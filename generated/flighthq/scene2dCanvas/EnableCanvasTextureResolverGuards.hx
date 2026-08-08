@@ -6,15 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.render.RenderRegistryGuards.areRenderRegistryGuardsEnabled;
 import flighthq.render.RenderRegistryGuards.enableRenderRegistryGuards;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.RenderState;
 
 class EnableCanvasTextureResolverGuards {
   @:noCompletion
   public static function areCanvasTextureResolverGuardsEnabled(state:CanvasRenderState):Bool {
-    return cast (cast areRenderRegistryGuardsEnabled(state) : Bool);
+    return cast (cast areRenderRegistryGuardsEnabled((cast state)) : Bool);
     return cast null;
   }
 
   public static function enableCanvasTextureResolverGuards(state:CanvasRenderState):Void {
-    enableRenderRegistryGuards(state);
+    enableRenderRegistryGuards((cast state));
   }
 }

@@ -29,16 +29,16 @@ class CompactStrokePath {
     cap = _Runtime.coalesce(_Runtime.field(style, 'cap'), function():Dynamic return cast 'butt');
     miterLimit = _Runtime.coalesce(_Runtime.field(style, 'miterLimit'), function():Dynamic return cast 4.0);
     halfWidth = (width / 2.0);
-    result = { commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: 'nonZero' };
-    subpaths = (cast CompactStrokePath.decodeSubpaths__compactStrokePath((cast path : Path), (cast tolerance : Float)) : Array<StrokeSubpath__compactStrokePath>);
+    result = (cast { commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: 'nonZero' });
+    subpaths = (cast CompactStrokePath.decodeSubpaths__compactStrokePath((cast path), (cast tolerance : Float)) : Array<StrokeSubpath__compactStrokePath>);
     dash = _Runtime.select(_Runtime.andValue(_Runtime.field(style, 'dash'), function():Dynamic return cast ((cast _Runtime.field(_Runtime.field(style, 'dash'), 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast _Runtime.field(style, 'dash'), function():Dynamic return cast null);
     dashOffset = _Runtime.coalesce(_Runtime.field(style, 'dashOffset'), function():Dynamic return cast 0.0);
     for (subpath in _Runtime.iterable(subpaths)) {
       if ((cast ((cast _Runtime.field((cast subpath : StrokeSubpath__compactStrokePath).points, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-      var segments:Array<DashSegment__compactStrokePath> = _Runtime.select(dash, function():Dynamic return cast (cast CompactStrokePath.applyDash__compactStrokePath((cast (cast subpath : StrokeSubpath__compactStrokePath).points : Array<Float>), (cast (cast subpath : StrokeSubpath__compactStrokePath).closed : Bool), (cast dash : Array<Float>), (cast dashOffset : Float)) : Array<DashSegment__compactStrokePath>), function():Dynamic return cast cast ([{ points: (cast subpath : StrokeSubpath__compactStrokePath).points, closed: (cast subpath : StrokeSubpath__compactStrokePath).closed }] : Array<Dynamic>));
+      var segments:Array<DashSegment__compactStrokePath> = _Runtime.select(dash, function():Dynamic return cast (cast CompactStrokePath.applyDash__compactStrokePath((cast (cast subpath : StrokeSubpath__compactStrokePath).points), (cast (cast subpath : StrokeSubpath__compactStrokePath).closed : Bool), (cast dash), (cast dashOffset : Float)) : Array<DashSegment__compactStrokePath>), function():Dynamic return cast cast ([{ points: (cast subpath : StrokeSubpath__compactStrokePath).points, closed: (cast subpath : StrokeSubpath__compactStrokePath).closed }] : Array<Dynamic>));
       for (seg in _Runtime.iterable(segments)) {
         if ((cast ((cast _Runtime.field((cast seg : DashSegment__compactStrokePath).points, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-        CompactStrokePath.strokeSubpath__compactStrokePath((cast (cast seg : DashSegment__compactStrokePath).points : Array<Float>), (cast (cast seg : DashSegment__compactStrokePath).closed : Bool), (cast halfWidth : Float), (cast join : String), (cast cap : String), (cast miterLimit : Float), (cast result : Path), (cast tolerance : Float));
+        CompactStrokePath.strokeSubpath__compactStrokePath((cast (cast seg : DashSegment__compactStrokePath).points), (cast (cast seg : DashSegment__compactStrokePath).closed : Bool), (cast halfWidth : Float), (cast join : String), (cast cap : String), (cast miterLimit : Float), (cast result), (cast tolerance : Float));
       }
     }
     return cast result;
@@ -93,10 +93,10 @@ class CompactStrokePath {
         _Runtime.pushMany(right, cast ([rx, ry] : Array<Dynamic>));
         var startAngle:Float = HxMath.atan2(-ny, -nx);
         var endAngle:Float = HxMath.atan2(ny, nx);
-        CompactStrokePath.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast startAngle : Float), (cast endAngle : Float), (cast false : Bool), (cast tolerance : Float), (cast right : Array<Float>));
+        CompactStrokePath.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast startAngle : Float), (cast endAngle : Float), (cast false : Bool), (cast tolerance : Float), (cast right));
       } else {
         _Runtime.pushMany(left, cast ([lx, ly] : Array<Dynamic>));
-        CompactStrokePath.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(ny, nx) : Float), (cast HxMath.atan2(-ny, -nx) : Float), (cast true : Bool), (cast tolerance : Float), (cast left : Array<Float>));
+        CompactStrokePath.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(ny, nx) : Float), (cast HxMath.atan2(-ny, -nx) : Float), (cast true : Bool), (cast tolerance : Float), (cast left));
         _Runtime.pushMany(right, cast ([rx, ry] : Array<Dynamic>));
       }
     } }
@@ -143,10 +143,10 @@ class CompactStrokePath {
       }
     } else { if ((cast _Runtime.strictEquals(join, 'round') : Bool)) {
       _Runtime.pushMany(left, cast ([lx0, ly0] : Array<Dynamic>));
-      CompactStrokePath.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(ny0, nx0) : Float), (cast HxMath.atan2(ny1, nx1) : Float), (cast true : Bool), (cast tolerance : Float), (cast left : Array<Float>));
+      CompactStrokePath.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(ny0, nx0) : Float), (cast HxMath.atan2(ny1, nx1) : Float), (cast true : Bool), (cast tolerance : Float), (cast left));
       _Runtime.pushMany(left, cast ([lx1, ly1] : Array<Dynamic>));
       _Runtime.pushMany(right, cast ([rx0, ry0] : Array<Dynamic>));
-      CompactStrokePath.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(-ny0, -nx0) : Float), (cast HxMath.atan2(-ny1, -nx1) : Float), (cast false : Bool), (cast tolerance : Float), (cast right : Array<Float>));
+      CompactStrokePath.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(-ny0, -nx0) : Float), (cast HxMath.atan2(-ny1, -nx1) : Float), (cast false : Bool), (cast tolerance : Float), (cast right));
       _Runtime.pushMany(right, cast ([rx1, ry1] : Array<Dynamic>));
     } else {
       _Runtime.pushMany(left, cast ([lx0, ly0, lx1, ly1] : Array<Dynamic>));
@@ -163,7 +163,7 @@ class CompactStrokePath {
     var isOn:Bool = cast _Runtime.UNDEFINED;
     var current:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     var n:Float = cast _Runtime.UNDEFINED;
-    result = cast ([] : Array<Dynamic>);
+    result = (cast cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(dash, 'length'), 0.0) : Bool)) {
       _Runtime.callProperty(result, 'push', cast ([{ points: (cast pts : Array<Float>), closed: closed }] : Array<Dynamic>));
       return cast result;
@@ -265,7 +265,7 @@ class CompactStrokePath {
     commands = _Runtime.field(path, 'commands');
     data = _Runtime.field(path, 'data');
     toleranceSq = (tolerance * tolerance);
-    subpaths = cast ([] : Array<Dynamic>);
+    subpaths = (cast cast ([] : Array<Dynamic>));
     current = null;
     x = 0.0;
     y = 0.0;
@@ -280,7 +280,8 @@ class CompactStrokePath {
         (y = cast (0.0 : Dynamic));
       }
       return cast current;
-    } : Void->StrokeSubpath__compactStrokePath);
+      return cast _Runtime.UNDEFINED;
+    });
     {
       var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
@@ -315,13 +316,13 @@ class CompactStrokePath {
           _Runtime.pushMany((cast sp : StrokeSubpath__compactStrokePath).points, cast ([x, y] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO) : Bool)) {
           var sp:StrokeSubpath__compactStrokePath = (cast ensureCurrent() : StrokeSubpath__compactStrokePath);
-          CompactStrokePath.flattenQuadratic__compactStrokePath((cast (cast sp : StrokeSubpath__compactStrokePath).points : Array<Float>), (cast x : Float), (cast y : Float), (cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
+          CompactStrokePath.flattenQuadratic__compactStrokePath((cast (cast sp : StrokeSubpath__compactStrokePath).points), (cast x : Float), (cast y : Float), (cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
           (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
           (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO) : Bool)) {
           var sp:StrokeSubpath__compactStrokePath = (cast ensureCurrent() : StrokeSubpath__compactStrokePath);
-          CompactStrokePath.flattenCubic__compactStrokePath((cast (cast sp : StrokeSubpath__compactStrokePath).points : Array<Float>), (cast x : Float), (cast y : Float), (cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 4.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 5.0)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
+          CompactStrokePath.flattenCubic__compactStrokePath((cast (cast sp : StrokeSubpath__compactStrokePath).points), (cast x : Float), (cast y : Float), (cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 4.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 5.0)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
           (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 4.0)) : Dynamic));
           (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 5.0)) : Dynamic));
           (di = cast ((di + 6.0) : Dynamic));
@@ -391,8 +392,8 @@ class CompactStrokePath {
     y123 = ((y12 + y23) / 2.0);
     xm = ((x012 + x123) / 2.0);
     ym = ((y012 + y123) / 2.0);
-    CompactStrokePath.flattenCubic__compactStrokePath((cast out : Array<Float>), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast x012 : Float), (cast y012 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
-    CompactStrokePath.flattenCubic__compactStrokePath((cast out : Array<Float>), (cast xm : Float), (cast ym : Float), (cast x123 : Float), (cast y123 : Float), (cast x23 : Float), (cast y23 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    CompactStrokePath.flattenCubic__compactStrokePath((cast out), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast x012 : Float), (cast y012 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    CompactStrokePath.flattenCubic__compactStrokePath((cast out), (cast xm : Float), (cast ym : Float), (cast x123 : Float), (cast y123 : Float), (cast x23 : Float), (cast y23 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
   }
 
   public static function flattenQuadratic__compactStrokePath(out:Array<Float>, x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
@@ -427,8 +428,8 @@ class CompactStrokePath {
     y12 = ((cy + y1) / 2.0);
     xm = ((x01 + x12) / 2.0);
     ym = ((y01 + y12) / 2.0);
-    CompactStrokePath.flattenQuadratic__compactStrokePath((cast out : Array<Float>), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
-    CompactStrokePath.flattenQuadratic__compactStrokePath((cast out : Array<Float>), (cast xm : Float), (cast ym : Float), (cast x12 : Float), (cast y12 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    CompactStrokePath.flattenQuadratic__compactStrokePath((cast out), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    CompactStrokePath.flattenQuadratic__compactStrokePath((cast out), (cast xm : Float), (cast ym : Float), (cast x12 : Float), (cast y12 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
   }
 
   public static function strokeSubpath__compactStrokePath(pts:Array<Float>, closed:Bool, halfWidth:Float, join:String, cap:String, miterLimit:Float, out:Path, tolerance:Float):Void {
@@ -438,8 +439,8 @@ class CompactStrokePath {
     var normals:Array<Float> = cast _Runtime.UNDEFINED;
     n = (_Runtime.toInt32(_Runtime.field(pts, 'length')) >> 1);
     if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { return; }
-    left = cast ([] : Array<Dynamic>);
-    right = cast ([] : Array<Dynamic>);
+    left = (cast cast ([] : Array<Dynamic>));
+    right = (cast cast ([] : Array<Dynamic>));
     normals = _Runtime.createArray(((n - 1.0) * 2.0));
     {
       var i:Float = 0.0;
@@ -467,14 +468,14 @@ class CompactStrokePath {
           var ny0:Float = flighthq._internal._StaticIndex.readArray(normals, ((prev * 2.0) + 1.0));
           var nx1:Float = flighthq._internal._StaticIndex.readArray(normals, (curr * 2.0));
           var ny1:Float = flighthq._internal._StaticIndex.readArray(normals, ((curr * 2.0) + 1.0));
-          CompactStrokePath.addJoin__compactStrokePath((cast flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)) : Float), (cast nx0 : Float), (cast ny0 : Float), (cast nx1 : Float), (cast ny1 : Float), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), (cast left : Array<Float>), (cast right : Array<Float>), (cast tolerance : Float));
+          CompactStrokePath.addJoin__compactStrokePath((cast flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)) : Float), (cast nx0 : Float), (cast ny0 : Float), (cast nx1 : Float), (cast ny1 : Float), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), (cast left), (cast right), (cast tolerance : Float));
           i++;
         }
       }
     } else {
       var sn0x:Float = flighthq._internal._StaticIndex.readArray(normals, 0.0);
       var sn0y:Float = flighthq._internal._StaticIndex.readArray(normals, 1.0);
-      CompactStrokePath.addCap__compactStrokePath((cast flighthq._internal._StaticIndex.readArray(pts, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(pts, 1.0) : Float), (cast sn0x : Float), (cast sn0y : Float), (cast -sn0y : Float), (cast sn0x : Float), (cast halfWidth : Float), (cast cap : String), (cast left : Array<Float>), (cast right : Array<Float>), (cast tolerance : Float), (cast true : Bool));
+      CompactStrokePath.addCap__compactStrokePath((cast flighthq._internal._StaticIndex.readArray(pts, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(pts, 1.0) : Float), (cast sn0x : Float), (cast sn0y : Float), (cast -sn0y : Float), (cast sn0x : Float), (cast halfWidth : Float), (cast cap : String), (cast left), (cast right), (cast tolerance : Float), (cast true : Bool));
       {
         var i:Float = 1.0;
         while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
@@ -482,13 +483,13 @@ class CompactStrokePath {
           var ny0:Float = flighthq._internal._StaticIndex.readArray(normals, (((i - 1.0) * 2.0) + 1.0));
           var nx1:Float = flighthq._internal._StaticIndex.readArray(normals, (i * 2.0));
           var ny1:Float = flighthq._internal._StaticIndex.readArray(normals, ((i * 2.0) + 1.0));
-          CompactStrokePath.addJoin__compactStrokePath((cast flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)) : Float), (cast nx0 : Float), (cast ny0 : Float), (cast nx1 : Float), (cast ny1 : Float), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), (cast left : Array<Float>), (cast right : Array<Float>), (cast tolerance : Float));
+          CompactStrokePath.addJoin__compactStrokePath((cast flighthq._internal._StaticIndex.readArray(pts, (i * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0)) : Float), (cast nx0 : Float), (cast ny0 : Float), (cast nx1 : Float), (cast ny1 : Float), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), (cast left), (cast right), (cast tolerance : Float));
           i++;
         }
       }
       var snLx:Float = flighthq._internal._StaticIndex.readArray(normals, ((n - 2.0) * 2.0));
       var snLy:Float = flighthq._internal._StaticIndex.readArray(normals, (((n - 2.0) * 2.0) + 1.0));
-      CompactStrokePath.addCap__compactStrokePath((cast flighthq._internal._StaticIndex.readArray(pts, ((n - 1.0) * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(pts, (((n - 1.0) * 2.0) + 1.0)) : Float), (cast snLx : Float), (cast snLy : Float), (cast snLy : Float), (cast -snLx : Float), (cast halfWidth : Float), (cast cap : String), (cast left : Array<Float>), (cast right : Array<Float>), (cast tolerance : Float), (cast false : Bool));
+      CompactStrokePath.addCap__compactStrokePath((cast flighthq._internal._StaticIndex.readArray(pts, ((n - 1.0) * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(pts, (((n - 1.0) * 2.0) + 1.0)) : Float), (cast snLx : Float), (cast snLy : Float), (cast snLy : Float), (cast -snLx : Float), (cast halfWidth : Float), (cast cap : String), (cast left), (cast right), (cast tolerance : Float), (cast false : Bool));
     }
     if ((cast ((cast _Runtime.field(left, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
     _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
@@ -509,7 +510,7 @@ class CompactStrokePath {
         (i = cast ((i - 2.0) : Dynamic));
       }
     }
-    appendPathClose((cast out : Path));
+    appendPathClose((cast out));
   }
 
   public static final MAX_SUBDIVISION_DEPTH__compactStrokePath:Float = 16.0;

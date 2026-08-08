@@ -28,7 +28,7 @@ typedef LayoutNode<ContainerStyle, ItemStyle> = { var containerStyle:Null<Contai
 
 typedef LayoutTree = { var nodes:Array<LayoutNode<Dynamic, Dynamic>>; };
 
-typedef LayoutResolutionFailureKind = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef LayoutResolutionFailureKind = flighthq._internal._IndexedAccess<Dynamic, String>;
 
 typedef LayoutResolutionExplanation = { var actualLength:Float; var kind:LayoutResolutionFailureKind; var nodeIndex:Float; var parentIndex:Float; var requiredLength:Float; var resolverKind:Null<String>; };
 
@@ -45,5 +45,5 @@ class Layout {
 
   public static final GridLayoutKind:String = 'GridLayout';
 
-  public static final LayoutResolutionFailureKindValue:{ var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; } = { IntrinsicSizesTooSmall: 'IntrinsicSizesTooSmall', InvalidContainerStyle: 'InvalidContainerStyle', InvalidHierarchy: 'InvalidHierarchy', InvalidItemStyle: 'InvalidItemStyle', OutputTooSmall: 'OutputTooSmall', UnregisteredKind: 'UnregisteredKind' };
+  public static final LayoutResolutionFailureKindValue:{ var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; } = (cast { IntrinsicSizesTooSmall: 'IntrinsicSizesTooSmall', InvalidContainerStyle: 'InvalidContainerStyle', InvalidHierarchy: 'InvalidHierarchy', InvalidItemStyle: 'InvalidItemStyle', OutputTooSmall: 'OutputTooSmall', UnregisteredKind: 'UnregisteredKind' });
 }

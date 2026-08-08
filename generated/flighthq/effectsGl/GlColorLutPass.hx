@@ -20,15 +20,15 @@ class GlColorLutPass {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     size = _Runtime.field(lut, 'size');
-    texture = (cast GlColorLutPass.uploadLutTexture__glColorLutPass((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast lut : ColorLut), (cast cache : GlColorLutTextureCache)) : flighthq._internal.dom.WebGLTexture);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'adjustment.colorLut' : String), (cast GlColorLutPass.COLOR_LUT_FRAGMENT_SRC__glColorLutPass : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(glc:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    texture = (cast GlColorLutPass.uploadLutTexture__glColorLutPass((cast gl), (cast lut), (cast cache)) : flighthq._internal.dom.WebGLTexture);
+    program = (cast getGlEffectProgram((cast state), (cast 'adjustment.colorLut' : String), (cast GlColorLutPass.COLOR_LUT_FRAGMENT_SRC__glColorLutPass : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(glc:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(glc, flighthq._internal.backend.WebGl2Backend.getUniformLocation(glc, _Runtime.field(p, 'program'), 'u_lutSize'), size);
       flighthq._internal.backend.WebGl2Backend.activeTexture(glc, flighthq._internal.backend.WebGl2Backend.contextConstant(glc, 'TEXTURE1', flighthq._internal.backend.WebGl2Backend.TEXTURE1));
       flighthq._internal.backend.WebGl2Backend.bindTexture(glc, flighthq._internal.backend.WebGl2Backend.contextConstant(glc, 'TEXTURE_3D', flighthq._internal.backend.WebGl2Backend.TEXTURE_3D), texture);
       flighthq._internal.backend.WebGl2Backend.uniform1i(glc, flighthq._internal.backend.WebGl2Backend.getUniformLocation(glc, _Runtime.field(p, 'program'), 'u_lut'), 1.0);
       flighthq._internal.backend.WebGl2Backend.activeTexture(glc, flighthq._internal.backend.WebGl2Backend.contextConstant(glc, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
-    });
+    }));
   }
 
   public static function uploadLutTexture__glColorLutPass(gl:flighthq._internal.dom.WebGL2RenderingContext, lut:ColorLut, cache:GlColorLutTextureCache):flighthq._internal.dom.WebGLTexture {

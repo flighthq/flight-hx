@@ -26,22 +26,22 @@ class GlCrtEffect {
     scanlineIntensity = _Runtime.coalesce(_Runtime.field(effect, 'scanlineIntensity'), function():Dynamic return cast 0.3);
     vignette = _Runtime.coalesce(_Runtime.field(effect, 'vignette'), function():Dynamic return cast 0.3);
     aberration = _Runtime.coalesce(_Runtime.field(effect, 'aberration'), function():Dynamic return cast 0.005);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'stylization.crt' : String), (cast GlCrtEffect.CRT_FRAGMENT_SRC__glCrtEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'stylization.crt' : String), (cast GlCrtEffect.CRT_FRAGMENT_SRC__glCrtEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_curvature'), curvature);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_scanlineIntensity'), scanlineIntensity);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_vignette'), vignette);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_aberration'), aberration);
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
-    });
+    }));
   }
 
-  public static final defaultGlCrtEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyCrtEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : CrtEffect) : CrtEffect));
-  };
+  public static final defaultGlCrtEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyCrtEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : CrtEffect)));
+  });
 
   public static function registerGlCrtEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'CrtEffect' : String), (cast defaultGlCrtEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'CrtEffect' : String), (cast defaultGlCrtEffectRunner));
   }
 
   public static final CRT_FRAGMENT_SRC__glCrtEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_curvature;\nuniform float u_scanlineIntensity;\nuniform float u_vignette;\nuniform float u_aberration;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvec2 barrel(vec2 uv) {\n  vec2 c = uv * 2.0 - 1.0;\n  c += c * u_curvature * dot(c, c);\n  return c * 0.5 + 0.5;\n}\nvoid main() {\n  vec2 uv = barrel(v_texCoord);\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    o_color = vec4(0.0, 0.0, 0.0, 1.0);\n    return;\n  }\n  vec2 off = vec2(u_aberration, 0.0);\n  float r = texture(u_texture0, uv + off).r;\n  float g = texture(u_texture0, uv).g;\n  float b = texture(u_texture0, uv - off).b;\n  float a = texture(u_texture0, uv).a;\n  vec3 col = vec3(r, g, b);\n  float line = sin(uv.y * u_resolution.y * 3.14159265) * 0.5 + 0.5;\n  col *= 1.0 - u_scanlineIntensity * (1.0 - line);\n  vec2 vc = uv * 2.0 - 1.0;\n  col *= 1.0 - u_vignette * dot(vc, vc);\n  o_color = vec4(col, a);\n}';

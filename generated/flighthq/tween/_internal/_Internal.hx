@@ -4,11 +4,10 @@ package flighthq.tween._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Tween;
-import flighthq.types.Tween.NumericProps;
 import flighthq.types.TweenPropertyDetail;
 
 class _Internal {
-  public static function initializeTween<T>(tween:Tween<T>):Void {
+  public static function initializeTween<T:flighthq._internal._Object>(tween:Tween<T>):Void {
     var target:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
     var propertyMap:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
     target = (cast (cast tween : Tween<T>).target : flighthq._internal._Record<String, Float>);

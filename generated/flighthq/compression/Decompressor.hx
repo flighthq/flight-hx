@@ -18,7 +18,7 @@ class Decompressor {
   }
 
   public static function registerDecompressor(compression:Compression, decompress:flighthq.types.Compression.Decompressor):Void {
-    ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Compression.Decompressor>).set(compression, decompress));
+    ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Compression.Decompressor>).set(compression, (cast decompress)));
   }
 
   public static function unregisterDecompressor(compression:Compression):Void {

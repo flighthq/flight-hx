@@ -10,6 +10,6 @@ typedef AppLaunchKind = String;
 
 typedef AppMemoryPressure = String;
 
-typedef LifecycleBackend = { var getState:Void->AppLifecycleState; var subscribe:Void->Void->Void->Void; @:optional var getLaunchKind:Void->AppLaunchKind; @:optional var subscribeMemoryWarning:AppMemoryPressure->Void->Void->Void; };
+typedef LifecycleBackend = { var getState:Void->AppLifecycleState; var subscribe:(Void->Void)->(Void->Void); @:optional var getLaunchKind:Void->AppLaunchKind; @:optional var subscribeMemoryWarning:(AppMemoryPressure->Void)->(Void->Void); };
 
 typedef AppLifecycle = { var onStateChange:Signal<AppLifecycleState->Void>; var onResume:Signal<Void->Void>; var onPause:Signal<Void->Void>; var onBackButton:Signal<Void->Void>; var onMemoryWarning:Signal<AppMemoryPressure->Void>; var onSaveState:Signal<flighthq._internal._Record<String, flighthq._internal._Any>->Void>; var onRestoreState:Signal<flighthq._internal._Record<String, flighthq._internal._Any>->Void>; };

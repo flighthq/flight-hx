@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
 class EaseCircular {
-  public static final easeInCircular:EasingFunction = function(t:Float):Float return _Runtime.subtractNumbers(1.0, HxMath.sqrt((1.0 - (t * t))));
+  public static final easeInCircular:EasingFunction = (cast function(t:Float):Float return _Runtime.subtractNumbers(1.0, HxMath.sqrt((1.0 - (t * t)))));
 
-  public static final easeInOutCircular:EasingFunction = function(t:Float):Float return ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool) ? (cast (_Runtime.subtractNumbers(1.0, HxMath.sqrt((1.0 - ((4.0 * t) * t)))) / 2.0) : Dynamic) : (cast (_Runtime.addNumbers(HxMath.sqrt((1.0 - HxMath.pow(((-2.0 * t) + 2.0), 2.0))), 1.0) / 2.0) : Dynamic));
+  public static final easeInOutCircular:EasingFunction = (cast function(t:Float):Float return ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool) ? (cast (_Runtime.subtractNumbers(1.0, HxMath.sqrt((1.0 - ((4.0 * t) * t)))) / 2.0) : Dynamic) : (cast (_Runtime.addNumbers(HxMath.sqrt((1.0 - HxMath.pow(((-2.0 * t) + 2.0), 2.0))), 1.0) / 2.0) : Dynamic)));
 
-  public static final easeOutCircular:EasingFunction = function(t:Float):Float return HxMath.sqrt((1.0 - ((t - 1.0) * (t - 1.0))));
+  public static final easeOutCircular:EasingFunction = (cast function(t:Float):Float return HxMath.sqrt((1.0 - ((t - 1.0) * (t - 1.0)))));
 }

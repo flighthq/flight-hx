@@ -26,38 +26,43 @@ import flighthq.scene2dGl.GlQuadBatchWriter.flushGlQuadBatchWriter;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.Matrix;
+import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Node2D;
 import flighthq.types.Rectangle;
+import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
+import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.Renderable;
+import flighthq.types.Renderer;
 import flighthq.types.Scene2DRenderer;
 
 class GlCache {
   public static function createGlCacheState(screenState:GlRenderState):GlRenderState {
     var cacheState:GlRenderState = cast _Runtime.UNDEFINED;
-    cacheState = (cast createGlOffscreenRenderState((cast screenState : GlRenderState)) : GlRenderState);
-    ((cast GlCache._cacheStateScreen__glCache : flighthq._internal._WeakMap<GlRenderState, GlRenderState>).set(cacheState, screenState));
+    cacheState = (cast createGlOffscreenRenderState((cast screenState)) : GlRenderState);
+    ((cast GlCache._cacheStateScreen__glCache : flighthq._internal._WeakMap<GlRenderState, GlRenderState>).set(cacheState, (cast screenState)));
     return cast cacheState;
     return cast null;
   }
 
   public static function enableGlRenderCache(state:GlRenderState):Void {
-    registerRenderCacheRenderer(state, defaultGlRenderCacheRenderer);
+    registerRenderCacheRenderer((cast state), (cast defaultGlRenderCacheRenderer));
   }
 
   @:noCompletion
   public static function ensureGlRenderCacheTarget(state:GlRenderState, cache:RenderCache, width:Float, height:Float):GlRenderTarget {
     var targets:flighthq._internal._WeakMap<RenderCache, GlRenderTarget> = cast _Runtime.UNDEFINED;
     var target:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
-    targets = (cast GlCache.getTargets__glCache((cast state : GlRenderState)) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>);
+    targets = (cast GlCache.getTargets__glCache((cast state)) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>);
     target = ((cast targets : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (target = cast ((cast createGlRenderTarget((cast state : GlRenderState), { width: width, height: height }) : Null<GlRenderTarget>) : Dynamic));
-      ((cast targets : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).set(cache, target));
+      (target = cast ((cast createGlRenderTarget((cast state), (cast { width: width, height: height })) : GlRenderTarget) : Dynamic));
+      ((cast targets : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).set(cache, (cast target)));
     } else {
-      resizeGlRenderTarget((cast state : GlRenderState), (cast target : GlRenderTarget), (cast width : Float), (cast height : Float));
+      resizeGlRenderTarget((cast state), (cast target), (cast width : Float), (cast height : Float));
     }
     return cast target;
     return cast null;
@@ -71,7 +76,7 @@ class GlCache {
 
   @:noCompletion
   public static function getGlRenderCacheTarget(state:GlRenderState, cache:RenderCache):Null<GlRenderTarget> {
-    return cast _Runtime.coalesce(((cast (cast GlCache.getTargets__glCache((cast state : GlRenderState)) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).get(cache)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast (cast GlCache.getTargets__glCache((cast state)) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).get(cache)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -87,39 +92,39 @@ class GlCache {
     var resized:Bool = cast _Runtime.UNDEFINED;
     var target:GlRenderTarget = cast _Runtime.UNDEFINED;
     var dirty:Bool = cast _Runtime.UNDEFINED;
-    screenState = (cast getGlRenderCacheScreenState((cast cacheState : GlRenderState)) : GlRenderState);
+    screenState = (cast getGlRenderCacheScreenState((cast cacheState)) : GlRenderState);
     padding = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.padding; }), function():Dynamic return cast 0.0);
     minWidth = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.minWidth; }), function():Dynamic return cast 1.0);
     minHeight = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.minHeight; }), function():Dynamic return cast 1.0);
-    computeNodeRootLocalBoundsRectangle(GlCache._bounds__glCache, source);
-    __destructure0 = (cast computeRenderTargetSize(GlCache._bounds__glCache, padding, (cast minWidth : Float), (cast minHeight : Float)) : { var width:Float; var height:Float; });
+    computeNodeRootLocalBoundsRectangle((cast GlCache._bounds__glCache), (cast source));
+    __destructure0 = (cast computeRenderTargetSize((cast GlCache._bounds__glCache), (cast padding), (cast minWidth : Float), (cast minHeight : Float)) : { var width:Float; var height:Float; });
     width = _Runtime.field(__destructure0, 'width');
     height = _Runtime.field(__destructure0, 'height');
-    existing = (cast getGlRenderCacheTarget((cast screenState : GlRenderState), (cast cache : RenderCache)) : Null<GlRenderTarget>);
+    existing = (cast getGlRenderCacheTarget((cast screenState), (cast cache)) : Null<GlRenderTarget>);
     resized = ((cast ((cast _Runtime.strictEquals(existing, null) : Bool) || (cast !_Runtime.strictEquals((cast existing : GlRenderTarget).width, width) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast existing : GlRenderTarget).height, height) : Bool));
-    target = (cast ensureGlRenderCacheTarget((cast screenState : GlRenderState), (cast cache : RenderCache), (cast width : Float), (cast height : Float)) : GlRenderTarget);
-    computeScene2DRenderTargetTransform(GlCache._renderTransform__glCache, (cast source : Node2D), GlCache._bounds__glCache, (cast padding : Float), (cast padding : Float));
-    computeRenderCacheTransform((cast cache : RenderCache).transform, GlCache._bounds__glCache, (cast padding : Float), (cast padding : Float));
-    beginGlRenderPass((cast cacheState : GlRenderState), (cast target : GlRenderTarget), { preserveColor: true, preserveDepth: true }, _Runtime.field(_Runtime, 'UNDEFINED'));
+    target = (cast ensureGlRenderCacheTarget((cast screenState), (cast cache), (cast width : Float), (cast height : Float)) : GlRenderTarget);
+    computeScene2DRenderTargetTransform((cast GlCache._renderTransform__glCache), (cast source), (cast GlCache._bounds__glCache), (cast padding : Float), (cast padding : Float));
+    computeRenderCacheTransform((cast (cast cache : RenderCache).transform), (cast GlCache._bounds__glCache), (cast padding : Float), (cast padding : Float));
+    beginGlRenderPass((cast cacheState), (cast target), (cast { preserveColor: true, preserveDepth: true }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     dirty = false;
     try {
       try {
-        setGlRenderTransform2D((cast cacheState : GlRenderState), (cast GlCache._renderTransform__glCache : Matrix));
-        (dirty = cast ((cast prepareScene2DRender(cacheState, source) : Bool) : Dynamic));
+        setGlRenderTransform2D((cast cacheState), (cast GlCache._renderTransform__glCache));
+        (dirty = cast ((cast prepareScene2DRender((cast cacheState), (cast source)) : Bool) : Dynamic));
         if ((cast ((cast dirty : Bool) || (cast resized : Bool)) : Bool)) {
           flighthq._internal.backend.WebGl2Backend.clearColor((cast cacheState : GlRenderState).gl, 0.0, 0.0, 0.0, 0.0);
           flighthq._internal.backend.WebGl2Backend.clear((cast cacheState : GlRenderState).gl, flighthq._internal.backend.WebGl2Backend.contextConstant((cast cacheState : GlRenderState).gl, 'COLOR_BUFFER_BIT', flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT));
-          renderGlScene2D((cast cacheState : GlRenderState), (cast source : Node2D));
+          renderGlScene2D((cast cacheState), (cast source));
         }
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError3:Dynamic) {
       {
-        endGlRenderPass((cast cacheState : GlRenderState));
+        endGlRenderPass((cast cacheState));
       }
       _Runtime.throwValue(__finallyError3);
     }
     {
-      endGlRenderPass((cast cacheState : GlRenderState));
+      endGlRenderPass((cast cacheState));
     }
     return cast ((cast dirty : Bool) || (cast resized : Bool));
     return cast null;
@@ -129,22 +134,22 @@ class GlCache {
   public static function releaseGlRenderCache(state:GlRenderState, cache:RenderCache):Void {
     var targets:flighthq._internal._WeakMap<RenderCache, GlRenderTarget> = cast _Runtime.UNDEFINED;
     var target:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
-    targets = (cast GlCache.getTargets__glCache((cast state : GlRenderState)) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>);
+    targets = (cast GlCache.getTargets__glCache((cast state)) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>);
     target = ((cast targets : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    destroyGlRenderTarget((cast state : GlRenderState), (cast target : GlRenderTarget));
+    destroyGlRenderTarget((cast state), (cast target));
     ((cast targets : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).delete_(cache));
   }
 
   public static function drawGlRenderCache__glCache(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var cache:Null<RenderCache> = cast _Runtime.UNDEFINED;
     var target:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
-    cache = (cast getRenderProxyCache(state, (cast renderProxy : RenderProxy2D).source) : Null<RenderCache>);
+    cache = (cast getRenderProxyCache((cast state), (cast (cast renderProxy : RenderProxy2D).source)) : Null<RenderCache>);
     if ((cast _Runtime.strictEquals(cache, null) : Bool)) { return; }
-    target = ((cast (cast GlCache.getTargets__glCache((cast state : GlRenderState)) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).get(cache));
+    target = ((cast (cast GlCache.getTargets__glCache((cast state)) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    flushGlQuadBatchWriter((cast state : GlRenderState));
-    drawGlRenderTargetResult((cast state : GlRenderState), (cast renderProxy : RenderProxy2D), (cast target : GlRenderTarget), (cast GlCache._identity__glCache : Matrix));
+    flushGlQuadBatchWriter((cast state));
+    drawGlRenderTargetResult((cast state), (cast renderProxy), (cast target), (cast GlCache._identity__glCache));
   }
 
   public static function getTargets__glCache(state:GlRenderState):flighthq._internal._WeakMap<RenderCache, GlRenderTarget> {
@@ -152,22 +157,22 @@ class GlCache {
     targets = ((cast GlCache._renderCacheTargets__glCache : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<RenderCache, GlRenderTarget>>).get(state));
     if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (targets = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
-      ((cast GlCache._renderCacheTargets__glCache : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<RenderCache, GlRenderTarget>>).set(state, targets));
+      ((cast GlCache._renderCacheTargets__glCache : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<RenderCache, GlRenderTarget>>).set(state, (cast targets)));
     }
     return cast targets;
     return cast null;
   }
 
   @:noCompletion
-  public static final defaultGlRenderCacheRenderer:Scene2DRenderer = { createData: noopRendererData, submit: GlCache.drawGlRenderCache__glCache };
+  public static final defaultGlRenderCacheRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: GlCache.drawGlRenderCache__glCache });
 
   public static final _renderCacheTargets__glCache:flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<RenderCache, GlRenderTarget>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final _cacheStateScreen__glCache:flighthq._internal._WeakMap<GlRenderState, GlRenderState> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _bounds__glCache:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
+  public static final _bounds__glCache:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle);
 
-  public static final _renderTransform__glCache:Matrix = (cast (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix) : Matrix);
+  public static final _renderTransform__glCache:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
 
-  public static final _identity__glCache:Matrix = (cast (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix) : Matrix);
+  public static final _identity__glCache:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
 }

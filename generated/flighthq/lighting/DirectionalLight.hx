@@ -9,6 +9,7 @@ import flighthq.geometry.Vector3.createVector3;
 import flighthq.geometry.Vector3.setVector3;
 import flighthq.types.DirectionalLight;
 import flighthq.types.DirectionalLightOptions;
+import flighthq.types.Entity;
 import flighthq.types.Types.DirectionalLightKind;
 import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
@@ -16,14 +17,14 @@ import flighthq.types._internal._DirectionalLightValues.DirectionalLightKind;
 
 class DirectionalLight {
   public static function cloneDirectionalLight(source:flighthq.types.DirectionalLight):flighthq.types.DirectionalLight {
-    return cast (cast createEntity({ castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: (cast cloneVector3(_Runtime.field(source, 'direction')) : Vector3), intensity: _Runtime.field(source, 'intensity'), kind: DirectionalLightKind, normalBias: _Runtime.field(source, 'normalBias'), pcfRadius: _Runtime.field(source, 'pcfRadius'), shadowBias: _Runtime.field(source, 'shadowBias') }) : flighthq.types.DirectionalLight);
+    return cast (cast createEntity((cast { castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: (cast cloneVector3((cast _Runtime.field(source, 'direction'))) : Vector3), intensity: _Runtime.field(source, 'intensity'), kind: DirectionalLightKind, normalBias: _Runtime.field(source, 'normalBias'), pcfRadius: _Runtime.field(source, 'pcfRadius'), shadowBias: _Runtime.field(source, 'shadowBias') })) : { >Entity, var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var kind:String; var normalBias:Float; var pcfRadius:Float; var shadowBias:Float; });
     return cast null;
   }
 
   public static function createDirectionalLight(?options:DirectionalLightOptions):flighthq.types.DirectionalLight {
     var direction:Null<Vector3Like> = cast _Runtime.UNDEFINED;
-    direction = _Runtime.optionalField(options, 'direction');
-    return cast (cast createEntity({ castsShadow: _Runtime.coalesce(_Runtime.optionalField(options, 'castsShadow'), function():Dynamic return cast false), color: _Runtime.coalesce(_Runtime.optionalField(options, 'color'), function():Dynamic return cast 4294967295.0), direction: _Runtime.select(direction, function():Dynamic return cast (cast cloneVector3(direction) : Vector3), function():Dynamic return cast (cast createVector3((cast 0.0 : Null<Float>), (cast -1.0 : Null<Float>), (cast 0.0 : Null<Float>)) : Vector3)), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: DirectionalLightKind, normalBias: _Runtime.coalesce(_Runtime.optionalField(options, 'normalBias'), function():Dynamic return cast 0.0), pcfRadius: _Runtime.coalesce(_Runtime.optionalField(options, 'pcfRadius'), function():Dynamic return cast 0.0), shadowBias: _Runtime.coalesce(_Runtime.optionalField(options, 'shadowBias'), function():Dynamic return cast 0.0) }) : flighthq.types.DirectionalLight);
+    direction = ({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var direction:Null<Vector3Like>; }).direction; });
+    return cast (cast createEntity((cast { castsShadow: _Runtime.coalesce(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var castsShadow:Null<Bool>; }).castsShadow; }), function():Dynamic return cast false), color: _Runtime.coalesce(({ final __structural2 = options; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var color:Null<Float>; }).color; }), function():Dynamic return cast 4294967295.0), direction: _Runtime.select(direction, function():Dynamic return cast (cast cloneVector3((cast direction)) : Vector3), function():Dynamic return cast (cast createVector3((cast 0.0), (cast -1.0), (cast 0.0)) : Vector3)), intensity: _Runtime.coalesce(({ final __structural3 = options; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0), kind: DirectionalLightKind, normalBias: _Runtime.coalesce(({ final __structural4 = options; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var normalBias:Null<Float>; }).normalBias; }), function():Dynamic return cast 0.0), pcfRadius: _Runtime.coalesce(({ final __structural5 = options; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var pcfRadius:Null<Float>; }).pcfRadius; }), function():Dynamic return cast 0.0), shadowBias: _Runtime.coalesce(({ final __structural6 = options; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var shadowBias:Null<Float>; }).shadowBias; }), function():Dynamic return cast 0.0) })) : { >Entity, var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var kind:String; var normalBias:Float; var pcfRadius:Float; var shadowBias:Float; });
     return cast null;
   }
 
@@ -37,7 +38,7 @@ class DirectionalLight {
     lz = z;
     len = HxMath.sqrt((((lx * lx) + (ly * ly)) + (lz * lz)));
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3((cast out : flighthq.types.DirectionalLight).direction, (cast (lx / len) : Float), (cast (ly / len) : Float), (cast (lz / len) : Float));
+      setVector3((cast (cast out : flighthq.types.DirectionalLight).direction), (cast (lx / len) : Float), (cast (ly / len) : Float), (cast (lz / len) : Float));
     }
   }
 
@@ -51,7 +52,7 @@ class DirectionalLight {
     dz = (toZ - fromZ);
     len = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3((cast out : flighthq.types.DirectionalLight).direction, (cast (dx / len) : Float), (cast (dy / len) : Float), (cast (dz / len) : Float));
+      setVector3((cast (cast out : flighthq.types.DirectionalLight).direction), (cast (dx / len) : Float), (cast (dy / len) : Float), (cast (dz / len) : Float));
     }
   }
 }

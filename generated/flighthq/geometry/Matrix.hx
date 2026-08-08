@@ -4,6 +4,7 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Entity;
 import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Matrix3.Matrix3Like;
@@ -15,14 +16,14 @@ import flighthq.types.Vector3.Vector3Like;
 class Matrix {
   public static function cloneMatrix(source:MatrixLike):flighthq.types.Matrix {
     var m:flighthq.types.Matrix = cast _Runtime.UNDEFINED;
-    m = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : flighthq.types.Matrix);
-    copyMatrix((cast m : MatrixLike), (cast source : MatrixLike));
+    m = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.Matrix);
+    copyMatrix((cast m), (cast source));
     return cast m;
     return cast null;
   }
 
   public static function copyMatrix(out:MatrixLike, source:MatrixLike):Void {
-    setMatrix((cast out : MatrixLike), (cast source.a : Float), (cast source.b : Float), (cast source.c : Float), (cast source.d : Float), (cast source.tx : Float), (cast source.ty : Float));
+    setMatrix((cast out), (cast source.a : Float), (cast source.b : Float), (cast source.c : Float), (cast source.d : Float), (cast source.tx : Float), (cast source.ty : Float));
   }
 
   public static function copyMatrixColumnFromVector3(out:MatrixLike, column:Float, source:Vector3Like):Void {
@@ -92,21 +93,21 @@ class Matrix {
 
   public static function createGradientTransformMatrix(width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):flighthq.types.Matrix {
     var out:flighthq.types.Matrix = cast _Runtime.UNDEFINED;
-    out = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : flighthq.types.Matrix);
-    setGradientTransformMatrix((cast out : MatrixLike), (cast width : Float), (cast height : Float), (cast rotation : Float), (cast tx : Float), (cast ty : Float));
+    out = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.Matrix);
+    setGradientTransformMatrix((cast out), (cast width : Float), (cast height : Float), (cast rotation : Float), (cast tx : Float), (cast ty : Float));
     return cast out;
     return cast null;
   }
 
   public static function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, ?ty:Float):flighthq.types.Matrix {
-    return cast (cast createEntity((cast { a: _Runtime.coalesce(a, function():Dynamic return cast 1.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 1.0), tx: _Runtime.coalesce(tx, function():Dynamic return cast 0.0), ty: _Runtime.coalesce(ty, function():Dynamic return cast 0.0) } : Null<{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }>)) : flighthq.types.Matrix);
+    return cast (cast createEntity((cast { a: _Runtime.coalesce(a, function():Dynamic return cast 1.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 1.0), tx: _Runtime.coalesce(tx, function():Dynamic return cast 0.0), ty: _Runtime.coalesce(ty, function():Dynamic return cast 0.0) })) : { >Entity, var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; });
     return cast null;
   }
 
   public static function createTransformMatrix(scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):flighthq.types.Matrix {
     var out:flighthq.types.Matrix = cast _Runtime.UNDEFINED;
-    out = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : flighthq.types.Matrix);
-    setTransformMatrix((cast out : MatrixLike), (cast scaleX : Float), (cast scaleY : Float), (cast rotation : Float), (cast tx : Float), (cast ty : Float));
+    out = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.Matrix);
+    setTransformMatrix((cast out), (cast scaleX : Float), (cast scaleY : Float), (cast rotation : Float), (cast tx : Float), (cast ty : Float));
     return cast out;
     return cast null;
   }
@@ -114,7 +115,7 @@ class Matrix {
   public static function equalsMatrix(a:Null<MatrixLike>, b:Null<MatrixLike>, compareTranslation:Bool = true):Bool {
     if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
-    return cast _Runtime.andValue(((cast ((cast ((cast _Runtime.orValue(!(cast compareTranslation : Bool), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals((cast a : flighthq.types.Matrix).tx, (cast b : flighthq.types.Matrix).tx), function():Dynamic return cast _Runtime.strictEquals((cast a : flighthq.types.Matrix).ty, (cast b : flighthq.types.Matrix).ty))) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Matrix).a, (cast b : flighthq.types.Matrix).a) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Matrix).b, (cast b : flighthq.types.Matrix).b) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Matrix).c, (cast b : flighthq.types.Matrix).c) : Bool)), function():Dynamic return cast _Runtime.strictEquals((cast a : flighthq.types.Matrix).d, (cast b : flighthq.types.Matrix).d));
+    return cast _Runtime.andValue(((cast ((cast ((cast _Runtime.orValue(!(cast compareTranslation : Bool), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals((cast a : { var tx:Float; }).tx, (cast b : { var tx:Float; }).tx), function():Dynamic return cast _Runtime.strictEquals((cast a : { var ty:Float; }).ty, (cast b : { var ty:Float; }).ty))) : Bool) && (cast _Runtime.strictEquals((cast a : { var a:Float; }).a, (cast b : { var a:Float; }).a) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var b:Float; }).b, (cast b : { var b:Float; }).b) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var c:Float; }).c, (cast b : { var c:Float; }).c) : Bool)), function():Dynamic return cast _Runtime.strictEquals((cast a : { var d:Float; }).d, (cast b : { var d:Float; }).d));
     return cast null;
   }
 
@@ -160,7 +161,7 @@ class Matrix {
   }
 
   public static function inverseMatrixTransformPoint(out:Vector2Like, matrix:MatrixLike, point:Vector2Like):Void {
-    inverseMatrixTransformPointXY((cast out : Vector2Like), (cast matrix : MatrixLike), (cast point.x : Float), (cast point.y : Float));
+    inverseMatrixTransformPointXY((cast out), (cast matrix), (cast point.x : Float), (cast point.y : Float));
   }
 
   public static function inverseMatrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
@@ -177,7 +178,7 @@ class Matrix {
   }
 
   public static function inverseMatrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {
-    inverseMatrixTransformVectorXY((cast out : Vector2Like), (cast matrix : MatrixLike), (cast vector.x : Float), (cast vector.y : Float));
+    inverseMatrixTransformVectorXY((cast out), (cast matrix), (cast vector.x : Float), (cast vector.y : Float));
   }
 
   public static function inverseMatrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
@@ -246,11 +247,11 @@ class Matrix {
   }
 
   public static function matrixTransformBoundsVector2(out:RectangleLike, matrix:MatrixLike, a:Vector2Like, b:Vector2Like):Void {
-    matrixTransformBounds((cast out : RectangleLike), (cast matrix : MatrixLike), (cast a.x : Float), (cast a.y : Float), (cast b.x : Float), (cast b.y : Float));
+    matrixTransformBounds((cast out), (cast matrix), (cast a.x : Float), (cast a.y : Float), (cast b.x : Float), (cast b.y : Float));
   }
 
   public static function matrixTransformPoint(out:Vector2Like, matrix:MatrixLike, point:Vector2Like):Void {
-    matrixTransformPointXY((cast out : Vector2Like), (cast matrix : MatrixLike), (cast point.x : Float), (cast point.y : Float));
+    matrixTransformPointXY((cast out), (cast matrix), (cast point.x : Float), (cast point.y : Float));
   }
 
   public static function matrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
@@ -259,11 +260,11 @@ class Matrix {
   }
 
   public static function matrixTransformRectangle(out:RectangleLike, matrix:MatrixLike, source:RectangleLike):Void {
-    matrixTransformBounds((cast out : RectangleLike), (cast matrix : MatrixLike), (cast _Runtime.field(source, 'x') : Float), (cast _Runtime.field(source, 'y') : Float), (cast _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')) : Float), (cast _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')) : Float));
+    matrixTransformBounds((cast out), (cast matrix), (cast _Runtime.field(source, 'x') : Float), (cast _Runtime.field(source, 'y') : Float), (cast _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')) : Float), (cast _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')) : Float));
   }
 
   public static function matrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {
-    matrixTransformVectorXY((cast out : Vector2Like), (cast matrix : MatrixLike), (cast vector.x : Float), (cast vector.y : Float));
+    matrixTransformVectorXY((cast out), (cast matrix), (cast vector.x : Float), (cast vector.y : Float));
   }
 
   public static function matrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
@@ -371,7 +372,7 @@ class Matrix {
   public static function setMatrixFromMatrix3(out:MatrixLike, source:Matrix3Like):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = source.m;
-    setMatrix((cast out : MatrixLike), (cast flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(m, 3.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(m, 7.0) : Float));
+    setMatrix((cast out), (cast flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(m, 3.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(m, 7.0) : Float));
   }
 
   public static function setMatrixFromMatrix4(out:MatrixLike, source:Matrix4Like):Void {
@@ -386,7 +387,7 @@ class Matrix {
   }
 
   public static function setMatrixIdentity(out:MatrixLike):Void {
-    setMatrix((cast out : MatrixLike), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
+    setMatrix((cast out), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
   }
 
   public static function setTransformMatrix(out:MatrixLike, scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Void {
@@ -422,11 +423,11 @@ class Matrix {
     d = _Runtime.field(__destructure1, 'd');
     tx = _Runtime.field(__destructure1, 'tx');
     ty = _Runtime.field(__destructure1, 'ty');
-    setMatrix((cast out : MatrixLike), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast (tx + dx) : Float), (cast (ty + dy) : Float));
+    setMatrix((cast out), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast (tx + dx) : Float), (cast (ty + dy) : Float));
   }
 
   public static function translateMatrixByVector(out:MatrixLike, matrix:MatrixLike, vector:Vector2Like):Void {
-    translateMatrixByVectorXY((cast out : MatrixLike), (cast matrix : MatrixLike), (cast vector.x : Float), (cast vector.y : Float));
+    translateMatrixByVectorXY((cast out), (cast matrix), (cast vector.x : Float), (cast vector.y : Float));
   }
 
   public static function translateMatrixByVectorXY(out:MatrixLike, source:MatrixLike, x:Float, y:Float):Void {
@@ -444,7 +445,7 @@ class Matrix {
     d = _Runtime.field(__destructure2, 'd');
     tx = _Runtime.field(__destructure2, 'tx');
     ty = _Runtime.field(__destructure2, 'ty');
-    setMatrix((cast out : MatrixLike), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast ((tx + (a * x)) + (c * y)) : Float), (cast ((ty + (b * x)) + (d * y)) : Float));
+    setMatrix((cast out), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast ((tx + (a * x)) + (c * y)) : Float), (cast ((ty + (b * x)) + (d * y)) : Float));
   }
 
   public static function writeMatrixToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:MatrixLike):Void {

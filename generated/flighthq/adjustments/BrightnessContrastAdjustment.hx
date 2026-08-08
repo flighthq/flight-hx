@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.BrightnessContrastAdjustment;
 
 class BrightnessContrastAdjustment {
-  public static function createBrightnessContrastAdjustment(?options:Dynamic):flighthq.types.BrightnessContrastAdjustment {
+  public static function createBrightnessContrastAdjustment(?options:flighthq._internal._Omit<flighthq.types.BrightnessContrastAdjustment, String>):flighthq.types.BrightnessContrastAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var brightness:Float = cast _Runtime.UNDEFINED;
     var contrast:Float = cast _Runtime.UNDEFINED;
@@ -17,7 +17,7 @@ class BrightnessContrastAdjustment {
     contrast = _Runtime.coalesce(_Runtime.field(options, 'contrast'), function():Dynamic return cast 1.0);
     s = contrast;
     o = ((brightness * contrast) + (0.5 * (1.0 - contrast)));
-    colorMatrix = cast ([s, 0.0, 0.0, 0.0, o, 0.0, s, 0.0, 0.0, o, 0.0, 0.0, s, 0.0, o, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
+    colorMatrix = (cast cast ([s, 0.0, 0.0, 0.0, o, 0.0, s, 0.0, 0.0, o, 0.0, 0.0, s, 0.0, o, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
     return cast _Runtime.mergeObjects([{ kind: 'BrightnessContrastAdjustment' }, options, { colorMatrix: colorMatrix }]);
     return cast null;
   }

@@ -15,36 +15,36 @@ class ShapeFill {
     {
       var __switchValue = name;
       if (__switchValue == 'moveTo') {
-        ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float));
+        ShapeFill.pushVerb__shapeFill((cast path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float));
       }
       else if (__switchValue == 'lineTo') {
-        ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float));
+        ShapeFill.pushVerb__shapeFill((cast path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float));
       }
       else if (__switchValue == 'curveTo') {
-        ShapeFill.pushQuadratic__shapeFill((cast path : Path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float));
+        ShapeFill.pushQuadratic__shapeFill((cast path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float));
       }
       else if (__switchValue == 'cubicCurveTo') {
-        ShapeFill.pushCubic__shapeFill((cast path : Path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float) : Float));
+        ShapeFill.pushCubic__shapeFill((cast path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float) : Float));
       }
       else if (__switchValue == 'drawCircle') {
-        ShapeFill.appendEllipseToPath__shapeFill((cast path : Path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float));
+        ShapeFill.appendEllipseToPath__shapeFill((cast path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float));
       }
       else if (__switchValue == 'drawEllipse') {
         {
           var w:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float);
           var h:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float);
-          ShapeFill.appendEllipseToPath__shapeFill((cast path : Path), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) + (w / 2.0)) : Float), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) + (h / 2.0)) : Float), (cast (w / 2.0) : Float), (cast (h / 2.0) : Float));
+          ShapeFill.appendEllipseToPath__shapeFill((cast path), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) + (w / 2.0)) : Float), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) + (h / 2.0)) : Float), (cast (w / 2.0) : Float), (cast (h / 2.0) : Float));
         }
       }
       else if (__switchValue == 'drawRectangle') {
-        ShapeFill.appendRectangleToPath__shapeFill((cast path : Path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float));
+        ShapeFill.appendRectangleToPath__shapeFill((cast path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float));
       }
       else if (__switchValue == 'drawRoundRectangle') {
-        ShapeFill.appendRoundRectangleToPath__shapeFill((cast path : Path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float) / 2.0) : Float), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float) / 2.0) : Float));
+        ShapeFill.appendRoundRectangleToPath__shapeFill((cast path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float) / 2.0) : Float), (cast ((cast flighthq._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float) / 2.0) : Float));
       }
       else if (__switchValue == 'drawPath') {
         ((cast path : Path).winding = (cast flighthq._internal._StaticIndex.readArray(commands, (a + 2.0)) : PathWinding));
-        ShapeFill.appendRawPath__shapeFill((cast path : Path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Array<Float>) : Array<Float>), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Array<Float>) : Array<Float>));
+        ShapeFill.appendRawPath__shapeFill((cast path), (cast (cast flighthq._internal._StaticIndex.readArray(commands, a) : Array<Float>)), (cast (cast flighthq._internal._StaticIndex.readArray(commands, (a + 1.0)) : Array<Float>)));
       }
       else  {
       }
@@ -77,8 +77,8 @@ class ShapeFill {
     var alpha:Float = cast _Runtime.UNDEFINED;
     var winding:PathWinding = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
-    if ((cast (cast hasNonSolidShapeFill((cast commands : Array<ShapeCommandToken>)) : Bool) : Bool)) { return cast null; }
-    regions = cast ([] : Array<Dynamic>);
+    if ((cast (cast hasNonSolidShapeFill((cast commands)) : Bool) : Bool)) { return cast null; }
+    regions = (cast cast ([] : Array<Dynamic>));
     path = null;
     color = 0.0;
     alpha = 1.0;
@@ -106,7 +106,7 @@ class ShapeFill {
           }
         }
         else  {
-          if ((cast !_Runtime.strictEquals(path, null) : Bool)) { appendShapeGeometryCommand((cast path : Path), (cast name : String), (cast commands : Array<ShapeCommandToken>), (cast a : Float)); }
+          if ((cast !_Runtime.strictEquals(path, null) : Bool)) { appendShapeGeometryCommand((cast path), (cast name : String), (cast commands), (cast a : Float)); }
         }
       }
     }
@@ -152,11 +152,11 @@ class ShapeFill {
     var ky:Float = cast _Runtime.UNDEFINED;
     kx = (rx * ShapeFill.KAPPA__shapeFill);
     ky = (ry * ShapeFill.KAPPA__shapeFill);
-    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (cx + rx) : Float), (cast cy : Float));
-    ShapeFill.pushCubic__shapeFill((cast path : Path), (cast (cx + rx) : Float), (cast (cy + ky) : Float), (cast (cx + kx) : Float), (cast (cy + ry) : Float), (cast cx : Float), (cast (cy + ry) : Float));
-    ShapeFill.pushCubic__shapeFill((cast path : Path), (cast (cx - kx) : Float), (cast (cy + ry) : Float), (cast (cx - rx) : Float), (cast (cy + ky) : Float), (cast (cx - rx) : Float), (cast cy : Float));
-    ShapeFill.pushCubic__shapeFill((cast path : Path), (cast (cx - rx) : Float), (cast (cy - ky) : Float), (cast (cx - kx) : Float), (cast (cy - ry) : Float), (cast cx : Float), (cast (cy - ry) : Float));
-    ShapeFill.pushCubic__shapeFill((cast path : Path), (cast (cx + kx) : Float), (cast (cy - ry) : Float), (cast (cx + rx) : Float), (cast (cy - ky) : Float), (cast (cx + rx) : Float), (cast cy : Float));
+    ShapeFill.pushVerb__shapeFill((cast path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (cx + rx) : Float), (cast cy : Float));
+    ShapeFill.pushCubic__shapeFill((cast path), (cast (cx + rx) : Float), (cast (cy + ky) : Float), (cast (cx + kx) : Float), (cast (cy + ry) : Float), (cast cx : Float), (cast (cy + ry) : Float));
+    ShapeFill.pushCubic__shapeFill((cast path), (cast (cx - kx) : Float), (cast (cy + ry) : Float), (cast (cx - rx) : Float), (cast (cy + ky) : Float), (cast (cx - rx) : Float), (cast cy : Float));
+    ShapeFill.pushCubic__shapeFill((cast path), (cast (cx - rx) : Float), (cast (cy - ky) : Float), (cast (cx - kx) : Float), (cast (cy - ry) : Float), (cast cx : Float), (cast (cy - ry) : Float));
+    ShapeFill.pushCubic__shapeFill((cast path), (cast (cx + kx) : Float), (cast (cy - ry) : Float), (cast (cx + rx) : Float), (cast (cy - ky) : Float), (cast (cx + rx) : Float), (cast cy : Float));
   }
 
   public static function appendRawPath__shapeFill(path:Path, verbs:Array<Float>, data:Array<Float>):Void {
@@ -182,11 +182,11 @@ class ShapeFill {
   }
 
   public static function appendRectangleToPath__shapeFill(path:Path, x:Float, y:Float, w:Float, h:Float):Void {
-    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast x : Float), (cast y : Float));
-    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + w) : Float), (cast y : Float));
-    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + w) : Float), (cast (y + h) : Float));
-    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast (y + h) : Float));
-    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast y : Float));
+    ShapeFill.pushVerb__shapeFill((cast path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast x : Float), (cast y : Float));
+    ShapeFill.pushVerb__shapeFill((cast path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + w) : Float), (cast y : Float));
+    ShapeFill.pushVerb__shapeFill((cast path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + w) : Float), (cast (y + h) : Float));
+    ShapeFill.pushVerb__shapeFill((cast path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast (y + h) : Float));
+    ShapeFill.pushVerb__shapeFill((cast path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast y : Float));
   }
 
   public static function appendRoundRectangleToPath__shapeFill(path:Path, x:Float, y:Float, w:Float, h:Float, rx:Float, ry:Float):Void {
@@ -194,15 +194,15 @@ class ShapeFill {
     var bottom:Float = cast _Runtime.UNDEFINED;
     right = (x + w);
     bottom = (y + h);
-    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (x + rx) : Float), (cast y : Float));
-    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (right - rx) : Float), (cast y : Float));
-    ShapeFill.pushQuadratic__shapeFill((cast path : Path), (cast right : Float), (cast y : Float), (cast right : Float), (cast (y + ry) : Float));
-    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast right : Float), (cast (bottom - ry) : Float));
-    ShapeFill.pushQuadratic__shapeFill((cast path : Path), (cast right : Float), (cast bottom : Float), (cast (right - rx) : Float), (cast bottom : Float));
-    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + rx) : Float), (cast bottom : Float));
-    ShapeFill.pushQuadratic__shapeFill((cast path : Path), (cast x : Float), (cast bottom : Float), (cast x : Float), (cast (bottom - ry) : Float));
-    ShapeFill.pushVerb__shapeFill((cast path : Path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast (y + ry) : Float));
-    ShapeFill.pushQuadratic__shapeFill((cast path : Path), (cast x : Float), (cast y : Float), (cast (x + rx) : Float), (cast y : Float));
+    ShapeFill.pushVerb__shapeFill((cast path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (x + rx) : Float), (cast y : Float));
+    ShapeFill.pushVerb__shapeFill((cast path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (right - rx) : Float), (cast y : Float));
+    ShapeFill.pushQuadratic__shapeFill((cast path), (cast right : Float), (cast y : Float), (cast right : Float), (cast (y + ry) : Float));
+    ShapeFill.pushVerb__shapeFill((cast path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast right : Float), (cast (bottom - ry) : Float));
+    ShapeFill.pushQuadratic__shapeFill((cast path), (cast right : Float), (cast bottom : Float), (cast (right - rx) : Float), (cast bottom : Float));
+    ShapeFill.pushVerb__shapeFill((cast path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + rx) : Float), (cast bottom : Float));
+    ShapeFill.pushQuadratic__shapeFill((cast path), (cast x : Float), (cast bottom : Float), (cast x : Float), (cast (bottom - ry) : Float));
+    ShapeFill.pushVerb__shapeFill((cast path), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast (y + ry) : Float));
+    ShapeFill.pushQuadratic__shapeFill((cast path), (cast x : Float), (cast y : Float), (cast (x + rx) : Float), (cast y : Float));
   }
 
   public static function pushCubic__shapeFill(path:Path, c1x:Float, c1y:Float, c2x:Float, c2y:Float, ax:Float, ay:Float):Void {

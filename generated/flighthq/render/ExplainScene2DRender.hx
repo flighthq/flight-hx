@@ -26,8 +26,8 @@ class ExplainScene2DRender {
     var effectiveAlpha:Float = cast _Runtime.UNDEFINED;
     var reason:Scene2DRenderBlankReason = cast _Runtime.UNDEFINED;
     kind = (cast source : { var kind:String; }).kind;
-    hasRenderer = !_Runtime.strictEquals(((cast (cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).rendererMap : flighthq._internal._Map<String, Renderer>).get(kind)), _Runtime.field(_Runtime, 'UNDEFINED'));
-    proxy = (cast getRenderProxy2D((cast state : RenderState), (cast source : Renderable)) : Null<RenderProxy2D>);
+    hasRenderer = !_Runtime.strictEquals(((cast (cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).rendererMap : flighthq._internal._Map<String, Renderer>).get(kind)), _Runtime.field(_Runtime, 'UNDEFINED'));
+    proxy = (cast getRenderProxy2D((cast state), (cast source)) : Null<RenderProxy2D>);
     prepared = !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED'));
     appearance = (cast (cast source : flighthq._internal._Any) : HasAppearance);
     visible = ((cast !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast proxy : RenderProxy2D).visible : Dynamic) : (cast (cast appearance : HasAppearance).visible : Dynamic));

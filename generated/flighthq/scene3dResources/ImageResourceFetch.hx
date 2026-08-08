@@ -12,9 +12,9 @@ class ImageResourceFetch {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var url:String = cast _Runtime.UNDEFINED;
-        url = (cast resolveImageResourceUri((cast ref.uri : String), (cast ref.basePath : Null<String>)) : String);
+        url = (cast resolveImageResourceUri((cast ref.uri : String), (cast ref.basePath)) : String);
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-          return flighthq._internal._Async.flatMap((cast loadImageResourceFromUrl((cast url : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>), (cast signal : Null<flighthq._internal.dom.AbortSignal>)) : Null<flighthq._internal._Any>), function(__awaitValue0:Dynamic):Dynamic {
+          return flighthq._internal._Async.flatMap((cast loadImageResourceFromUrl((cast url : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast signal)) : flighthq._internal._Promise<Image>), function(__awaitValue0:Dynamic):Dynamic {
             return flighthq._internal._Async.flowReturn(__awaitValue0);
           });
         }), function(__caughtError:Dynamic):Dynamic {

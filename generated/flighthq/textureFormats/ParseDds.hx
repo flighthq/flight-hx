@@ -20,14 +20,14 @@ class ParseDds {
   public static function getDdsParseFailureReason(bytes:flighthq._internal._UInt8Array):Null<TextureContainerParseFailureReason> {
     var failure:ParseFailure__parseDds = cast _Runtime.UNDEFINED;
     var container:Null<TextureContainer> = cast _Runtime.UNDEFINED;
-    failure = { reason: null };
-    container = (cast ParseDds.parseDdsInternal__parseDds((cast bytes : flighthq._internal._UInt8Array), failure) : Null<TextureContainer>);
+    failure = (cast { reason: null });
+    container = (cast ParseDds.parseDdsInternal__parseDds((cast bytes), (cast failure)) : Null<TextureContainer>);
     return cast ((cast _Runtime.strictEquals(container, null) : Bool) ? (cast (cast failure : ParseFailure__parseDds).reason : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function parseDds(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
-    return cast (cast ParseDds.parseDdsInternal__parseDds((cast bytes : flighthq._internal._UInt8Array), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<TextureContainer>);
+    return cast (cast ParseDds.parseDdsInternal__parseDds((cast bytes), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<TextureContainer>);
     return cast null;
   }
 
@@ -54,41 +54,41 @@ class ParseDds {
     var faces:Float = cast _Runtime.UNDEFINED;
     var mipLevels:Float = cast _Runtime.UNDEFINED;
     var layout:Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast ParseDds.hasDdsMagic__parseDds((cast bytes : flighthq._internal._UInt8Array)) : Bool) : Bool) : Bool)) { return cast (cast ParseDds.reject__parseDds(failure, (cast 'container-unrecognized' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
-    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseDds.ddsDataOffset__parseDds : Float)) : Bool)) { return cast (cast ParseDds.reject__parseDds(failure, (cast 'header-truncated' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
-    reader = (cast createByteReader((cast bytes : flighthq._internal._UInt8Array), (cast 4.0 : Float)) : ByteReader);
-    skipByteReader(reader, (cast 4.0 : Float));
-    skipByteReader(reader, (cast 4.0 : Float));
-    dwHeight = (cast readByteReaderU32(reader) : Float);
-    dwWidth = (cast readByteReaderU32(reader) : Float);
-    skipByteReader(reader, (cast 4.0 : Float));
-    dwDepth = (cast readByteReaderU32(reader) : Float);
-    dwMipMapCount = (cast readByteReaderU32(reader) : Float);
+    if ((cast !(cast (cast ParseDds.hasDdsMagic__parseDds((cast bytes)) : Bool) : Bool) : Bool)) { return cast (cast ParseDds.reject__parseDds((cast failure), (cast 'container-unrecognized')) : Null<TextureContainer>); }
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseDds.ddsDataOffset__parseDds : Float)) : Bool)) { return cast (cast ParseDds.reject__parseDds((cast failure), (cast 'header-truncated')) : Null<TextureContainer>); }
+    reader = (cast createByteReader((cast bytes), (cast 4.0 : Float)) : ByteReader);
+    skipByteReader((cast reader), (cast 4.0 : Float));
+    skipByteReader((cast reader), (cast 4.0 : Float));
+    dwHeight = (cast readByteReaderU32((cast reader)) : Float);
+    dwWidth = (cast readByteReaderU32((cast reader)) : Float);
+    skipByteReader((cast reader), (cast 4.0 : Float));
+    dwDepth = (cast readByteReaderU32((cast reader)) : Float);
+    dwMipMapCount = (cast readByteReaderU32((cast reader)) : Float);
     (reader.offset = cast (80.0 : Dynamic));
-    pfFlags = (cast readByteReaderU32(reader) : Float);
-    fourCC = (cast readByteReaderU32(reader) : Float);
-    rgbBitCount = (cast readByteReaderU32(reader) : Float);
-    rMask = (cast readByteReaderU32(reader) : Float);
-    gMask = (cast readByteReaderU32(reader) : Float);
-    bMask = (cast readByteReaderU32(reader) : Float);
-    aMask = (cast readByteReaderU32(reader) : Float);
+    pfFlags = (cast readByteReaderU32((cast reader)) : Float);
+    fourCC = (cast readByteReaderU32((cast reader)) : Float);
+    rgbBitCount = (cast readByteReaderU32((cast reader)) : Float);
+    rMask = (cast readByteReaderU32((cast reader)) : Float);
+    gMask = (cast readByteReaderU32((cast reader)) : Float);
+    bMask = (cast readByteReaderU32((cast reader)) : Float);
+    aMask = (cast readByteReaderU32((cast reader)) : Float);
     (reader.offset = cast (112.0 : Dynamic));
-    caps2 = (cast readByteReaderU32(reader) : Float);
+    caps2 = (cast readByteReaderU32((cast reader)) : Float);
     if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Volume__parseDds)), 0.0) : Bool) || (cast ((cast dwDepth : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) {
-      return cast (cast ParseDds.reject__parseDds(failure, (cast 'format-unsupported' : TextureContainerParseFailureReason)) : Null<TextureContainer>);
+      return cast (cast ParseDds.reject__parseDds((cast failure), (cast 'format-unsupported')) : Null<TextureContainer>);
     }
     cube = !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Cubemap__parseDds)), 0.0);
     layers = 1.0;
     dataOffset = ParseDds.ddsDataOffset__parseDds;
     if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfFourCC__parseDds)), 0.0) : Bool) && (cast _Runtime.strictEquals(fourCC, ParseDds.ddsFourCcDx10__parseDds) : Bool)) : Bool)) {
-      if ((cast !(cast (cast hasByteReaderBytes((cast createByteReader((cast bytes : flighthq._internal._UInt8Array), (cast ParseDds.ddsDataOffset__parseDds : Float)) : ByteReader), (cast 20.0 : Float)) : Bool) : Bool) : Bool)) {
-        return cast (cast ParseDds.reject__parseDds(failure, (cast 'header-truncated' : TextureContainerParseFailureReason)) : Null<TextureContainer>);
+      if ((cast !(cast (cast hasByteReaderBytes((cast (cast createByteReader((cast bytes), (cast ParseDds.ddsDataOffset__parseDds : Float)) : ByteReader)), (cast 20.0 : Float)) : Bool) : Bool) : Bool)) {
+        return cast (cast ParseDds.reject__parseDds((cast failure), (cast 'header-truncated')) : Null<TextureContainer>);
       }
-      var dx10:ByteReader = (cast createByteReader((cast bytes : flighthq._internal._UInt8Array), (cast ParseDds.ddsDataOffset__parseDds : Float)) : ByteReader);
-      var dxgiFormat:Float = (cast readByteReaderU32(dx10) : Float);
-      skipByteReader(dx10, (cast 4.0 : Float));
-      var miscFlag:Float = (cast readByteReaderU32(dx10) : Float);
-      var arraySize:Float = (cast readByteReaderU32(dx10) : Float);
+      var dx10:ByteReader = (cast createByteReader((cast bytes), (cast ParseDds.ddsDataOffset__parseDds : Float)) : ByteReader);
+      var dxgiFormat:Float = (cast readByteReaderU32((cast dx10)) : Float);
+      skipByteReader((cast dx10), (cast 4.0 : Float));
+      var miscFlag:Float = (cast readByteReaderU32((cast dx10)) : Float);
+      var arraySize:Float = (cast readByteReaderU32((cast dx10)) : Float);
       (format = cast (_Runtime.coalesce(_Runtime.getIndex(ParseDds.ddsDxgiFormat__parseDds, dxgiFormat), function():Dynamic return cast null) : Dynamic));
       (cube = cast (((cast cube : Bool) || (cast !_Runtime.strictEquals((_Runtime.toInt32(miscFlag) & _Runtime.toInt32(ParseDds.ddsDx10MiscCube__parseDds)), 0.0) : Bool)) : Dynamic));
       (layers = cast (HxMath.max(1.0, arraySize) : Dynamic));
@@ -100,14 +100,14 @@ class ParseDds {
     } else {
       (format = cast (null : Dynamic));
     } } }
-    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast (cast ParseDds.reject__parseDds(failure, (cast 'format-unsupported' : TextureContainerParseFailureReason)) : Null<TextureContainer>); }
+    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast (cast ParseDds.reject__parseDds((cast failure), (cast 'format-unsupported')) : Null<TextureContainer>); }
     width = HxMath.max(1.0, dwWidth);
     height = HxMath.max(1.0, dwHeight);
     faces = ((cast cube : Bool) ? (cast 6.0 : Dynamic) : (cast 1.0 : Dynamic));
     mipLevels = HxMath.max(1.0, dwMipMapCount);
-    layout = (cast computeTextureContainerLevels((cast format : TextureContainerFormat), (cast width : Float), (cast height : Float), (cast mipLevels : Float), (cast layers : Float), (cast faces : Float), (cast dataOffset : Float)) : Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }>);
+    layout = (cast computeTextureContainerLevels((cast format), (cast width : Float), (cast height : Float), (cast mipLevels : Float), (cast layers : Float), (cast faces : Float), (cast dataOffset : Float)) : Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }>);
     if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast ((cast (cast layout : { var levels:Array<TextureContainerLevel>; var endOffset:Float; }).endOffset : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) : Bool)) {
-      return cast (cast ParseDds.reject__parseDds(failure, (cast 'level-range-out-of-bounds' : TextureContainerParseFailureReason)) : Null<TextureContainer>);
+      return cast (cast ParseDds.reject__parseDds((cast failure), (cast 'level-range-out-of-bounds')) : Null<TextureContainer>);
     }
     return cast { depth: 1.0, faces: faces, format: format, height: height, layers: layers, levels: (cast layout : { var levels:Array<TextureContainerLevel>; var endOffset:Float; }).levels, mipLevels: mipLevels, supercompression: 'None', width: width };
     return cast null;
@@ -150,7 +150,7 @@ class ParseDds {
 
   public static final ddsPfRgb__parseDds:Float = 64.0;
 
-  public static final ddsDxgiFormat__parseDds:flighthq._internal._Record<Float, TextureContainerFormat> = _Runtime.objectFromPairs([{ key: '2', value: 'rgba32f' }, { key: '10', value: 'rgba16f' }, { key: '28', value: 'rgba8unorm' }, { key: '29', value: 'rgba8Srgb' }, { key: '49', value: 'rg8unorm' }, { key: '61', value: 'r8unorm' }, { key: '71', value: 'bc1' }, { key: '72', value: 'bc1Srgb' }, { key: '74', value: 'bc2' }, { key: '75', value: 'bc2Srgb' }, { key: '77', value: 'bc3' }, { key: '78', value: 'bc3Srgb' }, { key: '80', value: 'bc4' }, { key: '81', value: 'bc4Snorm' }, { key: '83', value: 'bc5' }, { key: '84', value: 'bc5Snorm' }, { key: '87', value: 'bgra8unorm' }, { key: '91', value: 'bgra8Srgb' }, { key: '95', value: 'bc6hUfloat' }, { key: '96', value: 'bc6hSfloat' }, { key: '98', value: 'bc7' }, { key: '99', value: 'bc7Srgb' }]);
+  public static final ddsDxgiFormat__parseDds:flighthq._internal._Record<Float, TextureContainerFormat> = (cast _Runtime.objectFromPairs([{ key: '2', value: 'rgba32f' }, { key: '10', value: 'rgba16f' }, { key: '28', value: 'rgba8unorm' }, { key: '29', value: 'rgba8Srgb' }, { key: '49', value: 'rg8unorm' }, { key: '61', value: 'r8unorm' }, { key: '71', value: 'bc1' }, { key: '72', value: 'bc1Srgb' }, { key: '74', value: 'bc2' }, { key: '75', value: 'bc2Srgb' }, { key: '77', value: 'bc3' }, { key: '78', value: 'bc3Srgb' }, { key: '80', value: 'bc4' }, { key: '81', value: 'bc4Snorm' }, { key: '83', value: 'bc5' }, { key: '84', value: 'bc5Snorm' }, { key: '87', value: 'bgra8unorm' }, { key: '91', value: 'bgra8Srgb' }, { key: '95', value: 'bc6hUfloat' }, { key: '96', value: 'bc6hSfloat' }, { key: '98', value: 'bc7' }, { key: '99', value: 'bc7Srgb' }]));
 
-  public static final ddsFourCcFormat__parseDds:flighthq._internal._Record<Float, TextureContainerFormat> = _Runtime.objectFromPairs([{ key: '113', value: 'rgba16f' }, { key: '116', value: 'rgba32f' }, { key: '827611204', value: 'bc1' }, { key: '844388420', value: 'bc2' }, { key: '861165636', value: 'bc2' }, { key: '877942852', value: 'bc3' }, { key: '894720068', value: 'bc3' }, { key: '826889281', value: 'bc4' }, { key: '1429488450', value: 'bc4' }, { key: '1395934018', value: 'bc4Snorm' }, { key: '843666497', value: 'bc5' }, { key: '1429553986', value: 'bc5' }, { key: '1395999554', value: 'bc5Snorm' }]);
+  public static final ddsFourCcFormat__parseDds:flighthq._internal._Record<Float, TextureContainerFormat> = (cast _Runtime.objectFromPairs([{ key: '113', value: 'rgba16f' }, { key: '116', value: 'rgba32f' }, { key: '827611204', value: 'bc1' }, { key: '844388420', value: 'bc2' }, { key: '861165636', value: 'bc2' }, { key: '877942852', value: 'bc3' }, { key: '894720068', value: 'bc3' }, { key: '826889281', value: 'bc4' }, { key: '1429488450', value: 'bc4' }, { key: '1395934018', value: 'bc4Snorm' }, { key: '843666497', value: 'bc5' }, { key: '1429553986', value: 'bc5' }, { key: '1395999554', value: 'bc5Snorm' }]));
 }

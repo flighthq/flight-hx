@@ -18,7 +18,7 @@ class BitmapColorMatrix {
   }
 
   public static function buildBitmapGrayscaleColorMatrix(out:Array<Float>):Void {
-    buildBitmapSaturationColorMatrix((cast out : Array<Float>), (cast 0.0 : Float));
+    buildBitmapSaturationColorMatrix((cast out), (cast 0.0 : Float));
   }
 
   public static function buildBitmapHueRotationColorMatrix(out:Array<Float>, degrees:Float):Void {
@@ -57,18 +57,18 @@ class BitmapColorMatrix {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
         var sourceY:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
-        if ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
+        if ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
             var sourceX:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
-            if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast _Runtime.field(source, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Float = ((_Runtime.multiplyNumbers(sourceY, _Runtime.field(source, 'bitmap').width) + sourceX) * 4.0);
+            if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool)) { px++; continue; }
+            var si:Float = (((sourceY * (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width) + sourceX) * 4.0);
             var di:Float = ((_Runtime.multiplyNumbers(py, _Runtime.field(source, 'width')) + px) * 4.0);
-            var r:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, si);
-            var g:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 1.0));
-            var b:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 2.0));
-            var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(_Runtime.field(source, 'bitmap').data, (si + 3.0));
+            var r:Float = flighthq._internal._StaticIndex.readUint8ClampedArray((cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data, si);
+            var g:Float = flighthq._internal._StaticIndex.readUint8ClampedArray((cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data, (si + 1.0));
+            var b:Float = flighthq._internal._StaticIndex.readUint8ClampedArray((cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data, (si + 2.0));
+            var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray((cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data, (si + 3.0));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (cast BitmapColorMatrix.clampByte__bitmapColorMatrix((cast _Runtime.addNumbers((((_Runtime.multiplyNumbers(r, flighthq._internal._StaticIndex.readArray(matrix, 0.0)) + _Runtime.multiplyNumbers(g, flighthq._internal._StaticIndex.readArray(matrix, 1.0))) + _Runtime.multiplyNumbers(b, flighthq._internal._StaticIndex.readArray(matrix, 2.0))) + _Runtime.multiplyNumbers(a, flighthq._internal._StaticIndex.readArray(matrix, 3.0))), flighthq._internal._StaticIndex.readArray(matrix, 4.0)) : Float)) : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (cast BitmapColorMatrix.clampByte__bitmapColorMatrix((cast _Runtime.addNumbers((((_Runtime.multiplyNumbers(r, flighthq._internal._StaticIndex.readArray(matrix, 5.0)) + _Runtime.multiplyNumbers(g, flighthq._internal._StaticIndex.readArray(matrix, 6.0))) + _Runtime.multiplyNumbers(b, flighthq._internal._StaticIndex.readArray(matrix, 7.0))) + _Runtime.multiplyNumbers(a, flighthq._internal._StaticIndex.readArray(matrix, 8.0))), flighthq._internal._StaticIndex.readArray(matrix, 9.0)) : Float)) : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (cast BitmapColorMatrix.clampByte__bitmapColorMatrix((cast _Runtime.addNumbers((((_Runtime.multiplyNumbers(r, flighthq._internal._StaticIndex.readArray(matrix, 10.0)) + _Runtime.multiplyNumbers(g, flighthq._internal._StaticIndex.readArray(matrix, 11.0))) + _Runtime.multiplyNumbers(b, flighthq._internal._StaticIndex.readArray(matrix, 12.0))) + _Runtime.multiplyNumbers(a, flighthq._internal._StaticIndex.readArray(matrix, 13.0))), flighthq._internal._StaticIndex.readArray(matrix, 14.0)) : Float)) : Float));

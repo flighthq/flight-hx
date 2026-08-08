@@ -7,9 +7,11 @@ import flighthq.geometry.Aabb.createAabb;
 import flighthq.mesh.MeshGeometryAttributes.getVertexAttributeFloatOffset;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryBounds;
 import flighthq.types.Aabb;
+import flighthq.types.Aabb.AabbLike;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
+import flighthq.types.MeshGeometry.VertexSemantic;
 import flighthq.types.Vector3;
 
 class MeshGeometryTransforms {
@@ -19,24 +21,24 @@ class MeshGeometryTransforms {
     var cy:Float = cast _Runtime.UNDEFINED;
     var cz:Float = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.truthy(geometry.bounds) : Bool)) {
-      var bounds:Aabb = (cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Aabb);
-      computeMeshGeometryBounds(bounds, (cast geometry : MeshGeometry));
+      var bounds:Aabb = (cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Aabb);
+      computeMeshGeometryBounds((cast bounds), (cast geometry));
       (geometry.bounds = cast (bounds : Dynamic));
     }
     b = geometry.bounds;
-    cx = ((b.min.x + b.max.x) * 0.5);
-    cy = ((b.min.y + b.max.y) * 0.5);
-    cz = ((b.min.z + b.max.z) * 0.5);
+    cx = (((cast b.min : { var x:Float; }).x + (cast b.max : { var x:Float; }).x) * 0.5);
+    cy = (((cast b.min : { var y:Float; }).y + (cast b.max : { var y:Float; }).y) * 0.5);
+    cz = (((cast b.min : { var z:Float; }).z + (cast b.max : { var z:Float; }).z) * 0.5);
     if ((cast ((cast ((cast _Runtime.strictEquals(cx, 0.0) : Bool) && (cast _Runtime.strictEquals(cy, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(cz, 0.0) : Bool)) : Bool)) { return; }
-    translateMeshGeometry((cast geometry : MeshGeometry), (cast -cx : Float), (cast -cy : Float), (cast -cz : Float));
+    translateMeshGeometry((cast geometry), (cast -cx : Float), (cast -cy : Float), (cast -cz : Float));
   }
 
   public static function scaleMeshGeometry(geometry:MeshGeometry, sx:Float, sy:Float, sz:Float):Void {
-    MeshGeometryTransforms.transformMeshGeometryPositions__meshGeometryTransforms((cast geometry : MeshGeometry), (cast geometry : MeshGeometry), (cast sx : Float), (cast sy : Float), (cast sz : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
+    MeshGeometryTransforms.transformMeshGeometryPositions__meshGeometryTransforms((cast geometry), (cast geometry), (cast sx : Float), (cast sy : Float), (cast sz : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
   }
 
   public static function transformMeshGeometry(geometry:MeshGeometry, matrix:Matrix4Like):Bool {
-    return cast (cast transformMeshGeometryInto((cast geometry : MeshGeometry), (cast geometry : MeshGeometry), (cast matrix : Matrix4Like)) : Bool);
+    return cast (cast transformMeshGeometryInto((cast geometry), (cast geometry), (cast matrix)) : Bool);
     return cast null;
   }
 
@@ -50,14 +52,14 @@ class MeshGeometryTransforms {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var dstVerts:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    invT = (cast MeshGeometryTransforms.computeMatrix3x3InverseTranspose__meshGeometryTransforms((cast matrix : Matrix4Like)) : Null<flighthq._internal._Float32Array>);
+    invT = (cast MeshGeometryTransforms.computeMatrix3x3InverseTranspose__meshGeometryTransforms((cast matrix)) : Null<flighthq._internal._Float32Array>);
     if ((cast !_Runtime.truthy(invT) : Bool)) { return cast false; }
     m = matrix.m;
-    posFloatOffset = (cast getVertexAttributeFloatOffset(source.layout, 'position') : Float);
-    normFloatOffset = (cast getVertexAttributeFloatOffset(source.layout, 'normal') : Float);
-    tanFloatOffset = (cast getVertexAttributeFloatOffset(source.layout, 'tangent') : Float);
+    posFloatOffset = (cast getVertexAttributeFloatOffset((cast source.layout), (cast 'position')) : Float);
+    normFloatOffset = (cast getVertexAttributeFloatOffset((cast source.layout), (cast 'normal')) : Float);
+    tanFloatOffset = (cast getVertexAttributeFloatOffset((cast source.layout), (cast 'tangent')) : Float);
     srcVerts = source.vertices;
-    floatsPerVertex = (source.layout.stride / 4.0);
+    floatsPerVertex = ((cast source.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(srcVerts, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     dstVerts = ((cast _Runtime.strictEquals(out, source) : Bool) ? (cast srcVerts : Dynamic) : (cast out.vertices : Dynamic));
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
@@ -119,7 +121,7 @@ class MeshGeometryTransforms {
     }
     out.version++;
     if (_Runtime.truthy(out.bounds)) {
-      computeMeshGeometryBounds(out.bounds, (cast out : MeshGeometry));
+      computeMeshGeometryBounds((cast out.bounds), (cast out));
     }
     return cast true;
     return cast null;
@@ -130,9 +132,9 @@ class MeshGeometryTransforms {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var verts:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    posFloatOffset = (cast getVertexAttributeFloatOffset(geometry.layout, 'position') : Float);
+    posFloatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout), (cast 'position')) : Float);
     if ((cast ((cast posFloatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return; }
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     verts = geometry.vertices;
     {
@@ -147,12 +149,12 @@ class MeshGeometryTransforms {
     }
     geometry.version++;
     if (_Runtime.truthy(geometry.bounds)) {
-      (geometry.bounds.min.x += x);
-      (geometry.bounds.min.y += y);
-      (geometry.bounds.min.z += z);
-      (geometry.bounds.max.x += x);
-      (geometry.bounds.max.y += y);
-      (geometry.bounds.max.z += z);
+      ((cast (cast geometry.bounds : { var min:Vector3; }).min : { var x:Float; }).x += x);
+      ((cast (cast geometry.bounds : { var min:Vector3; }).min : { var y:Float; }).y += y);
+      ((cast (cast geometry.bounds : { var min:Vector3; }).min : { var z:Float; }).z += z);
+      ((cast (cast geometry.bounds : { var max:Vector3; }).max : { var x:Float; }).x += x);
+      ((cast (cast geometry.bounds : { var max:Vector3; }).max : { var y:Float; }).y += y);
+      ((cast (cast geometry.bounds : { var max:Vector3; }).max : { var z:Float; }).z += z);
     }
   }
 
@@ -226,11 +228,11 @@ class MeshGeometryTransforms {
     var invSx:Float = cast _Runtime.UNDEFINED;
     var invSy:Float = cast _Runtime.UNDEFINED;
     var invSz:Float = cast _Runtime.UNDEFINED;
-    posFloatOffset = (cast getVertexAttributeFloatOffset(source.layout, 'position') : Float);
-    normFloatOffset = (cast getVertexAttributeFloatOffset(source.layout, 'normal') : Float);
-    tanFloatOffset = (cast getVertexAttributeFloatOffset(source.layout, 'tangent') : Float);
+    posFloatOffset = (cast getVertexAttributeFloatOffset((cast source.layout), (cast 'position')) : Float);
+    normFloatOffset = (cast getVertexAttributeFloatOffset((cast source.layout), (cast 'normal')) : Float);
+    tanFloatOffset = (cast getVertexAttributeFloatOffset((cast source.layout), (cast 'tangent')) : Float);
     srcVerts = source.vertices;
-    floatsPerVertex = (source.layout.stride / 4.0);
+    floatsPerVertex = ((cast source.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(srcVerts, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     dstVerts = out.vertices;
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
@@ -295,7 +297,7 @@ class MeshGeometryTransforms {
     }
     out.version++;
     if (_Runtime.truthy(out.bounds)) {
-      computeMeshGeometryBounds(out.bounds, (cast out : MeshGeometry));
+      computeMeshGeometryBounds((cast out.bounds), (cast out));
     }
   }
 }

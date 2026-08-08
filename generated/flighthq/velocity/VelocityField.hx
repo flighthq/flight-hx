@@ -46,7 +46,7 @@ class VelocityField {
 
   public static function contributeVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object, x:Float, y:Float):Void {
     var sample:VelocitySample = cast _Runtime.UNDEFINED;
-    sample = (cast ensureVelocitySample((cast field : flighthq.types.Velocity.VelocityField), (cast source : flighthq._internal._Object)) : VelocitySample);
+    sample = (cast ensureVelocitySample((cast field), (cast source)) : VelocitySample);
     ((cast (cast sample : VelocitySample).velocity : Velocity2D).x = x);
     ((cast (cast sample : VelocitySample).velocity : Velocity2D).y = y);
     ((cast sample : VelocitySample).lastFrameId = (cast field : flighthq.types.Velocity.VelocityField).frameId);
@@ -90,7 +90,7 @@ class VelocityField {
     sample = ((cast (cast field : flighthq.types.Velocity.VelocityField).samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).get(source));
     if ((cast _Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (sample = cast ({ previousWorldTransform: null, velocity: { x: 0.0, y: 0.0 }, lastFrameId: -1.0, explicitFrameId: -1.0 } : Dynamic));
-      ((cast (cast field : flighthq.types.Velocity.VelocityField).samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).set(source, sample));
+      ((cast (cast field : flighthq.types.Velocity.VelocityField).samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).set(source, (cast sample)));
     }
     return cast sample;
     return cast null;
@@ -182,7 +182,7 @@ class VelocityField {
   }
 
   public static function suppressVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object):Void {
-    contributeVelocity((cast field : flighthq.types.Velocity.VelocityField), (cast source : flighthq._internal._Object), (cast 0.0 : Float), (cast 0.0 : Float));
+    contributeVelocity((cast field), (cast source), (cast 0.0 : Float), (cast 0.0 : Float));
   }
 
   public static function zeroVelocity(out:Velocity2D):Velocity2D {

@@ -15,7 +15,7 @@ import flighthq.types.TextFormatRange;
 typedef SwfEditTextField__swfEditText = { var align:TextFormatAlign; var border:Bool; var color:Float; var fontHeight:Float; var fontId:Float; var hasColor:Bool; var height:Float; var html:Bool; var indent:Float; var leading:Float; var leftMargin:Float; var maxChars:Float; var multiline:Bool; var readOnly:Bool; var rightMargin:Float; var selectable:Bool; var text:String; var width:Float; var wordWrap:Bool; };
 
 class SwfEditText {
-  public static function readSwfEditTextFactory(reader:SwfReader, width:Float, height:Float):Null<Float->String->RichText> {
+  public static function readSwfEditTextFactory(reader:SwfReader, width:Float, height:Float):Null<(Float->String)->RichText> {
     var flags:Float = cast _Runtime.UNDEFINED;
     var layoutFlags:Float = cast _Runtime.UNDEFINED;
     var fontId:Float = cast _Runtime.UNDEFINED;
@@ -57,13 +57,13 @@ class SwfEditText {
       (leftMargin = cast (_Runtime.divideNumbers(_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)), SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
       (rightMargin = cast (_Runtime.divideNumbers(_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)), SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
       (indent = cast (_Runtime.divideNumbers(_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)), SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
-      (leading = cast (((cast SwfEditText.readSwfEditTextSigned__swfEditText((cast reader : SwfReader)) : Float) / SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
+      (leading = cast (((cast SwfEditText.readSwfEditTextSigned__swfEditText((cast reader)) : Float) / SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
     }
     _Runtime.callProperty(reader, 'readString', cast ([] : Array<Dynamic>));
     text = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_TEXT__swfEditText)), 0.0) : Bool) ? (cast _Runtime.callProperty(reader, 'readString', cast ([] : Array<Dynamic>)) : Dynamic) : (cast '' : Dynamic));
     if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
-    field = { align: align, border: !_Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_BORDER__swfEditText)), 0.0), color: color, fontHeight: (fontHeight / SwfEditText.TWIPS_PER_PIXEL__swfEditText), fontId: fontId, hasColor: hasColor, height: height, html: !_Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HTML__swfEditText)), 0.0), indent: indent, leading: leading, leftMargin: leftMargin, maxChars: maxChars, multiline: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_MULTILINE__swfEditText)), 0.0), readOnly: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_READ_ONLY__swfEditText)), 0.0), rightMargin: rightMargin, selectable: _Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_NO_SELECT__swfEditText)), 0.0), text: text, width: width, wordWrap: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_WORD_WRAP__swfEditText)), 0.0) };
-    return cast function(resolveFontName:Float->String):RichText return (cast SwfEditText.createSwfEditTextNode__swfEditText(field, (cast (cast resolveFontName((cast (cast field : SwfEditTextField__swfEditText).fontId : Float)) : String) : String)) : RichText);
+    field = (cast { align: align, border: !_Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_BORDER__swfEditText)), 0.0), color: color, fontHeight: (fontHeight / SwfEditText.TWIPS_PER_PIXEL__swfEditText), fontId: fontId, hasColor: hasColor, height: height, html: !_Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HTML__swfEditText)), 0.0), indent: indent, leading: leading, leftMargin: leftMargin, maxChars: maxChars, multiline: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_MULTILINE__swfEditText)), 0.0), readOnly: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_READ_ONLY__swfEditText)), 0.0), rightMargin: rightMargin, selectable: _Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_NO_SELECT__swfEditText)), 0.0), text: text, width: width, wordWrap: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_WORD_WRAP__swfEditText)), 0.0) });
+    return cast function(resolveFontName:Float->String):RichText return (cast SwfEditText.createSwfEditTextNode__swfEditText((cast field), (cast (cast resolveFontName((cast (cast field : SwfEditTextField__swfEditText).fontId : Float)) : String) : String)) : RichText);
     return cast null;
   }
 
@@ -71,11 +71,11 @@ class SwfEditText {
     var format:TextFormat = cast _Runtime.UNDEFINED;
     var content:Null<RichTextContent> = cast _Runtime.UNDEFINED;
     var node:RichText = cast _Runtime.UNDEFINED;
-    format = { align: _Runtime.field(field, 'align'), indent: _Runtime.field(field, 'indent'), leading: _Runtime.field(field, 'leading'), leftMargin: _Runtime.field(field, 'leftMargin'), rightMargin: _Runtime.field(field, 'rightMargin'), size: _Runtime.field(field, 'fontHeight') };
+    format = (cast { align: _Runtime.field(field, 'align'), indent: _Runtime.field(field, 'indent'), leading: _Runtime.field(field, 'leading'), leftMargin: _Runtime.field(field, 'leftMargin'), rightMargin: _Runtime.field(field, 'rightMargin'), size: _Runtime.field(field, 'fontHeight') });
     if ((cast _Runtime.field(field, 'hasColor') : Bool)) { ((cast format : TextFormat).color = _Runtime.field(field, 'color')); }
     if ((cast !_Runtime.strictEquals(fontName, '') : Bool)) { ((cast format : TextFormat).font = fontName); }
-    content = ((cast _Runtime.field(field, 'html') : Bool) ? (cast (cast parseTextMarkup((cast _Runtime.field(field, 'text') : String), _Runtime.field(_Runtime, 'UNDEFINED')) : RichTextContent) : Dynamic) : (cast null : Dynamic));
-    node = (cast createRichText(_Runtime.field(_Runtime, 'UNDEFINED')) : RichText);
+    content = ((cast _Runtime.field(field, 'html') : Bool) ? (cast (cast parseTextMarkup((cast _Runtime.field(field, 'text') : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : RichTextContent) : Dynamic) : (cast null : Dynamic));
+    node = (cast createRichText((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : RichText);
     ((cast (cast node : RichText).data : RichTextData).border = _Runtime.field(field, 'border'));
     ((cast (cast node : RichText).data : RichTextData).defaultTextFormat = format);
     ((cast (cast node : RichText).data : RichTextData).height = _Runtime.field(field, 'height'));

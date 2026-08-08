@@ -10,7 +10,7 @@ import flighthq.types.TweenOptions;
 
 class Timer {
   public static function createTweenTimer(manager:TweenManager, duration:Float, ?options:TweenOptions):Tween<flighthq._internal._Object> {
-    return cast (cast createTween((cast manager : TweenManager), (cast {  } : {  }), (cast duration : Float), {  }, (cast options : Null<TweenOptions>)) : Tween<flighthq._internal._Object>);
+    return cast (cast createTween((cast manager), (cast {  }), (cast duration : Float), (cast {  }), (cast options)) : Tween<{  }>);
     return cast null;
   }
 }

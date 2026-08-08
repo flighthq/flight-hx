@@ -15,14 +15,14 @@ import flighthq.types.PbrExtension;
 
 class EnableGlPbrExtensionGuards {
   public static function areGlPbrExtensionGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.strictEquals((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).pbrExtensionGuard, null);
+    return cast !_Runtime.strictEquals((cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).pbrExtensionGuard, null);
     return cast null;
   }
 
   public static function enableGlPbrExtensionGuards(state:GlRenderState):Void {
-    ((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).pbrExtensionGuard = function(extensions:Array<PbrExtension>):Void {
-      EnableGlPbrExtensionGuards.warnGlPbrExtensionIssues__enableGlPbrExtensionGuards((cast state : GlRenderState), (cast extensions : Array<PbrExtension>));
-    });
+    ((cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : { @:optional var pbrExtensionGuard:Null<Array<PbrExtension>->Void>; }).pbrExtensionGuard = (cast function(extensions:Array<PbrExtension>):Void {
+      EnableGlPbrExtensionGuards.warnGlPbrExtensionIssues__enableGlPbrExtensionGuards((cast state), (cast extensions));
+    }));
   }
 
   public static function getGlPbrExtensionIssueMessage__enableGlPbrExtensionGuards(issue:GlPbrExtensionIssue):String {
@@ -49,12 +49,12 @@ class EnableGlPbrExtensionGuards {
 
   public static function warnGlPbrExtensionIssues__enableGlPbrExtensionGuards(state:GlRenderState, extensions:Array<PbrExtension>):Void {
     var issues:Array<GlPbrExtensionIssue> = cast _Runtime.UNDEFINED;
-    issues = (cast explainGlPbrExtensions((cast state : GlRenderState), (cast extensions : Array<PbrExtension>)) : Array<GlPbrExtensionIssue>);
+    issues = (cast explainGlPbrExtensions((cast state), (cast extensions)) : Array<GlPbrExtensionIssue>);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(issues, 'length') : Float)) : Bool)) {
         var issue:GlPbrExtensionIssue = flighthq._internal._StaticIndex.readArray(issues, i);
-        (cast logOnce((cast 'scene-gl:pbr-extension:' + Std.string((cast issue : GlPbrExtensionIssue).code) + ':' + Std.string((cast issue : GlPbrExtensionIssue).kind) + '' : String), (cast LogLevel.Warn : LogLevel), { code: (cast issue : GlPbrExtensionIssue).code, kind: (cast issue : GlPbrExtensionIssue).kind, message: EnableGlPbrExtensionGuards.getGlPbrExtensionIssueMessage__enableGlPbrExtensionGuards((cast issue : GlPbrExtensionIssue)) }, (cast 'scene-gl' : Null<String>)) : Bool);
+        (cast logOnce((cast 'scene-gl:pbr-extension:' + Std.string((cast issue : GlPbrExtensionIssue).code) + ':' + Std.string((cast issue : GlPbrExtensionIssue).kind) + '' : String), (cast LogLevel.Warn), (cast { code: (cast issue : GlPbrExtensionIssue).code, kind: (cast issue : GlPbrExtensionIssue).kind, message: (cast EnableGlPbrExtensionGuards.getGlPbrExtensionIssueMessage__enableGlPbrExtensionGuards((cast issue)) : String) }), (cast 'scene-gl')) : Bool);
         i++;
       }
     }

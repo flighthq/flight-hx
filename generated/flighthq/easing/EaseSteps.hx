@@ -24,6 +24,7 @@ class EaseSteps {
         (step = cast (jumps : Dynamic));
       }
       return cast (step / jumps);
+      return cast _Runtime.UNDEFINED;
     };
     return cast null;
   }

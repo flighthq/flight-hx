@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _KeyModifierValues {
-  public static final KeyModifierValue:{ var ALT:Float; var CAPS_LOCK:Float; var CTRL:Float; var LEFT_ALT:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_SHIFT:Float; var META:Float; var MODE:Float; var NONE:Float; var NUM_LOCK:Float; var RIGHT_ALT:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_SHIFT:Float; var SHIFT:Float; } = { ALT: (256 | 512), CAPS_LOCK: 8192.0, CTRL: (64 | 128), LEFT_ALT: 256.0, LEFT_CTRL: 64.0, LEFT_META: 1024.0, LEFT_SHIFT: 1.0, META: (1024 | 2048), MODE: 16384.0, NONE: 0.0, NUM_LOCK: 4096.0, RIGHT_ALT: 512.0, RIGHT_CTRL: 128.0, RIGHT_META: 2048.0, RIGHT_SHIFT: 2.0, SHIFT: (1 | 2) };
+  public static final KeyModifierValue:{ var ALT:Float; var CAPS_LOCK:Float; var CTRL:Float; var LEFT_ALT:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_SHIFT:Float; var META:Float; var MODE:Float; var NONE:Float; var NUM_LOCK:Float; var RIGHT_ALT:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_SHIFT:Float; var SHIFT:Float; } = (cast { ALT: (256 | 512), CAPS_LOCK: 8192.0, CTRL: (64 | 128), LEFT_ALT: 256.0, LEFT_CTRL: 64.0, LEFT_META: 1024.0, LEFT_SHIFT: 1.0, META: (1024 | 2048), MODE: 16384.0, NONE: 0.0, NUM_LOCK: 4096.0, RIGHT_ALT: 512.0, RIGHT_CTRL: 128.0, RIGHT_META: 2048.0, RIGHT_SHIFT: 2.0, SHIFT: (1 | 2) });
 }

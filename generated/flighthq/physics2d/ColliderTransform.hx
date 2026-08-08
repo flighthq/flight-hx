@@ -3,10 +3,6 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionCircle;
-import flighthq.types.Collision.CollisionPoint;
-import flighthq.types.Collision.CollisionPolygon;
-import flighthq.types.Collision.CollisionSegment;
 import flighthq.types.Collision.CollisionShape;
 import flighthq.types.Physics2D.Physics2DCollider;
 import flighthq.types.Physics2D.RigidBody2D;
@@ -16,19 +12,19 @@ class ColliderTransform {
     {
       var __switchValue = (cast local : { var kind:String; }).kind;
       if (__switchValue == 'circle') {
-        return cast { kind: 'circle', x: (cast local : { >CollisionCircle, var kind:String; }).x, y: (cast local : { >CollisionCircle, var kind:String; }).y, radius: (cast local : { >CollisionCircle, var kind:String; }).radius };
+        return cast { kind: 'circle', x: (cast local : { var x:Float; }).x, y: (cast local : { var y:Float; }).y, radius: (cast local : { var radius:Float; }).radius };
       }
       else if (__switchValue == 'aabb' || __switchValue == 'obb') {
         return cast { kind: 'obb', x: 0.0, y: 0.0, halfW: 0.0, halfH: 0.0, rotation: 0.0 };
       }
       else if (__switchValue == 'polygon') {
-        return cast { kind: 'polygon', points: _Runtime.slice((cast local : { >CollisionPolygon, var kind:String; }).points, 0, null) };
+        return cast { kind: 'polygon', points: _Runtime.slice((cast local : { var points:Array<Float>; }).points, 0, null) };
       }
       else if (__switchValue == 'segment') {
-        return cast { kind: 'segment', x0: (cast local : { >CollisionSegment, var kind:String; }).x0, y0: (cast local : { >CollisionSegment, var kind:String; }).y0, x1: (cast local : { >CollisionSegment, var kind:String; }).x1, y1: (cast local : { >CollisionSegment, var kind:String; }).y1 };
+        return cast { kind: 'segment', x0: (cast local : { var x0:Float; }).x0, y0: (cast local : { var y0:Float; }).y0, x1: (cast local : { var x1:Float; }).x1, y1: (cast local : { var y1:Float; }).y1 };
       }
       else if (__switchValue == 'point') {
-        return cast { kind: 'point', x: (cast local : { >CollisionPoint, var kind:String; }).x, y: (cast local : { >CollisionPoint, var kind:String; }).y };
+        return cast { kind: 'point', x: (cast local : { var x:Float; }).x, y: (cast local : { var y:Float; }).y };
       }
       else  {
         return cast { kind: 'point', x: 0.0, y: 0.0 };

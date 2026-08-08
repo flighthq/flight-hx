@@ -4,6 +4,7 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Entity;
 import flighthq.types.EulerOrder;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Quaternion;
@@ -12,7 +13,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Quaternion {
   public static function cloneQuaternion(source:QuaternionLike):flighthq.types.Quaternion {
-    return cast (cast createQuaternion((cast source.x : Null<Float>), (cast source.y : Null<Float>), (cast source.z : Null<Float>), (cast source.w : Null<Float>)) : flighthq.types.Quaternion);
+    return cast (cast createQuaternion((cast source.x), (cast source.y), (cast source.z), (cast source.w)) : flighthq.types.Quaternion);
     return cast null;
   }
 
@@ -31,20 +32,20 @@ class Quaternion {
   }
 
   public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):flighthq.types.Quaternion {
-    return cast (cast createEntity((cast { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 1.0) } : Null<{ var x:Float; var y:Float; var z:Float; var w:Float; }>)) : flighthq.types.Quaternion);
+    return cast (cast createEntity((cast { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 1.0) })) : { >Entity, var x:Float; var y:Float; var z:Float; var w:Float; });
     return cast null;
   }
 
   public static function equalsQuaternion(a:Null<QuaternionLike>, b:Null<QuaternionLike>):Bool {
     if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
-    return cast ((cast ((cast ((cast _Runtime.strictEquals((cast a : flighthq.types.Quaternion).x, (cast b : flighthq.types.Quaternion).x) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Quaternion).y, (cast b : flighthq.types.Quaternion).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Quaternion).z, (cast b : flighthq.types.Quaternion).z) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Quaternion).w, (cast b : flighthq.types.Quaternion).w) : Bool));
+    return cast ((cast ((cast ((cast _Runtime.strictEquals((cast a : { var x:Float; }).x, (cast b : { var x:Float; }).x) : Bool) && (cast _Runtime.strictEquals((cast a : { var y:Float; }).y, (cast b : { var y:Float; }).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var z:Float; }).z, (cast b : { var z:Float; }).z) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var w:Float; }).w, (cast b : { var w:Float; }).w) : Bool));
     return cast null;
   }
 
   public static function getQuaternionAngleBetween(a:QuaternionLike, b:QuaternionLike):Float {
     var dot:Float = cast _Runtime.UNDEFINED;
-    dot = HxMath.abs((cast getQuaternionDot((cast a : QuaternionLike), (cast b : QuaternionLike)) : Float));
+    dot = HxMath.abs((cast getQuaternionDot((cast a), (cast b)) : Float));
     return cast _Runtime.multiplyNumbers(2.0, HxMath.acos(HxMath.min(1.0, dot)));
     return cast null;
   }
@@ -420,7 +421,7 @@ class Quaternion {
     tz = to.z;
     dot = (((fx * tx) + (fy * ty)) + (fz * tz));
     if ((cast ((cast dot : Float) > (cast 0.999999 : Float)) : Bool)) {
-      setQuaternionIdentity((cast out : QuaternionLike));
+      setQuaternionIdentity((cast out));
       return;
     }
     if ((cast ((cast dot : Float) < (cast -0.999999 : Float)) : Bool)) {
@@ -505,7 +506,7 @@ class Quaternion {
     rz = ((ux * fy) - (uy * fx));
     rLen = HxMath.sqrt((((rx * rx) + (ry * ry)) + (rz * rz)));
     if ((cast _Runtime.strictEquals(rLen, 0.0) : Bool)) {
-      setQuaternionIdentity((cast out : QuaternionLike));
+      setQuaternionIdentity((cast out));
       return;
     }
     rInv = (1.0 / rLen);

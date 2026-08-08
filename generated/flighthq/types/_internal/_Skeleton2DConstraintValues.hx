@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.Skeleton2D;
 
 class _Skeleton2DConstraintValues {
-  public static final Skeleton2DConstraintKindValue:{ var Ik:String; var Path:String; var Transform:String; } = { Ik: 'Skeleton2D.IkConstraint', Path: 'Skeleton2D.PathConstraint', Transform: 'Skeleton2D.TransformConstraint' };
+  public static final Skeleton2DConstraintKindValue:{ var Ik:String; var Path:String; var Transform:String; } = (cast { Ik: 'Skeleton2D.IkConstraint', Path: 'Skeleton2D.PathConstraint', Transform: 'Skeleton2D.TransformConstraint' });
 }

@@ -9,17 +9,17 @@ import flighthq.types.LocaleInput;
 
 class Datetime {
   public static function formatDate(date:flighthq._internal._Union2<Date, Float>, locale:LocaleInput, ?options:Dynamic):String {
-    return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), (cast locale : LocaleInput), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultDateOptions__datetime) : flighthq._internal._Any)) : String);
+    return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), (cast locale), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultDateOptions__datetime) : flighthq._internal._Any)) : String);
     return cast null;
   }
 
   public static function formatDateTime(date:flighthq._internal._Union2<Date, Float>, locale:LocaleInput, ?options:Dynamic):String {
-    return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), (cast locale : LocaleInput), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultDateTimeOptions__datetime) : flighthq._internal._Any)) : String);
+    return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), (cast locale), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultDateTimeOptions__datetime) : flighthq._internal._Any)) : String);
     return cast null;
   }
 
   public static function formatTime(date:flighthq._internal._Union2<Date, Float>, locale:LocaleInput, ?options:Dynamic):String {
-    return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), (cast locale : LocaleInput), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultTimeOptions__datetime) : flighthq._internal._Any)) : String);
+    return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), (cast locale), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultTimeOptions__datetime) : flighthq._internal._Any)) : String);
     return cast null;
   }
 
@@ -29,15 +29,15 @@ class Datetime {
     var formatter:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     time = ((cast _Runtime.strictEquals(_Runtime.typeofValue(date), 'number') : Bool) ? (cast date : Dynamic) : (cast _Runtime.callProperty(date, 'getTime', cast ([] : Array<Dynamic>)) : Dynamic));
     if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([time] : Array<Dynamic>)) : Bool)) { return cast 'Invalid Date'; }
-    key = (cast getCacheKey((cast 'datetime' : String), (cast locale : LocaleInput), (cast options : Null<flighthq._internal._Object>)) : String);
-    formatter = getCached((cast key : String), (cast function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'DateTimeFormat'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options]) : Void->flighthq._internal._Any));
+    key = (cast getCacheKey((cast 'datetime' : String), (cast locale), (cast options)) : String);
+    formatter = (cast getCached : String->(Void->flighthq._internal._Any)->flighthq._internal._Any)((cast key : String), (cast function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'DateTimeFormat'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options])));
     return cast _Runtime.callProperty(formatter, 'format', cast ([date] : Array<Dynamic>));
     return cast null;
   }
 
-  public static final defaultDateOptions__datetime:Dynamic = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  public static final defaultDateOptions__datetime:Dynamic = (cast { year: 'numeric', month: 'numeric', day: 'numeric' });
 
-  public static final defaultTimeOptions__datetime:Dynamic = { hour: 'numeric', minute: 'numeric' };
+  public static final defaultTimeOptions__datetime:Dynamic = (cast { hour: 'numeric', minute: 'numeric' });
 
-  public static final defaultDateTimeOptions__datetime:Dynamic = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+  public static final defaultDateTimeOptions__datetime:Dynamic = (cast { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' });
 }

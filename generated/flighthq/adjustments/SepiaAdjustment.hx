@@ -6,14 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.types.SepiaAdjustment;
 
 class SepiaAdjustment {
-  public static function createSepiaAdjustment(?options:Dynamic):flighthq.types.SepiaAdjustment {
+  public static function createSepiaAdjustment(?options:flighthq._internal._Omit<flighthq.types.SepiaAdjustment, String>):flighthq.types.SepiaAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var k:Float = cast _Runtime.UNDEFINED;
     var j:Float = cast _Runtime.UNDEFINED;
     var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
     k = _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0);
     j = (1.0 - k);
-    colorMatrix = cast ([(j + (0.393 * k)), (0.769 * k), (0.189 * k), 0.0, 0.0, (0.349 * k), (j + (0.686 * k)), (0.168 * k), 0.0, 0.0, (0.272 * k), (0.534 * k), (j + (0.131 * k)), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
+    colorMatrix = (cast cast ([(j + (0.393 * k)), (0.769 * k), (0.189 * k), 0.0, 0.0, (0.349 * k), (j + (0.686 * k)), (0.168 * k), 0.0, 0.0, (0.272 * k), (0.534 * k), (j + (0.131 * k)), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
     return cast _Runtime.mergeObjects([{ kind: 'SepiaAdjustment' }, options, { colorMatrix: colorMatrix }]);
     return cast null;
   }

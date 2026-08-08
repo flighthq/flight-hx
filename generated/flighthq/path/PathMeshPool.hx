@@ -16,7 +16,7 @@ class PathMeshPool {
     mesh = ((cast ((cast _Runtime.field(PathMeshPool.pathMeshPool__pathMeshPool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(PathMeshPool.pathMeshPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : (cast { vertices: cast ([] : Array<Dynamic>), indices: cast ([] : Array<Dynamic>) } : Dynamic));
     _Runtime.setLength((cast mesh : PathMesh).vertices, 0.0);
     _Runtime.setLength((cast mesh : PathMesh).indices, 0.0);
-    fresh = (cast tessellatePath((cast path : Path), (cast tolerance : Float)) : PathMesh);
+    fresh = (cast tessellatePath((cast path), (cast tolerance : Float)) : PathMesh);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast fresh : PathMesh).vertices, 'length') : Float)) : Bool)) {
@@ -40,7 +40,7 @@ class PathMeshPool {
   public static function acquirePathMeshTyped(path:Path, tolerance:Float = 0.25):PathMeshTyped {
     var fresh:PathMeshTyped = cast _Runtime.UNDEFINED;
     var mesh:PathMeshTyped = cast _Runtime.UNDEFINED;
-    fresh = (cast tessellatePathTyped((cast path : Path), (cast tolerance : Float)) : PathMeshTyped);
+    fresh = (cast tessellatePathTyped((cast path), (cast tolerance : Float)) : PathMeshTyped);
     mesh = ((cast ((cast _Runtime.field(PathMeshPool.typedPool__pathMeshPool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(PathMeshPool.typedPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : (cast { vertices: new flighthq._internal._Float32Array(0.0), indices: new flighthq._internal._UInt32Array(0.0) } : Dynamic));
     ((cast mesh : PathMeshTyped).vertices = (cast fresh : PathMeshTyped).vertices);
     ((cast mesh : PathMeshTyped).indices = (cast fresh : PathMeshTyped).indices);
@@ -62,7 +62,7 @@ class PathMeshPool {
 
   public static final POOL_HIGH_WATER__pathMeshPool:Float = 64.0;
 
-  public static final pathMeshPool__pathMeshPool:Array<PathMesh> = cast ([] : Array<Dynamic>);
+  public static final pathMeshPool__pathMeshPool:Array<PathMesh> = (cast cast ([] : Array<Dynamic>));
 
-  public static final typedPool__pathMeshPool:Array<PathMeshTyped> = cast ([] : Array<Dynamic>);
+  public static final typedPool__pathMeshPool:Array<PathMeshTyped> = (cast cast ([] : Array<Dynamic>));
 }

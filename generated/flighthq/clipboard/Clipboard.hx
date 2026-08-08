@@ -24,11 +24,11 @@ class Clipboard {
 
   public static function attachClipboardWatch(watch:ClipboardWatch):Void {
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
-    detachClipboardWatch((cast watch : ClipboardWatch));
-    unsubscribe = (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).subscribeClipboardChange(function():Void {
+    detachClipboardWatch((cast watch));
+    unsubscribe = (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).subscribeClipboardChange((cast function():Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[watch.onChange]]), 1);
-    });
-    ((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._WeakMap<ClipboardWatch, Void->Void>).set(watch, unsubscribe));
+    }));
+    ((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._WeakMap<ClipboardWatch, Void->Void>).set(watch, (cast unsubscribe)));
   }
 
   public static function blobFromFormatData__clipboard(format:String, data:String):flighthq._internal._Promise<flighthq._internal.dom.Blob> {
@@ -97,7 +97,7 @@ class Clipboard {
                         var __flowBranch8:Dynamic;
                         if ((cast StringTools.startsWith(format, 'image/') : Bool)) {
                           __flowBranch8 = flighthq._internal._Async.protect(function():Dynamic {
-                            return flighthq._internal._Async.flowReturn(Clipboard.readBlobAsDataUrl__clipboard((cast blob : flighthq._internal.dom.Blob)));
+                            return flighthq._internal._Async.flowReturn((cast Clipboard.readBlobAsDataUrl__clipboard((cast blob)) : flighthq._internal._Promise<String>));
                           });
                         } else {
                           __flowBranch8 = flighthq._internal._Async.flowNormal();
@@ -233,7 +233,7 @@ class Clipboard {
                 var item:Dynamic = __flowIterator20[__flowIndex21++];
                 var __beforeAwait22:Dynamic = entry;
                 var __beforeAwait23:Dynamic = item.format;
-                return flighthq._internal._Async.flatMap(Clipboard.blobFromFormatData__clipboard((cast item.format : String), (cast item.data : String)), function(__awaitValue24:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast Clipboard.blobFromFormatData__clipboard((cast item.format : String), (cast item.data : String)) : flighthq._internal._Promise<flighthq._internal.dom.Blob>), function(__awaitValue24:Dynamic):Dynamic {
                   _Runtime.setIndex(__beforeAwait22, __beforeAwait23, __awaitValue24);
                   return flighthq._internal._Async.flowNormal();
                 });
@@ -293,7 +293,7 @@ class Clipboard {
                           var __beforeAwait34:Dynamic = result;
                           var __beforeAwait35:Dynamic = format;
                           return flighthq._internal._Async.flatMap((cast blob : flighthq._internal.dom.Blob).text(), function(__awaitValue36:Dynamic):Dynamic {
-                            return flighthq._internal._Async.flatMap(Clipboard.readBlobAsDataUrl__clipboard((cast blob : flighthq._internal.dom.Blob)), function(__awaitValue37:Dynamic):Dynamic {
+                            return flighthq._internal._Async.flatMap((cast Clipboard.readBlobAsDataUrl__clipboard((cast blob)) : flighthq._internal._Promise<String>), function(__awaitValue37:Dynamic):Dynamic {
                               _Runtime.setIndex(__beforeAwait34, __beforeAwait35, ((cast StringTools.startsWith(format, 'image/') : Bool) ? (cast __awaitValue37 : Dynamic) : (cast __awaitValue36 : Dynamic)));
                               return flighthq._internal._Async.flowNormal();
                             });
@@ -386,12 +386,12 @@ class Clipboard {
     }, readHtml: function():flighthq._internal._Promise<String> {
       var __thisValue1:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve((cast __thisValue1 : ClipboardBackend).readFormat(ClipboardFormatHtml));
+        return flighthq._internal._Async.resolve((cast __thisValue1 : ClipboardBackend).readFormat((cast ClipboardFormatHtml : String)));
       }));
     }, writeHtml: function(html:String):flighthq._internal._Promise<Bool> {
       var __thisValue2:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve((cast __thisValue2 : ClipboardBackend).writeFormat(ClipboardFormatHtml, html));
+        return flighthq._internal._Async.resolve((cast __thisValue2 : ClipboardBackend).writeFormat((cast ClipboardFormatHtml : String), (cast html : String)));
       }));
     }, hasText: function():flighthq._internal._Promise<Bool> {
       var __thisValue3:Dynamic = _Runtime.thisValue();
@@ -431,7 +431,7 @@ class Clipboard {
                       var blob:flighthq._internal.dom.Blob = cast _Runtime.UNDEFINED;
                       return flighthq._internal._Async.flatMap((cast item : flighthq._internal.dom.ClipboardItem).getType(type), function(__awaitValue48:Dynamic):Dynamic {
                         blob = __awaitValue48;
-                        return flighthq._internal._Async.flowReturn(Clipboard.readBlobAsDataUrl__clipboard((cast blob : flighthq._internal.dom.Blob)));
+                        return flighthq._internal._Async.flowReturn((cast Clipboard.readBlobAsDataUrl__clipboard((cast blob)) : flighthq._internal._Promise<String>));
                       });
                     });
                   } else {
@@ -503,14 +503,14 @@ class Clipboard {
     }, readRTF: function():flighthq._internal._Promise<String> {
       var __thisValue7:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve((cast __thisValue7 : ClipboardBackend).readFormat(ClipboardFormatRtf));
+        return flighthq._internal._Async.resolve((cast __thisValue7 : ClipboardBackend).readFormat((cast ClipboardFormatRtf : String)));
       }));
     }, writeRTF: function(rtf:String):flighthq._internal._Promise<Bool> {
       var __thisValue8:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve((cast __thisValue8 : ClipboardBackend).writeFormat(ClipboardFormatRtf, rtf));
+        return flighthq._internal._Async.resolve((cast __thisValue8 : ClipboardBackend).writeFormat((cast ClipboardFormatRtf : String), (cast rtf : String)));
       }));
-    }, readBookmark: function():flighthq._internal._Promise<flighthq._internal._Any> {
+    }, readBookmark: function():flighthq._internal._Promise<Null<ClipboardBookmark>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
@@ -518,7 +518,7 @@ class Clipboard {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, readFiles: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
+    }, readFiles: function():flighthq._internal._Promise<Array<String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
@@ -529,23 +529,25 @@ class Clipboard {
     }, clear: function():flighthq._internal._Promise<Bool> {
       var __thisValue9:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve((cast __thisValue9 : ClipboardBackend).writeText(''));
+        return flighthq._internal._Async.resolve((cast __thisValue9 : ClipboardBackend).writeText((cast '' : String)));
       }));
     }, getChangeCount: function():Float {
       return cast -1.0;
+      return cast _Runtime.UNDEFINED;
     }, subscribeClipboardChange: function(listener:Void->Void):Void->Void {
       if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
 
       }; }
       if ((cast flighthq._internal.backend.DomWindowBackend.hasField(flighthq._internal.backend.DomWindowBackend.value(), 'onclipboardchange') : Bool)) {
         var handler:Void->Void = cast _Runtime.UNDEFINED;
-        handler = (cast function():Void return listener() : Void->Void);
-        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast ([(cast 'clipboardchange' : flighthq._internal.dom.WindowEventMap), (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
-        return cast function():Void return flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast ([(cast 'clipboardchange' : flighthq._internal.dom.WindowEventMap), (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
+        handler = (cast function():Void { listener(); });
+        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast ([(cast 'clipboardchange' : String), (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
+        return cast function():Void { flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast ([(cast 'clipboardchange' : String), (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>)); };
       }
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
@@ -560,12 +562,12 @@ class Clipboard {
   }
 
   public static function disposeClipboardWatch(watch:ClipboardWatch):Void {
-    detachClipboardWatch((cast watch : ClipboardWatch));
+    detachClipboardWatch((cast watch));
   }
 
   @:noCompletion
   public static function getClipboardBackend():ClipboardBackend {
-    if ((cast _Runtime.strictEquals(Clipboard._backend__clipboard, null) : Bool)) { (Clipboard._backend__clipboard = cast ((cast createWebClipboardBackend() : Null<ClipboardBackend>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Clipboard._backend__clipboard, null) : Bool)) { (Clipboard._backend__clipboard = cast ((cast createWebClipboardBackend() : ClipboardBackend) : Dynamic)); }
     return cast Clipboard._backend__clipboard;
     return cast null;
   }
@@ -595,17 +597,17 @@ class Clipboard {
   }
 
   public static function hasClipboardBookmark():flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).hasFormat(ClipboardFormatBookmark);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).hasFormat((cast ClipboardFormatBookmark : String));
     return cast null;
   }
 
   public static function hasClipboardFormat(format:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).hasFormat(format);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).hasFormat((cast format : String));
     return cast null;
   }
 
   public static function hasClipboardHtml():flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).hasFormat(ClipboardFormatHtml);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).hasFormat((cast ClipboardFormatHtml : String));
     return cast null;
   }
 
@@ -615,7 +617,7 @@ class Clipboard {
   }
 
   public static function hasClipboardRTF():flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).hasFormat(ClipboardFormatRtf);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).hasFormat((cast ClipboardFormatRtf : String));
     return cast null;
   }
 
@@ -632,8 +634,8 @@ class Clipboard {
       }
       try {
         var reader:flighthq._internal.dom.FileReader = _Runtime.construct(flighthq._internal._HostValueLut.get('FileReader'), []);
-        ((cast reader : flighthq._internal.dom.FileReader).onloadend = function():Void return resolve((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast reader : flighthq._internal.dom.FileReader).result), 'string') : Bool) ? (cast (cast reader : flighthq._internal.dom.FileReader).result : Dynamic) : (cast '' : Dynamic)) : flighthq._internal._Any)));
-        ((cast reader : flighthq._internal.dom.FileReader).onerror = function():Void return resolve((cast '' : flighthq._internal._Any)));
+        ((cast reader : flighthq._internal.dom.FileReader).onloadend = function(__unused11:flighthq._internal.dom.ProgressEvent<flighthq._internal.dom.FileReader>):Void { resolve((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast reader : flighthq._internal.dom.FileReader).result), 'string') : Bool) ? (cast (cast reader : flighthq._internal.dom.FileReader).result : Dynamic) : (cast '' : Dynamic)) : flighthq._internal._Any)); });
+        ((cast reader : flighthq._internal.dom.FileReader).onerror = function(__unused12:flighthq._internal.dom.ProgressEvent<flighthq._internal.dom.FileReader>):Void { resolve((cast '' : flighthq._internal._Any)); });
         (cast reader : flighthq._internal.dom.FileReader).readAsDataURL(blob);
       } catch (__error:Dynamic) {
         resolve((cast '' : flighthq._internal._Any));
@@ -643,7 +645,7 @@ class Clipboard {
   }
 
   public static function readClipboard(formats:Array<String>):flighthq._internal._Promise<flighthq._internal._Record<String, String>> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).readItems(formats);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).readItems((cast formats));
     return cast null;
   }
 
@@ -658,7 +660,7 @@ class Clipboard {
   }
 
   public static function readClipboardFormat(format:String):flighthq._internal._Promise<String> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).readFormat(format);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).readFormat((cast format : String));
     return cast null;
   }
 
@@ -688,42 +690,42 @@ class Clipboard {
   }
 
   public static function writeClipboard(items:Array<ClipboardWriteItem>):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeItems(items);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeItems((cast items));
     return cast null;
   }
 
   public static function writeClipboardBookmark(title:String, url:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeBookmark(title, url);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeBookmark((cast title : String), (cast url : String));
     return cast null;
   }
 
   public static function writeClipboardFiles(paths:Array<String>):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeFiles(paths);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeFiles((cast paths));
     return cast null;
   }
 
   public static function writeClipboardFormat(format:String, data:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeFormat(format, data);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeFormat((cast format : String), (cast data : String));
     return cast null;
   }
 
   public static function writeClipboardHtml(html:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeHtml(html);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeHtml((cast html : String));
     return cast null;
   }
 
   public static function writeClipboardImage(dataUrl:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeImage(dataUrl);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeImage((cast dataUrl : String));
     return cast null;
   }
 
   public static function writeClipboardRTF(rtf:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeRTF(rtf);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeRTF((cast rtf : String));
     return cast null;
   }
 
   public static function writeClipboardText(text:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeText(text);
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeText((cast text : String));
     return cast null;
   }
 }

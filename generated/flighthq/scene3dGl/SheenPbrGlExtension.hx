@@ -8,6 +8,7 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.GlPbrExtensionBindContext;
 import flighthq.types.GlPbrExtensionRegistration;
 import flighthq.types.GlPbrExtensionShaderContext;
+import flighthq.types.GlPbrExtensionShaderContribution;
 import flighthq.types.GlRenderState;
 import flighthq.types.PbrExtension;
 import flighthq.types.PbrExtension.PbrUvSet;
@@ -23,14 +24,14 @@ import flighthq.types.VoxelGrid;
 import flighthq.types._internal._SheenPbrExtensionValues.SheenPbrExtensionKind;
 
 class SheenPbrGlExtension {
-  public static final sheenPbrGlExtension:GlPbrExtensionRegistration = { bind: function(context:GlPbrExtensionBindContext, value:PbrExtension):Void {
+  public static final sheenPbrGlExtension:GlPbrExtensionRegistration = (cast { bind: function(context:GlPbrExtensionBindContext, value:PbrExtension):Void {
     var extension:SheenPbrExtension = cast _Runtime.UNDEFINED;
     extension = (cast value : SheenPbrExtension);
-    (cast context : GlPbrExtensionBindContext).setLinearColor('u_flightSheenColor', _Runtime.field(extension, 'sheenColor'));
-    (cast context : GlPbrExtensionBindContext).setFloat('u_flightSheenRoughness', _Runtime.field(extension, 'sheenRoughness'));
-    (cast context : GlPbrExtensionBindContext).bindTexture('u_flightSheenColorMap', 'u_flightSheenColorMapUvSet', 'u_flightSheenColorMapTransform', _Runtime.field(extension, 'sheenColorMap'), _Runtime.field(extension, 'sheenColorMapUvSet'));
-    (cast context : GlPbrExtensionBindContext).bindTexture('u_flightSheenRoughnessMap', 'u_flightSheenRoughnessMapUvSet', 'u_flightSheenRoughnessMapTransform', _Runtime.field(extension, 'sheenRoughnessMap'), _Runtime.field(extension, 'sheenRoughnessMapUvSet'));
-  }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):{ var applySurface:String; var contributeIbl:String; var contributePunctual:String; var finalize:String; var fragmentDeclarations:String; var fragmentFunctions:String; var key:String; var textureCount:Float; } {
+    (cast context : GlPbrExtensionBindContext).setLinearColor((cast 'u_flightSheenColor' : String), (cast _Runtime.field(extension, 'sheenColor') : Float));
+    (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightSheenRoughness' : String), (cast _Runtime.field(extension, 'sheenRoughness') : Float));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightSheenColorMap' : String), (cast 'u_flightSheenColorMapUvSet' : String), (cast 'u_flightSheenColorMapTransform' : String), (cast _Runtime.field(extension, 'sheenColorMap')), (cast _Runtime.field(extension, 'sheenColorMapUvSet')));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightSheenRoughnessMap' : String), (cast 'u_flightSheenRoughnessMapUvSet' : String), (cast 'u_flightSheenRoughnessMapTransform' : String), (cast _Runtime.field(extension, 'sheenRoughnessMap')), (cast _Runtime.field(extension, 'sheenRoughnessMapUvSet')));
+  }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):GlPbrExtensionShaderContribution {
     var extension:SheenPbrExtension = cast _Runtime.UNDEFINED;
     var colorMap:Bool = cast _Runtime.UNDEFINED;
     var roughnessMap:Bool = cast _Runtime.UNDEFINED;
@@ -38,11 +39,13 @@ class SheenPbrGlExtension {
     colorMap = _Runtime.callProperty(context, 'isTextureReady', cast ([_Runtime.field(extension, 'sheenColorMap')] : Array<Dynamic>));
     roughnessMap = _Runtime.callProperty(context, 'isTextureReady', cast ([_Runtime.field(extension, 'sheenRoughnessMap')] : Array<Dynamic>));
     return cast { applySurface: '', contributeIbl: '\n  vec3 flightSheenColor = u_flightSheenColor * ' + Std.string(((cast colorMap : Bool) ? (cast 'texture(u_flightSheenColorMap, flightSheenColorUv()).rgb' : Dynamic) : (cast 'vec3(1.0)' : Dynamic))) + ';\n  float flightSheenRoughness = clamp(u_flightSheenRoughness * ' + Std.string(((cast roughnessMap : Bool) ? (cast 'texture(u_flightSheenRoughnessMap, flightSheenRoughnessUv()).a' : Dynamic) : (cast '1.0' : Dynamic))) + ', 0.07, 1.0);\n  vec3 flightSheenR = reflect(-V, N);\n  ambient += flightSheenColor * textureLod(u_iblPrefiltered, flightSheenR, flightSheenRoughness * u_iblMaxMip).rgb *\n    (1.0 - max(max(F.r, F.g), F.b)) * occ * u_iblIntensity;', contributePunctual: '\n  vec3 flightSheenColor = u_flightSheenColor * ' + Std.string(((cast colorMap : Bool) ? (cast 'texture(u_flightSheenColorMap, flightSheenColorUv()).rgb' : Dynamic) : (cast 'vec3(1.0)' : Dynamic))) + ';\n  float flightSheenRoughness = clamp(u_flightSheenRoughness * ' + Std.string(((cast roughnessMap : Bool) ? (cast 'texture(u_flightSheenRoughnessMap, flightSheenRoughnessUv()).a' : Dynamic) : (cast '1.0' : Dynamic))) + ', 0.07, 1.0);\n  float flightSheenD = flightDistributionCharlie(nDotH, flightSheenRoughness);\n  float flightSheenV = 1.0 / max(4.0 * (nDotL + nDotV - nDotL * nDotV), 1e-4);\n  direct += flightSheenColor * flightSheenD * flightSheenV * lightColor * nDotL;', finalize: '', fragmentDeclarations: '\nuniform vec3 u_flightSheenColor;\nuniform float u_flightSheenRoughness;\n' + Std.string(((cast colorMap : Bool) ? (cast 'uniform sampler2D u_flightSheenColorMap; uniform int u_flightSheenColorMapUvSet; uniform mat3 u_flightSheenColorMapTransform;' : Dynamic) : (cast '' : Dynamic))) + '\n' + Std.string(((cast roughnessMap : Bool) ? (cast 'uniform sampler2D u_flightSheenRoughnessMap; uniform int u_flightSheenRoughnessMapUvSet; uniform mat3 u_flightSheenRoughnessMapTransform;' : Dynamic) : (cast '' : Dynamic))) + '', fragmentFunctions: '\n' + Std.string(((cast colorMap : Bool) ? (cast 'vec2 flightSheenColorUv() { vec2 uv = u_flightSheenColorMapUvSet == 1 ? v_pbrExtensionUv1 : v_pbrExtensionUv0; return (u_flightSheenColorMapTransform * vec3(uv, 1.0)).xy; }' : Dynamic) : (cast '' : Dynamic))) + '\n' + Std.string(((cast roughnessMap : Bool) ? (cast 'vec2 flightSheenRoughnessUv() { vec2 uv = u_flightSheenRoughnessMapUvSet == 1 ? v_pbrExtensionUv1 : v_pbrExtensionUv0; return (u_flightSheenRoughnessMapTransform * vec3(uv, 1.0)).xy; }' : Dynamic) : (cast '' : Dynamic))) + '\nfloat flightDistributionCharlie(float nDotH, float roughnessValue) {\n  float inverseRoughness = 1.0 / roughnessValue;\n  return (2.0 + inverseRoughness) * pow(max(1.0 - nDotH * nDotH, 1e-4), inverseRoughness * 0.5) / (2.0 * PI);\n}', key: 'sheen:' + Std.string(((cast colorMap : Bool) ? (cast 'c' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast roughnessMap : Bool) ? (cast 'r' : Dynamic) : (cast '-' : Dynamic))) + '', textureCount: _Runtime.addNumbers(_Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([colorMap] : Array<Dynamic>)), _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([roughnessMap] : Array<Dynamic>))) };
+    return cast _Runtime.UNDEFINED;
   }, isSupported: function(extension:PbrExtension):Bool {
     return cast true;
-  } };
+    return cast _Runtime.UNDEFINED;
+  } });
 
   public static function registerGlSheenPbrExtension(state:GlRenderState):Void {
-    registerGlPbrExtension((cast state : GlRenderState), (cast SheenPbrExtensionKind : String), (cast sheenPbrGlExtension : GlPbrExtensionRegistration));
+    registerGlPbrExtension((cast state), (cast SheenPbrExtensionKind : String), (cast sheenPbrGlExtension));
   }
 }

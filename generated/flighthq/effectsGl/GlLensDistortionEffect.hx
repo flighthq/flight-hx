@@ -22,19 +22,19 @@ class GlLensDistortionEffect {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(effect, 'amount'), function():Dynamic return cast 0.2);
     scale = _Runtime.coalesce(_Runtime.field(effect, 'scale'), function():Dynamic return cast 1.0);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'lens.lensDistortion' : String), (cast GlLensDistortionEffect.LENS_DISTORTION_FRAGMENT_SRC__glLensDistortionEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'lens.lensDistortion' : String), (cast GlLensDistortionEffect.LENS_DISTORTION_FRAGMENT_SRC__glLensDistortionEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_amount'), amount);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_scale'), scale);
-    });
+    }));
   }
 
-  public static final defaultGlLensDistortionEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyLensDistortionEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : LensDistortionEffect) : LensDistortionEffect));
-  };
+  public static final defaultGlLensDistortionEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyLensDistortionEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : LensDistortionEffect)));
+  });
 
   public static function registerGlLensDistortionEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'LensDistortionEffect' : String), (cast defaultGlLensDistortionEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'LensDistortionEffect' : String), (cast defaultGlLensDistortionEffectRunner));
   }
 
   public static final LENS_DISTORTION_FRAGMENT_SRC__glLensDistortionEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_amount;\nuniform float u_scale;\nout vec4 o_color;\nvoid main() {\n  vec2 centered = (v_texCoord - 0.5) / u_scale;\n  float r2 = dot(centered, centered);\n  vec2 distorted = centered * (1.0 + u_amount * r2) + 0.5;\n  if (distorted.x < 0.0 || distorted.x > 1.0 || distorted.y < 0.0 || distorted.y > 1.0) {\n    o_color = vec4(0.0, 0.0, 0.0, 1.0);\n  } else {\n    o_color = texture(u_texture0, distorted);\n  }\n}';

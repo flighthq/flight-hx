@@ -23,9 +23,9 @@ class EaseCubicBezier {
     cy = (3.0 * y1);
     by = ((3.0 * (y2 - y1)) - cy);
     ay = ((1.0 - cy) - by);
-    sampleX = (cast function(s:Float):Float return (((((ax * s) + bx) * s) + cx) * s) : Float->Float);
-    sampleY = (cast function(s:Float):Float return (((((ay * s) + by) * s) + cy) * s) : Float->Float);
-    sampleDerivativeX = (cast function(s:Float):Float return (((((3.0 * ax) * s) + (2.0 * bx)) * s) + cx) : Float->Float);
+    sampleX = (cast function(s:Float):Float return (((((ax * s) + bx) * s) + cx) * s));
+    sampleY = (cast function(s:Float):Float return (((((ay * s) + by) * s) + cy) * s));
+    sampleDerivativeX = (cast function(s:Float):Float return (((((3.0 * ax) * s) + (2.0 * bx)) * s) + cx));
     solveParameterForX = (cast function(x:Float, epsilon:Float):Float {
       var s:Float = cast _Runtime.UNDEFINED;
       var low:Float = cast _Runtime.UNDEFINED;
@@ -68,7 +68,8 @@ class EaseCubicBezier {
         (s = cast ((((high - low) * 0.5) + low) : Dynamic));
       }
       return cast s;
-    } : Float->Float->Float);
+      return cast _Runtime.UNDEFINED;
+    });
     return cast function(t:Float):Float {
       if ((cast ((cast t : Float) <= (cast 0.0 : Float)) : Bool)) {
         return cast 0.0;
@@ -77,6 +78,7 @@ class EaseCubicBezier {
         return cast 1.0;
       }
       return cast (cast sampleY((cast (cast solveParameterForX((cast t : Float), (cast 1e-7 : Float)) : Float) : Float)) : Float);
+      return cast _Runtime.UNDEFINED;
     };
     return cast null;
   }

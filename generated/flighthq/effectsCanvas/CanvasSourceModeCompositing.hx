@@ -33,7 +33,7 @@ class CanvasSourceModeCompositing {
 
   public static function compositeCanvasSourceMode(dest:CanvasRenderTarget, source:CanvasRenderTarget, sourceMode:CanvasEffectSourceMode):Void {
     if ((cast _Runtime.strictEquals(sourceMode, 'hide') : Bool)) { return; }
-    compositeCanvasImage((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast 0.0 : Float), (cast 0.0 : Float), (cast ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool) ? (cast 'destination-out' : Dynamic) : (cast 'source-over' : Dynamic)) : flighthq._internal._Any));
+    compositeCanvasImage((cast dest), (cast source), (cast 0.0 : Float), (cast 0.0 : Float), (cast ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool) ? (cast 'destination-out' : Dynamic) : (cast 'source-over' : Dynamic)) : flighthq._internal._Any));
   }
 
   public static function drawCanvasInvertedTintedAlphaMask(dest:CanvasRenderTarget, source:CanvasRenderTarget, color:Float, alpha:Float, strength:Float, offsetX:Float = 0.0, offsetY:Float = 0.0):Void {
@@ -45,7 +45,7 @@ class CanvasSourceModeCompositing {
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'source-over');
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'filter', 'none');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', (cast CanvasSourceModeCompositing.cssRgbaFromColor__canvasSourceModeCompositing((cast color : Float), (cast HxMath.min(1.0, (alpha * strength)) : Float)) : flighthq._internal._Union2<flighthq._internal._Union2<String, flighthq._internal.dom.CanvasGradient>, flighthq._internal.dom.CanvasPattern>));
+    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', (cast CanvasSourceModeCompositing.cssRgbaFromColor__canvasSourceModeCompositing((cast color : Float), (cast HxMath.min(1.0, (alpha * strength)) : Float)) : String));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'destination-out');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), offsetX, offsetY] : Array<Dynamic>));
@@ -63,7 +63,7 @@ class CanvasSourceModeCompositing {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'source-in');
-    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', (cast CanvasSourceModeCompositing.cssRgbaFromColor__canvasSourceModeCompositing((cast color : Float), (cast (alpha * strength) : Float)) : flighthq._internal._Union2<flighthq._internal._Union2<String, flighthq._internal.dom.CanvasGradient>, flighthq._internal.dom.CanvasPattern>));
+    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', (cast CanvasSourceModeCompositing.cssRgbaFromColor__canvasSourceModeCompositing((cast color : Float), (cast (alpha * strength) : Float)) : String));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }

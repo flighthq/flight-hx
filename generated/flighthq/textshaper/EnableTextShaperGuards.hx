@@ -10,14 +10,14 @@ import flighthq.types.ShapedRun;
 
 class EnableTextShaperGuards {
   public static function disableTextShaperGuards():Void {
-    setShapedRunReleaseGuard((cast null : Null<ShapedRun->Void>));
+    setShapedRunReleaseGuard((cast null));
   }
 
   public static function enableTextShaperGuards():Void {
-    setShapedRunReleaseGuard((cast EnableTextShaperGuards.warnOnDoubleRelease__enableTextShaperGuards : Null<ShapedRun->Void>));
+    setShapedRunReleaseGuard((cast EnableTextShaperGuards.warnOnDoubleRelease__enableTextShaperGuards));
   }
 
   public static function warnOnDoubleRelease__enableTextShaperGuards(_run:ShapedRun):Void {
-    (cast logOnce((cast 'textshaper:double-release' : String), (cast LogLevel.Warn : LogLevel), { message: 'releaseShapedRun: this run is already in the pool, so it is being released twice. The repeated release was ignored to preserve the pool, but it indicates an unbalanced bracket. Every acquireShapedRun call must pair with exactly one releaseShapedRun call, and the run must not be used after release.' }, (cast 'textshaper' : Null<String>)) : Bool);
+    (cast logOnce((cast 'textshaper:double-release' : String), (cast LogLevel.Warn), (cast { message: 'releaseShapedRun: this run is already in the pool, so it is being released twice. The repeated release was ignored to preserve the pool, but it indicates an unbalanced bracket. Every acquireShapedRun call must pair with exactly one releaseShapedRun call, and the run must not be used after release.' }), (cast 'textshaper')) : Bool);
   }
 }

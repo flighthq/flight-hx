@@ -27,25 +27,25 @@ class DisplayHitTests {
 
   @:noCompletion
   public static function defaultRichTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast (cast hitTestGraphLocalBounds(source, (cast x : Float), (cast y : Float)) : Bool);
+    return cast (cast hitTestGraphLocalBounds((cast source), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 
   @:noCompletion
   public static function defaultShapeHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast (cast hitTestGraphLocalBounds(source, (cast x : Float), (cast y : Float)) : Bool);
+    return cast (cast hitTestGraphLocalBounds((cast source), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 
   @:noCompletion
   public static function defaultTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast (cast hitTestGraphLocalBounds(source, (cast x : Float), (cast y : Float)) : Bool);
+    return cast (cast hitTestGraphLocalBounds((cast source), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 
   @:noCompletion
   public static function defaultTextInputHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast (cast hitTestGraphLocalBounds(source, (cast x : Float), (cast y : Float)) : Bool);
+    return cast (cast hitTestGraphLocalBounds((cast source), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 }

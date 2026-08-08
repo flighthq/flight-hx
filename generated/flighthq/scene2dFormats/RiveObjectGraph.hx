@@ -12,14 +12,13 @@ import flighthq.types.RiveDocument.RiveArtboardGraph;
 import flighthq.types.RiveDocument.RiveCoreObject;
 import flighthq.types.RiveDocument.RiveObjectGraph;
 import flighthq.types.RiveDocument.RiveProperty;
-import flighthq.types.RiveDocument.RiveValue;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 class RiveObjectGraph {
   public static function createRiveObjectGraph(document:RiveDocument, ?diagnostics:Array<ImportDiagnostic>):flighthq.types.RiveDocument.RiveObjectGraph {
     var artboards:Array<RiveArtboardGraph> = cast _Runtime.UNDEFINED;
     var current:Null<Array<RiveCoreObject>> = cast _Runtime.UNDEFINED;
-    artboards = cast ([] : Array<Dynamic>);
+    artboards = (cast cast ([] : Array<Dynamic>));
     current = null;
     {
       var index:Float = 0.0;
@@ -38,7 +37,7 @@ class RiveObjectGraph {
       }
     }
     for (artboard in _Runtime.iterable(artboards)) {
-      RiveObjectGraph.resolveRiveParentIndices__riveObjectGraph((cast artboard : RiveArtboardGraph), (cast diagnostics : Null<Array<ImportDiagnostic>>));
+      RiveObjectGraph.resolveRiveParentIndices__riveObjectGraph((cast artboard), (cast diagnostics));
     }
     return cast { artboards: artboards };
     return cast null;
@@ -52,15 +51,15 @@ class RiveObjectGraph {
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast count : Float)) : Bool)) {
-        _Runtime.callProperty(parents, 'push', cast ([((cast _Runtime.strictEquals(index, 0.0) : Bool) ? (cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph : Dynamic) : (cast (cast RiveObjectGraph.readRiveParentIndex__riveObjectGraph((cast flighthq._internal._StaticIndex.readArray((cast artboard : RiveArtboardGraph).objects, index) : RiveCoreObject), (cast count : Float), (cast index : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Float) : Dynamic))] : Array<Dynamic>));
+        _Runtime.callProperty(parents, 'push', cast ([((cast _Runtime.strictEquals(index, 0.0) : Bool) ? (cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph : Dynamic) : (cast (cast RiveObjectGraph.readRiveParentIndex__riveObjectGraph((cast flighthq._internal._StaticIndex.readArray((cast artboard : RiveArtboardGraph).objects, index)), (cast count : Float), (cast index : Float), (cast diagnostics)) : Float) : Dynamic))] : Array<Dynamic>));
         index++;
       }
     }
     {
       var index:Float = 1.0;
       while ((cast ((cast index : Float) < (cast count : Float)) : Bool)) {
-        if ((cast !(cast (cast RiveObjectGraph.hasRiveParentCycle__riveObjectGraph((cast parents : Array<Float>), (cast index : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
-        RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast 'rive.parent-cycle' : String), (cast { index: index } : flighthq._internal._Record<String, Float>));
+        if ((cast !(cast (cast RiveObjectGraph.hasRiveParentCycle__riveObjectGraph((cast parents), (cast index : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
+        RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph((cast diagnostics), (cast 'rive.parent-cycle' : String), (cast { index: index }));
         flighthq._internal._StaticIndex.writeArray(parents, index, RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph);
         index++;
       }
@@ -72,12 +71,12 @@ class RiveObjectGraph {
     var parent:Float = cast _Runtime.UNDEFINED;
     property = _Runtime.find(_Runtime.field(object, 'properties'), function(candidate:RiveProperty, __unused0:Float, __unused1:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, RiveObjectGraph.RIVE_PARENT_ID_PROPERTY_KEY__riveObjectGraph));
     if ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast 'rive.component-without-parent' : String), (cast { index: index } : flighthq._internal._Record<String, Float>));
+      RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph((cast diagnostics), (cast 'rive.component-without-parent' : String), (cast { index: index }));
       return cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph;
     }
     parent = (cast (cast property : RiveProperty).value : Float);
     if ((cast ((cast ((cast _Runtime.strictEquals(parent, index) : Bool) || (cast ((cast parent : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast parent : Float) >= (cast count : Float)) : Bool)) : Bool)) {
-      RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast 'rive.unresolved-parent' : String), (cast { index: index, parent: parent } : flighthq._internal._Record<String, Float>));
+      RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph((cast diagnostics), (cast 'rive.unresolved-parent' : String), (cast { index: index, parent: parent }));
       return cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph;
     }
     return cast parent;
@@ -103,7 +102,7 @@ class RiveObjectGraph {
   }
 
   public static function reportRiveGraphDrop__riveObjectGraph(diagnostics:Null<Array<ImportDiagnostic>>, kind:String, detail:flighthq._internal._Record<String, Float>):Void {
-    reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast kind : String), (cast 'createRiveObjectGraph' : String), (cast detail : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+    reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast kind : String), (cast 'createRiveObjectGraph' : String), (cast detail));
   }
 
   public static final RIVE_ARTBOARD_TYPE_KEY__riveObjectGraph:Float = 1.0;

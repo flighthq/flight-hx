@@ -264,12 +264,12 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
       ? ` = ${
           declaration.initializer.kind === 'literal' && declaration.initializer.value === null
             ? '_Runtime.explicitNull()'
-            : emitExpression(declaration.initializer)
+            : emitDeclarationInitializer(declaration.type, declaration.initializer)
         }`
       : '';
     return [`public static ${mutability} ${safeName(declaration.name)}${type}${initializer};`];
   }
-  const generics = declaration.typeParameters.length > 0 ? `<${declaration.typeParameters.join(', ')}>` : '';
+  const generics = emitTypeParameters(declaration.typeParameters, declaration.typeParameterConstraints);
   const directOnly = currentDirectFunctions.has(declaration.name);
   const parameters = directOnly ? '__flightArguments:Array<Dynamic>' : emitParameters(declaration.parameters);
   // High-arity `directOnly` shims stay private; everything else is public.
@@ -322,6 +322,21 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
     throw new Error(`Generator async lowering does not support ${declaration.origin.source}:${declaration.name}`);
   }
   return [`${signature} {`, ...indent([...emitThisCapture(declaration.thisCapture), ...bodyLines]), '}'];
+}
+
+function emitTypeParameters(names: string[], constraints: Array<IrType | undefined> | undefined): string {
+  if (names.length === 0) return '';
+  return `<${names
+    .map((name, index) => {
+      const constraint = constraints?.[index];
+      return constraint?.kind === 'named' ? `${name}:${emitType(constraint)}` : name;
+    })
+    .join(', ')}>`;
+}
+
+function emitDeclarationInitializer(type: IrType | undefined, initializer: IrExpression): string {
+  const emitted = emitExpression(initializer);
+  return type && ['array', 'function', 'object'].includes(initializer.kind) ? `(cast ${emitted})` : emitted;
 }
 
 /**
@@ -447,7 +462,7 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
     for (const method of declaration.methods) {
       const methodAccess = method.public ? 'public ' : 'private ';
       const static_ = method.static ? 'static ' : '';
-      const methodGenerics = method.typeParameters.length > 0 ? `<${method.typeParameters.join(', ')}>` : '';
+      const methodGenerics = emitTypeParameters(method.typeParameters, method.typeParameterConstraints);
       const bodyLines = emitFunctionBody(method.body, method.parameters, method.returns, method.async);
       if (!isVoidType(method.returns)) {
         if (method.async && isPromiseNothingType(method.returns)) {
@@ -560,12 +575,12 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       ? ` = ${
           declaration.initializer.kind === 'literal' && declaration.initializer.value === null
             ? '_Runtime.explicitNull()'
-            : emitExpression(declaration.initializer)
+            : emitDeclarationInitializer(declaration.type, declaration.initializer)
         }`
       : '';
     return [`${access}static ${mutability} ${safeName(declaration.name)}${type}${initializer};`];
   }
-  const generics = declaration.typeParameters.length > 0 ? `<${declaration.typeParameters.join(', ')}>` : '';
+  const generics = emitTypeParameters(declaration.typeParameters, declaration.typeParameterConstraints);
   const directOnly = currentDirectFunctions.has(declaration.name);
   const parameters = directOnly ? '__flightArguments:Array<Dynamic>' : emitParameters(declaration.parameters);
   const signature = `${directOnly ? 'private ' : access}static function ${safeName(declaration.name)}${generics}(${parameters}):${emitType(declaration.returns)}`;
@@ -1030,13 +1045,18 @@ function emitAwaitedExpression(expression: IrExpression, continuation: (value: s
     const awaited = awaits[index]!;
     lines = awaited.awaited
       ? [
-          `return flighthq._internal._Async.flatMap(${emitExpression(awaited.expression)}, function(${awaited.name}:Dynamic):Dynamic {`,
+          `return flighthq._internal._Async.flatMap(${emitAwaitInput(awaited.expression)}, function(${awaited.name}:Dynamic):Dynamic {`,
           ...indent(lines),
           '});',
         ]
       : [`var ${awaited.name}:Dynamic = ${emitExpression(awaited.expression)};`, ...lines];
   }
   return lines;
+}
+
+function emitAwaitInput(expression: IrExpression): string {
+  const emitted = emitExpression(expression);
+  return expression.type && isVoidType(expression.type) ? `({ ${emitted}; _Runtime.UNDEFINED; })` : emitted;
 }
 
 function extractAwaits(expression: IrExpression, awaits: ExtractedAwait[]): IrExpression {
@@ -1728,8 +1748,9 @@ function emitVariableInitializer(variable: IrVariable): string {
   const initializer = variable.initializer!;
   const emitted = emitExpression(initializer);
   if (variable.type?.kind === 'function' && initializer.kind === 'function') {
-    return `(cast ${emitted} : ${emitType(variable.type)})`;
+    return `(cast ${emitted})`;
   }
+  if (variable.type && (initializer.kind === 'array' || initializer.kind === 'object')) return `(cast ${emitted})`;
   if (
     variable.type?.kind === 'array' &&
     initializer.kind === 'call' &&
@@ -1852,6 +1873,7 @@ function propertyReadEmitsDynamic(expression: Extract<IrExpression, { kind: 'pro
 function runtimeNumericMethod(expression: Extract<IrExpression, { kind: 'binary' }>): string | undefined {
   const method = runtimeNumberMethods[expression.operator];
   if (!method || (expression.operator === '+' && !expression.staticFacts?.numericOperands)) return undefined;
+  if (expression.staticFacts?.narrowedNumericOperands) return method;
   return expressionEmitsDynamic(expression.left) || expressionEmitsDynamic(expression.right) ? method : undefined;
 }
 
@@ -2130,7 +2152,7 @@ function emitExpression(expression: IrExpression): string {
       }
       return `cast ([${expression.elements.map(emitExpression).join(', ')}] : Array<Dynamic>)`;
     case 'await':
-      return `flighthq._internal._Async.awaitValue(${emitExpression(expression.expression)})`;
+      return `flighthq._internal._Async.awaitValue(${emitAwaitInput(expression.expression)})`;
     case 'assignment':
     case 'binary': {
       if (expression.kind === 'assignment' && expression.left.kind === 'cast') {
@@ -2265,7 +2287,10 @@ function emitExpression(expression: IrExpression): string {
             throw new Error(`Optional structural assignment is not supported: ${expression.left.name}`);
           }
           const field = directStructuralField(expression.left, object);
-          const right = emitExpression(expression.right);
+          const emittedRight = emitExpression(expression.right);
+          const right = structuralFieldIsFunction(expression.left.structuralReceiverType, expression.left.name)
+            ? `(cast ${emittedRight})`
+            : emittedRight;
           if (expression.operator === '=') return `(${field} = ${right})`;
           if (expression.operator === '%=') {
             return `(${field} = ${emitArithmeticOperation(field, '%', right)})`;
@@ -2489,10 +2514,16 @@ function emitExpression(expression: IrExpression): string {
         throw new Error('Generator async lowering does not support a nested async function');
       }
       if (expression.expression) {
+        if (expression.returns && isVoidType(expression.returns)) {
+          return markHaxeRest(`function${name}(${parameters})${returns} { ${emitExpression(expression.expression)}; }`);
+        }
         const output = `function${name}(${parameters})${returns} return ${emitExpression(expression.expression)}`;
         return markHaxeRest(output);
       }
       const bodyLines = emitFunctionBody(expression.body, expression.parameters, expression.returns, expression.async);
+      if (expression.returns && !isVoidType(expression.returns)) {
+        bodyLines.push('return cast _Runtime.UNDEFINED;');
+      }
       const body = indent([...emitThisCapture(expression.thisCapture), ...bodyLines]).join('\n');
       const output = `function${name}(${parameters})${returns} {\n${body}\n}`;
       return markHaxeRest(output);
@@ -2517,7 +2548,10 @@ function emitExpression(expression: IrExpression): string {
     case 'new':
       const typedArray = typedArrayConstructor(expression.callee);
       if (typedArray) {
-        return `new ${typedArray}(${expression.arguments.map(emitExpression).join(', ')})`;
+        const arguments_ = expression.arguments.map((argument, index) =>
+          index === 0 ? emitExpression(argument) : `Std.int(${emitExpression(argument)})`,
+        );
+        return `new ${typedArray}(${arguments_.join(', ')})`;
       }
       if (
         (expression.callee.kind === 'identifier' && expression.callee.name === 'Promise') ||
@@ -2851,7 +2885,9 @@ function directGeneratedClassField(
   if (!expression.generatedClass) {
     throw new Error(`Missing generated-class field binding: ${currentSourceIdentity}:${expression.name}`);
   }
-  return `(cast ${owner} : ${safeName(expression.generatedClass)}).${safeName(expression.name)}`;
+  return owner === 'this'
+    ? `this.${safeName(expression.name)}`
+    : `(cast ${owner} : ${safeName(expression.generatedClass)}).${safeName(expression.name)}`;
 }
 
 function directStructuralField(
@@ -2925,7 +2961,27 @@ function directTypedStructField(
   if (!binding || binding.field.name !== expression.name) {
     throw new Error(`Invalid typed-struct field binding: ${currentSourceIdentity}:${expression.name}`);
   }
-  const typedOwner = binding.receiverCast ? `(cast ${owner} : ${binding.receiverCast})` : owner;
+  const indexedReceiver =
+    !binding.receiverCast &&
+    expression.object.type?.kind === 'named' &&
+    expression.object.type.name === 'flighthq._internal._IndexedAccess' &&
+    binding.field.type
+      ? ({
+          extends: [],
+          fields: [
+            {
+              name: binding.field.name,
+              optional: binding.field.optional,
+              type: binding.field.type,
+            },
+          ],
+          kind: 'anonymous',
+        } satisfies IrType)
+      : undefined;
+  const receiverCast = binding.receiverCast ?? indexedReceiver;
+  const typedOwner = receiverCast
+    ? `(cast ${owner} : ${typeof receiverCast === 'string' ? receiverCast : emitType(receiverCast)})`
+    : owner;
   return `${typedOwner}.${safeName(binding.field.name)}`;
 }
 
@@ -2975,11 +3031,9 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     const callee = expression.directCalleeType
       ? `(cast ${emitExpression(expression.callee)} : ${emitType(expression.directCalleeType)})`
       : emitExpression(expression.callee);
-    const arguments_ = expression.arguments.map((argument, index) => {
-      const emitted = emitExpression(argument);
-      const expected = expression.directArgumentTypes?.[index];
-      return expected ? `(cast ${emitted} : ${emitType(expected)})` : emitted;
-    });
+    const arguments_ = expression.arguments.map((argument, index) =>
+      emitCheckedCallArgument(expression, argument, index),
+    );
     const call = `${callee}(${arguments_.join(', ')})`;
     return expression.type &&
       expression.type.kind !== 'dynamic' &&
@@ -3103,8 +3157,14 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     if (expression.callee.binding && expression.callee.binding in collectionBindingTypes) {
       const collectionType = collectionReceiverType(expression.callee);
       const method = expression.callee.name === 'delete' ? 'delete_' : safeName(expression.callee.name);
-      const call = (target: string) =>
-        `((cast ${target} : ${collectionType}).${method}(${expression.arguments.map(emitExpression).join(', ')}))`;
+      const collectionBinding = expression.callee.binding;
+      const collectionName = expression.callee.name;
+      const arguments_ = expression.arguments.map((argument, index) =>
+        collectionBinding.includes('MapCollection') && collectionName === 'set' && index === 1
+          ? `(cast ${emitExpression(argument)})`
+          : emitExpression(argument),
+      );
+      const call = (target: string) => `((cast ${target} : ${collectionType}).${method}(${arguments_.join(', ')}))`;
       if (!(expression.optional || expression.callee.optional)) return call(owner);
       const temporary = `__collection${String(temporaryIndex++)}`;
       return `({ final ${temporary}:Dynamic = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${call(temporary)}; })`;
@@ -3128,13 +3188,13 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     }
     if (expression.callee.typedStructBinding) {
       if (!(expression.optional || expression.callee.optional)) {
-        return `(${emitTypedStructRead(expression.callee)})(${expression.arguments.map(emitExpression).join(', ')})`;
+        return `(${emitTypedStructRead(expression.callee)})(${expression.arguments.map((argument, index) => emitCheckedCallArgument(expression, argument, index)).join(', ')})`;
       }
       return `_Runtime.callOptionalValue(${emitTypedStructRead(expression.callee)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
     }
     if (expression.callee.structuralReceiverType) {
       if (!(expression.optional || expression.callee.optional)) {
-        return `${directStructuralField(expression.callee, owner)}(${expression.arguments.map(emitExpression).join(', ')})`;
+        return `${directStructuralField(expression.callee, owner)}(${expression.arguments.map((argument, index) => emitCheckedCallArgument(expression, argument, index)).join(', ')})`;
       }
       return `_Runtime.callOptionalValue(${emitStructuralRead(expression.callee)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
     }
@@ -3160,7 +3220,10 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       return `_Runtime.isArray(${expression.arguments.map(emitExpression).join(', ')})`;
     }
     if (owner === 'Array' && name === 'from') {
-      return `_Runtime.toArray(${expression.arguments.map(emitExpression).join(', ')})`;
+      const value = `_Runtime.toArray(${expression.arguments.map(emitExpression).join(', ')})`;
+      return expression.type?.kind === 'array' && !typeContainsDynamic(expression.type)
+        ? `(cast ${value} : ${emitType(expression.type)})`
+        : value;
     }
     if (owner === 'String' && name === 'fromCodePoint') {
       return `_Runtime.fromCodePoint(${expression.arguments.map(emitExpression).join(', ')})`;
@@ -3328,6 +3391,58 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
   return `_Runtime.${method}(${emitExpression(expression.callee)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
 }
 
+function emitCheckedCallArgument(
+  call: Extract<IrExpression, { kind: 'call' }>,
+  argument: IrExpression,
+  index: number,
+): string {
+  const emitted = emitExpression(argument);
+  const expected = call.directArgumentTypes?.[index];
+  if (call.inferenceCastArguments?.[index]) return `(cast ${emitted})`;
+  if (!expected) return emitted;
+  // TypeScript's open structural objects, covariant readonly arrays, and callback
+  // parameter variance are all stricter in Haxe. An inference cast bridges that
+  // representation mismatch while the callee signature still supplies the
+  // destination's concrete static type.
+  return expected.kind === 'primitive' ||
+    expected.kind === 'dynamic' ||
+    (expected.kind === 'named' && expected.name === 'flighthq._internal._Any')
+    ? `(cast ${emitted} : ${emitType(expected)})`
+    : `(cast ${emitted})`;
+}
+
+function structuralFieldIsFunction(type: IrType, name: string): boolean {
+  if (type.kind !== 'anonymous') return false;
+  const field = type.fields.find((candidate) => candidate.name === name);
+  if (!field) return false;
+  const isFunction = (candidate: IrType): boolean =>
+    candidate.kind === 'function' ||
+    (candidate.kind === 'nullable' && isFunction(candidate.inner)) ||
+    (candidate.kind === 'union' && candidate.alternatives.some(isFunction));
+  return isFunction(field.type);
+}
+
+function typeContainsDynamic(type: IrType): boolean {
+  switch (type.kind) {
+    case 'anonymous':
+      return type.extends.some(typeContainsDynamic) || type.fields.some((field) => typeContainsDynamic(field.type));
+    case 'array':
+      return typeContainsDynamic(type.element);
+    case 'function':
+      return type.parameters.some(typeContainsDynamic) || typeContainsDynamic(type.returns);
+    case 'named':
+      return type.arguments.some(typeContainsDynamic);
+    case 'nullable':
+      return typeContainsDynamic(type.inner);
+    case 'union':
+      return type.alternatives.some(typeContainsDynamic);
+    case 'dynamic':
+      return true;
+    case 'primitive':
+      return false;
+  }
+}
+
 function stripTrailingSwitchBreak(statements: IrStatement[]): IrStatement[] {
   if (statements.at(-1)?.kind === 'break') return statements.slice(0, -1);
   const last = statements.at(-1);
@@ -3443,7 +3558,13 @@ export function emitType(type: IrType): string {
     case 'dynamic':
       return type.reason && type.reason !== 'checker-known-unrepresentable' ? 'flighthq._internal._Any' : 'Dynamic';
     case 'function':
-      return `${type.parameters.length === 0 ? 'Void' : type.parameters.map(emitType).join('->')}->${emitType(type.returns)}`;
+      return `${
+        type.parameters.length === 0
+          ? 'Void'
+          : type.parameters
+              .map((parameter) => (parameter.kind === 'function' ? `(${emitType(parameter)})` : emitType(parameter)))
+              .join('->')
+      }->${type.returns.kind === 'function' ? `(${emitType(type.returns)})` : emitType(type.returns)}`;
     case 'named': {
       const arguments_ = type.arguments.length > 0 ? `<${type.arguments.map(emitType).join(', ')}>` : '';
       if (!type.name.includes('.') && shadowedTypeNames.has(type.name)) return 'Dynamic';

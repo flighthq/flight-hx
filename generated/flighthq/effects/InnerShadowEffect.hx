@@ -11,7 +11,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class InnerShadowEffect {
-  public static function createInnerShadowEffect(?options:Dynamic):flighthq.types.InnerShadowEffect {
+  public static function createInnerShadowEffect(?options:flighthq._internal._Omit<flighthq.types.InnerShadowEffect, String>):flighthq.types.InnerShadowEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'InnerShadowEffect' }, options]);
     return cast null;
@@ -27,11 +27,11 @@ class InnerShadowEffect {
   }
 
   public static function registerInnerShadowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'InnerShadowEffect' : String), InnerShadowEffect.resolveInnerShadowEffectPadding__innerShadowEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'InnerShadowEffect' : String), (cast InnerShadowEffect.resolveInnerShadowEffectPadding__innerShadowEffect));
   }
 
   public static function resolveInnerShadowEffectPadding__innerShadowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getInnerShadowEffectPadding((cast (cast effect : flighthq.types.InnerShadowEffect) : flighthq.types.InnerShadowEffect)) : RenderEffectPadding);
+    return cast (cast getInnerShadowEffectPadding((cast (cast effect : flighthq.types.InnerShadowEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

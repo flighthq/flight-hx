@@ -11,6 +11,6 @@ import flighthq.types.Skin2D;
 class BoundingBoxAttachment2D {
   public static function computeSkeleton2DBoundingBoxAttachmentVertices(out:flighthq._internal._Float32Array, attachment:flighthq.types.BoundingBoxAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
     if (deform == null) deform = cast (null : Dynamic);
-    skinSkeleton2DAttachmentPoints((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), _Runtime.field(attachment, 'skin'), (cast _Runtime.field(attachment, 'vertices') : Null<flighthq._internal._Float32Array>), (cast skeleton : Skeleton2D), (cast boneIndex : Float), (cast deform : Null<flighthq._internal._Float32Array>), (cast 'BoundingBoxAttachment2D' : String));
+    skinSkeleton2DAttachmentPoints((cast out), (cast _Runtime.field(attachment, 'skin')), (cast _Runtime.field(attachment, 'vertices')), (cast skeleton), (cast boneIndex : Float), (cast deform), (cast 'BoundingBoxAttachment2D' : String));
   }
 }

@@ -14,7 +14,7 @@ class GlyphAtlasMetrics {
   }
 
   public static function getGlyphAtlasMetrics(atlas:GlyphAtlas):GlyphMetrics {
-    return cast atlas.runtime.metrics;
+    return cast (cast atlas.runtime : { var metrics:GlyphMetrics; }).metrics;
     return cast null;
   }
 }

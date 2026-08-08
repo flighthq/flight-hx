@@ -30,31 +30,31 @@ import flighthq.types._internal._VertexColorMaterialValues.VertexColorMaterialKi
 
 class VertexColorGlMeshMaterialRenderer {
   @:noCompletion
-  public static final vertexColorGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  public static final vertexColorGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var vertexColor:Null<VertexColorMaterial> = cast _Runtime.UNDEFINED;
     var program:GlUnlitProgram = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     vertexColor = (cast material : Null<VertexColorMaterial>);
-    program = (cast ensureGlUnlitProgram((cast state : GlRenderState), (cast (cast VertexColorGlMeshMaterialRenderer.defineKeyForMaterial__vertexColorGlMeshMaterialRenderer((cast vertexColor : Null<VertexColorMaterial>)) : GlUnlitDefineKey) : GlUnlitDefineKey)) : GlUnlitProgram);
-    beginGlMeshDraw((cast state : GlRenderState), program, (cast ((cast !_Runtime.strictEquals(vertexColor, null) : Bool) && (cast _Runtime.field(vertexColor, 'doubleSided') : Bool)) : Bool));
-    setGlMeshViewProjection((cast state : GlRenderState), (cast (cast program : GlUnlitProgram).locViewProjection : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
+    program = (cast ensureGlUnlitProgram((cast state), (cast (cast VertexColorGlMeshMaterialRenderer.defineKeyForMaterial__vertexColorGlMeshMaterialRenderer((cast vertexColor)) : GlUnlitDefineKey))) : GlUnlitProgram);
+    beginGlMeshDraw((cast state), (cast program), (cast ((cast !_Runtime.strictEquals(vertexColor, null) : Bool) && (cast _Runtime.field(vertexColor, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection((cast state), (cast (cast program : GlUnlitProgram).locViewProjection), (cast camera));
     flighthq._internal.backend.WebGl2Backend.vertexAttrib4f(gl, 4.0, 1.0, 1.0, 1.0, 1.0);
     if ((cast _Runtime.strictEquals(vertexColor, null) : Bool)) {
-      bindGlUnlitSurface((cast state : GlRenderState), program, (cast VertexColorGlMeshMaterialRenderer.WHITE__vertexColorGlMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float), null, (cast 0.5 : Float));
+      bindGlUnlitSurface((cast state), (cast program), (cast VertexColorGlMeshMaterialRenderer.WHITE__vertexColorGlMeshMaterialRenderer), (cast 1.0 : Float), (cast null), (cast 0.5 : Float));
       return;
     }
-    (cast unpackColorToLinear((cast VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer : LinearColor), (cast _Runtime.field(vertexColor, 'tint') : Float)) : LinearColor);
-    bindGlUnlitSurface((cast state : GlRenderState), program, (cast VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float), null, (cast _Runtime.field(vertexColor, 'alphaCutoff') : Float));
+    (cast unpackColorToLinear((cast VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer), (cast _Runtime.field(vertexColor, 'tint') : Float)) : LinearColor);
+    bindGlUnlitSurface((cast state), (cast program), (cast VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer), (cast 1.0 : Float), (cast null), (cast _Runtime.field(vertexColor, 'alphaCutoff') : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset((cast state : GlRenderState), program, (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
-  } };
+    drawGlMeshSubset((cast state), (cast program), (cast proxy), (cast geometry));
+  } });
 
   public static function registerGlVertexColorMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer((cast state : GlRenderState), (cast VertexColorMaterialKind : String), (cast vertexColorGlMeshMaterialRenderer : GlMeshMaterialRenderer));
+    registerGlMeshMaterialRenderer((cast state), (cast VertexColorMaterialKind : String), (cast vertexColorGlMeshMaterialRenderer));
   }
 
   public static function defineKeyForMaterial__vertexColorGlMeshMaterialRenderer(material:Null<VertexColorMaterial>):GlUnlitDefineKey {
@@ -62,7 +62,7 @@ class VertexColorGlMeshMaterialRenderer {
     return cast null;
   }
 
-  public static final scratchRgba__vertexColorGlMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static final scratchRgba__vertexColorGlMeshMaterialRenderer:LinearColor = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 
-  public static final WHITE__vertexColorGlMeshMaterialRenderer:LinearColor = cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>);
+  public static final WHITE__vertexColorGlMeshMaterialRenderer:LinearColor = (cast cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
 }

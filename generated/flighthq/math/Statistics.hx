@@ -31,7 +31,7 @@ class Statistics {
   }
 
   public static function standardDeviation(values:Array<Float>):Float {
-    return cast HxMath.sqrt((cast variance((cast values : Array<Float>)) : Float));
+    return cast HxMath.sqrt((cast variance((cast values)) : Float));
     return cast null;
   }
 
@@ -39,7 +39,7 @@ class Statistics {
     var m:Float = cast _Runtime.UNDEFINED;
     var sum:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
-    m = (cast mean((cast values : Array<Float>)) : Float);
+    m = (cast mean((cast values)) : Float);
     sum = 0.0;
     {
       var i:Float = 0.0;

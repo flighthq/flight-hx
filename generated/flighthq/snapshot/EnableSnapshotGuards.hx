@@ -9,11 +9,11 @@ import flighthq.types.Log.LogLevel;
 
 class EnableSnapshotGuards {
   public static function disableSnapshotGuards():Void {
-    setSnapshotCaptureGuard((cast null : Null<flighthq._internal._Any->Void>));
+    setSnapshotCaptureGuard((cast null));
   }
 
   public static function enableSnapshotGuards():Void {
-    setSnapshotCaptureGuard((cast EnableSnapshotGuards.warnOnUnsupportedSnapshotSource__enableSnapshotGuards : Null<flighthq._internal._Any->Void>));
+    setSnapshotCaptureGuard((cast EnableSnapshotGuards.warnOnUnsupportedSnapshotSource__enableSnapshotGuards));
   }
 
   public static function warnOnUnsupportedSnapshotSource__enableSnapshotGuards(source:flighthq._internal._Any):Void {
@@ -32,7 +32,7 @@ class EnableSnapshotGuards {
         return;
       }
       ((cast seen : flighthq._internal._Set<flighthq._internal._Object>).add(value));
-      kind = (cast EnableSnapshotGuards.nonPlainSnapshotKind__enableSnapshotGuards((cast value : flighthq._internal._Object)) : Null<String>);
+      kind = (cast EnableSnapshotGuards.nonPlainSnapshotKind__enableSnapshotGuards((cast value)) : Null<String>);
       if ((cast !_Runtime.strictEquals(kind, null) : Bool)) {
         ((cast nonPlain : flighthq._internal._Set<String>).add(kind));
         return;
@@ -46,13 +46,13 @@ class EnableSnapshotGuards {
       for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys((cast value : flighthq._internal._Record<String, flighthq._internal._Any>)))) {
         visit((cast _Runtime.getIndex((cast value : flighthq._internal._Record<String, flighthq._internal._Any>), key) : flighthq._internal._Any));
       }
-    } : flighthq._internal._Any->Void);
+    });
     visit((cast source : flighthq._internal._Any));
     if ((cast ((cast (cast nonPlain : flighthq._internal._Set<String>).size : Float) > (cast 0.0 : Float)) : Bool)) {
-      (cast logOnce((cast 'snapshot:non-plain-source' : String), (cast LogLevel.Warn : LogLevel), { message: (('captureSnapshot: source contains non-plain value(s) (' + Std.string(_Runtime.join(_Runtime.callProperty(_Runtime.toArray(nonPlain), 'sort', cast ([] : Array<Dynamic>)), ', ')) + '). ' + 'They clone, but a frozen Map/Set stays mutable and equalsSnapshot compares them by reference, ') + 'so the snapshot is neither immutable nor comparable. Convert to plain arrays/objects first.') }, (cast 'snapshot' : Null<String>)) : Bool);
+      (cast logOnce((cast 'snapshot:non-plain-source' : String), (cast LogLevel.Warn), (cast { message: (('captureSnapshot: source contains non-plain value(s) (' + Std.string(_Runtime.join(_Runtime.callProperty((cast _Runtime.toArray(nonPlain) : Array<String>), 'sort', cast ([] : Array<Dynamic>)), ', ')) + '). ' + 'They clone, but a frozen Map/Set stays mutable and equalsSnapshot compares them by reference, ') + 'so the snapshot is neither immutable nor comparable. Convert to plain arrays/objects first.') }), (cast 'snapshot')) : Bool);
     }
     if ((cast cyclic : Bool)) {
-      (cast logOnce((cast 'snapshot:cyclic-source' : String), (cast LogLevel.Warn : LogLevel), { message: (('captureSnapshot: source contains a cycle. Capture handles it, but equalsSnapshot, ' + 'interpolateSnapshots, and restoreSnapshot recurse without cycle tracking and will overflow ') + 'the stack — restoreSnapshot only on the second restore into the same target.') }, (cast 'snapshot' : Null<String>)) : Bool);
+      (cast logOnce((cast 'snapshot:cyclic-source' : String), (cast LogLevel.Warn), (cast { message: (('captureSnapshot: source contains a cycle. Capture handles it, but equalsSnapshot, ' + 'interpolateSnapshots, and restoreSnapshot recurse without cycle tracking and will overflow ') + 'the stack — restoreSnapshot only on the second restore into the same target.') }), (cast 'snapshot')) : Bool);
     }
   }
 

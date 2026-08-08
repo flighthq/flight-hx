@@ -11,31 +11,31 @@ import flighthq.types.TextInputState.TextInputOptions;
 
 class TextInput {
   public static function disableTextInput(node:RichText):Void {
-    ((cast (cast (cast getRichTextRuntime((cast node : RichText)) : RichTextRuntime) : RichTextRuntime) : RichTextRuntime).input = null);
+    ((cast (cast getRichTextRuntime((cast node)) : RichTextRuntime) : RichTextRuntime).input = null);
   }
 
   public static function enableTextInput(node:RichText, ?options:TextInputOptions):TextInputState {
     var runtime:RichTextRuntime = cast _Runtime.UNDEFINED;
     var state:Null<TextInputState> = cast _Runtime.UNDEFINED;
-    runtime = (cast (cast getRichTextRuntime((cast node : RichText)) : RichTextRuntime) : RichTextRuntime);
+    runtime = (cast getRichTextRuntime((cast node)) : RichTextRuntime);
     state = (cast runtime : RichTextRuntime).input;
     if ((cast _Runtime.strictEquals(state, null) : Bool)) {
-      (state = cast ((cast TextInput.createTextInputState__textInput((cast options : Null<TextInputOptions>)) : Null<TextInputState>) : Dynamic));
+      (state = cast ((cast TextInput.createTextInputState__textInput((cast options)) : TextInputState) : Dynamic));
       ((cast runtime : RichTextRuntime).input = state);
     } else { if ((cast !_Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      TextInput.applyTextInputOptions__textInput((cast state : TextInputState), (cast options : TextInputOptions));
+      TextInput.applyTextInputOptions__textInput((cast state), (cast options));
     } }
     return cast state;
     return cast null;
   }
 
   public static function getTextInputState(node:RichText):Null<TextInputState> {
-    return cast _Runtime.field((cast getRichTextRuntime((cast node : RichText)) : RichTextRuntime), 'input');
+    return cast _Runtime.field((cast getRichTextRuntime((cast node)) : RichTextRuntime), 'input');
     return cast null;
   }
 
   public static function hasTextInput(node:RichText):Bool {
-    return cast !_Runtime.strictEquals(_Runtime.field((cast getRichTextRuntime((cast node : RichText)) : RichTextRuntime), 'input'), null);
+    return cast !_Runtime.strictEquals(_Runtime.field((cast getRichTextRuntime((cast node)) : RichTextRuntime), 'input'), null);
     return cast null;
   }
 
@@ -52,7 +52,7 @@ class TextInput {
   }
 
   public static function createTextInputState__textInput(?options:TextInputOptions):TextInputState {
-    return cast { alwaysShowSelection: _Runtime.coalesce(_Runtime.optionalField(options, 'alwaysShowSelection'), function():Dynamic return cast false), caretColor: _Runtime.coalesce(_Runtime.optionalField(options, 'caretColor'), function():Dynamic return cast 0.0), caretIndex: 0.0, caretWidth: _Runtime.coalesce(_Runtime.optionalField(options, 'caretWidth'), function():Dynamic return cast 1.0), desiredCaretX: -1.0, displayAsPassword: _Runtime.coalesce(_Runtime.optionalField(options, 'displayAsPassword'), function():Dynamic return cast false), focused: false, history: cast ([] : Array<Dynamic>), historyIndex: -1.0, historyLimit: ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'historyLimit'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.max(0.0, _Runtime.field(options, 'historyLimit')) : Dynamic) : (cast 100.0 : Dynamic)), passwordCharacter: _Runtime.coalesce(_Runtime.optionalField(options, 'passwordCharacter'), function():Dynamic return cast '•'), restrict: _Runtime.coalesce(_Runtime.optionalField(options, 'restrict'), function():Dynamic return cast ''), selectionAlpha: _Runtime.coalesce(_Runtime.optionalField(options, 'selectionAlpha'), function():Dynamic return cast 0.35), selectionColor: _Runtime.coalesce(_Runtime.optionalField(options, 'selectionColor'), function():Dynamic return cast 30935.0), selectionIndex: 0.0 };
+    return cast { alwaysShowSelection: _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var alwaysShowSelection:Null<Bool>; }).alwaysShowSelection; }), function():Dynamic return cast false), caretColor: _Runtime.coalesce(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var caretColor:Null<Float>; }).caretColor; }), function():Dynamic return cast 0.0), caretIndex: 0.0, caretWidth: _Runtime.coalesce(({ final __structural2 = options; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var caretWidth:Null<Float>; }).caretWidth; }), function():Dynamic return cast 1.0), desiredCaretX: -1.0, displayAsPassword: _Runtime.coalesce(({ final __structural3 = options; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var displayAsPassword:Null<Bool>; }).displayAsPassword; }), function():Dynamic return cast false), focused: false, history: cast ([] : Array<Dynamic>), historyIndex: -1.0, historyLimit: ((cast !_Runtime.strictEquals(({ final __structural4 = options; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var historyLimit:Null<Float>; }).historyLimit; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.max(0.0, _Runtime.field(options, 'historyLimit')) : Dynamic) : (cast 100.0 : Dynamic)), passwordCharacter: _Runtime.coalesce(({ final __structural5 = options; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var passwordCharacter:Null<String>; }).passwordCharacter; }), function():Dynamic return cast '•'), restrict: _Runtime.coalesce(({ final __structural6 = options; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var restrict:Null<String>; }).restrict; }), function():Dynamic return cast ''), selectionAlpha: _Runtime.coalesce(({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var selectionAlpha:Null<Float>; }).selectionAlpha; }), function():Dynamic return cast 0.35), selectionColor: _Runtime.coalesce(({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var selectionColor:Null<Float>; }).selectionColor; }), function():Dynamic return cast 30935.0), selectionIndex: 0.0 };
     return cast null;
   }
 }

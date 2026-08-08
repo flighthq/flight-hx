@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.CustomShaderEffect;
 
 class CustomShaderEffect {
-  public static function createCustomShaderEffect(options:Dynamic):flighthq.types.CustomShaderEffect {
+  public static function createCustomShaderEffect(options:flighthq._internal._Omit<flighthq.types.CustomShaderEffect, String>):flighthq.types.CustomShaderEffect {
     return cast _Runtime.mergeObjects([{ kind: 'CustomShaderEffect' }, options]);
     return cast null;
   }

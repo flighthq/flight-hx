@@ -17,9 +17,9 @@ class ElectronUpdater {
     var config:UpdaterConfig = cast _Runtime.UNDEFINED;
     autoUpdater = (cast electron : ElectronApi).autoUpdater;
     channel = '';
-    config = { allowPrerelease: false, autoDownload: true, autoInstallOnAppQuit: true };
+    config = (cast { allowPrerelease: false, autoDownload: true, autoInstallOnAppQuit: true });
     return cast { setFeedUrl: function(url:String):Void {
-      (cast autoUpdater : ElectronAutoUpdater).setFeedUrl({ url: url });
+      (cast autoUpdater : ElectronAutoUpdater).setFeedUrl((cast { url: url }));
     }, checkForUpdates: function():Void {
       (cast autoUpdater : ElectronAutoUpdater).checkForUpdates();
     }, downloadUpdate: function():Void {
@@ -32,34 +32,41 @@ class ElectronUpdater {
 
     }, getChannel: function():String {
       return cast channel;
+      return cast _Runtime.UNDEFINED;
     }, setChannel: function(next:String):Void {
       (channel = cast (next : Dynamic));
     }, getConfig: function():UpdaterConfig {
       return cast config;
+      return cast _Runtime.UNDEFINED;
     }, setConfig: function(next:UpdaterConfig):Void {
       (config = cast (next : Dynamic));
     }, setSignatureConfig: function():Void {
 
     }, subscribeChecking: function(listener:Void->Void):Void->Void {
-      (cast autoUpdater : ElectronAutoUpdater).on('checking-for-update', listener);
-      return cast function():Void return (cast autoUpdater : ElectronAutoUpdater).removeListener('checking-for-update', listener);
+      (cast autoUpdater : ElectronAutoUpdater).on((cast 'checking-for-update' : String), (cast function(__unused0:Array<flighthq._internal._Any>):Void { listener(); }));
+      return cast function():Void { (cast autoUpdater : ElectronAutoUpdater).removeListener((cast 'checking-for-update' : String), (cast function(__unused1:Array<flighthq._internal._Any>):Void { listener(); })); };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateAvailable: function(listener:UpdateInfo->Void):Void->Void {
       var handler:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
-      handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void return listener((cast (cast ElectronUpdater.toUpdateInfo__electronUpdater((cast args : Array<flighthq._internal._Any>)) : UpdateInfo) : UpdateInfo)), 0) : Array<flighthq._internal._Any>->Void);
-      (cast autoUpdater : ElectronAutoUpdater).on('update-available', handler);
-      return cast function():Void return (cast autoUpdater : ElectronAutoUpdater).removeListener('update-available', handler);
+      handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void { listener((cast (cast ElectronUpdater.toUpdateInfo__electronUpdater((cast args)) : UpdateInfo))); }, 0));
+      (cast autoUpdater : ElectronAutoUpdater).on((cast 'update-available' : String), (cast handler));
+      return cast function():Void { (cast autoUpdater : ElectronAutoUpdater).removeListener((cast 'update-available' : String), (cast handler)); };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateNotAvailable: function(listener:Void->Void):Void->Void {
-      (cast autoUpdater : ElectronAutoUpdater).on('update-not-available', listener);
-      return cast function():Void return (cast autoUpdater : ElectronAutoUpdater).removeListener('update-not-available', listener);
+      (cast autoUpdater : ElectronAutoUpdater).on((cast 'update-not-available' : String), (cast function(__unused2:Array<flighthq._internal._Any>):Void { listener(); }));
+      return cast function():Void { (cast autoUpdater : ElectronAutoUpdater).removeListener((cast 'update-not-available' : String), (cast function(__unused3:Array<flighthq._internal._Any>):Void { listener(); })); };
+      return cast _Runtime.UNDEFINED;
     }, subscribeDownloadProgress: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateDownloaded: function(listener:UpdateInfo->Void):Void->Void {
       var handler:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
-      handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void return listener((cast (cast ElectronUpdater.toUpdateInfo__electronUpdater((cast args : Array<flighthq._internal._Any>)) : UpdateInfo) : UpdateInfo)), 0) : Array<flighthq._internal._Any>->Void);
-      (cast autoUpdater : ElectronAutoUpdater).on('update-downloaded', handler);
-      return cast function():Void return (cast autoUpdater : ElectronAutoUpdater).removeListener('update-downloaded', handler);
+      handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void { listener((cast (cast ElectronUpdater.toUpdateInfo__electronUpdater((cast args)) : UpdateInfo))); }, 0));
+      (cast autoUpdater : ElectronAutoUpdater).on((cast 'update-downloaded' : String), (cast handler));
+      return cast function():Void { (cast autoUpdater : ElectronAutoUpdater).removeListener((cast 'update-downloaded' : String), (cast handler)); };
+      return cast _Runtime.UNDEFINED;
     }, subscribeError: function(listener:UpdaterError->Void):Void->Void {
       var handler:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
       handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
@@ -68,27 +75,32 @@ class ElectronUpdater {
         var error:UpdaterError = cast _Runtime.UNDEFINED;
         raw = (cast flighthq._internal._StaticIndex.readArray(args, 0.0) : Null<flighthq._internal._Union2<{ @:optional var message:String; }, String>>);
         message = ((cast _Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool) ? (cast _Runtime.coalesce(({ final __structural0 = raw; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var message:Null<String>; }).message; }), function():Dynamic return cast '') : Dynamic) : (cast Std.string(_Runtime.coalesce(raw, function():Dynamic return cast '')) : Dynamic));
-        error = { kind: 'Network', message: message };
-        listener((cast error : UpdaterError));
-      }, 0) : Array<flighthq._internal._Any>->Void);
-      (cast autoUpdater : ElectronAutoUpdater).on('error', handler);
-      return cast function():Void return (cast autoUpdater : ElectronAutoUpdater).removeListener('error', handler);
+        error = (cast { kind: 'Network', message: message });
+        listener((cast error));
+      }, 0));
+      (cast autoUpdater : ElectronAutoUpdater).on((cast 'error' : String), (cast handler));
+      return cast function():Void { (cast autoUpdater : ElectronAutoUpdater).removeListener((cast 'error' : String), (cast handler)); };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateCancelled: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateRolledBack: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateStaging: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateVerified: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }

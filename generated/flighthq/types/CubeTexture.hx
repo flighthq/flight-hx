@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef CubeTexture = Texture;
+typedef CubeTexture = flighthq._internal._Extract<Texture, { var dimension:String; }>;

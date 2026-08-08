@@ -79,7 +79,7 @@ class Scene2dCairo {
   public static inline function registerCairoBitmapTextureResolver(resolvers:CanvasTextureResolvers):Void { flighthq.scene2dCanvas.Scene2dCanvas.registerCanvasBitmapTextureResolver(resolvers); }
   public static inline function registerCairoImageTextureResolver(resolvers:CanvasTextureResolvers):Void { flighthq.scene2dCanvas.Scene2dCanvas.registerCanvasImageTextureResolver(resolvers); }
   public static inline function registerCairoRenderTextureResolver(resolvers:CanvasTextureResolvers, state:CanvasRenderState):Void { flighthq.scene2dCanvas.Scene2dCanvas.registerCanvasRenderTextureResolver(resolvers, state); }
-  public static inline function registerCairoShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<Dynamic>>):Void { flighthq.scene2dCanvas.Scene2dCanvas.registerCanvasShapeCommands(state, commands); }
+  public static inline function registerCairoShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<String>>):Void { flighthq.scene2dCanvas.Scene2dCanvas.registerCanvasShapeCommands(state, commands); }
   public static inline function registerCairoTextureResolver(resolvers:CanvasTextureResolvers, sourceKind:TextureSourceKind, resolver:Null<CanvasTextureResolver>):Void { flighthq.scene2dCanvas.Scene2dCanvas.registerCanvasTextureResolver(resolvers, sourceKind, resolver); }
   public static inline function releaseCairoRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, renderTexture:RenderTexture):Void { flighthq.scene2dCanvas.Scene2dCanvas.releaseCanvasRenderTexture(state, pool, renderTexture); }
   public static inline function renderCairoBackground(state:CanvasRenderState):Void { flighthq.scene2dCanvas.Scene2dCanvas.renderCanvasBackground(state); }

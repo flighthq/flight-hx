@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class BokehDepthOfFieldEffect {
-  public static function createBokehDepthOfFieldEffect(?options:Dynamic):flighthq.types.BokehDepthOfFieldEffect {
+  public static function createBokehDepthOfFieldEffect(?options:flighthq._internal._Omit<flighthq.types.BokehDepthOfFieldEffect, String>):flighthq.types.BokehDepthOfFieldEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BokehDepthOfFieldEffect' }, options]);
     return cast null;
@@ -24,11 +24,11 @@ class BokehDepthOfFieldEffect {
   }
 
   public static function registerBokehDepthOfFieldEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'BokehDepthOfFieldEffect' : String), BokehDepthOfFieldEffect.resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'BokehDepthOfFieldEffect' : String), (cast BokehDepthOfFieldEffect.resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect));
   }
 
   public static function resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getBokehDepthOfFieldEffectPadding((cast (cast effect : flighthq.types.BokehDepthOfFieldEffect) : flighthq.types.BokehDepthOfFieldEffect)) : RenderEffectPadding);
+    return cast (cast getBokehDepthOfFieldEffectPadding((cast (cast effect : flighthq.types.BokehDepthOfFieldEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

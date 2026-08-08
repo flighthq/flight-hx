@@ -7,15 +7,16 @@ import flighthq.types.EasingFunction;
 import flighthq.types.ScalarRemap;
 
 class EaseSmoothstep {
-  public static final easeSmootherstep:EasingFunction = function(t:Float):Float return (((t * t) * t) * ((t * ((t * 6.0) - 15.0)) + 10.0));
+  public static final easeSmootherstep:EasingFunction = (cast function(t:Float):Float return (((t * t) * t) * ((t * ((t * 6.0) - 15.0)) + 10.0)));
 
-  public static final easeSmoothstep:EasingFunction = function(t:Float):Float return ((t * t) * (3.0 - (2.0 * t)));
+  public static final easeSmoothstep:EasingFunction = (cast function(t:Float):Float return ((t * t) * (3.0 - (2.0 * t))));
 
   public static function easeSmoothstepRange(edge0:Float, edge1:Float):ScalarRemap {
     return cast function(x:Float):Float {
       var t:Float = cast _Runtime.UNDEFINED;
       t = HxMath.max(0.0, HxMath.min(1.0, ((x - edge0) / (edge1 - edge0))));
       return cast ((t * t) * (3.0 - (2.0 * t)));
+      return cast _Runtime.UNDEFINED;
     };
     return cast null;
   }

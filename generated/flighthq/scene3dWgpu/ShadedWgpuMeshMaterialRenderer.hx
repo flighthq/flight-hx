@@ -39,41 +39,41 @@ import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
 class ShadedWgpuMeshMaterialRenderer {
   @:noCompletion
-  public static final shadedWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+  public static final shadedWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var shaded:Null<ShadedMaterial> = cast _Runtime.UNDEFINED;
     var format:String = cast _Runtime.UNDEFINED;
     var pipeline:WgpuMeshPipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
-    pass = (cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).renderPass;
+    pass = (cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     shaded = (cast material : Null<ShadedMaterial>);
     if ((cast _Runtime.strictEquals(shaded, null) : Bool)) { return; }
-    format = _Runtime.coalesce((cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    pipeline = (cast ensureWgpuShadedPipeline((cast state : WgpuRenderState), (cast shaded : ShadedMaterial), (cast format : String)) : WgpuMeshPipeline);
-    writeWgpuFrameUniform((cast state : WgpuRenderState), (cast camera : Camera3D), (cast lights : Scene3DLightBlock));
-    (cast unpackColorToLinear((cast ShadedWgpuMeshMaterialRenderer._diffuse__shadedWgpuMeshMaterialRenderer : LinearColor), (cast _Runtime.field(shaded, 'diffuse') : Float)) : LinearColor);
-    (cast unpackColorToLinear((cast ShadedWgpuMeshMaterialRenderer._specular__shadedWgpuMeshMaterialRenderer : LinearColor), (cast _Runtime.field(shaded, 'specular') : Float)) : LinearColor);
-    group = (cast bindWgpuShadedSurface((cast state : WgpuRenderState), pipeline, (cast shaded : ShadedMaterial), (cast ShadedWgpuMeshMaterialRenderer._diffuse__shadedWgpuMeshMaterialRenderer : Array<Float>), (cast ShadedWgpuMeshMaterialRenderer._specular__shadedWgpuMeshMaterialRenderer : Array<Float>)) : flighthq._internal.dom.GPUBindGroup);
-    beginWgpuMeshDraw((cast state : WgpuRenderState), pipeline);
+    format = _Runtime.coalesce((cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    pipeline = (cast ensureWgpuShadedPipeline((cast state), (cast shaded), (cast format : String)) : WgpuMeshPipeline);
+    writeWgpuFrameUniform((cast state), (cast camera), (cast lights));
+    (cast unpackColorToLinear((cast ShadedWgpuMeshMaterialRenderer._diffuse__shadedWgpuMeshMaterialRenderer), (cast _Runtime.field(shaded, 'diffuse') : Float)) : LinearColor);
+    (cast unpackColorToLinear((cast ShadedWgpuMeshMaterialRenderer._specular__shadedWgpuMeshMaterialRenderer), (cast _Runtime.field(shaded, 'specular') : Float)) : LinearColor);
+    group = (cast bindWgpuShadedSurface((cast state), (cast pipeline), (cast shaded), (cast ShadedWgpuMeshMaterialRenderer._diffuse__shadedWgpuMeshMaterialRenderer), (cast ShadedWgpuMeshMaterialRenderer._specular__shadedWgpuMeshMaterialRenderer)) : flighthq._internal.dom.GPUBindGroup);
+    beginWgpuMeshDraw((cast state), (cast pipeline));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
-    drawWgpuMeshSubset((cast state : WgpuRenderState), (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
-  } };
+    drawWgpuMeshSubset((cast state), (cast proxy), (cast geometry));
+  } });
 
   @:noCompletion
   public static function getWgpuShadedBaseFlags(material:ShadedMaterial):{ var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; } {
-    return cast { alphaMaskEnabled: _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask'), doubleSided: _Runtime.field(material, 'doubleSided'), hasDiffuseMap: (cast isWgpuTextureReady(_Runtime.field(material, 'diffuseMap')) : Bool), hasNormalMap: (cast isWgpuTextureReady(_Runtime.field(material, 'normalMap')) : Bool), hasSpecularMap: (cast isWgpuTextureReady(_Runtime.field(material, 'specularMap')) : Bool) };
+    return cast { alphaMaskEnabled: _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask'), doubleSided: _Runtime.field(material, 'doubleSided'), hasDiffuseMap: (cast isWgpuTextureReady((cast _Runtime.field(material, 'diffuseMap'))) : Bool), hasNormalMap: (cast isWgpuTextureReady((cast _Runtime.field(material, 'normalMap'))) : Bool), hasSpecularMap: (cast isWgpuTextureReady((cast _Runtime.field(material, 'specularMap'))) : Bool) };
     return cast null;
   }
 
   public static function registerWgpuShadedMaterial(state:WgpuRenderState):Void {
-    registerWgpuBitmapTextureResolver((cast state : WgpuRenderState));
-    registerWgpuImageTextureResolver((cast state : WgpuRenderState));
-    registerWgpuMeshMaterialRenderer((cast state : WgpuRenderState), (cast ShadedMaterialKind : String), (cast shadedWgpuMeshMaterialRenderer : WgpuMeshMaterialRenderer));
+    registerWgpuBitmapTextureResolver((cast state));
+    registerWgpuImageTextureResolver((cast state));
+    registerWgpuMeshMaterialRenderer((cast state), (cast ShadedMaterialKind : String), (cast shadedWgpuMeshMaterialRenderer));
   }
 
-  public static final _diffuse__shadedWgpuMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static final _diffuse__shadedWgpuMeshMaterialRenderer:LinearColor = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 
-  public static final _specular__shadedWgpuMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static final _specular__shadedWgpuMeshMaterialRenderer:LinearColor = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 }

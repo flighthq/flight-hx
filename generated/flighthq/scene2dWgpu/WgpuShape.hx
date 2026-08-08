@@ -15,11 +15,11 @@ import flighthq.types.WgpuRenderState;
 class WgpuShape {
   @:noCompletion
   public static function drawWgpuShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
-    if ((cast (cast drawWgpuMeshShape((cast state : WgpuRenderState), (cast renderProxy : RenderProxy2D)) : Bool) : Bool)) { return; }
-    drawWgpuRasterShape((cast state : WgpuRenderState), (cast renderProxy : RenderProxy2D));
+    if ((cast (cast drawWgpuMeshShape((cast state), (cast renderProxy)) : Bool) : Bool)) { return; }
+    drawWgpuRasterShape((cast state), (cast renderProxy));
   }
 
-  public static final defaultWgpuShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createWgpuShapeData, destroyData: destroyWgpuShapeData, submit: drawWgpuShape };
+  public static final defaultWgpuShapeRenderer:Scene2DRenderer = (cast { format: BatchFormat.Quad, createData: createWgpuShapeData, destroyData: destroyWgpuShapeData, submit: drawWgpuShape });
 
   public static final defaultWgpuMorphShapeRenderer:Scene2DRenderer = defaultWgpuShapeRenderer;
 }

@@ -24,8 +24,8 @@ class GlClipContours {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var nextDepth:Float = cast _Runtime.UNDEFINED;
-    flushGlQuadBatchWriter((cast state : GlRenderState));
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    flushGlQuadBatchWriter((cast state));
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     nextDepth = HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.coalesce((cast runtime : GlRenderStateRuntime).currentMaskDepth, function():Dynamic return cast 0.0), 1.0));
     ((cast runtime : GlRenderStateRuntime).currentMaskDepth = nextDepth);
@@ -41,8 +41,8 @@ class GlClipContours {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var depth:Float = cast _Runtime.UNDEFINED;
     var program:ClipProgram__glClipContours = cast _Runtime.UNDEFINED;
-    flushGlQuadBatchWriter((cast state : GlRenderState));
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    flushGlQuadBatchWriter((cast state));
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     depth = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).currentMaskDepth, function():Dynamic return cast 0.0);
     if ((cast _Runtime.strictEquals(depth, 0.0) : Bool)) {
@@ -50,11 +50,11 @@ class GlClipContours {
       flighthq._internal.backend.WebGl2Backend.stencilMask(gl, 255.0);
       flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_BUFFER_BIT', flighthq._internal.backend.WebGl2Backend.STENCIL_BUFFER_BIT));
     }
-    GlClipContours.ensureClipProgram__glClipContours((cast state : GlRenderState));
-    program = (cast GlClipContours.clipProgramFor__glClipContours((cast state : GlRenderState)) : ClipProgram__glClipContours);
+    GlClipContours.ensureClipProgram__glClipContours((cast state));
+    program = (cast GlClipContours.clipProgramFor__glClipContours((cast state)) : ClipProgram__glClipContours);
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast program : ClipProgram__glClipContours).program);
     ((cast runtime : GlRenderStateRuntime).currentProgram = (cast program : ClipProgram__glClipContours).program);
-    GlClipContours.uploadClipUniforms__glClipContours((cast state : GlRenderState), program, (cast worldTransform : Matrix));
+    GlClipContours.uploadClipUniforms__glClipContours((cast state), (cast program), (cast worldTransform));
     flighthq._internal.backend.WebGl2Backend.colorMask(gl, false, false, false, false);
     flighthq._internal.backend.WebGl2Backend.stencilMask(gl, 255.0);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
@@ -66,7 +66,7 @@ class GlClipContours {
       flighthq._internal.backend.WebGl2Backend.stencilOpSeparate(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRONT', flighthq._internal.backend.WebGl2Backend.FRONT), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flighthq._internal.backend.WebGl2Backend.KEEP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flighthq._internal.backend.WebGl2Backend.KEEP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'INCR_WRAP', flighthq._internal.backend.WebGl2Backend.INCR_WRAP));
       flighthq._internal.backend.WebGl2Backend.stencilOpSeparate(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BACK', flighthq._internal.backend.WebGl2Backend.BACK), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flighthq._internal.backend.WebGl2Backend.KEEP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flighthq._internal.backend.WebGl2Backend.KEEP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DECR_WRAP', flighthq._internal.backend.WebGl2Backend.DECR_WRAP));
     }
-    GlClipContours.drawClipContours__glClipContours((cast state : GlRenderState), program, (cast contours : Array<Array<Float>>));
+    GlClipContours.drawClipContours__glClipContours((cast state), (cast program), (cast contours));
     flighthq._internal.backend.WebGl2Backend.colorMask(gl, true, true, true, true);
     flighthq._internal.backend.WebGl2Backend.stencilMask(gl, 0.0);
     if ((cast _Runtime.strictEquals(winding, 'evenOdd') : Bool)) {
@@ -90,12 +90,12 @@ class GlClipContours {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     if ((cast ((cast GlClipContours.clipPrograms__glClipContours : flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, ClipProgram__glClipContours>).has(gl)) : Bool)) { return; }
-    program = (cast GlClipContours.compileProgram__glClipContours((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlClipContours.VERTEX_SOURCE__glClipContours : String), (cast GlClipContours.FRAGMENT_SOURCE__glClipContours : String)) : flighthq._internal.dom.WebGLProgram);
-    ((cast GlClipContours.clipPrograms__glClipContours : flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, ClipProgram__glClipContours>).set(gl, { program: program, buffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), worldMatrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_worldMatrix'), projectionLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_projection') }));
+    program = (cast GlClipContours.compileProgram__glClipContours((cast gl), (cast GlClipContours.VERTEX_SOURCE__glClipContours : String), (cast GlClipContours.FRAGMENT_SOURCE__glClipContours : String)) : flighthq._internal.dom.WebGLProgram);
+    ((cast GlClipContours.clipPrograms__glClipContours : flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, ClipProgram__glClipContours>).set(gl, (cast { program: program, buffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), worldMatrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_worldMatrix'), projectionLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_projection') })));
   }
 
   public static function compileProgram__glClipContours(gl:flighthq._internal.dom.WebGL2RenderingContext, vertex:String, fragment:String):flighthq._internal.dom.WebGLProgram {
-    return cast (cast createGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast vertex : String), (cast fragment : String), (cast 'Clip-contours' : String)) : flighthq._internal.dom.WebGLProgram);
+    return cast (cast createGlProgram((cast gl), (cast vertex : String), (cast fragment : String), (cast 'Clip-contours' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast null;
   }
 
@@ -103,7 +103,7 @@ class GlClipContours {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, (cast program : ClipProgram__glClipContours).worldMatrixLocation, false, cast ([m.a, m.b, 0.0, m.c, m.d, 0.0, m.tx, m.ty, 1.0] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, (cast program : ClipProgram__glClipContours).projectionLocation, false, GlClipContours.getProjectionMat3__glClipContours((cast state : GlRenderState)));
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, (cast program : ClipProgram__glClipContours).projectionLocation, false, (cast GlClipContours.getProjectionMat3__glClipContours((cast state)) : flighthq._internal._Float32Array));
   }
 
   public static function drawClipContours__glClipContours(state:GlRenderState, program:ClipProgram__glClipContours, contours:Array<Array<Float>>):Void {
@@ -128,7 +128,7 @@ class GlClipContours {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var w:Float = cast _Runtime.UNDEFINED;
     var h:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     w = _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(_Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas), 'width'), function():Dynamic return cast 1.0);
     h = _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(_Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas), 'height'), function():Dynamic return cast 1.0);
     return cast new flighthq._internal._Float32Array(cast ([(2.0 / w), 0.0, 0.0, 0.0, (-2.0 / h), 0.0, -1.0, 1.0, 1.0] : Array<Dynamic>));

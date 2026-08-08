@@ -49,8 +49,9 @@ export interface IrTypedStructBinding {
     optional: boolean;
     readonly: boolean;
     requiredUndefined: boolean;
+    type?: IrType | undefined;
   };
-  receiverCast?: string | undefined;
+  receiverCast?: IrType | string | undefined;
   schemaId: string;
   schemaName: string;
 }
@@ -123,6 +124,7 @@ export interface IrExpressionStaticFacts {
     | undefined;
   indexedAccessEscape?: 'width-sensitive-mixed-write' | undefined;
   numericOperands?: true | undefined;
+  narrowedNumericOperands?: true | undefined;
   numericRelation?: true | undefined;
   typedArraySet?:
     | {
@@ -148,6 +150,7 @@ type IrExpressionNode =
       arguments: IrExpression[];
       callee: IrExpression;
       directArgumentTypes?: Array<IrType | undefined>;
+      inferenceCastArguments?: boolean[];
       direct?: boolean;
       directCalleeType?: IrType;
       haxeRestIndex?: number;
@@ -292,6 +295,7 @@ export interface IrFunctionDeclaration {
   parameters: IrParameter[];
   returns: IrType;
   thisCapture?: string | undefined;
+  typeParameterConstraints?: Array<IrType | undefined> | undefined;
   typeParameters: string[];
 }
 
@@ -345,6 +349,7 @@ export interface IrClassMethod {
   public: boolean;
   returns: IrType;
   static: boolean;
+  typeParameterConstraints?: Array<IrType | undefined> | undefined;
   typeParameters: string[];
 }
 

@@ -21,9 +21,9 @@ class BitmapGradientFill {
     var invLen:Float = cast _Runtime.UNDEFINED;
     dw = _Runtime.field(dest, 'width');
     dh = _Runtime.field(dest, 'height');
-    data = _Runtime.field(dest, 'bitmap').data;
-    bitmapWidth = _Runtime.field(dest, 'bitmap').width;
-    bitmapHeight = _Runtime.field(dest, 'bitmap').height;
+    data = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    bitmapWidth = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
+    bitmapHeight = (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height;
     axisX = (x1 - x0);
     axisY = (y1 - y0);
     lenSq = ((axisX * axisX) + (axisY * axisY));
@@ -39,7 +39,7 @@ class BitmapGradientFill {
             var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var t:Float = ((((px - x0) * axisX) + ((py - y0) * axisY)) * invLen);
-            var idx:Float = (cast BitmapGradientFill.spreadIndex__bitmapGradientFill((cast t : Float), (cast spread : GradientSpread)) : Float);
+            var idx:Float = (cast BitmapGradientFill.spreadIndex__bitmapGradientFill((cast t : Float), (cast spread)) : Float);
             var ri:Float = (idx * 4.0);
             var i:Float = (((y * bitmapWidth) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, ri));
@@ -52,7 +52,7 @@ class BitmapGradientFill {
         py++;
       }
     }
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
   }
 
   public static function fillBitmapRadialGradient(dest:BitmapRegion, ramp:flighthq._internal._UInt8ClampedArray, cx:Float, cy:Float, radius:Float, ?focalX:Float, ?focalY:Float, spread:GradientSpread = 'pad'):Void {
@@ -68,9 +68,9 @@ class BitmapGradientFill {
     var fdy:Float = cast _Runtime.UNDEFINED;
     dw = _Runtime.field(dest, 'width');
     dh = _Runtime.field(dest, 'height');
-    data = _Runtime.field(dest, 'bitmap').data;
-    bitmapWidth = _Runtime.field(dest, 'bitmap').width;
-    bitmapHeight = _Runtime.field(dest, 'bitmap').height;
+    data = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    bitmapWidth = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
+    bitmapHeight = (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height;
     invRadius = ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / radius) : Dynamic) : (cast 0.0 : Dynamic));
     fdx = (focalX - cx);
     fdy = (focalY - cy);
@@ -87,7 +87,7 @@ class BitmapGradientFill {
             var dx:Float = (px - focalX);
             var dy:Float = (py - focalY);
             var t:Float = (_Runtime.multiplyNumbers(HxMath.sqrt(((dx * dx) + (dy * dy))), invRadius) - ((((dx * fdx) + (dy * fdy)) * invRadius) * invRadius));
-            var idx:Float = (cast BitmapGradientFill.spreadIndex__bitmapGradientFill((cast t : Float), (cast spread : GradientSpread)) : Float);
+            var idx:Float = (cast BitmapGradientFill.spreadIndex__bitmapGradientFill((cast t : Float), (cast spread)) : Float);
             var ri:Float = (idx * 4.0);
             var i:Float = (((y * bitmapWidth) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, flighthq._internal._StaticIndex.readUint8ClampedArray(ramp, ri));
@@ -100,7 +100,7 @@ class BitmapGradientFill {
         py++;
       }
     }
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
   }
 
   public static function spreadIndex__bitmapGradientFill(t:Float, spread:GradientSpread):Float {

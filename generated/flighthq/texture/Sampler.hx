@@ -4,6 +4,7 @@ package flighthq.texture;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Entity;
 import flighthq.types.Sampler;
 import flighthq.types.Sampler.SamplerLike;
 import flighthq.types.Sampler.TextureFilter;
@@ -11,7 +12,7 @@ import flighthq.types.Sampler.TextureWrap;
 
 class Sampler {
   public static function cloneSampler(source:SamplerLike):flighthq.types.Sampler {
-    return cast (cast createEntity({ anisotropy: source.anisotropy, magFilter: source.magFilter, minFilter: source.minFilter, mipmaps: source.mipmaps, wrapU: source.wrapU, wrapV: source.wrapV }) : flighthq.types.Sampler);
+    return cast (cast createEntity((cast { anisotropy: source.anisotropy, magFilter: source.magFilter, minFilter: source.minFilter, mipmaps: source.mipmaps, wrapU: source.wrapU, wrapV: source.wrapV })) : { >Entity, var anisotropy:Float; var magFilter:TextureFilter; var minFilter:TextureFilter; var mipmaps:Bool; var wrapU:TextureWrap; var wrapV:TextureWrap; });
     return cast null;
   }
 
@@ -25,33 +26,33 @@ class Sampler {
   }
 
   public static function createAnisotropicSampler(level:Float):flighthq.types.Sampler {
-    return cast (cast createSampler((cast { anisotropy: level } : Null<flighthq._internal._Any>)) : flighthq.types.Sampler);
+    return cast (cast createSampler((cast { anisotropy: level })) : flighthq.types.Sampler);
     return cast null;
   }
 
   public static function createClampLinearSampler():flighthq.types.Sampler {
-    return cast (cast createSampler((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : flighthq.types.Sampler);
+    return cast (cast createSampler((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.Sampler);
     return cast null;
   }
 
   public static function createPixelArtSampler():flighthq.types.Sampler {
-    return cast (cast createSampler((cast { magFilter: 'nearest', minFilter: 'nearest', mipmaps: false } : Null<flighthq._internal._Any>)) : flighthq.types.Sampler);
+    return cast (cast createSampler((cast { magFilter: 'nearest', minFilter: 'nearest', mipmaps: false })) : flighthq.types.Sampler);
     return cast null;
   }
 
-  public static function createSampler(?opts:Dynamic):flighthq.types.Sampler {
-    return cast (cast createEntity({ anisotropy: _Runtime.coalesce(_Runtime.optionalField(opts, 'anisotropy'), function():Dynamic return cast 1.0), magFilter: _Runtime.coalesce(_Runtime.optionalField(opts, 'magFilter'), function():Dynamic return cast 'linear'), minFilter: _Runtime.coalesce(_Runtime.optionalField(opts, 'minFilter'), function():Dynamic return cast 'linear-mipmap-linear'), mipmaps: _Runtime.coalesce(_Runtime.optionalField(opts, 'mipmaps'), function():Dynamic return cast true), wrapU: _Runtime.coalesce(_Runtime.optionalField(opts, 'wrapU'), function():Dynamic return cast 'clamp-to-edge'), wrapV: _Runtime.coalesce(_Runtime.optionalField(opts, 'wrapV'), function():Dynamic return cast 'clamp-to-edge') }) : flighthq.types.Sampler);
+  public static function createSampler(?opts:flighthq._internal._Partial<SamplerLike>):flighthq.types.Sampler {
+    return cast (cast createEntity((cast { anisotropy: _Runtime.coalesce(({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var anisotropy:Null<Float>; }).anisotropy; }), function():Dynamic return cast 1.0), magFilter: _Runtime.coalesce(({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var magFilter:Null<String>; }).magFilter; }), function():Dynamic return cast 'linear'), minFilter: _Runtime.coalesce(({ final __structural2 = opts; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var minFilter:Null<String>; }).minFilter; }), function():Dynamic return cast 'linear-mipmap-linear'), mipmaps: _Runtime.coalesce(({ final __structural3 = opts; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var mipmaps:Null<Bool>; }).mipmaps; }), function():Dynamic return cast true), wrapU: _Runtime.coalesce(({ final __structural4 = opts; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var wrapU:Null<String>; }).wrapU; }), function():Dynamic return cast 'clamp-to-edge'), wrapV: _Runtime.coalesce(({ final __structural5 = opts; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var wrapV:Null<String>; }).wrapV; }), function():Dynamic return cast 'clamp-to-edge') })) : { >Entity, var anisotropy:Float; var magFilter:TextureFilter; var minFilter:TextureFilter; var mipmaps:Bool; var wrapU:TextureWrap; var wrapV:TextureWrap; });
     return cast null;
   }
 
   public static function createTilingSampler():flighthq.types.Sampler {
-    return cast (cast createSampler((cast { wrapU: 'repeat', wrapV: 'repeat' } : Null<flighthq._internal._Any>)) : flighthq.types.Sampler);
+    return cast (cast createSampler((cast { wrapU: 'repeat', wrapV: 'repeat' })) : flighthq.types.Sampler);
     return cast null;
   }
 
   public static function equalsSampler(a:Null<SamplerLike>, b:Null<SamplerLike>):Bool {
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
-    return cast _Runtime.orValue(_Runtime.strictEquals(a, b), function():Dynamic return cast _Runtime.andValue(((cast ((cast ((cast ((cast _Runtime.strictEquals((cast a : flighthq.types.Sampler).anisotropy, (cast b : flighthq.types.Sampler).anisotropy) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Sampler).magFilter, (cast b : flighthq.types.Sampler).magFilter) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Sampler).minFilter, (cast b : flighthq.types.Sampler).minFilter) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Sampler).mipmaps, (cast b : flighthq.types.Sampler).mipmaps) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Sampler).wrapU, (cast b : flighthq.types.Sampler).wrapU) : Bool)), function():Dynamic return cast _Runtime.strictEquals((cast a : flighthq.types.Sampler).wrapV, (cast b : flighthq.types.Sampler).wrapV)));
+    return cast _Runtime.orValue(_Runtime.strictEquals(a, b), function():Dynamic return cast _Runtime.andValue(((cast ((cast ((cast ((cast _Runtime.strictEquals((cast a : { var anisotropy:Float; }).anisotropy, (cast b : { var anisotropy:Float; }).anisotropy) : Bool) && (cast _Runtime.strictEquals((cast a : { var magFilter:TextureFilter; }).magFilter, (cast b : { var magFilter:TextureFilter; }).magFilter) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var minFilter:TextureFilter; }).minFilter, (cast b : { var minFilter:TextureFilter; }).minFilter) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var mipmaps:Bool; }).mipmaps, (cast b : { var mipmaps:Bool; }).mipmaps) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var wrapU:TextureWrap; }).wrapU, (cast b : { var wrapU:TextureWrap; }).wrapU) : Bool)), function():Dynamic return cast _Runtime.strictEquals((cast a : { var wrapV:TextureWrap; }).wrapV, (cast b : { var wrapV:TextureWrap; }).wrapV)));
     return cast null;
   }
 }

@@ -26,8 +26,8 @@ class LibgdxParse {
     }
     __destructure0 = (cast LibgdxParse.parseLibgdxText__libgdxParse((cast text : String)) : { var header:String; var sections:flighthq._internal._Map<String, LibgdxSection__libgdxParse>; });
     sections = _Runtime.field(__destructure0, 'sections');
-    doc = (cast LibgdxParse.sectionsToDocument__libgdxParse(sections) : LibgdxParticleDocument);
-    return cast (cast LibgdxParse.documentToConfig__libgdxParse((cast doc : LibgdxParticleDocument), (cast _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.textureSize; }), function():Dynamic return cast 1.0) : Float)) : ParticleEmitterConfig);
+    doc = (cast LibgdxParse.sectionsToDocument__libgdxParse((cast sections)) : LibgdxParticleDocument);
+    return cast (cast LibgdxParse.documentToConfig__libgdxParse((cast doc), (cast _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.textureSize; }), function():Dynamic return cast 1.0) : Float)) : ParticleEmitterConfig);
     return cast null;
   }
 
@@ -41,9 +41,9 @@ class LibgdxParse {
     }
     __destructure1 = (cast LibgdxParse.parseLibgdxText__libgdxParse((cast text : String)) : { var header:String; var sections:flighthq._internal._Map<String, LibgdxSection__libgdxParse>; });
     sections = _Runtime.field(__destructure1, 'sections');
-    doc = (cast LibgdxParse.sectionsToDocument__libgdxParse(sections) : LibgdxParticleDocument);
+    doc = (cast LibgdxParse.sectionsToDocument__libgdxParse((cast sections)) : LibgdxParticleDocument);
     textureSize = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.textureSize; }), function():Dynamic return cast 1.0);
-    return cast { config: (cast LibgdxParse.documentToConfig__libgdxParse((cast doc : LibgdxParticleDocument), (cast textureSize : Float)) : ParticleEmitterConfig), diagnostics: (cast LibgdxParse.collectLibgdxDiagnostics__libgdxParse((cast doc : LibgdxParticleDocument)) : Array<ImportDiagnostic>), document: doc };
+    return cast { config: (cast LibgdxParse.documentToConfig__libgdxParse((cast doc), (cast textureSize : Float)) : ParticleEmitterConfig), diagnostics: (cast LibgdxParse.collectLibgdxDiagnostics__libgdxParse((cast doc)) : Array<ImportDiagnostic>), document: doc };
     return cast null;
   }
 
@@ -59,31 +59,31 @@ class LibgdxParse {
 
   public static function collectLibgdxDiagnostics__libgdxParse(doc:LibgdxParticleDocument):Array<ImportDiagnostic> {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
-    diagnostics = cast ([] : Array<Dynamic>);
+    diagnostics = (cast cast ([] : Array<Dynamic>));
     if ((cast (cast doc.delay : { var active:Bool; }).active : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'libgdx.delay-unsupported' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'libgdx.delay-unsupported' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     }
     if ((cast (cast doc.lifeOffset : { var active:Bool; }).active : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'libgdx.life-offset-unsupported' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'libgdx.life-offset-unsupported' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     }
     if ((cast ((cast (cast doc.xOffset : { var active:Bool; }).active : Bool) || (cast (cast doc.yOffset : { var active:Bool; }).active : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'libgdx.position-offset-unsupported' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'libgdx.position-offset-unsupported' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     }
     if ((cast doc.premultipliedAlpha : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'libgdx.premultiplied-alpha-informational' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'libgdx.premultiplied-alpha-informational' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     }
     if ((cast _Runtime.strictEquals((cast doc.spawnShape : { var shape:String; var edges:Bool; var side:String; }).shape, 'line') : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'libgdx.line-shape-mapped-to-point' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'libgdx.line-shape-mapped-to-point' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     }
-    reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'libgdx.emission-unsupported' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+    reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'libgdx.emission-unsupported' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     if ((cast ((cast _Runtime.field((cast doc.tint : { var colors:Array<String>; var timeline:Array<Float>; }).colors, 'length') : Float) > (cast 2.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'libgdx.tint-reduced' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'libgdx.tint-reduced' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     }
-    if ((cast ((cast _Runtime.field(doc.transparency.scaling, 'length') : Float) > (cast 2.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'libgdx.transparency-reduced' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+    if ((cast ((cast _Runtime.field((cast doc.transparency : { var scaling:Array<Float>; }).scaling, 'length') : Float) > (cast 2.0 : Float)) : Bool)) {
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'libgdx.transparency-reduced' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     }
     if ((cast ((cast (cast doc.spawnShape : { var shape:String; var edges:Bool; var side:String; }).edges : Bool) || (cast !_Runtime.strictEquals((cast doc.spawnShape : { var shape:String; var edges:Bool; var side:String; }).side, 'both') : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'libgdx.spawn-edges-unsupported' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'libgdx.spawn-edges-unsupported' : String), (cast 'collectLibgdxDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     }
     return cast diagnostics;
     return cast null;
@@ -148,33 +148,33 @@ class LibgdxParse {
     var rotSpeedMin:Float = cast _Runtime.UNDEFINED;
     var rotSpeedMax:Float = cast _Runtime.UNDEFINED;
     var blendMode:String = cast _Runtime.UNDEFINED;
-    __destructure2 = (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.life : LibgdxRangeValue)) : Array<flighthq._internal._Any>);
+    __destructure2 = (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.life)) : Array<Float>);
     lifeMin = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
     lifeMax = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
-    __destructure3 = ((cast (cast doc.velocity : { var active:Bool; }).active : Bool) ? (cast (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.velocity : LibgdxRangeValue)) : Array<flighthq._internal._Any>) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
+    __destructure3 = ((cast (cast doc.velocity : { var active:Bool; }).active : Bool) ? (cast (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.velocity)) : Array<Float>) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
     velMin = flighthq._internal._StaticIndex.readArray(__destructure3, 0.0);
     velMax = flighthq._internal._StaticIndex.readArray(__destructure3, 1.0);
-    __destructure4 = ((cast (cast doc.angle : { var active:Bool; }).active : Bool) ? (cast (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.angle : LibgdxRangeValue)) : Array<flighthq._internal._Any>) : Dynamic) : (cast cast ([0.0, 360.0] : Array<Dynamic>) : Dynamic));
+    __destructure4 = ((cast (cast doc.angle : { var active:Bool; }).active : Bool) ? (cast (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.angle)) : Array<Float>) : Dynamic) : (cast cast ([0.0, 360.0] : Array<Dynamic>) : Dynamic));
     angleMin = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
     angleMax = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
     angleMid = (((angleMin + angleMax) * 0.5) * LibgdxParse.DEG2RAD__libgdxParse);
     spread = (((angleMax - angleMin) * 0.5) * LibgdxParse.DEG2RAD__libgdxParse);
-    __destructure5 = (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.scale : LibgdxRangeValue)) : Array<flighthq._internal._Any>);
+    __destructure5 = (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.scale)) : Array<Float>);
     scaleMinPx = flighthq._internal._StaticIndex.readArray(__destructure5, 0.0);
     scaleMaxPx = flighthq._internal._StaticIndex.readArray(__destructure5, 1.0);
     scaleMin = (scaleMinPx / textureSize);
     scaleMax = (scaleMaxPx / textureSize);
-    lastScaling = ((cast ((cast _Runtime.field(doc.scale.scaling, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(doc.scale.scaling, _Runtime.subtractNumbers(_Runtime.field(doc.scale.scaling, 'length'), 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
+    lastScaling = ((cast ((cast _Runtime.field((cast doc.scale : { var scaling:Array<Float>; }).scaling, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray((cast doc.scale : { var scaling:Array<Float>; }).scaling, _Runtime.subtractNumbers(_Runtime.field((cast doc.scale : { var scaling:Array<Float>; }).scaling, 'length'), 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
     scaleEnd = lastScaling;
-    __destructure6 = ((cast (cast doc.wind : { var active:Bool; }).active : Bool) ? (cast (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.wind : LibgdxRangeValue)) : Array<flighthq._internal._Any>) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
+    __destructure6 = ((cast (cast doc.wind : { var active:Bool; }).active : Bool) ? (cast (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.wind)) : Array<Float>) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
     windMin = flighthq._internal._StaticIndex.readArray(__destructure6, 0.0);
-    __destructure7 = ((cast (cast doc.gravity : { var active:Bool; }).active : Bool) ? (cast (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.gravity : LibgdxRangeValue)) : Array<flighthq._internal._Any>) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
+    __destructure7 = ((cast (cast doc.gravity : { var active:Bool; }).active : Bool) ? (cast (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.gravity)) : Array<Float>) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
     gravMin = flighthq._internal._StaticIndex.readArray(__destructure7, 0.0);
     shape = (cast doc.spawnShape : { var shape:String; var edges:Bool; var side:String; }).shape;
-    __destructure8 = (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.spawnWidth : LibgdxRangeValue)) : Array<flighthq._internal._Any>);
+    __destructure8 = (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.spawnWidth)) : Array<Float>);
     swMin = flighthq._internal._StaticIndex.readArray(__destructure8, 0.0);
     swMax = flighthq._internal._StaticIndex.readArray(__destructure8, 1.0);
-    __destructure9 = (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.spawnHeight : LibgdxRangeValue)) : Array<flighthq._internal._Any>);
+    __destructure9 = (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.spawnHeight)) : Array<Float>);
     shMin = flighthq._internal._StaticIndex.readArray(__destructure9, 0.0);
     shMax = flighthq._internal._StaticIndex.readArray(__destructure9, 1.0);
     swMid = ((swMin + swMax) * 0.5);
@@ -199,28 +199,28 @@ class LibgdxParse {
     } }
     firstColor = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast doc.tint : { var colors:Array<String>; var timeline:Array<Float>; }).colors, 0.0), function():Dynamic return cast 'ffffff');
     lastColor = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast doc.tint : { var colors:Array<String>; var timeline:Array<Float>; }).colors, _Runtime.subtractNumbers(_Runtime.field((cast doc.tint : { var colors:Array<String>; var timeline:Array<Float>; }).colors, 'length'), 1.0)), function():Dynamic return cast 'ffffff');
-    __destructure10 = (cast LibgdxParse.hexToRgb__libgdxParse((cast firstColor : String)) : Array<flighthq._internal._Any>);
+    __destructure10 = (cast LibgdxParse.hexToRgb__libgdxParse((cast firstColor : String)) : Array<Float>);
     sr = flighthq._internal._StaticIndex.readArray(__destructure10, 0.0);
     sg = flighthq._internal._StaticIndex.readArray(__destructure10, 1.0);
     sb = flighthq._internal._StaticIndex.readArray(__destructure10, 2.0);
-    __destructure11 = (cast LibgdxParse.hexToRgb__libgdxParse((cast lastColor : String)) : Array<flighthq._internal._Any>);
+    __destructure11 = (cast LibgdxParse.hexToRgb__libgdxParse((cast lastColor : String)) : Array<Float>);
     er = flighthq._internal._StaticIndex.readArray(__destructure11, 0.0);
     eg = flighthq._internal._StaticIndex.readArray(__destructure11, 1.0);
     eb = flighthq._internal._StaticIndex.readArray(__destructure11, 2.0);
-    alphaStart = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(doc.transparency.scaling, 0.0), function():Dynamic return cast 1.0);
-    alphaEnd = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(doc.transparency.scaling, _Runtime.subtractNumbers(_Runtime.field(doc.transparency.scaling, 'length'), 1.0)), function():Dynamic return cast 0.0);
-    __destructure12 = (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.duration : LibgdxRangeValue)) : Array<flighthq._internal._Any>);
+    alphaStart = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast doc.transparency : { var scaling:Array<Float>; }).scaling, 0.0), function():Dynamic return cast 1.0);
+    alphaEnd = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast doc.transparency : { var scaling:Array<Float>; }).scaling, _Runtime.subtractNumbers(_Runtime.field((cast doc.transparency : { var scaling:Array<Float>; }).scaling, 'length'), 1.0)), function():Dynamic return cast 0.0);
+    __destructure12 = (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.duration)) : Array<Float>);
     durMin = flighthq._internal._StaticIndex.readArray(__destructure12, 0.0);
     durMax = flighthq._internal._StaticIndex.readArray(__destructure12, 1.0);
     durMid = ((durMin + durMax) * 0.5);
-    __destructure13 = ((cast (cast doc.rotation : { var active:Bool; }).active : Bool) ? (cast (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.rotation : LibgdxRangeValue)) : Array<flighthq._internal._Any>) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
+    __destructure13 = ((cast (cast doc.rotation : { var active:Bool; }).active : Bool) ? (cast (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.rotation)) : Array<Float>) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
     rotMin = flighthq._internal._StaticIndex.readArray(__destructure13, 0.0);
     rotMax = flighthq._internal._StaticIndex.readArray(__destructure13, 1.0);
     lifetimeMid = _Runtime.orValue((((lifeMin / 1000.0) + (lifeMax / 1000.0)) * 0.5), function():Dynamic return cast 1.0);
     rotSpeedMin = ((rotMin * LibgdxParse.DEG2RAD__libgdxParse) / lifetimeMid);
     rotSpeedMax = ((rotMax * LibgdxParse.DEG2RAD__libgdxParse) / lifetimeMid);
     blendMode = ((cast doc.additive : Bool) ? (cast 'add' : Dynamic) : (cast 'normal' : Dynamic));
-    return cast (cast createParticleEmitterConfig((cast { maxParticles: doc.maxParticleCount, loop: ((cast durMid : Float) <= (cast 0.0 : Float)), duration: ((cast ((cast durMid : Float) > (cast 0.0 : Float)) : Bool) ? (cast (durMid / 1000.0) : Dynamic) : (cast 0.0 : Dynamic)), lifetimeMin: HxMath.max(0.0, (lifeMin / 1000.0)), lifetimeMax: (lifeMax / 1000.0), speedMin: velMin, speedMax: velMax, directionX: HxMath.cos(angleMid), directionY: -HxMath.sin(angleMid), spread: spread, gravityX: windMin, gravityY: gravMin, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleMin, scaleMax: scaleMax, scaleEnd: scaleEnd, colorStartR: sr, colorStartG: sg, colorStartB: sb, colorEndR: er, colorEndG: eg, colorEndB: eb, alphaStart: alphaStart, alphaEnd: alphaEnd, rotationSpeedMin: rotSpeedMin, rotationSpeedMax: rotSpeedMax, blendMode: blendMode } : Null<flighthq._internal._Any>)) : ParticleEmitterConfig);
+    return cast (cast createParticleEmitterConfig((cast { maxParticles: doc.maxParticleCount, loop: ((cast durMid : Float) <= (cast 0.0 : Float)), duration: ((cast ((cast durMid : Float) > (cast 0.0 : Float)) : Bool) ? (cast (durMid / 1000.0) : Dynamic) : (cast 0.0 : Dynamic)), lifetimeMin: HxMath.max(0.0, (lifeMin / 1000.0)), lifetimeMax: (lifeMax / 1000.0), speedMin: velMin, speedMax: velMax, directionX: HxMath.cos(angleMid), directionY: -HxMath.sin(angleMid), spread: spread, gravityX: windMin, gravityY: gravMin, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleMin, scaleMax: scaleMax, scaleEnd: scaleEnd, colorStartR: sr, colorStartG: sg, colorStartB: sb, colorEndR: er, colorEndG: eg, colorEndB: eb, alphaStart: alphaStart, alphaEnd: alphaEnd, rotationSpeedMin: rotSpeedMin, rotationSpeedMax: rotSpeedMax, blendMode: blendMode })) : ParticleEmitterConfig);
     return cast null;
   }
 
@@ -232,7 +232,8 @@ class LibgdxParse {
       var v:Float = cast _Runtime.UNDEFINED;
       v = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([_Runtime.slice(s, i, (i + 2.0)), 16.0] : Array<Dynamic>));
       return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) ? (cast (v / 255.0) : Dynamic) : (cast 1.0 : Dynamic));
-    } : Float->Float);
+      return cast _Runtime.UNDEFINED;
+    });
     return cast cast ([(cast channel((cast 0.0 : Float)) : Float), (cast channel((cast 2.0 : Float)) : Float), (cast channel((cast 4.0 : Float)) : Float)] : Array<Dynamic>);
     return cast null;
   }
@@ -264,7 +265,7 @@ class LibgdxParse {
       var colonIdx:Float = _Runtime.callProperty(line, 'indexOf', cast ([':'] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(colonIdx, -1.0) : Bool)) {
         if ((cast ((cast !_Runtime.strictEquals(currentSection, '') : Bool) || (cast ((cast (cast current : LibgdxSection__libgdxParse).size : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-          ((cast sections : flighthq._internal._Map<String, LibgdxSection__libgdxParse>).set(currentSection, current));
+          ((cast sections : flighthq._internal._Map<String, LibgdxSection__libgdxParse>).set(currentSection, (cast current)));
         }
         (currentSection = cast (line : Dynamic));
         (current = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
@@ -272,11 +273,11 @@ class LibgdxParse {
       } else {
         var key:String = StringTools.trim(Std.string(_Runtime.slice(line, 0.0, colonIdx)));
         var value:String = StringTools.trim(Std.string(_Runtime.slice(line, (colonIdx + 1.0), null)));
-        ((cast current : LibgdxSection__libgdxParse).set(key, value));
+        ((cast current : LibgdxSection__libgdxParse).set(key, (cast value)));
       }
     }
     if ((cast ((cast !_Runtime.strictEquals(currentSection, '') : Bool) || (cast ((cast (cast current : LibgdxSection__libgdxParse).size : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      ((cast sections : flighthq._internal._Map<String, LibgdxSection__libgdxParse>).set(currentSection, current));
+      ((cast sections : flighthq._internal._Map<String, LibgdxSection__libgdxParse>).set(currentSection, (cast current)));
     }
     return cast { header: header, sections: sections };
     return cast null;
@@ -291,31 +292,31 @@ class LibgdxParse {
     return cast null;
   }
 
-  public static function readRange__libgdxParse(section:LibgdxSection__libgdxParse, ?def:Dynamic):LibgdxRangeValue {
+  public static function readRange__libgdxParse(section:LibgdxSection__libgdxParse, ?def:flighthq._internal._Partial<LibgdxRangeValue>):LibgdxRangeValue {
     if (def == null) def = cast ({  } : Dynamic);
     var count:Float = cast _Runtime.UNDEFINED;
     var scaling:Array<Float> = cast _Runtime.UNDEFINED;
     var tlCount:Float = cast _Runtime.UNDEFINED;
     var timeline:Array<Float> = cast _Runtime.UNDEFINED;
-    count = (_Runtime.toInt32((cast LibgdxParse.numKey__libgdxParse(section, (cast 'scalingCount' : String), (cast 1.0 : Float)) : Float)) | 0);
-    scaling = cast ([] : Array<Dynamic>);
-    tlCount = (_Runtime.toInt32((cast LibgdxParse.numKey__libgdxParse(section, (cast 'timelineCount' : String), (cast 1.0 : Float)) : Float)) | 0);
-    timeline = cast ([] : Array<Dynamic>);
+    count = (_Runtime.toInt32((cast LibgdxParse.numKey__libgdxParse((cast section), (cast 'scalingCount' : String), (cast 1.0 : Float)) : Float)) | 0);
+    scaling = (cast cast ([] : Array<Dynamic>));
+    tlCount = (_Runtime.toInt32((cast LibgdxParse.numKey__libgdxParse((cast section), (cast 'timelineCount' : String), (cast 1.0 : Float)) : Float)) | 0);
+    timeline = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        _Runtime.callProperty(scaling, 'push', cast ([(cast LibgdxParse.numKey__libgdxParse(section, (cast 'scaling' + Std.string(i) + '' : String), (cast 1.0 : Float)) : Float)] : Array<Dynamic>));
+        _Runtime.callProperty(scaling, 'push', cast ([(cast LibgdxParse.numKey__libgdxParse((cast section), (cast 'scaling' + Std.string(i) + '' : String), (cast 1.0 : Float)) : Float)] : Array<Dynamic>));
         i++;
       }
     }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast tlCount : Float)) : Bool)) {
-        _Runtime.callProperty(timeline, 'push', cast ([(cast LibgdxParse.numKey__libgdxParse(section, (cast 'timeline' + Std.string(i) + '' : String), (cast ((cast _Runtime.strictEquals(i, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic)) : Float)) : Float)] : Array<Dynamic>));
+        _Runtime.callProperty(timeline, 'push', cast ([(cast LibgdxParse.numKey__libgdxParse((cast section), (cast 'timeline' + Std.string(i) + '' : String), (cast ((cast _Runtime.strictEquals(i, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic)) : Float)) : Float)] : Array<Dynamic>));
         i++;
       }
     }
-    return cast { lowMin: (cast LibgdxParse.numKey__libgdxParse(section, (cast 'lowMin' : String), (cast _Runtime.coalesce(_Runtime.field(def, 'lowMin'), function():Dynamic return cast 0.0) : Float)) : Float), lowMax: (cast LibgdxParse.numKey__libgdxParse(section, (cast 'lowMax' : String), (cast _Runtime.coalesce(_Runtime.field(def, 'lowMax'), function():Dynamic return cast 0.0) : Float)) : Float), highMin: (cast LibgdxParse.numKey__libgdxParse(section, (cast 'highMin' : String), (cast _Runtime.coalesce(_Runtime.field(def, 'highMin'), function():Dynamic return cast 0.0) : Float)) : Float), highMax: (cast LibgdxParse.numKey__libgdxParse(section, (cast 'highMax' : String), (cast _Runtime.coalesce(_Runtime.field(def, 'highMax'), function():Dynamic return cast 0.0) : Float)) : Float), relative: (cast LibgdxParse.boolKey__libgdxParse(section, (cast 'relative' : String), (cast false : Bool)) : Bool), scaling: scaling, timeline: timeline };
+    return cast { lowMin: (cast LibgdxParse.numKey__libgdxParse((cast section), (cast 'lowMin' : String), (cast _Runtime.coalesce(_Runtime.field(def, 'lowMin'), function():Dynamic return cast 0.0) : Float)) : Float), lowMax: (cast LibgdxParse.numKey__libgdxParse((cast section), (cast 'lowMax' : String), (cast _Runtime.coalesce(_Runtime.field(def, 'lowMax'), function():Dynamic return cast 0.0) : Float)) : Float), highMin: (cast LibgdxParse.numKey__libgdxParse((cast section), (cast 'highMin' : String), (cast _Runtime.coalesce(_Runtime.field(def, 'highMin'), function():Dynamic return cast 0.0) : Float)) : Float), highMax: (cast LibgdxParse.numKey__libgdxParse((cast section), (cast 'highMax' : String), (cast _Runtime.coalesce(_Runtime.field(def, 'highMax'), function():Dynamic return cast 0.0) : Float)) : Float), relative: (cast LibgdxParse.boolKey__libgdxParse((cast section), (cast 'relative' : String), (cast false : Bool)) : Bool), scaling: scaling, timeline: timeline };
     return cast null;
   }
 
@@ -351,7 +352,7 @@ class LibgdxParse {
     emitterKey = _Runtime.find(_Runtime.concatArrays([_Runtime.toArray(((cast sections : flighthq._internal._Map<String, LibgdxSection__libgdxParse>).keys()))]), function(k:String, __unused14:Float, __unused15:Array<String>):Bool return ((cast StringTools.startsWith(k, '- ') : Bool) && (cast StringTools.endsWith(Std.string(k), ' -') : Bool)));
     emitterName = _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callOptionalProperty(emitterKey, 'slice', cast ([2.0, -2.0] : Array<Dynamic>)), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '');
     root = _Runtime.coalesce(_Runtime.coalesce(_Runtime.coalesce(((cast !_Runtime.strictEquals(emitterKey, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast sections : flighthq._internal._Map<String, LibgdxSection__libgdxParse>).get(emitterKey)) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast ((cast sections : flighthq._internal._Map<String, LibgdxSection__libgdxParse>).get('Particle Effect'))), function():Dynamic return cast ((cast sections : flighthq._internal._Map<String, LibgdxSection__libgdxParse>).get(''))), function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
-    get = (cast function(name:String):flighthq._internal._Map<String, String> return _Runtime.coalesce(((cast sections : flighthq._internal._Map<String, LibgdxSection__libgdxParse>).get(name)), function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : String->flighthq._internal._Map<String, String>);
+    get = (cast function(name:String):flighthq._internal._Map<String, String> return _Runtime.coalesce(((cast sections : flighthq._internal._Map<String, LibgdxSection__libgdxParse>).get(name)), function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])));
     delaySection = (cast get((cast 'Delay' : String)) : flighthq._internal._Map<String, String>);
     durationSection = (cast get((cast 'Duration' : String)) : flighthq._internal._Map<String, String>);
     emissionSection = (cast get((cast 'Emission' : String)) : flighthq._internal._Map<String, String>);
@@ -370,9 +371,9 @@ class LibgdxParse {
     gravitySection = (cast get((cast 'Gravity' : String)) : flighthq._internal._Map<String, String>);
     tintSection = (cast get((cast 'Tint' : String)) : flighthq._internal._Map<String, String>);
     transparencySection = (cast get((cast 'Transparency' : String)) : flighthq._internal._Map<String, String>);
-    tintColors = cast ([] : Array<Dynamic>);
-    tintTimeline = cast ([] : Array<Dynamic>);
-    rawColors = (cast LibgdxParse.strKey__libgdxParse(tintSection, (cast 'colors' : String), (cast '' : String)) : String);
+    tintColors = (cast cast ([] : Array<Dynamic>));
+    tintTimeline = (cast cast ([] : Array<Dynamic>));
+    rawColors = (cast LibgdxParse.strKey__libgdxParse((cast tintSection), (cast 'colors' : String), (cast '' : String)) : String);
     if (_Runtime.truthy(rawColors)) {
       _Runtime.callProperty(_Runtime.callProperty(rawColors, 'split', cast ([','] : Array<Dynamic>)), 'forEach', cast ([function(c:String, __unused16:Float, __unused17:Array<String>):Void {
         var trimmed:String = cast _Runtime.UNDEFINED;
@@ -381,17 +382,17 @@ class LibgdxParse {
       }] : Array<Dynamic>));
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(tintColors, 'length'), 0.0) : Bool)) { _Runtime.callProperty(tintColors, 'push', cast (['ffffff'] : Array<Dynamic>)); }
-    tintTlCount = _Runtime.orValue((_Runtime.toInt32((cast LibgdxParse.numKey__libgdxParse(tintSection, (cast 'timelineCount' : String), (cast 1.0 : Float)) : Float)) | 0), function():Dynamic return cast 1.0);
+    tintTlCount = _Runtime.orValue((_Runtime.toInt32((cast LibgdxParse.numKey__libgdxParse((cast tintSection), (cast 'timelineCount' : String), (cast 1.0 : Float)) : Float)) | 0), function():Dynamic return cast 1.0);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast tintTlCount : Float)) : Bool)) {
-        _Runtime.callProperty(tintTimeline, 'push', cast ([(cast LibgdxParse.numKey__libgdxParse(tintSection, (cast 'timeline' + Std.string(i) + '' : String), (cast ((cast _Runtime.strictEquals(i, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic)) : Float)) : Float)] : Array<Dynamic>));
+        _Runtime.callProperty(tintTimeline, 'push', cast ([(cast LibgdxParse.numKey__libgdxParse((cast tintSection), (cast 'timeline' + Std.string(i) + '' : String), (cast ((cast _Runtime.strictEquals(i, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic)) : Float)) : Float)] : Array<Dynamic>));
         i++;
       }
     }
-    shapeStr = (cast LibgdxParse.strKey__libgdxParse(spawnShapeSection, (cast 'shape' : String), (cast 'point' : String)) : String);
-    spawnShape = { shape: (cast ((cast ((cast ((cast _Runtime.strictEquals(shapeStr, 'line') : Bool) || (cast _Runtime.strictEquals(shapeStr, 'square') : Bool)) : Bool) || (cast _Runtime.strictEquals(shapeStr, 'ellipse') : Bool)) : Bool) ? (cast shapeStr : Dynamic) : (cast 'point' : Dynamic)) : String), edges: (cast LibgdxParse.boolKey__libgdxParse(spawnShapeSection, (cast 'edges' : String), (cast false : Bool)) : Bool), side: (cast _Runtime.orValue((cast LibgdxParse.strKey__libgdxParse(spawnShapeSection, (cast 'side' : String), (cast 'both' : String)) : String), function():Dynamic return cast 'both') : String) };
-    return cast { name: emitterName, minParticleCount: (cast LibgdxParse.numKey__libgdxParse(root, (cast 'minParticleCount' : String), (cast 4.0 : Float)) : Float), maxParticleCount: (cast LibgdxParse.numKey__libgdxParse(root, (cast 'maxParticleCount' : String), (cast 100.0 : Float)) : Float), additive: (cast LibgdxParse.boolKey__libgdxParse(root, (cast 'additive' : String), (cast false : Bool)) : Bool), premultipliedAlpha: (cast LibgdxParse.boolKey__libgdxParse(root, (cast 'premultipliedAlpha' : String), (cast false : Bool)) : Bool), delay: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse(delaySection, (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse(delaySection, (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : { >LibgdxRangeValue, var active:Bool; })]), duration: (cast LibgdxParse.readRange__libgdxParse(durationSection, (cast { lowMin: 3000.0, lowMax: 3000.0 } : flighthq._internal._Any)) : LibgdxRangeValue), emission: (cast LibgdxParse.readRange__libgdxParse(emissionSection, (cast { highMin: 32.0, highMax: 64.0 } : flighthq._internal._Any)) : LibgdxRangeValue), life: (cast LibgdxParse.readRange__libgdxParse(lifeSection, (cast { lowMin: 1000.0, lowMax: 1000.0 } : flighthq._internal._Any)) : LibgdxRangeValue), lifeOffset: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse(lifeOffsetSection, (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse(lifeOffsetSection, (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : { >LibgdxRangeValue, var active:Bool; })]), xOffset: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse(xOffSection, (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse(xOffSection, (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : { >LibgdxRangeValue, var active:Bool; })]), yOffset: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse(yOffSection, (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse(yOffSection, (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : { >LibgdxRangeValue, var active:Bool; })]), spawnShape: spawnShape, spawnWidth: (cast LibgdxParse.readRange__libgdxParse(spawnWidthSection, (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : LibgdxRangeValue), spawnHeight: (cast LibgdxParse.readRange__libgdxParse(spawnHeightSection, (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : LibgdxRangeValue), scale: (cast LibgdxParse.readRange__libgdxParse(scaleSection, (cast { highMin: 32.0, highMax: 32.0 } : flighthq._internal._Any)) : LibgdxRangeValue), velocity: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse(velocitySection, (cast 'active' : String), (cast true : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse(velocitySection, (cast { highMin: 100.0, highMax: 100.0 } : flighthq._internal._Any)) : { >LibgdxRangeValue, var active:Bool; })]), angle: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse(angleSection, (cast 'active' : String), (cast true : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse(angleSection, (cast { highMin: 360.0, highMax: 360.0 } : flighthq._internal._Any)) : { >LibgdxRangeValue, var active:Bool; })]), rotation: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse(rotationSection, (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse(rotationSection, (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : { >LibgdxRangeValue, var active:Bool; })]), wind: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse(windSection, (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse(windSection, (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : { >LibgdxRangeValue, var active:Bool; })]), gravity: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse(gravitySection, (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse(gravitySection, (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : { >LibgdxRangeValue, var active:Bool; })]), tint: { colors: tintColors, timeline: tintTimeline }, transparency: (cast LibgdxParse.readRange__libgdxParse(transparencySection, (cast { highMin: 1.0, highMax: 1.0 } : flighthq._internal._Any)) : LibgdxRangeValue), imageCount: (cast LibgdxParse.numKey__libgdxParse(root, (cast 'imageCount' : String), (cast 1.0 : Float)) : Float), imagePath: (cast LibgdxParse.strKey__libgdxParse(root, (cast 'imagePath' : String), (cast '' : String)) : String) };
+    shapeStr = (cast LibgdxParse.strKey__libgdxParse((cast spawnShapeSection), (cast 'shape' : String), (cast 'point' : String)) : String);
+    spawnShape = (cast { shape: (cast ((cast ((cast ((cast _Runtime.strictEquals(shapeStr, 'line') : Bool) || (cast _Runtime.strictEquals(shapeStr, 'square') : Bool)) : Bool) || (cast _Runtime.strictEquals(shapeStr, 'ellipse') : Bool)) : Bool) ? (cast shapeStr : Dynamic) : (cast 'point' : Dynamic)) : String), edges: (cast LibgdxParse.boolKey__libgdxParse((cast spawnShapeSection), (cast 'edges' : String), (cast false : Bool)) : Bool), side: (cast _Runtime.orValue((cast LibgdxParse.strKey__libgdxParse((cast spawnShapeSection), (cast 'side' : String), (cast 'both' : String)) : String), function():Dynamic return cast 'both') : String) });
+    return cast { name: emitterName, minParticleCount: (cast LibgdxParse.numKey__libgdxParse((cast root), (cast 'minParticleCount' : String), (cast 4.0 : Float)) : Float), maxParticleCount: (cast LibgdxParse.numKey__libgdxParse((cast root), (cast 'maxParticleCount' : String), (cast 100.0 : Float)) : Float), additive: (cast LibgdxParse.boolKey__libgdxParse((cast root), (cast 'additive' : String), (cast false : Bool)) : Bool), premultipliedAlpha: (cast LibgdxParse.boolKey__libgdxParse((cast root), (cast 'premultipliedAlpha' : String), (cast false : Bool)) : Bool), delay: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse((cast delaySection), (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse((cast delaySection), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : LibgdxRangeValue)]), duration: (cast LibgdxParse.readRange__libgdxParse((cast durationSection), (cast { lowMin: 3000.0, lowMax: 3000.0 })) : LibgdxRangeValue), emission: (cast LibgdxParse.readRange__libgdxParse((cast emissionSection), (cast { highMin: 32.0, highMax: 64.0 })) : LibgdxRangeValue), life: (cast LibgdxParse.readRange__libgdxParse((cast lifeSection), (cast { lowMin: 1000.0, lowMax: 1000.0 })) : LibgdxRangeValue), lifeOffset: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse((cast lifeOffsetSection), (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse((cast lifeOffsetSection), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : LibgdxRangeValue)]), xOffset: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse((cast xOffSection), (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse((cast xOffSection), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : LibgdxRangeValue)]), yOffset: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse((cast yOffSection), (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse((cast yOffSection), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : LibgdxRangeValue)]), spawnShape: spawnShape, spawnWidth: (cast LibgdxParse.readRange__libgdxParse((cast spawnWidthSection), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : LibgdxRangeValue), spawnHeight: (cast LibgdxParse.readRange__libgdxParse((cast spawnHeightSection), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : LibgdxRangeValue), scale: (cast LibgdxParse.readRange__libgdxParse((cast scaleSection), (cast { highMin: 32.0, highMax: 32.0 })) : LibgdxRangeValue), velocity: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse((cast velocitySection), (cast 'active' : String), (cast true : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse((cast velocitySection), (cast { highMin: 100.0, highMax: 100.0 })) : LibgdxRangeValue)]), angle: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse((cast angleSection), (cast 'active' : String), (cast true : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse((cast angleSection), (cast { highMin: 360.0, highMax: 360.0 })) : LibgdxRangeValue)]), rotation: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse((cast rotationSection), (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse((cast rotationSection), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : LibgdxRangeValue)]), wind: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse((cast windSection), (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse((cast windSection), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : LibgdxRangeValue)]), gravity: _Runtime.mergeObjects([{ active: (cast LibgdxParse.boolKey__libgdxParse((cast gravitySection), (cast 'active' : String), (cast false : Bool)) : Bool) }, (cast LibgdxParse.readRange__libgdxParse((cast gravitySection), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)) : LibgdxRangeValue)]), tint: { colors: tintColors, timeline: tintTimeline }, transparency: (cast LibgdxParse.readRange__libgdxParse((cast transparencySection), (cast { highMin: 1.0, highMax: 1.0 })) : LibgdxRangeValue), imageCount: (cast LibgdxParse.numKey__libgdxParse((cast root), (cast 'imageCount' : String), (cast 1.0 : Float)) : Float), imagePath: (cast LibgdxParse.strKey__libgdxParse((cast root), (cast 'imagePath' : String), (cast '' : String)) : String) };
     return cast null;
   }
 

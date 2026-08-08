@@ -22,20 +22,20 @@ class GlSsaoEffect {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0);
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'atmospheric.ssao' : String), (cast GlSsaoEffect.SSAO_FRAGMENT_SRC__glSsaoEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'atmospheric.ssao' : String), (cast GlSsaoEffect.SSAO_FRAGMENT_SRC__glSsaoEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_radius'), radius);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
-    });
+    }));
   }
 
-  public static final defaultGlSsaoEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applySsaoEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : SsaoEffect) : SsaoEffect));
-  };
+  public static final defaultGlSsaoEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applySsaoEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : SsaoEffect)));
+  });
 
   public static function registerGlSsaoEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'SsaoEffect' : String), (cast defaultGlSsaoEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'SsaoEffect' : String), (cast defaultGlSsaoEffectRunner));
   }
 
   public static final SSAO_FRAGMENT_SRC__glSsaoEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_resolution;\nuniform float u_radius;\nuniform float u_intensity;\nout vec4 o_color;\nfloat luma(vec3 c) {\n  return dot(c, vec3(0.299, 0.587, 0.114));\n}\nvoid main() {\n  vec2 texel = (1.0 / u_resolution) * max(u_radius, 1.0);\n  vec4 center = texture(u_texture0, v_texCoord);\n  float lc = luma(center.rgb);\n  float variation = 0.0;\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(-1.0, 0.0) * texel).rgb));\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(1.0, 0.0) * texel).rgb));\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(0.0, -1.0) * texel).rgb));\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(0.0, 1.0) * texel).rgb));\n  variation *= 0.25;\n  float occlusion = clamp(variation * u_intensity, 0.0, 1.0);\n  o_color = vec4(center.rgb * (1.0 - occlusion), center.a);\n}';

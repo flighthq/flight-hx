@@ -16,22 +16,22 @@ class BitmapTone {
     var sd:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     w = HxMath.min(_Runtime.field(out, 'width'), _Runtime.field(source, 'width'));
     h = HxMath.min(_Runtime.field(out, 'height'), _Runtime.field(source, 'height'));
-    od = _Runtime.field(out, 'bitmap').data;
-    sd = _Runtime.field(source, 'bitmap').data;
+    od = (cast _Runtime.field(out, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    sd = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
         var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
         var oy:Float = _Runtime.addNumbers(_Runtime.field(out, 'y'), py);
-        if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) >= (cast _Runtime.field(out, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
+        if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) >= (cast (cast _Runtime.field(out, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
             var ox:Float = _Runtime.addNumbers(_Runtime.field(out, 'x'), px);
-            if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast _Runtime.field(source, 'bitmap').width : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) >= (cast _Runtime.field(out, 'bitmap').width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Float = ((_Runtime.multiplyNumbers(sy, _Runtime.field(source, 'bitmap').width) + sx) * 4.0);
-            var oi:Float = ((_Runtime.multiplyNumbers(oy, _Runtime.field(out, 'bitmap').width) + ox) * 4.0);
+            if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) >= (cast (cast _Runtime.field(out, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool)) { px++; continue; }
+            var si:Float = (((sy * (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width) + sx) * 4.0);
+            var oi:Float = (((oy * (cast _Runtime.field(out, 'bitmap') : { var width:Float; }).width) + ox) * 4.0);
             var r:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si);
             var g:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0));
             var b:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0));
@@ -46,7 +46,7 @@ class BitmapTone {
         py++;
       }
     }
-    invalidateBitmap(_Runtime.field(out, 'bitmap'));
+    invalidateBitmap((cast _Runtime.field(out, 'bitmap')));
   }
 
   public static function applyBitmapLevels(out:BitmapRegion, source:BitmapRegion, blackPoint:Float = 0.0, whitePoint:Float = 255.0, gamma:Float = 1.0):Void {
@@ -68,6 +68,6 @@ class BitmapTone {
         i++;
       }
     }
-    applyBitmapCurve((cast out : BitmapRegion), (cast source : BitmapRegion), (cast lut : Null<flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._UInt8ClampedArray>>), (cast lut : Null<flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._UInt8ClampedArray>>), (cast lut : Null<flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._UInt8ClampedArray>>), (cast null : Null<flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._UInt8ClampedArray>>));
+    applyBitmapCurve((cast out), (cast source), (cast lut), (cast lut), (cast lut), (cast null));
   }
 }

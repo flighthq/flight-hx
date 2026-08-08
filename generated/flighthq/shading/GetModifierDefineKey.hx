@@ -13,10 +13,10 @@ class GetModifierDefineKey {
   public static function getModifierDefineKey(stack:Array<Modifier>, ?registry:ModifierRegistry):String {
     var ordered:Array<Modifier> = cast _Runtime.UNDEFINED;
     var key:String = cast _Runtime.UNDEFINED;
-    ordered = (cast orderModifierStack((cast stack : Array<Modifier>)) : Array<Modifier>);
+    ordered = (cast orderModifierStack((cast stack)) : Array<Modifier>);
     key = '';
     for (modifier in _Runtime.iterable(ordered)) {
-      var signature:String = (cast GetModifierDefineKey.getDefineSignature__getModifierDefineKey((cast modifier : Modifier), (cast registry : Null<ModifierRegistry>)) : String);
+      var signature:String = (cast GetModifierDefineKey.getDefineSignature__getModifierDefineKey((cast modifier), (cast registry)) : String);
       var token:String = ((cast ((cast _Runtime.field(signature, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string((cast modifier : Modifier).kind) + ':' + Std.string(signature) + '' : Dynamic) : (cast (cast modifier : Modifier).kind : Dynamic));
       (key = cast (((cast ((cast _Runtime.field(key, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string(key) + '+' + Std.string(token) + '' : Dynamic) : (cast token : Dynamic)) : Dynamic));
     }
@@ -27,9 +27,9 @@ class GetModifierDefineKey {
   public static function getDefineSignature__getModifierDefineKey(modifier:Modifier, ?registry:ModifierRegistry):String {
     var definition:Null<ModifierDefinition> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast ''; }
-    definition = (cast resolveModifier((cast registry : ModifierRegistry), (cast _Runtime.field(modifier, 'kind') : String)) : Null<ModifierDefinition>);
+    definition = (cast resolveModifier((cast registry), (cast _Runtime.field(modifier, 'kind') : String)) : Null<ModifierDefinition>);
     if ((cast ((cast _Runtime.strictEquals(definition, null) : Bool) || (cast _Runtime.strictEquals((cast definition : ModifierDefinition).getDefineSignature, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast ''; }
-    return cast (cast definition : ModifierDefinition).getDefineSignature(modifier);
+    return cast (cast definition : ModifierDefinition).getDefineSignature((cast modifier));
     return cast null;
   }
 }

@@ -15,6 +15,7 @@ class Random {
       t = _Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(a) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(a), 15)))), _Runtime.toInt32((1 | _Runtime.toInt32(a))));
       (t = cast ((_Runtime.toInt32(_Runtime.addNumbers(t, _Runtime.imul(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), 7)))), _Runtime.toInt32((61 | _Runtime.toInt32(t)))))) ^ _Runtime.toInt32(t)) : Dynamic));
       return cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(t) ^ _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(t), 14)))), 0) / 4294967296.0);
+      return cast _Runtime.UNDEFINED;
     };
     return cast null;
   }

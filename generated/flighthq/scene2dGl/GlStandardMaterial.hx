@@ -17,15 +17,15 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 
 class GlStandardMaterial {
   public static function registerGlStandardMaterial(state:GlRenderState):Void {
-    registerGlMaterialRenderer((cast state : GlRenderState), (cast StandardMaterialKindValue : String), (cast standardGlMaterialRenderer : GlMaterialRenderer));
+    registerGlMaterialRenderer((cast state), (cast StandardMaterialKindValue : String), (cast standardGlMaterialRenderer));
   }
 
   @:noCompletion
-  public static final standardGlMaterialRenderer:GlMaterialRenderer = { instanceFloatCount: 0.0, bind: function(state:GlRenderState, material:Null<Material>):Void {
+  public static final standardGlMaterialRenderer:GlMaterialRenderer = (cast { instanceFloatCount: 0.0, bind: function(state:GlRenderState, material:Null<Material>):Void {
     var shader:GlQuadBatchShader = cast _Runtime.UNDEFINED;
-    shader = (cast ensureGlQuadBatchShader((cast state : GlRenderState)) : GlQuadBatchShader);
-    useGlQuadBatchProgram((cast state : GlRenderState), (cast (cast shader : GlQuadBatchShader).program : flighthq._internal.dom.WebGLProgram));
-    setGlQuadBatchWorldAndTexture((cast state : GlRenderState), (cast (cast shader : GlQuadBatchShader).locWorldMatrix : flighthq._internal.dom.WebGLUniformLocation), (cast (cast shader : GlQuadBatchShader).locTexture : flighthq._internal.dom.WebGLUniformLocation), (cast (cast shader : GlQuadBatchShader).locStraightTextureAlpha : Null<flighthq._internal.dom.WebGLUniformLocation>));
-    bindGlQuadBatchBaseAttributes((cast state : GlRenderState), (cast (cast shader : GlQuadBatchShader).locCorner : Float));
-  } };
+    shader = (cast ensureGlQuadBatchShader((cast state)) : GlQuadBatchShader);
+    useGlQuadBatchProgram((cast state), (cast (cast shader : GlQuadBatchShader).program));
+    setGlQuadBatchWorldAndTexture((cast state), (cast (cast shader : GlQuadBatchShader).locWorldMatrix), (cast (cast shader : GlQuadBatchShader).locTexture), (cast (cast shader : GlQuadBatchShader).locStraightTextureAlpha));
+    bindGlQuadBatchBaseAttributes((cast state), (cast (cast shader : GlQuadBatchShader).locCorner : Float));
+  } });
 }

@@ -7,7 +7,6 @@ import flighthq.capture.CaptureBaseline as Facade_Capture_flighthq_capture_Captu
 import flighthq.capture.CaptureComparison as Facade_Capture_flighthq_capture_CaptureComparison;
 import flighthq.types.CaptureBaseline;
 import flighthq.types.CaptureCheckResult;
-import flighthq.types.CaptureColumnBaseline;
 
 class Capture {
   public static final CAPTURE_PARITY_TOLERANCE:Float = Facade_Capture_flighthq_capture_CaptureComparison.CAPTURE_PARITY_TOLERANCE;
@@ -39,7 +38,7 @@ class Capture {
     return cast null;
   }
 
-  public static function getCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureColumnBaseline):Null<String> {
+  public static function getCaptureBaselineField(baseline:CaptureBaseline, column:String, field:String):Null<String> {
     return cast Facade_Capture_flighthq_capture_CaptureBaseline.getCaptureBaselineField(baseline, column, field);
     return cast null;
   }
@@ -49,7 +48,7 @@ class Capture {
     return cast null;
   }
 
-  public static function setCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureColumnBaseline, value:String):Void {
+  public static function setCaptureBaselineField(baseline:CaptureBaseline, column:String, field:String, value:String):Void {
     Facade_Capture_flighthq_capture_CaptureBaseline.setCaptureBaselineField(baseline, column, field, value);
   }
 }

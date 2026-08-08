@@ -11,7 +11,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class GradientGlowEffect {
-  public static function createGradientGlowEffect(options:Dynamic):flighthq.types.GradientGlowEffect {
+  public static function createGradientGlowEffect(options:flighthq._internal._Omit<flighthq.types.GradientGlowEffect, String>):flighthq.types.GradientGlowEffect {
     return cast _Runtime.mergeObjects([{ kind: 'GradientGlowEffect' }, options]);
     return cast null;
   }
@@ -22,11 +22,11 @@ class GradientGlowEffect {
   }
 
   public static function registerGradientGlowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'GradientGlowEffect' : String), GradientGlowEffect.resolveGradientGlowEffectPadding__gradientGlowEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'GradientGlowEffect' : String), (cast GradientGlowEffect.resolveGradientGlowEffectPadding__gradientGlowEffect));
   }
 
   public static function resolveGradientGlowEffectPadding__gradientGlowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getGradientGlowEffectPadding((cast (cast effect : flighthq.types.GradientGlowEffect) : flighthq.types.GradientGlowEffect)) : RenderEffectPadding);
+    return cast (cast getGradientGlowEffectPadding((cast (cast effect : flighthq.types.GradientGlowEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

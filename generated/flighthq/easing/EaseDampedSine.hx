@@ -18,6 +18,7 @@ class EaseDampedSine {
       if ((cast ((cast _Runtime.strictEquals(t, 0.0) : Bool) || (cast _Runtime.strictEquals(t, 1.0) : Bool)) : Bool)) { return cast t; }
       time = (t - 1.0);
       return cast -_Runtime.multiplyNumbers(_Runtime.multiplyNumbers(overshoot, HxMath.pow(2.0, (10.0 * time))), HxMath.sin((((time - phase) * EaseDampedSine.TAU__easeDampedSine) / wavelength)));
+      return cast _Runtime.UNDEFINED;
     };
     return cast null;
   }
@@ -37,6 +38,7 @@ class EaseDampedSine {
         return cast _Runtime.multiplyNumbers(_Runtime.multiplyNumbers((-0.5 * overshoot), HxMath.pow(2.0, (10.0 * time))), HxMath.sin((((time - phase) * EaseDampedSine.TAU__easeDampedSine) / wavelength)));
       }
       return cast (_Runtime.multiplyNumbers(_Runtime.multiplyNumbers((0.5 * overshoot), HxMath.pow(2.0, (-10.0 * time))), HxMath.sin((((time - phase) * EaseDampedSine.TAU__easeDampedSine) / wavelength))) + 1.0);
+      return cast _Runtime.UNDEFINED;
     };
     return cast null;
   }
@@ -51,6 +53,7 @@ class EaseDampedSine {
     return cast function(t:Float):Float {
       if ((cast ((cast _Runtime.strictEquals(t, 0.0) : Bool) || (cast _Runtime.strictEquals(t, 1.0) : Bool)) : Bool)) { return cast t; }
       return cast (_Runtime.multiplyNumbers(_Runtime.multiplyNumbers(overshoot, HxMath.pow(2.0, (-10.0 * t))), HxMath.sin((((t - phase) * EaseDampedSine.TAU__easeDampedSine) / wavelength))) + 1.0);
+      return cast _Runtime.UNDEFINED;
     };
     return cast null;
   }

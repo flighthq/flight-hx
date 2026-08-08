@@ -20,11 +20,12 @@ import flighthq.types.AnimationClip;
 import flighthq.types.AnimationPlayer;
 import flighthq.types.AnimationSampleAccumulator;
 import flighthq.types.AnimationTrack;
+import flighthq.types.Entity;
 
 class AnimationBlendTree {
   public static function advanceAnimationBlendTree(tree:flighthq.types.AnimationBlendTree, dt:Float):Void {
     for (player in _Runtime.iterable((cast tree : flighthq.types.AnimationBlendTree).players)) {
-      advanceAnimationPlayer((cast player : AnimationPlayer), (cast dt : Float));
+      advanceAnimationPlayer((cast player), (cast dt : Float));
     }
   }
 
@@ -35,17 +36,17 @@ class AnimationBlendTree {
     var players:Array<AnimationPlayer> = cast _Runtime.UNDEFINED;
     var sampleWidth:Float = cast _Runtime.UNDEFINED;
     copiedInputs = _Runtime.slice(inputs, 0, null);
-    channels = cast ([] : Array<Dynamic>);
+    channels = (cast cast ([] : Array<Dynamic>));
     channelByTarget = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
-    players = cast ([] : Array<Dynamic>);
+    players = (cast cast ([] : Array<Dynamic>));
     sampleWidth = 0.0;
     {
       var inputIndex:Float = 0.0;
       while ((cast ((cast inputIndex : Float) < (cast _Runtime.field(copiedInputs, 'length') : Float)) : Bool)) {
         var player:AnimationPlayer = (cast flighthq._internal._StaticIndex.readArray(copiedInputs, inputIndex) : AnimationBlendTreeInput).player;
         if ((cast !(cast _Runtime.includes(players, player) : Bool) : Bool)) { _Runtime.callProperty(players, 'push', cast ([player] : Array<Dynamic>)); }
-        var inputChannels:Array<AnimationChannel> = (cast (cast flighthq._internal._StaticIndex.readArray(copiedInputs, inputIndex) : AnimationBlendTreeInput).player : AnimationPlayer).clip.channels;
-        AnimationBlendTree.assertUniqueAnimationBlendTreeTargets__animationBlendTree((cast inputChannels : Array<AnimationChannel>), (cast inputIndex : Float));
+        var inputChannels:Array<AnimationChannel> = (cast (cast (cast flighthq._internal._StaticIndex.readArray(copiedInputs, inputIndex) : AnimationBlendTreeInput).player : AnimationPlayer).clip : { var channels:Array<AnimationChannel>; }).channels;
+        AnimationBlendTree.assertUniqueAnimationBlendTreeTargets__animationBlendTree((cast inputChannels), (cast inputIndex : Float));
         {
           var channelIndex:Float = 0.0;
           while ((cast ((cast channelIndex : Float) < (cast _Runtime.field(inputChannels, 'length') : Float)) : Bool)) {
@@ -53,13 +54,13 @@ class AnimationBlendTree {
             (sampleWidth = cast (HxMath.max(sampleWidth, (cast (cast channel : AnimationChannel).track : AnimationTrack).components) : Dynamic));
             var existingIndex:Null<Float> = ((cast channelByTarget : flighthq._internal._Map<flighthq._internal._Any, Float>).get((cast channel : AnimationChannel).targetRef));
             if ((cast _Runtime.strictEquals(existingIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              ((cast channelByTarget : flighthq._internal._Map<flighthq._internal._Any, Float>).set((cast channel : AnimationChannel).targetRef, _Runtime.field(channels, 'length')));
+              ((cast channelByTarget : flighthq._internal._Map<flighthq._internal._Any, Float>).set((cast channel : AnimationChannel).targetRef, (cast _Runtime.field(channels, 'length'))));
               _Runtime.callProperty(channels, 'push', cast ([{ accumulator: (cast createAnimationSampleAccumulator((cast (cast (cast channel : AnimationChannel).track : AnimationTrack).components : Float), (cast (cast (cast channel : AnimationChannel).track : AnimationTrack).quaternion : Bool)) : AnimationSampleAccumulator), channel: channel, sources: cast ([{ channelIndex: channelIndex, inputIndex: inputIndex }] : Array<Dynamic>) }] : Array<Dynamic>));
               channelIndex++;
               continue;
             }
             var existing:AnimationBlendTreeChannel = flighthq._internal._StaticIndex.readArray(channels, existingIndex);
-            AnimationBlendTree.assertCompatibleAnimationBlendTreeChannels__animationBlendTree((cast (cast existing : AnimationBlendTreeChannel).channel : AnimationChannel), (cast channel : AnimationChannel));
+            AnimationBlendTree.assertCompatibleAnimationBlendTreeChannels__animationBlendTree((cast (cast existing : AnimationBlendTreeChannel).channel), (cast channel));
             _Runtime.callProperty((cast (cast existing : AnimationBlendTreeChannel).sources : Array<AnimationBlendTreeChannelSource>), 'push', cast ([{ channelIndex: channelIndex, inputIndex: inputIndex }] : Array<Dynamic>));
             channelIndex++;
           }
@@ -67,12 +68,12 @@ class AnimationBlendTree {
         inputIndex++;
       }
     }
-    return cast (cast createEntity((cast { channels: channels, inputs: copiedInputs, players: players, sampleScratch: new flighthq._internal._Float32Array(sampleWidth) } : Null<{ var channels:Array<AnimationBlendTreeChannel>; var inputs:Array<AnimationBlendTreeInput>; var players:Array<AnimationPlayer>; var sampleScratch:flighthq._internal._Float32Array; }>)) : flighthq.types.AnimationBlendTree);
+    return cast (cast createEntity((cast { channels: channels, inputs: copiedInputs, players: players, sampleScratch: new flighthq._internal._Float32Array(sampleWidth) })) : { >Entity, var channels:Array<AnimationBlendTreeChannel>; var inputs:Array<AnimationBlendTreeInput>; var players:Array<AnimationPlayer>; var sampleScratch:flighthq._internal._Float32Array; });
     return cast null;
   }
 
   public static function createAnimationBlendTreeInput(player:AnimationPlayer, weight:Float = 1.0, additive:Bool = false):AnimationBlendTreeInput {
-    return cast (cast createEntity((cast { additive: additive, player: player, weight: weight } : Null<{ var additive:Bool; var player:AnimationPlayer; var weight:Float; }>)) : AnimationBlendTreeInput);
+    return cast (cast createEntity((cast { additive: additive, player: player, weight: weight })) : { >Entity, var additive:Bool; var player:AnimationPlayer; var weight:Float; });
     return cast null;
   }
 
@@ -80,7 +81,7 @@ class AnimationBlendTree {
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(tree, 'channels'), 'length') : Float)) : Bool)) {
-        if ((cast (cast sampleAnimationBlendTreeChannel((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast tree : flighthq.types.AnimationBlendTree), (cast index : Float)) : Bool) : Bool)) { visit((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'channels'), index), 'channel') : AnimationChannel), (cast index : Float)); }
+        if ((cast (cast sampleAnimationBlendTreeChannel((cast out), (cast tree), (cast index : Float)) : Bool) : Bool)) { visit((cast out), (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'channels'), index), 'channel')), (cast index : Float)); }
         index++;
       }
     }
@@ -94,7 +95,7 @@ class AnimationBlendTree {
     entry = flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'channels'), channelIndex);
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
     accumulator = _Runtime.field(entry, 'accumulator');
-    resetAnimationSampleAccumulator(accumulator);
+    resetAnimationSampleAccumulator((cast accumulator));
     hasAdditive = false;
     for (source in _Runtime.iterable(_Runtime.field(entry, 'sources'))) {
       var input:AnimationBlendTreeInput = flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'inputs'), _Runtime.field(source, 'inputIndex'));
@@ -102,19 +103,19 @@ class AnimationBlendTree {
         if ((cast ((cast (cast input : AnimationBlendTreeInput).additive : Bool) && (cast ((cast (cast input : AnimationBlendTreeInput).weight : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { (hasAdditive = cast (true : Dynamic)); }
         continue;
       }
-      var channel:AnimationChannel = flighthq._internal._StaticIndex.readArray((cast (cast input : AnimationBlendTreeInput).player : AnimationPlayer).clip.channels, _Runtime.field(source, 'channelIndex'));
-      sampleAnimationTrack((cast _Runtime.field(tree, 'sampleScratch') : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast channel : AnimationChannel).track, (cast (cast (cast input : AnimationBlendTreeInput).player : AnimationPlayer).time : Float));
-      accumulateAnimationSample(accumulator, (cast _Runtime.field(tree, 'sampleScratch') : flighthq._internal._ArrayLike<Float>), (cast (cast input : AnimationBlendTreeInput).weight : Float));
+      var channel:AnimationChannel = flighthq._internal._StaticIndex.readArray((cast (cast (cast input : AnimationBlendTreeInput).player : AnimationPlayer).clip : { var channels:Array<AnimationChannel>; }).channels, _Runtime.field(source, 'channelIndex'));
+      sampleAnimationTrack((cast _Runtime.field(tree, 'sampleScratch')), (cast (cast channel : AnimationChannel).track), (cast (cast (cast input : AnimationBlendTreeInput).player : AnimationPlayer).time : Float));
+      accumulateAnimationSample((cast accumulator), (cast _Runtime.field(tree, 'sampleScratch')), (cast (cast input : AnimationBlendTreeInput).weight : Float));
     }
-    hasOverride = (cast finishAnimationSample((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), accumulator) : Bool);
+    hasOverride = (cast finishAnimationSample((cast out), (cast accumulator)) : Bool);
     if ((cast ((cast !(cast hasOverride : Bool) : Bool) && (cast !(cast hasAdditive : Bool) : Bool)) : Bool)) { return cast false; }
-    if ((cast !(cast hasOverride : Bool) : Bool)) { AnimationBlendTree.writeAnimationBlendTreeIdentity__animationBlendTree((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).components : Float), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).quaternion : Bool)); }
+    if ((cast !(cast hasOverride : Bool) : Bool)) { AnimationBlendTree.writeAnimationBlendTreeIdentity__animationBlendTree((cast out), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).components : Float), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).quaternion : Bool)); }
     for (source in _Runtime.iterable(_Runtime.field(entry, 'sources'))) {
       var input:AnimationBlendTreeInput = flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'inputs'), _Runtime.field(source, 'inputIndex'));
       if ((cast ((cast !(cast (cast input : AnimationBlendTreeInput).additive : Bool) : Bool) || (cast !(cast _Runtime.compare((cast input : AnimationBlendTreeInput).weight, 0.0, '>') : Bool) : Bool)) : Bool)) { continue; }
-      var channel:AnimationChannel = flighthq._internal._StaticIndex.readArray((cast (cast input : AnimationBlendTreeInput).player : AnimationPlayer).clip.channels, _Runtime.field(source, 'channelIndex'));
-      sampleAnimationTrack((cast _Runtime.field(tree, 'sampleScratch') : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast channel : AnimationChannel).track, (cast (cast (cast input : AnimationBlendTreeInput).player : AnimationPlayer).time : Float));
-      addAnimationSample((cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast out : flighthq._internal._ArrayLike<Float>), (cast _Runtime.field(tree, 'sampleScratch') : flighthq._internal._ArrayLike<Float>), (cast (cast input : AnimationBlendTreeInput).weight : Float), (cast (cast (cast channel : AnimationChannel).track : AnimationTrack).quaternion : Bool));
+      var channel:AnimationChannel = flighthq._internal._StaticIndex.readArray((cast (cast (cast input : AnimationBlendTreeInput).player : AnimationPlayer).clip : { var channels:Array<AnimationChannel>; }).channels, _Runtime.field(source, 'channelIndex'));
+      sampleAnimationTrack((cast _Runtime.field(tree, 'sampleScratch')), (cast (cast channel : AnimationChannel).track), (cast (cast (cast input : AnimationBlendTreeInput).player : AnimationPlayer).time : Float));
+      addAnimationSample((cast out), (cast out), (cast _Runtime.field(tree, 'sampleScratch')), (cast (cast input : AnimationBlendTreeInput).weight : Float), (cast (cast (cast channel : AnimationChannel).track : AnimationTrack).quaternion : Bool));
     }
     return cast true;
     return cast null;

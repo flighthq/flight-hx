@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef ScreenSpaceFogEffect = { var kind:Kind; @:optional var color:Float; @:optional var near:Float; @:optional var far:Float; @:optional var density:Float; };
+typedef ScreenSpaceFogEffect = { var kind:String; @:optional var color:Float; @:optional var near:Float; @:optional var far:Float; @:optional var density:Float; };

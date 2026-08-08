@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.getCanvasRenderEffectRunner;
 import flighthq.scene2dCanvas.CanvasRenderTexture.getCanvasRenderTextureTarget;
 import flighthq.scene2dCanvas.CanvasRenderTexture.writeCanvasRenderTextureTarget;
+import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
 import flighthq.types.CanvasRenderState;
@@ -22,12 +23,13 @@ class CanvasRenderTextureEffect {
     if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, scratch) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, scratch) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('applyCanvasRenderEffectsToRenderTexture: source, destination, and scratch must be distinct'));
     }
-    sourceTarget = (cast getCanvasRenderTextureTarget((cast state : CanvasRenderState), (cast source : RenderTexture)) : Null<CanvasRenderTarget>);
+    sourceTarget = (cast getCanvasRenderTextureTarget((cast state), (cast source)) : Null<CanvasRenderTarget>);
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
-    operations = _Runtime.callProperty(effects, 'flatMap', cast ([function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):Array<{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }> {
+    operations = _Runtime.callProperty(effects, 'flatMap', cast ([function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flighthq._internal._Union2<{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }>> {
       var runner:Null<CanvasRenderEffectRunner> = cast _Runtime.UNDEFINED;
-      runner = (cast getCanvasRenderEffectRunner((cast state : CanvasRenderState), (cast _Runtime.field(effect, 'kind') : String)) : Null<CanvasRenderEffectRunner>);
+      runner = (cast getCanvasRenderEffectRunner((cast state), (cast _Runtime.field(effect, 'kind') : String)) : Null<CanvasRenderEffectRunner>);
       return cast ((cast _Runtime.strictEquals(runner, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([{ effect: effect, runner: runner }] : Array<Dynamic>) : Dynamic));
+      return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(operations, 'length'), 0.0) : Bool)) { return cast false; }
     current = sourceTarget;
@@ -37,10 +39,10 @@ class CanvasRenderTextureEffect {
         var operation:{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; } = flighthq._internal._StaticIndex.readArray(operations, index);
         var remaining:Float = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
         var output:RenderTexture = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
-        writeCanvasRenderTextureTarget((cast state : CanvasRenderState), (cast output : RenderTexture), function(target:CanvasRenderTarget):Void {
-          (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).runner({ state: state, source: current, dest: target, pool: (cast pool : CanvasRenderTexturePool).effectTargets }, (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).effect);
-        });
-        (current = cast ((cast getCanvasRenderTextureTarget((cast state : CanvasRenderState), (cast output : RenderTexture)) : CanvasRenderTarget) : Dynamic));
+        writeCanvasRenderTextureTarget((cast state), (cast output), (cast function(target:CanvasRenderTarget):Void {
+          (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).runner((cast { state: state, source: current, dest: target, pool: (cast pool : CanvasRenderTexturePool).effectTargets }), (cast (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).effect));
+        }));
+        (current = cast ((cast getCanvasRenderTextureTarget((cast state), (cast output)) : Null<CanvasRenderTarget>) : Dynamic));
         index++;
       }
     }

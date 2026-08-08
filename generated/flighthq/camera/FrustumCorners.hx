@@ -8,6 +8,7 @@ import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.geometry.Matrix4.inverseMatrix4;
 import flighthq.types.Camera3D;
 import flighthq.types.Matrix4;
+import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Vector3.Vector3Like;
 
 class FrustumCorners {
@@ -15,13 +16,13 @@ class FrustumCorners {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var ndcCorners:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var results:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    getCamera3DViewProjectionMatrix4(FrustumCorners.__scratchViewProjection__frustumCorners, (cast camera : Camera3D), (cast aspect : Float));
-    if ((cast !(cast (cast inverseMatrix4(FrustumCorners.__scratchInverseVP__frustumCorners, FrustumCorners.__scratchViewProjection__frustumCorners) : Bool) : Bool) : Bool)) {
+    getCamera3DViewProjectionMatrix4((cast FrustumCorners.__scratchViewProjection__frustumCorners), (cast camera), (cast aspect : Float));
+    if ((cast !(cast (cast inverseMatrix4((cast FrustumCorners.__scratchInverseVP__frustumCorners), (cast FrustumCorners.__scratchViewProjection__frustumCorners)) : Bool) : Bool) : Bool)) {
       return cast false;
     }
     m = FrustumCorners.__scratchInverseVP__frustumCorners.m;
-    ndcCorners = cast ([cast ([-1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, -1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, 1.0] : Array<Dynamic>), cast ([1.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>);
-    results = cast ([] : Array<Dynamic>);
+    ndcCorners = (cast cast ([cast ([-1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, -1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, 1.0] : Array<Dynamic>), cast ([1.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+    results = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
@@ -46,9 +47,9 @@ class FrustumCorners {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
-        (flighthq._internal._StaticIndex.readArray(out, i).x = cast (flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(results, i), 0.0) : Dynamic));
-        (flighthq._internal._StaticIndex.readArray(out, i).y = cast (flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(results, i), 1.0) : Dynamic));
-        (flighthq._internal._StaticIndex.readArray(out, i).z = cast (flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(results, i), 2.0) : Dynamic));
+        ((cast flighthq._internal._StaticIndex.readArray(out, i) : { var x:Float; }).x = cast (flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(results, i), 0.0) : Dynamic));
+        ((cast flighthq._internal._StaticIndex.readArray(out, i) : { var y:Float; }).y = cast (flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(results, i), 1.0) : Dynamic));
+        ((cast flighthq._internal._StaticIndex.readArray(out, i) : { var z:Float; }).z = cast (flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(results, i), 2.0) : Dynamic));
         i++;
       }
     }
@@ -56,7 +57,7 @@ class FrustumCorners {
     return cast null;
   }
 
-  public static final __scratchViewProjection__frustumCorners:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
+  public static final __scratchViewProjection__frustumCorners:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4);
 
-  public static final __scratchInverseVP__frustumCorners:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
+  public static final __scratchInverseVP__frustumCorners:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4);
 }

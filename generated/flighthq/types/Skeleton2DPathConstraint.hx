@@ -3,15 +3,14 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintKind;
 import flighthq.types._internal._Skeleton2DPathConstraintValues.Skeleton2DPathPositionModeValue;
 import flighthq.types._internal._Skeleton2DPathConstraintValues.Skeleton2DPathRotateModeValue;
 import flighthq.types._internal._Skeleton2DPathConstraintValues.Skeleton2DPathSpacingModeValue;
 
-typedef Skeleton2DPathConstraint = { var kind:Skeleton2DConstraintKind; var mix:Float; var boneIndices:Array<Float>; var mixRotate:Float; var mixX:Float; var mixY:Float; var position:Float; var positionMode:Skeleton2DPathPositionMode; var rotateMode:Skeleton2DPathRotateMode; var spacing:Float; var spacingMode:Skeleton2DPathSpacingMode; var targetSlotIndex:Float; };
+typedef Skeleton2DPathConstraint = { var kind:String; var mix:Float; var boneIndices:Array<Float>; var mixRotate:Float; var mixX:Float; var mixY:Float; var position:Float; var positionMode:Skeleton2DPathPositionMode; var rotateMode:Skeleton2DPathRotateMode; var spacing:Float; var spacingMode:Skeleton2DPathSpacingMode; var targetSlotIndex:Float; };
 
-typedef Skeleton2DPathPositionMode = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef Skeleton2DPathPositionMode = flighthq._internal._IndexedAccess<Dynamic, String>;
 
-typedef Skeleton2DPathRotateMode = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef Skeleton2DPathRotateMode = flighthq._internal._IndexedAccess<Dynamic, String>;
 
-typedef Skeleton2DPathSpacingMode = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef Skeleton2DPathSpacingMode = flighthq._internal._IndexedAccess<Dynamic, String>;

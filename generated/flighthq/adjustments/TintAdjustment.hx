@@ -16,7 +16,7 @@ class TintAdjustment {
     greenScale = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 16)) & 255) / 255.0);
     blueScale = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 8)) & 255) / 255.0);
     alphaScale = ((_Runtime.toInt32(rgba) & 255) / 255.0);
-    colorMatrix = cast ([redScale, 0.0, 0.0, 0.0, 0.0, 0.0, greenScale, 0.0, 0.0, 0.0, 0.0, 0.0, blueScale, 0.0, 0.0, 0.0, 0.0, 0.0, alphaScale, 0.0] : Array<Dynamic>);
+    colorMatrix = (cast cast ([redScale, 0.0, 0.0, 0.0, 0.0, 0.0, greenScale, 0.0, 0.0, 0.0, 0.0, 0.0, blueScale, 0.0, 0.0, 0.0, 0.0, 0.0, alphaScale, 0.0] : Array<Dynamic>));
     return cast { kind: 'TintAdjustment', colorMatrix: colorMatrix };
     return cast null;
   }

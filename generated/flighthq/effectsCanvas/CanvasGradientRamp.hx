@@ -8,7 +8,7 @@ import flighthq.types.CanvasRenderTarget;
 
 class CanvasGradientRamp {
   public static function applyCanvasGradientRampLookup(dest:CanvasRenderTarget, source:CanvasRenderTarget, ramp:flighthq._internal._UInt8ClampedArray, bias:Float = 0.0, scale:Float = 1.0):Void {
-    drawCanvasImageDataPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
+    drawCanvasImageDataPass((cast dest), (cast source), (cast function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast pixelCount : Float)) : Bool)) {
@@ -22,7 +22,7 @@ class CanvasGradientRamp {
           i++;
         }
       }
-    } : flighthq._internal._UInt8ClampedArray->Float->Void));
+    }));
   }
 
   public static function buildCanvasGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal._UInt8ClampedArray {

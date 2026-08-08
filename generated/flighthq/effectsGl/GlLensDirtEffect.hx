@@ -24,20 +24,20 @@ class GlLensDirtEffect {
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.55);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'lens.lensDirt' : String), (cast GlLensDirtEffect.LENS_DIRT_FRAGMENT_SRC__glLensDirtEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'lens.lensDirt' : String), (cast GlLensDirtEffect.LENS_DIRT_FRAGMENT_SRC__glLensDirtEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_threshold'), threshold);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_seed'), seed);
-    });
+    }));
   }
 
-  public static final defaultGlLensDirtEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyLensDirtEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : LensDirtEffect) : LensDirtEffect));
-  };
+  public static final defaultGlLensDirtEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyLensDirtEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : LensDirtEffect)));
+  });
 
   public static function registerGlLensDirtEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'LensDirtEffect' : String), (cast defaultGlLensDirtEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'LensDirtEffect' : String), (cast defaultGlLensDirtEffectRunner));
   }
 
   public static final LENS_DIRT_FRAGMENT_SRC__glLensDirtEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_threshold;\nuniform float u_seed;\nout vec4 o_color;\nfloat dirtHash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }\nfloat dirtAmount(vec2 uv, float seed) {\n  float acc = 0.0;\n  for (int i = 0; i < 8; i++) {\n    float fi = float(i);\n    vec2 c = vec2(dirtHash(vec2(fi, seed)), dirtHash(vec2(fi + 9.0, seed)));\n    float r = 0.06 + 0.16 * dirtHash(vec2(fi + 3.0, seed));\n    float d = distance(uv, c) / r;\n    acc += smoothstep(1.0, 0.0, d) * (0.3 + 0.7 * dirtHash(vec2(fi + 5.0, seed)));\n  }\n  return clamp(acc, 0.0, 1.0);\n}\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float lum = dot(c.rgb, vec3(0.299, 0.587, 0.114));\n  float bright = max(0.0, lum - u_threshold);\n  float dirt = dirtAmount(v_texCoord, u_seed + 1.0);\n  o_color = vec4(c.rgb + bright * dirt * u_intensity * 2.0, c.a);\n}';

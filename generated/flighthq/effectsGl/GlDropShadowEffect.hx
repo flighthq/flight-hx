@@ -20,6 +20,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.RenderEffect;
+import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.RenderTarget.RenderTargetFormat;
 
 class GlDropShadowEffect {
@@ -46,10 +47,10 @@ class GlDropShadowEffect {
     var mask:GlRenderTarget = cast _Runtime.UNDEFINED;
     var blurred:GlRenderTarget = cast _Runtime.UNDEFINED;
     var blurTemp:GlRenderTarget = cast _Runtime.UNDEFINED;
-    descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    s0 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
-    s1 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
-    s2 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
+    descriptor = (cast { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') });
+    s0 = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
@@ -67,31 +68,31 @@ class GlDropShadowEffect {
     mask = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
     blurred = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     blurTemp = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
-    applyGlEffectTintPass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast mask : GlRenderTarget), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
-    applyGlEffectBoxBlur((cast state : GlRenderState), (cast mask : GlRenderTarget), (cast blurred : GlRenderTarget), (cast blurTemp : GlRenderTarget), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }));
-    clearGlRenderTarget((cast state : GlRenderState), (cast dst : GlRenderTarget));
+    applyGlEffectTintPass((cast state), (cast src), (cast mask), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
+    applyGlEffectBoxBlur((cast state), (cast mask), (cast blurred), (cast blurTemp), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }));
+    clearGlRenderTarget((cast state), (cast dst));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast shadowPasses : Float)) : Bool)) {
-        applyGlEffectBlitOffsetPass((cast state : GlRenderState), (cast blurred : GlRenderTarget), (cast dst : GlRenderTarget), (cast dx : Float), (cast dy : Float));
+        applyGlEffectBlitOffsetPass((cast state), (cast blurred), (cast dst), (cast dx : Float), (cast dy : Float));
         i++;
       }
     }
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
-      applyGlEffectErasePass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast dst : GlRenderTarget));
+      applyGlEffectErasePass((cast state), (cast src), (cast dst));
     } else { if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyGlEffectBlitPass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast dst : GlRenderTarget));
+      applyGlEffectBlitPass((cast state), (cast src), (cast dst));
     } }
-    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s0 : GlRenderTarget));
-    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s1 : GlRenderTarget));
-    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s2 : GlRenderTarget));
+    releaseGlRenderTarget((cast pool), (cast s0));
+    releaseGlRenderTarget((cast pool), (cast s1));
+    releaseGlRenderTarget((cast pool), (cast s2));
   }
 
-  public static final defaultGlDropShadowEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyDropShadowEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast _Runtime.field(ctx, 'pool') : GlRenderTargetPool), (cast (cast effect : DropShadowEffect) : DropShadowEffect));
-  };
+  public static final defaultGlDropShadowEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyDropShadowEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : DropShadowEffect)));
+  });
 
   public static function registerGlDropShadowEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'DropShadowEffect' : String), (cast defaultGlDropShadowEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'DropShadowEffect' : String), (cast defaultGlDropShadowEffectRunner));
   }
 }

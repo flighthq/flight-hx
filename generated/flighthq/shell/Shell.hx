@@ -18,7 +18,7 @@ class Shell {
   public static function createWebShellBackend():ShellBackend {
     return cast { beep: function():Void {
 
-    }, moveItemsToTrash: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
+    }, moveItemsToTrash: function():flighthq._internal._Promise<Array<Bool>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
@@ -44,7 +44,7 @@ class Shell {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve('unavailable on web');
       }));
-    }, readShortcutLink: function():flighthq._internal._Promise<flighthq._internal._Any> {
+    }, readShortcutLink: function():flighthq._internal._Promise<Null<ShellShortcutLink>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
@@ -62,7 +62,7 @@ class Shell {
 
   @:noCompletion
   public static function getShellBackend():ShellBackend {
-    if ((cast _Runtime.strictEquals(Shell._backend__shell, null) : Bool)) { (Shell._backend__shell = cast ((cast createWebShellBackend() : Null<ShellBackend>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Shell._backend__shell, null) : Bool)) { (Shell._backend__shell = cast ((cast createWebShellBackend() : ShellBackend) : Dynamic)); }
     return cast Shell._backend__shell;
     return cast null;
   }
@@ -79,33 +79,33 @@ class Shell {
   }
 
   public static function moveItemsToTrash(paths:Array<String>):flighthq._internal._Promise<Array<Bool>> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).moveItemsToTrash(paths);
+    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).moveItemsToTrash((cast paths));
     return cast null;
   }
 
   public static function moveItemToTrash(path:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).moveToTrash(path);
+    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).moveToTrash((cast path : String));
     return cast null;
   }
 
   public static function openShellExternalUrl(url:String, ?options:ShellOpenExternalOptions):flighthq._internal._Promise<Bool> {
     if ((cast !(cast (cast isShellUrlAllowed((cast url : String)) : Bool) : Bool) : Bool)) { return cast flighthq._internal._Async.resolve(false); }
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openExternal(url, options);
+    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openExternal((cast url : String), (cast options));
     return cast null;
   }
 
   public static function openShellPath(path:String, ?options:ShellOpenPathOptions):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openPath(path, options);
+    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openPath((cast path : String), (cast options));
     return cast null;
   }
 
   public static function openShellPathResult(path:String, ?options:ShellOpenPathOptions):flighthq._internal._Promise<String> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openPathResult(path, options);
+    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openPathResult((cast path : String), (cast options));
     return cast null;
   }
 
   public static function readShellShortcutLink(shortcutPath:String):flighthq._internal._Promise<Null<ShellShortcutLink>> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).readShortcutLink(shortcutPath);
+    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).readShortcutLink((cast shortcutPath : String));
     return cast null;
   }
 
@@ -123,12 +123,12 @@ class Shell {
   }
 
   public static function showItemInFolder(path:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).showItemInFolder(path);
+    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).showItemInFolder((cast path : String));
     return cast null;
   }
 
   public static function writeShellShortcutLink(shortcutPath:String, link:ShellShortcutLink, ?operation:ShellShortcutWriteOperation):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).writeShortcutLink(shortcutPath, link, operation);
+    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).writeShortcutLink((cast shortcutPath : String), (cast link), (cast operation));
     return cast null;
   }
 }

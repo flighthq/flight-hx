@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.types._internal._AudioResourceReferenceValues.AudioResourceFailureKindValue;
 import flighthq.types._internal._AudioResourceReferenceValues.AudioResourceReferenceKindValue;
 
-typedef AudioResourceReferenceKind = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef AudioResourceReferenceKind = flighthq._internal._IndexedAccess<Dynamic, String>;
 
-typedef AudioResourceFailureKind = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef AudioResourceFailureKind = flighthq._internal._IndexedAccess<Dynamic, String>;
 
 typedef AudioResourceFailure = { var kind:AudioResourceFailureKind; var message:String; var name:Null<String>; };
 

@@ -15,18 +15,19 @@ import flighthq.types.DomRenderState.DomRenderStateRuntime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class DomRenderState {
-  public static function createDomRenderState(element:flighthq._internal.dom.HTMLElement, ?options:Dynamic):flighthq.types.DomRenderState {
+  public static function createDomRenderState(element:flighthq._internal.dom.HTMLElement, ?options:flighthq._internal._Partial<DomRenderOptions>):flighthq.types.DomRenderState {
     if (options == null) options = cast ({  } : Dynamic);
     var state:flighthq.types.DomRenderState = cast _Runtime.UNDEFINED;
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
-    state = (cast (cast _createRenderState((cast { pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Null<Matrix>), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') } : Null<flighthq._internal._Any>)) : flighthq.types.DomRenderState) : flighthq.types.DomRenderState);
-    if ((cast !_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null) : Bool)) { setRenderStateBackgroundColor(state, (cast _Runtime.field(options, 'backgroundColor') : Float)); }
-    ((cast state : flighthq.types.DomRenderState).applyBlendMode = null);
-    ((cast state : flighthq.types.DomRenderState).domCssFilterResolver = null);
+    state = (cast _createRenderState((cast { pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') })) : flighthq.types.DomRenderState);
+    if ((cast !_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null) : Bool)) { setRenderStateBackgroundColor((cast state), (cast _Runtime.field(options, 'backgroundColor') : Float)); }
+    ((cast state : { var applyBlendMode:Null<flighthq._internal.dom.HTMLElement->Null<String>->Void>; }).applyBlendMode = (cast null));
+    ((cast state : { var domCssFilterResolver:Null<RenderProxy2D->Null<String>>; }).domCssFilterResolver = (cast null));
     ((cast (cast state : { var element:flighthq._internal.dom.HTMLElement; }) : { var element:flighthq._internal.dom.HTMLElement; }).element = element);
     ((cast state : flighthq.types.DomRenderState).allowSmoothing = _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true));
     runtime = (cast createDomRenderStateRuntime() : DomRenderStateRuntime);
@@ -47,7 +48,7 @@ class DomRenderState {
 
   @:noCompletion
   public static function createDomRenderStateRuntime():DomRenderStateRuntime {
-    return cast (cast (cast createRenderStateRuntime() : DomRenderStateRuntime) : DomRenderStateRuntime);
+    return cast (cast createRenderStateRuntime() : DomRenderStateRuntime);
     return cast null;
   }
 

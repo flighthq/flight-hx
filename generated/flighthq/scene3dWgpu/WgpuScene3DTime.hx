@@ -13,7 +13,7 @@ class WgpuScene3DTime {
   }
 
   public static function setWgpuScene3DTime(state:WgpuRenderState, seconds:Float):Void {
-    ((cast WgpuScene3DTime.sceneTimes__wgpuScene3DTime : flighthq._internal._WeakMap<WgpuRenderState, Float>).set(state, seconds));
+    ((cast WgpuScene3DTime.sceneTimes__wgpuScene3DTime : flighthq._internal._WeakMap<WgpuRenderState, Float>).set(state, (cast seconds)));
   }
 
   public static final sceneTimes__wgpuScene3DTime:flighthq._internal._WeakMap<WgpuRenderState, Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);

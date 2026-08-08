@@ -20,7 +20,7 @@ import flighthq.types._internal._Node2DValues.Node2DTraitsKey;
 
 typedef Node2D = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node2DTraits>>; var alpha:Float; var visible:Bool; var blendMode:Null<BlendMode>; var clip:Null<ClipRegion>; var material:Null<Material>; var materialData:Null<MaterialData>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
 
-typedef Node2DTraits = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; var alpha:Float; var visible:Bool; var blendMode:Null<BlendMode>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var clip:Null<ClipRegion>; var material:Null<Material>; var materialData:Null<MaterialData>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
+typedef Node2DTraits = { var data:Null<Node2DData>; var enabled:Bool; var kind:Kind; var name:Null<String>; var alpha:Float; var visible:Bool; var blendMode:Null<BlendMode>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var clip:Null<ClipRegion>; var material:Null<Material>; var materialData:Null<MaterialData>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
 
 typedef Node2DData = {  };
 

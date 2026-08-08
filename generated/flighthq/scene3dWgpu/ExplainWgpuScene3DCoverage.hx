@@ -25,12 +25,12 @@ class ExplainWgpuScene3DCoverage {
   @:noCompletion
   public static function explainWgpuScene3DCoverage(out:Array<SceneCoverageEntry>, state:WgpuRenderState, usage:Scene3DKindUsage):Void {
     _Runtime.setLength(out, 0.0);
-    (cast ExplainWgpuScene3DCoverage.collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage((cast out : Null<Array<SceneCoverageEntry>>), (cast state : WgpuRenderState), (cast usage : Scene3DKindUsage), (cast false : Bool)) : Bool);
+    (cast ExplainWgpuScene3DCoverage.collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage((cast out), (cast state), (cast usage), (cast false : Bool)) : Bool);
   }
 
   @:noCompletion
   public static function hasWgpuScene3DCoverage(state:WgpuRenderState, usage:Scene3DKindUsage):Bool {
-    return cast !(cast (cast ExplainWgpuScene3DCoverage.collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage((cast null : Null<Array<SceneCoverageEntry>>), (cast state : WgpuRenderState), (cast usage : Scene3DKindUsage), (cast true : Bool)) : Bool) : Bool);
+    return cast !(cast (cast ExplainWgpuScene3DCoverage.collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage((cast null), (cast state), (cast usage), (cast true : Bool)) : Bool) : Bool);
     return cast null;
   }
 
@@ -41,7 +41,7 @@ class ExplainWgpuScene3DCoverage {
     var resolvers:Null<flighthq._internal._Map<String, WgpuTextureResolver>> = cast _Runtime.UNDEFINED;
     var snippets:Null<ModifierRegistry> = cast _Runtime.UNDEFINED;
     found = false;
-    materials = (cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).materialRegistry;
+    materials = (cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).materialRegistry;
     hasStandard = ((cast materials : flighthq._internal._Map<String, WgpuMeshMaterialRenderer>).has(StandardMaterialKindValue));
     {
       var i:Float = 0.0;
@@ -58,7 +58,7 @@ class ExplainWgpuScene3DCoverage {
         i++;
       }
     }
-    resolvers = (cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuTextureResolverRegistry;
+    resolvers = (cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuTextureResolverRegistry;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'textureSourceKinds'), 'length') : Float)) : Bool)) {
@@ -74,12 +74,12 @@ class ExplainWgpuScene3DCoverage {
         i++;
       }
     }
-    snippets = (cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).modifierSnippetRegistry;
+    snippets = (cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).modifierSnippetRegistry;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'modifierKinds'), 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'modifierKinds'), i);
-        if ((cast ((cast !_Runtime.strictEquals(snippets, null) : Bool) && (cast !_Runtime.strictEquals((cast resolveModifier(snippets, (cast kind : String)) : Null<ModifierDefinition>), null) : Bool)) : Bool)) {
+        if ((cast ((cast !_Runtime.strictEquals(snippets, null) : Bool) && (cast !_Runtime.strictEquals((cast resolveModifier((cast snippets), (cast kind : String)) : Null<ModifierDefinition>), null) : Bool)) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.ModifierSnippet }] : Array<Dynamic>));
           i++;
           continue;

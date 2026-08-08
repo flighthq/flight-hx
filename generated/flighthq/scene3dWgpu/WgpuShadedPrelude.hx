@@ -57,6 +57,7 @@ import flighthq.types.Vector3.Vector3Like;
 import flighthq.types.VertexDisplaceModifier;
 import flighthq.types.VertexDisplaceModifier.VertexDisplaceModifierSource;
 import flighthq.types.VoxelGrid;
+import flighthq.types.WgpuClassicPipeline.WgpuClassicDefineKey;
 import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuModifierSnippet;
 import flighthq.types.WgpuModifierSnippet.WgpuModifierCompileContext;
@@ -97,16 +98,16 @@ class WgpuShadedPrelude {
     var textureOffset:Float = cast _Runtime.UNDEFINED;
     var resourcesChanged:Bool = cast _Runtime.UNDEFINED;
     var data:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    registry = (cast WgpuShadedPrelude.getModifierRegistry__wgpuShadedPrelude((cast state : WgpuRenderState)) : ModifierRegistry);
-    plan = (cast WgpuShadedPrelude.getCachedModifierPlan__wgpuShadedPrelude((cast state : WgpuRenderState), (cast material : ShadedMaterial), (cast registry : ModifierRegistry), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>)) : ShadedModifierPlan__wgpuShadedPrelude);
+    registry = (cast WgpuShadedPrelude.getModifierRegistry__wgpuShadedPrelude((cast state)) : ModifierRegistry);
+    plan = (cast WgpuShadedPrelude.getCachedModifierPlan__wgpuShadedPrelude((cast state), (cast material), (cast registry), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : ShadedModifierPlan__wgpuShadedPrelude);
     byteLength = (48.0 + ((cast plan : ShadedModifierPlan__wgpuShadedPrelude).uniformFloatCount * 4.0));
-    stateBindings = (cast (cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).shadedMaterialBindingCache : flighthq._internal._WeakMap<ShadedMaterial, ShadedBinding__wgpuShadedPrelude>);
+    stateBindings = (cast (cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).shadedMaterialBindingCache : flighthq._internal._WeakMap<ShadedMaterial, ShadedBinding__wgpuShadedPrelude>);
     binding = ((cast stateBindings : flighthq._internal._WeakMap<ShadedMaterial, ShadedBinding__wgpuShadedPrelude>).get(material));
-    sampler = (cast getWgpuMaterialSampler((cast state : WgpuRenderState), _Runtime.field(material, 'diffuseMap')) : flighthq._internal.dom.GPUSampler);
+    sampler = (cast getWgpuMaterialSampler((cast state), (cast _Runtime.field(material, 'diffuseMap'))) : flighthq._internal.dom.GPUSampler);
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast binding : ShadedBinding__wgpuShadedPrelude).layout, _Runtime.field(pipeline, 'materialBindGroupLayout')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field((cast binding : ShadedBinding__wgpuShadedPrelude).data, 'byteLength'), byteLength) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field((cast binding : ShadedBinding__wgpuShadedPrelude).textures, 'length'), ((cast plan : ShadedModifierPlan__wgpuShadedPrelude).textureCount + 3.0)) : Bool)) : Bool)) {
-      ({ final __hostTypeCall0 = _Runtime.optionalField(binding, 'buffer'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUBuffer).destroy(); });
-      (binding = cast ((cast WgpuShadedPrelude.createShadedBinding__wgpuShadedPrelude((cast state : WgpuRenderState), (cast _Runtime.field(pipeline, 'materialBindGroupLayout') : flighthq._internal.dom.GPUBindGroupLayout), (cast byteLength : Float), (cast ((cast plan : ShadedModifierPlan__wgpuShadedPrelude).textureCount + 3.0) : Float), (cast sampler : flighthq._internal.dom.GPUSampler)) : Null<ShadedBinding__wgpuShadedPrelude>) : Dynamic));
-      ((cast stateBindings : flighthq._internal._WeakMap<ShadedMaterial, ShadedBinding__wgpuShadedPrelude>).set(material, binding));
+      ({ final __hostTypeCall3 = ({ final __structural2 = binding; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var buffer:flighthq._internal.dom.GPUBuffer; }).buffer; }); __hostTypeCall3 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall3 : flighthq._internal.dom.GPUBuffer).destroy(); });
+      (binding = cast ((cast WgpuShadedPrelude.createShadedBinding__wgpuShadedPrelude((cast state), (cast _Runtime.field(pipeline, 'materialBindGroupLayout')), (cast byteLength : Float), (cast ((cast plan : ShadedModifierPlan__wgpuShadedPrelude).textureCount + 3.0) : Float), (cast sampler)) : ShadedBinding__wgpuShadedPrelude) : Dynamic));
+      ((cast stateBindings : flighthq._internal._WeakMap<ShadedMaterial, ShadedBinding__wgpuShadedPrelude>).set(material, (cast binding)));
     }
     flighthq._internal._StaticIndex.writeArray((cast binding : ShadedBinding__wgpuShadedPrelude).textures, 0.0, _Runtime.field(material, 'diffuseMap'));
     flighthq._internal._StaticIndex.writeArray((cast binding : ShadedBinding__wgpuShadedPrelude).textures, 1.0, _Runtime.field(material, 'specularMap'));
@@ -116,7 +117,7 @@ class WgpuShadedPrelude {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast plan : ShadedModifierPlan__wgpuShadedPrelude).orderedModifiers, 'length') : Float)) : Bool)) {
         var snippet:Null<WgpuModifierSnippet> = flighthq._internal._StaticIndex.readArray((cast plan : ShadedModifierPlan__wgpuShadedPrelude).snippets, i);
-        if ((cast !_Runtime.strictEquals(_Runtime.optionalField(snippet, 'textures'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+        if ((cast !_Runtime.strictEquals(({ final __structural4 = snippet; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var textures:Null<Modifier->Array<Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>>->Float->Float>; }).textures; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           (textureOffset = cast (_Runtime.callProperty(snippet, 'textures', cast ([flighthq._internal._StaticIndex.readArray((cast plan : ShadedModifierPlan__wgpuShadedPrelude).orderedModifiers, i), (cast binding : ShadedBinding__wgpuShadedPrelude).textures, textureOffset] : Array<Dynamic>)) : Dynamic));
         }
         i++;
@@ -128,7 +129,7 @@ class WgpuShadedPrelude {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast binding : ShadedBinding__wgpuShadedPrelude).textures, 'length') : Float)) : Bool)) {
-        var view:flighthq._internal.dom.GPUTextureView = (cast resolveWgpuMaterialTextureView((cast state : WgpuRenderState), flighthq._internal._StaticIndex.readArray((cast binding : ShadedBinding__wgpuShadedPrelude).textures, i)) : flighthq._internal.dom.GPUTextureView);
+        var view:flighthq._internal.dom.GPUTextureView = (cast resolveWgpuMaterialTextureView((cast state), (cast flighthq._internal._StaticIndex.readArray((cast binding : ShadedBinding__wgpuShadedPrelude).textures, i))) : flighthq._internal.dom.GPUTextureView);
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray((cast binding : ShadedBinding__wgpuShadedPrelude).views, i), view) : Bool)) {
           flighthq._internal._StaticIndex.writeArray((cast binding : ShadedBinding__wgpuShadedPrelude).views, i, view);
           ((cast flighthq._internal._StaticIndex.readArray((cast binding : ShadedBinding__wgpuShadedPrelude).entries, (cast WgpuShadedPrelude.textureEntryIndex__wgpuShadedPrelude((cast i : Float)) : Float)) : flighthq._internal.dom.GPUBindGroupEntry).resource = view);
@@ -146,11 +147,11 @@ class WgpuShadedPrelude {
     (cast data : flighthq._internal._Float32Array).set(specular, Std.int(4.0));
     flighthq._internal._StaticIndex.writeFloat32Array(data, 8.0, _Runtime.field(material, 'shininess'));
     flighthq._internal._StaticIndex.writeFloat32Array(data, 9.0, _Runtime.field(material, 'alphaCutoff'));
-    flighthq._internal._StaticIndex.writeFloat32Array(data, 10.0, (cast getWgpuScene3DTime((cast state : WgpuRenderState)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32Array(data, 10.0, (cast getWgpuScene3DTime((cast state)) : Float));
     flighthq._internal._StaticIndex.writeFloat32Array(data, 11.0, _Runtime.field(material, 'normalScale'));
-    WgpuShadedPrelude.writeModifierUniforms__wgpuShadedPrelude((cast data : flighthq._internal._Float32Array), (cast 12.0 : Float), plan);
+    WgpuShadedPrelude.writeModifierUniforms__wgpuShadedPrelude((cast data), (cast 12.0 : Float), (cast plan));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast binding : ShadedBinding__wgpuShadedPrelude).buffer, 0.0, _Runtime.field(data, 'buffer'), 0.0, byteLength] : Array<Dynamic>));
-    stashWgpuUvTransform((cast state : WgpuRenderState), _Runtime.field(material, 'diffuseMap'));
+    stashWgpuUvTransform((cast state), (cast _Runtime.field(material, 'diffuseMap')));
     return cast (cast binding : ShadedBinding__wgpuShadedPrelude).bindGroup;
     return cast null;
   }
@@ -163,7 +164,7 @@ class WgpuShadedPrelude {
     var entries:Array<flighthq._internal.dom.GPUBindGroupEntry> = cast _Runtime.UNDEFINED;
     buffer = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBuffer', cast ([{ size: byteLength, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     textures = _Runtime.fill(_Runtime.createArray(textureCount), null, 0, null, 1);
-    placeholder = (cast resolveWgpuMaterialTextureView((cast state : WgpuRenderState), null) : flighthq._internal.dom.GPUTextureView);
+    placeholder = (cast resolveWgpuMaterialTextureView((cast state), (cast null)) : flighthq._internal.dom.GPUTextureView);
     views = _Runtime.fill(_Runtime.createArray(textureCount), placeholder, 0, null, 1);
     entries = _Runtime.createArray((textureCount + 3.0));
     flighthq._internal._StaticIndex.writeArray(entries, 0.0, { binding: 0.0, resource: { buffer: buffer } });
@@ -190,9 +191,9 @@ class WgpuShadedPrelude {
     if (registry == null) registry = cast ({ definitions: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) } : Dynamic);
     var flags:{ var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; } = cast _Runtime.UNDEFINED;
     var base:String = cast _Runtime.UNDEFINED;
-    flags = (cast getWgpuShadedBaseFlags((cast material : ShadedMaterial)) : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; });
+    flags = (cast getWgpuShadedBaseFlags((cast material)) : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; });
     base = '' + Std.string(((cast (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).alphaMaskEnabled : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).doubleSided : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).hasDiffuseMap : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).hasSpecularMap : Bool) ? (cast 's' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).hasNormalMap : Bool) ? (cast 'n' : Dynamic) : (cast '-' : Dynamic))) + '';
-    return cast 'shaded:' + Std.string(base) + '|' + Std.string((cast getModifierDefineKey((cast _Runtime.field(material, 'modifiers') : Array<Modifier>), (cast registry : Null<ModifierRegistry>)) : String)) + '';
+    return cast 'shaded:' + Std.string(base) + '|' + Std.string((cast getModifierDefineKey((cast _Runtime.field(material, 'modifiers')), (cast registry)) : String)) + '';
     return cast null;
   }
 
@@ -204,17 +205,17 @@ class WgpuShadedPrelude {
     var colorAdjusted:Bool = cast _Runtime.UNDEFINED;
     var colorMatrix:Bool = cast _Runtime.UNDEFINED;
     var key:String = cast _Runtime.UNDEFINED;
-    registry = (cast WgpuShadedPrelude.getModifierRegistry__wgpuShadedPrelude((cast state : WgpuRenderState)) : ModifierRegistry);
-    defineKey = (cast buildWgpuShadedCacheKey((cast material : ShadedMaterial), (cast registry : ModifierRegistry)) : String);
-    plan = (cast WgpuShadedPrelude.getCachedModifierPlan__wgpuShadedPrelude((cast state : WgpuRenderState), (cast material : ShadedMaterial), (cast registry : ModifierRegistry), (cast defineKey : Null<String>)) : ShadedModifierPlan__wgpuShadedPrelude);
-    colorAdjusted = (cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).activeColorAdjustmentRun;
-    colorMatrix = (cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).activeColorMatrixRun;
-    key = '' + Std.string(defineKey) + '|registry:' + Std.string((cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).modifierSnippetRevision) + '|' + Std.string(format) + '|' + Std.string(((cast colorMatrix : Bool) ? (cast 'color-matrix' : Dynamic) : (cast ((cast colorAdjusted : Bool) ? (cast 'color-adjusted' : Dynamic) : (cast 'base' : Dynamic)) : Dynamic))) + '';
-    return cast (cast ensureWgpuScene3DPipeline((cast state : WgpuRenderState), (cast key : String), (cast function(blended:Bool, skinned:Bool):WgpuMeshPipeline {
+    registry = (cast WgpuShadedPrelude.getModifierRegistry__wgpuShadedPrelude((cast state)) : ModifierRegistry);
+    defineKey = (cast buildWgpuShadedCacheKey((cast material), (cast registry)) : String);
+    plan = (cast WgpuShadedPrelude.getCachedModifierPlan__wgpuShadedPrelude((cast state), (cast material), (cast registry), (cast defineKey)) : ShadedModifierPlan__wgpuShadedPrelude);
+    colorAdjusted = (cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).activeColorAdjustmentRun;
+    colorMatrix = (cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).activeColorMatrixRun;
+    key = '' + Std.string(defineKey) + '|registry:' + Std.string((cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).modifierSnippetRevision) + '|' + Std.string(format) + '|' + Std.string(((cast colorMatrix : Bool) ? (cast 'color-matrix' : Dynamic) : (cast ((cast colorAdjusted : Bool) ? (cast 'color-adjusted' : Dynamic) : (cast 'base' : Dynamic)) : Dynamic))) + '';
+    return cast (cast (cast ensureWgpuScene3DPipeline : WgpuRenderState->String->(Bool->Bool->WgpuMeshPipeline)->WgpuMeshPipeline)((cast state), (cast key : String), (cast function(blended:Bool, skinned:Bool):WgpuMeshPipeline {
       var entries:Array<flighthq._internal.dom.GPUBindGroupLayoutEntry> = cast _Runtime.UNDEFINED;
       var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
       var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
-      entries = _Runtime.concatArrays([[{ binding: 0.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform' } }], [{ binding: 1.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), sampler: { type: 'filtering' } }], _Runtime.toArray(_Runtime.callProperty(cast ([2.0, 3.0, 4.0] : Array<Dynamic>), 'map', cast ([function(binding:Float, __unused0:Float, __unused1:Array<Float>):flighthq._internal.dom.GPUBindGroupLayoutEntry return { binding: binding, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }] : Array<Dynamic>))), [{ binding: 5.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }]]);
+      entries = (cast _Runtime.concatArrays([[{ binding: 0.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform' } }], [{ binding: 1.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), sampler: { type: 'filtering' } }], _Runtime.toArray(_Runtime.callProperty(cast ([2.0, 3.0, 4.0] : Array<Dynamic>), 'map', cast ([function(binding:Float, __unused0:Float, __unused1:Array<Float>):flighthq._internal.dom.GPUBindGroupLayoutEntry return { binding: binding, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }] : Array<Dynamic>))), [{ binding: 5.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }]]));
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast (cast plan : ShadedModifierPlan__wgpuShadedPrelude).textureCount : Float)) : Bool)) {
@@ -223,9 +224,10 @@ class WgpuShadedPrelude {
         }
       }
       materialBindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroupLayout', cast ([{ entries: entries }] : Array<Dynamic>));
-      module = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createShaderModule', cast ([{ code: (cast WgpuShadedPrelude.assembleWgpuShadedModuleSource__wgpuShadedPrelude((cast material : ShadedMaterial), plan, (cast skinned : Bool), (cast (cast getWgpuSkinningAdapter((cast state : WgpuRenderState)) : Null<WgpuSkinningAdapter>) : Null<WgpuSkinningAdapter>), (cast ((cast ((cast colorAdjusted : Bool) || (cast colorMatrix : Bool)) : Bool) ? (cast _Runtime.coalesce((cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeature, function():Dynamic return cast null) : Dynamic) : (cast null : Dynamic)) : Null<WgpuColorAdjustmentMaterialFeature>), (cast colorMatrix : Bool)) : String) }] : Array<Dynamic>));
-      return cast (cast createWgpuMeshPipeline((cast state : WgpuRenderState), (cast { blended: blended, doubleSided: (cast (cast getWgpuShadedBaseFlags((cast material : ShadedMaterial)) : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }) : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).doubleSided, format: format, materialBindGroupLayout: materialBindGroupLayout, module: module, pbrSampleBindGroupLayout: (cast ensureWgpuPbrSampleLayout((cast state : WgpuRenderState)) : Null<flighthq._internal.dom.GPUBindGroupLayout>), skinned: skinned } : { @:optional var blended:Null<Bool>; var doubleSided:Bool; @:optional var extraBindGroupLayout:Null<flighthq._internal.dom.GPUBindGroupLayout>; var format:String; @:optional var iblBindGroupLayout:Null<flighthq._internal.dom.GPUBindGroupLayout>; var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var module:flighthq._internal.dom.GPUShaderModule; @:optional var pbrSampleBindGroupLayout:Null<flighthq._internal.dom.GPUBindGroupLayout>; @:optional var shadowBindGroupLayout:Null<flighthq._internal.dom.GPUBindGroupLayout>; @:optional var skinned:Null<Bool>; @:optional var topology:Null<String>; })) : WgpuMeshPipeline);
-    } : Bool->Bool->WgpuMeshPipeline)) : WgpuMeshPipeline);
+      module = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createShaderModule', cast ([{ code: (cast WgpuShadedPrelude.assembleWgpuShadedModuleSource__wgpuShadedPrelude((cast material), (cast plan), (cast skinned : Bool), (cast (cast getWgpuSkinningAdapter((cast state)) : Null<WgpuSkinningAdapter>)), (cast ((cast ((cast colorAdjusted : Bool) || (cast colorMatrix : Bool)) : Bool) ? (cast _Runtime.coalesce((cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeature, function():Dynamic return cast null) : Dynamic) : (cast null : Dynamic))), (cast colorMatrix : Bool)) : String) }] : Array<Dynamic>));
+      return cast (cast createWgpuMeshPipeline((cast state), (cast { blended: blended, doubleSided: (cast (cast getWgpuShadedBaseFlags((cast material)) : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }) : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).doubleSided, format: format, materialBindGroupLayout: materialBindGroupLayout, module: module, pbrSampleBindGroupLayout: (cast ensureWgpuPbrSampleLayout((cast state)) : flighthq._internal.dom.GPUBindGroupLayout), skinned: skinned })) : WgpuMeshPipeline);
+      return cast _Runtime.UNDEFINED;
+    })) : WgpuMeshPipeline);
     return cast null;
   }
 
@@ -235,8 +237,8 @@ class WgpuShadedPrelude {
     if (skinning == null) skinning = cast (null : Dynamic);
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var plan:ShadedModifierPlan__wgpuShadedPrelude = cast _Runtime.UNDEFINED;
-    plan = (cast WgpuShadedPrelude.buildModifierPlan__wgpuShadedPrelude((cast _Runtime.field(material, 'modifiers') : Array<Modifier>), (cast registry : ModifierRegistry)) : ShadedModifierPlan__wgpuShadedPrelude);
-    return cast (cast WgpuShadedPrelude.assembleWgpuShadedModuleSource__wgpuShadedPrelude((cast material : ShadedMaterial), plan, (cast skinned : Bool), (cast skinning : Null<WgpuSkinningAdapter>), (cast colorAdjustmentFeature : Null<WgpuColorAdjustmentMaterialFeature>), (cast colorMatrix : Bool)) : String);
+    plan = (cast WgpuShadedPrelude.buildModifierPlan__wgpuShadedPrelude((cast _Runtime.field(material, 'modifiers')), (cast registry)) : ShadedModifierPlan__wgpuShadedPrelude);
+    return cast (cast WgpuShadedPrelude.assembleWgpuShadedModuleSource__wgpuShadedPrelude((cast material), (cast plan), (cast skinned : Bool), (cast skinning), (cast colorAdjustmentFeature), (cast colorMatrix : Bool)) : String);
     return cast null;
   }
 
@@ -246,9 +248,9 @@ class WgpuShadedPrelude {
     var source:String = cast _Runtime.UNDEFINED;
     var modifierField:String = cast _Runtime.UNDEFINED;
     var textureDeclarations:String = cast _Runtime.UNDEFINED;
-    flags = (cast getWgpuShadedBaseFlags((cast material : ShadedMaterial)) : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; });
-    defineKey = { alphaMaskEnabled: (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).alphaMaskEnabled, doubleSided: (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).doubleSided, hasDiffuseMap: (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).hasDiffuseMap, hasAlphaMap: false, hasNormalMap: (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).hasNormalMap, hasSpecularMap: (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).hasSpecularMap, lightingModel: 'blinnphong' };
-    source = (cast getWgpuClassicSharedSamplerModuleSourceForKey(defineKey, (cast skinned : Bool), (cast skinning : Null<WgpuSkinningAdapter>)) : String);
+    flags = (cast getWgpuShadedBaseFlags((cast material)) : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; });
+    defineKey = (cast { alphaMaskEnabled: (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).alphaMaskEnabled, doubleSided: (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).doubleSided, hasDiffuseMap: (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).hasDiffuseMap, hasAlphaMap: false, hasNormalMap: (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).hasNormalMap, hasSpecularMap: (cast flags : { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; }).hasSpecularMap, lightingModel: 'blinnphong' });
+    source = (cast getWgpuClassicSharedSamplerModuleSourceForKey((cast defineKey), (cast skinned : Bool), (cast skinning)) : String);
     (source = cast (_Runtime.replace(source, '  let world = draw.world * localPosition;', '  let vertexUv = uv;\n' + Std.string((cast WgpuShadedPrelude.indent__wgpuShadedPrelude((cast _Runtime.field(plan, 'vertex') : String), (cast 2.0 : Float)) : String)) + '\n  let world = draw.world * localPosition;', false) : Dynamic));
     modifierField = ((cast _Runtime.strictEquals(_Runtime.field(plan, 'uniformFloatCount'), 0.0) : Bool) ? (cast '' : Dynamic) : (cast '\n  modifierData : array<vec4f, ' + Std.string(_Runtime.divideNumbers(_Runtime.field(plan, 'uniformFloatCount'), 4.0)) + '>,' : Dynamic));
     (source = cast (_Runtime.replace(source, 'params : vec4f,    // x = shininess, y = alphaCutoff', 'params : vec4f,    // x = shininess, y = alphaCutoff, z = time, w = normalScale' + Std.string(modifierField) + '', false) : Dynamic));
@@ -270,7 +272,7 @@ class WgpuShadedPrelude {
     (source = cast (_Runtime.replace(source, '  return flightPremultipliedOutput(vec4f(radiance, flightMeshCoverage(diffuse.a, in.objectAlpha, draw.params.y)));', '  radiance = radiance + emissive;\n' + Std.string((cast WgpuShadedPrelude.indent__wgpuShadedPrelude((cast _Runtime.field(plan, 'effect') : String), (cast 2.0 : Float)) : String)) + '\n  return flightPremultipliedOutput(vec4f(radiance, flightMeshCoverage(diffuse.a, in.objectAlpha, draw.params.y)));', false) : Dynamic));
     (source = cast (_Runtime.replace(source, '@group(3) @binding(2) var shadowSampler : sampler_comparison;', '@group(3) @binding(2) var shadowSampler : sampler_comparison;\n\nstruct Ibl {\n  params : vec4f, // x = enabled, y = intensity, z = maxMip\n};\n@group(3) @binding(3) var<uniform> ibl : Ibl;\n@group(3) @binding(4) var iblIrradiance : texture_cube<f32>;\n@group(3) @binding(5) var iblPrefiltered : texture_cube<f32>;\n@group(3) @binding(6) var iblBrdf : texture_2d<f32>;\n@group(3) @binding(7) var iblSampler : sampler;', false) : Dynamic));
     if ((cast !_Runtime.strictEquals(colorAdjustmentFeature, null) : Bool)) {
-      (source = cast (_Runtime.replace((cast spliceWgpuColorAdjustmentPrelude((cast source : String), (cast colorAdjustmentFeature : WgpuColorAdjustmentMaterialFeature), (cast colorMatrix : Bool)) : String), '  return flightPremultipliedOutput(vec4f(radiance, flightMeshCoverage(diffuse.a, in.objectAlpha, draw.params.y)));', '  var flightColor = vec4f(radiance, diffuse.a);\n  flightColor = ' + Std.string(((cast colorMatrix : Bool) ? (cast 'applyFlightColorMatrix(flightColor, draw.flightColorMatrix0, draw.flightColorMatrix1, draw.flightColorMatrix2, draw.flightColorMatrix3, draw.flightColorMatrixOffset)' : Dynamic) : (cast 'applyFlightColorAdjustment(flightColor, draw.flightColorScale, draw.flightColorBias)' : Dynamic))) + ';\n  flightColor.a = flightMeshCoverage(flightColor.a, in.objectAlpha, draw.params.y);\n  return flightPremultipliedOutput(flightColor);', false) : Dynamic));
+      (source = cast (_Runtime.replace((cast spliceWgpuColorAdjustmentPrelude((cast source : String), (cast colorAdjustmentFeature), (cast colorMatrix : Bool)) : String), '  return flightPremultipliedOutput(vec4f(radiance, flightMeshCoverage(diffuse.a, in.objectAlpha, draw.params.y)));', '  var flightColor = vec4f(radiance, diffuse.a);\n  flightColor = ' + Std.string(((cast colorMatrix : Bool) ? (cast 'applyFlightColorMatrix(flightColor, draw.flightColorMatrix0, draw.flightColorMatrix1, draw.flightColorMatrix2, draw.flightColorMatrix3, draw.flightColorMatrixOffset)' : Dynamic) : (cast 'applyFlightColorAdjustment(flightColor, draw.flightColorScale, draw.flightColorBias)' : Dynamic))) + ';\n  flightColor.a = flightMeshCoverage(flightColor.a, in.objectAlpha, draw.params.y);\n  return flightPremultipliedOutput(flightColor);', false) : Dynamic));
     }
     return cast source;
     return cast null;
@@ -287,7 +289,7 @@ class WgpuShadedPrelude {
     var effect:String = cast _Runtime.UNDEFINED;
     var vertex:String = cast _Runtime.UNDEFINED;
     var textureCount:Float = cast _Runtime.UNDEFINED;
-    ordered = (cast orderModifierStack((cast modifiers : Array<Modifier>)) : Array<Modifier>);
+    ordered = (cast orderModifierStack((cast modifiers)) : Array<Modifier>);
     snippets = _Runtime.createArray(_Runtime.field(ordered, 'length'));
     declarations = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     diffuse = '';
@@ -301,19 +303,19 @@ class WgpuShadedPrelude {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(ordered, 'length') : Float)) : Bool)) {
         var modifier:Modifier = flighthq._internal._StaticIndex.readArray(ordered, index);
-        var snippet:Null<WgpuModifierSnippet> = (cast (cast resolveModifier((cast registry : ModifierRegistry), (cast (cast modifier : Modifier).kind : String)) : Null<WgpuModifierSnippet>) : Null<WgpuModifierSnippet>);
+        var snippet:Null<WgpuModifierSnippet> = (cast resolveModifier((cast registry), (cast (cast modifier : Modifier).kind : String)) : Null<WgpuModifierSnippet>);
         flighthq._internal._StaticIndex.writeArray(snippets, index, snippet);
         if ((cast _Runtime.strictEquals(snippet, null) : Bool)) { index++; continue; }
         var base:Float = (index * WgpuShadedPrelude.MODIFIER_FLOATS__wgpuShadedPrelude);
-        var context:WgpuModifierCompileContext = { acquireTexture: function(__unused2:Texture):Float return (6.0 + textureCount++), uniformBase: base };
-        var contribution:WgpuModifierContribution = (cast snippet : WgpuModifierSnippet).contribution(modifier, index, context);
+        var context:WgpuModifierCompileContext = (cast { acquireTexture: function(__unused2:Texture):Float return (6.0 + textureCount++), uniformBase: base });
+        var contribution:WgpuModifierContribution = (cast snippet : WgpuModifierSnippet).contribution((cast modifier), (cast index : Float), (cast context));
         if ((cast !_Runtime.strictEquals((cast contribution : WgpuModifierContribution).declarations, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast declarations : flighthq._internal._Set<String>).add(StringTools.trim(Std.string((cast contribution : WgpuModifierContribution).declarations)))); }
         var source:String = (cast WgpuShadedPrelude.delimitContribution__wgpuShadedPrelude((cast (cast contribution : WgpuModifierContribution).source : String)) : String);
         if ((cast _Runtime.strictEquals((cast snippet : WgpuModifierSnippet).slot, (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Normal) : Bool)) { (normal = cast ((normal + source) : Dynamic)); } else { if ((cast _Runtime.strictEquals((cast snippet : WgpuModifierSnippet).slot, (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Diffuse) : Bool)) { (diffuse = cast ((diffuse + source) : Dynamic)); } else { if ((cast _Runtime.strictEquals((cast snippet : WgpuModifierSnippet).slot, (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Specular) : Bool)) { (specular = cast ((specular + source) : Dynamic)); } else { if ((cast _Runtime.strictEquals((cast snippet : WgpuModifierSnippet).slot, (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Emissive) : Bool)) { (emissive = cast ((emissive + source) : Dynamic)); } else { if ((cast _Runtime.strictEquals((cast snippet : WgpuModifierSnippet).slot, (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect) : Bool)) { (effect = cast ((effect + source) : Dynamic)); } else { if ((cast _Runtime.strictEquals((cast snippet : WgpuModifierSnippet).slot, (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Vertex) : Bool)) { (vertex = cast ((vertex + source) : Dynamic)); } } } } } }
         index++;
       }
     }
-    return cast { diffuse: diffuse, effect: effect, emissive: emissive, fragmentDeclarations: ((cast _Runtime.strictEquals((cast declarations : flighthq._internal._Set<String>).size, 0.0) : Bool) ? (cast '' : Dynamic) : (cast '' + Std.string(_Runtime.join(_Runtime.toArray(declarations), '\n')) + '\n' : Dynamic)), normal: normal, orderedModifiers: ordered, snippets: snippets, specular: specular, textureCount: textureCount, uniformFloatCount: _Runtime.multiplyNumbers(_Runtime.field(ordered, 'length'), WgpuShadedPrelude.MODIFIER_FLOATS__wgpuShadedPrelude), vertex: vertex };
+    return cast { diffuse: diffuse, effect: effect, emissive: emissive, fragmentDeclarations: ((cast _Runtime.strictEquals((cast declarations : flighthq._internal._Set<String>).size, 0.0) : Bool) ? (cast '' : Dynamic) : (cast '' + Std.string(_Runtime.join((cast _Runtime.toArray(declarations) : Array<String>), '\n')) + '\n' : Dynamic)), normal: normal, orderedModifiers: ordered, snippets: snippets, specular: specular, textureCount: textureCount, uniformFloatCount: _Runtime.multiplyNumbers(_Runtime.field(ordered, 'length'), WgpuShadedPrelude.MODIFIER_FLOATS__wgpuShadedPrelude), vertex: vertex };
     return cast null;
   }
 
@@ -327,7 +329,7 @@ class WgpuShadedPrelude {
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(plan, 'orderedModifiers'), 'length') : Float)) : Bool)) {
-        _Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(_Runtime.field(plan, 'snippets'), index), 'bind', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(plan, 'orderedModifiers'), index), out, (offset + (index * WgpuShadedPrelude.MODIFIER_FLOATS__wgpuShadedPrelude))] : Array<Dynamic>));
+        _Runtime.callOptionalValue(({ final __structural5 = flighthq._internal._StaticIndex.readArray(_Runtime.field(plan, 'snippets'), index); __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var bind:Null<Modifier->flighthq._internal._Float32Array->Float->Void>; }).bind; }), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(plan, 'orderedModifiers'), index), out, (offset + (index * WgpuShadedPrelude.MODIFIER_FLOATS__wgpuShadedPrelude))] : Array<Dynamic>));
         index++;
       }
     }
@@ -337,13 +339,13 @@ class WgpuShadedPrelude {
     var plans:flighthq._internal._WeakMap<ShadedMaterial, CachedShadedPlan__wgpuShadedPrelude> = cast _Runtime.UNDEFINED;
     var cached:Null<CachedShadedPlan__wgpuShadedPrelude> = cast _Runtime.UNDEFINED;
     var plan:ShadedModifierPlan__wgpuShadedPrelude = cast _Runtime.UNDEFINED;
-    plans = (cast (cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).shadedMaterialPlanCache : flighthq._internal._WeakMap<ShadedMaterial, CachedShadedPlan__wgpuShadedPrelude>);
+    plans = (cast (cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).shadedMaterialPlanCache : flighthq._internal._WeakMap<ShadedMaterial, CachedShadedPlan__wgpuShadedPrelude>);
     cached = ((cast plans : flighthq._internal._WeakMap<ShadedMaterial, CachedShadedPlan__wgpuShadedPrelude>).get(material));
-    if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast cached : CachedShadedPlan__wgpuShadedPrelude).modifiers, _Runtime.field(material, 'modifiers')) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast cached : CachedShadedPlan__wgpuShadedPrelude).registry, registry) : Bool)) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(defineKey, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals((cast cached : CachedShadedPlan__wgpuShadedPrelude).defineKey, defineKey)) : Bool)) : Bool) && (cast (cast WgpuShadedPrelude.hasCurrentSnippets__wgpuShadedPrelude((cast cached : CachedShadedPlan__wgpuShadedPrelude).plan, (cast registry : ModifierRegistry)) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast cached : CachedShadedPlan__wgpuShadedPrelude).modifiers, _Runtime.field(material, 'modifiers')) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast cached : CachedShadedPlan__wgpuShadedPrelude).registry, registry) : Bool)) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(defineKey, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals((cast cached : CachedShadedPlan__wgpuShadedPrelude).defineKey, defineKey)) : Bool)) : Bool) && (cast (cast WgpuShadedPrelude.hasCurrentSnippets__wgpuShadedPrelude((cast (cast cached : CachedShadedPlan__wgpuShadedPrelude).plan), (cast registry)) : Bool) : Bool)) : Bool)) {
       return cast (cast cached : CachedShadedPlan__wgpuShadedPrelude).plan;
     }
-    plan = (cast WgpuShadedPrelude.buildModifierPlan__wgpuShadedPrelude((cast _Runtime.field(material, 'modifiers') : Array<Modifier>), (cast registry : ModifierRegistry)) : ShadedModifierPlan__wgpuShadedPrelude);
-    ((cast plans : flighthq._internal._WeakMap<ShadedMaterial, CachedShadedPlan__wgpuShadedPrelude>).set(material, { defineKey: _Runtime.coalesce(defineKey, function():Dynamic return cast (cast buildWgpuShadedCacheKey((cast material : ShadedMaterial), (cast registry : ModifierRegistry)) : String)), modifiers: _Runtime.field(material, 'modifiers'), plan: plan, registry: registry }));
+    plan = (cast WgpuShadedPrelude.buildModifierPlan__wgpuShadedPrelude((cast _Runtime.field(material, 'modifiers')), (cast registry)) : ShadedModifierPlan__wgpuShadedPrelude);
+    ((cast plans : flighthq._internal._WeakMap<ShadedMaterial, CachedShadedPlan__wgpuShadedPrelude>).set(material, (cast { defineKey: _Runtime.coalesce(defineKey, function():Dynamic return cast (cast buildWgpuShadedCacheKey((cast material), (cast registry)) : String)), modifiers: _Runtime.field(material, 'modifiers'), plan: plan, registry: registry })));
     return cast plan;
     return cast null;
   }
@@ -352,7 +354,7 @@ class WgpuShadedPrelude {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(plan, 'orderedModifiers'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals((cast resolveModifier((cast registry : ModifierRegistry), (cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(plan, 'orderedModifiers'), i) : Modifier).kind : String)) : Null<ModifierDefinition>), flighthq._internal._StaticIndex.readArray(_Runtime.field(plan, 'snippets'), i)) : Bool)) { return cast false; }
+        if ((cast !_Runtime.strictEquals((cast resolveModifier((cast registry), (cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(plan, 'orderedModifiers'), i) : Modifier).kind : String)) : Null<ModifierDefinition>), flighthq._internal._StaticIndex.readArray(_Runtime.field(plan, 'snippets'), i)) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -367,14 +369,14 @@ class WgpuShadedPrelude {
   }
 
   @:noCompletion
-  public static final animatedNormalWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  public static final animatedNormalWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:AnimatedNormalModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : AnimatedNormalModifier);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, base, _Runtime.field(value, 'scroll').x);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 1.0), _Runtime.field(value, 'scroll').y);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, base, (cast _Runtime.field(value, 'scroll') : { var x:Float; }).x);
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 1.0), (cast _Runtime.field(value, 'scroll') : { var y:Float; }).y);
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 2.0), _Runtime.coalesce(_Runtime.field(value, 'strength'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(({ final __typedStruct1 = _Runtime.field(value, 'secondaryScroll'); __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.x; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(({ final __typedStruct2 = _Runtime.field(value, 'secondaryScroll'); __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.y; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(({ final __typedStruct6 = _Runtime.field(value, 'secondaryScroll'); __typedStruct6 == null ? _Runtime.UNDEFINED : (cast __typedStruct6 : { var x:Float; }).x; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(({ final __typedStruct7 = _Runtime.field(value, 'secondaryScroll'); __typedStruct7 == null ? _Runtime.UNDEFINED : (cast __typedStruct7 : { var y:Float; }).y; }), function():Dynamic return cast 0.0));
   }, contribution: function(modifier:Modifier, _index:Float, context:WgpuModifierCompileContext):WgpuModifierContribution {
     var value:AnimatedNormalModifier = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
@@ -386,10 +388,12 @@ class WgpuShadedPrelude {
     primary = _Runtime.callProperty(context, 'acquireTexture', cast ([_Runtime.field(value, 'map')] : Array<Dynamic>));
     secondary = ((cast _Runtime.strictEquals(_Runtime.field(value, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast ' + textureSample(modifierTexture' + Std.string(_Runtime.callProperty(context, 'acquireTexture', cast ([_Runtime.field(value, 'secondaryMap')] : Array<Dynamic>))) + ', materialSampler, in.uv + material.modifierData[' + Std.string((base + 1.0)) + '].xy * material.params.z).xyz * 2.0 - vec3f(1.0)' : Dynamic));
     return cast { source: '{\n  var animatedNormal = textureSample(modifierTexture' + Std.string(primary) + ', materialSampler, in.uv + material.modifierData[' + Std.string(base) + '].xy * material.params.z).xyz * 2.0 - vec3f(1.0)' + Std.string(secondary) + ';\n  animatedNormal.x = animatedNormal.x * material.modifierData[' + Std.string(base) + '].z;\n  animatedNormal.y = animatedNormal.y * material.modifierData[' + Std.string(base) + '].z;\n  normal = normalize(tbn * animatedNormal);\n}\n' };
+    return cast _Runtime.UNDEFINED;
   }, getDefineSignature: function(modifier:Modifier):String {
     var value:AnimatedNormalModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : AnimatedNormalModifier);
     return cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'map'), null) : Bool) ? (cast '0' : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '1' : Dynamic) : (cast '2' : Dynamic)) : Dynamic));
+    return cast _Runtime.UNDEFINED;
   }, kind: AnimatedNormalModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Normal, textures: function(modifier:Modifier, out:Array<Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>>, offset:Float):Float {
     var value:AnimatedNormalModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : AnimatedNormalModifier);
@@ -397,17 +401,18 @@ class WgpuShadedPrelude {
     flighthq._internal._StaticIndex.writeArray(out, offset++, _Runtime.field(value, 'map'));
     if ((cast !_Runtime.strictEquals(_Runtime.field(value, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, offset++, _Runtime.field(value, 'secondaryMap')); }
     return cast offset;
-  } };
+    return cast _Runtime.UNDEFINED;
+  } });
 
   @:noCompletion
-  public static final dissolveWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  public static final dissolveWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:DissolveModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : DissolveModifier);
     flighthq._internal._StaticIndex.writeFloat32Array(out, base, _Runtime.field(value, 'threshold'));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 1.0), _Runtime.coalesce(_Runtime.field(value, 'edgeWidth'), function():Dynamic return cast 0.05));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 2.0), _Runtime.coalesce(_Runtime.field(value, 'scale'), function():Dynamic return cast 8.0));
-    (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude : LinearColor), (cast _Runtime.field(value, 'edgeColor') : Float)) : LinearColor);
-    WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out : flighthq._internal._Float32Array), (cast (base + 4.0) : Float));
+    (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude), (cast _Runtime.field(value, 'edgeColor') : Float)) : LinearColor);
+    WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out), (cast (base + 4.0) : Float));
   }, contribution: function(modifier:Modifier, _index:Float, context:WgpuModifierCompileContext):WgpuModifierContribution {
     var value:DissolveModifier = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
@@ -418,21 +423,24 @@ class WgpuShadedPrelude {
     procedural = _Runtime.strictEquals(_Runtime.field(value, 'map'), _Runtime.field(_Runtime, 'UNDEFINED'));
     noise = ((cast procedural : Bool) ? (cast 'shadedValueNoise(in.uv * material.modifierData[' + Std.string(base) + '].z)' : Dynamic) : (cast 'textureSample(modifierTexture' + Std.string(_Runtime.callProperty(context, 'acquireTexture', cast ([_Runtime.field(value, 'map')] : Array<Dynamic>))) + ', materialSampler, in.uv).r' : Dynamic));
     return cast { declarations: ((cast procedural : Bool) ? (cast WgpuShadedPrelude.VALUE_NOISE_WGSL__wgpuShadedPrelude : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)), source: '{\n  let dissolveNoise = ' + Std.string(noise) + ';\n  if (dissolveNoise < material.modifierData[' + Std.string(base) + '].x) { discard; }\n  let dissolveEdge = 1.0 - smoothstep(material.modifierData[' + Std.string(base) + '].x, material.modifierData[' + Std.string(base) + '].x + max(material.modifierData[' + Std.string(base) + '].y, 0.0001), dissolveNoise);\n  radiance = mix(radiance, material.modifierData[' + Std.string((base + 1.0)) + '].rgb, dissolveEdge);\n}\n' };
+    return cast _Runtime.UNDEFINED;
   }, getDefineSignature: function(modifier:Modifier):String {
     return cast ((cast _Runtime.strictEquals(_Runtime.field((cast modifier : DissolveModifier), 'map'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 'p' : Dynamic) : (cast 'm' : Dynamic));
+    return cast _Runtime.UNDEFINED;
   }, kind: DissolveModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, textures: function(modifier:Modifier, out:Array<Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>>, offset:Float):Float {
     var map:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
     map = _Runtime.field((cast modifier : DissolveModifier), 'map');
     if ((cast !_Runtime.strictEquals(map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, offset++, map); }
     return cast offset;
-  } };
+    return cast _Runtime.UNDEFINED;
+  } });
 
   @:noCompletion
-  public static final emissiveWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  public static final emissiveWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:EmissiveModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : EmissiveModifier);
-    (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude : LinearColor), (cast _Runtime.field(value, 'color') : Float)) : LinearColor);
-    WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out : flighthq._internal._Float32Array), (cast base : Float));
+    (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude), (cast _Runtime.field(value, 'color') : Float)) : LinearColor);
+    WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out), (cast base : Float));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 3.0), _Runtime.field(value, 'strength'));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), ((cast _Runtime.strictEquals(_Runtime.field(value, 'facing'), (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).AwayFromLight) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(_Runtime.field(value, 'facingSoftness'), function():Dynamic return cast 0.0));
@@ -446,23 +454,26 @@ class WgpuShadedPrelude {
     mask = ((cast _Runtime.strictEquals(_Runtime.field(value, 'mask'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast ' * textureSample(modifierTexture' + Std.string(_Runtime.callProperty(context, 'acquireTexture', cast ([_Runtime.field(value, 'mask')] : Array<Dynamic>))) + ', materialSampler, in.uv).rgb' : Dynamic));
     gated = ((cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'facing'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(value, 'facing'), (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).Ignore) : Bool)) : Bool) ? (cast '' : Dynamic) : (cast '\n  let emissiveLightDir = select(vec3f(0.0, 0.0, 1.0), normalize(-frame.lightDirection.xyz), frame.lightDirection.w > 0.5);\n  let emissiveFacing = dot(normal, emissiveLightDir) * material.modifierData[' + Std.string((base + 1.0)) + '].x;\n  let emissiveSoft = max(material.modifierData[' + Std.string((base + 1.0)) + '].y, 0.0001);\n  emissiveTerm = emissiveTerm * smoothstep(-emissiveSoft, emissiveSoft, emissiveFacing);' : Dynamic));
     return cast { source: '{\n  var emissiveTerm = material.modifierData[' + Std.string(base) + '].rgb * material.modifierData[' + Std.string(base) + '].w' + Std.string(mask) + ';' + Std.string(gated) + '\n  emissive = emissive + emissiveTerm;\n}\n' };
+    return cast _Runtime.UNDEFINED;
   }, getDefineSignature: function(modifier:Modifier):String {
     var value:EmissiveModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : EmissiveModifier);
     return cast '' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(value, 'mask'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast 'm' : Dynamic))) + '' + Std.string(((cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'facing'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(value, 'facing'), (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).Ignore) : Bool)) : Bool) ? (cast '' : Dynamic) : (cast 'g' : Dynamic))) + '';
+    return cast _Runtime.UNDEFINED;
   }, kind: EmissiveModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Emissive, textures: function(modifier:Modifier, out:Array<Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>>, offset:Float):Float {
     var mask:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
     mask = _Runtime.field((cast modifier : EmissiveModifier), 'mask');
     if ((cast !_Runtime.strictEquals(mask, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, offset++, mask); }
     return cast offset;
-  } };
+    return cast _Runtime.UNDEFINED;
+  } });
 
   @:noCompletion
-  public static final envReflectWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  public static final envReflectWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:EnvReflectModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : EnvReflectModifier);
-    (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude : LinearColor), (cast _Runtime.field(value, 'tint') : Float)) : LinearColor);
-    WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out : flighthq._internal._Float32Array), (cast base : Float));
+    (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude), (cast _Runtime.field(value, 'tint') : Float)) : LinearColor);
+    WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out), (cast base : Float));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 3.0), _Runtime.coalesce(_Runtime.field(value, 'intensity'), function():Dynamic return cast 1.0));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(_Runtime.field(value, 'fresnelBias'), function():Dynamic return cast 0.04));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(_Runtime.field(value, 'roughness'), function():Dynamic return cast 0.0));
@@ -470,14 +481,15 @@ class WgpuShadedPrelude {
     var base:Float = cast _Runtime.UNDEFINED;
     base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
     return cast { source: '{\n  let envDirection = reflect(-shadedViewDir, normal);\n  let envMip = clamp(material.modifierData[' + Std.string((base + 1.0)) + '].y, 0.0, 1.0) * max(ibl.params.z, 0.0);\n  let envSample = select(material.modifierData[' + Std.string(base) + '].rgb, textureSampleLevel(iblPrefiltered, iblSampler, envDirection, envMip).rgb, ibl.params.x > 0.5);\n  let envFresnel = material.modifierData[' + Std.string((base + 1.0)) + '].x + (1.0 - material.modifierData[' + Std.string((base + 1.0)) + '].x) * pow(1.0 - max(dot(normal, shadedViewDir), 0.0), 5.0);\n  radiance = radiance + envSample * material.modifierData[' + Std.string(base) + '].rgb * (material.modifierData[' + Std.string(base) + '].w * envFresnel);\n}\n' };
-  }, kind: EnvReflectModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect };
+    return cast _Runtime.UNDEFINED;
+  }, kind: EnvReflectModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect });
 
   @:noCompletion
-  public static final fogWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  public static final fogWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:FogModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : FogModifier);
-    (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude : LinearColor), (cast _Runtime.field(value, 'color') : Float)) : LinearColor);
-    WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out : flighthq._internal._Float32Array), (cast base : Float));
+    (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude), (cast _Runtime.field(value, 'color') : Float)) : LinearColor);
+    WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out), (cast base : Float));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(_Runtime.field(value, 'density'), function():Dynamic return cast 1.0));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(_Runtime.field(value, 'near'), function():Dynamic return cast 0.0));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 6.0), _Runtime.coalesce(_Runtime.field(value, 'far'), function():Dynamic return cast 1.0));
@@ -491,16 +503,18 @@ class WgpuShadedPrelude {
     distance = 'length(frame.cameraPosition.xyz - in.worldPosition)';
     factor = ((cast _Runtime.strictEquals(_Runtime.field(value, 'mode'), (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Exponential) : Bool) ? (cast '1.0 - exp(-material.modifierData[' + Std.string((base + 1.0)) + '].x * ' + Std.string(distance) + ')' : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'mode'), (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Exponential2) : Bool) ? (cast '1.0 - exp(-pow(material.modifierData[' + Std.string((base + 1.0)) + '].x * ' + Std.string(distance) + ', 2.0))' : Dynamic) : (cast 'clamp((' + Std.string(distance) + ' - material.modifierData[' + Std.string((base + 1.0)) + '].y) / max(material.modifierData[' + Std.string((base + 1.0)) + '].z - material.modifierData[' + Std.string((base + 1.0)) + '].y, 0.0001), 0.0, 1.0)' : Dynamic)) : Dynamic));
     return cast { source: 'radiance = mix(radiance, material.modifierData[' + Std.string(base) + '].rgb, clamp(' + Std.string(factor) + ', 0.0, 1.0));\n' };
+    return cast _Runtime.UNDEFINED;
   }, getDefineSignature: function(modifier:Modifier):String {
     return cast _Runtime.coalesce(_Runtime.field((cast modifier : FogModifier), 'mode'), function():Dynamic return cast (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Linear);
-  }, kind: FogModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect };
+    return cast _Runtime.UNDEFINED;
+  }, kind: FogModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect });
 
   @:noCompletion
-  public static final rimWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  public static final rimWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:RimModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : RimModifier);
-    (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude : LinearColor), (cast _Runtime.field(value, 'color') : Float)) : LinearColor);
-    WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out : flighthq._internal._Float32Array), (cast base : Float));
+    (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude), (cast _Runtime.field(value, 'color') : Float)) : LinearColor);
+    WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out), (cast base : Float));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 3.0), _Runtime.coalesce(_Runtime.field(value, 'power'), function():Dynamic return cast 3.0));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(_Runtime.field(value, 'intensity'), function():Dynamic return cast 1.0));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(_Runtime.field(value, 'bias'), function():Dynamic return cast 0.0));
@@ -508,10 +522,11 @@ class WgpuShadedPrelude {
     var base:Float = cast _Runtime.UNDEFINED;
     base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
     return cast { source: '{\n  let rimFactor = clamp(material.modifierData[' + Std.string((base + 1.0)) + '].y + material.modifierData[' + Std.string((base + 1.0)) + '].x * pow(1.0 - max(dot(normal, shadedViewDir), 0.0), max(material.modifierData[' + Std.string(base) + '].w, 0.0001)), 0.0, 1.0);\n  radiance = radiance + material.modifierData[' + Std.string(base) + '].rgb * rimFactor;\n}\n' };
-  }, kind: RimModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect };
+    return cast _Runtime.UNDEFINED;
+  }, kind: RimModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect });
 
   @:noCompletion
-  public static final toonWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  public static final toonWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:ToonModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : ToonModifier);
     flighthq._internal._StaticIndex.writeFloat32Array(out, base, HxMath.max(_Runtime.field(value, 'steps'), 2.0));
@@ -520,21 +535,22 @@ class WgpuShadedPrelude {
     var base:Float = cast _Runtime.UNDEFINED;
     base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
     return cast { source: '{\n  let toonLum = dot(radiance, vec3f(0.2126, 0.7152, 0.0722));\n  let toonSteps = max(material.modifierData[' + Std.string(base) + '].x, 2.0);\n  let toonScaled = toonLum * toonSteps;\n  let toonBand = floor(toonScaled);\n  let toonSoft = max(material.modifierData[' + Std.string(base) + '].y, 0.0001);\n  let toonQuant = (toonBand + smoothstep(0.5 - toonSoft, 0.5 + toonSoft, toonScaled - toonBand)) / toonSteps;\n  radiance = radiance * select(1.0, toonQuant / toonLum, toonLum > 0.0001);\n}\n' };
-  }, kind: ToonModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect };
+    return cast _Runtime.UNDEFINED;
+  }, kind: ToonModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect });
 
   @:noCompletion
-  public static final vertexDisplaceWgpuModifierSnippet:WgpuModifierSnippet = { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  public static final vertexDisplaceWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:VertexDisplaceModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : VertexDisplaceModifier);
     flighthq._internal._StaticIndex.writeFloat32Array(out, base, _Runtime.field(value, 'amplitude'));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 1.0), _Runtime.coalesce(_Runtime.field(value, 'frequency'), function():Dynamic return cast 1.0));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 2.0), _Runtime.coalesce(_Runtime.field(value, 'speed'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(({ final __typedStruct3 = _Runtime.field(value, 'axis'); __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.x; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(({ final __typedStruct4 = _Runtime.field(value, 'axis'); __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.y; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 6.0), _Runtime.coalesce(({ final __typedStruct5 = _Runtime.field(value, 'axis'); __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.z; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 8.0), _Runtime.coalesce(({ final __typedStruct6 = _Runtime.field(value, 'direction'); __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.x; }), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 9.0), _Runtime.coalesce(({ final __typedStruct7 = _Runtime.field(value, 'direction'); __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.y; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 10.0), _Runtime.coalesce(({ final __typedStruct8 = _Runtime.field(value, 'direction'); __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.z; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(({ final __typedStruct8 = _Runtime.field(value, 'axis'); __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var x:Float; }).x; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(({ final __typedStruct9 = _Runtime.field(value, 'axis'); __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var y:Float; }).y; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 6.0), _Runtime.coalesce(({ final __typedStruct10 = _Runtime.field(value, 'axis'); __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var z:Float; }).z; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 8.0), _Runtime.coalesce(({ final __typedStruct11 = _Runtime.field(value, 'direction'); __typedStruct11 == null ? _Runtime.UNDEFINED : (cast __typedStruct11 : { var x:Float; }).x; }), function():Dynamic return cast 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 9.0), _Runtime.coalesce(({ final __typedStruct12 = _Runtime.field(value, 'direction'); __typedStruct12 == null ? _Runtime.UNDEFINED : (cast __typedStruct12 : { var y:Float; }).y; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 10.0), _Runtime.coalesce(({ final __typedStruct13 = _Runtime.field(value, 'direction'); __typedStruct13 == null ? _Runtime.UNDEFINED : (cast __typedStruct13 : { var z:Float; }).z; }), function():Dynamic return cast 0.0));
   }, contribution: function(modifier:Modifier, _index:Float, context:WgpuModifierCompileContext):WgpuModifierContribution {
     var value:VertexDisplaceModifier = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
@@ -545,30 +561,33 @@ class WgpuShadedPrelude {
     axis = ((cast _Runtime.strictEquals(_Runtime.field(value, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 'normalize(localNormal)' : Dynamic) : (cast 'normalize(material.modifierData[' + Std.string((base + 1.0)) + '].xyz)' : Dynamic));
     amount = ((cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'source'), (cast VertexDisplaceModifierSourceValue : { var HeightMap:String; var Sine:String; }).HeightMap) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(value, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast 'textureSampleLevel(modifierTexture' + Std.string(_Runtime.callProperty(context, 'acquireTexture', cast ([_Runtime.field(value, 'map')] : Array<Dynamic>))) + ', materialSampler, vertexUv, 0.0).r * material.modifierData[' + Std.string(base) + '].x' : Dynamic) : (cast 'sin(dot(localPosition.xyz, normalize(material.modifierData[' + Std.string((base + 2.0)) + '].xyz)) * material.modifierData[' + Std.string(base) + '].y + material.params.z * material.modifierData[' + Std.string(base) + '].z) * material.modifierData[' + Std.string(base) + '].x' : Dynamic));
     return cast { source: 'localPosition = vec4f(localPosition.xyz + ' + Std.string(axis) + ' * (' + Std.string(amount) + '), 1.0);\n' };
+    return cast _Runtime.UNDEFINED;
   }, getDefineSignature: function(modifier:Modifier):String {
     var value:VertexDisplaceModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : VertexDisplaceModifier);
     return cast '' + Std.string(_Runtime.field(value, 'source')) + '' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(value, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast 'a' : Dynamic))) + '' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(value, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast 'm' : Dynamic))) + '';
+    return cast _Runtime.UNDEFINED;
   }, kind: VertexDisplaceModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Vertex, textures: function(modifier:Modifier, out:Array<Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>>, offset:Float):Float {
     var value:VertexDisplaceModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : VertexDisplaceModifier);
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'source'), (cast VertexDisplaceModifierSourceValue : { var HeightMap:String; var Sine:String; }).HeightMap) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(value, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, offset++, _Runtime.field(value, 'map')); }
     return cast offset;
-  } };
+    return cast _Runtime.UNDEFINED;
+  } });
 
   public static function registerBuiltInWgpuModifierSnippets(state:WgpuRenderState):Void {
-    registerWgpuModifierSnippet((cast state : WgpuRenderState), (cast animatedNormalWgpuModifierSnippet : WgpuModifierSnippet));
-    registerWgpuModifierSnippet((cast state : WgpuRenderState), (cast dissolveWgpuModifierSnippet : WgpuModifierSnippet));
-    registerWgpuModifierSnippet((cast state : WgpuRenderState), (cast emissiveWgpuModifierSnippet : WgpuModifierSnippet));
-    registerWgpuModifierSnippet((cast state : WgpuRenderState), (cast envReflectWgpuModifierSnippet : WgpuModifierSnippet));
-    registerWgpuModifierSnippet((cast state : WgpuRenderState), (cast fogWgpuModifierSnippet : WgpuModifierSnippet));
-    registerWgpuModifierSnippet((cast state : WgpuRenderState), (cast rimWgpuModifierSnippet : WgpuModifierSnippet));
-    registerWgpuModifierSnippet((cast state : WgpuRenderState), (cast toonWgpuModifierSnippet : WgpuModifierSnippet));
-    registerWgpuModifierSnippet((cast state : WgpuRenderState), (cast vertexDisplaceWgpuModifierSnippet : WgpuModifierSnippet));
+    registerWgpuModifierSnippet((cast state), (cast animatedNormalWgpuModifierSnippet));
+    registerWgpuModifierSnippet((cast state), (cast dissolveWgpuModifierSnippet));
+    registerWgpuModifierSnippet((cast state), (cast emissiveWgpuModifierSnippet));
+    registerWgpuModifierSnippet((cast state), (cast envReflectWgpuModifierSnippet));
+    registerWgpuModifierSnippet((cast state), (cast fogWgpuModifierSnippet));
+    registerWgpuModifierSnippet((cast state), (cast rimWgpuModifierSnippet));
+    registerWgpuModifierSnippet((cast state), (cast toonWgpuModifierSnippet));
+    registerWgpuModifierSnippet((cast state), (cast vertexDisplaceWgpuModifierSnippet));
   }
 
   public static function getModifierRegistry__wgpuShadedPrelude(state:WgpuRenderState):ModifierRegistry {
-    return cast _Runtime.coalesce((cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).modifierSnippetRegistry, function():Dynamic return cast WgpuShadedPrelude.EMPTY_MODIFIER_REGISTRY__wgpuShadedPrelude);
+    return cast _Runtime.coalesce((cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).modifierSnippetRegistry, function():Dynamic return cast WgpuShadedPrelude.EMPTY_MODIFIER_REGISTRY__wgpuShadedPrelude);
     return cast null;
   }
 
@@ -584,7 +603,7 @@ class WgpuShadedPrelude {
 
   public static final MODIFIER_FLOATS__wgpuShadedPrelude:Float = 12.0;
 
-  public static final _color__wgpuShadedPrelude:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static final _color__wgpuShadedPrelude:LinearColor = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 
-  public static final EMPTY_MODIFIER_REGISTRY__wgpuShadedPrelude:ModifierRegistry = { definitions: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) };
+  public static final EMPTY_MODIFIER_REGISTRY__wgpuShadedPrelude:ModifierRegistry = (cast { definitions: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) });
 }

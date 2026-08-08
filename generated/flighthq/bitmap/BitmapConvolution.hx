@@ -30,16 +30,16 @@ class BitmapConvolution {
     matrixY = _Runtime.field(__destructure0, 'matrixY');
     if ((cast ((cast ((cast matrixX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast matrixY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution filter matrix dimensions must be positive')); }
     if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution filter matrix does not match its dimensions')); }
-    rawDivisor = _Runtime.coalesce(_Runtime.field(options, 'divisor'), function():Dynamic return cast (cast BitmapConvolution.getConvolutionDivisor__bitmapConvolution((cast matrix : Array<Float>), (cast (matrixX * matrixY) : Float)) : Null<Float>));
+    rawDivisor = _Runtime.coalesce(_Runtime.field(options, 'divisor'), function():Dynamic return cast (cast BitmapConvolution.getConvolutionDivisor__bitmapConvolution((cast matrix), (cast (matrixX * matrixY) : Float)) : Float));
     divisor = ((cast _Runtime.strictEquals(rawDivisor, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast rawDivisor : Dynamic));
     bias = _Runtime.coalesce(_Runtime.field(options, 'bias'), function():Dynamic return cast 0.0);
     edge = _Runtime.coalesce(_Runtime.field(options, 'edge'), function():Dynamic return cast 'clamp');
     preserveAlpha = _Runtime.coalesce(_Runtime.field(options, 'preserveAlpha'), function():Dynamic return cast true);
     offsetX = HxMath.floor((matrixX / 2.0));
     offsetY = HxMath.floor((matrixY / 2.0));
-    bitmapWidth = _Runtime.field(source, 'bitmap').width;
-    bitmapHeight = _Runtime.field(source, 'bitmap').height;
-    data = _Runtime.field(source, 'bitmap').data;
+    bitmapWidth = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
+    bitmapHeight = (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height;
+    data = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {

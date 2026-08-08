@@ -15,7 +15,7 @@ import flighthq.types.ParticleSerializeResult;
 class ParticleDesignerSerialize {
   public static final RAD2DEG__particleDesignerSerialize:Float = (180.0 / HxMath.PI);
 
-  public static function configToDocument__particleDesignerSerialize(config:ParticleEmitterConfig, existing:Dynamic, textureSize:Float):ParticleDesignerDocument {
+  public static function configToDocument__particleDesignerSerialize(config:ParticleEmitterConfig, existing:flighthq._internal._Partial<ParticleDesignerDocument>, textureSize:Float):ParticleDesignerDocument {
     var angleDeg:Float = cast _Runtime.UNDEFINED;
     var startSize:Float = cast _Runtime.UNDEFINED;
     var startVar:Float = cast _Runtime.UNDEFINED;
@@ -45,7 +45,7 @@ class ParticleDesignerSerialize {
       (vx = cast ((config.emitterWidth * 0.5) : Dynamic));
       (vy = cast ((config.emitterHeight * 0.5) : Dynamic));
     } }
-    return cast { maxParticles: config.maxParticles, emitterType: _Runtime.coalesce(_Runtime.field(existing, 'emitterType'), function():Dynamic return cast 0.0), duration: ((cast ((cast ((cast config.duration : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast config.loop : Bool) : Bool)) : Bool) ? (cast config.duration : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'duration'), function():Dynamic return cast -1.0) : Dynamic)), particleLifespan: ((config.lifetimeMin + config.lifetimeMax) * 0.5), particleLifespanVariance: ((config.lifetimeMax - config.lifetimeMin) * 0.5), speed: ((config.speedMin + config.speedMax) * 0.5), speedVariance: ((config.speedMax - config.speedMin) * 0.5), angle: angleDeg, angleVariance: (config.spread * ParticleDesignerSerialize.RAD2DEG__particleDesignerSerialize), gravityx: config.gravityX, gravityy: config.gravityY, sourcePositionVariancex: vx, sourcePositionVariancey: vy, startParticleSize: startSize, startParticleSizeVariance: startVar, finishParticleSize: finishSize, finishParticleSizeVariance: _Runtime.coalesce(_Runtime.field(existing, 'finishParticleSizeVariance'), function():Dynamic return cast 0.0), startColorRed: config.colorStartR, startColorGreen: config.colorStartG, startColorBlue: config.colorStartB, startColorAlpha: config.alphaStart, startColorVarianceRed: ((cast !_Runtime.strictEquals(config.colorStartVarianceR, 0.0) : Bool) ? (cast config.colorStartVarianceR : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'startColorVarianceRed'), function():Dynamic return cast 0.0) : Dynamic)), startColorVarianceGreen: ((cast !_Runtime.strictEquals(config.colorStartVarianceG, 0.0) : Bool) ? (cast config.colorStartVarianceG : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'startColorVarianceGreen'), function():Dynamic return cast 0.0) : Dynamic)), startColorVarianceBlue: ((cast !_Runtime.strictEquals(config.colorStartVarianceB, 0.0) : Bool) ? (cast config.colorStartVarianceB : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'startColorVarianceBlue'), function():Dynamic return cast 0.0) : Dynamic)), startColorVarianceAlpha: _Runtime.coalesce(_Runtime.field(existing, 'startColorVarianceAlpha'), function():Dynamic return cast 0.0), finishColorRed: config.colorEndR, finishColorGreen: config.colorEndG, finishColorBlue: config.colorEndB, finishColorAlpha: config.alphaEnd, finishColorVarianceRed: ((cast !_Runtime.strictEquals(config.colorEndVarianceR, 0.0) : Bool) ? (cast config.colorEndVarianceR : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'finishColorVarianceRed'), function():Dynamic return cast 0.0) : Dynamic)), finishColorVarianceGreen: ((cast !_Runtime.strictEquals(config.colorEndVarianceG, 0.0) : Bool) ? (cast config.colorEndVarianceG : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'finishColorVarianceGreen'), function():Dynamic return cast 0.0) : Dynamic)), finishColorVarianceBlue: ((cast !_Runtime.strictEquals(config.colorEndVarianceB, 0.0) : Bool) ? (cast config.colorEndVarianceB : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'finishColorVarianceBlue'), function():Dynamic return cast 0.0) : Dynamic)), finishColorVarianceAlpha: _Runtime.coalesce(_Runtime.field(existing, 'finishColorVarianceAlpha'), function():Dynamic return cast 0.0), rotationStart: rotStart, rotationStartVariance: rotVar, rotationEnd: rotStart, rotationEndVariance: rotVar, maxRadius: _Runtime.coalesce(_Runtime.field(existing, 'maxRadius'), function():Dynamic return cast 0.0), maxRadiusVariance: _Runtime.coalesce(_Runtime.field(existing, 'maxRadiusVariance'), function():Dynamic return cast 0.0), minRadius: _Runtime.coalesce(_Runtime.field(existing, 'minRadius'), function():Dynamic return cast 0.0), minRadiusVariance: _Runtime.coalesce(_Runtime.field(existing, 'minRadiusVariance'), function():Dynamic return cast 0.0), rotatePerSecond: _Runtime.coalesce(_Runtime.field(existing, 'rotatePerSecond'), function():Dynamic return cast 0.0), rotatePerSecondVariance: _Runtime.coalesce(_Runtime.field(existing, 'rotatePerSecondVariance'), function():Dynamic return cast 0.0), blendFuncSource: (cast ParticleDesignerSerialize.blendModeToSrc__particleDesignerSerialize((cast config.blendMode : Null<String>), (cast _Runtime.coalesce(_Runtime.field(existing, 'blendFuncSource'), function():Dynamic return cast 770.0) : Float)) : Float), blendFuncDestination: (cast ParticleDesignerSerialize.blendModeToDst__particleDesignerSerialize((cast config.blendMode : Null<String>), (cast _Runtime.coalesce(_Runtime.field(existing, 'blendFuncDestination'), function():Dynamic return cast 771.0) : Float)) : Float), textureFileName: _Runtime.coalesce(_Runtime.field(existing, 'textureFileName'), function():Dynamic return cast '') };
+    return cast { maxParticles: config.maxParticles, emitterType: _Runtime.coalesce(_Runtime.field(existing, 'emitterType'), function():Dynamic return cast 0.0), duration: ((cast ((cast ((cast config.duration : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast config.loop : Bool) : Bool)) : Bool) ? (cast config.duration : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'duration'), function():Dynamic return cast -1.0) : Dynamic)), particleLifespan: ((config.lifetimeMin + config.lifetimeMax) * 0.5), particleLifespanVariance: ((config.lifetimeMax - config.lifetimeMin) * 0.5), speed: ((config.speedMin + config.speedMax) * 0.5), speedVariance: ((config.speedMax - config.speedMin) * 0.5), angle: angleDeg, angleVariance: (config.spread * ParticleDesignerSerialize.RAD2DEG__particleDesignerSerialize), gravityx: config.gravityX, gravityy: config.gravityY, sourcePositionVariancex: vx, sourcePositionVariancey: vy, startParticleSize: startSize, startParticleSizeVariance: startVar, finishParticleSize: finishSize, finishParticleSizeVariance: _Runtime.coalesce(_Runtime.field(existing, 'finishParticleSizeVariance'), function():Dynamic return cast 0.0), startColorRed: config.colorStartR, startColorGreen: config.colorStartG, startColorBlue: config.colorStartB, startColorAlpha: config.alphaStart, startColorVarianceRed: ((cast !_Runtime.strictEquals(config.colorStartVarianceR, 0.0) : Bool) ? (cast config.colorStartVarianceR : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'startColorVarianceRed'), function():Dynamic return cast 0.0) : Dynamic)), startColorVarianceGreen: ((cast !_Runtime.strictEquals(config.colorStartVarianceG, 0.0) : Bool) ? (cast config.colorStartVarianceG : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'startColorVarianceGreen'), function():Dynamic return cast 0.0) : Dynamic)), startColorVarianceBlue: ((cast !_Runtime.strictEquals(config.colorStartVarianceB, 0.0) : Bool) ? (cast config.colorStartVarianceB : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'startColorVarianceBlue'), function():Dynamic return cast 0.0) : Dynamic)), startColorVarianceAlpha: _Runtime.coalesce(_Runtime.field(existing, 'startColorVarianceAlpha'), function():Dynamic return cast 0.0), finishColorRed: config.colorEndR, finishColorGreen: config.colorEndG, finishColorBlue: config.colorEndB, finishColorAlpha: config.alphaEnd, finishColorVarianceRed: ((cast !_Runtime.strictEquals(config.colorEndVarianceR, 0.0) : Bool) ? (cast config.colorEndVarianceR : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'finishColorVarianceRed'), function():Dynamic return cast 0.0) : Dynamic)), finishColorVarianceGreen: ((cast !_Runtime.strictEquals(config.colorEndVarianceG, 0.0) : Bool) ? (cast config.colorEndVarianceG : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'finishColorVarianceGreen'), function():Dynamic return cast 0.0) : Dynamic)), finishColorVarianceBlue: ((cast !_Runtime.strictEquals(config.colorEndVarianceB, 0.0) : Bool) ? (cast config.colorEndVarianceB : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'finishColorVarianceBlue'), function():Dynamic return cast 0.0) : Dynamic)), finishColorVarianceAlpha: _Runtime.coalesce(_Runtime.field(existing, 'finishColorVarianceAlpha'), function():Dynamic return cast 0.0), rotationStart: rotStart, rotationStartVariance: rotVar, rotationEnd: rotStart, rotationEndVariance: rotVar, maxRadius: _Runtime.coalesce(_Runtime.field(existing, 'maxRadius'), function():Dynamic return cast 0.0), maxRadiusVariance: _Runtime.coalesce(_Runtime.field(existing, 'maxRadiusVariance'), function():Dynamic return cast 0.0), minRadius: _Runtime.coalesce(_Runtime.field(existing, 'minRadius'), function():Dynamic return cast 0.0), minRadiusVariance: _Runtime.coalesce(_Runtime.field(existing, 'minRadiusVariance'), function():Dynamic return cast 0.0), rotatePerSecond: _Runtime.coalesce(_Runtime.field(existing, 'rotatePerSecond'), function():Dynamic return cast 0.0), rotatePerSecondVariance: _Runtime.coalesce(_Runtime.field(existing, 'rotatePerSecondVariance'), function():Dynamic return cast 0.0), blendFuncSource: (cast ParticleDesignerSerialize.blendModeToSrc__particleDesignerSerialize((cast config.blendMode), (cast _Runtime.coalesce(_Runtime.field(existing, 'blendFuncSource'), function():Dynamic return cast 770.0) : Float)) : Float), blendFuncDestination: (cast ParticleDesignerSerialize.blendModeToDst__particleDesignerSerialize((cast config.blendMode), (cast _Runtime.coalesce(_Runtime.field(existing, 'blendFuncDestination'), function():Dynamic return cast 771.0) : Float)) : Float), textureFileName: _Runtime.coalesce(_Runtime.field(existing, 'textureFileName'), function():Dynamic return cast '') };
     return cast null;
   }
 
@@ -61,54 +61,54 @@ class ParticleDesignerSerialize {
       } else {
         _Runtime.callProperty(lines, 'push', cast (['	<string>' + Std.string((cast ParticleDesignerSerialize.escapeXml__particleDesignerSerialize((cast value : String)) : String)) + '</string>'] : Array<Dynamic>));
       } }
-    } : String->flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>->Void);
-    lines = cast (['<?xml version="1.0" encoding="utf-8"?>', '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">', '<plist version="1.0">', '<dict>'] : Array<Dynamic>);
-    kv((cast 'maxParticles' : String), (cast doc.maxParticles : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'emitterType' : String), (cast doc.emitterType : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'duration' : String), (cast doc.duration : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'particleLifespan' : String), (cast doc.particleLifespan : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'particleLifespanVariance' : String), (cast doc.particleLifespanVariance : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'speed' : String), (cast doc.speed : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'speedVariance' : String), (cast doc.speedVariance : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'angle' : String), (cast doc.angle : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'angleVariance' : String), (cast doc.angleVariance : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'gravityx' : String), (cast doc.gravityx : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'gravityy' : String), (cast doc.gravityy : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'sourcePositionVariancex' : String), (cast doc.sourcePositionVariancex : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'sourcePositionVariancey' : String), (cast doc.sourcePositionVariancey : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'startParticleSize' : String), (cast doc.startParticleSize : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'startParticleSizeVariance' : String), (cast doc.startParticleSizeVariance : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'finishParticleSize' : String), (cast doc.finishParticleSize : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'finishParticleSizeVariance' : String), (cast doc.finishParticleSizeVariance : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'startColorRed' : String), (cast doc.startColorRed : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'startColorGreen' : String), (cast doc.startColorGreen : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'startColorBlue' : String), (cast doc.startColorBlue : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'startColorAlpha' : String), (cast doc.startColorAlpha : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'startColorVarianceRed' : String), (cast doc.startColorVarianceRed : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'startColorVarianceGreen' : String), (cast doc.startColorVarianceGreen : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'startColorVarianceBlue' : String), (cast doc.startColorVarianceBlue : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'startColorVarianceAlpha' : String), (cast doc.startColorVarianceAlpha : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'finishColorRed' : String), (cast doc.finishColorRed : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'finishColorGreen' : String), (cast doc.finishColorGreen : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'finishColorBlue' : String), (cast doc.finishColorBlue : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'finishColorAlpha' : String), (cast doc.finishColorAlpha : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'finishColorVarianceRed' : String), (cast doc.finishColorVarianceRed : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'finishColorVarianceGreen' : String), (cast doc.finishColorVarianceGreen : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'finishColorVarianceBlue' : String), (cast doc.finishColorVarianceBlue : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'finishColorVarianceAlpha' : String), (cast doc.finishColorVarianceAlpha : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'rotationStart' : String), (cast doc.rotationStart : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'rotationStartVariance' : String), (cast doc.rotationStartVariance : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'rotationEnd' : String), (cast doc.rotationEnd : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'rotationEndVariance' : String), (cast doc.rotationEndVariance : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'maxRadius' : String), (cast doc.maxRadius : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'maxRadiusVariance' : String), (cast doc.maxRadiusVariance : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'minRadius' : String), (cast doc.minRadius : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'minRadiusVariance' : String), (cast doc.minRadiusVariance : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'rotatePerSecond' : String), (cast doc.rotatePerSecond : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'rotatePerSecondVariance' : String), (cast doc.rotatePerSecondVariance : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'blendFuncSource' : String), (cast doc.blendFuncSource : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'blendFuncDestination' : String), (cast doc.blendFuncDestination : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
-    kv((cast 'textureFileName' : String), (cast doc.textureFileName : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>));
+    });
+    lines = (cast cast (['<?xml version="1.0" encoding="utf-8"?>', '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">', '<plist version="1.0">', '<dict>'] : Array<Dynamic>));
+    kv((cast 'maxParticles' : String), (cast doc.maxParticles));
+    kv((cast 'emitterType' : String), (cast doc.emitterType));
+    kv((cast 'duration' : String), (cast doc.duration));
+    kv((cast 'particleLifespan' : String), (cast doc.particleLifespan));
+    kv((cast 'particleLifespanVariance' : String), (cast doc.particleLifespanVariance));
+    kv((cast 'speed' : String), (cast doc.speed));
+    kv((cast 'speedVariance' : String), (cast doc.speedVariance));
+    kv((cast 'angle' : String), (cast doc.angle));
+    kv((cast 'angleVariance' : String), (cast doc.angleVariance));
+    kv((cast 'gravityx' : String), (cast doc.gravityx));
+    kv((cast 'gravityy' : String), (cast doc.gravityy));
+    kv((cast 'sourcePositionVariancex' : String), (cast doc.sourcePositionVariancex));
+    kv((cast 'sourcePositionVariancey' : String), (cast doc.sourcePositionVariancey));
+    kv((cast 'startParticleSize' : String), (cast doc.startParticleSize));
+    kv((cast 'startParticleSizeVariance' : String), (cast doc.startParticleSizeVariance));
+    kv((cast 'finishParticleSize' : String), (cast doc.finishParticleSize));
+    kv((cast 'finishParticleSizeVariance' : String), (cast doc.finishParticleSizeVariance));
+    kv((cast 'startColorRed' : String), (cast doc.startColorRed));
+    kv((cast 'startColorGreen' : String), (cast doc.startColorGreen));
+    kv((cast 'startColorBlue' : String), (cast doc.startColorBlue));
+    kv((cast 'startColorAlpha' : String), (cast doc.startColorAlpha));
+    kv((cast 'startColorVarianceRed' : String), (cast doc.startColorVarianceRed));
+    kv((cast 'startColorVarianceGreen' : String), (cast doc.startColorVarianceGreen));
+    kv((cast 'startColorVarianceBlue' : String), (cast doc.startColorVarianceBlue));
+    kv((cast 'startColorVarianceAlpha' : String), (cast doc.startColorVarianceAlpha));
+    kv((cast 'finishColorRed' : String), (cast doc.finishColorRed));
+    kv((cast 'finishColorGreen' : String), (cast doc.finishColorGreen));
+    kv((cast 'finishColorBlue' : String), (cast doc.finishColorBlue));
+    kv((cast 'finishColorAlpha' : String), (cast doc.finishColorAlpha));
+    kv((cast 'finishColorVarianceRed' : String), (cast doc.finishColorVarianceRed));
+    kv((cast 'finishColorVarianceGreen' : String), (cast doc.finishColorVarianceGreen));
+    kv((cast 'finishColorVarianceBlue' : String), (cast doc.finishColorVarianceBlue));
+    kv((cast 'finishColorVarianceAlpha' : String), (cast doc.finishColorVarianceAlpha));
+    kv((cast 'rotationStart' : String), (cast doc.rotationStart));
+    kv((cast 'rotationStartVariance' : String), (cast doc.rotationStartVariance));
+    kv((cast 'rotationEnd' : String), (cast doc.rotationEnd));
+    kv((cast 'rotationEndVariance' : String), (cast doc.rotationEndVariance));
+    kv((cast 'maxRadius' : String), (cast doc.maxRadius));
+    kv((cast 'maxRadiusVariance' : String), (cast doc.maxRadiusVariance));
+    kv((cast 'minRadius' : String), (cast doc.minRadius));
+    kv((cast 'minRadiusVariance' : String), (cast doc.minRadiusVariance));
+    kv((cast 'rotatePerSecond' : String), (cast doc.rotatePerSecond));
+    kv((cast 'rotatePerSecondVariance' : String), (cast doc.rotatePerSecondVariance));
+    kv((cast 'blendFuncSource' : String), (cast doc.blendFuncSource));
+    kv((cast 'blendFuncDestination' : String), (cast doc.blendFuncDestination));
+    kv((cast 'textureFileName' : String), (cast doc.textureFileName));
     _Runtime.callProperty(lines, 'push', cast (['</dict>'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['</plist>'] : Array<Dynamic>));
     return cast _Runtime.join(lines, '\n');
@@ -134,27 +134,27 @@ class ParticleDesignerSerialize {
     return cast null;
   }
 
-  public static function serializeParticleDesignerPlist(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):String {
+  public static function serializeParticleDesignerPlist(config:ParticleEmitterConfig, ?existing:flighthq._internal._Partial<ParticleDesignerDocument>, ?options:ParticleDesignerSerializeOptions):String {
     var textureSize:Float = cast _Runtime.UNDEFINED;
     var doc:ParticleDesignerDocument = cast _Runtime.UNDEFINED;
     textureSize = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.textureSize; }), function():Dynamic return cast 1.0);
-    doc = (cast ParticleDesignerSerialize.configToDocument__particleDesignerSerialize((cast config : ParticleEmitterConfig), (cast _Runtime.coalesce(existing, function():Dynamic return cast {  }) : flighthq._internal._Any), (cast textureSize : Float)) : ParticleDesignerDocument);
-    return cast (cast ParticleDesignerSerialize.documentToPlist__particleDesignerSerialize((cast doc : ParticleDesignerDocument)) : String);
+    doc = (cast ParticleDesignerSerialize.configToDocument__particleDesignerSerialize((cast config), (cast _Runtime.coalesce(existing, function():Dynamic return cast {  }) : flighthq._internal._Any), (cast textureSize : Float)) : ParticleDesignerDocument);
+    return cast (cast ParticleDesignerSerialize.documentToPlist__particleDesignerSerialize((cast doc)) : String);
     return cast null;
   }
 
-  public static function serializeParticleDesignerPlistDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:ParticleDesignerSerializeOptions):ParticleSerializeResult {
+  public static function serializeParticleDesignerPlistDocument(config:ParticleEmitterConfig, ?existing:flighthq._internal._Partial<ParticleDesignerDocument>, ?options:ParticleDesignerSerializeOptions):ParticleSerializeResult {
     var text:String = cast _Runtime.UNDEFINED;
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
-    text = (cast serializeParticleDesignerPlist((cast config : ParticleEmitterConfig), (cast existing : Null<flighthq._internal._Any>), (cast options : Null<ParticleDesignerSerializeOptions>)) : String);
-    warnings = (cast ParticleDesignerSerialize.collectParticleDesignerSerializeWarnings__particleDesignerSerialize((cast config : ParticleEmitterConfig)) : Array<String>);
+    text = (cast serializeParticleDesignerPlist((cast config), (cast existing), (cast options)) : String);
+    warnings = (cast ParticleDesignerSerialize.collectParticleDesignerSerializeWarnings__particleDesignerSerialize((cast config)) : Array<String>);
     return cast { text: text, warnings: warnings };
     return cast null;
   }
 
   public static function collectParticleDesignerSerializeWarnings__particleDesignerSerialize(config:ParticleEmitterConfig):Array<String> {
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
-    warnings = cast ([] : Array<Dynamic>);
+    warnings = (cast cast ([] : Array<Dynamic>));
     if ((cast ((cast ((cast !_Runtime.strictEquals(config.blendMode, null) : Bool) && (cast !_Runtime.strictEquals(config.blendMode, 'add') : Bool)) : Bool) && (cast !_Runtime.strictEquals(config.blendMode, 'normal') : Bool)) : Bool)) {
       _Runtime.callProperty(warnings, 'push', cast (['Blend mode \'' + Std.string(config.blendMode) + '\' has no Particle Designer equivalent and was approximated as \'normal\''] : Array<Dynamic>));
     }

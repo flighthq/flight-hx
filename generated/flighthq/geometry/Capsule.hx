@@ -7,13 +7,14 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Capsule;
 import flighthq.types.Capsule.CapsuleLike;
+import flighthq.types.Entity;
 import flighthq.types.Ray3D.Ray3DLike;
 import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
 
 class Capsule {
   public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):flighthq.types.Capsule {
-    return cast (cast createEntity((cast { endX: endX, endY: endY, endZ: endZ, radius: radius, startX: startX, startY: startY, startZ: startZ } : Null<{ var endX:Float; var endY:Float; var endZ:Float; var radius:Float; var startX:Float; var startY:Float; var startZ:Float; }>)) : flighthq.types.Capsule);
+    return cast (cast createEntity((cast { endX: endX, endY: endY, endZ: endZ, radius: radius, startX: startX, startY: startY, startZ: startZ })) : { >Entity, var endX:Float; var endY:Float; var endZ:Float; var radius:Float; var startX:Float; var startY:Float; var startZ:Float; });
     return cast null;
   }
 
@@ -116,12 +117,12 @@ class Capsule {
     var qc:Float = cast _Runtime.UNDEFINED;
     var tA:Float = cast _Runtime.UNDEFINED;
     var tB:Float = cast _Runtime.UNDEFINED;
-    ox = ray.origin.x;
-    oy = ray.origin.y;
-    oz = ray.origin.z;
-    dx = ray.direction.x;
-    dy = ray.direction.y;
-    dz = ray.direction.z;
+    ox = (cast ray.origin : { var x:Float; }).x;
+    oy = (cast ray.origin : { var y:Float; }).y;
+    oz = (cast ray.origin : { var z:Float; }).z;
+    dx = (cast ray.direction : { var x:Float; }).x;
+    dy = (cast ray.direction : { var y:Float; }).y;
+    dz = (cast ray.direction : { var z:Float; }).z;
     ax = capsule.startX;
     ay = capsule.startY;
     az = capsule.startZ;
@@ -158,7 +159,8 @@ class Capsule {
       if ((cast ((cast t1 : Float) >= (cast 0.0 : Float)) : Bool)) { return cast t1; }
       t2 = ((-b + sqrtD) / lenD2);
       return cast ((cast ((cast t2 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast -1.0 : Dynamic));
-    } : Float->Float->Float->Float);
+      return cast _Runtime.UNDEFINED;
+    });
     if ((cast ((cast abLen2 : Float) < (cast 1e-20 : Float)) : Bool)) { return cast (cast sphereHit((cast ax : Float), (cast ay : Float), (cast az : Float)) : Float); }
     tBest = -1.0;
     invAb2 = (1.0 / abLen2);
@@ -215,7 +217,7 @@ class Capsule {
     var dist2:Float = cast _Runtime.UNDEFINED;
     var sumR:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast capsule.radius : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
-    dist2 = (cast Capsule.pointToSegmentDistanceSq__capsule((cast sphere.center.x : Float), (cast sphere.center.y : Float), (cast sphere.center.z : Float), (cast capsule.startX : Float), (cast capsule.startY : Float), (cast capsule.startZ : Float), (cast capsule.endX : Float), (cast capsule.endY : Float), (cast capsule.endZ : Float)) : Float);
+    dist2 = (cast Capsule.pointToSegmentDistanceSq__capsule((cast (cast sphere.center : { var x:Float; }).x : Float), (cast (cast sphere.center : { var y:Float; }).y : Float), (cast (cast sphere.center : { var z:Float; }).z : Float), (cast capsule.startX : Float), (cast capsule.startY : Float), (cast capsule.startZ : Float), (cast capsule.endX : Float), (cast capsule.endY : Float), (cast capsule.endZ : Float)) : Float);
     sumR = (capsule.radius + sphere.radius);
     return cast ((cast dist2 : Float) <= (cast (sumR * sumR) : Float));
     return cast null;

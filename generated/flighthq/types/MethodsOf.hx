@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef MethodsOf<T> = Dynamic;
+typedef MethodsOf<T> = flighthq._internal._Mapped<flighthq._internal._Any, flighthq._internal._IndexedAccess<T, flighthq._internal._Infer>>;

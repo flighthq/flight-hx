@@ -13,7 +13,7 @@ class AudioDecoderRegistry {
   }
 
   public static function getAudioDecoderMimeTypes():Array<String> {
-    return cast _Runtime.toArray(((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map<String, AudioDecoder>).keys()));
+    return cast (cast _Runtime.toArray(((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map<String, AudioDecoder>).keys())) : Array<String>);
     return cast null;
   }
 
@@ -23,7 +23,7 @@ class AudioDecoderRegistry {
   }
 
   public static function registerAudioDecoder(mimeType:String, decoder:AudioDecoder):Void {
-    ((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map<String, AudioDecoder>).set((cast getAudioMimeTypeEssence((cast mimeType : String)) : String), decoder));
+    ((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map<String, AudioDecoder>).set((cast getAudioMimeTypeEssence((cast mimeType : String)) : String), (cast decoder)));
   }
 
   public static function unregisterAudioDecoder(mimeType:String):Void {

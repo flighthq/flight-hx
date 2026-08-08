@@ -12,7 +12,9 @@ import flighthq.types.GlMatcapProgram;
 import flighthq.types.GlMatcapProgram.GlMatcapDefineKey;
 import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.Texture;
+import flighthq.types.Texture.TextureLike;
 
 class GlMatcapPrelude {
   @:noCompletion
@@ -23,7 +25,7 @@ class GlMatcapPrelude {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), alphaCutoff);
     if ((cast !_Runtime.strictEquals(matcap, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
-      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), matcap, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locMatcap'), 0.0); }
+      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast matcap), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locMatcap'), 0.0); }
     }
   }
 
@@ -36,26 +38,26 @@ class GlMatcapPrelude {
   @:noCompletion
   public static function compileGlMatcapProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlMatcapDefineKey):GlMatcapProgram {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
-    program = (cast compileGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast getGlMatcapVertexSourceForKey((cast key : GlMatcapDefineKey)) : String) : String), (cast (cast getGlMatcapFragmentSourceForKey((cast key : GlMatcapDefineKey)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
+    program = (cast compileGlProgram((cast gl), (cast (cast getGlMatcapVertexSourceForKey((cast key)) : String) : String), (cast (cast getGlMatcapFragmentSourceForKey((cast key)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff'), locMatcap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matcap'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix'), locTint: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_tint'), locView: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_view'), locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
 
   @:noCompletion
   public static function ensureGlMatcapProgram(state:GlRenderState, key:GlMatcapDefineKey):GlMatcapProgram {
-    return cast (cast ensureGlScene3DProgram((cast state : GlRenderState), (cast 'matcap:' + Std.string((cast buildGlMatcapDefineKey((cast key : GlMatcapDefineKey)) : String)) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlMatcapProgram return (cast compileGlMatcapProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast key : GlMatcapDefineKey)) : GlMatcapProgram) : flighthq._internal.dom.WebGL2RenderingContext->GlMatcapProgram)) : GlMatcapProgram);
+    return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlMatcapProgram)->GlMatcapProgram)((cast state), (cast 'matcap:' + Std.string((cast buildGlMatcapDefineKey((cast key)) : String)) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlMatcapProgram return (cast compileGlMatcapProgram((cast gl), (cast key)) : GlMatcapProgram))) : GlMatcapProgram);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlMatcapFragmentSourceForKey(key:GlMatcapDefineKey):String {
-    return cast ((cast GlMatcapPrelude.buildDefineSource__glMatcapPrelude((cast key : GlMatcapDefineKey)) : String) + GlMatcapPrelude.MATCAP_FRAGMENT_BODY__glMatcapPrelude);
+    return cast ((cast GlMatcapPrelude.buildDefineSource__glMatcapPrelude((cast key)) : String) + GlMatcapPrelude.MATCAP_FRAGMENT_BODY__glMatcapPrelude);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlMatcapVertexSourceForKey(key:GlMatcapDefineKey):String {
-    return cast ((cast GlMatcapPrelude.buildDefineSource__glMatcapPrelude((cast key : GlMatcapDefineKey)) : String) + GlMatcapPrelude.MATCAP_VERTEX_BODY__glMatcapPrelude);
+    return cast ((cast GlMatcapPrelude.buildDefineSource__glMatcapPrelude((cast key)) : String) + GlMatcapPrelude.MATCAP_VERTEX_BODY__glMatcapPrelude);
     return cast null;
   }
 

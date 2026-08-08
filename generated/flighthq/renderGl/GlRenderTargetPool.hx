@@ -24,25 +24,25 @@ class GlRenderTargetPool {
   public static function acquireGlRenderTarget(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy = 'preferred'):Null<GlRenderTarget> {
     var requested:ResolvedRenderTargetDescriptor = cast _Runtime.UNDEFINED;
     var effective:Null<RenderTargetAxes> = cast _Runtime.UNDEFINED;
-    requested = (cast resolveRenderTargetDescriptor((cast descriptor : RenderTargetDescriptor)) : ResolvedRenderTargetDescriptor);
-    effective = (cast resolveGlRenderTargetAxes((cast state : GlRenderState), (cast requested : RenderTargetDescriptor), (cast formatPolicy : RenderTargetFormatPolicy)) : Null<RenderTargetAxes>);
+    requested = (cast resolveRenderTargetDescriptor((cast descriptor)) : ResolvedRenderTargetDescriptor);
+    effective = (cast (cast resolveGlRenderTargetAxes : GlRenderState->RenderTargetDescriptor->RenderTargetFormatPolicy->Null<RenderTargetAxes>)((cast state), (cast requested), (cast formatPolicy)) : Null<RenderTargetAxes>);
     if ((cast !_Runtime.truthy(effective) : Bool)) { return cast null; }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, 'length') : Float)) : Bool)) {
         var candidate:GlRenderTarget = flighthq._internal._StaticIndex.readArray((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, i);
-        if ((cast (cast GlRenderTargetPool.matchesGlRenderTargetAxes__glRenderTargetPool((cast candidate : GlRenderTarget), (cast effective : RenderTargetAxes)) : Bool) : Bool)) {
+        if ((cast (cast GlRenderTargetPool.matchesGlRenderTargetAxes__glRenderTargetPool((cast candidate), (cast effective)) : Bool) : Bool)) {
           _Runtime.splice((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, Std.int(i), Std.int(1.0), []);
           ((cast candidate : GlRenderTarget).requestedAxes = { width: (cast requested : ResolvedRenderTargetDescriptor).width, height: (cast requested : ResolvedRenderTargetDescriptor).height, format: (cast requested : ResolvedRenderTargetDescriptor).format, colorAttachments: (cast requested : ResolvedRenderTargetDescriptor).colorAttachments, colorFormats: _Runtime.concatArrays([_Runtime.toArray((cast requested : ResolvedRenderTargetDescriptor).colorFormats)]), sampleCount: (cast requested : ResolvedRenderTargetDescriptor).sampleCount, depth: (cast requested : ResolvedRenderTargetDescriptor).depth, colorSpace: (cast requested : ResolvedRenderTargetDescriptor).colorSpace });
           ((cast candidate : GlRenderTarget).clearColors = _Runtime.concatArrays([_Runtime.toArray((cast requested : ResolvedRenderTargetDescriptor).clearColors)]));
           ((cast candidate : GlRenderTarget).clearDepth = (cast requested : ResolvedRenderTargetDescriptor).clearDepth);
-          clearGlRenderTarget((cast state : GlRenderState), (cast candidate : GlRenderTarget));
+          clearGlRenderTarget((cast state), (cast candidate));
           return cast candidate;
         }
         i++;
       }
     }
-    return cast (cast createGlRenderTarget((cast state : GlRenderState), (cast descriptor : RenderTargetDescriptor), (cast formatPolicy : RenderTargetFormatPolicy)) : Null<GlRenderTarget>);
+    return cast (cast (cast createGlRenderTarget : GlRenderState->RenderTargetDescriptor->RenderTargetFormatPolicy->Null<GlRenderTarget>)((cast state), (cast descriptor), (cast formatPolicy)) : Null<GlRenderTarget>);
     return cast null;
   }
 
@@ -55,7 +55,7 @@ class GlRenderTargetPool {
   @:noCompletion
   public static function destroyGlRenderTargetPool(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool):Void {
     for (target in _Runtime.iterable((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free)) {
-      destroyGlRenderTarget((cast state : GlRenderState), (cast target : GlRenderTarget));
+      destroyGlRenderTarget((cast state), (cast target));
     }
     _Runtime.setLength((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, 0.0);
   }

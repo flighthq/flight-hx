@@ -4,8 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
 import flighthq.types.PbrExtension.PbrUvSet;
 import flighthq.types._internal._SpecularPbrExtensionValues.SpecularPbrExtensionKind;
 
-typedef SpecularPbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var specular:Float; var specularColor:Float; var specularColorMap:Null<Texture>; var specularColorMapUvSet:PbrUvSet; var specularMap:Null<Texture>; var specularMapUvSet:PbrUvSet; };
+typedef SpecularPbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; var specular:Float; var specularColor:Float; var specularColorMap:Null<Texture>; var specularColorMapUvSet:PbrUvSet; var specularMap:Null<Texture>; var specularMapUvSet:PbrUvSet; };

@@ -18,7 +18,7 @@ class CanvasScale9Mapper {
     var gw:Float = cast _Runtime.UNDEFINED;
     var gh:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast scaleX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast scaleY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    bounds = (cast CanvasScale9Mapper.computeCommandsBounds__canvasScale9Mapper((cast commands : Array<flighthq._internal._Any>)) : Null<{ var width:Float; var height:Float; }>);
+    bounds = (cast CanvasScale9Mapper.computeCommandsBounds__canvasScale9Mapper((cast commands)) : Null<{ var width:Float; var height:Float; }>);
     if ((cast ((cast ((cast _Runtime.strictEquals(bounds, null) : Bool) || (cast ((cast (cast bounds : { var width:Float; var height:Float; }).width : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast bounds : { var width:Float; var height:Float; }).height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
     __destructure0 = bounds;
     bw = _Runtime.field(__destructure0, 'width');
@@ -69,7 +69,7 @@ class CanvasScale9Mapper {
       if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
       if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }
       if ((cast ((cast y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (y : Dynamic)); }
-    } : Float->Float->Void);
+    });
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     maxX = -HxMath.POSITIVE_INFINITY;

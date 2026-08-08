@@ -25,10 +25,11 @@ import flighthq.types.QuadBatch;
 import flighthq.types.QuadBatch.QuadBatchData;
 import flighthq.types.QuadTransformType;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Renderable;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.Sampler;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 import flighthq.types.TintMaterialData;
@@ -75,7 +76,7 @@ class WgpuQuadBatch {
     var alpha:Float = cast _Runtime.UNDEFINED;
     var writeBase:Float = cast _Runtime.UNDEFINED;
     var drawCount:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) { return; }
     source = (cast (cast quadBatch : RenderProxy2D).source : QuadBatch);
     data = (cast source : QuadBatch).data;
@@ -84,23 +85,23 @@ class WgpuQuadBatch {
     instanceCount = _Runtime.field(__destructure0, 'instanceCount');
     ids = _Runtime.field(__destructure0, 'ids');
     transforms = _Runtime.field(__destructure0, 'transforms');
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(atlas.texture) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource((cast atlas.texture)) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
     material = (cast quadBatch : RenderProxy2D).material;
-    materialRenderer = (cast resolveWgpuMaterialRenderer((cast state : WgpuRenderState), material) : Null<WgpuMaterialRenderer>);
+    materialRenderer = (cast resolveWgpuMaterialRenderer((cast state), (cast material)) : Null<WgpuMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     texture = atlas.texture;
-    textureEntry = (cast resolveWgpuTexture((cast state : WgpuRenderState), texture, (cast true : Bool), SCENE2D_WORKING_COLOR_SPACE) : Null<WgpuTextureEntry>);
+    textureEntry = (cast resolveWgpuTexture((cast state), (cast texture), (cast true : Bool), (cast SCENE2D_WORKING_COLOR_SPACE)) : Null<WgpuTextureEntry>);
     if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { return; }
     nodeMaterialData = (cast quadBatch : RenderProxy2D).materialData;
     perQuadColorScaleBias = (cast data : QuadBatchData).materialData;
     nodeColorScaleBias = (cast quadBatch : RenderProxy2D).colorScaleBias;
     nodeColorMatrix = (cast quadBatch : RenderProxy2D).colorMatrix;
     startCount = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount;
-    base = (cast prepareWgpuQuadBatchWrite((cast state : WgpuRenderState), textureEntry, (cast texture : Texture2D).sampler, (cast (cast quadBatch : RenderProxy2D).blendMode : Null<String>), material, materialRenderer, (cast instanceCount : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Float);
+    base = (cast prepareWgpuQuadBatchWrite((cast state), (cast textureEntry), (cast (cast texture : Texture2D).sampler), (cast (cast quadBatch : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast instanceCount : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Float);
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
-    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(texture) : Float)));
-    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(texture) : Float)));
+    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth((cast texture)) : Float)));
+    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight((cast texture)) : Float)));
     instanceData = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterInstanceData;
     isVector2 = _Runtime.strictEquals((cast data : QuadBatchData).transformType, 'vector2');
     pt = (cast quadBatch : RenderProxy2D).transform2D;
@@ -151,9 +152,9 @@ class WgpuQuadBatch {
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 10.0), ((region.x + region.width) * iw));
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 11.0), ((region.y + region.height) * ih));
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 12.0), alpha);
-        packWgpuQuadBatchMaterialInstance((cast state : WgpuRenderState), (cast nodeMaterialData : Null<flighthq._internal._Object>), (cast (startCount + drawCount) : Float));
+        packWgpuQuadBatchMaterialInstance((cast state), (cast nodeMaterialData), (cast (startCount + drawCount) : Float));
         var colorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>> = _Runtime.coalesce(_Runtime.coalesce((cast _Runtime.optionalIndex(perQuadColorScaleBias, i) : Null<flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>>), function():Dynamic return cast nodeColorMatrix), function():Dynamic return cast nodeColorScaleBias);
-        recordWgpuQuadBatchColorScaleBias((cast state : WgpuRenderState), (cast colorScaleBias : Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>>), (cast (startCount + drawCount) : Float));
+        recordWgpuQuadBatchColorScaleBias((cast state), (cast colorScaleBias), (cast (startCount + drawCount) : Float));
         (writeBase = cast ((writeBase + WgpuQuadBatch.INSTANCE_STRIDE_FLOATS__wgpuQuadBatch) : Dynamic));
         drawCount++;
         i++;
@@ -162,5 +163,5 @@ class WgpuQuadBatch {
     ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount += drawCount);
   }
 
-  public static final defaultWgpuQuadBatchRenderer:SpriteRenderer = { format: BatchFormat.Quad, createData: noopRendererData, submit: WgpuQuadBatch.submitWgpuQuadBatch__wgpuQuadBatch };
+  public static final defaultWgpuQuadBatchRenderer:SpriteRenderer = (cast { format: BatchFormat.Quad, createData: noopRendererData, submit: WgpuQuadBatch.submitWgpuQuadBatch__wgpuQuadBatch });
 }

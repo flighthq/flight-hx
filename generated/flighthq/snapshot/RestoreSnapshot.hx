@@ -10,7 +10,7 @@ class RestoreSnapshot {
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(snapshot, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(snapshot), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(target, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool)) {
       return;
     }
-    RestoreSnapshot.restoreSnapshotInto__restoreSnapshot((cast (cast target : flighthq._internal._Object) : flighthq._internal._Object), (cast (cast snapshot : flighthq._internal._Object) : flighthq._internal._Object));
+    RestoreSnapshot.restoreSnapshotInto__restoreSnapshot((cast (cast target : flighthq._internal._Object)), (cast (cast snapshot : flighthq._internal._Object)));
   }
 
   public static function restoreSnapshotInto__restoreSnapshot(target:flighthq._internal._Object, source:flighthq._internal._Object):Void {
@@ -43,7 +43,7 @@ class RestoreSnapshot {
     }
     sourceIsArray = _Runtime.isArray(sourceValue);
     if ((cast ((cast ((cast !_Runtime.strictEquals(targetValue, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(targetValue), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.isArray(targetValue), sourceIsArray) : Bool)) : Bool)) {
-      RestoreSnapshot.restoreSnapshotInto__restoreSnapshot((cast (cast targetValue : flighthq._internal._Object) : flighthq._internal._Object), (cast (cast sourceValue : flighthq._internal._Object) : flighthq._internal._Object));
+      RestoreSnapshot.restoreSnapshotInto__restoreSnapshot((cast (cast targetValue : flighthq._internal._Object)), (cast (cast sourceValue : flighthq._internal._Object)));
       return cast targetValue;
     }
     return cast _Runtime.callValue(flighthq._internal._HostValueLut.get('structuredClone'), cast ([sourceValue] : Array<Dynamic>));

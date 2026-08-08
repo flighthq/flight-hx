@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef BokehDepthOfFieldEffect = { var kind:Kind; @:optional var focusDistance:Float; @:optional var focusRange:Float; @:optional var maxBlur:Float; };
+typedef BokehDepthOfFieldEffect = { var kind:String; @:optional var focusDistance:Float; @:optional var focusRange:Float; @:optional var maxBlur:Float; };

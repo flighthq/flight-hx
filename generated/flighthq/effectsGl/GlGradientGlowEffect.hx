@@ -23,6 +23,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.GradientGlowEffect;
 import flighthq.types.RenderEffect;
+import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.RenderTarget.RenderTargetFormat;
 
 typedef GradientLookupLocations__glGradientGlowEffect = { >GlFullscreenProgram, var locRamp:flighthq._internal.dom.WebGLUniformLocation; };
@@ -45,51 +46,51 @@ class GlGradientGlowEffect {
     var sourceMode:EffectSourceMode = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var ramp:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
-    descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    s0 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
-    s1 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
-    s2 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
+    descriptor = (cast { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') });
+    s0 = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     gl = (cast state : GlRenderState).gl;
-    applyGlEffectTintPass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast s0 : GlRenderTarget), (cast 16777215.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
-    applyGlEffectBoxBlur((cast state : GlRenderState), (cast s0 : GlRenderTarget), (cast s1 : GlRenderTarget), (cast s2 : GlRenderTarget), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), passes: quality } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }));
-    ramp = (cast createGlEffectGradientRampTexture((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast _Runtime.field(effect, 'colors') : Array<Float>), (cast _Runtime.field(effect, 'alphas') : Array<Float>), (cast _Runtime.field(effect, 'ratios') : Array<Float>)) : flighthq._internal.dom.WebGLTexture);
-    GlGradientGlowEffect.applyGradientLookupPass__glGradientGlowEffect((cast state : GlRenderState), (cast s1 : GlRenderTarget), (cast ramp : flighthq._internal.dom.WebGLTexture), (cast s0 : GlRenderTarget));
+    applyGlEffectTintPass((cast state), (cast src), (cast s0), (cast 16777215.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
+    applyGlEffectBoxBlur((cast state), (cast s0), (cast s1), (cast s2), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), passes: quality }));
+    ramp = (cast createGlEffectGradientRampTexture((cast gl), (cast _Runtime.field(effect, 'colors')), (cast _Runtime.field(effect, 'alphas')), (cast _Runtime.field(effect, 'ratios'))) : flighthq._internal.dom.WebGLTexture);
+    GlGradientGlowEffect.applyGradientLookupPass__glGradientGlowEffect((cast state), (cast s1), (cast ramp), (cast s0));
     flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, ramp);
-    clearGlRenderTarget((cast state : GlRenderState), (cast dst : GlRenderTarget));
-    applyGlEffectBlitPass((cast state : GlRenderState), (cast s0 : GlRenderTarget), (cast dst : GlRenderTarget));
+    clearGlRenderTarget((cast state), (cast dst));
+    applyGlEffectBlitPass((cast state), (cast s0), (cast dst));
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
-      applyGlEffectErasePass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast dst : GlRenderTarget));
+      applyGlEffectErasePass((cast state), (cast src), (cast dst));
     } else { if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyGlEffectBlitPass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast dst : GlRenderTarget));
+      applyGlEffectBlitPass((cast state), (cast src), (cast dst));
     } }
-    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s0 : GlRenderTarget));
-    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s1 : GlRenderTarget));
-    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s2 : GlRenderTarget));
+    releaseGlRenderTarget((cast pool), (cast s0));
+    releaseGlRenderTarget((cast pool), (cast s1));
+    releaseGlRenderTarget((cast pool), (cast s2));
   }
 
-  public static final defaultGlGradientGlowEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyGradientGlowEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast _Runtime.field(ctx, 'pool') : GlRenderTargetPool), (cast (cast effect : GradientGlowEffect) : GradientGlowEffect));
-  };
+  public static final defaultGlGradientGlowEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyGradientGlowEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : GradientGlowEffect)));
+  });
 
   public static function registerGlGradientGlowEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'GradientGlowEffect' : String), (cast defaultGlGradientGlowEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'GradientGlowEffect' : String), (cast defaultGlGradientGlowEffectRunner));
   }
 
   public static function applyGradientLookupPass__glGradientGlowEffect(state:GlRenderState, blurred:GlRenderTarget, ramp:flighthq._internal.dom.WebGLTexture, dest:GlRenderTarget):Void {
     var loc:GradientLookupLocations__glGradientGlowEffect = cast _Runtime.UNDEFINED;
-    loc = (cast GlGradientGlowEffect.getLookupShader__glGradientGlowEffect((cast state : GlRenderState)) : GradientLookupLocations__glGradientGlowEffect);
-    drawGlFullscreenPass((cast state : GlRenderState), (cast loc : GlFullscreenProgram), (cast cast ([(cast blurred : GlRenderTarget).texture] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), (cast function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void return _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
+    loc = (cast GlGradientGlowEffect.getLookupShader__glGradientGlowEffect((cast state)) : GradientLookupLocations__glGradientGlowEffect);
+    drawGlFullscreenPass((cast state), (cast loc), (cast cast ([(cast blurred : GlRenderTarget).texture] : Array<Dynamic>)), (cast dest), (cast function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE1', flighthq._internal.backend.WebGl2Backend.TEXTURE1));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), ramp);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, (cast loc : { var locRamp:flighthq._internal.dom.WebGLUniformLocation; }).locRamp, 1.0);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal.dom.WebGL2RenderingContext->GlFullscreenProgram->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
   public static function getLookupShader__glGradientGlowEffect(state:GlRenderState):GradientLookupLocations__glGradientGlowEffect {
@@ -97,9 +98,9 @@ class GlGradientGlowEffect {
     loc = ((cast GlGradientGlowEffect.lookupShaders__glGradientGlowEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GradientLookupLocations__glGradientGlowEffect>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlGradientGlowEffect.GRADIENT_LOOKUP_FRAGMENT_SRC__glGradientGlowEffect : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram((cast gl), (cast GlGradientGlowEffect.GRADIENT_LOOKUP_FRAGMENT_SRC__glGradientGlowEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locRamp: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_ramp') }]) : Dynamic));
-      ((cast GlGradientGlowEffect.lookupShaders__glGradientGlowEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GradientLookupLocations__glGradientGlowEffect>).set((cast state : GlRenderState).gl, loc));
+      ((cast GlGradientGlowEffect.lookupShaders__glGradientGlowEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GradientLookupLocations__glGradientGlowEffect>).set((cast state : GlRenderState).gl, (cast loc)));
     }
     return cast loc;
     return cast null;

@@ -17,29 +17,34 @@ class TauriShortcut {
     registered = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     return cast { getRegistered: function():Array<String> {
       return cast _Runtime.concatArrays([_Runtime.toArray(registered)]);
+      return cast _Runtime.UNDEFINED;
     }, isRegistered: function(accelerator:String):Bool {
       return cast ((cast registered : flighthq._internal._Set<String>).has(accelerator));
+      return cast _Runtime.UNDEFINED;
     }, register: function(accelerator:String, listener:ShortcutEvent->Void):Bool {
       ((cast registered : flighthq._internal._Set<String>).add(accelerator));
-      flighthq._internal._Async.recover((cast globalShortcut : TauriGlobalShortcutPlugin).register(accelerator, function(event:TauriShortcutEvent):Void {
-        if ((cast _Runtime.strictEquals(_Runtime.field(event, 'state'), 'Pressed') : Bool)) { listener({ accelerator: accelerator }); }
-      }), function():Void {
+      flighthq._internal._Async.recover((cast globalShortcut : TauriGlobalShortcutPlugin).register((cast accelerator : String), (cast function(event:TauriShortcutEvent):Void {
+        if ((cast _Runtime.strictEquals(_Runtime.field(event, 'state'), 'Pressed') : Bool)) { listener((cast { accelerator: accelerator })); }
+      })), function(__unused0:flighthq._internal._Any):Void {
         ((cast registered : flighthq._internal._Set<String>).delete_(accelerator));
       });
       return cast true;
+      return cast _Runtime.UNDEFINED;
     }, setAllEnabled: function():Void {
 
     }, setEnabled: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, unregister: function(accelerator:String):Bool {
       ((cast registered : flighthq._internal._Set<String>).delete_(accelerator));
-      flighthq._internal._Async.recover((cast globalShortcut : TauriGlobalShortcutPlugin).unregister(accelerator), function():Void {
+      flighthq._internal._Async.recover((cast globalShortcut : TauriGlobalShortcutPlugin).unregister((cast accelerator : String)), function(__unused1:flighthq._internal._Any):Void {
 
       });
       return cast true;
+      return cast _Runtime.UNDEFINED;
     }, unregisterAll: function():Void {
       ((cast registered : flighthq._internal._Set<String>).clear());
-      flighthq._internal._Async.recover((cast globalShortcut : TauriGlobalShortcutPlugin).unregisterAll(), function():Void {
+      flighthq._internal._Async.recover((cast globalShortcut : TauriGlobalShortcutPlugin).unregisterAll(), function(__unused2:flighthq._internal._Any):Void {
 
       });
     } };

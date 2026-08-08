@@ -21,14 +21,14 @@ class GlShader {
 
   @:noCompletion
   public static function compileDefaultGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext):GlShaderLocations {
-    return cast (cast compileGlBitmapProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String)) : GlShaderLocations);
+    return cast (cast compileGlBitmapProgram((cast gl), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String)) : GlShaderLocations);
     return cast null;
   }
 
   @:noCompletion
   public static function compileGlBitmapProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, fragmentSrc:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform float u_alpha;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord) * clamp(u_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  fragColor = color;\n}'):GlShaderLocations {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
-    program = (cast createGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlShader.VERTEX_SRC__glShader : String), (cast fragmentSrc : String), (cast 'Bitmap' : String)) : flighthq._internal.dom.WebGLProgram);
+    program = (cast createGlProgram((cast gl), (cast GlShader.VERTEX_SRC__glShader : String), (cast fragmentSrc : String), (cast 'Bitmap' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { program: program, locPosition: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), locTexCoord: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_texCoord'), locMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matrix'), locAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alpha'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture') };
     return cast null;
   }
@@ -37,10 +37,10 @@ class GlShader {
   public static function createDefaultGlBitmapShader(shaderLoc:GlShaderLocations, matrixArray:flighthq._internal._Float32Array):GlBitmapShader {
     return cast { locations: shaderLoc, program: (cast shaderLoc : GlShaderLocations).program, bind: function(gl:flighthq._internal.dom.WebGL2RenderingContext, state:GlRenderState, renderProxy:RenderProxy2D):Void {
       var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-      runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
-      setGlAttributes((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast shaderLoc : GlShaderLocations));
-      setGlMatrixFromTransform((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast shaderLoc : GlShaderLocations), (cast matrixArray : flighthq._internal._Float32Array), (cast (cast renderProxy : RenderProxy2D).transform2D : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }), (cast _Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas) : { var width:Float; var height:Float; }));
-      setGlBaseUniforms((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast shaderLoc : GlShaderLocations), (cast renderProxy : RenderProxy));
+      runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
+      setGlAttributes((cast gl), (cast shaderLoc));
+      setGlMatrixFromTransform((cast gl), (cast shaderLoc), (cast matrixArray), (cast (cast renderProxy : RenderProxy2D).transform2D), (cast _Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas)));
+      setGlBaseUniforms((cast gl), (cast shaderLoc), (cast renderProxy));
     } };
     return cast null;
   }
@@ -48,13 +48,13 @@ class GlShader {
   @:noCompletion
   public static function createGlBitmapShader(gl:flighthq._internal.dom.WebGL2RenderingContext, fragmentSrc:String, ?onBind:flighthq._internal.dom.WebGL2RenderingContext->GlShaderLocations->RenderProxy2D->Void):GlBitmapShader {
     var locations:GlShaderLocations = cast _Runtime.UNDEFINED;
-    locations = (cast compileGlBitmapProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast fragmentSrc : String)) : GlShaderLocations);
+    locations = (cast compileGlBitmapProgram((cast gl), (cast fragmentSrc : String)) : GlShaderLocations);
     return cast { locations: locations, program: (cast locations : GlShaderLocations).program, bind: function(gl:flighthq._internal.dom.WebGL2RenderingContext, state:GlRenderState, renderProxy:RenderProxy2D):Void {
       var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-      runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
-      setGlAttributes((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast locations : GlShaderLocations));
-      setGlMatrixFromTransform((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast locations : GlShaderLocations), (cast (cast runtime : GlRenderStateRuntime).matrixArray : flighthq._internal._Float32Array), (cast (cast renderProxy : RenderProxy2D).transform2D : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }), (cast _Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas) : { var width:Float; var height:Float; }));
-      setGlBaseUniforms((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast locations : GlShaderLocations), (cast renderProxy : RenderProxy));
+      runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
+      setGlAttributes((cast gl), (cast locations));
+      setGlMatrixFromTransform((cast gl), (cast locations), (cast (cast runtime : GlRenderStateRuntime).matrixArray), (cast (cast renderProxy : RenderProxy2D).transform2D), (cast _Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas)));
+      setGlBaseUniforms((cast gl), (cast locations), (cast renderProxy));
       _Runtime.callOptionalValue(onBind, cast ([gl, locations, renderProxy] : Array<Dynamic>));
     } };
     return cast null;

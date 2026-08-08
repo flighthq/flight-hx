@@ -7,4 +7,4 @@ import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverity
 
 typedef ImportDiagnostic = { @:optional var detail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>; var kind:String; var origin:String; var severity:ImportDiagnosticSeverity; };
 
-typedef ImportDiagnosticSeverity = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef ImportDiagnosticSeverity = flighthq._internal._IndexedAccess<Dynamic, String>;

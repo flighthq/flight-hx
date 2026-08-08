@@ -24,12 +24,12 @@ import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModi
 class CreateVertexDisplaceModifier {
   public static function createVertexDisplaceModifier(options:VertexDisplaceModifierOptions):VertexDisplaceModifier {
     var modifier:VertexDisplaceModifier = cast _Runtime.UNDEFINED;
-    modifier = { kind: VertexDisplaceModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Vertex, source: _Runtime.field(options, 'source'), amplitude: _Runtime.field(options, 'amplitude'), frequency: _Runtime.coalesce(_Runtime.field(options, 'frequency'), function():Dynamic return cast 1.0), speed: _Runtime.coalesce(_Runtime.field(options, 'speed'), function():Dynamic return cast 1.0), direction: _Runtime.coalesce(_Runtime.field(options, 'direction'), function():Dynamic return cast CreateVertexDisplaceModifier.DEFAULT_DIRECTION__createVertexDisplaceModifier) };
+    modifier = (cast { kind: VertexDisplaceModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Vertex, source: _Runtime.field(options, 'source'), amplitude: _Runtime.field(options, 'amplitude'), frequency: _Runtime.coalesce(_Runtime.field(options, 'frequency'), function():Dynamic return cast 1.0), speed: _Runtime.coalesce(_Runtime.field(options, 'speed'), function():Dynamic return cast 1.0), direction: _Runtime.coalesce(_Runtime.field(options, 'direction'), function():Dynamic return cast CreateVertexDisplaceModifier.DEFAULT_DIRECTION__createVertexDisplaceModifier) });
     if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast modifier : VertexDisplaceModifier).axis = _Runtime.field(options, 'axis')); }
     if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast modifier : VertexDisplaceModifier).map = _Runtime.field(options, 'map')); }
     return cast modifier;
     return cast null;
   }
 
-  public static final DEFAULT_DIRECTION__createVertexDisplaceModifier:Vector3Like = { x: 1.0, y: 0.0, z: 0.0 };
+  public static final DEFAULT_DIRECTION__createVertexDisplaceModifier:Vector3Like = (cast { x: 1.0, y: 0.0, z: 0.0 });
 }

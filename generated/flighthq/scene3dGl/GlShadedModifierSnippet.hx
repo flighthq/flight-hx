@@ -10,6 +10,7 @@ import flighthq.shading.ModifierRegistry.resolveModifier;
 import flighthq.types.GlModifierSnippet;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
+import flighthq.types.ModifierDefinition;
 import flighthq.types.ModifierKind;
 import flighthq.types.ModifierRegistry;
 
@@ -17,17 +18,17 @@ class GlShadedModifierSnippet {
   @:noCompletion
   public static function registerGlModifierSnippet(state:GlRenderState, snippet:GlModifierSnippet):Void {
     var runtime:GlScene3DRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime);
-    if ((cast _Runtime.strictEquals((cast runtime : GlScene3DRuntime).modifierSnippetRegistry, null) : Bool)) { ((cast runtime : GlScene3DRuntime).modifierSnippetRegistry = (cast createModifierRegistry() : Null<ModifierRegistry>)); }
-    registerModifier((cast runtime : GlScene3DRuntime).modifierSnippetRegistry, snippet);
+    runtime = (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime);
+    if ((cast _Runtime.strictEquals((cast runtime : GlScene3DRuntime).modifierSnippetRegistry, null) : Bool)) { ((cast runtime : GlScene3DRuntime).modifierSnippetRegistry = (cast createModifierRegistry() : ModifierRegistry)); }
+    registerModifier((cast (cast runtime : GlScene3DRuntime).modifierSnippetRegistry), (cast snippet));
   }
 
   @:noCompletion
   public static function resolveGlModifierSnippet(state:GlRenderState, kind:ModifierKind):Null<GlModifierSnippet> {
     var registry:Null<ModifierRegistry> = cast _Runtime.UNDEFINED;
-    registry = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).modifierSnippetRegistry;
+    registry = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).modifierSnippetRegistry;
     if ((cast _Runtime.strictEquals(registry, null) : Bool)) { return cast null; }
-    return cast (cast (cast resolveModifier(registry, (cast kind : String)) : Null<GlModifierSnippet>) : Null<GlModifierSnippet>);
+    return cast (cast resolveModifier((cast registry), (cast kind : String)) : Null<GlModifierSnippet>);
     return cast null;
   }
 }

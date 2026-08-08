@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 
-typedef ResourceResolutionState = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef ResourceResolutionState = flighthq._internal._IndexedAccess<Dynamic, String>;

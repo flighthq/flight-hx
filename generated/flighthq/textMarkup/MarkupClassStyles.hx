@@ -8,9 +8,9 @@ import flighthq.types.MarkupTagRegistry;
 import flighthq.types.TextFormat;
 
 class MarkupClassStyles {
-  public static function registerMarkupClassStyles(registry:MarkupTagRegistry, styles:flighthq._internal._Record<String, Dynamic>):Void {
+  public static function registerMarkupClassStyles(registry:MarkupTagRegistry, styles:flighthq._internal._Record<String, flighthq._internal._Partial<TextFormat>>):Void {
     var resolver:MarkupClassResolver = cast _Runtime.UNDEFINED;
-    resolver = function(className:String):flighthq._internal._Any return _Runtime.coalesce(_Runtime.getIndex(styles, className), function():Dynamic return cast null);
-    ((cast registry : MarkupTagRegistry).classResolver = resolver);
+    resolver = function(className:String):Null<flighthq._internal._Any> return _Runtime.coalesce(_Runtime.getIndex(styles, className), function():Dynamic return cast null);
+    ((cast registry : { @:optional var classResolver:Null<MarkupClassResolver>; }).classResolver = resolver);
   }
 }

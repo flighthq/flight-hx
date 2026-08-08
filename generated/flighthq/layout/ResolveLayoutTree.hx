@@ -23,13 +23,13 @@ class ResolveLayoutTree {
     if ((cast ((cast ((cast nodeIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast nodeIndex : Float) >= (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) : Bool)) { return cast null; }
     node = flighthq._internal._StaticIndex.readArray(nodes, nodeIndex);
     if ((cast ((cast ((cast (cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).parentIndex : Float) < (cast -1.0 : Float)) : Bool) || (cast ((cast (cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).parentIndex : Float) >= (cast nodeIndex : Float)) : Bool)) : Bool)) {
-      return cast (cast ResolveLayoutTree.explanation__resolveLayoutTree((cast (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidHierarchy : LayoutResolutionFailureKind), (cast nodeIndex : Float), (cast (cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).parentIndex : Float), (cast (cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).kind : Null<String>)) : Null<LayoutResolutionExplanation>);
+      return cast (cast ResolveLayoutTree.explanation__resolveLayoutTree((cast (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidHierarchy), (cast nodeIndex : Float), (cast (cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).parentIndex : Float), (cast (cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).kind)) : LayoutResolutionExplanation);
     }
     {
       var i:Float = (nodeIndex + 1.0);
       while ((cast ((cast i : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
         if ((cast ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(nodes, i) : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).parentIndex, nodeIndex) : Bool) && (cast !(cast ((cast _Runtime.field(state, 'resolvers') : flighthq._internal._Map<String, LayoutResolver>).has((cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).kind)) : Bool) : Bool)) : Bool)) {
-          return cast (cast ResolveLayoutTree.explanation__resolveLayoutTree((cast (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).UnregisteredKind : LayoutResolutionFailureKind), (cast nodeIndex : Float), (cast -1.0 : Float), (cast (cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).kind : Null<String>)) : Null<LayoutResolutionExplanation>);
+          return cast (cast ResolveLayoutTree.explanation__resolveLayoutTree((cast (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).UnregisteredKind), (cast nodeIndex : Float), (cast -1.0 : Float), (cast (cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).kind)) : LayoutResolutionExplanation);
         }
         i++;
       }
@@ -44,15 +44,15 @@ class ResolveLayoutTree {
     var requiredIntrinsicLength:Float = cast _Runtime.UNDEFINED;
     var rootWidth:Float = cast _Runtime.UNDEFINED;
     var rootHeight:Float = cast _Runtime.UNDEFINED;
-    ResolveLayoutTree.clearLayoutFailure__resolveLayoutTree((cast state : LayoutState));
+    ResolveLayoutTree.clearLayoutFailure__resolveLayoutTree((cast state));
     nodes = _Runtime.field(tree, 'nodes');
     requiredOutLength = _Runtime.multiplyNumbers(_Runtime.field(nodes, 'length'), 4.0);
     if ((cast ((cast _Runtime.field(out, 'length') : Float) < (cast requiredOutLength : Float)) : Bool)) {
-      return cast (cast ResolveLayoutTree.failLayoutResolution__resolveLayoutTree((cast state : LayoutState), (cast tree : LayoutTree), (cast (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).OutputTooSmall : LayoutResolutionFailureKind), (cast -1.0 : Float), (cast -1.0 : Float), (cast requiredOutLength : Float), (cast _Runtime.field(out, 'length') : Float), (cast null : Null<String>)) : Bool);
+      return cast (cast ResolveLayoutTree.failLayoutResolution__resolveLayoutTree((cast state), (cast tree), (cast (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).OutputTooSmall), (cast -1.0 : Float), (cast -1.0 : Float), (cast requiredOutLength : Float), (cast _Runtime.field(out, 'length') : Float), (cast null)) : Bool);
     }
     requiredIntrinsicLength = _Runtime.multiplyNumbers(_Runtime.field(nodes, 'length'), 2.0);
     if ((cast ((cast _Runtime.field(intrinsicSizes, 'length') : Float) < (cast requiredIntrinsicLength : Float)) : Bool)) {
-      return cast (cast ResolveLayoutTree.failLayoutResolution__resolveLayoutTree((cast state : LayoutState), (cast tree : LayoutTree), (cast (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).IntrinsicSizesTooSmall : LayoutResolutionFailureKind), (cast -1.0 : Float), (cast -1.0 : Float), (cast requiredIntrinsicLength : Float), (cast _Runtime.field(intrinsicSizes, 'length') : Float), (cast null : Null<String>)) : Bool);
+      return cast (cast ResolveLayoutTree.failLayoutResolution__resolveLayoutTree((cast state), (cast tree), (cast (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).IntrinsicSizesTooSmall), (cast -1.0 : Float), (cast -1.0 : Float), (cast requiredIntrinsicLength : Float), (cast _Runtime.field(intrinsicSizes, 'length') : Float), (cast null)) : Bool);
     }
     rootWidth = (cast ResolveLayoutTree.finiteSize__resolveLayoutTree((cast availableWidth : Float)) : Float);
     rootHeight = (cast ResolveLayoutTree.finiteSize__resolveLayoutTree((cast availableHeight : Float)) : Float);
@@ -62,7 +62,7 @@ class ResolveLayoutTree {
         var node:LayoutNode<flighthq._internal._Object, flighthq._internal._Object> = flighthq._internal._StaticIndex.readArray(nodes, i);
         var parentIndex:Float = (cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).parentIndex;
         if ((cast ((cast ((cast parentIndex : Float) < (cast -1.0 : Float)) : Bool) || (cast ((cast parentIndex : Float) >= (cast i : Float)) : Bool)) : Bool)) {
-          return cast (cast ResolveLayoutTree.failLayoutResolution__resolveLayoutTree((cast state : LayoutState), (cast tree : LayoutTree), (cast (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidHierarchy : LayoutResolutionFailureKind), (cast i : Float), (cast parentIndex : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast (cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).kind : Null<String>)) : Bool);
+          return cast (cast ResolveLayoutTree.failLayoutResolution__resolveLayoutTree((cast state), (cast tree), (cast (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidHierarchy), (cast i : Float), (cast parentIndex : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast (cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).kind)) : Bool);
         }
         var offset:Float = (i * 4.0);
         if ((cast _Runtime.strictEquals(parentIndex, -1.0) : Bool)) {
@@ -76,12 +76,12 @@ class ResolveLayoutTree {
         var parentKind:String = (cast flighthq._internal._StaticIndex.readArray(nodes, parentIndex) : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).kind;
         var resolver:Null<LayoutResolver> = ((cast (cast state : LayoutState).resolvers : flighthq._internal._Map<String, LayoutResolver>).get(parentKind));
         if ((cast _Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          return cast (cast ResolveLayoutTree.failLayoutResolution__resolveLayoutTree((cast state : LayoutState), (cast tree : LayoutTree), (cast (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).UnregisteredKind : LayoutResolutionFailureKind), (cast parentIndex : Float), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast parentKind : Null<String>)) : Bool);
+          return cast (cast ResolveLayoutTree.failLayoutResolution__resolveLayoutTree((cast state), (cast tree), (cast (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).UnregisteredKind), (cast parentIndex : Float), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast parentKind)) : Bool);
         }
-        var failure:Null<String> = (cast resolver((cast out : flighthq._internal._Float32Array), (cast tree : LayoutTree), (cast intrinsicSizes : flighthq._internal._ArrayLike<Float>), (cast parentIndex : Float), (cast i : Float)) : Null<String>);
+        var failure:Null<String> = (cast resolver((cast out), (cast tree), (cast intrinsicSizes), (cast parentIndex : Float), (cast i : Float)) : Null<String>);
         if ((cast !_Runtime.strictEquals(failure, null) : Bool)) {
           var failureNodeIndex:Float = ((cast _Runtime.strictEquals(failure, (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidContainerStyle) : Bool) ? (cast parentIndex : Dynamic) : (cast i : Dynamic));
-          return cast (cast ResolveLayoutTree.failLayoutResolution__resolveLayoutTree((cast state : LayoutState), (cast tree : LayoutTree), (cast failure : LayoutResolutionFailureKind), (cast failureNodeIndex : Float), (cast parentIndex : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast parentKind : Null<String>)) : Bool);
+          return cast (cast ResolveLayoutTree.failLayoutResolution__resolveLayoutTree((cast state), (cast tree), (cast failure), (cast failureNodeIndex : Float), (cast parentIndex : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast parentKind)) : Bool);
         }
         i++;
       }
@@ -111,7 +111,7 @@ class ResolveLayoutTree {
     ((cast state : LayoutState).lastFailureParentIndex = parentIndex);
     ((cast state : LayoutState).lastFailureRequiredLength = requiredLength);
     ((cast state : LayoutState).lastFailureResolverKind = resolverKind);
-    if ((cast !_Runtime.strictEquals((cast state : LayoutState).guard, null) : Bool)) { (cast state : LayoutState).guard((cast (cast explainLayoutResolution((cast state : LayoutState), (cast tree : LayoutTree), (cast nodeIndex : Float)) : LayoutResolutionExplanation) : LayoutResolutionExplanation)); }
+    if ((cast !_Runtime.strictEquals((cast state : LayoutState).guard, null) : Bool)) { (cast state : LayoutState).guard((cast (cast explainLayoutResolution((cast state), (cast tree), (cast nodeIndex : Float)) : LayoutResolutionExplanation))); }
     return cast false;
     return cast null;
   }

@@ -11,7 +11,7 @@ import flighthq.types._internal._PathValues.PathCommandValue;
 class ContainsPathPoint {
   public static function containsPathPoint(path:Path, px:Float, py:Float, tolerance:Float = 0.25):Bool {
     var winding:Float = cast _Runtime.UNDEFINED;
-    winding = (cast ContainsPathPoint.computePathWindingNumber__containsPathPoint((cast path : Path), (cast px : Float), (cast py : Float), (cast tolerance : Float)) : Float);
+    winding = (cast ContainsPathPoint.computePathWindingNumber__containsPathPoint((cast path), (cast px : Float), (cast py : Float), (cast tolerance : Float)) : Float);
     if ((cast _Runtime.strictEquals(_Runtime.field(path, 'winding'), 'evenOdd') : Bool)) { return cast !_Runtime.strictEquals((_Runtime.toInt32(winding) & 1), 0.0); }
     return cast !_Runtime.strictEquals(winding, 0.0);
     return cast null;
@@ -65,7 +65,7 @@ class ContainsPathPoint {
       if ((cast hasContour : Bool)) {
         (windingNumber = cast ((windingNumber + (cast ContainsPathPoint.countSegmentCrossings__containsPathPoint((cast px : Float), (cast py : Float), (cast lastX : Float), (cast lastY : Float), (cast contourStartX : Float), (cast contourStartY : Float)) : Float)) : Dynamic));
       }
-    } : Void->Void);
+    });
     {
       var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {

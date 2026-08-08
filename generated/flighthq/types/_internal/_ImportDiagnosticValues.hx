@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _ImportDiagnosticValues {
-  public static final ImportDiagnosticSeverityValue:{ var Drop:String; var Recover:String; var Reject:String; var Skip:String; } = { Drop: 'Drop', Recover: 'Recover', Reject: 'Reject', Skip: 'Skip' };
+  public static final ImportDiagnosticSeverityValue:{ var Drop:String; var Recover:String; var Reject:String; var Skip:String; } = (cast { Drop: 'Drop', Recover: 'Recover', Reject: 'Reject', Skip: 'Skip' });
 }

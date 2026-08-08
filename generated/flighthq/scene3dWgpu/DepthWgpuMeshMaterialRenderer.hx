@@ -18,40 +18,42 @@ import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.Types.DepthMaterialKind;
 import flighthq.types.WgpuDebugPipeline;
+import flighthq.types.WgpuDebugPipeline.WgpuDebugDefineKey;
 import flighthq.types.WgpuMeshMaterialRenderer;
+import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types._internal._DepthMaterialValues.DepthMaterialKind;
 
 class DepthWgpuMeshMaterialRenderer {
   @:noCompletion
-  public static final depthWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  public static final depthWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var depth:Null<DepthMaterial> = cast _Runtime.UNDEFINED;
     var format:String = cast _Runtime.UNDEFINED;
     var pipeline:WgpuDebugPipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
-    stateRuntime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    stateRuntime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     depth = (cast material : Null<DepthMaterial>);
     format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    pipeline = (cast ensureWgpuDebugPipeline((cast state : WgpuRenderState), { hasNormalMap: false, mode: 'depth' }, (cast format : String), (cast _Runtime.coalesce(_Runtime.optionalField(depth, 'doubleSided'), function():Dynamic return cast false) : Bool)) : WgpuDebugPipeline);
-    writeWgpuFrameUniform((cast state : WgpuRenderState), (cast camera : Camera3D), (cast _lights : Scene3DLightBlock));
+    pipeline = (cast ensureWgpuDebugPipeline((cast state), (cast { hasNormalMap: false, mode: 'depth' }), (cast format : String), (cast _Runtime.coalesce(({ final __structural0 = depth; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var doubleSided:Bool; }).doubleSided; }), function():Dynamic return cast false) : Bool)) : WgpuDebugPipeline);
+    writeWgpuFrameUniform((cast state), (cast camera), (cast _lights));
     if ((cast _Runtime.strictEquals(depth, null) : Bool)) {
-      (group = cast ((cast bindWgpuDebugSurface((cast state : WgpuRenderState), pipeline, (cast DepthWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__depthWgpuMeshMaterialRenderer : flighthq._internal._Object), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (group = cast ((cast bindWgpuDebugSurface((cast state), (cast pipeline), (cast DepthWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__depthWgpuMeshMaterialRenderer), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
-      (group = cast ((cast bindWgpuDebugSurface((cast state : WgpuRenderState), pipeline, (cast depth : flighthq._internal._Object), (cast _Runtime.field(depth, 'near') : Float), (cast _Runtime.field(depth, 'far') : Float), (cast 1.0 : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (group = cast ((cast bindWgpuDebugSurface((cast state), (cast pipeline), (cast depth), (cast _Runtime.field(depth, 'near') : Float), (cast _Runtime.field(depth, 'far') : Float), (cast 1.0 : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
-    beginWgpuMeshDraw((cast state : WgpuRenderState), pipeline);
+    beginWgpuMeshDraw((cast state), (cast pipeline));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
-    drawWgpuMeshSubset((cast state : WgpuRenderState), (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
-  } };
+    drawWgpuMeshSubset((cast state), (cast proxy), (cast geometry));
+  } });
 
   public static function registerWgpuDepthMaterial(state:WgpuRenderState):Void {
-    registerWgpuMeshMaterialRenderer((cast state : WgpuRenderState), (cast DepthMaterialKind : String), (cast depthWgpuMeshMaterialRenderer : WgpuMeshMaterialRenderer));
+    registerWgpuMeshMaterialRenderer((cast state), (cast DepthMaterialKind : String), (cast depthWgpuMeshMaterialRenderer));
   }
 
   public static final FALLBACK_MATERIAL__depthWgpuMeshMaterialRenderer:DepthMaterial = (cast {  } : DepthMaterial);

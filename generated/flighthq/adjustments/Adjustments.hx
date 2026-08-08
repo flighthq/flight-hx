@@ -74,22 +74,22 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createBrightnessContrastAdjustment(?options:Dynamic):BrightnessContrastAdjustment {
+  public static function createBrightnessContrastAdjustment(?options:flighthq._internal._Omit<BrightnessContrastAdjustment, String>):BrightnessContrastAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_BrightnessContrastAdjustment.createBrightnessContrastAdjustment(options);
     return cast null;
   }
 
-  public static function createChannelMixerAdjustment(?options:Dynamic):ChannelMixerAdjustment {
+  public static function createChannelMixerAdjustment(?options:flighthq._internal._Omit<ChannelMixerAdjustment, String>):ChannelMixerAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_ChannelMixerAdjustment.createChannelMixerAdjustment(options);
     return cast null;
   }
 
-  public static function createColorBlindSimulationAdjustment(?options:Dynamic):ColorBlindSimulationAdjustment {
+  public static function createColorBlindSimulationAdjustment(?options:flighthq._internal._Omit<ColorBlindSimulationAdjustment, String>):ColorBlindSimulationAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_ColorBlindSimulationAdjustment.createColorBlindSimulationAdjustment(options);
     return cast null;
   }
 
-  public static function createColorGradeAdjustment(?options:Dynamic):ColorGradeAdjustment {
+  public static function createColorGradeAdjustment(?options:flighthq._internal._Omit<ColorGradeAdjustment, String>):ColorGradeAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_ColorGradeAdjustment.createColorGradeAdjustment(options);
     return cast null;
   }
@@ -119,12 +119,12 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createExposureAdjustment(?options:Dynamic):ExposureAdjustment {
+  public static function createExposureAdjustment(?options:flighthq._internal._Omit<ExposureAdjustment, String>):ExposureAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_ExposureAdjustment.createExposureAdjustment(options);
     return cast null;
   }
 
-  public static function createGrayscaleAdjustment(?options:Dynamic):GrayscaleAdjustment {
+  public static function createGrayscaleAdjustment(?options:flighthq._internal._Omit<GrayscaleAdjustment, String>):GrayscaleAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_GrayscaleAdjustment.createGrayscaleAdjustment(options);
     return cast null;
   }
@@ -134,7 +134,7 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createHueSaturationAdjustment(?options:Dynamic):HueSaturationAdjustment {
+  public static function createHueSaturationAdjustment(?options:flighthq._internal._Omit<HueSaturationAdjustment, String>):HueSaturationAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_HueSaturationAdjustment.createHueSaturationAdjustment(options);
     return cast null;
   }
@@ -144,17 +144,17 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createInvertAdjustment(?options:Dynamic):InvertAdjustment {
+  public static function createInvertAdjustment(?options:flighthq._internal._Omit<InvertAdjustment, String>):InvertAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_InvertAdjustment.createInvertAdjustment(options);
     return cast null;
   }
 
-  public static function createLiftGammaGainAdjustment(?options:Dynamic):LiftGammaGainAdjustment {
+  public static function createLiftGammaGainAdjustment(?options:flighthq._internal._Omit<LiftGammaGainAdjustment, String>):LiftGammaGainAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_LiftGammaGainAdjustment.createLiftGammaGainAdjustment(options);
     return cast null;
   }
 
-  public static function createLookupTableGradeAdjustment(?options:Dynamic):LookupTableGradeAdjustment {
+  public static function createLookupTableGradeAdjustment(?options:flighthq._internal._Omit<LookupTableGradeAdjustment, String>):LookupTableGradeAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_LookupTableGradeAdjustment.createLookupTableGradeAdjustment(options);
     return cast null;
   }
@@ -164,7 +164,7 @@ class Adjustments {
     return cast null;
   }
 
-  public static function createSepiaAdjustment(?options:Dynamic):SepiaAdjustment {
+  public static function createSepiaAdjustment(?options:flighthq._internal._Omit<SepiaAdjustment, String>):SepiaAdjustment {
     return cast Facade_Adjustments_flighthq_adjustments_SepiaAdjustment.createSepiaAdjustment(options);
     return cast null;
   }

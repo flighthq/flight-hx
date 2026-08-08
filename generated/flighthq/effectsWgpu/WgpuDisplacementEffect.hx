@@ -24,22 +24,22 @@ class WgpuDisplacementEffect {
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 8.0);
     frequency = _Runtime.coalesce(_Runtime.field(effect, 'frequency'), function():Dynamic return cast 12.0);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'lens.displacement' : String), (cast WgpuDisplacementEffect.DISPLACEMENT_FRAGMENT_WGSL__wgpuDisplacementEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'lens.displacement' : String), (cast WgpuDisplacementEffect.DISPLACEMENT_FRAGMENT_WGSL__wgpuDisplacementEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, frequency);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, seed);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, _Runtime.field(source, 'width'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, _Runtime.field(source, 'height'));
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
-  public static final defaultWgpuDisplacementEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyDisplacementEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : DisplacementEffect) : DisplacementEffect));
-  };
+  public static final defaultWgpuDisplacementEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyDisplacementEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : DisplacementEffect)));
+  });
 
   public static function registerWgpuDisplacementEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'DisplacementEffect' : String), (cast defaultWgpuDisplacementEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'DisplacementEffect' : String), (cast defaultWgpuDisplacementEffectRunner));
   }
 
   public static final DISPLACEMENT_FRAGMENT_WGSL__wgpuDisplacementEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_frequency : f32,\n  u_seed : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let f = uni.u_frequency;\n  let warp = vec2f(\n    sin(uv.y * f + uni.u_seed) + sin(uv.y * f * 2.3 + uni.u_seed * 1.7) * 0.5,\n    cos(uv.x * f * 0.8 + uni.u_seed * 1.3)\n  );\n  let displaced = uv + warp * (uni.u_intensity / uni.u_resolution);\n  return textureSampleLevel(tex, smp, displaced, 0.0);\n}';

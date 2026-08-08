@@ -7,7 +7,6 @@ import flighthq.mesh.MeshGeometry.getMeshGeometryMorphBindPose;
 import flighthq.mesh.MeshGeometry.setMeshGeometryMorphBindPose;
 import flighthq.mesh.MorphMeshGeometry.blendMeshGeometryMorph;
 import flighthq.mesh.MorphMeshGeometry.captureMeshMorphBindPose;
-import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshGeometryRuntime;
@@ -24,15 +23,15 @@ class UpdateMeshMorph {
     morph = mesh.morph;
     if ((cast _Runtime.looseEquals(morph, null) : Bool)) { return; }
     geometry = mesh.geometry;
-    bindPose = (cast getMeshGeometryMorphBindPose((cast geometry : MeshGeometry)) : Null<MeshMorphBindPose>);
+    bindPose = (cast getMeshGeometryMorphBindPose((cast geometry)) : Null<MeshMorphBindPose>);
     if ((cast _Runtime.strictEquals(bindPose, null) : Bool)) {
-      (bindPose = cast ((cast captureMeshMorphBindPose((cast geometry : MeshGeometry)) : Null<MeshMorphBindPose>) : Dynamic));
-      setMeshGeometryMorphBindPose((cast geometry : MeshGeometry), bindPose);
-    } else { if ((cast !(cast (cast UpdateMeshMorph.hasMorphWeightsChanged__updateMeshMorph((cast geometry : MeshGeometry), (cast morph : MeshMorph)) : Bool) : Bool) : Bool)) {
+      (bindPose = cast ((cast captureMeshMorphBindPose((cast geometry)) : MeshMorphBindPose) : Dynamic));
+      setMeshGeometryMorphBindPose((cast geometry), (cast bindPose));
+    } else { if ((cast !(cast (cast UpdateMeshMorph.hasMorphWeightsChanged__updateMeshMorph((cast geometry), (cast morph)) : Bool) : Bool) : Bool)) {
       return;
     } }
-    blendMeshGeometryMorph((cast geometry : MeshGeometry), (cast morph : MeshMorph), bindPose);
-    UpdateMeshMorph.recordMorphBlendedWeights__updateMeshMorph((cast geometry : MeshGeometry), (cast morph : MeshMorph));
+    blendMeshGeometryMorph((cast geometry), (cast morph), (cast bindPose));
+    UpdateMeshMorph.recordMorphBlendedWeights__updateMeshMorph((cast geometry), (cast morph));
   }
 
   public static function hasMorphWeightsChanged__updateMeshMorph(geometry:MeshGeometry, morph:MeshMorph):Bool {
@@ -40,7 +39,7 @@ class UpdateMeshMorph {
     var blended:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     var weights:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    blended = _Runtime.optionalField(runtime, 'morphBlendedWeights');
+    blended = ({ final __structural0 = runtime; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var morphBlendedWeights:Null<flighthq._internal._Float32Array>; }).morphBlendedWeights; });
     if ((cast _Runtime.looseEquals(blended, null) : Bool)) { return cast true; }
     weights = _Runtime.field(morph, 'weights');
     if ((cast !_Runtime.strictEquals(_Runtime.field(blended, 'length'), _Runtime.field(weights, 'length')) : Bool)) { return cast true; }

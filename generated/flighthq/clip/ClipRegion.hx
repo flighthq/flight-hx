@@ -44,26 +44,26 @@ class ClipRegion {
   }
 
   public static function clipRegionContainsPoint(clip:flighthq.types.ClipRegion, x:Float, y:Float):Bool {
-    if ((cast !(cast (cast containsRectanglePointXY((cast _Runtime.field(clip, 'rect') : RectangleLike), (cast x : Float), (cast y : Float)) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast containsRectanglePointXY((cast _Runtime.field(clip, 'rect')), (cast x : Float), (cast y : Float)) : Bool) : Bool) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(clip, 'contours'), null) : Bool)) { return cast true; }
-    return cast (cast ClipRegion.pointInContours__clipRegion((cast _Runtime.field(clip, 'contours') : Array<Array<Float>>), (cast _Runtime.field(clip, 'winding') : PathWinding), (cast x : Float), (cast y : Float)) : Bool);
+    return cast (cast ClipRegion.pointInContours__clipRegion((cast _Runtime.field(clip, 'contours')), (cast _Runtime.field(clip, 'winding')), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 
   public static function clipRegionContainsRectangle(clip:flighthq.types.ClipRegion, rectangle:RectangleLike):Bool {
-    return cast (cast enclosesRectangle((cast _Runtime.field(clip, 'rect') : RectangleLike), (cast rectangle : RectangleLike)) : Bool);
+    return cast (cast enclosesRectangle((cast _Runtime.field(clip, 'rect')), (cast rectangle)) : Bool);
     return cast null;
   }
 
   public static function clipRegionIntersectsRectangle(clip:flighthq.types.ClipRegion, rectangle:RectangleLike):Bool {
-    return cast (cast intersectsRectangle((cast _Runtime.field(clip, 'rect') : RectangleLike), (cast rectangle : RectangleLike)) : Bool);
+    return cast (cast intersectsRectangle((cast _Runtime.field(clip, 'rect')), (cast rectangle)) : Bool);
     return cast null;
   }
 
   public static function cloneClipRegion(clip:flighthq.types.ClipRegion):flighthq.types.ClipRegion {
     var rect:Rectangle = cast _Runtime.UNDEFINED;
     var contours:Null<Array<Array<Float>>> = cast _Runtime.UNDEFINED;
-    rect = (cast cloneRectangle((cast _Runtime.field(clip, 'rect') : RectangleLike)) : Rectangle);
+    rect = (cast cloneRectangle((cast _Runtime.field(clip, 'rect'))) : Rectangle);
     contours = ((cast _Runtime.strictEquals(_Runtime.field(clip, 'contours'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callProperty(_Runtime.field(clip, 'contours'), 'map', cast ([function(c:Array<Float>, __unused0:Float, __unused1:Array<Array<Float>>):Array<Float> return _Runtime.slice(c, 0, null)] : Array<Dynamic>)) : Dynamic));
     return cast { contours: contours, rect: rect, version: _Runtime.field(clip, 'version'), winding: _Runtime.field(clip, 'winding') };
     return cast null;
@@ -71,7 +71,7 @@ class ClipRegion {
 
   public static function copyClipRegion(out:flighthq.types.ClipRegion, source:flighthq.types.ClipRegion):Void {
     if ((cast _Runtime.strictEquals((cast out : flighthq._internal._Any), (cast source : flighthq._internal._Any)) : Bool)) { return; }
-    copyRectangle((cast (cast out : flighthq.types.ClipRegion).rect : RectangleLike), (cast _Runtime.field(source, 'rect') : RectangleLike));
+    copyRectangle((cast (cast out : flighthq.types.ClipRegion).rect), (cast _Runtime.field(source, 'rect')));
     ((cast out : flighthq.types.ClipRegion).contours = ((cast _Runtime.strictEquals(_Runtime.field(source, 'contours'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.callProperty(_Runtime.field(source, 'contours'), 'map', cast ([function(c:Array<Float>, __unused2:Float, __unused3:Array<Array<Float>>):Array<Float> return _Runtime.slice(c, 0, null)] : Array<Dynamic>)) : Dynamic)));
     ((cast out : flighthq.types.ClipRegion).winding = _Runtime.field(source, 'winding'));
     ((cast out : flighthq.types.ClipRegion).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast out : flighthq.types.ClipRegion).version + 1.0)), 0));
@@ -79,17 +79,17 @@ class ClipRegion {
 
   public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, tolerance:Float = 0.25):flighthq.types.ClipRegion {
     var path:Path = cast _Runtime.UNDEFINED;
-    path = (cast createPath((cast 'nonZero' : PathWinding)) : Path);
-    ClipRegion.appendCircleToPath__clipRegion((cast path : Path), (cast x : Float), (cast y : Float), (cast radius : Float));
-    return cast (cast createClipRegionFromPath((cast path : Path), (cast tolerance : Float)) : flighthq.types.ClipRegion);
+    path = (cast createPath((cast 'nonZero')) : Path);
+    ClipRegion.appendCircleToPath__clipRegion((cast path), (cast x : Float), (cast y : Float), (cast radius : Float));
+    return cast (cast createClipRegionFromPath((cast path), (cast tolerance : Float)) : flighthq.types.ClipRegion);
     return cast null;
   }
 
   public static function createClipRegionFromContours(contours:Array<Array<Float>>, winding:PathWinding):flighthq.types.ClipRegion {
     var rect:Rectangle = cast _Runtime.UNDEFINED;
     var owned:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    rect = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
-    ClipRegion.setRectangleToContoursBounds__clipRegion((cast rect : RectangleLike), (cast contours : Array<Array<Float>>));
+    rect = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle);
+    ClipRegion.setRectangleToContoursBounds__clipRegion((cast rect), (cast contours));
     owned = _Runtime.callProperty(contours, 'map', cast ([function(c:Array<Float>, __unused4:Float, __unused5:Array<Array<Float>>):Array<Float> return _Runtime.slice(c, 0, null)] : Array<Dynamic>));
     return cast { contours: owned, rect: rect, version: 0.0, winding: winding };
     return cast null;
@@ -97,33 +97,33 @@ class ClipRegion {
 
   public static function createClipRegionFromEllipse(rectangle:RectangleLike, tolerance:Float = 0.25):flighthq.types.ClipRegion {
     var path:Path = cast _Runtime.UNDEFINED;
-    path = (cast createPath((cast 'nonZero' : PathWinding)) : Path);
-    ClipRegion.appendEllipseToPath__clipRegion((cast path : Path), (cast _Runtime.field(rectangle, 'x') : Float), (cast _Runtime.field(rectangle, 'y') : Float), (cast _Runtime.field(rectangle, 'width') : Float), (cast _Runtime.field(rectangle, 'height') : Float));
-    return cast (cast createClipRegionFromPath((cast path : Path), (cast tolerance : Float)) : flighthq.types.ClipRegion);
+    path = (cast createPath((cast 'nonZero')) : Path);
+    ClipRegion.appendEllipseToPath__clipRegion((cast path), (cast _Runtime.field(rectangle, 'x') : Float), (cast _Runtime.field(rectangle, 'y') : Float), (cast _Runtime.field(rectangle, 'width') : Float), (cast _Runtime.field(rectangle, 'height') : Float));
+    return cast (cast createClipRegionFromPath((cast path), (cast tolerance : Float)) : flighthq.types.ClipRegion);
     return cast null;
   }
 
   public static function createClipRegionFromPath(path:Path, tolerance:Float = 0.25):flighthq.types.ClipRegion {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var rect:Rectangle = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath((cast path : Path), (cast tolerance : Float)) : Array<Array<Float>>);
-    rect = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
-    ClipRegion.setRectangleToContoursBounds__clipRegion((cast rect : RectangleLike), (cast contours : Array<Array<Float>>));
+    contours = (cast flattenPath((cast path), (cast tolerance : Float)) : Array<Array<Float>>);
+    rect = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle);
+    ClipRegion.setRectangleToContoursBounds__clipRegion((cast rect), (cast contours));
     return cast { contours: contours, rect: rect, version: 0.0, winding: _Runtime.field(path, 'winding') };
     return cast null;
   }
 
   public static function createClipRegionFromRectangle(rectangle:RectangleLike):flighthq.types.ClipRegion {
-    return cast { contours: null, rect: (cast cloneRectangle((cast rectangle : RectangleLike)) : Rectangle), version: 0.0, winding: 'nonZero' };
+    return cast { contours: null, rect: (cast cloneRectangle((cast rectangle)) : Rectangle), version: 0.0, winding: 'nonZero' };
     return cast null;
   }
 
   public static function createClipRegionFromRoundedRectangle(rectangle:RectangleLike, radius:Float, tolerance:Float = 0.25):flighthq.types.ClipRegion {
     var path:Path = cast _Runtime.UNDEFINED;
-    if ((cast ((cast radius : Float) <= (cast 0.0 : Float)) : Bool)) { return cast (cast createClipRegionFromRectangle((cast rectangle : RectangleLike)) : flighthq.types.ClipRegion); }
-    path = (cast createPath((cast 'nonZero' : PathWinding)) : Path);
-    ClipRegion.appendRoundedRectToPath__clipRegion((cast path : Path), (cast _Runtime.field(rectangle, 'x') : Float), (cast _Runtime.field(rectangle, 'y') : Float), (cast _Runtime.field(rectangle, 'width') : Float), (cast _Runtime.field(rectangle, 'height') : Float), (cast radius : Float));
-    return cast (cast createClipRegionFromPath((cast path : Path), (cast tolerance : Float)) : flighthq.types.ClipRegion);
+    if ((cast ((cast radius : Float) <= (cast 0.0 : Float)) : Bool)) { return cast (cast createClipRegionFromRectangle((cast rectangle)) : flighthq.types.ClipRegion); }
+    path = (cast createPath((cast 'nonZero')) : Path);
+    ClipRegion.appendRoundedRectToPath__clipRegion((cast path), (cast _Runtime.field(rectangle, 'x') : Float), (cast _Runtime.field(rectangle, 'y') : Float), (cast _Runtime.field(rectangle, 'width') : Float), (cast _Runtime.field(rectangle, 'height') : Float), (cast radius : Float));
+    return cast (cast createClipRegionFromPath((cast path), (cast tolerance : Float)) : flighthq.types.ClipRegion);
     return cast null;
   }
 
@@ -245,7 +245,7 @@ class ClipRegion {
   }
 
   public static function isClipRegionEmpty(clip:flighthq.types.ClipRegion):Bool {
-    if ((cast (cast isEmptyRectangle((cast _Runtime.field(clip, 'rect') : RectangleLike)) : Bool) : Bool)) { return cast true; }
+    if ((cast (cast isEmptyRectangle((cast _Runtime.field(clip, 'rect'))) : Bool) : Bool)) { return cast true; }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(clip, 'contours'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(clip, 'contours'), 'length'), 0.0) : Bool)) : Bool)) { return cast true; }
     return cast false;
     return cast null;
@@ -264,7 +264,7 @@ class ClipRegion {
     inRect = _Runtime.field(clip, 'rect');
     inWinding = _Runtime.field(clip, 'winding');
     if ((cast _Runtime.strictEquals(inContours, null) : Bool)) {
-      copyRectangle((cast (cast out : flighthq.types.ClipRegion).rect : RectangleLike), (cast inRect : RectangleLike));
+      copyRectangle((cast (cast out : flighthq.types.ClipRegion).rect), (cast inRect));
       ((cast out : flighthq.types.ClipRegion).contours = null);
       ((cast out : flighthq.types.ClipRegion).winding = inWinding);
       ((cast out : flighthq.types.ClipRegion).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast out : flighthq.types.ClipRegion).version + 1.0)), 0));
@@ -317,14 +317,14 @@ class ClipRegion {
         return;
       }
     }
-    copyRectangle((cast (cast out : flighthq.types.ClipRegion).rect : RectangleLike), (cast inRect : RectangleLike));
+    copyRectangle((cast (cast out : flighthq.types.ClipRegion).rect), (cast inRect));
     ((cast out : flighthq.types.ClipRegion).contours = _Runtime.callProperty(inContours, 'map', cast ([function(c:Array<Float>, __unused12:Float, __unused13:Array<Array<Float>>):Array<Float> return _Runtime.slice(c, 0, null)] : Array<Dynamic>)));
     ((cast out : flighthq.types.ClipRegion).winding = inWinding);
     ((cast out : flighthq.types.ClipRegion).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast out : flighthq.types.ClipRegion).version + 1.0)), 0));
   }
 
   public static function releaseClipRegion(clip:flighthq.types.ClipRegion):Void {
-    if ((cast ((cast !_Runtime.strictEquals(ClipRegion._releaseGuard__clipRegion, null) : Bool) && (cast _Runtime.includes(ClipRegion.clipRegionPool__clipRegion, clip) : Bool)) : Bool)) { (cast ClipRegion._releaseGuard__clipRegion : flighthq.types.ClipRegion->Void)((cast clip : flighthq.types.ClipRegion)); }
+    if ((cast ((cast !_Runtime.strictEquals(ClipRegion._releaseGuard__clipRegion, null) : Bool) && (cast _Runtime.includes(ClipRegion.clipRegionPool__clipRegion, clip) : Bool)) : Bool)) { (cast ClipRegion._releaseGuard__clipRegion : flighthq.types.ClipRegion->Void)((cast clip)); }
     _Runtime.callProperty(ClipRegion.clipRegionPool__clipRegion, 'push', cast ([clip] : Array<Dynamic>));
   }
 
@@ -336,7 +336,7 @@ class ClipRegion {
   public static var _releaseGuard__clipRegion:Null<ClipRegionReleaseGuard> = _Runtime.explicitNull();
 
   public static function setClipRegionToRectangle(out:flighthq.types.ClipRegion, rectangle:RectangleLike):Void {
-    copyRectangle((cast (cast out : flighthq.types.ClipRegion).rect : RectangleLike), (cast rectangle : RectangleLike));
+    copyRectangle((cast (cast out : flighthq.types.ClipRegion).rect), (cast rectangle));
     ((cast out : flighthq.types.ClipRegion).contours = null);
     ((cast out : flighthq.types.ClipRegion).winding = 'nonZero');
     ((cast out : flighthq.types.ClipRegion).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast out : flighthq.types.ClipRegion).version + 1.0)), 0));
@@ -364,7 +364,7 @@ class ClipRegion {
     if ((cast _Runtime.strictEquals(inContours, null) : Bool)) {
       var axisAligned:Bool = ((cast _Runtime.strictEquals(mb, 0.0) : Bool) && (cast _Runtime.strictEquals(mc, 0.0) : Bool));
       if ((cast axisAligned : Bool)) {
-        matrixTransformRectangle((cast (cast out : flighthq.types.ClipRegion).rect : RectangleLike), (cast matrix : MatrixLike), (cast inRect : RectangleLike));
+        matrixTransformRectangle((cast (cast out : flighthq.types.ClipRegion).rect), (cast matrix), (cast inRect));
         ((cast out : flighthq.types.ClipRegion).contours = null);
         ((cast out : flighthq.types.ClipRegion).winding = 'nonZero');
       } else {
@@ -380,10 +380,10 @@ class ClipRegion {
         var brY:Float = (((mb * (rx + rw)) + (md * (ry + rh))) + mty);
         var blX:Float = (((ma * rx) + (mc * (ry + rh))) + mtx);
         var blY:Float = (((mb * rx) + (md * (ry + rh))) + mty);
-        var quad:Array<Float> = cast ([tlX, tlY, trX, trY, brX, brY, blX, blY] : Array<Dynamic>);
+        var quad:Array<Float> = (cast cast ([tlX, tlY, trX, trY, brX, brY, blX, blY] : Array<Dynamic>));
         ((cast out : flighthq.types.ClipRegion).contours = cast ([quad] : Array<Dynamic>));
         ((cast out : flighthq.types.ClipRegion).winding = 'nonZero');
-        ClipRegion.setRectangleToContoursBounds__clipRegion((cast (cast out : flighthq.types.ClipRegion).rect : RectangleLike), (cast cast ([quad] : Array<Dynamic>) : Array<Array<Float>>));
+        ClipRegion.setRectangleToContoursBounds__clipRegion((cast (cast out : flighthq.types.ClipRegion).rect), (cast cast ([quad] : Array<Dynamic>)));
       }
     } else {
       var newContours:Array<Array<Float>> = _Runtime.createArray(_Runtime.field(inContours, 'length'));
@@ -408,7 +408,7 @@ class ClipRegion {
       }
       ((cast out : flighthq.types.ClipRegion).contours = newContours);
       ((cast out : flighthq.types.ClipRegion).winding = inWinding);
-      ClipRegion.setRectangleToContoursBounds__clipRegion((cast (cast out : flighthq.types.ClipRegion).rect : RectangleLike), (cast newContours : Array<Array<Float>>));
+      ClipRegion.setRectangleToContoursBounds__clipRegion((cast (cast out : flighthq.types.ClipRegion).rect), (cast newContours));
     }
     ((cast out : flighthq.types.ClipRegion).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast out : flighthq.types.ClipRegion).version + 1.0)), 0));
   }
@@ -426,7 +426,7 @@ class ClipRegion {
     bContours = _Runtime.field(b, 'contours');
     aWinding = _Runtime.field(a, 'winding');
     bWinding = _Runtime.field(b, 'winding');
-    mergeRectangle((cast (cast out : flighthq.types.ClipRegion).rect : RectangleLike), (cast aRect : RectangleLike), (cast bRect : RectangleLike));
+    mergeRectangle((cast (cast out : flighthq.types.ClipRegion).rect), (cast aRect), (cast bRect));
     if ((cast ((cast _Runtime.strictEquals(aContours, null) : Bool) && (cast _Runtime.strictEquals(bContours, null) : Bool)) : Bool)) {
       ((cast out : flighthq.types.ClipRegion).contours = null);
       ((cast out : flighthq.types.ClipRegion).winding = 'nonZero');
@@ -448,10 +448,10 @@ class ClipRegion {
 
   public static final KAPPA__clipRegion:Float = 0.5522847498;
 
-  public static final clipRegionPool__clipRegion:Array<flighthq.types.ClipRegion> = cast ([] : Array<Dynamic>);
+  public static final clipRegionPool__clipRegion:Array<flighthq.types.ClipRegion> = (cast cast ([] : Array<Dynamic>));
 
   public static function makeEmptyClipRegion__clipRegion():flighthq.types.ClipRegion {
-    return cast { contours: null, rect: (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle), version: 0.0, winding: 'nonZero' };
+    return cast { contours: null, rect: (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle), version: 0.0, winding: 'nonZero' };
     return cast null;
   }
 
@@ -500,11 +500,11 @@ class ClipRegion {
   public static function appendCircleToPath__clipRegion(path:Path, cx:Float, cy:Float, r:Float):Void {
     var k:Float = cast _Runtime.UNDEFINED;
     k = (r * ClipRegion.KAPPA__clipRegion);
-    appendPathMoveTo((cast path : Path), (cast cx : Float), (cast (cy - r) : Float));
-    appendPathCubicCurveTo((cast path : Path), (cast (cx + k) : Float), (cast (cy - r) : Float), (cast (cx + r) : Float), (cast (cy - k) : Float), (cast (cx + r) : Float), (cast cy : Float));
-    appendPathCubicCurveTo((cast path : Path), (cast (cx + r) : Float), (cast (cy + k) : Float), (cast (cx + k) : Float), (cast (cy + r) : Float), (cast cx : Float), (cast (cy + r) : Float));
-    appendPathCubicCurveTo((cast path : Path), (cast (cx - k) : Float), (cast (cy + r) : Float), (cast (cx - r) : Float), (cast (cy + k) : Float), (cast (cx - r) : Float), (cast cy : Float));
-    appendPathCubicCurveTo((cast path : Path), (cast (cx - r) : Float), (cast (cy - k) : Float), (cast (cx - k) : Float), (cast (cy - r) : Float), (cast cx : Float), (cast (cy - r) : Float));
+    appendPathMoveTo((cast path), (cast cx : Float), (cast (cy - r) : Float));
+    appendPathCubicCurveTo((cast path), (cast (cx + k) : Float), (cast (cy - r) : Float), (cast (cx + r) : Float), (cast (cy - k) : Float), (cast (cx + r) : Float), (cast cy : Float));
+    appendPathCubicCurveTo((cast path), (cast (cx + r) : Float), (cast (cy + k) : Float), (cast (cx + k) : Float), (cast (cy + r) : Float), (cast cx : Float), (cast (cy + r) : Float));
+    appendPathCubicCurveTo((cast path), (cast (cx - k) : Float), (cast (cy + r) : Float), (cast (cx - r) : Float), (cast (cy + k) : Float), (cast (cx - r) : Float), (cast cy : Float));
+    appendPathCubicCurveTo((cast path), (cast (cx - r) : Float), (cast (cy - k) : Float), (cast (cx - k) : Float), (cast (cy - r) : Float), (cast cx : Float), (cast (cy - r) : Float));
   }
 
   public static function appendEllipseToPath__clipRegion(path:Path, x:Float, y:Float, w:Float, h:Float):Void {
@@ -520,11 +520,11 @@ class ClipRegion {
     ry = (h / 2.0);
     kx = (rx * ClipRegion.KAPPA__clipRegion);
     ky = (ry * ClipRegion.KAPPA__clipRegion);
-    appendPathMoveTo((cast path : Path), (cast cx : Float), (cast (cy - ry) : Float));
-    appendPathCubicCurveTo((cast path : Path), (cast (cx + kx) : Float), (cast (cy - ry) : Float), (cast (cx + rx) : Float), (cast (cy - ky) : Float), (cast (cx + rx) : Float), (cast cy : Float));
-    appendPathCubicCurveTo((cast path : Path), (cast (cx + rx) : Float), (cast (cy + ky) : Float), (cast (cx + kx) : Float), (cast (cy + ry) : Float), (cast cx : Float), (cast (cy + ry) : Float));
-    appendPathCubicCurveTo((cast path : Path), (cast (cx - kx) : Float), (cast (cy + ry) : Float), (cast (cx - rx) : Float), (cast (cy + ky) : Float), (cast (cx - rx) : Float), (cast cy : Float));
-    appendPathCubicCurveTo((cast path : Path), (cast (cx - rx) : Float), (cast (cy - ky) : Float), (cast (cx - kx) : Float), (cast (cy - ry) : Float), (cast cx : Float), (cast (cy - ry) : Float));
+    appendPathMoveTo((cast path), (cast cx : Float), (cast (cy - ry) : Float));
+    appendPathCubicCurveTo((cast path), (cast (cx + kx) : Float), (cast (cy - ry) : Float), (cast (cx + rx) : Float), (cast (cy - ky) : Float), (cast (cx + rx) : Float), (cast cy : Float));
+    appendPathCubicCurveTo((cast path), (cast (cx + rx) : Float), (cast (cy + ky) : Float), (cast (cx + kx) : Float), (cast (cy + ry) : Float), (cast cx : Float), (cast (cy + ry) : Float));
+    appendPathCubicCurveTo((cast path), (cast (cx - kx) : Float), (cast (cy + ry) : Float), (cast (cx - rx) : Float), (cast (cy + ky) : Float), (cast (cx - rx) : Float), (cast cy : Float));
+    appendPathCubicCurveTo((cast path), (cast (cx - rx) : Float), (cast (cy - ky) : Float), (cast (cx - kx) : Float), (cast (cy - ry) : Float), (cast cx : Float), (cast (cy - ry) : Float));
   }
 
   public static function appendRoundedRectToPath__clipRegion(path:Path, x:Float, y:Float, w:Float, h:Float, r:Float):Void {
@@ -542,15 +542,15 @@ class ClipRegion {
     x2 = ((x + w) - cr);
     y1 = (y + cr);
     y2 = ((y + h) - cr);
-    appendPathMoveTo((cast path : Path), (cast x1 : Float), (cast y : Float));
-    appendPathLineTo((cast path : Path), (cast x2 : Float), (cast y : Float));
-    appendPathCubicCurveTo((cast path : Path), (cast (x2 + k) : Float), (cast y : Float), (cast (x + w) : Float), (cast (y1 - k) : Float), (cast (x + w) : Float), (cast y1 : Float));
-    appendPathLineTo((cast path : Path), (cast (x + w) : Float), (cast y2 : Float));
-    appendPathCubicCurveTo((cast path : Path), (cast (x + w) : Float), (cast (y2 + k) : Float), (cast (x2 + k) : Float), (cast (y + h) : Float), (cast x2 : Float), (cast (y + h) : Float));
-    appendPathLineTo((cast path : Path), (cast x1 : Float), (cast (y + h) : Float));
-    appendPathCubicCurveTo((cast path : Path), (cast (x1 - k) : Float), (cast (y + h) : Float), (cast x : Float), (cast (y2 + k) : Float), (cast x : Float), (cast y2 : Float));
-    appendPathLineTo((cast path : Path), (cast x : Float), (cast y1 : Float));
-    appendPathCubicCurveTo((cast path : Path), (cast x : Float), (cast (y1 - k) : Float), (cast (x1 - k) : Float), (cast y : Float), (cast x1 : Float), (cast y : Float));
+    appendPathMoveTo((cast path), (cast x1 : Float), (cast y : Float));
+    appendPathLineTo((cast path), (cast x2 : Float), (cast y : Float));
+    appendPathCubicCurveTo((cast path), (cast (x2 + k) : Float), (cast y : Float), (cast (x + w) : Float), (cast (y1 - k) : Float), (cast (x + w) : Float), (cast y1 : Float));
+    appendPathLineTo((cast path), (cast (x + w) : Float), (cast y2 : Float));
+    appendPathCubicCurveTo((cast path), (cast (x + w) : Float), (cast (y2 + k) : Float), (cast (x2 + k) : Float), (cast (y + h) : Float), (cast x2 : Float), (cast (y + h) : Float));
+    appendPathLineTo((cast path), (cast x1 : Float), (cast (y + h) : Float));
+    appendPathCubicCurveTo((cast path), (cast (x1 - k) : Float), (cast (y + h) : Float), (cast x : Float), (cast (y2 + k) : Float), (cast x : Float), (cast y2 : Float));
+    appendPathLineTo((cast path), (cast x : Float), (cast y1 : Float));
+    appendPathCubicCurveTo((cast path), (cast x : Float), (cast (y1 - k) : Float), (cast (x1 - k) : Float), (cast y : Float), (cast x1 : Float), (cast y : Float));
   }
 
   public static function setRectangleToContoursBounds__clipRegion(out:RectangleLike, contours:Array<Array<Float>>):Void {

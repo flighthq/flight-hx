@@ -24,50 +24,50 @@ class BooleanPaths {
     var clipContours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var result:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
     fillRule = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fillRule; }), function():Dynamic return cast 'nonZero');
-    subjectContours = (cast flattenPath((cast subject : Path), (cast ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.tolerance; }) : Float)) : Array<Array<Float>>);
-    clipContours = (cast flattenPath((cast clip : Path), (cast ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.tolerance; }) : Float)) : Array<Array<Float>>);
-    result = (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean(subjectContours, clipContours, operation, fillRule);
-    return cast (cast BooleanPaths.writeContours__booleanPaths((cast result : Array<Array<Float>>), (cast out : Null<Path>)) : Path);
+    subjectContours = (cast flattenPath((cast subject), (cast ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.tolerance; }) : Float)) : Array<Array<Float>>);
+    clipContours = (cast flattenPath((cast clip), (cast ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.tolerance; }) : Float)) : Array<Array<Float>>);
+    result = (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean((cast subjectContours), (cast clipContours), (cast operation), (cast fillRule));
+    return cast (cast BooleanPaths.writeContours__booleanPaths((cast result), (cast out)) : Path);
     return cast null;
   }
 
   public static function differencePaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast (cast booleanPaths((cast a : Path), (cast b : Path), (cast 'difference' : PathBooleanOperation), (cast out : Null<Path>), (cast options : Null<PathBooleanOptions>)) : Path);
+    return cast (cast booleanPaths((cast a), (cast b), (cast 'difference'), (cast out), (cast options)) : Path);
     return cast null;
   }
 
   public static function intersectPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast (cast booleanPaths((cast a : Path), (cast b : Path), (cast 'intersection' : PathBooleanOperation), (cast out : Null<Path>), (cast options : Null<PathBooleanOptions>)) : Path);
+    return cast (cast booleanPaths((cast a), (cast b), (cast 'intersection'), (cast out), (cast options)) : Path);
     return cast null;
   }
 
   public static function unionPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast (cast booleanPaths((cast a : Path), (cast b : Path), (cast 'union' : PathBooleanOperation), (cast out : Null<Path>), (cast options : Null<PathBooleanOptions>)) : Path);
+    return cast (cast booleanPaths((cast a), (cast b), (cast 'union'), (cast out), (cast options)) : Path);
     return cast null;
   }
 
   public static function xorPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast (cast booleanPaths((cast a : Path), (cast b : Path), (cast 'xor' : PathBooleanOperation), (cast out : Null<Path>), (cast options : Null<PathBooleanOptions>)) : Path);
+    return cast (cast booleanPaths((cast a), (cast b), (cast 'xor'), (cast out), (cast options)) : Path);
     return cast null;
   }
 
   public static function writeContours__booleanPaths(contours:Array<Array<Float>>, ?out:Path):Path {
     var path:Path = cast _Runtime.UNDEFINED;
-    path = _Runtime.coalesce(out, function():Dynamic return cast (cast createPath('nonZero') : Null<Path>));
+    path = _Runtime.coalesce(out, function():Dynamic return cast (cast createPath((cast 'nonZero')) : Path));
     _Runtime.setLength((cast path : Path).commands, 0.0);
     _Runtime.setLength((cast path : Path).data, 0.0);
     ((cast path : Path).winding = 'nonZero');
     for (ring in _Runtime.iterable(contours)) {
       if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-      appendPathMoveTo((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(ring, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, 1.0) : Float));
+      appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readArray(ring, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, 1.0) : Float));
       {
         var i:Float = 2.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          appendPathLineTo((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(ring, i) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, (i + 1.0)) : Float));
+          appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readArray(ring, i) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, (i + 1.0)) : Float));
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
-      appendPathClose((cast path : Path));
+      appendPathClose((cast path));
     }
     return cast path;
     return cast null;

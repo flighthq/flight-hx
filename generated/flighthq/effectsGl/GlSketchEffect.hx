@@ -20,19 +20,19 @@ class GlSketchEffect {
     var strength:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'stylization.sketch' : String), (cast GlSketchEffect.SKETCH_FRAGMENT_SRC__glSketchEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'stylization.sketch' : String), (cast GlSketchEffect.SKETCH_FRAGMENT_SRC__glSketchEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_strength'), strength);
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
-    });
+    }));
   }
 
-  public static final defaultGlSketchEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applySketchEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : SketchEffect) : SketchEffect));
-  };
+  public static final defaultGlSketchEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applySketchEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : SketchEffect)));
+  });
 
   public static function registerGlSketchEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'SketchEffect' : String), (cast defaultGlSketchEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'SketchEffect' : String), (cast defaultGlSketchEffectRunner));
   }
 
   public static final SKETCH_FRAGMENT_SRC__glSketchEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_strength;\nuniform vec2 u_resolution;\nout vec4 o_color;\nfloat lum(vec2 uv) {\n  return dot(texture(u_texture0, uv).rgb, vec3(0.2126, 0.7152, 0.0722));\n}\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  float tl = lum(v_texCoord + texel * vec2(-1.0, -1.0));\n  float t = lum(v_texCoord + texel * vec2(0.0, -1.0));\n  float tr = lum(v_texCoord + texel * vec2(1.0, -1.0));\n  float l = lum(v_texCoord + texel * vec2(-1.0, 0.0));\n  float rr = lum(v_texCoord + texel * vec2(1.0, 0.0));\n  float bl = lum(v_texCoord + texel * vec2(-1.0, 1.0));\n  float b = lum(v_texCoord + texel * vec2(0.0, 1.0));\n  float br = lum(v_texCoord + texel * vec2(1.0, 1.0));\n  float gx = -tl - 2.0 * l - bl + tr + 2.0 * rr + br;\n  float gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;\n  float edge = sqrt(gx * gx + gy * gy);\n  float pencil = clamp(1.0 - edge * u_strength, 0.0, 1.0);\n  float a = texture(u_texture0, v_texCoord).a;\n  o_color = vec4(vec3(pencil), a);\n}';

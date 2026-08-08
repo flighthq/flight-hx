@@ -12,9 +12,9 @@ import flighthq.types.ShapeTessellationExplanation;
 
 class ExplainShapeTessellation {
   public static function explainShapeTessellation(commands:Array<ShapeCommandToken>, strokePathTessellationEnabled:Bool = false):ShapeTessellationExplanation {
-    if ((cast (cast hasNonSolidShapeFill((cast commands : Array<ShapeCommandToken>)) : Bool) : Bool)) { return cast { blockedBy: 'non-solid-fill', status: 'needs-rasterizer' }; }
-    if ((cast (cast hasNonSolidShapeStroke((cast commands : Array<ShapeCommandToken>)) : Bool) : Bool)) { return cast { blockedBy: 'non-solid-stroke', status: 'needs-rasterizer' }; }
-    if ((cast ((cast !(cast strokePathTessellationEnabled : Bool) : Bool) && (cast _Runtime.strictEquals((cast getShapeStrokeOutlineRegions((cast commands : Array<ShapeCommandToken>)) : Null<Array<ShapeFillRegion>>), null) : Bool)) : Bool)) {
+    if ((cast (cast hasNonSolidShapeFill((cast commands)) : Bool) : Bool)) { return cast { blockedBy: 'non-solid-fill', status: 'needs-rasterizer' }; }
+    if ((cast (cast hasNonSolidShapeStroke((cast commands)) : Bool) : Bool)) { return cast { blockedBy: 'non-solid-stroke', status: 'needs-rasterizer' }; }
+    if ((cast ((cast !(cast strokePathTessellationEnabled : Bool) : Bool) && (cast _Runtime.strictEquals((cast getShapeStrokeOutlineRegions((cast commands)) : Null<Array<ShapeFillRegion>>), null) : Bool)) : Bool)) {
       return cast { blockedBy: 'stroke-outline', status: 'needs-rasterizer' };
     }
     return cast { blockedBy: 'none', status: 'tessellates' };

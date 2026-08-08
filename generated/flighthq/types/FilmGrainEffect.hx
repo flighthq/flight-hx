@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef FilmGrainEffect = { var kind:Kind; @:optional var intensity:Float; @:optional var size:Float; @:optional var seed:Float; };
+typedef FilmGrainEffect = { var kind:String; @:optional var intensity:Float; @:optional var size:Float; @:optional var seed:Float; };

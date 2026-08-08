@@ -14,6 +14,7 @@ import flighthq.scene2dDom.DomStyle.setDomRendererElement;
 import flighthq.shape.Scale9ShapeCommands.mapScale9ShapeCommands;
 import flighthq.types.DomRenderState;
 import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.Entity;
 import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle;
@@ -36,11 +37,11 @@ import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 typedef DomScale9ShapeData__domScale9Shape = { >RendererData, var canvas:Null<flighthq._internal.dom.HTMLCanvasElement>; var context:Null<flighthq._internal.dom.CanvasRenderingContext2D>; };
 
 class DomScale9Shape {
-  public static final _remappedCommands__domScale9Shape:Array<ShapeCommandToken> = cast ([] : Array<Dynamic>);
+  public static final _remappedCommands__domScale9Shape:Array<ShapeCommandToken> = (cast cast ([] : Array<Dynamic>));
 
   @:noCompletion
   public static function createDomScale9ShapeData(_state:RenderState, _source:Renderable):DomScale9ShapeData__domScale9Shape {
-    return cast (cast createEntity((cast { canvas: null, context: null } : Null<{ var canvas:flighthq._internal._Any; var context:flighthq._internal._Any; }>)) : DomScale9ShapeData__domScale9Shape);
+    return cast (cast createEntity((cast { canvas: null, context: null })) : { >Entity, var canvas:flighthq._internal._Any; var context:flighthq._internal._Any; });
     return cast null;
   }
 
@@ -65,21 +66,21 @@ class DomScale9Shape {
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
-    rasterizer = (cast getDomShapeRasterizer((cast state : DomRenderState)) : Null<ShapeRasterizer>);
+    rasterizer = (cast getDomShapeRasterizer((cast state)) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
-      _Runtime.callOptionalValue((cast (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime) : DomRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast (cast getDomRenderStateRuntime((cast state)) : DomRenderStateRuntime) : DomRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
       return;
     }
-    bounds = (cast getNodeLocalBoundsRectangle(source) : Rectangle);
-    mapper = (cast buildDomScale9Mapper(bounds, scale9Grid, (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float)) : Null<Scale9Mapper>);
+    bounds = (cast getNodeLocalBoundsRectangle((cast source)) : Rectangle);
+    mapper = (cast buildDomScale9Mapper((cast bounds), (cast scale9Grid), (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
-      drawDomShape((cast state : DomRenderState), (cast renderProxy : RenderProxy2D));
+      drawDomShape((cast state), (cast renderProxy));
       return;
     }
     if ((cast _Runtime.strictEquals((cast data : DomScale9ShapeData__domScale9Shape).canvas, null) : Bool)) {
       ((cast data : DomScale9ShapeData__domScale9Shape).canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       ((cast data : DomScale9ShapeData__domScale9Shape).context = flighthq._internal.backend.CanvasElementBackend.call((cast data : DomScale9ShapeData__domScale9Shape).canvas, 'getContext', cast (['2d'] : Array<Dynamic>)));
-      prepareDomElement((cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLElement));
+      prepareDomElement((cast (cast data : DomScale9ShapeData__domScale9Shape).canvas));
     }
     w = HxMath.max(1.0, HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'width'), (cast source : Scale9Shape).scaleX)));
     h = HxMath.max(1.0, HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'height'), (cast source : Scale9Shape).scaleY)));
@@ -89,17 +90,17 @@ class DomScale9Shape {
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(w) + 'px');
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(h) + 'px');
     ctx = (cast data : DomScale9ShapeData__domScale9Shape).context;
-    mapScale9ShapeCommands((cast DomScale9Shape._remappedCommands__domScale9Shape : Array<ShapeCommandToken>), (cast commands : Array<ShapeCommandToken>), mapper);
+    mapScale9ShapeCommands((cast DomScale9Shape._remappedCommands__domScale9Shape), (cast commands), (cast mapper));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
-    rasterizer((cast ctx : flighthq._internal.dom.CanvasRenderingContext2D), (cast DomScale9Shape._remappedCommands__domScale9Shape : Array<ShapeCommandToken>), (cast state : RenderState));
+    rasterizer((cast ctx), (cast DomScale9Shape._remappedCommands__domScale9Shape), (cast state));
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast renderProxy : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast renderProxy : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast (cast state : DomRenderState).allowSmoothing : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
     _Runtime.callOptionalValue((cast state : DomRenderState).applyBlendMode, cast ([(cast data : DomScale9ShapeData__domScale9Shape).canvas, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    DomScale9Shape.setStrippedDomTransform__domScale9Shape((cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLElement), (cast (cast renderProxy : RenderProxy2D).transform2D : MatrixLike), (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
-    setDomRendererElement((cast state : DomRenderState), (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLElement));
+    DomScale9Shape.setStrippedDomTransform__domScale9Shape((cast (cast data : DomScale9ShapeData__domScale9Shape).canvas), (cast (cast renderProxy : RenderProxy2D).transform2D), (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
+    setDomRendererElement((cast state), (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas));
   }
 
-  public static final defaultDomScale9ShapeRenderer:Scene2DRenderer = { createData: createDomScale9ShapeData, submit: drawDomScale9Shape };
+  public static final defaultDomScale9ShapeRenderer:Scene2DRenderer = (cast { createData: createDomScale9ShapeData, submit: drawDomScale9Shape });
 
   public static function setStrippedDomTransform__domScale9Shape(element:flighthq._internal.dom.HTMLElement, transform:MatrixLike, scaleX:Float, scaleY:Float, roundPixels:Bool):Void {
     var a:Float = cast _Runtime.UNDEFINED;

@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef FilmEmulationEffect = { var kind:Kind; @:optional var gateWeave:Float; @:optional var grainIntensity:Float; @:optional var halationRadius:Float; @:optional var halationStrength:Float; };
+typedef FilmEmulationEffect = { var kind:String; @:optional var gateWeave:Float; @:optional var grainIntensity:Float; @:optional var halationRadius:Float; @:optional var halationStrength:Float; };

@@ -20,19 +20,19 @@ class GlPixelateEffect {
     var size:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     size = _Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 8.0);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'stylization.pixelate' : String), (cast GlPixelateEffect.PIXELATE_FRAGMENT_SRC__glPixelateEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'stylization.pixelate' : String), (cast GlPixelateEffect.PIXELATE_FRAGMENT_SRC__glPixelateEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_size'), HxMath.max(1.0, size));
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
-    });
+    }));
   }
 
-  public static final defaultGlPixelateEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyPixelateEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : PixelateEffect) : PixelateEffect));
-  };
+  public static final defaultGlPixelateEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyPixelateEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : PixelateEffect)));
+  });
 
   public static function registerGlPixelateEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'PixelateEffect' : String), (cast defaultGlPixelateEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'PixelateEffect' : String), (cast defaultGlPixelateEffectRunner));
   }
 
   public static final PIXELATE_FRAGMENT_SRC__glPixelateEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_size;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec2 blocks = u_resolution / u_size;\n  vec2 uv = (floor(v_texCoord * blocks) + 0.5) / blocks;\n  o_color = texture(u_texture0, uv);\n}';

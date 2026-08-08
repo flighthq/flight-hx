@@ -27,7 +27,7 @@ class RiveText {
     var format:TextFormat = cast _Runtime.UNDEFINED;
     var node:RichText = cast _Runtime.UNDEFINED;
     source = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
-    runs = cast ([] : Array<Dynamic>);
+    runs = (cast cast ([] : Array<Dynamic>));
     {
       var child:Float = (index + 1.0);
       while ((cast ((cast child : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
@@ -36,25 +36,25 @@ class RiveText {
         child++;
       }
     }
-    align = (cast RiveText.readRiveNumber__riveText((cast source : RiveCoreObject), (cast RiveText.RIVE_TEXT_ALIGN__riveText : Float), (cast 0.0 : Float)) : Float);
-    formatRanges = cast ([] : Array<Dynamic>);
+    align = (cast RiveText.readRiveNumber__riveText((cast source), (cast RiveText.RIVE_TEXT_ALIGN__riveText : Float), (cast 0.0 : Float)) : Float);
+    formatRanges = (cast cast ([] : Array<Dynamic>));
     text = '';
     for (run in _Runtime.iterable(runs)) {
-      var value:String = (cast RiveText.readRiveText__riveText((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), run) : RiveCoreObject), (cast RiveText.RIVE_RUN_TEXT__riveText : Float), (cast '' : String)) : String);
-      var style:Float = (cast RiveText.readRiveNumber__riveText((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), run) : RiveCoreObject), (cast RiveText.RIVE_RUN_STYLE_ID__riveText : Float), (cast -1.0 : Float)) : Float);
-      _Runtime.callProperty(formatRanges, 'push', cast ([{ end: _Runtime.addNumbers(_Runtime.field(text, 'length'), _Runtime.field(value, 'length')), format: (cast RiveText.createRiveTextFormat__riveText((cast artboard : RiveArtboardGraph), (cast style : Float), (cast align : Float), (cast fontNames : Array<String>)) : TextFormat), start: _Runtime.field(text, 'length') }] : Array<Dynamic>));
+      var value:String = (cast RiveText.readRiveText__riveText((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), run)), (cast RiveText.RIVE_RUN_TEXT__riveText : Float), (cast '' : String)) : String);
+      var style:Float = (cast RiveText.readRiveNumber__riveText((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), run)), (cast RiveText.RIVE_RUN_STYLE_ID__riveText : Float), (cast -1.0 : Float)) : Float);
+      _Runtime.callProperty(formatRanges, 'push', cast ([{ end: _Runtime.addNumbers(_Runtime.field(text, 'length'), _Runtime.field(value, 'length')), format: (cast RiveText.createRiveTextFormat__riveText((cast artboard), (cast style : Float), (cast align : Float), (cast fontNames)) : TextFormat), start: _Runtime.field(text, 'length') }] : Array<Dynamic>));
       (text = cast ((text + value) : Dynamic));
     }
-    baseStyle = ((cast _Runtime.strictEquals(_Runtime.field(runs, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast RiveText.readRiveNumber__riveText((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), flighthq._internal._StaticIndex.readArray(runs, 0.0)) : RiveCoreObject), (cast RiveText.RIVE_RUN_STYLE_ID__riveText : Float), (cast -1.0 : Float)) : Float) : Dynamic));
-    format = (cast RiveText.createRiveTextFormat__riveText((cast artboard : RiveArtboardGraph), (cast baseStyle : Float), (cast align : Float), (cast fontNames : Array<String>)) : TextFormat);
-    node = (cast createRichText(_Runtime.field(_Runtime, 'UNDEFINED')) : RichText);
+    baseStyle = ((cast _Runtime.strictEquals(_Runtime.field(runs, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast RiveText.readRiveNumber__riveText((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), flighthq._internal._StaticIndex.readArray(runs, 0.0))), (cast RiveText.RIVE_RUN_STYLE_ID__riveText : Float), (cast -1.0 : Float)) : Float) : Dynamic));
+    format = (cast RiveText.createRiveTextFormat__riveText((cast artboard), (cast baseStyle : Float), (cast align : Float), (cast fontNames)) : TextFormat);
+    node = (cast createRichText((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : RichText);
     ((cast (cast node : RichText).data : RichTextData).defaultTextFormat = format);
-    ((cast (cast node : RichText).data : RichTextData).height = (cast RiveText.readRiveNumber__riveText((cast source : RiveCoreObject), (cast RiveText.RIVE_TEXT_HEIGHT__riveText : Float), (cast 0.0 : Float)) : Float));
+    ((cast (cast node : RichText).data : RichTextData).height = (cast RiveText.readRiveNumber__riveText((cast source), (cast RiveText.RIVE_TEXT_HEIGHT__riveText : Float), (cast 0.0 : Float)) : Float));
     ((cast (cast node : RichText).data : RichTextData).text = text);
     ((cast (cast node : RichText).data : RichTextData).textColor = _Runtime.coalesce((cast format : TextFormat).color, function():Dynamic return cast RiveText.RIVE_DEFAULT_TEXT_COLOR__riveText));
     ((cast (cast node : RichText).data : RichTextData).textFormat = format);
     ((cast (cast node : RichText).data : RichTextData).textFormatRanges = formatRanges);
-    ((cast (cast node : RichText).data : RichTextData).width = (cast RiveText.readRiveNumber__riveText((cast source : RiveCoreObject), (cast RiveText.RIVE_TEXT_WIDTH__riveText : Float), (cast 0.0 : Float)) : Float));
+    ((cast (cast node : RichText).data : RichTextData).width = (cast RiveText.readRiveNumber__riveText((cast source), (cast RiveText.RIVE_TEXT_WIDTH__riveText : Float), (cast 0.0 : Float)) : Float));
     return cast node;
     return cast null;
   }
@@ -66,15 +66,15 @@ class RiveText {
     var fontName:String = cast _Runtime.UNDEFINED;
     var variations:Array<FontVariation> = cast _Runtime.UNDEFINED;
     style = ((cast ((cast ((cast styleIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast styleIndex : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), styleIndex) : Dynamic) : (cast null : Dynamic));
-    format = { align: ((cast _Runtime.strictEquals(align, RiveText.RIVE_ALIGN_RIGHT__riveText) : Bool) ? (cast 'right' : Dynamic) : (cast ((cast _Runtime.strictEquals(align, RiveText.RIVE_ALIGN_CENTER__riveText) : Bool) ? (cast 'center' : Dynamic) : (cast 'left' : Dynamic)) : Dynamic)), color: (cast RiveText.readRiveStyleColor__riveText((cast artboard : RiveArtboardGraph), (cast styleIndex : Float)) : Null<Float>) };
+    format = (cast { align: ((cast _Runtime.strictEquals(align, RiveText.RIVE_ALIGN_RIGHT__riveText) : Bool) ? (cast 'right' : Dynamic) : (cast ((cast _Runtime.strictEquals(align, RiveText.RIVE_ALIGN_CENTER__riveText) : Bool) ? (cast 'center' : Dynamic) : (cast 'left' : Dynamic)) : Dynamic)), color: (cast RiveText.readRiveStyleColor__riveText((cast artboard), (cast styleIndex : Float)) : Float) });
     if ((cast _Runtime.strictEquals(style, null) : Bool)) { return cast format; }
-    ((cast format : TextFormat).leading = (cast RiveText.readRiveNumber__riveText((cast style : RiveCoreObject), (cast RiveText.RIVE_STYLE_LINE_HEIGHT__riveText : Float), (cast -1.0 : Float)) : Null<Float>));
-    ((cast format : TextFormat).letterSpacing = (cast RiveText.readRiveNumber__riveText((cast style : RiveCoreObject), (cast RiveText.RIVE_STYLE_LETTER_SPACING__riveText : Float), (cast 0.0 : Float)) : Null<Float>));
-    ((cast format : TextFormat).size = (cast RiveText.readRiveNumber__riveText((cast style : RiveCoreObject), (cast RiveText.RIVE_STYLE_FONT_SIZE__riveText : Float), (cast RiveText.RIVE_DEFAULT_FONT_SIZE__riveText : Float)) : Null<Float>));
-    fontAsset = (cast RiveText.readRiveNumber__riveText((cast style : RiveCoreObject), (cast RiveText.RIVE_STYLE_FONT_ASSET_ID__riveText : Float), (cast RiveText.RIVE_MISSING_ASSET_ID__riveText : Float)) : Float);
+    ((cast format : TextFormat).leading = (cast RiveText.readRiveNumber__riveText((cast style), (cast RiveText.RIVE_STYLE_LINE_HEIGHT__riveText : Float), (cast -1.0 : Float)) : Float));
+    ((cast format : TextFormat).letterSpacing = (cast RiveText.readRiveNumber__riveText((cast style), (cast RiveText.RIVE_STYLE_LETTER_SPACING__riveText : Float), (cast 0.0 : Float)) : Float));
+    ((cast format : TextFormat).size = (cast RiveText.readRiveNumber__riveText((cast style), (cast RiveText.RIVE_STYLE_FONT_SIZE__riveText : Float), (cast RiveText.RIVE_DEFAULT_FONT_SIZE__riveText : Float)) : Float));
+    fontAsset = (cast RiveText.readRiveNumber__riveText((cast style), (cast RiveText.RIVE_STYLE_FONT_ASSET_ID__riveText : Float), (cast RiveText.RIVE_MISSING_ASSET_ID__riveText : Float)) : Float);
     fontName = ((cast ((cast ((cast fontAsset : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast fontAsset : Float) < (cast _Runtime.field(fontNames, 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(fontNames, fontAsset) : Dynamic) : (cast '' : Dynamic));
     if ((cast !_Runtime.strictEquals(fontName, '') : Bool)) { ((cast format : TextFormat).font = fontName); }
-    variations = (cast RiveText.readRiveStyleAxes__riveText((cast artboard : RiveArtboardGraph), (cast styleIndex : Float)) : Array<FontVariation>);
+    variations = (cast RiveText.readRiveStyleAxes__riveText((cast artboard), (cast styleIndex : Float)) : Array<FontVariation>);
     if ((cast ((cast _Runtime.field(variations, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast format : TextFormat).variations = variations); }
     return cast format;
     return cast null;
@@ -82,7 +82,7 @@ class RiveText {
 
   public static function readRiveStyleAxes__riveText(artboard:RiveArtboardGraph, styleIndex:Float):Array<FontVariation> {
     var variations:Array<FontVariation> = cast _Runtime.UNDEFINED;
-    variations = cast ([] : Array<Dynamic>);
+    variations = (cast cast ([] : Array<Dynamic>));
     if ((cast ((cast styleIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast variations; }
     {
       var index:Float = (styleIndex + 1.0);
@@ -90,7 +90,7 @@ class RiveText {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         if ((cast !_Runtime.strictEquals((cast object : RiveCoreObject).typeKey, RiveText.RIVE_TEXT_STYLE_AXIS__riveText) : Bool)) { index++; continue; }
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index), styleIndex) : Bool)) { index++; continue; }
-        _Runtime.callProperty(variations, 'push', cast ([{ axis: (cast RiveText.toRiveOpenTypeTag__riveText((cast (cast RiveText.readRiveNumber__riveText((cast object : RiveCoreObject), (cast RiveText.RIVE_AXIS_TAG__riveText : Float), (cast 0.0 : Float)) : Float) : Float)) : String), value: (cast RiveText.readRiveNumber__riveText((cast object : RiveCoreObject), (cast RiveText.RIVE_AXIS_VALUE__riveText : Float), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
+        _Runtime.callProperty(variations, 'push', cast ([{ axis: (cast RiveText.toRiveOpenTypeTag__riveText((cast (cast RiveText.readRiveNumber__riveText((cast object), (cast RiveText.RIVE_AXIS_TAG__riveText : Float), (cast 0.0 : Float)) : Float) : Float)) : String), value: (cast RiveText.readRiveNumber__riveText((cast object), (cast RiveText.RIVE_AXIS_VALUE__riveText : Float), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
         index++;
       }
     }
@@ -110,8 +110,8 @@ class RiveText {
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveText.RIVE_SOLID_COLOR__riveText : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
-        if ((cast !(cast (cast RiveText.isRiveDescendantOf__riveText((cast artboard : RiveArtboardGraph), (cast index : Float), (cast styleIndex : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
-        var packed:Float = (cast RiveText.readRiveNumber__riveText((cast object : RiveCoreObject), (cast RiveText.RIVE_SOLID_COLOR_VALUE__riveText : Float), (cast 0.0 : Float)) : Float);
+        if ((cast !(cast (cast RiveText.isRiveDescendantOf__riveText((cast artboard), (cast index : Float), (cast styleIndex : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
+        var packed:Float = (cast RiveText.readRiveNumber__riveText((cast object), (cast RiveText.RIVE_SOLID_COLOR_VALUE__riveText : Float), (cast 0.0 : Float)) : Float);
         return cast (cast packColor((cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0) : Float), (cast ((_Runtime.toInt32(packed) & 255) / 255.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0) : Float)) : Float);
         index++;
       }

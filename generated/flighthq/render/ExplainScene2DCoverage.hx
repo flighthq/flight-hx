@@ -18,12 +18,12 @@ class ExplainScene2DCoverage {
   @:noCompletion
   public static function explainScene2DCoverage(out:Array<SceneCoverageEntry>, state:RenderState, usage:Scene2DKindUsage):Void {
     _Runtime.setLength(out, 0.0);
-    (cast ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage((cast out : Null<Array<SceneCoverageEntry>>), (cast state : RenderState), (cast usage : Scene2DKindUsage), (cast false : Bool)) : Bool);
+    (cast ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage((cast out), (cast state), (cast usage), (cast false : Bool)) : Bool);
   }
 
   @:noCompletion
   public static function hasScene2DCoverage(state:RenderState, usage:Scene2DKindUsage):Bool {
-    return cast !(cast (cast ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage((cast null : Null<Array<SceneCoverageEntry>>), (cast state : RenderState), (cast usage : Scene2DKindUsage), (cast true : Bool)) : Bool) : Bool);
+    return cast !(cast (cast ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage((cast null), (cast state), (cast usage), (cast true : Bool)) : Bool) : Bool);
     return cast null;
   }
 
@@ -32,7 +32,7 @@ class ExplainScene2DCoverage {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var commands:Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>> = cast _Runtime.UNDEFINED;
     found = false;
-    runtime = (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime((cast state)) : RenderStateRuntime);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'nodeKinds'), 'length') : Float)) : Bool)) {

@@ -22,18 +22,19 @@ import flighthq.physics2d.Joints.physics2DRevoluteJointSolver;
 import flighthq.physics2d.Joints.physics2DRopeJointSolver;
 import flighthq.physics2d.Joints.physics2DWeldJointSolver;
 import flighthq.physics2d.Joints.physics2DWheelJointSolver;
+import flighthq.types.Physics2D.Physics2DJointSolver;
 import flighthq.types.Physics2D.Physics2DWorld;
 
 class RegisterBuiltInPhysics2DJointSolvers {
   public static function registerBuiltInPhysics2DJointSolvers(world:Physics2DWorld):Void {
-    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DDistanceJointKind : String), physics2DDistanceJointSolver);
-    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DGearJointKind : String), physics2DGearJointSolver);
-    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DMouseJointKind : String), physics2DMouseJointSolver);
-    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DPrismaticJointKind : String), physics2DPrismaticJointSolver);
-    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DPulleyJointKind : String), physics2DPulleyJointSolver);
-    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DRevoluteJointKind : String), physics2DRevoluteJointSolver);
-    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DRopeJointKind : String), physics2DRopeJointSolver);
-    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DWeldJointKind : String), physics2DWeldJointSolver);
-    registerPhysics2DJointSolver((cast world : Physics2DWorld), (cast Physics2DWheelJointKind : String), physics2DWheelJointSolver);
+    registerPhysics2DJointSolver((cast world), (cast Physics2DDistanceJointKind : String), (cast physics2DDistanceJointSolver));
+    registerPhysics2DJointSolver((cast world), (cast Physics2DGearJointKind : String), (cast physics2DGearJointSolver));
+    registerPhysics2DJointSolver((cast world), (cast Physics2DMouseJointKind : String), (cast physics2DMouseJointSolver));
+    registerPhysics2DJointSolver((cast world), (cast Physics2DPrismaticJointKind : String), (cast physics2DPrismaticJointSolver));
+    registerPhysics2DJointSolver((cast world), (cast Physics2DPulleyJointKind : String), (cast physics2DPulleyJointSolver));
+    registerPhysics2DJointSolver((cast world), (cast Physics2DRevoluteJointKind : String), (cast physics2DRevoluteJointSolver));
+    registerPhysics2DJointSolver((cast world), (cast Physics2DRopeJointKind : String), (cast physics2DRopeJointSolver));
+    registerPhysics2DJointSolver((cast world), (cast Physics2DWeldJointKind : String), (cast physics2DWeldJointSolver));
+    registerPhysics2DJointSolver((cast world), (cast Physics2DWheelJointKind : String), (cast physics2DWheelJointSolver));
   }
 }

@@ -34,55 +34,56 @@ import flighthq.types.VoxelGrid;
 import flighthq.types.WgpuClassicPipeline;
 import flighthq.types.WgpuClassicPipeline.WgpuClassicDefineKey;
 import flighthq.types.WgpuMeshMaterialRenderer;
+import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types._internal._PhongMaterialValues.PhongMaterialKind;
 
 class PhongWgpuMeshMaterialRenderer {
   @:noCompletion
-  public static final phongWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+  public static final phongWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var phong:Null<PhongMaterial> = cast _Runtime.UNDEFINED;
     var format:String = cast _Runtime.UNDEFINED;
     var pipeline:WgpuClassicPipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
-    stateRuntime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    stateRuntime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     phong = (cast material : Null<PhongMaterial>);
     format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    pipeline = (cast ensureWgpuClassicPipeline((cast state : WgpuRenderState), (cast (cast PhongWgpuMeshMaterialRenderer.defineKeyForMaterial__phongWgpuMeshMaterialRenderer((cast phong : Null<PhongMaterial>)) : WgpuClassicDefineKey) : WgpuClassicDefineKey), (cast format : String)) : WgpuClassicPipeline);
-    writeWgpuFrameUniform((cast state : WgpuRenderState), (cast camera : Camera3D), (cast lights : Scene3DLightBlock));
+    pipeline = (cast ensureWgpuClassicPipeline((cast state), (cast (cast PhongWgpuMeshMaterialRenderer.defineKeyForMaterial__phongWgpuMeshMaterialRenderer((cast phong)) : WgpuClassicDefineKey)), (cast format : String)) : WgpuClassicPipeline);
+    writeWgpuFrameUniform((cast state), (cast camera), (cast lights));
     if ((cast _Runtime.strictEquals(phong, null) : Bool)) {
-      (group = cast ((cast bindWgpuClassicSurface((cast state : WgpuRenderState), pipeline, (cast PhongWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__phongWgpuMeshMaterialRenderer : flighthq._internal._Object), (cast PhongWgpuMeshMaterialRenderer.WHITE__phongWgpuMeshMaterialRenderer : Array<Float>), (cast PhongWgpuMeshMaterialRenderer.WHITE__phongWgpuMeshMaterialRenderer : Array<Float>), (cast 32.0 : Float), (cast 0.5 : Float), null, null, null, null) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (group = cast ((cast bindWgpuClassicSurface((cast state), (cast pipeline), (cast PhongWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__phongWgpuMeshMaterialRenderer), (cast PhongWgpuMeshMaterialRenderer.WHITE__phongWgpuMeshMaterialRenderer), (cast PhongWgpuMeshMaterialRenderer.WHITE__phongWgpuMeshMaterialRenderer), (cast 32.0 : Float), (cast 0.5 : Float), (cast null), (cast null), (cast null), (cast null)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
-      (cast unpackColorToLinear((cast PhongWgpuMeshMaterialRenderer._diffuse__phongWgpuMeshMaterialRenderer : LinearColor), (cast _Runtime.field(phong, 'diffuse') : Float)) : LinearColor);
-      (cast unpackColorToLinear((cast PhongWgpuMeshMaterialRenderer._specular__phongWgpuMeshMaterialRenderer : LinearColor), (cast _Runtime.field(phong, 'specular') : Float)) : LinearColor);
-      (group = cast ((cast bindWgpuClassicSurface((cast state : WgpuRenderState), pipeline, (cast phong : flighthq._internal._Object), (cast PhongWgpuMeshMaterialRenderer._diffuse__phongWgpuMeshMaterialRenderer : Array<Float>), (cast PhongWgpuMeshMaterialRenderer._specular__phongWgpuMeshMaterialRenderer : Array<Float>), (cast _Runtime.field(phong, 'shininess') : Float), (cast _Runtime.field(phong, 'alphaCutoff') : Float), _Runtime.field(phong, 'diffuseMap'), _Runtime.field(phong, 'specularMap'), _Runtime.field(phong, 'normalMap'), null) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (cast unpackColorToLinear((cast PhongWgpuMeshMaterialRenderer._diffuse__phongWgpuMeshMaterialRenderer), (cast _Runtime.field(phong, 'diffuse') : Float)) : LinearColor);
+      (cast unpackColorToLinear((cast PhongWgpuMeshMaterialRenderer._specular__phongWgpuMeshMaterialRenderer), (cast _Runtime.field(phong, 'specular') : Float)) : LinearColor);
+      (group = cast ((cast bindWgpuClassicSurface((cast state), (cast pipeline), (cast phong), (cast PhongWgpuMeshMaterialRenderer._diffuse__phongWgpuMeshMaterialRenderer), (cast PhongWgpuMeshMaterialRenderer._specular__phongWgpuMeshMaterialRenderer), (cast _Runtime.field(phong, 'shininess') : Float), (cast _Runtime.field(phong, 'alphaCutoff') : Float), (cast _Runtime.field(phong, 'diffuseMap')), (cast _Runtime.field(phong, 'specularMap')), (cast _Runtime.field(phong, 'normalMap')), (cast null)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
-    beginWgpuMeshDraw((cast state : WgpuRenderState), pipeline);
+    beginWgpuMeshDraw((cast state), (cast pipeline));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
-    drawWgpuMeshSubset((cast state : WgpuRenderState), (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
-  } };
+    drawWgpuMeshSubset((cast state), (cast proxy), (cast geometry));
+  } });
 
   public static function registerWgpuPhongMaterial(state:WgpuRenderState):Void {
-    registerWgpuBitmapTextureResolver((cast state : WgpuRenderState));
-    registerWgpuImageTextureResolver((cast state : WgpuRenderState));
-    registerWgpuMeshMaterialRenderer((cast state : WgpuRenderState), (cast PhongMaterialKind : String), (cast phongWgpuMeshMaterialRenderer : WgpuMeshMaterialRenderer));
+    registerWgpuBitmapTextureResolver((cast state));
+    registerWgpuImageTextureResolver((cast state));
+    registerWgpuMeshMaterialRenderer((cast state), (cast PhongMaterialKind : String), (cast phongWgpuMeshMaterialRenderer));
   }
 
   public static function defineKeyForMaterial__phongWgpuMeshMaterialRenderer(material:Null<PhongMaterial>):WgpuClassicDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasAlphaMap: false, hasDiffuseMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady(_Runtime.field(material, 'diffuseMap')) : Bool) : Bool)), hasNormalMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady(_Runtime.field(material, 'normalMap')) : Bool) : Bool)), hasSpecularMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady(_Runtime.field(material, 'specularMap')) : Bool) : Bool)), lightingModel: 'phong' };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasAlphaMap: false, hasDiffuseMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'diffuseMap'))) : Bool) : Bool)), hasNormalMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'normalMap'))) : Bool) : Bool)), hasSpecularMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'specularMap'))) : Bool) : Bool)), lightingModel: 'phong' };
     return cast null;
   }
 
-  public static final _diffuse__phongWgpuMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static final _diffuse__phongWgpuMeshMaterialRenderer:LinearColor = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 
-  public static final _specular__phongWgpuMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static final _specular__phongWgpuMeshMaterialRenderer:LinearColor = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 
-  public static final WHITE__phongWgpuMeshMaterialRenderer:LinearColor = cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>);
+  public static final WHITE__phongWgpuMeshMaterialRenderer:LinearColor = (cast cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
 
   public static final FALLBACK_MATERIAL__phongWgpuMeshMaterialRenderer:PhongMaterial = (cast {  } : PhongMaterial);
 }

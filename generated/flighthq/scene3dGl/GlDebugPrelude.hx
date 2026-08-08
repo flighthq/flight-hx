@@ -11,7 +11,9 @@ import flighthq.scene3dGl.GlMeshProgram.ensureGlScene3DProgram;
 import flighthq.types.GlDebugProgram;
 import flighthq.types.GlDebugProgram.GlDebugDefineKey;
 import flighthq.types.GlRenderState;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.Texture;
+import flighthq.types.Texture.TextureLike;
 
 class GlDebugPrelude {
   @:noCompletion
@@ -21,7 +23,7 @@ class GlDebugPrelude {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locNormalScale'), normalScale);
     if ((cast !_Runtime.strictEquals(normalMap, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
-      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), normalMap, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locNormalMap'), 0.0); }
+      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast normalMap), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locNormalMap'), 0.0); }
     }
   }
 
@@ -42,26 +44,26 @@ class GlDebugPrelude {
   @:noCompletion
   public static function compileGlDebugProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlDebugDefineKey):GlDebugProgram {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
-    program = (cast compileGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast getGlDebugVertexSourceForKey((cast key : GlDebugDefineKey)) : String) : String), (cast (cast getGlDebugFragmentSourceForKey((cast key : GlDebugDefineKey)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
+    program = (cast compileGlProgram((cast gl), (cast (cast getGlDebugVertexSourceForKey((cast key)) : String) : String), (cast (cast getGlDebugFragmentSourceForKey((cast key)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { locFar: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_far'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNear: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_near'), locNormalMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMap'), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix'), locNormalScale: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalScale'), locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
 
   @:noCompletion
   public static function ensureGlDebugProgram(state:GlRenderState, key:GlDebugDefineKey):GlDebugProgram {
-    return cast (cast ensureGlScene3DProgram((cast state : GlRenderState), (cast 'debug:' + Std.string((cast buildGlDebugDefineKey((cast key : GlDebugDefineKey)) : String)) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlDebugProgram return (cast compileGlDebugProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast key : GlDebugDefineKey)) : GlDebugProgram) : flighthq._internal.dom.WebGL2RenderingContext->GlDebugProgram)) : GlDebugProgram);
+    return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlDebugProgram)->GlDebugProgram)((cast state), (cast 'debug:' + Std.string((cast buildGlDebugDefineKey((cast key)) : String)) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlDebugProgram return (cast compileGlDebugProgram((cast gl), (cast key)) : GlDebugProgram))) : GlDebugProgram);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlDebugFragmentSourceForKey(key:GlDebugDefineKey):String {
-    return cast ((cast GlDebugPrelude.buildDefineSource__glDebugPrelude((cast key : GlDebugDefineKey)) : String) + GlDebugPrelude.DEBUG_FRAGMENT_BODY__glDebugPrelude);
+    return cast ((cast GlDebugPrelude.buildDefineSource__glDebugPrelude((cast key)) : String) + GlDebugPrelude.DEBUG_FRAGMENT_BODY__glDebugPrelude);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlDebugVertexSourceForKey(key:GlDebugDefineKey):String {
-    return cast ((cast GlDebugPrelude.buildDefineSource__glDebugPrelude((cast key : GlDebugDefineKey)) : String) + GlDebugPrelude.DEBUG_VERTEX_BODY__glDebugPrelude);
+    return cast ((cast GlDebugPrelude.buildDefineSource__glDebugPrelude((cast key)) : String) + GlDebugPrelude.DEBUG_VERTEX_BODY__glDebugPrelude);
     return cast null;
   }
 

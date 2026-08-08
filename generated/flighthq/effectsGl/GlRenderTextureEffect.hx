@@ -11,6 +11,7 @@ import flighthq.renderGl.GlRenderTexture.writeGlRenderTextureTarget;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationExplanation;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationGuard;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationStatus;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
@@ -28,16 +29,17 @@ class GlRenderTextureEffect {
     if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, scratch) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, scratch) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('applyGlRenderEffectsToRenderTexture: source, destination, and scratch must be distinct'));
     }
-    sourceTarget = (cast getGlRenderTextureTarget((cast state : GlRenderState), (cast source : RenderTexture)) : Null<GlRenderTarget>);
-    operations = _Runtime.callProperty(effects, 'flatMap', cast ([function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):Array<{ var effect:RenderEffect; var runner:GlRenderEffectRunner; }> {
+    sourceTarget = (cast getGlRenderTextureTarget((cast state), (cast source)) : Null<GlRenderTarget>);
+    operations = _Runtime.callProperty(effects, 'flatMap', cast ([function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flighthq._internal._Union2<{ var effect:RenderEffect; var runner:GlRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:GlRenderEffectRunner; }>> {
       var runner:Null<GlRenderEffectRunner> = cast _Runtime.UNDEFINED;
-      runner = (cast getGlRenderEffectRunner((cast state : GlRenderState), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>);
+      runner = (cast getGlRenderEffectRunner((cast state), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>);
       return cast ((cast _Runtime.strictEquals(runner, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([{ effect: effect, runner: runner }] : Array<Dynamic>) : Dynamic));
+      return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
-    GlRenderTextureEffect.reportGlRenderEffectApplication__glRenderTextureEffect((cast state : GlRenderState), (cast (cast explainGlRenderEffectApplication((cast state : GlRenderState), (cast effects : Array<RenderEffect>), (cast !_Runtime.strictEquals(sourceTarget, null) : Bool), (cast _Runtime.strictEquals((cast (cast explainGlRenderTexture((cast state : GlRenderState), (cast dest : RenderTexture)) : GlRenderTextureExplanation) : GlRenderTextureExplanation).status, 'ready') : Bool)) : GlRenderEffectApplicationExplanation) : GlRenderEffectApplicationExplanation));
+    GlRenderTextureEffect.reportGlRenderEffectApplication__glRenderTextureEffect((cast state), (cast (cast explainGlRenderEffectApplication((cast state), (cast effects), (cast !_Runtime.strictEquals(sourceTarget, null) : Bool), (cast _Runtime.strictEquals((cast (cast explainGlRenderTexture((cast state), (cast dest)) : GlRenderTextureExplanation) : GlRenderTextureExplanation).status, 'ready') : Bool)) : GlRenderEffectApplicationExplanation)));
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(operations, 'length'), 0.0) : Bool)) { return cast false; }
-    withGlRenderState((cast state : GlRenderState), (cast function():Void {
+    (cast withGlRenderState : GlRenderState->(Void->Void)->Void)((cast state), (cast function():Void {
       var current:GlRenderTarget = cast _Runtime.UNDEFINED;
       current = sourceTarget;
       {
@@ -46,14 +48,14 @@ class GlRenderTextureEffect {
           var operation:{ var effect:RenderEffect; var runner:GlRenderEffectRunner; } = flighthq._internal._StaticIndex.readArray(operations, index);
           var remaining:Float = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
           var output:RenderTexture = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
-          writeGlRenderTextureTarget((cast state : GlRenderState), (cast output : RenderTexture), function(target:GlRenderTarget):Void {
-            (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).runner({ state: state, source: current, dest: target, pool: (cast pool : GlRenderTexturePool).effectTargets, sceneDepthTexture: null, sceneVelocityTexture: null }, (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).effect);
-          });
-          (current = cast ((cast getGlRenderTextureTarget((cast state : GlRenderState), (cast output : RenderTexture)) : GlRenderTarget) : Dynamic));
+          writeGlRenderTextureTarget((cast state), (cast output), (cast function(target:GlRenderTarget):Void {
+            (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).runner((cast { state: state, source: current, dest: target, pool: (cast pool : GlRenderTexturePool).effectTargets, sceneDepthTexture: null, sceneVelocityTexture: null }), (cast (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).effect));
+          }));
+          (current = cast ((cast getGlRenderTextureTarget((cast state), (cast output)) : Null<GlRenderTarget>) : Dynamic));
           index++;
         }
       }
-    } : Void->Void));
+    }));
     return cast true;
     return cast null;
   }
@@ -69,8 +71,9 @@ class GlRenderTextureEffect {
       if ((cast !(cast sourceAvailable : Bool) : Bool)) { return cast 'source-unavailable'; }
       if ((cast _Runtime.strictEquals(registeredCount, 0.0) : Bool)) { return cast 'unregistered-effects'; }
       return cast ((cast ((cast _Runtime.field(unregisteredKinds, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'partial-registration' : Dynamic) : (cast 'complete' : Dynamic));
-    } : Void->flighthq._internal._IndexedAccess<GlRenderEffectApplicationExplanation, String>);
-    unregisteredKinds = _Runtime.callProperty(_Runtime.callProperty(effects, 'filter', cast ([function(effect:RenderEffect, __unused2:Float, __unused3:Array<RenderEffect>):Bool return _Runtime.strictEquals((cast getGlRenderEffectRunner((cast state : GlRenderState), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>), null)] : Array<Dynamic>)), 'map', cast ([function(effect:RenderEffect, __unused4:Float, __unused5:Array<RenderEffect>):String return _Runtime.field(effect, 'kind')] : Array<Dynamic>));
+      return cast _Runtime.UNDEFINED;
+    });
+    unregisteredKinds = _Runtime.callProperty(_Runtime.callProperty(effects, 'filter', cast ([function(effect:RenderEffect, __unused2:Float, __unused3:Array<RenderEffect>):Bool return _Runtime.strictEquals((cast getGlRenderEffectRunner((cast state), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>), null)] : Array<Dynamic>)), 'map', cast ([function(effect:RenderEffect, __unused4:Float, __unused5:Array<RenderEffect>):String return _Runtime.field(effect, 'kind')] : Array<Dynamic>));
     requestedCount = _Runtime.field(effects, 'length');
     registeredCount = _Runtime.subtractNumbers(requestedCount, _Runtime.field(unregisteredKinds, 'length'));
     return cast { registeredCount: registeredCount, requestedCount: requestedCount, status: (cast getStatus() : GlRenderEffectApplicationStatus), unregisteredKinds: unregisteredKinds };
@@ -79,7 +82,7 @@ class GlRenderTextureEffect {
 
   @:noCompletion
   public static function setGlRenderEffectApplicationGuard(state:GlRenderState, guard:Null<GlRenderEffectApplicationGuard>):Void {
-    if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).delete_(state)); } else { ((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).set(state, guard)); }
+    if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).delete_(state)); } else { ((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).set(state, (cast guard))); }
   }
 
   public static function reportGlRenderEffectApplication__glRenderTextureEffect(state:GlRenderState, explanation:GlRenderEffectApplicationExplanation):Void {

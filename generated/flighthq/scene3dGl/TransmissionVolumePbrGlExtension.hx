@@ -8,6 +8,7 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.GlPbrExtensionBindContext;
 import flighthq.types.GlPbrExtensionRegistration;
 import flighthq.types.GlPbrExtensionShaderContext;
+import flighthq.types.GlPbrExtensionShaderContribution;
 import flighthq.types.GlRenderState;
 import flighthq.types.PbrExtension;
 import flighthq.types.PbrExtension.PbrUvSet;
@@ -23,18 +24,18 @@ import flighthq.types.VoxelGrid;
 import flighthq.types._internal._TransmissionVolumePbrExtensionValues.TransmissionVolumePbrExtensionKind;
 
 class TransmissionVolumePbrGlExtension {
-  public static final transmissionVolumePbrGlExtension:GlPbrExtensionRegistration = { bind: function(context:GlPbrExtensionBindContext, value:PbrExtension):Void {
+  public static final transmissionVolumePbrGlExtension:GlPbrExtensionRegistration = (cast { bind: function(context:GlPbrExtensionBindContext, value:PbrExtension):Void {
     var extension:TransmissionVolumePbrExtension = cast _Runtime.UNDEFINED;
     extension = (cast value : TransmissionVolumePbrExtension);
-    (cast context : GlPbrExtensionBindContext).setFloat('u_flightTransmission', _Runtime.field(extension, 'transmission'));
-    (cast context : GlPbrExtensionBindContext).setFloat('u_flightTransmissionThickness', _Runtime.field(extension, 'thickness'));
-    (cast context : GlPbrExtensionBindContext).setFloat('u_flightTransmissionIor', _Runtime.field(extension, 'ior'));
-    (cast context : GlPbrExtensionBindContext).setFloat('u_flightAttenuationDistance', _Runtime.field(extension, 'attenuationDistance'));
-    (cast context : GlPbrExtensionBindContext).setLinearColor('u_flightAttenuationColor', _Runtime.field(extension, 'attenuationColor'));
-    (cast context : GlPbrExtensionBindContext).bindTexture('u_flightTransmissionMap', 'u_flightTransmissionMapUvSet', 'u_flightTransmissionMapTransform', _Runtime.field(extension, 'transmissionMap'), _Runtime.field(extension, 'transmissionMapUvSet'));
-    (cast context : GlPbrExtensionBindContext).bindTexture('u_flightTransmissionThicknessMap', 'u_flightTransmissionThicknessMapUvSet', 'u_flightTransmissionThicknessMapTransform', _Runtime.field(extension, 'thicknessMap'), _Runtime.field(extension, 'thicknessMapUvSet'));
-    (cast context : GlPbrExtensionBindContext).bindTransmissionSceneColor('u_flightTransmissionSceneColor', 'u_flightTransmissionMaxLod');
-  }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):{ var applySurface:String; var contributeIbl:String; var contributePunctual:String; var finalize:String; var fragmentDeclarations:String; var fragmentFunctions:String; var key:String; var samplesTransmissionSceneColor:Bool; var textureCount:Float; } {
+    (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightTransmission' : String), (cast _Runtime.field(extension, 'transmission') : Float));
+    (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightTransmissionThickness' : String), (cast _Runtime.field(extension, 'thickness') : Float));
+    (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightTransmissionIor' : String), (cast _Runtime.field(extension, 'ior') : Float));
+    (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightAttenuationDistance' : String), (cast _Runtime.field(extension, 'attenuationDistance') : Float));
+    (cast context : GlPbrExtensionBindContext).setLinearColor((cast 'u_flightAttenuationColor' : String), (cast _Runtime.field(extension, 'attenuationColor') : Float));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightTransmissionMap' : String), (cast 'u_flightTransmissionMapUvSet' : String), (cast 'u_flightTransmissionMapTransform' : String), (cast _Runtime.field(extension, 'transmissionMap')), (cast _Runtime.field(extension, 'transmissionMapUvSet')));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightTransmissionThicknessMap' : String), (cast 'u_flightTransmissionThicknessMapUvSet' : String), (cast 'u_flightTransmissionThicknessMapTransform' : String), (cast _Runtime.field(extension, 'thicknessMap')), (cast _Runtime.field(extension, 'thicknessMapUvSet')));
+    (cast context : GlPbrExtensionBindContext).bindTransmissionSceneColor((cast 'u_flightTransmissionSceneColor' : String), (cast 'u_flightTransmissionMaxLod' : String));
+  }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):GlPbrExtensionShaderContribution {
     var extension:TransmissionVolumePbrExtension = cast _Runtime.UNDEFINED;
     var transmissionMap:Bool = cast _Runtime.UNDEFINED;
     var thicknessMap:Bool = cast _Runtime.UNDEFINED;
@@ -44,11 +45,13 @@ class TransmissionVolumePbrGlExtension {
     thicknessMap = _Runtime.callProperty(context, 'isTextureReady', cast ([_Runtime.field(extension, 'thicknessMap')] : Array<Dynamic>));
     sceneColor = _Runtime.callProperty(context, 'hasTransmissionSceneColor', cast ([] : Array<Dynamic>));
     return cast { applySurface: '', contributeIbl: '', contributePunctual: '', finalize: ((cast sceneColor : Bool) ? (cast '\n  float flightTransmissionFactor = clamp(u_flightTransmission * ' + Std.string(((cast transmissionMap : Bool) ? (cast 'texture(u_flightTransmissionMap, flightTransmissionUv()).r' : Dynamic) : (cast '1.0' : Dynamic))) + ', 0.0, 1.0);\n  float flightTransmissionThickness = max(u_flightTransmissionThickness * ' + Std.string(((cast thicknessMap : Bool) ? (cast 'texture(u_flightTransmissionThicknessMap, flightTransmissionThicknessUv()).g' : Dynamic) : (cast '1.0' : Dynamic))) + ', 0.0);\n  float flightTransmissionEta = 1.0 / max(u_flightTransmissionIor, 1.0);\n  vec3 flightTransmissionRefracted = refract(-viewDir, normal, flightTransmissionEta);\n  vec4 flightTransmissionRefractedClip = u_viewProjection * vec4(\n    v_worldPosition + flightTransmissionRefracted * max(flightTransmissionThickness, 0.01), 1.0);\n  vec2 flightTransmissionScreenUv =\n    flightTransmissionRefractedClip.xy / max(flightTransmissionRefractedClip.w, 1e-5) * 0.5 + 0.5;\n  float flightTransmissionLod = roughness * u_flightTransmissionMaxLod;\n  vec3 flightTransmissionBackground = textureLod(\n    u_flightTransmissionSceneColor, clamp(flightTransmissionScreenUv, vec2(0.0), vec2(1.0)), flightTransmissionLod).rgb;\n  vec3 flightTransmissionAbsorption = u_flightAttenuationDistance > 0.0 && !isinf(u_flightAttenuationDistance)\n    ? pow(max(u_flightAttenuationColor, vec3(1e-4)), vec3(flightTransmissionThickness / u_flightAttenuationDistance))\n    : vec3(1.0);\n  vec3 flightTransmissionFresnel = fresnelSchlick(max(dot(normal, viewDir), 0.0), f0);\n  vec3 flightTransmissionThrough = flightTransmissionBackground * flightTransmissionAbsorption;\n  radiance = mix(radiance, radiance * flightTransmissionFresnel + flightTransmissionThrough * (1.0 - flightTransmissionFresnel), flightTransmissionFactor);' : Dynamic) : (cast '' : Dynamic)), fragmentDeclarations: '\nuniform float u_flightTransmission;\nuniform float u_flightTransmissionThickness;\nuniform float u_flightTransmissionIor;\nuniform float u_flightAttenuationDistance;\nuniform vec3 u_flightAttenuationColor;\n' + Std.string(((cast sceneColor : Bool) ? (cast 'uniform sampler2D u_flightTransmissionSceneColor;' : Dynamic) : (cast '' : Dynamic))) + '\n' + Std.string(((cast sceneColor : Bool) ? (cast 'uniform float u_flightTransmissionMaxLod; uniform mat4 u_viewProjection;' : Dynamic) : (cast '' : Dynamic))) + '\n' + Std.string(((cast transmissionMap : Bool) ? (cast 'uniform sampler2D u_flightTransmissionMap; uniform int u_flightTransmissionMapUvSet; uniform mat3 u_flightTransmissionMapTransform;' : Dynamic) : (cast '' : Dynamic))) + '\n' + Std.string(((cast thicknessMap : Bool) ? (cast 'uniform sampler2D u_flightTransmissionThicknessMap; uniform int u_flightTransmissionThicknessMapUvSet; uniform mat3 u_flightTransmissionThicknessMapTransform;' : Dynamic) : (cast '' : Dynamic))) + '', fragmentFunctions: '\n' + Std.string(((cast transmissionMap : Bool) ? (cast 'vec2 flightTransmissionUv() { vec2 uv = u_flightTransmissionMapUvSet == 1 ? v_pbrExtensionUv1 : v_pbrExtensionUv0; return (u_flightTransmissionMapTransform * vec3(uv, 1.0)).xy; }' : Dynamic) : (cast '' : Dynamic))) + '\n' + Std.string(((cast thicknessMap : Bool) ? (cast 'vec2 flightTransmissionThicknessUv() { vec2 uv = u_flightTransmissionThicknessMapUvSet == 1 ? v_pbrExtensionUv1 : v_pbrExtensionUv0; return (u_flightTransmissionThicknessMapTransform * vec3(uv, 1.0)).xy; }' : Dynamic) : (cast '' : Dynamic))) + '', key: 'transmission:' + Std.string(((cast sceneColor : Bool) ? (cast 's' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast transmissionMap : Bool) ? (cast 'f' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast thicknessMap : Bool) ? (cast 't' : Dynamic) : (cast '-' : Dynamic))) + '', samplesTransmissionSceneColor: sceneColor, textureCount: _Runtime.addNumbers(_Runtime.addNumbers(_Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([sceneColor] : Array<Dynamic>)), _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([transmissionMap] : Array<Dynamic>))), _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([thicknessMap] : Array<Dynamic>))) };
+    return cast _Runtime.UNDEFINED;
   }, isSupported: function(extension:PbrExtension):Bool {
     return cast true;
-  } };
+    return cast _Runtime.UNDEFINED;
+  } });
 
   public static function registerGlTransmissionVolumePbrExtension(state:GlRenderState):Void {
-    registerGlPbrExtension((cast state : GlRenderState), (cast TransmissionVolumePbrExtensionKind : String), (cast transmissionVolumePbrGlExtension : GlPbrExtensionRegistration));
+    registerGlPbrExtension((cast state), (cast TransmissionVolumePbrExtensionKind : String), (cast transmissionVolumePbrGlExtension));
   }
 }

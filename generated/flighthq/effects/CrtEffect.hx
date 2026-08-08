@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.CrtEffect;
 
 class CrtEffect {
-  public static function createCrtEffect(?options:Dynamic):flighthq.types.CrtEffect {
+  public static function createCrtEffect(?options:flighthq._internal._Omit<flighthq.types.CrtEffect, String>):flighthq.types.CrtEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'CrtEffect' }, options]);
     return cast null;

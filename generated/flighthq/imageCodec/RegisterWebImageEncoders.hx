@@ -11,7 +11,7 @@ import flighthq.types.ImageEncoder;
 class RegisterWebImageEncoders {
   public static function registerWebImageEncoders():Void {
     for (mimeType in _Runtime.iterable(RegisterWebImageEncoders.webEncodableMimeTypes__registerWebImageEncoders)) {
-      registerImageEncoder((cast mimeType : String), (cast (cast RegisterWebImageEncoders.createCanvasImageEncoder__registerWebImageEncoders((cast mimeType : String)) : ImageEncoder) : ImageEncoder));
+      registerImageEncoder((cast mimeType : String), (cast (cast RegisterWebImageEncoders.createCanvasImageEncoder__registerWebImageEncoders((cast mimeType : String)) : ImageEncoder)));
     }
   }
 
@@ -26,7 +26,7 @@ class RegisterWebImageEncoders {
         context = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)) : flighthq._internal.dom.OffscreenCanvasRenderingContext2D);
         pixels = new flighthq._internal._UInt8ClampedArray(_Runtime.field(image, 'data'));
         (cast context : flighthq._internal.dom.OffscreenCanvasRenderingContext2D).putImageData(_Runtime.construct(flighthq._internal._HostValueLut.get('ImageData'), [pixels, _Runtime.field(image, 'width'), _Runtime.field(image, 'height')]), 0.0, 0.0);
-        return flighthq._internal._Async.flatMap(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'convertToBlob', cast ([{ type: mimeType, quality: _Runtime.optionalField(options, 'quality') }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap(flighthq._internal.backend.CanvasElementBackend.call(canvas, 'convertToBlob', cast ([{ type: mimeType, quality: ({ final __structural4 = options; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var quality:Null<Float>; }).quality; }) }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
           blob = __awaitValue2;
           return flighthq._internal._Async.flatMap((cast blob : flighthq._internal.dom.Blob).arrayBuffer(), function(__awaitValue3:Dynamic):Dynamic {
             return flighthq._internal._Async.resolve(new flighthq._internal._UInt8Array(__awaitValue3));
@@ -37,5 +37,5 @@ class RegisterWebImageEncoders {
     return cast null;
   }
 
-  public static final webEncodableMimeTypes__registerWebImageEncoders:Array<String> = cast (['image/png', 'image/jpeg', 'image/webp'] : Array<Dynamic>);
+  public static final webEncodableMimeTypes__registerWebImageEncoders:Array<String> = (cast cast (['image/png', 'image/jpeg', 'image/webp'] : Array<Dynamic>));
 }

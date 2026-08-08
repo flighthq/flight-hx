@@ -18,40 +18,42 @@ class CapacitorStatusBar {
     cachedInfo = null;
     flighthq._internal._Async.recover(_Runtime.callProperty((cast statusBar : CapacitorStatusBarPlugin).getInfo(), 'then', cast ([function(info:CapacitorStatusBarInfoResult):Void {
       (cachedInfo = cast (info : Dynamic));
-    }] : Array<Dynamic>)), function():Void {
+    }] : Array<Dynamic>)), function(__unused0:flighthq._internal._Any):Void {
 
     });
     return cast { getInfo: function(out:StatusBarInfo):StatusBarInfo {
       var info:Null<CapacitorStatusBarInfoResult> = cast _Runtime.UNDEFINED;
       info = cachedInfo;
-      (out.color = cast (((cast !_Runtime.strictEquals(_Runtime.optionalField(info, 'color'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast CapacitorStatusBar.hexToRgba__capacitorStatusBar((cast (cast info : CapacitorStatusBarInfoResult).color : String)) : Float) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+      (out.color = cast (((cast !_Runtime.strictEquals(({ final __structural0 = info; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var color:Null<String>; }).color; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast CapacitorStatusBar.hexToRgba__capacitorStatusBar((cast (cast info : CapacitorStatusBarInfoResult).color : String)) : Float) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
       (out.height = cast (-1.0 : Dynamic));
-      (out.overlaysContent = cast (_Runtime.coalesce(_Runtime.optionalField(info, 'overlays'), function():Dynamic return cast false) : Dynamic));
+      (out.overlaysContent = cast (_Runtime.coalesce(({ final __structural1 = info; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var overlays:Null<Bool>; }).overlays; }), function():Dynamic return cast false) : Dynamic));
       (out.style = cast (((cast !_Runtime.strictEquals(info, null) : Bool) ? (cast (cast CapacitorStatusBar.toStatusBarStyle__capacitorStatusBar((cast (cast info : CapacitorStatusBarInfoResult).style : String)) : StatusBarStyle) : Dynamic) : (cast 'default' : Dynamic)) : Dynamic));
-      (out.visible = cast (_Runtime.coalesce(_Runtime.optionalField(info, 'visible'), function():Dynamic return cast true) : Dynamic));
+      (out.visible = cast (_Runtime.coalesce(({ final __structural2 = info; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var visible:Bool; }).visible; }), function():Dynamic return cast true) : Dynamic));
       return cast out;
+      return cast _Runtime.UNDEFINED;
     }, setBackgroundColor: function(color:Float):Void {
-      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setBackgroundColor({ color: (cast CapacitorStatusBar.rgbaToHex__capacitorStatusBar((cast color : Float)) : String) }), function():Void {
+      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setBackgroundColor((cast { color: (cast CapacitorStatusBar.rgbaToHex__capacitorStatusBar((cast color : Float)) : String) })), function(__unused1:flighthq._internal._Any):Void {
 
       });
     }, setOverlaysContent: function(overlay:Bool):Void {
-      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setOverlaysWebView({ overlay: overlay }), function():Void {
+      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setOverlaysWebView((cast { overlay: overlay })), function(__unused2:flighthq._internal._Any):Void {
 
       });
     }, setStyle: function(style:StatusBarStyle):Void {
-      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setStyle({ style: (cast CapacitorStatusBar.toCapacitorStyle__capacitorStatusBar((cast style : StatusBarStyle)) : String) }), function():Void {
+      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setStyle((cast { style: (cast CapacitorStatusBar.toCapacitorStyle__capacitorStatusBar((cast style)) : String) })), function(__unused3:flighthq._internal._Any):Void {
 
       });
     }, setVisible: function(visible:Bool):Void {
-      if ((cast visible : Bool)) { flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).show(), function():Void {
+      if ((cast visible : Bool)) { flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).show(), function(__unused4:flighthq._internal._Any):Void {
 
-      }); } else { flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).hide(), function():Void {
+      }); } else { flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).hide(), function(__unused5:flighthq._internal._Any):Void {
 
       }); }
     }, subscribe: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }

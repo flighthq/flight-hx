@@ -4,9 +4,8 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
 import flighthq.types._internal._DirectionalLightValues.DIRECTIONAL_SHADOW_MAP_SIZE;
 import flighthq.types._internal._DirectionalLightValues.DirectionalLightKind;
 import flighthq.types._internal._DirectionalLightValues.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 
-typedef DirectionalLight = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var normalBias:Float; var pcfRadius:Float; var shadowBias:Float; };
+typedef DirectionalLight = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var normalBias:Float; var pcfRadius:Float; var shadowBias:Float; };

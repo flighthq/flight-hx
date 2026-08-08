@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _CompositeOperatorValues {
-  public static final CompositeOperatorValue:{ var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; } = { Clear: 'Clear', Copy: 'Copy', DestinationAtop: 'DestinationAtop', DestinationIn: 'DestinationIn', DestinationOut: 'DestinationOut', DestinationOver: 'DestinationOver', SourceAtop: 'SourceAtop', SourceIn: 'SourceIn', SourceOut: 'SourceOut', SourceOver: 'SourceOver', Xor: 'Xor' };
+  public static final CompositeOperatorValue:{ var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; } = (cast { Clear: 'Clear', Copy: 'Copy', DestinationAtop: 'DestinationAtop', DestinationIn: 'DestinationIn', DestinationOut: 'DestinationOut', DestinationOver: 'DestinationOver', SourceAtop: 'SourceAtop', SourceIn: 'SourceIn', SourceOut: 'SourceOut', SourceOver: 'SourceOver', Xor: 'Xor' });
 }

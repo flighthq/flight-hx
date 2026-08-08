@@ -4,6 +4,7 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Entity;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
@@ -41,7 +42,7 @@ class Vector3 {
   }
 
   public static function cloneVector3(source:Vector3Like):flighthq.types.Vector3 {
-    return cast (cast createVector3((cast source.x : Null<Float>), (cast source.y : Null<Float>), (cast source.z : Null<Float>)) : flighthq.types.Vector3);
+    return cast (cast createVector3((cast source.x), (cast source.y), (cast source.z)) : flighthq.types.Vector3);
     return cast null;
   }
 
@@ -52,14 +53,14 @@ class Vector3 {
   }
 
   public static function createVector3(?x:Float, ?y:Float, ?z:Float):flighthq.types.Vector3 {
-    return cast (cast createEntity((cast { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0) } : Null<{ var x:Float; var y:Float; var z:Float; }>)) : flighthq.types.Vector3);
+    return cast (cast createEntity((cast { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0) })) : { >Entity, var x:Float; var y:Float; var z:Float; });
     return cast null;
   }
 
   public static function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):flighthq.types.Vector3 {
     var out:flighthq.types.Vector3 = cast _Runtime.UNDEFINED;
-    out = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : flighthq.types.Vector3);
-    setVector3FromSpherical((cast out : Vector3Like), (cast radius : Float), (cast theta : Float), (cast phi : Float));
+    out = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.Vector3);
+    setVector3FromSpherical((cast out), (cast radius : Float), (cast theta : Float), (cast phi : Float));
     return cast out;
     return cast null;
   }
@@ -96,7 +97,7 @@ class Vector3 {
 
   public static function equalsVector3(a:Null<Vector3Like>, b:Null<Vector3Like>):Bool {
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
-    return cast ((cast ((cast _Runtime.strictEquals((cast a : flighthq.types.Vector3).x, (cast b : flighthq.types.Vector3).x) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Vector3).y, (cast b : flighthq.types.Vector3).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : flighthq.types.Vector3).z, (cast b : flighthq.types.Vector3).z) : Bool));
+    return cast ((cast ((cast _Runtime.strictEquals((cast a : { var x:Float; }).x, (cast b : { var x:Float; }).x) : Bool) && (cast _Runtime.strictEquals((cast a : { var y:Float; }).y, (cast b : { var y:Float; }).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var z:Float; }).z, (cast b : { var z:Float; }).z) : Bool));
     return cast null;
   }
 
@@ -104,10 +105,10 @@ class Vector3 {
     var la:Float = cast _Runtime.UNDEFINED;
     var lb:Float = cast _Runtime.UNDEFINED;
     var _dot:Float = cast _Runtime.UNDEFINED;
-    la = (cast getVector3Length((cast a : Vector3Like)) : Float);
-    lb = (cast getVector3Length((cast b : Vector3Like)) : Float);
+    la = (cast getVector3Length((cast a)) : Float);
+    lb = (cast getVector3Length((cast b)) : Float);
     if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
-    _dot = ((cast getVector3Dot((cast a : Vector3Like), (cast b : Vector3Like)) : Float) / (la * lb));
+    _dot = ((cast getVector3Dot((cast a), (cast b)) : Float) / (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
@@ -212,7 +213,7 @@ class Vector3 {
 
   public static function normalizeVector3(out:Vector3Like, source:Vector3Like):Float {
     var l:Float = cast _Runtime.UNDEFINED;
-    l = (cast getVector3Length((cast source : Vector3Like)) : Float);
+    l = (cast getVector3Length((cast source)) : Float);
     if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
       (out.x = cast ((source.x / l) : Dynamic));
       (out.y = cast ((source.y / l) : Dynamic));
@@ -321,9 +322,9 @@ class Vector3 {
     flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 2.0), source.z);
   }
 
-  public static final VECTOR3_X_AXIS:flighthq.types.Vector3 = (cast createVector3((cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>)) : flighthq.types.Vector3);
+  public static final VECTOR3_X_AXIS:flighthq.types.Vector3 = (cast createVector3((cast 1.0), (cast 0.0), (cast 0.0)) : flighthq.types.Vector3);
 
-  public static final VECTOR3_Y_AXIS:flighthq.types.Vector3 = (cast createVector3((cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>)) : flighthq.types.Vector3);
+  public static final VECTOR3_Y_AXIS:flighthq.types.Vector3 = (cast createVector3((cast 0.0), (cast 1.0), (cast 0.0)) : flighthq.types.Vector3);
 
-  public static final VECTOR3_Z_AXIS:flighthq.types.Vector3 = (cast createVector3((cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>)) : flighthq.types.Vector3);
+  public static final VECTOR3_Z_AXIS:flighthq.types.Vector3 = (cast createVector3((cast 0.0), (cast 0.0), (cast 1.0)) : flighthq.types.Vector3);
 }

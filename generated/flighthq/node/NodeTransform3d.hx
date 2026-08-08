@@ -17,6 +17,7 @@ import flighthq.geometry.Quaternion.copyQuaternion;
 import flighthq.geometry.Vector3.copyVector3;
 import flighthq.node.Revision.computeNodeWorldTransformRevision;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
+import flighthq.types.Entity;
 import flighthq.types.HasTransform3D.HasTransform3DRuntime;
 import flighthq.types.HasTransform3D.Transform3DNode;
 import flighthq.types.Matrix4;
@@ -24,118 +25,119 @@ import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Node;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Quaternion;
+import flighthq.types.Quaternion.QuaternionLike;
 import flighthq.types.Transform3D.Transform3DLike;
 import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
 
 class NodeTransform3d {
-  public static function convertNodeVector3GlobalToLocal<Traits>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
+  public static function convertNodeVector3GlobalToLocal<Traits:flighthq._internal._Object>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
     var inv:Matrix4 = cast _Runtime.UNDEFINED;
     inv = (cast acquireMatrix4() : Matrix4);
-    (cast inverseMatrix4((cast inv : Matrix4Like), (cast (cast getNodeWorldMatrix4(source) : Matrix4Like) : Matrix4Like)) : Bool);
-    matrix4TransformPoint((cast out : Vector3Like), (cast inv : Matrix4Like), (cast point : Vector3Like));
-    releaseMatrix4(inv);
+    (cast inverseMatrix4((cast inv), (cast (cast getNodeWorldMatrix4((cast source)) : Matrix4Like))) : Bool);
+    matrix4TransformPoint((cast out), (cast inv), (cast point));
+    releaseMatrix4((cast inv));
   }
 
-  public static function convertNodeVector3LocalToGlobal<Traits>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
-    matrix4TransformPoint((cast out : Vector3Like), (cast (cast getNodeWorldMatrix4(source) : Matrix4Like) : Matrix4Like), (cast point : Vector3Like));
+  public static function convertNodeVector3LocalToGlobal<Traits:flighthq._internal._Object>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
+    matrix4TransformPoint((cast out), (cast (cast getNodeWorldMatrix4((cast source)) : Matrix4Like)), (cast point));
   }
 
   @:noCompletion
-  public static function ensureNodeLocalMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
+  public static function ensureNodeLocalMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, } = cast _Runtime.UNDEFINED;
-    runtime = (cast (cast getEntityRuntime(target) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, }) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, });
+    runtime = (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
     if ((cast ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool)) : Bool)) {
-      NodeTransform3d.recomputeLocalTransform3D__nodeTransform3d(target, runtime);
+      NodeTransform3d.recomputeLocalTransform3D__nodeTransform3d((cast target), (cast runtime));
     }
   }
 
   @:noCompletion
-  public static function ensureNodeWorldMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
+  public static function ensureNodeWorldMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, } = cast _Runtime.UNDEFINED;
     var parent:Null<Transform3DNode<Traits>> = cast _Runtime.UNDEFINED;
     var parentRuntime:Null<{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }> = cast _Runtime.UNDEFINED;
     var parentWorldTransformId:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast (cast getEntityRuntime(target) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, }) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, });
+    runtime = (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
     parent = (cast (cast runtime : { var parent:Null<Node<Traits>>; }).parent : Null<Transform3DNode<Traits>>);
     parentWorldTransformId = 0.0;
     if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
-      ensureNodeWorldMatrix4(parent);
-      (parentRuntime = cast ((cast (cast getEntityRuntime(parent) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, }) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, }) : Dynamic));
+      ensureNodeWorldMatrix4((cast parent));
+      (parentRuntime = cast ((cast getEntityRuntime((cast parent)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : Dynamic));
       (parentWorldTransformId = cast ((cast parentRuntime : { var worldTransformId:Float; }).worldTransformId : Dynamic));
     }
     if ((cast ((cast !_Runtime.strictEquals((cast runtime : { var worldTransformUsingLocalTransformId:Float; }).worldTransformUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var worldTransformUsingParentTransformId:Float; }).worldTransformUsingParentTransformId, parentWorldTransformId) : Bool)) : Bool)) {
-      NodeTransform3d.recomputeWorldTransform3D__nodeTransform3d(target, runtime, parentRuntime);
+      NodeTransform3d.recomputeWorldTransform3D__nodeTransform3d((cast target), (cast runtime), (cast parentRuntime));
     }
   }
 
-  public static function getNodeLocalMatrix4<Traits>(target:Transform3DNode<Traits>):Matrix4Like {
-    ensureNodeLocalMatrix4(target);
-    return cast (cast (cast getEntityRuntime(target) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, }) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, }).localMatrix4;
+  public static function getNodeLocalMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Matrix4Like {
+    ensureNodeLocalMatrix4((cast target));
+    return cast (cast (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var localMatrix4:Null<Matrix4>; }).localMatrix4;
     return cast null;
   }
 
-  public static function getNodeTransform3D<Traits>(out:Transform3DLike, source:Transform3DNode<Traits>):Void {
-    copyVector3((cast _Runtime.field(out, 'position') : Vector3Like), (cast source.position : Vector3Like));
-    copyQuaternion(_Runtime.field(out, 'rotation'), source.rotation);
-    copyVector3((cast _Runtime.field(out, 'scale') : Vector3Like), (cast source.scale : Vector3Like));
+  public static function getNodeTransform3D<Traits:flighthq._internal._Object>(out:Transform3DLike, source:Transform3DNode<Traits>):Void {
+    copyVector3((cast _Runtime.field(out, 'position')), (cast source.position));
+    copyQuaternion((cast _Runtime.field(out, 'rotation')), (cast source.rotation));
+    copyVector3((cast _Runtime.field(out, 'scale')), (cast source.scale));
   }
 
-  public static function getNodeWorldMatrix4<Traits>(target:Transform3DNode<Traits>):Matrix4Like {
-    ensureNodeWorldMatrix4(target);
-    return cast (cast (cast getEntityRuntime(target) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, }) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, }).worldMatrix4;
+  public static function getNodeWorldMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Matrix4Like {
+    ensureNodeWorldMatrix4((cast target));
+    return cast (cast (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var worldMatrix4:Null<Matrix4>; }).worldMatrix4;
     return cast null;
   }
 
-  public static function isNodeLocalMatrix4Detached<Traits>(target:Transform3DNode<Traits>):Bool {
-    ensureNodeLocalMatrix4(target);
-    return cast (cast (cast getEntityRuntime(target) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, }) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, }).localMatrix4Detached;
+  public static function isNodeLocalMatrix4Detached<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Bool {
+    ensureNodeLocalMatrix4((cast target));
+    return cast (cast (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var localMatrix4Detached:Bool; }).localMatrix4Detached;
     return cast null;
   }
 
-  public static function setNodeLocalMatrix4<Traits>(target:Transform3DNode<Traits>, source:Matrix4Like):Void {
+  public static function setNodeLocalMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>, source:Matrix4Like):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, } = cast _Runtime.UNDEFINED;
-    runtime = (cast (cast getEntityRuntime(target) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, }) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, });
-    if ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool)) { (runtime.localMatrix4 = cast ((cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Null<Matrix4>) : Dynamic)); }
-    copyMatrix4((cast runtime.localMatrix4 : Matrix4Like), (cast source : Matrix4Like));
-    invalidateNodeLocalTransform(target);
+    runtime = (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
+    if ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool)) { (runtime.localMatrix4 = cast ((cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4) : Dynamic)); }
+    copyMatrix4((cast runtime.localMatrix4), (cast source));
+    invalidateNodeLocalTransform((cast target));
     ((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId = (cast runtime : { var localTransformId:Float; }).localTransformId);
     (runtime.localMatrix4Detached = cast (true : Dynamic));
   }
 
-  public static function setNodeTransform3D<Traits>(target:Transform3DNode<Traits>, source:Transform3DLike):Void {
-    copyVector3((cast target.position : Vector3Like), (cast _Runtime.field(source, 'position') : Vector3Like));
-    copyQuaternion(target.rotation, _Runtime.field(source, 'rotation'));
-    copyVector3((cast target.scale : Vector3Like), (cast _Runtime.field(source, 'scale') : Vector3Like));
-    invalidateNodeLocalTransform(target);
+  public static function setNodeTransform3D<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>, source:Transform3DLike):Void {
+    copyVector3((cast target.position), (cast _Runtime.field(source, 'position')));
+    copyQuaternion((cast target.rotation), (cast _Runtime.field(source, 'rotation')));
+    copyVector3((cast target.scale), (cast _Runtime.field(source, 'scale')));
+    invalidateNodeLocalTransform((cast target));
   }
 
   @:noCompletion
-  public static function syncNodeTransform3DFromMatrix4<Traits>(target:Transform3DNode<Traits>):Void {
+  public static function syncNodeTransform3DFromMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, } = cast _Runtime.UNDEFINED;
-    runtime = (cast (cast getEntityRuntime(target) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, }) : { >NodeRuntime<Traits>, >HasTransform3DRuntime, });
-    ensureNodeLocalMatrix4(target);
-    decomposeMatrix4((cast target.position : Vector3Like), target.rotation, (cast target.scale : Vector3Like), (cast runtime.localMatrix4 : Matrix4Like));
+    runtime = (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
+    ensureNodeLocalMatrix4((cast target));
+    decomposeMatrix4((cast target.position), (cast target.rotation), (cast target.scale), (cast runtime.localMatrix4));
     (runtime.localMatrix4Detached = cast (false : Dynamic));
   }
 
-  public static function recomputeLocalTransform3D__nodeTransform3d<Traits>(target:Transform3DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }):Void {
-    if ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool)) { (runtime.localMatrix4 = cast ((cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Null<Matrix4>) : Dynamic)); }
-    composeMatrix4((cast runtime.localMatrix4 : Matrix4Like), (cast target.position : Vector3Like), target.rotation, (cast target.scale : Vector3Like));
+  public static function recomputeLocalTransform3D__nodeTransform3d<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }):Void {
+    if ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool)) { (runtime.localMatrix4 = cast ((cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4) : Dynamic)); }
+    composeMatrix4((cast runtime.localMatrix4), (cast target.position), (cast target.rotation), (cast target.scale));
     (runtime.localMatrix4Detached = cast (false : Dynamic));
     ((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId = (cast runtime : { var localTransformId:Float; }).localTransformId);
   }
 
-  public static function recomputeWorldTransform3D__nodeTransform3d<Traits>(target:Transform3DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }, ?parentRuntime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }):Void {
+  public static function recomputeWorldTransform3D__nodeTransform3d<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }, ?parentRuntime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }):Void {
     if ((cast _Runtime.strictEquals(runtime.worldMatrix4, null) : Bool)) {
-      (runtime.worldMatrix4 = cast ((cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Null<Matrix4>) : Dynamic));
+      (runtime.worldMatrix4 = cast ((cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4) : Dynamic));
     }
-    ensureNodeLocalMatrix4(target);
+    ensureNodeLocalMatrix4((cast target));
     if ((cast !_Runtime.strictEquals(parentRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      multiplyMatrix4((cast runtime.worldMatrix4 : Matrix4Like), (cast parentRuntime.worldMatrix4 : Matrix4Like), (cast runtime.localMatrix4 : Matrix4Like));
+      multiplyMatrix4((cast runtime.worldMatrix4), (cast parentRuntime.worldMatrix4), (cast runtime.localMatrix4));
     } else {
-      copyMatrix4((cast runtime.worldMatrix4 : Matrix4Like), (cast runtime.localMatrix4 : Matrix4Like));
+      copyMatrix4((cast runtime.worldMatrix4), (cast runtime.localMatrix4));
     }
-    computeNodeWorldTransformRevision(runtime, parentRuntime);
+    computeNodeWorldTransformRevision((cast runtime), (cast parentRuntime));
   }
 }

@@ -18,14 +18,18 @@ class BitmapFontGlyphSource {
   public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
     return cast { getGlyphAtlasImage: function(page:Null<Float> = 0.0):Null<TextureSource> {
       var texture:Null<Texture2D> = cast _Runtime.UNDEFINED;
-      texture = ({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(font.pages, page); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.texture; });
-      return cast ((cast _Runtime.strictEquals(_Runtime.optionalField(texture, 'dimension'), '2d') : Bool) ? (cast (cast texture : Texture2D).source : Dynamic) : (cast null : Dynamic));
+      texture = ({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(font.pages, page); __typedStruct0 == null ? _Runtime.UNDEFINED : (cast __typedStruct0 : { var texture:Null<Texture2D>; }).texture; });
+      return cast ((cast _Runtime.strictEquals(({ final __structural1 = texture; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var dimension:String; }).dimension; }), '2d') : Bool) ? (cast (cast texture : Texture2D).source : Dynamic) : (cast null : Dynamic));
+      return cast _Runtime.UNDEFINED;
     }, getGlyphEntry: function(codepoint:Float):Null<GlyphEntry> {
-      return cast (cast getBitmapFontGlyph((cast font : BitmapFont), (cast codepoint : Float)) : Null<GlyphEntry>);
+      return cast (cast getBitmapFontGlyph((cast font), (cast codepoint : Float)) : Null<GlyphEntry>);
+      return cast _Runtime.UNDEFINED;
     }, getGlyphKerning: function(left:Float, right:Float):Float {
-      return cast (cast getBitmapFontKerning((cast font : BitmapFont), (cast left : Float), (cast right : Float)) : Float);
+      return cast (cast getBitmapFontKerning((cast font), (cast left : Float), (cast right : Float)) : Float);
+      return cast _Runtime.UNDEFINED;
     }, getGlyphMetrics: function():GlyphMetrics {
-      return cast (cast getBitmapFontMetrics((cast font : BitmapFont)) : GlyphMetrics);
+      return cast (cast getBitmapFontMetrics((cast font)) : GlyphMetrics);
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }

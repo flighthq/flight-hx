@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef SsrEffect = { var kind:Kind; @:optional var maxDistance:Float; @:optional var resolution:Float; @:optional var steps:Float; };
+typedef SsrEffect = { var kind:String; @:optional var maxDistance:Float; @:optional var resolution:Float; @:optional var steps:Float; };

@@ -8,6 +8,7 @@ import flighthq.render.RenderProxy.installRenderAdaptHook;
 import flighthq.render.RenderProxy.updateRenderProxyRenderer;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.Node;
+import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderProxyAdapter;
 import flighthq.types.RenderState;
@@ -19,13 +20,13 @@ class RenderProxyAdapter {
   public static function applyRenderProxyAdapter(state:RenderState, source:Renderable, data:{ >RenderProxy2D, var traverseChildren:Bool; }):Void {
     var renderAdapter:Null<flighthq.types.RenderProxyAdapter> = cast _Runtime.UNDEFINED;
     var traverseChildren:Bool = cast _Runtime.UNDEFINED;
-    renderAdapter = _Runtime.coalesce(((cast (cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).renderProxyAdapterMap : flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxyAdapter>).get(source)), function():Dynamic return cast null);
+    renderAdapter = _Runtime.coalesce(((cast (cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).renderProxyAdapterMap : flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxyAdapter>).get(source)), function():Dynamic return cast null);
     traverseChildren = true;
     if ((cast !_Runtime.strictEquals(renderAdapter, null) : Bool)) {
-      var result:Null<Bool> = (cast renderAdapter : flighthq.types.RenderProxyAdapter).adapt(state, source, data);
+      var result:Null<Bool> = (cast renderAdapter : flighthq.types.RenderProxyAdapter).adapt((cast state), (cast source), (cast data));
       if ((cast !_Runtime.strictEquals(result, null) : Bool)) {
         (traverseChildren = cast (result : Dynamic));
-        updateRenderProxyRenderer((cast state : RenderState), data);
+        updateRenderProxyRenderer((cast state), (cast data));
       }
     }
     ((cast data : { var traverseChildren:Bool; }).traverseChildren = traverseChildren);
@@ -33,22 +34,22 @@ class RenderProxyAdapter {
 
   @:noCompletion
   public static function getRenderProxyAdapter(state:RenderState, source:Renderable):Null<flighthq.types.RenderProxyAdapter> {
-    return cast _Runtime.coalesce(((cast (cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).renderProxyAdapterMap : flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxyAdapter>).get(source)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast (cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).renderProxyAdapterMap : flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxyAdapter>).get(source)), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
   public static function setRenderProxyAdapter(state:RenderState, source:Renderable, adapter:Null<flighthq.types.RenderProxyAdapter>):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals((cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).renderAdaptHook, applyRenderProxyAdapter) : Bool)) {
-      installRenderAdaptHook((cast state : RenderState), (cast applyRenderProxyAdapter : RenderState->Renderable->RenderProxy2D->Void));
+    if ((cast !_Runtime.strictEquals((cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).renderAdaptHook, applyRenderProxyAdapter) : Bool)) {
+      installRenderAdaptHook((cast state), (cast applyRenderProxyAdapter));
     }
-    runtime = (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime((cast state)) : RenderStateRuntime);
     if ((cast _Runtime.strictEquals(adapter, null) : Bool)) {
       ((cast (cast runtime : RenderStateRuntime).renderProxyAdapterMap : flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxyAdapter>).delete_(source));
     } else {
-      ((cast (cast runtime : RenderStateRuntime).renderProxyAdapterMap : flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxyAdapter>).set(source, adapter));
+      ((cast (cast runtime : RenderStateRuntime).renderProxyAdapterMap : flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxyAdapter>).set(source, (cast adapter)));
     }
-    invalidateNodeAppearance((cast source : Node<Dynamic>));
+    invalidateNodeAppearance((cast (cast source : Node<Dynamic>)));
   }
 }

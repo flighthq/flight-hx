@@ -37,66 +37,66 @@ import flighthq.types.VoxelGrid;
 import flighthq.types._internal._TransmissionVolumePbrExtensionValues.TransmissionVolumePbrExtensionKind;
 
 class GltfTransmissionVolume {
-  public static final GltfTransmissionExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+  public static final GltfTransmissionExtensionHandler:GltfExtensionHandler = (cast { apply: function(context:GltfExtensionContext):Void {
     var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
-    materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
+    materials = _Runtime.coalesce((cast _Runtime.field(context, 'source') : { @:optional var materials:Null<Array<GltfMaterial>>; }).materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var block:Null<GltfMaterialsTransmission> = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_transmission');
+        var block:Null<GltfMaterialsTransmission> = ({ final __structural0 = (cast flighthq._internal._StaticIndex.readArray(materials, i) : { @:optional var extensions:Null<{ @:optional var KHR_materials_anisotropy:Null<GltfMaterialsAnisotropy>; @:optional var KHR_materials_clearcoat:Null<GltfMaterialsClearcoat>; @:optional var KHR_materials_emissive_strength:Null<GltfMaterialsEmissiveStrength>; @:optional var KHR_materials_ior:Null<GltfMaterialsIor>; @:optional var KHR_materials_iridescence:Null<GltfMaterialsIridescence>; @:optional var KHR_materials_pbrSpecularGlossiness:Null<GltfMaterialsPbrSpecularGlossiness>; @:optional var KHR_materials_sheen:Null<GltfMaterialsSheen>; @:optional var KHR_materials_unlit:Null<flighthq._internal._Record<String, flighthq._internal._Any>>; @:optional var KHR_materials_specular:Null<GltfMaterialsSpecular>; @:optional var KHR_materials_transmission:Null<GltfMaterialsTransmission>; @:optional var KHR_materials_volume:Null<GltfMaterialsVolume>; }>; }).extensions; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var KHR_materials_transmission:Null<GltfMaterialsTransmission>; }).KHR_materials_transmission; });
         if ((cast _Runtime.strictEquals(block, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var target:Null<TransmissionVolumePbrExtension> = (cast GltfTransmissionVolume.resolveTransmissionVolume__gltfTransmissionVolume((cast context : GltfExtensionContext), (cast i : Float)) : Null<TransmissionVolumePbrExtension>);
+        var target:Null<TransmissionVolumePbrExtension> = (cast GltfTransmissionVolume.resolveTransmissionVolume__gltfTransmissionVolume((cast context), (cast i : Float)) : Null<TransmissionVolumePbrExtension>);
         if ((cast _Runtime.strictEquals(target, null) : Bool)) { i++; continue; }
         ((cast target : TransmissionVolumePbrExtension).transmission = _Runtime.coalesce((cast block : GltfMaterialsTransmission).transmissionFactor, function():Dynamic return cast 0.0));
         ((cast target : TransmissionVolumePbrExtension).transmissionMap = _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsTransmission).transmissionTexture, 'linear'] : Array<Dynamic>)));
         i++;
       }
     }
-  }, kind: 'KHR_materials_transmission' };
+  }, kind: 'KHR_materials_transmission' });
 
-  public static final GltfVolumeExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+  public static final GltfVolumeExtensionHandler:GltfExtensionHandler = (cast { apply: function(context:GltfExtensionContext):Void {
     var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
-    materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
+    materials = _Runtime.coalesce((cast _Runtime.field(context, 'source') : { @:optional var materials:Null<Array<GltfMaterial>>; }).materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var block:Null<GltfMaterialsVolume> = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_volume');
+        var block:Null<GltfMaterialsVolume> = ({ final __structural1 = (cast flighthq._internal._StaticIndex.readArray(materials, i) : { @:optional var extensions:Null<{ @:optional var KHR_materials_anisotropy:Null<GltfMaterialsAnisotropy>; @:optional var KHR_materials_clearcoat:Null<GltfMaterialsClearcoat>; @:optional var KHR_materials_emissive_strength:Null<GltfMaterialsEmissiveStrength>; @:optional var KHR_materials_ior:Null<GltfMaterialsIor>; @:optional var KHR_materials_iridescence:Null<GltfMaterialsIridescence>; @:optional var KHR_materials_pbrSpecularGlossiness:Null<GltfMaterialsPbrSpecularGlossiness>; @:optional var KHR_materials_sheen:Null<GltfMaterialsSheen>; @:optional var KHR_materials_unlit:Null<flighthq._internal._Record<String, flighthq._internal._Any>>; @:optional var KHR_materials_specular:Null<GltfMaterialsSpecular>; @:optional var KHR_materials_transmission:Null<GltfMaterialsTransmission>; @:optional var KHR_materials_volume:Null<GltfMaterialsVolume>; }>; }).extensions; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var KHR_materials_volume:Null<GltfMaterialsVolume>; }).KHR_materials_volume; });
         if ((cast _Runtime.strictEquals(block, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var target:Null<TransmissionVolumePbrExtension> = (cast GltfTransmissionVolume.resolveTransmissionVolume__gltfTransmissionVolume((cast context : GltfExtensionContext), (cast i : Float)) : Null<TransmissionVolumePbrExtension>);
+        var target:Null<TransmissionVolumePbrExtension> = (cast GltfTransmissionVolume.resolveTransmissionVolume__gltfTransmissionVolume((cast context), (cast i : Float)) : Null<TransmissionVolumePbrExtension>);
         if ((cast _Runtime.strictEquals(target, null) : Bool)) { i++; continue; }
         var attenuation:Array<Float> = _Runtime.coalesce((cast block : GltfMaterialsVolume).attenuationColor, function():Dynamic return cast cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
-        ((cast target : TransmissionVolumePbrExtension).attenuationColor = (cast packLinearToColor((cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(attenuation, 0.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(attenuation, 1.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(attenuation, 2.0), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>) : Array<Float>)) : Float));
+        ((cast target : TransmissionVolumePbrExtension).attenuationColor = (cast packLinearToColor((cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(attenuation, 0.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(attenuation, 1.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(attenuation, 2.0), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>))) : Float));
         ((cast target : TransmissionVolumePbrExtension).attenuationDistance = _Runtime.coalesce((cast block : GltfMaterialsVolume).attenuationDistance, function():Dynamic return cast HxMath.POSITIVE_INFINITY));
         ((cast target : TransmissionVolumePbrExtension).thickness = _Runtime.coalesce((cast block : GltfMaterialsVolume).thicknessFactor, function():Dynamic return cast 0.0));
         ((cast target : TransmissionVolumePbrExtension).thicknessMap = _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsVolume).thicknessTexture, 'linear'] : Array<Dynamic>)));
         i++;
       }
     }
-  }, kind: 'KHR_materials_volume' };
+  }, kind: 'KHR_materials_volume' });
 
-  public static final GltfIorExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+  public static final GltfIorExtensionHandler:GltfExtensionHandler = (cast { apply: function(context:GltfExtensionContext):Void {
     var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
-    materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
+    materials = _Runtime.coalesce((cast _Runtime.field(context, 'source') : { @:optional var materials:Null<Array<GltfMaterial>>; }).materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var block:Null<GltfMaterialsIor> = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_ior');
+        var block:Null<GltfMaterialsIor> = ({ final __structural2 = (cast flighthq._internal._StaticIndex.readArray(materials, i) : { @:optional var extensions:Null<{ @:optional var KHR_materials_anisotropy:Null<GltfMaterialsAnisotropy>; @:optional var KHR_materials_clearcoat:Null<GltfMaterialsClearcoat>; @:optional var KHR_materials_emissive_strength:Null<GltfMaterialsEmissiveStrength>; @:optional var KHR_materials_ior:Null<GltfMaterialsIor>; @:optional var KHR_materials_iridescence:Null<GltfMaterialsIridescence>; @:optional var KHR_materials_pbrSpecularGlossiness:Null<GltfMaterialsPbrSpecularGlossiness>; @:optional var KHR_materials_sheen:Null<GltfMaterialsSheen>; @:optional var KHR_materials_unlit:Null<flighthq._internal._Record<String, flighthq._internal._Any>>; @:optional var KHR_materials_specular:Null<GltfMaterialsSpecular>; @:optional var KHR_materials_transmission:Null<GltfMaterialsTransmission>; @:optional var KHR_materials_volume:Null<GltfMaterialsVolume>; }>; }).extensions; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var KHR_materials_ior:Null<GltfMaterialsIor>; }).KHR_materials_ior; });
         if ((cast _Runtime.strictEquals(block, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var target:Null<TransmissionVolumePbrExtension> = (cast GltfTransmissionVolume.resolveTransmissionVolume__gltfTransmissionVolume((cast context : GltfExtensionContext), (cast i : Float)) : Null<TransmissionVolumePbrExtension>);
+        var target:Null<TransmissionVolumePbrExtension> = (cast GltfTransmissionVolume.resolveTransmissionVolume__gltfTransmissionVolume((cast context), (cast i : Float)) : Null<TransmissionVolumePbrExtension>);
         if ((cast _Runtime.strictEquals(target, null) : Bool)) { i++; continue; }
         ((cast target : TransmissionVolumePbrExtension).ior = _Runtime.coalesce((cast block : GltfMaterialsIor).ior, function():Dynamic return cast GltfTransmissionVolume.GLTF_DEFAULT_IOR__gltfTransmissionVolume));
         i++;
       }
     }
-  }, kind: 'KHR_materials_ior' };
+  }, kind: 'KHR_materials_ior' });
 
   public static function resolveTransmissionVolume__gltfTransmissionVolume(context:GltfExtensionContext, index:Float):Null<TransmissionVolumePbrExtension> {
     var existing:Null<PbrExtension> = cast _Runtime.UNDEFINED;
     var created:TransmissionVolumePbrExtension = cast _Runtime.UNDEFINED;
-    existing = (cast findGltfPbrExtension(_Runtime.field(context, 'document'), (cast index : Float), (cast TransmissionVolumePbrExtensionKind : String)) : Null<PbrExtension>);
+    existing = (cast findGltfPbrExtension((cast _Runtime.field(context, 'document')), (cast index : Float), (cast TransmissionVolumePbrExtensionKind : String)) : Null<PbrExtension>);
     if ((cast !_Runtime.strictEquals(existing, null) : Bool)) { return cast (cast existing : TransmissionVolumePbrExtension); }
-    created = (cast createTransmissionVolumePbrExtension((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : TransmissionVolumePbrExtension);
-    if ((cast !(cast (cast attachGltfPbrExtension(_Runtime.field(context, 'document'), (cast index : Float), created) : Bool) : Bool) : Bool)) { return cast null; }
+    created = (cast createTransmissionVolumePbrExtension((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TransmissionVolumePbrExtension);
+    if ((cast !(cast (cast attachGltfPbrExtension((cast _Runtime.field(context, 'document')), (cast index : Float), (cast created)) : Bool) : Bool) : Bool)) { return cast null; }
     return cast created;
     return cast null;
   }

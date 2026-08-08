@@ -32,8 +32,8 @@ import flighthq.types.DisplayObject;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.Matrix;
-import flighthq.types.Node;
 import flighthq.types.Node.NodeOf;
+import flighthq.types.Node2D;
 import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.Path;
 import flighthq.types.RichText;
@@ -64,12 +64,12 @@ class RiveScene2D {
     var graph:RiveObjectGraph = cast _Runtime.UNDEFINED;
     var assets:Array<RiveFileAsset> = cast _Runtime.UNDEFINED;
     var fontNames:Array<String> = cast _Runtime.UNDEFINED;
-    document = (cast parseRiveDocument((cast source : flighthq._internal._UInt8Array), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<RiveDocument>);
+    document = (cast parseRiveDocument((cast source), (cast diagnostics)) : Null<RiveDocument>);
     if ((cast _Runtime.strictEquals(document, null) : Bool)) { return cast { artboards: cast ([] : Array<Dynamic>), assets: cast ([] : Array<Dynamic>) }; }
-    graph = (cast createRiveObjectGraph(document, (cast diagnostics : Null<Array<ImportDiagnostic>>)) : RiveObjectGraph);
-    assets = (cast createRiveFileAssets((cast (cast document : RiveDocument).objects : Array<RiveCoreObject>)) : Array<RiveFileAsset>);
+    graph = (cast createRiveObjectGraph((cast document), (cast diagnostics)) : RiveObjectGraph);
+    assets = (cast createRiveFileAssets((cast (cast document : RiveDocument).objects)) : Array<RiveFileAsset>);
     fontNames = _Runtime.callProperty(assets, 'map', cast ([function(asset:RiveFileAsset, __unused0:Float, __unused1:Array<RiveFileAsset>):String return (cast asset : RiveFileAsset).name] : Array<Dynamic>));
-    return cast { artboards: _Runtime.callProperty((cast graph : RiveObjectGraph).artboards, 'map', cast ([function(artboard:RiveArtboardGraph, __unused2:Float, __unused3:Array<RiveArtboardGraph>):RiveArtboardImport return (cast RiveScene2D.createRiveArtboardImport__riveScene2D((cast artboard : RiveArtboardGraph), (cast (cast document : RiveDocument).objects : Array<RiveCoreObject>), (cast fontNames : Array<String>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : RiveArtboardImport)] : Array<Dynamic>)), assets: assets };
+    return cast { artboards: _Runtime.callProperty((cast graph : RiveObjectGraph).artboards, 'map', cast ([function(artboard:RiveArtboardGraph, __unused2:Float, __unused3:Array<RiveArtboardGraph>):RiveArtboardImport return (cast RiveScene2D.createRiveArtboardImport__riveScene2D((cast artboard), (cast (cast document : RiveDocument).objects), (cast fontNames), (cast diagnostics)) : RiveArtboardImport)] : Array<Dynamic>)), assets: assets };
     return cast null;
   }
 
@@ -89,15 +89,15 @@ class RiveScene2D {
     var layouts:Array<RiveLayoutImport> = cast _Runtime.UNDEFINED;
     var stateMachines:Array<RiveStateMachineDescriptor> = cast _Runtime.UNDEFINED;
     source = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), 0.0);
-    width = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_WIDTH__riveScene2D : Float), (cast 0.0 : Float)) : Float);
-    height = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_HEIGHT__riveScene2D : Float), (cast 0.0 : Float)) : Float);
-    name = (cast RiveScene2D.readRiveText__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_NAME__riveScene2D : Float), (cast '' : String)) : String);
-    root = (cast createDisplayObject({ name: name }) : DisplayObject);
-    RiveScene2D.applyRiveTransform__riveScene2D((cast root : DisplayObject), (cast source : RiveCoreObject));
-    ((cast root : DisplayObject).pivotX = ((cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_ORIGIN_X__riveScene2D : Float), (cast 0.0 : Float)) : Float) * width));
-    ((cast root : DisplayObject).pivotY = ((cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_ORIGIN_Y__riveScene2D : Float), (cast 0.0 : Float)) : Float) * height));
-    advancedBlends = cast ([] : Array<Dynamic>);
-    nodes = cast ([root] : Array<Dynamic>);
+    width = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_WIDTH__riveScene2D : Float), (cast 0.0 : Float)) : Float);
+    height = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_HEIGHT__riveScene2D : Float), (cast 0.0 : Float)) : Float);
+    name = (cast RiveScene2D.readRiveText__riveScene2D((cast source), (cast RiveScene2D.RIVE_NAME__riveScene2D : Float), (cast '' : String)) : String);
+    root = (cast createDisplayObject((cast { name: name })) : DisplayObject);
+    RiveScene2D.applyRiveTransform__riveScene2D((cast root), (cast source));
+    ((cast root : DisplayObject).pivotX = ((cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_ORIGIN_X__riveScene2D : Float), (cast 0.0 : Float)) : Float) * width));
+    ((cast root : DisplayObject).pivotY = ((cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_ORIGIN_Y__riveScene2D : Float), (cast 0.0 : Float)) : Float) * height));
+    advancedBlends = (cast cast ([] : Array<Dynamic>));
+    nodes = (cast cast ([root] : Array<Dynamic>));
     shapePaths = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var index:Float = 1.0;
@@ -105,7 +105,7 @@ class RiveScene2D {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveScene2D.RIVE_PATH_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) {
           _Runtime.callProperty(nodes, 'push', cast ([null] : Array<Dynamic>));
-          RiveScene2D.collectRivePathGeometry__riveScene2D((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>), (cast artboard : RiveArtboardGraph), (cast index : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>));
+          RiveScene2D.collectRivePathGeometry__riveScene2D((cast shapePaths), (cast artboard), (cast index : Float), (cast diagnostics));
           index++;
           continue;
         }
@@ -114,82 +114,82 @@ class RiveScene2D {
           index++;
           continue;
         }
-        var node:DisplayObject = (cast RiveScene2D.createRiveDisplayNode__riveScene2D((cast object : RiveCoreObject), (cast artboard : RiveArtboardGraph), (cast index : Float), (cast fontNames : Array<String>)) : DisplayObject);
-        RiveScene2D.applyRiveTransform__riveScene2D((cast node : DisplayObject), (cast object : RiveCoreObject));
-        RiveScene2D.applyRiveBlendMode__riveScene2D((cast node : DisplayObject), (cast object : RiveCoreObject), (cast advancedBlends : Array<RiveAdvancedBlend>));
+        var node:DisplayObject = (cast RiveScene2D.createRiveDisplayNode__riveScene2D((cast object), (cast artboard), (cast index : Float), (cast fontNames)) : DisplayObject);
+        RiveScene2D.applyRiveTransform__riveScene2D((cast node), (cast object));
+        RiveScene2D.applyRiveBlendMode__riveScene2D((cast node), (cast object), (cast advancedBlends));
         _Runtime.callProperty(nodes, 'push', cast ([node] : Array<Dynamic>));
-        (cast addNodeChild(_Runtime.coalesce((cast RiveScene2D.findRiveDisplayParent__riveScene2D((cast nodes : Array<Null<DisplayObject>>), (cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)) : Node<Node2DTraits>), function():Dynamic return cast root), node) : NodeOf<Node2DTraits>);
+        (cast addNodeChild((cast _Runtime.coalesce((cast RiveScene2D.findRiveDisplayParent__riveScene2D((cast nodes), (cast _Runtime.field(artboard, 'parentIndices')), (cast index : Float)) : Null<DisplayObject>), function():Dynamic return cast root)), (cast node)) : NodeOf<Node2DTraits>);
         index++;
       }
     }
-    applyRiveClipping((cast nodes : Array<Null<DisplayObject>>), (cast artboard : RiveArtboardGraph), (cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>), (cast diagnostics : Null<Array<ImportDiagnostic>>));
-    applyRiveDrawOrder(nodes, (cast artboard : RiveArtboardGraph), (cast root : DisplayObject), (cast diagnostics : Null<Array<ImportDiagnostic>>));
-    applyRiveSolo(nodes, (cast artboard : RiveArtboardGraph), (cast diagnostics : Null<Array<ImportDiagnostic>>));
+    applyRiveClipping((cast nodes), (cast artboard), (cast shapePaths), (cast diagnostics));
+    applyRiveDrawOrder((cast nodes), (cast artboard), (cast root), (cast diagnostics));
+    applyRiveSolo((cast nodes), (cast artboard), (cast diagnostics));
     rebuilds = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (shapeIndex in _Runtime.iterable(((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).keys()))) {
       var shape:Null<DisplayObject> = flighthq._internal._StaticIndex.readArray(nodes, shapeIndex);
       if ((cast ((cast _Runtime.strictEquals(shape, null) : Bool) || (cast _Runtime.strictEquals(shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
       var rebuild:Void->Void = cast _Runtime.UNDEFINED;
-      rebuild = (cast function():Void return RiveScene2D.rebuildRiveShape__riveScene2D((cast (cast shape : Shape) : Shape), (cast artboard : RiveArtboardGraph), (cast shapeIndex : Float), (cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>)) : Void->Void);
-      ((cast rebuilds : flighthq._internal._Map<Float, Void->Void>).set(shapeIndex, rebuild));
+      rebuild = (cast function():Void { RiveScene2D.rebuildRiveShape__riveScene2D((cast (cast shape : Shape)), (cast artboard), (cast shapeIndex : Float), (cast shapePaths)); });
+      ((cast rebuilds : flighthq._internal._Map<Float, Void->Void>).set(shapeIndex, (cast rebuild)));
       rebuild();
     }
-    span = { end: _Runtime.field(artboard, 'streamEnd'), start: _Runtime.field(artboard, 'streamStart') };
-    skeleton = (cast createRiveSkeleton2D((cast artboard : RiveArtboardGraph)) : Null<RiveSkeleton2DImport>);
-    animations = (cast createRiveAnimationClips((cast objects : Array<RiveCoreObject>), (cast span : { var end:Float; var start:Float; }), (cast nodes : Array<Null<DisplayObject>>), (cast artboard : RiveArtboardGraph), (cast rebuilds : flighthq._internal._Map<Float, Void->Void>), skeleton, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Array<ImportDiagnostic>>)) : Array<RiveAnimationClip>);
-    layouts = (cast createRiveLayoutImports((cast artboard : RiveArtboardGraph), (cast nodes : Array<Null<DisplayObject>>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<RiveLayoutImport>);
-    stateMachines = (cast createRiveStateMachines((cast objects : Array<RiveCoreObject>), (cast span : { var end:Float; var start:Float; })) : Array<RiveStateMachineDescriptor>);
+    span = (cast { end: _Runtime.field(artboard, 'streamEnd'), start: _Runtime.field(artboard, 'streamStart') });
+    skeleton = (cast createRiveSkeleton2D((cast artboard)) : Null<RiveSkeleton2DImport>);
+    animations = (cast createRiveAnimationClips((cast objects), (cast span), (cast nodes), (cast artboard), (cast rebuilds), (cast skeleton), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Array<RiveAnimationClip>);
+    layouts = (cast createRiveLayoutImports((cast artboard), (cast nodes), (cast diagnostics)) : Array<RiveLayoutImport>);
+    stateMachines = (cast createRiveStateMachines((cast objects), (cast span)) : Array<RiveStateMachineDescriptor>);
     return cast { advancedBlends: advancedBlends, animations: animations, height: height, layouts: layouts, name: name, root: root, skeleton: skeleton, stateMachines: stateMachines, width: width };
     return cast null;
   }
 
   public static function createRiveDisplayNode__riveScene2D(object:RiveCoreObject, artboard:RiveArtboardGraph, index:Float, fontNames:Array<String>):DisplayObject {
     var name:String = cast _Runtime.UNDEFINED;
-    name = (cast RiveScene2D.readRiveText__riveScene2D((cast object : RiveCoreObject), (cast RiveScene2D.RIVE_NAME__riveScene2D : Float), (cast '' : String)) : String);
+    name = (cast RiveScene2D.readRiveText__riveScene2D((cast object), (cast RiveScene2D.RIVE_NAME__riveScene2D : Float), (cast '' : String)) : String);
     if ((cast _Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveScene2D.RIVE_TEXT_TYPE_KEY__riveScene2D) : Bool)) {
-      var label:RichText = (cast createRiveRichText((cast artboard : RiveArtboardGraph), (cast index : Float), (cast fontNames : Array<String>)) : RichText);
+      var label:RichText = (cast createRiveRichText((cast artboard), (cast index : Float), (cast fontNames)) : RichText);
       ((cast label : RichText).name = name);
       return cast label;
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveScene2D.RIVE_IMAGE_TYPE_KEY__riveScene2D) : Bool)) {
-      return cast (cast createRiveImageSprite((cast name : String), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast object : RiveCoreObject), (cast RiveScene2D.RIVE_IMAGE_ASSET_ID__riveScene2D : Float), (cast -1.0 : Float)) : Float) : Float)) : DisplayObject);
+      return cast (cast createRiveImageSprite((cast name : String), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast object), (cast RiveScene2D.RIVE_IMAGE_ASSET_ID__riveScene2D : Float), (cast -1.0 : Float)) : Float) : Float)) : DisplayObject);
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveScene2D.RIVE_NESTED_ARTBOARD_TYPE_KEY__riveScene2D) : Bool)) {
-      var node:DisplayObject = (cast createDisplayObject({ name: name }) : DisplayObject);
-      markRiveNestedArtboard(node, (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast object : RiveCoreObject), (cast RiveScene2D.RIVE_NESTED_ARTBOARD_ID__riveScene2D : Float), (cast -1.0 : Float)) : Float) : Float));
+      var node:DisplayObject = (cast createDisplayObject((cast { name: name })) : DisplayObject);
+      markRiveNestedArtboard((cast node), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast object), (cast RiveScene2D.RIVE_NESTED_ARTBOARD_ID__riveScene2D : Float), (cast -1.0 : Float)) : Float) : Float));
       return cast node;
     }
-    if ((cast (cast isRiveCoreTypeDerivedFrom((cast _Runtime.field(object, 'typeKey') : Float), (cast RiveScene2D.RIVE_SHAPE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) { return cast (cast createShape({ name: name }) : DisplayObject); }
-    return cast (cast createDisplayObject({ name: name }) : DisplayObject);
+    if ((cast (cast isRiveCoreTypeDerivedFrom((cast _Runtime.field(object, 'typeKey') : Float), (cast RiveScene2D.RIVE_SHAPE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) { return cast (cast createShape((cast { name: name })) : Shape); }
+    return cast (cast createDisplayObject((cast { name: name })) : DisplayObject);
     return cast null;
   }
 
   public static function rebuildRiveShape__riveScene2D(shape:Shape, artboard:RiveArtboardGraph, shapeIndex:Float, shapePaths:flighthq._internal._Map<Float, Array<RivePathRecord>>):Void {
     var records:Array<RivePathRecord> = cast _Runtime.UNDEFINED;
-    records = cast ([] : Array<Dynamic>);
+    records = (cast cast ([] : Array<Dynamic>));
     for (pathIndex in _Runtime.iterable(_Runtime.coalesce(_Runtime.callOptionalProperty(((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).get(shapeIndex)), 'map', cast ([function(record:RivePathRecord, __unused4:Float, __unused5:Array<RivePathRecord>):Float return (cast record : RivePathRecord).pathIndex] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
-      var record:Null<RivePathRecord> = (cast RiveScene2D.createRivePathRecord__riveScene2D((cast artboard : RiveArtboardGraph), (cast pathIndex : Float)) : Null<RivePathRecord>);
+      var record:Null<RivePathRecord> = (cast RiveScene2D.createRivePathRecord__riveScene2D((cast artboard), (cast pathIndex : Float)) : Null<RivePathRecord>);
       if ((cast !_Runtime.strictEquals(record, null) : Bool)) { _Runtime.callProperty(records, 'push', cast ([record] : Array<Dynamic>)); }
     }
-    ((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).set(shapeIndex, records));
-    clearShapeCommands((cast shape : Shape));
-    appendRiveShapePaint((cast shape : Shape), (cast artboard : RiveArtboardGraph), (cast shapeIndex : Float), (cast records : Array<RivePathRecord>));
+    ((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).set(shapeIndex, (cast records)));
+    clearShapeCommands((cast shape));
+    appendRiveShapePaint((cast shape), (cast artboard), (cast shapeIndex : Float), (cast records));
   }
 
   public static function collectRivePathGeometry__riveScene2D(shapePaths:flighthq._internal._Map<Float, Array<RivePathRecord>>, artboard:RiveArtboardGraph, index:Float, diagnostics:Null<Array<ImportDiagnostic>>):Void {
     var owner:Float = cast _Runtime.UNDEFINED;
     var record:Null<RivePathRecord> = cast _Runtime.UNDEFINED;
     var records:Array<RivePathRecord> = cast _Runtime.UNDEFINED;
-    owner = (cast RiveScene2D.findRiveShapeOwner__riveScene2D((cast artboard : RiveArtboardGraph), (cast index : Float)) : Float);
+    owner = (cast RiveScene2D.findRiveShapeOwner__riveScene2D((cast artboard), (cast index : Float)) : Float);
     if ((cast ((cast owner : Float) < (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'rive.path-outside-shape' : String), (cast 'createScene2DFromRiveDocument' : String), (cast { index: index } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'rive.path-outside-shape' : String), (cast 'createScene2DFromRiveDocument' : String), (cast { index: index }));
       return;
     }
-    record = (cast RiveScene2D.createRivePathRecord__riveScene2D((cast artboard : RiveArtboardGraph), (cast index : Float)) : Null<RivePathRecord>);
+    record = (cast RiveScene2D.createRivePathRecord__riveScene2D((cast artboard), (cast index : Float)) : Null<RivePathRecord>);
     if ((cast _Runtime.strictEquals(record, null) : Bool)) { return; }
     records = _Runtime.coalesce(((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).get(owner)), function():Dynamic return cast cast ([] : Array<Dynamic>));
     _Runtime.callProperty(records, 'push', cast ([record] : Array<Dynamic>));
-    ((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).set(owner, records));
+    ((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).set(owner, (cast records)));
   }
 
   public static function createRivePathRecord__riveScene2D(artboard:RiveArtboardGraph, index:Float):Null<RivePathRecord> {
@@ -198,9 +198,9 @@ class RiveScene2D {
     var local:Matrix = cast _Runtime.UNDEFINED;
     var data:Array<Float> = cast _Runtime.UNDEFINED;
     source = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
-    path = (cast createRivePath((cast source : RiveCoreObject), (cast artboard : RiveArtboardGraph), (cast index : Float)) : Null<Path>);
+    path = (cast createRivePath((cast source), (cast artboard), (cast index : Float)) : Null<Path>);
     if ((cast ((cast _Runtime.strictEquals(path, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast path : Path).commands, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
-    local = (cast RiveScene2D.createRivePathMatrix__riveScene2D((cast source : RiveCoreObject)) : Matrix);
+    local = (cast RiveScene2D.createRivePathMatrix__riveScene2D((cast source)) : Matrix);
     data = _Runtime.slice((cast path : Path).data, 0, null);
     {
       var offset:Float = 0.0;
@@ -233,12 +233,12 @@ class RiveScene2D {
     var scaleY:Float = cast _Runtime.UNDEFINED;
     var cosine:Float = cast _Runtime.UNDEFINED;
     var sine:Float = cast _Runtime.UNDEFINED;
-    rotation = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_ROTATION__riveScene2D : Float), (cast 0.0 : Float)) : Float);
-    scaleX = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_SCALE_X__riveScene2D : Float), (cast 1.0 : Float)) : Float);
-    scaleY = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_SCALE_Y__riveScene2D : Float), (cast 1.0 : Float)) : Float);
+    rotation = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_ROTATION__riveScene2D : Float), (cast 0.0 : Float)) : Float);
+    scaleX = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_SCALE_X__riveScene2D : Float), (cast 1.0 : Float)) : Float);
+    scaleY = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_SCALE_Y__riveScene2D : Float), (cast 1.0 : Float)) : Float);
     cosine = HxMath.cos(rotation);
     sine = HxMath.sin(rotation);
-    return cast (cast createMatrix((cast (cosine * scaleX) : Null<Float>), (cast (sine * scaleX) : Null<Float>), (cast (-sine * scaleY) : Null<Float>), (cast (cosine * scaleY) : Null<Float>), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_X__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_X_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Null<Float>) : Null<Float>), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_Y__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_Y_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Null<Float>) : Null<Float>)) : Matrix);
+    return cast (cast createMatrix((cast (cosine * scaleX)), (cast (sine * scaleX)), (cast (-sine * scaleY)), (cast (cosine * scaleY)), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_X__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_X_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float)), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_Y__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_Y_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float))) : Matrix);
     return cast null;
   }
 
@@ -255,12 +255,12 @@ class RiveScene2D {
   }
 
   public static function applyRiveTransform__riveScene2D(target:DisplayObject, source:RiveCoreObject):Void {
-    ((cast target : DisplayObject).x = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_X__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_X_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float));
-    ((cast target : DisplayObject).y = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_Y__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_Y_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float));
-    ((cast target : DisplayObject).rotation = ((cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_ROTATION__riveScene2D : Float), (cast 0.0 : Float)) : Float) * RAD_TO_DEG));
-    ((cast target : DisplayObject).scaleX = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_SCALE_X__riveScene2D : Float), (cast 1.0 : Float)) : Float));
-    ((cast target : DisplayObject).scaleY = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_SCALE_Y__riveScene2D : Float), (cast 1.0 : Float)) : Float));
-    ((cast target : DisplayObject).alpha = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_OPACITY__riveScene2D : Float), (cast 1.0 : Float)) : Float));
+    ((cast target : DisplayObject).x = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_X__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_X_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float));
+    ((cast target : DisplayObject).y = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_Y__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_Y_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float));
+    ((cast target : DisplayObject).rotation = ((cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_ROTATION__riveScene2D : Float), (cast 0.0 : Float)) : Float) * RAD_TO_DEG));
+    ((cast target : DisplayObject).scaleX = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_SCALE_X__riveScene2D : Float), (cast 1.0 : Float)) : Float));
+    ((cast target : DisplayObject).scaleY = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_SCALE_Y__riveScene2D : Float), (cast 1.0 : Float)) : Float));
+    ((cast target : DisplayObject).alpha = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_OPACITY__riveScene2D : Float), (cast 1.0 : Float)) : Float));
   }
 
   public static function applyRiveBlendMode__riveScene2D(target:DisplayObject, source:RiveCoreObject, advanced:Array<RiveAdvancedBlend>):Void {
@@ -268,7 +268,7 @@ class RiveScene2D {
     var fixed:Null<String> = cast _Runtime.UNDEFINED;
     var mode:Null<String> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast _Runtime.field(source, 'typeKey') : Float), (cast RiveScene2D.RIVE_DRAWABLE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool) : Bool)) { return; }
-    value = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source : RiveCoreObject), (cast RiveScene2D.RIVE_BLEND_MODE__riveScene2D : Float), (cast RiveScene2D.RIVE_BLEND_SRC_OVER__riveScene2D : Float)) : Float);
+    value = (cast RiveScene2D.readRiveNumber__riveScene2D((cast source), (cast RiveScene2D.RIVE_BLEND_MODE__riveScene2D : Float), (cast RiveScene2D.RIVE_BLEND_SRC_OVER__riveScene2D : Float)) : Float);
     fixed = ((cast RiveScene2D.RIVE_FIXED_BLEND_MODES__riveScene2D : flighthq._internal._Map<Float, String>).get(value));
     if ((cast !_Runtime.strictEquals(fixed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       ((cast target : DisplayObject).blendMode = fixed);

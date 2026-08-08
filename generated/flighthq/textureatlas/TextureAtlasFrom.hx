@@ -15,57 +15,56 @@ import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.types.Image;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.TextureAtlas;
-import flighthq.types.TextureSource;
 
 class TextureAtlasFrom {
   public static function createTextureAtlasFromCanvas(canvas:flighthq._internal.dom.HTMLCanvasElement):TextureAtlas {
-    return cast (cast createTextureAtlas((cast { texture: (cast createTexture({ dimension: '2d', source: (cast createImageResourceFromCanvas((cast canvas : flighthq._internal.dom.HTMLCanvasElement)) : Null<TextureSource>) }) : Null<Texture2D>) } : Null<flighthq._internal._Any>)) : TextureAtlas);
+    return cast (cast createTextureAtlas((cast { texture: (cast createTexture((cast { dimension: '2d', source: (cast createImageResourceFromCanvas((cast canvas)) : Image) })) : Texture2D) })) : TextureAtlas);
     return cast null;
   }
 
   public static function createTextureAtlasFromImageBitmap(bitmap:flighthq._internal.dom.ImageBitmap):TextureAtlas {
-    return cast (cast createTextureAtlas((cast { texture: (cast createTexture({ dimension: '2d', source: (cast createImageResourceFromImageBitmap((cast bitmap : flighthq._internal.dom.ImageBitmap)) : Null<TextureSource>) }) : Null<Texture2D>) } : Null<flighthq._internal._Any>)) : TextureAtlas);
+    return cast (cast createTextureAtlas((cast { texture: (cast createTexture((cast { dimension: '2d', source: (cast createImageResourceFromImageBitmap((cast bitmap)) : Image) })) : Texture2D) })) : TextureAtlas);
     return cast null;
   }
 
   public static function createTextureAtlasFromImageElement(img:flighthq._internal.dom.HTMLImageElement):TextureAtlas {
-    return cast (cast createTextureAtlas((cast { texture: (cast createTexture({ dimension: '2d', source: (cast createImageResourceFromImageElement((cast img : flighthq._internal.dom.HTMLImageElement)) : Null<TextureSource>) }) : Null<Texture2D>) } : Null<flighthq._internal._Any>)) : TextureAtlas);
+    return cast (cast createTextureAtlas((cast { texture: (cast createTexture((cast { dimension: '2d', source: (cast createImageResourceFromImageElement((cast img)) : Image) })) : Texture2D) })) : TextureAtlas);
     return cast null;
   }
 
   public static function createTextureAtlasFromImageResource(resource:Image):TextureAtlas {
-    return cast (cast createTextureAtlas((cast { texture: (cast createTexture({ dimension: '2d', source: resource }) : Null<Texture2D>) } : Null<flighthq._internal._Any>)) : TextureAtlas);
+    return cast (cast createTextureAtlas((cast { texture: (cast createTexture((cast { dimension: '2d', source: resource })) : Texture2D) })) : TextureAtlas);
     return cast null;
   }
 
   public static function loadTextureAtlasFromBase64(base64:String, mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<TextureAtlas> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      return flighthq._internal._Async.flatMap(loadImageResourceFromBase64((cast base64 : String), (cast mimeType : String), (cast signal : Null<flighthq._internal.dom.AbortSignal>)), function(__awaitValue0:Dynamic):Dynamic {
-        return flighthq._internal._Async.resolve(createTextureAtlasFromImageResource((cast __awaitValue0 : Image)));
+      return flighthq._internal._Async.flatMap((cast loadImageResourceFromBase64((cast base64 : String), (cast mimeType : String), (cast signal)) : flighthq._internal._Promise<Image>), function(__awaitValue0:Dynamic):Dynamic {
+        return flighthq._internal._Async.resolve((cast createTextureAtlasFromImageResource((cast __awaitValue0)) : TextureAtlas));
       });
     }));
   }
 
   public static function loadTextureAtlasFromBlob(blob:flighthq._internal.dom.Blob, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<TextureAtlas> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      return flighthq._internal._Async.flatMap(loadImageResourceFromBlob((cast blob : flighthq._internal.dom.Blob), (cast signal : Null<flighthq._internal.dom.AbortSignal>)), function(__awaitValue1:Dynamic):Dynamic {
-        return flighthq._internal._Async.resolve(createTextureAtlasFromImageResource((cast __awaitValue1 : Image)));
+      return flighthq._internal._Async.flatMap((cast loadImageResourceFromBlob((cast blob), (cast signal)) : flighthq._internal._Promise<Image>), function(__awaitValue1:Dynamic):Dynamic {
+        return flighthq._internal._Async.resolve((cast createTextureAtlasFromImageResource((cast __awaitValue1)) : TextureAtlas));
       });
     }));
   }
 
   public static function loadTextureAtlasFromBytes(bytes:flighthq._internal._UInt8Array, ?mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<TextureAtlas> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      return flighthq._internal._Async.flatMap(loadImageResourceFromBytes((cast bytes : flighthq._internal._UInt8Array), (cast mimeType : Null<String>), (cast signal : Null<flighthq._internal.dom.AbortSignal>)), function(__awaitValue2:Dynamic):Dynamic {
-        return flighthq._internal._Async.resolve(createTextureAtlasFromImageResource((cast __awaitValue2 : Image)));
+      return flighthq._internal._Async.flatMap((cast loadImageResourceFromBytes((cast bytes), (cast mimeType), (cast signal)) : flighthq._internal._Promise<Image>), function(__awaitValue2:Dynamic):Dynamic {
+        return flighthq._internal._Async.resolve((cast createTextureAtlasFromImageResource((cast __awaitValue2)) : TextureAtlas));
       });
     }));
   }
 
   public static function loadTextureAtlasFromUrl(url:String, ?crossOrigin:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<TextureAtlas> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      return flighthq._internal._Async.flatMap(loadImageResourceFromUrl((cast url : String), (cast crossOrigin : Null<String>), (cast signal : Null<flighthq._internal.dom.AbortSignal>)), function(__awaitValue3:Dynamic):Dynamic {
-        return flighthq._internal._Async.resolve(createTextureAtlasFromImageResource((cast __awaitValue3 : Image)));
+      return flighthq._internal._Async.flatMap((cast loadImageResourceFromUrl((cast url : String), (cast crossOrigin), (cast signal)) : flighthq._internal._Promise<Image>), function(__awaitValue3:Dynamic):Dynamic {
+        return flighthq._internal._Async.resolve((cast createTextureAtlasFromImageResource((cast __awaitValue3)) : TextureAtlas));
       });
     }));
   }

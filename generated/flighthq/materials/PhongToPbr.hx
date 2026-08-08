@@ -18,8 +18,8 @@ import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 
 class PhongToPbr {
-  public static function convertPhongToStandardPbrMaterial(phong:PhongMaterial, ?opts:Dynamic):StandardPbrMaterial {
-    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: _Runtime.field(phong, 'diffuse') }, { baseColorMap: _Runtime.field(phong, 'diffuseMap') }, { metallic: (cast getPbrMetallicFromPhongSpecular((cast _Runtime.field(phong, 'specular') : Float), (cast _Runtime.field(phong, 'diffuse') : Float)) : Null<Float>) }, { normalMap: _Runtime.field(phong, 'normalMap') }, { normalScale: _Runtime.field(phong, 'normalScale') }, { roughness: (cast getPbrRoughnessFromPhongShininess((cast _Runtime.field(phong, 'shininess') : Float)) : Null<Float>) }, opts]) : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
+  public static function convertPhongToStandardPbrMaterial(phong:PhongMaterial, ?opts:flighthq._internal._Partial<StandardPbrMaterialProperties>):StandardPbrMaterial {
+    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: _Runtime.field(phong, 'diffuse') }, { baseColorMap: _Runtime.field(phong, 'diffuseMap') }, { metallic: (cast getPbrMetallicFromPhongSpecular((cast _Runtime.field(phong, 'specular') : Float), (cast _Runtime.field(phong, 'diffuse') : Float)) : Float) }, { normalMap: _Runtime.field(phong, 'normalMap') }, { normalScale: _Runtime.field(phong, 'normalScale') }, { roughness: (cast getPbrRoughnessFromPhongShininess((cast _Runtime.field(phong, 'shininess') : Float)) : Float) }, opts]))) : StandardPbrMaterial);
     return cast null;
   }
 

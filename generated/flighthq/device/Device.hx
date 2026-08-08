@@ -57,6 +57,7 @@ class Device {
       (out.hasKeyboard = cast ((cast Device.detectDesktopUa__device((cast ua : String)) : Bool) : Dynamic));
       (out.hasStylus = cast (false : Dynamic));
       return cast out;
+      return cast _Runtime.UNDEFINED;
     }, getDisplayMetrics: function(out:DeviceDisplayMetrics):DeviceDisplayMetrics {
       var win:Null<flighthq._internal.dom.Window> = cast _Runtime.UNDEFINED;
       var scr:Null<flighthq._internal.dom.Screen> = cast _Runtime.UNDEFINED;
@@ -72,6 +73,7 @@ class Device {
       (out.physicalWidth = cast (((cast ((cast !_Runtime.strictEquals(scr, null) : Bool) && (cast ((cast pixelRatio : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.round(_Runtime.multiplyNumbers((cast scr : flighthq._internal.dom.Screen).width, pixelRatio)) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       (out.physicalHeight = cast (((cast ((cast !_Runtime.strictEquals(scr, null) : Bool) && (cast ((cast pixelRatio : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast HxMath.round(_Runtime.multiplyNumbers((cast scr : flighthq._internal.dom.Screen).height, pixelRatio)) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       return cast out;
+      return cast _Runtime.UNDEFINED;
     }, getId: function():String {
       try {
         var key:String = '__flighthq_device_id';
@@ -84,6 +86,7 @@ class Device {
       } catch (__error:Dynamic) {
         return cast '';
       }
+      return cast _Runtime.UNDEFINED;
     }, getInfo: function(out:DeviceInfo):DeviceInfo {
       var nav:Null<flighthq._internal.dom.Navigator> = cast _Runtime.UNDEFINED;
       var ua:String = cast _Runtime.UNDEFINED;
@@ -93,8 +96,8 @@ class Device {
       var devMem:Float = cast _Runtime.UNDEFINED;
       nav = ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
       ua = _Runtime.coalesce(({ final __hostType1 = nav; __hostType1 == null ? _Runtime.UNDEFINED : (cast __hostType1 : flighthq._internal.dom.Navigator).userAgent; }), function():Dynamic return cast '');
-      uadPlatform = _Runtime.optionalField(_Runtime.optionalField((cast nav : Null<{ @:optional var userAgentData:{ @:optional var platform:String; }; }>), 'userAgentData'), 'platform');
-      (out.arch = cast ((cast parseUserAgentArch((cast ua : String), (cast uadPlatform : Null<String>)) : String) : Dynamic));
+      uadPlatform = ({ final __structural3 = ({ final __structural2 = (cast nav : Null<{ @:optional var userAgentData:{ @:optional var platform:String; }; }>); __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var userAgentData:Null<{ @:optional var platform:Null<String>; }>; }).userAgentData; }); __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var platform:Null<String>; }).platform; });
+      (out.arch = cast ((cast parseUserAgentArch((cast ua : String), (cast uadPlatform)) : String) : Dynamic));
       (out.availableMemory = cast (-1.0 : Dynamic));
       (out.boardName = cast ('' : Dynamic));
       (out.colorGamut = cast ('' : Dynamic));
@@ -123,14 +126,15 @@ class Device {
       (out.totalMemory = cast (((cast ((cast devMem : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (((devMem * 1024.0) * 1024.0) * 1024.0) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
       (out.webViewVersion = cast ('' : Dynamic));
       return cast out;
+      return cast _Runtime.UNDEFINED;
     }, getSafeAreaInsets: function(out:SafeAreaInsets):SafeAreaInsets {
       var insets:Null<SafeAreaInsets> = cast _Runtime.UNDEFINED;
       insets = Device._safeAreaInsets__device;
       if ((cast !_Runtime.strictEquals(insets, null) : Bool)) {
-        (out.bottom = cast ((cast insets : flighthq.types.Device.SafeAreaInsets).bottom : Dynamic));
-        (out.left = cast ((cast insets : flighthq.types.Device.SafeAreaInsets).left : Dynamic));
-        (out.right = cast ((cast insets : flighthq.types.Device.SafeAreaInsets).right : Dynamic));
-        (out.top = cast ((cast insets : flighthq.types.Device.SafeAreaInsets).top : Dynamic));
+        (out.bottom = cast ((cast insets : { var bottom:Float; }).bottom : Dynamic));
+        (out.left = cast ((cast insets : { var left:Float; }).left : Dynamic));
+        (out.right = cast ((cast insets : { var right:Float; }).right : Dynamic));
+        (out.top = cast ((cast insets : { var top:Float; }).top : Dynamic));
       } else {
         (out.bottom = cast (0.0 : Dynamic));
         (out.left = cast (0.0 : Dynamic));
@@ -138,6 +142,7 @@ class Device {
         (out.top = cast (0.0 : Dynamic));
       }
       return cast out;
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
@@ -162,7 +167,7 @@ class Device {
       var style:flighthq._internal.dom.CSSStyleDeclaration = cast _Runtime.UNDEFINED;
       style = _Runtime.callValue(flighthq._internal._HostValueLut.get('getComputedStyle'), cast ([el] : Array<Dynamic>));
       (Device._safeAreaInsets__device = cast ({ bottom: _Runtime.orValue(_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([(cast style : flighthq._internal.dom.CSSStyleDeclaration).bottom] : Array<Dynamic>)), function():Dynamic return cast 0.0), left: _Runtime.orValue(_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([(cast style : flighthq._internal.dom.CSSStyleDeclaration).left] : Array<Dynamic>)), function():Dynamic return cast 0.0), right: _Runtime.orValue(_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([(cast style : flighthq._internal.dom.CSSStyleDeclaration).right] : Array<Dynamic>)), function():Dynamic return cast 0.0), top: _Runtime.orValue(_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([(cast style : flighthq._internal.dom.CSSStyleDeclaration).top] : Array<Dynamic>)), function():Dynamic return cast 0.0) } : Dynamic));
-    } : Void->Void);
+    });
     if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast function():Void {
 
     }; }
@@ -174,7 +179,7 @@ class Device {
     if ((cast !_Runtime.strictEquals(observer, null) : Bool)) { (cast observer : flighthq._internal.dom.ResizeObserver).observe(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'documentElement')); }
     return cast function():Void {
       if ((cast !_Runtime.strictEquals(observer, null) : Bool)) { (cast observer : flighthq._internal.dom.ResizeObserver).disconnect(); }
-      ({ final __hostTypeCall2 = (cast el : flighthq._internal.dom.HTMLDivElement).parentNode; __hostTypeCall2 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall2 : flighthq._internal.dom.ParentNode).removeChild(el); });
+      ({ final __hostTypeCall4 = (cast el : flighthq._internal.dom.HTMLDivElement).parentNode; __hostTypeCall4 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall4 : flighthq._internal.dom.ParentNode).removeChild(el); });
       (Device._safeAreaInsets__device = cast (null : Dynamic));
     };
     return cast null;
@@ -182,18 +187,18 @@ class Device {
 
   @:noCompletion
   public static function getDeviceBackend():DeviceBackend {
-    if ((cast _Runtime.strictEquals(Device._backend__device, null) : Bool)) { (Device._backend__device = cast ((cast createWebDeviceBackend() : Null<DeviceBackend>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Device._backend__device, null) : Bool)) { (Device._backend__device = cast ((cast createWebDeviceBackend() : DeviceBackend) : Dynamic)); }
     return cast Device._backend__device;
     return cast null;
   }
 
   public static function getDeviceCapabilities(out:DeviceCapabilities):DeviceCapabilities {
-    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getCapabilities(out);
+    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getCapabilities((cast out));
     return cast null;
   }
 
   public static function getDeviceDisplayMetrics(out:DeviceDisplayMetrics):DeviceDisplayMetrics {
-    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getDisplayMetrics(out);
+    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getDisplayMetrics((cast out));
     return cast null;
   }
 
@@ -203,12 +208,12 @@ class Device {
   }
 
   public static function getDeviceInfo(out:DeviceInfo):DeviceInfo {
-    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getInfo(out);
+    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getInfo((cast out));
     return cast null;
   }
 
   public static function getSafeAreaInsets(out:SafeAreaInsets):SafeAreaInsets {
-    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getSafeAreaInsets(out);
+    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getSafeAreaInsets((cast out));
     return cast null;
   }
 

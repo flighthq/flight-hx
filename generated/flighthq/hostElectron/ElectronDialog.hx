@@ -7,6 +7,7 @@ import flighthq.types.Dialog.DialogBackend;
 import flighthq.types.Dialog.FileDialogFilter;
 import flighthq.types.Dialog.FileDialogHandle;
 import flighthq.types.Dialog.MessageDialogOptions;
+import flighthq.types.Dialog.MessageDialogResult;
 import flighthq.types.Dialog.OpenDirectoryDialogOptions;
 import flighthq.types.Dialog.OpenFileDialogOptions;
 import flighthq.types.Dialog.SaveFileDialogOptions;
@@ -48,7 +49,7 @@ class ElectronDialog {
               __flowBranch1 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
-              return flighthq._internal._Async.flatMap((cast dialog : flighthq.types.ElectronApi.ElectronDialog).showOpenDialog(_Runtime.field(_Runtime, 'UNDEFINED'), { title: options.title, defaultPath: options.defaultPath, filters: options.filters, properties: properties }), function(__awaitValue2:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap((cast dialog : flighthq.types.ElectronApi.ElectronDialog).showOpenDialog((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast { title: options.title, defaultPath: options.defaultPath, filters: options.filters, properties: properties })), function(__awaitValue2:Dynamic):Dynamic {
                 r = __awaitValue2;
                 kind = _Runtime.select(options.directory, function():Dynamic return cast 'Directory', function():Dynamic return cast 'File');
                 return flighthq._internal._Async.flowReturn(((cast (cast r : { var canceled:Bool; var filePaths:Array<String>; }).canceled : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty((cast r : { var canceled:Bool; var filePaths:Array<String>; }).filePaths, 'map', cast ([function(path:String, __unused0:Float, __unused1:Array<String>):FileDialogHandle return (cast ElectronDialog.toFileHandle__electronDialog((cast path : String), (cast kind : String)) : FileDialogHandle)] : Array<Dynamic>)) : Dynamic)));
@@ -73,7 +74,7 @@ class ElectronDialog {
             __flowBranch3 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast dialog : flighthq.types.ElectronApi.ElectronDialog).showOpenDialog(_Runtime.field(_Runtime, 'UNDEFINED'), { title: options.title, properties: properties }), function(__awaitValue4:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast dialog : flighthq.types.ElectronApi.ElectronDialog).showOpenDialog((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast { title: options.title, properties: properties })), function(__awaitValue4:Dynamic):Dynamic {
               r = __awaitValue4;
               return flighthq._internal._Async.flowReturn(((cast (cast r : { var canceled:Bool; var filePaths:Array<String>; }).canceled : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty((cast r : { var canceled:Bool; var filePaths:Array<String>; }).filePaths, 'map', cast ([function(path:String, __unused2:Float, __unused3:Array<String>):FileDialogHandle return (cast ElectronDialog.toFileHandle__electronDialog((cast path : String), (cast 'Directory' : String)) : FileDialogHandle)] : Array<Dynamic>)) : Dynamic)));
             });
@@ -83,15 +84,15 @@ class ElectronDialog {
     }, saveFile: function(options:SaveFileDialogOptions):flighthq._internal._Promise<Null<FileDialogHandle>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var r:{ var canceled:Bool; @:optional var filePath:Null<String>; } = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast dialog : flighthq.types.ElectronApi.ElectronDialog).showSaveDialog(_Runtime.field(_Runtime, 'UNDEFINED'), { title: options.title, defaultPath: options.defaultPath, filters: options.filters }), function(__awaitValue5:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap((cast dialog : flighthq.types.ElectronApi.ElectronDialog).showSaveDialog((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast { title: options.title, defaultPath: options.defaultPath, filters: options.filters })), function(__awaitValue5:Dynamic):Dynamic {
           r = __awaitValue5;
-          return flighthq._internal._Async.resolve(((cast ((cast (cast r : { var canceled:Bool; @:optional var filePath:Null<String>; }).canceled : Bool) || (cast !_Runtime.truthy((cast r : { var canceled:Bool; @:optional var filePath:Null<String>; }).filePath) : Bool)) : Bool) ? (cast null : Dynamic) : (cast (cast ElectronDialog.toFileHandle__electronDialog((cast (cast r : { var canceled:Bool; @:optional var filePath:Null<String>; }).filePath : String), (cast 'File' : String)) : Null<flighthq._internal._Any>) : Dynamic)));
+          return flighthq._internal._Async.resolve(((cast ((cast (cast r : { var canceled:Bool; @:optional var filePath:Null<String>; }).canceled : Bool) || (cast !_Runtime.truthy((cast r : { var canceled:Bool; @:optional var filePath:Null<String>; }).filePath) : Bool)) : Bool) ? (cast null : Dynamic) : (cast (cast ElectronDialog.toFileHandle__electronDialog((cast (cast r : { var canceled:Bool; @:optional var filePath:Null<String>; }).filePath : String), (cast 'File' : String)) : FileDialogHandle) : Dynamic)));
         });
       }));
-    }, message: function(options:MessageDialogOptions):flighthq._internal._Promise<{ var buttonIndex:Float; var cancelled:Bool; var checkboxChecked:Bool; }> {
+    }, message: function(options:MessageDialogOptions):flighthq._internal._Promise<MessageDialogResult> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var r:{ var response:Float; var checkboxChecked:Bool; } = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast dialog : flighthq.types.ElectronApi.ElectronDialog).showMessageBox(_Runtime.field(_Runtime, 'UNDEFINED'), { type: options.kind, title: options.title, message: options.message, detail: options.detail, buttons: options.buttons, defaultId: options.defaultId, cancelId: options.cancelId, checkboxLabel: options.checkboxLabel, checkboxChecked: options.checkboxChecked }), function(__awaitValue6:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap((cast dialog : flighthq.types.ElectronApi.ElectronDialog).showMessageBox((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast { type: options.kind, title: options.title, message: options.message, detail: options.detail, buttons: options.buttons, defaultId: options.defaultId, cancelId: options.cancelId, checkboxLabel: options.checkboxLabel, checkboxChecked: options.checkboxChecked })), function(__awaitValue6:Dynamic):Dynamic {
           r = __awaitValue6;
           return flighthq._internal._Async.resolve({ buttonIndex: (cast r : { var response:Float; var checkboxChecked:Bool; }).response, cancelled: ((cast !_Runtime.strictEquals(options.cancelId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast r : { var response:Float; var checkboxChecked:Bool; }).response, options.cancelId) : Bool)), checkboxChecked: (cast r : { var response:Float; var checkboxChecked:Bool; }).checkboxChecked });
         });
@@ -99,13 +100,14 @@ class ElectronDialog {
     }, confirm: function(options:MessageDialogOptions):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var r:{ var response:Float; var checkboxChecked:Bool; } = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast dialog : flighthq.types.ElectronApi.ElectronDialog).showMessageBox(_Runtime.field(_Runtime, 'UNDEFINED'), { type: options.kind, title: options.title, message: options.message, detail: options.detail, buttons: cast (['OK', 'Cancel'] : Array<Dynamic>), defaultId: 0.0, cancelId: 1.0 }), function(__awaitValue7:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap((cast dialog : flighthq.types.ElectronApi.ElectronDialog).showMessageBox((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast { type: options.kind, title: options.title, message: options.message, detail: options.detail, buttons: cast (['OK', 'Cancel'] : Array<Dynamic>), defaultId: 0.0, cancelId: 1.0 })), function(__awaitValue7:Dynamic):Dynamic {
           r = __awaitValue7;
           return flighthq._internal._Async.resolve(_Runtime.strictEquals((cast r : { var response:Float; var checkboxChecked:Bool; }).response, 0.0));
         });
       }));
-    }, prompt: function():flighthq._internal._Promise<flighthq._internal._Any> {
+    }, prompt: function():flighthq._internal._Promise<Null<String>> {
       return cast flighthq._internal._Async.resolve(null);
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }

@@ -13,6 +13,7 @@ import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Camera3D;
 import flighthq.types.DepthMaterial;
 import flighthq.types.GlDebugProgram;
+import flighthq.types.GlDebugProgram.GlDebugDefineKey;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
@@ -26,26 +27,26 @@ import flighthq.types._internal._DepthMaterialValues.DepthMaterialKind;
 
 class DepthGlMeshMaterialRenderer {
   @:noCompletion
-  public static final depthGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  public static final depthGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var depth:Null<DepthMaterial> = cast _Runtime.UNDEFINED;
     var program:GlDebugProgram = cast _Runtime.UNDEFINED;
     depth = (cast material : Null<DepthMaterial>);
-    program = (cast ensureGlDebugProgram((cast state : GlRenderState), { hasNormalMap: false, mode: 'depth' }) : GlDebugProgram);
-    beginGlMeshDraw((cast state : GlRenderState), program, (cast ((cast !_Runtime.strictEquals(depth, null) : Bool) && (cast _Runtime.field(depth, 'doubleSided') : Bool)) : Bool));
-    setGlMeshViewProjection((cast state : GlRenderState), (cast (cast program : GlDebugProgram).locViewProjection : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
+    program = (cast ensureGlDebugProgram((cast state), (cast { hasNormalMap: false, mode: 'depth' })) : GlDebugProgram);
+    beginGlMeshDraw((cast state), (cast program), (cast ((cast !_Runtime.strictEquals(depth, null) : Bool) && (cast _Runtime.field(depth, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection((cast state), (cast (cast program : GlDebugProgram).locViewProjection), (cast camera));
     if ((cast _Runtime.strictEquals(depth, null) : Bool)) {
-      bindGlDebugRange((cast state : GlRenderState), program, (cast 0.0 : Float), (cast 1.0 : Float));
+      bindGlDebugRange((cast state), (cast program), (cast 0.0 : Float), (cast 1.0 : Float));
       return;
     }
-    bindGlDebugRange((cast state : GlRenderState), program, (cast _Runtime.field(depth, 'near') : Float), (cast _Runtime.field(depth, 'far') : Float));
+    bindGlDebugRange((cast state), (cast program), (cast _Runtime.field(depth, 'near') : Float), (cast _Runtime.field(depth, 'far') : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset((cast state : GlRenderState), program, (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
-  } };
+    drawGlMeshSubset((cast state), (cast program), (cast proxy), (cast geometry));
+  } });
 
   public static function registerGlDepthMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer((cast state : GlRenderState), (cast DepthMaterialKind : String), (cast depthGlMeshMaterialRenderer : GlMeshMaterialRenderer));
+    registerGlMeshMaterialRenderer((cast state), (cast DepthMaterialKind : String), (cast depthGlMeshMaterialRenderer));
   }
 }

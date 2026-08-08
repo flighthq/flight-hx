@@ -7,7 +7,7 @@ import flighthq.types.AdvancedBlendMode;
 import flighthq.types.BlendEffect;
 
 class BlendEffect {
-  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:Dynamic):flighthq.types.BlendEffect {
+  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:flighthq._internal._Omit<flighthq.types.BlendEffect, String>):flighthq.types.BlendEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BlendEffect' }, { mode: mode }, options]);
     return cast null;

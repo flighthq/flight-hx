@@ -15,20 +15,20 @@ import flighthq.types.Vector2.Vector2Like;
 
 class MotionPath {
   public static function createMotionPath(path:Path, speed:Float = 0.0, loopMode:MotionPathLoopMode = 'clamp', ?tolerance:Float):flighthq.types.MotionPath {
-    return cast { direction: 1.0, distance: 0.0, length: (cast getPathLength((cast path : Path), (cast tolerance : Float)) : Float), loopMode: loopMode, path: path, speed: speed };
+    return cast { direction: 1.0, distance: 0.0, length: (cast getPathLength((cast path), (cast tolerance : Float)) : Float), loopMode: loopMode, path: path, speed: speed };
     return cast null;
   }
 
   public static function getMotionPathHeading(mp:flighthq.types.MotionPath):Float {
-    (cast getPathTangentAtDistance((cast _Runtime.field(mp, 'path') : Path), (cast _Runtime.field(mp, 'distance') : Float), (cast MotionPath.scratchTangent__motionPath : Vector2Like), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bool);
+    (cast getPathTangentAtDistance((cast _Runtime.field(mp, 'path')), (cast _Runtime.field(mp, 'distance') : Float), (cast MotionPath.scratchTangent__motionPath), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bool);
     return cast HxMath.atan2(MotionPath.scratchTangent__motionPath.y, MotionPath.scratchTangent__motionPath.x);
     return cast null;
   }
 
-  public static final scratchTangent__motionPath:Vector2 = (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector2);
+  public static final scratchTangent__motionPath:Vector2 = (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector2);
 
   public static function getMotionPathPosition(mp:flighthq.types.MotionPath, pointOut:Vector2Like, tangentOut:Vector2Like):Bool {
-    return cast (cast getPathPositionAtDistance((cast _Runtime.field(mp, 'path') : Path), (cast _Runtime.field(mp, 'distance') : Float), (cast pointOut : Vector2Like), (cast tangentOut : Vector2Like), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bool);
+    return cast (cast getPathPositionAtDistance((cast _Runtime.field(mp, 'path')), (cast _Runtime.field(mp, 'distance') : Float), (cast pointOut), (cast tangentOut), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bool);
     return cast null;
   }
 
@@ -60,7 +60,7 @@ class MotionPath {
     length = (cast mp : flighthq.types.MotionPath).length;
     if ((cast ((cast length : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     move = ((cast mp : flighthq.types.MotionPath).speed * deltaTime);
-    MotionPath.applyMotionPathLoopMode__motionPath((cast mp : flighthq.types.MotionPath), (cast move : Float), (cast length : Float));
+    MotionPath.applyMotionPathLoopMode__motionPath((cast mp), (cast move : Float), (cast length : Float));
   }
 
   public static function applyMotionPathLoopMode__motionPath(mp:flighthq.types.MotionPath, move:Float, length:Float):Void {

@@ -25,8 +25,8 @@ class ShapeStrokeOutline {
     var deferred:Bool = cast _Runtime.UNDEFINED;
     var flush:Void->Void = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
-    if ((cast (cast ShapeStrokeOutline.hasNonSolidShapeStroke__shapeStrokeOutline((cast commands : Array<ShapeCommandToken>)) : Bool) : Bool)) { return cast null; }
-    regions = cast ([] : Array<Dynamic>);
+    if ((cast (cast ShapeStrokeOutline.hasNonSolidShapeStroke__shapeStrokeOutline((cast commands)) : Bool) : Bool)) { return cast null; }
+    regions = (cast cast ([] : Array<Dynamic>));
     centerline = null;
     style = null;
     color = 0.0;
@@ -37,13 +37,13 @@ class ShapeStrokeOutline {
     flush = (cast function():Void {
       var outline:Path = cast _Runtime.UNDEFINED;
       if ((cast ((cast ((cast _Runtime.strictEquals(style, null) : Bool) || (cast _Runtime.strictEquals(centerline, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast centerline : Path).commands, 'length'), 0.0) : Bool)) : Bool)) { return; }
-      if ((cast (cast ShapeStrokeOutline.isCenterlineClosed__shapeStrokeOutline((cast centerline : Path)) : Bool) : Bool)) {
+      if ((cast (cast ShapeStrokeOutline.isCenterlineClosed__shapeStrokeOutline((cast centerline)) : Bool) : Bool)) {
         (deferred = cast (true : Dynamic));
         return;
       }
-      outline = (cast compactStrokePath((cast centerline : Path), (cast style : StrokeStyle), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Path);
+      outline = (cast compactStrokePath((cast centerline), (cast style), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Path);
       if ((cast ((cast _Runtime.field((cast outline : Path).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: outline, color: color, alpha: alpha }] : Array<Dynamic>)); }
-    } : Void->Void);
+    });
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var name:String = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
@@ -70,7 +70,7 @@ class ShapeStrokeOutline {
             _Runtime.callProperty((cast centerline : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
             _Runtime.pushMany((cast centerline : Path).data, cast ([penX, penY] : Array<Dynamic>));
           }
-          appendShapeGeometryCommand((cast centerline : Path), (cast name : String), (cast commands : Array<ShapeCommandToken>), (cast a : Float));
+          appendShapeGeometryCommand((cast centerline), (cast name : String), (cast commands), (cast a : Float));
         }
         if ((cast ((cast _Runtime.strictEquals(name, 'moveTo') : Bool) || (cast _Runtime.strictEquals(name, 'lineTo') : Bool)) : Bool)) {
           (penX = cast ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Dynamic));
@@ -121,7 +121,7 @@ class ShapeStrokeOutline {
     lastX = 0.0;
     lastY = 0.0;
     segments = 0.0;
-    subpathReturnsToStart = (cast function():Bool return ((cast ((cast ((cast segments : Float) >= (cast 2.0 : Float)) : Bool) && (cast ((cast HxMath.abs((lastX - subStartX)) : Float) < (cast ShapeStrokeOutline.CLOSE_EPSILON__shapeStrokeOutline : Float)) : Bool)) : Bool) && (cast ((cast HxMath.abs((lastY - subStartY)) : Float) < (cast ShapeStrokeOutline.CLOSE_EPSILON__shapeStrokeOutline : Float)) : Bool)) : Void->Bool);
+    subpathReturnsToStart = (cast function():Bool return ((cast ((cast ((cast segments : Float) >= (cast 2.0 : Float)) : Bool) && (cast ((cast HxMath.abs((lastX - subStartX)) : Float) < (cast ShapeStrokeOutline.CLOSE_EPSILON__shapeStrokeOutline : Float)) : Bool)) : Bool) && (cast ((cast HxMath.abs((lastY - subStartY)) : Float) < (cast ShapeStrokeOutline.CLOSE_EPSILON__shapeStrokeOutline : Float)) : Bool)));
     {
       var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {

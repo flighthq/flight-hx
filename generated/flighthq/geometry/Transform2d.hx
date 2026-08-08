@@ -4,13 +4,14 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Entity;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Transform2D;
 import flighthq.types.Transform2D.Transform2DLike;
 
 class Transform2d {
   public static function createTransform2D(?x:Float, ?y:Float, ?rotation:Float, ?scaleX:Float, ?scaleY:Float, ?skewX:Float, ?skewY:Float, ?pivotX:Float, ?pivotY:Float):Transform2D {
-    return cast (cast createEntity((cast { pivotX: _Runtime.coalesce(pivotX, function():Dynamic return cast 0.0), pivotY: _Runtime.coalesce(pivotY, function():Dynamic return cast 0.0), rotation: _Runtime.coalesce(rotation, function():Dynamic return cast 0.0), scaleX: _Runtime.coalesce(scaleX, function():Dynamic return cast 1.0), scaleY: _Runtime.coalesce(scaleY, function():Dynamic return cast 1.0), skewX: _Runtime.coalesce(skewX, function():Dynamic return cast 0.0), skewY: _Runtime.coalesce(skewY, function():Dynamic return cast 0.0), x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0) } : Null<{ var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; }>)) : Transform2D);
+    return cast (cast createEntity((cast { pivotX: _Runtime.coalesce(pivotX, function():Dynamic return cast 0.0), pivotY: _Runtime.coalesce(pivotY, function():Dynamic return cast 0.0), rotation: _Runtime.coalesce(rotation, function():Dynamic return cast 0.0), scaleX: _Runtime.coalesce(scaleX, function():Dynamic return cast 1.0), scaleY: _Runtime.coalesce(scaleY, function():Dynamic return cast 1.0), skewX: _Runtime.coalesce(skewX, function():Dynamic return cast 0.0), skewY: _Runtime.coalesce(skewY, function():Dynamic return cast 0.0), x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0) })) : { >Entity, var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; });
     return cast null;
   }
 

@@ -6,10 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.ColorScaleBias.ColorScaleBiasLike;
+import flighthq.types.Entity;
 
 class ColorScaleBias {
   public static function cloneColorScaleBias(source:ColorScaleBiasLike):flighthq.types.ColorScaleBias {
-    return cast (cast createColorScaleBias((cast source : Null<flighthq._internal._Any>)) : flighthq.types.ColorScaleBias);
+    return cast (cast createColorScaleBias((cast source)) : flighthq.types.ColorScaleBias);
     return cast null;
   }
 
@@ -46,13 +47,13 @@ class ColorScaleBias {
     flighthq._internal._StaticIndex.writeArray(outColorBiases, 3.0, _Runtime.field(source, 'alphaBias'));
   }
 
-  public static function createColorScaleBias(?opts:Dynamic):flighthq.types.ColorScaleBias {
-    return cast (cast createEntity((cast { redScale: _Runtime.coalesce(_Runtime.optionalField(opts, 'redScale'), function():Dynamic return cast 1.0), greenScale: _Runtime.coalesce(_Runtime.optionalField(opts, 'greenScale'), function():Dynamic return cast 1.0), blueScale: _Runtime.coalesce(_Runtime.optionalField(opts, 'blueScale'), function():Dynamic return cast 1.0), alphaScale: _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaScale'), function():Dynamic return cast 1.0), redBias: _Runtime.coalesce(_Runtime.optionalField(opts, 'redBias'), function():Dynamic return cast 0.0), greenBias: _Runtime.coalesce(_Runtime.optionalField(opts, 'greenBias'), function():Dynamic return cast 0.0), blueBias: _Runtime.coalesce(_Runtime.optionalField(opts, 'blueBias'), function():Dynamic return cast 0.0), alphaBias: _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaBias'), function():Dynamic return cast 0.0) } : Null<{ var redScale:Float; var greenScale:Float; var blueScale:Float; var alphaScale:Float; var redBias:Float; var greenBias:Float; var blueBias:Float; var alphaBias:Float; }>)) : flighthq.types.ColorScaleBias);
+  public static function createColorScaleBias(?opts:flighthq._internal._Partial<ColorScaleBiasLike>):flighthq.types.ColorScaleBias {
+    return cast (cast createEntity((cast { redScale: _Runtime.coalesce(({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var redScale:Null<Float>; }).redScale; }), function():Dynamic return cast 1.0), greenScale: _Runtime.coalesce(({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var greenScale:Null<Float>; }).greenScale; }), function():Dynamic return cast 1.0), blueScale: _Runtime.coalesce(({ final __structural2 = opts; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var blueScale:Null<Float>; }).blueScale; }), function():Dynamic return cast 1.0), alphaScale: _Runtime.coalesce(({ final __structural3 = opts; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var alphaScale:Null<Float>; }).alphaScale; }), function():Dynamic return cast 1.0), redBias: _Runtime.coalesce(({ final __structural4 = opts; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var redBias:Null<Float>; }).redBias; }), function():Dynamic return cast 0.0), greenBias: _Runtime.coalesce(({ final __structural5 = opts; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var greenBias:Null<Float>; }).greenBias; }), function():Dynamic return cast 0.0), blueBias: _Runtime.coalesce(({ final __structural6 = opts; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var blueBias:Null<Float>; }).blueBias; }), function():Dynamic return cast 0.0), alphaBias: _Runtime.coalesce(({ final __structural7 = opts; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var alphaBias:Null<Float>; }).alphaBias; }), function():Dynamic return cast 0.0) })) : { >Entity, var redScale:Float; var greenScale:Float; var blueScale:Float; var alphaScale:Float; var redBias:Float; var greenBias:Float; var blueBias:Float; var alphaBias:Float; });
     return cast null;
   }
 
   public static function equalsColorScaleBias(a:ColorScaleBiasLike, b:ColorScaleBiasLike):Bool {
-    return cast ((cast (cast equalsColorScaleBiasBiases((cast a : ColorScaleBiasLike), (cast b : ColorScaleBiasLike), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : Bool) : Bool) && (cast (cast equalsColorScaleBiasScales((cast a : ColorScaleBiasLike), (cast b : ColorScaleBiasLike), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : Bool) : Bool));
+    return cast ((cast (cast equalsColorScaleBiasBiases((cast a), (cast b), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : Bool) : Bool) && (cast (cast equalsColorScaleBiasScales((cast a), (cast b), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : Bool) : Bool));
     return cast null;
   }
 
@@ -88,7 +89,7 @@ class ColorScaleBias {
   }
 
   public static function isIdentityColorScaleBias(source:ColorScaleBiasLike, compareAlphaScale:Bool = true):Bool {
-    return cast _Runtime.andValue((cast equalsColorScaleBiasBiases((cast source : ColorScaleBiasLike), (cast ColorScaleBias._identity__colorScaleBias : ColorScaleBiasLike), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : Bool), function():Dynamic return cast (cast equalsColorScaleBiasScales((cast source : ColorScaleBiasLike), (cast ColorScaleBias._identity__colorScaleBias : ColorScaleBiasLike), (cast compareAlphaScale : Bool)) : Bool));
+    return cast _Runtime.andValue((cast equalsColorScaleBiasBiases((cast source), (cast ColorScaleBias._identity__colorScaleBias), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : Bool), function():Dynamic return cast (cast equalsColorScaleBiasScales((cast source), (cast ColorScaleBias._identity__colorScaleBias), (cast compareAlphaScale : Bool)) : Bool));
     return cast null;
   }
 
@@ -126,8 +127,8 @@ class ColorScaleBias {
   }
 
   public static function setColorScaleBiasIdentity(out:flighthq.types.ColorScaleBias):Void {
-    setColorScaleBias((cast out : ColorScaleBiasLike), (cast 1.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
+    setColorScaleBias((cast out), (cast 1.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
   }
 
-  public static final _identity__colorScaleBias:flighthq.types.ColorScaleBias = (cast createColorScaleBias((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : flighthq.types.ColorScaleBias);
+  public static final _identity__colorScaleBias:flighthq.types.ColorScaleBias = (cast createColorScaleBias((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.ColorScaleBias);
 }

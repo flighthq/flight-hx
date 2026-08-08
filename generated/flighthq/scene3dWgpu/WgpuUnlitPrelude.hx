@@ -14,6 +14,7 @@ import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuSkinningAdapter;
 import flighthq.types.LinearColor;
 import flighthq.types.Texture;
+import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuScene3DRuntime;
 import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
@@ -27,32 +28,32 @@ class WgpuUnlitPrelude {
     var sampler:flighthq._internal.dom.GPUSampler = cast _Runtime.UNDEFINED;
     var view:flighthq._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
     var binding:WgpuMaterialBinding = cast _Runtime.UNDEFINED;
-    sampler = (cast getWgpuMaterialSampler((cast state : WgpuRenderState), colorMap) : flighthq._internal.dom.GPUSampler);
-    view = (cast resolveWgpuMaterialTextureView((cast state : WgpuRenderState), colorMap) : flighthq._internal.dom.GPUTextureView);
-    binding = (cast WgpuUnlitPrelude.ensureWgpuUnlitBinding__wgpuUnlitPrelude((cast state : WgpuRenderState), (cast pipeline : WgpuUnlitPipeline), (cast materialKey : flighthq._internal._Object), (cast sampler : flighthq._internal.dom.GPUSampler), (cast view : flighthq._internal.dom.GPUTextureView)) : WgpuMaterialBinding);
-    WgpuUnlitPrelude.writeWgpuUnlitUniform__wgpuUnlitPrelude((cast state : WgpuRenderState), (cast binding : WgpuMaterialBinding), (cast color : Array<Float>), (cast intensity : Float), (cast alphaCutoff : Float));
-    stashWgpuUvTransform((cast state : WgpuRenderState), colorMap);
+    sampler = (cast getWgpuMaterialSampler((cast state), (cast colorMap)) : flighthq._internal.dom.GPUSampler);
+    view = (cast resolveWgpuMaterialTextureView((cast state), (cast colorMap)) : flighthq._internal.dom.GPUTextureView);
+    binding = (cast WgpuUnlitPrelude.ensureWgpuUnlitBinding__wgpuUnlitPrelude((cast state), (cast pipeline), (cast materialKey), (cast sampler), (cast view)) : WgpuMaterialBinding);
+    WgpuUnlitPrelude.writeWgpuUnlitUniform__wgpuUnlitPrelude((cast state), (cast binding), (cast color), (cast intensity : Float), (cast alphaCutoff : Float));
+    stashWgpuUvTransform((cast state), (cast colorMap));
     return cast (cast binding : WgpuMaterialBinding).bindGroup;
     return cast null;
   }
 
   @:noCompletion
   public static function bindWgpuUnlitVideoSurface(state:WgpuRenderState, pipeline:WgpuUnlitPipeline, materialKey:flighthq._internal._Object, color:LinearColor, intensity:Float, alphaCutoff:Float, colorMap:Texture):flighthq._internal.dom.GPUBindGroup {
-    return cast (cast bindWgpuUnlitSurface((cast state : WgpuRenderState), (cast pipeline : WgpuUnlitPipeline), (cast materialKey : flighthq._internal._Object), (cast color : Array<Float>), (cast intensity : Float), (cast alphaCutoff : Float), colorMap) : flighthq._internal.dom.GPUBindGroup);
+    return cast (cast bindWgpuUnlitSurface((cast state), (cast pipeline), (cast materialKey), (cast color), (cast intensity : Float), (cast alphaCutoff : Float), (cast colorMap)) : flighthq._internal.dom.GPUBindGroup);
     return cast null;
   }
 
   public static function ensureWgpuUnlitBinding__wgpuUnlitPrelude(state:WgpuRenderState, pipeline:WgpuUnlitPipeline, materialKey:flighthq._internal._Object, sampler:flighthq._internal.dom.GPUSampler, view:flighthq._internal.dom.GPUTextureView):WgpuMaterialBinding {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
-    scene = (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime);
+    scene = (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime);
     binding = ((cast (cast scene : WgpuScene3DRuntime).materialBindGroups : flighthq._internal._WeakMap<flighthq._internal._Object, WgpuMaterialBinding>).get(materialKey));
     if ((cast _Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var buffer:flighthq._internal.dom.GPUBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBuffer', cast ([{ size: WgpuUnlitPrelude.UNLIT_UNIFORM_BYTES__wgpuUnlitPrelude, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
-      (binding = cast ({ bindGroup: (cast WgpuUnlitPrelude.createWgpuUnlitBindGroup__wgpuUnlitPrelude((cast state : WgpuRenderState), (cast pipeline : WgpuUnlitPipeline), (cast buffer : flighthq._internal.dom.GPUBuffer), (cast sampler : flighthq._internal.dom.GPUSampler), (cast view : flighthq._internal.dom.GPUTextureView)) : flighthq._internal.dom.GPUBindGroup), buffer: buffer, sampler: sampler, views: cast ([view] : Array<Dynamic>) } : Dynamic));
-      ((cast (cast scene : WgpuScene3DRuntime).materialBindGroups : flighthq._internal._WeakMap<flighthq._internal._Object, WgpuMaterialBinding>).set(materialKey, binding));
+      (binding = cast ({ bindGroup: (cast WgpuUnlitPrelude.createWgpuUnlitBindGroup__wgpuUnlitPrelude((cast state), (cast pipeline), (cast buffer), (cast sampler), (cast view)) : flighthq._internal.dom.GPUBindGroup), buffer: buffer, sampler: sampler, views: cast ([view] : Array<Dynamic>) } : Dynamic));
+      ((cast (cast scene : WgpuScene3DRuntime).materialBindGroups : flighthq._internal._WeakMap<flighthq._internal._Object, WgpuMaterialBinding>).set(materialKey, (cast binding)));
     } else { if ((cast ((cast ((cast !_Runtime.strictEquals((cast binding : WgpuMaterialBinding).sampler, sampler) : Bool) || (cast !_Runtime.strictEquals(_Runtime.optionalIndex((cast binding : WgpuMaterialBinding).views, 0.0), view) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.optionalField((cast binding : WgpuMaterialBinding).views, 'length'), function():Dynamic return cast 0.0), 1.0) : Bool)) : Bool)) {
-      ((cast binding : WgpuMaterialBinding).bindGroup = (cast WgpuUnlitPrelude.createWgpuUnlitBindGroup__wgpuUnlitPrelude((cast state : WgpuRenderState), (cast pipeline : WgpuUnlitPipeline), (cast (cast binding : WgpuMaterialBinding).buffer : flighthq._internal.dom.GPUBuffer), (cast sampler : flighthq._internal.dom.GPUSampler), (cast view : flighthq._internal.dom.GPUTextureView)) : flighthq._internal.dom.GPUBindGroup));
+      ((cast binding : WgpuMaterialBinding).bindGroup = (cast WgpuUnlitPrelude.createWgpuUnlitBindGroup__wgpuUnlitPrelude((cast state), (cast pipeline), (cast (cast binding : WgpuMaterialBinding).buffer), (cast sampler), (cast view)) : flighthq._internal.dom.GPUBindGroup));
       ((cast binding : WgpuMaterialBinding).sampler = sampler);
       ((cast binding : WgpuMaterialBinding).views ??= cast ([view] : Array<Dynamic>));
       flighthq._internal._StaticIndex.writeArray((cast binding : WgpuMaterialBinding).views, 0.0, view);
@@ -91,22 +92,22 @@ class WgpuUnlitPrelude {
     var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
     device = (cast state : WgpuRenderState).device;
-    module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: (cast getWgpuUnlitModuleSourceForKey((cast key : WgpuUnlitDefineKey), (cast skinned : Bool), (cast (cast getWgpuSkinningAdapter((cast state : WgpuRenderState)) : Null<WgpuSkinningAdapter>) : Null<WgpuSkinningAdapter>)) : String) }] : Array<Dynamic>));
+    module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: (cast getWgpuUnlitModuleSourceForKey((cast key), (cast skinned : Bool), (cast (cast getWgpuSkinningAdapter((cast state)) : Null<WgpuSkinningAdapter>))) : String) }] : Array<Dynamic>));
     materialBindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), buffer: { type: 'uniform' } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: { type: 'filtering' } }, { binding: 2.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }] : Array<Dynamic>) }] : Array<Dynamic>));
-    return cast (cast createWgpuMeshPipeline((cast state : WgpuRenderState), (cast { blended: blended, doubleSided: _Runtime.field(key, 'doubleSided'), format: format, materialBindGroupLayout: materialBindGroupLayout, module: module, skinned: skinned } : { @:optional var blended:Null<Bool>; var doubleSided:Bool; @:optional var extraBindGroupLayout:Null<flighthq._internal.dom.GPUBindGroupLayout>; var format:String; @:optional var iblBindGroupLayout:Null<flighthq._internal.dom.GPUBindGroupLayout>; var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var module:flighthq._internal.dom.GPUShaderModule; @:optional var pbrSampleBindGroupLayout:Null<flighthq._internal.dom.GPUBindGroupLayout>; @:optional var shadowBindGroupLayout:Null<flighthq._internal.dom.GPUBindGroupLayout>; @:optional var skinned:Null<Bool>; @:optional var topology:Null<String>; })) : WgpuUnlitPipeline);
+    return cast (cast createWgpuMeshPipeline((cast state), (cast { blended: blended, doubleSided: _Runtime.field(key, 'doubleSided'), format: format, materialBindGroupLayout: materialBindGroupLayout, module: module, skinned: skinned })) : WgpuMeshPipeline);
     return cast null;
   }
 
   @:noCompletion
   public static function ensureWgpuUnlitPipeline(state:WgpuRenderState, key:WgpuUnlitDefineKey, format:flighthq._internal.dom.GPUTextureFormat):WgpuUnlitPipeline {
-    return cast (cast ensureWgpuScene3DPipeline((cast state : WgpuRenderState), (cast 'unlit:' + Std.string(format) + '|' + Std.string((cast buildWgpuUnlitDefineKey((cast key : WgpuUnlitDefineKey)) : String)) + '' : String), (cast function(blended:Bool, skinned:Bool):WgpuUnlitPipeline return (cast compileWgpuUnlitPipeline((cast state : WgpuRenderState), (cast key : WgpuUnlitDefineKey), (cast format : String), (cast blended : Bool), (cast skinned : Bool)) : WgpuUnlitPipeline) : Bool->Bool->WgpuUnlitPipeline)) : WgpuUnlitPipeline);
+    return cast (cast (cast ensureWgpuScene3DPipeline : WgpuRenderState->String->(Bool->Bool->WgpuUnlitPipeline)->WgpuUnlitPipeline)((cast state), (cast 'unlit:' + Std.string(format) + '|' + Std.string((cast buildWgpuUnlitDefineKey((cast key)) : String)) + '' : String), (cast function(blended:Bool, skinned:Bool):WgpuUnlitPipeline return (cast compileWgpuUnlitPipeline((cast state), (cast key), (cast format : String), (cast blended : Bool), (cast skinned : Bool)) : WgpuUnlitPipeline))) : WgpuUnlitPipeline);
     return cast null;
   }
 
   @:noCompletion
   public static function getWgpuUnlitModuleSourceForKey(key:WgpuUnlitDefineKey, skinned:Bool = false, ?skinning:Null<WgpuSkinningAdapter>):String {
     if (skinning == null) skinning = cast (null : Dynamic);
-    return cast ((('const ALPHA_MASK : bool = ' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n' + 'const HAS_COLOR_MAP : bool = ' + Std.string(((cast _Runtime.field(key, 'hasColorMap') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + (cast getWgpuMeshPreludeWgsl((cast skinned : Bool), (cast skinning : Null<WgpuSkinningAdapter>)) : String)) + WgpuUnlitPrelude.UNLIT_WGSL_BODY__wgpuUnlitPrelude);
+    return cast ((('const ALPHA_MASK : bool = ' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n' + 'const HAS_COLOR_MAP : bool = ' + Std.string(((cast _Runtime.field(key, 'hasColorMap') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + (cast getWgpuMeshPreludeWgsl((cast skinned : Bool), (cast skinning)) : String)) + WgpuUnlitPrelude.UNLIT_WGSL_BODY__wgpuUnlitPrelude);
     return cast null;
   }
 

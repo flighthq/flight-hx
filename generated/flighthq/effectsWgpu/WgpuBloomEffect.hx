@@ -17,6 +17,7 @@ import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
 import flighthq.types.BloomEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.WgpuDualSourceEffectPipeline;
+import flighthq.types.WgpuEffectBlendMode;
 import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
@@ -36,41 +37,41 @@ class WgpuBloomEffect {
     var temp:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var brightPipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     var compositePipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    threshold = (cast computeBloomThreshold((cast effect : BloomEffect)) : Float);
-    intensity = (cast computeBloomIntensity((cast effect : BloomEffect)) : Float);
-    radius = (cast computeBloomBlurRadius((cast effect : BloomEffect)) : Float);
-    descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    bright = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
-    blurred = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
-    temp = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
-    brightPipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'bloom.bright' : String), (cast WgpuBloomEffect.BLOOM_BRIGHT_FRAGMENT_WGSL__wgpuBloomEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast bright : Null<WgpuRenderTarget>), brightPipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    threshold = (cast computeBloomThreshold((cast effect)) : Float);
+    intensity = (cast computeBloomIntensity((cast effect)) : Float);
+    radius = (cast computeBloomBlurRadius((cast effect)) : Float);
+    descriptor = (cast { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') });
+    bright = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
+    blurred = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
+    temp = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
+    brightPipeline = (cast getWgpuEffectPipeline((cast state), (cast 'bloom.bright' : String), (cast WgpuBloomEffect.BLOOM_BRIGHT_FRAGMENT_WGSL__wgpuBloomEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast bright), (cast brightPipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, threshold);
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
-    applyGaussianBlurToWgpu((cast state : WgpuRenderState), (cast bright : WgpuRenderTarget), (cast blurred : WgpuRenderTarget), (cast temp : WgpuRenderTarget), (cast { blurX: radius, blurY: radius } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }));
-    compositePipeline = (cast WgpuBloomEffect.getBloomCompositePipeline__wgpuBloomEffect((cast state : WgpuRenderState)) : WgpuEffectPipeline);
-    drawWgpuDualSourceEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast blurred : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), compositePipeline, (cast function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
+    }, cast ([__unused1] : Array<Dynamic>)); }));
+    applyGaussianBlurToWgpu((cast state), (cast bright), (cast blurred), (cast temp), (cast { blurX: radius, blurY: radius }));
+    compositePipeline = (cast WgpuBloomEffect.getBloomCompositePipeline__wgpuBloomEffect((cast state)) : WgpuEffectPipeline);
+    drawWgpuDualSourceEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast blurred), (cast (cast dest : WgpuRenderTarget)), (cast compositePipeline), (cast function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
-    }, cast ([__unused4] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
-    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast bright : WgpuRenderTarget));
-    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast blurred : WgpuRenderTarget));
-    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast temp : WgpuRenderTarget));
+    }, cast ([__unused4] : Array<Dynamic>)); }));
+    releaseWgpuRenderTarget((cast pool), (cast bright));
+    releaseWgpuRenderTarget((cast pool), (cast blurred));
+    releaseWgpuRenderTarget((cast pool), (cast temp));
   }
 
-  public static final defaultWgpuBloomEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyBloomEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'pool') : WgpuRenderTargetPool), (cast (cast effect : BloomEffect) : BloomEffect));
-  };
+  public static final defaultWgpuBloomEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyBloomEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : BloomEffect)));
+  });
 
   public static function registerWgpuBloomEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'BloomEffect' : String), (cast defaultWgpuBloomEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'BloomEffect' : String), (cast defaultWgpuBloomEffectRunner));
   }
 
   public static function getBloomCompositePipeline__wgpuBloomEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var pipeline:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     pipeline = ((cast WgpuBloomEffect._compositePipelines__wgpuBloomEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline((cast state : WgpuRenderState), (cast WgpuBloomEffect.BLOOM_COMPOSITE_FRAGMENT_WGSL__wgpuBloomEffect : String), 'replace') : Null<WgpuEffectPipeline>) : Dynamic));
-      ((cast WgpuBloomEffect._compositePipelines__wgpuBloomEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, pipeline));
+      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline((cast state), (cast WgpuBloomEffect.BLOOM_COMPOSITE_FRAGMENT_WGSL__wgpuBloomEffect : String), (cast 'replace')) : WgpuEffectPipeline) : Dynamic));
+      ((cast WgpuBloomEffect._compositePipelines__wgpuBloomEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast pipeline)));
     }
     return cast pipeline;
     return cast null;

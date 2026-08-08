@@ -46,7 +46,6 @@ import flighthq.types.BlendMode;
 import flighthq.types.ClipRegion;
 import flighthq.types.DisplayObject;
 import flighthq.types.EasingFunction;
-import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Image;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
@@ -89,24 +88,23 @@ import flighthq.types.LottieDocumentImport.LottieAdvancedBlend;
 import flighthq.types.LottieDocumentImport.LottieDocumentImportOptions;
 import flighthq.types.LottieDocumentImport.LottieDocumentImportResult;
 import flighthq.types.Matrix;
-import flighthq.types.Node;
 import flighthq.types.Node.NodeOf;
 import flighthq.types.Node2D;
 import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.Node2DAnimationPath;
 import flighthq.types.Node2DAnimationTarget;
 import flighthq.types.Path;
-import flighthq.types.Sampler;
 import flighthq.types.Shape;
+import flighthq.types.ShapeCommand.CapsStyle;
+import flighthq.types.ShapeCommand.GradientType;
+import flighthq.types.ShapeCommand.InterpolationMethod;
+import flighthq.types.ShapeCommand.JointStyle;
+import flighthq.types.ShapeCommand.LineScaleMode;
 import flighthq.types.ShapeCommand.PathWinding;
-import flighthq.types.TextFormat;
+import flighthq.types.ShapeCommand.SpreadMethod;
+import flighthq.types.Sprite;
 import flighthq.types.TextLabel;
 import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
-import flighthq.types.TextureSource;
-import flighthq.types.Vector2;
-import flighthq.types.VoxelGrid;
 import flighthq.types._internal._AdvancedBlendModeValues.AdvancedBlendModeValue;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
@@ -117,18 +115,18 @@ typedef LottieMutableAnimationTarget__lottieDocument = { var lottieApply:flighth
 
 typedef LottiePaint__lottieDocument = flighthq._internal._Union2<flighthq._internal._Union2<{ var color:Array<Float>; var kind:String; var opacity:Float; var winding:String; }, { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }>, { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }>;
 
-typedef LottieGradientPaint__lottieDocument = LottiePaint__lottieDocument;
+typedef LottieGradientPaint__lottieDocument = flighthq._internal._Extract<LottiePaint__lottieDocument, { var kind:String; }>;
 
 typedef LottieShapeState__lottieDocument = { var paints:Array<LottiePaint__lottieDocument>; var paths:Array<Path>; var shape:Shape; };
 
 class LottieDocument {
   public static function applyAnimationClipToLottieDocument(clip:AnimationClip, time:Float):Void {
-    applyAnimationClipToNode2D((cast clip : AnimationClip), (cast time : Float));
+    applyAnimationClipToNode2D((cast clip), (cast time : Float));
     for (channel in _Runtime.iterable(clip.channels)) {
       var target:Null<LottieMutableAnimationTarget__lottieDocument> = (cast (cast channel : AnimationChannel).targetRef : Null<LottieMutableAnimationTarget__lottieDocument>);
       if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast target : LottieMutableAnimationTarget__lottieDocument).lottieApply, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
-      sampleAnimationTrack((cast LottieDocument._sampleScratch__lottieDocument : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast channel : AnimationChannel).track, (cast time : Float));
-      (cast target : LottieMutableAnimationTarget__lottieDocument).lottieApply(LottieDocument._sampleScratch__lottieDocument);
+      sampleAnimationTrack((cast LottieDocument._sampleScratch__lottieDocument), (cast (cast channel : AnimationChannel).track), (cast time : Float));
+      (cast target : LottieMutableAnimationTarget__lottieDocument).lottieApply((cast LottieDocument._sampleScratch__lottieDocument));
     }
   }
 
@@ -138,17 +136,17 @@ class LottieDocument {
     var context:LottieImportContext__lottieDocument = cast _Runtime.UNDEFINED;
     var duration:Float = cast _Runtime.UNDEFINED;
     var events:Array<AnimationClipEvent> = cast _Runtime.UNDEFINED;
-    document = (cast LottieDocument.parseLottieDocument__lottieDocument((cast source : flighthq._internal._Union2<String, flighthq.types.LottieDocument>)) : Null<flighthq.types.LottieDocument>);
-    root = (cast createDisplayObject(_Runtime.field(_Runtime, 'UNDEFINED')) : DisplayObject);
-    if ((cast ((cast _Runtime.strictEquals(document, null) : Bool) || (cast !(cast (cast LottieDocument.isValidLottieDocument__lottieDocument((cast document : flighthq.types.LottieDocument)) : Bool) : Bool) : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : ImportDiagnosticSeverity), (cast 'lottie.invalid-document' : String), (cast 'createScene2DFromLottieDocument' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
-      return cast { advancedBlends: cast ([] : Array<Dynamic>), clip: (cast createAnimationClip((cast cast ([] : Array<Dynamic>) : Array<AnimationChannel>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), _Runtime.field(_Runtime, 'UNDEFINED')) : AnimationClip), duration: 0.0, frameRate: 0.0, root: root };
+    document = (cast LottieDocument.parseLottieDocument__lottieDocument((cast source)) : Null<flighthq.types.LottieDocument>);
+    root = (cast createDisplayObject((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : DisplayObject);
+    if ((cast ((cast _Runtime.strictEquals(document, null) : Bool) || (cast !(cast (cast LottieDocument.isValidLottieDocument__lottieDocument((cast document)) : Bool) : Bool) : Bool)) : Bool)) {
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'lottie.invalid-document' : String), (cast 'createScene2DFromLottieDocument' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      return cast { advancedBlends: cast ([] : Array<Dynamic>), clip: (cast createAnimationClip((cast cast ([] : Array<Dynamic>)), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : AnimationClip), duration: 0.0, frameRate: 0.0, root: root };
     }
-    context = { advancedBlends: cast ([] : Array<Dynamic>), assets: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [_Runtime.callProperty(_Runtime.coalesce(_Runtime.field(document, 'assets'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(asset:LottieAsset, __unused0:Float, __unused1:Array<LottieAsset>):Array<flighthq._internal._Union2<String, LottieAsset>> return cast ([(cast asset : { var id:String; }).id, asset] : Array<Dynamic>)] : Array<Dynamic>))]), channels: cast ([] : Array<Dynamic>), diagnostics: diagnostics, document: document, frameOffset: 0.0, frameScale: 1.0, options: options, resolvingPrecompositions: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) };
-    LottieDocument.appendLottieLayers__lottieDocument((cast root : DisplayObject), (cast _Runtime.field(document, 'layers') : Array<LottieLayer>), context);
+    context = (cast { advancedBlends: cast ([] : Array<Dynamic>), assets: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [_Runtime.callProperty(_Runtime.coalesce(_Runtime.field(document, 'assets'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(asset:LottieAsset, __unused0:Float, __unused1:Array<LottieAsset>):Array<flighthq._internal._Union2<String, LottieAsset>> return cast ([(cast asset : { var id:String; }).id, asset] : Array<Dynamic>)] : Array<Dynamic>))]), channels: cast ([] : Array<Dynamic>), diagnostics: diagnostics, document: document, frameOffset: 0.0, frameScale: 1.0, options: options, resolvingPrecompositions: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) });
+    LottieDocument.appendLottieLayers__lottieDocument((cast root), (cast _Runtime.field(document, 'layers')), (cast context));
     duration = HxMath.max(0.0, _Runtime.divideNumbers(_Runtime.subtractNumbers(_Runtime.field(document, 'op'), _Runtime.field(document, 'ip')), _Runtime.field(document, 'fr')));
-    events = _Runtime.callProperty(_Runtime.coalesce(_Runtime.field(document, 'markers'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(marker:LottieMarker, __unused2:Float, __unused3:Array<LottieMarker>):AnimationClipEvent return (cast createAnimationClipEvent((cast (cast LottieDocument.clamp__lottieDocument((cast _Runtime.divideNumbers(_Runtime.subtractNumbers((cast marker : LottieMarker).tm, _Runtime.field(document, 'ip')), _Runtime.field(document, 'fr')) : Float), (cast 0.0 : Float), (cast duration : Float)) : Float) : Float), (cast (cast marker : LottieMarker).cm : String), (cast { duration: _Runtime.divideNumbers((cast marker : LottieMarker).dr, _Runtime.field(document, 'fr')) } : flighthq._internal._Any)) : AnimationClipEvent)] : Array<Dynamic>));
-    return cast { advancedBlends: (cast context : LottieImportContext__lottieDocument).advancedBlends, clip: (cast createAnimationClip((cast (cast context : LottieImportContext__lottieDocument).channels : Array<AnimationChannel>), (cast duration : Null<Float>), events) : AnimationClip), duration: duration, frameRate: _Runtime.field(document, 'fr'), root: root };
+    events = _Runtime.callProperty(_Runtime.coalesce(_Runtime.field(document, 'markers'), function():Dynamic return cast cast ([] : Array<Dynamic>)), 'map', cast ([function(marker:LottieMarker, __unused2:Float, __unused3:Array<LottieMarker>):AnimationClipEvent return (cast createAnimationClipEvent((cast (cast LottieDocument.clamp__lottieDocument((cast _Runtime.divideNumbers(_Runtime.subtractNumbers((cast marker : LottieMarker).tm, _Runtime.field(document, 'ip')), _Runtime.field(document, 'fr')) : Float), (cast 0.0 : Float), (cast duration : Float)) : Float) : Float), (cast (cast marker : LottieMarker).cm : String), (cast { duration: _Runtime.divideNumbers((cast marker : LottieMarker).dr, _Runtime.field(document, 'fr')) })) : AnimationClipEvent)] : Array<Dynamic>));
+    return cast { advancedBlends: (cast context : LottieImportContext__lottieDocument).advancedBlends, clip: (cast createAnimationClip((cast (cast context : LottieImportContext__lottieDocument).channels), (cast duration), (cast events)) : AnimationClip), duration: duration, frameRate: _Runtime.field(document, 'fr'), root: root };
     return cast null;
   }
 
@@ -156,11 +154,11 @@ class LottieDocument {
     var nodes:flighthq._internal._Map<Float, DisplayObject> = cast _Runtime.UNDEFINED;
     var ordered:Array<{ var layer:LottieLayer; var node:DisplayObject; }> = cast _Runtime.UNDEFINED;
     nodes = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
-    ordered = cast ([] : Array<Dynamic>);
+    ordered = (cast cast ([] : Array<Dynamic>));
     for (layer in _Runtime.iterable(layers)) {
-      var node:DisplayObject = (cast LottieDocument.createLottieLayerNode__lottieDocument((cast layer : LottieLayer), context) : DisplayObject);
+      var node:DisplayObject = (cast LottieDocument.createLottieLayerNode__lottieDocument((cast layer), (cast context)) : DisplayObject);
       _Runtime.callProperty(ordered, 'push', cast ([{ layer: layer, node: node }] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(_Runtime.field(layer, 'ind'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast nodes : flighthq._internal._Map<Float, DisplayObject>).set(_Runtime.field(layer, 'ind'), node)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(layer, 'ind'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast nodes : flighthq._internal._Map<Float, DisplayObject>).set(_Runtime.field(layer, 'ind'), (cast node))); }
     }
     {
       var index:Float = _Runtime.subtractNumbers(_Runtime.field(ordered, 'length'), 1.0);
@@ -169,7 +167,7 @@ class LottieDocument {
         var layer:LottieLayer = _Runtime.field(__destructure4, 'layer');
         var node:DisplayObject = _Runtime.field(__destructure4, 'node');
         var parent:Null<DisplayObject> = ((cast _Runtime.strictEquals(_Runtime.field(layer, 'parent'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast nodes : flighthq._internal._Map<Float, DisplayObject>).get(_Runtime.field(layer, 'parent'))) : Dynamic));
-        (cast addNodeChild(_Runtime.coalesce(parent, function():Dynamic return cast root), node) : NodeOf<Node2DTraits>);
+        (cast addNodeChild((cast _Runtime.coalesce(parent, function():Dynamic return cast root)), (cast node)) : NodeOf<Node2DTraits>);
         index--;
       }
     }
@@ -177,76 +175,76 @@ class LottieDocument {
 
   public static function createLottieLayerNode__lottieDocument(layer:LottieLayer, context:LottieImportContext__lottieDocument):DisplayObject {
     var container:DisplayObject = cast _Runtime.UNDEFINED;
-    container = (cast createDisplayObject({ name: _Runtime.coalesce(_Runtime.field(layer, 'nm'), function():Dynamic return cast null) }) : DisplayObject);
-    LottieDocument.applyLottieTransform__lottieDocument((cast container : Node2D), (cast _Runtime.field(layer, 'ks') : Null<LottieTransform>), context);
-    LottieDocument.applyLottieLayerVisibility__lottieDocument((cast container : Node2D), (cast layer : LottieLayer), context);
-    LottieDocument.applyLottieBlendMode__lottieDocument((cast container : Node2D), (cast layer : LottieLayer), context);
-    LottieDocument.reportLottieExpression__lottieDocument((cast _Runtime.field(layer, 'ks') : flighthq._internal._Any), context);
-    if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 0.0) : Bool)) { LottieDocument.appendLottiePrecomposition__lottieDocument((cast container : DisplayObject), (cast layer : LottieLayer), context); } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 1.0) : Bool)) { LottieDocument.appendLottieSolid__lottieDocument((cast container : DisplayObject), (cast layer : LottieLayer)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 2.0) : Bool)) { LottieDocument.appendLottieImage__lottieDocument((cast container : DisplayObject), (cast layer : LottieLayer), context); } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 3.0) : Bool)) {
-    } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 4.0) : Bool)) { LottieDocument.appendLottieShapeItems__lottieDocument((cast container : DisplayObject), (cast _Runtime.coalesce(_Runtime.field(layer, 'shapes'), function():Dynamic return cast cast ([] : Array<Dynamic>)) : Array<LottieShapeItem>), context, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<String>)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 5.0) : Bool)) { LottieDocument.appendLottieText__lottieDocument((cast container : DisplayObject), (cast layer : LottieLayer), context); } else { if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(layer, 'ty'), 6.0) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(layer, 'ty'), 13.0) : Bool)) : Bool)) {
-      LottieDocument.reportLottieSkip__lottieDocument(context, (cast 'lottie.unsupported-layer' : String), (cast { layerType: _Runtime.field(layer, 'ty') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>>));
+    container = (cast createDisplayObject((cast { name: _Runtime.coalesce(_Runtime.field(layer, 'nm'), function():Dynamic return cast null) })) : DisplayObject);
+    LottieDocument.applyLottieTransform__lottieDocument((cast container), (cast _Runtime.field(layer, 'ks')), (cast context));
+    LottieDocument.applyLottieLayerVisibility__lottieDocument((cast container), (cast layer), (cast context));
+    LottieDocument.applyLottieBlendMode__lottieDocument((cast container), (cast layer), (cast context));
+    LottieDocument.reportLottieExpression__lottieDocument((cast _Runtime.field(layer, 'ks') : flighthq._internal._Any), (cast context));
+    if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 0.0) : Bool)) { LottieDocument.appendLottiePrecomposition__lottieDocument((cast container), (cast layer), (cast context)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 1.0) : Bool)) { LottieDocument.appendLottieSolid__lottieDocument((cast container), (cast layer)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 2.0) : Bool)) { LottieDocument.appendLottieImage__lottieDocument((cast container), (cast layer), (cast context)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 3.0) : Bool)) {
+    } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 4.0) : Bool)) { LottieDocument.appendLottieShapeItems__lottieDocument((cast container), (cast _Runtime.coalesce(_Runtime.field(layer, 'shapes'), function():Dynamic return cast cast ([] : Array<Dynamic>))), (cast context), (cast _Runtime.field(_Runtime, 'UNDEFINED'))); } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 5.0) : Bool)) { LottieDocument.appendLottieText__lottieDocument((cast container), (cast layer), (cast context)); } else { if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(layer, 'ty'), 6.0) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(layer, 'ty'), 13.0) : Bool)) : Bool)) {
+      LottieDocument.reportLottieSkip__lottieDocument((cast context), (cast 'lottie.unsupported-layer' : String), (cast { layerType: _Runtime.field(layer, 'ty') }));
     } } } } } } }
-    LottieDocument.applyLottieMasks__lottieDocument((cast container : Node2D), (cast _Runtime.coalesce(_Runtime.field(layer, 'masksProperties'), function():Dynamic return cast cast ([] : Array<Dynamic>)) : Array<LottieMask>), context);
+    LottieDocument.applyLottieMasks__lottieDocument((cast container), (cast _Runtime.coalesce(_Runtime.field(layer, 'masksProperties'), function():Dynamic return cast cast ([] : Array<Dynamic>))), (cast context));
     return cast container;
     return cast null;
   }
 
   public static function applyLottieTransform__lottieDocument(target:Node2D, transform:Null<LottieTransform>, context:LottieImportContext__lottieDocument):Void {
     if ((cast _Runtime.strictEquals(transform, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    if ((cast (cast LottieDocument.isSeparatedPosition__lottieDocument(_Runtime.field(transform, 'p')) : Bool) : Bool)) {
-      LottieDocument.applyScalarProperty__lottieDocument((cast target : Node2D), (cast _Runtime.field(transform, 'p') : LottieSeparatedPositionProperty).x, (cast 'X' : Node2DAnimationPath), (cast function(value:Float):Float return value : Float->Float), context);
-      LottieDocument.applyScalarProperty__lottieDocument((cast target : Node2D), (cast _Runtime.field(transform, 'p') : LottieSeparatedPositionProperty).y, (cast 'Y' : Node2DAnimationPath), (cast function(value:Float):Float return value : Float->Float), context);
+    if ((cast (cast LottieDocument.isSeparatedPosition__lottieDocument((cast _Runtime.field(transform, 'p'))) : Bool) : Bool)) {
+      LottieDocument.applyScalarProperty__lottieDocument((cast target), (cast (cast _Runtime.field(transform, 'p') : LottieSeparatedPositionProperty).x), (cast 'X'), (cast function(value:Float):Float return value), (cast context));
+      LottieDocument.applyScalarProperty__lottieDocument((cast target), (cast (cast _Runtime.field(transform, 'p') : LottieSeparatedPositionProperty).y), (cast 'Y'), (cast function(value:Float):Float return value), (cast context));
     } else {
-      LottieDocument.applyVectorProperty__lottieDocument((cast target : Node2D), _Runtime.field(transform, 'p'), (cast 'Position' : Node2DAnimationPath), (cast cast (['X', 'Y'] : Array<Dynamic>) : Array<Node2DAnimationPath>), (cast 2.0 : Float), (cast function(__unused6:Float, __unused7:Float):Float return _Runtime.callValue(function(value:Float, __unused5:Float):Float return value, cast ([__unused6] : Array<Dynamic>)) : Float->Float->Float), context);
+      LottieDocument.applyVectorProperty__lottieDocument((cast target), (cast _Runtime.field(transform, 'p')), (cast 'Position'), (cast cast (['X', 'Y'] : Array<Dynamic>)), (cast 2.0 : Float), (cast function(__unused6:Float, __unused7:Float):Float return _Runtime.callValue(function(value:Float, __unused5:Float):Float return value, cast ([__unused6] : Array<Dynamic>))), (cast context));
     }
-    LottieDocument.applyVectorProperty__lottieDocument((cast target : Node2D), _Runtime.field(transform, 'a'), (cast 'Pivot' : Node2DAnimationPath), (cast cast (['PivotX', 'PivotY'] : Array<Dynamic>) : Array<Node2DAnimationPath>), (cast 2.0 : Float), (cast function(__unused9:Float, __unused10:Float):Float return _Runtime.callValue(function(value:Float, __unused8:Float):Float return value, cast ([__unused9] : Array<Dynamic>)) : Float->Float->Float), context);
-    LottieDocument.applyVectorProperty__lottieDocument((cast target : Node2D), _Runtime.field(transform, 's'), (cast 'Scale' : Node2DAnimationPath), (cast cast (['ScaleX', 'ScaleY'] : Array<Dynamic>) : Array<Node2DAnimationPath>), (cast 2.0 : Float), (cast function(__unused12:Float, __unused13:Float):Float return _Runtime.callValue(function(value:Float, __unused11:Float):Float return (value / 100.0), cast ([__unused12] : Array<Dynamic>)) : Float->Float->Float), context);
-    LottieDocument.applyScalarProperty__lottieDocument((cast target : Node2D), _Runtime.coalesce(_Runtime.field(transform, 'r'), function():Dynamic return cast _Runtime.field(transform, 'rz')), (cast 'Rotation' : Node2DAnimationPath), (cast function(value:Float):Float return value : Float->Float), context);
-    LottieDocument.applyScalarProperty__lottieDocument((cast target : Node2D), _Runtime.field(transform, 'o'), (cast 'Alpha' : Node2DAnimationPath), (cast function(value:Float):Float return (value / 100.0) : Float->Float), context);
+    LottieDocument.applyVectorProperty__lottieDocument((cast target), (cast _Runtime.field(transform, 'a')), (cast 'Pivot'), (cast cast (['PivotX', 'PivotY'] : Array<Dynamic>)), (cast 2.0 : Float), (cast function(__unused9:Float, __unused10:Float):Float return _Runtime.callValue(function(value:Float, __unused8:Float):Float return value, cast ([__unused9] : Array<Dynamic>))), (cast context));
+    LottieDocument.applyVectorProperty__lottieDocument((cast target), (cast _Runtime.field(transform, 's')), (cast 'Scale'), (cast cast (['ScaleX', 'ScaleY'] : Array<Dynamic>)), (cast 2.0 : Float), (cast function(__unused12:Float, __unused13:Float):Float return _Runtime.callValue(function(value:Float, __unused11:Float):Float return (value / 100.0), cast ([__unused12] : Array<Dynamic>))), (cast context));
+    LottieDocument.applyScalarProperty__lottieDocument((cast target), (cast _Runtime.coalesce(_Runtime.field(transform, 'r'), function():Dynamic return cast _Runtime.field(transform, 'rz'))), (cast 'Rotation'), (cast function(value:Float):Float return value), (cast context));
+    LottieDocument.applyScalarProperty__lottieDocument((cast target), (cast _Runtime.field(transform, 'o')), (cast 'Alpha'), (cast function(value:Float):Float return (value / 100.0)), (cast context));
     if ((cast !_Runtime.strictEquals(_Runtime.field(transform, 'sk'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      LottieDocument.applyScalarProperty__lottieDocument((cast target : Node2D), _Runtime.field(transform, 'sk'), (cast 'SkewX' : Node2DAnimationPath), (cast function(value:Float):Float return value : Float->Float), context);
+      LottieDocument.applyScalarProperty__lottieDocument((cast target), (cast _Runtime.field(transform, 'sk')), (cast 'SkewX'), (cast function(value:Float):Float return value), (cast context));
     }
   }
 
   public static function applyVectorProperty__lottieDocument(target:Node2D, property:Null<LottieAnimatable<Array<Float>>>, vectorPath:Node2DAnimationPath, scalarPaths:Array<Node2DAnimationPath>, components:Float, convert:Float->Float->Float, context:LottieImportContext__lottieDocument):Void {
     var initial:Array<Float> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    initial = _Runtime.callProperty((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(property) : flighthq._internal._Any), (cast components : Float)) : Array<Float>), 'map', cast ([convert] : Array<Dynamic>));
-    LottieDocument.applyDisplaySample__lottieDocument((cast target : Node2D), (cast vectorPath : Node2DAnimationPath), (cast initial : Array<Float>));
-    if ((cast !(cast (cast LottieDocument.isAnimatedProperty__lottieDocument((cast property : LottieAnimatable<Array<Float>>)) : Bool) : Bool) : Bool)) { return; }
-    LottieDocument.appendNumericPropertyChannels__lottieDocument((cast property : LottieAnimatable<Array<Float>>), (cast components : Float), (cast function(component:Null<Float>):{ var node:Node2D; var path:Node2DAnimationPath; } return { node: target, path: ((cast _Runtime.strictEquals(component, null) : Bool) ? (cast vectorPath : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(scalarPaths, component) : Dynamic)) } : Null<Float>->flighthq._internal._Any), (cast convert : Float->Float->Float), context);
+    initial = _Runtime.callProperty((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast property)) : Null<Array<Float>>) : flighthq._internal._Any), (cast components : Float)) : Array<Float>), 'map', cast ([convert] : Array<Dynamic>));
+    LottieDocument.applyDisplaySample__lottieDocument((cast target), (cast vectorPath), (cast initial));
+    if ((cast !(cast (cast (cast LottieDocument.isAnimatedProperty__lottieDocument : LottieAnimatable<Array<Float>>->Bool)((cast property)) : Bool) : Bool) : Bool)) { return; }
+    LottieDocument.appendNumericPropertyChannels__lottieDocument((cast property), (cast components : Float), (cast function(component:Null<Float>):{ var node:Node2D; var path:Node2DAnimationPath; } return { node: target, path: ((cast _Runtime.strictEquals(component, null) : Bool) ? (cast vectorPath : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(scalarPaths, component) : Dynamic)) }), (cast convert), (cast context));
   }
 
   public static function applyScalarProperty__lottieDocument(target:Node2D, property:Null<LottieAnimatable<Float>>, path:Node2DAnimationPath, convert:Float->Float, context:LottieImportContext__lottieDocument):Void {
     if ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    LottieDocument.applyDisplaySample__lottieDocument((cast target : Node2D), (cast path : Node2DAnimationPath), (cast cast ([(cast convert((cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(property) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Float)) : Float)] : Array<Dynamic>) : Array<Float>));
-    if ((cast !(cast (cast LottieDocument.isAnimatedProperty__lottieDocument((cast property : LottieAnimatable<Float>)) : Bool) : Bool) : Bool)) { return; }
-    LottieDocument.appendNumericPropertyChannels__lottieDocument((cast property : LottieAnimatable<Float>), (cast 1.0 : Float), (cast function(__unused15:Null<Float>):{ var node:Node2D; var path:Node2DAnimationPath; } return _Runtime.callValue(function(__unused14:Null<Float>):{ var node:Node2D; var path:Node2DAnimationPath; } return { node: target, path: path }, cast ([] : Array<Dynamic>)) : Null<Float>->flighthq._internal._Any), (cast function(__unused16:Float, __unused17:Float):Float return convert(__unused16) : Float->Float->Float), context);
+    LottieDocument.applyDisplaySample__lottieDocument((cast target), (cast path), (cast cast ([(cast convert((cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast property)) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Float)) : Float)] : Array<Dynamic>)));
+    if ((cast !(cast (cast (cast LottieDocument.isAnimatedProperty__lottieDocument : LottieAnimatable<Float>->Bool)((cast property)) : Bool) : Bool) : Bool)) { return; }
+    LottieDocument.appendNumericPropertyChannels__lottieDocument((cast property), (cast 1.0 : Float), (cast function(__unused15:Null<Float>):{ var node:Node2D; var path:Node2DAnimationPath; } return _Runtime.callValue(function(__unused14:Null<Float>):{ var node:Node2D; var path:Node2DAnimationPath; } return { node: target, path: path }, cast ([] : Array<Dynamic>))), (cast function(__unused16:Float, __unused17:Float):Float return convert(__unused16)), (cast context));
   }
 
   public static function appendNumericPropertyChannels__lottieDocument<T>(property:LottieAnimatable<T>, components:Float, target:Null<Float>->flighthq._internal._Any, convert:Float->Float->Float, context:LottieImportContext__lottieDocument):Void {
     var keyframes:Array<LottieKeyframe<T>> = cast _Runtime.UNDEFINED;
     var componentSpecific:Bool = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast LottieDocument.isAnimatedProperty__lottieDocument(property) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast LottieDocument.isAnimatedProperty__lottieDocument((cast property)) : Bool) : Bool) : Bool)) { return; }
     keyframes = _Runtime.field(property, 'k');
     if ((cast _Runtime.strictEquals(_Runtime.field(keyframes, 'length'), 0.0) : Bool)) { return; }
-    componentSpecific = (cast LottieDocument.hasComponentSpecificEasing__lottieDocument(keyframes, (cast components : Float)) : Bool);
+    componentSpecific = (cast LottieDocument.hasComponentSpecificEasing__lottieDocument((cast keyframes), (cast components : Float)) : Bool);
     if ((cast ((cast componentSpecific : Bool) && (cast ((cast components : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) {
       {
         var component:Float = 0.0;
         while ((cast ((cast component : Float) < (cast components : Float)) : Bool)) {
-          _Runtime.callProperty((cast context : LottieImportContext__lottieDocument).channels, 'push', cast ([(cast createAnimationChannel((cast LottieDocument.createLottieTrack__lottieDocument(keyframes, (cast 1.0 : Float), context, function(__unused19:Null<T>, __unused20:Float):Array<Float> return _Runtime.callValue(function(value:Null<T>, __unused18:Float):Array<Float> return cast ([(cast convert((cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast value : flighthq._internal._Any), (cast components : Float)) : Array<Float>), component) : Float), (cast component : Float)) : Float)] : Array<Dynamic>), cast ([__unused19] : Array<Dynamic>)), (cast component : Float)) : AnimationTrack), (cast target((cast component : Null<Float>)) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+          _Runtime.callProperty((cast context : LottieImportContext__lottieDocument).channels, 'push', cast ([(cast createAnimationChannel((cast (cast LottieDocument.createLottieTrack__lottieDocument((cast keyframes), (cast 1.0 : Float), (cast context), (cast function(__unused19:Dynamic, __unused20:Float):Array<Float> return _Runtime.callValue(function(value:Null<T>, __unused18:Float):Array<Float> return cast ([(cast convert((cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast value : flighthq._internal._Any), (cast components : Float)) : Array<Float>), component) : Float), (cast component : Float)) : Float)] : Array<Dynamic>), cast ([__unused19] : Array<Dynamic>))), (cast component : Float)) : AnimationTrack)), (cast target((cast component)) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
           component++;
         }
       }
       return;
     }
-    _Runtime.callProperty((cast context : LottieImportContext__lottieDocument).channels, 'push', cast ([(cast createAnimationChannel((cast LottieDocument.createLottieTrack__lottieDocument(keyframes, (cast components : Float), context, function(__unused22:Null<T>, __unused23:Float):Array<Float> return _Runtime.callValue(function(value:Null<T>, __unused21:Float):Array<Float> return _Runtime.callProperty((cast LottieDocument.numericValue__lottieDocument((cast value : flighthq._internal._Any), (cast components : Float)) : Array<Float>), 'map', cast ([convert] : Array<Dynamic>)), cast ([__unused22] : Array<Dynamic>)), (cast 0.0 : Float)) : AnimationTrack), (cast target((cast null : Null<Float>)) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+    _Runtime.callProperty((cast context : LottieImportContext__lottieDocument).channels, 'push', cast ([(cast createAnimationChannel((cast (cast LottieDocument.createLottieTrack__lottieDocument((cast keyframes), (cast components : Float), (cast context), (cast function(__unused22:Dynamic, __unused23:Float):Array<Float> return _Runtime.callValue(function(value:Null<T>, __unused21:Float):Array<Float> return _Runtime.callProperty((cast LottieDocument.numericValue__lottieDocument((cast value : flighthq._internal._Any), (cast components : Float)) : Array<Float>), 'map', cast ([convert] : Array<Dynamic>)), cast ([__unused22] : Array<Dynamic>))), (cast 0.0 : Float)) : AnimationTrack)), (cast target((cast null)) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
   }
 
   public static function bindMutableNumericProperty__lottieDocument<T>(property:LottieAnimatable<T>, current:Array<Float>, convert:Float->Float->Float, onChange:Void->Void, context:LottieImportContext__lottieDocument):Void {
-    if ((cast !(cast (cast LottieDocument.isAnimatedProperty__lottieDocument(property) : Bool) : Bool) : Bool)) { return; }
-    LottieDocument.appendNumericPropertyChannels__lottieDocument(property, (cast _Runtime.field(current, 'length') : Float), (cast function(component:Null<Float>):{ var lottieApply:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>->Void; } return { lottieApply: function(sample:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
+    if ((cast !(cast (cast LottieDocument.isAnimatedProperty__lottieDocument((cast property)) : Bool) : Bool) : Bool)) { return; }
+    LottieDocument.appendNumericPropertyChannels__lottieDocument((cast property), (cast _Runtime.field(current, 'length') : Float), (cast function(component:Null<Float>):{ var lottieApply:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>->Void; } return { lottieApply: function(sample:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
       if ((cast _Runtime.strictEquals(component, null) : Bool)) {
         {
           var index:Float = 0.0;
@@ -259,7 +257,7 @@ class LottieDocument {
         flighthq._internal._StaticIndex.writeArray(current, component, flighthq._internal._StaticIndex.readArrayOrFloat32Array(sample, 0.0));
       }
       onChange();
-    } } : Null<Float>->flighthq._internal._Any), (cast convert : Float->Float->Float), context);
+    } }), (cast convert), (cast context));
   }
 
   public static function createLottieTrack__lottieDocument<T>(keyframes:Array<LottieKeyframe<T>>, components:Float, context:LottieImportContext__lottieDocument, valueOf:Null<T>->Float->Array<Float>, easingComponent:Float):AnimationTrack {
@@ -267,23 +265,23 @@ class LottieDocument {
     var values:Array<Float> = cast _Runtime.UNDEFINED;
     var retained:Array<LottieKeyframe<T>> = cast _Runtime.UNDEFINED;
     var segmentEasings:Array<Null<EasingFunction>> = cast _Runtime.UNDEFINED;
-    times = cast ([] : Array<Dynamic>);
-    values = cast ([] : Array<Dynamic>);
-    retained = cast ([] : Array<Dynamic>);
+    times = (cast cast ([] : Array<Dynamic>));
+    values = (cast cast ([] : Array<Dynamic>));
+    retained = (cast cast ([] : Array<Dynamic>));
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(keyframes, 'length') : Float)) : Bool)) {
         var keyframe:LottieKeyframe<T> = flighthq._internal._StaticIndex.readArray(keyframes, index);
-        var time:Float = (cast LottieDocument.frameToSeconds__lottieDocument((cast _Runtime.field(keyframe, 't') : Float), context) : Float);
+        var time:Float = (cast LottieDocument.frameToSeconds__lottieDocument((cast _Runtime.field(keyframe, 't') : Float), (cast context)) : Float);
         if ((cast ((cast ((cast _Runtime.field(times, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast time : Float) <= (cast flighthq._internal._StaticIndex.readArray(times, _Runtime.subtractNumbers(_Runtime.field(times, 'length'), 1.0)) : Float)) : Bool)) : Bool)) { index++; continue; }
         _Runtime.callProperty(times, 'push', cast ([time] : Array<Dynamic>));
         _Runtime.callProperty(retained, 'push', cast ([keyframe] : Array<Dynamic>));
         var source:Null<T> = _Runtime.coalesce(_Runtime.field(keyframe, 's'), function():Dynamic return cast _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(keyframes, (index - 1.0)), 'e'));
-        _Runtime.callProperty(values, 'push', _Runtime.concatArrays([_Runtime.toArray((cast valueOf(source, (cast index : Float)) : Array<Float>))]));
+        _Runtime.callProperty(values, 'push', _Runtime.concatArrays([_Runtime.toArray((cast valueOf((cast source), (cast index : Float)) : Array<Float>))]));
         index++;
       }
     }
-    segmentEasings = cast ([] : Array<Dynamic>);
+    segmentEasings = (cast cast ([] : Array<Dynamic>));
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(retained, 'length'), 1.0) : Float)) : Bool)) {
@@ -291,18 +289,18 @@ class LottieDocument {
         if ((cast _Runtime.strictEquals(_Runtime.field(keyframe, 'h'), 1.0) : Bool)) {
           _Runtime.callProperty(segmentEasings, 'push', cast ([LottieDocument._holdEasing__lottieDocument] : Array<Dynamic>));
         } else {
-          _Runtime.callProperty(segmentEasings, 'push', cast ([(cast LottieDocument.createLottieSegmentEasing__lottieDocument((cast _Runtime.field(keyframe, 'o') : Null<LottieBezierHandle>), (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(retained, (index + 1.0)), 'i') : Null<LottieBezierHandle>), (cast easingComponent : Float)) : Null<EasingFunction>)] : Array<Dynamic>));
+          _Runtime.callProperty(segmentEasings, 'push', cast ([(cast LottieDocument.createLottieSegmentEasing__lottieDocument((cast _Runtime.field(keyframe, 'o')), (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(retained, (index + 1.0)), 'i')), (cast easingComponent : Float)) : Null<EasingFunction>)] : Array<Dynamic>));
         }
         index++;
       }
     }
-    return cast (cast createAnimationTrack((cast { components: components, interpolation: 'Linear', segmentEasings: segmentEasings, times: times, values: values } : { var times:flighthq._internal._ArrayLike<Float>; var values:flighthq._internal._ArrayLike<Float>; @:optional var components:Null<Float>; @:optional var interpolation:Null<String>; @:optional var quaternion:Null<Bool>; @:optional var easing:Null<EasingFunction>; @:optional var segmentEasings:Null<Array<Null<EasingFunction>>>; })) : AnimationTrack);
+    return cast (cast createAnimationTrack((cast { components: components, interpolation: 'Linear', segmentEasings: segmentEasings, times: times, values: values })) : AnimationTrack);
     return cast null;
   }
 
   public static function createLottieSegmentEasing__lottieDocument(outgoing:Null<LottieBezierHandle>, incoming:Null<LottieBezierHandle>, component:Float):Null<EasingFunction> {
     if ((cast ((cast _Runtime.strictEquals(outgoing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(incoming, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast null; }
-    return cast (cast easeCubicBezier((cast (cast LottieDocument.handleComponent__lottieDocument((cast _Runtime.field(outgoing, 'x') : flighthq._internal._Union2<Float, Array<Float>>), (cast component : Float)) : Float) : Float), (cast (cast LottieDocument.handleComponent__lottieDocument((cast _Runtime.field(outgoing, 'y') : flighthq._internal._Union2<Float, Array<Float>>), (cast component : Float)) : Float) : Float), (cast (cast LottieDocument.handleComponent__lottieDocument((cast _Runtime.field(incoming, 'x') : flighthq._internal._Union2<Float, Array<Float>>), (cast component : Float)) : Float) : Float), (cast (cast LottieDocument.handleComponent__lottieDocument((cast _Runtime.field(incoming, 'y') : flighthq._internal._Union2<Float, Array<Float>>), (cast component : Float)) : Float) : Float)) : Null<EasingFunction>);
+    return cast (cast easeCubicBezier((cast (cast LottieDocument.handleComponent__lottieDocument((cast _Runtime.field(outgoing, 'x')), (cast component : Float)) : Float) : Float), (cast (cast LottieDocument.handleComponent__lottieDocument((cast _Runtime.field(outgoing, 'y')), (cast component : Float)) : Float) : Float), (cast (cast LottieDocument.handleComponent__lottieDocument((cast _Runtime.field(incoming, 'x')), (cast component : Float)) : Float) : Float), (cast (cast LottieDocument.handleComponent__lottieDocument((cast _Runtime.field(incoming, 'y')), (cast component : Float)) : Float) : Float)) : EasingFunction);
     return cast null;
   }
 
@@ -310,30 +308,30 @@ class LottieDocument {
     var shape:Shape = cast _Runtime.UNDEFINED;
     var color:Float = cast _Runtime.UNDEFINED;
     var path:Path = cast _Runtime.UNDEFINED;
-    shape = (cast createShape(_Runtime.field(_Runtime, 'UNDEFINED')) : Shape);
+    shape = (cast createShape((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Shape);
     color = (cast LottieDocument.parseHexColor__lottieDocument((cast _Runtime.coalesce(_Runtime.field(layer, 'sc'), function():Dynamic return cast '#000000') : String)) : Float);
-    appendShapeBeginFill((cast shape : Shape), (cast color : Float), (cast 1.0 : Float));
-    path = (cast createPath(_Runtime.field(_Runtime, 'UNDEFINED')) : Path);
-    appendPathRectangle((cast path : Path), (cast 0.0 : Float), (cast 0.0 : Float), (cast _Runtime.coalesce(_Runtime.field(layer, 'sw'), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(_Runtime.field(layer, 'sh'), function():Dynamic return cast 0.0) : Float));
-    appendShapePath((cast shape : Shape), (cast _Runtime.slice((cast path : Path).commands, 0, null) : Array<Float>), (cast _Runtime.slice((cast path : Path).data, 0, null) : Array<Float>), (cast path : Path).winding);
-    appendShapeEndFill((cast shape : Shape));
-    (cast addNodeChild(parent, shape) : NodeOf<Node2DTraits>);
+    appendShapeBeginFill((cast shape), (cast color : Float), (cast 1.0 : Float));
+    path = (cast createPath((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
+    appendPathRectangle((cast path), (cast 0.0 : Float), (cast 0.0 : Float), (cast _Runtime.coalesce(_Runtime.field(layer, 'sw'), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(_Runtime.field(layer, 'sh'), function():Dynamic return cast 0.0) : Float));
+    appendShapePath((cast shape), (cast _Runtime.slice((cast path : Path).commands, 0, null)), (cast _Runtime.slice((cast path : Path).data, 0, null)), (cast (cast path : Path).winding));
+    appendShapeEndFill((cast shape));
+    (cast addNodeChild((cast parent), (cast shape)) : NodeOf<Node2DTraits>);
   }
 
   public static function appendLottieImage__lottieDocument(parent:DisplayObject, layer:LottieLayer, context:LottieImportContext__lottieDocument):Void {
     var asset:Null<flighthq._internal._Union2<LottieImageAsset, LottiePrecompositionAsset>> = cast _Runtime.UNDEFINED;
     var image:Null<Image> = cast _Runtime.UNDEFINED;
     asset = ((cast _Runtime.strictEquals(_Runtime.field(layer, 'refId'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast (cast context : LottieImportContext__lottieDocument).assets : flighthq._internal._Map<String, LottieAsset>).get(_Runtime.field(layer, 'refId'))) : Dynamic));
-    if ((cast ((cast _Runtime.strictEquals(asset, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast LottieDocument.isImageAsset__lottieDocument((cast asset : LottieAsset)) : Bool) : Bool) : Bool)) : Bool)) {
-      LottieDocument.reportLottieDrop__lottieDocument(context, (cast 'lottie.unresolved-asset' : String), (cast { id: _Runtime.coalesce(_Runtime.field(layer, 'refId'), function():Dynamic return cast '') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>>));
+    if ((cast ((cast _Runtime.strictEquals(asset, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast LottieDocument.isImageAsset__lottieDocument((cast asset)) : Bool) : Bool) : Bool)) : Bool)) {
+      LottieDocument.reportLottieDrop__lottieDocument((cast context), (cast 'lottie.unresolved-asset' : String), (cast { id: _Runtime.coalesce(_Runtime.field(layer, 'refId'), function():Dynamic return cast '') }));
       return;
     }
-    image = _Runtime.coalesce(_Runtime.callOptionalProperty((cast context : LottieImportContext__lottieDocument).options, 'resolveImageResource', cast ([asset] : Array<Dynamic>)), function():Dynamic return cast null);
+    image = _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural4 = (cast context : LottieImportContext__lottieDocument).options; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var resolveImageResource:Null<LottieImageAsset->Null<Image>>; }).resolveImageResource; }), cast ([asset] : Array<Dynamic>)), function():Dynamic return cast null);
     if ((cast _Runtime.strictEquals(image, null) : Bool)) {
-      LottieDocument.reportLottieSkip__lottieDocument(context, (cast 'lottie.unresolved-image' : String), (cast { id: (cast asset : LottieImageAsset).id } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>>));
+      LottieDocument.reportLottieSkip__lottieDocument((cast context), (cast 'lottie.unresolved-image' : String), (cast { id: (cast asset : LottieImageAsset).id }));
       return;
     }
-    (cast addNodeChild(parent, (cast createSprite({ data: { texture: (cast createTexture({ dimension: '2d', source: image }) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) } }) : Node<Node2DTraits>)) : NodeOf<Node2DTraits>);
+    (cast addNodeChild((cast parent), (cast (cast createSprite((cast { data: { texture: (cast createTexture((cast { dimension: '2d', source: image })) : Texture2D) } })) : Sprite))) : NodeOf<Node2DTraits>);
   }
 
   public static function appendLottieText__lottieDocument(parent:DisplayObject, layer:LottieLayer, context:LottieImportContext__lottieDocument):Void {
@@ -341,13 +339,13 @@ class LottieDocument {
     var first:Null<LottieTextDocument> = cast _Runtime.UNDEFINED;
     var label:TextLabel = cast _Runtime.UNDEFINED;
     textData = _Runtime.field(layer, 't');
-    first = _Runtime.optionalField(_Runtime.optionalIndex(_Runtime.optionalField(_Runtime.optionalField(textData, 'd'), 'k'), 0.0), 's');
+    first = ({ final __structural9 = _Runtime.optionalIndex(({ final __structural8 = ({ final __structural7 = textData; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var d:{ var k:Array<LottieKeyframe<LottieTextDocument>>; }; }).d; }); __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { var k:Array<LottieKeyframe<LottieTextDocument>>; }).k; }), 0.0); __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var s:Null<LottieTextDocument>; }).s; });
     if ((cast _Runtime.strictEquals(first, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      LottieDocument.reportLottieDrop__lottieDocument(context, (cast 'lottie.text-missing-document' : String), (cast { layer: _Runtime.coalesce(_Runtime.field(layer, 'nm'), function():Dynamic return cast '') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>>));
+      LottieDocument.reportLottieDrop__lottieDocument((cast context), (cast 'lottie.text-missing-document' : String), (cast { layer: _Runtime.coalesce(_Runtime.field(layer, 'nm'), function():Dynamic return cast '') }));
       return;
     }
-    label = (cast createTextLabel({ data: { autoSize: 'left', height: _Runtime.multiplyNumbers(_Runtime.coalesce((cast first : LottieTextDocument).s, function():Dynamic return cast 16.0), 1.25), text: (cast first : LottieTextDocument).t, textFormat: (cast LottieDocument.createLottieTextFormat__lottieDocument((cast first : LottieTextDocument)) : Null<TextFormat>), width: _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'w') } }) : TextLabel);
-    (cast addNodeChild(parent, label) : NodeOf<Node2DTraits>);
+    label = (cast createTextLabel((cast { data: { autoSize: 'left', height: _Runtime.multiplyNumbers(_Runtime.coalesce((cast first : LottieTextDocument).s, function():Dynamic return cast 16.0), 1.25), text: (cast first : LottieTextDocument).t, textFormat: (cast LottieDocument.createLottieTextFormat__lottieDocument((cast first)) : { var align:String; var color:Float; var font:Null<String>; var leading:Null<Float>; var letterSpacing:Null<Float>; var size:Null<Float>; }), width: _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'w') } })) : TextLabel);
+    (cast addNodeChild((cast parent), (cast label)) : NodeOf<Node2DTraits>);
   }
 
   public static function appendLottiePrecomposition__lottieDocument(parent:DisplayObject, layer:LottieLayer, context:LottieImportContext__lottieDocument):Void {
@@ -355,16 +353,16 @@ class LottieDocument {
     var asset:Null<flighthq._internal._Union2<LottieImageAsset, LottiePrecompositionAsset>> = cast _Runtime.UNDEFINED;
     id = _Runtime.field(layer, 'refId');
     asset = ((cast _Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast (cast context : LottieImportContext__lottieDocument).assets : flighthq._internal._Map<String, LottieAsset>).get(id)) : Dynamic));
-    if ((cast ((cast ((cast _Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(asset, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !(cast (cast LottieDocument.isPrecompositionAsset__lottieDocument((cast asset : LottieAsset)) : Bool) : Bool) : Bool)) : Bool)) {
-      LottieDocument.reportLottieDrop__lottieDocument(context, (cast 'lottie.unresolved-asset' : String), (cast { id: _Runtime.coalesce(id, function():Dynamic return cast '') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>>));
+    if ((cast ((cast ((cast _Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(asset, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !(cast (cast LottieDocument.isPrecompositionAsset__lottieDocument((cast asset)) : Bool) : Bool) : Bool)) : Bool)) {
+      LottieDocument.reportLottieDrop__lottieDocument((cast context), (cast 'lottie.unresolved-asset' : String), (cast { id: _Runtime.coalesce(id, function():Dynamic return cast '') }));
       return;
     }
     if ((cast ((cast (cast context : LottieImportContext__lottieDocument).resolvingPrecompositions : flighthq._internal._Set<String>).has(id)) : Bool)) {
-      LottieDocument.reportLottieDrop__lottieDocument(context, (cast 'lottie.recursive-precomposition' : String), (cast { id: id } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>>));
+      LottieDocument.reportLottieDrop__lottieDocument((cast context), (cast 'lottie.recursive-precomposition' : String), (cast { id: id }));
       return;
     }
     ((cast (cast context : LottieImportContext__lottieDocument).resolvingPrecompositions : flighthq._internal._Set<String>).add(id));
-    LottieDocument.appendLottieLayers__lottieDocument((cast parent : DisplayObject), (cast (cast asset : LottiePrecompositionAsset).layers : Array<LottieLayer>), _Runtime.mergeObjects([context, { frameOffset: ((cast context : LottieImportContext__lottieDocument).frameOffset + _Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(layer, 'st'), function():Dynamic return cast 0.0), (cast context : LottieImportContext__lottieDocument).frameScale)) }, { frameScale: _Runtime.multiplyNumbers((cast context : LottieImportContext__lottieDocument).frameScale, _Runtime.coalesce(_Runtime.field(layer, 'sr'), function():Dynamic return cast 1.0)) }]));
+    LottieDocument.appendLottieLayers__lottieDocument((cast parent), (cast (cast asset : LottiePrecompositionAsset).layers), (cast _Runtime.mergeObjects([context, { frameOffset: ((cast context : LottieImportContext__lottieDocument).frameOffset + _Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(layer, 'st'), function():Dynamic return cast 0.0), (cast context : LottieImportContext__lottieDocument).frameScale)) }, { frameScale: _Runtime.multiplyNumbers((cast context : LottieImportContext__lottieDocument).frameScale, _Runtime.coalesce(_Runtime.field(layer, 'sr'), function():Dynamic return cast 1.0)) }])));
     ((cast (cast context : LottieImportContext__lottieDocument).resolvingPrecompositions : flighthq._internal._Set<String>).delete_(id));
   }
 
@@ -374,144 +372,144 @@ class LottieDocument {
     var transform:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<LottieEllipseShapeItem, LottieFillShapeItem>, LottieGradientShapeItem>, LottieMergePathShapeItem>, LottiePolystarShapeItem>, LottieRectangleShapeItem>, LottieRepeaterShapeItem>, LottieRoundedCornersShapeItem>, LottieShapeGroup>, LottieShapePathItem>, LottieStrokeShapeItem>, LottieTransformShapeItem>, LottieTrimPathShapeItem>, LottieUnknownShapeItem>> = cast _Runtime.UNDEFINED;
     var state:LottieShapeState__lottieDocument = cast _Runtime.UNDEFINED;
     var rerender:Void->Void = cast _Runtime.UNDEFINED;
-    group = (cast createDisplayObject({ name: name }) : DisplayObject);
+    group = (cast createDisplayObject((cast { name: name })) : DisplayObject);
     transform = _Runtime.find(items, function(item:LottieShapeItem, __unused24:Float, __unused25:Array<LottieShapeItem>):Bool return _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'tr'));
-    if ((cast _Runtime.strictEquals(_Runtime.optionalField(transform, 'ty'), 'tr') : Bool)) { LottieDocument.applyLottieTransform__lottieDocument((cast group : Node2D), (cast (cast transform : LottieTransform) : Null<LottieTransform>), context); }
-    state = { paints: cast ([] : Array<Dynamic>), paths: cast ([] : Array<Dynamic>), shape: (cast createShape(_Runtime.field(_Runtime, 'UNDEFINED')) : Shape) };
-    rerender = (cast function():Void return LottieDocument.renderLottieShapeState__lottieDocument(state) : Void->Void);
+    if ((cast _Runtime.strictEquals(({ final __structural10 = transform; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { var ty:String; }).ty; }), 'tr') : Bool)) { LottieDocument.applyLottieTransform__lottieDocument((cast group), (cast (cast transform : LottieTransform)), (cast context)); }
+    state = (cast { paints: cast ([] : Array<Dynamic>), paths: cast ([] : Array<Dynamic>), shape: (cast createShape((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Shape) });
+    rerender = (cast function():Void { LottieDocument.renderLottieShapeState__lottieDocument((cast state)); });
     for (item in _Runtime.iterable(items)) {
       if ((cast _Runtime.strictEquals((cast item : { @:optional var hd:Null<Bool>; }).hd, true) : Bool)) { continue; }
       if ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'gr') : Bool)) {
         var shapeGroup:LottieShapeGroup = (cast item : LottieShapeGroup);
-        LottieDocument.appendLottieShapeItems__lottieDocument((cast group : DisplayObject), (cast _Runtime.field(shapeGroup, 'it') : Array<LottieShapeItem>), context, (cast _Runtime.coalesce(_Runtime.field(shapeGroup, 'nm'), function():Dynamic return cast null) : Null<String>));
+        LottieDocument.appendLottieShapeItems__lottieDocument((cast group), (cast _Runtime.field(shapeGroup, 'it')), (cast context), (cast _Runtime.coalesce(_Runtime.field(shapeGroup, 'nm'), function():Dynamic return cast null)));
         continue;
       }
-      var path:Null<Path> = (cast LottieDocument.createLottieShapeItemPath__lottieDocument((cast item : LottieShapeItem)) : Null<Path>);
+      var path:Null<Path> = (cast LottieDocument.createLottieShapeItemPath__lottieDocument((cast item)) : Null<Path>);
       if ((cast !_Runtime.strictEquals(path, null) : Bool)) {
         var pathIndex:Float = _Runtime.field((cast state : LottieShapeState__lottieDocument).paths, 'length');
         _Runtime.callProperty((cast state : LottieShapeState__lottieDocument).paths, 'push', cast ([path] : Array<Dynamic>));
-        LottieDocument.bindLottieGeometryItem__lottieDocument((cast item : LottieShapeItem), state, (cast pathIndex : Float), (cast rerender : Void->Void), context);
+        LottieDocument.bindLottieGeometryItem__lottieDocument((cast item), (cast state), (cast pathIndex : Float), (cast rerender), (cast context));
       }
       if ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'fl') : Bool)) {
         var fill:LottieFillShapeItem = (cast item : LottieFillShapeItem);
-        var color:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(fill, 'c')) : flighthq._internal._Any), (cast 3.0 : Float)) : Array<Float>);
-        var opacity:Array<Float> = cast ([_Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(fill, 'o')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0), 100.0)] : Array<Dynamic>);
-        var paint:{ var color:Array<Float>; var kind:String; var opacity:Float; var winding:String; } = { color: color, kind: 'fill', opacity: flighthq._internal._StaticIndex.readArray(opacity, 0.0), winding: (cast ((cast _Runtime.strictEquals(_Runtime.field(fill, 'r'), 2.0) : Bool) ? (cast 'evenOdd' : Dynamic) : (cast 'nonZero' : Dynamic)) : String) };
+        var color:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(fill, 'c'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 3.0 : Float)) : Array<Float>);
+        var opacity:Array<Float> = (cast cast ([_Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(fill, 'o'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0), 100.0)] : Array<Dynamic>));
+        var paint:{ var color:Array<Float>; var kind:String; var opacity:Float; var winding:String; } = (cast { color: color, kind: 'fill', opacity: flighthq._internal._StaticIndex.readArray(opacity, 0.0), winding: (cast ((cast _Runtime.strictEquals(_Runtime.field(fill, 'r'), 2.0) : Bool) ? (cast 'evenOdd' : Dynamic) : (cast 'nonZero' : Dynamic)) : String) });
         _Runtime.callProperty((cast state : LottieShapeState__lottieDocument).paints, 'push', cast ([paint] : Array<Dynamic>));
-        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(fill, 'c') : LottieAnimatable<Array<Float>>), (cast color : Array<Float>), (cast function(__unused27:Float, __unused28:Float):Float return _Runtime.callValue(function(value:Float, __unused26:Float):Float return value, cast ([__unused27] : Array<Dynamic>)) : Float->Float->Float), (cast rerender : Void->Void), context);
-        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(fill, 'o') : LottieAnimatable<Float>), (cast opacity : Array<Float>), (cast function(__unused30:Float, __unused31:Float):Float return _Runtime.callValue(function(value:Float, __unused29:Float):Float return (value / 100.0), cast ([__unused30] : Array<Dynamic>)) : Float->Float->Float), (cast function():Void {
+        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(fill, 'c')), (cast color), (cast function(__unused27:Float, __unused28:Float):Float return _Runtime.callValue(function(value:Float, __unused26:Float):Float return value, cast ([__unused27] : Array<Dynamic>))), (cast rerender), (cast context));
+        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(fill, 'o')), (cast opacity), (cast function(__unused30:Float, __unused31:Float):Float return _Runtime.callValue(function(value:Float, __unused29:Float):Float return (value / 100.0), cast ([__unused30] : Array<Dynamic>))), (cast function():Void {
           ((cast paint : { var color:Array<Float>; var kind:String; var opacity:Float; var winding:String; }).opacity = flighthq._internal._StaticIndex.readArray(opacity, 0.0));
           rerender();
-        } : Void->Void), context);
+        }), (cast context));
       } else { if ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'st') : Bool)) {
         var stroke:LottieStrokeShapeItem = (cast item : LottieStrokeShapeItem);
-        var color:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(stroke, 'c')) : flighthq._internal._Any), (cast 3.0 : Float)) : Array<Float>);
-        var opacity:Array<Float> = cast ([_Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(stroke, 'o')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0), 100.0)] : Array<Dynamic>);
-        var width:Array<Float> = cast ([flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(stroke, 'w')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0)] : Array<Dynamic>);
+        var color:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(stroke, 'c'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 3.0 : Float)) : Array<Float>);
+        var opacity:Array<Float> = (cast cast ([_Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(stroke, 'o'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0), 100.0)] : Array<Dynamic>));
+        var width:Array<Float> = (cast cast ([flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(stroke, 'w'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0)] : Array<Dynamic>));
         var dashEntries:Array<LottieDashEntry> = _Runtime.coalesce(_Runtime.field(stroke, 'd'), function():Dynamic return cast cast ([] : Array<Dynamic>));
-        var hasAnimatedDash:Bool = _Runtime.callProperty(dashEntries, 'some', cast ([function(entry:LottieDashEntry, __unused32:Float, __unused33:Array<LottieDashEntry>):Bool return LottieDocument.isAnimatedProperty__lottieDocument((cast (cast entry : LottieDashEntry).v : LottieAnimatable<Float>))] : Array<Dynamic>));
-        var dash:Array<Float> = ((cast hasAnimatedDash : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty(_Runtime.callProperty(dashEntries, 'filter', cast ([function(entry:LottieDashEntry, __unused34:Float, __unused35:Array<LottieDashEntry>):Bool return !_Runtime.strictEquals((cast entry : LottieDashEntry).n, 'o')] : Array<Dynamic>)), 'map', cast ([function(entry:LottieDashEntry, __unused36:Float, __unused37:Array<LottieDashEntry>):Float return HxMath.max(0.0, flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument((cast entry : LottieDashEntry).v) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0))] : Array<Dynamic>)) : Dynamic));
+        var hasAnimatedDash:Bool = _Runtime.callProperty(dashEntries, 'some', cast ([function(entry:LottieDashEntry, __unused32:Float, __unused33:Array<LottieDashEntry>):Bool return (cast (cast LottieDocument.isAnimatedProperty__lottieDocument : LottieAnimatable<Float>->Bool)((cast (cast entry : LottieDashEntry).v)) : Bool)] : Array<Dynamic>));
+        var dash:Array<Float> = ((cast hasAnimatedDash : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty(_Runtime.callProperty(dashEntries, 'filter', cast ([function(entry:LottieDashEntry, __unused34:Float, __unused35:Array<LottieDashEntry>):Bool return !_Runtime.strictEquals((cast entry : LottieDashEntry).n, 'o')] : Array<Dynamic>)), 'map', cast ([function(entry:LottieDashEntry, __unused36:Float, __unused37:Array<LottieDashEntry>):Float return HxMath.max(0.0, flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast (cast entry : LottieDashEntry).v)) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0))] : Array<Dynamic>)) : Dynamic));
         var dashOffsetEntry:Null<LottieDashEntry> = _Runtime.find(dashEntries, function(entry:LottieDashEntry, __unused38:Float, __unused39:Array<LottieDashEntry>):Bool return _Runtime.strictEquals((cast entry : LottieDashEntry).n, 'o'));
-        var dashOffset:Float = ((cast ((cast hasAnimatedDash : Bool) || (cast _Runtime.strictEquals(dashOffsetEntry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument((cast dashOffsetEntry : LottieDashEntry).v) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic));
-        if ((cast hasAnimatedDash : Bool)) { LottieDocument.reportLottieSkip__lottieDocument(context, (cast 'lottie.unsupported-shape-modifier' : String), (cast { modifier: 'dash' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>>)); }
-        var paint:{ var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; } = { caps: (cast LottieDocument.mapLottieLineCap__lottieDocument((cast _Runtime.field(stroke, 'lc') : Null<Float>)) : String), color: color, dash: ((cast _Runtime.callProperty(dash, 'some', cast ([function(value:Float, __unused40:Float, __unused41:Array<Float>):Bool return ((cast value : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast dash : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)), dashOffset: dashOffset, joints: (cast LottieDocument.mapLottieLineJoin__lottieDocument((cast _Runtime.field(stroke, 'lj') : Null<Float>)) : String), kind: 'stroke', miterLimit: _Runtime.coalesce(_Runtime.field(stroke, 'ml'), function():Dynamic return cast 4.0), opacity: flighthq._internal._StaticIndex.readArray(opacity, 0.0), width: flighthq._internal._StaticIndex.readArray(width, 0.0) };
+        var dashOffset:Float = ((cast ((cast hasAnimatedDash : Bool) || (cast _Runtime.strictEquals(dashOffsetEntry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast (cast dashOffsetEntry : LottieDashEntry).v)) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic));
+        if ((cast hasAnimatedDash : Bool)) { LottieDocument.reportLottieSkip__lottieDocument((cast context), (cast 'lottie.unsupported-shape-modifier' : String), (cast { modifier: 'dash' })); }
+        var paint:{ var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; } = (cast { caps: (cast LottieDocument.mapLottieLineCap__lottieDocument((cast _Runtime.field(stroke, 'lc'))) : String), color: color, dash: ((cast _Runtime.callProperty(dash, 'some', cast ([function(value:Float, __unused40:Float, __unused41:Array<Float>):Bool return ((cast value : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast dash : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)), dashOffset: dashOffset, joints: (cast LottieDocument.mapLottieLineJoin__lottieDocument((cast _Runtime.field(stroke, 'lj'))) : String), kind: 'stroke', miterLimit: _Runtime.coalesce(_Runtime.field(stroke, 'ml'), function():Dynamic return cast 4.0), opacity: flighthq._internal._StaticIndex.readArray(opacity, 0.0), width: flighthq._internal._StaticIndex.readArray(width, 0.0) });
         _Runtime.callProperty((cast state : LottieShapeState__lottieDocument).paints, 'push', cast ([paint] : Array<Dynamic>));
-        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(stroke, 'c') : LottieAnimatable<Array<Float>>), (cast color : Array<Float>), (cast function(__unused43:Float, __unused44:Float):Float return _Runtime.callValue(function(value:Float, __unused42:Float):Float return value, cast ([__unused43] : Array<Dynamic>)) : Float->Float->Float), (cast rerender : Void->Void), context);
-        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(stroke, 'o') : LottieAnimatable<Float>), (cast opacity : Array<Float>), (cast function(__unused46:Float, __unused47:Float):Float return _Runtime.callValue(function(value:Float, __unused45:Float):Float return (value / 100.0), cast ([__unused46] : Array<Dynamic>)) : Float->Float->Float), (cast function():Void {
+        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(stroke, 'c')), (cast color), (cast function(__unused43:Float, __unused44:Float):Float return _Runtime.callValue(function(value:Float, __unused42:Float):Float return value, cast ([__unused43] : Array<Dynamic>))), (cast rerender), (cast context));
+        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(stroke, 'o')), (cast opacity), (cast function(__unused46:Float, __unused47:Float):Float return _Runtime.callValue(function(value:Float, __unused45:Float):Float return (value / 100.0), cast ([__unused46] : Array<Dynamic>))), (cast function():Void {
           ((cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).opacity = flighthq._internal._StaticIndex.readArray(opacity, 0.0));
           rerender();
-        } : Void->Void), context);
-        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(stroke, 'w') : LottieAnimatable<Float>), (cast width : Array<Float>), (cast function(__unused49:Float, __unused50:Float):Float return _Runtime.callValue(function(value:Float, __unused48:Float):Float return value, cast ([__unused49] : Array<Dynamic>)) : Float->Float->Float), (cast function():Void {
+        }), (cast context));
+        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(stroke, 'w')), (cast width), (cast function(__unused49:Float, __unused50:Float):Float return _Runtime.callValue(function(value:Float, __unused48:Float):Float return value, cast ([__unused49] : Array<Dynamic>))), (cast function():Void {
           ((cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).width = flighthq._internal._StaticIndex.readArray(width, 0.0));
           rerender();
-        } : Void->Void), context);
+        }), (cast context));
       } else { if ((cast ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'gf') : Bool) || (cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'gs') : Bool)) : Bool)) {
         var gradient:LottieGradientShapeItem = (cast item : LottieGradientShapeItem);
-        var initialGradient:Null<Array<Float>> = (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(gradient, 'g') : LottieGradient).k) : Null<Array<Float>>);
+        var initialGradient:Null<Array<Float>> = (cast LottieDocument.initialLottieValue__lottieDocument((cast (cast _Runtime.field(gradient, 'g') : LottieGradient).k)) : Null<Array<Float>>);
         var values:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast initialGradient : flighthq._internal._Any), (cast HxMath.max(((cast _Runtime.field(gradient, 'g') : LottieGradient).p * 4.0), ((cast _Runtime.isArray(initialGradient) : Bool) ? (cast _Runtime.field(initialGradient, 'length') : Dynamic) : (cast 0.0 : Dynamic))) : Float)) : Array<Float>);
-        var start:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(gradient, 's')) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
-        var end:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(gradient, 'e')) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
-        var opacity:Array<Float> = cast ([((cast _Runtime.strictEquals(_Runtime.field(gradient, 'o'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 100.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(gradient, 'o')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic))] : Array<Dynamic>);
-        var width:Array<Float> = cast ([((cast _Runtime.strictEquals(_Runtime.field(gradient, 'w'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 1.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(gradient, 'w')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic))] : Array<Dynamic>);
+        var start:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(gradient, 's'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
+        var end:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(gradient, 'e'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
+        var opacity:Array<Float> = (cast cast ([((cast _Runtime.strictEquals(_Runtime.field(gradient, 'o'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 100.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(gradient, 'o'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic))] : Array<Dynamic>));
+        var width:Array<Float> = (cast cast ([((cast _Runtime.strictEquals(_Runtime.field(gradient, 'w'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 1.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(gradient, 'w'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic))] : Array<Dynamic>));
         var dashEntries:Array<LottieDashEntry> = _Runtime.coalesce(_Runtime.field(gradient, 'd'), function():Dynamic return cast cast ([] : Array<Dynamic>));
-        var hasAnimatedDash:Bool = _Runtime.callProperty(dashEntries, 'some', cast ([function(entry:LottieDashEntry, __unused51:Float, __unused52:Array<LottieDashEntry>):Bool return LottieDocument.isAnimatedProperty__lottieDocument((cast (cast entry : LottieDashEntry).v : LottieAnimatable<Float>))] : Array<Dynamic>));
-        var dash:Array<Float> = ((cast hasAnimatedDash : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty(_Runtime.callProperty(dashEntries, 'filter', cast ([function(entry:LottieDashEntry, __unused53:Float, __unused54:Array<LottieDashEntry>):Bool return !_Runtime.strictEquals((cast entry : LottieDashEntry).n, 'o')] : Array<Dynamic>)), 'map', cast ([function(entry:LottieDashEntry, __unused55:Float, __unused56:Array<LottieDashEntry>):Float return HxMath.max(0.0, flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument((cast entry : LottieDashEntry).v) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0))] : Array<Dynamic>)) : Dynamic));
+        var hasAnimatedDash:Bool = _Runtime.callProperty(dashEntries, 'some', cast ([function(entry:LottieDashEntry, __unused51:Float, __unused52:Array<LottieDashEntry>):Bool return (cast (cast LottieDocument.isAnimatedProperty__lottieDocument : LottieAnimatable<Float>->Bool)((cast (cast entry : LottieDashEntry).v)) : Bool)] : Array<Dynamic>));
+        var dash:Array<Float> = ((cast hasAnimatedDash : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast _Runtime.callProperty(_Runtime.callProperty(dashEntries, 'filter', cast ([function(entry:LottieDashEntry, __unused53:Float, __unused54:Array<LottieDashEntry>):Bool return !_Runtime.strictEquals((cast entry : LottieDashEntry).n, 'o')] : Array<Dynamic>)), 'map', cast ([function(entry:LottieDashEntry, __unused55:Float, __unused56:Array<LottieDashEntry>):Float return HxMath.max(0.0, flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast (cast entry : LottieDashEntry).v)) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0))] : Array<Dynamic>)) : Dynamic));
         var dashOffsetEntry:Null<LottieDashEntry> = _Runtime.find(dashEntries, function(entry:LottieDashEntry, __unused57:Float, __unused58:Array<LottieDashEntry>):Bool return _Runtime.strictEquals((cast entry : LottieDashEntry).n, 'o'));
-        var dashOffset:Float = ((cast ((cast hasAnimatedDash : Bool) || (cast _Runtime.strictEquals(dashOffsetEntry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument((cast dashOffsetEntry : LottieDashEntry).v) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic));
-        if ((cast hasAnimatedDash : Bool)) { LottieDocument.reportLottieSkip__lottieDocument(context, (cast 'lottie.unsupported-shape-modifier' : String), (cast { modifier: 'dash' } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>>)); }
-        var paint:{ var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; } = { caps: (cast LottieDocument.mapLottieLineCap__lottieDocument((cast _Runtime.field(gradient, 'lc') : Null<Float>)) : String), count: (cast _Runtime.field(gradient, 'g') : LottieGradient).p, dash: ((cast _Runtime.callProperty(dash, 'some', cast ([function(value:Float, __unused59:Float, __unused60:Array<Float>):Bool return ((cast value : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast dash : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)), dashOffset: dashOffset, end: end, joints: (cast LottieDocument.mapLottieLineJoin__lottieDocument((cast _Runtime.field(gradient, 'lj') : Null<Float>)) : String), kind: 'gradient', miterLimit: _Runtime.coalesce(_Runtime.field(gradient, 'ml'), function():Dynamic return cast 4.0), opacity: _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(opacity, 0.0), 100.0), shape: _Runtime.field(gradient, 't'), start: start, type: _Runtime.field(gradient, 'ty'), values: values, width: flighthq._internal._StaticIndex.readArray(width, 0.0) };
+        var dashOffset:Float = ((cast ((cast hasAnimatedDash : Bool) || (cast _Runtime.strictEquals(dashOffsetEntry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast (cast dashOffsetEntry : LottieDashEntry).v)) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic));
+        if ((cast hasAnimatedDash : Bool)) { LottieDocument.reportLottieSkip__lottieDocument((cast context), (cast 'lottie.unsupported-shape-modifier' : String), (cast { modifier: 'dash' })); }
+        var paint:{ var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; } = (cast { caps: (cast LottieDocument.mapLottieLineCap__lottieDocument((cast _Runtime.field(gradient, 'lc'))) : String), count: (cast _Runtime.field(gradient, 'g') : LottieGradient).p, dash: ((cast _Runtime.callProperty(dash, 'some', cast ([function(value:Float, __unused59:Float, __unused60:Array<Float>):Bool return ((cast value : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast dash : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)), dashOffset: dashOffset, end: end, joints: (cast LottieDocument.mapLottieLineJoin__lottieDocument((cast _Runtime.field(gradient, 'lj'))) : String), kind: 'gradient', miterLimit: _Runtime.coalesce(_Runtime.field(gradient, 'ml'), function():Dynamic return cast 4.0), opacity: _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(opacity, 0.0), 100.0), shape: _Runtime.field(gradient, 't'), start: start, type: _Runtime.field(gradient, 'ty'), values: values, width: flighthq._internal._StaticIndex.readArray(width, 0.0) });
         _Runtime.callProperty((cast state : LottieShapeState__lottieDocument).paints, 'push', cast ([paint] : Array<Dynamic>));
-        LottieDocument.bindMutableNumericProperty__lottieDocument((cast (cast _Runtime.field(gradient, 'g') : LottieGradient).k : LottieAnimatable<Array<Float>>), (cast values : Array<Float>), (cast function(__unused62:Float, __unused63:Float):Float return _Runtime.callValue(function(value:Float, __unused61:Float):Float return value, cast ([__unused62] : Array<Dynamic>)) : Float->Float->Float), (cast rerender : Void->Void), context);
-        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(gradient, 's') : LottieAnimatable<Array<Float>>), (cast start : Array<Float>), (cast function(__unused65:Float, __unused66:Float):Float return _Runtime.callValue(function(value:Float, __unused64:Float):Float return value, cast ([__unused65] : Array<Dynamic>)) : Float->Float->Float), (cast rerender : Void->Void), context);
-        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(gradient, 'e') : LottieAnimatable<Array<Float>>), (cast end : Array<Float>), (cast function(__unused68:Float, __unused69:Float):Float return _Runtime.callValue(function(value:Float, __unused67:Float):Float return value, cast ([__unused68] : Array<Dynamic>)) : Float->Float->Float), (cast rerender : Void->Void), context);
+        LottieDocument.bindMutableNumericProperty__lottieDocument((cast (cast _Runtime.field(gradient, 'g') : LottieGradient).k), (cast values), (cast function(__unused62:Float, __unused63:Float):Float return _Runtime.callValue(function(value:Float, __unused61:Float):Float return value, cast ([__unused62] : Array<Dynamic>))), (cast rerender), (cast context));
+        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(gradient, 's')), (cast start), (cast function(__unused65:Float, __unused66:Float):Float return _Runtime.callValue(function(value:Float, __unused64:Float):Float return value, cast ([__unused65] : Array<Dynamic>))), (cast rerender), (cast context));
+        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(gradient, 'e')), (cast end), (cast function(__unused68:Float, __unused69:Float):Float return _Runtime.callValue(function(value:Float, __unused67:Float):Float return value, cast ([__unused68] : Array<Dynamic>))), (cast rerender), (cast context));
         if ((cast !_Runtime.strictEquals(_Runtime.field(gradient, 'o'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(gradient, 'o') : LottieAnimatable<Float>), (cast opacity : Array<Float>), (cast function(__unused71:Float, __unused72:Float):Float return _Runtime.callValue(function(value:Float, __unused70:Float):Float return value, cast ([__unused71] : Array<Dynamic>)) : Float->Float->Float), (cast function():Void {
+          LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(gradient, 'o')), (cast opacity), (cast function(__unused71:Float, __unused72:Float):Float return _Runtime.callValue(function(value:Float, __unused70:Float):Float return value, cast ([__unused71] : Array<Dynamic>))), (cast function():Void {
             ((cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).opacity = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(opacity, 0.0), 100.0));
             rerender();
-          } : Void->Void), context);
+          }), (cast context));
         }
         if ((cast !_Runtime.strictEquals(_Runtime.field(gradient, 'w'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(gradient, 'w') : LottieAnimatable<Float>), (cast width : Array<Float>), (cast function(__unused74:Float, __unused75:Float):Float return _Runtime.callValue(function(value:Float, __unused73:Float):Float return value, cast ([__unused74] : Array<Dynamic>)) : Float->Float->Float), (cast function():Void {
+          LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(gradient, 'w')), (cast width), (cast function(__unused74:Float, __unused75:Float):Float return _Runtime.callValue(function(value:Float, __unused73:Float):Float return value, cast ([__unused74] : Array<Dynamic>))), (cast function():Void {
             ((cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).width = flighthq._internal._StaticIndex.readArray(width, 0.0));
             rerender();
-          } : Void->Void), context);
+          }), (cast context));
         }
       } else { if ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'tm') : Bool)) {
         var trim:LottieTrimPathShapeItem = (cast item : LottieTrimPathShapeItem);
-        if ((cast ((cast ((cast (cast LottieDocument.isAnimatedProperty__lottieDocument((cast _Runtime.field(trim, 's') : LottieAnimatable<Float>)) : Bool) : Bool) || (cast (cast LottieDocument.isAnimatedProperty__lottieDocument((cast _Runtime.field(trim, 'e') : LottieAnimatable<Float>)) : Bool) : Bool)) : Bool) || (cast (cast LottieDocument.isAnimatedProperty__lottieDocument((cast _Runtime.field(trim, 'o') : LottieAnimatable<Float>)) : Bool) : Bool)) : Bool)) {
-          LottieDocument.reportLottieSkip__lottieDocument(context, (cast 'lottie.unsupported-shape-modifier' : String), (cast { modifier: (cast item : { var ty:String; }).ty } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>>));
+        if ((cast ((cast ((cast (cast (cast LottieDocument.isAnimatedProperty__lottieDocument : LottieAnimatable<Float>->Bool)((cast _Runtime.field(trim, 's'))) : Bool) : Bool) || (cast (cast (cast LottieDocument.isAnimatedProperty__lottieDocument : LottieAnimatable<Float>->Bool)((cast _Runtime.field(trim, 'e'))) : Bool) : Bool)) : Bool) || (cast (cast (cast LottieDocument.isAnimatedProperty__lottieDocument : LottieAnimatable<Float>->Bool)((cast _Runtime.field(trim, 'o'))) : Bool) : Bool)) : Bool)) {
+          LottieDocument.reportLottieSkip__lottieDocument((cast context), (cast 'lottie.unsupported-shape-modifier' : String), (cast { modifier: (cast item : { var ty:String; }).ty }));
         }
       } else { if ((cast ((cast ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'rp') : Bool) || (cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'mm') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'rd') : Bool)) : Bool)) {
-        LottieDocument.reportLottieSkip__lottieDocument(context, (cast 'lottie.unsupported-shape-modifier' : String), (cast { modifier: (cast item : { var ty:String; }).ty } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>>));
+        LottieDocument.reportLottieSkip__lottieDocument((cast context), (cast 'lottie.unsupported-shape-modifier' : String), (cast { modifier: (cast item : { var ty:String; }).ty }));
       } else { if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals((cast item : { var ty:String; }).ty, 'sh') : Bool) && (cast !_Runtime.strictEquals((cast item : { var ty:String; }).ty, 'rc') : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast item : { var ty:String; }).ty, 'el') : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast item : { var ty:String; }).ty, 'sr') : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast item : { var ty:String; }).ty, 'tr') : Bool)) : Bool)) {
-        LottieDocument.reportLottieSkip__lottieDocument(context, (cast 'lottie.unsupported-shape-item' : String), (cast { shapeType: (cast item : { var ty:String; }).ty } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>>));
+        LottieDocument.reportLottieSkip__lottieDocument((cast context), (cast 'lottie.unsupported-shape-item' : String), (cast { shapeType: (cast item : { var ty:String; }).ty }));
       } } } } } }
-      LottieDocument.reportLottieExpression__lottieDocument((cast item : flighthq._internal._Any), context);
+      LottieDocument.reportLottieExpression__lottieDocument((cast item : flighthq._internal._Any), (cast context));
     }
-    LottieDocument.applyStaticLottieTrim__lottieDocument((cast items : Array<LottieShapeItem>), state);
-    LottieDocument.renderLottieShapeState__lottieDocument(state);
-    if ((cast ((cast _Runtime.field((cast state : LottieShapeState__lottieDocument).paths, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { (cast addNodeChild(group, (cast state : LottieShapeState__lottieDocument).shape) : NodeOf<Node2DTraits>); }
-    (cast addNodeChild(parent, group) : NodeOf<Node2DTraits>);
+    LottieDocument.applyStaticLottieTrim__lottieDocument((cast items), (cast state));
+    LottieDocument.renderLottieShapeState__lottieDocument((cast state));
+    if ((cast ((cast _Runtime.field((cast state : LottieShapeState__lottieDocument).paths, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { (cast addNodeChild((cast group), (cast (cast state : LottieShapeState__lottieDocument).shape)) : NodeOf<Node2DTraits>); }
+    (cast addNodeChild((cast parent), (cast group)) : NodeOf<Node2DTraits>);
   }
 
   public static function createLottieShapeItemPath__lottieDocument(item:LottieShapeItem):Null<Path> {
     var path:Path = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'sh') : Bool)) {
       var shapePath:LottieShapePathItem = (cast item : LottieShapePathItem);
-      var value:Null<LottieShapePath> = (cast LottieDocument.toLottieShapePath__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(shapePath, 'ks')) : flighthq._internal._Any)) : Null<LottieShapePath>);
+      var value:Null<LottieShapePath> = (cast LottieDocument.toLottieShapePath__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(shapePath, 'ks'))) : Null<LottieShapePath>) : flighthq._internal._Any)) : Null<LottieShapePath>);
       if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-      return cast (cast LottieDocument.createLottieBezierPath__lottieDocument((cast value : LottieShapePath)) : Null<Path>);
+      return cast (cast LottieDocument.createLottieBezierPath__lottieDocument((cast value)) : Path);
     }
-    path = (cast createPath(_Runtime.field(_Runtime, 'UNDEFINED')) : Path);
+    path = (cast createPath((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
     if ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'rc') : Bool)) {
       var rectangle:LottieRectangleShapeItem = (cast item : LottieRectangleShapeItem);
-      var position:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(rectangle, 'p')) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
-      var size:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(rectangle, 's')) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
-      var radius:Float = flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(rectangle, 'r')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0);
+      var position:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(rectangle, 'p'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
+      var size:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(rectangle, 's'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
+      var radius:Float = flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(rectangle, 'r'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0);
       if ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool)) {
-        appendPathRoundRectangle((cast path : Path), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 0.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 0.0), 2.0)) : Float), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 1.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 1.0), 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 1.0) : Float), (cast radius : flighthq._internal._Union2<Float, Array<Float>>));
+        appendPathRoundRectangle((cast path), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 0.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 0.0), 2.0)) : Float), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 1.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 1.0), 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 1.0) : Float), (cast radius));
       } else {
-        appendPathRectangle((cast path : Path), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 0.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 0.0), 2.0)) : Float), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 1.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 1.0), 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 1.0) : Float));
+        appendPathRectangle((cast path), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 0.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 0.0), 2.0)) : Float), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 1.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 1.0), 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 1.0) : Float));
       }
       return cast path;
     }
     if ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'el') : Bool)) {
       var ellipse:LottieEllipseShapeItem = (cast item : LottieEllipseShapeItem);
-      var position:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(ellipse, 'p')) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
-      var size:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(ellipse, 's')) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
-      appendPathEllipse((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(position, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(position, 1.0) : Float), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 0.0), 2.0) : Float), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 1.0), 2.0) : Float));
+      var position:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(ellipse, 'p'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
+      var size:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(ellipse, 's'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
+      appendPathEllipse((cast path), (cast flighthq._internal._StaticIndex.readArray(position, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(position, 1.0) : Float), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 0.0), 2.0) : Float), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 1.0), 2.0) : Float));
       return cast path;
     }
     if ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'sr') : Bool)) {
       var polystar:LottiePolystarShapeItem = (cast item : LottiePolystarShapeItem);
-      var center:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'p')) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
-      var points:Float = HxMath.max(2.0, HxMath.round(flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'pt')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0)));
-      var outer:Float = flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'or')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0);
-      var inner:Float = ((cast _Runtime.strictEquals(_Runtime.field(polystar, 'sy'), 1.0) : Bool) ? (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'ir')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic) : (cast outer : Dynamic));
-      var rotation:Float = flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'r')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0);
-      var outerRoundness:Float = ((cast _Runtime.strictEquals(_Runtime.field(polystar, 'os'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'os')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic));
-      var innerRoundness:Float = ((cast ((cast _Runtime.strictEquals(_Runtime.field(polystar, 'sy'), 1.0) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(polystar, 'is'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'is')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic) : (cast 0.0 : Dynamic));
-      return cast (cast LottieDocument.createLottiePolystarPath__lottieDocument((cast _Runtime.field(polystar, 'sy') : Float), (cast center : Array<Float>), (cast points : Float), (cast outer : Float), (cast inner : Float), (cast rotation : Float), (cast outerRoundness : Float), (cast innerRoundness : Float)) : Null<Path>);
+      var center:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'p'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
+      var points:Float = HxMath.max(2.0, HxMath.round(flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'pt'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0)));
+      var outer:Float = flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'or'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0);
+      var inner:Float = ((cast _Runtime.strictEquals(_Runtime.field(polystar, 'sy'), 1.0) : Bool) ? (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'ir'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic) : (cast outer : Dynamic));
+      var rotation:Float = flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'r'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0);
+      var outerRoundness:Float = ((cast _Runtime.strictEquals(_Runtime.field(polystar, 'os'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'os'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic));
+      var innerRoundness:Float = ((cast ((cast _Runtime.strictEquals(_Runtime.field(polystar, 'sy'), 1.0) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(polystar, 'is'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'is'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic) : (cast 0.0 : Dynamic));
+      return cast (cast LottieDocument.createLottiePolystarPath__lottieDocument((cast _Runtime.field(polystar, 'sy') : Float), (cast center), (cast points : Float), (cast outer : Float), (cast inner : Float), (cast rotation : Float), (cast outerRoundness : Float), (cast innerRoundness : Float)) : Path);
     }
     return cast null;
     return cast null;
@@ -528,16 +526,16 @@ class LottieDocument {
     var radii:Array<Float> = cast _Runtime.UNDEFINED;
     var handles:Array<Float> = cast _Runtime.UNDEFINED;
     var vertices:Array<Float> = cast _Runtime.UNDEFINED;
-    path = (cast createPath(_Runtime.field(_Runtime, 'UNDEFINED')) : Path);
+    path = (cast createPath((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
     points = HxMath.max(2.0, HxMath.round(pointCount));
     rotation = (cast LottieDocument.degreesToRadians__lottieDocument((cast (rotationDegrees - 90.0) : Float)) : Float);
     count = ((cast _Runtime.strictEquals(kind, 1.0) : Bool) ? (cast (points * 2.0) : Dynamic) : (cast points : Dynamic));
     step = ((HxMath.PI * 2.0) / count);
     handleScale = _Runtime.multiplyNumbers((4.0 / 3.0), HxMath.tan((step / 4.0)));
-    angles = cast ([] : Array<Dynamic>);
-    radii = cast ([] : Array<Dynamic>);
-    handles = cast ([] : Array<Dynamic>);
-    vertices = cast ([] : Array<Dynamic>);
+    angles = (cast cast ([] : Array<Dynamic>));
+    radii = (cast cast ([] : Array<Dynamic>));
+    handles = (cast cast ([] : Array<Dynamic>));
+    vertices = (cast cast ([] : Array<Dynamic>));
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast count : Float)) : Bool)) {
@@ -553,10 +551,10 @@ class LottieDocument {
       }
     }
     if ((cast _Runtime.callProperty(handles, 'every', cast ([function(handle:Float, __unused76:Float, __unused77:Array<Float>):Bool return _Runtime.strictEquals(handle, 0.0)] : Array<Dynamic>)) : Bool)) {
-      appendPathPolygon((cast path : Path), (cast vertices : Array<Float>));
+      appendPathPolygon((cast path), (cast vertices));
       return cast path;
     }
-    appendPathMoveTo((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(vertices, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(vertices, 1.0) : Float));
+    appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readArray(vertices, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(vertices, 1.0) : Float));
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast count : Float)) : Bool)) {
@@ -565,7 +563,7 @@ class LottieDocument {
         var outgoingY:Float = _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(vertices, ((index * 2.0) + 1.0)), _Runtime.multiplyNumbers(HxMath.cos(flighthq._internal._StaticIndex.readArray(angles, index)), flighthq._internal._StaticIndex.readArray(handles, index)));
         var incomingX:Float = _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(vertices, (next * 2.0)), _Runtime.multiplyNumbers(HxMath.sin(flighthq._internal._StaticIndex.readArray(angles, next)), flighthq._internal._StaticIndex.readArray(handles, next)));
         var incomingY:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(vertices, ((next * 2.0) + 1.0)), _Runtime.multiplyNumbers(HxMath.cos(flighthq._internal._StaticIndex.readArray(angles, next)), flighthq._internal._StaticIndex.readArray(handles, next)));
-        appendPathCubicCurveTo((cast path : Path), (cast outgoingX : Float), (cast outgoingY : Float), (cast incomingX : Float), (cast incomingY : Float), (cast flighthq._internal._StaticIndex.readArray(vertices, (next * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(vertices, ((next * 2.0) + 1.0)) : Float));
+        appendPathCubicCurveTo((cast path), (cast outgoingX : Float), (cast outgoingY : Float), (cast incomingX : Float), (cast incomingY : Float), (cast flighthq._internal._StaticIndex.readArray(vertices, (next * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(vertices, ((next * 2.0) + 1.0)) : Float));
         index++;
       }
     }
@@ -578,77 +576,77 @@ class LottieDocument {
     rebuild = (cast function(path:Path):Void {
       flighthq._internal._StaticIndex.writeArray((cast state : LottieShapeState__lottieDocument).paths, pathIndex, path);
       rerender();
-    } : Path->Void);
+    });
     if ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'sh') : Bool)) {
       var shape:LottieShapePathItem = (cast item : LottieShapePathItem);
-      if ((cast !(cast (cast LottieDocument.isAnimatedProperty__lottieDocument((cast _Runtime.field(shape, 'ks') : LottieAnimatable<LottieShapePath>)) : Bool) : Bool) : Bool)) { return; }
-      var template:Null<LottieShapePath> = (cast LottieDocument.toLottieShapePath__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(shape, 'ks')) : flighthq._internal._Any)) : Null<LottieShapePath>);
+      if ((cast !(cast (cast (cast LottieDocument.isAnimatedProperty__lottieDocument : LottieAnimatable<LottieShapePath>->Bool)((cast _Runtime.field(shape, 'ks'))) : Bool) : Bool) : Bool)) { return; }
+      var template:Null<LottieShapePath> = (cast LottieDocument.toLottieShapePath__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(shape, 'ks'))) : Null<LottieShapePath>) : flighthq._internal._Any)) : Null<LottieShapePath>);
       if ((cast _Runtime.strictEquals(template, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-      var current:Array<Float> = (cast LottieDocument.flattenLottieShapePath__lottieDocument((cast template : LottieShapePath)) : Array<Float>);
+      var current:Array<Float> = (cast LottieDocument.flattenLottieShapePath__lottieDocument((cast template)) : Array<Float>);
       var apply:Void->Void = cast _Runtime.UNDEFINED;
-      apply = (cast function():Void return rebuild((cast (cast LottieDocument.createLottieBezierPath__lottieDocument((cast (cast LottieDocument.unflattenLottieShapePath__lottieDocument((cast template : LottieShapePath), (cast current : Array<Float>)) : LottieShapePath) : LottieShapePath)) : Path) : Path)) : Void->Void);
-      LottieDocument.appendLottieShapePathChannels__lottieDocument((cast (cast _Runtime.field(shape, 'ks') : LottieAnimatedProperty<LottieShapePath>).k : Array<LottieKeyframe<LottieShapePath>>), (cast current : Array<Float>), (cast apply : Void->Void), context);
+      apply = (cast function():Void { rebuild((cast (cast LottieDocument.createLottieBezierPath__lottieDocument((cast (cast LottieDocument.unflattenLottieShapePath__lottieDocument((cast template), (cast current)) : LottieShapePath))) : Path))); });
+      LottieDocument.appendLottieShapePathChannels__lottieDocument((cast (cast _Runtime.field(shape, 'ks') : LottieAnimatedProperty<LottieShapePath>).k), (cast current), (cast apply), (cast context));
       return;
     }
     if ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'rc') : Bool)) {
       var rectangle:LottieRectangleShapeItem = (cast item : LottieRectangleShapeItem);
-      var position:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(rectangle, 'p')) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
-      var size:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(rectangle, 's')) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
-      var radius:Array<Float> = cast ([flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(rectangle, 'r')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0)] : Array<Dynamic>);
+      var position:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(rectangle, 'p'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
+      var size:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(rectangle, 's'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
+      var radius:Array<Float> = (cast cast ([flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(rectangle, 'r'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0)] : Array<Dynamic>));
       var apply:Void->Void = cast _Runtime.UNDEFINED;
       apply = (cast function():Void {
         var path:Path = cast _Runtime.UNDEFINED;
-        path = (cast createPath(_Runtime.field(_Runtime, 'UNDEFINED')) : Path);
+        path = (cast createPath((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
         if ((cast ((cast flighthq._internal._StaticIndex.readArray(radius, 0.0) : Float) > (cast 0.0 : Float)) : Bool)) {
-          appendPathRoundRectangle((cast path : Path), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 0.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 0.0), 2.0)) : Float), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 1.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 1.0), 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 1.0) : Float), (cast flighthq._internal._StaticIndex.readArray(radius, 0.0) : flighthq._internal._Union2<Float, Array<Float>>));
+          appendPathRoundRectangle((cast path), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 0.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 0.0), 2.0)) : Float), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 1.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 1.0), 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 1.0) : Float), (cast flighthq._internal._StaticIndex.readArray(radius, 0.0)));
         } else {
-          appendPathRectangle((cast path : Path), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 0.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 0.0), 2.0)) : Float), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 1.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 1.0), 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 1.0) : Float));
+          appendPathRectangle((cast path), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 0.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 0.0), 2.0)) : Float), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(position, 1.0), _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 1.0), 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(size, 1.0) : Float));
         }
-        rebuild((cast path : Path));
-      } : Void->Void);
-      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(rectangle, 'p') : LottieAnimatable<Array<Float>>), (cast position : Array<Float>), (cast function(__unused79:Float, __unused80:Float):Float return _Runtime.callValue(function(value:Float, __unused78:Float):Float return value, cast ([__unused79] : Array<Dynamic>)) : Float->Float->Float), (cast apply : Void->Void), context);
-      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(rectangle, 's') : LottieAnimatable<Array<Float>>), (cast size : Array<Float>), (cast function(__unused82:Float, __unused83:Float):Float return _Runtime.callValue(function(value:Float, __unused81:Float):Float return value, cast ([__unused82] : Array<Dynamic>)) : Float->Float->Float), (cast apply : Void->Void), context);
-      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(rectangle, 'r') : LottieAnimatable<Float>), (cast radius : Array<Float>), (cast function(__unused85:Float, __unused86:Float):Float return _Runtime.callValue(function(value:Float, __unused84:Float):Float return value, cast ([__unused85] : Array<Dynamic>)) : Float->Float->Float), (cast apply : Void->Void), context);
+        rebuild((cast path));
+      });
+      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(rectangle, 'p')), (cast position), (cast function(__unused79:Float, __unused80:Float):Float return _Runtime.callValue(function(value:Float, __unused78:Float):Float return value, cast ([__unused79] : Array<Dynamic>))), (cast apply), (cast context));
+      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(rectangle, 's')), (cast size), (cast function(__unused82:Float, __unused83:Float):Float return _Runtime.callValue(function(value:Float, __unused81:Float):Float return value, cast ([__unused82] : Array<Dynamic>))), (cast apply), (cast context));
+      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(rectangle, 'r')), (cast radius), (cast function(__unused85:Float, __unused86:Float):Float return _Runtime.callValue(function(value:Float, __unused84:Float):Float return value, cast ([__unused85] : Array<Dynamic>))), (cast apply), (cast context));
       return;
     }
     if ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'el') : Bool)) {
       var ellipse:LottieEllipseShapeItem = (cast item : LottieEllipseShapeItem);
-      var position:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(ellipse, 'p')) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
-      var size:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(ellipse, 's')) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
+      var position:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(ellipse, 'p'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
+      var size:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(ellipse, 's'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
       var apply:Void->Void = cast _Runtime.UNDEFINED;
       apply = (cast function():Void {
         var path:Path = cast _Runtime.UNDEFINED;
-        path = (cast createPath(_Runtime.field(_Runtime, 'UNDEFINED')) : Path);
-        appendPathEllipse((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(position, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(position, 1.0) : Float), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 0.0), 2.0) : Float), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 1.0), 2.0) : Float));
-        rebuild((cast path : Path));
-      } : Void->Void);
-      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(ellipse, 'p') : LottieAnimatable<Array<Float>>), (cast position : Array<Float>), (cast function(__unused88:Float, __unused89:Float):Float return _Runtime.callValue(function(value:Float, __unused87:Float):Float return value, cast ([__unused88] : Array<Dynamic>)) : Float->Float->Float), (cast apply : Void->Void), context);
-      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(ellipse, 's') : LottieAnimatable<Array<Float>>), (cast size : Array<Float>), (cast function(__unused91:Float, __unused92:Float):Float return _Runtime.callValue(function(value:Float, __unused90:Float):Float return value, cast ([__unused91] : Array<Dynamic>)) : Float->Float->Float), (cast apply : Void->Void), context);
+        path = (cast createPath((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
+        appendPathEllipse((cast path), (cast flighthq._internal._StaticIndex.readArray(position, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(position, 1.0) : Float), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 0.0), 2.0) : Float), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(size, 1.0), 2.0) : Float));
+        rebuild((cast path));
+      });
+      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(ellipse, 'p')), (cast position), (cast function(__unused88:Float, __unused89:Float):Float return _Runtime.callValue(function(value:Float, __unused87:Float):Float return value, cast ([__unused88] : Array<Dynamic>))), (cast apply), (cast context));
+      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(ellipse, 's')), (cast size), (cast function(__unused91:Float, __unused92:Float):Float return _Runtime.callValue(function(value:Float, __unused90:Float):Float return value, cast ([__unused91] : Array<Dynamic>))), (cast apply), (cast context));
       return;
     }
     if ((cast _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'sr') : Bool)) {
       var polystar:LottiePolystarShapeItem = (cast item : LottiePolystarShapeItem);
-      var center:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'p')) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
-      var points:Array<Float> = cast ([flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'pt')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0)] : Array<Dynamic>);
-      var outer:Array<Float> = cast ([flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'or')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0)] : Array<Dynamic>);
-      var inner:Array<Float> = cast ([((cast _Runtime.strictEquals(_Runtime.field(polystar, 'sy'), 1.0) : Bool) ? (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'ir')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(outer, 0.0) : Dynamic))] : Array<Dynamic>);
-      var rotation:Array<Float> = cast ([flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'r')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0)] : Array<Dynamic>);
-      var outerRoundness:Array<Float> = cast ([((cast _Runtime.strictEquals(_Runtime.field(polystar, 'os'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'os')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic))] : Array<Dynamic>);
-      var innerRoundness:Array<Float> = cast ([((cast ((cast _Runtime.strictEquals(_Runtime.field(polystar, 'sy'), 1.0) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(polystar, 'is'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(polystar, 'is')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic) : (cast 0.0 : Dynamic))] : Array<Dynamic>);
+      var center:Array<Float> = (cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'p'))) : Null<Array<Float>>) : flighthq._internal._Any), (cast 2.0 : Float)) : Array<Float>);
+      var points:Array<Float> = (cast cast ([flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'pt'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0)] : Array<Dynamic>));
+      var outer:Array<Float> = (cast cast ([flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'or'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0)] : Array<Dynamic>));
+      var inner:Array<Float> = (cast cast ([((cast _Runtime.strictEquals(_Runtime.field(polystar, 'sy'), 1.0) : Bool) ? (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'ir'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(outer, 0.0) : Dynamic))] : Array<Dynamic>));
+      var rotation:Array<Float> = (cast cast ([flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'r'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0)] : Array<Dynamic>));
+      var outerRoundness:Array<Float> = (cast cast ([((cast _Runtime.strictEquals(_Runtime.field(polystar, 'os'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'os'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic))] : Array<Dynamic>));
+      var innerRoundness:Array<Float> = (cast cast ([((cast ((cast _Runtime.strictEquals(_Runtime.field(polystar, 'sy'), 1.0) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(polystar, 'is'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(polystar, 'is'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0) : Dynamic) : (cast 0.0 : Dynamic))] : Array<Dynamic>));
       var apply:Void->Void = cast _Runtime.UNDEFINED;
       apply = (cast function():Void {
-        rebuild((cast (cast LottieDocument.createLottiePolystarPath__lottieDocument((cast _Runtime.field(polystar, 'sy') : Float), (cast center : Array<Float>), (cast flighthq._internal._StaticIndex.readArray(points, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(outer, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(rotation, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(outerRoundness, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(innerRoundness, 0.0) : Float)) : Path) : Path));
-      } : Void->Void);
-      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'p') : LottieAnimatable<Array<Float>>), (cast center : Array<Float>), (cast function(__unused94:Float, __unused95:Float):Float return _Runtime.callValue(function(value:Float, __unused93:Float):Float return value, cast ([__unused94] : Array<Dynamic>)) : Float->Float->Float), (cast apply : Void->Void), context);
-      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'pt') : LottieAnimatable<Float>), (cast points : Array<Float>), (cast function(__unused97:Float, __unused98:Float):Float return _Runtime.callValue(function(value:Float, __unused96:Float):Float return value, cast ([__unused97] : Array<Dynamic>)) : Float->Float->Float), (cast apply : Void->Void), context);
-      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'or') : LottieAnimatable<Float>), (cast outer : Array<Float>), (cast function(__unused100:Float, __unused101:Float):Float return _Runtime.callValue(function(value:Float, __unused99:Float):Float return value, cast ([__unused100] : Array<Dynamic>)) : Float->Float->Float), (cast apply : Void->Void), context);
-      if ((cast !_Runtime.strictEquals(_Runtime.field(polystar, 'ir'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'ir') : LottieAnimatable<Float>), (cast inner : Array<Float>), (cast function(__unused103:Float, __unused104:Float):Float return _Runtime.callValue(function(value:Float, __unused102:Float):Float return value, cast ([__unused103] : Array<Dynamic>)) : Float->Float->Float), (cast apply : Void->Void), context); }
-      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'r') : LottieAnimatable<Float>), (cast rotation : Array<Float>), (cast function(__unused106:Float, __unused107:Float):Float return _Runtime.callValue(function(value:Float, __unused105:Float):Float return value, cast ([__unused106] : Array<Dynamic>)) : Float->Float->Float), (cast apply : Void->Void), context);
+        rebuild((cast (cast LottieDocument.createLottiePolystarPath__lottieDocument((cast _Runtime.field(polystar, 'sy') : Float), (cast center), (cast flighthq._internal._StaticIndex.readArray(points, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(outer, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(rotation, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(outerRoundness, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(innerRoundness, 0.0) : Float)) : Path)));
+      });
+      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'p')), (cast center), (cast function(__unused94:Float, __unused95:Float):Float return _Runtime.callValue(function(value:Float, __unused93:Float):Float return value, cast ([__unused94] : Array<Dynamic>))), (cast apply), (cast context));
+      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'pt')), (cast points), (cast function(__unused97:Float, __unused98:Float):Float return _Runtime.callValue(function(value:Float, __unused96:Float):Float return value, cast ([__unused97] : Array<Dynamic>))), (cast apply), (cast context));
+      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'or')), (cast outer), (cast function(__unused100:Float, __unused101:Float):Float return _Runtime.callValue(function(value:Float, __unused99:Float):Float return value, cast ([__unused100] : Array<Dynamic>))), (cast apply), (cast context));
+      if ((cast !_Runtime.strictEquals(_Runtime.field(polystar, 'ir'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'ir')), (cast inner), (cast function(__unused103:Float, __unused104:Float):Float return _Runtime.callValue(function(value:Float, __unused102:Float):Float return value, cast ([__unused103] : Array<Dynamic>))), (cast apply), (cast context)); }
+      LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'r')), (cast rotation), (cast function(__unused106:Float, __unused107:Float):Float return _Runtime.callValue(function(value:Float, __unused105:Float):Float return value, cast ([__unused106] : Array<Dynamic>))), (cast apply), (cast context));
       if ((cast !_Runtime.strictEquals(_Runtime.field(polystar, 'os'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'os') : LottieAnimatable<Float>), (cast outerRoundness : Array<Float>), (cast function(__unused109:Float, __unused110:Float):Float return _Runtime.callValue(function(value:Float, __unused108:Float):Float return value, cast ([__unused109] : Array<Dynamic>)) : Float->Float->Float), (cast apply : Void->Void), context);
+        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'os')), (cast outerRoundness), (cast function(__unused109:Float, __unused110:Float):Float return _Runtime.callValue(function(value:Float, __unused108:Float):Float return value, cast ([__unused109] : Array<Dynamic>))), (cast apply), (cast context));
       }
       if ((cast !_Runtime.strictEquals(_Runtime.field(polystar, 'is'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'is') : LottieAnimatable<Float>), (cast innerRoundness : Array<Float>), (cast function(__unused112:Float, __unused113:Float):Float return _Runtime.callValue(function(value:Float, __unused111:Float):Float return value, cast ([__unused112] : Array<Dynamic>)) : Float->Float->Float), (cast apply : Void->Void), context);
+        LottieDocument.bindMutableNumericProperty__lottieDocument((cast _Runtime.field(polystar, 'is')), (cast innerRoundness), (cast function(__unused112:Float, __unused113:Float):Float return _Runtime.callValue(function(value:Float, __unused111:Float):Float return value, cast ([__unused112] : Array<Dynamic>))), (cast apply), (cast context));
       }
     }
   }
@@ -659,17 +657,18 @@ class LottieDocument {
     if ((cast _Runtime.callProperty(keyframes, 'some', cast ([function(keyframe:LottieKeyframe<LottieShapePath>, __unused114:Float, __unused115:Array<LottieKeyframe<LottieShapePath>>):Bool {
       var value:Null<LottieShapePath> = cast _Runtime.UNDEFINED;
       value = (cast LottieDocument.toLottieShapePath__lottieDocument((cast _Runtime.coalesce(_Runtime.field(keyframe, 's'), function():Dynamic return cast _Runtime.field(keyframe, 'e')) : flighthq._internal._Any)) : Null<LottieShapePath>);
-      return cast ((cast !_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field((cast LottieDocument.flattenLottieShapePath__lottieDocument((cast value : LottieShapePath)) : Array<Float>), 'length'), _Runtime.field(current, 'length')) : Bool));
+      return cast ((cast !_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field((cast LottieDocument.flattenLottieShapePath__lottieDocument((cast value)) : Array<Float>), 'length'), _Runtime.field(current, 'length')) : Bool));
+      return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>)) : Bool)) {
-      LottieDocument.reportLottieDrop__lottieDocument(context, (cast 'lottie.incompatible-animated-shape-path' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>>));
+      LottieDocument.reportLottieDrop__lottieDocument((cast context), (cast 'lottie.incompatible-animated-shape-path' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
       return;
     }
-    componentSpecific = (cast LottieDocument.hasComponentSpecificEasing__lottieDocument((cast keyframes : Array<LottieKeyframe<LottieShapePath>>), (cast _Runtime.field(current, 'length') : Float)) : Bool);
+    componentSpecific = (cast (cast LottieDocument.hasComponentSpecificEasing__lottieDocument : Array<LottieKeyframe<LottieShapePath>>->Float->Bool)((cast keyframes), (cast _Runtime.field(current, 'length') : Float)) : Bool);
     if ((cast componentSpecific : Bool)) {
       {
         var component:Float = 0.0;
         while ((cast ((cast component : Float) < (cast _Runtime.field(current, 'length') : Float)) : Bool)) {
-          _Runtime.callProperty((cast context : LottieImportContext__lottieDocument).channels, 'push', cast ([(cast createAnimationChannel((cast LottieDocument.createLottieTrack__lottieDocument((cast keyframes : Array<LottieKeyframe<LottieShapePath>>), (cast 1.0 : Float), context, (cast function(__unused117:Null<T>, __unused118:Float):Array<Float> return _Runtime.callValue(function(value:Null<LottieShapePath>, __unused116:Float):Array<Float> return cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast LottieDocument.flattenLottieShapePath__lottieDocument((cast (cast LottieDocument.toLottieShapePath__lottieDocument((cast _Runtime.coalesce(value, function():Dynamic return cast _Runtime.field(flighthq._internal._StaticIndex.readArray(keyframes, 0.0), 's')) : flighthq._internal._Any)) : LottieShapePath) : LottieShapePath)) : Array<Float>), component), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(current, component))] : Array<Dynamic>), cast ([__unused117] : Array<Dynamic>)) : Null<LottieShapePath>->Float->Array<Float>), (cast component : Float)) : AnimationTrack), (cast { lottieApply: function(sample:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
+          _Runtime.callProperty((cast context : LottieImportContext__lottieDocument).channels, 'push', cast ([(cast createAnimationChannel((cast (cast LottieDocument.createLottieTrack__lottieDocument((cast keyframes), (cast 1.0 : Float), (cast context), (cast function(__unused117:Null<LottieShapePath>, __unused118:Float):Array<Float> return _Runtime.callValue(function(value:Null<LottieShapePath>, __unused116:Float):Array<Float> return cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast LottieDocument.flattenLottieShapePath__lottieDocument((cast (cast LottieDocument.toLottieShapePath__lottieDocument((cast _Runtime.coalesce(value, function():Dynamic return cast _Runtime.field(flighthq._internal._StaticIndex.readArray(keyframes, 0.0), 's')) : flighthq._internal._Any)) : Null<LottieShapePath>))) : Array<Float>), component), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(current, component))] : Array<Dynamic>), cast ([__unused117] : Array<Dynamic>))), (cast component : Float)) : AnimationTrack)), (cast { lottieApply: function(sample:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
             flighthq._internal._StaticIndex.writeArray(current, component, flighthq._internal._StaticIndex.readArrayOrFloat32Array(sample, 0.0));
             apply();
           } } : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
@@ -678,7 +677,7 @@ class LottieDocument {
       }
       return;
     }
-    _Runtime.callProperty((cast context : LottieImportContext__lottieDocument).channels, 'push', cast ([(cast createAnimationChannel((cast LottieDocument.createLottieTrack__lottieDocument((cast keyframes : Array<LottieKeyframe<LottieShapePath>>), (cast _Runtime.field(current, 'length') : Float), context, (cast function(__unused120:Null<T>, __unused121:Float):Array<Float> return _Runtime.callValue(function(value:Null<LottieShapePath>, __unused119:Float):Array<Float> return (cast LottieDocument.flattenLottieShapePath__lottieDocument((cast (cast LottieDocument.toLottieShapePath__lottieDocument((cast _Runtime.coalesce(value, function():Dynamic return cast _Runtime.field(flighthq._internal._StaticIndex.readArray(keyframes, 0.0), 's')) : flighthq._internal._Any)) : LottieShapePath) : LottieShapePath)) : Array<Float>), cast ([__unused120] : Array<Dynamic>)) : Null<LottieShapePath>->Float->Array<Float>), (cast 0.0 : Float)) : AnimationTrack), (cast { lottieApply: function(sample:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
+    _Runtime.callProperty((cast context : LottieImportContext__lottieDocument).channels, 'push', cast ([(cast createAnimationChannel((cast (cast LottieDocument.createLottieTrack__lottieDocument((cast keyframes), (cast _Runtime.field(current, 'length') : Float), (cast context), (cast function(__unused120:Null<LottieShapePath>, __unused121:Float):Array<Float> return _Runtime.callValue(function(value:Null<LottieShapePath>, __unused119:Float):Array<Float> return (cast LottieDocument.flattenLottieShapePath__lottieDocument((cast (cast LottieDocument.toLottieShapePath__lottieDocument((cast _Runtime.coalesce(value, function():Dynamic return cast _Runtime.field(flighthq._internal._StaticIndex.readArray(keyframes, 0.0), 's')) : flighthq._internal._Any)) : Null<LottieShapePath>))) : Array<Float>), cast ([__unused120] : Array<Dynamic>))), (cast 0.0 : Float)) : AnimationTrack)), (cast { lottieApply: function(sample:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
       {
         var index:Float = 0.0;
         while ((cast ((cast index : Float) < (cast _Runtime.field(current, 'length') : Float)) : Bool)) {
@@ -692,7 +691,7 @@ class LottieDocument {
 
   public static function flattenLottieShapePath__lottieDocument(path:LottieShapePath):Array<Float> {
     var out:Array<Float> = cast _Runtime.UNDEFINED;
-    out = cast ([] : Array<Dynamic>);
+    out = (cast cast ([] : Array<Dynamic>));
     for (points in _Runtime.iterable(cast ([_Runtime.field(path, 'v'), _Runtime.field(path, 'i'), _Runtime.field(path, 'o')] : Array<Dynamic>))) {
       for (point in _Runtime.iterable(points)) {
         _Runtime.pushMany(out, cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(point, 0.0), function():Dynamic return cast 0.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(point, 1.0), function():Dynamic return cast 0.0)] : Array<Dynamic>));
@@ -708,7 +707,7 @@ class LottieDocument {
     count = _Runtime.field(_Runtime.field(template, 'v'), 'length');
     readPoints = (cast function(offset:Float):Array<Array<Float>> {
       var out:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-      out = cast ([] : Array<Dynamic>);
+      out = (cast cast ([] : Array<Dynamic>));
       {
         var index:Float = 0.0;
         while ((cast ((cast index : Float) < (cast count : Float)) : Bool)) {
@@ -717,7 +716,8 @@ class LottieDocument {
         }
       }
       return cast out;
-    } : Float->Array<Array<Float>>);
+      return cast _Runtime.UNDEFINED;
+    });
     return cast { c: _Runtime.field(template, 'c'), i: (cast readPoints((cast (count * 2.0) : Float)) : Array<Array<Float>>), o: (cast readPoints((cast (count * 4.0) : Float)) : Array<Array<Float>>), v: (cast readPoints((cast 0.0 : Float)) : Array<Array<Float>>) };
     return cast null;
   }
@@ -732,21 +732,22 @@ class LottieDocument {
     raw = _Runtime.find(items, function(item:LottieShapeItem, __unused122:Float, __unused123:Array<LottieShapeItem>):Bool return _Runtime.strictEquals((cast item : { var ty:String; }).ty, 'tm'));
     if ((cast _Runtime.strictEquals(raw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     trim = (cast raw : LottieTrimPathShapeItem);
-    if ((cast ((cast ((cast (cast LottieDocument.isAnimatedProperty__lottieDocument((cast _Runtime.field(trim, 's') : LottieAnimatable<Float>)) : Bool) : Bool) || (cast (cast LottieDocument.isAnimatedProperty__lottieDocument((cast _Runtime.field(trim, 'e') : LottieAnimatable<Float>)) : Bool) : Bool)) : Bool) || (cast (cast LottieDocument.isAnimatedProperty__lottieDocument((cast _Runtime.field(trim, 'o') : LottieAnimatable<Float>)) : Bool) : Bool)) : Bool)) { return; }
-    start = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(trim, 's')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0), 100.0);
-    end = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(trim, 'e')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0), 100.0);
-    offset = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(trim, 'o')) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0), 360.0);
+    if ((cast ((cast ((cast (cast (cast LottieDocument.isAnimatedProperty__lottieDocument : LottieAnimatable<Float>->Bool)((cast _Runtime.field(trim, 's'))) : Bool) : Bool) || (cast (cast (cast LottieDocument.isAnimatedProperty__lottieDocument : LottieAnimatable<Float>->Bool)((cast _Runtime.field(trim, 'e'))) : Bool) : Bool)) : Bool) || (cast (cast (cast LottieDocument.isAnimatedProperty__lottieDocument : LottieAnimatable<Float>->Bool)((cast _Runtime.field(trim, 'o'))) : Bool) : Bool)) : Bool)) { return; }
+    start = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(trim, 's'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0), 100.0);
+    end = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(trim, 'e'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0), 100.0);
+    offset = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray((cast LottieDocument.numericValue__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(trim, 'o'))) : Null<Float>) : flighthq._internal._Any), (cast 1.0 : Float)) : Array<Float>), 0.0), 360.0);
     visible = _Runtime.fmod((_Runtime.fmod((end - start), 1.0) + 1.0), 1.0);
     if ((cast ((cast HxMath.abs((end - start)) : Float) >= (cast 1.0 : Float)) : Bool)) { (visible = cast (1.0 : Dynamic)); }
     ((cast state : LottieShapeState__lottieDocument).paths = _Runtime.callProperty((cast state : LottieShapeState__lottieDocument).paths, 'map', cast ([function(path:Path, __unused124:Float, __unused125:Array<Path>):Path {
       var length:Float = cast _Runtime.UNDEFINED;
       var trimmed:Path = cast _Runtime.UNDEFINED;
       if ((cast ((cast visible : Float) >= (cast 1.0 : Float)) : Bool)) { return cast path; }
-      length = (cast getPathLength((cast path : Path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Float);
-      trimmed = (cast createPath((cast path : Path).winding) : Path);
+      length = (cast getPathLength((cast path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Float);
+      trimmed = (cast createPath((cast (cast path : Path).winding)) : Path);
       if ((cast ((cast ((cast length : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast visible : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast trimmed; }
-      dashPath((cast path : Path), (cast cast ([(visible * length), ((1.0 - visible) * length)] : Array<Dynamic>) : Array<Float>), (cast ((start + offset) * length) : Float), (cast trimmed : Path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
+      dashPath((cast path), (cast cast ([(visible * length), ((1.0 - visible) * length)] : Array<Dynamic>)), (cast ((start + offset) * length) : Float), (cast trimmed), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
       return cast trimmed;
+      return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>)));
   }
 
@@ -762,10 +763,10 @@ class LottieDocument {
     var path:Path = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
     var limit:Float = cast _Runtime.UNDEFINED;
-    path = (cast createPath(_Runtime.field(_Runtime, 'UNDEFINED')) : Path);
+    path = (cast createPath((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
     count = _Runtime.field(_Runtime.field(value, 'v'), 'length');
     if ((cast _Runtime.strictEquals(count, 0.0) : Bool)) { return cast path; }
-    appendPathMoveTo((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(_Runtime.field(value, 'v'), 0.0), 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(_Runtime.field(value, 'v'), 0.0), 1.0) : Float));
+    appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(_Runtime.field(value, 'v'), 0.0), 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(_Runtime.field(value, 'v'), 0.0), 1.0) : Float));
     limit = ((cast _Runtime.field(value, 'c') : Bool) ? (cast (count + 1.0) : Dynamic) : (cast count : Dynamic));
     {
       var index:Float = 1.0;
@@ -777,9 +778,9 @@ class LottieDocument {
         var outgoing:Array<Float> = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(value, 'o'), previous), function():Dynamic return cast cast ([0.0, 0.0] : Array<Dynamic>));
         var incoming:Array<Float> = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(value, 'i'), current), function():Dynamic return cast cast ([0.0, 0.0] : Array<Dynamic>));
         if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(outgoing, 0.0), 0.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(outgoing, 1.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(incoming, 0.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(incoming, 1.0), 0.0) : Bool)) : Bool)) {
-          appendPathLineTo((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(end, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(end, 1.0) : Float));
+          appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readArray(end, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(end, 1.0) : Float));
         } else {
-          appendPathCubicCurveTo((cast path : Path), (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(start, 0.0), flighthq._internal._StaticIndex.readArray(outgoing, 0.0)) : Float), (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(start, 1.0), flighthq._internal._StaticIndex.readArray(outgoing, 1.0)) : Float), (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(end, 0.0), flighthq._internal._StaticIndex.readArray(incoming, 0.0)) : Float), (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(end, 1.0), flighthq._internal._StaticIndex.readArray(incoming, 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(end, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(end, 1.0) : Float));
+          appendPathCubicCurveTo((cast path), (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(start, 0.0), flighthq._internal._StaticIndex.readArray(outgoing, 0.0)) : Float), (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(start, 1.0), flighthq._internal._StaticIndex.readArray(outgoing, 1.0)) : Float), (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(end, 0.0), flighthq._internal._StaticIndex.readArray(incoming, 0.0)) : Float), (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(end, 1.0), flighthq._internal._StaticIndex.readArray(incoming, 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(end, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(end, 1.0) : Float));
         }
         index++;
       }
@@ -789,27 +790,27 @@ class LottieDocument {
   }
 
   public static function renderLottieShapeState__lottieDocument(state:LottieShapeState__lottieDocument):Void {
-    clearShapeCommands((cast (cast state : LottieShapeState__lottieDocument).shape : Shape));
+    clearShapeCommands((cast (cast state : LottieShapeState__lottieDocument).shape));
     if ((cast _Runtime.strictEquals(_Runtime.field((cast state : LottieShapeState__lottieDocument).paths, 'length'), 0.0) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(_Runtime.field((cast state : LottieShapeState__lottieDocument).paints, 'length'), 0.0) : Bool)) {
-      LottieDocument.appendLottieShapePaths__lottieDocument(state, (cast null : Null<String>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Array<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
+      LottieDocument.appendLottieShapePaths__lottieDocument((cast state), (cast null), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
       return;
     }
     for (paint in _Runtime.iterable((cast state : LottieShapeState__lottieDocument).paints)) {
       if ((cast _Runtime.strictEquals((cast paint : { var kind:String; }).kind, 'fill') : Bool)) {
-        appendShapeBeginFill((cast (cast state : LottieShapeState__lottieDocument).shape : Shape), (cast (cast LottieDocument.lottieRgb__lottieDocument((cast (cast paint : { var color:Array<Float>; var kind:String; var opacity:Float; var winding:String; }).color : Array<Float>)) : Null<Float>) : Float), (cast (cast paint : { var color:Array<Float>; var kind:String; var opacity:Float; var winding:String; }).opacity : Float));
-        LottieDocument.appendLottieShapePaths__lottieDocument(state, (cast (cast paint : { var color:Array<Float>; var kind:String; var opacity:Float; var winding:String; }).winding : Null<String>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Array<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
-        appendShapeEndFill((cast (cast state : LottieShapeState__lottieDocument).shape : Shape));
+        appendShapeBeginFill((cast (cast state : LottieShapeState__lottieDocument).shape), (cast (cast LottieDocument.lottieRgb__lottieDocument((cast (cast paint : { var color:Array<Float>; var kind:String; var opacity:Float; var winding:String; }).color)) : Float) : Float), (cast (cast paint : { var color:Array<Float>; var kind:String; var opacity:Float; var winding:String; }).opacity : Float));
+        LottieDocument.appendLottieShapePaths__lottieDocument((cast state), (cast (cast paint : { var color:Array<Float>; var kind:String; var opacity:Float; var winding:String; }).winding), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
+        appendShapeEndFill((cast (cast state : LottieShapeState__lottieDocument).shape));
       } else { if ((cast _Runtime.strictEquals((cast paint : { var kind:String; }).kind, 'stroke') : Bool)) {
-        appendShapeLineStyle((cast (cast state : LottieShapeState__lottieDocument).shape : Shape), (cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).width : Float), (cast (cast LottieDocument.lottieRgb__lottieDocument((cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).color : Array<Float>)) : Null<Float>) : Float), (cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).opacity : Float), (cast false : Bool), 'normal', (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).caps, (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).joints, (cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).miterLimit : Float));
-        LottieDocument.appendLottieShapePaths__lottieDocument(state, (cast null : Null<String>), (cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).dash : Array<Float>), (cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).dashOffset : Float));
+        appendShapeLineStyle((cast (cast state : LottieShapeState__lottieDocument).shape), (cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).width : Float), (cast (cast LottieDocument.lottieRgb__lottieDocument((cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).color)) : Float) : Float), (cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).opacity : Float), (cast false : Bool), (cast 'normal'), (cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).caps), (cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).joints), (cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).miterLimit : Float));
+        LottieDocument.appendLottieShapePaths__lottieDocument((cast state), (cast null), (cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).dash), (cast (cast paint : { var caps:String; var color:Array<Float>; var dash:Array<Float>; var dashOffset:Float; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var width:Float; }).dashOffset : Float));
       } else { if ((cast _Runtime.strictEquals((cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).type, 'gf') : Bool)) {
-        LottieDocument.appendLottieGradientFill__lottieDocument((cast (cast state : LottieShapeState__lottieDocument).shape : Shape), (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }));
-        LottieDocument.appendLottieShapePaths__lottieDocument(state, (cast null : Null<String>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Array<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
-        appendShapeEndFill((cast (cast state : LottieShapeState__lottieDocument).shape : Shape));
+        LottieDocument.appendLottieGradientFill__lottieDocument((cast (cast state : LottieShapeState__lottieDocument).shape), (cast paint));
+        LottieDocument.appendLottieShapePaths__lottieDocument((cast state), (cast null), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
+        appendShapeEndFill((cast (cast state : LottieShapeState__lottieDocument).shape));
       } else {
-        LottieDocument.appendLottieGradientStroke__lottieDocument((cast (cast state : LottieShapeState__lottieDocument).shape : Shape), (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }));
-        LottieDocument.appendLottieShapePaths__lottieDocument(state, (cast null : Null<String>), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).dash : Array<Float>), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).dashOffset : Float));
+        LottieDocument.appendLottieGradientStroke__lottieDocument((cast (cast state : LottieShapeState__lottieDocument).shape), (cast paint));
+        LottieDocument.appendLottieShapePaths__lottieDocument((cast state), (cast null), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).dash), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).dashOffset : Float));
       } } }
     }
   }
@@ -819,24 +820,24 @@ class LottieDocument {
     for (path in _Runtime.iterable((cast state : LottieShapeState__lottieDocument).paths)) {
       var output:Path = path;
       if ((cast ((cast _Runtime.field(dash, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-        (output = cast ((cast createPath((cast path : Path).winding) : Path) : Dynamic));
-        dashPath((cast path : Path), (cast ((cast _Runtime.strictEquals(_Runtime.fmod(_Runtime.field(dash, 'length'), 2.0), 0.0) : Bool) ? (cast dash : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(dash), _Runtime.toArray(dash)]) : Dynamic)) : Array<Float>), (cast dashOffset : Float), (cast output : Path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
+        (output = cast ((cast createPath((cast (cast path : Path).winding)) : Path) : Dynamic));
+        dashPath((cast path), (cast ((cast _Runtime.strictEquals(_Runtime.fmod(_Runtime.field(dash, 'length'), 2.0), 0.0) : Bool) ? (cast dash : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(dash), _Runtime.toArray(dash)]) : Dynamic))), (cast dashOffset : Float), (cast output), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
       }
-      appendShapePath((cast (cast state : LottieShapeState__lottieDocument).shape : Shape), (cast _Runtime.slice((cast output : Path).commands, 0, null) : Array<Float>), (cast _Runtime.slice((cast output : Path).data, 0, null) : Array<Float>), _Runtime.coalesce(winding, function():Dynamic return cast (cast output : Path).winding));
+      appendShapePath((cast (cast state : LottieShapeState__lottieDocument).shape), (cast _Runtime.slice((cast output : Path).commands, 0, null)), (cast _Runtime.slice((cast output : Path).data, 0, null)), (cast _Runtime.coalesce(winding, function():Dynamic return cast (cast output : Path).winding)));
     }
   }
 
   public static function appendLottieGradientFill__lottieDocument(shape:Shape, paint:LottieGradientPaint__lottieDocument):Void {
     var gradient:{ var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; } = cast _Runtime.UNDEFINED;
-    gradient = (cast LottieDocument.parseLottieGradient__lottieDocument((cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).values : Array<Float>), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).count : Float), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).opacity : Float)) : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; });
-    appendShapeBeginGradientFill((cast shape : Shape), ((cast _Runtime.strictEquals((cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).shape, 2.0) : Bool) ? (cast 'radial' : Dynamic) : (cast 'linear' : Dynamic)), (cast (cast gradient : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; }).colors : Array<Float>), (cast (cast gradient : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; }).alphas : Array<Float>), (cast (cast gradient : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; }).ratios : Array<Float>), (cast LottieDocument.createLottieGradientMatrix__lottieDocument((cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).start : Array<Float>), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).end : Array<Float>)) : Null<Matrix>), _Runtime.field(_Runtime, 'UNDEFINED'), _Runtime.field(_Runtime, 'UNDEFINED'), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
+    gradient = (cast LottieDocument.parseLottieGradient__lottieDocument((cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).values), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).count : Float), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).opacity : Float)) : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; });
+    appendShapeBeginGradientFill((cast shape), (cast ((cast _Runtime.strictEquals((cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).shape, 2.0) : Bool) ? (cast 'radial' : Dynamic) : (cast 'linear' : Dynamic))), (cast (cast gradient : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; }).colors), (cast (cast gradient : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; }).alphas), (cast (cast gradient : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; }).ratios), (cast (cast LottieDocument.createLottieGradientMatrix__lottieDocument((cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).start), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).end)) : Matrix)), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
   }
 
   public static function appendLottieGradientStroke__lottieDocument(shape:Shape, paint:LottieGradientPaint__lottieDocument):Void {
     var gradient:{ var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; } = cast _Runtime.UNDEFINED;
-    gradient = (cast LottieDocument.parseLottieGradient__lottieDocument((cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).values : Array<Float>), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).count : Float), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).opacity : Float)) : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; });
-    appendShapeLineStyle((cast shape : Shape), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).width : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast false : Bool), 'normal', (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).caps, (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).joints, (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).miterLimit : Float));
-    appendShapeLineGradientStyle((cast shape : Shape), ((cast _Runtime.strictEquals((cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).shape, 2.0) : Bool) ? (cast 'radial' : Dynamic) : (cast 'linear' : Dynamic)), (cast (cast gradient : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; }).colors : Array<Float>), (cast (cast gradient : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; }).alphas : Array<Float>), (cast (cast gradient : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; }).ratios : Array<Float>), (cast LottieDocument.createLottieGradientMatrix__lottieDocument((cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).start : Array<Float>), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).end : Array<Float>)) : Null<Matrix>), _Runtime.field(_Runtime, 'UNDEFINED'), _Runtime.field(_Runtime, 'UNDEFINED'), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
+    gradient = (cast LottieDocument.parseLottieGradient__lottieDocument((cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).values), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).count : Float), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).opacity : Float)) : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; });
+    appendShapeLineStyle((cast shape), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).width : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast false : Bool), (cast 'normal'), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).caps), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).joints), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).miterLimit : Float));
+    appendShapeLineGradientStyle((cast shape), (cast ((cast _Runtime.strictEquals((cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).shape, 2.0) : Bool) ? (cast 'radial' : Dynamic) : (cast 'linear' : Dynamic))), (cast (cast gradient : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; }).colors), (cast (cast gradient : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; }).alphas), (cast (cast gradient : { var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; }).ratios), (cast (cast LottieDocument.createLottieGradientMatrix__lottieDocument((cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).start), (cast (cast paint : { var caps:String; var count:Float; var dash:Array<Float>; var dashOffset:Float; var end:Array<Float>; var joints:String; var kind:String; var miterLimit:Float; var opacity:Float; var shape:Float; var start:Array<Float>; var type:String; var values:Array<Float>; var width:Float; }).end)) : Matrix)), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
   }
 
   public static function applyLottieMasks__lottieDocument(target:Node2D, masks:Array<LottieMask>, context:LottieImportContext__lottieDocument):Void {
@@ -847,14 +848,14 @@ class LottieDocument {
     if ((cast _Runtime.strictEquals(_Runtime.field(active, 'length'), 0.0) : Bool)) { return; }
     first = flighthq._internal._StaticIndex.readArray(active, 0.0);
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(first, 'mode'), 'a') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(first, 'inv'), true) : Bool)) : Bool) || (cast ((cast _Runtime.field(active, 'length') : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) { return; }
-    initial = (cast LottieDocument.toLottieShapePath__lottieDocument((cast LottieDocument.initialLottieValue__lottieDocument(_Runtime.field(first, 'pt')) : flighthq._internal._Any)) : Null<LottieShapePath>);
+    initial = (cast LottieDocument.toLottieShapePath__lottieDocument((cast (cast LottieDocument.initialLottieValue__lottieDocument((cast _Runtime.field(first, 'pt'))) : Null<LottieShapePath>) : flighthq._internal._Any)) : Null<LottieShapePath>);
     if ((cast _Runtime.strictEquals(initial, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    ((cast target : { var clip:Null<ClipRegion>; }).clip = (cast createClipRegionFromPath((cast (cast LottieDocument.createLottieBezierPath__lottieDocument((cast initial : LottieShapePath)) : Path) : Path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Null<ClipRegion>));
-    if ((cast (cast LottieDocument.isAnimatedProperty__lottieDocument((cast _Runtime.field(first, 'pt') : LottieAnimatable<LottieShapePath>)) : Bool) : Bool)) {
-      var current:Array<Float> = (cast LottieDocument.flattenLottieShapePath__lottieDocument((cast initial : LottieShapePath)) : Array<Float>);
-      LottieDocument.appendLottieShapePathChannels__lottieDocument((cast (cast _Runtime.field(first, 'pt') : LottieAnimatedProperty<LottieShapePath>).k : Array<LottieKeyframe<LottieShapePath>>), (cast current : Array<Float>), (cast function():Void {
-        ((cast target : { var clip:Null<ClipRegion>; }).clip = (cast createClipRegionFromPath((cast (cast LottieDocument.createLottieBezierPath__lottieDocument((cast (cast LottieDocument.unflattenLottieShapePath__lottieDocument((cast initial : LottieShapePath), (cast current : Array<Float>)) : LottieShapePath) : LottieShapePath)) : Path) : Path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Null<ClipRegion>));
-      } : Void->Void), context);
+    ((cast target : { var clip:Null<ClipRegion>; }).clip = (cast createClipRegionFromPath((cast (cast LottieDocument.createLottieBezierPath__lottieDocument((cast initial)) : Path)), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : ClipRegion));
+    if ((cast (cast (cast LottieDocument.isAnimatedProperty__lottieDocument : LottieAnimatable<LottieShapePath>->Bool)((cast _Runtime.field(first, 'pt'))) : Bool) : Bool)) {
+      var current:Array<Float> = (cast LottieDocument.flattenLottieShapePath__lottieDocument((cast initial)) : Array<Float>);
+      LottieDocument.appendLottieShapePathChannels__lottieDocument((cast (cast _Runtime.field(first, 'pt') : LottieAnimatedProperty<LottieShapePath>).k), (cast current), (cast function():Void {
+        ((cast target : { var clip:Null<ClipRegion>; }).clip = (cast createClipRegionFromPath((cast (cast LottieDocument.createLottieBezierPath__lottieDocument((cast (cast LottieDocument.unflattenLottieShapePath__lottieDocument((cast initial), (cast current)) : LottieShapePath))) : Path)), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : ClipRegion));
+      }), (cast context));
     }
   }
 
@@ -864,14 +865,14 @@ class LottieDocument {
     var duration:Float = cast _Runtime.UNDEFINED;
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var values:Array<Float> = cast _Runtime.UNDEFINED;
-    start = (cast LottieDocument.frameToSeconds__lottieDocument((cast _Runtime.coalesce(_Runtime.field(layer, 'ip'), function():Dynamic return cast _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'ip')) : Float), context) : Float);
-    end = (cast LottieDocument.frameToSeconds__lottieDocument((cast _Runtime.coalesce(_Runtime.field(layer, 'op'), function():Dynamic return cast _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'op')) : Float), context) : Float);
+    start = (cast LottieDocument.frameToSeconds__lottieDocument((cast _Runtime.coalesce(_Runtime.field(layer, 'ip'), function():Dynamic return cast _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'ip')) : Float), (cast context)) : Float);
+    end = (cast LottieDocument.frameToSeconds__lottieDocument((cast _Runtime.coalesce(_Runtime.field(layer, 'op'), function():Dynamic return cast _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'op')) : Float), (cast context)) : Float);
     ((cast target : { var visible:Bool; }).visible = ((cast ((cast start : Float) <= (cast 0.0 : Float)) : Bool) && (cast ((cast end : Float) > (cast 0.0 : Float)) : Bool)));
     duration = HxMath.max(0.0, _Runtime.divideNumbers(_Runtime.subtractNumbers(_Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'op'), _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'ip')), _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'fr')));
     times = _Runtime.callProperty(cast ([0.0, (cast LottieDocument.clamp__lottieDocument((cast start : Float), (cast 0.0 : Float), (cast duration : Float)) : Float), (cast LottieDocument.clamp__lottieDocument((cast end : Float), (cast 0.0 : Float), (cast duration : Float)) : Float), duration] : Array<Dynamic>), 'filter', cast ([function(time:Float, index:Float, all:Array<Float>):Bool return ((cast _Runtime.strictEquals(index, 0.0) : Bool) || (cast ((cast time : Float) > (cast flighthq._internal._StaticIndex.readArray(all, (index - 1.0)) : Float)) : Bool))] : Array<Dynamic>));
     if ((cast ((cast _Runtime.field(times, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { return; }
     values = _Runtime.callProperty(times, 'map', cast ([function(time:Float, __unused128:Float, __unused129:Array<Float>):Float return ((cast ((cast ((cast time : Float) >= (cast start : Float)) : Bool) && (cast ((cast time : Float) < (cast end : Float)) : Bool)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic))] : Array<Dynamic>));
-    _Runtime.callProperty((cast context : LottieImportContext__lottieDocument).channels, 'push', cast ([(cast createAnimationChannel((cast createAnimationTrack((cast { interpolation: 'Step', times: times, values: values } : { var times:flighthq._internal._ArrayLike<Float>; var values:flighthq._internal._ArrayLike<Float>; @:optional var components:Null<Float>; @:optional var interpolation:Null<String>; @:optional var quaternion:Null<Bool>; @:optional var easing:Null<EasingFunction>; @:optional var segmentEasings:Null<Array<Null<EasingFunction>>>; })) : AnimationTrack), (cast { node: target, path: 'Visible' } : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+    _Runtime.callProperty((cast context : LottieImportContext__lottieDocument).channels, 'push', cast ([(cast createAnimationChannel((cast (cast createAnimationTrack((cast { interpolation: 'Step', times: times, values: values })) : AnimationTrack)), (cast { node: target, path: 'Visible' } : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
   }
 
   public static function applyLottieBlendMode__lottieDocument(target:Node2D, layer:LottieLayer, context:LottieImportContext__lottieDocument):Void {
@@ -892,10 +893,10 @@ class LottieDocument {
   public static function reportLottieExpression__lottieDocument(value:flighthq._internal._Any, context:LottieImportContext__lottieDocument):Void {
     if ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool)) { return; }
     if ((cast ((cast _Runtime.hasField(value, 'x') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast value : { var x:flighthq._internal._Any; }).x), 'string') : Bool)) : Bool)) {
-      LottieDocument.reportLottieSkip__lottieDocument(context, (cast 'lottie.unsupported-expression' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>>));
+      LottieDocument.reportLottieSkip__lottieDocument((cast context), (cast 'lottie.unsupported-expression' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     }
     for (child in _Runtime.iterable(flighthq._internal.DynamicObject.values(value))) {
-      if ((cast !_Runtime.strictEquals(child, value) : Bool)) { LottieDocument.reportLottieExpression__lottieDocument((cast child : flighthq._internal._Any), context); }
+      if ((cast !_Runtime.strictEquals(child, value) : Bool)) { LottieDocument.reportLottieExpression__lottieDocument((cast child : flighthq._internal._Any), (cast context)); }
     }
   }
 
@@ -937,8 +938,8 @@ class LottieDocument {
 
   public static function initialLottieValue__lottieDocument<T>(property:Null<LottieAnimatable<T>>):Null<T> {
     if ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.field(_Runtime, 'UNDEFINED'); }
-    if ((cast !(cast (cast LottieDocument.isAnimatedProperty__lottieDocument(property) : Bool) : Bool) : Bool)) { return cast _Runtime.field(property, 'k'); }
-    return cast _Runtime.coalesce(({ final __structural16 = flighthq._internal._StaticIndex.readArray(_Runtime.field(property, 'k'), 0.0); __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : LottieKeyframe<T>).s; }), function():Dynamic return cast ({ final __structural17 = flighthq._internal._StaticIndex.readArray(_Runtime.field(property, 'k'), 0.0); __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : LottieKeyframe<T>).e; }));
+    if ((cast !(cast (cast LottieDocument.isAnimatedProperty__lottieDocument((cast property)) : Bool) : Bool) : Bool)) { return cast _Runtime.field(property, 'k'); }
+    return cast _Runtime.coalesce(({ final __structural23 = flighthq._internal._StaticIndex.readArray(_Runtime.field(property, 'k'), 0.0); __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : LottieKeyframe<T>).s; }), function():Dynamic return cast ({ final __structural24 = flighthq._internal._StaticIndex.readArray(_Runtime.field(property, 'k'), 0.0); __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : LottieKeyframe<T>).e; }));
     return cast null;
   }
 
@@ -973,7 +974,7 @@ class LottieDocument {
         var next:LottieKeyframe<T> = flighthq._internal._StaticIndex.readArray(keyframes, (index + 1.0));
         for (handle in _Runtime.iterable(cast ([_Runtime.field(current, 'o'), _Runtime.field(next, 'i')] : Array<Dynamic>))) {
           if ((cast _Runtime.strictEquals(handle, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-          if ((cast ((cast (cast LottieDocument.handleVaries__lottieDocument((cast (cast handle : LottieBezierHandle).x : flighthq._internal._Union2<Float, Array<Float>>), (cast components : Float)) : Bool) : Bool) || (cast (cast LottieDocument.handleVaries__lottieDocument((cast (cast handle : LottieBezierHandle).y : flighthq._internal._Union2<Float, Array<Float>>), (cast components : Float)) : Bool) : Bool)) : Bool)) { return cast true; }
+          if ((cast ((cast (cast LottieDocument.handleVaries__lottieDocument((cast (cast handle : LottieBezierHandle).x), (cast components : Float)) : Bool) : Bool) || (cast (cast LottieDocument.handleVaries__lottieDocument((cast (cast handle : LottieBezierHandle).y), (cast components : Float)) : Bool) : Bool)) : Bool)) { return cast true; }
         }
         index++;
       }
@@ -1027,9 +1028,9 @@ class LottieDocument {
     var ratios:Array<Float> = cast _Runtime.UNDEFINED;
     var opacityStops:Array<{ var alpha:Float; var offset:Float; }> = cast _Runtime.UNDEFINED;
     var alphas:Array<Float> = cast _Runtime.UNDEFINED;
-    colors = cast ([] : Array<Dynamic>);
-    ratios = cast ([] : Array<Dynamic>);
-    opacityStops = cast ([] : Array<Dynamic>);
+    colors = (cast cast ([] : Array<Dynamic>));
+    ratios = (cast cast ([] : Array<Dynamic>));
+    opacityStops = (cast cast ([] : Array<Dynamic>));
     {
       var index:Float = (count * 4.0);
       while ((cast ((cast (index + 1.0) : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
@@ -1038,15 +1039,15 @@ class LottieDocument {
       }
     }
     _Runtime.sortAndReturn(opacityStops, function(left:{ var alpha:Float; var offset:Float; }, right:{ var alpha:Float; var offset:Float; }) return ((cast left : { var alpha:Float; var offset:Float; }).offset - (cast right : { var alpha:Float; var offset:Float; }).offset));
-    alphas = cast ([] : Array<Dynamic>);
+    alphas = (cast cast ([] : Array<Dynamic>));
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast count : Float)) : Bool)) {
         var offset:Float = (index * 4.0);
         var ratio:Float = (cast LottieDocument.clamp__lottieDocument((cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, offset), function():Dynamic return cast 0.0) : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float);
         _Runtime.callProperty(ratios, 'push', cast ([HxMath.round((ratio * 255.0))] : Array<Dynamic>));
-        _Runtime.callProperty(colors, 'push', cast ([(cast LottieDocument.lottieRgb__lottieDocument((cast _Runtime.slice(values, (offset + 1.0), (offset + 4.0)) : Array<Float>)) : Float)] : Array<Dynamic>));
-        _Runtime.callProperty(alphas, 'push', cast ([(opacity * (cast LottieDocument.interpolateLottieGradientOpacity__lottieDocument((cast opacityStops : Array<{ var alpha:Float; var offset:Float; }>), (cast ratio : Float)) : Float))] : Array<Dynamic>));
+        _Runtime.callProperty(colors, 'push', cast ([(cast LottieDocument.lottieRgb__lottieDocument((cast _Runtime.slice(values, (offset + 1.0), (offset + 4.0)))) : Float)] : Array<Dynamic>));
+        _Runtime.callProperty(alphas, 'push', cast ([(opacity * (cast LottieDocument.interpolateLottieGradientOpacity__lottieDocument((cast opacityStops), (cast ratio : Float)) : Float))] : Array<Dynamic>));
         index++;
       }
     }
@@ -1116,16 +1117,16 @@ class LottieDocument {
   }
 
   public static function reportLottieSkip__lottieDocument(context:LottieImportContext__lottieDocument, kind:String, ?detail:flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>):Void {
-    reportImportDiagnostic((cast _Runtime.field(context, 'diagnostics') : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast kind : String), (cast 'lottieDocument' : String), (cast detail : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+    reportImportDiagnostic((cast _Runtime.field(context, 'diagnostics')), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast kind : String), (cast 'lottieDocument' : String), (cast detail));
   }
 
   public static function reportLottieDrop__lottieDocument(context:LottieImportContext__lottieDocument, kind:String, ?detail:flighthq._internal._Record<String, flighthq._internal._Union2<String, Float>>):Void {
-    reportImportDiagnostic((cast _Runtime.field(context, 'diagnostics') : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast kind : String), (cast 'lottieDocument' : String), (cast detail : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+    reportImportDiagnostic((cast _Runtime.field(context, 'diagnostics')), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast kind : String), (cast 'lottieDocument' : String), (cast detail));
   }
 
   public static final _sampleScratch__lottieDocument:Array<Float> = _Runtime.fill(_Runtime.createArray(256.0), 0.0, 0, null, 1);
 
-  public static final _holdEasing__lottieDocument:EasingFunction = function(__unused130:Float):Float return 0.0;
+  public static final _holdEasing__lottieDocument:EasingFunction = (cast function(__unused130:Float):Float return 0.0);
 
   public static final _lottieFixedBlendModes__lottieDocument:flighthq._internal._Map<Float, String> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [cast ([cast ([0.0, (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal] : Array<Dynamic>), cast ([1.0, (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Multiply] : Array<Dynamic>), cast ([2.0, (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Screen] : Array<Dynamic>), cast ([4.0, (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Darken] : Array<Dynamic>), cast ([5.0, (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Lighten] : Array<Dynamic>)] : Array<Dynamic>)]);
 

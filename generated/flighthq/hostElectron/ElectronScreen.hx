@@ -25,44 +25,48 @@ class ElectronScreen {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(displays, 'length') : Float)) : Bool)) {
           var display:ElectronDisplay = flighthq._internal._StaticIndex.readArray(displays, i);
-          flighthq._internal._StaticIndex.writeArray(out, i, (cast ElectronScreen.fillScreenInfo__electronScreen((cast (cast {  } : ScreenInfo) : ScreenInfo), (cast display : ElectronDisplay), (cast _Runtime.strictEquals((cast display : ElectronDisplay).id, primaryId) : Bool)) : ScreenInfo));
+          flighthq._internal._StaticIndex.writeArray(out, i, (cast ElectronScreen.fillScreenInfo__electronScreen((cast (cast {  } : ScreenInfo)), (cast display), (cast _Runtime.strictEquals((cast display : ElectronDisplay).id, primaryId) : Bool)) : ScreenInfo));
           i++;
         }
       }
       return cast out;
+      return cast _Runtime.UNDEFINED;
     }, getPrimaryScreen: function(out:ScreenInfo):ScreenInfo {
-      return cast (cast ElectronScreen.fillScreenInfo__electronScreen((cast out : ScreenInfo), (cast (cast screen : flighthq.types.ElectronApi.ElectronScreen).getPrimaryDisplay() : ElectronDisplay), (cast true : Bool)) : ScreenInfo);
+      return cast (cast ElectronScreen.fillScreenInfo__electronScreen((cast out), (cast (cast screen : flighthq.types.ElectronApi.ElectronScreen).getPrimaryDisplay()), (cast true : Bool)) : ScreenInfo);
+      return cast _Runtime.UNDEFINED;
     }, getCursorPosition: function(out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
       var point:{ var x:Float; var y:Float; } = cast _Runtime.UNDEFINED;
       point = (cast screen : flighthq.types.ElectronApi.ElectronScreen).getCursorScreenPoint();
       ((cast out : { var x:Float; var y:Float; }).x = (cast point : { var x:Float; var y:Float; }).x);
       ((cast out : { var x:Float; var y:Float; }).y = (cast point : { var x:Float; var y:Float; }).y);
       return cast out;
+      return cast _Runtime.UNDEFINED;
     }, subscribe: function(listener:ScreenChangeEvent->Void):Void->Void {
       var primaryId:Void->Float = cast _Runtime.UNDEFINED;
-      var makeHandler:ScreenChangeKind->Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
+      var makeHandler:ScreenChangeKind->(Array<flighthq._internal._Any>->Void) = cast _Runtime.UNDEFINED;
       var onAdded:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
       var onRemoved:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
       var onMetrics:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
-      primaryId = (cast function():Float return (cast (cast screen : flighthq.types.ElectronApi.ElectronScreen).getPrimaryDisplay() : ElectronDisplay).id : Void->Float);
+      primaryId = (cast function():Float return (cast (cast screen : flighthq.types.ElectronApi.ElectronScreen).getPrimaryDisplay() : ElectronDisplay).id);
       makeHandler = (cast function(kind:ScreenChangeKind):Array<flighthq._internal._Any>->Void return _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
         var display:Null<ElectronDisplay> = cast _Runtime.UNDEFINED;
         var event:ScreenChangeEvent = cast _Runtime.UNDEFINED;
         display = (cast flighthq._internal._StaticIndex.readArray(args, 1.0) : Null<ElectronDisplay>);
-        event = { kind: kind, screen: _Runtime.select(display, function():Dynamic return cast (cast ElectronScreen.fillScreenInfo__electronScreen((cast (cast {  } : ScreenInfo) : ScreenInfo), (cast display : ElectronDisplay), (cast _Runtime.strictEquals((cast display : ElectronDisplay).id, (cast primaryId() : Float)) : Bool)) : ScreenInfo), function():Dynamic return cast (cast {  } : ScreenInfo)), changedMetrics: ((cast _Runtime.strictEquals(kind, 'ScreenMetricsChanged') : Bool) ? (cast { bounds: true, workArea: true, scaleFactor: true, orientation: true } : Dynamic) : (cast null : Dynamic)) };
-        listener((cast event : ScreenChangeEvent));
-      }, 0) : ScreenChangeKind->Array<flighthq._internal._Any>->Void);
-      onAdded = (cast makeHandler((cast 'ScreenAdded' : ScreenChangeKind)) : Array<flighthq._internal._Any>->Void);
-      onRemoved = (cast makeHandler((cast 'ScreenRemoved' : ScreenChangeKind)) : Array<flighthq._internal._Any>->Void);
-      onMetrics = (cast makeHandler((cast 'ScreenMetricsChanged' : ScreenChangeKind)) : Array<flighthq._internal._Any>->Void);
-      (cast screen : flighthq.types.ElectronApi.ElectronScreen).on('display-added', onAdded);
-      (cast screen : flighthq.types.ElectronApi.ElectronScreen).on('display-removed', onRemoved);
-      (cast screen : flighthq.types.ElectronApi.ElectronScreen).on('display-metrics-changed', onMetrics);
+        event = (cast { kind: kind, screen: _Runtime.select(display, function():Dynamic return cast (cast ElectronScreen.fillScreenInfo__electronScreen((cast (cast {  } : ScreenInfo)), (cast display), (cast _Runtime.strictEquals((cast display : ElectronDisplay).id, (cast primaryId() : Float)) : Bool)) : ScreenInfo), function():Dynamic return cast (cast {  } : ScreenInfo)), changedMetrics: ((cast _Runtime.strictEquals(kind, 'ScreenMetricsChanged') : Bool) ? (cast { bounds: true, workArea: true, scaleFactor: true, orientation: true } : Dynamic) : (cast null : Dynamic)) });
+        listener((cast event));
+      }, 0));
+      onAdded = (cast makeHandler((cast 'ScreenAdded')) : Array<flighthq._internal._Any>->Void);
+      onRemoved = (cast makeHandler((cast 'ScreenRemoved')) : Array<flighthq._internal._Any>->Void);
+      onMetrics = (cast makeHandler((cast 'ScreenMetricsChanged')) : Array<flighthq._internal._Any>->Void);
+      (cast screen : flighthq.types.ElectronApi.ElectronScreen).on((cast 'display-added' : String), (cast onAdded));
+      (cast screen : flighthq.types.ElectronApi.ElectronScreen).on((cast 'display-removed' : String), (cast onRemoved));
+      (cast screen : flighthq.types.ElectronApi.ElectronScreen).on((cast 'display-metrics-changed' : String), (cast onMetrics));
       return cast function():Void {
-        (cast screen : flighthq.types.ElectronApi.ElectronScreen).removeListener('display-added', onAdded);
-        (cast screen : flighthq.types.ElectronApi.ElectronScreen).removeListener('display-removed', onRemoved);
-        (cast screen : flighthq.types.ElectronApi.ElectronScreen).removeListener('display-metrics-changed', onMetrics);
+        (cast screen : flighthq.types.ElectronApi.ElectronScreen).removeListener((cast 'display-added' : String), (cast onAdded));
+        (cast screen : flighthq.types.ElectronApi.ElectronScreen).removeListener((cast 'display-removed' : String), (cast onRemoved));
+        (cast screen : flighthq.types.ElectronApi.ElectronScreen).removeListener((cast 'display-metrics-changed' : String), (cast onMetrics));
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }

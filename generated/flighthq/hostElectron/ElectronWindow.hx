@@ -21,55 +21,56 @@ class ElectronWindow {
       var bw:ElectronBrowserWindow = cast _Runtime.UNDEFINED;
       var onUnmaximize:Void->Void = cast _Runtime.UNDEFINED;
       bw = _Runtime.construct((cast electron : ElectronApi).BrowserWindow, [{ title: options.title, x: options.x, y: options.y, width: options.width, height: options.height, resizable: options.resizable, alwaysOnTop: options.alwaysOnTop, fullscreen: options.fullscreen, show: options.visible, minWidth: options.minWidth, minHeight: options.minHeight, maxWidth: options.maxWidth, maxHeight: options.maxHeight, frame: options.frame, transparent: options.transparent }]);
-      ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).set(win, bw));
-      ((cast ElectronWindow._windowsById__electronWindow : flighthq._internal._Map<Float, ApplicationWindow>).set((cast bw : ElectronBrowserWindow).id, win));
-      (cast bw : ElectronBrowserWindow).on('move', function():Void {
+      ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).set(win, (cast bw)));
+      ((cast ElectronWindow._windowsById__electronWindow : flighthq._internal._Map<Float, ApplicationWindow>).set((cast bw : ElectronBrowserWindow).id, (cast win)));
+      (cast bw : ElectronBrowserWindow).on((cast 'move' : String), (cast function(__unused0:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
         var bounds:ElectronRectangle = cast _Runtime.UNDEFINED;
         bounds = (cast bw : ElectronBrowserWindow).getBounds();
         (win.x = cast ((cast bounds : ElectronRectangle).x : Dynamic));
         (win.y = cast ((cast bounds : ElectronRectangle).y : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMove]]), 1);
-      });
-      (cast bw : ElectronBrowserWindow).on('resize', function():Void {
+      }, cast ([] : Array<Dynamic>)); }));
+      (cast bw : ElectronBrowserWindow).on((cast 'resize' : String), (cast function(__unused1:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
         var bounds:ElectronRectangle = cast _Runtime.UNDEFINED;
         bounds = (cast bw : ElectronBrowserWindow).getBounds();
         (win.width = cast ((cast bounds : ElectronRectangle).width : Dynamic));
         (win.height = cast ((cast bounds : ElectronRectangle).height : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onResize]]), 1);
-      });
-      (cast bw : ElectronBrowserWindow).on('minimize', function():Void {
+      }, cast ([] : Array<Dynamic>)); }));
+      (cast bw : ElectronBrowserWindow).on((cast 'minimize' : String), (cast function(__unused2:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
         (win.minimized = cast (true : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMinimize]]), 1);
-      });
-      (cast bw : ElectronBrowserWindow).on('maximize', function():Void {
+      }, cast ([] : Array<Dynamic>)); }));
+      (cast bw : ElectronBrowserWindow).on((cast 'maximize' : String), (cast function(__unused3:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
         (win.maximized = cast (true : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMaximize]]), 1);
-      });
+      }, cast ([] : Array<Dynamic>)); }));
       onUnmaximize = (cast function():Void {
         (win.minimized = cast (false : Dynamic));
         (win.maximized = cast (false : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onRestore]]), 1);
-      } : Void->Void);
-      (cast bw : ElectronBrowserWindow).on('unmaximize', onUnmaximize);
-      (cast bw : ElectronBrowserWindow).on('restore', onUnmaximize);
-      (cast bw : ElectronBrowserWindow).on('enter-full-screen', function():Void {
+      });
+      (cast bw : ElectronBrowserWindow).on((cast 'unmaximize' : String), (cast function(__unused4:Array<flighthq._internal._Any>):Void { onUnmaximize(); }));
+      (cast bw : ElectronBrowserWindow).on((cast 'restore' : String), (cast function(__unused5:Array<flighthq._internal._Any>):Void { onUnmaximize(); }));
+      (cast bw : ElectronBrowserWindow).on((cast 'enter-full-screen' : String), (cast function(__unused6:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
         (win.fullscreen = cast (true : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFullscreenChanged]]), 1);
-      });
-      (cast bw : ElectronBrowserWindow).on('leave-full-screen', function():Void {
+      }, cast ([] : Array<Dynamic>)); }));
+      (cast bw : ElectronBrowserWindow).on((cast 'leave-full-screen' : String), (cast function(__unused7:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
         (win.fullscreen = cast (false : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFullscreenChanged]]), 1);
-      });
-      (cast bw : ElectronBrowserWindow).on('focus', function():Void {
+      }, cast ([] : Array<Dynamic>)); }));
+      (cast bw : ElectronBrowserWindow).on((cast 'focus' : String), (cast function(__unused8:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
         (win.focused = cast (true : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFocusIn]]), 1);
-      });
-      (cast bw : ElectronBrowserWindow).on('blur', function():Void {
+      }, cast ([] : Array<Dynamic>)); }));
+      (cast bw : ElectronBrowserWindow).on((cast 'blur' : String), (cast function(__unused9:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
         (win.focused = cast (false : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFocusOut]]), 1);
-      });
-      (cast bw : ElectronBrowserWindow).on('close', function():Void return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onClose]]), 1));
+      }, cast ([] : Array<Dynamic>)); }));
+      (cast bw : ElectronBrowserWindow).on((cast 'close' : String), (cast function(__unused10:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onClose]]), 1); }, cast ([] : Array<Dynamic>)); }));
       return cast true;
+      return cast _Runtime.UNDEFINED;
     }, close: function(win:ApplicationWindow):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
@@ -85,7 +86,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setTitle(title);
+        (cast bw : ElectronBrowserWindow).setTitle((cast title : String));
       } catch (__error:Dynamic) {
       }
     }, setPosition: function(win:ApplicationWindow, x:Float, y:Float):Void {
@@ -93,7 +94,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setPosition(x, y);
+        (cast bw : ElectronBrowserWindow).setPosition((cast x : Float), (cast y : Float));
       } catch (__error:Dynamic) {
       }
     }, setSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
@@ -101,7 +102,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setSize(width, height);
+        (cast bw : ElectronBrowserWindow).setSize((cast width : Float), (cast height : Float));
       } catch (__error:Dynamic) {
       }
     }, getBounds: function(win:ApplicationWindow, out:WindowBounds):WindowBounds {
@@ -127,6 +128,7 @@ class ElectronWindow {
         (out.height = cast (win.height : Dynamic));
       }
       return cast out;
+      return cast _Runtime.UNDEFINED;
     }, minimize: function(win:ApplicationWindow):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
@@ -188,7 +190,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setResizable(resizable);
+        (cast bw : ElectronBrowserWindow).setResizable((cast resizable : Bool));
       } catch (__error:Dynamic) {
       }
     }, setAlwaysOnTop: function(win:ApplicationWindow, alwaysOnTop:Bool):Void {
@@ -196,7 +198,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setAlwaysOnTop(alwaysOnTop);
+        (cast bw : ElectronBrowserWindow).setAlwaysOnTop((cast alwaysOnTop : Bool));
       } catch (__error:Dynamic) {
       }
     }, setMinimumSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
@@ -204,7 +206,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setMinimumSize(width, height);
+        (cast bw : ElectronBrowserWindow).setMinimumSize((cast width : Float), (cast height : Float));
       } catch (__error:Dynamic) {
       }
     }, setMaximumSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
@@ -212,7 +214,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setMaximumSize(width, height);
+        (cast bw : ElectronBrowserWindow).setMaximumSize((cast width : Float), (cast height : Float));
       } catch (__error:Dynamic) {
       }
     }, setFullscreen: function(win:ApplicationWindow, fullscreen:Bool):Void {
@@ -220,7 +222,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setFullScreen(fullscreen);
+        (cast bw : ElectronBrowserWindow).setFullScreen((cast fullscreen : Bool));
       } catch (__error:Dynamic) {
       }
     }, setIcon: function(win:ApplicationWindow, icon:String):Void {
@@ -228,7 +230,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setIcon(icon);
+        (cast bw : ElectronBrowserWindow).setIcon((cast icon));
       } catch (__error:Dynamic) {
       }
     }, setOpacity: function(win:ApplicationWindow, opacity:Float):Void {
@@ -236,7 +238,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setOpacity(opacity);
+        (cast bw : ElectronBrowserWindow).setOpacity((cast opacity : Float));
       } catch (__error:Dynamic) {
       }
     }, setSkipTaskbar: function(win:ApplicationWindow, skip:Bool):Void {
@@ -244,7 +246,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setSkipTaskbar(skip);
+        (cast bw : ElectronBrowserWindow).setSkipTaskbar((cast skip : Bool));
       } catch (__error:Dynamic) {
       }
     }, setMenuBarVisible: function(win:ApplicationWindow, visible:Bool):Void {
@@ -252,7 +254,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setMenuBarVisibility(visible);
+        (cast bw : ElectronBrowserWindow).setMenuBarVisibility((cast visible : Bool));
       } catch (__error:Dynamic) {
       }
     }, setParent: function(win:ApplicationWindow, parent:Null<ApplicationWindow>):Void {
@@ -262,7 +264,7 @@ class ElectronWindow {
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       parentBw = ((cast _Runtime.strictEquals(parent, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(parent)), function():Dynamic return cast null) : Dynamic));
       try {
-        (cast bw : ElectronBrowserWindow).setParentWindow(parentBw);
+        (cast bw : ElectronBrowserWindow).setParentWindow((cast parentBw));
       } catch (__error:Dynamic) {
       }
     }, setProgress: function(win:ApplicationWindow, progress:Float):Void {
@@ -270,7 +272,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setProgressBar(progress);
+        (cast bw : ElectronBrowserWindow).setProgressBar((cast progress : Float));
       } catch (__error:Dynamic) {
       }
     }, requestAttention: function(win:ApplicationWindow, attention:Bool):Void {
@@ -278,7 +280,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).flashFrame(attention);
+        (cast bw : ElectronBrowserWindow).flashFrame((cast attention : Bool));
       } catch (__error:Dynamic) {
       }
     }, setContentProtection: function(win:ApplicationWindow, enabled:Bool):Void {
@@ -286,7 +288,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setContentProtection(enabled);
+        (cast bw : ElectronBrowserWindow).setContentProtection((cast enabled : Bool));
       } catch (__error:Dynamic) {
       }
     }, flashWindowFrame: function(win:ApplicationWindow):Void {
@@ -294,7 +296,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).flashFrame(true);
+        (cast bw : ElectronBrowserWindow).flashFrame((cast true : Bool));
       } catch (__error:Dynamic) {
       }
     }, setHasShadow: function(win:ApplicationWindow, hasShadow:Bool):Void {
@@ -302,7 +304,7 @@ class ElectronWindow {
       bw = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get(win));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        (cast bw : ElectronBrowserWindow).setHasShadow(hasShadow);
+        (cast bw : ElectronBrowserWindow).setHasShadow((cast hasShadow : Bool));
       } catch (__error:Dynamic) {
       }
     } };
@@ -320,7 +322,7 @@ class ElectronWindow {
   }
 
   public static function getElectronWindowId(win:ApplicationWindow):Float {
-    return cast _Runtime.coalesce(_Runtime.optionalField(((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win : ApplicationWindow))), 'id'), function():Dynamic return cast -1.0);
+    return cast _Runtime.coalesce(({ final __structural0 = ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win : ApplicationWindow))); __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var id:Float; }).id; }), function():Dynamic return cast -1.0);
     return cast null;
   }
 

@@ -11,7 +11,7 @@ class BitmapDraw {
     var domImageData:flighthq._internal.dom.ImageData = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast _Runtime.field(source, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(source, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     domImageData = _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('globalThis'), 'ImageData'), [_Runtime.field(source, 'width'), _Runtime.field(source, 'height')]);
-    extractBitmapPixels((cast (cast domImageData : flighthq._internal.dom.ImageData).data : flighthq._internal._UInt8ClampedArray), (cast source : BitmapRegion));
+    extractBitmapPixels((cast (cast domImageData : flighthq._internal.dom.ImageData).data), (cast source));
     flighthq._internal.backend.Canvas2dBackend.call(flighthq._internal.backend.CanvasElementBackend.call(dest, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, x, y] : Array<Dynamic>));
   }
 }

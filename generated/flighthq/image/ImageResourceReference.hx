@@ -60,7 +60,7 @@ class ImageResourceReference {
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
           var image:Null<Image> = cast _Runtime.UNDEFINED;
           if ((cast _Runtime.strictEquals((cast ref : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded) : Bool)) {
-            return flighthq._internal._Async.flatMap((cast loadImageResourceFromBytes((cast (cast ref : flighthq.types.ImageResourceReference.EmbeddedImageResourceReference).bytes : flighthq._internal._UInt8Array), (cast _Runtime.coalesce((cast ref : flighthq.types.ImageResourceReference.EmbeddedImageResourceReference).mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) : Null<String>), (cast signal : Null<flighthq._internal.dom.AbortSignal>)) : flighthq._internal._Promise<Image>), function(__awaitValue0:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast loadImageResourceFromBytes((cast (cast ref : { var bytes:flighthq._internal._UInt8Array; }).bytes), (cast _Runtime.coalesce((cast ref : { var mimeType:Null<String>; }).mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))), (cast signal)) : flighthq._internal._Promise<Image>), function(__awaitValue0:Dynamic):Dynamic {
               image = __awaitValue0;
               var __flowBranch1:Dynamic;
               if ((cast _Runtime.strictEquals(image, null) : Bool)) {
@@ -78,7 +78,7 @@ class ImageResourceReference {
               });
             });
           } else {
-            return flighthq._internal._Async.flatMap((cast fetch((cast ref : ExternalImageResourceReference), (cast signal : flighthq._internal.dom.AbortSignal)) : flighthq._internal._Promise<Null<Image>>), function(__awaitValue2:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast fetch((cast ref), (cast signal)) : flighthq._internal._Promise<Null<Image>>), function(__awaitValue2:Dynamic):Dynamic {
               image = __awaitValue2;
               var __flowBranch3:Dynamic;
               if ((cast _Runtime.strictEquals(image, null) : Bool)) {
@@ -109,7 +109,7 @@ class ImageResourceReference {
               __flowBranch4 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
-              ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = (cast createImageResourceFailure((cast cause : flighthq._internal._Any)) : Null<ImageResourceFailure>));
+              ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = (cast createImageResourceFailure((cast cause : flighthq._internal._Any)) : ImageResourceFailure));
               ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
               return flighthq._internal._Async.flowReturn(null);
             });

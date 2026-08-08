@@ -11,25 +11,25 @@ import flighthq.types.StarlingSchema.StarlingSubTexture;
 class StarlingSerialize {
   public static function frameToSubTexture__starlingSerialize(frame:flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<SpritesheetData, String>, Float>):StarlingSubTexture {
     var st:StarlingSubTexture = cast _Runtime.UNDEFINED;
-    st = { height: frame.height, name: frame.name, width: frame.width, x: frame.x, y: frame.y };
-    if ((cast !_Runtime.strictEquals(frame.offsetX, 0.0) : Bool)) { (st.frameX = cast (-frame.offsetX : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(frame.offsetY, 0.0) : Bool)) { (st.frameY = cast (-frame.offsetY : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(frame.sourceWidth, frame.width) : Bool)) { (st.frameWidth = cast (frame.sourceWidth : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(frame.sourceHeight, frame.height) : Bool)) { (st.frameHeight = cast (frame.sourceHeight : Dynamic)); }
-    if ((cast ((cast !_Runtime.strictEquals(frame.pivotX, null) : Bool) && (cast ((cast frame.sourceWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      (st.pivotX = cast ((frame.pivotX * frame.sourceWidth) : Dynamic));
+    st = (cast { height: (cast frame : { var height:Float; }).height, name: (cast frame : { var name:String; }).name, width: (cast frame : { var width:Float; }).width, x: (cast frame : { var x:Float; }).x, y: (cast frame : { var y:Float; }).y });
+    if ((cast !_Runtime.strictEquals((cast frame : { var offsetX:Float; }).offsetX, 0.0) : Bool)) { (st.frameX = cast (-(cast frame : { var offsetX:Float; }).offsetX : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast frame : { var offsetY:Float; }).offsetY, 0.0) : Bool)) { (st.frameY = cast (-(cast frame : { var offsetY:Float; }).offsetY : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast frame : { var sourceWidth:Float; }).sourceWidth, (cast frame : { var width:Float; }).width) : Bool)) { (st.frameWidth = cast ((cast frame : { var sourceWidth:Float; }).sourceWidth : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast frame : { var sourceHeight:Float; }).sourceHeight, (cast frame : { var height:Float; }).height) : Bool)) { (st.frameHeight = cast ((cast frame : { var sourceHeight:Float; }).sourceHeight : Dynamic)); }
+    if ((cast ((cast !_Runtime.strictEquals((cast frame : { var pivotX:Null<Float>; }).pivotX, null) : Bool) && (cast ((cast (cast frame : { var sourceWidth:Float; }).sourceWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      (st.pivotX = cast (((cast frame : { var pivotX:Null<Float>; }).pivotX * (cast frame : { var sourceWidth:Float; }).sourceWidth) : Dynamic));
     }
-    if ((cast ((cast !_Runtime.strictEquals(frame.pivotY, null) : Bool) && (cast ((cast frame.sourceHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      (st.pivotY = cast ((frame.pivotY * frame.sourceHeight) : Dynamic));
+    if ((cast ((cast !_Runtime.strictEquals((cast frame : { var pivotY:Null<Float>; }).pivotY, null) : Bool) && (cast ((cast (cast frame : { var sourceHeight:Float; }).sourceHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      (st.pivotY = cast (((cast frame : { var pivotY:Null<Float>; }).pivotY * (cast frame : { var sourceHeight:Float; }).sourceHeight) : Dynamic));
     }
-    if ((cast frame.rotated : Bool)) { (st.rotated = cast (true : Dynamic)); }
+    if ((cast (cast frame : { var rotated:Bool; }).rotated : Bool)) { (st.rotated = cast (true : Dynamic)); }
     return cast st;
     return cast null;
   }
 
   public static function subTextureToAttr__starlingSerialize(st:StarlingSubTexture):String {
     var parts:Array<String> = cast _Runtime.UNDEFINED;
-    parts = cast (['name="' + Std.string(st.name) + '"', 'x="' + Std.string(st.x) + '"', 'y="' + Std.string(st.y) + '"'] : Array<Dynamic>);
+    parts = (cast cast (['name="' + Std.string(st.name) + '"', 'x="' + Std.string(st.x) + '"', 'y="' + Std.string(st.y) + '"'] : Array<Dynamic>));
     _Runtime.pushMany(parts, cast (['width="' + Std.string(st.width) + '"', 'height="' + Std.string(st.height) + '"'] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(st.frameX, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameX="' + Std.string(st.frameX) + '"'] : Array<Dynamic>)); }
     if ((cast !_Runtime.strictEquals(st.frameY, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(parts, 'push', cast (['frameY="' + Std.string(st.frameY) + '"'] : Array<Dynamic>)); }
@@ -44,19 +44,19 @@ class StarlingSerialize {
 
   public static function documentToXml__starlingSerialize(doc:StarlingDocument):String {
     var lines:Array<String> = cast _Runtime.UNDEFINED;
-    lines = cast (['<?xml version="1.0" encoding="UTF-8"?>', '<TextureAtlas imagePath="' + Std.string(doc.imagePath) + '">'] : Array<Dynamic>);
+    lines = (cast cast (['<?xml version="1.0" encoding="UTF-8"?>', '<TextureAtlas imagePath="' + Std.string(doc.imagePath) + '">'] : Array<Dynamic>));
     for (st in _Runtime.iterable(doc.subTextures)) {
-      _Runtime.callProperty(lines, 'push', cast (['	<SubTexture ' + Std.string((cast StarlingSerialize.subTextureToAttr__starlingSerialize((cast st : StarlingSubTexture)) : String)) + '/>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['	<SubTexture ' + Std.string((cast StarlingSerialize.subTextureToAttr__starlingSerialize((cast st)) : String)) + '/>'] : Array<Dynamic>));
     }
     _Runtime.callProperty(lines, 'push', cast (['</TextureAtlas>'] : Array<Dynamic>));
     return cast _Runtime.join(lines, '\n');
     return cast null;
   }
 
-  public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
+  public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:flighthq._internal._Partial<StarlingDocument>):String {
     var doc:StarlingDocument = cast _Runtime.UNDEFINED;
-    doc = { imagePath: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast _Runtime.optionalField(existing, 'imagePath')), function():Dynamic return cast ''), subTextures: _Runtime.callProperty(data.frames, 'map', cast ([StarlingSerialize.frameToSubTexture__starlingSerialize] : Array<Dynamic>)) };
-    return cast (cast StarlingSerialize.documentToXml__starlingSerialize((cast doc : StarlingDocument)) : String);
+    doc = (cast { imagePath: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast ({ final __structural2 = existing; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var imagePath:Null<String>; }).imagePath; })), function():Dynamic return cast ''), subTextures: _Runtime.callProperty(data.frames, 'map', cast ([StarlingSerialize.frameToSubTexture__starlingSerialize] : Array<Dynamic>)) });
+    return cast (cast StarlingSerialize.documentToXml__starlingSerialize((cast doc)) : String);
     return cast null;
   }
 }

@@ -47,7 +47,7 @@ class BitmapPixel {
     flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, (i + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
     flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, (i + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
     flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, (i + 3.0), (_Runtime.toInt32(color) & 255));
-    invalidateBitmap((cast out : Bitmap));
+    invalidateBitmap((cast out));
   }
 
   public static function setBitmapPixelRgb(out:Bitmap, x:Float, y:Float, color:Float):Void {
@@ -56,6 +56,6 @@ class BitmapPixel {
     flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, i, (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
     flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, (i + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
     flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, (i + 2.0), (_Runtime.toInt32(color) & 255));
-    invalidateBitmap((cast out : Bitmap));
+    invalidateBitmap((cast out));
   }
 }

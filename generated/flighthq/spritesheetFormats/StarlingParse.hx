@@ -23,7 +23,7 @@ class StarlingParse {
     var result:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
     var RE:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var m:Null<Dynamic> = cast _Runtime.UNDEFINED;
-    result = {  };
+    result = (cast {  });
     RE = _Runtime.regexp('(\\w+)\\s*=\\s*"([^"]*)"', 'g');
     while ((cast !_Runtime.strictEquals((m = cast (_Runtime.callProperty(RE, 'exec', cast ([attrs] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
       _Runtime.setIndex(result, _Runtime.getIndex(m, 1.0), _Runtime.getIndex(m, 2.0));
@@ -44,12 +44,12 @@ class StarlingParse {
     atlasMatch = _Runtime.callProperty(atlasRE, 'exec', cast ([xml] : Array<Dynamic>));
     atlasAttrs = _Runtime.select(atlasMatch, function():Dynamic return cast (cast StarlingParse.parseAttrs__starlingParse((cast _Runtime.getIndex(atlasMatch, 1.0) : String)) : flighthq._internal._Record<String, String>), function():Dynamic return cast {  });
     imagePath = _Runtime.coalesce(_Runtime.getIndex(atlasAttrs, 'imagePath'), function():Dynamic return cast '');
-    subTextures = cast ([] : Array<Dynamic>);
+    subTextures = (cast cast ([] : Array<Dynamic>));
     stRE = _Runtime.regexp('<SubTexture([^/]*)\\/?>', 'g');
     while ((cast !_Runtime.strictEquals((m = cast (_Runtime.callProperty(stRE, 'exec', cast ([xml] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
       var a:flighthq._internal._Record<String, String> = (cast StarlingParse.parseAttrs__starlingParse((cast _Runtime.getIndex(m, 1.0) : String)) : flighthq._internal._Record<String, String>);
       if ((cast !_Runtime.truthy(_Runtime.getIndex(a, 'name')) : Bool)) { continue; }
-      var st:StarlingSubTexture = { height: _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'height'), function():Dynamic return cast '0')] : Array<Dynamic>)), name: _Runtime.getIndex(a, 'name'), width: _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'width'), function():Dynamic return cast '0')] : Array<Dynamic>)), x: _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'x'), function():Dynamic return cast '0')] : Array<Dynamic>)), y: _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'y'), function():Dynamic return cast '0')] : Array<Dynamic>)) };
+      var st:StarlingSubTexture = (cast { height: _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'height'), function():Dynamic return cast '0')] : Array<Dynamic>)), name: _Runtime.getIndex(a, 'name'), width: _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'width'), function():Dynamic return cast '0')] : Array<Dynamic>)), x: _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'x'), function():Dynamic return cast '0')] : Array<Dynamic>)), y: _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.coalesce(_Runtime.getIndex(a, 'y'), function():Dynamic return cast '0')] : Array<Dynamic>)) });
       if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameX = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameX')] : Array<Dynamic>)) : Dynamic)); }
       if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameY = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameY')] : Array<Dynamic>)) : Dynamic)); }
       if ((cast !_Runtime.strictEquals(_Runtime.getIndex(a, 'frameWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (st.frameWidth = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(a, 'frameWidth')] : Array<Dynamic>)) : Dynamic)); }
@@ -68,7 +68,7 @@ class StarlingParse {
     var sourceHeight:Float = cast _Runtime.UNDEFINED;
     sourceWidth = _Runtime.coalesce(region.originalWidth, function():Dynamic return cast region.width);
     sourceHeight = _Runtime.coalesce(region.originalHeight, function():Dynamic return cast region.height);
-    return cast (cast createSpritesheetFrameData((cast { height: region.height, name: _Runtime.coalesce(region.name, function():Dynamic return cast ''), offsetX: region.sourceX, offsetY: region.sourceY, pivotX: ((cast ((cast !_Runtime.strictEquals(region.pivotX, null) : Bool) && (cast ((cast sourceWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (region.pivotX / sourceWidth) : Dynamic) : (cast null : Dynamic)), pivotY: ((cast ((cast !_Runtime.strictEquals(region.pivotY, null) : Bool) && (cast ((cast sourceHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (region.pivotY / sourceHeight) : Dynamic) : (cast null : Dynamic)), rotated: region.rotated, sourceHeight: sourceHeight, sourceWidth: sourceWidth, width: region.width, x: region.x, y: region.y } : Null<flighthq._internal._Any>)) : SpritesheetFrameData);
+    return cast (cast createSpritesheetFrameData((cast { height: region.height, name: _Runtime.coalesce(region.name, function():Dynamic return cast ''), offsetX: region.sourceX, offsetY: region.sourceY, pivotX: ((cast ((cast !_Runtime.strictEquals(region.pivotX, null) : Bool) && (cast ((cast sourceWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (region.pivotX / sourceWidth) : Dynamic) : (cast null : Dynamic)), pivotY: ((cast ((cast !_Runtime.strictEquals(region.pivotY, null) : Bool) && (cast ((cast sourceHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (region.pivotY / sourceHeight) : Dynamic) : (cast null : Dynamic)), rotated: region.rotated, sourceHeight: sourceHeight, sourceWidth: sourceWidth, width: region.width, x: region.x, y: region.y })) : SpritesheetFrameData);
     return cast null;
   }
 
@@ -85,15 +85,15 @@ class StarlingParse {
       var numStr:String = _Runtime.getIndex(__destructure0, 2.0);
       var index:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([numStr, 10.0] : Array<Dynamic>));
       var bucket:Null<Array<{ var name:String; var index:Float; }>> = ((cast groups : flighthq._internal._Map<String, Array<{ var name:String; var index:Float; }>>).get(base));
-      if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { ((cast groups : flighthq._internal._Map<String, Array<{ var name:String; var index:Float; }>>).set(base, cast ([{ index: index, name: name }] : Array<Dynamic>))); }
+      if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { ((cast groups : flighthq._internal._Map<String, Array<{ var name:String; var index:Float; }>>).set(base, (cast cast ([{ index: index, name: name }] : Array<Dynamic>)))); }
     }
-    animations = cast ([] : Array<Dynamic>);
+    animations = (cast cast ([] : Array<Dynamic>));
     for (__iteration1 in _Runtime.iterable(groups)) {
       var base:String = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
       var entries:Array<{ var name:String; var index:Float; }> = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
       if ((cast ((cast _Runtime.field(entries, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
       _Runtime.sortAndReturn(entries, function(a:{ var name:String; var index:Float; }, b:{ var name:String; var index:Float; }) return ((cast a : { var name:String; var index:Float; }).index - (cast b : { var name:String; var index:Float; }).index));
-      _Runtime.callProperty(animations, 'push', cast ([(cast createSpritesheetAnimationData((cast { frameDuration: frameDuration, frameNames: _Runtime.callProperty(entries, 'map', cast ([function(e:{ var name:String; var index:Float; }, __unused2:Float, __unused3:Array<{ var name:String; var index:Float; }>):String return (cast e : { var name:String; var index:Float; }).name] : Array<Dynamic>)), name: base, repeatCount: -1.0 } : Null<flighthq._internal._Any>)) : SpritesheetAnimationData)] : Array<Dynamic>));
+      _Runtime.callProperty(animations, 'push', cast ([(cast createSpritesheetAnimationData((cast { frameDuration: frameDuration, frameNames: _Runtime.callProperty(entries, 'map', cast ([function(e:{ var name:String; var index:Float; }, __unused2:Float, __unused3:Array<{ var name:String; var index:Float; }>):String return (cast e : { var name:String; var index:Float; }).name] : Array<Dynamic>)), name: base, repeatCount: -1.0 })) : SpritesheetAnimationData)] : Array<Dynamic>));
     }
     return cast animations;
     return cast null;
@@ -105,25 +105,25 @@ class StarlingParse {
     var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
     frames = _Runtime.callProperty(regions, 'map', cast ([StarlingParse.frameFromRegion__starlingParse] : Array<Dynamic>));
     frameNames = _Runtime.callProperty(frames, 'map', cast ([function(f:SpritesheetFrameData, __unused4:Float, __unused5:Array<SpritesheetFrameData>):String return f.name] : Array<Dynamic>));
-    animations = (cast StarlingParse.inferAnimations__starlingParse((cast frameNames : Array<String>), (cast frameDuration : Float)) : Array<SpritesheetAnimationData>);
-    return cast (cast createSpritesheetData((cast { animations: animations, frames: frames, imageFile: doc.imagePath, imageHeight: 0.0, imageWidth: 0.0, scale: 1.0 } : Null<flighthq._internal._Any>)) : SpritesheetData);
+    animations = (cast StarlingParse.inferAnimations__starlingParse((cast frameNames), (cast frameDuration : Float)) : Array<SpritesheetAnimationData>);
+    return cast (cast createSpritesheetData((cast { animations: animations, frames: frames, imageFile: doc.imagePath, imageHeight: 0.0, imageWidth: 0.0, scale: 1.0 })) : SpritesheetData);
     return cast null;
   }
 
   public static function regionsFromXml__starlingParse(xml:String):Array<TextureAtlasRegion> {
-    return cast (cast parseTextureAtlasStarlingXml((cast xml : String), (cast createTextureAtlas((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : TextureAtlas), _Runtime.field(_Runtime, 'UNDEFINED')) : TextureAtlas).regions;
+    return cast (cast (cast parseTextureAtlasStarlingXml((cast xml : String), (cast (cast createTextureAtlas((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas)), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
     return cast null;
   }
 
   public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions):SpritesheetData {
-    return cast (cast StarlingParse.documentToData__starlingParse((cast (cast StarlingParse.parseStarlingXml__starlingParse((cast xml : String)) : StarlingDocument) : StarlingDocument), (cast (cast StarlingParse.regionsFromXml__starlingParse((cast xml : String)) : Array<TextureAtlasRegion>) : Array<TextureAtlasRegion>), (cast _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.frameDuration; }), function():Dynamic return cast 100.0) : Float)) : SpritesheetData);
+    return cast (cast StarlingParse.documentToData__starlingParse((cast (cast StarlingParse.parseStarlingXml__starlingParse((cast xml : String)) : StarlingDocument)), (cast (cast StarlingParse.regionsFromXml__starlingParse((cast xml : String)) : Array<TextureAtlasRegion>)), (cast _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.frameDuration; }), function():Dynamic return cast 100.0) : Float)) : SpritesheetData);
     return cast null;
   }
 
   public static function parseStarlingSpritesheetDocument(xml:String, ?options:StarlingParseOptions):StarlingParsed {
     var document:StarlingDocument = cast _Runtime.UNDEFINED;
     document = (cast StarlingParse.parseStarlingXml__starlingParse((cast xml : String)) : StarlingDocument);
-    return cast { data: (cast StarlingParse.documentToData__starlingParse((cast document : StarlingDocument), (cast (cast StarlingParse.regionsFromXml__starlingParse((cast xml : String)) : Array<TextureAtlasRegion>) : Array<TextureAtlasRegion>), (cast _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.frameDuration; }), function():Dynamic return cast 100.0) : Float)) : SpritesheetData), document: document };
+    return cast { data: (cast StarlingParse.documentToData__starlingParse((cast document), (cast (cast StarlingParse.regionsFromXml__starlingParse((cast xml : String)) : Array<TextureAtlasRegion>)), (cast _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.frameDuration; }), function():Dynamic return cast 100.0) : Float)) : SpritesheetData), document: document };
     return cast null;
   }
 }

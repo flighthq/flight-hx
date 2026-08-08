@@ -24,6 +24,7 @@ class TauriPlatform {
       (out.isTouch = cast (false : Dynamic));
       (out.runtime = cast ('tauri' : Dynamic));
       return cast out;
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }

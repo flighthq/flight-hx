@@ -1588,7 +1588,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain(
       'media:flighthq._internal._Union2<flighthq._internal.dom.HTMLImageElement, flighthq._internal.dom.HTMLVideoElement>',
     );
-    expect(output).toContain('message:flighthq._internal.dom.MessageEvent<Dynamic>');
+    expect(output).toContain('message:flighthq._internal.dom.MessageEvent<flighthq._internal._Any>');
     expect(output).toContain('local:HTMLFlightLocal');
     expect(output).toContain('width = image.width;');
     expect(output).toContain('(image.src = url)');
@@ -1952,6 +1952,32 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('flighthq._internal.DynamicObject.entries(target)');
     expect(output).not.toContain("_HostValueLut.get('Object')");
     expect(output).not.toContain('Reflect.fields');
+  });
+
+  it('keeps Object.keys results string-typed through keyof assertions', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/objectKeys.ts',
+      `
+        interface TextFormat { bold?: boolean; size?: number; }
+        export function formatKeys(format: TextFormat): (keyof TextFormat)[] {
+          const keys = Object.keys(format) as (keyof TextFormat)[];
+          return keys;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ObjectKeysFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('function formatKeys(format:TextFormat):Array<String>');
+    expect(output).toContain('var keys:Array<String> = cast _Runtime.UNDEFINED;');
+    expect(output).toContain('(cast flighthq._internal.DynamicObject.keys(format) : Array<String>)');
+    expect(output).not.toContain('Array<TextFormat>');
   });
 
   it('lowers portable callbacks and guarded platform constructors without capturing locals', () => {
@@ -2743,6 +2769,9 @@ describe('TypeScript lowering and Haxe emission', () => {
           bytes: new Uint8Array([255, 256]),
           clamped: new Uint8ClampedArray([255, 256]),
         };
+      }
+      export function createView(buffer: ArrayBuffer, offset: number, length: number) {
+        return new Uint8Array(buffer, offset, length);
       }`,
       ts.ScriptTarget.Latest,
       true,
@@ -2766,6 +2795,8 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('new flighthq._internal._UInt32Array(');
     expect(output).toContain('new flighthq._internal._UInt8Array(');
     expect(output).toContain('new flighthq._internal._UInt8ClampedArray(');
+    expect(output).toContain('new flighthq._internal._UInt8Array(buffer, Std.int(offset), Std.int(length))');
+    expect(output).not.toContain('new flighthq._internal._Float32Array(Std.int(4.0))');
     for (const name of [
       'Float32Array',
       'Float64Array',

@@ -9,7 +9,7 @@ class GlEffectGradientRamp {
   public static function createGlEffectGradientRampTexture(gl:flighthq._internal.dom.WebGL2RenderingContext, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal.dom.WebGLTexture {
     var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
-    data = (cast GlEffectGradientRamp.buildRampData__glEffectGradientRamp((cast colors : Array<Float>), (cast alphas : Array<Float>), (cast ratios : Array<Float>)) : flighthq._internal._UInt8ClampedArray);
+    data = (cast GlEffectGradientRamp.buildRampData__glEffectGradientRamp((cast colors), (cast alphas), (cast ratios)) : flighthq._internal._UInt8ClampedArray);
     texture = flighthq._internal.backend.WebGl2Backend.createTexture(gl);
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), texture);
     flighthq._internal.backend.WebGl2Backend.texImage2D(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA8', flighthq._internal.backend.WebGl2Backend.RGBA8), 256.0, 1.0, 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), data);

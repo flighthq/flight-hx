@@ -36,74 +36,74 @@ import flighthq.types._internal._TextureSourceKindValues.RenderTargetTextureSour
 
 class GlTextureResolver {
   public static function registerGlBitmapTextureResolver(state:GlRenderState):Void {
-    registerGlTextureResolver((cast state : GlRenderState), (cast BitmapTextureSourceKind : String), (cast GlTextureResolver.resolveGlBitmapTexture__glTextureResolver : Null<flighthq.types.GlTextureResolver>));
+    registerGlTextureResolver((cast state), (cast BitmapTextureSourceKind : String), (cast GlTextureResolver.resolveGlBitmapTexture__glTextureResolver));
   }
 
   public static function registerGlCompressedImageTextureResolver(state:GlRenderState):Void {
-    registerGlTextureResolver((cast state : GlRenderState), (cast CompressedImageTextureSourceKind : String), (cast GlTextureResolver.resolveGlCompressedImageTexture__glTextureResolver : Null<flighthq.types.GlTextureResolver>));
+    registerGlTextureResolver((cast state), (cast CompressedImageTextureSourceKind : String), (cast GlTextureResolver.resolveGlCompressedImageTexture__glTextureResolver));
   }
 
   public static function registerGlImageTextureResolver(state:GlRenderState):Void {
-    registerGlTextureResolver((cast state : GlRenderState), (cast ImageTextureSourceKind : String), (cast GlTextureResolver.resolveGlImageTexture__glTextureResolver : Null<flighthq.types.GlTextureResolver>));
+    registerGlTextureResolver((cast state), (cast ImageTextureSourceKind : String), (cast GlTextureResolver.resolveGlImageTexture__glTextureResolver));
   }
 
   public static function registerGlRenderTextureResolver(state:GlRenderState):Void {
-    registerGlTextureResolver((cast state : GlRenderState), (cast RenderTargetTextureSourceKind : String), (cast function(__unused0:GlRenderState, __unused1:TextureLike, __unused2:Bool, __unused3:TextureColorSpace):Null<flighthq._internal.dom.WebGLTexture> return GlTextureResolver.resolveGlRenderTexture__glTextureResolver(__unused0, __unused1) : Null<flighthq.types.GlTextureResolver>));
+    registerGlTextureResolver((cast state), (cast RenderTargetTextureSourceKind : String), (cast function(__unused0:GlRenderState, __unused1:TextureLike, __unused2:Bool, __unused3:TextureColorSpace):Null<flighthq._internal.dom.WebGLTexture> return GlTextureResolver.resolveGlRenderTexture__glTextureResolver(__unused0, __unused1)));
   }
 
   public static function registerGlTextureResolver(state:GlRenderState, sourceKind:TextureSourceKind, resolver:Null<flighthq.types.GlTextureResolver>):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var registry:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     registry = ((cast runtime : GlRenderStateRuntime).glTextureResolverRegistry ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
-    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).set(sourceKind, resolver)); }
+    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).set(sourceKind, (cast resolver))); }
   }
 
   public static function registerStandardGlTextureResolvers(state:GlRenderState):Void {
-    registerGlBitmapTextureResolver((cast state : GlRenderState));
-    registerGlImageTextureResolver((cast state : GlRenderState));
-    registerGlRenderTextureResolver((cast state : GlRenderState));
+    registerGlBitmapTextureResolver((cast state));
+    registerGlImageTextureResolver((cast state));
+    registerGlRenderTextureResolver((cast state));
   }
 
   public static function resolveGlTexture(state:GlRenderState, texture:TextureLike, premultiply:Bool = false, workingColorSpace:RenderTargetColorSpace = 'linear'):Null<flighthq._internal.dom.WebGLTexture> {
     var sourceKind:Null<String> = cast _Runtime.UNDEFINED;
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var resolver:Null<flighthq.types.GlTextureResolver> = cast _Runtime.UNDEFINED;
-    sourceKind = (cast getTextureSourceKind((cast texture : TextureLike)) : Null<String>);
+    sourceKind = (cast getTextureSourceKind((cast texture)) : Null<String>);
     if ((cast _Runtime.strictEquals(sourceKind, null) : Bool)) { return cast null; }
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     resolver = ({ final __collection0:Dynamic = (cast runtime : GlRenderStateRuntime).glTextureResolverRegistry; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, flighthq.types.GlTextureResolver>).get(sourceKind)); });
     if ((cast _Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callOptionalValue((cast runtime : GlRenderStateRuntime).registryMiss, cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;
     }
-    return cast (cast resolver((cast state : GlRenderState), (cast texture : TextureLike), (cast premultiply : Bool), (cast (cast getTextureSampleColorSpace((cast (cast texture : { var colorSpace:TextureColorSpace; }).colorSpace : TextureColorSpace), (cast workingColorSpace : RenderTargetColorSpace)) : TextureColorSpace) : TextureColorSpace)) : Null<flighthq._internal.dom.WebGLTexture>);
+    return cast (cast resolver((cast state), (cast texture), (cast premultiply : Bool), (cast (cast getTextureSampleColorSpace((cast (cast texture : { var colorSpace:TextureColorSpace; }).colorSpace), (cast workingColorSpace)) : TextureColorSpace))) : Null<flighthq._internal.dom.WebGLTexture>);
     return cast null;
   }
 
   public static function resolveGlBitmapTexture__glTextureResolver(state:GlRenderState, texture:TextureLike, premultiply:Bool, colorSpace:TextureColorSpace):Null<flighthq._internal.dom.WebGLTexture> {
     var bitmap:Null<Bitmap> = cast _Runtime.UNDEFINED;
-    bitmap = (cast (cast getTextureSource((cast texture : TextureLike)) : Null<Bitmap>) : Null<Bitmap>);
-    return cast ((cast _Runtime.strictEquals(bitmap, null) : Bool) ? (cast null : Dynamic) : (cast (cast bindGlBitmapTexture((cast state : GlRenderState), (cast bitmap : Bitmap), (cast texture : { var sampler:Sampler; }).sampler, (cast null : Null<Bool>), (cast premultiply : Bool), (cast colorSpace : TextureColorSpace)) : Null<flighthq._internal.dom.WebGLTexture>) : Dynamic));
+    bitmap = (cast getTextureSource((cast texture)) : Null<Bitmap>);
+    return cast ((cast _Runtime.strictEquals(bitmap, null) : Bool) ? (cast null : Dynamic) : (cast (cast bindGlBitmapTexture((cast state), (cast bitmap), (cast (cast texture : { var sampler:Sampler; }).sampler), (cast null), (cast premultiply : Bool), (cast colorSpace)) : flighthq._internal.dom.WebGLTexture) : Dynamic));
     return cast null;
   }
 
   public static function resolveGlCompressedImageTexture__glTextureResolver(state:GlRenderState, texture:TextureLike, _premultiply:Bool, colorSpace:TextureColorSpace):Null<flighthq._internal.dom.WebGLTexture> {
     var image:Null<CompressedImage> = cast _Runtime.UNDEFINED;
-    image = (cast (cast getTextureSource((cast texture : TextureLike)) : Null<CompressedImage>) : Null<CompressedImage>);
-    return cast ((cast _Runtime.strictEquals(image, null) : Bool) ? (cast null : Dynamic) : (cast (cast bindGlCompressedImageTexture((cast state : GlRenderState), (cast image : CompressedImage), (cast texture : { var sampler:Sampler; }).sampler, (cast null : Null<Bool>), (cast colorSpace : TextureColorSpace)) : Null<flighthq._internal.dom.WebGLTexture>) : Dynamic));
+    image = (cast getTextureSource((cast texture)) : Null<CompressedImage>);
+    return cast ((cast _Runtime.strictEquals(image, null) : Bool) ? (cast null : Dynamic) : (cast (cast bindGlCompressedImageTexture((cast state), (cast image), (cast (cast texture : { var sampler:Sampler; }).sampler), (cast null), (cast colorSpace)) : flighthq._internal.dom.WebGLTexture) : Dynamic));
     return cast null;
   }
 
   public static function resolveGlImageTexture__glTextureResolver(state:GlRenderState, texture:TextureLike, premultiply:Bool, colorSpace:TextureColorSpace):Null<flighthq._internal.dom.WebGLTexture> {
     var image:Null<Image> = cast _Runtime.UNDEFINED;
-    image = (cast (cast getTextureSource((cast texture : TextureLike)) : Null<Image>) : Null<Image>);
-    return cast ((cast _Runtime.strictEquals(image, null) : Bool) ? (cast null : Dynamic) : (cast (cast bindGlImageResourceTexture((cast state : GlRenderState), (cast image : Image), (cast texture : { var sampler:Sampler; }).sampler, (cast null : Null<Bool>), (cast premultiply : Bool), (cast colorSpace : TextureColorSpace)) : Null<flighthq._internal.dom.WebGLTexture>) : Dynamic));
+    image = (cast getTextureSource((cast texture)) : Null<Image>);
+    return cast ((cast _Runtime.strictEquals(image, null) : Bool) ? (cast null : Dynamic) : (cast (cast bindGlImageResourceTexture((cast state), (cast image), (cast (cast texture : { var sampler:Sampler; }).sampler), (cast null), (cast premultiply : Bool), (cast colorSpace)) : flighthq._internal.dom.WebGLTexture) : Dynamic));
     return cast null;
   }
 
   public static function resolveGlRenderTexture__glTextureResolver(state:GlRenderState, texture:TextureLike):Null<flighthq._internal.dom.WebGLTexture> {
-    return cast (cast bindGlRenderTexture((cast state : GlRenderState), (cast (cast texture : RenderTexture) : RenderTexture), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>);
+    return cast (cast bindGlRenderTexture((cast state), (cast (cast texture : RenderTexture)), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<flighthq._internal.dom.WebGLTexture>);
     return cast null;
   }
 }

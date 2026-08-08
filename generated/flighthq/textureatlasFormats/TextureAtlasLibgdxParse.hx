@@ -88,7 +88,7 @@ class TextureAtlasLibgdxParse {
           }
           var name:String = ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string(regionName) + '_' + Std.string(index) + '' : Dynamic) : (cast regionName : Dynamic));
           var trimmed:Bool = ((cast ((cast ((cast origW : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast origH : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.orValue(!_Runtime.strictEquals(origW, atlasW), function():Dynamic return cast !_Runtime.strictEquals(origH, atlasH)) : Bool));
-          _Runtime.callProperty(atlas.regions, 'push', cast ([(cast createTextureAtlasRegion((cast { height: atlasH, id: id, name: name, originalHeight: ((cast trimmed : Bool) ? (cast origH : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast trimmed : Bool) ? (cast origW : Dynamic) : (cast null : Dynamic)), pivotX: null, pivotY: null, rotated: rotated, sourceX: offsetX, sourceY: offsetY, trimmed: trimmed, width: atlasW, x: atlasX, y: atlasY } : Null<flighthq._internal._Any>)) : TextureAtlasRegion)] : Array<Dynamic>));
+          _Runtime.callProperty(atlas.regions, 'push', cast ([(cast createTextureAtlasRegion((cast { height: atlasH, id: id, name: name, originalHeight: ((cast trimmed : Bool) ? (cast origH : Dynamic) : (cast null : Dynamic)), originalWidth: ((cast trimmed : Bool) ? (cast origW : Dynamic) : (cast null : Dynamic)), pivotX: null, pivotY: null, rotated: rotated, sourceX: offsetX, sourceY: offsetY, trimmed: trimmed, width: atlasW, x: atlasX, y: atlasY })) : TextureAtlasRegion)] : Array<Dynamic>));
           id++;
         } else {
           i++;

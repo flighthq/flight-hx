@@ -32,23 +32,23 @@ class GlGodRaysEffect {
     weight = _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4);
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.6);
     samples = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 64.0)));
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'atmospheric.godRays.' + Std.string(samples) + '' : String), (cast (cast GlGodRaysEffect.buildGodRaysFragment__glGodRaysEffect((cast samples : Float)) : String) : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'atmospheric.godRays.' + Std.string(samples) + '' : String), (cast (cast GlGodRaysEffect.buildGodRaysFragment__glGodRaysEffect((cast samples : Float)) : String) : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_lightPosition'), centerX, centerY);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_density'), density);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_decay'), decay);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_weight'), weight);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_exposure'), exposure);
-    });
+    }));
   }
 
-  public static final defaultGlGodRaysEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyGodRaysEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : GodRaysEffect) : GodRaysEffect));
-  };
+  public static final defaultGlGodRaysEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyGodRaysEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : GodRaysEffect)));
+  });
 
   public static function registerGlGodRaysEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'GodRaysEffect' : String), (cast defaultGlGodRaysEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'GodRaysEffect' : String), (cast defaultGlGodRaysEffectRunner));
   }
 
   public static function buildGodRaysFragment__glGodRaysEffect(samples:Float):String {

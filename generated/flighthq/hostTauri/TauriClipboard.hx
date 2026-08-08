@@ -4,6 +4,7 @@ package flighthq.hostTauri;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Clipboard.ClipboardBackend;
+import flighthq.types.Clipboard.ClipboardBookmark;
 import flighthq.types.TauriApi;
 import flighthq.types.TauriApi.TauriClipboardManager;
 
@@ -32,7 +33,7 @@ class TauriClipboard {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast clipboard : TauriClipboardManager).writeText(text), function(__awaitValue1:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast clipboard : TauriClipboardManager).writeText((cast text : String)), function(__awaitValue1:Dynamic):Dynamic {
               __awaitValue1;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -91,7 +92,7 @@ class TauriClipboard {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, readBookmark: function():flighthq._internal._Promise<flighthq._internal._Any> {
+    }, readBookmark: function():flighthq._internal._Promise<Null<ClipboardBookmark>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
@@ -111,11 +112,11 @@ class TauriClipboard {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, getFormats: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
+    }, getFormats: function():flighthq._internal._Promise<Array<String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
-    }, readItems: function():flighthq._internal._Promise<{  }> {
+    }, readItems: function():flighthq._internal._Promise<flighthq._internal._Record<String, String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve({  });
       }));
@@ -123,7 +124,7 @@ class TauriClipboard {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, readFiles: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
+    }, readFiles: function():flighthq._internal._Promise<Array<String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
@@ -151,10 +152,12 @@ class TauriClipboard {
       );
     }, getChangeCount: function():Float {
       return cast -1.0;
+      return cast _Runtime.UNDEFINED;
     }, subscribeClipboardChange: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }

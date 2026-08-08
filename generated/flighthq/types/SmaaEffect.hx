@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef SmaaEffect = { var kind:Kind; @:optional var threshold:Float; };
+typedef SmaaEffect = { var kind:String; @:optional var threshold:Float; };

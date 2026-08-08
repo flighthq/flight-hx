@@ -10,11 +10,11 @@ import flighthq.types.ShapeRasterizer;
 
 class GlShapeRasterizer {
   public static function getGlShapeRasterizer(state:GlRenderState):Null<ShapeRasterizer> {
-    return cast _Runtime.coalesce((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).shapeRasterizer, function():Dynamic return cast null);
+    return cast _Runtime.coalesce((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).shapeRasterizer, function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerGlShapeRasterizer(state:GlRenderState, rasterizer:Null<ShapeRasterizer>):Void {
-    ((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).shapeRasterizer = rasterizer);
+    ((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : { @:optional var shapeRasterizer:Null<ShapeRasterizer>; }).shapeRasterizer = rasterizer);
   }
 }

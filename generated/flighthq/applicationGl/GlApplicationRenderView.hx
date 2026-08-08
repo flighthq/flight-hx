@@ -12,6 +12,7 @@ import flighthq.renderGl.GlRenderState.invalidateGlRenderStateCache;
 import flighthq.renderGl.GlRenderTarget.createGlRenderTarget;
 import flighthq.renderGl.GlRenderTarget.destroyGlRenderTarget;
 import flighthq.renderGl.GlRenderTarget.resizeGlRenderTarget;
+import flighthq.types.ApplicationRenderView;
 import flighthq.types.ApplicationRenderView.ApplicationRenderViewTargetOptions;
 import flighthq.types.ApplicationRenderView.GlApplicationRenderView;
 import flighthq.types.ApplicationRenderView.GlApplicationRenderViewOptions;
@@ -19,6 +20,7 @@ import flighthq.types.ApplicationWindow;
 import flighthq.types.GlRenderOptions;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.Viewport;
 
 class GlApplicationRenderView {
@@ -31,30 +33,30 @@ class GlApplicationRenderView {
     var viewport:Viewport = cast _Runtime.UNDEFINED;
     width = HxMath.max(0.0, HxMath.round((window.width * window.devicePixelRatio)));
     height = HxMath.max(0.0, HxMath.round((window.height * window.devicePixelRatio)));
-    (cast GlApplicationRenderView.synchronizeGlCanvasBackingStore__glApplicationRenderView((cast canvas : flighthq._internal.dom.HTMLCanvasElement), (cast width : Float), (cast height : Float)) : Bool);
-    renderState = (cast createGlRenderState((cast canvas : flighthq._internal.dom.HTMLCanvasElement), _Runtime.mergeObjects([_Runtime.field(options, 'render'), { pixelRatio: window.devicePixelRatio }])) : GlRenderState);
-    renderTarget = (cast createGlRenderTarget((cast renderState : GlRenderState), _Runtime.mergeObjects([_Runtime.field(options, 'target'), { height: height }, { width: width }])) : GlRenderTarget);
-    viewport = (cast createViewport((cast { devicePixelRatio: window.devicePixelRatio, height: height, width: width } : Null<flighthq._internal._Any>)) : Viewport);
-    return cast (cast createApplicationRenderView((cast window : ApplicationWindow), (cast renderState : GlRenderState), (cast renderTarget : GlRenderTarget), viewport, GlApplicationRenderView.resizeGlApplicationRenderView__glApplicationRenderView) : flighthq.types.ApplicationRenderView.GlApplicationRenderView);
+    (cast GlApplicationRenderView.synchronizeGlCanvasBackingStore__glApplicationRenderView((cast canvas), (cast width : Float), (cast height : Float)) : Bool);
+    renderState = (cast createGlRenderState((cast canvas), (cast _Runtime.mergeObjects([_Runtime.field(options, 'render'), { pixelRatio: window.devicePixelRatio }]))) : GlRenderState);
+    renderTarget = (cast createGlRenderTarget((cast renderState), (cast _Runtime.mergeObjects([_Runtime.field(options, 'target'), { height: height }, { width: width }]))) : GlRenderTarget);
+    viewport = (cast createViewport((cast { devicePixelRatio: window.devicePixelRatio, height: height, width: width })) : Viewport);
+    return cast (cast createApplicationRenderView((cast window), (cast renderState), (cast renderTarget), (cast viewport), (cast GlApplicationRenderView.resizeGlApplicationRenderView__glApplicationRenderView)) : ApplicationRenderView<GlRenderState, GlRenderTarget>);
     return cast null;
   }
 
   public static function destroyGlApplicationRenderView(view:flighthq.types.ApplicationRenderView.GlApplicationRenderView):Void {
-    detachApplicationRenderView(view);
-    destroyGlRenderTarget((cast _Runtime.field(view, 'renderState') : GlRenderState), (cast _Runtime.field(view, 'renderTarget') : GlRenderTarget));
-    destroyGlRenderState((cast _Runtime.field(view, 'renderState') : GlRenderState));
+    detachApplicationRenderView((cast view));
+    destroyGlRenderTarget((cast _Runtime.field(view, 'renderState')), (cast _Runtime.field(view, 'renderTarget')));
+    destroyGlRenderState((cast _Runtime.field(view, 'renderState')));
   }
 
   public static function resizeGlApplicationRenderView__glApplicationRenderView(renderState:GlRenderState, renderTarget:GlRenderTarget, width:Float, height:Float):Void {
     var storageWidth:Float = cast _Runtime.UNDEFINED;
     var storageHeight:Float = cast _Runtime.UNDEFINED;
-    if ((cast (cast GlApplicationRenderView.synchronizeGlCanvasBackingStore__glApplicationRenderView((cast (cast renderState : GlRenderState).canvas : flighthq._internal.dom.HTMLCanvasElement), (cast width : Float), (cast height : Float)) : Bool) : Bool)) {
-      invalidateGlRenderStateCache((cast renderState : GlRenderState));
+    if ((cast (cast GlApplicationRenderView.synchronizeGlCanvasBackingStore__glApplicationRenderView((cast (cast renderState : GlRenderState).canvas), (cast width : Float), (cast height : Float)) : Bool) : Bool)) {
+      invalidateGlRenderStateCache((cast renderState));
     }
     storageWidth = HxMath.max(1.0, HxMath.ceil(width));
     storageHeight = HxMath.max(1.0, HxMath.ceil(height));
     if ((cast ((cast !_Runtime.strictEquals((cast renderTarget : GlRenderTarget).width, storageWidth) : Bool) || (cast !_Runtime.strictEquals((cast renderTarget : GlRenderTarget).height, storageHeight) : Bool)) : Bool)) {
-      resizeGlRenderTarget((cast renderState : GlRenderState), (cast renderTarget : GlRenderTarget), (cast width : Float), (cast height : Float));
+      resizeGlRenderTarget((cast renderState), (cast renderTarget), (cast width : Float), (cast height : Float));
     }
   }
 

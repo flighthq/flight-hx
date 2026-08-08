@@ -17,7 +17,7 @@ class BitmapFontJson {
     var record:Null<BitmapFontRecord> = cast _Runtime.UNDEFINED;
     record = (cast BitmapFontJson.parseBitmapFontJsonRecord__bitmapFontJson((cast text : String)) : Null<BitmapFontRecord>);
     if ((cast _Runtime.strictEquals(record, null) : Bool)) { return cast null; }
-    return cast (cast buildBitmapFontFromRecord((cast record : BitmapFontRecord), (cast options : Null<BitmapFontParseOptions>)) : Null<BitmapFont>);
+    return cast (cast buildBitmapFontFromRecord((cast record), (cast options)) : Null<BitmapFont>);
     return cast null;
   }
 
@@ -36,38 +36,38 @@ class BitmapFontJson {
       return cast null;
     }
     if ((cast !(cast (cast BitmapFontJson.isObject__bitmapFontJson((cast root : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast null; }
-    common = _Runtime.field(root, 'common');
+    common = (cast root : { var common:flighthq._internal._Any; }).common;
     if ((cast !(cast (cast BitmapFontJson.isObject__bitmapFontJson((cast common : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast null; }
-    lineHeight = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(common, 'lineHeight') : flighthq._internal._Any)) : Null<Float>);
-    base = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(common, 'base') : flighthq._internal._Any)) : Null<Float>);
+    lineHeight = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast common : { var lineHeight:flighthq._internal._Any; }).lineHeight : flighthq._internal._Any)) : Null<Float>);
+    base = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast common : { var base:flighthq._internal._Any; }).base : flighthq._internal._Any)) : Null<Float>);
     if ((cast ((cast _Runtime.strictEquals(lineHeight, null) : Bool) || (cast _Runtime.strictEquals(base, null) : Bool)) : Bool)) { return cast null; }
-    rawChars = _Runtime.field(root, 'chars');
+    rawChars = (cast root : { var chars:flighthq._internal._Any; }).chars;
     if ((cast !(cast _Runtime.isArray(rawChars) : Bool) : Bool)) { return cast null; }
-    chars = cast ([] : Array<Dynamic>);
+    chars = (cast cast ([] : Array<Dynamic>));
     for (raw in _Runtime.iterable(rawChars)) {
       var char:Null<BitmapFontCharRecord> = (cast BitmapFontJson.readJsonChar__bitmapFontJson((cast raw : flighthq._internal._Any)) : Null<BitmapFontCharRecord>);
       if ((cast !_Runtime.strictEquals(char, null) : Bool)) { _Runtime.callProperty(chars, 'push', cast ([char] : Array<Dynamic>)); }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(chars, 'length'), 0.0) : Bool)) { return cast null; }
-    pages = cast ([] : Array<Dynamic>);
-    if ((cast _Runtime.isArray(_Runtime.field(root, 'pages')) : Bool)) {
+    pages = (cast cast ([] : Array<Dynamic>));
+    if ((cast _Runtime.isArray((cast root : { var pages:flighthq._internal._Any; }).pages) : Bool)) {
       {
         var id:Float = 0.0;
-        while ((cast ((cast id : Float) < (cast _Runtime.field(_Runtime.field(root, 'pages'), 'length') : Float)) : Bool)) {
-          var file:flighthq._internal._Any = flighthq._internal._StaticIndex.readArray(_Runtime.field(root, 'pages'), id);
+        while ((cast ((cast id : Float) < (cast _Runtime.field((cast root : { var pages:flighthq._internal._Any; }).pages, 'length') : Float)) : Bool)) {
+          var file:flighthq._internal._Any = flighthq._internal._StaticIndex.readArray((cast root : { var pages:flighthq._internal._Any; }).pages, id);
           _Runtime.callProperty(pages, 'push', cast ([{ file: ((cast _Runtime.strictEquals(_Runtime.typeofValue(file), 'string') : Bool) ? (cast file : Dynamic) : (cast '' : Dynamic)), id: id }] : Array<Dynamic>));
           id++;
         }
       }
     }
-    kernings = cast ([] : Array<Dynamic>);
-    if ((cast _Runtime.isArray(_Runtime.field(root, 'kernings')) : Bool)) {
-      for (raw in _Runtime.iterable(_Runtime.field(root, 'kernings'))) {
+    kernings = (cast cast ([] : Array<Dynamic>));
+    if ((cast _Runtime.isArray((cast root : { var kernings:flighthq._internal._Any; }).kernings) : Bool)) {
+      for (raw in _Runtime.iterable((cast root : { var kernings:flighthq._internal._Any; }).kernings)) {
         var kerning:Null<BitmapFontKerningRecord> = (cast BitmapFontJson.readJsonKerning__bitmapFontJson((cast raw : flighthq._internal._Any)) : Null<BitmapFontKerningRecord>);
         if ((cast !_Runtime.strictEquals(kerning, null) : Bool)) { _Runtime.callProperty(kernings, 'push', cast ([kerning] : Array<Dynamic>)); }
       }
     }
-    return cast { base: base, chars: chars, encoding: (cast BitmapFontJson.readJsonEncoding__bitmapFontJson((cast _Runtime.field(root, 'distanceField') : flighthq._internal._Any)) : BitmapFontEncoding), kernings: kernings, lineHeight: lineHeight, pages: pages };
+    return cast { base: base, chars: chars, encoding: (cast BitmapFontJson.readJsonEncoding__bitmapFontJson((cast (cast root : { var distanceField:flighthq._internal._Any; }).distanceField : flighthq._internal._Any)) : BitmapFontEncoding), kernings: kernings, lineHeight: lineHeight, pages: pages };
     return cast null;
   }
 
@@ -86,24 +86,24 @@ class BitmapFontJson {
     var yoffset:Null<Float> = cast _Runtime.UNDEFINED;
     var xadvance:Null<Float> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast BitmapFontJson.isObject__bitmapFontJson((cast raw : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast null; }
-    id = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(raw, 'id') : flighthq._internal._Any)) : Null<Float>);
-    x = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(raw, 'x') : flighthq._internal._Any)) : Null<Float>);
-    y = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(raw, 'y') : flighthq._internal._Any)) : Null<Float>);
-    width = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(raw, 'width') : flighthq._internal._Any)) : Null<Float>);
-    height = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(raw, 'height') : flighthq._internal._Any)) : Null<Float>);
-    xoffset = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(raw, 'xoffset') : flighthq._internal._Any)) : Null<Float>);
-    yoffset = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(raw, 'yoffset') : flighthq._internal._Any)) : Null<Float>);
-    xadvance = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(raw, 'xadvance') : flighthq._internal._Any)) : Null<Float>);
+    id = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast raw : { var id:flighthq._internal._Any; }).id : flighthq._internal._Any)) : Null<Float>);
+    x = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast raw : { var x:flighthq._internal._Any; }).x : flighthq._internal._Any)) : Null<Float>);
+    y = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast raw : { var y:flighthq._internal._Any; }).y : flighthq._internal._Any)) : Null<Float>);
+    width = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast raw : { var width:flighthq._internal._Any; }).width : flighthq._internal._Any)) : Null<Float>);
+    height = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast raw : { var height:flighthq._internal._Any; }).height : flighthq._internal._Any)) : Null<Float>);
+    xoffset = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast raw : { var xoffset:flighthq._internal._Any; }).xoffset : flighthq._internal._Any)) : Null<Float>);
+    yoffset = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast raw : { var yoffset:flighthq._internal._Any; }).yoffset : flighthq._internal._Any)) : Null<Float>);
+    xadvance = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast raw : { var xadvance:flighthq._internal._Any; }).xadvance : flighthq._internal._Any)) : Null<Float>);
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(id, null) : Bool) || (cast _Runtime.strictEquals(x, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(y, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(width, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(height, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(xoffset, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(yoffset, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(xadvance, null) : Bool)) : Bool)) {
       return cast null;
     }
-    return cast { height: height, id: id, page: _Runtime.coalesce((cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(raw, 'page') : flighthq._internal._Any)) : Float), function():Dynamic return cast 0.0), width: width, x: x, xadvance: xadvance, xoffset: xoffset, y: y, yoffset: yoffset };
+    return cast { height: height, id: id, page: _Runtime.coalesce((cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast raw : { var page:flighthq._internal._Any; }).page : flighthq._internal._Any)) : Null<Float>), function():Dynamic return cast 0.0), width: width, x: x, xadvance: xadvance, xoffset: xoffset, y: y, yoffset: yoffset };
     return cast null;
   }
 
   public static function readJsonEncoding__bitmapFontJson(distanceField:flighthq._internal._Any):BitmapFontEncoding {
     if ((cast (cast BitmapFontJson.isObject__bitmapFontJson((cast distanceField : flighthq._internal._Any)) : Bool) : Bool)) {
-      var fieldType:flighthq._internal._Any = _Runtime.field(distanceField, 'fieldType');
+      var fieldType:flighthq._internal._Any = (cast distanceField : { var fieldType:flighthq._internal._Any; }).fieldType;
       if ((cast ((cast _Runtime.strictEquals(fieldType, 'msdf') : Bool) || (cast _Runtime.strictEquals(fieldType, 'sdf') : Bool)) : Bool)) { return cast fieldType; }
     }
     return cast 'raster';
@@ -115,9 +115,9 @@ class BitmapFontJson {
     var second:Null<Float> = cast _Runtime.UNDEFINED;
     var amount:Null<Float> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast BitmapFontJson.isObject__bitmapFontJson((cast raw : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast null; }
-    first = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(raw, 'first') : flighthq._internal._Any)) : Null<Float>);
-    second = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(raw, 'second') : flighthq._internal._Any)) : Null<Float>);
-    amount = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast _Runtime.field(raw, 'amount') : flighthq._internal._Any)) : Null<Float>);
+    first = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast raw : { var first:flighthq._internal._Any; }).first : flighthq._internal._Any)) : Null<Float>);
+    second = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast raw : { var second:flighthq._internal._Any; }).second : flighthq._internal._Any)) : Null<Float>);
+    amount = (cast BitmapFontJson.readJsonNumber__bitmapFontJson((cast (cast raw : { var amount:flighthq._internal._Any; }).amount : flighthq._internal._Any)) : Null<Float>);
     if ((cast ((cast ((cast _Runtime.strictEquals(first, null) : Bool) || (cast _Runtime.strictEquals(second, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(amount, null) : Bool)) : Bool)) { return cast null; }
     return cast { amount: amount, first: first, second: second };
     return cast null;

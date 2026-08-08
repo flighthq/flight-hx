@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef CameraMotionBlurEffect = { var kind:Kind; @:optional var intensity:Float; @:optional var samples:Float; };
+typedef CameraMotionBlurEffect = { var kind:String; @:optional var intensity:Float; @:optional var samples:Float; };

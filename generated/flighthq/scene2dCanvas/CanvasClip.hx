@@ -11,6 +11,7 @@ import flighthq.types.ClipRegion;
 import flighthq.types.Matrix;
 import flighthq.types.Node2D;
 import flighthq.types.Rectangle;
+import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
@@ -21,11 +22,11 @@ class CanvasClip {
     ((cast state : CanvasRenderState).displayObjectClipHooks = CanvasClip.canvasClipHooks__canvasClip);
   }
 
-  public static final canvasClipHooks__canvasClip:Scene2DClipHooks = { finalize: function(state:RenderState):Void {
+  public static final canvasClipHooks__canvasClip:Scene2DClipHooks = (cast { finalize: function(state:RenderState):Void {
     var s:CanvasRenderState = cast _Runtime.UNDEFINED;
     s = (cast state : CanvasRenderState);
     while ((cast ((cast (cast s : CanvasRenderState).currentClipDepth : Float) > (cast 0.0 : Float)) : Bool)) {
-      popCanvasClipRectangle((cast s : CanvasRenderState));
+      popCanvasClipRectangle((cast s));
       (cast s : CanvasRenderState).currentClipDepth--;
     }
   }, popClip: function(state:RenderState, data:RenderProxy2D, source:Node2D):Void {
@@ -34,7 +35,7 @@ class CanvasClip {
     s = (cast state : CanvasRenderState);
     target = _Runtime.subtractNumbers((cast data : RenderProxy2D).clipDepth, ((cast !_Runtime.looseEquals((cast source : { var clip:Null<ClipRegion>; }).clip, null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     while ((cast ((cast (cast s : CanvasRenderState).currentClipDepth : Float) > (cast target : Float)) : Bool)) {
-      popCanvasClipRectangle((cast s : CanvasRenderState));
+      popCanvasClipRectangle((cast s));
       (cast s : CanvasRenderState).currentClipDepth--;
     }
   }, pushClip: function(state:RenderState, data:RenderProxy2D, source:Node2D):Void {
@@ -44,10 +45,10 @@ class CanvasClip {
     clip = (cast source : { var clip:Null<ClipRegion>; }).clip;
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast clip : ClipRegion).contours, null) : Bool)) {
-      pushCanvasClipRectangle((cast s : CanvasRenderState), (cast clip : ClipRegion).rect, (cast data : RenderProxy2D).transform2D);
+      pushCanvasClipRectangle((cast s), (cast (cast clip : ClipRegion).rect), (cast (cast data : RenderProxy2D).transform2D));
     } else {
-      pushCanvasClipContours((cast s : CanvasRenderState), (cast (cast clip : ClipRegion).contours : Array<Array<Float>>), (cast clip : ClipRegion).winding, (cast data : RenderProxy2D).transform2D);
+      pushCanvasClipContours((cast s), (cast (cast clip : ClipRegion).contours), (cast (cast clip : ClipRegion).winding), (cast (cast data : RenderProxy2D).transform2D));
     }
     (cast s : CanvasRenderState).currentClipDepth++;
-  } };
+  } });
 }

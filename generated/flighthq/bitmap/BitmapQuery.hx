@@ -16,8 +16,8 @@ class BitmapQuery {
     var minY:Float = cast _Runtime.UNDEFINED;
     var maxX:Float = cast _Runtime.UNDEFINED;
     var maxY:Float = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(source, 'bitmap').data;
-    bitmapWidth = _Runtime.field(source, 'bitmap').width;
+    data = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    bitmapWidth = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
     maskedColor = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 0)) & _Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(mask), 0)));
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
@@ -27,7 +27,7 @@ class BitmapQuery {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
         var y:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
-        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast _Runtime.field(source, 'bitmap').height : Float)) : Bool)) : Bool)) { py++; continue; }
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {

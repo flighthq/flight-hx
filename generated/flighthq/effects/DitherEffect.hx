@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.DitherEffect;
 
 class DitherEffect {
-  public static function createDitherEffect(?options:Dynamic):flighthq.types.DitherEffect {
+  public static function createDitherEffect(?options:flighthq._internal._Omit<flighthq.types.DitherEffect, String>):flighthq.types.DitherEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'DitherEffect' }, options]);
     return cast null;

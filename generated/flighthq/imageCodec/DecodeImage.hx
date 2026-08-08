@@ -12,9 +12,9 @@ class DecodeImage {
   public static function decodeImage(bytes:flighthq._internal._UInt8Array, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var decoder:Null<ImageDecoder> = cast _Runtime.UNDEFINED;
-      decoder = (cast DecodeImage.resolveImageDecoder__decodeImage((cast bytes : flighthq._internal._UInt8Array), (cast mimeType : Null<String>)) : Null<ImageDecoder>);
+      decoder = (cast DecodeImage.resolveImageDecoder__decodeImage((cast bytes), (cast mimeType)) : Null<ImageDecoder>);
       if ((cast _Runtime.strictEquals(decoder, null) : Bool)) { return cast null; }
-      return cast (cast decoder((cast bytes : flighthq._internal._UInt8Array), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal._Any>);
+      return cast (cast decoder((cast bytes), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq._internal._Promise<DecodedImage>);
       return cast null;
     }));
   }
@@ -22,16 +22,16 @@ class DecodeImage {
   public static function decodeImagePremultiplied(bytes:flighthq._internal._UInt8Array, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var decoder:Null<ImageDecoder> = cast _Runtime.UNDEFINED;
-      decoder = (cast DecodeImage.resolveImageDecoder__decodeImage((cast bytes : flighthq._internal._UInt8Array), (cast mimeType : Null<String>)) : Null<ImageDecoder>);
+      decoder = (cast DecodeImage.resolveImageDecoder__decodeImage((cast bytes), (cast mimeType)) : Null<ImageDecoder>);
       if ((cast _Runtime.strictEquals(decoder, null) : Bool)) { return cast null; }
-      return cast (cast decoder((cast bytes : flighthq._internal._UInt8Array), { premultiplyAlpha: true }) : Null<flighthq._internal._Any>);
+      return cast (cast decoder((cast bytes), (cast { premultiplyAlpha: true })) : flighthq._internal._Promise<DecodedImage>);
       return cast null;
     }));
   }
 
   public static function resolveImageDecoder__decodeImage(bytes:flighthq._internal._UInt8Array, ?mimeType:String):Null<ImageDecoder> {
     var type:Null<String> = cast _Runtime.UNDEFINED;
-    type = _Runtime.coalesce(mimeType, function():Dynamic return cast (cast detectImageMimeType((cast bytes : flighthq._internal._Union2<haxe.io.Bytes, flighthq._internal._UInt8Array>)) : Null<String>));
+    type = _Runtime.coalesce(mimeType, function():Dynamic return cast (cast detectImageMimeType((cast bytes)) : Null<String>));
     if ((cast _Runtime.strictEquals(type, null) : Bool)) { return cast null; }
     return cast (cast getImageDecoder((cast type : String)) : Null<ImageDecoder>);
     return cast null;

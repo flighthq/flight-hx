@@ -12,23 +12,23 @@ import flighthq.types.GlRenderTarget;
 class GlLinearToSrgbPass {
   @:noCompletion
   public static function drawGlLinearToSrgbPass(state:GlRenderState, source:GlRenderTarget, dest:Null<GlRenderTarget>):Void {
-    drawGlFullscreenPass((cast state : GlRenderState), (cast (cast GlLinearToSrgbPass.getGlLinearToSrgbProgram__glLinearToSrgbPass((cast state : GlRenderState)) : GlFullscreenProgram) : GlFullscreenProgram), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), (cast function(__unused0:flighthq._internal.dom.WebGL2RenderingContext, __unused1:GlFullscreenProgram):Void return GlLinearToSrgbPass.NOOP__glLinearToSrgbPass() : flighthq._internal.dom.WebGL2RenderingContext->GlFullscreenProgram->Void));
+    drawGlFullscreenPass((cast state), (cast (cast GlLinearToSrgbPass.getGlLinearToSrgbProgram__glLinearToSrgbPass((cast state)) : GlFullscreenProgram)), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(__unused0:flighthq._internal.dom.WebGL2RenderingContext, __unused1:GlFullscreenProgram):Void { GlLinearToSrgbPass.NOOP__glLinearToSrgbPass(); }));
   }
 
   public static function getGlLinearToSrgbProgram__glLinearToSrgbPass(state:GlRenderState):GlFullscreenProgram {
     var program:Null<GlFullscreenProgram> = cast _Runtime.UNDEFINED;
     program = ((cast GlLinearToSrgbPass._programs__glLinearToSrgbPass : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (program = cast ((cast compileGlFullscreenProgram((cast (cast state : GlRenderState).gl : flighthq._internal.dom.WebGL2RenderingContext), (cast LINEAR_TO_SRGB_FRAGMENT_SRC : String)) : Null<GlFullscreenProgram>) : Dynamic));
-      ((cast GlLinearToSrgbPass._programs__glLinearToSrgbPass : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).set((cast state : GlRenderState).gl, program));
+      (program = cast ((cast compileGlFullscreenProgram((cast (cast state : GlRenderState).gl), (cast LINEAR_TO_SRGB_FRAGMENT_SRC : String)) : GlFullscreenProgram) : Dynamic));
+      ((cast GlLinearToSrgbPass._programs__glLinearToSrgbPass : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).set((cast state : GlRenderState).gl, (cast program)));
     }
     return cast program;
     return cast null;
   }
 
-  public static final NOOP__glLinearToSrgbPass:Void->Void = function():Void {
+  public static final NOOP__glLinearToSrgbPass:Void->Void = (cast function():Void {
 
-  };
+  });
 
   public static final _programs__glLinearToSrgbPass:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 

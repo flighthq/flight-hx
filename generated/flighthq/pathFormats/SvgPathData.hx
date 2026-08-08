@@ -13,6 +13,7 @@ import flighthq.path.Path.appendPathMoveTo;
 import flighthq.path.Path.createPath;
 import flighthq.types.Path;
 import flighthq.types.PathSegment;
+import flighthq.types.ShapeCommand.PathWinding;
 
 class SvgPathData {
   public static function appendSvgPathData(path:Path, d:String):Bool {
@@ -35,7 +36,7 @@ class SvgPathData {
         var c:Float = _Runtime.charCodeAt(d, pos);
         if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(c, 32.0) : Bool) || (cast _Runtime.strictEquals(c, 9.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(c, 10.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(c, 13.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(c, 12.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(c, 44.0) : Bool)) : Bool)) { pos++; } else { break; }
       }
-    } : Void->Void);
+    });
     readNumber = (cast function readNumber():Null<Float> {
       var start:Float = cast _Runtime.UNDEFINED;
       var sawDigit:Bool = cast _Runtime.UNDEFINED;
@@ -70,7 +71,8 @@ class SvgPathData {
         if ((cast !(cast expDigit : Bool) : Bool)) { (pos = cast (expStart : Dynamic)); }
       }
       return cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([_Runtime.slice(d, start, pos)] : Array<Dynamic>));
-    } : Void->Null<Float>);
+      return cast _Runtime.UNDEFINED;
+    });
     readFlag = (cast function readFlag():Null<Float> {
       skipSeparators();
       if ((cast ((cast ((cast pos : Float) < (cast length : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(d, pos), '0') : Bool)) : Bool)) {
@@ -82,7 +84,8 @@ class SvgPathData {
         return cast 1.0;
       }
       return cast null;
-    } : Void->Null<Float>);
+      return cast _Runtime.UNDEFINED;
+    });
     length = _Runtime.field(d, 'length');
     pos = 0.0;
     currentX = 0.0;
@@ -102,7 +105,7 @@ class SvgPathData {
       pos++;
       if ((cast ((cast ((cast _Runtime.strictEquals(lastKind, '') : Bool) && (cast !_Runtime.strictEquals(commandLetter, 'M') : Bool)) : Bool) && (cast !_Runtime.strictEquals(commandLetter, 'm') : Bool)) : Bool)) { return cast false; }
       if ((cast ((cast _Runtime.strictEquals(commandLetter, 'Z') : Bool) || (cast _Runtime.strictEquals(commandLetter, 'z') : Bool)) : Bool)) {
-        appendPathClose((cast path : Path));
+        appendPathClose((cast path));
         (currentX = cast (startX : Dynamic));
         (currentY = cast (startY : Dynamic));
         (lastKind = cast ('Z' : Dynamic));
@@ -126,7 +129,7 @@ class SvgPathData {
           (currentY = cast (((cast relative : Bool) ? (cast (currentY + ny) : Dynamic) : (cast ny : Dynamic)) : Dynamic));
           (startX = cast (currentX : Dynamic));
           (startY = cast (currentY : Dynamic));
-          appendPathMoveTo((cast path : Path), (cast currentX : Float), (cast currentY : Float));
+          appendPathMoveTo((cast path), (cast currentX : Float), (cast currentY : Float));
           (lastKind = cast ('M' : Dynamic));
         } else { if ((cast _Runtime.strictEquals(upper, 'L') : Bool)) {
           var nx:Null<Float> = (cast readNumber() : Null<Float>);
@@ -134,19 +137,19 @@ class SvgPathData {
           if ((cast ((cast _Runtime.strictEquals(nx, null) : Bool) || (cast _Runtime.strictEquals(ny, null) : Bool)) : Bool)) { return cast false; }
           (currentX = cast (((cast relative : Bool) ? (cast (currentX + nx) : Dynamic) : (cast nx : Dynamic)) : Dynamic));
           (currentY = cast (((cast relative : Bool) ? (cast (currentY + ny) : Dynamic) : (cast ny : Dynamic)) : Dynamic));
-          appendPathLineTo((cast path : Path), (cast currentX : Float), (cast currentY : Float));
+          appendPathLineTo((cast path), (cast currentX : Float), (cast currentY : Float));
           (lastKind = cast ('L' : Dynamic));
         } else { if ((cast _Runtime.strictEquals(upper, 'H') : Bool)) {
           var nx:Null<Float> = (cast readNumber() : Null<Float>);
           if ((cast _Runtime.strictEquals(nx, null) : Bool)) { return cast false; }
           (currentX = cast (((cast relative : Bool) ? (cast (currentX + nx) : Dynamic) : (cast nx : Dynamic)) : Dynamic));
-          appendPathLineTo((cast path : Path), (cast currentX : Float), (cast currentY : Float));
+          appendPathLineTo((cast path), (cast currentX : Float), (cast currentY : Float));
           (lastKind = cast ('L' : Dynamic));
         } else { if ((cast _Runtime.strictEquals(upper, 'V') : Bool)) {
           var ny:Null<Float> = (cast readNumber() : Null<Float>);
           if ((cast _Runtime.strictEquals(ny, null) : Bool)) { return cast false; }
           (currentY = cast (((cast relative : Bool) ? (cast (currentY + ny) : Dynamic) : (cast ny : Dynamic)) : Dynamic));
-          appendPathLineTo((cast path : Path), (cast currentX : Float), (cast currentY : Float));
+          appendPathLineTo((cast path), (cast currentX : Float), (cast currentY : Float));
           (lastKind = cast ('L' : Dynamic));
         } else { if ((cast _Runtime.strictEquals(upper, 'C') : Bool)) {
           var x1:Null<Float> = (cast readNumber() : Null<Float>);
@@ -162,7 +165,7 @@ class SvgPathData {
           var c2y:Float = ((cast relative : Bool) ? (cast (currentY + y2) : Dynamic) : (cast y2 : Dynamic));
           var ax:Float = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
           var ay:Float = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
-          appendPathCubicCurveTo((cast path : Path), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast ax : Float), (cast ay : Float));
+          appendPathCubicCurveTo((cast path), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast ax : Float), (cast ay : Float));
           (lastControl2X = cast (c2x : Dynamic));
           (lastControl2Y = cast (c2y : Dynamic));
           (currentX = cast (ax : Dynamic));
@@ -181,7 +184,7 @@ class SvgPathData {
           var c2y:Float = ((cast relative : Bool) ? (cast (currentY + y2) : Dynamic) : (cast y2 : Dynamic));
           var ax:Float = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
           var ay:Float = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
-          appendPathCubicCurveTo((cast path : Path), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast ax : Float), (cast ay : Float));
+          appendPathCubicCurveTo((cast path), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast ax : Float), (cast ay : Float));
           (lastControl2X = cast (c2x : Dynamic));
           (lastControl2Y = cast (c2y : Dynamic));
           (currentX = cast (ax : Dynamic));
@@ -197,7 +200,7 @@ class SvgPathData {
           var cy:Float = ((cast relative : Bool) ? (cast (currentY + y1) : Dynamic) : (cast y1 : Dynamic));
           var ax:Float = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
           var ay:Float = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
-          appendPathCurveTo((cast path : Path), (cast cx : Float), (cast cy : Float), (cast ax : Float), (cast ay : Float));
+          appendPathCurveTo((cast path), (cast cx : Float), (cast cy : Float), (cast ax : Float), (cast ay : Float));
           (lastQuadControlX = cast (cx : Dynamic));
           (lastQuadControlY = cast (cy : Dynamic));
           (currentX = cast (ax : Dynamic));
@@ -212,7 +215,7 @@ class SvgPathData {
           var cy:Float = ((cast reflect : Bool) ? (cast ((2.0 * currentY) - lastQuadControlY) : Dynamic) : (cast currentY : Dynamic));
           var ax:Float = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
           var ay:Float = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
-          appendPathCurveTo((cast path : Path), (cast cx : Float), (cast cy : Float), (cast ax : Float), (cast ay : Float));
+          appendPathCurveTo((cast path), (cast cx : Float), (cast cy : Float), (cast ax : Float), (cast ay : Float));
           (lastQuadControlX = cast (cx : Dynamic));
           (lastQuadControlY = cast (cy : Dynamic));
           (currentX = cast (ax : Dynamic));
@@ -231,7 +234,7 @@ class SvgPathData {
           }
           var ax:Float = ((cast relative : Bool) ? (cast (currentX + x) : Dynamic) : (cast x : Dynamic));
           var ay:Float = ((cast relative : Bool) ? (cast (currentY + y) : Dynamic) : (cast y : Dynamic));
-          appendPathArcTo((cast path : Path), (cast rx : Float), (cast ry : Float), (cast ((rotationDegrees * HxMath.PI) / 180.0) : Float), (cast _Runtime.strictEquals(largeArc, 1.0) : Bool), (cast _Runtime.strictEquals(sweep, 1.0) : Bool), (cast ax : Float), (cast ay : Float));
+          appendPathArcTo((cast path), (cast rx : Float), (cast ry : Float), (cast ((rotationDegrees * HxMath.PI) / 180.0) : Float), (cast _Runtime.strictEquals(largeArc, 1.0) : Bool), (cast _Runtime.strictEquals(sweep, 1.0) : Bool), (cast ax : Float), (cast ay : Float));
           (currentX = cast (ax : Dynamic));
           (currentY = cast (ay : Dynamic));
           (lastKind = cast ('A' : Dynamic));
@@ -249,29 +252,29 @@ class SvgPathData {
   public static function formatSvgPathData(path:Path, ?options:{ @:optional var precision:Float; }):String {
     var precision:Null<Float> = cast _Runtime.UNDEFINED;
     var parts:Array<String> = cast _Runtime.UNDEFINED;
-    precision = _Runtime.optionalField(options, 'precision');
-    parts = cast ([] : Array<Dynamic>);
-    forEachPathSegment((cast path : Path), function(segment:PathSegment):Void {
+    precision = ({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var precision:Null<Float>; }).precision; });
+    parts = (cast cast ([] : Array<Dynamic>));
+    forEachPathSegment((cast path), (cast function(segment:PathSegment):Void {
       if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'moveTo') : Bool)) {
-        _Runtime.callProperty(parts, 'push', cast (['M' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).x : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).y : Float), (cast precision : Null<Float>)) : String)) + ''] : Array<Dynamic>));
+        _Runtime.callProperty(parts, 'push', cast (['M' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).x : Float), (cast precision)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).y : Float), (cast precision)) : String)) + ''] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'lineTo') : Bool)) {
-        _Runtime.callProperty(parts, 'push', cast (['L' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).x : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).y : Float), (cast precision : Null<Float>)) : String)) + ''] : Array<Dynamic>));
+        _Runtime.callProperty(parts, 'push', cast (['L' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).x : Float), (cast precision)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).y : Float), (cast precision)) : String)) + ''] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'curveTo') : Bool)) {
-        _Runtime.callProperty(parts, 'push', cast ([('Q' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).controlX : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).controlY : Float), (cast precision : Null<Float>)) : String)) + ' ' + '' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).x : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).y : Float), (cast precision : Null<Float>)) : String)) + '')] : Array<Dynamic>));
+        _Runtime.callProperty(parts, 'push', cast ([('Q' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).controlX : Float), (cast precision)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).controlY : Float), (cast precision)) : String)) + ' ' + '' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).x : Float), (cast precision)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).y : Float), (cast precision)) : String)) + '')] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'cubicCurveTo') : Bool)) {
-        _Runtime.callProperty(parts, 'push', cast ([(('C' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control1X : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control1Y : Float), (cast precision : Null<Float>)) : String)) + ' ' + '' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control2X : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control2Y : Float), (cast precision : Null<Float>)) : String)) + ' ') + '' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).x : Float), (cast precision : Null<Float>)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).y : Float), (cast precision : Null<Float>)) : String)) + '')] : Array<Dynamic>));
+        _Runtime.callProperty(parts, 'push', cast ([(('C' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control1X : Float), (cast precision)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control1Y : Float), (cast precision)) : String)) + ' ' + '' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control2X : Float), (cast precision)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control2Y : Float), (cast precision)) : String)) + ' ') + '' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).x : Float), (cast precision)) : String)) + ' ' + Std.string((cast SvgPathData.formatSvgNumber__svgPathData((cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).y : Float), (cast precision)) : String)) + '')] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'close') : Bool)) {
         _Runtime.callProperty(parts, 'push', cast (['Z'] : Array<Dynamic>));
       } } } } }
-    });
+    }));
     return cast _Runtime.join(parts, '');
     return cast null;
   }
 
   public static function parseSvgPathData(d:String):Null<Path> {
     var path:Path = cast _Runtime.UNDEFINED;
-    path = (cast createPath(_Runtime.field(_Runtime, 'UNDEFINED')) : Path);
-    if ((cast !(cast (cast appendSvgPathData((cast path : Path), (cast d : String)) : Bool) : Bool) : Bool)) { return cast null; }
+    path = (cast createPath((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
+    if ((cast !(cast (cast appendSvgPathData((cast path), (cast d : String)) : Bool) : Bool) : Bool)) { return cast null; }
     return cast path;
     return cast null;
   }

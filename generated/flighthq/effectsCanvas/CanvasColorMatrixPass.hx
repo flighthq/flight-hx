@@ -9,9 +9,9 @@ import flighthq.types.CanvasRenderTarget;
 class CanvasColorMatrixPass {
   @:noCompletion
   public static function applyColorMatrixPassToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, matrix:Array<Float>):Void {
-    drawCanvasImageDataPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
-      applyColorMatrixToImageDataBytes((cast data : flighthq._internal._UInt8ClampedArray), (cast pixelCount : Float), (cast matrix : Array<Float>));
-    } : flighthq._internal._UInt8ClampedArray->Float->Void));
+    drawCanvasImageDataPass((cast dest), (cast source), (cast function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
+      applyColorMatrixToImageDataBytes((cast data), (cast pixelCount : Float), (cast matrix));
+    }));
   }
 
   @:noCompletion

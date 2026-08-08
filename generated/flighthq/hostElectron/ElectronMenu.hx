@@ -15,23 +15,26 @@ class ElectronMenu {
     var selectListener:Null<String->Void> = cast _Runtime.UNDEFINED;
     selectListener = null;
     return cast { setApplicationMenu: function(items:Array<MenuItemTemplate>):Bool {
-      (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).setApplicationMenu((cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).buildFromTemplate((cast ElectronMenu.toElectronTemplate__electronMenu((cast items : Array<MenuItemTemplate>), (cast function(id:String):Null<Void> return _Runtime.callOptionalValue(selectListener, cast ([id] : Array<Dynamic>)) : Null<String->Void>)) : Array<ElectronMenuItemOptions>)));
+      (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).setApplicationMenu((cast (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast ElectronMenu.toElectronTemplate__electronMenu((cast items), (cast function(id:String):Void { _Runtime.callOptionalValue(selectListener, cast ([id] : Array<Dynamic>)); })) : Array<ElectronMenuItemOptions>)))));
       return cast true;
+      return cast _Runtime.UNDEFINED;
     }, popupContextMenu: function(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
       return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused0:flighthq._internal._Any):Void {
         var menu:flighthq.types.ElectronApi.ElectronMenu = cast _Runtime.UNDEFINED;
-        menu = (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).buildFromTemplate((cast ElectronMenu.toElectronTemplate__electronMenu((cast items : Array<MenuItemTemplate>), (cast function(id:String):Void return resolve((cast id : Null<flighthq._internal._Any>)) : Null<String->Void>)) : Array<ElectronMenuItemOptions>));
+        menu = (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast ElectronMenu.toElectronTemplate__electronMenu((cast items), (cast function(id:String):Void { resolve((cast id)); })) : Array<ElectronMenuItemOptions>)));
         try {
-          (cast menu : flighthq.types.ElectronApi.ElectronMenu).popup({ x: x, y: y });
+          (cast menu : flighthq.types.ElectronApi.ElectronMenu).popup((cast { x: x, y: y }));
         } catch (__error:Dynamic) {
-          resolve((cast null : Null<flighthq._internal._Any>));
+          resolve((cast null));
         }
       });
+      return cast _Runtime.UNDEFINED;
     }, subscribeSelect: function(listener:String->Void):Void->Void {
       (selectListener = cast (listener : Dynamic));
       return cast function():Void {
         if ((cast _Runtime.strictEquals(selectListener, listener) : Bool)) { (selectListener = cast (null : Dynamic)); }
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
@@ -39,13 +42,14 @@ class ElectronMenu {
   public static function toElectronTemplate__electronMenu(items:Array<MenuItemTemplate>, ?onSelect:String->Void):Array<ElectronMenuItemOptions> {
     return cast _Runtime.callProperty(items, 'map', cast ([function(item:MenuItemTemplate, __unused1:Float, __unused2:Array<MenuItemTemplate>):ElectronMenuItemOptions {
       var options:ElectronMenuItemOptions = cast _Runtime.UNDEFINED;
-      options = { id: item.id, label: item.label, type: item.type, role: item.role, accelerator: item.accelerator, enabled: item.enabled, checked: item.checked };
+      options = (cast { id: item.id, label: item.label, type: item.type, role: item.role, accelerator: item.accelerator, enabled: item.enabled, checked: item.checked });
       if (_Runtime.truthy(item.submenu)) {
-        ((cast options : ElectronMenuItemOptions).submenu = (cast ElectronMenu.toElectronTemplate__electronMenu((cast item.submenu : Array<MenuItemTemplate>), (cast onSelect : Null<String->Void>)) : Null<Array<ElectronMenuItemOptions>>));
+        ((cast options : ElectronMenuItemOptions).submenu = (cast ElectronMenu.toElectronTemplate__electronMenu((cast item.submenu), (cast onSelect)) : Array<ElectronMenuItemOptions>));
       } else { if (_Runtime.truthy(_Runtime.andValue(onSelect, function():Dynamic return cast !_Runtime.strictEquals(item.id, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
-        ((cast options : ElectronMenuItemOptions).click = function():Void return onSelect((cast item.id : String)));
+        ((cast options : { @:optional var click:Null<Void->Void>; }).click = (cast function():Void { onSelect((cast item.id : String)); }));
       } }
       return cast options;
+      return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
     return cast null;
   }

@@ -23,6 +23,7 @@ import flighthq.types.Physics2D.Physics2DCollider;
 import flighthq.types.Physics2D.Physics2DCollisionFilter;
 import flighthq.types.Physics2D.Physics2DContactPoint;
 import flighthq.types.Physics2D.Physics2DDebugGeometry;
+import flighthq.types.Physics2D.Physics2DDebugGeometryOptions;
 import flighthq.types.Physics2D.Physics2DDistanceJoint;
 import flighthq.types.Physics2D.Physics2DDistanceJointOptions;
 import flighthq.types.Physics2D.Physics2DGearJoint;
@@ -394,7 +395,7 @@ class Physics2d {
     Facade_Physics2d_flighthq_physics2d_ColliderTransform.writePhysics2DColliderBounds(collider, out);
   }
 
-  public static function writePhysics2DDebugGeometry(world:Physics2DWorld, out:Physics2DDebugGeometry, ?options:Dynamic):Void {
+  public static function writePhysics2DDebugGeometry(world:Physics2DWorld, out:Physics2DDebugGeometry, ?options:flighthq._internal._Partial<Physics2DDebugGeometryOptions>):Void {
     Facade_Physics2d_flighthq_physics2d_DebugGeometry.writePhysics2DDebugGeometry(world, out, options);
   }
 }

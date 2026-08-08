@@ -10,17 +10,17 @@ import flighthq.types.TextSegment.TextSegmenterBackend;
 
 class TextSegment {
   public static function segmentGraphemes(text:String, ?locale:String):Array<flighthq.types.TextSegment> {
-    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment(text, 'grapheme', locale);
+    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), (cast 'grapheme'), (cast locale));
     return cast null;
   }
 
   public static function segmentSentences(text:String, ?locale:String):Array<flighthq.types.TextSegment> {
-    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment(text, 'sentence', locale);
+    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), (cast 'sentence'), (cast locale));
     return cast null;
   }
 
   public static function segmentWords(text:String, ?locale:String):Array<flighthq.types.TextSegment> {
-    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment(text, 'word', locale);
+    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), (cast 'word'), (cast locale));
     return cast null;
   }
 }

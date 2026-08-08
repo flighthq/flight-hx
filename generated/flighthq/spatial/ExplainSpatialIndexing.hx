@@ -11,7 +11,7 @@ import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
 
 class ExplainSpatialIndexing {
   public static function explainSpatialIndexing(index:SpatialIndex, id:SpatialObjectId):SpatialIndexingExplanation {
-    return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).explainSpatialIndexing(id);
+    return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).explainSpatialIndexing((cast id : Float));
     return cast null;
   }
 }

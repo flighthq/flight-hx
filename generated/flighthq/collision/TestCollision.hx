@@ -14,7 +14,11 @@ import flighthq.collision.ShapeCollision.testCirclePolygonCollision;
 import flighthq.collision.ShapeCollision.testObbObbCollision;
 import flighthq.collision.ShapeCollision.testObbPolygonCollision;
 import flighthq.collision.ShapeCollision.testPolygonPolygonCollision;
+import flighthq.types.Collision.CollisionAabb;
+import flighthq.types.Collision.CollisionCircle;
 import flighthq.types.Collision.CollisionManifold;
+import flighthq.types.Collision.CollisionObb;
+import flighthq.types.Collision.CollisionPolygon;
 import flighthq.types.Collision.CollisionShape;
 import flighthq.types.Collision.CollisionShapeKind;
 import flighthq.types.Collision.CollisionTestGuard;
@@ -32,11 +36,11 @@ class TestCollision {
     var lo:CollisionShape = cast _Runtime.UNDEFINED;
     var hi:CollisionShape = cast _Runtime.UNDEFINED;
     var overlapping:Bool = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(TestCollision.collisionTestGuard__testCollision, null) : Bool)) { (cast TestCollision.collisionTestGuard__testCollision : CollisionShape->CollisionShape->Void)((cast a : CollisionShape), (cast b : CollisionShape)); }
-    rankA = (cast TestCollision.shapeKindRank__testCollision((cast (cast a : { var kind:String; }).kind : CollisionShapeKind)) : Float);
-    rankB = (cast TestCollision.shapeKindRank__testCollision((cast (cast b : { var kind:String; }).kind : CollisionShapeKind)) : Float);
+    if ((cast !_Runtime.strictEquals(TestCollision.collisionTestGuard__testCollision, null) : Bool)) { (cast TestCollision.collisionTestGuard__testCollision : CollisionShape->CollisionShape->Void)((cast a), (cast b)); }
+    rankA = (cast TestCollision.shapeKindRank__testCollision((cast (cast a : { var kind:String; }).kind)) : Float);
+    rankB = (cast TestCollision.shapeKindRank__testCollision((cast (cast b : { var kind:String; }).kind)) : Float);
     if ((cast ((cast ((cast rankA : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast rankB : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      clearCollisionManifold((cast out : CollisionManifold));
+      clearCollisionManifold((cast out));
       return cast false;
     }
     swapped = ((cast rankA : Float) > (cast rankB : Float));
@@ -49,16 +53,16 @@ class TestCollision {
         {
           var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'circle') {
-            (overlapping = cast ((cast testCircleCircleCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testCircleCircleCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'aabb') {
-            (overlapping = cast ((cast testCircleAabbCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testCircleAabbCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'obb') {
-            (overlapping = cast ((cast testCircleObbCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testCircleObbCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast ((cast testCirclePolygonCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testCirclePolygonCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
           }
         }
       }
@@ -66,13 +70,13 @@ class TestCollision {
         {
           var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'aabb') {
-            (overlapping = cast ((cast testAabbAabbCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testAabbAabbCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'obb') {
-            (overlapping = cast ((cast testAabbObbCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testAabbObbCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast ((cast testAabbPolygonCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testAabbPolygonCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
           }
         }
       }
@@ -80,16 +84,16 @@ class TestCollision {
         {
           var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'obb') {
-            (overlapping = cast ((cast testObbObbCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testObbObbCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast ((cast testObbPolygonCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testObbPolygonCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
           }
         }
       }
       else if (__switchValue == 'polygon') {
         if ((cast _Runtime.strictEquals((cast hi : { var kind:String; }).kind, 'polygon') : Bool)) {
-          (overlapping = cast ((cast testPolygonPolygonCollision(lo, hi, (cast out : CollisionManifold)) : Bool) : Dynamic));
+          (overlapping = cast ((cast testPolygonPolygonCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
         }
       }
     }

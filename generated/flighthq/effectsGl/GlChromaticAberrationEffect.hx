@@ -22,19 +22,19 @@ class GlChromaticAberrationEffect {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.005);
     radial = _Runtime.coalesce(_Runtime.field(effect, 'radial'), function():Dynamic return cast true);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'lens.chromaticAberration' : String), (cast GlChromaticAberrationEffect.CHROMATIC_ABERRATION_FRAGMENT_SRC__glChromaticAberrationEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'lens.chromaticAberration' : String), (cast GlChromaticAberrationEffect.CHROMATIC_ABERRATION_FRAGMENT_SRC__glChromaticAberrationEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_radial'), ((cast radial : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-    });
+    }));
   }
 
-  public static final defaultGlChromaticAberrationEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyChromaticAberrationEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : ChromaticAberrationEffect) : ChromaticAberrationEffect));
-  };
+  public static final defaultGlChromaticAberrationEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyChromaticAberrationEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : ChromaticAberrationEffect)));
+  });
 
   public static function registerGlChromaticAberrationEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'ChromaticAberrationEffect' : String), (cast defaultGlChromaticAberrationEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'ChromaticAberrationEffect' : String), (cast defaultGlChromaticAberrationEffectRunner));
   }
 
   public static final CHROMATIC_ABERRATION_FRAGMENT_SRC__glChromaticAberrationEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_radial;\nout vec4 o_color;\nvoid main() {\n  vec2 centered = v_texCoord - 0.5;\n  float scale = mix(1.0, length(centered) * 2.0, u_radial);\n  vec2 dir = mix(vec2(1.0, 0.0), normalize(centered + vec2(1e-5)), u_radial);\n  vec2 offset = dir * u_intensity * scale;\n  float r = texture(u_texture0, v_texCoord + offset).r;\n  float g = texture(u_texture0, v_texCoord).g;\n  float b = texture(u_texture0, v_texCoord - offset).b;\n  float a = texture(u_texture0, v_texCoord).a;\n  o_color = vec4(r, g, b, a);\n}';

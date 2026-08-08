@@ -12,10 +12,10 @@ import flighthq.types.Matrix;
 import flighthq.types.ParticleEmitter2D;
 import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Renderable;
 import flighthq.types.Sampler;
 import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.SpriteRenderer;
+import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
@@ -45,7 +45,7 @@ class CanvasParticleEmitter2D {
     particleCount = _Runtime.field(__destructure0, 'particleCount');
     transforms = _Runtime.field(__destructure0, 'transforms');
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
-    imageSource = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers((cast state : CanvasRenderState)) : CanvasTextureResolvers), atlas.texture) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
+    imageSource = (cast resolveCanvasTexture((cast (cast getCanvasRenderStateTextureResolvers((cast state)) : CanvasTextureResolvers)), (cast atlas.texture)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(imageSource, null) : Bool)) { return; }
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
@@ -53,7 +53,7 @@ class CanvasParticleEmitter2D {
     t = (cast renderProxy : RenderProxy2D).transform2D;
     context = (cast state : CanvasRenderState).context;
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast (cast (cast atlas.texture : Texture2D).sampler.magFilter : { var startsWith:flighthq._internal._Any; }).startsWith('nearest') : Bool) : Bool));
+    smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast (cast (cast (cast atlas.texture : Texture2D).sampler : { var magFilter:TextureFilter; }).magFilter : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'nearest' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) : Bool));
     if ((cast !(cast smoothing : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
     {
       var i:Float = 0.0;
@@ -75,7 +75,7 @@ class CanvasParticleEmitter2D {
         var d:Float = cast _Runtime.UNDEFINED;
         var tx:Float = cast _Runtime.UNDEFINED;
         var ty:Float = cast _Runtime.UNDEFINED;
-        if ((cast source.data.worldSpace : Bool)) {
+        if ((cast (cast source.data : { var worldSpace:Bool; }).worldSpace : Bool)) {
           (a = cast (cosR : Dynamic));
           (b = cast (sinR : Dynamic));
           (c = cast (-sinR : Dynamic));
@@ -99,5 +99,5 @@ class CanvasParticleEmitter2D {
     if ((cast !(cast smoothing : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true); }
   }
 
-  public static final defaultCanvasParticleEmitter2DRenderer:SpriteRenderer = { createData: noopRendererData, submit: drawCanvasParticleEmitter2D };
+  public static final defaultCanvasParticleEmitter2DRenderer:SpriteRenderer = (cast { createData: noopRendererData, submit: drawCanvasParticleEmitter2D });
 }

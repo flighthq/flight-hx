@@ -55,7 +55,7 @@ class Particles {
     return cast null;
   }
 
-  public static function createParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
+  public static function createParticleEmitterConfig(?config:flighthq._internal._Partial<ParticleEmitterConfig>):ParticleEmitterConfig {
     return cast Facade_Particles_flighthq_particles_ParticleEmitterConfig.createParticleEmitterConfig(config);
     return cast null;
   }
@@ -93,7 +93,7 @@ class Particles {
     Facade_Particles_flighthq_particles_Curve.lerpHsvInPlace(colorsOut, offset, birth, death, t);
   }
 
-  public static function normalizeParticleEmitterConfig(?config:Dynamic):ParticleEmitterConfig {
+  public static function normalizeParticleEmitterConfig(?config:flighthq._internal._Partial<ParticleEmitterConfig>):ParticleEmitterConfig {
     return cast Facade_Particles_flighthq_particles_ValidateParticleEmitterConfig.normalizeParticleEmitterConfig(config);
     return cast null;
   }

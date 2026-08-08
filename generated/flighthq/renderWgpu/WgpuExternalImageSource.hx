@@ -30,7 +30,7 @@ class WgpuExternalImageSource {
   }
 
   public static function tryCopyWgpuExternalImageToTexture(queue:flighthq._internal.dom.GPUQueue, source:flighthq._internal.dom.GPUCopyExternalImageSourceInfo, destination:flighthq._internal.dom.GPUCopyExternalImageDestInfo, width:Float, height:Float):Bool {
-    if ((cast !(cast (cast isWgpuExternalImageSourceReady((cast _Runtime.field(source, 'source') : flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>, flighthq._internal.dom.ImageData>), (cast width : Float), (cast height : Float)) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast isWgpuExternalImageSourceReady((cast _Runtime.field(source, 'source')), (cast width : Float), (cast height : Float)) : Bool) : Bool) : Bool)) { return cast false; }
     try {
       flighthq._internal.backend.WebGpuQueueBackend.call(queue, 'copyExternalImageToTexture', cast ([source, destination, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
       return cast true;

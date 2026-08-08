@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef CustomShaderEffect = { var kind:Kind; var shaderKey:String; @:optional var uniforms:flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>>; };
+typedef CustomShaderEffect = { var kind:String; var shaderKey:String; @:optional var uniforms:flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>>; };

@@ -20,19 +20,19 @@ class GlKuwaharaEffect {
     var radius:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 3.0);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'stylization.kuwahara' : String), (cast GlKuwaharaEffect.KUWAHARA_FRAGMENT_SRC__glKuwaharaEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'stylization.kuwahara' : String), (cast GlKuwaharaEffect.KUWAHARA_FRAGMENT_SRC__glKuwaharaEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_radius'), HxMath.max(1.0, radius));
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
-    });
+    }));
   }
 
-  public static final defaultGlKuwaharaEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyKuwaharaEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : KuwaharaEffect) : KuwaharaEffect));
-  };
+  public static final defaultGlKuwaharaEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyKuwaharaEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : KuwaharaEffect)));
+  });
 
   public static function registerGlKuwaharaEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'KuwaharaEffect' : String), (cast defaultGlKuwaharaEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'KuwaharaEffect' : String), (cast defaultGlKuwaharaEffectRunner));
   }
 
   public static final KUWAHARA_FRAGMENT_SRC__glKuwaharaEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_radius;\nuniform vec2 u_resolution;\nout vec4 o_color;\nconst int R = 4;\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  int r = int(min(float(R), u_radius));\n  vec3 means[4];\n  float vars[4];\n  ivec2 lo[4] = ivec2[4](ivec2(-1, -1), ivec2(0, -1), ivec2(-1, 0), ivec2(0, 0));\n  for (int q = 0; q < 4; q++) {\n    vec3 sum = vec3(0.0);\n    vec3 sumSq = vec3(0.0);\n    float n = 0.0;\n    for (int y = 0; y <= R; y++) {\n      for (int x = 0; x <= R; x++) {\n        if (x > r || y > r) continue;\n        ivec2 d = ivec2(x, y) * sign(lo[q] + ivec2(1)) + lo[q] * r;\n        vec2 off = vec2(float(d.x), float(d.y)) * texel;\n        vec3 col = texture(u_texture0, v_texCoord + off).rgb;\n        sum += col;\n        sumSq += col * col;\n        n += 1.0;\n      }\n    }\n    vec3 mean = sum / n;\n    means[q] = mean;\n    vec3 v = sumSq / n - mean * mean;\n    vars[q] = v.r + v.g + v.b;\n  }\n  float minVar = vars[0];\n  vec3 result = means[0];\n  for (int q = 1; q < 4; q++) {\n    if (vars[q] < minVar) {\n      minVar = vars[q];\n      result = means[q];\n    }\n  }\n  o_color = vec4(result, texture(u_texture0, v_texCoord).a);\n}';

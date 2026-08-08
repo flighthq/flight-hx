@@ -14,7 +14,7 @@ typedef AssetLoaderAdapter<T> = { var load:AssetDescriptor->flighthq._internal._
 
 typedef AssetEntry = { var value:flighthq._internal._Any; var refcount:Float; var loadPromise:Null<flighthq._internal._Promise<flighthq._internal._Any>>; var resident:Bool; };
 
-typedef AssetLibraryRuntime = { var acquireGuard:Null<AssetAcquireGuard>; var adapters:flighthq._internal._Map<AssetType, AssetLoaderAdapter<Dynamic>>; var descriptors:flighthq._internal._Map<String, AssetDescriptor>; var entries:flighthq._internal._Map<String, AssetEntry>; var freedIds:flighthq._internal._Set<String>; var groups:flighthq._internal._Map<String, Array<String>>; };
+typedef AssetLibraryRuntime = { var acquireGuard:Null<AssetAcquireGuard>; var adapters:flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>; var descriptors:flighthq._internal._Map<String, AssetDescriptor>; var entries:flighthq._internal._Map<String, AssetEntry>; var freedIds:flighthq._internal._Set<String>; var groups:flighthq._internal._Map<String, Array<String>>; };
 
 typedef AssetLibrary = { var runtime:AssetLibraryRuntime; };
 

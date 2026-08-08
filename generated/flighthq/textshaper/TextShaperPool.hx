@@ -34,7 +34,7 @@ class TextShaperPool {
 
   public static final _POOL_MAX_SIZE__textShaperPool:Float = 64.0;
 
-  public static final _pool__textShaperPool:Array<ShapedRun> = cast ([] : Array<Dynamic>);
+  public static final _pool__textShaperPool:Array<ShapedRun> = (cast cast ([] : Array<Dynamic>));
 
   public static final _pooled__textShaperPool:flighthq._internal._WeakSet<ShapedRun> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
 

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.materials.AnisotropyPbrExtension.createAnisotropyPbrExtension;
 import flighthq.scene3dFormats.GltfMaterialExtension.attachGltfPbrExtension;
+import flighthq.types.AnisotropyPbrExtension;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.GltfExtension.GltfExtensionContext;
 import flighthq.types.GltfExtension.GltfExtensionHandler;
@@ -32,17 +33,17 @@ import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 
 class GltfAnisotropy {
-  public static final GltfAnisotropyExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+  public static final GltfAnisotropyExtensionHandler:GltfExtensionHandler = (cast { apply: function(context:GltfExtensionContext):Void {
     var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
-    materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
+    materials = _Runtime.coalesce((cast _Runtime.field(context, 'source') : { @:optional var materials:Null<Array<GltfMaterial>>; }).materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var block:Null<GltfMaterialsAnisotropy> = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_anisotropy');
+        var block:Null<GltfMaterialsAnisotropy> = ({ final __structural0 = (cast flighthq._internal._StaticIndex.readArray(materials, i) : { @:optional var extensions:Null<{ @:optional var KHR_materials_anisotropy:Null<GltfMaterialsAnisotropy>; @:optional var KHR_materials_clearcoat:Null<GltfMaterialsClearcoat>; @:optional var KHR_materials_emissive_strength:Null<GltfMaterialsEmissiveStrength>; @:optional var KHR_materials_ior:Null<GltfMaterialsIor>; @:optional var KHR_materials_iridescence:Null<GltfMaterialsIridescence>; @:optional var KHR_materials_pbrSpecularGlossiness:Null<GltfMaterialsPbrSpecularGlossiness>; @:optional var KHR_materials_sheen:Null<GltfMaterialsSheen>; @:optional var KHR_materials_unlit:Null<flighthq._internal._Record<String, flighthq._internal._Any>>; @:optional var KHR_materials_specular:Null<GltfMaterialsSpecular>; @:optional var KHR_materials_transmission:Null<GltfMaterialsTransmission>; @:optional var KHR_materials_volume:Null<GltfMaterialsVolume>; }>; }).extensions; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var KHR_materials_anisotropy:Null<GltfMaterialsAnisotropy>; }).KHR_materials_anisotropy; });
         if ((cast _Runtime.strictEquals(block, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        (cast attachGltfPbrExtension(_Runtime.field(context, 'document'), (cast i : Float), (cast createAnisotropyPbrExtension((cast { anisotropyMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsAnisotropy).anisotropyTexture, 'linear'] : Array<Dynamic>)), anisotropyRotation: _Runtime.coalesce((cast block : GltfMaterialsAnisotropy).anisotropyRotation, function():Dynamic return cast 0.0), anisotropyStrength: _Runtime.coalesce((cast block : GltfMaterialsAnisotropy).anisotropyStrength, function():Dynamic return cast 0.0) } : Null<flighthq._internal._Any>)) : PbrExtension)) : Bool);
+        (cast attachGltfPbrExtension((cast _Runtime.field(context, 'document')), (cast i : Float), (cast (cast createAnisotropyPbrExtension((cast { anisotropyMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsAnisotropy).anisotropyTexture, 'linear'] : Array<Dynamic>)), anisotropyRotation: _Runtime.coalesce((cast block : GltfMaterialsAnisotropy).anisotropyRotation, function():Dynamic return cast 0.0), anisotropyStrength: _Runtime.coalesce((cast block : GltfMaterialsAnisotropy).anisotropyStrength, function():Dynamic return cast 0.0) })) : AnisotropyPbrExtension))) : Bool);
         i++;
       }
     }
-  }, kind: 'KHR_materials_anisotropy' };
+  }, kind: 'KHR_materials_anisotropy' });
 }

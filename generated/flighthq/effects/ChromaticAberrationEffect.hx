@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.ChromaticAberrationEffect;
 
 class ChromaticAberrationEffect {
-  public static function createChromaticAberrationEffect(?options:Dynamic):flighthq.types.ChromaticAberrationEffect {
+  public static function createChromaticAberrationEffect(?options:flighthq._internal._Omit<flighthq.types.ChromaticAberrationEffect, String>):flighthq.types.ChromaticAberrationEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'ChromaticAberrationEffect' }, options]);
     return cast null;

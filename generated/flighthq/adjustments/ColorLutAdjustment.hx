@@ -11,15 +11,15 @@ class ColorLutAdjustment {
   public static function getAdjustmentColorTransform(operation:{ var kind:String; }):Null<ColorTransformFunction> {
     var transform:Null<ColorTransformFunction> = cast _Runtime.UNDEFINED;
     var matrix:Null<Array<Float>> = cast _Runtime.UNDEFINED;
-    transform = _Runtime.field((cast operation : Dynamic), 'transform');
+    transform = _Runtime.field((cast operation : flighthq._internal._Partial<flighthq.types.ColorLutAdjustment>), 'transform');
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(transform), 'function') : Bool)) { return cast transform; }
-    matrix = (cast getAdjustmentColorMatrix((cast operation : { var kind:String; })) : Null<Array<Float>>);
-    return cast ((cast _Runtime.strictEquals(matrix, null) : Bool) ? (cast null : Dynamic) : (cast (cast ColorLutAdjustment.colorMatrixTransform__colorLutAdjustment((cast matrix : Array<Float>)) : Null<ColorTransformFunction>) : Dynamic));
+    matrix = (cast getAdjustmentColorMatrix((cast operation)) : Null<Array<Float>>);
+    return cast ((cast _Runtime.strictEquals(matrix, null) : Bool) ? (cast null : Dynamic) : (cast (cast ColorLutAdjustment.colorMatrixTransform__colorLutAdjustment((cast matrix)) : ColorTransformFunction) : Dynamic));
     return cast null;
   }
 
   public static function isColorLutAdjustment(operation:{ var kind:String; }):Bool {
-    return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast operation : Dynamic), 'transform')), 'function');
+    return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field((cast operation : flighthq._internal._Partial<flighthq.types.ColorLutAdjustment>), 'transform')), 'function');
     return cast null;
   }
 

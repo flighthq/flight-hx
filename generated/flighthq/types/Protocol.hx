@@ -8,4 +8,4 @@ typedef ParsedProtocolUrl = { var scheme:String; var host:String; var path:Strin
 
 typedef ProtocolHandler = { var onOpenUrl:Signal<String->Void>; };
 
-typedef ProtocolBackend = { var register:String->Bool; var unregister:String->Bool; var isRegistered:String->Bool; var getRegisteredSchemes:Void->Array<String>; var setAsDefault:String->Bool; var isDefault:String->Bool; var removeAsDefault:String->Bool; var getLaunchUrl:Void->Null<String>; var drainPendingUrls:Void->Array<String>; var subscribe:String->Void->Void->Void; };
+typedef ProtocolBackend = { var register:String->Bool; var unregister:String->Bool; var isRegistered:String->Bool; var getRegisteredSchemes:Void->Array<String>; var setAsDefault:String->Bool; var isDefault:String->Bool; var removeAsDefault:String->Bool; var getLaunchUrl:Void->Null<String>; var drainPendingUrls:Void->Array<String>; var subscribe:(String->Void)->(Void->Void); };

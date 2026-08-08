@@ -16,6 +16,7 @@ class EaseCombinators {
       var v:Float = cast _Runtime.UNDEFINED;
       v = (cast ease((cast t : Float)) : Float);
       return cast ((cast ((cast v : Float) < (cast min : Float)) : Bool) ? (cast min : Dynamic) : (cast ((cast ((cast v : Float) > (cast max : Float)) : Bool) ? (cast max : Dynamic) : (cast v : Dynamic)) : Dynamic));
+      return cast _Runtime.UNDEFINED;
     };
     return cast null;
   }
@@ -29,6 +30,7 @@ class EaseCombinators {
     return cast function(t:Float):Float {
       if ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool)) { return cast ((cast easeIn((cast (t * 2.0) : Float)) : Float) * 0.5); }
       return cast (1.0 - ((cast easeIn((cast ((1.0 - t) * 2.0) : Float)) : Float) * 0.5));
+      return cast _Runtime.UNDEFINED;
     };
     return cast null;
   }

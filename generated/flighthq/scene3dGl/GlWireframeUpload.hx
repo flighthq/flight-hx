@@ -33,29 +33,29 @@ class GlWireframeUpload {
     var position:Null<VertexAttribute> = cast _Runtime.UNDEFINED;
     var byteOffset:Float = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    meshUpload = (cast ensureGlMeshUpload((cast state : GlRenderState), (cast geometry : MeshGeometry), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : GlMeshUpload);
+    meshUpload = (cast ensureGlMeshUpload((cast state), (cast geometry), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : GlMeshUpload);
     perState = ((cast GlWireframeUpload.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>>).get(state));
     if ((cast _Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (perState = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
-      ((cast GlWireframeUpload.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>>).set(state, perState));
+      ((cast GlWireframeUpload.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>>).set(state, (cast perState)));
     }
     upload = ((cast perState : flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>).get((cast geometry : MeshGeometry)));
     if ((cast ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).version, geometry.version) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).vao);
       return cast upload;
     }
-    lineIndices = (cast GlWireframeUpload.buildLineIndices__glWireframeUpload((cast geometry : MeshGeometry)) : flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>);
+    lineIndices = (cast GlWireframeUpload.buildLineIndices__glWireframeUpload((cast geometry)) : flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>);
     indexType = ((cast _Runtime.isInstanceOfName(lineIndices, 'Uint32Array') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT) : Dynamic));
     if ((cast _Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (upload = cast ({ indexType: indexType, lineIndexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0 } : Dynamic));
-      ((cast perState : flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>).set((cast geometry : MeshGeometry), upload));
+      ((cast perState : flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>).set((cast geometry : MeshGeometry), (cast upload)));
     }
     ((cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).indexType = indexType);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).vao);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast meshUpload : GlMeshUpload).vertexBuffer);
-    stride = geometry.layout.stride;
-    position = _Runtime.find(geometry.layout.attributes, function(a:VertexAttribute, __unused0:Float, __unused1:Array<VertexAttribute>):Bool return _Runtime.strictEquals(a.semantic, 'position'));
-    byteOffset = ((cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast position : flighthq.types.MeshGeometry.VertexAttribute).byteOffset : Dynamic) : (cast 0.0 : Dynamic));
+    stride = (cast geometry.layout : { var stride:Float; }).stride;
+    position = _Runtime.find((cast geometry.layout : { var attributes:Array<VertexAttribute>; }).attributes, function(a:VertexAttribute, __unused0:Float, __unused1:Array<VertexAttribute>):Bool return _Runtime.strictEquals(a.semantic, 'position'));
+    byteOffset = ((cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast position : { var byteOffset:Float; }).byteOffset : Dynamic) : (cast 0.0 : Dynamic));
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 0.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 0.0, 3.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, stride, byteOffset);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), (cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).lineIndexBuffer);
@@ -72,7 +72,7 @@ class GlWireframeUpload {
     var useUint32:Bool = cast _Runtime.UNDEFINED;
     var lines:flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array> = cast _Runtime.UNDEFINED;
     triangleIndices = geometry.indices;
-    triangleCount = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast HxMath.floor(((cast triangleIndices : { var length:Float; }).length / 3.0)) : Dynamic) : (cast HxMath.floor(((_Runtime.multiplyNumbers(_Runtime.field(geometry.vertices, 'length'), 4.0) / geometry.layout.stride) / 3.0)) : Dynamic));
+    triangleCount = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast HxMath.floor(((cast triangleIndices : { var length:Float; }).length / 3.0)) : Dynamic) : (cast HxMath.floor(((_Runtime.multiplyNumbers(_Runtime.field(geometry.vertices, 'length'), 4.0) / (cast geometry.layout : { var stride:Float; }).stride) / 3.0)) : Dynamic));
     lineCount = (triangleCount * 6.0);
     useUint32 = ((cast _Runtime.isInstanceOfName(triangleIndices, 'Uint32Array') : Bool) || (cast ((cast lineCount : Float) > (cast 65535.0 : Float)) : Bool));
     lines = ((cast useUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(lineCount) : Dynamic) : (cast new flighthq._internal._UInt16Array(lineCount) : Dynamic));

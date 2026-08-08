@@ -10,12 +10,12 @@ import flighthq.node.Revision.getNodeLocalTransformRevision;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.HasTransform2D;
 import flighthq.types.Matrix;
+import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Node;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
-import flighthq.types.Renderable;
 
 class RenderTransform2d {
   @:noCompletion
@@ -23,11 +23,11 @@ class RenderTransform2d {
     var localTransformId:Float = cast _Runtime.UNDEFINED;
     var parentDirty:Bool = cast _Runtime.UNDEFINED;
     var localDirty:Bool = cast _Runtime.UNDEFINED;
-    localTransformId = (cast getNodeLocalTransformRevision((cast (cast data : RenderProxy2D).source : Node<Dynamic>)) : Float);
-    parentDirty = ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast parentData : RenderProxy2D).transformFrameId, (cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).currentFrameId) : Bool));
+    localTransformId = (cast getNodeLocalTransformRevision((cast (cast (cast data : RenderProxy2D).source : Node<Dynamic>))) : Float);
+    parentDirty = ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast parentData : RenderProxy2D).transformFrameId, (cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).currentFrameId) : Bool));
     localDirty = ((cast _Runtime.strictEquals((cast state : RenderState).sceneGraphSyncPolicy, 'refreshDerivedState') : Bool) || (cast !_Runtime.strictEquals((cast data : RenderProxy2D).lastLocalTransformId, localTransformId) : Bool));
     if ((cast ((cast parentDirty : Bool) || (cast localDirty : Bool)) : Bool)) {
-      RenderTransform2d.recalculateRenderTransform2D__renderTransform2d((cast state : RenderState), (cast data : RenderProxy2D), (cast parentData : Null<RenderProxy2D>));
+      RenderTransform2d.recalculateRenderTransform2D__renderTransform2d((cast state), (cast data), (cast parentData));
       ((cast data : RenderProxy2D).lastLocalTransformId = localTransformId);
       return cast true;
     }
@@ -38,13 +38,13 @@ class RenderTransform2d {
   public static function recalculateRenderTransform2D__renderTransform2d(state:RenderState, data:RenderProxy2D, ?parentData:RenderProxy2D):Void {
     var transform2D:Matrix = cast _Runtime.UNDEFINED;
     var parentTransform2D:Null<Matrix> = cast _Runtime.UNDEFINED;
-    transform2D = (cast getNodeLocalMatrix((cast (cast data : RenderProxy2D).source : { >Node<Dynamic>, >HasTransform2D, })) : Matrix);
+    transform2D = (cast getNodeLocalMatrix((cast (cast (cast data : RenderProxy2D).source : flighthq._internal._Intersection2<Node<Dynamic>, HasTransform2D>))) : Matrix);
     parentTransform2D = ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast parentData : RenderProxy2D).transform2D : Dynamic) : (cast (cast state : RenderState).renderTransform2D : Dynamic));
     if ((cast !_Runtime.strictEquals(parentTransform2D, null) : Bool)) {
-      multiplyMatrix((cast data : RenderProxy2D).transform2D, parentTransform2D, transform2D);
+      multiplyMatrix((cast (cast data : RenderProxy2D).transform2D), (cast parentTransform2D), (cast transform2D));
     } else {
-      copyMatrix((cast data : RenderProxy2D).transform2D, transform2D);
+      copyMatrix((cast (cast data : RenderProxy2D).transform2D), (cast transform2D));
     }
-    ((cast data : RenderProxy2D).transformFrameId = (cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).currentFrameId);
+    ((cast data : RenderProxy2D).transformFrameId = (cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).currentFrameId);
   }
 }

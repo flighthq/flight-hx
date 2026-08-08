@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 
-typedef GlassExtendedPbrMaterialOptions = { @:optional var alphaCutoff:Float; @:optional var alphaMode:MaterialAlphaMode; @:optional var blendMode:BlendMode; @:optional var doubleSided:Bool; @:optional var standard:Dynamic; @:optional var transmissionVolume:Dynamic; };
+typedef GlassExtendedPbrMaterialOptions = { @:optional var alphaCutoff:Float; @:optional var alphaMode:MaterialAlphaMode; @:optional var blendMode:BlendMode; @:optional var doubleSided:Bool; @:optional var standard:flighthq._internal._Partial<StandardPbrMaterialProperties>; @:optional var transmissionVolume:flighthq._internal._Partial<TransmissionVolumePbrExtension>; };

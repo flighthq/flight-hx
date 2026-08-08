@@ -17,12 +17,12 @@ class Spring2D {
   }
 
   public static function isSpring2DSettled(spring2D:flighthq.types.Spring.Spring2D, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
-    return cast _Runtime.andValue((cast isSpringSettled(_Runtime.field(spring2D, 'x'), (cast targetX : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool), function():Dynamic return cast (cast isSpringSettled(_Runtime.field(spring2D, 'y'), (cast targetY : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool));
+    return cast _Runtime.andValue((cast isSpringSettled((cast _Runtime.field(spring2D, 'x')), (cast targetX : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool), function():Dynamic return cast (cast isSpringSettled((cast _Runtime.field(spring2D, 'y')), (cast targetY : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool));
     return cast null;
   }
 
   public static function updateSpring2D(spring2D:flighthq.types.Spring.Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {
-    updateSpring((cast spring2D : flighthq.types.Spring.Spring2D).x, (cast targetX : Float), (cast config : SpringConfig), (cast deltaTime : Float));
-    updateSpring((cast spring2D : flighthq.types.Spring.Spring2D).y, (cast targetY : Float), (cast config : SpringConfig), (cast deltaTime : Float));
+    updateSpring((cast (cast spring2D : flighthq.types.Spring.Spring2D).x), (cast targetX : Float), (cast config), (cast deltaTime : Float));
+    updateSpring((cast (cast spring2D : flighthq.types.Spring.Spring2D).y), (cast targetY : Float), (cast config), (cast deltaTime : Float));
   }
 }

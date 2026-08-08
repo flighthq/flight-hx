@@ -7,14 +7,15 @@ import flighthq.camera.ViewMatrix.getCamera2DViewMatrix;
 import flighthq.geometry.Matrix.createMatrix;
 import flighthq.types.Camera2D;
 import flighthq.types.Matrix;
+import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Vector2.Vector2Like;
 
 class Parallax {
   public static function getCamera2DParallaxPoint(camera:Camera2D, factor:Float, out:Vector2Like):Void {
-    getCamera2DViewMatrix((cast camera : Camera2D), Parallax.scratchMatrix__parallax);
+    getCamera2DViewMatrix((cast camera), (cast Parallax.scratchMatrix__parallax));
     (out.x = cast (((Parallax.scratchMatrix__parallax.tx - (camera.viewportWidth * 0.5)) * factor) : Dynamic));
     (out.y = cast (((Parallax.scratchMatrix__parallax.ty - (camera.viewportHeight * 0.5)) * factor) : Dynamic));
   }
 
-  public static final scratchMatrix__parallax:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix);
+  public static final scratchMatrix__parallax:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
 }

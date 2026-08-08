@@ -16,33 +16,34 @@ import flighthq.types.ColorAdjustmentRuntime;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.Node;
 import flighthq.types.Node.NodeRuntime;
+import flighthq.types.TintAdjustment;
 
 class NodeColorAdjustment {
-  public static function addNodeColorAdjustment<Traits>(source:Node<Traits>, adjustment:Adjustment):Void {
+  public static function addNodeColorAdjustment<Traits:flighthq._internal._Object>(source:Node<Traits>, adjustment:Adjustment):Void {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
     var current:Null<Array<Adjustment>> = cast _Runtime.UNDEFINED;
-    runtime = (cast (cast getNodeRuntime(source) : NodeRuntime<Traits>) : NodeRuntime<Traits>);
+    runtime = (cast getNodeRuntime((cast source)) : NodeRuntime<Traits>);
     current = (cast runtime : NodeRuntime<Traits>).colorAdjustments;
     ((cast runtime : NodeRuntime<Traits>).colorAdjustments = ((cast _Runtime.strictEquals(current, null) : Bool) ? (cast cast ([adjustment] : Array<Dynamic>) : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(current), [adjustment]]) : Dynamic)));
-    NodeColorAdjustment.resolveNodeColorAdjustments__nodeColorAdjustment((cast runtime : ColorAdjustmentRuntime));
-    invalidateNodeAppearance(source);
+    NodeColorAdjustment.resolveNodeColorAdjustments__nodeColorAdjustment((cast runtime));
+    invalidateNodeAppearance((cast source));
   }
 
-  public static function getNodeColorAdjustments<Traits>(source:Node<Traits>):Null<Array<Adjustment>> {
-    return cast _Runtime.field((cast getNodeRuntime(source) : NodeRuntime<Traits>), 'colorAdjustments');
+  public static function getNodeColorAdjustments<Traits:flighthq._internal._Object>(source:Node<Traits>):Null<Array<Adjustment>> {
+    return cast _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'colorAdjustments');
     return cast null;
   }
 
-  public static function setNodeColorAdjustments<Traits>(source:Node<Traits>, value:Null<Array<Adjustment>>):Void {
+  public static function setNodeColorAdjustments<Traits:flighthq._internal._Object>(source:Node<Traits>, value:Null<Array<Adjustment>>):Void {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
-    runtime = (cast (cast getNodeRuntime(source) : NodeRuntime<Traits>) : NodeRuntime<Traits>);
+    runtime = (cast getNodeRuntime((cast source)) : NodeRuntime<Traits>);
     ((cast runtime : NodeRuntime<Traits>).colorAdjustments = value);
-    NodeColorAdjustment.resolveNodeColorAdjustments__nodeColorAdjustment((cast runtime : ColorAdjustmentRuntime));
-    invalidateNodeAppearance(source);
+    NodeColorAdjustment.resolveNodeColorAdjustments__nodeColorAdjustment((cast runtime));
+    invalidateNodeAppearance((cast source));
   }
 
-  public static function setNodeColorAdjustmentsTint<Traits>(source:Node<Traits>, tint:Float):Void {
-    setNodeColorAdjustments(source, (cast cast ([(cast createTintAdjustment((cast tint : Float)) : Adjustment)] : Array<Dynamic>) : Null<Array<Adjustment>>));
+  public static function setNodeColorAdjustmentsTint<Traits:flighthq._internal._Object>(source:Node<Traits>, tint:Float):Void {
+    setNodeColorAdjustments((cast source), (cast cast ([(cast createTintAdjustment((cast tint : Float)) : TintAdjustment)] : Array<Dynamic>)));
   }
 
   public static function resolveNodeColorAdjustments__nodeColorAdjustment(runtime:ColorAdjustmentRuntime):Void {
@@ -56,8 +57,8 @@ class NodeColorAdjustment {
       ((cast runtime : ColorAdjustmentRuntime).colorAdjustmentsUnsupported = false);
       return;
     }
-    out = _Runtime.coalesce((cast runtime : ColorAdjustmentRuntime).resolvedColorScaleBias, function():Dynamic return cast (cast createColorScaleBias((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : Null<ColorScaleBias>));
-    status = (cast resolveColorAdjustmentsColorScaleBias((cast adjustments : Null<Array<Adjustment>>), out) : Float);
+    out = _Runtime.coalesce((cast runtime : ColorAdjustmentRuntime).resolvedColorScaleBias, function():Dynamic return cast (cast createColorScaleBias((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : ColorScaleBias));
+    status = (cast resolveColorAdjustmentsColorScaleBias((cast adjustments), (cast out)) : Float);
     if ((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_NONE) : Bool)) {
       ((cast runtime : ColorAdjustmentRuntime).resolvedColorScaleBias = null);
       ((cast runtime : ColorAdjustmentRuntime).resolvedColorMatrix = null);
@@ -65,7 +66,7 @@ class NodeColorAdjustment {
       return;
     }
     ((cast runtime : ColorAdjustmentRuntime).resolvedColorScaleBias = out);
-    ((cast runtime : ColorAdjustmentRuntime).resolvedColorMatrix = ((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_CHANNEL_MIXING) : Bool) ? (cast (cast resolveColorAdjustmentsColorMatrix((cast adjustments : Null<Array<Adjustment>>)) : Null<Array<Float>>) : Dynamic) : (cast null : Dynamic)));
+    ((cast runtime : ColorAdjustmentRuntime).resolvedColorMatrix = ((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_CHANNEL_MIXING) : Bool) ? (cast (cast resolveColorAdjustmentsColorMatrix((cast adjustments)) : Null<Array<Float>>) : Dynamic) : (cast null : Dynamic)));
     ((cast runtime : ColorAdjustmentRuntime).colorAdjustmentsUnsupported = ((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_CHANNEL_MIXING) : Bool) && (cast _Runtime.strictEquals((cast runtime : ColorAdjustmentRuntime).resolvedColorMatrix, null) : Bool)));
   }
 }

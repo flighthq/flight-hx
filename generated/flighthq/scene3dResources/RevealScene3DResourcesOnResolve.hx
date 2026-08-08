@@ -30,6 +30,7 @@ import flighthq.types.Scene3DResources.Scene3DResourceRevealOptions;
 import flighthq.types.Scene3DResources.Scene3DResourceSignals;
 import flighthq.types.Signal;
 import flighthq.types.Texture;
+import flighthq.types.Texture.TextureLike;
 import flighthq.types.Tween;
 import flighthq.types.TweenManager;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
@@ -49,12 +50,12 @@ class RevealScene3DResourcesOnResolve {
     from = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.from; }), function():Dynamic return cast 0.0);
     tweenOptions = ((cast !_Runtime.strictEquals(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.ease; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { ease: options.ease } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     ownersByTexture = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
-    owners = cast ([] : Array<Dynamic>);
-    RevealScene3DResourcesOnResolve.collectPendingTextureOwners__revealScene3DResourcesOnResolve((cast scene : Scene3D), (cast resolver : Scene3DResourceResolver), ownersByTexture, owners);
+    owners = (cast cast ([] : Array<Dynamic>));
+    RevealScene3DResourcesOnResolve.collectPendingTextureOwners__revealScene3DResourcesOnResolve((cast scene), (cast resolver), (cast ownersByTexture), (cast owners));
     for (owner in _Runtime.iterable(owners)) {
-      ((cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).node.alpha = cast (from : Dynamic));
+      ((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).node : { var alpha:Float; }).alpha = cast (from : Dynamic));
     }
-    signals = (cast enableScene3DResourceSignals((cast resolver : Scene3DResourceResolver)) : Scene3DResourceSignals);
+    signals = (cast enableScene3DResourceSignals((cast resolver)) : Scene3DResourceSignals);
     slot = (cast function(event:{ var texture:Texture; }):Void {
       var textureOwners:Null<Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>> = cast _Runtime.UNDEFINED;
       textureOwners = ((cast ownersByTexture : flighthq._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).get((cast event : { var texture:Texture; }).texture));
@@ -63,15 +64,15 @@ class RevealScene3DResourcesOnResolve {
       for (owner in _Runtime.iterable(textureOwners)) {
         ((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flighthq._internal._Set<Texture>).delete_((cast event : { var texture:Texture; }).texture));
         if ((cast _Runtime.strictEquals((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flighthq._internal._Set<Texture>).size, 0.0) : Bool)) {
-          (cast createTween((cast tweenManager : TweenManager), (cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).node : Node3D), (cast fadeSeconds : Float), { alpha: 1.0 }, tweenOptions) : Tween<Node3D>);
+          (cast createTween((cast tweenManager), (cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).node), (cast fadeSeconds : Float), (cast { alpha: 1.0 }), (cast tweenOptions)) : Tween<Node3D>);
         }
       }
-    } : { var texture:Texture; }->Void);
-    connectSignal(signals.onResourceResolved, slot, _Runtime.field(_Runtime, 'UNDEFINED'));
-    connectSignal(signals.onResourceFailed, slot, _Runtime.field(_Runtime, 'UNDEFINED'));
+    });
+    connectSignal((cast signals.onResourceResolved), (cast slot), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    connectSignal((cast signals.onResourceFailed), (cast slot), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     return cast function():Void {
-      disconnectSignal(signals.onResourceResolved, slot);
-      disconnectSignal(signals.onResourceFailed, slot);
+      disconnectSignal((cast signals.onResourceResolved), (cast slot));
+      disconnectSignal((cast signals.onResourceFailed), (cast slot));
     };
     return cast null;
   }
@@ -80,31 +81,31 @@ class RevealScene3DResourcesOnResolve {
     var slots:Array<Texture> = cast _Runtime.UNDEFINED;
     var ownersByNode:flighthq._internal._Map<Node3D, Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve> = cast _Runtime.UNDEFINED;
     var visit:Node3D->Void = cast _Runtime.UNDEFINED;
-    slots = cast ([] : Array<Dynamic>);
+    slots = (cast cast ([] : Array<Dynamic>));
     ownersByNode = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     visit = (cast function(node:Node3D):Void {
       var owner:Node3D = cast _Runtime.UNDEFINED;
       var materials:Array<Null<Material>> = cast _Runtime.UNDEFINED;
       if ((cast !(cast (cast isMesh((cast node : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return; }
       owner = (cast node : Node3D);
-      materials = node.materials;
+      materials = (cast node : { var materials:Array<Null<Material>>; }).materials;
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
           var material:Null<Material> = (cast flighthq._internal._StaticIndex.readArray(materials, i) : Null<Material>);
           if ((cast _Runtime.strictEquals(material, null) : Bool)) { i++; continue; }
           _Runtime.setLength(slots, 0.0);
-          getScene3DMaterialTextures(resolver.registry, (cast material : Material), (cast slots : Array<Texture>));
+          getScene3DMaterialTextures((cast resolver.registry), (cast material), (cast slots));
           {
             var j:Float = 0.0;
             while ((cast ((cast j : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) {
               var texture:Texture = flighthq._internal._StaticIndex.readArray(slots, j);
-              var ref:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference((cast scene : Scene3D), (cast texture : Texture)) : Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
-              if ((cast ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast (cast hasTextureSource(texture) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed) : Bool)) : Bool)) { j++; continue; }
+              var ref:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference((cast scene), (cast texture)) : Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
+              if ((cast ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast (cast hasTextureSource((cast texture)) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed) : Bool)) : Bool)) { j++; continue; }
               var ownerState:Null<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve> = ((cast ownersByNode : flighthq._internal._Map<Node3D, Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>).get(owner));
               if ((cast _Runtime.strictEquals(ownerState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 (ownerState = cast ({ node: owner, pending: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) } : Dynamic));
-                ((cast ownersByNode : flighthq._internal._Map<Node3D, Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>).set(owner, ownerState));
+                ((cast ownersByNode : flighthq._internal._Map<Node3D, Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>).set(owner, (cast ownerState)));
                 _Runtime.callProperty(owners, 'push', cast ([ownerState] : Array<Dynamic>));
               }
               if ((cast ((cast (cast ownerState : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flighthq._internal._Set<Texture>).has(texture)) : Bool)) { j++; continue; }
@@ -112,7 +113,7 @@ class RevealScene3DResourcesOnResolve {
               var textureOwners:Null<Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>> = ((cast ownersByTexture : flighthq._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).get(texture));
               if ((cast _Runtime.strictEquals(textureOwners, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 (textureOwners = cast (cast ([] : Array<Dynamic>) : Dynamic));
-                ((cast ownersByTexture : flighthq._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).set(texture, textureOwners));
+                ((cast ownersByTexture : flighthq._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).set(texture, (cast textureOwners)));
               }
               _Runtime.callProperty(textureOwners, 'push', cast ([ownerState] : Array<Dynamic>));
               j++;
@@ -121,8 +122,8 @@ class RevealScene3DResourcesOnResolve {
           i++;
         }
       }
-    } : Node3D->Void);
-    visit((cast scene.root : Node3D));
-    forEachNodeDescendant(scene.root, function(node:Node<Node3DTraits>):Void return visit((cast (cast node : Node3D) : Node3D)));
+    });
+    visit((cast scene.root));
+    forEachNodeDescendant((cast scene.root), (cast function(node:Node<Node3DTraits>):Void { visit((cast (cast node : Node3D))); }));
   }
 }

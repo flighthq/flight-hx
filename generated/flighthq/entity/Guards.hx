@@ -17,7 +17,7 @@ class Guards {
   }
 
   @:noCompletion
-  public static function createGuardedEntity<Type>(entity:Type):Type {
+  public static function createGuardedEntity<Type:flighthq._internal._Object>(entity:Type):Type {
     if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Proxy'), 'undefined') : Bool)) : Bool)) { return cast entity; }
     return cast _Runtime.createProxy(entity, { set: function(target:flighthq._internal._Intersection2<Type, Entity>, prop:flighthq._internal._Union2<String, flighthq._internal._Symbol>, value:flighthq._internal._Any):Bool {
       if ((cast ((cast _Runtime.strictEquals(prop, EntityRuntimeKey) : Bool) && (cast Guards._guardsEnabled__guards : Bool)) : Bool)) {
@@ -25,6 +25,7 @@ class Guards {
       }
       _Runtime.setIndex((cast (cast target : flighthq._internal._Any) : flighthq._internal._Record<Dynamic, flighthq._internal._Any>), prop, value);
       return cast true;
+      return cast _Runtime.UNDEFINED;
     } });
     return cast null;
   }
@@ -38,6 +39,7 @@ class Guards {
       }
       _Runtime.setIndex((cast (cast target : flighthq._internal._Any) : flighthq._internal._Record<Dynamic, flighthq._internal._Any>), prop, value);
       return cast true;
+      return cast _Runtime.UNDEFINED;
     } });
     return cast null;
   }

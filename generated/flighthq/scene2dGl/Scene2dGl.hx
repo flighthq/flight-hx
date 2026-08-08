@@ -118,7 +118,7 @@ class Scene2dGl {
     Facade_Scene2dGl_flighthq_scene2dGl_GlColorAdjustmentMaterialFeature.registerGlColorAdjustmentMaterialFeature(state);
   }
 
-  public static function registerGlShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<Dynamic>>):Void {
+  public static function registerGlShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<String>>):Void {
     Facade_Scene2dGl_flighthq_scene2dCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(state, commands);
   }
 
@@ -138,7 +138,7 @@ class Scene2dGl {
     Facade_Scene2dGl_flighthq_scene2dGl_GlNode2D.renderGlScene2D(state, source);
   }
 
-  public static function renderGlVelocity<Traits>(state:GlRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:GlRenderTarget):Void {
+  public static function renderGlVelocity<Traits:flighthq._internal._Object>(state:GlRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:GlRenderTarget):Void {
     Facade_Scene2dGl_flighthq_scene2dGl_GlVelocity.renderGlVelocity(state, root, field, target);
   }
 }

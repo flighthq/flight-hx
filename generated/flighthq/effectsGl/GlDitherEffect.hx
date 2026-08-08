@@ -20,19 +20,19 @@ class GlDitherEffect {
     var levels:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     levels = _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 4.0);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'stylization.dither' : String), (cast GlDitherEffect.DITHER_FRAGMENT_SRC__glDitherEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'stylization.dither' : String), (cast GlDitherEffect.DITHER_FRAGMENT_SRC__glDitherEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_levels'), HxMath.max(2.0, levels));
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
-    });
+    }));
   }
 
-  public static final defaultGlDitherEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyDitherEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : DitherEffect) : DitherEffect));
-  };
+  public static final defaultGlDitherEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyDitherEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : DitherEffect)));
+  });
 
   public static function registerGlDitherEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'DitherEffect' : String), (cast defaultGlDitherEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'DitherEffect' : String), (cast defaultGlDitherEffectRunner));
   }
 
   public static final DITHER_FRAGMENT_SRC__glDitherEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_levels;\nuniform vec2 u_resolution;\nout vec4 o_color;\nfloat bayer(ivec2 p) {\n  int x = p.x & 3;\n  int y = p.y & 3;\n  int m[16] = int[16](0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5);\n  return float(m[y * 4 + x]) / 16.0;\n}\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  ivec2 px = ivec2(v_texCoord * u_resolution);\n  float t = bayer(px) - 0.5;\n  float steps = u_levels - 1.0;\n  vec3 q = floor(c.rgb * steps + 0.5 + t) / steps;\n  o_color = vec4(clamp(q, 0.0, 1.0), c.a);\n}';

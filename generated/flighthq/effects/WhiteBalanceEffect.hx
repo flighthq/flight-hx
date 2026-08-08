@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.WhiteBalanceEffect;
 
 class WhiteBalanceEffect {
-  public static function createWhiteBalanceEffect(?options:Dynamic):flighthq.types.WhiteBalanceEffect {
+  public static function createWhiteBalanceEffect(?options:flighthq._internal._Omit<flighthq.types.WhiteBalanceEffect, String>):flighthq.types.WhiteBalanceEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'WhiteBalanceEffect' }, options]);
     return cast null;

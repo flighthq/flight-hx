@@ -25,28 +25,29 @@ import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshSubset;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Types.WireframeMaterialKind;
 import flighthq.types.WireframeMaterial;
 import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 
 class WireframeGlMeshMaterialRenderer {
   @:noCompletion
-  public static final wireframeGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  public static final wireframeGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var wireframe:Null<WireframeMaterial> = cast _Runtime.UNDEFINED;
     var alphaMaskEnabled:Bool = cast _Runtime.UNDEFINED;
     var program:GlWireframeProgram = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     wireframe = (cast material : Null<WireframeMaterial>);
-    alphaMaskEnabled = _Runtime.strictEquals(_Runtime.optionalField(wireframe, 'alphaMode'), 'mask');
-    program = (cast ensureGlWireframeProgram((cast state : GlRenderState), (cast alphaMaskEnabled : Bool)) : GlWireframeProgram);
-    beginGlMeshDraw((cast state : GlRenderState), program, (cast true : Bool));
-    setGlMeshViewProjection((cast state : GlRenderState), (cast (cast program : GlWireframeProgram).locViewProjection : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
+    alphaMaskEnabled = _Runtime.strictEquals(({ final __structural0 = wireframe; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var alphaMode:MaterialAlphaMode; }).alphaMode; }), 'mask');
+    program = (cast ensureGlWireframeProgram((cast state), (cast alphaMaskEnabled : Bool)) : GlWireframeProgram);
+    beginGlMeshDraw((cast state), (cast program), (cast true : Bool));
+    setGlMeshViewProjection((cast state), (cast (cast program : GlWireframeProgram).locViewProjection), (cast camera));
     if ((cast _Runtime.strictEquals(wireframe, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast program : GlWireframeProgram).locColor, 1.0, 1.0, 1.0, 1.0);
       return;
     }
-    (cast unpackColorToLinear((cast WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer : LinearColor), (cast _Runtime.field(wireframe, 'color') : Float)) : LinearColor);
+    (cast unpackColorToLinear((cast WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer), (cast _Runtime.field(wireframe, 'color') : Float)) : LinearColor);
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast program : GlWireframeProgram).locColor, flighthq._internal._StaticIndex.readArray(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 0.0), flighthq._internal._StaticIndex.readArray(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 1.0), flighthq._internal._StaticIndex.readArray(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 2.0), flighthq._internal._StaticIndex.readArray(WireframeGlMeshMaterialRenderer.scratchRgba__wireframeGlMeshMaterialRenderer, 3.0));
     if ((cast alphaMaskEnabled : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast program : GlWireframeProgram).locAlphaCutoff, _Runtime.field(wireframe, 'alphaCutoff')); }
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
@@ -56,19 +57,19 @@ class WireframeGlMeshMaterialRenderer {
     var subset:MeshSubset = cast _Runtime.UNDEFINED;
     var elementSize:Float = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    program = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast program : GlMeshProgram).locModel, false, _Runtime.field(proxy, 'worldMatrix').m);
-    uploadGlMeshDrawAlpha((cast gl : flighthq._internal.dom.WebGL2RenderingContext), program, (cast _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0) : Float), (cast _Runtime.field(proxy, 'material') : Null<Material>));
-    upload = (cast ensureGlWireframeUpload((cast state : GlRenderState), (cast geometry : MeshGeometry)) : GlWireframeUpload);
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast program : GlMeshProgram).locModel, false, (cast _Runtime.field(proxy, 'worldMatrix') : { var m:flighthq._internal._Float32Array; }).m);
+    uploadGlMeshDrawAlpha((cast gl), (cast program), (cast _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0) : Float), (cast _Runtime.field(proxy, 'material')));
+    upload = (cast ensureGlWireframeUpload((cast state), (cast geometry)) : GlWireframeUpload);
     subset = _Runtime.field(proxy, 'subset');
     elementSize = ((cast _Runtime.strictEquals((cast upload : GlWireframeUpload).indexType, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT)) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
     flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINES', flighthq._internal.backend.WebGl2Backend.LINES), (subset.indexCount * 2.0), (cast upload : GlWireframeUpload).indexType, ((subset.indexOffset * 2.0) * elementSize));
-  } };
+  } });
 
   public static function registerGlWireframeMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer((cast state : GlRenderState), (cast WireframeMaterialKind : String), (cast wireframeGlMeshMaterialRenderer : GlMeshMaterialRenderer));
+    registerGlMeshMaterialRenderer((cast state), (cast WireframeMaterialKind : String), (cast wireframeGlMeshMaterialRenderer));
   }
 
-  public static final scratchRgba__wireframeGlMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static final scratchRgba__wireframeGlMeshMaterialRenderer:LinearColor = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 }

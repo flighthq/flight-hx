@@ -120,7 +120,7 @@ class Scene2dWgpu {
     Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuColorAdjustmentMaterialFeature.registerWgpuColorAdjustmentMaterialFeature(state);
   }
 
-  public static function registerWgpuShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<Dynamic>>):Void {
+  public static function registerWgpuShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<String>>):Void {
     Facade_Scene2dWgpu_flighthq_scene2dCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(state, commands);
   }
 
@@ -140,7 +140,7 @@ class Scene2dWgpu {
     Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuNode2D.renderWgpuScene2D(state, source);
   }
 
-  public static function renderWgpuVelocity<Traits>(state:WgpuRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:WgpuRenderTarget):Void {
+  public static function renderWgpuVelocity<Traits:flighthq._internal._Object>(state:WgpuRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:WgpuRenderTarget):Void {
     Facade_Scene2dWgpu_flighthq_scene2dWgpu_WgpuVelocity.renderWgpuVelocity(state, root, field, target);
   }
 }

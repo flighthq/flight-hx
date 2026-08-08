@@ -8,7 +8,7 @@ import flighthq.types.Texture;
 import flighthq.types.Vector3.Vector3Like;
 
 class _VertexDisplaceModifierValues {
-  public static final VertexDisplaceModifierSourceValue:{ var HeightMap:String; var Sine:String; } = { HeightMap: 'HeightMap', Sine: 'Sine' };
+  public static final VertexDisplaceModifierSourceValue:{ var HeightMap:String; var Sine:String; } = (cast { HeightMap: 'HeightMap', Sine: 'Sine' });
 
   public static final VertexDisplaceModifierKind:String = 'VertexDisplaceModifier';
 }

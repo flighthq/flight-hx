@@ -7,10 +7,12 @@ import flighthq.render.RenderProxy.getOrCreateRenderProxy2D;
 import flighthq.types.DomRenderState;
 import flighthq.types.Node2D;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
+import flighthq.types.Renderable;
 
 class DomCSSFilterBinding {
   public static function enableDomCssFilterSupport(state:DomRenderState):Void {
-    ((cast state : DomRenderState).domCssFilterResolver = getDomCssFilter);
+    ((cast state : { var domCssFilterResolver:Null<RenderProxy2D->Null<String>>; }).domCssFilterResolver = (cast getDomCssFilter));
   }
 
   @:noCompletion
@@ -21,12 +23,12 @@ class DomCSSFilterBinding {
 
   public static function setDomCssFilter(state:DomRenderState, node:Node2D, filter:Null<String>):Void {
     var renderProxy:RenderProxy2D = cast _Runtime.UNDEFINED;
-    renderProxy = (cast getOrCreateRenderProxy2D(state, node) : RenderProxy2D);
+    renderProxy = (cast getOrCreateRenderProxy2D((cast state), (cast node)) : RenderProxy2D);
     if ((cast _Runtime.strictEquals(filter, null) : Bool)) {
       ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap<RenderProxy2D, String>).delete_(renderProxy));
       return;
     }
-    ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap<RenderProxy2D, String>).set(renderProxy, filter));
+    ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap<RenderProxy2D, String>).set(renderProxy, (cast filter)));
   }
 
   public static final _cssFilterBindings__domCSSFilterBinding:flighthq._internal._WeakMap<RenderProxy2D, String> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);

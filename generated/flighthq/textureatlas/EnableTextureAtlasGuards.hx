@@ -17,18 +17,18 @@ class EnableTextureAtlasGuards {
   }
 
   public static function disableTextureAtlasGuards():Void {
-    setTextureAtlasRegionTextureGuard(null);
+    setTextureAtlasRegionTextureGuard((cast null));
     (EnableTextureAtlasGuards.textureAtlasGuardsEnabled__enableTextureAtlasGuards = cast (false : Dynamic));
   }
 
   public static function enableTextureAtlasGuards():Void {
-    setTextureAtlasRegionTextureGuard(EnableTextureAtlasGuards.warnTextureAtlasRegionTextureUnavailable__enableTextureAtlasGuards);
+    setTextureAtlasRegionTextureGuard((cast EnableTextureAtlasGuards.warnTextureAtlasRegionTextureUnavailable__enableTextureAtlasGuards));
     (EnableTextureAtlasGuards.textureAtlasGuardsEnabled__enableTextureAtlasGuards = cast (true : Dynamic));
   }
 
   public static function warnTextureAtlasRegionTextureUnavailable__enableTextureAtlasGuards(atlas:TextureAtlas, regionId:Float, explanation:TextureAtlasRegionTextureExplanation):Void {
     if ((cast !_Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'rotated-page') : Bool)) { return; }
-    (cast logOnce((cast 'textureatlas:region-texture-rotated-page' : String), (cast LogLevel.Warn : LogLevel), { atlas: atlas, message: 'getTextureAtlasRegionTexture: a page Texture with nonzero uvRotation cannot compose a region without shear; use an unrotated page window.', regionId: regionId, status: _Runtime.field(explanation, 'status') }, (cast 'textureatlas' : Null<String>)) : Bool);
+    (cast logOnce((cast 'textureatlas:region-texture-rotated-page' : String), (cast LogLevel.Warn), (cast { atlas: atlas, message: 'getTextureAtlasRegionTexture: a page Texture with nonzero uvRotation cannot compose a region without shear; use an unrotated page window.', regionId: regionId, status: _Runtime.field(explanation, 'status') }), (cast 'textureatlas')) : Bool);
   }
 
   public static var textureAtlasGuardsEnabled__enableTextureAtlasGuards:Bool = false;

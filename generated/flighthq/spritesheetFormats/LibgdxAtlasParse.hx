@@ -39,8 +39,8 @@ class LibgdxAtlasParse {
     var currentPage:Null<LibgdxPage__libgdxAtlasParse> = cast _Runtime.UNDEFINED;
     var currentRegion:Null<LibgdxRegion__libgdxAtlasParse> = cast _Runtime.UNDEFINED;
     lines = _Runtime.callProperty(text, 'split', cast ([_Runtime.regexp('\\r?\\n', '')] : Array<Dynamic>));
-    pages = cast ([] : Array<Dynamic>);
-    regions = cast ([] : Array<Dynamic>);
+    pages = (cast cast ([] : Array<Dynamic>));
+    regions = (cast cast ([] : Array<Dynamic>));
     currentPage = null;
     currentRegion = null;
     for (raw in _Runtime.iterable(lines)) {
@@ -66,7 +66,7 @@ class LibgdxAtlasParse {
             }
             else if (__switchValue == 'xy') {
               {
-                var __destructure0 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<flighthq._internal._Any>);
+                var __destructure0 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<Float>);
                 var x:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
                 var y:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
                 ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).x = x);
@@ -75,7 +75,7 @@ class LibgdxAtlasParse {
             }
             else if (__switchValue == 'size') {
               {
-                var __destructure1 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<flighthq._internal._Any>);
+                var __destructure1 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<Float>);
                 var w:Float = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
                 var h:Float = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
                 ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).spriteWidth = w);
@@ -84,7 +84,7 @@ class LibgdxAtlasParse {
             }
             else if (__switchValue == 'orig') {
               {
-                var __destructure2 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<flighthq._internal._Any>);
+                var __destructure2 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<Float>);
                 var sw:Float = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
                 var sh:Float = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
                 ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).sourceWidth = sw);
@@ -93,7 +93,7 @@ class LibgdxAtlasParse {
             }
             else if (__switchValue == 'offset') {
               {
-                var __destructure3 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<flighthq._internal._Any>);
+                var __destructure3 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<Float>);
                 var ox:Float = flighthq._internal._StaticIndex.readArray(__destructure3, 0.0);
                 var oy:Float = flighthq._internal._StaticIndex.readArray(__destructure3, 1.0);
                 ((cast currentRegion : LibgdxRegion__libgdxAtlasParse).offsetX = ox);
@@ -109,7 +109,7 @@ class LibgdxAtlasParse {
             var __switchValue = key;
             if (__switchValue == 'size') {
               {
-                var __destructure4 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<flighthq._internal._Any>);
+                var __destructure4 = (cast LibgdxAtlasParse.parseIntPair__libgdxAtlasParse((cast value : String)) : Array<Float>);
                 var w:Float = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
                 var h:Float = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
                 ((cast currentPage : LibgdxPage__libgdxAtlasParse).width = w);
@@ -146,7 +146,7 @@ class LibgdxAtlasParse {
   }
 
   public static function frameFromRegion__libgdxAtlasParse(region:TextureAtlasRegion):SpritesheetFrameData {
-    return cast (cast createSpritesheetFrameData((cast { height: region.height, name: _Runtime.coalesce(region.name, function():Dynamic return cast ''), offsetX: region.sourceX, offsetY: region.sourceY, pivotX: region.pivotX, pivotY: region.pivotY, rotated: region.rotated, sourceHeight: _Runtime.coalesce(region.originalHeight, function():Dynamic return cast region.height), sourceWidth: _Runtime.coalesce(region.originalWidth, function():Dynamic return cast region.width), width: region.width, x: region.x, y: region.y } : Null<flighthq._internal._Any>)) : SpritesheetFrameData);
+    return cast (cast createSpritesheetFrameData((cast { height: region.height, name: _Runtime.coalesce(region.name, function():Dynamic return cast ''), offsetX: region.sourceX, offsetY: region.sourceY, pivotX: region.pivotX, pivotY: region.pivotY, rotated: region.rotated, sourceHeight: _Runtime.coalesce(region.originalHeight, function():Dynamic return cast region.height), sourceWidth: _Runtime.coalesce(region.originalWidth, function():Dynamic return cast region.width), width: region.width, x: region.x, y: region.y })) : SpritesheetFrameData);
     return cast null;
   }
 
@@ -163,15 +163,15 @@ class LibgdxAtlasParse {
       var numStr:String = _Runtime.getIndex(__destructure5, 2.0);
       var index:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([numStr, 10.0] : Array<Dynamic>));
       var bucket:Null<Array<{ var name:String; var index:Float; }>> = ((cast groups : flighthq._internal._Map<String, Array<{ var name:String; var index:Float; }>>).get(base));
-      if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { ((cast groups : flighthq._internal._Map<String, Array<{ var name:String; var index:Float; }>>).set(base, cast ([{ index: index, name: name }] : Array<Dynamic>))); }
+      if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { ((cast groups : flighthq._internal._Map<String, Array<{ var name:String; var index:Float; }>>).set(base, (cast cast ([{ index: index, name: name }] : Array<Dynamic>)))); }
     }
-    animations = cast ([] : Array<Dynamic>);
+    animations = (cast cast ([] : Array<Dynamic>));
     for (__iteration6 in _Runtime.iterable(groups)) {
       var base:String = flighthq._internal._StaticIndex.readArray(__iteration6, 0.0);
       var entries:Array<{ var name:String; var index:Float; }> = flighthq._internal._StaticIndex.readArray(__iteration6, 1.0);
       if ((cast ((cast _Runtime.field(entries, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
       _Runtime.sortAndReturn(entries, function(a:{ var name:String; var index:Float; }, b:{ var name:String; var index:Float; }) return ((cast a : { var name:String; var index:Float; }).index - (cast b : { var name:String; var index:Float; }).index));
-      _Runtime.callProperty(animations, 'push', cast ([(cast createSpritesheetAnimationData((cast { frameDuration: frameDuration, frameNames: _Runtime.callProperty(entries, 'map', cast ([function(e:{ var name:String; var index:Float; }, __unused7:Float, __unused8:Array<{ var name:String; var index:Float; }>):String return (cast e : { var name:String; var index:Float; }).name] : Array<Dynamic>)), name: base, repeatCount: -1.0 } : Null<flighthq._internal._Any>)) : SpritesheetAnimationData)] : Array<Dynamic>));
+      _Runtime.callProperty(animations, 'push', cast ([(cast createSpritesheetAnimationData((cast { frameDuration: frameDuration, frameNames: _Runtime.callProperty(entries, 'map', cast ([function(e:{ var name:String; var index:Float; }, __unused7:Float, __unused8:Array<{ var name:String; var index:Float; }>):String return (cast e : { var name:String; var index:Float; }).name] : Array<Dynamic>)), name: base, repeatCount: -1.0 })) : SpritesheetAnimationData)] : Array<Dynamic>));
     }
     return cast animations;
     return cast null;
@@ -196,11 +196,11 @@ class LibgdxAtlasParse {
     imageFile = _Runtime.coalesce(({ final __structural7 = firstPage; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : LibgdxPage__libgdxAtlasParse).filename; }), function():Dynamic return cast '');
     imageWidth = _Runtime.coalesce(({ final __structural8 = firstPage; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : LibgdxPage__libgdxAtlasParse).width; }), function():Dynamic return cast 0.0);
     imageHeight = _Runtime.coalesce(({ final __structural9 = firstPage; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : LibgdxPage__libgdxAtlasParse).height; }), function():Dynamic return cast 0.0);
-    regions = (cast parseTextureAtlasLibgdxAtlas((cast text : String), (cast createTextureAtlas((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : TextureAtlas)) : TextureAtlas).regions;
+    regions = (cast (cast parseTextureAtlasLibgdxAtlas((cast text : String), (cast (cast createTextureAtlas((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas))) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
     frames = _Runtime.callProperty(regions, 'map', cast ([LibgdxAtlasParse.frameFromRegion__libgdxAtlasParse] : Array<Dynamic>));
     frameNames = _Runtime.callProperty(frames, 'map', cast ([function(f:SpritesheetFrameData, __unused10:Float, __unused11:Array<SpritesheetFrameData>):String return f.name] : Array<Dynamic>));
-    animations = (cast LibgdxAtlasParse.inferAnimations__libgdxAtlasParse((cast frameNames : Array<String>), (cast frameDuration : Float)) : Array<SpritesheetAnimationData>);
-    return cast (cast createSpritesheetData((cast { animations: animations, frames: frames, imageFile: imageFile, imageHeight: imageHeight, imageWidth: imageWidth, scale: 1.0 } : Null<flighthq._internal._Any>)) : SpritesheetData);
+    animations = (cast LibgdxAtlasParse.inferAnimations__libgdxAtlasParse((cast frameNames), (cast frameDuration : Float)) : Array<SpritesheetAnimationData>);
+    return cast (cast createSpritesheetData((cast { animations: animations, frames: frames, imageFile: imageFile, imageHeight: imageHeight, imageWidth: imageWidth, scale: 1.0 })) : SpritesheetData);
     return cast null;
   }
 }

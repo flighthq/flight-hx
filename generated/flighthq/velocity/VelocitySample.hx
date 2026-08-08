@@ -20,8 +20,8 @@ class VelocitySample {
     }
     cx = (((currentWorldTransform.a * pointX) + (currentWorldTransform.c * pointY)) + currentWorldTransform.tx);
     cy = (((currentWorldTransform.b * pointX) + (currentWorldTransform.d * pointY)) + currentWorldTransform.ty);
-    px = _Runtime.addNumbers((_Runtime.multiplyNumbers(_Runtime.field(sample, 'previousWorldTransform').a, pointX) + _Runtime.multiplyNumbers(_Runtime.field(sample, 'previousWorldTransform').c, pointY)), _Runtime.field(sample, 'previousWorldTransform').tx);
-    py = _Runtime.addNumbers((_Runtime.multiplyNumbers(_Runtime.field(sample, 'previousWorldTransform').b, pointX) + _Runtime.multiplyNumbers(_Runtime.field(sample, 'previousWorldTransform').d, pointY)), _Runtime.field(sample, 'previousWorldTransform').ty);
+    px = ((((cast _Runtime.field(sample, 'previousWorldTransform') : { var a:Float; }).a * pointX) + ((cast _Runtime.field(sample, 'previousWorldTransform') : { var c:Float; }).c * pointY)) + (cast _Runtime.field(sample, 'previousWorldTransform') : { var tx:Float; }).tx);
+    py = ((((cast _Runtime.field(sample, 'previousWorldTransform') : { var b:Float; }).b * pointX) + ((cast _Runtime.field(sample, 'previousWorldTransform') : { var d:Float; }).d * pointY)) + (cast _Runtime.field(sample, 'previousWorldTransform') : { var ty:Float; }).ty);
     ((cast out : Velocity2D).x = (cx - px));
     ((cast out : Velocity2D).y = (cy - py));
     return cast out;

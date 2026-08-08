@@ -21,9 +21,9 @@ class Throttle {
         slot((cast elapsed : Float));
         (elapsed = cast (_Runtime.fmod(elapsed, period) : Dynamic));
       }
-    } : Float->Void);
-    connectSignal((cast source : Signal<Float->Void>), (cast handler : Float->Void), _Runtime.field(_Runtime, 'UNDEFINED'));
-    return cast function():Void return disconnectSignal((cast source : Signal<Float->Void>), (cast handler : Float->Void));
+    });
+    connectSignal((cast source), (cast handler), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    return cast function():Void { (cast disconnectSignal : Signal<Float->Void>->(Float->Void)->Void)((cast source), (cast handler)); };
     return cast null;
   }
 
@@ -45,7 +45,7 @@ class Throttle {
         _Runtime.clearTimeout(timer);
         (timer = cast (null : Dynamic));
       }
-    } : Void->Void);
+    });
     handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
       (lastArgs = cast (args : Dynamic));
       if ((cast ((cast ((cast leading : Bool) && (cast _Runtime.strictEquals(timer, null) : Bool)) : Bool) && (cast !(cast leadingFired : Bool) : Bool)) : Bool)) {
@@ -62,9 +62,9 @@ class Throttle {
         }
       }, delayMs) : Dynamic));
     }, 0) : T);
-    connectSignal(source, handler, _Runtime.field(_Runtime, 'UNDEFINED'));
+    connectSignal((cast source), (cast handler), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     return cast function():Void {
-      disconnectSignal(source, handler);
+      disconnectSignal((cast source), (cast handler));
       clearTimer();
     };
     return cast null;
@@ -88,7 +88,7 @@ class Throttle {
         _Runtime.clearTimeout(trailingTimer);
         (trailingTimer = cast (null : Dynamic));
       }
-    } : Void->Void);
+    });
     handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
       var now:Float = cast _Runtime.UNDEFINED;
       var remaining:Float = cast _Runtime.UNDEFINED;
@@ -115,9 +115,9 @@ class Throttle {
         }, remaining) : Dynamic));
       } }
     }, 0) : T);
-    connectSignal(source, handler, _Runtime.field(_Runtime, 'UNDEFINED'));
+    connectSignal((cast source), (cast handler), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     return cast function():Void {
-      disconnectSignal(source, handler);
+      disconnectSignal((cast source), (cast handler));
       clearTrailing();
     };
     return cast null;

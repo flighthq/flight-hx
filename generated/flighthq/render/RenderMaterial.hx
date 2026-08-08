@@ -7,13 +7,12 @@ import flighthq.types.HasMaterial;
 import flighthq.types.Material;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderState;
-import flighthq.types.Renderable;
 
 class RenderMaterial {
   @:noCompletion
   public static function updateRenderProxyMaterial(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
     var source:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    source = (cast (cast data : RenderProxy).source : Dynamic);
+    source = (cast (cast data : RenderProxy).source : flighthq._internal._Partial<HasMaterial>);
     ((cast data : RenderProxy).material = _Runtime.coalesce(_Runtime.field(source, 'material'), function():Dynamic return cast null));
     ((cast data : RenderProxy).materialData = _Runtime.coalesce(_Runtime.field(source, 'materialData'), function():Dynamic return cast null));
   }

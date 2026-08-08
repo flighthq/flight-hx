@@ -11,6 +11,7 @@ import flighthq.node.NodeTransform2d.ensureNodeWorldMatrix;
 import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.Matrix;
+import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Node.NodeOf;
 import flighthq.types.Velocity.Velocity2D;
 import flighthq.types.Velocity.VelocityField;
@@ -18,37 +19,37 @@ import flighthq.types.Velocity.VelocitySample;
 import flighthq.velocity.VelocityField.ensureVelocitySample;
 
 class TransformVelocity {
-  public static function contributeTransformVelocity<Traits>(field:VelocityField, root:Transform2DNode<Traits>):Void {
-    TransformVelocity.visitTransformVelocity__transformVelocity((cast field : VelocityField), root);
+  public static function contributeTransformVelocity<Traits:flighthq._internal._Object>(field:VelocityField, root:Transform2DNode<Traits>):Void {
+    TransformVelocity.visitTransformVelocity__transformVelocity((cast field), (cast root));
   }
 
-  public static function visitTransformVelocity__transformVelocity<Traits>(field:VelocityField, node:Transform2DNode<Traits>):Void {
+  public static function visitTransformVelocity__transformVelocity<Traits:flighthq._internal._Object>(field:VelocityField, node:Transform2DNode<Traits>):Void {
     var mutableNode:Transform2DNode<Traits> = cast _Runtime.UNDEFINED;
     var world:Matrix = cast _Runtime.UNDEFINED;
     var sample:VelocitySample = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
     mutableNode = (cast node : Transform2DNode<Traits>);
-    ensureNodeWorldMatrix(mutableNode);
-    world = (cast getNodeWorldMatrix(mutableNode) : Matrix);
-    sample = (cast ensureVelocitySample((cast field : VelocityField), (cast node : flighthq._internal._Object)) : VelocitySample);
+    ensureNodeWorldMatrix((cast mutableNode));
+    world = (cast getNodeWorldMatrix((cast mutableNode)) : Matrix);
+    sample = (cast ensureVelocitySample((cast field), (cast node)) : VelocitySample);
     if ((cast !_Runtime.strictEquals((cast sample : VelocitySample).explicitFrameId, (cast field : VelocityField).frameId) : Bool)) {
       if ((cast !_Runtime.strictEquals((cast sample : VelocitySample).previousWorldTransform, null) : Bool)) {
-        ((cast (cast sample : VelocitySample).velocity : Velocity2D).x = (world.tx - (cast sample : VelocitySample).previousWorldTransform.tx));
-        ((cast (cast sample : VelocitySample).velocity : Velocity2D).y = (world.ty - (cast sample : VelocitySample).previousWorldTransform.ty));
+        ((cast (cast sample : VelocitySample).velocity : Velocity2D).x = (world.tx - (cast (cast sample : VelocitySample).previousWorldTransform : { var tx:Float; }).tx));
+        ((cast (cast sample : VelocitySample).velocity : Velocity2D).y = (world.ty - (cast (cast sample : VelocitySample).previousWorldTransform : { var ty:Float; }).ty));
       } else {
         ((cast (cast sample : VelocitySample).velocity : Velocity2D).x = 0.0);
         ((cast (cast sample : VelocitySample).velocity : Velocity2D).y = 0.0);
       }
       ((cast sample : VelocitySample).lastFrameId = (cast field : VelocityField).frameId);
     }
-    if ((cast _Runtime.strictEquals((cast sample : VelocitySample).previousWorldTransform, null) : Bool)) { ((cast sample : VelocitySample).previousWorldTransform = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Null<Matrix>)); }
-    copyMatrix((cast sample : VelocitySample).previousWorldTransform, world);
-    count = (cast getNodeChildCount(mutableNode) : Float);
+    if ((cast _Runtime.strictEquals((cast sample : VelocitySample).previousWorldTransform, null) : Bool)) { ((cast sample : VelocitySample).previousWorldTransform = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix)); }
+    copyMatrix((cast (cast sample : VelocitySample).previousWorldTransform), (cast world));
+    count = (cast getNodeChildCount((cast mutableNode)) : Float);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var child:Null<NodeOf<Traits>> = (cast getNodeChildAt(mutableNode, (cast i : Float)) : Null<NodeOf<Traits>>);
-        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { TransformVelocity.visitTransformVelocity__transformVelocity((cast field : VelocityField), (cast (cast child : flighthq._internal._Any) : Transform2DNode<Traits>)); }
+        var child:Null<NodeOf<Traits>> = (cast getNodeChildAt((cast mutableNode), (cast i : Float)) : Null<NodeOf<Traits>>);
+        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { TransformVelocity.visitTransformVelocity__transformVelocity((cast field), (cast (cast (cast child : flighthq._internal._Any) : Transform2DNode<Traits>))); }
         i++;
       }
     }

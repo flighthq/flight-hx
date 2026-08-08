@@ -40,7 +40,7 @@ class CocosPlistParse {
         var keyEl:XmlElement = flighthq._internal._StaticIndex.readArray(children, i);
         var valEl:XmlElement = flighthq._internal._StaticIndex.readArray(children, (i + 1.0));
         if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(({ final __typedStruct0 = keyEl; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.name; }), 'key'), function():Dynamic return cast valEl))) {
-          ((cast map : flighthq._internal._Map<String, XmlElement>).set(keyEl.text, valEl));
+          ((cast map : flighthq._internal._Map<String, XmlElement>).set(keyEl.text, (cast valEl)));
         }
         (i = cast ((i + 2.0) : Dynamic));
       }
@@ -50,17 +50,17 @@ class CocosPlistParse {
   }
 
   public static function getTextValue__cocosPlistParse(el:Null<XmlElement>):String {
-    return cast _Runtime.coalesce(({ final __typedStruct1 = el; __typedStruct1 == null ? _Runtime.UNDEFINED : (cast __typedStruct1 : flighthq.types.XmlElement).text; }), function():Dynamic return cast '');
+    return cast _Runtime.coalesce(({ final __typedStruct1 = el; __typedStruct1 == null ? _Runtime.UNDEFINED : (cast __typedStruct1 : { var text:String; }).text; }), function():Dynamic return cast '');
     return cast null;
   }
 
   public static function getBoolValue__cocosPlistParse(el:Null<XmlElement>):Bool {
-    return cast _Runtime.strictEquals(({ final __typedStruct2 = el; __typedStruct2 == null ? _Runtime.UNDEFINED : (cast __typedStruct2 : flighthq.types.XmlElement).name; }), 'true');
+    return cast _Runtime.strictEquals(({ final __typedStruct2 = el; __typedStruct2 == null ? _Runtime.UNDEFINED : (cast __typedStruct2 : { var name:String; }).name; }), 'true');
     return cast null;
   }
 
   public static function getIntValue__cocosPlistParse(el:Null<XmlElement>):Float {
-    return cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([_Runtime.coalesce(({ final __typedStruct3 = el; __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : flighthq.types.XmlElement).text; }), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>));
+    return cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([_Runtime.coalesce(({ final __typedStruct3 = el; __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { var text:String; }).text; }), function():Dynamic return cast '0'), 10.0] : Array<Dynamic>));
     return cast null;
   }
 
@@ -74,41 +74,41 @@ class CocosPlistParse {
     var frames:flighthq._internal._Record<String, CocosPlistFrame> = cast _Runtime.UNDEFINED;
     root = (cast parseXmlDocument((cast xml : String)) : Null<XmlElement>);
     rootDict = null;
-    if ((cast _Runtime.strictEquals(({ final __typedStruct4 = root; __typedStruct4 == null ? _Runtime.UNDEFINED : (cast __typedStruct4 : flighthq.types.XmlElement).name; }), 'plist') : Bool)) {
-      (rootDict = cast (_Runtime.coalesce(_Runtime.find((cast root : flighthq.types.XmlElement).children, function(c:XmlElement, __unused0:Float, __unused1:Array<XmlElement>):Bool return _Runtime.strictEquals(c.name, 'dict')), function():Dynamic return cast null) : Dynamic));
-    } else { if ((cast _Runtime.strictEquals(({ final __typedStruct5 = root; __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : flighthq.types.XmlElement).name; }), 'dict') : Bool)) {
+    if ((cast _Runtime.strictEquals(({ final __typedStruct4 = root; __typedStruct4 == null ? _Runtime.UNDEFINED : (cast __typedStruct4 : { var name:String; }).name; }), 'plist') : Bool)) {
+      (rootDict = cast (_Runtime.coalesce(_Runtime.find((cast root : { var children:Array<XmlElement>; }).children, function(c:XmlElement, __unused0:Float, __unused1:Array<XmlElement>):Bool return _Runtime.strictEquals(c.name, 'dict')), function():Dynamic return cast null) : Dynamic));
+    } else { if ((cast _Runtime.strictEquals(({ final __typedStruct5 = root; __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : { var name:String; }).name; }), 'dict') : Bool)) {
       (rootDict = cast (root : Dynamic));
     } }
     if ((cast !_Runtime.truthy(rootDict) : Bool)) { return cast { frames: {  }, metadata: { format: 0.0, size: '{0,0}', textureFileName: '' } }; }
-    rootMap = (cast CocosPlistParse.dictToMap__cocosPlistParse((cast rootDict : XmlElement)) : flighthq._internal._Map<String, XmlElement>);
+    rootMap = (cast CocosPlistParse.dictToMap__cocosPlistParse((cast rootDict)) : flighthq._internal._Map<String, XmlElement>);
     metaEl = ((cast rootMap : flighthq._internal._Map<String, XmlElement>).get('metadata'));
-    metadata = { format: 0.0, size: '{0,0}', textureFileName: '' };
-    if ((cast _Runtime.strictEquals(({ final __typedStruct6 = metaEl; __typedStruct6 == null ? _Runtime.UNDEFINED : (cast __typedStruct6 : flighthq.types.XmlElement).name; }), 'dict') : Bool)) {
-      var metaMap:flighthq._internal._Map<String, XmlElement> = (cast CocosPlistParse.dictToMap__cocosPlistParse((cast metaEl : XmlElement)) : flighthq._internal._Map<String, XmlElement>);
-      (metadata = cast ({ format: (cast CocosPlistParse.getIntValue__cocosPlistParse((cast ((cast metaMap : flighthq._internal._Map<String, XmlElement>).get('format')) : Null<XmlElement>)) : Float), size: (cast CocosPlistParse.getTextValue__cocosPlistParse((cast ((cast metaMap : flighthq._internal._Map<String, XmlElement>).get('size')) : Null<XmlElement>)) : String), textureFileName: _Runtime.orValue((cast CocosPlistParse.getTextValue__cocosPlistParse((cast ((cast metaMap : flighthq._internal._Map<String, XmlElement>).get('textureFileName')) : Null<XmlElement>)) : String), function():Dynamic return cast (cast CocosPlistParse.getTextValue__cocosPlistParse((cast ((cast metaMap : flighthq._internal._Map<String, XmlElement>).get('realTextureFileName')) : Null<XmlElement>)) : String)) } : Dynamic));
+    metadata = (cast { format: 0.0, size: '{0,0}', textureFileName: '' });
+    if ((cast _Runtime.strictEquals(({ final __typedStruct6 = metaEl; __typedStruct6 == null ? _Runtime.UNDEFINED : (cast __typedStruct6 : { var name:String; }).name; }), 'dict') : Bool)) {
+      var metaMap:flighthq._internal._Map<String, XmlElement> = (cast CocosPlistParse.dictToMap__cocosPlistParse((cast metaEl)) : flighthq._internal._Map<String, XmlElement>);
+      (metadata = cast ({ format: (cast CocosPlistParse.getIntValue__cocosPlistParse((cast ((cast metaMap : flighthq._internal._Map<String, XmlElement>).get('format')))) : Float), size: (cast CocosPlistParse.getTextValue__cocosPlistParse((cast ((cast metaMap : flighthq._internal._Map<String, XmlElement>).get('size')))) : String), textureFileName: _Runtime.orValue((cast CocosPlistParse.getTextValue__cocosPlistParse((cast ((cast metaMap : flighthq._internal._Map<String, XmlElement>).get('textureFileName')))) : String), function():Dynamic return cast (cast CocosPlistParse.getTextValue__cocosPlistParse((cast ((cast metaMap : flighthq._internal._Map<String, XmlElement>).get('realTextureFileName')))) : String)) } : Dynamic));
     }
     framesEl = ((cast rootMap : flighthq._internal._Map<String, XmlElement>).get('frames'));
-    frames = {  };
-    if ((cast _Runtime.strictEquals(({ final __typedStruct7 = framesEl; __typedStruct7 == null ? _Runtime.UNDEFINED : (cast __typedStruct7 : flighthq.types.XmlElement).name; }), 'dict') : Bool)) {
-      var framesMap:flighthq._internal._Map<String, XmlElement> = (cast CocosPlistParse.dictToMap__cocosPlistParse((cast framesEl : XmlElement)) : flighthq._internal._Map<String, XmlElement>);
+    frames = (cast {  });
+    if ((cast _Runtime.strictEquals(({ final __typedStruct7 = framesEl; __typedStruct7 == null ? _Runtime.UNDEFINED : (cast __typedStruct7 : { var name:String; }).name; }), 'dict') : Bool)) {
+      var framesMap:flighthq._internal._Map<String, XmlElement> = (cast CocosPlistParse.dictToMap__cocosPlistParse((cast framesEl)) : flighthq._internal._Map<String, XmlElement>);
       for (__iteration2 in _Runtime.iterable(framesMap)) {
         var frameName:String = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
         var frameEl:XmlElement = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
         if ((cast !_Runtime.strictEquals(frameEl.name, 'dict') : Bool)) { continue; }
-        var fm:flighthq._internal._Map<String, XmlElement> = (cast CocosPlistParse.dictToMap__cocosPlistParse((cast frameEl : XmlElement)) : flighthq._internal._Map<String, XmlElement>);
+        var fm:flighthq._internal._Map<String, XmlElement> = (cast CocosPlistParse.dictToMap__cocosPlistParse((cast frameEl)) : flighthq._internal._Map<String, XmlElement>);
         var hasSpriteFields:Bool = ((cast fm : flighthq._internal._Map<String, XmlElement>).has('spriteOffset'));
         var hasFrame:Bool = ((cast ((cast fm : flighthq._internal._Map<String, XmlElement>).has('frame')) : Bool) || (cast ((cast fm : flighthq._internal._Map<String, XmlElement>).has('textureRect')) : Bool));
         if ((cast ((cast !(cast hasFrame : Bool) : Bool) && (cast !(cast hasSpriteFields : Bool) : Bool)) : Bool)) { continue; }
-        var rectStr:String = (cast CocosPlistParse.getTextValue__cocosPlistParse((cast _Runtime.coalesce(((cast fm : flighthq._internal._Map<String, XmlElement>).get('frame')), function():Dynamic return cast ((cast fm : flighthq._internal._Map<String, XmlElement>).get('textureRect'))) : Null<XmlElement>)) : String);
-        var rotated:Bool = (cast CocosPlistParse.getBoolValue__cocosPlistParse((cast _Runtime.coalesce(((cast fm : flighthq._internal._Map<String, XmlElement>).get('textureRotated')), function():Dynamic return cast ((cast fm : flighthq._internal._Map<String, XmlElement>).get('rotated'))) : Null<XmlElement>)) : Bool);
-        var offsetStr:String = (cast CocosPlistParse.getTextValue__cocosPlistParse((cast _Runtime.coalesce(((cast fm : flighthq._internal._Map<String, XmlElement>).get('spriteOffset')), function():Dynamic return cast ((cast fm : flighthq._internal._Map<String, XmlElement>).get('offset'))) : Null<XmlElement>)) : String);
-        var sourceSizeStr:String = (cast CocosPlistParse.getTextValue__cocosPlistParse((cast _Runtime.coalesce(((cast fm : flighthq._internal._Map<String, XmlElement>).get('spriteSourceSize')), function():Dynamic return cast ((cast fm : flighthq._internal._Map<String, XmlElement>).get('sourceSize'))) : Null<XmlElement>)) : String);
-        var sizeStr:String = (cast CocosPlistParse.getTextValue__cocosPlistParse((cast _Runtime.coalesce(((cast fm : flighthq._internal._Map<String, XmlElement>).get('spriteSize')), function():Dynamic return cast ((cast fm : flighthq._internal._Map<String, XmlElement>).get('size'))) : Null<XmlElement>)) : String);
-        var trimmed:Bool = (cast CocosPlistParse.getBoolValue__cocosPlistParse((cast _Runtime.coalesce(((cast fm : flighthq._internal._Map<String, XmlElement>).get('spriteTrimmed')), function():Dynamic return cast ((cast fm : flighthq._internal._Map<String, XmlElement>).get('trimmed'))) : Null<XmlElement>)) : Bool);
+        var rectStr:String = (cast CocosPlistParse.getTextValue__cocosPlistParse((cast _Runtime.coalesce(((cast fm : flighthq._internal._Map<String, XmlElement>).get('frame')), function():Dynamic return cast ((cast fm : flighthq._internal._Map<String, XmlElement>).get('textureRect'))))) : String);
+        var rotated:Bool = (cast CocosPlistParse.getBoolValue__cocosPlistParse((cast _Runtime.coalesce(((cast fm : flighthq._internal._Map<String, XmlElement>).get('textureRotated')), function():Dynamic return cast ((cast fm : flighthq._internal._Map<String, XmlElement>).get('rotated'))))) : Bool);
+        var offsetStr:String = (cast CocosPlistParse.getTextValue__cocosPlistParse((cast _Runtime.coalesce(((cast fm : flighthq._internal._Map<String, XmlElement>).get('spriteOffset')), function():Dynamic return cast ((cast fm : flighthq._internal._Map<String, XmlElement>).get('offset'))))) : String);
+        var sourceSizeStr:String = (cast CocosPlistParse.getTextValue__cocosPlistParse((cast _Runtime.coalesce(((cast fm : flighthq._internal._Map<String, XmlElement>).get('spriteSourceSize')), function():Dynamic return cast ((cast fm : flighthq._internal._Map<String, XmlElement>).get('sourceSize'))))) : String);
+        var sizeStr:String = (cast CocosPlistParse.getTextValue__cocosPlistParse((cast _Runtime.coalesce(((cast fm : flighthq._internal._Map<String, XmlElement>).get('spriteSize')), function():Dynamic return cast ((cast fm : flighthq._internal._Map<String, XmlElement>).get('size'))))) : String);
+        var trimmed:Bool = (cast CocosPlistParse.getBoolValue__cocosPlistParse((cast _Runtime.coalesce(((cast fm : flighthq._internal._Map<String, XmlElement>).get('spriteTrimmed')), function():Dynamic return cast ((cast fm : flighthq._internal._Map<String, XmlElement>).get('trimmed'))))) : Bool);
         var aliasEl:Null<XmlElement> = ((cast fm : flighthq._internal._Map<String, XmlElement>).get('aliases'));
-        var aliases:Array<String> = cast ([] : Array<Dynamic>);
-        if ((cast _Runtime.strictEquals(({ final __typedStruct10 = aliasEl; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : flighthq.types.XmlElement).name; }), 'array') : Bool)) {
-          for (child in _Runtime.iterable((cast aliasEl : flighthq.types.XmlElement).children)) {
+        var aliases:Array<String> = (cast cast ([] : Array<Dynamic>));
+        if ((cast _Runtime.strictEquals(({ final __typedStruct10 = aliasEl; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var name:String; }).name; }), 'array') : Bool)) {
+          for (child in _Runtime.iterable((cast aliasEl : { var children:Array<XmlElement>; }).children)) {
             if ((cast _Runtime.strictEquals(child.name, 'string') : Bool)) { _Runtime.callProperty(aliases, 'push', cast ([child.text] : Array<Dynamic>)); }
           }
         }
@@ -130,15 +130,15 @@ class CocosPlistParse {
     var atlasWidth:Float = cast _Runtime.UNDEFINED;
     var atlasHeight:Float = cast _Runtime.UNDEFINED;
     rect = (cast CocosPlistParse.parsePlistRect__cocosPlistParse((cast pf.frame : String)) : { var x:Float; var y:Float; var w:Float; var h:Float; });
-    __destructure3 = (cast CocosPlistParse.parsePlistPair__cocosPlistParse((cast pf.spriteOffset : String)) : Array<flighthq._internal._Any>);
+    __destructure3 = (cast CocosPlistParse.parsePlistPair__cocosPlistParse((cast pf.spriteOffset : String)) : Array<Float>);
     offsetX = flighthq._internal._StaticIndex.readArray(__destructure3, 0.0);
     offsetY = flighthq._internal._StaticIndex.readArray(__destructure3, 1.0);
-    __destructure4 = (cast CocosPlistParse.parsePlistPair__cocosPlistParse((cast pf.spriteSourceSize : String)) : Array<flighthq._internal._Any>);
+    __destructure4 = (cast CocosPlistParse.parsePlistPair__cocosPlistParse((cast pf.spriteSourceSize : String)) : Array<Float>);
     sourceWidth = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
     sourceHeight = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
     atlasWidth = ((cast pf.textureRotated : Bool) ? (cast (cast rect : { var x:Float; var y:Float; var w:Float; var h:Float; }).h : Dynamic) : (cast (cast rect : { var x:Float; var y:Float; var w:Float; var h:Float; }).w : Dynamic));
     atlasHeight = ((cast pf.textureRotated : Bool) ? (cast (cast rect : { var x:Float; var y:Float; var w:Float; var h:Float; }).w : Dynamic) : (cast (cast rect : { var x:Float; var y:Float; var w:Float; var h:Float; }).h : Dynamic));
-    return cast (cast createSpritesheetFrameData((cast { height: atlasHeight, name: name, offsetX: offsetX, offsetY: offsetY, pivotX: null, pivotY: null, rotated: pf.textureRotated, sourceHeight: ((cast ((cast sourceHeight : Float) > (cast 0.0 : Float)) : Bool) ? (cast sourceHeight : Dynamic) : (cast atlasHeight : Dynamic)), sourceWidth: ((cast ((cast sourceWidth : Float) > (cast 0.0 : Float)) : Bool) ? (cast sourceWidth : Dynamic) : (cast atlasWidth : Dynamic)), width: atlasWidth, x: (cast rect : { var x:Float; var y:Float; var w:Float; var h:Float; }).x, y: (cast rect : { var x:Float; var y:Float; var w:Float; var h:Float; }).y } : Null<flighthq._internal._Any>)) : SpritesheetFrameData);
+    return cast (cast createSpritesheetFrameData((cast { height: atlasHeight, name: name, offsetX: offsetX, offsetY: offsetY, pivotX: null, pivotY: null, rotated: pf.textureRotated, sourceHeight: ((cast ((cast sourceHeight : Float) > (cast 0.0 : Float)) : Bool) ? (cast sourceHeight : Dynamic) : (cast atlasHeight : Dynamic)), sourceWidth: ((cast ((cast sourceWidth : Float) > (cast 0.0 : Float)) : Bool) ? (cast sourceWidth : Dynamic) : (cast atlasWidth : Dynamic)), width: atlasWidth, x: (cast rect : { var x:Float; var y:Float; var w:Float; var h:Float; }).x, y: (cast rect : { var x:Float; var y:Float; var w:Float; var h:Float; }).y })) : SpritesheetFrameData);
     return cast null;
   }
 
@@ -152,24 +152,25 @@ class CocosPlistParse {
       var pf:CocosPlistFrame = cast _Runtime.UNDEFINED;
       name = flighthq._internal._StaticIndex.readArray(__parameter5, 0.0);
       pf = flighthq._internal._StaticIndex.readArray(__parameter5, 1.0);
-      return cast (cast CocosPlistParse.plistFrameToData__cocosPlistParse((cast name : String), (cast pf : CocosPlistFrame)) : SpritesheetFrameData);
+      return cast (cast CocosPlistParse.plistFrameToData__cocosPlistParse((cast name : String), (cast pf)) : SpritesheetFrameData);
+      return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
-    __destructure8 = (cast CocosPlistParse.parsePlistPair__cocosPlistParse((cast doc.metadata.size : String)) : Array<flighthq._internal._Any>);
+    __destructure8 = (cast CocosPlistParse.parsePlistPair__cocosPlistParse((cast (cast doc.metadata : { var size:String; }).size : String)) : Array<Float>);
     imageWidth = flighthq._internal._StaticIndex.readArray(__destructure8, 0.0);
     imageHeight = flighthq._internal._StaticIndex.readArray(__destructure8, 1.0);
-    return cast (cast createSpritesheetData((cast { animations: cast ([] : Array<Dynamic>), frames: frames, imageFile: doc.metadata.textureFileName, imageHeight: imageHeight, imageWidth: imageWidth, scale: 1.0 } : Null<flighthq._internal._Any>)) : SpritesheetData);
+    return cast (cast createSpritesheetData((cast { animations: cast ([] : Array<Dynamic>), frames: frames, imageFile: (cast doc.metadata : { var textureFileName:String; }).textureFileName, imageHeight: imageHeight, imageWidth: imageWidth, scale: 1.0 })) : SpritesheetData);
     return cast null;
   }
 
   public static function parseCocosPlistSpritesheet(xml:String):SpritesheetData {
-    return cast (cast CocosPlistParse.documentToData__cocosPlistParse((cast (cast CocosPlistParse.parseCocosPlistXml__cocosPlistParse((cast xml : String)) : CocosPlistDocument) : CocosPlistDocument)) : SpritesheetData);
+    return cast (cast CocosPlistParse.documentToData__cocosPlistParse((cast (cast CocosPlistParse.parseCocosPlistXml__cocosPlistParse((cast xml : String)) : CocosPlistDocument))) : SpritesheetData);
     return cast null;
   }
 
   public static function parseCocosPlistSpritesheetDocument(xml:String):CocosPlistParsed {
     var document:CocosPlistDocument = cast _Runtime.UNDEFINED;
     document = (cast CocosPlistParse.parseCocosPlistXml__cocosPlistParse((cast xml : String)) : CocosPlistDocument);
-    return cast { data: (cast CocosPlistParse.documentToData__cocosPlistParse((cast document : CocosPlistDocument)) : SpritesheetData), document: document };
+    return cast { data: (cast CocosPlistParse.documentToData__cocosPlistParse((cast document)) : SpritesheetData), document: document };
     return cast null;
   }
 }

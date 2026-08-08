@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.ScreenSpaceFogEffect;
 
 class ScreenSpaceFogEffect {
-  public static function createScreenSpaceFogEffect(?options:Dynamic):flighthq.types.ScreenSpaceFogEffect {
+  public static function createScreenSpaceFogEffect(?options:flighthq._internal._Omit<flighthq.types.ScreenSpaceFogEffect, String>):flighthq.types.ScreenSpaceFogEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'ScreenSpaceFogEffect' }, options]);
     return cast null;

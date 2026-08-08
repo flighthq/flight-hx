@@ -4,7 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef StorageBackend = { var getItem:String->Null<String>; var setItem:String->String->Bool; var removeItem:String->Bool; var clear:Void->Bool; var keys:Void->Array<String>; @:optional var byteSize:Void->Float; @:optional var subscribeChanges:StorageChange->Void->Void->Void; };
+typedef StorageBackend = { var getItem:String->Null<String>; var setItem:String->String->Bool; var removeItem:String->Bool; var clear:Void->Bool; var keys:Void->Array<String>; @:optional var byteSize:Void->Float; @:optional var subscribeChanges:(StorageChange->Void)->(Void->Void); };
 
 typedef StorageChange = { var key:Null<String>; var newValue:Null<String>; var oldValue:Null<String>; };
 

@@ -9,6 +9,7 @@ import flighthq.types.IridescencePbrExtension;
 import flighthq.types.PbrExtension;
 import flighthq.types.Sampler;
 import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
+import flighthq.types.Scene3DResources.Scene3DPbrExtensionTextureLister;
 import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.Texture.TextureColorSpace;
@@ -22,11 +23,11 @@ import flighthq.types._internal._IridescencePbrExtensionValues.IridescencePbrExt
 class IridescencePbrScene3DMaterialTextures {
   @:noCompletion
   public static function registerIridescencePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DPbrExtensionTextures((cast registry : Scene3DMaterialTextureRegistry), (cast IridescencePbrExtensionKind : String), function(extension:PbrExtension, out:Array<Texture>):Void {
+    registerScene3DPbrExtensionTextures((cast registry), (cast IridescencePbrExtensionKind : String), (cast function(extension:PbrExtension, out:Array<Texture>):Void {
       var iridescence:IridescencePbrExtension = cast _Runtime.UNDEFINED;
       iridescence = (cast extension : IridescencePbrExtension);
       if ((cast !_Runtime.strictEquals(_Runtime.field(iridescence, 'iridescenceMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(iridescence, 'iridescenceMap')] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(iridescence, 'iridescenceThicknessMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(iridescence, 'iridescenceThicknessMap')] : Array<Dynamic>)); }
-    });
+    }));
   }
 }

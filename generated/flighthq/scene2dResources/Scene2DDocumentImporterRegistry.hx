@@ -4,6 +4,7 @@ package flighthq.scene2dResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Entity;
 import flighthq.types.Scene2DDocument;
 import flighthq.types.Scene2DResources.Scene2DDocumentImportContext;
 import flighthq.types.Scene2DResources.Scene2DDocumentImporter;
@@ -18,8 +19,8 @@ class Scene2DDocumentImporterRegistry {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(registry, 'entries'), 'length') : Float)) : Bool)) {
         var entry:Scene2DDocumentImporterEntry = flighthq._internal._StaticIndex.readArray(_Runtime.field(registry, 'entries'), i);
-        if ((cast !(cast (cast entry : Scene2DDocumentImporterEntry).matches(source, context) : Bool) : Bool)) { i++; continue; }
-        var document:Null<Scene2DDocument> = (cast entry : Scene2DDocumentImporterEntry).importDocument(source, context);
+        if ((cast !(cast (cast entry : Scene2DDocumentImporterEntry).matches((cast source), (cast context)) : Bool) : Bool)) { i++; continue; }
+        var document:Null<Scene2DDocument> = (cast entry : Scene2DDocumentImporterEntry).importDocument((cast source), (cast context));
         if ((cast ((cast !_Runtime.strictEquals(document, null) : Bool) && (cast _Runtime.strictEquals((cast document : Scene2DDocument).sourceKind, null) : Bool)) : Bool)) { ((cast document : Scene2DDocument).sourceKind = (cast entry : Scene2DDocumentImporterEntry).kind); }
         return cast document;
         i++;
@@ -30,7 +31,7 @@ class Scene2DDocumentImporterRegistry {
   }
 
   public static function createScene2DDocumentImporterRegistry():flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry {
-    return cast (cast createEntity((cast { entries: cast ([] : Array<Dynamic>) } : Null<{ var entries:Array<flighthq._internal._Any>; }>)) : flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry);
+    return cast (cast createEntity((cast { entries: cast ([] : Array<Dynamic>) })) : { >Entity, var entries:Array<flighthq._internal._Any>; });
     return cast null;
   }
 
@@ -38,7 +39,7 @@ class Scene2DDocumentImporterRegistry {
     var index:Float = cast _Runtime.UNDEFINED;
     var entry:{ var importDocument:Scene2DDocumentImporter; var kind:String; var matches:Scene2DDocumentImporterMatcher; } = cast _Runtime.UNDEFINED;
     index = _Runtime.findIndex((cast registry : flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry).entries, function(entry:Scene2DDocumentImporterEntry, __unused0:Float, __unused1:Array<Scene2DDocumentImporterEntry>):Bool return _Runtime.strictEquals((cast entry : Scene2DDocumentImporterEntry).kind, kind));
-    entry = { importDocument: importDocument, kind: kind, matches: matches };
+    entry = (cast { importDocument: importDocument, kind: kind, matches: matches });
     if ((cast _Runtime.strictEquals(index, -1.0) : Bool)) { _Runtime.callProperty((cast registry : flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry).entries, 'push', cast ([entry] : Array<Dynamic>)); } else { flighthq._internal._StaticIndex.writeArray((cast registry : flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry).entries, index, entry); }
   }
 

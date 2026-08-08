@@ -4,8 +4,8 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef MarkupTagResult = Dynamic;
+typedef MarkupTagResult = flighthq._internal._Union2<flighthq._internal._Partial<TextFormat>, MarkupTagEffect>;
 
-typedef MarkupTagEffect = { @:optional var breakBefore:Bool; @:optional var format:Dynamic; @:optional var text:String; };
+typedef MarkupTagEffect = { @:optional var breakBefore:Bool; @:optional var format:flighthq._internal._Partial<TextFormat>; @:optional var text:String; };
 
 typedef MarkupTagHandler = flighthq._internal._Record<String, String>->MarkupTagResult;

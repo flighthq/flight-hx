@@ -8,7 +8,7 @@ import flighthq.types.Signal.SignalData;
 
 class Emitter {
   public static function cancelSignal<T>(signal:Signal<T>):Void {
-    if ((cast !_Runtime.strictEquals(signal.data, null) : Bool)) { (signal.data.cancelled = cast (true : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(signal.data, null) : Bool)) { ((cast signal.data : { var cancelled:Bool; }).cancelled = cast (true : Dynamic)); }
   }
 
   public static function emitSignal<T>(signal:Signal<T>, ...args:Dynamic):Void {

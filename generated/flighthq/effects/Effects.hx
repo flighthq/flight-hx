@@ -330,12 +330,12 @@ class Effects {
     Facade_Effects_flighthq_effects_ColorTemperatureMath.computeWhiteBalanceMultipliers(temperature, tint, out);
   }
 
-  public static function createAutoExposureEffect(?options:Dynamic):AutoExposureEffect {
+  public static function createAutoExposureEffect(?options:flighthq._internal._Omit<AutoExposureEffect, String>):AutoExposureEffect {
     return cast Facade_Effects_flighthq_effects_AutoExposureEffect.createAutoExposureEffect(options);
     return cast null;
   }
 
-  public static function createBarrelDistortionEffect(?options:Dynamic):BarrelDistortionEffect {
+  public static function createBarrelDistortionEffect(?options:flighthq._internal._Omit<BarrelDistortionEffect, String>):BarrelDistortionEffect {
     return cast Facade_Effects_flighthq_effects_BarrelDistortionEffect.createBarrelDistortionEffect(options);
     return cast null;
   }
@@ -345,97 +345,97 @@ class Effects {
     return cast null;
   }
 
-  public static function createBevelEffect(?options:Dynamic):BevelEffect {
+  public static function createBevelEffect(?options:flighthq._internal._Omit<BevelEffect, String>):BevelEffect {
     return cast Facade_Effects_flighthq_effects_BevelEffect.createBevelEffect(options);
     return cast null;
   }
 
-  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:Dynamic):BlendEffect {
+  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:flighthq._internal._Omit<BlendEffect, String>):BlendEffect {
     return cast Facade_Effects_flighthq_effects_BlendEffect.createBlendEffect(mode, options);
     return cast null;
   }
 
-  public static function createBloomEffect(?options:Dynamic):BloomEffect {
+  public static function createBloomEffect(?options:flighthq._internal._Omit<BloomEffect, String>):BloomEffect {
     return cast Facade_Effects_flighthq_effects_BloomEffect.createBloomEffect(options);
     return cast null;
   }
 
-  public static function createBlurEffect(?options:Dynamic):BlurEffect {
+  public static function createBlurEffect(?options:flighthq._internal._Omit<BlurEffect, String>):BlurEffect {
     return cast Facade_Effects_flighthq_effects_BlurEffect.createBlurEffect(options);
     return cast null;
   }
 
-  public static function createBokehDepthOfFieldEffect(?options:Dynamic):BokehDepthOfFieldEffect {
+  public static function createBokehDepthOfFieldEffect(?options:flighthq._internal._Omit<BokehDepthOfFieldEffect, String>):BokehDepthOfFieldEffect {
     return cast Facade_Effects_flighthq_effects_BokehDepthOfFieldEffect.createBokehDepthOfFieldEffect(options);
     return cast null;
   }
 
-  public static function createCameraMotionBlurEffect(?options:Dynamic):CameraMotionBlurEffect {
+  public static function createCameraMotionBlurEffect(?options:flighthq._internal._Omit<CameraMotionBlurEffect, String>):CameraMotionBlurEffect {
     return cast Facade_Effects_flighthq_effects_CameraMotionBlurEffect.createCameraMotionBlurEffect(options);
     return cast null;
   }
 
-  public static function createChromaticAberrationEffect(?options:Dynamic):ChromaticAberrationEffect {
+  public static function createChromaticAberrationEffect(?options:flighthq._internal._Omit<ChromaticAberrationEffect, String>):ChromaticAberrationEffect {
     return cast Facade_Effects_flighthq_effects_ChromaticAberrationEffect.createChromaticAberrationEffect(options);
     return cast null;
   }
 
-  public static function createCompositeEffect(operator_:CompositeOperator, ?options:Dynamic):CompositeEffect {
+  public static function createCompositeEffect(operator_:CompositeOperator, ?options:flighthq._internal._Omit<CompositeEffect, String>):CompositeEffect {
     return cast Facade_Effects_flighthq_effects_CompositeEffect.createCompositeEffect(operator_, options);
     return cast null;
   }
 
-  public static function createContactShadowsEffect(?options:Dynamic):ContactShadowsEffect {
+  public static function createContactShadowsEffect(?options:flighthq._internal._Omit<ContactShadowsEffect, String>):ContactShadowsEffect {
     return cast Facade_Effects_flighthq_effects_ContactShadowsEffect.createContactShadowsEffect(options);
     return cast null;
   }
 
-  public static function createConvolutionEffect(options:Dynamic):ConvolutionEffect {
+  public static function createConvolutionEffect(options:flighthq._internal._Omit<ConvolutionEffect, String>):ConvolutionEffect {
     return cast Facade_Effects_flighthq_effects_ConvolutionEffect.createConvolutionEffect(options);
     return cast null;
   }
 
-  public static function createCrtEffect(?options:Dynamic):CrtEffect {
+  public static function createCrtEffect(?options:flighthq._internal._Omit<CrtEffect, String>):CrtEffect {
     return cast Facade_Effects_flighthq_effects_CrtEffect.createCrtEffect(options);
     return cast null;
   }
 
-  public static function createCustomShaderEffect(options:Dynamic):CustomShaderEffect {
+  public static function createCustomShaderEffect(options:flighthq._internal._Omit<CustomShaderEffect, String>):CustomShaderEffect {
     return cast Facade_Effects_flighthq_effects_CustomShaderEffect.createCustomShaderEffect(options);
     return cast null;
   }
 
-  public static function createDirectionalBlurEffect(?options:Dynamic):DirectionalBlurEffect {
+  public static function createDirectionalBlurEffect(?options:flighthq._internal._Omit<DirectionalBlurEffect, String>):DirectionalBlurEffect {
     return cast Facade_Effects_flighthq_effects_DirectionalBlurEffect.createDirectionalBlurEffect(options);
     return cast null;
   }
 
-  public static function createDisplacementEffect(?options:Dynamic):DisplacementEffect {
+  public static function createDisplacementEffect(?options:flighthq._internal._Omit<DisplacementEffect, String>):DisplacementEffect {
     return cast Facade_Effects_flighthq_effects_DisplacementEffect.createDisplacementEffect(options);
     return cast null;
   }
 
-  public static function createDitherEffect(?options:Dynamic):DitherEffect {
+  public static function createDitherEffect(?options:flighthq._internal._Omit<DitherEffect, String>):DitherEffect {
     return cast Facade_Effects_flighthq_effects_DitherEffect.createDitherEffect(options);
     return cast null;
   }
 
-  public static function createDropShadowEffect(?options:Dynamic):DropShadowEffect {
+  public static function createDropShadowEffect(?options:flighthq._internal._Omit<DropShadowEffect, String>):DropShadowEffect {
     return cast Facade_Effects_flighthq_effects_DropShadowEffect.createDropShadowEffect(options);
     return cast null;
   }
 
-  public static function createFilmEmulationEffect(?options:Dynamic):FilmEmulationEffect {
+  public static function createFilmEmulationEffect(?options:flighthq._internal._Omit<FilmEmulationEffect, String>):FilmEmulationEffect {
     return cast Facade_Effects_flighthq_effects_FilmEmulationEffect.createFilmEmulationEffect(options);
     return cast null;
   }
 
-  public static function createFilmGrainEffect(?options:Dynamic):FilmGrainEffect {
+  public static function createFilmGrainEffect(?options:flighthq._internal._Omit<FilmGrainEffect, String>):FilmGrainEffect {
     return cast Facade_Effects_flighthq_effects_FilmGrainEffect.createFilmGrainEffect(options);
     return cast null;
   }
 
-  public static function createFxaaEffect(?options:Dynamic):FxaaEffect {
+  public static function createFxaaEffect(?options:flighthq._internal._Omit<FxaaEffect, String>):FxaaEffect {
     return cast Facade_Effects_flighthq_effects_FxaaEffect.createFxaaEffect(options);
     return cast null;
   }
@@ -445,162 +445,162 @@ class Effects {
     return cast null;
   }
 
-  public static function createGlitchEffect(?options:Dynamic):GlitchEffect {
+  public static function createGlitchEffect(?options:flighthq._internal._Omit<GlitchEffect, String>):GlitchEffect {
     return cast Facade_Effects_flighthq_effects_GlitchEffect.createGlitchEffect(options);
     return cast null;
   }
 
-  public static function createGodRaysEffect(?options:Dynamic):GodRaysEffect {
+  public static function createGodRaysEffect(?options:flighthq._internal._Omit<GodRaysEffect, String>):GodRaysEffect {
     return cast Facade_Effects_flighthq_effects_GodRaysEffect.createGodRaysEffect(options);
     return cast null;
   }
 
-  public static function createGradientBevelEffect(options:Dynamic):GradientBevelEffect {
+  public static function createGradientBevelEffect(options:flighthq._internal._Omit<GradientBevelEffect, String>):GradientBevelEffect {
     return cast Facade_Effects_flighthq_effects_GradientBevelEffect.createGradientBevelEffect(options);
     return cast null;
   }
 
-  public static function createGradientGlowEffect(options:Dynamic):GradientGlowEffect {
+  public static function createGradientGlowEffect(options:flighthq._internal._Omit<GradientGlowEffect, String>):GradientGlowEffect {
     return cast Facade_Effects_flighthq_effects_GradientGlowEffect.createGradientGlowEffect(options);
     return cast null;
   }
 
-  public static function createHalftoneEffect(?options:Dynamic):HalftoneEffect {
+  public static function createHalftoneEffect(?options:flighthq._internal._Omit<HalftoneEffect, String>):HalftoneEffect {
     return cast Facade_Effects_flighthq_effects_HalftoneEffect.createHalftoneEffect(options);
     return cast null;
   }
 
-  public static function createInnerGlowEffect(?options:Dynamic):InnerGlowEffect {
+  public static function createInnerGlowEffect(?options:flighthq._internal._Omit<InnerGlowEffect, String>):InnerGlowEffect {
     return cast Facade_Effects_flighthq_effects_InnerGlowEffect.createInnerGlowEffect(options);
     return cast null;
   }
 
-  public static function createInnerShadowEffect(?options:Dynamic):InnerShadowEffect {
+  public static function createInnerShadowEffect(?options:flighthq._internal._Omit<InnerShadowEffect, String>):InnerShadowEffect {
     return cast Facade_Effects_flighthq_effects_InnerShadowEffect.createInnerShadowEffect(options);
     return cast null;
   }
 
-  public static function createKuwaharaEffect(?options:Dynamic):KuwaharaEffect {
+  public static function createKuwaharaEffect(?options:flighthq._internal._Omit<KuwaharaEffect, String>):KuwaharaEffect {
     return cast Facade_Effects_flighthq_effects_KuwaharaEffect.createKuwaharaEffect(options);
     return cast null;
   }
 
-  public static function createLensDirtEffect(?options:Dynamic):LensDirtEffect {
+  public static function createLensDirtEffect(?options:flighthq._internal._Omit<LensDirtEffect, String>):LensDirtEffect {
     return cast Facade_Effects_flighthq_effects_LensDirtEffect.createLensDirtEffect(options);
     return cast null;
   }
 
-  public static function createLensDistortionEffect(?options:Dynamic):LensDistortionEffect {
+  public static function createLensDistortionEffect(?options:flighthq._internal._Omit<LensDistortionEffect, String>):LensDistortionEffect {
     return cast Facade_Effects_flighthq_effects_LensDistortionEffect.createLensDistortionEffect(options);
     return cast null;
   }
 
-  public static function createLensFlareEffect(?options:Dynamic):LensFlareEffect {
+  public static function createLensFlareEffect(?options:flighthq._internal._Omit<LensFlareEffect, String>):LensFlareEffect {
     return cast Facade_Effects_flighthq_effects_LensFlareEffect.createLensFlareEffect(options);
     return cast null;
   }
 
-  public static function createMedianEffect(?options:Dynamic):MedianEffect {
+  public static function createMedianEffect(?options:flighthq._internal._Omit<MedianEffect, String>):MedianEffect {
     return cast Facade_Effects_flighthq_effects_MedianEffect.createMedianEffect(options);
     return cast null;
   }
 
-  public static function createMotionBlurEffect(?options:Dynamic):MotionBlurEffect {
+  public static function createMotionBlurEffect(?options:flighthq._internal._Omit<MotionBlurEffect, String>):MotionBlurEffect {
     return cast Facade_Effects_flighthq_effects_MotionBlurEffect.createMotionBlurEffect(options);
     return cast null;
   }
 
-  public static function createOuterGlowEffect(?options:Dynamic):OuterGlowEffect {
+  public static function createOuterGlowEffect(?options:flighthq._internal._Omit<OuterGlowEffect, String>):OuterGlowEffect {
     return cast Facade_Effects_flighthq_effects_OuterGlowEffect.createOuterGlowEffect(options);
     return cast null;
   }
 
-  public static function createOutlineEffect(?options:Dynamic):OutlineEffect {
+  public static function createOutlineEffect(?options:flighthq._internal._Omit<OutlineEffect, String>):OutlineEffect {
     return cast Facade_Effects_flighthq_effects_OutlineEffect.createOutlineEffect(options);
     return cast null;
   }
 
-  public static function createPanniniProjectionEffect(?options:Dynamic):PanniniProjectionEffect {
+  public static function createPanniniProjectionEffect(?options:flighthq._internal._Omit<PanniniProjectionEffect, String>):PanniniProjectionEffect {
     return cast Facade_Effects_flighthq_effects_PanniniProjectionEffect.createPanniniProjectionEffect(options);
     return cast null;
   }
 
-  public static function createPixelateEffect(?options:Dynamic):PixelateEffect {
+  public static function createPixelateEffect(?options:flighthq._internal._Omit<PixelateEffect, String>):PixelateEffect {
     return cast Facade_Effects_flighthq_effects_PixelateEffect.createPixelateEffect(options);
     return cast null;
   }
 
-  public static function createPosterizeEffect(?options:Dynamic):PosterizeEffect {
+  public static function createPosterizeEffect(?options:flighthq._internal._Omit<PosterizeEffect, String>):PosterizeEffect {
     return cast Facade_Effects_flighthq_effects_PosterizeEffect.createPosterizeEffect(options);
     return cast null;
   }
 
-  public static function createRadialBlurEffect(?options:Dynamic):RadialBlurEffect {
+  public static function createRadialBlurEffect(?options:flighthq._internal._Omit<RadialBlurEffect, String>):RadialBlurEffect {
     return cast Facade_Effects_flighthq_effects_RadialBlurEffect.createRadialBlurEffect(options);
     return cast null;
   }
 
-  public static function createScanlinesEffect(?options:Dynamic):ScanlinesEffect {
+  public static function createScanlinesEffect(?options:flighthq._internal._Omit<ScanlinesEffect, String>):ScanlinesEffect {
     return cast Facade_Effects_flighthq_effects_ScanlinesEffect.createScanlinesEffect(options);
     return cast null;
   }
 
-  public static function createScreenSpaceFogEffect(?options:Dynamic):ScreenSpaceFogEffect {
+  public static function createScreenSpaceFogEffect(?options:flighthq._internal._Omit<ScreenSpaceFogEffect, String>):ScreenSpaceFogEffect {
     return cast Facade_Effects_flighthq_effects_ScreenSpaceFogEffect.createScreenSpaceFogEffect(options);
     return cast null;
   }
 
-  public static function createSharpenEffect(?options:Dynamic):SharpenEffect {
+  public static function createSharpenEffect(?options:flighthq._internal._Omit<SharpenEffect, String>):SharpenEffect {
     return cast Facade_Effects_flighthq_effects_SharpenEffect.createSharpenEffect(options);
     return cast null;
   }
 
-  public static function createSketchEffect(?options:Dynamic):SketchEffect {
+  public static function createSketchEffect(?options:flighthq._internal._Omit<SketchEffect, String>):SketchEffect {
     return cast Facade_Effects_flighthq_effects_SketchEffect.createSketchEffect(options);
     return cast null;
   }
 
-  public static function createSmaaEffect(?options:Dynamic):SmaaEffect {
+  public static function createSmaaEffect(?options:flighthq._internal._Omit<SmaaEffect, String>):SmaaEffect {
     return cast Facade_Effects_flighthq_effects_SmaaEffect.createSmaaEffect(options);
     return cast null;
   }
 
-  public static function createSsaoEffect(?options:Dynamic):SsaoEffect {
+  public static function createSsaoEffect(?options:flighthq._internal._Omit<SsaoEffect, String>):SsaoEffect {
     return cast Facade_Effects_flighthq_effects_SsaoEffect.createSsaoEffect(options);
     return cast null;
   }
 
-  public static function createSsrEffect(?options:Dynamic):SsrEffect {
+  public static function createSsrEffect(?options:flighthq._internal._Omit<SsrEffect, String>):SsrEffect {
     return cast Facade_Effects_flighthq_effects_SsrEffect.createSsrEffect(options);
     return cast null;
   }
 
-  public static function createTaaEffect(?options:Dynamic):TaaEffect {
+  public static function createTaaEffect(?options:flighthq._internal._Omit<TaaEffect, String>):TaaEffect {
     return cast Facade_Effects_flighthq_effects_TaaEffect.createTaaEffect(options);
     return cast null;
   }
 
-  public static function createTiltShiftEffect(?options:Dynamic):TiltShiftEffect {
+  public static function createTiltShiftEffect(?options:flighthq._internal._Omit<TiltShiftEffect, String>):TiltShiftEffect {
     return cast Facade_Effects_flighthq_effects_TiltShiftEffect.createTiltShiftEffect(options);
     return cast null;
   }
 
-  public static function createToneMapEffect(?options:Dynamic):ToneMapEffect {
+  public static function createToneMapEffect(?options:flighthq._internal._Omit<ToneMapEffect, String>):ToneMapEffect {
     return cast Facade_Effects_flighthq_effects_ToneMapEffect.createToneMapEffect(options);
     return cast null;
   }
 
-  public static function createVignetteEffect(?options:Dynamic):VignetteEffect {
+  public static function createVignetteEffect(?options:flighthq._internal._Omit<VignetteEffect, String>):VignetteEffect {
     return cast Facade_Effects_flighthq_effects_VignetteEffect.createVignetteEffect(options);
     return cast null;
   }
 
-  public static function createVolumetricLightEffect(?options:Dynamic):VolumetricLightEffect {
+  public static function createVolumetricLightEffect(?options:flighthq._internal._Omit<VolumetricLightEffect, String>):VolumetricLightEffect {
     return cast Facade_Effects_flighthq_effects_VolumetricLightEffect.createVolumetricLightEffect(options);
     return cast null;
   }
 
-  public static function createWhiteBalanceEffect(?options:Dynamic):WhiteBalanceEffect {
+  public static function createWhiteBalanceEffect(?options:flighthq._internal._Omit<WhiteBalanceEffect, String>):WhiteBalanceEffect {
     return cast Facade_Effects_flighthq_effects_WhiteBalanceEffect.createWhiteBalanceEffect(options);
     return cast null;
   }

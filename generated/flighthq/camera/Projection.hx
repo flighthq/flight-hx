@@ -42,12 +42,12 @@ class Projection {
     var halfWidth:Float = cast _Runtime.UNDEFINED;
     var halfHeight:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals((cast projection : { var kind:String; }).kind, 'perspective') : Bool)) {
-      var tanHalfFovY:Float = HxMath.tan(((cast projection : flighthq.types.Camera3D.PerspectiveProjection).fovY * 0.5));
-      setPerspectiveMatrix4((cast out : Matrix4Like), (cast tanHalfFovY : Float), (cast aspect : Float), (cast near : Float), (cast far : Float));
+      var tanHalfFovY:Float = HxMath.tan(((cast projection : { var fovY:Float; }).fovY * 0.5));
+      setPerspectiveMatrix4((cast out), (cast tanHalfFovY : Float), (cast aspect : Float), (cast near : Float), (cast far : Float));
       return;
     }
-    halfWidth = (cast projection : flighthq.types.Camera3D.OrthographicProjection).halfWidth;
-    halfHeight = (cast projection : flighthq.types.Camera3D.OrthographicProjection).halfHeight;
-    setOrthographicMatrix4((cast out : Matrix4Like), (cast -halfWidth : Float), (cast halfWidth : Float), (cast -halfHeight : Float), (cast halfHeight : Float), (cast near : Float), (cast far : Float));
+    halfWidth = (cast projection : { var halfWidth:Float; }).halfWidth;
+    halfHeight = (cast projection : { var halfHeight:Float; }).halfHeight;
+    setOrthographicMatrix4((cast out), (cast -halfWidth : Float), (cast halfWidth : Float), (cast -halfHeight : Float), (cast halfHeight : Float), (cast near : Float), (cast far : Float));
   }
 }

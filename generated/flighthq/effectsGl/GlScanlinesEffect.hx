@@ -22,19 +22,19 @@ class GlScanlinesEffect {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     count = _Runtime.coalesce(_Runtime.field(effect, 'count'), function():Dynamic return cast 240.0);
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.3);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'stylization.scanlines' : String), (cast GlScanlinesEffect.SCANLINES_FRAGMENT_SRC__glScanlinesEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'stylization.scanlines' : String), (cast GlScanlinesEffect.SCANLINES_FRAGMENT_SRC__glScanlinesEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_count'), count);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
-    });
+    }));
   }
 
-  public static final defaultGlScanlinesEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyScanlinesEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : ScanlinesEffect) : ScanlinesEffect));
-  };
+  public static final defaultGlScanlinesEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyScanlinesEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : ScanlinesEffect)));
+  });
 
   public static function registerGlScanlinesEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'ScanlinesEffect' : String), (cast defaultGlScanlinesEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'ScanlinesEffect' : String), (cast defaultGlScanlinesEffectRunner));
   }
 
   public static final SCANLINES_FRAGMENT_SRC__glScanlinesEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_count;\nuniform float u_intensity;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float line = sin(v_texCoord.y * u_count * 3.14159265) * 0.5 + 0.5;\n  o_color = vec4(c.rgb * (1.0 - u_intensity * (1.0 - line)), c.a);\n}';

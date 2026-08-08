@@ -10,25 +10,25 @@ import flighthq.types.Vector2.Vector2Like;
 class GetPathPointAtDistance {
   public static function getPathPointAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Float = 0.25):Bool {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath((cast path : Path), (cast tolerance : Float)) : Array<Array<Float>>);
-    return cast (cast GetPathPointAtDistance.samplePathPoint__getPathPointAtDistance((cast contours : Array<Array<Float>>), (cast distance : Float), (cast out : Vector2Like)) : Bool);
+    contours = (cast flattenPath((cast path), (cast tolerance : Float)) : Array<Array<Float>>);
+    return cast (cast GetPathPointAtDistance.samplePathPoint__getPathPointAtDistance((cast contours), (cast distance : Float), (cast out)) : Bool);
     return cast null;
   }
 
   public static function getPathPositionAtDistance(path:Path, distance:Float, pointOut:Vector2Like, tangentOut:Vector2Like, tolerance:Float = 0.25):Bool {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var hasPoint:Bool = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath((cast path : Path), (cast tolerance : Float)) : Array<Array<Float>>);
-    hasPoint = (cast GetPathPointAtDistance.samplePathPoint__getPathPointAtDistance((cast contours : Array<Array<Float>>), (cast distance : Float), (cast pointOut : Vector2Like)) : Bool);
-    (cast GetPathPointAtDistance.samplePathTangent__getPathPointAtDistance((cast contours : Array<Array<Float>>), (cast distance : Float), (cast tangentOut : Vector2Like)) : Bool);
+    contours = (cast flattenPath((cast path), (cast tolerance : Float)) : Array<Array<Float>>);
+    hasPoint = (cast GetPathPointAtDistance.samplePathPoint__getPathPointAtDistance((cast contours), (cast distance : Float), (cast pointOut)) : Bool);
+    (cast GetPathPointAtDistance.samplePathTangent__getPathPointAtDistance((cast contours), (cast distance : Float), (cast tangentOut)) : Bool);
     return cast hasPoint;
     return cast null;
   }
 
   public static function getPathTangentAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Float = 0.25):Bool {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath((cast path : Path), (cast tolerance : Float)) : Array<Array<Float>>);
-    return cast (cast GetPathPointAtDistance.samplePathTangent__getPathPointAtDistance((cast contours : Array<Array<Float>>), (cast distance : Float), (cast out : Vector2Like)) : Bool);
+    contours = (cast flattenPath((cast path), (cast tolerance : Float)) : Array<Array<Float>>);
+    return cast (cast GetPathPointAtDistance.samplePathTangent__getPathPointAtDistance((cast contours), (cast distance : Float), (cast out)) : Bool);
     return cast null;
   }
 

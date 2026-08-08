@@ -9,7 +9,7 @@ typedef Kind = String;
 
 typedef Entity = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; };
 
-typedef EntityWithoutRuntime<Type> = Dynamic;
+typedef EntityWithoutRuntime<Type> = flighthq._internal._Omit<Type, Dynamic>;
 
 typedef EntityRuntime = { var binding:Null<flighthq._internal._Object>; };
 

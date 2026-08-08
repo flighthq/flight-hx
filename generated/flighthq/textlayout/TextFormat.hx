@@ -20,7 +20,7 @@ class TextFormat {
   }
 
   public static function getTextFormatHeight(format:flighthq.types.TextFormat):Float {
-    return cast (((cast getTextFormatAscent((cast format : flighthq.types.TextFormat)) : Float) + (cast getTextFormatDescent((cast format : flighthq.types.TextFormat)) : Float)) + (cast getTextFormatLeading((cast format : flighthq.types.TextFormat)) : Float));
+    return cast (((cast getTextFormatAscent((cast format)) : Float) + (cast getTextFormatDescent((cast format)) : Float)) + (cast getTextFormatLeading((cast format)) : Float));
     return cast null;
   }
 
@@ -31,8 +31,8 @@ class TextFormat {
 
   public static function mergeTextFormat(base:flighthq.types.TextFormat, override_:flighthq.types.TextFormat):flighthq.types.TextFormat {
     var result:flighthq.types.TextFormat = cast _Runtime.UNDEFINED;
-    result = _Runtime.mergeObjects([base]);
-    for (key in _Runtime.iterable((cast flighthq._internal.DynamicObject.keys(override_) : Array<flighthq.types.TextFormat>))) {
+    result = (cast _Runtime.mergeObjects([base]));
+    for (key in _Runtime.iterable((cast flighthq._internal.DynamicObject.keys(override_) : Array<String>))) {
       var value:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>, Array<Float>>, Array<FontVariation>>> = _Runtime.getIndex(override_, key);
       if ((cast !_Runtime.looseEquals(value, null) : Bool)) {
         _Runtime.setIndex((cast result : flighthq._internal._Record<String, flighthq._internal._Any>), key, value);

@@ -14,12 +14,13 @@ import flighthq.types.ImageResourceReference.ImageResourceReferenceKind;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.SkinInfluence;
 import flighthq.types.Texture;
+import flighthq.types.Texture.Texture2D;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceReferenceKindValue;
 
 class Shared {
   public static final CANONICAL_FLOATS_PER_VERTEX:Float = 12.0;
 
-  public static final CANONICAL_LAYOUT:VertexAttributeLayout = { attributes: cast ([{ byteOffset: 0.0, format: 'float32x3', semantic: 'position' }, { byteOffset: 12.0, format: 'float32x3', semantic: 'normal' }, { byteOffset: 24.0, format: 'float32x4', semantic: 'tangent' }, { byteOffset: 40.0, format: 'float32x2', semantic: 'uv0' }] : Array<Dynamic>), stride: 48.0 };
+  public static final CANONICAL_LAYOUT:VertexAttributeLayout = (cast { attributes: cast ([{ byteOffset: 0.0, format: 'float32x3', semantic: 'position' }, { byteOffset: 12.0, format: 'float32x3', semantic: 'normal' }, { byteOffset: 24.0, format: 'float32x4', semantic: 'tangent' }, { byteOffset: 40.0, format: 'float32x2', semantic: 'uv0' }] : Array<Dynamic>), stride: 48.0 });
 
   public static final SKINNED_FLOATS_PER_VERTEX:Float = (CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT.stride / 4.0);
 
@@ -59,24 +60,24 @@ class Shared {
 
   public static function createEmbeddedTextureRef(bytes:flighthq._internal._UInt8Array, mimeType:Null<String>, ?resources:Array<ImageResourceReference>):Texture {
     var resource:Null<EmbeddedImageResourceReference> = cast _Runtime.UNDEFINED;
-    resource = _Runtime.callOptionalProperty(resources, 'find', cast ([function(candidate:ImageResourceReference, __unused0:Float, __unused1:Array<ImageResourceReference>):Bool return ((cast ((cast _Runtime.strictEquals((cast candidate : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded) : Bool) && (cast _Runtime.strictEquals((cast candidate : flighthq.types.ImageResourceReference.EmbeddedImageResourceReference).bytes, bytes) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast candidate : flighthq.types.ImageResourceReference.EmbeddedImageResourceReference).mimeType, mimeType) : Bool))] : Array<Dynamic>));
+    resource = _Runtime.callOptionalProperty(resources, 'find', cast ([function(candidate:ImageResourceReference, __unused0:Float, __unused1:Array<ImageResourceReference>):Bool return ((cast ((cast _Runtime.strictEquals((cast candidate : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded) : Bool) && (cast _Runtime.strictEquals((cast candidate : { var bytes:flighthq._internal._UInt8Array; }).bytes, bytes) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast candidate : { var mimeType:Null<String>; }).mimeType, mimeType) : Bool))] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(resource, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (resource = cast ((cast createEmbeddedImageResourceReference((cast bytes : flighthq._internal._UInt8Array), (cast mimeType : Null<String>)) : Null<EmbeddedImageResourceReference>) : Dynamic));
+      (resource = cast ((cast createEmbeddedImageResourceReference((cast bytes), (cast mimeType)) : EmbeddedImageResourceReference) : Dynamic));
       _Runtime.callOptionalProperty(resources, 'push', cast ([resource] : Array<Dynamic>));
     }
-    return cast (cast createTexture((cast { resource: resource } : Null<{ @:optional var dimension:Null<String>; @:optional var resource:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }>)) : Texture);
+    return cast (cast createTexture((cast { resource: resource })) : Texture2D);
     return cast null;
   }
 
   public static function createExternalTextureRef(uri:String, ?basePath:Null<String>, ?resources:Array<ImageResourceReference>):Texture {
     if (basePath == null) basePath = cast (null : Dynamic);
     var resource:Null<ExternalImageResourceReference> = cast _Runtime.UNDEFINED;
-    resource = _Runtime.callOptionalProperty(resources, 'find', cast ([function(candidate:ImageResourceReference, __unused2:Float, __unused3:Array<ImageResourceReference>):Bool return ((cast ((cast _Runtime.strictEquals((cast candidate : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).External) : Bool) && (cast _Runtime.strictEquals((cast candidate : flighthq.types.ImageResourceReference.ExternalImageResourceReference).uri, uri) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast candidate : flighthq.types.ImageResourceReference.ExternalImageResourceReference).basePath, basePath) : Bool))] : Array<Dynamic>));
+    resource = _Runtime.callOptionalProperty(resources, 'find', cast ([function(candidate:ImageResourceReference, __unused2:Float, __unused3:Array<ImageResourceReference>):Bool return ((cast ((cast _Runtime.strictEquals((cast candidate : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).External) : Bool) && (cast _Runtime.strictEquals((cast candidate : { var uri:String; }).uri, uri) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast candidate : { var basePath:Null<String>; }).basePath, basePath) : Bool))] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(resource, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (resource = cast ((cast createExternalImageResourceReference((cast uri : String), (cast basePath : Null<String>)) : Null<ExternalImageResourceReference>) : Dynamic));
+      (resource = cast ((cast createExternalImageResourceReference((cast uri : String), (cast basePath)) : ExternalImageResourceReference) : Dynamic));
       _Runtime.callOptionalProperty(resources, 'push', cast ([resource] : Array<Dynamic>));
     }
-    return cast (cast createTexture((cast { resource: resource } : Null<{ @:optional var dimension:Null<String>; @:optional var resource:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }>)) : Texture);
+    return cast (cast createTexture((cast { resource: resource })) : Texture2D);
     return cast null;
   }
 
@@ -107,15 +108,15 @@ class Shared {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast kept : Float)) : Bool)) {
-        (sum = cast ((sum + flighthq._internal._StaticIndex.readArray(influences, i).weight) : Dynamic));
+        (sum = cast ((sum + (cast flighthq._internal._StaticIndex.readArray(influences, i) : { var weight:Float; }).weight) : Dynamic));
         i++;
       }
     }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast kept : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(outJoints, i, flighthq._internal._StaticIndex.readArray(influences, i).jointIndex);
-        flighthq._internal._StaticIndex.writeArray(outWeights, i, ((cast ((cast sum : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(influences, i).weight, sum) : Dynamic) : (cast 0.0 : Dynamic)));
+        flighthq._internal._StaticIndex.writeArray(outJoints, i, (cast flighthq._internal._StaticIndex.readArray(influences, i) : { var jointIndex:Float; }).jointIndex);
+        flighthq._internal._StaticIndex.writeArray(outWeights, i, ((cast ((cast sum : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((cast flighthq._internal._StaticIndex.readArray(influences, i) : { var weight:Float; }).weight / sum) : Dynamic) : (cast 0.0 : Dynamic)));
         i++;
       }
     }

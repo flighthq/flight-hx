@@ -10,7 +10,7 @@ import flighthq.types._internal._RiveDocumentValues.RiveAnimationLoopValue;
 import flighthq.types._internal._RiveDocumentValues.RiveFieldTypeValue;
 import flighthq.types._internal._RiveDocumentValues.RiveWeightedPointKindValue;
 
-typedef RiveFieldType = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef RiveFieldType = flighthq._internal._IndexedAccess<Dynamic, String>;
 
 typedef RiveValue = flighthq._internal._Union2<flighthq._internal._Union2<Float, String>, flighthq._internal._UInt8Array>;
 
@@ -42,7 +42,7 @@ typedef RiveStateMachineDescriptor = { var inputs:Array<RiveStateMachineInput>; 
 
 typedef RiveAdvancedBlend = { var mode:AdvancedBlendMode; var node:DisplayObject; };
 
-typedef RiveAnimationLoop = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef RiveAnimationLoop = flighthq._internal._IndexedAccess<Dynamic, String>;
 
 typedef RiveSkeleton2DImport = { var boneIndices:Array<Float>; var skeleton:Skeleton2D; };
 
@@ -52,7 +52,7 @@ typedef RiveLayoutImport = { var targets:Array<DisplayObject>; var tree:LayoutTr
 
 typedef RiveArtboardImport = { var advancedBlends:Array<RiveAdvancedBlend>; var animations:Array<RiveAnimationClip>; var stateMachines:Array<RiveStateMachineDescriptor>; var height:Float; var layouts:Array<RiveLayoutImport>; var name:String; var root:DisplayObject; var skeleton:Null<RiveSkeleton2DImport>; var width:Float; };
 
-typedef RiveWeightedPointKind = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef RiveWeightedPointKind = flighthq._internal._IndexedAccess<Dynamic, String>;
 
 typedef RiveWeightedPoint = { var kind:RiveWeightedPointKind; var vertex:Float; var x:Float; var y:Float; };
 

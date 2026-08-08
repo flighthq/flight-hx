@@ -4,6 +4,7 @@ package flighthq.renderWgpu._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.createWgpuRenderState;
+import flighthq.types.WgpuRenderOptions;
 import flighthq.types.WgpuRenderState;
 
 class _WgpuTestHelper {
@@ -96,7 +97,7 @@ class _WgpuTestHelper {
   }
 
   public static function makeDevice__wgpuTestHelper():flighthq._internal.dom.GPUDevice {
-    return cast (cast (cast { features: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), limits: { maxTextureDimension2D: 8192.0, minUniformBufferOffsetAlignment: 256.0 }, createBindGroup: function():flighthq._internal.dom.GPUBindGroup return (cast _WgpuTestHelper.makeBindGroup__wgpuTestHelper() : flighthq._internal.dom.GPUBindGroup), createBindGroupLayout: function():flighthq._internal.dom.GPUBindGroupLayout return (cast _WgpuTestHelper.makeBindGroupLayout__wgpuTestHelper() : flighthq._internal.dom.GPUBindGroupLayout), createBuffer: function():flighthq._internal.dom.GPUBuffer return (cast _WgpuTestHelper.makeBuffer__wgpuTestHelper() : flighthq._internal.dom.GPUBuffer), createCommandEncoder: function():flighthq._internal.dom.GPUCommandEncoder return (cast _WgpuTestHelper.makeCommandEncoder__wgpuTestHelper() : flighthq._internal.dom.GPUCommandEncoder), createPipelineLayout: function():flighthq._internal.dom.GPUPipelineLayout return (cast _WgpuTestHelper.makePipelineLayout__wgpuTestHelper() : flighthq._internal.dom.GPUPipelineLayout), createRenderPipeline: function(descriptor:flighthq._internal.dom.GPURenderPipelineDescriptor):flighthq._internal.dom.GPURenderPipeline return (cast _WgpuTestHelper.makePipeline__wgpuTestHelper((cast descriptor : Null<flighthq._internal.dom.GPURenderPipelineDescriptor>)) : flighthq._internal.dom.GPURenderPipeline), createSampler: function():flighthq._internal.dom.GPUSampler return (cast _WgpuTestHelper.makeSampler__wgpuTestHelper() : flighthq._internal.dom.GPUSampler), createShaderModule: function():flighthq._internal.dom.GPUShaderModule return (cast _WgpuTestHelper.makeShaderModule__wgpuTestHelper() : flighthq._internal.dom.GPUShaderModule), createTexture: function():flighthq._internal.dom.GPUTexture return (cast _WgpuTestHelper.makeTexture__wgpuTestHelper() : flighthq._internal.dom.GPUTexture), queue: { copyExternalImageToTexture: function():Void {
+    return cast (cast (cast { features: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), limits: { maxTextureDimension2D: 8192.0, minUniformBufferOffsetAlignment: 256.0 }, createBindGroup: function():flighthq._internal.dom.GPUBindGroup return (cast _WgpuTestHelper.makeBindGroup__wgpuTestHelper() : flighthq._internal.dom.GPUBindGroup), createBindGroupLayout: function():flighthq._internal.dom.GPUBindGroupLayout return (cast _WgpuTestHelper.makeBindGroupLayout__wgpuTestHelper() : flighthq._internal.dom.GPUBindGroupLayout), createBuffer: function():flighthq._internal.dom.GPUBuffer return (cast _WgpuTestHelper.makeBuffer__wgpuTestHelper() : flighthq._internal.dom.GPUBuffer), createCommandEncoder: function():flighthq._internal.dom.GPUCommandEncoder return (cast _WgpuTestHelper.makeCommandEncoder__wgpuTestHelper() : flighthq._internal.dom.GPUCommandEncoder), createPipelineLayout: function():flighthq._internal.dom.GPUPipelineLayout return (cast _WgpuTestHelper.makePipelineLayout__wgpuTestHelper() : flighthq._internal.dom.GPUPipelineLayout), createRenderPipeline: function(descriptor:flighthq._internal.dom.GPURenderPipelineDescriptor):flighthq._internal.dom.GPURenderPipeline return (cast _WgpuTestHelper.makePipeline__wgpuTestHelper((cast descriptor)) : flighthq._internal.dom.GPURenderPipeline), createSampler: function():flighthq._internal.dom.GPUSampler return (cast _WgpuTestHelper.makeSampler__wgpuTestHelper() : flighthq._internal.dom.GPUSampler), createShaderModule: function():flighthq._internal.dom.GPUShaderModule return (cast _WgpuTestHelper.makeShaderModule__wgpuTestHelper() : flighthq._internal.dom.GPUShaderModule), createTexture: function():flighthq._internal.dom.GPUTexture return (cast _WgpuTestHelper.makeTexture__wgpuTestHelper() : flighthq._internal.dom.GPUTexture), queue: { copyExternalImageToTexture: function():Void {
 
     }, submit: function():Void {
 
@@ -131,7 +132,7 @@ class _WgpuTestHelper {
       canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 800.0);
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 600.0);
-      return flighthq._internal._Async.resolve(createWgpuRenderState((cast canvas : flighthq._internal.dom.HTMLCanvasElement), _Runtime.field(_Runtime, 'UNDEFINED')));
+      return flighthq._internal._Async.resolve((cast createWgpuRenderState((cast canvas), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq._internal._Promise<WgpuRenderState>));
     }));
   }
 
@@ -154,6 +155,7 @@ class _WgpuTestHelper {
         }, getCurrentTexture: function():flighthq._internal.dom.GPUTexture return (cast _WgpuTestHelper.makeTexture__wgpuTestHelper() : flighthq._internal.dom.GPUTexture) } : flighthq._internal._Any) : flighthq._internal.dom.GPUCanvasContext);
       }
       return cast _Runtime.callProperty((cast origGetContext : flighthq._internal._Any), 'call', cast ([__thisValue0, contextId, options] : Array<Dynamic>));
+      return cast _Runtime.UNDEFINED;
     });
   }
 }

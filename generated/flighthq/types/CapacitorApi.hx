@@ -8,7 +8,7 @@ typedef CapacitorApi = { var app:CapacitorAppPlugin; var clipboard:CapacitorClip
 
 typedef CapacitorPluginListenerHandle = { var remove:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; };
 
-typedef CapacitorAppPlugin = { var addListener:String->{ var url:String; }->Void->flighthq._internal._Promise<CapacitorPluginListenerHandle>; var exitApp:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; var getInfo:Void->flighthq._internal._Promise<CapacitorAppInfo>; var minimizeApp:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; };
+typedef CapacitorAppPlugin = { var addListener:String->({ var url:String; }->Void)->flighthq._internal._Promise<CapacitorPluginListenerHandle>; var exitApp:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; var getInfo:Void->flighthq._internal._Promise<CapacitorAppInfo>; var minimizeApp:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; };
 
 typedef CapacitorAppInfo = { var build:String; var id:String; var name:String; var version:String; };
 
@@ -60,7 +60,7 @@ typedef CapacitorFileInfo = { @:optional var ctime:Float; var mtime:Float; var n
 
 typedef CapacitorFilesystemStatResult = { @:optional var ctime:Float; var mtime:Float; var size:Float; var type:String; var uri:String; };
 
-typedef CapacitorGeolocationPlugin = { var checkPermissions:Void->flighthq._internal._Promise<CapacitorGeolocationPermissionStatus>; var clearWatch:{ var id:String; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var getCurrentPosition:CapacitorGeolocationOptions->flighthq._internal._Promise<CapacitorPosition>; var requestPermissions:CapacitorGeolocationPermissionOptions->flighthq._internal._Promise<CapacitorGeolocationPermissionStatus>; var watchPosition:CapacitorGeolocationOptions->Null<CapacitorPosition>->flighthq._internal._Any->Void->flighthq._internal._Promise<String>; };
+typedef CapacitorGeolocationPlugin = { var checkPermissions:Void->flighthq._internal._Promise<CapacitorGeolocationPermissionStatus>; var clearWatch:{ var id:String; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var getCurrentPosition:CapacitorGeolocationOptions->flighthq._internal._Promise<CapacitorPosition>; var requestPermissions:CapacitorGeolocationPermissionOptions->flighthq._internal._Promise<CapacitorGeolocationPermissionStatus>; var watchPosition:CapacitorGeolocationOptions->(Null<CapacitorPosition>->flighthq._internal._Any->Void)->flighthq._internal._Promise<String>; };
 
 typedef CapacitorGeolocationOptions = { @:optional var enableHighAccuracy:Bool; @:optional var maximumAge:Float; @:optional var timeout:Float; };
 
@@ -74,9 +74,9 @@ typedef CapacitorPositionCoords = { var accuracy:Float; var altitude:Null<Float>
 
 typedef CapacitorHapticsPlugin = { var impact:{ var style:String; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var notification:{ var type:String; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var selectionChanged:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; var selectionEnd:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; var selectionStart:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; var vibrate:{ @:optional var duration:Float; }->flighthq._internal._Promise<flighthq._internal._Nothing>; };
 
-typedef CapacitorKeyboardPlugin = { var addListener:String->Void->Void->flighthq._internal._Promise<CapacitorPluginListenerHandle>; var hide:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; var setAccessoryBarVisible:{ var isVisible:Bool; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var setResizeMode:{ var mode:String; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var setScroll:{ var isDisabled:Bool; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var setStyle:{ var style:String; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var show:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; };
+typedef CapacitorKeyboardPlugin = { var addListener:String->(Void->Void)->flighthq._internal._Promise<CapacitorPluginListenerHandle>; var hide:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; var setAccessoryBarVisible:{ var isVisible:Bool; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var setResizeMode:{ var mode:String; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var setScroll:{ var isDisabled:Bool; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var setStyle:{ var style:String; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var show:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; };
 
-typedef CapacitorLocalNotificationsPlugin = { var addListener:String->CapacitorLocalNotificationAction->Void->flighthq._internal._Promise<CapacitorPluginListenerHandle>; var cancel:{ var notifications:Array<{ var id:Float; }>; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var checkPermissions:Void->flighthq._internal._Promise<CapacitorLocalNotificationsPermission>; var getPending:Void->flighthq._internal._Promise<CapacitorLocalNotificationsPending>; var requestPermissions:Void->flighthq._internal._Promise<CapacitorLocalNotificationsPermission>; var schedule:{ var notifications:Array<CapacitorLocalNotificationSchema>; }->flighthq._internal._Promise<CapacitorLocalNotificationsScheduleResult>; };
+typedef CapacitorLocalNotificationsPlugin = { var addListener:String->(CapacitorLocalNotificationAction->Void)->flighthq._internal._Promise<CapacitorPluginListenerHandle>; var cancel:{ var notifications:Array<{ var id:Float; }>; }->flighthq._internal._Promise<flighthq._internal._Nothing>; var checkPermissions:Void->flighthq._internal._Promise<CapacitorLocalNotificationsPermission>; var getPending:Void->flighthq._internal._Promise<CapacitorLocalNotificationsPending>; var requestPermissions:Void->flighthq._internal._Promise<CapacitorLocalNotificationsPermission>; var schedule:{ var notifications:Array<CapacitorLocalNotificationSchema>; }->flighthq._internal._Promise<CapacitorLocalNotificationsScheduleResult>; };
 
 typedef CapacitorLocalNotificationSchema = { @:optional var body:String; var id:Float; @:optional var schedule:{ @:optional var at:Date; }; var title:String; };
 
@@ -88,7 +88,7 @@ typedef CapacitorLocalNotificationsPermission = { var display:String; };
 
 typedef CapacitorLocalNotificationAction = { var actionId:String; var notification:{ var id:Float; }; };
 
-typedef CapacitorNetworkPlugin = { var addListener:String->CapacitorConnectionStatus->Void->flighthq._internal._Promise<CapacitorPluginListenerHandle>; var getStatus:Void->flighthq._internal._Promise<CapacitorConnectionStatus>; };
+typedef CapacitorNetworkPlugin = { var addListener:String->(CapacitorConnectionStatus->Void)->flighthq._internal._Promise<CapacitorPluginListenerHandle>; var getStatus:Void->flighthq._internal._Promise<CapacitorConnectionStatus>; };
 
 typedef CapacitorConnectionStatus = { var connected:Bool; var connectionType:String; };
 

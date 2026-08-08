@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.SketchEffect;
 
 class SketchEffect {
-  public static function createSketchEffect(?options:Dynamic):flighthq.types.SketchEffect {
+  public static function createSketchEffect(?options:flighthq._internal._Omit<flighthq.types.SketchEffect, String>):flighthq.types.SketchEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'SketchEffect' }, options]);
     return cast null;

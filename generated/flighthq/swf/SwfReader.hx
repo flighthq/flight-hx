@@ -16,12 +16,12 @@ class SwfReader {
   public function new(source:flighthq._internal._UInt8Array, start:Float, end:Float):Void {
     (this.source = cast (source : Dynamic));
     (this.end = cast (end : Dynamic));
-    ((cast this : SwfReader).pos = start);
+    (this.pos = start);
   }
   public function alignToByte():Void {
-    if ((cast _Runtime.strictEquals((cast this : SwfReader).bitPosition, 0.0) : Bool)) { return; }
-    ((cast this : SwfReader).bitPosition = 0.0);
-    (cast this : SwfReader).pos++;
+    if ((cast _Runtime.strictEquals(this.bitPosition, 0.0) : Bool)) { return; }
+    (this.bitPosition = 0.0);
+    this.pos++;
   }
   public function readEncodedUint32():Float {
     var value:Float = cast _Runtime.UNDEFINED;
@@ -57,24 +57,24 @@ class SwfReader {
     var start:Float = cast _Runtime.UNDEFINED;
     var value:String = cast _Runtime.UNDEFINED;
     (cast this : SwfReader).alignToByte();
-    start = (cast this : SwfReader).pos;
-    while ((cast ((cast ((cast (cast this : SwfReader).pos : Float) < (cast (cast this : SwfReader).end : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array((cast this : SwfReader).source, (cast this : SwfReader).pos), 0.0) : Bool)) : Bool)) { (cast this : SwfReader).pos++; }
-    if ((cast ((cast (cast this : SwfReader).pos : Float) >= (cast (cast this : SwfReader).end : Float)) : Bool)) {
-      ((cast this : SwfReader).valid = false);
+    start = this.pos;
+    while ((cast ((cast ((cast this.pos : Float) < (cast this.end : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(this.source, this.pos), 0.0) : Bool)) : Bool)) { this.pos++; }
+    if ((cast ((cast this.pos : Float) >= (cast this.end : Float)) : Bool)) {
+      (this.valid = false);
       return cast '';
     }
-    value = (cast _decoder__swfReader : flighthq._internal.dom.TextDecoder).decode((cast (cast this : SwfReader).source : flighthq._internal._UInt8Array).subarray(Std.int(start), Std.int((cast this : SwfReader).pos)));
-    (cast this : SwfReader).pos++;
+    value = (cast _decoder__swfReader : flighthq._internal.dom.TextDecoder).decode((cast this.source : flighthq._internal._UInt8Array).subarray(Std.int(start), Std.int(this.pos)));
+    this.pos++;
     return cast value;
     return cast null;
   }
   public function readUint8():Float {
     (cast this : SwfReader).alignToByte();
-    if ((cast ((cast (cast this : SwfReader).pos : Float) >= (cast (cast this : SwfReader).end : Float)) : Bool)) {
-      ((cast this : SwfReader).valid = false);
+    if ((cast ((cast this.pos : Float) >= (cast this.end : Float)) : Bool)) {
+      (this.valid = false);
       return cast 0.0;
     }
-    return cast flighthq._internal._StaticIndex.readUint8Array((cast this : SwfReader).source, (cast this : SwfReader).pos++);
+    return cast flighthq._internal._StaticIndex.readUint8Array(this.source, this.pos++);
     return cast null;
   }
   public function readUint16():Float {
@@ -99,15 +99,15 @@ class SwfReader {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        if ((cast ((cast (cast this : SwfReader).pos : Float) >= (cast (cast this : SwfReader).end : Float)) : Bool)) {
-          ((cast this : SwfReader).valid = false);
+        if ((cast ((cast this.pos : Float) >= (cast this.end : Float)) : Bool)) {
+          (this.valid = false);
           return cast 0.0;
         }
-        (value = cast (((value * 2.0) + (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array((cast this : SwfReader).source, (cast this : SwfReader).pos)) >> _Runtime.toInt32((7.0 - (cast this : SwfReader).bitPosition)))) & 1)) : Dynamic));
-        (cast this : SwfReader).bitPosition++;
-        if ((cast _Runtime.strictEquals((cast this : SwfReader).bitPosition, 8.0) : Bool)) {
-          ((cast this : SwfReader).bitPosition = 0.0);
-          (cast this : SwfReader).pos++;
+        (value = cast (((value * 2.0) + (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(this.source, this.pos)) >> _Runtime.toInt32((7.0 - this.bitPosition)))) & 1)) : Dynamic));
+        this.bitPosition++;
+        if ((cast _Runtime.strictEquals(this.bitPosition, 8.0) : Bool)) {
+          (this.bitPosition = 0.0);
+          this.pos++;
         }
         i++;
       }

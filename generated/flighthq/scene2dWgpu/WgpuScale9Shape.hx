@@ -20,6 +20,7 @@ import flighthq.shape.Scale9ShapeCommands.mapScale9ShapeCommands;
 import flighthq.types.Matrix;
 import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderRegistrySignals;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
@@ -49,16 +50,16 @@ class WgpuScale9Shape {
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);
     ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
-    return cast (cast createWgpuRendererData({ canvas: canvas, ctx: ctx, lastH: 0.0, lastScaleX: -1.0, lastScaleY: -1.0, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, entry: null }) : RendererData);
+    return cast (cast createWgpuRendererData((cast { canvas: canvas, ctx: ctx, lastH: 0.0, lastScaleX: -1.0, lastScaleY: -1.0, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, entry: null })) : RendererData);
     return cast null;
   }
 
   @:noCompletion
   public static function destroyWgpuScale9ShapeData(_state:RenderState, data:RendererData):Void {
     var shapeData:Null<WgpuScale9ShapeData__wgpuScale9Shape> = cast _Runtime.UNDEFINED;
-    shapeData = (cast getWgpuRendererData((cast data : Null<RendererData>)) : Null<WgpuScale9ShapeData__wgpuScale9Shape>);
+    shapeData = (cast getWgpuRendererData((cast data)) : Null<WgpuScale9ShapeData__wgpuScale9Shape>);
     if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
-    ({ final __hostTypeCall0 = _Runtime.optionalField((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry, 'texture'); __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUTexture).destroy(); });
+    ({ final __hostTypeCall3 = ({ final __structural2 = (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var texture:flighthq._internal.dom.GPUTexture; }).texture; }); __hostTypeCall3 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall3 : flighthq._internal.dom.GPUTexture).destroy(); });
   }
 
   @:noCompletion
@@ -81,28 +82,28 @@ class WgpuScale9Shape {
     var b:Float = cast _Runtime.UNDEFINED;
     var c:Float = cast _Runtime.UNDEFINED;
     var d:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) { return; }
-    flushWgpuQuadBatchWriter((cast state : WgpuRenderState));
+    flushWgpuQuadBatchWriter((cast state));
     source = (cast (cast renderProxy : RenderProxy2D).source : Scale9Shape);
     __destructure0 = (cast source : Scale9Shape).data;
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');
-    version = (cast getNodeLocalContentRevision(source) : Float);
+    version = (cast getNodeLocalContentRevision((cast source)) : Float);
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) { return; }
-    rasterizer = (cast getWgpuShapeRasterizer((cast state : WgpuRenderState)) : Null<ShapeRasterizer>);
+    rasterizer = (cast getWgpuShapeRasterizer((cast state)) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
-      _Runtime.callOptionalValue((cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
       return;
     }
-    bounds = (cast getNodeLocalBoundsRectangle(source) : Rectangle);
-    mapper = (cast buildWgpuScale9Mapper(bounds, scale9Grid, (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float)) : Null<Scale9Mapper>);
+    bounds = (cast getNodeLocalBoundsRectangle((cast source)) : Rectangle);
+    mapper = (cast buildWgpuScale9Mapper((cast bounds), (cast scale9Grid), (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
-      drawWgpuShape((cast state : WgpuRenderState), (cast renderProxy : RenderProxy2D));
+      drawWgpuShape((cast state), (cast renderProxy));
       return;
     }
-    shapeData = (cast getWgpuRendererData((cast (cast renderProxy : RenderProxy2D).rendererData : Null<RendererData>)) : Null<WgpuScale9ShapeData__wgpuScale9Shape>);
+    shapeData = (cast getWgpuRendererData((cast (cast renderProxy : RenderProxy2D).rendererData)) : Null<WgpuScale9ShapeData__wgpuScale9Shape>);
     pixelRatio = (cast state : WgpuRenderState).pixelRatio;
     if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
     w = HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'width'), (cast source : Scale9Shape).scaleX));
@@ -116,16 +117,16 @@ class WgpuScale9Shape {
       var ctx:flighthq._internal.dom.CanvasRenderingContext2D = (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).ctx;
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([_Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'y'), w, h] : Array<Dynamic>));
-      mapScale9ShapeCommands((cast WgpuScale9Shape._remappedCommands__wgpuScale9Shape : Array<ShapeCommandToken>), (cast commands : Array<ShapeCommandToken>), mapper);
-      rasterizer((cast ctx : flighthq._internal.dom.CanvasRenderingContext2D), (cast WgpuScale9Shape._remappedCommands__wgpuScale9Shape : Array<ShapeCommandToken>), (cast state : RenderState));
+      mapScale9ShapeCommands((cast WgpuScale9Shape._remappedCommands__wgpuScale9Shape), (cast commands), (cast mapper));
+      rasterizer((cast ctx), (cast WgpuScale9Shape._remappedCommands__wgpuScale9Shape), (cast state));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
       if ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry, null) : Bool) || (cast !_Runtime.strictEquals((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).lastW, w) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).lastH, h) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).lastPixelRatio, pixelRatio) : Bool)) : Bool)) {
-        var nextEntry:Null<WgpuTextureEntry> = (cast createWgpuTextureEntry((cast state : WgpuRenderState), (cast pw : Float), (cast ph : Float), (cast (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement)) : Null<WgpuTextureEntry>);
+        var nextEntry:Null<WgpuTextureEntry> = (cast createWgpuTextureEntry((cast state), (cast pw : Float), (cast ph : Float), (cast (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).canvas)) : Null<WgpuTextureEntry>);
         if ((cast _Runtime.strictEquals(nextEntry, null) : Bool)) { return; }
-        ({ final __hostTypeCall1 = _Runtime.optionalField((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry, 'texture'); __hostTypeCall1 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall1 : flighthq._internal.dom.GPUTexture).destroy(); });
+        ({ final __hostTypeCall7 = ({ final __structural6 = (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var texture:flighthq._internal.dom.GPUTexture; }).texture; }); __hostTypeCall7 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall7 : flighthq._internal.dom.GPUTexture).destroy(); });
         ((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry = nextEntry);
       } else {
-        updateWgpuTextureEntry((cast state : WgpuRenderState), (cast (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry : WgpuTextureEntry), (cast (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement));
+        updateWgpuTextureEntry((cast state), (cast (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry), (cast (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).canvas));
       }
       ((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).lastH = h);
       ((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).lastScaleX = (cast source : Scale9Shape).scaleX);
@@ -140,15 +141,15 @@ class WgpuScale9Shape {
     b = ((cast !_Runtime.strictEquals((cast source : Scale9Shape).scaleX, 0.0) : Bool) ? (cast (t.b / (cast source : Scale9Shape).scaleX) : Dynamic) : (cast t.b : Dynamic));
     c = ((cast !_Runtime.strictEquals((cast source : Scale9Shape).scaleY, 0.0) : Bool) ? (cast (t.c / (cast source : Scale9Shape).scaleY) : Dynamic) : (cast t.c : Dynamic));
     d = ((cast !_Runtime.strictEquals((cast source : Scale9Shape).scaleY, 0.0) : Bool) ? (cast (t.d / (cast source : Scale9Shape).scaleY) : Dynamic) : (cast t.d : Dynamic));
-    drawWgpuQuadWithTransform((cast state : WgpuRenderState), renderProxy, (cast { a: a, b: b, c: c, d: d, tx: t.tx, ty: t.ty } : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }), (cast (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry : WgpuTextureEntry), (cast 0.0 : Float), (cast 0.0 : Float), (cast w : Float), (cast h : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
+    drawWgpuQuadWithTransform((cast state), (cast renderProxy), (cast { a: a, b: b, c: c, d: d, tx: t.tx, ty: t.ty }), (cast (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry), (cast 0.0 : Float), (cast 0.0 : Float), (cast w : Float), (cast h : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
   }
 
   @:noCompletion
   public static function drawWgpuScale9ShapeMask(state:WgpuRenderState, data:RenderProxy2D):Void {
-    drawWgpuScale9Shape((cast state : WgpuRenderState), (cast data : RenderProxy2D));
+    drawWgpuScale9Shape((cast state), (cast data));
   }
 
-  public static final defaultWgpuScale9ShapeRenderer:Scene2DRenderer = { createData: createWgpuScale9ShapeData, destroyData: destroyWgpuScale9ShapeData, submit: drawWgpuScale9Shape };
+  public static final defaultWgpuScale9ShapeRenderer:Scene2DRenderer = (cast { createData: createWgpuScale9ShapeData, destroyData: destroyWgpuScale9ShapeData, submit: drawWgpuScale9Shape });
 
-  public static final _remappedCommands__wgpuScale9Shape:Array<ShapeCommandToken> = cast ([] : Array<Dynamic>);
+  public static final _remappedCommands__wgpuScale9Shape:Array<ShapeCommandToken> = (cast cast ([] : Array<Dynamic>));
 }

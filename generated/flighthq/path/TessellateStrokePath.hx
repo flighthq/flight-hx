@@ -13,13 +13,13 @@ class TessellateStrokePath {
   public static function tessellateStrokePath(path:Path, style:StrokeStyle, tolerance:Float = 0.25):Null<PathMesh> {
     var geometry:{ var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; } = cast _Runtime.UNDEFINED;
     var mesh:PathMesh = cast _Runtime.UNDEFINED;
-    geometry = (cast buildStrokePathGeometry((cast path : Path), (cast style : StrokeStyle), (cast tolerance : Float)) : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; });
+    geometry = (cast buildStrokePathGeometry((cast path), (cast style), (cast tolerance : Float)) : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; });
     if ((cast !_Runtime.strictEquals((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).issue, StrokePathTessellationIssueNone) : Bool)) { return cast null; }
-    mesh = { indices: cast ([] : Array<Dynamic>), vertices: cast ([] : Array<Dynamic>) };
+    mesh = (cast { indices: cast ([] : Array<Dynamic>), vertices: cast ([] : Array<Dynamic>) });
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).pieces, 'length') : Float)) : Bool)) {
-        TessellateStrokePath.appendStrokePieceMesh__tessellateStrokePath((cast mesh : PathMesh), (cast flighthq._internal._StaticIndex.readArray((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).pieces, i) : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }));
+        TessellateStrokePath.appendStrokePieceMesh__tessellateStrokePath((cast mesh), (cast flighthq._internal._StaticIndex.readArray((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).pieces, i)));
         i++;
       }
     }
@@ -50,21 +50,21 @@ class TessellateStrokePath {
         var right:Float = (left + 1.0);
         var nextLeft:Float = (base + (next * 2.0));
         var nextRight:Float = (nextLeft + 1.0);
-        TessellateStrokePath.appendTriangle__tessellateStrokePath((cast mesh : PathMesh), (cast left : Float), (cast right : Float), (cast nextLeft : Float));
-        TessellateStrokePath.appendTriangle__tessellateStrokePath((cast mesh : PathMesh), (cast nextLeft : Float), (cast right : Float), (cast nextRight : Float));
+        TessellateStrokePath.appendTriangle__tessellateStrokePath((cast mesh), (cast left : Float), (cast right : Float), (cast nextLeft : Float));
+        TessellateStrokePath.appendTriangle__tessellateStrokePath((cast mesh), (cast nextLeft : Float), (cast right : Float), (cast nextRight : Float));
         i++;
       }
     }
     if ((cast ((cast !(cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool) : Bool) && (cast ((cast _Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).startCap, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var right:Array<Float> = cast ([flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, 0.0), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, 1.0)] : Array<Dynamic>);
-      var left:Array<Float> = cast ([flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, 0.0), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, 1.0)] : Array<Dynamic>);
-      TessellateStrokePath.appendRoundCap__tessellateStrokePath((cast mesh : PathMesh), (cast right : Array<Float>), (cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).startCap : Array<Float>), (cast left : Array<Float>));
+      var right:Array<Float> = (cast cast ([flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, 0.0), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, 1.0)] : Array<Dynamic>));
+      var left:Array<Float> = (cast cast ([flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, 0.0), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, 1.0)] : Array<Dynamic>));
+      TessellateStrokePath.appendRoundCap__tessellateStrokePath((cast mesh), (cast right), (cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).startCap), (cast left));
     }
     if ((cast ((cast !(cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool) : Bool) && (cast ((cast _Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).endCap, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var end:Float = _Runtime.subtractNumbers(_Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, 'length'), 2.0);
-      var left:Array<Float> = cast ([flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, end), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, (end + 1.0))] : Array<Dynamic>);
-      var right:Array<Float> = cast ([flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, end), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, (end + 1.0))] : Array<Dynamic>);
-      TessellateStrokePath.appendRoundCap__tessellateStrokePath((cast mesh : PathMesh), (cast left : Array<Float>), (cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).endCap : Array<Float>), (cast right : Array<Float>));
+      var left:Array<Float> = (cast cast ([flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, end), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, (end + 1.0))] : Array<Dynamic>));
+      var right:Array<Float> = (cast cast ([flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, end), flighthq._internal._StaticIndex.readArray((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, (end + 1.0))] : Array<Dynamic>));
+      TessellateStrokePath.appendRoundCap__tessellateStrokePath((cast mesh), (cast left), (cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).endCap), (cast right));
     }
   }
 
@@ -80,7 +80,7 @@ class TessellateStrokePath {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast (arcCount - 1.0) : Float)) : Bool)) {
-        TessellateStrokePath.appendTriangle__tessellateStrokePath((cast mesh : PathMesh), (cast center : Float), (cast (arcBase + i) : Float), (cast ((arcBase + i) + 1.0) : Float));
+        TessellateStrokePath.appendTriangle__tessellateStrokePath((cast mesh), (cast center : Float), (cast (arcBase + i) : Float), (cast ((arcBase + i) + 1.0) : Float));
         i++;
       }
     }

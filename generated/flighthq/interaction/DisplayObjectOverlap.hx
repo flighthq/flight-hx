@@ -14,12 +14,12 @@ import flighthq.types.Rectangle.RectangleLike;
 
 class DisplayObjectOverlap {
   public static function containsNode2D(outer:Node2D, inner:Node2D):Bool {
-    return cast (cast enclosesRectangle((cast getNodeWorldBoundsRectangle(outer) : RectangleLike), (cast getNodeWorldBoundsRectangle(inner) : RectangleLike)) : Bool);
+    return cast (cast enclosesRectangle((cast (cast getNodeWorldBoundsRectangle((cast outer)) : Rectangle)), (cast (cast getNodeWorldBoundsRectangle((cast inner)) : Rectangle))) : Bool);
     return cast null;
   }
 
   public static function getNode2DOverlapRectangle(source:Node2D, other:Node2D, out:Rectangle):Rectangle {
-    computeRectangleIntersection(out, (cast getNodeWorldBoundsRectangle(source) : RectangleLike), (cast getNodeWorldBoundsRectangle(other) : RectangleLike));
+    computeRectangleIntersection((cast out), (cast (cast getNodeWorldBoundsRectangle((cast source)) : Rectangle)), (cast (cast getNodeWorldBoundsRectangle((cast other)) : Rectangle)));
     return cast out;
     return cast null;
   }
@@ -31,14 +31,14 @@ class DisplayObjectOverlap {
     var aCenterY:Float = cast _Runtime.UNDEFINED;
     var bCenterX:Float = cast _Runtime.UNDEFINED;
     var bCenterY:Float = cast _Runtime.UNDEFINED;
-    a = (cast getNodeWorldBoundsRectangle(source) : Rectangle);
-    b = (cast getNodeWorldBoundsRectangle(other) : Rectangle);
-    if ((cast !(cast (cast intersectsRectangle(a, b) : Bool) : Bool) : Bool)) { return cast false; }
+    a = (cast getNodeWorldBoundsRectangle((cast source)) : Rectangle);
+    b = (cast getNodeWorldBoundsRectangle((cast other)) : Rectangle);
+    if ((cast !(cast (cast intersectsRectangle((cast a), (cast b)) : Bool) : Bool) : Bool)) { return cast false; }
     aCenterX = _Runtime.addNumbers(_Runtime.field(a, 'x'), _Runtime.multiplyNumbers(_Runtime.field(a, 'width'), 0.5));
     aCenterY = _Runtime.addNumbers(_Runtime.field(a, 'y'), _Runtime.multiplyNumbers(_Runtime.field(a, 'height'), 0.5));
     bCenterX = _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.multiplyNumbers(_Runtime.field(b, 'width'), 0.5));
     bCenterY = _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.multiplyNumbers(_Runtime.field(b, 'height'), 0.5));
-    return cast ((cast (cast containsRectanglePointXY(a, (cast bCenterX : Float), (cast bCenterY : Float)) : Bool) : Bool) || (cast (cast containsRectanglePointXY(b, (cast aCenterX : Float), (cast aCenterY : Float)) : Bool) : Bool));
+    return cast ((cast (cast containsRectanglePointXY((cast a), (cast bCenterX : Float), (cast bCenterY : Float)) : Bool) : Bool) || (cast (cast containsRectanglePointXY((cast b), (cast aCenterX : Float), (cast aCenterY : Float)) : Bool) : Bool));
     return cast null;
   }
 }

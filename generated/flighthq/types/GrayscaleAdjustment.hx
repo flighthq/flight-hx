@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GrayscaleAdjustment = { var kind:AdjustmentKind; var colorMatrix:Array<Float>; @:optional var intensity:Float; };
+typedef GrayscaleAdjustment = { var kind:String; var colorMatrix:Array<Float>; @:optional var intensity:Float; };

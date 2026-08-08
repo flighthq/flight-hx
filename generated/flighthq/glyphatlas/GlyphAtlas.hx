@@ -22,9 +22,9 @@ class GlyphAtlas {
     var rasterizerBackend:GlyphRasterizerBackend = cast _Runtime.UNDEFINED;
     var rasterizeOptions:GlyphRasterizeOptions = cast _Runtime.UNDEFINED;
     padding = _Runtime.coalesce(options.padding, function():Dynamic return cast 1.0);
-    rasterizerBackend = _Runtime.coalesce(options.rasterizerBackend, function():Dynamic return cast (cast getGlyphRasterizerBackend() : Null<GlyphRasterizerBackend>));
-    rasterizeOptions = _Runtime.mergeObjects([{ fontFamily: options.fontFamily }, { fontSize: options.fontSize }, ((cast !_Runtime.strictEquals(options.fontStyle, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fontStyle: options.fontStyle } : Dynamic) : (cast {  } : Dynamic)), ((cast !_Runtime.strictEquals(options.fontWeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fontWeight: options.fontWeight } : Dynamic) : (cast {  } : Dynamic))]);
-    return cast { runtime: { bitmaps: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), dirty: false, dirtyMaxX: 0.0, dirtyMaxY: 0.0, dirtyMinX: 0.0, dirtyMinY: 0.0, entries: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), lru: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), maxArea: _Runtime.coalesce(options.maxArea, function():Dynamic return cast 0.0), maxBytes: _Runtime.coalesce(options.maxBytes, function():Dynamic return cast 0.0), maxGlyphs: _Runtime.coalesce(options.maxGlyphs, function():Dynamic return cast 0.0), occupiedArea: 0.0, retainedBytes: 0.0, metrics: (cast GlyphAtlas._resolveGlyphAtlasMetrics__glyphAtlas((cast rasterizerBackend : GlyphRasterizerBackend), (cast rasterizeOptions : GlyphRasterizeOptions)) : GlyphMetrics), packBottom: padding, padding: padding, rasterizerBackend: rasterizerBackend, rasterizeOptions: rasterizeOptions, shelves: cast ([] : Array<Dynamic>), bitmap: (cast createBitmap((cast options.width : Float), (cast options.height : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bitmap) } };
+    rasterizerBackend = _Runtime.coalesce(options.rasterizerBackend, function():Dynamic return cast (cast getGlyphRasterizerBackend() : GlyphRasterizerBackend));
+    rasterizeOptions = (cast _Runtime.mergeObjects([{ fontFamily: options.fontFamily }, { fontSize: options.fontSize }, ((cast !_Runtime.strictEquals(options.fontStyle, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fontStyle: options.fontStyle } : Dynamic) : (cast {  } : Dynamic)), ((cast !_Runtime.strictEquals(options.fontWeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fontWeight: options.fontWeight } : Dynamic) : (cast {  } : Dynamic))]));
+    return cast { runtime: { bitmaps: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), dirty: false, dirtyMaxX: 0.0, dirtyMaxY: 0.0, dirtyMinX: 0.0, dirtyMinY: 0.0, entries: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), lru: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), maxArea: _Runtime.coalesce(options.maxArea, function():Dynamic return cast 0.0), maxBytes: _Runtime.coalesce(options.maxBytes, function():Dynamic return cast 0.0), maxGlyphs: _Runtime.coalesce(options.maxGlyphs, function():Dynamic return cast 0.0), occupiedArea: 0.0, retainedBytes: 0.0, metrics: (cast GlyphAtlas._resolveGlyphAtlasMetrics__glyphAtlas((cast rasterizerBackend), (cast rasterizeOptions)) : GlyphMetrics), packBottom: padding, padding: padding, rasterizerBackend: rasterizerBackend, rasterizeOptions: rasterizeOptions, shelves: cast ([] : Array<Dynamic>), bitmap: (cast createBitmap((cast options.width : Float), (cast options.height : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bitmap) } };
     return cast null;
   }
 
@@ -47,7 +47,7 @@ class GlyphAtlas {
   }
 
   public static function getGlyphAtlasBitmap(atlas:flighthq.types.GlyphSource.GlyphAtlas):Bitmap {
-    return cast atlas.runtime.bitmap;
+    return cast (cast atlas.runtime : { var bitmap:Bitmap; }).bitmap;
     return cast null;
   }
 

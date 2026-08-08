@@ -15,11 +15,11 @@ import flighthq.types.Scene2DRenderer;
 class GlShape {
   @:noCompletion
   public static function drawGlShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    if ((cast (cast drawGlMeshShape((cast state : GlRenderState), (cast renderProxy : RenderProxy2D)) : Bool) : Bool)) { return; }
-    drawGlRasterShape((cast state : GlRenderState), (cast renderProxy : RenderProxy2D));
+    if ((cast (cast drawGlMeshShape((cast state), (cast renderProxy)) : Bool) : Bool)) { return; }
+    drawGlRasterShape((cast state), (cast renderProxy));
   }
 
-  public static final defaultGlShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createGlShapeData, destroyData: destroyGlShapeData, submit: drawGlShape };
+  public static final defaultGlShapeRenderer:Scene2DRenderer = (cast { format: BatchFormat.Quad, createData: createGlShapeData, destroyData: destroyGlShapeData, submit: drawGlShape });
 
   public static final defaultGlMorphShapeRenderer:Scene2DRenderer = defaultGlShapeRenderer;
 }

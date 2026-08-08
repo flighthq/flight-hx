@@ -7,7 +7,7 @@ import flighthq.types.TextureContainerKind;
 
 class DetectTextureContainer {
   public static function detectTextureContainer(bytes:flighthq._internal._UInt8Array):Null<TextureContainerKind> {
-    if ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 12.0 : Float)) : Bool) && (cast (cast DetectTextureContainer.isKtx2Magic__detectTextureContainer((cast bytes : flighthq._internal._UInt8Array)) : Bool) : Bool)) : Bool)) { return cast 'ktx2'; }
+    if ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 12.0 : Float)) : Bool) && (cast (cast DetectTextureContainer.isKtx2Magic__detectTextureContainer((cast bytes)) : Bool) : Bool)) : Bool)) { return cast 'ktx2'; }
     if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 4.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 68.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 1.0), 68.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 2.0), 83.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 3.0), 32.0) : Bool)) : Bool)) {
       return cast 'dds';
     }
@@ -29,5 +29,5 @@ class DetectTextureContainer {
     return cast null;
   }
 
-  public static final ktx2Magic__detectTextureContainer:Array<Float> = cast ([171.0, 75.0, 84.0, 88.0, 32.0, 50.0, 48.0, 187.0, 13.0, 10.0, 26.0, 10.0] : Array<Dynamic>);
+  public static final ktx2Magic__detectTextureContainer:Array<Float> = (cast cast ([171.0, 75.0, 84.0, 88.0, 32.0, 50.0, 48.0, 187.0, 13.0, 10.0, 26.0, 10.0] : Array<Dynamic>));
 }

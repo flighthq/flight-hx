@@ -10,6 +10,7 @@ import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.RegionAttachment2D;
 import flighthq.types.Skeleton2D;
+import flighthq.types.Vector2.Vector2Like;
 
 class RegionAttachment2D {
   public static final MATRIX_STRIDE__regionAttachment2D:Float = 6.0;
@@ -19,7 +20,7 @@ class RegionAttachment2D {
     var world:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var hw:Float = cast _Runtime.UNDEFINED;
     var hh:Float = cast _Runtime.UNDEFINED;
-    setTransformMatrix((cast RegionAttachment2D._local__regionAttachment2D : MatrixLike), (cast _Runtime.field(attachment, 'scaleX') : Float), (cast _Runtime.field(attachment, 'scaleY') : Float), (cast _Runtime.multiplyNumbers(_Runtime.field(attachment, 'rotation'), DEG_TO_RAD) : Float), (cast _Runtime.field(attachment, 'x') : Float), (cast _Runtime.field(attachment, 'y') : Float));
+    setTransformMatrix((cast RegionAttachment2D._local__regionAttachment2D), (cast _Runtime.field(attachment, 'scaleX') : Float), (cast _Runtime.field(attachment, 'scaleY') : Float), (cast _Runtime.multiplyNumbers(_Runtime.field(attachment, 'rotation'), DEG_TO_RAD) : Float), (cast _Runtime.field(attachment, 'x') : Float), (cast _Runtime.field(attachment, 'y') : Float));
     b = (boneIndex * RegionAttachment2D.MATRIX_STRIDE__regionAttachment2D);
     world = _Runtime.field(skeleton, 'worldMatrices');
     (RegionAttachment2D._bone__regionAttachment2D.a = cast (flighthq._internal._StaticIndex.readFloat32Array(world, b) : Dynamic));
@@ -28,28 +29,28 @@ class RegionAttachment2D {
     (RegionAttachment2D._bone__regionAttachment2D.d = cast (flighthq._internal._StaticIndex.readFloat32Array(world, (b + 3.0)) : Dynamic));
     (RegionAttachment2D._bone__regionAttachment2D.tx = cast (flighthq._internal._StaticIndex.readFloat32Array(world, (b + 4.0)) : Dynamic));
     (RegionAttachment2D._bone__regionAttachment2D.ty = cast (flighthq._internal._StaticIndex.readFloat32Array(world, (b + 5.0)) : Dynamic));
-    multiplyMatrix((cast RegionAttachment2D._combined__regionAttachment2D : MatrixLike), (cast RegionAttachment2D._bone__regionAttachment2D : MatrixLike), (cast RegionAttachment2D._local__regionAttachment2D : MatrixLike));
+    multiplyMatrix((cast RegionAttachment2D._combined__regionAttachment2D), (cast RegionAttachment2D._bone__regionAttachment2D), (cast RegionAttachment2D._local__regionAttachment2D));
     hw = _Runtime.divideNumbers(_Runtime.field(attachment, 'width'), 2.0);
     hh = _Runtime.divideNumbers(_Runtime.field(attachment, 'height'), 2.0);
-    matrixTransformPointXY(RegionAttachment2D._corner__regionAttachment2D, (cast RegionAttachment2D._combined__regionAttachment2D : MatrixLike), (cast -hw : Float), (cast -hh : Float));
+    matrixTransformPointXY((cast RegionAttachment2D._corner__regionAttachment2D), (cast RegionAttachment2D._combined__regionAttachment2D), (cast -hw : Float), (cast -hh : Float));
     flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, (cast RegionAttachment2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).x);
     flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, (cast RegionAttachment2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).y);
-    matrixTransformPointXY(RegionAttachment2D._corner__regionAttachment2D, (cast RegionAttachment2D._combined__regionAttachment2D : MatrixLike), (cast -hw : Float), (cast hh : Float));
+    matrixTransformPointXY((cast RegionAttachment2D._corner__regionAttachment2D), (cast RegionAttachment2D._combined__regionAttachment2D), (cast -hw : Float), (cast hh : Float));
     flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, (cast RegionAttachment2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).x);
     flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, (cast RegionAttachment2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).y);
-    matrixTransformPointXY(RegionAttachment2D._corner__regionAttachment2D, (cast RegionAttachment2D._combined__regionAttachment2D : MatrixLike), (cast hw : Float), (cast hh : Float));
+    matrixTransformPointXY((cast RegionAttachment2D._corner__regionAttachment2D), (cast RegionAttachment2D._combined__regionAttachment2D), (cast hw : Float), (cast hh : Float));
     flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, (cast RegionAttachment2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).x);
     flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, (cast RegionAttachment2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).y);
-    matrixTransformPointXY(RegionAttachment2D._corner__regionAttachment2D, (cast RegionAttachment2D._combined__regionAttachment2D : MatrixLike), (cast hw : Float), (cast -hh : Float));
+    matrixTransformPointXY((cast RegionAttachment2D._corner__regionAttachment2D), (cast RegionAttachment2D._combined__regionAttachment2D), (cast hw : Float), (cast -hh : Float));
     flighthq._internal._StaticIndex.writeFloat32Array(out, 6.0, (cast RegionAttachment2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).x);
     flighthq._internal._StaticIndex.writeFloat32Array(out, 7.0, (cast RegionAttachment2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).y);
   }
 
-  public static final _local__regionAttachment2D:MatrixLike = { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 };
+  public static final _local__regionAttachment2D:MatrixLike = (cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 });
 
-  public static final _bone__regionAttachment2D:MatrixLike = { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 };
+  public static final _bone__regionAttachment2D:MatrixLike = (cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 });
 
-  public static final _combined__regionAttachment2D:MatrixLike = { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 };
+  public static final _combined__regionAttachment2D:MatrixLike = (cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 });
 
-  public static final _corner__regionAttachment2D:{ var x:Float; var y:Float; } = { x: 0.0, y: 0.0 };
+  public static final _corner__regionAttachment2D:{ var x:Float; var y:Float; } = (cast { x: 0.0, y: 0.0 });
 }

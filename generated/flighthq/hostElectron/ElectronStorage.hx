@@ -17,10 +17,10 @@ class ElectronStorage {
     load = (cast function load():flighthq._internal._Record<String, String> {
       if ((cast !_Runtime.strictEquals(store, null) : Bool)) { return cast store; }
       try {
-        var dir:String = (cast (cast electron : ElectronApi).app : ElectronApp).getPath('userData');
+        var dir:String = (cast (cast electron : ElectronApi).app : ElectronApp).getPath((cast 'userData' : String));
         var path:String = '' + Std.string(dir) + '/' + Std.string(fileName) + '';
-        if ((cast (cast fs : ElectronFs).existsSync(path) : Bool)) {
-          var raw:String = (cast fs : ElectronFs).readFileSync(path, 'utf-8');
+        if ((cast (cast fs : ElectronFs).existsSync((cast path : String)) : Bool)) {
+          var raw:String = (cast fs : ElectronFs).readFileSync((cast path : String), (cast 'utf-8' : String));
           var parsed:flighthq._internal._Any = _Runtime.jsonParse(raw);
           if ((cast ((cast ((cast !_Runtime.strictEquals(parsed, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(parsed), 'object') : Bool)) : Bool) && (cast !(cast _Runtime.isArray(parsed) : Bool) : Bool)) : Bool)) {
             (store = cast ((cast parsed : flighthq._internal._Record<String, String>) : Dynamic));
@@ -31,37 +31,44 @@ class ElectronStorage {
       }
       (store = cast ({  } : Dynamic));
       return cast store;
-    } : Void->flighthq._internal._Record<String, String>);
+      return cast _Runtime.UNDEFINED;
+    });
     save = (cast function save():Bool {
       try {
-        var dir:String = (cast (cast electron : ElectronApi).app : ElectronApp).getPath('userData');
+        var dir:String = (cast (cast electron : ElectronApi).app : ElectronApp).getPath((cast 'userData' : String));
         var path:String = '' + Std.string(dir) + '/' + Std.string(fileName) + '';
-        (cast fs : ElectronFs).writeFileSync(path, _Runtime.jsonStringify(load()));
+        (cast fs : ElectronFs).writeFileSync((cast path : String), (cast _Runtime.jsonStringify((cast load() : flighthq._internal._Record<String, String>)) : String));
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
       }
-    } : Void->Bool);
+      return cast _Runtime.UNDEFINED;
+    });
     fs = (cast electron : ElectronApi).fs;
     store = null;
     return cast { clear: function():Bool {
       (store = cast ({  } : Dynamic));
       return cast (cast save() : Bool);
+      return cast _Runtime.UNDEFINED;
     }, getItem: function(key:String):Null<String> {
       var s:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
       s = (cast load() : flighthq._internal._Record<String, String>);
       return cast ((cast _Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([s, key] : Array<Dynamic>)) : Bool) ? (cast _Runtime.getIndex(s, key) : Dynamic) : (cast null : Dynamic));
+      return cast _Runtime.UNDEFINED;
     }, keys: function():Array<String> {
-      return cast flighthq._internal.DynamicObject.keys((cast load() : {  }));
+      return cast flighthq._internal.DynamicObject.keys((cast load() : flighthq._internal._Record<String, String>));
+      return cast _Runtime.UNDEFINED;
     }, removeItem: function(key:String):Bool {
       var s:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
       s = (cast load() : flighthq._internal._Record<String, String>);
       if ((cast !(cast _Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([s, key] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
       _Runtime.deleteIndex(s, key);
       return cast (cast save() : Bool);
+      return cast _Runtime.UNDEFINED;
     }, setItem: function(key:String, value:String):Bool {
       _Runtime.setIndex((cast load() : flighthq._internal._Record<String, String>), key, value);
       return cast (cast save() : Bool);
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }

@@ -7,5 +7,5 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 
 class _SceneCoverageEntryValues {
-  public static final SceneCoverageValue:{ var Fallback:String; var Missing:String; var Satisfied:String; } = { Fallback: 'Fallback', Missing: 'Missing', Satisfied: 'Satisfied' };
+  public static final SceneCoverageValue:{ var Fallback:String; var Missing:String; var Satisfied:String; } = (cast { Fallback: 'Fallback', Missing: 'Missing', Satisfied: 'Satisfied' });
 }

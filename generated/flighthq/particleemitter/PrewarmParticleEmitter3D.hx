@@ -18,7 +18,7 @@ class PrewarmParticleEmitter3D {
     elapsed = 0.0;
     while ((cast ((cast elapsed : Float) < (cast duration : Float)) : Bool)) {
       var deltaTime:Float = HxMath.min(step, (duration - elapsed));
-      updateParticleEmitter3D((cast emitter : ParticleEmitter3D), (cast state : ParticleEmitterState), (cast config : ParticleEmitterConfig), (cast deltaTime : Float), (cast callbacks : Null<ParticleEmitterCallbacks>));
+      updateParticleEmitter3D((cast emitter), (cast state), (cast config), (cast deltaTime : Float), (cast callbacks));
       (elapsed = cast ((elapsed + deltaTime) : Dynamic));
     }
   }

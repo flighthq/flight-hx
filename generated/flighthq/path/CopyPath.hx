@@ -8,7 +8,7 @@ import flighthq.types.ShapeCommand.PathWinding;
 
 class CopyPath {
   public static function clonePath(source:Path):Path {
-    return cast (cast copyPath((cast source : Path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Path>)) : Path);
+    return cast (cast copyPath((cast source), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
     return cast null;
   }
 

@@ -18,33 +18,33 @@ class EnableCollisionGuards {
   }
 
   public static function disableCollisionGuards():Void {
-    setCollisionTestGuard(null);
+    setCollisionTestGuard((cast null));
     (EnableCollisionGuards.collisionGuardsEnabled__enableCollisionGuards = cast (false : Dynamic));
   }
 
   public static function enableCollisionGuards():Void {
-    setCollisionTestGuard(EnableCollisionGuards.warnOnInvalidCollisionShapes__enableCollisionGuards);
+    setCollisionTestGuard((cast EnableCollisionGuards.warnOnInvalidCollisionShapes__enableCollisionGuards));
     (EnableCollisionGuards.collisionGuardsEnabled__enableCollisionGuards = cast (true : Dynamic));
   }
 
   public static function warnOnInvalidCollisionShapes__enableCollisionGuards(a:CollisionShape, b:CollisionShape):Void {
     var statusA:Null<String> = cast _Runtime.UNDEFINED;
     var statusB:Null<String> = cast _Runtime.UNDEFINED;
-    statusA = (cast getCollisionShapeValidationStatus((cast a : CollisionShape)) : Null<String>);
+    statusA = (cast getCollisionShapeValidationStatus((cast a)) : Null<String>);
     if ((cast ((cast _Runtime.strictEquals(statusA, 'degenerate-shape') : Bool) || (cast _Runtime.strictEquals(statusA, 'non-convex-polygon') : Bool)) : Bool)) {
-      EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards((cast { kind: (cast a : { var kind:String; }).kind, overlapping: false, shapeIndex: 0.0, status: statusA } : CollisionTestExplanation));
+      EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards((cast { kind: (cast a : { var kind:String; }).kind, overlapping: false, shapeIndex: 0.0, status: statusA }));
       return;
     }
-    statusB = (cast getCollisionShapeValidationStatus((cast b : CollisionShape)) : Null<String>);
+    statusB = (cast getCollisionShapeValidationStatus((cast b)) : Null<String>);
     if ((cast ((cast _Runtime.strictEquals(statusB, 'degenerate-shape') : Bool) || (cast _Runtime.strictEquals(statusB, 'non-convex-polygon') : Bool)) : Bool)) {
-      EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards((cast { kind: (cast b : { var kind:String; }).kind, overlapping: false, shapeIndex: 1.0, status: statusB } : CollisionTestExplanation));
+      EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards((cast { kind: (cast b : { var kind:String; }).kind, overlapping: false, shapeIndex: 1.0, status: statusB }));
     }
   }
 
   public static function warnOnInvalidCollisionShape__enableCollisionGuards(explanation:CollisionTestExplanation):Void {
     var message:String = cast _Runtime.UNDEFINED;
     message = ((cast _Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'non-convex-polygon') : Bool) ? (cast 'testCollision: a polygon is non-convex and cannot produce a supported manifold — call explainCollisionTest(a, b) and replace the reported shape with a convex polygon.' : Dynamic) : (cast 'testCollision: a shape is degenerate and cannot produce a manifold — call explainCollisionTest(a, b) and replace the reported shape with a finite positive-area collider.' : Dynamic));
-    (cast logOnce((cast 'collision:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.field(explanation, 'shapeIndex')) + ':' + Std.string(_Runtime.field(explanation, 'kind')) + '' : String), (cast LogLevel.Warn : LogLevel), { kind: _Runtime.field(explanation, 'kind'), message: message, shapeIndex: _Runtime.field(explanation, 'shapeIndex'), status: _Runtime.field(explanation, 'status') }, (cast 'collision' : Null<String>)) : Bool);
+    (cast logOnce((cast 'collision:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.field(explanation, 'shapeIndex')) + ':' + Std.string(_Runtime.field(explanation, 'kind')) + '' : String), (cast LogLevel.Warn), (cast { kind: _Runtime.field(explanation, 'kind'), message: message, shapeIndex: _Runtime.field(explanation, 'shapeIndex'), status: _Runtime.field(explanation, 'status') }), (cast 'collision')) : Bool);
   }
 
   public static var collisionGuardsEnabled__enableCollisionGuards:Bool = false;

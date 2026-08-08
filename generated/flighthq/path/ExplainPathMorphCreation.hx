@@ -17,7 +17,7 @@ import flighthq.types.PathMorphCreationReason;
 class ExplainPathMorphCreation {
   public static function explainPathMorphCreation(start:Path, end:Path):PathMorphCreationExplanation {
     var result:{ var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; } = cast _Runtime.UNDEFINED;
-    result = (cast buildPathMorph((cast start : Path), (cast end : Path)) : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; });
+    result = (cast buildPathMorph((cast start), (cast end)) : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; });
     return cast { contour: (cast result : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; }).contour, reason: (cast ExplainPathMorphCreation.getReason__explainPathMorphCreation((cast (cast result : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; }).issue : Float)) : PathMorphCreationReason), supported: _Runtime.strictEquals((cast result : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; }).issue, PathMorphIssueNone) };
     return cast null;
   }

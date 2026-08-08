@@ -7,4 +7,4 @@ import flighthq.types.Entity.EntityRuntime;
 
 typedef Viewport = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var devicePixelRatio:Float; var height:Float; var width:Float; var x:Float; var y:Float; };
 
-typedef ViewportLike = Dynamic;
+typedef ViewportLike = flighthq._internal._Partial<flighthq.types.Viewport>;

@@ -59,22 +59,22 @@ class Scene3d {
     return cast null;
   }
 
-  public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, ?mode:BillboardMode, ?kind:Kind, ?obj:Dynamic):Billboard {
+  public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, ?mode:BillboardMode, ?kind:Kind, ?obj:flighthq._internal._Partial<flighthq._internal._Pick<Billboard, String>>):Billboard {
     return cast Facade_Scene3d_flighthq_scene3d_Billboard.createBillboard(geometry, materials, mode, kind, obj);
     return cast null;
   }
 
-  public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:Dynamic):Mesh {
+  public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:flighthq._internal._Partial<flighthq._internal._Pick<Mesh, String>>):Mesh {
     return cast Facade_Scene3d_flighthq_scene3d_Mesh.createMesh(geometry, materials, kind, obj);
     return cast null;
   }
 
-  public static function createNode3D(?kind:Kind, ?obj:Dynamic):Node3D {
+  public static function createNode3D(?kind:Kind, ?obj:flighthq._internal._Partial<flighthq._internal._Pick<Node3D, String>>):Node3D {
     return cast Facade_Scene3d_flighthq_scene3d_SceneNode.createNode3D(kind, obj);
     return cast null;
   }
 
-  public static function createScene3D(?obj:Dynamic):Scene3D {
+  public static function createScene3D(?obj:flighthq._internal._Partial<flighthq._internal._Pick<Node3D, String>>):Scene3D {
     return cast Facade_Scene3d_flighthq_scene3d_Scene.createScene3D(obj);
     return cast null;
   }

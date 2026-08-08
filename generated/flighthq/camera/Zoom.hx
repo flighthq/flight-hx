@@ -7,17 +7,18 @@ import flighthq.camera.Projection2d.unprojectCamera2DPoint;
 import flighthq.geometry.Vector2.createVector2;
 import flighthq.types.Camera2D;
 import flighthq.types.Vector2;
+import flighthq.types.Vector2.Vector2Like;
 
 class Zoom {
   public static function zoomCamera2DAtScreenPoint(camera:Camera2D, screenX:Float, screenY:Float, zoom:Float):Void {
-    unprojectCamera2DPoint((cast camera : Camera2D), (cast screenX : Float), (cast screenY : Float), Zoom.scratchBefore__zoom);
+    unprojectCamera2DPoint((cast camera), (cast screenX : Float), (cast screenY : Float), (cast Zoom.scratchBefore__zoom));
     (camera.zoom = cast (zoom : Dynamic));
-    unprojectCamera2DPoint((cast camera : Camera2D), (cast screenX : Float), (cast screenY : Float), Zoom.scratchAfter__zoom);
+    unprojectCamera2DPoint((cast camera), (cast screenX : Float), (cast screenY : Float), (cast Zoom.scratchAfter__zoom));
     (camera.x += (Zoom.scratchBefore__zoom.x - Zoom.scratchAfter__zoom.x));
     (camera.y += (Zoom.scratchBefore__zoom.y - Zoom.scratchAfter__zoom.y));
   }
 
-  public static final scratchAfter__zoom:Vector2 = (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector2);
+  public static final scratchAfter__zoom:Vector2 = (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector2);
 
-  public static final scratchBefore__zoom:Vector2 = (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector2);
+  public static final scratchBefore__zoom:Vector2 = (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector2);
 }

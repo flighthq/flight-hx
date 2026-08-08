@@ -19,17 +19,17 @@ class GlEnvironmentSkybox {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var sky:GlSkybox__glEnvironmentSkybox = cast _Runtime.UNDEFINED;
     var prevDepthTest:Bool = cast _Runtime.UNDEFINED;
-    cube = (cast ensureGlEnvironmentSourceCube((cast state : GlRenderState), (cast environment : Environment)) : Null<flighthq._internal.dom.WebGLTexture>);
+    cube = (cast ensureGlEnvironmentSourceCube((cast state), (cast environment)) : Null<flighthq._internal.dom.WebGLTexture>);
     if ((cast _Runtime.strictEquals(cube, null) : Bool)) { return; }
     gl = (cast state : GlRenderState).gl;
-    sky = (cast GlEnvironmentSkybox.ensureGlSkybox__glEnvironmentSkybox((cast state : GlRenderState)) : GlSkybox__glEnvironmentSkybox);
-    if ((cast !(cast (cast updateCamera3DInverseViewProjection((cast camera : Camera3D), (cast aspect : Float)) : Bool) : Bool) : Bool)) { return; }
+    sky = (cast GlEnvironmentSkybox.ensureGlSkybox__glEnvironmentSkybox((cast state)) : GlSkybox__glEnvironmentSkybox);
+    if ((cast !(cast (cast updateCamera3DInverseViewProjection((cast camera), (cast aspect : Float)) : Bool) : Bool) : Bool)) { return; }
     prevDepthTest = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST)) : Bool);
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, false);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast sky : GlSkybox__glEnvironmentSkybox).program);
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast sky : GlSkybox__glEnvironmentSkybox).locInverseViewProjection, false, camera.inverseViewProjection.m);
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast sky : GlSkybox__glEnvironmentSkybox).locInverseViewProjection, false, (cast camera.inverseViewProjection : { var m:flighthq._internal._Float32Array; }).m);
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast sky : GlSkybox__glEnvironmentSkybox).locIntensity, _Runtime.field(environment, 'intensity'));
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), cube);
@@ -50,7 +50,7 @@ class GlEnvironmentSkybox {
     gl = (cast state : GlRenderState).gl;
     sky = ((cast GlEnvironmentSkybox._skyboxes__glEnvironmentSkybox : flighthq._internal._WeakMap<GlRenderState, GlSkybox__glEnvironmentSkybox>).get(state));
     if ((cast !_Runtime.strictEquals(sky, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast sky; }
-    program = (cast GlEnvironmentSkybox.linkGlSkyboxProgram__glEnvironmentSkybox((cast gl : flighthq._internal.dom.WebGL2RenderingContext)) : flighthq._internal.dom.WebGLProgram);
+    program = (cast GlEnvironmentSkybox.linkGlSkyboxProgram__glEnvironmentSkybox((cast gl)) : flighthq._internal.dom.WebGLProgram);
     vao = flighthq._internal.backend.WebGl2Backend.createVertexArray(gl);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, vao);
     buffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl);
@@ -60,13 +60,13 @@ class GlEnvironmentSkybox {
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 0.0, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 0.0, 0.0);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
     (sky = cast ({ locEnvCube: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_envCube'), locInverseViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_inverseViewProjection'), locIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_intensity'), program: program, vao: vao } : Dynamic));
-    ((cast GlEnvironmentSkybox._skyboxes__glEnvironmentSkybox : flighthq._internal._WeakMap<GlRenderState, GlSkybox__glEnvironmentSkybox>).set(state, sky));
+    ((cast GlEnvironmentSkybox._skyboxes__glEnvironmentSkybox : flighthq._internal._WeakMap<GlRenderState, GlSkybox__glEnvironmentSkybox>).set(state, (cast sky)));
     return cast sky;
     return cast null;
   }
 
   public static function linkGlSkyboxProgram__glEnvironmentSkybox(gl:flighthq._internal.dom.WebGL2RenderingContext):flighthq._internal.dom.WebGLProgram {
-    return cast (cast createGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlEnvironmentSkybox.SKYBOX_VERTEX__glEnvironmentSkybox : String), (cast GlEnvironmentSkybox.SKYBOX_FRAGMENT__glEnvironmentSkybox : String), (cast 'Skybox' : String)) : flighthq._internal.dom.WebGLProgram);
+    return cast (cast createGlProgram((cast gl), (cast GlEnvironmentSkybox.SKYBOX_VERTEX__glEnvironmentSkybox : String), (cast GlEnvironmentSkybox.SKYBOX_FRAGMENT__glEnvironmentSkybox : String), (cast 'Skybox' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast null;
   }
 

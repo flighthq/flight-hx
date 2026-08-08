@@ -12,17 +12,17 @@ import flighthq.types.Log.LogLevel;
 class EnableAudioMixerGuards {
   @:noCompletion
   public static function disableAudioMixerGuards():Void {
-    setAudioBusMixerGuard(null);
+    setAudioBusMixerGuard((cast null));
   }
 
   @:noCompletion
   public static function enableAudioMixerGuards():Void {
-    setAudioBusMixerGuard(EnableAudioMixerGuards.warnOnUnmixedBus__enableAudioMixerGuards);
+    setAudioBusMixerGuard((cast EnableAudioMixerGuards.warnOnUnmixedBus__enableAudioMixerGuards));
   }
 
   public static function warnOnUnmixedBus__enableAudioMixerGuards(operation:AudioBusMixerOperation, bus:AudioBus):Void {
     var setter:String = cast _Runtime.UNDEFINED;
     setter = ((cast _Runtime.strictEquals(operation, 'gain') : Bool) ? (cast 'setAudioBusGain' : Dynamic) : (cast ((cast _Runtime.strictEquals(operation, 'mute') : Bool) ? (cast 'setAudioBusMuted' : Dynamic) : (cast 'setAudioBusPan' : Dynamic)) : Dynamic));
-    (cast logOnce((cast 'media:unmixed-bus-' + Std.string(operation) + '' : String), (cast LogLevel.Warn : LogLevel), { message: '' + Std.string(setter) + ': bus "' + Std.string(_Runtime.coalesce(bus.name, function():Dynamic return cast 'unnamed')) + '" belongs to no mixer, so the value was stored but reached no audio node and nothing changed audibly. Add the bus with addAudioBusToMixer(mixer, bus) — or route a channel through it with routeAudioChannelToMixerBus — before setting its properties.' }, (cast 'media' : Null<String>)) : Bool);
+    (cast logOnce((cast 'media:unmixed-bus-' + Std.string(operation) + '' : String), (cast LogLevel.Warn), (cast { message: '' + Std.string(setter) + ': bus "' + Std.string(_Runtime.coalesce(bus.name, function():Dynamic return cast 'unnamed')) + '" belongs to no mixer, so the value was stored but reached no audio node and nothing changed audibly. Add the bus with addAudioBusToMixer(mixer, bus) — or route a channel through it with routeAudioChannelToMixerBus — before setting its properties.' }), (cast 'media')) : Bool);
   }
 }

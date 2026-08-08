@@ -7,13 +7,15 @@ import flighthq.render.RenderProxy.getOrCreateRenderProxy2D;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.Node2D;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
+import flighthq.types.Renderable;
 
 class CanvasCSSFilterBinding {
   public static final _cssFilterBindings__canvasCSSFilterBinding:flighthq._internal._WeakMap<RenderProxy2D, String> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function enableCanvasCssFilter(state:CanvasRenderState):Void {
-    ((cast state : CanvasRenderState).canvasCssFilterResolver = resolveCanvasCssFilter);
+    ((cast state : { var canvasCssFilterResolver:Null<CanvasRenderState->RenderProxy2D->Null<String>>; }).canvasCssFilterResolver = (cast resolveCanvasCssFilter));
   }
 
   @:noCompletion
@@ -31,11 +33,11 @@ class CanvasCSSFilterBinding {
   @:noCompletion
   public static function setCanvasCssFilter(state:CanvasRenderState, node:Node2D, filter:Null<String>):Void {
     var renderProxy:RenderProxy2D = cast _Runtime.UNDEFINED;
-    renderProxy = (cast getOrCreateRenderProxy2D(state, node) : RenderProxy2D);
+    renderProxy = (cast getOrCreateRenderProxy2D((cast state), (cast node)) : RenderProxy2D);
     if ((cast _Runtime.strictEquals(filter, null) : Bool)) {
       ((cast CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding : flighthq._internal._WeakMap<RenderProxy2D, String>).delete_(renderProxy));
       return;
     }
-    ((cast CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding : flighthq._internal._WeakMap<RenderProxy2D, String>).set(renderProxy, filter));
+    ((cast CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding : flighthq._internal._WeakMap<RenderProxy2D, String>).set(renderProxy, (cast filter)));
   }
 }

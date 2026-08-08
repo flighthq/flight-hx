@@ -12,13 +12,13 @@ class TessellatePath {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var vertices:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath((cast path : Path), (cast tolerance : Float)) : Array<Array<Float>>);
-    vertices = cast ([] : Array<Dynamic>);
-    indices = cast ([] : Array<Dynamic>);
+    contours = (cast flattenPath((cast path), (cast tolerance : Float)) : Array<Array<Float>>);
+    vertices = (cast cast ([] : Array<Dynamic>));
+    indices = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        TessellatePath.tessellateContour__tessellatePath((cast flighthq._internal._StaticIndex.readArray(contours, i) : Array<Float>), (cast vertices : Array<Float>), (cast indices : Array<Float>));
+        TessellatePath.tessellateContour__tessellatePath((cast flighthq._internal._StaticIndex.readArray(contours, i)), (cast vertices), (cast indices));
         i++;
       }
     }
@@ -34,7 +34,7 @@ class TessellatePath {
     var twiceArea:Float = cast _Runtime.UNDEFINED;
     var ring:Array<Float> = cast _Runtime.UNDEFINED;
     var guard:Float = cast _Runtime.UNDEFINED;
-    pts = cast ([] : Array<Dynamic>);
+    pts = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
@@ -68,7 +68,7 @@ class TessellatePath {
         i++;
       }
     }
-    ring = cast ([] : Array<Dynamic>);
+    ring = (cast cast ([] : Array<Dynamic>));
     if ((cast ((cast twiceArea : Float) < (cast 0.0 : Float)) : Bool)) {
       {
         var i:Float = (count - 1.0);
@@ -95,7 +95,7 @@ class TessellatePath {
           var a:Float = flighthq._internal._StaticIndex.readArray(ring, _Runtime.fmod((_Runtime.addNumbers(i, _Runtime.field(ring, 'length')) - 1.0), _Runtime.field(ring, 'length')));
           var b:Float = flighthq._internal._StaticIndex.readArray(ring, i);
           var c:Float = flighthq._internal._StaticIndex.readArray(ring, _Runtime.fmod((i + 1.0), _Runtime.field(ring, 'length')));
-          if ((cast (cast TessellatePath.isEar__tessellatePath((cast contour : Array<Float>), (cast ring : Array<Float>), (cast a : Float), (cast b : Float), (cast c : Float)) : Bool) : Bool)) {
+          if ((cast (cast TessellatePath.isEar__tessellatePath((cast contour), (cast ring), (cast a : Float), (cast b : Float), (cast c : Float)) : Bool) : Bool)) {
             _Runtime.pushMany(indices, cast ([(base + a), (base + b), (base + c)] : Array<Dynamic>));
             _Runtime.splice(ring, Std.int(i), Std.int(1.0), []);
             (clipped = cast (true : Dynamic));

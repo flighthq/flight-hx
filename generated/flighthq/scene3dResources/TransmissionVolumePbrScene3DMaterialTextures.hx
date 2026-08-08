@@ -8,6 +8,7 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.PbrExtension;
 import flighthq.types.Sampler;
 import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
+import flighthq.types.Scene3DResources.Scene3DPbrExtensionTextureLister;
 import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.Texture.TextureColorSpace;
@@ -22,11 +23,11 @@ import flighthq.types._internal._TransmissionVolumePbrExtensionValues.Transmissi
 class TransmissionVolumePbrScene3DMaterialTextures {
   @:noCompletion
   public static function registerTransmissionVolumePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DPbrExtensionTextures((cast registry : Scene3DMaterialTextureRegistry), (cast TransmissionVolumePbrExtensionKind : String), function(extension:PbrExtension, out:Array<Texture>):Void {
+    registerScene3DPbrExtensionTextures((cast registry), (cast TransmissionVolumePbrExtensionKind : String), (cast function(extension:PbrExtension, out:Array<Texture>):Void {
       var transmission:TransmissionVolumePbrExtension = cast _Runtime.UNDEFINED;
       transmission = (cast extension : TransmissionVolumePbrExtension);
       if ((cast !_Runtime.strictEquals(_Runtime.field(transmission, 'transmissionMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(transmission, 'transmissionMap')] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(transmission, 'thicknessMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(transmission, 'thicknessMap')] : Array<Dynamic>)); }
-    });
+    }));
   }
 }

@@ -62,7 +62,7 @@ class VideoFormat {
 
   public static function selectVideoResourceUrl(sources:Array<VideoResourceUrl>):Null<VideoResourceUrl> {
     for (source in _Runtime.iterable(sources)) {
-      if ((cast (cast canPlayVideoType((cast _Runtime.coalesce(_Runtime.coalesce(source.type, function():Dynamic return cast (cast inferVideoMimeType((cast source.url : String)) : String)), function():Dynamic return cast '') : String)) : Bool) : Bool)) { return cast source; }
+      if ((cast (cast canPlayVideoType((cast _Runtime.coalesce(_Runtime.coalesce(source.type, function():Dynamic return cast (cast inferVideoMimeType((cast source.url : String)) : Null<String>)), function():Dynamic return cast '') : String)) : Bool) : Bool)) { return cast source; }
     }
     return cast null;
     return cast null;

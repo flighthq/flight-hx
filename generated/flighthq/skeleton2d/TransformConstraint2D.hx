@@ -10,6 +10,7 @@ import flighthq.types.Bone2D;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DConstraint;
 import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintKind;
+import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintSolver;
 import flighthq.types.Skeleton2DTransformConstraint;
 import flighthq.types._internal._Skeleton2DConstraintValues.Skeleton2DConstraintKindValue;
 
@@ -17,7 +18,7 @@ class TransformConstraint2D {
   public static final MATRIX_STRIDE__transformConstraint2D:Float = 6.0;
 
   public static function registerSkeleton2DTransformConstraintSolver():Void {
-    registerSkeleton2DConstraintSolver((cast (cast Skeleton2DConstraintKindValue : { var Ik:String; var Path:String; var Transform:String; }).Transform : String), solveSkeleton2DTransformConstraint);
+    registerSkeleton2DConstraintSolver((cast (cast Skeleton2DConstraintKindValue : { var Ik:String; var Path:String; var Transform:String; }).Transform : String), (cast solveSkeleton2DTransformConstraint));
   }
 
   @:noCompletion
@@ -78,13 +79,13 @@ class TransformConstraint2D {
       if ((cast ((cast !_Runtime.strictEquals(translateXMix, 0.0) : Bool) || (cast !_Runtime.strictEquals(translateYMix, 0.0) : Bool)) : Bool)) {
         var wantedX:Float = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 4.0)), (_Runtime.subtractNumbers(_Runtime.addNumbers(targetX, _Runtime.field(transform, 'offsetX')), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 4.0))) * translateXMix));
         var wantedY:Float = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 5.0)), (_Runtime.subtractNumbers(_Runtime.addNumbers(targetY, _Runtime.field(transform, 'offsetY')), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 5.0))) * translateYMix));
-        var local:Null<{ var x:Float; var y:Float; }> = (cast TransformConstraint2D.toSkeleton2DParentSpace__transformConstraint2D((cast skeleton : Skeleton2D), (cast boneIndex : Float), (cast wantedX : Float), (cast wantedY : Float)) : Null<{ var x:Float; var y:Float; }>);
+        var local:Null<{ var x:Float; var y:Float; }> = (cast TransformConstraint2D.toSkeleton2DParentSpace__transformConstraint2D((cast skeleton), (cast boneIndex : Float), (cast wantedX : Float), (cast wantedY : Float)) : Null<{ var x:Float; var y:Float; }>);
         if ((cast !_Runtime.strictEquals(local, null) : Bool)) {
           ((cast bone : Bone2D).x = (cast local : { var x:Float; var y:Float; }).x);
           ((cast bone : Bone2D).y = (cast local : { var x:Float; var y:Float; }).y);
         }
       }
-      computeSkeleton2DBoneWorldTransform((cast skeleton : Skeleton2D), (cast boneIndex : Float));
+      computeSkeleton2DBoneWorldTransform((cast skeleton), (cast boneIndex : Float));
     }
   }
 

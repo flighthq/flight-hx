@@ -38,18 +38,18 @@ class GlClassicPrelude {
     var vertexSource:String = cast _Runtime.UNDEFINED;
     var fragmentSource:String = cast _Runtime.UNDEFINED;
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
-    vertexSource = (cast getGlClassicVertexSourceForKey((cast key : GlClassicDefineKey)) : String);
-    fragmentSource = (cast getGlClassicFragmentSourceForKey((cast key : GlClassicDefineKey), (cast colorAdjustmentFeature : Null<GlColorAdjustmentMaterialFeature>)) : String);
-    program = (cast compileGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast vertexSource : String), (cast fragmentSource : String)) : flighthq._internal.dom.WebGLProgram);
-    return cast _Runtime.mergeObjects([(cast resolveGlLitLocations((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast program : flighthq._internal.dom.WebGLProgram)) : GlClassicProgram), { program: program }, { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff') }, { locAlphaMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaMap') }, { locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture') }, { locDiffuse: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_diffuse') }, { locDiffuseMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_diffuseMap') }, { locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model') }, { locNormalMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMap') }, { locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix') }, { locNormalScale: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalScale') }, { locShininess: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shininess') }, { locSpecular: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_specular') }, { locSpecularMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_specularMap') }, { locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection') }]);
+    vertexSource = (cast getGlClassicVertexSourceForKey((cast key)) : String);
+    fragmentSource = (cast getGlClassicFragmentSourceForKey((cast key), (cast colorAdjustmentFeature)) : String);
+    program = (cast compileGlProgram((cast gl), (cast vertexSource : String), (cast fragmentSource : String)) : flighthq._internal.dom.WebGLProgram);
+    return cast _Runtime.mergeObjects([(cast resolveGlLitLocations((cast gl), (cast program)) : GlClassicProgram), { program: program }, { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff') }, { locAlphaMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaMap') }, { locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture') }, { locDiffuse: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_diffuse') }, { locDiffuseMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_diffuseMap') }, { locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model') }, { locNormalMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMap') }, { locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix') }, { locNormalScale: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalScale') }, { locShininess: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shininess') }, { locSpecular: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_specular') }, { locSpecularMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_specularMap') }, { locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection') }]);
     return cast null;
   }
 
   @:noCompletion
   public static function ensureGlClassicProgram(state:GlRenderState, key:GlClassicDefineKey):GlClassicProgram {
     var fullKey:GlClassicDefineKey = cast _Runtime.UNDEFINED;
-    fullKey = _Runtime.mergeObjects([key, { hasColorAdjustment: (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeColorAdjustmentRun }, { hasColorMatrix: (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeColorMatrixRun }, { hasSkin: (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeSkinnedRun }]);
-    return cast (cast ensureGlScene3DProgram((cast state : GlRenderState), (cast 'classic:' + Std.string((cast buildGlClassicDefineKey((cast fullKey : GlClassicDefineKey)) : String)) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlClassicProgram return (cast compileGlClassicProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast fullKey : GlClassicDefineKey), (cast _Runtime.coalesce((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeature, function():Dynamic return cast null) : Null<GlColorAdjustmentMaterialFeature>)) : GlClassicProgram) : flighthq._internal.dom.WebGL2RenderingContext->GlClassicProgram)) : GlClassicProgram);
+    fullKey = (cast _Runtime.mergeObjects([key, { hasColorAdjustment: (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeColorAdjustmentRun }, { hasColorMatrix: (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeColorMatrixRun }, { hasSkin: (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeSkinnedRun }]));
+    return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlClassicProgram)->GlClassicProgram)((cast state), (cast 'classic:' + Std.string((cast buildGlClassicDefineKey((cast fullKey)) : String)) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlClassicProgram return (cast compileGlClassicProgram((cast gl), (cast fullKey), (cast _Runtime.coalesce((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeature, function():Dynamic return cast null))) : GlClassicProgram))) : GlClassicProgram);
     return cast null;
   }
 
@@ -67,7 +67,7 @@ class GlClassicPrelude {
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.orValue(_Runtime.field(key, 'hasColorAdjustment'), function():Dynamic return cast _Runtime.field(key, 'hasColorMatrix')), function():Dynamic return cast !_Runtime.strictEquals(colorAdjustmentFeature, null)))) {
       (body = cast (_Runtime.replace(body, 'precision highp float;', 'precision highp float;\n' + Std.string(_Runtime.select(_Runtime.field(key, 'hasColorMatrix'), function():Dynamic return cast _Runtime.field(colorAdjustmentFeature, 'matrixFragmentShaderChunk'), function():Dynamic return cast _Runtime.field(colorAdjustmentFeature, 'fragmentShaderChunk'))) + '', false) : Dynamic));
     }
-    return cast ((cast GlClassicPrelude.buildGlClassicDefineSource__glClassicPrelude((cast key : GlClassicDefineKey)) : String) + body);
+    return cast ((cast GlClassicPrelude.buildGlClassicDefineSource__glClassicPrelude((cast key)) : String) + body);
     return cast null;
   }
 
@@ -81,7 +81,7 @@ class GlClassicPrelude {
   public static function getGlClassicVertexSourceForKey(key:GlClassicDefineKey):String {
     var skin:String = cast _Runtime.UNDEFINED;
     skin = _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '');
-    return cast (((cast GlClassicPrelude.buildGlClassicDefineSource__glClassicPrelude((cast key : GlClassicDefineKey)) : String) + skin) + GlClassicPrelude.CLASSIC_VERTEX_BODY__glClassicPrelude);
+    return cast (((cast GlClassicPrelude.buildGlClassicDefineSource__glClassicPrelude((cast key)) : String) + skin) + GlClassicPrelude.CLASSIC_VERTEX_BODY__glClassicPrelude);
     return cast null;
   }
 

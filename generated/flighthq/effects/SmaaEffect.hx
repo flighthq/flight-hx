@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.SmaaEffect;
 
 class SmaaEffect {
-  public static function createSmaaEffect(?options:Dynamic):flighthq.types.SmaaEffect {
+  public static function createSmaaEffect(?options:flighthq._internal._Omit<flighthq.types.SmaaEffect, String>):flighthq.types.SmaaEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'SmaaEffect' }, options]);
     return cast null;

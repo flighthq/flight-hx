@@ -24,20 +24,20 @@ class WgpuSmaaEffect {
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.1);
     width = _Runtime.field(source, 'width');
     height = _Runtime.field(source, 'height');
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'antialiasing.smaa' : String), (cast WgpuSmaaEffect.SMAA_FRAGMENT_WGSL__wgpuSmaaEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'antialiasing.smaa' : String), (cast WgpuSmaaEffect.SMAA_FRAGMENT_WGSL__wgpuSmaaEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, width);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, height);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, threshold);
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
-  public static final defaultWgpuSmaaEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applySmaaEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : SmaaEffect) : SmaaEffect));
-  };
+  public static final defaultWgpuSmaaEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applySmaaEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : SmaaEffect)));
+  });
 
   public static function registerWgpuSmaaEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'SmaaEffect' : String), (cast defaultWgpuSmaaEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'SmaaEffect' : String), (cast defaultWgpuSmaaEffectRunner));
   }
 
   public static final SMAA_FRAGMENT_WGSL__wgpuSmaaEffect:String = '\nstruct Uniforms { u_resolution : vec2f, u_threshold : f32, _pad0 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn luma(c : vec3f) -> f32 {\n  return dot(c, vec3f(0.299, 0.587, 0.114));\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = 1.0 / uni.u_resolution;\n  let center = textureSampleLevel(tex, smp, uv, 0.0);\n  let lumaC = luma(center.rgb);\n  let lumaL = luma(textureSampleLevel(tex, smp, uv + vec2f(-1.0, 0.0) * texel, 0.0).rgb);\n  let lumaR = luma(textureSampleLevel(tex, smp, uv + vec2f(1.0, 0.0) * texel, 0.0).rgb);\n  let lumaT = luma(textureSampleLevel(tex, smp, uv + vec2f(0.0, -1.0) * texel, 0.0).rgb);\n  let lumaB = luma(textureSampleLevel(tex, smp, uv + vec2f(0.0, 1.0) * texel, 0.0).rgb);\n  let edge = max(abs(lumaC - lumaL), max(abs(lumaC - lumaR), max(abs(lumaC - lumaT), abs(lumaC - lumaB))));\n  if (edge < uni.u_threshold) {\n    return center;\n  }\n  let blurred = (\n    textureSampleLevel(tex, smp, uv + vec2f(-1.0, 0.0) * texel, 0.0).rgb +\n    textureSampleLevel(tex, smp, uv + vec2f(1.0, 0.0) * texel, 0.0).rgb +\n    textureSampleLevel(tex, smp, uv + vec2f(0.0, -1.0) * texel, 0.0).rgb +\n    textureSampleLevel(tex, smp, uv + vec2f(0.0, 1.0) * texel, 0.0).rgb +\n    center.rgb) / 5.0;\n  return vec4f(blurred, center.a);\n}';

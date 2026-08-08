@@ -42,7 +42,7 @@ class GlConvolutionEffect {
     clampEdge = _Runtime.coalesce(_Runtime.field(effect, 'clamp'), function():Dynamic return cast true);
     preserveAlpha = _Runtime.coalesce(_Runtime.field(effect, 'preserveAlpha'), function():Dynamic return cast true);
     edgeColor = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0);
-    divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast (cast GlConvolutionEffect.getAutoDivisor__glConvolutionEffect((cast matrix : Array<Float>), (cast (matrixX * matrixY) : Float)) : Null<Float>));
+    divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast (cast GlConvolutionEffect.getAutoDivisor__glConvolutionEffect((cast matrix), (cast (matrixX * matrixY) : Float)) : Float));
     matrixData = new flighthq._internal._Float32Array(MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE);
     {
       var i:Float = 0.0;
@@ -51,8 +51,8 @@ class GlConvolutionEffect {
         i++;
       }
     }
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'stylization.convolution' : String), (cast GlConvolutionEffect.CONVOLUTION_FRAGMENT_SRC__glConvolutionEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'stylization.convolution' : String), (cast GlConvolutionEffect.CONVOLUTION_FRAGMENT_SRC__glConvolutionEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_texelSize'), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
       flighthq._internal.backend.WebGl2Backend.uniform1fv(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_matrix[0]'), matrixData);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_matrixX'), matrixX);
@@ -62,15 +62,15 @@ class GlConvolutionEffect {
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_clamp'), ((cast clampEdge : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_preserveAlpha'), ((cast preserveAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_edgeColor'), ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 16)) & 255) / 255.0), ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 8)) & 255) / 255.0), ((_Runtime.toInt32(edgeColor) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(edgeColor), 24)) & 255) / 255.0));
-    });
+    }));
   }
 
-  public static final defaultGlConvolutionEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyConvolutionEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : ConvolutionEffect) : ConvolutionEffect));
-  };
+  public static final defaultGlConvolutionEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyConvolutionEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : ConvolutionEffect)));
+  });
 
   public static function registerGlConvolutionEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'ConvolutionEffect' : String), (cast defaultGlConvolutionEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'ConvolutionEffect' : String), (cast defaultGlConvolutionEffectRunner));
   }
 
   public static function getAutoDivisor__glConvolutionEffect(matrix:Array<Float>, length:Float):Float {

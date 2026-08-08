@@ -20,20 +20,20 @@ class WgpuKuwaharaEffect {
     var radius:Float = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 3.0);
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'stylization.kuwahara' : String), (cast WgpuKuwaharaEffect.KUWAHARA_FRAGMENT_WGSL__wgpuKuwaharaEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'stylization.kuwahara' : String), (cast WgpuKuwaharaEffect.KUWAHARA_FRAGMENT_WGSL__wgpuKuwaharaEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, HxMath.max(1.0, radius));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
-  public static final defaultWgpuKuwaharaEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyKuwaharaEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : KuwaharaEffect) : KuwaharaEffect));
-  };
+  public static final defaultWgpuKuwaharaEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyKuwaharaEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : KuwaharaEffect)));
+  });
 
   public static function registerWgpuKuwaharaEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'KuwaharaEffect' : String), (cast defaultWgpuKuwaharaEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'KuwaharaEffect' : String), (cast defaultWgpuKuwaharaEffectRunner));
   }
 
   public static final KUWAHARA_FRAGMENT_WGSL__wgpuKuwaharaEffect:String = '\nstruct Uniforms {\n  u_radius : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nconst R : i32 = 4;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = 1.0 / uni.u_resolution;\n  let r = i32(min(f32(R), uni.u_radius));\n  var means : array<vec3f, 4>;\n  var vars : array<f32, 4>;\n  var lo = array<vec2i, 4>(vec2i(-1, -1), vec2i(0, -1), vec2i(-1, 0), vec2i(0, 0));\n  for (var q = 0; q < 4; q++) {\n    var sum = vec3f(0.0);\n    var sumSq = vec3f(0.0);\n    var n = 0.0;\n    for (var y = 0; y <= R; y++) {\n      for (var x = 0; x <= R; x++) {\n        if (x > r || y > r) { continue; }\n        let d = vec2i(x, y) * sign(lo[q] + vec2i(1)) + lo[q] * r;\n        let off = vec2f(f32(d.x), f32(d.y)) * texel;\n        let col = textureSampleLevel(tex, smp, uv + off, 0.0).rgb;\n        sum += col;\n        sumSq += col * col;\n        n += 1.0;\n      }\n    }\n    let mean = sum / n;\n    means[q] = mean;\n    let v = sumSq / n - mean * mean;\n    vars[q] = v.r + v.g + v.b;\n  }\n  var minVar = vars[0];\n  var result = means[0];\n  for (var q = 1; q < 4; q++) {\n    if (vars[q] < minVar) {\n      minVar = vars[q];\n      result = means[q];\n    }\n  }\n  return vec4f(result, textureSampleLevel(tex, smp, uv, 0.0).a);\n}';

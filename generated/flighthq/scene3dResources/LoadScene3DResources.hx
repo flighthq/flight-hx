@@ -33,7 +33,7 @@ class LoadScene3DResources {
         var loaded:Float = cast _Runtime.UNDEFINED;
         var pending:Array<flighthq._internal._Promise<flighthq._internal._Nothing>> = cast _Runtime.UNDEFINED;
         var progress:Null<Signal<Scene3DResourceLoadProgress->Void>> = cast _Runtime.UNDEFINED;
-        resources = (cast updateScene3DResourceStreaming((cast scene : Scene3D), (cast resolver : Scene3DResourceResolver), options) : Scene3DResources);
+        resources = (cast updateScene3DResourceStreaming((cast scene), (cast resolver), (cast options)) : Scene3DResources);
         refs = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
         {
           var i:Float = 0.0;
@@ -61,7 +61,7 @@ class LoadScene3DResources {
           }
           var entry:Null<Scene3DResourceInFlight> = ((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get(ref));
           if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-          _Runtime.callProperty(pending, 'push', cast ([_Runtime.callProperty((cast entry : flighthq.types.Scene3DResources.Scene3DResourceInFlight).promise, 'then', cast ([function():Void {
+          _Runtime.callProperty(pending, 'push', cast ([_Runtime.callProperty((cast entry : { var promise:flighthq._internal._Promise<flighthq._internal._Nothing>; }).promise, 'then', cast ([function(__unused0:Void):Void {
             loaded++;
             if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ loaded: loaded, total: total }]]), 1); }
           }] : Array<Dynamic>))] : Array<Dynamic>));

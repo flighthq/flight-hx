@@ -18,11 +18,11 @@ class ColorTween {
     var components:ColorComponents__colorTween = cast _Runtime.UNDEFINED;
     var tween:Tween<ColorComponents__colorTween> = cast _Runtime.UNDEFINED;
     fromColor = _Runtime.coalesce(_Runtime.getIndex(target, property), function():Dynamic return cast 0.0);
-    components = { b: (_Runtime.toInt32(fromColor) & 255), g: (_Runtime.toInt32((_Runtime.toInt32(fromColor) >> 8)) & 255), r: (_Runtime.toInt32((_Runtime.toInt32(fromColor) >> 16)) & 255) };
-    tween = (cast createTween((cast manager : TweenManager), components, (cast duration : Float), { b: (_Runtime.toInt32(toColor) & 255), g: (_Runtime.toInt32((_Runtime.toInt32(toColor) >> 8)) & 255), r: (_Runtime.toInt32((_Runtime.toInt32(toColor) >> 16)) & 255) }, (cast options : Null<TweenOptions>)) : Tween<ColorComponents__colorTween>);
-    connectSignal((cast tween : Tween<ColorComponents__colorTween>).onUpdate, (cast function():Void {
+    components = (cast { b: (_Runtime.toInt32(fromColor) & 255), g: (_Runtime.toInt32((_Runtime.toInt32(fromColor) >> 8)) & 255), r: (_Runtime.toInt32((_Runtime.toInt32(fromColor) >> 16)) & 255) });
+    tween = (cast createTween((cast manager), (cast components), (cast duration : Float), (cast { b: (_Runtime.toInt32(toColor) & 255), g: (_Runtime.toInt32((_Runtime.toInt32(toColor) >> 8)) & 255), r: (_Runtime.toInt32((_Runtime.toInt32(toColor) >> 16)) & 255) }), (cast options)) : Tween<ColorComponents__colorTween>);
+    connectSignal((cast (cast tween : Tween<ColorComponents__colorTween>).onUpdate), (cast function():Void {
       _Runtime.setIndex(target, property, (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round((cast components : ColorComponents__colorTween).r)) & 255)) << 16)) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round((cast components : ColorComponents__colorTween).g)) & 255)) << 8)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round((cast components : ColorComponents__colorTween).b)) & 255))));
-    } : Void->Void), _Runtime.field(_Runtime, 'UNDEFINED'));
+    }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     return cast tween;
     return cast null;
   }

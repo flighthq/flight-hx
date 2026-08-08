@@ -10,7 +10,7 @@ import flighthq.types.Signal;
 class ClockSignals {
   public static function enableClockSignals(clock:Clock):Signal<Float->Void> {
     if ((cast _Runtime.strictEquals((cast clock : Clock).onTick, null) : Bool)) {
-      ((cast clock : Clock).onTick = (cast createSignal() : Null<Signal<Float->Void>>));
+      ((cast clock : Clock).onTick = (cast (cast createSignal : Void->Signal<Float->Void>)() : Signal<Float->Void>));
     }
     return cast (cast clock : Clock).onTick;
     return cast null;

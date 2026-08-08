@@ -22,7 +22,7 @@ class CanvasEffectCompositing {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast clampedSamples : Float)) : Bool)) {
         flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
-        perSampleTransform((cast ctx : flighthq._internal.dom.CanvasRenderingContext2D), (cast i : Float), (cast clampedSamples : Float));
+        perSampleTransform((cast ctx), (cast i : Float), (cast clampedSamples : Float));
         flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
         flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
         i++;
@@ -63,7 +63,7 @@ class CanvasEffectCompositing {
     imageData = flighthq._internal.backend.Canvas2dBackend.call(srcCtx, 'getImageData', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
     data = (cast imageData : flighthq._internal.dom.ImageData).data;
     pixelCount = (w * h);
-    transform((cast data : flighthq._internal._UInt8ClampedArray), (cast pixelCount : Float));
+    transform((cast data), (cast pixelCount : Float));
     dstCtx = _Runtime.field(dest, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(dstCtx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(dstCtx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
@@ -77,6 +77,6 @@ class CanvasEffectCompositing {
 
   @:noCompletion
   public static function passthroughCanvasEffectPass(dest:CanvasRenderTarget, source:CanvasRenderTarget):Void {
-    drawCanvasEffectPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    drawCanvasEffectPass((cast dest), (cast source), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
   }
 }

@@ -7,6 +7,7 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Plane.createPlane;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.Entity;
 import flighthq.types.Frustum;
 import flighthq.types.Frustum.FrustumLike;
 import flighthq.types.Matrix4.Matrix4Like;
@@ -17,7 +18,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Frustum {
   public static function createFrustum():flighthq.types.Frustum {
-    return cast (cast createEntity({ bottom: (cast createPlane((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Plane), far: (cast createPlane((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Plane), left: (cast createPlane((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Plane), near: (cast createPlane((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Plane), right: (cast createPlane((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Plane), top: (cast createPlane((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Plane) }) : flighthq.types.Frustum);
+    return cast (cast createEntity((cast { bottom: (cast createPlane((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Plane), far: (cast createPlane((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Plane), left: (cast createPlane((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Plane), near: (cast createPlane((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Plane), right: (cast createPlane((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Plane), top: (cast createPlane((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Plane) })) : { >Entity, var bottom:Plane; var far:Plane; var left:Plane; var near:Plane; var right:Plane; var top:Plane; });
     return cast null;
   }
 
@@ -26,7 +27,7 @@ class Frustum {
     var ndcCorners:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var len:Float = cast _Runtime.UNDEFINED;
     m = inverseViewProjection.m;
-    ndcCorners = cast ([cast ([-1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, 1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>);
+    ndcCorners = (cast cast ([cast ([-1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, 1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     len = HxMath.min(_Runtime.field(out, 'length'), _Runtime.field(ndcCorners, 'length'));
     {
       var i:Float = 0.0;
@@ -50,12 +51,12 @@ class Frustum {
   }
 
   public static function isFrustumContainingPoint(frustum:FrustumLike, point:Vector3Like):Bool {
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.left : PlaneLike), (cast point : Vector3Like)) : Float) : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.right : PlaneLike), (cast point : Vector3Like)) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.bottom : PlaneLike), (cast point : Vector3Like)) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.top : PlaneLike), (cast point : Vector3Like)) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.near : PlaneLike), (cast point : Vector3Like)) : Float) : Float) >= (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.far : PlaneLike), (cast point : Vector3Like)) : Float) : Float) >= (cast 0.0 : Float)));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.left), (cast point)) : Float) : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.right), (cast point)) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.bottom), (cast point)) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.top), (cast point)) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.near), (cast point)) : Float) : Float) >= (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.far), (cast point)) : Float) : Float) >= (cast 0.0 : Float)));
     return cast null;
   }
 
   public static function isFrustumIntersectingAabb(frustum:FrustumLike, aabb:AabbLike):Bool {
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast (cast Frustum.__planeIntersectsAabb__frustum((cast frustum.left : PlaneLike), (cast aabb : AabbLike)) : Bool) : Bool) && (cast (cast Frustum.__planeIntersectsAabb__frustum((cast frustum.right : PlaneLike), (cast aabb : AabbLike)) : Bool) : Bool)) : Bool) && (cast (cast Frustum.__planeIntersectsAabb__frustum((cast frustum.bottom : PlaneLike), (cast aabb : AabbLike)) : Bool) : Bool)) : Bool) && (cast (cast Frustum.__planeIntersectsAabb__frustum((cast frustum.top : PlaneLike), (cast aabb : AabbLike)) : Bool) : Bool)) : Bool) && (cast (cast Frustum.__planeIntersectsAabb__frustum((cast frustum.near : PlaneLike), (cast aabb : AabbLike)) : Bool) : Bool)), function():Dynamic return cast (cast Frustum.__planeIntersectsAabb__frustum((cast frustum.far : PlaneLike), (cast aabb : AabbLike)) : Bool));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast (cast Frustum.__planeIntersectsAabb__frustum((cast frustum.left), (cast aabb)) : Bool) : Bool) && (cast (cast Frustum.__planeIntersectsAabb__frustum((cast frustum.right), (cast aabb)) : Bool) : Bool)) : Bool) && (cast (cast Frustum.__planeIntersectsAabb__frustum((cast frustum.bottom), (cast aabb)) : Bool) : Bool)) : Bool) && (cast (cast Frustum.__planeIntersectsAabb__frustum((cast frustum.top), (cast aabb)) : Bool) : Bool)) : Bool) && (cast (cast Frustum.__planeIntersectsAabb__frustum((cast frustum.near), (cast aabb)) : Bool) : Bool)), function():Dynamic return cast (cast Frustum.__planeIntersectsAabb__frustum((cast frustum.far), (cast aabb)) : Bool));
     return cast null;
   }
 
@@ -63,7 +64,7 @@ class Frustum {
     var r:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
     r = sphere.radius;
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.left : PlaneLike), (cast sphere.center : Vector3Like)) : Float) : Float) >= (cast -r : Float)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.right : PlaneLike), (cast sphere.center : Vector3Like)) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.bottom : PlaneLike), (cast sphere.center : Vector3Like)) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.top : PlaneLike), (cast sphere.center : Vector3Like)) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.near : PlaneLike), (cast sphere.center : Vector3Like)) : Float) : Float) >= (cast -r : Float)) : Bool)), function():Dynamic return cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.far : PlaneLike), (cast sphere.center : Vector3Like)) : Float) : Float) >= (cast -r : Float)));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.left), (cast sphere.center)) : Float) : Float) >= (cast -r : Float)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.right), (cast sphere.center)) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.bottom), (cast sphere.center)) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.top), (cast sphere.center)) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.near), (cast sphere.center)) : Float) : Float) >= (cast -r : Float)) : Bool)), function():Dynamic return cast ((cast (cast Frustum.__planeSignedDistance__frustum((cast frustum.far), (cast sphere.center)) : Float) : Float) >= (cast -r : Float)));
     return cast null;
   }
 
@@ -102,21 +103,21 @@ class Frustum {
     r31 = flighthq._internal._StaticIndex.readFloat32Array(m, 7.0);
     r32 = flighthq._internal._StaticIndex.readFloat32Array(m, 11.0);
     r33 = flighthq._internal._StaticIndex.readFloat32Array(m, 15.0);
-    Frustum.__setPlane__frustum((cast out.left : PlaneLike), (cast (r30 + r00) : Float), (cast (r31 + r01) : Float), (cast (r32 + r02) : Float), (cast (r33 + r03) : Float));
-    Frustum.__setPlane__frustum((cast out.right : PlaneLike), (cast (r30 - r00) : Float), (cast (r31 - r01) : Float), (cast (r32 - r02) : Float), (cast (r33 - r03) : Float));
-    Frustum.__setPlane__frustum((cast out.bottom : PlaneLike), (cast (r30 + r10) : Float), (cast (r31 + r11) : Float), (cast (r32 + r12) : Float), (cast (r33 + r13) : Float));
-    Frustum.__setPlane__frustum((cast out.top : PlaneLike), (cast (r30 - r10) : Float), (cast (r31 - r11) : Float), (cast (r32 - r12) : Float), (cast (r33 - r13) : Float));
-    Frustum.__setPlane__frustum((cast out.near : PlaneLike), (cast (r30 + r20) : Float), (cast (r31 + r21) : Float), (cast (r32 + r22) : Float), (cast (r33 + r23) : Float));
-    Frustum.__setPlane__frustum((cast out.far : PlaneLike), (cast (r30 - r20) : Float), (cast (r31 - r21) : Float), (cast (r32 - r22) : Float), (cast (r33 - r23) : Float));
+    Frustum.__setPlane__frustum((cast out.left), (cast (r30 + r00) : Float), (cast (r31 + r01) : Float), (cast (r32 + r02) : Float), (cast (r33 + r03) : Float));
+    Frustum.__setPlane__frustum((cast out.right), (cast (r30 - r00) : Float), (cast (r31 - r01) : Float), (cast (r32 - r02) : Float), (cast (r33 - r03) : Float));
+    Frustum.__setPlane__frustum((cast out.bottom), (cast (r30 + r10) : Float), (cast (r31 + r11) : Float), (cast (r32 + r12) : Float), (cast (r33 + r13) : Float));
+    Frustum.__setPlane__frustum((cast out.top), (cast (r30 - r10) : Float), (cast (r31 - r11) : Float), (cast (r32 - r12) : Float), (cast (r33 - r13) : Float));
+    Frustum.__setPlane__frustum((cast out.near), (cast (r30 + r20) : Float), (cast (r31 + r21) : Float), (cast (r32 + r22) : Float), (cast (r33 + r23) : Float));
+    Frustum.__setPlane__frustum((cast out.far), (cast (r30 - r20) : Float), (cast (r31 - r21) : Float), (cast (r32 - r22) : Float), (cast (r33 - r23) : Float));
   }
 
   public static function __planeIntersectsAabb__frustum(plane:PlaneLike, aabb:AabbLike):Bool {
     var px:Float = cast _Runtime.UNDEFINED;
     var py:Float = cast _Runtime.UNDEFINED;
     var pz:Float = cast _Runtime.UNDEFINED;
-    px = ((cast ((cast plane.a : Float) >= (cast 0.0 : Float)) : Bool) ? (cast aabb.max.x : Dynamic) : (cast aabb.min.x : Dynamic));
-    py = ((cast ((cast plane.b : Float) >= (cast 0.0 : Float)) : Bool) ? (cast aabb.max.y : Dynamic) : (cast aabb.min.y : Dynamic));
-    pz = ((cast ((cast plane.c : Float) >= (cast 0.0 : Float)) : Bool) ? (cast aabb.max.z : Dynamic) : (cast aabb.min.z : Dynamic));
+    px = ((cast ((cast plane.a : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (cast aabb.max : { var x:Float; }).x : Dynamic) : (cast (cast aabb.min : { var x:Float; }).x : Dynamic));
+    py = ((cast ((cast plane.b : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (cast aabb.max : { var y:Float; }).y : Dynamic) : (cast (cast aabb.min : { var y:Float; }).y : Dynamic));
+    pz = ((cast ((cast plane.c : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (cast aabb.max : { var z:Float; }).z : Dynamic) : (cast (cast aabb.min : { var z:Float; }).z : Dynamic));
     return cast ((cast ((((plane.a * px) + (plane.b * py)) + (plane.c * pz)) + plane.d) : Float) >= (cast 0.0 : Float));
     return cast null;
   }

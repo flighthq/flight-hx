@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef RadialBlurEffect = { var kind:Kind; @:optional var centerX:Float; @:optional var centerY:Float; @:optional var strength:Float; @:optional var samples:Float; };
+typedef RadialBlurEffect = { var kind:String; @:optional var centerX:Float; @:optional var centerY:Float; @:optional var strength:Float; @:optional var samples:Float; };

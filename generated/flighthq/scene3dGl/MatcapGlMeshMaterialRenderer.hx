@@ -25,6 +25,7 @@ import flighthq.types.MatcapMaterial;
 import flighthq.types.Material;
 import flighthq.types.Matrix4;
 import flighthq.types.MeshGeometry;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
@@ -32,6 +33,7 @@ import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureLike;
 import flighthq.types.Texture.TextureSourceCubeFaces;
 import flighthq.types.TextureSource;
 import flighthq.types.Types.MatcapMaterialKind;
@@ -41,39 +43,39 @@ import flighthq.types._internal._MatcapMaterialValues.MatcapMaterialKind;
 
 class MatcapGlMeshMaterialRenderer {
   @:noCompletion
-  public static final matcapGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  public static final matcapGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var matcap:Null<MatcapMaterial> = cast _Runtime.UNDEFINED;
     var program:GlMatcapProgram = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     matcap = (cast material : Null<MatcapMaterial>);
-    program = (cast ensureGlMatcapProgram((cast state : GlRenderState), (cast (cast MatcapGlMeshMaterialRenderer.defineKeyForMaterial__matcapGlMeshMaterialRenderer((cast state : GlRenderState), (cast matcap : Null<MatcapMaterial>)) : GlMatcapDefineKey) : GlMatcapDefineKey)) : GlMatcapProgram);
-    beginGlMeshDraw((cast state : GlRenderState), program, (cast ((cast !_Runtime.strictEquals(matcap, null) : Bool) && (cast _Runtime.field(matcap, 'doubleSided') : Bool)) : Bool));
-    setGlMeshViewProjection((cast state : GlRenderState), (cast (cast program : GlMatcapProgram).locViewProjection : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast program : GlMatcapProgram).locView, false, camera.view.m);
+    program = (cast ensureGlMatcapProgram((cast state), (cast (cast MatcapGlMeshMaterialRenderer.defineKeyForMaterial__matcapGlMeshMaterialRenderer((cast state), (cast matcap)) : GlMatcapDefineKey))) : GlMatcapProgram);
+    beginGlMeshDraw((cast state), (cast program), (cast ((cast !_Runtime.strictEquals(matcap, null) : Bool) && (cast _Runtime.field(matcap, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection((cast state), (cast (cast program : GlMatcapProgram).locViewProjection), (cast camera));
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast program : GlMatcapProgram).locView, false, (cast camera.view : { var m:flighthq._internal._Float32Array; }).m);
     if ((cast _Runtime.strictEquals(matcap, null) : Bool)) {
-      bindGlMatcapSurface((cast state : GlRenderState), program, (cast MatcapGlMeshMaterialRenderer.WHITE__matcapGlMeshMaterialRenderer : Array<Float>), null, (cast 0.5 : Float));
+      bindGlMatcapSurface((cast state), (cast program), (cast MatcapGlMeshMaterialRenderer.WHITE__matcapGlMeshMaterialRenderer), (cast null), (cast 0.5 : Float));
       return;
     }
-    (cast unpackColorToLinear((cast MatcapGlMeshMaterialRenderer.scratchRgba__matcapGlMeshMaterialRenderer : LinearColor), (cast _Runtime.field(matcap, 'tint') : Float)) : LinearColor);
-    bindGlMatcapSurface((cast state : GlRenderState), program, (cast MatcapGlMeshMaterialRenderer.scratchRgba__matcapGlMeshMaterialRenderer : Array<Float>), _Runtime.field(matcap, 'matcap'), (cast _Runtime.field(matcap, 'alphaCutoff') : Float));
+    (cast unpackColorToLinear((cast MatcapGlMeshMaterialRenderer.scratchRgba__matcapGlMeshMaterialRenderer), (cast _Runtime.field(matcap, 'tint') : Float)) : LinearColor);
+    bindGlMatcapSurface((cast state), (cast program), (cast MatcapGlMeshMaterialRenderer.scratchRgba__matcapGlMeshMaterialRenderer), (cast _Runtime.field(matcap, 'matcap')), (cast _Runtime.field(matcap, 'alphaCutoff') : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset((cast state : GlRenderState), program, (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
-  } };
+    drawGlMeshSubset((cast state), (cast program), (cast proxy), (cast geometry));
+  } });
 
   public static function registerGlMatcapMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer((cast state : GlRenderState), (cast MatcapMaterialKind : String), (cast matcapGlMeshMaterialRenderer : GlMeshMaterialRenderer));
+    registerGlMeshMaterialRenderer((cast state), (cast MatcapMaterialKind : String), (cast matcapGlMeshMaterialRenderer));
   }
 
   public static function defineKeyForMaterial__matcapGlMeshMaterialRenderer(state:GlRenderState, material:Null<MatcapMaterial>):GlMatcapDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasMatcap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'matcap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), _Runtime.field(material, 'matcap'), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasMatcap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'matcap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast _Runtime.field(material, 'matcap')), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) };
     return cast null;
   }
 
-  public static final scratchRgba__matcapGlMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static final scratchRgba__matcapGlMeshMaterialRenderer:LinearColor = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 
-  public static final WHITE__matcapGlMeshMaterialRenderer:LinearColor = cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>);
+  public static final WHITE__matcapGlMeshMaterialRenderer:LinearColor = (cast cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
 }

@@ -217,7 +217,7 @@ class Text {
     Facade_Text_flighthq_text_RichText.insertRichTextString(source, index, value);
   }
 
-  public static function patchNativeTextStyle(source:NativeText, patch:Dynamic):Void {
+  public static function patchNativeTextStyle(source:NativeText, patch:flighthq._internal._Partial<NativeTextStyle>):Void {
     Facade_Text_flighthq_text_NativeText.patchNativeTextStyle(source, patch);
   }
 

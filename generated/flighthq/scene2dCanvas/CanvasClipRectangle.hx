@@ -18,7 +18,7 @@ class CanvasClipRectangle {
   @:noCompletion
   public static function pushCanvasClipContours(state:CanvasRenderState, contours:Array<Array<Float>>, winding:PathWinding, transform:Matrix):Void {
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'save', cast ([] : Array<Dynamic>));
-    setCanvasTransform((cast state : CanvasRenderState), (cast (cast state : CanvasRenderState).context : flighthq._internal.dom.CanvasRenderingContext2D), (cast transform : Matrix));
+    setCanvasTransform((cast state), (cast (cast state : CanvasRenderState).context), (cast transform));
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'beginPath', cast ([] : Array<Dynamic>));
     {
       var c:Float = 0.0;
@@ -43,7 +43,7 @@ class CanvasClipRectangle {
   @:noCompletion
   public static function pushCanvasClipRectangle(state:CanvasRenderState, rect:RectangleLike, transform:Matrix):Void {
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'save', cast ([] : Array<Dynamic>));
-    setCanvasTransform((cast state : CanvasRenderState), (cast (cast state : CanvasRenderState).context : flighthq._internal.dom.CanvasRenderingContext2D), (cast transform : Matrix));
+    setCanvasTransform((cast state), (cast (cast state : CanvasRenderState).context), (cast transform));
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'beginPath', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'rect', cast ([_Runtime.field(rect, 'x'), _Runtime.field(rect, 'y'), _Runtime.field(rect, 'width'), _Runtime.field(rect, 'height')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'clip', cast ([] : Array<Dynamic>));

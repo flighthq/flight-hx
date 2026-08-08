@@ -23,7 +23,7 @@ class QuaternionPool {
     if ((cast ((cast _Runtime.field(QuaternionPool.pool__quaternionPool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (q = cast ((cast _Runtime.callProperty(QuaternionPool.pool__quaternionPool, 'pop', cast ([] : Array<Dynamic>)) : Quaternion) : Dynamic));
     } else {
-      (q = cast ((cast createQuaternion((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Quaternion) : Dynamic));
+      (q = cast ((cast createQuaternion((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Quaternion) : Dynamic));
     }
     return cast q;
     return cast null;
@@ -38,5 +38,5 @@ class QuaternionPool {
     _Runtime.callProperty(QuaternionPool.pool__quaternionPool, 'push', cast ([q] : Array<Dynamic>));
   }
 
-  public static final pool__quaternionPool:Array<Quaternion> = cast ([] : Array<Dynamic>);
+  public static final pool__quaternionPool:Array<Quaternion> = (cast cast ([] : Array<Dynamic>));
 }

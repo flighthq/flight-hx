@@ -10,8 +10,10 @@ import flighthq.mesh.MeshGeometry.getMeshGeometrySkinBindPose;
 import flighthq.mesh.MeshGeometryAttributes.getVertexAttributeFloatOffset;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryBounds;
 import flighthq.types.Aabb;
+import flighthq.types.Aabb.AabbLike;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
+import flighthq.types.MeshGeometry.VertexSemantic;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MeshSkinBindPose;
 
@@ -21,35 +23,35 @@ class MeshGeometryDeformationClone {
     var morphBindPose:Null<MeshMorphBindPose> = cast _Runtime.UNDEFINED;
     var skinBindPose:Null<MeshSkinBindPose> = cast _Runtime.UNDEFINED;
     var bounds:Aabb = cast _Runtime.UNDEFINED;
-    clone = (cast cloneMeshGeometry((cast source : MeshGeometry)) : MeshGeometry);
-    morphBindPose = (cast getMeshGeometryMorphBindPose((cast source : MeshGeometry)) : Null<MeshMorphBindPose>);
-    skinBindPose = (cast getMeshGeometrySkinBindPose((cast source : MeshGeometry)) : Null<MeshSkinBindPose>);
-    if ((cast !_Runtime.strictEquals(morphBindPose, null) : Bool)) { MeshGeometryDeformationClone.restoreMorphBindPose__meshGeometryDeformationClone((cast clone : MeshGeometry), (cast morphBindPose : MeshMorphBindPose)); } else { if ((cast !_Runtime.strictEquals(skinBindPose, null) : Bool)) { MeshGeometryDeformationClone.restoreSkinBindPose__meshGeometryDeformationClone((cast clone : MeshGeometry), (cast skinBindPose : MeshSkinBindPose)); } }
-    bounds = (cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Aabb);
-    computeMeshGeometryBounds(bounds, (cast clone : MeshGeometry));
+    clone = (cast cloneMeshGeometry((cast source)) : MeshGeometry);
+    morphBindPose = (cast getMeshGeometryMorphBindPose((cast source)) : Null<MeshMorphBindPose>);
+    skinBindPose = (cast getMeshGeometrySkinBindPose((cast source)) : Null<MeshSkinBindPose>);
+    if ((cast !_Runtime.strictEquals(morphBindPose, null) : Bool)) { MeshGeometryDeformationClone.restoreMorphBindPose__meshGeometryDeformationClone((cast clone), (cast morphBindPose)); } else { if ((cast !_Runtime.strictEquals(skinBindPose, null) : Bool)) { MeshGeometryDeformationClone.restoreSkinBindPose__meshGeometryDeformationClone((cast clone), (cast skinBindPose)); } }
+    bounds = (cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Aabb);
+    computeMeshGeometryBounds((cast bounds), (cast clone));
     (clone.bounds = cast (bounds : Dynamic));
     return cast clone;
     return cast null;
   }
 
   public static function restoreMorphBindPose__meshGeometryDeformationClone(geometry:MeshGeometry, bindPose:MeshMorphBindPose):Void {
-    MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone((cast geometry : MeshGeometry), (cast 'position' : String), (cast _Runtime.field(bindPose, 'positions') : flighthq._internal._Float32Array));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(bindPose, 'normals'), null) : Bool)) { MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone((cast geometry : MeshGeometry), (cast 'normal' : String), (cast _Runtime.field(bindPose, 'normals') : flighthq._internal._Float32Array)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(bindPose, 'tangents'), null) : Bool)) { MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone((cast geometry : MeshGeometry), (cast 'tangent' : String), (cast _Runtime.field(bindPose, 'tangents') : flighthq._internal._Float32Array)); }
+    MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone((cast geometry), (cast 'position' : String), (cast _Runtime.field(bindPose, 'positions')));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(bindPose, 'normals'), null) : Bool)) { MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone((cast geometry), (cast 'normal' : String), (cast _Runtime.field(bindPose, 'normals'))); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(bindPose, 'tangents'), null) : Bool)) { MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone((cast geometry), (cast 'tangent' : String), (cast _Runtime.field(bindPose, 'tangents'))); }
   }
 
   public static function restoreSkinBindPose__meshGeometryDeformationClone(geometry:MeshGeometry, bindPose:MeshSkinBindPose):Void {
-    MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone((cast geometry : MeshGeometry), (cast 'position' : String), (cast _Runtime.field(bindPose, 'positions') : flighthq._internal._Float32Array));
-    MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone((cast geometry : MeshGeometry), (cast 'normal' : String), (cast _Runtime.field(bindPose, 'normals') : flighthq._internal._Float32Array));
+    MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone((cast geometry), (cast 'position' : String), (cast _Runtime.field(bindPose, 'positions')));
+    MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone((cast geometry), (cast 'normal' : String), (cast _Runtime.field(bindPose, 'normals')));
   }
 
   public static function restoreFloat3__meshGeometryDeformationClone(geometry:MeshGeometry, semantic:String, source:flighthq._internal._Float32Array):Void {
     var offset:Float = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
-    offset = (cast getVertexAttributeFloatOffset(geometry.layout, semantic) : Float);
+    offset = (cast getVertexAttributeFloatOffset((cast geometry.layout), (cast semantic)) : Float);
     if ((cast ((cast offset : Float) < (cast 0.0 : Float)) : Bool)) { return; }
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = HxMath.min((_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) | 0), (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(source, 'length'), 3.0)) | 0));
     {
       var vertex:Float = 0.0;

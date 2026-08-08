@@ -22,32 +22,32 @@ class SpatialIndex {
   }
 
   public static function insertSpatialObject(index:flighthq.types.Spatial.SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Bool {
-    return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).insertSpatialObject(id, bounds);
+    return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).insertSpatialObject((cast id : Float), (cast bounds));
     return cast null;
   }
 
   public static function querySpatialPairs(index:flighthq.types.Spatial.SpatialIndex, out:Array<SpatialPair>):Void {
-    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialPairs(out);
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialPairs((cast out));
   }
 
   public static function querySpatialPoint(index:flighthq.types.Spatial.SpatialIndex, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
-    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialPoint(x, y, out);
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialPoint((cast x : Float), (cast y : Float), (cast out));
   }
 
   public static function querySpatialRay(index:flighthq.types.Spatial.SpatialIndex, x:Float, y:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
-    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialRay(x, y, dx, dy, out);
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialRay((cast x : Float), (cast y : Float), (cast dx : Float), (cast dy : Float), (cast out));
   }
 
   public static function querySpatialRegion(index:flighthq.types.Spatial.SpatialIndex, region:SpatialAabb, out:Array<SpatialObjectId>):Void {
-    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialRegion(region, out);
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialRegion((cast region), (cast out));
   }
 
   public static function removeSpatialObject(index:flighthq.types.Spatial.SpatialIndex, id:SpatialObjectId):Void {
-    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).removeSpatialObject(id);
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).removeSpatialObject((cast id : Float));
   }
 
   public static function updateSpatialObject(index:flighthq.types.Spatial.SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Bool {
-    return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).updateSpatialObject(id, bounds);
+    return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).updateSpatialObject((cast id : Float), (cast bounds));
     return cast null;
   }
 

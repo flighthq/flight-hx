@@ -42,7 +42,7 @@ class TweenProgress {
     var easedT:Float = cast _Runtime.UNDEFINED;
     var writes:Array<{ var key:String; var value:Float; }> = cast _Runtime.UNDEFINED;
     var target:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast tween : Tween<flighthq._internal._Any>).initialized : Bool) : Bool)) { initializeTween((cast tween : Tween<flighthq._internal._Any>)); }
+    if ((cast !(cast (cast tween : Tween<flighthq._internal._Any>).initialized : Bool) : Bool)) { (cast initializeTween : Tween<flighthq._internal._Any>->Void)((cast tween)); }
     maxElapsed = ((cast tween : Tween<flighthq._internal._Any>).delay + (cast tween : Tween<flighthq._internal._Any>).duration);
     clampedElapsed = HxMath.max(0.0, HxMath.min(timeSeconds, maxElapsed));
     ((cast tween : Tween<flighthq._internal._Any>).elapsed = clampedElapsed);
@@ -50,8 +50,8 @@ class TweenProgress {
     if ((cast ((cast activeElapsed : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     t = HxMath.min((activeElapsed / (cast tween : Tween<flighthq._internal._Any>).duration), 1.0);
     effectiveT = ((cast (cast tween : Tween<flighthq._internal._Any>).reverse : Bool) ? (cast (1.0 - t) : Dynamic) : (cast t : Dynamic));
-    easedT = (cast tween : Tween<flighthq._internal._Any>).ease(effectiveT);
-    writes = cast ([] : Array<Dynamic>);
+    easedT = (cast tween : Tween<flighthq._internal._Any>).ease((cast effectiveT : Float));
+    writes = (cast cast ([] : Array<Dynamic>));
     for (detail in _Runtime.iterable((cast tween : Tween<flighthq._internal._Any>).properties)) {
       var value:Float = ((cast detail : TweenPropertyDetail).start + ((cast detail : TweenPropertyDetail).change * easedT));
       if ((cast (cast tween : Tween<flighthq._internal._Any>).snapping : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
@@ -75,6 +75,6 @@ class TweenProgress {
     var targetElapsed:Float = cast _Runtime.UNDEFINED;
     clamped = HxMath.max(0.0, HxMath.min(progress, 1.0));
     targetElapsed = ((cast tween : Tween<flighthq._internal._Any>).delay + (clamped * (cast tween : Tween<flighthq._internal._Any>).duration));
-    seekTween((cast tween : Tween<flighthq._internal._Any>), (cast targetElapsed : Float));
+    seekTween((cast tween), (cast targetElapsed : Float));
   }
 }

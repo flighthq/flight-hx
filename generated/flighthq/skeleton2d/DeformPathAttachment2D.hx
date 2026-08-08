@@ -29,6 +29,6 @@ class DeformPathAttachment2D {
     }
     ((cast out : Path).winding = _Runtime.field(attachment, 'winding'));
     _Runtime.setLength(data, _Runtime.multiplyNumbers(_Runtime.field(attachment, 'pointCount'), 2.0));
-    skinSkeleton2DAttachmentPoints((cast data : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), _Runtime.field(attachment, 'skin'), (cast _Runtime.field(attachment, 'vertices') : Null<flighthq._internal._Float32Array>), (cast skeleton : Skeleton2D), (cast boneIndex : Float), (cast deform : Null<flighthq._internal._Float32Array>), (cast 'PathAttachment2D' : String));
+    skinSkeleton2DAttachmentPoints((cast data), (cast _Runtime.field(attachment, 'skin')), (cast _Runtime.field(attachment, 'vertices')), (cast skeleton), (cast boneIndex : Float), (cast deform), (cast 'PathAttachment2D' : String));
   }
 }

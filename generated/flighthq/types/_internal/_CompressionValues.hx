@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _CompressionValues {
-  public static final CompressionValue:{ var Deflate:String; var Lzma:String; } = { Deflate: 'deflate', Lzma: 'lzma' };
+  public static final CompressionValue:{ var Deflate:String; var Lzma:String; } = (cast { Deflate: 'deflate', Lzma: 'lzma' });
 }

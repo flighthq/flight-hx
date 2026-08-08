@@ -8,6 +8,7 @@ import flighthq.types.Dialog.FileDialogFilter;
 import flighthq.types.Dialog.FileDialogHandle;
 import flighthq.types.Dialog.MessageDialogKind;
 import flighthq.types.Dialog.MessageDialogOptions;
+import flighthq.types.Dialog.MessageDialogResult;
 import flighthq.types.Dialog.OpenDirectoryDialogOptions;
 import flighthq.types.Dialog.OpenFileDialogOptions;
 import flighthq.types.Dialog.SaveFileDialogOptions;
@@ -26,40 +27,40 @@ class TauriDialog {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var result:Null<flighthq._internal._Union2<String, Array<String>>> = cast _Runtime.UNDEFINED;
         var kind:String = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).open({ title: options.title, defaultPath: options.defaultPath, multiple: options.multiple, directory: options.directory, filters: _Runtime.callOptionalProperty(options.filters, 'map', cast ([TauriDialog.toTauriFilter__tauriDialog] : Array<Dynamic>)) }), function(__awaitValue0:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).open((cast { title: options.title, defaultPath: options.defaultPath, multiple: options.multiple, directory: options.directory, filters: _Runtime.callOptionalProperty(options.filters, 'map', cast ([TauriDialog.toTauriFilter__tauriDialog] : Array<Dynamic>)) })), function(__awaitValue0:Dynamic):Dynamic {
           result = __awaitValue0;
           kind = _Runtime.select(options.directory, function():Dynamic return cast 'Directory', function():Dynamic return cast 'File');
-          return flighthq._internal._Async.resolve(TauriDialog.toHandles__tauriDialog((cast result : Null<flighthq._internal._Union2<String, Array<String>>>), (cast kind : String)));
+          return flighthq._internal._Async.resolve((cast TauriDialog.toHandles__tauriDialog((cast result), (cast kind : String)) : Array<FileDialogHandle>));
         });
       }));
     }, openDirectory: function(options:OpenDirectoryDialogOptions):flighthq._internal._Promise<Array<FileDialogHandle>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var result:Null<flighthq._internal._Union2<String, Array<String>>> = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).open({ title: options.title, multiple: options.multiple, directory: true }), function(__awaitValue1:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).open((cast { title: options.title, multiple: options.multiple, directory: true })), function(__awaitValue1:Dynamic):Dynamic {
           result = __awaitValue1;
-          return flighthq._internal._Async.resolve(TauriDialog.toHandles__tauriDialog((cast result : Null<flighthq._internal._Union2<String, Array<String>>>), (cast 'Directory' : String)));
+          return flighthq._internal._Async.resolve((cast TauriDialog.toHandles__tauriDialog((cast result), (cast 'Directory' : String)) : Array<FileDialogHandle>));
         });
       }));
     }, saveFile: function(options:SaveFileDialogOptions):flighthq._internal._Promise<Null<FileDialogHandle>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var path:Null<String> = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).save({ title: options.title, defaultPath: options.defaultPath, filters: _Runtime.callOptionalProperty(options.filters, 'map', cast ([TauriDialog.toTauriFilter__tauriDialog] : Array<Dynamic>)) }), function(__awaitValue2:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).save((cast { title: options.title, defaultPath: options.defaultPath, filters: _Runtime.callOptionalProperty(options.filters, 'map', cast ([TauriDialog.toTauriFilter__tauriDialog] : Array<Dynamic>)) })), function(__awaitValue2:Dynamic):Dynamic {
           path = __awaitValue2;
-          return flighthq._internal._Async.resolve(((cast _Runtime.strictEquals(path, null) : Bool) ? (cast null : Dynamic) : (cast (cast TauriDialog.toFileHandle__tauriDialog((cast path : String), (cast 'File' : String)) : Null<flighthq._internal._Any>) : Dynamic)));
+          return flighthq._internal._Async.resolve(((cast _Runtime.strictEquals(path, null) : Bool) ? (cast null : Dynamic) : (cast (cast TauriDialog.toFileHandle__tauriDialog((cast path : String), (cast 'File' : String)) : FileDialogHandle) : Dynamic)));
         });
       }));
-    }, message: function(options:MessageDialogOptions):flighthq._internal._Promise<{ var buttonIndex:Float; var cancelled:Bool; var checkboxChecked:Bool; }> {
+    }, message: function(options:MessageDialogOptions):flighthq._internal._Promise<MessageDialogResult> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).message(options.message, { title: options.title, kind: (cast TauriDialog.toTauriMessageKind__tauriDialog((cast options.kind : Null<String>)) : Null<String>) }), function(__awaitValue3:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap((cast dialog : TauriDialogPlugin).message((cast options.message : String), (cast { title: options.title, kind: (cast TauriDialog.toTauriMessageKind__tauriDialog((cast options.kind)) : String) })), function(__awaitValue3:Dynamic):Dynamic {
           __awaitValue3;
           return flighthq._internal._Async.resolve({ buttonIndex: 0.0, cancelled: false, checkboxChecked: false });
         });
       }));
     }, confirm: function(options:MessageDialogOptions):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve((cast dialog : TauriDialogPlugin).confirm(options.message, { title: options.title, kind: (cast TauriDialog.toTauriMessageKind__tauriDialog((cast options.kind : Null<String>)) : Null<String>) }));
+        return flighthq._internal._Async.resolve((cast dialog : TauriDialogPlugin).confirm((cast options.message : String), (cast { title: options.title, kind: (cast TauriDialog.toTauriMessageKind__tauriDialog((cast options.kind)) : String) })));
       }));
-    }, prompt: function():flighthq._internal._Promise<flighthq._internal._Any> {
+    }, prompt: function():flighthq._internal._Promise<Null<String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));

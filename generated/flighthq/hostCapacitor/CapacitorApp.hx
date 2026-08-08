@@ -21,13 +21,14 @@ class CapacitorApp {
     flighthq._internal._Async.recover(_Runtime.callProperty((cast app : CapacitorAppPlugin).getInfo(), 'then', cast ([function(info:CapacitorAppInfo):Void {
       (cachedName = cast ((cast info : CapacitorAppInfo).name : Dynamic));
       (cachedVersion = cast ((cast info : CapacitorAppInfo).version : Dynamic));
-    }] : Array<Dynamic>)), function():Void {
+    }] : Array<Dynamic>)), function(__unused0:flighthq._internal._Any):Void {
 
     });
     return cast { addRecentDocument: function():Void {
 
     }, bounceDock: function():Float {
       return cast -1.0;
+      return cast _Runtime.UNDEFINED;
     }, cancelAttention: function():Void {
 
     }, cancelDockBounce: function():Void {
@@ -38,37 +39,50 @@ class CapacitorApp {
 
     }, getAppDirectoryPath: function():String {
       return cast '';
+      return cast _Runtime.UNDEFINED;
     }, getAppPath: function():String {
       return cast '';
-    }, getCommandLine: function():Array<flighthq._internal._Any> {
+      return cast _Runtime.UNDEFINED;
+    }, getCommandLine: function():Array<String> {
       return cast cast ([] : Array<Dynamic>);
+      return cast _Runtime.UNDEFINED;
     }, getExecutablePath: function():String {
       return cast '';
+      return cast _Runtime.UNDEFINED;
     }, getLocale: function():String {
       return cast '';
+      return cast _Runtime.UNDEFINED;
     }, getLoginItem: function():AppLoginItem {
       var out:AppLoginItem = cast _Runtime.UNDEFINED;
-      out = { openAtLogin: false, openAsHidden: false, path: '', args: cast ([] : Array<Dynamic>) };
+      out = (cast { openAtLogin: false, openAsHidden: false, path: '', args: cast ([] : Array<Dynamic>) });
       return cast out;
+      return cast _Runtime.UNDEFINED;
     }, getName: function():String {
       return cast cachedName;
-    }, getPreferredSystemLanguages: function():Array<flighthq._internal._Any> {
+      return cast _Runtime.UNDEFINED;
+    }, getPreferredSystemLanguages: function():Array<String> {
       return cast cast ([] : Array<Dynamic>);
+      return cast _Runtime.UNDEFINED;
     }, getSystemLocale: function():String {
       return cast '';
+      return cast _Runtime.UNDEFINED;
     }, getVersion: function():String {
       return cast cachedVersion;
+      return cast _Runtime.UNDEFINED;
     }, hasSingleInstanceLock: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, hideApp: function():Bool {
-      flighthq._internal._Async.recover((cast app : CapacitorAppPlugin).minimizeApp(), function():Void {
+      flighthq._internal._Async.recover((cast app : CapacitorAppPlugin).minimizeApp(), function(__unused1:flighthq._internal._Any):Void {
 
       });
       return cast true;
+      return cast _Runtime.UNDEFINED;
     }, isAppHidden: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, quit: function():Void {
-      flighthq._internal._Async.recover((cast app : CapacitorAppPlugin).exitApp(), function():Void {
+      flighthq._internal._Async.recover((cast app : CapacitorAppPlugin).exitApp(), function(__unused2:flighthq._internal._Any):Void {
 
       });
     }, relaunch: function():Void {
@@ -77,46 +91,59 @@ class CapacitorApp {
 
     }, requestAttention: function():Float {
       return cast -1.0;
+      return cast _Runtime.UNDEFINED;
     }, requestSingleInstanceLock: function():Bool {
       return cast true;
+      return cast _Runtime.UNDEFINED;
     }, setActivationPolicy: function():Void {
 
     }, setBadgeCount: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, setDockBadge: function():Void {
 
     }, setDockMenu: function():Void {
 
     }, setLoginItem: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, setName: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, setUserModelId: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, showApp: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, subscribeActivate: function(listener:Void->Void):Void->Void {
-      return cast (cast CapacitorApp.toUnsubscribe__capacitorApp((cast (cast app : CapacitorAppPlugin).addListener('appStateChange', function(state:{ var isActive:Bool; }):Void {
+      return cast (cast CapacitorApp.toUnsubscribe__capacitorApp((cast (cast app : CapacitorAppPlugin).addListener((cast 'appStateChange' : String), (cast function(state:{ var isActive:Bool; }):Void {
         if ((cast (cast state : { var isActive:Bool; }).isActive : Bool)) { listener(); }
-      }) : flighthq._internal._Promise<CapacitorPluginListenerHandle>)) : Void->Void);
+      })))) : Void->Void);
+      return cast _Runtime.UNDEFINED;
     }, subscribeAllWindowsClosed: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeOpenFile: function(listener:String->Void):Void->Void {
-      return cast (cast CapacitorApp.toUnsubscribe__capacitorApp((cast (cast app : CapacitorAppPlugin).addListener('appUrlOpen', function(event:{ var url:String; }):Void return listener((cast (cast event : { var url:String; }).url : String))) : flighthq._internal._Promise<CapacitorPluginListenerHandle>)) : Void->Void);
+      return cast (cast CapacitorApp.toUnsubscribe__capacitorApp((cast (cast app : CapacitorAppPlugin).addListener((cast 'appUrlOpen' : String), (cast function(event:{ var url:String; }):Void { listener((cast (cast event : { var url:String; }).url : String)); })))) : Void->Void);
+      return cast _Runtime.UNDEFINED;
     }, subscribeQuitRequest: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeReady: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeSecondInstance: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
@@ -128,15 +155,15 @@ class CapacitorApp {
     handle = null;
     flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:CapacitorPluginListenerHandle):Void {
       (handle = cast (resolved : Dynamic));
-      if ((cast removed : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function():Void {
+      if ((cast removed : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function(__unused3:flighthq._internal._Any):Void {
 
       }); }
-    }] : Array<Dynamic>)), function():Void {
+    }] : Array<Dynamic>)), function(__unused4:flighthq._internal._Any):Void {
 
     });
     return cast function():Void {
       (removed = cast (true : Dynamic));
-      if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function():Void {
+      if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function(__unused5:flighthq._internal._Any):Void {
 
       }); }
     };

@@ -18,14 +18,14 @@ import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 class Renderer {
   @:noCompletion
   public static function copyAllRenderersFromRenderState(target:RenderState, source:RenderState):Void {
-    copyRenderersFromRenderState((cast target : RenderState), (cast source : RenderState));
+    copyRenderersFromRenderState((cast target), (cast source));
     if ((cast !_Runtime.strictEquals((cast source : RenderState).displayObjectClipHooks, null) : Bool)) { ((cast target : RenderState).displayObjectClipHooks = (cast source : RenderState).displayObjectClipHooks); }
   }
 
   @:noCompletion
   public static function copyRenderersFromRenderState(target:RenderState, source:RenderState):Void {
-    ((cast (cast (cast getRenderStateRuntime((cast source : RenderState)) : RenderStateRuntime) : RenderStateRuntime).rendererMap : flighthq._internal._Map<String, flighthq.types.Renderer>).forEach(function(renderer:flighthq.types.Renderer, kind:String, __unused0:flighthq._internal._Map<String, flighthq.types.Renderer>):Void {
-      registerRenderer((cast target : RenderState), (cast kind : String), (cast renderer : flighthq.types.Renderer));
+    ((cast (cast (cast getRenderStateRuntime((cast source)) : RenderStateRuntime) : RenderStateRuntime).rendererMap : flighthq._internal._Map<String, flighthq.types.Renderer>).forEach(function(renderer:flighthq.types.Renderer, kind:String, __unused0:flighthq._internal._Map<String, flighthq.types.Renderer>):Void {
+      registerRenderer((cast target), (cast kind : String), (cast renderer));
     }));
   }
 
@@ -35,9 +35,9 @@ class Renderer {
     var sourceRuntime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var sourcePaddingRegistry:Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>> = cast _Runtime.UNDEFINED;
     var sourceShapeCommands:Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>> = cast _Runtime.UNDEFINED;
-    targetRuntime = (cast getRenderStateRuntime((cast target : RenderState)) : RenderStateRuntime);
-    sourceRuntime = (cast getRenderStateRuntime((cast source : RenderState)) : RenderStateRuntime);
-    ((cast targetRuntime : RenderStateRuntime).colorAdjustmentResolver = (cast sourceRuntime : RenderStateRuntime).colorAdjustmentResolver);
+    targetRuntime = (cast getRenderStateRuntime((cast target)) : RenderStateRuntime);
+    sourceRuntime = (cast getRenderStateRuntime((cast source)) : RenderStateRuntime);
+    ((cast targetRuntime : { var colorAdjustmentResolver:Null<RenderState->RenderProxy->Null<RenderProxy>->Void>; }).colorAdjustmentResolver = (cast (cast sourceRuntime : RenderStateRuntime).colorAdjustmentResolver));
     sourcePaddingRegistry = (cast sourceRuntime : RenderStateRuntime).renderEffectPaddingResolverRegistry;
     ((cast targetRuntime : RenderStateRuntime).renderEffectPaddingResolverRegistry = ((cast ((cast _Runtime.strictEquals(sourcePaddingRegistry, null) : Bool) || (cast _Runtime.strictEquals(sourcePaddingRegistry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [sourcePaddingRegistry]) : Dynamic)));
     sourceShapeCommands = (cast sourceRuntime : RenderStateRuntime).canvasShapeCommandRegistry;
@@ -52,10 +52,10 @@ class Renderer {
 
   public static function registerRenderer(state:RenderState, kind:Kind, renderer:flighthq.types.Renderer):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime((cast state)) : RenderStateRuntime);
     if ((cast _Runtime.strictEquals(((cast (cast runtime : RenderStateRuntime).rendererMap : flighthq._internal._Map<String, flighthq.types.Renderer>).get(kind)), renderer) : Bool)) { return; }
     ((cast runtime : RenderStateRuntime).rendererMapId = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast runtime : RenderStateRuntime).rendererMapId + 1.0)), 0));
-    ((cast (cast runtime : RenderStateRuntime).rendererMap : flighthq._internal._Map<String, flighthq.types.Renderer>).set(kind, renderer));
+    ((cast (cast runtime : RenderStateRuntime).rendererMap : flighthq._internal._Map<String, flighthq.types.Renderer>).set(kind, (cast renderer)));
   }
 
   @:noCompletion
@@ -63,7 +63,7 @@ class Renderer {
     for (__iteration1 in _Runtime.iterable(entries)) {
       var kind:String = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
       var renderer:flighthq.types.Renderer = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
-      registerRenderer((cast state : RenderState), (cast kind : String), (cast renderer : flighthq.types.Renderer));
+      registerRenderer((cast state), (cast kind : String), (cast renderer));
     }
   }
 }

@@ -22,6 +22,7 @@ import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderRegistrySignals;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.RenderState;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
@@ -29,34 +30,34 @@ class CanvasRenderState {
   public static function copyCanvasRenderStateRegistrations(target:flighthq.types.CanvasRenderState, source:flighthq.types.CanvasRenderState):Void {
     var targetRuntime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     var sourceRuntime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
-    targetRuntime = (cast getCanvasRenderStateRuntime((cast target : flighthq.types.CanvasRenderState)) : CanvasRenderStateRuntime);
-    sourceRuntime = (cast getCanvasRenderStateRuntime((cast source : flighthq.types.CanvasRenderState)) : CanvasRenderStateRuntime);
-    ((cast target : flighthq.types.CanvasRenderState).applyBlendMode = (cast source : flighthq.types.CanvasRenderState).applyBlendMode);
-    ((cast target : flighthq.types.CanvasRenderState).canvasCssFilterResolver = (cast source : flighthq.types.CanvasRenderState).canvasCssFilterResolver);
-    ((cast (cast targetRuntime : CanvasRenderStateRuntime).canvasTextureResolvers : CanvasTextureResolvers).registry = (cast CanvasRenderState.copyMap__canvasRenderState((cast (cast sourceRuntime : CanvasRenderStateRuntime).canvasTextureResolvers : CanvasTextureResolvers).registry) : Null<flighthq._internal._Map<String, CanvasTextureResolver>>));
-    ((cast targetRuntime : CanvasRenderStateRuntime).materialRendererMap = (cast CanvasRenderState.copyMap__canvasRenderState((cast sourceRuntime : CanvasRenderStateRuntime).materialRendererMap) : Null<flighthq._internal._Map<String, CanvasMaterialRenderer>>));
-    ((cast targetRuntime : CanvasRenderStateRuntime).canvasRenderEffectRegistry = (cast CanvasRenderState.copyMap__canvasRenderState((cast sourceRuntime : CanvasRenderStateRuntime).canvasRenderEffectRegistry) : Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>>));
-    copyRenderStateRegistrations(target, source);
+    targetRuntime = (cast getCanvasRenderStateRuntime((cast target)) : CanvasRenderStateRuntime);
+    sourceRuntime = (cast getCanvasRenderStateRuntime((cast source)) : CanvasRenderStateRuntime);
+    ((cast target : { var applyBlendMode:Null<flighthq.types.CanvasRenderState->Null<String>->Void>; }).applyBlendMode = (cast (cast source : flighthq.types.CanvasRenderState).applyBlendMode));
+    ((cast target : { var canvasCssFilterResolver:Null<flighthq.types.CanvasRenderState->RenderProxy2D->Null<String>>; }).canvasCssFilterResolver = (cast (cast source : flighthq.types.CanvasRenderState).canvasCssFilterResolver));
+    ((cast (cast targetRuntime : CanvasRenderStateRuntime).canvasTextureResolvers : CanvasTextureResolvers).registry = (cast CanvasRenderState.copyMap__canvasRenderState((cast (cast (cast sourceRuntime : CanvasRenderStateRuntime).canvasTextureResolvers : CanvasTextureResolvers).registry)) : Null<flighthq._internal._Map<String, CanvasTextureResolver>>));
+    ((cast targetRuntime : CanvasRenderStateRuntime).materialRendererMap = (cast CanvasRenderState.copyMap__canvasRenderState((cast (cast sourceRuntime : CanvasRenderStateRuntime).materialRendererMap)) : Null<flighthq._internal._Map<String, CanvasMaterialRenderer>>));
+    ((cast targetRuntime : CanvasRenderStateRuntime).canvasRenderEffectRegistry = (cast CanvasRenderState.copyMap__canvasRenderState((cast (cast sourceRuntime : CanvasRenderStateRuntime).canvasRenderEffectRegistry)) : Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>>));
+    copyRenderStateRegistrations((cast target), (cast source));
   }
 
-  public static function createCanvasRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:Dynamic):flighthq.types.CanvasRenderState {
+  public static function createCanvasRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:flighthq._internal._Partial<CanvasRenderOptions>):flighthq.types.CanvasRenderState {
     if (options == null) options = cast ({  } : Dynamic);
     var context:Null<flighthq._internal.dom.CanvasRenderingContext2D> = cast _Runtime.UNDEFINED;
     var state:flighthq.types.CanvasRenderState = cast _Runtime.UNDEFINED;
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     context = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d', _Runtime.orValue(_Runtime.field(options, 'contextAttributes'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
     if ((cast !_Runtime.truthy(context) : Bool)) { _Runtime.throwValue(_Runtime.error('Failed to get context for canvas.')); }
-    state = (cast (cast _createRenderState((cast { pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.coalesce(_Runtime.field(options, 'renderTransform'), function():Dynamic return cast (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Null<Matrix>)), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') } : Null<flighthq._internal._Any>)) : flighthq.types.CanvasRenderState) : flighthq.types.CanvasRenderState);
-    if ((cast !_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null) : Bool)) { setRenderStateBackgroundColor(state, (cast _Runtime.field(options, 'backgroundColor') : Float)); }
-    ((cast state : flighthq.types.CanvasRenderState).applyBlendMode = null);
-    ((cast state : flighthq.types.CanvasRenderState).canvasCssFilterResolver = null);
+    state = (cast _createRenderState((cast { pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.coalesce(_Runtime.field(options, 'renderTransform'), function():Dynamic return cast (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix)), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') })) : flighthq.types.CanvasRenderState);
+    if ((cast !_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null) : Bool)) { setRenderStateBackgroundColor((cast state), (cast _Runtime.field(options, 'backgroundColor') : Float)); }
+    ((cast state : { var applyBlendMode:Null<flighthq.types.CanvasRenderState->Null<String>->Void>; }).applyBlendMode = (cast null));
+    ((cast state : { var canvasCssFilterResolver:Null<flighthq.types.CanvasRenderState->RenderProxy2D->Null<String>>; }).canvasCssFilterResolver = (cast null));
     ((cast (cast state : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }) : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas = canvas);
     ((cast (cast state : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }) : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context = context);
     ((cast (cast state : { var contextAttributes:flighthq._internal.dom.CanvasRenderingContext2DSettings; }) : { var contextAttributes:flighthq._internal.dom.CanvasRenderingContext2DSettings; }).contextAttributes = flighthq._internal.backend.Canvas2dBackend.call(context, 'getContextAttributes', cast ([] : Array<Dynamic>)));
     runtime = (cast createCanvasRenderStateRuntime() : CanvasRenderStateRuntime);
     _Runtime.setIndex(state, EntityRuntimeKey, runtime);
     ((cast runtime : CanvasRenderStateRuntime).canvasTextureResolvers = (cast createCanvasTextureResolvers() : CanvasTextureResolvers));
-    ((cast (cast runtime : CanvasRenderStateRuntime).canvasTextureResolvers : CanvasTextureResolvers).registryMiss = function(registry:RenderRegistry, kind:String):Null<Void> return _Runtime.callOptionalValue((cast runtime : CanvasRenderStateRuntime).registryMiss, cast ([registry, kind] : Array<Dynamic>)));
+    ((cast (cast runtime : CanvasRenderStateRuntime).canvasTextureResolvers : { @:optional var registryMiss:Null<RenderRegistry->String->Void>; }).registryMiss = (cast function(registry:RenderRegistry, kind:String):Void { _Runtime.callOptionalValue((cast runtime : CanvasRenderStateRuntime).registryMiss, cast ([registry, kind] : Array<Dynamic>)); }));
     ((cast runtime : CanvasRenderStateRuntime).currentBlendMode = null);
     ((cast runtime : CanvasRenderStateRuntime).imageSmoothingEnabled = _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true));
     ((cast runtime : CanvasRenderStateRuntime).imageSmoothingQuality = _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingQuality'), function():Dynamic return cast 'high'));
@@ -68,12 +69,12 @@ class CanvasRenderState {
 
   @:noCompletion
   public static function createCanvasRenderStateRuntime():CanvasRenderStateRuntime {
-    return cast (cast (cast createRenderStateRuntime() : CanvasRenderStateRuntime) : CanvasRenderStateRuntime);
+    return cast (cast createRenderStateRuntime() : CanvasRenderStateRuntime);
     return cast null;
   }
 
   public static function destroyCanvasRenderState(state:flighthq.types.CanvasRenderState):Void {
-    destroyRenderState(state);
+    destroyRenderState((cast state));
   }
 
   @:noCompletion
@@ -88,7 +89,7 @@ class CanvasRenderState {
   }
 
   public static function getCanvasRenderStateTextureResolvers(state:flighthq.types.CanvasRenderState):CanvasTextureResolvers {
-    return cast (cast (cast getCanvasRenderStateRuntime((cast state : flighthq.types.CanvasRenderState)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasTextureResolvers;
+    return cast (cast (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasTextureResolvers;
     return cast null;
   }
 }

@@ -8,13 +8,14 @@ import flighthq.renderWgpu.WgpuTextureResolver.registerWgpuImageTextureResolver;
 import flighthq.scene3dWgpu.StandardPbrWgpuMeshMaterialRenderer.standardPbrWgpuMeshMaterialRenderer;
 import flighthq.scene3dWgpu.WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer;
 import flighthq.types.Types.StandardPbrMaterialKind;
+import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
 class RegisterWgpuStandardPbrMaterial {
   public static function registerWgpuStandardPbrMaterial(state:WgpuRenderState):Void {
-    registerWgpuBitmapTextureResolver((cast state : WgpuRenderState));
-    registerWgpuImageTextureResolver((cast state : WgpuRenderState));
-    registerWgpuMeshMaterialRenderer((cast state : WgpuRenderState), (cast StandardPbrMaterialKind : String), standardPbrWgpuMeshMaterialRenderer);
+    registerWgpuBitmapTextureResolver((cast state));
+    registerWgpuImageTextureResolver((cast state));
+    registerWgpuMeshMaterialRenderer((cast state), (cast StandardPbrMaterialKind : String), (cast standardPbrWgpuMeshMaterialRenderer));
   }
 }

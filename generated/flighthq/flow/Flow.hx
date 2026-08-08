@@ -71,7 +71,7 @@ class Flow {
     popped = (cast _Runtime.callProperty(states, 'pop', cast ([] : Array<Dynamic>)) : FlowState);
     _Runtime.callOptionalValue((cast popped : FlowState).onExit, cast ([] : Array<Dynamic>));
     revealed = ((cast ((cast _Runtime.field(states, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(states, _Runtime.subtractNumbers(_Runtime.field(states, 'length'), 1.0)) : Dynamic) : (cast null : Dynamic));
-    _Runtime.callOptionalProperty(revealed, 'onResume', cast ([] : Array<Dynamic>));
+    _Runtime.callOptionalValue(({ final __structural0 = revealed; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var onResume:Null<Void->Void>; }).onResume; }), cast ([] : Array<Dynamic>));
     return cast popped;
     return cast null;
   }
@@ -81,7 +81,7 @@ class Flow {
     var previousTop:Null<FlowState> = cast _Runtime.UNDEFINED;
     states = (cast stack : FlowStack).states;
     previousTop = ((cast ((cast _Runtime.field(states, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(states, _Runtime.subtractNumbers(_Runtime.field(states, 'length'), 1.0)) : Dynamic) : (cast null : Dynamic));
-    _Runtime.callOptionalProperty(previousTop, 'onPause', cast ([] : Array<Dynamic>));
+    _Runtime.callOptionalValue(({ final __structural1 = previousTop; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var onPause:Null<Void->Void>; }).onPause; }), cast ([] : Array<Dynamic>));
     _Runtime.callProperty(states, 'push', cast ([state] : Array<Dynamic>));
     _Runtime.callOptionalProperty(state, 'onEnter', cast ([] : Array<Dynamic>));
   }

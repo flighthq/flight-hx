@@ -14,6 +14,6 @@ import flighthq.types._internal._TextureSourceKindValues.RenderTargetTextureSour
 
 class CanvasRenderTextureResolver {
   public static function registerCanvasRenderTextureResolver(resolvers:CanvasTextureResolvers, state:CanvasRenderState):Void {
-    registerCanvasTextureResolver((cast resolvers : CanvasTextureResolvers), (cast RenderTargetTextureSourceKind : String), function(_resolvers:CanvasTextureResolvers, texture:Texture):Null<flighthq._internal.dom.HTMLCanvasElement> return (cast bindCanvasRenderTexture((cast state : CanvasRenderState), (cast (cast texture : RenderTexture) : RenderTexture)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>));
+    registerCanvasTextureResolver((cast resolvers), (cast RenderTargetTextureSourceKind : String), (cast function(_resolvers:CanvasTextureResolvers, texture:Texture):Null<flighthq._internal.dom.HTMLCanvasElement> return (cast bindCanvasRenderTexture((cast state), (cast (cast texture : RenderTexture))) : Null<flighthq._internal.dom.HTMLCanvasElement>)));
   }
 }

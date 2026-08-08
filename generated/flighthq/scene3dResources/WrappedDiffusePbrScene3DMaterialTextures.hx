@@ -8,6 +8,7 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.PbrExtension;
 import flighthq.types.Sampler;
 import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
+import flighthq.types.Scene3DResources.Scene3DPbrExtensionTextureLister;
 import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.Texture.TextureColorSpace;
@@ -22,11 +23,11 @@ import flighthq.types._internal._WrappedDiffusePbrExtensionValues.WrappedDiffuse
 class WrappedDiffusePbrScene3DMaterialTextures {
   @:noCompletion
   public static function registerWrappedDiffusePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DPbrExtensionTextures((cast registry : Scene3DMaterialTextureRegistry), (cast WrappedDiffusePbrExtensionKind : String), function(extension:PbrExtension, out:Array<Texture>):Void {
+    registerScene3DPbrExtensionTextures((cast registry), (cast WrappedDiffusePbrExtensionKind : String), (cast function(extension:PbrExtension, out:Array<Texture>):Void {
       var wrappedDiffuse:WrappedDiffusePbrExtension = cast _Runtime.UNDEFINED;
       wrappedDiffuse = (cast extension : WrappedDiffusePbrExtension);
       if ((cast !_Runtime.strictEquals(_Runtime.field(wrappedDiffuse, 'wrappedDiffuseMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(wrappedDiffuse, 'wrappedDiffuseMap')] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(wrappedDiffuse, 'thicknessMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(wrappedDiffuse, 'thicknessMap')] : Array<Dynamic>)); }
-    });
+    }));
   }
 }

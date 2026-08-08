@@ -13,15 +13,19 @@ import flighthq.spritesheetFormats.StarlingParse as Facade_SpritesheetFormats_fl
 import flighthq.spritesheetFormats.StarlingSerialize as Facade_SpritesheetFormats_flighthq_spritesheetFormats_StarlingSerialize;
 import flighthq.spritesheetFormats.TexturePackerParse as Facade_SpritesheetFormats_flighthq_spritesheetFormats_TexturePackerParse;
 import flighthq.spritesheetFormats.TexturePackerSerialize as Facade_SpritesheetFormats_flighthq_spritesheetFormats_TexturePackerSerialize;
+import flighthq.types.AsepriteSchema.AsepriteDocument;
 import flighthq.types.AsepriteSchema.AsepriteParsed;
 import flighthq.types.AsepriteSchema.AsepriteSerializeOptions;
+import flighthq.types.CocosPlistSchema.CocosPlistDocument;
 import flighthq.types.CocosPlistSchema.CocosPlistParsed;
 import flighthq.types.LibgdxAtlasSchema.LibgdxAtlasParseOptions;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKind;
 import flighthq.types.SpritesheetParseOptions;
+import flighthq.types.StarlingSchema.StarlingDocument;
 import flighthq.types.StarlingSchema.StarlingParseOptions;
 import flighthq.types.StarlingSchema.StarlingParsed;
+import flighthq.types.TexturePackerSchema.TexturePackerDocument;
 import flighthq.types.TexturePackerSchema.TexturePackerParsed;
 import flighthq.types.TexturePackerSchema.TexturePackerSerializeOptions;
 
@@ -90,22 +94,22 @@ class SpritesheetFormats {
     Facade_SpritesheetFormats_flighthq_spritesheetFormats_SpritesheetDetect.registerSpritesheetFormat(kind, entry);
   }
 
-  public static function serializeAsepriteSpritesheet(data:SpritesheetData, ?existing:Dynamic, ?options:AsepriteSerializeOptions):String {
+  public static function serializeAsepriteSpritesheet(data:SpritesheetData, ?existing:flighthq._internal._Partial<AsepriteDocument>, ?options:AsepriteSerializeOptions):String {
     return cast Facade_SpritesheetFormats_flighthq_spritesheetFormats_AsepriteSerialize.serializeAsepriteSpritesheet(data, existing, options);
     return cast null;
   }
 
-  public static function serializeCocosPlistSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
+  public static function serializeCocosPlistSpritesheet(data:SpritesheetData, ?existing:flighthq._internal._Partial<CocosPlistDocument>):String {
     return cast Facade_SpritesheetFormats_flighthq_spritesheetFormats_CocosPlistSerialize.serializeCocosPlistSpritesheet(data, existing);
     return cast null;
   }
 
-  public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:Dynamic):String {
+  public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:flighthq._internal._Partial<StarlingDocument>):String {
     return cast Facade_SpritesheetFormats_flighthq_spritesheetFormats_StarlingSerialize.serializeStarlingSpritesheet(data, existing);
     return cast null;
   }
 
-  public static function serializeTexturePackerSpritesheet(data:SpritesheetData, ?existing:Dynamic, ?options:TexturePackerSerializeOptions):String {
+  public static function serializeTexturePackerSpritesheet(data:SpritesheetData, ?existing:flighthq._internal._Partial<TexturePackerDocument>, ?options:TexturePackerSerializeOptions):String {
     return cast Facade_SpritesheetFormats_flighthq_spritesheetFormats_TexturePackerSerialize.serializeTexturePackerSpritesheet(data, existing, options);
     return cast null;
   }

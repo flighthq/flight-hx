@@ -12,6 +12,7 @@ import flighthq.scene2dDom.DomStyle.setDomRendererElement;
 import flighthq.scene2dDom.DomTransform.setDomTransformWithOffset;
 import flighthq.types.DomRenderState;
 import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.Entity;
 import flighthq.types.Matrix;
 import flighthq.types.Rectangle;
 import flighthq.types.RenderProxy2D;
@@ -32,7 +33,7 @@ typedef DomShapeData__domShape = { >RendererData, var canvas:Null<flighthq._inte
 
 class DomShape {
   public static function createDomShapeData__domShape(_state:RenderState, _source:Renderable):DomShapeData__domShape {
-    return cast (cast createEntity((cast { canvas: null, context: null } : Null<{ var canvas:flighthq._internal._Any; var context:flighthq._internal._Any; }>)) : DomShapeData__domShape);
+    return cast (cast createEntity((cast { canvas: null, context: null })) : { >Entity, var canvas:flighthq._internal._Any; var context:flighthq._internal._Any; });
     return cast null;
   }
 
@@ -54,17 +55,17 @@ class DomShape {
     __destructure0 = (cast source : Shape).data;
     commands = _Runtime.field(__destructure0, 'commands');
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
-    rasterizer = (cast getDomShapeRasterizer((cast state : DomRenderState)) : Null<ShapeRasterizer>);
+    rasterizer = (cast getDomShapeRasterizer((cast state)) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
-      _Runtime.callOptionalValue((cast (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime) : DomRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast (cast getDomRenderStateRuntime((cast state)) : DomRenderStateRuntime) : DomRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
       return;
     }
     if ((cast _Runtime.strictEquals((cast data : DomShapeData__domShape).canvas, null) : Bool)) {
       ((cast data : DomShapeData__domShape).canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       ((cast data : DomShapeData__domShape).context = flighthq._internal.backend.CanvasElementBackend.call((cast data : DomShapeData__domShape).canvas, 'getContext', cast (['2d'] : Array<Dynamic>)));
-      prepareDomElement((cast (cast data : DomShapeData__domShape).canvas : flighthq._internal.dom.HTMLElement));
+      prepareDomElement((cast (cast data : DomShapeData__domShape).canvas));
     }
-    bounds = (cast getNodeLocalBoundsRectangle(source) : Rectangle);
+    bounds = (cast getNodeLocalBoundsRectangle((cast source)) : Rectangle);
     w = HxMath.max(1.0, HxMath.ceil(_Runtime.field(bounds, 'width')));
     h = HxMath.max(1.0, HxMath.ceil(_Runtime.field(bounds, 'height')));
     pixelRatio = (cast state : DomRenderState).pixelRatio;
@@ -74,17 +75,17 @@ class DomShape {
     ((cast (cast (cast data : DomShapeData__domShape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(h) + 'px');
     ctx = (cast data : DomShapeData__domShape).context;
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
-    rasterizer((cast ctx : flighthq._internal.dom.CanvasRenderingContext2D), commands, (cast state : RenderState));
+    rasterizer((cast ctx), (cast commands), (cast state));
     ((cast (cast (cast data : DomShapeData__domShape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast renderProxy : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast renderProxy : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     if ((cast !_Runtime.strictEquals((cast state : DomRenderState).domCssFilterResolver, null) : Bool)) {
-      ((cast (cast (cast data : DomShapeData__domShape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce((cast state : DomRenderState).domCssFilterResolver(renderProxy), function():Dynamic return cast ''));
+      ((cast (cast (cast data : DomShapeData__domShape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce((cast state : DomRenderState).domCssFilterResolver((cast renderProxy)), function():Dynamic return cast ''));
     }
     _Runtime.callOptionalValue((cast state : DomRenderState).applyBlendMode, cast ([(cast data : DomShapeData__domShape).canvas, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    setDomTransformWithOffset((cast (cast data : DomShapeData__domShape).canvas : flighthq._internal.dom.HTMLElement), (cast renderProxy : RenderProxy2D).transform2D, (cast _Runtime.field(bounds, 'x') : Float), (cast _Runtime.field(bounds, 'y') : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
-    setDomRendererElement((cast state : DomRenderState), (cast (cast data : DomShapeData__domShape).canvas : flighthq._internal.dom.HTMLElement));
+    setDomTransformWithOffset((cast (cast data : DomShapeData__domShape).canvas), (cast (cast renderProxy : RenderProxy2D).transform2D), (cast _Runtime.field(bounds, 'x') : Float), (cast _Runtime.field(bounds, 'y') : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
+    setDomRendererElement((cast state), (cast (cast data : DomShapeData__domShape).canvas));
   }
 
-  public static final defaultDomShapeRenderer:Scene2DRenderer = { createData: DomShape.createDomShapeData__domShape, submit: drawDomShape };
+  public static final defaultDomShapeRenderer:Scene2DRenderer = (cast { createData: DomShape.createDomShapeData__domShape, submit: drawDomShape });
 
   public static final defaultDomMorphShapeRenderer:Scene2DRenderer = defaultDomShapeRenderer;
 }

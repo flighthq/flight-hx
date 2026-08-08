@@ -32,15 +32,15 @@ class BitmapFontFnt {
     var lines:Array<String> = cast _Runtime.UNDEFINED;
     var codepoints:Array<Float> = cast _Runtime.UNDEFINED;
     var kernKeys:Array<Float> = cast _Runtime.UNDEFINED;
-    metrics = (cast getBitmapFontMetrics((cast font : BitmapFont)) : GlyphMetrics);
+    metrics = (cast getBitmapFontMetrics((cast font)) : GlyphMetrics);
     lineHeight = ((metrics.ascent + metrics.descent) + metrics.lineGap);
     base = metrics.ascent;
-    primaryTexture = ({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(font.pages, 0.0); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.texture; });
-    primaryImage = ((cast _Runtime.strictEquals(_Runtime.optionalField(primaryTexture, 'dimension'), '2d') : Bool) ? (cast (cast primaryTexture : Texture2D).source : Dynamic) : (cast null : Dynamic));
+    primaryTexture = ({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(font.pages, 0.0); __typedStruct0 == null ? _Runtime.UNDEFINED : (cast __typedStruct0 : { var texture:Null<Texture2D>; }).texture; });
+    primaryImage = ((cast _Runtime.strictEquals(({ final __structural1 = primaryTexture; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var dimension:String; }).dimension; }), '2d') : Bool) ? (cast (cast primaryTexture : Texture2D).source : Dynamic) : (cast null : Dynamic));
     scaleW = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast (cast primaryImage : TextureSource).width : Dynamic) : (cast 0.0 : Dynamic));
     scaleH = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast (cast primaryImage : TextureSource).height : Dynamic) : (cast 0.0 : Dynamic));
     pageCount = HxMath.max(_Runtime.field(font.pages, 'length'), 1.0);
-    lines = cast ([] : Array<Dynamic>);
+    lines = (cast cast ([] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['info face="" size=' + Std.string(lineHeight) + ' bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=0,0 outline=0'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['common lineHeight=' + Std.string(lineHeight) + ' base=' + Std.string(base) + ' scaleW=' + Std.string(scaleW) + ' scaleH=' + Std.string(scaleH) + ' pages=' + Std.string(pageCount) + ' packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0'] : Array<Dynamic>));
     {
@@ -50,17 +50,17 @@ class BitmapFontFnt {
         id++;
       }
     }
-    codepoints = _Runtime.concatArrays([_Runtime.toArray(((cast font.glyphs : flighthq._internal._Map<Float, GlyphEntry>).keys()))]);
+    codepoints = (cast _Runtime.concatArrays([_Runtime.toArray(((cast font.glyphs : flighthq._internal._Map<Float, GlyphEntry>).keys()))]));
     _Runtime.callProperty(lines, 'push', cast (['chars count=' + Std.string(_Runtime.field(codepoints, 'length')) + ''] : Array<Dynamic>));
     for (codepoint in _Runtime.iterable(codepoints)) {
       var glyph:GlyphEntry = (cast ((cast font.glyphs : flighthq._internal._Map<Float, GlyphEntry>).get(codepoint)) : GlyphEntry);
       _Runtime.callProperty(lines, 'push', cast ([('char id=' + Std.string(codepoint) + ' x=' + Std.string(glyph.x) + ' y=' + Std.string(glyph.y) + ' width=' + Std.string(glyph.width) + ' height=' + Std.string(glyph.height) + ' ' + 'xoffset=' + Std.string(glyph.bearingX) + ' yoffset=' + Std.string((base - glyph.bearingY)) + ' xadvance=' + Std.string(glyph.advance) + ' page=' + Std.string(glyph.page) + ' chnl=15')] : Array<Dynamic>));
     }
-    kernKeys = _Runtime.concatArrays([_Runtime.toArray(((cast font.kerning : flighthq._internal._Map<Float, Float>).keys()))]);
+    kernKeys = (cast _Runtime.concatArrays([_Runtime.toArray(((cast font.kerning : flighthq._internal._Map<Float, Float>).keys()))]));
     _Runtime.callProperty(lines, 'push', cast (['kernings count=' + Std.string(_Runtime.field(kernKeys, 'length')) + ''] : Array<Dynamic>));
     for (key in _Runtime.iterable(kernKeys)) {
       var amount:Float = (cast ((cast font.kerning : flighthq._internal._Map<Float, Float>).get(key)) : Float);
-      (cast unpackBitmapFontKerningKey((cast key : Float), (cast BitmapFontFnt._kerningPair__bitmapFontFnt : BitmapFontKerningPair)) : BitmapFontKerningPair);
+      (cast unpackBitmapFontKerningKey((cast key : Float), (cast BitmapFontFnt._kerningPair__bitmapFontFnt)) : BitmapFontKerningPair);
       _Runtime.callProperty(lines, 'push', cast (['kerning first=' + Std.string((cast BitmapFontFnt._kerningPair__bitmapFontFnt : BitmapFontKerningPair).left) + ' second=' + Std.string((cast BitmapFontFnt._kerningPair__bitmapFontFnt : BitmapFontKerningPair).right) + ' amount=' + Std.string(amount) + ''] : Array<Dynamic>));
     }
     return cast (_Runtime.join(lines, '\n') + '\n');
@@ -71,7 +71,7 @@ class BitmapFontFnt {
     var record:Null<BitmapFontRecord> = cast _Runtime.UNDEFINED;
     record = (cast BitmapFontFnt.parseBitmapFontFntRecord__bitmapFontFnt((cast text : String)) : Null<BitmapFontRecord>);
     if ((cast _Runtime.strictEquals(record, null) : Bool)) { return cast null; }
-    return cast (cast buildBitmapFontFromRecord((cast record : BitmapFontRecord), (cast options : Null<BitmapFontParseOptions>)) : Null<BitmapFont>);
+    return cast (cast buildBitmapFontFromRecord((cast record), (cast options)) : Null<BitmapFont>);
     return cast null;
   }
 
@@ -83,9 +83,9 @@ class BitmapFontFnt {
     var kernings:Array<BitmapFontKerningRecord> = cast _Runtime.UNDEFINED;
     lineHeight = null;
     base = null;
-    pages = cast ([] : Array<Dynamic>);
-    chars = cast ([] : Array<Dynamic>);
-    kernings = cast ([] : Array<Dynamic>);
+    pages = (cast cast ([] : Array<Dynamic>));
+    chars = (cast cast ([] : Array<Dynamic>));
+    kernings = (cast cast ([] : Array<Dynamic>));
     for (rawLine in _Runtime.iterable(_Runtime.callProperty(text, 'split', cast ([_Runtime.regexp('\\r\\n?|\\n', '')] : Array<Dynamic>)))) {
       var line:String = StringTools.trim(Std.string(rawLine));
       if ((cast _Runtime.strictEquals(line, '') : Bool)) { continue; }
@@ -93,16 +93,16 @@ class BitmapFontFnt {
       var tag:String = ((cast ((cast spaceAt : Float) < (cast 0.0 : Float)) : Bool) ? (cast line : Dynamic) : (cast _Runtime.slice(line, 0.0, spaceAt) : Dynamic));
       var fields:flighthq._internal._Record<String, String> = (cast BitmapFontFnt.parseFntFields__bitmapFontFnt((cast _Runtime.slice(line, _Runtime.field(tag, 'length'), null) : String)) : flighthq._internal._Record<String, String>);
       if ((cast _Runtime.strictEquals(tag, 'common') : Bool)) {
-        (lineHeight = cast ((cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'lineHeight') : Null<String>)) : Null<Float>) : Dynamic));
-        (base = cast ((cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'base') : Null<String>)) : Null<Float>) : Dynamic));
+        (lineHeight = cast ((cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var lineHeight:String; }).lineHeight)) : Null<Float>) : Dynamic));
+        (base = cast ((cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var base:String; }).base)) : Null<Float>) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(tag, 'page') : Bool)) {
-        var id:Null<Float> = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'id') : Null<String>)) : Null<Float>);
-        if ((cast !_Runtime.strictEquals(id, null) : Bool)) { _Runtime.callProperty(pages, 'push', cast ([{ file: _Runtime.coalesce(_Runtime.field(fields, 'file'), function():Dynamic return cast ''), id: id }] : Array<Dynamic>)); }
+        var id:Null<Float> = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var id:String; }).id)) : Null<Float>);
+        if ((cast !_Runtime.strictEquals(id, null) : Bool)) { _Runtime.callProperty(pages, 'push', cast ([{ file: _Runtime.coalesce((cast fields : { var file:String; }).file, function():Dynamic return cast ''), id: id }] : Array<Dynamic>)); }
       } else { if ((cast _Runtime.strictEquals(tag, 'char') : Bool)) {
-        var char:Null<BitmapFontCharRecord> = (cast BitmapFontFnt.readFntChar__bitmapFontFnt((cast fields : flighthq._internal._Record<String, String>)) : Null<BitmapFontCharRecord>);
+        var char:Null<BitmapFontCharRecord> = (cast BitmapFontFnt.readFntChar__bitmapFontFnt((cast fields)) : Null<BitmapFontCharRecord>);
         if ((cast !_Runtime.strictEquals(char, null) : Bool)) { _Runtime.callProperty(chars, 'push', cast ([char] : Array<Dynamic>)); }
       } else { if ((cast _Runtime.strictEquals(tag, 'kerning') : Bool)) {
-        var kerning:Null<BitmapFontKerningRecord> = (cast BitmapFontFnt.readFntKerning__bitmapFontFnt((cast fields : flighthq._internal._Record<String, String>)) : Null<BitmapFontKerningRecord>);
+        var kerning:Null<BitmapFontKerningRecord> = (cast BitmapFontFnt.readFntKerning__bitmapFontFnt((cast fields)) : Null<BitmapFontKerningRecord>);
         if ((cast !_Runtime.strictEquals(kerning, null) : Bool)) { _Runtime.callProperty(kernings, 'push', cast ([kerning] : Array<Dynamic>)); }
       } } } }
     }
@@ -115,7 +115,7 @@ class BitmapFontFnt {
     var fields:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
     var re:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var match:Null<Dynamic> = cast _Runtime.UNDEFINED;
-    fields = {  };
+    fields = (cast {  });
     re = _Runtime.regexp('([A-Za-z_]\\w*)\\s*=\\s*(?:"([^"]*)"|(\\S+))', 'g');
     while ((cast !_Runtime.strictEquals((match = cast (_Runtime.callProperty(re, 'exec', cast ([rest] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
       _Runtime.setIndex(fields, _Runtime.getIndex(match, 1.0), ((cast !_Runtime.strictEquals(_Runtime.getIndex(match, 2.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.getIndex(match, 2.0) : Dynamic) : (cast _Runtime.coalesce(_Runtime.getIndex(match, 3.0), function():Dynamic return cast '') : Dynamic)));
@@ -133,18 +133,18 @@ class BitmapFontFnt {
     var xoffset:Null<Float> = cast _Runtime.UNDEFINED;
     var yoffset:Null<Float> = cast _Runtime.UNDEFINED;
     var xadvance:Null<Float> = cast _Runtime.UNDEFINED;
-    id = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'id') : Null<String>)) : Null<Float>);
-    x = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'x') : Null<String>)) : Null<Float>);
-    y = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'y') : Null<String>)) : Null<Float>);
-    width = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'width') : Null<String>)) : Null<Float>);
-    height = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'height') : Null<String>)) : Null<Float>);
-    xoffset = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'xoffset') : Null<String>)) : Null<Float>);
-    yoffset = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'yoffset') : Null<String>)) : Null<Float>);
-    xadvance = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'xadvance') : Null<String>)) : Null<Float>);
+    id = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var id:String; }).id)) : Null<Float>);
+    x = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var x:String; }).x)) : Null<Float>);
+    y = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var y:String; }).y)) : Null<Float>);
+    width = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var width:String; }).width)) : Null<Float>);
+    height = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var height:String; }).height)) : Null<Float>);
+    xoffset = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var xoffset:String; }).xoffset)) : Null<Float>);
+    yoffset = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var yoffset:String; }).yoffset)) : Null<Float>);
+    xadvance = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var xadvance:String; }).xadvance)) : Null<Float>);
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(id, null) : Bool) || (cast _Runtime.strictEquals(x, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(y, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(width, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(height, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(xoffset, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(yoffset, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(xadvance, null) : Bool)) : Bool)) {
       return cast null;
     }
-    return cast { height: height, id: id, page: _Runtime.coalesce((cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'page') : Null<String>)) : Float), function():Dynamic return cast 0.0), width: width, x: x, xadvance: xadvance, xoffset: xoffset, y: y, yoffset: yoffset };
+    return cast { height: height, id: id, page: _Runtime.coalesce((cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var page:String; }).page)) : Null<Float>), function():Dynamic return cast 0.0), width: width, x: x, xadvance: xadvance, xoffset: xoffset, y: y, yoffset: yoffset };
     return cast null;
   }
 
@@ -152,9 +152,9 @@ class BitmapFontFnt {
     var first:Null<Float> = cast _Runtime.UNDEFINED;
     var second:Null<Float> = cast _Runtime.UNDEFINED;
     var amount:Null<Float> = cast _Runtime.UNDEFINED;
-    first = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'first') : Null<String>)) : Null<Float>);
-    second = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'second') : Null<String>)) : Null<Float>);
-    amount = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast _Runtime.field(fields, 'amount') : Null<String>)) : Null<Float>);
+    first = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var first:String; }).first)) : Null<Float>);
+    second = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var second:String; }).second)) : Null<Float>);
+    amount = (cast BitmapFontFnt.readFntNumber__bitmapFontFnt((cast (cast fields : { var amount:String; }).amount)) : Null<Float>);
     if ((cast ((cast ((cast _Runtime.strictEquals(first, null) : Bool) || (cast _Runtime.strictEquals(second, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(amount, null) : Bool)) : Bool)) { return cast null; }
     return cast { amount: amount, first: first, second: second };
     return cast null;
@@ -168,5 +168,5 @@ class BitmapFontFnt {
     return cast null;
   }
 
-  public static final _kerningPair__bitmapFontFnt:BitmapFontKerningPair = { left: 0.0, right: 0.0 };
+  public static final _kerningPair__bitmapFontFnt:BitmapFontKerningPair = (cast { left: 0.0, right: 0.0 });
 }

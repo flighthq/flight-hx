@@ -16,7 +16,7 @@ class ImageDecoderRegistry {
   }
 
   public static function getImageDecoderMimeTypes():Array<String> {
-    return cast _Runtime.toArray(((cast ImageDecoderRegistry.decoders__imageDecoderRegistry : flighthq._internal._Map<String, ImageDecoder>).keys()));
+    return cast (cast _Runtime.toArray(((cast ImageDecoderRegistry.decoders__imageDecoderRegistry : flighthq._internal._Map<String, ImageDecoder>).keys())) : Array<String>);
     return cast null;
   }
 
@@ -26,7 +26,7 @@ class ImageDecoderRegistry {
   }
 
   public static function registerImageDecoder(mimeType:String, decoder:ImageDecoder):Void {
-    ((cast ImageDecoderRegistry.decoders__imageDecoderRegistry : flighthq._internal._Map<String, ImageDecoder>).set(mimeType, decoder));
+    ((cast ImageDecoderRegistry.decoders__imageDecoderRegistry : flighthq._internal._Map<String, ImageDecoder>).set(mimeType, (cast decoder)));
   }
 
   public static function unregisterImageDecoder(mimeType:String):Void {

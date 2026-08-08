@@ -22,19 +22,19 @@ class GlWhiteBalanceEffect {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     temperature = _Runtime.coalesce(_Runtime.field(effect, 'temperature'), function():Dynamic return cast 0.0);
     tint = _Runtime.coalesce(_Runtime.field(effect, 'tint'), function():Dynamic return cast 0.0);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'colorGrade.whiteBalance' : String), (cast GlWhiteBalanceEffect.WHITE_BALANCE_FRAGMENT_SRC__glWhiteBalanceEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'colorGrade.whiteBalance' : String), (cast GlWhiteBalanceEffect.WHITE_BALANCE_FRAGMENT_SRC__glWhiteBalanceEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_temperature'), temperature);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_tint'), tint);
-    });
+    }));
   }
 
-  public static final defaultGlWhiteBalanceEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyWhiteBalanceEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : WhiteBalanceEffect) : WhiteBalanceEffect));
-  };
+  public static final defaultGlWhiteBalanceEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyWhiteBalanceEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : WhiteBalanceEffect)));
+  });
 
   public static function registerGlWhiteBalanceEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'WhiteBalanceEffect' : String), (cast defaultGlWhiteBalanceEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'WhiteBalanceEffect' : String), (cast defaultGlWhiteBalanceEffectRunner));
   }
 
   public static final WHITE_BALANCE_FRAGMENT_SRC__glWhiteBalanceEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_temperature;\nuniform float u_tint;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec3 rgb = c.rgb;\n  rgb.r += u_temperature * 0.5;\n  rgb.b -= u_temperature * 0.5;\n  rgb.g += u_tint * 0.5;\n  o_color = vec4(clamp(rgb, 0.0, 1.0), c.a);\n}';

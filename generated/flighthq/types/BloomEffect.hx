@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef BloomEffect = { var kind:Kind; @:optional var threshold:Float; @:optional var intensity:Float; @:optional var radius:Float; @:optional var passes:Float; };
+typedef BloomEffect = { var kind:String; @:optional var threshold:Float; @:optional var intensity:Float; @:optional var radius:Float; @:optional var passes:Float; };

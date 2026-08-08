@@ -38,8 +38,8 @@ class PathMorphGeometry {
     if ((cast !_Runtime.strictEquals(_Runtime.field(start, 'winding'), _Runtime.field(end, 'winding')) : Bool)) {
       return cast { contour: null, issue: PathMorphIssueWindingMismatch, morph: null };
     }
-    startContours = (cast PathMorphGeometry.decodeCubicContours__pathMorphGeometry((cast start : Path)) : Array<CubicContour__pathMorphGeometry>);
-    endContours = (cast PathMorphGeometry.decodeCubicContours__pathMorphGeometry((cast end : Path)) : Array<CubicContour__pathMorphGeometry>);
+    startContours = (cast PathMorphGeometry.decodeCubicContours__pathMorphGeometry((cast start)) : Array<CubicContour__pathMorphGeometry>);
+    endContours = (cast PathMorphGeometry.decodeCubicContours__pathMorphGeometry((cast end)) : Array<CubicContour__pathMorphGeometry>);
     if ((cast !_Runtime.strictEquals(_Runtime.field(startContours, 'length'), _Runtime.field(endContours, 'length')) : Bool)) {
       return cast { contour: null, issue: PathMorphIssueContourCountMismatch, morph: null };
     }
@@ -52,7 +52,7 @@ class PathMorphGeometry {
         i++;
       }
     }
-    orientationMismatch = (cast PathMorphGeometry.normalizeCubicContourOrientations__pathMorphGeometry(startContours, endContours, _Runtime.field(start, 'winding')) : Null<Float>);
+    orientationMismatch = (cast PathMorphGeometry.normalizeCubicContourOrientations__pathMorphGeometry((cast startContours), (cast endContours), (cast _Runtime.field(start, 'winding'))) : Null<Float>);
     if ((cast !_Runtime.strictEquals(orientationMismatch, null) : Bool)) {
       return cast { contour: orientationMismatch, issue: PathMorphIssueContourOrientationMismatch, morph: null };
     }
@@ -61,18 +61,18 @@ class PathMorphGeometry {
       while ((cast ((cast i : Float) < (cast _Runtime.field(startContours, 'length') : Float)) : Bool)) {
         var startContour:CubicContour__pathMorphGeometry = flighthq._internal._StaticIndex.readArray(startContours, i);
         var endContour:CubicContour__pathMorphGeometry = flighthq._internal._StaticIndex.readArray(endContours, i);
-        PathMorphGeometry.equalizeCubicContourSegments__pathMorphGeometry(startContour, endContour);
-        PathMorphGeometry.alignClosedCubicContour__pathMorphGeometry(startContour, endContour);
+        PathMorphGeometry.equalizeCubicContourSegments__pathMorphGeometry((cast startContour), (cast endContour));
+        PathMorphGeometry.alignClosedCubicContour__pathMorphGeometry((cast startContour), (cast endContour));
         i++;
       }
     }
-    commands = cast ([] : Array<Dynamic>);
-    startData = cast ([] : Array<Dynamic>);
-    endData = cast ([] : Array<Dynamic>);
+    commands = (cast cast ([] : Array<Dynamic>));
+    startData = (cast cast ([] : Array<Dynamic>));
+    endData = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(startContours, 'length') : Float)) : Bool)) {
-        PathMorphGeometry.appendCubicContourPair__pathMorphGeometry((cast commands : Array<Float>), (cast startData : Array<Float>), (cast endData : Array<Float>), flighthq._internal._StaticIndex.readArray(startContours, i), flighthq._internal._StaticIndex.readArray(endContours, i));
+        PathMorphGeometry.appendCubicContourPair__pathMorphGeometry((cast commands), (cast startData), (cast endData), (cast flighthq._internal._StaticIndex.readArray(startContours, i)), (cast flighthq._internal._StaticIndex.readArray(endContours, i)));
         i++;
       }
     }
@@ -86,10 +86,10 @@ class PathMorphGeometry {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(start, 'length') : Float)) : Bool)) {
-          var startOrientation:Float = (cast PathMorphGeometry.getCubicContourOrientation__pathMorphGeometry(flighthq._internal._StaticIndex.readArray(start, i)) : Float);
-          var endOrientation:Float = (cast PathMorphGeometry.getCubicContourOrientation__pathMorphGeometry(flighthq._internal._StaticIndex.readArray(end, i)) : Float);
+          var startOrientation:Float = (cast PathMorphGeometry.getCubicContourOrientation__pathMorphGeometry((cast flighthq._internal._StaticIndex.readArray(start, i))) : Float);
+          var endOrientation:Float = (cast PathMorphGeometry.getCubicContourOrientation__pathMorphGeometry((cast flighthq._internal._StaticIndex.readArray(end, i))) : Float);
           if ((cast ((cast ((cast !_Runtime.strictEquals(startOrientation, 0.0) : Bool) && (cast !_Runtime.strictEquals(endOrientation, 0.0) : Bool)) : Bool) && (cast !_Runtime.strictEquals(startOrientation, endOrientation) : Bool)) : Bool)) {
-            PathMorphGeometry.reverseClosedCubicContour__pathMorphGeometry(flighthq._internal._StaticIndex.readArray(end, i));
+            PathMorphGeometry.reverseClosedCubicContour__pathMorphGeometry((cast flighthq._internal._StaticIndex.readArray(end, i)));
           }
           i++;
         }
@@ -100,8 +100,8 @@ class PathMorphGeometry {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(start, 'length') : Float)) : Bool)) {
-        var startOrientation:Float = (cast PathMorphGeometry.getCubicContourOrientation__pathMorphGeometry(flighthq._internal._StaticIndex.readArray(start, i)) : Float);
-        var endOrientation:Float = (cast PathMorphGeometry.getCubicContourOrientation__pathMorphGeometry(flighthq._internal._StaticIndex.readArray(end, i)) : Float);
+        var startOrientation:Float = (cast PathMorphGeometry.getCubicContourOrientation__pathMorphGeometry((cast flighthq._internal._StaticIndex.readArray(start, i))) : Float);
+        var endOrientation:Float = (cast PathMorphGeometry.getCubicContourOrientation__pathMorphGeometry((cast flighthq._internal._StaticIndex.readArray(end, i))) : Float);
         if ((cast ((cast _Runtime.strictEquals(startOrientation, 0.0) : Bool) || (cast _Runtime.strictEquals(endOrientation, 0.0) : Bool)) : Bool)) { i++; continue; }
         var reversed:Bool = !_Runtime.strictEquals(startOrientation, endOrientation);
         if ((cast _Runtime.strictEquals(reverseEnd, null) : Bool)) { (reverseEnd = cast (reversed : Dynamic)); } else { if ((cast !_Runtime.strictEquals(reverseEnd, reversed) : Bool)) { return cast i; } }
@@ -112,7 +112,7 @@ class PathMorphGeometry {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(end, 'length') : Float)) : Bool)) {
-          if ((cast !_Runtime.strictEquals((cast PathMorphGeometry.getCubicContourOrientation__pathMorphGeometry(flighthq._internal._StaticIndex.readArray(end, i)) : Float), 0.0) : Bool)) { PathMorphGeometry.reverseClosedCubicContour__pathMorphGeometry(flighthq._internal._StaticIndex.readArray(end, i)); }
+          if ((cast !_Runtime.strictEquals((cast PathMorphGeometry.getCubicContourOrientation__pathMorphGeometry((cast flighthq._internal._StaticIndex.readArray(end, i))) : Float), 0.0) : Bool)) { PathMorphGeometry.reverseClosedCubicContour__pathMorphGeometry((cast flighthq._internal._StaticIndex.readArray(end, i))); }
           i++;
         }
       }
@@ -124,14 +124,14 @@ class PathMorphGeometry {
   public static function getCubicContourOrientation__pathMorphGeometry(contour:CubicContour__pathMorphGeometry):Float {
     var area:Float = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(contour, 'closed') : Bool) : Bool)) { return cast 0.0; }
-    area = (cast PathMorphGeometry.getCubicContourSignedArea__pathMorphGeometry(contour) : Float);
+    area = (cast PathMorphGeometry.getCubicContourSignedArea__pathMorphGeometry((cast contour)) : Float);
     return cast ((cast ((cast area : Float) < (cast 0.0 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast ((cast ((cast area : Float) > (cast 0.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
     return cast null;
   }
 
   public static function reverseClosedCubicContour__pathMorphGeometry(contour:CubicContour__pathMorphGeometry):Void {
     var reversed:Array<CubicSegment__pathMorphGeometry> = cast _Runtime.UNDEFINED;
-    reversed = cast ([] : Array<Dynamic>);
+    reversed = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = _Runtime.subtractNumbers(_Runtime.field((cast contour : CubicContour__pathMorphGeometry).segments, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
@@ -263,7 +263,7 @@ class PathMorphGeometry {
     var y0:Float = cast _Runtime.UNDEFINED;
     x0 = (cast contour : CubicContour__pathMorphGeometry).currentX;
     y0 = (cast contour : CubicContour__pathMorphGeometry).currentY;
-    PathMorphGeometry.appendCubicSegment__pathMorphGeometry(contour, (cast (x0 + ((x - x0) / 3.0)) : Float), (cast (y0 + ((y - y0) / 3.0)) : Float), (cast (x0 + (((x - x0) * 2.0) / 3.0)) : Float), (cast (y0 + (((y - y0) * 2.0) / 3.0)) : Float), (cast x : Float), (cast y : Float));
+    PathMorphGeometry.appendCubicSegment__pathMorphGeometry((cast contour), (cast (x0 + ((x - x0) / 3.0)) : Float), (cast (y0 + ((y - y0) / 3.0)) : Float), (cast (x0 + (((x - x0) * 2.0) / 3.0)) : Float), (cast (y0 + (((y - y0) * 2.0) / 3.0)) : Float), (cast x : Float), (cast y : Float));
   }
 
   public static function appendQuadraticAsCubic__pathMorphGeometry(contour:CubicContour__pathMorphGeometry, controlX:Float, controlY:Float, x:Float, y:Float):Void {
@@ -271,12 +271,12 @@ class PathMorphGeometry {
     var y0:Float = cast _Runtime.UNDEFINED;
     x0 = (cast contour : CubicContour__pathMorphGeometry).currentX;
     y0 = (cast contour : CubicContour__pathMorphGeometry).currentY;
-    PathMorphGeometry.appendCubicSegment__pathMorphGeometry(contour, (cast (x0 + (((controlX - x0) * 2.0) / 3.0)) : Float), (cast (y0 + (((controlY - y0) * 2.0) / 3.0)) : Float), (cast (x + (((controlX - x) * 2.0) / 3.0)) : Float), (cast (y + (((controlY - y) * 2.0) / 3.0)) : Float), (cast x : Float), (cast y : Float));
+    PathMorphGeometry.appendCubicSegment__pathMorphGeometry((cast contour), (cast (x0 + (((controlX - x0) * 2.0) / 3.0)) : Float), (cast (y0 + (((controlY - y0) * 2.0) / 3.0)) : Float), (cast (x + (((controlX - x) * 2.0) / 3.0)) : Float), (cast (y + (((controlY - y) * 2.0) / 3.0)) : Float), (cast x : Float), (cast y : Float));
   }
 
   public static function closeCubicContour__pathMorphGeometry(contour:CubicContour__pathMorphGeometry):Void {
     if ((cast ((cast !_Runtime.strictEquals((cast contour : CubicContour__pathMorphGeometry).currentX, (cast contour : CubicContour__pathMorphGeometry).x) : Bool) || (cast !_Runtime.strictEquals((cast contour : CubicContour__pathMorphGeometry).currentY, (cast contour : CubicContour__pathMorphGeometry).y) : Bool)) : Bool)) {
-      PathMorphGeometry.appendLineAsCubic__pathMorphGeometry(contour, (cast (cast contour : CubicContour__pathMorphGeometry).x : Float), (cast (cast contour : CubicContour__pathMorphGeometry).y : Float));
+      PathMorphGeometry.appendLineAsCubic__pathMorphGeometry((cast contour), (cast (cast contour : CubicContour__pathMorphGeometry).x : Float), (cast (cast contour : CubicContour__pathMorphGeometry).y : Float));
     }
     ((cast contour : CubicContour__pathMorphGeometry).closed = true);
   }
@@ -295,29 +295,30 @@ class PathMorphGeometry {
     var contours:Array<CubicContour__pathMorphGeometry> = cast _Runtime.UNDEFINED;
     var contour:Null<CubicContour__pathMorphGeometry> = cast _Runtime.UNDEFINED;
     var ensureContour:Void->CubicContour__pathMorphGeometry = cast _Runtime.UNDEFINED;
-    contours = cast ([] : Array<Dynamic>);
+    contours = (cast cast ([] : Array<Dynamic>));
     contour = null;
     ensureContour = (cast function():CubicContour__pathMorphGeometry {
       if ((cast !_Runtime.strictEquals(contour, null) : Bool)) { return cast contour; }
-      (contour = cast ((cast PathMorphGeometry.createCubicContour__pathMorphGeometry((cast 0.0 : Float), (cast 0.0 : Float)) : Null<CubicContour__pathMorphGeometry>) : Dynamic));
+      (contour = cast ((cast PathMorphGeometry.createCubicContour__pathMorphGeometry((cast 0.0 : Float), (cast 0.0 : Float)) : CubicContour__pathMorphGeometry) : Dynamic));
       _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
       return cast contour;
-    } : Void->CubicContour__pathMorphGeometry);
-    forEachPathSegment((cast path : Path), function(segment:PathSegment):Void {
+      return cast _Runtime.UNDEFINED;
+    });
+    forEachPathSegment((cast path), (cast function(segment:PathSegment):Void {
       if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'moveTo') : Bool)) {
-        (contour = cast ((cast PathMorphGeometry.createCubicContour__pathMorphGeometry((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).x : Float), (cast (cast segment : { var kind:String; var x:Float; var y:Float; }).y : Float)) : Null<CubicContour__pathMorphGeometry>) : Dynamic));
+        (contour = cast ((cast PathMorphGeometry.createCubicContour__pathMorphGeometry((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).x : Float), (cast (cast segment : { var kind:String; var x:Float; var y:Float; }).y : Float)) : CubicContour__pathMorphGeometry) : Dynamic));
         _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
       } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'lineTo') : Bool)) {
-        PathMorphGeometry.appendLineAsCubic__pathMorphGeometry((cast ensureContour() : CubicContour__pathMorphGeometry), (cast (cast segment : { var kind:String; var x:Float; var y:Float; }).x : Float), (cast (cast segment : { var kind:String; var x:Float; var y:Float; }).y : Float));
+        PathMorphGeometry.appendLineAsCubic__pathMorphGeometry((cast (cast ensureContour() : CubicContour__pathMorphGeometry)), (cast (cast segment : { var kind:String; var x:Float; var y:Float; }).x : Float), (cast (cast segment : { var kind:String; var x:Float; var y:Float; }).y : Float));
       } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'curveTo') : Bool)) {
-        PathMorphGeometry.appendQuadraticAsCubic__pathMorphGeometry((cast ensureContour() : CubicContour__pathMorphGeometry), (cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).controlX : Float), (cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).controlY : Float), (cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).x : Float), (cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).y : Float));
+        PathMorphGeometry.appendQuadraticAsCubic__pathMorphGeometry((cast (cast ensureContour() : CubicContour__pathMorphGeometry)), (cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).controlX : Float), (cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).controlY : Float), (cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).x : Float), (cast (cast segment : { var kind:String; var controlX:Float; var controlY:Float; var x:Float; var y:Float; }).y : Float));
       } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'cubicCurveTo') : Bool)) {
-        PathMorphGeometry.appendCubicSegment__pathMorphGeometry((cast ensureContour() : CubicContour__pathMorphGeometry), (cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control1X : Float), (cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control1Y : Float), (cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control2X : Float), (cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control2Y : Float), (cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).x : Float), (cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).y : Float));
+        PathMorphGeometry.appendCubicSegment__pathMorphGeometry((cast (cast ensureContour() : CubicContour__pathMorphGeometry)), (cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control1X : Float), (cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control1Y : Float), (cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control2X : Float), (cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).control2Y : Float), (cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).x : Float), (cast (cast segment : { var kind:String; var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x:Float; var y:Float; }).y : Float));
       } else { if ((cast ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'close') : Bool) && (cast !_Runtime.strictEquals(contour, null) : Bool)) : Bool)) {
-        PathMorphGeometry.closeCubicContour__pathMorphGeometry(contour);
+        PathMorphGeometry.closeCubicContour__pathMorphGeometry((cast contour));
         (contour = cast (null : Dynamic));
       } } } } }
-    });
+    }));
     return cast contours;
     return cast null;
   }
@@ -326,8 +327,8 @@ class PathMorphGeometry {
     var targetCount:Float = cast _Runtime.UNDEFINED;
     targetCount = HxMath.max(_Runtime.field((cast start : CubicContour__pathMorphGeometry).segments, 'length'), _Runtime.field((cast end : CubicContour__pathMorphGeometry).segments, 'length'));
     if ((cast _Runtime.strictEquals(targetCount, 0.0) : Bool)) { return; }
-    ((cast start : CubicContour__pathMorphGeometry).segments = (cast PathMorphGeometry.subdivideCubicSegments__pathMorphGeometry((cast start : CubicContour__pathMorphGeometry).segments, (cast targetCount : Float), (cast (cast start : CubicContour__pathMorphGeometry).x : Float), (cast (cast start : CubicContour__pathMorphGeometry).y : Float)) : Array<CubicSegment__pathMorphGeometry>));
-    ((cast end : CubicContour__pathMorphGeometry).segments = (cast PathMorphGeometry.subdivideCubicSegments__pathMorphGeometry((cast end : CubicContour__pathMorphGeometry).segments, (cast targetCount : Float), (cast (cast end : CubicContour__pathMorphGeometry).x : Float), (cast (cast end : CubicContour__pathMorphGeometry).y : Float)) : Array<CubicSegment__pathMorphGeometry>));
+    ((cast start : CubicContour__pathMorphGeometry).segments = (cast PathMorphGeometry.subdivideCubicSegments__pathMorphGeometry((cast (cast start : CubicContour__pathMorphGeometry).segments), (cast targetCount : Float), (cast (cast start : CubicContour__pathMorphGeometry).x : Float), (cast (cast start : CubicContour__pathMorphGeometry).y : Float)) : Array<CubicSegment__pathMorphGeometry>));
+    ((cast end : CubicContour__pathMorphGeometry).segments = (cast PathMorphGeometry.subdivideCubicSegments__pathMorphGeometry((cast (cast end : CubicContour__pathMorphGeometry).segments), (cast targetCount : Float), (cast (cast end : CubicContour__pathMorphGeometry).x : Float), (cast (cast end : CubicContour__pathMorphGeometry).y : Float)) : Array<CubicSegment__pathMorphGeometry>));
   }
 
   public static function pointDistance__pathMorphGeometry(x0:Float, y0:Float, x1:Float, y1:Float):Float {
@@ -374,7 +375,7 @@ class PathMorphGeometry {
     var segments:Array<CubicSegment__pathMorphGeometry> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(source, 'length'), targetCount) : Bool)) { return cast _Runtime.slice(source, 0, null); }
     if ((cast _Runtime.strictEquals(_Runtime.field(source, 'length'), 0.0) : Bool)) {
-      var segments:Array<CubicSegment__pathMorphGeometry> = cast ([] : Array<Dynamic>);
+      var segments:Array<CubicSegment__pathMorphGeometry> = (cast cast ([] : Array<Dynamic>));
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast targetCount : Float)) : Bool)) {
@@ -406,7 +407,7 @@ class PathMorphGeometry {
         total++;
       }
     }
-    segments = cast ([] : Array<Dynamic>);
+    segments = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
@@ -414,7 +415,7 @@ class PathMorphGeometry {
         {
           var parts:Float = flighthq._internal._StaticIndex.readArray(partCounts, i);
           while ((cast ((cast parts : Float) > (cast 1.0 : Float)) : Bool)) {
-            var split:Array<CubicSegment__pathMorphGeometry> = (cast PathMorphGeometry.splitCubicSegment__pathMorphGeometry(remainder, (cast (1.0 / parts) : Float)) : Array<CubicSegment__pathMorphGeometry>);
+            var split:Array<CubicSegment__pathMorphGeometry> = (cast PathMorphGeometry.splitCubicSegment__pathMorphGeometry((cast remainder), (cast (1.0 / parts) : Float)) : Array<CubicSegment__pathMorphGeometry>);
             _Runtime.callProperty(segments, 'push', cast ([flighthq._internal._StaticIndex.readArray(split, 0.0)] : Array<Dynamic>));
             (remainder = cast (flighthq._internal._StaticIndex.readArray(split, 1.0) : Dynamic));
             parts--;

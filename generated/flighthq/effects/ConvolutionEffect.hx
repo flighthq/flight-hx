@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class ConvolutionEffect {
-  public static function createConvolutionEffect(options:Dynamic):flighthq.types.ConvolutionEffect {
+  public static function createConvolutionEffect(options:flighthq._internal._Omit<flighthq.types.ConvolutionEffect, String>):flighthq.types.ConvolutionEffect {
     return cast _Runtime.mergeObjects([{ kind: 'ConvolutionEffect' }, options]);
     return cast null;
   }
@@ -25,11 +25,11 @@ class ConvolutionEffect {
   }
 
   public static function registerConvolutionEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'ConvolutionEffect' : String), ConvolutionEffect.resolveConvolutionEffectPadding__convolutionEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'ConvolutionEffect' : String), (cast ConvolutionEffect.resolveConvolutionEffectPadding__convolutionEffect));
   }
 
   public static function resolveConvolutionEffectPadding__convolutionEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getConvolutionEffectPadding((cast (cast effect : flighthq.types.ConvolutionEffect) : flighthq.types.ConvolutionEffect)) : RenderEffectPadding);
+    return cast (cast getConvolutionEffectPadding((cast (cast effect : flighthq.types.ConvolutionEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

@@ -14,11 +14,11 @@ import flighthq.types._internal._BlendModeValues.BlendModeValue;
 class SurfaceMaterial {
   public static function createSurfaceMaterial(kind:Kind, ?opts:SurfaceMaterialOptions):flighthq.types.SurfaceMaterial {
     var material:flighthq.types.SurfaceMaterial = cast _Runtime.UNDEFINED;
-    material = (cast (cast createMaterial((cast kind : String)) : flighthq.types.SurfaceMaterial) : flighthq.types.SurfaceMaterial);
-    ((cast material : flighthq.types.SurfaceMaterial).alphaCutoff = _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaCutoff'), function():Dynamic return cast SurfaceMaterial.DEFAULT_ALPHA_CUTOFF__surfaceMaterial));
-    ((cast material : flighthq.types.SurfaceMaterial).alphaMode = _Runtime.coalesce(_Runtime.optionalField(opts, 'alphaMode'), function():Dynamic return cast SurfaceMaterial.DEFAULT_ALPHA_MODE__surfaceMaterial));
-    ((cast material : flighthq.types.SurfaceMaterial).blendMode = _Runtime.coalesce(_Runtime.optionalField(opts, 'blendMode'), function():Dynamic return cast (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal));
-    ((cast material : flighthq.types.SurfaceMaterial).doubleSided = _Runtime.coalesce(_Runtime.optionalField(opts, 'doubleSided'), function():Dynamic return cast SurfaceMaterial.DEFAULT_DOUBLE_SIDED__surfaceMaterial));
+    material = (cast createMaterial((cast kind : String)) : flighthq.types.SurfaceMaterial);
+    ((cast material : flighthq.types.SurfaceMaterial).alphaCutoff = _Runtime.coalesce(({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var alphaCutoff:Null<Float>; }).alphaCutoff; }), function():Dynamic return cast SurfaceMaterial.DEFAULT_ALPHA_CUTOFF__surfaceMaterial));
+    ((cast material : flighthq.types.SurfaceMaterial).alphaMode = _Runtime.coalesce(({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var alphaMode:Null<String>; }).alphaMode; }), function():Dynamic return cast SurfaceMaterial.DEFAULT_ALPHA_MODE__surfaceMaterial));
+    ((cast material : flighthq.types.SurfaceMaterial).blendMode = _Runtime.coalesce(({ final __structural2 = opts; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var blendMode:Null<String>; }).blendMode; }), function():Dynamic return cast (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal));
+    ((cast material : flighthq.types.SurfaceMaterial).doubleSided = _Runtime.coalesce(({ final __structural3 = opts; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var doubleSided:Null<Bool>; }).doubleSided; }), function():Dynamic return cast SurfaceMaterial.DEFAULT_DOUBLE_SIDED__surfaceMaterial));
     return cast material;
     return cast null;
   }

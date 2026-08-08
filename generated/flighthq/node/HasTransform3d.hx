@@ -20,9 +20,9 @@ class HasTransform3d {
   }
 
   @:noCompletion
-  public static function initTransform3DTrait(target:HasTransform3D, ?obj:Dynamic):Void {
-    (target.rotation = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'rotation'), function():Dynamic return cast (cast createQuaternion((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Quaternion)) : Dynamic));
-    (target.scale = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'scale'), function():Dynamic return cast (cast createVector3((cast 1.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast 1.0 : Null<Float>)) : Vector3)) : Dynamic));
-    (target.position = cast (_Runtime.coalesce(_Runtime.optionalField(obj, 'position'), function():Dynamic return cast (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3)) : Dynamic));
+  public static function initTransform3DTrait(target:HasTransform3D, ?obj:flighthq._internal._Partial<HasTransform3D>):Void {
+    (target.rotation = cast (_Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var rotation:Null<Quaternion>; }).rotation; }), function():Dynamic return cast (cast createQuaternion((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Quaternion)) : Dynamic));
+    (target.scale = cast (_Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var scale:Null<Vector3>; }).scale; }), function():Dynamic return cast (cast createVector3((cast 1.0), (cast 1.0), (cast 1.0)) : Vector3)) : Dynamic));
+    (target.position = cast (_Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var position:Null<Vector3>; }).position; }), function():Dynamic return cast (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector3)) : Dynamic));
   }
 }

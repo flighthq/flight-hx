@@ -11,7 +11,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class BevelEffect {
-  public static function createBevelEffect(?options:Dynamic):flighthq.types.BevelEffect {
+  public static function createBevelEffect(?options:flighthq._internal._Omit<flighthq.types.BevelEffect, String>):flighthq.types.BevelEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BevelEffect' }, options]);
     return cast null;
@@ -27,11 +27,11 @@ class BevelEffect {
   }
 
   public static function registerBevelEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'BevelEffect' : String), BevelEffect.resolveBevelEffectPadding__bevelEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'BevelEffect' : String), (cast BevelEffect.resolveBevelEffectPadding__bevelEffect));
   }
 
   public static function resolveBevelEffectPadding__bevelEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getBevelEffectPadding((cast (cast effect : flighthq.types.BevelEffect) : flighthq.types.BevelEffect)) : RenderEffectPadding);
+    return cast (cast getBevelEffectPadding((cast (cast effect : flighthq.types.BevelEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

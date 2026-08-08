@@ -13,7 +13,7 @@ import flighthq.types.Connectivity.ConnectivityReachabilityOptions;
 import flighthq.types.Connectivity.ConnectivityStatus;
 import flighthq.types.Signal;
 
-typedef WebConnectivityConnection__connectivity = { @:optional var type:String; @:optional var downlink:Float; @:optional var downlinkMax:Float; @:optional var effectiveType:String; @:optional var rtt:Float; @:optional var saveData:Bool; @:optional var addEventListener:String->Void->Void->Void; @:optional var removeEventListener:String->Void->Void->Void; };
+typedef WebConnectivityConnection__connectivity = { @:optional var type:String; @:optional var downlink:Float; @:optional var downlinkMax:Float; @:optional var effectiveType:String; @:optional var rtt:Float; @:optional var saveData:Bool; @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; };
 
 class Connectivity {
   public static var _backend__connectivity:Null<ConnectivityBackend> = _Runtime.explicitNull();
@@ -28,14 +28,14 @@ class Connectivity {
     var controller:flighthq._internal.dom.AbortController = cast _Runtime.UNDEFINED;
     var onAbort:Void->Void = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('AbortSignal'), 'undefined') : Bool) && (cast _Runtime.hasField(flighthq._internal._HostValueLut.get('AbortSignal'), 'any') : Bool)) : Bool)) {
-      return cast (cast (cast (cast flighthq._internal._HostValueLut.get('AbortSignal') : flighthq._internal._Any) : { var any:Array<flighthq._internal.dom.AbortSignal>->flighthq._internal.dom.AbortSignal; }) : { var any:Array<flighthq._internal.dom.AbortSignal>->flighthq._internal.dom.AbortSignal; }).any(cast ([a, b] : Array<Dynamic>));
+      return cast (cast (cast (cast flighthq._internal._HostValueLut.get('AbortSignal') : flighthq._internal._Any) : { var any:Array<flighthq._internal.dom.AbortSignal>->flighthq._internal.dom.AbortSignal; }) : { var any:Array<flighthq._internal.dom.AbortSignal>->flighthq._internal.dom.AbortSignal; }).any((cast cast ([a, b] : Array<Dynamic>)));
     }
     controller = _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []);
     onAbort = (cast function():Void {
       (cast controller : flighthq._internal.dom.AbortController).abort();
       a.removeEventListener('abort', onAbort);
       b.removeEventListener('abort', onAbort);
-    } : Void->Void);
+    });
     a.addEventListener('abort', onAbort, { once: true });
     b.addEventListener('abort', onAbort, { once: true });
     return cast (cast controller : flighthq._internal.dom.AbortController).signal;
@@ -49,15 +49,15 @@ class Connectivity {
     var wasType:ConnectivityConnectionType = cast _Runtime.UNDEFINED;
     var wasMetered:Bool = cast _Runtime.UNDEFINED;
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
-    detachConnectivity((cast net : flighthq.types.Connectivity));
+    detachConnectivity((cast net));
     backend = (cast getConnectivityBackend() : ConnectivityBackend);
-    initial = (cast backend : ConnectivityBackend).getStatus(Connectivity._scratch__connectivity);
+    initial = (cast backend : ConnectivityBackend).getStatus((cast Connectivity._scratch__connectivity));
     wasOnline = initial.online;
     wasType = initial.type;
     wasMetered = initial.metered;
-    unsubscribe = (cast backend : ConnectivityBackend).subscribe(function():Void {
+    unsubscribe = (cast backend : ConnectivityBackend).subscribe((cast function():Void {
       var status:ConnectivityStatus = cast _Runtime.UNDEFINED;
-      status = (cast backend : ConnectivityBackend).getStatus(Connectivity._scratch__connectivity);
+      status = (cast backend : ConnectivityBackend).getStatus((cast Connectivity._scratch__connectivity));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[net.onChange], [status]]), 1);
       if ((cast !_Runtime.strictEquals(status.online, wasOnline) : Bool)) {
         (wasOnline = cast (status.online : Dynamic));
@@ -71,8 +71,8 @@ class Connectivity {
         (wasMetered = cast (status.metered : Dynamic));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[net.onMeteredChange], [status.metered]]), 1);
       }
-    });
-    ((cast Connectivity._subscriptions__connectivity : flighthq._internal._WeakMap<flighthq.types.Connectivity, Void->Void>).set(net, unsubscribe));
+    }));
+    ((cast Connectivity._subscriptions__connectivity : flighthq._internal._WeakMap<flighthq.types.Connectivity, Void->Void>).set(net, (cast unsubscribe)));
   }
 
   public static function createConnectivity():flighthq.types.Connectivity {
@@ -94,14 +94,15 @@ class Connectivity {
       nav = ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
       (out.online = cast (_Runtime.coalesce(({ final __hostType0 = nav; __hostType0 == null ? _Runtime.UNDEFINED : (cast __hostType0 : flighthq._internal.dom.Navigator).onLine; }), function():Dynamic return cast true) : Dynamic));
       conn = (cast Connectivity.getWebConnection__connectivity() : Null<WebConnectivityConnection__connectivity>);
-      (out.type = cast ((cast Connectivity.mapWebConnectionType__connectivity((cast _Runtime.optionalField(conn, 'type') : Null<String>)) : ConnectivityConnectionType) : Dynamic));
-      (out.downlink = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(conn, 'downlink')), 'number') : Bool) ? (cast (cast conn : WebConnectivityConnection__connectivity).downlink : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.downlinkMax = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(conn, 'downlinkMax')), 'number') : Bool) ? (cast (cast conn : WebConnectivityConnection__connectivity).downlinkMax : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.effectiveType = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(conn, 'effectiveType')), 'string') : Bool) ? (cast (cast conn : WebConnectivityConnection__connectivity).effectiveType : Dynamic) : (cast '' : Dynamic)) : Dynamic));
-      (out.rtt = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(conn, 'rtt')), 'number') : Bool) ? (cast (cast conn : WebConnectivityConnection__connectivity).rtt : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.saveData = cast (_Runtime.strictEquals(_Runtime.optionalField(conn, 'saveData'), true) : Dynamic));
+      (out.type = cast ((cast Connectivity.mapWebConnectionType__connectivity((cast ({ final __structural1 = conn; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var type:Null<String>; }).type; }))) : ConnectivityConnectionType) : Dynamic));
+      (out.downlink = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural2 = conn; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var downlink:Null<Float>; }).downlink; })), 'number') : Bool) ? (cast (cast conn : WebConnectivityConnection__connectivity).downlink : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.downlinkMax = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural3 = conn; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var downlinkMax:Null<Float>; }).downlinkMax; })), 'number') : Bool) ? (cast (cast conn : WebConnectivityConnection__connectivity).downlinkMax : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.effectiveType = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural4 = conn; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var effectiveType:Null<String>; }).effectiveType; })), 'string') : Bool) ? (cast (cast conn : WebConnectivityConnection__connectivity).effectiveType : Dynamic) : (cast '' : Dynamic)) : Dynamic));
+      (out.rtt = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural5 = conn; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var rtt:Null<Float>; }).rtt; })), 'number') : Bool) ? (cast (cast conn : WebConnectivityConnection__connectivity).rtt : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+      (out.saveData = cast (_Runtime.strictEquals(({ final __structural6 = conn; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var saveData:Null<Bool>; }).saveData; }), true) : Dynamic));
       (out.metered = cast (((cast out.saveData : Bool) || (cast _Runtime.strictEquals(out.type, 'cellular') : Bool)) : Dynamic));
       return cast out;
+      return cast _Runtime.UNDEFINED;
     }, detectReachability: function(options:ConnectivityReachabilityOptions, out:ConnectivityReachability):flighthq._internal._Promise<ConnectivityReachability> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
@@ -110,26 +111,26 @@ class Connectivity {
           var timerId:flighthq._internal.dom.Timeout = cast _Runtime.UNDEFINED;
           var combinedSignal:flighthq._internal.dom.AbortSignal = cast _Runtime.UNDEFINED;
           var start:Float = cast _Runtime.UNDEFINED;
-          var __flowBranch1:Dynamic;
+          var __flowBranch7:Dynamic;
           if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('fetch'), 'undefined') : Bool)) {
-            __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch7 = flighthq._internal._Async.protect(function():Dynamic {
               (out.reachable = cast (false : Dynamic));
               (out.latency = cast (-1.0 : Dynamic));
               return flighthq._internal._Async.flowReturn(out);
             });
           } else {
-            __flowBranch1 = flighthq._internal._Async.flowNormal();
+            __flowBranch7 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch7, function():Dynamic {
             timeout = _Runtime.coalesce(options.timeout, function():Dynamic return cast 5000.0);
             controller = _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []);
-            timerId = _Runtime.setTimeout(function():Void return (cast controller : flighthq._internal.dom.AbortController).abort(), timeout);
-            combinedSignal = _Runtime.select(options.signal, function():Dynamic return cast (cast Connectivity.anyAbortSignal__connectivity((cast options.signal : flighthq._internal.dom.AbortSignal), (cast (cast controller : flighthq._internal.dom.AbortController).signal : flighthq._internal.dom.AbortSignal)) : flighthq._internal.dom.AbortSignal), function():Dynamic return cast (cast controller : flighthq._internal.dom.AbortController).signal);
+            timerId = _Runtime.setTimeout(function():Void { (cast controller : flighthq._internal.dom.AbortController).abort(); }, timeout);
+            combinedSignal = _Runtime.select(options.signal, function():Dynamic return cast (cast Connectivity.anyAbortSignal__connectivity((cast options.signal), (cast (cast controller : flighthq._internal.dom.AbortController).signal)) : flighthq._internal.dom.AbortSignal), function():Dynamic return cast (cast controller : flighthq._internal.dom.AbortController).signal);
             start = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>));
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var response:flighthq._internal.dom.Response = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('fetch'), cast ([options.url, { method: 'HEAD', cache: 'no-store', signal: combinedSignal }] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
-                response = __awaitValue2;
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('fetch'), cast ([options.url, { method: 'HEAD', cache: 'no-store', signal: combinedSignal }] : Array<Dynamic>)), function(__awaitValue8:Dynamic):Dynamic {
+                response = __awaitValue8;
                 _Runtime.clearTimeout(timerId);
                 (out.reachable = cast ((cast response : flighthq._internal.dom.Response).ok : Dynamic));
                 (out.latency = cast (_Runtime.subtractNumbers(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)), start) : Dynamic));
@@ -157,12 +158,13 @@ class Connectivity {
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['online', listener] : Array<Dynamic>));
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['offline', listener] : Array<Dynamic>));
       conn = (cast Connectivity.getWebConnection__connectivity() : Null<WebConnectivityConnection__connectivity>);
-      _Runtime.callOptionalProperty(conn, 'addEventListener', cast (['change', listener] : Array<Dynamic>));
+      _Runtime.callOptionalValue(({ final __structural9 = conn; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var addEventListener:Null<String->(Void->Void)->Void>; }).addEventListener; }), cast (['change', listener] : Array<Dynamic>));
       return cast function():Void {
         flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['online', listener] : Array<Dynamic>));
         flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['offline', listener] : Array<Dynamic>));
-        _Runtime.callOptionalProperty(conn, 'removeEventListener', cast (['change', listener] : Array<Dynamic>));
+        _Runtime.callOptionalValue(({ final __structural10 = conn; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; }), cast (['change', listener] : Array<Dynamic>));
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
@@ -182,12 +184,12 @@ class Connectivity {
       var webBackend:ConnectivityBackend = cast _Runtime.UNDEFINED;
       backend = (cast getConnectivityBackend() : ConnectivityBackend);
       if ((cast !_Runtime.strictEquals((cast backend : ConnectivityBackend).detectReachability, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        return cast (cast backend : ConnectivityBackend).detectReachability(options, out);
+        return cast (cast backend : ConnectivityBackend).detectReachability((cast options), (cast out));
       }
-      if ((cast _Runtime.strictEquals(Connectivity._cachedWebBackend__connectivity, null) : Bool)) { (Connectivity._cachedWebBackend__connectivity = cast ((cast createWebConnectivityBackend() : Null<ConnectivityBackend>) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(Connectivity._cachedWebBackend__connectivity, null) : Bool)) { (Connectivity._cachedWebBackend__connectivity = cast ((cast createWebConnectivityBackend() : ConnectivityBackend) : Dynamic)); }
       webBackend = Connectivity._cachedWebBackend__connectivity;
       if ((cast !_Runtime.strictEquals((cast webBackend : ConnectivityBackend).detectReachability, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        return cast (cast webBackend : ConnectivityBackend).detectReachability(options, out);
+        return cast (cast webBackend : ConnectivityBackend).detectReachability((cast options), (cast out));
       }
       (out.reachable = cast (false : Dynamic));
       (out.latency = cast (-1.0 : Dynamic));
@@ -197,18 +199,18 @@ class Connectivity {
   }
 
   public static function disposeConnectivity(net:flighthq.types.Connectivity):Void {
-    detachConnectivity((cast net : flighthq.types.Connectivity));
+    detachConnectivity((cast net));
   }
 
   @:noCompletion
   public static function getConnectivityBackend():ConnectivityBackend {
-    if ((cast _Runtime.strictEquals(Connectivity._backend__connectivity, null) : Bool)) { (Connectivity._backend__connectivity = cast ((cast createWebConnectivityBackend() : Null<ConnectivityBackend>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Connectivity._backend__connectivity, null) : Bool)) { (Connectivity._backend__connectivity = cast ((cast createWebConnectivityBackend() : ConnectivityBackend) : Dynamic)); }
     return cast Connectivity._backend__connectivity;
     return cast null;
   }
 
   public static function getConnectivityStatus(out:ConnectivityStatus):ConnectivityStatus {
-    return cast (cast (cast getConnectivityBackend() : ConnectivityBackend) : ConnectivityBackend).getStatus(out);
+    return cast (cast (cast getConnectivityBackend() : ConnectivityBackend) : ConnectivityBackend).getStatus((cast out));
     return cast null;
   }
 
@@ -226,17 +228,17 @@ class Connectivity {
   }
 
   public static function isConnectivityMetered():Bool {
-    return cast (cast (cast getConnectivityBackend() : ConnectivityBackend) : ConnectivityBackend).getStatus(Connectivity._scratch__connectivity).metered;
+    return cast (cast (cast (cast getConnectivityBackend() : ConnectivityBackend) : ConnectivityBackend).getStatus((cast Connectivity._scratch__connectivity)) : { var metered:Bool; }).metered;
     return cast null;
   }
 
   public static function isConnectivityOnline():Bool {
-    return cast (cast (cast getConnectivityBackend() : ConnectivityBackend) : ConnectivityBackend).getStatus(Connectivity._scratch__connectivity).online;
+    return cast (cast (cast (cast getConnectivityBackend() : ConnectivityBackend) : ConnectivityBackend).getStatus((cast Connectivity._scratch__connectivity)) : { var online:Bool; }).online;
     return cast null;
   }
 
   public static function isConnectivitySaveDataEnabled():Bool {
-    return cast (cast (cast getConnectivityBackend() : ConnectivityBackend) : ConnectivityBackend).getStatus(Connectivity._scratch__connectivity).saveData;
+    return cast (cast (cast (cast getConnectivityBackend() : ConnectivityBackend) : ConnectivityBackend).getStatus((cast Connectivity._scratch__connectivity)) : { var saveData:Bool; }).saveData;
     return cast null;
   }
 

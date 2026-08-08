@@ -20,8 +20,8 @@ class TextShaperItemize {
     var runScript:String = cast _Runtime.UNDEFINED;
     var runDirection:TextDirection = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    baseDirection = _Runtime.coalesce(_Runtime.optionalField(options, 'direction'), function():Dynamic return cast 'LeftToRight');
-    items = cast ([] : Array<Dynamic>);
+    baseDirection = _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var direction:Null<String>; }).direction; }), function():Dynamic return cast 'LeftToRight');
+    items = (cast cast ([] : Array<Dynamic>));
     runStart = 0.0;
     runScript = '';
     runDirection = baseDirection;
@@ -66,12 +66,12 @@ class TextShaperItemize {
     var items:Array<TextItem> = cast _Runtime.UNDEFINED;
     var result:Array<ShapedRun> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    items = (cast itemizeText((cast text : String), (cast format : TextFormat), (cast options : Null<TextShaperOptions>)) : Array<TextItem>);
-    result = cast ([] : Array<Dynamic>);
+    items = (cast itemizeText((cast text : String), (cast format), (cast options)) : Array<TextItem>);
+    result = (cast cast ([] : Array<Dynamic>));
     for (item in _Runtime.iterable(items)) {
       var sub:String = _Runtime.slice(text, (cast item : TextItem).start, (cast item : TextItem).end);
-      var runOptions:{ var direction:Null<String>; var script:String; @:optional var features:Null<Array<TextFeature>>; @:optional var language:Null<String>; @:optional var variations:Null<Array<FontVariation>>; } = _Runtime.mergeObjects([options, { direction: ((cast _Runtime.strictEquals((cast item : TextItem).direction, 'TopToBottom') : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast (cast item : TextItem).direction : Dynamic)) }, { script: (cast item : TextItem).script }]);
-      var run:Null<ShapedRun> = (cast shapeTextRun((cast sub : String), (cast format : TextFormat), runOptions) : Null<ShapedRun>);
+      var runOptions:{ var direction:Null<String>; var script:String; @:optional var features:Null<Array<TextFeature>>; @:optional var language:Null<String>; @:optional var variations:Null<Array<FontVariation>>; } = (cast _Runtime.mergeObjects([options, { direction: ((cast _Runtime.strictEquals((cast item : TextItem).direction, 'TopToBottom') : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast (cast item : TextItem).direction : Dynamic)) }, { script: (cast item : TextItem).script }]));
+      var run:Null<ShapedRun> = (cast shapeTextRun((cast sub : String), (cast format), (cast runOptions)) : Null<ShapedRun>);
       if ((cast !_Runtime.strictEquals(run, null) : Bool)) { _Runtime.callProperty(result, 'push', cast ([run] : Array<Dynamic>)); }
     }
     return cast result;

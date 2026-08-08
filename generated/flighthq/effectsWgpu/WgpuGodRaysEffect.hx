@@ -32,23 +32,23 @@ class WgpuGodRaysEffect {
     weight = _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4);
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.6);
     samples = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 64.0)));
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'atmospheric.godRays.' + Std.string(samples) + '' : String), (cast (cast WgpuGodRaysEffect.buildGodRaysFragment__wgpuGodRaysEffect((cast samples : Float)) : String) : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'atmospheric.godRays.' + Std.string(samples) + '' : String), (cast (cast WgpuGodRaysEffect.buildGodRaysFragment__wgpuGodRaysEffect((cast samples : Float)) : String) : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, centerX);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, centerY);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, density);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, decay);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, weight);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, exposure);
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
-  public static final defaultWgpuGodRaysEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyGodRaysEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : GodRaysEffect) : GodRaysEffect));
-  };
+  public static final defaultWgpuGodRaysEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyGodRaysEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : GodRaysEffect)));
+  });
 
   public static function registerWgpuGodRaysEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'GodRaysEffect' : String), (cast defaultWgpuGodRaysEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'GodRaysEffect' : String), (cast defaultWgpuGodRaysEffectRunner));
   }
 
   public static function buildGodRaysFragment__wgpuGodRaysEffect(samples:Float):String {

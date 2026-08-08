@@ -23,15 +23,15 @@ import flighthq.types.RenderState;
 
 class Debug {
   public static function _applyDebugLevels__debug(level:LogLevel, channels:Array<String>):Void {
-    setLogLevel((cast level : LogLevel));
+    setLogLevel((cast level));
     for (channel in _Runtime.iterable(channels)) {
-      setLogChannelLevel((cast channel : String), (cast level : LogLevel));
+      setLogChannelLevel((cast channel : String), (cast level));
     }
   }
 
   public static function _collectDebugChannels__debug(subsystems:Array<DebugSubsystemHooks>, extra:Null<Array<String>>):Array<String> {
     var channels:Array<String> = cast _Runtime.UNDEFINED;
-    channels = cast ([] : Array<Dynamic>);
+    channels = (cast cast ([] : Array<Dynamic>));
     for (hooks in _Runtime.iterable(subsystems)) {
       if ((cast !_Runtime.strictEquals(_Runtime.field(hooks, 'channels'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(channels, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(hooks, 'channels'))])); }
     }
@@ -42,25 +42,25 @@ class Debug {
 
   public static var _enabled__debug:Bool = false;
 
-  public static final _enabledSubsystems__debug:Array<DebugSubsystemHooks> = cast ([] : Array<Dynamic>);
+  public static final _enabledSubsystems__debug:Array<DebugSubsystemHooks> = (cast cast ([] : Array<Dynamic>));
 
   public static function _installDebugSink__debug(sink:LogSink):Void {
     (Debug._installedSink__debug = cast (sink : Dynamic));
-    addLogSink((cast sink : LogSink));
+    addLogSink((cast sink));
   }
 
   public static var _installedSink__debug:Null<LogSink> = _Runtime.explicitNull();
 
   public static function _removeDebugSink__debug():Void {
     if ((cast _Runtime.strictEquals(Debug._installedSink__debug, null) : Bool)) { return; }
-    (cast removeLogSink((cast Debug._installedSink__debug : LogSink)) : Bool);
+    (cast removeLogSink((cast Debug._installedSink__debug)) : Bool);
     (Debug._installedSink__debug = cast (null : Dynamic));
   }
 
   public static function _resolveDebugSubsystems__debug(names:Null<Array<DebugSubsystemName>>):Array<DebugSubsystemHooks> {
     var resolved:Array<DebugSubsystemHooks> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(names, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.concatArrays([_Runtime.toArray(((cast Debug._subsystems__debug : flighthq._internal._Map<String, DebugSubsystemHooks>).values()))]); }
-    resolved = cast ([] : Array<Dynamic>);
+    resolved = (cast cast ([] : Array<Dynamic>));
     for (name in _Runtime.iterable(names)) {
       var hooks:Null<DebugSubsystemHooks> = ((cast Debug._subsystems__debug : flighthq._internal._Map<String, DebugSubsystemHooks>).get(name));
       if ((cast !_Runtime.strictEquals(hooks, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(resolved, 'push', cast ([hooks] : Array<Dynamic>)); }
@@ -70,7 +70,7 @@ class Debug {
   }
 
   public static function _restoreDebugLevels__debug():Void {
-    setLogLevel((cast Debug._savedGlobalLevel__debug : LogLevel));
+    setLogLevel((cast Debug._savedGlobalLevel__debug));
     clearLogChannelLevels();
   }
 
@@ -101,11 +101,11 @@ class Debug {
     var channels:Array<String> = cast _Runtime.UNDEFINED;
     if ((cast Debug._enabled__debug : Bool)) { return; }
     level = _Runtime.coalesce(_Runtime.field(options, 'level'), function():Dynamic return cast LogLevel.Debug);
-    subsystems = (cast Debug._resolveDebugSubsystems__debug((cast _Runtime.field(options, 'subsystems') : Null<Array<DebugSubsystemName>>)) : Array<DebugSubsystemHooks>);
-    channels = (cast Debug._collectDebugChannels__debug((cast subsystems : Array<DebugSubsystemHooks>), (cast _Runtime.field(options, 'channels') : Null<Array<String>>)) : Array<String>);
+    subsystems = (cast Debug._resolveDebugSubsystems__debug((cast _Runtime.field(options, 'subsystems'))) : Array<DebugSubsystemHooks>);
+    channels = (cast Debug._collectDebugChannels__debug((cast subsystems), (cast _Runtime.field(options, 'channels'))) : Array<String>);
     (Debug._savedGlobalLevel__debug = cast ((cast getLogLevel() : LogLevel) : Dynamic));
-    Debug._applyDebugLevels__debug((cast level : LogLevel), (cast channels : Array<String>));
-    Debug._installDebugSink__debug((cast _Runtime.coalesce(_Runtime.field(options, 'sink'), function():Dynamic return cast (cast createConsoleLogSink(_Runtime.field(_Runtime, 'UNDEFINED')) : LogSink)) : LogSink));
+    Debug._applyDebugLevels__debug((cast level), (cast channels));
+    Debug._installDebugSink__debug((cast _Runtime.coalesce(_Runtime.field(options, 'sink'), function():Dynamic return cast (cast createConsoleLogSink((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : LogSink))));
     for (hooks in _Runtime.iterable(subsystems)) {
       _Runtime.callOptionalProperty(hooks, 'enableGuards', cast ([] : Array<Dynamic>));
       _Runtime.callProperty(Debug._enabledSubsystems__debug, 'push', cast ([hooks] : Array<Dynamic>));
@@ -114,9 +114,9 @@ class Debug {
   }
 
   public static function enableFlightDiagnostics(state:RenderState):Void {
-    enableDebug((cast _Runtime.field(_Runtime, 'UNDEFINED') : DebugOptions));
-    enableColorAdjustmentGuards((cast state : RenderState));
-    enableRenderRegistryGuards((cast state : RenderState));
+    enableDebug((cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    enableColorAdjustmentGuards((cast state));
+    enableRenderRegistryGuards((cast state));
   }
 
   public static function endDebugSpan(timer:Null<LogTimer>):Float {
@@ -139,7 +139,7 @@ class Debug {
   }
 
   public static function registerDebugSubsystem(name:DebugSubsystemName, hooks:DebugSubsystemHooks):Void {
-    ((cast Debug._subsystems__debug : flighthq._internal._Map<String, DebugSubsystemHooks>).set(name, hooks));
+    ((cast Debug._subsystems__debug : flighthq._internal._Map<String, DebugSubsystemHooks>).set(name, (cast hooks)));
   }
 
   public static function unregisterDebugSubsystem(name:DebugSubsystemName):Bool {

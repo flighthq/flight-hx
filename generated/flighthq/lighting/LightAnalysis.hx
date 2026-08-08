@@ -35,9 +35,9 @@ class LightAnalysis {
     var window:Float = cast _Runtime.UNDEFINED;
     var contribution:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast bounds.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
-    centerDx = (bounds.center.x - (cast light : { var position:Vector3; }).position.x);
-    centerDy = (bounds.center.y - (cast light : { var position:Vector3; }).position.y);
-    centerDz = (bounds.center.z - (cast light : { var position:Vector3; }).position.z);
+    centerDx = ((cast bounds.center : { var x:Float; }).x - (cast (cast light : { var position:Vector3; }).position : { var x:Float; }).x);
+    centerDy = ((cast bounds.center : { var y:Float; }).y - (cast (cast light : { var position:Vector3; }).position : { var y:Float; }).y);
+    centerDz = ((cast bounds.center : { var z:Float; }).z - (cast (cast light : { var position:Vector3; }).position : { var z:Float; }).z);
     centerDistance = _Runtime.hypot(centerDx, centerDy, centerDz);
     distance = HxMath.max((centerDistance - bounds.radius), 0.0);
     distanceSquared = (distance * distance);
@@ -47,13 +47,13 @@ class LightAnalysis {
       var windowed:Float = HxMath.max(0.0, HxMath.min(1.0, (1.0 - (factor * factor))));
       (window = cast ((windowed * windowed) : Dynamic));
     }
-    contribution = _Runtime.divideNumbers(((cast getLightLuminance((cast light : Light)) : Float) * window), HxMath.max(distanceSquared, 0.0001));
+    contribution = _Runtime.divideNumbers(((cast getLightLuminance((cast light)) : Float) * window), HxMath.max(distanceSquared, 0.0001));
     if ((cast _Runtime.strictEquals((cast light : { var kind:String; }).kind, SpotLightKind) : Bool)) {
       var spot:SpotLight = (cast light : SpotLight);
-      var directionLength:Float = _Runtime.hypot(_Runtime.field(spot, 'direction').x, _Runtime.field(spot, 'direction').y, _Runtime.field(spot, 'direction').z);
+      var directionLength:Float = _Runtime.hypot((cast _Runtime.field(spot, 'direction') : { var x:Float; }).x, (cast _Runtime.field(spot, 'direction') : { var y:Float; }).y, (cast _Runtime.field(spot, 'direction') : { var z:Float; }).z);
       var inverseRayLength:Float = ((cast ((cast centerDistance : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / centerDistance) : Dynamic) : (cast 0.0 : Dynamic));
       var inverseDirectionLength:Float = ((cast ((cast directionLength : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / directionLength) : Dynamic) : (cast 0.0 : Dynamic));
-      var cosine:Float = ((((_Runtime.multiplyNumbers(_Runtime.field(spot, 'direction').x, centerDx) + _Runtime.multiplyNumbers(_Runtime.field(spot, 'direction').y, centerDy)) + _Runtime.multiplyNumbers(_Runtime.field(spot, 'direction').z, centerDz)) * inverseRayLength) * inverseDirectionLength);
+      var cosine:Float = ((((((cast _Runtime.field(spot, 'direction') : { var x:Float; }).x * centerDx) + ((cast _Runtime.field(spot, 'direction') : { var y:Float; }).y * centerDy)) + ((cast _Runtime.field(spot, 'direction') : { var z:Float; }).z * centerDz)) * inverseRayLength) * inverseDirectionLength);
       (contribution = cast ((contribution * (cast LightAnalysis.smoothstep__lightAnalysis((cast _Runtime.field(spot, 'outerConeCos') : Float), (cast _Runtime.field(spot, 'innerConeCos') : Float), (cast ((cast ((cast centerDistance : Float) > (cast 0.0 : Float)) : Bool) ? (cast cosine : Dynamic) : (cast 1.0 : Dynamic)) : Float)) : Float)) : Dynamic));
     }
     return cast contribution;
@@ -64,9 +64,9 @@ class LightAnalysis {
     var kind:String = cast _Runtime.UNDEFINED;
     kind = _Runtime.field(light, 'kind');
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(kind, AmbientLightKind) : Bool) || (cast _Runtime.strictEquals(kind, HemisphereLightKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, EnvironmentKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, DirectionalLightKind) : Bool)) : Bool)) {
-      (out.center.x = cast (0.0 : Dynamic));
-      (out.center.y = cast (0.0 : Dynamic));
-      (out.center.z = cast (0.0 : Dynamic));
+      ((cast out.center : { var x:Float; }).x = cast (0.0 : Dynamic));
+      ((cast out.center : { var y:Float; }).y = cast (0.0 : Dynamic));
+      ((cast out.center : { var z:Float; }).z = cast (0.0 : Dynamic));
       (out.radius = cast (-1.0 : Dynamic));
       return;
     }
@@ -74,21 +74,21 @@ class LightAnalysis {
       var spatial:PointLight = (cast light : PointLight);
       var range:Float = _Runtime.field(spatial, 'range');
       if ((cast ((cast range : Float) < (cast 0.0 : Float)) : Bool)) {
-        (out.center.x = cast (0.0 : Dynamic));
-        (out.center.y = cast (0.0 : Dynamic));
-        (out.center.z = cast (0.0 : Dynamic));
+        ((cast out.center : { var x:Float; }).x = cast (0.0 : Dynamic));
+        ((cast out.center : { var y:Float; }).y = cast (0.0 : Dynamic));
+        ((cast out.center : { var z:Float; }).z = cast (0.0 : Dynamic));
         (out.radius = cast (-1.0 : Dynamic));
         return;
       }
-      (out.center.x = cast (_Runtime.field(spatial, 'position').x : Dynamic));
-      (out.center.y = cast (_Runtime.field(spatial, 'position').y : Dynamic));
-      (out.center.z = cast (_Runtime.field(spatial, 'position').z : Dynamic));
+      ((cast out.center : { var x:Float; }).x = cast ((cast _Runtime.field(spatial, 'position') : { var x:Float; }).x : Dynamic));
+      ((cast out.center : { var y:Float; }).y = cast ((cast _Runtime.field(spatial, 'position') : { var y:Float; }).y : Dynamic));
+      ((cast out.center : { var z:Float; }).z = cast ((cast _Runtime.field(spatial, 'position') : { var z:Float; }).z : Dynamic));
       (out.radius = cast (range : Dynamic));
       return;
     }
-    (out.center.x = cast (0.0 : Dynamic));
-    (out.center.y = cast (0.0 : Dynamic));
-    (out.center.z = cast (0.0 : Dynamic));
+    ((cast out.center : { var x:Float; }).x = cast (0.0 : Dynamic));
+    ((cast out.center : { var y:Float; }).y = cast (0.0 : Dynamic));
+    ((cast out.center : { var z:Float; }).z = cast (0.0 : Dynamic));
     (out.radius = cast (-1.0 : Dynamic));
   }
 
@@ -120,9 +120,9 @@ class LightAnalysis {
     spatial = (cast light : PointLight);
     if ((cast ((cast _Runtime.field(spatial, 'range') : Float) < (cast 0.0 : Float)) : Bool)) { return cast true; }
     if ((cast ((cast bounds.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    dx = _Runtime.subtractNumbers(_Runtime.field(spatial, 'position').x, bounds.center.x);
-    dy = _Runtime.subtractNumbers(_Runtime.field(spatial, 'position').y, bounds.center.y);
-    dz = _Runtime.subtractNumbers(_Runtime.field(spatial, 'position').z, bounds.center.z);
+    dx = ((cast _Runtime.field(spatial, 'position') : { var x:Float; }).x - (cast bounds.center : { var x:Float; }).x);
+    dy = ((cast _Runtime.field(spatial, 'position') : { var y:Float; }).y - (cast bounds.center : { var y:Float; }).y);
+    dz = ((cast _Runtime.field(spatial, 'position') : { var z:Float; }).z - (cast bounds.center : { var z:Float; }).z);
     distSq = (((dx * dx) + (dy * dy)) + (dz * dz));
     radSum = _Runtime.addNumbers(_Runtime.field(spatial, 'range'), bounds.radius);
     return cast ((cast distSq : Float) <= (cast (radSum * radSum) : Float));

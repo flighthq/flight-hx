@@ -7,6 +7,7 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.Entity;
 import flighthq.types.Plane.PlaneLike;
 import flighthq.types.Ray3D;
 import flighthq.types.Ray3D.Ray3DLike;
@@ -15,7 +16,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Ray3d {
   public static function createRay3D(?originX:Float, ?originY:Float, ?originZ:Float, ?directionX:Float, ?directionY:Float, ?directionZ:Float):Ray3D {
-    return cast (cast createEntity({ direction: (cast createVector3((cast _Runtime.coalesce(directionX, function():Dynamic return cast 0.0) : Null<Float>), (cast _Runtime.coalesce(directionY, function():Dynamic return cast 0.0) : Null<Float>), (cast _Runtime.coalesce(directionZ, function():Dynamic return cast 1.0) : Null<Float>)) : Vector3), origin: (cast createVector3((cast _Runtime.coalesce(originX, function():Dynamic return cast 0.0) : Null<Float>), (cast _Runtime.coalesce(originY, function():Dynamic return cast 0.0) : Null<Float>), (cast _Runtime.coalesce(originZ, function():Dynamic return cast 0.0) : Null<Float>)) : Vector3) }) : Ray3D);
+    return cast (cast createEntity((cast { direction: (cast createVector3((cast _Runtime.coalesce(directionX, function():Dynamic return cast 0.0)), (cast _Runtime.coalesce(directionY, function():Dynamic return cast 0.0)), (cast _Runtime.coalesce(directionZ, function():Dynamic return cast 1.0))) : Vector3), origin: (cast createVector3((cast _Runtime.coalesce(originX, function():Dynamic return cast 0.0)), (cast _Runtime.coalesce(originY, function():Dynamic return cast 0.0)), (cast _Runtime.coalesce(originZ, function():Dynamic return cast 0.0))) : Vector3) })) : { >Entity, var direction:Vector3; var origin:Vector3; });
     return cast null;
   }
 
@@ -43,18 +44,18 @@ class Ray3d {
     var denom:Float = cast _Runtime.UNDEFINED;
     var ta:Float = cast _Runtime.UNDEFINED;
     var tb:Float = cast _Runtime.UNDEFINED;
-    aox = a.origin.x;
-    aoy = a.origin.y;
-    aoz = a.origin.z;
-    adx = a.direction.x;
-    ady = a.direction.y;
-    adz = a.direction.z;
-    box = b.origin.x;
-    boy = b.origin.y;
-    boz = b.origin.z;
-    bdx = b.direction.x;
-    bdy = b.direction.y;
-    bdz = b.direction.z;
+    aox = (cast a.origin : { var x:Float; }).x;
+    aoy = (cast a.origin : { var y:Float; }).y;
+    aoz = (cast a.origin : { var z:Float; }).z;
+    adx = (cast a.direction : { var x:Float; }).x;
+    ady = (cast a.direction : { var y:Float; }).y;
+    adz = (cast a.direction : { var z:Float; }).z;
+    box = (cast b.origin : { var x:Float; }).x;
+    boy = (cast b.origin : { var y:Float; }).y;
+    boz = (cast b.origin : { var z:Float; }).z;
+    bdx = (cast b.direction : { var x:Float; }).x;
+    bdy = (cast b.direction : { var y:Float; }).y;
+    bdz = (cast b.direction : { var z:Float; }).z;
     aa = (((adx * adx) + (ady * ady)) + (adz * adz));
     bb = (((bdx * bdx) + (bdy * bdy)) + (bdz * bdz));
     ab = (((adx * bdx) + (ady * bdy)) + (adz * bdz));
@@ -96,12 +97,12 @@ class Ray3d {
     var pz:Float = cast _Runtime.UNDEFINED;
     var lenSq:Float = cast _Runtime.UNDEFINED;
     var t:Float = cast _Runtime.UNDEFINED;
-    ox = ray.origin.x;
-    oy = ray.origin.y;
-    oz = ray.origin.z;
-    dx = ray.direction.x;
-    dy = ray.direction.y;
-    dz = ray.direction.z;
+    ox = (cast ray.origin : { var x:Float; }).x;
+    oy = (cast ray.origin : { var y:Float; }).y;
+    oz = (cast ray.origin : { var z:Float; }).z;
+    dx = (cast ray.direction : { var x:Float; }).x;
+    dy = (cast ray.direction : { var y:Float; }).y;
+    dz = (cast ray.direction : { var z:Float; }).z;
     px = point.x;
     py = point.y;
     pz = point.z;
@@ -120,12 +121,12 @@ class Ray3d {
     var dx:Float = cast _Runtime.UNDEFINED;
     var dy:Float = cast _Runtime.UNDEFINED;
     var dz:Float = cast _Runtime.UNDEFINED;
-    ox = ray.origin.x;
-    oy = ray.origin.y;
-    oz = ray.origin.z;
-    dx = ray.direction.x;
-    dy = ray.direction.y;
-    dz = ray.direction.z;
+    ox = (cast ray.origin : { var x:Float; }).x;
+    oy = (cast ray.origin : { var y:Float; }).y;
+    oz = (cast ray.origin : { var z:Float; }).z;
+    dx = (cast ray.direction : { var x:Float; }).x;
+    dy = (cast ray.direction : { var y:Float; }).y;
+    dz = (cast ray.direction : { var z:Float; }).z;
     (out.x = cast ((ox + (dx * t)) : Dynamic));
     (out.y = cast ((oy + (dy * t)) : Dynamic));
     (out.z = cast ((oz + (dz * t)) : Dynamic));
@@ -140,18 +141,18 @@ class Ray3d {
     var dz:Float = cast _Runtime.UNDEFINED;
     var tMin:Float = cast _Runtime.UNDEFINED;
     var tMax:Float = cast _Runtime.UNDEFINED;
-    ox = ray.origin.x;
-    oy = ray.origin.y;
-    oz = ray.origin.z;
-    dx = ray.direction.x;
-    dy = ray.direction.y;
-    dz = ray.direction.z;
+    ox = (cast ray.origin : { var x:Float; }).x;
+    oy = (cast ray.origin : { var y:Float; }).y;
+    oz = (cast ray.origin : { var z:Float; }).z;
+    dx = (cast ray.direction : { var x:Float; }).x;
+    dy = (cast ray.direction : { var y:Float; }).y;
+    dz = (cast ray.direction : { var z:Float; }).z;
     tMin = 0.0;
     tMax = HxMath.POSITIVE_INFINITY;
     if ((cast !_Runtime.strictEquals(dx, 0.0) : Bool)) {
       var invDx:Float = (1.0 / dx);
-      var t1:Float = ((aabb.min.x - ox) * invDx);
-      var t2:Float = ((aabb.max.x - ox) * invDx);
+      var t1:Float = (((cast aabb.min : { var x:Float; }).x - ox) * invDx);
+      var t2:Float = (((cast aabb.max : { var x:Float; }).x - ox) * invDx);
       if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
         var tmp:Float = t1;
         (t1 = cast (t2 : Dynamic));
@@ -160,13 +161,13 @@ class Ray3d {
       (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
       (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
       if ((cast ((cast tMin : Float) > (cast tMax : Float)) : Bool)) { return cast -1.0; }
-    } else { if ((cast ((cast ((cast ox : Float) < (cast aabb.min.x : Float)) : Bool) || (cast ((cast ox : Float) > (cast aabb.max.x : Float)) : Bool)) : Bool)) {
+    } else { if ((cast ((cast ((cast ox : Float) < (cast (cast aabb.min : { var x:Float; }).x : Float)) : Bool) || (cast ((cast ox : Float) > (cast (cast aabb.max : { var x:Float; }).x : Float)) : Bool)) : Bool)) {
       return cast -1.0;
     } }
     if ((cast !_Runtime.strictEquals(dy, 0.0) : Bool)) {
       var invDy:Float = (1.0 / dy);
-      var t1:Float = ((aabb.min.y - oy) * invDy);
-      var t2:Float = ((aabb.max.y - oy) * invDy);
+      var t1:Float = (((cast aabb.min : { var y:Float; }).y - oy) * invDy);
+      var t2:Float = (((cast aabb.max : { var y:Float; }).y - oy) * invDy);
       if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
         var tmp:Float = t1;
         (t1 = cast (t2 : Dynamic));
@@ -175,13 +176,13 @@ class Ray3d {
       (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
       (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
       if ((cast ((cast tMin : Float) > (cast tMax : Float)) : Bool)) { return cast -1.0; }
-    } else { if ((cast ((cast ((cast oy : Float) < (cast aabb.min.y : Float)) : Bool) || (cast ((cast oy : Float) > (cast aabb.max.y : Float)) : Bool)) : Bool)) {
+    } else { if ((cast ((cast ((cast oy : Float) < (cast (cast aabb.min : { var y:Float; }).y : Float)) : Bool) || (cast ((cast oy : Float) > (cast (cast aabb.max : { var y:Float; }).y : Float)) : Bool)) : Bool)) {
       return cast -1.0;
     } }
     if ((cast !_Runtime.strictEquals(dz, 0.0) : Bool)) {
       var invDz:Float = (1.0 / dz);
-      var t1:Float = ((aabb.min.z - oz) * invDz);
-      var t2:Float = ((aabb.max.z - oz) * invDz);
+      var t1:Float = (((cast aabb.min : { var z:Float; }).z - oz) * invDz);
+      var t2:Float = (((cast aabb.max : { var z:Float; }).z - oz) * invDz);
       if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
         var tmp:Float = t1;
         (t1 = cast (t2 : Dynamic));
@@ -190,7 +191,7 @@ class Ray3d {
       (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
       (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
       if ((cast ((cast tMin : Float) > (cast tMax : Float)) : Bool)) { return cast -1.0; }
-    } else { if ((cast ((cast ((cast oz : Float) < (cast aabb.min.z : Float)) : Bool) || (cast ((cast oz : Float) > (cast aabb.max.z : Float)) : Bool)) : Bool)) {
+    } else { if ((cast ((cast ((cast oz : Float) < (cast (cast aabb.min : { var z:Float; }).z : Float)) : Bool) || (cast ((cast oz : Float) > (cast (cast aabb.max : { var z:Float; }).z : Float)) : Bool)) : Bool)) {
       return cast -1.0;
     } }
     return cast tMin;
@@ -200,9 +201,9 @@ class Ray3d {
   public static function intersectRay3DPlane(ray:Ray3DLike, plane:PlaneLike):Float {
     var denom:Float = cast _Runtime.UNDEFINED;
     var t:Float = cast _Runtime.UNDEFINED;
-    denom = (((plane.a * ray.direction.x) + (plane.b * ray.direction.y)) + (plane.c * ray.direction.z));
+    denom = (((plane.a * (cast ray.direction : { var x:Float; }).x) + (plane.b * (cast ray.direction : { var y:Float; }).y)) + (plane.c * (cast ray.direction : { var z:Float; }).z));
     if ((cast ((cast HxMath.abs(denom) : Float) < (cast 1e-10 : Float)) : Bool)) { return cast -1.0; }
-    t = (-((((plane.a * ray.origin.x) + (plane.b * ray.origin.y)) + (plane.c * ray.origin.z)) + plane.d) / denom);
+    t = (-((((plane.a * (cast ray.origin : { var x:Float; }).x) + (plane.b * (cast ray.origin : { var y:Float; }).y)) + (plane.c * (cast ray.origin : { var z:Float; }).z)) + plane.d) / denom);
     return cast ((cast ((cast t : Float) >= (cast 0.0 : Float)) : Bool) ? (cast t : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
@@ -222,12 +223,12 @@ class Ray3d {
     var t:Float = cast _Runtime.UNDEFINED;
     var t2:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast -1.0; }
-    ox = (ray.origin.x - sphere.center.x);
-    oy = (ray.origin.y - sphere.center.y);
-    oz = (ray.origin.z - sphere.center.z);
-    dx = ray.direction.x;
-    dy = ray.direction.y;
-    dz = ray.direction.z;
+    ox = ((cast ray.origin : { var x:Float; }).x - (cast sphere.center : { var x:Float; }).x);
+    oy = ((cast ray.origin : { var y:Float; }).y - (cast sphere.center : { var y:Float; }).y);
+    oz = ((cast ray.origin : { var z:Float; }).z - (cast sphere.center : { var z:Float; }).z);
+    dx = (cast ray.direction : { var x:Float; }).x;
+    dy = (cast ray.direction : { var y:Float; }).y;
+    dz = (cast ray.direction : { var z:Float; }).z;
     a = (((dx * dx) + (dy * dy)) + (dz * dz));
     if ((cast _Runtime.strictEquals(a, 0.0) : Bool)) { return cast -1.0; }
     b = (((ox * dx) + (oy * dy)) + (oz * dz));
@@ -272,18 +273,18 @@ class Ray3d {
     e2x = (c.x - a.x);
     e2y = (c.y - a.y);
     e2z = (c.z - a.z);
-    dx = ray.direction.x;
-    dy = ray.direction.y;
-    dz = ray.direction.z;
+    dx = (cast ray.direction : { var x:Float; }).x;
+    dy = (cast ray.direction : { var y:Float; }).y;
+    dz = (cast ray.direction : { var z:Float; }).z;
     hx = ((dy * e2z) - (dz * e2y));
     hy = ((dz * e2x) - (dx * e2z));
     hz = ((dx * e2y) - (dy * e2x));
     det = (((e1x * hx) + (e1y * hy)) + (e1z * hz));
     if ((cast ((cast HxMath.abs(det) : Float) < (cast 1e-10 : Float)) : Bool)) { return cast -1.0; }
     invDet = (1.0 / det);
-    sx = (ray.origin.x - a.x);
-    sy = (ray.origin.y - a.y);
-    sz = (ray.origin.z - a.z);
+    sx = ((cast ray.origin : { var x:Float; }).x - a.x);
+    sy = ((cast ray.origin : { var y:Float; }).y - a.y);
+    sz = ((cast ray.origin : { var z:Float; }).z - a.z);
     u = ((((sx * hx) + (sy * hy)) + (sz * hz)) * invDet);
     if ((cast ((cast ((cast u : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast u : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
     qx = ((sy * e1z) - (sz * e1y));
@@ -309,11 +310,11 @@ class Ray3d {
     dx = direction.x;
     dy = direction.y;
     dz = direction.z;
-    (out.origin.x = cast (ox : Dynamic));
-    (out.origin.y = cast (oy : Dynamic));
-    (out.origin.z = cast (oz : Dynamic));
-    (out.direction.x = cast (dx : Dynamic));
-    (out.direction.y = cast (dy : Dynamic));
-    (out.direction.z = cast (dz : Dynamic));
+    ((cast out.origin : { var x:Float; }).x = cast (ox : Dynamic));
+    ((cast out.origin : { var y:Float; }).y = cast (oy : Dynamic));
+    ((cast out.origin : { var z:Float; }).z = cast (oz : Dynamic));
+    ((cast out.direction : { var x:Float; }).x = cast (dx : Dynamic));
+    ((cast out.direction : { var y:Float; }).y = cast (dy : Dynamic));
+    ((cast out.direction : { var z:Float; }).z = cast (dz : Dynamic));
   }
 }

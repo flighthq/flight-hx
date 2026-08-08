@@ -9,18 +9,19 @@ import flighthq.geometry.Matrix.inverseMatrixTransformPointXY;
 import flighthq.geometry.Matrix.matrixTransformPointXY;
 import flighthq.types.Camera2D;
 import flighthq.types.Matrix;
+import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Vector2.Vector2Like;
 
 class Projection2d {
   public static function projectCamera2DPoint(camera:Camera2D, worldX:Float, worldY:Float, out:Vector2Like):Void {
-    getCamera2DViewMatrix((cast camera : Camera2D), Projection2d.scratchMatrix__projection2d);
-    matrixTransformPointXY((cast out : Vector2Like), Projection2d.scratchMatrix__projection2d, (cast worldX : Float), (cast worldY : Float));
+    getCamera2DViewMatrix((cast camera), (cast Projection2d.scratchMatrix__projection2d));
+    matrixTransformPointXY((cast out), (cast Projection2d.scratchMatrix__projection2d), (cast worldX : Float), (cast worldY : Float));
   }
 
   public static function unprojectCamera2DPoint(camera:Camera2D, screenX:Float, screenY:Float, out:Vector2Like):Void {
-    getCamera2DViewMatrix((cast camera : Camera2D), Projection2d.scratchMatrix__projection2d);
-    inverseMatrixTransformPointXY((cast out : Vector2Like), Projection2d.scratchMatrix__projection2d, (cast screenX : Float), (cast screenY : Float));
+    getCamera2DViewMatrix((cast camera), (cast Projection2d.scratchMatrix__projection2d));
+    inverseMatrixTransformPointXY((cast out), (cast Projection2d.scratchMatrix__projection2d), (cast screenX : Float), (cast screenY : Float));
   }
 
-  public static final scratchMatrix__projection2d:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix);
+  public static final scratchMatrix__projection2d:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
 }

@@ -38,10 +38,10 @@ class WgpuOuterGlowEffect {
     var glowPasses:Float = cast _Runtime.UNDEFINED;
     src = (cast source : WgpuRenderTarget);
     dst = (cast dest : WgpuRenderTarget);
-    descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    mask = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
-    blurred = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
-    blurTemp = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
+    descriptor = (cast { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') });
+    mask = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
+    blurred = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
+    blurTemp = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0);
     alpha = _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
@@ -49,31 +49,31 @@ class WgpuOuterGlowEffect {
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     tintStrength = HxMath.min(1.0, strength);
     glowPasses = HxMath.max(1.0, HxMath.floor(strength));
-    applyWgpuEffectTintPass((cast state : WgpuRenderState), (cast src : WgpuRenderTarget), (cast mask : WgpuRenderTarget), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
-    applyWgpuEffectBoxBlur((cast state : WgpuRenderState), (cast mask : WgpuRenderTarget), (cast blurred : WgpuRenderTarget), (cast blurTemp : WgpuRenderTarget), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), passes: quality } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }));
-    clearWgpuEffectTarget((cast state : WgpuRenderState), (cast dst : WgpuRenderTarget));
+    applyWgpuEffectTintPass((cast state), (cast src), (cast mask), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
+    applyWgpuEffectBoxBlur((cast state), (cast mask), (cast blurred), (cast blurTemp), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), passes: quality }));
+    clearWgpuEffectTarget((cast state), (cast dst));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast glowPasses : Float)) : Bool)) {
-        applyWgpuEffectBlitPass((cast state : WgpuRenderState), (cast blurred : WgpuRenderTarget), (cast dst : WgpuRenderTarget));
+        applyWgpuEffectBlitPass((cast state), (cast blurred), (cast dst));
         i++;
       }
     }
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
-      applyWgpuEffectErasePass((cast state : WgpuRenderState), (cast src : WgpuRenderTarget), (cast dst : WgpuRenderTarget));
+      applyWgpuEffectErasePass((cast state), (cast src), (cast dst));
     } else { if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyWgpuEffectBlitPass((cast state : WgpuRenderState), (cast src : WgpuRenderTarget), (cast dst : WgpuRenderTarget));
+      applyWgpuEffectBlitPass((cast state), (cast src), (cast dst));
     } }
-    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast mask : WgpuRenderTarget));
-    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast blurred : WgpuRenderTarget));
-    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast blurTemp : WgpuRenderTarget));
+    releaseWgpuRenderTarget((cast pool), (cast mask));
+    releaseWgpuRenderTarget((cast pool), (cast blurred));
+    releaseWgpuRenderTarget((cast pool), (cast blurTemp));
   }
 
-  public static final defaultWgpuOuterGlowEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyOuterGlowEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'pool') : WgpuRenderTargetPool), (cast (cast effect : OuterGlowEffect) : OuterGlowEffect));
-  };
+  public static final defaultWgpuOuterGlowEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyOuterGlowEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : OuterGlowEffect)));
+  });
 
   public static function registerWgpuOuterGlowEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'OuterGlowEffect' : String), (cast defaultWgpuOuterGlowEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'OuterGlowEffect' : String), (cast defaultWgpuOuterGlowEffectRunner));
   }
 }

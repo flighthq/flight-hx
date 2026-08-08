@@ -16,7 +16,7 @@ class ImageEncoderRegistry {
   }
 
   public static function getImageEncoderMimeTypes():Array<String> {
-    return cast _Runtime.toArray(((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map<String, ImageEncoder>).keys()));
+    return cast (cast _Runtime.toArray(((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map<String, ImageEncoder>).keys())) : Array<String>);
     return cast null;
   }
 
@@ -26,7 +26,7 @@ class ImageEncoderRegistry {
   }
 
   public static function registerImageEncoder(mimeType:String, encoder:ImageEncoder):Void {
-    ((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map<String, ImageEncoder>).set(mimeType, encoder));
+    ((cast ImageEncoderRegistry.encoders__imageEncoderRegistry : flighthq._internal._Map<String, ImageEncoder>).set(mimeType, (cast encoder)));
   }
 
   public static function unregisterImageEncoder(mimeType:String):Void {

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Aabb.AabbLike;
+import flighthq.types.Entity;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Obb;
 import flighthq.types.Obb.ObbLike;
@@ -14,7 +15,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Obb {
   public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):flighthq.types.Obb {
-    return cast (cast createEntity((cast { centerX: centerX, centerY: centerY, centerZ: centerZ, halfExtentX: halfExtentX, halfExtentY: halfExtentY, halfExtentZ: halfExtentZ, orientationW: orientationW, orientationX: orientationX, orientationY: orientationY, orientationZ: orientationZ } : Null<{ var centerX:Float; var centerY:Float; var centerZ:Float; var halfExtentX:Float; var halfExtentY:Float; var halfExtentZ:Float; var orientationW:Float; var orientationX:Float; var orientationY:Float; var orientationZ:Float; }>)) : flighthq.types.Obb);
+    return cast (cast createEntity((cast { centerX: centerX, centerY: centerY, centerZ: centerZ, halfExtentX: halfExtentX, halfExtentY: halfExtentY, halfExtentZ: halfExtentZ, orientationW: orientationW, orientationX: orientationX, orientationY: orientationY, orientationZ: orientationZ })) : { >Entity, var centerX:Float; var centerY:Float; var centerZ:Float; var halfExtentX:Float; var halfExtentY:Float; var halfExtentZ:Float; var orientationW:Float; var orientationX:Float; var orientationY:Float; var orientationZ:Float; });
     return cast null;
   }
 
@@ -53,7 +54,7 @@ class Obb {
     px = point.x;
     py = point.y;
     pz = point.z;
-    __destructure0 = (cast Obb.obbLocalAxes__obb((cast obb : ObbLike)) : Array<flighthq._internal._Any>);
+    __destructure0 = (cast Obb.obbLocalAxes__obb((cast obb)) : Array<Float>);
     ax0 = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
     ay0 = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     az0 = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
@@ -99,16 +100,16 @@ class Obb {
     var halfExts:Array<Float> = cast _Runtime.UNDEFINED;
     var tMin:Float = cast _Runtime.UNDEFINED;
     var tMax:Float = cast _Runtime.UNDEFINED;
-    ox = (ray.origin.x - obb.centerX);
-    oy = (ray.origin.y - obb.centerY);
-    oz = (ray.origin.z - obb.centerZ);
-    dx = ray.direction.x;
-    dy = ray.direction.y;
-    dz = ray.direction.z;
+    ox = ((cast ray.origin : { var x:Float; }).x - obb.centerX);
+    oy = ((cast ray.origin : { var y:Float; }).y - obb.centerY);
+    oz = ((cast ray.origin : { var z:Float; }).z - obb.centerZ);
+    dx = (cast ray.direction : { var x:Float; }).x;
+    dy = (cast ray.direction : { var y:Float; }).y;
+    dz = (cast ray.direction : { var z:Float; }).z;
     hx = obb.halfExtentX;
     hy = obb.halfExtentY;
     hz = obb.halfExtentZ;
-    __destructure1 = (cast Obb.obbLocalAxes__obb((cast obb : ObbLike)) : Array<flighthq._internal._Any>);
+    __destructure1 = (cast Obb.obbLocalAxes__obb((cast obb)) : Array<Float>);
     ax0 = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
     ay0 = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
     az0 = flighthq._internal._StaticIndex.readArray(__destructure1, 2.0);
@@ -118,9 +119,9 @@ class Obb {
     ax2 = flighthq._internal._StaticIndex.readArray(__destructure1, 6.0);
     ay2 = flighthq._internal._StaticIndex.readArray(__destructure1, 7.0);
     az2 = flighthq._internal._StaticIndex.readArray(__destructure1, 8.0);
-    origins = cast ([(((ox * ax0) + (oy * ay0)) + (oz * az0)), (((ox * ax1) + (oy * ay1)) + (oz * az1)), (((ox * ax2) + (oy * ay2)) + (oz * az2))] : Array<Dynamic>);
-    dirs = cast ([(((dx * ax0) + (dy * ay0)) + (dz * az0)), (((dx * ax1) + (dy * ay1)) + (dz * az1)), (((dx * ax2) + (dy * ay2)) + (dz * az2))] : Array<Dynamic>);
-    halfExts = cast ([hx, hy, hz] : Array<Dynamic>);
+    origins = (cast cast ([(((ox * ax0) + (oy * ay0)) + (oz * az0)), (((ox * ax1) + (oy * ay1)) + (oz * az1)), (((ox * ax2) + (oy * ay2)) + (oz * az2))] : Array<Dynamic>));
+    dirs = (cast cast ([(((dx * ax0) + (dy * ay0)) + (dz * az0)), (((dx * ax1) + (dy * ay1)) + (dz * az1)), (((dx * ax2) + (dy * ay2)) + (dz * az2))] : Array<Dynamic>));
+    halfExts = (cast cast ([hx, hy, hz] : Array<Dynamic>));
     tMin = 0.0;
     tMax = HxMath.POSITIVE_INFINITY;
     {
@@ -171,13 +172,13 @@ class Obb {
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
     var tz:Float = cast _Runtime.UNDEFINED;
-    acx = ((aabb.min.x + aabb.max.x) * 0.5);
-    acy = ((aabb.min.y + aabb.max.y) * 0.5);
-    acz = ((aabb.min.z + aabb.max.z) * 0.5);
-    ahx = ((aabb.max.x - aabb.min.x) * 0.5);
-    ahy = ((aabb.max.y - aabb.min.y) * 0.5);
-    ahz = ((aabb.max.z - aabb.min.z) * 0.5);
-    __destructure2 = (cast Obb.obbLocalAxes__obb((cast obb : ObbLike)) : Array<flighthq._internal._Any>);
+    acx = (((cast aabb.min : { var x:Float; }).x + (cast aabb.max : { var x:Float; }).x) * 0.5);
+    acy = (((cast aabb.min : { var y:Float; }).y + (cast aabb.max : { var y:Float; }).y) * 0.5);
+    acz = (((cast aabb.min : { var z:Float; }).z + (cast aabb.max : { var z:Float; }).z) * 0.5);
+    ahx = (((cast aabb.max : { var x:Float; }).x - (cast aabb.min : { var x:Float; }).x) * 0.5);
+    ahy = (((cast aabb.max : { var y:Float; }).y - (cast aabb.min : { var y:Float; }).y) * 0.5);
+    ahz = (((cast aabb.max : { var z:Float; }).z - (cast aabb.min : { var z:Float; }).z) * 0.5);
+    __destructure2 = (cast Obb.obbLocalAxes__obb((cast obb)) : Array<Float>);
     ax0 = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
     ay0 = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
     az0 = flighthq._internal._StaticIndex.readArray(__destructure2, 2.0);
@@ -218,7 +219,7 @@ class Obb {
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
     var tz:Float = cast _Runtime.UNDEFINED;
-    __destructure3 = (cast Obb.obbLocalAxes__obb((cast a : ObbLike)) : Array<flighthq._internal._Any>);
+    __destructure3 = (cast Obb.obbLocalAxes__obb((cast a)) : Array<Float>);
     ax0 = flighthq._internal._StaticIndex.readArray(__destructure3, 0.0);
     ay0 = flighthq._internal._StaticIndex.readArray(__destructure3, 1.0);
     az0 = flighthq._internal._StaticIndex.readArray(__destructure3, 2.0);
@@ -228,7 +229,7 @@ class Obb {
     ax2 = flighthq._internal._StaticIndex.readArray(__destructure3, 6.0);
     ay2 = flighthq._internal._StaticIndex.readArray(__destructure3, 7.0);
     az2 = flighthq._internal._StaticIndex.readArray(__destructure3, 8.0);
-    __destructure4 = (cast Obb.obbLocalAxes__obb((cast b : ObbLike)) : Array<flighthq._internal._Any>);
+    __destructure4 = (cast Obb.obbLocalAxes__obb((cast b)) : Array<Float>);
     bx0 = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
     by0 = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
     bz0 = flighthq._internal._StaticIndex.readArray(__destructure4, 2.0);
@@ -425,7 +426,8 @@ class Obb {
       pA = ((_Runtime.multiplyNumbers(HxMath.abs((((ax0 * lx) + (ay0 * ly)) + (az0 * lz))), hax) + _Runtime.multiplyNumbers(HxMath.abs((((ax1 * lx) + (ay1 * ly)) + (az1 * lz))), hay)) + _Runtime.multiplyNumbers(HxMath.abs((((ax2 * lx) + (ay2 * ly)) + (az2 * lz))), haz));
       pB = ((_Runtime.multiplyNumbers(HxMath.abs((((bx0 * lx) + (by0 * ly)) + (bz0 * lz))), hbx) + _Runtime.multiplyNumbers(HxMath.abs((((bx1 * lx) + (by1 * ly)) + (bz1 * lz))), hby)) + _Runtime.multiplyNumbers(HxMath.abs((((bx2 * lx) + (by2 * ly)) + (bz2 * lz))), hbz));
       return cast ((cast d : Float) > (cast (pA + pB) : Float));
-    } : Float->Float->Float->Bool);
+      return cast _Runtime.UNDEFINED;
+    });
     if ((cast (cast onAxis((cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float)) : Bool) : Bool)) { return cast true; }
     if ((cast (cast onAxis((cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float)) : Bool) : Bool)) { return cast true; }
     if ((cast (cast onAxis((cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)) { return cast true; }

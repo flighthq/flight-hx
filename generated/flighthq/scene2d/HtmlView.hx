@@ -12,6 +12,7 @@ import flighthq.types.HtmlView.HtmlViewData;
 import flighthq.types.HtmlView.HtmlViewRuntime;
 import flighthq.types.MethodsOf;
 import flighthq.types.Node;
+import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.Types.HtmlViewKind;
@@ -26,25 +27,25 @@ class HtmlView {
   }
 
   public static function createHtmlView(?obj:PartialNode<flighthq.types.HtmlView>):flighthq.types.HtmlView {
-    return cast (cast (cast createNode2D((cast HtmlViewKind : String), obj, createHtmlViewData, function(__unused0:Dynamic):HtmlViewRuntime return createHtmlViewRuntime()) : flighthq.types.HtmlView) : flighthq.types.HtmlView);
+    return cast (cast createNode2D((cast HtmlViewKind : String), (cast obj), (cast createHtmlViewData), (cast function(__unused0:Null<flighthq._internal._Any>):HtmlViewRuntime return createHtmlViewRuntime())) : flighthq.types.HtmlView);
     return cast null;
   }
 
   @:noCompletion
-  public static function createHtmlViewData(?data:Dynamic):HtmlViewData {
-    return cast { element: _Runtime.coalesce(_Runtime.optionalField(data, 'element'), function():Dynamic return cast null), height: _Runtime.coalesce(_Runtime.optionalField(data, 'height'), function():Dynamic return cast 100.0), width: _Runtime.coalesce(_Runtime.optionalField(data, 'width'), function():Dynamic return cast 100.0) };
+  public static function createHtmlViewData(?data:flighthq._internal._Partial<HtmlViewData>):HtmlViewData {
+    return cast { element: _Runtime.coalesce(({ final __structural0 = data; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var element:Null<flighthq._internal.dom.HTMLElement>; }).element; }), function():Dynamic return cast null), height: _Runtime.coalesce(({ final __structural1 = data; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 100.0), width: _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 100.0) };
     return cast null;
   }
 
   @:noCompletion
   public static function createHtmlViewRuntime():HtmlViewRuntime {
-    return cast (cast (cast createNode2DRuntime((cast HtmlView.defaultMethods__htmlView : Null<flighthq._internal._Any>)) : HtmlViewRuntime) : HtmlViewRuntime);
+    return cast (cast createNode2DRuntime((cast HtmlView.defaultMethods__htmlView)) : HtmlViewRuntime);
     return cast null;
   }
 
   @:noCompletion
   public static function getHtmlViewRuntime(source:flighthq.types.HtmlView):HtmlViewRuntime {
-    return cast (cast (cast getNode2DRuntime(source) : HtmlViewRuntime) : HtmlViewRuntime);
+    return cast (cast getNode2DRuntime((cast source)) : HtmlViewRuntime);
     return cast null;
   }
 
@@ -52,8 +53,8 @@ class HtmlView {
     if ((cast ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.HtmlView).data : HtmlViewData).width, width) : Bool) && (cast _Runtime.strictEquals((cast (cast source : flighthq.types.HtmlView).data : HtmlViewData).height, height) : Bool)) : Bool)) { return; }
     ((cast (cast source : flighthq.types.HtmlView).data : HtmlViewData).width = width);
     ((cast (cast source : flighthq.types.HtmlView).data : HtmlViewData).height = height);
-    invalidateNodeLocalBounds(source);
+    invalidateNodeLocalBounds((cast source));
   }
 
-  public static final defaultMethods__htmlView:Dynamic = { computeLocalBoundsRectangle: computeHtmlViewLocalBoundsRectangle };
+  public static final defaultMethods__htmlView:flighthq._internal._Partial<MethodsOf<HtmlViewRuntime>> = (cast { computeLocalBoundsRectangle: computeHtmlViewLocalBoundsRectangle });
 }

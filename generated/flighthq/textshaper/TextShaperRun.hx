@@ -35,7 +35,7 @@ class TextShaperRun {
     var backend:Null<TextShaperBackend> = cast _Runtime.UNDEFINED;
     backend = (cast getTextShaperBackend() : Null<TextShaperBackend>);
     if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy((cast backend : TextShaperBackend).getCodePointForGlyph) : Bool)) : Bool)) { return cast -1.0; }
-    return cast (cast backend : TextShaperBackend).getCodePointForGlyph(glyphId);
+    return cast (cast backend : TextShaperBackend).getCodePointForGlyph((cast glyphId : Float));
     return cast null;
   }
 
@@ -43,22 +43,22 @@ class TextShaperRun {
     var backend:Null<TextShaperBackend> = cast _Runtime.UNDEFINED;
     backend = (cast getTextShaperBackend() : Null<TextShaperBackend>);
     if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy((cast backend : TextShaperBackend).getFontMetrics) : Bool)) : Bool)) { return cast null; }
-    return cast (cast backend : TextShaperBackend).getFontMetrics(format);
+    return cast (cast backend : TextShaperBackend).getFontMetrics((cast format));
     return cast null;
   }
 
   public static function getFontMetricsInto(format:TextFormat, out:FontMetrics):Bool {
     var metrics:Null<FontMetrics> = cast _Runtime.UNDEFINED;
-    metrics = (cast getFontMetrics((cast format : TextFormat)) : Null<FontMetrics>);
+    metrics = (cast getFontMetrics((cast format)) : Null<FontMetrics>);
     if ((cast _Runtime.strictEquals(metrics, null) : Bool)) { return cast false; }
-    (out.ascent = cast ((cast metrics : flighthq.types.FontMetrics).ascent : Dynamic));
-    (out.capHeight = cast ((cast metrics : flighthq.types.FontMetrics).capHeight : Dynamic));
-    (out.descent = cast ((cast metrics : flighthq.types.FontMetrics).descent : Dynamic));
-    (out.lineGap = cast ((cast metrics : flighthq.types.FontMetrics).lineGap : Dynamic));
-    (out.underlinePosition = cast ((cast metrics : flighthq.types.FontMetrics).underlinePosition : Dynamic));
-    (out.underlineThickness = cast ((cast metrics : flighthq.types.FontMetrics).underlineThickness : Dynamic));
-    (out.unitsPerEm = cast ((cast metrics : flighthq.types.FontMetrics).unitsPerEm : Dynamic));
-    (out.xHeight = cast ((cast metrics : flighthq.types.FontMetrics).xHeight : Dynamic));
+    (out.ascent = cast ((cast metrics : { var ascent:Float; }).ascent : Dynamic));
+    (out.capHeight = cast ((cast metrics : { var capHeight:Float; }).capHeight : Dynamic));
+    (out.descent = cast ((cast metrics : { var descent:Float; }).descent : Dynamic));
+    (out.lineGap = cast ((cast metrics : { var lineGap:Float; }).lineGap : Dynamic));
+    (out.underlinePosition = cast ((cast metrics : { var underlinePosition:Float; }).underlinePosition : Dynamic));
+    (out.underlineThickness = cast ((cast metrics : { var underlineThickness:Float; }).underlineThickness : Dynamic));
+    (out.unitsPerEm = cast ((cast metrics : { var unitsPerEm:Float; }).unitsPerEm : Dynamic));
+    (out.xHeight = cast ((cast metrics : { var xHeight:Float; }).xHeight : Dynamic));
     return cast true;
     return cast null;
   }
@@ -66,10 +66,10 @@ class TextShaperRun {
   public static function getFontUnitScale(format:TextFormat):Float {
     var metrics:Null<FontMetrics> = cast _Runtime.UNDEFINED;
     var size:Float = cast _Runtime.UNDEFINED;
-    metrics = (cast getFontMetrics((cast format : TextFormat)) : Null<FontMetrics>);
+    metrics = (cast getFontMetrics((cast format)) : Null<FontMetrics>);
     if ((cast _Runtime.strictEquals(metrics, null) : Bool)) { return cast -1.0; }
     size = _Runtime.coalesce(_Runtime.field(format, 'size'), function():Dynamic return cast 12.0);
-    return cast (size / (cast metrics : flighthq.types.FontMetrics).unitsPerEm);
+    return cast (size / (cast metrics : { var unitsPerEm:Float; }).unitsPerEm);
     return cast null;
   }
 
@@ -77,7 +77,7 @@ class TextShaperRun {
     var backend:Null<TextShaperBackend> = cast _Runtime.UNDEFINED;
     backend = (cast getTextShaperBackend() : Null<TextShaperBackend>);
     if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy((cast backend : TextShaperBackend).getGlyphExtents) : Bool)) : Bool)) { return cast null; }
-    return cast (cast backend : TextShaperBackend).getGlyphExtents(glyphId);
+    return cast (cast backend : TextShaperBackend).getGlyphExtents((cast glyphId : Float));
     return cast null;
   }
 
@@ -90,7 +90,7 @@ class TextShaperRun {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(glyphIds, 'length') : Float)) : Bool)) {
-        var extents:Null<GlyphExtents> = (cast backend : TextShaperBackend).getGlyphExtents(flighthq._internal._StaticIndex.readArray(glyphIds, i));
+        var extents:Null<GlyphExtents> = (cast backend : TextShaperBackend).getGlyphExtents((cast flighthq._internal._StaticIndex.readArray(glyphIds, i) : Float));
         if ((cast !_Runtime.strictEquals(extents, null) : Bool)) {
           flighthq._internal._StaticIndex.writeArray(out, i, extents);
           resolved++;
@@ -106,7 +106,7 @@ class TextShaperRun {
 
   public static function getGlyphExtentsInto(glyphId:Float, _format:TextFormat, out:GlyphExtents):Bool {
     var extents:Null<GlyphExtents> = cast _Runtime.UNDEFINED;
-    extents = (cast getGlyphExtents((cast glyphId : Float), (cast _format : TextFormat)) : Null<GlyphExtents>);
+    extents = (cast getGlyphExtents((cast glyphId : Float), (cast _format)) : Null<GlyphExtents>);
     if ((cast _Runtime.strictEquals(extents, null) : Bool)) { return cast false; }
     ((cast out : GlyphExtents).height = (cast extents : GlyphExtents).height);
     ((cast out : GlyphExtents).width = (cast extents : GlyphExtents).width);
@@ -120,7 +120,7 @@ class TextShaperRun {
     var backend:Null<TextShaperBackend> = cast _Runtime.UNDEFINED;
     backend = (cast getTextShaperBackend() : Null<TextShaperBackend>);
     if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy((cast backend : TextShaperBackend).getGlyphIndexForCodePoint) : Bool)) : Bool)) { return cast -1.0; }
-    return cast (cast backend : TextShaperBackend).getGlyphIndexForCodePoint(codePoint);
+    return cast (cast backend : TextShaperBackend).getGlyphIndexForCodePoint((cast codePoint : Float));
     return cast null;
   }
 
@@ -128,7 +128,7 @@ class TextShaperRun {
     var backend:Null<TextShaperBackend> = cast _Runtime.UNDEFINED;
     backend = (cast getTextShaperBackend() : Null<TextShaperBackend>);
     if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy((cast backend : TextShaperBackend).getGlyphName) : Bool)) : Bool)) { return cast ''; }
-    return cast (cast backend : TextShaperBackend).getGlyphName(glyphId);
+    return cast (cast backend : TextShaperBackend).getGlyphName((cast glyphId : Float));
     return cast null;
   }
 
@@ -136,7 +136,7 @@ class TextShaperRun {
     var backend:Null<TextShaperBackend> = cast _Runtime.UNDEFINED;
     backend = (cast getTextShaperBackend() : Null<TextShaperBackend>);
     if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy((cast backend : TextShaperBackend).shapeRun) : Bool)) : Bool)) { return cast null; }
-    return cast (cast backend : TextShaperBackend).shapeRun(text, format, options);
+    return cast (cast backend : TextShaperBackend).shapeRun((cast text : String), (cast format), (cast options));
     return cast null;
   }
 
@@ -146,7 +146,7 @@ class TextShaperRun {
     var glyphs:Array<ShapedGlyph> = cast _Runtime.UNDEFINED;
     backend = (cast getTextShaperBackend() : Null<TextShaperBackend>);
     if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy((cast backend : TextShaperBackend).shapeRun) : Bool)) : Bool)) { return cast false; }
-    result = (cast backend : TextShaperBackend).shapeRun(text, format, options);
+    result = (cast backend : TextShaperBackend).shapeRun((cast text : String), (cast format), (cast options));
     glyphs = (cast out : ShapedRun).glyphs;
     ((cast out : ShapedRun).advanceWidth = (cast result : ShapedRun).advanceWidth);
     ((cast out : ShapedRun).direction = (cast result : ShapedRun).direction);

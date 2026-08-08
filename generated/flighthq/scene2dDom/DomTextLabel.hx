@@ -15,6 +15,7 @@ import flighthq.textlayout.TextFormatRange.createTextFormatRange;
 import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.types.DomRenderState;
+import flighthq.types.Entity;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
@@ -27,6 +28,7 @@ import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelData;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextLayout.TextLayoutGroup;
+import flighthq.types.TextLayout.TextLayoutParams;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextVerticalAlign;
 
@@ -34,7 +36,7 @@ typedef DomTextData__domTextLabel = { >RendererData, var div:Null<flighthq._inte
 
 class DomTextLabel {
   public static function createDomTextData__domTextLabel(_state:RenderState, _source:Renderable):DomTextData__domTextLabel {
-    return cast (cast createEntity((cast { div: null } : Null<{ var div:flighthq._internal._Any; }>)) : DomTextData__domTextLabel);
+    return cast (cast createEntity((cast { div: null })) : { >Entity, var div:flighthq._internal._Any; });
     return cast null;
   }
 
@@ -71,15 +73,16 @@ class DomTextLabel {
     if ((cast _Runtime.strictEquals(ctx, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast data : DomTextData__domTextLabel).div, null) : Bool)) {
       ((cast data : DomTextData__domTextLabel).div = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>)));
-      prepareDomElement((cast (cast data : DomTextData__domTextLabel).div : flighthq._internal.dom.HTMLElement));
+      prepareDomElement((cast (cast data : DomTextData__domTextLabel).div));
       ((cast (cast (cast data : DomTextData__domTextLabel).div : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
     }
     measure = (cast function(t:String, format:TextFormat):Float {
-      flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString((cast format : TextFormat)) : String));
+      flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString((cast format)) : String));
       return cast (cast flighthq._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast ([t] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
-    } : String->TextFormat->Float);
-    result = (cast getTextLayoutResult((cast (cast (cast getTextLabelRuntime((cast source : TextLabel)) : TextLabelRuntime) : TextLabelRuntime) : TextLabelRuntime)) : TextLayoutResult);
-    computeTextLayout(result, { text: text, formatRanges: cast ([(cast createTextFormatRange((cast textFormat : TextFormat), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: (cast (cast source : TextLabel).data : TextLabelData).width, height: (cast (cast source : TextLabel).data : TextLabelData).height, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast (cast source : TextLabel).data : TextLabelData).autoSize, 'none') : Bool) ? (cast (cast (cast source : TextLabel).data : TextLabelData).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) });
+      return cast _Runtime.UNDEFINED;
+    });
+    result = (cast getTextLayoutResult((cast (cast getTextLabelRuntime((cast source)) : TextLabelRuntime))) : TextLayoutResult);
+    computeTextLayout((cast result), (cast { text: text, formatRanges: cast ([(cast createTextFormatRange((cast textFormat), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: (cast (cast source : TextLabel).data : TextLabelData).width, height: (cast (cast source : TextLabel).data : TextLabelData).height, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast (cast source : TextLabel).data : TextLabelData).autoSize, 'none') : Bool) ? (cast (cast (cast source : TextLabel).data : TextLabelData).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }));
     divWidth = 0.0;
     for (group in _Runtime.iterable((cast result : TextLayoutResult).groups)) {
       var right:Float = ((cast group : TextLayoutGroup).offsetX + (cast group : TextLayoutGroup).width);
@@ -93,15 +96,15 @@ class DomTextLabel {
       var slice:String = (cast escapeDomHtmlString((cast _Runtime.substring(text, (cast group : TextLayoutGroup).startIndex, (cast group : TextLayoutGroup).endIndex) : String)) : String);
       var x:Float = (cast group : TextLayoutGroup).offsetX;
       var y:Float = (cast group : TextLayoutGroup).offsetY;
-      var style:String = 'position:absolute;left:' + Std.string(x) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string((cast computeTextFormatFontString((cast fmt : TextFormat)) : String)) + ';';
+      var style:String = 'position:absolute;left:' + Std.string(x) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string((cast computeTextFormatFontString((cast fmt)) : String)) + ';';
       (style = cast ((style + 'color:' + Std.string((cast computeRgbHexString((cast _Runtime.coalesce((cast fmt : TextFormat).color, function():Dynamic return cast 0.0) : Float)) : String)) + ';white-space:nowrap;') : Dynamic));
       if (_Runtime.truthy((cast fmt : TextFormat).underline)) { (style = cast ((style + 'text-decoration:underline;') : Dynamic)); }
       (html = cast ((html + '<div style="' + Std.string(style) + '">' + Std.string(slice) + '</div>') : Dynamic));
     }
     ((cast (cast data : DomTextData__domTextLabel).div : flighthq._internal.dom.HTMLDivElement).innerHTML = html);
-    applyDomStyle((cast state : DomRenderState), (cast (cast data : DomTextData__domTextLabel).div : flighthq._internal.dom.HTMLElement), (cast renderProxy : RenderProxy2D));
-    setDomRendererElement((cast state : DomRenderState), (cast (cast data : DomTextData__domTextLabel).div : flighthq._internal.dom.HTMLElement));
+    applyDomStyle((cast state), (cast (cast data : DomTextData__domTextLabel).div), (cast renderProxy));
+    setDomRendererElement((cast state), (cast (cast data : DomTextData__domTextLabel).div));
   }
 
-  public static final defaultDomTextLabelRenderer:Scene2DRenderer = { createData: DomTextLabel.createDomTextData__domTextLabel, submit: drawDomTextLabel };
+  public static final defaultDomTextLabelRenderer:Scene2DRenderer = (cast { createData: DomTextLabel.createDomTextData__domTextLabel, submit: drawDomTextLabel });
 }

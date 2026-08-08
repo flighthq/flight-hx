@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef PixelateEffect = { var kind:Kind; @:optional var size:Float; };
+typedef PixelateEffect = { var kind:String; @:optional var size:Float; };

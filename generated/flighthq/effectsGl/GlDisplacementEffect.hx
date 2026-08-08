@@ -24,21 +24,21 @@ class GlDisplacementEffect {
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 8.0);
     frequency = _Runtime.coalesce(_Runtime.field(effect, 'frequency'), function():Dynamic return cast 12.0);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'lens.displacement' : String), (cast GlDisplacementEffect.DISPLACEMENT_FRAGMENT_SRC__glDisplacementEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'lens.displacement' : String), (cast GlDisplacementEffect.DISPLACEMENT_FRAGMENT_SRC__glDisplacementEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_frequency'), frequency);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_seed'), seed);
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
-    });
+    }));
   }
 
-  public static final defaultGlDisplacementEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyDisplacementEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : DisplacementEffect) : DisplacementEffect));
-  };
+  public static final defaultGlDisplacementEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyDisplacementEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : DisplacementEffect)));
+  });
 
   public static function registerGlDisplacementEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'DisplacementEffect' : String), (cast defaultGlDisplacementEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'DisplacementEffect' : String), (cast defaultGlDisplacementEffectRunner));
   }
 
   public static final DISPLACEMENT_FRAGMENT_SRC__glDisplacementEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_frequency;\nuniform float u_seed;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  float f = u_frequency;\n  vec2 warp = vec2(\n    sin(v_texCoord.y * f + u_seed) + sin(v_texCoord.y * f * 2.3 + u_seed * 1.7) * 0.5,\n    cos(v_texCoord.x * f * 0.8 + u_seed * 1.3)\n  );\n  vec2 displaced = v_texCoord + warp * (u_intensity / u_resolution);\n  o_color = texture(u_texture0, displaced);\n}';

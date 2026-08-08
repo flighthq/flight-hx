@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef BarrelDistortionEffect = { var kind:Kind; @:optional var amount:Float; @:optional var scale:Float; };
+typedef BarrelDistortionEffect = { var kind:String; @:optional var amount:Float; @:optional var scale:Float; };

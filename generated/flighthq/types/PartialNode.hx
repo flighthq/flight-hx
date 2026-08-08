@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef PartialNode<T> = { @:optional var data:Dynamic; };
+typedef PartialNode<T> = flighthq._internal._Intersection2<{ @:optional var data:flighthq._internal._Partial<flighthq._internal._Conditional<T, { var data:flighthq._internal._Infer; }, flighthq._internal._Infer, flighthq._internal._Any>>; }, flighthq._internal._Partial<flighthq._internal._Omit<T, String>>>;

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.Entity;
 import flighthq.types.Scene3DResources.Scene3DResourceEvent;
 import flighthq.types.Scene3DResources.Scene3DResourceResolver;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverRuntime;
@@ -17,7 +18,7 @@ import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverR
 class SceneResourceSignals {
   @:noCompletion
   public static function createScene3DResourceSignals():Scene3DResourceSignals {
-    return cast (cast createEntity({ onResourceFailed: (cast createSignal() : Signal<Scene3DResourceEvent->Void>), onResourceResolved: (cast createSignal() : Signal<Scene3DResourceEvent->Void>) }) : Scene3DResourceSignals);
+    return cast (cast createEntity((cast { onResourceFailed: (cast createSignal() : Signal<Scene3DResourceEvent->Void>), onResourceResolved: (cast createSignal() : Signal<Scene3DResourceEvent->Void>) })) : { >Entity, var onResourceFailed:Signal<Scene3DResourceEvent->Void>; var onResourceResolved:Signal<Scene3DResourceEvent->Void>; });
     return cast null;
   }
 

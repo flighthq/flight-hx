@@ -30,7 +30,7 @@ class Depth {
   }
 
   public static function getCamera3DViewSpaceZ(camera:Camera3D, ndcZ:Float):Float {
-    return cast -(cast getCamera3DLinearDepth((cast camera : Camera3D), (cast ndcZ : Float)) : Float);
+    return cast -(cast getCamera3DLinearDepth((cast camera), (cast ndcZ : Float)) : Float);
     return cast null;
   }
 }

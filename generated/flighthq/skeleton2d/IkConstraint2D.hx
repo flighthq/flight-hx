@@ -10,6 +10,7 @@ import flighthq.types.Bone2D;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DConstraint;
 import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintKind;
+import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintSolver;
 import flighthq.types.Skeleton2DIkConstraint;
 import flighthq.types._internal._Skeleton2DConstraintValues.Skeleton2DConstraintKindValue;
 
@@ -17,7 +18,7 @@ class IkConstraint2D {
   public static final MATRIX_STRIDE__ikConstraint2D:Float = 6.0;
 
   public static function registerSkeleton2DIkConstraintSolver():Void {
-    registerSkeleton2DConstraintSolver((cast (cast Skeleton2DConstraintKindValue : { var Ik:String; var Path:String; var Transform:String; }).Ik : String), solveSkeleton2DIkConstraint);
+    registerSkeleton2DConstraintSolver((cast (cast Skeleton2DConstraintKindValue : { var Ik:String; var Path:String; var Transform:String; }).Ik : String), (cast solveSkeleton2DIkConstraint));
   }
 
   @:noCompletion
@@ -38,10 +39,10 @@ class IkConstraint2D {
     targetY = flighthq._internal._StaticIndex.readFloat32Array(world, ((target * IkConstraint2D.MATRIX_STRIDE__ikConstraint2D) + 5.0));
     chain = _Runtime.field(ik, 'boneIndices');
     if ((cast _Runtime.strictEquals(_Runtime.field(chain, 'length'), 1.0) : Bool)) {
-      IkConstraint2D.solveSkeleton2DIkChain1__ikConstraint2D((cast skeleton : Skeleton2D), (cast flighthq._internal._StaticIndex.readArray(chain, 0.0) : Float), (cast targetX : Float), (cast targetY : Float), (cast ik : Skeleton2DIkConstraint));
+      IkConstraint2D.solveSkeleton2DIkChain1__ikConstraint2D((cast skeleton), (cast flighthq._internal._StaticIndex.readArray(chain, 0.0) : Float), (cast targetX : Float), (cast targetY : Float), (cast ik));
       return;
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(chain, 'length'), 2.0) : Bool)) { IkConstraint2D.solveSkeleton2DIkChain2__ikConstraint2D((cast skeleton : Skeleton2D), (cast flighthq._internal._StaticIndex.readArray(chain, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(chain, 1.0) : Float), (cast targetX : Float), (cast targetY : Float), (cast ik : Skeleton2DIkConstraint)); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(chain, 'length'), 2.0) : Bool)) { IkConstraint2D.solveSkeleton2DIkChain2__ikConstraint2D((cast skeleton), (cast flighthq._internal._StaticIndex.readArray(chain, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(chain, 1.0) : Float), (cast targetX : Float), (cast targetY : Float), (cast ik)); }
   }
 
   public static function solveSkeleton2DIkChain1__ikConstraint2D(skeleton:Skeleton2D, boneIndex:Float, targetX:Float, targetY:Float, ik:Skeleton2DIkConstraint):Void {
@@ -54,7 +55,7 @@ class IkConstraint2D {
     bones = (cast skeleton : Skeleton2D).bones;
     if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool)) { return; }
     bone = flighthq._internal._StaticIndex.readArray(bones, boneIndex);
-    local = (cast IkConstraint2D.toSkeleton2DParentSpace__ikConstraint2D((cast skeleton : Skeleton2D), (cast boneIndex : Float), (cast targetX : Float), (cast targetY : Float)) : Null<{ var x:Float; var y:Float; }>);
+    local = (cast IkConstraint2D.toSkeleton2DParentSpace__ikConstraint2D((cast skeleton), (cast boneIndex : Float), (cast targetX : Float), (cast targetY : Float)) : Null<{ var x:Float; var y:Float; }>);
     if ((cast _Runtime.strictEquals(local, null) : Bool)) { return; }
     dx = ((cast local : { var x:Float; var y:Float; }).x - (cast bone : Bone2D).x);
     dy = ((cast local : { var x:Float; var y:Float; }).y - (cast bone : Bone2D).y);
@@ -72,7 +73,7 @@ class IkConstraint2D {
         }
       }
     }
-    computeSkeleton2DBoneWorldTransform((cast skeleton : Skeleton2D), (cast boneIndex : Float));
+    computeSkeleton2DBoneWorldTransform((cast skeleton), (cast boneIndex : Float));
   }
 
   public static function solveSkeleton2DIkChain2__ikConstraint2D(skeleton:Skeleton2D, parentIndex:Float, childIndex:Float, targetX:Float, targetY:Float, ik:Skeleton2DIkConstraint):Void {
@@ -100,7 +101,7 @@ class IkConstraint2D {
     parentLength = _Runtime.multiplyNumbers((cast parent : Bone2D).length, HxMath.abs((cast parent : Bone2D).scaleX));
     childLength = _Runtime.multiplyNumbers((cast child : Bone2D).length, HxMath.abs((cast child : Bone2D).scaleX));
     if ((cast ((cast ((cast parentLength : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast childLength : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
-    local = (cast IkConstraint2D.toSkeleton2DParentSpace__ikConstraint2D((cast skeleton : Skeleton2D), (cast parentIndex : Float), (cast targetX : Float), (cast targetY : Float)) : Null<{ var x:Float; var y:Float; }>);
+    local = (cast IkConstraint2D.toSkeleton2DParentSpace__ikConstraint2D((cast skeleton), (cast parentIndex : Float), (cast targetX : Float), (cast targetY : Float)) : Null<{ var x:Float; var y:Float; }>);
     if ((cast _Runtime.strictEquals(local, null) : Bool)) { return; }
     dx = ((cast local : { var x:Float; var y:Float; }).x - (cast parent : Bone2D).x);
     dy = ((cast local : { var x:Float; var y:Float; }).y - (cast parent : Bone2D).y);
@@ -127,10 +128,10 @@ class IkConstraint2D {
     aim = HxMath.atan2(dy, dx);
     parentRotation = (((aim + (parentOffset * direction)) * RAD_TO_DEG) - (cast parent : Bone2D).shearX);
     ((cast parent : Bone2D).rotation += _Runtime.multiplyNumbers((cast IkConstraint2D.wrapSkeleton2DAngle__ikConstraint2D((cast (parentRotation - (cast parent : Bone2D).rotation) : Float)) : Float), _Runtime.field(ik, 'mix')));
-    computeSkeleton2DBoneWorldTransform((cast skeleton : Skeleton2D), (cast parentIndex : Float));
+    computeSkeleton2DBoneWorldTransform((cast skeleton), (cast parentIndex : Float));
     childRotation = (((-bendAngle * direction) * RAD_TO_DEG) - (cast child : Bone2D).shearX);
     ((cast child : Bone2D).rotation += _Runtime.multiplyNumbers((cast IkConstraint2D.wrapSkeleton2DAngle__ikConstraint2D((cast (childRotation - (cast child : Bone2D).rotation) : Float)) : Float), _Runtime.field(ik, 'mix')));
-    computeSkeleton2DBoneWorldTransform((cast skeleton : Skeleton2D), (cast childIndex : Float));
+    computeSkeleton2DBoneWorldTransform((cast skeleton), (cast childIndex : Float));
   }
 
   public static function toSkeleton2DParentSpace__ikConstraint2D(skeleton:Skeleton2D, boneIndex:Float, x:Float, y:Float):Null<{ var x:Float; var y:Float; }> {

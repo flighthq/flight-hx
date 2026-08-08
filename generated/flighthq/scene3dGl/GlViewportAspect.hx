@@ -11,7 +11,7 @@ import flighthq.types.GlRenderState.GlViewportRect;
 class GlViewportAspect {
   public static function getGlScene3DViewportAspect(state:GlRenderState):Float {
     var viewport:flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, GlViewportRect> = cast _Runtime.UNDEFINED;
-    viewport = _Runtime.coalesce((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast _Runtime.field(state, 'canvas'));
+    viewport = _Runtime.coalesce((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast _Runtime.field(state, 'canvas'));
     return cast ((cast ((cast ((cast flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width') / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height')) : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }

@@ -1455,7 +1455,11 @@ function flattenStructuralTypes(declarations: IrDeclaration[]): void {
   };
   for (const declaration of declarations) {
     if (declaration.kind !== 'type' || declaration.type.kind !== 'anonymous') continue;
-    const fields = expand(declaration.type, new Map(), new Set([declaration.name]));
+    const inheritedFields = declaration.type.extends.flatMap((parent) =>
+      expand(parent, new Map(), new Set([declaration.name])),
+    );
+    const localFields = declaration.type.fields;
+    const fields = [...inheritedFields, ...localFields];
     if (
       fields.length === 0 &&
       declaration.type.fields.length === 0 &&
@@ -1465,10 +1469,12 @@ function flattenStructuralTypes(declarations: IrDeclaration[]): void {
       continue;
     }
     const merged = new Map<string, IrTypeField>();
-    for (const field of fields) {
+    for (const field of inheritedFields) {
       const existing = merged.get(field.name);
       if (!existing || typeSpecificity(field.type) > typeSpecificity(existing.type)) merged.set(field.name, field);
     }
+    // TypeScript members declared directly on the child override every inherited member.
+    for (const field of localFields) merged.set(field.name, field);
     declaration.type.extends = [];
     declaration.type.fields = [...merged.values()];
   }
@@ -1608,6 +1614,9 @@ function fillGenericArguments(declarations: IrDeclaration[]): void {
         declaration.fields.forEach((field) => visit(field.type));
         parameters(declaration.constructorParameters);
         declaration.methods.forEach((method) => {
+          method.typeParameterConstraints?.forEach((constraint) => {
+            if (constraint) visit(constraint);
+          });
           parameters(method.parameters);
           visit(method.returns);
         });
@@ -1619,6 +1628,9 @@ function fillGenericArguments(declarations: IrDeclaration[]): void {
         });
         break;
       case 'function':
+        declaration.typeParameterConstraints?.forEach((constraint) => {
+          if (constraint) visit(constraint);
+        });
         parameters(declaration.parameters);
         visit(declaration.returns);
         break;
@@ -2354,6 +2366,7 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
         expression(value.object);
         if (value.generatedClass) value.generatedClass = typeNames.get(value.generatedClass) ?? value.generatedClass;
         if (value.structuralReceiverType) type(value.structuralReceiverType);
+        if (value.typedStructBinding?.field.type) type(value.typedStructBinding.field.type);
         break;
       case 'spread':
         expression(value.expression);
@@ -2466,6 +2479,9 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
         parameters(declaration.constructorParameters);
         declaration.constructorBody.forEach(statement);
         declaration.methods.forEach((method) => {
+          method.typeParameterConstraints?.forEach((constraint) => {
+            if (constraint) type(constraint);
+          });
           parameters(method.parameters);
           type(method.returns);
           method.body.forEach(statement);
@@ -2478,6 +2494,9 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
         declaration.methods.forEach((method) => method.body.forEach(statement));
         break;
       case 'function':
+        declaration.typeParameterConstraints?.forEach((constraint) => {
+          if (constraint) type(constraint);
+        });
         parameters(declaration.parameters);
         type(declaration.returns);
         declaration.body.forEach(statement);

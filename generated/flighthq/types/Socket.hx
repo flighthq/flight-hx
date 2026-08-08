@@ -24,7 +24,7 @@ typedef SocketRuntime = { var connection:Null<SocketConnection>; var signals:Nul
 
 typedef Socket = { var url:String; var runtime:SocketRuntime; };
 
-typedef SocketSendFailureExplanation = flighthq._internal._Union2<{ var reason:String; var readyState:String; var url:String; }, { var reason:String; var readyState:SocketReadyState; var url:String; }>;
+typedef SocketSendFailureExplanation = flighthq._internal._Union2<flighthq._internal._Union2<{ var reason:String; var readyState:String; var url:String; }, { var reason:String; var readyState:SocketReadyState; var url:String; }>, { var reason:String; var readyState:flighthq._internal._Exclude<SocketReadyState, String>; var url:String; }>;
 
 typedef SocketGuardNotice = { var operation:String; var reason:String; var socket:flighthq.types.Socket; };
 

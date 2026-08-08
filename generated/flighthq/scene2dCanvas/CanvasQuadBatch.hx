@@ -15,14 +15,15 @@ import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
+import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.QuadBatch;
 import flighthq.types.QuadBatch.QuadBatchData;
 import flighthq.types.QuadTransformType;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Renderable;
 import flighthq.types.Sampler;
 import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.SpriteRenderer;
+import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
@@ -55,7 +56,7 @@ class CanvasQuadBatch {
     ids = _Runtime.field(__destructure0, 'ids');
     transforms = _Runtime.field(__destructure0, 'transforms');
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
-    image = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers((cast state : CanvasRenderState)) : CanvasTextureResolvers), atlas.texture) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
+    image = (cast resolveCanvasTexture((cast (cast getCanvasRenderStateTextureResolvers((cast state)) : CanvasTextureResolvers)), (cast atlas.texture)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast quadBatch : RenderProxy2D).blendMode] : Array<Dynamic>));
     context = (cast state : CanvasRenderState).context;
@@ -66,11 +67,11 @@ class CanvasQuadBatch {
     quadTransform = (cast acquireMatrix() : Matrix);
     stride = ((cast _Runtime.strictEquals((cast data : QuadBatchData).transformType, 'vector2') : Bool) ? (cast 2.0 : Dynamic) : (cast 6.0 : Dynamic));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast quadBatch : RenderProxy2D).alpha);
-    smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast (cast (cast atlas.texture : Texture2D).sampler.magFilter : { var startsWith:flighthq._internal._Any; }).startsWith('nearest') : Bool) : Bool));
+    smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast (cast (cast (cast atlas.texture : Texture2D).sampler : { var magFilter:TextureFilter; }).magFilter : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'nearest' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) : Bool));
     if ((cast !(cast smoothing : Bool) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false);
     }
-    restoreMaterial = (cast applyCanvasMaterial((cast state : CanvasRenderState), (cast quadBatch : RenderProxy2D).material) : Bool);
+    restoreMaterial = (cast applyCanvasMaterial((cast state), (cast (cast quadBatch : RenderProxy2D).material)) : Bool);
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty] : Array<Dynamic>));
     {
       var i:Float = 0.0;
@@ -88,8 +89,8 @@ class CanvasQuadBatch {
           var dy:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (offset + 1.0));
           flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, region.x, region.y, region.width, region.height, ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dx) | 0) : Dynamic) : (cast dx : Dynamic)), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dy) | 0) : Dynamic) : (cast dy : Dynamic)), region.width, region.height] : Array<Dynamic>));
         } else {
-          setMatrixFromFloat32Array(quadTransform, (cast offset : Float), (cast transforms : flighthq._internal._Float32Array));
-          multiplyMatrix(quadTransform, transform, quadTransform);
+          setMatrixFromFloat32Array((cast quadTransform), (cast offset : Float), (cast transforms));
+          multiplyMatrix((cast quadTransform), (cast transform), (cast quadTransform));
           if ((cast roundPixels : Bool)) {
             (quadTransform.tx = cast (HxMath.round(quadTransform.tx) : Dynamic));
             (quadTransform.ty = cast (HxMath.round(quadTransform.ty) : Dynamic));
@@ -102,11 +103,11 @@ class CanvasQuadBatch {
     }
     if ((cast restoreMaterial : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>)); }
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    releaseMatrix(quadTransform);
+    releaseMatrix((cast quadTransform));
     if ((cast !(cast smoothing : Bool) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true);
     }
   }
 
-  public static final defaultCanvasQuadBatchRenderer:SpriteRenderer = { createData: noopRendererData, submit: drawCanvasQuadBatch };
+  public static final defaultCanvasQuadBatchRenderer:SpriteRenderer = (cast { createData: noopRendererData, submit: drawCanvasQuadBatch });
 }

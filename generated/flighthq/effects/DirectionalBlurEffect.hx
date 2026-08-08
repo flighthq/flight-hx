@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class DirectionalBlurEffect {
-  public static function createDirectionalBlurEffect(?options:Dynamic):flighthq.types.DirectionalBlurEffect {
+  public static function createDirectionalBlurEffect(?options:flighthq._internal._Omit<flighthq.types.DirectionalBlurEffect, String>):flighthq.types.DirectionalBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'DirectionalBlurEffect' }, options]);
     return cast null;
@@ -34,11 +34,11 @@ class DirectionalBlurEffect {
   }
 
   public static function registerDirectionalBlurEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'DirectionalBlurEffect' : String), DirectionalBlurEffect.resolveDirectionalBlurEffectPadding__directionalBlurEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'DirectionalBlurEffect' : String), (cast DirectionalBlurEffect.resolveDirectionalBlurEffectPadding__directionalBlurEffect));
   }
 
   public static function resolveDirectionalBlurEffectPadding__directionalBlurEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getDirectionalBlurEffectPadding((cast (cast effect : flighthq.types.DirectionalBlurEffect) : flighthq.types.DirectionalBlurEffect)) : RenderEffectPadding);
+    return cast (cast getDirectionalBlurEffectPadding((cast (cast effect : flighthq.types.DirectionalBlurEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

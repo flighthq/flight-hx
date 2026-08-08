@@ -20,7 +20,7 @@ import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 class WgpuBlurEffect {
   @:noCompletion
   public static function applyBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, effect:BlurEffect):Void {
-    applyGaussianBlurToWgpu((cast state : WgpuRenderState), (cast source : WgpuRenderTarget), (cast dest : WgpuRenderTarget), (cast temp : WgpuRenderTarget), (cast { blurX: _Runtime.field(effect, 'blurX'), blurY: _Runtime.field(effect, 'blurY') } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }));
+    applyGaussianBlurToWgpu((cast state), (cast source), (cast dest), (cast temp), (cast { blurX: _Runtime.field(effect, 'blurX'), blurY: _Runtime.field(effect, 'blurY') }));
   }
 
   @:noCompletion
@@ -33,34 +33,34 @@ class WgpuBlurEffect {
     sigmaY = _Runtime.coalesce((cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }).blurY, function():Dynamic return cast 4.0);
     radiusX = ((cast ((cast sigmaX : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.ceil((sigmaX * 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
     radiusY = ((cast ((cast sigmaY : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.ceil((sigmaY * 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
-    WgpuBlurEffect.applyWgpuGaussianBlurPass__wgpuBlurEffect((cast state : WgpuRenderState), (cast source : WgpuRenderTarget), (cast temp : WgpuRenderTarget), (cast sigmaX : Float), (cast radiusX : Float), (cast 1.0 : Float), (cast 0.0 : Float));
-    WgpuBlurEffect.applyWgpuGaussianBlurPass__wgpuBlurEffect((cast state : WgpuRenderState), (cast temp : WgpuRenderTarget), (cast dest : WgpuRenderTarget), (cast sigmaY : Float), (cast radiusY : Float), (cast 0.0 : Float), (cast 1.0 : Float));
+    WgpuBlurEffect.applyWgpuGaussianBlurPass__wgpuBlurEffect((cast state), (cast source), (cast temp), (cast sigmaX : Float), (cast radiusX : Float), (cast 1.0 : Float), (cast 0.0 : Float));
+    WgpuBlurEffect.applyWgpuGaussianBlurPass__wgpuBlurEffect((cast state), (cast temp), (cast dest), (cast sigmaY : Float), (cast radiusY : Float), (cast 0.0 : Float), (cast 1.0 : Float));
   }
 
-  public static final defaultWgpuBlurEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+  public static final defaultWgpuBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
     var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;
     var temp:WgpuRenderTarget = cast _Runtime.UNDEFINED;
-    descriptor = { width: _Runtime.field(_Runtime.field(ctx, 'source'), 'width'), height: _Runtime.field(_Runtime.field(ctx, 'source'), 'height'), format: _Runtime.field(_Runtime.field(ctx, 'source'), 'format') };
-    temp = (cast acquireWgpuRenderTarget((cast _Runtime.field(ctx, 'state') : WgpuRenderState), _Runtime.field(ctx, 'pool'), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
-    applyBlurEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast temp : WgpuRenderTarget), (cast (cast effect : BlurEffect) : BlurEffect));
-    releaseWgpuRenderTarget(_Runtime.field(ctx, 'pool'), (cast temp : WgpuRenderTarget));
-  };
+    descriptor = (cast { width: _Runtime.field(_Runtime.field(ctx, 'source'), 'width'), height: _Runtime.field(_Runtime.field(ctx, 'source'), 'height'), format: _Runtime.field(_Runtime.field(ctx, 'source'), 'format') });
+    temp = (cast acquireWgpuRenderTarget((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'pool')), (cast descriptor)) : WgpuRenderTarget);
+    applyBlurEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast temp), (cast (cast effect : BlurEffect)));
+    releaseWgpuRenderTarget((cast _Runtime.field(ctx, 'pool')), (cast temp));
+  });
 
   public static function registerWgpuBlurEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'BlurEffect' : String), (cast defaultWgpuBlurEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'BlurEffect' : String), (cast defaultWgpuBlurEffectRunner));
   }
 
   public static function applyWgpuGaussianBlurPass__wgpuBlurEffect(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, sigma:Float, radius:Float, dirX:Float, dirY:Float):Void {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'blur.gaussian' : String), (cast WgpuBlurEffect.GAUSSIAN_BLUR_WGSL__wgpuBlurEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'blur.gaussian' : String), (cast WgpuBlurEffect.GAUSSIAN_BLUR_WGSL__wgpuBlurEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, dirX);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, dirY);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, radius);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, sigma);
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
   public static final GAUSSIAN_BLUR_WGSL__wgpuBlurEffect:String = '\nstruct Uniforms {\n  texelSize : vec2f,\n  direction : vec2f,\n  radius : f32,\n  sigma : f32,\n  _pad0 : f32, _pad1 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let r = i32(uni.radius);\n  if (r == 0) { return textureSampleLevel(tex, smp, uv, 0.0); }\n  let twoSigmaSq = 2.0 * uni.sigma * uni.sigma;\n  var sum = vec4f(0.0);\n  var weightSum = 0.0;\n  for (var i = -r; i <= r; i++) {\n    let w = exp(-f32(i * i) / twoSigmaSq);\n    sum += w * textureSampleLevel(tex, smp, uv + f32(i) * uni.texelSize * uni.direction, 0.0);\n    weightSum += w;\n  }\n  return sum / weightSum;\n}';

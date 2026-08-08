@@ -13,6 +13,6 @@ class LayoutState {
   }
 
   public static function registerLayoutResolver(state:flighthq.types.Layout.LayoutState, kind:String, resolver:Null<LayoutResolver>):Void {
-    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast _Runtime.field(state, 'resolvers') : flighthq._internal._Map<String, LayoutResolver>).delete_(kind)); } else { ((cast _Runtime.field(state, 'resolvers') : flighthq._internal._Map<String, LayoutResolver>).set(kind, resolver)); }
+    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast _Runtime.field(state, 'resolvers') : flighthq._internal._Map<String, LayoutResolver>).delete_(kind)); } else { ((cast _Runtime.field(state, 'resolvers') : flighthq._internal._Map<String, LayoutResolver>).set(kind, (cast resolver))); }
   }
 }

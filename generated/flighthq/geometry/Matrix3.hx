@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Matrix3Pool.acquireMatrix3;
 import flighthq.geometry.Matrix3Pool.releaseMatrix3;
+import flighthq.types.Entity;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Matrix3;
 import flighthq.types.Matrix3.Matrix3Like;
@@ -15,8 +16,8 @@ import flighthq.types.Vector3.Vector3Like;
 class Matrix3 {
   public static function cloneMatrix3(source:Matrix3Like):flighthq.types.Matrix3 {
     var m:flighthq.types.Matrix3 = cast _Runtime.UNDEFINED;
-    m = (cast createMatrix3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : flighthq.types.Matrix3);
-    copyMatrix3((cast m : Matrix3Like), (cast source : Matrix3Like));
+    m = (cast createMatrix3((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.Matrix3);
+    copyMatrix3((cast m), (cast source));
     return cast m;
     return cast null;
   }
@@ -69,7 +70,7 @@ class Matrix3 {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var out:flighthq.types.Matrix3 = cast _Runtime.UNDEFINED;
     m = new flighthq._internal._Float32Array(Matrix3.__identity__matrix3);
-    out = (cast createEntity((cast { m: m } : Null<{ var m:flighthq._internal._Float32Array; }>)) : flighthq.types.Matrix3);
+    out = (cast createEntity((cast { m: m })) : { >Entity, var m:flighthq._internal._Float32Array; });
     if ((cast !_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, m00); }
     if ((cast !_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, m01); }
     if ((cast !_Runtime.strictEquals(m02, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, m02); }
@@ -89,7 +90,7 @@ class Matrix3 {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 9.0 : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array((cast a : flighthq.types.Matrix3).m, i), flighthq._internal._StaticIndex.readFloat32Array((cast b : flighthq.types.Matrix3).m, i)) : Bool)) { return cast false; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array((cast a : { var m:flighthq._internal._Float32Array; }).m, i), flighthq._internal._StaticIndex.readFloat32Array((cast b : { var m:flighthq._internal._Float32Array; }).m, i)) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -134,7 +135,7 @@ class Matrix3 {
     a02 = flighthq._internal._StaticIndex.readFloat32Array(_in, 6.0);
     a12 = flighthq._internal._StaticIndex.readFloat32Array(_in, 7.0);
     a22 = flighthq._internal._StaticIndex.readFloat32Array(_in, 8.0);
-    if ((cast (cast isAffineMatrix3((cast source : Matrix3Like)) : Bool) : Bool)) {
+    if ((cast (cast isAffineMatrix3((cast source)) : Bool) : Bool)) {
       var det:Float = ((a00 * a11) - (a01 * a10));
       if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) {
         _Runtime.fill(_out, HxMath.NaN, 0, null, 1);
@@ -223,7 +224,7 @@ class Matrix3 {
     b02 = flighthq._internal._StaticIndex.readFloat32Array(_b, 6.0);
     b12 = flighthq._internal._StaticIndex.readFloat32Array(_b, 7.0);
     b22 = flighthq._internal._StaticIndex.readFloat32Array(_b, 8.0);
-    if ((cast ((cast (cast isAffineMatrix3((cast a : Matrix3Like)) : Bool) : Bool) && (cast (cast isAffineMatrix3((cast b : Matrix3Like)) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast (cast isAffineMatrix3((cast a)) : Bool) : Bool) && (cast (cast isAffineMatrix3((cast b)) : Bool) : Bool)) : Bool)) {
       flighthq._internal._StaticIndex.writeFloat32Array(_out, 0.0, ((a00 * b00) + (a01 * b10)));
       flighthq._internal._StaticIndex.writeFloat32Array(_out, 1.0, ((a10 * b00) + (a11 * b10)));
       flighthq._internal._StaticIndex.writeFloat32Array(_out, 2.0, 0.0);
@@ -367,10 +368,10 @@ class Matrix3 {
   public static function setMatrix3NormalFromMatrix4(out:Matrix3Like, source:Matrix4Like):Void {
     var scratch:flighthq.types.Matrix3 = cast _Runtime.UNDEFINED;
     scratch = (cast acquireMatrix3() : flighthq.types.Matrix3);
-    setMatrix3FromMatrix4((cast scratch : Matrix3Like), (cast source : Matrix4Like));
-    (cast inverseMatrix3((cast scratch : Matrix3Like), (cast scratch : Matrix3Like)) : Bool);
-    transposeMatrix3((cast out : Matrix3Like), (cast scratch : Matrix3Like));
-    releaseMatrix3((cast scratch : flighthq.types.Matrix3));
+    setMatrix3FromMatrix4((cast scratch), (cast source));
+    (cast inverseMatrix3((cast scratch), (cast scratch)) : Bool);
+    transposeMatrix3((cast out), (cast scratch));
+    releaseMatrix3((cast scratch));
   }
 
   public static function translateMatrix3(out:Matrix3Like, source:Matrix3Like, tx:Float, ty:Float):Void {

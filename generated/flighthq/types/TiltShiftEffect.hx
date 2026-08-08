@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef TiltShiftEffect = { var kind:Kind; @:optional var center:Float; @:optional var width:Float; @:optional var blur:Float; };
+typedef TiltShiftEffect = { var kind:String; @:optional var center:Float; @:optional var width:Float; @:optional var blur:Float; };

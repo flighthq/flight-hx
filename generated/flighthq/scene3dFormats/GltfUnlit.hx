@@ -35,17 +35,17 @@ import flighthq.types.VoxelGrid;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
 class GltfUnlit {
-  public static final GltfUnlitExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+  public static final GltfUnlitExtensionHandler:GltfExtensionHandler = (cast { apply: function(context:GltfExtensionContext):Void {
     var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
-    materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
+    materials = _Runtime.coalesce((cast _Runtime.field(context, 'source') : { @:optional var materials:Null<Array<GltfMaterial>>; }).materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_unlit'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
+        if ((cast _Runtime.strictEquals(({ final __structural0 = (cast flighthq._internal._StaticIndex.readArray(materials, i) : { @:optional var extensions:Null<{ @:optional var KHR_materials_anisotropy:Null<GltfMaterialsAnisotropy>; @:optional var KHR_materials_clearcoat:Null<GltfMaterialsClearcoat>; @:optional var KHR_materials_emissive_strength:Null<GltfMaterialsEmissiveStrength>; @:optional var KHR_materials_ior:Null<GltfMaterialsIor>; @:optional var KHR_materials_iridescence:Null<GltfMaterialsIridescence>; @:optional var KHR_materials_pbrSpecularGlossiness:Null<GltfMaterialsPbrSpecularGlossiness>; @:optional var KHR_materials_sheen:Null<GltfMaterialsSheen>; @:optional var KHR_materials_unlit:Null<flighthq._internal._Record<String, flighthq._internal._Any>>; @:optional var KHR_materials_specular:Null<GltfMaterialsSpecular>; @:optional var KHR_materials_transmission:Null<GltfMaterialsTransmission>; @:optional var KHR_materials_volume:Null<GltfMaterialsVolume>; }>; }).extensions; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var KHR_materials_unlit:Null<flighthq._internal._Record<String, flighthq._internal._Any>>; }).KHR_materials_unlit; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         var existing:MaterialLike = flighthq._internal._StaticIndex.readArray((cast _Runtime.field(context, 'document') : Scene3DDocument).materials, i);
         if ((cast ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(existing, 'kind'), StandardPbrMaterialKind) : Bool)) : Bool)) { i++; continue; }
         var standard:StandardPbrMaterial = (cast (cast existing : flighthq._internal._Any) : StandardPbrMaterial);
-        var replacement:UnlitMaterial = (cast createUnlitMaterial((cast { baseColor: (cast standard : StandardPbrMaterial).baseColor, baseColorMap: (cast standard : StandardPbrMaterial).baseColorMap } : Null<flighthq._internal._Any>)) : UnlitMaterial);
+        var replacement:UnlitMaterial = (cast createUnlitMaterial((cast { baseColor: (cast standard : StandardPbrMaterial).baseColor, baseColorMap: (cast standard : StandardPbrMaterial).baseColorMap })) : UnlitMaterial);
         ((cast replacement : UnlitMaterial).alphaCutoff = (cast standard : StandardPbrMaterial).alphaCutoff);
         ((cast replacement : UnlitMaterial).alphaMode = (cast standard : StandardPbrMaterial).alphaMode);
         ((cast replacement : UnlitMaterial).doubleSided = (cast standard : StandardPbrMaterial).doubleSided);
@@ -54,5 +54,5 @@ class GltfUnlit {
         i++;
       }
     }
-  }, kind: 'KHR_materials_unlit' };
+  }, kind: 'KHR_materials_unlit' });
 }

@@ -209,20 +209,20 @@ class BitmapBlur {
     radiusX = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0)));
     radiusY = HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0)));
     passes = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0)));
-    extractBitmapPixels((cast out : flighthq._internal._UInt8ClampedArray), (cast source : BitmapRegion));
+    extractBitmapPixels((cast out), (cast source));
     a = out;
     b = scratch;
     {
       var pass:Float = 0.0;
       while ((cast ((cast pass : Float) < (cast passes : Float)) : Bool)) {
         if ((cast ((cast radiusX : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsHorizontal((cast b : flighthq._internal._UInt8ClampedArray), (cast a : flighthq._internal._UInt8ClampedArray), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), (cast radiusX : Float));
+          blurBitmapPixelsHorizontal((cast b), (cast a), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), (cast radiusX : Float));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
         if ((cast ((cast radiusY : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsVertical((cast b : flighthq._internal._UInt8ClampedArray), (cast a : flighthq._internal._UInt8ClampedArray), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), (cast radiusY : Float));
+          blurBitmapPixelsVertical((cast b), (cast a), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), (cast radiusY : Float));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
@@ -279,22 +279,22 @@ class BitmapBlur {
     radiusY = HxMath.max(0.0, HxMath.ceil((sigmaY * 3.0)));
     kernelX = ((cast ((cast radiusX : Float) > (cast 0.0 : Float)) : Bool) ? (cast new flighthq._internal._Float32Array(((2.0 * radiusX) + 1.0)) : Dynamic) : (cast null : Dynamic));
     kernelY = ((cast ((cast radiusY : Float) > (cast 0.0 : Float)) : Bool) ? (cast new flighthq._internal._Float32Array(((2.0 * radiusY) + 1.0)) : Dynamic) : (cast null : Dynamic));
-    if (_Runtime.truthy(kernelX)) { computeGaussianKernel((cast kernelX : flighthq._internal._Float32Array), (cast radiusX : Float), (cast sigmaX : Float)); }
-    if (_Runtime.truthy(kernelY)) { computeGaussianKernel((cast kernelY : flighthq._internal._Float32Array), (cast radiusY : Float), (cast sigmaY : Float)); }
-    extractBitmapPixels((cast out : flighthq._internal._UInt8ClampedArray), (cast source : BitmapRegion));
+    if (_Runtime.truthy(kernelX)) { computeGaussianKernel((cast kernelX), (cast radiusX : Float), (cast sigmaX : Float)); }
+    if (_Runtime.truthy(kernelY)) { computeGaussianKernel((cast kernelY), (cast radiusY : Float), (cast sigmaY : Float)); }
+    extractBitmapPixels((cast out), (cast source));
     a = out;
     b = scratch;
     {
       var pass:Float = 0.0;
       while ((cast ((cast pass : Float) < (cast passCount : Float)) : Bool)) {
         if (_Runtime.truthy(kernelX)) {
-          blurBitmapPixelsHorizontalWeighted((cast b : flighthq._internal._UInt8ClampedArray), (cast a : flighthq._internal._UInt8ClampedArray), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), (cast kernelX : flighthq._internal._Float32Array));
+          blurBitmapPixelsHorizontalWeighted((cast b), (cast a), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), (cast kernelX));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
         if (_Runtime.truthy(kernelY)) {
-          blurBitmapPixelsVerticalWeighted((cast b : flighthq._internal._UInt8ClampedArray), (cast a : flighthq._internal._UInt8ClampedArray), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), (cast kernelY : flighthq._internal._Float32Array));
+          blurBitmapPixelsVerticalWeighted((cast b), (cast a), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), (cast kernelY));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));

@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class GlitchEffect {
-  public static function createGlitchEffect(?options:Dynamic):flighthq.types.GlitchEffect {
+  public static function createGlitchEffect(?options:flighthq._internal._Omit<flighthq.types.GlitchEffect, String>):flighthq.types.GlitchEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'GlitchEffect' }, options]);
     return cast null;
@@ -28,11 +28,11 @@ class GlitchEffect {
   }
 
   public static function registerGlitchEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'GlitchEffect' : String), GlitchEffect.resolveGlitchEffectPadding__glitchEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'GlitchEffect' : String), (cast GlitchEffect.resolveGlitchEffectPadding__glitchEffect));
   }
 
   public static function resolveGlitchEffectPadding__glitchEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getGlitchEffectPadding((cast (cast effect : flighthq.types.GlitchEffect) : flighthq.types.GlitchEffect)) : RenderEffectPadding);
+    return cast (cast getGlitchEffectPadding((cast (cast effect : flighthq.types.GlitchEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometryAttributes.getVertexAttributeFloatOffset;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
+import flighthq.types.MeshGeometry.VertexSemantic;
 
 class MeshGeometryUvs {
   public static function offsetMeshGeometryUvs(geometry:MeshGeometry, du:Float, dv:Float):Void {
@@ -13,9 +14,9 @@ class MeshGeometryUvs {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var verts:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    floatOffset = (cast getVertexAttributeFloatOffset(geometry.layout, 'uv0') : Float);
+    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout), (cast 'uv0')) : Float);
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return; }
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     verts = geometry.vertices;
     {
@@ -35,9 +36,9 @@ class MeshGeometryUvs {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var verts:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    floatOffset = (cast getVertexAttributeFloatOffset(geometry.layout, 'uv0') : Float);
+    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout), (cast 'uv0')) : Float);
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return; }
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     verts = geometry.vertices;
     {
@@ -57,9 +58,9 @@ class MeshGeometryUvs {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var verts:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    floatOffset = (cast getVertexAttributeFloatOffset(geometry.layout, 'uv0') : Float);
+    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout), (cast 'uv0')) : Float);
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return; }
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     verts = geometry.vertices;
     {

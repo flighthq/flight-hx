@@ -196,6 +196,7 @@ export function lowerTypeScriptSource(
   const externalTypes = new Set<string>();
   const externalValues = new Map<string, { imported: string; specifier: string }>();
   const directTypeNames = new Set<string>();
+  const utilityAliasNames = new Set<string>();
   const visibleTypeNames = new Set<string>();
   for (const statement of sourceFile.statements) {
     if (
@@ -207,6 +208,9 @@ export function lowerTypeScriptSource(
     ) {
       visibleTypeNames.add(statement.name.text);
       if (hasModifier(statement, ts.SyntaxKind.ExportKeyword)) directTypeNames.add(statement.name.text);
+      if (ts.isTypeAliasDeclaration(statement) && typeNodeIncludesErasedUtility(statement.type)) {
+        utilityAliasNames.add(statement.name.text);
+      }
     }
   }
   for (const statement of sourceFile.statements) {
@@ -295,6 +299,7 @@ export function lowerTypeScriptSource(
     sourceFile,
     temporaryIndex: 0,
     typedStructs,
+    utilityAliasNames,
     visibleTypeNames,
     webGpuCanvasContextBindingNames,
     webGpuDeviceBindingNames,
@@ -729,18 +734,35 @@ function structuralReceiverType(node: ts.PropertyAccessExpression, context: Lowe
   const checker = context.checker;
   if (!checker) return undefined;
   const receiver = checker.getTypeAtLocation(node.expression);
-  if (
-    (receiver.flags & (ts.TypeFlags.Any | ts.TypeFlags.Unknown | ts.TypeFlags.TypeParameter)) !== 0 ||
-    !checker.getPropertyOfType(receiver, node.name.text)
-  ) {
+  const declaredProperty = checker.getPropertyOfType(receiver, node.name.text);
+  const narrowedProperty = checker.getSymbolAtLocation(node.name);
+  const property =
+    declaredProperty ??
+    (narrowedProperty?.declarations?.some((declaration) => !declaration.getSourceFile().isDeclarationFile)
+      ? narrowedProperty
+      : undefined);
+  if ((receiver.flags & (ts.TypeFlags.Any | ts.TypeFlags.Unknown | ts.TypeFlags.TypeParameter)) !== 0) {
     return undefined;
   }
-  if (receiver.isUnionOrIntersection()) {
-    const property = checker.getPropertyOfType(receiver, node.name.text);
-    const declaration = property?.valueDeclaration ?? property?.declarations?.[0] ?? node;
-    const fieldType = property
-      ? lowerCheckerType(checker.getTypeOfSymbolAtLocation(property, declaration), node, context, new Set())
+  if (!property) {
+    const indexed = checker.getIndexTypeOfType(receiver, ts.IndexKind.String);
+    const fieldType = indexed ? lowerCheckerType(indexed, node, context, new Set()) : undefined;
+    return fieldType
+      ? {
+          extends: [],
+          fields: [{ name: node.name.text, optional: false, type: fieldType }],
+          kind: 'anonymous',
+        }
       : undefined;
+  }
+  const fieldShape = (): IrType | undefined => {
+    const declaration = property?.valueDeclaration ?? property?.declarations?.[0] ?? node;
+    const fieldType = lowerCheckerType(
+      checker.getTypeOfSymbolAtLocation(property, declaration),
+      node,
+      context,
+      new Set(),
+    );
     return fieldType
       ? {
           extends: [],
@@ -754,10 +776,27 @@ function structuralReceiverType(node: ts.PropertyAccessExpression, context: Lowe
           kind: 'anonymous',
         }
       : undefined;
+  };
+  const declaredTypeNode = declaredStorageTypeNode(node.expression, checker);
+  if (declaredTypeNode && typeNodeContainsIndexedAccess(declaredTypeNode)) return fieldShape();
+  const propertyDeclaration = property?.valueDeclaration ?? property?.declarations?.[0] ?? node;
+  const propertyType =
+    property && checker.getNonNullableType(checker.getTypeOfSymbolAtLocation(property, propertyDeclaration));
+  const assignmentTarget =
+    ts.isBinaryExpression(node.parent) &&
+    node.parent.left === node &&
+    node.parent.operatorToken.kind >= ts.SyntaxKind.FirstAssignment &&
+    node.parent.operatorToken.kind <= ts.SyntaxKind.LastAssignment;
+  if (assignmentTarget && propertyType && checker.getSignaturesOfType(propertyType, ts.SignatureKind.Call).length > 0) {
+    return fieldShape();
   }
+  if (receiver.isUnionOrIntersection() || (receiver.flags & ts.TypeFlags.IndexedAccess) !== 0) return fieldShape();
   const lowered = lowerCheckerType(receiver, node.expression, context, new Set());
   if (!lowered || lowered.kind === 'dynamic' || lowered.kind === 'union') return undefined;
-  if (lowered.kind === 'anonymous') return lowered;
+  if (lowered.kind === 'named' && lowered.name === 'flighthq._internal._IndexedAccess') return fieldShape();
+  if (lowered.kind === 'anonymous') {
+    return lowered.fields.some((field) => field.name === node.name.text) ? lowered : fieldShape();
+  }
   if (lowered.kind !== 'named') return undefined;
   const symbol = receiver.aliasSymbol ?? receiver.getSymbol();
   const declarations = symbol?.declarations ?? [];
@@ -862,6 +901,7 @@ interface LoweringContext {
   sourceFile: ts.SourceFile;
   temporaryIndex: number;
   typedStructs?: TypedStructRegistry | undefined;
+  utilityAliasNames: ReadonlySet<string>;
   visibleTypeNames: ReadonlySet<string>;
   webGpuCanvasContextBindingNames: ReadonlySet<string>;
   webGpuDeviceBindingNames: ReadonlySet<string>;
@@ -975,6 +1015,7 @@ function lowerClass(node: ts.ClassDeclaration, context: LoweringContext) {
               ? ({ kind: 'dynamic' } satisfies IrType)
               : ({ kind: 'primitive', name: 'Void' } satisfies IrType)),
         static: hasModifier(method, ts.SyntaxKind.StaticKeyword),
+        typeParameterConstraints: lowerTypeParameterConstraints(method.typeParameters, context),
         typeParameters: method.typeParameters?.map((parameter) => parameter.name.text) ?? [],
       };
     }),
@@ -1032,12 +1073,21 @@ function lowerFunction(node: ts.FunctionDeclaration, context: LoweringContext): 
             ? { kind: 'dynamic' }
             : { kind: 'primitive', name: 'Void' }),
       ...(thisCapture ? { thisCapture } : {}),
+      typeParameterConstraints: lowerTypeParameterConstraints(node.typeParameters, context),
       typeParameters: node.typeParameters?.map((parameter) => parameter.name.text) ?? [],
     };
   } finally {
     context.classThis = previousClassThis;
     context.dynamicThisCapture = previousDynamicThisCapture;
   }
+}
+
+function lowerTypeParameterConstraints(
+  parameters: ts.NodeArray<ts.TypeParameterDeclaration> | undefined,
+  context: LoweringContext,
+): Array<IrType | undefined> | undefined {
+  if (!parameters?.some((parameter) => parameter.constraint)) return undefined;
+  return parameters.map((parameter) => (parameter.constraint ? lowerType(parameter.constraint, context) : undefined));
 }
 
 function dynamicThisCapture(node: ts.Node, context: LoweringContext): string | undefined {
@@ -1169,6 +1219,14 @@ function hostTypeMemberBinding(
   node: ts.PropertyAccessExpression,
   context: LoweringContext,
 ): IrHostTypeBinding | undefined {
+  const receiverType = context.checker?.getTypeAtLocation(node.expression);
+  const property = context.checker?.getSymbolAtLocation(node.name);
+  if (
+    receiverType?.isIntersection() &&
+    property?.declarations?.some((declaration) => !declaration.getSourceFile().isDeclarationFile)
+  ) {
+    return undefined;
+  }
   const identity = hostTypeIdentityForExpression(node.expression, context.checker);
   if (!identity) return undefined;
   recordHostType(identity, node, context, {
@@ -1210,7 +1268,13 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
       return { kind: 'primitive', name: 'Void' };
   }
   if (ts.isArrayTypeNode(node)) return { element: lowerType(node.elementType, context), kind: 'array' };
-  if (ts.isTypeOperatorNode(node)) return lowerType(node.type, context);
+  if (ts.isTypeOperatorNode(node)) {
+    if (node.operator === ts.SyntaxKind.KeyOfKeyword && context.checker) {
+      const type = context.checker.getTypeFromTypeNode(node);
+      return lowerCheckerType(type, node, context, new Set()) ?? checkerKnownUnrepresentable(type, context.checker);
+    }
+    return lowerType(node.type, context);
+  }
   if (ts.isTypeQueryNode(node)) return { kind: 'dynamic' };
   if (ts.isTypeLiteralNode(node)) {
     return { extends: [], fields: lowerTypeMembers(node.members, context), kind: 'anonymous' };
@@ -1234,7 +1298,48 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
   if (ts.isTypePredicateNode(node)) return { kind: 'primitive', name: 'Bool' };
   if (ts.isTypeReferenceNode(node)) {
     const name = node.typeName.getText(context.sourceFile);
-    const arguments_ = node.typeArguments?.map((argument) => lowerType(argument, context)) ?? [];
+    let arguments_ = node.typeArguments?.map((argument) => lowerType(argument, context)) ?? [];
+    let symbol = context.checker?.getSymbolAtLocation(node.typeName);
+    if (symbol && context.checker && (symbol.flags & ts.SymbolFlags.Alias) !== 0) {
+      symbol = context.checker.getAliasedSymbol(symbol);
+    }
+    const operatorBound = symbol?.declarations?.some(
+      (declaration) =>
+        ts.isTypeParameterDeclaration(declaration) &&
+        (ts.isInferTypeNode(declaration.parent) || ts.isMappedTypeNode(declaration.parent)),
+    );
+    if (operatorBound) return { arguments: [], kind: 'named', name: 'flighthq._internal._Infer' };
+    const declaredArity = Math.max(
+      0,
+      ...(symbol?.declarations ?? []).map((declaration) =>
+        ts.isTypeAliasDeclaration(declaration) ||
+        ts.isInterfaceDeclaration(declaration) ||
+        ts.isClassDeclaration(declaration)
+          ? (declaration.typeParameters?.length ?? 0)
+          : 0,
+      ),
+    );
+    if (arguments_.length === 0 && declaredArity > 0 && context.checker) {
+      const defaultTypes = checkerTypeArguments(context.checker.getTypeFromTypeNode(node), context.checker).slice(
+        0,
+        declaredArity,
+      );
+      const directlyRepresentableDefaults = defaultTypes.every(
+        (argument) =>
+          (argument.flags & (ts.TypeFlags.Any | ts.TypeFlags.Unknown)) !== 0 ||
+          typeOnlyHasFlags(argument, context.checker!, ts.TypeFlags.BooleanLike) ||
+          typeOnlyHasFlags(argument, context.checker!, ts.TypeFlags.NumberLike) ||
+          typeOnlyHasFlags(argument, context.checker!, ts.TypeFlags.StringLike),
+      );
+      if (defaultTypes.length === declaredArity && directlyRepresentableDefaults) {
+        arguments_ = defaultTypes.map(
+          (argument): IrType => lowerCheckerType(argument, node, context, new Set()) ?? { kind: 'dynamic' },
+        );
+      }
+    }
+    if (name === 'DeepReadonly') {
+      return { arguments: arguments_, kind: 'named', name: 'flighthq._internal._DeepReadonly' };
+    }
     if (context.erasedLocalTypes.has(name)) return { kind: 'dynamic' };
     if (name === 'Error') return { arguments: [], kind: 'named', name: 'haxe.Exception' };
     const portableType = portableTypeReferenceMap[name];
@@ -1266,8 +1371,16 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     ) {
       return { kind: 'dynamic' };
     }
-    if (['Omit', 'Partial', 'Pick'].includes(name)) return { kind: 'dynamic' };
-    if (['Awaited', 'Exclude', 'Extract', 'NonNullable', 'Readonly', 'Required'].includes(name) && arguments_[0]) {
+    const utilityType = {
+      Exclude: 'flighthq._internal._Exclude',
+      Extract: 'flighthq._internal._Extract',
+      Omit: 'flighthq._internal._Omit',
+      Partial: 'flighthq._internal._Partial',
+      Pick: 'flighthq._internal._Pick',
+      Required: 'flighthq._internal._Required',
+    }[name];
+    if (utilityType) return { arguments: arguments_, kind: 'named', name: utilityType };
+    if (['Awaited', 'NonNullable', 'Readonly'].includes(name) && arguments_[0]) {
       return arguments_[0];
     }
     if (name === 'Parameters') return { element: { kind: 'dynamic' }, kind: 'array' };
@@ -1300,7 +1413,7 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
       concrete.length === 1
         ? lowerType(concrete[0]!, context)
         : commonType(concrete.map((item) => lowerType(item, context)));
-    return nullable ? { inner, kind: 'nullable' } : inner;
+    return nullable && !(inner.kind === 'primitive' && inner.name === 'Void') ? { inner, kind: 'nullable' } : inner;
   }
   if (ts.isIntersectionTypeNode(node)) {
     const types = node.types.map((item) => lowerType(item, context));
@@ -1310,7 +1423,7 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     const genericPartner = types.find(
       (item) => item.kind === 'named' && ['D', 'R', 'T', 'Traits', 'Type', 'U'].includes(item.name),
     );
-    if (types.length === 2 && nodeType && genericPartner) return nodeType;
+    if (types.length === 2 && nodeType && genericPartner) return lowerIntersection(types, true);
     const genericType = types.find(
       (item) => item.kind === 'named' && ['D', 'R', 'T', 'Traits', 'Type', 'U'].includes(item.name),
     );
@@ -1318,7 +1431,11 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     const concrete = types.filter((item) => item.kind !== 'dynamic');
     if (concrete.length === 0) return { kind: 'dynamic' };
     if (concrete.length === 1) return concrete[0]!;
-    return lowerIntersection(concrete);
+    return lowerIntersection(
+      concrete,
+      concrete.some((item) => item.kind === 'named' && context.utilityAliasNames.has(item.name)) ||
+        Boolean(context.checker && node.types.some((item) => context.checker!.getTypeFromTypeNode(item).isUnion())),
+    );
   }
   if (ts.isIndexedAccessTypeNode(node)) {
     return {
@@ -1327,8 +1444,30 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
       name: 'flighthq._internal._IndexedAccess',
     };
   }
-  if (ts.isConditionalTypeNode(node) || ts.isMappedTypeNode(node)) {
-    return { kind: 'dynamic' };
+  if (ts.isInferTypeNode(node)) {
+    return { arguments: [], kind: 'named', name: 'flighthq._internal._Infer' };
+  }
+  if (ts.isConditionalTypeNode(node)) {
+    return {
+      arguments: [
+        lowerType(node.checkType, context),
+        lowerType(node.extendsType, context),
+        lowerType(node.trueType, context),
+        lowerType(node.falseType, context),
+      ],
+      kind: 'named',
+      name: 'flighthq._internal._Conditional',
+    };
+  }
+  if (ts.isMappedTypeNode(node)) {
+    return {
+      arguments: [
+        node.typeParameter.constraint ? lowerType(node.typeParameter.constraint, context) : { kind: 'dynamic' },
+        node.type ? lowerType(node.type, context) : { kind: 'dynamic' },
+      ],
+      kind: 'named',
+      name: 'flighthq._internal._Mapped',
+    };
   }
   if (ts.isLiteralTypeNode(node)) {
     if (node.literal.kind === ts.SyntaxKind.NullKeyword) return { kind: 'dynamic' };
@@ -1360,10 +1499,29 @@ function inferredReturnType(node: ts.SignatureDeclaration, context: LoweringCont
   if (!context.preserveInferredTypes) return undefined;
   const checker = context.checker;
   if (!checker) return undefined;
+  let contextualType: ts.Type | undefined;
+  if (ts.isArrowFunction(node) || ts.isFunctionExpression(node)) {
+    contextualType = checker.getContextualType(node);
+  } else if (ts.isMethodDeclaration(node) && ts.isObjectLiteralExpression(node.parent)) {
+    const owner = checker.getContextualType(node.parent);
+    const property = owner && checker.getPropertyOfType(owner, propertyName(node.name, context));
+    contextualType = property && checker.getTypeOfSymbolAtLocation(property, node);
+  }
+  const contextualSignature = contextualType && checker.getSignaturesOfType(contextualType, ts.SignatureKind.Call)[0];
+  let loweredContextualReturn: IrType | undefined;
+  if (contextualSignature) {
+    const contextualReturn = checker.getReturnTypeOfSignature(contextualSignature);
+    loweredContextualReturn = lowerCheckerType(contextualReturn, node, context, new Set());
+    if (loweredContextualReturn?.kind !== 'dynamic') return loweredContextualReturn;
+  }
   const signature = checker.getSignatureFromDeclaration(node);
   if (!signature) return undefined;
   const type = checker.getReturnTypeOfSignature(signature);
-  return lowerCheckerType(type, node, context, new Set()) ?? checkerKnownUnrepresentable(type, checker);
+  return (
+    lowerCheckerType(type, node, context, new Set()) ??
+    loweredContextualReturn ??
+    checkerKnownUnrepresentable(type, checker)
+  );
 }
 
 function checkerKnownUnrepresentable(type: ts.Type, checker: ts.TypeChecker): IrType {
@@ -1459,7 +1617,9 @@ function lowerCheckerTypeUncached(
     const lowered = concrete.map((item) => lowerCheckerType(item, node, context, nextSeen));
     if (lowered.some((item) => !item)) return undefined;
     const inner = commonType(lowered as IrType[]);
-    return concrete.length === type.types.length ? inner : { inner, kind: 'nullable' };
+    return concrete.length === type.types.length || (inner.kind === 'primitive' && inner.name === 'Void')
+      ? inner
+      : { inner, kind: 'nullable' };
   }
   if (type.isIntersection()) {
     const lowered = type.types.map((item) => lowerCheckerType(item, node, context, nextSeen));
@@ -1469,7 +1629,9 @@ function lowerCheckerTypeUncached(
     if (concrete.length === 1) return concrete[0];
     return lowerIntersection(
       concrete,
-      type.types.some((item) => (item.flags & ts.TypeFlags.TypeParameter) !== 0),
+      type.types.some(
+        (item) => (item.flags & ts.TypeFlags.TypeParameter) !== 0 || hostTypeIdentity(item, checker) !== undefined,
+      ),
     );
   }
   const hostType = hostTypeIdentity(type, checker);
@@ -1635,7 +1797,13 @@ function lowerExpressionWithTypeArguments(node: ts.ExpressionWithTypeArguments, 
     const hostArguments = [...arguments_];
     while (hostArguments.length < hostType.arity) hostArguments.push({ kind: 'dynamic' });
     recordHostType(hostType, node, context, { arity: hostArguments.length, kind: 'type-reference' });
-    return { arguments: hostArguments, kind: 'named', name: hostType.haxeType };
+    if (hostType.name === 'EventTarget') {
+      return { arguments: hostArguments, kind: 'named', name: hostType.haxeType };
+    }
+    // Haxe anonymous structures can only extend other structures. The host
+    // identity remains in the toolkit audit; the local declaration carries
+    // the source-defined structural slice that portable targets consume.
+    return { kind: 'dynamic', reason: 'external-toolkit-boundary' };
   }
   return {
     arguments: arguments_,
@@ -1867,7 +2035,20 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
     context.dynamicThisCapture = thisCapture;
     try {
       const loweredParameters = lowerParameterList(node.parameters, context);
-      const parameters = loweredParameters.parameters;
+      const erasedTypeParameters = new Set(node.typeParameters?.map((parameter) => parameter.name.text) ?? []);
+      const parameters = loweredParameters.parameters.map((parameter) => ({
+        ...parameter,
+        type: eraseLocalTypeParameters(parameter.type, erasedTypeParameters),
+      }));
+      const returnType = eraseLocalTypeParameters(
+        (node.type ? lowerType(node.type, context) : inferredReturnType(node, context)) ??
+          (hasModifier(node, ts.SyntaxKind.AsyncKeyword)
+            ? promiseOfDynamic()
+            : hasReturnValue(node.body)
+              ? { kind: 'dynamic' }
+              : { kind: 'primitive', name: 'Void' }),
+        erasedTypeParameters,
+      );
       return {
         declarations: [
           {
@@ -1877,13 +2058,7 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
               kind: 'function',
               name: node.name.text,
               parameters,
-              returns:
-                (node.type ? lowerType(node.type, context) : inferredReturnType(node, context)) ??
-                (hasModifier(node, ts.SyntaxKind.AsyncKeyword)
-                  ? promiseOfDynamic()
-                  : hasReturnValue(node.body)
-                    ? { kind: 'dynamic' }
-                    : { kind: 'primitive', name: 'Void' }),
+              returns: returnType,
               ...(thisCapture ? { thisCapture } : {}),
             },
             mutable: false,
@@ -1891,9 +2066,7 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
             type: {
               kind: 'function',
               parameters: parameters.map((parameter) => parameter.type),
-              returns: (node.type ? lowerType(node.type, context) : inferredReturnType(node, context)) ?? {
-                kind: 'dynamic',
-              },
+              returns: returnType,
             },
           },
         ],
@@ -1954,6 +2127,21 @@ function expressionStaticFacts(node: ts.Expression, context: LoweringContext): I
     typeOnlyHasFlags(checker.getTypeAtLocation(node.right), checker, ts.TypeFlags.NumberLike)
   ) {
     facts.numericOperands = true;
+    const widenedStorage = (operand: ts.Expression): boolean => {
+      const target = unwrapAssignmentTarget(operand);
+      if (!ts.isIdentifier(target)) return false;
+      const declaration = checker.getSymbolAtLocation(target)?.valueDeclaration;
+      const declaredTypeNode =
+        declaration &&
+        (ts.isParameter(declaration) || ts.isVariableDeclaration(declaration) || ts.isPropertyDeclaration(declaration))
+          ? declaration.type
+          : undefined;
+      return Boolean(
+        declaredTypeNode &&
+        !typeOnlyHasFlags(checker.getTypeFromTypeNode(declaredTypeNode), checker, ts.TypeFlags.NumberLike),
+      );
+    };
+    if (widenedStorage(node.left) || widenedStorage(node.right)) facts.narrowedNumericOperands = true;
   }
   if (
     ts.isBinaryExpression(node) &&
@@ -2348,14 +2536,25 @@ function typedStructPropertyBinding(
   if (field.readonly && isTypedStructWrite(node)) {
     return unsupported(node, context, `assignment to readonly typed-struct field ${schema.name}.${node.name.text}`);
   }
+  const propertyDeclaration = property?.valueDeclaration ?? property?.declarations?.[0] ?? node;
+  const fieldType = property
+    ? lowerCheckerType(checker.getTypeOfSymbolAtLocation(property, propertyDeclaration), node, context, new Set())
+    : undefined;
   return {
     field: {
       name: field.name,
       optional: field.optional,
       readonly: field.readonly,
       requiredUndefined: field.requiredUndefined,
+      ...(fieldType ? { type: fieldType } : {}),
     },
-    receiverCast: typedStructReceiverCast(node.expression, binding.schemaId, binding.schemaHaxeType, context),
+    receiverCast: typedStructReceiverCast(
+      node.expression,
+      binding.schemaId,
+      binding.schemaHaxeType,
+      node.name.text,
+      context,
+    ),
     schemaId: binding.schemaId,
     schemaName: binding.schemaName,
   };
@@ -2365,9 +2564,37 @@ function typedStructReceiverCast(
   receiver: ts.Expression,
   schemaId: string,
   schemaHaxeType: string,
+  fieldName: string,
   context: LoweringContext,
-): string | undefined {
-  if (!ts.isIdentifier(receiver) || !context.checker || !context.typedStructs) return undefined;
+): IrType | string | undefined {
+  if (!context.checker || !context.typedStructs) return undefined;
+  if (!ts.isIdentifier(receiver)) {
+    const receiverType = context.checker.getNonNullableType(context.checker.getTypeAtLocation(receiver));
+    const property = context.checker.getPropertyOfType(receiverType, fieldName);
+    if (property) {
+      const location = property.valueDeclaration ?? property.declarations?.[0] ?? receiver;
+      const fieldType = lowerCheckerType(
+        context.checker.getTypeOfSymbolAtLocation(property, location),
+        receiver,
+        context,
+        new Set(),
+      );
+      if (fieldType) {
+        return {
+          extends: [],
+          fields: [
+            {
+              name: fieldName,
+              optional: (property.flags & ts.SymbolFlags.Optional) !== 0,
+              type: fieldType,
+            },
+          ],
+          kind: 'anonymous',
+        };
+      }
+    }
+    return schemaHaxeType;
+  }
   const symbol = context.checker.getSymbolAtLocation(receiver);
   const declaration = symbol?.valueDeclaration;
   const declaredTypeNode =
@@ -2382,14 +2609,52 @@ function typedStructReceiverCast(
       ? context.checker.getTypeAtLocation(declaration.name)
       : undefined;
   if (!declaredType) return undefined;
+  const narrowedType = context.checker.getNonNullableType(context.checker.getTypeAtLocation(receiver));
+  const narrowedProperty = context.checker.getPropertyOfType(narrowedType, fieldName);
+  const narrowedFieldShape = (): IrType | undefined => {
+    if (!narrowedProperty) return undefined;
+    const location = narrowedProperty.valueDeclaration ?? narrowedProperty.declarations?.[0] ?? receiver;
+    const fieldType = lowerCheckerType(
+      context.checker!.getTypeOfSymbolAtLocation(narrowedProperty, location),
+      receiver,
+      context,
+      new Set(),
+    );
+    return fieldType
+      ? {
+          extends: [],
+          fields: [
+            {
+              name: fieldName,
+              optional: (narrowedProperty.flags & ts.SymbolFlags.Optional) !== 0,
+              type: fieldType,
+            },
+          ],
+          kind: 'anonymous',
+        }
+      : undefined;
+  };
+  if (declaredTypeNode && typeNodeContainsIndexedAccess(declaredTypeNode)) {
+    return narrowedFieldShape() ?? schemaHaxeType;
+  }
   // A schema-only cast would erase generic storage such as SignalData<T>. Concrete
   // utility wrappers (for example Readonly<Projection>) are safe to narrow.
   if (checkerTypeContainsTypeParameter(declaredType, context.checker)) return undefined;
-  if (declaredType.isUnion()) return schemaHaxeType;
+  if (!context.checker.getPropertyOfType(declaredType, fieldName)) {
+    return narrowedFieldShape() ?? schemaHaxeType;
+  }
+  if (declaredType.isUnion()) return narrowedFieldShape() ?? schemaHaxeType;
   if (declaredTypeNode && ts.isTypeReferenceNode(declaredTypeNode) && declaredTypeNode.typeArguments?.length) {
     return undefined;
   }
   const declaredResolution = context.typedStructs.resolveDirect(declaredType);
+  if (declaredTypeNode) {
+    const storageType = lowerType(declaredTypeNode, context);
+    const concreteStorageType = storageType.kind === 'nullable' ? storageType.inner : storageType;
+    if (concreteStorageType.kind === 'named' && concreteStorageType.name === 'flighthq._internal._IndexedAccess') {
+      return schemaHaxeType;
+    }
+  }
   if (declaredResolution.kind === 'matched' && declaredResolution.schemas[0]?.id === schemaId) return undefined;
   try {
     if (!declaredTypeNode) return schemaHaxeType;
@@ -2400,6 +2665,24 @@ function typedStructReceiverCast(
     if (error instanceof UnsupportedSyntaxError) return undefined;
     throw error;
   }
+}
+
+function declaredStorageTypeNode(expression: ts.Expression, checker: ts.TypeChecker): ts.TypeNode | undefined {
+  if (!ts.isIdentifier(expression)) return undefined;
+  const declaration = checker.getSymbolAtLocation(expression)?.valueDeclaration;
+  return declaration &&
+    (ts.isParameter(declaration) || ts.isVariableDeclaration(declaration) || ts.isPropertyDeclaration(declaration))
+    ? declaration.type
+    : undefined;
+}
+
+function typeNodeContainsIndexedAccess(node: ts.TypeNode): boolean {
+  if (ts.isIndexedAccessTypeNode(node)) return true;
+  let found = false;
+  ts.forEachChild(node, (child) => {
+    if (!found && ts.isTypeNode(child) && typeNodeContainsIndexedAccess(child)) found = true;
+  });
+  return found;
 }
 
 function checkerTypeContainsTypeParameter(type: ts.Type, checker: ts.TypeChecker, seen = new Set<ts.Type>()): boolean {
@@ -2440,17 +2723,20 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
   const contextualType =
     context.preserveExpressionTypes && ts.isCallExpression(node) ? context.checker?.getContextualType(node) : undefined;
   const loweredContextualType = contextualType ? lowerCheckerType(contextualType, node, context, new Set()) : undefined;
+  const loweredInferredType = context.preserveExpressionTypes ? inferredType(node, context) : undefined;
   const type =
     context.preserveExpressionTypes && preservesExpressionType(node)
-      ? loweredContextualType
-        ? loweredContextualType
-        : inferredType(node, context)
+      ? loweredInferredType && loweredInferredType.kind !== 'dynamic'
+        ? loweredInferredType
+        : (loweredContextualType ?? loweredInferredType)
       : undefined;
   // Anonymous object shapes are already explicit in object-expression IR and
   // on each structural member binding. Repeating their full field graph on
   // every intermediate expression makes module transforms quadratic without
   // adding backend information.
-  if (type && (type.kind !== 'anonymous' || ts.isCallExpression(node))) expression.type = type;
+  const explicitParentCast =
+    (ts.isAsExpression(node.parent) || ts.isTypeAssertionExpression(node.parent)) && node.parent.expression === node;
+  if (type && !explicitParentCast && (type.kind !== 'anonymous' || ts.isCallExpression(node))) expression.type = type;
   return expression;
 }
 
@@ -2481,7 +2767,13 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     ) {
       return lowerExpression(node.expression, context);
     }
-    return { expression: lowerExpression(node.expression, context), kind: 'cast', type: lowerType(node.type, context) };
+    const type = ts.isIntersectionTypeNode(node.type)
+      ? lowerIntersection(
+          node.type.types.map((item) => lowerType(item, context)),
+          true,
+        )
+      : lowerType(node.type, context);
+    return { expression: lowerExpression(node.expression, context), kind: 'cast', type };
   }
   if (ts.isNonNullExpression(node)) {
     return lowerExpression(node.expression, context);
@@ -2682,14 +2974,22 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
       !node.arguments.some(ts.isSpreadElement) &&
       checkerCallIsTyped(node.expression, context);
     const directCalleeType = direct ? directCallReceiverCast(node, context) : undefined;
-    const directCall = direct ? directCallArguments(node, context) : undefined;
+    const adaptStructuralCall =
+      callee.kind === 'property' &&
+      callee.name !== 'set' &&
+      Boolean(callee.typedStructBinding || callee.structuralReceiverType);
+    const checkedCall =
+      (direct || adaptStructuralCall) && checkerCallIsTyped(node.expression, context)
+        ? directCallArguments(node, context)
+        : undefined;
     return {
-      arguments: directCall?.arguments ?? node.arguments.map((argument) => lowerExpression(argument, context)),
+      arguments: checkedCall?.arguments ?? node.arguments.map((argument) => lowerExpression(argument, context)),
       callee,
+      ...(checkedCall?.inferenceCasts.some(Boolean) ? { inferenceCastArguments: checkedCall.inferenceCasts } : {}),
+      ...(checkedCall?.types ? { directArgumentTypes: checkedCall.types } : {}),
       ...(direct
         ? {
             direct: true,
-            ...(directCall?.types ? { directArgumentTypes: directCall.types } : {}),
             ...(directCalleeType ? { directCalleeType } : {}),
           }
         : {}),
@@ -2809,13 +3109,20 @@ function checkerCallIsTyped(node: ts.Expression, context: LoweringContext): bool
 function directCallArguments(
   node: ts.CallExpression,
   context: LoweringContext,
-): { arguments: IrExpression[]; types?: Array<IrType | undefined> } {
+): { arguments: IrExpression[]; inferenceCasts: boolean[]; types?: Array<IrType | undefined> } {
   const arguments_ = node.arguments.map((argument) => lowerExpression(argument, context));
+  const inferenceCasts = node.arguments.map(
+    (argument) =>
+      ts.isObjectLiteralExpression(argument) ||
+      ts.isArrayLiteralExpression(argument) ||
+      ts.isArrowFunction(argument) ||
+      ts.isFunctionExpression(argument),
+  );
   const checker = context.checker;
   const signature = checker?.getResolvedSignature(node);
-  if (!checker || !signature) return { arguments: arguments_ };
+  if (!checker || !signature) return { arguments: arguments_, inferenceCasts };
   const symbols = signature.getParameters();
-  if (symbols.some(signatureParameterIsRest)) return { arguments: arguments_ };
+  if (symbols.some(signatureParameterIsRest)) return { arguments: arguments_, inferenceCasts };
   for (let index = 0; index < arguments_.length && index < symbols.length; index++) {
     arguments_[index] = adaptDirectFunctionArgument(
       node.arguments[index]!,
@@ -2824,10 +3131,8 @@ function directCallArguments(
       context,
     );
   }
-  const types = symbols.map((parameter) => {
-    const location = parameter.valueDeclaration ?? parameter.declarations?.[0] ?? node.expression;
-    return lowerCheckerType(checker.getTypeOfSymbolAtLocation(parameter, location), node, context, new Set());
-  });
+  const parameterTypes = symbols.map((parameter) => checker.getTypeOfSymbolAtLocation(parameter, node));
+  const types = parameterTypes.map((type) => lowerCheckerType(type, node, context, new Set()));
   for (let index = arguments_.length; index < symbols.length; index++) {
     if (!signatureParameterIsOptional(symbols[index]!)) break;
     arguments_.push({
@@ -2837,8 +3142,19 @@ function directCallArguments(
     });
   }
   const usedTypes = types.slice(0, arguments_.length);
-  const visibleTypes = usedTypes.map((type) => (type && directArgumentTypeIsVisible(type, context) ? type : undefined));
-  return visibleTypes.some((type) => type) ? { arguments: arguments_, types: visibleTypes } : { arguments: arguments_ };
+  const visibleTypes = usedTypes.map((type, index) =>
+    type &&
+    (directArgumentTypeIsVisible(type, context) || checkerTypeIsExportedMonomorphic(parameterTypes[index]!, checker))
+      ? type
+      : undefined,
+  );
+  visibleTypes.forEach((type, index) => {
+    const expected = usedTypes[index];
+    if (!type && expected && expected.kind !== 'primitive') inferenceCasts[index] = true;
+  });
+  return visibleTypes.some((type) => type)
+    ? { arguments: arguments_, inferenceCasts, types: visibleTypes }
+    : { arguments: arguments_, inferenceCasts };
 }
 
 function adaptDirectFunctionArgument(
@@ -2849,45 +3165,37 @@ function adaptDirectFunctionArgument(
 ): IrExpression {
   const checker = context.checker;
   if (!checker) return lowered;
-  const expectedLocation = expectedParameter.valueDeclaration ?? expectedParameter.declarations?.[0] ?? node;
   const expectedType = checker.getNonNullableType(
-    checker.getTypeOfSymbolAtLocation(expectedParameter, expectedLocation),
+    checker.getContextualType(node) ?? checker.getTypeOfSymbolAtLocation(expectedParameter, node),
   );
   const expectedSignature = checker.getSignaturesOfType(expectedType, ts.SignatureKind.Call)[0];
   const actualSignature = checker.getSignaturesOfType(checker.getTypeAtLocation(node), ts.SignatureKind.Call)[0];
   if (!expectedSignature || !actualSignature) return lowered;
   const expectedParameters = expectedSignature.getParameters();
   const actualParameters = actualSignature.getParameters();
-  if (
-    actualParameters.length >= expectedParameters.length ||
-    expectedParameters.some(signatureParameterIsRest) ||
-    actualParameters.some(signatureParameterIsRest)
-  ) {
+  if (actualParameters.length >= expectedParameters.length || actualParameters.some(signatureParameterIsRest)) {
     return lowered;
   }
   const parameters: IrParameter[] = [];
   for (const parameter of expectedParameters) {
-    const declaration = parameter.valueDeclaration ?? parameter.declarations?.[0];
-    const checkerType = lowerCheckerType(
-      checker.getTypeOfSymbolAtLocation(parameter, declaration ?? node),
-      node,
-      context,
-      new Set(),
+    const actualParameter = actualParameters[parameters.length];
+    const sourceParameter = actualParameter ?? parameter;
+    const declaration = sourceParameter.valueDeclaration ?? sourceParameter.declarations?.[0];
+    const location = actualParameter || expectedSignature.typeParameters?.length ? node : (declaration ?? node);
+    const parameterType = checker.getTypeOfSymbolAtLocation(sourceParameter, location);
+    const checkerType = lowerCheckerType(parameterType, node, context, new Set([expectedType]));
+    const sourceVisible = [parameterType, ...checkerTypeArguments(parameterType, checker)].some((candidate) =>
+      sourceDefinedNamedType(candidate.aliasSymbol ?? candidate.getSymbol()),
     );
     const type =
-      declaration &&
-      ts.isParameter(declaration) &&
-      declaration.type &&
-      declaration.getSourceFile() === context.sourceFile
-        ? lowerType(declaration.type, context)
+      checkerType && (directArgumentTypeIsVisible(checkerType, context) || sourceVisible)
+        ? checkerType
         : declaration &&
             ts.isParameter(declaration) &&
             declaration.type &&
-            typeNodeIncludesErasedUtility(declaration.type)
-          ? ({ kind: 'dynamic' } as const)
-          : checkerType && directArgumentTypeIsVisible(checkerType, context)
-            ? checkerType
-            : ({ kind: 'dynamic' } as const);
+            declaration.getSourceFile() === context.sourceFile
+          ? lowerType(declaration.type, context)
+          : ({ kind: 'dynamic' } as const);
     if (!type) return lowered;
     parameters.push({
       name: `__unused${String(context.temporaryIndex++)}`,
@@ -2915,14 +3223,61 @@ function adaptDirectFunctionArgument(
   };
 }
 
+function checkerTypeIsExportedMonomorphic(type: ts.Type, checker: ts.TypeChecker): boolean {
+  if (type.aliasSymbol?.getName() === 'Readonly' && type.aliasTypeArguments?.[0]) {
+    return checkerTypeIsExportedMonomorphic(type.aliasTypeArguments[0], checker);
+  }
+  return (
+    sourceDefinedNamedType(type.aliasSymbol ?? type.getSymbol()) && checkerTypeArguments(type, checker).length === 0
+  );
+}
+
+function eraseLocalTypeParameters(type: IrType, names: ReadonlySet<string>): IrType {
+  switch (type.kind) {
+    case 'anonymous':
+      return {
+        extends: type.extends.map((item) => eraseLocalTypeParameters(item, names)),
+        fields: type.fields.map((field) => ({ ...field, type: eraseLocalTypeParameters(field.type, names) })),
+        kind: 'anonymous',
+      };
+    case 'array':
+      return { element: eraseLocalTypeParameters(type.element, names), kind: 'array' };
+    case 'function':
+      return {
+        kind: 'function',
+        parameters: type.parameters.map((item) => eraseLocalTypeParameters(item, names)),
+        returns: eraseLocalTypeParameters(type.returns, names),
+      };
+    case 'named':
+      return names.has(type.name)
+        ? { kind: 'dynamic', reason: 'source-unknown' }
+        : {
+            arguments: type.arguments.map((item) => eraseLocalTypeParameters(item, names)),
+            kind: 'named',
+            name: type.name,
+          };
+    case 'nullable':
+      return { inner: eraseLocalTypeParameters(type.inner, names), kind: 'nullable' };
+    case 'union':
+      return { alternatives: type.alternatives.map((item) => eraseLocalTypeParameters(item, names)), kind: 'union' };
+    case 'dynamic':
+    case 'primitive':
+      return type;
+  }
+}
+
 function typeNodeIncludesErasedUtility(node: ts.TypeNode): boolean {
   let found = false;
   const visit = (current: ts.Node): void => {
     if (found) return;
+    if (ts.isConditionalTypeNode(current) || ts.isMappedTypeNode(current)) {
+      found = true;
+      return;
+    }
     if (
       ts.isTypeReferenceNode(current) &&
       ts.isIdentifier(current.typeName) &&
-      ['Omit', 'Partial', 'Pick'].includes(current.typeName.text)
+      ['Exclude', 'Extract', 'Omit', 'Partial', 'Pick', 'Required'].includes(current.typeName.text)
     ) {
       found = true;
       return;
@@ -2984,7 +3339,9 @@ function padContextualFunctionParameters(
 ): IrParameter[] {
   const checker = context.checker;
   const contextualType = checker?.getContextualType(node);
-  const signature = contextualType && checker?.getSignaturesOfType(contextualType, ts.SignatureKind.Call)[0];
+  const signature =
+    contextualType &&
+    checker?.getSignaturesOfType(checker.getNonNullableType(contextualType), ts.SignatureKind.Call)[0];
   if (!checker || !signature) return parameters;
   const contextualParameters = signature.getParameters();
   if (contextualParameters.length <= parameters.length || contextualParameters.some(signatureParameterIsRest)) {
@@ -2993,8 +3350,7 @@ function padContextualFunctionParameters(
   const padded = [...parameters];
   for (let index = parameters.length; index < contextualParameters.length; index++) {
     const parameter = contextualParameters[index]!;
-    const location = parameter.valueDeclaration ?? parameter.declarations?.[0] ?? node;
-    const type = lowerCheckerType(checker.getTypeOfSymbolAtLocation(parameter, location), node, context, new Set());
+    const type = lowerCheckerType(checker.getTypeOfSymbolAtLocation(parameter, node), node, context, new Set());
     if (!type) return parameters;
     padded.push({
       name: `__unused${String(context.temporaryIndex++)}`,
@@ -3016,17 +3372,26 @@ function directCallReceiverCast(node: ts.CallExpression, context: LoweringContex
     (ts.isParameter(declaration) || ts.isVariableDeclaration(declaration) || ts.isPropertyDeclaration(declaration))
       ? declaration.type
       : undefined;
-  if (!declaredTypeNode) return undefined;
-  const declaredType = checker.getTypeFromTypeNode(declaredTypeNode);
-  if (!declaredType.isUnionOrIntersection()) return undefined;
+  const declaredType = declaredTypeNode ? checker.getTypeFromTypeNode(declaredTypeNode) : undefined;
+  const calleeType = checker.getTypeAtLocation(node.expression);
+  const signatures = checker.getSignaturesOfType(calleeType, ts.SignatureKind.Call);
+  if (
+    !declaredType?.isUnionOrIntersection() &&
+    !calleeType.isUnionOrIntersection() &&
+    signatures.length <= 1 &&
+    !signatures.some((candidate) => Boolean(candidate.typeParameters?.length))
+  ) {
+    return undefined;
+  }
   const signature = checker.getResolvedSignature(node);
   if (!signature) return undefined;
   const parameters = signature.getParameters().map((parameter) => {
-    const location = parameter.valueDeclaration ?? parameter.declarations?.[0] ?? node;
-    return lowerCheckerType(checker.getTypeOfSymbolAtLocation(parameter, location), node, context, new Set());
+    return lowerCheckerType(checker.getTypeOfSymbolAtLocation(parameter, node), node, context, new Set());
   });
   const returns = lowerCheckerType(checker.getReturnTypeOfSignature(signature), node, context, new Set());
-  return returns && parameters.every((parameter) => parameter)
+  return returns &&
+    directArgumentTypeIsVisible(returns, context) &&
+    parameters.every((parameter) => parameter && directArgumentTypeIsVisible(parameter, context))
     ? { kind: 'function', parameters: parameters as IrType[], returns }
     : undefined;
 }

@@ -13,29 +13,30 @@ import flighthq.types.PathBooleanBackend;
 import flighthq.types.PathBooleanBackend.PathBooleanContour;
 import flighthq.types.PathBooleanFillRule;
 import flighthq.types.PathBooleanOperation;
+import flighthq.types.ShapeCommand.PathWinding;
 
 class ResolvePathRegions {
   public static function resolvePathRegions(rings:Array<PathBooleanContour>, fillRule:PathBooleanFillRule):Path {
     var path:Path = cast _Runtime.UNDEFINED;
     var resolved:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
-    path = (cast createPath('nonZero') : Path);
+    path = (cast createPath((cast 'nonZero')) : Path);
     if ((cast _Runtime.strictEquals(_Runtime.field(rings, 'length'), 0.0) : Bool)) { return cast path; }
-    resolved = (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean(rings, ResolvePathRegions.EMPTY_CONTOURS__resolvePathRegions, 'union', fillRule);
+    resolved = (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean((cast rings), (cast ResolvePathRegions.EMPTY_CONTOURS__resolvePathRegions), (cast 'union'), (cast fillRule));
     for (ring in _Runtime.iterable(resolved)) {
       if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-      appendPathMoveTo((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(ring, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, 1.0) : Float));
+      appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readArray(ring, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, 1.0) : Float));
       {
         var i:Float = 2.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          appendPathLineTo((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(ring, i) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, (i + 1.0)) : Float));
+          appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readArray(ring, i) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, (i + 1.0)) : Float));
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
-      appendPathClose((cast path : Path));
+      appendPathClose((cast path));
     }
     return cast path;
     return cast null;
   }
 
-  public static final EMPTY_CONTOURS__resolvePathRegions:Array<PathBooleanContour> = cast ([] : Array<Dynamic>);
+  public static final EMPTY_CONTOURS__resolvePathRegions:Array<PathBooleanContour> = (cast cast ([] : Array<Dynamic>));
 }

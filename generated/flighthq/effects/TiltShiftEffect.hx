@@ -10,7 +10,7 @@ import flighthq.types.RenderState;
 import flighthq.types.TiltShiftEffect;
 
 class TiltShiftEffect {
-  public static function createTiltShiftEffect(?options:Dynamic):flighthq.types.TiltShiftEffect {
+  public static function createTiltShiftEffect(?options:flighthq._internal._Omit<flighthq.types.TiltShiftEffect, String>):flighthq.types.TiltShiftEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'TiltShiftEffect' }, options]);
     return cast null;
@@ -24,11 +24,11 @@ class TiltShiftEffect {
   }
 
   public static function registerTiltShiftEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'TiltShiftEffect' : String), TiltShiftEffect.resolveTiltShiftEffectPadding__tiltShiftEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'TiltShiftEffect' : String), (cast TiltShiftEffect.resolveTiltShiftEffectPadding__tiltShiftEffect));
   }
 
   public static function resolveTiltShiftEffectPadding__tiltShiftEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getTiltShiftEffectPadding((cast (cast effect : flighthq.types.TiltShiftEffect) : flighthq.types.TiltShiftEffect)) : RenderEffectPadding);
+    return cast (cast getTiltShiftEffectPadding((cast (cast effect : flighthq.types.TiltShiftEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

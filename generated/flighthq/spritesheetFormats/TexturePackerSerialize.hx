@@ -10,7 +10,6 @@ import flighthq.types.SpritesheetFrameData;
 import flighthq.types.TexturePackerSchema.TexturePackerArrayDocument;
 import flighthq.types.TexturePackerSchema.TexturePackerArrayFrame;
 import flighthq.types.TexturePackerSchema.TexturePackerDocument;
-import flighthq.types.TexturePackerSchema.TexturePackerFrameTag;
 import flighthq.types.TexturePackerSchema.TexturePackerHashDocument;
 import flighthq.types.TexturePackerSchema.TexturePackerHashFrame;
 import flighthq.types.TexturePackerSchema.TexturePackerMeta;
@@ -20,52 +19,53 @@ import flighthq.types.TexturePackerSchema.TexturePackerSerializeOptions;
 import flighthq.types.TexturePackerSchema.TexturePackerSize;
 
 class TexturePackerSerialize {
-  public static function dataToMeta__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerMeta {
+  public static function dataToMeta__texturePackerSerialize(data:SpritesheetData, existing:flighthq._internal._Partial<TexturePackerMeta>):TexturePackerMeta {
     return cast { app: _Runtime.coalesce(_Runtime.field(existing, 'app'), function():Dynamic return cast 'https://www.codeandweb.com/texturepacker'), format: _Runtime.coalesce(_Runtime.field(existing, 'format'), function():Dynamic return cast 'RGBA8888'), frameTags: _Runtime.select(_Runtime.field(data.animations, 'length'), function():Dynamic return cast _Runtime.callProperty(data.animations, 'map', cast ([function(anim:SpritesheetAnimationData, __unused0:Float, __unused1:Array<SpritesheetAnimationData>):{ var direction:SpritesheetAnimationDirection; var from:Float; var name:String; var to:Float; } {
       var firstIdx:Float = cast _Runtime.UNDEFINED;
       var lastIdx:Float = cast _Runtime.UNDEFINED;
       firstIdx = _Runtime.findIndex(data.frames, function(f:SpritesheetFrameData, __unused2:Float, __unused3:Array<SpritesheetFrameData>):Bool return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(anim.frameNames, 0.0)));
       lastIdx = _Runtime.findIndex(data.frames, function(f:SpritesheetFrameData, __unused4:Float, __unused5:Array<SpritesheetFrameData>):Bool return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(anim.frameNames, _Runtime.subtractNumbers(_Runtime.field(anim.frameNames, 'length'), 1.0))));
       return cast { direction: anim.direction, from: ((cast ((cast firstIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast firstIdx : Dynamic) : (cast 0.0 : Dynamic)), name: anim.name, to: ((cast ((cast lastIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast lastIdx : Dynamic) : (cast 0.0 : Dynamic)) };
+      return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), image: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast _Runtime.field(existing, 'image')), function():Dynamic return cast ''), scale: ((cast !_Runtime.strictEquals(data.scale, 1.0) : Bool) ? (cast data.scale : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'scale'), function():Dynamic return cast 1.0) : Dynamic)), size: { h: data.imageHeight, w: data.imageWidth }, version: _Runtime.coalesce(_Runtime.field(existing, 'version'), function():Dynamic return cast '1.0') };
     return cast null;
   }
 
   public static function frameToEntry__texturePackerSerialize(frame:flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<SpritesheetData, String>, Float>):TexturePackerHashFrame {
     var trimmed:Bool = cast _Runtime.UNDEFINED;
-    trimmed = ((cast ((cast ((cast !_Runtime.strictEquals(frame.offsetX, 0.0) : Bool) || (cast !_Runtime.strictEquals(frame.offsetY, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(frame.sourceWidth, frame.width) : Bool)) : Bool) || (cast !_Runtime.strictEquals(frame.sourceHeight, frame.height) : Bool));
-    return cast _Runtime.mergeObjects([{ frame: { h: frame.height, w: frame.width, x: frame.x, y: frame.y } }, ((cast ((cast !_Runtime.strictEquals(frame.pivotX, null) : Bool) && (cast !_Runtime.strictEquals(frame.pivotY, null) : Bool)) : Bool) ? (cast { pivot: { x: frame.pivotX, y: frame.pivotY } } : Dynamic) : (cast {  } : Dynamic)), { rotated: frame.rotated }, { sourceSize: { h: frame.sourceHeight, w: frame.sourceWidth } }, { spriteSourceSize: { h: frame.height, w: frame.width, x: frame.offsetX, y: frame.offsetY } }, { trimmed: trimmed }]);
+    trimmed = ((cast ((cast ((cast !_Runtime.strictEquals((cast frame : { var offsetX:Float; }).offsetX, 0.0) : Bool) || (cast !_Runtime.strictEquals((cast frame : { var offsetY:Float; }).offsetY, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast frame : { var sourceWidth:Float; }).sourceWidth, (cast frame : { var width:Float; }).width) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast frame : { var sourceHeight:Float; }).sourceHeight, (cast frame : { var height:Float; }).height) : Bool));
+    return cast _Runtime.mergeObjects([{ frame: { h: (cast frame : { var height:Float; }).height, w: (cast frame : { var width:Float; }).width, x: (cast frame : { var x:Float; }).x, y: (cast frame : { var y:Float; }).y } }, ((cast ((cast !_Runtime.strictEquals((cast frame : { var pivotX:Null<Float>; }).pivotX, null) : Bool) && (cast !_Runtime.strictEquals((cast frame : { var pivotY:Null<Float>; }).pivotY, null) : Bool)) : Bool) ? (cast { pivot: { x: (cast frame : { var pivotX:Null<Float>; }).pivotX, y: (cast frame : { var pivotY:Null<Float>; }).pivotY } } : Dynamic) : (cast {  } : Dynamic)), { rotated: (cast frame : { var rotated:Bool; }).rotated }, { sourceSize: { h: (cast frame : { var sourceHeight:Float; }).sourceHeight, w: (cast frame : { var sourceWidth:Float; }).sourceWidth } }, { spriteSourceSize: { h: (cast frame : { var height:Float; }).height, w: (cast frame : { var width:Float; }).width, x: (cast frame : { var offsetX:Float; }).offsetX, y: (cast frame : { var offsetY:Float; }).offsetY } }, { trimmed: trimmed }]);
     return cast null;
   }
 
-  public static function dataToHashDocument__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerHashDocument {
+  public static function dataToHashDocument__texturePackerSerialize(data:SpritesheetData, existing:flighthq._internal._Partial<TexturePackerHashDocument>):TexturePackerHashDocument {
     var frames:flighthq._internal._Record<String, TexturePackerHashFrame> = cast _Runtime.UNDEFINED;
-    frames = {  };
+    frames = (cast {  });
     for (frame in _Runtime.iterable(data.frames)) {
-      _Runtime.setIndex(frames, frame.name, (cast TexturePackerSerialize.frameToEntry__texturePackerSerialize(frame) : TexturePackerHashFrame));
+      _Runtime.setIndex(frames, frame.name, (cast TexturePackerSerialize.frameToEntry__texturePackerSerialize((cast frame)) : TexturePackerHashFrame));
     }
-    return cast { frames: frames, meta: (cast TexturePackerSerialize.dataToMeta__texturePackerSerialize((cast data : SpritesheetData), (cast _Runtime.coalesce(_Runtime.field(existing, 'meta'), function():Dynamic return cast {  }) : flighthq._internal._Any)) : TexturePackerMeta) };
+    return cast { frames: frames, meta: (cast TexturePackerSerialize.dataToMeta__texturePackerSerialize((cast data), (cast _Runtime.coalesce(_Runtime.field(existing, 'meta'), function():Dynamic return cast {  }) : flighthq._internal._Any)) : TexturePackerMeta) };
     return cast null;
   }
 
-  public static function dataToArrayDocument__texturePackerSerialize(data:SpritesheetData, existing:Dynamic):TexturePackerArrayDocument {
+  public static function dataToArrayDocument__texturePackerSerialize(data:SpritesheetData, existing:flighthq._internal._Partial<TexturePackerArrayDocument>):TexturePackerArrayDocument {
     var frames:Array<TexturePackerArrayFrame> = cast _Runtime.UNDEFINED;
-    frames = _Runtime.callProperty(data.frames, 'map', cast ([function(frame:SpritesheetFrameData, __unused6:Float, __unused7:Array<SpritesheetFrameData>):{ var frame:TexturePackerRect; @:optional var pivot:Null<TexturePackerPivot>; var rotated:Bool; var sourceSize:TexturePackerSize; var spriteSourceSize:TexturePackerRect; var trimmed:Bool; var filename:String; } return _Runtime.mergeObjects([{ filename: frame.name }, (cast TexturePackerSerialize.frameToEntry__texturePackerSerialize(frame) : { var frame:TexturePackerRect; @:optional var pivot:Null<TexturePackerPivot>; var rotated:Bool; var sourceSize:TexturePackerSize; var spriteSourceSize:TexturePackerRect; var trimmed:Bool; var filename:String; })])] : Array<Dynamic>));
-    return cast { frames: frames, meta: (cast TexturePackerSerialize.dataToMeta__texturePackerSerialize((cast data : SpritesheetData), (cast _Runtime.coalesce(_Runtime.field(existing, 'meta'), function():Dynamic return cast {  }) : flighthq._internal._Any)) : TexturePackerMeta) };
+    frames = _Runtime.callProperty(data.frames, 'map', cast ([function(frame:SpritesheetFrameData, __unused6:Float, __unused7:Array<SpritesheetFrameData>):{ var frame:TexturePackerRect; @:optional var pivot:Null<TexturePackerPivot>; var rotated:Bool; var sourceSize:TexturePackerSize; var spriteSourceSize:TexturePackerRect; var trimmed:Bool; var filename:String; } return _Runtime.mergeObjects([{ filename: frame.name }, (cast TexturePackerSerialize.frameToEntry__texturePackerSerialize((cast frame)) : TexturePackerHashFrame)])] : Array<Dynamic>));
+    return cast { frames: frames, meta: (cast TexturePackerSerialize.dataToMeta__texturePackerSerialize((cast data), (cast _Runtime.coalesce(_Runtime.field(existing, 'meta'), function():Dynamic return cast {  }) : flighthq._internal._Any)) : TexturePackerMeta) };
     return cast null;
   }
 
-  public static function serializeTexturePackerSpritesheet(data:SpritesheetData, ?existing:Dynamic, ?options:TexturePackerSerializeOptions):String {
+  public static function serializeTexturePackerSpritesheet(data:SpritesheetData, ?existing:flighthq._internal._Partial<TexturePackerDocument>, ?options:TexturePackerSerializeOptions):String {
     var existingIsArray:Bool = cast _Runtime.UNDEFINED;
     var variant:String = cast _Runtime.UNDEFINED;
     var doc:TexturePackerHashDocument = cast _Runtime.UNDEFINED;
-    existingIsArray = ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.isArray((cast existing : TexturePackerArrayDocument).frames) : Bool));
+    existingIsArray = ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.isArray((cast (cast existing : TexturePackerArrayDocument) : { var frames:Array<TexturePackerArrayFrame>; }).frames) : Bool));
     variant = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.variant; }), function():Dynamic return cast ((cast existingIsArray : Bool) ? (cast 'array' : Dynamic) : (cast 'hash' : Dynamic)));
     if ((cast _Runtime.strictEquals(variant, 'array') : Bool)) {
-      var doc:TexturePackerArrayDocument = (cast TexturePackerSerialize.dataToArrayDocument__texturePackerSerialize((cast data : SpritesheetData), (cast _Runtime.coalesce((cast existing : Dynamic), function():Dynamic return cast {  }) : flighthq._internal._Any)) : TexturePackerArrayDocument);
+      var doc:TexturePackerArrayDocument = (cast TexturePackerSerialize.dataToArrayDocument__texturePackerSerialize((cast data), (cast _Runtime.coalesce((cast existing : flighthq._internal._Partial<TexturePackerArrayDocument>), function():Dynamic return cast {  }) : flighthq._internal._Any)) : TexturePackerArrayDocument);
       return cast _Runtime.jsonStringify(doc, null, 2.0);
     }
-    doc = (cast TexturePackerSerialize.dataToHashDocument__texturePackerSerialize((cast data : SpritesheetData), (cast _Runtime.coalesce((cast existing : Dynamic), function():Dynamic return cast {  }) : flighthq._internal._Any)) : TexturePackerHashDocument);
+    doc = (cast TexturePackerSerialize.dataToHashDocument__texturePackerSerialize((cast data), (cast _Runtime.coalesce((cast existing : flighthq._internal._Partial<TexturePackerHashDocument>), function():Dynamic return cast {  }) : flighthq._internal._Any)) : TexturePackerHashDocument);
     return cast _Runtime.jsonStringify(doc, null, 2.0);
     return cast null;
   }

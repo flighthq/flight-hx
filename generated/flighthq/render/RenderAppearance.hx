@@ -11,15 +11,14 @@ import flighthq.types.Node;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderState;
 import flighthq.types.RenderState.RenderStateRuntime;
-import flighthq.types.Renderable;
 
 class RenderAppearance {
   @:noCompletion
   public static function updateRenderProxyAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Bool {
     var appearanceId:Float = cast _Runtime.UNDEFINED;
-    appearanceId = (cast getNodeAppearanceRevision((cast (cast data : RenderProxy).source : Node<Dynamic>)) : Float);
-    if ((cast ((cast _Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals((cast parentData : RenderProxy).appearanceFrameId, (cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).currentFrameId)) : Bool) || (cast !_Runtime.strictEquals((cast data : RenderProxy).lastAppearanceId, appearanceId) : Bool)) : Bool)) {
-      RenderAppearance.recalculateAppearance__renderAppearance((cast state : RenderState), (cast data : RenderProxy), (cast parentData : Null<RenderProxy>));
+    appearanceId = (cast getNodeAppearanceRevision((cast (cast (cast data : RenderProxy).source : Node<Dynamic>))) : Float);
+    if ((cast ((cast _Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals((cast parentData : RenderProxy).appearanceFrameId, (cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).currentFrameId)) : Bool) || (cast !_Runtime.strictEquals((cast data : RenderProxy).lastAppearanceId, appearanceId) : Bool)) : Bool)) {
+      RenderAppearance.recalculateAppearance__renderAppearance((cast state), (cast data), (cast parentData));
       ((cast data : RenderProxy).lastAppearanceId = appearanceId);
       return cast true;
     }
@@ -29,7 +28,7 @@ class RenderAppearance {
 
   public static function recalculateAppearance__renderAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Void {
     var source:{ >HasAppearance, >HasBlendMode, } = cast _Runtime.UNDEFINED;
-    source = (cast (cast (cast data : RenderProxy).source : flighthq._internal._Any) : { >HasAppearance, >HasBlendMode, });
+    source = (cast (cast (cast data : RenderProxy).source : flighthq._internal._Any) : flighthq._internal._Intersection2<HasAppearance, HasBlendMode>);
     if ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       ((cast data : RenderProxy).visible = ((cast (cast source : { var visible:Bool; }).visible : Bool) && (cast (cast parentData : RenderProxy).visible : Bool)));
       if ((cast !(cast (cast data : RenderProxy).visible : Bool) : Bool)) { return; }
@@ -43,6 +42,6 @@ class RenderAppearance {
       if ((cast ((cast (cast data : RenderProxy).alpha : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
       ((cast data : RenderProxy).blendMode = ((cast !_Runtime.strictEquals((cast state : RenderState).renderBlendMode, null) : Bool) ? (cast (cast state : RenderState).renderBlendMode : Dynamic) : (cast (cast source : { var blendMode:Null<String>; }).blendMode : Dynamic)));
     }
-    ((cast data : RenderProxy).appearanceFrameId = (cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).currentFrameId);
+    ((cast data : RenderProxy).appearanceFrameId = (cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).currentFrameId);
   }
 }

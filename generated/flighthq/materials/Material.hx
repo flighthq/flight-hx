@@ -10,20 +10,20 @@ import flighthq.types.Material;
 class Material {
   public static function cloneMaterial(source:flighthq.types.Material):flighthq.types.Material {
     var clone:flighthq.types.Material = cast _Runtime.UNDEFINED;
-    clone = (cast (cast createEntity((cast { kind: _Runtime.field(source, 'kind') } : Null<{ var kind:String; }>)) : flighthq.types.Material) : flighthq.types.Material);
-    Material.copyMaterialFields__material((cast clone : flighthq.types.Material), (cast source : flighthq.types.Material), (cast _Runtime.field(source, 'kind') : String));
+    clone = (cast createEntity((cast { kind: _Runtime.field(source, 'kind') })) : flighthq.types.Material);
+    Material.copyMaterialFields__material((cast clone), (cast source), (cast _Runtime.field(source, 'kind') : String));
     return cast clone;
     return cast null;
   }
 
   public static function copyMaterial(out:flighthq.types.Material, source:flighthq.types.Material):Void {
     if ((cast _Runtime.strictEquals(out, source) : Bool)) { return; }
-    Material.copyMaterialFields__material((cast out : flighthq.types.Material), (cast source : flighthq.types.Material), (cast _Runtime.field(source, 'kind') : String));
+    Material.copyMaterialFields__material((cast out), (cast source), (cast _Runtime.field(source, 'kind') : String));
   }
 
   public static function createMaterial(kind:Kind):flighthq.types.Material {
     var material:flighthq.types.Material = cast _Runtime.UNDEFINED;
-    material = (cast (cast createEntity((cast { kind: kind } : Null<{ var kind:String; }>)) : flighthq.types.Material) : flighthq.types.Material);
+    material = (cast createEntity((cast { kind: kind })) : flighthq.types.Material);
     ((cast material : flighthq.types.Material).name = null);
     return cast material;
     return cast null;
@@ -44,7 +44,7 @@ class Material {
     return cast null;
   }
 
-  public static function getMaterialOfKind<T>(material:Null<flighthq.types.Material>, kind:Kind):Null<T> {
+  public static function getMaterialOfKind<T:flighthq.types.Material>(material:Null<flighthq.types.Material>, kind:Kind):Null<T> {
     return cast ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'kind'), kind) : Bool)) : Bool) ? (cast (cast material : T) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }

@@ -20,7 +20,6 @@ import flighthq.types.RenderRegistrySignals;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.RenderState.RenderStateRuntime;
-import flighthq.types.Renderable;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Shape;
 import flighthq.types.Shape.ShapeData;
@@ -33,7 +32,7 @@ class CanvasShape {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
     var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
-    drawCanvasScene2D((cast state : CanvasRenderState), (cast renderProxy : RenderProxy2D));
+    drawCanvasScene2D((cast state), (cast renderProxy));
     source = (cast (cast renderProxy : RenderProxy2D).source : Shape);
     __destructure0 = (cast source : Shape).data;
     commands = _Runtime.field(__destructure0, 'commands');
@@ -41,36 +40,36 @@ class CanvasShape {
     context = (cast state : CanvasRenderState).context;
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast renderProxy : RenderProxy2D).alpha);
-    setCanvasTransform((cast state : CanvasRenderState), (cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast renderProxy : RenderProxy2D).transform2D);
-    renderCanvasShapeCommands((cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast state : RenderState), (cast commands : Array<flighthq._internal._Any>), (cast (cast getCanvasRenderStateTextureResolvers((cast state : CanvasRenderState)) : CanvasTextureResolvers) : CanvasTextureResolvers));
+    setCanvasTransform((cast state), (cast context), (cast (cast renderProxy : RenderProxy2D).transform2D));
+    renderCanvasShapeCommands((cast context), (cast state), (cast commands), (cast (cast getCanvasRenderStateTextureResolvers((cast state)) : CanvasTextureResolvers)));
   }
 
   @:noCompletion
   public static function renderCanvasShapeCommands(context:flighthq._internal.dom.CanvasRenderingContext2D, state:RenderState, commands:Array<flighthq._internal._Any>, resolvers:CanvasTextureResolvers):Void {
     var drawState:CanvasShapeDrawState = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
-    drawState = (cast CanvasShape.createCanvasShapeDrawState__canvasShape((cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast resolvers : CanvasTextureResolvers), (cast (cast state : RenderState).allowSmoothing : Bool)) : CanvasShapeDrawState);
+    drawState = (cast CanvasShape.createCanvasShapeDrawState__canvasShape((cast context), (cast resolvers), (cast (cast state : RenderState).allowSmoothing : Bool)) : CanvasShapeDrawState);
     flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var key:String = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
       var argCount:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
-      var def:Null<CanvasShapeCommand<String>> = (cast getCanvasShapeCommand((cast state : RenderState), (cast key : String)) : Null<CanvasShapeCommand<String>>);
-      if ((cast !_Runtime.strictEquals(def, null) : Bool)) { (cast def : CanvasShapeCommand<String>).draw(context, drawState, commands, (i + 2.0)); } else { _Runtime.callOptionalValue((cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeCommandHandler, key] : Array<Dynamic>)); }
+      var def:Null<CanvasShapeCommand<String>> = (cast getCanvasShapeCommand((cast state), (cast key : String)) : Null<CanvasShapeCommand<String>>);
+      if ((cast !_Runtime.strictEquals(def, null) : Bool)) { (cast def : CanvasShapeCommand<String>).draw((cast context), (cast drawState), (cast commands), (cast (i + 2.0) : Float)); } else { _Runtime.callOptionalValue((cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeCommandHandler, key] : Array<Dynamic>)); }
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }
     if ((cast ((cast (cast drawState : CanvasShapeDrawState).hasPendingPath : Bool) && (cast _Runtime.orValue((cast drawState : CanvasShapeDrawState).hasFill, function():Dynamic return cast (cast drawState : CanvasShapeDrawState).hasStroke) : Bool)) : Bool)) {
-      CanvasShape.flushCanvasShapePath__canvasShape((cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast drawState : CanvasShapeDrawState));
+      CanvasShape.flushCanvasShapePath__canvasShape((cast context), (cast drawState));
     }
   }
 
-  public static final defaultCanvasShapeRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawCanvasShape };
+  public static final defaultCanvasShapeRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: drawCanvasShape });
 
   public static final defaultCanvasMorphShapeRenderer:Scene2DRenderer = defaultCanvasShapeRenderer;
 
   public static function createCanvasShapeDrawState__canvasShape(context:flighthq._internal.dom.CanvasRenderingContext2D, resolvers:CanvasTextureResolvers, allowSmoothing:Bool):CanvasShapeDrawState {
     var state:CanvasShapeDrawState = cast _Runtime.UNDEFINED;
-    state = { allowSmoothing: allowSmoothing, bitmapH: 0.0, bitmapSrc: null, bitmapW: 0.0, canvasTextureResolvers: resolvers, fillMatrix: null, fillMatrixInverse: null, fillStyle: '', hasFill: false, hasPendingPath: false, hasCurrentPoint: false, hasStroke: false, strokeStyle: '', strokeWidth: 1.0, windingRule: 'evenodd', flush: function():Void return CanvasShape.flushCanvasShapePath__canvasShape((cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast state : CanvasShapeDrawState)) };
+    state = (cast { allowSmoothing: allowSmoothing, bitmapH: 0.0, bitmapSrc: null, bitmapW: 0.0, canvasTextureResolvers: resolvers, fillMatrix: null, fillMatrixInverse: null, fillStyle: '', hasFill: false, hasPendingPath: false, hasCurrentPoint: false, hasStroke: false, strokeStyle: '', strokeWidth: 1.0, windingRule: 'evenodd', flush: function():Void { CanvasShape.flushCanvasShapePath__canvasShape((cast context), (cast state)); } });
     return cast state;
     return cast null;
   }

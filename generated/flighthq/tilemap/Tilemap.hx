@@ -9,6 +9,7 @@ import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.MethodsOf;
 import flighthq.types.Node;
+import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.Signal;
@@ -27,14 +28,14 @@ class Tilemap {
   public static function clearTilemap(tilemap:flighthq.types.Tilemap):Void {
     var signals:Null<TilemapSignals> = cast _Runtime.UNDEFINED;
     _Runtime.fill((cast (cast tilemap : flighthq.types.Tilemap).data : TilemapData).tiles, -1.0, 0, null, 1);
-    signals = (cast getTilemapSignals((cast tilemap : flighthq.types.Tilemap)) : Null<TilemapSignals>);
-    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast signals : TilemapSignals).onCleared.emit)(); }
+    signals = (cast getTilemapSignals((cast tilemap)) : Null<TilemapSignals>);
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast (cast signals : TilemapSignals).onCleared : { var emit:Void->Void; }).emit)(); }
   }
 
   public static function cloneTilemap(source:flighthq.types.Tilemap):flighthq.types.Tilemap {
     var src:TilemapData = cast _Runtime.UNDEFINED;
     src = _Runtime.field(source, 'data');
-    return cast (cast createTilemap((cast { data: { atlas: (cast src : TilemapData).atlas, columns: (cast src : TilemapData).columns, materialData: ((cast !_Runtime.strictEquals((cast src : TilemapData).materialData, null) : Bool) ? (cast _Runtime.slice((cast src : TilemapData).materialData, 0, null) : Dynamic) : (cast null : Dynamic)), rows: (cast src : TilemapData).rows, tileHeight: (cast src : TilemapData).tileHeight, tileWidth: (cast src : TilemapData).tileWidth, tiles: _Runtime.slice((cast src : TilemapData).tiles, 0, null) } } : Null<PartialNode<flighthq.types.Tilemap>>)) : flighthq.types.Tilemap);
+    return cast (cast createTilemap((cast { data: { atlas: (cast src : TilemapData).atlas, columns: (cast src : TilemapData).columns, materialData: ((cast !_Runtime.strictEquals((cast src : TilemapData).materialData, null) : Bool) ? (cast _Runtime.slice((cast src : TilemapData).materialData, 0, null) : Dynamic) : (cast null : Dynamic)), rows: (cast src : TilemapData).rows, tileHeight: (cast src : TilemapData).tileHeight, tileWidth: (cast src : TilemapData).tileWidth, tiles: _Runtime.slice((cast src : TilemapData).tiles, 0, null) } })) : flighthq.types.Tilemap);
     return cast null;
   }
 
@@ -60,23 +61,23 @@ class Tilemap {
   }
 
   public static function createTilemap(?obj:PartialNode<flighthq.types.Tilemap>):flighthq.types.Tilemap {
-    return cast (cast (cast createNode2D((cast TilemapKind : String), obj, createTilemapData, function(__unused1:Dynamic):TilemapRuntime return createTilemapRuntime()) : flighthq.types.Tilemap) : flighthq.types.Tilemap);
+    return cast (cast createNode2D((cast TilemapKind : String), (cast obj), (cast createTilemapData), (cast function(__unused1:Null<flighthq._internal._Any>):TilemapRuntime return createTilemapRuntime())) : flighthq.types.Tilemap);
     return cast null;
   }
 
   @:noCompletion
-  public static function createTilemapData(?data:Dynamic):TilemapData {
+  public static function createTilemapData(?data:flighthq._internal._Partial<TilemapData>):TilemapData {
     var columns:Float = cast _Runtime.UNDEFINED;
     var rows:Float = cast _Runtime.UNDEFINED;
-    columns = _Runtime.coalesce(_Runtime.optionalField(data, 'columns'), function():Dynamic return cast 0.0);
-    rows = _Runtime.coalesce(_Runtime.optionalField(data, 'rows'), function():Dynamic return cast 0.0);
-    return cast { atlas: _Runtime.coalesce(_Runtime.optionalField(data, 'atlas'), function():Dynamic return cast null), columns: columns, materialData: _Runtime.coalesce(_Runtime.optionalField(data, 'materialData'), function():Dynamic return cast null), rows: rows, tileHeight: _Runtime.coalesce(_Runtime.optionalField(data, 'tileHeight'), function():Dynamic return cast 0.0), tileWidth: _Runtime.coalesce(_Runtime.optionalField(data, 'tileWidth'), function():Dynamic return cast 0.0), tiles: _Runtime.coalesce(_Runtime.optionalField(data, 'tiles'), function():Dynamic return cast _Runtime.fill(new flighthq._internal._Int16Array((columns * rows)), -1.0, 0, null, 1)) };
+    columns = _Runtime.coalesce(({ final __structural0 = data; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var columns:Null<Float>; }).columns; }), function():Dynamic return cast 0.0);
+    rows = _Runtime.coalesce(({ final __structural1 = data; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var rows:Null<Float>; }).rows; }), function():Dynamic return cast 0.0);
+    return cast { atlas: _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null), columns: columns, materialData: _Runtime.coalesce(({ final __structural3 = data; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var materialData:Null<Array<Null<flighthq._internal._Object>>>; }).materialData; }), function():Dynamic return cast null), rows: rows, tileHeight: _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var tileHeight:Null<Float>; }).tileHeight; }), function():Dynamic return cast 0.0), tileWidth: _Runtime.coalesce(({ final __structural5 = data; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var tileWidth:Null<Float>; }).tileWidth; }), function():Dynamic return cast 0.0), tiles: _Runtime.coalesce(({ final __structural6 = data; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var tiles:Null<flighthq._internal._Int16Array>; }).tiles; }), function():Dynamic return cast _Runtime.fill(new flighthq._internal._Int16Array((columns * rows)), -1.0, 0, null, 1)) };
     return cast null;
   }
 
   @:noCompletion
   public static function createTilemapRuntime():TilemapRuntime {
-    return cast (cast (cast createNode2DRuntime((cast Tilemap.defaultMethods__tilemap : Null<flighthq._internal._Any>)) : TilemapRuntime) : TilemapRuntime);
+    return cast (cast createNode2DRuntime((cast Tilemap.defaultMethods__tilemap)) : TilemapRuntime);
     return cast null;
   }
 
@@ -86,7 +87,7 @@ class Tilemap {
     return cast null;
   }
 
-  public static final defaultMethods__tilemap:Dynamic = { computeLocalBoundsRectangle: computeTilemapLocalBoundsRectangle };
+  public static final defaultMethods__tilemap:flighthq._internal._Partial<MethodsOf<TilemapRuntime>> = (cast { computeLocalBoundsRectangle: computeTilemapLocalBoundsRectangle });
 
   public static function enableTilemapSignals(target:flighthq.types.Tilemap):TilemapSignals {
     var s:TilemapWithSignals__tilemap = cast _Runtime.UNDEFINED;
@@ -119,8 +120,8 @@ class Tilemap {
   public static function getTilemapColumnRowAtPoint(out:Vector2Like, source:flighthq.types.Tilemap, x:Float, y:Float):Bool {
     var col:Float = cast _Runtime.UNDEFINED;
     var row:Float = cast _Runtime.UNDEFINED;
-    col = (cast getTilemapColumnAtX((cast source : flighthq.types.Tilemap), (cast x : Float)) : Float);
-    row = (cast getTilemapRowAtY((cast source : flighthq.types.Tilemap), (cast y : Float)) : Float);
+    col = (cast getTilemapColumnAtX((cast source), (cast x : Float)) : Float);
+    row = (cast getTilemapRowAtY((cast source), (cast y : Float)) : Float);
     if ((cast ((cast ((cast col : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
     (out.x = cast (col : Dynamic));
     (out.y = cast (row : Dynamic));
@@ -147,7 +148,7 @@ class Tilemap {
 
   @:noCompletion
   public static function getTilemapRuntime(source:flighthq.types.Tilemap):TilemapRuntime {
-    return cast (cast (cast getNode2DRuntime(source) : TilemapRuntime) : TilemapRuntime);
+    return cast (cast getNode2DRuntime((cast source)) : TilemapRuntime);
     return cast null;
   }
 
@@ -171,17 +172,17 @@ class Tilemap {
   }
 
   public static function getTilemapTileAtPoint(source:flighthq.types.Tilemap, point:Vector2Like):Float {
-    return cast (cast getTilemapTileAtPointXY((cast source : flighthq.types.Tilemap), (cast point.x : Float), (cast point.y : Float)) : Float);
+    return cast (cast getTilemapTileAtPointXY((cast source), (cast point.x : Float), (cast point.y : Float)) : Float);
     return cast null;
   }
 
   public static function getTilemapTileAtPointXY(source:flighthq.types.Tilemap, x:Float, y:Float):Float {
     var col:Float = cast _Runtime.UNDEFINED;
     var row:Float = cast _Runtime.UNDEFINED;
-    col = (cast getTilemapColumnAtX((cast source : flighthq.types.Tilemap), (cast x : Float)) : Float);
-    row = (cast getTilemapRowAtY((cast source : flighthq.types.Tilemap), (cast y : Float)) : Float);
+    col = (cast getTilemapColumnAtX((cast source), (cast x : Float)) : Float);
+    row = (cast getTilemapRowAtY((cast source), (cast y : Float)) : Float);
     if ((cast ((cast ((cast col : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
-    return cast (cast getTilemapTile((cast source : flighthq.types.Tilemap), (cast col : Float), (cast row : Float)) : Float);
+    return cast (cast getTilemapTile((cast source), (cast col : Float), (cast row : Float)) : Float);
     return cast null;
   }
 
@@ -246,8 +247,8 @@ class Tilemap {
     tiles = _Runtime.field(__destructure6, 'tiles');
     if ((cast ((cast ((cast ((cast ((cast column : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast column : Float) >= (cast columns : Float)) : Bool)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast row : Float) >= (cast rows : Float)) : Bool)) : Bool)) { return; }
     flighthq._internal._StaticIndex.writeInt16Array(tiles, ((row * columns) + column), id);
-    signals = (cast getTilemapSignals((cast tilemap : flighthq.types.Tilemap)) : Null<TilemapSignals>);
-    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast signals : TilemapSignals).onTileChanged.emit)(column, row, id); }
+    signals = (cast getTilemapSignals((cast tilemap)) : Null<TilemapSignals>);
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast (cast signals : TilemapSignals).onTileChanged : { var emit:Float->Float->Float->Void; }).emit)((cast column : Float), (cast row : Float), (cast id : Float)); }
   }
 
   public static function setTilemapTiles(tilemap:flighthq.types.Tilemap, ids:flighthq._internal._ArrayLike<Float>, offsetColumn:Float, offsetRow:Float, width:Float, height:Float):Void {
@@ -277,8 +278,8 @@ class Tilemap {
         r++;
       }
     }
-    signals = (cast getTilemapSignals((cast tilemap : flighthq.types.Tilemap)) : Null<TilemapSignals>);
-    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast signals : TilemapSignals).onTilesChanged.emit)(offsetColumn, offsetRow, width, height); }
+    signals = (cast getTilemapSignals((cast tilemap)) : Null<TilemapSignals>);
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast (cast signals : TilemapSignals).onTilesChanged : { var emit:Float->Float->Float->Float->Void; }).emit)((cast offsetColumn : Float), (cast offsetRow : Float), (cast width : Float), (cast height : Float)); }
   }
 
   public static function setTilemapTileTint(tilemap:flighthq.types.Tilemap, column:Float, row:Float, rgba:Float):Void {

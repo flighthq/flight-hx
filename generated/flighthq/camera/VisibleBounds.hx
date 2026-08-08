@@ -9,16 +9,17 @@ import flighthq.geometry.Matrix.inverseMatrix;
 import flighthq.geometry.Matrix.matrixTransformBounds;
 import flighthq.types.Camera2D;
 import flighthq.types.Matrix;
+import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle.RectangleLike;
 
 class VisibleBounds {
   public static function getCamera2DVisibleBounds(camera:Camera2D, out:RectangleLike):Void {
-    getCamera2DViewMatrix((cast camera : Camera2D), VisibleBounds.scratchMatrix__visibleBounds);
-    (cast inverseMatrix(VisibleBounds.scratchInverse__visibleBounds, VisibleBounds.scratchMatrix__visibleBounds) : Bool);
-    matrixTransformBounds((cast out : RectangleLike), VisibleBounds.scratchInverse__visibleBounds, (cast 0.0 : Float), (cast 0.0 : Float), (cast camera.viewportWidth : Float), (cast camera.viewportHeight : Float));
+    getCamera2DViewMatrix((cast camera), (cast VisibleBounds.scratchMatrix__visibleBounds));
+    (cast inverseMatrix((cast VisibleBounds.scratchInverse__visibleBounds), (cast VisibleBounds.scratchMatrix__visibleBounds)) : Bool);
+    matrixTransformBounds((cast out), (cast VisibleBounds.scratchInverse__visibleBounds), (cast 0.0 : Float), (cast 0.0 : Float), (cast camera.viewportWidth : Float), (cast camera.viewportHeight : Float));
   }
 
-  public static final scratchInverse__visibleBounds:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix);
+  public static final scratchInverse__visibleBounds:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
 
-  public static final scratchMatrix__visibleBounds:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix);
+  public static final scratchMatrix__visibleBounds:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
 }

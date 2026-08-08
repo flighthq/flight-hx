@@ -11,7 +11,6 @@ import flighthq.scene3d.SceneNode.getNode3DRuntime;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DRuntime;
 import flighthq.types.PartialNode;
 import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.ParticleEmitter3D;
@@ -38,41 +37,41 @@ class ParticleEmitter3D {
     var tt:Float = cast _Runtime.UNDEFINED;
     var ct:Float = cast _Runtime.UNDEFINED;
     var vt:Float = cast _Runtime.UNDEFINED;
-    index = (cast target : flighthq.types.ParticleEmitter3D).data.particleCount;
+    index = (cast (cast target : flighthq.types.ParticleEmitter3D).data : { var particleCount:Float; }).particleCount;
     needed = (index + 1.0);
-    if ((cast ((cast (cast getParticleEmitter3DCapacity((cast target : flighthq.types.ParticleEmitter3D)) : Float) : Float) < (cast needed : Float)) : Bool)) {
-      var newCapacity:Float = HxMath.max(needed, _Runtime.orValue(((cast target : flighthq.types.ParticleEmitter3D).data.particleCount * 2.0), function():Dynamic return cast 8.0));
-      reserveParticleEmitter3D((cast target : flighthq.types.ParticleEmitter3D), (cast newCapacity : Float));
+    if ((cast ((cast (cast getParticleEmitter3DCapacity((cast target)) : Float) : Float) < (cast needed : Float)) : Bool)) {
+      var newCapacity:Float = HxMath.max(needed, _Runtime.orValue(((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var particleCount:Float; }).particleCount * 2.0), function():Dynamic return cast 8.0));
+      reserveParticleEmitter3D((cast target), (cast newCapacity : Float));
     }
-    ((cast target : flighthq.types.ParticleEmitter3D).data.particleCount = cast (needed : Dynamic));
-    flighthq._internal._StaticIndex.writeUint16Array((cast target : flighthq.types.ParticleEmitter3D).data.ids, index, id);
+    ((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var particleCount:Float; }).particleCount = cast (needed : Dynamic));
+    flighthq._internal._StaticIndex.writeUint16Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var ids:flighthq._internal._UInt16Array; }).ids, index, id);
     tt = (index * ParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__particleEmitter3D);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.transforms, tt, x);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.transforms, (tt + 1.0), y);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.transforms, (tt + 2.0), rotation);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.transforms, (tt + 3.0), scale);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.positionsZ, index, z);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.alphas, index, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var transforms:flighthq._internal._Float32Array; }).transforms, tt, x);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var transforms:flighthq._internal._Float32Array; }).transforms, (tt + 1.0), y);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var transforms:flighthq._internal._Float32Array; }).transforms, (tt + 2.0), rotation);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var transforms:flighthq._internal._Float32Array; }).transforms, (tt + 3.0), scale);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var positionsZ:flighthq._internal._Float32Array; }).positionsZ, index, z);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var alphas:flighthq._internal._Float32Array; }).alphas, index, 1.0);
     ct = (index * ParticleEmitter3D.PARTICLE_COLOR_STRIDE__particleEmitter3D);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.colors, ct, 1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.colors, (ct + 1.0), 1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.colors, (ct + 2.0), 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var colors:flighthq._internal._Float32Array; }).colors, ct, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var colors:flighthq._internal._Float32Array; }).colors, (ct + 1.0), 1.0);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var colors:flighthq._internal._Float32Array; }).colors, (ct + 2.0), 1.0);
     vt = (index * ParticleEmitter3D.PARTICLE_VELOCITY_STRIDE__particleEmitter3D);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.velocities, vt, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.velocities, (vt + 1.0), 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.velocities, (vt + 2.0), 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var velocities:flighthq._internal._Float32Array; }).velocities, vt, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var velocities:flighthq._internal._Float32Array; }).velocities, (vt + 1.0), 0.0);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var velocities:flighthq._internal._Float32Array; }).velocities, (vt + 2.0), 0.0);
     return cast index;
     return cast null;
   }
 
   public static function clearParticleEmitter3D(target:flighthq.types.ParticleEmitter3D):Void {
-    ((cast target : flighthq.types.ParticleEmitter3D).data.particleCount = cast (0.0 : Dynamic));
+    ((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var particleCount:Float; }).particleCount = cast (0.0 : Dynamic));
   }
 
   public static function cloneParticleEmitter3D(source:flighthq.types.ParticleEmitter3D):flighthq.types.ParticleEmitter3D {
     var src:ParticleEmitterData = cast _Runtime.UNDEFINED;
     src = _Runtime.field(source, 'data');
-    return cast (cast createParticleEmitter3D((cast { blendMode: _Runtime.field(source, 'blendMode'), data: { alphas: _Runtime.slice(src.alphas, 0, null), atlas: src.atlas, colors: _Runtime.slice(src.colors, 0, null), ids: _Runtime.slice(src.ids, 0, null), particleCount: src.particleCount, positionsZ: _Runtime.slice(src.positionsZ, 0, null), transforms: _Runtime.slice(src.transforms, 0, null), velocities: _Runtime.slice(src.velocities, 0, null), worldSpace: src.worldSpace } } : Null<PartialNode<flighthq.types.ParticleEmitter3D>>)) : flighthq.types.ParticleEmitter3D);
+    return cast (cast createParticleEmitter3D((cast { blendMode: _Runtime.field(source, 'blendMode'), data: { alphas: _Runtime.slice(src.alphas, 0, null), atlas: src.atlas, colors: _Runtime.slice(src.colors, 0, null), ids: _Runtime.slice(src.ids, 0, null), particleCount: src.particleCount, positionsZ: _Runtime.slice(src.positionsZ, 0, null), transforms: _Runtime.slice(src.transforms, 0, null), velocities: _Runtime.slice(src.velocities, 0, null), worldSpace: src.worldSpace } })) : flighthq.types.ParticleEmitter3D);
     return cast null;
   }
 
@@ -130,12 +129,12 @@ class ParticleEmitter3D {
     positionsZ = _Runtime.field(__destructure0, 'positionsZ');
     transforms = _Runtime.field(__destructure0, 'transforms');
     if ((cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) {
-      (out.min.x = cast (0.0 : Dynamic));
-      (out.min.y = cast (0.0 : Dynamic));
-      (out.min.z = cast (0.0 : Dynamic));
-      (out.max.x = cast (0.0 : Dynamic));
-      (out.max.y = cast (0.0 : Dynamic));
-      (out.max.z = cast (0.0 : Dynamic));
+      ((cast out.min : { var x:Float; }).x = cast (0.0 : Dynamic));
+      ((cast out.min : { var y:Float; }).y = cast (0.0 : Dynamic));
+      ((cast out.min : { var z:Float; }).z = cast (0.0 : Dynamic));
+      ((cast out.max : { var x:Float; }).x = cast (0.0 : Dynamic));
+      ((cast out.max : { var y:Float; }).y = cast (0.0 : Dynamic));
+      ((cast out.max : { var z:Float; }).z = cast (0.0 : Dynamic));
       return;
     }
     minX = HxMath.POSITIVE_INFINITY;
@@ -162,19 +161,19 @@ class ParticleEmitter3D {
         i++;
       }
     }
-    (out.min.x = cast (minX : Dynamic));
-    (out.min.y = cast (minY : Dynamic));
-    (out.min.z = cast (minZ : Dynamic));
-    (out.max.x = cast (maxX : Dynamic));
-    (out.max.y = cast (maxY : Dynamic));
-    (out.max.z = cast (maxZ : Dynamic));
+    ((cast out.min : { var x:Float; }).x = cast (minX : Dynamic));
+    ((cast out.min : { var y:Float; }).y = cast (minY : Dynamic));
+    ((cast out.min : { var z:Float; }).z = cast (minZ : Dynamic));
+    ((cast out.max : { var x:Float; }).x = cast (maxX : Dynamic));
+    ((cast out.max : { var y:Float; }).y = cast (maxY : Dynamic));
+    ((cast out.max : { var z:Float; }).z = cast (maxZ : Dynamic));
   }
 
   public static function createParticleEmitter3D(?obj:PartialNode<flighthq.types.ParticleEmitter3D>):flighthq.types.ParticleEmitter3D {
     var node:flighthq.types.ParticleEmitter3D = cast _Runtime.UNDEFINED;
-    node = (cast (cast createNode3D((cast ParticleEmitter3DKind : String), (cast obj : Null<flighthq._internal._Any>)) : flighthq._internal._Any) : flighthq.types.ParticleEmitter3D);
-    ((cast node : flighthq.types.ParticleEmitter3D).data = (cast createParticleEmitterData((cast (cast _Runtime.optionalField(obj, 'data') : Null<Dynamic>) : Null<flighthq._internal._Any>)) : ParticleEmitterData));
-    ((cast node : flighthq.types.ParticleEmitter3D).blendMode = _Runtime.coalesce(_Runtime.optionalField(obj, 'blendMode'), function():Dynamic return cast 'normal'));
+    node = (cast (cast createNode3D((cast ParticleEmitter3DKind : String), (cast obj)) : flighthq._internal._Any) : flighthq.types.ParticleEmitter3D);
+    ((cast node : flighthq.types.ParticleEmitter3D).data = (cast createParticleEmitterData((cast (cast ({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var data:Null<flighthq._internal._Any>; }).data; }) : Null<flighthq._internal._Partial<ParticleEmitterData>>))) : ParticleEmitterData));
+    ((cast node : flighthq.types.ParticleEmitter3D).blendMode = _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var blendMode:Null<String>; }).blendMode; }), function():Dynamic return cast 'normal'));
     return cast node;
     return cast null;
   }
@@ -193,31 +192,31 @@ class ParticleEmitter3D {
   }
 
   public static function getParticleEmitter3DParticleAlpha(source:flighthq.types.ParticleEmitter3D, index:Float):Float {
-    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast _Runtime.field(source, 'data').particleCount : Float)) : Bool)) : Bool)) { return cast -1.0; }
-    return cast flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(source, 'data').alphas, index);
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast _Runtime.field(source, 'data') : { var particleCount:Float; }).particleCount : Float)) : Bool)) : Bool)) { return cast -1.0; }
+    return cast flighthq._internal._StaticIndex.readFloat32Array((cast _Runtime.field(source, 'data') : { var alphas:flighthq._internal._Float32Array; }).alphas, index);
     return cast null;
   }
 
   public static function getParticleEmitter3DParticleId(source:flighthq.types.ParticleEmitter3D, index:Float):Float {
-    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast _Runtime.field(source, 'data').particleCount : Float)) : Bool)) : Bool)) { return cast -1.0; }
-    return cast flighthq._internal._StaticIndex.readUint16Array(_Runtime.field(source, 'data').ids, index);
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast _Runtime.field(source, 'data') : { var particleCount:Float; }).particleCount : Float)) : Bool)) : Bool)) { return cast -1.0; }
+    return cast flighthq._internal._StaticIndex.readUint16Array((cast _Runtime.field(source, 'data') : { var ids:flighthq._internal._UInt16Array; }).ids, index);
     return cast null;
   }
 
   public static function getParticleEmitter3DParticleVelocity(out:Vector3Like, source:flighthq.types.ParticleEmitter3D, index:Float):Bool {
     var vt:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast _Runtime.field(source, 'data').particleCount : Float)) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast _Runtime.field(source, 'data') : { var particleCount:Float; }).particleCount : Float)) : Bool)) : Bool)) { return cast false; }
     vt = (index * ParticleEmitter3D.PARTICLE_VELOCITY_STRIDE__particleEmitter3D);
-    (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(source, 'data').velocities, vt) : Dynamic));
-    (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(source, 'data').velocities, (vt + 1.0)) : Dynamic));
-    (out.z = cast (flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(source, 'data').velocities, (vt + 2.0)) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array((cast _Runtime.field(source, 'data') : { var velocities:flighthq._internal._Float32Array; }).velocities, vt) : Dynamic));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array((cast _Runtime.field(source, 'data') : { var velocities:flighthq._internal._Float32Array; }).velocities, (vt + 1.0)) : Dynamic));
+    (out.z = cast (flighthq._internal._StaticIndex.readFloat32Array((cast _Runtime.field(source, 'data') : { var velocities:flighthq._internal._Float32Array; }).velocities, (vt + 2.0)) : Dynamic));
     return cast true;
     return cast null;
   }
 
   @:noCompletion
   public static function getParticleEmitter3DRuntime(source:flighthq.types.ParticleEmitter3D):ParticleEmitter3DRuntime {
-    return cast (cast (cast getNode3DRuntime((cast (cast (cast source : flighthq._internal._Any) : Node3D) : Node3D)) : Node3DRuntime) : ParticleEmitter3DRuntime);
+    return cast (cast getNode3DRuntime((cast (cast (cast source : flighthq._internal._Any) : Node3D))) : ParticleEmitter3DRuntime);
     return cast null;
   }
 
@@ -258,14 +257,14 @@ class ParticleEmitter3D {
 
   public static function reserveParticleEmitter3D(target:flighthq.types.ParticleEmitter3D, capacity:Float):Void {
     var data:ParticleEmitterData = cast _Runtime.UNDEFINED;
-    if ((cast ((cast (cast getParticleEmitter3DCapacity((cast target : flighthq.types.ParticleEmitter3D)) : Float) : Float) >= (cast capacity : Float)) : Bool)) { return; }
+    if ((cast ((cast (cast getParticleEmitter3DCapacity((cast target)) : Float) : Float) >= (cast capacity : Float)) : Bool)) { return; }
     data = (cast target : flighthq.types.ParticleEmitter3D).data;
-    (data.alphas = cast ((cast reserveFloat32Array((cast data.alphas : flighthq._internal._Float32Array), (cast capacity : Float)) : flighthq._internal._Float32Array) : Dynamic));
-    (data.colors = cast ((cast reserveFloat32Array((cast data.colors : flighthq._internal._Float32Array), (cast (capacity * ParticleEmitter3D.PARTICLE_COLOR_STRIDE__particleEmitter3D) : Float)) : flighthq._internal._Float32Array) : Dynamic));
-    (data.ids = cast ((cast reserveUint16Array((cast data.ids : flighthq._internal._UInt16Array), (cast capacity : Float)) : flighthq._internal._UInt16Array) : Dynamic));
-    (data.positionsZ = cast ((cast reserveFloat32Array((cast data.positionsZ : flighthq._internal._Float32Array), (cast capacity : Float)) : flighthq._internal._Float32Array) : Dynamic));
-    (data.transforms = cast ((cast reserveFloat32Array((cast data.transforms : flighthq._internal._Float32Array), (cast (capacity * ParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__particleEmitter3D) : Float)) : flighthq._internal._Float32Array) : Dynamic));
-    (data.velocities = cast ((cast reserveFloat32Array((cast data.velocities : flighthq._internal._Float32Array), (cast (capacity * ParticleEmitter3D.PARTICLE_VELOCITY_STRIDE__particleEmitter3D) : Float)) : flighthq._internal._Float32Array) : Dynamic));
+    (data.alphas = cast ((cast reserveFloat32Array((cast data.alphas), (cast capacity : Float)) : flighthq._internal._Float32Array) : Dynamic));
+    (data.colors = cast ((cast reserveFloat32Array((cast data.colors), (cast (capacity * ParticleEmitter3D.PARTICLE_COLOR_STRIDE__particleEmitter3D) : Float)) : flighthq._internal._Float32Array) : Dynamic));
+    (data.ids = cast ((cast reserveUint16Array((cast data.ids), (cast capacity : Float)) : flighthq._internal._UInt16Array) : Dynamic));
+    (data.positionsZ = cast ((cast reserveFloat32Array((cast data.positionsZ), (cast capacity : Float)) : flighthq._internal._Float32Array) : Dynamic));
+    (data.transforms = cast ((cast reserveFloat32Array((cast data.transforms), (cast (capacity * ParticleEmitter3D.PARTICLE_TRANSFORM_STRIDE__particleEmitter3D) : Float)) : flighthq._internal._Float32Array) : Dynamic));
+    (data.velocities = cast ((cast reserveFloat32Array((cast data.velocities), (cast (capacity * ParticleEmitter3D.PARTICLE_VELOCITY_STRIDE__particleEmitter3D) : Float)) : flighthq._internal._Float32Array) : Dynamic));
   }
 
   public static function setParticleEmitter3DParticle(target:flighthq.types.ParticleEmitter3D, index:Float, id:Float, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Void {
@@ -283,26 +282,26 @@ class ParticleEmitter3D {
   }
 
   public static function setParticleEmitter3DParticleAlpha(target:flighthq.types.ParticleEmitter3D, index:Float, alpha:Float):Void {
-    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast target : flighthq.types.ParticleEmitter3D).data.particleCount : Float)) : Bool)) : Bool)) { return; }
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.alphas, index, alpha);
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast (cast target : flighthq.types.ParticleEmitter3D).data : { var particleCount:Float; }).particleCount : Float)) : Bool)) : Bool)) { return; }
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var alphas:flighthq._internal._Float32Array; }).alphas, index, alpha);
   }
 
   public static function setParticleEmitter3DParticleColor(target:flighthq.types.ParticleEmitter3D, index:Float, r:Float, g:Float, b:Float):Void {
     var ct:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast target : flighthq.types.ParticleEmitter3D).data.particleCount : Float)) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast (cast target : flighthq.types.ParticleEmitter3D).data : { var particleCount:Float; }).particleCount : Float)) : Bool)) : Bool)) { return; }
     ct = (index * ParticleEmitter3D.PARTICLE_COLOR_STRIDE__particleEmitter3D);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.colors, ct, r);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.colors, (ct + 1.0), g);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.colors, (ct + 2.0), b);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var colors:flighthq._internal._Float32Array; }).colors, ct, r);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var colors:flighthq._internal._Float32Array; }).colors, (ct + 1.0), g);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var colors:flighthq._internal._Float32Array; }).colors, (ct + 2.0), b);
   }
 
   public static function setParticleEmitter3DParticleVelocity(target:flighthq.types.ParticleEmitter3D, index:Float, vx:Float, vy:Float, vz:Float):Void {
     var vt:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast target : flighthq.types.ParticleEmitter3D).data.particleCount : Float)) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast (cast target : flighthq.types.ParticleEmitter3D).data : { var particleCount:Float; }).particleCount : Float)) : Bool)) : Bool)) { return; }
     vt = (index * ParticleEmitter3D.PARTICLE_VELOCITY_STRIDE__particleEmitter3D);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.velocities, vt, vx);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.velocities, (vt + 1.0), vy);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast target : flighthq.types.ParticleEmitter3D).data.velocities, (vt + 2.0), vz);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var velocities:flighthq._internal._Float32Array; }).velocities, vt, vx);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var velocities:flighthq._internal._Float32Array; }).velocities, (vt + 1.0), vy);
+    flighthq._internal._StaticIndex.writeFloat32Array((cast (cast target : flighthq.types.ParticleEmitter3D).data : { var velocities:flighthq._internal._Float32Array; }).velocities, (vt + 2.0), vz);
   }
 
   public static function sortParticleEmitter3DIndicesByViewDepth(outIndices:flighthq._internal._UInt32Array, outViewDepths:flighthq._internal._Float64Array, source:flighthq.types.ParticleEmitter3D, positionToView:Matrix4Like):Bool {
@@ -310,13 +309,13 @@ class ParticleEmitter3D {
     var matrix:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var transforms:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var positionsZ:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    count = _Runtime.field(source, 'data').particleCount;
-    if ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([count] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast count : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast getParticleEmitter3DCapacity((cast source : flighthq.types.ParticleEmitter3D)) : Float) : Float) < (cast count : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(outIndices, 'length') : Float) < (cast count : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(outViewDepths, 'length') : Float) < (cast count : Float)) : Bool)) : Bool)) {
+    count = (cast _Runtime.field(source, 'data') : { var particleCount:Float; }).particleCount;
+    if ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([count] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast count : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast getParticleEmitter3DCapacity((cast source)) : Float) : Float) < (cast count : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(outIndices, 'length') : Float) < (cast count : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(outViewDepths, 'length') : Float) < (cast count : Float)) : Bool)) : Bool)) {
       return cast false;
     }
     matrix = positionToView.m;
-    transforms = _Runtime.field(source, 'data').transforms;
-    positionsZ = _Runtime.field(source, 'data').positionsZ;
+    transforms = (cast _Runtime.field(source, 'data') : { var transforms:flighthq._internal._Float32Array; }).transforms;
+    positionsZ = (cast _Runtime.field(source, 'data') : { var positionsZ:flighthq._internal._Float32Array; }).positionsZ;
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast count : Float)) : Bool)) {
@@ -332,7 +331,7 @@ class ParticleEmitter3D {
     {
       var start:Float = ((_Runtime.toInt32(count) >> 1) - 1.0);
       while ((cast ((cast start : Float) >= (cast 0.0 : Float)) : Bool)) {
-        ParticleEmitter3D.siftParticleDepthMaxHeap__particleEmitter3D((cast outIndices : flighthq._internal._UInt32Array), (cast outViewDepths : flighthq._internal._Float64Array), (cast start : Float), (cast count : Float));
+        ParticleEmitter3D.siftParticleDepthMaxHeap__particleEmitter3D((cast outIndices), (cast outViewDepths), (cast start : Float), (cast count : Float));
         start--;
       }
     }
@@ -342,7 +341,7 @@ class ParticleEmitter3D {
         var first:Float = flighthq._internal._StaticIndex.readUint32Array(outIndices, 0.0);
         flighthq._internal._StaticIndex.writeUint32Array(outIndices, 0.0, flighthq._internal._StaticIndex.readUint32Array(outIndices, end));
         flighthq._internal._StaticIndex.writeUint32Array(outIndices, end, first);
-        ParticleEmitter3D.siftParticleDepthMaxHeap__particleEmitter3D((cast outIndices : flighthq._internal._UInt32Array), (cast outViewDepths : flighthq._internal._Float64Array), (cast 0.0 : Float), (cast end : Float));
+        ParticleEmitter3D.siftParticleDepthMaxHeap__particleEmitter3D((cast outIndices), (cast outViewDepths), (cast 0.0 : Float), (cast end : Float));
         end--;
       }
     }
@@ -365,8 +364,8 @@ class ParticleEmitter3D {
       if ((cast ((cast left : Float) >= (cast length : Float)) : Bool)) { return; }
       var right:Float = (left + 1.0);
       var greater:Float = left;
-      if ((cast ((cast ((cast right : Float) < (cast length : Float)) : Bool) && (cast (cast ParticleEmitter3D.isParticleDepthGreater__particleEmitter3D((cast flighthq._internal._StaticIndex.readUint32Array(indices, right) : Float), (cast flighthq._internal._StaticIndex.readUint32Array(indices, left) : Float), (cast depths : flighthq._internal._Float64Array)) : Bool) : Bool)) : Bool)) { (greater = cast (right : Dynamic)); }
-      if ((cast !(cast (cast ParticleEmitter3D.isParticleDepthGreater__particleEmitter3D((cast flighthq._internal._StaticIndex.readUint32Array(indices, greater) : Float), (cast flighthq._internal._StaticIndex.readUint32Array(indices, root) : Float), (cast depths : flighthq._internal._Float64Array)) : Bool) : Bool) : Bool)) { return; }
+      if ((cast ((cast ((cast right : Float) < (cast length : Float)) : Bool) && (cast (cast ParticleEmitter3D.isParticleDepthGreater__particleEmitter3D((cast flighthq._internal._StaticIndex.readUint32Array(indices, right) : Float), (cast flighthq._internal._StaticIndex.readUint32Array(indices, left) : Float), (cast depths)) : Bool) : Bool)) : Bool)) { (greater = cast (right : Dynamic)); }
+      if ((cast !(cast (cast ParticleEmitter3D.isParticleDepthGreater__particleEmitter3D((cast flighthq._internal._StaticIndex.readUint32Array(indices, greater) : Float), (cast flighthq._internal._StaticIndex.readUint32Array(indices, root) : Float), (cast depths)) : Bool) : Bool) : Bool)) { return; }
       var swap:Float = flighthq._internal._StaticIndex.readUint32Array(indices, root);
       flighthq._internal._StaticIndex.writeUint32Array(indices, root, flighthq._internal._StaticIndex.readUint32Array(indices, greater));
       flighthq._internal._StaticIndex.writeUint32Array(indices, greater, swap);

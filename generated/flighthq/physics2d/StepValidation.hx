@@ -3,12 +3,6 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionAabb;
-import flighthq.types.Collision.CollisionCircle;
-import flighthq.types.Collision.CollisionObb;
-import flighthq.types.Collision.CollisionPoint;
-import flighthq.types.Collision.CollisionPolygon;
-import flighthq.types.Collision.CollisionSegment;
 import flighthq.types.Collision.CollisionShape;
 import flighthq.types.Physics2D.Physics2DBodyType;
 import flighthq.types.Physics2D.Physics2DCollider;
@@ -25,7 +19,7 @@ class StepValidation {
   public static function isPhysics2DBodyStateValid(world:Physics2DWorld):Bool {
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(world, 'nextBodyIndex')] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast _Runtime.field(world, 'nextBodyIndex') : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
     for (body in _Runtime.iterable(_Runtime.field(world, 'bodies'))) {
-      if ((cast ((cast !(cast (cast StepValidation.isRigidBody2DStateValid__stepValidation((cast body : RigidBody2D)) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals(((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map<Float, RigidBody2D>).get((cast body : RigidBody2D).index)), body) : Bool)) : Bool)) { return cast false; }
+      if ((cast ((cast !(cast (cast StepValidation.isRigidBody2DStateValid__stepValidation((cast body)) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals(((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map<Float, RigidBody2D>).get((cast body : RigidBody2D).index)), body) : Bool)) : Bool)) { return cast false; }
     }
     return cast true;
     return cast null;
@@ -33,7 +27,7 @@ class StepValidation {
 
   public static function isPhysics2DContactStateValid(world:Physics2DWorld):Bool {
     for (contact in _Runtime.iterable(_Runtime.field(world, 'contacts'))) {
-      if ((cast !(cast (cast isPhysics2DContactValid((cast contact : Physics2DContact)) : Bool) : Bool) : Bool)) { return cast false; }
+      if ((cast !(cast (cast isPhysics2DContactValid((cast contact)) : Bool) : Bool) : Bool)) { return cast false; }
     }
     return cast true;
     return cast null;
@@ -49,7 +43,7 @@ class StepValidation {
         var point:Physics2DContactPoint = flighthq._internal._StaticIndex.readArray(_Runtime.field(contact, 'points'), i);
         if ((cast _Runtime.strictEquals(point, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
         for (key in _Runtime.forInKeys(point)) {
-          var value:Float = _Runtime.getIndex(point, (cast key : Dynamic));
+          var value:Float = _Runtime.getIndex(point, (cast key : String));
           if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
         }
         i++;
@@ -66,7 +60,7 @@ class StepValidation {
 
   public static function isPhysics2DJointStateValid(world:Physics2DWorld):Bool {
     for (joint in _Runtime.iterable(_Runtime.field(world, 'joints'))) {
-      if ((cast !(cast (cast StepValidation.isPhysics2DJointValid__stepValidation((cast joint : Physics2DJoint)) : Bool) : Bool) : Bool)) { return cast false; }
+      if ((cast !(cast (cast StepValidation.isPhysics2DJointValid__stepValidation((cast joint)) : Bool) : Bool) : Bool)) { return cast false; }
     }
     return cast true;
     return cast null;
@@ -86,26 +80,26 @@ class StepValidation {
     {
       var __switchValue = (cast shape : { var kind:String; }).kind;
       if (__switchValue == 'circle') {
-        return cast ((cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionCircle, var kind:String; }).x] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionCircle, var kind:String; }).y] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionCircle, var kind:String; }).radius] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast shape : { >CollisionCircle, var kind:String; }).radius : Float) > (cast 0.0 : Float)) : Bool));
+        return cast ((cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var x:Float; }).x] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var y:Float; }).y] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var radius:Float; }).radius] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast shape : { var radius:Float; }).radius : Float) > (cast 0.0 : Float)) : Bool));
       }
       else if (__switchValue == 'aabb') {
-        return cast _Runtime.andValue(((cast ((cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionAabb, var kind:String; }).minX] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionAabb, var kind:String; }).minY] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionAabb, var kind:String; }).maxX] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionAabb, var kind:String; }).maxY] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast shape : { >CollisionAabb, var kind:String; }).maxX : Float) > (cast (cast shape : { >CollisionAabb, var kind:String; }).minX : Float)) : Bool)), function():Dynamic return cast ((cast (cast shape : { >CollisionAabb, var kind:String; }).maxY : Float) > (cast (cast shape : { >CollisionAabb, var kind:String; }).minY : Float)));
+        return cast _Runtime.andValue(((cast ((cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var minX:Float; }).minX] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var minY:Float; }).minY] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var maxX:Float; }).maxX] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var maxY:Float; }).maxY] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast shape : { var maxX:Float; }).maxX : Float) > (cast (cast shape : { var minX:Float; }).minX : Float)) : Bool)), function():Dynamic return cast ((cast (cast shape : { var maxY:Float; }).maxY : Float) > (cast (cast shape : { var minY:Float; }).minY : Float)));
       }
       else if (__switchValue == 'obb') {
-        return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionObb, var kind:String; }).x] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionObb, var kind:String; }).y] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionObb, var kind:String; }).halfW] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionObb, var kind:String; }).halfH] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionObb, var kind:String; }).rotation] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast shape : { >CollisionObb, var kind:String; }).halfW : Float) > (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast (cast shape : { >CollisionObb, var kind:String; }).halfH : Float) > (cast 0.0 : Float)));
+        return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var x:Float; }).x] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var y:Float; }).y] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var halfW:Float; }).halfW] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var halfH:Float; }).halfH] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var rotation:Float; }).rotation] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast shape : { var halfW:Float; }).halfW : Float) > (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast (cast shape : { var halfH:Float; }).halfH : Float) > (cast 0.0 : Float)));
       }
       else if (__switchValue == 'polygon') {
-        if ((cast ((cast ((cast _Runtime.field((cast shape : { >CollisionPolygon, var kind:String; }).points, 'length') : Float) < (cast 6.0 : Float)) : Bool) || (cast !_Runtime.strictEquals((_Runtime.toInt32(_Runtime.field((cast shape : { >CollisionPolygon, var kind:String; }).points, 'length')) & 1), 0.0) : Bool)) : Bool)) { return cast false; }
-        for (coordinate in _Runtime.iterable((cast shape : { >CollisionPolygon, var kind:String; }).points)) {
+        if ((cast ((cast ((cast _Runtime.field((cast shape : { var points:Array<Float>; }).points, 'length') : Float) < (cast 6.0 : Float)) : Bool) || (cast !_Runtime.strictEquals((_Runtime.toInt32(_Runtime.field((cast shape : { var points:Array<Float>; }).points, 'length')) & 1), 0.0) : Bool)) : Bool)) { return cast false; }
+        for (coordinate in _Runtime.iterable((cast shape : { var points:Array<Float>; }).points)) {
           if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([coordinate] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
         }
         return cast true;
       }
       else if (__switchValue == 'segment') {
-        return cast _Runtime.andValue(((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionSegment, var kind:String; }).x0] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionSegment, var kind:String; }).y0] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionSegment, var kind:String; }).x1] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionSegment, var kind:String; }).y1] : Array<Dynamic>)));
+        return cast _Runtime.andValue(((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var x0:Float; }).x0] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var y0:Float; }).y0] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var x1:Float; }).x1] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var y1:Float; }).y1] : Array<Dynamic>)));
       }
       else if (__switchValue == 'point') {
-        return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionPoint, var kind:String; }).x] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { >CollisionPoint, var kind:String; }).y] : Array<Dynamic>)) : Bool));
+        return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var x:Float; }).x] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var y:Float; }).y] : Array<Dynamic>)) : Bool));
       }
     }
     return cast null;
@@ -114,7 +108,7 @@ class StepValidation {
   public static function isPhysics2DColliderStateValid__stepValidation(collider:Physics2DCollider):Bool {
     var filter:Physics2DCollisionFilter = cast _Runtime.UNDEFINED;
     filter = _Runtime.field(collider, 'filter');
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast (cast StepValidation.isCollisionShapeStateValid__stepValidation((cast _Runtime.field(collider, 'local') : CollisionShape)) : Bool) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast _Runtime.field(collider, 'material') : Physics2DMaterial).density] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast _Runtime.field(collider, 'material') : Physics2DMaterial).density : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast _Runtime.field(collider, 'material') : Physics2DMaterial).friction] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast _Runtime.field(collider, 'material') : Physics2DMaterial).friction : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast _Runtime.field(collider, 'material') : Physics2DMaterial).restitution] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast _Runtime.field(collider, 'material') : Physics2DMaterial).restitution : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(collider, 'sensor')), 'boolean') : Bool)), function():Dynamic return cast _Runtime.orValue(_Runtime.strictEquals(filter, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.andValue(((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([(cast filter : Physics2DCollisionFilter).categoryBits] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([(cast filter : Physics2DCollisionFilter).maskBits] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([(cast filter : Physics2DCollisionFilter).groupIndex] : Array<Dynamic>)))));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast (cast StepValidation.isCollisionShapeStateValid__stepValidation((cast _Runtime.field(collider, 'local'))) : Bool) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast _Runtime.field(collider, 'material') : Physics2DMaterial).density] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast _Runtime.field(collider, 'material') : Physics2DMaterial).density : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast _Runtime.field(collider, 'material') : Physics2DMaterial).friction] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast _Runtime.field(collider, 'material') : Physics2DMaterial).friction : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast _Runtime.field(collider, 'material') : Physics2DMaterial).restitution] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast _Runtime.field(collider, 'material') : Physics2DMaterial).restitution : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(collider, 'sensor')), 'boolean') : Bool)), function():Dynamic return cast _Runtime.orValue(_Runtime.strictEquals(filter, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.andValue(((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([(cast filter : Physics2DCollisionFilter).categoryBits] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([(cast filter : Physics2DCollisionFilter).maskBits] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([(cast filter : Physics2DCollisionFilter).groupIndex] : Array<Dynamic>)))));
     return cast null;
   }
 
@@ -128,7 +122,7 @@ class StepValidation {
       return cast false;
     }
     for (key in _Runtime.forInKeys(joint)) {
-      var value:flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool> = _Runtime.getIndex(joint, (cast key : Dynamic));
+      var value:flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool> = _Runtime.getIndex(joint, (cast key : String));
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool) && (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
     }
     return cast true;
@@ -143,11 +137,11 @@ class StepValidation {
       if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.getIndex(body, key)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
     }
     for (collider in _Runtime.iterable(_Runtime.field(body, 'colliders'))) {
-      if ((cast !(cast (cast StepValidation.isPhysics2DColliderStateValid__stepValidation((cast collider : Physics2DCollider)) : Bool) : Bool) : Bool)) { return cast false; }
+      if ((cast !(cast (cast StepValidation.isPhysics2DColliderStateValid__stepValidation((cast collider)) : Bool) : Bool) : Bool)) { return cast false; }
     }
     return cast true;
     return cast null;
   }
 
-  public static final rigidBodyFiniteKeys__stepValidation:Array<String> = cast (['x', 'y', 'angle', 'velocityX', 'velocityY', 'angularVelocity', 'forceX', 'forceY', 'torque', 'centerX', 'centerY'] : Array<Dynamic>);
+  public static final rigidBodyFiniteKeys__stepValidation:Array<String> = (cast cast (['x', 'y', 'angle', 'velocityX', 'velocityY', 'angularVelocity', 'forceX', 'forceY', 'torque', 'centerX', 'centerY'] : Array<Dynamic>));
 }

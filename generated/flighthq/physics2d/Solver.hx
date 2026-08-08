@@ -47,19 +47,19 @@ class Solver {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast (cast contact : Physics2DContact).pointCount : Float)) : Bool)) {
         var point:Physics2DContactPoint = flighthq._internal._StaticIndex.readArray((cast contact : Physics2DContact).points, i);
-        var tangentVelocity:Float = (cast Solver.relativeAxisVelocity__solver((cast bodyA : RigidBody2D), (cast bodyB : RigidBody2D), (cast (cast point : Physics2DContactPoint).rAX : Float), (cast (cast point : Physics2DContactPoint).rAY : Float), (cast (cast point : Physics2DContactPoint).rBX : Float), (cast (cast point : Physics2DContactPoint).rBY : Float), (cast tangentX : Float), (cast tangentY : Float)) : Float);
+        var tangentVelocity:Float = (cast Solver.relativeAxisVelocity__solver((cast bodyA), (cast bodyB), (cast (cast point : Physics2DContactPoint).rAX : Float), (cast (cast point : Physics2DContactPoint).rAY : Float), (cast (cast point : Physics2DContactPoint).rBX : Float), (cast (cast point : Physics2DContactPoint).rBY : Float), (cast tangentX : Float), (cast tangentY : Float)) : Float);
         var tangentImpulse:Float = (-(cast point : Physics2DContactPoint).tangentMass * tangentVelocity);
         var limit:Float = ((cast contact : Physics2DContact).friction * (cast point : Physics2DContactPoint).normalImpulse);
         var clampedTangent:Float = HxMath.max(-limit, HxMath.min(limit, ((cast point : Physics2DContactPoint).tangentImpulse + tangentImpulse)));
         (tangentImpulse = cast ((clampedTangent - (cast point : Physics2DContactPoint).tangentImpulse) : Dynamic));
         ((cast point : Physics2DContactPoint).tangentImpulse = clampedTangent);
-        applyPhysics2DImpulse((cast bodyA : RigidBody2D), (cast bodyB : RigidBody2D), (cast (cast point : Physics2DContactPoint).rAX : Float), (cast (cast point : Physics2DContactPoint).rAY : Float), (cast (cast point : Physics2DContactPoint).rBX : Float), (cast (cast point : Physics2DContactPoint).rBY : Float), (cast (tangentImpulse * tangentX) : Float), (cast (tangentImpulse * tangentY) : Float));
-        var normalVelocity:Float = (cast relativeNormalVelocity((cast bodyA : RigidBody2D), (cast bodyB : RigidBody2D), (cast point : Physics2DContactPoint), (cast normalX : Float), (cast normalY : Float)) : Float);
+        applyPhysics2DImpulse((cast bodyA), (cast bodyB), (cast (cast point : Physics2DContactPoint).rAX : Float), (cast (cast point : Physics2DContactPoint).rAY : Float), (cast (cast point : Physics2DContactPoint).rBX : Float), (cast (cast point : Physics2DContactPoint).rBY : Float), (cast (tangentImpulse * tangentX) : Float), (cast (tangentImpulse * tangentY) : Float));
+        var normalVelocity:Float = (cast relativeNormalVelocity((cast bodyA), (cast bodyB), (cast point), (cast normalX : Float), (cast normalY : Float)) : Float);
         var normalImpulse:Float = (-(cast point : Physics2DContactPoint).normalMass * (normalVelocity + (cast point : Physics2DContactPoint).bias));
         var clampedNormal:Float = HxMath.max(0.0, ((cast point : Physics2DContactPoint).normalImpulse + normalImpulse));
         (normalImpulse = cast ((clampedNormal - (cast point : Physics2DContactPoint).normalImpulse) : Dynamic));
         ((cast point : Physics2DContactPoint).normalImpulse = clampedNormal);
-        applyPhysics2DImpulse((cast bodyA : RigidBody2D), (cast bodyB : RigidBody2D), (cast (cast point : Physics2DContactPoint).rAX : Float), (cast (cast point : Physics2DContactPoint).rAY : Float), (cast (cast point : Physics2DContactPoint).rBX : Float), (cast (cast point : Physics2DContactPoint).rBY : Float), (cast (normalImpulse * normalX) : Float), (cast (normalImpulse * normalY) : Float));
+        applyPhysics2DImpulse((cast bodyA), (cast bodyB), (cast (cast point : Physics2DContactPoint).rAX : Float), (cast (cast point : Physics2DContactPoint).rAY : Float), (cast (cast point : Physics2DContactPoint).rBX : Float), (cast (cast point : Physics2DContactPoint).rBY : Float), (cast (normalImpulse * normalX) : Float), (cast (normalImpulse * normalY) : Float));
         i++;
       }
     }
@@ -71,7 +71,7 @@ class Solver {
     {
       var i:Float = start;
       while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
-        Solver._solvePhysics2DContactAt__solver((cast world : Physics2DWorld), (cast flighthq._internal._StaticIndex.readArray(indices, i) : Float));
+        Solver._solvePhysics2DContactAt__solver((cast world), (cast flighthq._internal._StaticIndex.readArray(indices, i) : Float));
         i++;
       }
     }
@@ -83,7 +83,7 @@ class Solver {
     {
       var iteration:Float = 0.0;
       while ((cast ((cast iteration : Float) < (cast iterations : Float)) : Bool)) {
-        solvePhysics2DContactsOnce((cast world : Physics2DWorld));
+        solvePhysics2DContactsOnce((cast world));
         iteration++;
       }
     }
@@ -93,7 +93,7 @@ class Solver {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast world : Physics2DWorld).contacts, 'length') : Float)) : Bool)) {
-        Solver._solvePhysics2DContactAt__solver((cast world : Physics2DWorld), (cast i : Float));
+        Solver._solvePhysics2DContactAt__solver((cast world), (cast i : Float));
         i++;
       }
     }
@@ -105,7 +105,7 @@ class Solver {
     {
       var i:Float = start;
       while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
-        Solver._warmStartPhysics2DContactAt__solver((cast world : Physics2DWorld), (cast flighthq._internal._StaticIndex.readArray(indices, i) : Float));
+        Solver._warmStartPhysics2DContactAt__solver((cast world), (cast flighthq._internal._StaticIndex.readArray(indices, i) : Float));
         i++;
       }
     }
@@ -115,7 +115,7 @@ class Solver {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast world : Physics2DWorld).contacts, 'length') : Float)) : Bool)) {
-        Solver._warmStartPhysics2DContactAt__solver((cast world : Physics2DWorld), (cast i : Float));
+        Solver._warmStartPhysics2DContactAt__solver((cast world), (cast i : Float));
         i++;
       }
     }
@@ -127,10 +127,10 @@ class Solver {
     var bodyB:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
     contact = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).contacts, contactIndex);
     if ((cast ((cast ((cast _Runtime.strictEquals(contact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast contact : Physics2DContact).enabled : Bool) : Bool)) : Bool) || (cast (cast contact : Physics2DContact).sensor : Bool)) : Bool)) { return; }
-    bodyA = (cast findPhysics2DBody((cast world : Physics2DWorld), (cast (cast contact : Physics2DContact).bodyA : Float)) : Null<RigidBody2D>);
-    bodyB = (cast findPhysics2DBody((cast world : Physics2DWorld), (cast (cast contact : Physics2DContact).bodyB : Float)) : Null<RigidBody2D>);
-    if ((cast ((cast ((cast _Runtime.strictEquals(bodyA, null) : Bool) || (cast _Runtime.strictEquals(bodyB, null) : Bool)) : Bool) || (cast !(cast (cast isRigidBody2DPairAwake((cast bodyA : RigidBody2D), (cast bodyB : RigidBody2D)) : Bool) : Bool) : Bool)) : Bool)) { return; }
-    Solver.solvePhysics2DContact__solver((cast contact : Physics2DContact), (cast bodyA : RigidBody2D), (cast bodyB : RigidBody2D));
+    bodyA = (cast findPhysics2DBody((cast world), (cast (cast contact : Physics2DContact).bodyA : Float)) : Null<RigidBody2D>);
+    bodyB = (cast findPhysics2DBody((cast world), (cast (cast contact : Physics2DContact).bodyB : Float)) : Null<RigidBody2D>);
+    if ((cast ((cast ((cast _Runtime.strictEquals(bodyA, null) : Bool) || (cast _Runtime.strictEquals(bodyB, null) : Bool)) : Bool) || (cast !(cast (cast isRigidBody2DPairAwake((cast bodyA), (cast bodyB)) : Bool) : Bool) : Bool)) : Bool)) { return; }
+    Solver.solvePhysics2DContact__solver((cast contact), (cast bodyA), (cast bodyB));
   }
 
   public static function _warmStartPhysics2DContactAt__solver(world:Physics2DWorld, contactIndex:Float):Void {
@@ -143,9 +143,9 @@ class Solver {
     var tangentY:Float = cast _Runtime.UNDEFINED;
     contact = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).contacts, contactIndex);
     if ((cast ((cast ((cast _Runtime.strictEquals(contact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast contact : Physics2DContact).enabled : Bool) : Bool)) : Bool) || (cast (cast contact : Physics2DContact).sensor : Bool)) : Bool)) { return; }
-    bodyA = (cast findPhysics2DBody((cast world : Physics2DWorld), (cast (cast contact : Physics2DContact).bodyA : Float)) : Null<RigidBody2D>);
-    bodyB = (cast findPhysics2DBody((cast world : Physics2DWorld), (cast (cast contact : Physics2DContact).bodyB : Float)) : Null<RigidBody2D>);
-    if ((cast ((cast ((cast _Runtime.strictEquals(bodyA, null) : Bool) || (cast _Runtime.strictEquals(bodyB, null) : Bool)) : Bool) || (cast !(cast (cast isRigidBody2DPairAwake((cast bodyA : RigidBody2D), (cast bodyB : RigidBody2D)) : Bool) : Bool) : Bool)) : Bool)) { return; }
+    bodyA = (cast findPhysics2DBody((cast world), (cast (cast contact : Physics2DContact).bodyA : Float)) : Null<RigidBody2D>);
+    bodyB = (cast findPhysics2DBody((cast world), (cast (cast contact : Physics2DContact).bodyB : Float)) : Null<RigidBody2D>);
+    if ((cast ((cast ((cast _Runtime.strictEquals(bodyA, null) : Bool) || (cast _Runtime.strictEquals(bodyB, null) : Bool)) : Bool) || (cast !(cast (cast isRigidBody2DPairAwake((cast bodyA), (cast bodyB)) : Bool) : Bool) : Bool)) : Bool)) { return; }
     normalX = (cast contact : Physics2DContact).normalX;
     normalY = (cast contact : Physics2DContact).normalY;
     tangentX = -normalY;
@@ -156,7 +156,7 @@ class Solver {
         var point:Physics2DContactPoint = flighthq._internal._StaticIndex.readArray((cast contact : Physics2DContact).points, i);
         var impulseX:Float = (((cast point : Physics2DContactPoint).normalImpulse * normalX) + ((cast point : Physics2DContactPoint).tangentImpulse * tangentX));
         var impulseY:Float = (((cast point : Physics2DContactPoint).normalImpulse * normalY) + ((cast point : Physics2DContactPoint).tangentImpulse * tangentY));
-        applyPhysics2DImpulse((cast bodyA : RigidBody2D), (cast bodyB : RigidBody2D), (cast (cast point : Physics2DContactPoint).rAX : Float), (cast (cast point : Physics2DContactPoint).rAY : Float), (cast (cast point : Physics2DContactPoint).rBX : Float), (cast (cast point : Physics2DContactPoint).rBY : Float), (cast impulseX : Float), (cast impulseY : Float));
+        applyPhysics2DImpulse((cast bodyA), (cast bodyB), (cast (cast point : Physics2DContactPoint).rAX : Float), (cast (cast point : Physics2DContactPoint).rAY : Float), (cast (cast point : Physics2DContactPoint).rBX : Float), (cast (cast point : Physics2DContactPoint).rBY : Float), (cast impulseX : Float), (cast impulseY : Float));
         i++;
       }
     }

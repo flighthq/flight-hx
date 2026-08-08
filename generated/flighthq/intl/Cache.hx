@@ -16,7 +16,7 @@ class Cache {
       var oldest:Null<String> = (cast _Runtime.callProperty(((cast Cache.formatterCache__cache : flighthq._internal._Map<String, flighthq._internal._Any>).keys()), 'next', cast ([] : Array<Dynamic>)) : { var value:Null<String>; }).value;
       if ((cast !_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast Cache.formatterCache__cache : flighthq._internal._Map<String, flighthq._internal._Any>).delete_(oldest)); }
     }
-    ((cast Cache.formatterCache__cache : flighthq._internal._Map<String, flighthq._internal._Any>).set(key, built));
+    ((cast Cache.formatterCache__cache : flighthq._internal._Map<String, flighthq._internal._Any>).set(key, (cast built)));
     return cast built;
     return cast null;
   }

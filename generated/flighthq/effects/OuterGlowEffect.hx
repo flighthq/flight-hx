@@ -11,7 +11,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class OuterGlowEffect {
-  public static function createOuterGlowEffect(?options:Dynamic):flighthq.types.OuterGlowEffect {
+  public static function createOuterGlowEffect(?options:flighthq._internal._Omit<flighthq.types.OuterGlowEffect, String>):flighthq.types.OuterGlowEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'OuterGlowEffect' }, options]);
     return cast null;
@@ -23,11 +23,11 @@ class OuterGlowEffect {
   }
 
   public static function registerOuterGlowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'OuterGlowEffect' : String), OuterGlowEffect.resolveOuterGlowEffectPadding__outerGlowEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'OuterGlowEffect' : String), (cast OuterGlowEffect.resolveOuterGlowEffectPadding__outerGlowEffect));
   }
 
   public static function resolveOuterGlowEffectPadding__outerGlowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getOuterGlowEffectPadding((cast (cast effect : flighthq.types.OuterGlowEffect) : flighthq.types.OuterGlowEffect)) : RenderEffectPadding);
+    return cast (cast getOuterGlowEffectPadding((cast (cast effect : flighthq.types.OuterGlowEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

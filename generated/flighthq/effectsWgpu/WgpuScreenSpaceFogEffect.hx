@@ -28,21 +28,21 @@ class WgpuScreenSpaceFogEffect {
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0);
     density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 1.0);
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'atmospheric.screenSpaceFog' : String), (cast WgpuScreenSpaceFogEffect.SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'atmospheric.screenSpaceFog' : String), (cast WgpuScreenSpaceFogEffect.SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, density);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, r);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, g);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 6.0, b);
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
-  public static final defaultWgpuScreenSpaceFogEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyScreenSpaceFogEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : ScreenSpaceFogEffect) : ScreenSpaceFogEffect));
-  };
+  public static final defaultWgpuScreenSpaceFogEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyScreenSpaceFogEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : ScreenSpaceFogEffect)));
+  });
 
   public static function registerWgpuScreenSpaceFogEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'ScreenSpaceFogEffect' : String), (cast defaultWgpuScreenSpaceFogEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'ScreenSpaceFogEffect' : String), (cast defaultWgpuScreenSpaceFogEffectRunner));
   }
 
   public static final SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect:String = '\nstruct Uniforms {\n  u_density : f32,\n  _pad0 : f32,\n  _pad1 : f32,\n  _pad2 : f32,\n  u_fogColor : vec3f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  // Color-only fallback: no depth G-buffer in Wgpu yet — screen-Y gradient as a depth proxy.\n  // The real version reads depth and computes fog = 1 - exp(-density * remap(depth, near, far)).\n  let fog = clamp((1.0 - uv.y) * uni.u_density, 0.0, 1.0);\n  return vec4f(mix(c.rgb, uni.u_fogColor, fog), c.a);\n}';

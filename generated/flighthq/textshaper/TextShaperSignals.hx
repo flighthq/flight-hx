@@ -13,9 +13,9 @@ import flighthq.types.TextShaperSignals;
 class TextShaperSignals {
   public static function disposeTextShaperSignals():Void {
     if ((cast _Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null) : Bool)) { return; }
-    clearSignal((cast TextShaperSignals._signals__textShaperSignals : flighthq.types.TextShaperSignals).onBackendChanged);
+    clearSignal((cast (cast TextShaperSignals._signals__textShaperSignals : flighthq.types.TextShaperSignals).onBackendChanged));
     (TextShaperSignals._signals__textShaperSignals = cast (null : Dynamic));
-    _setTextShaperBackendHook((cast null : Null<Null<TextShaperBackend>->Void>));
+    _setTextShaperBackendHook((cast null));
   }
 
   public static function enableTextShaperSignals():flighthq.types.TextShaperSignals {
@@ -23,9 +23,9 @@ class TextShaperSignals {
     (TextShaperSignals._signals__textShaperSignals = cast ({ onBackendChanged: (cast createSignal() : Signal<Null<TextShaperBackend>->Void>) } : Dynamic));
     _setTextShaperBackendHook((cast function(backend:Null<TextShaperBackend>):Void {
       if ((cast !_Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null) : Bool)) {
-        ((cast TextShaperSignals._signals__textShaperSignals : flighthq.types.TextShaperSignals).onBackendChanged.emit)(backend);
+        ((cast (cast TextShaperSignals._signals__textShaperSignals : flighthq.types.TextShaperSignals).onBackendChanged : { var emit:Null<TextShaperBackend>->Void; }).emit)((cast backend));
       }
-    } : Null<Null<TextShaperBackend>->Void>));
+    }));
     return cast TextShaperSignals._signals__textShaperSignals;
     return cast null;
   }

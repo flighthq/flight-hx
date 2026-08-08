@@ -9,6 +9,8 @@ import flighthq.interaction.HitTests.registerHitTestPrecise;
 import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.text.TextLabelLayout.getTextLayout;
 import flighthq.textlayout.RichTextQuery.computeRichTextCharIndexAtPoint;
+import flighthq.types.HitTestFunction.HitTestPreciseFunction;
+import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.Node2D;
@@ -16,24 +18,25 @@ import flighthq.types.TextLabel;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.Types.RichTextKind;
 import flighthq.types.Types.TextLabelKind;
+import flighthq.types.Vector2.Vector2Like;
 import flighthq.types._internal._RichTextValues.RichTextKind;
 import flighthq.types._internal._TextLabelValues.TextLabelKind;
 
 class RegisterTextHitTest {
   public static function registerTextHitTest():Void {
-    registerHitTestPrecise((cast TextLabelKind : String), RegisterTextHitTest.resolveTextCharIndex__registerTextHitTest);
-    registerHitTestPrecise((cast RichTextKind : String), RegisterTextHitTest.resolveTextCharIndex__registerTextHitTest);
+    registerHitTestPrecise((cast TextLabelKind : String), (cast RegisterTextHitTest.resolveTextCharIndex__registerTextHitTest));
+    registerHitTestPrecise((cast RichTextKind : String), (cast RegisterTextHitTest.resolveTextCharIndex__registerTextHitTest));
   }
 
   public static function resolveTextCharIndex__registerTextHitTest(source:NodeAny, x:Float, y:Float):Float {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast hitTestGraphLocalBounds(source, (cast x : Float), (cast y : Float)) : Bool) : Bool) : Bool)) { return cast -1.0; }
-    layout = (cast getTextLayout((cast (cast source : TextLabel) : TextLabel)) : Null<TextLayoutResult>);
+    if ((cast !(cast (cast hitTestGraphLocalBounds((cast source), (cast x : Float), (cast y : Float)) : Bool) : Bool) : Bool)) { return cast -1.0; }
+    layout = (cast getTextLayout((cast (cast source : TextLabel))) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast 0.0; }
-    inverseMatrixTransformPointXY(RegisterTextHitTest.textHitLocalPoint__registerTextHitTest, (cast getNodeWorldMatrix((cast source : Node2D)) : MatrixLike), (cast x : Float), (cast y : Float));
-    return cast (cast computeRichTextCharIndexAtPoint(layout, (cast (cast RegisterTextHitTest.textHitLocalPoint__registerTextHitTest : { var x:Float; var y:Float; }).x : Float), (cast (cast RegisterTextHitTest.textHitLocalPoint__registerTextHitTest : { var x:Float; var y:Float; }).y : Float)) : Float);
+    inverseMatrixTransformPointXY((cast RegisterTextHitTest.textHitLocalPoint__registerTextHitTest), (cast (cast getNodeWorldMatrix((cast (cast source : Node2D))) : Matrix)), (cast x : Float), (cast y : Float));
+    return cast (cast computeRichTextCharIndexAtPoint((cast layout), (cast (cast RegisterTextHitTest.textHitLocalPoint__registerTextHitTest : { var x:Float; var y:Float; }).x : Float), (cast (cast RegisterTextHitTest.textHitLocalPoint__registerTextHitTest : { var x:Float; var y:Float; }).y : Float)) : Float);
     return cast null;
   }
 
-  public static final textHitLocalPoint__registerTextHitTest:{ var x:Float; var y:Float; } = { x: 0.0, y: 0.0 };
+  public static final textHitLocalPoint__registerTextHitTest:{ var x:Float; var y:Float; } = (cast { x: 0.0, y: 0.0 });
 }

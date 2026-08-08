@@ -16,8 +16,8 @@ class SkeletonDetect {
   public static function getRegistry__skeletonDetect():flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect> {
     if ((cast !_Runtime.strictEquals(SkeletonDetect._registry__skeletonDetect, null) : Bool)) { return cast SkeletonDetect._registry__skeletonDetect; }
     (SkeletonDetect._registry__skeletonDetect = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-    ((cast SkeletonDetect._registry__skeletonDetect : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>).set('Spine', { detect: SkeletonDetect.detectSpine__skeletonDetect, parse: function(text:String, diagnostics:Null<Array<ImportDiagnostic>>):Null<Skeleton2DImport> return (cast parseSpineSkeleton((cast text : String), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Skeleton2DImport>) }));
-    ((cast SkeletonDetect._registry__skeletonDetect : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>).set('DragonBones', { detect: SkeletonDetect.detectDragonBones__skeletonDetect, parse: function(text:String, diagnostics:Null<Array<ImportDiagnostic>>):Null<Skeleton2DImport> return (cast parseDragonBonesSkeleton((cast text : String), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Skeleton2DImport>) }));
+    ((cast SkeletonDetect._registry__skeletonDetect : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>).set('Spine', (cast { detect: SkeletonDetect.detectSpine__skeletonDetect, parse: function(text:String, diagnostics:Null<Array<ImportDiagnostic>>):Null<Skeleton2DImport> return (cast parseSpineSkeleton((cast text : String), (cast diagnostics)) : Null<Skeleton2DImport>) })));
+    ((cast SkeletonDetect._registry__skeletonDetect : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>).set('DragonBones', (cast { detect: SkeletonDetect.detectDragonBones__skeletonDetect, parse: function(text:String, diagnostics:Null<Array<ImportDiagnostic>>):Null<Skeleton2DImport> return (cast parseDragonBonesSkeleton((cast text : String), (cast diagnostics)) : Null<Skeleton2DImport>) })));
     return cast SkeletonDetect._registry__skeletonDetect;
     return cast null;
   }
@@ -36,14 +36,14 @@ class SkeletonDetect {
 
   public static function parseSkeleton2D(text:String, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DImport> {
     for (entry in _Runtime.iterable(((cast (cast SkeletonDetect.getRegistry__skeletonDetect() : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>) : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>).values()))) {
-      if ((cast (cast entry : SkeletonFormatEntry__skeletonDetect).detect(text) : Bool)) { return cast (cast entry : SkeletonFormatEntry__skeletonDetect).parse(text, diagnostics); }
+      if ((cast (cast entry : SkeletonFormatEntry__skeletonDetect).detect((cast text : String)) : Bool)) { return cast (cast entry : SkeletonFormatEntry__skeletonDetect).parse((cast text : String), (cast diagnostics)); }
     }
     return cast null;
     return cast null;
   }
 
   public static function registerSkeleton2DFormat(kind:String, detect:String->Bool, parse:String->Array<ImportDiagnostic>->Null<Skeleton2DImport>):Void {
-    ((cast (cast SkeletonDetect.getRegistry__skeletonDetect() : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>) : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>).set(kind, { detect: detect, parse: parse }));
+    ((cast (cast SkeletonDetect.getRegistry__skeletonDetect() : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>) : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>).set(kind, (cast { detect: detect, parse: parse })));
   }
 
   public static function unregisterSkeleton2DFormat(kind:String):Void {

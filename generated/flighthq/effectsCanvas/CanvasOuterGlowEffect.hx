@@ -13,6 +13,7 @@ import flighthq.effectsCanvas.CanvasSourceModeCompositing.clearCanvasTarget;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasImage;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasSourceMode;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.drawCanvasTintedAlphaMask;
+import flighthq.types.CanvasEffectSourceMode;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
@@ -29,21 +30,21 @@ class CanvasOuterGlowEffect {
     var css:Null<String> = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : OuterGlowEffect));
-    css = (cast computeOuterGlowEffectCss((cast effect : OuterGlowEffect)) : Null<String>);
+    css = (cast computeOuterGlowEffectCss((cast effect)) : Null<String>);
     if ((cast !_Runtime.strictEquals(css, null) : Bool)) {
-      drawCanvasEffectPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast css : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+      drawCanvasEffectPass((cast dest), (cast source), (cast css : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
       return;
     }
     pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool() : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
-    CanvasOuterGlowEffect.applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect((cast source : CanvasRenderTarget), (cast dest : CanvasRenderTarget), (cast pool : CanvasRenderTargetPool), (cast effect : OuterGlowEffect));
+    CanvasOuterGlowEffect.applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect((cast source), (cast dest), (cast pool), (cast effect));
   }
 
-  public static final defaultCanvasOuterGlowEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyOuterGlowEffectToCanvas((cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'pool') : CanvasRenderTargetPool), (cast (cast effect : OuterGlowEffect) : OuterGlowEffect));
-  };
+  public static final defaultCanvasOuterGlowEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    (cast applyOuterGlowEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->OuterGlowEffect->Void)((cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : OuterGlowEffect)));
+  });
 
   public static function registerCanvasOuterGlowEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'OuterGlowEffect' : String), (cast defaultCanvasOuterGlowEffectRunner : CanvasRenderEffectRunner));
+    registerCanvasRenderEffect((cast state), (cast 'OuterGlowEffect' : String), (cast defaultCanvasOuterGlowEffectRunner));
   }
 
   public static function applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:OuterGlowEffect):Void {
@@ -54,25 +55,25 @@ class CanvasOuterGlowEffect {
     var glowPasses:Float = cast _Runtime.UNDEFINED;
     var blur:Float = cast _Runtime.UNDEFINED;
     var sourceMode:EffectSourceMode = cast _Runtime.UNDEFINED;
-    mask = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    blurred = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    mask = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    blurred = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     tintStrength = HxMath.min(1.0, strength);
     glowPasses = HxMath.max(1.0, HxMath.floor(strength));
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0)) / 2.0));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
-    drawCanvasTintedAlphaMask((cast mask : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0) : Float), (cast tintStrength : Float));
-    drawCanvasEffectPass((cast blurred : CanvasRenderTarget), (cast mask : CanvasRenderTarget), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
-    clearCanvasTarget((cast dest : CanvasRenderTarget));
+    drawCanvasTintedAlphaMask((cast mask), (cast source), (cast _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0) : Float), (cast tintStrength : Float));
+    drawCanvasEffectPass((cast blurred), (cast mask), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    clearCanvasTarget((cast dest));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast glowPasses : Float)) : Bool)) {
-        compositeCanvasImage((cast dest : CanvasRenderTarget), (cast blurred : CanvasRenderTarget), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+        compositeCanvasImage((cast dest), (cast blurred), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
         i++;
       }
     }
-    compositeCanvasSourceMode((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), sourceMode);
-    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast mask : CanvasRenderTarget));
-    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast blurred : CanvasRenderTarget));
+    compositeCanvasSourceMode((cast dest), (cast source), (cast sourceMode));
+    releaseCanvasRenderTarget((cast pool), (cast mask));
+    releaseCanvasRenderTarget((cast pool), (cast blurred));
   }
 }

@@ -10,14 +10,14 @@ import flighthq.types.Rectangle;
 
 class GlyphAtlasDirty {
   public static function clearGlyphAtlasDirty(atlas:GlyphAtlas):Void {
-    (atlas.runtime.dirty = cast (false : Dynamic));
+    ((cast atlas.runtime : { var dirty:Bool; }).dirty = cast (false : Dynamic));
   }
 
   public static function getGlyphAtlasDirtyRegion(atlas:GlyphAtlas):Null<Rectangle> {
     var runtime:GlyphAtlasRuntime = cast _Runtime.UNDEFINED;
     runtime = atlas.runtime;
     if ((cast !(cast runtime.dirty : Bool) : Bool)) { return cast null; }
-    return cast (cast createRectangle((cast runtime.dirtyMinX : Null<Float>), (cast runtime.dirtyMinY : Null<Float>), (cast (runtime.dirtyMaxX - runtime.dirtyMinX) : Null<Float>), (cast (runtime.dirtyMaxY - runtime.dirtyMinY) : Null<Float>)) : Null<Rectangle>);
+    return cast (cast createRectangle((cast runtime.dirtyMinX), (cast runtime.dirtyMinY), (cast (runtime.dirtyMaxX - runtime.dirtyMinX)), (cast (runtime.dirtyMaxY - runtime.dirtyMinY))) : Rectangle);
     return cast null;
   }
 }

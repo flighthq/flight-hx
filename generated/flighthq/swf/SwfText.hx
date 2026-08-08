@@ -16,6 +16,7 @@ import flighthq.shape.ShapeFill.getShapeFillRegions;
 import flighthq.swf.SwfShape.createSwfGlyphShape;
 import flighthq.types.GlyphOutlineSource;
 import flighthq.types.GlyphOutlineSource.GlyphOutlineMetrics;
+import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types.Rectangle.RectangleLike;
@@ -41,8 +42,8 @@ class SwfText {
     glyphBits = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
     advanceBits = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
     if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
-    shape = (cast createShape(_Runtime.field(_Runtime, 'UNDEFINED')) : Shape);
-    glyphOutline = (cast createPath(_Runtime.field(_Runtime, 'UNDEFINED')) : Path);
+    shape = (cast createShape((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Shape);
+    glyphOutline = (cast createPath((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
     font = null;
     unitsPerEm = SwfText.DEFAULT_FONT_UNITS_PER_EM__swfText;
     color = 0.0;
@@ -59,7 +60,7 @@ class SwfText {
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_HAS_FONT__swfText)), 0.0) : Bool)) {
           var fontId:Float = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
           (font = cast (_Runtime.coalesce(((cast fonts : flighthq._internal._Map<Float, GlyphOutlineSource>).get(fontId)), function():Dynamic return cast null) : Dynamic));
-          (unitsPerEm = cast (_Runtime.coalesce(_Runtime.optionalField(_Runtime.callOptionalProperty(font, 'getGlyphOutlineMetrics', cast ([] : Array<Dynamic>)), 'unitsPerEm'), function():Dynamic return cast SwfText.DEFAULT_FONT_UNITS_PER_EM__swfText) : Dynamic));
+          (unitsPerEm = cast (_Runtime.coalesce(({ final __structural1 = _Runtime.callOptionalValue(({ final __structural0 = font; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var getGlyphOutlineMetrics:Void->GlyphOutlineMetrics; }).getGlyphOutlineMetrics; }), cast ([] : Array<Dynamic>)); __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var unitsPerEm:Float; }).unitsPerEm; }), function():Dynamic return cast SwfText.DEFAULT_FONT_UNITS_PER_EM__swfText) : Dynamic));
         }
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_HAS_COLOR__swfText)), 0.0) : Bool)) {
           var red:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
@@ -68,8 +69,8 @@ class SwfText {
           if ((cast ((cast version : Float) >= (cast 2.0 : Float)) : Bool)) { _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>)); }
           (color = cast ((((red * 65536.0) + (green * 256.0)) + blue) : Dynamic));
         }
-        if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_HAS_X_OFFSET__swfText)), 0.0) : Bool)) { (x = cast ((cast SwfText.readSwfTextOffset__swfText((cast reader : SwfReader)) : Float) : Dynamic)); }
-        if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_HAS_Y_OFFSET__swfText)), 0.0) : Bool)) { (y = cast ((cast SwfText.readSwfTextOffset__swfText((cast reader : SwfReader)) : Float) : Dynamic)); }
+        if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_HAS_X_OFFSET__swfText)), 0.0) : Bool)) { (x = cast ((cast SwfText.readSwfTextOffset__swfText((cast reader)) : Float) : Dynamic)); }
+        if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_HAS_Y_OFFSET__swfText)), 0.0) : Bool)) { (y = cast ((cast SwfText.readSwfTextOffset__swfText((cast reader)) : Float) : Dynamic)); }
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_HAS_FONT__swfText)), 0.0) : Bool)) { (height = cast (_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic)); }
         var glyphCount:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
         if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
@@ -81,8 +82,8 @@ class SwfText {
             var advance:Float = _Runtime.callProperty(reader, 'readSignedBits', cast ([advanceBits] : Array<Dynamic>));
             if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
             if ((cast ((cast !_Runtime.strictEquals(font, null) : Bool) && (cast ((cast scale : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-              if ((cast (cast font : GlyphOutlineSource).getGlyphOutline(glyphOutline, index) : Bool)) {
-                SwfText.appendSwfGlyphOutline__swfText((cast shape : Shape), (cast glyphOutline : Path), (cast color : Float), (cast scale : Float), (cast (x / SwfText.TWIPS_PER_PIXEL__swfText) : Float), (cast (y / SwfText.TWIPS_PER_PIXEL__swfText) : Float));
+              if ((cast (cast font : GlyphOutlineSource).getGlyphOutline((cast glyphOutline), (cast index : Float)) : Bool)) {
+                SwfText.appendSwfGlyphOutline__swfText((cast shape), (cast glyphOutline), (cast color : Float), (cast scale : Float), (cast (x / SwfText.TWIPS_PER_PIXEL__swfText) : Float), (cast (y / SwfText.TWIPS_PER_PIXEL__swfText) : Float));
               }
             }
             (x = cast ((x + advance) : Dynamic));
@@ -107,14 +108,14 @@ class SwfText {
     var codepointToGlyphIndex:flighthq._internal._Map<Float, Float> = cast _Runtime.UNDEFINED;
     var metrics:{ var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; } = cast _Runtime.UNDEFINED;
     glyphReader = new SwfReader(_Runtime.field(reader, 'source'), _Runtime.field(reader, 'pos'), _Runtime.field(reader, 'end'));
-    glyphs = (cast readSwfFontGlyphs((cast glyphReader : SwfReader), (cast version : Float)) : Null<Array<Null<Shape>>>);
+    glyphs = (cast readSwfFontGlyphs((cast glyphReader), (cast version : Float)) : Null<Array<Null<Shape>>>);
     if ((cast _Runtime.strictEquals(glyphs, null) : Bool)) { return cast null; }
     outlines = _Runtime.callProperty(glyphs, 'map', cast ([SwfText.createSwfGlyphOutlinePath__swfText] : Array<Dynamic>));
-    fallback = (cast SwfText.deriveSwfGlyphOutlineData__swfText((cast outlines : Array<Null<Path>>), (cast (cast resolveSwfFontUnitsPerEm((cast version : Float)) : Float) : Float)) : { var advances:Array<Float>; var metrics:{ var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; }; });
-    metadata = ((cast _Runtime.strictEquals(version, 1.0) : Bool) ? (cast null : Dynamic) : (cast (cast SwfText.readSwfFontMetadata__swfText((cast reader : SwfReader), (cast version : Float), (cast _Runtime.field(outlines, 'length') : Float)) : Null<flighthq._internal._Union2<{ var advances:flighthq._internal._Any; var codepointToGlyphIndex:flighthq._internal._Map<Float, Float>; var metrics:flighthq._internal._Any; }, { var advances:Array<Float>; var codepointToGlyphIndex:flighthq._internal._Map<Float, Float>; var metrics:{ var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; }; }>>) : Dynamic));
-    advances = _Runtime.coalesce(_Runtime.optionalField(metadata, 'advances'), function():Dynamic return cast (cast fallback : { var advances:Array<Float>; var metrics:{ var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; }; }).advances);
-    codepointToGlyphIndex = _Runtime.coalesce(_Runtime.optionalField(metadata, 'codepointToGlyphIndex'), function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
-    metrics = _Runtime.coalesce(_Runtime.optionalField(metadata, 'metrics'), function():Dynamic return cast (cast fallback : { var advances:Array<Float>; var metrics:{ var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; }; }).metrics);
+    fallback = (cast SwfText.deriveSwfGlyphOutlineData__swfText((cast outlines), (cast (cast resolveSwfFontUnitsPerEm((cast version : Float)) : Float) : Float)) : { var advances:Array<Float>; var metrics:{ var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; }; });
+    metadata = ((cast _Runtime.strictEquals(version, 1.0) : Bool) ? (cast null : Dynamic) : (cast (cast SwfText.readSwfFontMetadata__swfText((cast reader), (cast version : Float), (cast _Runtime.field(outlines, 'length') : Float)) : Null<flighthq._internal._Union2<{ var advances:flighthq._internal._Any; var codepointToGlyphIndex:flighthq._internal._Map<Float, Float>; var metrics:flighthq._internal._Any; }, { var advances:Array<Float>; var codepointToGlyphIndex:flighthq._internal._Map<Float, Float>; var metrics:{ var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; }; }>>) : Dynamic));
+    advances = _Runtime.coalesce(({ final __structural2 = metadata; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var advances:Null<Array<Float>>; }).advances; }), function():Dynamic return cast (cast fallback : { var advances:Array<Float>; var metrics:{ var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; }; }).advances);
+    codepointToGlyphIndex = _Runtime.coalesce(({ final __structural3 = metadata; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var codepointToGlyphIndex:flighthq._internal._Map<Float, Float>; }).codepointToGlyphIndex; }), function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
+    metrics = _Runtime.coalesce(({ final __structural4 = metadata; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var metrics:Null<{ var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; }>; }).metrics; }), function():Dynamic return cast (cast fallback : { var advances:Array<Float>; var metrics:{ var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; }; }).metrics);
     return cast { getGlyphOutline: function(out:Path, glyphIndex:Float):Bool {
       var outline:Null<Path> = cast _Runtime.UNDEFINED;
       _Runtime.setLength((cast out : Path).commands, 0.0);
@@ -130,12 +131,16 @@ class SwfText {
       }
       ((cast out : Path).winding = (cast outline : Path).winding);
       return cast true;
+      return cast _Runtime.UNDEFINED;
     }, getGlyphOutlineAdvance: function(glyphIndex:Float):Float {
       return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(advances, glyphIndex), function():Dynamic return cast 0.0);
+      return cast _Runtime.UNDEFINED;
     }, getGlyphOutlineIndexForCodePoint: function(codePoint:Float):Float {
       return cast _Runtime.coalesce(((cast codepointToGlyphIndex : flighthq._internal._Map<Float, Float>).get(codePoint)), function():Dynamic return cast -1.0);
+      return cast _Runtime.UNDEFINED;
     }, getGlyphOutlineMetrics: function():{ var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; } {
       return cast metrics;
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
@@ -149,7 +154,7 @@ class SwfText {
     _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(version, 1.0) : Bool)) {
       var tableStart:Float = _Runtime.field(reader, 'pos');
-      return cast (cast SwfText.readSwfFontGlyphShapes__swfText((cast reader : SwfReader), (cast (cast SwfText.readSwfLegacyFontOffsets__swfText((cast reader : SwfReader), (cast tableStart : Float)) : Null<Array<Float>>) : Null<Array<Float>>), (cast tableStart : Float)) : Null<Array<Null<Shape>>>);
+      return cast (cast SwfText.readSwfFontGlyphShapes__swfText((cast reader), (cast (cast SwfText.readSwfLegacyFontOffsets__swfText((cast reader), (cast tableStart : Float)) : Null<Array<Float>>)), (cast tableStart : Float)) : Null<Array<Null<Shape>>>);
     }
     flags = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
     hasWideOffsets = !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.FONT_FLAG_WIDE_OFFSETS__swfText)), 0.0);
@@ -165,39 +170,39 @@ class SwfText {
     glyphCount = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
     if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast glyphCount : Float) > (cast SwfText.MAX_FONT_GLYPHS__swfText : Float)) : Bool)) : Bool)) { return cast null; }
     tableStart = _Runtime.field(reader, 'pos');
-    return cast (cast SwfText.readSwfFontGlyphShapes__swfText((cast reader : SwfReader), (cast (cast SwfText.readSwfFontOffsets__swfText((cast reader : SwfReader), (cast glyphCount : Float), (cast hasWideOffsets : Bool)) : Null<Array<Float>>) : Null<Array<Float>>), (cast tableStart : Float)) : Null<Array<Null<Shape>>>);
+    return cast (cast SwfText.readSwfFontGlyphShapes__swfText((cast reader), (cast (cast SwfText.readSwfFontOffsets__swfText((cast reader), (cast glyphCount : Float), (cast hasWideOffsets : Bool)) : Null<Array<Float>>)), (cast tableStart : Float)) : Null<Array<Null<Shape>>>);
     return cast null;
   }
 
   public static function appendSwfGlyphOutline__swfText(target:Shape, glyph:Path, color:Float, scale:Float, offsetX:Float, offsetY:Float):Void {
     var dataIndex:Float = cast _Runtime.UNDEFINED;
-    appendShapeBeginFill((cast target : Shape), (cast color : Float), (cast 1.0 : Float));
+    appendShapeBeginFill((cast target), (cast color : Float), (cast 1.0 : Float));
     dataIndex = 0.0;
     for (command in _Runtime.iterable(_Runtime.field(glyph, 'commands'))) {
       if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO) : Bool)) {
-        appendShapeMoveTo((cast target : Shape), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), dataIndex), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetX) : Float), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), (dataIndex + 1.0)), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetY) : Float));
+        appendShapeMoveTo((cast target), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), dataIndex), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetX) : Float), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), (dataIndex + 1.0)), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetY) : Float));
         (dataIndex = cast ((dataIndex + 2.0) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO) : Bool)) {
-        appendShapeLineTo((cast target : Shape), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), dataIndex), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetX) : Float), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), (dataIndex + 1.0)), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetY) : Float));
+        appendShapeLineTo((cast target), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), dataIndex), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetX) : Float), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), (dataIndex + 1.0)), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetY) : Float));
         (dataIndex = cast ((dataIndex + 2.0) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO) : Bool)) {
-        appendShapeCurveTo((cast target : Shape), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), dataIndex), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetX) : Float), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), (dataIndex + 1.0)), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetY) : Float), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), (dataIndex + 2.0)), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetX) : Float), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), (dataIndex + 3.0)), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetY) : Float));
+        appendShapeCurveTo((cast target), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), dataIndex), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetX) : Float), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), (dataIndex + 1.0)), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetY) : Float), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), (dataIndex + 2.0)), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetX) : Float), (cast ((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(glyph, 'data'), (dataIndex + 3.0)), scale) / SwfText.TWIPS_PER_PIXEL__swfText) + offsetY) : Float));
         (dataIndex = cast ((dataIndex + 4.0) : Dynamic));
       } } }
     }
-    appendShapeEndFill((cast target : Shape));
+    appendShapeEndFill((cast target));
   }
 
   public static function createSwfGlyphOutlinePath__swfText(glyph:Null<Shape>):Null<Path> {
     var regions:Null<Array<ShapeFillRegion>> = cast _Runtime.UNDEFINED;
     var outline:Path = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(glyph, null) : Bool)) { return cast null; }
-    regions = (cast getShapeFillRegions((cast _Runtime.field(glyph, 'data') : ShapeData).commands) : Null<Array<ShapeFillRegion>>);
+    regions = (cast getShapeFillRegions((cast (cast _Runtime.field(glyph, 'data') : ShapeData).commands)) : Null<Array<ShapeFillRegion>>);
     if ((cast _Runtime.strictEquals(regions, null) : Bool)) { return cast null; }
-    outline = (cast createPath('nonZero') : Path);
+    outline = (cast createPath((cast 'nonZero')) : Path);
     for (region in _Runtime.iterable(regions)) {
-      var restored:Path = (cast createPath((cast (cast region : ShapeFillRegion).path : Path).winding) : Path);
-      transformPath((cast (cast region : ShapeFillRegion).path : Path), SwfText.FONT_SHAPE_TO_DESIGN_UNITS__swfText, (cast restored : Path));
+      var restored:Path = (cast createPath((cast (cast (cast region : ShapeFillRegion).path : Path).winding)) : Path);
+      transformPath((cast (cast region : ShapeFillRegion).path), (cast SwfText.FONT_SHAPE_TO_DESIGN_UNITS__swfText), (cast restored));
       for (command in _Runtime.iterable((cast restored : Path).commands)) {
         _Runtime.callProperty((cast outline : Path).commands, 'push', cast ([command] : Array<Dynamic>));
       }
@@ -214,12 +219,12 @@ class SwfText {
     var minY:Float = cast _Runtime.UNDEFINED;
     var maxY:Float = cast _Runtime.UNDEFINED;
     var hasVerticalInk:Bool = cast _Runtime.UNDEFINED;
-    advances = cast ([] : Array<Dynamic>);
+    advances = (cast cast ([] : Array<Dynamic>));
     minY = HxMath.POSITIVE_INFINITY;
     maxY = -HxMath.POSITIVE_INFINITY;
     for (outline in _Runtime.iterable(outlines)) {
-      var bounds:RectangleLike = { height: 0.0, width: 0.0, x: 0.0, y: 0.0 };
-      if ((cast ((cast _Runtime.strictEquals(outline, null) : Bool) || (cast !(cast (cast getPathBounds((cast outline : Path), (cast bounds : RectangleLike)) : Bool) : Bool) : Bool)) : Bool)) {
+      var bounds:RectangleLike = (cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 });
+      if ((cast ((cast _Runtime.strictEquals(outline, null) : Bool) || (cast !(cast (cast getPathBounds((cast outline), (cast bounds)) : Bool) : Bool) : Bool)) : Bool)) {
         _Runtime.callProperty(advances, 'push', cast ([0.0] : Array<Dynamic>));
         continue;
       }
@@ -264,7 +269,7 @@ class SwfText {
     glyphCount = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
     if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast !_Runtime.strictEquals(glyphCount, expectedGlyphCount) : Bool)) : Bool)) { return cast null; }
     tableStart = _Runtime.field(reader, 'pos');
-    offsets = (cast SwfText.readSwfFontOffsets__swfText((cast reader : SwfReader), (cast glyphCount : Float), (cast hasWideOffsets : Bool)) : Null<Array<Float>>);
+    offsets = (cast SwfText.readSwfFontOffsets__swfText((cast reader), (cast glyphCount : Float), (cast hasWideOffsets : Bool)) : Null<Array<Float>>);
     if ((cast _Runtime.strictEquals(offsets, null) : Bool)) { return cast null; }
     codeTableStart = _Runtime.addNumbers(tableStart, flighthq._internal._StaticIndex.readArray(offsets, _Runtime.subtractNumbers(_Runtime.field(offsets, 'length'), 1.0)));
     if ((cast ((cast ((cast codeTableStart : Float) < (cast _Runtime.field(reader, 'pos') : Float)) : Bool) || (cast ((cast codeTableStart : Float) > (cast _Runtime.field(reader, 'end') : Float)) : Bool)) : Bool)) { return cast null; }
@@ -274,26 +279,26 @@ class SwfText {
       var glyphIndex:Float = 0.0;
       while ((cast ((cast glyphIndex : Float) < (cast glyphCount : Float)) : Bool)) {
         var codePoint:Float = ((cast hasWideCodes : Bool) ? (cast _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>)) : Dynamic));
-        if ((cast ((cast _Runtime.field(reader, 'valid') : Bool) && (cast !(cast ((cast codepointToGlyphIndex : flighthq._internal._Map<Float, Float>).has(codePoint)) : Bool) : Bool)) : Bool)) { ((cast codepointToGlyphIndex : flighthq._internal._Map<Float, Float>).set(codePoint, glyphIndex)); }
+        if ((cast ((cast _Runtime.field(reader, 'valid') : Bool) && (cast !(cast ((cast codepointToGlyphIndex : flighthq._internal._Map<Float, Float>).has(codePoint)) : Bool) : Bool)) : Bool)) { ((cast codepointToGlyphIndex : flighthq._internal._Map<Float, Float>).set(codePoint, (cast glyphIndex))); }
         glyphIndex++;
       }
     }
     if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
     if ((cast !(cast hasLayout : Bool) : Bool)) { return cast { advances: null, codepointToGlyphIndex: codepointToGlyphIndex, metrics: null }; }
     unitsPerEm = (cast resolveSwfFontUnitsPerEm((cast version : Float)) : Float);
-    metrics = { ascent: (cast SwfText.readSwfSignedUint16__swfText((cast reader : SwfReader)) : Float), descent: (cast SwfText.readSwfSignedUint16__swfText((cast reader : SwfReader)) : Float), lineGap: (cast SwfText.readSwfSignedUint16__swfText((cast reader : SwfReader)) : Float), unitsPerEm: unitsPerEm };
-    advances = cast ([] : Array<Dynamic>);
+    metrics = (cast { ascent: (cast SwfText.readSwfSignedUint16__swfText((cast reader)) : Float), descent: (cast SwfText.readSwfSignedUint16__swfText((cast reader)) : Float), lineGap: (cast SwfText.readSwfSignedUint16__swfText((cast reader)) : Float), unitsPerEm: unitsPerEm });
+    advances = (cast cast ([] : Array<Dynamic>));
     {
       var glyphIndex:Float = 0.0;
       while ((cast ((cast glyphIndex : Float) < (cast glyphCount : Float)) : Bool)) {
-        _Runtime.callProperty(advances, 'push', cast ([(cast SwfText.readSwfSignedUint16__swfText((cast reader : SwfReader)) : Float)] : Array<Dynamic>));
+        _Runtime.callProperty(advances, 'push', cast ([(cast SwfText.readSwfSignedUint16__swfText((cast reader)) : Float)] : Array<Dynamic>));
         glyphIndex++;
       }
     }
     {
       var glyphIndex:Float = 0.0;
       while ((cast ((cast glyphIndex : Float) < (cast glyphCount : Float)) : Bool)) {
-        SwfText.skipSwfRectangle__swfText((cast reader : SwfReader));
+        SwfText.skipSwfRectangle__swfText((cast reader));
         glyphIndex++;
       }
     }
@@ -339,14 +344,14 @@ class SwfText {
   public static function readSwfFontGlyphShapes__swfText(reader:SwfReader, offsets:Null<Array<Float>>, tableStart:Float):Null<Array<Null<Shape>>> {
     var glyphs:Array<Null<Shape>> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(offsets, null) : Bool) || (cast ((cast _Runtime.field(offsets, 'length') : Float) < (cast 2.0 : Float)) : Bool)) : Bool)) { return cast ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast null : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)); }
-    glyphs = cast ([] : Array<Dynamic>);
+    glyphs = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast (i + 1.0) : Float) < (cast _Runtime.field(offsets, 'length') : Float)) : Bool)) {
         var start:Float = _Runtime.addNumbers(tableStart, flighthq._internal._StaticIndex.readArray(offsets, i));
         var end:Float = _Runtime.addNumbers(tableStart, flighthq._internal._StaticIndex.readArray(offsets, (i + 1.0)));
         if ((cast ((cast ((cast ((cast start : Float) < (cast tableStart : Float)) : Bool) || (cast ((cast end : Float) > (cast _Runtime.field(reader, 'end') : Float)) : Bool)) : Bool) || (cast ((cast end : Float) < (cast start : Float)) : Bool)) : Bool)) { return cast null; }
-        _Runtime.callProperty(glyphs, 'push', cast ([(cast createSwfGlyphShape((cast new SwfReader(_Runtime.field(reader, 'source'), start, end) : SwfReader)) : Null<Shape>)] : Array<Dynamic>));
+        _Runtime.callProperty(glyphs, 'push', cast ([(cast createSwfGlyphShape((cast new SwfReader(_Runtime.field(reader, 'source'), start, end))) : Null<Shape>)] : Array<Dynamic>));
         i++;
       }
     }
@@ -356,7 +361,7 @@ class SwfText {
 
   public static function readSwfFontOffsets__swfText(reader:SwfReader, glyphCount:Float, hasWideOffsets:Bool):Null<Array<Float>> {
     var offsets:Array<Float> = cast _Runtime.UNDEFINED;
-    offsets = cast ([] : Array<Dynamic>);
+    offsets = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) <= (cast glyphCount : Float)) : Bool)) {
@@ -373,7 +378,7 @@ class SwfText {
     var offsets:Array<Float> = cast _Runtime.UNDEFINED;
     first = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
     if ((cast ((cast ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast first : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(first, 2.0), 0.0) : Bool)) : Bool) || (cast ((cast (first / 2.0) : Float) > (cast SwfText.MAX_FONT_GLYPHS__swfText : Float)) : Bool)) : Bool)) { return cast null; }
-    offsets = cast ([first] : Array<Dynamic>);
+    offsets = (cast cast ([first] : Array<Dynamic>));
     {
       var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast (first / 2.0) : Float)) : Bool)) {
@@ -408,7 +413,7 @@ class SwfText {
 
   public static final FONT_FLAG_WIDE_OFFSETS__swfText:Float = 8.0;
 
-  public static final FONT_SHAPE_TO_DESIGN_UNITS__swfText:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; } = { a: 20.0, b: 0.0, c: 0.0, d: 20.0, tx: 0.0, ty: 0.0 };
+  public static final FONT_SHAPE_TO_DESIGN_UNITS__swfText:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; } = (cast { a: 20.0, b: 0.0, c: 0.0, d: 20.0, tx: 0.0, ty: 0.0 });
 
   public static final MAX_FONT_GLYPHS__swfText:Float = 65535.0;
 

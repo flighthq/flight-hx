@@ -13,6 +13,7 @@ import flighthq.interaction.HitTests.registerHitTest;
 import flighthq.interaction.SpriteHitTests.defaultQuadBatchHitTestHandler;
 import flighthq.interaction.SpriteHitTests.defaultSpriteHitTestHandler;
 import flighthq.interaction.SpriteHitTests.defaultTilemapHitTestHandler;
+import flighthq.types.HitTestFunction;
 import flighthq.types.Types.DisplayObjectKind;
 import flighthq.types.Types.HtmlViewKind;
 import flighthq.types.Types.MorphShapeKind;
@@ -38,16 +39,16 @@ import flighthq.types._internal._TilemapValues.TilemapKind;
 
 class RegisterDefaultHitTests {
   public static function registerDefaultHitTests():Void {
-    registerHitTest((cast DisplayObjectKind : String), defaultNode2DHitTestHandler);
-    registerHitTest((cast HtmlViewKind : String), defaultHtmlViewHitTestHandler);
-    registerHitTest((cast MovieClipKind : String), defaultMovieClipHitTestHandler);
-    registerHitTest((cast MorphShapeKind : String), defaultShapeHitTestHandler);
-    registerHitTest((cast QuadBatchKind : String), defaultQuadBatchHitTestHandler);
-    registerHitTest((cast RichTextKind : String), defaultRichTextHitTestHandler);
-    registerHitTest((cast Scale9ShapeKind : String), defaultShapeHitTestHandler);
-    registerHitTest((cast ShapeKind : String), defaultShapeHitTestHandler);
-    registerHitTest((cast SpriteKind : String), defaultSpriteHitTestHandler);
-    registerHitTest((cast TextLabelKind : String), defaultTextHitTestHandler);
-    registerHitTest((cast TilemapKind : String), defaultTilemapHitTestHandler);
+    registerHitTest((cast DisplayObjectKind : String), (cast defaultNode2DHitTestHandler));
+    registerHitTest((cast HtmlViewKind : String), (cast defaultHtmlViewHitTestHandler));
+    registerHitTest((cast MovieClipKind : String), (cast defaultMovieClipHitTestHandler));
+    registerHitTest((cast MorphShapeKind : String), (cast defaultShapeHitTestHandler));
+    registerHitTest((cast QuadBatchKind : String), (cast defaultQuadBatchHitTestHandler));
+    registerHitTest((cast RichTextKind : String), (cast defaultRichTextHitTestHandler));
+    registerHitTest((cast Scale9ShapeKind : String), (cast defaultShapeHitTestHandler));
+    registerHitTest((cast ShapeKind : String), (cast defaultShapeHitTestHandler));
+    registerHitTest((cast SpriteKind : String), (cast defaultSpriteHitTestHandler));
+    registerHitTest((cast TextLabelKind : String), (cast defaultTextHitTestHandler));
+    registerHitTest((cast TilemapKind : String), (cast defaultTilemapHitTestHandler));
   }
 }

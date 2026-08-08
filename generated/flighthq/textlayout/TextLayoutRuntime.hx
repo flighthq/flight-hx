@@ -14,7 +14,7 @@ class TextLayoutRuntime {
 
   public static function getTextLayoutResult(runtime:TextLabelRuntime):TextLayoutResult {
     if ((cast _Runtime.strictEquals((cast runtime : TextLabelRuntime).textLayout, null) : Bool)) {
-      ((cast runtime : TextLabelRuntime).textLayout = (cast createTextLayoutResult() : Null<TextLayoutResult>));
+      ((cast runtime : TextLabelRuntime).textLayout = (cast createTextLayoutResult() : TextLayoutResult));
     }
     return cast (cast runtime : TextLabelRuntime).textLayout;
     return cast null;

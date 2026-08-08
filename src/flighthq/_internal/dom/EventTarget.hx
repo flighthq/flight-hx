@@ -1,7 +1,8 @@
-// Maintained host-type declaration stub: every target currently sees this
-// type as Dynamic, exactly as before the literal host-type mapping. Upgrading
-// a platform means replacing its branch with a real declaration; see
-// HTMLCanvasElement.hx for the model.
+// Maintained structural contract shared by DOM-like event targets.
 package flighthq._internal.dom;
 
-typedef EventTarget = Dynamic;
+typedef EventTarget = {
+  var addEventListener:(type:String, listener:EventListener, ?options:flighthq._internal._Union2<Bool, AddEventListenerOptions>)->Void;
+  var dispatchEvent:Event->Bool;
+  var removeEventListener:(type:String, listener:EventListener, ?options:flighthq._internal._Union2<Bool, EventListenerOptions>)->Void;
+};

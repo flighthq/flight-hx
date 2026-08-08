@@ -13,14 +13,14 @@ import flighthq.types.RiveDocument.RiveValue;
 class RiveAssets {
   public static function createRiveFileAssets(objects:Array<RiveCoreObject>):Array<RiveFileAsset> {
     var assets:Array<RiveFileAsset> = cast _Runtime.UNDEFINED;
-    assets = cast ([] : Array<Dynamic>);
+    assets = (cast cast ([] : Array<Dynamic>));
     for (object in _Runtime.iterable(objects)) {
       if ((cast (cast isRiveCoreTypeDerivedFrom((cast _Runtime.field(object, 'typeKey') : Float), (cast RiveAssets.RIVE_FILE_ASSET__riveAssets : Float)) : Bool) : Bool)) {
-        _Runtime.callProperty(assets, 'push', cast ([{ bytes: null, cdnBaseUrl: (cast RiveAssets.readRiveText__riveAssets((cast object : RiveCoreObject), (cast RiveAssets.RIVE_ASSET_CDN_BASE_URL__riveAssets : Float), (cast '' : String)) : String), height: (cast RiveAssets.readRiveNumber__riveAssets((cast object : RiveCoreObject), (cast RiveAssets.RIVE_ASSET_HEIGHT__riveAssets : Float), (cast 0.0 : Float)) : Float), kind: _Runtime.coalesce((cast getRiveCoreTypeName((cast _Runtime.field(object, 'typeKey') : Float)) : String), function():Dynamic return cast ''), name: (cast RiveAssets.readRiveText__riveAssets((cast object : RiveCoreObject), (cast RiveAssets.RIVE_ASSET_NAME__riveAssets : Float), (cast '' : String)) : String), width: (cast RiveAssets.readRiveNumber__riveAssets((cast object : RiveCoreObject), (cast RiveAssets.RIVE_ASSET_WIDTH__riveAssets : Float), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
+        _Runtime.callProperty(assets, 'push', cast ([{ bytes: null, cdnBaseUrl: (cast RiveAssets.readRiveText__riveAssets((cast object), (cast RiveAssets.RIVE_ASSET_CDN_BASE_URL__riveAssets : Float), (cast '' : String)) : String), height: (cast RiveAssets.readRiveNumber__riveAssets((cast object), (cast RiveAssets.RIVE_ASSET_HEIGHT__riveAssets : Float), (cast 0.0 : Float)) : Float), kind: _Runtime.coalesce((cast getRiveCoreTypeName((cast _Runtime.field(object, 'typeKey') : Float)) : Null<String>), function():Dynamic return cast ''), name: (cast RiveAssets.readRiveText__riveAssets((cast object), (cast RiveAssets.RIVE_ASSET_NAME__riveAssets : Float), (cast '' : String)) : String), width: (cast RiveAssets.readRiveNumber__riveAssets((cast object), (cast RiveAssets.RIVE_ASSET_WIDTH__riveAssets : Float), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
         continue;
       }
       if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveAssets.RIVE_FILE_ASSET_CONTENTS__riveAssets) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(assets, 'length'), 0.0) : Bool)) : Bool)) { continue; }
-      ((cast flighthq._internal._StaticIndex.readArray(assets, _Runtime.subtractNumbers(_Runtime.field(assets, 'length'), 1.0)) : RiveFileAsset).bytes = (cast RiveAssets.readRiveBytes__riveAssets((cast object : RiveCoreObject), (cast RiveAssets.RIVE_ASSET_BYTES__riveAssets : Float)) : Null<flighthq._internal._UInt8Array>));
+      ((cast flighthq._internal._StaticIndex.readArray(assets, _Runtime.subtractNumbers(_Runtime.field(assets, 'length'), 1.0)) : RiveFileAsset).bytes = (cast RiveAssets.readRiveBytes__riveAssets((cast object), (cast RiveAssets.RIVE_ASSET_BYTES__riveAssets : Float)) : Null<flighthq._internal._UInt8Array>));
     }
     return cast assets;
     return cast null;

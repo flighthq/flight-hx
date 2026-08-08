@@ -32,21 +32,21 @@ class WgpuNode2D {
     var tempStack:Array<Renderable> = cast _Runtime.UNDEFINED;
     var clipHooks:Null<Scene2DClipHooks> = cast _Runtime.UNDEFINED;
     var stackLength:Float = cast _Runtime.UNDEFINED;
-    tempStack = (cast (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).tempStack;
+    tempStack = (cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).tempStack;
     clipHooks = (cast state : WgpuRenderState).displayObjectClipHooks;
     stackLength = 1.0;
     flighthq._internal._StaticIndex.writeArray(tempStack, 0.0, source);
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
       var current:Node2D = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Node2D);
       if ((cast !(cast (cast current : { var enabled:Bool; }).enabled : Bool) : Bool)) { continue; }
-      var data:Null<RenderProxy2D> = (cast getRenderProxy2D(state, current) : Null<RenderProxy2D>);
+      var data:Null<RenderProxy2D> = (cast getRenderProxy2D((cast state), (cast current)) : Null<RenderProxy2D>);
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      _Runtime.callOptionalProperty(clipHooks, 'popClip', cast ([state, data, current] : Array<Dynamic>));
-      if ((cast !(cast (cast isRenderProxyVisible((cast data : RenderProxy2D)) : Bool) : Bool) : Bool)) { continue; }
-      _Runtime.callOptionalProperty(clipHooks, 'pushClip', cast ([state, data, current] : Array<Dynamic>));
-      _Runtime.callOptionalProperty((cast data : RenderProxy2D).renderer, 'submit', cast ([state, data] : Array<Dynamic>));
+      _Runtime.callOptionalValue(({ final __structural0 = clipHooks; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; }), cast ([state, data, current] : Array<Dynamic>));
+      if ((cast !(cast (cast isRenderProxyVisible((cast data)) : Bool) : Bool) : Bool)) { continue; }
+      _Runtime.callOptionalValue(({ final __structural1 = clipHooks; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; }), cast ([state, data, current] : Array<Dynamic>));
+      _Runtime.callOptionalValue(({ final __structural2 = (cast data : RenderProxy2D).renderer; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var submit:RenderState->RenderProxy->Void; }).submit; }), cast ([state, data] : Array<Dynamic>));
       if ((cast (cast data : RenderProxy2D).traverseChildren : Bool)) {
-        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime((cast current : Node2D)) : Node2DRuntime), 'children');
+        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime((cast current)) : Node2DRuntime), 'children');
         if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
             var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
@@ -58,9 +58,9 @@ class WgpuNode2D {
         }
       }
     }
-    flushWgpuQuadBatchWriter((cast state : WgpuRenderState));
-    _Runtime.callOptionalProperty(clipHooks, 'finalize', cast ([state] : Array<Dynamic>));
+    flushWgpuQuadBatchWriter((cast state));
+    _Runtime.callOptionalValue(({ final __structural3 = clipHooks; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var finalize:RenderState->Void; }).finalize; }), cast ([state] : Array<Dynamic>));
   }
 
-  public static final defaultWgpuScene2DRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawWgpuScene2D };
+  public static final defaultWgpuScene2DRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: drawWgpuScene2D });
 }

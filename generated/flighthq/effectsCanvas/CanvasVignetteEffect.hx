@@ -39,7 +39,7 @@ class CanvasVignetteEffect {
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 255.0);
     colorAlpha = ((_Runtime.toInt32(color) & 255) / 255.0);
     darken = HxMath.max(0.0, HxMath.min(1.0, (intensity * colorAlpha)));
-    drawCanvasEffectPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    drawCanvasEffectPass((cast dest), (cast source), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
     ctx = _Runtime.field(dest, 'context');
     w = _Runtime.field(dest, 'width');
     h = _Runtime.field(dest, 'height');
@@ -63,11 +63,11 @@ class CanvasVignetteEffect {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasVignetteEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyVignetteEffectToCanvas((cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast (cast effect : VignetteEffect) : VignetteEffect));
-  };
+  public static final defaultCanvasVignetteEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    applyVignetteEffectToCanvas((cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : VignetteEffect)));
+  });
 
   public static function registerCanvasVignetteEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'VignetteEffect' : String), (cast defaultCanvasVignetteEffectRunner : CanvasRenderEffectRunner));
+    registerCanvasRenderEffect((cast state), (cast 'VignetteEffect' : String), (cast defaultCanvasVignetteEffectRunner));
   }
 }

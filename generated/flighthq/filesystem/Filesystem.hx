@@ -18,7 +18,7 @@ class Filesystem {
   public static var _backend__filesystem:Null<FileSystemBackend> = _Runtime.explicitNull();
 
   public static function appendTextFile(path:String, data:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).appendTextFile(path, data);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).appendTextFile((cast path : String), (cast data : String));
     return cast null;
   }
 
@@ -28,17 +28,17 @@ class Filesystem {
   }
 
   public static function canAccessFile(path:String, mode:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).canAccessFile(path, mode);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).canAccessFile((cast path : String), (cast mode : String));
     return cast null;
   }
 
   public static function copyFile(from:String, to:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).copy(from, to);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).copy((cast from : String), (cast to : String));
     return cast null;
   }
 
   public static function createFileSymlink(target:String, linkPath:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).createFileSymlink(target, linkPath);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).createFileSymlink((cast target : String), (cast linkPath : String));
     return cast null;
   }
 
@@ -81,7 +81,7 @@ class Filesystem {
       );
     }, writeTextFile: function(path:String, data:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(Filesystem.writeWebFile__filesystem((cast path : String), (cast data : flighthq._internal._Union2<String, flighthq._internal._UInt8Array>)));
+        return flighthq._internal._Async.resolve((cast Filesystem.writeWebFile__filesystem((cast path : String), (cast data)) : flighthq._internal._Promise<Bool>));
       }));
     }, readBinaryFile: function(path:String):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
       return cast flighthq._internal._Async.finishFlow(
@@ -167,7 +167,7 @@ class Filesystem {
       );
     }, writeBinaryFile: function(path:String, data:flighthq._internal._UInt8Array):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(Filesystem.writeWebFile__filesystem((cast path : String), (cast _Runtime.slice(data, 0, null) : flighthq._internal._Union2<String, flighthq._internal._UInt8Array>)));
+        return flighthq._internal._Async.resolve((cast Filesystem.writeWebFile__filesystem((cast path : String), (cast _Runtime.slice(data, 0, null))) : flighthq._internal._Promise<Bool>));
       }));
     }, fileExists: function(path:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
@@ -190,7 +190,7 @@ class Filesystem {
               __flowBranch15 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch15, function():Dynamic {
-              return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root : flighthq._internal.dom.FileSystemDirectoryHandle), (cast (cast Filesystem.splitWebPath__filesystem((cast path : String)) : Array<String>) : Array<String>), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue16:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root), (cast (cast Filesystem.splitWebPath__filesystem((cast path : String)) : Array<String>)), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue16:Dynamic):Dynamic {
                 return flighthq._internal._Async.flowReturn(!_Runtime.strictEquals(__awaitValue16, null));
               });
             });
@@ -199,7 +199,7 @@ class Filesystem {
       );
     }, removeFile: function(path:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(Filesystem.writeWebRemove__filesystem((cast path : String), (cast false : Bool)));
+        return flighthq._internal._Async.resolve((cast Filesystem.writeWebRemove__filesystem((cast path : String), (cast false : Bool)) : flighthq._internal._Promise<Bool>));
       }));
     }, removeDirectory: function(path:String, recursive:Null<Bool> = false):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
@@ -228,7 +228,7 @@ class Filesystem {
                 __flowBranch19 = flighthq._internal._Async.flowNormal();
               }
               return flighthq._internal._Async.continueFlow(__flowBranch19, function():Dynamic {
-                return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root : flighthq._internal.dom.FileSystemDirectoryHandle), (cast _Runtime.slice(segments, 0.0, -1.0) : Array<String>), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue20:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root), (cast _Runtime.slice(segments, 0.0, -1.0)), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue20:Dynamic):Dynamic {
                   parent = __awaitValue20;
                   var __flowBranch21:Dynamic;
                   if ((cast _Runtime.strictEquals(parent, null) : Bool)) {
@@ -275,7 +275,7 @@ class Filesystem {
               __flowBranch24 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch24, function():Dynamic {
-              return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root : flighthq._internal.dom.FileSystemDirectoryHandle), (cast (cast Filesystem.splitWebPath__filesystem((cast path : String)) : Array<String>) : Array<String>), (cast true : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue25:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root), (cast (cast Filesystem.splitWebPath__filesystem((cast path : String)) : Array<String>)), (cast true : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue25:Dynamic):Dynamic {
                 created = __awaitValue25;
                 return flighthq._internal._Async.flowReturn(!_Runtime.strictEquals(created, null));
               });
@@ -300,7 +300,7 @@ class Filesystem {
               __flowBranch27 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch27, function():Dynamic {
-              return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root : flighthq._internal.dom.FileSystemDirectoryHandle), (cast (cast Filesystem.splitWebPath__filesystem((cast path : String)) : Array<String>) : Array<String>), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue28:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root), (cast (cast Filesystem.splitWebPath__filesystem((cast path : String)) : Array<String>)), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue28:Dynamic):Dynamic {
                 dir = __awaitValue28;
                 var __flowBranch29:Dynamic;
                 if ((cast _Runtime.strictEquals(dir, null) : Bool)) {
@@ -315,7 +315,7 @@ class Filesystem {
                   return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
                     var base:String = cast _Runtime.UNDEFINED;
                     base = (cast Filesystem.normalizeWebPath__filesystem((cast path : String)) : String);
-                    var __flowIterator30:Dynamic = _Runtime.asyncIterator(Filesystem.asAsyncEntries__filesystem((cast dir : flighthq._internal.dom.FileSystemDirectoryHandle)));
+                    var __flowIterator30:Dynamic = _Runtime.asyncIterator(Filesystem.asAsyncEntries__filesystem((cast dir)));
                     return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
                       return flighthq._internal._Async.flatMap(_Runtime.callProperty(__flowIterator30, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {
                         if (_Runtime.truthy(_Runtime.field(__step, 'done'))) return flighthq._internal._Async.flowBreak();
@@ -364,7 +364,7 @@ class Filesystem {
               __flowBranch33 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch33, function():Dynamic {
-              return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root : flighthq._internal.dom.FileSystemDirectoryHandle), (cast (cast Filesystem.splitWebPath__filesystem((cast path : String)) : Array<String>) : Array<String>), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue34:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root), (cast (cast Filesystem.splitWebPath__filesystem((cast path : String)) : Array<String>)), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue34:Dynamic):Dynamic {
                 dir = __awaitValue34;
                 var __flowBranch35:Dynamic;
                 if ((cast _Runtime.strictEquals(dir, null) : Bool)) {
@@ -378,7 +378,7 @@ class Filesystem {
                   base = (cast Filesystem.normalizeWebPath__filesystem((cast path : String)) : String);
                   results = cast ([] : Array<Dynamic>);
                   return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-                    return flighthq._internal._Async.flatMap((cast Filesystem.walkWebDirectory__filesystem((cast dir : flighthq._internal.dom.FileSystemDirectoryHandle), (cast base : String), (cast results : Array<FileEntry>), (cast 0.0 : Float), (cast _Runtime.coalesce(({ final __typedStruct37 = options; __typedStruct37 == null ? _Runtime.UNDEFINED : (cast __typedStruct37 : flighthq.types.FileSystem.FileWalkOptions).maxDepth; }), function():Dynamic return cast HxMath.POSITIVE_INFINITY) : Float)) : flighthq._internal._Promise<flighthq._internal._Nothing>), function(__awaitValue36:Dynamic):Dynamic {
+                    return flighthq._internal._Async.flatMap((cast Filesystem.walkWebDirectory__filesystem((cast dir), (cast base : String), (cast results), (cast 0.0 : Float), (cast _Runtime.coalesce(({ final __typedStruct37 = options; __typedStruct37 == null ? _Runtime.UNDEFINED : (cast __typedStruct37 : { @:optional var maxDepth:Null<Float>; }).maxDepth; }), function():Dynamic return cast HxMath.POSITIVE_INFINITY) : Float)) : flighthq._internal._Promise<flighthq._internal._Nothing>), function(__awaitValue36:Dynamic):Dynamic {
                       __awaitValue36;
                       return flighthq._internal._Async.flowNormal();
                     });
@@ -396,7 +396,7 @@ class Filesystem {
           });
         })
       );
-    }, statFile: function(path:String):flighthq._internal._Promise<Null<{ var size:Float; var isDirectory:Bool; var modifiedTime:Float; var createdTime:Float; var isSymlink:Bool; }>> {
+    }, statFile: function(path:String):flighthq._internal._Promise<Null<FileStat>> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var fileHandle:Null<flighthq._internal.dom.FileSystemFileHandle> = cast _Runtime.UNDEFINED;
@@ -437,7 +437,7 @@ class Filesystem {
                   __flowBranch42 = flighthq._internal._Async.flowNormal();
                 }
                 return flighthq._internal._Async.continueFlow(__flowBranch42, function():Dynamic {
-                  return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root : flighthq._internal.dom.FileSystemDirectoryHandle), (cast (cast Filesystem.splitWebPath__filesystem((cast path : String)) : Array<String>) : Array<String>), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue43:Dynamic):Dynamic {
+                  return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root), (cast (cast Filesystem.splitWebPath__filesystem((cast path : String)) : Array<String>)), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue43:Dynamic):Dynamic {
                     dir = __awaitValue43;
                     var __flowBranch44:Dynamic;
                     if ((cast _Runtime.strictEquals(dir, null) : Bool)) {
@@ -461,7 +461,7 @@ class Filesystem {
       var __thisValue1:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
-          return flighthq._internal._Async.flatMap((cast __thisValue1 : FileSystemBackend).copy(from, to), function(__awaitValue45:Dynamic):Dynamic {
+          return flighthq._internal._Async.flatMap((cast __thisValue1 : FileSystemBackend).copy((cast from : String), (cast to : String)), function(__awaitValue45:Dynamic):Dynamic {
             var __flowBranch46:Dynamic;
             if ((cast !_Runtime.truthy(__awaitValue45) : Bool)) {
               __flowBranch46 = flighthq._internal._Async.protect(function():Dynamic {
@@ -471,7 +471,7 @@ class Filesystem {
               __flowBranch46 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch46, function():Dynamic {
-              return flighthq._internal._Async.flowReturn(Filesystem.writeWebRemove__filesystem((cast from : String), (cast false : Bool)));
+              return flighthq._internal._Async.flowReturn((cast Filesystem.writeWebRemove__filesystem((cast from : String), (cast false : Bool)) : flighthq._internal._Promise<Bool>));
             });
           });
         })
@@ -510,7 +510,7 @@ class Filesystem {
                       file = __awaitValue51;
                       return flighthq._internal._Async.flatMap((cast file : flighthq._internal.dom.File).arrayBuffer(), function(__awaitValue52:Dynamic):Dynamic {
                         bytes = new flighthq._internal._UInt8Array(__awaitValue52);
-                        return flighthq._internal._Async.flowReturn(Filesystem.writeWebFile__filesystem((cast to : String), (cast bytes : flighthq._internal._Union2<String, flighthq._internal._UInt8Array>)));
+                        return flighthq._internal._Async.flowReturn((cast Filesystem.writeWebFile__filesystem((cast to : String), (cast bytes)) : flighthq._internal._Promise<Bool>));
                       });
                     });
                   }), function(__caughtError:Dynamic):Dynamic {
@@ -559,7 +559,7 @@ class Filesystem {
               __flowBranch54 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch54, function():Dynamic {
-              return flighthq._internal._Async.flowReturn(Filesystem.writeWebFile__filesystem((cast path : String), (cast (existing + data) : flighthq._internal._Union2<String, flighthq._internal._UInt8Array>)));
+              return flighthq._internal._Async.flowReturn((cast Filesystem.writeWebFile__filesystem((cast path : String), (cast (existing + data))) : flighthq._internal._Promise<Bool>));
             });
           });
         })
@@ -636,7 +636,7 @@ class Filesystem {
           var tmpHandle:Null<flighthq._internal.dom.FileSystemFileHandle> = cast _Runtime.UNDEFINED;
           tmpPath = (path + '.__atomic_tmp__');
           payload = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool) ? (cast data : Dynamic) : (cast _Runtime.slice(data, 0, null) : Dynamic));
-          return flighthq._internal._Async.flatMap((cast Filesystem.writeWebFile__filesystem((cast tmpPath : String), (cast payload : flighthq._internal._Union2<String, flighthq._internal._UInt8Array>)) : flighthq._internal._Promise<Bool>), function(__awaitValue63:Dynamic):Dynamic {
+          return flighthq._internal._Async.flatMap((cast Filesystem.writeWebFile__filesystem((cast tmpPath : String), (cast payload)) : flighthq._internal._Promise<Bool>), function(__awaitValue63:Dynamic):Dynamic {
             var __flowBranch64:Dynamic;
             if ((cast !_Runtime.truthy(__awaitValue63) : Bool)) {
               __flowBranch64 = flighthq._internal._Async.protect(function():Dynamic {
@@ -659,7 +659,7 @@ class Filesystem {
                         file = __awaitValue67;
                         return flighthq._internal._Async.flatMap((cast file : flighthq._internal.dom.File).arrayBuffer(), function(__awaitValue68:Dynamic):Dynamic {
                           bytes = new flighthq._internal._UInt8Array(__awaitValue68);
-                          return flighthq._internal._Async.flatMap((cast Filesystem.writeWebFile__filesystem((cast path : String), (cast bytes : flighthq._internal._Union2<String, flighthq._internal._UInt8Array>)) : flighthq._internal._Promise<Bool>), function(__awaitValue69:Dynamic):Dynamic {
+                          return flighthq._internal._Async.flatMap((cast Filesystem.writeWebFile__filesystem((cast path : String), (cast bytes)) : flighthq._internal._Promise<Bool>), function(__awaitValue69:Dynamic):Dynamic {
                             ok = __awaitValue69;
                             return flighthq._internal._Async.flatMap((cast Filesystem.writeWebRemove__filesystem((cast tmpPath : String), (cast false : Bool)) : flighthq._internal._Promise<Bool>), function(__awaitValue70:Dynamic):Dynamic {
                               __awaitValue70;
@@ -695,15 +695,15 @@ class Filesystem {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, readFileSymlink: function():flighthq._internal._Promise<flighthq._internal._Any> {
+    }, readFileSymlink: function():flighthq._internal._Promise<Null<String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, getFileRealPath: function():flighthq._internal._Promise<flighthq._internal._Any> {
+    }, getFileRealPath: function():flighthq._internal._Promise<Null<String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, getFilePermissions: function():flighthq._internal._Promise<flighthq._internal._Any> {
+    }, getFilePermissions: function():flighthq._internal._Promise<Null<FilePermissions>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
@@ -751,7 +751,7 @@ class Filesystem {
                         __flowBranch77 = flighthq._internal._Async.flowNormal();
                       }
                       return flighthq._internal._Async.continueFlow(__flowBranch77, function():Dynamic {
-                        return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root : flighthq._internal.dom.FileSystemDirectoryHandle), (cast (cast Filesystem.splitWebPath__filesystem((cast path : String)) : Array<String>) : Array<String>), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue78:Dynamic):Dynamic {
+                        return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root), (cast (cast Filesystem.splitWebPath__filesystem((cast path : String)) : Array<String>)), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue78:Dynamic):Dynamic {
                           return flighthq._internal._Async.flowReturn(!_Runtime.strictEquals(__awaitValue78, null));
                         });
                       });
@@ -797,7 +797,7 @@ class Filesystem {
           });
         })
       );
-    }, getFileSystemUsage: function():flighthq._internal._Promise<Null<{ var usedBytes:Float; var quotaBytes:Float; }>> {
+    }, getFileSystemUsage: function():flighthq._internal._Promise<Null<FileSystemUsage>> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var storage:flighthq._internal.dom.StorageManager = cast _Runtime.UNDEFINED;
@@ -842,19 +842,21 @@ class Filesystem {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, getPath: function():String {
       return cast '';
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
 
   public static function directoryExists(path:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).directoryExists(path);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).directoryExists((cast path : String));
     return cast null;
   }
 
   public static function fileExists(path:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).fileExists(path);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).fileExists((cast path : String));
     return cast null;
   }
 
@@ -863,7 +865,7 @@ class Filesystem {
       flighthq._internal._Async.protect(function():Dynamic {
         var all:Array<FileEntry> = cast _Runtime.UNDEFINED;
         var re:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readDirectoryRecursive(rootPath), function(__awaitValue86:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readDirectoryRecursive((cast rootPath : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))), function(__awaitValue86:Dynamic):Dynamic {
           all = __awaitValue86;
           var __flowBranch87:Dynamic;
           if ((cast _Runtime.strictEquals(_Runtime.field(all, 'length'), 0.0) : Bool)) {
@@ -907,24 +909,24 @@ class Filesystem {
   }
 
   public static function getFilePermissions(path:String):flighthq._internal._Promise<Null<FilePermissions>> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).getFilePermissions(path);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).getFilePermissions((cast path : String));
     return cast null;
   }
 
   public static function getFileRealPath(path:String):flighthq._internal._Promise<Null<String>> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).getFileRealPath(path);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).getFileRealPath((cast path : String));
     return cast null;
   }
 
   @:noCompletion
   public static function getFileSystemBackend():FileSystemBackend {
-    if ((cast _Runtime.strictEquals(Filesystem._backend__filesystem, null) : Bool)) { (Filesystem._backend__filesystem = cast ((cast createWebFileSystemBackend() : Null<FileSystemBackend>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Filesystem._backend__filesystem, null) : Bool)) { (Filesystem._backend__filesystem = cast ((cast createWebFileSystemBackend() : FileSystemBackend) : Dynamic)); }
     return cast Filesystem._backend__filesystem;
     return cast null;
   }
 
   public static function getFileSystemPath(kind:FileSystemPathKind):String {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).getPath(kind);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).getPath((cast kind));
     return cast null;
   }
 
@@ -990,7 +992,7 @@ class Filesystem {
               __flowBranch95 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch95, function():Dynamic {
-              return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root : flighthq._internal.dom.FileSystemDirectoryHandle), (cast _Runtime.slice(segments, 0.0, -1.0) : Array<String>), (cast create : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue96:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root), (cast _Runtime.slice(segments, 0.0, -1.0)), (cast create : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue96:Dynamic):Dynamic {
                 parent = __awaitValue96;
                 var __flowBranch97:Dynamic;
                 if ((cast _Runtime.strictEquals(parent, null) : Bool)) {
@@ -1104,7 +1106,7 @@ class Filesystem {
   public static function joinFilePath(...segments:String):String {
     var parts:Array<String> = cast _Runtime.UNDEFINED;
     var prefix:String = cast _Runtime.UNDEFINED;
-    parts = cast ([] : Array<Dynamic>);
+    parts = (cast cast ([] : Array<Dynamic>));
     for (segment in _Runtime.iterable(segments)) {
       for (part in _Runtime.iterable(_Runtime.callProperty(segment, 'split', cast (['/'] : Array<Dynamic>)))) {
         if ((cast ((cast _Runtime.strictEquals(part, '') : Bool) || (cast _Runtime.strictEquals(part, '.') : Bool)) : Bool)) { continue; }
@@ -1117,7 +1119,7 @@ class Filesystem {
   }
 
   public static function makeDirectory(path:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).makeDirectory(path);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).makeDirectory((cast path : String));
     return cast null;
   }
 
@@ -1136,22 +1138,22 @@ class Filesystem {
   }
 
   public static function openFileReadStream(path:String):flighthq._internal._Promise<Null<flighthq._internal.dom.ReadableStream<flighthq._internal._UInt8Array>>> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).openFileReadStream(path);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).openFileReadStream((cast path : String));
     return cast null;
   }
 
   public static function openFileWriteStream(path:String):flighthq._internal._Promise<Null<flighthq._internal.dom.WritableStream<flighthq._internal._UInt8Array>>> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).openFileWriteStream(path);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).openFileWriteStream((cast path : String));
     return cast null;
   }
 
   public static function readBinaryFile(path:String):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readBinaryFile(path);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readBinaryFile((cast path : String));
     return cast null;
   }
 
   public static function readBinaryFileRange(path:String, offset:Float, length:Float):flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readBinaryFileRange(path, offset, length);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readBinaryFileRange((cast path : String), (cast offset : Float), (cast length : Float));
     return cast null;
   }
 
@@ -1162,13 +1164,13 @@ class Filesystem {
         var __flowBranch106:Dynamic;
         if ((cast !_Runtime.strictEquals(handle.path, null) : Bool)) {
           __flowBranch106 = flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flowReturn((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readBinaryFile(handle.path));
+            return flighthq._internal._Async.flowReturn((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readBinaryFile((cast handle.path : String)));
           });
         } else {
           __flowBranch106 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch106, function():Dynamic {
-          fsHandle = (cast getWebFileSystemHandle((cast handle : FileDialogHandle)) : Null<{ var kind:String; var name:String; var getFile:Void->flighthq._internal._Promise<flighthq._internal.dom.File>; var createWritable:Void->flighthq._internal._Promise<{ var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }>; }>);
+          fsHandle = (cast getWebFileSystemHandle((cast handle)) : Null<{ var kind:String; var name:String; var getFile:Void->flighthq._internal._Promise<flighthq._internal.dom.File>; var createWritable:Void->flighthq._internal._Promise<{ var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }>; }>);
           var __flowBranch107:Dynamic;
           if ((cast !_Runtime.strictEquals(fsHandle, null) : Bool)) {
             __flowBranch107 = flighthq._internal._Async.protect(function():Dynamic {
@@ -1202,7 +1204,7 @@ class Filesystem {
               __flowBranch110 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch110, function():Dynamic {
-              return flighthq._internal._Async.flowReturn((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readBinaryFile(handle.name));
+              return flighthq._internal._Async.flowReturn((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readBinaryFile((cast handle.name : String)));
             });
           });
         });
@@ -1217,13 +1219,13 @@ class Filesystem {
         var __flowBranch111:Dynamic;
         if ((cast !_Runtime.strictEquals(handle.path, null) : Bool)) {
           __flowBranch111 = flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flowReturn((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readTextFile(handle.path));
+            return flighthq._internal._Async.flowReturn((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readTextFile((cast handle.path : String)));
           });
         } else {
           __flowBranch111 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch111, function():Dynamic {
-          fsHandle = (cast getWebFileSystemHandle((cast handle : FileDialogHandle)) : Null<{ var kind:String; var name:String; var getFile:Void->flighthq._internal._Promise<flighthq._internal.dom.File>; var createWritable:Void->flighthq._internal._Promise<{ var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }>; }>);
+          fsHandle = (cast getWebFileSystemHandle((cast handle)) : Null<{ var kind:String; var name:String; var getFile:Void->flighthq._internal._Promise<flighthq._internal.dom.File>; var createWritable:Void->flighthq._internal._Promise<{ var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }>; }>);
           var __flowBranch112:Dynamic;
           if ((cast !_Runtime.strictEquals(fsHandle, null) : Bool)) {
             __flowBranch112 = flighthq._internal._Async.protect(function():Dynamic {
@@ -1257,7 +1259,7 @@ class Filesystem {
               __flowBranch115 = flighthq._internal._Async.flowNormal();
             }
             return flighthq._internal._Async.continueFlow(__flowBranch115, function():Dynamic {
-              return flighthq._internal._Async.flowReturn((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readTextFile(handle.name));
+              return flighthq._internal._Async.flowReturn((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readTextFile((cast handle.name : String)));
             });
           });
         });
@@ -1266,42 +1268,42 @@ class Filesystem {
   }
 
   public static function readDirectory(path:String):flighthq._internal._Promise<Array<FileEntry>> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readDirectory(path);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readDirectory((cast path : String));
     return cast null;
   }
 
   public static function readDirectoryRecursive(path:String, ?options:FileWalkOptions):flighthq._internal._Promise<Array<FileEntry>> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readDirectoryRecursive(path, options);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readDirectoryRecursive((cast path : String), (cast options));
     return cast null;
   }
 
   public static function readFileSymlink(path:String):flighthq._internal._Promise<Null<String>> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readFileSymlink(path);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readFileSymlink((cast path : String));
     return cast null;
   }
 
   public static function readTextFile(path:String):flighthq._internal._Promise<Null<String>> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readTextFile(path);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readTextFile((cast path : String));
     return cast null;
   }
 
   public static function removeDirectory(path:String, ?recursive:Bool):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).removeDirectory(path, recursive);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).removeDirectory((cast path : String), (cast recursive));
     return cast null;
   }
 
   public static function removeFile(path:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).removeFile(path);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).removeFile((cast path : String));
     return cast null;
   }
 
   public static function renameFile(from:String, to:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).rename(from, to);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).rename((cast from : String), (cast to : String));
     return cast null;
   }
 
   public static function setFilePermissions(path:String, permissions:FilePermissions):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).setFilePermissions(path, permissions);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).setFilePermissions((cast path : String), (cast permissions));
     return cast null;
   }
 
@@ -1316,14 +1318,14 @@ class Filesystem {
   }
 
   public static function statFile(path:String):flighthq._internal._Promise<Null<FileStat>> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).statFile(path);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).statFile((cast path : String));
     return cast null;
   }
 
   public static function walkWebDirectory__filesystem(dir:flighthq._internal.dom.FileSystemDirectoryHandle, basePath:String, out:Array<FileEntry>, depth:Float, maxDepth:Float):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var __flowIterator118:Dynamic = _Runtime.asyncIterator(Filesystem.asAsyncEntries__filesystem((cast dir : flighthq._internal.dom.FileSystemDirectoryHandle)));
+        var __flowIterator118:Dynamic = _Runtime.asyncIterator(Filesystem.asAsyncEntries__filesystem((cast dir)));
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
           return flighthq._internal._Async.flatMap(_Runtime.callProperty(__flowIterator118, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {
             if (_Runtime.truthy(_Runtime.field(__step, 'done'))) return flighthq._internal._Async.flowBreak();
@@ -1340,7 +1342,7 @@ class Filesystem {
             var __flowBranch120:Dynamic;
             if ((cast ((cast isDirectory : Bool) && (cast ((cast depth : Float) < (cast maxDepth : Float)) : Bool)) : Bool)) {
               __flowBranch120 = flighthq._internal._Async.protect(function():Dynamic {
-                return flighthq._internal._Async.flatMap((cast Filesystem.walkWebDirectory__filesystem((cast (cast handle : flighthq._internal.dom.FileSystemDirectoryHandle) : flighthq._internal.dom.FileSystemDirectoryHandle), (cast entryPath : String), (cast out : Array<FileEntry>), (cast (depth + 1.0) : Float), (cast maxDepth : Float)) : flighthq._internal._Promise<flighthq._internal._Nothing>), function(__awaitValue121:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast Filesystem.walkWebDirectory__filesystem((cast (cast handle : flighthq._internal.dom.FileSystemDirectoryHandle)), (cast entryPath : String), (cast out), (cast (depth + 1.0) : Float), (cast maxDepth : Float)) : flighthq._internal._Promise<flighthq._internal._Nothing>), function(__awaitValue121:Dynamic):Dynamic {
                   __awaitValue121;
                   return flighthq._internal._Async.flowNormal();
                 });
@@ -1360,12 +1362,12 @@ class Filesystem {
   }
 
   public static function watchPath(path:String, listener:FileWatchEvent->Void):Void->Void {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).watch(path, listener);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).watch((cast path : String), (cast listener));
     return cast null;
   }
 
   public static function writeBinaryFile(path:String, data:flighthq._internal._UInt8Array):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).writeBinaryFile(path, data);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).writeBinaryFile((cast path : String), (cast data));
     return cast null;
   }
 
@@ -1374,7 +1376,7 @@ class Filesystem {
       flighthq._internal._Async.protect(function():Dynamic {
         var stream:Null<flighthq._internal.dom.WritableStream<flighthq._internal._UInt8Array>> = cast _Runtime.UNDEFINED;
         var writer:flighthq._internal.dom.WritableStreamDefaultWriter<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).openFileWriteStream(path), function(__awaitValue124:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).openFileWriteStream((cast path : String)), function(__awaitValue124:Dynamic):Dynamic {
           stream = __awaitValue124;
           var __flowBranch125:Dynamic;
           if ((cast _Runtime.strictEquals(stream, null) : Bool)) {
@@ -1427,13 +1429,13 @@ class Filesystem {
         var __flowBranch131:Dynamic;
         if ((cast !_Runtime.strictEquals(handle.path, null) : Bool)) {
           __flowBranch131 = flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flowReturn((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).writeBinaryFile(handle.path, data));
+            return flighthq._internal._Async.flowReturn((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).writeBinaryFile((cast handle.path : String), (cast data)));
           });
         } else {
           __flowBranch131 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch131, function():Dynamic {
-          fsHandle = (cast getWebFileSystemHandle((cast handle : FileDialogHandle)) : Null<{ var kind:String; var name:String; var getFile:Void->flighthq._internal._Promise<flighthq._internal.dom.File>; var createWritable:Void->flighthq._internal._Promise<{ var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }>; }>);
+          fsHandle = (cast getWebFileSystemHandle((cast handle)) : Null<{ var kind:String; var name:String; var getFile:Void->flighthq._internal._Promise<flighthq._internal.dom.File>; var createWritable:Void->flighthq._internal._Promise<{ var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }>; }>);
           var __flowBranch132:Dynamic;
           if ((cast _Runtime.strictEquals(fsHandle, null) : Bool)) {
             __flowBranch132 = flighthq._internal._Async.protect(function():Dynamic {
@@ -1447,7 +1449,7 @@ class Filesystem {
               var writable:{ var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; } = cast _Runtime.UNDEFINED;
               return flighthq._internal._Async.flatMap((cast fsHandle : { var kind:String; var name:String; var getFile:Void->flighthq._internal._Promise<flighthq._internal.dom.File>; var createWritable:Void->flighthq._internal._Promise<{ var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }>; }).createWritable(), function(__awaitValue133:Dynamic):Dynamic {
                 writable = __awaitValue133;
-                return flighthq._internal._Async.flatMap((cast writable : { var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }).write(_Runtime.slice(data, 0, null)), function(__awaitValue134:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast writable : { var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }).write((cast _Runtime.slice(data, 0, null))), function(__awaitValue134:Dynamic):Dynamic {
                   __awaitValue134;
                   return flighthq._internal._Async.flatMap((cast writable : { var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }).close(), function(__awaitValue135:Dynamic):Dynamic {
                     __awaitValue135;
@@ -1476,13 +1478,13 @@ class Filesystem {
         var __flowBranch136:Dynamic;
         if ((cast !_Runtime.strictEquals(handle.path, null) : Bool)) {
           __flowBranch136 = flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flowReturn((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).writeTextFile(handle.path, data));
+            return flighthq._internal._Async.flowReturn((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).writeTextFile((cast handle.path : String), (cast data : String)));
           });
         } else {
           __flowBranch136 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch136, function():Dynamic {
-          fsHandle = (cast getWebFileSystemHandle((cast handle : FileDialogHandle)) : Null<{ var kind:String; var name:String; var getFile:Void->flighthq._internal._Promise<flighthq._internal.dom.File>; var createWritable:Void->flighthq._internal._Promise<{ var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }>; }>);
+          fsHandle = (cast getWebFileSystemHandle((cast handle)) : Null<{ var kind:String; var name:String; var getFile:Void->flighthq._internal._Promise<flighthq._internal.dom.File>; var createWritable:Void->flighthq._internal._Promise<{ var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }>; }>);
           var __flowBranch137:Dynamic;
           if ((cast _Runtime.strictEquals(fsHandle, null) : Bool)) {
             __flowBranch137 = flighthq._internal._Async.protect(function():Dynamic {
@@ -1496,7 +1498,7 @@ class Filesystem {
               var writable:{ var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; } = cast _Runtime.UNDEFINED;
               return flighthq._internal._Async.flatMap((cast fsHandle : { var kind:String; var name:String; var getFile:Void->flighthq._internal._Promise<flighthq._internal.dom.File>; var createWritable:Void->flighthq._internal._Promise<{ var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }>; }).createWritable(), function(__awaitValue138:Dynamic):Dynamic {
                 writable = __awaitValue138;
-                return flighthq._internal._Async.flatMap((cast writable : { var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }).write(data), function(__awaitValue139:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast writable : { var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }).write((cast data)), function(__awaitValue139:Dynamic):Dynamic {
                   __awaitValue139;
                   return flighthq._internal._Async.flatMap((cast writable : { var write:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<String, haxe.io.Bytes>, flighthq._internal.dom.Blob>, haxe.io.ArrayBufferView>->flighthq._internal._Promise<flighthq._internal._Nothing>; var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }).close(), function(__awaitValue140:Dynamic):Dynamic {
                     __awaitValue140;
@@ -1519,12 +1521,12 @@ class Filesystem {
   }
 
   public static function writeFileAtomic(path:String, data:flighthq._internal._Union2<flighthq._internal._UInt8Array, String>):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).writeFileAtomic(path, data);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).writeFileAtomic((cast path : String), (cast data));
     return cast null;
   }
 
   public static function writeTextFile(path:String, data:String):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).writeTextFile(path, data);
+    return cast (cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).writeTextFile((cast path : String), (cast data : String));
     return cast null;
   }
 
@@ -1597,7 +1599,7 @@ class Filesystem {
             return flighthq._internal._Async.continueFlow(__flowBranch148, function():Dynamic {
               return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
                 var parent:Null<flighthq._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
-                return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root : flighthq._internal.dom.FileSystemDirectoryHandle), (cast _Runtime.slice(segments, 0.0, -1.0) : Array<String>), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue149:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast Filesystem.getWebDirectoryHandle__filesystem((cast root), (cast _Runtime.slice(segments, 0.0, -1.0)), (cast false : Bool)) : flighthq._internal._Promise<Null<flighthq._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue149:Dynamic):Dynamic {
                   parent = __awaitValue149;
                   var __flowBranch150:Dynamic;
                   if ((cast _Runtime.strictEquals(parent, null) : Bool)) {

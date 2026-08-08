@@ -17,32 +17,33 @@ import flighthq.types.AnimationTrack;
 import flighthq.types.Node;
 import flighthq.types.Node.NodeTraits;
 import flighthq.types.NodeOrderList;
+import flighthq.types.Skeleton2DAnimationTargetBinder;
 import flighthq.types.Skeleton2DDrawOrderAnimationTarget;
 import flighthq.types.Skeleton2DDrawOrderTimeline;
 import flighthq.types._internal._Skeleton2DAnimationTargetKindValues.Skeleton2DAnimationTargetKindValue as TargetKind;
 
 class Skeleton2dDrawOrderTarget {
   @:noCompletion
-  public static function createSkeleton2DDrawOrderAnimationTarget<Traits>(nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Skeleton2DDrawOrderAnimationTarget<Traits> {
+  public static function createSkeleton2DDrawOrderAnimationTarget<Traits:flighthq._internal._Object>(nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Skeleton2DDrawOrderAnimationTarget<Traits> {
     return cast { kind: (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).DrawOrder, nodes: nodes, orderList: orderList };
     return cast null;
   }
 
   @:noCompletion
-  public static function createSkeleton2DDrawOrderChannel<Traits>(timeline:Skeleton2DDrawOrderTimeline, nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Null<AnimationChannel> {
+  public static function createSkeleton2DDrawOrderChannel<Traits:flighthq._internal._Object>(timeline:Skeleton2DDrawOrderTimeline, nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Null<AnimationChannel> {
     var keyframes:Float = cast _Runtime.UNDEFINED;
     var slotCount:Float = cast _Runtime.UNDEFINED;
     keyframes = _Runtime.field(_Runtime.field(timeline, 'times'), 'length');
     if ((cast _Runtime.strictEquals(keyframes, 0.0) : Bool)) { return cast null; }
     slotCount = _Runtime.divideNumbers(_Runtime.field(_Runtime.field(timeline, 'orderings'), 'length'), keyframes);
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([slotCount] : Array<Dynamic>)) : Bool) : Bool) || (cast _Runtime.strictEquals(slotCount, 0.0) : Bool)) : Bool)) { return cast null; }
-    return cast (cast createAnimationChannel((cast createAnimationTrack({ components: slotCount, interpolation: Skeleton2dDrawOrderTarget.STEP_INTERPOLATION__skeleton2dDrawOrderTarget, times: _Runtime.field(timeline, 'times'), values: _Runtime.field(timeline, 'orderings') }) : AnimationTrack), (cast createSkeleton2DDrawOrderAnimationTarget(nodes, orderList) : flighthq._internal._Any)) : Null<AnimationChannel>);
+    return cast (cast createAnimationChannel((cast (cast createAnimationTrack((cast { components: slotCount, interpolation: Skeleton2dDrawOrderTarget.STEP_INTERPOLATION__skeleton2dDrawOrderTarget, times: _Runtime.field(timeline, 'times'), values: _Runtime.field(timeline, 'orderings') })) : AnimationTrack)), (cast (cast createSkeleton2DDrawOrderAnimationTarget((cast nodes), (cast orderList)) : Skeleton2DDrawOrderAnimationTarget<Traits>) : flighthq._internal._Any)) : AnimationChannel);
     return cast null;
   }
 
   @:noCompletion
   public static function registerSkeleton2DDrawOrderAnimationBinder():Void {
-    registerSkeleton2DAnimationTargetBinder((cast (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).DrawOrder : String), Skeleton2dDrawOrderTarget.bindSkeleton2DDrawOrderChannel__skeleton2dDrawOrderTarget);
+    registerSkeleton2DAnimationTargetBinder((cast (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).DrawOrder : String), (cast Skeleton2dDrawOrderTarget.bindSkeleton2DDrawOrderChannel__skeleton2dDrawOrderTarget));
   }
 
   @:noCompletion
@@ -66,12 +67,12 @@ class Skeleton2dDrawOrderTarget {
     track = _Runtime.field(channel, 'track');
     components = (cast track : AnimationTrack).components;
     if ((cast _Runtime.strictEquals(components, 0.0) : Bool)) { return; }
-    keyframe = (cast findSkeleton2DStepKeyframe((cast (cast track : AnimationTrack).times : flighthq._internal._ArrayLike<Float>), (cast time : Float)) : Float);
+    keyframe = (cast findSkeleton2DStepKeyframe((cast (cast track : AnimationTrack).times), (cast time : Float)) : Float);
     if ((cast ((cast keyframe : Float) < (cast 0.0 : Float)) : Bool)) { return; }
     if ((cast !_Runtime.strictEquals((cast track : AnimationTrack).interpolation, Skeleton2dDrawOrderTarget.STEP_INTERPOLATION__skeleton2dDrawOrderTarget) : Bool)) {
       reportSkeleton2DCoercedInterpolation((cast Skeleton2dDrawOrderTarget.DRAW_ORDER_SUBJECT__skeleton2dDrawOrderTarget : String), (cast (cast track : AnimationTrack).interpolation : String), (cast Skeleton2dDrawOrderTarget.STEP_INTERPOLATION__skeleton2dDrawOrderTarget : String));
     }
-    clearNodeOrderList((cast orderList : NodeOrderList<NodeTraits>));
+    (cast clearNodeOrderList : NodeOrderList<NodeTraits>->Void)((cast orderList));
     base = (keyframe * components);
     count = ((cast ((cast components : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool) ? (cast components : Dynamic) : (cast _Runtime.field(nodes, 'length') : Dynamic));
     {
@@ -79,7 +80,7 @@ class Skeleton2dDrawOrderTarget {
       while ((cast ((cast slot : Float) < (cast count : Float)) : Bool)) {
         var node:Null<Node<NodeTraits>> = flighthq._internal._StaticIndex.readArray(nodes, slot);
         if ((cast ((cast _Runtime.strictEquals(node, null) : Bool) || (cast _Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { slot++; continue; }
-        addNodeOrderListEntry((cast orderList : NodeOrderList<NodeTraits>), (cast node : Node<NodeTraits>), (cast _Runtime.getIndex((cast track : AnimationTrack).values, (base + slot)) : Float));
+        (cast addNodeOrderListEntry : NodeOrderList<NodeTraits>->Node<NodeTraits>->Float->Void)((cast orderList), (cast node), (cast _Runtime.getIndex((cast track : AnimationTrack).values, (base + slot)) : Float));
         slot++;
       }
     }

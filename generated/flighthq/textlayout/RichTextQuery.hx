@@ -25,7 +25,7 @@ class RichTextQuery {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
-        var lineTop:Float = (cast RichTextQuery.getLineOffsetY__richTextQuery((cast layout : TextLayoutResult), (cast i : Float)) : Float);
+        var lineTop:Float = (cast RichTextQuery.getLineOffsetY__richTextQuery((cast layout), (cast i : Float)) : Float);
         var lineBottom:Float = _Runtime.addNumbers(lineTop, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0));
         var dist:Float = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
         if ((cast ((cast dist : Float) < (cast closestDist : Float)) : Bool)) {
@@ -100,7 +100,7 @@ class RichTextQuery {
     var x:Float = cast _Runtime.UNDEFINED;
     var limit:Float = cast _Runtime.UNDEFINED;
     var charWidth:Float = cast _Runtime.UNDEFINED;
-    group = (cast RichTextQuery.getGroupContainingIndex__richTextQuery((cast layout : TextLayoutResult), (cast charIndex : Float)) : Null<TextLayoutGroup>);
+    group = (cast RichTextQuery.getGroupContainingIndex__richTextQuery((cast layout), (cast charIndex : Float)) : Null<TextLayoutGroup>);
     if ((cast _Runtime.strictEquals(group, null) : Bool)) { return cast false; }
     x = (cast group : TextLayoutGroup).offsetX;
     limit = HxMath.min((charIndex - (cast group : TextLayoutGroup).startIndex), _Runtime.field((cast group : TextLayoutGroup).positions, 'length'));
@@ -142,7 +142,7 @@ class RichTextQuery {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
-        var lineTop:Float = (cast RichTextQuery.getLineOffsetY__richTextQuery((cast layout : TextLayoutResult), (cast i : Float)) : Float);
+        var lineTop:Float = (cast RichTextQuery.getLineOffsetY__richTextQuery((cast layout), (cast i : Float)) : Float);
         var lineBottom:Float = _Runtime.addNumbers(lineTop, flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i));
         var dist:Float = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
         if ((cast ((cast dist : Float) < (cast closestDist : Float)) : Bool)) {
@@ -158,8 +158,8 @@ class RichTextQuery {
 
   public static function getRichTextLineIndexOfChar(layout:TextLayoutResult, charIndex:Float):Float {
     var group:Null<TextLayoutGroup> = cast _Runtime.UNDEFINED;
-    group = (cast RichTextQuery.getGroupContainingIndex__richTextQuery((cast layout : TextLayoutResult), (cast charIndex : Float)) : Null<TextLayoutGroup>);
-    return cast _Runtime.coalesce(_Runtime.optionalField(group, 'lineIndex'), function():Dynamic return cast 0.0);
+    group = (cast RichTextQuery.getGroupContainingIndex__richTextQuery((cast layout), (cast charIndex : Float)) : Null<TextLayoutGroup>);
+    return cast _Runtime.coalesce(({ final __structural7 = group; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var lineIndex:Float; }).lineIndex; }), function():Dynamic return cast 0.0);
     return cast null;
   }
 
@@ -232,8 +232,8 @@ class RichTextQuery {
       var groupStart:Float = HxMath.max(start, (cast group : TextLayoutGroup).startIndex);
       var groupEnd:Float = HxMath.min(end, (cast group : TextLayoutGroup).endIndex);
       if ((cast ((cast groupStart : Float) >= (cast groupEnd : Float)) : Bool)) { continue; }
-      var x:Float = (cast RichTextQuery.getCaretX__richTextQuery((cast group : TextLayoutGroup), (cast groupStart : Float)) : Float);
-      var right:Float = (cast RichTextQuery.getCaretX__richTextQuery((cast group : TextLayoutGroup), (cast groupEnd : Float)) : Float);
+      var x:Float = (cast RichTextQuery.getCaretX__richTextQuery((cast group), (cast groupStart : Float)) : Float);
+      var right:Float = (cast RichTextQuery.getCaretX__richTextQuery((cast group), (cast groupEnd : Float)) : Float);
       _Runtime.callProperty(out, 'push', cast ([{ height: (cast group : TextLayoutGroup).height, lineIndex: (cast group : TextLayoutGroup).lineIndex, width: (right - x), x: x, y: (cast group : TextLayoutGroup).offsetY }] : Array<Dynamic>));
     }
   }

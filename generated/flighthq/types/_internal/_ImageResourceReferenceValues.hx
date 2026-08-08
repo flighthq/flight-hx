@@ -8,7 +8,7 @@ import flighthq.types.ResourceResolutionState;
 import flighthq.types.Texture;
 
 class _ImageResourceReferenceValues {
-  public static final ImageResourceReferenceKindValue:{ var Embedded:String; var External:String; } = { Embedded: 'Embedded', External: 'External' };
+  public static final ImageResourceReferenceKindValue:{ var Embedded:String; var External:String; } = (cast { Embedded: 'Embedded', External: 'External' });
 
-  public static final ImageResourceFailureKindValue:{ var Error:String; var Unavailable:String; } = { Error: 'Error', Unavailable: 'Unavailable' };
+  public static final ImageResourceFailureKindValue:{ var Error:String; var Unavailable:String; } = (cast { Error: 'Error', Unavailable: 'Unavailable' });
 }

@@ -27,13 +27,14 @@ import flighthq.types.Rectangle;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderRegistrySignals;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
-import flighthq.types.Renderable;
+import flighthq.types.RenderState;
 import flighthq.types.RendererData;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Shape;
 import flighthq.types.Shape.ShapeData;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
 import flighthq.types.ShapeRasterizer;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Types.ShapeKind;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuQuadBatchResources;
@@ -68,29 +69,29 @@ class WgpuRasterShapeRenderer {
     var startCount:Float = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
     var d:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) { return; }
     source = (cast (cast renderProxy : RenderProxy2D).source : Shape);
     __destructure0 = (cast source : Shape).data;
     commands = _Runtime.field(__destructure0, 'commands');
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) : Bool)) { return; }
-    rasterizer = (cast getWgpuShapeRasterizer((cast state : WgpuRenderState)) : Null<ShapeRasterizer>);
+    rasterizer = (cast getWgpuShapeRasterizer((cast state)) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
       _Runtime.callOptionalValue((cast runtime : WgpuRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
       return;
     }
     material = (cast renderProxy : RenderProxy2D).material;
-    materialRenderer = (cast resolveWgpuMaterialRenderer((cast state : WgpuRenderState), material) : Null<WgpuMaterialRenderer>);
+    materialRenderer = (cast resolveWgpuMaterialRenderer((cast state), (cast material)) : Null<WgpuMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
-    shapeData = (cast getWgpuShapeData((cast renderProxy : RenderProxy2D).rendererData) : Null<WgpuShapeRendererData>);
+    shapeData = (cast getWgpuShapeData((cast (cast renderProxy : RenderProxy2D).rendererData)) : Null<WgpuShapeRendererData>);
     if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
-    bounds = (cast getNodeLocalBoundsRectangle(source) : Rectangle);
+    bounds = (cast getNodeLocalBoundsRectangle((cast source)) : Rectangle);
     w = HxMath.ceil(_Runtime.field(bounds, 'width'));
     h = HxMath.ceil(_Runtime.field(bounds, 'height'));
     if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
-    version = (cast getNodeLocalContentRevision(source) : Float);
+    version = (cast getNodeLocalContentRevision((cast source)) : Float);
     pixelRatio = (cast state : WgpuRenderState).pixelRatio;
-    surface = (cast acquireWgpuShapeRasterSurface(shapeData) : WgpuShapeRasterSurface);
+    surface = (cast acquireWgpuShapeRasterSurface((cast shapeData)) : WgpuShapeRasterSurface);
     if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, (cast shapeData : WgpuShapeRendererData).lastContentId) : Bool) || (cast !_Runtime.strictEquals(w, (cast shapeData : WgpuShapeRendererData).lastW) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, (cast shapeData : WgpuShapeRendererData).lastH) : Bool)) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, (cast shapeData : WgpuShapeRendererData).lastPixelRatio) : Bool)) : Bool)) {
       var pw:Float = HxMath.ceil((w * pixelRatio));
       var ph:Float = HxMath.ceil((h * pixelRatio));
@@ -99,22 +100,22 @@ class WgpuRasterShapeRenderer {
       var ctx:flighthq._internal.dom.CanvasRenderingContext2D = (cast surface : WgpuShapeRasterSurface).ctx;
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([_Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'y'), w, h] : Array<Dynamic>));
-      rasterizer((cast ctx : flighthq._internal.dom.CanvasRenderingContext2D), commands, state);
+      rasterizer((cast ctx), (cast commands), (cast state));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-      invalidateImageResource((cast surface : WgpuShapeRasterSurface).image);
+      invalidateImageResource((cast (cast surface : WgpuShapeRasterSurface).image));
       ((cast shapeData : WgpuShapeRendererData).lastContentId = version);
       ((cast shapeData : WgpuShapeRendererData).lastPixelRatio = pixelRatio);
       ((cast shapeData : WgpuShapeRendererData).lastW = w);
       ((cast shapeData : WgpuShapeRendererData).lastH = h);
     }
-    (cast ensureWgpuQuadBatchResources((cast state : WgpuRenderState)) : WgpuQuadBatchResources);
+    (cast ensureWgpuQuadBatchResources((cast state)) : WgpuQuadBatchResources);
     t = (cast renderProxy : RenderProxy2D).transform2D;
     tx = ((t.tx + _Runtime.multiplyNumbers(t.a, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.c, _Runtime.field(bounds, 'y')));
     ty = ((t.ty + _Runtime.multiplyNumbers(t.b, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.d, _Runtime.field(bounds, 'y')));
-    textureEntry = (cast bindWgpuImageResourceTexture((cast state : WgpuRenderState), (cast surface : WgpuShapeRasterSurface).image, (cast false : Bool), (cast true : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<WgpuTextureEntry>);
+    textureEntry = (cast bindWgpuImageResourceTexture((cast state), (cast (cast surface : WgpuShapeRasterSurface).image), (cast false : Bool), (cast true : Bool), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<WgpuTextureEntry>);
     if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { return; }
     startCount = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount;
-    base = (cast prepareWgpuQuadBatchWrite((cast state : WgpuRenderState), textureEntry, null, (cast (cast renderProxy : RenderProxy2D).blendMode : Null<String>), material, materialRenderer, (cast 1.0 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Float);
+    base = (cast prepareWgpuQuadBatchWrite((cast state), (cast textureEntry), (cast null), (cast (cast renderProxy : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast 1.0 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Float);
     d = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterInstanceData;
     flighthq._internal._StaticIndex.writeFloat32Array(d, base, t.a);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 1.0), t.b);
@@ -129,10 +130,10 @@ class WgpuRasterShapeRenderer {
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 10.0), 1.0);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 11.0), 1.0);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 12.0), (cast renderProxy : RenderProxy2D).alpha);
-    packWgpuQuadBatchMaterialInstance((cast state : WgpuRenderState), (cast (cast renderProxy : RenderProxy2D).materialData : Null<flighthq._internal._Object>), (cast startCount : Float));
-    recordWgpuQuadBatchColorScaleBias((cast state : WgpuRenderState), _Runtime.coalesce((cast renderProxy : RenderProxy2D).colorMatrix, function():Dynamic return cast (cast renderProxy : RenderProxy2D).colorScaleBias), (cast startCount : Float));
+    packWgpuQuadBatchMaterialInstance((cast state), (cast (cast renderProxy : RenderProxy2D).materialData), (cast startCount : Float));
+    recordWgpuQuadBatchColorScaleBias((cast state), (cast _Runtime.coalesce((cast renderProxy : RenderProxy2D).colorMatrix, function():Dynamic return cast (cast renderProxy : RenderProxy2D).colorScaleBias)), (cast startCount : Float));
     (cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount++;
   }
 
-  public static final defaultWgpuRasterShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createWgpuShapeData, destroyData: destroyWgpuShapeData, submit: drawWgpuRasterShape };
+  public static final defaultWgpuRasterShapeRenderer:Scene2DRenderer = (cast { format: BatchFormat.Quad, createData: createWgpuShapeData, destroyData: destroyWgpuShapeData, submit: drawWgpuRasterShape });
 }

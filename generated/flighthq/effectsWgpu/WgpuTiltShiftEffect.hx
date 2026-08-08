@@ -24,22 +24,22 @@ class WgpuTiltShiftEffect {
     center = _Runtime.coalesce(_Runtime.field(effect, 'center'), function():Dynamic return cast 0.5);
     width = _Runtime.coalesce(_Runtime.field(effect, 'width'), function():Dynamic return cast 0.3);
     blur = _Runtime.coalesce(_Runtime.field(effect, 'blur'), function():Dynamic return cast 4.0);
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'lens.tiltShift' : String), (cast WgpuTiltShiftEffect.TILT_SHIFT_FRAGMENT_WGSL__wgpuTiltShiftEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'lens.tiltShift' : String), (cast WgpuTiltShiftEffect.TILT_SHIFT_FRAGMENT_WGSL__wgpuTiltShiftEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, center);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, width);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, blur);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, _Runtime.field(source, 'width'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, _Runtime.field(source, 'height'));
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
-  public static final defaultWgpuTiltShiftEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyTiltShiftEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : TiltShiftEffect) : TiltShiftEffect));
-  };
+  public static final defaultWgpuTiltShiftEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyTiltShiftEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : TiltShiftEffect)));
+  });
 
   public static function registerWgpuTiltShiftEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'TiltShiftEffect' : String), (cast defaultWgpuTiltShiftEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'TiltShiftEffect' : String), (cast defaultWgpuTiltShiftEffectRunner));
   }
 
   public static final TILT_SHIFT_FRAGMENT_WGSL__wgpuTiltShiftEffect:String = '\nstruct Uniforms {\n  u_center : f32,\n  u_width : f32,\n  u_blur : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = vec2f(1.0) / uni.u_resolution;\n  let dist = abs(uv.y - uni.u_center);\n  let edge = uni.u_width * 0.5;\n  let amount = smoothstep(edge, edge + uni.u_width, dist);\n  let radius = amount * uni.u_blur;\n  var sum = vec4f(0.0);\n  var total = 0.0;\n  for (var i = -3; i <= 3; i = i + 1) {\n    let offset = vec2f(0.0, f32(i)) * radius * texel;\n    sum = sum + textureSampleLevel(tex, smp, uv + offset, 0.0);\n    total = total + 1.0;\n  }\n  return sum / total;\n}';

@@ -18,9 +18,9 @@ class ExplainBitmapFontGlyph {
     if ((cast _Runtime.strictEquals(glyph, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       return cast { glyphHeight: 0.0, glyphWidth: 0.0, page: -1.0, pageCount: pageCount, reason: 'no-glyph', renderable: false };
     }
-    shared = { glyphHeight: (cast glyph : flighthq.types.GlyphSource.GlyphEntry).height, glyphWidth: (cast glyph : flighthq.types.GlyphSource.GlyphEntry).width, page: (cast glyph : flighthq.types.GlyphSource.GlyphEntry).page, pageCount: pageCount };
+    shared = (cast { glyphHeight: (cast glyph : { var height:Float; }).height, glyphWidth: (cast glyph : { var width:Float; }).width, page: (cast glyph : { var page:Float; }).page, pageCount: pageCount });
     if ((cast _Runtime.strictEquals(pageCount, 0.0) : Bool)) { return cast _Runtime.mergeObjects([shared, { reason: 'no-pages' }, { renderable: false }]); }
-    if ((cast ((cast ((cast (cast glyph : flighthq.types.GlyphSource.GlyphEntry).width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast (cast glyph : flighthq.types.GlyphSource.GlyphEntry).height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast _Runtime.mergeObjects([shared, { reason: 'empty-glyph' }, { renderable: false }]); }
+    if ((cast ((cast ((cast (cast glyph : { var width:Float; }).width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast (cast glyph : { var height:Float; }).height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast _Runtime.mergeObjects([shared, { reason: 'empty-glyph' }, { renderable: false }]); }
     return cast _Runtime.mergeObjects([shared, { reason: 'ok' }, { renderable: true }]);
     return cast null;
   }

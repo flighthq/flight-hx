@@ -20,11 +20,11 @@ class ExplainAssetLoad {
     runtime = library.runtime;
     descriptor = ((cast runtime.descriptors : flighthq._internal._Map<String, AssetDescriptor>).get(id));
     if ((cast _Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { id: id, refCount: 0.0, status: 'missing-descriptor', type: null }; }
-    type = (cast descriptor : flighthq.types.Assets.AssetDescriptor).type;
+    type = (cast descriptor : { var type:AssetType; }).type;
     if ((cast !(cast ((cast runtime.adapters : flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>).has(type)) : Bool) : Bool)) { return cast { id: id, refCount: 0.0, status: 'missing-loader', type: type }; }
     entry = ((cast runtime.entries : flighthq._internal._Map<String, AssetEntry>).get(id));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      return cast { id: id, refCount: (cast entry : flighthq.types.Assets.AssetEntry).refcount, status: ((cast (cast entry : flighthq.types.Assets.AssetEntry).resident : Bool) ? (cast 'resident' : Dynamic) : (cast 'loading' : Dynamic)), type: type };
+      return cast { id: id, refCount: (cast entry : { var refcount:Float; }).refcount, status: ((cast (cast entry : { var resident:Bool; }).resident : Bool) ? (cast 'resident' : Dynamic) : (cast 'loading' : Dynamic)), type: type };
     }
     return cast { id: id, refCount: 0.0, status: ((cast ((cast runtime.freedIds : flighthq._internal._Set<String>).has(id)) : Bool) ? (cast 'freed' : Dynamic) : (cast 'never-acquired' : Dynamic)), type: type };
     return cast null;

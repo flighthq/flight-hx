@@ -21,15 +21,15 @@ class BitmapFont {
     glyphs = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (glyph in _Runtime.iterable(data.glyphs)) {
       var page:Float = _Runtime.coalesce(glyph.page, function():Dynamic return cast 0.0);
-      ((cast glyphs : flighthq._internal._Map<Float, GlyphEntry>).set(glyph.codepoint, { advance: glyph.advance, bearingX: glyph.bearingX, bearingY: glyph.bearingY, height: glyph.height, page: (cast BitmapFont.resolveBitmapFontGlyphPage__bitmapFont((cast glyph.codepoint : Float), (cast page : Float), (cast pageCount : Float)) : Float), width: glyph.width, x: glyph.x, y: glyph.y }));
+      ((cast glyphs : flighthq._internal._Map<Float, GlyphEntry>).set(glyph.codepoint, (cast { advance: glyph.advance, bearingX: glyph.bearingX, bearingY: glyph.bearingY, height: glyph.height, page: (cast BitmapFont.resolveBitmapFontGlyphPage__bitmapFont((cast glyph.codepoint : Float), (cast page : Float), (cast pageCount : Float)) : Float), width: glyph.width, x: glyph.x, y: glyph.y })));
     }
     kerning = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     if ((cast !_Runtime.strictEquals(data.kerning, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       for (pair in _Runtime.iterable(data.kerning)) {
-        ((cast kerning : flighthq._internal._Map<Float, Float>).set((cast packBitmapFontKerningKey((cast pair.left : Float), (cast pair.right : Float)) : Float), pair.amount));
+        ((cast kerning : flighthq._internal._Map<Float, Float>).set((cast packBitmapFontKerningKey((cast pair.left : Float), (cast pair.right : Float)) : Float), (cast pair.amount)));
       }
     }
-    return cast { encoding: _Runtime.coalesce(data.encoding, function():Dynamic return cast 'raster'), glyphs: glyphs, kerning: kerning, metrics: { ascent: data.metrics.ascent, descent: data.metrics.descent, lineGap: data.metrics.lineGap }, pages: _Runtime.slice(data.pages, 0, null) };
+    return cast { encoding: _Runtime.coalesce(data.encoding, function():Dynamic return cast 'raster'), glyphs: glyphs, kerning: kerning, metrics: { ascent: (cast data.metrics : { var ascent:Float; }).ascent, descent: (cast data.metrics : { var descent:Float; }).descent, lineGap: (cast data.metrics : { var lineGap:Float; }).lineGap }, pages: _Runtime.slice(data.pages, 0, null) };
     return cast null;
   }
 

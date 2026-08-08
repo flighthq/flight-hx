@@ -36,7 +36,7 @@ class DomReconcile {
       drawFn();
       var newElement:flighthq._internal._Any = (cast runtime : DomRenderStateRuntime).domCurrentElement;
       if ((cast !_Runtime.strictEquals(newElement, null) : Bool)) {
-        ((cast (cast runtime : DomRenderStateRuntime).domElementMap : flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>).set(data, newElement));
+        ((cast (cast runtime : DomRenderStateRuntime).domElementMap : flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>).set(data, (cast newElement)));
         if ((cast !_Runtime.strictEquals(newElement, prevElement) : Bool)) { (needsReconcile = cast (true : Dynamic)); }
       } else { if ((cast !_Runtime.strictEquals(prevElement, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         ((cast (cast runtime : DomRenderStateRuntime).domElementMap : flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>).delete_(data));

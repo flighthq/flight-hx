@@ -11,8 +11,10 @@ import flighthq.interaction.HitTests.registerHitTestPrecise;
 import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.types.Bitmap;
 import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.HitTestFunction.HitTestPreciseFunction;
 import flighthq.types.Image;
 import flighthq.types.ImageChannel;
+import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.Node2D;
@@ -28,6 +30,7 @@ import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types.Types.ImageTextureSourceKind;
 import flighthq.types.Types.SpriteKind;
 import flighthq.types.Vector2;
+import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._ImageChannelValues.ImageChannelValue;
 import flighthq.types._internal._SpriteValues.SpriteKind;
@@ -36,7 +39,7 @@ import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class RegisterSpriteHitTest {
   public static function registerSpriteHitTest(alphaThreshold:Float = 1.0):Void {
-    registerHitTestPrecise((cast SpriteKind : String), function(source:NodeAny, x:Float, y:Float):Float return (cast RegisterSpriteHitTest.hitTestSpriteAlpha__registerSpriteHitTest((cast source : NodeAny), (cast x : Float), (cast y : Float), (cast alphaThreshold : Float)) : Float));
+    registerHitTestPrecise((cast SpriteKind : String), (cast function(source:NodeAny, x:Float, y:Float):Float return (cast RegisterSpriteHitTest.hitTestSpriteAlpha__registerSpriteHitTest((cast source), (cast x : Float), (cast y : Float), (cast alphaThreshold : Float)) : Float)));
   }
 
   public static function hitTestSpriteAlpha__registerSpriteHitTest(source:NodeAny, x:Float, y:Float, alphaThreshold:Float):Float {
@@ -46,19 +49,19 @@ class RegisterSpriteHitTest {
     var bitmap:Null<Bitmap> = cast _Runtime.UNDEFINED;
     var px:Float = cast _Runtime.UNDEFINED;
     var py:Float = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast hitTestGraphLocalBounds(source, (cast x : Float), (cast y : Float)) : Bool) : Bool) : Bool)) { return cast -1.0; }
+    if ((cast !(cast (cast hitTestGraphLocalBounds((cast source), (cast x : Float), (cast y : Float)) : Bool) : Bool) : Bool)) { return cast -1.0; }
     sprite = (cast source : Sprite);
     texture = (cast (cast sprite : Sprite).data : SpriteData).texture;
     if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool)) { return cast 0.0; }
     image = (cast texture : Texture2D).source;
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return cast 0.0; }
-    bitmap = (cast RegisterSpriteHitTest.bitmapForImage__registerSpriteHitTest((cast image : TextureSource)) : Null<Bitmap>);
+    bitmap = (cast RegisterSpriteHitTest.bitmapForImage__registerSpriteHitTest((cast image)) : Null<Bitmap>);
     if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) { return cast 0.0; }
-    inverseMatrixTransformPointXY(RegisterSpriteHitTest.bitmapAlphaLocalPoint__registerSpriteHitTest, (cast getNodeWorldMatrix((cast source : Node2D)) : MatrixLike), (cast x : Float), (cast y : Float));
-    px = HxMath.floor((((cast texture : Texture2D).uvOffset.x * (cast image : TextureSource).width) + (cast RegisterSpriteHitTest.bitmapAlphaLocalPoint__registerSpriteHitTest : { var x:Float; var y:Float; }).x));
-    py = HxMath.floor((((cast texture : Texture2D).uvOffset.y * (cast image : TextureSource).height) + (cast RegisterSpriteHitTest.bitmapAlphaLocalPoint__registerSpriteHitTest : { var x:Float; var y:Float; }).y));
-    if ((cast ((cast ((cast ((cast ((cast px : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast py : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast px : Float) >= (cast (cast bitmap : flighthq.types.Bitmap).width : Float)) : Bool)) : Bool) || (cast ((cast py : Float) >= (cast (cast bitmap : flighthq.types.Bitmap).height : Float)) : Bool)) : Bool)) { return cast -1.0; }
-    return cast ((cast ((cast (cast getBitmapPixelChannel((cast bitmap : Bitmap), (cast px : Float), (cast py : Float), (cast (cast ImageChannelValue : { var Red:Float; var Green:Float; var Blue:Float; var Alpha:Float; }).Alpha : Float)) : Float) : Float) >= (cast alphaThreshold : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast -1.0 : Dynamic));
+    inverseMatrixTransformPointXY((cast RegisterSpriteHitTest.bitmapAlphaLocalPoint__registerSpriteHitTest), (cast (cast getNodeWorldMatrix((cast (cast source : Node2D))) : Matrix)), (cast x : Float), (cast y : Float));
+    px = HxMath.floor((((cast (cast texture : Texture2D).uvOffset : { var x:Float; }).x * (cast image : TextureSource).width) + (cast RegisterSpriteHitTest.bitmapAlphaLocalPoint__registerSpriteHitTest : { var x:Float; var y:Float; }).x));
+    py = HxMath.floor((((cast (cast texture : Texture2D).uvOffset : { var y:Float; }).y * (cast image : TextureSource).height) + (cast RegisterSpriteHitTest.bitmapAlphaLocalPoint__registerSpriteHitTest : { var x:Float; var y:Float; }).y));
+    if ((cast ((cast ((cast ((cast ((cast px : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast py : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast px : Float) >= (cast (cast bitmap : { var width:Float; }).width : Float)) : Bool)) : Bool) || (cast ((cast py : Float) >= (cast (cast bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { return cast -1.0; }
+    return cast ((cast ((cast (cast getBitmapPixelChannel((cast bitmap), (cast px : Float), (cast py : Float), (cast (cast ImageChannelValue : { var Red:Float; var Green:Float; var Blue:Float; var Alpha:Float; }).Alpha : Float)) : Float) : Float) >= (cast alphaThreshold : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
@@ -73,16 +76,16 @@ class RegisterSpriteHitTest {
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     bitmap = null;
     try {
-      (bitmap = cast ((cast captureBitmapFromImageResource((cast resource : Image)) : Null<Bitmap>) : Dynamic));
+      (bitmap = cast ((cast captureBitmapFromImageResource((cast resource)) : Bitmap) : Dynamic));
     } catch (__error:Dynamic) {
       (bitmap = cast (null : Dynamic));
     }
-    if ((cast !_Runtime.strictEquals(bitmap, null) : Bool)) { ((cast RegisterSpriteHitTest.bitmapCache__registerSpriteHitTest : flighthq._internal._WeakMap<Image, Bitmap>).set(resource, bitmap)); }
+    if ((cast !_Runtime.strictEquals(bitmap, null) : Bool)) { ((cast RegisterSpriteHitTest.bitmapCache__registerSpriteHitTest : flighthq._internal._WeakMap<Image, Bitmap>).set(resource, (cast bitmap))); }
     return cast bitmap;
     return cast null;
   }
 
-  public static final bitmapAlphaLocalPoint__registerSpriteHitTest:{ var x:Float; var y:Float; } = { x: 0.0, y: 0.0 };
+  public static final bitmapAlphaLocalPoint__registerSpriteHitTest:{ var x:Float; var y:Float; } = (cast { x: 0.0, y: 0.0 });
 
   public static final bitmapCache__registerSpriteHitTest:flighthq._internal._WeakMap<Image, Bitmap> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

@@ -25,23 +25,23 @@ class WgpuToneMapEffect {
     operator_ = _Runtime.coalesce(_Runtime.field(effect, 'operator'), function():Dynamic return cast 'aces');
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 1.0);
     white = _Runtime.coalesce(_Runtime.field(effect, 'white'), function():Dynamic return cast 1.0);
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'toneMap.' + Std.string(operator_) + '' : String), (cast (cast WgpuToneMapEffect.buildToneMapFragment__wgpuToneMapEffect((cast operator_ : String)) : String) : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'toneMap.' + Std.string(operator_) + '' : String), (cast (cast WgpuToneMapEffect.buildToneMapFragment__wgpuToneMapEffect((cast operator_ : String)) : String) : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, exposure);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, white);
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
-  public static final defaultWgpuToneMapEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyToneMapEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : ToneMapEffect) : ToneMapEffect));
-  };
+  public static final defaultWgpuToneMapEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyToneMapEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : ToneMapEffect)));
+  });
 
   public static function registerWgpuToneMapEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'ToneMapEffect' : String), (cast defaultWgpuToneMapEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'ToneMapEffect' : String), (cast defaultWgpuToneMapEffectRunner));
   }
 
   public static function buildToneMapFragment__wgpuToneMapEffect(operator_:String):String {
-    return cast ((WgpuToneMapEffect.TONEMAP_FRAGMENT_HEAD__wgpuToneMapEffect + _Runtime.coalesce(_Runtime.getIndex(WgpuToneMapEffect.TONEMAP_OPERATORS__wgpuToneMapEffect, operator_), function():Dynamic return cast WgpuToneMapEffect.TONEMAP_OPERATORS__wgpuToneMapEffect.aces)) + WgpuToneMapEffect.TONEMAP_FRAGMENT_TAIL__wgpuToneMapEffect);
+    return cast ((WgpuToneMapEffect.TONEMAP_FRAGMENT_HEAD__wgpuToneMapEffect + _Runtime.coalesce(_Runtime.getIndex(WgpuToneMapEffect.TONEMAP_OPERATORS__wgpuToneMapEffect, operator_), function():Dynamic return cast (cast WgpuToneMapEffect.TONEMAP_OPERATORS__wgpuToneMapEffect : { var aces:String; }).aces)) + WgpuToneMapEffect.TONEMAP_FRAGMENT_TAIL__wgpuToneMapEffect);
     return cast null;
   }
 
@@ -49,5 +49,5 @@ class WgpuToneMapEffect {
 
   public static final TONEMAP_FRAGMENT_TAIL__wgpuToneMapEffect:String = '}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let mapped = tonemap(c.rgb * uni.u_exposure);\n  return vec4f(clamp(mapped, vec3f(0.0), vec3f(1.0)), c.a);\n}';
 
-  public static final TONEMAP_OPERATORS__wgpuToneMapEffect:flighthq._internal._Record<String, String> = { aces: '\n  let a = x * (2.51 * x + 0.03);\n  let b = x * (2.43 * x + 0.59) + 0.14;\n  return a / b;', reinhard: '\n  return x / (1.0 + x / (uni.u_white * uni.u_white));', filmic: '\n  let X = max(vec3f(0.0), x - 0.004);\n  return (X * (6.2 * X + 0.5)) / (X * (6.2 * X + 1.7) + 0.06);', uncharted2: '\n  let A = 0.15; let B = 0.50; let C = 0.10; let D = 0.20; let E = 0.02; let F = 0.30;\n  let v = ((x * (A * x + C * B) + D * E) / (x * (A * x + B) + D * F)) - E / F;\n  return v;', agx: '\n  let v = clamp((x - 0.004) / (1.0 + x), vec3f(0.0), vec3f(1.0));\n  return pow(v, vec3f(0.8));' };
+  public static final TONEMAP_OPERATORS__wgpuToneMapEffect:flighthq._internal._Record<String, String> = (cast { aces: '\n  let a = x * (2.51 * x + 0.03);\n  let b = x * (2.43 * x + 0.59) + 0.14;\n  return a / b;', reinhard: '\n  return x / (1.0 + x / (uni.u_white * uni.u_white));', filmic: '\n  let X = max(vec3f(0.0), x - 0.004);\n  return (X * (6.2 * X + 0.5)) / (X * (6.2 * X + 1.7) + 0.06);', uncharted2: '\n  let A = 0.15; let B = 0.50; let C = 0.10; let D = 0.20; let E = 0.02; let F = 0.30;\n  let v = ((x * (A * x + C * B) + D * E) / (x * (A * x + B) + D * F)) - E / F;\n  return v;', agx: '\n  let v = clamp((x - 0.004) / (1.0 + x), vec3f(0.0), vec3f(1.0));\n  return pow(v, vec3f(0.8));' });
 }

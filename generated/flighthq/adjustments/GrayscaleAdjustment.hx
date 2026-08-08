@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.GrayscaleAdjustment;
 
 class GrayscaleAdjustment {
-  public static function createGrayscaleAdjustment(?options:Dynamic):flighthq.types.GrayscaleAdjustment {
+  public static function createGrayscaleAdjustment(?options:flighthq._internal._Omit<flighthq.types.GrayscaleAdjustment, String>):flighthq.types.GrayscaleAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var intensity:Float = cast _Runtime.UNDEFINED;
     var k:Float = cast _Runtime.UNDEFINED;
@@ -21,7 +21,7 @@ class GrayscaleAdjustment {
     lr = (0.2126 * k);
     lg = (0.7152 * k);
     lb = (0.0722 * k);
-    colorMatrix = cast ([(j + lr), lg, lb, 0.0, 0.0, lr, (j + lg), lb, 0.0, 0.0, lr, lg, (j + lb), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
+    colorMatrix = (cast cast ([(j + lr), lg, lb, 0.0, 0.0, lr, (j + lg), lb, 0.0, 0.0, lr, lg, (j + lb), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
     return cast _Runtime.mergeObjects([{ kind: 'GrayscaleAdjustment' }, options, { colorMatrix: colorMatrix }]);
     return cast null;
   }

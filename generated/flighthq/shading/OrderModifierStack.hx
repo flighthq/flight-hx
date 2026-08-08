@@ -15,6 +15,7 @@ class OrderModifierStack {
       var rankDelta:Float = cast _Runtime.UNDEFINED;
       rankDelta = ((cast OrderModifierStack.getModifierSlotRank__orderModifierStack((cast (cast (cast a : { var index:Float; var modifier:Modifier; }).modifier : Modifier).slot : String)) : Float) - (cast OrderModifierStack.getModifierSlotRank__orderModifierStack((cast (cast (cast b : { var index:Float; var modifier:Modifier; }).modifier : Modifier).slot : String)) : Float));
       return cast ((cast !_Runtime.strictEquals(rankDelta, 0.0) : Bool) ? (cast rankDelta : Dynamic) : (cast ((cast a : { var index:Float; var modifier:Modifier; }).index - (cast b : { var index:Float; var modifier:Modifier; }).index) : Dynamic));
+      return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
     return cast _Runtime.callProperty(indexed, 'map', cast ([function(entry:{ var index:Float; var modifier:Modifier; }, __unused1:Float, __unused2:Array<{ var index:Float; var modifier:Modifier; }>):Modifier return (cast entry : { var index:Float; var modifier:Modifier; }).modifier] : Array<Dynamic>));
     return cast null;

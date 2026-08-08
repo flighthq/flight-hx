@@ -6,11 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
 class EaseBack {
-  public static final easeInBack:EasingFunction = function(t:Float):Float return ((t * t) * (((EaseBack.s__easeBack + 1.0) * t) - EaseBack.s__easeBack));
+  public static final easeInBack:EasingFunction = (cast function(t:Float):Float return ((t * t) * (((EaseBack.s__easeBack + 1.0) * t) - EaseBack.s__easeBack)));
 
-  public static final easeInOutBack:EasingFunction = function(t:Float):Float return ((cast ((cast (t = cast ((t * 2.0) : Dynamic)) : Float) < (cast 1.0 : Float)) : Bool) ? (cast (0.5 * ((t * t) * (((EaseBack.s2__easeBack + 1.0) * t) - EaseBack.s2__easeBack))) : Dynamic) : (cast (0.5 * ((_Runtime.multiplyNumbers((t = cast ((t - 2.0) : Dynamic)), t) * (((EaseBack.s2__easeBack + 1.0) * t) + EaseBack.s2__easeBack)) + 2.0)) : Dynamic));
+  public static final easeInOutBack:EasingFunction = (cast function(t:Float):Float return ((cast ((cast (t = cast ((t * 2.0) : Dynamic)) : Float) < (cast 1.0 : Float)) : Bool) ? (cast (0.5 * ((t * t) * (((EaseBack.s2__easeBack + 1.0) * t) - EaseBack.s2__easeBack))) : Dynamic) : (cast (0.5 * ((_Runtime.multiplyNumbers((t = cast ((t - 2.0) : Dynamic)), t) * (((EaseBack.s2__easeBack + 1.0) * t) + EaseBack.s2__easeBack)) + 2.0)) : Dynamic)));
 
-  public static final easeOutBack:EasingFunction = function(t:Float):Float return ((_Runtime.multiplyNumbers((t = cast ((t - 1.0) : Dynamic)), t) * (((EaseBack.s__easeBack + 1.0) * t) + EaseBack.s__easeBack)) + 1.0);
+  public static final easeOutBack:EasingFunction = (cast function(t:Float):Float return ((_Runtime.multiplyNumbers((t = cast ((t - 1.0) : Dynamic)), t) * (((EaseBack.s__easeBack + 1.0) * t) + EaseBack.s__easeBack)) + 1.0));
 
   public static final s__easeBack:Float = 1.70158;
 

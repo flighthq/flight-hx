@@ -14,6 +14,7 @@ import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureAtlasRegion.TextureAtlasRegionLike;
 import flighthq.types.TextureAtlasRegionTextureExplanation;
 import flighthq.types.Vector2.Vector2Like;
 
@@ -48,7 +49,7 @@ class Textureatlas {
     Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.clearTextureAtlasRegions(target);
   }
 
-  public static function createTextureAtlas(?obj:Dynamic):TextureAtlas {
+  public static function createTextureAtlas(?obj:flighthq._internal._Partial<TextureAtlas>):TextureAtlas {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlas.createTextureAtlas(obj);
     return cast null;
   }
@@ -78,7 +79,7 @@ class Textureatlas {
     return cast null;
   }
 
-  public static function createTextureAtlasRegion(?obj:Dynamic):TextureAtlasRegion {
+  public static function createTextureAtlasRegion(?obj:flighthq._internal._Partial<TextureAtlasRegionLike>):TextureAtlasRegion {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.createTextureAtlasRegion(obj);
     return cast null;
   }
@@ -185,7 +186,7 @@ class Textureatlas {
     return cast null;
   }
 
-  public static function setTextureAtlasRegion(out:TextureAtlasRegion, source:Dynamic):Void {
+  public static function setTextureAtlasRegion(out:TextureAtlasRegion, source:flighthq._internal._Partial<TextureAtlasRegionLike>):Void {
     Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.setTextureAtlasRegion(out, source);
   }
 }

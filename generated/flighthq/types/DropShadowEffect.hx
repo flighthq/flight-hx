@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef DropShadowEffect = { var kind:Kind; @:optional var alpha:Float; @:optional var angle:Float; @:optional var blurX:Float; @:optional var blurY:Float; @:optional var color:Float; @:optional var distance:Float; @:optional var quality:Float; @:optional var sourceMode:EffectSourceMode; @:optional var strength:Float; };
+typedef DropShadowEffect = { var kind:String; @:optional var alpha:Float; @:optional var angle:Float; @:optional var blurX:Float; @:optional var blurY:Float; @:optional var color:Float; @:optional var distance:Float; @:optional var quality:Float; @:optional var sourceMode:EffectSourceMode; @:optional var strength:Float; };

@@ -40,12 +40,12 @@ class GetPathSegmentAtParameter {
   }
 
   public static function getPathSegmentPointAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
-    return cast (cast GetPathSegmentAtParameter.walkPathSegment__getPathSegmentAtParameter((cast path : Path), (cast segmentIndex : Float), (cast t : Float), (cast out : Vector2Like), (cast false : Bool)) : Bool);
+    return cast (cast GetPathSegmentAtParameter.walkPathSegment__getPathSegmentAtParameter((cast path), (cast segmentIndex : Float), (cast t : Float), (cast out), (cast false : Bool)) : Bool);
     return cast null;
   }
 
   public static function getPathSegmentTangentAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
-    return cast (cast GetPathSegmentAtParameter.walkPathSegment__getPathSegmentAtParameter((cast path : Path), (cast segmentIndex : Float), (cast t : Float), (cast out : Vector2Like), (cast true : Bool)) : Bool);
+    return cast (cast GetPathSegmentAtParameter.walkPathSegment__getPathSegmentAtParameter((cast path), (cast segmentIndex : Float), (cast t : Float), (cast out), (cast true : Bool)) : Bool);
     return cast null;
   }
 
@@ -134,9 +134,9 @@ class GetPathSegmentAtParameter {
           (di = cast ((di + 4.0) : Dynamic));
           if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
             if ((cast wantTangent : Bool)) {
-              (cast getQuadraticBezierTangent((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), (cast out : Vector2Like)) : Vector2Like);
+              (cast getQuadraticBezierTangent((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), (cast out)) : Vector2Like);
             } else {
-              (cast getQuadraticBezierPoint((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), (cast out : Vector2Like)) : Vector2Like);
+              (cast getQuadraticBezierPoint((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), (cast out)) : Vector2Like);
             }
             return cast true;
           }
@@ -153,9 +153,9 @@ class GetPathSegmentAtParameter {
           (di = cast ((di + 6.0) : Dynamic));
           if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
             if ((cast wantTangent : Bool)) {
-              (cast getCubicBezierTangent((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), (cast out : Vector2Like)) : Vector2Like);
+              (cast getCubicBezierTangent((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), (cast out)) : Vector2Like);
             } else {
-              (cast getCubicBezierPoint((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), (cast out : Vector2Like)) : Vector2Like);
+              (cast getCubicBezierPoint((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), (cast out)) : Vector2Like);
             }
             return cast true;
           }

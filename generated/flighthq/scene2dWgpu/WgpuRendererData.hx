@@ -7,13 +7,13 @@ import flighthq.types.RendererData;
 
 class WgpuRendererData {
   @:noCompletion
-  public static function createWgpuRendererData<T>(data:T):RendererData {
+  public static function createWgpuRendererData<T:flighthq._internal._Object>(data:T):RendererData {
     return cast (cast (cast data : flighthq._internal._Any) : RendererData);
     return cast null;
   }
 
   @:noCompletion
-  public static function getWgpuRendererData<T>(data:Null<RendererData>):Null<T> {
+  public static function getWgpuRendererData<T:flighthq._internal._Object>(data:Null<RendererData>):Null<T> {
     return cast (cast (cast data : flighthq._internal._Any) : Null<T>);
     return cast null;
   }

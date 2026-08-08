@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
 class EaseQuintic {
-  public static final easeInOutQuintic:EasingFunction = function(t:Float):Float return ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool) ? (cast (((((16.0 * t) * t) * t) * t) * t) : Dynamic) : (cast (1.0 - _Runtime.divideNumbers(HxMath.pow(((-2.0 * t) + 2.0), 5.0), 2.0)) : Dynamic));
+  public static final easeInOutQuintic:EasingFunction = (cast function(t:Float):Float return ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool) ? (cast (((((16.0 * t) * t) * t) * t) * t) : Dynamic) : (cast (1.0 - _Runtime.divideNumbers(HxMath.pow(((-2.0 * t) + 2.0), 5.0), 2.0)) : Dynamic)));
 
-  public static final easeInQuintic:EasingFunction = function(t:Float):Float return ((((t * t) * t) * t) * t);
+  public static final easeInQuintic:EasingFunction = (cast function(t:Float):Float return ((((t * t) * t) * t) * t));
 
-  public static final easeOutQuintic:EasingFunction = function(t:Float):Float return _Runtime.subtractNumbers(1.0, HxMath.pow((1.0 - t), 5.0));
+  public static final easeOutQuintic:EasingFunction = (cast function(t:Float):Float return _Runtime.subtractNumbers(1.0, HxMath.pow((1.0 - t), 5.0)));
 }

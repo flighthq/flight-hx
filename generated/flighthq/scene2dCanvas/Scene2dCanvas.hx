@@ -32,6 +32,7 @@ import flighthq.scene2dCanvas.CanvasTextureResolver as Facade_Scene2dCanvas_flig
 import flighthq.scene2dCanvas.CanvasTilemap as Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasTilemap;
 import flighthq.scene2dCanvas.EnableCanvasTextureResolverGuards as Facade_Scene2dCanvas_flighthq_scene2dCanvas_EnableCanvasTextureResolverGuards;
 import flighthq.scene2dCanvas.ExplainCanvasTextureResolution as Facade_Scene2dCanvas_flighthq_scene2dCanvas_ExplainCanvasTextureResolution;
+import flighthq.types.CanvasRenderOptions;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTexture.CanvasRenderTextureExplanation;
 import flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool;
@@ -86,7 +87,7 @@ class Scene2dCanvas {
     return cast null;
   }
 
-  public static function createCanvasRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:Dynamic):CanvasRenderState {
+  public static function createCanvasRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:flighthq._internal._Partial<CanvasRenderOptions>):CanvasRenderState {
     return cast Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasRenderState.createCanvasRenderState(canvas, options);
     return cast null;
   }
@@ -222,7 +223,7 @@ class Scene2dCanvas {
     Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasRenderTextureResolver.registerCanvasRenderTextureResolver(resolvers, state);
   }
 
-  public static function registerCanvasShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<Dynamic>>):Void {
+  public static function registerCanvasShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<String>>):Void {
     Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasShapeRegistry.registerCanvasShapeCommands(state, commands);
   }
 

@@ -16,20 +16,20 @@ import flighthq.types.Scene3DLights.Scene3DLightsLike;
 class PresentGlScene3D {
   @:noCompletion
   public static function presentGlScene3D(state:GlRenderState, target:GlRenderTarget, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike):Void {
-    beginGlRenderPass((cast state : GlRenderState), (cast target : GlRenderTarget), _Runtime.field(_Runtime, 'UNDEFINED'), _Runtime.field(_Runtime, 'UNDEFINED'));
+    beginGlRenderPass((cast state), (cast target), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     try {
       try {
-        drawGlScene3D((cast state : GlRenderState), (cast scene : Node3D), (cast camera : Camera3D), (cast lights : Scene3DLightsLike), _Runtime.field(_Runtime, 'UNDEFINED'));
+        drawGlScene3D((cast state), (cast scene), (cast camera), (cast lights), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError0:Dynamic) {
       {
-        endGlRenderPass((cast state : GlRenderState));
+        endGlRenderPass((cast state));
       }
       _Runtime.throwValue(__finallyError0);
     }
     {
-      endGlRenderPass((cast state : GlRenderState));
+      endGlRenderPass((cast state));
     }
-    presentGlRenderTarget((cast state : GlRenderState), (cast target : GlRenderTarget), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<GlRenderTarget>));
+    presentGlRenderTarget((cast state), (cast target), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
   }
 }

@@ -6,15 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.render.RenderRegistryGuards.areRenderRegistryGuardsEnabled;
 import flighthq.render.RenderRegistryGuards.enableRenderRegistryGuards;
 import flighthq.types.GlRenderState;
+import flighthq.types.RenderState;
 
 class EnableGlTextureResolverGuards {
   @:noCompletion
   public static function areGlTextureResolverGuardsEnabled(state:GlRenderState):Bool {
-    return cast (cast areRenderRegistryGuardsEnabled(state) : Bool);
+    return cast (cast areRenderRegistryGuardsEnabled((cast state)) : Bool);
     return cast null;
   }
 
   public static function enableGlTextureResolverGuards(state:GlRenderState):Void {
-    enableRenderRegistryGuards(state);
+    enableRenderRegistryGuards((cast state));
   }
 }

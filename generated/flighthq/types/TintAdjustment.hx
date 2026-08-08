@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef TintAdjustment = { var kind:AdjustmentKind; var colorMatrix:Array<Float>; };
+typedef TintAdjustment = { var kind:String; var colorMatrix:Array<Float>; };

@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef OutlineEffect = { var kind:Kind; @:optional var threshold:Float; @:optional var thickness:Float; @:optional var color:Float; };
+typedef OutlineEffect = { var kind:String; @:optional var threshold:Float; @:optional var thickness:Float; @:optional var color:Float; };

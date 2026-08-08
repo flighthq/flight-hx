@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintKind;
 
-typedef Skeleton2DIkConstraint = { var kind:Skeleton2DConstraintKind; var mix:Float; var bendPositive:Bool; var boneIndices:Array<Float>; var compress:Bool; var stretch:Bool; var targetBoneIndex:Float; };
+typedef Skeleton2DIkConstraint = { var kind:String; var mix:Float; var bendPositive:Bool; var boneIndices:Array<Float>; var compress:Bool; var stretch:Bool; var targetBoneIndex:Float; };

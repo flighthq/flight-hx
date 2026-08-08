@@ -32,9 +32,9 @@ class TauriMenu {
         return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
           var built:Array<TauriMenuItemHandle> = cast _Runtime.UNDEFINED;
           var menu:flighthq.types.TauriApi.TauriMenu = cast _Runtime.UNDEFINED;
-          return flighthq._internal._Async.flatMap((cast TauriMenu.buildItems__tauriMenu(menuModule, (cast items : Array<MenuItemTemplate>), (cast function(id:String):Null<Void> return _Runtime.callOptionalValue(selectListener, cast ([id] : Array<Dynamic>)) : String->Void)) : flighthq._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue3:Dynamic):Dynamic {
+          return flighthq._internal._Async.flatMap((cast TauriMenu.buildItems__tauriMenu((cast menuModule), (cast items), (cast function(id:String):Void { _Runtime.callOptionalValue(selectListener, cast ([id] : Array<Dynamic>)); })) : flighthq._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue3:Dynamic):Dynamic {
             built = __awaitValue3;
-            return flighthq._internal._Async.flatMap((cast (cast menuModule : TauriMenuModule).Menu : TauriMenuFactory).new_({ items: built }), function(__awaitValue4:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast (cast menuModule : TauriMenuModule).Menu : TauriMenuFactory).new_((cast { items: built })), function(__awaitValue4:Dynamic):Dynamic {
               menu = __awaitValue4;
               return flighthq._internal._Async.flatMap((cast menu : flighthq.types.TauriApi.TauriMenu).setAsAppMenu(), function(__awaitValue5:Dynamic):Dynamic {
                 __awaitValue5;
@@ -43,34 +43,37 @@ class TauriMenu {
             });
           });
         }));
-      }, cast ([] : Array<Dynamic>)), function():Void {
+      }, cast ([] : Array<Dynamic>)), function(__unused0:flighthq._internal._Any):Void {
 
       }));
       return cast true;
+      return cast _Runtime.UNDEFINED;
     }, popupContextMenu: function(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
-      return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused0:flighthq._internal._Any):Void {
+      return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused1:flighthq._internal._Any):Void {
         _Runtime.voidValue(flighthq._internal._Async.recover(_Runtime.callValue(function():flighthq._internal._Promise<flighthq._internal._Nothing> {
           return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
             var built:Array<TauriMenuItemHandle> = cast _Runtime.UNDEFINED;
             var menu:flighthq.types.TauriApi.TauriMenu = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap((cast TauriMenu.buildItems__tauriMenu(menuModule, (cast items : Array<MenuItemTemplate>), (cast function(id:String):Void return resolve((cast id : Null<flighthq._internal._Any>)) : String->Void)) : flighthq._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue9:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast TauriMenu.buildItems__tauriMenu((cast menuModule), (cast items), (cast function(id:String):Void { resolve((cast id)); })) : flighthq._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue9:Dynamic):Dynamic {
               built = __awaitValue9;
-              return flighthq._internal._Async.flatMap((cast (cast menuModule : TauriMenuModule).Menu : TauriMenuFactory).new_({ items: built }), function(__awaitValue10:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap((cast (cast menuModule : TauriMenuModule).Menu : TauriMenuFactory).new_((cast { items: built })), function(__awaitValue10:Dynamic):Dynamic {
                 menu = __awaitValue10;
-                return flighthq._internal._Async.flatMap((cast menu : flighthq.types.TauriApi.TauriMenu).popup(_Runtime.construct((cast (cast tauri : TauriApi).window : TauriWindowModule).LogicalPosition, [x, y])), function(__awaitValue11:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast menu : flighthq.types.TauriApi.TauriMenu).popup((cast _Runtime.construct((cast (cast tauri : TauriApi).window : TauriWindowModule).LogicalPosition, [x, y]))), function(__awaitValue11:Dynamic):Dynamic {
                   __awaitValue11;
                   return flighthq._internal._Async.resolve(_Runtime.UNDEFINED);
                 });
               });
             });
           }));
-        }, cast ([] : Array<Dynamic>)), function():Void return resolve((cast null : Null<flighthq._internal._Any>))));
+        }, cast ([] : Array<Dynamic>)), function(__unused2:flighthq._internal._Any):Void { resolve((cast null)); }));
       });
+      return cast _Runtime.UNDEFINED;
     }, subscribeSelect: function(listener:String->Void):Void->Void {
       (selectListener = cast (listener : Dynamic));
       return cast function():Void {
         if ((cast _Runtime.strictEquals(selectListener, listener) : Bool)) { (selectListener = cast (null : Dynamic)); }
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
@@ -85,7 +88,7 @@ class TauriMenu {
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
           if (__flowIndex15 >= __flowIterator14.length) return flighthq._internal._Async.flowBreak();
           var item:Dynamic = __flowIterator14[__flowIndex15++];
-          return flighthq._internal._Async.flatMap(TauriMenu.buildItem__tauriMenu(menuModule, (cast item : MenuItemTemplate), (cast onSelect : String->Void)), function(__awaitValue16:Dynamic):Dynamic {
+          return flighthq._internal._Async.flatMap((cast TauriMenu.buildItem__tauriMenu((cast menuModule), (cast item), (cast onSelect)) : flighthq._internal._Promise<TauriMenuItemHandle>), function(__awaitValue16:Dynamic):Dynamic {
             _Runtime.callProperty(built, 'push', cast ([__awaitValue16] : Array<Dynamic>));
             return flighthq._internal._Async.flowNormal();
           });
@@ -103,7 +106,7 @@ class TauriMenu {
         var __flowBranch17:Dynamic;
         if ((cast _Runtime.strictEquals(item.type, 'separator') : Bool)) {
           __flowBranch17 = flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flowReturn((cast (cast menuModule : TauriMenuModule).PredefinedMenuItem : TauriPredefinedMenuItemFactory).new_({ item: 'Separator' }));
+            return flighthq._internal._Async.flowReturn((cast (cast menuModule : { var PredefinedMenuItem:TauriPredefinedMenuItemFactory; }).PredefinedMenuItem : TauriPredefinedMenuItemFactory).new_((cast { item: 'Separator' })));
           });
         } else {
           __flowBranch17 = flighthq._internal._Async.flowNormal();
@@ -113,9 +116,9 @@ class TauriMenu {
           if (_Runtime.truthy(item.submenu)) {
             __flowBranch18 = flighthq._internal._Async.protect(function():Dynamic {
               var children:Array<TauriMenuItemHandle> = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap((cast TauriMenu.buildItems__tauriMenu(menuModule, (cast item.submenu : Array<MenuItemTemplate>), (cast onSelect : String->Void)) : flighthq._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue19:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap((cast TauriMenu.buildItems__tauriMenu((cast menuModule), (cast item.submenu), (cast onSelect)) : flighthq._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue19:Dynamic):Dynamic {
                 children = __awaitValue19;
-                return flighthq._internal._Async.flowReturn((cast (cast menuModule : TauriMenuModule).Submenu : TauriSubmenuFactory).new_({ text: item.label, enabled: item.enabled, items: children }));
+                return flighthq._internal._Async.flowReturn((cast (cast menuModule : { var Submenu:TauriSubmenuFactory; }).Submenu : TauriSubmenuFactory).new_((cast { text: item.label, enabled: item.enabled, items: children })));
               });
             });
           } else {
@@ -123,7 +126,7 @@ class TauriMenu {
           }
           return flighthq._internal._Async.continueFlow(__flowBranch18, function():Dynamic {
             id = item.id;
-            return flighthq._internal._Async.flowReturn((cast (cast menuModule : TauriMenuModule).MenuItem : TauriMenuItemFactory).new_({ id: id, text: item.label, enabled: item.enabled, accelerator: item.accelerator, action: ((cast !_Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast function():Void return onSelect((cast id : String)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) }));
+            return flighthq._internal._Async.flowReturn((cast (cast menuModule : { var MenuItem:TauriMenuItemFactory; }).MenuItem : TauriMenuItemFactory).new_((cast { id: id, text: item.label, enabled: item.enabled, accelerator: item.accelerator, action: ((cast !_Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast function(__unused3:String):Void { onSelect((cast id : String)); } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) })));
           });
         });
       })

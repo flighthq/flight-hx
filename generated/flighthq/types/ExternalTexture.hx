@@ -6,4 +6,4 @@ import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types._internal._TextureSourceKindValues.ExternalTextureSourceKind;
 
-typedef ExternalTexture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:TextureSourceKind; var version:Float; var width:Float; };
+typedef ExternalTexture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:Dynamic; var version:Float; var width:Float; };

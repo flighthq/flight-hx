@@ -11,11 +11,11 @@ import flighthq.types.ImageDecoder;
 class RegisterWebImageDecoders {
   public static function registerWebImageDecoders():Void {
     for (mimeType in _Runtime.iterable(RegisterWebImageDecoders.webDecodableMimeTypes__registerWebImageDecoders)) {
-      registerImageDecoder((cast mimeType : String), (cast RegisterWebImageDecoders.decodeImageWithCanvas__registerWebImageDecoders : ImageDecoder));
+      registerImageDecoder((cast mimeType : String), (cast RegisterWebImageDecoders.decodeImageWithCanvas__registerWebImageDecoders));
     }
   }
 
-  public static final decodeImageWithCanvas__registerWebImageDecoders:ImageDecoder = function(bytes:flighthq._internal._UInt8Array, ?options:ImageDecodeOptions):flighthq._internal._Promise<DecodedImage> {
+  public static final decodeImageWithCanvas__registerWebImageDecoders:ImageDecoder = (cast function(bytes:flighthq._internal._UInt8Array, ?options:ImageDecodeOptions):flighthq._internal._Promise<DecodedImage> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var bitmap:flighthq._internal.dom.ImageBitmap = cast _Runtime.UNDEFINED;
@@ -33,22 +33,22 @@ class RegisterWebImageDecoders {
           (cast context : flighthq._internal.dom.OffscreenCanvasRenderingContext2D).drawImage(bitmap, 0.0, 0.0);
           (cast bitmap : flighthq._internal.dom.ImageBitmap).close();
           data = (cast (cast context : flighthq._internal.dom.OffscreenCanvasRenderingContext2D).getImageData(0.0, 0.0, width, height) : flighthq._internal.dom.ImageData).data;
-          var __flowBranch3:Dynamic;
-          if ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'premultiplyAlpha'), true) : Bool)) {
-            __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
-              RegisterWebImageDecoders.premultiplyRgbaInPlace__registerWebImageDecoders((cast data : flighthq._internal._UInt8ClampedArray));
+          var __flowBranch4:Dynamic;
+          if ((cast _Runtime.strictEquals(({ final __structural3 = options; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var premultiplyAlpha:Null<Bool>; }).premultiplyAlpha; }), true) : Bool)) {
+            __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
+              RegisterWebImageDecoders.premultiplyRgbaInPlace__registerWebImageDecoders((cast data));
               return flighthq._internal._Async.flowNormal();
             });
           } else {
-            __flowBranch3 = flighthq._internal._Async.flowNormal();
+            __flowBranch4 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
             return flighthq._internal._Async.flowReturn({ data: data, width: width, height: height });
           });
         });
       })
     );
-  };
+  });
 
   public static function premultiplyRgbaInPlace__registerWebImageDecoders(data:flighthq._internal._UInt8ClampedArray):Void {
     {
@@ -64,5 +64,5 @@ class RegisterWebImageDecoders {
     }
   }
 
-  public static final webDecodableMimeTypes__registerWebImageDecoders:Array<String> = cast (['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif', 'image/bmp'] : Array<Dynamic>);
+  public static final webDecodableMimeTypes__registerWebImageDecoders:Array<String> = (cast cast (['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif', 'image/bmp'] : Array<Dynamic>));
 }

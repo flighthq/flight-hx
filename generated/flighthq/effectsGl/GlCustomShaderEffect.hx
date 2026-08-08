@@ -21,18 +21,18 @@ class GlCustomShaderEffect {
     var fragmentSource:Null<String> = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     var uniforms:Null<flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>>> = cast _Runtime.UNDEFINED;
-    fragmentSource = (cast getGlCustomShaderSource((cast state : GlRenderState), (cast _Runtime.field(effect, 'shaderKey') : String)) : Null<String>);
+    fragmentSource = (cast getGlCustomShaderSource((cast state), (cast _Runtime.field(effect, 'shaderKey') : String)) : Null<String>);
     if ((cast _Runtime.strictEquals(fragmentSource, null) : Bool)) {
-      var passthrough:GlFullscreenProgram = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'custom.passthrough' : String), (cast GlCustomShaderEffect.PASSTHROUGH_FRAGMENT_SRC__glCustomShaderEffect : String)) : GlFullscreenProgram);
-      drawGlFullscreenPass((cast state : GlRenderState), passthrough, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(__unused0:flighthq._internal.dom.WebGL2RenderingContext, __unused1:Dynamic):Void return GlCustomShaderEffect.NO_UNIFORMS__glCustomShaderEffect());
+      var passthrough:GlFullscreenProgram = (cast getGlEffectProgram((cast state), (cast 'custom.passthrough' : String), (cast GlCustomShaderEffect.PASSTHROUGH_FRAGMENT_SRC__glCustomShaderEffect : String)) : GlFullscreenProgram);
+      drawGlFullscreenPass((cast state), (cast passthrough), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(__unused0:flighthq._internal.dom.WebGL2RenderingContext, __unused1:GlFullscreenProgram):Void { GlCustomShaderEffect.NO_UNIFORMS__glCustomShaderEffect(); }));
       return;
     }
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast ('custom.' + _Runtime.field(effect, 'shaderKey')) : String), (cast fragmentSource : String)) : GlFullscreenProgram);
+    program = (cast getGlEffectProgram((cast state), (cast ('custom.' + _Runtime.field(effect, 'shaderKey')) : String), (cast fragmentSource : String)) : GlFullscreenProgram);
     uniforms = _Runtime.field(effect, 'uniforms');
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       if ((cast _Runtime.strictEquals(uniforms, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       for (name in _Runtime.iterable(flighthq._internal.DynamicObject.keys(uniforms))) {
-        var location:Null<flighthq._internal.dom.WebGLUniformLocation> = (cast getGlEffectUniformLocation((cast state : GlRenderState), p, (cast name : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>);
+        var location:Null<flighthq._internal.dom.WebGLUniformLocation> = (cast getGlEffectUniformLocation((cast state), (cast p), (cast name : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>);
         if ((cast _Runtime.strictEquals(location, null) : Bool)) { continue; }
         var value:flighthq._internal._Union2<Float, Array<Float>> = _Runtime.getIndex(uniforms, name);
         if ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool)) {
@@ -58,12 +58,12 @@ class GlCustomShaderEffect {
           }
         }
       }
-    });
+    }));
   }
 
-  public static final defaultGlCustomShaderEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyCustomShaderEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : CustomShaderEffect) : CustomShaderEffect));
-  };
+  public static final defaultGlCustomShaderEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyCustomShaderEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : CustomShaderEffect)));
+  });
 
   @:noCompletion
   public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
@@ -72,7 +72,7 @@ class GlCustomShaderEffect {
   }
 
   public static function registerGlCustomShaderEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'CustomShaderEffect' : String), (cast defaultGlCustomShaderEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'CustomShaderEffect' : String), (cast defaultGlCustomShaderEffectRunner));
   }
 
   @:noCompletion
@@ -81,14 +81,14 @@ class GlCustomShaderEffect {
     registry = ((cast GlCustomShaderEffect._customShaders__glCustomShaderEffect : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, String>>).get(state));
     if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (registry = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast GlCustomShaderEffect._customShaders__glCustomShaderEffect : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, String>>).set(state, registry));
+      ((cast GlCustomShaderEffect._customShaders__glCustomShaderEffect : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, String>>).set(state, (cast registry)));
     }
-    ((cast registry : flighthq._internal._Map<String, String>).set(shaderKey, fragmentSource));
+    ((cast registry : flighthq._internal._Map<String, String>).set(shaderKey, (cast fragmentSource)));
   }
 
-  public static final NO_UNIFORMS__glCustomShaderEffect:Void->Void = function():Void {
+  public static final NO_UNIFORMS__glCustomShaderEffect:Void->Void = (cast function():Void {
 
-  };
+  });
 
   public static final PASSTHROUGH_FRAGMENT_SRC__glCustomShaderEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 o_color;\nvoid main() {\n  o_color = texture(u_texture0, v_texCoord);\n}';
 

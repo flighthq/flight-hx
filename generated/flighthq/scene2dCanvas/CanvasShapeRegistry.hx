@@ -11,23 +11,23 @@ import flighthq.types.ShapeCommand.ShapeCommandKey;
 
 class CanvasShapeRegistry {
   @:noCompletion
-  public static function getCanvasShapeCommand(state:RenderState, key:String):Null<CanvasShapeCommand<Dynamic>> {
-    return cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime) : RenderStateRuntime).canvasShapeCommandRegistry; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, CanvasShapeCommand<String>>).get(key)); }), function():Dynamic return cast null);
+  public static function getCanvasShapeCommand(state:RenderState, key:String):Null<CanvasShapeCommand<String>> {
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).canvasShapeCommandRegistry; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, CanvasShapeCommand<String>>).get(key)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
-  public static function registerCanvasShapeCommand<K>(state:RenderState, command:CanvasShapeCommand<K>):Void {
+  public static function registerCanvasShapeCommand<K:ShapeCommandKey>(state:RenderState, command:CanvasShapeCommand<K>):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var registry:flighthq._internal._Map<String, CanvasShapeCommand<String>> = cast _Runtime.UNDEFINED;
-    runtime = (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime((cast state)) : RenderStateRuntime);
     registry = ((cast runtime : RenderStateRuntime).canvasShapeCommandRegistry ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
-    ((cast registry : flighthq._internal._Map<String, CanvasShapeCommand<String>>).set((cast command : CanvasShapeCommand<K>).key, command));
+    ((cast registry : flighthq._internal._Map<String, CanvasShapeCommand<String>>).set((cast command : CanvasShapeCommand<K>).key, (cast command)));
   }
 
-  public static function registerCanvasShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<Dynamic>>):Void {
+  public static function registerCanvasShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<String>>):Void {
     for (command in _Runtime.iterable(commands)) {
-      registerCanvasShapeCommand((cast state : RenderState), (cast command : CanvasShapeCommand<String>));
+      (cast registerCanvasShapeCommand : RenderState->CanvasShapeCommand<String>->Void)((cast state), (cast command));
     }
   }
 }

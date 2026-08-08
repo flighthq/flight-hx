@@ -39,8 +39,10 @@ import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelData;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextLayout.TextLayoutGroup;
+import flighthq.types.TextLayout.TextLayoutParams;
 import flighthq.types.TextLayout.TextLayoutResult;
 import flighthq.types.TextVerticalAlign;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.TextureSource;
 
 typedef GlTextLabelData__glTextLabel = { var canvas:flighthq._internal.dom.HTMLCanvasElement; var ctx:flighthq._internal.dom.CanvasRenderingContext2D; var image:Image; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; };
@@ -63,7 +65,7 @@ class GlTextLabel {
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);
     ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
-    return cast (cast GlTextLabel.toGlTextLabelRendererData__glTextLabel({ canvas: canvas, ctx: ctx, image: (cast createImageResource((cast canvas : flighthq._internal._Any)) : Image), lastContentId: -1.0, lastPixelRatio: 0.0, logW: 0.0, logH: 0.0 }) : RendererData);
+    return cast (cast GlTextLabel.toGlTextLabelRendererData__glTextLabel((cast { canvas: canvas, ctx: ctx, image: (cast createImageResource((cast canvas : flighthq._internal._Any)) : Image), lastContentId: -1.0, lastPixelRatio: 0.0, logW: 0.0, logH: 0.0 })) : RendererData);
     return cast null;
   }
 
@@ -72,8 +74,8 @@ class GlTextLabel {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var image:Image = cast _Runtime.UNDEFINED;
     var entry:Null<{ var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
-    __destructure0 = (cast GlTextLabel.getGlTextLabelData__glTextLabel((cast data : RendererData)) : GlTextLabelData__glTextLabel);
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
+    __destructure0 = (cast GlTextLabel.getGlTextLabelData__glTextLabel((cast data)) : GlTextLabelData__glTextLabel);
     image = _Runtime.field(__destructure0, 'image');
     entry = ((cast (cast runtime : GlRenderStateRuntime).textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).get(image));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -102,7 +104,7 @@ class GlTextLabel {
     var base:Float = cast _Runtime.UNDEFINED;
     var d:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var t:Matrix = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     source = (cast (cast renderProxy : RenderProxy2D).source : TextLabel);
     __destructure1 = (cast source : TextLabel).data;
     text = _Runtime.field(__destructure1, 'text');
@@ -112,19 +114,20 @@ class GlTextLabel {
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) { return; }
     material = (cast renderProxy : RenderProxy2D).material;
-    materialRenderer = (cast resolveGlMaterialRenderer((cast state : GlRenderState), material) : Null<GlMaterialRenderer>);
+    materialRenderer = (cast resolveGlMaterialRenderer((cast state), (cast material)) : Null<GlMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
-    textData = (cast GlTextLabel.getGlTextLabelData__glTextLabel((cast (cast renderProxy : RenderProxy2D).rendererData : RendererData)) : GlTextLabelData__glTextLabel);
+    textData = (cast GlTextLabel.getGlTextLabelData__glTextLabel((cast (cast renderProxy : RenderProxy2D).rendererData)) : GlTextLabelData__glTextLabel);
     pixelRatio = (cast state : GlRenderState).pixelRatio;
-    version = (cast getNodeLocalContentRevision(source) : Float);
+    version = (cast getNodeLocalContentRevision((cast source)) : Float);
     if ((cast ((cast !_Runtime.strictEquals(version, (cast textData : GlTextLabelData__glTextLabel).lastContentId) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, (cast textData : GlTextLabelData__glTextLabel).lastPixelRatio) : Bool)) : Bool)) {
       var measure:String->TextFormat->Float = cast _Runtime.UNDEFINED;
       measure = (cast function(t:String, format:TextFormat):Float {
-        flighthq._internal.backend.Canvas2dBackend.setField((cast textData : GlTextLabelData__glTextLabel).ctx, 'font', (cast computeTextFormatFontString((cast format : TextFormat)) : String));
+        flighthq._internal.backend.Canvas2dBackend.setField((cast textData : GlTextLabelData__glTextLabel).ctx, 'font', (cast computeTextFormatFontString((cast format)) : String));
         return cast (cast flighthq._internal.backend.Canvas2dBackend.call((cast textData : GlTextLabelData__glTextLabel).ctx, 'measureText', cast ([t] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
-      } : String->TextFormat->Float);
-      var result:TextLayoutResult = (cast getTextLayoutResult((cast (cast (cast getTextLabelRuntime((cast source : TextLabel)) : TextLabelRuntime) : TextLabelRuntime) : TextLabelRuntime)) : TextLayoutResult);
-      computeTextLayout(result, { text: text, formatRanges: cast ([(cast createTextFormatRange((cast textFormat : TextFormat), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: fieldWidth, height: fieldHeight, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast (cast source : TextLabel).data : TextLabelData).autoSize, 'none') : Bool) ? (cast (cast (cast source : TextLabel).data : TextLabelData).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) });
+        return cast _Runtime.UNDEFINED;
+      });
+      var result:TextLayoutResult = (cast getTextLayoutResult((cast (cast getTextLabelRuntime((cast source)) : TextLabelRuntime))) : TextLayoutResult);
+      computeTextLayout((cast result), (cast { text: text, formatRanges: cast ([(cast createTextFormatRange((cast textFormat), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: fieldWidth, height: fieldHeight, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast (cast source : TextLabel).data : TextLabelData).autoSize, 'none') : Bool) ? (cast (cast (cast source : TextLabel).data : TextLabelData).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }));
       ((cast textData : GlTextLabelData__glTextLabel).lastContentId = version);
       ((cast textData : GlTextLabelData__glTextLabel).lastPixelRatio = pixelRatio);
       ((cast textData : GlTextLabelData__glTextLabel).logW = 0.0);
@@ -151,21 +154,21 @@ class GlTextLabel {
       flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'textBaseline', 'alphabetic');
       flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'textAlign', 'start');
       for (group in _Runtime.iterable((cast result : TextLayoutResult).groups)) {
-        flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString((cast (cast group : TextLayoutGroup).format : TextFormat)) : String));
-        flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', (cast computeRgbHexString((cast _Runtime.coalesce((cast (cast group : TextLayoutGroup).format : TextFormat).color, function():Dynamic return cast 0.0) : Float)) : flighthq._internal._Union2<flighthq._internal._Union2<String, flighthq._internal.dom.CanvasGradient>, flighthq._internal.dom.CanvasPattern>));
+        flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString((cast (cast group : TextLayoutGroup).format)) : String));
+        flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', (cast computeRgbHexString((cast _Runtime.coalesce((cast (cast group : TextLayoutGroup).format : TextFormat).color, function():Dynamic return cast 0.0) : Float)) : String));
         var slice:String = _Runtime.substring(text, (cast group : TextLayoutGroup).startIndex, (cast group : TextLayoutGroup).endIndex);
         flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillText', cast ([slice, (cast group : TextLayoutGroup).offsetX, ((cast group : TextLayoutGroup).offsetY + ((cast group : TextLayoutGroup).ascent * 0.815))] : Array<Dynamic>));
       }
-      invalidateImageResource((cast (cast textData : GlTextLabelData__glTextLabel).image : Image));
+      invalidateImageResource((cast (cast textData : GlTextLabelData__glTextLabel).image));
       ((cast textData : GlTextLabelData__glTextLabel).logW = w);
       ((cast textData : GlTextLabelData__glTextLabel).logH = h);
     }
     if ((cast ((cast ((cast (cast textData : GlTextLabelData__glTextLabel).logW : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast (cast textData : GlTextLabelData__glTextLabel).logH : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
-    (cast ensureGlQuadBatchShader((cast state : GlRenderState)) : GlQuadBatchShader);
-    texture = (cast bindGlImageResourceTexture((cast state : GlRenderState), (cast (cast textData : GlTextLabelData__glTextLabel).image : Image), null, (cast null : Null<Bool>), (cast true : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : flighthq._internal.dom.WebGLTexture);
+    (cast ensureGlQuadBatchShader((cast state)) : GlQuadBatchShader);
+    texture = (cast bindGlImageResourceTexture((cast state), (cast (cast textData : GlTextLabelData__glTextLabel).image), (cast null), (cast null), (cast true : Bool), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq._internal.dom.WebGLTexture);
     straightAlpha = (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha;
     startCount = (cast runtime : GlRenderStateRuntime).quadBatchWriterCount;
-    base = (cast prepareGlQuadBatchWrite((cast state : GlRenderState), (cast texture : flighthq._internal.dom.WebGLTexture), (cast straightAlpha : Bool), null, (cast (cast renderProxy : RenderProxy2D).blendMode : Null<String>), material, materialRenderer, (cast 1.0 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Float);
+    base = (cast prepareGlQuadBatchWrite((cast state), (cast texture), (cast straightAlpha : Bool), (cast null), (cast (cast renderProxy : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast 1.0 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Float);
     d = (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData;
     t = (cast renderProxy : RenderProxy2D).transform2D;
     flighthq._internal._StaticIndex.writeFloat32Array(d, base, t.a);
@@ -181,10 +184,10 @@ class GlTextLabel {
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 10.0), 1.0);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 11.0), 1.0);
     flighthq._internal._StaticIndex.writeFloat32Array(d, (base + 12.0), (cast renderProxy : RenderProxy2D).alpha);
-    packGlQuadBatchMaterialInstance((cast state : GlRenderState), (cast (cast renderProxy : RenderProxy2D).materialData : Null<flighthq._internal._Object>), (cast startCount : Float));
-    recordGlQuadBatchColorScaleBias((cast state : GlRenderState), _Runtime.coalesce((cast renderProxy : RenderProxy2D).colorMatrix, function():Dynamic return cast (cast renderProxy : RenderProxy2D).colorScaleBias), (cast startCount : Float));
+    packGlQuadBatchMaterialInstance((cast state), (cast (cast renderProxy : RenderProxy2D).materialData), (cast startCount : Float));
+    recordGlQuadBatchColorScaleBias((cast state), (cast _Runtime.coalesce((cast renderProxy : RenderProxy2D).colorMatrix, function():Dynamic return cast (cast renderProxy : RenderProxy2D).colorScaleBias)), (cast startCount : Float));
     (cast runtime : GlRenderStateRuntime).quadBatchWriterCount++;
   }
 
-  public static final defaultGlTextLabelRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: GlTextLabel.createGlTextLabelData__glTextLabel, destroyData: GlTextLabel.destroyGlTextLabelData__glTextLabel, submit: drawGlTextLabel };
+  public static final defaultGlTextLabelRenderer:Scene2DRenderer = (cast { format: BatchFormat.Quad, createData: GlTextLabel.createGlTextLabelData__glTextLabel, destroyData: GlTextLabel.destroyGlTextLabelData__glTextLabel, submit: drawGlTextLabel });
 }

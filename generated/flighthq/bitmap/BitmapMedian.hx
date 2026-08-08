@@ -22,9 +22,9 @@ class BitmapMedian {
     r = HxMath.max(0.0, HxMath.round(radius));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
-    bitmapWidth = _Runtime.field(source, 'bitmap').width;
-    bitmapHeight = _Runtime.field(source, 'bitmap').height;
-    data = _Runtime.field(source, 'bitmap').data;
+    bitmapWidth = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
+    bitmapHeight = (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height;
+    data = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     area = (((2.0 * r) + 1.0) * ((2.0 * r) + 1.0));
     if ((cast ((cast _Runtime.strictEquals(BitmapMedian._windowRed__bitmapMedian, null) : Bool) || (cast ((cast _Runtime.field(BitmapMedian._windowRed__bitmapMedian, 'length') : Float) < (cast area : Float)) : Bool)) : Bool)) {
       (BitmapMedian._windowRed__bitmapMedian = cast (new flighthq._internal._UInt8Array(area) : Dynamic));
@@ -65,10 +65,10 @@ class BitmapMedian {
             }
             var mid:Float = (_Runtime.toInt32(n) >> 1);
             var di:Float = (((py * w) + px) * 4.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (cast BitmapMedian.medianOf__bitmapMedian((cast rs : flighthq._internal._UInt8Array), (cast n : Float), (cast mid : Float)) : Float));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (cast BitmapMedian.medianOf__bitmapMedian((cast gs : flighthq._internal._UInt8Array), (cast n : Float), (cast mid : Float)) : Float));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (cast BitmapMedian.medianOf__bitmapMedian((cast bs : flighthq._internal._UInt8Array), (cast n : Float), (cast mid : Float)) : Float));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), (cast BitmapMedian.medianOf__bitmapMedian((cast as : flighthq._internal._UInt8Array), (cast n : Float), (cast mid : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (cast BitmapMedian.medianOf__bitmapMedian((cast rs), (cast n : Float), (cast mid : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (cast BitmapMedian.medianOf__bitmapMedian((cast gs), (cast n : Float), (cast mid : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (cast BitmapMedian.medianOf__bitmapMedian((cast bs), (cast n : Float), (cast mid : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), (cast BitmapMedian.medianOf__bitmapMedian((cast as), (cast n : Float), (cast mid : Float)) : Float));
             px++;
           }
         }

@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef BlurEffect = { var kind:Kind; @:optional var blurX:Float; @:optional var blurY:Float; };
+typedef BlurEffect = { var kind:String; @:optional var blurX:Float; @:optional var blurY:Float; };

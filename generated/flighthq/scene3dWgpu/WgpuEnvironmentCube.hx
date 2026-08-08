@@ -36,10 +36,10 @@ class WgpuEnvironmentCube {
     var format:flighthq._internal.dom.GPUTextureFormat = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.GPUTexture = cast _Runtime.UNDEFINED;
     var view:flighthq._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
-    scene = (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime);
+    scene = (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime);
     if ((cast !_Runtime.strictEquals((cast scene : WgpuScene3DRuntime).environmentSourceCubeView, null) : Bool)) { return cast (cast scene : WgpuScene3DRuntime).environmentSourceCubeView; }
     cube = _Runtime.field(environment, 'environment');
-    if ((cast ((cast ((cast _Runtime.strictEquals(cube, null) : Bool) || (cast !_Runtime.strictEquals((cast cube : { var dimension:String; }).dimension, 'cube') : Bool)) : Bool) || (cast !(cast (cast WgpuEnvironmentCube.hasWgpuCubeFacePixels__wgpuEnvironmentCube((cast cube : Texture)) : Bool) : Bool) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(cube, null) : Bool) || (cast !_Runtime.strictEquals((cast cube : { var dimension:String; }).dimension, 'cube') : Bool)) : Bool) || (cast !(cast (cast WgpuEnvironmentCube.hasWgpuCubeFacePixels__wgpuEnvironmentCube((cast cube)) : Bool) : Bool) : Bool)) : Bool)) { return cast null; }
     sources = (cast cube : { var sources:TextureSourceCubeFaces; }).sources;
     size = (cast flighthq._internal._StaticIndex.readArray(sources, 0.0) : TextureSource).width;
     device = (cast state : WgpuRenderState).device;
@@ -48,7 +48,7 @@ class WgpuEnvironmentCube {
     {
       var face:Float = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
-        WgpuEnvironmentCube.uploadWgpuEnvironmentImage__wgpuEnvironmentCube((cast device : flighthq._internal.dom.GPUDevice), (cast texture : flighthq._internal.dom.GPUTexture), (cast face : Float), (cast flighthq._internal._StaticIndex.readArray(sources, face) : TextureSource));
+        WgpuEnvironmentCube.uploadWgpuEnvironmentImage__wgpuEnvironmentCube((cast device), (cast texture), (cast face : Float), (cast flighthq._internal._StaticIndex.readArray(sources, face)));
         face++;
       }
     }
@@ -62,9 +62,9 @@ class WgpuEnvironmentCube {
   @:noCompletion
   public static function updateWgpuEnvironmentCubeFace(state:WgpuRenderState, face:Float, image:TextureSource):Bool {
     var texture:Null<flighthq._internal.dom.GPUTexture> = cast _Runtime.UNDEFINED;
-    texture = (cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).environmentSourceCube;
+    texture = (cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).environmentSourceCube;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast false; }
-    WgpuEnvironmentCube.uploadWgpuEnvironmentImage__wgpuEnvironmentCube((cast (cast state : WgpuRenderState).device : flighthq._internal.dom.GPUDevice), (cast texture : flighthq._internal.dom.GPUTexture), (cast face : Float), (cast image : TextureSource));
+    WgpuEnvironmentCube.uploadWgpuEnvironmentImage__wgpuEnvironmentCube((cast (cast state : WgpuRenderState).device), (cast texture), (cast face : Float), (cast image));
     return cast true;
     return cast null;
   }
@@ -88,9 +88,9 @@ class WgpuEnvironmentCube {
   public static function uploadWgpuEnvironmentImage__wgpuEnvironmentCube(device:flighthq._internal.dom.GPUDevice, texture:flighthq._internal.dom.GPUTexture, face:Float, image:TextureSource):Void {
     if ((cast _Runtime.strictEquals(_Runtime.field(image, 'kind'), BitmapTextureSourceKind) : Bool)) {
       var bitmap:Bitmap = (cast image : Bitmap);
-      uploadWgpuTextureData((cast device : flighthq._internal.dom.GPUDevice), (cast texture : flighthq._internal.dom.GPUTexture), (cast cast ([0.0, 0.0, face] : Array<Dynamic>) : flighthq._internal._Any), (cast bitmap.width : Float), (cast bitmap.height : Float), (cast bitmap.data : flighthq._internal._UInt8ClampedArray));
+      uploadWgpuTextureData((cast device), (cast texture), (cast cast ([0.0, 0.0, face] : Array<Dynamic>)), (cast bitmap.width : Float), (cast bitmap.height : Float), (cast bitmap.data));
     } else {
-      uploadWgpuTextureImageResource((cast device : flighthq._internal.dom.GPUDevice), (cast texture : flighthq._internal.dom.GPUTexture), (cast cast ([0.0, 0.0, face] : Array<Dynamic>) : flighthq._internal._Any), (cast (cast image : Image) : Image));
+      uploadWgpuTextureImageResource((cast device), (cast texture), (cast cast ([0.0, 0.0, face] : Array<Dynamic>)), (cast (cast image : Image)));
     }
   }
 }

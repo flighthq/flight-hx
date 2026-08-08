@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class MedianEffect {
-  public static function createMedianEffect(?options:Dynamic):flighthq.types.MedianEffect {
+  public static function createMedianEffect(?options:flighthq._internal._Omit<flighthq.types.MedianEffect, String>):flighthq.types.MedianEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'MedianEffect' }, options]);
     return cast null;
@@ -24,11 +24,11 @@ class MedianEffect {
   }
 
   public static function registerMedianEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'MedianEffect' : String), MedianEffect.resolveMedianEffectPadding__medianEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'MedianEffect' : String), (cast MedianEffect.resolveMedianEffectPadding__medianEffect));
   }
 
   public static function resolveMedianEffectPadding__medianEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getMedianEffectPadding((cast (cast effect : flighthq.types.MedianEffect) : flighthq.types.MedianEffect)) : RenderEffectPadding);
+    return cast (cast getMedianEffectPadding((cast (cast effect : flighthq.types.MedianEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

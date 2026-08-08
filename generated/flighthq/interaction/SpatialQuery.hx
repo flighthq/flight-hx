@@ -11,6 +11,7 @@ import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node2D;
 import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.Rectangle;
+import flighthq.types.Rectangle.RectangleLike;
 
 class SpatialQuery {
   public static function hitTestAreaQuery(root:Node2D, rect:Rectangle, ?out:Array<Node2D>):Array<Node2D> {
@@ -18,14 +19,14 @@ class SpatialQuery {
     var worldBounds:Rectangle = cast _Runtime.UNDEFINED;
     var children:Null<Array<Node<Node2DTraits>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast root : { var enabled:Bool; }).enabled : Bool) : Bool)) { return cast out; }
-    worldBounds = (cast getNodeWorldBoundsRectangle(root) : Rectangle);
-    if ((cast (cast intersectsRectangle(worldBounds, rect) : Bool) : Bool)) {
+    worldBounds = (cast getNodeWorldBoundsRectangle((cast root)) : Rectangle);
+    if ((cast (cast intersectsRectangle((cast worldBounds), (cast rect)) : Bool) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([root] : Array<Dynamic>));
     }
-    children = _Runtime.field((cast getNodeRuntime(root) : NodeRuntime<Node2DTraits>), 'children');
+    children = _Runtime.field((cast getNodeRuntime((cast root)) : NodeRuntime<Node2DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        (cast hitTestAreaQuery((cast (cast child : Node2D) : Node2D), (cast rect : Rectangle), (cast out : Array<Node2D>)) : Array<Node2D>);
+        (cast hitTestAreaQuery((cast (cast child : Node2D)), (cast rect), (cast out)) : Array<Node2D>);
       }
     }
     return cast out;
@@ -41,7 +42,7 @@ class SpatialQuery {
     var dy:Float = cast _Runtime.UNDEFINED;
     var children:Null<Array<Node<Node2DTraits>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast root : { var enabled:Bool; }).enabled : Bool) : Bool)) { return cast out; }
-    b = (cast getNodeWorldBoundsRectangle(root) : Rectangle);
+    b = (cast getNodeWorldBoundsRectangle((cast root)) : Rectangle);
     nearX = HxMath.max(_Runtime.field(b, 'x'), HxMath.min(cx, _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.field(b, 'width'))));
     nearY = HxMath.max(_Runtime.field(b, 'y'), HxMath.min(cy, _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.field(b, 'height'))));
     dx = (cx - nearX);
@@ -49,10 +50,10 @@ class SpatialQuery {
     if ((cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast (radius * radius) : Float)) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([root] : Array<Dynamic>));
     }
-    children = _Runtime.field((cast getNodeRuntime(root) : NodeRuntime<Node2DTraits>), 'children');
+    children = _Runtime.field((cast getNodeRuntime((cast root)) : NodeRuntime<Node2DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        (cast hitTestAreaQueryCircle((cast (cast child : Node2D) : Node2D), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast out : Array<Node2D>)) : Array<Node2D>);
+        (cast hitTestAreaQueryCircle((cast (cast child : Node2D)), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast out)) : Array<Node2D>);
       }
     }
     return cast out;

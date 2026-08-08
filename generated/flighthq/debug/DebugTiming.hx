@@ -12,41 +12,41 @@ import flighthq.types.Log.LogTimer;
 class DebugTiming {
   public static function beginDebugSpan(name:String, ?channel:Null<String>):Null<LogTimer> {
     if (channel == null) channel = cast (null : Dynamic);
-    return cast ((cast (cast isDebugEnabled() : Bool) : Bool) ? (cast (cast startLogTimer((cast name : String), (cast channel : Null<String>)) : Null<LogTimer>) : Dynamic) : (cast null : Dynamic));
+    return cast ((cast (cast isDebugEnabled() : Bool) : Bool) ? (cast (cast startLogTimer((cast name : String), (cast channel)) : LogTimer) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function endDebugSpan(timer:Null<LogTimer>):Float {
-    return cast ((cast _Runtime.strictEquals(timer, null) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast endLogTimer((cast timer : LogTimer)) : Float) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(timer, null) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast endLogTimer((cast timer)) : Float) : Dynamic));
     return cast null;
   }
 
   public static function markDebugFrame(?label:String, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     if ((cast !(cast (cast isDebugEnabled() : Bool) : Bool) : Bool)) { return; }
-    logDebug({ frame: _Runtime.coalesce(label, function():Dynamic return cast ++DebugTiming._debugFrameNumber__debugTiming) }, (cast channel : Null<String>));
+    logDebug((cast { frame: _Runtime.coalesce(label, function():Dynamic return cast ++DebugTiming._debugFrameNumber__debugTiming) }), (cast channel));
   }
 
   public static function measureDebugSpan<T>(name:String, fn:Void->T, ?channel:Null<String>):T {
     if (channel == null) channel = cast (null : Dynamic);
     var timer:Null<LogTimer> = cast _Runtime.UNDEFINED;
-    timer = (cast beginDebugSpan((cast name : String), (cast channel : Null<String>)) : Null<LogTimer>);
+    timer = (cast beginDebugSpan((cast name : String), (cast channel)) : Null<LogTimer>);
     try {
       try {
         var __returnValue0:Dynamic = (cast fn() : T);
         {
-          (cast endDebugSpan((cast timer : Null<LogTimer>)) : Float);
+          (cast endDebugSpan((cast timer)) : Float);
         }
         return cast __returnValue0;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError1:Dynamic) {
       {
-        (cast endDebugSpan((cast timer : Null<LogTimer>)) : Float);
+        (cast endDebugSpan((cast timer)) : Float);
       }
       _Runtime.throwValue(__finallyError1);
     }
     {
-      (cast endDebugSpan((cast timer : Null<LogTimer>)) : Float);
+      (cast endDebugSpan((cast timer)) : Float);
     }
     return cast null;
   }

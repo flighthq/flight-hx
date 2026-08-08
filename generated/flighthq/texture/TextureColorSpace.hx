@@ -8,7 +8,7 @@ import flighthq.types.Texture.TextureColorSpace;
 
 class TextureColorSpace {
   public static function getTextureSampleColorSpace(source:flighthq.types.Texture.TextureColorSpace, working:RenderTargetColorSpace):flighthq.types.Texture.TextureColorSpace {
-    return cast ((cast (cast shouldDecodeTextureOnSample((cast source : flighthq.types.Texture.TextureColorSpace), (cast working : RenderTargetColorSpace)) : Bool) : Bool) ? (cast 'srgb' : Dynamic) : (cast 'linear' : Dynamic));
+    return cast ((cast (cast shouldDecodeTextureOnSample((cast source), (cast working)) : Bool) : Bool) ? (cast 'srgb' : Dynamic) : (cast 'linear' : Dynamic));
     return cast null;
   }
 
@@ -18,7 +18,7 @@ class TextureColorSpace {
   }
 
   public static function shouldPremultiplyTextureOnUpload(source:flighthq.types.Texture.TextureColorSpace, working:RenderTargetColorSpace):Bool {
-    return cast !(cast (cast shouldDecodeTextureOnSample((cast source : flighthq.types.Texture.TextureColorSpace), (cast working : RenderTargetColorSpace)) : Bool) : Bool);
+    return cast !(cast (cast shouldDecodeTextureOnSample((cast source), (cast working)) : Bool) : Bool);
     return cast null;
   }
 }

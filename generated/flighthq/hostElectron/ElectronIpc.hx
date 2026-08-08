@@ -15,11 +15,13 @@ class ElectronIpc {
 
     }, invoke: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(_Runtime.field(_Runtime, 'UNDEFINED'));
+      return cast _Runtime.UNDEFINED;
     }, subscribe: function(channel:String, listener:Array<flighthq._internal._Any>->Void):Void->Void {
       var handler:flighthq._internal._Any->Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
-      handler = (cast _Runtime.haxeRest(function(_event:flighthq._internal._Any, ...args:flighthq._internal._Any):Void return listener((cast args : Array<flighthq._internal._Any>)), 1) : flighthq._internal._Any->Array<flighthq._internal._Any>->Void);
-      (cast ipcMain : ElectronIpcMain).on(channel, handler);
-      return cast function():Void return (cast ipcMain : ElectronIpcMain).removeListener(channel, handler);
+      handler = (cast _Runtime.haxeRest(function(_event:flighthq._internal._Any, ...args:flighthq._internal._Any):Void { listener((cast args)); }, 1));
+      (cast ipcMain : ElectronIpcMain).on((cast channel : String), (cast handler));
+      return cast function():Void { (cast ipcMain : ElectronIpcMain).removeListener((cast channel : String), (cast handler)); };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }

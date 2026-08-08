@@ -26,7 +26,7 @@ class Tray {
 
   public static function createTrayIcon(?options:TrayIconOptions):Null<TrayIcon> {
     var id:Float = cast _Runtime.UNDEFINED;
-    id = (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).create(_Runtime.coalesce(options, function():Dynamic return cast {  }));
+    id = (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).create((cast _Runtime.coalesce(options, function():Dynamic return cast {  })));
     return cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) ? (cast null : Dynamic) : (cast { id: id } : Dynamic));
     return cast null;
   }
@@ -35,22 +35,29 @@ class Tray {
   public static function createWebTrayBackend():TrayBackend {
     return cast { create: function():Float {
       return cast -1.0;
+      return cast _Runtime.UNDEFINED;
     }, destroy: function():Void {
 
     }, displayBalloon: function():Void {
 
-    }, getBounds: function():flighthq._internal._Any {
+    }, getBounds: function():Null<RectangleLike> {
       return cast null;
+      return cast _Runtime.UNDEFINED;
     }, getCapabilities: function():TrayCapabilities {
       return cast Tray.WEB_CAPABILITIES__tray;
+      return cast _Runtime.UNDEFINED;
     }, getTitle: function():String {
       return cast '';
+      return cast _Runtime.UNDEFINED;
     }, getTooltip: function():String {
       return cast '';
+      return cast _Runtime.UNDEFINED;
     }, isDestroyed: function():Bool {
       return cast true;
-    }, listIds: function():Array<flighthq._internal._Any> {
+      return cast _Runtime.UNDEFINED;
+    }, listIds: function():Array<Float> {
       return cast cast ([] : Array<Dynamic>);
+      return cast _Runtime.UNDEFINED;
     }, popUpContextMenu: function():Void {
 
     }, removeBalloon: function():Void {
@@ -73,13 +80,14 @@ class Tray {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
 
   public static function destroyTrayIcon(tray:TrayIcon):Void {
-    stopTrayIconAnimation((cast tray : TrayIcon));
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).destroy(tray.id);
+    stopTrayIconAnimation((cast tray));
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).destroy((cast tray.id : Float));
   }
 
   public static function disableTrayGuards():Void {
@@ -87,7 +95,7 @@ class Tray {
   }
 
   public static function displayTrayBalloon(tray:TrayIcon, options:TrayBalloonOptions):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).displayBalloon(tray.id, options);
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).displayBalloon((cast tray.id : Float), (cast options));
   }
 
   public static function enableTrayGuards():Void {
@@ -96,7 +104,7 @@ class Tray {
 
   @:noCompletion
   public static function getTrayBackend():TrayBackend {
-    if ((cast _Runtime.strictEquals(Tray._backend__tray, null) : Bool)) { (Tray._backend__tray = cast ((cast createWebTrayBackend() : Null<TrayBackend>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Tray._backend__tray, null) : Bool)) { (Tray._backend__tray = cast ((cast createWebTrayBackend() : TrayBackend) : Dynamic)); }
     return cast Tray._backend__tray;
     return cast null;
   }
@@ -107,7 +115,7 @@ class Tray {
   }
 
   public static function getTrayIconBounds(tray:TrayIcon):Null<RectangleLike> {
-    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).getBounds(tray.id);
+    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).getBounds((cast tray.id : Float));
     return cast null;
   }
 
@@ -117,17 +125,17 @@ class Tray {
   }
 
   public static function getTrayIconTitle(tray:TrayIcon):String {
-    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).getTitle(tray.id);
+    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).getTitle((cast tray.id : Float));
     return cast null;
   }
 
   public static function getTrayIconTooltip(tray:TrayIcon):String {
-    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).getTooltip(tray.id);
+    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).getTooltip((cast tray.id : Float));
     return cast null;
   }
 
   public static function isTrayDestroyed(tray:TrayIcon):Bool {
-    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).isDestroyed(tray.id);
+    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).isDestroyed((cast tray.id : Float));
     return cast null;
   }
 
@@ -137,16 +145,16 @@ class Tray {
   }
 
   public static function onTrayEvent(listener:TrayEventData->Void):Void->Void {
-    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).subscribe(listener);
+    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).subscribe((cast listener));
     return cast null;
   }
 
   public static function popupTrayContextMenu(tray:TrayIcon, ?position:Vector2Like):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).popUpContextMenu(tray.id, position);
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).popUpContextMenu((cast tray.id : Float), (cast position));
   }
 
   public static function removeTrayBalloon(tray:TrayIcon):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).removeBalloon(tray.id);
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).removeBalloon((cast tray.id : Float));
   }
 
   @:noCompletion
@@ -160,31 +168,31 @@ class Tray {
   }
 
   public static function setTrayIcon(tray:TrayIcon, icon:String):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setIcon(tray.id, icon);
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setIcon((cast tray.id : Float), (cast icon : String));
   }
 
   public static function setTrayIconContextMenu(tray:TrayIcon, items:Array<MenuItemTemplate>):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setContextMenu(tray.id, items);
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setContextMenu((cast tray.id : Float), (cast items));
   }
 
   public static function setTrayIconTemplate(tray:TrayIcon, isTemplate:Bool):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setTemplate(tray.id, isTemplate);
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setTemplate((cast tray.id : Float), (cast isTemplate : Bool));
   }
 
   public static function setTrayIconTitle(tray:TrayIcon, title:String):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setTitle(tray.id, title);
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setTitle((cast tray.id : Float), (cast title : String));
   }
 
   public static function setTrayIconTooltip(tray:TrayIcon, tooltip:String):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setTooltip(tray.id, tooltip);
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setTooltip((cast tray.id : Float), (cast tooltip : String));
   }
 
   public static function setTrayIgnoreDoubleClickEvents(tray:TrayIcon, ignore:Bool):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setIgnoreDoubleClickEvents(tray.id, ignore);
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setIgnoreDoubleClickEvents((cast tray.id : Float), (cast ignore : Bool));
   }
 
   public static function setTrayPressedIcon(tray:TrayIcon, icon:String):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setPressedIcon(tray.id, icon);
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setPressedIcon((cast tray.id : Float), (cast icon : String));
   }
 
   public static function startTrayIconAnimation(tray:TrayIcon, frames:Array<String>, intervalMs:Float):Void->Void {
@@ -192,14 +200,14 @@ class Tray {
     var handle:flighthq._internal.dom.Timeout = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) { return cast Tray._noopStop__tray; }
     _Runtime.callOptionalValue(Tray._animationGuard__tray, cast ([tray, _Runtime.field(frames, 'length'), intervalMs] : Array<Dynamic>));
-    stopTrayIconAnimation((cast tray : TrayIcon));
+    stopTrayIconAnimation((cast tray));
     index = 0.0;
-    setTrayIcon((cast tray : TrayIcon), (cast flighthq._internal._StaticIndex.readArray(frames, index) : String));
+    setTrayIcon((cast tray), (cast flighthq._internal._StaticIndex.readArray(frames, index) : String));
     handle = _Runtime.setInterval(function():Void {
       (index = cast (_Runtime.fmod((index + 1.0), _Runtime.field(frames, 'length')) : Dynamic));
-      setTrayIcon((cast tray : TrayIcon), (cast flighthq._internal._StaticIndex.readArray(frames, index) : String));
+      setTrayIcon((cast tray), (cast flighthq._internal._StaticIndex.readArray(frames, index) : String));
     }, intervalMs);
-    ((cast Tray._animations__tray : flighthq._internal._Map<Float, flighthq._internal.dom.Timeout>).set(tray.id, handle));
+    ((cast Tray._animations__tray : flighthq._internal._Map<Float, flighthq._internal.dom.Timeout>).set(tray.id, (cast handle)));
     return cast function():Void {
       if ((cast !_Runtime.strictEquals(((cast Tray._animations__tray : flighthq._internal._Map<Float, flighthq._internal.dom.Timeout>).get(tray.id)), handle) : Bool)) { return; }
       _Runtime.clearInterval(handle);
@@ -216,5 +224,5 @@ class Tray {
     ((cast Tray._animations__tray : flighthq._internal._Map<Float, flighthq._internal.dom.Timeout>).delete_(tray.id));
   }
 
-  public static final WEB_CAPABILITIES__tray:TrayCapabilities = { balloon: false, bounds: false, clickEvents: false, dropFiles: false, pressedIcon: false, title: false };
+  public static final WEB_CAPABILITIES__tray:TrayCapabilities = (cast { balloon: false, bounds: false, clickEvents: false, dropFiles: false, pressedIcon: false, title: false });
 }

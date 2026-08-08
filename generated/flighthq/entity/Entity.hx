@@ -10,7 +10,7 @@ import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Entity {
   @:noCompletion
-  public static function createEntity<Type>(?obj:Type):Type {
+  public static function createEntity<Type:flighthq._internal._Object>(?obj:Type):Type {
     if (obj == null) obj = cast {};
     final entity:Type = cast obj;
     _Runtime.setIndex(entity, EntityRuntimeKey, _Runtime.UNDEFINED);

@@ -17,12 +17,12 @@ typedef SubpathPoint__reversePath = flighthq._internal._Union2<flighthq._interna
 class ReversePath {
   public static function reversePath(source:Path, out:Path):Void {
     var subpaths:Array<Subpath__reversePath> = cast _Runtime.UNDEFINED;
-    subpaths = (cast ReversePath.decodeSubpaths__reversePath((cast source : Path)) : Array<Subpath__reversePath>);
+    subpaths = (cast ReversePath.decodeSubpaths__reversePath((cast source)) : Array<Subpath__reversePath>);
     _Runtime.setLength((cast out : Path).commands, 0.0);
     _Runtime.setLength((cast out : Path).data, 0.0);
     ((cast out : Path).winding = _Runtime.field(source, 'winding'));
     for (subpath in _Runtime.iterable(subpaths)) {
-      ReversePath.encodeReversedSubpath__reversePath(subpath, (cast out : Path));
+      ReversePath.encodeReversedSubpath__reversePath((cast subpath), (cast out));
     }
   }
 
@@ -30,7 +30,7 @@ class ReversePath {
     var subpaths:Array<Subpath__reversePath> = cast _Runtime.UNDEFINED;
     var current:Null<Subpath__reversePath> = cast _Runtime.UNDEFINED;
     var ensureCurrent:Void->Subpath__reversePath = cast _Runtime.UNDEFINED;
-    subpaths = cast ([] : Array<Dynamic>);
+    subpaths = (cast cast ([] : Array<Dynamic>));
     current = null;
     ensureCurrent = (cast function():Subpath__reversePath {
       if ((cast _Runtime.strictEquals(current, null) : Bool)) {
@@ -38,8 +38,9 @@ class ReversePath {
         _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
       }
       return cast current;
-    } : Void->Subpath__reversePath);
-    forEachPathSegment((cast path : Path), function(segment:PathSegment):Void {
+      return cast _Runtime.UNDEFINED;
+    });
+    forEachPathSegment((cast path), (cast function(segment:PathSegment):Void {
       if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'moveTo') : Bool)) {
         (current = cast ({ points: cast ([{ x: (cast segment : { var kind:String; var x:Float; var y:Float; }).x, y: (cast segment : { var kind:String; var x:Float; var y:Float; }).y, kind: 'move' }] : Array<Dynamic>), closed: false } : Dynamic));
         _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
@@ -52,7 +53,7 @@ class ReversePath {
       } else { if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'close') : Bool)) {
         if ((cast !_Runtime.strictEquals(current, null) : Bool)) { ((cast current : Subpath__reversePath).closed = true); }
       } } } } }
-    });
+    }));
     return cast subpaths;
     return cast null;
   }

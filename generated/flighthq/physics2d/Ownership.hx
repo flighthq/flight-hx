@@ -20,7 +20,7 @@ class Ownership {
   public static function assertPhysics2DBodyNotStepping(body:RigidBody2D):Void {
     var world:Null<Physics2DWorld> = cast _Runtime.UNDEFINED;
     world = ((cast physics2DBodyOwners : flighthq._internal._WeakMap<RigidBody2D, Physics2DWorld>).get((cast body : RigidBody2D)));
-    if ((cast !_Runtime.strictEquals(world, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { assertPhysics2DWorldNotStepping((cast world : Physics2DWorld)); }
+    if ((cast !_Runtime.strictEquals(world, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { assertPhysics2DWorldNotStepping((cast world)); }
   }
 
   public static function assertPhysics2DWorldNotStepping(world:Physics2DWorld):Void {

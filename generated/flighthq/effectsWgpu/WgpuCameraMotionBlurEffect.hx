@@ -22,19 +22,19 @@ class WgpuCameraMotionBlurEffect {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.5);
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'motion.cameraMotionBlur' : String), (cast WgpuCameraMotionBlurEffect.CAMERA_MOTION_BLUR_FRAGMENT_WGSL__wgpuCameraMotionBlurEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'motion.cameraMotionBlur' : String), (cast WgpuCameraMotionBlurEffect.CAMERA_MOTION_BLUR_FRAGMENT_WGSL__wgpuCameraMotionBlurEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, samples);
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
-  public static final defaultWgpuCameraMotionBlurEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyCameraMotionBlurEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : CameraMotionBlurEffect) : CameraMotionBlurEffect));
-  };
+  public static final defaultWgpuCameraMotionBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyCameraMotionBlurEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : CameraMotionBlurEffect)));
+  });
 
   public static function registerWgpuCameraMotionBlurEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'CameraMotionBlurEffect' : String), (cast defaultWgpuCameraMotionBlurEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'CameraMotionBlurEffect' : String), (cast defaultWgpuCameraMotionBlurEffectRunner));
   }
 
   public static final CAMERA_MOTION_BLUR_FRAGMENT_WGSL__wgpuCameraMotionBlurEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_samples : f32,\n  _pad0 : f32,\n  _pad1 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nconst SAMPLES : i32 = 16;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let toCenter = vec2f(0.5) - uv;\n  let count = min(uni.u_samples, 16.0);\n  var sum = vec4f(0.0);\n  var taken = 0.0;\n  for (var i = 0; i < SAMPLES; i = i + 1) {\n    if (f32(i) >= count) { break; }\n    let t = select(0.0, f32(i) / (count - 1.0), count > 1.0);\n    let p = uv + toCenter * (t * uni.u_intensity);\n    sum = sum + textureSampleLevel(tex, smp, p, 0.0);\n    taken = taken + 1.0;\n  }\n  return sum / max(taken, 1.0);\n}';

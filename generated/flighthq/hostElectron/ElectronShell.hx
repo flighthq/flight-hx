@@ -17,7 +17,7 @@ class ElectronShell {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast shell : flighthq.types.ElectronApi.ElectronShell).openExternal(url), function(__awaitValue0:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast shell : flighthq.types.ElectronApi.ElectronShell).openExternal((cast url : String)), function(__awaitValue0:Dynamic):Dynamic {
               __awaitValue0;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -36,7 +36,7 @@ class ElectronShell {
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var err:String = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap((cast shell : flighthq.types.ElectronApi.ElectronShell).openPath(path), function(__awaitValue1:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast shell : flighthq.types.ElectronApi.ElectronShell).openPath((cast path : String)), function(__awaitValue1:Dynamic):Dynamic {
               err = __awaitValue1;
               return flighthq._internal._Async.flowReturn(_Runtime.strictEquals(err, ''));
             });
@@ -54,7 +54,7 @@ class ElectronShell {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast shell : flighthq.types.ElectronApi.ElectronShell).openPath(path), function(__awaitValue2:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast shell : flighthq.types.ElectronApi.ElectronShell).openPath((cast path : String)), function(__awaitValue2:Dynamic):Dynamic {
               return flighthq._internal._Async.flowReturn(__awaitValue2);
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -70,7 +70,7 @@ class ElectronShell {
     }, showItemInFolder: function(path:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast shell : flighthq.types.ElectronApi.ElectronShell).showItemInFolder(path);
+          (cast shell : flighthq.types.ElectronApi.ElectronShell).showItemInFolder((cast path : String));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -81,7 +81,7 @@ class ElectronShell {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast shell : flighthq.types.ElectronApi.ElectronShell).trashItem(path), function(__awaitValue3:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast shell : flighthq.types.ElectronApi.ElectronShell).trashItem((cast path : String)), function(__awaitValue3:Dynamic):Dynamic {
               __awaitValue3;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -101,7 +101,7 @@ class ElectronShell {
           return cast flighthq._internal._Async.finishFlow(
             flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-                return flighthq._internal._Async.flatMap((cast shell : flighthq.types.ElectronApi.ElectronShell).trashItem(path), function(__awaitValue4:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast shell : flighthq.types.ElectronApi.ElectronShell).trashItem((cast path : String)), function(__awaitValue4:Dynamic):Dynamic {
                   __awaitValue4;
                   return flighthq._internal._Async.flowReturn(true);
                 });
@@ -120,8 +120,8 @@ class ElectronShell {
     }, readShortcutLink: function(shortcutPath:String):flighthq._internal._Promise<Null<ShellShortcutLink>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          var details:ElectronShortcutDetails = (cast shell : flighthq.types.ElectronApi.ElectronShell).readShortcutLink(shortcutPath);
-          var link:ShellShortcutLink = { target: (cast details : ElectronShortcutDetails).target, appUserModelId: (cast details : ElectronShortcutDetails).appUserModelId, args: (cast details : ElectronShortcutDetails).args, description: (cast details : ElectronShortcutDetails).description, icon: (cast details : ElectronShortcutDetails).icon, iconIndex: (cast details : ElectronShortcutDetails).iconIndex, workingDirectory: (cast details : ElectronShortcutDetails).cwd };
+          var details:ElectronShortcutDetails = (cast shell : flighthq.types.ElectronApi.ElectronShell).readShortcutLink((cast shortcutPath : String));
+          var link:ShellShortcutLink = (cast { target: (cast details : ElectronShortcutDetails).target, appUserModelId: (cast details : ElectronShortcutDetails).appUserModelId, args: (cast details : ElectronShortcutDetails).args, description: (cast details : ElectronShortcutDetails).description, icon: (cast details : ElectronShortcutDetails).icon, iconIndex: (cast details : ElectronShortcutDetails).iconIndex, workingDirectory: (cast details : ElectronShortcutDetails).cwd });
           return cast link;
         } catch (__error:Dynamic) {
           return cast null;
@@ -131,8 +131,8 @@ class ElectronShell {
     }, writeShortcutLink: function(shortcutPath:String, link:ShellShortcutLink, operation:Null<String> = 'create'):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          var details:ElectronShortcutDetails = { target: link.target, appUserModelId: link.appUserModelId, args: link.args, description: link.description, icon: link.icon, iconIndex: link.iconIndex, cwd: link.workingDirectory };
-          return cast (cast shell : flighthq.types.ElectronApi.ElectronShell).writeShortcutLink(shortcutPath, operation, details);
+          var details:ElectronShortcutDetails = (cast { target: link.target, appUserModelId: link.appUserModelId, args: link.args, description: link.description, icon: link.icon, iconIndex: link.iconIndex, cwd: link.workingDirectory });
+          return cast (cast shell : flighthq.types.ElectronApi.ElectronShell).writeShortcutLink((cast shortcutPath : String), (cast operation : String), (cast details));
         } catch (__error:Dynamic) {
           return cast false;
         }

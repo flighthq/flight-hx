@@ -14,10 +14,10 @@ class CaptureBaseline {
 
   public static function formatCaptureBaseline(baseline:flighthq.types.CaptureBaseline):String {
     var sorted:flighthq.types.CaptureBaseline = cast _Runtime.UNDEFINED;
-    sorted = {  };
+    sorted = (cast {  });
     for (column in _Runtime.iterable(_Runtime.callProperty(flighthq._internal.DynamicObject.keys(baseline), 'sort', cast ([] : Array<Dynamic>)))) {
       var entry:CaptureColumnBaseline = _Runtime.getIndex(baseline, column);
-      var out:CaptureColumnBaseline = {  };
+      var out:CaptureColumnBaseline = (cast {  });
       if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).fingerprint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).fingerprint = (cast entry : CaptureColumnBaseline).fingerprint); }
       if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).sourceHash, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).sourceHash = (cast entry : CaptureColumnBaseline).sourceHash); }
       if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).sha256, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).sha256 = (cast entry : CaptureColumnBaseline).sha256); }
@@ -27,7 +27,7 @@ class CaptureBaseline {
     return cast null;
   }
 
-  public static function getCaptureBaselineField(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureColumnBaseline):Null<String> {
+  public static function getCaptureBaselineField(baseline:flighthq.types.CaptureBaseline, column:String, field:String):Null<String> {
     return cast _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.getIndex(baseline, column), field), function():Dynamic return cast null);
     return cast null;
   }
@@ -44,7 +44,7 @@ class CaptureBaseline {
     return cast null;
   }
 
-  public static function setCaptureBaselineField(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureColumnBaseline, value:String):Void {
+  public static function setCaptureBaselineField(baseline:flighthq.types.CaptureBaseline, column:String, field:String, value:String):Void {
     _Runtime.setIndex(_Runtime.setIndex(baseline, column, (_Runtime.getIndex(baseline, column) ?? {  })), field, value);
   }
 }

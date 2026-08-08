@@ -11,7 +11,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class DropShadowEffect {
-  public static function createDropShadowEffect(?options:Dynamic):flighthq.types.DropShadowEffect {
+  public static function createDropShadowEffect(?options:flighthq._internal._Omit<flighthq.types.DropShadowEffect, String>):flighthq.types.DropShadowEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'DropShadowEffect' }, options]);
     return cast null;
@@ -27,11 +27,11 @@ class DropShadowEffect {
   }
 
   public static function registerDropShadowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'DropShadowEffect' : String), DropShadowEffect.resolveDropShadowEffectPadding__dropShadowEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'DropShadowEffect' : String), (cast DropShadowEffect.resolveDropShadowEffectPadding__dropShadowEffect));
   }
 
   public static function resolveDropShadowEffectPadding__dropShadowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getDropShadowEffectPadding((cast (cast effect : flighthq.types.DropShadowEffect) : flighthq.types.DropShadowEffect)) : RenderEffectPadding);
+    return cast (cast getDropShadowEffectPadding((cast (cast effect : flighthq.types.DropShadowEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

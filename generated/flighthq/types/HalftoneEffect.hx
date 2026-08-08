@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef HalftoneEffect = { var kind:Kind; @:optional var scale:Float; @:optional var angle:Float; };
+typedef HalftoneEffect = { var kind:String; @:optional var scale:Float; @:optional var angle:Float; };

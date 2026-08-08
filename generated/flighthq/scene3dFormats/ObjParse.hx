@@ -23,6 +23,7 @@ import flighthq.types.Material.MaterialLike;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshSubset;
 import flighthq.types.MeshGeometry.PrimitiveTopology;
+import flighthq.types.MeshGeometryOptions;
 import flighthq.types.ObjSchema.ObjMaterial;
 import flighthq.types.ObjSchema.ObjMaterialLibrary;
 import flighthq.types.Sampler;
@@ -51,7 +52,7 @@ typedef ObjDropTally__objParse = { var count:Float; var detail:flighthq._interna
 
 class ObjParse {
   public static function createScene3DFromObj(source:String, ?materials:ObjMaterialLibrary, ?diagnostics:Array<ImportDiagnostic>):Scene3D {
-    return cast (cast createScene3DFromDocument((cast (cast parseObj((cast source : String), (cast materials : Null<ObjMaterialLibrary>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Scene3DDocument) : Scene3DDocument), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Scene3D);
+    return cast (cast createScene3DFromDocument((cast (cast parseObj((cast source : String), (cast materials), (cast diagnostics)) : Scene3DDocument)), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Scene3D);
     return cast null;
   }
 
@@ -70,16 +71,16 @@ class ObjParse {
     var resolvedMaterials:flighthq._internal._Map<String, Float> = cast _Runtime.UNDEFINED;
     var objDrops:Null<flighthq._internal._Map<String, ObjDropTally__objParse>> = cast _Runtime.UNDEFINED;
     var lines:Array<String> = cast _Runtime.UNDEFINED;
-    positions = cast ([] : Array<Dynamic>);
-    normals = cast ([] : Array<Dynamic>);
-    uvs = cast ([] : Array<Dynamic>);
-    document = { animations: cast ([] : Array<Dynamic>), cameras: cast ([] : Array<Dynamic>), lights: cast ([] : Array<Dynamic>), materials: cast ([] : Array<Dynamic>), meshes: cast ([] : Array<Dynamic>), metadata: null, nodes: cast ([] : Array<Dynamic>), resources: cast ([] : Array<Dynamic>), scenes: cast ([{ rootNodes: cast ([] : Array<Dynamic>) }] : Array<Dynamic>), skins: cast ([] : Array<Dynamic>) };
+    positions = (cast cast ([] : Array<Dynamic>));
+    normals = (cast cast ([] : Array<Dynamic>));
+    uvs = (cast cast ([] : Array<Dynamic>));
+    document = (cast { animations: cast ([] : Array<Dynamic>), cameras: cast ([] : Array<Dynamic>), lights: cast ([] : Array<Dynamic>), materials: cast ([] : Array<Dynamic>), meshes: cast ([] : Array<Dynamic>), metadata: null, nodes: cast ([] : Array<Dynamic>), resources: cast ([] : Array<Dynamic>), scenes: cast ([{ rootNodes: cast ([] : Array<Dynamic>) }] : Array<Dynamic>), skins: cast ([] : Array<Dynamic>) });
     materialBuckets = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     activeMaterial = '';
     activeSmoothingGroup = ObjParse.OBJ_SMOOTHING_UNSTATED__objParse;
     faceOrdinal = 0.0;
-    lineElements = cast ([] : Array<Dynamic>);
-    pointElements = cast ([] : Array<Dynamic>);
+    lineElements = (cast cast ([] : Array<Dynamic>));
+    pointElements = (cast cast ([] : Array<Dynamic>));
     resolvedMaterials = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     objDrops = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), function():Dynamic return cast null);
     lines = _Runtime.callProperty(source, 'split', cast (['\n'] : Array<Dynamic>));
@@ -90,9 +91,9 @@ class ObjParse {
         if ((cast ((cast _Runtime.strictEquals(_Runtime.field(raw, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.charCodeAt(raw, 0.0), 35.0) : Bool)) : Bool)) { i++; continue; }
         var spaceIndex:Float = _Runtime.callProperty(raw, 'indexOf', cast ([' '] : Array<Dynamic>));
         if ((cast ((cast spaceIndex : Float) < (cast 0.0 : Float)) : Bool)) {
-          if ((cast _Runtime.strictEquals(raw, 'v') : Bool)) { ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.vertex-malformed' : String), (cast 'too-few-components' : String), (cast { firstLine: (i + 1.0), reason: 'too-few-components' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>)); } else { if ((cast _Runtime.strictEquals(raw, 'vn') : Bool)) { ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.normal-malformed' : String), (cast 'too-few-components' : String), (cast { firstLine: (i + 1.0), reason: 'too-few-components' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>)); } else { if ((cast _Runtime.strictEquals(raw, 'vt') : Bool)) { ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.uv-malformed' : String), (cast 'too-few-components' : String), (cast { firstLine: (i + 1.0), reason: 'too-few-components' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>)); } else { if ((cast _Runtime.strictEquals(raw, 'f') : Bool)) { ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.face-too-few-vertices' : String), (cast '' : String), (cast { firstLine: (i + 1.0) } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>)); } else { if ((cast ((cast _Runtime.strictEquals(raw, 'g') : Bool) || (cast _Runtime.strictEquals(raw, 'o') : Bool)) : Bool)) {
-            if ((cast _Runtime.strictEquals(raw, 'o') : Bool)) { ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'obj.object-name-missing' : String), (cast '' : String), (cast { firstLine: (i + 1.0) } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>)); }
-            ObjParse.flushGroup__objParse(materialBuckets, (cast lineElements : Array<Array<Float>>), (cast pointElements : Array<Float>), (cast positions : Array<Float>), (cast currentGroupName : Null<String>), (cast document : Scene3DDocument), (cast materials : Null<ObjMaterialLibrary>), (cast resolvedMaterials : flighthq._internal._Map<String, Float>), (cast ((cast _Runtime.field(normals, 'length') : Float) > (cast 0.0 : Float)) : Bool), (cast diagnostics : Null<Array<ImportDiagnostic>>));
+          if ((cast _Runtime.strictEquals(raw, 'v') : Bool)) { ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.vertex-malformed' : String), (cast 'too-few-components' : String), (cast { firstLine: (i + 1.0), reason: 'too-few-components' })); } else { if ((cast _Runtime.strictEquals(raw, 'vn') : Bool)) { ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.normal-malformed' : String), (cast 'too-few-components' : String), (cast { firstLine: (i + 1.0), reason: 'too-few-components' })); } else { if ((cast _Runtime.strictEquals(raw, 'vt') : Bool)) { ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.uv-malformed' : String), (cast 'too-few-components' : String), (cast { firstLine: (i + 1.0), reason: 'too-few-components' })); } else { if ((cast _Runtime.strictEquals(raw, 'f') : Bool)) { ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.face-too-few-vertices' : String), (cast '' : String), (cast { firstLine: (i + 1.0) })); } else { if ((cast ((cast _Runtime.strictEquals(raw, 'g') : Bool) || (cast _Runtime.strictEquals(raw, 'o') : Bool)) : Bool)) {
+            if ((cast _Runtime.strictEquals(raw, 'o') : Bool)) { ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'obj.object-name-missing' : String), (cast '' : String), (cast { firstLine: (i + 1.0) })); }
+            ObjParse.flushGroup__objParse((cast materialBuckets), (cast lineElements), (cast pointElements), (cast positions), (cast currentGroupName), (cast document), (cast materials), (cast resolvedMaterials), (cast ((cast _Runtime.field(normals, 'length') : Float) > (cast 0.0 : Float)) : Bool), (cast diagnostics));
             (materialBuckets = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
             (lineElements = cast (cast ([] : Array<Dynamic>) : Dynamic));
             (pointElements = cast (cast ([] : Array<Dynamic>) : Dynamic));
@@ -112,14 +113,14 @@ class ObjParse {
               {
                 var parts:Array<String> = _Runtime.callProperty(args, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
                 if ((cast ((cast _Runtime.field(parts, 'length') : Float) < (cast 3.0 : Float)) : Bool)) {
-                  ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.vertex-malformed' : String), (cast 'too-few-components' : String), (cast { firstLine: (i + 1.0), reason: 'too-few-components' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+                  ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.vertex-malformed' : String), (cast 'too-few-components' : String), (cast { firstLine: (i + 1.0), reason: 'too-few-components' }));
                   break;
                 }
                 var x:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 0.0)] : Array<Dynamic>));
                 var y:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 1.0)] : Array<Dynamic>));
                 var z:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 2.0)] : Array<Dynamic>));
                 if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([x] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([y] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([z] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-                  ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.vertex-malformed' : String), (cast 'non-numeric' : String), (cast { firstLine: (i + 1.0), reason: 'non-numeric' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+                  ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.vertex-malformed' : String), (cast 'non-numeric' : String), (cast { firstLine: (i + 1.0), reason: 'non-numeric' }));
                   break;
                 }
                 _Runtime.pushMany(positions, cast ([x, y, z] : Array<Dynamic>));
@@ -129,14 +130,14 @@ class ObjParse {
               {
                 var parts:Array<String> = _Runtime.callProperty(args, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
                 if ((cast ((cast _Runtime.field(parts, 'length') : Float) < (cast 3.0 : Float)) : Bool)) {
-                  ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.normal-malformed' : String), (cast 'too-few-components' : String), (cast { firstLine: (i + 1.0), reason: 'too-few-components' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+                  ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.normal-malformed' : String), (cast 'too-few-components' : String), (cast { firstLine: (i + 1.0), reason: 'too-few-components' }));
                   break;
                 }
                 var x:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 0.0)] : Array<Dynamic>));
                 var y:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 1.0)] : Array<Dynamic>));
                 var z:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 2.0)] : Array<Dynamic>));
                 if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([x] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([y] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([z] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-                  ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.normal-malformed' : String), (cast 'non-numeric' : String), (cast { firstLine: (i + 1.0), reason: 'non-numeric' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+                  ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.normal-malformed' : String), (cast 'non-numeric' : String), (cast { firstLine: (i + 1.0), reason: 'non-numeric' }));
                   break;
                 }
                 _Runtime.pushMany(normals, cast ([x, y, z] : Array<Dynamic>));
@@ -146,13 +147,13 @@ class ObjParse {
               {
                 var parts:Array<String> = _Runtime.callProperty(args, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
                 if ((cast ((cast _Runtime.field(parts, 'length') : Float) < (cast 2.0 : Float)) : Bool)) {
-                  ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.uv-malformed' : String), (cast 'too-few-components' : String), (cast { firstLine: (i + 1.0), reason: 'too-few-components' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+                  ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.uv-malformed' : String), (cast 'too-few-components' : String), (cast { firstLine: (i + 1.0), reason: 'too-few-components' }));
                   break;
                 }
                 var u:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 0.0)] : Array<Dynamic>));
                 var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(parts, 1.0)] : Array<Dynamic>));
                 if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([u] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-                  ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.uv-malformed' : String), (cast 'non-numeric' : String), (cast { firstLine: (i + 1.0), reason: 'non-numeric' } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+                  ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.uv-malformed' : String), (cast 'non-numeric' : String), (cast { firstLine: (i + 1.0), reason: 'non-numeric' }));
                   break;
                 }
                 _Runtime.pushMany(uvs, cast ([u, (1.0 - v)] : Array<Dynamic>));
@@ -162,15 +163,15 @@ class ObjParse {
               {
                 var vertexTokens:Array<String> = _Runtime.callProperty(args, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
                 if ((cast ((cast _Runtime.field(vertexTokens, 'length') : Float) < (cast 3.0 : Float)) : Bool)) {
-                  ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.face-too-few-vertices' : String), (cast '' : String), (cast { firstLine: (i + 1.0) } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+                  ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.face-too-few-vertices' : String), (cast '' : String), (cast { firstLine: (i + 1.0) }));
                   break;
                 }
-                var bucket:MaterialBucket__objParse = (cast ObjParse.getOrCreateBucket__objParse(materialBuckets, (cast activeMaterial : String)) : MaterialBucket__objParse);
-                var faceIndices:Array<Float> = cast ([] : Array<Dynamic>);
+                var bucket:MaterialBucket__objParse = (cast ObjParse.getOrCreateBucket__objParse((cast materialBuckets), (cast activeMaterial : String)) : MaterialBucket__objParse);
+                var faceIndices:Array<Float> = (cast cast ([] : Array<Dynamic>));
                 {
                   var vi:Float = 0.0;
                   while ((cast ((cast vi : Float) < (cast _Runtime.field(vertexTokens, 'length') : Float)) : Bool)) {
-                    var idx:Float = (cast ObjParse.parseFaceVertex__objParse((cast flighthq._internal._StaticIndex.readArray(vertexTokens, vi) : String), (cast positions : Array<Float>), (cast uvs : Array<Float>), (cast normals : Array<Float>), bucket, (cast ((cast _Runtime.strictEquals(activeSmoothingGroup, ObjParse.OBJ_SMOOTHING_OFF__objParse) : Bool) ? (cast (-1.0 - faceOrdinal) : Dynamic) : (cast activeSmoothingGroup : Dynamic)) : Float), objDrops, (cast i : Float)) : Float);
+                    var idx:Float = (cast ObjParse.parseFaceVertex__objParse((cast flighthq._internal._StaticIndex.readArray(vertexTokens, vi) : String), (cast positions), (cast uvs), (cast normals), (cast bucket), (cast ((cast _Runtime.strictEquals(activeSmoothingGroup, ObjParse.OBJ_SMOOTHING_OFF__objParse) : Bool) ? (cast (-1.0 - faceOrdinal) : Dynamic) : (cast activeSmoothingGroup : Dynamic)) : Float), (cast objDrops), (cast i : Float)) : Float);
                     if ((cast ((cast idx : Float) < (cast 0.0 : Float)) : Bool)) { break; }
                     _Runtime.callProperty(faceIndices, 'push', cast ([idx] : Array<Dynamic>));
                     vi++;
@@ -190,7 +191,7 @@ class ObjParse {
             }
             else if (__switchValue == 'g' || __switchValue == 'o') {
               {
-                ObjParse.flushGroup__objParse(materialBuckets, (cast lineElements : Array<Array<Float>>), (cast pointElements : Array<Float>), (cast positions : Array<Float>), (cast currentGroupName : Null<String>), (cast document : Scene3DDocument), (cast materials : Null<ObjMaterialLibrary>), (cast resolvedMaterials : flighthq._internal._Map<String, Float>), (cast ((cast _Runtime.field(normals, 'length') : Float) > (cast 0.0 : Float)) : Bool), (cast diagnostics : Null<Array<ImportDiagnostic>>));
+                ObjParse.flushGroup__objParse((cast materialBuckets), (cast lineElements), (cast pointElements), (cast positions), (cast currentGroupName), (cast document), (cast materials), (cast resolvedMaterials), (cast ((cast _Runtime.field(normals, 'length') : Float) > (cast 0.0 : Float)) : Bool), (cast diagnostics));
                 (materialBuckets = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
                 (lineElements = cast (cast ([] : Array<Dynamic>) : Dynamic));
                 (pointElements = cast (cast ([] : Array<Dynamic>) : Dynamic));
@@ -214,13 +215,13 @@ class ObjParse {
             }
             else if (__switchValue == 'l') {
               {
-                var resolved:Array<Float> = (cast ObjParse.resolveObjElementIndices__objParse((cast args : String), (cast _Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0) : Float), objDrops, (cast i : Float)) : Array<Float>);
+                var resolved:Array<Float> = (cast ObjParse.resolveObjElementIndices__objParse((cast args : String), (cast _Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0) : Float), (cast objDrops), (cast i : Float)) : Array<Float>);
                 if ((cast ((cast _Runtime.field(resolved, 'length') : Float) >= (cast 2.0 : Float)) : Bool)) { _Runtime.callProperty(lineElements, 'push', cast ([resolved] : Array<Dynamic>)); }
               }
             }
             else if (__switchValue == 'p') {
               {
-                var resolved:Array<Float> = (cast ObjParse.resolveObjElementIndices__objParse((cast args : String), (cast _Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0) : Float), objDrops, (cast i : Float)) : Array<Float>);
+                var resolved:Array<Float> = (cast ObjParse.resolveObjElementIndices__objParse((cast args : String), (cast _Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0) : Float), (cast objDrops), (cast i : Float)) : Array<Float>);
                 {
                   var k:Float = 0.0;
                   while ((cast ((cast k : Float) < (cast _Runtime.field(resolved, 'length') : Float)) : Bool)) {
@@ -237,10 +238,10 @@ class ObjParse {
         i++;
       }
     }
-    ObjParse.flushGroup__objParse(materialBuckets, (cast lineElements : Array<Array<Float>>), (cast pointElements : Array<Float>), (cast positions : Array<Float>), (cast currentGroupName : Null<String>), (cast document : Scene3DDocument), (cast materials : Null<ObjMaterialLibrary>), (cast resolvedMaterials : flighthq._internal._Map<String, Float>), (cast ((cast _Runtime.field(normals, 'length') : Float) > (cast 0.0 : Float)) : Bool), (cast diagnostics : Null<Array<ImportDiagnostic>>));
+    ObjParse.flushGroup__objParse((cast materialBuckets), (cast lineElements), (cast pointElements), (cast positions), (cast currentGroupName), (cast document), (cast materials), (cast resolvedMaterials), (cast ((cast _Runtime.field(normals, 'length') : Float) > (cast 0.0 : Float)) : Bool), (cast diagnostics));
     if ((cast !_Runtime.strictEquals(objDrops, null) : Bool)) {
       for (tally in _Runtime.iterable(((cast objDrops : flighthq._internal._Map<String, ObjDropTally__objParse>).values()))) {
-        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast tally : ObjDropTally__objParse).severity : ImportDiagnosticSeverity), (cast (cast tally : ObjDropTally__objParse).kind : String), (cast 'parseObj' : String), (cast _Runtime.mergeObjects([(cast tally : ObjDropTally__objParse).detail, { count: (cast tally : ObjDropTally__objParse).count }]) : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+        reportImportDiagnostic((cast diagnostics), (cast (cast tally : ObjDropTally__objParse).severity), (cast (cast tally : ObjDropTally__objParse).kind : String), (cast 'parseObj' : String), (cast _Runtime.mergeObjects([(cast tally : ObjDropTally__objParse).detail, { count: (cast tally : ObjDropTally__objParse).count }])));
       }
     }
     return cast document;
@@ -256,7 +257,7 @@ class ObjParse {
     bucket = ((cast buckets : flighthq._internal._Map<String, MaterialBucket__objParse>).get(material));
     if ((cast _Runtime.strictEquals(bucket, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (bucket = cast ({ dedup: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), indices: cast ([] : Array<Dynamic>), vertices: cast ([] : Array<Dynamic>) } : Dynamic));
-      ((cast buckets : flighthq._internal._Map<String, MaterialBucket__objParse>).set(material, bucket));
+      ((cast buckets : flighthq._internal._Map<String, MaterialBucket__objParse>).set(material, (cast bucket)));
     }
     return cast bucket;
     return cast null;
@@ -280,26 +281,26 @@ class ObjParse {
     normalCount = _Runtime.divideNumbers(_Runtime.field(normals, 'length'), 3.0);
     rawPosIdx = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(parts, 0.0), 10.0] : Array<Dynamic>));
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([rawPosIdx] : Array<Dynamic>)) : Bool) : Bool) || (cast _Runtime.strictEquals(rawPosIdx, 0.0) : Bool)) : Bool)) {
-      ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.face-vertex-invalid' : String), (cast '' : String), (cast { firstLine: (lineIndex + 1.0), firstToken: token } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+      ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.face-vertex-invalid' : String), (cast '' : String), (cast { firstLine: (lineIndex + 1.0), firstToken: token }));
       return cast -1.0;
     }
     posIdx = ((cast ((cast rawPosIdx : Float) > (cast 0.0 : Float)) : Bool) ? (cast (rawPosIdx - 1.0) : Dynamic) : (cast (posCount + rawPosIdx) : Dynamic));
     if ((cast ((cast ((cast posIdx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast posIdx : Float) >= (cast posCount : Float)) : Bool)) : Bool)) {
-      ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.position-index-out-of-range' : String), (cast '' : String), (cast { firstIndex: rawPosIdx, firstLine: (lineIndex + 1.0) } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+      ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.position-index-out-of-range' : String), (cast '' : String), (cast { firstIndex: rawPosIdx, firstLine: (lineIndex + 1.0) }));
       return cast -1.0;
     }
     uvIdx = -1.0;
     if ((cast ((cast ((cast _Runtime.field(parts, 'length') : Float) >= (cast 2.0 : Float)) : Bool) && (cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(parts, 1.0), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       (uvIdx = cast ((cast ObjParse.resolveFaceAttrIndex__objParse((cast flighthq._internal._StaticIndex.readArray(parts, 1.0) : String), (cast uvCount : Float)) : Float) : Dynamic));
       if ((cast ((cast uvIdx : Float) < (cast 0.0 : Float)) : Bool)) {
-        ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'obj.uv-index-invalid' : String), (cast '' : String), (cast { firstLine: (lineIndex + 1.0), firstToken: flighthq._internal._StaticIndex.readArray(parts, 1.0) } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+        ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'obj.uv-index-invalid' : String), (cast '' : String), (cast { firstLine: (lineIndex + 1.0), firstToken: flighthq._internal._StaticIndex.readArray(parts, 1.0) }));
       }
     }
     normalIdx = -1.0;
     if ((cast ((cast ((cast _Runtime.field(parts, 'length') : Float) >= (cast 3.0 : Float)) : Bool) && (cast ((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(parts, 2.0), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       (normalIdx = cast ((cast ObjParse.resolveFaceAttrIndex__objParse((cast flighthq._internal._StaticIndex.readArray(parts, 2.0) : String), (cast normalCount : Float)) : Float) : Dynamic));
       if ((cast ((cast normalIdx : Float) < (cast 0.0 : Float)) : Bool)) {
-        ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'obj.normal-index-invalid' : String), (cast '' : String), (cast { firstLine: (lineIndex + 1.0), firstToken: flighthq._internal._StaticIndex.readArray(parts, 2.0) } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+        ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'obj.normal-index-invalid' : String), (cast '' : String), (cast { firstLine: (lineIndex + 1.0), firstToken: flighthq._internal._StaticIndex.readArray(parts, 2.0) }));
       }
     }
     key = ((cast ((cast normalIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string(posIdx) + '/' + Std.string(uvIdx) + '/' + Std.string(normalIdx) + '' : Dynamic) : (cast '' + Std.string(posIdx) + '/' + Std.string(uvIdx) + '/s' + Std.string(smoothingGroup) + '' : Dynamic));
@@ -318,7 +319,7 @@ class ObjParse {
     } else {
       _Runtime.pushMany((cast bucket : MaterialBucket__objParse).vertices, cast ([0.0, 0.0] : Array<Dynamic>));
     }
-    ((cast (cast bucket : MaterialBucket__objParse).dedup : flighthq._internal._Map<String, Float>).set(key, vertexIndex));
+    ((cast (cast bucket : MaterialBucket__objParse).dedup : flighthq._internal._Map<String, Float>).set(key, (cast vertexIndex)));
     return cast vertexIndex;
     return cast null;
   }
@@ -333,10 +334,10 @@ class ObjParse {
     var mesh:Scene3DDocumentMesh = cast _Runtime.UNDEFINED;
     var nodeIndex:Float = cast _Runtime.UNDEFINED;
     var node:Scene3DDocumentNode = cast _Runtime.UNDEFINED;
-    vertices = cast ([] : Array<Dynamic>);
-    indices = cast ([] : Array<Dynamic>);
-    subsets = cast ([] : Array<Dynamic>);
-    materials = cast ([] : Array<Dynamic>);
+    vertices = (cast cast ([] : Array<Dynamic>));
+    indices = (cast cast ([] : Array<Dynamic>));
+    subsets = (cast cast ([] : Array<Dynamic>));
+    materials = (cast cast ([] : Array<Dynamic>));
     for (__iteration0 in _Runtime.iterable(buckets)) {
       var materialName:String = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
       var bucket:MaterialBucket__objParse = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
@@ -358,18 +359,18 @@ class ObjParse {
         }
       }
       _Runtime.callProperty(subsets, 'push', cast ([{ indexCount: _Runtime.field((cast bucket : MaterialBucket__objParse).indices, 'length'), indexOffset: indexOffset }] : Array<Dynamic>));
-      _Runtime.callProperty(materials, 'push', cast ([(cast ObjParse.resolveObjMaterial__objParse((cast materialName : String), (cast library : Null<ObjMaterialLibrary>), (cast resolvedMaterials : flighthq._internal._Map<String, Float>), (cast document : Scene3DDocument), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Float)] : Array<Dynamic>));
+      _Runtime.callProperty(materials, 'push', cast ([(cast ObjParse.resolveObjMaterial__objParse((cast materialName : String), (cast library), (cast resolvedMaterials), (cast document), (cast diagnostics)) : Float)] : Array<Dynamic>));
     }
-    ObjParse.appendObjTopologyMesh__objParse((cast _Runtime.callProperty(lineElements, 'flatMap', cast ([ObjParse.toObjLineSegments__objParse] : Array<Dynamic>)) : Array<Float>), (cast sourcePositions : Array<Float>), (cast 'line-list' : PrimitiveTopology), (cast name : Null<String>), (cast document : Scene3DDocument));
-    ObjParse.appendObjTopologyMesh__objParse((cast pointElements : Array<Float>), (cast sourcePositions : Array<Float>), (cast 'point-list' : PrimitiveTopology), (cast name : Null<String>), (cast document : Scene3DDocument));
+    ObjParse.appendObjTopologyMesh__objParse((cast _Runtime.callProperty(lineElements, 'flatMap', cast ([ObjParse.toObjLineSegments__objParse] : Array<Dynamic>))), (cast sourcePositions), (cast 'line-list'), (cast name), (cast document));
+    ObjParse.appendObjTopologyMesh__objParse((cast pointElements), (cast sourcePositions), (cast 'point-list'), (cast name), (cast document));
     if ((cast _Runtime.strictEquals(_Runtime.field(subsets, 'length'), 0.0) : Bool)) { return; }
-    geometry = (cast createMeshGeometry({ indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_LAYOUT, subsets: subsets, vertices: new flighthq._internal._Float32Array(vertices) }) : MeshGeometry);
-    if ((cast !(cast sourceHasNormals : Bool) : Bool)) { computeMeshGeometryNormals(geometry, geometry); }
+    geometry = (cast createMeshGeometry((cast { indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_LAYOUT, subsets: subsets, vertices: new flighthq._internal._Float32Array(vertices) })) : MeshGeometry);
+    if ((cast !(cast sourceHasNormals : Bool) : Bool)) { computeMeshGeometryNormals((cast geometry), (cast geometry)); }
     meshIndex = _Runtime.field((cast document : Scene3DDocument).meshes, 'length');
-    mesh = { geometry: geometry, materials: materials };
+    mesh = (cast { geometry: geometry, materials: materials });
     _Runtime.callProperty((cast document : Scene3DDocument).meshes, 'push', cast ([mesh] : Array<Dynamic>));
     nodeIndex = _Runtime.field((cast document : Scene3DDocument).nodes, 'length');
-    node = { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) };
+    node = (cast { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) });
     if ((cast !_Runtime.strictEquals(name, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast node : Scene3DDocumentNode).name = name); }
     _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([node] : Array<Dynamic>));
     _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
@@ -378,7 +379,7 @@ class ObjParse {
   public static function resolveObjElementIndices__objParse(args:String, positionCount:Float, objDrops:Null<flighthq._internal._Map<String, ObjDropTally__objParse>>, lineIndex:Float):Array<Float> {
     var resolved:Array<Float> = cast _Runtime.UNDEFINED;
     var tokens:Array<String> = cast _Runtime.UNDEFINED;
-    resolved = cast ([] : Array<Dynamic>);
+    resolved = (cast cast ([] : Array<Dynamic>));
     tokens = _Runtime.callProperty(args, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
     {
       var i:Float = 0.0;
@@ -386,7 +387,7 @@ class ObjParse {
         if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(tokens, i), 'length'), 0.0) : Bool)) { i++; continue; }
         var index:Float = (cast ObjParse.resolveFaceAttrIndex__objParse((cast flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(flighthq._internal._StaticIndex.readArray(tokens, i), 'split', cast (['/'] : Array<Dynamic>)), 0.0) : String), (cast positionCount : Float)) : Float);
         if ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool)) {
-          ObjParse.tallyObjDrop__objParse(objDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.element-index-out-of-range' : String), (cast '' : String), (cast { firstLine: (lineIndex + 1.0), firstToken: flighthq._internal._StaticIndex.readArray(tokens, i) } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+          ObjParse.tallyObjDrop__objParse((cast objDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.element-index-out-of-range' : String), (cast '' : String), (cast { firstLine: (lineIndex + 1.0), firstToken: flighthq._internal._StaticIndex.readArray(tokens, i) }));
           i++;
           continue;
         }
@@ -400,7 +401,7 @@ class ObjParse {
 
   public static function toObjLineSegments__objParse(chain:Array<Float>):Array<Float> {
     var segments:Array<Float> = cast _Runtime.UNDEFINED;
-    segments = cast ([] : Array<Dynamic>);
+    segments = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast (i + 1.0) : Float) < (cast _Runtime.field(chain, 'length') : Float)) : Bool)) {
@@ -420,8 +421,8 @@ class ObjParse {
     var meshIndex:Float = cast _Runtime.UNDEFINED;
     var node:Scene3DDocumentNode = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(elements, 'length'), 0.0) : Bool)) { return; }
-    vertices = cast ([] : Array<Dynamic>);
-    indices = cast ([] : Array<Dynamic>);
+    vertices = (cast cast ([] : Array<Dynamic>));
+    indices = (cast cast ([] : Array<Dynamic>));
     dedup = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var i:Float = 0.0;
@@ -438,16 +439,16 @@ class ObjParse {
               pad++;
             }
           }
-          ((cast dedup : flighthq._internal._Map<Float, Float>).set(source, emitted));
+          ((cast dedup : flighthq._internal._Map<Float, Float>).set(source, (cast emitted)));
         }
         _Runtime.callProperty(indices, 'push', cast ([emitted] : Array<Dynamic>));
         i++;
       }
     }
-    geometry = (cast createMeshGeometry({ indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_LAYOUT, subsets: cast ([{ indexCount: _Runtime.field(indices, 'length'), indexOffset: 0.0 }] : Array<Dynamic>), topology: topology, vertices: new flighthq._internal._Float32Array(vertices) }) : MeshGeometry);
+    geometry = (cast createMeshGeometry((cast { indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_LAYOUT, subsets: cast ([{ indexCount: _Runtime.field(indices, 'length'), indexOffset: 0.0 }] : Array<Dynamic>), topology: topology, vertices: new flighthq._internal._Float32Array(vertices) })) : MeshGeometry);
     meshIndex = _Runtime.field((cast document : Scene3DDocument).meshes, 'length');
     _Runtime.callProperty((cast document : Scene3DDocument).meshes, 'push', cast ([{ geometry: geometry, materials: cast ([-1.0] : Array<Dynamic>) }] : Array<Dynamic>));
-    node = { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) };
+    node = (cast { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) });
     if ((cast !_Runtime.strictEquals(name, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast node : Scene3DDocumentNode).name = name); }
     _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([node] : Array<Dynamic>));
     _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([_Runtime.subtractNumbers(_Runtime.field((cast document : Scene3DDocument).nodes, 'length'), 1.0)] : Array<Dynamic>));
@@ -455,10 +456,10 @@ class ObjParse {
 
   public static function objMaterialToBlinnPhong__objParse(material:ObjMaterial, document:Scene3DDocument, diagnostics:Null<Array<ImportDiagnostic>>):BlinnPhongMaterial {
     var result:BlinnPhongMaterial = cast _Runtime.UNDEFINED;
-    result = (cast createBlinnPhongMaterial((cast { alphaMap: (cast ObjParse.externalObjTexture__objParse((cast material.mapDissolve : Null<String>), (cast document : Scene3DDocument), (cast 'linear' : TextureColorSpace)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>), diffuse: (cast ObjParse.packObjColor__objParse((cast material.diffuse : Array<Float>), (cast material.dissolve : Float)) : Null<Float>), diffuseMap: (cast ObjParse.externalObjTexture__objParse((cast material.mapDiffuse : Null<String>), (cast document : Scene3DDocument), (cast 'srgb' : TextureColorSpace)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>), normalMap: (cast ObjParse.externalObjTexture__objParse((cast _Runtime.coalesce(material.mapNormal, function():Dynamic return cast material.mapBump) : Null<String>), (cast document : Scene3DDocument), (cast 'linear' : TextureColorSpace)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>), shininess: material.specularExponent, specular: (cast ObjParse.packObjColor__objParse((cast material.specular : Array<Float>), (cast 1.0 : Float)) : Null<Float>), specularMap: (cast ObjParse.externalObjTexture__objParse((cast material.mapSpecular : Null<String>), (cast document : Scene3DDocument), (cast 'srgb' : TextureColorSpace)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) } : Null<flighthq._internal._Any>)) : BlinnPhongMaterial);
+    result = (cast createBlinnPhongMaterial((cast { alphaMap: (cast ObjParse.externalObjTexture__objParse((cast material.mapDissolve), (cast document), (cast 'linear')) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>), diffuse: (cast ObjParse.packObjColor__objParse((cast material.diffuse), (cast material.dissolve : Float)) : Float), diffuseMap: (cast ObjParse.externalObjTexture__objParse((cast material.mapDiffuse), (cast document), (cast 'srgb')) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>), normalMap: (cast ObjParse.externalObjTexture__objParse((cast _Runtime.coalesce(material.mapNormal, function():Dynamic return cast material.mapBump)), (cast document), (cast 'linear')) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>), shininess: material.specularExponent, specular: (cast ObjParse.packObjColor__objParse((cast material.specular), (cast 1.0 : Float)) : Float), specularMap: (cast ObjParse.externalObjTexture__objParse((cast material.mapSpecular), (cast document), (cast 'srgb')) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) })) : BlinnPhongMaterial);
     if ((cast ((cast ((cast material.dissolve : Float) < (cast 1.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(material.mapDissolve, null) : Bool)) : Bool)) { ((cast result : BlinnPhongMaterial).alphaMode = 'blend'); }
     if ((cast ((cast !_Runtime.strictEquals(material.emissive, null) : Bool) || (cast !_Runtime.strictEquals(material.mapEmissive, null) : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'mtl.emissive-dropped' : String), (cast 'resolveObjMaterial' : String), (cast { name: material.name } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'mtl.emissive-dropped' : String), (cast 'resolveObjMaterial' : String), (cast { name: material.name }));
     }
     return cast result;
     return cast null;
@@ -466,10 +467,10 @@ class ObjParse {
 
   public static function objMaterialToStandardPbr__objParse(material:ObjMaterial, document:Scene3DDocument, diagnostics:Null<Array<ImportDiagnostic>>):StandardPbrMaterial {
     var result:StandardPbrMaterial = cast _Runtime.UNDEFINED;
-    result = (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ alphaMap: (cast ObjParse.externalObjTexture__objParse((cast material.mapDissolve : Null<String>), (cast document : Scene3DDocument), (cast 'linear' : TextureColorSpace)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) }, { baseColor: (cast ObjParse.packObjColor__objParse((cast material.diffuse : Array<Float>), (cast material.dissolve : Float)) : Null<Float>) }, { baseColorMap: (cast ObjParse.externalObjTexture__objParse((cast material.mapDiffuse : Null<String>), (cast document : Scene3DDocument), (cast 'srgb' : TextureColorSpace)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) }, { emissiveMap: (cast ObjParse.externalObjTexture__objParse((cast material.mapEmissive : Null<String>), (cast document : Scene3DDocument), (cast 'srgb' : TextureColorSpace)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) }, { normalMap: (cast ObjParse.externalObjTexture__objParse((cast _Runtime.coalesce(material.mapNormal, function():Dynamic return cast material.mapBump) : Null<String>), (cast document : Scene3DDocument), (cast 'linear' : TextureColorSpace)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) }, ((cast !_Runtime.strictEquals(material.emissive, null) : Bool) ? (cast { emissive: (cast ObjParse.packObjColor__objParse((cast material.emissive : Array<Float>), (cast 1.0 : Float)) : Null<Float>) } : Dynamic) : (cast {  } : Dynamic)), ((cast !_Runtime.strictEquals(material.metallic, null) : Bool) ? (cast { metallic: material.metallic } : Dynamic) : (cast {  } : Dynamic)), ((cast !_Runtime.strictEquals(material.roughness, null) : Bool) ? (cast { roughness: material.roughness } : Dynamic) : (cast {  } : Dynamic))]) : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
+    result = (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ alphaMap: (cast ObjParse.externalObjTexture__objParse((cast material.mapDissolve), (cast document), (cast 'linear')) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) }, { baseColor: (cast ObjParse.packObjColor__objParse((cast material.diffuse), (cast material.dissolve : Float)) : Float) }, { baseColorMap: (cast ObjParse.externalObjTexture__objParse((cast material.mapDiffuse), (cast document), (cast 'srgb')) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) }, { emissiveMap: (cast ObjParse.externalObjTexture__objParse((cast material.mapEmissive), (cast document), (cast 'srgb')) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) }, { normalMap: (cast ObjParse.externalObjTexture__objParse((cast _Runtime.coalesce(material.mapNormal, function():Dynamic return cast material.mapBump)), (cast document), (cast 'linear')) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) }, ((cast !_Runtime.strictEquals(material.emissive, null) : Bool) ? (cast { emissive: (cast ObjParse.packObjColor__objParse((cast material.emissive), (cast 1.0 : Float)) : Float) } : Dynamic) : (cast {  } : Dynamic)), ((cast !_Runtime.strictEquals(material.metallic, null) : Bool) ? (cast { metallic: material.metallic } : Dynamic) : (cast {  } : Dynamic)), ((cast !_Runtime.strictEquals(material.roughness, null) : Bool) ? (cast { roughness: material.roughness } : Dynamic) : (cast {  } : Dynamic))]))) : StandardPbrMaterial);
     if ((cast ((cast ((cast material.dissolve : Float) < (cast 1.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(material.mapDissolve, null) : Bool)) : Bool)) { ((cast result : StandardPbrMaterial).alphaMode = 'blend'); }
     if ((cast ((cast !_Runtime.strictEquals(material.mapRoughness, null) : Bool) || (cast !_Runtime.strictEquals(material.mapMetallic, null) : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'mtl.metallic-roughness-map-unpacked' : String), (cast 'resolveObjMaterial' : String), (cast { name: material.name } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'mtl.metallic-roughness-map-unpacked' : String), (cast 'resolveObjMaterial' : String), (cast { name: material.name }));
     }
     return cast result;
     return cast null;
@@ -483,7 +484,7 @@ class ObjParse {
   public static function externalObjTexture__objParse(uri:Null<String>, document:Scene3DDocument, colorSpace:TextureColorSpace):Null<Texture> {
     var texture:Texture = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(uri, null) : Bool)) { return cast null; }
-    texture = (cast createExternalTextureRef((cast uri : String), (cast null : Null<String>), (cast document : Scene3DDocument).resources) : Texture);
+    texture = (cast createExternalTextureRef((cast uri : String), (cast null), (cast (cast document : Scene3DDocument).resources)) : Texture);
     ((cast texture : { var colorSpace:TextureColorSpace; }).colorSpace = colorSpace);
     return cast texture;
     return cast null;
@@ -515,19 +516,19 @@ class ObjParse {
     if ((cast _Runtime.strictEquals(name, '') : Bool)) { return cast -1.0; }
     cached = ((cast cache : flighthq._internal._Map<String, Float>).get(name));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
-    parsed = ({ final __collection6:Dynamic = ({ final __typedStruct5 = library; __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : flighthq.types.ObjSchema.ObjMaterialLibrary).materials; }); __collection6 == null ? _Runtime.UNDEFINED : ((cast __collection6 : flighthq._internal._Map<String, ObjMaterial>).get(name)); });
+    parsed = ({ final __collection6:Dynamic = ({ final __typedStruct5 = library; __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : { var materials:flighthq._internal._Map<String, ObjMaterial>; }).materials; }); __collection6 == null ? _Runtime.UNDEFINED : ((cast __collection6 : flighthq._internal._Map<String, ObjMaterial>).get(name)); });
     if ((cast _Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       if ((cast !_Runtime.strictEquals(library, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'obj.material-missing' : String), (cast 'resolveObjMaterial' : String), (cast { name: name } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+        reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'obj.material-missing' : String), (cast 'resolveObjMaterial' : String), (cast { name: name }));
       }
-      ((cast cache : flighthq._internal._Map<String, Float>).set(name, -1.0));
+      ((cast cache : flighthq._internal._Map<String, Float>).set(name, (cast -1.0)));
       return cast -1.0;
     }
-    material = (cast (cast ((cast (cast ObjParse.hasObjPbrDirectives__objParse((cast parsed : ObjMaterial)) : Bool) : Bool) ? (cast ObjParse.objMaterialToStandardPbr__objParse((cast parsed : ObjMaterial), (cast document : Scene3DDocument), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Dynamic) : (cast ObjParse.objMaterialToBlinnPhong__objParse((cast parsed : ObjMaterial), (cast document : Scene3DDocument), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Dynamic)) : flighthq._internal._Any) : Material);
+    material = (cast (cast ((cast (cast ObjParse.hasObjPbrDirectives__objParse((cast parsed)) : Bool) : Bool) ? (cast (cast ObjParse.objMaterialToStandardPbr__objParse((cast parsed), (cast document), (cast diagnostics)) : StandardPbrMaterial) : Dynamic) : (cast (cast ObjParse.objMaterialToBlinnPhong__objParse((cast parsed), (cast document), (cast diagnostics)) : BlinnPhongMaterial) : Dynamic)) : flighthq._internal._Any) : Material);
     ((cast material : Material).name = name);
     index = _Runtime.field((cast document : Scene3DDocument).materials, 'length');
     _Runtime.callProperty((cast document : Scene3DDocument).materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
-    ((cast cache : flighthq._internal._Map<String, Float>).set(name, index));
+    ((cast cache : flighthq._internal._Map<String, Float>).set(name, (cast index)));
     return cast index;
     return cast null;
   }
@@ -548,6 +549,6 @@ class ObjParse {
     if ((cast _Runtime.strictEquals(tallies, null) : Bool)) { return; }
     key = '' + Std.string(kind) + '|' + Std.string(discriminator) + '';
     existing = ((cast tallies : flighthq._internal._Map<String, ObjDropTally__objParse>).get(key));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flighthq._internal._Map<String, ObjDropTally__objParse>).set(key, { count: 1.0, detail: firstDetail, kind: kind, severity: severity })); } else { (cast existing : ObjDropTally__objParse).count++; }
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flighthq._internal._Map<String, ObjDropTally__objParse>).set(key, (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : ObjDropTally__objParse).count++; }
   }
 }

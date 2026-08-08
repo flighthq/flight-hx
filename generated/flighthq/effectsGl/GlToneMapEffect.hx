@@ -23,23 +23,23 @@ class GlToneMapEffect {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     operator_ = _Runtime.coalesce(_Runtime.field(effect, 'operator'), function():Dynamic return cast 'aces');
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 1.0);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'toneMap.' + Std.string(operator_) + '' : String), (cast (cast GlToneMapEffect.buildToneMapFragment__glToneMapEffect((cast operator_ : String)) : String) : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'toneMap.' + Std.string(operator_) + '' : String), (cast (cast GlToneMapEffect.buildToneMapFragment__glToneMapEffect((cast operator_ : String)) : String) : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_exposure'), exposure);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_white'), _Runtime.coalesce(_Runtime.field(effect, 'white'), function():Dynamic return cast 1.0));
-    });
+    }));
   }
 
-  public static final defaultGlToneMapEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyToneMapEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : ToneMapEffect) : ToneMapEffect));
-  };
+  public static final defaultGlToneMapEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyToneMapEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : ToneMapEffect)));
+  });
 
   public static function registerGlToneMapEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'ToneMapEffect' : String), (cast defaultGlToneMapEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'ToneMapEffect' : String), (cast defaultGlToneMapEffectRunner));
   }
 
   public static function buildToneMapFragment__glToneMapEffect(operator_:String):String {
-    return cast ((GlToneMapEffect.TONEMAP_FRAGMENT_HEAD__glToneMapEffect + _Runtime.coalesce(_Runtime.getIndex(GlToneMapEffect.TONEMAP_OPERATORS__glToneMapEffect, operator_), function():Dynamic return cast GlToneMapEffect.TONEMAP_OPERATORS__glToneMapEffect.aces)) + GlToneMapEffect.TONEMAP_FRAGMENT_TAIL__glToneMapEffect);
+    return cast ((GlToneMapEffect.TONEMAP_FRAGMENT_HEAD__glToneMapEffect + _Runtime.coalesce(_Runtime.getIndex(GlToneMapEffect.TONEMAP_OPERATORS__glToneMapEffect, operator_), function():Dynamic return cast (cast GlToneMapEffect.TONEMAP_OPERATORS__glToneMapEffect : { var aces:String; }).aces)) + GlToneMapEffect.TONEMAP_FRAGMENT_TAIL__glToneMapEffect);
     return cast null;
   }
 
@@ -47,5 +47,5 @@ class GlToneMapEffect {
 
   public static final TONEMAP_FRAGMENT_TAIL__glToneMapEffect:String = '}\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec3 mapped = tonemap(c.rgb * u_exposure);\n  o_color = vec4(clamp(mapped, 0.0, 1.0), c.a);\n}';
 
-  public static final TONEMAP_OPERATORS__glToneMapEffect:flighthq._internal._Record<String, String> = { aces: '\n  vec3 a = x * (2.51 * x + 0.03);\n  vec3 b = x * (2.43 * x + 0.59) + 0.14;\n  return a / b;', reinhard: '\n  return x / (1.0 + x / (u_white * u_white));', filmic: '\n  vec3 X = max(vec3(0.0), x - 0.004);\n  return (X * (6.2 * X + 0.5)) / (X * (6.2 * X + 1.7) + 0.06);', uncharted2: '\n  float A = 0.15, B = 0.50, C = 0.10, D = 0.20, E = 0.02, F = 0.30;\n  vec3 v = ((x * (A * x + C * B) + D * E) / (x * (A * x + B) + D * F)) - E / F;\n  return v;', agx: '\n  vec3 v = clamp((x - 0.004) / (1.0 + x), 0.0, 1.0);\n  return pow(v, vec3(0.8));' };
+  public static final TONEMAP_OPERATORS__glToneMapEffect:flighthq._internal._Record<String, String> = (cast { aces: '\n  vec3 a = x * (2.51 * x + 0.03);\n  vec3 b = x * (2.43 * x + 0.59) + 0.14;\n  return a / b;', reinhard: '\n  return x / (1.0 + x / (u_white * u_white));', filmic: '\n  vec3 X = max(vec3(0.0), x - 0.004);\n  return (X * (6.2 * X + 0.5)) / (X * (6.2 * X + 1.7) + 0.06);', uncharted2: '\n  float A = 0.15, B = 0.50, C = 0.10, D = 0.20, E = 0.02, F = 0.30;\n  vec3 v = ((x * (A * x + C * B) + D * E) / (x * (A * x + B) + D * F)) - E / F;\n  return v;', agx: '\n  vec3 v = clamp((x - 0.004) / (1.0 + x), 0.0, 1.0);\n  return pow(v, vec3(0.8));' });
 }

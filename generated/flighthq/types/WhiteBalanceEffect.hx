@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef WhiteBalanceEffect = { var kind:Kind; @:optional var temperature:Float; @:optional var tint:Float; };
+typedef WhiteBalanceEffect = { var kind:String; @:optional var temperature:Float; @:optional var tint:Float; };

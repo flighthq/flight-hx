@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ChannelMixerAdjustment = { var kind:AdjustmentKind; var colorMatrix:Array<Float>; var matrix:Array<Float>; };
+typedef ChannelMixerAdjustment = { var kind:String; var colorMatrix:Array<Float>; var matrix:Array<Float>; };

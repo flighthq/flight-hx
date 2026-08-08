@@ -16,7 +16,7 @@ class Skeleton2dConstraint {
   }
 
   public static function registerSkeleton2DConstraintSolver(kind:Skeleton2DConstraintKind, solve:Skeleton2DConstraintSolver):Void {
-    ((cast Skeleton2dConstraint._solvers__skeleton2dConstraint : flighthq._internal._Map<String, Skeleton2DConstraintSolver>).set(kind, solve));
+    ((cast Skeleton2dConstraint._solvers__skeleton2dConstraint : flighthq._internal._Map<String, Skeleton2DConstraintSolver>).set(kind, (cast solve)));
   }
 
   public static function solveSkeleton2DConstraints(skeleton:Skeleton2D, constraints:Array<Skeleton2DConstraint>):Void {
@@ -26,7 +26,7 @@ class Skeleton2dConstraint {
         var constraint:Skeleton2DConstraint = flighthq._internal._StaticIndex.readArray(constraints, i);
         var solve:Null<Skeleton2DConstraintSolver> = ((cast Skeleton2dConstraint._solvers__skeleton2dConstraint : flighthq._internal._Map<String, Skeleton2DConstraintSolver>).get(_Runtime.field(constraint, 'kind')));
         if ((cast _Runtime.strictEquals(solve, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        solve((cast skeleton : Skeleton2D), (cast constraint : Skeleton2DConstraint));
+        solve((cast skeleton), (cast constraint));
         i++;
       }
     }

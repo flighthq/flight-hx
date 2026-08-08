@@ -11,6 +11,7 @@ import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationPermission;
 import flighthq.types.Notification.NotificationRequest;
+import flighthq.types.Notification.ScheduledNotification;
 
 class ElectronNotification {
   public static function createElectronNotificationBackend(electron:ElectronApi):NotificationBackend {
@@ -35,18 +36,18 @@ class ElectronNotification {
         id = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
         actions = _Runtime.coalesce(request.actions, function():Dynamic return cast cast ([] : Array<Dynamic>));
         n = _Runtime.construct((cast electron : ElectronApi).Notification, [{ title: request.title, body: request.body, icon: request.icon, silent: request.silent, actions: _Runtime.callProperty(actions, 'map', cast ([function(a:NotificationAction, __unused0:Float, __unused1:Array<NotificationAction>):{ var type:String; var text:String; } return { type: 'button', text: a.title }] : Array<Dynamic>)) }]);
-        (cast n : flighthq.types.ElectronApi.ElectronNotification).on('show', function():Null<Void> return _Runtime.callOptionalValue(showListener, cast ([id] : Array<Dynamic>)));
-        (cast n : flighthq.types.ElectronApi.ElectronNotification).on('click', function():Null<Void> return _Runtime.callOptionalValue(clickListener, cast ([id] : Array<Dynamic>)));
-        (cast n : flighthq.types.ElectronApi.ElectronNotification).on('action', _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'show' : String), (cast function(__unused2:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callOptionalValue(showListener, cast ([id] : Array<Dynamic>)); }, cast ([] : Array<Dynamic>)); }));
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'click' : String), (cast function(__unused3:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callOptionalValue(clickListener, cast ([id] : Array<Dynamic>)); }, cast ([] : Array<Dynamic>)); }));
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'action' : String), (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
           var index:Float = cast _Runtime.UNDEFINED;
           index = _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([flighthq._internal._StaticIndex.readArray(args, 1.0)] : Array<Dynamic>));
-          _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(actions, index); __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.id; }), function():Dynamic return cast ''))] : Array<Dynamic>));
-        }, 0));
-        (cast n : flighthq.types.ElectronApi.ElectronNotification).on('close', function():Void {
+          _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(actions, index); __typedStruct0 == null ? _Runtime.UNDEFINED : (cast __typedStruct0 : { var id:String; }).id; }), function():Dynamic return cast ''))] : Array<Dynamic>));
+        }, 0)));
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'close' : String), (cast function(__unused4:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
           ((cast live : flighthq._internal._Map<String, flighthq.types.ElectronApi.ElectronNotification>).delete_(id));
           _Runtime.callOptionalValue(dismissListener, cast ([id] : Array<Dynamic>));
-        });
-        ((cast live : flighthq._internal._Map<String, flighthq.types.ElectronApi.ElectronNotification>).set(id, n));
+        }, cast ([] : Array<Dynamic>)); }));
+        ((cast live : flighthq._internal._Map<String, flighthq.types.ElectronApi.ElectronNotification>).set(id, (cast n)));
         (cast n : flighthq.types.ElectronApi.ElectronNotification).show();
         return cast id;
         return cast null;
@@ -57,19 +58,22 @@ class ElectronNotification {
       }));
     }, getPermission: function():NotificationPermission {
       return cast ((cast (cast (cast electron : ElectronApi).Notification : ElectronNotificationConstructor).isSupported() : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic));
+      return cast _Runtime.UNDEFINED;
     }, isSupported: function():Bool {
       return cast (cast (cast electron : ElectronApi).Notification : ElectronNotificationConstructor).isSupported();
+      return cast _Runtime.UNDEFINED;
     }, getCapabilities: function():NotificationCapabilities {
       return cast { actions: true, channels: false, coldStart: false, image: false, listActive: false, scheduling: false, textReply: false };
-    }, getLaunchNotification: function():flighthq._internal._Promise<flighthq._internal._Any> {
+      return cast _Runtime.UNDEFINED;
+    }, getLaunchNotification: function():flighthq._internal._Promise<Null<NotificationRequest>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, getActiveNotifications: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
+    }, getActiveNotifications: function():flighthq._internal._Promise<Array<NotificationRequest>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
-    }, getPendingNotifications: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
+    }, getPendingNotifications: function():flighthq._internal._Promise<Array<ScheduledNotification>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
@@ -99,25 +103,30 @@ class ElectronNotification {
       return cast function():Void {
         if ((cast _Runtime.strictEquals(clickListener, listener) : Bool)) { (clickListener = cast (null : Dynamic)); }
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeAction: function(listener:String->String->Void):Void->Void {
       (actionListener = cast (listener : Dynamic));
       return cast function():Void {
         if ((cast _Runtime.strictEquals(actionListener, listener) : Bool)) { (actionListener = cast (null : Dynamic)); }
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeDismiss: function(listener:String->Void):Void->Void {
       (dismissListener = cast (listener : Dynamic));
       return cast function():Void {
         if ((cast _Runtime.strictEquals(dismissListener, listener) : Bool)) { (dismissListener = cast (null : Dynamic)); }
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeReply: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeShow: function(listener:String->Void):Void->Void {
       (showListener = cast (listener : Dynamic));
       return cast function():Void {
         if ((cast _Runtime.strictEquals(showListener, listener) : Bool)) { (showListener = cast (null : Dynamic)); }
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }

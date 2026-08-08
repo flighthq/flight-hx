@@ -12,7 +12,7 @@ class ViewMatrix {
   public static function getCamera2DViewMatrix(camera:Camera2D, out:MatrixLike):Void {
     var zoom:Float = cast _Runtime.UNDEFINED;
     zoom = camera.zoom;
-    setTransformMatrix((cast out : MatrixLike), (cast zoom : Float), (cast zoom : Float), (cast -camera.rotation : Float), (cast (camera.viewportWidth * 0.5) : Float), (cast (camera.viewportHeight * 0.5) : Float));
-    translateMatrixByVectorXY((cast out : MatrixLike), (cast out : MatrixLike), (cast -camera.x : Float), (cast -camera.y : Float));
+    setTransformMatrix((cast out), (cast zoom : Float), (cast zoom : Float), (cast -camera.rotation : Float), (cast (camera.viewportWidth * 0.5) : Float), (cast (camera.viewportHeight * 0.5) : Float));
+    translateMatrixByVectorXY((cast out), (cast out), (cast -camera.x : Float), (cast -camera.y : Float));
   }
 }

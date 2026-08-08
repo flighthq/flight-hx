@@ -9,63 +9,63 @@ import flighthq.materials.PbrMaterials.createStandardPbrMaterialProperties;
 import flighthq.materials.TransmissionVolumePbrExtension.createTransmissionVolumePbrExtension;
 import flighthq.types.ExtendedPbrMaterial;
 import flighthq.types.GlassExtendedPbrMaterialOptions;
-import flighthq.types.PbrExtension;
 import flighthq.types.StandardPbrMaterial;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.TransmissionVolumePbrExtension;
 
 class MaterialPresets {
-  public static function createAluminumStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 2964369663.0 }, { metallic: 1.0 }, { roughness: 0.35 }, opts]) : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
+  public static function createAluminumStandardPbrMaterial(?opts:flighthq._internal._Partial<StandardPbrMaterial>):StandardPbrMaterial {
+    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 2964369663.0 }, { metallic: 1.0 }, { roughness: 0.35 }, opts]))) : StandardPbrMaterial);
     return cast null;
   }
 
-  public static function createCarbonStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 437918463.0 }, { metallic: 0.0 }, { roughness: 0.95 }, opts]) : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
+  public static function createCarbonStandardPbrMaterial(?opts:flighthq._internal._Partial<StandardPbrMaterial>):StandardPbrMaterial {
+    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 437918463.0 }, { metallic: 0.0 }, { roughness: 0.95 }, opts]))) : StandardPbrMaterial);
     return cast null;
   }
 
   public static function createGlassExtendedPbrMaterial(?opts:GlassExtendedPbrMaterialOptions):ExtendedPbrMaterial {
-    return cast (cast createExtendedPbrMaterial((cast _Runtime.mergeObjects([opts, { extensions: cast ([(cast createTransmissionVolumePbrExtension((cast _Runtime.mergeObjects([{ ior: 1.5 }, { transmission: 1.0 }, _Runtime.optionalField(opts, 'transmissionVolume')]) : Null<flighthq._internal._Any>)) : PbrExtension)] : Array<Dynamic>) }, { standard: (cast createStandardPbrMaterialProperties((cast _Runtime.mergeObjects([{ baseColor: 4294967295.0 }, { metallic: 0.0 }, { roughness: 0.0 }, _Runtime.optionalField(opts, 'standard')]) : Null<flighthq._internal._Any>)) : Null<StandardPbrMaterialProperties>) }]) : Null<flighthq._internal._Any>)) : ExtendedPbrMaterial);
+    return cast (cast createExtendedPbrMaterial((cast _Runtime.mergeObjects([opts, { extensions: cast ([(cast createTransmissionVolumePbrExtension((cast _Runtime.mergeObjects([{ ior: 1.5 }, { transmission: 1.0 }, ({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var transmissionVolume:Null<flighthq._internal._Any>; }).transmissionVolume; })]))) : TransmissionVolumePbrExtension)] : Array<Dynamic>) }, { standard: (cast createStandardPbrMaterialProperties((cast _Runtime.mergeObjects([{ baseColor: 4294967295.0 }, { metallic: 0.0 }, { roughness: 0.0 }, ({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var standard:Null<flighthq._internal._Any>; }).standard; })]))) : StandardPbrMaterialProperties) }]))) : ExtendedPbrMaterial);
     return cast null;
   }
 
-  public static function createGoldStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 4292280575.0 }, { metallic: 1.0 }, { roughness: 0.25 }, opts]) : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
+  public static function createGoldStandardPbrMaterial(?opts:flighthq._internal._Partial<StandardPbrMaterial>):StandardPbrMaterial {
+    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 4292280575.0 }, { metallic: 1.0 }, { roughness: 0.25 }, opts]))) : StandardPbrMaterial);
     return cast null;
   }
 
-  public static function createIronStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 1145324799.0 }, { metallic: 1.0 }, { roughness: 0.7 }, opts]) : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
+  public static function createIronStandardPbrMaterial(?opts:flighthq._internal._Partial<StandardPbrMaterial>):StandardPbrMaterial {
+    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 1145324799.0 }, { metallic: 1.0 }, { roughness: 0.7 }, opts]))) : StandardPbrMaterial);
     return cast null;
   }
 
-  public static function createMarbleStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 4126537215.0 }, { metallic: 0.0 }, { roughness: 0.05 }, opts]) : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
+  public static function createMarbleStandardPbrMaterial(?opts:flighthq._internal._Partial<StandardPbrMaterial>):StandardPbrMaterial {
+    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 4126537215.0 }, { metallic: 0.0 }, { roughness: 0.05 }, opts]))) : StandardPbrMaterial);
     return cast null;
   }
 
-  public static function createPlasticStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 4294967295.0 }, { metallic: 0.0 }, { roughness: 0.05 }, opts]) : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
+  public static function createPlasticStandardPbrMaterial(?opts:flighthq._internal._Partial<StandardPbrMaterial>):StandardPbrMaterial {
+    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 4294967295.0 }, { metallic: 0.0 }, { roughness: 0.05 }, opts]))) : StandardPbrMaterial);
     return cast null;
   }
 
-  public static function createRubberStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 471604479.0 }, { metallic: 0.0 }, { roughness: 0.9 }, opts]) : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
+  public static function createRubberStandardPbrMaterial(?opts:flighthq._internal._Partial<StandardPbrMaterial>):StandardPbrMaterial {
+    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 471604479.0 }, { metallic: 0.0 }, { roughness: 0.9 }, opts]))) : StandardPbrMaterial);
     return cast null;
   }
 
-  public static function createSilverStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 3233857791.0 }, { metallic: 1.0 }, { roughness: 0.1 }, opts]) : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
+  public static function createSilverStandardPbrMaterial(?opts:flighthq._internal._Partial<StandardPbrMaterial>):StandardPbrMaterial {
+    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 3233857791.0 }, { metallic: 1.0 }, { roughness: 0.1 }, opts]))) : StandardPbrMaterial);
     return cast null;
   }
 
-  public static function createSkinStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 4291598847.0 }, { metallic: 0.0 }, { roughness: 0.4 }, opts]) : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
+  public static function createSkinStandardPbrMaterial(?opts:flighthq._internal._Partial<StandardPbrMaterial>):StandardPbrMaterial {
+    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 4291598847.0 }, { metallic: 0.0 }, { roughness: 0.4 }, opts]))) : StandardPbrMaterial);
     return cast null;
   }
 
-  public static function createWoodStandardPbrMaterial(?opts:Dynamic):StandardPbrMaterial {
-    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 2337942527.0 }, { metallic: 0.0 }, { roughness: 0.8 }, opts]) : Null<flighthq._internal._Any>)) : StandardPbrMaterial);
+  public static function createWoodStandardPbrMaterial(?opts:flighthq._internal._Partial<StandardPbrMaterial>):StandardPbrMaterial {
+    return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 2337942527.0 }, { metallic: 0.0 }, { roughness: 0.8 }, opts]))) : StandardPbrMaterial);
     return cast null;
   }
 }

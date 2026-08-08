@@ -23,6 +23,7 @@ import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.ToonMaterial;
 import flighthq.types.Types.ToonMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
+import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuToonPipeline;
@@ -31,36 +32,36 @@ import flighthq.types._internal._ToonMaterialValues.ToonMaterialKind;
 
 class ToonWgpuMeshMaterialRenderer {
   @:noCompletion
-  public static final toonWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+  public static final toonWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var toon:Null<ToonMaterial> = cast _Runtime.UNDEFINED;
     var format:String = cast _Runtime.UNDEFINED;
     var pipeline:WgpuToonPipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
-    stateRuntime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    stateRuntime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     toon = (cast material : Null<ToonMaterial>);
     format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    pipeline = (cast ensureWgpuToonPipeline((cast state : WgpuRenderState), (cast (cast ToonWgpuMeshMaterialRenderer.defineKeyForMaterial__toonWgpuMeshMaterialRenderer((cast toon : Null<ToonMaterial>)) : WgpuToonDefineKey) : WgpuToonDefineKey), (cast format : String)) : WgpuToonPipeline);
-    writeWgpuFrameUniform((cast state : WgpuRenderState), (cast camera : Camera3D), (cast lights : Scene3DLightBlock));
+    pipeline = (cast ensureWgpuToonPipeline((cast state), (cast (cast ToonWgpuMeshMaterialRenderer.defineKeyForMaterial__toonWgpuMeshMaterialRenderer((cast toon)) : WgpuToonDefineKey)), (cast format : String)) : WgpuToonPipeline);
+    writeWgpuFrameUniform((cast state), (cast camera), (cast lights));
     if ((cast _Runtime.strictEquals(toon, null) : Bool)) {
-      (group = cast ((cast bindWgpuToonSurface((cast state : WgpuRenderState), pipeline, (cast ToonWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__toonWgpuMeshMaterialRenderer : flighthq._internal._Object), (cast ToonWgpuMeshMaterialRenderer.WHITE__toonWgpuMeshMaterialRenderer : Array<Float>), (cast 3.0 : Float), (cast 0.5 : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (group = cast ((cast bindWgpuToonSurface((cast state), (cast pipeline), (cast ToonWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__toonWgpuMeshMaterialRenderer), (cast ToonWgpuMeshMaterialRenderer.WHITE__toonWgpuMeshMaterialRenderer), (cast 3.0 : Float), (cast 0.5 : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
-      (cast unpackColorToLinear((cast ToonWgpuMeshMaterialRenderer._scratch__toonWgpuMeshMaterialRenderer : LinearColor), (cast _Runtime.field(toon, 'baseColor') : Float)) : LinearColor);
-      (group = cast ((cast bindWgpuToonSurface((cast state : WgpuRenderState), pipeline, (cast toon : flighthq._internal._Object), (cast ToonWgpuMeshMaterialRenderer._scratch__toonWgpuMeshMaterialRenderer : Array<Float>), (cast _Runtime.field(toon, 'steps') : Float), (cast _Runtime.field(toon, 'alphaCutoff') : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (cast unpackColorToLinear((cast ToonWgpuMeshMaterialRenderer._scratch__toonWgpuMeshMaterialRenderer), (cast _Runtime.field(toon, 'baseColor') : Float)) : LinearColor);
+      (group = cast ((cast bindWgpuToonSurface((cast state), (cast pipeline), (cast toon), (cast ToonWgpuMeshMaterialRenderer._scratch__toonWgpuMeshMaterialRenderer), (cast _Runtime.field(toon, 'steps') : Float), (cast _Runtime.field(toon, 'alphaCutoff') : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
-    beginWgpuMeshDraw((cast state : WgpuRenderState), pipeline);
+    beginWgpuMeshDraw((cast state), (cast pipeline));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
-    drawWgpuMeshSubset((cast state : WgpuRenderState), (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
-  } };
+    drawWgpuMeshSubset((cast state), (cast proxy), (cast geometry));
+  } });
 
   public static function registerWgpuToonMaterial(state:WgpuRenderState):Void {
-    registerWgpuBitmapTextureResolver((cast state : WgpuRenderState));
-    registerWgpuImageTextureResolver((cast state : WgpuRenderState));
-    registerWgpuMeshMaterialRenderer((cast state : WgpuRenderState), (cast ToonMaterialKind : String), (cast toonWgpuMeshMaterialRenderer : WgpuMeshMaterialRenderer));
+    registerWgpuBitmapTextureResolver((cast state));
+    registerWgpuImageTextureResolver((cast state));
+    registerWgpuMeshMaterialRenderer((cast state), (cast ToonMaterialKind : String), (cast toonWgpuMeshMaterialRenderer));
   }
 
   public static function defineKeyForMaterial__toonWgpuMeshMaterialRenderer(material:Null<ToonMaterial>):WgpuToonDefineKey {
@@ -68,9 +69,9 @@ class ToonWgpuMeshMaterialRenderer {
     return cast null;
   }
 
-  public static final _scratch__toonWgpuMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static final _scratch__toonWgpuMeshMaterialRenderer:LinearColor = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 
-  public static final WHITE__toonWgpuMeshMaterialRenderer:LinearColor = cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>);
+  public static final WHITE__toonWgpuMeshMaterialRenderer:LinearColor = (cast cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
 
   public static final FALLBACK_MATERIAL__toonWgpuMeshMaterialRenderer:ToonMaterial = (cast {  } : ToonMaterial);
 }

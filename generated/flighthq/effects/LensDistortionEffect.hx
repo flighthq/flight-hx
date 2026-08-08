@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.LensDistortionEffect;
 
 class LensDistortionEffect {
-  public static function createLensDistortionEffect(?options:Dynamic):flighthq.types.LensDistortionEffect {
+  public static function createLensDistortionEffect(?options:flighthq._internal._Omit<flighthq.types.LensDistortionEffect, String>):flighthq.types.LensDistortionEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'LensDistortionEffect' }, options]);
     return cast null;

@@ -45,7 +45,7 @@ class RiveLayout {
     var providerChildren:flighthq._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>> = cast _Runtime.UNDEFINED;
     var roots:Array<RiveLayoutProvider__riveLayout> = cast _Runtime.UNDEFINED;
     var imports:Array<RiveLayoutImport> = cast _Runtime.UNDEFINED;
-    componentProviders = (cast RiveLayout.findRiveLayoutComponents__riveLayout((cast artboard : RiveArtboardGraph), (cast nodes : Array<Null<DisplayObject>>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>);
+    componentProviders = (cast RiveLayout.findRiveLayoutComponents__riveLayout((cast artboard), (cast nodes), (cast diagnostics)) : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>);
     if ((cast _Runtime.strictEquals((cast componentProviders : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).size, 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     providers = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [componentProviders]);
     placements = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
@@ -56,21 +56,21 @@ class RiveLayout {
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveLayout.RIVE_LAYOUT_PARTICIPANT_TYPE_KEY__riveLayout : Float)) : Bool) : Bool)) {
           var targetIndex:Float = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index);
           if ((cast ((cast ((cast ((cast targetIndex : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(nodes, targetIndex), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(nodes, targetIndex), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-            ((cast providers : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).set(targetIndex, { sourceIndex: targetIndex, styleIndex: index, targetIndex: targetIndex, type: 'participant' }));
+            ((cast providers : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).set(targetIndex, (cast { sourceIndex: targetIndex, styleIndex: index, targetIndex: targetIndex, type: 'participant' })));
           }
           index++;
           continue;
         }
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveLayout.RIVE_NESTED_ARTBOARD_LAYOUT_TYPE_KEY__riveLayout : Float)) : Bool) : Bool)) {
           if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(nodes, index), null) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(nodes, index), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-            ((cast providers : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).set(index, { sourceIndex: index, styleIndex: index, targetIndex: index, type: 'nested' }));
+            ((cast providers : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).set(index, (cast { sourceIndex: index, styleIndex: index, targetIndex: index, type: 'nested' })));
           }
           index++;
           continue;
         }
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveLayout.RIVE_GRID_ITEM_PLACEMENT_TYPE_KEY__riveLayout : Float)) : Bool) : Bool)) {
           var owner:Float = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index);
-          if ((cast ((cast owner : Float) >= (cast 0.0 : Float)) : Bool)) { ((cast placements : flighthq._internal._Map<Float, RiveCoreObject>).set(owner, object)); }
+          if ((cast ((cast owner : Float) >= (cast 0.0 : Float)) : Bool)) { ((cast placements : flighthq._internal._Map<Float, RiveCoreObject>).set(owner, (cast object))); }
         }
         index++;
       }
@@ -79,22 +79,22 @@ class RiveLayout {
     providerChildren = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (provider in _Runtime.iterable(((cast providers : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).values()))) {
       var start:Float = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), (cast provider : RiveLayoutProvider__riveLayout).sourceIndex);
-      var parent:Float = (cast RiveLayout.findRiveLayoutParent__riveLayout((cast artboard : RiveArtboardGraph), componentProviders, (cast start : Float), (cast (cast provider : RiveLayoutProvider__riveLayout).sourceIndex : Float)) : Float);
-      ((cast providerParents : flighthq._internal._Map<Float, Float>).set((cast provider : RiveLayoutProvider__riveLayout).sourceIndex, parent));
+      var parent:Float = (cast RiveLayout.findRiveLayoutParent__riveLayout((cast artboard), (cast componentProviders), (cast start : Float), (cast (cast provider : RiveLayoutProvider__riveLayout).sourceIndex : Float)) : Float);
+      ((cast providerParents : flighthq._internal._Map<Float, Float>).set((cast provider : RiveLayoutProvider__riveLayout).sourceIndex, (cast parent)));
       if ((cast ((cast parent : Float) < (cast 0.0 : Float)) : Bool)) { continue; }
       var children:Array<RiveLayoutProvider__riveLayout> = _Runtime.coalesce(((cast providerChildren : flighthq._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>>).get(parent)), function():Dynamic return cast cast ([] : Array<Dynamic>));
       _Runtime.callProperty(children, 'push', cast ([provider] : Array<Dynamic>));
-      ((cast providerChildren : flighthq._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>>).set(parent, children));
+      ((cast providerChildren : flighthq._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>>).set(parent, (cast children)));
     }
     for (children in _Runtime.iterable(((cast providerChildren : flighthq._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>>).values()))) {
       _Runtime.callProperty(children, 'sort', cast ([RiveLayout.compareRiveLayoutProviders__riveLayout] : Array<Dynamic>));
     }
     roots = _Runtime.callProperty(_Runtime.callProperty(_Runtime.concatArrays([_Runtime.toArray(((cast componentProviders : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).values()))]), 'filter', cast ([function(provider:RiveLayoutProvider__riveLayout, __unused0:Float, __unused1:Array<RiveLayoutProvider__riveLayout>):Bool return ((cast _Runtime.coalesce(((cast providerParents : flighthq._internal._Map<Float, Float>).get((cast provider : RiveLayoutProvider__riveLayout).sourceIndex)), function():Dynamic return cast -1.0) : Float) < (cast 0.0 : Float))] : Array<Dynamic>)), 'sort', cast ([RiveLayout.compareRiveLayoutProviders__riveLayout] : Array<Dynamic>));
-    imports = cast ([] : Array<Dynamic>);
+    imports = (cast cast ([] : Array<Dynamic>));
     for (root in _Runtime.iterable(roots)) {
-      var layoutNodes:Array<LayoutNode<Dynamic, Dynamic>> = cast ([] : Array<Dynamic>);
-      var targets:Array<DisplayObject> = cast ([] : Array<Dynamic>);
-      RiveLayout.appendRiveLayoutProvider__riveLayout((cast artboard : RiveArtboardGraph), (cast nodes : Array<Null<DisplayObject>>), componentProviders, providerChildren, (cast placements : flighthq._internal._Map<Float, RiveCoreObject>), root, (cast -1.0 : Float), null, (cast layoutNodes : Array<LayoutNode<flighthq._internal._Object, flighthq._internal._Object>>), (cast targets : Array<DisplayObject>));
+      var layoutNodes:Array<LayoutNode<Dynamic, Dynamic>> = (cast cast ([] : Array<Dynamic>));
+      var targets:Array<DisplayObject> = (cast cast ([] : Array<Dynamic>));
+      RiveLayout.appendRiveLayoutProvider__riveLayout((cast artboard), (cast nodes), (cast componentProviders), (cast providerChildren), (cast placements), (cast root), (cast -1.0 : Float), (cast null), (cast layoutNodes), (cast targets));
       if ((cast ((cast _Runtime.field(layoutNodes, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(imports, 'push', cast ([{ targets: targets, tree: { nodes: layoutNodes } }] : Array<Dynamic>)); }
     }
     return cast imports;
@@ -114,11 +114,11 @@ class RiveLayout {
         var styleIndex:Float = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast styleProperty : RiveProperty).value), 'number') : Bool) ? (cast (cast styleProperty : RiveProperty).value : Dynamic) : (cast -1.0 : Dynamic));
         var style:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), styleIndex);
         if ((cast ((cast ((cast ((cast _Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast isRiveCoreTypeDerivedFrom((cast (cast style : RiveCoreObject).typeKey : Float), (cast RiveLayout.RIVE_LAYOUT_COMPONENT_STYLE_TYPE_KEY__riveLayout : Float)) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(nodes, index), null) : Bool)) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(nodes, index), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-          reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'rive.layout-unresolved-style' : String), (cast 'createRiveLayoutImports' : String), (cast { index: index, styleId: styleIndex } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'rive.layout-unresolved-style' : String), (cast 'createRiveLayoutImports' : String), (cast { index: index, styleId: styleIndex }));
           index++;
           continue;
         }
-        ((cast providers : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).set(index, { sourceIndex: index, styleIndex: styleIndex, targetIndex: index, type: 'component' }));
+        ((cast providers : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).set(index, (cast { sourceIndex: index, styleIndex: styleIndex, targetIndex: index, type: 'component' })));
         index++;
       }
     }
@@ -140,7 +140,7 @@ class RiveLayout {
         continue;
       }
       if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveLayout.RIVE_SOLO_TYPE_KEY__riveLayout : Float)) : Bool) : Bool)) {
-        var active:Float = (cast RiveLayout.readRiveNumber__riveLayout((cast object : RiveCoreObject), (cast RiveLayout.RIVE_SOLO_ACTIVE_COMPONENT__riveLayout : Float), (cast -1.0 : Float)) : Float);
+        var active:Float = (cast RiveLayout.readRiveNumber__riveLayout((cast object), (cast RiveLayout.RIVE_SOLO_ACTIVE_COMPONENT__riveLayout : Float), (cast -1.0 : Float)) : Float);
         if ((cast ((cast ((cast active : Float) >= (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(active, child) : Bool)) : Bool)) { return cast RiveLayout.RIVE_NO_PARENT__riveLayout; }
         (child = cast (index : Dynamic));
         (index = cast (flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index) : Dynamic));
@@ -167,16 +167,16 @@ class RiveLayout {
     source = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), _Runtime.field(provider, 'sourceIndex'));
     style = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), _Runtime.field(provider, 'styleIndex'));
     children = _Runtime.coalesce(((cast childrenByProvider : flighthq._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>>).get(_Runtime.field(provider, 'sourceIndex'))), function():Dynamic return cast cast ([] : Array<Dynamic>));
-    context = ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'component') : Bool) ? (cast (cast RiveLayout.createRiveLayoutContext__riveLayout((cast _Runtime.field(provider, 'sourceIndex') : Float), (cast style : RiveCoreObject), (cast _Runtime.coalesce(_Runtime.optionalField(parentContext, 'rtl'), function():Dynamic return cast false) : Bool), (cast _Runtime.field(children, 'length') : Float)) : RiveLayoutContext__riveLayout) : Dynamic) : (cast null : Dynamic));
-    itemStyle = ((cast _Runtime.strictEquals(parentContext, null) : Bool) ? (cast null : Dynamic) : (cast (cast RiveLayout.createRiveItemStyle__riveLayout((cast artboard : RiveArtboardGraph), provider, (cast source : RiveCoreObject), (cast style : RiveCoreObject), parentContext, (cast ((cast placements : flighthq._internal._Map<Float, RiveCoreObject>).get(_Runtime.field(provider, 'sourceIndex'))) : Null<RiveCoreObject>)) : Null<flighthq._internal._Union2<FlexLayoutItemStyle, GridLayoutItemStyle>>) : Dynamic));
+    context = ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'component') : Bool) ? (cast (cast RiveLayout.createRiveLayoutContext__riveLayout((cast _Runtime.field(provider, 'sourceIndex') : Float), (cast style), (cast _Runtime.coalesce(({ final __structural6 = parentContext; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var rtl:Bool; }).rtl; }), function():Dynamic return cast false) : Bool), (cast _Runtime.field(children, 'length') : Float)) : RiveLayoutContext__riveLayout) : Dynamic) : (cast null : Dynamic));
+    itemStyle = ((cast _Runtime.strictEquals(parentContext, null) : Bool) ? (cast null : Dynamic) : (cast (cast RiveLayout.createRiveItemStyle__riveLayout((cast artboard), (cast provider), (cast source), (cast style), (cast parentContext), (cast ((cast placements : flighthq._internal._Map<Float, RiveCoreObject>).get(_Runtime.field(provider, 'sourceIndex'))))) : Null<flighthq._internal._Union2<FlexLayoutItemStyle, GridLayoutItemStyle>>) : Dynamic));
     kind = ((cast ((cast _Runtime.strictEquals(context, null) : Bool) || (cast _Runtime.strictEquals((cast context : RiveLayoutContext__riveLayout).layoutType, RiveLayout.RIVE_LAYOUT_TYPE_FLEX__riveLayout) : Bool)) : Bool) ? (cast FlexLayoutKind : Dynamic) : (cast GridLayoutKind : Dynamic));
-    containerStyle = ((cast _Runtime.strictEquals(context, null) : Bool) ? (cast null : Dynamic) : (cast ((cast _Runtime.strictEquals((cast context : RiveLayoutContext__riveLayout).layoutType, RiveLayout.RIVE_LAYOUT_TYPE_FLEX__riveLayout) : Bool) ? (cast (cast RiveLayout.createRiveFlexContainerStyle__riveLayout((cast style : RiveCoreObject), context) : FlexLayoutContainerStyle) : Dynamic) : (cast (cast RiveLayout.createRiveGridContainerStyle__riveLayout((cast artboard : RiveArtboardGraph), (cast _Runtime.field(provider, 'sourceIndex') : Float), (cast style : RiveCoreObject), context) : GridLayoutContainerStyle) : Dynamic)) : Dynamic));
+    containerStyle = ((cast _Runtime.strictEquals(context, null) : Bool) ? (cast null : Dynamic) : (cast ((cast _Runtime.strictEquals((cast context : RiveLayoutContext__riveLayout).layoutType, RiveLayout.RIVE_LAYOUT_TYPE_FLEX__riveLayout) : Bool) ? (cast (cast RiveLayout.createRiveFlexContainerStyle__riveLayout((cast style), (cast context)) : FlexLayoutContainerStyle) : Dynamic) : (cast (cast RiveLayout.createRiveGridContainerStyle__riveLayout((cast artboard), (cast _Runtime.field(provider, 'sourceIndex') : Float), (cast style), (cast context)) : GridLayoutContainerStyle) : Dynamic)) : Dynamic));
     nodeIndex = _Runtime.field(nodes, 'length');
     _Runtime.callProperty(nodes, 'push', cast ([{ containerStyle: containerStyle, itemStyle: itemStyle, kind: kind, parentIndex: parentIndex }] : Array<Dynamic>));
     _Runtime.callProperty(targets, 'push', cast ([target] : Array<Dynamic>));
     if ((cast ((cast !(cast ((cast components : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).has(_Runtime.field(provider, 'sourceIndex'))) : Bool) : Bool) || (cast _Runtime.strictEquals(context, null) : Bool)) : Bool)) { return; }
     for (child in _Runtime.iterable(children)) {
-      RiveLayout.appendRiveLayoutProvider__riveLayout((cast artboard : RiveArtboardGraph), (cast displayNodes : Array<Null<DisplayObject>>), components, childrenByProvider, (cast placements : flighthq._internal._Map<Float, RiveCoreObject>), child, (cast nodeIndex : Float), context, (cast nodes : Array<LayoutNode<flighthq._internal._Object, flighthq._internal._Object>>), (cast targets : Array<DisplayObject>));
+      RiveLayout.appendRiveLayoutProvider__riveLayout((cast artboard), (cast displayNodes), (cast components), (cast childrenByProvider), (cast placements), (cast child), (cast nodeIndex : Float), (cast context), (cast nodes), (cast targets));
     }
   }
 
@@ -184,10 +184,10 @@ class RiveLayout {
     var rawDirection:Float = cast _Runtime.UNDEFINED;
     var rtl:Bool = cast _Runtime.UNDEFINED;
     var flexDirection:Float = cast _Runtime.UNDEFINED;
-    rawDirection = (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_DIRECTION__riveLayout : Float), (cast RiveLayout.RIVE_DIRECTION_INHERIT__riveLayout : Float)) : Float);
+    rawDirection = (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_DIRECTION__riveLayout : Float), (cast RiveLayout.RIVE_DIRECTION_INHERIT__riveLayout : Float)) : Float);
     rtl = ((cast _Runtime.strictEquals(rawDirection, RiveLayout.RIVE_DIRECTION_RTL__riveLayout) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(rawDirection, RiveLayout.RIVE_DIRECTION_INHERIT__riveLayout), function():Dynamic return cast inheritedRtl) : Bool));
-    flexDirection = (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_FLEX_DIRECTION__riveLayout : Float), (cast RiveLayout.RIVE_FLEX_DIRECTION_ROW__riveLayout : Float)) : Float);
-    return cast { childCount: childCount, layoutType: (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_LAYOUT_TYPE__riveLayout : Float), (cast RiveLayout.RIVE_LAYOUT_TYPE_FLEX__riveLayout : Float)) : Float), row: ((cast _Runtime.strictEquals(flexDirection, RiveLayout.RIVE_FLEX_DIRECTION_ROW__riveLayout) : Bool) || (cast _Runtime.strictEquals(flexDirection, RiveLayout.RIVE_FLEX_DIRECTION_ROW_REVERSE__riveLayout) : Bool)), rtl: rtl, sourceIndex: sourceIndex, style: style };
+    flexDirection = (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_FLEX_DIRECTION__riveLayout : Float), (cast RiveLayout.RIVE_FLEX_DIRECTION_ROW__riveLayout : Float)) : Float);
+    return cast { childCount: childCount, layoutType: (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_LAYOUT_TYPE__riveLayout : Float), (cast RiveLayout.RIVE_LAYOUT_TYPE_FLEX__riveLayout : Float)) : Float), row: ((cast _Runtime.strictEquals(flexDirection, RiveLayout.RIVE_FLEX_DIRECTION_ROW__riveLayout) : Bool) || (cast _Runtime.strictEquals(flexDirection, RiveLayout.RIVE_FLEX_DIRECTION_ROW_REVERSE__riveLayout) : Bool)), rtl: rtl, sourceIndex: sourceIndex, style: style };
     return cast null;
   }
 
@@ -200,16 +200,16 @@ class RiveLayout {
     var horizontalGap:Float = cast _Runtime.UNDEFINED;
     var verticalGap:Float = cast _Runtime.UNDEFINED;
     var gap:Float = cast _Runtime.UNDEFINED;
-    rawDirection = (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_FLEX_DIRECTION__riveLayout : Float), (cast RiveLayout.RIVE_FLEX_DIRECTION_ROW__riveLayout : Float)) : Float);
+    rawDirection = (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_FLEX_DIRECTION__riveLayout : Float), (cast RiveLayout.RIVE_FLEX_DIRECTION_ROW__riveLayout : Float)) : Float);
     direction = (cast RiveLayout.mapRiveFlexDirection__riveLayout((cast rawDirection : Float), (cast _Runtime.field(context, 'rtl') : Bool)) : FlexLayoutDirection);
-    alignment = (cast RiveLayout.mapRiveFlexAlignment__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_LAYOUT_ALIGNMENT__riveLayout : Float), (cast 0.0 : Float)) : Float) : Float), (cast _Runtime.field(context, 'row') : Bool), (cast _Runtime.field(context, 'rtl') : Bool)) : { var align:FlexLayoutAlign; var justify:FlexLayoutJustify; });
-    wrap = (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_FLEX_WRAP__riveLayout : Float), (cast 0.0 : Float)) : Float);
-    result = { align: (cast alignment : { var align:FlexLayoutAlign; var justify:FlexLayoutJustify; }).align, direction: direction, justify: (cast alignment : { var align:FlexLayoutAlign; var justify:FlexLayoutJustify; }).justify, wrap: ((cast _Runtime.strictEquals(wrap, 1.0) : Bool) ? (cast 'wrap' : Dynamic) : (cast ((cast _Runtime.strictEquals(wrap, 2.0) : Bool) ? (cast 'wrap-reverse' : Dynamic) : (cast 'nowrap' : Dynamic)) : Dynamic)) };
-    horizontalGap = (cast RiveLayout.readRivePointLength__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_GAP_HORIZONTAL__riveLayout : Float), (cast RiveLayout.RIVE_GAP_HORIZONTAL_UNITS__riveLayout : Float)) : Float);
-    verticalGap = (cast RiveLayout.readRivePointLength__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_GAP_VERTICAL__riveLayout : Float), (cast RiveLayout.RIVE_GAP_VERTICAL_UNITS__riveLayout : Float)) : Float);
+    alignment = (cast RiveLayout.mapRiveFlexAlignment__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_LAYOUT_ALIGNMENT__riveLayout : Float), (cast 0.0 : Float)) : Float) : Float), (cast _Runtime.field(context, 'row') : Bool), (cast _Runtime.field(context, 'rtl') : Bool)) : { var align:FlexLayoutAlign; var justify:FlexLayoutJustify; });
+    wrap = (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_FLEX_WRAP__riveLayout : Float), (cast 0.0 : Float)) : Float);
+    result = (cast { align: (cast alignment : { var align:FlexLayoutAlign; var justify:FlexLayoutJustify; }).align, direction: direction, justify: (cast alignment : { var align:FlexLayoutAlign; var justify:FlexLayoutJustify; }).justify, wrap: ((cast _Runtime.strictEquals(wrap, 1.0) : Bool) ? (cast 'wrap' : Dynamic) : (cast ((cast _Runtime.strictEquals(wrap, 2.0) : Bool) ? (cast 'wrap-reverse' : Dynamic) : (cast 'nowrap' : Dynamic)) : Dynamic)) });
+    horizontalGap = (cast RiveLayout.readRivePointLength__riveLayout((cast style), (cast RiveLayout.RIVE_GAP_HORIZONTAL__riveLayout : Float), (cast RiveLayout.RIVE_GAP_HORIZONTAL_UNITS__riveLayout : Float)) : Float);
+    verticalGap = (cast RiveLayout.readRivePointLength__riveLayout((cast style), (cast RiveLayout.RIVE_GAP_VERTICAL__riveLayout : Float), (cast RiveLayout.RIVE_GAP_VERTICAL_UNITS__riveLayout : Float)) : Float);
     gap = ((cast _Runtime.field(context, 'row') : Bool) ? (cast horizontalGap : Dynamic) : (cast verticalGap : Dynamic));
     if ((cast ((cast gap : Float) > (cast 0.0 : Float)) : Bool)) { ((cast result : FlexLayoutContainerStyle).gap = gap); }
-    RiveLayout.applyRiveInsets__riveLayout((cast result : flighthq._internal._Union2<FlexLayoutContainerStyle, GridLayoutContainerStyle>), (cast style : RiveCoreObject), (cast _Runtime.field(context, 'rtl') : Bool));
+    RiveLayout.applyRiveInsets__riveLayout((cast result), (cast style), (cast _Runtime.field(context, 'rtl') : Bool));
     return cast result;
     return cast null;
   }
@@ -222,21 +222,21 @@ class RiveLayout {
     var columnGap:Float = cast _Runtime.UNDEFINED;
     var rowGap:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(context, 'layoutType'), RiveLayout.RIVE_LAYOUT_TYPE_STACK__riveLayout) : Bool)) {
-      var stack:GridLayoutContainerStyle = { columns: cast ([{ fraction: 1.0, kind: 'fraction' }] : Array<Dynamic>), rows: cast ([{ fraction: 1.0, kind: 'fraction' }] : Array<Dynamic>) };
-      RiveLayout.applyRiveInsets__riveLayout((cast stack : flighthq._internal._Union2<FlexLayoutContainerStyle, GridLayoutContainerStyle>), (cast style : RiveCoreObject), (cast _Runtime.field(context, 'rtl') : Bool));
+      var stack:GridLayoutContainerStyle = (cast { columns: cast ([{ fraction: 1.0, kind: 'fraction' }] : Array<Dynamic>), rows: cast ([{ fraction: 1.0, kind: 'fraction' }] : Array<Dynamic>) });
+      RiveLayout.applyRiveInsets__riveLayout((cast stack), (cast style), (cast _Runtime.field(context, 'rtl') : Bool));
       return cast stack;
     }
-    columns = cast ([] : Array<Dynamic>);
-    rows = cast ([] : Array<Dynamic>);
+    columns = (cast cast ([] : Array<Dynamic>));
+    rows = (cast cast ([] : Array<Dynamic>));
     {
       var index:Float = 1.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index), sourceIndex) : Bool)) { index++; continue; }
         var track:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast (cast track : RiveCoreObject).typeKey : Float), (cast RiveLayout.RIVE_GRID_TRACK_TYPE_KEY__riveLayout : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
-        var collection:Float = (cast RiveLayout.readRiveNumber__riveLayout((cast track : RiveCoreObject), (cast RiveLayout.RIVE_GRID_TRACK_COLLECTION__riveLayout : Float), (cast 0.0 : Float)) : Float);
+        var collection:Float = (cast RiveLayout.readRiveNumber__riveLayout((cast track), (cast RiveLayout.RIVE_GRID_TRACK_COLLECTION__riveLayout : Float), (cast 0.0 : Float)) : Float);
         if ((cast ((cast !_Runtime.strictEquals(collection, RiveLayout.RIVE_GRID_TEMPLATE_COLUMNS__riveLayout) : Bool) && (cast !_Runtime.strictEquals(collection, RiveLayout.RIVE_GRID_TEMPLATE_ROWS__riveLayout) : Bool)) : Bool)) { index++; continue; }
-        var mapped:GridLayoutTrack = (cast RiveLayout.mapRiveGridTrack__riveLayout((cast track : RiveCoreObject)) : GridLayoutTrack);
+        var mapped:GridLayoutTrack = (cast RiveLayout.mapRiveGridTrack__riveLayout((cast track)) : GridLayoutTrack);
         _Runtime.callProperty(((cast _Runtime.strictEquals(collection, RiveLayout.RIVE_GRID_TEMPLATE_COLUMNS__riveLayout) : Bool) ? (cast columns : Dynamic) : (cast rows : Dynamic)), 'push', cast ([mapped] : Array<Dynamic>));
         index++;
       }
@@ -245,12 +245,12 @@ class RiveLayout {
     requiredRows = HxMath.max(1.0, HxMath.ceil(_Runtime.divideNumbers(_Runtime.field(context, 'childCount'), _Runtime.field(columns, 'length'))));
     if ((cast _Runtime.strictEquals(_Runtime.field(rows, 'length'), 0.0) : Bool)) { _Runtime.callProperty(rows, 'push', cast ([{ kind: 'auto' }] : Array<Dynamic>)); }
     while ((cast ((cast _Runtime.field(rows, 'length') : Float) < (cast requiredRows : Float)) : Bool)) { _Runtime.callProperty(rows, 'push', cast ([{ kind: 'auto' }] : Array<Dynamic>)); }
-    result = { columns: columns, rows: rows };
-    columnGap = (cast RiveLayout.readRivePointLength__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_GAP_HORIZONTAL__riveLayout : Float), (cast RiveLayout.RIVE_GAP_HORIZONTAL_UNITS__riveLayout : Float)) : Float);
-    rowGap = (cast RiveLayout.readRivePointLength__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_GAP_VERTICAL__riveLayout : Float), (cast RiveLayout.RIVE_GAP_VERTICAL_UNITS__riveLayout : Float)) : Float);
+    result = (cast { columns: columns, rows: rows });
+    columnGap = (cast RiveLayout.readRivePointLength__riveLayout((cast style), (cast RiveLayout.RIVE_GAP_HORIZONTAL__riveLayout : Float), (cast RiveLayout.RIVE_GAP_HORIZONTAL_UNITS__riveLayout : Float)) : Float);
+    rowGap = (cast RiveLayout.readRivePointLength__riveLayout((cast style), (cast RiveLayout.RIVE_GAP_VERTICAL__riveLayout : Float), (cast RiveLayout.RIVE_GAP_VERTICAL_UNITS__riveLayout : Float)) : Float);
     if ((cast ((cast columnGap : Float) > (cast 0.0 : Float)) : Bool)) { ((cast result : GridLayoutContainerStyle).columnGap = columnGap); }
     if ((cast ((cast rowGap : Float) > (cast 0.0 : Float)) : Bool)) { ((cast result : GridLayoutContainerStyle).rowGap = rowGap); }
-    RiveLayout.applyRiveInsets__riveLayout((cast result : flighthq._internal._Union2<FlexLayoutContainerStyle, GridLayoutContainerStyle>), (cast style : RiveCoreObject), (cast _Runtime.field(context, 'rtl') : Bool));
+    RiveLayout.applyRiveInsets__riveLayout((cast result), (cast style), (cast _Runtime.field(context, 'rtl') : Bool));
     return cast result;
     return cast null;
   }
@@ -259,10 +259,10 @@ class RiveLayout {
     if ((cast _Runtime.strictEquals(_Runtime.field(parent, 'layoutType'), RiveLayout.RIVE_LAYOUT_TYPE_STACK__riveLayout) : Bool)) { return cast { column: 0.0, row: 0.0 }; }
     if ((cast _Runtime.strictEquals(_Runtime.field(parent, 'layoutType'), RiveLayout.RIVE_LAYOUT_TYPE_GRID__riveLayout) : Bool)) {
       if ((cast _Runtime.strictEquals(placement, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-      var parentContainer:GridLayoutContainerStyle = (cast RiveLayout.createRiveGridContainerStyle__riveLayout((cast artboard : RiveArtboardGraph), (cast _Runtime.field(parent, 'sourceIndex') : Float), (cast _Runtime.field(parent, 'style') : RiveCoreObject), parent) : GridLayoutContainerStyle);
-      return cast (cast RiveLayout.createRiveGridItemStyle__riveLayout((cast placement : RiveCoreObject), (cast _Runtime.field((cast parentContainer : GridLayoutContainerStyle).columns, 'length') : Float), (cast _Runtime.field((cast parentContainer : GridLayoutContainerStyle).rows, 'length') : Float)) : Null<flighthq._internal._Union2<FlexLayoutItemStyle, GridLayoutItemStyle>>);
+      var parentContainer:GridLayoutContainerStyle = (cast RiveLayout.createRiveGridContainerStyle__riveLayout((cast artboard), (cast _Runtime.field(parent, 'sourceIndex') : Float), (cast _Runtime.field(parent, 'style')), (cast parent)) : GridLayoutContainerStyle);
+      return cast (cast RiveLayout.createRiveGridItemStyle__riveLayout((cast placement), (cast _Runtime.field((cast parentContainer : GridLayoutContainerStyle).columns, 'length') : Float), (cast _Runtime.field((cast parentContainer : GridLayoutContainerStyle).rows, 'length') : Float)) : GridLayoutItemStyle);
     }
-    return cast (cast RiveLayout.createRiveFlexItemStyle__riveLayout(provider, (cast source : RiveCoreObject), (cast style : RiveCoreObject), (cast _Runtime.field(parent, 'row') : Bool)) : Null<flighthq._internal._Union2<FlexLayoutItemStyle, GridLayoutItemStyle>>);
+    return cast (cast RiveLayout.createRiveFlexItemStyle__riveLayout((cast provider), (cast source), (cast style), (cast _Runtime.field(parent, 'row') : Bool)) : FlexLayoutItemStyle);
     return cast null;
   }
 
@@ -274,17 +274,17 @@ class RiveLayout {
     var mainFraction:Float = cast _Runtime.UNDEFINED;
     var crossScale:Float = cast _Runtime.UNDEFINED;
     var result:FlexLayoutItemStyle = cast _Runtime.UNDEFINED;
-    sizing = (cast RiveLayout.readRiveSizingValues__riveLayout(provider, (cast source : RiveCoreObject), (cast style : RiveCoreObject)) : RiveSizingValues__riveLayout);
+    sizing = (cast RiveLayout.readRiveSizingValues__riveLayout((cast provider), (cast source), (cast style)) : RiveSizingValues__riveLayout);
     mainScale = ((cast parentIsRow : Bool) ? (cast (cast sizing : RiveSizingValues__riveLayout).widthScale : Dynamic) : (cast (cast sizing : RiveSizingValues__riveLayout).heightScale : Dynamic));
     mainValue = ((cast parentIsRow : Bool) ? (cast (cast sizing : RiveSizingValues__riveLayout).width : Dynamic) : (cast (cast sizing : RiveSizingValues__riveLayout).height : Dynamic));
     mainUnits = ((cast parentIsRow : Bool) ? (cast (cast sizing : RiveSizingValues__riveLayout).widthUnits : Dynamic) : (cast (cast sizing : RiveSizingValues__riveLayout).heightUnits : Dynamic));
     mainFraction = ((cast parentIsRow : Bool) ? (cast (cast sizing : RiveSizingValues__riveLayout).fractionalWidth : Dynamic) : (cast (cast sizing : RiveSizingValues__riveLayout).fractionalHeight : Dynamic));
     crossScale = ((cast parentIsRow : Bool) ? (cast (cast sizing : RiveSizingValues__riveLayout).heightScale : Dynamic) : (cast (cast sizing : RiveSizingValues__riveLayout).widthScale : Dynamic));
-    result = { alignSelf: ((cast _Runtime.strictEquals(crossScale, RiveLayout.RIVE_SCALE_FILL__riveLayout) : Bool) ? (cast 'stretch' : Dynamic) : (cast 'auto' : Dynamic)), grow: ((cast _Runtime.strictEquals(mainScale, RiveLayout.RIVE_SCALE_FILL__riveLayout) : Bool) ? (cast (cast RiveLayout.finiteNonNegative__riveLayout((cast mainFraction : Float)) : Null<Float>) : Dynamic) : (cast 0.0 : Dynamic)), shrink: ((cast _Runtime.strictEquals(mainScale, RiveLayout.RIVE_SCALE_FILL__riveLayout) : Bool) ? (cast (cast RiveLayout.finiteNonNegative__riveLayout((cast mainFraction : Float)) : Null<Float>) : Dynamic) : (cast 0.0 : Dynamic)) };
+    result = (cast { alignSelf: ((cast _Runtime.strictEquals(crossScale, RiveLayout.RIVE_SCALE_FILL__riveLayout) : Bool) ? (cast 'stretch' : Dynamic) : (cast 'auto' : Dynamic)), grow: ((cast _Runtime.strictEquals(mainScale, RiveLayout.RIVE_SCALE_FILL__riveLayout) : Bool) ? (cast (cast RiveLayout.finiteNonNegative__riveLayout((cast mainFraction : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic)), shrink: ((cast _Runtime.strictEquals(mainScale, RiveLayout.RIVE_SCALE_FILL__riveLayout) : Bool) ? (cast (cast RiveLayout.finiteNonNegative__riveLayout((cast mainFraction : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic)) });
     if ((cast _Runtime.strictEquals(mainScale, RiveLayout.RIVE_SCALE_FILL__riveLayout) : Bool)) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'participant') : Bool)) { ((cast result : FlexLayoutItemStyle).basis = 0.0); } else { if ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'nested') : Bool)) { ((cast result : FlexLayoutItemStyle).basis = 'auto'); } else { ((cast result : FlexLayoutItemStyle).basis = (cast RiveLayout.readRiveFlexBasis__riveLayout((cast style : RiveCoreObject)) : Null<flighthq._internal._Union2<Float, String>>)); } }
+      if ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'participant') : Bool)) { ((cast result : FlexLayoutItemStyle).basis = 0.0); } else { if ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'nested') : Bool)) { ((cast result : FlexLayoutItemStyle).basis = 'auto'); } else { ((cast result : FlexLayoutItemStyle).basis = (cast RiveLayout.readRiveFlexBasis__riveLayout((cast style)) : flighthq._internal._Union2<Float, String>)); } }
     } else { if ((cast ((cast ((cast _Runtime.strictEquals(mainScale, RiveLayout.RIVE_SCALE_FIXED__riveLayout) : Bool) && (cast _Runtime.strictEquals(mainUnits, RiveLayout.RIVE_UNIT_POINT__riveLayout) : Bool)) : Bool) && (cast ((cast mainValue : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      ((cast result : FlexLayoutItemStyle).basis = (cast RiveLayout.finiteNonNegative__riveLayout((cast mainValue : Float)) : Null<flighthq._internal._Union2<Float, String>>));
+      ((cast result : FlexLayoutItemStyle).basis = (cast RiveLayout.finiteNonNegative__riveLayout((cast mainValue : Float)) : Float));
     } else {
       ((cast result : FlexLayoutItemStyle).basis = 'auto');
     } }
@@ -294,19 +294,19 @@ class RiveLayout {
 
   public static function readRiveSizingValues__riveLayout(provider:RiveLayoutProvider__riveLayout, source:RiveCoreObject, style:RiveCoreObject):RiveSizingValues__riveLayout {
     if ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'component') : Bool)) {
-      return cast { fractionalHeight: (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast RiveLayout.RIVE_LAYOUT_COMPONENT_FRACTIONAL_HEIGHT__riveLayout : Float), (cast 1.0 : Float)) : Float), fractionalWidth: (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast RiveLayout.RIVE_LAYOUT_COMPONENT_FRACTIONAL_WIDTH__riveLayout : Float), (cast 1.0 : Float)) : Float), height: (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast RiveLayout.RIVE_HEIGHT__riveLayout : Float), (cast 0.0 : Float)) : Float), heightScale: (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_HEIGHT_SCALE__riveLayout : Float), (cast RiveLayout.RIVE_SCALE_FIXED__riveLayout : Float)) : Float), heightUnits: (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_HEIGHT_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_POINT__riveLayout : Float)) : Float), width: (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast RiveLayout.RIVE_WIDTH__riveLayout : Float), (cast 0.0 : Float)) : Float), widthScale: (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_WIDTH_SCALE__riveLayout : Float), (cast RiveLayout.RIVE_SCALE_FIXED__riveLayout : Float)) : Float), widthUnits: (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_WIDTH_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_POINT__riveLayout : Float)) : Float) };
+      return cast { fractionalHeight: (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast RiveLayout.RIVE_LAYOUT_COMPONENT_FRACTIONAL_HEIGHT__riveLayout : Float), (cast 1.0 : Float)) : Float), fractionalWidth: (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast RiveLayout.RIVE_LAYOUT_COMPONENT_FRACTIONAL_WIDTH__riveLayout : Float), (cast 1.0 : Float)) : Float), height: (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast RiveLayout.RIVE_HEIGHT__riveLayout : Float), (cast 0.0 : Float)) : Float), heightScale: (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_HEIGHT_SCALE__riveLayout : Float), (cast RiveLayout.RIVE_SCALE_FIXED__riveLayout : Float)) : Float), heightUnits: (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_HEIGHT_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_POINT__riveLayout : Float)) : Float), width: (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast RiveLayout.RIVE_WIDTH__riveLayout : Float), (cast 0.0 : Float)) : Float), widthScale: (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_WIDTH_SCALE__riveLayout : Float), (cast RiveLayout.RIVE_SCALE_FIXED__riveLayout : Float)) : Float), widthUnits: (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_WIDTH_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_POINT__riveLayout : Float)) : Float) };
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'nested') : Bool)) {
-      return cast { fractionalHeight: 1.0, fractionalWidth: 1.0, height: (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast RiveLayout.RIVE_NESTED_HEIGHT__riveLayout : Float), (cast -1.0 : Float)) : Float), heightScale: (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast RiveLayout.RIVE_NESTED_HEIGHT_SCALE__riveLayout : Float), (cast RiveLayout.RIVE_SCALE_FIXED__riveLayout : Float)) : Float), heightUnits: (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast RiveLayout.RIVE_NESTED_HEIGHT_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_POINT__riveLayout : Float)) : Float), width: (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast RiveLayout.RIVE_NESTED_WIDTH__riveLayout : Float), (cast -1.0 : Float)) : Float), widthScale: (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast RiveLayout.RIVE_NESTED_WIDTH_SCALE__riveLayout : Float), (cast RiveLayout.RIVE_SCALE_FIXED__riveLayout : Float)) : Float), widthUnits: (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast RiveLayout.RIVE_NESTED_WIDTH_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_POINT__riveLayout : Float)) : Float) };
+      return cast { fractionalHeight: 1.0, fractionalWidth: 1.0, height: (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast RiveLayout.RIVE_NESTED_HEIGHT__riveLayout : Float), (cast -1.0 : Float)) : Float), heightScale: (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast RiveLayout.RIVE_NESTED_HEIGHT_SCALE__riveLayout : Float), (cast RiveLayout.RIVE_SCALE_FIXED__riveLayout : Float)) : Float), heightUnits: (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast RiveLayout.RIVE_NESTED_HEIGHT_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_POINT__riveLayout : Float)) : Float), width: (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast RiveLayout.RIVE_NESTED_WIDTH__riveLayout : Float), (cast -1.0 : Float)) : Float), widthScale: (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast RiveLayout.RIVE_NESTED_WIDTH_SCALE__riveLayout : Float), (cast RiveLayout.RIVE_SCALE_FIXED__riveLayout : Float)) : Float), widthUnits: (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast RiveLayout.RIVE_NESTED_WIDTH_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_POINT__riveLayout : Float)) : Float) };
     }
-    return cast { fractionalHeight: (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_PARTICIPANT_FRACTIONAL_HEIGHT__riveLayout : Float), (cast 1.0 : Float)) : Float), fractionalWidth: (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_PARTICIPANT_FRACTIONAL_WIDTH__riveLayout : Float), (cast 1.0 : Float)) : Float), height: (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_PARTICIPANT_HEIGHT__riveLayout : Float), (cast 0.0 : Float)) : Float), heightScale: (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_HEIGHT_SCALE__riveLayout : Float), (cast RiveLayout.RIVE_SCALE_FIXED__riveLayout : Float)) : Float), heightUnits: (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_HEIGHT_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_POINT__riveLayout : Float)) : Float), width: (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_PARTICIPANT_WIDTH__riveLayout : Float), (cast 0.0 : Float)) : Float), widthScale: (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_WIDTH_SCALE__riveLayout : Float), (cast RiveLayout.RIVE_SCALE_FIXED__riveLayout : Float)) : Float), widthUnits: (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_WIDTH_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_POINT__riveLayout : Float)) : Float) };
+    return cast { fractionalHeight: (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_PARTICIPANT_FRACTIONAL_HEIGHT__riveLayout : Float), (cast 1.0 : Float)) : Float), fractionalWidth: (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_PARTICIPANT_FRACTIONAL_WIDTH__riveLayout : Float), (cast 1.0 : Float)) : Float), height: (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_PARTICIPANT_HEIGHT__riveLayout : Float), (cast 0.0 : Float)) : Float), heightScale: (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_HEIGHT_SCALE__riveLayout : Float), (cast RiveLayout.RIVE_SCALE_FIXED__riveLayout : Float)) : Float), heightUnits: (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_HEIGHT_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_POINT__riveLayout : Float)) : Float), width: (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_PARTICIPANT_WIDTH__riveLayout : Float), (cast 0.0 : Float)) : Float), widthScale: (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_WIDTH_SCALE__riveLayout : Float), (cast RiveLayout.RIVE_SCALE_FIXED__riveLayout : Float)) : Float), widthUnits: (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_WIDTH_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_POINT__riveLayout : Float)) : Float) };
     return cast null;
   }
 
   public static function readRiveFlexBasis__riveLayout(style:RiveCoreObject):flighthq._internal._Union2<Float, String> {
     var units:Float = cast _Runtime.UNDEFINED;
-    units = (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_FLEX_BASIS_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_AUTO__riveLayout : Float)) : Float);
-    return cast ((cast _Runtime.strictEquals(units, RiveLayout.RIVE_UNIT_POINT__riveLayout) : Bool) ? (cast (cast RiveLayout.finiteNonNegative__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_FLEX_BASIS__riveLayout : Float), (cast 0.0 : Float)) : Float) : Float)) : flighthq._internal._Union2<Float, String>) : Dynamic) : (cast 'auto' : Dynamic));
+    units = (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_FLEX_BASIS_UNITS__riveLayout : Float), (cast RiveLayout.RIVE_UNIT_AUTO__riveLayout : Float)) : Float);
+    return cast ((cast _Runtime.strictEquals(units, RiveLayout.RIVE_UNIT_POINT__riveLayout) : Bool) ? (cast (cast RiveLayout.finiteNonNegative__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast style), (cast RiveLayout.RIVE_FLEX_BASIS__riveLayout : Float), (cast 0.0 : Float)) : Float) : Float)) : Float) : Dynamic) : (cast 'auto' : Dynamic));
     return cast null;
   }
 
@@ -316,11 +316,11 @@ class RiveLayout {
     var row:Null<Float> = cast _Runtime.UNDEFINED;
     var columnSpan:Float = cast _Runtime.UNDEFINED;
     var rowSpan:Float = cast _Runtime.UNDEFINED;
-    result = {  };
-    column = (cast RiveLayout.mapRiveGridCell__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast placement : RiveCoreObject), (cast RiveLayout.RIVE_GRID_COLUMN__riveLayout : Float), (cast 0.0 : Float)) : Float) : Float), (cast columnCount : Float)) : Null<Float>);
-    row = (cast RiveLayout.mapRiveGridCell__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast placement : RiveCoreObject), (cast RiveLayout.RIVE_GRID_ROW__riveLayout : Float), (cast 0.0 : Float)) : Float) : Float), (cast rowCount : Float)) : Null<Float>);
-    columnSpan = (cast RiveLayout.positiveInteger__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast placement : RiveCoreObject), (cast RiveLayout.RIVE_GRID_COLUMN_SPAN__riveLayout : Float), (cast 1.0 : Float)) : Float) : Float)) : Float);
-    rowSpan = (cast RiveLayout.positiveInteger__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast placement : RiveCoreObject), (cast RiveLayout.RIVE_GRID_ROW_SPAN__riveLayout : Float), (cast 1.0 : Float)) : Float) : Float)) : Float);
+    result = (cast {  });
+    column = (cast RiveLayout.mapRiveGridCell__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast placement), (cast RiveLayout.RIVE_GRID_COLUMN__riveLayout : Float), (cast 0.0 : Float)) : Float) : Float), (cast columnCount : Float)) : Null<Float>);
+    row = (cast RiveLayout.mapRiveGridCell__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast placement), (cast RiveLayout.RIVE_GRID_ROW__riveLayout : Float), (cast 0.0 : Float)) : Float) : Float), (cast rowCount : Float)) : Null<Float>);
+    columnSpan = (cast RiveLayout.positiveInteger__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast placement), (cast RiveLayout.RIVE_GRID_COLUMN_SPAN__riveLayout : Float), (cast 1.0 : Float)) : Float) : Float)) : Float);
+    rowSpan = (cast RiveLayout.positiveInteger__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast placement), (cast RiveLayout.RIVE_GRID_ROW_SPAN__riveLayout : Float), (cast 1.0 : Float)) : Float) : Float)) : Float);
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(column, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(row, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast ((cast (column + columnSpan) : Float) > (cast columnCount : Float)) : Bool)) : Bool) || (cast ((cast (row + rowSpan) : Float) > (cast rowCount : Float)) : Bool)) : Bool)) {
       return cast result;
     }
@@ -342,8 +342,8 @@ class RiveLayout {
   public static function mapRiveGridTrack__riveLayout(source:RiveCoreObject):GridLayoutTrack {
     var type:Float = cast _Runtime.UNDEFINED;
     var value:Float = cast _Runtime.UNDEFINED;
-    type = (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast RiveLayout.RIVE_GRID_TRACK_TYPE__riveLayout : Float), (cast RiveLayout.RIVE_GRID_TRACK_AUTO__riveLayout : Float)) : Float);
-    value = (cast RiveLayout.finiteNonNegative__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast RiveLayout.RIVE_GRID_TRACK_VALUE__riveLayout : Float), (cast 0.0 : Float)) : Float) : Float)) : Float);
+    type = (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast RiveLayout.RIVE_GRID_TRACK_TYPE__riveLayout : Float), (cast RiveLayout.RIVE_GRID_TRACK_AUTO__riveLayout : Float)) : Float);
+    value = (cast RiveLayout.finiteNonNegative__riveLayout((cast (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast RiveLayout.RIVE_GRID_TRACK_VALUE__riveLayout : Float), (cast 0.0 : Float)) : Float) : Float)) : Float);
     if ((cast _Runtime.strictEquals(type, RiveLayout.RIVE_GRID_TRACK_POINTS__riveLayout) : Bool)) { return cast { kind: 'fixed', size: value }; }
     if ((cast ((cast _Runtime.strictEquals(type, RiveLayout.RIVE_GRID_TRACK_FRACTION__riveLayout) : Bool) && (cast ((cast value : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { return cast { fraction: value, kind: 'fraction' }; }
     return cast { kind: 'auto' };
@@ -364,12 +364,12 @@ class RiveLayout {
     var vertical:RiveAxisAlignment__riveLayout = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast value : Float) >= (cast 9.0 : Float)) : Bool) && (cast ((cast value : Float) <= (cast 11.0 : Float)) : Bool)) : Bool)) {
       var cross:RiveAxisAlignment__riveLayout = ((cast _Runtime.strictEquals(value, 9.0) : Bool) ? (cast 'start' : Dynamic) : (cast ((cast _Runtime.strictEquals(value, 10.0) : Bool) ? (cast 'center' : Dynamic) : (cast 'end' : Dynamic)) : Dynamic));
-      return cast { align: ((cast ((cast row : Bool) || (cast !(cast rtl : Bool) : Bool)) : Bool) ? (cast cross : Dynamic) : (cast (cast RiveLayout.reverseFlexAlign__riveLayout(cross) : FlexLayoutAlign) : Dynamic)), justify: 'space-between' };
+      return cast { align: ((cast ((cast row : Bool) || (cast !(cast rtl : Bool) : Bool)) : Bool) ? (cast cross : Dynamic) : (cast (cast RiveLayout.reverseFlexAlign__riveLayout((cast cross)) : RiveAxisAlignment__riveLayout) : Dynamic)), justify: 'space-between' };
     }
     normalized = ((cast ((cast ((cast value : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast value : Float) <= (cast 8.0 : Float)) : Bool)) : Bool) ? (cast value : Dynamic) : (cast 0.0 : Dynamic));
     horizontal = (cast RiveLayout.mapRiveAlignmentAxis__riveLayout((cast _Runtime.fmod(normalized, 3.0) : Float)) : RiveAxisAlignment__riveLayout);
     vertical = (cast RiveLayout.mapRiveAlignmentAxis__riveLayout((cast HxMath.floor((normalized / 3.0)) : Float)) : RiveAxisAlignment__riveLayout);
-    return cast ((cast row : Bool) ? (cast { align: vertical, justify: horizontal } : Dynamic) : (cast { align: ((cast rtl : Bool) ? (cast (cast RiveLayout.reverseFlexAlign__riveLayout(horizontal) : FlexLayoutAlign) : Dynamic) : (cast horizontal : Dynamic)), justify: vertical } : Dynamic));
+    return cast ((cast row : Bool) ? (cast { align: vertical, justify: horizontal } : Dynamic) : (cast { align: ((cast rtl : Bool) ? (cast (cast RiveLayout.reverseFlexAlign__riveLayout((cast horizontal)) : RiveAxisAlignment__riveLayout) : Dynamic) : (cast horizontal : Dynamic)), justify: vertical } : Dynamic));
     return cast null;
   }
 
@@ -390,10 +390,10 @@ class RiveLayout {
     var bottom:Float = cast _Runtime.UNDEFINED;
     var left:Float = cast _Runtime.UNDEFINED;
     var right:Float = cast _Runtime.UNDEFINED;
-    logicalLeft = ((cast RiveLayout.readRivePointLength__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_PADDING_LEFT__riveLayout : Float), (cast RiveLayout.RIVE_PADDING_LEFT_UNITS__riveLayout : Float)) : Float) + (cast RiveLayout.readRivePointLength__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_BORDER_LEFT__riveLayout : Float), (cast RiveLayout.RIVE_BORDER_LEFT_UNITS__riveLayout : Float)) : Float));
-    logicalRight = ((cast RiveLayout.readRivePointLength__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_PADDING_RIGHT__riveLayout : Float), (cast RiveLayout.RIVE_PADDING_RIGHT_UNITS__riveLayout : Float)) : Float) + (cast RiveLayout.readRivePointLength__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_BORDER_RIGHT__riveLayout : Float), (cast RiveLayout.RIVE_BORDER_RIGHT_UNITS__riveLayout : Float)) : Float));
-    top = ((cast RiveLayout.readRivePointLength__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_PADDING_TOP__riveLayout : Float), (cast RiveLayout.RIVE_PADDING_TOP_UNITS__riveLayout : Float)) : Float) + (cast RiveLayout.readRivePointLength__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_BORDER_TOP__riveLayout : Float), (cast RiveLayout.RIVE_BORDER_TOP_UNITS__riveLayout : Float)) : Float));
-    bottom = ((cast RiveLayout.readRivePointLength__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_PADDING_BOTTOM__riveLayout : Float), (cast RiveLayout.RIVE_PADDING_BOTTOM_UNITS__riveLayout : Float)) : Float) + (cast RiveLayout.readRivePointLength__riveLayout((cast style : RiveCoreObject), (cast RiveLayout.RIVE_BORDER_BOTTOM__riveLayout : Float), (cast RiveLayout.RIVE_BORDER_BOTTOM_UNITS__riveLayout : Float)) : Float));
+    logicalLeft = ((cast RiveLayout.readRivePointLength__riveLayout((cast style), (cast RiveLayout.RIVE_PADDING_LEFT__riveLayout : Float), (cast RiveLayout.RIVE_PADDING_LEFT_UNITS__riveLayout : Float)) : Float) + (cast RiveLayout.readRivePointLength__riveLayout((cast style), (cast RiveLayout.RIVE_BORDER_LEFT__riveLayout : Float), (cast RiveLayout.RIVE_BORDER_LEFT_UNITS__riveLayout : Float)) : Float));
+    logicalRight = ((cast RiveLayout.readRivePointLength__riveLayout((cast style), (cast RiveLayout.RIVE_PADDING_RIGHT__riveLayout : Float), (cast RiveLayout.RIVE_PADDING_RIGHT_UNITS__riveLayout : Float)) : Float) + (cast RiveLayout.readRivePointLength__riveLayout((cast style), (cast RiveLayout.RIVE_BORDER_RIGHT__riveLayout : Float), (cast RiveLayout.RIVE_BORDER_RIGHT_UNITS__riveLayout : Float)) : Float));
+    top = ((cast RiveLayout.readRivePointLength__riveLayout((cast style), (cast RiveLayout.RIVE_PADDING_TOP__riveLayout : Float), (cast RiveLayout.RIVE_PADDING_TOP_UNITS__riveLayout : Float)) : Float) + (cast RiveLayout.readRivePointLength__riveLayout((cast style), (cast RiveLayout.RIVE_BORDER_TOP__riveLayout : Float), (cast RiveLayout.RIVE_BORDER_TOP_UNITS__riveLayout : Float)) : Float));
+    bottom = ((cast RiveLayout.readRivePointLength__riveLayout((cast style), (cast RiveLayout.RIVE_PADDING_BOTTOM__riveLayout : Float), (cast RiveLayout.RIVE_PADDING_BOTTOM_UNITS__riveLayout : Float)) : Float) + (cast RiveLayout.readRivePointLength__riveLayout((cast style), (cast RiveLayout.RIVE_BORDER_BOTTOM__riveLayout : Float), (cast RiveLayout.RIVE_BORDER_BOTTOM_UNITS__riveLayout : Float)) : Float));
     left = ((cast rtl : Bool) ? (cast logicalRight : Dynamic) : (cast logicalLeft : Dynamic));
     right = ((cast rtl : Bool) ? (cast logicalLeft : Dynamic) : (cast logicalRight : Dynamic));
     if ((cast ((cast left : Float) > (cast 0.0 : Float)) : Bool)) { ((cast target : { @:optional var paddingLeft:Null<Float>; }).paddingLeft = left); }
@@ -405,8 +405,8 @@ class RiveLayout {
   public static function readRivePointLength__riveLayout(source:RiveCoreObject, valueKey:Float, unitsKey:Float):Float {
     var value:Float = cast _Runtime.UNDEFINED;
     var units:Float = cast _Runtime.UNDEFINED;
-    value = (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast valueKey : Float), (cast 0.0 : Float)) : Float);
-    units = (cast RiveLayout.readRiveNumber__riveLayout((cast source : RiveCoreObject), (cast unitsKey : Float), (cast RiveLayout.RIVE_UNIT_UNDEFINED__riveLayout : Float)) : Float);
+    value = (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast valueKey : Float), (cast 0.0 : Float)) : Float);
+    units = (cast RiveLayout.readRiveNumber__riveLayout((cast source), (cast unitsKey : Float), (cast RiveLayout.RIVE_UNIT_UNDEFINED__riveLayout : Float)) : Float);
     return cast ((cast _Runtime.strictEquals(units, RiveLayout.RIVE_UNIT_POINT__riveLayout) : Bool) ? (cast (cast RiveLayout.finiteNonNegative__riveLayout((cast value : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
@@ -414,7 +414,7 @@ class RiveLayout {
   public static function readRiveNumber__riveLayout(source:RiveCoreObject, key:Float, fallback:Float):Float {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
     property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused4:Float, __unused5:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
-    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalField(property, 'value')), 'number') : Bool) ? (cast (cast property : RiveProperty).value : Dynamic) : (cast fallback : Dynamic));
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural9 = property; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var value:RiveValue; }).value; })), 'number') : Bool) ? (cast (cast property : RiveProperty).value : Dynamic) : (cast fallback : Dynamic));
     return cast null;
   }
 

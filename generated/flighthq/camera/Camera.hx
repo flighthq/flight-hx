@@ -33,6 +33,7 @@ import flighthq.types.Camera3D.OrthographicProjection;
 import flighthq.types.Camera3D.PerspectiveProjection;
 import flighthq.types.Camera3D.Projection;
 import flighthq.types.Camera3DOptions;
+import flighthq.types.Entity;
 import flighthq.types.Frustum.FrustumLike;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Matrix4;
@@ -47,11 +48,11 @@ import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.Vector3.Vector3Like;
 
 class Camera {
-  public static final __scratchInverse__camera:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
+  public static final __scratchInverse__camera:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4);
 
-  public static final __scratchProjection__camera:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
+  public static final __scratchProjection__camera:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4);
 
-  public static final __scratchViewProjection__camera:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
+  public static final __scratchViewProjection__camera:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4);
 
   public static function applyCamera3DProjectionJitter__camera(out:Matrix4Like, x:Float, y:Float):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -80,7 +81,7 @@ class Camera {
   }
 
   public static function createCamera3D(opts:Camera3DOptions):Camera3D {
-    return cast (cast createEntity({ far: _Runtime.field(opts, 'far'), inverseViewProjection: (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4), jitter: (cast createVector2((cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>)) : Vector2), near: _Runtime.field(opts, 'near'), projection: _Runtime.field(opts, 'projection'), view: (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4) }) : Camera3D);
+    return cast (cast createEntity((cast { far: _Runtime.field(opts, 'far'), inverseViewProjection: (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4), jitter: (cast createVector2((cast 0.0), (cast 0.0)) : Vector2), near: _Runtime.field(opts, 'near'), projection: _Runtime.field(opts, 'projection'), view: (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4) })) : { >Entity, var far:Float; var inverseViewProjection:Matrix4; var jitter:Vector2; var near:Float; var projection:Projection; var view:Matrix4; });
     return cast null;
   }
 
@@ -120,8 +121,8 @@ class Camera {
   }
 
   public static function getCamera3DInverseViewProjectionMatrix4(out:Matrix4Like, camera:Camera3D, aspect:Float):Bool {
-    getCamera3DViewProjectionMatrix4((cast Camera.__scratchViewProjection__camera : Matrix4Like), (cast camera : Camera3D), (cast aspect : Float));
-    return cast (cast inverseMatrix4((cast out : Matrix4Like), (cast Camera.__scratchViewProjection__camera : Matrix4Like)) : Bool);
+    getCamera3DViewProjectionMatrix4((cast Camera.__scratchViewProjection__camera), (cast camera), (cast aspect : Float));
+    return cast (cast inverseMatrix4((cast out), (cast Camera.__scratchViewProjection__camera)) : Bool);
     return cast null;
   }
 
@@ -153,9 +154,9 @@ class Camera {
   }
 
   public static function getCamera3DViewProjectionMatrix4(out:Matrix4Like, camera:Camera3D, aspect:Float):Void {
-    setProjectionMatrix4((cast Camera.__scratchProjection__camera : Matrix4Like), camera.projection, (cast aspect : Float), (cast camera.near : Float), (cast camera.far : Float));
-    Camera.applyCamera3DProjectionJitter__camera((cast Camera.__scratchProjection__camera : Matrix4Like), (cast camera.jitter.x : Float), (cast camera.jitter.y : Float));
-    multiplyMatrix4((cast out : Matrix4Like), (cast Camera.__scratchProjection__camera : Matrix4Like), (cast camera.view : Matrix4Like));
+    setProjectionMatrix4((cast Camera.__scratchProjection__camera), (cast camera.projection), (cast aspect : Float), (cast camera.near : Float), (cast camera.far : Float));
+    Camera.applyCamera3DProjectionJitter__camera((cast Camera.__scratchProjection__camera), (cast (cast camera.jitter : { var x:Float; }).x : Float), (cast (cast camera.jitter : { var y:Float; }).y : Float));
+    multiplyMatrix4((cast out), (cast Camera.__scratchProjection__camera), (cast camera.view));
   }
 
   public static function getCamera3DViewSpaceZ(camera:Camera3D, ndcZ:Float):Float {
@@ -211,23 +212,23 @@ class Camera {
     var projection:Projection = cast _Runtime.UNDEFINED;
     projection = camera.projection;
     if ((cast _Runtime.strictEquals((cast projection : { var kind:String; }).kind, 'perspective') : Bool)) {
-      ((cast projection : flighthq.types.Camera3D.PerspectiveProjection).aspect = cast (aspect : Dynamic));
+      ((cast projection : { var aspect:Float; }).aspect = cast (aspect : Dynamic));
       return;
     }
-    ((cast projection : flighthq.types.Camera3D.OrthographicProjection).halfWidth = cast (((cast projection : flighthq.types.Camera3D.OrthographicProjection).halfHeight * aspect) : Dynamic));
+    ((cast projection : { var halfWidth:Float; }).halfWidth = cast (((cast projection : { var halfHeight:Float; }).halfHeight * aspect) : Dynamic));
   }
 
   public static function setCamera3DJitter(camera:Camera3D, x:Float, y:Float):Void {
-    (camera.jitter.x = cast (x : Dynamic));
-    (camera.jitter.y = cast (y : Dynamic));
+    ((cast camera.jitter : { var x:Float; }).x = cast (x : Dynamic));
+    ((cast camera.jitter : { var y:Float; }).y = cast (y : Dynamic));
   }
 
   public static function setCamera3DViewMatrix4FromLookAt(camera:Camera3D, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
-    setMatrix4LookAt((cast camera.view : Matrix4Like), (cast eye : Vector3Like), (cast target : Vector3Like), (cast up : Vector3Like));
+    setMatrix4LookAt((cast camera.view), (cast eye), (cast target), (cast up));
   }
 
   public static function setCamera3DViewMatrix4FromMatrix4(camera:Camera3D, view:Matrix4Like):Void {
-    (cast camera.view.m : flighthq._internal._Float32Array).set(view.m);
+    (cast (cast camera.view : { var m:flighthq._internal._Float32Array; }).m : flighthq._internal._Float32Array).set(view.m);
   }
 
   public static function setProjectionMatrix4(out:Matrix4Like, projection:Projection, aspect:Float, near:Float, far:Float):Void {
@@ -240,8 +241,8 @@ class Camera {
 
   public static function updateCamera3DInverseViewProjection(camera:Camera3D, aspect:Float):Bool {
     var ok:Bool = cast _Runtime.UNDEFINED;
-    ok = (cast getCamera3DInverseViewProjectionMatrix4((cast Camera.__scratchInverse__camera : Matrix4Like), (cast camera : Camera3D), (cast aspect : Float)) : Bool);
-    if ((cast ok : Bool)) { (cast camera.inverseViewProjection.m : flighthq._internal._Float32Array).set(Camera.__scratchInverse__camera.m); }
+    ok = (cast getCamera3DInverseViewProjectionMatrix4((cast Camera.__scratchInverse__camera), (cast camera), (cast aspect : Float)) : Bool);
+    if ((cast ok : Bool)) { (cast (cast camera.inverseViewProjection : { var m:flighthq._internal._Float32Array; }).m : flighthq._internal._Float32Array).set(Camera.__scratchInverse__camera.m); }
     return cast ok;
     return cast null;
   }

@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef GradientGlowEffect = { var kind:Kind; var alphas:Array<Float>; @:optional var blurX:Float; @:optional var blurY:Float; var colors:Array<Float>; @:optional var quality:Float; var ratios:Array<Float>; @:optional var sourceMode:EffectSourceMode; @:optional var strength:Float; };
+typedef GradientGlowEffect = { var kind:String; var alphas:Array<Float>; @:optional var blurX:Float; @:optional var blurY:Float; var colors:Array<Float>; @:optional var quality:Float; var ratios:Array<Float>; @:optional var sourceMode:EffectSourceMode; @:optional var strength:Float; };

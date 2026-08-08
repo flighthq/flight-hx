@@ -13,8 +13,8 @@ import flighthq.textinput.TextInputEditing.getTextInputSelectionEndIndex;
 import flighthq.textinput.TextInputEditing.getTextInputSelectionRectangles;
 import flighthq.textlayout.RichTextMetrics.getRichTextScrollYOffset;
 import flighthq.types.DomRenderState;
+import flighthq.types.DomTextInputOverlay;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextData;
@@ -45,23 +45,23 @@ class DomTextInput {
       (DomTextInput._keyframesInjected__domTextInput = cast (true : Dynamic));
     }
     source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
-    input = (cast getTextInputState((cast source : RichText)) : Null<TextInputState>);
+    input = (cast getTextInputState((cast source)) : Null<TextInputState>);
     if ((cast _Runtime.strictEquals(input, null) : Bool)) { return; }
-    layout = _Runtime.field((cast getRichTextRuntime((cast source : RichText)) : RichTextRuntime), 'textLayout');
+    layout = _Runtime.field((cast getRichTextRuntime((cast source)) : RichTextRuntime), 'textLayout');
     data = (cast (cast renderProxy : RenderProxy2D).rendererData : Null<DomTextInputData__domTextInput>);
-    if ((cast ((cast ((cast _Runtime.andValue(!(cast (cast input : TextInputState).focused : Bool), function():Dynamic return cast !(cast (cast input : TextInputState).alwaysShowSelection : Bool)) : Bool) || (cast _Runtime.strictEquals(layout, null) : Bool)) : Bool) || (cast _Runtime.looseEquals(_Runtime.optionalField(data, 'div'), null) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast _Runtime.andValue(!(cast (cast input : TextInputState).focused : Bool), function():Dynamic return cast !(cast (cast input : TextInputState).alwaysShowSelection : Bool)) : Bool) || (cast _Runtime.strictEquals(layout, null) : Bool)) : Bool) || (cast _Runtime.looseEquals(({ final __structural0 = data; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var div:Null<flighthq._internal.dom.HTMLDivElement>; }).div; }), null) : Bool)) : Bool)) { return; }
     firstVisibleLine = ((cast (cast source : RichText).data : RichTextData).scrollV - 1.0);
-    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast (cast layout : TextLayoutResult).lineHeights : Array<Float>), (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
+    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast (cast layout : TextLayoutResult).lineHeights), (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
     scrollXOffset = (cast (cast source : RichText).data : RichTextData).scrollH;
     selColor = (cast computeRgbHexString((cast (cast input : TextInputState).selectionColor : Float)) : String);
     selAlpha = (cast input : TextInputState).selectionAlpha;
     html = '';
-    getTextInputSelectionRectangles((cast DomTextInput.selectionRectangles__domTextInput : Array<TextSelectionRectangle>), (cast source : RichText), layout);
+    getTextInputSelectionRectangles((cast DomTextInput.selectionRectangles__domTextInput), (cast source), (cast layout));
     for (rect in _Runtime.iterable(DomTextInput.selectionRectangles__domTextInput)) {
       (html = cast ((html + '<div data-input-overlay style="position:absolute;left:' + Std.string(((cast rect : TextSelectionRectangle).x - scrollXOffset)) + 'px;top:' + Std.string(((cast rect : TextSelectionRectangle).y - scrollYOffset)) + 'px;width:' + Std.string((cast rect : TextSelectionRectangle).width) + 'px;height:' + Std.string((cast rect : TextSelectionRectangle).height) + 'px;background:' + Std.string(selColor) + ';opacity:' + Std.string(selAlpha) + ';pointer-events:none;"></div>') : Dynamic));
     }
-    if ((cast ((cast (cast input : TextInputState).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex((cast source : RichText)) : Float), (cast getTextInputSelectionEndIndex((cast source : RichText)) : Float)) : Bool)) : Bool)) {
-      getTextInputCaretRectangle((cast DomTextInput.caretRectangle__domTextInput : TextSelectionRectangle), (cast source : RichText), layout);
+    if ((cast ((cast (cast input : TextInputState).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex((cast source)) : Float), (cast getTextInputSelectionEndIndex((cast source)) : Float)) : Bool)) : Bool)) {
+      getTextInputCaretRectangle((cast DomTextInput.caretRectangle__domTextInput), (cast source), (cast layout));
       (html = cast ((html + '<div data-input-overlay style="position:absolute;left:' + Std.string(((cast DomTextInput.caretRectangle__domTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - scrollXOffset)) + 'px;top:' + Std.string(((cast DomTextInput.caretRectangle__domTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y - scrollYOffset)) + 'px;width:' + Std.string((cast input : TextInputState).caretWidth) + 'px;height:' + Std.string((cast DomTextInput.caretRectangle__domTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).height) + 'px;background:' + Std.string((cast computeRgbHexString((cast (cast input : TextInputState).caretColor : Float)) : String)) + ';animation:flight-caret-blink 1s step-end infinite;pointer-events:none;"></div>') : Dynamic));
     }
     for (el in _Runtime.iterable((cast (cast data : DomTextInputData__domTextInput).div : flighthq._internal.dom.HTMLDivElement).querySelectorAll('[data-input-overlay]'))) {
@@ -73,7 +73,7 @@ class DomTextInput {
   }
 
   public static function enableDomTextInput():Void {
-    registerDomTextInputOverlay(drawDomTextInputOverlay);
+    registerDomTextInputOverlay((cast drawDomTextInputOverlay));
   }
 
   public static function injectCaretBlinkKeyframes__domTextInput():Void {
@@ -88,7 +88,7 @@ class DomTextInput {
     (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head') : flighthq._internal.dom.HTMLHeadElement).appendChild(style);
   }
 
-  public static final caretRectangle__domTextInput:{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; } = { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 };
+  public static final caretRectangle__domTextInput:{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; } = (cast { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 });
 
-  public static final selectionRectangles__domTextInput:Array<TextSelectionRectangle> = cast ([] : Array<Dynamic>);
+  public static final selectionRectangles__domTextInput:Array<TextSelectionRectangle> = (cast cast ([] : Array<Dynamic>));
 }

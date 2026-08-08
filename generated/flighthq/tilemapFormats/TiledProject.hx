@@ -34,7 +34,7 @@ class TiledProject {
     height = _Runtime.field(__destructure0, 'height');
     data = _Runtime.field(__destructure0, 'data');
     cellCount = (width * height);
-    groups = cast ([] : Array<Dynamic>);
+    groups = (cast cast ([] : Array<Dynamic>));
     byFirstGid = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     anyResolved = false;
     {
@@ -43,18 +43,18 @@ class TiledProject {
         var __destructure1 = (cast decodeTiledGid((cast flighthq._internal._StaticIndex.readUint32Array(data, i) : Float)) : TiledGid);
         var tileId:Float = _Runtime.field(__destructure1, 'tileId');
         if ((cast ((cast tileId : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
-        var ref:Null<TiledTilesetRef> = (cast getTiledTilesetRefForGid((cast map : TiledMap), (cast tileId : Float)) : Null<TiledTilesetRef>);
+        var ref:Null<TiledTilesetRef> = (cast getTiledTilesetRefForGid((cast map), (cast tileId : Float)) : Null<TiledTilesetRef>);
         if ((cast _Runtime.strictEquals(ref, null) : Bool)) { i++; continue; }
         var group:Null<TilesetGroup__tiledProject> = ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).get((cast ref : TiledTilesetRef).firstGid));
         if ((cast _Runtime.strictEquals(group, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          var layout:Null<flighthq._internal._Any> = (cast resolveTileset(ref) : Null<flighthq._internal._Any>);
+          var layout:Null<flighthq._internal._Any> = (cast resolveTileset((cast ref)) : Null<flighthq._internal._Any>);
           if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
-            ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : TiledTilesetRef).firstGid, null));
+            ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : TiledTilesetRef).firstGid, (cast null)));
             (group = cast (null : Dynamic));
           } else {
             (anyResolved = cast (true : Dynamic));
             (group = cast ({ firstGid: (cast ref : TiledTilesetRef).firstGid, layout: layout, tiles: _Runtime.fill(new flighthq._internal._Int16Array(cellCount), -1.0, 0, null, 1) } : Dynamic));
-            ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : TiledTilesetRef).firstGid, group));
+            ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : TiledTilesetRef).firstGid, (cast group)));
             _Runtime.callProperty(groups, 'push', cast ([group] : Array<Dynamic>));
           }
         }
@@ -64,7 +64,7 @@ class TiledProject {
       }
     }
     if ((cast !(cast anyResolved : Bool) : Bool)) { return cast null; }
-    return cast _Runtime.callProperty(groups, 'map', cast ([function(group:TilesetGroup__tiledProject, __unused2:Float, __unused3:Array<TilesetGroup__tiledProject>):TilemapData return (cast createTilemapData((cast { atlas: _Runtime.field((cast group : TilesetGroup__tiledProject).layout, 'atlas'), columns: width, rows: height, tileHeight: _Runtime.field((cast group : TilesetGroup__tiledProject).layout, 'tileHeight'), tileWidth: _Runtime.field((cast group : TilesetGroup__tiledProject).layout, 'tileWidth'), tiles: (cast group : TilesetGroup__tiledProject).tiles } : Null<flighthq._internal._Any>)) : TilemapData)] : Array<Dynamic>));
+    return cast _Runtime.callProperty(groups, 'map', cast ([function(group:TilesetGroup__tiledProject, __unused2:Float, __unused3:Array<TilesetGroup__tiledProject>):TilemapData return (cast createTilemapData((cast { atlas: _Runtime.field((cast group : TilesetGroup__tiledProject).layout, 'atlas'), columns: width, rows: height, tileHeight: _Runtime.field((cast group : TilesetGroup__tiledProject).layout, 'tileHeight'), tileWidth: _Runtime.field((cast group : TilesetGroup__tiledProject).layout, 'tileWidth'), tiles: (cast group : TilesetGroup__tiledProject).tiles })) : TilemapData)] : Array<Dynamic>));
     return cast null;
   }
 }

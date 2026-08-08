@@ -34,8 +34,8 @@ class WgpuVignetteEffect {
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
     a = ((_Runtime.toInt32(color) & 255) / 255.0);
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'lens.vignette' : String), (cast WgpuVignetteEffect.VIGNETTE_FRAGMENT_WGSL__wgpuVignetteEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'lens.vignette' : String), (cast WgpuVignetteEffect.VIGNETTE_FRAGMENT_WGSL__wgpuVignetteEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, radius);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, softness);
@@ -43,15 +43,15 @@ class WgpuVignetteEffect {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, g);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 6.0, b);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 7.0, a);
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
-  public static final defaultWgpuVignetteEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyVignetteEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : VignetteEffect) : VignetteEffect));
-  };
+  public static final defaultWgpuVignetteEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyVignetteEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : VignetteEffect)));
+  });
 
   public static function registerWgpuVignetteEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'VignetteEffect' : String), (cast defaultWgpuVignetteEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'VignetteEffect' : String), (cast defaultWgpuVignetteEffectRunner));
   }
 
   public static final VIGNETTE_FRAGMENT_WGSL__wgpuVignetteEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_radius : f32,\n  u_softness : f32,\n  _pad0 : f32,\n  u_color : vec4f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let centered = uv - vec2f(0.5);\n  let dist = length(centered) * 1.41421356;\n  let vig = smoothstep(uni.u_radius, uni.u_radius - uni.u_softness, dist);\n  let darken = (1.0 - vig) * uni.u_intensity * uni.u_color.a;\n  return vec4f(mix(c.rgb, uni.u_color.rgb, darken), c.a);\n}';

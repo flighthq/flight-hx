@@ -26,9 +26,11 @@ import flighthq.types.MeshAttachment2D;
 import flighthq.types.RegionAttachment2D;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DAnimationPath;
+import flighthq.types.Skeleton2DAnimationTarget;
 import flighthq.types.Skeleton2DDrawOrderTimeline;
 import flighthq.types.Skeleton2DImport;
 import flighthq.types.Skeleton2DImport.Skeleton2DImportAnimation;
+import flighthq.types.Skeleton2DSlotAnimationTarget;
 import flighthq.types.Skeleton2DSlotAnimationTarget.Skeleton2DSlotAnimationPath;
 import flighthq.types.Skin2D;
 import flighthq.types.Slot2D;
@@ -53,14 +55,14 @@ class SpineParse {
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var orderings:Array<Float> = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast !(cast _Runtime.isArray(raw) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(raw, 'length'), 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(slots, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
-    times = cast ([] : Array<Dynamic>);
-    orderings = cast ([] : Array<Dynamic>);
+    times = (cast cast ([] : Array<Dynamic>));
+    orderings = (cast cast ([] : Array<Dynamic>));
     for (frame in _Runtime.iterable(raw)) {
       if ((cast ((cast _Runtime.strictEquals(frame, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(frame), 'object') : Bool)) : Bool)) { continue; }
       var entry:{ @:optional var offsets:flighthq._internal._Any; @:optional var time:flighthq._internal._Any; } = (cast frame : { @:optional var offsets:flighthq._internal._Any; @:optional var time:flighthq._internal._Any; });
-      var ordering:Null<Array<Float>> = (cast SpineParse.resolveSpineDrawOrder__spineParse((cast (cast entry : { @:optional var offsets:flighthq._internal._Any; @:optional var time:flighthq._internal._Any; }).offsets : flighthq._internal._Any), (cast slots : Array<Slot2D>)) : Null<Array<Float>>);
+      var ordering:Null<Array<Float>> = (cast SpineParse.resolveSpineDrawOrder__spineParse((cast (cast entry : { @:optional var offsets:flighthq._internal._Any; @:optional var time:flighthq._internal._Any; }).offsets : flighthq._internal._Any), (cast slots)) : Null<Array<Float>>);
       if ((cast _Runtime.strictEquals(ordering, null) : Bool)) {
-        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'spine.draworder-keyframe-unresolved' : String), (cast 'parseSpineSkeleton' : String), (cast { time: (cast SpineParse.numberOr__spineParse((cast (cast entry : { @:optional var offsets:flighthq._internal._Any; @:optional var time:flighthq._internal._Any; }).time : flighthq._internal._Any), (cast 0.0 : Float)) : flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>) } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+        reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'spine.draworder-keyframe-unresolved' : String), (cast 'parseSpineSkeleton' : String), (cast { time: (cast SpineParse.numberOr__spineParse((cast (cast entry : { @:optional var offsets:flighthq._internal._Any; @:optional var time:flighthq._internal._Any; }).time : flighthq._internal._Any), (cast 0.0 : Float)) : Float) }));
         continue;
       }
       _Runtime.callProperty(times, 'push', cast ([(cast SpineParse.numberOr__spineParse((cast (cast entry : { @:optional var offsets:flighthq._internal._Any; @:optional var time:flighthq._internal._Any; }).time : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>));
@@ -77,22 +79,22 @@ class SpineParse {
 
   public static function parseSpineBones__spineParse(raw:flighthq._internal._Any, ?diagnostics:Array<ImportDiagnostic>):Array<Bone2D> {
     var bones:Array<Bone2D> = cast _Runtime.UNDEFINED;
-    bones = cast ([] : Array<Dynamic>);
+    bones = (cast cast ([] : Array<Dynamic>));
     if ((cast !(cast _Runtime.isArray(raw) : Bool) : Bool)) { return cast bones; }
     for (entry in _Runtime.iterable(raw)) {
       if ((cast ((cast _Runtime.strictEquals(entry, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(entry), 'object') : Bool)) : Bool)) {
-        reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'spine.malformed-bone-recovered' : String), (cast 'parseSpineSkeleton' : String), (cast { bones: 1.0 } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+        reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'spine.malformed-bone-recovered' : String), (cast 'parseSpineSkeleton' : String), (cast { bones: 1.0 }));
         _Runtime.callProperty(bones, 'push', cast ([(cast SpineParse.createPlaceholderBone2D__spineParse() : Bone2D)] : Array<Dynamic>));
         continue;
       }
       var bone:flighthq._internal._Record<String, flighthq._internal._Any> = (cast entry : flighthq._internal._Record<String, flighthq._internal._Any>);
-      var name:Null<String> = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(bone, 'name')), 'string') : Bool) ? (cast _Runtime.field(bone, 'name') : Dynamic) : (cast null : Dynamic));
+      var name:Null<String> = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast bone : { var name:flighthq._internal._Any; }).name), 'string') : Bool) ? (cast (cast bone : { var name:flighthq._internal._Any; }).name : Dynamic) : (cast null : Dynamic));
       var parentIndex:Float = -1.0;
-      if ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(bone, 'parent')), 'string') : Bool)) {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast bone : { var parent:flighthq._internal._Any; }).parent), 'string') : Bool)) {
         {
           var i:Float = _Runtime.subtractNumbers(_Runtime.field(bones, 'length'), 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-            if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(bones, i) : Bone2D).name, _Runtime.field(bone, 'parent')) : Bool)) {
+            if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(bones, i) : Bone2D).name, (cast bone : { var parent:flighthq._internal._Any; }).parent) : Bool)) {
               (parentIndex = cast (i : Dynamic));
               break;
             }
@@ -100,7 +102,7 @@ class SpineParse {
           }
         }
       }
-      _Runtime.callProperty(bones, 'push', cast ([{ length: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(bone, 'length') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), name: name, parentIndex: parentIndex, rotation: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(bone, 'rotation') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), scaleX: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(bone, 'scaleX') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), scaleY: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(bone, 'scaleY') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), shearX: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(bone, 'shearX') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), shearY: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(bone, 'shearY') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), transformMode: (cast SpineParse.spineTransformMode__spineParse((cast _Runtime.field(bone, 'transform') : flighthq._internal._Any)) : TransformInherit2D), x: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(bone, 'x') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), y: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(bone, 'y') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
+      _Runtime.callProperty(bones, 'push', cast ([{ length: (cast SpineParse.numberOr__spineParse((cast (cast bone : { var length:flighthq._internal._Any; }).length : flighthq._internal._Any), (cast 0.0 : Float)) : Float), name: name, parentIndex: parentIndex, rotation: (cast SpineParse.numberOr__spineParse((cast (cast bone : { var rotation:flighthq._internal._Any; }).rotation : flighthq._internal._Any), (cast 0.0 : Float)) : Float), scaleX: (cast SpineParse.numberOr__spineParse((cast (cast bone : { var scaleX:flighthq._internal._Any; }).scaleX : flighthq._internal._Any), (cast 1.0 : Float)) : Float), scaleY: (cast SpineParse.numberOr__spineParse((cast (cast bone : { var scaleY:flighthq._internal._Any; }).scaleY : flighthq._internal._Any), (cast 1.0 : Float)) : Float), shearX: (cast SpineParse.numberOr__spineParse((cast (cast bone : { var shearX:flighthq._internal._Any; }).shearX : flighthq._internal._Any), (cast 0.0 : Float)) : Float), shearY: (cast SpineParse.numberOr__spineParse((cast (cast bone : { var shearY:flighthq._internal._Any; }).shearY : flighthq._internal._Any), (cast 0.0 : Float)) : Float), transformMode: (cast SpineParse.spineTransformMode__spineParse((cast (cast bone : { var transform:flighthq._internal._Any; }).transform : flighthq._internal._Any)) : TransformInherit2D), x: (cast SpineParse.numberOr__spineParse((cast (cast bone : { var x:flighthq._internal._Any; }).x : flighthq._internal._Any), (cast 0.0 : Float)) : Float), y: (cast SpineParse.numberOr__spineParse((cast (cast bone : { var y:flighthq._internal._Any; }).y : flighthq._internal._Any), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
     }
     return cast bones;
     return cast null;
@@ -113,10 +115,10 @@ class SpineParse {
 
   public static function parseSpineAttachment__spineParse(name:String, raw:flighthq._internal._Record<String, flighthq._internal._Any>, ?diagnostics:Array<ImportDiagnostic>):Null<Attachment2D> {
     var type:String = cast _Runtime.UNDEFINED;
-    type = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(raw, 'type')), 'string') : Bool) ? (cast _Runtime.field(raw, 'type') : Dynamic) : (cast 'region' : Dynamic));
-    if ((cast _Runtime.strictEquals(type, 'region') : Bool)) { return cast (cast SpineParse.parseSpineRegionAttachment__spineParse((cast name : String), (cast raw : flighthq._internal._Record<String, flighthq._internal._Any>)) : Null<Attachment2D>); }
-    if ((cast _Runtime.strictEquals(type, 'mesh') : Bool)) { return cast (cast SpineParse.parseSpineMeshAttachment__spineParse((cast name : String), (cast raw : flighthq._internal._Record<String, flighthq._internal._Any>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Attachment2D>); }
-    reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'spine.' + Std.string(type) + '-attachment-unsupported' : String), (cast 'parseSpineSkeleton' : String), (cast { name: 1.0 } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+    type = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast raw : { var type:flighthq._internal._Any; }).type), 'string') : Bool) ? (cast (cast raw : { var type:flighthq._internal._Any; }).type : Dynamic) : (cast 'region' : Dynamic));
+    if ((cast _Runtime.strictEquals(type, 'region') : Bool)) { return cast (cast SpineParse.parseSpineRegionAttachment__spineParse((cast name : String), (cast raw)) : RegionAttachment2D); }
+    if ((cast _Runtime.strictEquals(type, 'mesh') : Bool)) { return cast (cast SpineParse.parseSpineMeshAttachment__spineParse((cast name : String), (cast raw), (cast diagnostics)) : MeshAttachment2D); }
+    reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'spine.' + Std.string(type) + '-attachment-unsupported' : String), (cast 'parseSpineSkeleton' : String), (cast { name: 1.0 }));
     return cast null;
     return cast null;
   }
@@ -124,13 +126,13 @@ class SpineParse {
   public static function parseSpineSkins__spineParse(raw:flighthq._internal._Any, slots:Array<Slot2D>, ?diagnostics:Array<ImportDiagnostic>):Array<AttachmentSkin2D> {
     var skins:Array<AttachmentSkin2D> = cast _Runtime.UNDEFINED;
     var named:Array<Array<flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
-    skins = cast ([] : Array<Dynamic>);
-    named = cast ([] : Array<Dynamic>);
+    skins = (cast cast ([] : Array<Dynamic>));
+    named = (cast cast ([] : Array<Dynamic>));
     if ((cast _Runtime.isArray(raw) : Bool)) {
       for (skin in _Runtime.iterable(raw)) {
         if ((cast ((cast _Runtime.strictEquals(skin, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(skin), 'object') : Bool)) : Bool)) { continue; }
         var s:flighthq._internal._Record<String, flighthq._internal._Any> = (cast skin : flighthq._internal._Record<String, flighthq._internal._Any>);
-        _Runtime.callProperty(named, 'push', cast ([cast ([((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(s, 'name')), 'string') : Bool) ? (cast _Runtime.field(s, 'name') : Dynamic) : (cast 'default' : Dynamic)), _Runtime.field(s, 'attachments')] : Array<Dynamic>)] : Array<Dynamic>));
+        _Runtime.callProperty(named, 'push', cast ([cast ([((cast _Runtime.strictEquals(_Runtime.typeofValue((cast s : { var name:flighthq._internal._Any; }).name), 'string') : Bool) ? (cast (cast s : { var name:flighthq._internal._Any; }).name : Dynamic) : (cast 'default' : Dynamic)), (cast s : { var attachments:flighthq._internal._Any; }).attachments] : Array<Dynamic>)] : Array<Dynamic>));
       }
     } else { if ((cast ((cast !_Runtime.strictEquals(raw, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool)) {
       for (__iteration0 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast raw : flighthq._internal._Record<String, flighthq._internal._Any>)))) {
@@ -143,17 +145,17 @@ class SpineParse {
       var name:String = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
       var rawAttachments:flighthq._internal._Any = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
       if ((cast ((cast _Runtime.strictEquals(rawAttachments, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(rawAttachments), 'object') : Bool)) : Bool)) { continue; }
-      var attachments:Array<SkinAttachment2D> = cast ([] : Array<Dynamic>);
+      var attachments:Array<SkinAttachment2D> = (cast cast ([] : Array<Dynamic>));
       for (__iteration2 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast rawAttachments : flighthq._internal._Record<String, flighthq._internal._Any>)))) {
         var slotName:String = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
         var slotAttachments:flighthq._internal._Any = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
         if ((cast ((cast _Runtime.strictEquals(slotAttachments, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(slotAttachments), 'object') : Bool)) : Bool)) { continue; }
-        var slotIndex:Float = (cast SpineParse.indexOfSpineSlot__spineParse((cast slots : Array<Slot2D>), (cast slotName : String)) : Float);
+        var slotIndex:Float = (cast SpineParse.indexOfSpineSlot__spineParse((cast slots), (cast slotName : String)) : Float);
         for (__iteration3 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast slotAttachments : flighthq._internal._Record<String, flighthq._internal._Any>)))) {
           var attachmentName:String = flighthq._internal._StaticIndex.readArray(__iteration3, 0.0);
           var rawAttachment:flighthq._internal._Any = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
           if ((cast ((cast _Runtime.strictEquals(rawAttachment, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(rawAttachment), 'object') : Bool)) : Bool)) { continue; }
-          var attachment:Null<Attachment2D> = (cast SpineParse.parseSpineAttachment__spineParse((cast attachmentName : String), (cast (cast rawAttachment : flighthq._internal._Record<String, flighthq._internal._Any>) : flighthq._internal._Record<String, flighthq._internal._Any>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Attachment2D>);
+          var attachment:Null<Attachment2D> = (cast SpineParse.parseSpineAttachment__spineParse((cast attachmentName : String), (cast (cast rawAttachment : flighthq._internal._Record<String, flighthq._internal._Any>)), (cast diagnostics)) : Null<Attachment2D>);
           if ((cast ((cast !_Runtime.strictEquals(attachment, null) : Bool) && (cast ((cast slotIndex : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(attachments, 'push', cast ([{ attachment: attachment, name: attachmentName, slotIndex: slotIndex }] : Array<Dynamic>)); }
         }
       }
@@ -180,38 +182,38 @@ class SpineParse {
     var triangles:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     var rawVerts:Array<Float> = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
-    uvs = (cast SpineParse.toFloat32Array__spineParse((cast _Runtime.field(raw, 'uvs') : flighthq._internal._Any)) : flighthq._internal._Float32Array);
-    triangles = (cast SpineParse.toUint16Array__spineParse((cast _Runtime.field(raw, 'triangles') : flighthq._internal._Any)) : flighthq._internal._UInt16Array);
-    rawVerts = ((cast _Runtime.isArray(_Runtime.field(raw, 'vertices')) : Bool) ? (cast (cast _Runtime.field(raw, 'vertices') : Array<Float>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
+    uvs = (cast SpineParse.toFloat32Array__spineParse((cast (cast raw : { var uvs:flighthq._internal._Any; }).uvs : flighthq._internal._Any)) : flighthq._internal._Float32Array);
+    triangles = (cast SpineParse.toUint16Array__spineParse((cast (cast raw : { var triangles:flighthq._internal._Any; }).triangles : flighthq._internal._Any)) : flighthq._internal._UInt16Array);
+    rawVerts = ((cast _Runtime.isArray((cast raw : { var vertices:flighthq._internal._Any; }).vertices) : Bool) ? (cast (cast (cast raw : { var vertices:flighthq._internal._Any; }).vertices : Array<Float>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
     vertexCount = (_Runtime.toInt32(_Runtime.field(uvs, 'length')) >> 1);
     if ((cast _Runtime.strictEquals(_Runtime.field(rawVerts, 'length'), (vertexCount * 2.0)) : Bool)) {
       return cast { kind: MeshAttachment2DKind, name: name, skin: null, triangles: triangles, uvs: uvs, vertexCount: vertexCount, vertices: new flighthq._internal._Float32Array(rawVerts) };
     }
-    return cast { kind: MeshAttachment2DKind, name: name, skin: (cast SpineParse.parseSpineWeightedVertices__spineParse((cast rawVerts : Array<Float>), (cast vertexCount : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Skin2D>), triangles: triangles, uvs: uvs, vertexCount: vertexCount, vertices: null };
+    return cast { kind: MeshAttachment2DKind, name: name, skin: (cast SpineParse.parseSpineWeightedVertices__spineParse((cast rawVerts), (cast vertexCount : Float), (cast diagnostics)) : Skin2D), triangles: triangles, uvs: uvs, vertexCount: vertexCount, vertices: null };
     return cast null;
   }
 
   public static function parseSpineRegionAttachment__spineParse(name:String, raw:flighthq._internal._Record<String, flighthq._internal._Any>):RegionAttachment2D {
-    return cast { height: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(raw, 'height') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), kind: RegionAttachment2DKind, name: name, rotation: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(raw, 'rotation') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), scaleX: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(raw, 'scaleX') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), scaleY: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(raw, 'scaleY') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), width: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(raw, 'width') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), x: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(raw, 'x') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), y: (cast SpineParse.numberOr__spineParse((cast _Runtime.field(raw, 'y') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) };
+    return cast { height: (cast SpineParse.numberOr__spineParse((cast (cast raw : { var height:flighthq._internal._Any; }).height : flighthq._internal._Any), (cast 0.0 : Float)) : Float), kind: RegionAttachment2DKind, name: name, rotation: (cast SpineParse.numberOr__spineParse((cast (cast raw : { var rotation:flighthq._internal._Any; }).rotation : flighthq._internal._Any), (cast 0.0 : Float)) : Float), scaleX: (cast SpineParse.numberOr__spineParse((cast (cast raw : { var scaleX:flighthq._internal._Any; }).scaleX : flighthq._internal._Any), (cast 1.0 : Float)) : Float), scaleY: (cast SpineParse.numberOr__spineParse((cast (cast raw : { var scaleY:flighthq._internal._Any; }).scaleY : flighthq._internal._Any), (cast 1.0 : Float)) : Float), width: (cast SpineParse.numberOr__spineParse((cast (cast raw : { var width:flighthq._internal._Any; }).width : flighthq._internal._Any), (cast 0.0 : Float)) : Float), x: (cast SpineParse.numberOr__spineParse((cast (cast raw : { var x:flighthq._internal._Any; }).x : flighthq._internal._Any), (cast 0.0 : Float)) : Float), y: (cast SpineParse.numberOr__spineParse((cast (cast raw : { var y:flighthq._internal._Any; }).y : flighthq._internal._Any), (cast 0.0 : Float)) : Float) };
     return cast null;
   }
 
   public static function parseSpineSlots__spineParse(raw:flighthq._internal._Any, bones:Array<Bone2D>):{ var attachmentNames:Array<Null<String>>; var slots:Array<Slot2D>; } {
     var attachmentNames:Array<Null<String>> = cast _Runtime.UNDEFINED;
     var slots:Array<Slot2D> = cast _Runtime.UNDEFINED;
-    attachmentNames = cast ([] : Array<Dynamic>);
-    slots = cast ([] : Array<Dynamic>);
+    attachmentNames = (cast cast ([] : Array<Dynamic>));
+    slots = (cast cast ([] : Array<Dynamic>));
     if ((cast !(cast _Runtime.isArray(raw) : Bool) : Bool)) { return cast { attachmentNames: attachmentNames, slots: slots }; }
     for (entry in _Runtime.iterable(raw)) {
       if ((cast ((cast _Runtime.strictEquals(entry, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(entry), 'object') : Bool)) : Bool)) { continue; }
       var slot:flighthq._internal._Record<String, flighthq._internal._Any> = (cast entry : flighthq._internal._Record<String, flighthq._internal._Any>);
-      var name:Null<String> = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(slot, 'name')), 'string') : Bool) ? (cast _Runtime.field(slot, 'name') : Dynamic) : (cast null : Dynamic));
+      var name:Null<String> = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast slot : { var name:flighthq._internal._Any; }).name), 'string') : Bool) ? (cast (cast slot : { var name:flighthq._internal._Any; }).name : Dynamic) : (cast null : Dynamic));
       var boneIndex:Float = -1.0;
-      if ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(slot, 'bone')), 'string') : Bool)) {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast slot : { var bone:flighthq._internal._Any; }).bone), 'string') : Bool)) {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(bones, 'length') : Float)) : Bool)) {
-            if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(bones, i) : Bone2D).name, _Runtime.field(slot, 'bone')) : Bool)) {
+            if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(bones, i) : Bone2D).name, (cast slot : { var bone:flighthq._internal._Any; }).bone) : Bool)) {
               (boneIndex = cast (i : Dynamic));
               break;
             }
@@ -219,8 +221,8 @@ class SpineParse {
           }
         }
       }
-      _Runtime.callProperty(attachmentNames, 'push', cast ([((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(slot, 'attachment')), 'string') : Bool) ? (cast _Runtime.field(slot, 'attachment') : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>));
-      _Runtime.callProperty(slots, 'push', cast ([{ attachment: null, boneIndex: boneIndex, color: (cast SpineParse.parseSpineColor__spineParse((cast _Runtime.field(slot, 'color') : flighthq._internal._Any)) : Null<Float>), name: name }] : Array<Dynamic>));
+      _Runtime.callProperty(attachmentNames, 'push', cast ([((cast _Runtime.strictEquals(_Runtime.typeofValue((cast slot : { var attachment:flighthq._internal._Any; }).attachment), 'string') : Bool) ? (cast (cast slot : { var attachment:flighthq._internal._Any; }).attachment : Dynamic) : (cast null : Dynamic))] : Array<Dynamic>));
+      _Runtime.callProperty(slots, 'push', cast ([{ attachment: null, boneIndex: boneIndex, color: (cast SpineParse.parseSpineColor__spineParse((cast (cast slot : { var color:flighthq._internal._Any; }).color : flighthq._internal._Any)) : Float), name: name }] : Array<Dynamic>));
     }
     return cast { attachmentNames: attachmentNames, slots: slots };
     return cast null;
@@ -251,7 +253,7 @@ class SpineParse {
     var truncated:Bool = cast _Runtime.UNDEFINED;
     var r:Float = cast _Runtime.UNDEFINED;
     influenceCounts = new flighthq._internal._UInt16Array(vertexCount);
-    influences = cast ([] : Array<Dynamic>);
+    influences = (cast cast ([] : Array<Dynamic>));
     truncated = false;
     r = 0.0;
     {
@@ -278,7 +280,7 @@ class SpineParse {
       }
     }
     if ((cast truncated : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'spine.weighted-vertices-truncated' : String), (cast 'parseSpineSkeleton' : String), (cast { vertices: 1.0 } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'spine.weighted-vertices-truncated' : String), (cast 'parseSpineSkeleton' : String), (cast { vertices: 1.0 }));
     }
     return cast { influenceCounts: influenceCounts, influences: new flighthq._internal._Float32Array(influences) };
     return cast null;
@@ -294,7 +296,7 @@ class SpineParse {
     return cast null;
   }
 
-  public static function addSpineBoneChannel__spineParse(channels:Array<Dynamic>, rawKeys:flighthq._internal._Any, boneIndex:Float, path:flighthq._internal._IndexedAccess<Dynamic, Dynamic>, components:Float, extract:flighthq._internal._Record<String, flighthq._internal._Any>->Array<Float>, ?diagnostics:Array<ImportDiagnostic>):Void {
+  public static function addSpineBoneChannel__spineParse(channels:Array<Dynamic>, rawKeys:flighthq._internal._Any, boneIndex:Float, path:flighthq._internal._IndexedAccess<Dynamic, String>, components:Float, extract:flighthq._internal._Record<String, flighthq._internal._Any>->Array<Float>, ?diagnostics:Array<ImportDiagnostic>):Void {
     var keys:Array<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var values:Array<Float> = cast _Runtime.UNDEFINED;
@@ -303,24 +305,24 @@ class SpineParse {
     var segmentEasings:Null<Array<Null<EasingFunction>>> = cast _Runtime.UNDEFINED;
     var track:AnimationTrack = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.isArray(rawKeys) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(rawKeys, 'length'), 0.0) : Bool)) : Bool)) { return; }
-    keys = cast ([] : Array<Dynamic>);
-    times = cast ([] : Array<Dynamic>);
-    values = cast ([] : Array<Dynamic>);
+    keys = (cast cast ([] : Array<Dynamic>));
+    times = (cast cast ([] : Array<Dynamic>));
+    values = (cast cast ([] : Array<Dynamic>));
     allStepped = true;
     for (key in _Runtime.iterable(rawKeys)) {
       if ((cast ((cast _Runtime.strictEquals(key, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(key), 'object') : Bool)) : Bool)) { continue; }
       var k:flighthq._internal._Record<String, flighthq._internal._Any> = (cast key : flighthq._internal._Record<String, flighthq._internal._Any>);
       _Runtime.callProperty(keys, 'push', cast ([k] : Array<Dynamic>));
-      _Runtime.callProperty(times, 'push', cast ([(cast SpineParse.numberOr__spineParse((cast _Runtime.field(k, 'time') : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>));
-      for (component in _Runtime.iterable((cast extract((cast k : flighthq._internal._Record<String, flighthq._internal._Any>)) : Array<Float>))) {
+      _Runtime.callProperty(times, 'push', cast ([(cast SpineParse.numberOr__spineParse((cast (cast k : { var time:flighthq._internal._Any; }).time : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>));
+      for (component in _Runtime.iterable((cast extract((cast k)) : Array<Float>))) {
         _Runtime.callProperty(values, 'push', cast ([component] : Array<Dynamic>));
       }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(k, 'curve'), 'stepped') : Bool)) { (allStepped = cast (false : Dynamic)); }
+      if ((cast !_Runtime.strictEquals((cast k : { var curve:flighthq._internal._Any; }).curve, 'stepped') : Bool)) { (allStepped = cast (false : Dynamic)); }
     }
     interpolation = ((cast allStepped : Bool) ? (cast AnimationInterpolationStep : Dynamic) : (cast AnimationInterpolationLinear : Dynamic));
-    segmentEasings = (cast SpineParse.buildSpineSegmentEasings__spineParse((cast keys : Array<flighthq._internal._Record<String, flighthq._internal._Any>>), (cast times : Array<Float>), (cast values : Array<Float>), (cast components : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Array<Null<EasingFunction>>>);
-    track = (cast createAnimationTrack((cast { components: components, interpolation: interpolation, segmentEasings: segmentEasings, times: times, values: values } : { var times:flighthq._internal._ArrayLike<Float>; var values:flighthq._internal._ArrayLike<Float>; @:optional var components:Null<Float>; @:optional var interpolation:Null<String>; @:optional var quaternion:Null<Bool>; @:optional var easing:Null<EasingFunction>; @:optional var segmentEasings:Null<Array<Null<EasingFunction>>>; })) : AnimationTrack);
-    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel(track, (cast createSkeleton2DBoneAnimationTarget((cast boneIndex : Float), (cast path : Skeleton2DAnimationPath)) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+    segmentEasings = (cast SpineParse.buildSpineSegmentEasings__spineParse((cast keys), (cast times), (cast values), (cast components : Float), (cast diagnostics)) : Null<Array<Null<EasingFunction>>>);
+    track = (cast createAnimationTrack((cast { components: components, interpolation: interpolation, segmentEasings: segmentEasings, times: times, values: values })) : AnimationTrack);
+    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast track), (cast (cast createSkeleton2DBoneAnimationTarget((cast boneIndex : Float), (cast path)) : Skeleton2DAnimationTarget) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
   }
 
   public static function buildSpineSegmentEasings__spineParse(keys:Array<flighthq._internal._Record<String, flighthq._internal._Any>>, times:Array<Float>, values:Array<Float>, components:Float, ?diagnostics:Array<ImportDiagnostic>):Null<Array<Null<EasingFunction>>> {
@@ -331,14 +333,14 @@ class SpineParse {
     var divergentSegments:Float = cast _Runtime.UNDEFINED;
     segments = _Runtime.subtractNumbers(_Runtime.field(times, 'length'), 1.0);
     if ((cast ((cast segments : Float) < (cast 1.0 : Float)) : Bool)) { return cast null; }
-    easings = cast ([] : Array<Dynamic>);
+    easings = (cast cast ([] : Array<Dynamic>));
     curved = false;
     clampedSegments = 0.0;
     divergentSegments = 0.0;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast segments : Float)) : Bool)) {
-        var curve:flighthq._internal._Any = _Runtime.field(flighthq._internal._StaticIndex.readArray(keys, i), 'curve');
+        var curve:flighthq._internal._Any = (cast flighthq._internal._StaticIndex.readArray(keys, i) : { var curve:flighthq._internal._Any; }).curve;
         var span:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(times, (i + 1.0)), flighthq._internal._StaticIndex.readArray(times, i));
         if ((cast ((cast !(cast _Runtime.isArray(curve) : Bool) : Bool) || (cast ((cast span : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
           _Runtime.callProperty(easings, 'push', cast ([null] : Array<Dynamic>));
@@ -368,7 +370,8 @@ class SpineParse {
           if ((cast _Runtime.strictEquals(rise, 0.0) : Bool)) { return cast null; }
           offset = (c * 4.0);
           return cast cast ([(_Runtime.subtractNumbers((cast SpineParse.numberOr__spineParse((cast flighthq._internal._StaticIndex.readArray(curve, offset) : flighthq._internal._Any), (cast 0.0 : Float)) : Float), flighthq._internal._StaticIndex.readArray(times, i)) / span), (((cast SpineParse.numberOr__spineParse((cast flighthq._internal._StaticIndex.readArray(curve, (offset + 1.0)) : flighthq._internal._Any), (cast 0.0 : Float)) : Float) - from) / rise), (_Runtime.subtractNumbers((cast SpineParse.numberOr__spineParse((cast flighthq._internal._StaticIndex.readArray(curve, (offset + 2.0)) : flighthq._internal._Any), (cast 0.0 : Float)) : Float), flighthq._internal._StaticIndex.readArray(times, i)) / span), (((cast SpineParse.numberOr__spineParse((cast flighthq._internal._StaticIndex.readArray(curve, (offset + 3.0)) : flighthq._internal._Any), (cast 0.0 : Float)) : Float) - from) / rise)] : Array<Dynamic>);
-        } : Float->Null<Array<Float>>);
+          return cast _Runtime.UNDEFINED;
+        });
         var won:Null<Array<Float>> = ((cast ((cast winner : Float) < (cast 0.0 : Float)) : Bool) ? (cast null : Dynamic) : (cast (cast rebase((cast winner : Float)) : Null<Array<Float>>) : Dynamic));
         var diverged:Bool = false;
         if ((cast !_Runtime.strictEquals(won, null) : Bool)) {
@@ -400,7 +403,7 @@ class SpineParse {
           var clampedX1:Float = (cast SpineParse.clampUnit__spineParse((cast x1 : Float)) : Float);
           var clampedX2:Float = (cast SpineParse.clampUnit__spineParse((cast x2 : Float)) : Float);
           if ((cast ((cast !_Runtime.strictEquals(clampedX1, x1) : Bool) || (cast !_Runtime.strictEquals(clampedX2, x2) : Bool)) : Bool)) { clampedSegments++; }
-          _Runtime.callProperty(easings, 'push', cast ([(cast easeCubicBezier((cast clampedX1 : Float), (cast y1 : Float), (cast clampedX2 : Float), (cast y2 : Float)) : Null<EasingFunction>)] : Array<Dynamic>));
+          _Runtime.callProperty(easings, 'push', cast ([(cast easeCubicBezier((cast clampedX1 : Float), (cast y1 : Float), (cast clampedX2 : Float), (cast y2 : Float)) : EasingFunction)] : Array<Dynamic>));
         } else {
           _Runtime.callProperty(easings, 'push', cast ([null] : Array<Dynamic>));
         }
@@ -408,10 +411,10 @@ class SpineParse {
       }
     }
     if ((cast ((cast clampedSegments : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'spine.curve-time-overshoot-clamped' : String), (cast 'parseSpineSkeleton' : String), (cast { segments: clampedSegments } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'spine.curve-time-overshoot-clamped' : String), (cast 'parseSpineSkeleton' : String), (cast { segments: clampedSegments }));
     }
     if ((cast ((cast divergentSegments : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'spine.per-component-curve-easing-unsupported' : String), (cast 'parseSpineSkeleton' : String), (cast { segments: divergentSegments } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'spine.per-component-curve-easing-unsupported' : String), (cast 'parseSpineSkeleton' : String), (cast { segments: divergentSegments }));
     }
     return cast ((cast curved : Bool) ? (cast easings : Dynamic) : (cast null : Dynamic));
     return cast null;
@@ -431,38 +434,38 @@ class SpineParse {
 
   public static function parseSpineAnimations__spineParse(raw:flighthq._internal._Any, bones:Array<Bone2D>, slots:Array<Slot2D>, skins:Array<AttachmentSkin2D>, ?diagnostics:Array<ImportDiagnostic>):Array<Skeleton2DImportAnimation> {
     var animations:Array<Skeleton2DImportAnimation> = cast _Runtime.UNDEFINED;
-    animations = cast ([] : Array<Dynamic>);
+    animations = (cast cast ([] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool)) { return cast animations; }
     for (__iteration6 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast raw : flighthq._internal._Record<String, flighthq._internal._Any>)))) {
       var name:String = flighthq._internal._StaticIndex.readArray(__iteration6, 0.0);
       var animEntry:flighthq._internal._Any = flighthq._internal._StaticIndex.readArray(__iteration6, 1.0);
       if ((cast ((cast _Runtime.strictEquals(animEntry, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(animEntry), 'object') : Bool)) : Bool)) { continue; }
       var anim:flighthq._internal._Record<String, flighthq._internal._Any> = (cast animEntry : flighthq._internal._Record<String, flighthq._internal._Any>);
-      var channels:Array<Dynamic> = cast ([] : Array<Dynamic>);
-      if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(anim, 'bones'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(anim, 'bones')), 'object') : Bool)) : Bool)) {
-        for (__iteration7 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast _Runtime.field(anim, 'bones') : flighthq._internal._Record<String, flighthq._internal._Any>)))) {
+      var channels:Array<Dynamic> = (cast cast ([] : Array<Dynamic>));
+      if ((cast ((cast !_Runtime.strictEquals((cast anim : { var bones:flighthq._internal._Any; }).bones, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast anim : { var bones:flighthq._internal._Any; }).bones), 'object') : Bool)) : Bool)) {
+        for (__iteration7 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast (cast anim : { var bones:flighthq._internal._Any; }).bones : flighthq._internal._Record<String, flighthq._internal._Any>)))) {
           var boneName:String = flighthq._internal._StaticIndex.readArray(__iteration7, 0.0);
           var timelinesEntry:flighthq._internal._Any = flighthq._internal._StaticIndex.readArray(__iteration7, 1.0);
-          var boneIndex:Float = (cast SpineParse.indexOfBone__spineParse((cast bones : Array<Bone2D>), (cast boneName : String)) : Float);
+          var boneIndex:Float = (cast SpineParse.indexOfBone__spineParse((cast bones), (cast boneName : String)) : Float);
           if ((cast ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(timelinesEntry, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(timelinesEntry), 'object') : Bool)) : Bool)) { continue; }
           var timelines:flighthq._internal._Record<String, flighthq._internal._Any> = (cast timelinesEntry : flighthq._internal._Record<String, flighthq._internal._Any>);
-          SpineParse.addSpineBoneChannel__spineParse(channels, (cast _Runtime.field(timelines, 'rotate') : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Rotation : String), (cast 1.0 : Float), (cast function(k:flighthq._internal._Record<String, flighthq._internal._Any>):Array<Float> return cast ([(cast SpineParse.numberOr__spineParse((cast _Runtime.field(k, 'value') : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>) : flighthq._internal._Record<String, flighthq._internal._Any>->Array<Float>), (cast diagnostics : Null<Array<ImportDiagnostic>>));
-          SpineParse.addSpineBoneChannel__spineParse(channels, (cast _Runtime.field(timelines, 'translate') : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Translation : String), (cast 2.0 : Float), (cast function(k:flighthq._internal._Record<String, flighthq._internal._Any>):Array<Float> return cast ([(cast SpineParse.numberOr__spineParse((cast _Runtime.field(k, 'x') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), (cast SpineParse.numberOr__spineParse((cast _Runtime.field(k, 'y') : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>) : flighthq._internal._Record<String, flighthq._internal._Any>->Array<Float>), (cast diagnostics : Null<Array<ImportDiagnostic>>));
-          SpineParse.addSpineBoneChannel__spineParse(channels, (cast _Runtime.field(timelines, 'scale') : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Scale : String), (cast 2.0 : Float), (cast function(k:flighthq._internal._Record<String, flighthq._internal._Any>):Array<Float> return cast ([(cast SpineParse.numberOr__spineParse((cast _Runtime.field(k, 'x') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), (cast SpineParse.numberOr__spineParse((cast _Runtime.field(k, 'y') : flighthq._internal._Any), (cast 1.0 : Float)) : Float)] : Array<Dynamic>) : flighthq._internal._Record<String, flighthq._internal._Any>->Array<Float>), (cast diagnostics : Null<Array<ImportDiagnostic>>));
-          SpineParse.addSpineBoneChannel__spineParse(channels, (cast _Runtime.field(timelines, 'shear') : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Shear : String), (cast 2.0 : Float), (cast function(k:flighthq._internal._Record<String, flighthq._internal._Any>):Array<Float> return cast ([(cast SpineParse.numberOr__spineParse((cast _Runtime.field(k, 'x') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), (cast SpineParse.numberOr__spineParse((cast _Runtime.field(k, 'y') : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>) : flighthq._internal._Record<String, flighthq._internal._Any>->Array<Float>), (cast diagnostics : Null<Array<ImportDiagnostic>>));
+          SpineParse.addSpineBoneChannel__spineParse((cast channels), (cast (cast timelines : { var rotate:flighthq._internal._Any; }).rotate : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Rotation : String), (cast 1.0 : Float), (cast function(k:flighthq._internal._Record<String, flighthq._internal._Any>):Array<Float> return cast ([(cast SpineParse.numberOr__spineParse((cast (cast k : { var value:flighthq._internal._Any; }).value : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>)), (cast diagnostics));
+          SpineParse.addSpineBoneChannel__spineParse((cast channels), (cast (cast timelines : { var translate:flighthq._internal._Any; }).translate : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Translation : String), (cast 2.0 : Float), (cast function(k:flighthq._internal._Record<String, flighthq._internal._Any>):Array<Float> return cast ([(cast SpineParse.numberOr__spineParse((cast (cast k : { var x:flighthq._internal._Any; }).x : flighthq._internal._Any), (cast 0.0 : Float)) : Float), (cast SpineParse.numberOr__spineParse((cast (cast k : { var y:flighthq._internal._Any; }).y : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>)), (cast diagnostics));
+          SpineParse.addSpineBoneChannel__spineParse((cast channels), (cast (cast timelines : { var scale:flighthq._internal._Any; }).scale : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Scale : String), (cast 2.0 : Float), (cast function(k:flighthq._internal._Record<String, flighthq._internal._Any>):Array<Float> return cast ([(cast SpineParse.numberOr__spineParse((cast (cast k : { var x:flighthq._internal._Any; }).x : flighthq._internal._Any), (cast 1.0 : Float)) : Float), (cast SpineParse.numberOr__spineParse((cast (cast k : { var y:flighthq._internal._Any; }).y : flighthq._internal._Any), (cast 1.0 : Float)) : Float)] : Array<Dynamic>)), (cast diagnostics));
+          SpineParse.addSpineBoneChannel__spineParse((cast channels), (cast (cast timelines : { var shear:flighthq._internal._Any; }).shear : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Shear : String), (cast 2.0 : Float), (cast function(k:flighthq._internal._Record<String, flighthq._internal._Any>):Array<Float> return cast ([(cast SpineParse.numberOr__spineParse((cast (cast k : { var x:flighthq._internal._Any; }).x : flighthq._internal._Any), (cast 0.0 : Float)) : Float), (cast SpineParse.numberOr__spineParse((cast (cast k : { var y:flighthq._internal._Any; }).y : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>)), (cast diagnostics));
           for (axis in _Runtime.iterable(SpineParse.SPINE_BONE_AXIS_TIMELINES__spineParse)) {
-            SpineParse.addSpineBoneChannel__spineParse(channels, (cast _Runtime.getIndex(timelines, (cast axis : { var key:String; }).key) : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast axis : { var path:String; }).path : String), (cast 1.0 : Float), (cast function(k:flighthq._internal._Record<String, flighthq._internal._Any>):Array<Float> return cast ([(cast SpineParse.numberOr__spineParse((cast _Runtime.field(k, 'value') : flighthq._internal._Any), (cast (cast axis : { var identity:Float; }).identity : Float)) : Float)] : Array<Dynamic>) : flighthq._internal._Record<String, flighthq._internal._Any>->Array<Float>), (cast diagnostics : Null<Array<ImportDiagnostic>>));
+            SpineParse.addSpineBoneChannel__spineParse((cast channels), (cast _Runtime.getIndex(timelines, (cast axis : { var key:String; }).key) : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast axis : { var path:String; }).path : String), (cast 1.0 : Float), (cast function(k:flighthq._internal._Record<String, flighthq._internal._Any>):Array<Float> return cast ([(cast SpineParse.numberOr__spineParse((cast (cast k : { var value:flighthq._internal._Any; }).value : flighthq._internal._Any), (cast (cast axis : { var identity:Float; }).identity : Float)) : Float)] : Array<Dynamic>)), (cast diagnostics));
           }
         }
       }
-      SpineParse.parseSpineSlotTimelines__spineParse(channels, (cast _Runtime.field(anim, 'slots') : flighthq._internal._Any), (cast slots : Array<Slot2D>), (cast skins : Array<AttachmentSkin2D>), (cast diagnostics : Null<Array<ImportDiagnostic>>));
-      SpineParse.skipCrumbSpineTimelineGroup__spineParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast _Runtime.field(anim, 'ik') : flighthq._internal._Any), (cast 'spine.ik-timeline-unsupported' : String));
-      SpineParse.skipCrumbSpineTimelineGroup__spineParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast _Runtime.field(anim, 'transform') : flighthq._internal._Any), (cast 'spine.transform-timeline-unsupported' : String));
-      SpineParse.skipCrumbSpineTimelineGroup__spineParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast _Runtime.field(anim, 'path') : flighthq._internal._Any), (cast 'spine.path-timeline-unsupported' : String));
-      SpineParse.skipCrumbSpineTimelineGroup__spineParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast _Runtime.field(anim, 'deform') : flighthq._internal._Any), (cast 'spine.deform-timeline-unsupported' : String));
-      SpineParse.skipCrumbSpineTimelineGroup__spineParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast _Runtime.field(anim, 'events') : flighthq._internal._Any), (cast 'spine.event-timeline-unsupported' : String));
-      var drawOrder:Null<Skeleton2DDrawOrderTimeline> = (cast parseSpineDrawOrderTimeline((cast _Runtime.coalesce(_Runtime.field(anim, 'drawOrder'), function():Dynamic return cast _Runtime.field(anim, 'draworder')) : flighthq._internal._Any), (cast slots : Array<Slot2D>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Skeleton2DDrawOrderTimeline>);
-      _Runtime.callProperty(animations, 'push', cast ([{ clip: (cast createAnimationClip(channels, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), _Runtime.field(_Runtime, 'UNDEFINED')) : AnimationClip), drawOrder: drawOrder, name: name }] : Array<Dynamic>));
+      SpineParse.parseSpineSlotTimelines__spineParse((cast channels), (cast (cast anim : { var slots:flighthq._internal._Any; }).slots : flighthq._internal._Any), (cast slots), (cast skins), (cast diagnostics));
+      SpineParse.skipCrumbSpineTimelineGroup__spineParse((cast diagnostics), (cast (cast anim : { var ik:flighthq._internal._Any; }).ik : flighthq._internal._Any), (cast 'spine.ik-timeline-unsupported' : String));
+      SpineParse.skipCrumbSpineTimelineGroup__spineParse((cast diagnostics), (cast (cast anim : { var transform:flighthq._internal._Any; }).transform : flighthq._internal._Any), (cast 'spine.transform-timeline-unsupported' : String));
+      SpineParse.skipCrumbSpineTimelineGroup__spineParse((cast diagnostics), (cast (cast anim : { var path:flighthq._internal._Any; }).path : flighthq._internal._Any), (cast 'spine.path-timeline-unsupported' : String));
+      SpineParse.skipCrumbSpineTimelineGroup__spineParse((cast diagnostics), (cast (cast anim : { var deform:flighthq._internal._Any; }).deform : flighthq._internal._Any), (cast 'spine.deform-timeline-unsupported' : String));
+      SpineParse.skipCrumbSpineTimelineGroup__spineParse((cast diagnostics), (cast (cast anim : { var events:flighthq._internal._Any; }).events : flighthq._internal._Any), (cast 'spine.event-timeline-unsupported' : String));
+      var drawOrder:Null<Skeleton2DDrawOrderTimeline> = (cast parseSpineDrawOrderTimeline((cast _Runtime.coalesce((cast anim : { var drawOrder:flighthq._internal._Any; }).drawOrder, function():Dynamic return cast (cast anim : { var draworder:flighthq._internal._Any; }).draworder) : flighthq._internal._Any), (cast slots), (cast diagnostics)) : Null<Skeleton2DDrawOrderTimeline>);
+      _Runtime.callProperty(animations, 'push', cast ([{ clip: (cast createAnimationClip((cast channels), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : AnimationClip), drawOrder: drawOrder, name: name }] : Array<Dynamic>));
     }
     return cast animations;
     return cast null;
@@ -476,22 +479,22 @@ class SpineParse {
       var slotName:String = flighthq._internal._StaticIndex.readArray(__iteration8, 0.0);
       var timelinesEntry:flighthq._internal._Any = flighthq._internal._StaticIndex.readArray(__iteration8, 1.0);
       if ((cast ((cast _Runtime.strictEquals(timelinesEntry, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(timelinesEntry), 'object') : Bool)) : Bool)) { continue; }
-      var slotIndex:Float = (cast SpineParse.indexOfSpineSlot__spineParse((cast slots : Array<Slot2D>), (cast slotName : String)) : Float);
+      var slotIndex:Float = (cast SpineParse.indexOfSpineSlot__spineParse((cast slots), (cast slotName : String)) : Float);
       for (__iteration9 in _Runtime.iterable(flighthq._internal.DynamicObject.entries((cast timelinesEntry : flighthq._internal._Record<String, flighthq._internal._Any>)))) {
         var kind:String = flighthq._internal._StaticIndex.readArray(__iteration9, 0.0);
         var keys:flighthq._internal._Any = flighthq._internal._StaticIndex.readArray(__iteration9, 1.0);
         if ((cast ((cast !_Runtime.strictEquals(kind, 'rgba') : Bool) && (cast !_Runtime.strictEquals(kind, 'attachment') : Bool)) : Bool)) {
-          ((cast unmodeled : flighthq._internal._Map<String, Float>).set(kind, _Runtime.addNumbers(_Runtime.coalesce(((cast unmodeled : flighthq._internal._Map<String, Float>).get(kind)), function():Dynamic return cast 0.0), 1.0)));
+          ((cast unmodeled : flighthq._internal._Map<String, Float>).set(kind, (cast _Runtime.addNumbers(_Runtime.coalesce(((cast unmodeled : flighthq._internal._Map<String, Float>).get(kind)), function():Dynamic return cast 0.0), 1.0))));
           continue;
         }
         if ((cast ((cast ((cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast !(cast _Runtime.isArray(keys) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(keys, 'length'), 0.0) : Bool)) : Bool)) { continue; }
-        if ((cast _Runtime.strictEquals(kind, 'attachment') : Bool)) { SpineParse.addSpineSlotAttachmentChannel__spineParse(channels, (cast keys : Array<flighthq._internal._Any>), (cast slotIndex : Float), (cast slotName : String), (cast skins : Array<AttachmentSkin2D>)); } else { SpineParse.addSpineSlotColorChannel__spineParse(channels, (cast keys : Array<flighthq._internal._Any>), (cast slotIndex : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)); }
+        if ((cast _Runtime.strictEquals(kind, 'attachment') : Bool)) { SpineParse.addSpineSlotAttachmentChannel__spineParse((cast channels), (cast keys), (cast slotIndex : Float), (cast slotName : String), (cast skins)); } else { SpineParse.addSpineSlotColorChannel__spineParse((cast channels), (cast keys), (cast slotIndex : Float), (cast diagnostics)); }
       }
     }
     for (__iteration10 in _Runtime.iterable(unmodeled)) {
       var kind:String = flighthq._internal._StaticIndex.readArray(__iteration10, 0.0);
       var count:Float = flighthq._internal._StaticIndex.readArray(__iteration10, 1.0);
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'spine.slot-' + Std.string(kind) + '-timeline-unsupported' : String), (cast 'parseSpineSkeleton' : String), (cast { timelines: count } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'spine.slot-' + Std.string(kind) + '-timeline-unsupported' : String), (cast 'parseSpineSkeleton' : String), (cast { timelines: count }));
     }
   }
 
@@ -503,24 +506,24 @@ class SpineParse {
     var interpolation:String = cast _Runtime.UNDEFINED;
     var segmentEasings:Null<Array<Null<EasingFunction>>> = cast _Runtime.UNDEFINED;
     var track:AnimationTrack = cast _Runtime.UNDEFINED;
-    keys = cast ([] : Array<Dynamic>);
-    times = cast ([] : Array<Dynamic>);
-    values = cast ([] : Array<Dynamic>);
+    keys = (cast cast ([] : Array<Dynamic>));
+    times = (cast cast ([] : Array<Dynamic>));
+    values = (cast cast ([] : Array<Dynamic>));
     allStepped = true;
     for (key in _Runtime.iterable(rawKeys)) {
       if ((cast ((cast _Runtime.strictEquals(key, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(key), 'object') : Bool)) : Bool)) { continue; }
       var k:flighthq._internal._Record<String, flighthq._internal._Any> = (cast key : flighthq._internal._Record<String, flighthq._internal._Any>);
       _Runtime.callProperty(keys, 'push', cast ([k] : Array<Dynamic>));
-      _Runtime.callProperty(times, 'push', cast ([(cast SpineParse.numberOr__spineParse((cast _Runtime.field(k, 'time') : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>));
-      var packed:Float = (cast SpineParse.parseSpineColor__spineParse((cast _Runtime.field(k, 'color') : flighthq._internal._Any)) : Float);
+      _Runtime.callProperty(times, 'push', cast ([(cast SpineParse.numberOr__spineParse((cast (cast k : { var time:flighthq._internal._Any; }).time : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>));
+      var packed:Float = (cast SpineParse.parseSpineColor__spineParse((cast (cast k : { var color:flighthq._internal._Any; }).color : flighthq._internal._Any)) : Float);
       _Runtime.pushMany(values, cast ([((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0), ((_Runtime.toInt32(packed) & 255) / 255.0)] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(_Runtime.field(k, 'curve'), 'stepped') : Bool)) { (allStepped = cast (false : Dynamic)); }
+      if ((cast !_Runtime.strictEquals((cast k : { var curve:flighthq._internal._Any; }).curve, 'stepped') : Bool)) { (allStepped = cast (false : Dynamic)); }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(times, 'length'), 0.0) : Bool)) { return; }
     interpolation = ((cast allStepped : Bool) ? (cast AnimationInterpolationStep : Dynamic) : (cast AnimationInterpolationLinear : Dynamic));
-    segmentEasings = (cast SpineParse.buildSpineSegmentEasings__spineParse((cast keys : Array<flighthq._internal._Record<String, flighthq._internal._Any>>), (cast times : Array<Float>), (cast values : Array<Float>), (cast 4.0 : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Array<Null<EasingFunction>>>);
-    track = (cast createAnimationTrack((cast { components: 4.0, interpolation: interpolation, segmentEasings: segmentEasings, times: times, values: values } : { var times:flighthq._internal._ArrayLike<Float>; var values:flighthq._internal._ArrayLike<Float>; @:optional var components:Null<Float>; @:optional var interpolation:Null<String>; @:optional var quaternion:Null<Bool>; @:optional var easing:Null<EasingFunction>; @:optional var segmentEasings:Null<Array<Null<EasingFunction>>>; })) : AnimationTrack);
-    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel(track, (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Color : Skeleton2DSlotAnimationPath), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Array<Null<Attachment2D>>>)) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+    segmentEasings = (cast SpineParse.buildSpineSegmentEasings__spineParse((cast keys), (cast times), (cast values), (cast 4.0 : Float), (cast diagnostics)) : Null<Array<Null<EasingFunction>>>);
+    track = (cast createAnimationTrack((cast { components: 4.0, interpolation: interpolation, segmentEasings: segmentEasings, times: times, values: values })) : AnimationTrack);
+    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast track), (cast (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Color), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Skeleton2DSlotAnimationTarget) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
   }
 
   public static function addSpineSlotAttachmentChannel__spineParse(channels:Array<Dynamic>, rawKeys:Array<flighthq._internal._Any>, slotIndex:Float, slotName:String, skins:Array<AttachmentSkin2D>):Void {
@@ -531,15 +534,15 @@ class SpineParse {
     var values:Array<Float> = cast _Runtime.UNDEFINED;
     var track:AnimationTrack = cast _Runtime.UNDEFINED;
     setup = _Runtime.coalesce(_Runtime.find(skins, function(skin:AttachmentSkin2D, __unused11:Float, __unused12:Array<AttachmentSkin2D>):Bool return _Runtime.strictEquals((cast skin : AttachmentSkin2D).name, SpineParse.SPINE_DEFAULT_SKIN_NAME__spineParse)), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(skins, 0.0));
-    attachments = cast ([] : Array<Dynamic>);
+    attachments = (cast cast ([] : Array<Dynamic>));
     indexByName = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
-    times = cast ([] : Array<Dynamic>);
-    values = cast ([] : Array<Dynamic>);
+    times = (cast cast ([] : Array<Dynamic>));
+    values = (cast cast ([] : Array<Dynamic>));
     for (key in _Runtime.iterable(rawKeys)) {
       if ((cast ((cast _Runtime.strictEquals(key, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(key), 'object') : Bool)) : Bool)) { continue; }
       var k:flighthq._internal._Record<String, flighthq._internal._Any> = (cast key : flighthq._internal._Record<String, flighthq._internal._Any>);
-      _Runtime.callProperty(times, 'push', cast ([(cast SpineParse.numberOr__spineParse((cast _Runtime.field(k, 'time') : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>));
-      var name:Null<String> = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(k, 'name')), 'string') : Bool) ? (cast _Runtime.field(k, 'name') : Dynamic) : (cast null : Dynamic));
+      _Runtime.callProperty(times, 'push', cast ([(cast SpineParse.numberOr__spineParse((cast (cast k : { var time:flighthq._internal._Any; }).time : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>));
+      var name:Null<String> = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast k : { var name:flighthq._internal._Any; }).name), 'string') : Bool) ? (cast (cast k : { var name:flighthq._internal._Any; }).name : Dynamic) : (cast null : Dynamic));
       if ((cast _Runtime.strictEquals(name, null) : Bool)) {
         _Runtime.callProperty(values, 'push', cast ([SpineParse.SPINE_NO_ATTACHMENT_INDEX__spineParse] : Array<Dynamic>));
         continue;
@@ -548,20 +551,20 @@ class SpineParse {
       if ((cast _Runtime.strictEquals(index, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         var found:Null<SkinAttachment2D> = _Runtime.callOptionalProperty(({ final __structural39 = setup; __structural39 == null ? _Runtime.UNDEFINED : (cast __structural39 : AttachmentSkin2D).attachments; }), 'find', cast ([function(entry:SkinAttachment2D, __unused13:Float, __unused14:Array<SkinAttachment2D>):Bool return ((cast _Runtime.strictEquals((cast entry : SkinAttachment2D).slotIndex, slotIndex) : Bool) && (cast _Runtime.strictEquals((cast entry : SkinAttachment2D).name, name) : Bool))] : Array<Dynamic>));
         (index = cast (((cast _Runtime.strictEquals(found, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast SpineParse.SPINE_NO_ATTACHMENT_INDEX__spineParse : Dynamic) : (cast _Runtime.subtractNumbers(_Runtime.callProperty(attachments, 'push', cast ([(cast found : SkinAttachment2D).attachment] : Array<Dynamic>)), 1.0) : Dynamic)) : Dynamic));
-        ((cast indexByName : flighthq._internal._Map<String, Float>).set(name, index));
+        ((cast indexByName : flighthq._internal._Map<String, Float>).set(name, (cast index)));
       }
       _Runtime.callProperty(values, 'push', cast ([index] : Array<Dynamic>));
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(times, 'length'), 0.0) : Bool)) { return; }
-    track = (cast createAnimationTrack((cast { components: 1.0, interpolation: AnimationInterpolationStep, times: times, values: values } : { var times:flighthq._internal._ArrayLike<Float>; var values:flighthq._internal._ArrayLike<Float>; @:optional var components:Null<Float>; @:optional var interpolation:Null<String>; @:optional var quaternion:Null<Bool>; @:optional var easing:Null<EasingFunction>; @:optional var segmentEasings:Null<Array<Null<EasingFunction>>>; })) : AnimationTrack);
-    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel(track, (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Attachment : Skeleton2DSlotAnimationPath), (cast attachments : Null<Array<Null<Attachment2D>>>)) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+    track = (cast createAnimationTrack((cast { components: 1.0, interpolation: AnimationInterpolationStep, times: times, values: values })) : AnimationTrack);
+    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast track), (cast (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Attachment), (cast attachments)) : Skeleton2DSlotAnimationTarget) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
   }
 
   public static function skipCrumbSpineTimelineGroup__spineParse(diagnostics:Null<Array<ImportDiagnostic>>, raw:flighthq._internal._Any, kind:String):Void {
     var count:Float = cast _Runtime.UNDEFINED;
     count = 0.0;
     if ((cast _Runtime.isArray(raw) : Bool)) { (count = cast (_Runtime.field(raw, 'length') : Dynamic)); } else { if ((cast ((cast !_Runtime.strictEquals(raw, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool)) { (count = cast (_Runtime.field(flighthq._internal.DynamicObject.keys((cast raw : flighthq._internal._Record<String, flighthq._internal._Any>)), 'length') : Dynamic)); } }
-    if ((cast ((cast count : Float) > (cast 0.0 : Float)) : Bool)) { reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast kind : String), (cast 'parseSpineSkeleton' : String), (cast { count: count } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>)); }
+    if ((cast ((cast count : Float) > (cast 0.0 : Float)) : Bool)) { reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast kind : String), (cast 'parseSpineSkeleton' : String), (cast { count: count })); }
   }
 
   public static function clampUnit__spineParse(value:Float):Float {
@@ -569,7 +572,7 @@ class SpineParse {
     return cast null;
   }
 
-  public static final SPINE_BONE_AXIS_TIMELINES__spineParse:Array<{ var identity:Float; var key:String; var path:String; }> = cast ([{ identity: 0.0, key: 'translatex', path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).TranslationX }, { identity: 0.0, key: 'translatey', path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).TranslationY }, { identity: 1.0, key: 'scalex', path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ScaleX }, { identity: 1.0, key: 'scaley', path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ScaleY }, { identity: 0.0, key: 'shearx', path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ShearX }, { identity: 0.0, key: 'sheary', path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ShearY }] : Array<Dynamic>);
+  public static final SPINE_BONE_AXIS_TIMELINES__spineParse:Array<{ var identity:Float; var key:String; var path:String; }> = (cast cast ([{ identity: 0.0, key: 'translatex', path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).TranslationX }, { identity: 0.0, key: 'translatey', path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).TranslationY }, { identity: 1.0, key: 'scalex', path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ScaleX }, { identity: 1.0, key: 'scaley', path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ScaleY }, { identity: 0.0, key: 'shearx', path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ShearX }, { identity: 0.0, key: 'sheary', path: (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).ShearY }] : Array<Dynamic>));
 
   public static final SPINE_CURVE_EPSILON__spineParse:Float = 0.000001;
 
@@ -616,14 +619,14 @@ class SpineParse {
     }
     if ((cast ((cast _Runtime.strictEquals(doc, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(doc), 'object') : Bool)) : Bool)) { return cast null; }
     record = (cast doc : flighthq._internal._Record<String, flighthq._internal._Any>);
-    bones = (cast SpineParse.parseSpineBones__spineParse((cast _Runtime.field(record, 'bones') : flighthq._internal._Any), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<Bone2D>);
-    __destructure15 = (cast SpineParse.parseSpineSlots__spineParse((cast _Runtime.field(record, 'slots') : flighthq._internal._Any), (cast bones : Array<Bone2D>)) : { var attachmentNames:Array<Null<String>>; var slots:Array<Slot2D>; });
+    bones = (cast SpineParse.parseSpineBones__spineParse((cast (cast record : { var bones:flighthq._internal._Any; }).bones : flighthq._internal._Any), (cast diagnostics)) : Array<Bone2D>);
+    __destructure15 = (cast SpineParse.parseSpineSlots__spineParse((cast (cast record : { var slots:flighthq._internal._Any; }).slots : flighthq._internal._Any), (cast bones)) : { var attachmentNames:Array<Null<String>>; var slots:Array<Slot2D>; });
     attachmentNames = _Runtime.field(__destructure15, 'attachmentNames');
     slots = _Runtime.field(__destructure15, 'slots');
-    skins = (cast SpineParse.parseSpineSkins__spineParse((cast _Runtime.field(record, 'skins') : flighthq._internal._Any), (cast slots : Array<Slot2D>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<AttachmentSkin2D>);
-    SpineParse.resolveSpineSetupAttachments__spineParse((cast slots : Array<Slot2D>), (cast attachmentNames : Array<Null<String>>), (cast skins : Array<AttachmentSkin2D>));
-    animations = (cast SpineParse.parseSpineAnimations__spineParse((cast _Runtime.field(record, 'animations') : flighthq._internal._Any), (cast bones : Array<Bone2D>), (cast slots : Array<Slot2D>), (cast skins : Array<AttachmentSkin2D>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<Skeleton2DImportAnimation>);
-    skeleton = (cast createSkeleton2D((cast bones : Array<Bone2D>), (cast slots : Null<Array<Slot2D>>)) : Skeleton2D);
+    skins = (cast SpineParse.parseSpineSkins__spineParse((cast (cast record : { var skins:flighthq._internal._Any; }).skins : flighthq._internal._Any), (cast slots), (cast diagnostics)) : Array<AttachmentSkin2D>);
+    SpineParse.resolveSpineSetupAttachments__spineParse((cast slots), (cast attachmentNames), (cast skins));
+    animations = (cast SpineParse.parseSpineAnimations__spineParse((cast (cast record : { var animations:flighthq._internal._Any; }).animations : flighthq._internal._Any), (cast bones), (cast slots), (cast skins), (cast diagnostics)) : Array<Skeleton2DImportAnimation>);
+    skeleton = (cast createSkeleton2D((cast bones), (cast slots)) : Skeleton2D);
     if ((cast ((cast _Runtime.field(skins, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast skeleton : Skeleton2D).skins = skins); }
     return cast { animations: animations, skeleton: skeleton };
     return cast null;
@@ -631,17 +634,17 @@ class SpineParse {
 
   public static function resolveSpineDrawOrder__spineParse(raw:flighthq._internal._Any, slots:Array<Slot2D>):Null<Array<Float>> {
     var moves:Array<{ var offset:Float; var slotIndex:Float; }> = cast _Runtime.UNDEFINED;
-    moves = cast ([] : Array<Dynamic>);
+    moves = (cast cast ([] : Array<Dynamic>));
     if ((cast _Runtime.isArray(raw) : Bool)) {
       for (offset in _Runtime.iterable(raw)) {
         if ((cast ((cast _Runtime.strictEquals(offset, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(offset), 'object') : Bool)) : Bool)) { continue; }
         var move:{ @:optional var offset:flighthq._internal._Any; @:optional var slot:flighthq._internal._Any; } = (cast offset : { @:optional var offset:flighthq._internal._Any; @:optional var slot:flighthq._internal._Any; });
-        var slotIndex:Float = (cast SpineParse.indexOfSpineSlot__spineParse((cast slots : Array<Slot2D>), (cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast move : { @:optional var offset:flighthq._internal._Any; @:optional var slot:flighthq._internal._Any; }).slot), 'string') : Bool) ? (cast (cast move : { @:optional var offset:flighthq._internal._Any; @:optional var slot:flighthq._internal._Any; }).slot : Dynamic) : (cast '' : Dynamic)) : String)) : Float);
+        var slotIndex:Float = (cast SpineParse.indexOfSpineSlot__spineParse((cast slots), (cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast move : { @:optional var offset:flighthq._internal._Any; @:optional var slot:flighthq._internal._Any; }).slot), 'string') : Bool) ? (cast (cast move : { @:optional var offset:flighthq._internal._Any; @:optional var slot:flighthq._internal._Any; }).slot : Dynamic) : (cast '' : Dynamic)) : String)) : Float);
         if ((cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
         _Runtime.callProperty(moves, 'push', cast ([{ offset: (cast SpineParse.numberOr__spineParse((cast (cast move : { @:optional var offset:flighthq._internal._Any; @:optional var slot:flighthq._internal._Any; }).offset : flighthq._internal._Any), (cast 0.0 : Float)) : Float), slotIndex: slotIndex }] : Array<Dynamic>));
       }
     }
-    return cast (cast resolveSpineDrawOrdering((cast moves : Array<{ var offset:Float; var slotIndex:Float; }>), (cast _Runtime.field(slots, 'length') : Float)) : Null<Array<Float>>);
+    return cast (cast resolveSpineDrawOrdering((cast moves), (cast _Runtime.field(slots, 'length') : Float)) : Null<Array<Float>>);
     return cast null;
   }
 }

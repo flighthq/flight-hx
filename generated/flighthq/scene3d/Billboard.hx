@@ -20,10 +20,10 @@ import flighthq.types.Types.BillboardKind;
 import flighthq.types._internal._BillboardValues.BillboardKind;
 
 class Billboard {
-  public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, mode:BillboardMode = 'full', ?kind:Kind, ?obj:Dynamic):flighthq.types.Billboard {
+  public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, mode:BillboardMode = 'full', ?kind:Kind, ?obj:flighthq._internal._Partial<flighthq._internal._Pick<flighthq.types.Billboard, String>>):flighthq.types.Billboard {
     if (kind == null) kind = cast (BillboardKind : Dynamic);
     var billboard:flighthq.types.Billboard = cast _Runtime.UNDEFINED;
-    billboard = (cast (cast createNode3D((cast kind : String), (cast obj : Null<flighthq._internal._Any>)) : flighthq.types.Billboard) : flighthq.types.Billboard);
+    billboard = (cast createNode3D((cast kind : String), (cast obj)) : flighthq.types.Billboard);
     (billboard.geometry = cast (geometry : Dynamic));
     (billboard.materials = cast (materials : Dynamic));
     (billboard.mode = cast (mode : Dynamic));
@@ -32,24 +32,24 @@ class Billboard {
   }
 
   public static function enableBillboardSignals(source:flighthq.types.Billboard):NodeSignals {
-    return cast (cast enableNodeSignals(source) : NodeSignals);
+    return cast (cast enableNodeSignals((cast source)) : NodeSignals);
     return cast null;
   }
 
   @:noCompletion
   public static function getBillboardRuntime(source:flighthq.types.Billboard):BillboardRuntime {
-    return cast (cast getNode3DRuntime((cast source : Node3D)) : Node3DRuntime);
+    return cast (cast getNode3DRuntime((cast source)) : Node3DRuntime);
     return cast null;
   }
 
   public static function getBillboardSignals(source:flighthq.types.Billboard):Null<NodeSignals> {
-    return cast (cast getNodeSignals(source) : Null<NodeSignals>);
+    return cast (cast getNodeSignals((cast source)) : Null<NodeSignals>);
     return cast null;
   }
 
   public static function isBillboard(source:Node3D):Bool {
     var candidate:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    candidate = (cast source : Dynamic);
+    candidate = (cast source : flighthq._internal._Partial<flighthq.types.Billboard>);
     return cast ((cast !_Runtime.looseEquals(_Runtime.field(candidate, 'geometry'), null) : Bool) && (cast !_Runtime.looseEquals(_Runtime.field(candidate, 'mode'), null) : Bool));
     return cast null;
   }

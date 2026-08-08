@@ -31,13 +31,17 @@ import flighthq.types.GlScene3DRuntime;
 import flighthq.types.GlScene3DRuntime.GlScene3DDrawEntry;
 import flighthq.types.Material;
 import flighthq.types.Matrix3;
+import flighthq.types.Matrix3.Matrix3Like;
 import flighthq.types.Matrix4;
+import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshSubset;
 import flighthq.types.Node3D;
 import flighthq.types.Node3D.Node3DRuntime;
 import flighthq.types.PointLight;
+import flighthq.types.RenderState;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DLights.Scene3DLightsLike;
 import flighthq.types.Scene3DRenderList;
@@ -57,7 +61,7 @@ typedef DrawEntry__drawGlScene3D = { var alpha:Float; var clipW:Float; var color
 
 class DrawGlScene3D {
   public static function isGpuSkinnedDraw__drawGlScene3D(mesh:Mesh):Bool {
-    return cast ((cast !_Runtime.looseEquals(mesh.skin, null) : Bool) && (cast (cast hasMeshGeometrySkin(mesh.geometry) : Bool) : Bool));
+    return cast ((cast !_Runtime.looseEquals(mesh.skin, null) : Bool) && (cast (cast hasMeshGeometrySkin((cast mesh.geometry)) : Bool) : Bool));
     return cast null;
   }
 
@@ -77,43 +81,43 @@ class DrawGlScene3D {
     var boundColorAdjustment:Null<Bool> = cast _Runtime.UNDEFINED;
     var boundColorMatrix:Null<Bool> = cast _Runtime.UNDEFINED;
     var colorAdjustmentFeatureEnabled:Bool = cast _Runtime.UNDEFINED;
-    list = (cast prepareScene3DRender(state, (cast scene : Node3D), (cast camera : Camera3D), (cast lights : Scene3DLightsLike), (cast (cast getGlScene3DViewportAspect((cast state : GlRenderState)) : Null<Float>) : Null<Float>)) : Scene3DRenderList);
+    list = (cast prepareScene3DRender((cast state), (cast scene), (cast camera), (cast lights), (cast (cast getGlScene3DViewportAspect((cast state)) : Float))) : Scene3DRenderList);
     lightBlock = (cast list : Scene3DRenderList).lights;
     viewProjection = (cast list : Scene3DRenderList).viewProjection;
-    runtime = (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime);
+    runtime = (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime);
     hasPreparedForwardLights = ((cast !_Runtime.strictEquals(forwardLights, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(forwardLights, 'meshCount'), (cast list : Scene3DRenderList).meshCount) : Bool));
-    if ((cast ((cast !(cast hasPreparedForwardLights : Bool) : Bool) && (cast (cast DrawGlScene3D.hasExcessForwardLights__drawGlScene3D((cast lights : Scene3DLightsLike)) : Bool) : Bool)) : Bool)) { _Runtime.callOptionalValue((cast runtime : GlScene3DRuntime).forwardLightSelectionGuard, cast ([lights] : Array<Dynamic>)); }
-    if ((cast !(cast (cast declareGlRenderTargetColorSpace((cast state : GlRenderState), 'linear') : Bool) : Bool) : Bool)) { _Runtime.callOptionalValue((cast runtime : GlScene3DRuntime).colorSpaceGuard, cast ([] : Array<Dynamic>)); }
+    if ((cast ((cast !(cast hasPreparedForwardLights : Bool) : Bool) && (cast (cast DrawGlScene3D.hasExcessForwardLights__drawGlScene3D((cast lights)) : Bool) : Bool)) : Bool)) { _Runtime.callOptionalValue((cast runtime : GlScene3DRuntime).forwardLightSelectionGuard, cast ([lights] : Array<Dynamic>)); }
+    if ((cast !(cast (cast declareGlRenderTargetColorSpace((cast state), (cast 'linear')) : Bool) : Bool) : Bool)) { _Runtime.callOptionalValue((cast runtime : GlScene3DRuntime).colorSpaceGuard, cast ([] : Array<Dynamic>)); }
     opaqueDrawList = (cast runtime : GlScene3DRuntime).opaqueDrawList;
     blendedDrawList = (cast runtime : GlScene3DRuntime).blendedDrawList;
-    DrawGlScene3D.recycleDrawEntries__drawGlScene3D((cast opaqueDrawList : Array<GlScene3DDrawEntry>), (cast (cast runtime : GlScene3DRuntime).opaquePool : Array<GlScene3DDrawEntry>));
-    DrawGlScene3D.recycleDrawEntries__drawGlScene3D((cast blendedDrawList : Array<GlScene3DDrawEntry>), (cast (cast runtime : GlScene3DRuntime).blendedPool : Array<GlScene3DDrawEntry>));
+    DrawGlScene3D.recycleDrawEntries__drawGlScene3D((cast opaqueDrawList), (cast (cast runtime : GlScene3DRuntime).opaquePool));
+    DrawGlScene3D.recycleDrawEntries__drawGlScene3D((cast blendedDrawList), (cast (cast runtime : GlScene3DRuntime).blendedPool));
     deformGuard = (cast runtime : GlScene3DRuntime).deformGuard;
     {
       var m:Float = 0.0;
       while ((cast ((cast m : Float) < (cast (cast list : Scene3DRenderList).meshCount : Float)) : Bool)) {
         var mesh:Mesh = flighthq._internal._StaticIndex.readArray((cast list : Scene3DRenderList).visibleMeshes, m);
-        if ((cast !_Runtime.looseEquals(deformGuard, null) : Bool)) { deformGuard((cast mesh : Mesh)); }
-        var subsets:Array<MeshSubset> = mesh.geometry.subsets;
-        var worldMatrix:Matrix4 = (cast (cast getNodeWorldMatrix4(mesh) : Matrix4) : Matrix4);
+        if ((cast !_Runtime.looseEquals(deformGuard, null) : Bool)) { deformGuard((cast mesh)); }
+        var subsets:Array<MeshSubset> = (cast mesh.geometry : { var subsets:Array<MeshSubset>; }).subsets;
+        var worldMatrix:Matrix4 = (cast getNodeWorldMatrix4((cast mesh)) : Matrix4);
         var wx:Float = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 12.0);
         var wy:Float = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 13.0);
         var wz:Float = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 14.0);
         var vp:flighthq._internal._Float32Array = viewProjection.m;
         var clipW:Float = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(vp, 3.0), wx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(vp, 7.0), wy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(vp, 11.0), wz)), flighthq._internal._StaticIndex.readFloat32Array(vp, 15.0));
-        var objectAlpha:Float = (cast getNode3DWorldAlpha((cast mesh : Node3D)) : Float);
-        var nodeRuntime:Node3DRuntime = (cast getNode3DRuntime((cast mesh : Node3D)) : Node3DRuntime);
+        var objectAlpha:Float = (cast getNode3DWorldAlpha((cast mesh)) : Float);
+        var nodeRuntime:Node3DRuntime = (cast getNode3DRuntime((cast mesh)) : Node3DRuntime);
         var colorScaleBias:Null<ColorScaleBias> = (cast nodeRuntime : { var resolvedColorScaleBias:Null<ColorScaleBias>; }).resolvedColorScaleBias;
         var colorMatrix:Null<Array<Float>> = (cast nodeRuntime : { var resolvedColorMatrix:Null<Array<Float>>; }).resolvedColorMatrix;
         {
           var s:Float = 0.0;
           while ((cast ((cast s : Float) < (cast _Runtime.field(subsets, 'length') : Float)) : Bool)) {
-            var material:Null<Material> = (cast DrawGlScene3D.resolveSubsetMaterial__drawGlScene3D((cast mesh : Mesh), (cast s : Float)) : Null<Material>);
-            var renderer:Null<GlMeshMaterialRenderer> = (cast resolveGlMeshMaterialRenderer((cast state : GlRenderState), (cast material : Null<Material>)) : Null<GlMeshMaterialRenderer>);
+            var material:Null<Material> = (cast DrawGlScene3D.resolveSubsetMaterial__drawGlScene3D((cast mesh), (cast s : Float)) : Null<Material>);
+            var renderer:Null<GlMeshMaterialRenderer> = (cast resolveGlMeshMaterialRenderer((cast state), (cast material)) : Null<GlMeshMaterialRenderer>);
             if ((cast _Runtime.strictEquals(renderer, null) : Bool)) { s++; continue; }
             var resolvedMaterial:Material = _Runtime.coalesce(material, function():Dynamic return cast DrawGlScene3D.DEFAULT_MATERIAL__drawGlScene3D);
-            var isBlended:Bool = ((cast (cast DrawGlScene3D.isBlendedMaterial__drawGlScene3D((cast resolvedMaterial : Material)) : Bool) : Bool) || (cast ((cast objectAlpha : Float) < (cast 1.0 : Float)) : Bool));
-            var entry:GlScene3DDrawEntry = (cast DrawGlScene3D.acquireDrawEntry__drawGlScene3D((cast ((cast isBlended : Bool) ? (cast (cast runtime : GlScene3DRuntime).blendedPool : Dynamic) : (cast (cast runtime : GlScene3DRuntime).opaquePool : Dynamic)) : Array<GlScene3DDrawEntry>)) : GlScene3DDrawEntry);
+            var isBlended:Bool = ((cast (cast DrawGlScene3D.isBlendedMaterial__drawGlScene3D((cast resolvedMaterial)) : Bool) : Bool) || (cast ((cast objectAlpha : Float) < (cast 1.0 : Float)) : Bool));
+            var entry:GlScene3DDrawEntry = (cast DrawGlScene3D.acquireDrawEntry__drawGlScene3D((cast ((cast isBlended : Bool) ? (cast (cast runtime : GlScene3DRuntime).blendedPool : Dynamic) : (cast (cast runtime : GlScene3DRuntime).opaquePool : Dynamic)))) : GlScene3DDrawEntry);
             ((cast entry : GlScene3DDrawEntry).alpha = objectAlpha);
             ((cast entry : GlScene3DDrawEntry).clipW = clipW);
             ((cast entry : GlScene3DDrawEntry).colorMatrix = colorMatrix);
@@ -141,21 +145,21 @@ class DrawGlScene3D {
     boundSkinned = _Runtime.field(_Runtime, 'UNDEFINED');
     boundColorAdjustment = _Runtime.field(_Runtime, 'UNDEFINED');
     boundColorMatrix = _Runtime.field(_Runtime, 'UNDEFINED');
-    colorAdjustmentFeatureEnabled = !_Runtime.looseEquals((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeature, null);
+    colorAdjustmentFeatureEnabled = !_Runtime.looseEquals((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeature, null);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(opaqueDrawList, 'length') : Float)) : Bool)) {
         var entry:DrawEntry__drawGlScene3D = (cast flighthq._internal._StaticIndex.readArray(opaqueDrawList, i) : DrawEntry__drawGlScene3D);
         var worldMatrix:Matrix4 = (cast (cast entry : DrawEntry__drawGlScene3D).worldMatrix : Matrix4);
-        setMatrix3NormalFromMatrix4(DrawGlScene3D.scratchNormalMatrix__drawGlScene3D, worldMatrix);
-        var skinned:Bool = (cast DrawGlScene3D.isGpuSkinnedDraw__drawGlScene3D((cast (cast entry : DrawEntry__drawGlScene3D).mesh : Mesh)) : Bool);
+        setMatrix3NormalFromMatrix4((cast DrawGlScene3D.scratchNormalMatrix__drawGlScene3D), (cast worldMatrix));
+        var skinned:Bool = (cast DrawGlScene3D.isGpuSkinnedDraw__drawGlScene3D((cast (cast entry : DrawEntry__drawGlScene3D).mesh)) : Bool);
         var colorAdjusted:Bool = ((cast colorAdjustmentFeatureEnabled : Bool) && (cast _Runtime.orValue(!_Runtime.strictEquals((cast entry : DrawEntry__drawGlScene3D).colorMatrix, null), function():Dynamic return cast !_Runtime.strictEquals((cast entry : DrawEntry__drawGlScene3D).colorScaleBias, null)) : Bool));
         var colorMatrix:Bool = ((cast colorAdjusted : Bool) && (cast !_Runtime.strictEquals((cast entry : DrawEntry__drawGlScene3D).colorMatrix, null) : Bool));
         if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals((cast entry : DrawEntry__drawGlScene3D).renderer, boundRenderer) : Bool) || (cast !_Runtime.strictEquals((cast entry : DrawEntry__drawGlScene3D).material, boundMaterial) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast entry : DrawEntry__drawGlScene3D).lightBlock, boundLightBlock) : Bool)) : Bool) || (cast !_Runtime.strictEquals(skinned, boundSkinned) : Bool)) : Bool) || (cast !_Runtime.strictEquals(colorAdjusted, boundColorAdjustment) : Bool)) : Bool) || (cast !_Runtime.strictEquals(colorMatrix, boundColorMatrix) : Bool)) : Bool)) {
           ((cast runtime : GlScene3DRuntime).activeColorAdjustmentRun = colorAdjusted);
           ((cast runtime : GlScene3DRuntime).activeColorMatrixRun = colorMatrix);
           ((cast runtime : GlScene3DRuntime).activeSkinnedRun = skinned);
-          (cast (cast entry : DrawEntry__drawGlScene3D).renderer : GlMeshMaterialRenderer).bind(state, (cast entry : DrawEntry__drawGlScene3D).material, (cast entry : DrawEntry__drawGlScene3D).lightBlock, camera);
+          (cast (cast entry : DrawEntry__drawGlScene3D).renderer : GlMeshMaterialRenderer).bind((cast state), (cast (cast entry : DrawEntry__drawGlScene3D).material), (cast (cast entry : DrawEntry__drawGlScene3D).lightBlock), (cast camera));
           (boundRenderer = cast ((cast entry : DrawEntry__drawGlScene3D).renderer : Dynamic));
           (boundMaterial = cast ((cast entry : DrawEntry__drawGlScene3D).material : Dynamic));
           (boundLightBlock = cast ((cast entry : DrawEntry__drawGlScene3D).lightBlock : Dynamic));
@@ -166,12 +170,12 @@ class DrawGlScene3D {
         ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).alpha = (cast entry : DrawEntry__drawGlScene3D).alpha);
         ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).colorScaleBias = ((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawGlScene3D).colorScaleBias : Dynamic) : (cast null : Dynamic)));
         ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).colorMatrix = ((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawGlScene3D).colorMatrix : Dynamic) : (cast null : Dynamic)));
-        ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).jointMatrices = ((cast skinned : Bool) ? (cast (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh.skin : Skin).skeleton : Skeleton3D).jointMatrices : Dynamic) : (cast null : Dynamic)));
+        ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).jointMatrices = ((cast skinned : Bool) ? (cast (cast (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh : { @:optional var skin:Null<Skin>; }).skin : Skin).skeleton : Skeleton3D).jointMatrices : Dynamic) : (cast null : Dynamic)));
         ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).material = (cast entry : DrawEntry__drawGlScene3D).material);
         ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).normalMatrix = DrawGlScene3D.scratchNormalMatrix__drawGlScene3D);
         ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).subset = (cast entry : DrawEntry__drawGlScene3D).subset);
         ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).worldMatrix = worldMatrix);
-        (cast (cast entry : DrawEntry__drawGlScene3D).renderer : GlMeshMaterialRenderer).draw(state, DrawGlScene3D.proxy__drawGlScene3D, (cast entry : DrawEntry__drawGlScene3D).mesh.geometry);
+        (cast (cast entry : DrawEntry__drawGlScene3D).renderer : GlMeshMaterialRenderer).draw((cast state), (cast DrawGlScene3D.proxy__drawGlScene3D), (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh : { var geometry:MeshGeometry; }).geometry));
         i++;
       }
     }
@@ -190,16 +194,16 @@ class DrawGlScene3D {
         while ((cast ((cast i : Float) < (cast _Runtime.field(blendedDrawList, 'length') : Float)) : Bool)) {
           var entry:DrawEntry__drawGlScene3D = (cast flighthq._internal._StaticIndex.readArray(blendedDrawList, i) : DrawEntry__drawGlScene3D);
           var worldMatrix:Matrix4 = (cast (cast entry : DrawEntry__drawGlScene3D).worldMatrix : Matrix4);
-          setMatrix3NormalFromMatrix4(DrawGlScene3D.scratchNormalMatrix__drawGlScene3D, worldMatrix);
-          var skinned:Bool = (cast DrawGlScene3D.isGpuSkinnedDraw__drawGlScene3D((cast (cast entry : DrawEntry__drawGlScene3D).mesh : Mesh)) : Bool);
+          setMatrix3NormalFromMatrix4((cast DrawGlScene3D.scratchNormalMatrix__drawGlScene3D), (cast worldMatrix));
+          var skinned:Bool = (cast DrawGlScene3D.isGpuSkinnedDraw__drawGlScene3D((cast (cast entry : DrawEntry__drawGlScene3D).mesh)) : Bool);
           var colorAdjusted:Bool = ((cast colorAdjustmentFeatureEnabled : Bool) && (cast _Runtime.orValue(!_Runtime.strictEquals((cast entry : DrawEntry__drawGlScene3D).colorMatrix, null), function():Dynamic return cast !_Runtime.strictEquals((cast entry : DrawEntry__drawGlScene3D).colorScaleBias, null)) : Bool));
           var colorMatrix:Bool = ((cast colorAdjusted : Bool) && (cast !_Runtime.strictEquals((cast entry : DrawEntry__drawGlScene3D).colorMatrix, null) : Bool));
           if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals((cast entry : DrawEntry__drawGlScene3D).renderer, boundRenderer) : Bool) || (cast !_Runtime.strictEquals((cast entry : DrawEntry__drawGlScene3D).material, boundMaterial) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast entry : DrawEntry__drawGlScene3D).lightBlock, boundLightBlock) : Bool)) : Bool) || (cast !_Runtime.strictEquals(skinned, boundSkinned) : Bool)) : Bool) || (cast !_Runtime.strictEquals(colorAdjusted, boundColorAdjustment) : Bool)) : Bool) || (cast !_Runtime.strictEquals(colorMatrix, boundColorMatrix) : Bool)) : Bool)) {
-            DrawGlScene3D.applyGlSurfaceBlendMode__drawGlScene3D((cast state : GlRenderState), (cast (cast entry : DrawEntry__drawGlScene3D).material : Material));
+            DrawGlScene3D.applyGlSurfaceBlendMode__drawGlScene3D((cast state), (cast (cast entry : DrawEntry__drawGlScene3D).material));
             ((cast runtime : GlScene3DRuntime).activeColorAdjustmentRun = colorAdjusted);
             ((cast runtime : GlScene3DRuntime).activeColorMatrixRun = colorMatrix);
             ((cast runtime : GlScene3DRuntime).activeSkinnedRun = skinned);
-            (cast (cast entry : DrawEntry__drawGlScene3D).renderer : GlMeshMaterialRenderer).bind(state, (cast entry : DrawEntry__drawGlScene3D).material, (cast entry : DrawEntry__drawGlScene3D).lightBlock, camera);
+            (cast (cast entry : DrawEntry__drawGlScene3D).renderer : GlMeshMaterialRenderer).bind((cast state), (cast (cast entry : DrawEntry__drawGlScene3D).material), (cast (cast entry : DrawEntry__drawGlScene3D).lightBlock), (cast camera));
             (boundRenderer = cast ((cast entry : DrawEntry__drawGlScene3D).renderer : Dynamic));
             (boundMaterial = cast ((cast entry : DrawEntry__drawGlScene3D).material : Dynamic));
             (boundLightBlock = cast ((cast entry : DrawEntry__drawGlScene3D).lightBlock : Dynamic));
@@ -210,19 +214,19 @@ class DrawGlScene3D {
           ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).alpha = (cast entry : DrawEntry__drawGlScene3D).alpha);
           ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).colorScaleBias = ((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawGlScene3D).colorScaleBias : Dynamic) : (cast null : Dynamic)));
           ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).colorMatrix = ((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawGlScene3D).colorMatrix : Dynamic) : (cast null : Dynamic)));
-          ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).jointMatrices = ((cast skinned : Bool) ? (cast (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh.skin : Skin).skeleton : Skeleton3D).jointMatrices : Dynamic) : (cast null : Dynamic)));
+          ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).jointMatrices = ((cast skinned : Bool) ? (cast (cast (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh : { @:optional var skin:Null<Skin>; }).skin : Skin).skeleton : Skeleton3D).jointMatrices : Dynamic) : (cast null : Dynamic)));
           ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).material = (cast entry : DrawEntry__drawGlScene3D).material);
           ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).normalMatrix = DrawGlScene3D.scratchNormalMatrix__drawGlScene3D);
           ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).subset = (cast entry : DrawEntry__drawGlScene3D).subset);
           ((cast DrawGlScene3D.proxy__drawGlScene3D : Scene3DRenderProxy).worldMatrix = worldMatrix);
-          (cast (cast entry : DrawEntry__drawGlScene3D).renderer : GlMeshMaterialRenderer).draw(state, DrawGlScene3D.proxy__drawGlScene3D, (cast entry : DrawEntry__drawGlScene3D).mesh.geometry);
+          (cast (cast entry : DrawEntry__drawGlScene3D).renderer : GlMeshMaterialRenderer).draw((cast state), (cast DrawGlScene3D.proxy__drawGlScene3D), (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh : { var geometry:MeshGeometry; }).geometry));
           i++;
         }
       }
       flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
     }
-    drawGlScene3DParticleEmitter3Ds((cast state : GlRenderState), (cast scene : Node3D), (cast camera : Camera3D), (cast lights : Scene3DLightsLike));
-    invalidateGlRenderStateCache((cast state : GlRenderState));
+    drawGlScene3DParticleEmitter3Ds((cast state), (cast scene), (cast camera), (cast lights));
+    invalidateGlRenderStateCache((cast state));
   }
 
   public static function isBlendedMaterial__drawGlScene3D(material:Material):Bool {
@@ -235,7 +239,7 @@ class DrawGlScene3D {
     var blendMode:String = cast _Runtime.UNDEFINED;
     surface = (cast material : SurfaceMaterial);
     blendMode = ((cast ((cast _Runtime.strictEquals(_Runtime.field(surface, 'alphaMode'), 'blend') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(surface, 'blendMode')), 'string') : Bool)) : Bool) ? (cast _Runtime.field(surface, 'blendMode') : Dynamic) : (cast (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal : Dynamic));
-    if ((cast _Runtime.strictEquals((cast state : GlRenderState).applyBlendMode, null) : Bool)) { enableGlBlendModeSupport((cast state : GlRenderState)); }
+    if ((cast _Runtime.strictEquals((cast state : GlRenderState).applyBlendMode, null) : Bool)) { enableGlBlendModeSupport((cast state)); }
     (cast state : GlRenderState).applyBlendMode(state, blendMode);
   }
 
@@ -267,13 +271,13 @@ class DrawGlScene3D {
   }
 
   public static function createDrawEntry__drawGlScene3D():GlScene3DDrawEntry {
-    return cast { alpha: 1.0, clipW: 0.0, colorMatrix: null, colorScaleBias: null, lightBlock: null, material: DrawGlScene3D.DEFAULT_MATERIAL__drawGlScene3D, mesh: null, renderer: null, subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : flighthq._internal._Object) };
+    return cast { alpha: 1.0, clipW: 0.0, colorMatrix: null, colorScaleBias: null, lightBlock: null, material: DrawGlScene3D.DEFAULT_MATERIAL__drawGlScene3D, mesh: null, renderer: null, subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4) };
     return cast null;
   }
 
-  public static final proxy__drawGlScene3D:Scene3DRenderProxy = { colorMatrix: null, colorScaleBias: null, jointMatrices: null, material: (cast { kind: StandardMaterialKindValue } : Material), normalMatrix: (cast (cast createMatrix3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix3) : Matrix3), subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4) : Matrix4) };
+  public static final proxy__drawGlScene3D:Scene3DRenderProxy = (cast { colorMatrix: null, colorScaleBias: null, jointMatrices: null, material: (cast { kind: StandardMaterialKindValue } : Material), normalMatrix: (cast createMatrix3((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix3), subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4) });
 
   public static final DEFAULT_MATERIAL__drawGlScene3D:Material = (cast { kind: StandardMaterialKindValue } : Material);
 
-  public static final scratchNormalMatrix__drawGlScene3D:Matrix3 = (cast (cast createMatrix3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix3) : Matrix3);
+  public static final scratchNormalMatrix__drawGlScene3D:Matrix3 = (cast createMatrix3((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix3);
 }

@@ -10,7 +10,7 @@ import flighthq.types.Vector3.Vector3Like;
 class Basis {
   public static function getCamera3DForward(out:Vector3Like, camera:Camera3D):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    m = camera.view.m;
+    m = (cast camera.view : { var m:flighthq._internal._Float32Array; }).m;
     (out.x = cast (-flighthq._internal._StaticIndex.readFloat32Array(m, 2.0) : Dynamic));
     (out.y = cast (-flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) : Dynamic));
     (out.z = cast (-flighthq._internal._StaticIndex.readFloat32Array(m, 10.0) : Dynamic));
@@ -30,7 +30,7 @@ class Basis {
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
     var tz:Float = cast _Runtime.UNDEFINED;
-    m = camera.view.m;
+    m = (cast camera.view : { var m:flighthq._internal._Float32Array; }).m;
     m00 = flighthq._internal._StaticIndex.readFloat32Array(m, 0.0);
     m01 = flighthq._internal._StaticIndex.readFloat32Array(m, 1.0);
     m02 = flighthq._internal._StaticIndex.readFloat32Array(m, 2.0);
@@ -50,7 +50,7 @@ class Basis {
 
   public static function getCamera3DRight(out:Vector3Like, camera:Camera3D):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    m = camera.view.m;
+    m = (cast camera.view : { var m:flighthq._internal._Float32Array; }).m;
     (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) : Dynamic));
     (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) : Dynamic));
     (out.z = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 8.0) : Dynamic));
@@ -58,7 +58,7 @@ class Basis {
 
   public static function getCamera3DUp(out:Vector3Like, camera:Camera3D):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    m = camera.view.m;
+    m = (cast camera.view : { var m:flighthq._internal._Float32Array; }).m;
     (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) : Dynamic));
     (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 5.0) : Dynamic));
     (out.z = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 9.0) : Dynamic));

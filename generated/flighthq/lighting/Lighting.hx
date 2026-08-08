@@ -113,7 +113,7 @@ class Lighting {
     return cast null;
   }
 
-  public static function createScene3DLights(?options:Dynamic):Scene3DLights {
+  public static function createScene3DLights(?options:flighthq._internal._Partial<Scene3DLightsLike>):Scene3DLights {
     return cast Facade_Lighting_flighthq_lighting_SceneLights.createScene3DLights(options);
     return cast null;
   }

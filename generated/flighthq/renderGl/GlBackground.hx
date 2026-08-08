@@ -9,6 +9,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.GlRenderState.GlViewportRect;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 
 class GlBackground {
   public static function renderGlBackground(state:GlRenderState):Void {
@@ -16,13 +17,13 @@ class GlBackground {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var viewport:Null<GlViewportRect> = cast _Runtime.UNDEFINED;
     var rgba:Array<Float> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     viewport = (cast runtime : GlRenderStateRuntime).renderTargetViewport;
-    flighthq._internal.backend.WebGl2Backend.viewport(gl, _Runtime.coalesce(_Runtime.optionalField(viewport, 'x'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(viewport, 'y'), function():Dynamic return cast 0.0), _Runtime.coalesce(_Runtime.optionalField(viewport, 'width'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'width')), _Runtime.coalesce(_Runtime.optionalField(viewport, 'height'), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'height')));
+    flighthq._internal.backend.WebGl2Backend.viewport(gl, _Runtime.coalesce(({ final __structural0 = viewport; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var x:Float; }).x; }), function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural1 = viewport; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var y:Float; }).y; }), function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural2 = viewport; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var width:Float; }).width; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'width')), _Runtime.coalesce(({ final __structural3 = viewport; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var height:Float; }).height; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'height')));
     rgba = (cast state : GlRenderState).backgroundColorRgba;
     if ((cast ((cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readArray(rgba, 3.0) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var linear:Bool = _Runtime.strictEquals(_Runtime.optionalField((cast runtime : GlRenderStateRuntime).currentRenderTarget, 'colorSpace'), 'linear');
+      var linear:Bool = _Runtime.strictEquals(({ final __structural4 = (cast runtime : GlRenderStateRuntime).currentRenderTarget; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var colorSpace:RenderTargetColorSpace; }).colorSpace; }), 'linear');
       flighthq._internal.backend.WebGl2Backend.clearColor(gl, ((cast linear : Bool) ? (cast (cast srgbChannelToLinear((cast flighthq._internal._StaticIndex.readArray(rgba, 0.0) : Float)) : Float) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(rgba, 0.0) : Dynamic)), ((cast linear : Bool) ? (cast (cast srgbChannelToLinear((cast flighthq._internal._StaticIndex.readArray(rgba, 1.0) : Float)) : Float) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(rgba, 1.0) : Dynamic)), ((cast linear : Bool) ? (cast (cast srgbChannelToLinear((cast flighthq._internal._StaticIndex.readArray(rgba, 2.0) : Float)) : Float) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(rgba, 2.0) : Dynamic)), flighthq._internal._StaticIndex.readArray(rgba, 3.0));
     } else {
       flighthq._internal.backend.WebGl2Backend.clearColor(gl, 0.0, 0.0, 0.0, 0.0);

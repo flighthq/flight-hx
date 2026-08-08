@@ -28,8 +28,10 @@ import flighthq.textlayout.TextFormat.mergeTextFormat;
 import flighthq.types.FontVariation;
 import flighthq.types.MethodsOf;
 import flighthq.types.Node;
+import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
+import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextData;
 import flighthq.types.RichText.RichTextRuntime;
@@ -58,8 +60,8 @@ class RichText {
     if ((cast _Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0) : Bool)) { return; }
     previousText = (cast (cast source : flighthq.types.RichText).data : RichTextData).text;
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).text += value);
-    RichText.invalidateRichTextContent__richText((cast source : flighthq.types.RichText));
-    RichText.emitTextFieldChange__richText((cast source : flighthq.types.RichText), (cast previousText : String));
+    RichText.invalidateRichTextContent__richText((cast source));
+    RichText.emitTextFieldChange__richText((cast source), (cast previousText : String));
   }
 
   public static function buildRichTextLayoutParams(source:TextLabel, measure:TextMeasureFunction):TextLayoutParams {
@@ -69,16 +71,16 @@ class RichText {
     var content:RichTextContent = cast _Runtime.UNDEFINED;
     richText = (cast source : flighthq.types.RichText);
     data = _Runtime.field(richText, 'data');
-    runtime = (cast (cast getNode2DRuntime(richText) : RichTextRuntime) : RichTextRuntime);
-    content = (cast getRichTextContent((cast runtime : RichTextRuntime)) : RichTextContent);
-    computeRichTextContent((cast content : RichTextContent), (cast data : RichTextData), (cast (cast getRichTextPasswordCharacter((cast richText : flighthq.types.RichText)) : Null<String>) : Null<String>));
+    runtime = (cast getNode2DRuntime((cast richText)) : RichTextRuntime);
+    content = (cast getRichTextContent((cast runtime)) : RichTextContent);
+    computeRichTextContent((cast content), (cast data), (cast (cast getRichTextPasswordCharacter((cast richText)) : Null<String>)));
     return cast { formatRanges: (cast content : RichTextContent).formatRanges, height: (cast data : RichTextData).height, measure: measure, multiline: (cast data : RichTextData).multiline, text: (cast content : RichTextContent).text, verticalAlign: ((cast _Runtime.strictEquals((cast data : RichTextData).autoSize, 'none') : Bool) ? (cast (cast data : RichTextData).verticalAlign : Dynamic) : (cast 'top' : Dynamic)), width: ((cast (cast data : RichTextData).wordWrap : Bool) ? (cast (cast data : RichTextData).width : Dynamic) : (cast 10000.0 : Dynamic)), wordWrap: (cast data : RichTextData).wordWrap };
     return cast null;
   }
 
   public static function clearRichTextFormatRanges(source:flighthq.types.RichText):Void {
     _Runtime.setLength((cast (cast source : flighthq.types.RichText).data : RichTextData).textFormatRanges, 0.0);
-    RichText.invalidateRichTextContent__richText((cast source : flighthq.types.RichText));
+    RichText.invalidateRichTextContent__richText((cast source));
   }
 
   public static function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
@@ -94,8 +96,8 @@ class RichText {
       ((cast out : Rectangle).height = (cast data : RichTextData).height);
       return;
     }
-    ensureTextLayout((cast richText : TextLabel));
-    layout = (cast getTextLayout((cast richText : TextLabel)) : Null<TextLayoutResult>);
+    ensureTextLayout((cast richText));
+    layout = (cast getTextLayout((cast richText)) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
       ((cast out : Rectangle).x = 0.0);
       ((cast out : Rectangle).y = 0.0);
@@ -103,35 +105,35 @@ class RichText {
       ((cast out : Rectangle).height = (cast data : RichTextData).height);
       return;
     }
-    computeTextBoundsRectangle(out, data, (cast layout : TextLayoutResult));
+    computeTextBoundsRectangle((cast out), (cast data), (cast layout));
   }
 
   public static function createRichText(?obj:PartialNode<flighthq.types.RichText>):flighthq.types.RichText {
-    return cast (cast (cast createNode2D((cast RichTextKind : String), obj, createRichTextData, function(__unused0:Dynamic):RichTextRuntime return createRichTextRuntime()) : flighthq.types.RichText) : flighthq.types.RichText);
+    return cast (cast createNode2D((cast RichTextKind : String), (cast obj), (cast createRichTextData), (cast function(__unused0:Null<flighthq._internal._Any>):RichTextRuntime return createRichTextRuntime())) : flighthq.types.RichText);
     return cast null;
   }
 
   @:noCompletion
-  public static function createRichTextData(?data:Dynamic):RichTextData {
+  public static function createRichTextData(?data:flighthq._internal._Partial<RichTextData>):RichTextData {
     var _data:RichTextData = cast _Runtime.UNDEFINED;
-    _data = (cast (cast createTextLabelData((cast data : Null<flighthq._internal._Any>)) : RichTextData) : RichTextData);
-    ((cast _data : RichTextData).background = _Runtime.coalesce(_Runtime.optionalField(data, 'background'), function():Dynamic return cast false));
-    ((cast _data : RichTextData).backgroundColor = _Runtime.coalesce(_Runtime.optionalField(data, 'backgroundColor'), function():Dynamic return cast 16777215.0));
-    ((cast _data : RichTextData).border = _Runtime.coalesce(_Runtime.optionalField(data, 'border'), function():Dynamic return cast false));
-    ((cast _data : RichTextData).borderColor = _Runtime.coalesce(_Runtime.optionalField(data, 'borderColor'), function():Dynamic return cast 0.0));
-    ((cast _data : RichTextData).height = _Runtime.coalesce(_Runtime.optionalField(data, 'height'), function():Dynamic return cast 100.0));
-    ((cast _data : RichTextData).width = _Runtime.coalesce(_Runtime.optionalField(data, 'width'), function():Dynamic return cast 100.0));
-    ((cast _data : RichTextData).condenseWhite = _Runtime.coalesce(_Runtime.optionalField(data, 'condenseWhite'), function():Dynamic return cast false));
-    ((cast _data : RichTextData).defaultTextFormat = _Runtime.coalesce(_Runtime.optionalField(data, 'defaultTextFormat'), function():Dynamic return cast {  }));
-    ((cast _data : RichTextData).maxChars = _Runtime.coalesce(_Runtime.optionalField(data, 'maxChars'), function():Dynamic return cast -1.0));
-    ((cast _data : RichTextData).mouseWheelEnabled = _Runtime.coalesce(_Runtime.optionalField(data, 'mouseWheelEnabled'), function():Dynamic return cast true));
-    ((cast _data : RichTextData).multiline = _Runtime.coalesce(_Runtime.optionalField(data, 'multiline'), function():Dynamic return cast true));
-    ((cast _data : RichTextData).scrollH = _Runtime.coalesce(_Runtime.optionalField(data, 'scrollH'), function():Dynamic return cast 0.0));
-    ((cast _data : RichTextData).scrollV = _Runtime.coalesce(_Runtime.optionalField(data, 'scrollV'), function():Dynamic return cast 1.0));
-    ((cast _data : RichTextData).selectable = _Runtime.coalesce(_Runtime.optionalField(data, 'selectable'), function():Dynamic return cast true));
-    ((cast _data : RichTextData).textColor = _Runtime.coalesce(_Runtime.optionalField(data, 'textColor'), function():Dynamic return cast 0.0));
-    ((cast _data : RichTextData).textFormatRanges = _Runtime.select(_Runtime.optionalField(data, 'textFormatRanges'), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(data, 'textFormatRanges'), 'map', cast ([function(range:TextFormatRange, __unused1:Float, __unused2:Array<TextFormatRange>):{ var end:Float; var format:TextFormat; var start:Float; } return _Runtime.mergeObjects([range])] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)));
-    ((cast _data : RichTextData).wordWrap = _Runtime.coalesce(_Runtime.optionalField(data, 'wordWrap'), function():Dynamic return cast false));
+    _data = (cast createTextLabelData((cast data)) : RichTextData);
+    ((cast _data : RichTextData).background = _Runtime.coalesce(({ final __structural0 = data; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var background:Null<Bool>; }).background; }), function():Dynamic return cast false));
+    ((cast _data : RichTextData).backgroundColor = _Runtime.coalesce(({ final __structural1 = data; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var backgroundColor:Null<Float>; }).backgroundColor; }), function():Dynamic return cast 16777215.0));
+    ((cast _data : RichTextData).border = _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var border:Null<Bool>; }).border; }), function():Dynamic return cast false));
+    ((cast _data : RichTextData).borderColor = _Runtime.coalesce(({ final __structural3 = data; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var borderColor:Null<Float>; }).borderColor; }), function():Dynamic return cast 0.0));
+    ((cast _data : RichTextData).height = _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 100.0));
+    ((cast _data : RichTextData).width = _Runtime.coalesce(({ final __structural5 = data; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 100.0));
+    ((cast _data : RichTextData).condenseWhite = _Runtime.coalesce(({ final __structural6 = data; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var condenseWhite:Null<Bool>; }).condenseWhite; }), function():Dynamic return cast false));
+    ((cast _data : RichTextData).defaultTextFormat = _Runtime.coalesce(({ final __structural7 = data; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var defaultTextFormat:Null<TextFormat>; }).defaultTextFormat; }), function():Dynamic return cast {  }));
+    ((cast _data : RichTextData).maxChars = _Runtime.coalesce(({ final __structural8 = data; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var maxChars:Null<Float>; }).maxChars; }), function():Dynamic return cast -1.0));
+    ((cast _data : RichTextData).mouseWheelEnabled = _Runtime.coalesce(({ final __structural9 = data; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var mouseWheelEnabled:Null<Bool>; }).mouseWheelEnabled; }), function():Dynamic return cast true));
+    ((cast _data : RichTextData).multiline = _Runtime.coalesce(({ final __structural10 = data; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var multiline:Null<Bool>; }).multiline; }), function():Dynamic return cast true));
+    ((cast _data : RichTextData).scrollH = _Runtime.coalesce(({ final __structural11 = data; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { @:optional var scrollH:Null<Float>; }).scrollH; }), function():Dynamic return cast 0.0));
+    ((cast _data : RichTextData).scrollV = _Runtime.coalesce(({ final __structural12 = data; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { @:optional var scrollV:Null<Float>; }).scrollV; }), function():Dynamic return cast 1.0));
+    ((cast _data : RichTextData).selectable = _Runtime.coalesce(({ final __structural13 = data; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { @:optional var selectable:Null<Bool>; }).selectable; }), function():Dynamic return cast true));
+    ((cast _data : RichTextData).textColor = _Runtime.coalesce(({ final __structural14 = data; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { @:optional var textColor:Null<Float>; }).textColor; }), function():Dynamic return cast 0.0));
+    ((cast _data : RichTextData).textFormatRanges = _Runtime.select(({ final __structural15 = data; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { @:optional var textFormatRanges:Null<Array<TextFormatRange>>; }).textFormatRanges; }), function():Dynamic return cast _Runtime.callProperty(_Runtime.field(data, 'textFormatRanges'), 'map', cast ([function(range:TextFormatRange, __unused1:Float, __unused2:Array<TextFormatRange>):{ var end:Float; var format:TextFormat; var start:Float; } return _Runtime.mergeObjects([range])] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    ((cast _data : RichTextData).wordWrap = _Runtime.coalesce(({ final __structural16 = data; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { @:optional var wordWrap:Null<Bool>; }).wordWrap; }), function():Dynamic return cast false));
     return cast _data;
     return cast null;
   }
@@ -139,8 +141,8 @@ class RichText {
   @:noCompletion
   public static function createRichTextRuntime():RichTextRuntime {
     var out:RichTextRuntime = cast _Runtime.UNDEFINED;
-    out = (cast (cast createNode2DRuntime((cast RichText.defaultMethods__richText : Null<flighthq._internal._Any>)) : RichTextRuntime) : RichTextRuntime);
-    ((cast out : RichTextRuntime).buildTextLayoutParams = buildRichTextLayoutParams);
+    out = (cast createNode2DRuntime((cast RichText.defaultMethods__richText)) : RichTextRuntime);
+    ((cast out : { var buildTextLayoutParams:TextLabel->TextMeasureFunction->TextLayoutParams; }).buildTextLayoutParams = (cast buildRichTextLayoutParams));
     ((cast out : RichTextRuntime).textLayout = null);
     ((cast out : RichTextRuntime).textLayoutUsingContentId = -1.0);
     ((cast out : RichTextRuntime).richTextContent = null);
@@ -161,15 +163,15 @@ class RichText {
   public static function dispatchRichTextLinkAtPoint(source:flighthq.types.RichText, x:Float, y:Float):Null<String> {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
     var url:Null<String> = cast _Runtime.UNDEFINED;
-    ensureTextLayout((cast source : TextLabel));
-    layout = (cast getTextLayout((cast source : TextLabel)) : Null<TextLayoutResult>);
+    ensureTextLayout((cast source));
+    layout = (cast getTextLayout((cast source)) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast null; }
-    url = (cast getRichTextLinkAtPoint((cast layout : TextLayoutResult), (cast x : Float), (cast y : Float)) : Null<String>);
+    url = (cast getRichTextLinkAtPoint((cast layout), (cast x : Float), (cast y : Float)) : Null<String>);
     if ((cast !_Runtime.strictEquals(url, null) : Bool)) {
-      var signals:Null<TextFieldSignals> = (cast (cast (cast getNode2DRuntime(source) : RichTextRuntime) : RichTextRuntime) : RichTextRuntime).textFieldSignals;
+      var signals:Null<TextFieldSignals> = (cast (cast getNode2DRuntime((cast source)) : RichTextRuntime) : RichTextRuntime).textFieldSignals;
       if ((cast !_Runtime.strictEquals(signals, null) : Bool)) {
-        var event:TextFieldLinkEvent = { url: url, x: x, y: y };
-        ((cast signals : TextFieldSignals).onTextFieldLink.emit)(event);
+        var event:TextFieldLinkEvent = (cast { url: url, x: x, y: y });
+        ((cast (cast signals : TextFieldSignals).onTextFieldLink : { var emit:TextFieldLinkEvent->Void; }).emit)((cast event));
       }
     }
     return cast url;
@@ -177,31 +179,31 @@ class RichText {
   }
 
   public static function dispatchRichTextWheel(source:flighthq.types.RichText, deltaLines:Float, ?layout:TextLayoutResult):Void {
-    setRichTextScrollV((cast source : flighthq.types.RichText), (cast _Runtime.addNumbers((cast (cast source : flighthq.types.RichText).data : RichTextData).scrollV, HxMath.round(deltaLines)) : Float), (cast layout : Null<TextLayoutResult>));
+    setRichTextScrollV((cast source), (cast _Runtime.addNumbers((cast (cast source : flighthq.types.RichText).data : RichTextData).scrollV, HxMath.round(deltaLines)) : Float), (cast layout));
   }
 
   public static function enableTextFieldSignals(source:flighthq.types.RichText):TextFieldSignals {
     var runtime:RichTextRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast (cast getNode2DRuntime(source) : RichTextRuntime) : RichTextRuntime);
-    return cast ((cast runtime : RichTextRuntime).textFieldSignals ??= (cast createTextFieldSignals() : Null<TextFieldSignals>));
+    runtime = (cast getNode2DRuntime((cast source)) : RichTextRuntime);
+    return cast ((cast runtime : RichTextRuntime).textFieldSignals ??= (cast createTextFieldSignals() : TextFieldSignals));
     return cast null;
   }
 
   public static function getRichTextBottomScrollV(source:flighthq.types.RichText):Float {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
-    ensureTextLayout((cast source : TextLabel));
-    layout = (cast getTextLayout((cast source : TextLabel)) : Null<TextLayoutResult>);
+    ensureTextLayout((cast source));
+    layout = (cast getTextLayout((cast source)) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast 1.0; }
-    return cast (cast computeRichTextBottomScrollV((cast _Runtime.field(source, 'data') : RichTextData), (cast layout : TextLayoutResult)) : Float);
+    return cast (cast computeRichTextBottomScrollV((cast _Runtime.field(source, 'data')), (cast layout)) : Float);
     return cast null;
   }
 
   public static function getRichTextCharIndexAtPoint(source:flighthq.types.RichText, x:Float, y:Float):Float {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
-    ensureTextLayout((cast source : TextLabel));
-    layout = (cast getTextLayout((cast source : TextLabel)) : Null<TextLayoutResult>);
+    ensureTextLayout((cast source));
+    layout = (cast getTextLayout((cast source)) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast -1.0; }
-    return cast (cast computeRichTextCharIndexAtPoint((cast layout : TextLayoutResult), (cast x : Float), (cast y : Float)) : Float);
+    return cast (cast computeRichTextCharIndexAtPoint((cast layout), (cast x : Float), (cast y : Float)) : Float);
     return cast null;
   }
 
@@ -215,13 +217,13 @@ class RichText {
     var merged:TextFormat = cast _Runtime.UNDEFINED;
     var keys:Array<String> = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
-    merged = _Runtime.mergeObjects([(cast data : RichTextData).defaultTextFormat]);
+    merged = (cast _Runtime.mergeObjects([(cast data : RichTextData).defaultTextFormat]));
     for (range in _Runtime.iterable((cast data : RichTextData).textFormatRanges)) {
       if ((cast ((cast ((cast index : Float) >= (cast (cast range : TextFormatRange).start : Float)) : Bool) && (cast ((cast index : Float) < (cast (cast range : TextFormatRange).end : Float)) : Bool)) : Bool)) {
-        (merged = cast ((cast mergeTextFormat((cast merged : TextFormat), (cast (cast range : TextFormatRange).format : TextFormat)) : TextFormat) : Dynamic));
+        (merged = cast ((cast mergeTextFormat((cast merged), (cast (cast range : TextFormatRange).format)) : TextFormat) : Dynamic));
       }
     }
-    keys = (cast flighthq._internal.DynamicObject.keys(merged) : Array<TextFormat>);
+    keys = (cast flighthq._internal.DynamicObject.keys(merged) : Array<String>);
     for (key in _Runtime.iterable(keys)) {
       _Runtime.setIndex((cast out : flighthq._internal._Record<String, flighthq._internal._Any>), key, _Runtime.getIndex(merged, key));
     }
@@ -257,50 +259,50 @@ class RichText {
 
   public static function getRichTextLineCount(source:flighthq.types.RichText):Float {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
-    ensureTextLayout((cast source : TextLabel));
-    layout = (cast getTextLayout((cast source : TextLabel)) : Null<TextLayoutResult>);
+    ensureTextLayout((cast source));
+    layout = (cast getTextLayout((cast source)) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast 0.0; }
-    return cast (cast computeRichTextLineCount((cast layout : TextLayoutResult)) : Float);
+    return cast (cast computeRichTextLineCount((cast layout)) : Float);
     return cast null;
   }
 
   public static function getRichTextLineMetrics(source:flighthq.types.RichText, lineIndex:Float):Null<TextLineMetrics> {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
-    ensureTextLayout((cast source : TextLabel));
-    layout = (cast getTextLayout((cast source : TextLabel)) : Null<TextLayoutResult>);
+    ensureTextLayout((cast source));
+    layout = (cast getTextLayout((cast source)) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast null; }
-    return cast (cast computeRichTextLineMetrics((cast layout : TextLayoutResult), (cast lineIndex : Float)) : Null<TextLineMetrics>);
+    return cast (cast computeRichTextLineMetrics((cast layout), (cast lineIndex : Float)) : Null<TextLineMetrics>);
     return cast null;
   }
 
   public static function getRichTextMaxScrollH(source:flighthq.types.RichText):Float {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
-    ensureTextLayout((cast source : TextLabel));
-    layout = (cast getTextLayout((cast source : TextLabel)) : Null<TextLayoutResult>);
+    ensureTextLayout((cast source));
+    layout = (cast getTextLayout((cast source)) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast 0.0; }
-    return cast (cast computeRichTextMaxScrollH((cast _Runtime.field(source, 'data') : RichTextData), (cast layout : TextLayoutResult)) : Float);
+    return cast (cast computeRichTextMaxScrollH((cast _Runtime.field(source, 'data')), (cast layout)) : Float);
     return cast null;
   }
 
   public static function getRichTextMaxScrollV(source:flighthq.types.RichText):Float {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
-    ensureTextLayout((cast source : TextLabel));
-    layout = (cast getTextLayout((cast source : TextLabel)) : Null<TextLayoutResult>);
+    ensureTextLayout((cast source));
+    layout = (cast getTextLayout((cast source)) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast 1.0; }
-    return cast (cast computeRichTextMaxScrollV((cast _Runtime.field(source, 'data') : RichTextData), (cast layout : TextLayoutResult)) : Float);
+    return cast (cast computeRichTextMaxScrollV((cast _Runtime.field(source, 'data')), (cast layout)) : Float);
     return cast null;
   }
 
   public static function getRichTextPasswordCharacter(source:flighthq.types.RichText):Null<String> {
     var input:Null<TextInputState> = cast _Runtime.UNDEFINED;
-    input = (cast (cast (cast getNode2DRuntime(source) : RichTextRuntime) : RichTextRuntime) : RichTextRuntime).input;
+    input = (cast (cast getNode2DRuntime((cast source)) : RichTextRuntime) : RichTextRuntime).input;
     return cast ((cast ((cast !_Runtime.strictEquals(input, null) : Bool) && (cast (cast input : TextInputState).displayAsPassword : Bool)) : Bool) ? (cast (cast input : TextInputState).passwordCharacter : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   @:noCompletion
   public static function getRichTextRuntime(source:flighthq.types.RichText):RichTextRuntime {
-    return cast (cast (cast getNode2DRuntime(source) : RichTextRuntime) : RichTextRuntime);
+    return cast (cast getNode2DRuntime((cast source)) : RichTextRuntime);
     return cast null;
   }
 
@@ -311,24 +313,24 @@ class RichText {
 
   public static function getRichTextTextHeight(source:flighthq.types.RichText):Float {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
-    ensureTextLayout((cast source : TextLabel));
-    layout = (cast getTextLayout((cast source : TextLabel)) : Null<TextLayoutResult>);
+    ensureTextLayout((cast source));
+    layout = (cast getTextLayout((cast source)) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast 0.0; }
-    return cast (cast computeRichTextTextHeight((cast layout : TextLayoutResult)) : Float);
+    return cast (cast computeRichTextTextHeight((cast layout)) : Float);
     return cast null;
   }
 
   public static function getRichTextTextWidth(source:flighthq.types.RichText):Float {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
-    ensureTextLayout((cast source : TextLabel));
-    layout = (cast getTextLayout((cast source : TextLabel)) : Null<TextLayoutResult>);
+    ensureTextLayout((cast source));
+    layout = (cast getTextLayout((cast source)) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast 0.0; }
-    return cast (cast computeRichTextTextWidth((cast layout : TextLayoutResult)) : Float);
+    return cast (cast computeRichTextTextWidth((cast layout)) : Float);
     return cast null;
   }
 
   public static function getTextFieldSignals(source:flighthq.types.RichText):Null<TextFieldSignals> {
-    return cast (cast (cast (cast getNode2DRuntime(source) : RichTextRuntime) : RichTextRuntime) : RichTextRuntime).textFieldSignals;
+    return cast (cast (cast getNode2DRuntime((cast source)) : RichTextRuntime) : RichTextRuntime).textFieldSignals;
     return cast null;
   }
 
@@ -351,8 +353,8 @@ class RichText {
         ((cast range : TextFormatRange).end += delta);
       } }
     }
-    RichText.invalidateRichTextContent__richText((cast source : flighthq.types.RichText));
-    RichText.emitTextFieldChange__richText((cast source : flighthq.types.RichText), (cast previousText : String));
+    RichText.invalidateRichTextContent__richText((cast source));
+    RichText.emitTextFieldChange__richText((cast source), (cast previousText : String));
   }
 
   public static function removeRichTextFormatRangesIn(source:flighthq.types.RichText, begin:Float, end:Float):Void {
@@ -371,7 +373,7 @@ class RichText {
         i--;
       }
     }
-    if ((cast changed : Bool)) { RichText.invalidateRichTextContent__richText((cast source : flighthq.types.RichText)); }
+    if ((cast changed : Bool)) { RichText.invalidateRichTextContent__richText((cast source)); }
   }
 
   public static function replaceRichTextString(source:flighthq.types.RichText, beginIndex:Float, endIndex:Float, value:String):Void {
@@ -411,38 +413,38 @@ class RichText {
         i--;
       }
     }
-    RichText.invalidateRichTextContent__richText((cast source : flighthq.types.RichText));
-    if ((cast !_Runtime.strictEquals(previousText, (cast (cast source : flighthq.types.RichText).data : RichTextData).text) : Bool)) { RichText.emitTextFieldChange__richText((cast source : flighthq.types.RichText), (cast previousText : String)); }
+    RichText.invalidateRichTextContent__richText((cast source));
+    if ((cast !_Runtime.strictEquals(previousText, (cast (cast source : flighthq.types.RichText).data : RichTextData).text) : Bool)) { RichText.emitTextFieldChange__richText((cast source), (cast previousText : String)); }
   }
 
   public static function setRichTextBackground(source:flighthq.types.RichText, value:Bool):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).background, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).background = value);
-    invalidateNodeLocalContent(source);
+    invalidateNodeLocalContent((cast source));
   }
 
   public static function setRichTextBackgroundColor(source:flighthq.types.RichText, value:Float):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).backgroundColor, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).backgroundColor = value);
-    invalidateNodeLocalContent(source);
+    invalidateNodeLocalContent((cast source));
   }
 
   public static function setRichTextBorder(source:flighthq.types.RichText, value:Bool):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).border, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).border = value);
-    invalidateNodeLocalContent(source);
+    invalidateNodeLocalContent((cast source));
   }
 
   public static function setRichTextBorderColor(source:flighthq.types.RichText, value:Float):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).borderColor, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).borderColor = value);
-    invalidateNodeLocalContent(source);
+    invalidateNodeLocalContent((cast source));
   }
 
   public static function setRichTextCondenseWhite(source:flighthq.types.RichText, value:Bool):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).condenseWhite, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).condenseWhite = value);
-    RichText.invalidateRichTextContent__richText((cast source : flighthq.types.RichText));
+    RichText.invalidateRichTextContent__richText((cast source));
   }
 
   public static function setRichTextContent(source:flighthq.types.RichText, content:RichTextContent):Void {
@@ -450,45 +452,45 @@ class RichText {
     previousText = (cast (cast source : flighthq.types.RichText).data : RichTextData).text;
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).text = _Runtime.field(content, 'text'));
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).textFormatRanges = _Runtime.callProperty(_Runtime.field(content, 'formatRanges'), 'map', cast ([function(range:TextFormatRange, __unused3:Float, __unused4:Array<TextFormatRange>):{ var end:Float; var format:TextFormat; var start:Float; } return _Runtime.mergeObjects([range])] : Array<Dynamic>)));
-    RichText.invalidateRichTextContent__richText((cast source : flighthq.types.RichText));
-    if ((cast !_Runtime.strictEquals(previousText, _Runtime.field(content, 'text')) : Bool)) { RichText.emitTextFieldChange__richText((cast source : flighthq.types.RichText), (cast previousText : String)); }
+    RichText.invalidateRichTextContent__richText((cast source));
+    if ((cast !_Runtime.strictEquals(previousText, _Runtime.field(content, 'text')) : Bool)) { RichText.emitTextFieldChange__richText((cast source), (cast previousText : String)); }
   }
 
   public static function setRichTextDefaultTextFormat(source:flighthq.types.RichText, value:TextFormat):Void {
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).defaultTextFormat = value);
-    RichText.invalidateRichTextContent__richText((cast source : flighthq.types.RichText));
+    RichText.invalidateRichTextContent__richText((cast source));
   }
 
   public static function setRichTextFormatRange(source:flighthq.types.RichText, format:TextFormat, start:Float = 0.0, ?end:Float):Void {
     if (end == null) end = cast (_Runtime.field((cast (cast source : flighthq.types.RichText).data : RichTextData).text, 'length') : Dynamic);
     _Runtime.callProperty((cast (cast source : flighthq.types.RichText).data : RichTextData).textFormatRanges, 'push', cast ([{ end: end, format: format, start: start }] : Array<Dynamic>));
-    RichText.invalidateRichTextContent__richText((cast source : flighthq.types.RichText));
+    RichText.invalidateRichTextContent__richText((cast source));
   }
 
   public static function setRichTextHeight(source:flighthq.types.RichText, value:Float):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).height, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).height = value);
-    invalidateNodeLocalContent(source);
-    invalidateNodeLocalBounds(source);
+    invalidateNodeLocalContent((cast source));
+    invalidateNodeLocalBounds((cast source));
   }
 
   public static function setRichTextMaxChars(source:flighthq.types.RichText, value:Float):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).maxChars, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).maxChars = value);
-    invalidateNodeLocalContent(source);
+    invalidateNodeLocalContent((cast source));
   }
 
   public static function setRichTextMouseWheelEnabled(source:flighthq.types.RichText, value:Bool):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).mouseWheelEnabled, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).mouseWheelEnabled = value);
-    invalidateNodeLocalContent(source);
+    invalidateNodeLocalContent((cast source));
   }
 
   public static function setRichTextMultiline(source:flighthq.types.RichText, value:Bool):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).multiline, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).multiline = value);
-    RichText.invalidateRichTextContent__richText((cast source : flighthq.types.RichText));
-    invalidateNodeLocalBounds(source);
+    RichText.invalidateRichTextContent__richText((cast source));
+    invalidateNodeLocalBounds((cast source));
   }
 
   public static function setRichTextScrollH(source:flighthq.types.RichText, value:Float, ?layout:TextLayoutResult):Void {
@@ -496,14 +498,14 @@ class RichText {
     var clamped:Float = cast _Runtime.UNDEFINED;
     var previousScrollH:Float = cast _Runtime.UNDEFINED;
     var previousScrollV:Float = cast _Runtime.UNDEFINED;
-    max = ((cast !_Runtime.looseEquals(layout, null) : Bool) ? (cast (cast RichText.computeRichTextMaxScrollHFromLayout__richText((cast (cast source : flighthq.types.RichText).data : RichTextData), (cast layout : TextLayoutResult)) : Float) : Dynamic) : (cast HxMath.POSITIVE_INFINITY : Dynamic));
+    max = ((cast !_Runtime.looseEquals(layout, null) : Bool) ? (cast (cast RichText.computeRichTextMaxScrollHFromLayout__richText((cast (cast source : flighthq.types.RichText).data), (cast layout)) : Float) : Dynamic) : (cast HxMath.POSITIVE_INFINITY : Dynamic));
     clamped = HxMath.max(0.0, HxMath.min(max, HxMath.round(value)));
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).scrollH, clamped) : Bool)) { return; }
     previousScrollH = (cast (cast source : flighthq.types.RichText).data : RichTextData).scrollH;
     previousScrollV = (cast (cast source : flighthq.types.RichText).data : RichTextData).scrollV;
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).scrollH = clamped);
-    invalidateNodeLocalContent(source);
-    RichText.emitTextFieldScroll__richText((cast source : flighthq.types.RichText), (cast previousScrollH : Float), (cast previousScrollV : Float));
+    invalidateNodeLocalContent((cast source));
+    RichText.emitTextFieldScroll__richText((cast source), (cast previousScrollH : Float), (cast previousScrollV : Float));
   }
 
   public static function setRichTextScrollV(source:flighthq.types.RichText, value:Float, ?layout:TextLayoutResult):Void {
@@ -511,20 +513,20 @@ class RichText {
     var clamped:Float = cast _Runtime.UNDEFINED;
     var previousScrollH:Float = cast _Runtime.UNDEFINED;
     var previousScrollV:Float = cast _Runtime.UNDEFINED;
-    max = ((cast !_Runtime.looseEquals(layout, null) : Bool) ? (cast (cast RichText.computeRichTextMaxScrollVFromLayout__richText((cast (cast source : flighthq.types.RichText).data : RichTextData), (cast layout : TextLayoutResult)) : Float) : Dynamic) : (cast HxMath.POSITIVE_INFINITY : Dynamic));
+    max = ((cast !_Runtime.looseEquals(layout, null) : Bool) ? (cast (cast RichText.computeRichTextMaxScrollVFromLayout__richText((cast (cast source : flighthq.types.RichText).data), (cast layout)) : Float) : Dynamic) : (cast HxMath.POSITIVE_INFINITY : Dynamic));
     clamped = HxMath.max(1.0, HxMath.min(max, HxMath.round(value)));
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).scrollV, clamped) : Bool)) { return; }
     previousScrollH = (cast (cast source : flighthq.types.RichText).data : RichTextData).scrollH;
     previousScrollV = (cast (cast source : flighthq.types.RichText).data : RichTextData).scrollV;
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).scrollV = clamped);
-    invalidateNodeLocalContent(source);
-    RichText.emitTextFieldScroll__richText((cast source : flighthq.types.RichText), (cast previousScrollH : Float), (cast previousScrollV : Float));
+    invalidateNodeLocalContent((cast source));
+    RichText.emitTextFieldScroll__richText((cast source), (cast previousScrollH : Float), (cast previousScrollV : Float));
   }
 
   public static function setRichTextSelectable(source:flighthq.types.RichText, value:Bool):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).selectable, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).selectable = value);
-    invalidateNodeLocalContent(source);
+    invalidateNodeLocalContent((cast source));
   }
 
   public static function setRichTextString(source:flighthq.types.RichText, value:String):Void {
@@ -532,41 +534,41 @@ class RichText {
     previousText = (cast (cast source : flighthq.types.RichText).data : RichTextData).text;
     if ((cast _Runtime.strictEquals(previousText, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).text = value);
-    RichText.invalidateRichTextContent__richText((cast source : flighthq.types.RichText));
-    RichText.emitTextFieldChange__richText((cast source : flighthq.types.RichText), (cast previousText : String));
+    RichText.invalidateRichTextContent__richText((cast source));
+    RichText.emitTextFieldChange__richText((cast source), (cast previousText : String));
   }
 
   public static function setRichTextTextColor(source:flighthq.types.RichText, value:Float):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).textColor, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).textColor = value);
-    invalidateNodeLocalContent(source);
+    invalidateNodeLocalContent((cast source));
   }
 
   public static function setRichTextVerticalAlign(source:flighthq.types.RichText, value:TextVerticalAlign):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).verticalAlign, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).verticalAlign = value);
-    invalidateNodeLocalContent(source);
+    invalidateNodeLocalContent((cast source));
   }
 
   public static function setRichTextWidth(source:flighthq.types.RichText, value:Float):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).width, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).width = value);
-    invalidateNodeLocalContent(source);
-    invalidateNodeLocalBounds(source);
+    invalidateNodeLocalContent((cast source));
+    invalidateNodeLocalBounds((cast source));
   }
 
   public static function setRichTextWordWrap(source:flighthq.types.RichText, value:Bool):Void {
     if ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).wordWrap, value) : Bool)) { return; }
     ((cast (cast source : flighthq.types.RichText).data : RichTextData).wordWrap = value);
-    RichText.invalidateRichTextContent__richText((cast source : flighthq.types.RichText));
-    invalidateNodeLocalBounds(source);
+    RichText.invalidateRichTextContent__richText((cast source));
+    invalidateNodeLocalBounds((cast source));
   }
 
-  public static final defaultMethods__richText:Dynamic = { computeLocalBoundsRectangle: computeRichTextLocalBoundsRectangle };
+  public static final defaultMethods__richText:flighthq._internal._Partial<MethodsOf<RichTextRuntime>> = (cast { computeLocalBoundsRectangle: computeRichTextLocalBoundsRectangle });
 
   public static function invalidateRichTextContent__richText(source:flighthq.types.RichText):Void {
-    invalidateNodeLocalContent(source);
-    if ((cast !_Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).autoSize, 'none') : Bool)) { invalidateNodeLocalBounds(source); }
+    invalidateNodeLocalContent((cast source));
+    if ((cast !_Runtime.strictEquals((cast (cast source : flighthq.types.RichText).data : RichTextData).autoSize, 'none') : Bool)) { invalidateNodeLocalBounds((cast source)); }
   }
 
   public static function computeRichTextMaxScrollHFromLayout__richText(data:RichTextData, layout:TextLayoutResult):Float {
@@ -598,18 +600,18 @@ class RichText {
   public static function emitTextFieldChange__richText(source:flighthq.types.RichText, previousText:String):Void {
     var signals:Null<TextFieldSignals> = cast _Runtime.UNDEFINED;
     var event:TextFieldChangeEvent = cast _Runtime.UNDEFINED;
-    signals = (cast (cast (cast getNode2DRuntime(source) : RichTextRuntime) : RichTextRuntime) : RichTextRuntime).textFieldSignals;
+    signals = (cast (cast getNode2DRuntime((cast source)) : RichTextRuntime) : RichTextRuntime).textFieldSignals;
     if ((cast _Runtime.strictEquals(signals, null) : Bool)) { return; }
-    event = { previousText: previousText, text: (cast _Runtime.field(source, 'data') : RichTextData).text };
-    ((cast signals : TextFieldSignals).onTextFieldChange.emit)(event);
+    event = (cast { previousText: previousText, text: (cast _Runtime.field(source, 'data') : RichTextData).text });
+    ((cast (cast signals : TextFieldSignals).onTextFieldChange : { var emit:TextFieldChangeEvent->Void; }).emit)((cast event));
   }
 
   public static function emitTextFieldScroll__richText(source:flighthq.types.RichText, previousScrollH:Float, previousScrollV:Float):Void {
     var signals:Null<TextFieldSignals> = cast _Runtime.UNDEFINED;
     var event:TextFieldScrollEvent = cast _Runtime.UNDEFINED;
-    signals = (cast (cast (cast getNode2DRuntime(source) : RichTextRuntime) : RichTextRuntime) : RichTextRuntime).textFieldSignals;
+    signals = (cast (cast getNode2DRuntime((cast source)) : RichTextRuntime) : RichTextRuntime).textFieldSignals;
     if ((cast _Runtime.strictEquals(signals, null) : Bool)) { return; }
-    event = { previousScrollH: previousScrollH, previousScrollV: previousScrollV, scrollH: (cast _Runtime.field(source, 'data') : RichTextData).scrollH, scrollV: (cast _Runtime.field(source, 'data') : RichTextData).scrollV };
-    ((cast signals : TextFieldSignals).onTextFieldScroll.emit)(event);
+    event = (cast { previousScrollH: previousScrollH, previousScrollV: previousScrollV, scrollH: (cast _Runtime.field(source, 'data') : RichTextData).scrollH, scrollV: (cast _Runtime.field(source, 'data') : RichTextData).scrollV });
+    ((cast (cast signals : TextFieldSignals).onTextFieldScroll : { var emit:TextFieldScrollEvent->Void; }).emit)((cast event));
   }
 }

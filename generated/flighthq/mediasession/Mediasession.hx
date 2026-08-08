@@ -15,15 +15,15 @@ class Mediasession {
   public static var _backend__mediasession:Null<MediaSessionBackend> = _Runtime.explicitNull();
 
   public static function clearMediaSessionActionHandler(action:MediaSessionAction):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler(action, null);
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler((cast action), (cast null));
   }
 
   public static function clearMediaSessionMetadata():Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata(null);
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata((cast null));
   }
 
   public static function clearMediaSessionPositionState():Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState(null);
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState((cast null));
   }
 
   @:noCompletion
@@ -37,7 +37,7 @@ class Mediasession {
         return;
       }
       if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('MediaMetadata'), 'undefined') : Bool)) { return; }
-      ((cast session : flighthq._internal.dom.MediaSession).metadata = _Runtime.construct(flighthq._internal._HostValueLut.get('MediaMetadata'), [{ title: (cast metadata : flighthq.types.MediaSession.MediaSessionMetadata).title, artist: (cast metadata : flighthq.types.MediaSession.MediaSessionMetadata).artist, album: (cast metadata : flighthq.types.MediaSession.MediaSessionMetadata).album, artwork: _Runtime.concatArrays([_Runtime.toArray((cast metadata : flighthq.types.MediaSession.MediaSessionMetadata).artwork)]) }]));
+      ((cast session : flighthq._internal.dom.MediaSession).metadata = _Runtime.construct(flighthq._internal._HostValueLut.get('MediaMetadata'), [{ title: (cast metadata : { var title:String; }).title, artist: (cast metadata : { var artist:String; }).artist, album: (cast metadata : { var album:String; }).album, artwork: _Runtime.concatArrays([_Runtime.toArray((cast metadata : { var artwork:Array<MediaSessionArtwork>; }).artwork)]) }]));
     }, setPlaybackState: function(state:MediaSessionPlaybackState):Void {
       var session:Null<flighthq._internal.dom.MediaSession> = cast _Runtime.UNDEFINED;
       session = (cast Mediasession.getWebMediaSession__mediasession() : Null<flighthq._internal.dom.MediaSession>);
@@ -53,7 +53,7 @@ class Mediasession {
       session = (cast Mediasession.getWebMediaSession__mediasession() : Null<flighthq._internal.dom.MediaSession>);
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
       try {
-        (cast session : flighthq._internal.dom.MediaSession).setActionHandler(action, _Runtime.select(handler, function():Dynamic return cast function(details:MediaSessionActionDetails):Void return handler((cast (cast details : MediaSessionActionDetails) : MediaSessionActionDetails)), function():Dynamic return cast null));
+        (cast session : flighthq._internal.dom.MediaSession).setActionHandler(action, _Runtime.select(handler, function():Dynamic return cast function(details:MediaSessionActionDetails):Void { handler((cast (cast details : MediaSessionActionDetails))); }, function():Dynamic return cast null));
       } catch (__error:Dynamic) {
       }
     } };
@@ -62,7 +62,7 @@ class Mediasession {
 
   @:noCompletion
   public static function getMediaSessionBackend():MediaSessionBackend {
-    if ((cast _Runtime.strictEquals(Mediasession._backend__mediasession, null) : Bool)) { (Mediasession._backend__mediasession = cast ((cast createWebMediaSessionBackend() : Null<MediaSessionBackend>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Mediasession._backend__mediasession, null) : Bool)) { (Mediasession._backend__mediasession = cast ((cast createWebMediaSessionBackend() : MediaSessionBackend) : Dynamic)); }
     return cast Mediasession._backend__mediasession;
     return cast null;
   }
@@ -74,7 +74,7 @@ class Mediasession {
   }
 
   public static function setMediaSessionActionHandler(action:MediaSessionAction, handler:MediaSessionActionDetails->Void):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler(action, handler);
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler((cast action), (cast handler));
   }
 
   @:noCompletion
@@ -83,14 +83,14 @@ class Mediasession {
   }
 
   public static function setMediaSessionMetadata(metadata:MediaSessionMetadata):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata(metadata);
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata((cast metadata));
   }
 
   public static function setMediaSessionPlaybackState(state:MediaSessionPlaybackState):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPlaybackState(state);
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPlaybackState((cast state));
   }
 
   public static function setMediaSessionPositionState(state:MediaSessionPositionState):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState(state);
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState((cast state));
   }
 }

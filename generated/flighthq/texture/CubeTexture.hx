@@ -14,6 +14,7 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Sampler;
 import flighthq.types.Sampler.SamplerLike;
 import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureLike;
 import flighthq.types.Texture.TextureSourceCubeFaces;
 import flighthq.types.TextureSource;
 import flighthq.types.Vector2;
@@ -25,28 +26,28 @@ class CubeTexture {
   }
 
   public static function cloneCubeTexture(source:flighthq.types.CubeTexture):flighthq.types.CubeTexture {
-    return cast (cast (cast cloneTexture(source) : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }) : flighthq.types.CubeTexture);
+    return cast (cast cloneTexture((cast source)) : flighthq.types.CubeTexture);
     return cast null;
   }
 
   public static function copyCubeTexture(out:flighthq.types.CubeTexture, source:flighthq.types.CubeTexture):Void {
-    copyTexture(out, source);
+    copyTexture((cast out), (cast source));
   }
 
   public static function createCubeTexture(?opts:CreateCubeTextureOptions):flighthq.types.CubeTexture {
-    return cast (cast (cast createTexture({ colorSpace: _Runtime.coalesce(_Runtime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), sampler: _Runtime.select(_Runtime.optionalField(opts, 'sampler'), function():Dynamic return cast (cast cloneSampler(_Runtime.field(opts, 'sampler')) : Null<Sampler>), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), dimension: 'cube', sources: _Runtime.coalesce(_Runtime.optionalField(opts, 'sources'), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)) }) : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }) : flighthq.types.CubeTexture);
+    return cast (cast createTexture((cast { colorSpace: _Runtime.coalesce(({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var colorSpace:Null<String>; }).colorSpace; }), function():Dynamic return cast 'srgb'), sampler: _Runtime.select(({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var sampler:Null<SamplerLike>; }).sampler; }), function():Dynamic return cast (cast cloneSampler((cast _Runtime.field(opts, 'sampler'))) : Sampler), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), dimension: 'cube', sources: _Runtime.coalesce(({ final __structural2 = opts; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var sources:Null<TextureSourceCubeFaces>; }).sources; }), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)) })) : flighthq.types.CubeTexture);
     return cast null;
   }
 
   public static function equalsCubeTexture(a:Null<flighthq.types.CubeTexture>, b:Null<flighthq.types.CubeTexture>):Bool {
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
-    return cast (cast equalsTexture(a, b) : Bool);
+    return cast (cast equalsTexture((cast a), (cast b)) : Bool);
     return cast null;
   }
 
   public static function getCubeTextureFaceSize(cube:flighthq.types.CubeTexture):Float {
     var sources:TextureSourceCubeFaces = cast _Runtime.UNDEFINED;
-    sources = (cast CubeTexture.getCubeSources__cubeTexture(cube) : TextureSourceCubeFaces);
+    sources = (cast CubeTexture.getCubeSources__cubeTexture((cast cube)) : TextureSourceCubeFaces);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 6.0 : Float)) : Bool)) {
@@ -60,13 +61,13 @@ class CubeTexture {
   }
 
   public static function isCubeTextureComplete(cube:flighthq.types.CubeTexture):Bool {
-    return cast _Runtime.callProperty((cast CubeTexture.getCubeSources__cubeTexture(cube) : TextureSourceCubeFaces), 'every', cast ([function(face:Null<TextureSource>, __unused0:Float, __unused1:Array<Null<TextureSource>>):Bool return !_Runtime.strictEquals(face, null)] : Array<Dynamic>));
+    return cast _Runtime.callProperty((cast CubeTexture.getCubeSources__cubeTexture((cast cube)) : TextureSourceCubeFaces), 'every', cast ([function(face:Null<TextureSource>, __unused0:Float, __unused1:Array<Null<TextureSource>>):Bool return !_Runtime.strictEquals(face, null)] : Array<Dynamic>));
     return cast null;
   }
 
   public static function setCubeTextureFace(cube:flighthq.types.CubeTexture, faceIndex:Float, source:Null<TextureSource>):Void {
     var sources:TextureSourceCubeFaces = cast _Runtime.UNDEFINED;
-    sources = (cast CubeTexture.getCubeSources__cubeTexture(cube) : TextureSourceCubeFaces);
+    sources = (cast CubeTexture.getCubeSources__cubeTexture((cast cube)) : TextureSourceCubeFaces);
     if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(sources, faceIndex), source) : Bool)) { return; }
     flighthq._internal._StaticIndex.writeArray((cast (cast sources : flighthq._internal._Any) : Array<Null<TextureSource>>), faceIndex, source);
     ((cast cube : { var version:Float; }).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast cube : { var version:Float; }).version + 1.0)), 0));

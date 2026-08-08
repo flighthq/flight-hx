@@ -11,6 +11,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlBlendRealization;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.RenderState;
 import flighthq.types.Scene2DKindUsage;
 import flighthq.types.SceneCoverageEntry;
 import flighthq.types.SceneCoverageEntry.SceneCoverage;
@@ -21,14 +22,14 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 class ExplainGlScene2DCoverage {
   @:noCompletion
   public static function explainGlScene2DCoverage(out:Array<SceneCoverageEntry>, state:GlRenderState, usage:Scene2DKindUsage):Void {
-    explainScene2DCoverage((cast out : Array<SceneCoverageEntry>), state, (cast usage : Scene2DKindUsage));
-    (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage((cast out : Null<Array<SceneCoverageEntry>>), (cast state : GlRenderState), (cast usage : Scene2DKindUsage), (cast false : Bool)) : Bool);
+    explainScene2DCoverage((cast out), (cast state), (cast usage));
+    (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage((cast out), (cast state), (cast usage), (cast false : Bool)) : Bool);
   }
 
   @:noCompletion
   public static function hasGlScene2DCoverage(state:GlRenderState, usage:Scene2DKindUsage):Bool {
-    if ((cast !(cast (cast hasScene2DCoverage(state, (cast usage : Scene2DKindUsage)) : Bool) : Bool) : Bool)) { return cast false; }
-    return cast !(cast (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage((cast null : Null<Array<SceneCoverageEntry>>), (cast state : GlRenderState), (cast usage : Scene2DKindUsage), (cast true : Bool)) : Bool) : Bool);
+    if ((cast !(cast (cast hasScene2DCoverage((cast state), (cast usage)) : Bool) : Bool) : Bool)) { return cast false; }
+    return cast !(cast (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage((cast null), (cast state), (cast usage), (cast true : Bool)) : Bool) : Bool);
     return cast null;
   }
 
@@ -39,7 +40,7 @@ class ExplainGlScene2DCoverage {
     var materials:Null<flighthq._internal._Map<String, GlMaterialRenderer>> = cast _Runtime.UNDEFINED;
     var hasStandard:Bool = cast _Runtime.UNDEFINED;
     found = false;
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     blendModes = (cast runtime : GlRenderStateRuntime).glBlendModeRegistry;
     {
       var i:Float = 0.0;

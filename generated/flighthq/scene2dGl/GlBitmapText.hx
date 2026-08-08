@@ -27,11 +27,13 @@ import flighthq.types.GlRenderState.GlQuadBatchShader;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
+import flighthq.types.Node2D;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Renderable;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.Sampler;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 
@@ -54,11 +56,11 @@ class GlBitmapText {
     var ptx:Float = cast _Runtime.UNDEFINED;
     var pty:Float = cast _Runtime.UNDEFINED;
     var alpha:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     source = (cast (cast node : RenderProxy2D).source : BitmapText);
-    pages = (cast (cast (cast getNode2DRuntime(source) : BitmapTextRuntime) : BitmapTextRuntime) : BitmapTextRuntime).pages;
+    pages = (cast (cast getNode2DRuntime((cast source)) : BitmapTextRuntime) : BitmapTextRuntime).pages;
     material = (cast node : RenderProxy2D).material;
-    materialRenderer = (cast resolveGlMaterialRenderer((cast state : GlRenderState), material) : Null<GlMaterialRenderer>);
+    materialRenderer = (cast resolveGlMaterialRenderer((cast state), (cast material)) : Null<GlMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     nodeMaterialData = (cast node : RenderProxy2D).materialData;
     nodeColorScaleBias = _Runtime.coalesce((cast node : RenderProxy2D).colorMatrix, function():Dynamic return cast (cast node : RenderProxy2D).colorScaleBias);
@@ -73,17 +75,17 @@ class GlBitmapText {
     for (page in _Runtime.iterable(pages)) {
       var atlas:TextureAtlas = (cast page : BitmapTextPage).atlas;
       var texture:Null<Texture2D> = atlas.texture;
-      if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !(cast (cast hasTextureSource(texture) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast page : BitmapTextPage).instanceCount, 0.0) : Bool)) : Bool)) { continue; }
-      var glTexture:Null<flighthq._internal.dom.WebGLTexture> = (cast resolveGlTexture((cast state : GlRenderState), texture, (cast true : Bool), SCENE2D_WORKING_COLOR_SPACE) : Null<flighthq._internal.dom.WebGLTexture>);
+      if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !(cast (cast hasTextureSource((cast texture)) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast page : BitmapTextPage).instanceCount, 0.0) : Bool)) : Bool)) { continue; }
+      var glTexture:Null<flighthq._internal.dom.WebGLTexture> = (cast resolveGlTexture((cast state), (cast texture), (cast true : Bool), (cast SCENE2D_WORKING_COLOR_SPACE)) : Null<flighthq._internal.dom.WebGLTexture>);
       if ((cast _Runtime.strictEquals(glTexture, null) : Bool)) { continue; }
       var straightAlpha:Bool = (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha;
-      (cast ensureGlQuadBatchShader((cast state : GlRenderState)) : GlQuadBatchShader);
-      var base:Float = (cast prepareGlQuadBatchWrite((cast state : GlRenderState), (cast glTexture : flighthq._internal.dom.WebGLTexture), (cast straightAlpha : Bool), (cast texture : Texture2D).sampler, (cast (cast node : RenderProxy2D).blendMode : Null<String>), material, materialRenderer, (cast (cast page : BitmapTextPage).instanceCount : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Float);
+      (cast ensureGlQuadBatchShader((cast state)) : GlQuadBatchShader);
+      var base:Float = (cast prepareGlQuadBatchWrite((cast state), (cast glTexture), (cast straightAlpha : Bool), (cast (cast texture : Texture2D).sampler), (cast (cast node : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast (cast page : BitmapTextPage).instanceCount : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Float);
       var startCount:Float = (cast runtime : GlRenderStateRuntime).quadBatchWriterCount;
       var regions:Array<TextureAtlasRegion> = atlas.regions;
       var numRegions:Float = _Runtime.field(regions, 'length');
-      var iw:Float = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(texture) : Float)));
-      var ih:Float = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(texture) : Float)));
+      var iw:Float = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth((cast texture)) : Float)));
+      var ih:Float = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight((cast texture)) : Float)));
       var instanceData:flighthq._internal._Float32Array = (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData;
       var ids:flighthq._internal._UInt16Array = (cast page : BitmapTextPage).ids;
       var transforms:flighthq._internal._Float32Array = (cast page : BitmapTextPage).transforms;
@@ -111,8 +113,8 @@ class GlBitmapText {
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 10.0), ((region.x + region.width) * iw));
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 11.0), ((region.y + region.height) * ih));
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 12.0), alpha);
-          packGlQuadBatchMaterialInstance((cast state : GlRenderState), (cast nodeMaterialData : Null<flighthq._internal._Object>), (cast (startCount + drawCount) : Float));
-          recordGlQuadBatchColorScaleBias((cast state : GlRenderState), nodeColorScaleBias, (cast (startCount + drawCount) : Float));
+          packGlQuadBatchMaterialInstance((cast state), (cast nodeMaterialData), (cast (startCount + drawCount) : Float));
+          recordGlQuadBatchColorScaleBias((cast state), (cast nodeColorScaleBias), (cast (startCount + drawCount) : Float));
           (writeBase = cast ((writeBase + GlBitmapText.INSTANCE_FLOATS__glBitmapText) : Dynamic));
           drawCount++;
           i++;
@@ -122,5 +124,5 @@ class GlBitmapText {
     }
   }
 
-  public static final defaultGlBitmapTextRenderer:SpriteRenderer = { format: BatchFormat.Quad, createData: noopRendererData, submit: GlBitmapText.submitGlBitmapText__glBitmapText };
+  public static final defaultGlBitmapTextRenderer:SpriteRenderer = (cast { format: BatchFormat.Quad, createData: noopRendererData, submit: GlBitmapText.submitGlBitmapText__glBitmapText });
 }

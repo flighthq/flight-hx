@@ -27,10 +27,11 @@ import flighthq.types.QuadBatch;
 import flighthq.types.QuadBatch.QuadBatchData;
 import flighthq.types.QuadTransformType;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Renderable;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.Sampler;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 import flighthq.types.TintMaterialData;
@@ -74,7 +75,7 @@ class GlQuadBatch {
     var alpha:Float = cast _Runtime.UNDEFINED;
     var writeBase:Float = cast _Runtime.UNDEFINED;
     var drawCount:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     source = (cast (cast quadBatch : RenderProxy2D).source : QuadBatch);
     data = (cast source : QuadBatch).data;
     __destructure0 = data;
@@ -82,13 +83,13 @@ class GlQuadBatch {
     instanceCount = _Runtime.field(__destructure0, 'instanceCount');
     ids = _Runtime.field(__destructure0, 'ids');
     transforms = _Runtime.field(__destructure0, 'transforms');
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(atlas.texture) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
-    (cast ensureGlQuadBatchShader((cast state : GlRenderState)) : GlQuadBatchShader);
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource((cast atlas.texture)) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
+    (cast ensureGlQuadBatchShader((cast state)) : GlQuadBatchShader);
     material = (cast quadBatch : RenderProxy2D).material;
-    materialRenderer = (cast resolveGlMaterialRenderer((cast state : GlRenderState), material) : Null<GlMaterialRenderer>);
+    materialRenderer = (cast resolveGlMaterialRenderer((cast state), (cast material)) : Null<GlMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     texture = atlas.texture;
-    glTexture = (cast resolveGlTexture((cast state : GlRenderState), texture, (cast true : Bool), SCENE2D_WORKING_COLOR_SPACE) : Null<flighthq._internal.dom.WebGLTexture>);
+    glTexture = (cast resolveGlTexture((cast state), (cast texture), (cast true : Bool), (cast SCENE2D_WORKING_COLOR_SPACE)) : Null<flighthq._internal.dom.WebGLTexture>);
     if ((cast _Runtime.strictEquals(glTexture, null) : Bool)) { return; }
     straightAlpha = (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha;
     nodeMaterialData = (cast quadBatch : RenderProxy2D).materialData;
@@ -96,11 +97,11 @@ class GlQuadBatch {
     nodeColorScaleBias = (cast quadBatch : RenderProxy2D).colorScaleBias;
     nodeColorMatrix = (cast quadBatch : RenderProxy2D).colorMatrix;
     startCount = (cast runtime : GlRenderStateRuntime).quadBatchWriterCount;
-    base = (cast prepareGlQuadBatchWrite((cast state : GlRenderState), (cast glTexture : flighthq._internal.dom.WebGLTexture), (cast straightAlpha : Bool), (cast texture : Texture2D).sampler, (cast (cast quadBatch : RenderProxy2D).blendMode : Null<String>), material, materialRenderer, (cast instanceCount : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Float);
+    base = (cast prepareGlQuadBatchWrite((cast state), (cast glTexture), (cast straightAlpha : Bool), (cast (cast texture : Texture2D).sampler), (cast (cast quadBatch : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast instanceCount : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Float);
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
-    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(texture) : Float)));
-    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(texture) : Float)));
+    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth((cast texture)) : Float)));
+    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight((cast texture)) : Float)));
     instanceData = (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData;
     isVector2 = _Runtime.strictEquals((cast data : QuadBatchData).transformType, 'vector2');
     pt = (cast quadBatch : RenderProxy2D).transform2D;
@@ -151,9 +152,9 @@ class GlQuadBatch {
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 10.0), ((region.x + region.width) * iw));
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 11.0), ((region.y + region.height) * ih));
         flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 12.0), alpha);
-        packGlQuadBatchMaterialInstance((cast state : GlRenderState), (cast nodeMaterialData : Null<flighthq._internal._Object>), (cast (startCount + drawCount) : Float));
+        packGlQuadBatchMaterialInstance((cast state), (cast nodeMaterialData), (cast (startCount + drawCount) : Float));
         var colorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>> = _Runtime.coalesce(_Runtime.coalesce((cast _Runtime.optionalIndex(perQuadColorScaleBias, i) : Null<flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>>), function():Dynamic return cast nodeColorMatrix), function():Dynamic return cast nodeColorScaleBias);
-        recordGlQuadBatchColorScaleBias((cast state : GlRenderState), (cast colorScaleBias : Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>>), (cast (startCount + drawCount) : Float));
+        recordGlQuadBatchColorScaleBias((cast state), (cast colorScaleBias), (cast (startCount + drawCount) : Float));
         (writeBase = cast ((writeBase + GlQuadBatch.INSTANCE_FLOATS__glQuadBatch) : Dynamic));
         drawCount++;
         i++;
@@ -162,5 +163,5 @@ class GlQuadBatch {
     ((cast runtime : GlRenderStateRuntime).quadBatchWriterCount += drawCount);
   }
 
-  public static final defaultGlQuadBatchRenderer:SpriteRenderer = { format: BatchFormat.Quad, createData: noopRendererData, submit: GlQuadBatch.submitGlQuadBatch__glQuadBatch };
+  public static final defaultGlQuadBatchRenderer:SpriteRenderer = (cast { format: BatchFormat.Quad, createData: noopRendererData, submit: GlQuadBatch.submitGlQuadBatch__glQuadBatch });
 }

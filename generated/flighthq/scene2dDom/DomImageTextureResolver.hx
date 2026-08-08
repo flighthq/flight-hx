@@ -8,16 +8,17 @@ import flighthq.texture.Texture.getTextureSource;
 import flighthq.types.DomRenderState;
 import flighthq.types.Image;
 import flighthq.types.Texture;
+import flighthq.types.Texture.TextureLike;
 import flighthq.types.Types.ImageTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class DomImageTextureResolver {
   public static function registerDomImageTextureResolver(state:DomRenderState):Void {
-    registerDomTextureResolver((cast state : DomRenderState), (cast ImageTextureSourceKind : String), DomImageTextureResolver.resolveDomImageTexture__domImageTextureResolver);
+    registerDomTextureResolver((cast state), (cast ImageTextureSourceKind : String), (cast DomImageTextureResolver.resolveDomImageTexture__domImageTextureResolver));
   }
 
   public static function resolveDomImageTexture__domImageTextureResolver(_state:DomRenderState, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
-    return cast _Runtime.coalesce(_Runtime.optionalField((cast (cast getTextureSource(texture) : Null<Image>) : Null<Image>), 'source'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __structural0 = (cast getTextureSource((cast texture)) : Null<Image>); __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var source:flighthq._internal._Any; }).source; }), function():Dynamic return cast null);
     return cast null;
   }
 }

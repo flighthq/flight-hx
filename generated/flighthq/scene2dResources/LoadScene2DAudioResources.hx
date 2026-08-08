@@ -27,30 +27,30 @@ class LoadScene2DAudioResources {
         var resources:Array<Null<AudioResource>> = cast _Runtime.UNDEFINED;
         var resolved:Array<AudioResourceReference> = cast _Runtime.UNDEFINED;
         var unresolved:Array<AudioResourceReference> = cast _Runtime.UNDEFINED;
-        selected = _Runtime.callProperty((cast document : Scene2DDocument).audioResources, 'filter', cast ([function(reference:AudioResourceReference, __unused0:Float, __unused1:Array<AudioResourceReference>):Bool return ((cast _Runtime.strictEquals(_Runtime.optionalField(options, 'select'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.callProperty(options, 'select', cast ([reference] : Array<Dynamic>)) : Bool))] : Array<Dynamic>));
-        signal = _Runtime.coalesce(_Runtime.optionalField(options, 'signal'), function():Dynamic return cast (cast _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []) : flighthq._internal.dom.AbortController).signal);
-        context = _Runtime.coalesce(_Runtime.optionalField(options, 'context'), function():Dynamic return cast null);
-        fetch = _Runtime.coalesce(_Runtime.optionalField(options, 'fetch'), function():Dynamic return cast LoadScene2DAudioResources.rejectExternalAudioResource__loadScene2DAudioResources);
+        selected = _Runtime.callProperty((cast document : Scene2DDocument).audioResources, 'filter', cast ([function(reference:AudioResourceReference, __unused0:Float, __unused1:Array<AudioResourceReference>):Bool return ((cast _Runtime.strictEquals(({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var select:Null<AudioResourceReference->Bool>; }).select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.callProperty(options, 'select', cast ([reference] : Array<Dynamic>)) : Bool))] : Array<Dynamic>));
+        signal = _Runtime.coalesce(({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var signal:Null<flighthq._internal.dom.AbortSignal>; }).signal; }), function():Dynamic return cast (cast _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []) : flighthq._internal.dom.AbortController).signal);
+        context = _Runtime.coalesce(({ final __structural9 = options; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var context:Null<flighthq._internal.dom.AudioContext>; }).context; }), function():Dynamic return cast null);
+        fetch = _Runtime.coalesce(({ final __structural10 = options; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var fetch:Null<AudioResourceFetch>; }).fetch; }), function():Dynamic return cast LoadScene2DAudioResources.rejectExternalAudioResource__loadScene2DAudioResources);
         loaded = 0.0;
         return flighthq._internal._Async.flatMap(flighthq._internal._Async.all(_Runtime.callProperty(selected, 'map', cast ([function(reference:AudioResourceReference, __unused2:Float, __unused3:Array<AudioResourceReference>):flighthq._internal._Promise<Null<AudioResource>> {
           return cast flighthq._internal._Async.finishFlow(
             flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.continueFlow(flighthq._internal._Async.finalizeFlow(flighthq._internal._Async.protect(function():Dynamic {
-                return flighthq._internal._Async.flatMap((cast resolveAudioResourceReference((cast reference : AudioResourceReference), (cast context : Null<flighthq._internal.dom.AudioContext>), (cast fetch : AudioResourceFetch), (cast signal : flighthq._internal.dom.AbortSignal)) : Null<flighthq._internal._Any>), function(__awaitValue3:Dynamic):Dynamic {
-                  return flighthq._internal._Async.flowReturn(__awaitValue3);
+                return flighthq._internal._Async.flatMap((cast resolveAudioResourceReference((cast reference), (cast context), (cast fetch), (cast signal)) : flighthq._internal._Promise<Null<AudioResource>>), function(__awaitValue12:Dynamic):Dynamic {
+                  return flighthq._internal._Async.flowReturn(__awaitValue12);
                 });
               }), function():Dynamic {
                 loaded++;
-                var __flowBranch4:Dynamic;
-                if ((cast !_Runtime.strictEquals(_Runtime.optionalField(options, 'progress'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                  __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
+                var __flowBranch14:Dynamic;
+                if ((cast !_Runtime.strictEquals(({ final __structural13 = options; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { @:optional var progress:Null<Signal<Scene2DAudioResourceLoadProgress->Void>>; }).progress; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+                  __flowBranch14 = flighthq._internal._Async.protect(function():Dynamic {
                     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.field(options, 'progress')], [{ loaded: loaded, reference: reference, total: _Runtime.field(selected, 'length') }]]), 1);
                     return flighthq._internal._Async.flowNormal();
                   });
                 } else {
-                  __flowBranch4 = flighthq._internal._Async.flowNormal();
+                  __flowBranch14 = flighthq._internal._Async.flowNormal();
                 }
-                return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
+                return flighthq._internal._Async.continueFlow(__flowBranch14, function():Dynamic {
                   return flighthq._internal._Async.flowNormal();
                 });
               }), function():Dynamic {
@@ -58,8 +58,8 @@ class LoadScene2DAudioResources {
               });
             })
           );
-        }] : Array<Dynamic>))), function(__awaitValue2:Dynamic):Dynamic {
-          resources = __awaitValue2;
+        }] : Array<Dynamic>))), function(__awaitValue11:Dynamic):Dynamic {
+          resources = __awaitValue11;
           resolved = cast ([] : Array<Dynamic>);
           unresolved = cast ([] : Array<Dynamic>);
           {
@@ -75,5 +75,5 @@ class LoadScene2DAudioResources {
     );
   }
 
-  public static final rejectExternalAudioResource__loadScene2DAudioResources:AudioResourceFetch = function(__unused4:ExternalAudioResourceReference, __unused5:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<flighthq._internal._Any> return flighthq._internal._Async.resolve(null);
+  public static final rejectExternalAudioResource__loadScene2DAudioResources:AudioResourceFetch = (cast function(__unused4:ExternalAudioResourceReference, __unused5:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<AudioResource>> return flighthq._internal._Async.resolve(null));
 }

@@ -22,8 +22,8 @@ class ShapeStroke {
     var penY:Float = cast _Runtime.UNDEFINED;
     var flush:Void->Void = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
-    if ((cast (cast hasNonSolidShapeStroke((cast commands : Array<ShapeCommandToken>)) : Bool) : Bool)) { return cast null; }
-    regions = cast ([] : Array<Dynamic>);
+    if ((cast (cast hasNonSolidShapeStroke((cast commands)) : Bool) : Bool)) { return cast null; }
+    regions = (cast cast ([] : Array<Dynamic>));
     centerline = null;
     style = null;
     color = 0.0;
@@ -33,7 +33,7 @@ class ShapeStroke {
     flush = (cast function():Void {
       if ((cast ((cast ((cast _Runtime.strictEquals(style, null) : Bool) || (cast _Runtime.strictEquals(centerline, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast centerline : Path).commands, 'length'), 0.0) : Bool)) : Bool)) { return; }
       _Runtime.callProperty(regions, 'push', cast ([{ path: centerline, style: style, color: color, alpha: alpha }] : Array<Dynamic>));
-    } : Void->Void);
+    });
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var name:String = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
@@ -60,7 +60,7 @@ class ShapeStroke {
             _Runtime.callProperty((cast centerline : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
             _Runtime.pushMany((cast centerline : Path).data, cast ([penX, penY] : Array<Dynamic>));
           }
-          appendShapeGeometryCommand((cast centerline : Path), (cast name : String), (cast commands : Array<ShapeCommandToken>), (cast a : Float));
+          appendShapeGeometryCommand((cast centerline), (cast name : String), (cast commands), (cast a : Float));
         }
         if ((cast ((cast _Runtime.strictEquals(name, 'moveTo') : Bool) || (cast _Runtime.strictEquals(name, 'lineTo') : Bool)) : Bool)) {
           (penX = cast ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Dynamic));

@@ -27,7 +27,7 @@ class Velocity {
     return cast null;
   }
 
-  public static function contributeTransformVelocity<Traits>(field:VelocityField, root:Transform2DNode<Traits>):Void {
+  public static function contributeTransformVelocity<Traits:flighthq._internal._Object>(field:VelocityField, root:Transform2DNode<Traits>):Void {
     Facade_Velocity_flighthq_velocity_TransformVelocity.contributeTransformVelocity(field, root);
   }
 

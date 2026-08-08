@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.InvertAdjustment;
 
 class InvertAdjustment {
-  public static function createInvertAdjustment(?options:Dynamic):flighthq.types.InvertAdjustment {
+  public static function createInvertAdjustment(?options:flighthq._internal._Omit<flighthq.types.InvertAdjustment, String>):flighthq.types.InvertAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var intensity:Float = cast _Runtime.UNDEFINED;
     var s:Float = cast _Runtime.UNDEFINED;
@@ -15,7 +15,7 @@ class InvertAdjustment {
     intensity = _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0);
     s = (1.0 - (2.0 * intensity));
     o = intensity;
-    colorMatrix = cast ([s, 0.0, 0.0, 0.0, o, 0.0, s, 0.0, 0.0, o, 0.0, 0.0, s, 0.0, o, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
+    colorMatrix = (cast cast ([s, 0.0, 0.0, 0.0, o, 0.0, s, 0.0, 0.0, o, 0.0, 0.0, s, 0.0, o, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
     return cast _Runtime.mergeObjects([{ kind: 'InvertAdjustment' }, options, { colorMatrix: colorMatrix }]);
     return cast null;
   }

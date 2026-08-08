@@ -13,20 +13,20 @@ import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
 import flighthq.types.ParticleSerializeResult;
 
 class LibgdxSerialize {
-  public static function serializeLibgdxParticle(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):String {
+  public static function serializeLibgdxParticle(config:ParticleEmitterConfig, ?existing:flighthq._internal._Partial<LibgdxParticleDocument>, ?options:LibgdxSerializeOptions):String {
     var textureSize:Float = cast _Runtime.UNDEFINED;
     var doc:LibgdxParticleDocument = cast _Runtime.UNDEFINED;
     textureSize = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.textureSize; }), function():Dynamic return cast 1.0);
-    doc = (cast LibgdxSerialize.configToDocument__libgdxSerialize((cast config : ParticleEmitterConfig), (cast _Runtime.coalesce(existing, function():Dynamic return cast {  }) : flighthq._internal._Any), (cast textureSize : Float)) : LibgdxParticleDocument);
-    return cast (cast LibgdxSerialize.documentToText__libgdxSerialize((cast doc : LibgdxParticleDocument)) : String);
+    doc = (cast LibgdxSerialize.configToDocument__libgdxSerialize((cast config), (cast _Runtime.coalesce(existing, function():Dynamic return cast {  }) : flighthq._internal._Any), (cast textureSize : Float)) : LibgdxParticleDocument);
+    return cast (cast LibgdxSerialize.documentToText__libgdxSerialize((cast doc)) : String);
     return cast null;
   }
 
-  public static function serializeLibgdxParticleDocument(config:ParticleEmitterConfig, ?existing:Dynamic, ?options:LibgdxSerializeOptions):ParticleSerializeResult {
+  public static function serializeLibgdxParticleDocument(config:ParticleEmitterConfig, ?existing:flighthq._internal._Partial<LibgdxParticleDocument>, ?options:LibgdxSerializeOptions):ParticleSerializeResult {
     var text:String = cast _Runtime.UNDEFINED;
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
-    text = (cast serializeLibgdxParticle((cast config : ParticleEmitterConfig), (cast existing : Null<flighthq._internal._Any>), (cast options : Null<LibgdxSerializeOptions>)) : String);
-    warnings = (cast LibgdxSerialize.collectLibgdxSerializeWarnings__libgdxSerialize((cast config : ParticleEmitterConfig)) : Array<String>);
+    text = (cast serializeLibgdxParticle((cast config), (cast existing), (cast options)) : String);
+    warnings = (cast LibgdxSerialize.collectLibgdxSerializeWarnings__libgdxSerialize((cast config)) : Array<String>);
     return cast { text: text, warnings: warnings };
     return cast null;
   }
@@ -35,7 +35,7 @@ class LibgdxSerialize {
 
   public static function collectLibgdxSerializeWarnings__libgdxSerialize(config:ParticleEmitterConfig):Array<String> {
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
-    warnings = cast ([] : Array<Dynamic>);
+    warnings = (cast cast ([] : Array<Dynamic>));
     if ((cast ((cast ((cast !_Runtime.strictEquals(config.blendMode, null) : Bool) && (cast !_Runtime.strictEquals(config.blendMode, 'add') : Bool)) : Bool) && (cast !_Runtime.strictEquals(config.blendMode, 'normal') : Bool)) : Bool)) {
       _Runtime.callProperty(warnings, 'push', cast (['Blend mode \'' + Std.string(config.blendMode) + '\' has no libGDX equivalent and was approximated as \'normal\''] : Array<Dynamic>));
     }
@@ -61,7 +61,7 @@ class LibgdxSerialize {
     return cast null;
   }
 
-  public static function configToDocument__libgdxSerialize(config:ParticleEmitterConfig, existing:Dynamic, textureSize:Float):LibgdxParticleDocument {
+  public static function configToDocument__libgdxSerialize(config:ParticleEmitterConfig, existing:flighthq._internal._Partial<LibgdxParticleDocument>, textureSize:Float):LibgdxParticleDocument {
     var angleMid:Float = cast _Runtime.UNDEFINED;
     var spreadDeg:Float = cast _Runtime.UNDEFINED;
     var angleMin:Float = cast _Runtime.UNDEFINED;
@@ -82,7 +82,7 @@ class LibgdxSerialize {
     angleMax = (angleMid + spreadDeg);
     scaleMinPx = (config.scaleMin * textureSize);
     scaleMaxPx = (config.scaleMax * textureSize);
-    spawnShape = { shape: 'point', edges: false, side: 'both' };
+    spawnShape = (cast { shape: 'point', edges: false, side: 'both' });
     spawnWidth = (cast LibgdxSerialize.makeConstRange__libgdxSerialize((cast 0.0 : Float)) : LibgdxRangeValue);
     spawnHeight = (cast LibgdxSerialize.makeConstRange__libgdxSerialize((cast 0.0 : Float)) : LibgdxRangeValue);
     if ((cast _Runtime.strictEquals(config.emitterShape, 'circle') : Bool)) {
@@ -106,7 +106,7 @@ class LibgdxSerialize {
 
   public static function documentToText__libgdxSerialize(doc:LibgdxParticleDocument):String {
     var lines:Array<String> = cast _Runtime.UNDEFINED;
-    lines = cast ([] : Array<Dynamic>);
+    lines = (cast cast ([] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['Particle Effect'] : Array<Dynamic>));
     if (_Runtime.truthy(doc.name)) { _Runtime.callProperty(lines, 'push', cast (['- ' + Std.string(doc.name) + ' -'] : Array<Dynamic>)); }
     _Runtime.callProperty(lines, 'push', cast (['minParticleCount: ' + Std.string(doc.minParticleCount) + ''] : Array<Dynamic>));
@@ -116,19 +116,19 @@ class LibgdxSerialize {
     if (_Runtime.truthy(doc.imagePath)) { _Runtime.callProperty(lines, 'push', cast (['imagePath: ' + Std.string(doc.imagePath) + ''] : Array<Dynamic>)); }
     if ((cast !_Runtime.strictEquals(doc.imageCount, 1.0) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['imageCount: ' + Std.string(doc.imageCount) + ''] : Array<Dynamic>)); }
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Delay' : String), (cast doc.delay : LibgdxRangeValue), (cast (cast doc.delay : { var active:Bool; }).active : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Delay' : String), (cast doc.delay), (cast (cast doc.delay : { var active:Bool; }).active)) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Duration' : String), (cast doc.duration : LibgdxRangeValue), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Duration' : String), (cast doc.duration), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Emission' : String), (cast doc.emission : LibgdxRangeValue), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Emission' : String), (cast doc.emission), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Life' : String), (cast doc.life : LibgdxRangeValue), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Life' : String), (cast doc.life), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Life Offset' : String), (cast doc.lifeOffset : LibgdxRangeValue), (cast (cast doc.lifeOffset : { var active:Bool; }).active : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Life Offset' : String), (cast doc.lifeOffset), (cast (cast doc.lifeOffset : { var active:Bool; }).active)) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'X Offset' : String), (cast doc.xOffset : LibgdxRangeValue), (cast (cast doc.xOffset : { var active:Bool; }).active : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'X Offset' : String), (cast doc.xOffset), (cast (cast doc.xOffset : { var active:Bool; }).active)) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Y Offset' : String), (cast doc.yOffset : LibgdxRangeValue), (cast (cast doc.yOffset : { var active:Bool; }).active : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Y Offset' : String), (cast doc.yOffset), (cast (cast doc.yOffset : { var active:Bool; }).active)) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['Spawn Shape'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['shape: ' + Std.string((cast doc.spawnShape : { var shape:String; var edges:Bool; var side:String; }).shape) + ''] : Array<Dynamic>));
@@ -137,28 +137,28 @@ class LibgdxSerialize {
       _Runtime.callProperty(lines, 'push', cast (['side: ' + Std.string((cast doc.spawnShape : { var shape:String; var edges:Bool; var side:String; }).side) + ''] : Array<Dynamic>));
     }
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Spawn Width' : String), (cast doc.spawnWidth : LibgdxRangeValue), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Spawn Width' : String), (cast doc.spawnWidth), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Spawn Height' : String), (cast doc.spawnHeight : LibgdxRangeValue), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Spawn Height' : String), (cast doc.spawnHeight), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Scale' : String), (cast doc.scale : LibgdxRangeValue), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Scale' : String), (cast doc.scale), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Velocity' : String), (cast doc.velocity : LibgdxRangeValue), (cast (cast doc.velocity : { var active:Bool; }).active : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Velocity' : String), (cast doc.velocity), (cast (cast doc.velocity : { var active:Bool; }).active)) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Angle' : String), (cast doc.angle : LibgdxRangeValue), (cast (cast doc.angle : { var active:Bool; }).active : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Angle' : String), (cast doc.angle), (cast (cast doc.angle : { var active:Bool; }).active)) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Rotation' : String), (cast doc.rotation : LibgdxRangeValue), (cast (cast doc.rotation : { var active:Bool; }).active : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Rotation' : String), (cast doc.rotation), (cast (cast doc.rotation : { var active:Bool; }).active)) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Wind' : String), (cast doc.wind : LibgdxRangeValue), (cast (cast doc.wind : { var active:Bool; }).active : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Wind' : String), (cast doc.wind), (cast (cast doc.wind : { var active:Bool; }).active)) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Gravity' : String), (cast doc.gravity : LibgdxRangeValue), (cast (cast doc.gravity : { var active:Bool; }).active : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Gravity' : String), (cast doc.gravity), (cast (cast doc.gravity : { var active:Bool; }).active)) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['Tint'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['colors: ' + Std.string(_Runtime.join((cast doc.tint : { var colors:Array<String>; var timeline:Array<Float>; }).colors, ',')) + ''] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['timelineCount: ' + Std.string(_Runtime.field((cast doc.tint : { var colors:Array<String>; var timeline:Array<Float>; }).timeline, 'length')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty((cast doc.tint : { var colors:Array<String>; var timeline:Array<Float>; }).timeline, 'forEach', cast ([function(v:Float, i:Float, __unused0:Array<Float>):Float return _Runtime.callProperty(lines, 'push', cast (['timeline' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty((cast doc.tint : { var colors:Array<String>; var timeline:Array<Float>; }).timeline, 'forEach', cast ([function(v:Float, i:Float, __unused0:Array<Float>):Void { _Runtime.callProperty(lines, 'push', cast (['timeline' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>)); }] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Transparency' : String), (cast doc.transparency : LibgdxRangeValue), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Array<String>))]));
+    _Runtime.callProperty(lines, 'push', _Runtime.concatArrays([_Runtime.toArray((cast LibgdxSerialize.rangeToLines__libgdxSerialize((cast 'Transparency' : String), (cast doc.transparency), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Array<String>))]));
     _Runtime.callProperty(lines, 'push', cast ([''] : Array<Dynamic>));
     return cast _Runtime.join(lines, '\n');
     return cast null;
@@ -171,7 +171,7 @@ class LibgdxSerialize {
 
   public static function rangeToLines__libgdxSerialize(section:String, r:LibgdxRangeValue, ?active:Bool):Array<String> {
     var lines:Array<String> = cast _Runtime.UNDEFINED;
-    lines = cast ([section] : Array<Dynamic>);
+    lines = (cast cast ([section] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(active, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['active: ' + Std.string(active) + ''] : Array<Dynamic>)); }
     _Runtime.callProperty(lines, 'push', cast (['lowMin: ' + Std.string(r.lowMin) + ''] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['lowMax: ' + Std.string(r.lowMax) + ''] : Array<Dynamic>));
@@ -179,16 +179,16 @@ class LibgdxSerialize {
     _Runtime.callProperty(lines, 'push', cast (['highMax: ' + Std.string(r.highMax) + ''] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['relative: ' + Std.string(r.relative) + ''] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['scalingCount: ' + Std.string(_Runtime.field(r.scaling, 'length')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(r.scaling, 'forEach', cast ([function(v:Float, i:Float, __unused1:Array<Float>):Float return _Runtime.callProperty(lines, 'push', cast (['scaling' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(r.scaling, 'forEach', cast ([function(v:Float, i:Float, __unused1:Array<Float>):Void { _Runtime.callProperty(lines, 'push', cast (['scaling' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>)); }] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['timelineCount: ' + Std.string(_Runtime.field(r.timeline, 'length')) + ''] : Array<Dynamic>));
-    _Runtime.callProperty(r.timeline, 'forEach', cast ([function(v:Float, i:Float, __unused2:Array<Float>):Float return _Runtime.callProperty(lines, 'push', cast (['timeline' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>))] : Array<Dynamic>));
+    _Runtime.callProperty(r.timeline, 'forEach', cast ([function(v:Float, i:Float, __unused2:Array<Float>):Void { _Runtime.callProperty(lines, 'push', cast (['timeline' + Std.string(i) + ': ' + Std.string(v) + ''] : Array<Dynamic>)); }] : Array<Dynamic>));
     return cast lines;
     return cast null;
   }
 
   public static function rgbToHex__libgdxSerialize(r:Float, g:Float, b:Float):String {
     var c:Float->String = cast _Runtime.UNDEFINED;
-    c = (cast function(v:Float):String return _Runtime.padStart(_Runtime.numberToString(HxMath.round(_Runtime.multiplyNumbers(HxMath.max(0.0, HxMath.min(1.0, v)), 255.0)), 16.0), 2.0, '0') : Float->String);
+    c = (cast function(v:Float):String return _Runtime.padStart(_Runtime.numberToString(HxMath.round(_Runtime.multiplyNumbers(HxMath.max(0.0, HxMath.min(1.0, v)), 255.0)), 16.0), 2.0, '0'));
     return cast '' + Std.string((cast c((cast r : Float)) : String)) + '' + Std.string((cast c((cast g : Float)) : String)) + '' + Std.string((cast c((cast b : Float)) : String)) + '';
     return cast null;
   }

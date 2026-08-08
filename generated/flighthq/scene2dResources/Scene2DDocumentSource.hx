@@ -7,6 +7,7 @@ import flighthq.scene2dResources.Scene2DDocumentImporterRegistry.createScene2DDo
 import flighthq.types.Scene2DDocument;
 import flighthq.types.Scene2DResources.Scene2DDocumentFetchProgress;
 import flighthq.types.Scene2DResources.Scene2DDocumentFetcher;
+import flighthq.types.Scene2DResources.Scene2DDocumentImportContext;
 import flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry;
 import flighthq.types.Scene2DResources.Scene2DDocumentLoadOptions;
 import flighthq.types.Signal;
@@ -17,19 +18,19 @@ class Scene2DDocumentSource {
       flighthq._internal._Async.protect(function():Dynamic {
         var signal:flighthq._internal.dom.AbortSignal = cast _Runtime.UNDEFINED;
         var source:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
-        signal = _Runtime.coalesce(_Runtime.optionalField(options, 'signal'), function():Dynamic return cast (cast _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []) : flighthq._internal.dom.AbortController).signal);
-        return flighthq._internal._Async.flatMap((cast fetchDocument((cast url : String), (cast signal : flighthq._internal.dom.AbortSignal), _Runtime.coalesce(_Runtime.optionalField(options, 'progress'), function():Dynamic return cast null)) : flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>>), function(__awaitValue0:Dynamic):Dynamic {
-          source = __awaitValue0;
-          var __flowBranch1:Dynamic;
+        signal = _Runtime.coalesce(({ final __structural3 = options; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var signal:Null<flighthq._internal.dom.AbortSignal>; }).signal; }), function():Dynamic return cast (cast _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []) : flighthq._internal.dom.AbortController).signal);
+        return flighthq._internal._Async.flatMap((cast fetchDocument((cast url : String), (cast signal), (cast _Runtime.coalesce(({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var progress:Null<Signal<Scene2DDocumentFetchProgress->Void>>; }).progress; }), function():Dynamic return cast null))) : flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>>), function(__awaitValue4:Dynamic):Dynamic {
+          source = __awaitValue4;
+          var __flowBranch5:Dynamic;
           if ((cast _Runtime.strictEquals(source, null) : Bool)) {
-            __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch1 = flighthq._internal._Async.flowNormal();
+            __flowBranch5 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
-            return flighthq._internal._Async.flowReturn((cast createScene2DDocumentFromBytes((cast source : flighthq._internal._UInt8Array), (cast registry : Scene2DDocumentImporterRegistry), { mimeType: _Runtime.coalesce(_Runtime.optionalField(options, 'mimeType'), function():Dynamic return cast null), url: url }) : Null<flighthq._internal._Any>));
+          return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
+            return flighthq._internal._Async.flowReturn((cast createScene2DDocumentFromBytes((cast source), (cast registry), (cast { mimeType: _Runtime.coalesce(({ final __structural6 = options; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var mimeType:Null<String>; }).mimeType; }), function():Dynamic return cast null), url: url })) : Null<Scene2DDocument>));
           });
         });
       })

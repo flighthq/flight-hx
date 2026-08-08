@@ -15,9 +15,10 @@ import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
+import flighthq.types.Node2D;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Renderable;
 import flighthq.types.SpriteRenderer;
+import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
@@ -32,20 +33,20 @@ class CanvasBitmapText {
     var roundPixels:Bool = cast _Runtime.UNDEFINED;
     var restoreMaterial:Bool = cast _Runtime.UNDEFINED;
     source = (cast (cast node : RenderProxy2D).source : BitmapText);
-    pages = (cast (cast (cast getNode2DRuntime(source) : BitmapTextRuntime) : BitmapTextRuntime) : BitmapTextRuntime).pages;
+    pages = (cast (cast getNode2DRuntime((cast source)) : BitmapTextRuntime) : BitmapTextRuntime).pages;
     context = (cast state : CanvasRenderState).context;
     transform = (cast node : RenderProxy2D).transform2D;
     roundPixels = (cast state : CanvasRenderState).roundPixels;
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast node : RenderProxy2D).blendMode] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast node : RenderProxy2D).alpha);
     if ((cast !(cast (cast state : CanvasRenderState).allowSmoothing : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
-    restoreMaterial = (cast applyCanvasMaterial((cast state : CanvasRenderState), (cast node : RenderProxy2D).material) : Bool);
+    restoreMaterial = (cast applyCanvasMaterial((cast state), (cast (cast node : RenderProxy2D).material)) : Bool);
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty] : Array<Dynamic>));
     for (page in _Runtime.iterable(pages)) {
       var atlas:TextureAtlas = (cast page : BitmapTextPage).atlas;
       var texture:Null<Texture2D> = atlas.texture;
       if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast _Runtime.strictEquals((cast page : BitmapTextPage).instanceCount, 0.0) : Bool)) : Bool)) { continue; }
-      var domImage:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers((cast state : CanvasRenderState)) : CanvasTextureResolvers), texture) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
+      var domImage:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = (cast resolveCanvasTexture((cast (cast getCanvasRenderStateTextureResolvers((cast state)) : CanvasTextureResolvers)), (cast texture)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
       if ((cast _Runtime.strictEquals(domImage, null) : Bool)) { continue; }
       var regions:Array<TextureAtlasRegion> = atlas.regions;
       var numRegions:Float = _Runtime.field(regions, 'length');
@@ -70,5 +71,5 @@ class CanvasBitmapText {
     if ((cast !(cast (cast state : CanvasRenderState).allowSmoothing : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true); }
   }
 
-  public static final defaultCanvasBitmapTextRenderer:SpriteRenderer = { createData: noopRendererData, submit: drawCanvasSpriteText };
+  public static final defaultCanvasBitmapTextRenderer:SpriteRenderer = (cast { createData: noopRendererData, submit: drawCanvasSpriteText });
 }

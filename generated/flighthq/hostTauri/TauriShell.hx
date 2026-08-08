@@ -4,6 +4,7 @@ package flighthq.hostTauri;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Shell.ShellBackend;
+import flighthq.types.Shell.ShellShortcutLink;
 import flighthq.types.TauriApi;
 import flighthq.types.TauriApi.TauriOpenerPlugin;
 
@@ -15,7 +16,7 @@ class TauriShell {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openUrl(url), function(__awaitValue0:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openUrl((cast url : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))), function(__awaitValue0:Dynamic):Dynamic {
               __awaitValue0;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -33,7 +34,7 @@ class TauriShell {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openPath(path), function(__awaitValue1:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openPath((cast path : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))), function(__awaitValue1:Dynamic):Dynamic {
               __awaitValue1;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -51,7 +52,7 @@ class TauriShell {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openPath(path), function(__awaitValue2:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openPath((cast path : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))), function(__awaitValue2:Dynamic):Dynamic {
               __awaitValue2;
               return flighthq._internal._Async.flowReturn('');
             });
@@ -69,7 +70,7 @@ class TauriShell {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).revealItemInDir(path), function(__awaitValue3:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).revealItemInDir((cast path : String)), function(__awaitValue3:Dynamic):Dynamic {
               __awaitValue3;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -91,7 +92,7 @@ class TauriShell {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(_Runtime.callProperty(paths, 'map', cast ([function(__unused0:String, __unused1:Float, __unused2:Array<String>):Bool return false] : Array<Dynamic>)));
       }));
-    }, readShortcutLink: function():flighthq._internal._Promise<flighthq._internal._Any> {
+    }, readShortcutLink: function():flighthq._internal._Promise<Null<ShellShortcutLink>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));

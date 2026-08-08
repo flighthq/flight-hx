@@ -8,6 +8,6 @@ import flighthq.types.Layout.LayoutState;
 
 class EnableLayoutGuards {
   public static function enableLayoutGuards(state:LayoutState, warningSink:LayoutResolutionGuard):Void {
-    ((cast state : LayoutState).guard = warningSink);
+    ((cast state : { var guard:Null<LayoutResolutionGuard>; }).guard = warningSink);
   }
 }

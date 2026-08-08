@@ -11,7 +11,7 @@ import flighthq.types.ImageDecoder;
 class ExplainImageDecodeFailure {
   public static function explainImageDecodeFailure(bytes:flighthq._internal._UInt8Array, ?mimeType:String):Null<ImageDecodeFailureExplanation> {
     var type:Null<String> = cast _Runtime.UNDEFINED;
-    type = _Runtime.coalesce(mimeType, function():Dynamic return cast (cast detectImageMimeType((cast bytes : flighthq._internal._Union2<haxe.io.Bytes, flighthq._internal._UInt8Array>)) : Null<String>));
+    type = _Runtime.coalesce(mimeType, function():Dynamic return cast (cast detectImageMimeType((cast bytes)) : Null<String>));
     if ((cast _Runtime.strictEquals(type, null) : Bool)) { return cast { mimeType: null, reason: 'mime-type-undetected' }; }
     if ((cast _Runtime.strictEquals((cast getImageDecoder((cast type : String)) : Null<ImageDecoder>), null) : Bool)) { return cast { mimeType: type, reason: 'decoder-not-registered' }; }
     return cast null;

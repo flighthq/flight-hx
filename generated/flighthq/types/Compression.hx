@@ -7,4 +7,4 @@ import flighthq.types._internal._CompressionValues.CompressionValue;
 
 typedef Decompressor = flighthq._internal._UInt8Array->Float->Null<flighthq._internal._UInt8Array>;
 
-typedef Compression = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef Compression = flighthq._internal._IndexedAccess<Dynamic, String>;

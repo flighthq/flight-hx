@@ -15,7 +15,7 @@ class InterpolateSnapshots {
       return;
     }
     paths = ((cast _Runtime.strictEquals(schema, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [schema]) : Dynamic));
-    InterpolateSnapshots.interpolateSnapshotsInto__interpolateSnapshots((cast (cast out : flighthq._internal._Object) : flighthq._internal._Object), (cast (cast a : flighthq._internal._Object) : flighthq._internal._Object), (cast (cast b : flighthq._internal._Object) : flighthq._internal._Object), (cast (cast clamp((cast t : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float) : Float), (cast paths : Null<flighthq._internal._Set<String>>), (cast '' : String));
+    InterpolateSnapshots.interpolateSnapshotsInto__interpolateSnapshots((cast (cast out : flighthq._internal._Object)), (cast (cast a : flighthq._internal._Object)), (cast (cast b : flighthq._internal._Object)), (cast (cast clamp((cast t : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float) : Float), (cast paths), (cast '' : String));
   }
 
   public static function interpolateSnapshotsInto__interpolateSnapshots(out:flighthq._internal._Object, a:flighthq._internal._Object, b:flighthq._internal._Object, t:Float, paths:Null<flighthq._internal._Set<String>>, prefix:String):Void {
@@ -32,13 +32,13 @@ class InterpolateSnapshots {
       var aValue:flighthq._internal._Any = _Runtime.getIndex(aRecord, key);
       var bValue:flighthq._internal._Any = _Runtime.getIndex(bRecord, key);
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(aValue), 'number') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(bValue), 'number') : Bool)) : Bool)) {
-        _Runtime.setIndex(outRecord, key, ((cast ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast paths : flighthq._internal._Set<String>).has((cast InterpolateSnapshots.snapshotPath__interpolateSnapshots((cast prefix : String), (cast key : String)) : String))) : Bool)) : Bool) ? (cast lerp((cast aValue : Float), (cast bValue : Float), (cast t : Float)) : Dynamic) : (cast bValue : Dynamic)));
+        _Runtime.setIndex(outRecord, key, ((cast ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast paths : flighthq._internal._Set<String>).has((cast InterpolateSnapshots.snapshotPath__interpolateSnapshots((cast prefix : String), (cast key : String)) : String))) : Bool)) : Bool) ? (cast (cast lerp((cast aValue : Float), (cast bValue : Float), (cast t : Float)) : Float) : Dynamic) : (cast bValue : Dynamic)));
         continue;
       }
       if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(aValue, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(aValue), 'object') : Bool)) : Bool) && (cast !_Runtime.strictEquals(bValue, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(bValue), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.isArray(aValue), _Runtime.isArray(bValue)) : Bool)) : Bool)) {
         var container:flighthq._internal._Object = (cast InterpolateSnapshots.ensureSnapshotContainer__interpolateSnapshots((cast _Runtime.getIndex(outRecord, key) : flighthq._internal._Any), (cast _Runtime.isArray(bValue) : Bool)) : flighthq._internal._Object);
         _Runtime.setIndex(outRecord, key, container);
-        InterpolateSnapshots.interpolateSnapshotsInto__interpolateSnapshots((cast container : flighthq._internal._Object), (cast aValue : flighthq._internal._Object), (cast bValue : flighthq._internal._Object), (cast t : Float), (cast paths : Null<flighthq._internal._Set<String>>), (cast ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast (cast InterpolateSnapshots.snapshotPath__interpolateSnapshots((cast prefix : String), (cast key : String)) : String) : Dynamic)) : String));
+        InterpolateSnapshots.interpolateSnapshotsInto__interpolateSnapshots((cast container), (cast aValue), (cast bValue), (cast t : Float), (cast paths), (cast ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast (cast InterpolateSnapshots.snapshotPath__interpolateSnapshots((cast prefix : String), (cast key : String)) : String) : Dynamic)) : String));
         continue;
       }
       _Runtime.setIndex(outRecord, key, InterpolateSnapshots.cloneSnapshotValue__interpolateSnapshots((cast bValue : flighthq._internal._Any)));

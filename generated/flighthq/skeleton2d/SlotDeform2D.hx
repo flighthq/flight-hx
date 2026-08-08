@@ -29,7 +29,7 @@ class SlotDeform2D {
       ((cast existing : Skeleton2DSlotDeform).attachment = attachment);
       return cast existing;
     }
-    record = { attachment: attachment, offsets: new flighthq._internal._Float32Array(offsets) };
+    record = (cast { attachment: attachment, offsets: new flighthq._internal._Float32Array(offsets) });
     ((cast slot : Slot2D).deform = record);
     return cast record;
     return cast null;

@@ -4,6 +4,7 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Entity;
 import flighthq.types.Vector3.Vector3Like;
 import flighthq.types.Vector4;
 import flighthq.types.Vector4.Vector4Like;
@@ -48,7 +49,7 @@ class Vector4 {
   }
 
   public static function cloneVector4(source:Vector4Like):flighthq.types.Vector4 {
-    return cast (cast createVector4((cast _Runtime.field(source, 'x') : Null<Float>), (cast _Runtime.field(source, 'y') : Null<Float>), (cast _Runtime.field(source, 'z') : Null<Float>), (cast _Runtime.field(source, 'w') : Null<Float>)) : flighthq.types.Vector4);
+    return cast (cast createVector4((cast _Runtime.field(source, 'x')), (cast _Runtime.field(source, 'y')), (cast _Runtime.field(source, 'z')), (cast _Runtime.field(source, 'w'))) : flighthq.types.Vector4);
     return cast null;
   }
 
@@ -60,7 +61,7 @@ class Vector4 {
   }
 
   public static function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):flighthq.types.Vector4 {
-    return cast (cast createEntity((cast { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 0.0) } : Null<{ var x:Float; var y:Float; var z:Float; var w:Float; }>)) : flighthq.types.Vector4);
+    return cast (cast createEntity((cast { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 0.0) })) : { >Entity, var x:Float; var y:Float; var z:Float; var w:Float; });
     return cast null;
   }
 
@@ -97,10 +98,10 @@ class Vector4 {
     var la:Float = cast _Runtime.UNDEFINED;
     var lb:Float = cast _Runtime.UNDEFINED;
     var _dot:Float = cast _Runtime.UNDEFINED;
-    la = (cast getVector4Length((cast a : Vector4Like)) : Float);
-    lb = (cast getVector4Length((cast b : Vector4Like)) : Float);
+    la = (cast getVector4Length((cast a)) : Float);
+    lb = (cast getVector4Length((cast b)) : Float);
     if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
-    _dot = ((cast getVector4Dot((cast a : Vector4Like), (cast b : Vector4Like)) : Float) / (la * lb));
+    _dot = ((cast getVector4Dot((cast a), (cast b)) : Float) / (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
@@ -196,7 +197,7 @@ class Vector4 {
 
   public static function normalizeVector4(out:Vector4Like, source:Vector4Like):Float {
     var l:Float = cast _Runtime.UNDEFINED;
-    l = (cast getVector4Length((cast source : Vector4Like)) : Float);
+    l = (cast getVector4Length((cast source)) : Float);
     if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
       _Runtime.setField(out, 'x', _Runtime.divideNumbers(_Runtime.field(source, 'x'), l));
       _Runtime.setField(out, 'y', _Runtime.divideNumbers(_Runtime.field(source, 'y'), l));
@@ -298,11 +299,11 @@ class Vector4 {
     flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 3.0), _Runtime.field(source, 'w'));
   }
 
-  public static final VECTOR4_W_UNIT:flighthq.types.Vector4 = (cast createVector4((cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>)) : flighthq.types.Vector4);
+  public static final VECTOR4_W_UNIT:flighthq.types.Vector4 = (cast createVector4((cast 0.0), (cast 0.0), (cast 0.0), (cast 1.0)) : flighthq.types.Vector4);
 
-  public static final VECTOR4_X_AXIS:flighthq.types.Vector4 = (cast createVector4((cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>)) : flighthq.types.Vector4);
+  public static final VECTOR4_X_AXIS:flighthq.types.Vector4 = (cast createVector4((cast 1.0), (cast 0.0), (cast 0.0), (cast 0.0)) : flighthq.types.Vector4);
 
-  public static final VECTOR4_Y_AXIS:flighthq.types.Vector4 = (cast createVector4((cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>)) : flighthq.types.Vector4);
+  public static final VECTOR4_Y_AXIS:flighthq.types.Vector4 = (cast createVector4((cast 0.0), (cast 1.0), (cast 0.0), (cast 0.0)) : flighthq.types.Vector4);
 
-  public static final VECTOR4_Z_AXIS:flighthq.types.Vector4 = (cast createVector4((cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>), (cast 1.0 : Null<Float>), (cast 0.0 : Null<Float>)) : flighthq.types.Vector4);
+  public static final VECTOR4_Z_AXIS:flighthq.types.Vector4 = (cast createVector4((cast 0.0), (cast 0.0), (cast 1.0), (cast 0.0)) : flighthq.types.Vector4);
 }

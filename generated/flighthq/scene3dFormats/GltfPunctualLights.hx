@@ -8,6 +8,7 @@ import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnost
 import flighthq.lighting.DirectionalLight.createDirectionalLight;
 import flighthq.lighting.PointLight.createPointLight;
 import flighthq.lighting.SpotLight.createSpotLight;
+import flighthq.types.DirectionalLight;
 import flighthq.types.GltfExtension.GltfExtensionContext;
 import flighthq.types.GltfExtension.GltfExtensionHandler;
 import flighthq.types.GltfSchema.GltfDocument;
@@ -17,33 +18,35 @@ import flighthq.types.GltfSchema.GltfPunctualLight;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.Light;
+import flighthq.types.PointLight;
 import flighthq.types.Scene3DDocument;
 import flighthq.types.Scene3DDocument.Scene3DDocumentLight;
+import flighthq.types.SpotLight;
 import flighthq.types.Transform3D;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef LightDropTally__gltfPunctualLights = { var count:Float; var detail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>; var kind:String; var severity:ImportDiagnosticSeverity; };
 
 class GltfPunctualLights {
-  public static final GltfPunctualLightsExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+  public static final GltfPunctualLightsExtensionHandler:GltfExtensionHandler = (cast { apply: function(context:GltfExtensionContext):Void {
     var definitions:Array<GltfPunctualLight> = cast _Runtime.UNDEFINED;
     var nodes:Array<GltfNode> = cast _Runtime.UNDEFINED;
     var lightDrops:Null<flighthq._internal._Map<String, LightDropTally__gltfPunctualLights>> = cast _Runtime.UNDEFINED;
-    definitions = _Runtime.coalesce(_Runtime.optionalField(_Runtime.optionalField(_Runtime.field(context, 'source').extensions, 'KHR_lights_punctual'), 'lights'), function():Dynamic return cast cast ([] : Array<Dynamic>));
-    nodes = _Runtime.coalesce(_Runtime.field(context, 'source').nodes, function():Dynamic return cast cast ([] : Array<Dynamic>));
+    definitions = _Runtime.coalesce(({ final __structural1 = ({ final __structural0 = (cast _Runtime.field(context, 'source') : { @:optional var extensions:Null<GltfDocumentExtensions>; }).extensions; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var KHR_lights_punctual:Null<{ var lights:Array<GltfPunctualLight>; }>; }).KHR_lights_punctual; }); __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var lights:Array<GltfPunctualLight>; }).lights; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    nodes = _Runtime.coalesce((cast _Runtime.field(context, 'source') : { @:optional var nodes:Null<Array<GltfNode>>; }).nodes, function():Dynamic return cast cast ([] : Array<Dynamic>));
     lightDrops = _Runtime.select(_Runtime.field(context, 'diagnostics'), function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), function():Dynamic return cast null);
     {
       var node:Float = 0.0;
       while ((cast ((cast node : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
-        var lightIndex:Null<Float> = _Runtime.optionalField(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(nodes, node).extensions, 'KHR_lights_punctual'), 'light');
+        var lightIndex:Null<Float> = ({ final __structural3 = ({ final __structural2 = (cast flighthq._internal._StaticIndex.readArray(nodes, node) : { @:optional var extensions:Null<{ @:optional var KHR_lights_punctual:Null<{ var light:Float; }>; }>; }).extensions; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var KHR_lights_punctual:Null<{ var light:Float; }>; }).KHR_lights_punctual; }); __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var light:Float; }).light; });
         if ((cast _Runtime.strictEquals(lightIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { node++; continue; }
         var source:GltfPunctualLight = flighthq._internal._StaticIndex.readArray(definitions, lightIndex);
         if ((cast _Runtime.strictEquals(source, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          GltfPunctualLights.tallyLightDrop__gltfPunctualLights(lightDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.light-missing' : String), (cast { firstLight: lightIndex, firstNode: node } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+          GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'gltf.light-missing' : String), (cast { firstLight: lightIndex, firstNode: node }));
           node++;
           continue;
         }
-        var descriptor:Null<Light> = (cast GltfPunctualLights.buildGltfPunctualLight__gltfPunctualLights((cast source : GltfPunctualLight), (cast lightIndex : Float), lightDrops) : Null<Light>);
+        var descriptor:Null<Light> = (cast GltfPunctualLights.buildGltfPunctualLight__gltfPunctualLights((cast source), (cast lightIndex : Float), (cast lightDrops)) : Null<Light>);
         if ((cast _Runtime.strictEquals(descriptor, null) : Bool)) { node++; continue; }
         _Runtime.callProperty((cast _Runtime.field(context, 'document') : Scene3DDocument).lights, 'push', cast ([{ descriptor: descriptor, name: (cast source : GltfPunctualLight).name, node: flighthq._internal._StaticIndex.readArray(_Runtime.field(context, 'nodeIndices'), node), transform: _Runtime.callProperty(context, 'buildNodeTransform', cast ([node] : Array<Dynamic>)) }] : Array<Dynamic>));
         node++;
@@ -51,10 +54,10 @@ class GltfPunctualLights {
     }
     if ((cast !_Runtime.strictEquals(lightDrops, null) : Bool)) {
       for (tally in _Runtime.iterable(((cast lightDrops : flighthq._internal._Map<String, LightDropTally__gltfPunctualLights>).values()))) {
-        reportImportDiagnostic(_Runtime.field(context, 'diagnostics'), (cast (cast tally : LightDropTally__gltfPunctualLights).severity : ImportDiagnosticSeverity), (cast (cast tally : LightDropTally__gltfPunctualLights).kind : String), (cast 'buildGltfPunctualLight' : String), (cast _Runtime.mergeObjects([(cast tally : LightDropTally__gltfPunctualLights).detail, { count: (cast tally : LightDropTally__gltfPunctualLights).count }]) : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+        reportImportDiagnostic((cast _Runtime.field(context, 'diagnostics')), (cast (cast tally : LightDropTally__gltfPunctualLights).severity), (cast (cast tally : LightDropTally__gltfPunctualLights).kind : String), (cast 'buildGltfPunctualLight' : String), (cast _Runtime.mergeObjects([(cast tally : LightDropTally__gltfPunctualLights).detail, { count: (cast tally : LightDropTally__gltfPunctualLights).count }])));
       }
     }
-  }, kind: 'KHR_lights_punctual' };
+  }, kind: 'KHR_lights_punctual' });
 
   public static function buildGltfPunctualLight__gltfPunctualLights(source:GltfPunctualLight, index:Float, lightDrops:Null<flighthq._internal._Map<String, LightDropTally__gltfPunctualLights>>):Null<Light> {
     var color:Array<Float> = cast _Runtime.UNDEFINED;
@@ -62,31 +65,31 @@ class GltfPunctualLights {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var range:Float = cast _Runtime.UNDEFINED;
     color = _Runtime.coalesce(_Runtime.field(source, 'color'), function():Dynamic return cast cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
-    packedColor = (cast packLinearToColor((cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 0.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 1.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 2.0), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>) : Array<Float>)) : Float);
+    packedColor = (cast packLinearToColor((cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 0.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 1.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 2.0), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>))) : Float);
     intensity = _Runtime.coalesce(_Runtime.field(source, 'intensity'), function():Dynamic return cast 1.0);
     if ((cast !(cast _Runtime.compare(intensity, 0.0, '>=') : Bool) : Bool)) {
-      GltfPunctualLights.tallyLightDrop__gltfPunctualLights(lightDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.light-negative-intensity' : String), (cast { firstLight: index } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+      GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'gltf.light-negative-intensity' : String), (cast { firstLight: index }));
       return cast null;
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(source, 'type'), 'directional') : Bool)) {
-      return cast (cast createDirectionalLight({ color: packedColor, direction: { x: 0.0, y: 0.0, z: -1.0 }, intensity: intensity }) : Null<Light>);
+      return cast (cast createDirectionalLight((cast { color: packedColor, direction: { x: 0.0, y: 0.0, z: -1.0 }, intensity: intensity })) : DirectionalLight);
     }
     range = _Runtime.coalesce(_Runtime.field(source, 'range'), function():Dynamic return cast -1.0);
     if ((cast ((cast !_Runtime.strictEquals(range, -1.0) : Bool) && (cast !(cast _Runtime.compare(range, 0.0, '>') : Bool) : Bool)) : Bool)) {
-      GltfPunctualLights.tallyLightDrop__gltfPunctualLights(lightDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.light-non-positive-range' : String), (cast { firstLight: index } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+      GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'gltf.light-non-positive-range' : String), (cast { firstLight: index }));
       return cast null;
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(source, 'type'), 'point') : Bool)) { return cast (cast createPointLight({ color: packedColor, intensity: intensity, range: range }) : Null<Light>); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(source, 'type'), 'point') : Bool)) { return cast (cast createPointLight((cast { color: packedColor, intensity: intensity, range: range })) : PointLight); }
     if ((cast _Runtime.strictEquals(_Runtime.field(source, 'type'), 'spot') : Bool)) {
-      var inner:Float = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(source, 'spot'), 'innerConeAngle'), function():Dynamic return cast 0.0);
-      var outer:Float = _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(source, 'spot'), 'outerConeAngle'), function():Dynamic return cast (HxMath.PI / 4.0));
+      var inner:Float = _Runtime.coalesce(({ final __structural6 = _Runtime.field(source, 'spot'); __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var innerConeAngle:Null<Float>; }).innerConeAngle; }), function():Dynamic return cast 0.0);
+      var outer:Float = _Runtime.coalesce(({ final __structural7 = _Runtime.field(source, 'spot'); __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var outerConeAngle:Null<Float>; }).outerConeAngle; }), function():Dynamic return cast (HxMath.PI / 4.0));
       if ((cast ((cast ((cast !(cast _Runtime.compare(inner, 0.0, '>=') : Bool) : Bool) || (cast !(cast _Runtime.compare(outer, inner, '>') : Bool) : Bool)) : Bool) || (cast ((cast outer : Float) > (cast (HxMath.PI / 2.0) : Float)) : Bool)) : Bool)) {
-        GltfPunctualLights.tallyLightDrop__gltfPunctualLights(lightDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.light-invalid-spot-cone' : String), (cast { firstLight: index } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+        GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'gltf.light-invalid-spot-cone' : String), (cast { firstLight: index }));
         return cast null;
       }
-      return cast (cast createSpotLight({ color: packedColor, direction: { x: 0.0, y: 0.0, z: -1.0 }, innerConeDegrees: ((inner * 180.0) / HxMath.PI), intensity: intensity, outerConeDegrees: ((outer * 180.0) / HxMath.PI), range: range }) : Null<Light>);
+      return cast (cast createSpotLight((cast { color: packedColor, direction: { x: 0.0, y: 0.0, z: -1.0 }, innerConeDegrees: ((inner * 180.0) / HxMath.PI), intensity: intensity, outerConeDegrees: ((outer * 180.0) / HxMath.PI), range: range })) : SpotLight);
     }
-    GltfPunctualLights.tallyLightDrop__gltfPunctualLights(lightDrops, (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'gltf.light-unsupported-type' : String), (cast { firstLight: index, firstType: _Runtime.field(source, 'type') } : flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>));
+    GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'gltf.light-unsupported-type' : String), (cast { firstLight: index, firstType: _Runtime.field(source, 'type') }));
     return cast null;
     return cast null;
   }
@@ -95,6 +98,6 @@ class GltfPunctualLights {
     var existing:Null<LightDropTally__gltfPunctualLights> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(tallies, null) : Bool)) { return; }
     existing = ((cast tallies : flighthq._internal._Map<String, LightDropTally__gltfPunctualLights>).get(kind));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flighthq._internal._Map<String, LightDropTally__gltfPunctualLights>).set(kind, { count: 1.0, detail: firstDetail, kind: kind, severity: severity })); } else { (cast existing : LightDropTally__gltfPunctualLights).count++; }
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flighthq._internal._Map<String, LightDropTally__gltfPunctualLights>).set(kind, (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : LightDropTally__gltfPunctualLights).count++; }
   }
 }

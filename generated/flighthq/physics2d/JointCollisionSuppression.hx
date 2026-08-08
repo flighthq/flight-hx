@@ -30,9 +30,9 @@ class JointCollisionSuppression {
       var seconds:Null<flighthq._internal._Map<Float, Float>> = ((cast suppressions : flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>).get(first));
       if ((cast _Runtime.strictEquals(seconds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (seconds = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-        ((cast suppressions : flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>).set(first, seconds));
+        ((cast suppressions : flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>).set(first, (cast seconds)));
       }
-      ((cast seconds : flighthq._internal._Map<Float, Float>).set(second, _Runtime.addNumbers(_Runtime.coalesce(((cast seconds : flighthq._internal._Map<Float, Float>).get(second)), function():Dynamic return cast 0.0), 1.0)));
+      ((cast seconds : flighthq._internal._Map<Float, Float>).set(second, (cast _Runtime.addNumbers(_Runtime.coalesce(((cast seconds : flighthq._internal._Map<Float, Float>).get(second)), function():Dynamic return cast 0.0), 1.0))));
     }
   }
 }

@@ -12,10 +12,10 @@ import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Renderable;
 import flighthq.types.Sampler;
 import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.SpriteRenderer;
+import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
@@ -50,7 +50,7 @@ class CanvasTilemap {
     tileWidth = _Runtime.field(__destructure0, 'tileWidth');
     tiles = _Runtime.field(__destructure0, 'tiles');
     if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool)) { return; }
-    image = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers((cast state : CanvasRenderState)) : CanvasTextureResolvers), atlas.texture) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
+    image = (cast resolveCanvasTexture((cast (cast getCanvasRenderStateTextureResolvers((cast state)) : CanvasTextureResolvers)), (cast atlas.texture)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast tilemapNode : RenderProxy2D).blendMode] : Array<Dynamic>));
@@ -60,9 +60,9 @@ class CanvasTilemap {
     transform = (cast tilemapNode : RenderProxy2D).transform2D;
     roundPixels = (cast state : CanvasRenderState).roundPixels;
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast tilemapNode : RenderProxy2D).alpha);
-    smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast (cast (cast atlas.texture : Texture2D).sampler.magFilter : { var startsWith:flighthq._internal._Any; }).startsWith('nearest') : Bool) : Bool));
+    smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast (cast (cast (cast atlas.texture : Texture2D).sampler : { var magFilter:TextureFilter; }).magFilter : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'nearest' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) : Bool));
     if ((cast !(cast smoothing : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
-    restoreMaterial = (cast applyCanvasMaterial((cast state : CanvasRenderState), (cast tilemapNode : RenderProxy2D).material) : Bool);
+    restoreMaterial = (cast applyCanvasMaterial((cast state), (cast (cast tilemapNode : RenderProxy2D).material)) : Bool);
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty] : Array<Dynamic>));
     {
       var row:Float = 0.0;
@@ -88,5 +88,5 @@ class CanvasTilemap {
     if ((cast !(cast smoothing : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true); }
   }
 
-  public static final defaultCanvasTilemapRenderer:SpriteRenderer = { createData: noopRendererData, submit: drawCanvasTilemap };
+  public static final defaultCanvasTilemapRenderer:SpriteRenderer = (cast { createData: noopRendererData, submit: drawCanvasTilemap });
 }

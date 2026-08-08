@@ -17,6 +17,7 @@ import flighthq.scene3dGl.GlPbrStandardBlock.buildGlPbrStandardDefineKey;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Camera3D;
 import flighthq.types.ExtendedPbrMaterial;
+import flighthq.types.GlLitProgram;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlMeshProgram;
 import flighthq.types.GlPbrExtensionShaderContribution;
@@ -34,37 +35,37 @@ import flighthq.types.Types.ExtendedPbrMaterialKind;
 import flighthq.types._internal._ExtendedPbrMaterialValues.ExtendedPbrMaterialKind;
 
 class ExtendedPbrGlMeshMaterialRenderer {
-  public static final extendedPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+  public static final extendedPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
     var extended:Null<ExtendedPbrMaterial> = cast _Runtime.UNDEFINED;
     var runtime:GlScene3DRuntime = cast _Runtime.UNDEFINED;
     var extensions:Array<PbrExtension> = cast _Runtime.UNDEFINED;
     var contributions:Null<Array<GlPbrExtensionShaderContribution>> = cast _Runtime.UNDEFINED;
     var program:GlPbrProgram = cast _Runtime.UNDEFINED;
     extended = (cast material : Null<ExtendedPbrMaterial>);
-    runtime = (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime);
-    extensions = _Runtime.coalesce(_Runtime.optionalField(extended, 'extensions'), function():Dynamic return cast cast ([] : Array<Dynamic>));
-    contributions = (cast resolveGlPbrExtensionContributions((cast state : GlRenderState), extensions) : Null<Array<GlPbrExtensionShaderContribution>>);
+    runtime = (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime);
+    extensions = _Runtime.coalesce(({ final __structural0 = extended; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var extensions:Array<PbrExtension>; }).extensions; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    contributions = (cast resolveGlPbrExtensionContributions((cast state), (cast extensions)) : Null<Array<GlPbrExtensionShaderContribution>>);
     if ((cast _Runtime.strictEquals(contributions, null) : Bool)) {
       _Runtime.callOptionalValue((cast runtime : GlScene3DRuntime).pbrExtensionGuard, cast ([extensions] : Array<Dynamic>));
       ((cast runtime : GlScene3DRuntime).activeMeshProgram = null);
       return;
     }
-    program = (cast ensureGlPbrProgram((cast state : GlRenderState), (cast buildGlPbrStandardDefineKey((cast state : GlRenderState), _Runtime.coalesce(_Runtime.optionalField(extended, 'standard'), function():Dynamic return cast null), extended) : GlPbrDefineKey), contributions) : GlPbrProgram);
-    beginGlMeshDraw((cast state : GlRenderState), program, (cast _Runtime.coalesce(_Runtime.optionalField(extended, 'doubleSided'), function():Dynamic return cast false) : Bool));
-    setGlMeshViewProjection((cast state : GlRenderState), (cast (cast program : GlPbrProgram).locViewProjection : Null<flighthq._internal.dom.WebGLUniformLocation>), camera);
-    setGlMeshCameraPosition((cast (cast state : GlRenderState).gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast program : GlPbrProgram).locCameraPosition : Null<flighthq._internal.dom.WebGLUniformLocation>), camera);
-    bindGlMeshLightBlock((cast state : GlRenderState), program, lights);
-    bindGlPbrStandardBlock((cast state : GlRenderState), program, _Runtime.coalesce(_Runtime.optionalField(extended, 'standard'), function():Dynamic return cast null));
-    flighthq._internal.backend.WebGl2Backend.uniform1f((cast state : GlRenderState).gl, (cast program : GlPbrProgram).locAlphaCutoff, _Runtime.coalesce(_Runtime.optionalField(extended, 'alphaCutoff'), function():Dynamic return cast 0.5));
-    (cast bindGlPbrExtensions((cast state : GlRenderState), (cast (cast program : GlPbrProgram).program : flighthq._internal.dom.WebGLProgram), extensions) : Bool);
+    program = (cast ensureGlPbrProgram((cast state), (cast (cast buildGlPbrStandardDefineKey((cast state), (cast _Runtime.coalesce(({ final __structural1 = extended; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var standard:StandardPbrMaterialProperties; }).standard; }), function():Dynamic return cast null)), (cast extended)) : GlPbrDefineKey)), (cast contributions)) : GlPbrProgram);
+    beginGlMeshDraw((cast state), (cast program), (cast _Runtime.coalesce(({ final __structural2 = extended; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var doubleSided:Bool; }).doubleSided; }), function():Dynamic return cast false) : Bool));
+    setGlMeshViewProjection((cast state), (cast (cast program : GlPbrProgram).locViewProjection), (cast camera));
+    setGlMeshCameraPosition((cast (cast state : GlRenderState).gl), (cast (cast program : GlPbrProgram).locCameraPosition), (cast camera));
+    bindGlMeshLightBlock((cast state), (cast program), (cast lights));
+    bindGlPbrStandardBlock((cast state), (cast program), (cast _Runtime.coalesce(({ final __structural3 = extended; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var standard:StandardPbrMaterialProperties; }).standard; }), function():Dynamic return cast null)));
+    flighthq._internal.backend.WebGl2Backend.uniform1f((cast state : GlRenderState).gl, (cast program : GlPbrProgram).locAlphaCutoff, _Runtime.coalesce(({ final __structural4 = extended; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var alphaCutoff:Float; }).alphaCutoff; }), function():Dynamic return cast 0.5));
+    (cast bindGlPbrExtensions((cast state), (cast (cast program : GlPbrProgram).program), (cast extensions)) : Bool);
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset((cast state : GlRenderState), program, proxy, geometry);
-  } };
+    drawGlMeshSubset((cast state), (cast program), (cast proxy), (cast geometry));
+  } });
 
   public static function registerGlExtendedPbrMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer((cast state : GlRenderState), (cast ExtendedPbrMaterialKind : String), (cast extendedPbrGlMeshMaterialRenderer : GlMeshMaterialRenderer));
+    registerGlMeshMaterialRenderer((cast state), (cast ExtendedPbrMaterialKind : String), (cast extendedPbrGlMeshMaterialRenderer));
   }
 }

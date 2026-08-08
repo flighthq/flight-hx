@@ -8,6 +8,7 @@ import flighthq.renderWgpu.WgpuRenderTexture.getWgpuRenderTextureTarget;
 import flighthq.renderWgpu.WgpuRenderTexture.writeWgpuRenderTextureTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderTexture;
+import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -22,12 +23,13 @@ class WgpuRenderTextureEffect {
     if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, scratch) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, scratch) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('applyWgpuRenderEffectsToRenderTexture: source, destination, and scratch must be distinct'));
     }
-    sourceTarget = (cast getWgpuRenderTextureTarget((cast state : WgpuRenderState), (cast source : RenderTexture)) : Null<WgpuRenderTarget>);
+    sourceTarget = (cast getWgpuRenderTextureTarget((cast state), (cast source)) : Null<WgpuRenderTarget>);
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
-    operations = _Runtime.callProperty(effects, 'flatMap', cast ([function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):Array<{ var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }> {
+    operations = _Runtime.callProperty(effects, 'flatMap', cast ([function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flighthq._internal._Union2<{ var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }>> {
       var runner:Null<WgpuRenderEffectRunner> = cast _Runtime.UNDEFINED;
-      runner = (cast getWgpuRenderEffectRunner((cast state : WgpuRenderState), (cast _Runtime.field(effect, 'kind') : String)) : Null<WgpuRenderEffectRunner>);
+      runner = (cast getWgpuRenderEffectRunner((cast state), (cast _Runtime.field(effect, 'kind') : String)) : Null<WgpuRenderEffectRunner>);
       return cast ((cast _Runtime.strictEquals(runner, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([{ effect: effect, runner: runner }] : Array<Dynamic>) : Dynamic));
+      return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(operations, 'length'), 0.0) : Bool)) { return cast false; }
     current = sourceTarget;
@@ -37,10 +39,10 @@ class WgpuRenderTextureEffect {
         var operation:{ var effect:RenderEffect; var runner:WgpuRenderEffectRunner; } = flighthq._internal._StaticIndex.readArray(operations, index);
         var remaining:Float = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
         var output:RenderTexture = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
-        writeWgpuRenderTextureTarget((cast state : WgpuRenderState), (cast output : RenderTexture), function(target:WgpuRenderTarget):Void {
-          (cast operation : { var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }).runner({ state: state, source: current, dest: target, pool: (cast pool : WgpuRenderTexturePool).effectTargets, sceneDepthTexture: null, sceneVelocityTexture: null }, (cast operation : { var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }).effect);
-        });
-        (current = cast ((cast getWgpuRenderTextureTarget((cast state : WgpuRenderState), (cast output : RenderTexture)) : WgpuRenderTarget) : Dynamic));
+        writeWgpuRenderTextureTarget((cast state), (cast output), (cast function(target:WgpuRenderTarget):Void {
+          (cast operation : { var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }).runner((cast { state: state, source: current, dest: target, pool: (cast pool : WgpuRenderTexturePool).effectTargets, sceneDepthTexture: null, sceneVelocityTexture: null }), (cast (cast operation : { var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }).effect));
+        }));
+        (current = cast ((cast getWgpuRenderTextureTarget((cast state), (cast output)) : Null<WgpuRenderTarget>) : Dynamic));
         index++;
       }
     }

@@ -17,6 +17,7 @@ import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.MeshGeometry.VertexFormat;
 import flighthq.types.MeshGeometry.VertexSemantic;
 import flighthq.types.MeshGeometryFromAttributesOptions;
+import flighthq.types.MeshGeometryOptions;
 import flighthq.types.MeshTriangleVertexIndices;
 
 class MeshGeometryOperations {
@@ -79,23 +80,23 @@ class MeshGeometryOperations {
         (indexArray = cast (a : Dynamic));
       }
     }
-    geometry = (cast createMeshGeometry({ indices: indexArray, layout: CANONICAL_MESH_GEOMETRY_LAYOUT, vertices: vertices }) : MeshGeometry);
+    geometry = (cast createMeshGeometry((cast { indices: indexArray, layout: CANONICAL_MESH_GEOMETRY_LAYOUT, vertices: vertices })) : MeshGeometry);
     if ((cast !_Runtime.truthy(normals) : Bool)) {
-      computeMeshGeometryNormals((cast geometry : MeshGeometry), (cast geometry : MeshGeometry));
+      computeMeshGeometryNormals((cast geometry), (cast geometry));
     }
-    computeMeshGeometryTangents((cast geometry : MeshGeometry), (cast geometry : MeshGeometry));
-    refreshMeshGeometryBounds((cast geometry : MeshGeometry));
+    computeMeshGeometryTangents((cast geometry), (cast geometry));
+    refreshMeshGeometryBounds((cast geometry));
     return cast geometry;
     return cast null;
   }
 
   public static function getMeshGeometryTriangleCount(geometry:MeshGeometry):Float {
     if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool)) {
-      var indexCount:Float = _Runtime.select(geometry.indices, function():Dynamic return cast (cast geometry.indices : { var length:Float; }).length, function():Dynamic return cast (cast getMeshGeometryVertexCount((cast geometry : MeshGeometry)) : Float));
+      var indexCount:Float = _Runtime.select(geometry.indices, function():Dynamic return cast (cast geometry.indices : { var length:Float; }).length, function():Dynamic return cast (cast getMeshGeometryVertexCount((cast geometry)) : Float));
       return cast HxMath.floor((indexCount / 3.0));
     }
     if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-strip') : Bool)) {
-      var indexCount:Float = _Runtime.select(geometry.indices, function():Dynamic return cast (cast geometry.indices : { var length:Float; }).length, function():Dynamic return cast (cast getMeshGeometryVertexCount((cast geometry : MeshGeometry)) : Float));
+      var indexCount:Float = _Runtime.select(geometry.indices, function():Dynamic return cast (cast geometry.indices : { var length:Float; }).length, function():Dynamic return cast (cast getMeshGeometryVertexCount((cast geometry)) : Float));
       return cast ((cast ((cast indexCount : Float) >= (cast 3.0 : Float)) : Bool) ? (cast (indexCount - 2.0) : Dynamic) : (cast 0.0 : Dynamic));
     }
     return cast 0.0;
@@ -107,7 +108,7 @@ class MeshGeometryOperations {
     var element1:Float = cast _Runtime.UNDEFINED;
     var element2:Float = cast _Runtime.UNDEFINED;
     var indices:Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>> = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast triangleIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast triangleIndex : Float) >= (cast (cast getMeshGeometryTriangleCount((cast geometry : MeshGeometry)) : Float) : Float)) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast ((cast triangleIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast triangleIndex : Float) >= (cast (cast getMeshGeometryTriangleCount((cast geometry)) : Float) : Float)) : Bool)) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool)) {
       (element0 = cast ((triangleIndex * 3.0) : Dynamic));
       (element1 = cast ((element0 + 1.0) : Dynamic));
@@ -153,7 +154,7 @@ class MeshGeometryOperations {
     {
       var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(geometries, 'length') : Float)) : Bool)) {
-        if ((cast !(cast (cast MeshGeometryOperations.layoutsMatch__meshGeometryOperations((cast layout : VertexAttributeLayout), (cast flighthq._internal._StaticIndex.readArray(geometries, i).layout : VertexAttributeLayout)) : Bool) : Bool) : Bool)) { return cast null; }
+        if ((cast !(cast (cast MeshGeometryOperations.layoutsMatch__meshGeometryOperations((cast layout), (cast (cast flighthq._internal._StaticIndex.readArray(geometries, i) : { var layout:VertexAttributeLayout; }).layout)) : Bool) : Bool) : Bool)) { return cast null; }
         i++;
       }
     }
@@ -174,7 +175,7 @@ class MeshGeometryOperations {
     mergedVertices = new flighthq._internal._Float32Array(totalVertexFloats);
     needsUint32 = ((cast (totalVertexFloats / floatsPerVertex) : Float) > (cast MeshGeometryOperations.UINT16_INDEX_CEILING__meshGeometryOperations : Float));
     mergedIndices = ((cast ((cast allIndexed : Bool) || (cast ((cast totalIndexCount : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast ((cast needsUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(totalIndexCount) : Dynamic) : (cast new flighthq._internal._UInt16Array(totalIndexCount) : Dynamic)) : Dynamic) : (cast null : Dynamic));
-    mergedSubsets = cast ([] : Array<Dynamic>);
+    mergedSubsets = (cast cast ([] : Array<Dynamic>));
     vertexOffset = 0.0;
     indexOffset = 0.0;
     vertexFloatOffset = 0.0;
@@ -202,8 +203,8 @@ class MeshGeometryOperations {
     if ((cast _Runtime.strictEquals(_Runtime.field(mergedSubsets, 'length'), 0.0) : Bool)) {
       _Runtime.callProperty(mergedSubsets, 'push', cast ([{ indexCount: _Runtime.select(mergedIndices, function():Dynamic return cast (cast mergedIndices : { var length:Float; }).length, function():Dynamic return cast (totalVertexFloats / floatsPerVertex)), indexOffset: 0.0 }] : Array<Dynamic>));
     }
-    merged = (cast createMeshGeometry({ indices: _Runtime.coalesce(mergedIndices, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: layout, subsets: mergedSubsets, topology: reference.topology, vertices: mergedVertices }) : MeshGeometry);
-    refreshMeshGeometryBounds((cast merged : MeshGeometry));
+    merged = (cast createMeshGeometry((cast { indices: _Runtime.coalesce(mergedIndices, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: layout, subsets: mergedSubsets, topology: reference.topology, vertices: mergedVertices })) : MeshGeometry);
+    refreshMeshGeometryBounds((cast merged));
     return cast merged;
     return cast null;
   }
@@ -212,7 +213,7 @@ class MeshGeometryOperations {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var posOffset:Float = cast _Runtime.UNDEFINED;
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     if ((cast ((cast floatsPerVertex : Float) <= (cast 0.0 : Float)) : Bool)) { return cast false; }
     if ((cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex), 0.0) : Bool)) { return cast false; }
     vertexCount = HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex));
@@ -228,9 +229,9 @@ class MeshGeometryOperations {
     posOffset = -1.0;
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(geometry.layout.attributes, 'length') : Float)) : Bool)) {
-        var attr:VertexAttribute = flighthq._internal._StaticIndex.readArray(geometry.layout.attributes, i);
-        if ((cast ((cast _Runtime.strictEquals(attr.semantic, 'position') : Bool) && (cast (cast attr.format : { var startsWith:flighthq._internal._Any; }).startsWith('float32') : Bool)) : Bool)) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field((cast geometry.layout : { var attributes:Array<VertexAttribute>; }).attributes, 'length') : Float)) : Bool)) {
+        var attr:VertexAttribute = flighthq._internal._StaticIndex.readArray((cast geometry.layout : { var attributes:Array<VertexAttribute>; }).attributes, i);
+        if ((cast ((cast _Runtime.strictEquals(attr.semantic, 'position') : Bool) && (cast (cast attr.format : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'float32' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool)) : Bool)) {
           (posOffset = cast ((attr.byteOffset / 4.0) : Dynamic));
           break;
         }

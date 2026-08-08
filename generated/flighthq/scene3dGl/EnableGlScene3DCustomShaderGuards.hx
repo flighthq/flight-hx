@@ -12,13 +12,13 @@ import flighthq.types.Log.LogLevel;
 class EnableGlScene3DCustomShaderGuards {
   @:noCompletion
   public static function areGlScene3DCustomShaderGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).customShaderGuard, null);
+    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).customShaderGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableGlScene3DCustomShaderGuards(state:GlRenderState):Void {
-    ((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).customShaderGuard = EnableGlScene3DCustomShaderGuards.warnGlCustomShaderUniformTypes__enableGlScene3DCustomShaderGuards);
+    ((cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : { @:optional var customShaderGuard:Null<GlRenderState->flighthq._internal.dom.WebGLProgram->String->Void>; }).customShaderGuard = (cast EnableGlScene3DCustomShaderGuards.warnGlCustomShaderUniformTypes__enableGlScene3DCustomShaderGuards));
   }
 
   public static function glUniformTypeName__enableGlScene3DCustomShaderGuards(gl:flighthq._internal.dom.WebGL2RenderingContext, type:Float):String {
@@ -68,7 +68,7 @@ class EnableGlScene3DCustomShaderGuards {
         if ((cast _Runtime.strictEquals(info, null) : Bool)) { i++; continue; }
         var want:Null<Float> = ((cast expected : flighthq._internal._Map<String, Float>).get((cast info : flighthq._internal.dom.WebGLActiveInfo).name));
         if ((cast ((cast _Runtime.strictEquals(want, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast info : flighthq._internal.dom.WebGLActiveInfo).type, want) : Bool)) : Bool)) { i++; continue; }
-        (cast logOnce((cast 'scene-gl:custom-shader-uniform-type:' + Std.string(shaderKey) + ':' + Std.string((cast info : flighthq._internal.dom.WebGLActiveInfo).name) + '' : String), (cast LogLevel.Warn : LogLevel), { message: 'customShaderGlMeshMaterialRenderer: shader "' + Std.string(shaderKey) + '" declares ' + Std.string((cast info : flighthq._internal.dom.WebGLActiveInfo).name) + ' as ' + Std.string((cast EnableGlScene3DCustomShaderGuards.glUniformTypeName__enableGlScene3DCustomShaderGuards((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast info : flighthq._internal.dom.WebGLActiveInfo).type : Float)) : String)) + ' but the renderer uploads it as ' + Std.string((cast EnableGlScene3DCustomShaderGuards.glUniformTypeName__enableGlScene3DCustomShaderGuards((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast want : Float)) : String)) + ' — the mismatched upload raises a silent GL_INVALID_OPERATION and the draw is dropped. Declare \'' + Std.string((cast EnableGlScene3DCustomShaderGuards.glUniformTypeName__enableGlScene3DCustomShaderGuards((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast want : Float)) : String)) + ' ' + Std.string((cast info : flighthq._internal.dom.WebGLActiveInfo).name) + '\' in the shader.' }, (cast 'scene-gl' : Null<String>)) : Bool);
+        (cast logOnce((cast 'scene-gl:custom-shader-uniform-type:' + Std.string(shaderKey) + ':' + Std.string((cast info : flighthq._internal.dom.WebGLActiveInfo).name) + '' : String), (cast LogLevel.Warn), (cast { message: 'customShaderGlMeshMaterialRenderer: shader "' + Std.string(shaderKey) + '" declares ' + Std.string((cast info : flighthq._internal.dom.WebGLActiveInfo).name) + ' as ' + Std.string((cast EnableGlScene3DCustomShaderGuards.glUniformTypeName__enableGlScene3DCustomShaderGuards((cast gl), (cast (cast info : flighthq._internal.dom.WebGLActiveInfo).type : Float)) : String)) + ' but the renderer uploads it as ' + Std.string((cast EnableGlScene3DCustomShaderGuards.glUniformTypeName__enableGlScene3DCustomShaderGuards((cast gl), (cast want : Float)) : String)) + ' — the mismatched upload raises a silent GL_INVALID_OPERATION and the draw is dropped. Declare \'' + Std.string((cast EnableGlScene3DCustomShaderGuards.glUniformTypeName__enableGlScene3DCustomShaderGuards((cast gl), (cast want : Float)) : String)) + ' ' + Std.string((cast info : flighthq._internal.dom.WebGLActiveInfo).name) + '\' in the shader.' }), (cast 'scene-gl')) : Bool);
         i++;
       }
     }

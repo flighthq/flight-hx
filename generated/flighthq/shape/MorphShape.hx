@@ -16,10 +16,11 @@ import flighthq.types.MorphShape.MorphShapeData;
 import flighthq.types.MorphShape.MorphShapePaintBinding;
 import flighthq.types.MorphShape.MorphShapePathBinding;
 import flighthq.types.MorphShape.MorphShapeRuntime;
-import flighthq.types.Node2D.Node2DData;
+import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
 import flighthq.types.Path;
 import flighthq.types.PathMorph;
+import flighthq.types.Shape;
 import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
 import flighthq.types.Types.MorphShapeKind;
@@ -32,33 +33,33 @@ class MorphShape {
     var path:Path = cast _Runtime.UNDEFINED;
     binding = _Runtime.find((cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).pathBindings, function(candidate:MorphShapePathBinding, __unused0:Float, __unused1:Array<MorphShapePathBinding>):Bool return _Runtime.strictEquals((cast candidate : MorphShapePathBinding).morph, morph));
     if ((cast _Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var path:Path = (cast createPath(_Runtime.field(morph, 'winding')) : Path);
-      samplePathMorph((cast path : Path), (cast morph : PathMorph), (cast (cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).progress : Float));
+      var path:Path = (cast createPath((cast _Runtime.field(morph, 'winding'))) : Path);
+      samplePathMorph((cast path), (cast morph), (cast (cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).progress : Float));
       (binding = cast ({ morph: morph, path: path } : Dynamic));
       _Runtime.callProperty((cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).pathBindings, 'push', cast ([binding] : Array<Dynamic>));
     }
     path = (cast binding : MorphShapePathBinding).path;
-    appendShapePath(shape, (cast (cast path : Path).commands : Array<Float>), (cast (cast path : Path).data : Array<Float>), (cast path : Path).winding);
+    appendShapePath((cast shape), (cast (cast path : Path).commands), (cast (cast path : Path).data), (cast (cast path : Path).winding));
     return cast path;
     return cast null;
   }
 
   public static function createMorphShape(morph:PathMorph, ?obj:PartialNode<flighthq.types.MorphShape>):flighthq.types.MorphShape {
-    return cast (cast (cast createNode2D((cast MorphShapeKind : String), obj, function(data:Null<flighthq._internal._Any>):MorphShapeData return (cast createMorphShapeData((cast morph : PathMorph), (cast data : Null<flighthq._internal._Any>)) : Node2DData), function(__unused2:Dynamic):MorphShapeRuntime return createMorphShapeRuntime()) : flighthq.types.MorphShape) : flighthq.types.MorphShape);
+    return cast (cast createNode2D((cast MorphShapeKind : String), (cast obj), (cast function(data:Null<flighthq._internal._Any>):MorphShapeData return (cast createMorphShapeData((cast morph), (cast data)) : MorphShapeData)), (cast function(__unused2:Null<flighthq._internal._Any>):MorphShapeRuntime return createMorphShapeRuntime())) : flighthq.types.MorphShape);
     return cast null;
   }
 
   @:noCompletion
-  public static function createMorphShapeData(morph:PathMorph, ?data:Dynamic):MorphShapeData {
+  public static function createMorphShapeData(morph:PathMorph, ?data:flighthq._internal._Partial<MorphShapeData>):MorphShapeData {
     var progress:Float = cast _Runtime.UNDEFINED;
     var path:Path = cast _Runtime.UNDEFINED;
     var pathBindings:Array<{ var morph:PathMorph; var path:Path; }> = cast _Runtime.UNDEFINED;
     var inputPathBindings:Array<MorphShapePathBinding> = cast _Runtime.UNDEFINED;
     var out:MorphShapeData = cast _Runtime.UNDEFINED;
-    progress = _Runtime.coalesce(_Runtime.optionalField(data, 'progress'), function():Dynamic return cast 0.0);
-    path = _Runtime.coalesce(_Runtime.optionalField(data, 'path'), function():Dynamic return cast (cast createPath(_Runtime.field(morph, 'winding')) : Null<Path>));
-    pathBindings = cast ([{ morph: morph, path: path }] : Array<Dynamic>);
-    inputPathBindings = _Runtime.coalesce(_Runtime.optionalField(data, 'pathBindings'), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    progress = _Runtime.coalesce(({ final __structural0 = data; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var progress:Null<Float>; }).progress; }), function():Dynamic return cast 0.0);
+    path = _Runtime.coalesce(({ final __structural1 = data; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var path:Null<Path>; }).path; }), function():Dynamic return cast (cast createPath((cast _Runtime.field(morph, 'winding'))) : Path));
+    pathBindings = (cast cast ([{ morph: morph, path: path }] : Array<Dynamic>));
+    inputPathBindings = _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var pathBindings:Null<Array<MorphShapePathBinding>>; }).pathBindings; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(inputPathBindings, 'length') : Float)) : Bool)) {
@@ -70,25 +71,25 @@ class MorphShape {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(pathBindings, 'length') : Float)) : Bool)) {
-        samplePathMorph((cast (cast flighthq._internal._StaticIndex.readArray(pathBindings, i) : { var morph:PathMorph; var path:Path; }).path : Path), (cast (cast flighthq._internal._StaticIndex.readArray(pathBindings, i) : { var morph:PathMorph; var path:Path; }).morph : PathMorph), (cast progress : Float));
+        samplePathMorph((cast (cast flighthq._internal._StaticIndex.readArray(pathBindings, i) : { var morph:PathMorph; var path:Path; }).path), (cast (cast flighthq._internal._StaticIndex.readArray(pathBindings, i) : { var morph:PathMorph; var path:Path; }).morph), (cast progress : Float));
         i++;
       }
     }
-    out = { commands: _Runtime.coalesce(_Runtime.optionalField(data, 'commands'), function():Dynamic return cast cast ([] : Array<Dynamic>)), morph: morph, paintBindings: _Runtime.concatArrays([_Runtime.toArray(_Runtime.coalesce(_Runtime.optionalField(data, 'paintBindings'), function():Dynamic return cast cast ([] : Array<Dynamic>)))]), path: path, pathBindings: pathBindings, progress: progress };
-    sampleMorphShapePaintBindings((cast out : MorphShapeData), (cast progress : Float));
+    out = (cast { commands: _Runtime.coalesce(({ final __structural3 = data; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), morph: morph, paintBindings: _Runtime.concatArrays([_Runtime.toArray(_Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var paintBindings:Null<Array<MorphShapePaintBinding>>; }).paintBindings; }), function():Dynamic return cast cast ([] : Array<Dynamic>)))]), path: path, pathBindings: pathBindings, progress: progress });
+    sampleMorphShapePaintBindings((cast out), (cast progress : Float));
     return cast out;
     return cast null;
   }
 
   @:noCompletion
   public static function createMorphShapeRuntime():MorphShapeRuntime {
-    return cast (cast (cast createShapeRuntime() : MorphShapeRuntime) : MorphShapeRuntime);
+    return cast (cast createShapeRuntime() : MorphShapeRuntime);
     return cast null;
   }
 
   @:noCompletion
   public static function getMorphShapeRuntime(source:flighthq.types.MorphShape):MorphShapeRuntime {
-    return cast (cast (cast getNode2DRuntime(source) : MorphShapeRuntime) : MorphShapeRuntime);
+    return cast (cast getNode2DRuntime((cast source)) : MorphShapeRuntime);
     return cast null;
   }
 
@@ -99,11 +100,11 @@ class MorphShape {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).pathBindings, 'length') : Float)) : Bool)) {
         var binding:MorphShapePathBinding = flighthq._internal._StaticIndex.readArray((cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).pathBindings, i);
-        samplePathMorph((cast (cast binding : MorphShapePathBinding).path : Path), (cast (cast binding : MorphShapePathBinding).morph : PathMorph), (cast progress : Float));
+        samplePathMorph((cast (cast binding : MorphShapePathBinding).path), (cast (cast binding : MorphShapePathBinding).morph), (cast progress : Float));
         i++;
       }
     }
-    sampleMorphShapePaintBindings((cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData), (cast progress : Float));
-    invalidateContent(shape);
+    sampleMorphShapePaintBindings((cast (cast shape : flighthq.types.MorphShape).data), (cast progress : Float));
+    invalidateContent((cast shape));
   }
 }

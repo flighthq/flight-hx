@@ -4,6 +4,7 @@ package flighthq.effectsWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuEffectPipeline;
+import flighthq.types.WgpuEffectBlendMode;
 import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 
@@ -16,12 +17,12 @@ class WgpuEffectProgramCache {
     cache = ((cast WgpuEffectProgramCache._pipelines__wgpuEffectProgramCache : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuEffectPipeline>>).get(state));
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast WgpuEffectProgramCache._pipelines__wgpuEffectProgramCache : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuEffectPipeline>>).set(state, cache));
+      ((cast WgpuEffectProgramCache._pipelines__wgpuEffectProgramCache : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuEffectPipeline>>).set(state, (cast cache)));
     }
     existing = ((cast cache : flighthq._internal._Map<String, WgpuEffectPipeline>).get(key));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
-    compiled = (cast createWgpuEffectPipeline((cast state : WgpuRenderState), (cast fragmentWGSL : String), blend) : WgpuEffectPipeline);
-    ((cast cache : flighthq._internal._Map<String, WgpuEffectPipeline>).set(key, compiled));
+    compiled = (cast createWgpuEffectPipeline((cast state), (cast fragmentWGSL : String), (cast blend)) : WgpuEffectPipeline);
+    ((cast cache : flighthq._internal._Map<String, WgpuEffectPipeline>).set(key, (cast compiled)));
     return cast compiled;
     return cast null;
   }

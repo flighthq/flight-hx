@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef CrtEffect = { var kind:Kind; @:optional var curvature:Float; @:optional var scanlineIntensity:Float; @:optional var vignette:Float; @:optional var aberration:Float; };
+typedef CrtEffect = { var kind:String; @:optional var curvature:Float; @:optional var scanlineIntensity:Float; @:optional var vignette:Float; @:optional var aberration:Float; };

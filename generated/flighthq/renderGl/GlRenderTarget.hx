@@ -21,6 +21,8 @@ import flighthq.types.GlRenderState.GlViewportRect;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlShaderLocations;
 import flighthq.types.Matrix;
+import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderTarget.RenderTargetAxes;
 import flighthq.types.RenderTarget.RenderTargetAxisDifference;
@@ -39,13 +41,13 @@ class GlRenderTarget {
     var requested:ResolvedRenderTargetDescriptor = cast _Runtime.UNDEFINED;
     var effective:Null<RenderTargetAxes> = cast _Runtime.UNDEFINED;
     var target:flighthq.types.GlRenderTarget = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
-    requested = (cast resolveRenderTargetDescriptor((cast descriptor : RenderTargetDescriptor)) : ResolvedRenderTargetDescriptor);
-    effective = (cast GlRenderTarget.resolveEffectiveGlRenderTargetAxes__glRenderTarget((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast requested : ResolvedRenderTargetDescriptor), (cast formatPolicy : RenderTargetFormatPolicy)) : Null<RenderTargetAxes>);
+    requested = (cast resolveRenderTargetDescriptor((cast descriptor)) : ResolvedRenderTargetDescriptor);
+    effective = (cast GlRenderTarget.resolveEffectiveGlRenderTargetAxes__glRenderTarget((cast gl), (cast requested), (cast formatPolicy)) : Null<RenderTargetAxes>);
     if ((cast _Runtime.strictEquals(effective, null) : Bool)) { return cast null; }
-    target = { requestedAxes: (cast GlRenderTarget.copyRenderTargetAxes__glRenderTarget((cast requested : RenderTargetAxes)) : RenderTargetAxes), width: (cast effective : RenderTargetAxes).width, height: (cast effective : RenderTargetAxes).height, format: (cast effective : RenderTargetAxes).format, colorAttachments: (cast effective : RenderTargetAxes).colorAttachments, colorFormats: _Runtime.concatArrays([_Runtime.toArray((cast effective : RenderTargetAxes).colorFormats)]), depth: (cast effective : RenderTargetAxes).depth, colorSpace: (cast effective : RenderTargetAxes).colorSpace, clearColors: _Runtime.concatArrays([_Runtime.toArray((cast requested : ResolvedRenderTargetDescriptor).clearColors)]), clearDepth: (cast requested : ResolvedRenderTargetDescriptor).clearDepth, sampleCount: (cast effective : RenderTargetAxes).sampleCount, framebuffer: flighthq._internal.backend.WebGl2Backend.createFramebuffer(gl), resolveFramebuffer: null, textures: cast ([] : Array<Dynamic>), texture: (cast (cast null : flighthq._internal._Any) : flighthq._internal.dom.WebGLTexture), depthTexture: null, colorRenderbuffers: cast ([] : Array<Dynamic>), depthStencilRenderbuffer: null };
-    GlRenderTarget.allocateGlRenderTargetStorage__glRenderTarget((cast state : GlRenderState), (cast target : flighthq.types.GlRenderTarget));
+    target = (cast { requestedAxes: (cast GlRenderTarget.copyRenderTargetAxes__glRenderTarget((cast requested)) : RenderTargetAxes), width: (cast effective : RenderTargetAxes).width, height: (cast effective : RenderTargetAxes).height, format: (cast effective : RenderTargetAxes).format, colorAttachments: (cast effective : RenderTargetAxes).colorAttachments, colorFormats: _Runtime.concatArrays([_Runtime.toArray((cast effective : RenderTargetAxes).colorFormats)]), depth: (cast effective : RenderTargetAxes).depth, colorSpace: (cast effective : RenderTargetAxes).colorSpace, clearColors: _Runtime.concatArrays([_Runtime.toArray((cast requested : ResolvedRenderTargetDescriptor).clearColors)]), clearDepth: (cast requested : ResolvedRenderTargetDescriptor).clearDepth, sampleCount: (cast effective : RenderTargetAxes).sampleCount, framebuffer: flighthq._internal.backend.WebGl2Backend.createFramebuffer(gl), resolveFramebuffer: null, textures: cast ([] : Array<Dynamic>), texture: (cast (cast null : flighthq._internal._Any) : flighthq._internal.dom.WebGLTexture), depthTexture: null, colorRenderbuffers: cast ([] : Array<Dynamic>), depthStencilRenderbuffer: null });
+    GlRenderTarget.allocateGlRenderTargetStorage__glRenderTarget((cast state), (cast target));
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), (cast runtime : GlRenderStateRuntime).currentFramebuffer);
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), null);
     ((cast runtime : GlRenderStateRuntime).currentTexture = null);
@@ -56,7 +58,7 @@ class GlRenderTarget {
   @:noCompletion
   public static function declareGlRenderTargetColorSpace(state:GlRenderState, colorSpace:RenderTargetColorSpace):Bool {
     var target:Null<flighthq.types.GlRenderTarget> = cast _Runtime.UNDEFINED;
-    target = (cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).currentRenderTarget;
+    target = (cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).currentRenderTarget;
     if ((cast _Runtime.looseEquals(target, null) : Bool)) { return cast false; }
     ((cast target : flighthq.types.GlRenderTarget).colorSpace = colorSpace);
     ((cast target : flighthq.types.GlRenderTarget).requestedAxes = _Runtime.mergeObjects([(cast target : flighthq.types.GlRenderTarget).requestedAxes, { colorSpace: colorSpace }]));
@@ -89,8 +91,8 @@ class GlRenderTarget {
     var matrixArray:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var quadTransform:Matrix = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast _Runtime.field(target, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(target, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
-    useGlProgram((cast state : GlRenderState), _Runtime.field(_Runtime, 'UNDEFINED'));
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
+    useGlProgram((cast state), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     _Runtime.callOptionalValue((cast state : GlRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
     gl = (cast state : GlRenderState).gl;
     __destructure0 = runtime;
@@ -99,25 +101,25 @@ class GlRenderTarget {
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), _Runtime.field(target, 'texture'));
     ((cast runtime : GlRenderStateRuntime).currentTexture = _Runtime.field(target, 'texture'));
     quadTransform = (cast acquireMatrix() : Matrix);
-    multiplyMatrix(quadTransform, (cast renderProxy : RenderProxy2D).transform2D, transform);
-    setGlAttributes((cast gl : flighthq._internal.dom.WebGL2RenderingContext), shaderLoc);
-    setGlMatrixFromTransform((cast gl : flighthq._internal.dom.WebGL2RenderingContext), shaderLoc, (cast matrixArray : flighthq._internal._Float32Array), (cast quadTransform : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }), (cast _Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas) : { var width:Float; var height:Float; }));
-    setGlBaseUniforms((cast gl : flighthq._internal.dom.WebGL2RenderingContext), shaderLoc, renderProxy);
-    releaseMatrix((cast quadTransform : Matrix));
-    drawGlQuad((cast state : GlRenderState), (cast 0.0 : Float), (cast 0.0 : Float), (cast _Runtime.field(target, 'width') : Float), (cast _Runtime.field(target, 'height') : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float));
+    multiplyMatrix((cast quadTransform), (cast (cast renderProxy : RenderProxy2D).transform2D), (cast transform));
+    setGlAttributes((cast gl), (cast shaderLoc));
+    setGlMatrixFromTransform((cast gl), (cast shaderLoc), (cast matrixArray), (cast quadTransform), (cast _Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas)));
+    setGlBaseUniforms((cast gl), (cast shaderLoc), (cast renderProxy));
+    releaseMatrix((cast quadTransform));
+    drawGlQuad((cast state), (cast 0.0 : Float), (cast 0.0 : Float), (cast _Runtime.field(target, 'width') : Float), (cast _Runtime.field(target, 'height') : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float));
   }
 
   public static function explainGlRenderTarget(target:flighthq.types.GlRenderTarget):RenderTargetExplanation {
     var requested:RenderTargetAxes = cast _Runtime.UNDEFINED;
     var effective:RenderTargetAxes = cast _Runtime.UNDEFINED;
-    requested = (cast GlRenderTarget.copyRenderTargetAxes__glRenderTarget((cast _Runtime.field(target, 'requestedAxes') : RenderTargetAxes)) : RenderTargetAxes);
-    effective = (cast GlRenderTarget.getGlRenderTargetAxes__glRenderTarget((cast target : flighthq.types.GlRenderTarget)) : RenderTargetAxes);
-    return cast { differences: (cast explainRenderTargetAxes((cast requested : RenderTargetAxes), (cast effective : RenderTargetAxes)) : Array<RenderTargetAxisDifference>), effective: effective, requested: requested };
+    requested = (cast GlRenderTarget.copyRenderTargetAxes__glRenderTarget((cast _Runtime.field(target, 'requestedAxes'))) : RenderTargetAxes);
+    effective = (cast GlRenderTarget.getGlRenderTargetAxes__glRenderTarget((cast target)) : RenderTargetAxes);
+    return cast { differences: (cast explainRenderTargetAxes((cast requested), (cast effective)) : Array<RenderTargetAxisDifference>), effective: effective, requested: requested };
     return cast null;
   }
 
   public static function isGlRenderTargetFormatSupported(state:GlRenderState, format:RenderTargetFormat):Bool {
-    return cast (cast GlRenderTarget.isGlRenderTargetFormatSupportedByContext__glRenderTarget((cast (cast state : GlRenderState).gl : flighthq._internal.dom.WebGL2RenderingContext), (cast format : RenderTargetFormat)) : Bool);
+    return cast (cast GlRenderTarget.isGlRenderTargetFormatSupportedByContext__glRenderTarget((cast (cast state : GlRenderState).gl), (cast format)) : Bool);
     return cast null;
   }
 
@@ -127,8 +129,8 @@ class GlRenderTarget {
     var effective:RenderTargetAxes = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    requested = (cast resolveRenderTargetDescriptor((cast _Runtime.mergeObjects([(cast target : flighthq.types.GlRenderTarget).requestedAxes, { width: width }, { height: height }, { clearColors: (cast target : flighthq.types.GlRenderTarget).clearColors }, { clearDepth: (cast target : flighthq.types.GlRenderTarget).clearDepth }]) : RenderTargetDescriptor)) : ResolvedRenderTargetDescriptor);
-    effective = (cast GlRenderTarget.resolveEffectiveGlRenderTargetAxes__glRenderTarget((cast (cast state : GlRenderState).gl : flighthq._internal.dom.WebGL2RenderingContext), (cast requested : ResolvedRenderTargetDescriptor), (cast 'preferred' : RenderTargetFormatPolicy)) : Null<RenderTargetAxes>);
+    requested = (cast resolveRenderTargetDescriptor((cast _Runtime.mergeObjects([(cast target : flighthq.types.GlRenderTarget).requestedAxes, { width: width }, { height: height }, { clearColors: (cast target : flighthq.types.GlRenderTarget).clearColors }, { clearDepth: (cast target : flighthq.types.GlRenderTarget).clearDepth }]))) : ResolvedRenderTargetDescriptor);
+    effective = (cast GlRenderTarget.resolveEffectiveGlRenderTargetAxes__glRenderTarget((cast (cast state : GlRenderState).gl), (cast requested), (cast 'preferred')) : Null<RenderTargetAxes>);
     if ((cast ((cast _Runtime.strictEquals((cast effective : RenderTargetAxes).width, (cast target : flighthq.types.GlRenderTarget).width) : Bool) && (cast _Runtime.strictEquals((cast effective : RenderTargetAxes).height, (cast target : flighthq.types.GlRenderTarget).height) : Bool)) : Bool)) { return; }
     gl = (cast state : GlRenderState).gl;
     for (texture in _Runtime.iterable((cast target : flighthq.types.GlRenderTarget).textures)) {
@@ -147,10 +149,10 @@ class GlRenderTarget {
     ((cast target : flighthq.types.GlRenderTarget).depthTexture = null);
     ((cast target : flighthq.types.GlRenderTarget).depthStencilRenderbuffer = null);
     ((cast target : flighthq.types.GlRenderTarget).resolveFramebuffer = null);
-    ((cast target : flighthq.types.GlRenderTarget).requestedAxes = (cast GlRenderTarget.copyRenderTargetAxes__glRenderTarget((cast requested : RenderTargetAxes)) : RenderTargetAxes));
-    GlRenderTarget.setGlRenderTargetAxes__glRenderTarget((cast target : flighthq.types.GlRenderTarget), (cast effective : RenderTargetAxes));
-    GlRenderTarget.allocateGlRenderTargetStorage__glRenderTarget((cast state : GlRenderState), (cast target : flighthq.types.GlRenderTarget));
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    ((cast target : flighthq.types.GlRenderTarget).requestedAxes = (cast GlRenderTarget.copyRenderTargetAxes__glRenderTarget((cast requested)) : RenderTargetAxes));
+    GlRenderTarget.setGlRenderTargetAxes__glRenderTarget((cast target), (cast effective));
+    GlRenderTarget.allocateGlRenderTargetStorage__glRenderTarget((cast state), (cast target));
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), (cast runtime : GlRenderStateRuntime).currentFramebuffer);
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), null);
     ((cast runtime : GlRenderStateRuntime).currentTexture = null);
@@ -162,7 +164,7 @@ class GlRenderTarget {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var scissor:Null<GlScissorRect> = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast (cast target : flighthq.types.GlRenderTarget).sampleCount : Float) <= (cast 1.0 : Float)) : Bool) || (cast _Runtime.strictEquals((cast target : flighthq.types.GlRenderTarget).resolveFramebuffer, null) : Bool)) : Bool)) { return; }
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     scissor = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).currentScissorRect, function():Dynamic return cast null);
     try {
@@ -174,7 +176,7 @@ class GlRenderTarget {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field((cast target : flighthq.types.GlRenderTarget).textures, 'length') : Float)) : Bool)) {
             flighthq._internal.backend.WebGl2Backend.readBuffer(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_ATTACHMENT0', flighthq._internal.backend.WebGl2Backend.COLOR_ATTACHMENT0) + i));
-            flighthq._internal.backend.WebGl2Backend.drawBuffers(gl, GlRenderTarget.buildSingleDrawBuffer__glRenderTarget((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast i : Float), (cast _Runtime.field((cast target : flighthq.types.GlRenderTarget).textures, 'length') : Float)));
+            flighthq._internal.backend.WebGl2Backend.drawBuffers(gl, (cast GlRenderTarget.buildSingleDrawBuffer__glRenderTarget((cast gl), (cast i : Float), (cast _Runtime.field((cast target : flighthq.types.GlRenderTarget).textures, 'length') : Float)) : Array<Float>));
             flighthq._internal.backend.WebGl2Backend.blitFramebuffer(gl, 0.0, 0.0, (cast target : flighthq.types.GlRenderTarget).width, (cast target : flighthq.types.GlRenderTarget).height, 0.0, 0.0, (cast target : flighthq.types.GlRenderTarget).width, (cast target : flighthq.types.GlRenderTarget).height, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_BUFFER_BIT', flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'NEAREST', flighthq._internal.backend.WebGl2Backend.NEAREST));
             i++;
           }
@@ -205,7 +207,7 @@ class GlRenderTarget {
   }
 
   public static function resolveGlRenderTargetAxes(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy = 'preferred'):Null<RenderTargetAxes> {
-    return cast (cast GlRenderTarget.resolveEffectiveGlRenderTargetAxes__glRenderTarget((cast (cast state : GlRenderState).gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast resolveRenderTargetDescriptor((cast descriptor : RenderTargetDescriptor)) : ResolvedRenderTargetDescriptor) : ResolvedRenderTargetDescriptor), (cast formatPolicy : RenderTargetFormatPolicy)) : Null<RenderTargetAxes>);
+    return cast (cast GlRenderTarget.resolveEffectiveGlRenderTargetAxes__glRenderTarget((cast (cast state : GlRenderState).gl), (cast (cast resolveRenderTargetDescriptor((cast descriptor)) : ResolvedRenderTargetDescriptor)), (cast formatPolicy)) : Null<RenderTargetAxes>);
     return cast null;
   }
 
@@ -230,9 +232,9 @@ class GlRenderTarget {
     colorFormats = _Runtime.field(__destructure1, 'colorFormats');
     depth = _Runtime.field(__destructure1, 'depth');
     multisampled = ((cast sampleCount : Float) > (cast 1.0 : Float));
-    usesFloat = (cast GlRenderTarget.isFloatRenderTargetFormat__glRenderTarget((cast (cast target : flighthq.types.GlRenderTarget).format : RenderTargetFormat)) : Bool);
+    usesFloat = (cast GlRenderTarget.isFloatRenderTargetFormat__glRenderTarget((cast (cast target : flighthq.types.GlRenderTarget).format)) : Bool);
     for (f in _Runtime.iterable(colorFormats)) {
-      (usesFloat = cast (((cast usesFloat : Bool) || (cast (cast GlRenderTarget.isFloatRenderTargetFormat__glRenderTarget((cast f : RenderTargetFormat)) : Bool) : Bool)) : Dynamic));
+      (usesFloat = cast (((cast usesFloat : Bool) || (cast (cast GlRenderTarget.isFloatRenderTargetFormat__glRenderTarget((cast f)) : Bool) : Bool)) : Dynamic));
     }
     if ((cast usesFloat : Bool)) { flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_color_buffer_float'); }
     resolveFramebuffer = ((cast multisampled : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.createFramebuffer(gl) : Dynamic) : (cast (cast target : flighthq.types.GlRenderTarget).framebuffer : Dynamic));
@@ -241,7 +243,7 @@ class GlRenderTarget {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast attachments : Float)) : Bool)) {
         var fmt:RenderTargetFormat = flighthq._internal._StaticIndex.readArray(colorFormats, i);
-        var gf:{ var internalFormat:Float; var format:Float; var type:Float; } = (cast GlRenderTarget.mapGlFormat__glRenderTarget((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast fmt : RenderTargetFormat)) : { var internalFormat:Float; var format:Float; var type:Float; });
+        var gf:{ var internalFormat:Float; var format:Float; var type:Float; } = (cast GlRenderTarget.mapGlFormat__glRenderTarget((cast gl), (cast fmt)) : { var internalFormat:Float; var format:Float; var type:Float; });
         var texture:flighthq._internal.dom.WebGLTexture = flighthq._internal.backend.WebGl2Backend.createTexture(gl);
         flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), texture);
         flighthq._internal.backend.WebGl2Backend.texImage2D(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), 0.0, (cast gf : { var internalFormat:Float; var format:Float; var type:Float; }).internalFormat, w, h, 0.0, (cast gf : { var internalFormat:Float; var format:Float; var type:Float; }).format, (cast gf : { var internalFormat:Float; var format:Float; var type:Float; }).type, null);
@@ -256,7 +258,7 @@ class GlRenderTarget {
       }
     }
     ((cast target : flighthq.types.GlRenderTarget).texture = flighthq._internal._StaticIndex.readArray((cast target : flighthq.types.GlRenderTarget).textures, 0.0));
-    if ((cast ((cast attachments : Float) > (cast 1.0 : Float)) : Bool)) { flighthq._internal.backend.WebGl2Backend.drawBuffers(gl, GlRenderTarget.buildDrawBuffers__glRenderTarget((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast attachments : Float))); }
+    if ((cast ((cast attachments : Float) > (cast 1.0 : Float)) : Bool)) { flighthq._internal.backend.WebGl2Backend.drawBuffers(gl, (cast GlRenderTarget.buildDrawBuffers__glRenderTarget((cast gl), (cast attachments : Float)) : Array<Float>)); }
     if ((cast multisampled : Bool)) {
       flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), (cast target : flighthq.types.GlRenderTarget).framebuffer);
       {
@@ -265,13 +267,13 @@ class GlRenderTarget {
           var fmt:RenderTargetFormat = flighthq._internal._StaticIndex.readArray(colorFormats, i);
           var rb:flighthq._internal.dom.WebGLRenderbuffer = flighthq._internal.backend.WebGl2Backend.createRenderbuffer(gl);
           flighthq._internal.backend.WebGl2Backend.bindRenderbuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RENDERBUFFER', flighthq._internal.backend.WebGl2Backend.RENDERBUFFER), rb);
-          flighthq._internal.backend.WebGl2Backend.renderbufferStorageMultisample(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RENDERBUFFER', flighthq._internal.backend.WebGl2Backend.RENDERBUFFER), sampleCount, (cast (cast GlRenderTarget.mapGlFormat__glRenderTarget((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast fmt : RenderTargetFormat)) : { var internalFormat:Float; var format:Float; var type:Float; }) : { var internalFormat:Float; var format:Float; var type:Float; }).internalFormat, w, h);
+          flighthq._internal.backend.WebGl2Backend.renderbufferStorageMultisample(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RENDERBUFFER', flighthq._internal.backend.WebGl2Backend.RENDERBUFFER), sampleCount, (cast (cast GlRenderTarget.mapGlFormat__glRenderTarget((cast gl), (cast fmt)) : { var internalFormat:Float; var format:Float; var type:Float; }) : { var internalFormat:Float; var format:Float; var type:Float; }).internalFormat, w, h);
           flighthq._internal.backend.WebGl2Backend.framebufferRenderbuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_ATTACHMENT0', flighthq._internal.backend.WebGl2Backend.COLOR_ATTACHMENT0) + i), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RENDERBUFFER', flighthq._internal.backend.WebGl2Backend.RENDERBUFFER), rb);
           _Runtime.callProperty((cast target : flighthq.types.GlRenderTarget).colorRenderbuffers, 'push', cast ([rb] : Array<Dynamic>));
           i++;
         }
       }
-      if ((cast ((cast attachments : Float) > (cast 1.0 : Float)) : Bool)) { flighthq._internal.backend.WebGl2Backend.drawBuffers(gl, GlRenderTarget.buildDrawBuffers__glRenderTarget((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast attachments : Float))); }
+      if ((cast ((cast attachments : Float) > (cast 1.0 : Float)) : Bool)) { flighthq._internal.backend.WebGl2Backend.drawBuffers(gl, (cast GlRenderTarget.buildDrawBuffers__glRenderTarget((cast gl), (cast attachments : Float)) : Array<Float>)); }
       ((cast target : flighthq.types.GlRenderTarget).resolveFramebuffer = resolveFramebuffer);
     }
     if ((cast !_Runtime.strictEquals(depth, 'none') : Bool)) {
@@ -300,7 +302,7 @@ class GlRenderTarget {
 
   public static function buildDrawBuffers__glRenderTarget(gl:flighthq._internal.dom.WebGL2RenderingContext, count:Float):Array<Float> {
     var buffers:Array<Float> = cast _Runtime.UNDEFINED;
-    buffers = cast ([] : Array<Dynamic>);
+    buffers = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
@@ -314,7 +316,7 @@ class GlRenderTarget {
 
   public static function buildSingleDrawBuffer__glRenderTarget(gl:flighthq._internal.dom.WebGL2RenderingContext, index:Float, count:Float):Array<Float> {
     var buffers:Array<Float> = cast _Runtime.UNDEFINED;
-    buffers = cast ([] : Array<Dynamic>);
+    buffers = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
@@ -332,7 +334,7 @@ class GlRenderTarget {
   }
 
   public static function isGlRenderTargetFormatSupportedByContext__glRenderTarget(gl:flighthq._internal.dom.WebGL2RenderingContext, format:RenderTargetFormat):Bool {
-    return cast ((cast !(cast (cast GlRenderTarget.isFloatRenderTargetFormat__glRenderTarget((cast format : RenderTargetFormat)) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_color_buffer_float'), null) : Bool));
+    return cast ((cast !(cast (cast GlRenderTarget.isFloatRenderTargetFormat__glRenderTarget((cast format)) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_color_buffer_float'), null) : Bool));
     return cast null;
   }
 
@@ -355,9 +357,9 @@ class GlRenderTarget {
     reportedMaxSamples = ((cast ((cast _Runtime.field(requested, 'sampleCount') : Float) > (cast 1.0 : Float)) : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'MAX_SAMPLES', flighthq._internal.backend.WebGl2Backend.MAX_SAMPLES)) : Dynamic) : (cast 1.0 : Dynamic));
     maxSamples = ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(reportedMaxSamples), 'number') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([reportedMaxSamples] : Array<Dynamic>)) : Bool)) : Bool) ? (cast HxMath.max(1.0, HxMath.floor(reportedMaxSamples)) : Dynamic) : (cast 1.0 : Dynamic));
     sampleCount = HxMath.min(_Runtime.field(requested, 'sampleCount'), maxSamples);
-    colorFormats = cast ([] : Array<Dynamic>);
+    colorFormats = (cast cast ([] : Array<Dynamic>));
     for (format in _Runtime.iterable(_Runtime.field(requested, 'colorFormats'))) {
-      var effectiveFormat:Null<String> = (cast GlRenderTarget.resolveRenderableFormat__glRenderTarget((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast format : RenderTargetFormat), (cast formatPolicy : RenderTargetFormatPolicy)) : Null<String>);
+      var effectiveFormat:Null<String> = (cast GlRenderTarget.resolveRenderableFormat__glRenderTarget((cast gl), (cast format), (cast formatPolicy)) : Null<String>);
       if ((cast _Runtime.strictEquals(effectiveFormat, null) : Bool)) { return cast null; }
       _Runtime.callProperty(colorFormats, 'push', cast ([effectiveFormat] : Array<Dynamic>));
     }
@@ -378,7 +380,7 @@ class GlRenderTarget {
   }
 
   public static function resolveRenderableFormat__glRenderTarget(gl:flighthq._internal.dom.WebGL2RenderingContext, format:RenderTargetFormat, formatPolicy:RenderTargetFormatPolicy):Null<RenderTargetFormat> {
-    if ((cast (cast GlRenderTarget.isGlRenderTargetFormatSupportedByContext__glRenderTarget((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast format : RenderTargetFormat)) : Bool) : Bool)) { return cast format; }
+    if ((cast (cast GlRenderTarget.isGlRenderTargetFormatSupportedByContext__glRenderTarget((cast gl), (cast format)) : Bool) : Bool)) { return cast format; }
     return cast ((cast _Runtime.strictEquals(formatPolicy, 'preferred') : Bool) ? (cast 'rgba8' : Dynamic) : (cast null : Dynamic));
     return cast null;
   }

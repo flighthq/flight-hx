@@ -5,16 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.render.RenderRegistryGuards.areRenderRegistryGuardsEnabled;
 import flighthq.render.RenderRegistryGuards.enableRenderRegistryGuards;
+import flighthq.types.RenderState;
 import flighthq.types.WgpuRenderState;
 
 class EnableWgpuTextureResolverGuards {
   @:noCompletion
   public static function areWgpuTextureResolverGuardsEnabled(state:WgpuRenderState):Bool {
-    return cast (cast areRenderRegistryGuardsEnabled(state) : Bool);
+    return cast (cast areRenderRegistryGuardsEnabled((cast state)) : Bool);
     return cast null;
   }
 
   public static function enableWgpuTextureResolverGuards(state:WgpuRenderState):Void {
-    enableRenderRegistryGuards(state);
+    enableRenderRegistryGuards((cast state));
   }
 }

@@ -7,4 +7,4 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.Texture.TextureColorSpace;
 
-typedef RenderTexture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var dimension:String; var source:Null<TextureSource>; };
+typedef RenderTexture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var dimension:String; var source:RenderTarget; };

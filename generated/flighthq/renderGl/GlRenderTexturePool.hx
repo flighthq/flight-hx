@@ -9,6 +9,7 @@ import flighthq.renderGl.GlRenderTexture.destroyGlRenderTexture;
 import flighthq.renderGl.GlRenderTexture.invalidateGlRenderTexture;
 import flighthq.texture.RenderTexture.createRenderTexture;
 import flighthq.texture.Texture.resetTextureUvTransform;
+import flighthq.types.CreateRenderTextureOptions;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.GlRenderTexture.GlRenderTexturePool;
@@ -17,16 +18,17 @@ import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.RenderTarget.RenderTargetFormat;
 import flighthq.types.RenderTexture;
 import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureLike;
 
 class GlRenderTexturePool {
   public static function acquireGlRenderTexture(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool, descriptor:RenderTargetDescriptor):RenderTexture {
     var renderTexture:RenderTexture = cast _Runtime.UNDEFINED;
-    GlRenderTexturePool.assertUsablePool__glRenderTexturePool((cast state : GlRenderState), (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool));
-    renderTexture = _Runtime.coalesce(_Runtime.callProperty((cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createRenderTexture(descriptor) : Null<RenderTexture>));
-    GlRenderTexturePool.applyRenderTargetDescriptor__glRenderTexturePool((cast (cast renderTexture : RenderTexture).source : RenderTarget), (cast descriptor : RenderTargetDescriptor));
-    resetTextureUvTransform(renderTexture);
+    GlRenderTexturePool.assertUsablePool__glRenderTexturePool((cast state), (cast pool));
+    renderTexture = _Runtime.coalesce(_Runtime.callProperty((cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createRenderTexture((cast descriptor)) : RenderTexture));
+    GlRenderTexturePool.applyRenderTargetDescriptor__glRenderTexturePool((cast (cast renderTexture : RenderTexture).source), (cast descriptor));
+    resetTextureUvTransform((cast renderTexture));
     ((cast renderTexture : RenderTexture).colorSpace = _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'));
-    invalidateGlRenderTexture((cast state : GlRenderState), (cast renderTexture : RenderTexture), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String));
+    invalidateGlRenderTexture((cast state), (cast renderTexture), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String));
     ((cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).add(renderTexture));
     return cast renderTexture;
     return cast null;
@@ -40,41 +42,41 @@ class GlRenderTexturePool {
   public static function destroyGlRenderTexturePool(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool):Void {
     var textures:flighthq._internal._Set<RenderTexture> = cast _Runtime.UNDEFINED;
     if ((cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).destroyed : Bool)) { return; }
-    GlRenderTexturePool.assertPoolContext__glRenderTexturePool((cast state : GlRenderState), (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool));
+    GlRenderTexturePool.assertPoolContext__glRenderTexturePool((cast state), (cast pool));
     textures = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [_Runtime.concatArrays([_Runtime.toArray((cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).free), _Runtime.toArray((cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).leased)])]);
     for (renderTexture in _Runtime.iterable(textures)) {
-      destroyGlRenderTexture((cast state : GlRenderState), (cast renderTexture : RenderTexture));
+      destroyGlRenderTexture((cast state), (cast renderTexture));
     }
     _Runtime.setLength((cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).free, 0.0);
     ((cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).clear());
-    destroyGlRenderTargetPool((cast state : GlRenderState), (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).effectTargets);
+    destroyGlRenderTargetPool((cast state), (cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).effectTargets));
     ((cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).destroyed = true);
   }
 
   public static function releaseGlRenderTexture(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool, renderTexture:RenderTexture):Void {
-    GlRenderTexturePool.assertUsablePool__glRenderTexturePool((cast state : GlRenderState), (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool));
+    GlRenderTexturePool.assertUsablePool__glRenderTexturePool((cast state), (cast pool));
     if ((cast !(cast ((cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).delete_(renderTexture)) : Bool) : Bool)) {
       _Runtime.throwValue(_Runtime.error('releaseGlRenderTexture: texture is not leased from this pool'));
     }
-    invalidateGlRenderTexture((cast state : GlRenderState), (cast renderTexture : RenderTexture), (cast 'released' : String));
+    invalidateGlRenderTexture((cast state), (cast renderTexture), (cast 'released' : String));
     _Runtime.callProperty((cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).free, 'push', cast ([renderTexture] : Array<Dynamic>));
   }
 
   public static function withGlRenderTextures<T>(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {
     var textures:Array<RenderTexture> = cast _Runtime.UNDEFINED;
-    textures = cast ([] : Array<Dynamic>);
+    textures = (cast cast ([] : Array<Dynamic>));
     try {
       try {
         for (descriptor in _Runtime.iterable(descriptors)) {
-          _Runtime.callProperty(textures, 'push', cast ([(cast acquireGlRenderTexture((cast state : GlRenderState), (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool), (cast descriptor : RenderTargetDescriptor)) : RenderTexture)] : Array<Dynamic>));
+          _Runtime.callProperty(textures, 'push', cast ([(cast acquireGlRenderTexture((cast state), (cast pool), (cast descriptor)) : RenderTexture)] : Array<Dynamic>));
         }
-        var __returnValue4:Dynamic = (cast callback((cast textures : Array<RenderTexture>)) : T);
+        var __returnValue4:Dynamic = (cast callback((cast textures)) : T);
         {
           {
             var i:Float = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
             while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
               var texture:RenderTexture = flighthq._internal._StaticIndex.readArray(textures, i);
-              if ((cast ((cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseGlRenderTexture((cast state : GlRenderState), (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool), (cast texture : RenderTexture)); }
+              if ((cast ((cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseGlRenderTexture((cast state), (cast pool), (cast texture)); }
               i--;
             }
           }
@@ -87,7 +89,7 @@ class GlRenderTexturePool {
           var i:Float = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
             var texture:RenderTexture = flighthq._internal._StaticIndex.readArray(textures, i);
-            if ((cast ((cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseGlRenderTexture((cast state : GlRenderState), (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool), (cast texture : RenderTexture)); }
+            if ((cast ((cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseGlRenderTexture((cast state), (cast pool), (cast texture)); }
             i--;
           }
         }
@@ -99,7 +101,7 @@ class GlRenderTexturePool {
         var i:Float = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           var texture:RenderTexture = flighthq._internal._StaticIndex.readArray(textures, i);
-          if ((cast ((cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseGlRenderTexture((cast state : GlRenderState), (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool), (cast texture : RenderTexture)); }
+          if ((cast ((cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseGlRenderTexture((cast state), (cast pool), (cast texture)); }
           i--;
         }
       }
@@ -123,7 +125,7 @@ class GlRenderTexturePool {
 
   public static function assertUsablePool__glRenderTexturePool(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool):Void {
     if ((cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).destroyed : Bool)) { _Runtime.throwValue(_Runtime.error('GlRenderTexturePool has been destroyed')); }
-    GlRenderTexturePool.assertPoolContext__glRenderTexturePool((cast state : GlRenderState), (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool));
+    GlRenderTexturePool.assertPoolContext__glRenderTexturePool((cast state), (cast pool));
   }
 
   public static function assertPoolContext__glRenderTexturePool(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool):Void {

@@ -9,7 +9,7 @@ import flighthq.types.Node.NodeTraits;
 import flighthq.types.PointerEventData.PointerType;
 import flighthq.types.Spatial.SpatialIndex;
 
-typedef InteractionSignalName = InteractionSignals;
+typedef InteractionSignalName = String;
 
 typedef AnyInteractionSignalSlot = flighthq._internal._Union2<flighthq._internal._Union2<PointerEventData, KeyboardEventData>, FocusEventData>->Void;
 
@@ -17,7 +17,7 @@ typedef InteractionManager<N> = { var cursorBackend:Null<CursorBackend>; var dou
 
 typedef InteractionManagerOptions = { @:optional var cursorBackend:Null<CursorBackend>; @:optional var enabled:Bool; @:optional var precise:Bool; @:optional var spatialIndex:Null<SpatialIndex>; @:optional var trackedSubscribersOnly:Bool; };
 
-typedef InteractionInputSource = Dynamic;
+typedef InteractionInputSource = flighthq._internal._Pick<InputSignals, String>;
 
 typedef InteractionPointerOptions = { @:optional var altKey:Bool; @:optional var buttons:Float; @:optional var ctrlKey:Bool; @:optional var metaKey:Bool; @:optional var pointerId:Float; @:optional var pointerType:PointerType; @:optional var shiftKey:Bool; };
 

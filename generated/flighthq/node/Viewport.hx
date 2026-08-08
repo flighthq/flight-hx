@@ -4,12 +4,13 @@ package flighthq.node;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Entity;
 import flighthq.types.Viewport;
 import flighthq.types.Viewport.ViewportLike;
 
 class Viewport {
   public static function createViewport(?obj:ViewportLike):flighthq.types.Viewport {
-    return cast (cast createEntity((cast { devicePixelRatio: _Runtime.coalesce(_Runtime.optionalField(obj, 'devicePixelRatio'), function():Dynamic return cast 1.0), height: _Runtime.coalesce(_Runtime.optionalField(obj, 'height'), function():Dynamic return cast 0.0), width: _Runtime.coalesce(_Runtime.optionalField(obj, 'width'), function():Dynamic return cast 0.0), x: _Runtime.coalesce(_Runtime.optionalField(obj, 'x'), function():Dynamic return cast 0.0), y: _Runtime.coalesce(_Runtime.optionalField(obj, 'y'), function():Dynamic return cast 0.0) } : Null<{ var devicePixelRatio:Float; var height:Float; var width:Float; var x:Float; var y:Float; }>)) : flighthq.types.Viewport);
+    return cast (cast createEntity((cast { devicePixelRatio: _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var devicePixelRatio:Null<Float>; }).devicePixelRatio; }), function():Dynamic return cast 1.0), height: _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 0.0), width: _Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 0.0), x: _Runtime.coalesce(({ final __structural3 = obj; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0), y: _Runtime.coalesce(({ final __structural4 = obj; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0) })) : { >Entity, var devicePixelRatio:Float; var height:Float; var width:Float; var x:Float; var y:Float; });
     return cast null;
   }
 

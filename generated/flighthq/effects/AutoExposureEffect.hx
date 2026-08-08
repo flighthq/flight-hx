@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.AutoExposureEffect;
 
 class AutoExposureEffect {
-  public static function createAutoExposureEffect(?options:Dynamic):flighthq.types.AutoExposureEffect {
+  public static function createAutoExposureEffect(?options:flighthq._internal._Omit<flighthq.types.AutoExposureEffect, String>):flighthq.types.AutoExposureEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'AutoExposureEffect' }, options]);
     return cast null;

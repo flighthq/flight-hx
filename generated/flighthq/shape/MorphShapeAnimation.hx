@@ -14,7 +14,7 @@ import flighthq.types._internal._MorphShapeValues.MorphShapeKind;
 
 class MorphShapeAnimation {
   public static function applyAnimationClipToMorphShape(clip:AnimationClip, time:Float):Void {
-    sampleAnimationClip((cast MorphShapeAnimation.morphShapeAnimationScratch__morphShapeAnimation : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), (cast clip : AnimationClip), (cast time : Float), (cast function(__unused0:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, __unused1:AnimationChannel, __unused2:Float):Bool return applyMorphShapeAnimationSample(__unused0, __unused1) : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>->AnimationChannel->Float->Void));
+    sampleAnimationClip((cast MorphShapeAnimation.morphShapeAnimationScratch__morphShapeAnimation), (cast clip), (cast time : Float), (cast function(__unused0:flighthq._internal._ArrayLike<Float>, __unused1:AnimationChannel, __unused2:Float):Bool return applyMorphShapeAnimationSample(__unused0, __unused1)));
   }
 
   public static function applyMorphShapeAnimationSample(sampled:flighthq._internal._ArrayLike<Float>, channel:AnimationChannel):Bool {
@@ -24,7 +24,7 @@ class MorphShapeAnimation {
     if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast target : MorphShapeAnimationTarget).shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast false; }
     shape = (cast (cast target : MorphShapeAnimationTarget).shape : Null<MorphShape>);
     if ((cast ((cast ((cast _Runtime.strictEquals(shape, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(shape), 'object') : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast shape : MorphShape).kind, MorphShapeKind) : Bool)) : Bool)) { return cast false; }
-    setMorphShapeProgress((cast shape : MorphShape), (cast _Runtime.getIndex(sampled, 0.0) : Float));
+    setMorphShapeProgress((cast shape), (cast _Runtime.getIndex(sampled, 0.0) : Float));
     return cast true;
     return cast null;
   }
@@ -34,5 +34,5 @@ class MorphShapeAnimation {
     return cast null;
   }
 
-  public static final morphShapeAnimationScratch__morphShapeAnimation:Array<Float> = cast ([0.0] : Array<Dynamic>);
+  public static final morphShapeAnimationScratch__morphShapeAnimation:Array<Float> = (cast cast ([0.0] : Array<Dynamic>));
 }

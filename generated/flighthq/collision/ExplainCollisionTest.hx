@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.CollisionShapeValidation.getCollisionShapeValidationStatus;
 import flighthq.collision.TestCollision.testCollision;
+import flighthq.types.Collision.CollisionManifold;
 import flighthq.types.Collision.CollisionShape;
 import flighthq.types.Collision.CollisionTestExplanation;
 
@@ -13,11 +14,11 @@ class ExplainCollisionTest {
     var statusA:Null<String> = cast _Runtime.UNDEFINED;
     var statusB:Null<String> = cast _Runtime.UNDEFINED;
     var overlapping:Bool = cast _Runtime.UNDEFINED;
-    statusA = (cast getCollisionShapeValidationStatus((cast a : CollisionShape)) : Null<String>);
+    statusA = (cast getCollisionShapeValidationStatus((cast a)) : Null<String>);
     if ((cast !_Runtime.strictEquals(statusA, null) : Bool)) { return cast { kind: (cast a : { var kind:String; }).kind, overlapping: false, shapeIndex: 0.0, status: statusA }; }
-    statusB = (cast getCollisionShapeValidationStatus((cast b : CollisionShape)) : Null<String>);
+    statusB = (cast getCollisionShapeValidationStatus((cast b)) : Null<String>);
     if ((cast !_Runtime.strictEquals(statusB, null) : Bool)) { return cast { kind: (cast b : { var kind:String; }).kind, overlapping: false, shapeIndex: 1.0, status: statusB }; }
-    overlapping = (cast testCollision((cast a : CollisionShape), (cast b : CollisionShape), { depth: 0.0, normalX: 0.0, normalY: 0.0, overlapping: false }) : Bool);
+    overlapping = (cast testCollision((cast a), (cast b), (cast { depth: 0.0, normalX: 0.0, normalY: 0.0, overlapping: false })) : Bool);
     return cast { kind: null, overlapping: overlapping, shapeIndex: null, status: ((cast overlapping : Bool) ? (cast 'overlapping' : Dynamic) : (cast 'separated' : Dynamic)) };
     return cast null;
   }

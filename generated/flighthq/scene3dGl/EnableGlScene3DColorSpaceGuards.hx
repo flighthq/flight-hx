@@ -12,16 +12,16 @@ import flighthq.types.Log.LogLevel;
 class EnableGlScene3DColorSpaceGuards {
   @:noCompletion
   public static function areGlScene3DColorSpaceGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).colorSpaceGuard, null);
+    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).colorSpaceGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableGlScene3DColorSpaceGuards(state:GlRenderState):Void {
-    ((cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).colorSpaceGuard = EnableGlScene3DColorSpaceGuards.warnGlScene3DDrawnToCanvas__enableGlScene3DColorSpaceGuards);
+    ((cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : { @:optional var colorSpaceGuard:Null<Void->Void>; }).colorSpaceGuard = (cast EnableGlScene3DColorSpaceGuards.warnGlScene3DDrawnToCanvas__enableGlScene3DColorSpaceGuards));
   }
 
   public static function warnGlScene3DDrawnToCanvas__enableGlScene3DColorSpaceGuards():Void {
-    (cast logOnce((cast 'scene-gl:scene-drawn-to-canvas-unencoded' : String), (cast LogLevel.Warn : LogLevel), { message: 'drawGlScene3D: scene drawn directly to the canvas — linear radiance is not sRGB-encoded (output will be dark). Render into a target and present with presentGlScene3D, or draw through the effect pipeline.' }, (cast 'scene-gl' : Null<String>)) : Bool);
+    (cast logOnce((cast 'scene-gl:scene-drawn-to-canvas-unencoded' : String), (cast LogLevel.Warn), (cast { message: 'drawGlScene3D: scene drawn directly to the canvas — linear radiance is not sRGB-encoded (output will be dark). Render into a target and present with presentGlScene3D, or draw through the effect pipeline.' }), (cast 'scene-gl')) : Bool);
   }
 }

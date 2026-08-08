@@ -17,10 +17,10 @@ class Intersection {
     if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) {
       return cast false;
     }
-    if ((cast !(cast (cast getCamera3DWorldToScreen((cast Intersection.__scratchNdc__intersection : Vector3Like), (cast camera : Camera3D), (cast sphere.center : Vector3Like), (cast aspect : Float)) : Bool) : Bool) : Bool)) {
+    if ((cast !(cast (cast getCamera3DWorldToScreen((cast Intersection.__scratchNdc__intersection), (cast camera), (cast sphere.center), (cast aspect : Float)) : Bool) : Bool) : Bool)) {
       return cast false;
     }
-    return cast (cast getCamera3DScreenToWorldRay((cast out : Ray3DLike), (cast camera : Camera3D), (cast Intersection.__scratchNdc__intersection.x : Float), (cast Intersection.__scratchNdc__intersection.y : Float), (cast aspect : Float)) : Bool);
+    return cast (cast getCamera3DScreenToWorldRay((cast out), (cast camera), (cast Intersection.__scratchNdc__intersection.x : Float), (cast Intersection.__scratchNdc__intersection.y : Float), (cast aspect : Float)) : Bool);
     return cast null;
   }
 
@@ -37,12 +37,12 @@ class Intersection {
     var d:Float = cast _Runtime.UNDEFINED;
     var denom:Float = cast _Runtime.UNDEFINED;
     var t:Float = cast _Runtime.UNDEFINED;
-    dx = ray.direction.x;
-    dy = ray.direction.y;
-    dz = ray.direction.z;
-    ox = ray.origin.x;
-    oy = ray.origin.y;
-    oz = ray.origin.z;
+    dx = (cast ray.direction : { var x:Float; }).x;
+    dy = (cast ray.direction : { var y:Float; }).y;
+    dz = (cast ray.direction : { var z:Float; }).z;
+    ox = (cast ray.origin : { var x:Float; }).x;
+    oy = (cast ray.origin : { var y:Float; }).y;
+    oz = (cast ray.origin : { var z:Float; }).z;
     a = plane.a;
     b = plane.b;
     c = plane.c;
@@ -62,5 +62,5 @@ class Intersection {
     return cast null;
   }
 
-  public static final __scratchNdc__intersection:Vector3Like = { x: 0.0, y: 0.0, z: 0.0 };
+  public static final __scratchNdc__intersection:Vector3Like = (cast { x: 0.0, y: 0.0, z: 0.0 });
 }

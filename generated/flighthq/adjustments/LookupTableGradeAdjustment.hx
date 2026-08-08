@@ -9,7 +9,7 @@ import flighthq.types.ColorTransformFunction;
 import flighthq.types.LookupTableGradeAdjustment;
 
 class LookupTableGradeAdjustment {
-  public static function createLookupTableGradeAdjustment(?options:Dynamic):flighthq.types.LookupTableGradeAdjustment {
+  public static function createLookupTableGradeAdjustment(?options:flighthq._internal._Omit<flighthq.types.LookupTableGradeAdjustment, String>):flighthq.types.LookupTableGradeAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var lut:Null<ColorLut> = cast _Runtime.UNDEFINED;
     var strength:Float = cast _Runtime.UNDEFINED;
@@ -23,7 +23,7 @@ class LookupTableGradeAdjustment {
         flighthq._internal._StaticIndex.writeArray(out, 2.0, b);
         return;
       }
-      sampleColorLut(lut, (cast out : Array<Float>), (cast r : Float), (cast g : Float), (cast b : Float));
+      sampleColorLut((cast lut), (cast out), (cast r : Float), (cast g : Float), (cast b : Float));
       flighthq._internal._StaticIndex.writeArray(out, 0.0, (r + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 0.0), r) * strength)));
       flighthq._internal._StaticIndex.writeArray(out, 1.0, (g + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 1.0), g) * strength)));
       flighthq._internal._StaticIndex.writeArray(out, 2.0, (b + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 2.0), b) * strength)));

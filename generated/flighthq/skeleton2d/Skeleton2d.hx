@@ -29,6 +29,7 @@ import flighthq.types.AttachmentSkin2D.SkinAttachment2D;
 import flighthq.types.Bone2D;
 import flighthq.types.BoundingBoxAttachment2D;
 import flighthq.types.ClippingAttachment2D;
+import flighthq.types.Entity;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.MeshAttachment2D;
 import flighthq.types.Path;
@@ -53,18 +54,18 @@ import flighthq.types.TransformInherit2D;
 import flighthq.types.Vector2.Vector2Like;
 
 class Skeleton2d {
-  public static final _scratchA__skeleton2d:MatrixLike = { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 };
+  public static final _scratchA__skeleton2d:MatrixLike = (cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 });
 
-  public static final _scratchB__skeleton2d:MatrixLike = { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 };
+  public static final _scratchB__skeleton2d:MatrixLike = (cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 });
 
-  public static final _scratchC__skeleton2d:MatrixLike = { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 };
+  public static final _scratchC__skeleton2d:MatrixLike = (cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 });
 
   public static function applyAnimationClipToSkeleton2D(clip:AnimationClip, setup:Skeleton2D, pose:Skeleton2D, time:Float):Void {
     Facade_Skeleton2d_flighthq_skeleton2d_ApplyAnimationClipToSkeleton2D.applyAnimationClipToSkeleton2D(clip, setup, pose, time);
   }
 
   public static function cloneSkeleton2D(skeleton:Skeleton2D):Skeleton2D {
-    return cast (cast createEntity({ boneMatrices: _Runtime.slice(_Runtime.field(skeleton, 'boneMatrices'), 0, null), bones: _Runtime.callProperty(_Runtime.field(skeleton, 'bones'), 'map', cast ([function(bone:Bone2D, __unused0:Float, __unused1:Array<Bone2D>):{ var length:Float; @:optional var name:Null<String>; var parentIndex:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var shearX:Float; var shearY:Float; var transformMode:TransformInherit2D; var x:Float; var y:Float; } return _Runtime.mergeObjects([bone])] : Array<Dynamic>)), inverseBindMatrices: _Runtime.slice(_Runtime.field(skeleton, 'inverseBindMatrices'), 0, null), slots: ((cast ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'slots'), null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(skeleton, 'slots'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast _Runtime.field(skeleton, 'slots') : Dynamic) : (cast _Runtime.callProperty(_Runtime.field(skeleton, 'slots'), 'map', cast ([function(s:Slot2D, __unused2:Float, __unused3:Array<Slot2D>):{ @:optional var attachment:Null<Attachment2D>; @:optional var deform:Null<Skeleton2DSlotDeform>; var boneIndex:Float; @:optional var color:Null<Float>; @:optional var name:Null<String>; } return _Runtime.mergeObjects([s])] : Array<Dynamic>)) : Dynamic)), worldMatrices: _Runtime.slice(_Runtime.field(skeleton, 'worldMatrices'), 0, null) }) : Skeleton2D);
+    return cast (cast createEntity((cast { boneMatrices: _Runtime.slice(_Runtime.field(skeleton, 'boneMatrices'), 0, null), bones: _Runtime.callProperty(_Runtime.field(skeleton, 'bones'), 'map', cast ([function(bone:Bone2D, __unused0:Float, __unused1:Array<Bone2D>):{ var length:Float; @:optional var name:Null<String>; var parentIndex:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var shearX:Float; var shearY:Float; var transformMode:TransformInherit2D; var x:Float; var y:Float; } return _Runtime.mergeObjects([bone])] : Array<Dynamic>)), inverseBindMatrices: _Runtime.slice(_Runtime.field(skeleton, 'inverseBindMatrices'), 0, null), slots: ((cast ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'slots'), null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(skeleton, 'slots'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast _Runtime.field(skeleton, 'slots') : Dynamic) : (cast _Runtime.callProperty(_Runtime.field(skeleton, 'slots'), 'map', cast ([function(s:Slot2D, __unused2:Float, __unused3:Array<Slot2D>):{ @:optional var attachment:Null<Attachment2D>; @:optional var deform:Null<Skeleton2DSlotDeform>; var boneIndex:Float; @:optional var color:Null<Float>; @:optional var name:Null<String>; } return _Runtime.mergeObjects([s])] : Array<Dynamic>)) : Dynamic)), worldMatrices: _Runtime.slice(_Runtime.field(skeleton, 'worldMatrices'), 0, null) })) : { >Entity, var boneMatrices:flighthq._internal._Float32Array; var bones:Array<{ var length:Float; @:optional var name:Null<String>; var parentIndex:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var shearX:Float; var shearY:Float; var transformMode:TransformInherit2D; var x:Float; var y:Float; }>; var inverseBindMatrices:flighthq._internal._Float32Array; var slots:Null<Array<{ @:optional var attachment:Null<Attachment2D>; @:optional var deform:Null<Skeleton2DSlotDeform>; var boneIndex:Float; @:optional var color:Null<Float>; @:optional var name:Null<String>; }>>; var worldMatrices:flighthq._internal._Float32Array; });
     return cast null;
   }
 
@@ -81,10 +82,10 @@ class Skeleton2d {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var o:Float = (i * Skeleton2d.MATRIX_STRIDE__skeleton2d);
-        Skeleton2d.readMatrix__skeleton2d((cast Skeleton2d._scratchA__skeleton2d : MatrixLike), (cast world : flighthq._internal._Float32Array), (cast o : Float));
-        Skeleton2d.readMatrix__skeleton2d((cast Skeleton2d._scratchB__skeleton2d : MatrixLike), (cast invBind : flighthq._internal._Float32Array), (cast o : Float));
-        multiplyMatrix((cast Skeleton2d._scratchC__skeleton2d : MatrixLike), (cast Skeleton2d._scratchA__skeleton2d : MatrixLike), (cast Skeleton2d._scratchB__skeleton2d : MatrixLike));
-        Skeleton2d.writeMatrix__skeleton2d((cast out : flighthq._internal._Float32Array), (cast o : Float), (cast Skeleton2d._scratchC__skeleton2d : MatrixLike));
+        Skeleton2d.readMatrix__skeleton2d((cast Skeleton2d._scratchA__skeleton2d), (cast world), (cast o : Float));
+        Skeleton2d.readMatrix__skeleton2d((cast Skeleton2d._scratchB__skeleton2d), (cast invBind), (cast o : Float));
+        multiplyMatrix((cast Skeleton2d._scratchC__skeleton2d), (cast Skeleton2d._scratchA__skeleton2d), (cast Skeleton2d._scratchB__skeleton2d));
+        Skeleton2d.writeMatrix__skeleton2d((cast out), (cast o : Float), (cast Skeleton2d._scratchC__skeleton2d));
         i++;
       }
     }
@@ -195,7 +196,7 @@ class Skeleton2d {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        computeSkeleton2DBoneWorldTransform((cast skeleton : Skeleton2D), (cast i : Float));
+        computeSkeleton2DBoneWorldTransform((cast skeleton), (cast i : Float));
         i++;
       }
     }
@@ -205,7 +206,7 @@ class Skeleton2d {
     if (slots == null) slots = cast (null : Dynamic);
     var count:Float = cast _Runtime.UNDEFINED;
     count = _Runtime.field(bones, 'length');
-    return cast (cast createEntity({ boneMatrices: new flighthq._internal._Float32Array((count * Skeleton2d.MATRIX_STRIDE__skeleton2d)), bones: bones, inverseBindMatrices: new flighthq._internal._Float32Array((count * Skeleton2d.MATRIX_STRIDE__skeleton2d)), slots: slots, worldMatrices: new flighthq._internal._Float32Array((count * Skeleton2d.MATRIX_STRIDE__skeleton2d)) }) : Skeleton2D);
+    return cast (cast createEntity((cast { boneMatrices: new flighthq._internal._Float32Array((count * Skeleton2d.MATRIX_STRIDE__skeleton2d)), bones: bones, inverseBindMatrices: new flighthq._internal._Float32Array((count * Skeleton2d.MATRIX_STRIDE__skeleton2d)), slots: slots, worldMatrices: new flighthq._internal._Float32Array((count * Skeleton2d.MATRIX_STRIDE__skeleton2d)) })) : { >Entity, var boneMatrices:flighthq._internal._Float32Array; var bones:Array<Bone2D>; var inverseBindMatrices:flighthq._internal._Float32Array; var slots:Null<Array<Slot2D>>; var worldMatrices:flighthq._internal._Float32Array; });
     return cast null;
   }
 
@@ -271,7 +272,7 @@ class Skeleton2d {
 
   public static function getSkeleton2DBoneWorldMatrix(out:MatrixLike, skeleton:Skeleton2D, boneIndex:Float):Bool {
     if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(_Runtime.field(skeleton, 'bones'), 'length') : Float)) : Bool)) : Bool)) { return cast false; }
-    Skeleton2d.readMatrix__skeleton2d((cast out : MatrixLike), (cast _Runtime.field(skeleton, 'worldMatrices') : flighthq._internal._Float32Array), (cast (boneIndex * Skeleton2d.MATRIX_STRIDE__skeleton2d) : Float));
+    Skeleton2d.readMatrix__skeleton2d((cast out), (cast _Runtime.field(skeleton, 'worldMatrices')), (cast (boneIndex * Skeleton2d.MATRIX_STRIDE__skeleton2d) : Float));
     return cast true;
     return cast null;
   }
@@ -353,9 +354,9 @@ class Skeleton2d {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var o:Float = (i * Skeleton2d.MATRIX_STRIDE__skeleton2d);
-        Skeleton2d.readMatrix__skeleton2d((cast Skeleton2d._scratchA__skeleton2d : MatrixLike), (cast world : flighthq._internal._Float32Array), (cast o : Float));
-        if ((cast !(cast (cast inverseMatrix((cast Skeleton2d._scratchB__skeleton2d : MatrixLike), (cast Skeleton2d._scratchA__skeleton2d : MatrixLike)) : Bool) : Bool) : Bool)) { Skeleton2d.setMatrixIdentityLocal__skeleton2d((cast Skeleton2d._scratchB__skeleton2d : MatrixLike)); }
-        Skeleton2d.writeMatrix__skeleton2d((cast out : flighthq._internal._Float32Array), (cast o : Float), (cast Skeleton2d._scratchB__skeleton2d : MatrixLike));
+        Skeleton2d.readMatrix__skeleton2d((cast Skeleton2d._scratchA__skeleton2d), (cast world), (cast o : Float));
+        if ((cast !(cast (cast inverseMatrix((cast Skeleton2d._scratchB__skeleton2d), (cast Skeleton2d._scratchA__skeleton2d)) : Bool) : Bool) : Bool)) { Skeleton2d.setMatrixIdentityLocal__skeleton2d((cast Skeleton2d._scratchB__skeleton2d)); }
+        Skeleton2d.writeMatrix__skeleton2d((cast out), (cast o : Float), (cast Skeleton2d._scratchB__skeleton2d));
         i++;
       }
     }

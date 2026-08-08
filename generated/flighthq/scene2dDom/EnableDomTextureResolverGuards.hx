@@ -6,15 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.render.RenderRegistryGuards.areRenderRegistryGuardsEnabled;
 import flighthq.render.RenderRegistryGuards.enableRenderRegistryGuards;
 import flighthq.types.DomRenderState;
+import flighthq.types.RenderState;
 
 class EnableDomTextureResolverGuards {
   @:noCompletion
   public static function areDomTextureResolverGuardsEnabled(state:DomRenderState):Bool {
-    return cast (cast areRenderRegistryGuardsEnabled(state) : Bool);
+    return cast (cast areRenderRegistryGuardsEnabled((cast state)) : Bool);
     return cast null;
   }
 
   public static function enableDomTextureResolverGuards(state:DomRenderState):Void {
-    enableRenderRegistryGuards(state);
+    enableRenderRegistryGuards((cast state));
   }
 }

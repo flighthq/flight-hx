@@ -29,10 +29,10 @@ class TextureAtlasDetect {
   public static function getRegistry__textureAtlasDetect():FormatRegistry__textureAtlasDetect {
     if ((cast !_Runtime.strictEquals(TextureAtlasDetect._registry__textureAtlasDetect, null) : Bool)) { return cast TextureAtlasDetect._registry__textureAtlasDetect; }
     (TextureAtlasDetect._registry__textureAtlasDetect = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-    ((cast TextureAtlasDetect._registry__textureAtlasDetect : FormatRegistry__textureAtlasDetect).set(TextureAtlasFormatKindAseprite, { detect: TextureAtlasDetect.detectAseprite__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, __unused0:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasAsepriteJson((cast content : String), (cast atlas : TextureAtlas)) : TextureAtlas) }));
-    ((cast TextureAtlasDetect._registry__textureAtlasDetect : FormatRegistry__textureAtlasDetect).set(TextureAtlasFormatKindLibgdxAtlas, { detect: TextureAtlasDetect.detectLibgdxAtlas__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, __unused1:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasLibgdxAtlas((cast content : String), (cast atlas : TextureAtlas)) : TextureAtlas) }));
-    ((cast TextureAtlasDetect._registry__textureAtlasDetect : FormatRegistry__textureAtlasDetect).set(TextureAtlasFormatKindStarling, { detect: TextureAtlasDetect.detectStarling__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, options:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasStarlingXml((cast content : String), (cast atlas : TextureAtlas), options) : TextureAtlas) }));
-    ((cast TextureAtlasDetect._registry__textureAtlasDetect : FormatRegistry__textureAtlasDetect).set(TextureAtlasFormatKindTexturePacker, { detect: TextureAtlasDetect.detectTexturePacker__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, options:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasPackerJson((cast content : String), (cast atlas : TextureAtlas), options) : TextureAtlas) }));
+    ((cast TextureAtlasDetect._registry__textureAtlasDetect : FormatRegistry__textureAtlasDetect).set(TextureAtlasFormatKindAseprite, (cast { detect: TextureAtlasDetect.detectAseprite__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, __unused0:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasAsepriteJson((cast content : String), (cast atlas)) : TextureAtlas) })));
+    ((cast TextureAtlasDetect._registry__textureAtlasDetect : FormatRegistry__textureAtlasDetect).set(TextureAtlasFormatKindLibgdxAtlas, (cast { detect: TextureAtlasDetect.detectLibgdxAtlas__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, __unused1:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasLibgdxAtlas((cast content : String), (cast atlas)) : TextureAtlas) })));
+    ((cast TextureAtlasDetect._registry__textureAtlasDetect : FormatRegistry__textureAtlasDetect).set(TextureAtlasFormatKindStarling, (cast { detect: TextureAtlasDetect.detectStarling__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, options:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasStarlingXml((cast content : String), (cast atlas), (cast options)) : TextureAtlas) })));
+    ((cast TextureAtlasDetect._registry__textureAtlasDetect : FormatRegistry__textureAtlasDetect).set(TextureAtlasFormatKindTexturePacker, (cast { detect: TextureAtlasDetect.detectTexturePacker__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, options:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasPackerJson((cast content : String), (cast atlas), (cast options)) : TextureAtlas) })));
     return cast TextureAtlasDetect._registry__textureAtlasDetect;
     return cast null;
   }
@@ -90,7 +90,7 @@ class TextureAtlasDetect {
     for (__iteration2 in _Runtime.iterable((cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : FormatRegistry__textureAtlasDetect))) {
       var kind:String = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
       var entry:FormatEntry__textureAtlasDetect = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
-      if ((cast (cast entry : FormatEntry__textureAtlasDetect).detect(content) : Bool)) { return cast kind; }
+      if ((cast (cast entry : FormatEntry__textureAtlasDetect).detect((cast content : String)) : Bool)) { return cast kind; }
     }
     return cast null;
     return cast null;
@@ -108,12 +108,12 @@ class TextureAtlasDetect {
     if ((cast ((cast _Runtime.strictEquals(kind, null) : Bool) || (cast _Runtime.strictEquals(kind, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast null; }
     entry = ((cast (cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : FormatRegistry__textureAtlasDetect) : FormatRegistry__textureAtlasDetect).get(kind));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-    return cast (cast entry : FormatEntry__textureAtlasDetect).parse(content, atlas, _Runtime.coalesce(options, function():Dynamic return cast {  }));
+    return cast (cast entry : FormatEntry__textureAtlasDetect).parse((cast content : String), (cast atlas), (cast _Runtime.coalesce(options, function():Dynamic return cast {  })));
     return cast null;
   }
 
   public static function registerTextureAtlasFormat(kind:TextureAtlasFormatKind, entry:{ var detect:String->Bool; var parse:String->TextureAtlas->TextureAtlasParseOptions->TextureAtlas; }):Void {
-    ((cast (cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : FormatRegistry__textureAtlasDetect) : FormatRegistry__textureAtlasDetect).set(kind, entry));
+    ((cast (cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : FormatRegistry__textureAtlasDetect) : FormatRegistry__textureAtlasDetect).set(kind, (cast entry)));
   }
 
   public static function firstFrame__textureAtlasDetect(frames:flighthq._internal._Any):flighthq._internal._Any {

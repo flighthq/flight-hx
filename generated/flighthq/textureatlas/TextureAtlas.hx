@@ -7,6 +7,7 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.types.Bitmap;
 import flighthq.types.CompressedImage;
 import flighthq.types.CompressedImageData;
+import flighthq.types.Entity;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
@@ -17,8 +18,8 @@ import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind
 import flighthq.types._internal._TextureSourceKindValues.CompressedImageTextureSourceKind;
 
 class TextureAtlas {
-  public static function createTextureAtlas(?obj:Dynamic):flighthq.types.TextureAtlas {
-    return cast (cast createEntity({ regions: _Runtime.coalesce(_Runtime.optionalField(obj, 'regions'), function():Dynamic return cast cast ([] : Array<Dynamic>)), texture: _Runtime.coalesce(_Runtime.optionalField(obj, 'texture'), function():Dynamic return cast null) }) : flighthq.types.TextureAtlas);
+  public static function createTextureAtlas(?obj:flighthq._internal._Partial<flighthq.types.TextureAtlas>):flighthq.types.TextureAtlas {
+    return cast (cast createEntity((cast { regions: _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var regions:Null<Array<TextureAtlasRegion>>; }).regions; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), texture: _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var texture:Null<Texture2D>; }).texture; }), function():Dynamic return cast null) })) : { >Entity, var regions:Array<TextureAtlasRegion>; var texture:Null<Texture2D>; });
     return cast null;
   }
 
@@ -33,9 +34,9 @@ class TextureAtlas {
     texture = atlas.texture;
     if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : Texture2D).dimension, '2d') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast texture : Texture2D).source, null) : Bool)) : Bool)) { return cast 0.0; }
     image = (cast texture : Texture2D).source;
-    if ((cast _Runtime.strictEquals((cast image : TextureSource).kind, BitmapTextureSourceKind) : Bool)) { return cast _Runtime.field((cast image : Bitmap).data, 'byteLength'); }
+    if ((cast _Runtime.strictEquals((cast image : TextureSource).kind, BitmapTextureSourceKind) : Bool)) { return cast _Runtime.field((cast (cast image : Bitmap) : { var data:flighthq._internal._UInt8ClampedArray; }).data, 'byteLength'); }
     if ((cast _Runtime.strictEquals((cast image : TextureSource).kind, CompressedImageTextureSourceKind) : Bool)) {
-      return cast _Runtime.field(_Runtime.field((cast image : CompressedImage), 'compressed').payload, 'byteLength');
+      return cast _Runtime.field((cast _Runtime.field((cast image : CompressedImage), 'compressed') : { var payload:flighthq._internal._UInt8Array; }).payload, 'byteLength');
     }
     return cast 0.0;
     return cast null;

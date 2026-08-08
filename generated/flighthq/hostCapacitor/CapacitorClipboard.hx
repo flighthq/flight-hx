@@ -8,6 +8,7 @@ import flighthq.types.CapacitorApi.CapacitorClipboardPlugin;
 import flighthq.types.CapacitorApi.CapacitorClipboardReadResult;
 import flighthq.types.CapacitorApi.CapacitorClipboardWriteOptions;
 import flighthq.types.Clipboard.ClipboardBackend;
+import flighthq.types.Clipboard.ClipboardBookmark;
 
 class CapacitorClipboard {
   public static function createCapacitorClipboardBackend(capacitor:CapacitorApi):ClipboardBackend {
@@ -36,7 +37,7 @@ class CapacitorClipboard {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).write({ string: text }), function(__awaitValue1:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).write((cast { string: text })), function(__awaitValue1:Dynamic):Dynamic {
               __awaitValue1;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -100,7 +101,7 @@ class CapacitorClipboard {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).write({ image: dataUrl }), function(__awaitValue4:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).write((cast { image: dataUrl })), function(__awaitValue4:Dynamic):Dynamic {
               __awaitValue4;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -139,7 +140,7 @@ class CapacitorClipboard {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, readBookmark: function():flighthq._internal._Promise<flighthq._internal._Any> {
+    }, readBookmark: function():flighthq._internal._Promise<Null<ClipboardBookmark>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
@@ -159,11 +160,11 @@ class CapacitorClipboard {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, getFormats: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
+    }, getFormats: function():flighthq._internal._Promise<Array<String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
-    }, readItems: function():flighthq._internal._Promise<{  }> {
+    }, readItems: function():flighthq._internal._Promise<flighthq._internal._Record<String, String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve({  });
       }));
@@ -171,7 +172,7 @@ class CapacitorClipboard {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(false);
       }));
-    }, readFiles: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
+    }, readFiles: function():flighthq._internal._Promise<Array<String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
@@ -183,7 +184,7 @@ class CapacitorClipboard {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).write({ string: '' }), function(__awaitValue6:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).write((cast { string: '' })), function(__awaitValue6:Dynamic):Dynamic {
               __awaitValue6;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -199,10 +200,12 @@ class CapacitorClipboard {
       );
     }, getChangeCount: function():Float {
       return cast -1.0;
+      return cast _Runtime.UNDEFINED;
     }, subscribeClipboardChange: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }

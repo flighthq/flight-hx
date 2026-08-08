@@ -23,7 +23,7 @@ class WgpuShader {
 
   public static final NORMAL_BLEND__wgpuShader:flighthq._internal.dom.GPUBlendState = (cast WgpuShader.createWgpuBlendState__wgpuShader((cast 'one' : String), (cast 'one-minus-src-alpha' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String)) : flighthq._internal.dom.GPUBlendState);
 
-  public static final BLEND_MODES__wgpuShader:flighthq._internal._Record<BlendMode, Null<flighthq._internal.dom.GPUBlendState>> = _Runtime.objectFromPairs([{ key: (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Add, value: (cast WgpuShader.createWgpuBlendState__wgpuShader((cast 'one' : String), (cast 'one' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String)) : Null<flighthq._internal.dom.GPUBlendState>) }, { key: (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Darken, value: (cast WgpuShader.createWgpuBlendState__wgpuShader((cast 'one' : String), (cast 'one' : String), (cast 'min' : String)) : Null<flighthq._internal.dom.GPUBlendState>) }, { key: (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Lighten, value: (cast WgpuShader.createWgpuBlendState__wgpuShader((cast 'one' : String), (cast 'one' : String), (cast 'max' : String)) : Null<flighthq._internal.dom.GPUBlendState>) }, { key: (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Multiply, value: (cast WgpuShader.createWgpuBlendState__wgpuShader((cast 'dst' : String), (cast 'one-minus-src-alpha' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String)) : Null<flighthq._internal.dom.GPUBlendState>) }, { key: (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal, value: WgpuShader.NORMAL_BLEND__wgpuShader }, { key: (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Screen, value: (cast WgpuShader.createWgpuBlendState__wgpuShader((cast 'one' : String), (cast 'one-minus-src' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String)) : Null<flighthq._internal.dom.GPUBlendState>) }]);
+  public static final BLEND_MODES__wgpuShader:flighthq._internal._Record<BlendMode, Null<flighthq._internal.dom.GPUBlendState>> = (cast _Runtime.objectFromPairs([{ key: (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Add, value: (cast WgpuShader.createWgpuBlendState__wgpuShader((cast 'one' : String), (cast 'one' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String)) : flighthq._internal.dom.GPUBlendState) }, { key: (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Darken, value: (cast WgpuShader.createWgpuBlendState__wgpuShader((cast 'one' : String), (cast 'one' : String), (cast 'min' : String)) : flighthq._internal.dom.GPUBlendState) }, { key: (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Lighten, value: (cast WgpuShader.createWgpuBlendState__wgpuShader((cast 'one' : String), (cast 'one' : String), (cast 'max' : String)) : flighthq._internal.dom.GPUBlendState) }, { key: (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Multiply, value: (cast WgpuShader.createWgpuBlendState__wgpuShader((cast 'dst' : String), (cast 'one-minus-src-alpha' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String)) : flighthq._internal.dom.GPUBlendState) }, { key: (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal, value: WgpuShader.NORMAL_BLEND__wgpuShader }, { key: (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Screen, value: (cast WgpuShader.createWgpuBlendState__wgpuShader((cast 'one' : String), (cast 'one-minus-src' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String)) : flighthq._internal.dom.GPUBlendState) }]));
 
   @:noCompletion
   public static function createWgpuBindGroupLayouts(device:flighthq._internal.dom.GPUDevice):{ var uniformBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var textureBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; } {
@@ -45,9 +45,9 @@ class WgpuShader {
   public static function getActiveWgpuPipeline(state:WgpuRenderState):flighthq._internal.dom.GPURenderPipeline {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var stencilMode:StencilMode__wgpuShader = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     stencilMode = ((cast (cast runtime : WgpuRenderStateRuntime).maskWriteMode : Bool) ? (cast 'maskwrite' : Dynamic) : (cast ((cast ((cast (cast runtime : WgpuRenderStateRuntime).currentMaskDepth : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'masked' : Dynamic) : (cast 'normal' : Dynamic)) : Dynamic));
-    return cast (cast getWgpuPipeline((cast state : WgpuRenderState), (cast (cast runtime : WgpuRenderStateRuntime).currentBlendMode : Null<String>), stencilMode) : flighthq._internal.dom.GPURenderPipeline);
+    return cast (cast getWgpuPipeline((cast state), (cast (cast runtime : WgpuRenderStateRuntime).currentBlendMode), (cast stencilMode)) : flighthq._internal.dom.GPURenderPipeline);
     return cast null;
   }
 
@@ -83,21 +83,21 @@ class WgpuShader {
     var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
     var layout:flighthq._internal.dom.GPUPipelineLayout = cast _Runtime.UNDEFINED;
     var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     format = _Runtime.coalesce((cast runtime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     key = '' + Std.string(_Runtime.coalesce(blendMode, function():Dynamic return cast 'null')) + '-' + Std.string(stencilMode) + '-' + Std.string(format) + '';
     cached = ((cast (cast runtime : WgpuRenderStateRuntime).pipelineCache : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).get(key));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
-    blend = (cast getWgpuBlendState((cast blendMode : Null<String>)) : flighthq._internal.dom.GPUBlendState);
+    blend = (cast getWgpuBlendState((cast blendMode)) : flighthq._internal.dom.GPUBlendState);
     isMaskWrite = _Runtime.strictEquals(stencilMode, 'maskwrite');
-    stencilFace = (cast WgpuShader.buildStencilFaceState__wgpuShader(stencilMode) : flighthq._internal.dom.GPUStencilFaceState);
+    stencilFace = (cast WgpuShader.buildStencilFaceState__wgpuShader((cast stencilMode)) : flighthq._internal.dom.GPUStencilFaceState);
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     shaderSrc = ((cast isMaskWrite : Bool) ? (cast WgpuShader.MASK_FRAGMENT_SRC__wgpuShader : Dynamic) : (cast WgpuShader.BITMAP_SHADER_SRC__wgpuShader : Dynamic));
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: shaderSrc }] : Array<Dynamic>));
-    layout = (cast createWgpuPipelineLayout((cast device : flighthq._internal.dom.GPUDevice), (cast (cast runtime : WgpuRenderStateRuntime).uniformBindGroupLayout : flighthq._internal.dom.GPUBindGroupLayout), (cast (cast runtime : WgpuRenderStateRuntime).textureBindGroupLayout : flighthq._internal.dom.GPUBindGroupLayout)) : flighthq._internal.dom.GPUPipelineLayout);
+    layout = (cast createWgpuPipelineLayout((cast device), (cast (cast runtime : WgpuRenderStateRuntime).uniformBindGroupLayout), (cast (cast runtime : WgpuRenderStateRuntime).textureBindGroupLayout)) : flighthq._internal.dom.GPUPipelineLayout);
     pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: ((cast isMaskWrite : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast blend : Dynamic)), writeMask: ((cast isMaskWrite : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal.backend.WebGpuConstantsBackend.value('GPUColorWrite', 'ALL') : Dynamic)) }] : Array<Dynamic>) }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: stencilFace, stencilBack: stencilFace, stencilReadMask: 255.0, stencilWriteMask: ((cast isMaskWrite : Bool) ? (cast 255.0 : Dynamic) : (cast 0.0 : Dynamic)) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
-    ((cast (cast runtime : WgpuRenderStateRuntime).pipelineCache : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).set(key, pipeline));
+    ((cast (cast runtime : WgpuRenderStateRuntime).pipelineCache : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).set(key, (cast pipeline)));
     return cast pipeline;
     return cast null;
   }
@@ -121,7 +121,7 @@ class WgpuShader {
 
   @:noCompletion
   public static function writeWgpuMatrixOnlyUniforms(state:WgpuRenderState, renderProxy:RenderProxy, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Float {
-    return cast (cast writeWgpuQuadUniforms((cast state : WgpuRenderState), (cast { alpha: (cast renderProxy : RenderProxy).alpha, transform2D: transform } : { var alpha:Float; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }), (cast null : Null<ColorScaleBias>), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float), (cast u0 : Float), (cast v0 : Float), (cast u1 : Float), (cast v1 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : Float);
+    return cast (cast writeWgpuQuadUniforms((cast state), (cast { alpha: (cast renderProxy : RenderProxy).alpha, transform2D: transform }), (cast null), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float), (cast u0 : Float), (cast v0 : Float), (cast u1 : Float), (cast v1 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : Float);
     return cast null;
   }
 
@@ -135,7 +135,7 @@ class WgpuShader {
     var uniformDataU32:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
     var matrixArray:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var viewport:{ var width:Float; var height:Float; } = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     byteOffset = (cast runtime : WgpuRenderStateRuntime).uniformOffset;
     floatBase = (_Runtime.toInt32(byteOffset) >> 2);
     __destructure1 = runtime;
@@ -143,7 +143,7 @@ class WgpuShader {
     uniformDataU32 = _Runtime.field(__destructure1, 'uniformDataU32');
     matrixArray = _Runtime.field(__destructure1, 'matrixArray');
     viewport = _Runtime.coalesce((cast runtime : WgpuRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : WgpuRenderState).canvas);
-    setWgpuMatrixFromTransform((cast matrixArray : flighthq._internal._Float32Array), (cast (cast renderProxy : { var alpha:Float; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }).transform2D : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }), (cast viewport : { var width:Float; var height:Float; }));
+    setWgpuMatrixFromTransform((cast matrixArray), (cast (cast renderProxy : { var alpha:Float; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }).transform2D), (cast viewport));
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 0.0), flighthq._internal._StaticIndex.readFloat32Array(matrixArray, 0.0));
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 1.0), flighthq._internal._StaticIndex.readFloat32Array(matrixArray, 1.0));
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 2.0), flighthq._internal._StaticIndex.readFloat32Array(matrixArray, 2.0));
@@ -160,14 +160,14 @@ class WgpuShader {
     flighthq._internal._StaticIndex.writeUint32Array(uniformDataU32, (floatBase + 13.0), ((cast !_Runtime.strictEquals(colorScaleBias, null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     flighthq._internal._StaticIndex.writeUint32Array(uniformDataU32, (floatBase + 14.0), ((cast straightTextureAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 15.0), 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 16.0), _Runtime.coalesce(_Runtime.optionalField(colorScaleBias, 'redScale'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 17.0), _Runtime.coalesce(_Runtime.optionalField(colorScaleBias, 'greenScale'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 18.0), _Runtime.coalesce(_Runtime.optionalField(colorScaleBias, 'blueScale'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 19.0), _Runtime.coalesce(_Runtime.optionalField(colorScaleBias, 'alphaScale'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 20.0), _Runtime.coalesce(_Runtime.optionalField(colorScaleBias, 'redBias'), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 21.0), _Runtime.coalesce(_Runtime.optionalField(colorScaleBias, 'greenBias'), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 22.0), _Runtime.coalesce(_Runtime.optionalField(colorScaleBias, 'blueBias'), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 23.0), _Runtime.coalesce(_Runtime.optionalField(colorScaleBias, 'alphaBias'), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 16.0), _Runtime.coalesce(({ final __structural0 = colorScaleBias; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var redScale:Float; }).redScale; }), function():Dynamic return cast 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 17.0), _Runtime.coalesce(({ final __structural1 = colorScaleBias; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var greenScale:Float; }).greenScale; }), function():Dynamic return cast 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 18.0), _Runtime.coalesce(({ final __structural2 = colorScaleBias; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var blueScale:Float; }).blueScale; }), function():Dynamic return cast 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 19.0), _Runtime.coalesce(({ final __structural3 = colorScaleBias; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var alphaScale:Float; }).alphaScale; }), function():Dynamic return cast 1.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 20.0), _Runtime.coalesce(({ final __structural4 = colorScaleBias; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var redBias:Float; }).redBias; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 21.0), _Runtime.coalesce(({ final __structural5 = colorScaleBias; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var greenBias:Float; }).greenBias; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 22.0), _Runtime.coalesce(({ final __structural6 = colorScaleBias; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var blueBias:Float; }).blueBias; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 23.0), _Runtime.coalesce(({ final __structural7 = colorScaleBias; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var alphaBias:Float; }).alphaBias; }), function():Dynamic return cast 0.0));
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 24.0), x0);
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 25.0), y0);
     flighthq._internal._StaticIndex.writeFloat32Array(uniformData, (floatBase + 26.0), x1);
@@ -183,7 +183,7 @@ class WgpuShader {
 
   public static function createWgpuBlendState__wgpuShader(srcFactor:flighthq._internal.dom.GPUBlendFactor, dstFactor:flighthq._internal.dom.GPUBlendFactor, operation:flighthq._internal.dom.GPUBlendOperation = 'add'):flighthq._internal.dom.GPUBlendState {
     var component:flighthq._internal.dom.GPUBlendComponent = cast _Runtime.UNDEFINED;
-    component = { srcFactor: srcFactor, dstFactor: dstFactor, operation: operation };
+    component = (cast { srcFactor: srcFactor, dstFactor: dstFactor, operation: operation });
     return cast { color: component, alpha: component };
     return cast null;
   }

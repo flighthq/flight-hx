@@ -21,9 +21,9 @@ class Updater {
   public static function _setState__updater(updater:AppUpdater, update:flighthq._internal._Union2<UpdaterState, UpdaterState->UpdaterState>):Void {
     var prev:UpdaterState = cast _Runtime.UNDEFINED;
     var next:UpdaterState = cast _Runtime.UNDEFINED;
-    prev = _Runtime.coalesce(((cast Updater._states__updater : flighthq._internal._WeakMap<AppUpdater, UpdaterState>).get(updater)), function():Dynamic return cast (cast createUpdaterState() : Null<UpdaterState>));
-    next = ((cast _Runtime.strictEquals(_Runtime.typeofValue(update), 'function') : Bool) ? (cast (cast (cast update : UpdaterState->UpdaterState)((cast prev : UpdaterState)) : UpdaterState) : Dynamic) : (cast update : Dynamic));
-    ((cast Updater._states__updater : flighthq._internal._WeakMap<AppUpdater, UpdaterState>).set(updater, next));
+    prev = _Runtime.coalesce(((cast Updater._states__updater : flighthq._internal._WeakMap<AppUpdater, UpdaterState>).get(updater)), function():Dynamic return cast (cast createUpdaterState() : UpdaterState));
+    next = ((cast _Runtime.strictEquals(_Runtime.typeofValue(update), 'function') : Bool) ? (cast (cast (cast update : UpdaterState->UpdaterState)((cast prev)) : UpdaterState) : Dynamic) : (cast update : Dynamic));
+    ((cast Updater._states__updater : flighthq._internal._WeakMap<AppUpdater, UpdaterState>).set(updater, (cast next)));
   }
 
   public static final _states__updater:flighthq._internal._WeakMap<AppUpdater, UpdaterState> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
@@ -33,43 +33,43 @@ class Updater {
   public static function attachAppUpdater(updater:AppUpdater):Void {
     var backend:UpdaterBackend = cast _Runtime.UNDEFINED;
     var unsubscribes:Array<Void->Void> = cast _Runtime.UNDEFINED;
-    detachAppUpdater((cast updater : AppUpdater));
+    detachAppUpdater((cast updater));
     backend = (cast getUpdaterBackend() : UpdaterBackend);
-    unsubscribes = cast ([(cast backend : UpdaterBackend).subscribeChecking(function():Void {
-      Updater._setState__updater((cast updater : AppUpdater), (cast { phase: 'Checking', info: null, progress: null, error: null } : flighthq._internal._Union2<UpdaterState, UpdaterState->UpdaterState>));
+    unsubscribes = (cast cast ([(cast backend : UpdaterBackend).subscribeChecking((cast function():Void {
+      Updater._setState__updater((cast updater), (cast { phase: 'Checking', info: null, progress: null, error: null }));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onChecking]]), 1);
-    }), (cast backend : UpdaterBackend).subscribeUpdateAvailable(function(info:UpdateInfo):Void {
-      Updater._setState__updater((cast updater : AppUpdater), (cast { phase: 'UpdateAvailable', info: info, progress: null, error: null } : flighthq._internal._Union2<UpdaterState, UpdaterState->UpdaterState>));
+    })), (cast backend : UpdaterBackend).subscribeUpdateAvailable((cast function(info:UpdateInfo):Void {
+      Updater._setState__updater((cast updater), (cast { phase: 'UpdateAvailable', info: info, progress: null, error: null }));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateAvailable], [info]]), 1);
-    }), (cast backend : UpdaterBackend).subscribeUpdateNotAvailable(function():Void {
-      Updater._setState__updater((cast updater : AppUpdater), (cast function(prev:UpdaterState):{ var phase:String; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Idle' }]) : flighthq._internal._Union2<UpdaterState, UpdaterState->UpdaterState>));
+    })), (cast backend : UpdaterBackend).subscribeUpdateNotAvailable((cast function():Void {
+      Updater._setState__updater((cast updater), (cast function(prev:UpdaterState):{ var phase:String; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Idle' }])));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateNotAvailable]]), 1);
-    }), (cast backend : UpdaterBackend).subscribeDownloadProgress(function(progress:UpdateProgress):Void {
-      Updater._setState__updater((cast updater : AppUpdater), (cast function(prev:UpdaterState):{ var phase:String; var progress:UpdateProgress; var info:Null<UpdateInfo>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Downloading' }, { progress: progress }]) : flighthq._internal._Union2<UpdaterState, UpdaterState->UpdaterState>));
+    })), (cast backend : UpdaterBackend).subscribeDownloadProgress((cast function(progress:UpdateProgress):Void {
+      Updater._setState__updater((cast updater), (cast function(prev:UpdaterState):{ var phase:String; var progress:UpdateProgress; var info:Null<UpdateInfo>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Downloading' }, { progress: progress }])));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onDownloadProgress], [progress]]), 1);
-    }), (cast backend : UpdaterBackend).subscribeUpdateDownloaded(function(info:UpdateInfo):Void {
-      Updater._setState__updater((cast updater : AppUpdater), (cast function(prev:UpdaterState):{ var phase:String; var info:UpdateInfo; var progress:flighthq._internal._Any; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Downloaded' }, { info: info }, { progress: null }]) : flighthq._internal._Union2<UpdaterState, UpdaterState->UpdaterState>));
+    })), (cast backend : UpdaterBackend).subscribeUpdateDownloaded((cast function(info:UpdateInfo):Void {
+      Updater._setState__updater((cast updater), (cast function(prev:UpdaterState):{ var phase:String; var info:UpdateInfo; var progress:flighthq._internal._Any; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Downloaded' }, { info: info }, { progress: null }])));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateDownloaded], [info]]), 1);
-    }), (cast backend : UpdaterBackend).subscribeError(function(error:UpdaterError):Void {
-      Updater._setState__updater((cast updater : AppUpdater), (cast function(prev:UpdaterState):{ var phase:String; var error:UpdaterError; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; } return _Runtime.mergeObjects([prev, { phase: 'Error' }, { error: error }]) : flighthq._internal._Union2<UpdaterState, UpdaterState->UpdaterState>));
+    })), (cast backend : UpdaterBackend).subscribeError((cast function(error:UpdaterError):Void {
+      Updater._setState__updater((cast updater), (cast function(prev:UpdaterState):{ var phase:String; var error:UpdaterError; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; } return _Runtime.mergeObjects([prev, { phase: 'Error' }, { error: error }])));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onError], [error]]), 1);
-    }), (cast backend : UpdaterBackend).subscribeUpdateCancelled(function():Void {
-      Updater._setState__updater((cast updater : AppUpdater), (cast function(prev:UpdaterState):{ var phase:String; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Idle' }]) : flighthq._internal._Union2<UpdaterState, UpdaterState->UpdaterState>));
+    })), (cast backend : UpdaterBackend).subscribeUpdateCancelled((cast function():Void {
+      Updater._setState__updater((cast updater), (cast function(prev:UpdaterState):{ var phase:String; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Idle' }])));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateCancelled]]), 1);
-    }), (cast backend : UpdaterBackend).subscribeUpdateStaging(function():Void {
-      Updater._setState__updater((cast updater : AppUpdater), (cast function(prev:UpdaterState):{ var phase:String; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Staging' }]) : flighthq._internal._Union2<UpdaterState, UpdaterState->UpdaterState>));
+    })), (cast backend : UpdaterBackend).subscribeUpdateStaging((cast function():Void {
+      Updater._setState__updater((cast updater), (cast function(prev:UpdaterState):{ var phase:String; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Staging' }])));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateStaging]]), 1);
-    }), (cast backend : UpdaterBackend).subscribeUpdateVerified(function():Void {
+    })), (cast backend : UpdaterBackend).subscribeUpdateVerified((cast function():Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateVerified]]), 1);
-    }), (cast backend : UpdaterBackend).subscribeUpdateRolledBack(function():Void {
-      Updater._setState__updater((cast updater : AppUpdater), (cast function(prev:UpdaterState):{ var phase:String; var info:flighthq._internal._Any; var progress:flighthq._internal._Any; var error:flighthq._internal._Any; } return _Runtime.mergeObjects([prev, { phase: 'Idle' }, { info: null }, { progress: null }, { error: null }]) : flighthq._internal._Union2<UpdaterState, UpdaterState->UpdaterState>));
+    })), (cast backend : UpdaterBackend).subscribeUpdateRolledBack((cast function():Void {
+      Updater._setState__updater((cast updater), (cast function(prev:UpdaterState):{ var phase:String; var info:flighthq._internal._Any; var progress:flighthq._internal._Any; var error:flighthq._internal._Any; } return _Runtime.mergeObjects([prev, { phase: 'Idle' }, { info: null }, { progress: null }, { error: null }])));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateRolledBack]]), 1);
-    })] : Array<Dynamic>);
-    ((cast Updater._subscriptions__updater : flighthq._internal._WeakMap<AppUpdater, Void->Void>).set(updater, function():Void {
+    }))] : Array<Dynamic>));
+    ((cast Updater._subscriptions__updater : flighthq._internal._WeakMap<AppUpdater, Void->Void>).set(updater, (cast function():Void {
       for (unsubscribe in _Runtime.iterable(unsubscribes)) {
         unsubscribe();
       }
-    }));
+    })));
   }
 
   public static function cancelAppUpdateDownload():Void {
@@ -91,8 +91,8 @@ class Updater {
 
   public static function createAppUpdater():AppUpdater {
     var updater:AppUpdater = cast _Runtime.UNDEFINED;
-    updater = { onChecking: (cast createSignal() : Signal<Void->Void>), onDownloadProgress: (cast createSignal() : Signal<UpdateProgress->Void>), onError: (cast createSignal() : Signal<UpdaterError->Void>), onUpdateAvailable: (cast createSignal() : Signal<UpdateInfo->Void>), onUpdateCancelled: (cast createSignal() : Signal<Void->Void>), onUpdateDownloaded: (cast createSignal() : Signal<UpdateInfo->Void>), onUpdateNotAvailable: (cast createSignal() : Signal<Void->Void>), onUpdateRolledBack: (cast createSignal() : Signal<Void->Void>), onUpdateStaging: (cast createSignal() : Signal<Void->Void>), onUpdateVerified: (cast createSignal() : Signal<Void->Void>) };
-    ((cast Updater._states__updater : flighthq._internal._WeakMap<AppUpdater, UpdaterState>).set(updater, (cast createUpdaterState() : UpdaterState)));
+    updater = (cast { onChecking: (cast createSignal() : Signal<Void->Void>), onDownloadProgress: (cast createSignal() : Signal<UpdateProgress->Void>), onError: (cast createSignal() : Signal<UpdaterError->Void>), onUpdateAvailable: (cast createSignal() : Signal<UpdateInfo->Void>), onUpdateCancelled: (cast createSignal() : Signal<Void->Void>), onUpdateDownloaded: (cast createSignal() : Signal<UpdateInfo->Void>), onUpdateNotAvailable: (cast createSignal() : Signal<Void->Void>), onUpdateRolledBack: (cast createSignal() : Signal<Void->Void>), onUpdateStaging: (cast createSignal() : Signal<Void->Void>), onUpdateVerified: (cast createSignal() : Signal<Void->Void>) });
+    ((cast Updater._states__updater : flighthq._internal._WeakMap<AppUpdater, UpdaterState>).set(updater, (cast (cast createUpdaterState() : UpdaterState))));
     return cast updater;
     return cast null;
   }
@@ -121,8 +121,10 @@ class Updater {
 
     }, getChannel: function():String {
       return cast _channel;
+      return cast _Runtime.UNDEFINED;
     }, getConfig: function():UpdaterConfig {
       return cast _config;
+      return cast _Runtime.UNDEFINED;
     }, quitAndInstall: function():Void {
 
     }, rollback: function():Void {
@@ -139,42 +141,52 @@ class Updater {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeDownloadProgress: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeError: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateAvailable: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateCancelled: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateDownloaded: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateNotAvailable: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateRolledBack: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateStaging: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeUpdateVerified: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
@@ -189,7 +201,7 @@ class Updater {
   }
 
   public static function disposeAppUpdater(updater:AppUpdater):Void {
-    detachAppUpdater((cast updater : AppUpdater));
+    detachAppUpdater((cast updater));
   }
 
   public static function downloadAppUpdate():Void {
@@ -203,7 +215,7 @@ class Updater {
 
   @:noCompletion
   public static function getUpdaterBackend():UpdaterBackend {
-    if ((cast _Runtime.strictEquals(Updater._backend__updater, null) : Bool)) { (Updater._backend__updater = cast ((cast createWebUpdaterBackend() : Null<UpdaterBackend>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Updater._backend__updater, null) : Bool)) { (Updater._backend__updater = cast ((cast createWebUpdaterBackend() : UpdaterBackend) : Dynamic)); }
     return cast Updater._backend__updater;
     return cast null;
   }
@@ -237,18 +249,18 @@ class Updater {
   }
 
   public static function setUpdaterChannel(channel:String):Void {
-    (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).setChannel(channel);
+    (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).setChannel((cast channel : String));
   }
 
   public static function setUpdaterConfig(config:UpdaterConfig):Void {
-    (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).setConfig(config);
+    (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).setConfig((cast config));
   }
 
   public static function setUpdaterFeedUrl(url:String):Void {
-    (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).setFeedUrl(url);
+    (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).setFeedUrl((cast url : String));
   }
 
   public static function setUpdaterSignatureConfig(config:Null<UpdaterSignatureConfig>):Void {
-    (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).setSignatureConfig(config);
+    (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).setSignatureConfig((cast config));
   }
 }

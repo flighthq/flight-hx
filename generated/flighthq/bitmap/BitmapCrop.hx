@@ -7,6 +7,7 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.types.AlphaType;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapEdgeMode;
+import flighthq.types.Entity;
 import flighthq.types.PixelFormat;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Types.BitmapTextureSourceKind;
@@ -52,7 +53,7 @@ class BitmapCrop {
         py++;
       }
     }
-    return cast (cast createEntity({ alphaType: source.alphaType, gamut: source.gamut, data: data, format: source.format, height: rh, kind: BitmapTextureSourceKind, version: 0.0, width: rw }) : Bitmap);
+    return cast (cast createEntity((cast { alphaType: source.alphaType, gamut: source.gamut, data: data, format: source.format, height: rh, kind: BitmapTextureSourceKind, version: 0.0, width: rw })) : { >Entity, var alphaType:AlphaType; var gamut:String; var data:flighthq._internal._UInt8ClampedArray; var format:PixelFormat; var height:Float; var kind:String; var version:Float; var width:Float; });
     return cast null;
   }
 
@@ -93,8 +94,8 @@ class BitmapCrop {
               flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)));
               flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0)));
             } else {
-              var cx:Null<Float> = (cast BitmapCrop.resolveEdge__bitmapCrop((cast sx : Float), (cast sw : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>);
-              var cy:Null<Float> = (cast BitmapCrop.resolveEdge__bitmapCrop((cast sy : Float), (cast sh : Float), (cast edgeMode : BitmapEdgeMode)) : Null<Float>);
+              var cx:Null<Float> = (cast BitmapCrop.resolveEdge__bitmapCrop((cast sx : Float), (cast sw : Float), (cast edgeMode)) : Null<Float>);
+              var cy:Null<Float> = (cast BitmapCrop.resolveEdge__bitmapCrop((cast sy : Float), (cast sh : Float), (cast edgeMode)) : Null<Float>);
               if ((cast ((cast !_Runtime.strictEquals(cx, null) : Bool) && (cast !_Runtime.strictEquals(cy, null) : Bool)) : Bool)) {
                 var si:Float = (((cy * sw) + cx) * 4.0);
                 flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si));
@@ -114,7 +115,7 @@ class BitmapCrop {
         py++;
       }
     }
-    return cast (cast createEntity({ alphaType: source.alphaType, gamut: source.gamut, data: data, format: source.format, height: dh, kind: BitmapTextureSourceKind, version: 0.0, width: dw }) : Bitmap);
+    return cast (cast createEntity((cast { alphaType: source.alphaType, gamut: source.gamut, data: data, format: source.format, height: dh, kind: BitmapTextureSourceKind, version: 0.0, width: dw })) : { >Entity, var alphaType:AlphaType; var gamut:String; var data:flighthq._internal._UInt8ClampedArray; var format:PixelFormat; var height:Float; var kind:String; var version:Float; var width:Float; });
     return cast null;
   }
 
@@ -153,9 +154,9 @@ class BitmapCrop {
       }
     }
     if ((cast ((cast maxX : Float) < (cast 0.0 : Float)) : Bool)) {
-      return cast (cast createEntity({ alphaType: source.alphaType, gamut: source.gamut, data: new flighthq._internal._UInt8ClampedArray(4.0), format: source.format, height: 1.0, kind: BitmapTextureSourceKind, version: 0.0, width: 1.0 }) : Bitmap);
+      return cast (cast createEntity((cast { alphaType: source.alphaType, gamut: source.gamut, data: new flighthq._internal._UInt8ClampedArray(4.0), format: source.format, height: 1.0, kind: BitmapTextureSourceKind, version: 0.0, width: 1.0 })) : { >Entity, var alphaType:AlphaType; var gamut:String; var data:flighthq._internal._UInt8ClampedArray; var format:PixelFormat; var height:Float; var kind:String; var version:Float; var width:Float; });
     }
-    return cast (cast cropBitmap((cast source : Bitmap), (cast { x: minX, y: minY, width: ((maxX - minX) + 1.0), height: ((maxY - minY) + 1.0) } : RectangleLike)) : Bitmap);
+    return cast (cast cropBitmap((cast source), (cast { x: minX, y: minY, width: ((maxX - minX) + 1.0), height: ((maxY - minY) + 1.0) })) : Bitmap);
     return cast null;
   }
 

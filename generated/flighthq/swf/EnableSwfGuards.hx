@@ -14,17 +14,17 @@ class EnableSwfGuards {
   }
 
   public static function disableSwfGuards():Void {
-    setSwfFilterListGuard(null);
+    setSwfFilterListGuard((cast null));
     (EnableSwfGuards.swfGuardsEnabled__enableSwfGuards = cast (false : Dynamic));
   }
 
   public static function enableSwfGuards():Void {
-    setSwfFilterListGuard(EnableSwfGuards.warnOnUnknownSwfFilter__enableSwfGuards);
+    setSwfFilterListGuard((cast EnableSwfGuards.warnOnUnknownSwfFilter__enableSwfGuards));
     (EnableSwfGuards.swfGuardsEnabled__enableSwfGuards = cast (true : Dynamic));
   }
 
   public static function warnOnUnknownSwfFilter__enableSwfGuards(filterId:Float, filterIndex:Float):Void {
-    (cast logOnce((cast 'swf:unknown-filter:' + Std.string(filterId) + '' : String), (cast LogLevel.Warn : LogLevel), { filterId: filterId, filterIndex: filterIndex, message: 'readSwfFilterList: an unknown variable-width filter prevents safe parsing of the remaining filters and trailing blend mode — remove the unsupported filter from the asset before importing it.' }, (cast 'swf' : Null<String>)) : Bool);
+    (cast logOnce((cast 'swf:unknown-filter:' + Std.string(filterId) + '' : String), (cast LogLevel.Warn), (cast { filterId: filterId, filterIndex: filterIndex, message: 'readSwfFilterList: an unknown variable-width filter prevents safe parsing of the remaining filters and trailing blend mode — remove the unsupported filter from the asset before importing it.' }), (cast 'swf')) : Bool);
   }
 
   public static var swfGuardsEnabled__enableSwfGuards:Bool = false;

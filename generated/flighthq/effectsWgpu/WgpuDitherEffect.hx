@@ -20,20 +20,20 @@ class WgpuDitherEffect {
     var levels:Float = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     levels = _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 4.0);
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'stylization.dither' : String), (cast WgpuDitherEffect.DITHER_FRAGMENT_WGSL__wgpuDitherEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'stylization.dither' : String), (cast WgpuDitherEffect.DITHER_FRAGMENT_WGSL__wgpuDitherEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, HxMath.max(2.0, levels));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
-  public static final defaultWgpuDitherEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyDitherEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : DitherEffect) : DitherEffect));
-  };
+  public static final defaultWgpuDitherEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyDitherEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : DitherEffect)));
+  });
 
   public static function registerWgpuDitherEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'DitherEffect' : String), (cast defaultWgpuDitherEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'DitherEffect' : String), (cast defaultWgpuDitherEffectRunner));
   }
 
   public static final DITHER_FRAGMENT_WGSL__wgpuDitherEffect:String = '\nstruct Uniforms {\n  u_levels : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn bayer(p : vec2i) -> f32 {\n  let x = p.x & 3;\n  let y = p.y & 3;\n  var m = array<i32, 16>(0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5);\n  return f32(m[y * 4 + x]) / 16.0;\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let px = vec2i(uv * uni.u_resolution);\n  let t = bayer(px) - 0.5;\n  let steps = uni.u_levels - 1.0;\n  let q = floor(c.rgb * steps + 0.5 + t) / steps;\n  return vec4f(clamp(q, vec3f(0.0), vec3f(1.0)), c.a);\n}';

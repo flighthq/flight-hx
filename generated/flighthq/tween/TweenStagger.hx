@@ -12,7 +12,7 @@ import flighthq.types.TweenOptions;
 import flighthq.types.TweenStaggerOptions;
 
 class TweenStagger {
-  public static function createTweenStagger<T>(manager:TweenManager, targets:Array<T>, duration:Float, propertyMap:NumericProps<T>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Tween<T>> {
+  public static function createTweenStagger<T:flighthq._internal._Object>(manager:TweenManager, targets:Array<T>, duration:Float, propertyMap:NumericProps<T>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Tween<T>> {
     var each:Float = cast _Runtime.UNDEFINED;
     var from:flighthq._internal._Union2<Float, String> = cast _Runtime.UNDEFINED;
     var staggerEase:Null<EasingFunction> = cast _Runtime.UNDEFINED;
@@ -20,17 +20,17 @@ class TweenStagger {
     var count:Float = cast _Runtime.UNDEFINED;
     var tweens:Array<Tween<T>> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(targets, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    each = _Runtime.coalesce(_Runtime.optionalField(stagger, 'each'), function():Dynamic return cast 0.1);
-    from = _Runtime.coalesce(_Runtime.optionalField(stagger, 'from'), function():Dynamic return cast 'start');
-    staggerEase = _Runtime.optionalField(stagger, 'staggerEase');
-    baseDelay = _Runtime.coalesce(_Runtime.optionalField(options, 'delay'), function():Dynamic return cast 0.0);
+    each = _Runtime.coalesce(({ final __structural0 = stagger; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var each:Null<Float>; }).each; }), function():Dynamic return cast 0.1);
+    from = _Runtime.coalesce(({ final __structural1 = stagger; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var from:Null<flighthq._internal._Union2<Float, String>>; }).from; }), function():Dynamic return cast 'start');
+    staggerEase = ({ final __structural2 = stagger; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var staggerEase:Null<EasingFunction>; }).staggerEase; });
+    baseDelay = _Runtime.coalesce(({ final __structural3 = options; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var delay:Null<Float>; }).delay; }), function():Dynamic return cast 0.0);
     count = _Runtime.field(targets, 'length');
-    tweens = cast ([] : Array<Dynamic>);
+    tweens = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var staggerOffset:Float = (cast TweenStagger.computeStaggerDelay__tweenStagger((cast i : Float), (cast count : Float), (cast each : Float), (cast from : flighthq._internal._Union2<Float, String>), (cast staggerEase : Null<EasingFunction>)) : Float);
-        var tween:Tween<T> = (cast createTween((cast manager : TweenManager), flighthq._internal._StaticIndex.readArray(targets, i), (cast duration : Float), propertyMap, (cast _Runtime.mergeObjects([options, { delay: (baseDelay + staggerOffset) }]) : Null<TweenOptions>)) : Tween<T>);
+        var staggerOffset:Float = (cast TweenStagger.computeStaggerDelay__tweenStagger((cast i : Float), (cast count : Float), (cast each : Float), (cast from), (cast staggerEase)) : Float);
+        var tween:Tween<T> = (cast createTween((cast manager), (cast flighthq._internal._StaticIndex.readArray(targets, i)), (cast duration : Float), (cast propertyMap), (cast _Runtime.mergeObjects([options, { delay: (baseDelay + staggerOffset) }]))) : Tween<T>);
         _Runtime.callProperty(tweens, 'push', cast ([tween] : Array<Dynamic>));
         i++;
       }

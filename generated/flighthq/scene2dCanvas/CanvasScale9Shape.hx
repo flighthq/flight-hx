@@ -16,7 +16,7 @@ import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Renderable;
+import flighthq.types.RenderState;
 import flighthq.types.Scale9Mapper;
 import flighthq.types.Scale9Shape;
 import flighthq.types.Scale9Shape.Scale9ShapeData;
@@ -24,7 +24,7 @@ import flighthq.types.Scene2DRenderer;
 import flighthq.types.ShapeCommand.ShapeCommandToken;
 
 class CanvasScale9Shape {
-  public static final _remappedCommands__canvasScale9Shape:Array<ShapeCommandToken> = cast ([] : Array<Dynamic>);
+  public static final _remappedCommands__canvasScale9Shape:Array<ShapeCommandToken> = (cast cast ([] : Array<Dynamic>));
 
   @:noCompletion
   public static function drawCanvasScale9Shape(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
@@ -37,7 +37,7 @@ class CanvasScale9Shape {
     var scaleX:Float = cast _Runtime.UNDEFINED;
     var scaleY:Float = cast _Runtime.UNDEFINED;
     var mapper:Null<Scale9Mapper> = cast _Runtime.UNDEFINED;
-    drawCanvasScene2D((cast state : CanvasRenderState), (cast renderProxy : RenderProxy2D));
+    drawCanvasScene2D((cast state), (cast renderProxy));
     source = (cast (cast renderProxy : RenderProxy2D).source : Scale9Shape);
     __destructure0 = (cast source : Scale9Shape).data;
     commands = _Runtime.field(__destructure0, 'commands');
@@ -49,18 +49,18 @@ class CanvasScale9Shape {
     __destructure1 = source;
     scaleX = _Runtime.field(__destructure1, 'scaleX');
     scaleY = _Runtime.field(__destructure1, 'scaleY');
-    mapper = (cast buildScale9Mapper((cast commands : Array<flighthq._internal._Any>), scale9Grid, (cast scaleX : Float), (cast scaleY : Float)) : Null<Scale9Mapper>);
+    mapper = (cast buildScale9Mapper((cast commands), (cast scale9Grid), (cast scaleX : Float), (cast scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
-      setCanvasTransform((cast state : CanvasRenderState), (cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast renderProxy : RenderProxy2D).transform2D);
-      renderCanvasShapeCommands((cast context : flighthq._internal.dom.CanvasRenderingContext2D), state, (cast commands : Array<flighthq._internal._Any>), (cast getCanvasRenderStateTextureResolvers((cast state : CanvasRenderState)) : CanvasTextureResolvers));
+      setCanvasTransform((cast state), (cast context), (cast (cast renderProxy : RenderProxy2D).transform2D));
+      renderCanvasShapeCommands((cast context), (cast state), (cast commands), (cast (cast getCanvasRenderStateTextureResolvers((cast state)) : CanvasTextureResolvers)));
     } else {
-      CanvasScale9Shape.applyStrippedTransform__canvasScale9Shape((cast state : CanvasRenderState), (cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast (cast renderProxy : RenderProxy2D).transform2D : MatrixLike), (cast scaleX : Float), (cast scaleY : Float));
-      mapScale9ShapeCommands((cast CanvasScale9Shape._remappedCommands__canvasScale9Shape : Array<ShapeCommandToken>), (cast commands : Array<ShapeCommandToken>), mapper);
-      renderCanvasShapeCommands((cast context : flighthq._internal.dom.CanvasRenderingContext2D), state, (cast CanvasScale9Shape._remappedCommands__canvasScale9Shape : Array<flighthq._internal._Any>), (cast getCanvasRenderStateTextureResolvers((cast state : CanvasRenderState)) : CanvasTextureResolvers));
+      CanvasScale9Shape.applyStrippedTransform__canvasScale9Shape((cast state), (cast context), (cast (cast renderProxy : RenderProxy2D).transform2D), (cast scaleX : Float), (cast scaleY : Float));
+      mapScale9ShapeCommands((cast CanvasScale9Shape._remappedCommands__canvasScale9Shape), (cast commands), (cast mapper));
+      renderCanvasShapeCommands((cast context), (cast state), (cast CanvasScale9Shape._remappedCommands__canvasScale9Shape), (cast (cast getCanvasRenderStateTextureResolvers((cast state)) : CanvasTextureResolvers)));
     }
   }
 
-  public static final defaultCanvasScale9ShapeRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawCanvasScale9Shape };
+  public static final defaultCanvasScale9ShapeRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: drawCanvasScale9Shape });
 
   public static function applyStrippedTransform__canvasScale9Shape(state:CanvasRenderState, context:flighthq._internal.dom.CanvasRenderingContext2D, t:MatrixLike, scaleX:Float, scaleY:Float):Void {
     var a:Float = cast _Runtime.UNDEFINED;

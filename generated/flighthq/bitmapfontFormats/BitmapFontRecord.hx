@@ -32,7 +32,7 @@ class BitmapFontRecord {
       for (page in _Runtime.iterable(record.pages)) {
         var atlas:Null<TextureAtlas> = (cast resolvePage((cast page.id : Float), (cast page.file : String)) : Null<TextureAtlas>);
         if ((cast !_Runtime.strictEquals(atlas, null) : Bool)) {
-          ((cast resolved : flighthq._internal._Map<Float, TextureAtlas>).set(page.id, atlas));
+          ((cast resolved : flighthq._internal._Map<Float, TextureAtlas>).set(page.id, (cast atlas)));
           if ((cast ((cast page.id : Float) > (cast maxPageId : Float)) : Bool)) { (maxPageId = cast (page.id : Dynamic)); }
         }
       }
@@ -41,7 +41,7 @@ class BitmapFontRecord {
       if ((cast !(cast ((cast resolved : flighthq._internal._Map<Float, TextureAtlas>).has(char.page)) : Bool) : Bool)) { return cast null; }
       if ((cast ((cast char.page : Float) > (cast maxPageId : Float)) : Bool)) { (maxPageId = cast (char.page : Dynamic)); }
     }
-    pages = cast ([] : Array<Dynamic>);
+    pages = (cast cast ([] : Array<Dynamic>));
     {
       var id:Float = 0.0;
       while ((cast ((cast id : Float) <= (cast maxPageId : Float)) : Bool)) {
@@ -52,8 +52,8 @@ class BitmapFontRecord {
     }
     glyphs = _Runtime.callProperty(record.chars, 'map', cast ([function(char:BitmapFontCharRecord, __unused0:Float, __unused1:Array<BitmapFontCharRecord>):{ var advance:Float; var bearingX:Float; var bearingY:Float; var codepoint:Float; var height:Float; var page:Float; var width:Float; var x:Float; var y:Float; } return { advance: char.xadvance, bearingX: char.xoffset, bearingY: (record.base - char.yoffset), codepoint: char.id, height: char.height, page: char.page, width: char.width, x: char.x, y: char.y }] : Array<Dynamic>));
     kerning = _Runtime.callProperty(record.kernings, 'map', cast ([function(pair:BitmapFontKerningRecord, __unused2:Float, __unused3:Array<BitmapFontKerningRecord>):{ var amount:Float; var left:Float; var right:Float; } return { amount: pair.amount, left: pair.first, right: pair.second }] : Array<Dynamic>));
-    data = { encoding: record.encoding, glyphs: glyphs, kerning: kerning, metrics: { ascent: record.base, descent: (record.lineHeight - record.base), lineGap: 0.0 }, pages: pages };
-    return cast (cast createBitmapFont((cast data : BitmapFontData)) : Null<BitmapFont>);
+    data = (cast { encoding: record.encoding, glyphs: glyphs, kerning: kerning, metrics: { ascent: record.base, descent: (record.lineHeight - record.base), lineGap: 0.0 }, pages: pages });
+    return cast (cast createBitmapFont((cast data)) : BitmapFont);
     return cast null;
   }
 }

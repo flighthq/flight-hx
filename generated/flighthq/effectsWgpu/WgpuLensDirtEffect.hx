@@ -24,20 +24,20 @@ class WgpuLensDirtEffect {
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.55);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'lens.lensDirt' : String), (cast WgpuLensDirtEffect.LENS_DIRT_FRAGMENT_WGSL__wgpuLensDirtEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'lens.lensDirt' : String), (cast WgpuLensDirtEffect.LENS_DIRT_FRAGMENT_WGSL__wgpuLensDirtEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, threshold);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, seed);
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
-  public static final defaultWgpuLensDirtEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyLensDirtEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : LensDirtEffect) : LensDirtEffect));
-  };
+  public static final defaultWgpuLensDirtEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyLensDirtEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : LensDirtEffect)));
+  });
 
   public static function registerWgpuLensDirtEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'LensDirtEffect' : String), (cast defaultWgpuLensDirtEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'LensDirtEffect' : String), (cast defaultWgpuLensDirtEffectRunner));
   }
 
   public static final LENS_DIRT_FRAGMENT_WGSL__wgpuLensDirtEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_threshold : f32,\n  u_seed : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn dirtHash(p : vec2f) -> f32 { return fract(sin(dot(p, vec2f(127.1, 311.7))) * 43758.5453123); }\n\nfn dirtAmount(uv : vec2f, seed : f32) -> f32 {\n  var acc = 0.0;\n  for (var i = 0; i < 8; i = i + 1) {\n    let fi = f32(i);\n    let c = vec2f(dirtHash(vec2f(fi, seed)), dirtHash(vec2f(fi + 9.0, seed)));\n    let r = 0.06 + 0.16 * dirtHash(vec2f(fi + 3.0, seed));\n    let d = distance(uv, c) / r;\n    acc = acc + smoothstep(1.0, 0.0, d) * (0.3 + 0.7 * dirtHash(vec2f(fi + 5.0, seed)));\n  }\n  return clamp(acc, 0.0, 1.0);\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let lum = dot(c.rgb, vec3f(0.299, 0.587, 0.114));\n  let bright = max(0.0, lum - uni.u_threshold);\n  let dirt = dirtAmount(uv, uni.u_seed + 1.0);\n  return vec4f(c.rgb + bright * dirt * uni.u_intensity * 2.0, c.a);\n}';

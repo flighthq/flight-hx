@@ -34,21 +34,21 @@ class GlVignetteEffect {
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
     a = ((_Runtime.toInt32(color) & 255) / 255.0);
-    program = (cast getGlEffectProgram((cast state : GlRenderState), (cast 'lens.vignette' : String), (cast GlVignetteEffect.VIGNETTE_FRAGMENT_SRC__glVignetteEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), program, (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram((cast state), (cast 'lens.vignette' : String), (cast GlVignetteEffect.VIGNETTE_FRAGMENT_SRC__glVignetteEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_radius'), radius);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_softness'), softness);
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_color'), r, g, b, a);
-    });
+    }));
   }
 
-  public static final defaultGlVignetteEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyVignetteEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : VignetteEffect) : VignetteEffect));
-  };
+  public static final defaultGlVignetteEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyVignetteEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : VignetteEffect)));
+  });
 
   public static function registerGlVignetteEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'VignetteEffect' : String), (cast defaultGlVignetteEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'VignetteEffect' : String), (cast defaultGlVignetteEffectRunner));
   }
 
   public static final VIGNETTE_FRAGMENT_SRC__glVignetteEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_radius;\nuniform float u_softness;\nuniform vec4 u_color;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec2 centered = v_texCoord - 0.5;\n  float dist = length(centered) * 1.41421356;\n  float vig = smoothstep(u_radius, u_radius - u_softness, dist);\n  float darken = (1.0 - vig) * u_intensity * u_color.a;\n  o_color = vec4(mix(c.rgb, u_color.rgb, darken), c.a);\n}';

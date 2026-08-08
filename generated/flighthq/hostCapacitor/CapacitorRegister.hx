@@ -43,17 +43,17 @@ import flighthq.types.StatusBar.StatusBarBackend;
 
 class CapacitorRegister {
   public static function registerCapacitorBackends(capacitor:CapacitorApi):Void {
-    setAppBackend((cast createCapacitorAppBackend((cast capacitor : CapacitorApi)) : Null<AppBackend>));
-    setClipboardBackend((cast createCapacitorClipboardBackend((cast capacitor : CapacitorApi)) : Null<ClipboardBackend>));
-    setConnectivityBackend((cast createCapacitorConnectivityBackend((cast capacitor : CapacitorApi)) : Null<ConnectivityBackend>));
-    setDeviceBackend((cast createCapacitorDeviceBackend((cast capacitor : CapacitorApi)) : Null<DeviceBackend>));
-    setDialogBackend((cast createCapacitorDialogBackend((cast capacitor : CapacitorApi)) : Null<DialogBackend>));
-    setFileSystemBackend((cast createCapacitorFileSystemBackend((cast capacitor : CapacitorApi)) : Null<FileSystemBackend>));
-    setGeolocationBackend((cast createCapacitorGeolocationBackend((cast capacitor : CapacitorApi)) : Null<GeolocationBackend>));
-    setHapticsBackend((cast createCapacitorHapticsBackend((cast capacitor : CapacitorApi)) : Null<HapticsBackend>));
-    setNotificationBackend((cast createCapacitorNotificationBackend((cast capacitor : CapacitorApi)) : Null<NotificationBackend>));
-    setShareBackend((cast createCapacitorShareBackend((cast capacitor : CapacitorApi)) : Null<ShareBackend>));
-    setSoftKeyboardBackend((cast createCapacitorKeyboardBackend((cast capacitor : CapacitorApi)) : Null<SoftKeyboardBackend>));
-    setStatusBarBackend((cast createCapacitorStatusBarBackend((cast capacitor : CapacitorApi)) : Null<StatusBarBackend>));
+    setAppBackend((cast (cast createCapacitorAppBackend((cast capacitor)) : AppBackend)));
+    setClipboardBackend((cast (cast createCapacitorClipboardBackend((cast capacitor)) : ClipboardBackend)));
+    setConnectivityBackend((cast (cast createCapacitorConnectivityBackend((cast capacitor)) : ConnectivityBackend)));
+    setDeviceBackend((cast (cast createCapacitorDeviceBackend((cast capacitor)) : DeviceBackend)));
+    setDialogBackend((cast (cast createCapacitorDialogBackend((cast capacitor)) : DialogBackend)));
+    setFileSystemBackend((cast (cast createCapacitorFileSystemBackend((cast capacitor)) : FileSystemBackend)));
+    setGeolocationBackend((cast (cast createCapacitorGeolocationBackend((cast capacitor)) : GeolocationBackend)));
+    setHapticsBackend((cast (cast createCapacitorHapticsBackend((cast capacitor)) : HapticsBackend)));
+    setNotificationBackend((cast (cast createCapacitorNotificationBackend((cast capacitor)) : NotificationBackend)));
+    setShareBackend((cast (cast createCapacitorShareBackend((cast capacitor)) : ShareBackend)));
+    setSoftKeyboardBackend((cast (cast createCapacitorKeyboardBackend((cast capacitor)) : SoftKeyboardBackend)));
+    setStatusBarBackend((cast (cast createCapacitorStatusBarBackend((cast capacitor)) : StatusBarBackend)));
   }
 }

@@ -12,13 +12,15 @@ import flighthq.types.GlShaderLocations.GlBitmapShader;
 import flighthq.types.Material;
 import flighthq.types.Node2D;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderState;
+import flighthq.types.Renderable;
 
 class GlShaderBinding {
   public static final _shaderBindings__glShaderBinding:flighthq._internal._WeakMap<RenderProxy2D, GlBitmapShader> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   @:noCompletion
   public static function getGlMaterialShader(state:GlRenderState, kind:Kind):Null<GlBitmapShader> {
-    return cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).materialBitmapShaderMap; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, GlBitmapShader>).get(kind)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).materialBitmapShaderMap; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, GlBitmapShader>).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -31,8 +33,8 @@ class GlShaderBinding {
   @:noCompletion
   public static function registerGlMaterialShader(state:GlRenderState, kind:Kind, shader:GlBitmapShader):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
-    ((cast ((cast runtime : GlRenderStateRuntime).materialBitmapShaderMap ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, shader));
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
+    ((cast ((cast runtime : GlRenderStateRuntime).materialBitmapShaderMap ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast shader)));
   }
 
   @:noCompletion
@@ -40,10 +42,10 @@ class GlShaderBinding {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var resolver:Null<RenderProxy2D->Null<GlBitmapShader>> = cast _Runtime.UNDEFINED;
     var material:Null<Material> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
     resolver = (cast runtime : GlRenderStateRuntime).webglShaderBindingResolver;
     if ((cast !_Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var shader:Null<GlBitmapShader> = (cast resolver((cast renderProxy : RenderProxy2D)) : Null<GlBitmapShader>);
+      var shader:Null<GlBitmapShader> = (cast resolver((cast renderProxy)) : Null<GlBitmapShader>);
       if ((cast !_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast shader; }
     }
     material = (cast renderProxy : RenderProxy2D).material;
@@ -58,12 +60,12 @@ class GlShaderBinding {
   @:noCompletion
   public static function setGlShader(state:GlRenderState, node:Node2D, shader:Null<GlBitmapShader>):Void {
     var renderProxy:RenderProxy2D = cast _Runtime.UNDEFINED;
-    renderProxy = (cast getOrCreateRenderProxy2D(state, node) : RenderProxy2D);
+    renderProxy = (cast getOrCreateRenderProxy2D((cast state), (cast node)) : RenderProxy2D);
     if ((cast _Runtime.strictEquals(shader, null) : Bool)) {
       ((cast GlShaderBinding._shaderBindings__glShaderBinding : flighthq._internal._WeakMap<RenderProxy2D, GlBitmapShader>).delete_(renderProxy));
       return;
     }
-    ((cast GlShaderBinding._shaderBindings__glShaderBinding : flighthq._internal._WeakMap<RenderProxy2D, GlBitmapShader>).set(renderProxy, shader));
-    ((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).webglShaderBindingResolver = getGlShader);
+    ((cast GlShaderBinding._shaderBindings__glShaderBinding : flighthq._internal._WeakMap<RenderProxy2D, GlBitmapShader>).set(renderProxy, (cast shader)));
+    ((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : { @:optional var webglShaderBindingResolver:Null<RenderProxy2D->Null<GlBitmapShader>>; }).webglShaderBindingResolver = (cast getGlShader));
   }
 }

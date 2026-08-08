@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef MedianEffect = { var kind:Kind; @:optional var radius:Float; };
+typedef MedianEffect = { var kind:String; @:optional var radius:Float; };

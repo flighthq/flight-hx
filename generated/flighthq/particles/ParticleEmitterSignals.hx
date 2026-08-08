@@ -17,7 +17,7 @@ class ParticleEmitterSignals {
   public static function enableParticleEmitterSignals(state:flighthq._internal._Object):flighthq.types.ParticleEmitterSignals {
     var s:flighthq._internal._Record<flighthq._internal._Symbol, Null<flighthq.types.ParticleEmitterSignals>> = cast _Runtime.UNDEFINED;
     s = (cast state : flighthq._internal._Record<flighthq._internal._Symbol, Null<flighthq.types.ParticleEmitterSignals>>);
-    return cast _Runtime.setIndex(s, ParticleEmitterSignals.signalsSlot__particleEmitterSignals, (_Runtime.getIndex(s, ParticleEmitterSignals.signalsSlot__particleEmitterSignals) ?? (cast createParticleEmitterSignals() : Null<flighthq.types.ParticleEmitterSignals>)));
+    return cast _Runtime.setIndex(s, ParticleEmitterSignals.signalsSlot__particleEmitterSignals, (_Runtime.getIndex(s, ParticleEmitterSignals.signalsSlot__particleEmitterSignals) ?? (cast createParticleEmitterSignals() : flighthq.types.ParticleEmitterSignals)));
     return cast null;
   }
 

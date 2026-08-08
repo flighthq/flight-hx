@@ -14,16 +14,16 @@ import flighthq.types.TintMaterialData;
 class EnableGlColorAdjustmentGuards {
   @:noCompletion
   public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeatureGuard, null);
+    return cast !_Runtime.looseEquals((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeatureGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableGlColorAdjustmentGuards(state:GlRenderState):Void {
-    ((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeatureGuard = EnableGlColorAdjustmentGuards.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards);
+    ((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : { @:optional var glColorAdjustmentMaterialFeatureGuard:Null<GlRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).glColorAdjustmentMaterialFeatureGuard = (cast EnableGlColorAdjustmentGuards.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards));
   }
 
   public static function warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards():Void {
-    (cast logOnce((cast 'scene2d-gl:color-adjustment-not-enabled' : String), (cast LogLevel.Warn : LogLevel), { message: 'recordGlQuadBatchColorScaleBias: color adjustment present but GL color adjustment not enabled — call registerGlColorAdjustmentMaterialFeature(state)' }, (cast 'scene2d-gl' : Null<String>)) : Bool);
+    (cast logOnce((cast 'scene2d-gl:color-adjustment-not-enabled' : String), (cast LogLevel.Warn), (cast { message: 'recordGlQuadBatchColorScaleBias: color adjustment present but GL color adjustment not enabled — call registerGlColorAdjustmentMaterialFeature(state)' }), (cast 'scene2d-gl')) : Bool);
   }
 }

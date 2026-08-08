@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef ContactShadowsEffect = { var kind:Kind; @:optional var distance:Float; @:optional var opacity:Float; @:optional var samples:Float; @:optional var smoothness:Float; };
+typedef ContactShadowsEffect = { var kind:String; @:optional var distance:Float; @:optional var opacity:Float; @:optional var samples:Float; @:optional var smoothness:Float; };

@@ -14,7 +14,7 @@ class Binding {
   @:noCompletion
   public static function attachEntityBinding(entity:Entity, binding:flighthq._internal._Object):Void {
     if ((cast _Runtime.strictEquals(_Runtime.getIndex(entity, EntityRuntimeKey), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.setIndex(entity, EntityRuntimeKey, (cast createEntityRuntime() : Null<EntityRuntime>));
+      _Runtime.setIndex(entity, EntityRuntimeKey, (cast createEntityRuntime() : EntityRuntime));
     }
     ((cast _Runtime.getIndex(entity, EntityRuntimeKey) : EntityRuntime).binding = binding);
   }
@@ -22,7 +22,7 @@ class Binding {
   @:noCompletion
   public static function getEntityBinding(source:Entity):Null<flighthq._internal._Object> {
     var runtime:EntityRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime((cast source : Entity)) : EntityRuntime);
+    runtime = (cast getEntityRuntime((cast source)) : EntityRuntime);
     return cast _Runtime.coalesce(_Runtime.optionalField(runtime, 'binding'), function():Dynamic return cast null);
     return cast null;
   }

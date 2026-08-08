@@ -28,7 +28,7 @@ class TransformPath {
     d = _Runtime.field(__destructure0, 'd');
     tx = _Runtime.field(__destructure0, 'tx');
     ty = _Runtime.field(__destructure0, 'ty');
-    (cast copyPath((cast source : Path), (cast out : Null<Path>)) : Path);
+    (cast copyPath((cast source), (cast out)) : Path);
     data = (cast out : Path).data;
     commands = _Runtime.field(source, 'commands');
     di = 0.0;
@@ -79,6 +79,6 @@ class TransformPath {
   }
 
   public static function translatePath(source:Path, dx:Float, dy:Float, out:Path):Void {
-    transformPath((cast source : Path), (cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: dx, ty: dy } : MatrixLike), (cast out : Path));
+    transformPath((cast source), (cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: dx, ty: dy }), (cast out));
   }
 }

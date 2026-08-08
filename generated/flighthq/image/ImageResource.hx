@@ -7,6 +7,7 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.types.AlphaType;
 import flighthq.types.CompressedImage;
 import flighthq.types.CompressedImageData;
+import flighthq.types.Entity;
 import flighthq.types.Image;
 import flighthq.types.TextureContainer;
 import flighthq.types.Types.CompressedImageTextureSourceKind;
@@ -16,26 +17,26 @@ import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class ImageResource {
   public static function cloneImageResource(resource:Image):Image {
-    return cast (cast createEntity({ alphaType: _Runtime.field(resource, 'alphaType'), gamut: _Runtime.field(resource, 'gamut'), height: _Runtime.field(resource, 'height'), kind: _Runtime.field(resource, 'kind'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') }) : Image);
+    return cast (cast createEntity((cast { alphaType: _Runtime.field(resource, 'alphaType'), gamut: _Runtime.field(resource, 'gamut'), height: _Runtime.field(resource, 'height'), kind: _Runtime.field(resource, 'kind'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') })) : { >Entity, var alphaType:AlphaType; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal._Any; var version:Float; var width:Float; });
     return cast null;
   }
 
   public static function createCompressedImage(compressed:CompressedImageData):CompressedImage {
-    return cast (cast createEntity((cast { alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, compressed: compressed, gamut: ImageResource.DECODED_GAMUT__imageResource, height: (cast compressed.container : TextureContainer).height, kind: CompressedImageTextureSourceKind, version: 0.0, width: (cast compressed.container : TextureContainer).width } : Null<{ var alphaType:String; var compressed:CompressedImageData; var gamut:String; var height:Float; var kind:String; var version:Float; var width:Float; }>)) : CompressedImage);
+    return cast (cast createEntity((cast { alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, compressed: compressed, gamut: ImageResource.DECODED_GAMUT__imageResource, height: (cast compressed.container : TextureContainer).height, kind: CompressedImageTextureSourceKind, version: 0.0, width: (cast compressed.container : TextureContainer).width })) : { >Entity, var alphaType:String; var compressed:CompressedImageData; var gamut:String; var height:Float; var kind:String; var version:Float; var width:Float; });
     return cast null;
   }
 
   public static function createImageResource(image:flighthq._internal.dom.CanvasImageSource):Image {
     var resource:Image = cast _Runtime.UNDEFINED;
-    resource = (cast createEntity((cast { alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, gamut: ImageResource.DECODED_GAMUT__imageResource, height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 } : Null<{ var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal._Any; var version:Float; var width:Float; }>)) : Image);
-    ImageResource.updateImageResourceSize__imageResource((cast resource : Image));
+    resource = (cast createEntity((cast { alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, gamut: ImageResource.DECODED_GAMUT__imageResource, height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal._Any; var version:Float; var width:Float; });
+    ImageResource.updateImageResourceSize__imageResource((cast resource));
     return cast resource;
     return cast null;
   }
 
   @:noCompletion
   public static function invalidateImageResource(resource:Image):Void {
-    ImageResource.updateImageResourceSize__imageResource((cast resource : Image));
+    ImageResource.updateImageResourceSize__imageResource((cast resource));
     ((cast resource : Image).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast resource : Image).version + 1.0)), 0));
   }
 

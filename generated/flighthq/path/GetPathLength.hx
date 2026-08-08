@@ -10,12 +10,12 @@ class GetPathLength {
   public static function getPathLength(path:Path, tolerance:Float = 0.25):Float {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var total:Float = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath((cast path : Path), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath((cast path), (cast tolerance : Float)) : Array<Array<Float>>);
     total = 0.0;
     {
       var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        (total = cast ((total + (cast GetPathLength.contourLength__getPathLength((cast flighthq._internal._StaticIndex.readArray(contours, ci) : Array<Float>)) : Float)) : Dynamic));
+        (total = cast ((total + (cast GetPathLength.contourLength__getPathLength((cast flighthq._internal._StaticIndex.readArray(contours, ci))) : Float)) : Dynamic));
         ci++;
       }
     }

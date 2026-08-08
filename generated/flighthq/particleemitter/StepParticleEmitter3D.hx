@@ -19,11 +19,11 @@ class StepParticleEmitter3D {
     var asEmitter:ParticleEmitter2D = cast _Runtime.UNDEFINED;
     asEmitter = (cast (cast emitter : flighthq._internal._Any) : ParticleEmitter2D);
     if ((cast ((cast !_Runtime.looseEquals(forces, null) : Bool) && (cast ((cast _Runtime.field(forces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      applyParticleForces((cast asEmitter : ParticleEmitter2D), (cast state : ParticleEmitterState), (cast forces : Array<ParticleForce>), (cast deltaTime : Float));
+      applyParticleForces((cast asEmitter), (cast state), (cast forces), (cast deltaTime : Float));
     }
-    updateParticleEmitter3D((cast emitter : ParticleEmitter3D), (cast state : ParticleEmitterState), (cast config : ParticleEmitterConfig), (cast deltaTime : Float), (cast callbacks : Null<ParticleEmitterCallbacks>));
+    updateParticleEmitter3D((cast emitter), (cast state), (cast config), (cast deltaTime : Float), (cast callbacks));
     if ((cast ((cast !_Runtime.looseEquals(colliders, null) : Bool) && (cast ((cast _Runtime.field(colliders, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      applyParticleCollisions((cast asEmitter : ParticleEmitter2D), (cast state : ParticleEmitterState), (cast colliders : Array<ParticleCollider>));
+      applyParticleCollisions((cast asEmitter), (cast state), (cast colliders));
     }
   }
 }

@@ -37,15 +37,15 @@ import flighthq.types.Tray.TrayBackend;
 
 class TauriRegister {
   public static function registerTauriBackends(tauri:TauriApi):Void {
-    setPlatformBackend((cast createTauriPlatformBackend((cast tauri : TauriApi)) : Null<PlatformBackend>));
-    setAppBackend((cast createTauriAppBackend((cast tauri : TauriApi)) : Null<AppBackend>));
-    setWindowBackend((cast createTauriWindowBackend((cast tauri : TauriApi)) : Null<WindowBackend>));
-    setDialogBackend((cast createTauriDialogBackend((cast tauri : TauriApi)) : Null<DialogBackend>));
-    setClipboardBackend((cast createTauriClipboardBackend((cast tauri : TauriApi)) : Null<ClipboardBackend>));
-    setMenuBackend((cast createTauriMenuBackend((cast tauri : TauriApi)) : Null<MenuBackend>));
-    setTrayBackend((cast createTauriTrayBackend((cast tauri : TauriApi)) : Null<TrayBackend>));
-    setShortcutBackend((cast createTauriShortcutBackend((cast tauri : TauriApi)) : Null<ShortcutBackend>));
-    setNotificationBackend((cast createTauriNotificationBackend((cast tauri : TauriApi)) : Null<NotificationBackend>));
-    setShellBackend((cast createTauriShellBackend((cast tauri : TauriApi)) : Null<ShellBackend>));
+    setPlatformBackend((cast (cast createTauriPlatformBackend((cast tauri)) : PlatformBackend)));
+    setAppBackend((cast (cast createTauriAppBackend((cast tauri)) : AppBackend)));
+    setWindowBackend((cast (cast createTauriWindowBackend((cast tauri)) : WindowBackend)));
+    setDialogBackend((cast (cast createTauriDialogBackend((cast tauri)) : DialogBackend)));
+    setClipboardBackend((cast (cast createTauriClipboardBackend((cast tauri)) : ClipboardBackend)));
+    setMenuBackend((cast (cast createTauriMenuBackend((cast tauri)) : MenuBackend)));
+    setTrayBackend((cast (cast createTauriTrayBackend((cast tauri)) : TrayBackend)));
+    setShortcutBackend((cast (cast createTauriShortcutBackend((cast tauri)) : ShortcutBackend)));
+    setNotificationBackend((cast (cast createTauriNotificationBackend((cast tauri)) : NotificationBackend)));
+    setShellBackend((cast (cast createTauriShellBackend((cast tauri)) : ShellBackend)));
   }
 }

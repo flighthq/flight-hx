@@ -14,7 +14,7 @@ class TiledLayerData {
     bytes = (cast TiledLayerData.decodeBase64__tiledLayerData((cast text : String)) : flighthq._internal._UInt8Array);
     if ((cast !_Runtime.strictEquals(compression, null) : Bool)) {
       if ((cast _Runtime.strictEquals(inflate, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-      var inflated:Null<flighthq._internal._UInt8Array> = (cast inflate((cast bytes : flighthq._internal._UInt8Array), (cast compression : TiledCompression)) : Null<flighthq._internal._UInt8Array>);
+      var inflated:Null<flighthq._internal._UInt8Array> = (cast inflate((cast bytes), (cast compression)) : Null<flighthq._internal._UInt8Array>);
       if ((cast _Runtime.strictEquals(inflated, null) : Bool)) { return cast null; }
       (bytes = cast (inflated : Dynamic));
     }
@@ -34,7 +34,7 @@ class TiledLayerData {
 
   public static function decodeTiledCsvLayer(text:String):flighthq._internal._UInt32Array {
     var out:Array<Float> = cast _Runtime.UNDEFINED;
-    out = cast ([] : Array<Dynamic>);
+    out = (cast cast ([] : Array<Dynamic>));
     for (part in _Runtime.iterable(_Runtime.callProperty(text, 'split', cast ([','] : Array<Dynamic>)))) {
       var trimmed:String = StringTools.trim(Std.string(part));
       if ((cast _Runtime.strictEquals(trimmed, '') : Bool)) { continue; }
@@ -49,7 +49,7 @@ class TiledLayerData {
     var stripped:String = cast _Runtime.UNDEFINED;
     var out:Array<Float> = cast _Runtime.UNDEFINED;
     stripped = _Runtime.replace(s, _Runtime.regexp('[^A-Za-z0-9+/]', 'g'), '', false);
-    out = cast ([] : Array<Dynamic>);
+    out = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(stripped, 'length') : Float)) : Bool)) {

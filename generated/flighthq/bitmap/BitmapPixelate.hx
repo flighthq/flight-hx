@@ -17,9 +17,9 @@ class BitmapPixelate {
     block = HxMath.max(1.0, HxMath.round(blockSize));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
-    bitmapWidth = _Runtime.field(source, 'bitmap').width;
-    bitmapHeight = _Runtime.field(source, 'bitmap').height;
-    data = _Runtime.field(source, 'bitmap').data;
+    bitmapWidth = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
+    bitmapHeight = (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height;
+    data = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     {
       var by:Float = 0.0;
       while ((cast ((cast by : Float) < (cast h : Float)) : Bool)) {

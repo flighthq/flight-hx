@@ -13,20 +13,20 @@ class EnableEntityRuntimeGuards {
   @:noCompletion
   public static function disableEntityRuntimeGuards():Void {
     setEntityRuntimeGuardMode((cast false : Bool));
-    setEntityRuntimeWriteGuard(null);
+    setEntityRuntimeWriteGuard((cast null));
   }
 
   @:noCompletion
   public static function enableEntityRuntimeGuards():Void {
     setEntityRuntimeGuardMode((cast true : Bool));
-    setEntityRuntimeWriteGuard(EnableEntityRuntimeGuards.warnOnDirectWrite__enableEntityRuntimeGuards);
+    setEntityRuntimeWriteGuard((cast EnableEntityRuntimeGuards.warnOnDirectWrite__enableEntityRuntimeGuards));
   }
 
   public static function warnOnDirectWrite__enableEntityRuntimeGuards(slot:EntityRuntimeWriteSlot):Void {
     if ((cast _Runtime.strictEquals(slot, 'binding-slot') : Bool)) {
-      (cast logOnce((cast 'entity:direct-binding-write' : String), (cast LogLevel.Warn : LogLevel), { message: 'EntityRuntime.binding was written directly. Use attachEntityBinding or detachEntityBinding, which keep the binding and the runtime consistent; the write was allowed but is not tracked.' }, (cast 'entity' : Null<String>)) : Bool);
+      (cast logOnce((cast 'entity:direct-binding-write' : String), (cast LogLevel.Warn), (cast { message: 'EntityRuntime.binding was written directly. Use attachEntityBinding or detachEntityBinding, which keep the binding and the runtime consistent; the write was allowed but is not tracked.' }), (cast 'entity')) : Bool);
       return;
     }
-    (cast logOnce((cast 'entity:direct-runtime-write' : String), (cast LogLevel.Warn : LogLevel), { message: 'An entity\'s runtime slot was written directly. Use ensureEntityRuntime or attachEntityBinding; the write was allowed, but bypassing them is how a runtime ends up on the wrong entity.' }, (cast 'entity' : Null<String>)) : Bool);
+    (cast logOnce((cast 'entity:direct-runtime-write' : String), (cast LogLevel.Warn), (cast { message: 'An entity\'s runtime slot was written directly. Use ensureEntityRuntime or attachEntityBinding; the write was allowed, but bypassing them is how a runtime ends up on the wrong entity.' }), (cast 'entity')) : Bool);
   }
 }

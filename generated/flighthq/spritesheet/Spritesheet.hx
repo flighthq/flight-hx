@@ -11,6 +11,7 @@ import flighthq.spritesheet.SpritesheetFrame.createSpritesheetFrame;
 import flighthq.spritesheet.SpritesheetFrom as Facade_Spritesheet_flighthq_spritesheet_SpritesheetFrom;
 import flighthq.spritesheet.SpritesheetPlayer as Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer;
 import flighthq.spritesheet.SpritesheetValidation as Facade_Spritesheet_flighthq_spritesheet_SpritesheetValidation;
+import flighthq.types.Entity;
 import flighthq.types.GridSliceOptions;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetAnimation;
@@ -30,8 +31,8 @@ class Spritesheet {
 
   public static function cloneSpritesheet(spritesheet:flighthq.types.Spritesheet):flighthq.types.Spritesheet {
     var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
-    frames = _Runtime.callProperty(spritesheet.frames, 'map', cast ([function(f:SpritesheetFrame, __unused0:Float, __unused1:Array<SpritesheetFrame>):SpritesheetFrame return (cast createSpritesheetFrame((cast { id: f.id, offsetX: f.offsetX, offsetY: f.offsetY, pivotX: f.pivotX, pivotY: f.pivotY, rotated: f.rotated } : Null<flighthq._internal._Any>)) : SpritesheetFrame)] : Array<Dynamic>));
-    return cast (cast createEntity({ atlas: spritesheet.atlas, animations: _Runtime.mergeObjects([spritesheet.animations]), frames: frames }) : flighthq.types.Spritesheet);
+    frames = _Runtime.callProperty(spritesheet.frames, 'map', cast ([function(f:SpritesheetFrame, __unused0:Float, __unused1:Array<SpritesheetFrame>):SpritesheetFrame return (cast createSpritesheetFrame((cast { id: f.id, offsetX: f.offsetX, offsetY: f.offsetY, pivotX: f.pivotX, pivotY: f.pivotY, rotated: f.rotated })) : SpritesheetFrame)] : Array<Dynamic>));
+    return cast (cast createEntity((cast { atlas: spritesheet.atlas, animations: _Runtime.mergeObjects([spritesheet.animations]), frames: frames })) : { >Entity, var atlas:Null<TextureAtlas>; var animations:{  }; var frames:Array<SpritesheetFrame>; });
     return cast null;
   }
 
@@ -40,37 +41,37 @@ class Spritesheet {
     return cast null;
   }
 
-  public static function createSpritesheet(?obj:Dynamic):flighthq.types.Spritesheet {
-    return cast (cast createEntity({ atlas: _Runtime.coalesce(_Runtime.optionalField(obj, 'atlas'), function():Dynamic return cast null), animations: _Runtime.coalesce(_Runtime.optionalField(obj, 'animations'), function():Dynamic return cast {  }), frames: _Runtime.coalesce(_Runtime.optionalField(obj, 'frames'), function():Dynamic return cast cast ([] : Array<Dynamic>)) }) : flighthq.types.Spritesheet);
+  public static function createSpritesheet(?obj:flighthq._internal._Partial<flighthq.types.Spritesheet>):flighthq.types.Spritesheet {
+    return cast (cast createEntity((cast { atlas: _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null), animations: _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var animations:Null<flighthq._internal._Record<String, SpritesheetAnimation>>; }).animations; }), function():Dynamic return cast {  }), frames: _Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var frames:Null<Array<SpritesheetFrame>>; }).frames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) })) : { >Entity, var atlas:Null<TextureAtlas>; var animations:flighthq._internal._Record<String, SpritesheetAnimation>; var frames:Array<SpritesheetFrame>; });
     return cast null;
   }
 
-  public static function createSpritesheetAnimation(?obj:Dynamic):SpritesheetAnimation {
+  public static function createSpritesheetAnimation(?obj:flighthq._internal._Partial<SpritesheetAnimation>):SpritesheetAnimation {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetAnimation.createSpritesheetAnimation(obj);
     return cast null;
   }
 
-  public static function createSpritesheetAnimationData(?obj:Dynamic):SpritesheetAnimationData {
+  public static function createSpritesheetAnimationData(?obj:flighthq._internal._Partial<SpritesheetAnimationData>):SpritesheetAnimationData {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetData.createSpritesheetAnimationData(obj);
     return cast null;
   }
 
-  public static function createSpritesheetAnimationFromFrameNames(spritesheet:flighthq.types.Spritesheet, pattern:Dynamic, ?options:Dynamic):Null<SpritesheetAnimation> {
+  public static function createSpritesheetAnimationFromFrameNames(spritesheet:flighthq.types.Spritesheet, pattern:Dynamic, ?options:flighthq._internal._Partial<flighthq._internal._Pick<SpritesheetAnimation, String>>):Null<SpritesheetAnimation> {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetAnimation.createSpritesheetAnimationFromFrameNames(spritesheet, pattern, options);
     return cast null;
   }
 
-  public static function createSpritesheetData(?obj:Dynamic):SpritesheetData {
+  public static function createSpritesheetData(?obj:flighthq._internal._Partial<SpritesheetData>):SpritesheetData {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetData.createSpritesheetData(obj);
     return cast null;
   }
 
-  public static function createSpritesheetFrame(?obj:Dynamic):SpritesheetFrame {
+  public static function createSpritesheetFrame(?obj:flighthq._internal._Partial<SpritesheetFrame>):SpritesheetFrame {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetFrame.createSpritesheetFrame(obj);
     return cast null;
   }
 
-  public static function createSpritesheetFrameData(?obj:Dynamic):SpritesheetFrameData {
+  public static function createSpritesheetFrameData(?obj:flighthq._internal._Partial<SpritesheetFrameData>):SpritesheetFrameData {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetData.createSpritesheetFrameData(obj);
     return cast null;
   }
@@ -85,7 +86,7 @@ class Spritesheet {
     return cast null;
   }
 
-  public static function createSpritesheetPlayer(?obj:Dynamic):SpritesheetPlayer {
+  public static function createSpritesheetPlayer(?obj:flighthq._internal._Partial<SpritesheetPlayer>):SpritesheetPlayer {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.createSpritesheetPlayer(obj);
     return cast null;
   }

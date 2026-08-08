@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef GlitchEffect = { var kind:Kind; @:optional var intensity:Float; @:optional var blockSize:Float; @:optional var colorShift:Float; @:optional var seed:Float; };
+typedef GlitchEffect = { var kind:String; @:optional var intensity:Float; @:optional var blockSize:Float; @:optional var colorShift:Float; @:optional var seed:Float; };

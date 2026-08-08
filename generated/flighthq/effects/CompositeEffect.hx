@@ -7,7 +7,7 @@ import flighthq.types.CompositeEffect;
 import flighthq.types.CompositeOperator;
 
 class CompositeEffect {
-  public static function createCompositeEffect(operator_:CompositeOperator, ?options:Dynamic):flighthq.types.CompositeEffect {
+  public static function createCompositeEffect(operator_:CompositeOperator, ?options:flighthq._internal._Omit<flighthq.types.CompositeEffect, String>):flighthq.types.CompositeEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'CompositeEffect' }, _Runtime.objectFromPairs([{ key: 'operator', value: operator_ }]), options]);
     return cast null;

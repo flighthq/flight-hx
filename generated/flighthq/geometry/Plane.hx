@@ -4,13 +4,14 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Entity;
 import flighthq.types.Plane;
 import flighthq.types.Plane.PlaneLike;
 import flighthq.types.Vector3.Vector3Like;
 
 class Plane {
   public static function clonePlane(source:PlaneLike):flighthq.types.Plane {
-    return cast (cast createPlane((cast source.a : Null<Float>), (cast source.b : Null<Float>), (cast source.c : Null<Float>), (cast source.d : Null<Float>)) : flighthq.types.Plane);
+    return cast (cast createPlane((cast source.a), (cast source.b), (cast source.c), (cast source.d)) : flighthq.types.Plane);
     return cast null;
   }
 
@@ -22,7 +23,7 @@ class Plane {
   }
 
   public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):flighthq.types.Plane {
-    return cast (cast createEntity((cast { a: _Runtime.coalesce(a, function():Dynamic return cast 0.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 0.0) } : Null<{ var a:Float; var b:Float; var c:Float; var d:Float; }>)) : flighthq.types.Plane);
+    return cast (cast createEntity((cast { a: _Runtime.coalesce(a, function():Dynamic return cast 0.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 0.0) })) : { >Entity, var a:Float; var b:Float; var c:Float; var d:Float; });
     return cast null;
   }
 

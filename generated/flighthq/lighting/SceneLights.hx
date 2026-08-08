@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.AmbientLight;
 import flighthq.types.DirectionalLight;
+import flighthq.types.Entity;
 import flighthq.types.HemisphereLight;
 import flighthq.types.PointLight;
 import flighthq.types.Scene3DLights;
@@ -13,8 +14,8 @@ import flighthq.types.Scene3DLights.Scene3DLightsLike;
 import flighthq.types.SpotLight;
 
 class SceneLights {
-  public static function createScene3DLights(?options:Dynamic):Scene3DLights {
-    return cast (cast createEntity({ ambient: _Runtime.coalesce(_Runtime.optionalField(options, 'ambient'), function():Dynamic return cast null), directional: _Runtime.coalesce(_Runtime.optionalField(options, 'directional'), function():Dynamic return cast null), hemisphere: _Runtime.coalesce(_Runtime.optionalField(options, 'hemisphere'), function():Dynamic return cast cast ([] : Array<Dynamic>)), point: _Runtime.coalesce(_Runtime.optionalField(options, 'point'), function():Dynamic return cast cast ([] : Array<Dynamic>)), spot: _Runtime.coalesce(_Runtime.optionalField(options, 'spot'), function():Dynamic return cast cast ([] : Array<Dynamic>)) }) : Scene3DLights);
+  public static function createScene3DLights(?options:flighthq._internal._Partial<Scene3DLightsLike>):Scene3DLights {
+    return cast (cast createEntity((cast { ambient: _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var ambient:Null<AmbientLight>; }).ambient; }), function():Dynamic return cast null), directional: _Runtime.coalesce(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var directional:Null<DirectionalLight>; }).directional; }), function():Dynamic return cast null), hemisphere: _Runtime.coalesce(({ final __structural2 = options; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var hemisphere:Null<Array<HemisphereLight>>; }).hemisphere; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), point: _Runtime.coalesce(({ final __structural3 = options; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var point:Null<Array<PointLight>>; }).point; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), spot: _Runtime.coalesce(({ final __structural4 = options; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var spot:Null<Array<SpotLight>>; }).spot; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) })) : { >Entity, var ambient:Null<AmbientLight>; var directional:Null<DirectionalLight>; var hemisphere:Array<HemisphereLight>; var point:Array<PointLight>; var spot:Array<SpotLight>; });
     return cast null;
   }
 }

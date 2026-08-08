@@ -14,11 +14,11 @@ class WgpuTextureUpload {
 
   @:noCompletion
   public static function uploadWgpuTextureElement(device:flighthq._internal.dom.GPUDevice, texture:flighthq._internal.dom.GPUTexture, origin:flighthq._internal.dom.GPUOrigin3D, width:Float, height:Float, source:flighthq._internal.dom.GPUCopyExternalImageSource):Void {
-    (cast tryCopyWgpuExternalImageToTexture((cast flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue') : flighthq._internal.dom.GPUQueue), (cast { source: source } : flighthq._internal.dom.GPUCopyExternalImageSourceInfo), (cast { texture: texture, origin: origin } : flighthq._internal.dom.GPUCopyExternalImageDestInfo), (cast width : Float), (cast height : Float)) : Bool);
+    (cast tryCopyWgpuExternalImageToTexture((cast flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue')), (cast { source: source }), (cast { texture: texture, origin: origin }), (cast width : Float), (cast height : Float)) : Bool);
   }
 
   @:noCompletion
   public static function uploadWgpuTextureImageResource(device:flighthq._internal.dom.GPUDevice, texture:flighthq._internal.dom.GPUTexture, origin:flighthq._internal.dom.GPUOrigin3D, image:Image):Void {
-    uploadWgpuTextureElement((cast device : flighthq._internal.dom.GPUDevice), (cast texture : flighthq._internal.dom.GPUTexture), (cast origin : flighthq._internal._Any), (cast _Runtime.field(image, 'width') : Float), (cast _Runtime.field(image, 'height') : Float), (cast (cast _Runtime.field(image, 'source') : flighthq._internal.dom.GPUCopyExternalImageSource) : flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>, flighthq._internal.dom.ImageData>));
+    uploadWgpuTextureElement((cast device), (cast texture), (cast origin : flighthq._internal._Any), (cast _Runtime.field(image, 'width') : Float), (cast _Runtime.field(image, 'height') : Float), (cast (cast _Runtime.field(image, 'source') : flighthq._internal.dom.GPUCopyExternalImageSource)));
   }
 }

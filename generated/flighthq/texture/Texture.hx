@@ -45,13 +45,13 @@ import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.VideoResource;
 import flighthq.types.VoxelGrid;
 
-typedef CreateTexture2DArrayOptions__texture = CreateTextureOptions;
+typedef CreateTexture2DArrayOptions__texture = flighthq._internal._Extract<CreateTextureOptions, { var dimension:String; }>;
 
-typedef CreateTexture2DOptions__texture = CreateTextureOptions;
+typedef CreateTexture2DOptions__texture = flighthq._internal._Extract<CreateTextureOptions, { @:optional var dimension:String; }>;
 
-typedef CreateTexture3DOptions__texture = CreateTextureOptions;
+typedef CreateTexture3DOptions__texture = flighthq._internal._Extract<CreateTextureOptions, { var dimension:String; }>;
 
-typedef CreateTextureCubeOptions__texture = CreateTextureOptions;
+typedef CreateTextureCubeOptions__texture = flighthq._internal._Extract<CreateTextureOptions, { var dimension:String; }>;
 
 class Texture {
   public static function advanceVideoTexture(texture:TextureLike):Float {
@@ -71,20 +71,20 @@ class Texture {
 
   public static function cloneTexture(source:TextureLike):flighthq.types.Texture {
     var common:{ var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; } = cast _Runtime.UNDEFINED;
-    common = { colorSpace: (cast source : { var colorSpace:TextureColorSpace; }).colorSpace, flipX: (cast source : { var flipX:Bool; }).flipX, flipY: (cast source : { var flipY:Bool; }).flipY, sampler: (cast cloneSampler((cast source : { var sampler:Sampler; }).sampler) : Sampler), uvOffset: (cast cloneVector2((cast (cast source : { var uvOffset:Vector2; }).uvOffset : Vector2Like)) : Vector2), uvRotation: (cast source : { var uvRotation:Float; }).uvRotation, uvScale: (cast cloneVector2((cast (cast source : { var uvScale:Vector2; }).uvScale : Vector2Like)) : Vector2), version: _Runtime.unsignedShiftRight(_Runtime.toInt32((cast source : { var version:Float; }).version), 0) };
+    common = (cast { colorSpace: (cast source : { var colorSpace:TextureColorSpace; }).colorSpace, flipX: (cast source : { var flipX:Bool; }).flipX, flipY: (cast source : { var flipY:Bool; }).flipY, sampler: (cast cloneSampler((cast (cast source : { var sampler:Sampler; }).sampler)) : Sampler), uvOffset: (cast cloneVector2((cast (cast source : { var uvOffset:Vector2; }).uvOffset)) : Vector2), uvRotation: (cast source : { var uvRotation:Float; }).uvRotation, uvScale: (cast cloneVector2((cast (cast source : { var uvScale:Vector2; }).uvScale)) : Vector2), version: _Runtime.unsignedShiftRight(_Runtime.toInt32((cast source : { var version:Float; }).version), 0) });
     {
       var __switchValue = (cast source : { var dimension:String; }).dimension;
       if (__switchValue == '2d') {
-        return cast (cast (cast createEntity(_Runtime.mergeObjects([common, { dimension: '2d' }, { source: _Runtime.field(source, 'source') }])) : Texture2D) : Texture2D);
+        return cast (cast createEntity((cast _Runtime.mergeObjects([common, { dimension: '2d' }, { source: _Runtime.field(source, 'source') }]))) : Texture2D);
       }
       else if (__switchValue == '2d-array') {
-        return cast (cast (cast createEntity(_Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.slice(_Runtime.field(source, 'sources'), 0, null) }])) : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }) : flighthq.types.Texture);
+        return cast (cast createEntity((cast _Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.slice(_Runtime.field(source, 'sources'), 0, null) }]))) : flighthq._internal._Extract<flighthq.types.Texture, { var dimension:String; }>);
       }
       else if (__switchValue == '3d') {
-        return cast (cast (cast createEntity(_Runtime.mergeObjects([common, { dimension: '3d' }, { source: _Runtime.field(source, 'source') }])) : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }) : flighthq.types.Texture);
+        return cast (cast createEntity((cast _Runtime.mergeObjects([common, { dimension: '3d' }, { source: _Runtime.field(source, 'source') }]))) : flighthq._internal._Extract<flighthq.types.Texture, { var dimension:String; }>);
       }
       else if (__switchValue == 'cube') {
-        return cast (cast (cast createEntity(_Runtime.mergeObjects([common, { dimension: 'cube' }, { sources: (cast (cast _Runtime.slice(_Runtime.field(source, 'sources'), 0, null) : flighthq._internal._Any) : TextureSourceCubeFaces) }])) : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }) : flighthq.types.Texture);
+        return cast (cast createEntity((cast _Runtime.mergeObjects([common, { dimension: 'cube' }, { sources: (cast (cast _Runtime.slice(_Runtime.field(source, 'sources'), 0, null) : flighthq._internal._Any) : TextureSourceCubeFaces) }]))) : flighthq._internal._Extract<flighthq.types.Texture, { var dimension:String; }>);
       }
     }
     return cast null;
@@ -115,9 +115,9 @@ class Texture {
     flipY = (cast source : { var flipY:Bool; }).flipY;
     uvRotation = (cast source : { var uvRotation:Float; }).uvRotation;
     version = _Runtime.unsignedShiftRight(_Runtime.toInt32((cast source : { var version:Float; }).version), 0);
-    copySampler((cast out : { var sampler:Sampler; }).sampler, (cast source : { var sampler:Sampler; }).sampler);
-    copyVector2((cast (cast out : { var uvOffset:Vector2; }).uvOffset : Vector2Like), (cast (cast source : { var uvOffset:Vector2; }).uvOffset : Vector2Like));
-    copyVector2((cast (cast out : { var uvScale:Vector2; }).uvScale : Vector2Like), (cast (cast source : { var uvScale:Vector2; }).uvScale : Vector2Like));
+    copySampler((cast (cast out : { var sampler:Sampler; }).sampler), (cast (cast source : { var sampler:Sampler; }).sampler));
+    copyVector2((cast (cast out : { var uvOffset:Vector2; }).uvOffset), (cast (cast source : { var uvOffset:Vector2; }).uvOffset));
+    copyVector2((cast (cast out : { var uvScale:Vector2; }).uvScale), (cast (cast source : { var uvScale:Vector2; }).uvScale));
     ((cast out : { var colorSpace:TextureColorSpace; }).colorSpace = colorSpace);
     ((cast out : { var flipX:Bool; }).flipX = flipX);
     ((cast out : { var flipY:Bool; }).flipY = flipY);
@@ -173,7 +173,7 @@ class Texture {
     return cast null;
   }
 
-  public static function createSampler(?opts:Dynamic):Sampler {
+  public static function createSampler(?opts:flighthq._internal._Partial<SamplerLike>):Sampler {
     return cast Facade_Texture_flighthq_texture_Sampler.createSampler(opts);
     return cast null;
   }
@@ -182,26 +182,26 @@ class Texture {
     var common:{ var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; } = cast _Runtime.UNDEFINED;
     var texture:flighthq.types.Texture = cast _Runtime.UNDEFINED;
     var resource:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = cast _Runtime.UNDEFINED;
-    common = { colorSpace: _Runtime.coalesce(_Runtime.optionalField(opts, 'colorSpace'), function():Dynamic return cast 'srgb'), flipX: _Runtime.coalesce(_Runtime.optionalField(opts, 'flipX'), function():Dynamic return cast false), flipY: _Runtime.coalesce(_Runtime.optionalField(opts, 'flipY'), function():Dynamic return cast false), sampler: _Runtime.select(_Runtime.optionalField(opts, 'sampler'), function():Dynamic return cast (cast cloneSampler((cast opts : { @:optional var sampler:Null<Sampler>; }).sampler) : Sampler), function():Dynamic return cast (cast createSampler((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : Sampler)), uvOffset: _Runtime.select(_Runtime.optionalField(opts, 'uvOffset'), function():Dynamic return cast (cast cloneVector2((cast (cast opts : { @:optional var uvOffset:Null<Vector2>; }).uvOffset : Vector2Like)) : Vector2), function():Dynamic return cast (cast createVector2((cast 0.0 : Null<Float>), (cast 0.0 : Null<Float>)) : Vector2)), uvRotation: _Runtime.coalesce(_Runtime.optionalField(opts, 'uvRotation'), function():Dynamic return cast 0.0), uvScale: _Runtime.select(_Runtime.optionalField(opts, 'uvScale'), function():Dynamic return cast (cast cloneVector2((cast (cast opts : { @:optional var uvScale:Null<Vector2>; }).uvScale : Vector2Like)) : Vector2), function():Dynamic return cast (cast createVector2((cast 1.0 : Null<Float>), (cast 1.0 : Null<Float>)) : Vector2)), version: _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.coalesce(_Runtime.optionalField(opts, 'version'), function():Dynamic return cast 0.0)), 0) };
+    common = (cast { colorSpace: _Runtime.coalesce(({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var colorSpace:Null<String>; }).colorSpace; }), function():Dynamic return cast 'srgb'), flipX: _Runtime.coalesce(({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var flipX:Null<Bool>; }).flipX; }), function():Dynamic return cast false), flipY: _Runtime.coalesce(({ final __structural2 = opts; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var flipY:Null<Bool>; }).flipY; }), function():Dynamic return cast false), sampler: _Runtime.select(({ final __structural3 = opts; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var sampler:Null<Sampler>; }).sampler; }), function():Dynamic return cast (cast cloneSampler((cast (cast opts : { @:optional var sampler:Null<Sampler>; }).sampler)) : Sampler), function():Dynamic return cast (cast createSampler((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Sampler)), uvOffset: _Runtime.select(({ final __structural4 = opts; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var uvOffset:Null<Vector2>; }).uvOffset; }), function():Dynamic return cast (cast cloneVector2((cast (cast opts : { @:optional var uvOffset:Null<Vector2>; }).uvOffset)) : Vector2), function():Dynamic return cast (cast createVector2((cast 0.0), (cast 0.0)) : Vector2)), uvRotation: _Runtime.coalesce(({ final __structural5 = opts; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var uvRotation:Null<Float>; }).uvRotation; }), function():Dynamic return cast 0.0), uvScale: _Runtime.select(({ final __structural6 = opts; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var uvScale:Null<Vector2>; }).uvScale; }), function():Dynamic return cast (cast cloneVector2((cast (cast opts : { @:optional var uvScale:Null<Vector2>; }).uvScale)) : Vector2), function():Dynamic return cast (cast createVector2((cast 1.0), (cast 1.0)) : Vector2)), version: _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.coalesce(({ final __structural7 = opts; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var version:Null<Float>; }).version; }), function():Dynamic return cast 0.0)), 0) });
     {
-      var __switchValue = _Runtime.optionalField(opts, 'dimension');
+      var __switchValue = ({ final __structural9 = opts; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var dimension:Null<String>; }).dimension; });
       if (__switchValue == '2d-array') {
-        (texture = cast ((cast (cast createEntity(_Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.coalesce(_Runtime.callOptionalProperty((cast opts : { var dimension:String; @:optional var resource:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).sources, 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)) }])) : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }) : flighthq.types.Texture) : Dynamic));
+        (texture = cast ((cast createEntity((cast _Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.coalesce(_Runtime.callOptionalProperty((cast opts : { @:optional var sources:Null<Array<Null<TextureSource>>>; }).sources, 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)) }]))) : flighthq._internal._Extract<flighthq.types.Texture, { var dimension:String; }>) : Dynamic));
       }
       else if (__switchValue == '3d') {
-        (texture = cast ((cast (cast createEntity(_Runtime.mergeObjects([common, { dimension: '3d' }, { source: _Runtime.coalesce((cast opts : { var dimension:String; @:optional var resource:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).source, function():Dynamic return cast null) }])) : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }) : flighthq.types.Texture) : Dynamic));
+        (texture = cast ((cast createEntity((cast _Runtime.mergeObjects([common, { dimension: '3d' }, { source: _Runtime.coalesce((cast opts : { @:optional var source:Null<VoxelGrid>; }).source, function():Dynamic return cast null) }]))) : flighthq._internal._Extract<flighthq.types.Texture, { var dimension:String; }>) : Dynamic));
       }
       else if (__switchValue == 'cube') {
-        (texture = cast ((cast (cast createEntity(_Runtime.mergeObjects([common, { dimension: 'cube' }, { sources: (cast (cast _Runtime.coalesce(_Runtime.callOptionalProperty((cast opts : { var dimension:String; @:optional var resource:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).sources, 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)) : flighthq._internal._Any) : TextureSourceCubeFaces) }])) : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }) : flighthq.types.Texture) : Dynamic));
+        (texture = cast ((cast createEntity((cast _Runtime.mergeObjects([common, { dimension: 'cube' }, { sources: (cast (cast _Runtime.coalesce(_Runtime.callOptionalProperty((cast opts : { @:optional var sources:Null<TextureSourceCubeFaces>; }).sources, 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)) : flighthq._internal._Any) : TextureSourceCubeFaces) }]))) : flighthq._internal._Extract<flighthq.types.Texture, { var dimension:String; }>) : Dynamic));
       }
       else  {
         {
           var options:Null<{ @:optional var dimension:Null<String>; @:optional var resource:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }> = (cast opts : Null<CreateTexture2DOptions__texture>);
-          (texture = cast ((cast (cast createEntity(_Runtime.mergeObjects([common, { dimension: '2d' }, { source: _Runtime.coalesce(_Runtime.optionalField(options, 'source'), function():Dynamic return cast null) }])) : Texture2D) : Texture2D) : Dynamic));
+          (texture = cast ((cast createEntity((cast _Runtime.mergeObjects([common, { dimension: '2d' }, { source: _Runtime.coalesce(({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var source:Null<TextureSource>; }).source; }), function():Dynamic return cast null) }]))) : Texture2D) : Dynamic));
         }
       }
     }
-    resource = _Runtime.optionalField(opts, 'resource');
+    resource = ({ final __structural10 = opts; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var resource:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).resource; });
     if ((cast !_Runtime.looseEquals(resource, null) : Bool)) {
       _Runtime.callProperty(((cast resource : { @:optional var textures:Null<Array<flighthq.types.Texture>>; }).textures ??= cast ([] : Array<Dynamic>)), 'push', cast ([texture] : Array<Dynamic>));
     }
@@ -214,7 +214,7 @@ class Texture {
     return cast null;
   }
 
-  public static function createVideoTexture(source:VideoResource, ?opts:Dynamic):flighthq.types.Texture {
+  public static function createVideoTexture(source:VideoResource, ?opts:flighthq._internal._Partial<TextureLike>):flighthq.types.Texture {
     return cast Facade_Texture_flighthq_texture_VideoTexture.createVideoTexture(source, opts);
     return cast null;
   }
@@ -232,7 +232,7 @@ class Texture {
   public static function equalsTexture(a:Null<TextureLike>, b:Null<TextureLike>):Bool {
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast a : { var colorSpace:TextureColorSpace; }).colorSpace, (cast b : { var colorSpace:TextureColorSpace; }).colorSpace) : Bool) && (cast _Runtime.strictEquals((cast a : { var flipX:Bool; }).flipX, (cast b : { var flipX:Bool; }).flipX) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var flipY:Bool; }).flipY, (cast b : { var flipY:Bool; }).flipY) : Bool)) : Bool) && (cast (cast Texture.equalsTextureContent__texture((cast a : TextureLike), (cast b : TextureLike)) : Bool) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var uvRotation:Float; }).uvRotation, (cast b : { var uvRotation:Float; }).uvRotation) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var uvOffset:Vector2; }).uvOffset.x, (cast b : { var uvOffset:Vector2; }).uvOffset.x) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var uvOffset:Vector2; }).uvOffset.y, (cast b : { var uvOffset:Vector2; }).uvOffset.y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var uvScale:Vector2; }).uvScale.x, (cast b : { var uvScale:Vector2; }).uvScale.x) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var uvScale:Vector2; }).uvScale.y, (cast b : { var uvScale:Vector2; }).uvScale.y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var version:Float; }).version, (cast b : { var version:Float; }).version) : Bool)), function():Dynamic return cast (cast equalsSampler((cast a : { var sampler:Sampler; }).sampler, (cast b : { var sampler:Sampler; }).sampler) : Bool));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast a : { var colorSpace:TextureColorSpace; }).colorSpace, (cast b : { var colorSpace:TextureColorSpace; }).colorSpace) : Bool) && (cast _Runtime.strictEquals((cast a : { var flipX:Bool; }).flipX, (cast b : { var flipX:Bool; }).flipX) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var flipY:Bool; }).flipY, (cast b : { var flipY:Bool; }).flipY) : Bool)) : Bool) && (cast (cast Texture.equalsTextureContent__texture((cast a), (cast b)) : Bool) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var uvRotation:Float; }).uvRotation, (cast b : { var uvRotation:Float; }).uvRotation) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x, (cast (cast b : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y, (cast (cast b : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x, (cast (cast b : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y, (cast (cast b : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var version:Float; }).version, (cast b : { var version:Float; }).version) : Bool)), function():Dynamic return cast (cast equalsSampler((cast (cast a : { var sampler:Sampler; }).sampler), (cast (cast b : { var sampler:Sampler; }).sampler)) : Bool));
     return cast null;
   }
 
@@ -244,7 +244,7 @@ class Texture {
         return cast ((cast _Runtime.strictEquals((cast b : { var dimension:String; }).dimension, (cast a : { var dimension:String; }).dimension) : Bool) && (cast _Runtime.strictEquals((cast a : { var source:Null<flighthq._internal._Union2<TextureSource, VoxelGrid>>; }).source, (cast b : { var source:Null<flighthq._internal._Union2<TextureSource, VoxelGrid>>; }).source) : Bool));
       }
       else if (__switchValue == '2d-array' || __switchValue == 'cube') {
-        return cast _Runtime.andValue(((cast _Runtime.strictEquals((cast b : { var dimension:String; }).dimension, (cast a : { var dimension:String; }).dimension) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var sources:flighthq._internal._Union2<Array<Null<TextureSource>>, TextureSourceCubeFaces>; }).sources : { var length:Float; }).length, (cast (cast b : { var sources:flighthq._internal._Union2<Array<Null<TextureSource>>, TextureSourceCubeFaces>; }).sources : { var length:Float; }).length) : Bool)), function():Dynamic return cast (cast (cast a : { var sources:flighthq._internal._Union2<Array<Null<TextureSource>>, TextureSourceCubeFaces>; }).sources : { var every:flighthq._internal._Any; }).every(function(source:Null<TextureSource>, index:Float, __unused2:Array<Null<TextureSource>>):Bool return _Runtime.strictEquals(source, flighthq._internal._StaticIndex.readArray((cast b : { var sources:flighthq._internal._Union2<Array<Null<TextureSource>>, TextureSourceCubeFaces>; }).sources, index))));
+        return cast _Runtime.andValue(((cast _Runtime.strictEquals((cast b : { var dimension:String; }).dimension, (cast a : { var dimension:String; }).dimension) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var sources:flighthq._internal._Union2<Array<Null<TextureSource>>, TextureSourceCubeFaces>; }).sources : { var length:Float; }).length, (cast (cast b : { var sources:flighthq._internal._Union2<Array<Null<TextureSource>>, TextureSourceCubeFaces>; }).sources : { var length:Float; }).length) : Bool)), function():Dynamic return cast (cast (cast a : { var sources:flighthq._internal._Union2<Array<Null<TextureSource>>, TextureSourceCubeFaces>; }).sources : { var every:flighthq._internal._Any; }).every((cast function(__unused6:Null<TextureSource>, __unused7:Float, __unused8:Array<Null<TextureSource>>):Bool return _Runtime.callValue(function(source:Null<TextureSource>, index:Float, __unused5:Array<Null<TextureSource>>):Bool return _Runtime.strictEquals(source, flighthq._internal._StaticIndex.readArray((cast b : { var sources:flighthq._internal._Union2<Array<Null<TextureSource>>, TextureSourceCubeFaces>; }).sources, index)), cast ([__unused6, __unused7] : Array<Dynamic>))), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)));
       }
     }
     return cast null;
@@ -262,20 +262,20 @@ class Texture {
         return cast (cast texture : { var source:Null<flighthq._internal._Union2<TextureSource, VoxelGrid>>; }).source;
       }
       else if (__switchValue == '2d-array' || __switchValue == 'cube') {
-        return cast _Runtime.coalesce((cast (cast texture : { var sources:flighthq._internal._Union2<Array<Null<TextureSource>>, TextureSourceCubeFaces>; }).sources : { var find:flighthq._internal._Any; }).find(function(source:Null<TextureSource>, __unused0:Float, __unused1:Array<Null<TextureSource>>):Bool return !_Runtime.strictEquals(source, null)), function():Dynamic return cast null);
+        return cast _Runtime.coalesce((cast (cast texture : { var sources:flighthq._internal._Union2<Array<Null<TextureSource>>, TextureSourceCubeFaces>; }).sources : { var find:flighthq._internal._Any; }).find((cast function(__unused2:Null<TextureSource>, __unused3:Float, __unused4:Array<Null<TextureSource>>):Bool return _Runtime.callValue(function(source:Null<TextureSource>, __unused0:Float, __unused1:Array<Null<TextureSource>>):Bool return !_Runtime.strictEquals(source, null), cast ([__unused2] : Array<Dynamic>))), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)), function():Dynamic return cast null);
       }
     }
     return cast null;
   }
 
   public static function getTextureHeight(texture:TextureLike):Float {
-    return cast _Runtime.coalesce(_Runtime.optionalField((cast Texture.getFirstTextureSource__texture((cast texture : TextureLike)) : Null<TextureSource>), 'height'), function():Dynamic return cast -1.0);
+    return cast _Runtime.coalesce(({ final __structural11 = (cast Texture.getFirstTextureSource__texture((cast texture)) : Null<TextureSource>); __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { var height:Float; }).height; }), function():Dynamic return cast -1.0);
     return cast null;
   }
 
   public static function getTextureInverseUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
-    getTextureUvMatrix((cast out : Matrix3Like), (cast texture : TextureUvTransform));
-    (cast inverseMatrix3((cast out : Matrix3Like), (cast out : Matrix3Like)) : Bool);
+    getTextureUvMatrix((cast out), (cast texture));
+    (cast inverseMatrix3((cast out), (cast out)) : Bool);
   }
 
   public static function getTextureSampleColorSpace(source:TextureColorSpace, working:RenderTargetColorSpace):TextureColorSpace {
@@ -284,12 +284,12 @@ class Texture {
   }
 
   public static function getTextureSource(texture:TextureLike):Null<TextureSource> {
-    return cast (cast Texture.getFirstTextureSource__texture((cast texture : TextureLike)) : Null<TextureSource>);
+    return cast (cast Texture.getFirstTextureSource__texture((cast texture)) : Null<TextureSource>);
     return cast null;
   }
 
   public static function getTextureSourceKind(texture:TextureLike):Null<TextureSourceKind> {
-    return cast _Runtime.coalesce(_Runtime.optionalField((cast Texture.getFirstTextureSource__texture((cast texture : TextureLike)) : Null<TextureSource>), 'kind'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __structural12 = (cast Texture.getFirstTextureSource__texture((cast texture)) : Null<TextureSource>); __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { var kind:String; }).kind; }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -309,14 +309,14 @@ class Texture {
     r = texture.uvRotation;
     flipScaleX = ((cast texture.flipX : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
     flipScaleY = ((cast texture.flipY : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
-    sx = (texture.uvScale.x * flipScaleX);
-    sy = (texture.uvScale.y * flipScaleY);
-    preOffsetX = ((cast texture.flipX : Bool) ? (cast texture.uvScale.x : Dynamic) : (cast 0.0 : Dynamic));
-    preOffsetY = ((cast texture.flipY : Bool) ? (cast texture.uvScale.y : Dynamic) : (cast 0.0 : Dynamic));
+    sx = ((cast texture.uvScale : { var x:Float; }).x * flipScaleX);
+    sy = ((cast texture.uvScale : { var y:Float; }).y * flipScaleY);
+    preOffsetX = ((cast texture.flipX : Bool) ? (cast (cast texture.uvScale : { var x:Float; }).x : Dynamic) : (cast 0.0 : Dynamic));
+    preOffsetY = ((cast texture.flipY : Bool) ? (cast (cast texture.uvScale : { var y:Float; }).y : Dynamic) : (cast 0.0 : Dynamic));
     cosR = HxMath.cos(r);
     sinR = HxMath.sin(r);
-    tx = ((texture.uvOffset.x + (cosR * preOffsetX)) - (sinR * preOffsetY));
-    ty = ((texture.uvOffset.y + (sinR * preOffsetX)) + (cosR * preOffsetY));
+    tx = (((cast texture.uvOffset : { var x:Float; }).x + (cosR * preOffsetX)) - (sinR * preOffsetY));
+    ty = (((cast texture.uvOffset : { var y:Float; }).y + (sinR * preOffsetX)) + (cosR * preOffsetY));
     m = out.m;
     flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (sx * cosR));
     flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (sx * sinR));
@@ -330,7 +330,7 @@ class Texture {
   }
 
   public static function getTextureWidth(texture:TextureLike):Float {
-    return cast _Runtime.coalesce(_Runtime.optionalField((cast Texture.getFirstTextureSource__texture((cast texture : TextureLike)) : Null<TextureSource>), 'width'), function():Dynamic return cast -1.0);
+    return cast _Runtime.coalesce(({ final __structural13 = (cast Texture.getFirstTextureSource__texture((cast texture)) : Null<TextureSource>); __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { var width:Float; }).width; }), function():Dynamic return cast -1.0);
     return cast null;
   }
 
@@ -353,12 +353,12 @@ class Texture {
   }
 
   public static function hasTextureSource(texture:TextureLike):Bool {
-    return cast !_Runtime.strictEquals((cast getTextureSourceKind((cast texture : TextureLike)) : Null<String>), null);
+    return cast !_Runtime.strictEquals((cast getTextureSourceKind((cast texture)) : Null<String>), null);
     return cast null;
   }
 
   public static function hasTextureUvTransform(texture:TextureUvTransform):Bool {
-    return cast _Runtime.orValue(((cast ((cast ((cast ((cast ((cast texture.flipX : Bool) || (cast texture.flipY : Bool)) : Bool) || (cast !_Runtime.strictEquals(texture.uvScale.x, 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(texture.uvScale.y, 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(texture.uvOffset.x, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(texture.uvOffset.y, 0.0) : Bool)), function():Dynamic return cast !_Runtime.strictEquals(texture.uvRotation, 0.0));
+    return cast _Runtime.orValue(((cast ((cast ((cast ((cast ((cast texture.flipX : Bool) || (cast texture.flipY : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast texture.uvScale : { var x:Float; }).x, 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast texture.uvScale : { var y:Float; }).y, 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast texture.uvOffset : { var x:Float; }).x, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast texture.uvOffset : { var y:Float; }).y, 0.0) : Bool)), function():Dynamic return cast !_Runtime.strictEquals(texture.uvRotation, 0.0));
     return cast null;
   }
 
@@ -372,7 +372,7 @@ class Texture {
   }
 
   public static function isTextureReady(texture:TextureLike):Bool {
-    return cast (cast hasTextureSource((cast texture : TextureLike)) : Bool);
+    return cast (cast hasTextureSource((cast texture)) : Bool);
     return cast null;
   }
 
@@ -384,11 +384,11 @@ class Texture {
   public static function resetTextureUvTransform(texture:TextureLike):Void {
     ((cast texture : { var flipX:Bool; }).flipX = false);
     ((cast texture : { var flipY:Bool; }).flipY = false);
-    ((cast texture : { var uvOffset:Vector2; }).uvOffset.x = cast (0.0 : Dynamic));
-    ((cast texture : { var uvOffset:Vector2; }).uvOffset.y = cast (0.0 : Dynamic));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast (0.0 : Dynamic));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast (0.0 : Dynamic));
     ((cast texture : { var uvRotation:Float; }).uvRotation = 0.0);
-    ((cast texture : { var uvScale:Vector2; }).uvScale.x = cast (1.0 : Dynamic));
-    ((cast texture : { var uvScale:Vector2; }).uvScale.y = cast (1.0 : Dynamic));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast (1.0 : Dynamic));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast (1.0 : Dynamic));
   }
 
   public static function resetVideoTextureFrame(texture:TextureLike):Void {
@@ -414,24 +414,24 @@ class Texture {
   public static function setTextureUvFromPixelRect(texture:TextureLike, x:Float, y:Float, width:Float, height:Float):Void {
     var textureWidth:Float = cast _Runtime.UNDEFINED;
     var textureHeight:Float = cast _Runtime.UNDEFINED;
-    textureWidth = (cast getTextureWidth((cast texture : TextureLike)) : Float);
-    textureHeight = (cast getTextureHeight((cast texture : TextureLike)) : Float);
+    textureWidth = (cast getTextureWidth((cast texture)) : Float);
+    textureHeight = (cast getTextureHeight((cast texture)) : Float);
     if ((cast ((cast ((cast textureWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast textureHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      ((cast texture : { var uvOffset:Vector2; }).uvOffset.x = cast (0.0 : Dynamic));
-      ((cast texture : { var uvOffset:Vector2; }).uvOffset.y = cast (0.0 : Dynamic));
-      ((cast texture : { var uvScale:Vector2; }).uvScale.x = cast (0.0 : Dynamic));
-      ((cast texture : { var uvScale:Vector2; }).uvScale.y = cast (0.0 : Dynamic));
+      ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast (0.0 : Dynamic));
+      ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast (0.0 : Dynamic));
+      ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast (0.0 : Dynamic));
+      ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast (0.0 : Dynamic));
       return;
     }
-    ((cast texture : { var uvOffset:Vector2; }).uvOffset.x = cast ((x / textureWidth) : Dynamic));
-    ((cast texture : { var uvOffset:Vector2; }).uvOffset.y = cast ((y / textureHeight) : Dynamic));
-    ((cast texture : { var uvScale:Vector2; }).uvScale.x = cast ((width / textureWidth) : Dynamic));
-    ((cast texture : { var uvScale:Vector2; }).uvScale.y = cast ((height / textureHeight) : Dynamic));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast ((x / textureWidth) : Dynamic));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast ((y / textureHeight) : Dynamic));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast ((width / textureWidth) : Dynamic));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast ((height / textureHeight) : Dynamic));
   }
 
   public static function setTextureUvOffset(texture:TextureLike, x:Float, y:Float):Void {
-    ((cast texture : { var uvOffset:Vector2; }).uvOffset.x = cast (x : Dynamic));
-    ((cast texture : { var uvOffset:Vector2; }).uvOffset.y = cast (y : Dynamic));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast (x : Dynamic));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast (y : Dynamic));
   }
 
   public static function setTextureUvRotation(texture:TextureLike, radians:Float):Void {
@@ -439,8 +439,8 @@ class Texture {
   }
 
   public static function setTextureUvScale(texture:TextureLike, x:Float, y:Float):Void {
-    ((cast texture : { var uvScale:Vector2; }).uvScale.x = cast (x : Dynamic));
-    ((cast texture : { var uvScale:Vector2; }).uvScale.y = cast (y : Dynamic));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast (x : Dynamic));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast (y : Dynamic));
   }
 
   public static function setVideoTextureSource(texture:TextureLike, source:VideoResource):Void {
@@ -470,10 +470,10 @@ class Texture {
     fu = ((cast (cast texture : { var flipX:Bool; }).flipX : Bool) ? (cast (1.0 - u) : Dynamic) : (cast u : Dynamic));
     fv = ((cast (cast texture : { var flipY:Bool; }).flipY : Bool) ? (cast (1.0 - v) : Dynamic) : (cast v : Dynamic));
     r = (cast texture : { var uvRotation:Float; }).uvRotation;
-    sx = (cast texture : { var uvScale:Vector2; }).uvScale.x;
-    sy = (cast texture : { var uvScale:Vector2; }).uvScale.y;
-    tx = (cast texture : { var uvOffset:Vector2; }).uvOffset.x;
-    ty = (cast texture : { var uvOffset:Vector2; }).uvOffset.y;
+    sx = (cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x;
+    sy = (cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y;
+    tx = (cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x;
+    ty = (cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y;
     cosR = HxMath.cos(r);
     sinR = HxMath.sin(r);
     (out.x = cast (((((sx * cosR) * fu) - ((sy * sinR) * fv)) + tx) : Dynamic));

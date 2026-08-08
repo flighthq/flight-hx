@@ -20,7 +20,7 @@ class SpritesheetValidation {
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var animations:flighthq._internal._Record<String, SpritesheetAnimation> = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
-    diagnostics = cast ([] : Array<Dynamic>);
+    diagnostics = (cast cast ([] : Array<Dynamic>));
     __destructure0 = spritesheet;
     atlas = _Runtime.field(__destructure0, 'atlas');
     animations = _Runtime.field(__destructure0, 'animations');
@@ -30,8 +30,8 @@ class SpritesheetValidation {
       {
         var fi:Float = 0.0;
         while ((cast ((cast fi : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
-          if ((cast !(cast ((cast regionIds : flighthq._internal._Set<Float>).has(flighthq._internal._StaticIndex.readArray(frames, fi).id)) : Bool) : Bool)) {
-            _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: null, frameIndex: fi, message: 'Frame ' + Std.string(fi) + ' references atlas region id ' + Std.string(flighthq._internal._StaticIndex.readArray(frames, fi).id) + ' which does not exist in the atlas.', severity: 'error' }] : Array<Dynamic>));
+          if ((cast !(cast ((cast regionIds : flighthq._internal._Set<Float>).has((cast flighthq._internal._StaticIndex.readArray(frames, fi) : { var id:Float; }).id)) : Bool) : Bool)) {
+            _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: null, frameIndex: fi, message: 'Frame ' + Std.string(fi) + ' references atlas region id ' + Std.string((cast flighthq._internal._StaticIndex.readArray(frames, fi) : { var id:Float; }).id) + ' which does not exist in the atlas.', severity: 'error' }] : Array<Dynamic>));
           }
           fi++;
         }
@@ -64,7 +64,7 @@ class SpritesheetValidation {
     var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrameData> = cast _Runtime.UNDEFINED;
     var frameNameSet:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
-    diagnostics = cast ([] : Array<Dynamic>);
+    diagnostics = (cast cast ([] : Array<Dynamic>));
     __destructure4 = data;
     animations = _Runtime.field(__destructure4, 'animations');
     frames = _Runtime.field(__destructure4, 'frames');

@@ -15,14 +15,14 @@ import flighthq.types.Skin;
 class SceneSkeleton {
   public static function findScene3DSkeletonJoints(root:Node3D):Null<Array<Node3D>> {
     var stack:Array<Node3D> = cast _Runtime.UNDEFINED;
-    stack = _Runtime.concatArrays([_Runtime.toArray((cast getNodeChildren(root) : Array<NodeOf<Node3DTraits>>))]);
+    stack = (cast _Runtime.concatArrays([_Runtime.toArray((cast getNodeChildren((cast root)) : Array<NodeOf<Node3DTraits>>))]));
     while ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       var node:Node3D = _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
       if ((cast (cast isMesh((cast node : flighthq._internal._Any)) : Bool) : Bool)) {
-        var skin:Null<Skin> = (cast (cast node : flighthq._internal._Any) : Mesh).skin;
+        var skin:Null<Skin> = (cast (cast (cast node : flighthq._internal._Any) : Mesh) : { @:optional var skin:Null<Skin>; }).skin;
         if ((cast !_Runtime.looseEquals(skin, null) : Bool)) { return cast (cast (cast skin : Skin).skeleton : Skeleton3D).joints; }
       }
-      _Runtime.callProperty(stack, 'push', _Runtime.concatArrays([_Runtime.toArray((cast getNodeChildren(node) : Array<NodeOf<Node3DTraits>>))]));
+      _Runtime.callProperty(stack, 'push', _Runtime.concatArrays([_Runtime.toArray((cast getNodeChildren((cast node)) : Array<NodeOf<Node3DTraits>>))]));
     }
     return cast null;
     return cast null;

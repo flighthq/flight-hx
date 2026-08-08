@@ -23,8 +23,8 @@ class SceneForwardLights {
     var outIndices:Array<Float> = cast _Runtime.UNDEFINED;
     points = _Runtime.field(lights, 'point');
     spots = _Runtime.field(lights, 'spot');
-    pointCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights((cast points : Null<Array<flighthq._internal._Union2<PointLight, SpotLight>>>), (cast bounds : BoundingSphereLike), (cast SceneForwardLights.scratchSelectedPointLights__sceneForwardLights : Array<flighthq._internal._Union2<PointLight, SpotLight>>), (cast SceneForwardLights.scratchSelectedPointIndices__sceneForwardLights : flighthq._internal._Int32Array), (cast SceneForwardLights.scratchSelectedPointScores__sceneForwardLights : flighthq._internal._Float64Array)) : Float);
-    spotCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights((cast spots : Null<Array<flighthq._internal._Union2<PointLight, SpotLight>>>), (cast bounds : BoundingSphereLike), (cast SceneForwardLights.scratchSelectedSpotLights__sceneForwardLights : Array<flighthq._internal._Union2<PointLight, SpotLight>>), (cast SceneForwardLights.scratchSelectedSpotIndices__sceneForwardLights : flighthq._internal._Int32Array), (cast SceneForwardLights.scratchSelectedSpotScores__sceneForwardLights : flighthq._internal._Float64Array)) : Float);
+    pointCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights((cast points), (cast bounds), (cast SceneForwardLights.scratchSelectedPointLights__sceneForwardLights), (cast SceneForwardLights.scratchSelectedPointIndices__sceneForwardLights), (cast SceneForwardLights.scratchSelectedPointScores__sceneForwardLights)) : Float);
+    spotCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights((cast spots), (cast bounds), (cast SceneForwardLights.scratchSelectedSpotLights__sceneForwardLights), (cast SceneForwardLights.scratchSelectedSpotIndices__sceneForwardLights), (cast SceneForwardLights.scratchSelectedSpotScores__sceneForwardLights)) : Float);
     outPoints = (cast out : Scene3DForwardLightSelection).point;
     outSpots = (cast out : Scene3DForwardLightSelection).spot;
     outIndices = (cast out : Scene3DForwardLightSelection).indices;
@@ -57,7 +57,7 @@ class SceneForwardLights {
       var inputIndex:Float = 0.0;
       while ((cast ((cast inputIndex : Float) < (cast _Runtime.field(lights, 'length') : Float)) : Bool)) {
         var light:flighthq._internal._Union2<PointLight, SpotLight> = flighthq._internal._StaticIndex.readArray(lights, inputIndex);
-        var score:Float = (cast getLightContributionAtBoundingSphere((cast light : flighthq._internal._Union2<PointLight, SpotLight>), (cast bounds : BoundingSphereLike)) : Float);
+        var score:Float = (cast getLightContributionAtBoundingSphere((cast light), (cast bounds)) : Float);
         if ((cast !(cast _Runtime.compare(score, 0.0, '>') : Bool) : Bool)) { inputIndex++; continue; }
         var insertAt:Float = selectedCount;
         while ((cast ((cast insertAt : Float) > (cast 0.0 : Float)) : Bool)) {

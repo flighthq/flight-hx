@@ -16,28 +16,29 @@ class SceneMaterial {
   public static function findScene3DMaterialByName(root:Node3D, name:String):Null<Material> {
     var rootMatch:Null<Material> = cast _Runtime.UNDEFINED;
     var found:Null<Material> = cast _Runtime.UNDEFINED;
-    rootMatch = (cast SceneMaterial.getNamedNodeMaterial__sceneMaterial((cast root : Node3D), (cast name : String)) : Null<Material>);
+    rootMatch = (cast SceneMaterial.getNamedNodeMaterial__sceneMaterial((cast root), (cast name : String)) : Null<Material>);
     if ((cast !_Runtime.strictEquals(rootMatch, null) : Bool)) { return cast rootMatch; }
     found = null;
-    (cast findNode(root, function(node:Node<Node3DTraits>):Bool {
+    (cast findNode((cast root), (cast function(node:Node<Node3DTraits>):Bool {
       var match:Null<Material> = cast _Runtime.UNDEFINED;
-      match = (cast SceneMaterial.getNamedNodeMaterial__sceneMaterial((cast (cast node : Node3D) : Node3D), (cast name : String)) : Null<Material>);
+      match = (cast SceneMaterial.getNamedNodeMaterial__sceneMaterial((cast (cast node : Node3D)), (cast name : String)) : Null<Material>);
       if ((cast _Runtime.strictEquals(match, null) : Bool)) { return cast false; }
       (found = cast (match : Dynamic));
       return cast true;
-    }) : Null<NodeOf<Node3DTraits>>);
+      return cast _Runtime.UNDEFINED;
+    })) : Null<NodeOf<Node3DTraits>>);
     return cast found;
     return cast null;
   }
 
   public static function getScene3DMaterials(root:Node3D, out:Array<Material>):Void {
-    SceneMaterial.collectNodeMaterials__sceneMaterial((cast root : Node3D), (cast out : Array<Material>));
-    forEachNodeDescendant(root, function(node:Node<Node3DTraits>):Void return SceneMaterial.collectNodeMaterials__sceneMaterial((cast (cast node : Node3D) : Node3D), (cast out : Array<Material>)));
+    SceneMaterial.collectNodeMaterials__sceneMaterial((cast root), (cast out));
+    forEachNodeDescendant((cast root), (cast function(node:Node<Node3DTraits>):Void { SceneMaterial.collectNodeMaterials__sceneMaterial((cast (cast node : Node3D)), (cast out)); }));
   }
 
   public static function collectNodeMaterials__sceneMaterial(node:Node3D, out:Array<Material>):Void {
     var materials:Null<Array<Null<Material>>> = cast _Runtime.UNDEFINED;
-    materials = _Runtime.field((cast node : Dynamic), 'materials');
+    materials = _Runtime.field((cast node : flighthq._internal._Partial<Mesh>), 'materials');
     if ((cast _Runtime.looseEquals(materials, null) : Bool)) { return; }
     {
       var i:Float = 0.0;
@@ -51,7 +52,7 @@ class SceneMaterial {
 
   public static function getNamedNodeMaterial__sceneMaterial(node:Node3D, name:String):Null<Material> {
     var materials:Null<Array<Null<Material>>> = cast _Runtime.UNDEFINED;
-    materials = _Runtime.field((cast node : Dynamic), 'materials');
+    materials = _Runtime.field((cast node : flighthq._internal._Partial<Mesh>), 'materials');
     if ((cast _Runtime.looseEquals(materials, null) : Bool)) { return cast null; }
     {
       var i:Float = 0.0;

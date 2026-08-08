@@ -12,14 +12,14 @@ import flighthq.types.TweenManager;
 import flighthq.types.TweenPropertyDetail;
 
 class UpdateTweens {
-  public static function completeTween<T>(tween:Tween<T>):Void {
+  public static function completeTween<T:flighthq._internal._Object>(tween:Tween<T>):Void {
     var effectiveT:Float = cast _Runtime.UNDEFINED;
     var easedT:Float = cast _Runtime.UNDEFINED;
     var target:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
     if ((cast (cast tween : Tween<T>).complete : Bool)) { return; }
-    if ((cast !(cast (cast tween : Tween<T>).initialized : Bool) : Bool)) { initializeTween(tween); }
+    if ((cast !(cast (cast tween : Tween<T>).initialized : Bool) : Bool)) { initializeTween((cast tween)); }
     effectiveT = ((cast (cast tween : Tween<T>).reverse : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic));
-    easedT = (cast tween : Tween<T>).ease(effectiveT);
+    easedT = (cast tween : Tween<T>).ease((cast effectiveT : Float));
     target = (cast (cast tween : Tween<T>).target : flighthq._internal._Record<String, Float>);
     for (detail in _Runtime.iterable((cast tween : Tween<T>).properties)) {
       var value:Float = ((cast detail : TweenPropertyDetail).start + ((cast detail : TweenPropertyDetail).change * easedT));
@@ -30,7 +30,7 @@ class UpdateTweens {
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast tween : Tween<T>).onComplete]]), 1);
   }
 
-  public static function updateTween__updateTweens<T>(tween:Tween<T>, deltaTime:Float):Void {
+  public static function updateTween__updateTweens<T:flighthq._internal._Object>(tween:Tween<T>, deltaTime:Float):Void {
     var activeElapsed:Float = cast _Runtime.UNDEFINED;
     var t:Float = cast _Runtime.UNDEFINED;
     var effectiveT:Float = cast _Runtime.UNDEFINED;
@@ -40,10 +40,10 @@ class UpdateTweens {
     ((cast tween : Tween<T>).elapsed += deltaTime);
     activeElapsed = ((cast tween : Tween<T>).elapsed - (cast tween : Tween<T>).delay);
     if ((cast ((cast activeElapsed : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
-    if ((cast !(cast (cast tween : Tween<T>).initialized : Bool) : Bool)) { initializeTween(tween); }
+    if ((cast !(cast (cast tween : Tween<T>).initialized : Bool) : Bool)) { initializeTween((cast tween)); }
     t = HxMath.min((activeElapsed / (cast tween : Tween<T>).duration), 1.0);
     effectiveT = ((cast (cast tween : Tween<T>).reverse : Bool) ? (cast (1.0 - t) : Dynamic) : (cast t : Dynamic));
-    easedT = (cast tween : Tween<T>).ease(effectiveT);
+    easedT = (cast tween : Tween<T>).ease((cast effectiveT : Float));
     target = (cast (cast tween : Tween<T>).target : flighthq._internal._Record<String, Float>);
     for (detail in _Runtime.iterable((cast tween : Tween<T>).properties)) {
       var value:Float = ((cast detail : TweenPropertyDetail).start + ((cast detail : TweenPropertyDetail).change * easedT));
@@ -76,7 +76,7 @@ class UpdateTweens {
         if ((cast (cast flighthq._internal._StaticIndex.readArray(list, i) : Tween<flighthq._internal._Any>).complete : Bool)) {
           _Runtime.splice(list, Std.int(i), Std.int(1.0), []);
         } else {
-          UpdateTweens.updateTween__updateTweens((cast flighthq._internal._StaticIndex.readArray(list, i) : Tween<flighthq._internal._Any>), (cast deltaTime : Float));
+          (cast UpdateTweens.updateTween__updateTweens : Tween<flighthq._internal._Any>->Float->Void)((cast flighthq._internal._StaticIndex.readArray(list, i)), (cast deltaTime : Float));
         }
         i--;
       }

@@ -41,134 +41,134 @@ class GlCompressedTexture {
     etc = (cast flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_etc') : Null<flighthq._internal._Record<String, Float>>);
     astc = (cast flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_astc') : Null<flighthq._internal._Record<String, Float>>);
     pvrtc = (cast flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'WEBGL_compressed_texture_pvrtc') : Null<flighthq._internal._Record<String, Float>>);
-    enumFromExt = (cast function(ext:Null<flighthq._internal._Record<String, Float>>, key:String):Float return ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalIndex(ext, key)), 'number') : Bool) ? (cast _Runtime.getIndex(ext, key) : Dynamic) : (cast -1.0 : Dynamic)) : Null<flighthq._internal._Record<String, Float>>->String->Float);
+    enumFromExt = (cast function(ext:Null<flighthq._internal._Record<String, Float>>, key:String):Float return ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.optionalIndex(ext, key)), 'number') : Bool) ? (cast _Runtime.getIndex(ext, key) : Dynamic) : (cast -1.0 : Dynamic)));
     {
       var __switchValue = format;
       if (__switchValue == 'bc1') {
-        return cast (cast enumFromExt((cast s3tc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_S3TC_DXT1_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast s3tc), (cast 'COMPRESSED_RGBA_S3TC_DXT1_EXT' : String)) : Float);
       }
       else if (__switchValue == 'bc1Srgb') {
-        return cast (cast enumFromExt((cast s3tcSrgb : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast s3tcSrgb), (cast 'COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT' : String)) : Float);
       }
       else if (__switchValue == 'bc2') {
-        return cast (cast enumFromExt((cast s3tc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_S3TC_DXT3_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast s3tc), (cast 'COMPRESSED_RGBA_S3TC_DXT3_EXT' : String)) : Float);
       }
       else if (__switchValue == 'bc2Srgb') {
-        return cast (cast enumFromExt((cast s3tcSrgb : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast s3tcSrgb), (cast 'COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT' : String)) : Float);
       }
       else if (__switchValue == 'bc3') {
-        return cast (cast enumFromExt((cast s3tc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_S3TC_DXT5_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast s3tc), (cast 'COMPRESSED_RGBA_S3TC_DXT5_EXT' : String)) : Float);
       }
       else if (__switchValue == 'bc3Srgb') {
-        return cast (cast enumFromExt((cast s3tcSrgb : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast s3tcSrgb), (cast 'COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT' : String)) : Float);
       }
       else if (__switchValue == 'bc4') {
-        return cast (cast enumFromExt((cast rgtc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RED_RGTC1_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast rgtc), (cast 'COMPRESSED_RED_RGTC1_EXT' : String)) : Float);
       }
       else if (__switchValue == 'bc4Snorm') {
-        return cast (cast enumFromExt((cast rgtc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_SIGNED_RED_RGTC1_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast rgtc), (cast 'COMPRESSED_SIGNED_RED_RGTC1_EXT' : String)) : Float);
       }
       else if (__switchValue == 'bc5') {
-        return cast (cast enumFromExt((cast rgtc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RED_GREEN_RGTC2_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast rgtc), (cast 'COMPRESSED_RED_GREEN_RGTC2_EXT' : String)) : Float);
       }
       else if (__switchValue == 'bc5Snorm') {
-        return cast (cast enumFromExt((cast rgtc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast rgtc), (cast 'COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT' : String)) : Float);
       }
       else if (__switchValue == 'bc6hUfloat') {
-        return cast (cast enumFromExt((cast bptc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast bptc), (cast 'COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_EXT' : String)) : Float);
       }
       else if (__switchValue == 'bc6hSfloat') {
-        return cast (cast enumFromExt((cast bptc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGB_BPTC_SIGNED_FLOAT_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast bptc), (cast 'COMPRESSED_RGB_BPTC_SIGNED_FLOAT_EXT' : String)) : Float);
       }
       else if (__switchValue == 'bc7') {
-        return cast (cast enumFromExt((cast bptc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_BPTC_UNORM_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast bptc), (cast 'COMPRESSED_RGBA_BPTC_UNORM_EXT' : String)) : Float);
       }
       else if (__switchValue == 'bc7Srgb') {
-        return cast (cast enumFromExt((cast bptc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_SRGB_ALPHA_BPTC_UNORM_EXT' : String)) : Float);
+        return cast (cast enumFromExt((cast bptc), (cast 'COMPRESSED_SRGB_ALPHA_BPTC_UNORM_EXT' : String)) : Float);
       }
       else if (__switchValue == 'etc1' || __switchValue == 'etc2Rgb') {
-        return cast (cast enumFromExt((cast etc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGB8_ETC2' : String)) : Float);
+        return cast (cast enumFromExt((cast etc), (cast 'COMPRESSED_RGB8_ETC2' : String)) : Float);
       }
       else if (__switchValue == 'etc2RgbSrgb') {
-        return cast (cast enumFromExt((cast etc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_SRGB8_ETC2' : String)) : Float);
+        return cast (cast enumFromExt((cast etc), (cast 'COMPRESSED_SRGB8_ETC2' : String)) : Float);
       }
       else if (__switchValue == 'etc2Rgba') {
-        return cast (cast enumFromExt((cast etc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA8_ETC2_EAC' : String)) : Float);
+        return cast (cast enumFromExt((cast etc), (cast 'COMPRESSED_RGBA8_ETC2_EAC' : String)) : Float);
       }
       else if (__switchValue == 'etc2RgbaSrgb') {
-        return cast (cast enumFromExt((cast etc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_SRGB8_ALPHA8_ETC2_EAC' : String)) : Float);
+        return cast (cast enumFromExt((cast etc), (cast 'COMPRESSED_SRGB8_ALPHA8_ETC2_EAC' : String)) : Float);
       }
       else if (__switchValue == 'etc2RgbA1') {
-        return cast (cast enumFromExt((cast etc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2' : String)) : Float);
+        return cast (cast enumFromExt((cast etc), (cast 'COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2' : String)) : Float);
       }
       else if (__switchValue == 'etc2RgbA1Srgb') {
-        return cast (cast enumFromExt((cast etc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2' : String)) : Float);
+        return cast (cast enumFromExt((cast etc), (cast 'COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2' : String)) : Float);
       }
       else if (__switchValue == 'eacR11') {
-        return cast (cast enumFromExt((cast etc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_R11_EAC' : String)) : Float);
+        return cast (cast enumFromExt((cast etc), (cast 'COMPRESSED_R11_EAC' : String)) : Float);
       }
       else if (__switchValue == 'eacR11Snorm') {
-        return cast (cast enumFromExt((cast etc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_SIGNED_R11_EAC' : String)) : Float);
+        return cast (cast enumFromExt((cast etc), (cast 'COMPRESSED_SIGNED_R11_EAC' : String)) : Float);
       }
       else if (__switchValue == 'eacRg11') {
-        return cast (cast enumFromExt((cast etc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RG11_EAC' : String)) : Float);
+        return cast (cast enumFromExt((cast etc), (cast 'COMPRESSED_RG11_EAC' : String)) : Float);
       }
       else if (__switchValue == 'eacRg11Snorm') {
-        return cast (cast enumFromExt((cast etc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_SIGNED_RG11_EAC' : String)) : Float);
+        return cast (cast enumFromExt((cast etc), (cast 'COMPRESSED_SIGNED_RG11_EAC' : String)) : Float);
       }
       else if (__switchValue == 'pvrtc2bppRgb') {
-        return cast (cast enumFromExt((cast pvrtc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGB_PVRTC_2BPPV1_IMG' : String)) : Float);
+        return cast (cast enumFromExt((cast pvrtc), (cast 'COMPRESSED_RGB_PVRTC_2BPPV1_IMG' : String)) : Float);
       }
       else if (__switchValue == 'pvrtc2bppRgba') {
-        return cast (cast enumFromExt((cast pvrtc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_PVRTC_2BPPV1_IMG' : String)) : Float);
+        return cast (cast enumFromExt((cast pvrtc), (cast 'COMPRESSED_RGBA_PVRTC_2BPPV1_IMG' : String)) : Float);
       }
       else if (__switchValue == 'pvrtc4bppRgb') {
-        return cast (cast enumFromExt((cast pvrtc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGB_PVRTC_4BPPV1_IMG' : String)) : Float);
+        return cast (cast enumFromExt((cast pvrtc), (cast 'COMPRESSED_RGB_PVRTC_4BPPV1_IMG' : String)) : Float);
       }
       else if (__switchValue == 'pvrtc4bppRgba') {
-        return cast (cast enumFromExt((cast pvrtc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_PVRTC_4BPPV1_IMG' : String)) : Float);
+        return cast (cast enumFromExt((cast pvrtc), (cast 'COMPRESSED_RGBA_PVRTC_4BPPV1_IMG' : String)) : Float);
       }
       else if (__switchValue == 'astc4x4') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_4x4_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_4x4_KHR' : String)) : Float);
       }
       else if (__switchValue == 'astc5x4') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_5x4_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_5x4_KHR' : String)) : Float);
       }
       else if (__switchValue == 'astc5x5') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_5x5_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_5x5_KHR' : String)) : Float);
       }
       else if (__switchValue == 'astc6x5') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_6x5_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_6x5_KHR' : String)) : Float);
       }
       else if (__switchValue == 'astc6x6') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_6x6_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_6x6_KHR' : String)) : Float);
       }
       else if (__switchValue == 'astc8x5') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_8x5_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_8x5_KHR' : String)) : Float);
       }
       else if (__switchValue == 'astc8x6') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_8x6_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_8x6_KHR' : String)) : Float);
       }
       else if (__switchValue == 'astc8x8') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_8x8_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_8x8_KHR' : String)) : Float);
       }
       else if (__switchValue == 'astc10x5') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_10x5_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_10x5_KHR' : String)) : Float);
       }
       else if (__switchValue == 'astc10x6') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_10x6_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_10x6_KHR' : String)) : Float);
       }
       else if (__switchValue == 'astc10x8') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_10x8_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_10x8_KHR' : String)) : Float);
       }
       else if (__switchValue == 'astc10x10') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_10x10_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_10x10_KHR' : String)) : Float);
       }
       else if (__switchValue == 'astc12x10') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_12x10_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_12x10_KHR' : String)) : Float);
       }
       else if (__switchValue == 'astc12x12') {
-        return cast (cast enumFromExt((cast astc : Null<flighthq._internal._Record<String, Float>>), (cast 'COMPRESSED_RGBA_ASTC_12x12_KHR' : String)) : Float);
+        return cast (cast enumFromExt((cast astc), (cast 'COMPRESSED_RGBA_ASTC_12x12_KHR' : String)) : Float);
       }
       else  {
         return cast -1.0;
@@ -197,18 +197,18 @@ class GlCompressedTexture {
         return cast _Runtime.field(support, 'pvrtc');
       }
       else  {
-        return cast ((cast (cast GlCompressedTexture.isAstcFormat__glCompressedTexture((cast format : TextureContainerFormat)) : Bool) : Bool) ? (cast _Runtime.field(support, 'astc') : Dynamic) : (cast false : Dynamic));
+        return cast ((cast (cast GlCompressedTexture.isAstcFormat__glCompressedTexture((cast format)) : Bool) : Bool) ? (cast _Runtime.field(support, 'astc') : Dynamic) : (cast false : Dynamic));
       }
     }
     return cast null;
   }
 
   public static function registerGlCompressedTextureDecoder(state:GlRenderState, decode:Null<GlCompressedTextureDecoder>):Void {
-    ((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).compressedTextureDecoder = decode);
+    ((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : { @:optional var compressedTextureDecoder:Null<GlCompressedTextureDecoder>; }).compressedTextureDecoder = decode);
   }
 
   public static function registerGlCompressedTextureUpload(state:GlRenderState, ?uploader:Dynamic):Void {
-    ((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).compressedTextureUpload = ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast GlCompressedTexture.uploadGlCompressedImage__glCompressedTexture : Dynamic)));
+    ((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : { @:optional var compressedTextureUpload:Null<GlCompressedTextureUploader>; }).compressedTextureUpload = ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast GlCompressedTexture.uploadGlCompressedImage__glCompressedTexture : Dynamic)));
   }
 
   public static function uploadGlCompressedTextureContainer(gl:flighthq._internal.dom.WebGL2RenderingContext, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {
@@ -217,10 +217,10 @@ class GlCompressedTexture {
     var faces:Float = cast _Runtime.UNDEFINED;
     var layers:Float = cast _Runtime.UNDEFINED;
     var mipLevels:Float = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast GlCompressedTexture.isSupportedGlCompressedTextureContainerShape__glCompressedTexture((cast container : TextureContainer)) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast GlCompressedTexture.isSupportedGlCompressedTextureContainerShape__glCompressedTexture((cast container)) : Bool) : Bool) : Bool)) { return cast false; }
     if ((cast !_Runtime.strictEquals(_Runtime.field(container, 'supercompression'), 'None') : Bool)) { return cast false; }
-    uploadFormat = ((cast _Runtime.strictEquals(colorSpace, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(container, 'format') : Dynamic) : (cast (cast GlCompressedTexture.getTextureContainerFormatForColorSpace__glCompressedTexture((cast _Runtime.field(container, 'format') : TextureContainerFormat), (cast colorSpace : TextureColorSpace)) : TextureContainerFormat) : Dynamic));
-    nativeFormat = ((cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) && (cast (cast GlCompressedTexture.isAstcFormat__glCompressedTexture((cast _Runtime.field(container, 'format') : TextureContainerFormat)) : Bool) : Bool)) : Bool) ? (cast (cast GlCompressedTexture.getGlAstcSrgbFormat__glCompressedTexture((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast _Runtime.field(container, 'format') : TextureContainerFormat)) : Float) : Dynamic) : (cast (cast getGlCompressedTextureFormat((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast uploadFormat : TextureContainerFormat)) : Float) : Dynamic));
+    uploadFormat = ((cast _Runtime.strictEquals(colorSpace, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(container, 'format') : Dynamic) : (cast (cast GlCompressedTexture.getTextureContainerFormatForColorSpace__glCompressedTexture((cast _Runtime.field(container, 'format')), (cast colorSpace)) : TextureContainerFormat) : Dynamic));
+    nativeFormat = ((cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) && (cast (cast GlCompressedTexture.isAstcFormat__glCompressedTexture((cast _Runtime.field(container, 'format'))) : Bool) : Bool)) : Bool) ? (cast (cast GlCompressedTexture.getGlAstcSrgbFormat__glCompressedTexture((cast gl), (cast _Runtime.field(container, 'format'))) : Float) : Dynamic) : (cast (cast getGlCompressedTextureFormat((cast gl), (cast uploadFormat)) : Float) : Dynamic));
     faces = _Runtime.field(container, 'faces');
     layers = _Runtime.field(container, 'layers');
     mipLevels = _Runtime.field(container, 'mipLevels');
@@ -232,7 +232,7 @@ class GlCompressedTexture {
         var index:Float = 0.0;
         while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(container, 'levels'), 'length') : Float)) : Bool)) {
           var entry:TextureContainerLevel = flighthq._internal._StaticIndex.readArray(_Runtime.field(container, 'levels'), index);
-          var view:flighthq._internal._UInt8Array = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), _Runtime.addNumbers(_Runtime.field(payload, 'byteOffset'), (cast entry : TextureContainerLevel).byteOffset), (cast entry : TextureContainerLevel).byteLength);
+          var view:flighthq._internal._UInt8Array = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), Std.int(_Runtime.addNumbers(_Runtime.field(payload, 'byteOffset'), (cast entry : TextureContainerLevel).byteOffset)), Std.int((cast entry : TextureContainerLevel).byteLength));
           var mip:Float = _Runtime.fmod(index, mipLevels);
           var faceLayer:Float = ((index - mip) / mipLevels);
           var face:Float = _Runtime.fmod(faceLayer, faces);
@@ -253,8 +253,8 @@ class GlCompressedTexture {
       var mip:Float = 0.0;
       while ((cast ((cast mip : Float) < (cast _Runtime.field(_Runtime.field(container, 'levels'), 'length') : Float)) : Bool)) {
         var entry:TextureContainerLevel = flighthq._internal._StaticIndex.readArray(_Runtime.field(container, 'levels'), mip);
-        var view:flighthq._internal._UInt8Array = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), _Runtime.addNumbers(_Runtime.field(payload, 'byteOffset'), (cast entry : TextureContainerLevel).byteOffset), (cast entry : TextureContainerLevel).byteLength);
-        var rgba:Null<flighthq._internal._UInt8ClampedArray> = (cast decode((cast _Runtime.field(container, 'format') : TextureContainerFormat), (cast (cast entry : TextureContainerLevel).width : Float), (cast (cast entry : TextureContainerLevel).height : Float), (cast view : flighthq._internal._UInt8Array)) : Null<flighthq._internal._UInt8ClampedArray>);
+        var view:flighthq._internal._UInt8Array = new flighthq._internal._UInt8Array(_Runtime.field(payload, 'buffer'), Std.int(_Runtime.addNumbers(_Runtime.field(payload, 'byteOffset'), (cast entry : TextureContainerLevel).byteOffset)), Std.int((cast entry : TextureContainerLevel).byteLength));
+        var rgba:Null<flighthq._internal._UInt8ClampedArray> = (cast decode((cast _Runtime.field(container, 'format')), (cast (cast entry : TextureContainerLevel).width : Float), (cast (cast entry : TextureContainerLevel).height : Float), (cast view)) : Null<flighthq._internal._UInt8ClampedArray>);
         if ((cast _Runtime.strictEquals(rgba, null) : Bool)) { return cast false; }
         flighthq._internal.backend.WebGl2Backend.texImage2D(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), mip, ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic)), (cast entry : TextureContainerLevel).width, (cast entry : TextureContainerLevel).height, 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), rgba);
         (mip = cast ((mip + 1.0) : Dynamic));
@@ -265,7 +265,7 @@ class GlCompressedTexture {
   }
 
   public static function isAstcFormat__glCompressedTexture(format:TextureContainerFormat):Bool {
-    return cast (cast format : { var startsWith:flighthq._internal._Any; }).startsWith('astc');
+    return cast (cast format : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'astc' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     return cast null;
   }
 
@@ -302,9 +302,9 @@ class GlCompressedTexture {
     compressed = _Runtime.field(image, 'compressed');
     container = compressed.container;
     if ((cast ((cast ((cast !_Runtime.strictEquals((cast container : TextureContainer).depth, 1.0) : Bool) || (cast !_Runtime.strictEquals((cast container : TextureContainer).faces, 1.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast container : TextureContainer).layers, 1.0) : Bool)) : Bool)) { return cast false; }
-    return cast (cast uploadGlCompressedTextureContainer((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast container : TextureContainer), (cast compressed.payload : flighthq._internal._UInt8Array), (cast _Runtime.coalesce(decode, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) : Null<GlCompressedTextureDecoder>), (cast colorSpace : Null<String>)) : Bool);
+    return cast (cast uploadGlCompressedTextureContainer((cast gl), (cast container), (cast compressed.payload), (cast _Runtime.coalesce(decode, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))), (cast colorSpace)) : Bool);
     return cast null;
   }
 
-  public static final SRGB_FORMAT_PAIRS__glCompressedTexture:Dynamic = { bc1: cast (['bc1', 'bc1Srgb'] : Array<Dynamic>), bc1Srgb: cast (['bc1', 'bc1Srgb'] : Array<Dynamic>), bc2: cast (['bc2', 'bc2Srgb'] : Array<Dynamic>), bc2Srgb: cast (['bc2', 'bc2Srgb'] : Array<Dynamic>), bc3: cast (['bc3', 'bc3Srgb'] : Array<Dynamic>), bc3Srgb: cast (['bc3', 'bc3Srgb'] : Array<Dynamic>), bc7: cast (['bc7', 'bc7Srgb'] : Array<Dynamic>), bc7Srgb: cast (['bc7', 'bc7Srgb'] : Array<Dynamic>), etc1: cast (['etc1', 'etc2RgbSrgb'] : Array<Dynamic>), etc2Rgb: cast (['etc2Rgb', 'etc2RgbSrgb'] : Array<Dynamic>), etc2RgbSrgb: cast (['etc2Rgb', 'etc2RgbSrgb'] : Array<Dynamic>), etc2RgbA1: cast (['etc2RgbA1', 'etc2RgbA1Srgb'] : Array<Dynamic>), etc2RgbA1Srgb: cast (['etc2RgbA1', 'etc2RgbA1Srgb'] : Array<Dynamic>), etc2Rgba: cast (['etc2Rgba', 'etc2RgbaSrgb'] : Array<Dynamic>), etc2RgbaSrgb: cast (['etc2Rgba', 'etc2RgbaSrgb'] : Array<Dynamic>) };
+  public static final SRGB_FORMAT_PAIRS__glCompressedTexture:flighthq._internal._Partial<flighthq._internal._Record<TextureContainerFormat, Array<TextureContainerFormat>>> = (cast { bc1: cast (['bc1', 'bc1Srgb'] : Array<Dynamic>), bc1Srgb: cast (['bc1', 'bc1Srgb'] : Array<Dynamic>), bc2: cast (['bc2', 'bc2Srgb'] : Array<Dynamic>), bc2Srgb: cast (['bc2', 'bc2Srgb'] : Array<Dynamic>), bc3: cast (['bc3', 'bc3Srgb'] : Array<Dynamic>), bc3Srgb: cast (['bc3', 'bc3Srgb'] : Array<Dynamic>), bc7: cast (['bc7', 'bc7Srgb'] : Array<Dynamic>), bc7Srgb: cast (['bc7', 'bc7Srgb'] : Array<Dynamic>), etc1: cast (['etc1', 'etc2RgbSrgb'] : Array<Dynamic>), etc2Rgb: cast (['etc2Rgb', 'etc2RgbSrgb'] : Array<Dynamic>), etc2RgbSrgb: cast (['etc2Rgb', 'etc2RgbSrgb'] : Array<Dynamic>), etc2RgbA1: cast (['etc2RgbA1', 'etc2RgbA1Srgb'] : Array<Dynamic>), etc2RgbA1Srgb: cast (['etc2RgbA1', 'etc2RgbA1Srgb'] : Array<Dynamic>), etc2Rgba: cast (['etc2Rgba', 'etc2RgbaSrgb'] : Array<Dynamic>), etc2RgbaSrgb: cast (['etc2Rgba', 'etc2RgbaSrgb'] : Array<Dynamic>) });
 }

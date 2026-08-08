@@ -9,6 +9,7 @@ import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.MotionBlurEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.WgpuDualSourceEffectPipeline;
+import flighthq.types.WgpuEffectBlendMode;
 import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
@@ -24,41 +25,41 @@ class WgpuMotionBlurEffect {
     var velocitySource:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
-    pipeline = (cast WgpuMotionBlurEffect.getMotionBlurPipeline__wgpuMotionBlurEffect((cast state : WgpuRenderState)) : WgpuEffectPipeline);
+    pipeline = (cast WgpuMotionBlurEffect.getMotionBlurPipeline__wgpuMotionBlurEffect((cast state)) : WgpuEffectPipeline);
     if ((cast _Runtime.strictEquals(velocityTexture, null) : Bool)) {
-      drawWgpuDualSourceEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+      drawWgpuDualSourceEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
         flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
         flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, samples);
         flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
         flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
         flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, 0.0);
-      }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+      }, cast ([__unused1] : Array<Dynamic>)); }));
       return;
     }
     velocitySource = (cast { view: velocityTexture.createView() } : WgpuRenderTarget);
-    drawWgpuDualSourceEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast velocitySource : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
+    drawWgpuDualSourceEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast velocitySource), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, samples);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, 1.0);
-    }, cast ([__unused4] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused4] : Array<Dynamic>)); }));
   }
 
-  public static final defaultWgpuMotionBlurEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyMotionBlurEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'sceneVelocityTexture') : Null<flighthq._internal.dom.GPUTexture>), (cast (cast effect : MotionBlurEffect) : MotionBlurEffect));
-  };
+  public static final defaultWgpuMotionBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyMotionBlurEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'sceneVelocityTexture')), (cast (cast effect : MotionBlurEffect)));
+  });
 
   public static function registerWgpuMotionBlurEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'MotionBlurEffect' : String), (cast defaultWgpuMotionBlurEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'MotionBlurEffect' : String), (cast defaultWgpuMotionBlurEffectRunner));
   }
 
   public static function getMotionBlurPipeline__wgpuMotionBlurEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var pipeline:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     pipeline = ((cast WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline((cast state : WgpuRenderState), (cast WgpuMotionBlurEffect.MOTION_BLUR_FRAGMENT_WGSL__wgpuMotionBlurEffect : String), 'replace') : Null<WgpuEffectPipeline>) : Dynamic));
-      ((cast WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, pipeline));
+      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline((cast state), (cast WgpuMotionBlurEffect.MOTION_BLUR_FRAGMENT_WGSL__wgpuMotionBlurEffect : String), (cast 'replace')) : WgpuEffectPipeline) : Dynamic));
+      ((cast WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast pipeline)));
     }
     return cast pipeline;
     return cast null;

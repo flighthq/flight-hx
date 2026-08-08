@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ExposureAdjustment = { var kind:AdjustmentKind; var colorMatrix:Array<Float>; @:optional var exposure:Float; };
+typedef ExposureAdjustment = { var kind:String; var colorMatrix:Array<Float>; @:optional var exposure:Float; };

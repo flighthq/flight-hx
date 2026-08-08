@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.RadialBlurEffect;
 
 class RadialBlurEffect {
-  public static function createRadialBlurEffect(?options:Dynamic):flighthq.types.RadialBlurEffect {
+  public static function createRadialBlurEffect(?options:flighthq._internal._Omit<flighthq.types.RadialBlurEffect, String>):flighthq.types.RadialBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'RadialBlurEffect' }, options]);
     return cast null;

@@ -8,8 +8,6 @@ const bridgesDirectory = path.join(repositoryRoot, 'tests/bridges');
 const selectedPackage = process.env.FLIGHT_UPSTREAM_PACKAGE;
 export const bridgeHookTimeoutMs = 30_000;
 
-export const bridgeHookTimeoutMs = 30_000;
-
 export function packageBridge(specifier: string): string | undefined {
   const match = /^@flighthq\/([^/]+)(?:\/(.+))?$/u.exec(specifier);
   if (!match) return undefined;

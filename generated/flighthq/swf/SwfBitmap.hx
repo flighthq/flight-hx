@@ -33,12 +33,12 @@ class SwfBitmap {
     hasColorTable = _Runtime.strictEquals(format, SwfBitmap.FORMAT_COLOR_MAPPED__swfBitmap);
     colorCount = ((cast hasColorTable : Bool) ? (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readUint8Array(source, 5.0), 1.0) : Dynamic) : (cast 0.0 : Dynamic));
     compressed = (cast source : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.addNumbers(SwfBitmap.LOSSLESS_HEADER_BYTES__swfBitmap, ((cast hasColorTable : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)))));
-    decompress = (cast getDecompressor((cast (cast CompressionValue : { var Deflate:String; var Lzma:String; }).Deflate : Compression)) : Null<Decompressor>);
+    decompress = (cast getDecompressor((cast (cast CompressionValue : { var Deflate:String; var Lzma:String; }).Deflate)) : Null<Decompressor>);
     if ((cast _Runtime.strictEquals(decompress, null) : Bool)) { return cast null; }
-    pixels = (cast decompress((cast compressed : flighthq._internal._UInt8Array), (cast 0.0 : Float)) : Null<flighthq._internal._UInt8Array>);
+    pixels = (cast decompress((cast compressed), (cast 0.0 : Float)) : Null<flighthq._internal._UInt8Array>);
     if ((cast _Runtime.strictEquals(pixels, null) : Bool)) { return cast null; }
     bitmap = (cast createBitmap((cast width : Float), (cast height : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bitmap);
-    unpacked = ((cast hasColorTable : Bool) ? (cast (cast SwfBitmap.unpackSwfColorMapped__swfBitmap((cast bitmap : Bitmap), (cast pixels : flighthq._internal._UInt8Array), (cast width : Float), (cast height : Float), (cast colorCount : Float), (cast hasAlpha : Bool)) : Bool) : Dynamic) : (cast ((cast _Runtime.strictEquals(format, SwfBitmap.FORMAT_15_BIT__swfBitmap) : Bool) ? (cast (cast SwfBitmap.unpackSwf15Bit__swfBitmap((cast bitmap : Bitmap), (cast pixels : flighthq._internal._UInt8Array), (cast width : Float), (cast height : Float)) : Bool) : Dynamic) : (cast (cast SwfBitmap.unpackSwf24Bit__swfBitmap((cast bitmap : Bitmap), (cast pixels : flighthq._internal._UInt8Array), (cast width : Float), (cast height : Float), (cast hasAlpha : Bool)) : Bool) : Dynamic)) : Dynamic));
+    unpacked = ((cast hasColorTable : Bool) ? (cast (cast SwfBitmap.unpackSwfColorMapped__swfBitmap((cast bitmap), (cast pixels), (cast width : Float), (cast height : Float), (cast colorCount : Float), (cast hasAlpha : Bool)) : Bool) : Dynamic) : (cast ((cast _Runtime.strictEquals(format, SwfBitmap.FORMAT_15_BIT__swfBitmap) : Bool) ? (cast (cast SwfBitmap.unpackSwf15Bit__swfBitmap((cast bitmap), (cast pixels), (cast width : Float), (cast height : Float)) : Bool) : Dynamic) : (cast (cast SwfBitmap.unpackSwf24Bit__swfBitmap((cast bitmap), (cast pixels), (cast width : Float), (cast height : Float), (cast hasAlpha : Bool)) : Bool) : Dynamic)) : Dynamic));
     if ((cast !(cast unpacked : Bool) : Bool)) { return cast null; }
     (bitmap.alphaType = cast (((cast hasAlpha : Bool) ? (cast 'premultiplied' : Dynamic) : (cast 'opaque' : Dynamic)) : Dynamic));
     return cast bitmap;

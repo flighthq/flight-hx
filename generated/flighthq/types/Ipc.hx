@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 
 typedef IpcBackendCapabilities = { var canHandle:Bool; var canInvoke:Bool; var canSend:Bool; var canTarget:Bool; };
 
-typedef IpcBackend = { var send:String->Array<flighthq._internal._Any>->Void; var invoke:String->Array<flighthq._internal._Any>->flighthq._internal._Promise<flighthq._internal._Any>; var subscribe:String->Array<flighthq._internal._Any>->Void->Void->Void; @:optional var handle:String->Array<flighthq._internal._Any>->flighthq._internal._Any->Void->Void; @:optional var sendTo:IpcTarget->String->Array<flighthq._internal._Any>->Void; @:optional var getCapabilities:Void->IpcBackendCapabilities; };
+typedef IpcBackend = { var send:String->Array<flighthq._internal._Any>->Void; var invoke:String->Array<flighthq._internal._Any>->flighthq._internal._Promise<flighthq._internal._Any>; var subscribe:String->(Array<flighthq._internal._Any>->Void)->(Void->Void); @:optional var handle:String->(Array<flighthq._internal._Any>->flighthq._internal._Any)->(Void->Void); @:optional var sendTo:IpcTarget->String->Array<flighthq._internal._Any>->Void; @:optional var getCapabilities:Void->IpcBackendCapabilities; };
 
 typedef IpcChannel = { var name:String; };
 
@@ -19,10 +19,10 @@ class IpcTimeoutError extends haxe.Exception {
   public final timeoutMs:Float;
   public var name:String;
   public function new(channel:String, timeoutMs:Float):Void {
-    super((cast 'IPC invoke on channel "' + Std.string(channel) + '" timed out after ' + Std.string(timeoutMs) + 'ms' : Null<String>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>));
+    super((cast 'IPC invoke on channel "' + Std.string(channel) + '" timed out after ' + Std.string(timeoutMs) + 'ms'), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
     this.name = 'Error';
-    ((cast this : IpcTimeoutError).name = 'IpcTimeoutError');
-    ((cast this : IpcTimeoutError).channel = channel);
-    ((cast this : IpcTimeoutError).timeoutMs = timeoutMs);
+    (this.name = 'IpcTimeoutError');
+    (this.channel = channel);
+    (this.timeoutMs = timeoutMs);
   }
 }

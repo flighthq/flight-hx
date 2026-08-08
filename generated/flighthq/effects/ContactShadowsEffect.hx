@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class ContactShadowsEffect {
-  public static function createContactShadowsEffect(?options:Dynamic):flighthq.types.ContactShadowsEffect {
+  public static function createContactShadowsEffect(?options:flighthq._internal._Omit<flighthq.types.ContactShadowsEffect, String>):flighthq.types.ContactShadowsEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'ContactShadowsEffect' }, options]);
     return cast null;
@@ -22,11 +22,11 @@ class ContactShadowsEffect {
   }
 
   public static function registerContactShadowsEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'ContactShadowsEffect' : String), ContactShadowsEffect.resolveContactShadowsEffectPadding__contactShadowsEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'ContactShadowsEffect' : String), (cast ContactShadowsEffect.resolveContactShadowsEffectPadding__contactShadowsEffect));
   }
 
   public static function resolveContactShadowsEffectPadding__contactShadowsEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getContactShadowsEffectPadding((cast (cast effect : flighthq.types.ContactShadowsEffect) : flighthq.types.ContactShadowsEffect)) : RenderEffectPadding);
+    return cast (cast getContactShadowsEffectPadding((cast (cast effect : flighthq.types.ContactShadowsEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

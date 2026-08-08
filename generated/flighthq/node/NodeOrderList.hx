@@ -15,7 +15,7 @@ import flighthq.types.NodeSignals;
 import flighthq.types.Signal;
 
 class NodeOrderList {
-  public static function addNodeOrderListEntry<Traits>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>, sortKey:Float):Void {
+  public static function addNodeOrderListEntry<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>, sortKey:Float):Void {
     var entryCount:Float = cast _Runtime.UNDEFINED;
     entryCount = (cast list : flighthq.types.NodeOrderList<Traits>).entryCount;
     if ((cast ((cast entryCount : Float) < (cast _Runtime.field((cast list : flighthq.types.NodeOrderList<Traits>).nodes, 'length') : Float)) : Bool)) {
@@ -28,7 +28,7 @@ class NodeOrderList {
     ((cast list : flighthq.types.NodeOrderList<Traits>).entryCount = (entryCount + 1.0));
   }
 
-  public static function applyNodeOrderList<Traits>(target:Node<Traits>, list:flighthq.types.NodeOrderList<Traits>):Void {
+  public static function applyNodeOrderList<Traits:flighthq._internal._Object>(target:Node<Traits>, list:flighthq.types.NodeOrderList<Traits>):Void {
     var targetRuntime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
     var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
     var listIndex:flighthq._internal._Map<NodeAny, Float> = cast _Runtime.UNDEFINED;
@@ -37,7 +37,7 @@ class NodeOrderList {
     var sortKeys:Array<Float> = cast _Runtime.UNDEFINED;
     var moved:Bool = cast _Runtime.UNDEFINED;
     var targetSignals:Null<NodeSignals> = cast _Runtime.UNDEFINED;
-    targetRuntime = (cast (cast getNodeRuntime(target) : NodeRuntime<Traits>) : NodeRuntime<Traits>);
+    targetRuntime = (cast getNodeRuntime((cast target)) : NodeRuntime<Traits>);
     children = (cast targetRuntime : NodeRuntime<Traits>).children;
     if ((cast ((cast _Runtime.strictEquals(children, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(list, 'entryCount'), 0.0) : Bool)) : Bool)) { return; }
     listIndex = NodeOrderList._listIndex__nodeOrderList;
@@ -49,7 +49,7 @@ class NodeOrderList {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(list, 'entryCount') : Float)) : Bool)) {
-        ((cast listIndex : flighthq._internal._Map<NodeAny, Float>).set(flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'nodes'), i), i));
+        ((cast listIndex : flighthq._internal._Map<NodeAny, Float>).set(flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'nodes'), i), (cast i)));
         i++;
       }
     }
@@ -74,6 +74,7 @@ class NodeOrderList {
       ai = (cast ((cast listIndex : flighthq._internal._Map<NodeAny, Float>).get(a)) : Float);
       bi = (cast ((cast listIndex : flighthq._internal._Map<NodeAny, Float>).get(b)) : Float);
       return cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(sortKeys, ai), flighthq._internal._StaticIndex.readArray(sortKeys, bi)) : Bool) ? (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(sortKeys, ai), flighthq._internal._StaticIndex.readArray(sortKeys, bi)) : Dynamic) : (cast (ai - bi) : Dynamic));
+      return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
     moved = false;
     {
@@ -91,101 +92,101 @@ class NodeOrderList {
     if ((cast !(cast moved : Bool) : Bool)) { return; }
     ((cast targetRuntime : NodeRuntime<Traits>).childrenId = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast targetRuntime : NodeRuntime<Traits>).childrenId + 1.0)), 0));
     targetSignals = (cast targetRuntime : NodeRuntime<Traits>).nodeSignals;
-    if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast targetSignals : flighthq.types.NodeSignals).onChildrenOrderChanged]]), 1); }
+    if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast targetSignals : { var onChildrenOrderChanged:Signal<Void->Void>; }).onChildrenOrderChanged]]), 1); }
   }
 
-  public static function clearNodeOrderList<Traits>(list:flighthq.types.NodeOrderList<Traits>):Void {
+  public static function clearNodeOrderList<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>):Void {
     ((cast list : flighthq.types.NodeOrderList<Traits>).entryCount = 0.0);
   }
 
-  public static function createNodeOrderList<Traits>():flighthq.types.NodeOrderList<Traits> {
+  public static function createNodeOrderList<Traits:flighthq._internal._Object>():flighthq.types.NodeOrderList<Traits> {
     return cast { entryCount: 0.0, nodes: cast ([] : Array<Dynamic>), sortKeys: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
-  public static function disposeNodeOrderList<Traits>(list:flighthq.types.NodeOrderList<Traits>):Void {
+  public static function disposeNodeOrderList<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>):Void {
     ((cast list : flighthq.types.NodeOrderList<Traits>).entryCount = 0.0);
     _Runtime.setLength((cast list : flighthq.types.NodeOrderList<Traits>).nodes, 0.0);
     _Runtime.setLength((cast list : flighthq.types.NodeOrderList<Traits>).sortKeys, 0.0);
   }
 
-  public static function forEachNodeOrderListEntry<Traits>(list:flighthq.types.NodeOrderList<Traits>, callback:NodeOrderListEntryVisitor<Traits>):Void {
+  public static function forEachNodeOrderListEntry<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, callback:NodeOrderListEntryVisitor<Traits>):Void {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(list, 'entryCount') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals((cast callback(flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'nodes'), i), (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'sortKeys'), i) : Float), (cast i : Float)) : flighthq._internal._Union2<Bool, Void>), false) : Bool)) { return; }
+        if ((cast _Runtime.strictEquals((cast callback((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'nodes'), i)), (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'sortKeys'), i) : Float), (cast i : Float)) : flighthq._internal._Union2<Bool, Void>), false) : Bool)) { return; }
         i++;
       }
     }
   }
 
-  public static function getNodeOrderListEntrySortKey<Traits>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>):Null<Float> {
+  public static function getNodeOrderListEntrySortKey<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>):Null<Float> {
     var index:Float = cast _Runtime.UNDEFINED;
-    index = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList(list, node) : Float);
+    index = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList((cast list), (cast node)) : Float);
     return cast ((cast _Runtime.strictEquals(index, -1.0) : Bool) ? (cast null : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(list, 'sortKeys'), index) : Dynamic));
     return cast null;
   }
 
-  public static function hasNodeOrderListEntry<Traits>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>):Bool {
-    return cast !_Runtime.strictEquals((cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList(list, node) : Float), -1.0);
+  public static function hasNodeOrderListEntry<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>):Bool {
+    return cast !_Runtime.strictEquals((cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList((cast list), (cast node)) : Float), -1.0);
     return cast null;
   }
 
-  public static function removeNodeOrderListEntry<Traits>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>):Bool {
+  public static function removeNodeOrderListEntry<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>):Bool {
     var index:Float = cast _Runtime.UNDEFINED;
-    index = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList(list, node) : Float);
+    index = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList((cast list), (cast node)) : Float);
     if ((cast _Runtime.strictEquals(index, -1.0) : Bool)) { return cast false; }
-    NodeOrderList.removeNodeOrderListEntryAtIndex__nodeOrderList(list, (cast index : Float));
+    NodeOrderList.removeNodeOrderListEntryAtIndex__nodeOrderList((cast list), (cast index : Float));
     return cast true;
     return cast null;
   }
 
-  public static function setNodeOrderListEntry<Traits>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>, sortKey:Float):Void {
+  public static function setNodeOrderListEntry<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>, sortKey:Float):Void {
     var index:Float = cast _Runtime.UNDEFINED;
-    index = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList(list, node) : Float);
+    index = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList((cast list), (cast node)) : Float);
     if ((cast _Runtime.strictEquals(index, -1.0) : Bool)) {
-      addNodeOrderListEntry(list, node, (cast sortKey : Float));
+      addNodeOrderListEntry((cast list), (cast node), (cast sortKey : Float));
       return;
     }
     flighthq._internal._StaticIndex.writeArray((cast list : flighthq.types.NodeOrderList<Traits>).sortKeys, index, sortKey);
   }
 
-  public static function setNodeOrderListEntryAbove<Traits>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>, target:Node<Traits>):Void {
-    NodeOrderList.insertNodeOrderListEntryBeside__nodeOrderList(list, node, target, (cast 1.0 : Float));
+  public static function setNodeOrderListEntryAbove<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>, target:Node<Traits>):Void {
+    NodeOrderList.insertNodeOrderListEntryBeside__nodeOrderList((cast list), (cast node), (cast target), (cast 1.0 : Float));
   }
 
-  public static function setNodeOrderListEntryBelow<Traits>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>, target:Node<Traits>):Void {
-    NodeOrderList.insertNodeOrderListEntryBeside__nodeOrderList(list, node, target, (cast 0.0 : Float));
+  public static function setNodeOrderListEntryBelow<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>, target:Node<Traits>):Void {
+    NodeOrderList.insertNodeOrderListEntryBeside__nodeOrderList((cast list), (cast node), (cast target), (cast 0.0 : Float));
   }
 
-  public static function setNodeOrderListFromNodeChildren<Traits>(list:flighthq.types.NodeOrderList<Traits>, source:Node<Traits>):Void {
+  public static function setNodeOrderListFromNodeChildren<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, source:Node<Traits>):Void {
     var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
     ((cast list : flighthq.types.NodeOrderList<Traits>).entryCount = 0.0);
-    children = _Runtime.field((cast getNodeRuntime(source) : NodeRuntime<Traits>), 'children');
+    children = _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'children');
     if ((cast _Runtime.strictEquals(children, null) : Bool)) { return; }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        addNodeOrderListEntry(list, (cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>), (cast i : Float));
+        addNodeOrderListEntry((cast list), (cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>)), (cast i : Float));
         i++;
       }
     }
   }
 
-  public static function swapNodeOrderListEntries<Traits>(list:flighthq.types.NodeOrderList<Traits>, nodeA:Node<Traits>, nodeB:Node<Traits>):Void {
+  public static function swapNodeOrderListEntries<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, nodeA:Node<Traits>, nodeB:Node<Traits>):Void {
     var indexA:Float = cast _Runtime.UNDEFINED;
     var indexB:Float = cast _Runtime.UNDEFINED;
     var sortKeyA:Float = cast _Runtime.UNDEFINED;
-    indexA = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList(list, nodeA) : Float);
+    indexA = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList((cast list), (cast nodeA)) : Float);
     if ((cast _Runtime.strictEquals(indexA, -1.0) : Bool)) { return; }
-    indexB = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList(list, nodeB) : Float);
+    indexB = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList((cast list), (cast nodeB)) : Float);
     if ((cast _Runtime.strictEquals(indexB, -1.0) : Bool)) { return; }
     sortKeyA = flighthq._internal._StaticIndex.readArray((cast list : flighthq.types.NodeOrderList<Traits>).sortKeys, indexA);
     flighthq._internal._StaticIndex.writeArray((cast list : flighthq.types.NodeOrderList<Traits>).sortKeys, indexA, flighthq._internal._StaticIndex.readArray((cast list : flighthq.types.NodeOrderList<Traits>).sortKeys, indexB));
     flighthq._internal._StaticIndex.writeArray((cast list : flighthq.types.NodeOrderList<Traits>).sortKeys, indexB, sortKeyA);
   }
 
-  public static function findNodeOrderListEntryIndex__nodeOrderList<Traits>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>):Float {
+  public static function findNodeOrderListEntryIndex__nodeOrderList<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>):Float {
     {
       var i:Float = _Runtime.subtractNumbers(_Runtime.field(list, 'entryCount'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
@@ -197,19 +198,19 @@ class NodeOrderList {
     return cast null;
   }
 
-  public static function insertNodeOrderListEntryBeside__nodeOrderList<Traits>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>, target:Node<Traits>, offset:Float):Void {
+  public static function insertNodeOrderListEntryBeside__nodeOrderList<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>, target:Node<Traits>, offset:Float):Void {
     var existing:Float = cast _Runtime.UNDEFINED;
     var targetIndex:Float = cast _Runtime.UNDEFINED;
     var sortKey:Float = cast _Runtime.UNDEFINED;
     var at:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(node, target) : Bool)) { return; }
-    existing = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList(list, node) : Float);
-    if ((cast !_Runtime.strictEquals(existing, -1.0) : Bool)) { NodeOrderList.removeNodeOrderListEntryAtIndex__nodeOrderList(list, (cast existing : Float)); }
-    targetIndex = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList(list, target) : Float);
+    existing = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList((cast list), (cast node)) : Float);
+    if ((cast !_Runtime.strictEquals(existing, -1.0) : Bool)) { NodeOrderList.removeNodeOrderListEntryAtIndex__nodeOrderList((cast list), (cast existing : Float)); }
+    targetIndex = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList((cast list), (cast target)) : Float);
     if ((cast _Runtime.strictEquals(targetIndex, -1.0) : Bool)) { return; }
     sortKey = flighthq._internal._StaticIndex.readArray((cast list : flighthq.types.NodeOrderList<Traits>).sortKeys, targetIndex);
     at = (targetIndex + offset);
-    addNodeOrderListEntry(list, node, (cast sortKey : Float));
+    addNodeOrderListEntry((cast list), (cast node), (cast sortKey : Float));
     {
       var i:Float = ((cast list : flighthq.types.NodeOrderList<Traits>).entryCount - 1.0);
       while ((cast ((cast i : Float) > (cast at : Float)) : Bool)) {
@@ -222,7 +223,7 @@ class NodeOrderList {
     flighthq._internal._StaticIndex.writeArray((cast list : flighthq.types.NodeOrderList<Traits>).sortKeys, at, sortKey);
   }
 
-  public static function removeNodeOrderListEntryAtIndex__nodeOrderList<Traits>(list:flighthq.types.NodeOrderList<Traits>, index:Float):Void {
+  public static function removeNodeOrderListEntryAtIndex__nodeOrderList<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, index:Float):Void {
     var last:Float = cast _Runtime.UNDEFINED;
     last = ((cast list : flighthq.types.NodeOrderList<Traits>).entryCount - 1.0);
     {
@@ -238,7 +239,7 @@ class NodeOrderList {
 
   public static final _listIndex__nodeOrderList:flighthq._internal._Map<NodeAny, Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
-  public static final _members__nodeOrderList:Array<NodeAny> = cast ([] : Array<Dynamic>);
+  public static final _members__nodeOrderList:Array<NodeAny> = (cast cast ([] : Array<Dynamic>));
 
-  public static final _slots__nodeOrderList:Array<Float> = cast ([] : Array<Dynamic>);
+  public static final _slots__nodeOrderList:Array<Float> = (cast cast ([] : Array<Dynamic>));
 }

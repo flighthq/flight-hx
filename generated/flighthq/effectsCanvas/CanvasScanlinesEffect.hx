@@ -26,7 +26,7 @@ class CanvasScanlinesEffect {
     var channel:Float = cast _Runtime.UNDEFINED;
     count = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'count'), function():Dynamic return cast 240.0)));
     intensity = HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.3)));
-    drawCanvasEffectPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    drawCanvasEffectPass((cast dest), (cast source), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
     ctx = _Runtime.field(dest, 'context');
     w = _Runtime.field(dest, 'width');
     h = _Runtime.field(dest, 'height');
@@ -49,11 +49,11 @@ class CanvasScanlinesEffect {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasScanlinesEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyScanlinesEffectToCanvas((cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast (cast effect : ScanlinesEffect) : ScanlinesEffect));
-  };
+  public static final defaultCanvasScanlinesEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    applyScanlinesEffectToCanvas((cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : ScanlinesEffect)));
+  });
 
   public static function registerCanvasScanlinesEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'ScanlinesEffect' : String), (cast defaultCanvasScanlinesEffectRunner : CanvasRenderEffectRunner));
+    registerCanvasRenderEffect((cast state), (cast 'ScanlinesEffect' : String), (cast defaultCanvasScanlinesEffectRunner));
   }
 }

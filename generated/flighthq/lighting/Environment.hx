@@ -4,6 +4,7 @@ package flighthq.lighting;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Environment;
 import flighthq.types.EnvironmentOptions;
@@ -19,12 +20,12 @@ import flighthq.types._internal._EnvironmentValues.EnvironmentKind;
 
 class Environment {
   public static function cloneEnvironment(source:flighthq.types.Environment):flighthq.types.Environment {
-    return cast (cast createEnvironment((cast { environment: _Runtime.field(source, 'environment'), intensity: _Runtime.field(source, 'intensity') } : Null<EnvironmentOptions>)) : flighthq.types.Environment);
+    return cast (cast createEnvironment((cast { environment: _Runtime.field(source, 'environment'), intensity: _Runtime.field(source, 'intensity') })) : flighthq.types.Environment);
     return cast null;
   }
 
   public static function createEnvironment(?options:EnvironmentOptions):flighthq.types.Environment {
-    return cast (cast createEntity({ environment: _Runtime.coalesce(_Runtime.optionalField(options, 'environment'), function():Dynamic return cast null), intensity: _Runtime.coalesce(_Runtime.optionalField(options, 'intensity'), function():Dynamic return cast 1.0), kind: EnvironmentKind }) : flighthq.types.Environment);
+    return cast (cast createEntity((cast { environment: _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var environment:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).environment; }), function():Dynamic return cast null), intensity: _Runtime.coalesce(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0), kind: EnvironmentKind })) : { >Entity, var environment:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; var intensity:Float; var kind:String; });
     return cast null;
   }
 }

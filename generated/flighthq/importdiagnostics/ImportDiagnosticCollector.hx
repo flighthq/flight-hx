@@ -9,8 +9,8 @@ import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 class ImportDiagnosticCollector {
   public static function collectImportDiagnostics(run:Array<ImportDiagnostic>->Void):Array<ImportDiagnostic> {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
-    diagnostics = cast ([] : Array<Dynamic>);
-    run((cast diagnostics : Array<ImportDiagnostic>));
+    diagnostics = (cast cast ([] : Array<Dynamic>));
+    run((cast diagnostics));
     return cast diagnostics;
     return cast null;
   }

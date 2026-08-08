@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef CompositeEffect = { var kind:Kind; var operator_:CompositeOperator; @:optional var backdropKey:String; };
+typedef CompositeEffect = { var kind:String; var operator_:CompositeOperator; @:optional var backdropKey:String; };

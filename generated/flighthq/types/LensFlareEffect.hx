@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef LensFlareEffect = { var kind:Kind; @:optional var threshold:Float; @:optional var intensity:Float; @:optional var ghosts:Float; @:optional var halo:Float; };
+typedef LensFlareEffect = { var kind:String; @:optional var threshold:Float; @:optional var intensity:Float; @:optional var ghosts:Float; @:optional var halo:Float; };

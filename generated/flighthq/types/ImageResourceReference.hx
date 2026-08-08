@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceFailureKindValue;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceReferenceKindValue;
 
-typedef ImageResourceReferenceKind = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef ImageResourceReferenceKind = flighthq._internal._IndexedAccess<Dynamic, String>;
 
-typedef ImageResourceFailureKind = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef ImageResourceFailureKind = flighthq._internal._IndexedAccess<Dynamic, String>;
 
 typedef ImageResourceFailure = { var kind:ImageResourceFailureKind; var message:String; var name:Null<String>; };
 

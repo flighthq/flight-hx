@@ -30,6 +30,7 @@ import flighthq.types.MorphShape.MorphShapeGradientEndpointExplanation;
 import flighthq.types.MorphShape.MorphShapeLineEndpoint;
 import flighthq.types.MorphShape.MorphShapePaintBinding;
 import flighthq.types.MorphShapeAnimationTarget;
+import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
 import flighthq.types.Path;
 import flighthq.types.PathMorph;
@@ -195,7 +196,7 @@ class Shape {
   public static function clearShapeCommands(shape:flighthq.types.Shape):Void {
     _Runtime.setLength((cast (cast shape : flighthq.types.Shape).data : ShapeData).commands, 0.0);
     if ((cast _Runtime.strictEquals((cast shape : flighthq.types.Shape).kind, MorphShapeKind) : Bool)) { _Runtime.setLength((cast (cast (cast shape : MorphShape) : MorphShape).data : MorphShapeData).paintBindings, 0.0); }
-    invalidateContent(shape);
+    invalidateContent((cast shape));
   }
 
   public static function computeShapeLocalBoundsRectangle(out:Rectangle, source:BoundsNodeAny):Void {
@@ -227,21 +228,23 @@ class Shape {
       if ((cast ((cast lo_y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (lo_y : Dynamic)); }
       if ((cast ((cast hi_x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (hi_x : Dynamic)); }
       if ((cast ((cast hi_y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (hi_y : Dynamic)); }
-    } : Float->Float->Void);
+    });
     quadPoint = (cast function quadPoint(t:Float, p0:Float, p1:Float, p2:Float):Float {
       var u:Float = cast _Runtime.UNDEFINED;
       u = (1.0 - t);
       return cast ((((u * u) * p0) + (((2.0 * u) * t) * p1)) + ((t * t) * p2));
-    } : Float->Float->Float->Float->Float);
+      return cast _Runtime.UNDEFINED;
+    });
     cubicPoint = (cast function cubicPoint(t:Float, p0:Float, p1:Float, p2:Float, p3:Float):Float {
       var u:Float = cast _Runtime.UNDEFINED;
       u = (1.0 - t);
       return cast ((((((u * u) * u) * p0) + ((((3.0 * u) * u) * t) * p1)) + ((((3.0 * u) * t) * t) * p2)) + (((t * t) * t) * p3));
-    } : Float->Float->Float->Float->Float->Float);
+      return cast _Runtime.UNDEFINED;
+    });
     expandCubicExtrema = (cast function expandCubicExtrema(p0x:Float, p0y:Float, p1x:Float, p1y:Float, p2x:Float, p2y:Float, p3x:Float, p3y:Float):Void {
       expandCubicAxis((cast p0x : Float), (cast p1x : Float), (cast p2x : Float), (cast p3x : Float), (cast p0y : Float), (cast p1y : Float), (cast p2y : Float), (cast p3y : Float));
       expandCubicAxis((cast p0y : Float), (cast p1y : Float), (cast p2y : Float), (cast p3y : Float), (cast p0x : Float), (cast p1x : Float), (cast p2x : Float), (cast p3x : Float));
-    } : Float->Float->Float->Float->Float->Float->Float->Float->Void);
+    });
     expandCubicAxis = (cast function expandCubicAxis(p0:Float, p1:Float, p2:Float, p3:Float, q0:Float, q1:Float, q2:Float, q3:Float):Void {
       var a:Float = cast _Runtime.UNDEFINED;
       var b:Float = cast _Runtime.UNDEFINED;
@@ -267,7 +270,7 @@ class Shape {
       t2 = ((-b - sqrtDisc) / (2.0 * a));
       if ((cast ((cast ((cast t1 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t1 : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { expand((cast (cast cubicPoint((cast t1 : Float), (cast p0 : Float), (cast p1 : Float), (cast p2 : Float), (cast p3 : Float)) : Float) : Float), (cast (cast cubicPoint((cast t1 : Float), (cast q0 : Float), (cast q1 : Float), (cast q2 : Float), (cast q3 : Float)) : Float) : Float)); }
       if ((cast ((cast ((cast t2 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t2 : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { expand((cast (cast cubicPoint((cast t2 : Float), (cast p0 : Float), (cast p1 : Float), (cast p2 : Float), (cast p3 : Float)) : Float) : Float), (cast (cast cubicPoint((cast t2 : Float), (cast q0 : Float), (cast q1 : Float), (cast q2 : Float), (cast q3 : Float)) : Float) : Float)); }
-    } : Float->Float->Float->Float->Float->Float->Float->Float->Void);
+    });
     shape = (cast (cast source : flighthq._internal._Any) : flighthq.types.Shape);
     commands = (cast (cast shape : flighthq.types.Shape).data : ShapeData).commands;
     minX = HxMath.POSITIVE_INFINITY;
@@ -486,7 +489,7 @@ class Shape {
       }
     }
     if ((cast _Runtime.strictEquals((cast out : flighthq.types.Shape).kind, MorphShapeKind) : Bool)) { _Runtime.setLength((cast (cast (cast out : MorphShape) : MorphShape).data : MorphShapeData).paintBindings, 0.0); }
-    invalidateContent(out);
+    invalidateContent((cast out));
   }
 
   public static function createMorphShape(morph:PathMorph, ?obj:PartialNode<MorphShape>):MorphShape {
@@ -505,19 +508,19 @@ class Shape {
   }
 
   public static function createShape(?obj:PartialNode<flighthq.types.Shape>):flighthq.types.Shape {
-    return cast (cast (cast createNode2D((cast ShapeKind : String), obj, createShapeData, function(__unused0:Dynamic):ShapeRuntime return createShapeRuntime()) : flighthq.types.Shape) : flighthq.types.Shape);
+    return cast (cast createNode2D((cast ShapeKind : String), (cast obj), (cast createShapeData), (cast function(__unused0:Null<flighthq._internal._Any>):ShapeRuntime return createShapeRuntime())) : flighthq.types.Shape);
     return cast null;
   }
 
   @:noCompletion
-  public static function createShapeData(?data:Dynamic):ShapeData {
-    return cast { commands: _Runtime.coalesce(_Runtime.optionalField(data, 'commands'), function():Dynamic return cast cast ([] : Array<Dynamic>)) };
+  public static function createShapeData(?data:flighthq._internal._Partial<ShapeData>):ShapeData {
+    return cast { commands: _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
   @:noCompletion
   public static function createShapeRuntime():ShapeRuntime {
-    return cast (cast (cast createNode2DRuntime((cast { computeLocalBoundsRectangle: computeShapeLocalBoundsRectangle } : Null<flighthq._internal._Any>)) : ShapeRuntime) : ShapeRuntime);
+    return cast (cast createNode2DRuntime((cast { computeLocalBoundsRectangle: computeShapeLocalBoundsRectangle })) : ShapeRuntime);
     return cast null;
   }
 
@@ -537,7 +540,7 @@ class Shape {
   }
 
   public static function getShapeBounds(out:Rectangle, source:flighthq.types.Shape):Void {
-    computeShapeLocalBoundsRectangle((cast out : Rectangle), (cast source : BoundsNodeAny));
+    computeShapeLocalBoundsRectangle((cast out), (cast source));
   }
 
   public static function getShapeCommandCount(source:flighthq.types.Shape):Float {
@@ -563,7 +566,7 @@ class Shape {
 
   @:noCompletion
   public static function getShapeRuntime(source:flighthq.types.Shape):ShapeRuntime {
-    return cast (cast (cast getNode2DRuntime(source) : ShapeRuntime) : ShapeRuntime);
+    return cast (cast getNode2DRuntime((cast source)) : ShapeRuntime);
     return cast null;
   }
 

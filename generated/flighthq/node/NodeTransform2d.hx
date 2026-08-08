@@ -12,6 +12,7 @@ import flighthq.geometry.Matrix.multiplyMatrix;
 import flighthq.geometry.Transform2d.decomposeMatrixToTransform2D;
 import flighthq.node.Revision.computeNodeWorldTransformRevision;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
+import flighthq.types.Entity;
 import flighthq.types.HasTransform2D.HasTransform2DRuntime;
 import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.Matrix;
@@ -22,49 +23,49 @@ import flighthq.types.Transform2D.Transform2DLike;
 import flighthq.types.Vector2.Vector2Like;
 
 class NodeTransform2d {
-  public static function convertNodeVector2GlobalToLocal<Traits>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
-    inverseMatrixTransformPointXY((cast out : Vector2Like), (cast (cast getNodeWorldMatrix(source) : MatrixLike) : MatrixLike), (cast vector.x : Float), (cast vector.y : Float));
+  public static function convertNodeVector2GlobalToLocal<Traits:flighthq._internal._Object>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
+    inverseMatrixTransformPointXY((cast out), (cast (cast getNodeWorldMatrix((cast source)) : Matrix)), (cast vector.x : Float), (cast vector.y : Float));
   }
 
-  public static function convertNodeVector2LocalToGlobal<Traits>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
-    matrixTransformPointXY((cast out : Vector2Like), (cast (cast getNodeWorldMatrix(source) : MatrixLike) : MatrixLike), (cast vector.x : Float), (cast vector.y : Float));
+  public static function convertNodeVector2LocalToGlobal<Traits:flighthq._internal._Object>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
+    matrixTransformPointXY((cast out), (cast (cast getNodeWorldMatrix((cast source)) : Matrix)), (cast vector.x : Float), (cast vector.y : Float));
   }
 
   @:noCompletion
-  public static function ensureNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Void {
+  public static function ensureNodeLocalMatrix<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasTransform2DRuntime, } = cast _Runtime.UNDEFINED;
-    runtime = (cast (cast getEntityRuntime(target) : { >NodeRuntime<Traits>, >HasTransform2DRuntime, }) : { >NodeRuntime<Traits>, >HasTransform2DRuntime, });
+    runtime = (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>);
     if ((cast !_Runtime.strictEquals((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool)) {
-      NodeTransform2d.recomputeLocalTransform2D__nodeTransform2d(target, runtime);
+      NodeTransform2d.recomputeLocalTransform2D__nodeTransform2d((cast target), (cast runtime));
     }
   }
 
   @:noCompletion
-  public static function ensureNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Void {
+  public static function ensureNodeWorldMatrix<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasTransform2DRuntime, } = cast _Runtime.UNDEFINED;
     var parent:Transform2DNode<Traits> = cast _Runtime.UNDEFINED;
     var parentRuntime:Null<{ >NodeRuntime<Traits>, >HasTransform2DRuntime, }> = cast _Runtime.UNDEFINED;
     var parentWorldTransformId:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast (cast getEntityRuntime(target) : { >NodeRuntime<Traits>, >HasTransform2DRuntime, }) : { >NodeRuntime<Traits>, >HasTransform2DRuntime, });
+    runtime = (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>);
     parent = (cast (cast runtime : { var parent:Null<Node<Traits>>; }).parent : Transform2DNode<Traits>);
     parentWorldTransformId = 0.0;
     if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
-      ensureNodeWorldMatrix(parent);
-      (parentRuntime = cast ((cast (cast getEntityRuntime(parent) : { >NodeRuntime<Traits>, >HasTransform2DRuntime, }) : { >NodeRuntime<Traits>, >HasTransform2DRuntime, }) : Dynamic));
+      ensureNodeWorldMatrix((cast parent));
+      (parentRuntime = cast ((cast getEntityRuntime((cast parent)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : Dynamic));
       (parentWorldTransformId = cast ((cast parentRuntime : { var worldTransformId:Float; }).worldTransformId : Dynamic));
     }
     if ((cast ((cast !_Runtime.strictEquals((cast runtime : { var worldTransformUsingLocalTransformId:Float; }).worldTransformUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var worldTransformUsingParentTransformId:Float; }).worldTransformUsingParentTransformId, parentWorldTransformId) : Bool)) : Bool)) {
-      NodeTransform2d.recomputeWorldTransform2D__nodeTransform2d(target, runtime, parentRuntime);
+      NodeTransform2d.recomputeWorldTransform2D__nodeTransform2d((cast target), (cast runtime), (cast parentRuntime));
     }
   }
 
-  public static function getNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
-    ensureNodeLocalMatrix(target);
-    return cast (cast (cast getEntityRuntime(target) : { >NodeRuntime<Traits>, >HasTransform2DRuntime, }) : { >NodeRuntime<Traits>, >HasTransform2DRuntime, }).localMatrix;
+  public static function getNodeLocalMatrix<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>):Matrix {
+    ensureNodeLocalMatrix((cast target));
+    return cast (cast (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : { var localMatrix:Null<Matrix>; }).localMatrix;
     return cast null;
   }
 
-  public static function getNodeTransform2D<Traits>(out:Transform2DLike, source:Transform2DNode<Traits>):Void {
+  public static function getNodeTransform2D<Traits:flighthq._internal._Object>(out:Transform2DLike, source:Transform2DNode<Traits>):Void {
     _Runtime.setField(out, 'pivotX', source.pivotX);
     _Runtime.setField(out, 'pivotY', source.pivotY);
     _Runtime.setField(out, 'rotation', source.rotation);
@@ -76,18 +77,18 @@ class NodeTransform2d {
     _Runtime.setField(out, 'y', source.y);
   }
 
-  public static function getNodeWorldMatrix<Traits>(target:Transform2DNode<Traits>):Matrix {
-    ensureNodeWorldMatrix(target);
-    return cast (cast (cast getEntityRuntime(target) : { >NodeRuntime<Traits>, >HasTransform2DRuntime, }) : { >NodeRuntime<Traits>, >HasTransform2DRuntime, }).worldMatrix;
+  public static function getNodeWorldMatrix<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>):Matrix {
+    ensureNodeWorldMatrix((cast target));
+    return cast (cast (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : { var worldMatrix:Null<Matrix>; }).worldMatrix;
     return cast null;
   }
 
-  public static function setNodeLocalMatrix<Traits>(target:Transform2DNode<Traits>, source:MatrixLike):Void {
-    decomposeMatrixToTransform2D((cast target : Transform2DLike), (cast source : MatrixLike));
-    invalidateNodeLocalTransform(target);
+  public static function setNodeLocalMatrix<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>, source:MatrixLike):Void {
+    decomposeMatrixToTransform2D((cast target), (cast source));
+    invalidateNodeLocalTransform((cast target));
   }
 
-  public static function setNodeTransform2D<Traits>(target:Transform2DNode<Traits>, source:Transform2DLike):Void {
+  public static function setNodeTransform2D<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>, source:Transform2DLike):Void {
     (target.pivotX = cast (_Runtime.field(source, 'pivotX') : Dynamic));
     (target.pivotY = cast (_Runtime.field(source, 'pivotY') : Dynamic));
     (target.rotation = cast (_Runtime.field(source, 'rotation') : Dynamic));
@@ -97,10 +98,10 @@ class NodeTransform2d {
     (target.skewY = cast (_Runtime.field(source, 'skewY') : Dynamic));
     (target.x = cast (_Runtime.field(source, 'x') : Dynamic));
     (target.y = cast (_Runtime.field(source, 'y') : Dynamic));
-    invalidateNodeLocalTransform(target);
+    invalidateNodeLocalTransform((cast target));
   }
 
-  public static function recomputeLocalTransform2D__nodeTransform2d<Traits>(target:Transform2DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasTransform2DRuntime, }):Void {
+  public static function recomputeLocalTransform2D__nodeTransform2d<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasTransform2DRuntime, }):Void {
     var matrix:Matrix = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(target.rotation, runtime.rotationAngle) : Bool)) {
       var angle:Float = _Runtime.fmod(target.rotation, 360.0);
@@ -116,7 +117,7 @@ class NodeTransform2d {
       (runtime.rotationSine = cast (sin : Dynamic));
       (runtime.rotationCosine = cast (cos : Dynamic));
     }
-    if ((cast _Runtime.strictEquals(runtime.localMatrix, null) : Bool)) { (runtime.localMatrix = cast ((cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Null<Matrix>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(runtime.localMatrix, null) : Bool)) { (runtime.localMatrix = cast ((cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix) : Dynamic)); }
     matrix = runtime.localMatrix;
     if ((cast ((cast _Runtime.strictEquals(target.skewX, 0.0) : Bool) && (cast _Runtime.strictEquals(target.skewY, 0.0) : Bool)) : Bool)) {
       (matrix.a = cast ((runtime.rotationCosine * target.scaleX) : Dynamic));
@@ -136,15 +137,15 @@ class NodeTransform2d {
     ((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId = (cast runtime : { var localTransformId:Float; }).localTransformId);
   }
 
-  public static function recomputeWorldTransform2D__nodeTransform2d<Traits>(target:Transform2DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasTransform2DRuntime, }, ?parentRuntime:{ >NodeRuntime<Traits>, >HasTransform2DRuntime, }):Void {
-    if ((cast _Runtime.strictEquals(runtime.worldMatrix, null) : Bool)) { (runtime.worldMatrix = cast ((cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Null<Matrix>) : Dynamic)); }
-    ensureNodeLocalMatrix(target);
+  public static function recomputeWorldTransform2D__nodeTransform2d<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasTransform2DRuntime, }, ?parentRuntime:{ >NodeRuntime<Traits>, >HasTransform2DRuntime, }):Void {
+    if ((cast _Runtime.strictEquals(runtime.worldMatrix, null) : Bool)) { (runtime.worldMatrix = cast ((cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix) : Dynamic)); }
+    ensureNodeLocalMatrix((cast target));
     if ((cast !_Runtime.strictEquals(parentRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      multiplyMatrix((cast runtime.worldMatrix : MatrixLike), (cast parentRuntime.worldMatrix : MatrixLike), (cast runtime.localMatrix : MatrixLike));
+      multiplyMatrix((cast runtime.worldMatrix), (cast parentRuntime.worldMatrix), (cast runtime.localMatrix));
     } else {
-      copyMatrix((cast runtime.worldMatrix : MatrixLike), (cast runtime.localMatrix : MatrixLike));
+      copyMatrix((cast runtime.worldMatrix), (cast runtime.localMatrix));
     }
-    computeNodeWorldTransformRevision(runtime, parentRuntime);
+    computeNodeWorldTransformRevision((cast runtime), (cast parentRuntime));
   }
 
   public static final DEG_TO_RAD__nodeTransform2d:Float = (HxMath.PI / 180.0);

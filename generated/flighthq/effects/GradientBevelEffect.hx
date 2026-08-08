@@ -11,7 +11,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class GradientBevelEffect {
-  public static function createGradientBevelEffect(options:Dynamic):flighthq.types.GradientBevelEffect {
+  public static function createGradientBevelEffect(options:flighthq._internal._Omit<flighthq.types.GradientBevelEffect, String>):flighthq.types.GradientBevelEffect {
     return cast _Runtime.mergeObjects([{ kind: 'GradientBevelEffect' }, options]);
     return cast null;
   }
@@ -26,11 +26,11 @@ class GradientBevelEffect {
   }
 
   public static function registerGradientBevelEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'GradientBevelEffect' : String), GradientBevelEffect.resolveGradientBevelEffectPadding__gradientBevelEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'GradientBevelEffect' : String), (cast GradientBevelEffect.resolveGradientBevelEffectPadding__gradientBevelEffect));
   }
 
   public static function resolveGradientBevelEffectPadding__gradientBevelEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getGradientBevelEffectPadding((cast (cast effect : flighthq.types.GradientBevelEffect) : flighthq.types.GradientBevelEffect)) : RenderEffectPadding);
+    return cast (cast getGradientBevelEffectPadding((cast (cast effect : flighthq.types.GradientBevelEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

@@ -23,7 +23,7 @@ class Vector4Pool {
     if ((cast ((cast _Runtime.field(Vector4Pool.pool__vector4Pool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (v = cast ((cast _Runtime.callProperty(Vector4Pool.pool__vector4Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector4) : Dynamic));
     } else {
-      (v = cast ((cast createVector4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector4) : Dynamic));
+      (v = cast ((cast createVector4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector4) : Dynamic));
     }
     return cast v;
     return cast null;
@@ -38,5 +38,5 @@ class Vector4Pool {
     _Runtime.callProperty(Vector4Pool.pool__vector4Pool, 'push', cast ([v] : Array<Dynamic>));
   }
 
-  public static final pool__vector4Pool:Array<Vector4> = cast ([] : Array<Dynamic>);
+  public static final pool__vector4Pool:Array<Vector4> = (cast cast ([] : Array<Dynamic>));
 }

@@ -17,7 +17,7 @@ class Vector2Pool {
   }
 
   public static function acquireVector2():Vector2 {
-    return cast ((cast ((cast _Runtime.field(Vector2Pool.pool__vector2Pool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast _Runtime.callProperty(Vector2Pool.pool__vector2Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector2) : Dynamic) : (cast (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector2) : Dynamic));
+    return cast ((cast ((cast _Runtime.field(Vector2Pool.pool__vector2Pool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast _Runtime.callProperty(Vector2Pool.pool__vector2Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector2) : Dynamic) : (cast (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector2) : Dynamic));
     return cast null;
   }
 
@@ -30,5 +30,5 @@ class Vector2Pool {
     _Runtime.callProperty(Vector2Pool.pool__vector2Pool, 'push', cast ([v] : Array<Dynamic>));
   }
 
-  public static final pool__vector2Pool:Array<Vector2> = cast ([] : Array<Dynamic>);
+  public static final pool__vector2Pool:Array<Vector2> = (cast cast ([] : Array<Dynamic>));
 }

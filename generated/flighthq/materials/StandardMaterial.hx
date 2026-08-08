@@ -4,13 +4,14 @@ package flighthq.materials;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Entity;
 import flighthq.types.StandardMaterial;
 import flighthq.types.StandardMaterial.StandardMaterialKind;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
 class StandardMaterial {
-  public static function createStandardMaterial(?options:Dynamic):flighthq.types.StandardMaterial {
-    return cast (cast createEntity((cast { kind: StandardMaterialKindValue, name: _Runtime.coalesce(_Runtime.optionalField(options, 'name'), function():Dynamic return cast null) } : Null<{ var kind:String; var name:Null<String>; }>)) : flighthq.types.StandardMaterial);
+  public static function createStandardMaterial(?options:flighthq._internal._Partial<flighthq.types.StandardMaterial>):flighthq.types.StandardMaterial {
+    return cast (cast createEntity((cast { kind: StandardMaterialKindValue, name: _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast null) })) : { >Entity, var kind:String; var name:Null<String>; });
     return cast null;
   }
 }

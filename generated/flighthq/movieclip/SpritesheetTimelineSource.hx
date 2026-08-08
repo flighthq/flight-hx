@@ -34,9 +34,9 @@ class SpritesheetTimelineSource {
     var bitmaps:flighthq._internal._WeakMap<Node2D, Sprite> = cast _Runtime.UNDEFINED;
     var frames:Array<Float> = cast _Runtime.UNDEFINED;
     bitmaps = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
-    frames = (cast SpritesheetTimelineSource.materializeSpritesheetTimelineFrames__spritesheetTimelineSource((cast animation : SpritesheetAnimation)) : Array<Float>);
+    frames = (cast SpritesheetTimelineSource.materializeSpritesheetTimelineFrames__spritesheetTimelineSource((cast animation)) : Array<Float>);
     if ((cast !_Runtime.strictEquals(SpritesheetTimelineSource._spritesheetTimelineSourceGuard__spritesheetTimelineSource, null) : Bool)) {
-      (cast SpritesheetTimelineSource._spritesheetTimelineSourceGuard__spritesheetTimelineSource : SpritesheetAnimation->SpritesheetTimelineSourceExplanation->Void)((cast animation : SpritesheetAnimation), (cast (cast explainSpritesheetTimelineSource((cast animation : SpritesheetAnimation)) : SpritesheetTimelineSourceExplanation) : SpritesheetTimelineSourceExplanation));
+      (cast SpritesheetTimelineSource._spritesheetTimelineSourceGuard__spritesheetTimelineSource : SpritesheetAnimation->SpritesheetTimelineSourceExplanation->Void)((cast animation), (cast (cast explainSpritesheetTimelineSource((cast animation)) : SpritesheetTimelineSourceExplanation)));
     }
     return cast { totalFrames: _Runtime.field(frames, 'length'), labels: cast ([] : Array<Dynamic>), cues: cast ([] : Array<Dynamic>), frameRate: (1000.0 / animation.frameDuration), constructFrame: function(target:Node2D, frame:Float):Void {
       var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
@@ -46,16 +46,16 @@ class SpritesheetTimelineSource {
       if ((cast _Runtime.strictEquals(atlas, null) : Bool)) { return; }
       bitmap = ((cast bitmaps : flighthq._internal._WeakMap<Node2D, Sprite>).get(target));
       if ((cast _Runtime.strictEquals(bitmap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (bitmap = cast ((cast createSprite(_Runtime.field(_Runtime, 'UNDEFINED')) : Null<Sprite>) : Dynamic));
-        (cast addNodeChild(target, bitmap) : NodeOf<Node2DTraits>);
-        ((cast bitmaps : flighthq._internal._WeakMap<Node2D, Sprite>).set(target, bitmap));
+        (bitmap = cast ((cast createSprite((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Sprite) : Dynamic));
+        (cast addNodeChild((cast target), (cast bitmap)) : NodeOf<Node2DTraits>);
+        ((cast bitmaps : flighthq._internal._WeakMap<Node2D, Sprite>).set(target, (cast bitmap)));
       }
       sheetFrame = flighthq._internal._StaticIndex.readArray(spritesheet.frames, flighthq._internal._StaticIndex.readArray(frames, (frame - 1.0)));
       if ((cast _Runtime.strictEquals(sheetFrame, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-      ((cast (cast bitmap : Sprite).data : SpriteData).texture = (cast getTextureAtlasRegionTexture(atlas, (cast sheetFrame.id : Float)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>));
+      ((cast (cast bitmap : Sprite).data : SpriteData).texture = (cast getTextureAtlasRegionTexture((cast atlas), (cast sheetFrame.id : Float)) : Null<Texture2D>));
       ((cast bitmap : Sprite).x = (sheetFrame.offsetX - animation.originX));
       ((cast bitmap : Sprite).y = (sheetFrame.offsetY - animation.originY));
-      invalidateNodeLocalTransform(bitmap);
+      invalidateNodeLocalTransform((cast bitmap));
     } };
     return cast null;
   }
@@ -76,7 +76,7 @@ class SpritesheetTimelineSource {
     frames = animation.frames;
     if ((cast ((cast ((cast _Runtime.field(frames, 'length') : Float) < (cast 2.0 : Float)) : Bool) || (cast _Runtime.strictEquals(animation.direction, 'forward') : Bool)) : Bool)) { return cast frames; }
     if ((cast _Runtime.strictEquals(animation.direction, 'reverse') : Bool)) { return cast _Runtime.callProperty(_Runtime.concatArrays([_Runtime.toArray(frames)]), 'reverse', cast ([] : Array<Dynamic>)); }
-    out = cast ([] : Array<Dynamic>);
+    out = (cast cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(animation.direction, 'pingpong') : Bool)) {
       {
         var index:Float = 0.0;
@@ -112,9 +112,9 @@ class SpritesheetTimelineSource {
     return cast null;
   }
 
-  public static final FRAME_DURATIONS_AND_REPEAT_COUNT_UNSUPPORTED__spritesheetTimelineSource:Array<String> = cast (['frameDurations', 'repeatCount'] : Array<Dynamic>);
+  public static final FRAME_DURATIONS_AND_REPEAT_COUNT_UNSUPPORTED__spritesheetTimelineSource:Array<String> = (cast cast (['frameDurations', 'repeatCount'] : Array<Dynamic>));
 
-  public static final REPEAT_COUNT_UNSUPPORTED__spritesheetTimelineSource:Array<String> = cast (['repeatCount'] : Array<Dynamic>);
+  public static final REPEAT_COUNT_UNSUPPORTED__spritesheetTimelineSource:Array<String> = (cast cast (['repeatCount'] : Array<Dynamic>));
 
   public static var _spritesheetTimelineSourceGuard__spritesheetTimelineSource:Null<SpritesheetTimelineSourceGuard> = _Runtime.explicitNull();
 }

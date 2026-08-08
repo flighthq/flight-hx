@@ -454,7 +454,7 @@ describe('typed struct analysis', () => {
       `cpp @:structInit schemas are not provenance-closed: ${particleEmitterDataId}`,
     );
     expect(readFileSync('generated/flighthq/types/ParticleEmitter2D.hx', 'utf8')).toContain(
-      'typedef ParticleEmitter2D = { var data:Null<NodeData>;',
+      'typedef ParticleEmitter2D = { var data:ParticleEmitterData;',
     );
     expect(readFileSync('generated/flighthq/types/ParticleEmitter3D.hx', 'utf8')).toContain(
       'typedef ParticleEmitter3D = { var data:Null<NodeData>;',
@@ -707,7 +707,7 @@ describe('typed struct analysis', () => {
     expect(output).toContain('(value.y = cast (value.x : Dynamic))');
     expect(output).toContain('(value.y += 1.0)');
     expect(output).toContain('value.y++');
-    expect(output).toContain('(value.callback)(value.y)');
+    expect(output).toContain('(value.callback)((cast value.y : Float))');
     expect(output).toContain('(cast value : Vector2).method()');
     expect(output).toContain('final __typedStruct0 = (cast factory() : Null<Vector2>)');
     expect(output).toContain('__typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.optional');
@@ -731,6 +731,30 @@ describe('typed struct analysis', () => {
     );
   });
 
+  it('narrows indexed-access storage before reading a bound field directly', () => {
+    const result = lowerFixture(`
+      export interface Vector2 { x: number; y: number; }
+      interface Container { values: readonly Vector2[]; optional?: Vector2; }
+      export function readArray(value: Readonly<Container['values'][number]>): number { return value.x; }
+      export function readOptional(value: NonNullable<Container['optional']>): number { return value.y; }
+      export function readDirect(value: Vector2): number { return value.x; }
+    `);
+    const bindings = collectTypedStructBindings(result.lowered.declarations);
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      imports: [],
+      name: 'Vector2',
+      packageName: '@flighthq/types',
+    });
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(bindings.map((binding) => binding.field.name)).toEqual(['x', 'y', 'x']);
+    expect(output).toContain('(cast value : { var x:Float; }).x');
+    expect(output).toContain('(cast value : { var y:Float; }).y');
+    expect(output).toContain('return cast value.x;');
+    expect(output).not.toContain('(cast value : Vector2).x');
+  });
+
   it('casts a type-guard-narrowed receiver to its canonical struct before direct access', () => {
     const result = lowerFixture(`
       export interface SceneNode { enabled: boolean; }
@@ -749,9 +773,14 @@ describe('typed struct analysis', () => {
 
     expect(result.lowered.diagnostics).toEqual([]);
     expect(collectTypedStructBindings(result.lowered.declarations)).toEqual([
-      expect.objectContaining({ receiverCast: 'flighthq.types.Vector2' }),
+      expect.objectContaining({
+        receiverCast: expect.objectContaining({
+          fields: [expect.objectContaining({ name: 'x', type: { kind: 'primitive', name: 'Float' } })],
+          kind: 'anonymous',
+        }),
+      }),
     ]);
-    expect(output).toContain('(cast value : flighthq.types.Vector2).x');
+    expect(output).toContain('(cast value : { var x:Float; }).x');
     expect(output).not.toContain("_Runtime.field(value, 'x')");
   });
 

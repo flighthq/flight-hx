@@ -10,6 +10,7 @@ class EasePower {
     return cast function(t:Float):Float {
       if ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool)) { return cast _Runtime.multiplyNumbers(HxMath.pow((t * 2.0), exponent), 0.5); }
       return cast (1.0 - _Runtime.multiplyNumbers(HxMath.pow(((1.0 - t) * 2.0), exponent), 0.5));
+      return cast _Runtime.UNDEFINED;
     };
     return cast null;
   }

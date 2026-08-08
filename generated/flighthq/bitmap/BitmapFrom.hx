@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Bitmap;
+import flighthq.types.Entity;
 import flighthq.types.Image;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
@@ -20,7 +21,7 @@ class BitmapFrom {
     ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(resource, 'source'), 0.0, 0.0] : Array<Dynamic>));
     raw = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'getImageData', cast ([0.0, 0.0, _Runtime.field(resource, 'width'), _Runtime.field(resource, 'height')] : Array<Dynamic>));
-    return cast (cast createEntity((cast { alphaType: 'straight', gamut: (cast (cast raw : flighthq._internal.dom.ImageData).colorSpace : String), data: (cast raw : flighthq._internal.dom.ImageData).data, format: 'rgba8unorm', height: _Runtime.field(resource, 'height'), kind: BitmapTextureSourceKind, version: 0.0, width: _Runtime.field(resource, 'width') } : Null<{ var alphaType:String; var gamut:String; var data:flighthq._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; }>)) : Bitmap);
+    return cast (cast createEntity((cast { alphaType: 'straight', gamut: (cast (cast raw : flighthq._internal.dom.ImageData).colorSpace : String), data: (cast raw : flighthq._internal.dom.ImageData).data, format: 'rgba8unorm', height: _Runtime.field(resource, 'height'), kind: BitmapTextureSourceKind, version: 0.0, width: _Runtime.field(resource, 'width') })) : { >Entity, var alphaType:String; var gamut:String; var data:flighthq._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; });
     return cast null;
   }
 
@@ -33,7 +34,7 @@ class BitmapFrom {
     h = _Runtime.coalesce(height, function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height'));
     ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
     raw = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'getImageData', cast ([x, y, w, h] : Array<Dynamic>));
-    return cast (cast createEntity((cast { alphaType: 'straight', gamut: (cast (cast raw : flighthq._internal.dom.ImageData).colorSpace : String), data: (cast raw : flighthq._internal.dom.ImageData).data, format: 'rgba8unorm', height: (cast raw : flighthq._internal.dom.ImageData).height, kind: BitmapTextureSourceKind, version: 0.0, width: (cast raw : flighthq._internal.dom.ImageData).width } : Null<{ var alphaType:String; var gamut:String; var data:flighthq._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; }>)) : Bitmap);
+    return cast (cast createEntity((cast { alphaType: 'straight', gamut: (cast (cast raw : flighthq._internal.dom.ImageData).colorSpace : String), data: (cast raw : flighthq._internal.dom.ImageData).data, format: 'rgba8unorm', height: (cast raw : flighthq._internal.dom.ImageData).height, kind: BitmapTextureSourceKind, version: 0.0, width: (cast raw : flighthq._internal.dom.ImageData).width })) : { >Entity, var alphaType:String; var gamut:String; var data:flighthq._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; });
     return cast null;
   }
 
@@ -55,7 +56,7 @@ class BitmapFrom {
     } catch (__error:Dynamic) {
       return cast null;
     }
-    bitmap = (cast createEntity((cast { alphaType: 'straight', gamut: (cast raw.colorSpace : String), data: raw.data, format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width } : Null<{ var alphaType:String; var gamut:String; var data:flighthq._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; }>)) : Bitmap);
+    bitmap = (cast createEntity((cast { alphaType: 'straight', gamut: (cast raw.colorSpace : String), data: raw.data, format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width })) : { >Entity, var alphaType:String; var gamut:String; var data:flighthq._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; });
     return cast bitmap;
     return cast null;
   }

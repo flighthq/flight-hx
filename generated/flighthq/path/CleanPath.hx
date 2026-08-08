@@ -14,7 +14,7 @@ class CleanPath {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var winding:PathWinding = cast _Runtime.UNDEFINED;
     var toleranceSq:Float = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath((cast source : Path), (cast flattenTolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath((cast source), (cast flattenTolerance : Float)) : Array<Array<Float>>);
     winding = _Runtime.field(source, 'winding');
     toleranceSq = (tolerance * tolerance);
     _Runtime.setLength((cast out : Path).commands, 0.0);
@@ -25,15 +25,15 @@ class CleanPath {
       if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
       var closed:Bool = ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast (cast CleanPath.withinTolerance__cleanPath((cast flighthq._internal._StaticIndex.readArray(contour, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, 1.0) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, ((n * 2.0) - 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, ((n * 2.0) - 1.0)) : Float), (cast toleranceSq : Float)) : Bool) : Bool));
       var count:Float = ((cast closed : Bool) ? (cast (n - 1.0) : Dynamic) : (cast n : Dynamic));
-      var kept:Array<Float> = cast ([] : Array<Dynamic>);
+      var kept:Array<Float> = (cast cast ([] : Array<Dynamic>));
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-          CleanPath.pushCleanVertex__cleanPath((cast kept : Array<Float>), (cast flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0)) : Float), (cast toleranceSq : Float));
+          CleanPath.pushCleanVertex__cleanPath((cast kept), (cast flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0)) : Float), (cast toleranceSq : Float));
           i++;
         }
       }
-      if ((cast closed : Bool)) { CleanPath.collapseClosedSeam__cleanPath((cast kept : Array<Float>), (cast toleranceSq : Float)); }
+      if ((cast closed : Bool)) { CleanPath.collapseClosedSeam__cleanPath((cast kept), (cast toleranceSq : Float)); }
       var keptCount:Float = (_Runtime.toInt32(_Runtime.field(kept, 'length')) >> 1);
       if ((cast ((cast closed : Bool) ? (cast ((cast keptCount : Float) < (cast 3.0 : Float)) : Dynamic) : (cast ((cast keptCount : Float) < (cast 2.0 : Float)) : Dynamic)) : Bool)) { continue; }
       _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
@@ -56,12 +56,12 @@ class CleanPath {
     while ((cast ((cast changed : Bool) && (cast ((cast (_Runtime.toInt32(_Runtime.field(kept, 'length')) >> 1) : Float) > (cast 3.0 : Float)) : Bool)) : Bool)) {
       (changed = cast (false : Dynamic));
       var last:Float = (_Runtime.toInt32(_Runtime.field(kept, 'length')) >> 1);
-      if ((cast (cast CleanPath.isMiddleRemovable__cleanPath((cast kept : Array<Float>), (cast (last - 2.0) : Float), (cast (last - 1.0) : Float), (cast 0.0 : Float), (cast toleranceSq : Float)) : Bool) : Bool)) {
+      if ((cast (cast CleanPath.isMiddleRemovable__cleanPath((cast kept), (cast (last - 2.0) : Float), (cast (last - 1.0) : Float), (cast 0.0 : Float), (cast toleranceSq : Float)) : Bool) : Bool)) {
         _Runtime.setLength(kept, (kept.length - 2.0));
         (changed = cast (true : Dynamic));
         continue;
       }
-      if ((cast (cast CleanPath.isMiddleRemovable__cleanPath((cast kept : Array<Float>), (cast (last - 1.0) : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast toleranceSq : Float)) : Bool) : Bool)) {
+      if ((cast (cast CleanPath.isMiddleRemovable__cleanPath((cast kept), (cast (last - 1.0) : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast toleranceSq : Float)) : Bool) : Bool)) {
         _Runtime.copyWithin(kept, 0.0, 2.0);
         _Runtime.setLength(kept, (kept.length - 2.0));
         (changed = cast (true : Dynamic));

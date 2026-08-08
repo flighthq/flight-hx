@@ -28,15 +28,15 @@ class CanvasGradientBevelEffect {
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : GradientBevelEffect));
     pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool() : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
-    CanvasGradientBevelEffect.applyGradientBevelEffectToCanvasWithPool__canvasGradientBevelEffect((cast source : CanvasRenderTarget), (cast dest : CanvasRenderTarget), (cast pool : CanvasRenderTargetPool), (cast effect : GradientBevelEffect));
+    CanvasGradientBevelEffect.applyGradientBevelEffectToCanvasWithPool__canvasGradientBevelEffect((cast source), (cast dest), (cast pool), (cast effect));
   }
 
-  public static final defaultCanvasGradientBevelEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyGradientBevelEffectToCanvas((cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'pool') : CanvasRenderTargetPool), (cast (cast effect : GradientBevelEffect) : GradientBevelEffect));
-  };
+  public static final defaultCanvasGradientBevelEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    (cast applyGradientBevelEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->GradientBevelEffect->Void)((cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : GradientBevelEffect)));
+  });
 
   public static function registerCanvasGradientBevelEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'GradientBevelEffect' : String), (cast defaultCanvasGradientBevelEffectRunner : CanvasRenderEffectRunner));
+    registerCanvasRenderEffect((cast state), (cast 'GradientBevelEffect' : String), (cast defaultCanvasGradientBevelEffectRunner));
   }
 
   public static function applyGradientBevelEffectToCanvasWithPool__canvasGradientBevelEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:GradientBevelEffect):Void {
@@ -53,44 +53,44 @@ class CanvasGradientBevelEffect {
     var offsetY:Float = cast _Runtime.UNDEFINED;
     var strength:Float = cast _Runtime.UNDEFINED;
     var ramp:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
-    blurred = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    lit = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    shade = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    side = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    ramped = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    band = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    blurred = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    lit = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    shade = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    side = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    ramped = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    band = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0)) / 2.0));
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
     offsetX = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
     offsetY = _Runtime.multiplyNumbers(HxMath.sin(angle), distance);
     strength = HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0));
-    ramp = (cast buildCanvasGradientRamp((cast _Runtime.field(effect, 'colors') : Array<Float>), (cast _Runtime.field(effect, 'alphas') : Array<Float>), (cast _Runtime.field(effect, 'ratios') : Array<Float>)) : flighthq._internal._UInt8ClampedArray);
-    drawCanvasEffectPass((cast blurred : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
-    clearCanvasTarget((cast lit : CanvasRenderTarget));
-    compositeCanvasImage((cast lit : CanvasRenderTarget), (cast blurred : CanvasRenderTarget), (cast -offsetX : Float), (cast -offsetY : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
-    clearCanvasTarget((cast shade : CanvasRenderTarget));
-    compositeCanvasImage((cast shade : CanvasRenderTarget), (cast blurred : CanvasRenderTarget), (cast offsetX : Float), (cast offsetY : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
-    clearCanvasTarget((cast band : CanvasRenderTarget));
-    clearCanvasTarget((cast side : CanvasRenderTarget));
-    compositeCanvasImage((cast side : CanvasRenderTarget), (cast lit : CanvasRenderTarget), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
-    compositeCanvasImage((cast side : CanvasRenderTarget), (cast shade : CanvasRenderTarget), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flighthq._internal._Any));
-    applyCanvasGradientRampLookup((cast ramped : CanvasRenderTarget), (cast side : CanvasRenderTarget), (cast ramp : flighthq._internal._UInt8ClampedArray), (cast 0.5 : Float), (cast (0.5 * strength) : Float));
-    compositeCanvasImage((cast band : CanvasRenderTarget), (cast ramped : CanvasRenderTarget), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
-    clearCanvasTarget((cast side : CanvasRenderTarget));
-    compositeCanvasImage((cast side : CanvasRenderTarget), (cast shade : CanvasRenderTarget), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
-    compositeCanvasImage((cast side : CanvasRenderTarget), (cast lit : CanvasRenderTarget), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flighthq._internal._Any));
-    applyCanvasGradientRampLookup((cast ramped : CanvasRenderTarget), (cast side : CanvasRenderTarget), (cast ramp : flighthq._internal._UInt8ClampedArray), (cast 0.5 : Float), (cast (-0.5 * strength) : Float));
-    compositeCanvasImage((cast band : CanvasRenderTarget), (cast ramped : CanvasRenderTarget), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
-    clipCanvasBevelBand((cast band : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast _Runtime.field(effect, 'bevelType') : Null<String>));
-    clearCanvasTarget((cast dest : CanvasRenderTarget));
-    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'hide') : Bool)) { compositeCanvasImage((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)); }
-    compositeCanvasImage((cast dest : CanvasRenderTarget), (cast band : CanvasRenderTarget), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
-    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast band : CanvasRenderTarget));
-    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast ramped : CanvasRenderTarget));
-    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast side : CanvasRenderTarget));
-    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast shade : CanvasRenderTarget));
-    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast lit : CanvasRenderTarget));
-    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast blurred : CanvasRenderTarget));
+    ramp = (cast buildCanvasGradientRamp((cast _Runtime.field(effect, 'colors')), (cast _Runtime.field(effect, 'alphas')), (cast _Runtime.field(effect, 'ratios'))) : flighthq._internal._UInt8ClampedArray);
+    drawCanvasEffectPass((cast blurred), (cast source), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    clearCanvasTarget((cast lit));
+    compositeCanvasImage((cast lit), (cast blurred), (cast -offsetX : Float), (cast -offsetY : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    clearCanvasTarget((cast shade));
+    compositeCanvasImage((cast shade), (cast blurred), (cast offsetX : Float), (cast offsetY : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    clearCanvasTarget((cast band));
+    clearCanvasTarget((cast side));
+    compositeCanvasImage((cast side), (cast lit), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    compositeCanvasImage((cast side), (cast shade), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flighthq._internal._Any));
+    applyCanvasGradientRampLookup((cast ramped), (cast side), (cast ramp), (cast 0.5 : Float), (cast (0.5 * strength) : Float));
+    compositeCanvasImage((cast band), (cast ramped), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    clearCanvasTarget((cast side));
+    compositeCanvasImage((cast side), (cast shade), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    compositeCanvasImage((cast side), (cast lit), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flighthq._internal._Any));
+    applyCanvasGradientRampLookup((cast ramped), (cast side), (cast ramp), (cast 0.5 : Float), (cast (-0.5 * strength) : Float));
+    compositeCanvasImage((cast band), (cast ramped), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    clipCanvasBevelBand((cast band), (cast source), (cast _Runtime.field(effect, 'bevelType')));
+    clearCanvasTarget((cast dest));
+    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'hide') : Bool)) { compositeCanvasImage((cast dest), (cast source), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)); }
+    compositeCanvasImage((cast dest), (cast band), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    releaseCanvasRenderTarget((cast pool), (cast band));
+    releaseCanvasRenderTarget((cast pool), (cast ramped));
+    releaseCanvasRenderTarget((cast pool), (cast side));
+    releaseCanvasRenderTarget((cast pool), (cast shade));
+    releaseCanvasRenderTarget((cast pool), (cast lit));
+    releaseCanvasRenderTarget((cast pool), (cast blurred));
   }
 }

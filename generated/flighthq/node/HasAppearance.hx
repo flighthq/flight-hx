@@ -7,8 +7,8 @@ import flighthq.types.HasAppearance;
 
 class HasAppearance {
   @:noCompletion
-  public static function initAppearanceTrait(target:flighthq.types.HasAppearance, ?obj:Dynamic):Void {
-    ((cast target : flighthq.types.HasAppearance).alpha = _Runtime.coalesce(_Runtime.optionalField(obj, 'alpha'), function():Dynamic return cast 1.0));
-    ((cast target : flighthq.types.HasAppearance).visible = _Runtime.coalesce(_Runtime.optionalField(obj, 'visible'), function():Dynamic return cast true));
+  public static function initAppearanceTrait(target:flighthq.types.HasAppearance, ?obj:flighthq._internal._Partial<flighthq.types.HasAppearance>):Void {
+    ((cast target : flighthq.types.HasAppearance).alpha = _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var alpha:Null<Float>; }).alpha; }), function():Dynamic return cast 1.0));
+    ((cast target : flighthq.types.HasAppearance).visible = _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var visible:Null<Bool>; }).visible; }), function():Dynamic return cast true));
   }
 }

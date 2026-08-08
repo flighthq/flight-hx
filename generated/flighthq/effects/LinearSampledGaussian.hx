@@ -13,7 +13,7 @@ class LinearSampledGaussian {
     var tapCount:Float = cast _Runtime.UNDEFINED;
     size = (cast getGaussianKernelSize((cast sigma : Float)) : Float);
     radius = ((size - 1.0) / 2.0);
-    (cast computeGaussianKernelWeights((cast sigma : Float), (cast LinearSampledGaussian.scratchWeights__linearSampledGaussian : Array<Float>)) : Array<Float>);
+    (cast computeGaussianKernelWeights((cast sigma : Float), (cast LinearSampledGaussian.scratchWeights__linearSampledGaussian)) : Array<Float>);
     tapCount = (cast getLinearSampledGaussianTapCount((cast sigma : Float)) : Float);
     _Runtime.setLength(outWeights, tapCount);
     _Runtime.setLength(outOffsets, tapCount);
@@ -44,5 +44,5 @@ class LinearSampledGaussian {
     return cast null;
   }
 
-  public static final scratchWeights__linearSampledGaussian:Array<Float> = cast ([] : Array<Dynamic>);
+  public static final scratchWeights__linearSampledGaussian:Array<Float> = (cast cast ([] : Array<Dynamic>));
 }

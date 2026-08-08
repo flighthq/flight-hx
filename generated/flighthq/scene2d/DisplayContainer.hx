@@ -8,25 +8,26 @@ import flighthq.scene2d.DisplayObject.createNode2DRuntime;
 import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.types.DisplayObject;
 import flighthq.types.DisplayObject.DisplayObjectRuntime;
+import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
 import flighthq.types.Types.DisplayObjectKind;
 import flighthq.types._internal._Node2DValues.DisplayObjectKind;
 
 class DisplayContainer {
   public static function createDisplayObject(?obj:PartialNode<DisplayObject>):DisplayObject {
-    return cast (cast (cast createNode2D((cast DisplayObjectKind : String), obj, _Runtime.field(_Runtime, 'UNDEFINED'), function(__unused0:Dynamic):DisplayObjectRuntime return createDisplayObjectRuntime()) : DisplayObject) : DisplayObject);
+    return cast (cast createNode2D((cast DisplayObjectKind : String), (cast obj), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast function(__unused0:Null<flighthq._internal._Any>):DisplayObjectRuntime return createDisplayObjectRuntime())) : DisplayObject);
     return cast null;
   }
 
   @:noCompletion
   public static function createDisplayObjectRuntime():DisplayObjectRuntime {
-    return cast (cast (cast createNode2DRuntime((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : DisplayObjectRuntime) : DisplayObjectRuntime);
+    return cast (cast createNode2DRuntime((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : DisplayObjectRuntime);
     return cast null;
   }
 
   @:noCompletion
   public static function getDisplayObjectRuntime(source:DisplayObject):DisplayObjectRuntime {
-    return cast (cast (cast getNode2DRuntime(source) : DisplayObjectRuntime) : DisplayObjectRuntime);
+    return cast (cast getNode2DRuntime((cast source)) : DisplayObjectRuntime);
     return cast null;
   }
 }

@@ -22,9 +22,13 @@ import flighthq.types.Path;
 import flighthq.types.Shape;
 import flighthq.types.ShapeCommand.CapsStyle;
 import flighthq.types.ShapeCommand.GradientType;
+import flighthq.types.ShapeCommand.InterpolationMethod;
 import flighthq.types.ShapeCommand.JointStyle;
+import flighthq.types.ShapeCommand.LineScaleMode;
+import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types.ShapeCommand.SpreadMethod;
 import flighthq.types.SwfMorphShapePaths;
+import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
 
 typedef SwfShapeEdgeRecord__swfShape = { var controlX:Float; var controlY:Float; var curved:Bool; var kind:String; var toX:Float; var toY:Float; };
@@ -49,15 +53,15 @@ typedef SwfBitmapFillResolver__swfShape = Float->Bool->Bool->Null<Texture2D>;
 
 class SwfShape {
   public static function createSwfGlyphShape(reader:SwfReader):Null<Shape> {
-    return cast (cast SwfShape.decodeSwfShapeBody__swfShape((cast reader : SwfReader), (cast 1.0 : Float), { fills: cast ([(cast SwfShape.createSwfShapeFill__swfShape((cast 0.0 : Float), (cast 1.0 : Float)) : SwfShapeFill__swfShape)] : Array<Dynamic>), lines: cast ([] : Array<Dynamic>) }, _Runtime.field(_Runtime, 'UNDEFINED')) : Null<Shape>);
+    return cast (cast SwfShape.decodeSwfShapeBody__swfShape((cast reader), (cast 1.0 : Float), (cast { fills: cast ([(cast SwfShape.createSwfShapeFill__swfShape((cast 0.0 : Float), (cast 1.0 : Float)) : SwfShapeFill__swfShape)] : Array<Dynamic>), lines: cast ([] : Array<Dynamic>) }), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<Shape>);
     return cast null;
   }
 
   public static function createSwfShape(reader:SwfReader, version:Float, ?resolveBitmapFill:Null<SwfBitmapFillResolver__swfShape>):Null<Shape> {
     if (resolveBitmapFill == null) resolveBitmapFill = cast (null : Dynamic);
     var styles:Null<SwfShapeStyles__swfShape> = cast _Runtime.UNDEFINED;
-    styles = (cast SwfShape.readSwfShapeStyles__swfShape((cast reader : SwfReader), (cast version : Float), (cast ((cast version : Float) >= (cast 3.0 : Float)) : Bool), resolveBitmapFill) : Null<SwfShapeStyles__swfShape>);
-    return cast ((cast _Runtime.strictEquals(styles, null) : Bool) ? (cast null : Dynamic) : (cast (cast SwfShape.decodeSwfShapeBody__swfShape((cast reader : SwfReader), (cast version : Float), styles, resolveBitmapFill) : Null<Shape>) : Dynamic));
+    styles = (cast SwfShape.readSwfShapeStyles__swfShape((cast reader), (cast version : Float), (cast ((cast version : Float) >= (cast 3.0 : Float)) : Bool), (cast resolveBitmapFill)) : Null<SwfShapeStyles__swfShape>);
+    return cast ((cast _Runtime.strictEquals(styles, null) : Bool) ? (cast null : Dynamic) : (cast (cast SwfShape.decodeSwfShapeBody__swfShape((cast reader), (cast version : Float), (cast styles), (cast resolveBitmapFill)) : Null<Shape>) : Dynamic));
     return cast null;
   }
 
@@ -70,8 +74,8 @@ class SwfShape {
     var lineBits:Float = cast _Runtime.UNDEFINED;
     var records:Float = cast _Runtime.UNDEFINED;
     hasAlpha = ((cast version : Float) >= (cast 3.0 : Float));
-    shape = (cast createShape(_Runtime.field(_Runtime, 'UNDEFINED')) : Shape);
-    state = { fill0: 0.0, fill0Segment: null, fill1: 0.0, fill1Segment: null, fillSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), line: 0.0, lineSegment: null, lineSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), styles: styles, x: 0.0, y: 0.0 };
+    shape = (cast createShape((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Shape);
+    state = (cast { fill0: 0.0, fill0Segment: null, fill1: 0.0, fill1Segment: null, fillSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), line: 0.0, lineSegment: null, lineSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), styles: styles, x: 0.0, y: 0.0 });
     fillBits = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>));
     lineBits = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>));
     if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
@@ -80,13 +84,13 @@ class SwfShape {
       while (true) {
         if ((cast ((cast ++records : Float) > (cast SwfShape.MAX_SHAPE_RECORDS__swfShape : Float)) : Bool)) { return cast null; }
         if ((cast !_Runtime.strictEquals(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>)), 0.0) : Bool)) {
-          if ((cast !(cast (cast SwfShape.readSwfShapeEdge__swfShape((cast reader : SwfReader), state) : Bool) : Bool) : Bool)) { return cast null; }
+          if ((cast !(cast (cast SwfShape.readSwfShapeEdge__swfShape((cast reader), (cast state)) : Bool) : Bool) : Bool)) { return cast null; }
           continue;
         }
         var flags:Float = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([5.0] : Array<Dynamic>));
         if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
         if ((cast _Runtime.strictEquals(flags, 0.0) : Bool)) { break; }
-        SwfShape.flushSwfShapeSegments__swfShape(state);
+        SwfShape.flushSwfShapeSegments__swfShape((cast state));
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_MOVE_TO__swfShape)), 0.0) : Bool)) {
           var moveBits:Float = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([5.0] : Array<Dynamic>));
           ((cast state : SwfShapeState__swfShape).x = _Runtime.callProperty(reader, 'readSignedBits', cast ([moveBits] : Array<Dynamic>)));
@@ -97,8 +101,8 @@ class SwfShape {
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_LINE_STYLE__swfShape)), 0.0) : Bool)) { ((cast state : SwfShapeState__swfShape).line = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([lineBits] : Array<Dynamic>))); }
         if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_NEW_STYLES__swfShape)), 0.0) : Bool)) {
-          SwfShape.appendSwfShapeStyleLayer__swfShape((cast shape : Shape), state);
-          var replacement:Null<SwfShapeStyles__swfShape> = (cast SwfShape.readSwfShapeStyles__swfShape((cast reader : SwfReader), (cast version : Float), (cast hasAlpha : Bool), resolveBitmapFill) : Null<SwfShapeStyles__swfShape>);
+          SwfShape.appendSwfShapeStyleLayer__swfShape((cast shape), (cast state));
+          var replacement:Null<SwfShapeStyles__swfShape> = (cast SwfShape.readSwfShapeStyles__swfShape((cast reader), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill)) : Null<SwfShapeStyles__swfShape>);
           if ((cast _Runtime.strictEquals(replacement, null) : Bool)) { return cast null; }
           ((cast state : SwfShapeState__swfShape).styles = replacement);
           ((cast state : SwfShapeState__swfShape).fill0 = 0.0);
@@ -110,8 +114,8 @@ class SwfShape {
         }
       }
     }
-    SwfShape.flushSwfShapeSegments__swfShape(state);
-    SwfShape.appendSwfShapeStyleLayer__swfShape((cast shape : Shape), state);
+    SwfShape.flushSwfShapeSegments__swfShape((cast state));
+    SwfShape.appendSwfShapeStyleLayer__swfShape((cast shape), (cast state));
     return cast ((cast _Runtime.field(reader, 'valid') : Bool) ? (cast shape : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -124,10 +128,10 @@ class SwfShape {
     var endY:Float = cast _Runtime.UNDEFINED;
     var startIndex:Float = cast _Runtime.UNDEFINED;
     var endIndex:Float = cast _Runtime.UNDEFINED;
-    startRecords = (cast SwfShape.readSwfShapeRecordList__swfShape((cast startReader : SwfReader)) : Null<Array<SwfShapeRecord__swfShape>>);
-    endRecords = (cast SwfShape.readSwfShapeRecordList__swfShape((cast endReader : SwfReader)) : Null<Array<SwfShapeRecord__swfShape>>);
+    startRecords = (cast SwfShape.readSwfShapeRecordList__swfShape((cast startReader)) : Null<Array<SwfShapeRecord__swfShape>>);
+    endRecords = (cast SwfShape.readSwfShapeRecordList__swfShape((cast endReader)) : Null<Array<SwfShapeRecord__swfShape>>);
     if ((cast ((cast _Runtime.strictEquals(startRecords, null) : Bool) || (cast _Runtime.strictEquals(endRecords, null) : Bool)) : Bool)) { return cast null; }
-    state = { fill0: 0.0, fill0Segment: null, fill1: 0.0, fill1Segment: null, fillSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), line: 0.0, lineSegment: null, lineSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), styles: { fills: cast ([] : Array<Dynamic>), lines: cast ([] : Array<Dynamic>) }, x: 0.0, y: 0.0 };
+    state = (cast { fill0: 0.0, fill0Segment: null, fill1: 0.0, fill1Segment: null, fillSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), line: 0.0, lineSegment: null, lineSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), styles: { fills: cast ([] : Array<Dynamic>), lines: cast ([] : Array<Dynamic>) }, x: 0.0, y: 0.0 });
     endX = 0.0;
     endY = 0.0;
     startIndex = 0.0;
@@ -138,7 +142,7 @@ class SwfShape {
         var endRecord:SwfShapeRecord__swfShape = flighthq._internal._StaticIndex.readArray(endRecords, endIndex);
         if ((cast ((cast _Runtime.strictEquals(startRecord, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(endRecord, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { break; }
         if ((cast _Runtime.strictEquals((cast startRecord : { var kind:String; }).kind, 'style') : Bool)) {
-          SwfShape.flushSwfShapeSegments__swfShape(state);
+          SwfShape.flushSwfShapeSegments__swfShape((cast state));
           if ((cast !_Runtime.strictEquals((cast startRecord : SwfShapeStyleRecord__swfShape).moveTo, null) : Bool)) {
             ((cast state : SwfShapeState__swfShape).x = (cast (cast startRecord : SwfShapeStyleRecord__swfShape).moveTo : { var x:Float; var y:Float; }).x);
             ((cast state : SwfShapeState__swfShape).y = (cast (cast startRecord : SwfShapeStyleRecord__swfShape).moveTo : { var x:Float; var y:Float; }).y);
@@ -157,7 +161,7 @@ class SwfShape {
           continue;
         }
         if ((cast _Runtime.strictEquals((cast endRecord : { var kind:String; }).kind, 'style') : Bool)) {
-          SwfShape.flushSwfShapeSegments__swfShape(state);
+          SwfShape.flushSwfShapeSegments__swfShape((cast state));
           if ((cast !_Runtime.strictEquals((cast endRecord : SwfShapeStyleRecord__swfShape).moveTo, null) : Bool)) {
             (endX = cast ((cast (cast endRecord : SwfShapeStyleRecord__swfShape).moveTo : { var x:Float; var y:Float; }).x : Dynamic));
             (endY = cast ((cast (cast endRecord : SwfShapeStyleRecord__swfShape).moveTo : { var x:Float; var y:Float; }).y : Dynamic));
@@ -165,15 +169,15 @@ class SwfShape {
           endIndex++;
           continue;
         }
-        SwfShape.appendSwfMorphEdge__swfShape(state, startRecord, endRecord, (cast endX : Float), (cast endY : Float));
+        SwfShape.appendSwfMorphEdge__swfShape((cast state), (cast startRecord), (cast endRecord), (cast endX : Float), (cast endY : Float));
         (endX = cast ((cast endRecord : SwfShapeEdgeRecord__swfShape).toX : Dynamic));
         (endY = cast ((cast endRecord : SwfShapeEdgeRecord__swfShape).toY : Dynamic));
         startIndex++;
         endIndex++;
       }
     }
-    SwfShape.flushSwfShapeSegments__swfShape(state);
-    return cast { fills: (cast SwfShape.createSwfMorphSegmentPaths__swfShape((cast state : SwfShapeState__swfShape).fillSegments) : flighthq._internal._Map<Float, { var end:Path; var start:Path; }>), lines: (cast SwfShape.createSwfMorphSegmentPaths__swfShape((cast state : SwfShapeState__swfShape).lineSegments) : flighthq._internal._Map<Float, { var end:Path; var start:Path; }>) };
+    SwfShape.flushSwfShapeSegments__swfShape((cast state));
+    return cast { fills: (cast SwfShape.createSwfMorphSegmentPaths__swfShape((cast (cast state : SwfShapeState__swfShape).fillSegments)) : flighthq._internal._Map<Float, { var end:Path; var start:Path; }>), lines: (cast SwfShape.createSwfMorphSegmentPaths__swfShape((cast (cast state : SwfShapeState__swfShape).lineSegments)) : flighthq._internal._Map<Float, { var end:Path; var start:Path; }>) };
     return cast null;
   }
 
@@ -183,21 +187,21 @@ class SwfShape {
     var edge:SwfShapeEdge__swfShape = cast _Runtime.UNDEFINED;
     fromX = (cast state : SwfShapeState__swfShape).x;
     fromY = (cast state : SwfShapeState__swfShape).y;
-    edge = { controlX: _Runtime.field(startEdge, 'controlX'), controlY: _Runtime.field(startEdge, 'controlY'), curved: ((cast _Runtime.field(startEdge, 'curved') : Bool) || (cast _Runtime.field(endEdge, 'curved') : Bool)), endControlX: ((cast _Runtime.field(endEdge, 'curved') : Bool) ? (cast _Runtime.field(endEdge, 'controlX') : Dynamic) : (cast (_Runtime.addNumbers(endFromX, _Runtime.field(endEdge, 'toX')) / 2.0) : Dynamic)), endControlY: ((cast _Runtime.field(endEdge, 'curved') : Bool) ? (cast _Runtime.field(endEdge, 'controlY') : Dynamic) : (cast (_Runtime.addNumbers(endFromY, _Runtime.field(endEdge, 'toY')) / 2.0) : Dynamic)), endToX: _Runtime.field(endEdge, 'toX'), endToY: _Runtime.field(endEdge, 'toY'), toX: _Runtime.field(startEdge, 'toX'), toY: _Runtime.field(startEdge, 'toY') };
+    edge = (cast { controlX: _Runtime.field(startEdge, 'controlX'), controlY: _Runtime.field(startEdge, 'controlY'), curved: ((cast _Runtime.field(startEdge, 'curved') : Bool) || (cast _Runtime.field(endEdge, 'curved') : Bool)), endControlX: ((cast _Runtime.field(endEdge, 'curved') : Bool) ? (cast _Runtime.field(endEdge, 'controlX') : Dynamic) : (cast (_Runtime.addNumbers(endFromX, _Runtime.field(endEdge, 'toX')) / 2.0) : Dynamic)), endControlY: ((cast _Runtime.field(endEdge, 'curved') : Bool) ? (cast _Runtime.field(endEdge, 'controlY') : Dynamic) : (cast (_Runtime.addNumbers(endFromY, _Runtime.field(endEdge, 'toY')) / 2.0) : Dynamic)), endToX: _Runtime.field(endEdge, 'toX'), endToY: _Runtime.field(endEdge, 'toY'), toX: _Runtime.field(startEdge, 'toX'), toY: _Runtime.field(startEdge, 'toY') });
     if ((cast ((cast (cast edge : SwfShapeEdge__swfShape).curved : Bool) && (cast !(cast _Runtime.field(startEdge, 'curved') : Bool) : Bool)) : Bool)) {
       ((cast edge : SwfShapeEdge__swfShape).controlX = (_Runtime.addNumbers(fromX, _Runtime.field(startEdge, 'toX')) / 2.0));
       ((cast edge : SwfShapeEdge__swfShape).controlY = (_Runtime.addNumbers(fromY, _Runtime.field(startEdge, 'toY')) / 2.0));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).fill0, 0.0) : Bool)) {
-      ((cast state : SwfShapeState__swfShape).fill0Segment ??= (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : Null<SwfShapeSegment__swfShape>));
+      ((cast state : SwfShapeState__swfShape).fill0Segment ??= (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape));
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).fill0Segment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).fill1, 0.0) : Bool)) {
-      ((cast state : SwfShapeState__swfShape).fill1Segment ??= (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : Null<SwfShapeSegment__swfShape>));
+      ((cast state : SwfShapeState__swfShape).fill1Segment ??= (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape));
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).fill1Segment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).line, 0.0) : Bool)) {
-      ((cast state : SwfShapeState__swfShape).lineSegment ??= (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : Null<SwfShapeSegment__swfShape>));
+      ((cast state : SwfShapeState__swfShape).lineSegment ??= (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape));
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).lineSegment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     ((cast state : SwfShapeState__swfShape).x = _Runtime.field(startEdge, 'toX'));
@@ -215,22 +219,22 @@ class SwfShape {
     for (__iteration0 in _Runtime.iterable(segments)) {
       var index:Float = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
       var collected:Array<SwfShapeSegment__swfShape> = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      var startPath:Path = (cast createPath('nonZero') : Path);
-      var endPath:Path = (cast createPath('nonZero') : Path);
-      for (contour in _Runtime.iterable((cast SwfShape.stitchSwfShapeSegments__swfShape(collected) : Array<SwfShapeSegment__swfShape>))) {
-        appendPathMoveTo((cast startPath : Path), (cast ((cast contour : SwfShapeSegment__swfShape).startX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast contour : SwfShapeSegment__swfShape).startY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
-        appendPathMoveTo((cast endPath : Path), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast contour : SwfShapeSegment__swfShape).endStartX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast contour : SwfShapeSegment__swfShape).endStartY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+      var startPath:Path = (cast createPath((cast 'nonZero')) : Path);
+      var endPath:Path = (cast createPath((cast 'nonZero')) : Path);
+      for (contour in _Runtime.iterable((cast SwfShape.stitchSwfShapeSegments__swfShape((cast collected)) : Array<SwfShapeSegment__swfShape>))) {
+        appendPathMoveTo((cast startPath), (cast ((cast contour : SwfShapeSegment__swfShape).startX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast contour : SwfShapeSegment__swfShape).startY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+        appendPathMoveTo((cast endPath), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast contour : SwfShapeSegment__swfShape).endStartX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast contour : SwfShapeSegment__swfShape).endStartY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
         for (edge in _Runtime.iterable((cast contour : SwfShapeSegment__swfShape).edges)) {
           if ((cast (cast edge : SwfShapeEdge__swfShape).curved : Bool)) {
-            appendPathCurveTo((cast startPath : Path), (cast ((cast edge : SwfShapeEdge__swfShape).controlX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).controlY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
-            appendPathCurveTo((cast endPath : Path), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endControlX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endControlY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+            appendPathCurveTo((cast startPath), (cast ((cast edge : SwfShapeEdge__swfShape).controlX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).controlY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+            appendPathCurveTo((cast endPath), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endControlX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endControlY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
           } else {
-            appendPathLineTo((cast startPath : Path), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
-            appendPathLineTo((cast endPath : Path), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+            appendPathLineTo((cast startPath), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+            appendPathLineTo((cast endPath), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
           }
         }
       }
-      if ((cast ((cast _Runtime.field((cast startPath : Path).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast paths : flighthq._internal._Map<Float, { var end:Path; var start:Path; }>).set(index, { end: endPath, start: startPath })); }
+      if ((cast ((cast _Runtime.field((cast startPath : Path).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast paths : flighthq._internal._Map<Float, { var end:Path; var start:Path; }>).set(index, (cast { end: endPath, start: startPath }))); }
     }
     return cast paths;
     return cast null;
@@ -244,14 +248,14 @@ class SwfShape {
     fillBits = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>));
     lineBits = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>));
     if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
-    records = cast ([] : Array<Dynamic>);
-    pen = { x: 0.0, y: 0.0 };
+    records = (cast cast ([] : Array<Dynamic>));
+    pen = (cast { x: 0.0, y: 0.0 });
     {
       var count:Float = 0.0;
       while ((cast ((cast count : Float) <= (cast SwfShape.MAX_SHAPE_RECORDS__swfShape : Float)) : Bool)) {
         if ((cast _Runtime.strictEquals(count, SwfShape.MAX_SHAPE_RECORDS__swfShape) : Bool)) { return cast null; }
         if ((cast !_Runtime.strictEquals(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>)), 0.0) : Bool)) {
-          var record:Null<SwfShapeEdgeRecord__swfShape> = (cast SwfShape.readSwfShapeEdgeRecord__swfShape((cast reader : SwfReader), (cast pen : { var x:Float; var y:Float; })) : Null<SwfShapeEdgeRecord__swfShape>);
+          var record:Null<SwfShapeEdgeRecord__swfShape> = (cast SwfShape.readSwfShapeEdgeRecord__swfShape((cast reader), (cast pen)) : Null<SwfShapeEdgeRecord__swfShape>);
           if ((cast _Runtime.strictEquals(record, null) : Bool)) { return cast null; }
           _Runtime.callProperty(records, 'push', cast ([record] : Array<Dynamic>));
           count++;
@@ -281,13 +285,13 @@ class SwfShape {
   }
 
   public static function appendSwfShapeContours__swfShape(shape:Shape, segments:Array<SwfShapeSegment__swfShape>):Void {
-    for (contour in _Runtime.iterable((cast SwfShape.stitchSwfShapeSegments__swfShape(segments) : Array<SwfShapeSegment__swfShape>))) {
-      appendShapeMoveTo((cast shape : Shape), (cast ((cast contour : SwfShapeSegment__swfShape).startX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast contour : SwfShapeSegment__swfShape).startY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+    for (contour in _Runtime.iterable((cast SwfShape.stitchSwfShapeSegments__swfShape((cast segments)) : Array<SwfShapeSegment__swfShape>))) {
+      appendShapeMoveTo((cast shape), (cast ((cast contour : SwfShapeSegment__swfShape).startX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast contour : SwfShapeSegment__swfShape).startY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
       for (edge in _Runtime.iterable((cast contour : SwfShapeSegment__swfShape).edges)) {
         if ((cast (cast edge : SwfShapeEdge__swfShape).curved : Bool)) {
-          appendShapeCurveTo((cast shape : Shape), (cast ((cast edge : SwfShapeEdge__swfShape).controlX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).controlY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+          appendShapeCurveTo((cast shape), (cast ((cast edge : SwfShapeEdge__swfShape).controlX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).controlY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
         } else {
-          appendShapeLineTo((cast shape : Shape), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+          appendShapeLineTo((cast shape), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
         }
       }
     }
@@ -299,21 +303,21 @@ class SwfShape {
       var segments:Null<Array<SwfShapeSegment__swfShape>> = ((cast (cast state : SwfShapeState__swfShape).fillSegments : flighthq._internal._Map<Float, Array<SwfShapeSegment__swfShape>>).get(index));
       if ((cast ((cast _Runtime.strictEquals(fill, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(segments, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
       if ((cast !_Runtime.strictEquals((cast fill : SwfShapeFill__swfShape).texture, null) : Bool)) {
-        appendShapeBeginTextureFill((cast shape : Shape), (cast fill : SwfShapeFill__swfShape).texture, (cast (cast fill : SwfShapeFill__swfShape).textureMatrix : Null<Matrix>));
+        appendShapeBeginTextureFill((cast shape), (cast (cast fill : SwfShapeFill__swfShape).texture), (cast (cast fill : SwfShapeFill__swfShape).textureMatrix));
       } else { if ((cast _Runtime.strictEquals((cast fill : SwfShapeFill__swfShape).gradientType, null) : Bool)) {
-        appendShapeBeginFill((cast shape : Shape), (cast (cast fill : SwfShapeFill__swfShape).color : Float), (cast (cast fill : SwfShapeFill__swfShape).opacity : Float));
+        appendShapeBeginFill((cast shape), (cast (cast fill : SwfShapeFill__swfShape).color : Float), (cast (cast fill : SwfShapeFill__swfShape).opacity : Float));
       } else {
-        appendShapeBeginGradientFill((cast shape : Shape), (cast (cast fill : SwfShapeFill__swfShape).gradientType : GradientType), (cast (cast fill : SwfShapeFill__swfShape).colors : Array<Float>), (cast (cast fill : SwfShapeFill__swfShape).alphas : Array<Float>), (cast (cast fill : SwfShapeFill__swfShape).ratios : Array<Float>), (cast (cast fill : SwfShapeFill__swfShape).matrix : Null<Matrix>), (cast (cast fill : SwfShapeFill__swfShape).spreadMethod : SpreadMethod), 'rgb', (cast (cast fill : SwfShapeFill__swfShape).focalPoint : Float));
+        appendShapeBeginGradientFill((cast shape), (cast (cast fill : SwfShapeFill__swfShape).gradientType), (cast (cast fill : SwfShapeFill__swfShape).colors), (cast (cast fill : SwfShapeFill__swfShape).alphas), (cast (cast fill : SwfShapeFill__swfShape).ratios), (cast (cast fill : SwfShapeFill__swfShape).matrix), (cast (cast fill : SwfShapeFill__swfShape).spreadMethod), (cast 'rgb'), (cast (cast fill : SwfShapeFill__swfShape).focalPoint : Float));
       } }
-      SwfShape.appendSwfShapeContours__swfShape((cast shape : Shape), segments);
-      appendShapeEndFill((cast shape : Shape));
+      SwfShape.appendSwfShapeContours__swfShape((cast shape), (cast segments));
+      appendShapeEndFill((cast shape));
     }
     for (index in _Runtime.iterable(_Runtime.callProperty(_Runtime.concatArrays([_Runtime.toArray(((cast (cast state : SwfShapeState__swfShape).lineSegments : flighthq._internal._Map<Float, Array<SwfShapeSegment__swfShape>>).keys()))]), 'sort', cast ([SwfShape.compareSwfShapeStyleIndex__swfShape] : Array<Dynamic>)))) {
       var line:SwfShapeLine__swfShape = flighthq._internal._StaticIndex.readArray((cast (cast state : SwfShapeState__swfShape).styles : SwfShapeStyles__swfShape).lines, (index - 1.0));
       var segments:Null<Array<SwfShapeSegment__swfShape>> = ((cast (cast state : SwfShapeState__swfShape).lineSegments : flighthq._internal._Map<Float, Array<SwfShapeSegment__swfShape>>).get(index));
       if ((cast ((cast _Runtime.strictEquals(line, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(segments, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
-      appendShapeLineStyle((cast shape : Shape), (cast ((cast line : SwfShapeLine__swfShape).width / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast (cast line : SwfShapeLine__swfShape).color : Float), (cast (cast line : SwfShapeLine__swfShape).alpha : Float), (cast (cast line : SwfShapeLine__swfShape).pixelHinting : Bool), 'normal', (cast (cast line : SwfShapeLine__swfShape).caps : CapsStyle), (cast (cast line : SwfShapeLine__swfShape).joints : JointStyle), (cast (cast line : SwfShapeLine__swfShape).miterLimit : Float));
-      SwfShape.appendSwfShapeContours__swfShape((cast shape : Shape), segments);
+      appendShapeLineStyle((cast shape), (cast ((cast line : SwfShapeLine__swfShape).width / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast (cast line : SwfShapeLine__swfShape).color : Float), (cast (cast line : SwfShapeLine__swfShape).alpha : Float), (cast (cast line : SwfShapeLine__swfShape).pixelHinting : Bool), (cast 'normal'), (cast (cast line : SwfShapeLine__swfShape).caps), (cast (cast line : SwfShapeLine__swfShape).joints), (cast (cast line : SwfShapeLine__swfShape).miterLimit : Float));
+      SwfShape.appendSwfShapeContours__swfShape((cast shape), (cast segments));
     }
     ((cast (cast state : SwfShapeState__swfShape).fillSegments : flighthq._internal._Map<Float, Array<SwfShapeSegment__swfShape>>).clear());
     ((cast (cast state : SwfShapeState__swfShape).lineSegments : flighthq._internal._Map<Float, Array<SwfShapeSegment__swfShape>>).clear());
@@ -330,9 +334,9 @@ class SwfShape {
   }
 
   public static function flushSwfShapeSegments__swfShape(state:SwfShapeState__swfShape):Void {
-    SwfShape.pushSwfShapeSegment__swfShape((cast state : SwfShapeState__swfShape).fillSegments, (cast (cast state : SwfShapeState__swfShape).fill1 : Float), (cast state : SwfShapeState__swfShape).fill1Segment);
-    SwfShape.pushSwfShapeSegment__swfShape((cast state : SwfShapeState__swfShape).fillSegments, (cast (cast state : SwfShapeState__swfShape).fill0 : Float), (cast SwfShape.reverseSwfShapeSegment__swfShape((cast state : SwfShapeState__swfShape).fill0Segment) : Null<SwfShapeSegment__swfShape>));
-    SwfShape.pushSwfShapeSegment__swfShape((cast state : SwfShapeState__swfShape).lineSegments, (cast (cast state : SwfShapeState__swfShape).line : Float), (cast state : SwfShapeState__swfShape).lineSegment);
+    SwfShape.pushSwfShapeSegment__swfShape((cast (cast state : SwfShapeState__swfShape).fillSegments), (cast (cast state : SwfShapeState__swfShape).fill1 : Float), (cast (cast state : SwfShapeState__swfShape).fill1Segment));
+    SwfShape.pushSwfShapeSegment__swfShape((cast (cast state : SwfShapeState__swfShape).fillSegments), (cast (cast state : SwfShapeState__swfShape).fill0 : Float), (cast (cast SwfShape.reverseSwfShapeSegment__swfShape((cast (cast state : SwfShapeState__swfShape).fill0Segment)) : Null<SwfShapeSegment__swfShape>)));
+    SwfShape.pushSwfShapeSegment__swfShape((cast (cast state : SwfShapeState__swfShape).lineSegments), (cast (cast state : SwfShapeState__swfShape).line : Float), (cast (cast state : SwfShapeState__swfShape).lineSegment));
     ((cast state : SwfShapeState__swfShape).fill0Segment = null);
     ((cast state : SwfShapeState__swfShape).fill1Segment = null);
     ((cast state : SwfShapeState__swfShape).lineSegment = null);
@@ -342,7 +346,7 @@ class SwfShape {
     var existing:Null<Array<SwfShapeSegment__swfShape>> = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast _Runtime.strictEquals(index, 0.0) : Bool) || (cast _Runtime.strictEquals(segment, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast segment : SwfShapeSegment__swfShape).edges, 'length'), 0.0) : Bool)) : Bool)) { return; }
     existing = ((cast target : flighthq._internal._Map<Float, Array<SwfShapeSegment__swfShape>>).get(index));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast target : flighthq._internal._Map<Float, Array<SwfShapeSegment__swfShape>>).set(index, cast ([segment] : Array<Dynamic>))); } else { _Runtime.callProperty(existing, 'push', cast ([segment] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast target : flighthq._internal._Map<Float, Array<SwfShapeSegment__swfShape>>).set(index, (cast cast ([segment] : Array<Dynamic>)))); } else { _Runtime.callProperty(existing, 'push', cast ([segment] : Array<Dynamic>)); }
   }
 
   public static function readSwfShapeColor__swfShape(reader:SwfReader, hasAlpha:Bool):{ var color:Float; var opacity:Float; } {
@@ -401,19 +405,19 @@ class SwfShape {
     var edge:SwfShapeEdge__swfShape = cast _Runtime.UNDEFINED;
     fromX = (cast state : SwfShapeState__swfShape).x;
     fromY = (cast state : SwfShapeState__swfShape).y;
-    record = (cast SwfShape.readSwfShapeEdgeRecord__swfShape((cast reader : SwfReader), (cast state : { var x:Float; var y:Float; })) : Null<SwfShapeEdgeRecord__swfShape>);
+    record = (cast SwfShape.readSwfShapeEdgeRecord__swfShape((cast reader), (cast state)) : Null<SwfShapeEdgeRecord__swfShape>);
     if ((cast _Runtime.strictEquals(record, null) : Bool)) { return cast false; }
-    edge = { controlX: (cast record : SwfShapeEdgeRecord__swfShape).controlX, controlY: (cast record : SwfShapeEdgeRecord__swfShape).controlY, curved: (cast record : SwfShapeEdgeRecord__swfShape).curved, toX: (cast record : SwfShapeEdgeRecord__swfShape).toX, toY: (cast record : SwfShapeEdgeRecord__swfShape).toY };
+    edge = (cast { controlX: (cast record : SwfShapeEdgeRecord__swfShape).controlX, controlY: (cast record : SwfShapeEdgeRecord__swfShape).controlY, curved: (cast record : SwfShapeEdgeRecord__swfShape).curved, toX: (cast record : SwfShapeEdgeRecord__swfShape).toX, toY: (cast record : SwfShapeEdgeRecord__swfShape).toY });
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).fill1, 0.0) : Bool)) {
-      ((cast state : SwfShapeState__swfShape).fill1Segment ??= (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : Null<SwfShapeSegment__swfShape>));
+      ((cast state : SwfShapeState__swfShape).fill1Segment ??= (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape));
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).fill1Segment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).fill0, 0.0) : Bool)) {
-      ((cast state : SwfShapeState__swfShape).fill0Segment ??= (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : Null<SwfShapeSegment__swfShape>));
+      ((cast state : SwfShapeState__swfShape).fill0Segment ??= (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape));
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).fill0Segment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).line, 0.0) : Bool)) {
-      ((cast state : SwfShapeState__swfShape).lineSegment ??= (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : Null<SwfShapeSegment__swfShape>));
+      ((cast state : SwfShapeState__swfShape).lineSegment ??= (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape));
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).lineSegment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     return cast true;
@@ -424,25 +428,25 @@ class SwfShape {
     var type:Float = cast _Runtime.UNDEFINED;
     type = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(type, SwfShape.FILL_SOLID__swfShape) : Bool)) {
-      var solid:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape((cast reader : SwfReader), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
-      return cast (cast SwfShape.createSwfShapeFill__swfShape((cast (cast solid : { var color:Float; var opacity:Float; }).color : Float), (cast (cast solid : { var color:Float; var opacity:Float; }).opacity : Float)) : Null<SwfShapeFill__swfShape>);
+      var solid:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape((cast reader), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
+      return cast (cast SwfShape.createSwfShapeFill__swfShape((cast (cast solid : { var color:Float; var opacity:Float; }).color : Float), (cast (cast solid : { var color:Float; var opacity:Float; }).opacity : Float)) : SwfShapeFill__swfShape);
     }
     if ((cast ((cast ((cast _Runtime.strictEquals(type, SwfShape.FILL_LINEAR_GRADIENT__swfShape) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_RADIAL_GRADIENT__swfShape) : Bool)) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_FOCAL_GRADIENT__swfShape) : Bool)) : Bool)) {
       if ((cast ((cast _Runtime.strictEquals(type, SwfShape.FILL_FOCAL_GRADIENT__swfShape) : Bool) && (cast ((cast version : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
-      var matrix:Matrix = (cast SwfShape.readSwfShapeMatrix__swfShape((cast reader : SwfReader)) : Matrix);
+      var matrix:Matrix = (cast SwfShape.readSwfShapeMatrix__swfShape((cast reader)) : Matrix);
       var spread:Float = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([2.0] : Array<Dynamic>));
       _Runtime.callProperty(reader, 'readUnsignedBits', cast ([2.0] : Array<Dynamic>));
       var count:Float = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>));
       _Runtime.callProperty(reader, 'alignToByte', cast ([] : Array<Dynamic>));
       if ((cast ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast _Runtime.strictEquals(count, 0.0) : Bool)) : Bool) || (cast ((cast count : Float) > (cast SwfShape.MAX_GRADIENT_RECORDS__swfShape : Float)) : Bool)) : Bool)) { return cast null; }
-      var colors:Array<Float> = cast ([] : Array<Dynamic>);
-      var alphas:Array<Float> = cast ([] : Array<Dynamic>);
-      var ratios:Array<Float> = cast ([] : Array<Dynamic>);
+      var colors:Array<Float> = (cast cast ([] : Array<Dynamic>));
+      var alphas:Array<Float> = (cast cast ([] : Array<Dynamic>));
+      var ratios:Array<Float> = (cast cast ([] : Array<Dynamic>));
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
           var ratio:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-          var record:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape((cast reader : SwfReader), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
+          var record:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape((cast reader), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
           _Runtime.callProperty(ratios, 'push', cast ([ratio] : Array<Dynamic>));
           _Runtime.callProperty(colors, 'push', cast ([(cast record : { var color:Float; var opacity:Float; }).color] : Array<Dynamic>));
           _Runtime.callProperty(alphas, 'push', cast ([(cast record : { var color:Float; var opacity:Float; }).opacity] : Array<Dynamic>));
@@ -455,13 +459,13 @@ class SwfShape {
     }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(type, SwfShape.FILL_REPEATING_BITMAP__swfShape) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_CLIPPED_BITMAP__swfShape) : Bool)) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_NON_SMOOTHED_REPEATING_BITMAP__swfShape) : Bool)) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_NON_SMOOTHED_CLIPPED_BITMAP__swfShape) : Bool)) : Bool)) {
       var characterId:Float = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
-      var matrix:Matrix = (cast SwfShape.readSwfShapeMatrix__swfShape((cast reader : SwfReader)) : Matrix);
+      var matrix:Matrix = (cast SwfShape.readSwfShapeMatrix__swfShape((cast reader)) : Matrix);
       if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
       var repeat:Bool = ((cast _Runtime.strictEquals(type, SwfShape.FILL_REPEATING_BITMAP__swfShape) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_NON_SMOOTHED_REPEATING_BITMAP__swfShape) : Bool));
       var smoothed:Bool = ((cast _Runtime.strictEquals(type, SwfShape.FILL_REPEATING_BITMAP__swfShape) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_CLIPPED_BITMAP__swfShape) : Bool));
       var fill:SwfShapeFill__swfShape = (cast SwfShape.createSwfShapeFill__swfShape((cast 0.0 : Float), (cast 1.0 : Float)) : SwfShapeFill__swfShape);
       ((cast fill : SwfShapeFill__swfShape).texture = _Runtime.coalesce(_Runtime.callOptionalValue(resolveBitmapFill, cast ([characterId, repeat, smoothed] : Array<Dynamic>)), function():Dynamic return cast null));
-      ((cast fill : SwfShapeFill__swfShape).textureMatrix = (cast createMatrix((cast (matrix.a / SwfShape.TWIPS_PER_PIXEL__swfShape) : Null<Float>), (cast (matrix.b / SwfShape.TWIPS_PER_PIXEL__swfShape) : Null<Float>), (cast (matrix.c / SwfShape.TWIPS_PER_PIXEL__swfShape) : Null<Float>), (cast (matrix.d / SwfShape.TWIPS_PER_PIXEL__swfShape) : Null<Float>), (cast matrix.tx : Null<Float>), (cast matrix.ty : Null<Float>)) : Null<Matrix>));
+      ((cast fill : SwfShapeFill__swfShape).textureMatrix = (cast createMatrix((cast (matrix.a / SwfShape.TWIPS_PER_PIXEL__swfShape)), (cast (matrix.b / SwfShape.TWIPS_PER_PIXEL__swfShape)), (cast (matrix.c / SwfShape.TWIPS_PER_PIXEL__swfShape)), (cast (matrix.d / SwfShape.TWIPS_PER_PIXEL__swfShape)), (cast matrix.tx), (cast matrix.ty)) : Matrix));
       return cast fill;
     }
     return cast null;
@@ -483,7 +487,7 @@ class SwfShape {
     var color:{ var color:Float; var opacity:Float; } = cast _Runtime.UNDEFINED;
     width = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
     if ((cast ((cast version : Float) < (cast 4.0 : Float)) : Bool)) {
-      var color:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape((cast reader : SwfReader), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
+      var color:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape((cast reader), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
       if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
       return cast { alpha: (cast color : { var color:Float; var opacity:Float; }).opacity, caps: 'round', color: (cast color : { var color:Float; var opacity:Float; }).color, joints: 'round', miterLimit: 3.0, pixelHinting: false, width: width };
     }
@@ -499,11 +503,11 @@ class SwfShape {
     miterLimit = ((cast _Runtime.strictEquals(join, SwfShape.JOIN_MITER__swfShape) : Bool) ? (cast _Runtime.callProperty(reader, 'readFixed8', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 3.0 : Dynamic));
     if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
     if ((cast hasFill : Bool)) {
-      var fill:Null<SwfShapeFill__swfShape> = (cast SwfShape.readSwfShapeFillStyle__swfShape((cast reader : SwfReader), (cast version : Float), (cast hasAlpha : Bool), resolveBitmapFill) : Null<SwfShapeFill__swfShape>);
+      var fill:Null<SwfShapeFill__swfShape> = (cast SwfShape.readSwfShapeFillStyle__swfShape((cast reader), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill)) : Null<SwfShapeFill__swfShape>);
       if ((cast _Runtime.strictEquals(fill, null) : Bool)) { return cast null; }
       return cast { alpha: (cast fill : SwfShapeFill__swfShape).opacity, caps: (cast SwfShape.resolveSwfShapeCapsStyle__swfShape((cast startCap : Float)) : CapsStyle), color: (cast fill : SwfShapeFill__swfShape).color, joints: (cast SwfShape.resolveSwfShapeJointStyle__swfShape((cast join : Float)) : JointStyle), miterLimit: miterLimit, pixelHinting: pixelHinting, width: width };
     }
-    color = (cast SwfShape.readSwfShapeColor__swfShape((cast reader : SwfReader), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
+    color = (cast SwfShape.readSwfShapeColor__swfShape((cast reader), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
     if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
     return cast { alpha: (cast color : { var color:Float; var opacity:Float; }).opacity, caps: (cast SwfShape.resolveSwfShapeCapsStyle__swfShape((cast startCap : Float)) : CapsStyle), color: (cast color : { var color:Float; var opacity:Float; }).color, joints: (cast SwfShape.resolveSwfShapeJointStyle__swfShape((cast join : Float)) : JointStyle), miterLimit: miterLimit, pixelHinting: pixelHinting, width: width };
     return cast null;
@@ -535,7 +539,7 @@ class SwfShape {
     tx = _Runtime.divideNumbers(_Runtime.callProperty(reader, 'readSignedBits', cast ([translateBits] : Array<Dynamic>)), SwfShape.TWIPS_PER_PIXEL__swfShape);
     ty = _Runtime.divideNumbers(_Runtime.callProperty(reader, 'readSignedBits', cast ([translateBits] : Array<Dynamic>)), SwfShape.TWIPS_PER_PIXEL__swfShape);
     _Runtime.callProperty(reader, 'alignToByte', cast ([] : Array<Dynamic>));
-    return cast (cast createMatrix((cast a : Null<Float>), (cast b : Null<Float>), (cast c : Null<Float>), (cast d : Null<Float>), (cast tx : Null<Float>), (cast ty : Null<Float>)) : Matrix);
+    return cast (cast createMatrix((cast a), (cast b), (cast c), (cast d), (cast tx), (cast ty)) : Matrix);
     return cast null;
   }
 
@@ -551,25 +555,25 @@ class SwfShape {
     var fills:Array<SwfShapeFill__swfShape> = cast _Runtime.UNDEFINED;
     var lineCount:Float = cast _Runtime.UNDEFINED;
     var lines:Array<SwfShapeLine__swfShape> = cast _Runtime.UNDEFINED;
-    fillCount = (cast SwfShape.readSwfShapeStyleCount__swfShape((cast reader : SwfReader), (cast version : Float)) : Float);
+    fillCount = (cast SwfShape.readSwfShapeStyleCount__swfShape((cast reader), (cast version : Float)) : Float);
     if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast fillCount : Float) > (cast SwfShape.MAX_SHAPE_STYLES__swfShape : Float)) : Bool)) : Bool)) { return cast null; }
-    fills = cast ([] : Array<Dynamic>);
+    fills = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast fillCount : Float)) : Bool)) {
-        var fill:Null<SwfShapeFill__swfShape> = (cast SwfShape.readSwfShapeFillStyle__swfShape((cast reader : SwfReader), (cast version : Float), (cast hasAlpha : Bool), resolveBitmapFill) : Null<SwfShapeFill__swfShape>);
+        var fill:Null<SwfShapeFill__swfShape> = (cast SwfShape.readSwfShapeFillStyle__swfShape((cast reader), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill)) : Null<SwfShapeFill__swfShape>);
         if ((cast _Runtime.strictEquals(fill, null) : Bool)) { return cast null; }
         _Runtime.callProperty(fills, 'push', cast ([fill] : Array<Dynamic>));
         i++;
       }
     }
-    lineCount = (cast SwfShape.readSwfShapeStyleCount__swfShape((cast reader : SwfReader), (cast version : Float)) : Float);
+    lineCount = (cast SwfShape.readSwfShapeStyleCount__swfShape((cast reader), (cast version : Float)) : Float);
     if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast lineCount : Float) > (cast SwfShape.MAX_SHAPE_STYLES__swfShape : Float)) : Bool)) : Bool)) { return cast null; }
-    lines = cast ([] : Array<Dynamic>);
+    lines = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast lineCount : Float)) : Bool)) {
-        var line:Null<SwfShapeLine__swfShape> = (cast SwfShape.readSwfShapeLineStyle__swfShape((cast reader : SwfReader), (cast version : Float), (cast hasAlpha : Bool), resolveBitmapFill) : Null<SwfShapeLine__swfShape>);
+        var line:Null<SwfShapeLine__swfShape> = (cast SwfShape.readSwfShapeLineStyle__swfShape((cast reader), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill)) : Null<SwfShapeLine__swfShape>);
         if ((cast _Runtime.strictEquals(line, null) : Bool)) { return cast null; }
         _Runtime.callProperty(lines, 'push', cast ([line] : Array<Dynamic>));
         i++;
@@ -628,19 +632,19 @@ class SwfShape {
       while ((cast ((cast i : Float) < (cast _Runtime.field(segments, 'length') : Float)) : Bool)) {
         var key:String = (cast SwfShape.createSwfShapePointKey__swfShape((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(segments, i), 'startX') : Float), (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(segments, i), 'startY') : Float)) : String);
         var existing:Null<Array<Float>> = ((cast starts : flighthq._internal._Map<String, Array<Float>>).get(key));
-        if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast starts : flighthq._internal._Map<String, Array<Float>>).set(key, cast ([i] : Array<Dynamic>))); } else { _Runtime.callProperty(existing, 'push', cast ([i] : Array<Dynamic>)); }
+        if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast starts : flighthq._internal._Map<String, Array<Float>>).set(key, (cast cast ([i] : Array<Dynamic>)))); } else { _Runtime.callProperty(existing, 'push', cast ([i] : Array<Dynamic>)); }
         i++;
       }
     }
     used = _Runtime.fill(_Runtime.createArray(_Runtime.field(segments, 'length')), false, 0, null, 1);
-    contours = cast ([] : Array<Dynamic>);
+    contours = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(segments, 'length') : Float)) : Bool)) {
         if ((cast flighthq._internal._StaticIndex.readArray(used, i) : Bool)) { i++; continue; }
         flighthq._internal._StaticIndex.writeArray(used, i, true);
         var contour:SwfShapeSegment__swfShape = (cast SwfShape.createSwfShapeSegment__swfShape((cast _Runtime.field(flighthq._internal._StaticIndex.readArray(segments, i), 'startX') : Float), (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(segments, i), 'startY') : Float)) : SwfShapeSegment__swfShape);
-        SwfShape.appendSwfShapeEdges__swfShape((cast contour : SwfShapeSegment__swfShape).edges, _Runtime.field(flighthq._internal._StaticIndex.readArray(segments, i), 'edges'));
+        SwfShape.appendSwfShapeEdges__swfShape((cast (cast contour : SwfShapeSegment__swfShape).edges), (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(segments, i), 'edges')));
         {
           while (true) {
             var tail:SwfShapeEdge__swfShape = flighthq._internal._StaticIndex.readArray((cast contour : SwfShapeSegment__swfShape).edges, _Runtime.subtractNumbers(_Runtime.field((cast contour : SwfShapeSegment__swfShape).edges, 'length'), 1.0));
@@ -650,7 +654,7 @@ class SwfShape {
             var next:Null<Float> = _Runtime.find(candidates, function(index:Float, __unused1:Float, __unused2:Array<Float>):Bool return !(cast flighthq._internal._StaticIndex.readArray(used, index) : Bool));
             if ((cast _Runtime.strictEquals(next, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { break; }
             flighthq._internal._StaticIndex.writeArray(used, next, true);
-            SwfShape.appendSwfShapeEdges__swfShape((cast contour : SwfShapeSegment__swfShape).edges, _Runtime.field(flighthq._internal._StaticIndex.readArray(segments, next), 'edges'));
+            SwfShape.appendSwfShapeEdges__swfShape((cast (cast contour : SwfShapeSegment__swfShape).edges), (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(segments, next), 'edges')));
           }
         }
         _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));

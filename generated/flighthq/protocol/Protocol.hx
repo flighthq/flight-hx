@@ -32,14 +32,14 @@ class Protocol {
     var backend:ProtocolBackend = cast _Runtime.UNDEFINED;
     var pending:Array<String> = cast _Runtime.UNDEFINED;
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
-    detachProtocolHandler((cast handler : ProtocolHandler));
+    detachProtocolHandler((cast handler));
     backend = (cast getProtocolBackend() : ProtocolBackend);
     pending = (cast backend : ProtocolBackend).drainPendingUrls();
     for (url in _Runtime.iterable(pending)) {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[handler.onOpenUrl], [url]]), 1);
     }
-    unsubscribe = (cast backend : ProtocolBackend).subscribe(function(url:String):Void return _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[handler.onOpenUrl], [url]]), 1));
-    ((cast Protocol._subscriptions__protocol : flighthq._internal._WeakMap<ProtocolHandler, Void->Void>).set(handler, unsubscribe));
+    unsubscribe = (cast backend : ProtocolBackend).subscribe((cast function(url:String):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[handler.onOpenUrl], [url]]), 1); }));
+    ((cast Protocol._subscriptions__protocol : flighthq._internal._WeakMap<ProtocolHandler, Void->Void>).set(handler, (cast unsubscribe)));
   }
 
   public static function createProtocolHandler():ProtocolHandler {
@@ -47,7 +47,7 @@ class Protocol {
     return cast null;
   }
 
-  public static function createProtocolUrl(parts:Dynamic):String {
+  public static function createProtocolUrl(parts:flighthq._internal._Partial<ParsedProtocolUrl>):String {
     var scheme:String = cast _Runtime.UNDEFINED;
     var host:String = cast _Runtime.UNDEFINED;
     var path:String = cast _Runtime.UNDEFINED;
@@ -67,6 +67,7 @@ class Protocol {
         var k:String = cast _Runtime.UNDEFINED;
         k = flighthq._internal._StaticIndex.readArray(__parameter0, 0.0);
         return cast ((cast _Runtime.field(k, 'length') : Float) > (cast 0.0 : Float));
+        return cast _Runtime.UNDEFINED;
       }] : Array<Dynamic>));
       if ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
         var qs:String = _Runtime.join(_Runtime.callProperty(entries, 'map', cast ([function(__parameter3:Array<String>, __unused4:Float, __unused5:Array<Array<String>>):String {
@@ -75,6 +76,7 @@ class Protocol {
           k = flighthq._internal._StaticIndex.readArray(__parameter3, 0.0);
           v = flighthq._internal._StaticIndex.readArray(__parameter3, 1.0);
           return cast '' + Std.string(_Runtime.callValue(flighthq._internal._HostValueLut.get('encodeURIComponent'), cast ([k] : Array<Dynamic>))) + '=' + Std.string(_Runtime.callValue(flighthq._internal._HostValueLut.get('encodeURIComponent'), cast ([v] : Array<Dynamic>))) + '';
+          return cast _Runtime.UNDEFINED;
         }] : Array<Dynamic>)), '&');
         (url = cast ((url + '?' + Std.string(qs) + '') : Dynamic));
       }
@@ -86,34 +88,41 @@ class Protocol {
   @:noCompletion
   public static function createWebProtocolBackend():ProtocolBackend {
     var _registeredSchemes:Array<String> = cast _Runtime.UNDEFINED;
-    _registeredSchemes = cast ([] : Array<Dynamic>);
+    _registeredSchemes = (cast cast ([] : Array<Dynamic>));
     return cast { register: function(scheme:String):Bool {
       var nav:flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { @:optional var registerProtocolHandler:Null<String->String->Void>; }> = cast _Runtime.UNDEFINED;
       if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('location'), 'undefined') : Bool)) : Bool)) { return cast false; }
       nav = (cast flighthq._internal.backend.DomNavigatorBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { @:optional var registerProtocolHandler:String->String->Void; }>);
-      if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast nav : flighthq._internal.dom.Navigator).registerProtocolHandler), 'function') : Bool)) { return cast false; }
+      if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast nav : { var registerProtocolHandler:String->String->Void; }).registerProtocolHandler), 'function') : Bool)) { return cast false; }
       try {
-        (cast nav : flighthq._internal.dom.Navigator).registerProtocolHandler(scheme, ((cast flighthq._internal._HostValueLut.get('location') : flighthq._internal.dom.Location).origin + '/?url=%s'));
+        (cast nav : { var registerProtocolHandler:String->String->Void; }).registerProtocolHandler((cast scheme : String), (cast ((cast flighthq._internal._HostValueLut.get('location') : flighthq._internal.dom.Location).origin + '/?url=%s')));
         if ((cast !(cast _Runtime.includes(_registeredSchemes, scheme) : Bool) : Bool)) { _Runtime.callProperty(_registeredSchemes, 'push', cast ([scheme] : Array<Dynamic>)); }
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
       }
+      return cast _Runtime.UNDEFINED;
     }, unregister: function(scheme:String):Bool {
       var idx:Float = cast _Runtime.UNDEFINED;
       idx = _Runtime.callProperty(_registeredSchemes, 'indexOf', cast ([scheme] : Array<Dynamic>));
       if ((cast ((cast idx : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.splice(_registeredSchemes, Std.int(idx), Std.int(1.0), []); }
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, isRegistered: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, getRegisteredSchemes: function():Array<String> {
       return cast _Runtime.slice(_registeredSchemes, 0, null);
+      return cast _Runtime.UNDEFINED;
     }, setAsDefault: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, isDefault: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, removeAsDefault: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, getLaunchUrl: function():Null<String> {
       if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('location'), 'undefined') : Bool)) { return cast null; }
       try {
@@ -123,12 +132,15 @@ class Protocol {
       } catch (__error:Dynamic) {
         return cast null;
       }
+      return cast _Runtime.UNDEFINED;
     }, drainPendingUrls: function():Array<String> {
       return cast (cast cast ([] : Array<Dynamic>) : Array<String>);
+      return cast _Runtime.UNDEFINED;
     }, subscribe: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
@@ -143,12 +155,12 @@ class Protocol {
   }
 
   public static function disposeProtocolHandler(handler:ProtocolHandler):Void {
-    detachProtocolHandler((cast handler : ProtocolHandler));
+    detachProtocolHandler((cast handler));
   }
 
   @:noCompletion
   public static function getProtocolBackend():ProtocolBackend {
-    if ((cast _Runtime.strictEquals(Protocol._backend__protocol, null) : Bool)) { (Protocol._backend__protocol = cast ((cast createWebProtocolBackend() : Null<ProtocolBackend>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Protocol._backend__protocol, null) : Bool)) { (Protocol._backend__protocol = cast ((cast createWebProtocolBackend() : ProtocolBackend) : Dynamic)); }
     return cast Protocol._backend__protocol;
     return cast null;
   }
@@ -164,12 +176,12 @@ class Protocol {
   }
 
   public static function isProtocolSchemeDefault(scheme:String):Bool {
-    return cast (cast (cast getProtocolBackend() : ProtocolBackend) : ProtocolBackend).isDefault(scheme);
+    return cast (cast (cast getProtocolBackend() : ProtocolBackend) : ProtocolBackend).isDefault((cast scheme : String));
     return cast null;
   }
 
   public static function isProtocolSchemeRegistered(scheme:String):Bool {
-    return cast (cast (cast getProtocolBackend() : ProtocolBackend) : ProtocolBackend).isRegistered(scheme);
+    return cast (cast (cast getProtocolBackend() : ProtocolBackend) : ProtocolBackend).isRegistered((cast scheme : String));
     return cast null;
   }
 
@@ -221,7 +233,7 @@ class Protocol {
       (path = cast (rest : Dynamic));
       (queryString = cast ('' : Dynamic));
     }
-    query = {  };
+    query = (cast {  });
     if ((cast ((cast _Runtime.field(queryString, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       for (pair in _Runtime.iterable(_Runtime.callProperty(queryString, 'split', cast (['&'] : Array<Dynamic>)))) {
         var eqIdx:Float = _Runtime.callProperty(pair, 'indexOf', cast (['='] : Array<Dynamic>));
@@ -240,7 +252,7 @@ class Protocol {
 
   public static function registerProtocolScheme(scheme:String):Bool {
     if ((cast !(cast (cast isValidProtocolScheme((cast scheme : String)) : Bool) : Bool) : Bool)) { return cast false; }
-    return cast (cast (cast getProtocolBackend() : ProtocolBackend) : ProtocolBackend).register(scheme);
+    return cast (cast (cast getProtocolBackend() : ProtocolBackend) : ProtocolBackend).register((cast scheme : String));
     return cast null;
   }
 
@@ -250,14 +262,14 @@ class Protocol {
     backend = (cast getProtocolBackend() : ProtocolBackend);
     allOk = true;
     for (scheme in _Runtime.iterable(schemes)) {
-      if ((cast ((cast !(cast (cast isValidProtocolScheme((cast scheme : String)) : Bool) : Bool) : Bool) || (cast !(cast (cast backend : ProtocolBackend).register(scheme) : Bool) : Bool)) : Bool)) { (allOk = cast (false : Dynamic)); }
+      if ((cast ((cast !(cast (cast isValidProtocolScheme((cast scheme : String)) : Bool) : Bool) : Bool) || (cast !(cast (cast backend : ProtocolBackend).register((cast scheme : String)) : Bool) : Bool)) : Bool)) { (allOk = cast (false : Dynamic)); }
     }
     return cast allOk;
     return cast null;
   }
 
   public static function removeProtocolSchemeAsDefault(scheme:String):Bool {
-    return cast (cast (cast getProtocolBackend() : ProtocolBackend) : ProtocolBackend).removeAsDefault(scheme);
+    return cast (cast (cast getProtocolBackend() : ProtocolBackend) : ProtocolBackend).removeAsDefault((cast scheme : String));
     return cast null;
   }
 
@@ -267,12 +279,12 @@ class Protocol {
   }
 
   public static function setProtocolSchemeAsDefault(scheme:String):Bool {
-    return cast (cast (cast getProtocolBackend() : ProtocolBackend) : ProtocolBackend).setAsDefault(scheme);
+    return cast (cast (cast getProtocolBackend() : ProtocolBackend) : ProtocolBackend).setAsDefault((cast scheme : String));
     return cast null;
   }
 
   public static function unregisterProtocolScheme(scheme:String):Bool {
-    return cast (cast (cast getProtocolBackend() : ProtocolBackend) : ProtocolBackend).unregister(scheme);
+    return cast (cast (cast getProtocolBackend() : ProtocolBackend) : ProtocolBackend).unregister((cast scheme : String));
     return cast null;
   }
 
@@ -282,7 +294,7 @@ class Protocol {
     backend = (cast getProtocolBackend() : ProtocolBackend);
     allOk = true;
     for (scheme in _Runtime.iterable(schemes)) {
-      if ((cast !(cast (cast backend : ProtocolBackend).unregister(scheme) : Bool) : Bool)) { (allOk = cast (false : Dynamic)); }
+      if ((cast !(cast (cast backend : ProtocolBackend).unregister((cast scheme : String)) : Bool) : Bool)) { (allOk = cast (false : Dynamic)); }
     }
     return cast allOk;
     return cast null;

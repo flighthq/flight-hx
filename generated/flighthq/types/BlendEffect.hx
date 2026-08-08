@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef BlendEffect = { var kind:Kind; var mode:AdvancedBlendMode; @:optional var backdropKey:String; @:optional var opacity:Float; };
+typedef BlendEffect = { var kind:String; var mode:AdvancedBlendMode; @:optional var backdropKey:String; @:optional var opacity:Float; };

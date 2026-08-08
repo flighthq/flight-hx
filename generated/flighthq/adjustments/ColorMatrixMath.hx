@@ -30,7 +30,7 @@ class ColorMatrixMath {
   }
 
   public static function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void {
-    (cast multiplyColorMatrix((cast target : Array<Float>), (cast source : Array<Float>), (cast target : Null<Array<Float>>)) : Array<Float>);
+    (cast multiplyColorMatrix((cast target), (cast source), (cast target)) : Array<Float>);
   }
 
   public static function createBrightnessColorMatrix(amount:Float):Array<Float> {
@@ -202,7 +202,7 @@ class ColorMatrixMath {
     {
       var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(matrices, 'length') : Float)) : Bool)) {
-        (cast multiplyColorMatrix((cast flighthq._internal._StaticIndex.readArray(matrices, i) : Array<Float>), (cast out : Array<Float>), (cast out : Null<Array<Float>>)) : Array<Float>);
+        (cast multiplyColorMatrix((cast flighthq._internal._StaticIndex.readArray(matrices, i)), (cast out), (cast out)) : Array<Float>);
         i++;
       }
     }

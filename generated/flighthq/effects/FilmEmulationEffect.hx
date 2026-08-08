@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.FilmEmulationEffect;
 
 class FilmEmulationEffect {
-  public static function createFilmEmulationEffect(?options:Dynamic):flighthq.types.FilmEmulationEffect {
+  public static function createFilmEmulationEffect(?options:flighthq._internal._Omit<flighthq.types.FilmEmulationEffect, String>):flighthq.types.FilmEmulationEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'FilmEmulationEffect' }, options]);
     return cast null;

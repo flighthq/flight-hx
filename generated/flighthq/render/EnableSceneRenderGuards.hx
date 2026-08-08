@@ -10,14 +10,14 @@ import flighthq.types.Mesh;
 
 class EnableSceneRenderGuards {
   public static function disableSceneRenderGuards():Void {
-    setSkinnedMeshBoundsGuard((cast null : Null<Mesh->Void>));
+    setSkinnedMeshBoundsGuard((cast null));
   }
 
   public static function enableSceneRenderGuards():Void {
-    setSkinnedMeshBoundsGuard((cast EnableSceneRenderGuards.warnOnUnposedSkinnedMesh__enableSceneRenderGuards : Null<Mesh->Void>));
+    setSkinnedMeshBoundsGuard((cast EnableSceneRenderGuards.warnOnUnposedSkinnedMesh__enableSceneRenderGuards));
   }
 
   public static function warnOnUnposedSkinnedMesh__enableSceneRenderGuards(_mesh:Mesh):Void {
-    (cast logOnce((cast 'render:skinned-mesh-without-deformed-bounds' : String), (cast LogLevel.Warn : LogLevel), { message: (('prepareScene3DRender: a skinned mesh has no posed bounds, so culling is testing it against its ' + 'BIND POSE box and a deformed limb can be wrongly culled. Call prepareScene3DSkinning ') + '(@flighthq/skeleton3d) before prepareScene3DRender each frame.') }, (cast 'render' : Null<String>)) : Bool);
+    (cast logOnce((cast 'render:skinned-mesh-without-deformed-bounds' : String), (cast LogLevel.Warn), (cast { message: (('prepareScene3DRender: a skinned mesh has no posed bounds, so culling is testing it against its ' + 'BIND POSE box and a deformed limb can be wrongly culled. Call prepareScene3DSkinning ') + '(@flighthq/skeleton3d) before prepareScene3DRender each frame.') }), (cast 'render')) : Bool);
   }
 }

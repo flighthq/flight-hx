@@ -16,9 +16,9 @@ import flighthq.textlayout.RichTextMetrics.getRichTextScrollYOffset;
 import flighthq.textlayout.TextBounds.computeTextBoundsHeight;
 import flighthq.textlayout.TextBounds.computeTextBoundsWidth;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasTextInputOverlay;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Renderable;
 import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextData;
 import flighthq.types.RichText.RichTextRuntime;
@@ -39,32 +39,32 @@ class CanvasTextInput {
     var scrollXOffset:Float = cast _Runtime.UNDEFINED;
     var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
-    input = (cast getTextInputState((cast source : RichText)) : Null<TextInputState>);
+    input = (cast getTextInputState((cast source)) : Null<TextInputState>);
     if ((cast _Runtime.strictEquals(input, null) : Bool)) { return; }
-    layout = _Runtime.field((cast getRichTextRuntime((cast source : RichText)) : RichTextRuntime), 'textLayout');
+    layout = _Runtime.field((cast getRichTextRuntime((cast source)) : RichTextRuntime), 'textLayout');
     if ((cast ((cast _Runtime.andValue(!(cast (cast input : TextInputState).focused : Bool), function():Dynamic return cast !(cast (cast input : TextInputState).alwaysShowSelection : Bool)) : Bool) || (cast _Runtime.strictEquals(layout, null) : Bool)) : Bool)) { return; }
-    fieldW = (cast computeTextBoundsWidth((cast source : RichText).data, layout) : Float);
-    fieldH = (cast computeTextBoundsHeight((cast source : RichText).data, layout) : Float);
+    fieldW = (cast computeTextBoundsWidth((cast (cast source : RichText).data), (cast layout)) : Float);
+    fieldH = (cast computeTextBoundsHeight((cast (cast source : RichText).data), (cast layout)) : Float);
     firstVisibleLine = ((cast (cast source : RichText).data : RichTextData).scrollV - 1.0);
-    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast (cast layout : TextLayoutResult).lineHeights : Array<Float>), (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
+    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast (cast layout : TextLayoutResult).lineHeights), (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
     scrollXOffset = (cast (cast source : RichText).data : RichTextData).scrollH;
     context = (cast state : CanvasRenderState).context;
     flighthq._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));
-    setCanvasTransform((cast state : CanvasRenderState), (cast context : flighthq._internal.dom.CanvasRenderingContext2D), (cast renderProxy : RenderProxy2D).transform2D);
+    setCanvasTransform((cast state), (cast context), (cast (cast renderProxy : RenderProxy2D).transform2D));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'rect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'clip', cast ([] : Array<Dynamic>));
-    getTextInputSelectionRectangles((cast CanvasTextInput.selectionRectangles__canvasTextInput : Array<TextSelectionRectangle>), (cast source : RichText), layout);
+    getTextInputSelectionRectangles((cast CanvasTextInput.selectionRectangles__canvasTextInput), (cast source), (cast layout));
     if ((cast ((cast _Runtime.field(CanvasTextInput.selectionRectangles__canvasTextInput, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbHexString((cast (cast input : TextInputState).selectionColor : Float)) : flighthq._internal._Union2<flighthq._internal._Union2<String, flighthq._internal.dom.CanvasGradient>, flighthq._internal.dom.CanvasPattern>));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbHexString((cast (cast input : TextInputState).selectionColor : Float)) : String));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', HxMath.min(1.0, ((cast renderProxy : RenderProxy2D).alpha * (cast input : TextInputState).selectionAlpha)));
       for (rect in _Runtime.iterable(CanvasTextInput.selectionRectangles__canvasTextInput)) {
         flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([((cast rect : TextSelectionRectangle).x - scrollXOffset), ((cast rect : TextSelectionRectangle).y - scrollYOffset), (cast rect : TextSelectionRectangle).width, (cast rect : TextSelectionRectangle).height] : Array<Dynamic>));
       }
     }
-    if ((cast ((cast (cast input : TextInputState).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex((cast source : RichText)) : Float), (cast getTextInputSelectionEndIndex((cast source : RichText)) : Float)) : Bool)) : Bool)) {
-      if ((cast (cast CanvasTextInput.getCaretVisible__canvasTextInput((cast source : flighthq._internal._Object), (cast (cast input : TextInputState).focused : Bool)) : Bool) : Bool)) {
-        getTextInputCaretRectangle((cast CanvasTextInput.caretRectangle__canvasTextInput : TextSelectionRectangle), (cast source : RichText), layout);
+    if ((cast ((cast (cast input : TextInputState).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex((cast source)) : Float), (cast getTextInputSelectionEndIndex((cast source)) : Float)) : Bool)) : Bool)) {
+      if ((cast (cast CanvasTextInput.getCaretVisible__canvasTextInput((cast source), (cast (cast input : TextInputState).focused : Bool)) : Bool) : Bool)) {
+        getTextInputCaretRectangle((cast CanvasTextInput.caretRectangle__canvasTextInput), (cast source), (cast layout));
         flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', CanvasTextInput.CARET_COLOR__canvasTextInput);
         flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast renderProxy : RenderProxy2D).alpha);
         flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([((cast CanvasTextInput.caretRectangle__canvasTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - scrollXOffset), ((cast CanvasTextInput.caretRectangle__canvasTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y - scrollYOffset), CanvasTextInput.CARET_WIDTH__canvasTextInput, (cast CanvasTextInput.caretRectangle__canvasTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).height] : Array<Dynamic>));
@@ -74,7 +74,7 @@ class CanvasTextInput {
   }
 
   public static function enableCanvasTextInput():Void {
-    registerCanvasTextInputOverlay(drawCanvasTextInputOverlay);
+    registerCanvasTextInputOverlay((cast drawCanvasTextInputOverlay));
   }
 
   public static final CARET_BLINK_MS__canvasTextInput:Float = 530.0;
@@ -89,8 +89,8 @@ class CanvasTextInput {
     var wasFocused:Bool = cast _Runtime.UNDEFINED;
     var elapsed:Float = cast _Runtime.UNDEFINED;
     wasFocused = _Runtime.coalesce(((cast CanvasTextInput._prevFocused__canvasTextInput : flighthq._internal._WeakMap<flighthq._internal._Object, Bool>).get(source)), function():Dynamic return cast false);
-    if ((cast ((cast !(cast wasFocused : Bool) : Bool) && (cast focused : Bool)) : Bool)) { ((cast CanvasTextInput._blinkStart__canvasTextInput : flighthq._internal._WeakMap<flighthq._internal._Object, Float>).set(source, (cast flighthq._internal._HostValueLut.get('performance') : flighthq._internal.dom.Performance).now())); }
-    ((cast CanvasTextInput._prevFocused__canvasTextInput : flighthq._internal._WeakMap<flighthq._internal._Object, Bool>).set(source, focused));
+    if ((cast ((cast !(cast wasFocused : Bool) : Bool) && (cast focused : Bool)) : Bool)) { ((cast CanvasTextInput._blinkStart__canvasTextInput : flighthq._internal._WeakMap<flighthq._internal._Object, Float>).set(source, (cast (cast flighthq._internal._HostValueLut.get('performance') : flighthq._internal.dom.Performance).now()))); }
+    ((cast CanvasTextInput._prevFocused__canvasTextInput : flighthq._internal._WeakMap<flighthq._internal._Object, Bool>).set(source, (cast focused)));
     elapsed = _Runtime.subtractNumbers((cast flighthq._internal._HostValueLut.get('performance') : flighthq._internal.dom.Performance).now(), _Runtime.coalesce(((cast CanvasTextInput._blinkStart__canvasTextInput : flighthq._internal._WeakMap<flighthq._internal._Object, Float>).get(source)), function():Dynamic return cast (cast flighthq._internal._HostValueLut.get('performance') : flighthq._internal.dom.Performance).now()));
     return cast ((cast _Runtime.fmod(elapsed, (CanvasTextInput.CARET_BLINK_MS__canvasTextInput * 2.0)) : Float) < (cast CanvasTextInput.CARET_BLINK_MS__canvasTextInput : Float));
     return cast null;
@@ -98,7 +98,7 @@ class CanvasTextInput {
 
   public static final CARET_WIDTH__canvasTextInput:Float = 1.0;
 
-  public static final caretRectangle__canvasTextInput:{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; } = { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 };
+  public static final caretRectangle__canvasTextInput:{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; } = (cast { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 });
 
-  public static final selectionRectangles__canvasTextInput:Array<TextSelectionRectangle> = cast ([] : Array<Dynamic>);
+  public static final selectionRectangles__canvasTextInput:Array<TextSelectionRectangle> = (cast cast ([] : Array<Dynamic>));
 }

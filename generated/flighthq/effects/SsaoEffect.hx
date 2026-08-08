@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.SsaoEffect;
 
 class SsaoEffect {
-  public static function createSsaoEffect(?options:Dynamic):flighthq.types.SsaoEffect {
+  public static function createSsaoEffect(?options:flighthq._internal._Omit<flighthq.types.SsaoEffect, String>):flighthq.types.SsaoEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'SsaoEffect' }, options]);
     return cast null;

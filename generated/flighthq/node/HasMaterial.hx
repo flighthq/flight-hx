@@ -8,8 +8,8 @@ import flighthq.types.Material;
 
 class HasMaterial {
   @:noCompletion
-  public static function initMaterialTrait(target:flighthq.types.HasMaterial, ?obj:Dynamic):Void {
-    ((cast target : flighthq.types.HasMaterial).material = _Runtime.coalesce(_Runtime.optionalField(obj, 'material'), function():Dynamic return cast null));
-    ((cast target : flighthq.types.HasMaterial).materialData = _Runtime.coalesce(_Runtime.optionalField(obj, 'materialData'), function():Dynamic return cast null));
+  public static function initMaterialTrait(target:flighthq.types.HasMaterial, ?obj:flighthq._internal._Partial<flighthq.types.HasMaterial>):Void {
+    ((cast target : flighthq.types.HasMaterial).material = _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var material:Null<Material>; }).material; }), function():Dynamic return cast null));
+    ((cast target : flighthq.types.HasMaterial).materialData = _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var materialData:Null<flighthq._internal._Object>; }).materialData; }), function():Dynamic return cast null));
   }
 }

@@ -11,22 +11,22 @@ import flighthq.types.MeshGeometry.VertexSemantic;
 
 class MeshGeometryAttributes {
   public static function getMeshGeometryVertexColor0(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
-    return cast (cast MeshGeometryAttributes.getFourComponentAttribute__meshGeometryAttributes((cast out : { var w:Float; var x:Float; var y:Float; var z:Float; }), (cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast 'color0' : VertexSemantic), (cast true : Bool)) : Bool);
+    return cast (cast MeshGeometryAttributes.getFourComponentAttribute__meshGeometryAttributes((cast out), (cast geometry), (cast vertexIndex : Float), (cast 'color0'), (cast true : Bool)) : Bool);
     return cast null;
   }
 
   public static function getMeshGeometryVertexJoints0(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
-    return cast (cast MeshGeometryAttributes.getFourComponentAttribute__meshGeometryAttributes((cast out : { var w:Float; var x:Float; var y:Float; var z:Float; }), (cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast 'joints0' : VertexSemantic), (cast false : Bool)) : Bool);
+    return cast (cast MeshGeometryAttributes.getFourComponentAttribute__meshGeometryAttributes((cast out), (cast geometry), (cast vertexIndex : Float), (cast 'joints0'), (cast false : Bool)) : Bool);
     return cast null;
   }
 
   public static function getMeshGeometryVertexNormal(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
-    return cast (cast MeshGeometryAttributes.getFloat3Attribute__meshGeometryAttributes((cast out : { var x:Float; var y:Float; var z:Float; }), (cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast 'normal' : VertexSemantic)) : Bool);
+    return cast (cast MeshGeometryAttributes.getFloat3Attribute__meshGeometryAttributes((cast out), (cast geometry), (cast vertexIndex : Float), (cast 'normal')) : Bool);
     return cast null;
   }
 
   public static function getMeshGeometryVertexPosition(out:{ var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
-    return cast (cast MeshGeometryAttributes.getFloat3Attribute__meshGeometryAttributes((cast out : { var x:Float; var y:Float; var z:Float; }), (cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast 'position' : VertexSemantic)) : Bool);
+    return cast (cast MeshGeometryAttributes.getFloat3Attribute__meshGeometryAttributes((cast out), (cast geometry), (cast vertexIndex : Float), (cast 'position')) : Bool);
     return cast null;
   }
 
@@ -35,9 +35,9 @@ class MeshGeometryAttributes {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
-    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout : VertexAttributeLayout), (cast 'tangent' : VertexSemantic)) : Float);
+    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout), (cast 'tangent')) : Float);
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
@@ -54,9 +54,9 @@ class MeshGeometryAttributes {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
-    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout : VertexAttributeLayout), (cast 'uv0' : VertexSemantic)) : Float);
+    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout), (cast 'uv0')) : Float);
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
@@ -67,12 +67,12 @@ class MeshGeometryAttributes {
   }
 
   public static function getMeshGeometryVertexUv1(out:{ var x:Float; var y:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
-    return cast (cast MeshGeometryAttributes.getFloat2Attribute__meshGeometryAttributes((cast out : { var x:Float; var y:Float; }), (cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast 'uv1' : VertexSemantic)) : Bool);
+    return cast (cast MeshGeometryAttributes.getFloat2Attribute__meshGeometryAttributes((cast out), (cast geometry), (cast vertexIndex : Float), (cast 'uv1')) : Bool);
     return cast null;
   }
 
   public static function getMeshGeometryVertexWeights0(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
-    return cast (cast MeshGeometryAttributes.getFourComponentAttribute__meshGeometryAttributes((cast out : { var w:Float; var x:Float; var y:Float; var z:Float; }), (cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast 'weights0' : VertexSemantic), (cast false : Bool)) : Bool);
+    return cast (cast MeshGeometryAttributes.getFourComponentAttribute__meshGeometryAttributes((cast out), (cast geometry), (cast vertexIndex : Float), (cast 'weights0'), (cast false : Bool)) : Bool);
     return cast null;
   }
 
@@ -82,7 +82,7 @@ class MeshGeometryAttributes {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(attrs, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attrs, i).semantic, semantic) : Bool)) { return cast flighthq._internal._StaticIndex.readArray(attrs, i); }
+        if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(attrs, i) : { var semantic:VertexSemantic; }).semantic, semantic) : Bool)) { return cast flighthq._internal._StaticIndex.readArray(attrs, i); }
         i++;
       }
     }
@@ -98,7 +98,7 @@ class MeshGeometryAttributes {
       while ((cast ((cast i : Float) < (cast _Runtime.field(attrs, 'length') : Float)) : Bool)) {
         var attr:VertexAttribute = flighthq._internal._StaticIndex.readArray(attrs, i);
         if ((cast _Runtime.strictEquals(attr.semantic, semantic) : Bool)) {
-          if ((cast !(cast (cast attr.format : { var startsWith:flighthq._internal._Any; }).startsWith('float32') : Bool) : Bool)) { return cast -1.0; }
+          if ((cast !(cast (cast attr.format : { var startsWith:flighthq._internal._Any; }).startsWith((cast 'float32' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool) : Bool)) { return cast -1.0; }
           return cast (attr.byteOffset / 4.0);
         }
         i++;
@@ -109,22 +109,22 @@ class MeshGeometryAttributes {
   }
 
   public static function setMeshGeometryVertexColor0(geometry:MeshGeometry, vertexIndex:Float, r:Float, g:Float, b:Float, a:Float):Bool {
-    return cast (cast MeshGeometryAttributes.setFourComponentAttribute__meshGeometryAttributes((cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast 'color0' : VertexSemantic), (cast r : Float), (cast g : Float), (cast b : Float), (cast a : Float), (cast true : Bool)) : Bool);
+    return cast (cast MeshGeometryAttributes.setFourComponentAttribute__meshGeometryAttributes((cast geometry), (cast vertexIndex : Float), (cast 'color0'), (cast r : Float), (cast g : Float), (cast b : Float), (cast a : Float), (cast true : Bool)) : Bool);
     return cast null;
   }
 
   public static function setMeshGeometryVertexJoints0(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float, w:Float):Bool {
-    return cast (cast MeshGeometryAttributes.setFourComponentAttribute__meshGeometryAttributes((cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast 'joints0' : VertexSemantic), (cast x : Float), (cast y : Float), (cast z : Float), (cast w : Float), (cast false : Bool)) : Bool);
+    return cast (cast MeshGeometryAttributes.setFourComponentAttribute__meshGeometryAttributes((cast geometry), (cast vertexIndex : Float), (cast 'joints0'), (cast x : Float), (cast y : Float), (cast z : Float), (cast w : Float), (cast false : Bool)) : Bool);
     return cast null;
   }
 
   public static function setMeshGeometryVertexNormal(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
-    return cast (cast MeshGeometryAttributes.setFloat3Attribute__meshGeometryAttributes((cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast 'normal' : VertexSemantic), (cast x : Float), (cast y : Float), (cast z : Float)) : Bool);
+    return cast (cast MeshGeometryAttributes.setFloat3Attribute__meshGeometryAttributes((cast geometry), (cast vertexIndex : Float), (cast 'normal'), (cast x : Float), (cast y : Float), (cast z : Float)) : Bool);
     return cast null;
   }
 
   public static function setMeshGeometryVertexPosition(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float):Bool {
-    return cast (cast MeshGeometryAttributes.setFloat3Attribute__meshGeometryAttributes((cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast 'position' : VertexSemantic), (cast x : Float), (cast y : Float), (cast z : Float)) : Bool);
+    return cast (cast MeshGeometryAttributes.setFloat3Attribute__meshGeometryAttributes((cast geometry), (cast vertexIndex : Float), (cast 'position'), (cast x : Float), (cast y : Float), (cast z : Float)) : Bool);
     return cast null;
   }
 
@@ -133,9 +133,9 @@ class MeshGeometryAttributes {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
-    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout : VertexAttributeLayout), (cast 'tangent' : VertexSemantic)) : Float);
+    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout), (cast 'tangent')) : Float);
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
@@ -153,9 +153,9 @@ class MeshGeometryAttributes {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
-    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout : VertexAttributeLayout), (cast 'uv0' : VertexSemantic)) : Float);
+    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout), (cast 'uv0')) : Float);
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
@@ -167,12 +167,12 @@ class MeshGeometryAttributes {
   }
 
   public static function setMeshGeometryVertexUv1(geometry:MeshGeometry, vertexIndex:Float, u:Float, v:Float):Bool {
-    return cast (cast MeshGeometryAttributes.setFloat2Attribute__meshGeometryAttributes((cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast 'uv1' : VertexSemantic), (cast u : Float), (cast v : Float)) : Bool);
+    return cast (cast MeshGeometryAttributes.setFloat2Attribute__meshGeometryAttributes((cast geometry), (cast vertexIndex : Float), (cast 'uv1'), (cast u : Float), (cast v : Float)) : Bool);
     return cast null;
   }
 
   public static function setMeshGeometryVertexWeights0(geometry:MeshGeometry, vertexIndex:Float, x:Float, y:Float, z:Float, w:Float):Bool {
-    return cast (cast MeshGeometryAttributes.setFourComponentAttribute__meshGeometryAttributes((cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast 'weights0' : VertexSemantic), (cast x : Float), (cast y : Float), (cast z : Float), (cast w : Float), (cast false : Bool)) : Bool);
+    return cast (cast MeshGeometryAttributes.setFourComponentAttribute__meshGeometryAttributes((cast geometry), (cast vertexIndex : Float), (cast 'weights0'), (cast x : Float), (cast y : Float), (cast z : Float), (cast w : Float), (cast false : Bool)) : Bool);
     return cast null;
   }
 
@@ -182,11 +182,11 @@ class MeshGeometryAttributes {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
-    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout : VertexAttributeLayout), (cast semantic : VertexSemantic)) : Float);
+    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout), (cast semantic)) : Float);
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    attribute = (cast getVertexAttribute((cast geometry.layout : VertexAttributeLayout), (cast semantic : VertexSemantic)) : Null<VertexAttribute>);
-    if ((cast !_Runtime.strictEquals(({ final __typedStruct0 = attribute; __typedStruct0 == null ? _Runtime.UNDEFINED : (cast __typedStruct0 : flighthq.types.MeshGeometry.VertexAttribute).format; }), 'float32x2') : Bool)) { return cast false; }
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    attribute = (cast getVertexAttribute((cast geometry.layout), (cast semantic)) : Null<VertexAttribute>);
+    if ((cast !_Runtime.strictEquals(({ final __typedStruct0 = attribute; __typedStruct0 == null ? _Runtime.UNDEFINED : (cast __typedStruct0 : { var format:VertexFormat; }).format; }), 'float32x2') : Bool)) { return cast false; }
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
@@ -207,18 +207,18 @@ class MeshGeometryAttributes {
     var y:Float = cast _Runtime.UNDEFINED;
     var z:Float = cast _Runtime.UNDEFINED;
     var w:Float = cast _Runtime.UNDEFINED;
-    location = (cast MeshGeometryAttributes.getAttributeByteLocation__meshGeometryAttributes((cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast semantic : VertexSemantic)) : Null<{ var attribute:VertexAttribute; var byteOffset:Float; var view:flighthq._internal._Any; }>);
+    location = (cast MeshGeometryAttributes.getAttributeByteLocation__meshGeometryAttributes((cast geometry), (cast vertexIndex : Float), (cast semantic)) : Null<{ var attribute:VertexAttribute; var byteOffset:Float; var view:flighthq._internal._Any; }>);
     if ((cast _Runtime.strictEquals(location, null) : Bool)) { return cast false; }
     __destructure0 = location;
     attribute = _Runtime.field(__destructure0, 'attribute');
     byteOffset = _Runtime.field(__destructure0, 'byteOffset');
     view = _Runtime.field(__destructure0, 'view');
-    componentCount = (cast MeshGeometryAttributes.getVertexFormatComponentCount__meshGeometryAttributes(attribute.format) : Float);
+    componentCount = (cast MeshGeometryAttributes.getVertexFormatComponentCount__meshGeometryAttributes((cast attribute.format)) : Float);
     if ((cast ((cast !_Runtime.strictEquals(componentCount, 4.0) : Bool) && (cast !(cast _Runtime.andValue(allowFloat3, function():Dynamic return cast _Runtime.strictEquals(attribute.format, 'float32x3')) : Bool) : Bool)) : Bool)) { return cast false; }
-    x = (cast MeshGeometryAttributes.readVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), attribute.format, (cast 0.0 : Float)) : Float);
-    y = (cast MeshGeometryAttributes.readVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), attribute.format, (cast 1.0 : Float)) : Float);
-    z = (cast MeshGeometryAttributes.readVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), attribute.format, (cast 2.0 : Float)) : Float);
-    w = ((cast _Runtime.strictEquals(componentCount, 4.0) : Bool) ? (cast (cast MeshGeometryAttributes.readVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), attribute.format, (cast 3.0 : Float)) : Float) : Dynamic) : (cast 1.0 : Dynamic));
+    x = (cast MeshGeometryAttributes.readVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), (cast attribute.format), (cast 0.0 : Float)) : Float);
+    y = (cast MeshGeometryAttributes.readVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), (cast attribute.format), (cast 1.0 : Float)) : Float);
+    z = (cast MeshGeometryAttributes.readVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), (cast attribute.format), (cast 2.0 : Float)) : Float);
+    w = ((cast _Runtime.strictEquals(componentCount, 4.0) : Bool) ? (cast (cast MeshGeometryAttributes.readVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), (cast attribute.format), (cast 3.0 : Float)) : Float) : Dynamic) : (cast 1.0 : Dynamic));
     ((cast out : { var w:Float; var x:Float; var y:Float; var z:Float; }).x = x);
     ((cast out : { var w:Float; var x:Float; var y:Float; var z:Float; }).y = y);
     ((cast out : { var w:Float; var x:Float; var y:Float; var z:Float; }).z = z);
@@ -230,9 +230,9 @@ class MeshGeometryAttributes {
   public static function setFloat2Attribute__meshGeometryAttributes(geometry:MeshGeometry, vertexIndex:Float, semantic:VertexSemantic, x:Float, y:Float):Bool {
     var attribute:Null<VertexAttribute> = cast _Runtime.UNDEFINED;
     var location:Null<{ var attribute:VertexAttribute; var byteOffset:Float; var view:flighthq._internal._Any; }> = cast _Runtime.UNDEFINED;
-    attribute = (cast getVertexAttribute((cast geometry.layout : VertexAttributeLayout), (cast semantic : VertexSemantic)) : Null<VertexAttribute>);
-    if ((cast !_Runtime.strictEquals(({ final __typedStruct1 = attribute; __typedStruct1 == null ? _Runtime.UNDEFINED : (cast __typedStruct1 : flighthq.types.MeshGeometry.VertexAttribute).format; }), 'float32x2') : Bool)) { return cast false; }
-    location = (cast MeshGeometryAttributes.getAttributeByteLocation__meshGeometryAttributes((cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast semantic : VertexSemantic)) : Null<{ var attribute:VertexAttribute; var byteOffset:Float; var view:flighthq._internal._Any; }>);
+    attribute = (cast getVertexAttribute((cast geometry.layout), (cast semantic)) : Null<VertexAttribute>);
+    if ((cast !_Runtime.strictEquals(({ final __typedStruct1 = attribute; __typedStruct1 == null ? _Runtime.UNDEFINED : (cast __typedStruct1 : { var format:VertexFormat; }).format; }), 'float32x2') : Bool)) { return cast false; }
+    location = (cast MeshGeometryAttributes.getAttributeByteLocation__meshGeometryAttributes((cast geometry), (cast vertexIndex : Float), (cast semantic)) : Null<{ var attribute:VertexAttribute; var byteOffset:Float; var view:flighthq._internal._Any; }>);
     if ((cast _Runtime.strictEquals(location, null) : Bool)) { return cast false; }
     _Runtime.callProperty((cast location : { var attribute:VertexAttribute; var byteOffset:Float; var view:flighthq._internal._Any; }).view, 'setFloat32', cast ([(cast location : { var attribute:VertexAttribute; var byteOffset:Float; var view:flighthq._internal._Any; }).byteOffset, x, true] : Array<Dynamic>));
     _Runtime.callProperty((cast location : { var attribute:VertexAttribute; var byteOffset:Float; var view:flighthq._internal._Any; }).view, 'setFloat32', cast ([((cast location : { var attribute:VertexAttribute; var byteOffset:Float; var view:flighthq._internal._Any; }).byteOffset + 4.0), y, true] : Array<Dynamic>));
@@ -248,18 +248,18 @@ class MeshGeometryAttributes {
     var byteOffset:Float = cast _Runtime.UNDEFINED;
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var componentCount:Float = cast _Runtime.UNDEFINED;
-    location = (cast MeshGeometryAttributes.getAttributeByteLocation__meshGeometryAttributes((cast geometry : MeshGeometry), (cast vertexIndex : Float), (cast semantic : VertexSemantic)) : Null<{ var attribute:VertexAttribute; var byteOffset:Float; var view:flighthq._internal._Any; }>);
+    location = (cast MeshGeometryAttributes.getAttributeByteLocation__meshGeometryAttributes((cast geometry), (cast vertexIndex : Float), (cast semantic)) : Null<{ var attribute:VertexAttribute; var byteOffset:Float; var view:flighthq._internal._Any; }>);
     if ((cast _Runtime.strictEquals(location, null) : Bool)) { return cast false; }
     __destructure1 = location;
     attribute = _Runtime.field(__destructure1, 'attribute');
     byteOffset = _Runtime.field(__destructure1, 'byteOffset');
     view = _Runtime.field(__destructure1, 'view');
-    componentCount = (cast MeshGeometryAttributes.getVertexFormatComponentCount__meshGeometryAttributes(attribute.format) : Float);
+    componentCount = (cast MeshGeometryAttributes.getVertexFormatComponentCount__meshGeometryAttributes((cast attribute.format)) : Float);
     if ((cast ((cast !_Runtime.strictEquals(componentCount, 4.0) : Bool) && (cast !(cast _Runtime.andValue(allowFloat3, function():Dynamic return cast _Runtime.strictEquals(attribute.format, 'float32x3')) : Bool) : Bool)) : Bool)) { return cast false; }
-    MeshGeometryAttributes.writeVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), attribute.format, (cast 0.0 : Float), (cast x : Float));
-    MeshGeometryAttributes.writeVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), attribute.format, (cast 1.0 : Float), (cast y : Float));
-    MeshGeometryAttributes.writeVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), attribute.format, (cast 2.0 : Float), (cast z : Float));
-    if ((cast _Runtime.strictEquals(componentCount, 4.0) : Bool)) { MeshGeometryAttributes.writeVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), attribute.format, (cast 3.0 : Float), (cast w : Float)); }
+    MeshGeometryAttributes.writeVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), (cast attribute.format), (cast 0.0 : Float), (cast x : Float));
+    MeshGeometryAttributes.writeVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), (cast attribute.format), (cast 1.0 : Float), (cast y : Float));
+    MeshGeometryAttributes.writeVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), (cast attribute.format), (cast 2.0 : Float), (cast z : Float));
+    if ((cast _Runtime.strictEquals(componentCount, 4.0) : Bool)) { MeshGeometryAttributes.writeVertexComponent__meshGeometryAttributes((cast view : flighthq._internal._Any), (cast byteOffset : Float), (cast attribute.format), (cast 3.0 : Float), (cast w : Float)); }
     geometry.version++;
     return cast true;
     return cast null;
@@ -270,14 +270,14 @@ class MeshGeometryAttributes {
     var attributeByteLength:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var byteOffset:Float = cast _Runtime.UNDEFINED;
-    attribute = (cast getVertexAttribute((cast geometry.layout : VertexAttributeLayout), (cast semantic : VertexSemantic)) : Null<VertexAttribute>);
-    if ((cast ((cast ((cast _Runtime.strictEquals(attribute, null) : Bool) || (cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast geometry.layout.stride : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    attributeByteLength = (cast MeshGeometryAttributes.getVertexFormatByteLength__meshGeometryAttributes((cast attribute : flighthq.types.MeshGeometry.VertexAttribute).format) : Float);
-    if ((cast ((cast _Runtime.strictEquals(attributeByteLength, 0.0) : Bool) || (cast ((cast (cast attribute : flighthq.types.MeshGeometry.VertexAttribute).byteOffset : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    if ((cast ((cast ((cast attribute : flighthq.types.MeshGeometry.VertexAttribute).byteOffset + attributeByteLength) : Float) > (cast geometry.layout.stride : Float)) : Bool)) { return cast null; }
-    vertexCount = HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'byteLength'), geometry.layout.stride));
+    attribute = (cast getVertexAttribute((cast geometry.layout), (cast semantic)) : Null<VertexAttribute>);
+    if ((cast ((cast ((cast _Runtime.strictEquals(attribute, null) : Bool) || (cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast geometry.layout : { var stride:Float; }).stride : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    attributeByteLength = (cast MeshGeometryAttributes.getVertexFormatByteLength__meshGeometryAttributes((cast (cast attribute : { var format:VertexFormat; }).format)) : Float);
+    if ((cast ((cast _Runtime.strictEquals(attributeByteLength, 0.0) : Bool) || (cast ((cast (cast attribute : { var byteOffset:Float; }).byteOffset : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast ((cast attribute : { var byteOffset:Float; }).byteOffset + attributeByteLength) : Float) > (cast (cast geometry.layout : { var stride:Float; }).stride : Float)) : Bool)) { return cast null; }
+    vertexCount = HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'byteLength'), (cast geometry.layout : { var stride:Float; }).stride));
     if ((cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) { return cast null; }
-    byteOffset = ((vertexIndex * geometry.layout.stride) + (cast attribute : flighthq.types.MeshGeometry.VertexAttribute).byteOffset);
+    byteOffset = ((vertexIndex * (cast geometry.layout : { var stride:Float; }).stride) + (cast attribute : { var byteOffset:Float; }).byteOffset);
     if ((cast ((cast (byteOffset + attributeByteLength) : Float) > (cast _Runtime.field(geometry.vertices, 'byteLength') : Float)) : Bool)) { return cast null; }
     return cast { attribute: attribute, byteOffset: byteOffset, view: _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(geometry.vertices, 'buffer'), _Runtime.field(geometry.vertices, 'byteOffset'), _Runtime.field(geometry.vertices, 'byteLength')]) };
     return cast null;
@@ -368,9 +368,9 @@ class MeshGeometryAttributes {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
-    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout : VertexAttributeLayout), (cast semantic : VertexSemantic)) : Float);
+    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout), (cast semantic)) : Float);
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);
@@ -386,9 +386,9 @@ class MeshGeometryAttributes {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
-    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout : VertexAttributeLayout), (cast semantic : VertexSemantic)) : Float);
+    floatOffset = (cast getVertexAttributeFloatOffset((cast geometry.layout), (cast semantic)) : Float);
     if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast ((cast vertexIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast vertexIndex : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) { return cast false; }
     base = ((vertexIndex * floatsPerVertex) + floatOffset);

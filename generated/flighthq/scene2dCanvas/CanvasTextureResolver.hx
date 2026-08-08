@@ -12,13 +12,14 @@ import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types.Texture;
+import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureSourceKind;
 
 class CanvasTextureResolver {
   public static function connectCanvasTextureResolverMisses(resolvers:CanvasTextureResolvers, state:RenderState):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getRenderStateRuntime((cast state : RenderState)) : RenderStateRuntime);
-    ((cast resolvers : CanvasTextureResolvers).registryMiss = function(registry:RenderRegistry, kind:String):Null<Void> return _Runtime.callOptionalValue((cast runtime : RenderStateRuntime).registryMiss, cast ([registry, kind] : Array<Dynamic>)));
+    runtime = (cast getRenderStateRuntime((cast state)) : RenderStateRuntime);
+    ((cast resolvers : { @:optional var registryMiss:Null<RenderRegistry->String->Void>; }).registryMiss = (cast function(registry:RenderRegistry, kind:String):Void { _Runtime.callOptionalValue((cast runtime : RenderStateRuntime).registryMiss, cast ([registry, kind] : Array<Dynamic>)); }));
   }
 
   public static function createCanvasTextureResolvers():CanvasTextureResolvers {
@@ -29,7 +30,7 @@ class CanvasTextureResolver {
   public static function registerCanvasTextureResolver(resolvers:CanvasTextureResolvers, sourceKind:TextureSourceKind, resolver:Null<flighthq.types.CanvasTextureResolver>):Void {
     var registry:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     registry = ((cast resolvers : CanvasTextureResolvers).registry ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
-    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).set(sourceKind, resolver)); }
+    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).set(sourceKind, (cast resolver))); }
   }
 
   @:noCompletion
@@ -37,14 +38,14 @@ class CanvasTextureResolver {
     var sourceKind:Null<String> = cast _Runtime.UNDEFINED;
     var resolver:Null<flighthq.types.CanvasTextureResolver> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) { return cast null; }
-    sourceKind = (cast getTextureSourceKind(texture) : Null<String>);
+    sourceKind = (cast getTextureSourceKind((cast texture)) : Null<String>);
     if ((cast _Runtime.strictEquals(sourceKind, null) : Bool)) { return cast null; }
     resolver = ({ final __collection0:Dynamic = (cast resolvers : CanvasTextureResolvers).registry; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, flighthq.types.CanvasTextureResolver>).get(sourceKind)); });
     if ((cast _Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callOptionalValue((cast resolvers : CanvasTextureResolvers).registryMiss, cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;
     }
-    return cast (cast resolver((cast resolvers : CanvasTextureResolvers), (cast texture : Texture)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
+    return cast (cast resolver((cast resolvers), (cast texture)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     return cast null;
   }
 }

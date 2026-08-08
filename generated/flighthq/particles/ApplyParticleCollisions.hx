@@ -16,7 +16,7 @@ import flighthq.types.RectangleCollider;
 import flighthq.types.SphereCollider;
 
 class ApplyParticleCollisions {
-  public static final s__applyParticleCollisions:Array<Float> = cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static final s__applyParticleCollisions:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 
   public static function applyParticleCollisions(emitter:ParticleEmitter2D, state:ParticleEmitterState, colliders:Array<ParticleCollider>):Void {
     var data:ParticleEmitterData = cast _Runtime.UNDEFINED;
@@ -41,7 +41,7 @@ class ApplyParticleCollisions {
         flighthq._internal._StaticIndex.writeArray(ApplyParticleCollisions.s__applyParticleCollisions, 3.0, flighthq._internal._StaticIndex.readFloat32Array(velocities, vt));
         flighthq._internal._StaticIndex.writeArray(ApplyParticleCollisions.s__applyParticleCollisions, 4.0, flighthq._internal._StaticIndex.readFloat32Array(velocities, (vt + 1.0)));
         flighthq._internal._StaticIndex.writeArray(ApplyParticleCollisions.s__applyParticleCollisions, 5.0, flighthq._internal._StaticIndex.readFloat32Array(velocities, (vt + 2.0)));
-        if ((cast (cast ApplyParticleCollisions.resolveColliders__applyParticleCollisions((cast colliders : Array<ParticleCollider>), (cast ApplyParticleCollisions.s__applyParticleCollisions : Array<Float>)) : Bool) : Bool)) {
+        if ((cast (cast ApplyParticleCollisions.resolveColliders__applyParticleCollisions((cast colliders), (cast ApplyParticleCollisions.s__applyParticleCollisions)) : Bool) : Bool)) {
           flighthq._internal._StaticIndex.writeFloat32Array(transforms, tt, flighthq._internal._StaticIndex.readArray(ApplyParticleCollisions.s__applyParticleCollisions, 0.0));
           flighthq._internal._StaticIndex.writeFloat32Array(transforms, (tt + 1.0), flighthq._internal._StaticIndex.readArray(ApplyParticleCollisions.s__applyParticleCollisions, 1.0));
           if ((cast ((cast _Runtime.field(positionsZ, 'length') : Float) > (cast i : Float)) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(positionsZ, i, flighthq._internal._StaticIndex.readArray(ApplyParticleCollisions.s__applyParticleCollisions, 2.0)); }
@@ -65,15 +65,15 @@ class ApplyParticleCollisions {
       while ((cast ((cast i : Float) < (cast _Runtime.field(objects, 'length') : Float)) : Bool)) {
         if ((cast ((cast flighthq._internal._StaticIndex.readFloat32Array(lifetimes, ((i * 2.0) + 1.0)) : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
         var vt:Float = (i * 2.0);
-        flighthq._internal._StaticIndex.writeArray(ApplyParticleCollisions.s__applyParticleCollisions, 0.0, flighthq._internal._StaticIndex.readArray(objects, i).x);
-        flighthq._internal._StaticIndex.writeArray(ApplyParticleCollisions.s__applyParticleCollisions, 1.0, flighthq._internal._StaticIndex.readArray(objects, i).y);
+        flighthq._internal._StaticIndex.writeArray(ApplyParticleCollisions.s__applyParticleCollisions, 0.0, (cast flighthq._internal._StaticIndex.readArray(objects, i) : { var x:Float; }).x);
+        flighthq._internal._StaticIndex.writeArray(ApplyParticleCollisions.s__applyParticleCollisions, 1.0, (cast flighthq._internal._StaticIndex.readArray(objects, i) : { var y:Float; }).y);
         flighthq._internal._StaticIndex.writeArray(ApplyParticleCollisions.s__applyParticleCollisions, 2.0, 0.0);
         flighthq._internal._StaticIndex.writeArray(ApplyParticleCollisions.s__applyParticleCollisions, 3.0, flighthq._internal._StaticIndex.readFloat32Array(velocities, vt));
         flighthq._internal._StaticIndex.writeArray(ApplyParticleCollisions.s__applyParticleCollisions, 4.0, flighthq._internal._StaticIndex.readFloat32Array(velocities, (vt + 1.0)));
         flighthq._internal._StaticIndex.writeArray(ApplyParticleCollisions.s__applyParticleCollisions, 5.0, 0.0);
-        if ((cast (cast ApplyParticleCollisions.resolveColliders__applyParticleCollisions((cast colliders : Array<ParticleCollider>), (cast ApplyParticleCollisions.s__applyParticleCollisions : Array<Float>)) : Bool) : Bool)) {
-          (flighthq._internal._StaticIndex.readArray(objects, i).x = cast (flighthq._internal._StaticIndex.readArray(ApplyParticleCollisions.s__applyParticleCollisions, 0.0) : Dynamic));
-          (flighthq._internal._StaticIndex.readArray(objects, i).y = cast (flighthq._internal._StaticIndex.readArray(ApplyParticleCollisions.s__applyParticleCollisions, 1.0) : Dynamic));
+        if ((cast (cast ApplyParticleCollisions.resolveColliders__applyParticleCollisions((cast colliders), (cast ApplyParticleCollisions.s__applyParticleCollisions)) : Bool) : Bool)) {
+          ((cast flighthq._internal._StaticIndex.readArray(objects, i) : { var x:Float; }).x = cast (flighthq._internal._StaticIndex.readArray(ApplyParticleCollisions.s__applyParticleCollisions, 0.0) : Dynamic));
+          ((cast flighthq._internal._StaticIndex.readArray(objects, i) : { var y:Float; }).y = cast (flighthq._internal._StaticIndex.readArray(ApplyParticleCollisions.s__applyParticleCollisions, 1.0) : Dynamic));
           flighthq._internal._StaticIndex.writeFloat32Array(velocities, vt, flighthq._internal._StaticIndex.readArray(ApplyParticleCollisions.s__applyParticleCollisions, 3.0));
           flighthq._internal._StaticIndex.writeFloat32Array(velocities, (vt + 1.0), flighthq._internal._StaticIndex.readArray(ApplyParticleCollisions.s__applyParticleCollisions, 4.0));
         }
@@ -92,16 +92,16 @@ class ApplyParticleCollisions {
         {
           var __switchValue = (cast collider : { var kind:String; }).kind;
           if (__switchValue == 'PlaneCollider') {
-            (hit = cast (((cast (cast ApplyParticleCollisions.resolvePlane__applyParticleCollisions((cast collider : PlaneCollider), (cast p : Array<Float>)) : Bool) : Bool) || (cast hit : Bool)) : Dynamic));
+            (hit = cast (((cast (cast ApplyParticleCollisions.resolvePlane__applyParticleCollisions((cast collider), (cast p)) : Bool) : Bool) || (cast hit : Bool)) : Dynamic));
           }
           else if (__switchValue == 'CircleCollider') {
-            (hit = cast (((cast (cast ApplyParticleCollisions.resolveCircle__applyParticleCollisions((cast collider : CircleCollider), (cast p : Array<Float>)) : Bool) : Bool) || (cast hit : Bool)) : Dynamic));
+            (hit = cast (((cast (cast ApplyParticleCollisions.resolveCircle__applyParticleCollisions((cast collider), (cast p)) : Bool) : Bool) || (cast hit : Bool)) : Dynamic));
           }
           else if (__switchValue == 'RectangleCollider') {
-            (hit = cast (((cast (cast ApplyParticleCollisions.resolveRect__applyParticleCollisions((cast collider : RectangleCollider), (cast p : Array<Float>)) : Bool) : Bool) || (cast hit : Bool)) : Dynamic));
+            (hit = cast (((cast (cast ApplyParticleCollisions.resolveRect__applyParticleCollisions((cast collider), (cast p)) : Bool) : Bool) || (cast hit : Bool)) : Dynamic));
           }
           else if (__switchValue == 'SphereCollider') {
-            (hit = cast (((cast (cast ApplyParticleCollisions.resolveSphere__applyParticleCollisions((cast collider : SphereCollider), (cast p : Array<Float>)) : Bool) : Bool) || (cast hit : Bool)) : Dynamic));
+            (hit = cast (((cast (cast ApplyParticleCollisions.resolveSphere__applyParticleCollisions((cast collider), (cast p)) : Bool) : Bool) || (cast hit : Bool)) : Dynamic));
           }
         }
         c++;
@@ -120,7 +120,7 @@ class ApplyParticleCollisions {
     ({ var __indexedObject0:Dynamic = p; var __indexedKey1:Dynamic = 0.0; flighthq._internal._StaticIndex.writeArray(__indexedObject0, __indexedKey1, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject0, __indexedKey1), (c.nx * depth))); });
     ({ var __indexedObject2:Dynamic = p; var __indexedKey3:Dynamic = 1.0; flighthq._internal._StaticIndex.writeArray(__indexedObject2, __indexedKey3, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject2, __indexedKey3), (c.ny * depth))); });
     ({ var __indexedObject4:Dynamic = p; var __indexedKey5:Dynamic = 2.0; flighthq._internal._StaticIndex.writeArray(__indexedObject4, __indexedKey5, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject4, __indexedKey5), (nz * depth))); });
-    ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p : Array<Float>), (cast c.nx : Float), (cast c.ny : Float), (cast nz : Float), (cast _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0) : Float));
+    ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p), (cast c.nx : Float), (cast c.ny : Float), (cast nz : Float), (cast _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0) : Float));
     return cast true;
     return cast null;
   }
@@ -140,7 +140,7 @@ class ApplyParticleCollisions {
       var ny:Float = (dy / dist);
       flighthq._internal._StaticIndex.writeArray(p, 0.0, (c.x + (nx * c.radius)));
       flighthq._internal._StaticIndex.writeArray(p, 1.0, (c.y + (ny * c.radius)));
-      ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p : Array<Float>), (cast nx : Float), (cast ny : Float), (cast 0.0 : Float), (cast _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0) : Float));
+      ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p), (cast nx : Float), (cast ny : Float), (cast 0.0 : Float), (cast _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0) : Float));
       return cast true;
     }
     if ((cast ((cast dist : Float) <= (cast c.radius : Float)) : Bool)) { return cast false; }
@@ -148,7 +148,7 @@ class ApplyParticleCollisions {
     ny = ((cast ((cast dist : Float) <= (cast 0.000001 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast (-dy / dist) : Dynamic));
     flighthq._internal._StaticIndex.writeArray(p, 0.0, (c.x - (nx * c.radius)));
     flighthq._internal._StaticIndex.writeArray(p, 1.0, (c.y - (ny * c.radius)));
-    ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p : Array<Float>), (cast nx : Float), (cast ny : Float), (cast 0.0 : Float), (cast _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0) : Float));
+    ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p), (cast nx : Float), (cast ny : Float), (cast 0.0 : Float), (cast _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0) : Float));
     return cast true;
     return cast null;
   }
@@ -179,20 +179,20 @@ class ApplyParticleCollisions {
       var hit:Bool = false;
       if ((cast ((cast flighthq._internal._StaticIndex.readArray(p, 0.0) : Float) < (cast minX : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(p, 0.0, minX);
-        ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p : Array<Float>), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
+        ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
         (hit = cast (true : Dynamic));
       } else { if ((cast ((cast flighthq._internal._StaticIndex.readArray(p, 0.0) : Float) > (cast maxX : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(p, 0.0, maxX);
-        ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p : Array<Float>), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
+        ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
         (hit = cast (true : Dynamic));
       } }
       if ((cast ((cast flighthq._internal._StaticIndex.readArray(p, 1.0) : Float) < (cast minY : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(p, 1.0, minY);
-        ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p : Array<Float>), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
+        ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
         (hit = cast (true : Dynamic));
       } else { if ((cast ((cast flighthq._internal._StaticIndex.readArray(p, 1.0) : Float) > (cast maxY : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(p, 1.0, maxY);
-        ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p : Array<Float>), (cast 0.0 : Float), (cast -1.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
+        ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p), (cast 0.0 : Float), (cast -1.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
         (hit = cast (true : Dynamic));
       } }
       return cast hit;
@@ -205,16 +205,16 @@ class ApplyParticleCollisions {
     minPen = HxMath.min(HxMath.min(HxMath.min(left, right), top), bottom);
     if ((cast _Runtime.strictEquals(minPen, left) : Bool)) {
       flighthq._internal._StaticIndex.writeArray(p, 0.0, minX);
-      ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p : Array<Float>), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
+      ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
     } else { if ((cast _Runtime.strictEquals(minPen, right) : Bool)) {
       flighthq._internal._StaticIndex.writeArray(p, 0.0, maxX);
-      ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p : Array<Float>), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
+      ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
     } else { if ((cast _Runtime.strictEquals(minPen, top) : Bool)) {
       flighthq._internal._StaticIndex.writeArray(p, 1.0, minY);
-      ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p : Array<Float>), (cast 0.0 : Float), (cast -1.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
+      ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p), (cast 0.0 : Float), (cast -1.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
     } else {
       flighthq._internal._StaticIndex.writeArray(p, 1.0, maxY);
-      ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p : Array<Float>), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
+      ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast restitution : Float), (cast friction : Float));
     } } }
     return cast true;
     return cast null;
@@ -240,7 +240,7 @@ class ApplyParticleCollisions {
       flighthq._internal._StaticIndex.writeArray(p, 0.0, (c.x + (nx * c.radius)));
       flighthq._internal._StaticIndex.writeArray(p, 1.0, (c.y + (ny * c.radius)));
       flighthq._internal._StaticIndex.writeArray(p, 2.0, (c.z + (nz * c.radius)));
-      ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p : Array<Float>), (cast nx : Float), (cast ny : Float), (cast nz : Float), (cast _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0) : Float));
+      ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p), (cast nx : Float), (cast ny : Float), (cast nz : Float), (cast _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0) : Float));
       return cast true;
     }
     if ((cast ((cast dist : Float) <= (cast c.radius : Float)) : Bool)) { return cast false; }
@@ -250,7 +250,7 @@ class ApplyParticleCollisions {
     flighthq._internal._StaticIndex.writeArray(p, 0.0, (c.x - (nx * c.radius)));
     flighthq._internal._StaticIndex.writeArray(p, 1.0, (c.y - (ny * c.radius)));
     flighthq._internal._StaticIndex.writeArray(p, 2.0, (c.z - (nz * c.radius)));
-    ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p : Array<Float>), (cast nx : Float), (cast ny : Float), (cast nz : Float), (cast _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0) : Float));
+    ApplyParticleCollisions.reflect3__applyParticleCollisions((cast p), (cast nx : Float), (cast ny : Float), (cast nz : Float), (cast _Runtime.coalesce(c.restitution, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(c.friction, function():Dynamic return cast 0.0) : Float));
     return cast true;
     return cast null;
   }

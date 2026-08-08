@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ColorGradeAdjustment = { var kind:AdjustmentKind; var transform:ColorTransformFunction; @:optional var exposure:Float; @:optional var brightness:Float; @:optional var contrast:Float; @:optional var saturation:Float; @:optional var temperature:Float; @:optional var tint:Float; @:optional var lift:Float; @:optional var gamma:Float; @:optional var gain:Float; };
+typedef ColorGradeAdjustment = { var kind:String; var transform:ColorTransformFunction; @:optional var exposure:Float; @:optional var brightness:Float; @:optional var contrast:Float; @:optional var saturation:Float; @:optional var temperature:Float; @:optional var tint:Float; @:optional var lift:Float; @:optional var gamma:Float; @:optional var gain:Float; };

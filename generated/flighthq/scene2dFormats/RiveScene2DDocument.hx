@@ -39,19 +39,19 @@ class RiveScene2DDocument {
   public static function createRiveImageSprite(name:String, assetIndex:Float):DisplayObject {
     var texture:Texture2D = cast _Runtime.UNDEFINED;
     var sprite:Sprite = cast _Runtime.UNDEFINED;
-    texture = (cast createTexture({ dimension: '2d', source: null }) : Texture2D);
-    sprite = (cast createSprite({ data: { texture: texture }, name: name }) : Sprite);
-    ((cast RiveScene2DDocument._imageTextures__riveScene2DDocument : flighthq._internal._WeakMap<Node2D, Texture>).set(sprite, texture));
-    ((cast RiveScene2DDocument._imageAssetIndices__riveScene2DDocument : flighthq._internal._WeakMap<Node2D, Float>).set(sprite, assetIndex));
+    texture = (cast createTexture((cast { dimension: '2d', source: null })) : Texture2D);
+    sprite = (cast createSprite((cast { data: { texture: texture }, name: name })) : Sprite);
+    ((cast RiveScene2DDocument._imageTextures__riveScene2DDocument : flighthq._internal._WeakMap<Node2D, Texture>).set(sprite, (cast texture)));
+    ((cast RiveScene2DDocument._imageAssetIndices__riveScene2DDocument : flighthq._internal._WeakMap<Node2D, Float>).set(sprite, (cast assetIndex)));
     return cast sprite;
     return cast null;
   }
 
   public static function createRiveSlots__riveScene2DDocument(artboards:Array<RiveArtboardImport>):Array<Scene2DSlotReference> {
     var slots:Array<Scene2DSlotReference> = cast _Runtime.UNDEFINED;
-    slots = cast ([] : Array<Dynamic>);
+    slots = (cast cast ([] : Array<Dynamic>));
     for (artboard in _Runtime.iterable(artboards)) {
-      RiveScene2DDocument.collectRiveSlots__riveScene2DDocument((cast _Runtime.field(artboard, 'root') : Node2D), (cast artboards : Array<RiveArtboardImport>), (cast slots : Array<Scene2DSlotReference>));
+      RiveScene2DDocument.collectRiveSlots__riveScene2DDocument((cast _Runtime.field(artboard, 'root')), (cast artboards), (cast slots));
     }
     return cast slots;
     return cast null;
@@ -66,8 +66,8 @@ class RiveScene2DDocument {
     }
     {
       var index:Float = 0.0;
-      while ((cast ((cast index : Float) < (cast (cast getNodeChildCount(node) : Float) : Float)) : Bool)) {
-        RiveScene2DDocument.collectRiveSlots__riveScene2DDocument((cast (cast (cast getNodeChildAt(node, (cast index : Float)) : Node2D) : Node2D) : Node2D), (cast artboards : Array<RiveArtboardImport>), (cast slots : Array<Scene2DSlotReference>));
+      while ((cast ((cast index : Float) < (cast (cast getNodeChildCount((cast node)) : Float) : Float)) : Bool)) {
+        RiveScene2DDocument.collectRiveSlots__riveScene2DDocument((cast (cast getNodeChildAt((cast node), (cast index : Float)) : Node2D)), (cast artboards), (cast slots));
         index++;
       }
     }
@@ -75,14 +75,14 @@ class RiveScene2DDocument {
 
   public static function createRiveImageResources__riveScene2DDocument(imported:RiveDocumentImportResult):Array<ImageResourceReference> {
     var references:Array<ImageResourceReference> = cast _Runtime.UNDEFINED;
-    references = cast ([] : Array<Dynamic>);
+    references = (cast cast ([] : Array<Dynamic>));
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(imported, 'assets'), 'length') : Float)) : Bool)) {
         var asset:RiveFileAsset = flighthq._internal._StaticIndex.readArray(_Runtime.field(imported, 'assets'), index);
         if ((cast ((cast !_Runtime.strictEquals((cast asset : RiveFileAsset).kind, RiveScene2DDocument.RIVE_IMAGE_ASSET_KIND__riveScene2DDocument) : Bool) || (cast _Runtime.strictEquals((cast asset : RiveFileAsset).bytes, null) : Bool)) : Bool)) { index++; continue; }
-        var reference:EmbeddedImageResourceReference = (cast createEmbeddedImageResourceReference((cast (cast asset : RiveFileAsset).bytes : flighthq._internal._UInt8Array), (cast (cast RiveScene2DDocument.toRiveMimeType__riveScene2DDocument((cast (cast asset : RiveFileAsset).bytes : flighthq._internal._UInt8Array)) : Null<String>) : Null<String>)) : EmbeddedImageResourceReference);
-        (reference.textures = cast ((cast RiveScene2DDocument.collectRiveTexturesForAsset__riveScene2DDocument((cast imported : RiveDocumentImportResult), (cast index : Float)) : Null<Array<Texture>>) : Dynamic));
+        var reference:EmbeddedImageResourceReference = (cast createEmbeddedImageResourceReference((cast (cast asset : RiveFileAsset).bytes), (cast (cast RiveScene2DDocument.toRiveMimeType__riveScene2DDocument((cast (cast asset : RiveFileAsset).bytes)) : Null<String>))) : EmbeddedImageResourceReference);
+        (reference.textures = cast ((cast RiveScene2DDocument.collectRiveTexturesForAsset__riveScene2DDocument((cast imported), (cast index : Float)) : Array<Texture>) : Dynamic));
         _Runtime.callProperty(references, 'push', cast ([reference] : Array<Dynamic>));
         index++;
       }
@@ -93,7 +93,7 @@ class RiveScene2DDocument {
 
   public static function collectRiveTexturesForAsset__riveScene2DDocument(imported:RiveDocumentImportResult, assetIndex:Float):Array<Texture> {
     var textures:Array<Texture> = cast _Runtime.UNDEFINED;
-    textures = cast ([] : Array<Dynamic>);
+    textures = (cast cast ([] : Array<Dynamic>));
     for (artboard in _Runtime.iterable(_Runtime.field(imported, 'artboards'))) {
       var walk:Node2D->Void = cast _Runtime.UNDEFINED;
       walk = (cast function(node:Node2D):Void {
@@ -102,13 +102,13 @@ class RiveScene2DDocument {
         if ((cast ((cast !_Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(((cast RiveScene2DDocument._imageAssetIndices__riveScene2DDocument : flighthq._internal._WeakMap<Node2D, Float>).get(node)), assetIndex) : Bool)) : Bool)) { _Runtime.callProperty(textures, 'push', cast ([texture] : Array<Dynamic>)); }
         {
           var index:Float = 0.0;
-          while ((cast ((cast index : Float) < (cast (cast getNodeChildCount(node) : Float) : Float)) : Bool)) {
-            walk((cast (cast (cast getNodeChildAt(node, (cast index : Float)) : Node2D) : Node2D) : Node2D));
+          while ((cast ((cast index : Float) < (cast (cast getNodeChildCount((cast node)) : Float) : Float)) : Bool)) {
+            walk((cast (cast getNodeChildAt((cast node), (cast index : Float)) : Node2D)));
             index++;
           }
         }
-      } : Node2D->Void);
-      walk((cast (cast artboard : RiveArtboardImport).root : Node2D));
+      });
+      walk((cast (cast artboard : RiveArtboardImport).root));
     }
     return cast textures;
     return cast null;
@@ -118,19 +118,19 @@ class RiveScene2DDocument {
   public static function createScene2DDocumentFromRiveDocument(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<RiveScene2DDocumentResult> {
     var imported:RiveDocumentImportResult = cast _Runtime.UNDEFINED;
     var root:DisplayObject = cast _Runtime.UNDEFINED;
-    imported = (cast createScene2DFromRiveDocument((cast source : flighthq._internal._UInt8Array), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : RiveDocumentImportResult);
+    imported = (cast createScene2DFromRiveDocument((cast source), (cast diagnostics)) : RiveDocumentImportResult);
     if ((cast _Runtime.strictEquals(_Runtime.field((cast imported : RiveDocumentImportResult).artboards, 'length'), 0.0) : Bool)) { return cast null; }
-    root = (cast createDisplayObject({ name: 'Rive' }) : DisplayObject);
+    root = (cast createDisplayObject((cast { name: 'Rive' })) : DisplayObject);
     for (artboard in _Runtime.iterable((cast imported : RiveDocumentImportResult).artboards)) {
-      (cast addNodeChild(root, (cast artboard : RiveArtboardImport).root) : NodeOf<Node2DTraits>);
+      (cast addNodeChild((cast root), (cast (cast artboard : RiveArtboardImport).root)) : NodeOf<Node2DTraits>);
     }
-    return cast { imageResources: (cast RiveScene2DDocument.createRiveImageResources__riveScene2DDocument((cast imported : RiveDocumentImportResult)) : Array<ImageResourceReference>), imported: imported, root: root, slots: (cast RiveScene2DDocument.createRiveSlots__riveScene2DDocument((cast (cast imported : RiveDocumentImportResult).artboards : Array<RiveArtboardImport>)) : Array<Scene2DSlotReference>) };
+    return cast { imageResources: (cast RiveScene2DDocument.createRiveImageResources__riveScene2DDocument((cast imported)) : Array<ImageResourceReference>), imported: imported, root: root, slots: (cast RiveScene2DDocument.createRiveSlots__riveScene2DDocument((cast (cast imported : RiveDocumentImportResult).artboards)) : Array<Scene2DSlotReference>) };
     return cast null;
   }
 
   @:noCompletion
   public static function markRiveNestedArtboard(node:Node2D, artboardIndex:Float):Void {
-    ((cast RiveScene2DDocument._nestedArtboards__riveScene2DDocument : flighthq._internal._WeakMap<Node2D, Float>).set(node, artboardIndex));
+    ((cast RiveScene2DDocument._nestedArtboards__riveScene2DDocument : flighthq._internal._WeakMap<Node2D, Float>).set(node, (cast artboardIndex)));
   }
 
   public static function toRiveMimeType__riveScene2DDocument(bytes:flighthq._internal._UInt8Array):Null<String> {

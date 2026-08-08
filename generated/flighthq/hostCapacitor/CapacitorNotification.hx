@@ -16,6 +16,7 @@ import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationPermission;
 import flighthq.types.Notification.NotificationRequest;
 import flighthq.types.Notification.NotificationSchedule;
+import flighthq.types.Notification.ScheduledNotification;
 
 class CapacitorNotification {
   public static function createCapacitorNotificationBackend(capacitor:CapacitorApi):NotificationBackend {
@@ -29,7 +30,7 @@ class CapacitorNotification {
     cachedPermission = 'default';
     flighthq._internal._Async.recover(_Runtime.callProperty((cast notifications : CapacitorLocalNotificationsPlugin).checkPermissions(), 'then', cast ([function(status:CapacitorLocalNotificationsPermission):Void {
       (cachedPermission = cast ((cast CapacitorNotification.toNotificationPermission__capacitorNotification((cast (cast status : CapacitorLocalNotificationsPermission).display : String)) : NotificationPermission) : Dynamic));
-    }] : Array<Dynamic>)), function():Void {
+    }] : Array<Dynamic>)), function(__unused0:flighthq._internal._Any):Void {
 
     });
     return cast { notify: function(request:NotificationRequest):flighthq._internal._Promise<String> {
@@ -39,9 +40,9 @@ class CapacitorNotification {
           var stringId:String = cast _Runtime.UNDEFINED;
           numericId = nextNumericId++;
           stringId = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(numericId) + '');
-          ((cast idByNumber : flighthq._internal._Map<Float, String>).set(numericId, stringId));
+          ((cast idByNumber : flighthq._internal._Map<Float, String>).set(numericId, (cast stringId)));
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast notifications : CapacitorLocalNotificationsPlugin).schedule({ notifications: cast ([{ id: numericId, title: request.title, body: request.body }] : Array<Dynamic>) }), function(__awaitValue0:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast notifications : CapacitorLocalNotificationsPlugin).schedule((cast { notifications: cast ([{ id: numericId, title: request.title, body: request.body }] : Array<Dynamic>) })), function(__awaitValue0:Dynamic):Dynamic {
               __awaitValue0;
               return flighthq._internal._Async.flowReturn(stringId);
             });
@@ -77,26 +78,29 @@ class CapacitorNotification {
       );
     }, getPermission: function():NotificationPermission {
       return cast cachedPermission;
+      return cast _Runtime.UNDEFINED;
     }, isSupported: function():Bool {
       return cast true;
+      return cast _Runtime.UNDEFINED;
     }, getCapabilities: function():NotificationCapabilities {
       return cast { actions: true, channels: true, coldStart: true, image: false, listActive: false, scheduling: true, textReply: false };
-    }, getLaunchNotification: function():flighthq._internal._Promise<flighthq._internal._Any> {
+      return cast _Runtime.UNDEFINED;
+    }, getLaunchNotification: function():flighthq._internal._Promise<Null<NotificationRequest>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, getActiveNotifications: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
+    }, getActiveNotifications: function():flighthq._internal._Promise<Array<NotificationRequest>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
-    }, getPendingNotifications: function():flighthq._internal._Promise<Array<{ var id:String; var request:{ var id:String; var title:String; var body:Null<String>; }; var schedule:{ var at:Float; }; }>> {
+    }, getPendingNotifications: function():flighthq._internal._Promise<Array<ScheduledNotification>> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var pending:CapacitorLocalNotificationsPending = cast _Runtime.UNDEFINED;
             return flighthq._internal._Async.flatMap((cast notifications : CapacitorLocalNotificationsPlugin).getPending(), function(__awaitValue2:Dynamic):Dynamic {
               pending = __awaitValue2;
-              return flighthq._internal._Async.flowReturn(_Runtime.callProperty((cast pending : CapacitorLocalNotificationsPending).notifications, 'map', cast ([function(schema:CapacitorLocalNotificationSchema, __unused0:Float, __unused1:Array<CapacitorLocalNotificationSchema>):{ var id:String; var request:{ var id:String; var title:String; var body:Null<String>; }; var schedule:{ var at:Float; }; } return { id: _Runtime.coalesce(((cast idByNumber : flighthq._internal._Map<Float, String>).get((cast schema : CapacitorLocalNotificationSchema).id)), function():Dynamic return cast Std.string((cast schema : CapacitorLocalNotificationSchema).id)), request: { id: _Runtime.coalesce(((cast idByNumber : flighthq._internal._Map<Float, String>).get((cast schema : CapacitorLocalNotificationSchema).id)), function():Dynamic return cast Std.string((cast schema : CapacitorLocalNotificationSchema).id)), title: (cast schema : CapacitorLocalNotificationSchema).title, body: (cast schema : CapacitorLocalNotificationSchema).body }, schedule: { at: _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.optionalField((cast schema : CapacitorLocalNotificationSchema).schedule, 'at'), 'getTime', cast ([] : Array<Dynamic>)), function():Dynamic return cast 0.0) } }] : Array<Dynamic>)));
+              return flighthq._internal._Async.flowReturn(_Runtime.callProperty((cast pending : CapacitorLocalNotificationsPending).notifications, 'map', cast ([function(schema:CapacitorLocalNotificationSchema, __unused1:Float, __unused2:Array<CapacitorLocalNotificationSchema>):{ var id:String; var request:{ var id:String; var title:String; var body:Null<String>; }; var schedule:{ var at:Float; }; } return { id: _Runtime.coalesce(((cast idByNumber : flighthq._internal._Map<Float, String>).get((cast schema : CapacitorLocalNotificationSchema).id)), function():Dynamic return cast Std.string((cast schema : CapacitorLocalNotificationSchema).id)), request: { id: _Runtime.coalesce(((cast idByNumber : flighthq._internal._Map<Float, String>).get((cast schema : CapacitorLocalNotificationSchema).id)), function():Dynamic return cast Std.string((cast schema : CapacitorLocalNotificationSchema).id)), title: (cast schema : CapacitorLocalNotificationSchema).title, body: (cast schema : CapacitorLocalNotificationSchema).body }, schedule: { at: _Runtime.coalesce(_Runtime.callOptionalProperty(({ final __structural4 = (cast schema : CapacitorLocalNotificationSchema).schedule; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var at:Null<flighthq._internal._Any>; }).at; }), 'getTime', cast ([] : Array<Dynamic>)), function():Dynamic return cast 0.0) } }] : Array<Dynamic>)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -116,11 +120,11 @@ class CapacitorNotification {
           var schema:CapacitorLocalNotificationSchema = cast _Runtime.UNDEFINED;
           numericId = nextNumericId++;
           stringId = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(numericId) + '');
-          ((cast idByNumber : flighthq._internal._Map<Float, String>).set(numericId, stringId));
+          ((cast idByNumber : flighthq._internal._Map<Float, String>).set(numericId, (cast stringId)));
           schema = { id: numericId, title: request.title, body: request.body, schedule: { at: _Runtime.construct(flighthq._internal._HostValueLut.get('Date'), [schedule.at]) } };
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast notifications : CapacitorLocalNotificationsPlugin).schedule({ notifications: cast ([schema] : Array<Dynamic>) }), function(__awaitValue3:Dynamic):Dynamic {
-              __awaitValue3;
+            return flighthq._internal._Async.flatMap((cast notifications : CapacitorLocalNotificationsPlugin).schedule((cast { notifications: cast ([schema] : Array<Dynamic>) })), function(__awaitValue5:Dynamic):Dynamic {
+              __awaitValue5;
               return flighthq._internal._Async.flowReturn(stringId);
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -135,9 +139,9 @@ class CapacitorNotification {
       );
     }, cancelScheduledNotification: function(id:String):Void {
       var numericId:Null<Float> = cast _Runtime.UNDEFINED;
-      numericId = (cast CapacitorNotification.findNumericId__capacitorNotification((cast idByNumber : flighthq._internal._Map<Float, String>), (cast id : String)) : Null<Float>);
+      numericId = (cast CapacitorNotification.findNumericId__capacitorNotification((cast idByNumber), (cast id : String)) : Null<Float>);
       if ((cast _Runtime.strictEquals(numericId, null) : Bool)) { return; }
-      flighthq._internal._Async.recover((cast notifications : CapacitorLocalNotificationsPlugin).cancel({ notifications: cast ([{ id: numericId }] : Array<Dynamic>) }), function():Void {
+      flighthq._internal._Async.recover((cast notifications : CapacitorLocalNotificationsPlugin).cancel((cast { notifications: cast ([{ id: numericId }] : Array<Dynamic>) })), function(__unused3:flighthq._internal._Any):Void {
 
       });
     }, closeNotification: function():Void {
@@ -149,32 +153,37 @@ class CapacitorNotification {
         return flighthq._internal._Async.resolve(false);
       }));
     }, subscribeClick: function(listener:String->Void):Void->Void {
-      return cast (cast CapacitorNotification.toUnsubscribe__capacitorNotification((cast (cast notifications : CapacitorLocalNotificationsPlugin).addListener('localNotificationActionPerformed', function(action:CapacitorLocalNotificationAction):Void {
+      return cast (cast CapacitorNotification.toUnsubscribe__capacitorNotification((cast (cast notifications : CapacitorLocalNotificationsPlugin).addListener((cast 'localNotificationActionPerformed' : String), (cast function(action:CapacitorLocalNotificationAction):Void {
         if ((cast _Runtime.strictEquals(_Runtime.field(action, 'actionId'), 'tap') : Bool)) { listener((cast _Runtime.coalesce(((cast idByNumber : flighthq._internal._Map<Float, String>).get((cast _Runtime.field(action, 'notification') : { var id:Float; }).id)), function():Dynamic return cast Std.string((cast _Runtime.field(action, 'notification') : { var id:Float; }).id)) : String)); }
-      }) : flighthq._internal._Promise<CapacitorPluginListenerHandle>)) : Void->Void);
+      })))) : Void->Void);
+      return cast _Runtime.UNDEFINED;
     }, subscribeAction: function(listener:String->String->Void):Void->Void {
-      return cast (cast CapacitorNotification.toUnsubscribe__capacitorNotification((cast (cast notifications : CapacitorLocalNotificationsPlugin).addListener('localNotificationActionPerformed', function(action:CapacitorLocalNotificationAction):Void return listener((cast _Runtime.coalesce(((cast idByNumber : flighthq._internal._Map<Float, String>).get((cast _Runtime.field(action, 'notification') : { var id:Float; }).id)), function():Dynamic return cast Std.string((cast _Runtime.field(action, 'notification') : { var id:Float; }).id)) : String), (cast _Runtime.field(action, 'actionId') : String))) : flighthq._internal._Promise<CapacitorPluginListenerHandle>)) : Void->Void);
+      return cast (cast CapacitorNotification.toUnsubscribe__capacitorNotification((cast (cast notifications : CapacitorLocalNotificationsPlugin).addListener((cast 'localNotificationActionPerformed' : String), (cast function(action:CapacitorLocalNotificationAction):Void { listener((cast _Runtime.coalesce(((cast idByNumber : flighthq._internal._Map<Float, String>).get((cast _Runtime.field(action, 'notification') : { var id:Float; }).id)), function():Dynamic return cast Std.string((cast _Runtime.field(action, 'notification') : { var id:Float; }).id)) : String), (cast _Runtime.field(action, 'actionId') : String)); })))) : Void->Void);
+      return cast _Runtime.UNDEFINED;
     }, subscribeDismiss: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeReply: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeShow: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
 
   public static function findNumericId__capacitorNotification(idByNumber:flighthq._internal._Map<Float, String>, stringId:String):Null<Float> {
     var parsed:Float = cast _Runtime.UNDEFINED;
-    for (__iteration2 in _Runtime.iterable(idByNumber)) {
-      var numericId:Float = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
-      var mapped:String = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
+    for (__iteration4 in _Runtime.iterable(idByNumber)) {
+      var numericId:Float = flighthq._internal._StaticIndex.readArray(__iteration4, 0.0);
+      var mapped:String = flighthq._internal._StaticIndex.readArray(__iteration4, 1.0);
       if ((cast _Runtime.strictEquals(mapped, stringId) : Bool)) { return cast numericId; }
     }
     parsed = _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([stringId] : Array<Dynamic>));
@@ -196,15 +205,15 @@ class CapacitorNotification {
     handle = null;
     flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:CapacitorPluginListenerHandle):Void {
       (handle = cast (resolved : Dynamic));
-      if ((cast removed : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function():Void {
+      if ((cast removed : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function(__unused5:flighthq._internal._Any):Void {
 
       }); }
-    }] : Array<Dynamic>)), function():Void {
+    }] : Array<Dynamic>)), function(__unused6:flighthq._internal._Any):Void {
 
     });
     return cast function():Void {
       (removed = cast (true : Dynamic));
-      if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function():Void {
+      if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function(__unused7:flighthq._internal._Any):Void {
 
       }); }
     };

@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.ScanlinesEffect;
 
 class ScanlinesEffect {
-  public static function createScanlinesEffect(?options:Dynamic):flighthq.types.ScanlinesEffect {
+  public static function createScanlinesEffect(?options:flighthq._internal._Omit<flighthq.types.ScanlinesEffect, String>):flighthq.types.ScanlinesEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'ScanlinesEffect' }, options]);
     return cast null;

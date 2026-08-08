@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.PosterizeEffect;
 
 class PosterizeEffect {
-  public static function createPosterizeEffect(?options:Dynamic):flighthq.types.PosterizeEffect {
+  public static function createPosterizeEffect(?options:flighthq._internal._Omit<flighthq.types.PosterizeEffect, String>):flighthq.types.PosterizeEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'PosterizeEffect' }, options]);
     return cast null;

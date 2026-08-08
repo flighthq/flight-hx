@@ -7,14 +7,14 @@ import flighthq.adjustments.ColorMatrixMath.createChannelMixerColorMatrix;
 import flighthq.types.ChannelMixerAdjustment;
 
 class ChannelMixerAdjustment {
-  public static function createChannelMixerAdjustment(?options:Dynamic):flighthq.types.ChannelMixerAdjustment {
+  public static function createChannelMixerAdjustment(?options:flighthq._internal._Omit<flighthq.types.ChannelMixerAdjustment, String>):flighthq.types.ChannelMixerAdjustment {
     if (options == null) options = cast ({ matrix: ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment } : Dynamic);
     var matrix:Array<Float> = cast _Runtime.UNDEFINED;
     var m:Float->Float = cast _Runtime.UNDEFINED;
     var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
     matrix = _Runtime.coalesce(_Runtime.field(options, 'matrix'), function():Dynamic return cast ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment);
-    m = (cast function(i:Float):Float return _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, i), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment, i)) : Float->Float);
-    colorMatrix = (cast createChannelMixerColorMatrix((cast cast ([(cast m((cast 0.0 : Float)) : Float), (cast m((cast 1.0 : Float)) : Float), (cast m((cast 2.0 : Float)) : Float)] : Array<Dynamic>) : Array<Float>), (cast cast ([(cast m((cast 4.0 : Float)) : Float), (cast m((cast 5.0 : Float)) : Float), (cast m((cast 6.0 : Float)) : Float)] : Array<Dynamic>) : Array<Float>), (cast cast ([(cast m((cast 8.0 : Float)) : Float), (cast m((cast 9.0 : Float)) : Float), (cast m((cast 10.0 : Float)) : Float)] : Array<Dynamic>) : Array<Float>)) : Array<Float>);
+    m = (cast function(i:Float):Float return _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, i), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment, i)));
+    colorMatrix = (cast createChannelMixerColorMatrix((cast cast ([(cast m((cast 0.0 : Float)) : Float), (cast m((cast 1.0 : Float)) : Float), (cast m((cast 2.0 : Float)) : Float)] : Array<Dynamic>)), (cast cast ([(cast m((cast 4.0 : Float)) : Float), (cast m((cast 5.0 : Float)) : Float), (cast m((cast 6.0 : Float)) : Float)] : Array<Dynamic>)), (cast cast ([(cast m((cast 8.0 : Float)) : Float), (cast m((cast 9.0 : Float)) : Float), (cast m((cast 10.0 : Float)) : Float)] : Array<Dynamic>))) : Array<Float>);
     flighthq._internal._StaticIndex.writeArray(colorMatrix, 4.0, (cast m((cast 3.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeArray(colorMatrix, 9.0, (cast m((cast 7.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeArray(colorMatrix, 14.0, (cast m((cast 11.0 : Float)) : Float));
@@ -22,5 +22,5 @@ class ChannelMixerAdjustment {
     return cast null;
   }
 
-  public static final IDENTITY_CHANNEL_MIXER__channelMixerAdjustment:Array<Float> = cast ([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
+  public static final IDENTITY_CHANNEL_MIXER__channelMixerAdjustment:Array<Float> = (cast cast ([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
 }

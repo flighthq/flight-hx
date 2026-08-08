@@ -31,10 +31,10 @@ class CanvasFilmGrainEffect {
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.1);
     size = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 1.0)));
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    drawCanvasEffectPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    drawCanvasEffectPass((cast dest), (cast source), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
     cells = 64.0;
     patchSize = (cells * size);
-    noise = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast patchSize : Float), (cast patchSize : Float)) : CanvasRenderTarget);
+    noise = (cast acquireCanvasRenderTarget((cast pool), (cast patchSize : Float), (cast patchSize : Float)) : CanvasRenderTarget);
     nctx = (cast noise : CanvasRenderTarget).context;
     flighthq._internal.backend.Canvas2dBackend.call(nctx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(nctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
@@ -71,14 +71,14 @@ class CanvasFilmGrainEffect {
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
     }
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
-    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast noise : CanvasRenderTarget));
+    releaseCanvasRenderTarget((cast pool), (cast noise));
   }
 
-  public static final defaultCanvasFilmGrainEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyFilmGrainEffectToCanvas((cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'pool') : CanvasRenderTargetPool), (cast (cast effect : FilmGrainEffect) : FilmGrainEffect));
-  };
+  public static final defaultCanvasFilmGrainEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    applyFilmGrainEffectToCanvas((cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : FilmGrainEffect)));
+  });
 
   public static function registerCanvasFilmGrainEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'FilmGrainEffect' : String), (cast defaultCanvasFilmGrainEffectRunner : CanvasRenderEffectRunner));
+    registerCanvasRenderEffect((cast state), (cast 'FilmGrainEffect' : String), (cast defaultCanvasFilmGrainEffectRunner));
   }
 }

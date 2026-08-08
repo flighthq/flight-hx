@@ -57,21 +57,21 @@ import flighthq.updater.Updater.setUpdaterBackend;
 class ElectronRegister {
   public static function registerElectronBackends(electron:ElectronApi, ?options:ElectronBackendOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
-    setPlatformBackend((cast createElectronPlatformBackend((cast electron : ElectronApi)) : Null<PlatformBackend>));
-    setAppBackend((cast createElectronAppBackend((cast electron : ElectronApi)) : Null<AppBackend>));
-    setWindowBackend((cast createElectronWindowBackend((cast electron : ElectronApi)) : Null<WindowBackend>));
-    setDialogBackend((cast createElectronDialogBackend((cast electron : ElectronApi)) : Null<DialogBackend>));
-    setClipboardBackend((cast createElectronClipboardBackend((cast electron : ElectronApi)) : Null<ClipboardBackend>));
-    setMenuBackend((cast createElectronMenuBackend((cast electron : ElectronApi)) : Null<MenuBackend>));
-    setTrayBackend((cast createElectronTrayBackend((cast electron : ElectronApi)) : Null<TrayBackend>));
-    setShortcutBackend((cast createElectronShortcutBackend((cast electron : ElectronApi)) : Null<ShortcutBackend>));
-    setScreenBackend((cast createElectronScreenBackend((cast electron : ElectronApi)) : Null<ScreenBackend>));
-    setPowerBackend((cast createElectronPowerBackend((cast electron : ElectronApi)) : Null<PowerBackend>));
-    setNotificationBackend((cast createElectronNotificationBackend((cast electron : ElectronApi)) : Null<NotificationBackend>));
-    setShellBackend((cast createElectronShellBackend((cast electron : ElectronApi)) : Null<ShellBackend>));
-    setStorageBackend((cast createElectronStorageBackend((cast electron : ElectronApi), (cast _Runtime.field(options, 'storageFileName') : String)) : Null<StorageBackend>));
-    setProtocolBackend((cast createElectronProtocolBackend((cast electron : ElectronApi)) : Null<ProtocolBackend>));
-    setUpdaterBackend((cast createElectronUpdaterBackend((cast electron : ElectronApi)) : Null<UpdaterBackend>));
-    setIpcBackend((cast createElectronIpcBackend((cast electron : ElectronApi)) : Null<IpcBackend>));
+    setPlatformBackend((cast (cast createElectronPlatformBackend((cast electron)) : PlatformBackend)));
+    setAppBackend((cast (cast createElectronAppBackend((cast electron)) : AppBackend)));
+    setWindowBackend((cast (cast createElectronWindowBackend((cast electron)) : WindowBackend)));
+    setDialogBackend((cast (cast createElectronDialogBackend((cast electron)) : DialogBackend)));
+    setClipboardBackend((cast (cast createElectronClipboardBackend((cast electron)) : ClipboardBackend)));
+    setMenuBackend((cast (cast createElectronMenuBackend((cast electron)) : MenuBackend)));
+    setTrayBackend((cast (cast createElectronTrayBackend((cast electron)) : TrayBackend)));
+    setShortcutBackend((cast (cast createElectronShortcutBackend((cast electron)) : ShortcutBackend)));
+    setScreenBackend((cast (cast createElectronScreenBackend((cast electron)) : ScreenBackend)));
+    setPowerBackend((cast (cast createElectronPowerBackend((cast electron)) : PowerBackend)));
+    setNotificationBackend((cast (cast createElectronNotificationBackend((cast electron)) : NotificationBackend)));
+    setShellBackend((cast (cast createElectronShellBackend((cast electron)) : ShellBackend)));
+    setStorageBackend((cast (cast createElectronStorageBackend((cast electron), (cast _Runtime.field(options, 'storageFileName') : String)) : StorageBackend)));
+    setProtocolBackend((cast (cast createElectronProtocolBackend((cast electron)) : ProtocolBackend)));
+    setUpdaterBackend((cast (cast createElectronUpdaterBackend((cast electron)) : UpdaterBackend)));
+    setIpcBackend((cast (cast createElectronIpcBackend((cast electron)) : IpcBackend)));
   }
 }

@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class OutlineEffect {
-  public static function createOutlineEffect(?options:Dynamic):flighthq.types.OutlineEffect {
+  public static function createOutlineEffect(?options:flighthq._internal._Omit<flighthq.types.OutlineEffect, String>):flighthq.types.OutlineEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'OutlineEffect' }, options]);
     return cast null;
@@ -24,11 +24,11 @@ class OutlineEffect {
   }
 
   public static function registerOutlineEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'OutlineEffect' : String), OutlineEffect.resolveOutlineEffectPadding__outlineEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'OutlineEffect' : String), (cast OutlineEffect.resolveOutlineEffectPadding__outlineEffect));
   }
 
   public static function resolveOutlineEffectPadding__outlineEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getOutlineEffectPadding((cast (cast effect : flighthq.types.OutlineEffect) : flighthq.types.OutlineEffect)) : RenderEffectPadding);
+    return cast (cast getOutlineEffectPadding((cast (cast effect : flighthq.types.OutlineEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

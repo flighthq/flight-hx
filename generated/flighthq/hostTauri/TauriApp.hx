@@ -24,18 +24,19 @@ class TauriApp {
     cachedVersion = '';
     flighthq._internal._Async.recover(_Runtime.callProperty((cast app : TauriAppModule).getName(), 'then', cast ([function(name:String):Void {
       (cachedName = cast (name : Dynamic));
-    }] : Array<Dynamic>)), function():Void {
+    }] : Array<Dynamic>)), function(__unused0:flighthq._internal._Any):Void {
 
     });
     flighthq._internal._Async.recover(_Runtime.callProperty((cast app : TauriAppModule).getVersion(), 'then', cast ([function(version:String):Void {
       (cachedVersion = cast (version : Dynamic));
-    }] : Array<Dynamic>)), function():Void {
+    }] : Array<Dynamic>)), function(__unused1:flighthq._internal._Any):Void {
 
     });
     return cast { addRecentDocument: function():Void {
 
     }, bounceDock: function():Float {
       return cast -1.0;
+      return cast _Runtime.UNDEFINED;
     }, cancelAttention: function():Void {
 
     }, cancelDockBounce: function():Void {
@@ -46,94 +47,120 @@ class TauriApp {
 
     }, getAppDirectoryPath: function():String {
       return cast '';
+      return cast _Runtime.UNDEFINED;
     }, getAppPath: function():String {
       return cast '';
-    }, getCommandLine: function():Array<flighthq._internal._Any> {
+      return cast _Runtime.UNDEFINED;
+    }, getCommandLine: function():Array<String> {
       return cast cast ([] : Array<Dynamic>);
+      return cast _Runtime.UNDEFINED;
     }, getExecutablePath: function():String {
       return cast '';
+      return cast _Runtime.UNDEFINED;
     }, getLocale: function():String {
       return cast _Runtime.coalesce((cast os : TauriOsModule).locale(), function():Dynamic return cast '');
+      return cast _Runtime.UNDEFINED;
     }, getLoginItem: function():AppLoginItem {
       var out:AppLoginItem = cast _Runtime.UNDEFINED;
-      out = { openAtLogin: false, openAsHidden: false, path: '', args: cast ([] : Array<Dynamic>) };
+      out = (cast { openAtLogin: false, openAsHidden: false, path: '', args: cast ([] : Array<Dynamic>) });
       return cast out;
+      return cast _Runtime.UNDEFINED;
     }, getName: function():String {
       return cast cachedName;
+      return cast _Runtime.UNDEFINED;
     }, getPreferredSystemLanguages: function():Array<String> {
       var locale:Null<String> = cast _Runtime.UNDEFINED;
       locale = (cast os : TauriOsModule).locale();
       return cast _Runtime.select(locale, function():Dynamic return cast cast ([locale] : Array<Dynamic>), function():Dynamic return cast cast ([] : Array<Dynamic>));
+      return cast _Runtime.UNDEFINED;
     }, getSystemLocale: function():String {
       return cast _Runtime.coalesce((cast os : TauriOsModule).locale(), function():Dynamic return cast '');
+      return cast _Runtime.UNDEFINED;
     }, getVersion: function():String {
       return cast cachedVersion;
+      return cast _Runtime.UNDEFINED;
     }, hasSingleInstanceLock: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, hideApp: function():Bool {
-      flighthq._internal._Async.recover((cast app : TauriAppModule).hide(), function():Void {
+      flighthq._internal._Async.recover((cast app : TauriAppModule).hide(), function(__unused2:flighthq._internal._Any):Void {
 
       });
       return cast true;
+      return cast _Runtime.UNDEFINED;
     }, isAppHidden: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, quit: function():Void {
-      flighthq._internal._Async.recover((cast process : TauriProcessPlugin).exit(0.0), function():Void {
+      flighthq._internal._Async.recover((cast process : TauriProcessPlugin).exit((cast 0.0)), function(__unused3:flighthq._internal._Any):Void {
 
       });
     }, relaunch: function():Void {
-      flighthq._internal._Async.recover((cast process : TauriProcessPlugin).relaunch(), function():Void {
+      flighthq._internal._Async.recover((cast process : TauriProcessPlugin).relaunch(), function(__unused4:flighthq._internal._Any):Void {
 
       });
     }, releaseSingleInstanceLock: function():Void {
 
     }, requestAttention: function():Float {
       return cast -1.0;
+      return cast _Runtime.UNDEFINED;
     }, requestSingleInstanceLock: function():Bool {
       return cast true;
+      return cast _Runtime.UNDEFINED;
     }, setActivationPolicy: function():Void {
 
     }, setBadgeCount: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, setDockBadge: function():Void {
 
     }, setDockMenu: function():Void {
 
     }, setLoginItem: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, setName: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, setUserModelId: function():Bool {
       return cast false;
+      return cast _Runtime.UNDEFINED;
     }, showApp: function():Bool {
-      flighthq._internal._Async.recover((cast app : TauriAppModule).show(), function():Void {
+      flighthq._internal._Async.recover((cast app : TauriAppModule).show(), function(__unused5:flighthq._internal._Any):Void {
 
       });
       return cast true;
+      return cast _Runtime.UNDEFINED;
     }, subscribeActivate: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeAllWindowsClosed: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeOpenFile: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeQuitRequest: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeReady: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeSecondInstance: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }

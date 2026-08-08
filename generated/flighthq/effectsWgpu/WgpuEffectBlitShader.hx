@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
+import flighthq.types.WgpuEffectBlendMode;
 import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
@@ -19,37 +20,37 @@ class WgpuEffectBlitShader {
   @:noCompletion
   public static function applyWgpuEffectBlitOffsetPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, dx:Float, dy:Float):Void {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    pipeline = (cast WgpuEffectBlitShader.getWgpuBlitOffsetShader__wgpuEffectBlitShader((cast state : WgpuRenderState)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast source : WgpuRenderTarget), (cast dest : Null<WgpuRenderTarget>), (cast pipeline : WgpuEffectPipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast WgpuEffectBlitShader.getWgpuBlitOffsetShader__wgpuEffectBlitShader((cast state)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast source), (cast dest), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, (-dx / (cast source : WgpuRenderTarget).width));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, (dy / (cast source : WgpuRenderTarget).height));
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
   @:noCompletion
   public static function applyWgpuEffectBlitPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    pipeline = (cast WgpuEffectBlitShader.getWgpuBlitShader__wgpuEffectBlitShader((cast state : WgpuRenderState)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast source : WgpuRenderTarget), (cast dest : Null<WgpuRenderTarget>), (cast pipeline : WgpuEffectPipeline), (cast function(__unused5:flighthq._internal._Float32Array, __unused6:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(__unused3:flighthq._internal._Float32Array, __unused4:flighthq._internal._Int32Array):Void {
+    pipeline = (cast WgpuEffectBlitShader.getWgpuBlitShader__wgpuEffectBlitShader((cast state)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast source), (cast dest), (cast pipeline), (cast function(__unused5:flighthq._internal._Float32Array, __unused6:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(__unused3:flighthq._internal._Float32Array, __unused4:flighthq._internal._Int32Array):Void {
 
-    }, cast ([] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([] : Array<Dynamic>)); }));
   }
 
   @:noCompletion
   public static function applyWgpuEffectErasePass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    pipeline = (cast WgpuEffectBlitShader.getWgpuEraseShader__wgpuEffectBlitShader((cast state : WgpuRenderState)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast source : WgpuRenderTarget), (cast dest : Null<WgpuRenderTarget>), (cast pipeline : WgpuEffectPipeline), (cast function(__unused9:flighthq._internal._Float32Array, __unused10:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(__unused7:flighthq._internal._Float32Array, __unused8:flighthq._internal._Int32Array):Void {
+    pipeline = (cast WgpuEffectBlitShader.getWgpuEraseShader__wgpuEffectBlitShader((cast state)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast source), (cast dest), (cast pipeline), (cast function(__unused9:flighthq._internal._Float32Array, __unused10:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(__unused7:flighthq._internal._Float32Array, __unused8:flighthq._internal._Int32Array):Void {
 
-    }, cast ([] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([] : Array<Dynamic>)); }));
   }
 
   public static function getWgpuBlitOffsetShader__wgpuEffectBlitShader(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectBlitShader.blitOffsetPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (p = cast ((cast createWgpuEffectPipeline((cast state : WgpuRenderState), (cast WgpuEffectBlitShader.BLIT_OFFSET_WGSL__wgpuEffectBlitShader : String), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<WgpuEffectPipeline>) : Dynamic));
-      ((cast WgpuEffectBlitShader.blitOffsetPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, p));
+      (p = cast ((cast createWgpuEffectPipeline((cast state), (cast WgpuEffectBlitShader.BLIT_OFFSET_WGSL__wgpuEffectBlitShader : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : WgpuEffectPipeline) : Dynamic));
+      ((cast WgpuEffectBlitShader.blitOffsetPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast p)));
     }
     return cast p;
     return cast null;
@@ -59,8 +60,8 @@ class WgpuEffectBlitShader {
     var p:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectBlitShader.blitPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (p = cast ((cast createWgpuEffectPipeline((cast state : WgpuRenderState), (cast WgpuEffectBlitShader.BLIT_WGSL__wgpuEffectBlitShader : String), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<WgpuEffectPipeline>) : Dynamic));
-      ((cast WgpuEffectBlitShader.blitPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, p));
+      (p = cast ((cast createWgpuEffectPipeline((cast state), (cast WgpuEffectBlitShader.BLIT_WGSL__wgpuEffectBlitShader : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : WgpuEffectPipeline) : Dynamic));
+      ((cast WgpuEffectBlitShader.blitPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast p)));
     }
     return cast p;
     return cast null;
@@ -70,8 +71,8 @@ class WgpuEffectBlitShader {
     var p:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectBlitShader.erasePipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (p = cast ((cast createWgpuEffectPipeline((cast state : WgpuRenderState), (cast WgpuEffectBlitShader.ERASE_WGSL__wgpuEffectBlitShader : String), 'erase') : Null<WgpuEffectPipeline>) : Dynamic));
-      ((cast WgpuEffectBlitShader.erasePipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, p));
+      (p = cast ((cast createWgpuEffectPipeline((cast state), (cast WgpuEffectBlitShader.ERASE_WGSL__wgpuEffectBlitShader : String), (cast 'erase')) : WgpuEffectPipeline) : Dynamic));
+      ((cast WgpuEffectBlitShader.erasePipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast p)));
     }
     return cast p;
     return cast null;

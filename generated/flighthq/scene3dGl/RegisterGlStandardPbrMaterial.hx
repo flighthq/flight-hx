@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
 import flighthq.scene3dGl.StandardPbrGlMeshMaterialRenderer.standardPbrGlMeshMaterialRenderer;
+import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
 import flighthq.types.Types.StandardPbrMaterialKind;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
 class RegisterGlStandardPbrMaterial {
   public static function registerGlStandardPbrMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer((cast state : GlRenderState), (cast StandardPbrMaterialKind : String), standardPbrGlMeshMaterialRenderer);
+    registerGlMeshMaterialRenderer((cast state), (cast StandardPbrMaterialKind : String), (cast standardPbrGlMeshMaterialRenderer));
   }
 }

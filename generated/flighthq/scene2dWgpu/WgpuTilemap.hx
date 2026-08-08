@@ -20,10 +20,11 @@ import flighthq.types.ColorScaleBias;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Renderable;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.Sampler;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 import flighthq.types.Tilemap;
@@ -72,7 +73,7 @@ class WgpuTilemap {
     var alpha:Float = cast _Runtime.UNDEFINED;
     var writeBase:Float = cast _Runtime.UNDEFINED;
     var drawCount:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) { return; }
     source = (cast (cast tilemapNode : RenderProxy2D).source : Tilemap);
     __destructure0 = (cast source : Tilemap).data;
@@ -82,24 +83,24 @@ class WgpuTilemap {
     tileHeight = _Runtime.field(__destructure0, 'tileHeight');
     tileWidth = _Runtime.field(__destructure0, 'tileWidth');
     tiles = _Runtime.field(__destructure0, 'tiles');
-    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(atlas.texture) : Bool) : Bool) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource((cast atlas.texture)) : Bool) : Bool) : Bool)) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
     material = (cast tilemapNode : RenderProxy2D).material;
-    materialRenderer = (cast resolveWgpuMaterialRenderer((cast state : WgpuRenderState), material) : Null<WgpuMaterialRenderer>);
+    materialRenderer = (cast resolveWgpuMaterialRenderer((cast state), (cast material)) : Null<WgpuMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     texture = atlas.texture;
-    textureEntry = (cast resolveWgpuTexture((cast state : WgpuRenderState), texture, (cast true : Bool), SCENE2D_WORKING_COLOR_SPACE) : Null<WgpuTextureEntry>);
+    textureEntry = (cast resolveWgpuTexture((cast state), (cast texture), (cast true : Bool), (cast SCENE2D_WORKING_COLOR_SPACE)) : Null<WgpuTextureEntry>);
     if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { return; }
     nodeMaterialData = (cast tilemapNode : RenderProxy2D).materialData;
     perTileColorScaleBias = (cast (cast source : Tilemap).data : TilemapData).materialData;
     nodeColorScaleBias = (cast tilemapNode : RenderProxy2D).colorScaleBias;
     nodeColorMatrix = (cast tilemapNode : RenderProxy2D).colorMatrix;
     startCount = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount;
-    base = (cast prepareWgpuQuadBatchWrite((cast state : WgpuRenderState), textureEntry, (cast texture : Texture2D).sampler, (cast (cast tilemapNode : RenderProxy2D).blendMode : Null<String>), material, materialRenderer, (cast (columns * rows) : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Float);
+    base = (cast prepareWgpuQuadBatchWrite((cast state), (cast textureEntry), (cast (cast texture : Texture2D).sampler), (cast (cast tilemapNode : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast (columns * rows) : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Float);
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
-    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(texture) : Float)));
-    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(texture) : Float)));
+    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth((cast texture)) : Float)));
+    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight((cast texture)) : Float)));
     instanceData = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterInstanceData;
     pt = (cast tilemapNode : RenderProxy2D).transform2D;
     pa = pt.a;
@@ -136,9 +137,9 @@ class WgpuTilemap {
             flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 10.0), ((region.x + region.width) * iw));
             flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 11.0), ((region.y + region.height) * ih));
             flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 12.0), alpha);
-            packWgpuQuadBatchMaterialInstance((cast state : WgpuRenderState), (cast nodeMaterialData : Null<flighthq._internal._Object>), (cast (startCount + drawCount) : Float));
+            packWgpuQuadBatchMaterialInstance((cast state), (cast nodeMaterialData), (cast (startCount + drawCount) : Float));
             var colorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>> = _Runtime.coalesce(_Runtime.coalesce((cast _Runtime.optionalIndex(perTileColorScaleBias, ((row * columns) + col)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>>), function():Dynamic return cast nodeColorMatrix), function():Dynamic return cast nodeColorScaleBias);
-            recordWgpuQuadBatchColorScaleBias((cast state : WgpuRenderState), (cast colorScaleBias : Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>>), (cast (startCount + drawCount) : Float));
+            recordWgpuQuadBatchColorScaleBias((cast state), (cast colorScaleBias), (cast (startCount + drawCount) : Float));
             (writeBase = cast ((writeBase + WgpuTilemap.INSTANCE_STRIDE_FLOATS__wgpuTilemap) : Dynamic));
             drawCount++;
             col++;
@@ -150,5 +151,5 @@ class WgpuTilemap {
     ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount += drawCount);
   }
 
-  public static final defaultWgpuTilemapRenderer:SpriteRenderer = { format: BatchFormat.Quad, createData: noopRendererData, submit: WgpuTilemap.submitWgpuTilemap__wgpuTilemap };
+  public static final defaultWgpuTilemapRenderer:SpriteRenderer = (cast { format: BatchFormat.Quad, createData: noopRendererData, submit: WgpuTilemap.submitWgpuTilemap__wgpuTilemap });
 }

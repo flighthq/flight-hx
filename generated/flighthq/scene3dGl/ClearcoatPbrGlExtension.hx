@@ -9,6 +9,7 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.GlPbrExtensionBindContext;
 import flighthq.types.GlPbrExtensionRegistration;
 import flighthq.types.GlPbrExtensionShaderContext;
+import flighthq.types.GlPbrExtensionShaderContribution;
 import flighthq.types.GlRenderState;
 import flighthq.types.PbrExtension;
 import flighthq.types.PbrExtension.PbrUvSet;
@@ -24,16 +25,16 @@ import flighthq.types.VoxelGrid;
 import flighthq.types._internal._ClearcoatPbrExtensionValues.ClearcoatPbrExtensionKind;
 
 class ClearcoatPbrGlExtension {
-  public static final clearcoatPbrGlExtension:GlPbrExtensionRegistration = { bind: function(context:GlPbrExtensionBindContext, value:PbrExtension):Void {
+  public static final clearcoatPbrGlExtension:GlPbrExtensionRegistration = (cast { bind: function(context:GlPbrExtensionBindContext, value:PbrExtension):Void {
     var extension:ClearcoatPbrExtension = cast _Runtime.UNDEFINED;
     extension = (cast value : ClearcoatPbrExtension);
-    (cast context : GlPbrExtensionBindContext).setFloat('u_flightClearcoat', _Runtime.field(extension, 'clearcoat'));
-    (cast context : GlPbrExtensionBindContext).setFloat('u_flightClearcoatRoughness', _Runtime.field(extension, 'clearcoatRoughness'));
-    (cast context : GlPbrExtensionBindContext).setFloat('u_flightClearcoatNormalScale', _Runtime.field(extension, 'clearcoatNormalScale'));
-    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension((cast context : GlPbrExtensionBindContext), (cast 'Clearcoat' : String), _Runtime.field(extension, 'clearcoatMap'), (cast _Runtime.field(extension, 'clearcoatMapUvSet') : PbrUvSet));
-    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension((cast context : GlPbrExtensionBindContext), (cast 'ClearcoatRoughness' : String), _Runtime.field(extension, 'clearcoatRoughnessMap'), (cast _Runtime.field(extension, 'clearcoatRoughnessMapUvSet') : PbrUvSet));
-    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension((cast context : GlPbrExtensionBindContext), (cast 'ClearcoatNormal' : String), _Runtime.field(extension, 'clearcoatNormalMap'), (cast _Runtime.field(extension, 'clearcoatNormalMapUvSet') : PbrUvSet));
-  }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):{ var applySurface:String; var contributeIbl:String; var contributePunctual:String; var finalize:String; var fragmentDeclarations:String; var fragmentFunctions:String; var key:String; var textureCount:Float; } {
+    (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightClearcoat' : String), (cast _Runtime.field(extension, 'clearcoat') : Float));
+    (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightClearcoatRoughness' : String), (cast _Runtime.field(extension, 'clearcoatRoughness') : Float));
+    (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightClearcoatNormalScale' : String), (cast _Runtime.field(extension, 'clearcoatNormalScale') : Float));
+    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension((cast context), (cast 'Clearcoat' : String), (cast _Runtime.field(extension, 'clearcoatMap')), (cast _Runtime.field(extension, 'clearcoatMapUvSet')));
+    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension((cast context), (cast 'ClearcoatRoughness' : String), (cast _Runtime.field(extension, 'clearcoatRoughnessMap')), (cast _Runtime.field(extension, 'clearcoatRoughnessMapUvSet')));
+    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension((cast context), (cast 'ClearcoatNormal' : String), (cast _Runtime.field(extension, 'clearcoatNormalMap')), (cast _Runtime.field(extension, 'clearcoatNormalMapUvSet')));
+  }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):GlPbrExtensionShaderContribution {
     var extension:ClearcoatPbrExtension = cast _Runtime.UNDEFINED;
     var factorMap:Bool = cast _Runtime.UNDEFINED;
     var roughnessMap:Bool = cast _Runtime.UNDEFINED;
@@ -43,16 +44,18 @@ class ClearcoatPbrGlExtension {
     roughnessMap = _Runtime.callProperty(context, 'isTextureReady', cast ([_Runtime.field(extension, 'clearcoatRoughnessMap')] : Array<Dynamic>));
     normalMap = _Runtime.callProperty(context, 'isTextureReady', cast ([_Runtime.field(extension, 'clearcoatNormalMap')] : Array<Dynamic>));
     return cast { applySurface: ((cast normalMap : Bool) ? (cast '\n  vec3 flightClearcoatTangentNormal = texture(u_flightClearcoatNormalMap, flightClearcoatNormalUv()).xyz * 2.0 - 1.0;\n  flightClearcoatTangentNormal.xy *= u_flightClearcoatNormalScale;\n  normal = normalize(mat3(tangent, bitangent, normal) * flightClearcoatTangentNormal);\n  nDotV = max(dot(normal, viewDir), 1e-4);' : Dynamic) : (cast '' : Dynamic)), contributeIbl: '\n  float flightClearcoatFactor = clamp(u_flightClearcoat * flightClearcoatFactorSample(), 0.0, 1.0);\n  float flightClearcoatRough = clamp(u_flightClearcoatRoughness * flightClearcoatRoughnessSample(), 0.04, 1.0);\n  vec3 flightClearcoatF = fresnelSchlickRoughness(max(dot(N, V), 1e-4), vec3(0.04), flightClearcoatRough) * flightClearcoatFactor;\n  vec3 flightClearcoatR = reflect(-V, N);\n  vec3 flightClearcoatPrefiltered = textureLod(u_iblPrefiltered, flightClearcoatR, flightClearcoatRough * u_iblMaxMip).rgb;\n  vec2 flightClearcoatBrdf = texture(u_iblBrdf, vec2(max(dot(N, V), 1e-4), flightClearcoatRough)).rg;\n  ambient = ambient * (1.0 - flightClearcoatF) +\n    flightClearcoatPrefiltered * (flightClearcoatF * flightClearcoatBrdf.x + flightClearcoatBrdf.y) * occ * u_iblIntensity;', contributePunctual: '\n  float flightClearcoatFactor = clamp(u_flightClearcoat * flightClearcoatFactorSample(), 0.0, 1.0);\n  float flightClearcoatRough = clamp(u_flightClearcoatRoughness * flightClearcoatRoughnessSample(), 0.04, 1.0);\n  float flightClearcoatD = distributionGgx(nDotH, flightClearcoatRough);\n  float flightClearcoatVis = visibilitySmith(nDotV, nDotL, flightClearcoatRough);\n  vec3 flightClearcoatF = fresnelSchlick(vDotH, vec3(0.04)) * flightClearcoatFactor;\n  direct = direct * (1.0 - flightClearcoatF) +\n    flightClearcoatD * flightClearcoatVis * flightClearcoatF * lightColor * nDotL;', finalize: '', fragmentDeclarations: '\nuniform float u_flightClearcoat;\nuniform float u_flightClearcoatRoughness;\nuniform float u_flightClearcoatNormalScale;\n' + Std.string((cast ClearcoatPbrGlExtension.mapDeclarations__clearcoatPbrGlExtension((cast 'Clearcoat' : String), (cast factorMap : Bool)) : String)) + '\n' + Std.string((cast ClearcoatPbrGlExtension.mapDeclarations__clearcoatPbrGlExtension((cast 'ClearcoatRoughness' : String), (cast roughnessMap : Bool)) : String)) + '\n' + Std.string((cast ClearcoatPbrGlExtension.mapDeclarations__clearcoatPbrGlExtension((cast 'ClearcoatNormal' : String), (cast normalMap : Bool)) : String)) + '', fragmentFunctions: '\n' + Std.string((cast ClearcoatPbrGlExtension.mapUvFunction__clearcoatPbrGlExtension((cast 'Clearcoat' : String), (cast factorMap : Bool)) : String)) + '\n' + Std.string((cast ClearcoatPbrGlExtension.mapUvFunction__clearcoatPbrGlExtension((cast 'ClearcoatRoughness' : String), (cast roughnessMap : Bool)) : String)) + '\n' + Std.string((cast ClearcoatPbrGlExtension.mapUvFunction__clearcoatPbrGlExtension((cast 'ClearcoatNormal' : String), (cast normalMap : Bool)) : String)) + '\nfloat flightClearcoatFactorSample() { return ' + Std.string(((cast factorMap : Bool) ? (cast 'texture(u_flightClearcoatMap, flightClearcoatUv()).r' : Dynamic) : (cast '1.0' : Dynamic))) + '; }\nfloat flightClearcoatRoughnessSample() { return ' + Std.string(((cast roughnessMap : Bool) ? (cast 'texture(u_flightClearcoatRoughnessMap, flightClearcoatRoughnessUv()).g' : Dynamic) : (cast '1.0' : Dynamic))) + '; }', key: 'clearcoat:' + Std.string(((cast factorMap : Bool) ? (cast 'f' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast roughnessMap : Bool) ? (cast 'r' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast normalMap : Bool) ? (cast 'n' : Dynamic) : (cast '-' : Dynamic))) + '', textureCount: _Runtime.addNumbers(_Runtime.addNumbers(_Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([factorMap] : Array<Dynamic>)), _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([roughnessMap] : Array<Dynamic>))), _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([normalMap] : Array<Dynamic>))) };
+    return cast _Runtime.UNDEFINED;
   }, isSupported: function(extension:PbrExtension):Bool {
     return cast true;
-  } };
+    return cast _Runtime.UNDEFINED;
+  } });
 
   public static function registerGlClearcoatPbrExtension(state:GlRenderState):Void {
-    registerGlPbrExtension((cast state : GlRenderState), (cast ClearcoatPbrExtensionKind : String), (cast clearcoatPbrGlExtension : GlPbrExtensionRegistration));
+    registerGlPbrExtension((cast state), (cast ClearcoatPbrExtensionKind : String), (cast clearcoatPbrGlExtension));
   }
 
   public static function bindMap__clearcoatPbrGlExtension(context:GlPbrExtensionBindContext, name:String, texture:Null<Texture>, uvSet:PbrUvSet):Void {
-    (cast context : GlPbrExtensionBindContext).bindTexture('u_flight' + Std.string(name) + 'Map', 'u_flight' + Std.string(name) + 'MapUvSet', 'u_flight' + Std.string(name) + 'MapTransform', texture, uvSet);
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flight' + Std.string(name) + 'Map' : String), (cast 'u_flight' + Std.string(name) + 'MapUvSet' : String), (cast 'u_flight' + Std.string(name) + 'MapTransform' : String), (cast texture), (cast uvSet));
   }
 
   public static function mapDeclarations__clearcoatPbrGlExtension(name:String, enabled:Bool):String {

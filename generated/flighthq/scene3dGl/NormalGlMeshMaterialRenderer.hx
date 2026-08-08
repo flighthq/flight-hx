@@ -14,6 +14,7 @@ import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Camera3D;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.GlDebugProgram;
+import flighthq.types.GlDebugProgram.GlDebugDefineKey;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
@@ -21,12 +22,14 @@ import flighthq.types.GlScene3DRuntime;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
 import flighthq.types.NormalMaterial;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.Texture.TextureLike;
 import flighthq.types.Texture.TextureSourceCubeFaces;
 import flighthq.types.TextureSource;
 import flighthq.types.Types.NormalMaterialKind;
@@ -36,28 +39,28 @@ import flighthq.types._internal._NormalMaterialValues.NormalMaterialKind;
 
 class NormalGlMeshMaterialRenderer {
   @:noCompletion
-  public static final normalGlMeshMaterialRenderer:GlMeshMaterialRenderer = { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  public static final normalGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var normal:Null<NormalMaterial> = cast _Runtime.UNDEFINED;
     var hasNormalMap:Bool = cast _Runtime.UNDEFINED;
     var program:GlDebugProgram = cast _Runtime.UNDEFINED;
     normal = (cast material : Null<NormalMaterial>);
-    hasNormalMap = ((cast ((cast !_Runtime.strictEquals(normal, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(normal, 'normalMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), _Runtime.field(normal, 'normalMap'), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool));
-    program = (cast ensureGlDebugProgram((cast state : GlRenderState), { hasNormalMap: hasNormalMap, mode: 'normal' }) : GlDebugProgram);
-    beginGlMeshDraw((cast state : GlRenderState), program, (cast ((cast !_Runtime.strictEquals(normal, null) : Bool) && (cast _Runtime.field(normal, 'doubleSided') : Bool)) : Bool));
-    setGlMeshViewProjection((cast state : GlRenderState), (cast (cast program : GlDebugProgram).locViewProjection : Null<flighthq._internal.dom.WebGLUniformLocation>), (cast camera : Camera3D));
+    hasNormalMap = ((cast ((cast !_Runtime.strictEquals(normal, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(normal, 'normalMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast _Runtime.field(normal, 'normalMap')), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool));
+    program = (cast ensureGlDebugProgram((cast state), (cast { hasNormalMap: hasNormalMap, mode: 'normal' })) : GlDebugProgram);
+    beginGlMeshDraw((cast state), (cast program), (cast ((cast !_Runtime.strictEquals(normal, null) : Bool) && (cast _Runtime.field(normal, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection((cast state), (cast (cast program : GlDebugProgram).locViewProjection), (cast camera));
     if ((cast _Runtime.strictEquals(normal, null) : Bool)) {
-      bindGlDebugNormalMap((cast state : GlRenderState), program, null, (cast 1.0 : Float));
+      bindGlDebugNormalMap((cast state), (cast program), (cast null), (cast 1.0 : Float));
       return;
     }
-    bindGlDebugNormalMap((cast state : GlRenderState), program, _Runtime.field(normal, 'normalMap'), (cast _Runtime.field(normal, 'normalScale') : Float));
+    bindGlDebugNormalMap((cast state), (cast program), (cast _Runtime.field(normal, 'normalMap')), (cast _Runtime.field(normal, 'normalScale') : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset((cast state : GlRenderState), program, (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
-  } };
+    drawGlMeshSubset((cast state), (cast program), (cast proxy), (cast geometry));
+  } });
 
   public static function registerGlNormalMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer((cast state : GlRenderState), (cast NormalMaterialKind : String), (cast normalGlMeshMaterialRenderer : GlMeshMaterialRenderer));
+    registerGlMeshMaterialRenderer((cast state), (cast NormalMaterialKind : String), (cast normalGlMeshMaterialRenderer));
   }
 }

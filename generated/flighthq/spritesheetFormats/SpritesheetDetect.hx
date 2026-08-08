@@ -59,11 +59,11 @@ class SpritesheetDetect {
   public static function getRegistry__spritesheetDetect():FormatRegistry__spritesheetDetect {
     if ((cast !_Runtime.strictEquals(SpritesheetDetect._registry__spritesheetDetect, null) : Bool)) { return cast SpritesheetDetect._registry__spritesheetDetect; }
     (SpritesheetDetect._registry__spritesheetDetect = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(ASEPRITE, { detect: SpritesheetDetect.detectAseprite__spritesheetDetect, parse: function(text:String, __unused0:SpritesheetParseOptions):SpritesheetData return (cast parseAsepriteSpritesheet((cast text : String)) : SpritesheetData) }));
-    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(COCOS_PLIST, { detect: SpritesheetDetect.detectCocosPlist__spritesheetDetect, parse: function(text:String, __unused1:SpritesheetParseOptions):SpritesheetData return (cast parseCocosPlistSpritesheet((cast text : String)) : SpritesheetData) }));
-    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(TEXTURE_PACKER, { detect: SpritesheetDetect.detectTexturePacker__spritesheetDetect, parse: function(text:String, __unused2:SpritesheetParseOptions):SpritesheetData return (cast parseTexturePackerSpritesheet((cast text : String)) : SpritesheetData) }));
-    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(STARLING, { detect: SpritesheetDetect.detectStarling__spritesheetDetect, parse: function(text:String, opts:SpritesheetParseOptions):SpritesheetData return (cast parseStarlingSpritesheet((cast text : String), { frameDuration: opts.frameDuration }) : SpritesheetData) }));
-    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(LIBGDX_ATLAS, { detect: SpritesheetDetect.detectLibgdxAtlas__spritesheetDetect, parse: function(text:String, opts:SpritesheetParseOptions):SpritesheetData return (cast parseLibgdxAtlasSpritesheet((cast text : String), { frameDuration: opts.frameDuration }) : SpritesheetData) }));
+    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(ASEPRITE, (cast { detect: SpritesheetDetect.detectAseprite__spritesheetDetect, parse: function(text:String, __unused0:SpritesheetParseOptions):SpritesheetData return (cast parseAsepriteSpritesheet((cast text : String)) : SpritesheetData) })));
+    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(COCOS_PLIST, (cast { detect: SpritesheetDetect.detectCocosPlist__spritesheetDetect, parse: function(text:String, __unused1:SpritesheetParseOptions):SpritesheetData return (cast parseCocosPlistSpritesheet((cast text : String)) : SpritesheetData) })));
+    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(TEXTURE_PACKER, (cast { detect: SpritesheetDetect.detectTexturePacker__spritesheetDetect, parse: function(text:String, __unused2:SpritesheetParseOptions):SpritesheetData return (cast parseTexturePackerSpritesheet((cast text : String)) : SpritesheetData) })));
+    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(STARLING, (cast { detect: SpritesheetDetect.detectStarling__spritesheetDetect, parse: function(text:String, opts:SpritesheetParseOptions):SpritesheetData return (cast parseStarlingSpritesheet((cast text : String), (cast { frameDuration: opts.frameDuration })) : SpritesheetData) })));
+    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(LIBGDX_ATLAS, (cast { detect: SpritesheetDetect.detectLibgdxAtlas__spritesheetDetect, parse: function(text:String, opts:SpritesheetParseOptions):SpritesheetData return (cast parseLibgdxAtlasSpritesheet((cast text : String), (cast { frameDuration: opts.frameDuration })) : SpritesheetData) })));
     return cast SpritesheetDetect._registry__spritesheetDetect;
     return cast null;
   }
@@ -72,7 +72,7 @@ class SpritesheetDetect {
     for (__iteration3 in _Runtime.iterable((cast SpritesheetDetect.getRegistry__spritesheetDetect() : FormatRegistry__spritesheetDetect))) {
       var kind:String = flighthq._internal._StaticIndex.readArray(__iteration3, 0.0);
       var entry:FormatEntry__spritesheetDetect = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
-      if ((cast (cast entry : FormatEntry__spritesheetDetect).detect(text) : Bool)) { return cast kind; }
+      if ((cast (cast entry : FormatEntry__spritesheetDetect).detect((cast text : String)) : Bool)) { return cast kind; }
     }
     return cast null;
     return cast null;
@@ -92,11 +92,11 @@ class SpritesheetDetect {
     if ((cast !_Runtime.truthy(kind) : Bool)) { return cast null; }
     entry = ((cast (cast SpritesheetDetect.getRegistry__spritesheetDetect() : FormatRegistry__spritesheetDetect) : FormatRegistry__spritesheetDetect).get(kind));
     if ((cast !_Runtime.truthy(entry) : Bool)) { return cast null; }
-    return cast (cast entry : FormatEntry__spritesheetDetect).parse(text, opts);
+    return cast (cast entry : FormatEntry__spritesheetDetect).parse((cast text : String), (cast opts));
     return cast null;
   }
 
   public static function registerSpritesheetFormat(kind:SpritesheetFormatKind, entry:{ var detect:String->Bool; var parse:String->SpritesheetParseOptions->SpritesheetData; }):Void {
-    ((cast (cast SpritesheetDetect.getRegistry__spritesheetDetect() : FormatRegistry__spritesheetDetect) : FormatRegistry__spritesheetDetect).set(kind, entry));
+    ((cast (cast SpritesheetDetect.getRegistry__spritesheetDetect() : FormatRegistry__spritesheetDetect) : FormatRegistry__spritesheetDetect).set(kind, (cast entry)));
   }
 }

@@ -8,17 +8,19 @@ import flighthq.geometry.Rectangle.createRectangle;
 import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
 import flighthq.types.HasBoundsRectangle.Spatial2DNode;
 import flighthq.types.Matrix;
+import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Rectangle;
+import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderViewport2D;
 import flighthq.types.Renderable;
 
 class RenderViewport {
   @:noCompletion
-  public static function computeRenderProxyWorldBounds(out:Dynamic, source:flighthq._internal._Any):Bool {
+  public static function computeRenderProxyWorldBounds(out:flighthq._internal._Pick<Rectangle, String>, source:flighthq._internal._Any):Bool {
     var worldBounds:Rectangle = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast RenderViewport.isSpatial2DNode__renderViewport((cast source : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast false; }
-    worldBounds = (cast getNodeWorldBoundsRectangle(source) : Rectangle);
+    worldBounds = (cast getNodeWorldBoundsRectangle((cast source)) : Rectangle);
     _Runtime.setField(out, 'x', _Runtime.field(worldBounds, 'x'));
     _Runtime.setField(out, 'y', _Runtime.field(worldBounds, 'y'));
     _Runtime.setField(out, 'width', _Runtime.field(worldBounds, 'width'));
@@ -47,7 +49,7 @@ class RenderViewport {
     if ((cast !(cast (cast computeRenderProxyWorldBounds((cast RenderViewport._scratchBounds__renderViewport : flighthq._internal._Any), (cast source : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast true; }
     bounds = RenderViewport._scratchBounds__renderViewport;
     if ((cast !_Runtime.looseEquals(renderTransform2D, null) : Bool)) {
-      matrixTransformRectangle(RenderViewport._scratchTransformed__renderViewport, renderTransform2D, RenderViewport._scratchBounds__renderViewport);
+      matrixTransformRectangle((cast RenderViewport._scratchTransformed__renderViewport), (cast renderTransform2D), (cast RenderViewport._scratchBounds__renderViewport));
       (bounds = cast (RenderViewport._scratchTransformed__renderViewport : Dynamic));
     }
     objMinX = (cast bounds : Rectangle).x;
@@ -64,7 +66,7 @@ class RenderViewport {
 
   @:noCompletion
   public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
-    return cast (cast isRenderableInViewport((cast _Runtime.field(proxy, 'source') : flighthq._internal._Any), (cast viewport : RenderViewport2D), (cast renderTransform2D : Null<Matrix>)) : Bool);
+    return cast (cast isRenderableInViewport((cast _Runtime.field(proxy, 'source') : flighthq._internal._Any), (cast viewport), (cast renderTransform2D)) : Bool);
     return cast null;
   }
 
@@ -73,7 +75,7 @@ class RenderViewport {
     return cast null;
   }
 
-  public static final _scratchBounds__renderViewport:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
+  public static final _scratchBounds__renderViewport:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle);
 
-  public static final _scratchTransformed__renderViewport:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
+  public static final _scratchTransformed__renderViewport:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle);
 }

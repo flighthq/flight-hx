@@ -24,14 +24,14 @@ class InflateState__deflate {
   }
   public function readBit():Float {
     var bit:Float = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals((cast this : InflateState__deflate).bitCount, 0.0) : Bool)) {
-      if ((cast ((cast (cast this : InflateState__deflate).position : Float) >= (cast _Runtime.field((cast this : InflateState__deflate).input, 'length') : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: read past end of stream')); }
-      ((cast this : InflateState__deflate).bitBuffer = flighthq._internal._StaticIndex.readUint8Array((cast this : InflateState__deflate).input, (cast this : InflateState__deflate).position++));
-      ((cast this : InflateState__deflate).bitCount = 8.0);
+    if ((cast _Runtime.strictEquals(this.bitCount, 0.0) : Bool)) {
+      if ((cast ((cast this.position : Float) >= (cast _Runtime.field(this.input, 'length') : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: read past end of stream')); }
+      (this.bitBuffer = flighthq._internal._StaticIndex.readUint8Array(this.input, this.position++));
+      (this.bitCount = 8.0);
     }
-    bit = (_Runtime.toInt32((cast this : InflateState__deflate).bitBuffer) & 1);
-    ((cast this : InflateState__deflate).bitBuffer = (_Runtime.toInt32((cast this : InflateState__deflate).bitBuffer) >> 1));
-    (cast this : InflateState__deflate).bitCount--;
+    bit = (_Runtime.toInt32(this.bitBuffer) & 1);
+    (this.bitBuffer = (_Runtime.toInt32(this.bitBuffer) >> 1));
+    this.bitCount--;
     return cast bit;
     return cast null;
   }
@@ -49,18 +49,18 @@ class InflateState__deflate {
     return cast null;
   }
   public function writeByte(byte:Float):Void {
-    if ((cast ((cast (cast this : InflateState__deflate).outputLength : Float) >= (cast _Runtime.field((cast this : InflateState__deflate).output, 'length') : Float)) : Bool)) {
-      if ((cast ((cast _Runtime.multiplyNumbers(_Runtime.field((cast this : InflateState__deflate).output, 'length'), 2.0) : Float) > (cast Deflate.MAX_INFLATE_BYTES__deflate : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: output exceeds the inflate limit')); }
-      var grown:flighthq._internal._UInt8Array = new flighthq._internal._UInt8Array(_Runtime.multiplyNumbers(_Runtime.field((cast this : InflateState__deflate).output, 'length'), 2.0));
-      (cast grown : flighthq._internal._UInt8Array).set((cast this : InflateState__deflate).output);
-      ((cast this : InflateState__deflate).output = grown);
+    if ((cast ((cast this.outputLength : Float) >= (cast _Runtime.field(this.output, 'length') : Float)) : Bool)) {
+      if ((cast ((cast _Runtime.multiplyNumbers(_Runtime.field(this.output, 'length'), 2.0) : Float) > (cast Deflate.MAX_INFLATE_BYTES__deflate : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: output exceeds the inflate limit')); }
+      var grown:flighthq._internal._UInt8Array = new flighthq._internal._UInt8Array(_Runtime.multiplyNumbers(_Runtime.field(this.output, 'length'), 2.0));
+      (cast grown : flighthq._internal._UInt8Array).set(this.output);
+      (this.output = grown);
     }
-    flighthq._internal._StaticIndex.writeUint8Array((cast this : InflateState__deflate).output, (cast this : InflateState__deflate).outputLength++, byte);
+    flighthq._internal._StaticIndex.writeUint8Array(this.output, this.outputLength++, byte);
   }
 }
 
 class Deflate {
-  public static final inflateDeflate:Decompressor = function(compressed:flighthq._internal._UInt8Array, __unused0:Float):Null<flighthq._internal._UInt8Array> {
+  public static final inflateDeflate:Decompressor = (cast function(compressed:flighthq._internal._UInt8Array, __unused0:Float):Null<flighthq._internal._UInt8Array> {
     var input:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var start:Float = cast _Runtime.UNDEFINED;
     input = (cast compressed : flighthq._internal._UInt8Array);
@@ -70,25 +70,26 @@ class Deflate {
       (start = cast (2.0 : Dynamic));
     }
     try {
-      return cast (cast Deflate.rawInflate__deflate((cast input : flighthq._internal._UInt8Array), (cast start : Float)) : Null<flighthq._internal._UInt8Array>);
+      return cast (cast Deflate.rawInflate__deflate((cast input), (cast start : Float)) : flighthq._internal._UInt8Array);
     } catch (__error:Dynamic) {
       return cast null;
     }
-  };
+    return cast _Runtime.UNDEFINED;
+  });
 
   public static function registerDeflateDecompressor():Void {
-    registerDecompressor((cast (cast CompressionValue : { var Deflate:String; var Lzma:String; }).Deflate : Compression), (cast inflateDeflate : Decompressor));
+    registerDecompressor((cast (cast CompressionValue : { var Deflate:String; var Lzma:String; }).Deflate), (cast inflateDeflate));
   }
 
-  public static final LENGTH_BASE__deflate:Array<Float> = cast ([3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 13.0, 15.0, 17.0, 19.0, 23.0, 27.0, 31.0, 35.0, 43.0, 51.0, 59.0, 67.0, 83.0, 99.0, 115.0, 131.0, 163.0, 195.0, 227.0, 258.0] : Array<Dynamic>);
+  public static final LENGTH_BASE__deflate:Array<Float> = (cast cast ([3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 13.0, 15.0, 17.0, 19.0, 23.0, 27.0, 31.0, 35.0, 43.0, 51.0, 59.0, 67.0, 83.0, 99.0, 115.0, 131.0, 163.0, 195.0, 227.0, 258.0] : Array<Dynamic>));
 
-  public static final LENGTH_EXTRA__deflate:Array<Float> = cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 2.0, 3.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0, 5.0, 5.0, 5.0, 5.0, 0.0] : Array<Dynamic>);
+  public static final LENGTH_EXTRA__deflate:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 2.0, 3.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0, 5.0, 5.0, 5.0, 5.0, 0.0] : Array<Dynamic>));
 
-  public static final DISTANCE_BASE__deflate:Array<Float> = cast ([1.0, 2.0, 3.0, 4.0, 5.0, 7.0, 9.0, 13.0, 17.0, 25.0, 33.0, 49.0, 65.0, 97.0, 129.0, 193.0, 257.0, 385.0, 513.0, 769.0, 1025.0, 1537.0, 2049.0, 3073.0, 4097.0, 6145.0, 8193.0, 12289.0, 16385.0, 24577.0] : Array<Dynamic>);
+  public static final DISTANCE_BASE__deflate:Array<Float> = (cast cast ([1.0, 2.0, 3.0, 4.0, 5.0, 7.0, 9.0, 13.0, 17.0, 25.0, 33.0, 49.0, 65.0, 97.0, 129.0, 193.0, 257.0, 385.0, 513.0, 769.0, 1025.0, 1537.0, 2049.0, 3073.0, 4097.0, 6145.0, 8193.0, 12289.0, 16385.0, 24577.0] : Array<Dynamic>));
 
-  public static final DISTANCE_EXTRA__deflate:Array<Float> = cast ([0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.0, 3.0, 3.0, 4.0, 4.0, 5.0, 5.0, 6.0, 6.0, 7.0, 7.0, 8.0, 8.0, 9.0, 9.0, 10.0, 10.0, 11.0, 11.0, 12.0, 12.0, 13.0, 13.0] : Array<Dynamic>);
+  public static final DISTANCE_EXTRA__deflate:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.0, 3.0, 3.0, 4.0, 4.0, 5.0, 5.0, 6.0, 6.0, 7.0, 7.0, 8.0, 8.0, 9.0, 9.0, 10.0, 10.0, 11.0, 11.0, 12.0, 12.0, 13.0, 13.0] : Array<Dynamic>));
 
-  public static final CODE_LENGTH_ORDER__deflate:Array<Float> = cast ([16.0, 17.0, 18.0, 0.0, 8.0, 7.0, 9.0, 6.0, 10.0, 5.0, 11.0, 4.0, 12.0, 3.0, 13.0, 2.0, 14.0, 1.0, 15.0] : Array<Dynamic>);
+  public static final CODE_LENGTH_ORDER__deflate:Array<Float> = (cast cast ([16.0, 17.0, 18.0, 0.0, 8.0, 7.0, 9.0, 6.0, 10.0, 5.0, 11.0, 4.0, 12.0, 3.0, 13.0, 2.0, 14.0, 1.0, 15.0] : Array<Dynamic>));
 
   public static function rawInflate__deflate(input:flighthq._internal._UInt8Array, start:Float):flighthq._internal._UInt8Array {
     var state:InflateState__deflate = cast _Runtime.UNDEFINED;
@@ -98,7 +99,7 @@ class Deflate {
     do {
       (final_ = cast ((cast state : InflateState__deflate).readBit() : Dynamic));
       var type:Float = (cast state : InflateState__deflate).readBits(2.0, 0.0);
-      if ((cast _Runtime.strictEquals(type, 0.0) : Bool)) { Deflate.inflateStoredBlock__deflate(state); } else { if ((cast _Runtime.strictEquals(type, 1.0) : Bool)) { Deflate.inflateHuffmanBlock__deflate(state, Deflate.FIXED_LITERAL_TREE__deflate, Deflate.FIXED_DISTANCE_TREE__deflate); } else { if ((cast _Runtime.strictEquals(type, 2.0) : Bool)) { Deflate.inflateDynamicBlock__deflate(state); } else { _Runtime.throwValue(_Runtime.error('deflate: invalid block type')); } } }
+      if ((cast _Runtime.strictEquals(type, 0.0) : Bool)) { Deflate.inflateStoredBlock__deflate((cast state)); } else { if ((cast _Runtime.strictEquals(type, 1.0) : Bool)) { Deflate.inflateHuffmanBlock__deflate((cast state), (cast Deflate.FIXED_LITERAL_TREE__deflate), (cast Deflate.FIXED_DISTANCE_TREE__deflate)); } else { if ((cast _Runtime.strictEquals(type, 2.0) : Bool)) { Deflate.inflateDynamicBlock__deflate((cast state)); } else { _Runtime.throwValue(_Runtime.error('deflate: invalid block type')); } } }
     } while ((cast _Runtime.strictEquals(final_, 0.0) : Bool));
     return cast _Runtime.slice((cast state : InflateState__deflate).output, 0.0, (cast state : InflateState__deflate).outputLength);
     return cast null;
@@ -127,7 +128,7 @@ class Deflate {
   public static function inflateHuffmanBlock__deflate(state:InflateState__deflate, literalTree:HuffmanTree__deflate, distanceTree:HuffmanTree__deflate):Void {
     {
       while (true) {
-        var symbol:Float = (cast Deflate.decodeSymbol__deflate(state, literalTree) : Float);
+        var symbol:Float = (cast Deflate.decodeSymbol__deflate((cast state), (cast literalTree)) : Float);
         if ((cast _Runtime.strictEquals(symbol, 256.0) : Bool)) { return; }
         if ((cast ((cast symbol : Float) < (cast 256.0 : Float)) : Bool)) {
           (cast state : InflateState__deflate).writeByte(symbol);
@@ -136,7 +137,7 @@ class Deflate {
         var lengthIndex:Float = (symbol - 257.0);
         if ((cast ((cast lengthIndex : Float) >= (cast Deflate.LENGTH_BASE__deflate.length : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: invalid length symbol')); }
         var length:Float = (cast state : InflateState__deflate).readBits(flighthq._internal._StaticIndex.readArray(Deflate.LENGTH_EXTRA__deflate, lengthIndex), flighthq._internal._StaticIndex.readArray(Deflate.LENGTH_BASE__deflate, lengthIndex));
-        var distanceSymbol:Float = (cast Deflate.decodeSymbol__deflate(state, distanceTree) : Float);
+        var distanceSymbol:Float = (cast Deflate.decodeSymbol__deflate((cast state), (cast distanceTree)) : Float);
         if ((cast ((cast distanceSymbol : Float) >= (cast Deflate.DISTANCE_BASE__deflate.length : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: invalid distance symbol')); }
         var distance:Float = (cast state : InflateState__deflate).readBits(flighthq._internal._StaticIndex.readArray(Deflate.DISTANCE_EXTRA__deflate, distanceSymbol), flighthq._internal._StaticIndex.readArray(Deflate.DISTANCE_BASE__deflate, distanceSymbol));
         var source:Float = ((cast state : InflateState__deflate).outputLength - distance);
@@ -173,11 +174,11 @@ class Deflate {
         i++;
       }
     }
-    codeLengthTree = (cast Deflate.buildHuffmanTree__deflate((cast codeLengthLengths : Array<Float>), (cast 19.0 : Float)) : HuffmanTree__deflate);
+    codeLengthTree = (cast Deflate.buildHuffmanTree__deflate((cast codeLengthLengths), (cast 19.0 : Float)) : HuffmanTree__deflate);
     lengths = _Runtime.fill(_Runtime.createArray((literalCount + distanceCount)), 0.0, 0, null, 1);
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lengths, 'length') : Float)) : Bool)) {
-      var symbol:Float = (cast Deflate.decodeSymbol__deflate(state, codeLengthTree) : Float);
+      var symbol:Float = (cast Deflate.decodeSymbol__deflate((cast state), (cast codeLengthTree)) : Float);
       if ((cast ((cast symbol : Float) < (cast 16.0 : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeArray(lengths, i++, symbol);
       } else { if ((cast _Runtime.strictEquals(symbol, 16.0) : Bool)) {
@@ -213,9 +214,9 @@ class Deflate {
         _Runtime.throwValue(_Runtime.error('deflate: invalid code-length symbol'));
       } } } }
     }
-    literalTree = (cast Deflate.buildHuffmanTree__deflate((cast _Runtime.slice(lengths, 0.0, literalCount) : Array<Float>), (cast literalCount : Float)) : HuffmanTree__deflate);
-    distanceTree = (cast Deflate.buildHuffmanTree__deflate((cast _Runtime.slice(lengths, literalCount, null) : Array<Float>), (cast distanceCount : Float)) : HuffmanTree__deflate);
-    Deflate.inflateHuffmanBlock__deflate(state, literalTree, distanceTree);
+    literalTree = (cast Deflate.buildHuffmanTree__deflate((cast _Runtime.slice(lengths, 0.0, literalCount)), (cast literalCount : Float)) : HuffmanTree__deflate);
+    distanceTree = (cast Deflate.buildHuffmanTree__deflate((cast _Runtime.slice(lengths, literalCount, null)), (cast distanceCount : Float)) : HuffmanTree__deflate);
+    Deflate.inflateHuffmanBlock__deflate((cast state), (cast literalTree), (cast distanceTree));
   }
 
   public static function buildHuffmanTree__deflate(lengths:Array<Float>, count:Float):HuffmanTree__deflate {
@@ -277,7 +278,7 @@ class Deflate {
 
   public static final FIXED_LITERAL_TREE__deflate:HuffmanTree__deflate = (cast Deflate.buildFixedLiteralTree__deflate() : HuffmanTree__deflate);
 
-  public static final FIXED_DISTANCE_TREE__deflate:HuffmanTree__deflate = (cast Deflate.buildHuffmanTree__deflate((cast _Runtime.fill(_Runtime.createArray(30.0), 5.0, 0, null, 1) : Array<Float>), (cast 30.0 : Float)) : HuffmanTree__deflate);
+  public static final FIXED_DISTANCE_TREE__deflate:HuffmanTree__deflate = (cast Deflate.buildHuffmanTree__deflate((cast _Runtime.fill(_Runtime.createArray(30.0), 5.0, 0, null, 1)), (cast 30.0 : Float)) : HuffmanTree__deflate);
 
   public static function buildFixedLiteralTree__deflate():HuffmanTree__deflate {
     var lengths:Array<Float> = cast _Runtime.UNDEFINED;
@@ -310,7 +311,7 @@ class Deflate {
         i++;
       }
     }
-    return cast (cast Deflate.buildHuffmanTree__deflate((cast lengths : Array<Float>), (cast 288.0 : Float)) : HuffmanTree__deflate);
+    return cast (cast Deflate.buildHuffmanTree__deflate((cast lengths), (cast 288.0 : Float)) : HuffmanTree__deflate);
     return cast null;
   }
 

@@ -32,15 +32,15 @@ import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverity
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
 class GltfEmissiveStrength {
-  public static final GltfEmissiveStrengthExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+  public static final GltfEmissiveStrengthExtensionHandler:GltfExtensionHandler = (cast { apply: function(context:GltfExtensionContext):Void {
     var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
     var negative:Float = cast _Runtime.UNDEFINED;
-    materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
+    materials = _Runtime.coalesce((cast _Runtime.field(context, 'source') : { @:optional var materials:Null<Array<GltfMaterial>>; }).materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     negative = 0.0;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var strength:Null<Float> = _Runtime.optionalField(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_emissive_strength'), 'emissiveStrength');
+        var strength:Null<Float> = ({ final __structural1 = ({ final __structural0 = (cast flighthq._internal._StaticIndex.readArray(materials, i) : { @:optional var extensions:Null<{ @:optional var KHR_materials_anisotropy:Null<GltfMaterialsAnisotropy>; @:optional var KHR_materials_clearcoat:Null<GltfMaterialsClearcoat>; @:optional var KHR_materials_emissive_strength:Null<GltfMaterialsEmissiveStrength>; @:optional var KHR_materials_ior:Null<GltfMaterialsIor>; @:optional var KHR_materials_iridescence:Null<GltfMaterialsIridescence>; @:optional var KHR_materials_pbrSpecularGlossiness:Null<GltfMaterialsPbrSpecularGlossiness>; @:optional var KHR_materials_sheen:Null<GltfMaterialsSheen>; @:optional var KHR_materials_unlit:Null<flighthq._internal._Record<String, flighthq._internal._Any>>; @:optional var KHR_materials_specular:Null<GltfMaterialsSpecular>; @:optional var KHR_materials_transmission:Null<GltfMaterialsTransmission>; @:optional var KHR_materials_volume:Null<GltfMaterialsVolume>; }>; }).extensions; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var KHR_materials_emissive_strength:Null<GltfMaterialsEmissiveStrength>; }).KHR_materials_emissive_strength; }); __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var emissiveStrength:Null<Float>; }).emissiveStrength; });
         if ((cast _Runtime.strictEquals(strength, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         if ((cast !(cast _Runtime.compare(strength, 0.0, '>=') : Bool) : Bool)) {
           negative++;
@@ -58,7 +58,7 @@ class GltfEmissiveStrength {
       }
     }
     if ((cast ((cast negative : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(_Runtime.field(context, 'diagnostics'), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : ImportDiagnosticSeverity), (cast 'gltf.emissive-strength-negative' : String), (cast 'GltfEmissiveStrengthExtensionHandler' : String), (cast { count: negative } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast _Runtime.field(context, 'diagnostics')), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'gltf.emissive-strength-negative' : String), (cast 'GltfEmissiveStrengthExtensionHandler' : String), (cast { count: negative }));
     }
-  }, kind: 'KHR_materials_emissive_strength' };
+  }, kind: 'KHR_materials_emissive_strength' });
 }

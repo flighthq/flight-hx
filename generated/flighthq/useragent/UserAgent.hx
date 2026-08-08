@@ -114,10 +114,10 @@ class UserAgent {
   public static function parseUserAgentRuntime(win:Null<flighthq._internal._Record<String, flighthq._internal._Any>>):PlatformRuntime {
     var proc:Null<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.looseEquals(win, null) : Bool)) { return cast 'unknown'; }
-    proc = (cast _Runtime.field(win, 'process') : Null<flighthq._internal._Record<String, flighthq._internal._Any>>);
-    if (_Runtime.truthy(_Runtime.andValue(_Runtime.optionalField(proc, 'versions'), function():Dynamic return cast _Runtime.field((cast _Runtime.field(proc, 'versions') : flighthq._internal._Record<String, flighthq._internal._Any>), 'electron')))) { return cast 'electron'; }
-    if (_Runtime.truthy(_Runtime.field(win, '__TAURI__'))) { return cast 'tauri'; }
-    if (_Runtime.truthy(_Runtime.field(win, 'Capacitor'))) { return cast 'capacitor'; }
+    proc = (cast (cast win : { var process:flighthq._internal._Any; }).process : Null<flighthq._internal._Record<String, flighthq._internal._Any>>);
+    if (_Runtime.truthy(_Runtime.andValue(_Runtime.optionalField(proc, 'versions'), function():Dynamic return cast (cast (cast (cast proc : { var versions:flighthq._internal._Any; }).versions : flighthq._internal._Record<String, flighthq._internal._Any>) : { var electron:flighthq._internal._Any; }).electron))) { return cast 'electron'; }
+    if (_Runtime.truthy((cast win : { var __TAURI__:flighthq._internal._Any; }).__TAURI__)) { return cast 'tauri'; }
+    if (_Runtime.truthy((cast win : { var Capacitor:flighthq._internal._Any; }).Capacitor)) { return cast 'capacitor'; }
     return cast 'web';
     return cast null;
   }

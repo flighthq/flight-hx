@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef InputKeyRepeatTimer = { var start:Void->Void->Void; var stop:Void->Void; };
+typedef InputKeyRepeatTimer = { var start:(Void->Void)->Void; var stop:Void->Void; };

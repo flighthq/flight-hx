@@ -11,7 +11,7 @@ typedef ApplicationRenderView<State, Target> = { @:optional var __EntityRuntimeK
 
 typedef ApplicationRenderViewResize<State, Target> = State->Target->Float->Float->Void;
 
-typedef ApplicationRenderViewTargetOptions = Dynamic;
+typedef ApplicationRenderViewTargetOptions = flighthq._internal._Omit<RenderTargetDescriptor, String>;
 
 typedef GlApplicationRenderViewOptions = { @:optional var render:GlRenderOptions; @:optional var target:ApplicationRenderViewTargetOptions; };
 

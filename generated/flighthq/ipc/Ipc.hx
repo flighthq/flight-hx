@@ -26,7 +26,7 @@ class Ipc {
     set = ((cast Ipc._listeners__ipc : flighthq._internal._Map<String, flighthq._internal._Set<Void->Void>>).get(channel));
     if ((cast _Runtime.strictEquals(set, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (set = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) : Dynamic));
-      ((cast Ipc._listeners__ipc : flighthq._internal._Map<String, flighthq._internal._Set<Void->Void>>).set(channel, set));
+      ((cast Ipc._listeners__ipc : flighthq._internal._Map<String, flighthq._internal._Set<Void->Void>>).set(channel, (cast set)));
     }
     ((cast set : flighthq._internal._Set<Void->Void>).add(unsubscribe));
   }
@@ -51,12 +51,15 @@ class Ipc {
 
     }, invoke: function():flighthq._internal._Promise<flighthq._internal._Any> {
       return cast flighthq._internal._Async.resolve(_Runtime.field(_Runtime, 'UNDEFINED'));
+      return cast _Runtime.UNDEFINED;
     }, subscribe: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, getCapabilities: function():IpcBackendCapabilities {
       return cast { canHandle: false, canInvoke: false, canSend: false, canTarget: false };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
@@ -71,14 +74,14 @@ class Ipc {
 
   @:noCompletion
   public static function getIpcBackend():IpcBackend {
-    if ((cast _Runtime.strictEquals(Ipc._backend__ipc, null) : Bool)) { (Ipc._backend__ipc = cast ((cast createWebIpcBackend() : Null<IpcBackend>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Ipc._backend__ipc, null) : Bool)) { (Ipc._backend__ipc = cast ((cast createWebIpcBackend() : IpcBackend) : Dynamic)); }
     return cast Ipc._backend__ipc;
     return cast null;
   }
 
   public static function getIpcListenerCount(channel:flighthq._internal._Union2<String, IpcChannel>):Float {
     var name:String = cast _Runtime.UNDEFINED;
-    name = (cast Ipc.resolveChannel__ipc((cast channel : flighthq._internal._Union2<String, IpcChannel>)) : String);
+    name = (cast Ipc.resolveChannel__ipc((cast channel)) : String);
     return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast Ipc._listeners__ipc : flighthq._internal._Map<String, flighthq._internal._Set<Void->Void>>).get(name)); __collection0 == null ? _Runtime.UNDEFINED : (cast __collection0 : flighthq._internal._Set<Void->Void>).size; }), function():Dynamic return cast 0.0);
     return cast null;
   }
@@ -95,7 +98,7 @@ class Ipc {
   }
 
   public static function invokeIpc(channel:flighthq._internal._Union2<String, IpcChannel>, ...args:flighthq._internal._Any):flighthq._internal._Promise<flighthq._internal._Any> {
-    return cast (cast (cast getIpcBackend() : IpcBackend) : IpcBackend).invoke((cast Ipc.resolveChannel__ipc((cast channel : flighthq._internal._Union2<String, IpcChannel>)) : String), args);
+    return cast (cast (cast getIpcBackend() : IpcBackend) : IpcBackend).invoke((cast (cast Ipc.resolveChannel__ipc((cast channel)) : String) : String), (cast args));
     return cast null;
   }
 
@@ -103,12 +106,12 @@ class Ipc {
     var name:String = cast _Runtime.UNDEFINED;
     var invoke:flighthq._internal._Promise<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     var timeout:flighthq._internal._Promise<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
-    name = (cast Ipc.resolveChannel__ipc((cast channel : flighthq._internal._Union2<String, IpcChannel>)) : String);
-    invoke = (cast (cast getIpcBackend() : IpcBackend) : IpcBackend).invoke(name, args);
+    name = (cast Ipc.resolveChannel__ipc((cast channel)) : String);
+    invoke = (cast (cast getIpcBackend() : IpcBackend) : IpcBackend).invoke((cast name : String), (cast args));
     timeout = flighthq._internal._Async.create(function(_:flighthq._internal._Any, reject:flighthq._internal._Any):Void {
       var id:flighthq._internal.dom.Timeout = cast _Runtime.UNDEFINED;
-      id = _Runtime.setTimeout(function():Void return reject((cast new IpcTimeoutError(name, timeoutMs) : flighthq._internal._Any)), timeoutMs);
-      _Runtime.callProperty(invoke, 'then', cast ([function():Void return _Runtime.clearTimeout(id), function():Void return _Runtime.clearTimeout(id)] : Array<Dynamic>));
+      id = _Runtime.setTimeout(function():Void { reject((cast new IpcTimeoutError(name, timeoutMs) : flighthq._internal._Any)); }, timeoutMs);
+      _Runtime.callProperty(invoke, 'then', cast ([function(__unused0:flighthq._internal._Any):Void { _Runtime.clearTimeout(id); }, function(__unused1:flighthq._internal._Any):Void { _Runtime.clearTimeout(id); }] : Array<Dynamic>));
     });
     return cast flighthq._internal._Async.race(cast ([invoke, timeout] : Array<Dynamic>));
     return cast null;
@@ -117,10 +120,10 @@ class Ipc {
   public static function onceIpcMessage(channel:flighthq._internal._Union2<String, IpcChannel>, listener:Array<flighthq._internal._Any>->Void):Void->Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
     unsubscribe = null;
-    (unsubscribe = cast ((cast onIpcMessage((cast channel : flighthq._internal._Union2<String, IpcChannel>), (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
+    (unsubscribe = cast ((cast onIpcMessage((cast channel), (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
       _Runtime.callOptionalValue(unsubscribe, cast ([] : Array<Dynamic>));
       _Runtime.callHaxeRestValue(listener, _Runtime.concatArrays([_Runtime.toArray(args)]), 0);
-    }, 0) : Array<flighthq._internal._Any>->Void)) : Null<Void->Void>) : Dynamic));
+    }, 0))) : Void->Void) : Dynamic));
     return cast unsubscribe;
     return cast null;
   }
@@ -131,7 +134,7 @@ class Ipc {
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast backend : IpcBackend).handle), 'function') : Bool)) { return cast function():Void {
 
     }; }
-    return cast (cast backend : IpcBackend).handle((cast Ipc.resolveChannel__ipc((cast channel : flighthq._internal._Union2<String, IpcChannel>)) : String), handler);
+    return cast (cast backend : IpcBackend).handle((cast (cast Ipc.resolveChannel__ipc((cast channel)) : String) : String), (cast handler));
     return cast null;
   }
 
@@ -141,18 +144,18 @@ class Ipc {
     var signals:Null<IpcSignals> = cast _Runtime.UNDEFINED;
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
     var tracked:Void->Void = cast _Runtime.UNDEFINED;
-    name = (cast Ipc.resolveChannel__ipc((cast channel : flighthq._internal._Union2<String, IpcChannel>)) : String);
+    name = (cast Ipc.resolveChannel__ipc((cast channel)) : String);
     backend = (cast getIpcBackend() : IpcBackend);
     signals = Ipc._ipcSignals__ipc;
-    unsubscribe = (cast backend : IpcBackend).subscribe(name, function(args:Array<flighthq._internal._Any>):Void {
-      if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : flighthq.types.IpcSignals).onChannelMessage], [name]]), 1); }
+    unsubscribe = (cast backend : IpcBackend).subscribe((cast name : String), (cast function(args:Array<flighthq._internal._Any>):Void {
+      if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : { var onChannelMessage:Signal<String->Void>; }).onChannelMessage], [name]]), 1); }
       _Runtime.callHaxeRestValue(listener, _Runtime.concatArrays([_Runtime.toArray(args)]), 0);
-    });
+    }));
     tracked = (cast function():Void {
       unsubscribe();
-      Ipc._untrackListener__ipc((cast name : String), (cast tracked : Void->Void));
-    } : Void->Void);
-    Ipc._trackListener__ipc((cast name : String), (cast tracked : Void->Void));
+      Ipc._untrackListener__ipc((cast name : String), (cast tracked));
+    });
+    Ipc._trackListener__ipc((cast name : String), (cast tracked));
     return cast tracked;
     return cast null;
   }
@@ -163,31 +166,31 @@ class Ipc {
     var signals:Null<IpcSignals> = cast _Runtime.UNDEFINED;
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
     var tracked:Void->Void = cast _Runtime.UNDEFINED;
-    name = (cast Ipc.resolveChannel__ipc((cast channel : flighthq._internal._Union2<String, IpcChannel>)) : String);
+    name = (cast Ipc.resolveChannel__ipc((cast channel)) : String);
     backend = (cast getIpcBackend() : IpcBackend);
     signals = Ipc._ipcSignals__ipc;
-    unsubscribe = (cast backend : IpcBackend).subscribe(name, function(args:Array<flighthq._internal._Any>):Void {
+    unsubscribe = (cast backend : IpcBackend).subscribe((cast name : String), (cast function(args:Array<flighthq._internal._Any>):Void {
       var event:IpcMessageEvent = cast _Runtime.UNDEFINED;
-      if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : flighthq.types.IpcSignals).onChannelMessage], [name]]), 1); }
-      event = { channel: name, senderId: -1.0, args: args, reply: _Runtime.haxeRest(function(...replyArgs:flighthq._internal._Any):Void {
-        var __thisValue0:Dynamic = _Runtime.thisValue();
-        if ((cast _Runtime.strictEquals(__thisValue0.senderId, -1.0) : Bool)) { return; }
-        _Runtime.callOptionalValue((cast backend : IpcBackend).sendTo, cast ([{ windowId: __thisValue0.senderId }, name, replyArgs] : Array<Dynamic>));
-      }, 0) };
-      listener((cast event : IpcMessageEvent));
-    });
+      if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : { var onChannelMessage:Signal<String->Void>; }).onChannelMessage], [name]]), 1); }
+      event = (cast { channel: name, senderId: -1.0, args: args, reply: _Runtime.haxeRest(function(...replyArgs:flighthq._internal._Any):Void {
+        var __thisValue2:Dynamic = _Runtime.thisValue();
+        if ((cast _Runtime.strictEquals((cast __thisValue2 : { var senderId:Float; }).senderId, -1.0) : Bool)) { return; }
+        _Runtime.callOptionalValue((cast backend : IpcBackend).sendTo, cast ([{ windowId: (cast __thisValue2 : { var senderId:Float; }).senderId }, name, replyArgs] : Array<Dynamic>));
+      }, 0) });
+      listener((cast event));
+    }));
     tracked = (cast function():Void {
       unsubscribe();
-      Ipc._untrackListener__ipc((cast name : String), (cast tracked : Void->Void));
-    } : Void->Void);
-    Ipc._trackListener__ipc((cast name : String), (cast tracked : Void->Void));
+      Ipc._untrackListener__ipc((cast name : String), (cast tracked));
+    });
+    Ipc._trackListener__ipc((cast name : String), (cast tracked));
     return cast tracked;
     return cast null;
   }
 
   public static function removeAllIpcListeners(?channel:flighthq._internal._Union2<String, IpcChannel>):Void {
     if ((cast !_Runtime.strictEquals(channel, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var name:String = (cast Ipc.resolveChannel__ipc((cast channel : flighthq._internal._Union2<String, IpcChannel>)) : String);
+      var name:String = (cast Ipc.resolveChannel__ipc((cast channel)) : String);
       var set:Null<flighthq._internal._Set<Void->Void>> = ((cast Ipc._listeners__ipc : flighthq._internal._Map<String, flighthq._internal._Set<Void->Void>>).get(name));
       if ((cast !_Runtime.strictEquals(set, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         for (unsubscribe in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(set)]))) {
@@ -195,8 +198,8 @@ class Ipc {
         }
       }
     } else {
-      for (__iteration1 in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(Ipc._listeners__ipc)]))) {
-        var set:flighthq._internal._Set<Void->Void> = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
+      for (__iteration3 in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(Ipc._listeners__ipc)]))) {
+        var set:flighthq._internal._Set<Void->Void> = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
         for (unsubscribe in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(set)]))) {
           unsubscribe();
         }
@@ -205,21 +208,21 @@ class Ipc {
   }
 
   public static function resolveChannel__ipc(channel:flighthq._internal._Union2<String, IpcChannel>):String {
-    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(channel), 'string') : Bool) ? (cast channel : Dynamic) : (cast (cast channel : flighthq.types.Ipc.IpcChannel).name : Dynamic));
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(channel), 'string') : Bool) ? (cast channel : Dynamic) : (cast (cast channel : { var name:String; }).name : Dynamic));
     return cast null;
   }
 
   public static function sendIpcMessage(channel:flighthq._internal._Union2<String, IpcChannel>, ...args:flighthq._internal._Any):Void {
-    (cast (cast getIpcBackend() : IpcBackend) : IpcBackend).send((cast Ipc.resolveChannel__ipc((cast channel : flighthq._internal._Union2<String, IpcChannel>)) : String), args);
+    (cast (cast getIpcBackend() : IpcBackend) : IpcBackend).send((cast (cast Ipc.resolveChannel__ipc((cast channel)) : String) : String), (cast args));
   }
 
   public static function sendIpcMessageTo(target:IpcTarget, channel:flighthq._internal._Union2<String, IpcChannel>, ...args:flighthq._internal._Any):Void {
-    _Runtime.callOptionalValue((cast (cast getIpcBackend() : IpcBackend) : IpcBackend).sendTo, cast ([target, (cast Ipc.resolveChannel__ipc((cast channel : flighthq._internal._Union2<String, IpcChannel>)) : String), args] : Array<Dynamic>));
+    _Runtime.callOptionalValue((cast (cast getIpcBackend() : IpcBackend) : IpcBackend).sendTo, cast ([target, (cast Ipc.resolveChannel__ipc((cast channel)) : String), args] : Array<Dynamic>));
   }
 
   @:noCompletion
   public static function setIpcBackend(backend:Null<IpcBackend>):Void {
     (Ipc._backend__ipc = cast (backend : Dynamic));
-    if ((cast !_Runtime.strictEquals(Ipc._ipcSignals__ipc, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Ipc._ipcSignals__ipc : flighthq.types.IpcSignals).onBackendChanged]]), 1); }
+    if ((cast !_Runtime.strictEquals(Ipc._ipcSignals__ipc, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Ipc._ipcSignals__ipc : { var onBackendChanged:Signal<Void->Void>; }).onBackendChanged]]), 1); }
   }
 }

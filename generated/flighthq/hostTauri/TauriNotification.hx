@@ -7,6 +7,7 @@ import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Notification.NotificationCapabilities;
 import flighthq.types.Notification.NotificationPermission;
 import flighthq.types.Notification.NotificationRequest;
+import flighthq.types.Notification.ScheduledNotification;
 import flighthq.types.TauriApi;
 import flighthq.types.TauriApi.TauriNotificationOptions;
 import flighthq.types.TauriApi.TauriNotificationPermission;
@@ -22,7 +23,7 @@ class TauriNotification {
     cachedPermission = 'default';
     flighthq._internal._Async.recover(_Runtime.callProperty((cast notification : TauriNotificationPlugin).isPermissionGranted(), 'then', cast ([function(granted:Bool):Void {
       (cachedPermission = cast (((cast granted : Bool) ? (cast 'granted' : Dynamic) : (cast 'default' : Dynamic)) : Dynamic));
-    }] : Array<Dynamic>)), function():Void {
+    }] : Array<Dynamic>)), function(__unused0:flighthq._internal._Any):Void {
 
     });
     return cast { notify: function(request:NotificationRequest):flighthq._internal._Promise<String> {
@@ -30,7 +31,7 @@ class TauriNotification {
         var id:String = cast _Runtime.UNDEFINED;
         id = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
         try {
-          (cast notification : TauriNotificationPlugin).sendNotification({ title: request.title, body: request.body, icon: request.icon });
+          (cast notification : TauriNotificationPlugin).sendNotification((cast { title: request.title, body: request.body, icon: request.icon }));
           return cast id;
         } catch (__error:Dynamic) {
           return cast '';
@@ -59,19 +60,22 @@ class TauriNotification {
       );
     }, getPermission: function():NotificationPermission {
       return cast cachedPermission;
+      return cast _Runtime.UNDEFINED;
     }, isSupported: function():Bool {
       return cast true;
+      return cast _Runtime.UNDEFINED;
     }, getCapabilities: function():NotificationCapabilities {
       return cast { actions: false, channels: false, coldStart: false, image: false, listActive: false, scheduling: false, textReply: false };
-    }, getLaunchNotification: function():flighthq._internal._Promise<flighthq._internal._Any> {
+      return cast _Runtime.UNDEFINED;
+    }, getLaunchNotification: function():flighthq._internal._Promise<Null<NotificationRequest>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(null);
       }));
-    }, getActiveNotifications: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
+    }, getActiveNotifications: function():flighthq._internal._Promise<Array<NotificationRequest>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
-    }, getPendingNotifications: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
+    }, getPendingNotifications: function():flighthq._internal._Promise<Array<ScheduledNotification>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
@@ -93,22 +97,27 @@ class TauriNotification {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeAction: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeDismiss: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeReply: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, subscribeShow: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }

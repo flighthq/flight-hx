@@ -16,7 +16,7 @@ class GlTextureVideoUpload {
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(element, null) : Bool) || (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).readyState : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       return cast uploadedVersion;
     }
-    uploadGlTextureElement((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D) : Float), (cast (cast (cast element : flighthq._internal._Any) : flighthq._internal.dom.TexImageSource) : flighthq._internal._Any), (cast internalFormat : Float));
+    uploadGlTextureElement((cast gl), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D) : Float), (cast (cast (cast element : flighthq._internal._Any) : flighthq._internal.dom.TexImageSource) : flighthq._internal._Any), (cast internalFormat : Float));
     return cast _Runtime.field(image, 'version');
     return cast null;
   }

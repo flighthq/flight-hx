@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.materials.ClearcoatPbrExtension.createClearcoatPbrExtension;
 import flighthq.scene3dFormats.GltfMaterialExtension.attachGltfPbrExtension;
+import flighthq.types.ClearcoatPbrExtension;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.GltfExtension.GltfExtensionContext;
 import flighthq.types.GltfExtension.GltfExtensionHandler;
@@ -33,17 +34,17 @@ import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 
 class GltfClearcoat {
-  public static final GltfClearcoatExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+  public static final GltfClearcoatExtensionHandler:GltfExtensionHandler = (cast { apply: function(context:GltfExtensionContext):Void {
     var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
-    materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
+    materials = _Runtime.coalesce((cast _Runtime.field(context, 'source') : { @:optional var materials:Null<Array<GltfMaterial>>; }).materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var block:Null<GltfMaterialsClearcoat> = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_clearcoat');
+        var block:Null<GltfMaterialsClearcoat> = ({ final __structural0 = (cast flighthq._internal._StaticIndex.readArray(materials, i) : { @:optional var extensions:Null<{ @:optional var KHR_materials_anisotropy:Null<GltfMaterialsAnisotropy>; @:optional var KHR_materials_clearcoat:Null<GltfMaterialsClearcoat>; @:optional var KHR_materials_emissive_strength:Null<GltfMaterialsEmissiveStrength>; @:optional var KHR_materials_ior:Null<GltfMaterialsIor>; @:optional var KHR_materials_iridescence:Null<GltfMaterialsIridescence>; @:optional var KHR_materials_pbrSpecularGlossiness:Null<GltfMaterialsPbrSpecularGlossiness>; @:optional var KHR_materials_sheen:Null<GltfMaterialsSheen>; @:optional var KHR_materials_unlit:Null<flighthq._internal._Record<String, flighthq._internal._Any>>; @:optional var KHR_materials_specular:Null<GltfMaterialsSpecular>; @:optional var KHR_materials_transmission:Null<GltfMaterialsTransmission>; @:optional var KHR_materials_volume:Null<GltfMaterialsVolume>; }>; }).extensions; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var KHR_materials_clearcoat:Null<GltfMaterialsClearcoat>; }).KHR_materials_clearcoat; });
         if ((cast _Runtime.strictEquals(block, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        (cast attachGltfPbrExtension(_Runtime.field(context, 'document'), (cast i : Float), (cast createClearcoatPbrExtension((cast { clearcoat: _Runtime.coalesce((cast block : GltfMaterialsClearcoat).clearcoatFactor, function():Dynamic return cast 0.0), clearcoatMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsClearcoat).clearcoatTexture, 'linear'] : Array<Dynamic>)), clearcoatNormalMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsClearcoat).clearcoatNormalTexture, 'linear'] : Array<Dynamic>)), clearcoatNormalScale: _Runtime.coalesce(({ final __typedStruct0 = (cast block : GltfMaterialsClearcoat).clearcoatNormalTexture; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.scale; }), function():Dynamic return cast 1.0), clearcoatRoughness: _Runtime.coalesce((cast block : GltfMaterialsClearcoat).clearcoatRoughnessFactor, function():Dynamic return cast 0.0), clearcoatRoughnessMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsClearcoat).clearcoatRoughnessTexture, 'linear'] : Array<Dynamic>)) } : Null<flighthq._internal._Any>)) : PbrExtension)) : Bool);
+        (cast attachGltfPbrExtension((cast _Runtime.field(context, 'document')), (cast i : Float), (cast (cast createClearcoatPbrExtension((cast { clearcoat: _Runtime.coalesce((cast block : GltfMaterialsClearcoat).clearcoatFactor, function():Dynamic return cast 0.0), clearcoatMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsClearcoat).clearcoatTexture, 'linear'] : Array<Dynamic>)), clearcoatNormalMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsClearcoat).clearcoatNormalTexture, 'linear'] : Array<Dynamic>)), clearcoatNormalScale: _Runtime.coalesce(({ final __typedStruct1 = (cast block : GltfMaterialsClearcoat).clearcoatNormalTexture; __typedStruct1 == null ? _Runtime.UNDEFINED : (cast __typedStruct1 : { @:optional var scale:Null<Float>; }).scale; }), function():Dynamic return cast 1.0), clearcoatRoughness: _Runtime.coalesce((cast block : GltfMaterialsClearcoat).clearcoatRoughnessFactor, function():Dynamic return cast 0.0), clearcoatRoughnessMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsClearcoat).clearcoatRoughnessTexture, 'linear'] : Array<Dynamic>)) })) : ClearcoatPbrExtension))) : Bool);
         i++;
       }
     }
-  }, kind: 'KHR_materials_clearcoat' };
+  }, kind: 'KHR_materials_clearcoat' });
 }

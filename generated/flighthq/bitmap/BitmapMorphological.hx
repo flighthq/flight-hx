@@ -8,11 +8,11 @@ import flighthq.types.BitmapRegion;
 
 class BitmapMorphological {
   public static function dilateBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float):Void {
-    BitmapMorphological.applyMorphological__bitmapMorphological((cast out : flighthq._internal._UInt8ClampedArray), (cast source : BitmapRegion), (cast radius : Float), (cast true : Bool));
+    BitmapMorphological.applyMorphological__bitmapMorphological((cast out), (cast source), (cast radius : Float), (cast true : Bool));
   }
 
   public static function erodeBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float):Void {
-    BitmapMorphological.applyMorphological__bitmapMorphological((cast out : flighthq._internal._UInt8ClampedArray), (cast source : BitmapRegion), (cast radius : Float), (cast false : Bool));
+    BitmapMorphological.applyMorphological__bitmapMorphological((cast out), (cast source), (cast radius : Float), (cast false : Bool));
   }
 
   public static function applyMorphological__bitmapMorphological(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float, dilate:Bool):Void {
@@ -26,9 +26,9 @@ class BitmapMorphological {
     r = HxMath.max(0.0, HxMath.round(radius));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
-    bitmapWidth = _Runtime.field(source, 'bitmap').width;
-    bitmapHeight = _Runtime.field(source, 'bitmap').height;
-    data = _Runtime.field(source, 'bitmap').data;
+    bitmapWidth = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
+    bitmapHeight = (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height;
+    data = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     identity = ((cast dilate : Bool) ? (cast 0.0 : Dynamic) : (cast 255.0 : Dynamic));
     {
       var py:Float = 0.0;

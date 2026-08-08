@@ -23,11 +23,13 @@ import flighthq.types.BitmapText.BitmapTextRuntime;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
+import flighthq.types.Node2D;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Renderable;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.Sampler;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 import flighthq.types.WgpuMaterialRenderer;
@@ -54,12 +56,12 @@ class WgpuBitmapText {
     var ptx:Float = cast _Runtime.UNDEFINED;
     var pty:Float = cast _Runtime.UNDEFINED;
     var alpha:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) { return; }
     source = (cast (cast node : RenderProxy2D).source : BitmapText);
-    pages = (cast (cast (cast getNode2DRuntime(source) : BitmapTextRuntime) : BitmapTextRuntime) : BitmapTextRuntime).pages;
+    pages = (cast (cast getNode2DRuntime((cast source)) : BitmapTextRuntime) : BitmapTextRuntime).pages;
     material = (cast node : RenderProxy2D).material;
-    materialRenderer = (cast resolveWgpuMaterialRenderer((cast state : WgpuRenderState), material) : Null<WgpuMaterialRenderer>);
+    materialRenderer = (cast resolveWgpuMaterialRenderer((cast state), (cast material)) : Null<WgpuMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     nodeMaterialData = (cast node : RenderProxy2D).materialData;
     nodeColorScaleBias = _Runtime.coalesce((cast node : RenderProxy2D).colorMatrix, function():Dynamic return cast (cast node : RenderProxy2D).colorScaleBias);
@@ -74,15 +76,15 @@ class WgpuBitmapText {
     for (page in _Runtime.iterable(pages)) {
       var atlas:TextureAtlas = (cast page : BitmapTextPage).atlas;
       var texture:Null<Texture2D> = atlas.texture;
-      if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !(cast (cast hasTextureSource(texture) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast page : BitmapTextPage).instanceCount, 0.0) : Bool)) : Bool)) { continue; }
-      var textureEntry:Null<WgpuTextureEntry> = (cast resolveWgpuTexture((cast state : WgpuRenderState), texture, (cast true : Bool), SCENE2D_WORKING_COLOR_SPACE) : Null<WgpuTextureEntry>);
+      if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !(cast (cast hasTextureSource((cast texture)) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast page : BitmapTextPage).instanceCount, 0.0) : Bool)) : Bool)) { continue; }
+      var textureEntry:Null<WgpuTextureEntry> = (cast resolveWgpuTexture((cast state), (cast texture), (cast true : Bool), (cast SCENE2D_WORKING_COLOR_SPACE)) : Null<WgpuTextureEntry>);
       if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { continue; }
-      var base:Float = (cast prepareWgpuQuadBatchWrite((cast state : WgpuRenderState), textureEntry, (cast texture : Texture2D).sampler, (cast (cast node : RenderProxy2D).blendMode : Null<String>), material, materialRenderer, (cast (cast page : BitmapTextPage).instanceCount : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Bool>)) : Float);
+      var base:Float = (cast prepareWgpuQuadBatchWrite((cast state), (cast textureEntry), (cast (cast texture : Texture2D).sampler), (cast (cast node : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast (cast page : BitmapTextPage).instanceCount : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Float);
       var startCount:Float = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount;
       var regions:Array<TextureAtlasRegion> = atlas.regions;
       var numRegions:Float = _Runtime.field(regions, 'length');
-      var iw:Float = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(texture) : Float)));
-      var ih:Float = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(texture) : Float)));
+      var iw:Float = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth((cast texture)) : Float)));
+      var ih:Float = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight((cast texture)) : Float)));
       var instanceData:flighthq._internal._Float32Array = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterInstanceData;
       var ids:flighthq._internal._UInt16Array = (cast page : BitmapTextPage).ids;
       var transforms:flighthq._internal._Float32Array = (cast page : BitmapTextPage).transforms;
@@ -110,8 +112,8 @@ class WgpuBitmapText {
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 10.0), ((region.x + region.width) * iw));
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 11.0), ((region.y + region.height) * ih));
           flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 12.0), alpha);
-          packWgpuQuadBatchMaterialInstance((cast state : WgpuRenderState), (cast nodeMaterialData : Null<flighthq._internal._Object>), (cast (startCount + drawCount) : Float));
-          recordWgpuQuadBatchColorScaleBias((cast state : WgpuRenderState), nodeColorScaleBias, (cast (startCount + drawCount) : Float));
+          packWgpuQuadBatchMaterialInstance((cast state), (cast nodeMaterialData), (cast (startCount + drawCount) : Float));
+          recordWgpuQuadBatchColorScaleBias((cast state), (cast nodeColorScaleBias), (cast (startCount + drawCount) : Float));
           (writeBase = cast ((writeBase + WgpuBitmapText.INSTANCE_STRIDE_FLOATS__wgpuBitmapText) : Dynamic));
           drawCount++;
           i++;
@@ -121,5 +123,5 @@ class WgpuBitmapText {
     }
   }
 
-  public static final defaultWgpuBitmapTextRenderer:SpriteRenderer = { format: BatchFormat.Quad, createData: noopRendererData, submit: WgpuBitmapText.submitWgpuBitmapText__wgpuBitmapText };
+  public static final defaultWgpuBitmapTextRenderer:SpriteRenderer = (cast { format: BatchFormat.Quad, createData: noopRendererData, submit: WgpuBitmapText.submitWgpuBitmapText__wgpuBitmapText });
 }

@@ -27,16 +27,16 @@ class CapacitorKeyboard {
     keyboard = (cast capacitor : CapacitorApi).keyboard;
     mirrorVisible = false;
     mirrorHeight = 0.0;
-    flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).addListener('keyboardWillShow', function(info:{ var keyboardHeight:Float; }):Void {
+    flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).addListener((cast 'keyboardWillShow' : String), (cast function(info:{ var keyboardHeight:Float; }):Void {
       (mirrorVisible = cast (true : Dynamic));
       (mirrorHeight = cast ((cast info : { var keyboardHeight:Float; }).keyboardHeight : Dynamic));
-    }), function():Void {
+    })), function(__unused0:flighthq._internal._Any):Void {
 
     });
-    flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).addListener('keyboardWillHide', function():Void {
+    flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).addListener((cast 'keyboardWillHide' : String), (cast function():Void {
       (mirrorVisible = cast (false : Dynamic));
       (mirrorHeight = cast (0.0 : Dynamic));
-    }), function():Void {
+    })), function(__unused1:flighthq._internal._Any):Void {
 
     });
     return cast { getInfo: function(out:SoftKeyboardInfo):SoftKeyboardInfo {
@@ -46,39 +46,41 @@ class CapacitorKeyboard {
       ((cast out : SoftKeyboardInfo).y = 0.0);
       ((cast out : SoftKeyboardInfo).width = 0.0);
       return cast out;
+      return cast _Runtime.UNDEFINED;
     }, hide: function():Void {
-      flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).hide(), function():Void {
+      flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).hide(), function(__unused2:flighthq._internal._Any):Void {
 
       });
     }, setAccessoryBarVisible: function(visible:Bool):Void {
-      flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).setAccessoryBarVisible({ isVisible: visible }), function():Void {
+      flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).setAccessoryBarVisible((cast { isVisible: visible })), function(__unused3:flighthq._internal._Any):Void {
 
       });
     }, setResizeMode: function(mode:SoftKeyboardResizeMode):Void {
-      flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).setResizeMode({ mode: (cast CapacitorKeyboard.toCapacitorResizeMode__capacitorKeyboard((cast mode : String)) : String) }), function():Void {
+      flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).setResizeMode((cast { mode: (cast CapacitorKeyboard.toCapacitorResizeMode__capacitorKeyboard((cast mode : String)) : String) })), function(__unused4:flighthq._internal._Any):Void {
 
       });
     }, setScrollAssistEnabled: function(enabled:Bool):Void {
-      flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).setScroll({ isDisabled: !(cast enabled : Bool) }), function():Void {
+      flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).setScroll((cast { isDisabled: !(cast enabled : Bool) })), function(__unused5:flighthq._internal._Any):Void {
 
       });
     }, setStyle: function(style:SoftKeyboardStyleKind):Void {
-      flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).setStyle({ style: ((cast _Runtime.strictEquals(style, SoftKeyboardStyleDarkKind) : Bool) ? (cast 'DARK' : Dynamic) : (cast 'DEFAULT' : Dynamic)) }), function():Void {
+      flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).setStyle((cast { style: ((cast _Runtime.strictEquals(style, SoftKeyboardStyleDarkKind) : Bool) ? (cast 'DARK' : Dynamic) : (cast 'DEFAULT' : Dynamic)) })), function(__unused6:flighthq._internal._Any):Void {
 
       });
     }, show: function():Void {
-      flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).show(), function():Void {
+      flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).show(), function(__unused7:flighthq._internal._Any):Void {
 
       });
     }, subscribe: function(listener:SoftKeyboardPhase->SoftKeyboardTransition->Void):Void->Void {
       var unsubShow:Void->Void = cast _Runtime.UNDEFINED;
       var unsubHide:Void->Void = cast _Runtime.UNDEFINED;
-      unsubShow = (cast CapacitorKeyboard.toUnsubscribe__capacitorKeyboard((cast (cast keyboard : CapacitorKeyboardPlugin).addListener('keyboardWillShow', function(info:{ var keyboardHeight:Float; }):Void return listener('will', { durationSeconds: 0.0, height: (cast info : { var keyboardHeight:Float; }).keyboardHeight })) : flighthq._internal._Promise<CapacitorPluginListenerHandle>)) : Void->Void);
-      unsubHide = (cast CapacitorKeyboard.toUnsubscribe__capacitorKeyboard((cast (cast keyboard : CapacitorKeyboardPlugin).addListener('keyboardWillHide', function():Void return listener('will', { durationSeconds: 0.0, height: 0.0 })) : flighthq._internal._Promise<CapacitorPluginListenerHandle>)) : Void->Void);
+      unsubShow = (cast CapacitorKeyboard.toUnsubscribe__capacitorKeyboard((cast (cast keyboard : CapacitorKeyboardPlugin).addListener((cast 'keyboardWillShow' : String), (cast function(info:{ var keyboardHeight:Float; }):Void { listener((cast 'will'), (cast { durationSeconds: 0.0, height: (cast info : { var keyboardHeight:Float; }).keyboardHeight })); })))) : Void->Void);
+      unsubHide = (cast CapacitorKeyboard.toUnsubscribe__capacitorKeyboard((cast (cast keyboard : CapacitorKeyboardPlugin).addListener((cast 'keyboardWillHide' : String), (cast function():Void { listener((cast 'will'), (cast { durationSeconds: 0.0, height: 0.0 })); })))) : Void->Void);
       return cast function():Void {
         unsubShow();
         unsubHide();
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
@@ -97,15 +99,15 @@ class CapacitorKeyboard {
     handle = null;
     flighthq._internal._Async.recover(_Runtime.callProperty(handlePromise, 'then', cast ([function(resolved:CapacitorPluginListenerHandle):Void {
       (handle = cast (resolved : Dynamic));
-      if ((cast removed : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function():Void {
+      if ((cast removed : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function(__unused8:flighthq._internal._Any):Void {
 
       }); }
-    }] : Array<Dynamic>)), function():Void {
+    }] : Array<Dynamic>)), function(__unused9:flighthq._internal._Any):Void {
 
     });
     return cast function():Void {
       (removed = cast (true : Dynamic));
-      if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function():Void {
+      if ((cast !_Runtime.strictEquals(handle, null) : Bool)) { flighthq._internal._Async.recover((cast handle : CapacitorPluginListenerHandle).remove(), function(__unused10:flighthq._internal._Any):Void {
 
       }); }
     };

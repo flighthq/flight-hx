@@ -33,6 +33,7 @@ import flighthq.types.UnlitMaterial;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 import flighthq.types.WgpuMeshMaterialRenderer;
+import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuUnlitPipeline;
@@ -40,47 +41,47 @@ import flighthq.types.WgpuUnlitPipeline.WgpuUnlitDefineKey;
 import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
 
 class UnlitWgpuMeshMaterialRenderer {
-  public static final unlitWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  public static final unlitWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var unlit:Null<UnlitMaterial> = cast _Runtime.UNDEFINED;
     var format:String = cast _Runtime.UNDEFINED;
     var pipeline:WgpuUnlitPipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
-    stateRuntime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    stateRuntime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     unlit = (cast material : Null<UnlitMaterial>);
     format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    pipeline = (cast ensureWgpuUnlitPipeline((cast state : WgpuRenderState), (cast (cast UnlitWgpuMeshMaterialRenderer.defineKeyForMaterial__unlitWgpuMeshMaterialRenderer((cast unlit : Null<UnlitMaterial>)) : WgpuUnlitDefineKey) : WgpuUnlitDefineKey), (cast format : String)) : WgpuUnlitPipeline);
-    writeWgpuFrameUniform((cast state : WgpuRenderState), (cast camera : Camera3D), (cast _lights : Scene3DLightBlock));
+    pipeline = (cast ensureWgpuUnlitPipeline((cast state), (cast (cast UnlitWgpuMeshMaterialRenderer.defineKeyForMaterial__unlitWgpuMeshMaterialRenderer((cast unlit)) : WgpuUnlitDefineKey)), (cast format : String)) : WgpuUnlitPipeline);
+    writeWgpuFrameUniform((cast state), (cast camera), (cast _lights));
     if ((cast _Runtime.strictEquals(unlit, null) : Bool)) {
-      (group = cast ((cast bindWgpuUnlitSurface((cast state : WgpuRenderState), pipeline, (cast UnlitWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__unlitWgpuMeshMaterialRenderer : flighthq._internal._Object), (cast UnlitWgpuMeshMaterialRenderer.WHITE__unlitWgpuMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float), (cast 0.5 : Float), null) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (group = cast ((cast bindWgpuUnlitSurface((cast state), (cast pipeline), (cast UnlitWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__unlitWgpuMeshMaterialRenderer), (cast UnlitWgpuMeshMaterialRenderer.WHITE__unlitWgpuMeshMaterialRenderer), (cast 1.0 : Float), (cast 0.5 : Float), (cast null)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
-      (cast unpackColorToLinear((cast UnlitWgpuMeshMaterialRenderer._scratch__unlitWgpuMeshMaterialRenderer : LinearColor), (cast _Runtime.field(unlit, 'baseColor') : Float)) : LinearColor);
-      (group = cast ((cast bindWgpuUnlitSurface((cast state : WgpuRenderState), pipeline, (cast unlit : flighthq._internal._Object), (cast UnlitWgpuMeshMaterialRenderer._scratch__unlitWgpuMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float), (cast _Runtime.field(unlit, 'alphaCutoff') : Float), _Runtime.field(unlit, 'baseColorMap')) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (cast unpackColorToLinear((cast UnlitWgpuMeshMaterialRenderer._scratch__unlitWgpuMeshMaterialRenderer), (cast _Runtime.field(unlit, 'baseColor') : Float)) : LinearColor);
+      (group = cast ((cast bindWgpuUnlitSurface((cast state), (cast pipeline), (cast unlit), (cast UnlitWgpuMeshMaterialRenderer._scratch__unlitWgpuMeshMaterialRenderer), (cast 1.0 : Float), (cast _Runtime.field(unlit, 'alphaCutoff') : Float), (cast _Runtime.field(unlit, 'baseColorMap'))) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
-    beginWgpuMeshDraw((cast state : WgpuRenderState), pipeline);
+    beginWgpuMeshDraw((cast state), (cast pipeline));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
-    drawWgpuMeshSubset((cast state : WgpuRenderState), (cast proxy : Scene3DRenderProxy), (cast geometry : MeshGeometry));
-  } };
+    drawWgpuMeshSubset((cast state), (cast proxy), (cast geometry));
+  } });
 
   public static function registerWgpuUnlitMaterial(state:WgpuRenderState):Void {
-    registerWgpuBitmapTextureResolver((cast state : WgpuRenderState));
-    registerWgpuImageTextureResolver((cast state : WgpuRenderState));
-    registerWgpuRenderTextureResolver((cast state : WgpuRenderState));
-    registerWgpuMeshMaterialRenderer((cast state : WgpuRenderState), (cast UnlitMaterialKind : String), (cast unlitWgpuMeshMaterialRenderer : WgpuMeshMaterialRenderer));
+    registerWgpuBitmapTextureResolver((cast state));
+    registerWgpuImageTextureResolver((cast state));
+    registerWgpuRenderTextureResolver((cast state));
+    registerWgpuMeshMaterialRenderer((cast state), (cast UnlitMaterialKind : String), (cast unlitWgpuMeshMaterialRenderer));
   }
 
   public static function defineKeyForMaterial__unlitWgpuMeshMaterialRenderer(material:Null<UnlitMaterial>):WgpuUnlitDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasColorMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady(_Runtime.field(material, 'baseColorMap')) : Bool) : Bool)) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasColorMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'baseColorMap'))) : Bool) : Bool)) };
     return cast null;
   }
 
-  public static final _scratch__unlitWgpuMeshMaterialRenderer:LinearColor = cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>);
+  public static final _scratch__unlitWgpuMeshMaterialRenderer:LinearColor = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 
-  public static final WHITE__unlitWgpuMeshMaterialRenderer:LinearColor = cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>);
+  public static final WHITE__unlitWgpuMeshMaterialRenderer:LinearColor = (cast cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
 
   public static final FALLBACK_MATERIAL__unlitWgpuMeshMaterialRenderer:UnlitMaterial = (cast {  } : UnlitMaterial);
 }

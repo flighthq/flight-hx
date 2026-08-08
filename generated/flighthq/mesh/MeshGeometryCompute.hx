@@ -7,7 +7,6 @@ import flighthq.geometry.Aabb.createAabb;
 import flighthq.types.Aabb;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
-import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshGeometryRuntime;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
@@ -34,12 +33,12 @@ class MeshGeometryCompute {
     var cz:Float = cast _Runtime.UNDEFINED;
     var radiusSq:Float = cast _Runtime.UNDEFINED;
     vertices = geometry.vertices;
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast _Runtime.strictEquals(vertexCount, 0.0) : Bool)) {
-      (out.center.x = cast (0.0 : Dynamic));
-      (out.center.y = cast (0.0 : Dynamic));
-      (out.center.z = cast (0.0 : Dynamic));
+      ((cast out.center : { var x:Float; }).x = cast (0.0 : Dynamic));
+      ((cast out.center : { var y:Float; }).y = cast (0.0 : Dynamic));
+      ((cast out.center : { var z:Float; }).z = cast (0.0 : Dynamic));
       (out.radius = cast (-1.0 : Dynamic));
       return;
     }
@@ -81,9 +80,9 @@ class MeshGeometryCompute {
         i++;
       }
     }
-    (out.center.x = cast (cx : Dynamic));
-    (out.center.y = cast (cy : Dynamic));
-    (out.center.z = cast (cz : Dynamic));
+    ((cast out.center : { var x:Float; }).x = cast (cx : Dynamic));
+    ((cast out.center : { var y:Float; }).y = cast (cy : Dynamic));
+    ((cast out.center : { var z:Float; }).z = cast (cz : Dynamic));
     (out.radius = cast (HxMath.sqrt(radiusSq) : Dynamic));
   }
 
@@ -98,7 +97,7 @@ class MeshGeometryCompute {
     var maxY:Float = cast _Runtime.UNDEFINED;
     var maxZ:Float = cast _Runtime.UNDEFINED;
     vertices = geometry.vertices;
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
@@ -122,12 +121,12 @@ class MeshGeometryCompute {
         i++;
       }
     }
-    (out.min.x = cast (minX : Dynamic));
-    (out.min.y = cast (minY : Dynamic));
-    (out.min.z = cast (minZ : Dynamic));
-    (out.max.x = cast (maxX : Dynamic));
-    (out.max.y = cast (maxY : Dynamic));
-    (out.max.z = cast (maxZ : Dynamic));
+    ((cast out.min : { var x:Float; }).x = cast (minX : Dynamic));
+    ((cast out.min : { var y:Float; }).y = cast (minY : Dynamic));
+    ((cast out.min : { var z:Float; }).z = cast (minZ : Dynamic));
+    ((cast out.max : { var x:Float; }).x = cast (maxX : Dynamic));
+    ((cast out.max : { var y:Float; }).y = cast (maxY : Dynamic));
+    ((cast out.max : { var z:Float; }).z = cast (maxZ : Dynamic));
   }
 
   public static function computeMeshGeometryFlatNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
@@ -137,7 +136,7 @@ class MeshGeometryCompute {
     var indexCount:Float = cast _Runtime.UNDEFINED;
     var dstVerts:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     srcVerts = geometry.vertices;
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     indices = geometry.indices;
     indexCount = _Runtime.select(indices, function():Dynamic return cast (cast indices : { var length:Float; }).length, function():Dynamic return cast ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(srcVerts, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic)));
     dstVerts = out.vertices;
@@ -204,12 +203,12 @@ class MeshGeometryCompute {
     var accum:flighthq._internal._Float64Array = cast _Runtime.UNDEFINED;
     var target:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     vertices = geometry.vertices;
-    floatsPerVertex = (geometry.layout.stride / 4.0);
+    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     indices = geometry.indices;
     indexCount = _Runtime.select(indices, function():Dynamic return cast (cast indices : { var length:Float; }).length, function():Dynamic return cast vertexCount);
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    recordedSmoothingSources = _Runtime.optionalField(runtime, 'tangentSmoothingSources');
+    recordedSmoothingSources = ({ final __structural0 = runtime; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
     smoothingSources = ((cast ((cast ((cast !_Runtime.strictEquals(recordedSmoothingSources, null) : Bool) && (cast !_Runtime.strictEquals(recordedSmoothingSources, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(recordedSmoothingSources, 'length'), vertexCount) : Bool)) : Bool) ? (cast recordedSmoothingSources : Dynamic) : (cast null : Dynamic));
     accum = new flighthq._internal._Float64Array((vertexCount * 3.0));
     {
@@ -230,9 +229,9 @@ class MeshGeometryCompute {
         var nx:Float = ((e1y * e2z) - (e1z * e2y));
         var ny:Float = ((e1z * e2x) - (e1x * e2z));
         var nz:Float = ((e1x * e2y) - (e1y * e2x));
-        MeshGeometryCompute.accumulateNormal__meshGeometryCompute((cast accum : flighthq._internal._Float64Array), (cast _Runtime.select(smoothingSources, function():Dynamic return cast flighthq._internal._StaticIndex.readUint32Array(smoothingSources, i0), function():Dynamic return cast i0) : Float), (cast nx : Float), (cast ny : Float), (cast nz : Float));
-        MeshGeometryCompute.accumulateNormal__meshGeometryCompute((cast accum : flighthq._internal._Float64Array), (cast _Runtime.select(smoothingSources, function():Dynamic return cast flighthq._internal._StaticIndex.readUint32Array(smoothingSources, i1), function():Dynamic return cast i1) : Float), (cast nx : Float), (cast ny : Float), (cast nz : Float));
-        MeshGeometryCompute.accumulateNormal__meshGeometryCompute((cast accum : flighthq._internal._Float64Array), (cast _Runtime.select(smoothingSources, function():Dynamic return cast flighthq._internal._StaticIndex.readUint32Array(smoothingSources, i2), function():Dynamic return cast i2) : Float), (cast nx : Float), (cast ny : Float), (cast nz : Float));
+        MeshGeometryCompute.accumulateNormal__meshGeometryCompute((cast accum), (cast _Runtime.select(smoothingSources, function():Dynamic return cast flighthq._internal._StaticIndex.readUint32Array(smoothingSources, i0), function():Dynamic return cast i0) : Float), (cast nx : Float), (cast ny : Float), (cast nz : Float));
+        MeshGeometryCompute.accumulateNormal__meshGeometryCompute((cast accum), (cast _Runtime.select(smoothingSources, function():Dynamic return cast flighthq._internal._StaticIndex.readUint32Array(smoothingSources, i1), function():Dynamic return cast i1) : Float), (cast nx : Float), (cast ny : Float), (cast nz : Float));
+        MeshGeometryCompute.accumulateNormal__meshGeometryCompute((cast accum), (cast _Runtime.select(smoothingSources, function():Dynamic return cast flighthq._internal._StaticIndex.readUint32Array(smoothingSources, i2), function():Dynamic return cast i2) : Float), (cast nx : Float), (cast ny : Float), (cast nz : Float));
         (t = cast ((t + 3.0) : Dynamic));
       }
     }
@@ -262,9 +261,9 @@ class MeshGeometryCompute {
   public static function accumulateNormal__meshGeometryCompute(accumulator:flighthq._internal._Float64Array, vertex:Float, nx:Float, ny:Float, nz:Float):Void {
     var base:Float = cast _Runtime.UNDEFINED;
     base = (vertex * 3.0);
-    ({ var __indexedObject0:Dynamic = accumulator; var __indexedKey1:Dynamic = base; flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject0, __indexedKey1, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat64Array(__indexedObject0, __indexedKey1), nx)); });
-    ({ var __indexedObject2:Dynamic = accumulator; var __indexedKey3:Dynamic = (base + 1.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject2, __indexedKey3, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat64Array(__indexedObject2, __indexedKey3), ny)); });
-    ({ var __indexedObject4:Dynamic = accumulator; var __indexedKey5:Dynamic = (base + 2.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject4, __indexedKey5, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat64Array(__indexedObject4, __indexedKey5), nz)); });
+    ({ var __indexedObject1:Dynamic = accumulator; var __indexedKey2:Dynamic = base; flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject1, __indexedKey2, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat64Array(__indexedObject1, __indexedKey2), nx)); });
+    ({ var __indexedObject3:Dynamic = accumulator; var __indexedKey4:Dynamic = (base + 1.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject3, __indexedKey4, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat64Array(__indexedObject3, __indexedKey4), ny)); });
+    ({ var __indexedObject5:Dynamic = accumulator; var __indexedKey6:Dynamic = (base + 2.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject5, __indexedKey6, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat64Array(__indexedObject5, __indexedKey6), nz)); });
   }
 
   public static function computeMeshGeometryTangents(out:MeshGeometry, geometry:MeshGeometry):Void {
@@ -288,13 +287,13 @@ class MeshGeometryCompute {
     var clusterOutputs:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
     var targetVertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     sourceVertices = geometry.vertices;
-    sourceStride = (geometry.layout.stride / 4.0);
+    sourceStride = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     sourceVertexCount = ((cast ((cast sourceStride : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(sourceVertices, 'length'), sourceStride)) : Dynamic) : (cast 0.0 : Dynamic));
     sourceIndices = geometry.indices;
-    targetStride = (out.layout.stride / 4.0);
+    targetStride = ((cast out.layout : { var stride:Float; }).stride / 4.0);
     if ((cast _Runtime.strictEquals(sourceIndices, null) : Bool)) {
-      MeshGeometryCompute.computeNonIndexedTangents__meshGeometryCompute((cast out.vertices : flighthq._internal._Float32Array), (cast targetStride : Float), (cast sourceVertices : flighthq._internal._Float32Array), (cast sourceStride : Float), (cast sourceVertexCount : Float));
-      MeshGeometryCompute.copyTangentSmoothingSources__meshGeometryCompute((cast out : MeshGeometry), (cast geometry : MeshGeometry), (cast sourceVertexCount : Float));
+      MeshGeometryCompute.computeNonIndexedTangents__meshGeometryCompute((cast out.vertices), (cast targetStride : Float), (cast sourceVertices), (cast sourceStride : Float), (cast sourceVertexCount : Float));
+      MeshGeometryCompute.copyTangentSmoothingSources__meshGeometryCompute((cast out), (cast geometry), (cast sourceVertexCount : Float));
       out.version++;
       return;
     }
@@ -392,11 +391,11 @@ class MeshGeometryCompute {
             if ((cast ((cast tangentLength : Float) > (cast 0.0 : Float)) : Bool)) {
               var other1:Float = flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(sourceIndices, (triangle + _Runtime.fmod((corner + 1.0), 3.0)));
               var other2:Float = flighthq._internal._StaticIndex.readUint16ArrayOrUint32Array(sourceIndices, (triangle + _Runtime.fmod((corner + 2.0), 3.0)));
-              var weight:Float = (cast MeshGeometryCompute.getMeshCornerAngle__meshGeometryCompute((cast sourceVertices : flighthq._internal._Float32Array), (cast sourceStride : Float), (cast vertex : Float), (cast other1 : Float), (cast other2 : Float)) : Float);
+              var weight:Float = (cast MeshGeometryCompute.getMeshCornerAngle__meshGeometryCompute((cast sourceVertices), (cast sourceStride : Float), (cast vertex : Float), (cast other1 : Float), (cast other2 : Float)) : Float);
               var tangent:Float = (compatibleCluster * 3.0);
-              ({ var __indexedObject6:Dynamic = clusterTangents; var __indexedKey7:Dynamic = tangent; flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject6, __indexedKey7, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat64Array(__indexedObject6, __indexedKey7), (tx * weight))); });
-              ({ var __indexedObject8:Dynamic = clusterTangents; var __indexedKey9:Dynamic = (tangent + 1.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject8, __indexedKey9, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat64Array(__indexedObject8, __indexedKey9), (ty * weight))); });
-              ({ var __indexedObject10:Dynamic = clusterTangents; var __indexedKey11:Dynamic = (tangent + 2.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject10, __indexedKey11, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat64Array(__indexedObject10, __indexedKey11), (tz * weight))); });
+              ({ var __indexedObject7:Dynamic = clusterTangents; var __indexedKey8:Dynamic = tangent; flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject7, __indexedKey8, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat64Array(__indexedObject7, __indexedKey8), (tx * weight))); });
+              ({ var __indexedObject9:Dynamic = clusterTangents; var __indexedKey10:Dynamic = (tangent + 1.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject9, __indexedKey10, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat64Array(__indexedObject9, __indexedKey10), (ty * weight))); });
+              ({ var __indexedObject11:Dynamic = clusterTangents; var __indexedKey12:Dynamic = (tangent + 2.0); flighthq._internal._StaticIndex.writeFloat64Array(__indexedObject11, __indexedKey12, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat64Array(__indexedObject11, __indexedKey12), (tz * weight))); });
             }
             corner++;
           }
@@ -445,7 +444,7 @@ class MeshGeometryCompute {
         }
       }
       (out.indices = cast (remappedIndices : Dynamic));
-      MeshGeometryCompute.recordTangentSmoothingSources__meshGeometryCompute((cast out : MeshGeometry), (cast geometry : MeshGeometry), (cast clusterSources : flighthq._internal._UInt32Array), (cast clusterOutputs : flighthq._internal._UInt32Array), (cast clusterCount : Float), (cast sourceVertexCount : Float), (cast outputVertexCount : Float));
+      MeshGeometryCompute.recordTangentSmoothingSources__meshGeometryCompute((cast out), (cast geometry), (cast clusterSources), (cast clusterOutputs), (cast clusterCount : Float), (cast sourceVertexCount : Float), (cast outputVertexCount : Float));
     } else {
       {
         var cluster:Float = 0.0;
@@ -454,20 +453,20 @@ class MeshGeometryCompute {
           cluster++;
         }
       }
-      MeshGeometryCompute.copyTangentSmoothingSources__meshGeometryCompute((cast out : MeshGeometry), (cast geometry : MeshGeometry), (cast sourceVertexCount : Float));
+      MeshGeometryCompute.copyTangentSmoothingSources__meshGeometryCompute((cast out), (cast geometry), (cast sourceVertexCount : Float));
     }
     {
       var cluster:Float = 0.0;
       while ((cast ((cast cluster : Float) < (cast clusterCount : Float)) : Bool)) {
         var tangent:Float = (cluster * 3.0);
-        MeshGeometryCompute.writeMeshTangent__meshGeometryCompute((cast targetVertices : flighthq._internal._Float32Array), (cast targetStride : Float), (cast flighthq._internal._StaticIndex.readUint32Array(clusterOutputs, cluster) : Float), (cast flighthq._internal._StaticIndex.readFloat64Array(clusterTangents, tangent) : Float), (cast flighthq._internal._StaticIndex.readFloat64Array(clusterTangents, (tangent + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readFloat64Array(clusterTangents, (tangent + 2.0)) : Float), (cast ((cast ((cast flighthq._internal._StaticIndex.readInt8Array(clusterSigns, cluster) : Float) < (cast 0.0 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)) : Float));
+        MeshGeometryCompute.writeMeshTangent__meshGeometryCompute((cast targetVertices), (cast targetStride : Float), (cast flighthq._internal._StaticIndex.readUint32Array(clusterOutputs, cluster) : Float), (cast flighthq._internal._StaticIndex.readFloat64Array(clusterTangents, tangent) : Float), (cast flighthq._internal._StaticIndex.readFloat64Array(clusterTangents, (tangent + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readFloat64Array(clusterTangents, (tangent + 2.0)) : Float), (cast ((cast ((cast flighthq._internal._StaticIndex.readInt8Array(clusterSigns, cluster) : Float) < (cast 0.0 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)) : Float));
         cluster++;
       }
     }
     {
       var vertex:Float = 0.0;
       while ((cast ((cast vertex : Float) < (cast sourceVertexCount : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readInt32Array(primaryClusters, vertex), -1.0) : Bool)) { MeshGeometryCompute.writeMeshTangent__meshGeometryCompute((cast targetVertices : flighthq._internal._Float32Array), (cast targetStride : Float), (cast vertex : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float)); }
+        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readInt32Array(primaryClusters, vertex), -1.0) : Bool)) { MeshGeometryCompute.writeMeshTangent__meshGeometryCompute((cast targetVertices), (cast targetStride : Float), (cast vertex : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float)); }
         vertex++;
       }
     }
@@ -518,7 +517,7 @@ class MeshGeometryCompute {
             var cy:Float = ((nz * tangentX) - (nx * tangentZ));
             var cz:Float = ((nx * tangentY) - (ny * tangentX));
             var sign:Float = ((cast ((cast (((cx * bx) + (cy * by)) + (cz * bz)) : Float) < (cast 0.0 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
-            MeshGeometryCompute.writeMeshTangent__meshGeometryCompute((cast target : flighthq._internal._Float32Array), (cast targetStride : Float), (cast vertex : Float), (cast tangentX : Float), (cast tangentY : Float), (cast tangentZ : Float), (cast sign : Float));
+            MeshGeometryCompute.writeMeshTangent__meshGeometryCompute((cast target), (cast targetStride : Float), (cast vertex : Float), (cast tangentX : Float), (cast tangentY : Float), (cast tangentZ : Float), (cast sign : Float));
             corner++;
           }
         }
@@ -528,7 +527,7 @@ class MeshGeometryCompute {
     {
       var vertex:Float = (vertexCount - _Runtime.fmod(vertexCount, 3.0));
       while ((cast ((cast vertex : Float) < (cast vertexCount : Float)) : Bool)) {
-        MeshGeometryCompute.writeMeshTangent__meshGeometryCompute((cast target : flighthq._internal._Float32Array), (cast targetStride : Float), (cast vertex : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float));
+        MeshGeometryCompute.writeMeshTangent__meshGeometryCompute((cast target), (cast targetStride : Float), (cast vertex : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float));
         vertex++;
       }
     }
@@ -618,7 +617,7 @@ class MeshGeometryCompute {
     if ((cast _Runtime.strictEquals(out, geometry) : Bool)) { return; }
     sourceRuntime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     targetRuntime = (cast _Runtime.getIndex(out, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    sources = _Runtime.optionalField(sourceRuntime, 'tangentSmoothingSources');
+    sources = ({ final __structural13 = sourceRuntime; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
     if ((cast !_Runtime.strictEquals(targetRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       ((cast targetRuntime : MeshGeometryRuntime).tangentSmoothingSources = ((cast ((cast ((cast !_Runtime.strictEquals(sources, null) : Bool) && (cast !_Runtime.strictEquals(sources, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(sources, 'length'), vertexCount) : Bool)) : Bool) ? (cast _Runtime.slice(sources, 0, null) : Dynamic) : (cast null : Dynamic)));
     }
@@ -632,7 +631,7 @@ class MeshGeometryCompute {
     sourceRuntime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     targetRuntime = (cast _Runtime.getIndex(out, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     if ((cast _Runtime.strictEquals(targetRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    previous = _Runtime.optionalField(sourceRuntime, 'tangentSmoothingSources');
+    previous = ({ final __structural14 = sourceRuntime; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
     sources = new flighthq._internal._UInt32Array(outputVertexCount);
     {
       var vertex:Float = 0.0;
@@ -662,10 +661,10 @@ class MeshGeometryCompute {
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     bounds = geometry.bounds;
     if ((cast ((cast ((cast _Runtime.strictEquals(bounds, null) : Bool) || (cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast runtime : MeshGeometryRuntime).boundsVersion, geometry.version) : Bool)) : Bool)) {
-      refreshMeshGeometryBounds((cast geometry : MeshGeometry));
+      refreshMeshGeometryBounds((cast geometry));
       (bounds = cast (geometry.bounds : Dynamic));
     }
-    return cast ((cast ((cast !_Runtime.strictEquals(bounds, null) : Bool) && (cast ((cast (cast bounds : flighthq.types.Aabb).min.x : Float) <= (cast (cast bounds : flighthq.types.Aabb).max.x : Float)) : Bool)) : Bool) ? (cast bounds : Dynamic) : (cast null : Dynamic));
+    return cast ((cast ((cast !_Runtime.strictEquals(bounds, null) : Bool) && (cast ((cast (cast (cast bounds : { var min:Vector3; }).min : { var x:Float; }).x : Float) <= (cast (cast (cast bounds : { var max:Vector3; }).max : { var x:Float; }).x : Float)) : Bool)) : Bool) ? (cast bounds : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -674,10 +673,10 @@ class MeshGeometryCompute {
     var runtime:Null<MeshGeometryRuntime> = cast _Runtime.UNDEFINED;
     bounds = geometry.bounds;
     if ((cast _Runtime.strictEquals(bounds, null) : Bool)) {
-      (bounds = cast ((cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Null<Aabb>) : Dynamic));
+      (bounds = cast ((cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Aabb) : Dynamic));
       (geometry.bounds = cast (bounds : Dynamic));
     }
-    computeMeshGeometryBounds((cast bounds : AabbLike), (cast geometry : MeshGeometry));
+    computeMeshGeometryBounds((cast bounds), (cast geometry));
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     if ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast runtime : MeshGeometryRuntime).boundsVersion = geometry.version); }
   }

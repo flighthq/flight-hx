@@ -86,7 +86,7 @@ class Path {
         var c1y:Float = ((p1y + (sin_u3C6_ * dx1)) + (cos_u3C6_ * dy1));
         var c2x:Float = ((p2x + (cos_u3C6_ * dx2)) - (sin_u3C6_ * dy2));
         var c2y:Float = ((p2y + (sin_u3C6_ * dx2)) + (cos_u3C6_ * dy2));
-        appendPathCubicCurveTo((cast path : flighthq.types.Path), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast p2x : Float), (cast p2y : Float));
+        appendPathCubicCurveTo((cast path), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast p2x : Float), (cast p2y : Float));
         i++;
       }
     }
@@ -104,7 +104,7 @@ class Path {
     sinStart = HxMath.sin(startAngle);
     cosEnd = HxMath.cos(endAngle);
     sinEnd = HxMath.sin(endAngle);
-    appendPathCubicCurveTo((cast path : flighthq.types.Path), (cast ((cx + (cosStart * radius)) - (sinStart * k)) : Float), (cast ((cy + (sinStart * radius)) + (cosStart * k)) : Float), (cast ((cx + (cosEnd * radius)) + (sinEnd * k)) : Float), (cast ((cy + (sinEnd * radius)) - (cosEnd * k)) : Float), (cast (cx + (cosEnd * radius)) : Float), (cast (cy + (sinEnd * radius)) : Float));
+    appendPathCubicCurveTo((cast path), (cast ((cx + (cosStart * radius)) - (sinStart * k)) : Float), (cast ((cy + (sinStart * radius)) + (cosStart * k)) : Float), (cast ((cx + (cosEnd * radius)) + (sinEnd * k)) : Float), (cast ((cy + (sinEnd * radius)) - (cosEnd * k)) : Float), (cast (cx + (cosEnd * radius)) : Float), (cast (cy + (sinEnd * radius)) : Float));
   }
 
   public static function appendPathArc(path:flighthq.types.Path, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Bool = false, connectToCurrent:Bool = false):Void {
@@ -121,11 +121,11 @@ class Path {
     arcStartX = (cx + _Runtime.multiplyNumbers(HxMath.cos(startAngle), radius));
     arcStartY = (cy + _Runtime.multiplyNumbers(HxMath.sin(startAngle), radius));
     if ((cast connectToCurrent : Bool)) {
-      appendPathLineTo((cast path : flighthq.types.Path), (cast arcStartX : Float), (cast arcStartY : Float));
+      appendPathLineTo((cast path), (cast arcStartX : Float), (cast arcStartY : Float));
     } else {
-      appendPathMoveTo((cast path : flighthq.types.Path), (cast arcStartX : Float), (cast arcStartY : Float));
+      appendPathMoveTo((cast path), (cast arcStartX : Float), (cast arcStartY : Float));
     }
-    Path.appendArcCubics__path((cast path : flighthq.types.Path), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast radius : Float), (cast 0.0 : Float), (cast startAngle : Float), (cast sweep : Float));
+    Path.appendArcCubics__path((cast path), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast radius : Float), (cast 0.0 : Float), (cast startAngle : Float), (cast sweep : Float));
   }
 
   public static function appendPathArcTo(path:flighthq.types.Path, radiusX:Float, radiusY:Float, xAxisRotation:Float, largeArc:Bool, sweep:Bool, endX:Float, endY:Float):Void {
@@ -163,13 +163,13 @@ class Path {
     var theta1:Float = cast _Runtime.UNDEFINED;
     var dtheta:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(radiusX, 0.0) : Bool) || (cast _Runtime.strictEquals(radiusY, 0.0) : Bool)) : Bool)) {
-      appendPathLineTo((cast path : flighthq.types.Path), (cast endX : Float), (cast endY : Float));
+      appendPathLineTo((cast path), (cast endX : Float), (cast endY : Float));
       return;
     }
     x1 = 0.0;
     y1 = 0.0;
     {
-      var last:Null<Array<Float>> = (cast getPathLastPoint((cast path : flighthq.types.Path)) : Null<Array<Float>>);
+      var last:Null<Array<Float>> = (cast getPathLastPoint((cast path)) : Null<Array<Float>>);
       if ((cast !_Runtime.strictEquals(last, null) : Bool)) {
         (x1 = cast (flighthq._internal._StaticIndex.readArray(last, 0.0) : Dynamic));
         (y1 = cast (flighthq._internal._StaticIndex.readArray(last, 1.0) : Dynamic));
@@ -214,11 +214,11 @@ class Path {
     dtheta = (cast Path.vectorAngle__path((cast ux : Float), (cast uy : Float), (cast vx : Float), (cast vy : Float)) : Float);
     if ((cast ((cast !(cast sweep : Bool) : Bool) && (cast ((cast dtheta : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { (dtheta = cast ((dtheta - (HxMath.PI * 2.0)) : Dynamic)); }
     if ((cast ((cast sweep : Bool) && (cast ((cast dtheta : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { (dtheta = cast ((dtheta + (HxMath.PI * 2.0)) : Dynamic)); }
-    Path.appendArcCubics__path((cast path : flighthq.types.Path), (cast cx : Float), (cast cy : Float), (cast rx : Float), (cast ry : Float), (cast xAxisRotation : Float), (cast theta1 : Float), (cast dtheta : Float));
+    Path.appendArcCubics__path((cast path), (cast cx : Float), (cast cy : Float), (cast rx : Float), (cast ry : Float), (cast xAxisRotation : Float), (cast theta1 : Float), (cast dtheta : Float));
   }
 
   public static function appendPathCircle(path:flighthq.types.Path, cx:Float, cy:Float, radius:Float):Void {
-    appendPathEllipse((cast path : flighthq.types.Path), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast radius : Float));
+    appendPathEllipse((cast path), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast radius : Float));
   }
 
   public static function appendPathClose(path:flighthq.types.Path):Void {
@@ -240,12 +240,12 @@ class Path {
     var ky:Float = cast _Runtime.UNDEFINED;
     kx = (radiusX * Path.KAPPA__path);
     ky = (radiusY * Path.KAPPA__path);
-    appendPathMoveTo((cast path : flighthq.types.Path), (cast (cx + radiusX) : Float), (cast cy : Float));
-    appendPathCubicCurveTo((cast path : flighthq.types.Path), (cast (cx + radiusX) : Float), (cast (cy - ky) : Float), (cast (cx + kx) : Float), (cast (cy - radiusY) : Float), (cast cx : Float), (cast (cy - radiusY) : Float));
-    appendPathCubicCurveTo((cast path : flighthq.types.Path), (cast (cx - kx) : Float), (cast (cy - radiusY) : Float), (cast (cx - radiusX) : Float), (cast (cy - ky) : Float), (cast (cx - radiusX) : Float), (cast cy : Float));
-    appendPathCubicCurveTo((cast path : flighthq.types.Path), (cast (cx - radiusX) : Float), (cast (cy + ky) : Float), (cast (cx - kx) : Float), (cast (cy + radiusY) : Float), (cast cx : Float), (cast (cy + radiusY) : Float));
-    appendPathCubicCurveTo((cast path : flighthq.types.Path), (cast (cx + kx) : Float), (cast (cy + radiusY) : Float), (cast (cx + radiusX) : Float), (cast (cy + ky) : Float), (cast (cx + radiusX) : Float), (cast cy : Float));
-    appendPathClose((cast path : flighthq.types.Path));
+    appendPathMoveTo((cast path), (cast (cx + radiusX) : Float), (cast cy : Float));
+    appendPathCubicCurveTo((cast path), (cast (cx + radiusX) : Float), (cast (cy - ky) : Float), (cast (cx + kx) : Float), (cast (cy - radiusY) : Float), (cast cx : Float), (cast (cy - radiusY) : Float));
+    appendPathCubicCurveTo((cast path), (cast (cx - kx) : Float), (cast (cy - radiusY) : Float), (cast (cx - radiusX) : Float), (cast (cy - ky) : Float), (cast (cx - radiusX) : Float), (cast cy : Float));
+    appendPathCubicCurveTo((cast path), (cast (cx - radiusX) : Float), (cast (cy + ky) : Float), (cast (cx - kx) : Float), (cast (cy + radiusY) : Float), (cast cx : Float), (cast (cy + radiusY) : Float));
+    appendPathCubicCurveTo((cast path), (cast (cx + kx) : Float), (cast (cy + radiusY) : Float), (cast (cx + radiusX) : Float), (cast (cy + ky) : Float), (cast (cx + radiusX) : Float), (cast cy : Float));
+    appendPathClose((cast path));
   }
 
   public static function appendPathLineTo(path:flighthq.types.Path, x:Float, y:Float):Void {
@@ -260,35 +260,35 @@ class Path {
 
   public static function appendPathPolygon(path:flighthq.types.Path, points:Array<Float>):Void {
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { return; }
-    appendPathMoveTo((cast path : flighthq.types.Path), (cast flighthq._internal._StaticIndex.readArray(points, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(points, 1.0) : Float));
+    appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readArray(points, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(points, 1.0) : Float));
     {
       var i:Float = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        appendPathLineTo((cast path : flighthq.types.Path), (cast flighthq._internal._StaticIndex.readArray(points, i) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (i + 1.0)) : Float));
+        appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readArray(points, i) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (i + 1.0)) : Float));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
-    appendPathClose((cast path : flighthq.types.Path));
+    appendPathClose((cast path));
   }
 
   public static function appendPathPolyline(path:flighthq.types.Path, points:Array<Float>):Void {
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
-    appendPathMoveTo((cast path : flighthq.types.Path), (cast flighthq._internal._StaticIndex.readArray(points, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(points, 1.0) : Float));
+    appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readArray(points, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(points, 1.0) : Float));
     {
       var i:Float = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        appendPathLineTo((cast path : flighthq.types.Path), (cast flighthq._internal._StaticIndex.readArray(points, i) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (i + 1.0)) : Float));
+        appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readArray(points, i) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (i + 1.0)) : Float));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
   }
 
   public static function appendPathRectangle(path:flighthq.types.Path, x:Float, y:Float, width:Float, height:Float):Void {
-    appendPathMoveTo((cast path : flighthq.types.Path), (cast x : Float), (cast y : Float));
-    appendPathLineTo((cast path : flighthq.types.Path), (cast (x + width) : Float), (cast y : Float));
-    appendPathLineTo((cast path : flighthq.types.Path), (cast (x + width) : Float), (cast (y + height) : Float));
-    appendPathLineTo((cast path : flighthq.types.Path), (cast x : Float), (cast (y + height) : Float));
-    appendPathClose((cast path : flighthq.types.Path));
+    appendPathMoveTo((cast path), (cast x : Float), (cast y : Float));
+    appendPathLineTo((cast path), (cast (x + width) : Float), (cast y : Float));
+    appendPathLineTo((cast path), (cast (x + width) : Float), (cast (y + height) : Float));
+    appendPathLineTo((cast path), (cast x : Float), (cast (y + height) : Float));
+    appendPathClose((cast path));
   }
 
   public static function appendPathRoundRectangle(path:flighthq.types.Path, x:Float, y:Float, width:Float, height:Float, radius:flighthq._internal._Union2<Float, Array<Float>>):Void {
@@ -297,21 +297,21 @@ class Path {
     var rtr:Float = cast _Runtime.UNDEFINED;
     var rbr:Float = cast _Runtime.UNDEFINED;
     var rbl:Float = cast _Runtime.UNDEFINED;
-    __destructure0 = (cast Path.normalizeCornerRadii__path((cast radius : flighthq._internal._Union2<Float, Array<Float>>), (cast width : Float), (cast height : Float)) : Array<flighthq._internal._Any>);
+    __destructure0 = (cast Path.normalizeCornerRadii__path((cast radius), (cast width : Float), (cast height : Float)) : Array<Float>);
     rtl = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
     rtr = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     rbr = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
     rbl = flighthq._internal._StaticIndex.readArray(__destructure0, 3.0);
-    appendPathMoveTo((cast path : flighthq.types.Path), (cast (x + rtl) : Float), (cast y : Float));
-    appendPathLineTo((cast path : flighthq.types.Path), (cast ((x + width) - rtr) : Float), (cast y : Float));
-    Path.appendCornerArc__path((cast path : flighthq.types.Path), (cast ((x + width) - rtr) : Float), (cast (y + rtr) : Float), (cast rtr : Float), (cast (-HxMath.PI / 2.0) : Float), (cast 0.0 : Float));
-    appendPathLineTo((cast path : flighthq.types.Path), (cast (x + width) : Float), (cast ((y + height) - rbr) : Float));
-    Path.appendCornerArc__path((cast path : flighthq.types.Path), (cast ((x + width) - rbr) : Float), (cast ((y + height) - rbr) : Float), (cast rbr : Float), (cast 0.0 : Float), (cast (HxMath.PI / 2.0) : Float));
-    appendPathLineTo((cast path : flighthq.types.Path), (cast (x + rbl) : Float), (cast (y + height) : Float));
-    Path.appendCornerArc__path((cast path : flighthq.types.Path), (cast (x + rbl) : Float), (cast ((y + height) - rbl) : Float), (cast rbl : Float), (cast (HxMath.PI / 2.0) : Float), (cast HxMath.PI : Float));
-    appendPathLineTo((cast path : flighthq.types.Path), (cast x : Float), (cast (y + rtl) : Float));
-    Path.appendCornerArc__path((cast path : flighthq.types.Path), (cast (x + rtl) : Float), (cast (y + rtl) : Float), (cast rtl : Float), (cast HxMath.PI : Float), (cast ((HxMath.PI * 3.0) / 2.0) : Float));
-    appendPathClose((cast path : flighthq.types.Path));
+    appendPathMoveTo((cast path), (cast (x + rtl) : Float), (cast y : Float));
+    appendPathLineTo((cast path), (cast ((x + width) - rtr) : Float), (cast y : Float));
+    Path.appendCornerArc__path((cast path), (cast ((x + width) - rtr) : Float), (cast (y + rtr) : Float), (cast rtr : Float), (cast (-HxMath.PI / 2.0) : Float), (cast 0.0 : Float));
+    appendPathLineTo((cast path), (cast (x + width) : Float), (cast ((y + height) - rbr) : Float));
+    Path.appendCornerArc__path((cast path), (cast ((x + width) - rbr) : Float), (cast ((y + height) - rbr) : Float), (cast rbr : Float), (cast 0.0 : Float), (cast (HxMath.PI / 2.0) : Float));
+    appendPathLineTo((cast path), (cast (x + rbl) : Float), (cast (y + height) : Float));
+    Path.appendCornerArc__path((cast path), (cast (x + rbl) : Float), (cast ((y + height) - rbl) : Float), (cast rbl : Float), (cast (HxMath.PI / 2.0) : Float), (cast HxMath.PI : Float));
+    appendPathLineTo((cast path), (cast x : Float), (cast (y + rtl) : Float));
+    Path.appendCornerArc__path((cast path), (cast (x + rtl) : Float), (cast (y + rtl) : Float), (cast rtl : Float), (cast HxMath.PI : Float), (cast ((HxMath.PI * 3.0) / 2.0) : Float));
+    appendPathClose((cast path));
   }
 
   public static function cleanPath(source:flighthq.types.Path, tolerance:Float, out:flighthq.types.Path, ?flattenTolerance:Float):Void {

@@ -8,7 +8,7 @@ import flighthq.types.HasClip;
 
 class HasClip {
   @:noCompletion
-  public static function initClipTrait(target:flighthq.types.HasClip, ?obj:Dynamic):Void {
-    ((cast target : flighthq.types.HasClip).clip = _Runtime.coalesce(_Runtime.optionalField(obj, 'clip'), function():Dynamic return cast null));
+  public static function initClipTrait(target:flighthq.types.HasClip, ?obj:flighthq._internal._Partial<flighthq.types.HasClip>):Void {
+    ((cast target : flighthq.types.HasClip).clip = _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var clip:Null<ClipRegion>; }).clip; }), function():Dynamic return cast null));
   }
 }

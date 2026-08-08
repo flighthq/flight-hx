@@ -10,6 +10,7 @@ import flighthq.math.InterpolationAdvanced.damp;
 import flighthq.types.Camera2D;
 import flighthq.types.Camera2D.Camera2DFollowOptions;
 import flighthq.types.Rectangle;
+import flighthq.types.Rectangle.RectangleLike;
 
 class Follow {
   public static function updateCamera2DFollow(camera:Camera2D, targetX:Float, targetY:Float, deltaTime:Float, ?options:Camera2DFollowOptions):Void {
@@ -46,7 +47,7 @@ class Follow {
       (nextY = cast (goalY : Dynamic));
     }
     if (_Runtime.truthy(worldBounds)) {
-      getCamera2DVisibleBounds((cast camera : Camera2D), Follow.scratchBounds__follow);
+      getCamera2DVisibleBounds((cast camera), (cast Follow.scratchBounds__follow));
       var halfVisW:Float = ((cast Follow.scratchBounds__follow : Rectangle).width * 0.5);
       var halfVisH:Float = ((cast Follow.scratchBounds__follow : Rectangle).height * 0.5);
       if ((cast ((cast _Runtime.field(worldBounds, 'width') : Float) <= (cast (cast Follow.scratchBounds__follow : Rectangle).width : Float)) : Bool)) {
@@ -64,5 +65,5 @@ class Follow {
     (camera.y = cast (nextY : Dynamic));
   }
 
-  public static final scratchBounds__follow:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Rectangle);
+  public static final scratchBounds__follow:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle);
 }

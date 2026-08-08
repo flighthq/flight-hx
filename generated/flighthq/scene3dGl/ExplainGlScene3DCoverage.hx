@@ -24,11 +24,11 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 class ExplainGlScene3DCoverage {
   public static function explainGlScene3DCoverage(out:Array<SceneCoverageEntry>, state:GlRenderState, usage:Scene3DKindUsage):Void {
     _Runtime.setLength(out, 0.0);
-    (cast ExplainGlScene3DCoverage.collectGlScene3DCoverageGaps__explainGlScene3DCoverage((cast out : Null<Array<SceneCoverageEntry>>), (cast state : GlRenderState), (cast usage : Scene3DKindUsage), (cast false : Bool)) : Bool);
+    (cast ExplainGlScene3DCoverage.collectGlScene3DCoverageGaps__explainGlScene3DCoverage((cast out), (cast state), (cast usage), (cast false : Bool)) : Bool);
   }
 
   public static function hasGlScene3DCoverage(state:GlRenderState, usage:Scene3DKindUsage):Bool {
-    return cast !(cast (cast ExplainGlScene3DCoverage.collectGlScene3DCoverageGaps__explainGlScene3DCoverage((cast null : Null<Array<SceneCoverageEntry>>), (cast state : GlRenderState), (cast usage : Scene3DKindUsage), (cast true : Bool)) : Bool) : Bool);
+    return cast !(cast (cast ExplainGlScene3DCoverage.collectGlScene3DCoverageGaps__explainGlScene3DCoverage((cast null), (cast state), (cast usage), (cast true : Bool)) : Bool) : Bool);
     return cast null;
   }
 
@@ -39,7 +39,7 @@ class ExplainGlScene3DCoverage {
     var resolvers:Null<flighthq._internal._Map<String, GlTextureResolver>> = cast _Runtime.UNDEFINED;
     var snippets:Null<ModifierRegistry> = cast _Runtime.UNDEFINED;
     found = false;
-    materials = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).materialRegistry;
+    materials = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).materialRegistry;
     hasStandard = ((cast materials : flighthq._internal._Map<String, GlMeshMaterialRenderer>).has(StandardMaterialKindValue));
     {
       var i:Float = 0.0;
@@ -56,7 +56,7 @@ class ExplainGlScene3DCoverage {
         i++;
       }
     }
-    resolvers = (cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).glTextureResolverRegistry;
+    resolvers = (cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).glTextureResolverRegistry;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'textureSourceKinds'), 'length') : Float)) : Bool)) {
@@ -72,12 +72,12 @@ class ExplainGlScene3DCoverage {
         i++;
       }
     }
-    snippets = (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).modifierSnippetRegistry;
+    snippets = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).modifierSnippetRegistry;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'modifierKinds'), 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'modifierKinds'), i);
-        if ((cast ((cast !_Runtime.strictEquals(snippets, null) : Bool) && (cast !_Runtime.strictEquals((cast resolveModifier(snippets, (cast kind : String)) : Null<ModifierDefinition>), null) : Bool)) : Bool)) {
+        if ((cast ((cast !_Runtime.strictEquals(snippets, null) : Bool) && (cast !_Runtime.strictEquals((cast resolveModifier((cast snippets), (cast kind : String)) : Null<ModifierDefinition>), null) : Bool)) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.ModifierSnippet }] : Array<Dynamic>));
           i++;
           continue;

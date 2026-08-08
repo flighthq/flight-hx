@@ -152,7 +152,7 @@ class RandomDistributions {
   public static function shuffle<T>(random:RandomSource, items:Array<T>):Array<T> {
     var copy:Array<T> = cast _Runtime.UNDEFINED;
     copy = _Runtime.slice(items, 0, null);
-    shuffleInPlace((cast random : RandomSource), copy);
+    shuffleInPlace((cast random), (cast copy));
     return cast copy;
     return cast null;
   }

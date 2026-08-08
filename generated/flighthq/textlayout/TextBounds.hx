@@ -21,7 +21,7 @@ class TextBounds {
 
   public static function computeTextBoundsOffsetX(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
     var slack:Float = cast _Runtime.UNDEFINED;
-    slack = ((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).width - (cast computeTextBoundsWidth(spec, (cast layout : TextLayoutResult)) : Float));
+    slack = ((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).width - (cast computeTextBoundsWidth((cast spec), (cast layout)) : Float));
     if ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'right') : Bool)) { return cast slack; }
     if ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'center') : Bool)) { return cast (slack / 2.0); }
     return cast 0.0;
@@ -31,12 +31,12 @@ class TextBounds {
   public static function computeTextBoundsRectangle(out:RectangleLike, spec:TextBoundsSpec, layout:TextLayoutResult):Void {
     var width:Float = cast _Runtime.UNDEFINED;
     var slack:Float = cast _Runtime.UNDEFINED;
-    width = (cast computeTextBoundsWidth(spec, (cast layout : TextLayoutResult)) : Float);
+    width = (cast computeTextBoundsWidth((cast spec), (cast layout)) : Float);
     slack = ((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).width - width);
     _Runtime.setField(out, 'x', ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'right') : Bool) ? (cast slack : Dynamic) : (cast ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'center') : Bool) ? (cast (slack / 2.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)));
     _Runtime.setField(out, 'y', 0.0);
     _Runtime.setField(out, 'width', width);
-    _Runtime.setField(out, 'height', (cast computeTextBoundsHeight(spec, (cast layout : TextLayoutResult)) : Float));
+    _Runtime.setField(out, 'height', (cast computeTextBoundsHeight((cast spec), (cast layout)) : Float));
   }
 
   public static function computeTextBoundsWidth(spec:TextBoundsSpec, layout:TextLayoutResult):Float {

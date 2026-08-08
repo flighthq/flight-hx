@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.GodRaysEffect;
 
 class GodRaysEffect {
-  public static function createGodRaysEffect(?options:Dynamic):flighthq.types.GodRaysEffect {
+  public static function createGodRaysEffect(?options:flighthq._internal._Omit<flighthq.types.GodRaysEffect, String>):flighthq.types.GodRaysEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'GodRaysEffect' }, options]);
     return cast null;

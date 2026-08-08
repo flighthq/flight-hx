@@ -23,13 +23,13 @@ class GlShapeMesh {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var nodeAlpha:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0) : Bool)) { return; }
-    runtime = (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime);
-    flushGlQuadBatchWriter((cast state : GlRenderState));
+    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
+    flushGlQuadBatchWriter((cast state));
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(binding, 'program'));
     ((cast runtime : GlRenderStateRuntime).currentProgram = _Runtime.field(binding, 'program'));
     _Runtime.callOptionalValue((cast state : GlRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(binding, 'matrixLocation'), false, GlShapeMesh.shapeMeshMatrix__glShapeMesh((cast state : GlRenderState), (cast renderProxy : RenderProxy2D)));
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(binding, 'matrixLocation'), false, (cast GlShapeMesh.shapeMeshMatrix__glShapeMesh((cast state), (cast renderProxy)) : flighthq._internal._Float32Array));
     _Runtime.callOptionalValue(onProgramBound, cast ([state] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(binding, 'vertexBuffer'));
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, _Runtime.field(binding, 'positionLocation'));
@@ -60,12 +60,12 @@ class GlShapeMesh {
   public static function drawGlShapeMeshes(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>):Void {
     var fold:Null<GlColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0) : Bool)) { return; }
-    fold = (cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeature;
+    fold = (cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeature;
     if ((cast ((cast !_Runtime.looseEquals(fold, null) : Bool) && (cast _Runtime.orValue(!_Runtime.looseEquals((cast renderProxy : RenderProxy2D).colorMatrix, null), function():Dynamic return cast !_Runtime.looseEquals((cast renderProxy : RenderProxy2D).colorScaleBias, null)) : Bool)) : Bool)) {
-      (cast fold : GlColorAdjustmentMaterialFeature).drawShapeMeshes(state, renderProxy, meshes);
+      (cast fold : GlColorAdjustmentMaterialFeature).drawShapeMeshes((cast state), (cast renderProxy), (cast meshes));
       return;
     }
-    drawGlShapeMeshBatch((cast state : GlRenderState), (cast renderProxy : RenderProxy2D), (cast meshes : Array<flighthq.types.GlShapeMesh>), (cast (cast ensureGlShapeMeshProgram((cast state : GlRenderState)) : GlShapeMeshBinding) : GlShapeMeshBinding), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<GlRenderState->Void>));
+    drawGlShapeMeshBatch((cast state), (cast renderProxy), (cast meshes), (cast (cast ensureGlShapeMeshProgram((cast state)) : GlShapeMeshBinding)), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
   }
 
   @:noCompletion
@@ -77,9 +77,9 @@ class GlShapeMesh {
     gl = (cast state : GlRenderState).gl;
     existing = ((cast GlShapeMesh.shapeMeshPrograms__glShapeMesh : flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, GlShapeMeshBinding>).get(gl));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
-    program = (cast GlShapeMesh.compileShapeMeshProgram__glShapeMesh((cast gl : flighthq._internal.dom.WebGL2RenderingContext)) : flighthq._internal.dom.WebGLProgram);
-    created = { program: program, vertexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), indexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), matrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matrix'), colorLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color') };
-    ((cast GlShapeMesh.shapeMeshPrograms__glShapeMesh : flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, GlShapeMeshBinding>).set(gl, created));
+    program = (cast GlShapeMesh.compileShapeMeshProgram__glShapeMesh((cast gl)) : flighthq._internal.dom.WebGLProgram);
+    created = (cast { program: program, vertexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), indexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), matrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matrix'), colorLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color') });
+    ((cast GlShapeMesh.shapeMeshPrograms__glShapeMesh : flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, GlShapeMeshBinding>).set(gl, (cast created)));
     return cast created;
     return cast null;
   }
@@ -91,7 +91,7 @@ class GlShapeMesh {
   public static final shapeMeshPrograms__glShapeMesh:flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, GlShapeMeshBinding> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function compileShapeMeshProgram__glShapeMesh(gl:flighthq._internal.dom.WebGL2RenderingContext):flighthq._internal.dom.WebGLProgram {
-    return cast (cast createGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlShapeMesh.VERTEX_SOURCE__glShapeMesh : String), (cast GlShapeMesh.FRAGMENT_SOURCE__glShapeMesh : String), (cast 'Shape-mesh' : String)) : flighthq._internal.dom.WebGLProgram);
+    return cast (cast createGlProgram((cast gl), (cast GlShapeMesh.VERTEX_SOURCE__glShapeMesh : String), (cast GlShapeMesh.FRAGMENT_SOURCE__glShapeMesh : String), (cast 'Shape-mesh' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast null;
   }
 
@@ -100,7 +100,7 @@ class GlShapeMesh {
     var iw:Float = cast _Runtime.UNDEFINED;
     var ih:Float = cast _Runtime.UNDEFINED;
     var t:Matrix = cast _Runtime.UNDEFINED;
-    viewport = _Runtime.coalesce((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas);
+    viewport = _Runtime.coalesce((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas);
     iw = _Runtime.divideNumbers(2.0, _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'), function():Dynamic return cast 1.0));
     ih = _Runtime.divideNumbers(2.0, _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height'), function():Dynamic return cast 1.0));
     t = (cast renderProxy : RenderProxy2D).transform2D;

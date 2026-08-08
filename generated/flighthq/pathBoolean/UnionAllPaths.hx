@@ -24,32 +24,32 @@ class UnionAllPaths {
     var result:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
     var path:Path = cast _Runtime.UNDEFINED;
     fillRule = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fillRule; }), function():Dynamic return cast 'nonZero');
-    contours = cast ([] : Array<Dynamic>);
+    contours = (cast cast ([] : Array<Dynamic>));
     for (path in _Runtime.iterable(paths)) {
-      for (contour in _Runtime.iterable((cast flattenPath((cast path : Path), (cast ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.tolerance; }) : Float)) : Array<Array<Float>>))) {
+      for (contour in _Runtime.iterable((cast flattenPath((cast path), (cast ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.tolerance; }) : Float)) : Array<Array<Float>>))) {
         _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
       }
     }
-    result = ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool) ? (cast UnionAllPaths.EMPTY_CONTOURS__unionAllPaths : Dynamic) : (cast (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean(contours, UnionAllPaths.EMPTY_CONTOURS__unionAllPaths, 'union', fillRule) : Dynamic));
-    path = _Runtime.coalesce(out, function():Dynamic return cast (cast createPath('nonZero') : Null<Path>));
+    result = ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool) ? (cast UnionAllPaths.EMPTY_CONTOURS__unionAllPaths : Dynamic) : (cast (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean((cast contours), (cast UnionAllPaths.EMPTY_CONTOURS__unionAllPaths), (cast 'union'), (cast fillRule)) : Dynamic));
+    path = _Runtime.coalesce(out, function():Dynamic return cast (cast createPath((cast 'nonZero')) : Path));
     _Runtime.setLength((cast path : Path).commands, 0.0);
     _Runtime.setLength((cast path : Path).data, 0.0);
     ((cast path : Path).winding = 'nonZero');
     for (ring in _Runtime.iterable(result)) {
       if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-      appendPathMoveTo((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(ring, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, 1.0) : Float));
+      appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readArray(ring, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, 1.0) : Float));
       {
         var i:Float = 2.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          appendPathLineTo((cast path : Path), (cast flighthq._internal._StaticIndex.readArray(ring, i) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, (i + 1.0)) : Float));
+          appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readArray(ring, i) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, (i + 1.0)) : Float));
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
-      appendPathClose((cast path : Path));
+      appendPathClose((cast path));
     }
     return cast path;
     return cast null;
   }
 
-  public static final EMPTY_CONTOURS__unionAllPaths:Array<PathBooleanContour> = cast ([] : Array<Dynamic>);
+  public static final EMPTY_CONTOURS__unionAllPaths:Array<PathBooleanContour> = (cast cast ([] : Array<Dynamic>));
 }

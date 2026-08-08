@@ -12,11 +12,11 @@ import flighthq.types.Types.ExtendedPbrMaterialKind;
 import flighthq.types._internal._ExtendedPbrMaterialValues.ExtendedPbrMaterialKind;
 
 class ExtendedPbrMaterial {
-  public static function createExtendedPbrMaterial(?opts:Dynamic):flighthq.types.ExtendedPbrMaterial {
+  public static function createExtendedPbrMaterial(?opts:flighthq._internal._Partial<flighthq.types.ExtendedPbrMaterial>):flighthq.types.ExtendedPbrMaterial {
     var material:flighthq.types.ExtendedPbrMaterial = cast _Runtime.UNDEFINED;
-    material = (cast (cast createSurfaceMaterial((cast ExtendedPbrMaterialKind : String), opts) : flighthq.types.ExtendedPbrMaterial) : flighthq.types.ExtendedPbrMaterial);
-    ((cast material : flighthq.types.ExtendedPbrMaterial).extensions = _Runtime.coalesce(_Runtime.optionalField(opts, 'extensions'), function():Dynamic return cast cast ([] : Array<Dynamic>)));
-    ((cast material : flighthq.types.ExtendedPbrMaterial).standard = _Runtime.coalesce(_Runtime.optionalField(opts, 'standard'), function():Dynamic return cast (cast createStandardPbrMaterialProperties((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal._Any>)) : StandardPbrMaterialProperties)));
+    material = (cast createSurfaceMaterial((cast ExtendedPbrMaterialKind : String), (cast opts)) : flighthq.types.ExtendedPbrMaterial);
+    ((cast material : flighthq.types.ExtendedPbrMaterial).extensions = _Runtime.coalesce(({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var extensions:Null<Array<PbrExtension>>; }).extensions; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    ((cast material : flighthq.types.ExtendedPbrMaterial).standard = _Runtime.coalesce(({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var standard:Null<StandardPbrMaterialProperties>; }).standard; }), function():Dynamic return cast (cast createStandardPbrMaterialProperties((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : StandardPbrMaterialProperties)));
     return cast material;
     return cast null;
   }

@@ -16,6 +16,7 @@ import flighthq.types.HemisphereLight;
 import flighthq.types.Light;
 import flighthq.types.PointLight;
 import flighthq.types.Quaternion;
+import flighthq.types.Quaternion.QuaternionLike;
 import flighthq.types.Scene3DDocument;
 import flighthq.types.Scene3DDocument.Scene3DDocumentLight;
 import flighthq.types.Scene3DLights;
@@ -44,59 +45,59 @@ class SceneDocumentLights {
     var spot:Array<SpotLight> = cast _Runtime.UNDEFINED;
     ambient = null;
     directional = null;
-    hemisphere = cast ([] : Array<Dynamic>);
-    point = cast ([] : Array<Dynamic>);
-    spot = cast ([] : Array<Dynamic>);
+    hemisphere = (cast cast ([] : Array<Dynamic>));
+    point = (cast cast ([] : Array<Dynamic>));
+    spot = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(document, 'lights'), 'length') : Float)) : Bool)) {
         var source:Scene3DDocumentLight = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'lights'), i);
         var descriptor:Light = (cast source : Scene3DDocumentLight).descriptor;
         if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, AmbientLightKind) : Bool)) {
-          if ((cast _Runtime.strictEquals(ambient, null) : Bool)) { (ambient = cast ((cast cloneAmbientLight((cast (cast descriptor : AmbientLight) : AmbientLight)) : Null<AmbientLight>) : Dynamic)); }
+          if ((cast _Runtime.strictEquals(ambient, null) : Bool)) { (ambient = cast ((cast cloneAmbientLight((cast (cast descriptor : AmbientLight))) : AmbientLight) : Dynamic)); }
           i++;
           continue;
         }
         if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, DirectionalLightKind) : Bool)) {
           if ((cast _Runtime.strictEquals(directional, null) : Bool)) {
-            (directional = cast ((cast cloneDirectionalLight((cast (cast descriptor : DirectionalLight) : DirectionalLight)) : Null<DirectionalLight>) : Dynamic));
-            rotateVector3ByQuaternion((cast (cast directional : DirectionalLight).direction : Vector3Like), (cast (cast directional : DirectionalLight).direction : Vector3Like), (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation);
+            (directional = cast ((cast cloneDirectionalLight((cast (cast descriptor : DirectionalLight))) : DirectionalLight) : Dynamic));
+            rotateVector3ByQuaternion((cast (cast directional : DirectionalLight).direction), (cast (cast directional : DirectionalLight).direction), (cast (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation));
           }
           i++;
           continue;
         }
         if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, HemisphereLightKind) : Bool)) {
-          _Runtime.callProperty(hemisphere, 'push', cast ([(cast cloneHemisphereLight((cast (cast descriptor : HemisphereLight) : HemisphereLight)) : HemisphereLight)] : Array<Dynamic>));
+          _Runtime.callProperty(hemisphere, 'push', cast ([(cast cloneHemisphereLight((cast (cast descriptor : HemisphereLight))) : HemisphereLight)] : Array<Dynamic>));
           i++;
           continue;
         }
         if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, PointLightKind) : Bool)) {
-          var resolved:PointLight = (cast clonePointLight((cast (cast descriptor : PointLight) : PointLight)) : PointLight);
-          SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights((cast (cast resolved : PointLight).position : Vector3Like), (cast (cast source : Scene3DDocumentLight).transform : Transform3DLike));
+          var resolved:PointLight = (cast clonePointLight((cast (cast descriptor : PointLight))) : PointLight);
+          SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights((cast (cast resolved : PointLight).position), (cast (cast source : Scene3DDocumentLight).transform));
           _Runtime.callProperty(point, 'push', cast ([resolved] : Array<Dynamic>));
           i++;
           continue;
         }
         if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, SpotLightKind) : Bool)) {
-          var resolved:SpotLight = (cast cloneSpotLight((cast (cast descriptor : SpotLight) : SpotLight)) : SpotLight);
-          SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights((cast (cast resolved : SpotLight).position : Vector3Like), (cast (cast source : Scene3DDocumentLight).transform : Transform3DLike));
-          rotateVector3ByQuaternion((cast (cast resolved : SpotLight).direction : Vector3Like), (cast (cast resolved : SpotLight).direction : Vector3Like), (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation);
+          var resolved:SpotLight = (cast cloneSpotLight((cast (cast descriptor : SpotLight))) : SpotLight);
+          SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights((cast (cast resolved : SpotLight).position), (cast (cast source : Scene3DDocumentLight).transform));
+          rotateVector3ByQuaternion((cast (cast resolved : SpotLight).direction), (cast (cast resolved : SpotLight).direction), (cast (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation));
           _Runtime.callProperty(spot, 'push', cast ([resolved] : Array<Dynamic>));
         }
         i++;
       }
     }
-    return cast (cast createScene3DLights((cast { ambient: ambient, directional: directional, hemisphere: hemisphere, point: point, spot: spot } : Null<flighthq._internal._Any>)) : Scene3DLights);
+    return cast (cast createScene3DLights((cast { ambient: ambient, directional: directional, hemisphere: hemisphere, point: point, spot: spot })) : Scene3DLights);
     return cast null;
   }
 
   public static function transformDocumentLightPosition__sceneDocumentLights(out:Vector3Like, transform:Transform3DLike):Void {
-    (out.x *= _Runtime.field(transform, 'scale').x);
-    (out.y *= _Runtime.field(transform, 'scale').y);
-    (out.z *= _Runtime.field(transform, 'scale').z);
-    rotateVector3ByQuaternion((cast out : Vector3Like), (cast out : Vector3Like), _Runtime.field(transform, 'rotation'));
-    (out.x += _Runtime.field(transform, 'position').x);
-    (out.y += _Runtime.field(transform, 'position').y);
-    (out.z += _Runtime.field(transform, 'position').z);
+    (out.x *= (cast _Runtime.field(transform, 'scale') : { var x:Float; }).x);
+    (out.y *= (cast _Runtime.field(transform, 'scale') : { var y:Float; }).y);
+    (out.z *= (cast _Runtime.field(transform, 'scale') : { var z:Float; }).z);
+    rotateVector3ByQuaternion((cast out), (cast out), (cast _Runtime.field(transform, 'rotation')));
+    (out.x += (cast _Runtime.field(transform, 'position') : { var x:Float; }).x);
+    (out.y += (cast _Runtime.field(transform, 'position') : { var y:Float; }).y);
+    (out.z += (cast _Runtime.field(transform, 'position') : { var z:Float; }).z);
   }
 }

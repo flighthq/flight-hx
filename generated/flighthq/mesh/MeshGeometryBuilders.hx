@@ -7,6 +7,7 @@ import flighthq.mesh.MeshGeometry.createMeshGeometry;
 import flighthq.mesh.MeshGeometryCompute.refreshMeshGeometryBounds;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.VertexAttributeLayout;
+import flighthq.types.MeshGeometryOptions;
 
 class MeshGeometryBuilders {
   public static function createBoxMeshGeometry(width:Float = 1.0, height:Float = 1.0, depth:Float = 1.0):MeshGeometry {
@@ -21,10 +22,10 @@ class MeshGeometryBuilders {
     hx = (width * 0.5);
     hy = (height * 0.5);
     hz = (depth * 0.5);
-    positions = cast ([] : Array<Dynamic>);
-    normals = cast ([] : Array<Dynamic>);
-    uvs = cast ([] : Array<Dynamic>);
-    indices = cast ([] : Array<Dynamic>);
+    positions = (cast cast ([] : Array<Dynamic>));
+    normals = (cast cast ([] : Array<Dynamic>));
+    uvs = (cast cast ([] : Array<Dynamic>));
+    indices = (cast cast ([] : Array<Dynamic>));
     addFace = (cast function(ox:Float, oy:Float, oz:Float, ux:Float, uy:Float, uz:Float, vx:Float, vy:Float, vz:Float, nx:Float, ny:Float, nz:Float):Void {
       var start:Float = cast _Runtime.UNDEFINED;
       start = _Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0);
@@ -44,14 +45,14 @@ class MeshGeometryBuilders {
         }
       }
       _Runtime.pushMany(indices, cast ([start, (start + 1.0), (start + 3.0), start, (start + 3.0), (start + 2.0)] : Array<Dynamic>));
-    } : Float->Float->Float->Float->Float->Float->Float->Float->Float->Float->Float->Float->Void);
+    });
     addFace((cast hx : Float), (cast -hy : Float), (cast hz : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast -depth : Float), (cast 0.0 : Float), (cast height : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
     addFace((cast -hx : Float), (cast -hy : Float), (cast -hz : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast depth : Float), (cast 0.0 : Float), (cast height : Float), (cast 0.0 : Float), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
     addFace((cast -hx : Float), (cast hy : Float), (cast hz : Float), (cast width : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast -depth : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float));
     addFace((cast -hx : Float), (cast -hy : Float), (cast -hz : Float), (cast width : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast depth : Float), (cast 0.0 : Float), (cast -1.0 : Float), (cast 0.0 : Float));
     addFace((cast -hx : Float), (cast -hy : Float), (cast hz : Float), (cast width : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast height : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float));
     addFace((cast hx : Float), (cast -hy : Float), (cast -hz : Float), (cast -width : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast height : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast -1.0 : Float));
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast indices : Array<Float>)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
     return cast null;
   }
 
@@ -71,10 +72,10 @@ class MeshGeometryBuilders {
     rSeg = HxMath.max(3.0, radialSegments);
     cSeg = HxMath.max(1.0, capSegments);
     halfH = (height * 0.5);
-    positions = cast ([] : Array<Dynamic>);
-    normals = cast ([] : Array<Dynamic>);
-    uvs = cast ([] : Array<Dynamic>);
-    indices = cast ([] : Array<Dynamic>);
+    positions = (cast cast ([] : Array<Dynamic>));
+    normals = (cast cast ([] : Array<Dynamic>));
+    uvs = (cast cast ([] : Array<Dynamic>));
+    indices = (cast cast ([] : Array<Dynamic>));
     addRing = (cast function(phi:Float, yOffset:Float):Void {
       var sinPhi:Float = cast _Runtime.UNDEFINED;
       var cosPhi:Float = cast _Runtime.UNDEFINED;
@@ -95,7 +96,7 @@ class MeshGeometryBuilders {
           i++;
         }
       }
-    } : Float->Float->Void);
+    });
     ringVertexCount = (rSeg + 1.0);
     vDivisor = ((2.0 * cSeg) + 1.0);
     {
@@ -145,7 +146,7 @@ class MeshGeometryBuilders {
         j++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast indices : Array<Float>)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
     return cast null;
   }
 
@@ -156,12 +157,12 @@ class MeshGeometryBuilders {
     var uvs:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
     segs = HxMath.max(3.0, segments);
-    positions = cast ([] : Array<Dynamic>);
-    normals = cast ([] : Array<Dynamic>);
-    uvs = cast ([] : Array<Dynamic>);
-    indices = cast ([] : Array<Dynamic>);
-    MeshGeometryBuilders.addDisc__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast indices : Array<Float>), (cast segs : Float), (cast radius : Float), (cast 0.0 : Float), (cast 1.0 : Float));
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast indices : Array<Float>)) : MeshGeometry);
+    positions = (cast cast ([] : Array<Dynamic>));
+    normals = (cast cast ([] : Array<Dynamic>));
+    uvs = (cast cast ([] : Array<Dynamic>));
+    indices = (cast cast ([] : Array<Dynamic>));
+    MeshGeometryBuilders.addDisc__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices), (cast segs : Float), (cast radius : Float), (cast 0.0 : Float), (cast 1.0 : Float));
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
     return cast null;
   }
 
@@ -181,10 +182,10 @@ class MeshGeometryBuilders {
     var sideStart:Float = cast _Runtime.UNDEFINED;
     segments = HxMath.max(3.0, radialSegments);
     halfHeight = (height * 0.5);
-    positions = cast ([] : Array<Dynamic>);
-    normals = cast ([] : Array<Dynamic>);
-    uvs = cast ([] : Array<Dynamic>);
-    indices = cast ([] : Array<Dynamic>);
+    positions = (cast cast ([] : Array<Dynamic>));
+    normals = (cast cast ([] : Array<Dynamic>));
+    uvs = (cast cast ([] : Array<Dynamic>));
+    indices = (cast cast ([] : Array<Dynamic>));
     slope = ((bottomRadius - topRadius) / height);
     sideStart = _Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0);
     {
@@ -227,23 +228,23 @@ class MeshGeometryBuilders {
     }
     if ((cast capped : Bool)) {
       if ((cast ((cast bottomRadius : Float) > (cast 0.0 : Float)) : Bool)) {
-        MeshGeometryBuilders.addDisc__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast indices : Array<Float>), (cast segments : Float), (cast bottomRadius : Float), (cast -halfHeight : Float), (cast -1.0 : Float));
+        MeshGeometryBuilders.addDisc__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices), (cast segments : Float), (cast bottomRadius : Float), (cast -halfHeight : Float), (cast -1.0 : Float));
       }
       if ((cast ((cast topRadius : Float) > (cast 0.0 : Float)) : Bool)) {
-        MeshGeometryBuilders.addDisc__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast indices : Array<Float>), (cast segments : Float), (cast topRadius : Float), (cast halfHeight : Float), (cast 1.0 : Float));
+        MeshGeometryBuilders.addDisc__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices), (cast segments : Float), (cast topRadius : Float), (cast halfHeight : Float), (cast 1.0 : Float));
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast indices : Array<Float>)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
     return cast null;
   }
 
   public static function createDodecahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
-    return cast (cast createPolyhedronMeshGeometry((cast MeshGeometryBuilders.DODECAHEDRON_VERTS__meshGeometryBuilders : Array<Array<Float>>), (cast MeshGeometryBuilders.DODECAHEDRON_FACES__meshGeometryBuilders : Array<Array<Float>>), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
+    return cast (cast createPolyhedronMeshGeometry((cast MeshGeometryBuilders.DODECAHEDRON_VERTS__meshGeometryBuilders), (cast MeshGeometryBuilders.DODECAHEDRON_FACES__meshGeometryBuilders), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
     return cast null;
   }
 
   public static function createIcosahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
-    return cast (cast createPolyhedronMeshGeometry((cast MeshGeometryBuilders.ICOSAHEDRON_VERTS__meshGeometryBuilders : Array<Array<Float>>), (cast MeshGeometryBuilders.ICOSAHEDRON_FACES__meshGeometryBuilders : Array<Array<Float>>), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
+    return cast (cast createPolyhedronMeshGeometry((cast MeshGeometryBuilders.ICOSAHEDRON_VERTS__meshGeometryBuilders), (cast MeshGeometryBuilders.ICOSAHEDRON_FACES__meshGeometryBuilders), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
     return cast null;
   }
 
@@ -271,9 +272,10 @@ class MeshGeometryBuilders {
       y = flighthq._internal._StaticIndex.readArray(__parameter0, 1.0);
       z = flighthq._internal._StaticIndex.readArray(__parameter0, 2.0);
       return cast (cast cast ([(x * scale), (y * scale), (z * scale)] : Array<Dynamic>) : Array<Float>);
+      return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
     verts = _Runtime.callProperty(baseVerts, 'map', cast ([function(v:Array<Float>, __unused3:Float, __unused4:Array<Array<Float>>):Array<Float> return (cast _Runtime.concatArrays([_Runtime.toArray(v)]) : Array<Float>)] : Array<Dynamic>));
-    faces = cast ([cast ([0.0, 11.0, 5.0] : Array<Dynamic>), cast ([0.0, 5.0, 1.0] : Array<Dynamic>), cast ([0.0, 1.0, 7.0] : Array<Dynamic>), cast ([0.0, 7.0, 10.0] : Array<Dynamic>), cast ([0.0, 10.0, 11.0] : Array<Dynamic>), cast ([1.0, 5.0, 9.0] : Array<Dynamic>), cast ([5.0, 11.0, 4.0] : Array<Dynamic>), cast ([11.0, 10.0, 2.0] : Array<Dynamic>), cast ([10.0, 7.0, 6.0] : Array<Dynamic>), cast ([7.0, 1.0, 8.0] : Array<Dynamic>), cast ([3.0, 9.0, 4.0] : Array<Dynamic>), cast ([3.0, 4.0, 2.0] : Array<Dynamic>), cast ([3.0, 2.0, 6.0] : Array<Dynamic>), cast ([3.0, 6.0, 8.0] : Array<Dynamic>), cast ([3.0, 8.0, 9.0] : Array<Dynamic>), cast ([4.0, 9.0, 5.0] : Array<Dynamic>), cast ([2.0, 4.0, 11.0] : Array<Dynamic>), cast ([6.0, 2.0, 10.0] : Array<Dynamic>), cast ([8.0, 6.0, 7.0] : Array<Dynamic>), cast ([9.0, 8.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>);
+    faces = (cast cast ([cast ([0.0, 11.0, 5.0] : Array<Dynamic>), cast ([0.0, 5.0, 1.0] : Array<Dynamic>), cast ([0.0, 1.0, 7.0] : Array<Dynamic>), cast ([0.0, 7.0, 10.0] : Array<Dynamic>), cast ([0.0, 10.0, 11.0] : Array<Dynamic>), cast ([1.0, 5.0, 9.0] : Array<Dynamic>), cast ([5.0, 11.0, 4.0] : Array<Dynamic>), cast ([11.0, 10.0, 2.0] : Array<Dynamic>), cast ([10.0, 7.0, 6.0] : Array<Dynamic>), cast ([7.0, 1.0, 8.0] : Array<Dynamic>), cast ([3.0, 9.0, 4.0] : Array<Dynamic>), cast ([3.0, 4.0, 2.0] : Array<Dynamic>), cast ([3.0, 2.0, 6.0] : Array<Dynamic>), cast ([3.0, 6.0, 8.0] : Array<Dynamic>), cast ([3.0, 8.0, 9.0] : Array<Dynamic>), cast ([4.0, 9.0, 5.0] : Array<Dynamic>), cast ([2.0, 4.0, 11.0] : Array<Dynamic>), cast ([6.0, 2.0, 10.0] : Array<Dynamic>), cast ([8.0, 6.0, 7.0] : Array<Dynamic>), cast ([9.0, 8.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     midpointCache = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     getMidpoint = (cast function(a:Float, b:Float):Float {
       var key:String = cast _Runtime.UNDEFINED;
@@ -299,13 +301,14 @@ class MeshGeometryBuilders {
       (mz = cast ((mz / len) : Dynamic));
       idx = _Runtime.field(verts, 'length');
       _Runtime.callProperty(verts, 'push', cast ([cast ([mx, my, mz] : Array<Dynamic>)] : Array<Dynamic>));
-      ((cast midpointCache : flighthq._internal._Map<String, Float>).set(key, idx));
+      ((cast midpointCache : flighthq._internal._Map<String, Float>).set(key, (cast idx)));
       return cast idx;
-    } : Float->Float->Float);
+      return cast _Runtime.UNDEFINED;
+    });
     {
       var s:Float = 0.0;
       while ((cast ((cast s : Float) < (cast subs : Float)) : Bool)) {
-        var newFaces:Array<Array<Float>> = cast ([] : Array<Dynamic>);
+        var newFaces:Array<Array<Float>> = (cast cast ([] : Array<Dynamic>));
         for (__iteration5 in _Runtime.iterable(faces)) {
           var a:Float = flighthq._internal._StaticIndex.readArray(__iteration5, 0.0);
           var b:Float = flighthq._internal._StaticIndex.readArray(__iteration5, 1.0);
@@ -320,10 +323,10 @@ class MeshGeometryBuilders {
         s++;
       }
     }
-    positions = cast ([] : Array<Dynamic>);
-    normals = cast ([] : Array<Dynamic>);
-    uvs = cast ([] : Array<Dynamic>);
-    faceIndices = cast ([] : Array<Dynamic>);
+    positions = (cast cast ([] : Array<Dynamic>));
+    normals = (cast cast ([] : Array<Dynamic>));
+    uvs = (cast cast ([] : Array<Dynamic>));
+    faceIndices = (cast cast ([] : Array<Dynamic>));
     for (__iteration6 in _Runtime.iterable(faces)) {
       var a:Float = flighthq._internal._StaticIndex.readArray(__iteration6, 0.0);
       var b:Float = flighthq._internal._StaticIndex.readArray(__iteration6, 1.0);
@@ -347,12 +350,12 @@ class MeshGeometryBuilders {
         i++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast faceIndices : Array<Float>)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast faceIndices)) : MeshGeometry);
     return cast null;
   }
 
   public static function createOctahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
-    return cast (cast createPolyhedronMeshGeometry((cast MeshGeometryBuilders.OCTAHEDRON_VERTS__meshGeometryBuilders : Array<Array<Float>>), (cast MeshGeometryBuilders.OCTAHEDRON_FACES__meshGeometryBuilders : Array<Array<Float>>), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
+    return cast (cast createPolyhedronMeshGeometry((cast MeshGeometryBuilders.OCTAHEDRON_VERTS__meshGeometryBuilders), (cast MeshGeometryBuilders.OCTAHEDRON_FACES__meshGeometryBuilders), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
     return cast null;
   }
 
@@ -370,10 +373,10 @@ class MeshGeometryBuilders {
     dSeg = HxMath.max(1.0, depthSegments);
     hw = (width * 0.5);
     hd = (depth * 0.5);
-    positions = cast ([] : Array<Dynamic>);
-    normals = cast ([] : Array<Dynamic>);
-    uvs = cast ([] : Array<Dynamic>);
-    indices = cast ([] : Array<Dynamic>);
+    positions = (cast cast ([] : Array<Dynamic>));
+    normals = (cast cast ([] : Array<Dynamic>));
+    uvs = (cast cast ([] : Array<Dynamic>));
+    indices = (cast cast ([] : Array<Dynamic>));
     {
       var iz:Float = 0.0;
       while ((cast ((cast iz : Float) <= (cast dSeg : Float)) : Bool)) {
@@ -411,7 +414,7 @@ class MeshGeometryBuilders {
         iz++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast indices : Array<Float>)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
     return cast null;
   }
 
@@ -434,6 +437,7 @@ class MeshGeometryBuilders {
       z = flighthq._internal._StaticIndex.readArray(__parameter7, 2.0);
       len = HxMath.sqrt((((x * x) + (y * y)) + (z * z)));
       return cast cast ([(x / len), (y / len), (z / len)] : Array<Dynamic>);
+      return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
     faces = _Runtime.callProperty(faceIndices, 'map', cast ([function(f:Array<Float>, __unused10:Float, __unused11:Array<Array<Float>>):Array<Float> return cast ([flighthq._internal._StaticIndex.readArray(f, 0.0), flighthq._internal._StaticIndex.readArray(f, 1.0), flighthq._internal._StaticIndex.readArray(f, 2.0)] : Array<Dynamic>)] : Array<Dynamic>));
     if ((cast ((cast subs : Float) > (cast 0.0 : Float)) : Bool)) {
@@ -463,13 +467,14 @@ class MeshGeometryBuilders {
         (mz = cast ((mz / mlen) : Dynamic));
         idx = _Runtime.field(verts, 'length');
         _Runtime.callProperty(verts, 'push', cast ([cast ([mx, my, mz] : Array<Dynamic>)] : Array<Dynamic>));
-        ((cast midCache : flighthq._internal._Map<String, Float>).set(key, idx));
+        ((cast midCache : flighthq._internal._Map<String, Float>).set(key, (cast idx)));
         return cast idx;
-      } : Float->Float->Float);
+        return cast _Runtime.UNDEFINED;
+      });
       {
         var s:Float = 0.0;
         while ((cast ((cast s : Float) < (cast subs : Float)) : Bool)) {
-          var newFaces:Array<Array<Float>> = cast ([] : Array<Dynamic>);
+          var newFaces:Array<Array<Float>> = (cast cast ([] : Array<Dynamic>));
           for (__iteration12 in _Runtime.iterable(faces)) {
             var a:Float = flighthq._internal._StaticIndex.readArray(__iteration12, 0.0);
             var b:Float = flighthq._internal._StaticIndex.readArray(__iteration12, 1.0);
@@ -485,10 +490,10 @@ class MeshGeometryBuilders {
         }
       }
     }
-    positions = cast ([] : Array<Dynamic>);
-    normals = cast ([] : Array<Dynamic>);
-    uvs = cast ([] : Array<Dynamic>);
-    flatIndices = cast ([] : Array<Dynamic>);
+    positions = (cast cast ([] : Array<Dynamic>));
+    normals = (cast cast ([] : Array<Dynamic>));
+    uvs = (cast cast ([] : Array<Dynamic>));
+    flatIndices = (cast cast ([] : Array<Dynamic>));
     for (__iteration13 in _Runtime.iterable(faces)) {
       var a:Float = flighthq._internal._StaticIndex.readArray(__iteration13, 0.0);
       var b:Float = flighthq._internal._StaticIndex.readArray(__iteration13, 1.0);
@@ -512,7 +517,7 @@ class MeshGeometryBuilders {
         i++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast flatIndices : Array<Float>)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast flatIndices)) : MeshGeometry);
     return cast null;
   }
 
@@ -525,11 +530,11 @@ class MeshGeometryBuilders {
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
     hw = (width * 0.5);
     hh = (height * 0.5);
-    positions = cast ([-hw, -hh, 0.0, hw, -hh, 0.0, -hw, hh, 0.0, hw, hh, 0.0] : Array<Dynamic>);
-    normals = cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0] : Array<Dynamic>);
-    uvs = cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0] : Array<Dynamic>);
-    indices = cast ([0.0, 1.0, 2.0, 2.0, 1.0, 3.0] : Array<Dynamic>);
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast indices : Array<Float>)) : MeshGeometry);
+    positions = (cast cast ([-hw, -hh, 0.0, hw, -hh, 0.0, -hw, hh, 0.0, hw, hh, 0.0] : Array<Dynamic>));
+    normals = (cast cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
+    uvs = (cast cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
+    indices = (cast cast ([0.0, 1.0, 2.0, 2.0, 1.0, 3.0] : Array<Dynamic>));
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
     return cast null;
   }
 
@@ -540,10 +545,10 @@ class MeshGeometryBuilders {
     var uvs:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
     segs = HxMath.max(3.0, segments);
-    positions = cast ([] : Array<Dynamic>);
-    normals = cast ([] : Array<Dynamic>);
-    uvs = cast ([] : Array<Dynamic>);
-    indices = cast ([] : Array<Dynamic>);
+    positions = (cast cast ([] : Array<Dynamic>));
+    normals = (cast cast ([] : Array<Dynamic>));
+    uvs = (cast cast ([] : Array<Dynamic>));
+    indices = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) <= (cast segs : Float)) : Bool)) {
@@ -570,7 +575,7 @@ class MeshGeometryBuilders {
         i++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast indices : Array<Float>)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
     return cast null;
   }
 
@@ -584,10 +589,10 @@ class MeshGeometryBuilders {
     var rowStride:Float = cast _Runtime.UNDEFINED;
     wSeg = HxMath.max(3.0, widthSegments);
     hSeg = HxMath.max(2.0, heightSegments);
-    positions = cast ([] : Array<Dynamic>);
-    normals = cast ([] : Array<Dynamic>);
-    uvs = cast ([] : Array<Dynamic>);
-    indices = cast ([] : Array<Dynamic>);
+    positions = (cast cast ([] : Array<Dynamic>));
+    normals = (cast cast ([] : Array<Dynamic>));
+    uvs = (cast cast ([] : Array<Dynamic>));
+    indices = (cast cast ([] : Array<Dynamic>));
     {
       var iy:Float = 0.0;
       while ((cast ((cast iy : Float) <= (cast hSeg : Float)) : Bool)) {
@@ -632,12 +637,12 @@ class MeshGeometryBuilders {
         iy++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast indices : Array<Float>)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
     return cast null;
   }
 
   public static function createTetrahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
-    return cast (cast createPolyhedronMeshGeometry((cast MeshGeometryBuilders.TETRAHEDRON_VERTS__meshGeometryBuilders : Array<Array<Float>>), (cast MeshGeometryBuilders.TETRAHEDRON_FACES__meshGeometryBuilders : Array<Array<Float>>), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
+    return cast (cast createPolyhedronMeshGeometry((cast MeshGeometryBuilders.TETRAHEDRON_VERTS__meshGeometryBuilders), (cast MeshGeometryBuilders.TETRAHEDRON_FACES__meshGeometryBuilders), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
     return cast null;
   }
 
@@ -652,10 +657,10 @@ class MeshGeometryBuilders {
     var rowStride:Float = cast _Runtime.UNDEFINED;
     tSeg = HxMath.max(3.0, tubularSegments);
     rSeg = HxMath.max(3.0, radialSegments);
-    positions = cast ([] : Array<Dynamic>);
-    normals = cast ([] : Array<Dynamic>);
-    uvs = cast ([] : Array<Dynamic>);
-    indices = cast ([] : Array<Dynamic>);
+    positions = (cast cast ([] : Array<Dynamic>));
+    normals = (cast cast ([] : Array<Dynamic>));
+    uvs = (cast cast ([] : Array<Dynamic>));
+    indices = (cast cast ([] : Array<Dynamic>));
     curvePoint = (cast function(t:Float):Array<Float> {
       var angle:Float = cast _Runtime.UNDEFINED;
       var x:Float = cast _Runtime.UNDEFINED;
@@ -666,20 +671,21 @@ class MeshGeometryBuilders {
       y = _Runtime.multiplyNumbers(_Runtime.multiplyNumbers((radius + tube), HxMath.cos((p * angle))), HxMath.sin((q * angle)));
       z = _Runtime.multiplyNumbers((radius + tube), HxMath.sin((p * angle)));
       return cast cast ([x, y, z] : Array<Dynamic>);
-    } : Float->Array<Float>);
+      return cast _Runtime.UNDEFINED;
+    });
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) <= (cast tSeg : Float)) : Bool)) {
         var u:Float = (i / tSeg);
-        var __destructure14 = (cast curvePoint((cast u : Float)) : Array<flighthq._internal._Any>);
+        var __destructure14 = (cast curvePoint((cast u : Float)) : Array<Float>);
         var cx:Float = flighthq._internal._StaticIndex.readArray(__destructure14, 0.0);
         var cy:Float = flighthq._internal._StaticIndex.readArray(__destructure14, 1.0);
         var cz:Float = flighthq._internal._StaticIndex.readArray(__destructure14, 2.0);
-        var __destructure15 = (cast curvePoint((cast (u + 0.001) : Float)) : Array<flighthq._internal._Any>);
+        var __destructure15 = (cast curvePoint((cast (u + 0.001) : Float)) : Array<Float>);
         var tx1:Float = flighthq._internal._StaticIndex.readArray(__destructure15, 0.0);
         var ty1:Float = flighthq._internal._StaticIndex.readArray(__destructure15, 1.0);
         var tz1:Float = flighthq._internal._StaticIndex.readArray(__destructure15, 2.0);
-        var __destructure16 = (cast curvePoint((cast (u - 0.001) : Float)) : Array<flighthq._internal._Any>);
+        var __destructure16 = (cast curvePoint((cast (u - 0.001) : Float)) : Array<Float>);
         var tx0:Float = flighthq._internal._StaticIndex.readArray(__destructure16, 0.0);
         var ty0:Float = flighthq._internal._StaticIndex.readArray(__destructure16, 1.0);
         var tz0:Float = flighthq._internal._StaticIndex.readArray(__destructure16, 2.0);
@@ -744,7 +750,7 @@ class MeshGeometryBuilders {
         i++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast indices : Array<Float>)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
     return cast null;
   }
 
@@ -758,10 +764,10 @@ class MeshGeometryBuilders {
     var rowStride:Float = cast _Runtime.UNDEFINED;
     rSeg = HxMath.max(3.0, radialSegments);
     tSeg = HxMath.max(3.0, tubularSegments);
-    positions = cast ([] : Array<Dynamic>);
-    normals = cast ([] : Array<Dynamic>);
-    uvs = cast ([] : Array<Dynamic>);
-    indices = cast ([] : Array<Dynamic>);
+    positions = (cast cast ([] : Array<Dynamic>));
+    normals = (cast cast ([] : Array<Dynamic>));
+    uvs = (cast cast ([] : Array<Dynamic>));
+    indices = (cast cast ([] : Array<Dynamic>));
     {
       var j:Float = 0.0;
       while ((cast ((cast j : Float) <= (cast rSeg : Float)) : Bool)) {
@@ -813,7 +819,7 @@ class MeshGeometryBuilders {
         j++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions : Array<Float>), (cast normals : Array<Float>), (cast uvs : Array<Float>), (cast indices : Array<Float>)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
     return cast null;
   }
 
@@ -876,9 +882,9 @@ class MeshGeometryBuilders {
     }
     indexArray = new flighthq._internal._UInt32Array(_Runtime.field(indices, 'length'));
     (cast indexArray : flighthq._internal._UInt32Array).set(indices);
-    geometry = (cast createMeshGeometry({ indices: indexArray, layout: MeshGeometryBuilders.CANONICAL_VERTEX_LAYOUT__meshGeometryBuilders, vertices: vertices }) : MeshGeometry);
-    MeshGeometryBuilders.computeCanonicalMeshTangents__meshGeometryBuilders((cast vertices : flighthq._internal._Float32Array), (cast indexArray : flighthq._internal._UInt32Array));
-    refreshMeshGeometryBounds((cast geometry : MeshGeometry));
+    geometry = (cast createMeshGeometry((cast { indices: indexArray, layout: MeshGeometryBuilders.CANONICAL_VERTEX_LAYOUT__meshGeometryBuilders, vertices: vertices })) : MeshGeometry);
+    MeshGeometryBuilders.computeCanonicalMeshTangents__meshGeometryBuilders((cast vertices), (cast indexArray));
+    refreshMeshGeometryBounds((cast geometry));
     return cast geometry;
     return cast null;
   }
@@ -973,25 +979,25 @@ class MeshGeometryBuilders {
 
   public static final CANONICAL_FLOATS_PER_VERTEX__meshGeometryBuilders:Float = 12.0;
 
-  public static final CANONICAL_VERTEX_LAYOUT__meshGeometryBuilders:VertexAttributeLayout = { attributes: cast ([{ byteOffset: 0.0, format: 'float32x3', semantic: 'position' }, { byteOffset: 12.0, format: 'float32x3', semantic: 'normal' }, { byteOffset: 24.0, format: 'float32x4', semantic: 'tangent' }, { byteOffset: 40.0, format: 'float32x2', semantic: 'uv0' }] : Array<Dynamic>), stride: 48.0 };
+  public static final CANONICAL_VERTEX_LAYOUT__meshGeometryBuilders:VertexAttributeLayout = (cast { attributes: cast ([{ byteOffset: 0.0, format: 'float32x3', semantic: 'position' }, { byteOffset: 12.0, format: 'float32x3', semantic: 'normal' }, { byteOffset: 24.0, format: 'float32x4', semantic: 'tangent' }, { byteOffset: 40.0, format: 'float32x2', semantic: 'uv0' }] : Array<Dynamic>), stride: 48.0 });
 
-  public static final TETRAHEDRON_VERTS__meshGeometryBuilders:Array<Array<Float>> = cast ([cast ([1.0, 1.0, 1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>)] : Array<Dynamic>);
+  public static final TETRAHEDRON_VERTS__meshGeometryBuilders:Array<Array<Float>> = (cast cast ([cast ([1.0, 1.0, 1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>)] : Array<Dynamic>));
 
-  public static final TETRAHEDRON_FACES__meshGeometryBuilders:Array<Array<Float>> = cast ([cast ([2.0, 1.0, 0.0] : Array<Dynamic>), cast ([0.0, 3.0, 2.0] : Array<Dynamic>), cast ([1.0, 3.0, 0.0] : Array<Dynamic>), cast ([2.0, 3.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>);
+  public static final TETRAHEDRON_FACES__meshGeometryBuilders:Array<Array<Float>> = (cast cast ([cast ([2.0, 1.0, 0.0] : Array<Dynamic>), cast ([0.0, 3.0, 2.0] : Array<Dynamic>), cast ([1.0, 3.0, 0.0] : Array<Dynamic>), cast ([2.0, 3.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
 
-  public static final OCTAHEDRON_VERTS__meshGeometryBuilders:Array<Array<Float>> = cast ([cast ([1.0, 0.0, 0.0] : Array<Dynamic>), cast ([-1.0, 0.0, 0.0] : Array<Dynamic>), cast ([0.0, 1.0, 0.0] : Array<Dynamic>), cast ([0.0, -1.0, 0.0] : Array<Dynamic>), cast ([0.0, 0.0, 1.0] : Array<Dynamic>), cast ([0.0, 0.0, -1.0] : Array<Dynamic>)] : Array<Dynamic>);
+  public static final OCTAHEDRON_VERTS__meshGeometryBuilders:Array<Array<Float>> = (cast cast ([cast ([1.0, 0.0, 0.0] : Array<Dynamic>), cast ([-1.0, 0.0, 0.0] : Array<Dynamic>), cast ([0.0, 1.0, 0.0] : Array<Dynamic>), cast ([0.0, -1.0, 0.0] : Array<Dynamic>), cast ([0.0, 0.0, 1.0] : Array<Dynamic>), cast ([0.0, 0.0, -1.0] : Array<Dynamic>)] : Array<Dynamic>));
 
-  public static final OCTAHEDRON_FACES__meshGeometryBuilders:Array<Array<Float>> = cast ([cast ([0.0, 2.0, 4.0] : Array<Dynamic>), cast ([0.0, 4.0, 3.0] : Array<Dynamic>), cast ([0.0, 3.0, 5.0] : Array<Dynamic>), cast ([0.0, 5.0, 2.0] : Array<Dynamic>), cast ([1.0, 4.0, 2.0] : Array<Dynamic>), cast ([1.0, 3.0, 4.0] : Array<Dynamic>), cast ([1.0, 5.0, 3.0] : Array<Dynamic>), cast ([1.0, 2.0, 5.0] : Array<Dynamic>)] : Array<Dynamic>);
+  public static final OCTAHEDRON_FACES__meshGeometryBuilders:Array<Array<Float>> = (cast cast ([cast ([0.0, 2.0, 4.0] : Array<Dynamic>), cast ([0.0, 4.0, 3.0] : Array<Dynamic>), cast ([0.0, 3.0, 5.0] : Array<Dynamic>), cast ([0.0, 5.0, 2.0] : Array<Dynamic>), cast ([1.0, 4.0, 2.0] : Array<Dynamic>), cast ([1.0, 3.0, 4.0] : Array<Dynamic>), cast ([1.0, 5.0, 3.0] : Array<Dynamic>), cast ([1.0, 2.0, 5.0] : Array<Dynamic>)] : Array<Dynamic>));
 
   public static final _phi__meshGeometryBuilders:Float = (_Runtime.addNumbers(1.0, HxMath.sqrt(5.0)) * 0.5);
 
-  public static final ICOSAHEDRON_VERTS__meshGeometryBuilders:Array<Array<Float>> = cast ([cast ([-1.0, MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([1.0, MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([-1.0, -MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([1.0, -MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([0.0, -1.0, MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, 1.0, MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, -1.0, -MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, 1.0, -MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, -1.0] : Array<Dynamic>), cast ([MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, 1.0] : Array<Dynamic>), cast ([-MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, -1.0] : Array<Dynamic>), cast ([-MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>);
+  public static final ICOSAHEDRON_VERTS__meshGeometryBuilders:Array<Array<Float>> = (cast cast ([cast ([-1.0, MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([1.0, MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([-1.0, -MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([1.0, -MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([0.0, -1.0, MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, 1.0, MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, -1.0, -MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, 1.0, -MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, -1.0] : Array<Dynamic>), cast ([MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, 1.0] : Array<Dynamic>), cast ([-MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, -1.0] : Array<Dynamic>), cast ([-MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
 
-  public static final ICOSAHEDRON_FACES__meshGeometryBuilders:Array<Array<Float>> = cast ([cast ([0.0, 11.0, 5.0] : Array<Dynamic>), cast ([0.0, 5.0, 1.0] : Array<Dynamic>), cast ([0.0, 1.0, 7.0] : Array<Dynamic>), cast ([0.0, 7.0, 10.0] : Array<Dynamic>), cast ([0.0, 10.0, 11.0] : Array<Dynamic>), cast ([1.0, 5.0, 9.0] : Array<Dynamic>), cast ([5.0, 11.0, 4.0] : Array<Dynamic>), cast ([11.0, 10.0, 2.0] : Array<Dynamic>), cast ([10.0, 7.0, 6.0] : Array<Dynamic>), cast ([7.0, 1.0, 8.0] : Array<Dynamic>), cast ([3.0, 9.0, 4.0] : Array<Dynamic>), cast ([3.0, 4.0, 2.0] : Array<Dynamic>), cast ([3.0, 2.0, 6.0] : Array<Dynamic>), cast ([3.0, 6.0, 8.0] : Array<Dynamic>), cast ([3.0, 8.0, 9.0] : Array<Dynamic>), cast ([4.0, 9.0, 5.0] : Array<Dynamic>), cast ([2.0, 4.0, 11.0] : Array<Dynamic>), cast ([6.0, 2.0, 10.0] : Array<Dynamic>), cast ([8.0, 6.0, 7.0] : Array<Dynamic>), cast ([9.0, 8.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>);
+  public static final ICOSAHEDRON_FACES__meshGeometryBuilders:Array<Array<Float>> = (cast cast ([cast ([0.0, 11.0, 5.0] : Array<Dynamic>), cast ([0.0, 5.0, 1.0] : Array<Dynamic>), cast ([0.0, 1.0, 7.0] : Array<Dynamic>), cast ([0.0, 7.0, 10.0] : Array<Dynamic>), cast ([0.0, 10.0, 11.0] : Array<Dynamic>), cast ([1.0, 5.0, 9.0] : Array<Dynamic>), cast ([5.0, 11.0, 4.0] : Array<Dynamic>), cast ([11.0, 10.0, 2.0] : Array<Dynamic>), cast ([10.0, 7.0, 6.0] : Array<Dynamic>), cast ([7.0, 1.0, 8.0] : Array<Dynamic>), cast ([3.0, 9.0, 4.0] : Array<Dynamic>), cast ([3.0, 4.0, 2.0] : Array<Dynamic>), cast ([3.0, 2.0, 6.0] : Array<Dynamic>), cast ([3.0, 6.0, 8.0] : Array<Dynamic>), cast ([3.0, 8.0, 9.0] : Array<Dynamic>), cast ([4.0, 9.0, 5.0] : Array<Dynamic>), cast ([2.0, 4.0, 11.0] : Array<Dynamic>), cast ([6.0, 2.0, 10.0] : Array<Dynamic>), cast ([8.0, 6.0, 7.0] : Array<Dynamic>), cast ([9.0, 8.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
 
   public static final _d__meshGeometryBuilders:Float = (1.0 / MeshGeometryBuilders._phi__meshGeometryBuilders);
 
-  public static final DODECAHEDRON_VERTS__meshGeometryBuilders:Array<Array<Float>> = cast ([cast ([-1.0, -1.0, -1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, 1.0, 1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, 1.0, -1.0] : Array<Dynamic>), cast ([1.0, 1.0, 1.0] : Array<Dynamic>), cast ([0.0, -MeshGeometryBuilders._d__meshGeometryBuilders, -MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, -MeshGeometryBuilders._d__meshGeometryBuilders, MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, MeshGeometryBuilders._d__meshGeometryBuilders, -MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, MeshGeometryBuilders._d__meshGeometryBuilders, MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([-MeshGeometryBuilders._d__meshGeometryBuilders, -MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([-MeshGeometryBuilders._d__meshGeometryBuilders, MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([MeshGeometryBuilders._d__meshGeometryBuilders, -MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([MeshGeometryBuilders._d__meshGeometryBuilders, MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([-MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, -MeshGeometryBuilders._d__meshGeometryBuilders] : Array<Dynamic>), cast ([-MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, MeshGeometryBuilders._d__meshGeometryBuilders] : Array<Dynamic>), cast ([MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, -MeshGeometryBuilders._d__meshGeometryBuilders] : Array<Dynamic>), cast ([MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, MeshGeometryBuilders._d__meshGeometryBuilders] : Array<Dynamic>)] : Array<Dynamic>);
+  public static final DODECAHEDRON_VERTS__meshGeometryBuilders:Array<Array<Float>> = (cast cast ([cast ([-1.0, -1.0, -1.0] : Array<Dynamic>), cast ([-1.0, -1.0, 1.0] : Array<Dynamic>), cast ([-1.0, 1.0, -1.0] : Array<Dynamic>), cast ([-1.0, 1.0, 1.0] : Array<Dynamic>), cast ([1.0, -1.0, -1.0] : Array<Dynamic>), cast ([1.0, -1.0, 1.0] : Array<Dynamic>), cast ([1.0, 1.0, -1.0] : Array<Dynamic>), cast ([1.0, 1.0, 1.0] : Array<Dynamic>), cast ([0.0, -MeshGeometryBuilders._d__meshGeometryBuilders, -MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, -MeshGeometryBuilders._d__meshGeometryBuilders, MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, MeshGeometryBuilders._d__meshGeometryBuilders, -MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([0.0, MeshGeometryBuilders._d__meshGeometryBuilders, MeshGeometryBuilders._phi__meshGeometryBuilders] : Array<Dynamic>), cast ([-MeshGeometryBuilders._d__meshGeometryBuilders, -MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([-MeshGeometryBuilders._d__meshGeometryBuilders, MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([MeshGeometryBuilders._d__meshGeometryBuilders, -MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([MeshGeometryBuilders._d__meshGeometryBuilders, MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0] : Array<Dynamic>), cast ([-MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, -MeshGeometryBuilders._d__meshGeometryBuilders] : Array<Dynamic>), cast ([-MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, MeshGeometryBuilders._d__meshGeometryBuilders] : Array<Dynamic>), cast ([MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, -MeshGeometryBuilders._d__meshGeometryBuilders] : Array<Dynamic>), cast ([MeshGeometryBuilders._phi__meshGeometryBuilders, 0.0, MeshGeometryBuilders._d__meshGeometryBuilders] : Array<Dynamic>)] : Array<Dynamic>));
 
-  public static final DODECAHEDRON_FACES__meshGeometryBuilders:Array<Array<Float>> = cast ([cast ([3.0, 11.0, 7.0] : Array<Dynamic>), cast ([3.0, 7.0, 15.0] : Array<Dynamic>), cast ([3.0, 15.0, 13.0] : Array<Dynamic>), cast ([7.0, 19.0, 11.0] : Array<Dynamic>), cast ([7.0, 11.0, 9.0] : Array<Dynamic>), cast ([7.0, 9.0, 19.0] : Array<Dynamic>), cast ([15.0, 7.0, 19.0] : Array<Dynamic>), cast ([15.0, 19.0, 18.0] : Array<Dynamic>), cast ([15.0, 18.0, 6.0] : Array<Dynamic>), cast ([13.0, 15.0, 6.0] : Array<Dynamic>), cast ([13.0, 6.0, 2.0] : Array<Dynamic>), cast ([13.0, 2.0, 16.0] : Array<Dynamic>), cast ([3.0, 13.0, 16.0] : Array<Dynamic>), cast ([3.0, 16.0, 17.0] : Array<Dynamic>), cast ([3.0, 17.0, 11.0] : Array<Dynamic>), cast ([11.0, 17.0, 1.0] : Array<Dynamic>), cast ([11.0, 1.0, 9.0] : Array<Dynamic>), cast ([9.0, 1.0, 5.0] : Array<Dynamic>), cast ([5.0, 1.0, 17.0] : Array<Dynamic>), cast ([5.0, 17.0, 4.0] : Array<Dynamic>), cast ([5.0, 4.0, 14.0] : Array<Dynamic>), cast ([9.0, 5.0, 14.0] : Array<Dynamic>), cast ([9.0, 14.0, 12.0] : Array<Dynamic>), cast ([9.0, 12.0, 0.0] : Array<Dynamic>), cast ([1.0, 0.0, 12.0] : Array<Dynamic>), cast ([1.0, 12.0, 4.0] : Array<Dynamic>), cast ([1.0, 4.0, 17.0] : Array<Dynamic>), cast ([6.0, 18.0, 8.0] : Array<Dynamic>), cast ([6.0, 8.0, 10.0] : Array<Dynamic>), cast ([6.0, 10.0, 2.0] : Array<Dynamic>), cast ([18.0, 19.0, 8.0] : Array<Dynamic>), cast ([19.0, 7.0, 8.0] : Array<Dynamic>), cast ([7.0, 15.0, 8.0] : Array<Dynamic>), cast ([2.0, 10.0, 16.0] : Array<Dynamic>), cast ([10.0, 8.0, 0.0] : Array<Dynamic>), cast ([0.0, 8.0, 12.0] : Array<Dynamic>)] : Array<Dynamic>);
+  public static final DODECAHEDRON_FACES__meshGeometryBuilders:Array<Array<Float>> = (cast cast ([cast ([3.0, 11.0, 7.0] : Array<Dynamic>), cast ([3.0, 7.0, 15.0] : Array<Dynamic>), cast ([3.0, 15.0, 13.0] : Array<Dynamic>), cast ([7.0, 19.0, 11.0] : Array<Dynamic>), cast ([7.0, 11.0, 9.0] : Array<Dynamic>), cast ([7.0, 9.0, 19.0] : Array<Dynamic>), cast ([15.0, 7.0, 19.0] : Array<Dynamic>), cast ([15.0, 19.0, 18.0] : Array<Dynamic>), cast ([15.0, 18.0, 6.0] : Array<Dynamic>), cast ([13.0, 15.0, 6.0] : Array<Dynamic>), cast ([13.0, 6.0, 2.0] : Array<Dynamic>), cast ([13.0, 2.0, 16.0] : Array<Dynamic>), cast ([3.0, 13.0, 16.0] : Array<Dynamic>), cast ([3.0, 16.0, 17.0] : Array<Dynamic>), cast ([3.0, 17.0, 11.0] : Array<Dynamic>), cast ([11.0, 17.0, 1.0] : Array<Dynamic>), cast ([11.0, 1.0, 9.0] : Array<Dynamic>), cast ([9.0, 1.0, 5.0] : Array<Dynamic>), cast ([5.0, 1.0, 17.0] : Array<Dynamic>), cast ([5.0, 17.0, 4.0] : Array<Dynamic>), cast ([5.0, 4.0, 14.0] : Array<Dynamic>), cast ([9.0, 5.0, 14.0] : Array<Dynamic>), cast ([9.0, 14.0, 12.0] : Array<Dynamic>), cast ([9.0, 12.0, 0.0] : Array<Dynamic>), cast ([1.0, 0.0, 12.0] : Array<Dynamic>), cast ([1.0, 12.0, 4.0] : Array<Dynamic>), cast ([1.0, 4.0, 17.0] : Array<Dynamic>), cast ([6.0, 18.0, 8.0] : Array<Dynamic>), cast ([6.0, 8.0, 10.0] : Array<Dynamic>), cast ([6.0, 10.0, 2.0] : Array<Dynamic>), cast ([18.0, 19.0, 8.0] : Array<Dynamic>), cast ([19.0, 7.0, 8.0] : Array<Dynamic>), cast ([7.0, 15.0, 8.0] : Array<Dynamic>), cast ([2.0, 10.0, 16.0] : Array<Dynamic>), cast ([10.0, 8.0, 0.0] : Array<Dynamic>), cast ([0.0, 8.0, 12.0] : Array<Dynamic>)] : Array<Dynamic>));
 }

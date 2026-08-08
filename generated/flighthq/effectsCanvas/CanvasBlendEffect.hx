@@ -21,9 +21,9 @@ class CanvasBlendEffect {
     var backdrop:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     var operation:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
-    backdrop = (cast getCanvasBlendEffectBackdrop((cast state : CanvasRenderState), (cast _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null) : Null<String>)) : Null<CanvasRenderTarget>);
+    backdrop = (cast getCanvasBlendEffectBackdrop((cast state), (cast _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null))) : Null<CanvasRenderTarget>);
     if ((cast _Runtime.strictEquals(backdrop, null) : Bool)) {
-      drawCanvasEffectPass((cast dest : CanvasRenderTarget), (cast source : CanvasRenderTarget), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+      drawCanvasEffectPass((cast dest), (cast source), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
       return;
     }
     operation = getCanvasBlendEffectCompositeOperation((cast _Runtime.field(effect, 'mode') : String));
@@ -41,13 +41,13 @@ class CanvasBlendEffect {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  public static final defaultCanvasBlendEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyBlendEffectToCanvas((cast _Runtime.field(ctx, 'state') : CanvasRenderState), (cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast (cast effect : BlendEffect) : BlendEffect));
-  };
+  public static final defaultCanvasBlendEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    applyBlendEffectToCanvas((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : BlendEffect)));
+  });
 
   public static function getCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:Null<String>):Null<CanvasRenderTarget> {
     if ((cast _Runtime.strictEquals(backdropKey, null) : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasBlendEffectBackdrops; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, CanvasRenderTarget>).get(backdropKey)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasBlendEffectBackdrops; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, CanvasRenderTarget>).get(backdropKey)); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -57,19 +57,19 @@ class CanvasBlendEffect {
   }
 
   public static function registerCanvasBlendEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'BlendEffect' : String), (cast defaultCanvasBlendEffectRunner : CanvasRenderEffectRunner));
+    registerCanvasRenderEffect((cast state), (cast 'BlendEffect' : String), (cast defaultCanvasBlendEffectRunner));
   }
 
   public static function registerCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String, target:CanvasRenderTarget):Void {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime);
-    ((cast ((cast runtime : CanvasRenderStateRuntime).canvasBlendEffectBackdrops ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(backdropKey, target));
+    runtime = (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime);
+    ((cast ((cast runtime : CanvasRenderStateRuntime).canvasBlendEffectBackdrops ??= _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [])) : flighthq._internal._Map<Dynamic, Dynamic>).set(backdropKey, (cast target)));
   }
 
   public static function unregisterCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String):Bool {
-    return cast _Runtime.coalesce(({ final __collection1:Dynamic = (cast (cast getCanvasRenderStateRuntime((cast state : CanvasRenderState)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasBlendEffectBackdrops; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, CanvasRenderTarget>).delete_(backdropKey)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection1:Dynamic = (cast (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasBlendEffectBackdrops; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, CanvasRenderTarget>).delete_(backdropKey)); }), function():Dynamic return cast false);
     return cast null;
   }
 
-  public static final BLEND_MODE_OPERATION__canvasBlendEffect:flighthq._internal._Record<String, flighthq._internal.dom.GlobalCompositeOperation> = { Color: 'color', ColorBurn: 'color-burn', ColorDodge: 'color-dodge', Difference: 'difference', Exclusion: 'exclusion', HardLight: 'hard-light', Hue: 'hue', Luminosity: 'luminosity', Overlay: 'overlay', Saturation: 'saturation', SoftLight: 'soft-light' };
+  public static final BLEND_MODE_OPERATION__canvasBlendEffect:flighthq._internal._Record<String, flighthq._internal.dom.GlobalCompositeOperation> = (cast { Color: 'color', ColorBurn: 'color-burn', ColorDodge: 'color-dodge', Difference: 'difference', Exclusion: 'exclusion', HardLight: 'hard-light', Hue: 'hue', Luminosity: 'luminosity', Overlay: 'overlay', Saturation: 'saturation', SoftLight: 'soft-light' });
 }

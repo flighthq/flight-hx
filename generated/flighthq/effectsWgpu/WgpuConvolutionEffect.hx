@@ -41,9 +41,9 @@ class WgpuConvolutionEffect {
     clampEdge = _Runtime.coalesce(_Runtime.field(effect, 'clamp'), function():Dynamic return cast true);
     preserveAlpha = _Runtime.coalesce(_Runtime.field(effect, 'preserveAlpha'), function():Dynamic return cast true);
     edgeColor = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0);
-    divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast (cast WgpuConvolutionEffect.getAutoDivisor__wgpuConvolutionEffect((cast matrix : Array<Float>), (cast (matrixX * matrixY) : Float)) : Null<Float>));
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'stylization.convolution' : String), (cast WgpuConvolutionEffect.CONVOLUTION_WGSL__wgpuConvolutionEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
+    divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast (cast WgpuConvolutionEffect.getAutoDivisor__wgpuConvolutionEffect((cast matrix), (cast (matrixX * matrixY) : Float)) : Float));
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'stylization.convolution' : String), (cast WgpuConvolutionEffect.CONVOLUTION_WGSL__wgpuConvolutionEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
       flighthq._internal._StaticIndex.writeInt32Array(i32, 2.0, matrixX);
@@ -63,15 +63,15 @@ class WgpuConvolutionEffect {
           i++;
         }
       }
-    } : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }));
   }
 
-  public static final defaultWgpuConvolutionEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyConvolutionEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : ConvolutionEffect) : ConvolutionEffect));
-  };
+  public static final defaultWgpuConvolutionEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyConvolutionEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : ConvolutionEffect)));
+  });
 
   public static function registerWgpuConvolutionEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'ConvolutionEffect' : String), (cast defaultWgpuConvolutionEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'ConvolutionEffect' : String), (cast defaultWgpuConvolutionEffectRunner));
   }
 
   public static function getAutoDivisor__wgpuConvolutionEffect(matrix:Array<Float>, length:Float):Float {

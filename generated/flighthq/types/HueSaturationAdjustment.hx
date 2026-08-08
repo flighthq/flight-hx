@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef HueSaturationAdjustment = { var kind:AdjustmentKind; var transform:ColorTransformFunction; @:optional var hue:Float; @:optional var saturation:Float; @:optional var lightness:Float; };
+typedef HueSaturationAdjustment = { var kind:String; var transform:ColorTransformFunction; @:optional var hue:Float; @:optional var saturation:Float; @:optional var lightness:Float; };

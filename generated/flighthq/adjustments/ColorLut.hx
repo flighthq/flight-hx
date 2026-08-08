@@ -19,7 +19,7 @@ class ColorLut {
     n = HxMath.max(2.0, HxMath.floor(size));
     samples = _Runtime.createArray((((n * n) * n) * 3.0));
     denom = (n - 1.0);
-    cell = cast ([0.0, 0.0, 0.0] : Array<Dynamic>);
+    cell = (cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
     i = 0.0;
     {
       var bi:Float = 0.0;

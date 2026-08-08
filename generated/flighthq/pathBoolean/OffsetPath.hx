@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.pathBoolean.ResolvePathRegions.resolvePathRegions;
 import flighthq.types.Path;
+import flighthq.types.PathBooleanFillRule;
 import flighthq.types.PathOffsetEnd;
 import flighthq.types.PathOffsetJoin;
 import flighthq.types.PathOffsetOptions;
@@ -23,31 +24,31 @@ class OffsetPath {
     end = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.end; }), function():Dynamic return cast 'butt');
     miterLimit = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.miterLimit; }), function():Dynamic return cast OffsetPath.DEFAULT_MITER_LIMIT__offsetPath);
     arcTolerance = _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.arcTolerance; }), function():Dynamic return cast OffsetPath.DEFAULT_ARC_TOLERANCE__offsetPath);
-    contours = (cast flattenPath((cast path : Path), (cast ({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.tolerance; }) : Float)) : Array<Array<Float>>);
-    pointEpsSq = HxMath.pow((cast OffsetPath.getContourPointEps__offsetPath((cast contours : Array<Array<Float>>)) : Float), 2.0);
-    rawRings = cast ([] : Array<Dynamic>);
+    contours = (cast flattenPath((cast path), (cast ({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.tolerance; }) : Float)) : Array<Array<Float>>);
+    pointEpsSq = HxMath.pow((cast OffsetPath.getContourPointEps__offsetPath((cast contours)) : Float), 2.0);
+    rawRings = (cast cast ([] : Array<Dynamic>));
     for (contour in _Runtime.iterable(contours)) {
-      var closed:Bool = (cast OffsetPath.isClosedContour__offsetPath((cast contour : Array<Float>), (cast pointEpsSq : Float)) : Bool);
-      var vertices:Array<Float> = (cast OffsetPath.getCleanContourVertices__offsetPath((cast contour : Array<Float>), (cast closed : Bool), (cast pointEpsSq : Float)) : Array<Float>);
+      var closed:Bool = (cast OffsetPath.isClosedContour__offsetPath((cast contour), (cast pointEpsSq : Float)) : Bool);
+      var vertices:Array<Float> = (cast OffsetPath.getCleanContourVertices__offsetPath((cast contour), (cast closed : Bool), (cast pointEpsSq : Float)) : Array<Float>);
       if ((cast closed : Bool)) {
         if ((cast ((cast _Runtime.field(vertices, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-        var orientation:Float = (cast OffsetPath.getRingOrientationSign__offsetPath((cast vertices : Array<Float>)) : Float);
-        var ring:Array<Float> = (cast OffsetPath.buildOffsetRing__offsetPath((cast vertices : Array<Float>), (cast (delta * orientation) : Float), (cast OffsetPath.NO_CAPS__offsetPath : flighthq._internal._Set<Float>), (cast join : PathOffsetJoin), (cast end : PathOffsetEnd), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
+        var orientation:Float = (cast OffsetPath.getRingOrientationSign__offsetPath((cast vertices)) : Float);
+        var ring:Array<Float> = (cast OffsetPath.buildOffsetRing__offsetPath((cast vertices), (cast (delta * orientation) : Float), (cast OffsetPath.NO_CAPS__offsetPath), (cast join), (cast end), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
         if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-        var offsetArea:Float = (cast OffsetPath.getRingSignedArea__offsetPath((cast ring : Array<Float>)) : Float);
+        var offsetArea:Float = (cast OffsetPath.getRingSignedArea__offsetPath((cast ring)) : Float);
         var inverted:Bool = !_Runtime.strictEquals(_Runtime.sign(offsetArea), orientation);
-        var notReduced:Bool = ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool) && (cast ((cast HxMath.abs(offsetArea) : Float) >= (cast HxMath.abs((cast OffsetPath.getRingSignedArea__offsetPath((cast vertices : Array<Float>)) : Float)) : Float)) : Bool));
+        var notReduced:Bool = ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool) && (cast ((cast HxMath.abs(offsetArea) : Float) >= (cast HxMath.abs((cast OffsetPath.getRingSignedArea__offsetPath((cast vertices)) : Float)) : Float)) : Bool));
         if ((cast ((cast inverted : Bool) || (cast notReduced : Bool)) : Bool)) { continue; }
-        _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast offsetArea : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast OffsetPath.reverseVertexLoop__offsetPath((cast ring : Array<Float>)) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>));
+        _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast offsetArea : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast OffsetPath.reverseVertexLoop__offsetPath((cast ring)) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>));
       } else {
         if ((cast ((cast _Runtime.field(vertices, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { continue; }
         var caps:flighthq._internal._Set<Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast ([0.0, (_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), 2.0) - 1.0)] : Array<Dynamic>)]);
-        var loop:Array<Float> = (cast OffsetPath.getOpenContourLoop__offsetPath((cast vertices : Array<Float>)) : Array<Float>);
-        var ring:Array<Float> = (cast OffsetPath.buildOffsetRing__offsetPath((cast loop : Array<Float>), (cast HxMath.abs(delta) : Float), (cast caps : flighthq._internal._Set<Float>), (cast join : PathOffsetJoin), (cast end : PathOffsetEnd), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
-        if ((cast ((cast _Runtime.field(ring, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) { _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast (cast OffsetPath.getRingSignedArea__offsetPath((cast ring : Array<Float>)) : Float) : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast OffsetPath.reverseVertexLoop__offsetPath((cast ring : Array<Float>)) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>)); }
+        var loop:Array<Float> = (cast OffsetPath.getOpenContourLoop__offsetPath((cast vertices)) : Array<Float>);
+        var ring:Array<Float> = (cast OffsetPath.buildOffsetRing__offsetPath((cast loop), (cast HxMath.abs(delta) : Float), (cast caps), (cast join), (cast end), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
+        if ((cast ((cast _Runtime.field(ring, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) { _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast (cast OffsetPath.getRingSignedArea__offsetPath((cast ring)) : Float) : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast OffsetPath.reverseVertexLoop__offsetPath((cast ring)) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>)); }
       }
     }
-    return cast (cast resolvePathRegions(rawRings, 'positive') : Path);
+    return cast (cast resolvePathRegions((cast rawRings), (cast 'positive')) : Path);
     return cast null;
   }
 
@@ -78,7 +79,7 @@ class OffsetPath {
         k++;
       }
     }
-    ring = cast ([] : Array<Dynamic>);
+    ring = (cast cast ([] : Array<Dynamic>));
     {
       var k:Float = 0.0;
       while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
@@ -90,9 +91,9 @@ class OffsetPath {
         var thisStartX:Float = (vx + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalX, k)));
         var thisStartY:Float = (vy + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalY, k)));
         if ((cast ((cast capIndices : flighthq._internal._Set<Float>).has(k)) : Bool)) {
-          OffsetPath.emitOffsetEndCap__offsetPath((cast ring : Array<Float>), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, k) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, k) : Float), (cast HxMath.abs(signedDelta) : Float), (cast end : PathOffsetEnd), (cast arcTolerance : Float));
+          OffsetPath.emitOffsetEndCap__offsetPath((cast ring), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, k) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, k) : Float), (cast HxMath.abs(signedDelta) : Float), (cast end), (cast arcTolerance : Float));
         } else {
-          OffsetPath.emitOffsetJoin__offsetPath((cast ring : Array<Float>), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, k) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, k) : Float), (cast signedDelta : Float), (cast join : PathOffsetJoin), (cast miterLimit : Float), (cast arcTolerance : Float));
+          OffsetPath.emitOffsetJoin__offsetPath((cast ring), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, k) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, k) : Float), (cast signedDelta : Float), (cast join), (cast miterLimit : Float), (cast arcTolerance : Float));
         }
         k++;
       }
@@ -111,7 +112,7 @@ class OffsetPath {
       var midX:Float = HxMath.cos((startAngle + OffsetPath.HALF_PI__offsetPath));
       var midY:Float = HxMath.sin((startAngle + OffsetPath.HALF_PI__offsetPath));
       var sweep:Float = _Runtime.multiplyNumbers(((cast ((cast ((midX * previousDirX) + (midY * previousDirY)) : Float) >= (cast 0.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic)), HxMath.PI);
-      OffsetPath.pushOffsetArc__offsetPath((cast ring : Array<Float>), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast sweep : Float), (cast arcTolerance : Float));
+      OffsetPath.pushOffsetArc__offsetPath((cast ring), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast sweep : Float), (cast arcTolerance : Float));
     } }
     _Runtime.pushMany(ring, cast ([thisStartX, thisStartY] : Array<Dynamic>));
   }
@@ -144,7 +145,7 @@ class OffsetPath {
         var radius:Float = HxMath.abs(signedDelta);
         var startAngle:Float = HxMath.atan2((previousEndY - vy), (previousEndX - vx));
         var endAngle:Float = HxMath.atan2((thisStartY - vy), (thisStartX - vx));
-        OffsetPath.pushOffsetArc__offsetPath((cast ring : Array<Float>), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast (cast OffsetPath.getShortSweep__offsetPath((cast startAngle : Float), (cast endAngle : Float)) : Float) : Float), (cast arcTolerance : Float));
+        OffsetPath.pushOffsetArc__offsetPath((cast ring), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast (cast OffsetPath.getShortSweep__offsetPath((cast startAngle : Float), (cast endAngle : Float)) : Float) : Float), (cast arcTolerance : Float));
       } } }
     }
     _Runtime.pushMany(ring, cast ([thisStartX, thisStartY] : Array<Dynamic>));
@@ -152,7 +153,7 @@ class OffsetPath {
 
   public static function getCleanContourVertices__offsetPath(contour:Array<Float>, closed:Bool, pointEpsSq:Float):Array<Float> {
     var out:Array<Float> = cast _Runtime.UNDEFINED;
-    out = cast ([] : Array<Dynamic>);
+    out = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
@@ -223,7 +224,7 @@ class OffsetPath {
 
   public static function getRingOrientationSign__offsetPath(vertices:Array<Float>):Float {
     var sign:Float = cast _Runtime.UNDEFINED;
-    sign = _Runtime.sign((cast OffsetPath.getRingSignedArea__offsetPath((cast vertices : Array<Float>)) : Float));
+    sign = _Runtime.sign((cast OffsetPath.getRingSignedArea__offsetPath((cast vertices)) : Float));
     return cast ((cast _Runtime.strictEquals(sign, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast sign : Dynamic));
     return cast null;
   }

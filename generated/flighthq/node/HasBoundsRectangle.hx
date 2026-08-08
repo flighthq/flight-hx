@@ -15,15 +15,15 @@ class HasBoundsRectangle {
   }
 
   @:noCompletion
-  public static function initBoundsRectangleRuntimeTrait(target:HasBoundsRectangleRuntime, ?methods:Dynamic):Void {
+  public static function initBoundsRectangleRuntimeTrait(target:HasBoundsRectangleRuntime, ?methods:flighthq._internal._Partial<flighthq._internal._Intersection2<MethodsOf<HasBoundsRectangleRuntime>, flighthq._internal._Pick<HasBoundsRectangleRuntime, String>>>):Void {
     (target.boundsRectangle = cast (null : Dynamic));
     (target.localBoundsRectangle = cast (null : Dynamic));
     (target.worldBoundsRectangle = cast (null : Dynamic));
-    (target.computeLocalBoundsRectangle = cast (_Runtime.coalesce(_Runtime.optionalField(methods, 'computeLocalBoundsRectangle'), function():Dynamic return cast defaultComputeLocalBoundsRectangle) : Dynamic));
-    (target.isLocalBoundsRectangleValid = cast (_Runtime.coalesce(_Runtime.optionalField(methods, 'isLocalBoundsRectangleValid'), function():Dynamic return cast null) : Dynamic));
+    (target.computeLocalBoundsRectangle = cast (_Runtime.coalesce(({ final __structural0 = methods; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; }).computeLocalBoundsRectangle; }), function():Dynamic return cast defaultComputeLocalBoundsRectangle) : Dynamic));
+    (target.isLocalBoundsRectangleValid = cast (_Runtime.coalesce(({ final __structural1 = methods; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; }).isLocalBoundsRectangleValid; }), function():Dynamic return cast null) : Dynamic));
   }
 
   @:noCompletion
-  public static function initBoundsRectangleTrait(_target:flighthq.types.HasBoundsRectangle, ?_obj:Dynamic):Void {
+  public static function initBoundsRectangleTrait(_target:flighthq.types.HasBoundsRectangle, ?_obj:flighthq._internal._Partial<flighthq.types.HasBoundsRectangle>):Void {
   }
 }

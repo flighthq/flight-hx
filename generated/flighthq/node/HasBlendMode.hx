@@ -7,7 +7,7 @@ import flighthq.types.HasBlendMode;
 
 class HasBlendMode {
   @:noCompletion
-  public static function initBlendModeTrait(target:flighthq.types.HasBlendMode, ?obj:Dynamic):Void {
-    ((cast target : flighthq.types.HasBlendMode).blendMode = _Runtime.coalesce(_Runtime.optionalField(obj, 'blendMode'), function():Dynamic return cast null));
+  public static function initBlendModeTrait(target:flighthq.types.HasBlendMode, ?obj:flighthq._internal._Partial<flighthq.types.HasBlendMode>):Void {
+    ((cast target : flighthq.types.HasBlendMode).blendMode = _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var blendMode:Null<String>; }).blendMode; }), function():Dynamic return cast null));
   }
 }

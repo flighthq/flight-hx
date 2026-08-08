@@ -28,7 +28,7 @@ class ElectronClipboard {
     }, writeText: function(text:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeText(text);
+          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeText((cast text : String));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -47,7 +47,7 @@ class ElectronClipboard {
     }, writeHtml: function(html:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeHtml(html);
+          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeHtml((cast html : String));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -76,7 +76,7 @@ class ElectronClipboard {
     }, writeImage: function(dataUrl:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeImage((cast (cast electron : ElectronApi).nativeImage : ElectronNativeImageModule).createFromDataUrl(dataUrl));
+          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeImage((cast (cast (cast electron : ElectronApi).nativeImage : ElectronNativeImageModule).createFromDataUrl((cast dataUrl : String))));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -104,7 +104,7 @@ class ElectronClipboard {
     }, writeRTF: function(rtf:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeRTF(rtf);
+          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeRTF((cast rtf : String));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -116,7 +116,7 @@ class ElectronClipboard {
         try {
           var bookmark:{ var title:String; var url:String; } = (cast cb : flighthq.types.ElectronApi.ElectronClipboard).readBookmark();
           if ((cast ((cast _Runtime.strictEquals((cast bookmark : { var title:String; var url:String; }).title, '') : Bool) && (cast _Runtime.strictEquals((cast bookmark : { var title:String; var url:String; }).url, '') : Bool)) : Bool)) { return cast null; }
-          var out:ClipboardBookmark = { title: (cast bookmark : { var title:String; var url:String; }).title, url: (cast bookmark : { var title:String; var url:String; }).url };
+          var out:ClipboardBookmark = (cast { title: (cast bookmark : { var title:String; var url:String; }).title, url: (cast bookmark : { var title:String; var url:String; }).url });
           return cast out;
         } catch (__error:Dynamic) {
           return cast null;
@@ -126,7 +126,7 @@ class ElectronClipboard {
     }, writeBookmark: function(title:String, url:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeBookmark(title, url);
+          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeBookmark((cast title : String), (cast url : String));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -136,7 +136,7 @@ class ElectronClipboard {
     }, readFormat: function(format:String):flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          return cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).read(format);
+          return cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).read((cast format : String));
         } catch (__error:Dynamic) {
           return cast '';
         }
@@ -145,9 +145,9 @@ class ElectronClipboard {
     }, writeFormat: function(format:String, data:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          var payload:ElectronClipboardData = {  };
+          var payload:ElectronClipboardData = (cast {  });
           _Runtime.setIndex(payload, (cast ElectronClipboard.formatKey__electronClipboard((cast format : String)) : String), data);
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).write(payload);
+          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).write((cast payload));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -157,7 +157,7 @@ class ElectronClipboard {
     }, hasFormat: function(format:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          return cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).has(format);
+          return cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).has((cast format : String));
         } catch (__error:Dynamic) {
           return cast false;
         }
@@ -175,10 +175,10 @@ class ElectronClipboard {
     }, readItems: function(formats:Array<String>):flighthq._internal._Promise<flighthq._internal._Record<String, String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var out:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
-        out = {  };
+        out = (cast {  });
         for (format in _Runtime.iterable(formats)) {
           try {
-            if ((cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).has(format) : Bool)) { _Runtime.setIndex(out, format, (cast cb : flighthq.types.ElectronApi.ElectronClipboard).read(format)); }
+            if ((cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).has((cast format : String)) : Bool)) { _Runtime.setIndex(out, format, (cast cb : flighthq.types.ElectronApi.ElectronClipboard).read((cast format : String))); }
           } catch (__error:Dynamic) {
           }
         }
@@ -188,18 +188,18 @@ class ElectronClipboard {
     }, writeItems: function(items:Array<ClipboardWriteItem>):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          var data:ElectronClipboardData = {  };
+          var data:ElectronClipboardData = (cast {  });
           for (item in _Runtime.iterable(items)) {
             _Runtime.setIndex(data, (cast ElectronClipboard.formatKey__electronClipboard((cast item.format : String)) : String), item.data);
           }
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).write(data);
+          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).write((cast data));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
         }
         return cast null;
       }));
-    }, readFiles: function():flighthq._internal._Promise<Array<flighthq._internal._Any>> {
+    }, readFiles: function():flighthq._internal._Promise<Array<String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
       }));
@@ -209,10 +209,12 @@ class ElectronClipboard {
       }));
     }, getChangeCount: function():Float {
       return cast -1.0;
+      return cast _Runtime.UNDEFINED;
     }, subscribeClipboardChange: function():Void->Void {
       return cast function():Void {
 
       };
+      return cast _Runtime.UNDEFINED;
     }, clear: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {

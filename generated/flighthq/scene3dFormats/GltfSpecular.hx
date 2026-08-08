@@ -25,6 +25,7 @@ import flighthq.types.GltfSchema.GltfTextureInfo;
 import flighthq.types.PbrExtension;
 import flighthq.types.Sampler;
 import flighthq.types.Scene3DDocument;
+import flighthq.types.SpecularPbrExtension;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Texture.TextureSourceCubeFaces;
@@ -33,18 +34,18 @@ import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 
 class GltfSpecular {
-  public static final GltfSpecularExtensionHandler:GltfExtensionHandler = { apply: function(context:GltfExtensionContext):Void {
+  public static final GltfSpecularExtensionHandler:GltfExtensionHandler = (cast { apply: function(context:GltfExtensionContext):Void {
     var materials:Array<GltfMaterial> = cast _Runtime.UNDEFINED;
-    materials = _Runtime.coalesce(_Runtime.field(context, 'source').materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
+    materials = _Runtime.coalesce((cast _Runtime.field(context, 'source') : { @:optional var materials:Null<Array<GltfMaterial>>; }).materials, function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
-        var block:Null<GltfMaterialsSpecular> = _Runtime.optionalField(flighthq._internal._StaticIndex.readArray(materials, i).extensions, 'KHR_materials_specular');
+        var block:Null<GltfMaterialsSpecular> = ({ final __structural0 = (cast flighthq._internal._StaticIndex.readArray(materials, i) : { @:optional var extensions:Null<{ @:optional var KHR_materials_anisotropy:Null<GltfMaterialsAnisotropy>; @:optional var KHR_materials_clearcoat:Null<GltfMaterialsClearcoat>; @:optional var KHR_materials_emissive_strength:Null<GltfMaterialsEmissiveStrength>; @:optional var KHR_materials_ior:Null<GltfMaterialsIor>; @:optional var KHR_materials_iridescence:Null<GltfMaterialsIridescence>; @:optional var KHR_materials_pbrSpecularGlossiness:Null<GltfMaterialsPbrSpecularGlossiness>; @:optional var KHR_materials_sheen:Null<GltfMaterialsSheen>; @:optional var KHR_materials_unlit:Null<flighthq._internal._Record<String, flighthq._internal._Any>>; @:optional var KHR_materials_specular:Null<GltfMaterialsSpecular>; @:optional var KHR_materials_transmission:Null<GltfMaterialsTransmission>; @:optional var KHR_materials_volume:Null<GltfMaterialsVolume>; }>; }).extensions; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var KHR_materials_specular:Null<GltfMaterialsSpecular>; }).KHR_materials_specular; });
         if ((cast _Runtime.strictEquals(block, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         var color:Array<Float> = _Runtime.coalesce((cast block : GltfMaterialsSpecular).specularColorFactor, function():Dynamic return cast cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
-        (cast attachGltfPbrExtension(_Runtime.field(context, 'document'), (cast i : Float), (cast createSpecularPbrExtension((cast { specular: _Runtime.coalesce((cast block : GltfMaterialsSpecular).specularFactor, function():Dynamic return cast 1.0), specularColor: (cast packLinearToColor((cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 0.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 1.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 2.0), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>) : Array<Float>)) : Null<Float>), specularColorMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsSpecular).specularColorTexture, 'srgb'] : Array<Dynamic>)), specularMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsSpecular).specularTexture, 'linear'] : Array<Dynamic>)) } : Null<flighthq._internal._Any>)) : PbrExtension)) : Bool);
+        (cast attachGltfPbrExtension((cast _Runtime.field(context, 'document')), (cast i : Float), (cast (cast createSpecularPbrExtension((cast { specular: _Runtime.coalesce((cast block : GltfMaterialsSpecular).specularFactor, function():Dynamic return cast 1.0), specularColor: (cast packLinearToColor((cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 0.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 1.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 2.0), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>))) : Float), specularColorMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsSpecular).specularColorTexture, 'srgb'] : Array<Dynamic>)), specularMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsSpecular).specularTexture, 'linear'] : Array<Dynamic>)) })) : SpecularPbrExtension))) : Bool);
         i++;
       }
     }
-  }, kind: 'KHR_materials_specular' };
+  }, kind: 'KHR_materials_specular' });
 }

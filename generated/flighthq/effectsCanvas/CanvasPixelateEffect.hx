@@ -26,7 +26,7 @@ class CanvasPixelateEffect {
     size = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 8.0)));
     smallW = HxMath.max(1.0, HxMath.floor(_Runtime.divideNumbers(_Runtime.field(source, 'width'), size)));
     smallH = HxMath.max(1.0, HxMath.floor(_Runtime.divideNumbers(_Runtime.field(source, 'height'), size)));
-    small = (cast acquireCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast smallW : Float), (cast smallH : Float)) : CanvasRenderTarget);
+    small = (cast acquireCanvasRenderTarget((cast pool), (cast smallW : Float), (cast smallH : Float)) : CanvasRenderTarget);
     sctx = (cast small : CanvasRenderTarget).context;
     flighthq._internal.backend.Canvas2dBackend.call(sctx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(sctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
@@ -48,14 +48,14 @@ class CanvasPixelateEffect {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([(cast small : CanvasRenderTarget).canvas, 0.0, 0.0, smallW, smallH, 0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'imageSmoothingEnabled', true);
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
-    releaseCanvasRenderTarget((cast pool : CanvasRenderTargetPool), (cast small : CanvasRenderTarget));
+    releaseCanvasRenderTarget((cast pool), (cast small));
   }
 
-  public static final defaultCanvasPixelateEffectRunner:CanvasRenderEffectRunner = function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyPixelateEffectToCanvas((cast _Runtime.field(ctx, 'source') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'dest') : CanvasRenderTarget), (cast _Runtime.field(ctx, 'pool') : CanvasRenderTargetPool), (cast (cast effect : PixelateEffect) : PixelateEffect));
-  };
+  public static final defaultCanvasPixelateEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
+    applyPixelateEffectToCanvas((cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : PixelateEffect)));
+  });
 
   public static function registerCanvasPixelateEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect((cast state : CanvasRenderState), (cast 'PixelateEffect' : String), (cast defaultCanvasPixelateEffectRunner : CanvasRenderEffectRunner));
+    registerCanvasRenderEffect((cast state), (cast 'PixelateEffect' : String), (cast defaultCanvasPixelateEffectRunner));
   }
 }

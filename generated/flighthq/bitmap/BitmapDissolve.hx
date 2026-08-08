@@ -43,12 +43,12 @@ class BitmapDissolve {
     fillG = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> 16)) & 255);
     fillB = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> 8)) & 255);
     fillA = (_Runtime.toInt32(fillColor) & 255);
-    destData = _Runtime.field(dest, 'bitmap').data;
-    destStride = _Runtime.field(dest, 'bitmap').width;
-    destBitmapHeight = _Runtime.field(dest, 'bitmap').height;
-    sourceData = _Runtime.field(source, 'bitmap').data;
-    sourceStride = _Runtime.field(source, 'bitmap').width;
-    sourceBitmapHeight = _Runtime.field(source, 'bitmap').height;
+    destData = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    destStride = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
+    destBitmapHeight = (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height;
+    sourceData = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    sourceStride = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
+    sourceBitmapHeight = (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height;
     dissolved = 0.0;
     while ((cast ((cast ((cast dissolved : Float) < (cast pixelCount : Float)) : Bool) && (cast ((cast cursor : Float) < (cast period : Float)) : Bool)) : Bool)) {
       var pixelIndex:Float = (cast BitmapDissolve.permutePixelIndex__bitmapDissolve((cast cursor : Float), (cast bits : Float), (cast mask : Float)) : Float);
@@ -77,7 +77,7 @@ class BitmapDissolve {
       flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sourceData, (si + 2.0)));
       flighthq._internal._StaticIndex.writeUint8ClampedArray(destData, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sourceData, (si + 3.0)));
     }
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
     return cast cursor;
     return cast null;
   }

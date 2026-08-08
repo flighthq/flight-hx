@@ -25,11 +25,11 @@ class Lifecycle {
     var previous:AppLifecycleState = cast _Runtime.UNDEFINED;
     var unsubscribeState:Void->Void = cast _Runtime.UNDEFINED;
     var unsubscribeMemory:Null<Void->Void> = cast _Runtime.UNDEFINED;
-    var memSub:Null<AppMemoryPressure->Void->Void->Void> = cast _Runtime.UNDEFINED;
-    detachAppLifecycle((cast app : AppLifecycle));
+    var memSub:Null<(AppMemoryPressure->Void)->(Void->Void)> = cast _Runtime.UNDEFINED;
+    detachAppLifecycle((cast app));
     backend = (cast getLifecycleBackend() : LifecycleBackend);
     previous = (cast backend : LifecycleBackend).getState();
-    unsubscribeState = (cast backend : LifecycleBackend).subscribe(function():Void {
+    unsubscribeState = (cast backend : LifecycleBackend).subscribe((cast function():Void {
       var state:AppLifecycleState = cast _Runtime.UNDEFINED;
       state = (cast backend : LifecycleBackend).getState();
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onStateChange], [state]]), 1);
@@ -41,22 +41,22 @@ class Lifecycle {
         }
       } else { if ((cast ((cast !_Runtime.strictEquals(state, 'active') : Bool) && (cast _Runtime.strictEquals(previous, 'active') : Bool)) : Bool)) {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onPause]]), 1);
-        var stateBag:flighthq._internal._Record<String, flighthq._internal._Any> = {  };
+        var stateBag:flighthq._internal._Record<String, flighthq._internal._Any> = (cast {  });
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onSaveState], [stateBag]]), 1);
-        ((cast Lifecycle._savedState__lifecycle : flighthq._internal._WeakMap<AppLifecycle, flighthq._internal._Record<String, flighthq._internal._Any>>).set(app, stateBag));
+        ((cast Lifecycle._savedState__lifecycle : flighthq._internal._WeakMap<AppLifecycle, flighthq._internal._Record<String, flighthq._internal._Any>>).set(app, (cast stateBag)));
       } }
       (previous = cast (state : Dynamic));
-    });
+    }));
     memSub = (cast backend : LifecycleBackend).subscribeMemoryWarning;
     if ((cast !_Runtime.strictEquals(memSub, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (unsubscribeMemory = cast (_Runtime.callProperty(memSub, 'call', cast ([backend, function(level:AppMemoryPressure):Void {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onMemoryWarning], [level]]), 1);
       }] : Array<Dynamic>)) : Dynamic));
     }
-    ((cast Lifecycle._subscriptions__lifecycle : flighthq._internal._WeakMap<AppLifecycle, Void->Void>).set(app, function():Void {
+    ((cast Lifecycle._subscriptions__lifecycle : flighthq._internal._WeakMap<AppLifecycle, Void->Void>).set(app, (cast function():Void {
       unsubscribeState();
       _Runtime.callOptionalValue(unsubscribeMemory, cast ([] : Array<Dynamic>));
-    }));
+    })));
   }
 
   public static function createAppLifecycle():AppLifecycle {
@@ -72,6 +72,7 @@ class Lifecycle {
       if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast 'active'; }
       if ((cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'hidden') : Bool)) { return cast 'background'; }
       return cast ((cast _windowFocused : Bool) ? (cast 'active' : Dynamic) : (cast 'inactive' : Dynamic));
+      return cast _Runtime.UNDEFINED;
     }, subscribe: function(listener:Void->Void):Void->Void {
       var onFocus:Void->Void = cast _Runtime.UNDEFINED;
       var onBlur:Void->Void = cast _Runtime.UNDEFINED;
@@ -82,11 +83,11 @@ class Lifecycle {
       onFocus = (cast function():Void {
         (_windowFocused = cast (true : Dynamic));
         listener();
-      } : Void->Void);
+      });
       onBlur = (cast function():Void {
         (_windowFocused = cast (false : Dynamic));
         listener();
-      } : Void->Void);
+      });
       flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['visibilitychange', listener] : Array<Dynamic>));
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['pagehide', listener] : Array<Dynamic>));
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['pageshow', listener] : Array<Dynamic>));
@@ -99,12 +100,14 @@ class Lifecycle {
         flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['focus', onFocus] : Array<Dynamic>));
         flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['blur', onBlur] : Array<Dynamic>));
       };
+      return cast _Runtime.UNDEFINED;
     }, getLaunchKind: function():AppLaunchKind {
       var entries:Array<flighthq._internal.dom.PerformanceNavigationTiming> = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('performance'), 'undefined') : Bool)) { return cast 'cold'; }
       entries = (cast (cast flighthq._internal._HostValueLut.get('performance') : flighthq._internal.dom.Performance).getEntriesByType('navigation') : Array<flighthq._internal.dom.PerformanceNavigationTiming>);
       if ((cast ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(entries, 0.0) : flighthq._internal.dom.PerformanceNavigationTiming).type, 'back_forward') : Bool)) : Bool)) { return cast 'warm'; }
       return cast 'cold';
+      return cast _Runtime.UNDEFINED;
     }, subscribeMemoryWarning: function(listener:AppMemoryPressure->Void):Void->Void {
       var onPressure:flighthq._internal.dom.Event->Void = cast _Runtime.UNDEFINED;
       var onPressureRelieved:Void->Void = cast _Runtime.UNDEFINED;
@@ -117,22 +120,23 @@ class Lifecycle {
         detail = (cast e : flighthq._internal.dom.CustomEvent<{ @:optional var pressure:String; }>).detail;
         pressure = ({ final __structural0 = detail; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var pressure:Null<String>; }).pressure; });
         if ((cast _Runtime.strictEquals(pressure, 'critical') : Bool)) {
-          listener((cast 'critical' : AppMemoryPressure));
+          listener((cast 'critical'));
         } else { if ((cast _Runtime.strictEquals(pressure, 'moderate') : Bool)) {
-          listener((cast 'moderate' : AppMemoryPressure));
+          listener((cast 'moderate'));
         } else {
-          listener((cast 'moderate' : AppMemoryPressure));
+          listener((cast 'moderate'));
         } }
-      } : flighthq._internal.dom.Event->Void);
+      });
       onPressureRelieved = (cast function():Void {
-        listener((cast 'normal' : AppMemoryPressure));
-      } : Void->Void);
+        listener((cast 'normal'));
+      });
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['memory-pressure', onPressure] : Array<Dynamic>));
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['memory-pressure-relieved', onPressureRelieved] : Array<Dynamic>));
       return cast function():Void {
         flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['memory-pressure', onPressure] : Array<Dynamic>));
         flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['memory-pressure-relieved', onPressureRelieved] : Array<Dynamic>));
       };
+      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
@@ -147,7 +151,7 @@ class Lifecycle {
   }
 
   public static function disposeAppLifecycle(app:AppLifecycle):Void {
-    detachAppLifecycle((cast app : AppLifecycle));
+    detachAppLifecycle((cast app));
     ((cast Lifecycle._savedState__lifecycle : flighthq._internal._WeakMap<AppLifecycle, flighthq._internal._Record<String, flighthq._internal._Any>>).delete_(app));
   }
 
@@ -165,7 +169,7 @@ class Lifecycle {
 
   @:noCompletion
   public static function getLifecycleBackend():LifecycleBackend {
-    if ((cast _Runtime.strictEquals(Lifecycle._backend__lifecycle, null) : Bool)) { (Lifecycle._backend__lifecycle = cast ((cast createWebLifecycleBackend() : Null<LifecycleBackend>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Lifecycle._backend__lifecycle, null) : Bool)) { (Lifecycle._backend__lifecycle = cast ((cast createWebLifecycleBackend() : LifecycleBackend) : Dynamic)); }
     return cast Lifecycle._backend__lifecycle;
     return cast null;
   }
@@ -187,7 +191,7 @@ class Lifecycle {
 
   public static function requestAppBack(app:AppLifecycle):Bool {
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onBackButton]]), 1);
-    return cast !_Runtime.strictEquals(({ final __typedStruct1 = app.onBackButton.data; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.cancelled; }), true);
+    return cast !_Runtime.strictEquals(({ final __typedStruct1 = (cast app.onBackButton : { var data:Null<SignalData<Void->Void>>; }).data; __typedStruct1 == null ? _Runtime.UNDEFINED : (cast __typedStruct1 : { var cancelled:Bool; }).cancelled; }), true);
     return cast null;
   }
 

@@ -10,8 +10,10 @@ import flighthq.scene2dWgpu.WgpuClipRectangle.popWgpuClipRectangle;
 import flighthq.scene2dWgpu.WgpuClipRectangle.pushWgpuClipRectangle;
 import flighthq.types.ClipRegion;
 import flighthq.types.Matrix;
+import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Node2D;
 import flighthq.types.Rectangle;
+import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 import flighthq.types.ShapeCommand.PathWinding;
@@ -26,33 +28,33 @@ class WgpuClip {
   public static function popOneWgpuClip__wgpuClip(state:WgpuRenderState):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var form:Null<String> = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     form = _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).clipForms, 'pop', cast ([] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(form, 'contour') : Bool)) { popWgpuClipContours((cast state : WgpuRenderState)); } else { popWgpuClipRectangle((cast state : WgpuRenderState)); }
+    if ((cast _Runtime.strictEquals(form, 'contour') : Bool)) { popWgpuClipContours((cast state)); } else { popWgpuClipRectangle((cast state)); }
   }
 
-  public static final webgpuClipHooks__wgpuClip:Scene2DClipHooks = { finalize: function(state:WgpuRenderState):Void {
+  public static final webgpuClipHooks__wgpuClip:Scene2DClipHooks = (cast { finalize: function(state:WgpuRenderState):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
-    while ((cast ((cast _Runtime.field((cast runtime : WgpuRenderStateRuntime).clipForms, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { WgpuClip.popOneWgpuClip__wgpuClip((cast state : WgpuRenderState)); }
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    while ((cast ((cast _Runtime.field((cast runtime : WgpuRenderStateRuntime).clipForms, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { WgpuClip.popOneWgpuClip__wgpuClip((cast state)); }
   }, popClip: function(state:WgpuRenderState, data:RenderProxy2D, source:Node2D):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var target:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     target = _Runtime.subtractNumbers((cast data : RenderProxy2D).clipDepth, ((cast !_Runtime.looseEquals((cast source : { var clip:Null<ClipRegion>; }).clip, null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-    while ((cast ((cast _Runtime.field((cast runtime : WgpuRenderStateRuntime).clipForms, 'length') : Float) > (cast target : Float)) : Bool)) { WgpuClip.popOneWgpuClip__wgpuClip((cast state : WgpuRenderState)); }
+    while ((cast ((cast _Runtime.field((cast runtime : WgpuRenderStateRuntime).clipForms, 'length') : Float) > (cast target : Float)) : Bool)) { WgpuClip.popOneWgpuClip__wgpuClip((cast state)); }
   }, pushClip: function(state:WgpuRenderState, data:RenderProxy2D, source:Node2D):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var clip:Null<ClipRegion> = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     clip = (cast source : { var clip:Null<ClipRegion>; }).clip;
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast clip : ClipRegion).contours, null) : Bool)) {
-      pushWgpuClipRectangle((cast state : WgpuRenderState), (cast clip : ClipRegion).rect, (cast data : RenderProxy2D).transform2D);
+      pushWgpuClipRectangle((cast state), (cast (cast clip : ClipRegion).rect), (cast (cast data : RenderProxy2D).transform2D));
       _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).clipForms, 'push', cast (['rect'] : Array<Dynamic>));
     } else {
-      pushWgpuClipContours((cast state : WgpuRenderState), (cast (cast clip : ClipRegion).contours : Array<Array<Float>>), (cast clip : ClipRegion).winding, (cast data : RenderProxy2D).transform2D);
+      pushWgpuClipContours((cast state), (cast (cast clip : ClipRegion).contours), (cast (cast clip : ClipRegion).winding), (cast (cast data : RenderProxy2D).transform2D));
       _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).clipForms, 'push', cast (['contour'] : Array<Dynamic>));
     }
-  } };
+  } });
 }

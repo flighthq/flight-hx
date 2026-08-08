@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ColorScaleBias.ColorScaleBiasLike;
 
-typedef ColorScaleBiasAdjustment = { var kind:AdjustmentKind; var colorMatrix:Array<Float>; var colorScaleBias:ColorScaleBiasLike; };
+typedef ColorScaleBiasAdjustment = { var kind:String; var colorMatrix:Array<Float>; var colorScaleBias:ColorScaleBiasLike; };

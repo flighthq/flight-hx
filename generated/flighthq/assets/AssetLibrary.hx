@@ -40,32 +40,34 @@ class AssetLibrary {
       _Runtime.callOptionalValue(runtime.acquireGuard, cast ([library, { id: id, refCount: 0.0, status: 'missing-descriptor', type: null }] : Array<Dynamic>));
       return cast flighthq._internal._Async.reject(_Runtime.error('assets: no descriptor for id "' + Std.string(id) + '"'));
     }
-    adapter = ((cast runtime.adapters : flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>).get((cast descriptor : flighthq.types.Assets.AssetDescriptor).type));
+    adapter = ((cast runtime.adapters : flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>).get((cast descriptor : { var type:AssetType; }).type));
     if ((cast _Runtime.strictEquals(adapter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callOptionalValue(runtime.acquireGuard, cast ([library, { id: id, refCount: 0.0, status: 'missing-loader', type: (cast descriptor : flighthq.types.Assets.AssetDescriptor).type }] : Array<Dynamic>));
-      return cast flighthq._internal._Async.reject(_Runtime.error('assets: no loader for type "' + Std.string((cast descriptor : flighthq.types.Assets.AssetDescriptor).type) + '"'));
+      _Runtime.callOptionalValue(runtime.acquireGuard, cast ([library, { id: id, refCount: 0.0, status: 'missing-loader', type: (cast descriptor : { var type:AssetType; }).type }] : Array<Dynamic>));
+      return cast flighthq._internal._Async.reject(_Runtime.error('assets: no loader for type "' + Std.string((cast descriptor : { var type:AssetType; }).type) + '"'));
     }
     existing = ((cast runtime.entries : flighthq._internal._Map<String, AssetEntry>).get(id));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (cast existing : flighthq.types.Assets.AssetEntry).refcount++;
-      if ((cast (cast existing : flighthq.types.Assets.AssetEntry).resident : Bool)) { return cast flighthq._internal._Async.resolve((cast (cast existing : flighthq.types.Assets.AssetEntry).value : T)); }
-      return cast (cast (cast existing : flighthq.types.Assets.AssetEntry).loadPromise : flighthq._internal._Promise<T>);
+      (cast existing : { var refcount:Float; }).refcount++;
+      if ((cast (cast existing : { var resident:Bool; }).resident : Bool)) { return cast flighthq._internal._Async.resolve((cast (cast existing : { var value:flighthq._internal._Any; }).value : T)); }
+      return cast (cast (cast existing : { var loadPromise:Null<flighthq._internal._Promise<flighthq._internal._Any>>; }).loadPromise : flighthq._internal._Promise<T>);
     }
-    entry = { value: _Runtime.field(_Runtime, 'UNDEFINED'), refcount: 1.0, loadPromise: null, resident: false };
+    entry = (cast { value: _Runtime.field(_Runtime, 'UNDEFINED'), refcount: 1.0, loadPromise: null, resident: false });
     ((cast runtime.freedIds : flighthq._internal._Set<String>).delete_(id));
-    ((cast runtime.entries : flighthq._internal._Map<String, AssetEntry>).set(id, entry));
-    loadPromise = _Runtime.callProperty((cast adapter : AssetLoaderAdapter<flighthq._internal._Any>).load(descriptor), 'then', cast ([function(value:flighthq._internal._Any):flighthq._internal._Any {
+    ((cast runtime.entries : flighthq._internal._Map<String, AssetEntry>).set(id, (cast entry)));
+    loadPromise = _Runtime.callProperty((cast adapter : AssetLoaderAdapter<flighthq._internal._Any>).load((cast descriptor)), 'then', cast ([function(value:flighthq._internal._Any):flighthq._internal._Any {
       if ((cast ((cast !_Runtime.strictEquals(((cast runtime.entries : flighthq._internal._Map<String, AssetEntry>).get(id)), entry) : Bool) || (cast ((cast entry.refcount : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-        (cast adapter : AssetLoaderAdapter<flighthq._internal._Any>).dispose(value);
+        (cast adapter : AssetLoaderAdapter<flighthq._internal._Any>).dispose((cast value : flighthq._internal._Any));
         return cast value;
       }
       (entry.value = cast (value : Dynamic));
       (entry.resident = cast (true : Dynamic));
       (entry.loadPromise = cast (null : Dynamic));
       return cast value;
+      return cast _Runtime.UNDEFINED;
     }, function(error:flighthq._internal._Any):flighthq._internal._Any {
       if ((cast _Runtime.strictEquals(((cast runtime.entries : flighthq._internal._Map<String, AssetEntry>).get(id)), entry) : Bool)) { ((cast runtime.entries : flighthq._internal._Map<String, AssetEntry>).delete_(id)); }
       _Runtime.throwValue(error);
+      return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
     (entry.loadPromise = cast (loadPromise : Dynamic));
     return cast (cast loadPromise : flighthq._internal._Promise<T>);
@@ -74,7 +76,7 @@ class AssetLibrary {
 
   public static function createAssetLibrary():flighthq.types.Assets.AssetLibrary {
     var runtime:AssetLibraryRuntime = cast _Runtime.UNDEFINED;
-    runtime = { acquireGuard: null, adapters: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), descriptors: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), entries: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), freedIds: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), groups: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) };
+    runtime = (cast { acquireGuard: null, adapters: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), descriptors: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), entries: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), freedIds: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), groups: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) });
     return cast { runtime: runtime };
     return cast null;
   }
@@ -87,8 +89,8 @@ class AssetLibrary {
       var entry:AssetEntry = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       if ((cast !(cast entry.resident : Bool) : Bool)) { continue; }
       var descriptor:Null<AssetDescriptor> = ((cast runtime.descriptors : flighthq._internal._Map<String, AssetDescriptor>).get(id));
-      var adapter:Null<AssetLoaderAdapter<flighthq._internal._Any>> = ((cast !_Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast runtime.adapters : flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>).get((cast descriptor : flighthq.types.Assets.AssetDescriptor).type)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-      if ((cast !_Runtime.strictEquals(adapter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast adapter : AssetLoaderAdapter<flighthq._internal._Any>).dispose(entry.value); }
+      var adapter:Null<AssetLoaderAdapter<flighthq._internal._Any>> = ((cast !_Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast runtime.adapters : flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>).get((cast descriptor : { var type:AssetType; }).type)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+      if ((cast !_Runtime.strictEquals(adapter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast adapter : AssetLoaderAdapter<flighthq._internal._Any>).dispose((cast entry.value : flighthq._internal._Any)); }
     }
     ((cast runtime.adapters : flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>).clear());
     (runtime.acquireGuard = cast (null : Dynamic));
@@ -100,25 +102,25 @@ class AssetLibrary {
 
   public static function getAsset<T>(library:flighthq.types.Assets.AssetLibrary, id:String):Null<T> {
     var entry:Null<AssetEntry> = cast _Runtime.UNDEFINED;
-    entry = ((cast library.runtime.entries : flighthq._internal._Map<String, AssetEntry>).get(id));
-    return cast ((cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast entry : flighthq.types.Assets.AssetEntry).resident : Bool)) : Bool) ? (cast (cast (cast entry : flighthq.types.Assets.AssetEntry).value : T) : Dynamic) : (cast null : Dynamic));
+    entry = ((cast (cast library.runtime : { var entries:flighthq._internal._Map<String, AssetEntry>; }).entries : flighthq._internal._Map<String, AssetEntry>).get(id));
+    return cast ((cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast entry : { var resident:Bool; }).resident : Bool)) : Bool) ? (cast (cast (cast entry : { var value:flighthq._internal._Any; }).value : T) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function getAssetGroupIds(library:flighthq.types.Assets.AssetLibrary, name:String):Array<String> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(((cast library.runtime.groups : flighthq._internal._Map<String, Array<String>>).get(name)), 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(((cast (cast library.runtime : { var groups:flighthq._internal._Map<String, Array<String>>; }).groups : flighthq._internal._Map<String, Array<String>>).get(name)), 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
     return cast null;
   }
 
   public static function getAssetIds(library:flighthq.types.Assets.AssetLibrary):Array<String> {
-    return cast _Runtime.toArray(((cast library.runtime.entries : flighthq._internal._Map<String, AssetEntry>).keys()));
+    return cast (cast _Runtime.toArray(((cast (cast library.runtime : { var entries:flighthq._internal._Map<String, AssetEntry>; }).entries : flighthq._internal._Map<String, AssetEntry>).keys())) : Array<String>);
     return cast null;
   }
 
   public static function getAssetRefCount(library:flighthq.types.Assets.AssetLibrary, id:String):Float {
     var entry:Null<AssetEntry> = cast _Runtime.UNDEFINED;
-    entry = ((cast library.runtime.entries : flighthq._internal._Map<String, AssetEntry>).get(id));
-    return cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast entry : flighthq.types.Assets.AssetEntry).refcount : Dynamic) : (cast 0.0 : Dynamic));
+    entry = ((cast (cast library.runtime : { var entries:flighthq._internal._Map<String, AssetEntry>; }).entries : flighthq._internal._Map<String, AssetEntry>).get(id));
+    return cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast entry : { var refcount:Float; }).refcount : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
@@ -144,16 +146,16 @@ class AssetLibrary {
           __flowBranch5 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
-          loader = (cast createResourceLoader(_Runtime.field(_Runtime, 'UNDEFINED')) : ResourceLoader);
+          loader = (cast createResourceLoader((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : ResourceLoader);
           progress = ({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.progress; });
           var __flowBranch7:Dynamic;
           if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             __flowBranch7 = flighthq._internal._Async.protect(function():Dynamic {
-              connectSignal(loader.onProgress, (cast function(__unused2:Float):Void return _Runtime.callValue(function(__unused1:Float):Void {
+              connectSignal((cast loader.onProgress), (cast function(__unused2:Float):Void { _Runtime.callValue(function(__unused1:Float):Void {
                 var counts:ResourceLoadCounts = cast _Runtime.UNDEFINED;
-                counts = (cast getResourceLoadCounts(loader) : ResourceLoadCounts);
+                counts = (cast getResourceLoadCounts((cast loader)) : ResourceLoadCounts);
                 _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ loaded: (cast counts : ResourceLoadCounts).settledItems, total: (cast counts : ResourceLoadCounts).totalItems }]]), 1);
-              }, cast ([] : Array<Dynamic>)) : Float->Void), _Runtime.field(_Runtime, 'UNDEFINED'));
+              }, cast ([] : Array<Dynamic>)); }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
               return flighthq._internal._Async.flowNormal();
             });
           } else {
@@ -163,21 +165,21 @@ class AssetLibrary {
             itemPromises = cast ([] : Array<Dynamic>);
             for (id in _Runtime.iterable(ids)) {
               var entry:Null<AssetEntry> = ((cast runtime.entries : flighthq._internal._Map<String, AssetEntry>).get(id));
-              if ((cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast entry : flighthq.types.Assets.AssetEntry).resident : Bool)) : Bool)) {
-                _Runtime.callProperty(itemPromises, 'push', cast ([(cast acquireAsset((cast library : flighthq.types.Assets.AssetLibrary), (cast id : String)) : flighthq._internal._Promise<flighthq._internal._Any>)] : Array<Dynamic>));
+              if ((cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast entry : { var resident:Bool; }).resident : Bool)) : Bool)) {
+                _Runtime.callProperty(itemPromises, 'push', cast ([(cast (cast acquireAsset : flighthq.types.Assets.AssetLibrary->String->flighthq._internal._Promise<flighthq._internal._Any>)((cast library), (cast id : String)) : flighthq._internal._Promise<flighthq._internal._Any>)] : Array<Dynamic>));
                 continue;
               }
-              _Runtime.callProperty(itemPromises, 'push', cast ([(cast queueResourceLoad(loader, function():flighthq._internal._Promise<flighthq._internal._Any> return (cast acquireAsset((cast library : flighthq.types.Assets.AssetLibrary), (cast id : String)) : flighthq._internal._Promise<flighthq._internal._Any>)) : ResourceLoadHandle<flighthq._internal._Any>).promise] : Array<Dynamic>));
+              _Runtime.callProperty(itemPromises, 'push', cast ([(cast (cast queueResourceLoad((cast loader), (cast function():flighthq._internal._Promise<flighthq._internal._Any> return (cast (cast acquireAsset : flighthq.types.Assets.AssetLibrary->String->flighthq._internal._Promise<flighthq._internal._Any>)((cast library), (cast id : String)) : flighthq._internal._Promise<flighthq._internal._Any>))) : ResourceLoadHandle<flighthq._internal._Any>) : { var promise:flighthq._internal._Promise<flighthq._internal._Any>; }).promise] : Array<Dynamic>));
             }
             settlements = flighthq._internal._Async.allSettled(itemPromises);
             return flighthq._internal._Async.flatMap(flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused3:flighthq._internal._Any):Void {
-              connectSignal(loader.onComplete, function(__unused5:Dynamic):Void return _Runtime.callValue(function(__unused4:Array<ResourceLoadReport>):Void return resolve(), cast ([] : Array<Dynamic>)), _Runtime.field(_Runtime, 'UNDEFINED'));
-              startResourceLoad(loader);
+              connectSignal((cast loader.onComplete), (cast function(__unused5:Array<ResourceLoadReport>):Void { _Runtime.callValue(function(__unused4:Array<ResourceLoadReport>):Void { resolve(); }, cast ([] : Array<Dynamic>)); }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+              startResourceLoad((cast loader));
             }), function(__awaitValue10:Dynamic):Dynamic {
               __awaitValue10;
               return flighthq._internal._Async.flatMap(settlements, function(__awaitValue11:Dynamic):Dynamic {
                 results = __awaitValue11;
-                disposeResourceLoader(loader);
+                disposeResourceLoader((cast loader));
                 failed = _Runtime.find(results, function(result:flighthq._internal._Any, __unused6:Float, __unused7:Array<flighthq._internal._Any>):Bool return _Runtime.strictEquals((cast result : { var status:String; }).status, 'rejected'));
                 var __flowBranch12:Dynamic;
                 if ((cast _Runtime.strictEquals(_Runtime.optionalField(failed, 'status'), 'rejected') : Bool)) {
@@ -206,13 +208,13 @@ class AssetLibrary {
     runtime = library.runtime;
     previous = ((cast runtime.descriptors : flighthq._internal._Map<String, AssetDescriptor>).get(descriptor.id));
     if ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast runtime.entries : flighthq._internal._Map<String, AssetEntry>).has(descriptor.id)) : Bool)) : Bool)) {
-      if ((cast (cast AssetLibrary.isEquivalentAssetDescriptor__assetLibrary((cast previous : AssetDescriptor), (cast descriptor : AssetDescriptor)) : Bool) : Bool)) { return; }
+      if ((cast (cast AssetLibrary.isEquivalentAssetDescriptor__assetLibrary((cast previous), (cast descriptor)) : Bool) : Bool)) { return; }
       _Runtime.throwValue(_Runtime.error('assets: cannot replace acquired descriptor "' + Std.string(descriptor.id) + '" (releaseAsset first)'));
     }
-    if ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { AssetLibrary.removeAssetDescriptorGroups__assetLibrary((cast runtime : AssetLibraryRuntime), (cast previous : AssetDescriptor)); }
-    if ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast (cast AssetLibrary.isEquivalentAssetDescriptor__assetLibrary((cast previous : AssetDescriptor), (cast descriptor : AssetDescriptor)) : Bool) : Bool) : Bool)) : Bool)) { ((cast runtime.freedIds : flighthq._internal._Set<String>).delete_(descriptor.id)); }
-    storedDescriptor = (cast AssetLibrary.copyAssetDescriptor__assetLibrary((cast descriptor : AssetDescriptor)) : AssetDescriptor);
-    ((cast runtime.descriptors : flighthq._internal._Map<String, AssetDescriptor>).set(descriptor.id, storedDescriptor));
+    if ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { AssetLibrary.removeAssetDescriptorGroups__assetLibrary((cast runtime), (cast previous)); }
+    if ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast (cast AssetLibrary.isEquivalentAssetDescriptor__assetLibrary((cast previous), (cast descriptor)) : Bool) : Bool) : Bool)) : Bool)) { ((cast runtime.freedIds : flighthq._internal._Set<String>).delete_(descriptor.id)); }
+    storedDescriptor = (cast AssetLibrary.copyAssetDescriptor__assetLibrary((cast descriptor)) : AssetDescriptor);
+    ((cast runtime.descriptors : flighthq._internal._Map<String, AssetDescriptor>).set(descriptor.id, (cast storedDescriptor)));
     groups = storedDescriptor.groups;
     if ((cast _Runtime.strictEquals(groups, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     {
@@ -222,7 +224,7 @@ class AssetLibrary {
         var members:Null<Array<String>> = ((cast runtime.groups : flighthq._internal._Map<String, Array<String>>).get(group));
         if ((cast _Runtime.strictEquals(members, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           (members = cast (cast ([] : Array<Dynamic>) : Dynamic));
-          ((cast runtime.groups : flighthq._internal._Map<String, Array<String>>).set(group, members));
+          ((cast runtime.groups : flighthq._internal._Map<String, Array<String>>).set(group, (cast members)));
         }
         if ((cast !(cast _Runtime.includes(members, descriptor.id) : Bool) : Bool)) { _Runtime.callProperty(members, 'push', cast ([descriptor.id] : Array<Dynamic>)); }
         i++;
@@ -231,23 +233,23 @@ class AssetLibrary {
   }
 
   public static function registerAssetLoader<T>(library:flighthq.types.Assets.AssetLibrary, type:AssetType, adapter:AssetLoaderAdapter<T>):Void {
-    ((cast library.runtime.adapters : flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>).set(type, (cast adapter : AssetLoaderAdapter<Dynamic>)));
+    ((cast (cast library.runtime : { var adapters:flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>; }).adapters : flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>).set(type, (cast (cast adapter : AssetLoaderAdapter<flighthq._internal._Any>))));
   }
 
   public static function registerAssetManifest(library:flighthq.types.Assets.AssetLibrary, manifest:AssetManifest):Void {
     var descriptors:flighthq._internal._Map<String, AssetDescriptor> = cast _Runtime.UNDEFINED;
     descriptors = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (descriptor in _Runtime.iterable(manifest)) {
-      ((cast descriptors : flighthq._internal._Map<String, AssetDescriptor>).set(descriptor.id, descriptor));
+      ((cast descriptors : flighthq._internal._Map<String, AssetDescriptor>).set(descriptor.id, (cast descriptor)));
     }
     for (descriptor in _Runtime.iterable(((cast descriptors : flighthq._internal._Map<String, AssetDescriptor>).values()))) {
-      var previous:Null<AssetDescriptor> = ((cast library.runtime.descriptors : flighthq._internal._Map<String, AssetDescriptor>).get(descriptor.id));
-      if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast library.runtime.entries : flighthq._internal._Map<String, AssetEntry>).has(descriptor.id)) : Bool)) : Bool) && (cast !(cast (cast AssetLibrary.isEquivalentAssetDescriptor__assetLibrary((cast previous : AssetDescriptor), (cast descriptor : AssetDescriptor)) : Bool) : Bool) : Bool)) : Bool)) {
+      var previous:Null<AssetDescriptor> = ((cast (cast library.runtime : { var descriptors:flighthq._internal._Map<String, AssetDescriptor>; }).descriptors : flighthq._internal._Map<String, AssetDescriptor>).get(descriptor.id));
+      if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast (cast library.runtime : { var entries:flighthq._internal._Map<String, AssetEntry>; }).entries : flighthq._internal._Map<String, AssetEntry>).has(descriptor.id)) : Bool)) : Bool) && (cast !(cast (cast AssetLibrary.isEquivalentAssetDescriptor__assetLibrary((cast previous), (cast descriptor)) : Bool) : Bool) : Bool)) : Bool)) {
         _Runtime.throwValue(_Runtime.error('assets: cannot replace acquired descriptor "' + Std.string(descriptor.id) + '" (releaseAsset first)'));
       }
     }
     for (descriptor in _Runtime.iterable(((cast descriptors : flighthq._internal._Map<String, AssetDescriptor>).values()))) {
-      registerAssetDescriptor((cast library : flighthq.types.Assets.AssetLibrary), (cast descriptor : AssetDescriptor));
+      registerAssetDescriptor((cast library), (cast descriptor));
     }
   }
 
@@ -257,23 +259,23 @@ class AssetLibrary {
     runtime = library.runtime;
     entry = ((cast runtime.entries : flighthq._internal._Map<String, AssetEntry>).get(id));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    (cast entry : flighthq.types.Assets.AssetEntry).refcount--;
-    if ((cast ((cast (cast entry : flighthq.types.Assets.AssetEntry).refcount : Float) > (cast 0.0 : Float)) : Bool)) { return; }
-    AssetLibrary.disposeAssetEntry__assetLibrary((cast runtime : AssetLibraryRuntime), (cast id : String), (cast entry : AssetEntry));
+    (cast entry : { var refcount:Float; }).refcount--;
+    if ((cast ((cast (cast entry : { var refcount:Float; }).refcount : Float) > (cast 0.0 : Float)) : Bool)) { return; }
+    AssetLibrary.disposeAssetEntry__assetLibrary((cast runtime), (cast id : String), (cast entry));
   }
 
   public static function releaseAssetGroup(library:flighthq.types.Assets.AssetLibrary, name:String):Void {
     var ids:Null<Array<String>> = cast _Runtime.UNDEFINED;
-    ids = ((cast library.runtime.groups : flighthq._internal._Map<String, Array<String>>).get(name));
+    ids = ((cast (cast library.runtime : { var groups:flighthq._internal._Map<String, Array<String>>; }).groups : flighthq._internal._Map<String, Array<String>>).get(name));
     if ((cast _Runtime.strictEquals(ids, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (id in _Runtime.iterable(ids)) {
-      releaseAsset((cast library : flighthq.types.Assets.AssetLibrary), (cast id : String));
+      releaseAsset((cast library), (cast id : String));
     }
   }
 
   @:noCompletion
   public static function setAssetAcquireGuard(library:flighthq.types.Assets.AssetLibrary, guard:Null<AssetAcquireGuard>):Void {
-    (library.runtime.acquireGuard = cast (guard : Dynamic));
+    ((cast library.runtime : { var acquireGuard:Null<AssetAcquireGuard>; }).acquireGuard = cast (guard : Dynamic));
   }
 
   public static function disposeAssetEntry__assetLibrary(runtime:AssetLibraryRuntime, id:String, entry:AssetEntry):Void {
@@ -283,8 +285,8 @@ class AssetLibrary {
     ((cast runtime.freedIds : flighthq._internal._Set<String>).add(id));
     if ((cast !(cast entry.resident : Bool) : Bool)) { return; }
     descriptor = ((cast runtime.descriptors : flighthq._internal._Map<String, AssetDescriptor>).get(id));
-    adapter = ((cast !_Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast runtime.adapters : flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>).get((cast descriptor : flighthq.types.Assets.AssetDescriptor).type)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-    if ((cast !_Runtime.strictEquals(adapter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast adapter : AssetLoaderAdapter<flighthq._internal._Any>).dispose(entry.value); }
+    adapter = ((cast !_Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast runtime.adapters : flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>).get((cast descriptor : { var type:AssetType; }).type)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    if ((cast !_Runtime.strictEquals(adapter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast adapter : AssetLoaderAdapter<flighthq._internal._Any>).dispose((cast entry.value : flighthq._internal._Any)); }
   }
 
   public static function copyAssetDescriptor__assetLibrary(descriptor:AssetDescriptor):AssetDescriptor {

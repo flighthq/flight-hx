@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _ResourceResolutionStateValues {
-  public static final ResourceResolutionStateValue:{ var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; } = { Failed: 'Failed', Loading: 'Loading', Resolved: 'Resolved', Unresolved: 'Unresolved' };
+  public static final ResourceResolutionStateValue:{ var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; } = (cast { Failed: 'Failed', Loading: 'Loading', Resolved: 'Resolved', Unresolved: 'Unresolved' });
 }

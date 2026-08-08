@@ -7,7 +7,7 @@ import flighthq.types.ColorTransformFunction;
 import flighthq.types.HueSaturationAdjustment;
 
 class HueSaturationAdjustment {
-  public static function createHueSaturationAdjustment(?options:Dynamic):flighthq.types.HueSaturationAdjustment {
+  public static function createHueSaturationAdjustment(?options:flighthq._internal._Omit<flighthq.types.HueSaturationAdjustment, String>):flighthq.types.HueSaturationAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var hue:Float = cast _Runtime.UNDEFINED;
     var saturation:Float = cast _Runtime.UNDEFINED;

@@ -36,34 +36,34 @@ class WgpuInnerGlowEffect {
     var sourceMode:InnerEffectSourceMode = cast _Runtime.UNDEFINED;
     src = (cast source : WgpuRenderTarget);
     dst = (cast dest : WgpuRenderTarget);
-    descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    s0 = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
-    s1 = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
-    s2 = (cast acquireWgpuRenderTarget((cast state : WgpuRenderState), (cast pool : WgpuRenderTargetPool), (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; })) : WgpuRenderTarget);
+    descriptor = (cast { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') });
+    s0 = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
+    s1 = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
+    s2 = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0);
     alpha = _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
-    applyWgpuEffectInvertTintPass((cast state : WgpuRenderState), (cast src : WgpuRenderTarget), (cast s0 : WgpuRenderTarget), (cast color : Float), (cast alpha : Float), (cast strength : Float));
-    applyWgpuEffectBoxBlur((cast state : WgpuRenderState), (cast s0 : WgpuRenderTarget), (cast s1 : WgpuRenderTarget), (cast s2 : WgpuRenderTarget), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), edgeColor: (cast WgpuInnerGlowEffect.getInvertTintEdgeColor__wgpuInnerGlowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Null<Array<Float>>), passes: quality } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }));
-    applyWgpuEffectInnerClipPass((cast state : WgpuRenderState), (cast s1 : WgpuRenderTarget), (cast src : WgpuRenderTarget), (cast s0 : WgpuRenderTarget));
-    clearWgpuEffectTarget((cast state : WgpuRenderState), (cast dst : WgpuRenderTarget));
+    applyWgpuEffectInvertTintPass((cast state), (cast src), (cast s0), (cast color : Float), (cast alpha : Float), (cast strength : Float));
+    applyWgpuEffectBoxBlur((cast state), (cast s0), (cast s1), (cast s2), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), edgeColor: (cast WgpuInnerGlowEffect.getInvertTintEdgeColor__wgpuInnerGlowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Array<Float>), passes: quality }));
+    applyWgpuEffectInnerClipPass((cast state), (cast s1), (cast src), (cast s0));
+    clearWgpuEffectTarget((cast state), (cast dst));
     if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyWgpuEffectBlitPass((cast state : WgpuRenderState), (cast src : WgpuRenderTarget), (cast dst : WgpuRenderTarget));
+      applyWgpuEffectBlitPass((cast state), (cast src), (cast dst));
     }
-    applyWgpuEffectBlitPass((cast state : WgpuRenderState), (cast s0 : WgpuRenderTarget), (cast dst : WgpuRenderTarget));
-    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast s0 : WgpuRenderTarget));
-    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast s1 : WgpuRenderTarget));
-    releaseWgpuRenderTarget((cast pool : WgpuRenderTargetPool), (cast s2 : WgpuRenderTarget));
+    applyWgpuEffectBlitPass((cast state), (cast s0), (cast dst));
+    releaseWgpuRenderTarget((cast pool), (cast s0));
+    releaseWgpuRenderTarget((cast pool), (cast s1));
+    releaseWgpuRenderTarget((cast pool), (cast s2));
   }
 
-  public static final defaultWgpuInnerGlowEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyInnerGlowEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'pool') : WgpuRenderTargetPool), (cast (cast effect : InnerGlowEffect) : InnerGlowEffect));
-  };
+  public static final defaultWgpuInnerGlowEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyInnerGlowEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : InnerGlowEffect)));
+  });
 
   public static function registerWgpuInnerGlowEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'InnerGlowEffect' : String), (cast defaultWgpuInnerGlowEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'InnerGlowEffect' : String), (cast defaultWgpuInnerGlowEffectRunner));
   }
 
   public static function getInvertTintEdgeColor__wgpuInnerGlowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {

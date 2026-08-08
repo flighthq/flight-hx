@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef ScanlinesEffect = { var kind:Kind; @:optional var count:Float; @:optional var intensity:Float; };
+typedef ScanlinesEffect = { var kind:String; @:optional var count:Float; @:optional var intensity:Float; };

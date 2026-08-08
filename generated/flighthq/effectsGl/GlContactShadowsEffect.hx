@@ -11,18 +11,19 @@ import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
+import flighthq.types.SsaoEffect;
 
 class GlContactShadowsEffect {
   @:noCompletion
   public static function applyContactShadowsEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ContactShadowsEffect):Void {
-    applySsaoEffectToGl((cast state : GlRenderState), (cast source : GlRenderTarget), (cast dest : GlRenderTarget), { kind: 'SsaoEffect', intensity: _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 0.6), radius: _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 0.5), samples: _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0) });
+    applySsaoEffectToGl((cast state), (cast source), (cast dest), (cast { kind: 'SsaoEffect', intensity: _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 0.6), radius: _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 0.5), samples: _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0) }));
   }
 
-  public static final defaultGlContactShadowsEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyContactShadowsEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast (cast effect : ContactShadowsEffect) : ContactShadowsEffect));
-  };
+  public static final defaultGlContactShadowsEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyContactShadowsEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : ContactShadowsEffect)));
+  });
 
   public static function registerGlContactShadowsEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'ContactShadowsEffect' : String), (cast defaultGlContactShadowsEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'ContactShadowsEffect' : String), (cast defaultGlContactShadowsEffectRunner));
   }
 }

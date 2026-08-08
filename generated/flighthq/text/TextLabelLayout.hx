@@ -9,6 +9,7 @@ import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutMeasure.getTextLayoutMeasureProvider;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.textlayout.TextMetrics.getTextMetrics;
+import flighthq.types.Node2D;
 import flighthq.types.TextLabel;
 import flighthq.types.TextLabel.TextLabelRuntime;
 import flighthq.types.TextLayout.TextLayoutParams;
@@ -24,32 +25,32 @@ class TextLabelLayout {
     var measure:Null<TextMeasureFunction> = cast _Runtime.UNDEFINED;
     var params:TextLayoutParams = cast _Runtime.UNDEFINED;
     var result:TextLayoutResult = cast _Runtime.UNDEFINED;
-    runtime = (cast (cast getNode2DRuntime(source) : TextLabelRuntime) : TextLabelRuntime);
-    contentId = (cast getNodeLocalContentRevision(source) : Float);
+    runtime = (cast getNode2DRuntime((cast source)) : TextLabelRuntime);
+    contentId = (cast getNodeLocalContentRevision((cast source)) : Float);
     if ((cast ((cast !_Runtime.strictEquals((cast runtime : TextLabelRuntime).textLayout, null) : Bool) && (cast _Runtime.strictEquals((cast runtime : TextLabelRuntime).textLayoutUsingContentId, contentId) : Bool)) : Bool)) { return; }
     measure = (cast getTextLayoutMeasureProvider() : Null<TextMeasureFunction>);
     if ((cast _Runtime.strictEquals(measure, null) : Bool)) { return; }
-    params = (cast runtime : TextLabelRuntime).buildTextLayoutParams(source, measure);
-    result = (cast getTextLayoutResult((cast runtime : TextLabelRuntime)) : TextLayoutResult);
-    computeTextLayout((cast result : TextLayoutResult), params);
+    params = (cast runtime : TextLabelRuntime).buildTextLayoutParams((cast source), (cast measure));
+    result = (cast getTextLayoutResult((cast runtime)) : TextLayoutResult);
+    computeTextLayout((cast result), (cast params));
     ((cast runtime : TextLabelRuntime).textLayoutUsingContentId = contentId);
   }
 
   public static function getTextLayout(source:TextLabel):Null<TextLayoutResult> {
-    ensureTextLayout((cast source : TextLabel));
-    return cast (cast (cast (cast getNode2DRuntime(source) : TextLabelRuntime) : TextLabelRuntime) : TextLabelRuntime).textLayout;
+    ensureTextLayout((cast source));
+    return cast (cast (cast getNode2DRuntime((cast source)) : TextLabelRuntime) : TextLabelRuntime).textLayout;
     return cast null;
   }
 
   public static function getTextLayoutMetrics(out:TextMetrics, source:TextLabel):Void {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
-    layout = (cast getTextLayout((cast source : TextLabel)) : Null<TextLayoutResult>);
+    layout = (cast getTextLayout((cast source)) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
       (out.height = cast (0.0 : Dynamic));
       (out.numLines = cast (0.0 : Dynamic));
       (out.width = cast (0.0 : Dynamic));
       return;
     }
-    getTextMetrics((cast out : TextMetrics), (cast layout : TextLayoutResult));
+    getTextMetrics((cast out), (cast layout));
   }
 }

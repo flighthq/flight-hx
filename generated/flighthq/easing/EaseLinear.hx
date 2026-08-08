@@ -6,5 +6,5 @@ import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
 class EaseLinear {
-  public static final easeLinear:EasingFunction = function(t:Float):Float return t;
+  public static final easeLinear:EasingFunction = (cast function(t:Float):Float return t);
 }

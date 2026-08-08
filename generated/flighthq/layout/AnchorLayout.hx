@@ -17,10 +17,10 @@ import flighthq.types.ViewportAlign;
 
 class AnchorLayout {
   public static function registerAnchorLayoutResolver(state:LayoutState):Void {
-    registerLayoutResolver((cast state : LayoutState), (cast AnchorLayoutKind : String), (cast AnchorLayout.anchorLayoutResolver__anchorLayout : Null<LayoutResolver>));
+    registerLayoutResolver((cast state), (cast AnchorLayoutKind : String), (cast AnchorLayout.anchorLayoutResolver__anchorLayout));
   }
 
-  public static final anchorLayoutResolver__anchorLayout:LayoutResolver = function(out:flighthq._internal._Float32Array, tree:LayoutTree, intrinsicSizes:flighthq._internal._ArrayLike<Float>, parentIndex:Float, childIndex:Float):Null<String> {
+  public static final anchorLayoutResolver__anchorLayout:LayoutResolver = (cast function(out:flighthq._internal._Float32Array, tree:LayoutTree, intrinsicSizes:flighthq._internal._ArrayLike<Float>, parentIndex:Float, childIndex:Float):Null<String> {
     var parentStyle:Null<flighthq._internal._Object> = cast _Runtime.UNDEFINED;
     var itemStyle:Null<flighthq._internal._Object> = cast _Runtime.UNDEFINED;
     var style:Null<AnchorLayoutItemStyle> = cast _Runtime.UNDEFINED;
@@ -39,30 +39,31 @@ class AnchorLayout {
     var align:ViewportAlign = cast _Runtime.UNDEFINED;
     var childOffset:Float = cast _Runtime.UNDEFINED;
     parentStyle = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'nodes'), parentIndex) : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).containerStyle;
-    if ((cast !(cast (cast AnchorLayout.isEmptyStyle__anchorLayout((cast parentStyle : Null<flighthq._internal._Object>)) : Bool) : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidContainerStyle; }
+    if ((cast !(cast (cast AnchorLayout.isEmptyStyle__anchorLayout((cast parentStyle)) : Bool) : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidContainerStyle; }
     itemStyle = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'nodes'), childIndex) : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).itemStyle;
-    if ((cast !(cast (cast AnchorLayout.isAnchorLayoutItemStyle__anchorLayout((cast itemStyle : Null<flighthq._internal._Object>)) : Bool) : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidItemStyle; }
+    if ((cast !(cast (cast AnchorLayout.isAnchorLayoutItemStyle__anchorLayout((cast itemStyle)) : Bool) : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidItemStyle; }
     style = (cast itemStyle : Null<AnchorLayoutItemStyle>);
     parentOffset = (parentIndex * 4.0);
     parentX = flighthq._internal._StaticIndex.readFloat32Array(out, parentOffset);
     parentY = flighthq._internal._StaticIndex.readFloat32Array(out, (parentOffset + 1.0));
     parentWidth = flighthq._internal._StaticIndex.readFloat32Array(out, (parentOffset + 2.0));
     parentHeight = flighthq._internal._StaticIndex.readFloat32Array(out, (parentOffset + 3.0));
-    left = _Runtime.coalesce(_Runtime.optionalField(style, 'left'), function():Dynamic return cast null);
-    right = _Runtime.coalesce(_Runtime.optionalField(style, 'right'), function():Dynamic return cast null);
-    top = _Runtime.coalesce(_Runtime.optionalField(style, 'top'), function():Dynamic return cast null);
-    bottom = _Runtime.coalesce(_Runtime.optionalField(style, 'bottom'), function():Dynamic return cast null);
+    left = _Runtime.coalesce(({ final __structural0 = style; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var left:Null<Float>; }).left; }), function():Dynamic return cast null);
+    right = _Runtime.coalesce(({ final __structural1 = style; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var right:Null<Float>; }).right; }), function():Dynamic return cast null);
+    top = _Runtime.coalesce(({ final __structural2 = style; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var top:Null<Float>; }).top; }), function():Dynamic return cast null);
+    bottom = _Runtime.coalesce(({ final __structural3 = style; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var bottom:Null<Float>; }).bottom; }), function():Dynamic return cast null);
     intrinsicOffset = (childIndex * 2.0);
-    width = ((cast ((cast !_Runtime.strictEquals(left, null) : Bool) && (cast !_Runtime.strictEquals(right, null) : Bool)) : Bool) ? (cast HxMath.max(0.0, ((parentWidth - left) - right)) : Dynamic) : (cast (cast AnchorLayout.finiteSize__anchorLayout((cast _Runtime.coalesce(_Runtime.optionalField(style, 'width'), function():Dynamic return cast _Runtime.getIndex(intrinsicSizes, intrinsicOffset)) : Float)) : Float) : Dynamic));
-    height = ((cast ((cast !_Runtime.strictEquals(top, null) : Bool) && (cast !_Runtime.strictEquals(bottom, null) : Bool)) : Bool) ? (cast HxMath.max(0.0, ((parentHeight - top) - bottom)) : Dynamic) : (cast (cast AnchorLayout.finiteSize__anchorLayout((cast _Runtime.coalesce(_Runtime.optionalField(style, 'height'), function():Dynamic return cast _Runtime.getIndex(intrinsicSizes, (intrinsicOffset + 1.0))) : Float)) : Float) : Dynamic));
-    align = _Runtime.coalesce(_Runtime.optionalField(style, 'align'), function():Dynamic return cast 'topleft');
+    width = ((cast ((cast !_Runtime.strictEquals(left, null) : Bool) && (cast !_Runtime.strictEquals(right, null) : Bool)) : Bool) ? (cast HxMath.max(0.0, ((parentWidth - left) - right)) : Dynamic) : (cast (cast AnchorLayout.finiteSize__anchorLayout((cast _Runtime.coalesce(({ final __structural4 = style; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast _Runtime.getIndex(intrinsicSizes, intrinsicOffset)) : Float)) : Float) : Dynamic));
+    height = ((cast ((cast !_Runtime.strictEquals(top, null) : Bool) && (cast !_Runtime.strictEquals(bottom, null) : Bool)) : Bool) ? (cast HxMath.max(0.0, ((parentHeight - top) - bottom)) : Dynamic) : (cast (cast AnchorLayout.finiteSize__anchorLayout((cast _Runtime.coalesce(({ final __structural5 = style; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast _Runtime.getIndex(intrinsicSizes, (intrinsicOffset + 1.0))) : Float)) : Float) : Dynamic));
+    align = _Runtime.coalesce(({ final __structural6 = style; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var align:Null<String>; }).align; }), function():Dynamic return cast 'topleft');
     childOffset = (childIndex * 4.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, childOffset, ((cast !_Runtime.strictEquals(left, null) : Bool) ? (cast (parentX + left) : Dynamic) : (cast ((cast !_Runtime.strictEquals(right, null) : Bool) ? (cast (((parentX + parentWidth) - right) - width) : Dynamic) : (cast (parentX + (cast AnchorLayout.alignX__anchorLayout((cast parentWidth : Float), (cast width : Float), (cast align : ViewportAlign)) : Float)) : Dynamic)) : Dynamic)));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (childOffset + 1.0), ((cast !_Runtime.strictEquals(top, null) : Bool) ? (cast (parentY + top) : Dynamic) : (cast ((cast !_Runtime.strictEquals(bottom, null) : Bool) ? (cast (((parentY + parentHeight) - bottom) - height) : Dynamic) : (cast (parentY + (cast AnchorLayout.alignY__anchorLayout((cast parentHeight : Float), (cast height : Float), (cast align : ViewportAlign)) : Float)) : Dynamic)) : Dynamic)));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, childOffset, ((cast !_Runtime.strictEquals(left, null) : Bool) ? (cast (parentX + left) : Dynamic) : (cast ((cast !_Runtime.strictEquals(right, null) : Bool) ? (cast (((parentX + parentWidth) - right) - width) : Dynamic) : (cast (parentX + (cast AnchorLayout.alignX__anchorLayout((cast parentWidth : Float), (cast width : Float), (cast align)) : Float)) : Dynamic)) : Dynamic)));
+    flighthq._internal._StaticIndex.writeFloat32Array(out, (childOffset + 1.0), ((cast !_Runtime.strictEquals(top, null) : Bool) ? (cast (parentY + top) : Dynamic) : (cast ((cast !_Runtime.strictEquals(bottom, null) : Bool) ? (cast (((parentY + parentHeight) - bottom) - height) : Dynamic) : (cast (parentY + (cast AnchorLayout.alignY__anchorLayout((cast parentHeight : Float), (cast height : Float), (cast align)) : Float)) : Dynamic)) : Dynamic)));
     flighthq._internal._StaticIndex.writeFloat32Array(out, (childOffset + 2.0), width);
     flighthq._internal._StaticIndex.writeFloat32Array(out, (childOffset + 3.0), height);
     return cast null;
-  };
+    return cast _Runtime.UNDEFINED;
+  });
 
   public static function isEmptyStyle__anchorLayout(value:Null<flighthq._internal._Object>):Bool {
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast true; }
@@ -76,7 +77,7 @@ class AnchorLayout {
   public static function isAnchorLayoutItemStyle__anchorLayout(value:Null<flighthq._internal._Object>):Bool {
     var style:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast true; }
-    style = (cast value : Dynamic);
+    style = (cast value : flighthq._internal._Partial<AnchorLayoutItemStyle>);
     return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast AnchorLayout.isAlign__anchorLayout((cast _Runtime.field(style, 'align') : flighthq._internal._Any)) : Bool) : Bool) && (cast (cast AnchorLayout.isOptionalNumber__anchorLayout((cast _Runtime.field(style, 'bottom') : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast AnchorLayout.isOptionalNumber__anchorLayout((cast _Runtime.field(style, 'height') : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast AnchorLayout.isOptionalNumber__anchorLayout((cast _Runtime.field(style, 'left') : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast AnchorLayout.isOptionalNumber__anchorLayout((cast _Runtime.field(style, 'right') : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast AnchorLayout.isOptionalNumber__anchorLayout((cast _Runtime.field(style, 'top') : flighthq._internal._Any)) : Bool) : Bool)), function():Dynamic return cast (cast AnchorLayout.isOptionalNumber__anchorLayout((cast _Runtime.field(style, 'width') : flighthq._internal._Any)) : Bool));
     return cast null;
   }

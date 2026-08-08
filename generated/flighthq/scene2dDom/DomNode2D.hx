@@ -33,7 +33,7 @@ class DomNode2D {
   }
 
   @:noCompletion
-  public static final defaultDomScene2DRenderer:Scene2DRenderer = { createData: noopRendererData, submit: drawDomScene2D };
+  public static final defaultDomScene2DRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: drawDomScene2D });
 
   public static function renderDomScene2D(state:DomRenderState, source:Node2D):Void {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
@@ -45,7 +45,7 @@ class DomNode2D {
     var stackLength:Float = cast _Runtime.UNDEFINED;
     var newLength:Float = cast _Runtime.UNDEFINED;
     var needsReconcile:Bool = cast _Runtime.UNDEFINED;
-    runtime = (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime);
+    runtime = (cast getDomRenderStateRuntime((cast state)) : DomRenderStateRuntime);
     container = (cast state : DomRenderState).element;
     clipHooks = (cast state : DomRenderState).displayObjectClipHooks;
     applyClip = (cast runtime : DomRenderStateRuntime).domClipHooks;
@@ -58,19 +58,19 @@ class DomNode2D {
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
       var current:Node2D = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Node2D);
       if ((cast !(cast (cast current : { var enabled:Bool; }).enabled : Bool) : Bool)) { continue; }
-      var data:Null<RenderProxy2D> = (cast getRenderProxy2D(state, current) : Null<RenderProxy2D>);
+      var data:Null<RenderProxy2D> = (cast getRenderProxy2D((cast state), (cast current)) : Null<RenderProxy2D>);
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      _Runtime.callOptionalProperty(clipHooks, 'popClip', cast ([state, data, current] : Array<Dynamic>));
-      if ((cast !(cast (cast isRenderProxyVisible((cast data : RenderProxy2D)) : Bool) : Bool) : Bool)) { continue; }
-      _Runtime.callOptionalProperty(clipHooks, 'pushClip', cast ([state, data, current] : Array<Dynamic>));
+      _Runtime.callOptionalValue(({ final __structural0 = clipHooks; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; }), cast ([state, data, current] : Array<Dynamic>));
+      if ((cast !(cast (cast isRenderProxyVisible((cast data)) : Bool) : Bool) : Bool)) { continue; }
+      _Runtime.callOptionalValue(({ final __structural1 = clipHooks; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; }), cast ([state, data, current] : Array<Dynamic>));
       if ((cast !_Runtime.strictEquals((cast data : RenderProxy2D).renderer, null) : Bool)) {
-        var result:{ var newLength:Float; var needsReconcile:Bool; } = (cast processDomNode(runtime, (cast data : RenderProxy2D), (cast frameId : Float), (cast function():Void return (cast (cast data : RenderProxy2D).renderer : Renderer).submit(state, data) : Void->Void), (cast newLength : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : { var newLength:Float; var needsReconcile:Bool; });
+        var result:{ var newLength:Float; var needsReconcile:Bool; } = (cast processDomNode((cast runtime), (cast data), (cast frameId : Float), (cast function():Void { (cast (cast data : RenderProxy2D).renderer : Renderer).submit((cast state), (cast data)); }), (cast newLength : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : { var newLength:Float; var needsReconcile:Bool; });
         (newLength = cast ((cast result : { var newLength:Float; var needsReconcile:Bool; }).newLength : Dynamic));
         if ((cast (cast result : { var newLength:Float; var needsReconcile:Bool; }).needsReconcile : Bool)) { (needsReconcile = cast (true : Dynamic)); }
-        _Runtime.callOptionalProperty(applyClip, 'apply', cast ([state, data] : Array<Dynamic>));
+        _Runtime.callOptionalValue(({ final __structural2 = applyClip; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var apply:DomRenderState->RenderProxy2D->Void; }).apply; }), cast ([state, data] : Array<Dynamic>));
       }
       if ((cast (cast data : RenderProxy2D).traverseChildren : Bool)) {
-        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime((cast current : Node2D)) : Node2DRuntime), 'children');
+        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime((cast current)) : Node2DRuntime), 'children');
         if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
             var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
@@ -82,10 +82,10 @@ class DomNode2D {
         }
       }
     }
-    _Runtime.callOptionalProperty(clipHooks, 'finalize', cast ([state] : Array<Dynamic>));
-    if ((cast (cast hasDomStructureChanged(runtime, (cast newLength : Float), (cast needsReconcile : Bool)) : Bool) : Bool)) {
-      reconcileDomContainer((cast container : flighthq._internal.dom.HTMLElement), runtime, (cast newLength : Float));
+    _Runtime.callOptionalValue(({ final __structural3 = clipHooks; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var finalize:RenderState->Void; }).finalize; }), cast ([state] : Array<Dynamic>));
+    if ((cast (cast hasDomStructureChanged((cast runtime), (cast newLength : Float), (cast needsReconcile : Bool)) : Bool) : Bool)) {
+      reconcileDomContainer((cast container), (cast runtime), (cast newLength : Float));
     }
-    swapDomOrderLists(runtime, (cast newLength : Float));
+    swapDomOrderLists((cast runtime), (cast newLength : Float));
   }
 }

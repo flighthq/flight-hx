@@ -16,14 +16,14 @@ class DashPath {
     _Runtime.setLength((cast out : Path).commands, 0.0);
     _Runtime.setLength((cast out : Path).data, 0.0);
     ((cast out : Path).winding = _Runtime.field(source, 'winding'));
-    totalDashLength = (cast DashPath.dashTotal__dashPath((cast dash : Array<Float>)) : Float);
+    totalDashLength = (cast DashPath.dashTotal__dashPath((cast dash)) : Float);
     if ((cast ((cast totalDashLength : Float) <= (cast 0.0 : Float)) : Bool)) {
-      DashPath.copyCommands__dashPath((cast source : Path), (cast out : Path));
+      DashPath.copyCommands__dashPath((cast source), (cast out));
       return;
     }
-    contours = (cast flattenPath((cast source : Path), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath((cast source), (cast tolerance : Float)) : Array<Array<Float>>);
     for (contour in _Runtime.iterable(contours)) {
-      DashPath.applyDashToContour__dashPath((cast contour : Array<Float>), (cast dash : Array<Float>), (cast dashOffset : Float), (cast totalDashLength : Float), (cast out : Path));
+      DashPath.applyDashToContour__dashPath((cast contour), (cast dash), (cast dashOffset : Float), (cast totalDashLength : Float), (cast out));
     }
   }
 

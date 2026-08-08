@@ -43,7 +43,7 @@ class BlendModeMath {
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     if ((cast (cast isNonSeparableBlendMode((cast mode : String)) : Bool) : Bool)) {
-      blendNonSeparableRgb((cast mode : String), (cast cbR : Float), (cast cbG : Float), (cast cbB : Float), (cast csR : Float), (cast csG : Float), (cast csB : Float), (cast out : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>));
+      blendNonSeparableRgb((cast mode : String), (cast cbR : Float), (cast cbG : Float), (cast cbB : Float), (cast csR : Float), (cast csG : Float), (cast csB : Float), (cast out));
       return;
     }
     r = (cast getSeparableBlendChannel((cast mode : String), (cast cbR : Float), (cast csR : Float)) : Float);
@@ -154,7 +154,7 @@ class BlendModeMath {
     var iMin:Float = cast _Runtime.UNDEFINED;
     var iMax:Float = cast _Runtime.UNDEFINED;
     var iMid:Float = cast _Runtime.UNDEFINED;
-    out = cast ([r, g, b] : Array<Dynamic>);
+    out = (cast cast ([r, g, b] : Array<Dynamic>));
     iMin = 0.0;
     iMax = 0.0;
     {

@@ -11,7 +11,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class BlurEffect {
-  public static function createBlurEffect(?options:Dynamic):flighthq.types.BlurEffect {
+  public static function createBlurEffect(?options:flighthq._internal._Omit<flighthq.types.BlurEffect, String>):flighthq.types.BlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BlurEffect' }, options]);
     return cast null;
@@ -23,11 +23,11 @@ class BlurEffect {
   }
 
   public static function registerBlurEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'BlurEffect' : String), BlurEffect.resolveBlurEffectPadding__blurEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'BlurEffect' : String), (cast BlurEffect.resolveBlurEffectPadding__blurEffect));
   }
 
   public static function resolveBlurEffectPadding__blurEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getBlurEffectPadding((cast (cast effect : flighthq.types.BlurEffect) : flighthq.types.BlurEffect)) : RenderEffectPadding);
+    return cast (cast getBlurEffectPadding((cast (cast effect : flighthq.types.BlurEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

@@ -11,6 +11,7 @@ import flighthq.geometry.Vector3.normalizeVector3;
 import flighthq.geometry.Vector3.subtractVector3;
 import flighthq.types.Camera3D;
 import flighthq.types.Matrix4;
+import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Ray3D.Ray3DLike;
 import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
@@ -28,8 +29,8 @@ class Picking {
     var farY:Float = cast _Runtime.UNDEFINED;
     var farZ:Float = cast _Runtime.UNDEFINED;
     var farW:Float = cast _Runtime.UNDEFINED;
-    getCamera3DViewProjectionMatrix4(Picking.__scratchViewProjection__picking, (cast camera : Camera3D), (cast aspect : Float));
-    if ((cast !(cast (cast inverseMatrix4(Picking.__scratchInverseVP__picking, Picking.__scratchViewProjection__picking) : Bool) : Bool) : Bool)) {
+    getCamera3DViewProjectionMatrix4((cast Picking.__scratchViewProjection__picking), (cast camera), (cast aspect : Float));
+    if ((cast !(cast (cast inverseMatrix4((cast Picking.__scratchInverseVP__picking), (cast Picking.__scratchViewProjection__picking)) : Bool) : Bool) : Bool)) {
       return cast false;
     }
     m = Picking.__scratchInverseVP__picking.m;
@@ -61,14 +62,14 @@ class Picking {
     (Picking.__scratchFar__picking.x = cast (farX : Dynamic));
     (Picking.__scratchFar__picking.y = cast (farY : Dynamic));
     (Picking.__scratchFar__picking.z = cast (farZ : Dynamic));
-    subtractVector3((cast Picking.__scratchDir__picking : Vector3Like), (cast Picking.__scratchFar__picking : Vector3Like), (cast Picking.__scratchNear__picking : Vector3Like));
-    (cast normalizeVector3((cast Picking.__scratchDir__picking : Vector3Like), (cast Picking.__scratchDir__picking : Vector3Like)) : Float);
-    (out.origin.x = cast (nearX : Dynamic));
-    (out.origin.y = cast (nearY : Dynamic));
-    (out.origin.z = cast (nearZ : Dynamic));
-    (out.direction.x = cast (Picking.__scratchDir__picking.x : Dynamic));
-    (out.direction.y = cast (Picking.__scratchDir__picking.y : Dynamic));
-    (out.direction.z = cast (Picking.__scratchDir__picking.z : Dynamic));
+    subtractVector3((cast Picking.__scratchDir__picking), (cast Picking.__scratchFar__picking), (cast Picking.__scratchNear__picking));
+    (cast normalizeVector3((cast Picking.__scratchDir__picking), (cast Picking.__scratchDir__picking)) : Float);
+    ((cast out.origin : { var x:Float; }).x = cast (nearX : Dynamic));
+    ((cast out.origin : { var y:Float; }).y = cast (nearY : Dynamic));
+    ((cast out.origin : { var z:Float; }).z = cast (nearZ : Dynamic));
+    ((cast out.direction : { var x:Float; }).x = cast (Picking.__scratchDir__picking.x : Dynamic));
+    ((cast out.direction : { var y:Float; }).y = cast (Picking.__scratchDir__picking.y : Dynamic));
+    ((cast out.direction : { var z:Float; }).z = cast (Picking.__scratchDir__picking.z : Dynamic));
     return cast true;
     return cast null;
   }
@@ -83,7 +84,7 @@ class Picking {
     var clipZ:Float = cast _Runtime.UNDEFINED;
     var clipW:Float = cast _Runtime.UNDEFINED;
     var invW:Float = cast _Runtime.UNDEFINED;
-    getCamera3DViewProjectionMatrix4(Picking.__scratchViewProjection__picking, (cast camera : Camera3D), (cast aspect : Float));
+    getCamera3DViewProjectionMatrix4((cast Picking.__scratchViewProjection__picking), (cast camera), (cast aspect : Float));
     m = Picking.__scratchViewProjection__picking.m;
     wx = worldPoint.x;
     wy = worldPoint.y;
@@ -103,13 +104,13 @@ class Picking {
     return cast null;
   }
 
-  public static final __scratchViewProjection__picking:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
+  public static final __scratchViewProjection__picking:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4);
 
-  public static final __scratchInverseVP__picking:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Matrix4);
+  public static final __scratchInverseVP__picking:Matrix4 = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4);
 
-  public static final __scratchNear__picking:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
+  public static final __scratchNear__picking:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector3);
 
-  public static final __scratchFar__picking:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
+  public static final __scratchFar__picking:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector3);
 
-  public static final __scratchDir__picking:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Vector3);
+  public static final __scratchDir__picking:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector3);
 }

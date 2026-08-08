@@ -13,10 +13,10 @@ import flighthq.types.RenderProxy2D;
 class DomStyle {
   @:noCompletion
   public static function applyDomStyle(state:DomRenderState, element:flighthq._internal.dom.HTMLElement, node:RenderProxy2D):Void {
-    setDomTransform((cast element : flighthq._internal.dom.HTMLElement), (cast node : RenderProxy2D).transform2D, (cast (cast state : DomRenderState).roundPixels : Bool));
+    setDomTransform((cast element), (cast (cast node : RenderProxy2D).transform2D), (cast (cast state : DomRenderState).roundPixels : Bool));
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast node : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast node : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast (cast state : DomRenderState).allowSmoothing : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
-    if ((cast !_Runtime.strictEquals((cast state : DomRenderState).domCssFilterResolver, null) : Bool)) { ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce((cast state : DomRenderState).domCssFilterResolver(node), function():Dynamic return cast '')); }
+    if ((cast !_Runtime.strictEquals((cast state : DomRenderState).domCssFilterResolver, null) : Bool)) { ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce((cast state : DomRenderState).domCssFilterResolver((cast node)), function():Dynamic return cast '')); }
     _Runtime.callOptionalValue((cast state : DomRenderState).applyBlendMode, cast ([element, (cast node : RenderProxy2D).blendMode] : Array<Dynamic>));
   }
 
@@ -31,6 +31,6 @@ class DomStyle {
 
   @:noCompletion
   public static function setDomRendererElement(state:DomRenderState, element:flighthq._internal.dom.HTMLElement):Void {
-    ((cast (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime) : DomRenderStateRuntime).domCurrentElement = element);
+    ((cast (cast getDomRenderStateRuntime((cast state)) : DomRenderStateRuntime) : DomRenderStateRuntime).domCurrentElement = element);
   }
 }

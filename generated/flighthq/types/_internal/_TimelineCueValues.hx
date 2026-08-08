@@ -22,5 +22,5 @@ class _TimelineCueValues {
 
   public static final TimelineStreamAudioCueKind:String = 'StreamAudio';
 
-  public static final TimelineFrameEntryCauseValue:{ var Advance:String; var Seek:String; } = { Advance: 'Advance', Seek: 'Seek' };
+  public static final TimelineFrameEntryCauseValue:{ var Advance:String; var Seek:String; } = (cast { Advance: 'Advance', Seek: 'Seek' });
 }

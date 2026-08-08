@@ -14,14 +14,14 @@ class GlWireframePrelude {
   @:noCompletion
   public static function compileGlWireframeProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, alphaMaskEnabled:Bool = false):GlWireframeProgram {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
-    program = (cast compileGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast getGlWireframeVertexSource() : String) : String), (cast (cast getGlWireframeFragmentSource((cast alphaMaskEnabled : Bool)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
+    program = (cast compileGlProgram((cast gl), (cast (cast getGlWireframeVertexSource() : String) : String), (cast (cast getGlWireframeFragmentSource((cast alphaMaskEnabled : Bool)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff'), locColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
 
   @:noCompletion
   public static function ensureGlWireframeProgram(state:GlRenderState, alphaMaskEnabled:Bool = false):GlWireframeProgram {
-    return cast (cast ensureGlScene3DProgram((cast state : GlRenderState), (cast 'wireframe:' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast 'mask' : Dynamic) : (cast 'base' : Dynamic))) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlWireframeProgram return (cast compileGlWireframeProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast alphaMaskEnabled : Bool)) : GlWireframeProgram) : flighthq._internal.dom.WebGL2RenderingContext->GlWireframeProgram)) : GlWireframeProgram);
+    return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlWireframeProgram)->GlWireframeProgram)((cast state), (cast 'wireframe:' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast 'mask' : Dynamic) : (cast 'base' : Dynamic))) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlWireframeProgram return (cast compileGlWireframeProgram((cast gl), (cast alphaMaskEnabled : Bool)) : GlWireframeProgram))) : GlWireframeProgram);
     return cast null;
   }
 

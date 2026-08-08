@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmap.BitmapBlur.boxBlurBitmap;
 import flighthq.types.Bitmap;
+import flighthq.types.BitmapBoxBlurOptions;
 import flighthq.types.BitmapRegion;
 import flighthq.types.BitmapSharpenOptions;
 
@@ -18,12 +19,12 @@ class BitmapSharpen {
     var bitmapHeight:Float = cast _Runtime.UNDEFINED;
     var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(options, 'amount'), function():Dynamic return cast 1.0);
-    boxBlurBitmap((cast out : flighthq._internal._UInt8ClampedArray), (cast scratch : flighthq._internal._UInt8ClampedArray), (cast source : BitmapRegion), { radiusX: _Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0), radiusY: _Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0), passes: _Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0) });
+    boxBlurBitmap((cast out), (cast scratch), (cast source), (cast { radiusX: _Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0), radiusY: _Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0), passes: _Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0) }));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
-    bitmapWidth = _Runtime.field(source, 'bitmap').width;
-    bitmapHeight = _Runtime.field(source, 'bitmap').height;
-    data = _Runtime.field(source, 'bitmap').data;
+    bitmapWidth = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
+    bitmapHeight = (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height;
+    data = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {

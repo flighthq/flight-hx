@@ -22,8 +22,8 @@ class WgpuMipmap {
     if ((cast ((cast levelCount : Float) <= (cast 1.0 : Float)) : Bool)) { return; }
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
-    cached = (cast WgpuMipmap.ensureWgpuMipmapPipeline__wgpuMipmap((cast state : WgpuRenderState), (cast format : String)) : { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; });
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    cached = (cast WgpuMipmap.ensureWgpuMipmapPipeline__wgpuMipmap((cast state), (cast format : String)) : { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; });
     pipeline = (cast cached : { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; }).pipeline;
     layout = (cast cached : { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; }).bindGroupLayout;
     encoder = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createCommandEncoder', cast ([] : Array<Dynamic>));
@@ -59,7 +59,7 @@ class WgpuMipmap {
     var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
     var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
     var result:{ var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; } = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state : WgpuRenderState)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
     cached = ((cast (cast runtime : WgpuRenderStateRuntime).mipmapPipelineCache : flighthq._internal._Map<String, { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; }>).get(format));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     __destructure1 = state;
@@ -67,8 +67,8 @@ class WgpuMipmap {
     bindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: WgpuMipmap.MIPMAP_WGSL__wgpuMipmap }] : Array<Dynamic>));
     pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([bindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>)), vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
-    result = { bindGroupLayout: bindGroupLayout, pipeline: pipeline };
-    ((cast (cast runtime : WgpuRenderStateRuntime).mipmapPipelineCache : flighthq._internal._Map<String, { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; }>).set(format, result));
+    result = (cast { bindGroupLayout: bindGroupLayout, pipeline: pipeline });
+    ((cast (cast runtime : WgpuRenderStateRuntime).mipmapPipelineCache : flighthq._internal._Map<String, { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; }>).set(format, (cast result)));
     return cast result;
     return cast null;
   }

@@ -4,6 +4,7 @@ package flighthq.scene3dResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Entity;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.ExtendedPbrMaterial;
@@ -33,7 +34,7 @@ import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
 class SceneMaterialTextureRegistry {
   @:noCompletion
   public static function createScene3DMaterialTextureRegistry():Scene3DMaterialTextureRegistry {
-    return cast (cast createEntity((cast { extensionListers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), listers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) } : Null<{ var extensionListers:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>; var listers:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>; }>)) : Scene3DMaterialTextureRegistry);
+    return cast (cast createEntity((cast { extensionListers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), listers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) })) : { >Entity, var extensionListers:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>; var listers:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>; });
     return cast null;
   }
 
@@ -41,7 +42,7 @@ class SceneMaterialTextureRegistry {
   public static function getScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry, material:Material, out:Array<Texture>):Void {
     var lister:Null<Scene3DMaterialTextureLister> = cast _Runtime.UNDEFINED;
     lister = ((cast registry.listers : flighthq._internal._Map<String, Scene3DMaterialTextureLister>).get(_Runtime.field(material, 'kind')));
-    if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { lister((cast material : Material), (cast out : Array<Texture>)); }
+    if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { lister((cast material), (cast out)); }
   }
 
   @:noCompletion
@@ -52,44 +53,44 @@ class SceneMaterialTextureRegistry {
 
   @:noCompletion
   public static function registerExtendedPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DMaterialTextures((cast registry : Scene3DMaterialTextureRegistry), (cast ExtendedPbrMaterialKind : String), (cast function(material:Material, out:Array<Texture>):Void {
+    registerScene3DMaterialTextures((cast registry), (cast ExtendedPbrMaterialKind : String), (cast function(material:Material, out:Array<Texture>):Void {
       var extended:ExtendedPbrMaterial = cast _Runtime.UNDEFINED;
       extended = (cast material : ExtendedPbrMaterial);
-      SceneMaterialTextureRegistry.listStandardPbrPropertiesTextures__sceneMaterialTextureRegistry((cast _Runtime.field(extended, 'standard') : StandardPbrMaterialProperties), (cast out : Array<Texture>));
+      SceneMaterialTextureRegistry.listStandardPbrPropertiesTextures__sceneMaterialTextureRegistry((cast _Runtime.field(extended, 'standard')), (cast out));
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(extended, 'extensions'), 'length') : Float)) : Bool)) {
           var extension:PbrExtension = flighthq._internal._StaticIndex.readArray(_Runtime.field(extended, 'extensions'), i);
           var lister:Null<Scene3DPbrExtensionTextureLister> = ((cast registry.extensionListers : flighthq._internal._Map<String, Scene3DPbrExtensionTextureLister>).get((cast extension : PbrExtension).kind));
-          if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { lister(extension, (cast out : Array<Texture>)); }
+          if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { lister((cast extension), (cast out)); }
           i++;
         }
       }
-    } : Scene3DMaterialTextureLister));
+    }));
   }
 
   @:noCompletion
   public static function registerScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry, kind:Kind, lister:Scene3DMaterialTextureLister):Void {
-    ((cast registry.listers : flighthq._internal._Map<String, Scene3DMaterialTextureLister>).set(kind, lister));
+    ((cast registry.listers : flighthq._internal._Map<String, Scene3DMaterialTextureLister>).set(kind, (cast lister)));
   }
 
   @:noCompletion
   public static function registerScene3DPbrExtensionTextures(registry:Scene3DMaterialTextureRegistry, kind:Kind, lister:Scene3DPbrExtensionTextureLister):Void {
-    ((cast registry.extensionListers : flighthq._internal._Map<String, Scene3DPbrExtensionTextureLister>).set(kind, lister));
+    ((cast registry.extensionListers : flighthq._internal._Map<String, Scene3DPbrExtensionTextureLister>).set(kind, (cast lister)));
   }
 
   @:noCompletion
   public static function registerStandardPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DMaterialTextures((cast registry : Scene3DMaterialTextureRegistry), (cast StandardPbrMaterialKind : String), (cast SceneMaterialTextureRegistry.listStandardPbrMaterialTextures__sceneMaterialTextureRegistry : Scene3DMaterialTextureLister));
+    registerScene3DMaterialTextures((cast registry), (cast StandardPbrMaterialKind : String), (cast SceneMaterialTextureRegistry.listStandardPbrMaterialTextures__sceneMaterialTextureRegistry));
   }
 
   @:noCompletion
   public static function registerUnlitScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DMaterialTextures((cast registry : Scene3DMaterialTextureRegistry), (cast UnlitMaterialKind : String), (cast SceneMaterialTextureRegistry.listUnlitMaterialTextures__sceneMaterialTextureRegistry : Scene3DMaterialTextureLister));
+    registerScene3DMaterialTextures((cast registry), (cast UnlitMaterialKind : String), (cast SceneMaterialTextureRegistry.listUnlitMaterialTextures__sceneMaterialTextureRegistry));
   }
 
   public static function listStandardPbrMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {
-    SceneMaterialTextureRegistry.listStandardPbrPropertiesTextures__sceneMaterialTextureRegistry((cast (cast material : StandardPbrMaterial) : StandardPbrMaterialProperties), (cast out : Array<Texture>));
+    SceneMaterialTextureRegistry.listStandardPbrPropertiesTextures__sceneMaterialTextureRegistry((cast (cast material : StandardPbrMaterial)), (cast out));
   }
 
   public static function listStandardPbrPropertiesTextures__sceneMaterialTextureRegistry(pbr:StandardPbrMaterialProperties, out:Array<Texture>):Void {

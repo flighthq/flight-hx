@@ -46,7 +46,7 @@ class Net {
     return cast null;
   }
 
-  public static final _netTimeoutReason__net:{ var flightNetTimeout:Bool; } = { flightNetTimeout: true };
+  public static final _netTimeoutReason__net:{ var flightNetTimeout:Bool; } = (cast { flightNetTimeout: true });
 
   public static function _netTransportFailure__net(url:String, signal:flighthq._internal.dom.AbortSignal, error:flighthq._internal._Any):NetResponse {
     var statusText:String = cast _Runtime.UNDEFINED;
@@ -67,9 +67,9 @@ class Net {
         if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
             var buffer:haxe.io.Bytes = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap((cast Net._readNetResponseWithProgress__net((cast response : flighthq._internal.dom.Response), (cast progress : Signal<NetProgress->Void>)) : flighthq._internal._Promise<haxe.io.Bytes>), function(__awaitValue1:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast Net._readNetResponseWithProgress__net((cast response), (cast progress)) : flighthq._internal._Promise<haxe.io.Bytes>), function(__awaitValue1:Dynamic):Dynamic {
               buffer = __awaitValue1;
-              return flighthq._internal._Async.flowReturn(Net._decodeNetBuffer__net((cast buffer : haxe.io.Bytes), (cast responseType : NetResponseType)));
+              return flighthq._internal._Async.flowReturn(Net._decodeNetBuffer__net((cast buffer), (cast responseType)));
             });
           });
         } else {
@@ -131,7 +131,7 @@ class Net {
 
   public static function _readNetResponseHeaders__net(headers:flighthq._internal.dom.Headers):flighthq._internal._Record<String, String> {
     var out:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
-    out = {  };
+    out = (cast {  });
     headers.forEach(function(value:String, key:String, __unused1:flighthq._internal.dom.Headers):Void {
       _Runtime.setIndex(out, key, value);
     });
@@ -149,7 +149,7 @@ class Net {
         var loaded:Float = cast _Runtime.UNDEFINED;
         var out:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
         var offset:Float = cast _Runtime.UNDEFINED;
-        total = (cast Net._netContentLength__net((cast response.headers : flighthq._internal.dom.Headers)) : Float);
+        total = (cast Net._netContentLength__net((cast response.headers)) : Float);
         stream = response.body;
         var __flowBranch11:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(stream, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast stream : flighthq._internal.dom.ReadableStream<Dynamic>).getReader), 'function') : Bool)) : Bool)) {
@@ -224,7 +224,7 @@ class Net {
 
   public static function _toNetFetchInit__net(request:NetRequest, signal:flighthq._internal.dom.AbortSignal):flighthq._internal.dom.RequestInit {
     var init:flighthq._internal.dom.RequestInit = cast _Runtime.UNDEFINED;
-    init = { method: _Runtime.field(request, 'method'), signal: signal };
+    init = (cast { method: _Runtime.field(request, 'method'), signal: signal });
     if ((cast !_Runtime.strictEquals(_Runtime.field(request, 'headers'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (init.headers = _Runtime.mergeObjects([_Runtime.field(request, 'headers')])); }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(request, 'body'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(request, 'body'), null) : Bool)) : Bool)) { (init.body = (cast _Runtime.field(request, 'body') : flighthq._internal.dom.BodyInit)); }
     if ((cast !_Runtime.strictEquals(_Runtime.field(request, 'credentials'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (init.credentials = _Runtime.field(request, 'credentials')); }
@@ -238,14 +238,14 @@ class Net {
     var onAbort:Null<Void->Void> = cast _Runtime.UNDEFINED;
     timer = null;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(timeoutMs), 'number') : Bool) && (cast ((cast timeoutMs : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      (timer = cast (_Runtime.setTimeout(function():Void return controller.abort(Net._netTimeoutReason__net), timeoutMs) : Dynamic));
+      (timer = cast (_Runtime.setTimeout(function():Void { controller.abort(Net._netTimeoutReason__net); }, timeoutMs) : Dynamic));
     }
     onAbort = null;
     if ((cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       if ((cast signal.aborted : Bool)) {
         controller.abort(signal.reason);
       } else {
-        (onAbort = cast (function():Void return controller.abort(signal.reason) : Dynamic));
+        (onAbort = cast (function():Void { controller.abort(signal.reason); } : Dynamic));
         signal.addEventListener('abort', onAbort);
       }
     }
@@ -264,23 +264,23 @@ class Net {
           var controller:flighthq._internal.dom.AbortController = cast _Runtime.UNDEFINED;
           var teardownAbort:Void->Void = cast _Runtime.UNDEFINED;
           controller = _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []);
-          teardownAbort = (cast Net._wireNetAbort__net((cast controller : flighthq._internal.dom.AbortController), (cast _Runtime.field(request, 'timeoutMs') : Null<Float>), (cast _Runtime.optionalField(options, 'signal') : Null<flighthq._internal.dom.AbortSignal>)) : Void->Void);
+          teardownAbort = (cast Net._wireNetAbort__net((cast controller), (cast _Runtime.field(request, 'timeoutMs')), (cast ({ final __structural18 = options; __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { @:optional var signal:Null<flighthq._internal.dom.AbortSignal>; }).signal; }))) : Void->Void);
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.finalizeFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var response:flighthq._internal.dom.Response = cast _Runtime.UNDEFINED;
             var headers:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
             var body:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('fetch'), cast ([_Runtime.field(request, 'url'), (cast Net._toNetFetchInit__net((cast request : NetRequest), (cast (cast controller : flighthq._internal.dom.AbortController).signal : flighthq._internal.dom.AbortSignal)) : Null<flighthq._internal.dom.RequestInit>)] : Array<Dynamic>)), function(__awaitValue18:Dynamic):Dynamic {
-              response = __awaitValue18;
-              headers = (cast Net._readNetResponseHeaders__net((cast (cast response : flighthq._internal.dom.Response).headers : flighthq._internal.dom.Headers)) : flighthq._internal._Record<String, String>);
-              return flighthq._internal._Async.flatMap((cast Net._readNetResponseBody__net((cast response : flighthq._internal.dom.Response), (cast _Runtime.coalesce(_Runtime.field(request, 'responseType'), function():Dynamic return cast 'text') : NetResponseType), (cast _Runtime.optionalField(options, 'progress') : Null<Signal<NetProgress->Void>>)) : flighthq._internal._Promise<flighthq._internal._Any>), function(__awaitValue19:Dynamic):Dynamic {
-                body = __awaitValue19;
+            return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('fetch'), cast ([_Runtime.field(request, 'url'), (cast Net._toNetFetchInit__net((cast request), (cast (cast controller : flighthq._internal.dom.AbortController).signal)) : flighthq._internal.dom.RequestInit)] : Array<Dynamic>)), function(__awaitValue19:Dynamic):Dynamic {
+              response = __awaitValue19;
+              headers = (cast Net._readNetResponseHeaders__net((cast (cast response : flighthq._internal.dom.Response).headers)) : flighthq._internal._Record<String, String>);
+              return flighthq._internal._Async.flatMap((cast Net._readNetResponseBody__net((cast response), (cast _Runtime.coalesce(_Runtime.field(request, 'responseType'), function():Dynamic return cast 'text')), (cast ({ final __structural21 = options; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { @:optional var progress:Null<Signal<NetProgress->Void>>; }).progress; }))) : flighthq._internal._Promise<flighthq._internal._Any>), function(__awaitValue20:Dynamic):Dynamic {
+                body = __awaitValue20;
                 return flighthq._internal._Async.flowReturn({ status: (cast response : flighthq._internal.dom.Response).status, statusText: (cast response : flighthq._internal.dom.Response).statusText, ok: (cast response : flighthq._internal.dom.Response).ok, headers: headers, body: body, url: ((cast !_Runtime.strictEquals((cast response : flighthq._internal.dom.Response).url, '') : Bool) ? (cast (cast response : flighthq._internal.dom.Response).url : Dynamic) : (cast _Runtime.field(request, 'url') : Dynamic)) });
               });
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var error:Dynamic = __caughtError;
             return flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flowReturn(Net._netTransportFailure__net((cast _Runtime.field(request, 'url') : String), (cast (cast controller : flighthq._internal.dom.AbortController).signal : flighthq._internal.dom.AbortSignal), (cast error : flighthq._internal._Any)));
+              return flighthq._internal._Async.flowReturn((cast Net._netTransportFailure__net((cast _Runtime.field(request, 'url') : String), (cast (cast controller : flighthq._internal.dom.AbortController).signal), (cast error : flighthq._internal._Any)) : NetResponse));
             });
           }), function():Dynamic {
             teardownAbort();
@@ -296,13 +296,13 @@ class Net {
 
   @:noCompletion
   public static function getNetBackend():NetBackend {
-    if ((cast _Runtime.strictEquals(Net._backend__net, null) : Bool)) { (Net._backend__net = cast ((cast createWebNetBackend() : Null<NetBackend>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Net._backend__net, null) : Bool)) { (Net._backend__net = cast ((cast createWebNetBackend() : NetBackend) : Dynamic)); }
     return cast Net._backend__net;
     return cast null;
   }
 
   public static function sendNetRequest(request:NetRequest, ?options:NetRequestOptions):flighthq._internal._Promise<NetResponse> {
-    return cast (cast (cast getNetBackend() : NetBackend) : NetBackend).sendNetRequest(request, options);
+    return cast (cast (cast getNetBackend() : NetBackend) : NetBackend).sendNetRequest((cast request), (cast options));
     return cast null;
   }
 

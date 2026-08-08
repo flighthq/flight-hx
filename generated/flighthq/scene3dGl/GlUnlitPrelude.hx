@@ -16,7 +16,9 @@ import flighthq.types.GlScene3DRuntime;
 import flighthq.types.GlUnlitProgram;
 import flighthq.types.GlUnlitProgram.GlUnlitDefineKey;
 import flighthq.types.LinearColor;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.Texture;
+import flighthq.types.Texture.TextureLike;
 
 class GlUnlitPrelude {
   @:noCompletion
@@ -28,7 +30,7 @@ class GlUnlitPrelude {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), alphaCutoff);
     if ((cast !_Runtime.strictEquals(colorMap, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
-      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state : GlRenderState), colorMap, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), _Runtime.field(_Runtime, 'UNDEFINED')) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locColorMap'), 0.0); }
+      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast colorMap), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locColorMap'), 0.0); }
     }
   }
 
@@ -41,7 +43,7 @@ class GlUnlitPrelude {
   @:noCompletion
   public static function compileGlUnlitProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlUnlitDefineKey):GlUnlitProgram {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
-    program = (cast compileGlProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast (cast getGlUnlitVertexSourceForKey((cast key : GlUnlitDefineKey)) : String) : String), (cast (cast getGlUnlitFragmentSourceForKey((cast key : GlUnlitDefineKey)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
+    program = (cast compileGlProgram((cast gl), (cast (cast getGlUnlitVertexSourceForKey((cast key)) : String) : String), (cast (cast getGlUnlitFragmentSourceForKey((cast key)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff'), locColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color'), locColorMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorMap'), locIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_intensity'), locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
@@ -49,20 +51,20 @@ class GlUnlitPrelude {
   @:noCompletion
   public static function ensureGlUnlitProgram(state:GlRenderState, key:GlUnlitDefineKey):GlUnlitProgram {
     var fullKey:GlUnlitDefineKey = cast _Runtime.UNDEFINED;
-    fullKey = _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime) : GlScene3DRuntime).activeSkinnedRun }]);
-    return cast (cast ensureGlScene3DProgram((cast state : GlRenderState), (cast 'unlit:' + Std.string((cast buildGlUnlitDefineKey((cast fullKey : GlUnlitDefineKey)) : String)) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlUnlitProgram return (cast compileGlUnlitProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast fullKey : GlUnlitDefineKey)) : GlUnlitProgram) : flighthq._internal.dom.WebGL2RenderingContext->GlUnlitProgram)) : GlUnlitProgram);
+    fullKey = (cast _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeSkinnedRun }]));
+    return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlUnlitProgram)->GlUnlitProgram)((cast state), (cast 'unlit:' + Std.string((cast buildGlUnlitDefineKey((cast fullKey)) : String)) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlUnlitProgram return (cast compileGlUnlitProgram((cast gl), (cast fullKey)) : GlUnlitProgram))) : GlUnlitProgram);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlUnlitFragmentSourceForKey(key:GlUnlitDefineKey):String {
-    return cast ((cast GlUnlitPrelude.buildDefineSource__glUnlitPrelude((cast key : GlUnlitDefineKey)) : String) + GlUnlitPrelude.UNLIT_FRAGMENT_BODY__glUnlitPrelude);
+    return cast ((cast GlUnlitPrelude.buildDefineSource__glUnlitPrelude((cast key)) : String) + GlUnlitPrelude.UNLIT_FRAGMENT_BODY__glUnlitPrelude);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlUnlitVertexSourceForKey(key:GlUnlitDefineKey):String {
-    return cast (((cast GlUnlitPrelude.buildDefineSource__glUnlitPrelude((cast key : GlUnlitDefineKey)) : String) + _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + GlUnlitPrelude.UNLIT_VERTEX_BODY__glUnlitPrelude);
+    return cast (((cast GlUnlitPrelude.buildDefineSource__glUnlitPrelude((cast key)) : String) + _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + GlUnlitPrelude.UNLIT_VERTEX_BODY__glUnlitPrelude);
     return cast null;
   }
 

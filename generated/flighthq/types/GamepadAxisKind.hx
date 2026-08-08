@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types._internal._GamepadAxisKindValues.GamepadAxisKindValue;
 
-typedef GamepadAxisKind = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef GamepadAxisKind = flighthq._internal._IndexedAccess<Dynamic, String>;

@@ -9,9 +9,9 @@ import flighthq.types._internal._StatechartValues.StatechartInputKindValue;
 import flighthq.types._internal._StatechartValues.StatechartNestedStateKind;
 import flighthq.types._internal._StatechartValues.StatechartTransitionStatusValue;
 
-typedef StatechartInputKind = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef StatechartInputKind = flighthq._internal._IndexedAccess<Dynamic, String>;
 
-typedef StatechartComparison = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef StatechartComparison = flighthq._internal._IndexedAccess<Dynamic, String>;
 
 typedef StatechartInput = { var initialValue:Float; var kind:StatechartInputKind; @:optional var name:String; };
 
@@ -29,6 +29,6 @@ typedef StatechartDurationGuard = StatechartInstance->StatechartTransitionExplan
 
 typedef StatechartInstance = { var chart:flighthq.types.Statechart; var durationGuard:Null<StatechartDurationGuard>; var inputValues:flighthq._internal._Float64Array; var regionBlend:flighthq._internal._Float32Array; var regionDuration:flighthq._internal._Float64Array; var regionElapsed:flighthq._internal._Float64Array; var regionStates:flighthq._internal._Int32Array; var regionTransitions:flighthq._internal._Int32Array; var signals:Null<StatechartSignals>; };
 
-typedef StatechartTransitionStatus = flighthq._internal._IndexedAccess<Dynamic, Dynamic>;
+typedef StatechartTransitionStatus = flighthq._internal._IndexedAccess<Dynamic, String>;
 
 typedef StatechartTransitionExplanation = { var blend:Float; var conditionIndex:Float; var regionIndex:Float; var sourceStateIndex:Float; var status:StatechartTransitionStatus; var targetStateIndex:Float; var transitionIndex:Float; };

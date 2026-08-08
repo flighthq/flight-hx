@@ -16,7 +16,7 @@ class ExplainPhysics2DJoints {
   public static function explainPhysics2DJoints(world:Physics2DWorld):Physics2DJointResolutionExplanation {
     var joints:Array<Physics2DJointResolution> = cast _Runtime.UNDEFINED;
     var readyCount:Float = cast _Runtime.UNDEFINED;
-    joints = cast ([] : Array<Dynamic>);
+    joints = (cast cast ([] : Array<Dynamic>));
     readyCount = 0.0;
     {
       var jointIndex:Float = 0.0;
@@ -24,9 +24,9 @@ class ExplainPhysics2DJoints {
         var joint:Physics2DJoint = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'joints'), jointIndex);
         var solver:Null<Physics2DJointSolver> = ((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map<String, Physics2DJointSolver>).get((cast joint : Physics2DJoint).kind));
         var solverRegistered:Bool = !_Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED'));
-        var bodyAUsed:Bool = !_Runtime.strictEquals(_Runtime.optionalField(solver, 'usesBodyA'), false);
-        var bodyAFound:Bool = !_Runtime.strictEquals((cast findPhysics2DBody((cast world : Physics2DWorld), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>), null);
-        var bodyBFound:Bool = !_Runtime.strictEquals((cast findPhysics2DBody((cast world : Physics2DWorld), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>), null);
+        var bodyAUsed:Bool = !_Runtime.strictEquals(({ final __structural0 = solver; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var usesBodyA:Null<Bool>; }).usesBodyA; }), false);
+        var bodyAFound:Bool = !_Runtime.strictEquals((cast findPhysics2DBody((cast world), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>), null);
+        var bodyBFound:Bool = !_Runtime.strictEquals((cast findPhysics2DBody((cast world), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>), null);
         var status:Physics2DJointResolutionStatus = (cast ExplainPhysics2DJoints.getJointResolutionStatus__explainPhysics2DJoints((cast solverRegistered : Bool), (cast bodyAUsed : Bool), (cast bodyAFound : Bool), (cast bodyBFound : Bool)) : Physics2DJointResolutionStatus);
         if ((cast _Runtime.strictEquals(status, 'ready') : Bool)) { readyCount++; }
         _Runtime.callProperty(joints, 'push', cast ([{ bodyA: (cast joint : Physics2DJoint).bodyA, bodyAFound: bodyAFound, bodyAUsed: bodyAUsed, bodyB: (cast joint : Physics2DJoint).bodyB, bodyBFound: bodyBFound, jointIndex: jointIndex, kind: (cast joint : Physics2DJoint).kind, solverRegistered: solverRegistered, status: status }] : Array<Dynamic>));

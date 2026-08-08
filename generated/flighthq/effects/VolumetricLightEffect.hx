@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.VolumetricLightEffect;
 
 class VolumetricLightEffect {
-  public static function createVolumetricLightEffect(?options:Dynamic):flighthq.types.VolumetricLightEffect {
+  public static function createVolumetricLightEffect(?options:flighthq._internal._Omit<flighthq.types.VolumetricLightEffect, String>):flighthq.types.VolumetricLightEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'VolumetricLightEffect' }, options]);
     return cast null;

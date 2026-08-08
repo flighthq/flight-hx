@@ -25,32 +25,32 @@ import flighthq.types.Vector3;
 
 class SceneNodeBounds {
   public static function getNode3DWorldBounds(out:AabbLike, node:Node3D):Void {
-    setAabb((cast out : AabbLike), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float));
-    SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds((cast out : AabbLike), (cast node : Node3D));
+    setAabb((cast out), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float));
+    SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds((cast out), (cast node));
   }
 
   public static function _accumulateWorldBounds__sceneNodeBounds(out:AabbLike, node:Node3D):Void {
     var children:Null<Array<Node<Node3DTraits>>> = cast _Runtime.UNDEFINED;
     if ((cast (cast isMesh((cast node : flighthq._internal._Any)) : Bool) : Bool)) {
-      var localBounds:Null<Aabb> = (cast ensureMeshGeometryBounds(node.geometry) : Null<Aabb>);
-      if ((cast ((cast !_Runtime.strictEquals(localBounds, null) : Bool) && (cast ((cast (cast localBounds : flighthq.types.Aabb).min.x : Float) <= (cast (cast localBounds : flighthq.types.Aabb).max.x : Float)) : Bool)) : Bool)) {
-        ensureNodeWorldMatrix4(node);
-        var worldMatrix:Matrix4Like = (cast getNodeWorldMatrix4(node) : Matrix4Like);
-        transformAabbByMatrix4((cast SceneNodeBounds._scratchWorldAabb__sceneNodeBounds : AabbLike), (cast localBounds : AabbLike), worldMatrix);
-        unionAabb((cast out : AabbLike), (cast out : AabbLike), (cast SceneNodeBounds._scratchWorldAabb__sceneNodeBounds : AabbLike));
+      var localBounds:Null<Aabb> = (cast ensureMeshGeometryBounds((cast (cast node : { var geometry:MeshGeometry; }).geometry)) : Null<Aabb>);
+      if ((cast ((cast !_Runtime.strictEquals(localBounds, null) : Bool) && (cast ((cast (cast (cast localBounds : { var min:Vector3; }).min : { var x:Float; }).x : Float) <= (cast (cast (cast localBounds : { var max:Vector3; }).max : { var x:Float; }).x : Float)) : Bool)) : Bool)) {
+        ensureNodeWorldMatrix4((cast node));
+        var worldMatrix:Matrix4Like = (cast getNodeWorldMatrix4((cast node)) : Matrix4Like);
+        transformAabbByMatrix4((cast SceneNodeBounds._scratchWorldAabb__sceneNodeBounds), (cast localBounds), (cast worldMatrix));
+        unionAabb((cast out), (cast out), (cast SceneNodeBounds._scratchWorldAabb__sceneNodeBounds));
       }
     }
-    children = _Runtime.field((cast getNodeRuntime(node) : NodeRuntime<Node3DTraits>), 'children');
+    children = _Runtime.field((cast getNodeRuntime((cast node)) : NodeRuntime<Node3DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds((cast out : AabbLike), (cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D) : Node3D));
+          SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds((cast out), (cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D)));
           i++;
         }
       }
     }
   }
 
-  public static final _scratchWorldAabb__sceneNodeBounds:Aabb = (cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Aabb);
+  public static final _scratchWorldAabb__sceneNodeBounds:Aabb = (cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Aabb);
 }

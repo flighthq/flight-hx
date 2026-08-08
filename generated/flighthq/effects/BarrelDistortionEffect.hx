@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.BarrelDistortionEffect;
 
 class BarrelDistortionEffect {
-  public static function createBarrelDistortionEffect(?options:Dynamic):flighthq.types.BarrelDistortionEffect {
+  public static function createBarrelDistortionEffect(?options:flighthq._internal._Omit<flighthq.types.BarrelDistortionEffect, String>):flighthq.types.BarrelDistortionEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BarrelDistortionEffect' }, options]);
     return cast null;

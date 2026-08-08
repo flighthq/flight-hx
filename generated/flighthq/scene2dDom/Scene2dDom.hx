@@ -24,6 +24,7 @@ import flighthq.scene2dDom.DomTextLabel as Facade_Scene2dDom_flighthq_scene2dDom
 import flighthq.scene2dDom.DomTextureResolver as Facade_Scene2dDom_flighthq_scene2dDom_DomTextureResolver;
 import flighthq.scene2dDom.EnableDomTextureResolverGuards as Facade_Scene2dDom_flighthq_scene2dDom_EnableDomTextureResolverGuards;
 import flighthq.scene2dDom.ExplainDomTextureResolution as Facade_Scene2dDom_flighthq_scene2dDom_ExplainDomTextureResolution;
+import flighthq.types.DomRenderOptions;
 import flighthq.types.DomRenderState;
 import flighthq.types.DomTextureResolver;
 import flighthq.types.Node2D;
@@ -35,7 +36,7 @@ import flighthq.types.TextureResolutionExplanation;
 import flighthq.types.TextureSourceKind;
 
 class Scene2dDom {
-  public static function createDomRenderState(element:flighthq._internal.dom.HTMLElement, ?options:Dynamic):DomRenderState {
+  public static function createDomRenderState(element:flighthq._internal.dom.HTMLElement, ?options:flighthq._internal._Partial<DomRenderOptions>):DomRenderState {
     return cast Facade_Scene2dDom_flighthq_scene2dDom_DomRenderState.createDomRenderState(element, options);
     return cast null;
   }

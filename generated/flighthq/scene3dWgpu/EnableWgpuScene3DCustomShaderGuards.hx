@@ -17,13 +17,13 @@ import flighthq.types.WgpuScene3DRuntime;
 class EnableWgpuScene3DCustomShaderGuards {
   @:noCompletion
   public static function areWgpuScene3DCustomShaderGuardsEnabled(state:WgpuRenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).customShaderGuard, null);
+    return cast !_Runtime.looseEquals((cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).customShaderGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableWgpuScene3DCustomShaderGuards(state:WgpuRenderState):Void {
-    ((cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).customShaderGuard = runWgpuCustomShaderGuards);
+    ((cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : { @:optional var customShaderGuard:Null<WgpuRenderState->String->String->CustomShaderMaterial->Void>; }).customShaderGuard = (cast runWgpuCustomShaderGuards));
   }
 
   @:noCompletion
@@ -32,7 +32,7 @@ class EnableWgpuScene3DCustomShaderGuards {
     var uniformNames:Array<String> = cast _Runtime.UNDEFINED;
     var textureCount:Float = cast _Runtime.UNDEFINED;
     var required:Array<Array<flighthq._internal._Union2<Float, String>>> = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.looseEquals((cast (cast getWgpuScene3DRuntime((cast state : WgpuRenderState)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).customShaderGuard, null) : Bool)) { return; }
+    if ((cast _Runtime.looseEquals((cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).customShaderGuard, null) : Bool)) { return; }
     uniforms = _Runtime.coalesce(_Runtime.field(material, 'uniforms'), function():Dynamic return cast {  });
     uniformNames = _Runtime.callProperty(flighthq._internal.DynamicObject.keys(uniforms), 'sort', cast ([] : Array<Dynamic>));
     for (name in _Runtime.iterable(uniformNames)) {
@@ -48,7 +48,7 @@ class EnableWgpuScene3DCustomShaderGuards {
     if ((cast ((cast textureCount : Float) > (cast WGPU_CUSTOM_SHADER_TEXTURE_CAPACITY : Float)) : Bool)) {
       EnableWgpuScene3DCustomShaderGuards.warn__enableWgpuScene3DCustomShaderGuards((cast 'texture-overflow:' + Std.string(shaderKey) + '' : String), (cast 'shader "' + Std.string(shaderKey) + '" has ' + Std.string(textureCount) + ' textures, exceeding the fixed ' + Std.string(WGPU_CUSTOM_SHADER_TEXTURE_CAPACITY) + '-texture binding capacity; extra bag-order textures are not bound.' : String));
     }
-    required = cast ([cast ([0.0, 0.0, 'Frame'] : Array<Dynamic>), cast ([1.0, 0.0, 'Draw'] : Array<Dynamic>), cast ([2.0, 0.0, 'UserBlock'] : Array<Dynamic>)] : Array<Dynamic>);
+    required = (cast cast ([cast ([0.0, 0.0, 'Frame'] : Array<Dynamic>), cast ([1.0, 0.0, 'Draw'] : Array<Dynamic>), cast ([2.0, 0.0, 'UserBlock'] : Array<Dynamic>)] : Array<Dynamic>));
     {
       var slot:Float = 0.0;
       while ((cast ((cast slot : Float) < (cast HxMath.min(textureCount, WGPU_CUSTOM_SHADER_TEXTURE_CAPACITY) : Float)) : Bool)) {
@@ -76,6 +76,6 @@ class EnableWgpuScene3DCustomShaderGuards {
   }
 
   public static function warn__enableWgpuScene3DCustomShaderGuards(key:String, message:String):Void {
-    (cast logOnce((cast 'scene-wgpu:custom-shader:' + Std.string(key) + '' : String), (cast LogLevel.Warn : LogLevel), { message: message }, (cast 'scene-wgpu' : Null<String>)) : Bool);
+    (cast logOnce((cast 'scene-wgpu:custom-shader:' + Std.string(key) + '' : String), (cast LogLevel.Warn), (cast { message: message }), (cast 'scene-wgpu')) : Bool);
   }
 }

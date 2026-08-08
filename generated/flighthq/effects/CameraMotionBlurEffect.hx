@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.CameraMotionBlurEffect;
 
 class CameraMotionBlurEffect {
-  public static function createCameraMotionBlurEffect(?options:Dynamic):flighthq.types.CameraMotionBlurEffect {
+  public static function createCameraMotionBlurEffect(?options:flighthq._internal._Omit<flighthq.types.CameraMotionBlurEffect, String>):flighthq.types.CameraMotionBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'CameraMotionBlurEffect' }, options]);
     return cast null;

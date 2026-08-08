@@ -7,7 +7,7 @@ import flighthq.types.ColorGradeAdjustment;
 import flighthq.types.ColorTransformFunction;
 
 class ColorGradeAdjustment {
-  public static function createColorGradeAdjustment(?options:Dynamic):flighthq.types.ColorGradeAdjustment {
+  public static function createColorGradeAdjustment(?options:flighthq._internal._Omit<flighthq.types.ColorGradeAdjustment, String>):flighthq.types.ColorGradeAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var exposure:Float = cast _Runtime.UNDEFINED;
     var brightness:Float = cast _Runtime.UNDEFINED;
@@ -29,7 +29,7 @@ class ColorGradeAdjustment {
     lift = (cast ColorGradeAdjustment.unpackRgb__colorGradeAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'lift'), function():Dynamic return cast 255.0) : Float)) : Array<Float>);
     gammaRaw = (cast ColorGradeAdjustment.unpackRgb__colorGradeAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'gamma'), function():Dynamic return cast 2155905279.0) : Float)) : Array<Float>);
     gain = (cast ColorGradeAdjustment.unpackRgb__colorGradeAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'gain'), function():Dynamic return cast 4294967295.0) : Float)) : Array<Float>);
-    gammaExp = cast ([_Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 0.0), 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 1.0), 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 2.0), 2.0), 0.001))] : Array<Dynamic>);
+    gammaExp = (cast cast ([_Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 0.0), 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 1.0), 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 2.0), 2.0), 0.001))] : Array<Dynamic>));
     transform = function(out:Array<Float>, r:Float, g:Float, b:Float):Void {
       var cr:Float = cast _Runtime.UNDEFINED;
       var cg:Float = cast _Runtime.UNDEFINED;

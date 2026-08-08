@@ -12,16 +12,16 @@ import flighthq.types.Node.NodeTraits;
 import flighthq.types.NodeDescendantVisitor;
 
 class Traversal {
-  public static function findNode<Traits>(source:Node<Traits>, predicate:Node<Traits>->Bool):Null<NodeOf<Traits>> {
+  public static function findNode<Traits:flighthq._internal._Object>(source:Node<Traits>, predicate:Node<Traits>->Bool):Null<NodeOf<Traits>> {
     var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
-    children = _Runtime.field((cast getNodeRuntime(source) : NodeRuntime<Traits>), 'children');
+    children = _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'children');
     if ((cast _Runtime.strictEquals(children, null) : Bool)) { return cast null; }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
         var child:Node<Traits> = (cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>);
-        if ((cast (cast predicate(child) : Bool) : Bool)) { return cast (cast child : NodeOf<Traits>); }
-        var found:Null<NodeOf<Traits>> = (cast findNode(child, predicate) : Null<NodeOf<Traits>>);
+        if ((cast (cast predicate((cast child)) : Bool) : Bool)) { return cast (cast child : NodeOf<Traits>); }
+        var found:Null<NodeOf<Traits>> = (cast findNode((cast child), (cast predicate)) : Null<NodeOf<Traits>>);
         if ((cast !_Runtime.strictEquals(found, null) : Bool)) { return cast found; }
         i++;
       }
@@ -30,62 +30,62 @@ class Traversal {
     return cast null;
   }
 
-  public static function findNodeByName<Traits>(source:Node<Traits>, name:String):Null<NodeOf<Traits>> {
-    return cast (cast findNode(source, function(node:Node<Traits>):Bool return _Runtime.strictEquals((cast node : Node<Traits>).name, name)) : Null<NodeOf<Traits>>);
+  public static function findNodeByName<Traits:flighthq._internal._Object>(source:Node<Traits>, name:String):Null<NodeOf<Traits>> {
+    return cast (cast findNode((cast source), (cast function(node:Node<Traits>):Bool return _Runtime.strictEquals((cast node : Node<Traits>).name, name))) : Null<NodeOf<Traits>>);
     return cast null;
   }
 
-  public static function forEachNodeAncestor<Traits>(source:Node<Traits>, callback:Node<Traits>->flighthq._internal._Union2<Bool, Void>):Void {
+  public static function forEachNodeAncestor<Traits:flighthq._internal._Object>(source:Node<Traits>, callback:Node<Traits>->flighthq._internal._Union2<Bool, Void>):Void {
     var current:Null<NodeOf<Traits>> = cast _Runtime.UNDEFINED;
-    current = (cast getNodeParent((cast source : Node<Traits>)) : Null<NodeOf<Traits>>);
+    current = (cast getNodeParent((cast (cast source : Node<Traits>))) : Null<NodeOf<Traits>>);
     while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
-      if ((cast _Runtime.strictEquals((cast callback(current) : flighthq._internal._Union2<Bool, Void>), false) : Bool)) { return; }
-      (current = cast ((cast getNodeParent(current) : Null<NodeOf<Traits>>) : Dynamic));
+      if ((cast _Runtime.strictEquals((cast callback((cast current)) : flighthq._internal._Union2<Bool, Void>), false) : Bool)) { return; }
+      (current = cast ((cast getNodeParent((cast current)) : Null<NodeOf<Traits>>) : Dynamic));
     }
   }
 
-  public static function forEachNodeDescendant<Traits>(source:Node<Traits>, callback:Node<Traits>->Void):Void {
+  public static function forEachNodeDescendant<Traits:flighthq._internal._Object>(source:Node<Traits>, callback:Node<Traits>->Void):Void {
     var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
-    children = _Runtime.field((cast getNodeRuntime(source) : NodeRuntime<Traits>), 'children');
+    children = _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'children');
     if ((cast _Runtime.strictEquals(children, null) : Bool)) { return; }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        callback((cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>));
-        forEachNodeDescendant((cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>), callback);
+        callback((cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>)));
+        forEachNodeDescendant((cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>)), (cast callback));
         i++;
       }
     }
   }
 
-  public static function getNodeChildren<Traits>(source:Node<Traits>):Array<NodeOf<Traits>> {
+  public static function getNodeChildren<Traits:flighthq._internal._Object>(source:Node<Traits>):Array<NodeOf<Traits>> {
     var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
-    children = _Runtime.field((cast getNodeRuntime(source) : NodeRuntime<Traits>), 'children');
+    children = _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'children');
     if ((cast _Runtime.strictEquals(children, null) : Bool)) { return cast (cast Traversal._emptyChildren__traversal : Array<NodeOf<Traits>>); }
     return cast (cast _Runtime.slice(children, 0, null) : Array<NodeOf<Traits>>);
     return cast null;
   }
 
-  public static function getNodeDepth<Traits>(source:Node<Traits>):Float {
+  public static function getNodeDepth<Traits:flighthq._internal._Object>(source:Node<Traits>):Float {
     var depth:Float = cast _Runtime.UNDEFINED;
     var current:Null<NodeOf<Traits>> = cast _Runtime.UNDEFINED;
     depth = 0.0;
-    current = (cast getNodeParent((cast source : Node<Traits>)) : Null<NodeOf<Traits>>);
+    current = (cast getNodeParent((cast (cast source : Node<Traits>))) : Null<NodeOf<Traits>>);
     while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
       depth++;
-      (current = cast ((cast getNodeParent(current) : Null<NodeOf<Traits>>) : Dynamic));
+      (current = cast ((cast getNodeParent((cast current)) : Null<NodeOf<Traits>>) : Dynamic));
     }
     return cast depth;
     return cast null;
   }
 
-  public static function getNodeNextSibling<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
+  public static function getNodeNextSibling<Traits:flighthq._internal._Object>(source:Node<Traits>):Null<NodeOf<Traits>> {
     var parent:Null<NodeOf<Traits>> = cast _Runtime.UNDEFINED;
     var siblings:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
     var idx:Float = cast _Runtime.UNDEFINED;
-    parent = (cast getNodeParent((cast source : Node<Traits>)) : Null<NodeOf<Traits>>);
+    parent = (cast getNodeParent((cast (cast source : Node<Traits>))) : Null<NodeOf<Traits>>);
     if ((cast _Runtime.strictEquals(parent, null) : Bool)) { return cast null; }
-    siblings = _Runtime.field((cast getNodeRuntime(parent) : NodeRuntime<Traits>), 'children');
+    siblings = _Runtime.field((cast getNodeRuntime((cast parent)) : NodeRuntime<Traits>), 'children');
     if ((cast _Runtime.strictEquals(siblings, null) : Bool)) { return cast null; }
     idx = _Runtime.callProperty(siblings, 'indexOf', cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals(idx, -1.0) : Bool) || (cast _Runtime.strictEquals(idx, _Runtime.subtractNumbers(_Runtime.field(siblings, 'length'), 1.0)) : Bool)) : Bool)) { return cast null; }
@@ -93,13 +93,13 @@ class Traversal {
     return cast null;
   }
 
-  public static function getNodePreviousSibling<Traits>(source:Node<Traits>):Null<NodeOf<Traits>> {
+  public static function getNodePreviousSibling<Traits:flighthq._internal._Object>(source:Node<Traits>):Null<NodeOf<Traits>> {
     var parent:Null<NodeOf<Traits>> = cast _Runtime.UNDEFINED;
     var siblings:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
     var idx:Float = cast _Runtime.UNDEFINED;
-    parent = (cast getNodeParent((cast source : Node<Traits>)) : Null<NodeOf<Traits>>);
+    parent = (cast getNodeParent((cast (cast source : Node<Traits>))) : Null<NodeOf<Traits>>);
     if ((cast _Runtime.strictEquals(parent, null) : Bool)) { return cast null; }
-    siblings = _Runtime.field((cast getNodeRuntime(parent) : NodeRuntime<Traits>), 'children');
+    siblings = _Runtime.field((cast getNodeRuntime((cast parent)) : NodeRuntime<Traits>), 'children');
     if ((cast _Runtime.strictEquals(siblings, null) : Bool)) { return cast null; }
     idx = _Runtime.callProperty(siblings, 'indexOf', cast ([(cast source : Node<Traits>)] : Array<Dynamic>));
     if ((cast ((cast idx : Float) <= (cast 0.0 : Float)) : Bool)) { return cast null; }
@@ -107,16 +107,16 @@ class Traversal {
     return cast null;
   }
 
-  public static function walkNodeDescendants<Traits>(source:Node<Traits>, visit:NodeDescendantVisitor<Traits>):Bool {
+  public static function walkNodeDescendants<Traits:flighthq._internal._Object>(source:Node<Traits>, visit:NodeDescendantVisitor<Traits>):Bool {
     var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
-    children = _Runtime.field((cast getNodeRuntime(source) : NodeRuntime<Traits>), 'children');
+    children = _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'children');
     if ((cast _Runtime.strictEquals(children, null) : Bool)) { return cast true; }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
         var child:Node<Traits> = (cast flighthq._internal._StaticIndex.readArray(children, i) : Node<Traits>);
-        if ((cast !(cast (cast visit(child) : Bool) : Bool) : Bool)) { return cast false; }
-        if ((cast !(cast (cast walkNodeDescendants(child, visit) : Bool) : Bool) : Bool)) { return cast false; }
+        if ((cast !(cast (cast visit((cast child)) : Bool) : Bool) : Bool)) { return cast false; }
+        if ((cast !(cast (cast walkNodeDescendants((cast child), (cast visit)) : Bool) : Bool) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -124,5 +124,5 @@ class Traversal {
     return cast null;
   }
 
-  public static final _emptyChildren__traversal:Array<flighthq._internal._Any> = cast ([] : Array<Dynamic>);
+  public static final _emptyChildren__traversal:Array<flighthq._internal._Any> = (cast cast ([] : Array<Dynamic>));
 }

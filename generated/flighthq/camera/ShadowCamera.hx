@@ -7,8 +7,10 @@ import flighthq.camera.Camera.setCamera3DViewMatrix4FromLookAt;
 import flighthq.camera.Projection.createOrthographicProjection;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.Camera3D;
+import flighthq.types.Camera3D.OrthographicProjection;
 import flighthq.types.Camera3D.Projection;
 import flighthq.types.Matrix4;
+import flighthq.types.OrthographicProjectionOptions;
 import flighthq.types.Vector3.Vector3Like;
 
 class ShadowCamera {
@@ -44,10 +46,10 @@ class ShadowCamera {
     (ShadowCamera._target__shadowCamera.y = cast (cy : Dynamic));
     (ShadowCamera._target__shadowCamera.z = cast (cz : Dynamic));
     up = ((cast ((cast HxMath.abs(dy) : Float) > (cast 0.99 : Float)) : Bool) ? (cast ShadowCamera._upZ__shadowCamera : Dynamic) : (cast ShadowCamera._upY__shadowCamera : Dynamic));
-    setCamera3DViewMatrix4FromLookAt((cast camera : Camera3D), (cast ShadowCamera._eye__shadowCamera : Vector3Like), (cast ShadowCamera._target__shadowCamera : Vector3Like), (cast up : Vector3Like));
+    setCamera3DViewMatrix4FromLookAt((cast camera), (cast ShadowCamera._eye__shadowCamera), (cast ShadowCamera._target__shadowCamera), (cast up));
     (camera.near = cast (radius : Dynamic));
     (camera.far = cast ((radius * 3.0) : Dynamic));
-    (camera.projection = cast ((cast createOrthographicProjection({ halfHeight: radius, halfWidth: radius }) : Projection) : Dynamic));
+    (camera.projection = cast ((cast createOrthographicProjection((cast { halfHeight: radius, halfWidth: radius })) : OrthographicProjection) : Dynamic));
   }
 
   public static function configureDirectionalShadowCamera3DTightFit(camera:Camera3D, lightDirection:Vector3Like, worldBounds:AabbLike, padding:Float = 1.0):Void {
@@ -105,8 +107,8 @@ class ShadowCamera {
     (ShadowCamera._target__shadowCamera.x = cast (cx : Dynamic));
     (ShadowCamera._target__shadowCamera.y = cast (cy : Dynamic));
     (ShadowCamera._target__shadowCamera.z = cast (cz : Dynamic));
-    setCamera3DViewMatrix4FromLookAt((cast camera : Camera3D), (cast ShadowCamera._eye__shadowCamera : Vector3Like), (cast ShadowCamera._target__shadowCamera : Vector3Like), (cast ((cast ((cast HxMath.abs(dy) : Float) > (cast 0.99 : Float)) : Bool) ? (cast ShadowCamera._upZ__shadowCamera : Dynamic) : (cast ShadowCamera._upY__shadowCamera : Dynamic)) : Vector3Like));
-    view = camera.view.m;
+    setCamera3DViewMatrix4FromLookAt((cast camera), (cast ShadowCamera._eye__shadowCamera), (cast ShadowCamera._target__shadowCamera), (cast ((cast ((cast HxMath.abs(dy) : Float) > (cast 0.99 : Float)) : Bool) ? (cast ShadowCamera._upZ__shadowCamera : Dynamic) : (cast ShadowCamera._upY__shadowCamera : Dynamic))));
+    view = (cast camera.view : { var m:flighthq._internal._Float32Array; }).m;
     halfWidth = 0.0;
     halfHeight = 0.0;
     minViewZ = HxMath.POSITIVE_INFINITY;
@@ -131,14 +133,14 @@ class ShadowCamera {
     halfDepth = HxMath.max((((maxViewZ - minViewZ) * 0.5) * extentScale), 0.0001);
     (camera.near = cast (HxMath.max((-depthCenter - halfDepth), 0.0001) : Dynamic));
     (camera.far = cast (HxMath.max((-depthCenter + halfDepth), (camera.near + 0.0001)) : Dynamic));
-    (camera.projection = cast ((cast createOrthographicProjection({ halfHeight: HxMath.max((halfHeight * extentScale), 0.0001), halfWidth: HxMath.max((halfWidth * extentScale), 0.0001) }) : Projection) : Dynamic));
+    (camera.projection = cast ((cast createOrthographicProjection((cast { halfHeight: HxMath.max((halfHeight * extentScale), 0.0001), halfWidth: HxMath.max((halfWidth * extentScale), 0.0001) })) : OrthographicProjection) : Dynamic));
   }
 
-  public static final _eye__shadowCamera:Vector3Like = { x: 0.0, y: 0.0, z: 0.0 };
+  public static final _eye__shadowCamera:Vector3Like = (cast { x: 0.0, y: 0.0, z: 0.0 });
 
-  public static final _target__shadowCamera:Vector3Like = { x: 0.0, y: 0.0, z: 0.0 };
+  public static final _target__shadowCamera:Vector3Like = (cast { x: 0.0, y: 0.0, z: 0.0 });
 
-  public static final _upY__shadowCamera:Vector3Like = { x: 0.0, y: 1.0, z: 0.0 };
+  public static final _upY__shadowCamera:Vector3Like = (cast { x: 0.0, y: 1.0, z: 0.0 });
 
-  public static final _upZ__shadowCamera:Vector3Like = { x: 0.0, y: 0.0, z: 1.0 };
+  public static final _upZ__shadowCamera:Vector3Like = (cast { x: 0.0, y: 0.0, z: 1.0 });
 }

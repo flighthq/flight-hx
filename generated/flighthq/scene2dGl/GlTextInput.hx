@@ -11,6 +11,7 @@ import flighthq.textinput.TextInputEditing.getTextInputSelectionBeginIndex;
 import flighthq.textinput.TextInputEditing.getTextInputSelectionEndIndex;
 import flighthq.textinput.TextInputEditing.getTextInputSelectionRectangles;
 import flighthq.textlayout.RichTextMetrics.getRichTextScrollYOffset;
+import flighthq.types.GlRichTextOverlay;
 import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextData;
 import flighthq.types.TextInputState;
@@ -24,25 +25,25 @@ class GlTextInput {
     var firstVisibleLine:Float = cast _Runtime.UNDEFINED;
     var scrollYOffset:Float = cast _Runtime.UNDEFINED;
     var scrollXOffset:Float = cast _Runtime.UNDEFINED;
-    input = (cast getTextInputState((cast source : RichText)) : Null<TextInputState>);
+    input = (cast getTextInputState((cast source)) : Null<TextInputState>);
     if ((cast ((cast _Runtime.strictEquals(input, null) : Bool) || (cast _Runtime.andValue(!(cast (cast input : TextInputState).focused : Bool), function():Dynamic return cast !(cast (cast input : TextInputState).alwaysShowSelection : Bool)) : Bool)) : Bool)) { return; }
     firstVisibleLine = ((cast (cast source : RichText).data : RichTextData).scrollV - 1.0);
-    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast (cast result : TextLayoutResult).lineHeights : Array<Float>), (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
+    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast (cast result : TextLayoutResult).lineHeights), (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
     scrollXOffset = (cast (cast source : RichText).data : RichTextData).scrollH;
     flighthq._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'rect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'clip', cast ([] : Array<Dynamic>));
-    getTextInputSelectionRectangles((cast GlTextInput.selectionRectangles__glTextInput : Array<TextSelectionRectangle>), (cast source : RichText), (cast result : TextLayoutResult));
+    getTextInputSelectionRectangles((cast GlTextInput.selectionRectangles__glTextInput), (cast source), (cast result));
     if ((cast ((cast _Runtime.field(GlTextInput.selectionRectangles__glTextInput, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbHexString((cast (cast input : TextInputState).selectionColor : Float)) : flighthq._internal._Union2<flighthq._internal._Union2<String, flighthq._internal.dom.CanvasGradient>, flighthq._internal.dom.CanvasPattern>));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbHexString((cast (cast input : TextInputState).selectionColor : Float)) : String));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast input : TextInputState).selectionAlpha);
       for (rect in _Runtime.iterable(GlTextInput.selectionRectangles__glTextInput)) {
         flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([((cast rect : TextSelectionRectangle).x - scrollXOffset), ((cast rect : TextSelectionRectangle).y - scrollYOffset), (cast rect : TextSelectionRectangle).width, (cast rect : TextSelectionRectangle).height] : Array<Dynamic>));
       }
     }
-    if ((cast ((cast (cast input : TextInputState).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex((cast source : RichText)) : Float), (cast getTextInputSelectionEndIndex((cast source : RichText)) : Float)) : Bool)) : Bool)) {
-      getTextInputCaretRectangle((cast GlTextInput.caretRectangle__glTextInput : TextSelectionRectangle), (cast source : RichText), (cast result : TextLayoutResult));
+    if ((cast ((cast (cast input : TextInputState).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex((cast source)) : Float), (cast getTextInputSelectionEndIndex((cast source)) : Float)) : Bool)) : Bool)) {
+      getTextInputCaretRectangle((cast GlTextInput.caretRectangle__glTextInput), (cast source), (cast result));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', GlTextInput.CARET_COLOR__glTextInput);
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', 1.0);
       flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([((cast GlTextInput.caretRectangle__glTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - scrollXOffset), ((cast GlTextInput.caretRectangle__glTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y - scrollYOffset), GlTextInput.CARET_WIDTH__glTextInput, (cast GlTextInput.caretRectangle__glTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).height] : Array<Dynamic>));
@@ -51,14 +52,14 @@ class GlTextInput {
   }
 
   public static function enableGlTextInput():Void {
-    registerGlTextInputOverlay(drawGlTextInputOverlay);
+    registerGlTextInputOverlay((cast drawGlTextInputOverlay));
   }
 
   public static final CARET_COLOR__glTextInput:String = '#000000';
 
   public static final CARET_WIDTH__glTextInput:Float = 1.0;
 
-  public static final caretRectangle__glTextInput:{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; } = { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 };
+  public static final caretRectangle__glTextInput:{ var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; } = (cast { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 });
 
-  public static final selectionRectangles__glTextInput:Array<TextSelectionRectangle> = cast ([] : Array<Dynamic>);
+  public static final selectionRectangles__glTextInput:Array<TextSelectionRectangle> = (cast cast ([] : Array<Dynamic>));
 }

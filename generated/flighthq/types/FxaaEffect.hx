@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef FxaaEffect = { var kind:Kind; @:optional var edgeThreshold:Float; @:optional var subpixel:Float; };
+typedef FxaaEffect = { var kind:String; @:optional var edgeThreshold:Float; @:optional var subpixel:Float; };

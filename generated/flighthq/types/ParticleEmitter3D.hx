@@ -4,7 +4,6 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.Kind;
-import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D.Node3DRuntime;
 import flighthq.types.Node3D.Node3DTraits;
@@ -12,6 +11,6 @@ import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
 
-typedef ParticleEmitter3D = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var blendMode:ParticleBlendMode; };
+typedef ParticleEmitter3D = { var data:ParticleEmitterData; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var blendMode:ParticleBlendMode; };
 
 typedef ParticleEmitter3DRuntime = Node3DRuntime;

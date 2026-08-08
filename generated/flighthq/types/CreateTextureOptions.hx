@@ -5,6 +5,6 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Texture.TextureLike;
 
-typedef CreateTextureVariantOptions__CreateTextureOptions<Type> = Dynamic;
+typedef CreateTextureVariantOptions__CreateTextureOptions<Type> = flighthq._internal._Conditional<Type, TextureLike, flighthq._internal._Intersection2<flighthq._internal._Omit<flighthq._internal._Partial<Type>, String>, flighthq._internal._Conditional<flighthq._internal._IndexedAccess<Type, String>, String, { @:optional var dimension:String; }, { var dimension:flighthq._internal._IndexedAccess<Type, String>; }>>, flighthq._internal._Any>;
 
-typedef CreateTextureOptions = { @:optional var resource:Null<ImageResourceReference>; };
+typedef CreateTextureOptions = flighthq._internal._Intersection2<CreateTextureVariantOptions__CreateTextureOptions<TextureLike>, { @:optional var resource:Null<ImageResourceReference>; }>;

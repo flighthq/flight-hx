@@ -12,12 +12,13 @@ import flighthq.types.DomRenderState;
 import flighthq.types.DomRenderState.DomRenderStateRuntime;
 import flighthq.types.Image;
 import flighthq.types.Texture;
+import flighthq.types.Texture.TextureLike;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 
 class DomBitmapTextureResolver {
   public static function registerDomBitmapTextureResolver(state:DomRenderState):Void {
-    registerDomTextureResolver((cast state : DomRenderState), (cast BitmapTextureSourceKind : String), DomBitmapTextureResolver.resolveDomBitmapTexture__domBitmapTextureResolver);
+    registerDomTextureResolver((cast state), (cast BitmapTextureSourceKind : String), (cast DomBitmapTextureResolver.resolveDomBitmapTexture__domBitmapTextureResolver));
   }
 
   public static function resolveDomBitmapTexture__domBitmapTextureResolver(state:DomRenderState, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
@@ -25,15 +26,15 @@ class DomBitmapTextureResolver {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     var cache:flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }> = cast _Runtime.UNDEFINED;
     var entry:Null<{ var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }> = cast _Runtime.UNDEFINED;
-    bitmap = (cast (cast getTextureSource(texture) : Null<Bitmap>) : Null<Bitmap>);
+    bitmap = (cast getTextureSource((cast texture)) : Null<Bitmap>);
     if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) { return cast null; }
-    runtime = (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime);
+    runtime = (cast getDomRenderStateRuntime((cast state)) : DomRenderStateRuntime);
     cache = ((cast runtime : DomRenderStateRuntime).bitmapElementCache ??= _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
     entry = ((cast cache : flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>).get(bitmap));
-    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }).version, (cast bitmap : flighthq.types.Bitmap).version) : Bool)) : Bool)) {
-      var image:Image = (cast createImageResourceFromBitmap((cast bitmap : Bitmap)) : Image);
-      (entry = cast ({ element: (cast (cast image : Image).source : flighthq._internal.dom.HTMLCanvasElement), version: (cast bitmap : flighthq.types.Bitmap).version } : Dynamic));
-      ((cast cache : flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>).set(bitmap, entry));
+    if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }).version, (cast bitmap : { var version:Float; }).version) : Bool)) : Bool)) {
+      var image:Image = (cast createImageResourceFromBitmap((cast bitmap)) : Image);
+      (entry = cast ({ element: (cast (cast image : Image).source : flighthq._internal.dom.HTMLCanvasElement), version: (cast bitmap : { var version:Float; }).version } : Dynamic));
+      ((cast cache : flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>).set(bitmap, (cast entry)));
     }
     return cast (cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }).element;
     return cast null;

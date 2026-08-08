@@ -5,5 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class _ImageChannelValues {
-  public static final ImageChannelValue:{ var Red:Float; var Green:Float; var Blue:Float; var Alpha:Float; } = { Red: 0.0, Green: 1.0, Blue: 2.0, Alpha: 3.0 };
+  public static final ImageChannelValue:{ var Red:Float; var Green:Float; var Blue:Float; var Alpha:Float; } = (cast { Red: 0.0, Green: 1.0, Blue: 2.0, Alpha: 3.0 });
 }

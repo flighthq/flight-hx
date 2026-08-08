@@ -25,6 +25,6 @@ class DomFontSource {
   }
 
   public static function setDomFontAscentCached(font:String, ascent:Float):Void {
-    ((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map<String, Float>).set(font, ascent));
+    ((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map<String, Float>).set(font, (cast ascent)));
   }
 }

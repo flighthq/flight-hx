@@ -26,8 +26,10 @@ import flighthq.types.MeshAttachment2D;
 import flighthq.types.RegionAttachment2D;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DAnimationPath;
+import flighthq.types.Skeleton2DAnimationTarget;
 import flighthq.types.Skeleton2DImport;
 import flighthq.types.Skeleton2DImport.Skeleton2DImportAnimation;
+import flighthq.types.Skeleton2DSlotAnimationTarget;
 import flighthq.types.Skeleton2DSlotAnimationTarget.Skeleton2DSlotAnimationPath;
 import flighthq.types.Slot2D;
 import flighthq.types.TransformInherit2D;
@@ -70,28 +72,28 @@ class DragonBonesParse {
       return cast null;
     }
     if ((cast ((cast _Runtime.strictEquals(doc, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(doc), 'object') : Bool)) : Bool)) { return cast null; }
-    armatures = _Runtime.field((cast doc : flighthq._internal._Record<String, flighthq._internal._Any>), 'armature');
+    armatures = (cast (cast doc : flighthq._internal._Record<String, flighthq._internal._Any>) : { var armature:flighthq._internal._Any; }).armature;
     if ((cast ((cast !(cast _Runtime.isArray(armatures) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(armatures, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
     if ((cast ((cast _Runtime.field(armatures, 'length') : Float) > (cast 1.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'dragonbones.multi-armature-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { armatures: _Runtime.subtractNumbers(_Runtime.field(armatures, 'length'), 1.0) } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'dragonbones.multi-armature-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { armatures: _Runtime.subtractNumbers(_Runtime.field(armatures, 'length'), 1.0) }));
     }
     first = flighthq._internal._StaticIndex.readArray(armatures, 0.0);
     if ((cast ((cast _Runtime.strictEquals(first, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(first), 'object') : Bool)) : Bool)) { return cast null; }
     armature = (cast first : flighthq._internal._Record<String, flighthq._internal._Any>);
-    __destructure0 = (cast DragonBonesParse.parseDragonBonesBones__dragonBonesParse((cast _Runtime.field(armature, 'bone') : flighthq._internal._Any), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : { var bones:Array<Bone2D>; var rawIndexToOutput:Array<Float>; });
+    __destructure0 = (cast DragonBonesParse.parseDragonBonesBones__dragonBonesParse((cast (cast armature : { var bone:flighthq._internal._Any; }).bone : flighthq._internal._Any), (cast diagnostics)) : { var bones:Array<Bone2D>; var rawIndexToOutput:Array<Float>; });
     bones = _Runtime.field(__destructure0, 'bones');
     rawIndexToOutput = _Runtime.field(__destructure0, 'rawIndexToOutput');
-    boneIndexByName = (cast DragonBonesParse.buildBoneIndexByName__dragonBonesParse((cast bones : Array<Bone2D>)) : flighthq._internal._Map<String, Float>);
-    remapBoneIndex = (cast DragonBonesParse.buildDragonBonesBoneRemap__dragonBonesParse((cast rawIndexToOutput : Array<Float>)) : DragonBonesBoneRemap__dragonBonesParse);
-    slotOrder = (cast DragonBonesParse.buildDragonBonesSlotOrder__dragonBonesParse((cast _Runtime.field(armature, 'slot') : flighthq._internal._Any)) : flighthq._internal._Map<String, Float>);
-    __destructure1 = (cast DragonBonesParse.parseDragonBonesSkins__dragonBonesParse((cast _Runtime.field(armature, 'skin') : flighthq._internal._Any), (cast slotOrder : flighthq._internal._Map<String, Float>), remapBoneIndex, (cast diagnostics : Null<Array<ImportDiagnostic>>)) : { var skins:Array<AttachmentSkin2D>; var table:flighthq._internal._Map<String, Array<Null<Attachment2D>>>; });
+    boneIndexByName = (cast DragonBonesParse.buildBoneIndexByName__dragonBonesParse((cast bones)) : flighthq._internal._Map<String, Float>);
+    remapBoneIndex = (cast DragonBonesParse.buildDragonBonesBoneRemap__dragonBonesParse((cast rawIndexToOutput)) : DragonBonesBoneRemap__dragonBonesParse);
+    slotOrder = (cast DragonBonesParse.buildDragonBonesSlotOrder__dragonBonesParse((cast (cast armature : { var slot:flighthq._internal._Any; }).slot : flighthq._internal._Any)) : flighthq._internal._Map<String, Float>);
+    __destructure1 = (cast DragonBonesParse.parseDragonBonesSkins__dragonBonesParse((cast (cast armature : { var skin:flighthq._internal._Any; }).skin : flighthq._internal._Any), (cast slotOrder), (cast remapBoneIndex), (cast diagnostics)) : { var skins:Array<AttachmentSkin2D>; var table:flighthq._internal._Map<String, Array<Null<Attachment2D>>>; });
     skins = _Runtime.field(__destructure1, 'skins');
     table = _Runtime.field(__destructure1, 'table');
-    slots = (cast DragonBonesParse.parseDragonBonesSlots__dragonBonesParse((cast _Runtime.field(armature, 'slot') : flighthq._internal._Any), (cast boneIndexByName : flighthq._internal._Map<String, Float>), (cast table : flighthq._internal._Map<String, Array<Null<Attachment2D>>>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<Slot2D>);
-    frameRate = (cast DragonBonesParse.dragonBonesFrameRate__dragonBonesParse((cast armature : flighthq._internal._Record<String, flighthq._internal._Any>), (cast (cast doc : flighthq._internal._Record<String, flighthq._internal._Any>) : flighthq._internal._Record<String, flighthq._internal._Any>)) : Float);
-    animations = (cast DragonBonesParse.parseDragonBonesAnimations__dragonBonesParse((cast _Runtime.field(armature, 'animation') : flighthq._internal._Any), (cast boneIndexByName : flighthq._internal._Map<String, Float>), (cast slotOrder : flighthq._internal._Map<String, Float>), (cast table : flighthq._internal._Map<String, Array<Null<Attachment2D>>>), (cast frameRate : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<Skeleton2DImportAnimation>);
-    DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast _Runtime.field(armature, 'ik') : flighthq._internal._Any), (cast 'dragonbones.ik-constraint-unsupported' : String));
-    skeleton = (cast createSkeleton2D((cast bones : Array<Bone2D>), (cast slots : Null<Array<Slot2D>>)) : Skeleton2D);
+    slots = (cast DragonBonesParse.parseDragonBonesSlots__dragonBonesParse((cast (cast armature : { var slot:flighthq._internal._Any; }).slot : flighthq._internal._Any), (cast boneIndexByName), (cast table), (cast diagnostics)) : Array<Slot2D>);
+    frameRate = (cast DragonBonesParse.dragonBonesFrameRate__dragonBonesParse((cast armature), (cast (cast doc : flighthq._internal._Record<String, flighthq._internal._Any>))) : Float);
+    animations = (cast DragonBonesParse.parseDragonBonesAnimations__dragonBonesParse((cast (cast armature : { var animation:flighthq._internal._Any; }).animation : flighthq._internal._Any), (cast boneIndexByName), (cast slotOrder), (cast table), (cast frameRate : Float), (cast diagnostics)) : Array<Skeleton2DImportAnimation>);
+    DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse((cast diagnostics), (cast (cast armature : { var ik:flighthq._internal._Any; }).ik : flighthq._internal._Any), (cast 'dragonbones.ik-constraint-unsupported' : String));
+    skeleton = (cast createSkeleton2D((cast bones), (cast slots)) : Skeleton2D);
     if ((cast ((cast _Runtime.field(skins, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast skeleton : Skeleton2D).skins = skins); }
     return cast { animations: animations, skeleton: skeleton };
     return cast null;
@@ -104,7 +106,7 @@ class DragonBonesParse {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(bones, 'length') : Float)) : Bool)) {
         var name:Null<String> = (cast flighthq._internal._StaticIndex.readArray(bones, i) : Bone2D).name;
-        if ((cast _Runtime.strictEquals(_Runtime.typeofValue(name), 'string') : Bool)) { ((cast byName : flighthq._internal._Map<String, Float>).set(name, i)); }
+        if ((cast _Runtime.strictEquals(_Runtime.typeofValue(name), 'string') : Bool)) { ((cast byName : flighthq._internal._Map<String, Float>).set(name, (cast i))); }
         i++;
       }
     }
@@ -122,7 +124,7 @@ class DragonBonesParse {
     var unmodeled:flighthq._internal._Map<String, Float> = cast _Runtime.UNDEFINED;
     var blendTrees:Float = cast _Runtime.UNDEFINED;
     var unresolvedBones:Float = cast _Runtime.UNDEFINED;
-    animations = cast ([] : Array<Dynamic>);
+    animations = (cast cast ([] : Array<Dynamic>));
     if ((cast !(cast _Runtime.isArray(raw) : Bool) : Bool)) { return cast animations; }
     unmodeled = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     blendTrees = 0.0;
@@ -130,37 +132,37 @@ class DragonBonesParse {
     for (entry in _Runtime.iterable(raw)) {
       if ((cast ((cast _Runtime.strictEquals(entry, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(entry), 'object') : Bool)) : Bool)) { continue; }
       var animation:flighthq._internal._Record<String, flighthq._internal._Any> = (cast entry : flighthq._internal._Record<String, flighthq._internal._Any>);
-      if ((cast _Runtime.strictEquals(_Runtime.field(animation, 'type'), DragonBonesParse.DRAGONBONES_BLEND_TREE_TYPE__dragonBonesParse) : Bool)) { blendTrees++; }
-      var channels:Array<AnimationChannel> = cast ([] : Array<Dynamic>);
-      if ((cast _Runtime.isArray(_Runtime.field(animation, 'bone')) : Bool)) {
-        for (rawTimeline in _Runtime.iterable(_Runtime.field(animation, 'bone'))) {
+      if ((cast _Runtime.strictEquals((cast animation : { var type:flighthq._internal._Any; }).type, DragonBonesParse.DRAGONBONES_BLEND_TREE_TYPE__dragonBonesParse) : Bool)) { blendTrees++; }
+      var channels:Array<AnimationChannel> = (cast cast ([] : Array<Dynamic>));
+      if ((cast _Runtime.isArray((cast animation : { var bone:flighthq._internal._Any; }).bone) : Bool)) {
+        for (rawTimeline in _Runtime.iterable((cast animation : { var bone:flighthq._internal._Any; }).bone)) {
           if ((cast ((cast _Runtime.strictEquals(rawTimeline, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(rawTimeline), 'object') : Bool)) : Bool)) { continue; }
           var timeline:flighthq._internal._Record<String, flighthq._internal._Any> = (cast rawTimeline : flighthq._internal._Record<String, flighthq._internal._Any>);
-          var boneIndex:Float = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(timeline, 'name')), 'string') : Bool) ? (cast _Runtime.coalesce(((cast boneIndexByName : flighthq._internal._Map<String, Float>).get(_Runtime.field(timeline, 'name'))), function():Dynamic return cast -1.0) : Dynamic) : (cast -1.0 : Dynamic));
+          var boneIndex:Float = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast timeline : { var name:flighthq._internal._Any; }).name), 'string') : Bool) ? (cast _Runtime.coalesce(((cast boneIndexByName : flighthq._internal._Map<String, Float>).get((cast timeline : { var name:flighthq._internal._Any; }).name)), function():Dynamic return cast -1.0) : Dynamic) : (cast -1.0 : Dynamic));
           if ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool)) {
             unresolvedBones++;
             continue;
           }
-          DragonBonesParse.parseDragonBonesBoneTimeline__dragonBonesParse((cast channels : Array<AnimationChannel>), (cast timeline : flighthq._internal._Record<String, flighthq._internal._Any>), (cast boneIndex : Float), (cast frameRate : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>));
+          DragonBonesParse.parseDragonBonesBoneTimeline__dragonBonesParse((cast channels), (cast timeline), (cast boneIndex : Float), (cast frameRate : Float), (cast diagnostics));
         }
       }
-      DragonBonesParse.parseDragonBonesSlotTimelines__dragonBonesParse((cast channels : Array<AnimationChannel>), (cast _Runtime.field(animation, 'slot') : flighthq._internal._Any), (cast slotOrder : flighthq._internal._Map<String, Float>), (cast displayTable : flighthq._internal._Map<String, Array<Null<Attachment2D>>>), (cast frameRate : Float), (cast unmodeled : flighthq._internal._Map<String, Float>));
-      DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast _Runtime.field(animation, 'ffd') : flighthq._internal._Any), (cast 'dragonbones.deform-timeline-unsupported' : String));
-      DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast _Runtime.field(animation, 'ik') : flighthq._internal._Any), (cast 'dragonbones.ik-timeline-unsupported' : String));
-      DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast _Runtime.field(animation, 'zOrder') : flighthq._internal._Any), (cast 'dragonbones.zorder-timeline-unsupported' : String));
-      var duration:Float = ((cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(animation, 'duration') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) / frameRate);
-      _Runtime.callProperty(animations, 'push', cast ([{ clip: (cast createAnimationClip((cast channels : Array<AnimationChannel>), (cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([duration] : Array<Dynamic>)) : Bool) && (cast ((cast duration : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast duration : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) : Null<Float>), _Runtime.field(_Runtime, 'UNDEFINED')) : AnimationClip), name: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(animation, 'name')), 'string') : Bool) ? (cast _Runtime.field(animation, 'name') : Dynamic) : (cast DragonBonesParse.DEFAULT_DRAGONBONES_ANIMATION_NAME__dragonBonesParse : Dynamic)) }] : Array<Dynamic>));
+      DragonBonesParse.parseDragonBonesSlotTimelines__dragonBonesParse((cast channels), (cast (cast animation : { var slot:flighthq._internal._Any; }).slot : flighthq._internal._Any), (cast slotOrder), (cast displayTable), (cast frameRate : Float), (cast unmodeled));
+      DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse((cast diagnostics), (cast (cast animation : { var ffd:flighthq._internal._Any; }).ffd : flighthq._internal._Any), (cast 'dragonbones.deform-timeline-unsupported' : String));
+      DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse((cast diagnostics), (cast (cast animation : { var ik:flighthq._internal._Any; }).ik : flighthq._internal._Any), (cast 'dragonbones.ik-timeline-unsupported' : String));
+      DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse((cast diagnostics), (cast (cast animation : { var zOrder:flighthq._internal._Any; }).zOrder : flighthq._internal._Any), (cast 'dragonbones.zorder-timeline-unsupported' : String));
+      var duration:Float = ((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast animation : { var duration:flighthq._internal._Any; }).duration : flighthq._internal._Any), (cast 0.0 : Float)) : Float) / frameRate);
+      _Runtime.callProperty(animations, 'push', cast ([{ clip: (cast createAnimationClip((cast channels), (cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([duration] : Array<Dynamic>)) : Bool) && (cast ((cast duration : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast duration : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic))), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : AnimationClip), name: ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast animation : { var name:flighthq._internal._Any; }).name), 'string') : Bool) ? (cast (cast animation : { var name:flighthq._internal._Any; }).name : Dynamic) : (cast DragonBonesParse.DEFAULT_DRAGONBONES_ANIMATION_NAME__dragonBonesParse : Dynamic)) }] : Array<Dynamic>));
     }
     if ((cast ((cast blendTrees : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'dragonbones.blend-tree-animation-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { animations: blendTrees } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'dragonbones.blend-tree-animation-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { animations: blendTrees }));
     }
     for (__iteration2 in _Runtime.iterable(unmodeled)) {
       var kind:String = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
       var count:Float = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'dragonbones.' + Std.string(kind) + '-timeline-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { timelines: count } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'dragonbones.' + Std.string(kind) + '-timeline-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { timelines: count }));
     }
     if ((cast ((cast unresolvedBones : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'dragonbones.animation-bone-unresolved' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { bones: unresolvedBones } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'dragonbones.animation-bone-unresolved' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { bones: unresolvedBones }));
     }
     return cast animations;
     return cast null;
@@ -171,18 +173,18 @@ class DragonBonesParse {
     for (entry in _Runtime.iterable(raw)) {
       if ((cast ((cast _Runtime.strictEquals(entry, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(entry), 'object') : Bool)) : Bool)) { continue; }
       var timeline:flighthq._internal._Record<String, flighthq._internal._Any> = (cast entry : flighthq._internal._Record<String, flighthq._internal._Any>);
-      var name:Null<String> = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(timeline, 'name')), 'string') : Bool) ? (cast _Runtime.field(timeline, 'name') : Dynamic) : (cast null : Dynamic));
+      var name:Null<String> = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast timeline : { var name:flighthq._internal._Any; }).name), 'string') : Bool) ? (cast (cast timeline : { var name:flighthq._internal._Any; }).name : Dynamic) : (cast null : Dynamic));
       var slotIndex:Float = ((cast _Runtime.strictEquals(name, null) : Bool) ? (cast -1.0 : Dynamic) : (cast _Runtime.coalesce(((cast slotOrder : flighthq._internal._Map<String, Float>).get(name)), function():Dynamic return cast -1.0) : Dynamic));
       if ((cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) {
-        ((cast unmodeled : flighthq._internal._Map<String, Float>).set('slot', _Runtime.addNumbers(_Runtime.coalesce(((cast unmodeled : flighthq._internal._Map<String, Float>).get('slot')), function():Dynamic return cast 0.0), 1.0)));
+        ((cast unmodeled : flighthq._internal._Map<String, Float>).set('slot', (cast _Runtime.addNumbers(_Runtime.coalesce(((cast unmodeled : flighthq._internal._Map<String, Float>).get('slot')), function():Dynamic return cast 0.0), 1.0))));
         continue;
       }
-      var displayFrames:Array<flighthq._internal._Record<String, flighthq._internal._Any>> = (cast DragonBonesParse.dragonBonesFrames__dragonBonesParse((cast _Runtime.coalesce(_Runtime.field(timeline, 'displayFrame'), function():Dynamic return cast _Runtime.field(timeline, 'display')) : flighthq._internal._Any), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Array<ImportDiagnostic>>)) : Array<flighthq._internal._Record<String, flighthq._internal._Any>>);
+      var displayFrames:Array<flighthq._internal._Record<String, flighthq._internal._Any>> = (cast DragonBonesParse.dragonBonesFrames__dragonBonesParse((cast _Runtime.coalesce((cast timeline : { var displayFrame:flighthq._internal._Any; }).displayFrame, function():Dynamic return cast (cast timeline : { var display:flighthq._internal._Any; }).display) : flighthq._internal._Any), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Array<flighthq._internal._Record<String, flighthq._internal._Any>>);
       if ((cast ((cast _Runtime.field(displayFrames, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-        DragonBonesParse.addDragonBonesDisplayChannel__dragonBonesParse((cast channels : Array<AnimationChannel>), (cast displayFrames : Array<flighthq._internal._Record<String, flighthq._internal._Any>>), (cast slotIndex : Float), (cast _Runtime.coalesce(((cast displayTable : flighthq._internal._Map<String, Array<Null<Attachment2D>>>).get(_Runtime.coalesce(name, function():Dynamic return cast ''))), function():Dynamic return cast cast ([] : Array<Dynamic>)) : Array<Null<Attachment2D>>), (cast frameRate : Float));
+        DragonBonesParse.addDragonBonesDisplayChannel__dragonBonesParse((cast channels), (cast displayFrames), (cast slotIndex : Float), (cast _Runtime.coalesce(((cast displayTable : flighthq._internal._Map<String, Array<Null<Attachment2D>>>).get(_Runtime.coalesce(name, function():Dynamic return cast ''))), function():Dynamic return cast cast ([] : Array<Dynamic>))), (cast frameRate : Float));
       }
-      var colorFrames:Array<flighthq._internal._Record<String, flighthq._internal._Any>> = (cast DragonBonesParse.dragonBonesFrames__dragonBonesParse((cast _Runtime.coalesce(_Runtime.field(timeline, 'colorFrame'), function():Dynamic return cast _Runtime.field(timeline, 'color')) : flighthq._internal._Any), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Array<ImportDiagnostic>>)) : Array<flighthq._internal._Record<String, flighthq._internal._Any>>);
-      if ((cast ((cast _Runtime.field(colorFrames, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { DragonBonesParse.addDragonBonesSlotColorChannel__dragonBonesParse((cast channels : Array<AnimationChannel>), (cast colorFrames : Array<flighthq._internal._Record<String, flighthq._internal._Any>>), (cast slotIndex : Float), (cast frameRate : Float)); }
+      var colorFrames:Array<flighthq._internal._Record<String, flighthq._internal._Any>> = (cast DragonBonesParse.dragonBonesFrames__dragonBonesParse((cast _Runtime.coalesce((cast timeline : { var colorFrame:flighthq._internal._Any; }).colorFrame, function():Dynamic return cast (cast timeline : { var color:flighthq._internal._Any; }).color) : flighthq._internal._Any), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Array<flighthq._internal._Record<String, flighthq._internal._Any>>);
+      if ((cast ((cast _Runtime.field(colorFrames, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { DragonBonesParse.addDragonBonesSlotColorChannel__dragonBonesParse((cast channels), (cast colorFrames), (cast slotIndex : Float), (cast frameRate : Float)); }
     }
   }
 
@@ -190,29 +192,29 @@ class DragonBonesParse {
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var values:Array<Float> = cast _Runtime.UNDEFINED;
     var track:AnimationTrack = cast _Runtime.UNDEFINED;
-    times = (cast DragonBonesParse.dragonBonesFrameTimes__dragonBonesParse((cast frames : Array<flighthq._internal._Record<String, flighthq._internal._Any>>), (cast frameRate : Float)) : Array<Float>);
-    values = cast ([] : Array<Dynamic>);
+    times = (cast DragonBonesParse.dragonBonesFrameTimes__dragonBonesParse((cast frames), (cast frameRate : Float)) : Array<Float>);
+    values = (cast cast ([] : Array<Dynamic>));
     for (frame in _Runtime.iterable(frames)) {
-      var index:Float = (_Runtime.toInt32((cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(frame, 'value') : flighthq._internal._Any), (cast (cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(frame, 'displayIndex') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) : Float)) : Float)) | 0);
+      var index:Float = (_Runtime.toInt32((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast frame : { var value:flighthq._internal._Any; }).value : flighthq._internal._Any), (cast (cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast frame : { var displayIndex:flighthq._internal._Any; }).displayIndex : flighthq._internal._Any), (cast 0.0 : Float)) : Float) : Float)) : Float)) | 0);
       _Runtime.callProperty(values, 'push', cast ([((cast ((cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field(displays, 'length') : Float)) : Bool)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(displays, index), null) : Bool)) : Bool) ? (cast index : Dynamic) : (cast -1.0 : Dynamic))] : Array<Dynamic>));
     }
-    track = (cast createAnimationTrack((cast { components: 1.0, interpolation: AnimationInterpolationStep, times: times, values: values } : { var times:flighthq._internal._ArrayLike<Float>; var values:flighthq._internal._ArrayLike<Float>; @:optional var components:Null<Float>; @:optional var interpolation:Null<String>; @:optional var quaternion:Null<Bool>; @:optional var easing:Null<EasingFunction>; @:optional var segmentEasings:Null<Array<Null<EasingFunction>>>; })) : AnimationTrack);
-    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel(track, (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Attachment : Skeleton2DSlotAnimationPath), (cast _Runtime.slice(displays, 0, null) : Null<Array<Null<Attachment2D>>>)) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+    track = (cast createAnimationTrack((cast { components: 1.0, interpolation: AnimationInterpolationStep, times: times, values: values })) : AnimationTrack);
+    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast track), (cast (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Attachment), (cast _Runtime.slice(displays, 0, null))) : Skeleton2DSlotAnimationTarget) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
   }
 
   public static function addDragonBonesSlotColorChannel__dragonBonesParse(channels:Array<AnimationChannel>, frames:Array<flighthq._internal._Record<String, flighthq._internal._Any>>, slotIndex:Float, frameRate:Float):Void {
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var values:Array<Float> = cast _Runtime.UNDEFINED;
     var track:AnimationTrack = cast _Runtime.UNDEFINED;
-    times = (cast DragonBonesParse.dragonBonesFrameTimes__dragonBonesParse((cast frames : Array<flighthq._internal._Record<String, flighthq._internal._Any>>), (cast frameRate : Float)) : Array<Float>);
-    values = cast ([] : Array<Dynamic>);
+    times = (cast DragonBonesParse.dragonBonesFrameTimes__dragonBonesParse((cast frames), (cast frameRate : Float)) : Array<Float>);
+    values = (cast cast ([] : Array<Dynamic>));
     for (frame in _Runtime.iterable(frames)) {
-      var raw:flighthq._internal._Any = _Runtime.coalesce(_Runtime.field(frame, 'value'), function():Dynamic return cast _Runtime.field(frame, 'color'));
+      var raw:flighthq._internal._Any = _Runtime.coalesce((cast frame : { var value:flighthq._internal._Any; }).value, function():Dynamic return cast (cast frame : { var color:flighthq._internal._Any; }).color);
       var color:flighthq._internal._Record<String, flighthq._internal._Any> = ((cast ((cast !_Runtime.strictEquals(raw, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool) ? (cast (cast raw : flighthq._internal._Record<String, flighthq._internal._Any>) : Dynamic) : (cast {  } : Dynamic));
-      _Runtime.pushMany(values, cast ([(cast DragonBonesParse.colorPercent__dragonBonesParse((cast _Runtime.field(color, 'rM') : flighthq._internal._Any)) : Float), (cast DragonBonesParse.colorPercent__dragonBonesParse((cast _Runtime.field(color, 'gM') : flighthq._internal._Any)) : Float), (cast DragonBonesParse.colorPercent__dragonBonesParse((cast _Runtime.field(color, 'bM') : flighthq._internal._Any)) : Float), (cast DragonBonesParse.colorPercent__dragonBonesParse((cast _Runtime.field(color, 'aM') : flighthq._internal._Any)) : Float)] : Array<Dynamic>));
+      _Runtime.pushMany(values, cast ([(cast DragonBonesParse.colorPercent__dragonBonesParse((cast (cast color : { var rM:flighthq._internal._Any; }).rM : flighthq._internal._Any)) : Float), (cast DragonBonesParse.colorPercent__dragonBonesParse((cast (cast color : { var gM:flighthq._internal._Any; }).gM : flighthq._internal._Any)) : Float), (cast DragonBonesParse.colorPercent__dragonBonesParse((cast (cast color : { var bM:flighthq._internal._Any; }).bM : flighthq._internal._Any)) : Float), (cast DragonBonesParse.colorPercent__dragonBonesParse((cast (cast color : { var aM:flighthq._internal._Any; }).aM : flighthq._internal._Any)) : Float)] : Array<Dynamic>));
     }
-    track = (cast createAnimationTrack((cast { components: 4.0, interpolation: (cast DragonBonesParse.dragonBonesInterpolation__dragonBonesParse((cast frames : Array<flighthq._internal._Record<String, flighthq._internal._Any>>), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Array<ImportDiagnostic>>)) : Null<String>), segmentEasings: (cast DragonBonesParse.buildDragonBonesSegmentEasings__dragonBonesParse((cast frames : Array<flighthq._internal._Record<String, flighthq._internal._Any>>)) : Null<Array<Null<EasingFunction>>>), times: times, values: values } : { var times:flighthq._internal._ArrayLike<Float>; var values:flighthq._internal._ArrayLike<Float>; @:optional var components:Null<Float>; @:optional var interpolation:Null<String>; @:optional var quaternion:Null<Bool>; @:optional var easing:Null<EasingFunction>; @:optional var segmentEasings:Null<Array<Null<EasingFunction>>>; })) : AnimationTrack);
-    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel(track, (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Color : Skeleton2DSlotAnimationPath), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Array<Null<Attachment2D>>>)) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+    track = (cast createAnimationTrack((cast { components: 4.0, interpolation: (cast DragonBonesParse.dragonBonesInterpolation__dragonBonesParse((cast frames), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : AnimationInterpolation), segmentEasings: (cast DragonBonesParse.buildDragonBonesSegmentEasings__dragonBonesParse((cast frames)) : Null<Array<Null<EasingFunction>>>), times: times, values: values })) : AnimationTrack);
+    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast track), (cast (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Color), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Skeleton2DSlotAnimationTarget) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
   }
 
   public static function colorPercent__dragonBonesParse(value:flighthq._internal._Any):Float {
@@ -223,24 +225,24 @@ class DragonBonesParse {
   }
 
   public static function parseDragonBonesBoneTimeline__dragonBonesParse(channels:Array<AnimationChannel>, timeline:flighthq._internal._Record<String, flighthq._internal._Any>, boneIndex:Float, frameRate:Float, ?diagnostics:Array<ImportDiagnostic>):Void {
-    DragonBonesParse.addDragonBonesVectorChannel__dragonBonesParse((cast channels : Array<AnimationChannel>), (cast _Runtime.field(timeline, 'translateFrame') : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Translation : Skeleton2DAnimationPath), (cast frameRate : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>));
-    DragonBonesParse.addDragonBonesRotateChannels__dragonBonesParse((cast channels : Array<AnimationChannel>), (cast _Runtime.field(timeline, 'rotateFrame') : flighthq._internal._Any), (cast boneIndex : Float), (cast frameRate : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>));
-    DragonBonesParse.addDragonBonesVectorChannel__dragonBonesParse((cast channels : Array<AnimationChannel>), (cast _Runtime.field(timeline, 'scaleFrame') : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Scale : Skeleton2DAnimationPath), (cast frameRate : Float), (cast diagnostics : Null<Array<ImportDiagnostic>>));
-    DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast _Runtime.field(timeline, 'frame') : flighthq._internal._Any), (cast 'dragonbones.legacy-bone-frame-unsupported' : String));
+    DragonBonesParse.addDragonBonesVectorChannel__dragonBonesParse((cast channels), (cast (cast timeline : { var translateFrame:flighthq._internal._Any; }).translateFrame : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Translation), (cast frameRate : Float), (cast diagnostics));
+    DragonBonesParse.addDragonBonesRotateChannels__dragonBonesParse((cast channels), (cast (cast timeline : { var rotateFrame:flighthq._internal._Any; }).rotateFrame : flighthq._internal._Any), (cast boneIndex : Float), (cast frameRate : Float), (cast diagnostics));
+    DragonBonesParse.addDragonBonesVectorChannel__dragonBonesParse((cast channels), (cast (cast timeline : { var scaleFrame:flighthq._internal._Any; }).scaleFrame : flighthq._internal._Any), (cast boneIndex : Float), (cast (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Scale), (cast frameRate : Float), (cast diagnostics));
+    DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse((cast diagnostics), (cast (cast timeline : { var frame:flighthq._internal._Any; }).frame : flighthq._internal._Any), (cast 'dragonbones.legacy-bone-frame-unsupported' : String));
   }
 
   public static function addDragonBonesVectorChannel__dragonBonesParse(channels:Array<AnimationChannel>, raw:flighthq._internal._Any, boneIndex:Float, path:Skeleton2DAnimationPath, frameRate:Float, ?diagnostics:Array<ImportDiagnostic>):Void {
     var frames:Array<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
     var fallback:Float = cast _Runtime.UNDEFINED;
     var values:Array<Float> = cast _Runtime.UNDEFINED;
-    frames = (cast DragonBonesParse.dragonBonesFrames__dragonBonesParse((cast raw : flighthq._internal._Any), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<flighthq._internal._Record<String, flighthq._internal._Any>>);
+    frames = (cast DragonBonesParse.dragonBonesFrames__dragonBonesParse((cast raw : flighthq._internal._Any), (cast diagnostics)) : Array<flighthq._internal._Record<String, flighthq._internal._Any>>);
     if ((cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) { return; }
     fallback = ((cast _Runtime.strictEquals(path, (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Scale) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic));
-    values = cast ([] : Array<Dynamic>);
+    values = (cast cast ([] : Array<Dynamic>));
     for (frame in _Runtime.iterable(frames)) {
-      _Runtime.pushMany(values, cast ([(cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(frame, 'x') : flighthq._internal._Any), (cast fallback : Float)) : Float), (cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(frame, 'y') : flighthq._internal._Any), (cast fallback : Float)) : Float)] : Array<Dynamic>));
+      _Runtime.pushMany(values, cast ([(cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast frame : { var x:flighthq._internal._Any; }).x : flighthq._internal._Any), (cast fallback : Float)) : Float), (cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast frame : { var y:flighthq._internal._Any; }).y : flighthq._internal._Any), (cast fallback : Float)) : Float)] : Array<Dynamic>));
     }
-    DragonBonesParse.addDragonBonesBoneChannel__dragonBonesParse((cast channels : Array<AnimationChannel>), (cast (cast DragonBonesParse.dragonBonesFrameTimes__dragonBonesParse((cast frames : Array<flighthq._internal._Record<String, flighthq._internal._Any>>), (cast frameRate : Float)) : Array<Float>) : Array<Float>), (cast values : Array<Float>), (cast 2.0 : Float), (cast (cast DragonBonesParse.dragonBonesInterpolation__dragonBonesParse((cast frames : Array<flighthq._internal._Record<String, flighthq._internal._Any>>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : AnimationInterpolation) : AnimationInterpolation), (cast boneIndex : Float), (cast path : Skeleton2DAnimationPath), (cast (cast DragonBonesParse.buildDragonBonesSegmentEasings__dragonBonesParse((cast frames : Array<flighthq._internal._Record<String, flighthq._internal._Any>>)) : Null<Array<Null<EasingFunction>>>) : Null<Array<Null<EasingFunction>>>));
+    DragonBonesParse.addDragonBonesBoneChannel__dragonBonesParse((cast channels), (cast (cast DragonBonesParse.dragonBonesFrameTimes__dragonBonesParse((cast frames), (cast frameRate : Float)) : Array<Float>)), (cast values), (cast 2.0 : Float), (cast (cast DragonBonesParse.dragonBonesInterpolation__dragonBonesParse((cast frames), (cast diagnostics)) : AnimationInterpolation)), (cast boneIndex : Float), (cast path), (cast (cast DragonBonesParse.buildDragonBonesSegmentEasings__dragonBonesParse((cast frames)) : Null<Array<Null<EasingFunction>>>)));
   }
 
   public static function addDragonBonesRotateChannels__dragonBonesParse(channels:Array<AnimationChannel>, raw:flighthq._internal._Any, boneIndex:Float, frameRate:Float, ?diagnostics:Array<ImportDiagnostic>):Void {
@@ -254,12 +256,12 @@ class DragonBonesParse {
     var previousClockwise:Float = cast _Runtime.UNDEFINED;
     var easings:Null<Array<Null<EasingFunction>>> = cast _Runtime.UNDEFINED;
     var rotationPath:String = cast _Runtime.UNDEFINED;
-    frames = (cast DragonBonesParse.dragonBonesFrames__dragonBonesParse((cast raw : flighthq._internal._Any), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<flighthq._internal._Record<String, flighthq._internal._Any>>);
+    frames = (cast DragonBonesParse.dragonBonesFrames__dragonBonesParse((cast raw : flighthq._internal._Any), (cast diagnostics)) : Array<flighthq._internal._Record<String, flighthq._internal._Any>>);
     if ((cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) { return; }
-    times = (cast DragonBonesParse.dragonBonesFrameTimes__dragonBonesParse((cast frames : Array<flighthq._internal._Record<String, flighthq._internal._Any>>), (cast frameRate : Float)) : Array<Float>);
-    interpolation = (cast DragonBonesParse.dragonBonesInterpolation__dragonBonesParse((cast frames : Array<flighthq._internal._Record<String, flighthq._internal._Any>>), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : AnimationInterpolation);
-    rotations = cast ([] : Array<Dynamic>);
-    shears = cast ([] : Array<Dynamic>);
+    times = (cast DragonBonesParse.dragonBonesFrameTimes__dragonBonesParse((cast frames), (cast frameRate : Float)) : Array<Float>);
+    interpolation = (cast DragonBonesParse.dragonBonesInterpolation__dragonBonesParse((cast frames), (cast diagnostics)) : AnimationInterpolation);
+    rotations = (cast cast ([] : Array<Dynamic>));
+    shears = (cast cast ([] : Array<Dynamic>));
     skewed = false;
     previousRotation = 0.0;
     previousClockwise = 0.0;
@@ -267,7 +269,7 @@ class DragonBonesParse {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
         var frame:flighthq._internal._Record<String, flighthq._internal._Any> = flighthq._internal._StaticIndex.readArray(frames, i);
-        var rotation:Float = (cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(frame, 'rotate') : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
+        var rotation:Float = (cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast frame : { var rotate:flighthq._internal._Any; }).rotate : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(times, i), 0.0) : Bool)) {
           if ((cast _Runtime.strictEquals(previousClockwise, 0.0) : Bool)) {
             (rotation = cast ((previousRotation + (cast DragonBonesParse.normalizeDegrees__dragonBonesParse((cast (rotation - previousRotation) : Float)) : Float)) : Dynamic));
@@ -278,39 +280,39 @@ class DragonBonesParse {
             (rotation = cast ((rotation + (360.0 * previousClockwise)) : Dynamic));
           }
         }
-        (previousClockwise = cast ((_Runtime.toInt32((cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(frame, 'clockwise') : flighthq._internal._Any), (cast 0.0 : Float)) : Float)) | 0) : Dynamic));
+        (previousClockwise = cast ((_Runtime.toInt32((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast frame : { var clockwise:flighthq._internal._Any; }).clockwise : flighthq._internal._Any), (cast 0.0 : Float)) : Float)) | 0) : Dynamic));
         (previousRotation = cast (rotation : Dynamic));
-        var skew:Float = (cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(frame, 'skew') : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
+        var skew:Float = (cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast frame : { var skew:flighthq._internal._Any; }).skew : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
         if ((cast !_Runtime.strictEquals(skew, 0.0) : Bool)) { (skewed = cast (true : Dynamic)); }
         _Runtime.callProperty(rotations, 'push', cast ([rotation] : Array<Dynamic>));
         _Runtime.pushMany(shears, cast ([0.0, skew] : Array<Dynamic>));
         i++;
       }
     }
-    easings = (cast DragonBonesParse.buildDragonBonesSegmentEasings__dragonBonesParse((cast frames : Array<flighthq._internal._Record<String, flighthq._internal._Any>>)) : Null<Array<Null<EasingFunction>>>);
+    easings = (cast DragonBonesParse.buildDragonBonesSegmentEasings__dragonBonesParse((cast frames)) : Null<Array<Null<EasingFunction>>>);
     rotationPath = (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Rotation;
-    DragonBonesParse.addDragonBonesBoneChannel__dragonBonesParse((cast channels : Array<AnimationChannel>), (cast times : Array<Float>), (cast rotations : Array<Float>), (cast 1.0 : Float), (cast interpolation : AnimationInterpolation), (cast boneIndex : Float), (cast rotationPath : Skeleton2DAnimationPath), (cast easings : Null<Array<Null<EasingFunction>>>));
+    DragonBonesParse.addDragonBonesBoneChannel__dragonBonesParse((cast channels), (cast times), (cast rotations), (cast 1.0 : Float), (cast interpolation), (cast boneIndex : Float), (cast rotationPath), (cast easings));
     if ((cast skewed : Bool)) {
       var shearPath:String = (cast Skeleton2DAnimationPathValue : { var Translation:String; var TranslationX:String; var TranslationY:String; var Rotation:String; var Scale:String; var ScaleX:String; var ScaleY:String; var Shear:String; var ShearX:String; var ShearY:String; }).Shear;
-      DragonBonesParse.addDragonBonesBoneChannel__dragonBonesParse((cast channels : Array<AnimationChannel>), (cast times : Array<Float>), (cast shears : Array<Float>), (cast 2.0 : Float), (cast interpolation : AnimationInterpolation), (cast boneIndex : Float), (cast shearPath : Skeleton2DAnimationPath), (cast easings : Null<Array<Null<EasingFunction>>>));
+      DragonBonesParse.addDragonBonesBoneChannel__dragonBonesParse((cast channels), (cast times), (cast shears), (cast 2.0 : Float), (cast interpolation), (cast boneIndex : Float), (cast shearPath), (cast easings));
     }
   }
 
   public static function addDragonBonesBoneChannel__dragonBonesParse(channels:Array<AnimationChannel>, times:Array<Float>, values:Array<Float>, components:Float, interpolation:AnimationInterpolation, boneIndex:Float, path:Skeleton2DAnimationPath, ?segmentEasings:Null<Array<Null<EasingFunction>>>):Void {
     if (segmentEasings == null) segmentEasings = cast (null : Dynamic);
     var track:AnimationTrack = cast _Runtime.UNDEFINED;
-    track = (cast createAnimationTrack((cast { components: components, interpolation: interpolation, segmentEasings: segmentEasings, times: _Runtime.slice(times, 0, null), values: values } : { var times:flighthq._internal._ArrayLike<Float>; var values:flighthq._internal._ArrayLike<Float>; @:optional var components:Null<Float>; @:optional var interpolation:Null<String>; @:optional var quaternion:Null<Bool>; @:optional var easing:Null<EasingFunction>; @:optional var segmentEasings:Null<Array<Null<EasingFunction>>>; })) : AnimationTrack);
-    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel(track, (cast createSkeleton2DBoneAnimationTarget((cast boneIndex : Float), (cast path : Skeleton2DAnimationPath)) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+    track = (cast createAnimationTrack((cast { components: components, interpolation: interpolation, segmentEasings: segmentEasings, times: _Runtime.slice(times, 0, null), values: values })) : AnimationTrack);
+    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast track), (cast (cast createSkeleton2DBoneAnimationTarget((cast boneIndex : Float), (cast path)) : Skeleton2DAnimationTarget) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
   }
 
   public static function dragonBonesFrameTimes__dragonBonesParse(frames:Array<flighthq._internal._Record<String, flighthq._internal._Any>>, frameRate:Float):Array<Float> {
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var elapsedFrames:Float = cast _Runtime.UNDEFINED;
-    times = cast ([] : Array<Dynamic>);
+    times = (cast cast ([] : Array<Dynamic>));
     elapsedFrames = 0.0;
     for (frame in _Runtime.iterable(frames)) {
       _Runtime.callProperty(times, 'push', cast ([(elapsedFrames / frameRate)] : Array<Dynamic>));
-      (elapsedFrames = cast ((elapsedFrames + HxMath.max(0.0, (cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(frame, 'duration') : flighthq._internal._Any), (cast 1.0 : Float)) : Float))) : Dynamic));
+      (elapsedFrames = cast ((elapsedFrames + HxMath.max(0.0, (cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast frame : { var duration:flighthq._internal._Any; }).duration : flighthq._internal._Any), (cast 1.0 : Float)) : Float))) : Dynamic));
     }
     return cast times;
     return cast null;
@@ -320,7 +322,7 @@ class DragonBonesParse {
     var frames:Array<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
     var recovered:Float = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.isArray(raw) : Bool) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    frames = cast ([] : Array<Dynamic>);
+    frames = (cast cast ([] : Array<Dynamic>));
     recovered = 0.0;
     for (entry in _Runtime.iterable(raw)) {
       if ((cast ((cast !_Runtime.strictEquals(entry, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(entry), 'object') : Bool)) : Bool)) {
@@ -331,7 +333,7 @@ class DragonBonesParse {
       }
     }
     if ((cast ((cast recovered : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'dragonbones.malformed-frame-recovered' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { frames: recovered } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'dragonbones.malformed-frame-recovered' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { frames: recovered }));
     }
     return cast frames;
     return cast null;
@@ -346,16 +348,16 @@ class DragonBonesParse {
       var i:Float = 0.0;
       while ((cast ((cast (i + 1.0) : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
         var frame:flighthq._internal._Record<String, flighthq._internal._Any> = flighthq._internal._StaticIndex.readArray(frames, i);
-        if ((cast !(cast (cast DragonBonesParse.isDragonBonesFrameStepped__dragonBonesParse((cast frame : flighthq._internal._Record<String, flighthq._internal._Any>)) : Bool) : Bool) : Bool)) { (stepped = cast (false : Dynamic)); }
+        if ((cast !(cast (cast DragonBonesParse.isDragonBonesFrameStepped__dragonBonesParse((cast frame)) : Bool) : Bool) : Bool)) { (stepped = cast (false : Dynamic)); }
         if ((cast !(cast _Runtime.hasField(frame, 'curve') : Bool) : Bool)) {
-          var easing:flighthq._internal._Any = _Runtime.field(frame, 'tweenEasing');
+          var easing:flighthq._internal._Any = (cast frame : { var tweenEasing:flighthq._internal._Any; }).tweenEasing;
           if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(easing), 'number') : Bool) && (cast !_Runtime.strictEquals(easing, 0.0) : Bool)) : Bool) && (cast !_Runtime.strictEquals(easing, DragonBonesParse.DRAGONBONES_NO_TWEEN__dragonBonesParse) : Bool)) : Bool)) { approximated++; }
         }
         i++;
       }
     }
     if ((cast ((cast approximated : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'dragonbones.tween-easing-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { frames: approximated } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'dragonbones.tween-easing-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { frames: approximated }));
     }
     return cast ((cast stepped : Bool) ? (cast AnimationInterpolationStep : Dynamic) : (cast AnimationInterpolationLinear : Dynamic));
     return cast null;
@@ -367,19 +369,19 @@ class DragonBonesParse {
     var curved:Bool = cast _Runtime.UNDEFINED;
     segments = _Runtime.subtractNumbers(_Runtime.field(frames, 'length'), 1.0);
     if ((cast ((cast segments : Float) < (cast 1.0 : Float)) : Bool)) { return cast null; }
-    easings = cast ([] : Array<Dynamic>);
+    easings = (cast cast ([] : Array<Dynamic>));
     curved = false;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast segments : Float)) : Bool)) {
-        var curve:flighthq._internal._Any = _Runtime.field(flighthq._internal._StaticIndex.readArray(frames, i), 'curve');
+        var curve:flighthq._internal._Any = (cast flighthq._internal._StaticIndex.readArray(frames, i) : { var curve:flighthq._internal._Any; }).curve;
         if ((cast ((cast !(cast _Runtime.isArray(curve) : Bool) : Bool) || (cast ((cast _Runtime.field(curve, 'length') : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) {
           _Runtime.callProperty(easings, 'push', cast ([null] : Array<Dynamic>));
           i++;
           continue;
         }
         (curved = cast (true : Dynamic));
-        _Runtime.callProperty(easings, 'push', cast ([(cast easeCubicBezier((cast (cast DragonBonesParse.clampDragonBonesUnit__dragonBonesParse((cast (cast DragonBonesParse.numberOr__dragonBonesParse((cast flighthq._internal._StaticIndex.readArray(curve, 0.0) : flighthq._internal._Any), (cast 0.0 : Float)) : Float) : Float)) : Float) : Float), (cast (cast DragonBonesParse.numberOr__dragonBonesParse((cast flighthq._internal._StaticIndex.readArray(curve, 1.0) : flighthq._internal._Any), (cast 0.0 : Float)) : Float) : Float), (cast (cast DragonBonesParse.clampDragonBonesUnit__dragonBonesParse((cast (cast DragonBonesParse.numberOr__dragonBonesParse((cast flighthq._internal._StaticIndex.readArray(curve, 2.0) : flighthq._internal._Any), (cast 1.0 : Float)) : Float) : Float)) : Float) : Float), (cast (cast DragonBonesParse.numberOr__dragonBonesParse((cast flighthq._internal._StaticIndex.readArray(curve, 3.0) : flighthq._internal._Any), (cast 1.0 : Float)) : Float) : Float)) : Null<EasingFunction>)] : Array<Dynamic>));
+        _Runtime.callProperty(easings, 'push', cast ([(cast easeCubicBezier((cast (cast DragonBonesParse.clampDragonBonesUnit__dragonBonesParse((cast (cast DragonBonesParse.numberOr__dragonBonesParse((cast flighthq._internal._StaticIndex.readArray(curve, 0.0) : flighthq._internal._Any), (cast 0.0 : Float)) : Float) : Float)) : Float) : Float), (cast (cast DragonBonesParse.numberOr__dragonBonesParse((cast flighthq._internal._StaticIndex.readArray(curve, 1.0) : flighthq._internal._Any), (cast 0.0 : Float)) : Float) : Float), (cast (cast DragonBonesParse.clampDragonBonesUnit__dragonBonesParse((cast (cast DragonBonesParse.numberOr__dragonBonesParse((cast flighthq._internal._StaticIndex.readArray(curve, 2.0) : flighthq._internal._Any), (cast 1.0 : Float)) : Float) : Float)) : Float) : Float), (cast (cast DragonBonesParse.numberOr__dragonBonesParse((cast flighthq._internal._StaticIndex.readArray(curve, 3.0) : flighthq._internal._Any), (cast 1.0 : Float)) : Float) : Float)) : EasingFunction)] : Array<Dynamic>));
         i++;
       }
     }
@@ -396,7 +398,7 @@ class DragonBonesParse {
     var easing:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.hasField(frame, 'curve') : Bool)) { return cast false; }
     if ((cast !(cast _Runtime.hasField(frame, 'tweenEasing') : Bool) : Bool)) { return cast false; }
-    easing = _Runtime.field(frame, 'tweenEasing');
+    easing = (cast frame : { var tweenEasing:flighthq._internal._Any; }).tweenEasing;
     return cast ((cast _Runtime.strictEquals(easing, null) : Bool) || (cast _Runtime.strictEquals(easing, DragonBonesParse.DRAGONBONES_NO_TWEEN__dragonBonesParse) : Bool));
     return cast null;
   }
@@ -404,9 +406,9 @@ class DragonBonesParse {
   public static function dragonBonesFrameRate__dragonBonesParse(armature:flighthq._internal._Record<String, flighthq._internal._Any>, doc:flighthq._internal._Record<String, flighthq._internal._Any>):Float {
     var armatureRate:Float = cast _Runtime.UNDEFINED;
     var documentRate:Float = cast _Runtime.UNDEFINED;
-    armatureRate = (cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(armature, 'frameRate') : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
+    armatureRate = (cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast armature : { var frameRate:flighthq._internal._Any; }).frameRate : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
     if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([armatureRate] : Array<Dynamic>)) : Bool) && (cast ((cast armatureRate : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { return cast armatureRate; }
-    documentRate = (cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(doc, 'frameRate') : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
+    documentRate = (cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast doc : { var frameRate:flighthq._internal._Any; }).frameRate : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
     if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([documentRate] : Array<Dynamic>)) : Bool) && (cast ((cast documentRate : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { return cast documentRate; }
     return cast DragonBonesParse.DEFAULT_DRAGONBONES_FRAME_RATE__dragonBonesParse;
     return cast null;
@@ -427,12 +429,12 @@ class DragonBonesParse {
     var a:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool)) { return cast 4294967295.0; }
     color = (cast raw : flighthq._internal._Record<String, flighthq._internal._Any>);
-    r = (cast DragonBonesParse.colorChannel__dragonBonesParse((cast _Runtime.field(color, 'rM') : flighthq._internal._Any)) : Float);
-    g = (cast DragonBonesParse.colorChannel__dragonBonesParse((cast _Runtime.field(color, 'gM') : flighthq._internal._Any)) : Float);
-    b = (cast DragonBonesParse.colorChannel__dragonBonesParse((cast _Runtime.field(color, 'bM') : flighthq._internal._Any)) : Float);
-    a = (cast DragonBonesParse.colorChannel__dragonBonesParse((cast _Runtime.field(color, 'aM') : flighthq._internal._Any)) : Float);
-    if ((cast ((cast ((cast ((cast !_Runtime.strictEquals((cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(color, 'rO') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0) : Bool) || (cast !_Runtime.strictEquals((cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(color, 'gO') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(color, 'bO') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(color, 'aO') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0) : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'dragonbones.color-offset-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { slots: 1.0 } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+    r = (cast DragonBonesParse.colorChannel__dragonBonesParse((cast (cast color : { var rM:flighthq._internal._Any; }).rM : flighthq._internal._Any)) : Float);
+    g = (cast DragonBonesParse.colorChannel__dragonBonesParse((cast (cast color : { var gM:flighthq._internal._Any; }).gM : flighthq._internal._Any)) : Float);
+    b = (cast DragonBonesParse.colorChannel__dragonBonesParse((cast (cast color : { var bM:flighthq._internal._Any; }).bM : flighthq._internal._Any)) : Float);
+    a = (cast DragonBonesParse.colorChannel__dragonBonesParse((cast (cast color : { var aM:flighthq._internal._Any; }).aM : flighthq._internal._Any)) : Float);
+    if ((cast ((cast ((cast ((cast !_Runtime.strictEquals((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast color : { var rO:flighthq._internal._Any; }).rO : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0) : Bool) || (cast !_Runtime.strictEquals((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast color : { var gO:flighthq._internal._Any; }).gO : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast color : { var bO:flighthq._internal._Any; }).bO : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast color : { var aO:flighthq._internal._Any; }).aO : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0) : Bool)) : Bool)) {
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'dragonbones.color-offset-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { slots: 1.0 }));
     }
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 24)) | _Runtime.toInt32((_Runtime.toInt32(g) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(b) << 8)))) | _Runtime.toInt32(a))), 0);
     return cast null;
@@ -442,24 +444,24 @@ class DragonBonesParse {
     var table:flighthq._internal._Map<String, Array<Null<Attachment2D>>> = cast _Runtime.UNDEFINED;
     var skins:Array<AttachmentSkin2D> = cast _Runtime.UNDEFINED;
     table = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
-    skins = cast ([] : Array<Dynamic>);
+    skins = (cast cast ([] : Array<Dynamic>));
     if ((cast !(cast _Runtime.isArray(raw) : Bool) : Bool)) { return cast { skins: skins, table: table }; }
     for (rawSkin in _Runtime.iterable(raw)) {
       if ((cast ((cast _Runtime.strictEquals(rawSkin, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(rawSkin), 'object') : Bool)) : Bool)) { continue; }
       var skin:flighthq._internal._Record<String, flighthq._internal._Any> = (cast rawSkin : flighthq._internal._Record<String, flighthq._internal._Any>);
-      var skinName:String = ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(skin, 'name')), 'string') : Bool) && (cast ((cast _Runtime.field(_Runtime.field(skin, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.field(skin, 'name') : Dynamic) : (cast DragonBonesParse.DEFAULT_DRAGONBONES_SKIN_NAME__dragonBonesParse : Dynamic));
-      if ((cast !(cast _Runtime.isArray(_Runtime.field(skin, 'slot')) : Bool) : Bool)) { continue; }
-      var attachments:Array<SkinAttachment2D> = cast ([] : Array<Dynamic>);
-      for (rawSlot in _Runtime.iterable(_Runtime.field(skin, 'slot'))) {
+      var skinName:String = ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast skin : { var name:flighthq._internal._Any; }).name), 'string') : Bool) && (cast ((cast _Runtime.field((cast skin : { var name:flighthq._internal._Any; }).name, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast skin : { var name:flighthq._internal._Any; }).name : Dynamic) : (cast DragonBonesParse.DEFAULT_DRAGONBONES_SKIN_NAME__dragonBonesParse : Dynamic));
+      if ((cast !(cast _Runtime.isArray((cast skin : { var slot:flighthq._internal._Any; }).slot) : Bool) : Bool)) { continue; }
+      var attachments:Array<SkinAttachment2D> = (cast cast ([] : Array<Dynamic>));
+      for (rawSlot in _Runtime.iterable((cast skin : { var slot:flighthq._internal._Any; }).slot)) {
         if ((cast ((cast _Runtime.strictEquals(rawSlot, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(rawSlot), 'object') : Bool)) : Bool)) { continue; }
         var slot:flighthq._internal._Record<String, flighthq._internal._Any> = (cast rawSlot : flighthq._internal._Record<String, flighthq._internal._Any>);
-        if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(slot, 'name')), 'string') : Bool)) { continue; }
-        var displays:Array<Null<Attachment2D>> = (cast DragonBonesParse.parseDragonBonesDisplayList__dragonBonesParse((cast _Runtime.field(slot, 'display') : flighthq._internal._Any), remapBoneIndex, (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Array<Null<Attachment2D>>);
-        if ((cast _Runtime.strictEquals(skinName, DragonBonesParse.DEFAULT_DRAGONBONES_SKIN_NAME__dragonBonesParse) : Bool)) { ((cast table : flighthq._internal._Map<String, Array<Null<Attachment2D>>>).set(_Runtime.field(slot, 'name'), displays)); }
-        var slotIndex:Float = _Runtime.coalesce(((cast slotOrder : flighthq._internal._Map<String, Float>).get(_Runtime.field(slot, 'name'))), function():Dynamic return cast -1.0);
+        if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast slot : { var name:flighthq._internal._Any; }).name), 'string') : Bool)) { continue; }
+        var displays:Array<Null<Attachment2D>> = (cast DragonBonesParse.parseDragonBonesDisplayList__dragonBonesParse((cast (cast slot : { var display:flighthq._internal._Any; }).display : flighthq._internal._Any), (cast remapBoneIndex), (cast diagnostics)) : Array<Null<Attachment2D>>);
+        if ((cast _Runtime.strictEquals(skinName, DragonBonesParse.DEFAULT_DRAGONBONES_SKIN_NAME__dragonBonesParse) : Bool)) { ((cast table : flighthq._internal._Map<String, Array<Null<Attachment2D>>>).set((cast slot : { var name:flighthq._internal._Any; }).name, (cast displays))); }
+        var slotIndex:Float = _Runtime.coalesce(((cast slotOrder : flighthq._internal._Map<String, Float>).get((cast slot : { var name:flighthq._internal._Any; }).name)), function():Dynamic return cast -1.0);
         if ((cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) { continue; }
         for (display in _Runtime.iterable(displays)) {
-          var displayName:Null<String> = _Runtime.optionalField(display, 'name');
+          var displayName:Null<String> = ({ final __structural24 = display; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var name:Null<String>; }).name; });
           if ((cast ((cast !_Runtime.strictEquals(display, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(displayName), 'string') : Bool)) : Bool)) {
             _Runtime.callProperty(attachments, 'push', cast ([{ attachment: display, name: displayName, slotIndex: slotIndex }] : Array<Dynamic>));
           }
@@ -476,10 +478,10 @@ class DragonBonesParse {
     var type:String = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(raw, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool)) { return cast null; }
     display = (cast raw : flighthq._internal._Record<String, flighthq._internal._Any>);
-    type = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(display, 'type')), 'string') : Bool) ? (cast _Runtime.field(display, 'type') : Dynamic) : (cast 'image' : Dynamic));
-    if ((cast _Runtime.strictEquals(type, 'image') : Bool)) { return cast (cast DragonBonesParse.parseDragonBonesRegionDisplay__dragonBonesParse((cast display : flighthq._internal._Record<String, flighthq._internal._Any>)) : Null<Attachment2D>); }
-    if ((cast _Runtime.strictEquals(type, 'mesh') : Bool)) { return cast (cast DragonBonesParse.parseDragonBonesMeshDisplay__dragonBonesParse((cast display : flighthq._internal._Record<String, flighthq._internal._Any>), remapBoneIndex, (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Attachment2D>); }
-    reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'dragonbones.' + Std.string(type) + '-display-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { displays: 1.0 } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+    type = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast display : { var type:flighthq._internal._Any; }).type), 'string') : Bool) ? (cast (cast display : { var type:flighthq._internal._Any; }).type : Dynamic) : (cast 'image' : Dynamic));
+    if ((cast _Runtime.strictEquals(type, 'image') : Bool)) { return cast (cast DragonBonesParse.parseDragonBonesRegionDisplay__dragonBonesParse((cast display)) : RegionAttachment2D); }
+    if ((cast _Runtime.strictEquals(type, 'mesh') : Bool)) { return cast (cast DragonBonesParse.parseDragonBonesMeshDisplay__dragonBonesParse((cast display), (cast remapBoneIndex), (cast diagnostics)) : Null<MeshAttachment2D>); }
+    reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'dragonbones.' + Std.string(type) + '-display-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { displays: 1.0 }));
     return cast null;
     return cast null;
   }
@@ -487,16 +489,16 @@ class DragonBonesParse {
   public static function parseDragonBonesMeshDisplay__dragonBonesParse(display:flighthq._internal._Record<String, flighthq._internal._Any>, remapBoneIndex:DragonBonesBoneRemap__dragonBonesParse, ?diagnostics:Array<ImportDiagnostic>):Null<MeshAttachment2D> {
     var uvs:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.hasField(display, 'share') : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'dragonbones.shared-mesh-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { displays: 1.0 } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'dragonbones.shared-mesh-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { displays: 1.0 }));
       return cast null;
     }
     if ((cast _Runtime.hasField(display, 'weights') : Bool)) {
-      if ((cast _Runtime.hasField(display, 'bonePose') : Bool)) { return cast (cast DragonBonesParse.parseDragonBonesWeightedMesh__dragonBonesParse((cast display : flighthq._internal._Record<String, flighthq._internal._Any>), remapBoneIndex, (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<MeshAttachment2D>); }
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'dragonbones.legacy-weighted-mesh-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { displays: 1.0 } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      if ((cast _Runtime.hasField(display, 'bonePose') : Bool)) { return cast (cast DragonBonesParse.parseDragonBonesWeightedMesh__dragonBonesParse((cast display), (cast remapBoneIndex), (cast diagnostics)) : MeshAttachment2D); }
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'dragonbones.legacy-weighted-mesh-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { displays: 1.0 }));
       return cast null;
     }
-    uvs = (cast DragonBonesParse.toFloat32Array__dragonBonesParse((cast _Runtime.field(display, 'uvs') : flighthq._internal._Any)) : flighthq._internal._Float32Array);
-    return cast { kind: MeshAttachment2DKind, name: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(display, 'name')), 'string') : Bool) ? (cast _Runtime.field(display, 'name') : Dynamic) : (cast null : Dynamic)), skin: null, triangles: (cast DragonBonesParse.toUint16Array__dragonBonesParse((cast _Runtime.field(display, 'triangles') : flighthq._internal._Any)) : flighthq._internal._UInt16Array), uvs: uvs, vertexCount: (_Runtime.toInt32(_Runtime.field(uvs, 'length')) >> 1), vertices: (cast DragonBonesParse.toFloat32Array__dragonBonesParse((cast _Runtime.field(display, 'vertices') : flighthq._internal._Any)) : Null<flighthq._internal._Float32Array>) };
+    uvs = (cast DragonBonesParse.toFloat32Array__dragonBonesParse((cast (cast display : { var uvs:flighthq._internal._Any; }).uvs : flighthq._internal._Any)) : flighthq._internal._Float32Array);
+    return cast { kind: MeshAttachment2DKind, name: ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast display : { var name:flighthq._internal._Any; }).name), 'string') : Bool) ? (cast (cast display : { var name:flighthq._internal._Any; }).name : Dynamic) : (cast null : Dynamic)), skin: null, triangles: (cast DragonBonesParse.toUint16Array__dragonBonesParse((cast (cast display : { var triangles:flighthq._internal._Any; }).triangles : flighthq._internal._Any)) : flighthq._internal._UInt16Array), uvs: uvs, vertexCount: (_Runtime.toInt32(_Runtime.field(uvs, 'length')) >> 1), vertices: (cast DragonBonesParse.toFloat32Array__dragonBonesParse((cast (cast display : { var vertices:flighthq._internal._Any; }).vertices : flighthq._internal._Any)) : flighthq._internal._Float32Array) };
     return cast null;
   }
 
@@ -518,21 +520,21 @@ class DragonBonesParse {
     var influences:Array<Float> = cast _Runtime.UNDEFINED;
     var recovered:Bool = cast _Runtime.UNDEFINED;
     var iW:Float = cast _Runtime.UNDEFINED;
-    uvs = (cast DragonBonesParse.toFloat32Array__dragonBonesParse((cast _Runtime.field(display, 'uvs') : flighthq._internal._Any)) : flighthq._internal._Float32Array);
+    uvs = (cast DragonBonesParse.toFloat32Array__dragonBonesParse((cast (cast display : { var uvs:flighthq._internal._Any; }).uvs : flighthq._internal._Any)) : flighthq._internal._Float32Array);
     vertexCount = (_Runtime.toInt32(_Runtime.field(uvs, 'length')) >> 1);
-    verts = (cast DragonBonesParse.numberArray__dragonBonesParse((cast _Runtime.field(display, 'vertices') : flighthq._internal._Any)) : Array<Float>);
-    weights = (cast DragonBonesParse.numberArray__dragonBonesParse((cast _Runtime.field(display, 'weights') : flighthq._internal._Any)) : Array<Float>);
-    bonePose = (cast DragonBonesParse.numberArray__dragonBonesParse((cast _Runtime.field(display, 'bonePose') : flighthq._internal._Any)) : Array<Float>);
-    slotPose = (cast DragonBonesParse.numberArray__dragonBonesParse((cast _Runtime.field(display, 'slotPose') : flighthq._internal._Any)) : Array<Float>);
-    spA = (cast DragonBonesParse.numAt__dragonBonesParse((cast slotPose : Array<Float>), (cast 0.0 : Float), (cast 1.0 : Float)) : Float);
-    spB = (cast DragonBonesParse.numAt__dragonBonesParse((cast slotPose : Array<Float>), (cast 1.0 : Float), (cast 0.0 : Float)) : Float);
-    spC = (cast DragonBonesParse.numAt__dragonBonesParse((cast slotPose : Array<Float>), (cast 2.0 : Float), (cast 0.0 : Float)) : Float);
-    spD = (cast DragonBonesParse.numAt__dragonBonesParse((cast slotPose : Array<Float>), (cast 3.0 : Float), (cast 1.0 : Float)) : Float);
-    spTx = (cast DragonBonesParse.numAt__dragonBonesParse((cast slotPose : Array<Float>), (cast 4.0 : Float), (cast 0.0 : Float)) : Float);
-    spTy = (cast DragonBonesParse.numAt__dragonBonesParse((cast slotPose : Array<Float>), (cast 5.0 : Float), (cast 0.0 : Float)) : Float);
+    verts = (cast DragonBonesParse.numberArray__dragonBonesParse((cast (cast display : { var vertices:flighthq._internal._Any; }).vertices : flighthq._internal._Any)) : Array<Float>);
+    weights = (cast DragonBonesParse.numberArray__dragonBonesParse((cast (cast display : { var weights:flighthq._internal._Any; }).weights : flighthq._internal._Any)) : Array<Float>);
+    bonePose = (cast DragonBonesParse.numberArray__dragonBonesParse((cast (cast display : { var bonePose:flighthq._internal._Any; }).bonePose : flighthq._internal._Any)) : Array<Float>);
+    slotPose = (cast DragonBonesParse.numberArray__dragonBonesParse((cast (cast display : { var slotPose:flighthq._internal._Any; }).slotPose : flighthq._internal._Any)) : Array<Float>);
+    spA = (cast DragonBonesParse.numAt__dragonBonesParse((cast slotPose), (cast 0.0 : Float), (cast 1.0 : Float)) : Float);
+    spB = (cast DragonBonesParse.numAt__dragonBonesParse((cast slotPose), (cast 1.0 : Float), (cast 0.0 : Float)) : Float);
+    spC = (cast DragonBonesParse.numAt__dragonBonesParse((cast slotPose), (cast 2.0 : Float), (cast 0.0 : Float)) : Float);
+    spD = (cast DragonBonesParse.numAt__dragonBonesParse((cast slotPose), (cast 3.0 : Float), (cast 1.0 : Float)) : Float);
+    spTx = (cast DragonBonesParse.numAt__dragonBonesParse((cast slotPose), (cast 4.0 : Float), (cast 0.0 : Float)) : Float);
+    spTy = (cast DragonBonesParse.numAt__dragonBonesParse((cast slotPose), (cast 5.0 : Float), (cast 0.0 : Float)) : Float);
     usedBoneCount = HxMath.floor(_Runtime.divideNumbers(_Runtime.field(bonePose, 'length'), 7.0));
     influenceCounts = new flighthq._internal._UInt16Array(vertexCount);
-    influences = cast ([] : Array<Dynamic>);
+    influences = (cast cast ([] : Array<Dynamic>));
     recovered = false;
     iW = 0.0;
     {
@@ -543,8 +545,8 @@ class DragonBonesParse {
           break;
         }
         var declaredCount:Float = (_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(weights, iW++)) | 0);
-        var vx:Float = (cast DragonBonesParse.numAt__dragonBonesParse((cast verts : Array<Float>), (cast (v * 2.0) : Float), (cast 0.0 : Float)) : Float);
-        var vy:Float = (cast DragonBonesParse.numAt__dragonBonesParse((cast verts : Array<Float>), (cast ((v * 2.0) + 1.0) : Float), (cast 0.0 : Float)) : Float);
+        var vx:Float = (cast DragonBonesParse.numAt__dragonBonesParse((cast verts), (cast (v * 2.0) : Float), (cast 0.0 : Float)) : Float);
+        var vy:Float = (cast DragonBonesParse.numAt__dragonBonesParse((cast verts), (cast ((v * 2.0) + 1.0) : Float), (cast 0.0 : Float)) : Float);
         var sx:Float = (((spA * vx) + (spC * vy)) + spTx);
         var sy:Float = (((spB * vx) + (spD * vy)) + spTy);
         var realCount:Float = 0.0;
@@ -558,7 +560,7 @@ class DragonBonesParse {
             var rawBoneIndex:Float = (_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(weights, iW++)) | 0);
             var weight:Float = flighthq._internal._StaticIndex.readArray(weights, iW++);
             var outputBone:Float = (cast remapBoneIndex((cast rawBoneIndex : Float)) : Float);
-            var ordinal:Float = (cast DragonBonesParse.findBonePoseOrdinal__dragonBonesParse((cast bonePose : Array<Float>), (cast usedBoneCount : Float), (cast rawBoneIndex : Float)) : Float);
+            var ordinal:Float = (cast DragonBonesParse.findBonePoseOrdinal__dragonBonesParse((cast bonePose), (cast usedBoneCount : Float), (cast rawBoneIndex : Float)) : Float);
             if ((cast ((cast ((cast ((cast outputBone : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ordinal : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast realCount : Float) >= (cast DragonBonesParse.MAX_INFLUENCES_PER_VERTEX__dragonBonesParse : Float)) : Bool)) : Bool)) {
               (recovered = cast (true : Dynamic));
               j++;
@@ -594,18 +596,18 @@ class DragonBonesParse {
       }
     }
     if ((cast recovered : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover : ImportDiagnosticSeverity), (cast 'dragonbones.weighted-mesh-recovered' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { meshes: 1.0 } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'dragonbones.weighted-mesh-recovered' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { meshes: 1.0 }));
     }
-    return cast { kind: MeshAttachment2DKind, name: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(display, 'name')), 'string') : Bool) ? (cast _Runtime.field(display, 'name') : Dynamic) : (cast null : Dynamic)), skin: { influenceCounts: influenceCounts, influences: new flighthq._internal._Float32Array(influences) }, triangles: (cast DragonBonesParse.toUint16Array__dragonBonesParse((cast _Runtime.field(display, 'triangles') : flighthq._internal._Any)) : flighthq._internal._UInt16Array), uvs: uvs, vertexCount: vertexCount, vertices: null };
+    return cast { kind: MeshAttachment2DKind, name: ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast display : { var name:flighthq._internal._Any; }).name), 'string') : Bool) ? (cast (cast display : { var name:flighthq._internal._Any; }).name : Dynamic) : (cast null : Dynamic)), skin: { influenceCounts: influenceCounts, influences: new flighthq._internal._Float32Array(influences) }, triangles: (cast DragonBonesParse.toUint16Array__dragonBonesParse((cast (cast display : { var triangles:flighthq._internal._Any; }).triangles : flighthq._internal._Any)) : flighthq._internal._UInt16Array), uvs: uvs, vertexCount: vertexCount, vertices: null };
     return cast null;
   }
 
   public static function parseDragonBonesDisplayList__dragonBonesParse(raw:flighthq._internal._Any, remapBoneIndex:DragonBonesBoneRemap__dragonBonesParse, ?diagnostics:Array<ImportDiagnostic>):Array<Null<Attachment2D>> {
     var displays:Array<Null<Attachment2D>> = cast _Runtime.UNDEFINED;
-    displays = cast ([] : Array<Dynamic>);
+    displays = (cast cast ([] : Array<Dynamic>));
     if ((cast !(cast _Runtime.isArray(raw) : Bool) : Bool)) { return cast displays; }
     for (rawDisplay in _Runtime.iterable(raw)) {
-      _Runtime.callProperty(displays, 'push', cast ([(cast DragonBonesParse.parseDragonBonesDisplay__dragonBonesParse((cast rawDisplay : flighthq._internal._Any), remapBoneIndex, (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Attachment2D>)] : Array<Dynamic>));
+      _Runtime.callProperty(displays, 'push', cast ([(cast DragonBonesParse.parseDragonBonesDisplay__dragonBonesParse((cast rawDisplay : flighthq._internal._Any), (cast remapBoneIndex), (cast diagnostics)) : Null<Attachment2D>)] : Array<Dynamic>));
     }
     return cast displays;
     return cast null;
@@ -613,27 +615,27 @@ class DragonBonesParse {
 
   public static function parseDragonBonesRegionDisplay__dragonBonesParse(display:flighthq._internal._Record<String, flighthq._internal._Any>):RegionAttachment2D {
     var transform:{ var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; } = cast _Runtime.UNDEFINED;
-    transform = (cast DragonBonesParse.parseDragonBonesBoneTransform__dragonBonesParse((cast _Runtime.field(display, 'transform') : flighthq._internal._Any)) : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; });
-    return cast { height: 0.0, kind: RegionAttachment2DKind, name: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(display, 'name')), 'string') : Bool) ? (cast _Runtime.field(display, 'name') : Dynamic) : (cast null : Dynamic)), rotation: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).rotation, scaleX: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).scaleX, scaleY: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).scaleY, width: 0.0, x: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).x, y: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).y };
+    transform = (cast DragonBonesParse.parseDragonBonesBoneTransform__dragonBonesParse((cast (cast display : { var transform:flighthq._internal._Any; }).transform : flighthq._internal._Any)) : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; });
+    return cast { height: 0.0, kind: RegionAttachment2DKind, name: ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast display : { var name:flighthq._internal._Any; }).name), 'string') : Bool) ? (cast (cast display : { var name:flighthq._internal._Any; }).name : Dynamic) : (cast null : Dynamic)), rotation: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).rotation, scaleX: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).scaleX, scaleY: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).scaleY, width: 0.0, x: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).x, y: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).y };
     return cast null;
   }
 
   public static function parseDragonBonesSlots__dragonBonesParse(raw:flighthq._internal._Any, boneIndexByName:flighthq._internal._Map<String, Float>, skin:flighthq._internal._Map<String, Array<Null<Attachment2D>>>, ?diagnostics:Array<ImportDiagnostic>):Array<Slot2D> {
     var slots:Array<Slot2D> = cast _Runtime.UNDEFINED;
-    slots = cast ([] : Array<Dynamic>);
+    slots = (cast cast ([] : Array<Dynamic>));
     if ((cast !(cast _Runtime.isArray(raw) : Bool) : Bool)) { return cast slots; }
     for (entry in _Runtime.iterable(raw)) {
       if ((cast ((cast _Runtime.strictEquals(entry, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(entry), 'object') : Bool)) : Bool)) { continue; }
       var slot:flighthq._internal._Record<String, flighthq._internal._Any> = (cast entry : flighthq._internal._Record<String, flighthq._internal._Any>);
-      var name:Null<String> = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(slot, 'name')), 'string') : Bool) ? (cast _Runtime.field(slot, 'name') : Dynamic) : (cast null : Dynamic));
-      var boneIndex:Float = ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(slot, 'parent')), 'string') : Bool) ? (cast _Runtime.coalesce(((cast boneIndexByName : flighthq._internal._Map<String, Float>).get(_Runtime.field(slot, 'parent'))), function():Dynamic return cast -1.0) : Dynamic) : (cast -1.0 : Dynamic));
-      var displayIndex:Float = (_Runtime.toInt32((cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(slot, 'displayIndex') : flighthq._internal._Any), (cast 0.0 : Float)) : Float)) | 0);
+      var name:Null<String> = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast slot : { var name:flighthq._internal._Any; }).name), 'string') : Bool) ? (cast (cast slot : { var name:flighthq._internal._Any; }).name : Dynamic) : (cast null : Dynamic));
+      var boneIndex:Float = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast slot : { var parent:flighthq._internal._Any; }).parent), 'string') : Bool) ? (cast _Runtime.coalesce(((cast boneIndexByName : flighthq._internal._Map<String, Float>).get((cast slot : { var parent:flighthq._internal._Any; }).parent)), function():Dynamic return cast -1.0) : Dynamic) : (cast -1.0 : Dynamic));
+      var displayIndex:Float = (_Runtime.toInt32((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast slot : { var displayIndex:flighthq._internal._Any; }).displayIndex : flighthq._internal._Any), (cast 0.0 : Float)) : Float)) | 0);
       var attachment:Null<Attachment2D> = null;
       if ((cast ((cast !_Runtime.strictEquals(name, null) : Bool) && (cast ((cast displayIndex : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
         var displays:Null<Array<Null<Attachment2D>>> = ((cast skin : flighthq._internal._Map<String, Array<Null<Attachment2D>>>).get(name));
         if ((cast ((cast !_Runtime.strictEquals(displays, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast displayIndex : Float) < (cast _Runtime.field(displays, 'length') : Float)) : Bool)) : Bool)) { (attachment = cast (flighthq._internal._StaticIndex.readArray(displays, displayIndex) : Dynamic)); }
       }
-      _Runtime.callProperty(slots, 'push', cast ([{ attachment: attachment, boneIndex: boneIndex, color: (cast DragonBonesParse.parseDragonBonesColor__dragonBonesParse((cast _Runtime.field(slot, 'color') : flighthq._internal._Any), (cast diagnostics : Null<Array<ImportDiagnostic>>)) : Null<Float>), name: name }] : Array<Dynamic>));
+      _Runtime.callProperty(slots, 'push', cast ([{ attachment: attachment, boneIndex: boneIndex, color: (cast DragonBonesParse.parseDragonBonesColor__dragonBonesParse((cast (cast slot : { var color:flighthq._internal._Any; }).color : flighthq._internal._Any), (cast diagnostics)) : Float), name: name }] : Array<Dynamic>));
     }
     return cast slots;
     return cast null;
@@ -647,8 +649,8 @@ class DragonBonesParse {
     index = 0.0;
     for (entry in _Runtime.iterable(raw)) {
       if ((cast ((cast _Runtime.strictEquals(entry, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(entry), 'object') : Bool)) : Bool)) { continue; }
-      var name:flighthq._internal._Any = _Runtime.field((cast entry : flighthq._internal._Record<String, flighthq._internal._Any>), 'name');
-      if ((cast _Runtime.strictEquals(_Runtime.typeofValue(name), 'string') : Bool)) { ((cast order : flighthq._internal._Map<String, Float>).set(name, index)); }
+      var name:flighthq._internal._Any = (cast (cast entry : flighthq._internal._Record<String, flighthq._internal._Any>) : { var name:flighthq._internal._Any; }).name;
+      if ((cast _Runtime.strictEquals(_Runtime.typeofValue(name), 'string') : Bool)) { ((cast order : flighthq._internal._Map<String, Float>).set(name, (cast index))); }
       index++;
     }
     return cast order;
@@ -703,13 +705,13 @@ class DragonBonesParse {
     var shearY:Float = cast _Runtime.UNDEFINED;
     t = ((cast ((cast !_Runtime.strictEquals(raw, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool) ? (cast (cast raw : flighthq._internal._Record<String, flighthq._internal._Any>) : Dynamic) : (cast {  } : Dynamic));
     if ((cast ((cast _Runtime.hasField(t, 'rotate') : Bool) || (cast _Runtime.hasField(t, 'skew') : Bool)) : Bool)) {
-      (rotation = cast ((cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(t, 'rotate') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) : Dynamic));
-      (shearY = cast ((cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(t, 'skew') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) : Dynamic));
+      (rotation = cast ((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast t : { var rotate:flighthq._internal._Any; }).rotate : flighthq._internal._Any), (cast 0.0 : Float)) : Float) : Dynamic));
+      (shearY = cast ((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast t : { var skew:flighthq._internal._Any; }).skew : flighthq._internal._Any), (cast 0.0 : Float)) : Float) : Dynamic));
     } else {
-      (rotation = cast ((cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(t, 'skY') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) : Dynamic));
-      (shearY = cast (((cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(t, 'skX') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) - rotation) : Dynamic));
+      (rotation = cast ((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast t : { var skY:flighthq._internal._Any; }).skY : flighthq._internal._Any), (cast 0.0 : Float)) : Float) : Dynamic));
+      (shearY = cast (((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast t : { var skX:flighthq._internal._Any; }).skX : flighthq._internal._Any), (cast 0.0 : Float)) : Float) - rotation) : Dynamic));
     }
-    return cast { rotation: rotation, scaleX: (cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(t, 'scX') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), scaleY: (cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(t, 'scY') : flighthq._internal._Any), (cast 1.0 : Float)) : Float), shearY: shearY, x: (cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(t, 'x') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), y: (cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(t, 'y') : flighthq._internal._Any), (cast 0.0 : Float)) : Float) };
+    return cast { rotation: rotation, scaleX: (cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast t : { var scX:flighthq._internal._Any; }).scX : flighthq._internal._Any), (cast 1.0 : Float)) : Float), scaleY: (cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast t : { var scY:flighthq._internal._Any; }).scY : flighthq._internal._Any), (cast 1.0 : Float)) : Float), shearY: shearY, x: (cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast t : { var x:flighthq._internal._Any; }).x : flighthq._internal._Any), (cast 0.0 : Float)) : Float), y: (cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast t : { var y:flighthq._internal._Any; }).y : flighthq._internal._Any), (cast 0.0 : Float)) : Float) };
     return cast null;
   }
 
@@ -722,19 +724,19 @@ class DragonBonesParse {
     var advanced:Bool = cast _Runtime.UNDEFINED;
     rawArray = ((cast _Runtime.isArray(raw) : Bool) ? (cast raw : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
     rawIndexToOutput = _Runtime.fill(_Runtime.createArray(_Runtime.field(rawArray, 'length')), -1.0, 0, null, 1);
-    pending = cast ([] : Array<Dynamic>);
+    pending = (cast cast ([] : Array<Dynamic>));
     {
       var ri:Float = 0.0;
       while ((cast ((cast ri : Float) < (cast _Runtime.field(rawArray, 'length') : Float)) : Bool)) {
         var entry:flighthq._internal._Any = flighthq._internal._StaticIndex.readArray(rawArray, ri);
         if ((cast ((cast _Runtime.strictEquals(entry, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(entry), 'object') : Bool)) : Bool)) { ri++; continue; }
         var b:flighthq._internal._Record<String, flighthq._internal._Any> = (cast entry : flighthq._internal._Record<String, flighthq._internal._Any>);
-        var transform:{ var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; } = (cast DragonBonesParse.parseDragonBonesBoneTransform__dragonBonesParse((cast _Runtime.field(b, 'transform') : flighthq._internal._Any)) : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; });
-        _Runtime.callProperty(pending, 'push', cast ([{ bone: { length: (cast DragonBonesParse.numberOr__dragonBonesParse((cast _Runtime.field(b, 'length') : flighthq._internal._Any), (cast 0.0 : Float)) : Float), name: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(b, 'name')), 'string') : Bool) ? (cast _Runtime.field(b, 'name') : Dynamic) : (cast null : Dynamic)), parentIndex: -1.0, rotation: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).rotation, scaleX: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).scaleX, scaleY: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).scaleY, shearX: 0.0, shearY: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).shearY, transformMode: (cast DragonBonesParse.dragonBonesTransformMode__dragonBonesParse((cast b : flighthq._internal._Record<String, flighthq._internal._Any>)) : TransformInherit2D), x: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).x, y: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).y }, parentName: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(b, 'parent')), 'string') : Bool) ? (cast _Runtime.field(b, 'parent') : Dynamic) : (cast null : Dynamic)), rawIndex: ri }] : Array<Dynamic>));
+        var transform:{ var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; } = (cast DragonBonesParse.parseDragonBonesBoneTransform__dragonBonesParse((cast (cast b : { var transform:flighthq._internal._Any; }).transform : flighthq._internal._Any)) : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; });
+        _Runtime.callProperty(pending, 'push', cast ([{ bone: { length: (cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast b : { var length:flighthq._internal._Any; }).length : flighthq._internal._Any), (cast 0.0 : Float)) : Float), name: ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast b : { var name:flighthq._internal._Any; }).name), 'string') : Bool) ? (cast (cast b : { var name:flighthq._internal._Any; }).name : Dynamic) : (cast null : Dynamic)), parentIndex: -1.0, rotation: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).rotation, scaleX: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).scaleX, scaleY: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).scaleY, shearX: 0.0, shearY: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).shearY, transformMode: (cast DragonBonesParse.dragonBonesTransformMode__dragonBonesParse((cast b)) : TransformInherit2D), x: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).x, y: (cast transform : { var rotation:Float; var scaleX:Float; var scaleY:Float; var shearY:Float; var x:Float; var y:Float; }).y }, parentName: ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast b : { var parent:flighthq._internal._Any; }).parent), 'string') : Bool) ? (cast (cast b : { var parent:flighthq._internal._Any; }).parent : Dynamic) : (cast null : Dynamic)), rawIndex: ri }] : Array<Dynamic>));
         ri++;
       }
     }
-    bones = cast ([] : Array<Dynamic>);
+    bones = (cast cast ([] : Array<Dynamic>));
     indexByName = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     advanced = true;
     while ((cast ((cast ((cast _Runtime.field(pending, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast advanced : Bool)) : Bool)) {
@@ -745,7 +747,7 @@ class DragonBonesParse {
           var entry:{ var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; } = flighthq._internal._StaticIndex.readArray(pending, i);
           if ((cast ((cast _Runtime.strictEquals((cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).parentName, null) : Bool) || (cast ((cast indexByName : flighthq._internal._Map<String, Float>).has((cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).parentName)) : Bool)) : Bool)) {
             ((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).parentIndex = ((cast _Runtime.strictEquals((cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).parentName, null) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast ((cast indexByName : flighthq._internal._Map<String, Float>).get((cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).parentName)) : Float) : Dynamic)));
-            if ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name), 'string') : Bool)) { ((cast indexByName : flighthq._internal._Map<String, Float>).set((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name, _Runtime.field(bones, 'length'))); }
+            if ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name), 'string') : Bool)) { ((cast indexByName : flighthq._internal._Map<String, Float>).set((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name, (cast _Runtime.field(bones, 'length')))); }
             flighthq._internal._StaticIndex.writeArray(rawIndexToOutput, (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).rawIndex, _Runtime.field(bones, 'length'));
             _Runtime.callProperty(bones, 'push', cast ([(cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone] : Array<Dynamic>));
             _Runtime.splice(pending, Std.int(i), Std.int(1.0), []);
@@ -757,10 +759,10 @@ class DragonBonesParse {
       }
     }
     if ((cast ((cast _Runtime.field(pending, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast 'dragonbones.unresolved-bone-parent' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { count: _Runtime.field(pending, 'length') } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'dragonbones.unresolved-bone-parent' : String), (cast 'parseDragonBonesSkeleton' : String), (cast { count: _Runtime.field(pending, 'length') }));
       for (entry in _Runtime.iterable(pending)) {
         ((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).parentIndex = -1.0);
-        if ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name), 'string') : Bool)) { ((cast indexByName : flighthq._internal._Map<String, Float>).set((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name, _Runtime.field(bones, 'length'))); }
+        if ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name), 'string') : Bool)) { ((cast indexByName : flighthq._internal._Map<String, Float>).set((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name, (cast _Runtime.field(bones, 'length')))); }
         flighthq._internal._StaticIndex.writeArray(rawIndexToOutput, (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).rawIndex, _Runtime.field(bones, 'length'));
         _Runtime.callProperty(bones, 'push', cast ([(cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone] : Array<Dynamic>));
       }
@@ -770,7 +772,7 @@ class DragonBonesParse {
   }
 
   public static function dragonBonesTransformMode__dragonBonesParse(bone:flighthq._internal._Record<String, flighthq._internal._Any>):TransformInherit2D {
-    return cast { reflection: (cast DragonBonesParse.boolOr__dragonBonesParse((cast _Runtime.field(bone, 'inheritReflection') : flighthq._internal._Any), (cast true : Bool)) : Bool), rotation: (cast DragonBonesParse.boolOr__dragonBonesParse((cast _Runtime.field(bone, 'inheritRotation') : flighthq._internal._Any), (cast true : Bool)) : Bool), scale: (cast DragonBonesParse.boolOr__dragonBonesParse((cast _Runtime.field(bone, 'inheritScale') : flighthq._internal._Any), (cast true : Bool)) : Bool), translation: (cast DragonBonesParse.boolOr__dragonBonesParse((cast _Runtime.field(bone, 'inheritTranslation') : flighthq._internal._Any), (cast true : Bool)) : Bool) };
+    return cast { reflection: (cast DragonBonesParse.boolOr__dragonBonesParse((cast (cast bone : { var inheritReflection:flighthq._internal._Any; }).inheritReflection : flighthq._internal._Any), (cast true : Bool)) : Bool), rotation: (cast DragonBonesParse.boolOr__dragonBonesParse((cast (cast bone : { var inheritRotation:flighthq._internal._Any; }).inheritRotation : flighthq._internal._Any), (cast true : Bool)) : Bool), scale: (cast DragonBonesParse.boolOr__dragonBonesParse((cast (cast bone : { var inheritScale:flighthq._internal._Any; }).inheritScale : flighthq._internal._Any), (cast true : Bool)) : Bool), translation: (cast DragonBonesParse.boolOr__dragonBonesParse((cast (cast bone : { var inheritTranslation:flighthq._internal._Any; }).inheritTranslation : flighthq._internal._Any), (cast true : Bool)) : Bool) };
     return cast null;
   }
 
@@ -783,7 +785,7 @@ class DragonBonesParse {
     var count:Float = cast _Runtime.UNDEFINED;
     count = 0.0;
     if ((cast _Runtime.isArray(raw) : Bool)) { (count = cast (_Runtime.field(raw, 'length') : Dynamic)); } else { if ((cast ((cast !_Runtime.strictEquals(raw, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool)) { (count = cast (_Runtime.field(flighthq._internal.DynamicObject.keys((cast raw : flighthq._internal._Record<String, flighthq._internal._Any>)), 'length') : Dynamic)); } }
-    if ((cast ((cast count : Float) > (cast 0.0 : Float)) : Bool)) { reportImportDiagnostic((cast diagnostics : Null<Array<ImportDiagnostic>>), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip : ImportDiagnosticSeverity), (cast kind : String), (cast 'parseDragonBonesSkeleton' : String), (cast { count: count } : Null<flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<String, Float>, Bool>>>)); }
+    if ((cast ((cast count : Float) > (cast 0.0 : Float)) : Bool)) { reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast kind : String), (cast 'parseDragonBonesSkeleton' : String), (cast { count: count })); }
   }
 
   public static final DEFAULT_DRAGONBONES_ANIMATION_NAME__dragonBonesParse:String = 'default';
@@ -796,7 +798,7 @@ class DragonBonesParse {
 
   public static final DRAGONBONES_NO_TWEEN__dragonBonesParse:Float = 100.0;
 
-  public static final EMPTY_DRAGONBONES_FRAME__dragonBonesParse:flighthq._internal._Record<String, flighthq._internal._Any> = {  };
+  public static final EMPTY_DRAGONBONES_FRAME__dragonBonesParse:flighthq._internal._Record<String, flighthq._internal._Any> = (cast {  });
 
   public static final MAX_INFLUENCES_PER_VERTEX__dragonBonesParse:Float = 65535.0;
 }

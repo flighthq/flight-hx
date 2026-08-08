@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef DirectionalBlurEffect = { var kind:Kind; @:optional var angle:Float; @:optional var length:Float; @:optional var samples:Float; };
+typedef DirectionalBlurEffect = { var kind:String; @:optional var angle:Float; @:optional var length:Float; @:optional var samples:Float; };

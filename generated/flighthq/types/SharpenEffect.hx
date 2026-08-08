@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef SharpenEffect = { var kind:Kind; @:optional var amount:Float; };
+typedef SharpenEffect = { var kind:String; @:optional var amount:Float; };

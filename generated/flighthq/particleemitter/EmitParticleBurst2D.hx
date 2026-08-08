@@ -60,8 +60,8 @@ class EmitParticleBurst2D {
     if ((cast ((cast toSpawn : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     hasColorVariance = ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(config.colorStartVarianceR, 0.0) : Bool) || (cast !_Runtime.strictEquals(config.colorStartVarianceG, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(config.colorStartVarianceB, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(config.colorEndVarianceR, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(config.colorEndVarianceG, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(config.colorEndVarianceB, 0.0) : Bool));
     newCount = (liveCount + toSpawn);
-    reserveParticleEmitter2D((cast emitter : ParticleEmitter2D), (cast newCount : Float));
-    ensureParticleEmitterStateCapacity((cast state : ParticleEmitterState), (cast newCount : Float), (cast hasColorVariance : Bool));
+    reserveParticleEmitter2D((cast emitter), (cast newCount : Float));
+    ensureParticleEmitterStateCapacity((cast state), (cast newCount : Float), (cast hasColorVariance : Bool));
     __destructure0 = config;
     colorStartR = _Runtime.field(__destructure0, 'colorStartR');
     colorStartG = _Runtime.field(__destructure0, 'colorStartG');
@@ -117,12 +117,12 @@ class EmitParticleBurst2D {
         flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, tt, spawnX);
         flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 1.0), spawnY);
         flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 2.0), angle);
-        flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 3.0), ((cast hasScaleCurve : Bool) ? (cast (spawnScale * (cast sampleParticleCurve(scaleCurve, (cast 0.0 : Float)) : Float)) : Dynamic) : (cast spawnScale : Dynamic)));
+        flighthq._internal._StaticIndex.writeFloat32Array(data.transforms, (tt + 3.0), ((cast hasScaleCurve : Bool) ? (cast (spawnScale * (cast sampleParticleCurve((cast scaleCurve), (cast 0.0 : Float)) : Float)) : Dynamic) : (cast spawnScale : Dynamic)));
         flighthq._internal._StaticIndex.writeFloat32Array(data.positionsZ, idx, 0.0);
-        flighthq._internal._StaticIndex.writeFloat32Array(data.alphas, idx, ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(alphaCurve, (cast 0.0 : Float)) : Float) : Dynamic) : (cast config.alphaStart : Dynamic)));
+        flighthq._internal._StaticIndex.writeFloat32Array(data.alphas, idx, ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve((cast alphaCurve), (cast 0.0 : Float)) : Float) : Dynamic) : (cast config.alphaStart : Dynamic)));
         var ct:Float = (idx * 3.0);
         if ((cast hasColorCurve : Bool)) {
-          sampleParticleColorCurve((cast data.colors : {  }), (cast ct : Float), colorCurve, (cast 0.0 : Float));
+          sampleParticleColorCurve((cast data.colors), (cast ct : Float), (cast colorCurve), (cast 0.0 : Float));
         } else { if ((cast hasColorVariance : Bool)) {
           var r0:Float = (cast EmitParticleBurst2D.clamp01__emitParticleBurst2D((cast (colorStartR + ((((cast random() : Float) - 0.5) * 2.0) * config.colorStartVarianceR)) : Float)) : Float);
           var g0:Float = (cast EmitParticleBurst2D.clamp01__emitParticleBurst2D((cast (colorStartG + ((((cast random() : Float) - 0.5) * 2.0) * config.colorStartVarianceG)) : Float)) : Float);

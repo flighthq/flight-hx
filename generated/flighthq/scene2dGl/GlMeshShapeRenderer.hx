@@ -23,7 +23,6 @@ import flighthq.types.PathMesh;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderRegistrySignals;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
-import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Shape;
@@ -49,19 +48,19 @@ class GlMeshShapeRenderer {
     __destructure0 = (cast source : Shape).data;
     commands = _Runtime.field(__destructure0, 'commands');
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) : Bool)) { return cast false; }
-    strokePathTessellator = (cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).strokeTessellator;
-    regions = (cast GlMeshShapeRenderer.resolveGlShapeMeshRegions__glMeshShapeRenderer((cast commands : Array<ShapeCommandToken>), (cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool)) : Null<Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>>>);
+    strokePathTessellator = (cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).strokeTessellator;
+    regions = (cast GlMeshShapeRenderer.resolveGlShapeMeshRegions__glMeshShapeRenderer((cast commands), (cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool)) : Null<Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>>>);
     if ((cast ((cast _Runtime.strictEquals(regions, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(regions, 'length'), 0.0) : Bool)) : Bool)) { return cast false; }
-    version = (cast getNodeLocalContentRevision(source) : Float);
-    meshData = (cast getGlShapeData((cast renderProxy : RenderProxy2D).rendererData) : GlShapeRendererData);
+    version = (cast getNodeLocalContentRevision((cast source)) : Float);
+    meshData = (cast getGlShapeData((cast (cast renderProxy : RenderProxy2D).rendererData)) : GlShapeRendererData);
     if ((cast !_Runtime.strictEquals((cast meshData : GlShapeRendererData).meshVersion, version) : Bool)) {
-      var meshes:Array<GlShapeMesh> = cast ([] : Array<Dynamic>);
+      var meshes:Array<GlShapeMesh> = (cast cast ([] : Array<Dynamic>));
       var supported:Bool = true;
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(regions, 'length') : Float)) : Bool)) {
           var region:flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion> = flighthq._internal._StaticIndex.readArray(regions, i);
-          var mesh:Null<PathMesh> = ((cast ((cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool) && (cast (cast GlMeshShapeRenderer.isShapeStrokeRegion__glMeshShapeRenderer((cast region : flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>)) : Bool) : Bool)) : Bool) ? (cast (cast strokePathTessellator((cast region : ShapeStrokeRegion).path, (cast region : ShapeStrokeRegion).style, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Null<Float>)) : Null<PathMesh>) : Dynamic) : (cast (cast tessellatePath((cast region : { var path:Path; }).path, (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : PathMesh) : Dynamic));
+          var mesh:Null<PathMesh> = ((cast ((cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool) && (cast (cast GlMeshShapeRenderer.isShapeStrokeRegion__glMeshShapeRenderer((cast region)) : Bool) : Bool)) : Bool) ? (cast (cast strokePathTessellator((cast (cast region : ShapeStrokeRegion).path), (cast (cast region : ShapeStrokeRegion).style), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<PathMesh>) : Dynamic) : (cast (cast tessellatePath((cast (cast region : { var path:Path; }).path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : PathMesh) : Dynamic));
           if ((cast _Runtime.strictEquals(mesh, null) : Bool)) {
             (supported = cast (false : Dynamic));
             break;
@@ -74,25 +73,25 @@ class GlMeshShapeRenderer {
       ((cast meshData : GlShapeRendererData).meshVersion = version);
     }
     if ((cast _Runtime.strictEquals((cast meshData : GlShapeRendererData).meshes, null) : Bool)) { return cast false; }
-    drawGlShapeMeshes((cast state : GlRenderState), (cast renderProxy : RenderProxy2D), (cast (cast meshData : GlShapeRendererData).meshes : Array<GlShapeMesh>));
+    drawGlShapeMeshes((cast state), (cast renderProxy), (cast (cast meshData : GlShapeRendererData).meshes));
     return cast true;
     return cast null;
   }
 
-  public static final defaultGlMeshShapeRenderer:Scene2DRenderer = { format: BatchFormat.Quad, createData: createGlShapeData, destroyData: destroyGlShapeData, submit: function(state:GlRenderState, renderProxy:RenderProxy2D):Void {
-    if ((cast (cast drawGlMeshShape((cast state : GlRenderState), (cast renderProxy : RenderProxy2D)) : Bool) : Bool)) { return; }
-    _Runtime.callOptionalValue((cast (cast getGlRenderStateRuntime((cast state : GlRenderState)) : GlRenderStateRuntime) : GlRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
-  } };
+  public static final defaultGlMeshShapeRenderer:Scene2DRenderer = (cast { format: BatchFormat.Quad, createData: createGlShapeData, destroyData: destroyGlShapeData, submit: function(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+    if ((cast (cast drawGlMeshShape((cast state), (cast renderProxy)) : Bool) : Bool)) { return; }
+    _Runtime.callOptionalValue((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
+  } });
 
   public static function resolveGlShapeMeshRegions__glMeshShapeRenderer(commands:Array<ShapeCommandToken>, strokePathTessellatorEnabled:Bool):Null<Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>>> {
     var fillRegions:Null<Array<ShapeFillRegion>> = cast _Runtime.UNDEFINED;
     var strokeRegions:Null<Array<ShapeFillRegion>> = cast _Runtime.UNDEFINED;
     var regions:Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>> = cast _Runtime.UNDEFINED;
-    fillRegions = (cast getShapeFillRegions((cast commands : Array<ShapeCommandToken>)) : Null<Array<ShapeFillRegion>>);
+    fillRegions = (cast getShapeFillRegions((cast commands)) : Null<Array<ShapeFillRegion>>);
     if ((cast _Runtime.strictEquals(fillRegions, null) : Bool)) { return cast null; }
-    strokeRegions = ((cast strokePathTessellatorEnabled : Bool) ? (cast (cast getShapeStrokeRegions((cast commands : Array<ShapeCommandToken>)) : Null<Array<ShapeStrokeRegion>>) : Dynamic) : (cast (cast getShapeStrokeOutlineRegions((cast commands : Array<ShapeCommandToken>)) : Null<Array<ShapeFillRegion>>) : Dynamic));
+    strokeRegions = ((cast strokePathTessellatorEnabled : Bool) ? (cast (cast getShapeStrokeRegions((cast commands)) : Null<Array<ShapeStrokeRegion>>) : Dynamic) : (cast (cast getShapeStrokeOutlineRegions((cast commands)) : Null<Array<ShapeFillRegion>>) : Dynamic));
     if ((cast _Runtime.strictEquals(strokeRegions, null) : Bool)) { return cast null; }
-    regions = _Runtime.concatArrays([_Runtime.toArray(fillRegions), _Runtime.toArray(strokeRegions)]);
+    regions = (cast _Runtime.concatArrays([_Runtime.toArray(fillRegions), _Runtime.toArray(strokeRegions)]));
     return cast ((cast ((cast _Runtime.field(regions, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast regions : Dynamic) : (cast null : Dynamic));
     return cast null;
   }

@@ -23,18 +23,18 @@ class ExplainGlyphAtlasEntry {
     var fits:Bool = cast _Runtime.UNDEFINED;
     runtime = atlas.runtime;
     padding = runtime.padding;
-    usableWidth = (runtime.bitmap.width - (2.0 * padding));
-    usableHeight = (runtime.bitmap.height - (2.0 * padding));
+    usableWidth = ((cast runtime.bitmap : { var width:Float; }).width - (2.0 * padding));
+    usableHeight = ((cast runtime.bitmap : { var height:Float; }).height - (2.0 * padding));
     if ((cast ((cast runtime.entries : flighthq._internal._Map<Float, GlyphEntry>).has(codepoint)) : Bool)) {
       var entry:GlyphEntry = ((cast runtime.entries : flighthq._internal._Map<Float, GlyphEntry>).get(codepoint));
       return cast { renderable: true, reason: 'ok', glyphWidth: entry.width, glyphHeight: entry.height, usableWidth: usableWidth, usableHeight: usableHeight };
     }
-    bitmap = (cast (cast getGlyphRasterizerBackend() : GlyphRasterizerBackend) : GlyphRasterizerBackend).rasterize(codepoint, runtime.rasterizeOptions);
+    bitmap = (cast (cast getGlyphRasterizerBackend() : GlyphRasterizerBackend) : GlyphRasterizerBackend).rasterize((cast codepoint : Float), (cast runtime.rasterizeOptions));
     if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) {
       return cast { renderable: false, reason: 'rasterizer-returned-null', glyphWidth: 0.0, glyphHeight: 0.0, usableWidth: usableWidth, usableHeight: usableHeight };
     }
-    fits = ((cast ((cast (cast bitmap : flighthq.types.GlyphSource.GlyphRasterizedBitmap).width : Float) <= (cast usableWidth : Float)) : Bool) && (cast ((cast (cast bitmap : flighthq.types.GlyphSource.GlyphRasterizedBitmap).height : Float) <= (cast usableHeight : Float)) : Bool));
-    return cast { renderable: fits, reason: ((cast fits : Bool) ? (cast 'ok' : Dynamic) : (cast 'glyph-larger-than-atlas' : Dynamic)), glyphWidth: (cast bitmap : flighthq.types.GlyphSource.GlyphRasterizedBitmap).width, glyphHeight: (cast bitmap : flighthq.types.GlyphSource.GlyphRasterizedBitmap).height, usableWidth: usableWidth, usableHeight: usableHeight };
+    fits = ((cast ((cast (cast bitmap : { var width:Float; }).width : Float) <= (cast usableWidth : Float)) : Bool) && (cast ((cast (cast bitmap : { var height:Float; }).height : Float) <= (cast usableHeight : Float)) : Bool));
+    return cast { renderable: fits, reason: ((cast fits : Bool) ? (cast 'ok' : Dynamic) : (cast 'glyph-larger-than-atlas' : Dynamic)), glyphWidth: (cast bitmap : { var width:Float; }).width, glyphHeight: (cast bitmap : { var height:Float; }).height, usableWidth: usableWidth, usableHeight: usableHeight };
     return cast null;
   }
 }

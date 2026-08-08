@@ -24,22 +24,22 @@ class WgpuDirectionalBlurEffect {
     angle = _Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 0.0);
     length = _Runtime.coalesce(_Runtime.field(effect, 'length'), function():Dynamic return cast 8.0);
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
-    pipeline = (cast getWgpuEffectPipeline((cast state : WgpuRenderState), (cast 'motion.directionalBlur' : String), (cast WgpuDirectionalBlurEffect.DIRECTIONAL_BLUR_FRAGMENT_WGSL__wgpuDirectionalBlurEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state : WgpuRenderState), (cast (cast source : WgpuRenderTarget) : WgpuRenderTarget), (cast (cast dest : WgpuRenderTarget) : Null<WgpuRenderTarget>), pipeline, (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void return _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'motion.directionalBlur' : String), (cast WgpuDirectionalBlurEffect.DIRECTIONAL_BLUR_FRAGMENT_WGSL__wgpuDirectionalBlurEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, angle);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, length);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, samples);
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, _Runtime.field(source, 'width'));
       flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, _Runtime.field(source, 'height'));
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
-  public static final defaultWgpuDirectionalBlurEffectRunner:WgpuRenderEffectRunner = function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyDirectionalBlurEffectToWgpu((cast _Runtime.field(ctx, 'state') : WgpuRenderState), (cast _Runtime.field(ctx, 'source') : WgpuRenderTarget), (cast _Runtime.field(ctx, 'dest') : WgpuRenderTarget), (cast (cast effect : DirectionalBlurEffect) : DirectionalBlurEffect));
-  };
+  public static final defaultWgpuDirectionalBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
+    applyDirectionalBlurEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : DirectionalBlurEffect)));
+  });
 
   public static function registerWgpuDirectionalBlurEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state : WgpuRenderState), (cast 'DirectionalBlurEffect' : String), (cast defaultWgpuDirectionalBlurEffectRunner : WgpuRenderEffectRunner));
+    registerWgpuRenderEffect((cast state), (cast 'DirectionalBlurEffect' : String), (cast defaultWgpuDirectionalBlurEffectRunner));
   }
 
   public static final DIRECTIONAL_BLUR_FRAGMENT_WGSL__wgpuDirectionalBlurEffect:String = '\nstruct Uniforms {\n  u_angle : f32,\n  u_length : f32,\n  u_samples : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nconst SAMPLES : i32 = 16;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let dir = vec2f(cos(uni.u_angle), sin(uni.u_angle)) * (uni.u_length / uni.u_resolution);\n  let count = min(uni.u_samples, 16.0);\n  var sum = vec4f(0.0);\n  var taken = 0.0;\n  for (var i = 0; i < SAMPLES; i = i + 1) {\n    if (f32(i) >= count) { break; }\n    let t = select(0.0, (f32(i) / (count - 1.0)) - 0.5, count > 1.0);\n    let p = uv + dir * t;\n    sum = sum + textureSampleLevel(tex, smp, p, 0.0);\n    taken = taken + 1.0;\n  }\n  return sum / max(taken, 1.0);\n}';

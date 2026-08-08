@@ -66,17 +66,17 @@ class GlLitProgram {
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locPointCount'), _Runtime.field(lights, 'pointCount'));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locSpotCount'), _Runtime.field(lights, 'spotCount'));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locHemisphereCount'), _Runtime.field(lights, 'hemisphereCount'));
-      ((cast GlLitProgram._uploadedLightBlock__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Scene3DLightBlock>).set(program, lights));
-      ((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Float>).set(program, _Runtime.field(lights, 'version')));
+      ((cast GlLitProgram._uploadedLightBlock__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Scene3DLightBlock>).set(program, (cast lights)));
+      ((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Float>).set(program, (cast _Runtime.field(lights, 'version'))));
     }
-    runtime = (cast getGlScene3DRuntime((cast state : GlRenderState)) : GlScene3DRuntime);
+    runtime = (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime);
     shadow = (cast runtime : GlScene3DRuntime).shadow;
     if ((cast ((cast !_Runtime.strictEquals(shadow, null) : Bool) && (cast (cast shadow : GlScene3DShadow).enabled : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.SHADOW_MAP_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast shadow : GlScene3DShadow).texture);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowBias'), (cast shadow : GlScene3DShadow).shadowBias);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locShadowMap'), GlLitProgram.SHADOW_MAP_TEXTURE_UNIT__glLitProgram);
-      flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locShadowMatrix'), false, (cast shadow : GlScene3DShadow).matrix.m);
+      flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locShadowMatrix'), false, (cast (cast shadow : GlScene3DShadow).matrix : { var m:flighthq._internal._Float32Array; }).m);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowNormalBiasWorld'), (cast shadow : GlScene3DShadow).normalBiasWorld);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locShadowPcfRadius'), (cast shadow : GlScene3DShadow).pcfRadius);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowEnabled'), 1.0);
@@ -99,7 +99,7 @@ class GlLitProgram {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblMaxMip'), ((cast ibl : GlScene3DIbl).prefilteredMipCount - 1.0));
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
     } else {
-      var placeholders:GlIblPlaceholders__glLitProgram = (cast GlLitProgram.ensureGlIblPlaceholders__glLitProgram((cast state : GlRenderState)) : GlIblPlaceholders__glLitProgram);
+      var placeholders:GlIblPlaceholders__glLitProgram = (cast GlLitProgram.ensureGlIblPlaceholders__glLitProgram((cast state)) : GlIblPlaceholders__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast placeholders : GlIblPlaceholders__glLitProgram).cube);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblIrradiance'), GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram);
@@ -142,13 +142,13 @@ class GlLitProgram {
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_MIN_FILTER', flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR));
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_MAG_FILTER', flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR));
     (placeholders = cast ({ cube: cube, lut: lut } : Dynamic));
-    ((cast GlLitProgram._iblPlaceholders__glLitProgram : flighthq._internal._WeakMap<GlRenderState, GlIblPlaceholders__glLitProgram>).set(state, placeholders));
+    ((cast GlLitProgram._iblPlaceholders__glLitProgram : flighthq._internal._WeakMap<GlRenderState, GlIblPlaceholders__glLitProgram>).set(state, (cast placeholders)));
     return cast placeholders;
     return cast null;
   }
 
   @:noCompletion
-  public static function resolveGlLitLocations(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq._internal.dom.WebGLProgram):Dynamic {
+  public static function resolveGlLitLocations(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq._internal.dom.WebGLProgram):flighthq._internal._Omit<flighthq.types.GlLitProgram, String> {
     return cast { locAmbientCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ambientCount'), locAmbientRadiance: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ambientRadiance'), locCameraPosition: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_cameraPosition'), locDirectional: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_directional'), locDirectionalCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_directionalCount'), locDirectionalRadiance: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_directionalRadiance'), locHemisphereCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_hemisphereCount'), locHemisphereLights: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_hemisphereLights'), locIblBrdf: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblBrdf'), locIblEnabled: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblEnabled'), locIblIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblIntensity'), locIblIrradiance: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblIrradiance'), locIblMaxMip: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblMaxMip'), locIblPrefiltered: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_iblPrefiltered'), locPointCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_pointCount'), locPointLights: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_pointLights'), locShadowBias: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowBias'), locShadowEnabled: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowEnabled'), locShadowMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowMap'), locShadowMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowMatrix'), locShadowNormalBiasWorld: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowNormalBiasWorld'), locShadowPcfRadius: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_shadowPcfRadius'), locSpotCount: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_spotCount'), locSpotLights: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_spotLights') };
     return cast null;
   }

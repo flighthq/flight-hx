@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
-typedef TaaEffect = { var kind:Kind; @:optional var feedback:Float; };
+typedef TaaEffect = { var kind:String; @:optional var feedback:Float; };

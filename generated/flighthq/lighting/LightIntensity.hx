@@ -20,7 +20,7 @@ class LightIntensity {
   }
 
   public static function convertLightIntensity(fromUnit:LightUnit, toUnit:LightUnit, value:Float):Float {
-    return cast _Runtime.divideNumbers((cast getLightLinearIntensity((cast fromUnit : LightUnit), (cast value : Float)) : Float), _Runtime.getIndex(LightIntensity.LINEAR_PER_UNIT__lightIntensity, toUnit));
+    return cast _Runtime.divideNumbers((cast getLightLinearIntensity((cast fromUnit), (cast value : Float)) : Float), _Runtime.getIndex(LightIntensity.LINEAR_PER_UNIT__lightIntensity, toUnit));
     return cast null;
   }
 
@@ -31,5 +31,5 @@ class LightIntensity {
 
   public static final REFERENCE_PHOTOMETRIC_LEVEL__lightIntensity:Float = 100000.0;
 
-  public static final LINEAR_PER_UNIT__lightIntensity:flighthq._internal._Record<LightUnit, Float> = _Runtime.objectFromPairs([{ key: CandelaLightUnit, value: (1.0 / LightIntensity.REFERENCE_PHOTOMETRIC_LEVEL__lightIntensity) }, { key: LumenLightUnit, value: (1.0 / ((LightIntensity.REFERENCE_PHOTOMETRIC_LEVEL__lightIntensity * 4.0) * HxMath.PI)) }, { key: LuxLightUnit, value: (1.0 / LightIntensity.REFERENCE_PHOTOMETRIC_LEVEL__lightIntensity) }, { key: UnitlessLightUnit, value: 1.0 }]);
+  public static final LINEAR_PER_UNIT__lightIntensity:flighthq._internal._Record<LightUnit, Float> = (cast _Runtime.objectFromPairs([{ key: CandelaLightUnit, value: (1.0 / LightIntensity.REFERENCE_PHOTOMETRIC_LEVEL__lightIntensity) }, { key: LumenLightUnit, value: (1.0 / ((LightIntensity.REFERENCE_PHOTOMETRIC_LEVEL__lightIntensity * 4.0) * HxMath.PI)) }, { key: LuxLightUnit, value: (1.0 / LightIntensity.REFERENCE_PHOTOMETRIC_LEVEL__lightIntensity) }, { key: UnitlessLightUnit, value: 1.0 }]));
 }

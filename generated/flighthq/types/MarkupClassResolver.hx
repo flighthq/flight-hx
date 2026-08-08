@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef MarkupClassResolver = String->Null<Dynamic>;
+typedef MarkupClassResolver = String->Null<flighthq._internal._Partial<TextFormat>>;

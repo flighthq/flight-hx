@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class DisplacementEffect {
-  public static function createDisplacementEffect(?options:Dynamic):flighthq.types.DisplacementEffect {
+  public static function createDisplacementEffect(?options:flighthq._internal._Omit<flighthq.types.DisplacementEffect, String>):flighthq.types.DisplacementEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'DisplacementEffect' }, options]);
     return cast null;
@@ -28,11 +28,11 @@ class DisplacementEffect {
   }
 
   public static function registerDisplacementEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state : RenderState), (cast 'DisplacementEffect' : String), DisplacementEffect.resolveDisplacementEffectPadding__displacementEffect);
+    registerRenderEffectPaddingResolver((cast state), (cast 'DisplacementEffect' : String), (cast DisplacementEffect.resolveDisplacementEffectPadding__displacementEffect));
   }
 
   public static function resolveDisplacementEffectPadding__displacementEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getDisplacementEffectPadding((cast (cast effect : flighthq.types.DisplacementEffect) : flighthq.types.DisplacementEffect)) : RenderEffectPadding);
+    return cast (cast getDisplacementEffectPadding((cast (cast effect : flighthq.types.DisplacementEffect))) : RenderEffectPadding);
     return cast null;
   }
 }

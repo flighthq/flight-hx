@@ -19,7 +19,7 @@ class CaptureComparison {
     fa = (cast parseBitmapFingerprint((cast a : String)) : Null<BitmapFingerprint>);
     fb = (cast parseBitmapFingerprint((cast b : String)) : Null<BitmapFingerprint>);
     if ((cast ((cast ((cast _Runtime.strictEquals(fa, null) : Bool) || (cast _Runtime.strictEquals(fb, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast fa : BitmapFingerprint).gridSize, (cast fb : BitmapFingerprint).gridSize) : Bool)) : Bool)) { return cast HxMath.POSITIVE_INFINITY; }
-    return cast (cast compareBitmapFingerprints(fa, fb) : Float);
+    return cast (cast compareBitmapFingerprints((cast fa), (cast fb)) : Float);
     return cast null;
   }
 

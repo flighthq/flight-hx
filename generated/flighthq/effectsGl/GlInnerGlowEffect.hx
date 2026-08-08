@@ -21,6 +21,7 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.InnerGlowEffect;
 import flighthq.types.RenderEffect;
+import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.RenderTarget.RenderTargetFormat;
 
 typedef InnerClipLocations__glInnerGlowEffect = GlFullscreenProgram;
@@ -43,10 +44,10 @@ class GlInnerGlowEffect {
     var strength:Float = cast _Runtime.UNDEFINED;
     var quality:Float = cast _Runtime.UNDEFINED;
     var sourceMode:InnerEffectSourceMode = cast _Runtime.UNDEFINED;
-    descriptor = { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') };
-    s0 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
-    s1 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
-    s2 = (cast acquireGlRenderTarget((cast state : GlRenderState), (cast pool : GlRenderTargetPool), descriptor) : GlRenderTarget);
+    descriptor = (cast { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') });
+    s0 = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0);
@@ -54,34 +55,34 @@ class GlInnerGlowEffect {
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
-    applyGlEffectInvertTintPass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast s0 : GlRenderTarget), (cast color : Float), (cast alpha : Float), (cast strength : Float));
-    applyGlEffectBoxBlur((cast state : GlRenderState), (cast s0 : GlRenderTarget), (cast s1 : GlRenderTarget), (cast s2 : GlRenderTarget), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), edgeColor: (cast GlInnerGlowEffect.getInvertTintEdgeColor__glInnerGlowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Null<Array<Float>>), passes: quality } : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }));
-    clearGlRenderTarget((cast state : GlRenderState), (cast s0 : GlRenderTarget));
-    GlInnerGlowEffect.applyGlInnerClipPass__glInnerGlowEffect((cast state : GlRenderState), (cast s1 : GlRenderTarget), (cast src : GlRenderTarget), (cast s0 : GlRenderTarget));
-    clearGlRenderTarget((cast state : GlRenderState), (cast dst : GlRenderTarget));
+    applyGlEffectInvertTintPass((cast state), (cast src), (cast s0), (cast color : Float), (cast alpha : Float), (cast strength : Float));
+    applyGlEffectBoxBlur((cast state), (cast s0), (cast s1), (cast s2), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), edgeColor: (cast GlInnerGlowEffect.getInvertTintEdgeColor__glInnerGlowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Array<Float>), passes: quality }));
+    clearGlRenderTarget((cast state), (cast s0));
+    GlInnerGlowEffect.applyGlInnerClipPass__glInnerGlowEffect((cast state), (cast s1), (cast src), (cast s0));
+    clearGlRenderTarget((cast state), (cast dst));
     if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyGlEffectBlitPass((cast state : GlRenderState), (cast src : GlRenderTarget), (cast dst : GlRenderTarget));
+      applyGlEffectBlitPass((cast state), (cast src), (cast dst));
     }
-    applyGlEffectBlitPass((cast state : GlRenderState), (cast s0 : GlRenderTarget), (cast dst : GlRenderTarget));
-    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s0 : GlRenderTarget));
-    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s1 : GlRenderTarget));
-    releaseGlRenderTarget((cast pool : GlRenderTargetPool), (cast s2 : GlRenderTarget));
+    applyGlEffectBlitPass((cast state), (cast s0), (cast dst));
+    releaseGlRenderTarget((cast pool), (cast s0));
+    releaseGlRenderTarget((cast pool), (cast s1));
+    releaseGlRenderTarget((cast pool), (cast s2));
   }
 
-  public static final defaultGlInnerGlowEffectRunner:GlRenderEffectRunner = function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyInnerGlowEffectToGl((cast _Runtime.field(ctx, 'state') : GlRenderState), (cast _Runtime.field(ctx, 'source') : GlRenderTarget), (cast _Runtime.field(ctx, 'dest') : GlRenderTarget), (cast _Runtime.field(ctx, 'pool') : GlRenderTargetPool), (cast (cast effect : InnerGlowEffect) : InnerGlowEffect));
-  };
+  public static final defaultGlInnerGlowEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
+    applyInnerGlowEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : InnerGlowEffect)));
+  });
 
   public static function registerGlInnerGlowEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state : GlRenderState), (cast 'InnerGlowEffect' : String), (cast defaultGlInnerGlowEffectRunner : GlRenderEffectRunner));
+    registerGlRenderEffect((cast state), (cast 'InnerGlowEffect' : String), (cast defaultGlInnerGlowEffectRunner));
   }
 
   public static function applyGlInnerClipPass__glInnerGlowEffect(state:GlRenderState, glow:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    loc = (cast GlInnerGlowEffect.getClipShader__glInnerGlowEffect((cast state : GlRenderState)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state : GlRenderState), (cast loc : GlFullscreenProgram), (cast cast ([(cast glow : GlRenderTarget).texture, (cast source : GlRenderTarget).texture] : Array<Dynamic>) : Array<flighthq._internal.dom.WebGLTexture>), (cast dest : Null<GlRenderTarget>), (cast function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void return _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
+    loc = (cast GlInnerGlowEffect.getClipShader__glInnerGlowEffect((cast state)) : GlFullscreenProgram);
+    drawGlFullscreenPass((cast state), (cast loc), (cast cast ([(cast glow : GlRenderTarget).texture, (cast source : GlRenderTarget).texture] : Array<Dynamic>)), (cast dest), (cast function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused1] : Array<Dynamic>)) : flighthq._internal.dom.WebGL2RenderingContext->GlFullscreenProgram->Void));
+    }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 
   public static function getClipShader__glInnerGlowEffect(state:GlRenderState):InnerClipLocations__glInnerGlowEffect {
@@ -89,9 +90,9 @@ class GlInnerGlowEffect {
     loc = ((cast GlInnerGlowEffect.clipShaders__glInnerGlowEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram((cast gl : flighthq._internal.dom.WebGL2RenderingContext), (cast GlInnerGlowEffect.INNER_CLIP_FRAGMENT_SRC__glInnerGlowEffect : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram((cast gl), (cast GlInnerGlowEffect.INNER_CLIP_FRAGMENT_SRC__glInnerGlowEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base]) : Dynamic));
-      ((cast GlInnerGlowEffect.clipShaders__glInnerGlowEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).set((cast state : GlRenderState).gl, loc));
+      ((cast GlInnerGlowEffect.clipShaders__glInnerGlowEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).set((cast state : GlRenderState).gl, (cast loc)));
     }
     return cast loc;
     return cast null;
