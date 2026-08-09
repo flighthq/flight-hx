@@ -49,7 +49,7 @@ class RiveSkeleton {
       }
     }
     bones = (cast _Runtime.mapArray((cast ordered : Array<Float>), function(component:Float, __unused0:Float, __unused1:Array<Float>):Bone2D return (cast RiveSkeleton.createRiveBone2D__riveSkeleton((cast flighthq._internal._StaticIndex.readArray(objects, component)), (cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast boneIndices : Array<Float>), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast component : Float)) : Float)), function():Dynamic return cast RiveSkeleton.NO_BONE__riveSkeleton) : Float), (cast objects), (cast artboard), (cast component : Float)) : Bone2D), _Runtime.UNDEFINED));
-    return cast { boneIndices: boneIndices, skeleton: (cast createSkeleton2D((cast bones), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Skeleton2D) };
+    return cast { boneIndices: boneIndices, skeleton: (cast createSkeleton2D((cast bones), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Skeleton2D) };
     return cast null;
   }
 

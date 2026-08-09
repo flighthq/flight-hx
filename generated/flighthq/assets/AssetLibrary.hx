@@ -146,7 +146,7 @@ class AssetLibrary {
           __flowBranch5 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
-          loader = (cast createResourceLoader((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : ResourceLoader);
+          loader = (cast createResourceLoader(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : ResourceLoader);
           progress = ({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.progress; });
           var __flowBranch7:Dynamic;
           if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -155,7 +155,7 @@ class AssetLibrary {
                 var counts:ResourceLoadCounts = cast _Runtime.UNDEFINED;
                 counts = (cast getResourceLoadCounts((cast loader)) : ResourceLoadCounts);
                 _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ loaded: (cast counts : ResourceLoadCounts).settledItems, total: (cast counts : ResourceLoadCounts).totalItems }]]), 1);
-              }, cast ([] : Array<Dynamic>)); }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+              }, cast ([] : Array<Dynamic>)); }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
               return flighthq._internal._Async.flowNormal();
             });
           } else {
@@ -173,7 +173,7 @@ class AssetLibrary {
             }
             settlements = flighthq._internal._Async.allSettled(itemPromises);
             return flighthq._internal._Async.flatMap(flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused3:flighthq._internal._Any):Void {
-              connectSignal((cast loader.onComplete), (cast function(__unused5:Array<ResourceLoadReport>):Void { _Runtime.callValue(function(__unused4:Array<ResourceLoadReport>):Void { resolve(); }, cast ([] : Array<Dynamic>)); }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+              connectSignal((cast loader.onComplete), (cast function(__unused5:Array<ResourceLoadReport>):Void { _Runtime.callValue(function(__unused4:Array<ResourceLoadReport>):Void { resolve(); }, cast ([] : Array<Dynamic>)); }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
               startResourceLoad((cast loader));
             }), function(__awaitValue10:Dynamic):Dynamic {
               __awaitValue10;

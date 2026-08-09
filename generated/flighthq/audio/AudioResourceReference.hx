@@ -33,7 +33,7 @@ class AudioResourceReference {
   public static function createEmbeddedAudioResourceReference(bytes:flighthq._internal._UInt8Array, ?mimeType:Null<String>, ?name:Null<String>):EmbeddedAudioResourceReference {
     if (mimeType == null) mimeType = cast (null : Dynamic);
     if (name == null) name = cast (null : Dynamic);
-    return cast { bytes: bytes, failure: null, kind: (cast AudioResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded, mimeType: mimeType, name: name, resource: (cast createAudioResource((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : AudioResource), state: (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved };
+    return cast { bytes: bytes, failure: null, kind: (cast AudioResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded, mimeType: mimeType, name: name, resource: (cast createAudioResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : AudioResource), state: (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved };
     return cast null;
   }
 
@@ -41,7 +41,7 @@ class AudioResourceReference {
     if (basePath == null) basePath = cast (null : Dynamic);
     if (mimeType == null) mimeType = cast (null : Dynamic);
     if (name == null) name = cast (null : Dynamic);
-    return cast { basePath: basePath, failure: null, kind: (cast AudioResourceReferenceKindValue : { var Embedded:String; var External:String; }).External, mimeType: mimeType, name: name, resource: (cast createAudioResource((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : AudioResource), state: (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved, uri: uri };
+    return cast { basePath: basePath, failure: null, kind: (cast AudioResourceReferenceKindValue : { var Embedded:String; var External:String; }).External, mimeType: mimeType, name: name, resource: (cast createAudioResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : AudioResource), state: (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved, uri: uri };
     return cast null;
   }
 

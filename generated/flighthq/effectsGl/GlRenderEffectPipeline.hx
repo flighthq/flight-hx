@@ -61,7 +61,7 @@ class GlRenderEffectPipeline {
       resizeGlRenderTarget((cast state), (cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget), (cast w : Float), (cast h : Float));
     }
     ((cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget : GlRenderTarget).colorSpace = colorSpace);
-    beginGlRenderPass((cast state), (cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget), (cast { preserveColor: true, preserveDepth: true }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    beginGlRenderPass((cast state), (cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget), (cast { preserveColor: true, preserveDepth: true }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
   }
 
   public static function createGlRenderEffectPipeline(_state:GlRenderState, ?options:RenderEffectPipelineOptions):flighthq.types.GlRenderEffectPipeline {
@@ -116,7 +116,7 @@ class GlRenderEffectPipeline {
       dest = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       clearGlRenderTarget((cast state), (cast dest));
       if ((cast _Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)) : Bool)) {
-        applyColorLutPassToGl((cast state), (cast source), (cast dest), (cast (cast bakeColorLutForRun((cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).lutCache), (cast pending), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : ColorLut)), (cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).lutTexture));
+        applyColorLutPassToGl((cast state), (cast source), (cast dest), (cast (cast bakeColorLutForRun((cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).lutCache), (cast pending), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : ColorLut)), (cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).lutTexture));
       } else {
         var matrices:Array<Array<Float>> = (cast cast ([] : Array<Dynamic>));
         for (op in _Runtime.iterable(pending)) {

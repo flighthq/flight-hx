@@ -22,7 +22,7 @@ class Throttle {
         (elapsed = cast (_Runtime.fmod(elapsed, period) : Dynamic));
       }
     });
-    connectSignal((cast source), (cast handler), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    connectSignal((cast source), (cast handler), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast function():Void { (cast disconnectSignal : Signal<Float->Void>->(Float->Void)->Void)((cast source), (cast handler)); };
     return cast null;
   }
@@ -62,7 +62,7 @@ class Throttle {
         }
       }, delayMs) : Dynamic));
     }, 0) : T);
-    connectSignal((cast source), (cast handler), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    connectSignal((cast source), (cast handler), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast function():Void {
       disconnectSignal((cast source), (cast handler));
       clearTimer();
@@ -115,7 +115,7 @@ class Throttle {
         }, remaining) : Dynamic));
       } }
     }, 0) : T);
-    connectSignal((cast source), (cast handler), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    connectSignal((cast source), (cast handler), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast function():Void {
       disconnectSignal((cast source), (cast handler));
       clearTrailing();

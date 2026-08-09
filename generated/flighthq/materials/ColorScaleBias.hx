@@ -53,7 +53,7 @@ class ColorScaleBias {
   }
 
   public static function equalsColorScaleBias(a:ColorScaleBiasLike, b:ColorScaleBiasLike):Bool {
-    return cast ((cast (cast equalsColorScaleBiasBiases((cast a), (cast b), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : Bool) : Bool) && (cast (cast equalsColorScaleBiasScales((cast a), (cast b), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : Bool) : Bool));
+    return cast ((cast (cast equalsColorScaleBiasBiases((cast a), (cast b), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Bool) : Bool) && (cast (cast equalsColorScaleBiasScales((cast a), (cast b), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Bool) : Bool));
     return cast null;
   }
 
@@ -89,7 +89,7 @@ class ColorScaleBias {
   }
 
   public static function isIdentityColorScaleBias(source:ColorScaleBiasLike, compareAlphaScale:Bool = true):Bool {
-    return cast _Runtime.andValue((cast equalsColorScaleBiasBiases((cast source), (cast ColorScaleBias._identity__colorScaleBias), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : Bool), function():Dynamic return cast (cast equalsColorScaleBiasScales((cast source), (cast ColorScaleBias._identity__colorScaleBias), (cast compareAlphaScale : Bool)) : Bool));
+    return cast _Runtime.andValue((cast equalsColorScaleBiasBiases((cast source), (cast ColorScaleBias._identity__colorScaleBias), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Bool), function():Dynamic return cast (cast equalsColorScaleBiasScales((cast source), (cast ColorScaleBias._identity__colorScaleBias), (cast compareAlphaScale : Bool)) : Bool));
     return cast null;
   }
 
@@ -130,5 +130,5 @@ class ColorScaleBias {
     setColorScaleBias((cast out), (cast 1.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
   }
 
-  public static final _identity__colorScaleBias:flighthq.types.ColorScaleBias = (cast createColorScaleBias((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.ColorScaleBias);
+  public static final _identity__colorScaleBias:flighthq.types.ColorScaleBias = (cast createColorScaleBias(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq.types.ColorScaleBias);
 }

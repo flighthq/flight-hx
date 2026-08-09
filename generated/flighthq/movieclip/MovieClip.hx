@@ -56,7 +56,7 @@ class MovieClip {
   @:noCompletion
   public static function createMovieClipRuntime():MovieClipRuntime {
     var out:MovieClipRuntime = cast _Runtime.UNDEFINED;
-    out = (cast createNode2DRuntime((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : MovieClipRuntime);
+    out = (cast createNode2DRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : MovieClipRuntime);
     ((cast out : MovieClipRuntime).movieClipSignals = null);
     return cast out;
     return cast null;
@@ -74,7 +74,7 @@ class MovieClip {
     var signals:TimelineSignals = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(clip, EntityRuntimeKey) : MovieClipRuntime);
     if ((cast !_Runtime.strictEquals((cast runtime : MovieClipRuntime).movieClipSignals, null) : Bool)) { return cast (cast runtime : MovieClipRuntime).movieClipSignals; }
-    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { ((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline = (cast createTimeline((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Timeline)); }
+    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { ((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline = (cast createTimeline(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Timeline)); }
     signals = (cast enableTimelineSignals((cast (cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline)) : TimelineSignals);
     ((cast runtime : MovieClipRuntime).movieClipSignals = signals);
     return cast signals;
@@ -153,7 +153,7 @@ class MovieClip {
 
   public static function setMovieClipSource(clip:flighthq.types.MovieClip, source:TimelineSource):Void {
     var timeline:Timeline = cast _Runtime.UNDEFINED;
-    timeline = _Runtime.coalesce((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, function():Dynamic return cast (cast createTimeline((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Timeline));
+    timeline = _Runtime.coalesce((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, function():Dynamic return cast (cast createTimeline(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Timeline));
     ((cast timeline : Timeline).source = source);
     ((cast timeline : Timeline).target = clip);
     ((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline = timeline);

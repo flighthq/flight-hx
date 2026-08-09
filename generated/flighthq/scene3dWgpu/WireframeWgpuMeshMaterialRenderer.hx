@@ -49,7 +49,7 @@ class WireframeWgpuMeshMaterialRenderer {
     pipeline = (cast ensureWgpuWireframePipeline((cast state), (cast format : String), (cast _Runtime.strictEquals(({ final __structural0 = wireframe; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var alphaMode:MaterialAlphaMode; }).alphaMode; }), 'mask') : Bool)) : WgpuWireframePipeline);
     writeWgpuFrameUniform((cast state), (cast camera), (cast _lights));
     if ((cast _Runtime.strictEquals(wireframe, null) : Bool)) {
-      (group = cast ((cast bindWgpuWireframeColor((cast state), (cast pipeline), (cast WireframeWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__wireframeWgpuMeshMaterialRenderer), (cast WireframeWgpuMeshMaterialRenderer.WHITE__wireframeWgpuMeshMaterialRenderer), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (group = cast ((cast bindWgpuWireframeColor((cast state), (cast pipeline), (cast WireframeWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__wireframeWgpuMeshMaterialRenderer), (cast WireframeWgpuMeshMaterialRenderer.WHITE__wireframeWgpuMeshMaterialRenderer), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
       (cast unpackColorToLinear((cast WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer), (cast _Runtime.field(wireframe, 'color') : Float)) : LinearColor);
       (group = cast ((cast bindWgpuWireframeColor((cast state), (cast pipeline), (cast wireframe), (cast WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer), (cast _Runtime.field(wireframe, 'alphaCutoff') : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));

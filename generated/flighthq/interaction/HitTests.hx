@@ -207,7 +207,7 @@ class HitTests {
     inverseMatrixTransformPointXY((cast HitTests.hitTestScratchPoint__hitTests), (cast (cast getNodeWorldMatrix((cast (cast node : Node2D))) : Matrix)), (cast x : Float), (cast y : Float));
     lx = (cast HitTests.hitTestScratchPoint__hitTests : { var x:Float; var y:Float; }).x;
     ly = (cast HitTests.hitTestScratchPoint__hitTests : { var x:Float; var y:Float; }).y;
-    if ((cast _Runtime.hasField(hitArea, 'commands') : Bool)) { return cast (cast containsPathPoint((cast (cast hitArea : Path)), (cast lx : Float), (cast ly : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bool); }
+    if ((cast _Runtime.hasField(hitArea, 'commands') : Bool)) { return cast (cast containsPathPoint((cast (cast hitArea : Path)), (cast lx : Float), (cast ly : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Bool); }
     return cast (cast containsRectanglePointXY((cast (cast hitArea : Rectangle)), (cast lx : Float), (cast ly : Float)) : Bool);
     return cast null;
   }

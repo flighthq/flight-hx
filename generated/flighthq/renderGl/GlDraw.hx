@@ -149,7 +149,7 @@ class GlDraw {
       ((cast runtime : GlRenderStateRuntime).currentTexture = texture);
       ((cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha = false);
     }
-    applyGlSamplerState((cast state), (cast runtime), (cast texture), (cast _Runtime.coalesce(sampler, function():Dynamic return cast null)), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    applyGlSamplerState((cast state), (cast runtime), (cast texture), (cast _Runtime.coalesce(sampler, function():Dynamic return cast null)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast texture;
     return cast null;
   }
@@ -175,7 +175,7 @@ class GlDraw {
     ((cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha = false);
     flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL', flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL), true);
     ((cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).uploadedVersion = (cast uploadGlTextureVideoFrame((cast gl), (cast image), (cast (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).uploadedVersion : Float), (cast ((cast _Runtime.strictEquals((cast texture : { var colorSpace:TextureColorSpace; }).colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic)) : Float)) : Float));
-    applyGlSamplerState((cast state), (cast runtime), (cast (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).texture), (cast _Runtime.coalesce(sampler, function():Dynamic return cast (cast texture : { var sampler:Sampler; }).sampler)), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    applyGlSamplerState((cast state), (cast runtime), (cast (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).texture), (cast _Runtime.coalesce(sampler, function():Dynamic return cast (cast texture : { var sampler:Sampler; }).sampler)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).texture;
     return cast null;
   }

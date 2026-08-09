@@ -157,6 +157,36 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain("_Runtime.field(sample, 'value')");
   });
 
+  it('keeps synthesized optional arguments nullable at typed call boundaries', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/optional-default.ts',
+      `
+        function withDefault(value = 0.25): number {
+          return value;
+        }
+        interface Handler {
+          read(value?: number): number;
+        }
+        export function invoke(handler: Handler): number {
+          return withDefault() + handler.read();
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'OptionalDefaultFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain("withDefault(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end)");
+    expect(output).toContain(".read(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end)");
+    expect(output).not.toContain('(cast _Runtime.UNDEFINED : Float)');
+    expect(output).not.toContain("(cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)");
+  });
+
   it('uses primitive generic constraints for explicit any without guessing ambiguous constraints', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/constrainedAny.ts',
@@ -2302,6 +2332,40 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("_Runtime.callOptionalProperty(_Runtime.optionalField(value, 'nested'), 'call'");
     expect(output).toContain("_Runtime.callOptionalProperty(value, 'slice'");
     expect(output).toContain("_Runtime.optionalIndex(_Runtime.optionalField(value, 'nested'), key)");
+  });
+
+  it('keeps statically typed optional Void property calls direct', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/optional-call.ts',
+      `
+        export interface Handler {
+          submit(value: number): void;
+          optional?: (value: number) => void;
+          read(): number;
+        }
+        export function invoke(handler: Handler | null, value: number): number | undefined {
+          handler?.submit(value);
+          handler?.optional?.(value);
+          return handler?.read();
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'OptionalCallFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('final __optionalOwner1 = handler');
+    expect(output).toContain('(cast __optionalOwner1 : { var submit:Float->Void; }).submit');
+    expect(output).toContain('if (__optionalCall0 != null) __optionalCall0(value)');
+    expect(output).toContain('@:optional var optional:Null<Float->Void>');
+    expect(output).toContain('if (__optionalCall2 != null) __optionalCall2(value)');
+    expect(output).toContain('_Runtime.callOptionalValue(({ final __structural');
+    expect(output.match(/_Runtime\.callOptionalValue/g)).toHaveLength(1);
   });
 
   it('deletes the owning object property instead of its evaluated value', () => {

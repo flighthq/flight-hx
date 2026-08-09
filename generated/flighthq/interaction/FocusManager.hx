@@ -49,7 +49,7 @@ class FocusManager {
       direction = (cast FocusManager.arrowKeyDirection__focusManager((cast _Runtime.field(data, 'key') : String)) : Null<String>);
       if ((cast !_Runtime.strictEquals(direction, null) : Bool)) { (cast focusNodeInDirection((cast manager), (cast direction)) : Null<N>); }
     });
-    connectSignal((cast _Runtime.field(input, 'onKeyDown')), (cast onKeyDown), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    connectSignal((cast _Runtime.field(input, 'onKeyDown')), (cast onKeyDown), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast function():Void { (cast disconnectSignal : Signal<InputKeyboardData->Void>->(InputKeyboardData->Void)->Void)((cast _Runtime.field(input, 'onKeyDown')), (cast onKeyDown)); };
     return cast null;
   }

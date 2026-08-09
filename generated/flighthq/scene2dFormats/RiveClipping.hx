@@ -51,14 +51,14 @@ class RiveClipping {
         }
         var next:Path = (cast RiveClipping.createRiveClipPath__riveClipping((cast paths), (cast flighthq._internal._StaticIndex.readArray(relative, owner)), (cast flighthq._internal._StaticIndex.readArray(relative, source)), (cast object)) : Path);
         var current:Null<Path> = ((cast clips : flighthq._internal._Map<DisplayObject, Path>).get(target));
-        ((cast clips : flighthq._internal._Map<DisplayObject, Path>).set(target, (cast ((cast _Runtime.strictEquals(current, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast next : Dynamic) : (cast (cast intersectPaths((cast current), (cast next), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path) : Dynamic)))));
+        ((cast clips : flighthq._internal._Map<DisplayObject, Path>).set(target, (cast ((cast _Runtime.strictEquals(current, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast next : Dynamic) : (cast (cast intersectPaths((cast current), (cast next), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Path) : Dynamic)))));
         index++;
       }
     }
     for (__iteration0 in _Runtime.iterable(clips)) {
       var target:DisplayObject = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
       var path:Path = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      ((cast target : DisplayObject).clip = (cast createClipRegionFromPath((cast path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : ClipRegion));
+      ((cast target : DisplayObject).clip = (cast createClipRegionFromPath((cast path), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : ClipRegion));
     }
   }
 
@@ -66,9 +66,9 @@ class RiveClipping {
     var into:Matrix = cast _Runtime.UNDEFINED;
     var combined:Matrix = cast _Runtime.UNDEFINED;
     var path:Path = cast _Runtime.UNDEFINED;
-    into = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
-    combined = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
-    if ((cast (cast inverseMatrix((cast into), (cast clipped)) : Bool) : Bool)) { multiplyMatrix((cast combined), (cast into), (cast source)); } else { multiplyMatrix((cast combined), (cast (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix)), (cast source)); }
+    into = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
+    combined = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
+    if ((cast (cast inverseMatrix((cast into), (cast clipped)) : Bool) : Bool)) { multiplyMatrix((cast combined), (cast into), (cast source)); } else { multiplyMatrix((cast combined), (cast (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix)), (cast source)); }
     path = (cast createPath((cast ((cast _Runtime.strictEquals((cast RiveClipping.readRiveNumber__riveClipping((cast clipping), (cast RiveClipping.RIVE_CLIP_FILL_RULE__riveClipping : Float), (cast 0.0 : Float)) : Float), 1.0) : Bool) ? (cast 'evenOdd' : Dynamic) : (cast 'nonZero' : Dynamic)))) : Path);
     for (record in _Runtime.iterable(paths)) {
       for (command in _Runtime.iterable((cast record : RivePathRecord).commands)) {
@@ -90,7 +90,7 @@ class RiveClipping {
 
   public static function createRiveRelativeTransforms__riveClipping(artboard:RiveArtboardGraph):Array<Matrix> {
     var transforms:Array<Matrix> = cast _Runtime.UNDEFINED;
-    transforms = (cast cast ([(cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix)] : Array<Dynamic>));
+    transforms = (cast cast ([(cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix)] : Array<Dynamic>));
     {
       var index:Float = 1.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
@@ -103,7 +103,7 @@ class RiveClipping {
           continue;
         }
         var local:Matrix = (cast RiveClipping.createRiveLocalMatrix__riveClipping((cast object)) : Matrix);
-        var world:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
+        var world:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
         multiplyMatrix((cast world), (cast inherited), (cast local));
         _Runtime.callProperty(transforms, 'push', cast ([world] : Array<Dynamic>));
         index++;

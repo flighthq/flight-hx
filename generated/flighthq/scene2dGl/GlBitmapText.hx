@@ -80,7 +80,7 @@ class GlBitmapText {
       if ((cast _Runtime.strictEquals(glTexture, null) : Bool)) { continue; }
       var straightAlpha:Bool = (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha;
       (cast ensureGlQuadBatchShader((cast state)) : GlQuadBatchShader);
-      var base:Float = (cast prepareGlQuadBatchWrite((cast state), (cast glTexture), (cast straightAlpha : Bool), (cast (cast texture : Texture2D).sampler), (cast (cast node : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast (cast page : BitmapTextPage).instanceCount : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Float);
+      var base:Float = (cast prepareGlQuadBatchWrite((cast state), (cast glTexture), (cast straightAlpha : Bool), (cast (cast texture : Texture2D).sampler), (cast (cast node : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast (cast page : BitmapTextPage).instanceCount : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Float);
       var startCount:Float = (cast runtime : GlRenderStateRuntime).quadBatchWriterCount;
       var regions:Array<TextureAtlasRegion> = atlas.regions;
       var numRegions:Float = _Runtime.field(regions, 'length');

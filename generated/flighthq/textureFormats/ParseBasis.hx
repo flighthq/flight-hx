@@ -28,7 +28,7 @@ class ParseBasis {
   }
 
   public static function parseBasis(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
-    return cast (cast ParseBasis.parseBasisInternal__parseBasis((cast bytes), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<TextureContainer>);
+    return cast (cast ParseBasis.parseBasisInternal__parseBasis((cast bytes), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<TextureContainer>);
     return cast null;
   }
 

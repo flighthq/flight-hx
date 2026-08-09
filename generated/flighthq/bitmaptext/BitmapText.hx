@@ -77,7 +77,7 @@ class BitmapText {
 
   public static function getBitmapTextBounds(source:flighthq.types.BitmapText):Rectangle {
     var out:Rectangle = cast _Runtime.UNDEFINED;
-    out = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle);
+    out = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
     computeBitmapTextLocalBoundsRectangle((cast out), (cast source));
     return cast out;
     return cast null;
@@ -136,7 +136,7 @@ class BitmapText {
   }
 
   public static function createBitmapTextPage__bitmapText():BitmapTextPage {
-    return cast { atlas: (cast createTextureAtlas((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas), ids: new flighthq._internal._UInt16Array(), instanceCount: 0.0, transforms: new flighthq._internal._Float32Array() };
+    return cast { atlas: (cast createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : TextureAtlas), ids: new flighthq._internal._UInt16Array(), instanceCount: 0.0, transforms: new flighthq._internal._Float32Array() };
     return cast null;
   }
 

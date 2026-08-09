@@ -56,8 +56,8 @@ class EnableScene3DResourceFailureGuards {
     resolved = (cast function(event:Scene3DResourceEvent):Void {
       ((cast warned : flighthq._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).delete_(event.ref));
     });
-    connectSignal((cast signals.onResourceFailed), (cast failed), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    connectSignal((cast signals.onResourceResolved), (cast resolved), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    connectSignal((cast signals.onResourceFailed), (cast failed), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast signals.onResourceResolved), (cast resolved), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).set(resolver, (cast { failed: failed, resolved: resolved })));
     return cast function():Void { disableScene3DResourceFailureGuards((cast resolver)); };
     return cast null;

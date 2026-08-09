@@ -28,7 +28,7 @@ class WgpuRenderTexturePool {
     WgpuRenderTexturePool.applyRenderTargetDescriptor__wgpuRenderTexturePool((cast (cast renderTexture : RenderTexture).source), (cast descriptor));
     resetTextureUvTransform((cast renderTexture));
     ((cast renderTexture : RenderTexture).colorSpace = _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'));
-    invalidateWgpuRenderTexture((cast state), (cast renderTexture), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String));
+    invalidateWgpuRenderTexture((cast state), (cast renderTexture), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     ((cast (cast pool : flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).add(renderTexture));
     return cast renderTexture;
     return cast null;

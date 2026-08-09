@@ -44,7 +44,7 @@ class TexturePackerParse {
     var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
     var meta:TexturePackerMeta = cast _Runtime.UNDEFINED;
     var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
-    regions = (cast (cast parseTextureAtlasPackerDocument((cast doc), (cast (cast createTextureAtlas((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas)), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
+    regions = (cast (cast parseTextureAtlasPackerDocument((cast doc), (cast (cast createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : TextureAtlas)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
     frames = (cast _Runtime.mapArray((cast regions : Array<TextureAtlasRegion>), TexturePackerParse.frameFromRegion__texturePackerParse, _Runtime.UNDEFINED));
     frameNames = (cast _Runtime.mapArray((cast regions : Array<TextureAtlasRegion>), function(region:TextureAtlasRegion, __unused2:Float, __unused3:Array<TextureAtlasRegion>):String return _Runtime.coalesce(region.name, function():Dynamic return cast ''), _Runtime.UNDEFINED));
     __destructure4 = doc;
@@ -59,7 +59,7 @@ class TexturePackerParse {
     try {
       (document = cast ((cast _Runtime.jsonParse(json) : TexturePackerDocument) : Dynamic));
     } catch (__error:Dynamic) {
-      return cast (cast createSpritesheetData((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : SpritesheetData);
+      return cast (cast createSpritesheetData(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : SpritesheetData);
     }
     return cast (cast TexturePackerParse.documentToData__texturePackerParse((cast document)) : SpritesheetData);
     return cast null;
@@ -70,7 +70,7 @@ class TexturePackerParse {
     try {
       (document = cast ((cast _Runtime.jsonParse(json) : TexturePackerDocument) : Dynamic));
     } catch (__error:Dynamic) {
-      return cast { data: (cast createSpritesheetData((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : SpritesheetData), document: (cast TexturePackerParse.createEmptyTexturePackerDocument__texturePackerParse() : TexturePackerDocument) };
+      return cast { data: (cast createSpritesheetData(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : SpritesheetData), document: (cast TexturePackerParse.createEmptyTexturePackerDocument__texturePackerParse() : TexturePackerDocument) };
     }
     return cast { data: (cast TexturePackerParse.documentToData__texturePackerParse((cast document)) : SpritesheetData), document: document };
     return cast null;

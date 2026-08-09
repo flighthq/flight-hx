@@ -65,7 +65,7 @@ class GlShapeMesh {
       (cast fold : GlColorAdjustmentMaterialFeature).drawShapeMeshes((cast state), (cast renderProxy), (cast meshes));
       return;
     }
-    drawGlShapeMeshBatch((cast state), (cast renderProxy), (cast meshes), (cast (cast ensureGlShapeMeshProgram((cast state)) : GlShapeMeshBinding)), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    drawGlShapeMeshBatch((cast state), (cast renderProxy), (cast meshes), (cast (cast ensureGlShapeMeshProgram((cast state)) : GlShapeMeshBinding)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
   }
 
   @:noCompletion

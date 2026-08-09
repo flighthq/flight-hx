@@ -865,7 +865,7 @@ class Filesystem {
       flighthq._internal._Async.protect(function():Dynamic {
         var all:Array<FileEntry> = cast _Runtime.UNDEFINED;
         var re:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readDirectoryRecursive((cast rootPath : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))), function(__awaitValue86:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap((cast (cast getFileSystemBackend() : FileSystemBackend) : FileSystemBackend).readDirectoryRecursive((cast rootPath : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end), function(__awaitValue86:Dynamic):Dynamic {
           all = __awaitValue86;
           var __flowBranch87:Dynamic;
           if ((cast _Runtime.strictEquals(_Runtime.field(all, 'length'), 0.0) : Bool)) {

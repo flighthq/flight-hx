@@ -65,7 +65,7 @@ class CanvasRenderTexture {
 
   public static function renderIntoCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, callback:CanvasRenderState->Void):Void {
     (cast writeCanvasRenderTextureTarget : CanvasRenderState->RenderTexture->(CanvasRenderTarget->Void)->Void)((cast state), (cast renderTexture), (cast function(target:CanvasRenderTarget):Void {
-      beginCanvasRenderPass((cast state), (cast target), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      beginCanvasRenderPass((cast state), (cast target), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       try {
         try {
           callback((cast state));

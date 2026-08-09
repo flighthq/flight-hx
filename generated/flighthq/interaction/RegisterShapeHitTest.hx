@@ -39,7 +39,7 @@ class RegisterShapeHitTest {
     if ((cast _Runtime.strictEquals(regions, null) : Bool)) { return cast -1.0; }
     inverseMatrixTransformPointXY((cast RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest), (cast (cast getNodeWorldMatrix((cast (cast source : Node2D))) : Matrix)), (cast x : Float), (cast y : Float));
     for (region in _Runtime.iterable(regions)) {
-      if ((cast (cast containsPathPoint((cast (cast region : ShapeFillRegion).path), (cast (cast RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest : { var x:Float; var y:Float; }).x : Float), (cast (cast RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest : { var x:Float; var y:Float; }).y : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bool) : Bool)) { return cast 0.0; }
+      if ((cast (cast containsPathPoint((cast (cast region : ShapeFillRegion).path), (cast (cast RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest : { var x:Float; var y:Float; }).x : Float), (cast (cast RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest : { var x:Float; var y:Float; }).y : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Bool) : Bool)) { return cast 0.0; }
     }
     return cast -1.0;
     return cast null;

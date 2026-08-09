@@ -21,7 +21,7 @@ class GlShader {
 
   @:noCompletion
   public static function compileDefaultGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext):GlShaderLocations {
-    return cast (cast compileGlBitmapProgram((cast gl), (cast _Runtime.field(_Runtime, 'UNDEFINED') : String)) : GlShaderLocations);
+    return cast (cast compileGlBitmapProgram((cast gl), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : GlShaderLocations);
     return cast null;
   }
 

@@ -19,7 +19,7 @@ class ValidateParticleEmitterConfig {
     var mutable:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
     var defaultsRec:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
     out = (cast createParticleEmitterConfig((cast config)) : ParticleEmitterConfig);
-    defaults = (cast createParticleEmitterConfig((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : ParticleEmitterConfig);
+    defaults = (cast createParticleEmitterConfig(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : ParticleEmitterConfig);
     mutable = (cast (cast out : flighthq._internal._Any) : flighthq._internal._Record<String, Float>);
     defaultsRec = (cast (cast defaults : flighthq._internal._Any) : flighthq._internal._Record<String, Float>);
     for (field in _Runtime.iterable(ValidateParticleEmitterConfig.NUMERIC_FIELDS__validateParticleEmitterConfig)) {

@@ -26,7 +26,7 @@ class Md2Load {
             __flowBranch1 = flighthq._internal._Async.flowNormal();
           }
           return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
-            document = (cast parseMd2((cast bytes), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Scene3DDocument);
+            document = (cast parseMd2((cast bytes), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene3DDocument);
             setScene3DDocumentResourceBasePathFromUrl((cast document), (cast url : String));
             return flighthq._internal._Async.flowReturn(document);
           });

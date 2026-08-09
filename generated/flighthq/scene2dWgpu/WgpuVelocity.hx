@@ -41,7 +41,7 @@ typedef WgpuVelocityPipeline__wgpuVelocity = { var pipeline:flighthq._internal.d
 
 class WgpuVelocity {
   public static function createWgpuVelocityTarget(state:WgpuRenderState, width:Float, height:Float):WgpuRenderTarget {
-    return cast (cast createWgpuRenderTarget((cast state), (cast width : Float), (cast height : Float), (cast 'rgba16float' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : WgpuRenderTarget);
+    return cast (cast createWgpuRenderTarget((cast state), (cast width : Float), (cast height : Float), (cast 'rgba16float' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : WgpuRenderTarget);
     return cast null;
   }
 

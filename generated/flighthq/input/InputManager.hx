@@ -353,16 +353,16 @@ class InputManager {
         }
       }
     });
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onKeyDown), (cast onKeyDown), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onKeyUp), (cast onKeyUp), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onPointerDown), (cast onPointerDown), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onPointerUp), (cast onPointerUp), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onPointerCancel), (cast onPointerCancel), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadButtonDown), (cast onGamepadButtonDown), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadButtonUp), (cast onGamepadButtonUp), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadAxisMove), (cast onGamepadAxisMove), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadConnect), (cast onGamepadConnect), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadDisconnect), (cast onGamepadDisconnect), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    connectSignal((cast (cast manager : flighthq.types.InputManager).onKeyDown), (cast onKeyDown), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast (cast manager : flighthq.types.InputManager).onKeyUp), (cast onKeyUp), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast (cast manager : flighthq.types.InputManager).onPointerDown), (cast onPointerDown), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast (cast manager : flighthq.types.InputManager).onPointerUp), (cast onPointerUp), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast (cast manager : flighthq.types.InputManager).onPointerCancel), (cast onPointerCancel), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadButtonDown), (cast onGamepadButtonDown), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadButtonUp), (cast onGamepadButtonUp), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadAxisMove), (cast onGamepadAxisMove), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadConnect), (cast onGamepadConnect), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadDisconnect), (cast onGamepadDisconnect), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast function():Void {
       disconnectSignal((cast (cast manager : flighthq.types.InputManager).onKeyDown), (cast onKeyDown));
       disconnectSignal((cast (cast manager : flighthq.types.InputManager).onKeyUp), (cast onKeyUp));

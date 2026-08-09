@@ -55,8 +55,8 @@ class PathConstraint2D {
     attachment = (cast PathConstraint2D.resolveSkeleton2DPathAttachment__pathConstraint2D((cast skeleton), (cast _Runtime.field(pathConstraint, 'targetSlotIndex') : Float)) : Null<PathAttachment2D>);
     if ((cast _Runtime.strictEquals(attachment, null) : Bool)) { return; }
     slot = flighthq._internal._StaticIndex.readArray((cast skeleton : Skeleton2D).slots, _Runtime.field(pathConstraint, 'targetSlotIndex'));
-    deformSkeleton2DPathAttachment((cast PathConstraint2D._path__pathConstraint2D), (cast attachment), (cast skeleton), (cast (cast slot : Slot2D).boneIndex : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    total = (cast getPathLength((cast PathConstraint2D._path__pathConstraint2D), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Float);
+    deformSkeleton2DPathAttachment((cast PathConstraint2D._path__pathConstraint2D), (cast attachment), (cast skeleton), (cast (cast slot : Slot2D).boneIndex : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    total = (cast getPathLength((cast PathConstraint2D._path__pathConstraint2D), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Float);
     if ((cast !(cast _Runtime.compare(total, 0.0, '>') : Bool) : Bool)) { return; }
     bones = (cast skeleton : Skeleton2D).bones;
     chain = _Runtime.field(pathConstraint, 'boneIndices');
@@ -72,7 +72,7 @@ class PathConstraint2D {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var boneIndex:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast chain : Array<Float>), (cast i : Float));
-        (cast getPathPositionAtDistance((cast PathConstraint2D._path__pathConstraint2D), (cast (cast PathConstraint2D.clampSkeleton2DPathDistance__pathConstraint2D((cast distance : Float), (cast total : Float)) : Float) : Float), (cast PathConstraint2D._point__pathConstraint2D), (cast PathConstraint2D._tangent__pathConstraint2D), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bool);
+        (cast getPathPositionAtDistance((cast PathConstraint2D._path__pathConstraint2D), (cast (cast PathConstraint2D.clampSkeleton2DPathDistance__pathConstraint2D((cast distance : Float), (cast total : Float)) : Float) : Float), (cast PathConstraint2D._point__pathConstraint2D), (cast PathConstraint2D._tangent__pathConstraint2D), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Bool);
         flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast PathConstraint2D._positions__pathConstraint2D : flighthq._internal._Float64Array), (cast (i * 2.0) : Float), (cast (cast PathConstraint2D._point__pathConstraint2D : { var x:Float; var y:Float; }).x : Float));
         flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast PathConstraint2D._positions__pathConstraint2D : flighthq._internal._Float64Array), (cast ((i * 2.0) + 1.0) : Float), (cast (cast PathConstraint2D._point__pathConstraint2D : { var x:Float; var y:Float; }).y : Float));
         flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast PathConstraint2D._tangents__pathConstraint2D : flighthq._internal._Float64Array), (cast (i * 2.0) : Float), (cast (cast PathConstraint2D._tangent__pathConstraint2D : { var x:Float; var y:Float; }).x : Float));

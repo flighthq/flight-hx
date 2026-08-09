@@ -96,7 +96,7 @@ class WgpuTilemap {
     nodeColorScaleBias = (cast tilemapNode : RenderProxy2D).colorScaleBias;
     nodeColorMatrix = (cast tilemapNode : RenderProxy2D).colorMatrix;
     startCount = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount;
-    base = (cast prepareWgpuQuadBatchWrite((cast state), (cast textureEntry), (cast (cast texture : Texture2D).sampler), (cast (cast tilemapNode : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast (columns * rows) : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Float);
+    base = (cast prepareWgpuQuadBatchWrite((cast state), (cast textureEntry), (cast (cast texture : Texture2D).sampler), (cast (cast tilemapNode : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast (columns * rows) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Float);
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth((cast texture)) : Float)));

@@ -16,7 +16,7 @@ class ExtendedPbrMaterial {
     var material:flighthq.types.ExtendedPbrMaterial = cast _Runtime.UNDEFINED;
     material = (cast createSurfaceMaterial((cast ExtendedPbrMaterialKind : String), (cast opts)) : flighthq.types.ExtendedPbrMaterial);
     ((cast material : flighthq.types.ExtendedPbrMaterial).extensions = _Runtime.coalesce(({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var extensions:Null<Array<PbrExtension>>; }).extensions; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
-    ((cast material : flighthq.types.ExtendedPbrMaterial).standard = _Runtime.coalesce(({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var standard:Null<StandardPbrMaterialProperties>; }).standard; }), function():Dynamic return cast (cast createStandardPbrMaterialProperties((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : StandardPbrMaterialProperties)));
+    ((cast material : flighthq.types.ExtendedPbrMaterial).standard = _Runtime.coalesce(({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var standard:Null<StandardPbrMaterialProperties>; }).standard; }), function():Dynamic return cast (cast createStandardPbrMaterialProperties(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : StandardPbrMaterialProperties)));
     return cast material;
     return cast null;
   }

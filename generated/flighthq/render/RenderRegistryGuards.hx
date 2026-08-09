@@ -30,7 +30,7 @@ class RenderRegistryGuards {
     ((cast RenderRegistryGuards._stateMisses__renderRegistryGuards : flighthq._internal._WeakMap<RenderState, Array<RenderRegistryMiss>>).set(state, (cast cast ([] : Array<Dynamic>))));
     connectSignal((cast (cast (cast enableRenderRegistrySignals((cast state)) : RenderRegistrySignals) : RenderRegistrySignals).onRegistryMiss), (cast function(registry:RenderRegistry, kind:String):Void {
       RenderRegistryGuards.recordRenderRegistryMiss__renderRegistryGuards((cast state), (cast stateId : Float), (cast registry), (cast kind : String));
-    }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
   }
 
   public static function explainRenderRegistryMisses(state:RenderState):RenderRegistryMissExplanation {

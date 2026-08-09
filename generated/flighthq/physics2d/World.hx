@@ -397,7 +397,7 @@ class World {
       var connectedA:Bool = ((cast usesBodyA : Bool) && (cast _Runtime.strictEquals((cast joint : Physics2DJoint).bodyA, bodyIndex) : Bool));
       var connectedB:Bool = _Runtime.strictEquals((cast joint : Physics2DJoint).bodyB, bodyIndex);
       if ((cast ((cast !(cast connectedA : Bool) : Bool) && (cast !(cast connectedB : Bool) : Bool)) : Bool)) { continue; }
-      _Runtime.callOptionalValue(({ final __structural10 = solver; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var clearAccumulatedImpulses:Null<Physics2DJoint->Void>; }).clearAccumulatedImpulses; }), cast ([joint] : Array<Dynamic>));
+      ({ final __optionalOwner11 = solver; if (__optionalOwner11 != null) { final __optionalCall10 = (cast __optionalOwner11 : { @:optional var clearAccumulatedImpulses:Null<Physics2DJoint->Void>; }).clearAccumulatedImpulses; if (__optionalCall10 != null) __optionalCall10(joint); } });
       ((cast joint : Physics2DJoint).impulse0 = 0.0);
       ((cast joint : Physics2DJoint).impulse1 = 0.0);
       ((cast joint : Physics2DJoint).impulse2 = 0.0);

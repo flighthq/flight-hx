@@ -41,7 +41,7 @@ class PrepareScene3DSkinning {
     runtime = (cast getNodeRuntime((cast (cast mesh : NodeAny))) : MeshRuntime);
     bounds = (cast runtime : { @:optional var deformedLocalBounds:Null<Aabb>; }).deformedLocalBounds;
     if ((cast _Runtime.looseEquals(bounds, null) : Bool)) {
-      (bounds = cast ((cast createAabb((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Aabb) : Dynamic));
+      (bounds = cast ((cast createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Aabb) : Dynamic));
       ((cast runtime : { @:optional var deformedLocalBounds:Null<Aabb>; }).deformedLocalBounds = bounds);
     }
     getMeshSkinConservativeBounds((cast bounds), (cast bindPose), (cast (cast skin : Skin).skeleton));

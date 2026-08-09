@@ -53,7 +53,7 @@ class GlyphOutlineSource {
     metrics = (cast source : flighthq.types.GlyphOutlineSource).getGlyphOutlineMetrics();
     scale = (cast GlyphOutlineSource.resolveGlyphOutlineScale__glyphOutlineSource((cast _Runtime.field(metrics, 'unitsPerEm') : Float), (cast options.fontSize : Float)) : Null<Float>);
     if ((cast _Runtime.strictEquals(scale, null) : Bool)) { return cast null; }
-    path = (cast createPath((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
+    path = (cast createPath(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Path);
     if ((cast !(cast (cast source : flighthq.types.GlyphOutlineSource).getGlyphOutline((cast path), (cast glyphIndex : Float)) : Bool) : Bool)) { return cast null; }
     advance = _Runtime.multiplyNumbers((cast source : flighthq.types.GlyphOutlineSource).getGlyphOutlineAdvance((cast glyphIndex : Float)), scale);
     if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([advance] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }

@@ -196,7 +196,7 @@ class LibgdxAtlasParse {
     imageFile = _Runtime.coalesce(({ final __structural7 = firstPage; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : LibgdxPage__libgdxAtlasParse).filename; }), function():Dynamic return cast '');
     imageWidth = _Runtime.coalesce(({ final __structural8 = firstPage; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : LibgdxPage__libgdxAtlasParse).width; }), function():Dynamic return cast 0.0);
     imageHeight = _Runtime.coalesce(({ final __structural9 = firstPage; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : LibgdxPage__libgdxAtlasParse).height; }), function():Dynamic return cast 0.0);
-    regions = (cast (cast parseTextureAtlasLibgdxAtlas((cast text : String), (cast (cast createTextureAtlas((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas))) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
+    regions = (cast (cast parseTextureAtlasLibgdxAtlas((cast text : String), (cast (cast createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : TextureAtlas))) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
     frames = (cast _Runtime.mapArray((cast regions : Array<TextureAtlasRegion>), LibgdxAtlasParse.frameFromRegion__libgdxAtlasParse, _Runtime.UNDEFINED));
     frameNames = (cast _Runtime.mapArray((cast frames : Array<SpritesheetFrameData>), function(f:SpritesheetFrameData, __unused10:Float, __unused11:Array<SpritesheetFrameData>):String return f.name, _Runtime.UNDEFINED));
     animations = (cast LibgdxAtlasParse.inferAnimations__libgdxAtlasParse((cast frameNames), (cast frameDuration : Float)) : Array<SpritesheetAnimationData>);

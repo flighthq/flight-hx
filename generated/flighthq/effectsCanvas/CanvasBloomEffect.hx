@@ -33,14 +33,14 @@ class CanvasBloomEffect {
     contrast = (1.0 + (threshold * 6.0));
     brightnessShift = (1.0 - threshold);
     bright = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    drawCanvasEffectPass((cast bright), (cast source), (cast 'contrast(' + Std.string(contrast) + ') brightness(' + Std.string(brightnessShift) + ')' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    drawCanvasEffectPass((cast bright), (cast source), (cast 'contrast(' + Std.string(contrast) + ') brightness(' + Std.string(brightnessShift) + ')' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     blurred = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
     if ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool)) {
-      drawCanvasEffectPass((cast blurred), (cast bright), (cast 'blur(' + Std.string(radius) + 'px)' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+      drawCanvasEffectPass((cast blurred), (cast bright), (cast 'blur(' + Std.string(radius) + 'px)' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     } else {
-      drawCanvasEffectPass((cast blurred), (cast bright), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+      drawCanvasEffectPass((cast blurred), (cast bright), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
-    drawCanvasEffectPass((cast dest), (cast source), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any));
+    drawCanvasEffectPass((cast dest), (cast source), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     ctx = _Runtime.field(dest, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));

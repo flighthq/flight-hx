@@ -27,7 +27,7 @@ import flighthq.types._internal._RenderCacheValues.RenderCacheKindValue;
 
 class RenderCache {
   public static function createRenderCache():flighthq.types.RenderCache {
-    return cast (cast createEntity((cast { kind: RenderCacheKindValue, transform: (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix) })) : { >Entity, var kind:String; var transform:Matrix; });
+    return cast (cast createEntity((cast { kind: RenderCacheKindValue, transform: (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix) })) : { >Entity, var kind:String; var transform:Matrix; });
     return cast null;
   }
 
@@ -37,7 +37,7 @@ class RenderCache {
     var adapter:RenderCacheAdapter = cast _Runtime.UNDEFINED;
     adapter = (cast { cache: cache, signals: null, adapt: function(_state:RenderState, _source:Renderable, node:RenderProxy2D):Null<Bool> {
       var attached:Null<flighthq.types.RenderCache> = cast _Runtime.UNDEFINED;
-      _Runtime.callOptionalValue(({ final __typedStruct3 = ({ final __structural2 = (cast adapter : { var signals:Null<RenderCacheAdapterSignals>; }).signals; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var onPrepare:Signal<Void->Void>; }).onPrepare; }); __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { var emit:Void->Void; }).emit; }), cast ([] : Array<Dynamic>));
+      ({ final __optionalOwner3 = ({ final __structural4 = (cast adapter : { var signals:Null<RenderCacheAdapterSignals>; }).signals; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var onPrepare:Signal<Void->Void>; }).onPrepare; }); if (__optionalOwner3 != null) { final __optionalCall2 = (cast __optionalOwner3 : { var emit:Void->Void; }).emit; if (__optionalCall2 != null) __optionalCall2(); } });
       attached = _Runtime.coalesce((cast adapter : { var cache:Null<flighthq.types.RenderCache>; }).cache, function():Dynamic return cast null);
       if ((cast _Runtime.strictEquals(attached, null) : Bool)) { return cast null; }
       ((cast node : RenderProxy2D).kind = RenderCacheKindValue);
@@ -51,7 +51,7 @@ class RenderCache {
 
   @:noCompletion
   public static function enableRenderCacheAdapterSignals(adapter:RenderCacheAdapter):Void {
-    ({ final __nullishOwner4 = adapter; final __nullishValue5:Null<RenderCacheAdapterSignals> = cast (cast __nullishOwner4 : { var signals:Null<RenderCacheAdapterSignals>; }).signals; __nullishValue5 == null ? ((cast __nullishOwner4 : { var signals:Null<RenderCacheAdapterSignals>; }).signals = (cast { onPrepare: (cast createSignal() : Signal<Void->Void>) } : Null<RenderCacheAdapterSignals>)) : (cast __nullishValue5 : Null<RenderCacheAdapterSignals>); });
+    ({ final __nullishOwner5 = adapter; final __nullishValue6:Null<RenderCacheAdapterSignals> = cast (cast __nullishOwner5 : { var signals:Null<RenderCacheAdapterSignals>; }).signals; __nullishValue6 == null ? ((cast __nullishOwner5 : { var signals:Null<RenderCacheAdapterSignals>; }).signals = (cast { onPrepare: (cast createSignal() : Signal<Void->Void>) } : Null<RenderCacheAdapterSignals>)) : (cast __nullishValue6 : Null<RenderCacheAdapterSignals>); });
   }
 
   @:noCompletion

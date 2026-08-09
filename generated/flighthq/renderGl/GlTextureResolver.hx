@@ -103,7 +103,7 @@ class GlTextureResolver {
   }
 
   public static function resolveGlRenderTexture__glTextureResolver(state:GlRenderState, texture:TextureLike):Null<flighthq._internal.dom.WebGLTexture> {
-    return cast (cast bindGlRenderTexture((cast state), (cast (cast texture : RenderTexture)), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<flighthq._internal.dom.WebGLTexture>);
+    return cast (cast bindGlRenderTexture((cast state), (cast (cast texture : RenderTexture)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<flighthq._internal.dom.WebGLTexture>);
     return cast null;
   }
 }

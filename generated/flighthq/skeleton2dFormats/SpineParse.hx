@@ -465,7 +465,7 @@ class SpineParse {
       SpineParse.skipCrumbSpineTimelineGroup__spineParse((cast diagnostics), (cast (cast anim : { var deform:flighthq._internal._Any; }).deform : flighthq._internal._Any), (cast 'spine.deform-timeline-unsupported' : String));
       SpineParse.skipCrumbSpineTimelineGroup__spineParse((cast diagnostics), (cast (cast anim : { var events:flighthq._internal._Any; }).events : flighthq._internal._Any), (cast 'spine.event-timeline-unsupported' : String));
       var drawOrder:Null<Skeleton2DDrawOrderTimeline> = (cast parseSpineDrawOrderTimeline((cast _Runtime.coalesce((cast anim : { var drawOrder:flighthq._internal._Any; }).drawOrder, function():Dynamic return cast (cast anim : { var draworder:flighthq._internal._Any; }).draworder) : flighthq._internal._Any), (cast slots), (cast diagnostics)) : Null<Skeleton2DDrawOrderTimeline>);
-      _Runtime.callProperty(animations, 'push', cast ([{ clip: (cast createAnimationClip((cast channels), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : AnimationClip), drawOrder: drawOrder, name: name }] : Array<Dynamic>));
+      _Runtime.callProperty(animations, 'push', cast ([{ clip: (cast createAnimationClip((cast channels), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : AnimationClip), drawOrder: drawOrder, name: name }] : Array<Dynamic>));
     }
     return cast animations;
     return cast null;
@@ -523,7 +523,7 @@ class SpineParse {
     interpolation = ((cast allStepped : Bool) ? (cast AnimationInterpolationStep : Dynamic) : (cast AnimationInterpolationLinear : Dynamic));
     segmentEasings = (cast SpineParse.buildSpineSegmentEasings__spineParse((cast keys), (cast times), (cast values), (cast 4.0 : Float), (cast diagnostics)) : Null<Array<Null<EasingFunction>>>);
     track = (cast createAnimationTrack((cast { components: 4.0, interpolation: interpolation, segmentEasings: segmentEasings, times: times, values: values })) : AnimationTrack);
-    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast track), (cast (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Color), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Skeleton2DSlotAnimationTarget) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+    _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast track), (cast (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Color), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Skeleton2DSlotAnimationTarget) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
   }
 
   public static function addSpineSlotAttachmentChannel__spineParse(channels:Array<Dynamic>, rawKeys:Array<flighthq._internal._Any>, slotIndex:Float, slotName:String, skins:Array<AttachmentSkin2D>):Void {

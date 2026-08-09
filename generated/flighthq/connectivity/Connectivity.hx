@@ -158,11 +158,11 @@ class Connectivity {
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['online', listener] : Array<Dynamic>));
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['offline', listener] : Array<Dynamic>));
       conn = (cast Connectivity.getWebConnection__connectivity() : Null<WebConnectivityConnection__connectivity>);
-      _Runtime.callOptionalValue(({ final __structural9 = conn; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var addEventListener:Null<String->(Void->Void)->Void>; }).addEventListener; }), cast (['change', listener] : Array<Dynamic>));
+      ({ final __optionalOwner10 = conn; if (__optionalOwner10 != null) { final __optionalCall9 = (cast __optionalOwner10 : { @:optional var addEventListener:Null<String->(Void->Void)->Void>; }).addEventListener; if (__optionalCall9 != null) __optionalCall9('change', listener); } });
       return cast function():Void {
         flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['online', listener] : Array<Dynamic>));
         flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['offline', listener] : Array<Dynamic>));
-        _Runtime.callOptionalValue(({ final __structural10 = conn; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; }), cast (['change', listener] : Array<Dynamic>));
+        ({ final __optionalOwner12 = conn; if (__optionalOwner12 != null) { final __optionalCall11 = (cast __optionalOwner12 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall11 != null) __optionalCall11('change', listener); } });
       };
       return cast _Runtime.UNDEFINED;
     } };

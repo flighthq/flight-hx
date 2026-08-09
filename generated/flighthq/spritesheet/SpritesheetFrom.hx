@@ -59,7 +59,7 @@ class SpritesheetFrom {
   public static function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet {
     var atlas:TextureAtlas = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
-    atlas = (cast createTextureAtlasFromGrid((cast options), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas);
+    atlas = (cast createTextureAtlasFromGrid((cast options), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : TextureAtlas);
     frames = (cast _Runtime.mapArray((cast atlas.regions : Array<TextureAtlasRegion>), function(region:TextureAtlasRegion, __unused5:Float, __unused6:Array<TextureAtlasRegion>):SpritesheetFrame return (cast createSpritesheetFrame((cast { id: region.id })) : SpritesheetFrame), _Runtime.UNDEFINED));
     return cast (cast createSpritesheet((cast { atlas: atlas, frames: frames })) : Spritesheet);
     return cast null;

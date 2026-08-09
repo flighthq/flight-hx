@@ -48,19 +48,19 @@ class StarlingPexParse {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
     diagnostics = (cast cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(doc.emitterType, 1.0) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'starlingpex.radial-approximated' : String), (cast 'collectStarlingPexDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'starlingpex.radial-approximated' : String), (cast 'collectStarlingPexDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     if ((cast ((cast !_Runtime.strictEquals(doc.radialAcceleration, 0.0) : Bool) || (cast !_Runtime.strictEquals(doc.radialAccelVariance, 0.0) : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'starlingpex.radial-acceleration-unsupported' : String), (cast 'collectStarlingPexDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'starlingpex.radial-acceleration-unsupported' : String), (cast 'collectStarlingPexDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     if ((cast ((cast !_Runtime.strictEquals(doc.tangentialAcceleration, 0.0) : Bool) || (cast !_Runtime.strictEquals(doc.tangentialAccelVariance, 0.0) : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'starlingpex.tangential-acceleration-unsupported' : String), (cast 'collectStarlingPexDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'starlingpex.tangential-acceleration-unsupported' : String), (cast 'collectStarlingPexDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     if ((cast !_Runtime.strictEquals(doc.finishParticleSizeVariance, 0.0) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'starlingpex.finish-size-variance-unsupported' : String), (cast 'collectStarlingPexDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'starlingpex.finish-size-variance-unsupported' : String), (cast 'collectStarlingPexDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     if ((cast ((cast !_Runtime.strictEquals((cast doc.startColorVariance : { var alpha:Float; }).alpha, 0.0) : Bool) || (cast !_Runtime.strictEquals((cast doc.finishColorVariance : { var alpha:Float; }).alpha, 0.0) : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'starlingpex.alpha-variance-unsupported' : String), (cast 'collectStarlingPexDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'starlingpex.alpha-variance-unsupported' : String), (cast 'collectStarlingPexDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     return cast diagnostics;
     return cast null;

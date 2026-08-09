@@ -3060,6 +3060,36 @@ function emitTypedStructRead(expression: Extract<IrExpression, { kind: 'property
   return `({ final ${temporary} = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${directTypedStructField(expression, temporary)}; })`;
 }
 
+function propertyFunctionType(
+  expression: Extract<IrExpression, { kind: 'property' }>,
+): Extract<IrType, { kind: 'function' }> | undefined {
+  const fieldType =
+    expression.typedStructBinding?.field.type ??
+    (expression.structuralReceiverType?.kind === 'anonymous'
+      ? expression.structuralReceiverType.fields.find((field) => field.name === expression.name)?.type
+      : undefined);
+  const callable = fieldType?.kind === 'nullable' ? fieldType.inner : fieldType;
+  return callable?.kind === 'function' ? callable : undefined;
+}
+
+function emitOptionalDirectVoidPropertyCall(
+  expression: Extract<IrExpression, { kind: 'call' }>,
+  property: Extract<IrExpression, { kind: 'property' }>,
+  directField: (owner: string) => string,
+): string | undefined {
+  const callableType = propertyFunctionType(property);
+  if (callableType?.returns.kind !== 'primitive' || callableType.returns.name !== 'Void') return undefined;
+  const arguments_ = expression.arguments
+    .map((argument, index) => emitCheckedCallArgument(expression, argument, index))
+    .join(', ');
+  const callableTemporary = `__optionalCall${String(temporaryIndex++)}`;
+  if (!property.optional) {
+    return `({ final ${callableTemporary} = ${directField(emitExpression(property.object))}; if (${callableTemporary} != null) ${callableTemporary}(${arguments_}); })`;
+  }
+  const ownerTemporary = `__optionalOwner${String(temporaryIndex++)}`;
+  return `({ final ${ownerTemporary} = ${emitExpression(property.object)}; if (${ownerTemporary} != null) { final ${callableTemporary} = ${directField(ownerTemporary)}; if (${callableTemporary} != null) ${callableTemporary}(${arguments_}); } })`;
+}
+
 function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
   if (expression.callee.kind === 'identifier' && currentDirectFunctions.has(expression.callee.name)) {
     return `${currentModuleName}.${safeName(expression.callee.name)}(cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
@@ -3201,6 +3231,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     return `_Runtime.${method}(${emitExpression(expression.callee)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
   }
   if (expression.callee.kind === 'property') {
+    const property = expression.callee;
     const owner = emitExpression(expression.callee.object);
     const name = expression.callee.name;
     const typedArraySet = emitTypedArraySet(expression, owner);
@@ -3281,12 +3312,20 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       if (!(expression.optional || expression.callee.optional)) {
         return `(${emitTypedStructRead(expression.callee)})(${expression.arguments.map((argument, index) => emitCheckedCallArgument(expression, argument, index)).join(', ')})`;
       }
+      const directOptional = emitOptionalDirectVoidPropertyCall(expression, property, (owner) =>
+        directTypedStructField(property, owner),
+      );
+      if (directOptional) return directOptional;
       return `_Runtime.callOptionalValue(${emitTypedStructRead(expression.callee)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
     }
     if (expression.callee.structuralReceiverType) {
       if (!(expression.optional || expression.callee.optional)) {
         return `${directStructuralField(expression.callee, owner)}(${expression.arguments.map((argument, index) => emitCheckedCallArgument(expression, argument, index)).join(', ')})`;
       }
+      const directOptional = emitOptionalDirectVoidPropertyCall(expression, property, (target) =>
+        directStructuralField(property, target),
+      );
+      if (directOptional) return directOptional;
       return `_Runtime.callOptionalValue(${emitStructuralRead(expression.callee)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
     }
     if (expression.callee.generatedClass) {
@@ -3513,6 +3552,9 @@ function emitCheckedCallArgument(
   index: number,
 ): string {
   const emitted = emitExpression(argument);
+  // JavaScript needs the original undefined sentinel, while static targets
+  // need null so a scalar cast cannot turn an omitted argument into 0/false.
+  if (call.omittedArguments?.[index]) return `#if js (cast ${emitted}) #else (cast null) #end`;
   const expected = call.directArgumentTypes?.[index];
   if (call.inferenceCastArguments?.[index]) return `(cast ${emitted})`;
   if (!expected) return emitted;

@@ -52,7 +52,7 @@ class GlRenderTexture {
     flighthq._internal.backend.WebGl2Backend.bindTexture((cast state : GlRenderState).gl, flighthq._internal.backend.WebGl2Backend.contextConstant((cast state : GlRenderState).gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), texture);
     ((cast runtime : GlRenderStateRuntime).currentTexture = texture);
     ((cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha = false);
-    applyGlSamplerState((cast state), (cast runtime), (cast texture), (cast _Runtime.coalesce(sampler, function():Dynamic return cast _Runtime.field(renderTexture, 'sampler'))), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    applyGlSamplerState((cast state), (cast runtime), (cast texture), (cast _Runtime.coalesce(sampler, function():Dynamic return cast _Runtime.field(renderTexture, 'sampler'))), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast texture;
     return cast null;
   }
@@ -132,7 +132,7 @@ class GlRenderTexture {
       pushGlRenderState((cast state));
       try {
         try {
-          beginGlRenderPass((cast state), (cast target), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+          beginGlRenderPass((cast state), (cast target), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
           try {
             try {
               callback((cast state));

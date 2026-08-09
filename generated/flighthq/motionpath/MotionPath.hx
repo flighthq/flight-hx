@@ -20,15 +20,15 @@ class MotionPath {
   }
 
   public static function getMotionPathHeading(mp:flighthq.types.MotionPath):Float {
-    (cast getPathTangentAtDistance((cast _Runtime.field(mp, 'path')), (cast _Runtime.field(mp, 'distance') : Float), (cast MotionPath.scratchTangent__motionPath), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bool);
+    (cast getPathTangentAtDistance((cast _Runtime.field(mp, 'path')), (cast _Runtime.field(mp, 'distance') : Float), (cast MotionPath.scratchTangent__motionPath), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Bool);
     return cast HxMath.atan2(MotionPath.scratchTangent__motionPath.y, MotionPath.scratchTangent__motionPath.x);
     return cast null;
   }
 
-  public static final scratchTangent__motionPath:Vector2 = (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector2);
+  public static final scratchTangent__motionPath:Vector2 = (cast createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Vector2);
 
   public static function getMotionPathPosition(mp:flighthq.types.MotionPath, pointOut:Vector2Like, tangentOut:Vector2Like):Bool {
-    return cast (cast getPathPositionAtDistance((cast _Runtime.field(mp, 'path')), (cast _Runtime.field(mp, 'distance') : Float), (cast pointOut), (cast tangentOut), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bool);
+    return cast (cast getPathPositionAtDistance((cast _Runtime.field(mp, 'path')), (cast _Runtime.field(mp, 'distance') : Float), (cast pointOut), (cast tangentOut), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Bool);
     return cast null;
   }
 

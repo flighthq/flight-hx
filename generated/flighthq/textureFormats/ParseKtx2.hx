@@ -28,7 +28,7 @@ class ParseKtx2 {
   }
 
   public static function parseKtx2(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
-    return cast (cast ParseKtx2.parseKtx2Internal__parseKtx2((cast bytes), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<TextureContainer>);
+    return cast (cast ParseKtx2.parseKtx2Internal__parseKtx2((cast bytes), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<TextureContainer>);
     return cast null;
   }
 

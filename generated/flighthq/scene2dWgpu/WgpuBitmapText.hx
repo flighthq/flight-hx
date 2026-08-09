@@ -79,7 +79,7 @@ class WgpuBitmapText {
       if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !(cast (cast hasTextureSource((cast texture)) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast page : BitmapTextPage).instanceCount, 0.0) : Bool)) : Bool)) { continue; }
       var textureEntry:Null<WgpuTextureEntry> = (cast resolveWgpuTexture((cast state), (cast texture), (cast true : Bool), (cast SCENE2D_WORKING_COLOR_SPACE)) : Null<WgpuTextureEntry>);
       if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { continue; }
-      var base:Float = (cast prepareWgpuQuadBatchWrite((cast state), (cast textureEntry), (cast (cast texture : Texture2D).sampler), (cast (cast node : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast (cast page : BitmapTextPage).instanceCount : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Float);
+      var base:Float = (cast prepareWgpuQuadBatchWrite((cast state), (cast textureEntry), (cast (cast texture : Texture2D).sampler), (cast (cast node : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast (cast page : BitmapTextPage).instanceCount : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Float);
       var startCount:Float = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount;
       var regions:Array<TextureAtlasRegion> = atlas.regions;
       var numRegions:Float = _Runtime.field(regions, 'length');

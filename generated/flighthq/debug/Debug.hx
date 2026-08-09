@@ -105,7 +105,7 @@ class Debug {
     channels = (cast Debug._collectDebugChannels__debug((cast subsystems), (cast _Runtime.field(options, 'channels'))) : Array<String>);
     (Debug._savedGlobalLevel__debug = cast ((cast getLogLevel() : LogLevel) : Dynamic));
     Debug._applyDebugLevels__debug((cast level), (cast channels));
-    Debug._installDebugSink__debug((cast _Runtime.coalesce(_Runtime.field(options, 'sink'), function():Dynamic return cast (cast createConsoleLogSink((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : LogSink))));
+    Debug._installDebugSink__debug((cast _Runtime.coalesce(_Runtime.field(options, 'sink'), function():Dynamic return cast (cast createConsoleLogSink(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : LogSink))));
     for (hooks in _Runtime.iterable(subsystems)) {
       _Runtime.callOptionalProperty(hooks, 'enableGuards', cast ([] : Array<Dynamic>));
       _Runtime.callProperty(Debug._enabledSubsystems__debug, 'push', cast ([hooks] : Array<Dynamic>));
@@ -114,7 +114,7 @@ class Debug {
   }
 
   public static function enableFlightDiagnostics(state:RenderState):Void {
-    enableDebug((cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    enableDebug(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     enableColorAdjustmentGuards((cast state));
     enableRenderRegistryGuards((cast state));
   }

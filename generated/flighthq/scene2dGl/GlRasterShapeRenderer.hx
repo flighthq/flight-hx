@@ -110,10 +110,10 @@ class GlRasterShapeRenderer {
     t = (cast renderProxy : RenderProxy2D).transform2D;
     tx = ((t.tx + _Runtime.multiplyNumbers(t.a, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.c, _Runtime.field(bounds, 'y')));
     ty = ((t.ty + _Runtime.multiplyNumbers(t.b, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.d, _Runtime.field(bounds, 'y')));
-    texture = (cast bindGlImageResourceTexture((cast state), (cast (cast surface : GlShapeRasterSurface).image), (cast null), (cast null), (cast true : Bool), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq._internal.dom.WebGLTexture);
+    texture = (cast bindGlImageResourceTexture((cast state), (cast (cast surface : GlShapeRasterSurface).image), (cast null), (cast null), (cast true : Bool), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq._internal.dom.WebGLTexture);
     straightAlpha = (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha;
     startCount = (cast runtime : GlRenderStateRuntime).quadBatchWriterCount;
-    base = (cast prepareGlQuadBatchWrite((cast state), (cast texture), (cast straightAlpha : Bool), (cast null), (cast (cast renderProxy : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast 1.0 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Float);
+    base = (cast prepareGlQuadBatchWrite((cast state), (cast texture), (cast straightAlpha : Bool), (cast null), (cast (cast renderProxy : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Float);
     d = (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData;
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast d : flighthq._internal._Float32Array), (cast base : Float), (cast t.a : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast d : flighthq._internal._Float32Array), (cast (base + 1.0) : Float), (cast t.b : Float));

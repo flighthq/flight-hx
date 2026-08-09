@@ -36,13 +36,13 @@ class RiveDrawOrder {
         var governed:Null<Node2D> = (cast RiveDrawOrder.resolveRiveDrawNode__riveDrawOrder((cast nodes), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)))) : Null<Node2D>);
         var target:Null<{ var isAbove:Bool; var node:Node2D; }> = (cast RiveDrawOrder.resolveRiveDrawTarget__riveDrawOrder((cast nodes), (cast artboard), (cast (cast RiveDrawOrder.readRiveDrawId__riveDrawOrder((cast object), (cast RiveDrawOrder.RIVE_DRAW_TARGET_ID__riveDrawOrder : Float)) : Null<Float>))) : Null<{ var isAbove:Bool; var node:Node2D; }>);
         if ((cast ((cast _Runtime.strictEquals(governed, null) : Bool) || (cast _Runtime.strictEquals(target, null) : Bool)) : Bool)) {
-          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'rive.draw-rule-unresolved' : String), (cast 'applyRiveDrawOrder' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'rive.draw-rule-unresolved' : String), (cast 'applyRiveDrawOrder' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
           index++;
           continue;
         }
         var parent:Null<Node2D> = (cast getNodeParent((cast governed)) : Null<Node2D>);
         if ((cast ((cast _Runtime.strictEquals(parent, null) : Bool) || (cast !_Runtime.strictEquals(parent, (cast getNodeParent((cast (cast target : { var isAbove:Bool; var node:Node2D; }).node)) : Null<NodeOf<Node2DTraits>>)) : Bool)) : Bool)) {
-          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'rive.draw-rule-crosses-parent' : String), (cast 'applyRiveDrawOrder' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'rive.draw-rule-crosses-parent' : String), (cast 'applyRiveDrawOrder' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
           index++;
           continue;
         }

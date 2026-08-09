@@ -31,7 +31,7 @@ class Sampler {
   }
 
   public static function createClampLinearSampler():flighthq.types.Sampler {
-    return cast (cast createSampler((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.Sampler);
+    return cast (cast createSampler(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq.types.Sampler);
     return cast null;
   }
 

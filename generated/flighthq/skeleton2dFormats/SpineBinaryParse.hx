@@ -155,7 +155,7 @@ class SpineBinaryParse {
         SpineBinaryParse.skipSpineBinaryDeformTimelines__spineBinaryParse((cast reader), (cast unmodeled));
         var drawOrder:Null<Skeleton2DDrawOrderTimeline> = (cast SpineBinaryParse.readSpineBinaryDrawOrderTimeline__spineBinaryParse((cast reader), (cast slotCount : Float), (cast diagnostics)) : Null<Skeleton2DDrawOrderTimeline>);
         SpineBinaryParse.skipSpineBinaryEventTimelines__spineBinaryParse((cast reader), (cast unmodeled));
-        _Runtime.callProperty(animations, 'push', cast ([{ clip: (cast createAnimationClip((cast channels), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : AnimationClip), drawOrder: drawOrder, name: _Runtime.coalesce(name, function():Dynamic return cast '') }] : Array<Dynamic>));
+        _Runtime.callProperty(animations, 'push', cast ([{ clip: (cast createAnimationClip((cast channels), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : AnimationClip), drawOrder: drawOrder, name: _Runtime.coalesce(name, function():Dynamic return cast '') }] : Array<Dynamic>));
         i++;
       }
     }
@@ -374,7 +374,7 @@ class SpineBinaryParse {
             }
             var timeline:{ var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; } = (cast SpineBinaryParse.readSpineBinaryColorTimeline__spineBinaryParse((cast reader), (cast frameCount : Float), (cast count : Float)) : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; });
             var track:AnimationTrack = (cast createAnimationTrack((cast { components: count, interpolation: AnimationInterpolationLinear, segmentEasings: (cast SpineBinaryParse.buildSpineBinarySegmentEasings__spineBinaryParse((cast timeline), (cast count : Float), (cast diagnostics)) : Null<Array<Null<EasingFunction>>>), times: (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times, values: (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values })) : AnimationTrack);
-            _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast track), (cast (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Color), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Skeleton2DSlotAnimationTarget) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+            _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast track), (cast (cast createSkeleton2DSlotAnimationTarget((cast slotIndex : Float), (cast (cast Skeleton2DSlotAnimationPathValue : { var Attachment:String; var Color:String; }).Color), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Skeleton2DSlotAnimationTarget) : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
             j++;
           }
         }

@@ -42,8 +42,8 @@ class SwfText {
     glyphBits = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
     advanceBits = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
     if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
-    shape = (cast createShape((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Shape);
-    glyphOutline = (cast createPath((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
+    shape = (cast createShape(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Shape);
+    glyphOutline = (cast createPath(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Path);
     font = null;
     unitsPerEm = SwfText.DEFAULT_FONT_UNITS_PER_EM__swfText;
     color = 0.0;

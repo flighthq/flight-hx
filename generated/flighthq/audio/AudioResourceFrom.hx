@@ -16,7 +16,7 @@ class AudioResourceFrom {
     var buffer:flighthq._internal.dom.AudioBuffer = cast _Runtime.UNDEFINED;
     numberOfChannels = _Runtime.field(channels, 'length');
     length = ((cast ((cast numberOfChannels : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(channels, 0.0), 'length') : Dynamic) : (cast 0.0 : Dynamic));
-    if ((cast ((cast _Runtime.strictEquals(numberOfChannels, 0.0) : Bool) || (cast _Runtime.strictEquals(length, 0.0) : Bool)) : Bool)) { return cast (cast createAudioResource((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : AudioResource); }
+    if ((cast ((cast _Runtime.strictEquals(numberOfChannels, 0.0) : Bool) || (cast _Runtime.strictEquals(length, 0.0) : Bool)) : Bool)) { return cast (cast createAudioResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : AudioResource); }
     buffer = _Runtime.construct(flighthq._internal._HostValueLut.get('AudioBuffer'), [{ length: length, numberOfChannels: numberOfChannels, sampleRate: sampleRate }]);
     {
       var channel:Float = 0.0;
@@ -101,7 +101,7 @@ class AudioResourceFrom {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var selected:Null<String> = cast _Runtime.UNDEFINED;
       selected = (cast selectAudioResourceUrl((cast sources)) : Null<String>);
-      if ((cast _Runtime.strictEquals(selected, null) : Bool)) { return cast (cast createAudioResource((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : AudioResource); }
+      if ((cast _Runtime.strictEquals(selected, null) : Bool)) { return cast (cast createAudioResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : AudioResource); }
       return cast (cast loadAudioResourceFromUrl((cast context), (cast selected : String), (cast signal)) : flighthq._internal._Promise<AudioResource>);
       return cast null;
     }));

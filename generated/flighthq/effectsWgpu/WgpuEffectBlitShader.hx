@@ -49,7 +49,7 @@ class WgpuEffectBlitShader {
     var p:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectBlitShader.blitOffsetPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (p = cast ((cast createWgpuEffectPipeline((cast state), (cast WgpuEffectBlitShader.BLIT_OFFSET_WGSL__wgpuEffectBlitShader : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : WgpuEffectPipeline) : Dynamic));
+      (p = cast ((cast createWgpuEffectPipeline((cast state), (cast WgpuEffectBlitShader.BLIT_OFFSET_WGSL__wgpuEffectBlitShader : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : WgpuEffectPipeline) : Dynamic));
       ((cast WgpuEffectBlitShader.blitOffsetPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast p)));
     }
     return cast p;
@@ -60,7 +60,7 @@ class WgpuEffectBlitShader {
     var p:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectBlitShader.blitPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (p = cast ((cast createWgpuEffectPipeline((cast state), (cast WgpuEffectBlitShader.BLIT_WGSL__wgpuEffectBlitShader : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : WgpuEffectPipeline) : Dynamic));
+      (p = cast ((cast createWgpuEffectPipeline((cast state), (cast WgpuEffectBlitShader.BLIT_WGSL__wgpuEffectBlitShader : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : WgpuEffectPipeline) : Dynamic));
       ((cast WgpuEffectBlitShader.blitPipelines__wgpuEffectBlitShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast p)));
     }
     return cast p;

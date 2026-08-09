@@ -135,6 +135,37 @@ class CoreSmoke {
     );
     if (dynamicMapped.join(',') != 'ONE,TWO') throw 'dynamic Array map callback ABI failed';
 
+    final circleCommands:Array<flighthq.types.ShapeCommand.ShapeCommandToken> = cast (
+      [
+        'beginFill',
+        2.0,
+        0x4488cc,
+        1.0,
+        'drawCircle',
+        3.0,
+        100.0,
+        100.0,
+        100.0,
+        'endFill',
+        0.0,
+      ] : Array<Dynamic>
+    );
+    final circleRegions = flighthq.shape.ShapeFill.getShapeFillRegions(circleCommands);
+    if (circleRegions == null || circleRegions.length != 1) {
+      throw 'circle shape fill command walker failed';
+    }
+    final defaultToleranceMesh = flighthq.path.TessellatePath.tessellatePath(
+      circleRegions[0].path,
+      #if js
+      cast _Runtime.field(_Runtime, 'UNDEFINED')
+      #else
+      cast null
+      #end
+    );
+    if (defaultToleranceMesh.vertices.length != 128 || defaultToleranceMesh.indices.length != 186) {
+      throw 'omitted Float argument did not retain tessellation default: ${defaultToleranceMesh.vertices.length}/${defaultToleranceMesh.indices.length}';
+    }
+
     final endFillState:flighthq.types.CanvasShapeDrawState = cast {
       bitmapSrc: null,
       fillMatrix: null,

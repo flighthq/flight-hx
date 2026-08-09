@@ -28,9 +28,9 @@ class ElectronApp {
       return cast _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural0 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var bounce:Null<String>->Float; }).bounce; }), cast ([] : Array<Dynamic>)), function():Dynamic return cast -1.0);
       return cast _Runtime.UNDEFINED;
     }, cancelAttention: function(id:Float):Void {
-      _Runtime.callOptionalValue(({ final __structural1 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var cancelBounce:Float->Void; }).cancelBounce; }), cast ([id] : Array<Dynamic>));
+      ({ final __optionalOwner2 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; if (__optionalOwner2 != null) { final __optionalCall1 = (cast __optionalOwner2 : { var cancelBounce:Float->Void; }).cancelBounce; if (__optionalCall1 != null) __optionalCall1(id); } });
     }, cancelDockBounce: function(id:Float):Void {
-      _Runtime.callOptionalValue(({ final __structural2 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var cancelBounce:Float->Void; }).cancelBounce; }), cast ([id] : Array<Dynamic>));
+      ({ final __optionalOwner4 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; if (__optionalOwner4 != null) { final __optionalCall3 = (cast __optionalOwner4 : { var cancelBounce:Float->Void; }).cancelBounce; if (__optionalCall3 != null) __optionalCall3(id); } });
     }, clearRecentDocuments: function():Void {
       (cast app : flighthq.types.ElectronApi.ElectronApp).clearRecentDocuments();
     }, focus: function():Void {
@@ -86,7 +86,7 @@ class ElectronApp {
     }, releaseSingleInstanceLock: function():Void {
       (cast app : flighthq.types.ElectronApi.ElectronApp).releaseSingleInstanceLock();
     }, requestAttention: function(_critical:Bool):Float {
-      return cast _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural3 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var bounce:Null<String>->Float; }).bounce; }), cast ([((cast _critical : Bool) ? (cast 'critical' : Dynamic) : (cast 'informational' : Dynamic))] : Array<Dynamic>)), function():Dynamic return cast -1.0);
+      return cast _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural5 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var bounce:Null<String>->Float; }).bounce; }), cast ([((cast _critical : Bool) ? (cast 'critical' : Dynamic) : (cast 'informational' : Dynamic))] : Array<Dynamic>)), function():Dynamic return cast -1.0);
       return cast _Runtime.UNDEFINED;
     }, requestSingleInstanceLock: function():Bool {
       return cast (cast app : flighthq.types.ElectronApi.ElectronApp).requestSingleInstanceLock();
@@ -97,7 +97,7 @@ class ElectronApp {
       return cast (cast app : flighthq.types.ElectronApi.ElectronApp).setBadgeCount((cast count : Float));
       return cast _Runtime.UNDEFINED;
     }, setDockBadge: function(text:String):Void {
-      _Runtime.callOptionalValue(({ final __structural4 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var setBadge:String->Void; }).setBadge; }), cast ([text] : Array<Dynamic>));
+      ({ final __optionalOwner7 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; if (__optionalOwner7 != null) { final __optionalCall6 = (cast __optionalOwner7 : { var setBadge:String->Void; }).setBadge; if (__optionalCall6 != null) __optionalCall6(text); } });
     }, setDockMenu: function(items:Array<MenuItemTemplate>):Void {
       if ((cast !_Runtime.truthy((cast app : flighthq.types.ElectronApi.ElectronApp).dock) : Bool)) { return; }
       (cast (cast app : flighthq.types.ElectronApi.ElectronApp).dock : ElectronDock).setMenu((cast (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast _Runtime.mapArray((cast items : Array<MenuItemTemplate>), ElectronApp.toMenuItemOptions__electronApp, _Runtime.UNDEFINED))))));
@@ -136,7 +136,7 @@ class ElectronApp {
       handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
         var event:Null<{ @:optional var preventDefault:Null<Void->Void>; }> = cast _Runtime.UNDEFINED;
         event = (cast flighthq._internal._StaticIndex.readArray(args, 0.0) : Null<{ @:optional var preventDefault:Void->Void; }>);
-        listener((cast function():Void { _Runtime.callOptionalValue(({ final __structural5 = event; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var preventDefault:Null<Void->Void>; }).preventDefault; }), cast ([] : Array<Dynamic>)); }));
+        listener((cast function():Void { ({ final __optionalOwner9 = event; if (__optionalOwner9 != null) { final __optionalCall8 = (cast __optionalOwner9 : { @:optional var preventDefault:Null<Void->Void>; }).preventDefault; if (__optionalCall8 != null) __optionalCall8(); } }); }));
       }, 0));
       (cast app : flighthq.types.ElectronApi.ElectronApp).on((cast 'before-quit' : String), (cast handler));
       return cast function():Void { (cast app : flighthq.types.ElectronApi.ElectronApp).removeListener((cast 'before-quit' : String), (cast handler)); };

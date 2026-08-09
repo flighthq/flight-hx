@@ -19,7 +19,7 @@ import flighthq.types.Vector3.Vector3Like;
 class OrbitCameraController {
   public static function cloneOrbitCameraController(source:flighthq.types.OrbitCameraController):flighthq.types.OrbitCameraController {
     var clone:flighthq.types.OrbitCameraController = cast _Runtime.UNDEFINED;
-    clone = (cast createOrbitCameraController((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.OrbitCameraController);
+    clone = (cast createOrbitCameraController(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq.types.OrbitCameraController);
     copyOrbitCameraController((cast clone), (cast source));
     return cast clone;
     return cast null;
@@ -163,5 +163,5 @@ class OrbitCameraController {
 
   public static final WORLD_UP__orbitCameraController:Vector3 = (cast createVector3((cast 0.0), (cast 1.0), (cast 0.0)) : Vector3);
 
-  public static final scratchEye__orbitCameraController:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector3);
+  public static final scratchEye__orbitCameraController:Vector3 = (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Vector3);
 }

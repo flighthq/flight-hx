@@ -95,7 +95,7 @@ class GltfTransmissionVolume {
     var created:TransmissionVolumePbrExtension = cast _Runtime.UNDEFINED;
     existing = (cast findGltfPbrExtension((cast _Runtime.field(context, 'document')), (cast index : Float), (cast TransmissionVolumePbrExtensionKind : String)) : Null<PbrExtension>);
     if ((cast !_Runtime.strictEquals(existing, null) : Bool)) { return cast (cast existing : TransmissionVolumePbrExtension); }
-    created = (cast createTransmissionVolumePbrExtension((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TransmissionVolumePbrExtension);
+    created = (cast createTransmissionVolumePbrExtension(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : TransmissionVolumePbrExtension);
     if ((cast !(cast (cast attachGltfPbrExtension((cast _Runtime.field(context, 'document')), (cast index : Float), (cast created)) : Bool) : Bool) : Bool)) { return cast null; }
     return cast created;
     return cast null;

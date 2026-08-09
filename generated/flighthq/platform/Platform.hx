@@ -102,7 +102,7 @@ class Platform {
     (out.name = cast ((cast parseUserAgentName((cast ua : String)) : PlatformName) : Dynamic));
     (out.kind = cast ((cast parseUserAgentKind((cast out.name)) : PlatformKind) : Dynamic));
     (out.version = cast ((cast parseUserAgentVersion((cast ua : String), (cast out.name)) : String) : Dynamic));
-    (out.arch = cast ((cast parseUserAgentArch((cast ua : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : String) : Dynamic));
+    (out.arch = cast ((cast parseUserAgentArch((cast ua : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : String) : Dynamic));
     (out.locale = cast (_Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(nav, 'language'), function():Dynamic return cast '') : Dynamic));
     (out.isTouch = cast (((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'maxTouchPoints') : Bool)) : Bool) ? (cast ((cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'maxTouchPoints') : Float) > (cast 0.0 : Float)) : Dynamic) : (cast false : Dynamic)) : Dynamic));
     (out.runtime = cast ((cast parseUserAgentRuntime((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) ? (cast (cast (cast flighthq._internal.backend.DomWindowBackend.value() : flighthq._internal._Any) : flighthq._internal._Record<String, flighthq._internal._Any>) : Dynamic) : (cast null : Dynamic)))) : PlatformRuntime) : Dynamic));

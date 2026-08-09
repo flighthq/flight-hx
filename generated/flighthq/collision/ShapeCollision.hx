@@ -619,7 +619,7 @@ class ShapeCollision {
 
   public static final scratchB__shapeCollision:flighthq._internal._Float64Array = new flighthq._internal._Float64Array(8.0);
 
-  public static final scratchAxis__shapeCollision:Vector2 = (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector2);
+  public static final scratchAxis__shapeCollision:Vector2 = (cast createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Vector2);
 
   public static final minOverlapAxis__shapeCollision:{ var overlap:Float; var x:Float; var y:Float; } = (cast { overlap: HxMath.POSITIVE_INFINITY, x: 0.0, y: 0.0 });
 }

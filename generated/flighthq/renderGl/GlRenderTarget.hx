@@ -92,7 +92,7 @@ class GlRenderTarget {
     var quadTransform:Matrix = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast _Runtime.field(target, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(target, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
-    useGlProgram((cast state), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    useGlProgram((cast state), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     _Runtime.callOptionalValue((cast state : GlRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
     gl = (cast state : GlRenderState).gl;
     __destructure0 = runtime;

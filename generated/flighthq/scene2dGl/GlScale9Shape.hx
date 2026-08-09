@@ -131,7 +131,7 @@ class GlScale9Shape {
       ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastPixelRatio = pixelRatio);
       ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastW = w);
     }
-    useGlProgram((cast state), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    useGlProgram((cast state), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     gl = (cast state : GlRenderState).gl;
     if ((cast !_Runtime.strictEquals((cast runtime : GlRenderStateRuntime).currentTexture, (cast shapeData : GlScale9ShapeData__glScale9Shape).texture) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast shapeData : GlScale9ShapeData__glScale9Shape).texture);

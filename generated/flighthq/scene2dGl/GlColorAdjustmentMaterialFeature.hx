@@ -611,7 +611,7 @@ class GlColorAdjustmentMaterialFeature {
     colorScaleBias = (cast renderProxy : RenderProxy2D).colorScaleBias;
     base = (cast ensureGlShapeMeshProgram((cast state)) : GlShapeMeshBinding);
     if ((cast ((cast _Runtime.looseEquals(colorMatrix, null) : Bool) && (cast _Runtime.strictEquals(colorScaleBias, null) : Bool)) : Bool)) {
-      drawGlShapeMeshBatch((cast state), (cast renderProxy), (cast meshes), (cast base), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      drawGlShapeMeshBatch((cast state), (cast renderProxy), (cast meshes), (cast base), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       return;
     }
     shader = ((cast _Runtime.looseEquals(colorMatrix, null) : Bool) ? (cast (cast GlColorAdjustmentMaterialFeature.ensureGlShapeMeshColorScaleBiasShader__glColorAdjustmentMaterialFeature((cast state)) : GlShapeMeshColorScaleBiasShader) : Dynamic) : (cast (cast GlColorAdjustmentMaterialFeature.ensureGlShapeMeshColorMatrixShader__glColorAdjustmentMaterialFeature((cast state)) : GlShapeMeshColorScaleBiasShader) : Dynamic));

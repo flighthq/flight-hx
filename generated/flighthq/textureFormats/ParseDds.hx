@@ -27,7 +27,7 @@ class ParseDds {
   }
 
   public static function parseDds(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
-    return cast (cast ParseDds.parseDdsInternal__parseDds((cast bytes), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<TextureContainer>);
+    return cast (cast ParseDds.parseDdsInternal__parseDds((cast bytes), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<TextureContainer>);
     return cast null;
   }
 

@@ -60,14 +60,14 @@ class DomNode2D {
       if ((cast !(cast (cast current : { var enabled:Bool; }).enabled : Bool) : Bool)) { continue; }
       var data:Null<RenderProxy2D> = (cast getRenderProxy2D((cast state), (cast current)) : Null<RenderProxy2D>);
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      _Runtime.callOptionalValue(({ final __structural0 = clipHooks; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; }), cast ([state, data, current] : Array<Dynamic>));
+      ({ final __optionalOwner1 = clipHooks; if (__optionalOwner1 != null) { final __optionalCall0 = (cast __optionalOwner1 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall0 != null) __optionalCall0(state, data, current); } });
       if ((cast !(cast (cast isRenderProxyVisible((cast data)) : Bool) : Bool) : Bool)) { continue; }
-      _Runtime.callOptionalValue(({ final __structural1 = clipHooks; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; }), cast ([state, data, current] : Array<Dynamic>));
+      ({ final __optionalOwner3 = clipHooks; if (__optionalOwner3 != null) { final __optionalCall2 = (cast __optionalOwner3 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall2 != null) __optionalCall2(state, data, current); } });
       if ((cast !_Runtime.strictEquals((cast data : RenderProxy2D).renderer, null) : Bool)) {
-        var result:{ var newLength:Float; var needsReconcile:Bool; } = (cast processDomNode((cast runtime), (cast data), (cast frameId : Float), (cast function():Void { (cast (cast data : RenderProxy2D).renderer : Renderer).submit((cast state), (cast data)); }), (cast newLength : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : { var newLength:Float; var needsReconcile:Bool; });
+        var result:{ var newLength:Float; var needsReconcile:Bool; } = (cast processDomNode((cast runtime), (cast data), (cast frameId : Float), (cast function():Void { (cast (cast data : RenderProxy2D).renderer : Renderer).submit((cast state), (cast data)); }), (cast newLength : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : { var newLength:Float; var needsReconcile:Bool; });
         (newLength = cast ((cast result : { var newLength:Float; var needsReconcile:Bool; }).newLength : Dynamic));
         if ((cast (cast result : { var newLength:Float; var needsReconcile:Bool; }).needsReconcile : Bool)) { (needsReconcile = cast (true : Dynamic)); }
-        _Runtime.callOptionalValue(({ final __structural2 = applyClip; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var apply:DomRenderState->RenderProxy2D->Void; }).apply; }), cast ([state, data] : Array<Dynamic>));
+        ({ final __optionalOwner5 = applyClip; if (__optionalOwner5 != null) { final __optionalCall4 = (cast __optionalOwner5 : { var apply:DomRenderState->RenderProxy2D->Void; }).apply; if (__optionalCall4 != null) __optionalCall4(state, data); } });
       }
       if ((cast (cast data : RenderProxy2D).traverseChildren : Bool)) {
         var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime((cast current)) : Node2DRuntime), 'children');
@@ -82,7 +82,7 @@ class DomNode2D {
         }
       }
     }
-    _Runtime.callOptionalValue(({ final __structural3 = clipHooks; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var finalize:RenderState->Void; }).finalize; }), cast ([state] : Array<Dynamic>));
+    ({ final __optionalOwner7 = clipHooks; if (__optionalOwner7 != null) { final __optionalCall6 = (cast __optionalOwner7 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall6 != null) __optionalCall6(state); } });
     if ((cast (cast hasDomStructureChanged((cast runtime), (cast newLength : Float), (cast needsReconcile : Bool)) : Bool) : Bool)) {
       reconcileDomContainer((cast container), (cast runtime), (cast newLength : Float));
     }

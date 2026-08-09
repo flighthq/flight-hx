@@ -29,7 +29,7 @@ class RiveDocument {
     cursor = (cast { bytes: source, overflowed: false, position: 0.0, unknownPropertyKey: 0.0 });
     header = (cast RiveDocument.readRiveHeader__riveDocument((cast cursor)) : Null<RiveDocumentHeader>);
     if ((cast _Runtime.strictEquals(header, null) : Bool)) {
-      RiveDocument.reportRiveReject__riveDocument((cast diagnostics), (cast 'rive.invalid-header' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      RiveDocument.reportRiveReject__riveDocument((cast diagnostics), (cast 'rive.invalid-header' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       return cast null;
     }
     if ((cast !_Runtime.strictEquals((cast header : RiveDocumentHeader).majorVersion, RiveDocument.RIVE_SUPPORTED_MAJOR_VERSION__riveDocument) : Bool)) {
@@ -44,7 +44,7 @@ class RiveDocument {
     while ((cast ((cast (cast cursor : RiveCursor__riveDocument).position : Float) < (cast _Runtime.field((cast cursor : RiveCursor__riveDocument).bytes, 'length') : Float)) : Bool)) {
       var object:Null<RiveCoreObject> = (cast RiveDocument.readRiveCoreObject__riveDocument((cast cursor), (cast fieldTypes)) : Null<RiveCoreObject>);
       if ((cast _Runtime.strictEquals(object, null) : Bool)) {
-        if ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool)) { RiveDocument.reportRiveReject__riveDocument((cast diagnostics), (cast 'rive.truncated-object-stream' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))); } else { RiveDocument.reportRiveReject__riveDocument((cast diagnostics), (cast 'rive.unknown-property-width' : String), (cast { propertyKey: (cast cursor : RiveCursor__riveDocument).unknownPropertyKey })); }
+        if ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool)) { RiveDocument.reportRiveReject__riveDocument((cast diagnostics), (cast 'rive.truncated-object-stream' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end); } else { RiveDocument.reportRiveReject__riveDocument((cast diagnostics), (cast 'rive.unknown-property-width' : String), (cast { propertyKey: (cast cursor : RiveCursor__riveDocument).unknownPropertyKey })); }
         return cast null;
       }
       _Runtime.callProperty(objects, 'push', cast ([object] : Array<Dynamic>));

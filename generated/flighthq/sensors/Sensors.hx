@@ -75,34 +75,34 @@ class Sensors {
     unsubscribeMotion = (cast backend : SensorsBackend).subscribeMotion((cast function(acceleration:MotionReading, rotationRate:RotationRateReading):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onAccelerometer], [acceleration]]), 1);
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onGyroscope], [rotationRate]]), 1);
-    }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     unsubscribeLinearAcceleration = (cast backend : SensorsBackend).subscribeLinearAcceleration((cast function(reading:MotionReading):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onLinearAcceleration], [reading]]), 1);
-    }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     unsubscribeGravity = (cast backend : SensorsBackend).subscribeGravity((cast function(reading:MotionReading):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onGravity], [reading]]), 1);
-    }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     unsubscribeOrientation = (cast backend : SensorsBackend).subscribeOrientation((cast function(orientation:OrientationReading):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onOrientation], [orientation]]), 1);
-    }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     unsubscribeAbsoluteOrientation = (cast backend : SensorsBackend).subscribeAbsoluteOrientation((cast function(orientation:OrientationReading):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onAbsoluteOrientation], [orientation]]), 1);
-    }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     unsubscribeMagnetometer = (cast backend : SensorsBackend).subscribeMagnetometer((cast function(reading:MotionReading):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onMagnetometer], [reading]]), 1);
-    }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     unsubscribeAmbientLight = (cast backend : SensorsBackend).subscribeAmbientLight((cast function(reading:AmbientLightReading):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onAmbientLight], [reading]]), 1);
-    }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     unsubscribeBarometer = (cast backend : SensorsBackend).subscribeBarometer((cast function(reading:PressureReading):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onBarometer], [reading]]), 1);
-    }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     unsubscribeProximity = (cast backend : SensorsBackend).subscribeProximity((cast function(reading:ProximityReading):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onProximity], [reading]]), 1);
-    }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     unsubscribeQuaternion = (cast backend : SensorsBackend).subscribeQuaternion((cast function(reading:QuaternionReading):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onQuaternion], [reading]]), 1);
-    }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     ((cast Sensors._subscriptions__sensors : flighthq._internal._WeakMap<flighthq.types.Sensors, Void->Void>).set(sensors, (cast function():Void {
       unsubscribeAbsoluteOrientation();
       unsubscribeAmbientLight();

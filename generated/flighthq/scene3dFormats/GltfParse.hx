@@ -127,7 +127,7 @@ class GltfParse {
   public static function createScene3DFromGlb(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Scene3D {
     var container:Null<{ var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }> = cast _Runtime.UNDEFINED;
     container = (cast GltfParse.readGlbContainer__gltfParse((cast bytes), (cast diagnostics)) : Null<{ var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }>);
-    if ((cast _Runtime.strictEquals(container, null) : Bool)) { return cast (cast createScene3DFromDocument((cast (cast GltfParse.createEmptyGltfDocument__gltfParse() : Scene3DDocument)), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Scene3D); }
+    if ((cast _Runtime.strictEquals(container, null) : Bool)) { return cast (cast createScene3DFromDocument((cast (cast GltfParse.createEmptyGltfDocument__gltfParse() : Scene3DDocument)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene3D); }
     return cast (cast createScene3DFromDocument((cast (cast GltfParse.buildGltfDocument__gltfParse((cast (cast container : { var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }).document), (cast (cast container : { var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }).binary), (cast options), (cast diagnostics)) : Scene3DDocument)), (cast _Runtime.coalesce((cast (cast container : { var binary:Null<flighthq._internal._UInt8Array>; var document:GltfDocument; }).document : { @:optional var scene:Null<Float>; }).scene, function():Dynamic return cast 0.0) : Float)) : Scene3D);
     return cast null;
   }
@@ -135,7 +135,7 @@ class GltfParse {
   public static function createScene3DFromGltf(source:flighthq._internal._Union2<GltfDocument, String>, ?diagnostics:Array<ImportDiagnostic>, ?options:GltfImportOptions):Scene3D {
     var doc:Null<GltfDocument> = cast _Runtime.UNDEFINED;
     doc = (cast GltfParse.parseGltfSource__gltfParse((cast source), (cast diagnostics)) : Null<GltfDocument>);
-    if ((cast _Runtime.strictEquals(doc, null) : Bool)) { return cast (cast createScene3DFromDocument((cast (cast GltfParse.createEmptyGltfDocument__gltfParse() : Scene3DDocument)), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Scene3D); }
+    if ((cast _Runtime.strictEquals(doc, null) : Bool)) { return cast (cast createScene3DFromDocument((cast (cast GltfParse.createEmptyGltfDocument__gltfParse() : Scene3DDocument)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene3D); }
     return cast (cast createScene3DFromDocument((cast (cast GltfParse.buildGltfDocument__gltfParse((cast doc), (cast null), (cast options), (cast diagnostics)) : Scene3DDocument)), (cast _Runtime.coalesce((cast doc : { @:optional var scene:Null<Float>; }).scene, function():Dynamic return cast 0.0) : Float)) : Scene3D);
     return cast null;
   }
@@ -172,14 +172,14 @@ class GltfParse {
       try {
         (doc = cast ((cast _Runtime.jsonParse(source) : GltfDocument) : Dynamic));
       } catch (__error:Dynamic) {
-        reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'gltf.invalid-json' : String), (cast 'parseGltfSource' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+        reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'gltf.invalid-json' : String), (cast 'parseGltfSource' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
         return cast null;
       }
     } else {
       (doc = cast (source : Dynamic));
     }
     if ((cast ((cast _Runtime.strictEquals(doc, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(doc), 'object') : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'gltf.not-an-object' : String), (cast 'parseGltfSource' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'gltf.not-an-object' : String), (cast 'parseGltfSource' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       return cast null;
     }
     return cast doc;
@@ -424,12 +424,12 @@ class GltfParse {
     }
     localMatrices = (cast _Runtime.mapArray((cast nodes : Array<GltfNode>), function(node:GltfNode, __unused16:Float, __unused17:Array<GltfNode>):Matrix4 {
       var matrix:Matrix4 = cast _Runtime.UNDEFINED;
-      matrix = (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4);
+      matrix = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix4);
       composeMatrix4FromTransform3D((cast matrix), (cast (cast GltfParse.gltfNodeTransform__gltfParse((cast node)) : Transform3D)));
       return cast matrix;
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));
-    worldMatrices = (cast _Runtime.mapArray((cast nodes : Array<GltfNode>), function(__unused18:GltfNode, __unused19:Float, __unused20:Array<GltfNode>):Matrix4 return (cast createMatrix4((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix4), _Runtime.UNDEFINED));
+    worldMatrices = (cast _Runtime.mapArray((cast nodes : Array<GltfNode>), function(__unused18:GltfNode, __unused19:Float, __unused20:Array<GltfNode>):Matrix4 return (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix4), _Runtime.UNDEFINED));
     state = new flighthq._internal._UInt8Array(_Runtime.field(nodes, 'length'));
     stack = (cast cast ([] : Array<Dynamic>));
     transforms = (cast cast ([] : Array<Dynamic>));
@@ -1353,13 +1353,13 @@ class GltfParse {
     var binary:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
     var offset:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast GltfParse.GLB_HEADER_BYTES__gltfParse : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'glb.header-too-small' : String), (cast 'readGlbContainer' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'glb.header-too-small' : String), (cast 'readGlbContainer' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       return cast null;
     }
     source = (cast bytes : flighthq._internal._UInt8Array);
     view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     if ((cast !_Runtime.strictEquals(_Runtime.callProperty(view, 'getUint32', cast ([0.0, true] : Array<Dynamic>)), GltfParse.GLB_MAGIC__gltfParse) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'glb.wrong-magic' : String), (cast 'readGlbContainer' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'glb.wrong-magic' : String), (cast 'readGlbContainer' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       return cast null;
     }
     version = _Runtime.callProperty(view, 'getUint32', cast ([4.0, true] : Array<Dynamic>));
@@ -1377,7 +1377,7 @@ class GltfParse {
       var chunkType:Float = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 4.0), true] : Array<Dynamic>));
       var dataStart:Float = (offset + GltfParse.GLB_CHUNK_HEADER_BYTES__gltfParse);
       if ((cast ((cast (dataStart + chunkLength) : Float) > (cast end : Float)) : Bool)) {
-        reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'glb.chunk-past-end' : String), (cast 'readGlbContainer' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+        reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'glb.chunk-past-end' : String), (cast 'readGlbContainer' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
         break;
       }
       var chunkData:flighthq._internal._UInt8Array = (cast source : flighthq._internal._UInt8Array).subarray(Std.int(dataStart), Std.int((dataStart + chunkLength)));
@@ -1386,7 +1386,7 @@ class GltfParse {
         try {
           (document = cast ((cast _Runtime.jsonParse(json) : GltfDocument) : Dynamic));
         } catch (__error:Dynamic) {
-          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'glb.json-chunk-invalid' : String), (cast 'readGlbContainer' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'glb.json-chunk-invalid' : String), (cast 'readGlbContainer' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
           return cast null;
         }
       } else { if ((cast ((cast _Runtime.strictEquals(chunkType, GltfParse.GLB_BIN_CHUNK__gltfParse) : Bool) && (cast _Runtime.strictEquals(binary, null) : Bool)) : Bool)) {
@@ -1395,7 +1395,7 @@ class GltfParse {
       (offset = cast ((dataStart + chunkLength) : Dynamic));
     }
     if ((cast _Runtime.strictEquals(document, null) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'glb.no-json-chunk' : String), (cast 'readGlbContainer' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'glb.no-json-chunk' : String), (cast 'readGlbContainer' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       return cast null;
     }
     return cast { binary: binary, document: document };

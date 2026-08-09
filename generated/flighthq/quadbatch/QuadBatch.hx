@@ -582,7 +582,7 @@ class QuadBatch {
   public static function setQuadBatchLocalBoundsRectangle(target:flighthq.types.QuadBatch, rect:Rectangle):Void {
     var runtime:QuadBatchRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getNode2DRuntime((cast target)) : QuadBatchRuntime);
-    if ((cast _Runtime.strictEquals((cast runtime : QuadBatchRuntime).localBoundsRectangle, null) : Bool)) { ((cast runtime : QuadBatchRuntime).localBoundsRectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle)); }
+    if ((cast _Runtime.strictEquals((cast runtime : QuadBatchRuntime).localBoundsRectangle, null) : Bool)) { ((cast runtime : QuadBatchRuntime).localBoundsRectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle)); }
     copyRectangle((cast (cast runtime : QuadBatchRuntime).localBoundsRectangle), (cast rect));
     invalidateNodeLocalBounds((cast target));
   }

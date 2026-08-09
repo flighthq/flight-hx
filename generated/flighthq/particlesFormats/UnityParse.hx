@@ -230,12 +230,12 @@ class UnityParse {
       }
     }
     if ((cast (cast UnityParse.rb__unityParse((cast (cast raw : { var prewarm:flighthq._internal._Any; }).prewarm : flighthq._internal._Any), (cast false : Bool)) : Bool) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'unity.prewarm-unsupported' : String), (cast 'collectUnityDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'unity.prewarm-unsupported' : String), (cast 'collectUnityDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     startRotation = (cast UnityParse.readMinMax__unityParse((cast (cast raw : { var startRotation:flighthq._internal._Any; }).startRotation : flighthq._internal._Any), (cast 0.0 : Float)) : UnityMinMaxValue);
     startRotationDropped = ((cast ((cast ((cast ((cast _Runtime.strictEquals(startRotation.mode, 'curve') : Bool) || (cast _Runtime.strictEquals(startRotation.mode, 'twoCurves') : Bool)) : Bool) || (cast !_Runtime.strictEquals(startRotation.constant, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(startRotation.constantMin, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(startRotation.constantMax, 0.0) : Bool));
     if ((cast startRotationDropped : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'unity.start-rotation-unsupported' : String), (cast 'collectUnityDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'unity.start-rotation-unsupported' : String), (cast 'collectUnityDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     return cast diagnostics;
     return cast null;
@@ -256,7 +256,7 @@ class UnityParse {
         i++;
       }
     }
-    return cast (cast particleColorCurveFromKeyframes((cast keys), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Array<Float>);
+    return cast (cast particleColorCurveFromKeyframes((cast keys), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Array<Float>);
     return cast null;
   }
 
@@ -272,7 +272,7 @@ class UnityParse {
         i++;
       }
     }
-    return cast (cast particleCurveFromKeyframes((cast keys), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Array<Float>);
+    return cast (cast particleCurveFromKeyframes((cast keys), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Array<Float>);
     return cast null;
   }
 
@@ -291,7 +291,7 @@ class UnityParse {
         i++;
       }
     }
-    return cast (cast particleCurveFromKeyframes((cast keys), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Array<Float>);
+    return cast (cast particleCurveFromKeyframes((cast keys), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Array<Float>);
     return cast null;
   }
 

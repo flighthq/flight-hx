@@ -21,7 +21,7 @@ class RiveSolo {
         if ((cast !_Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index) : RiveCoreObject).typeKey, RiveSolo.RIVE_SOLO_TYPE_KEY__riveSolo) : Bool)) { index++; continue; }
         var active:Null<Float> = (cast RiveSolo.readRiveSoloActiveIndex__riveSolo((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index))) : Null<Float>);
         if ((cast ((cast _Runtime.strictEquals(active, null) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast active : Float)), index) : Bool)) : Bool)) {
-          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'rive.solo-unresolved-active' : String), (cast 'applyRiveSolo' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'rive.solo-unresolved-active' : String), (cast 'applyRiveSolo' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
           index++;
           continue;
         }

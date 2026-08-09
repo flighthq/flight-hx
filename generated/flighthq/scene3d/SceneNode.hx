@@ -32,7 +32,7 @@ class SceneNode {
     var node:{ >Node<Node3DTraits>, >Node3DTraits, } = cast _Runtime.UNDEFINED;
     node = (cast createNode((cast kind : String), (cast obj), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast function(__unused0:Null<flighthq._internal._Any>):Node3DRuntime return createNode3DRuntime())) : { >Node<Node3DTraits>, >Node3DTraits, });
     initAppearanceTrait((cast node), (cast obj));
-    initTransform3DTrait((cast node), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    initTransform3DTrait((cast node), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast (cast node : Node3D);
     return cast null;
   }
@@ -40,7 +40,7 @@ class SceneNode {
   @:noCompletion
   public static function createNode3DRuntime():Node3DRuntime {
     var out:Node3DRuntime = cast _Runtime.UNDEFINED;
-    out = (cast createNodeRuntime((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Node3DRuntime);
+    out = (cast createNodeRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Node3DRuntime);
     ((cast out : { @:optional var traits:Null<NodeTraitsKey<Node3DTraits>>; }).traits = Node3DTraitsKey);
     ((cast out : { var worldAlpha:Null<Float>; }).worldAlpha = null);
     ((cast out : { var worldAlphaUsingAppearanceId:Float; }).worldAlphaUsingAppearanceId = -1.0);

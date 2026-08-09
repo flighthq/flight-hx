@@ -60,7 +60,7 @@ class GlMeshShapeRenderer {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(regions, 'length') : Float)) : Bool)) {
           var region:flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion> = flighthq._internal._StaticIndex.readArray(regions, i);
-          var mesh:Null<PathMesh> = ((cast ((cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool) && (cast (cast GlMeshShapeRenderer.isShapeStrokeRegion__glMeshShapeRenderer((cast region)) : Bool) : Bool)) : Bool) ? (cast (cast strokePathTessellator((cast (cast region : ShapeStrokeRegion).path), (cast (cast region : ShapeStrokeRegion).style), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<PathMesh>) : Dynamic) : (cast (cast tessellatePath((cast (cast region : { var path:Path; }).path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : PathMesh) : Dynamic));
+          var mesh:Null<PathMesh> = ((cast ((cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool) && (cast (cast GlMeshShapeRenderer.isShapeStrokeRegion__glMeshShapeRenderer((cast region)) : Bool) : Bool)) : Bool) ? (cast (cast strokePathTessellator((cast (cast region : ShapeStrokeRegion).path), (cast (cast region : ShapeStrokeRegion).style), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<PathMesh>) : Dynamic) : (cast (cast tessellatePath((cast (cast region : { var path:Path; }).path), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : PathMesh) : Dynamic));
           if ((cast _Runtime.strictEquals(mesh, null) : Bool)) {
             (supported = cast (false : Dynamic));
             break;

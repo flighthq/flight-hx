@@ -39,7 +39,7 @@ class RiveShapePath {
     var first:RiveVertexPoint__riveShapePath = cast _Runtime.UNDEFINED;
     var limit:Float = cast _Runtime.UNDEFINED;
     vertices = (cast RiveShapePath.collectRiveVertices__riveShapePath((cast artboard), (cast index : Float)) : Array<RiveVertexPoint__riveShapePath>);
-    path = (cast createPath((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
+    path = (cast createPath(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Path);
     if ((cast _Runtime.strictEquals(_Runtime.field(vertices, 'length'), 0.0) : Bool)) { return cast path; }
     closed = (cast RiveShapePath.readRiveFlag__riveShapePath((cast source), (cast RiveShapePath.RIVE_IS_CLOSED__riveShapePath : Float), (cast false : Bool)) : Bool);
     RiveShapePath.applyRiveCornerRounding__riveShapePath((cast vertices), (cast closed : Bool));
@@ -117,7 +117,7 @@ class RiveShapePath {
     var height:Float = cast _Runtime.UNDEFINED;
     var left:Float = cast _Runtime.UNDEFINED;
     var top:Float = cast _Runtime.UNDEFINED;
-    path = (cast createPath((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
+    path = (cast createPath(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Path);
     width = (cast RiveShapePath.readRiveDouble__riveShapePath((cast source), (cast RiveShapePath.RIVE_PARAMETRIC_WIDTH__riveShapePath : Float), (cast 0.0 : Float)) : Float);
     height = (cast RiveShapePath.readRiveDouble__riveShapePath((cast source), (cast RiveShapePath.RIVE_PARAMETRIC_HEIGHT__riveShapePath : Float), (cast 0.0 : Float)) : Float);
     left = (-(cast RiveShapePath.readRiveDouble__riveShapePath((cast source), (cast RiveShapePath.RIVE_PARAMETRIC_ORIGIN_X__riveShapePath : Float), (cast 0.5 : Float)) : Float) * width);

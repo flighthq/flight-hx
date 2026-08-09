@@ -97,7 +97,7 @@ class SceneDocumentSource {
       var progress:Signal<NetProgress->Void> = (cast createSignal() : Signal<NetProgress->Void>);
       connectSignal((cast progress), (cast function(event:NetProgress):Void {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[outputProgress], [{ loaded: _Runtime.field(event, 'loaded'), phase: _Runtime.field(event, 'phase'), total: _Runtime.field(event, 'total'), url: url }]]), 1);
-      }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       ((cast out : NetRequestOptions).progress = progress);
     }
     return cast out;

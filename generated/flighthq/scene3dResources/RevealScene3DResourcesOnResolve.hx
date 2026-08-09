@@ -68,8 +68,8 @@ class RevealScene3DResourcesOnResolve {
         }
       }
     });
-    connectSignal((cast signals.onResourceResolved), (cast slot), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    connectSignal((cast signals.onResourceFailed), (cast slot), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    connectSignal((cast signals.onResourceResolved), (cast slot), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast signals.onResourceFailed), (cast slot), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast function():Void {
       disconnectSignal((cast signals.onResourceResolved), (cast slot));
       disconnectSignal((cast signals.onResourceFailed), (cast slot));

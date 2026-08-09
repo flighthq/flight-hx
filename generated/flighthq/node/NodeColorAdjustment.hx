@@ -57,7 +57,7 @@ class NodeColorAdjustment {
       ((cast runtime : ColorAdjustmentRuntime).colorAdjustmentsUnsupported = false);
       return;
     }
-    out = _Runtime.coalesce((cast runtime : ColorAdjustmentRuntime).resolvedColorScaleBias, function():Dynamic return cast (cast createColorScaleBias((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : ColorScaleBias));
+    out = _Runtime.coalesce((cast runtime : ColorAdjustmentRuntime).resolvedColorScaleBias, function():Dynamic return cast (cast createColorScaleBias(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : ColorScaleBias));
     status = (cast resolveColorAdjustmentsColorScaleBias((cast adjustments), (cast out)) : Float);
     if ((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_NONE) : Bool)) {
       ((cast runtime : ColorAdjustmentRuntime).resolvedColorScaleBias = null);

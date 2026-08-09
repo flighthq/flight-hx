@@ -33,7 +33,7 @@ class GlWireframeUpload {
     var position:Null<VertexAttribute> = cast _Runtime.UNDEFINED;
     var byteOffset:Float = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    meshUpload = (cast ensureGlMeshUpload((cast state), (cast geometry), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : GlMeshUpload);
+    meshUpload = (cast ensureGlMeshUpload((cast state), (cast geometry), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : GlMeshUpload);
     perState = ((cast GlWireframeUpload.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>>).get(state));
     if ((cast _Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (perState = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));

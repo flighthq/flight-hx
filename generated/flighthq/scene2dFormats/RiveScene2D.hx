@@ -136,7 +136,7 @@ class RiveScene2D {
     }
     span = (cast { end: _Runtime.field(artboard, 'streamEnd'), start: _Runtime.field(artboard, 'streamStart') });
     skeleton = (cast createRiveSkeleton2D((cast artboard)) : Null<RiveSkeleton2DImport>);
-    animations = (cast createRiveAnimationClips((cast objects), (cast span), (cast nodes), (cast artboard), (cast rebuilds), (cast skeleton), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Array<RiveAnimationClip>);
+    animations = (cast createRiveAnimationClips((cast objects), (cast span), (cast nodes), (cast artboard), (cast rebuilds), (cast skeleton), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Array<RiveAnimationClip>);
     layouts = (cast createRiveLayoutImports((cast artboard), (cast nodes), (cast diagnostics)) : Array<RiveLayoutImport>);
     stateMachines = (cast createRiveStateMachines((cast objects), (cast span)) : Array<RiveStateMachineDescriptor>);
     return cast { advancedBlends: advancedBlends, animations: animations, height: height, layouts: layouts, name: name, root: root, skeleton: skeleton, stateMachines: stateMachines, width: width };

@@ -245,10 +245,10 @@ class Power {
       });
       return cast function():Void {
         (cancelled = cast (true : Dynamic));
-        _Runtime.callOptionalValue(({ final __structural2 = manager; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; }), cast (['levelchange', onLevelChange] : Array<Dynamic>));
-        _Runtime.callOptionalValue(({ final __structural3 = manager; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; }), cast (['chargingchange', onChargingChange] : Array<Dynamic>));
-        _Runtime.callOptionalValue(({ final __structural4 = manager; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; }), cast (['chargingtimechange', onChargingTimeChange] : Array<Dynamic>));
-        _Runtime.callOptionalValue(({ final __structural5 = manager; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; }), cast (['dischargingtimechange', onDischargingTimeChange] : Array<Dynamic>));
+        ({ final __optionalOwner3 = manager; if (__optionalOwner3 != null) { final __optionalCall2 = (cast __optionalOwner3 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall2 != null) __optionalCall2('levelchange', onLevelChange); } });
+        ({ final __optionalOwner5 = manager; if (__optionalOwner5 != null) { final __optionalCall4 = (cast __optionalOwner5 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall4 != null) __optionalCall4('chargingchange', onChargingChange); } });
+        ({ final __optionalOwner7 = manager; if (__optionalOwner7 != null) { final __optionalCall6 = (cast __optionalOwner7 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall6 != null) __optionalCall6('chargingtimechange', onChargingTimeChange); } });
+        ({ final __optionalOwner9 = manager; if (__optionalOwner9 != null) { final __optionalCall8 = (cast __optionalOwner9 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall8 != null) __optionalCall8('dischargingtimechange', onDischargingTimeChange); } });
         (manager = cast (null : Dynamic));
       };
       return cast _Runtime.UNDEFINED;

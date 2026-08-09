@@ -99,7 +99,7 @@ class ShapeJson {
     rawCommands = (cast root : { var commands:flighthq._internal._Any; }).commands;
     if ((cast !(cast _Runtime.isArray(rawCommands) : Bool) : Bool)) { return cast null; }
     resolveTexture = ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.resolveTexture; });
-    shape = (cast createShape((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Shape);
+    shape = (cast createShape(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Shape);
     for (entry in _Runtime.iterable(rawCommands)) {
       if ((cast !(cast (cast ShapeJson.isPlainObject__shapeJson((cast entry : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast null; }
       var key:flighthq._internal._Any = (cast entry : { var key:flighthq._internal._Any; }).key;

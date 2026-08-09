@@ -44,9 +44,9 @@ class CanvasNode2D {
       if ((cast !(cast (cast current : { var enabled:Bool; }).enabled : Bool) : Bool)) { continue; }
       var data:Null<RenderProxy2D> = (cast getRenderProxy2D((cast state), (cast current)) : Null<RenderProxy2D>);
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      _Runtime.callOptionalValue(({ final __structural0 = clipHooks; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; }), cast ([state, data, current] : Array<Dynamic>));
+      ({ final __optionalOwner1 = clipHooks; if (__optionalOwner1 != null) { final __optionalCall0 = (cast __optionalOwner1 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall0 != null) __optionalCall0(state, data, current); } });
       if ((cast !(cast (cast isRenderProxyVisible((cast data)) : Bool) : Bool) : Bool)) { continue; }
-      _Runtime.callOptionalValue(({ final __structural1 = clipHooks; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; }), cast ([state, data, current] : Array<Dynamic>));
+      ({ final __optionalOwner3 = clipHooks; if (__optionalOwner3 != null) { final __optionalCall2 = (cast __optionalOwner3 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall2 != null) __optionalCall2(state, data, current); } });
       var filter:Null<String> = (cast resolveCanvasCssFilter((cast state), (cast data)) : Null<String>);
       if ((cast !_Runtime.strictEquals(filter, null) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'filter', filter); }
       if ((cast !_Runtime.strictEquals((cast data : RenderProxy2D).renderer, null) : Bool)) { (cast (cast data : RenderProxy2D).renderer : Renderer).submit((cast state), (cast data)); }
@@ -64,6 +64,6 @@ class CanvasNode2D {
         }
       }
     }
-    _Runtime.callOptionalValue(({ final __structural2 = clipHooks; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var finalize:RenderState->Void; }).finalize; }), cast ([state] : Array<Dynamic>));
+    ({ final __optionalOwner5 = clipHooks; if (__optionalOwner5 != null) { final __optionalCall4 = (cast __optionalOwner5 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall4 != null) __optionalCall4(state); } });
   }
 }

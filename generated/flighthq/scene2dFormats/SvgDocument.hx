@@ -108,19 +108,19 @@ class SvgDocument {
     var context:SvgImportContext__svgDocument = cast _Runtime.UNDEFINED;
     var viewport:Null<Matrix> = cast _Runtime.UNDEFINED;
     var rootStyle:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
-    out = (cast createDisplayObject((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : DisplayObject);
+    out = (cast createDisplayObject(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : DisplayObject);
     document = (cast parseXmlDocument((cast source : String)) : Null<XmlElement>);
     if ((cast ((cast _Runtime.strictEquals(document, null) : Bool) || (cast !_Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast (cast document : { var name:String; }).name : String)) : String), 'svg') : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'svg.invalid-document' : String), (cast 'createScene2DFromSvgDocument' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'svg.invalid-document' : String), (cast 'createScene2DFromSvgDocument' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       return cast out;
     }
     context = (cast { cssRules: (cast SvgDocument.collectCssRules__svgDocument((cast document)) : Array<SvgCssRule__svgDocument>), diagnostics: diagnostics, elementsById: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), gradientsById: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), options: options, parentByElement: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), reportedUnsupportedElements: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingClipUses: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingClips: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingGradients: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvingUses: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), resolvedDefinitionStyles: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) });
     SvgDocument.indexSvgDefinitions__svgDocument((cast document), (cast context));
-    viewport = (cast SvgDocument.createSvgViewportMatrix__svgDocument((cast document), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<Matrix>);
+    viewport = (cast SvgDocument.createSvgViewportMatrix__svgDocument((cast document), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<Matrix>);
     rootStyle = (cast SvgDocument.applySvgElementAppearance__svgDocument((cast out), (cast document), (cast SvgDocument.defaultSvgStyle__svgDocument), (cast context), (cast viewport), (cast true : Bool)) : SvgStyle__svgDocument);
     SvgDocument.appendSvgChildren__svgDocument((cast out), (cast document), (cast rootStyle), (cast context));
     SvgDocument.applySvgElementClip__svgDocument((cast out), (cast document), (cast context), (cast (cast SvgDocument.createSvgNode2DBounds__svgDocument((cast out)) : Null<Rectangle>)));
-    SvgDocument.reportRemainingUnsupportedSvgElements__svgDocument((cast document), (cast context), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool));
+    SvgDocument.reportRemainingUnsupportedSvgElements__svgDocument((cast document), (cast context), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast out;
     return cast null;
   }
@@ -180,7 +180,7 @@ class SvgDocument {
   public static function applySvgTransform__svgDocument(target:Node2D, matrix:Null<Matrix>):Void {
     var transform:Transform2D = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(matrix, null) : Bool)) { return; }
-    transform = (cast createTransform2D((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Transform2D);
+    transform = (cast createTransform2D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Transform2D);
     decomposeMatrixToTransform2D((cast transform), (cast matrix));
     SvgDocument.assignSvgTransform__svgDocument((cast target), (cast transform));
   }
@@ -231,7 +231,7 @@ class SvgDocument {
     var hasUnresolvedChildBounds:Bool = cast _Runtime.UNDEFINED;
     var childCount:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals((cast target : { var kind:String; }).kind, TextLabelKind) : Bool) || (cast _Runtime.strictEquals((cast target : { var kind:String; }).kind, RichTextKind) : Bool)) : Bool)) { return cast null; }
-    out = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle);
+    out = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
     hasBounds = (cast SvgDocument.copyNonEmptySvgBounds__svgDocument((cast out), (cast (cast getNodeLocalBoundsRectangle((cast target)) : Rectangle)), (cast false : Bool)) : Bool);
     hasUnresolvedChildBounds = false;
     childCount = (cast getNodeChildCount((cast target)) : Float);
@@ -246,7 +246,7 @@ class SvgDocument {
           index++;
           continue;
         }
-        var bounds:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle);
+        var bounds:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
         matrixTransformRectangle((cast bounds), (cast (cast getNodeLocalMatrix((cast child)) : Matrix)), (cast childBounds));
         (hasBounds = cast ((cast SvgDocument.copyNonEmptySvgBounds__svgDocument((cast out), (cast bounds), (cast hasBounds : Bool)) : Bool) : Dynamic));
         index++;
@@ -284,7 +284,7 @@ class SvgDocument {
       if ((cast !_Runtime.strictEquals((cast geometry : SvgClipGeometry__svgDocument).path, null) : Bool)) { SvgDocument.appendPathData__svgDocument((cast out), (cast (cast geometry : SvgClipGeometry__svgDocument).path)); }
       if ((cast !_Runtime.strictEquals((cast geometry : SvgClipGeometry__svgDocument).region, null) : Bool)) { _Runtime.callProperty(clippedRegions, 'push', cast ([(cast geometry : SvgClipGeometry__svgDocument).region] : Array<Dynamic>)); }
     }
-    region = (cast createClipRegionFromPath((cast out), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : ClipRegion);
+    region = (cast createClipRegionFromPath((cast out), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : ClipRegion);
     for (clippedRegion in _Runtime.iterable(clippedRegions)) {
       if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field((cast out : Path).commands, 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals((cast (cast region : ClipRegion).rect : Rectangle).width, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast region : ClipRegion).rect : Rectangle).height, 0.0) : Bool)) : Bool)) { (region = cast (clippedRegion : Dynamic)); } else { unionClipRegions((cast region), (cast region), (cast clippedRegion)); }
     }
@@ -303,7 +303,7 @@ class SvgDocument {
 
   public static function collectSvgClipGeometry__svgDocument(element:XmlElement, parentStyle:SvgStyle__svgDocument, parentTransform:Null<Matrix>, context:SvgImportContext__svgDocument, out:Array<SvgClipGeometry__svgDocument>):Void {
     for (child in _Runtime.iterable(element.children)) {
-      SvgDocument.collectSvgClipGeometryElement__svgDocument((cast child), (cast parentStyle), (cast parentTransform), (cast context), (cast out), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      SvgDocument.collectSvgClipGeometryElement__svgDocument((cast child), (cast parentStyle), (cast parentTransform), (cast context), (cast out), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
   }
 
@@ -322,7 +322,7 @@ class SvgDocument {
     if ((cast _Runtime.strictEquals(name, 'use') : Bool)) {
       (geometryTransform = cast ((cast createMatrix((cast 1.0), (cast 0.0), (cast 0.0), (cast 1.0), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element), (cast 'x' : String), (cast 0.0 : Float)) : Float)), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element), (cast 'y' : String), (cast 0.0 : Float)) : Float))) : Matrix) : Dynamic));
     } else { if ((cast _Runtime.strictEquals(name, 'svg') : Bool)) {
-      (geometryTransform = cast ((cast SvgDocument.createSvgViewportMatrix__svgDocument((cast element), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<Matrix>) : Dynamic));
+      (geometryTransform = cast ((cast SvgDocument.createSvgViewportMatrix__svgDocument((cast element), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<Matrix>) : Dynamic));
     } else { if ((cast ((cast _Runtime.strictEquals(name, 'symbol') : Bool) && (cast !_Runtime.strictEquals(viewportElement, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       (geometryTransform = cast ((cast SvgDocument.createSvgViewportMatrix__svgDocument((cast element), (cast { height: _Runtime.coalesce((cast SvgDocument.optionalNumberAttribute__svgDocument((cast viewportElement), (cast 'height' : String)) : Null<Float>), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), width: _Runtime.coalesce((cast SvgDocument.optionalNumberAttribute__svgDocument((cast viewportElement), (cast 'width' : String)) : Null<Float>), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), x: 0.0, y: 0.0 })) : Null<Matrix>) : Dynamic));
     } } }
@@ -345,7 +345,7 @@ class SvgDocument {
       if ((cast _Runtime.strictEquals((cast SvgDocument.parseUrlReference__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element), (cast 'clip-path' : String)) : Null<String>))) : Null<String>), null) : Bool)) {
         _Runtime.callProperty(out, 'push', cast ([{ path: transformedPath, region: null, winding: (cast path : Path).winding }] : Array<Dynamic>));
       } else {
-        var region:ClipRegion = (cast SvgDocument.intersectSvgClipReference__svgDocument((cast (cast createClipRegionFromPath((cast transformedPath), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : ClipRegion)), (cast element), (cast transform), (cast context)) : ClipRegion);
+        var region:ClipRegion = (cast SvgDocument.intersectSvgClipReference__svgDocument((cast (cast createClipRegionFromPath((cast transformedPath), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : ClipRegion)), (cast element), (cast transform), (cast context)) : ClipRegion);
         _Runtime.callProperty(out, 'push', cast ([{ path: null, region: region, winding: (cast region : ClipRegion).winding }] : Array<Dynamic>));
       }
       return;
@@ -358,7 +358,7 @@ class SvgDocument {
           var index:Float = start;
           while ((cast ((cast index : Float) < (cast _Runtime.field(out, 'length') : Float)) : Bool)) {
             var geometry:SvgClipGeometry__svgDocument = flighthq._internal._StaticIndex.readArray(out, index);
-            var region:ClipRegion = _Runtime.coalesce((cast geometry : SvgClipGeometry__svgDocument).region, function():Dynamic return cast (cast createClipRegionFromPath((cast (cast geometry : SvgClipGeometry__svgDocument).path), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : ClipRegion));
+            var region:ClipRegion = _Runtime.coalesce((cast geometry : SvgClipGeometry__svgDocument).region, function():Dynamic return cast (cast createClipRegionFromPath((cast (cast geometry : SvgClipGeometry__svgDocument).path), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : ClipRegion));
             ((cast geometry : SvgClipGeometry__svgDocument).path = null);
             ((cast geometry : SvgClipGeometry__svgDocument).region = (cast SvgDocument.intersectSvgClipReference__svgDocument((cast region), (cast element), (cast transform), (cast context)) : ClipRegion));
             ((cast geometry : SvgClipGeometry__svgDocument).winding = (cast (cast geometry : SvgClipGeometry__svgDocument).region : ClipRegion).winding);
@@ -452,8 +452,8 @@ class SvgDocument {
       return cast null;
     }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(name, 'g') : Bool) || (cast _Runtime.strictEquals(name, 'a') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'switch') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'svg') : Bool)) : Bool)) {
-      var container:DisplayObject = (cast createDisplayObject((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : DisplayObject);
-      var viewport:Null<Matrix> = ((cast _Runtime.strictEquals(name, 'svg') : Bool) ? (cast (cast SvgDocument.createSvgViewportMatrix__svgDocument((cast element), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<Matrix>) : Dynamic) : (cast null : Dynamic));
+      var container:DisplayObject = (cast createDisplayObject(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : DisplayObject);
+      var viewport:Null<Matrix> = ((cast _Runtime.strictEquals(name, 'svg') : Bool) ? (cast (cast SvgDocument.createSvgViewportMatrix__svgDocument((cast element), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<Matrix>) : Dynamic) : (cast null : Dynamic));
       var style:SvgStyle__svgDocument = (cast SvgDocument.applySvgElementAppearance__svgDocument((cast container), (cast element), (cast parentStyle), (cast context), (cast viewport), (cast true : Bool)) : SvgStyle__svgDocument);
       SvgDocument.appendSvgChildren__svgDocument((cast container), (cast element), (cast style), (cast context));
       SvgDocument.applySvgElementClip__svgDocument((cast container), (cast element), (cast context), (cast (cast SvgDocument.createSvgNode2DBounds__svgDocument((cast container)) : Null<Rectangle>)));
@@ -465,10 +465,10 @@ class SvgDocument {
     style = (cast SvgDocument.resolveSvgStyle__svgDocument((cast element), (cast parentStyle), (cast context)) : SvgStyle__svgDocument);
     path = (cast SvgDocument.createSvgGeometryPath__svgDocument((cast element), (cast (cast style : SvgStyle__svgDocument).fillRule)) : Null<Path>);
     if ((cast !_Runtime.strictEquals(path, null) : Bool)) {
-      var shape:Shape = (cast createShape((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Shape);
-      (cast SvgDocument.applySvgElementAppearance__svgDocument((cast shape), (cast element), (cast parentStyle), (cast context), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : SvgStyle__svgDocument);
+      var shape:Shape = (cast createShape(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Shape);
+      (cast SvgDocument.applySvgElementAppearance__svgDocument((cast shape), (cast element), (cast parentStyle), (cast context), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : SvgStyle__svgDocument);
       SvgDocument.appendSvgShapePaint__svgDocument((cast shape), (cast path), (cast style), (cast element), (cast context));
-      var bounds:Rectangle = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle);
+      var bounds:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
       (cast getPathBounds((cast path), (cast bounds)) : Bool);
       SvgDocument.applySvgElementClip__svgDocument((cast shape), (cast element), (cast context), (cast bounds));
       return cast shape;
@@ -500,7 +500,7 @@ class SvgDocument {
     y = (cast SvgDocument.numberAttribute__svgDocument((cast element), (cast 'y' : String), (cast 0.0 : Float)) : Float);
     bitmap = (cast createSprite((cast { data: { texture: (cast createTexture((cast { dimension: '2d', source: image })) : Texture2D) } })) : Sprite);
     geometry = ((cast ((cast ((cast ((cast ((cast (cast image : Image).width : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast (cast image : Image).height : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast width : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast height : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast SvgDocument.createSvgViewBoxMatrix__svgDocument((cast cast ([0.0, 0.0, (cast image : Image).width, (cast image : Image).height] : Array<Dynamic>)), (cast { height: height, width: width, x: x, y: y }), (cast _Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast element), (cast 'preserveAspectRatio' : String)) : Null<String>), function():Dynamic return cast 'xMidYMid meet') : String)) : Matrix) : Dynamic) : (cast (cast createMatrix((cast 1.0), (cast 0.0), (cast 0.0), (cast 1.0), (cast x), (cast y)) : Matrix) : Dynamic));
-    (cast SvgDocument.applySvgElementAppearance__svgDocument((cast bitmap), (cast element), (cast parentStyle), (cast context), (cast geometry), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : SvgStyle__svgDocument);
+    (cast SvgDocument.applySvgElementAppearance__svgDocument((cast bitmap), (cast element), (cast parentStyle), (cast context), (cast geometry), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : SvgStyle__svgDocument);
     bounds = (cast createRectangle((cast 0.0), (cast 0.0), (cast (cast image : Image).width), (cast (cast image : Image).height)) : Rectangle);
     SvgDocument.applySvgElementClip__svgDocument((cast bitmap), (cast element), (cast context), (cast bounds));
     return cast bitmap;
@@ -593,7 +593,7 @@ class SvgDocument {
     if ((cast (cast SvgDocument.hasFlattenedSvgTextPosition__svgDocument((cast tspans), (cast firstTspan)) : Bool) : Bool)) {
       reportImportDiagnostic((cast (cast context : SvgImportContext__svgDocument).diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'svg.tspan-position-flattened' : String), (cast 'createSvgTextNode' : String), (cast { count: _Runtime.field(tspans, 'length') }));
     }
-    (cast SvgDocument.applySvgElementAppearance__svgDocument((cast label), (cast element), (cast parentStyle), (cast context), (cast (cast createMatrix((cast 1.0), (cast 0.0), (cast 0.0), (cast 1.0), (cast x), (cast y)) : Matrix)), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : SvgStyle__svgDocument);
+    (cast SvgDocument.applySvgElementAppearance__svgDocument((cast label), (cast element), (cast parentStyle), (cast context), (cast (cast createMatrix((cast 1.0), (cast 0.0), (cast 0.0), (cast 1.0), (cast x), (cast y)) : Matrix)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : SvgStyle__svgDocument);
     SvgDocument.applySvgElementClip__svgDocument((cast label), (cast element), (cast context), (cast null));
     return cast label;
     return cast null;
@@ -626,8 +626,8 @@ class SvgDocument {
       return cast null;
     }
     ((cast (cast context : SvgImportContext__svgDocument).resolvingUses : flighthq._internal._Set<String>).add(id));
-    SvgDocument.reportRemainingUnsupportedSvgElements__svgDocument((cast referenced), (cast context), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool));
-    container = (cast createDisplayObject((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : DisplayObject);
+    SvgDocument.reportRemainingUnsupportedSvgElements__svgDocument((cast referenced), (cast context), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    container = (cast createDisplayObject(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : DisplayObject);
     placement = (cast createMatrix((cast 1.0), (cast 0.0), (cast 0.0), (cast 1.0), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element), (cast 'x' : String), (cast 0.0 : Float)) : Float)), (cast (cast SvgDocument.numberAttribute__svgDocument((cast element), (cast 'y' : String), (cast 0.0 : Float)) : Float))) : Matrix);
     style = (cast SvgDocument.applySvgElementAppearance__svgDocument((cast container), (cast element), (cast parentStyle), (cast context), (cast placement), (cast true : Bool)) : SvgStyle__svgDocument);
     referencedNode = ((cast _Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast (cast referenced : { var name:String; }).name : String)) : String), 'symbol') : Bool) ? (cast (cast SvgDocument.createSvgSymbolNode__svgDocument((cast referenced), (cast element), (cast style), (cast context)) : DisplayObject) : Dynamic) : (cast (cast SvgDocument.createSvgElementNode__svgDocument((cast referenced), (cast style), (cast context)) : Null<Node2D>) : Dynamic));
@@ -664,7 +664,7 @@ class SvgDocument {
     fillGradient = (cast SvgDocument.resolveSvgGradient__svgDocument((cast _Runtime.field(style, 'fill') : String), (cast context)) : Null<SvgGradient__svgDocument>);
     fillColor = (cast SvgDocument.resolveSvgColor__svgDocument((cast _Runtime.field(style, 'fill') : String), (cast _Runtime.field(style, 'color') : String)) : Null<SvgColor__svgDocument>);
     if ((cast !_Runtime.strictEquals(fillGradient, null) : Bool)) {
-      appendShapeBeginGradientFill((cast shape), (cast (cast fillGradient : SvgGradient__svgDocument).kind), (cast (cast _Runtime.mapArray((cast (cast fillGradient : SvgGradient__svgDocument).stops : Array<SvgGradientStop__svgDocument>), function(stop:SvgGradientStop__svgDocument, __unused4:Float, __unused5:Array<SvgGradientStop__svgDocument>):Float return (cast (cast stop : SvgGradientStop__svgDocument).color : SvgColor__svgDocument).rgb, _Runtime.UNDEFINED))), (cast (cast _Runtime.mapArray((cast (cast fillGradient : SvgGradient__svgDocument).stops : Array<SvgGradientStop__svgDocument>), function(stop:SvgGradientStop__svgDocument, __unused6:Float, __unused7:Array<SvgGradientStop__svgDocument>):Float return _Runtime.multiplyNumbers((cast (cast stop : SvgGradientStop__svgDocument).color : SvgColor__svgDocument).alpha, _Runtime.field(style, 'fillOpacity')), _Runtime.UNDEFINED))), (cast (cast _Runtime.mapArray((cast (cast fillGradient : SvgGradient__svgDocument).stops : Array<SvgGradientStop__svgDocument>), function(stop:SvgGradientStop__svgDocument, __unused8:Float, __unused9:Array<SvgGradientStop__svgDocument>):Float return HxMath.round(((cast stop : SvgGradientStop__svgDocument).offset * 255.0)), _Runtime.UNDEFINED))), (cast (cast SvgDocument.createSvgGradientMatrix__svgDocument((cast fillGradient), (cast path)) : Matrix)), (cast (cast fillGradient : SvgGradient__svgDocument).spreadMethod), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
+      appendShapeBeginGradientFill((cast shape), (cast (cast fillGradient : SvgGradient__svgDocument).kind), (cast (cast _Runtime.mapArray((cast (cast fillGradient : SvgGradient__svgDocument).stops : Array<SvgGradientStop__svgDocument>), function(stop:SvgGradientStop__svgDocument, __unused4:Float, __unused5:Array<SvgGradientStop__svgDocument>):Float return (cast (cast stop : SvgGradientStop__svgDocument).color : SvgColor__svgDocument).rgb, _Runtime.UNDEFINED))), (cast (cast _Runtime.mapArray((cast (cast fillGradient : SvgGradient__svgDocument).stops : Array<SvgGradientStop__svgDocument>), function(stop:SvgGradientStop__svgDocument, __unused6:Float, __unused7:Array<SvgGradientStop__svgDocument>):Float return _Runtime.multiplyNumbers((cast (cast stop : SvgGradientStop__svgDocument).color : SvgColor__svgDocument).alpha, _Runtime.field(style, 'fillOpacity')), _Runtime.UNDEFINED))), (cast (cast _Runtime.mapArray((cast (cast fillGradient : SvgGradient__svgDocument).stops : Array<SvgGradientStop__svgDocument>), function(stop:SvgGradientStop__svgDocument, __unused8:Float, __unused9:Array<SvgGradientStop__svgDocument>):Float return HxMath.round(((cast stop : SvgGradientStop__svgDocument).offset * 255.0)), _Runtime.UNDEFINED))), (cast (cast SvgDocument.createSvgGradientMatrix__svgDocument((cast fillGradient), (cast path)) : Matrix)), (cast (cast fillGradient : SvgGradient__svgDocument).spreadMethod), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     } else { if ((cast !_Runtime.strictEquals(fillColor, null) : Bool)) {
       appendShapeBeginFill((cast shape), (cast (cast fillColor : SvgColor__svgDocument).rgb : Float), (cast _Runtime.multiplyNumbers((cast fillColor : SvgColor__svgDocument).alpha, _Runtime.field(style, 'fillOpacity')) : Float));
     } }
@@ -684,14 +684,14 @@ class SvgDocument {
     }
     appendShapeLineStyle((cast shape), (cast _Runtime.field(style, 'strokeWidth') : Float), (cast _Runtime.coalesce(({ final __structural13 = strokeColor; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { var rgb:Float; }).rgb; }), function():Dynamic return cast 0.0) : Float), (cast _Runtime.multiplyNumbers(_Runtime.coalesce(({ final __structural14 = strokeColor; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { var alpha:Float; }).alpha; }), function():Dynamic return cast 1.0), _Runtime.field(style, 'strokeOpacity')) : Float), (cast false : Bool), (cast 'normal'), (cast (cast SvgDocument.mapSvgLineCap__svgDocument((cast _Runtime.field(style, 'strokeLinecap') : String)) : String)), (cast (cast SvgDocument.mapSvgLineJoin__svgDocument((cast _Runtime.field(style, 'strokeLinejoin') : String)) : String)), (cast _Runtime.field(style, 'strokeMiterlimit') : Float));
     if ((cast !_Runtime.strictEquals(strokeGradient, null) : Bool)) {
-      appendShapeLineGradientStyle((cast shape), (cast (cast strokeGradient : SvgGradient__svgDocument).kind), (cast (cast _Runtime.mapArray((cast (cast strokeGradient : SvgGradient__svgDocument).stops : Array<SvgGradientStop__svgDocument>), function(stop:SvgGradientStop__svgDocument, __unused10:Float, __unused11:Array<SvgGradientStop__svgDocument>):Float return (cast (cast stop : SvgGradientStop__svgDocument).color : SvgColor__svgDocument).rgb, _Runtime.UNDEFINED))), (cast (cast _Runtime.mapArray((cast (cast strokeGradient : SvgGradient__svgDocument).stops : Array<SvgGradientStop__svgDocument>), function(stop:SvgGradientStop__svgDocument, __unused12:Float, __unused13:Array<SvgGradientStop__svgDocument>):Float return _Runtime.multiplyNumbers((cast (cast stop : SvgGradientStop__svgDocument).color : SvgColor__svgDocument).alpha, _Runtime.field(style, 'strokeOpacity')), _Runtime.UNDEFINED))), (cast (cast _Runtime.mapArray((cast (cast strokeGradient : SvgGradient__svgDocument).stops : Array<SvgGradientStop__svgDocument>), function(stop:SvgGradientStop__svgDocument, __unused14:Float, __unused15:Array<SvgGradientStop__svgDocument>):Float return HxMath.round(((cast stop : SvgGradientStop__svgDocument).offset * 255.0)), _Runtime.UNDEFINED))), (cast (cast SvgDocument.createSvgGradientMatrix__svgDocument((cast strokeGradient), (cast path)) : Matrix)), (cast (cast strokeGradient : SvgGradient__svgDocument).spreadMethod), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
+      appendShapeLineGradientStyle((cast shape), (cast (cast strokeGradient : SvgGradient__svgDocument).kind), (cast (cast _Runtime.mapArray((cast (cast strokeGradient : SvgGradient__svgDocument).stops : Array<SvgGradientStop__svgDocument>), function(stop:SvgGradientStop__svgDocument, __unused10:Float, __unused11:Array<SvgGradientStop__svgDocument>):Float return (cast (cast stop : SvgGradientStop__svgDocument).color : SvgColor__svgDocument).rgb, _Runtime.UNDEFINED))), (cast (cast _Runtime.mapArray((cast (cast strokeGradient : SvgGradient__svgDocument).stops : Array<SvgGradientStop__svgDocument>), function(stop:SvgGradientStop__svgDocument, __unused12:Float, __unused13:Array<SvgGradientStop__svgDocument>):Float return _Runtime.multiplyNumbers((cast (cast stop : SvgGradientStop__svgDocument).color : SvgColor__svgDocument).alpha, _Runtime.field(style, 'strokeOpacity')), _Runtime.UNDEFINED))), (cast (cast _Runtime.mapArray((cast (cast strokeGradient : SvgGradient__svgDocument).stops : Array<SvgGradientStop__svgDocument>), function(stop:SvgGradientStop__svgDocument, __unused14:Float, __unused15:Array<SvgGradientStop__svgDocument>):Float return HxMath.round(((cast stop : SvgGradientStop__svgDocument).offset * 255.0)), _Runtime.UNDEFINED))), (cast (cast SvgDocument.createSvgGradientMatrix__svgDocument((cast strokeGradient), (cast path)) : Matrix)), (cast (cast strokeGradient : SvgGradient__svgDocument).spreadMethod), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     strokePath = path;
     if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'strokeDasharray'), 'none') : Bool)) {
       var dash:Array<Float> = (cast _Runtime.filterArray((cast (cast SvgDocument.parseSvgNumberList__svgDocument((cast _Runtime.field(style, 'strokeDasharray') : String)) : Array<Float>) : Array<Float>), function(value:Float, __unused16:Float, __unused17:Array<Float>):Bool return ((cast value : Float) >= (cast 0.0 : Float)), _Runtime.UNDEFINED));
       if ((cast ((cast _Runtime.field(dash, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
         (strokePath = cast ((cast createPath((cast _Runtime.field(path, 'winding'))) : Path) : Dynamic));
-        dashPath((cast path), (cast ((cast _Runtime.strictEquals(_Runtime.fmod(_Runtime.field(dash, 'length'), 2.0), 0.0) : Bool) ? (cast dash : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(dash), _Runtime.toArray(dash)]) : Dynamic))), (cast _Runtime.field(style, 'strokeDashoffset') : Float), (cast strokePath), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float));
+        dashPath((cast path), (cast ((cast _Runtime.strictEquals(_Runtime.fmod(_Runtime.field(dash, 'length'), 2.0), 0.0) : Bool) ? (cast dash : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(dash), _Runtime.toArray(dash)]) : Dynamic))), (cast _Runtime.field(style, 'strokeDashoffset') : Float), (cast strokePath), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       }
     }
     appendShapePath((cast shape), (cast _Runtime.slice(_Runtime.field(strokePath, 'commands'), 0, null)), (cast _Runtime.slice(_Runtime.field(strokePath, 'data'), 0, null)), (cast _Runtime.field(strokePath, 'winding')));
@@ -739,7 +739,7 @@ class SvgDocument {
     var mapX:Float->Float = cast _Runtime.UNDEFINED;
     var mapY:Float->Float = cast _Runtime.UNDEFINED;
     var matrix:Matrix = cast _Runtime.UNDEFINED;
-    bounds = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle);
+    bounds = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
     (cast getPathBounds((cast path), (cast bounds)) : Bool);
     mapX = (cast function(value:Float):Float return ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast ((cast bounds : Rectangle).x + (value * (cast bounds : Rectangle).width)) : Dynamic) : (cast value : Dynamic)));
     mapY = (cast function(value:Float):Float return ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast ((cast bounds : Rectangle).y + (value * (cast bounds : Rectangle).height)) : Dynamic) : (cast value : Dynamic)));
@@ -890,7 +890,7 @@ class SvgDocument {
 
   public static function multiplySvgMatrices__svgDocument(a:Matrix, b:Matrix):Matrix {
     var out:Matrix = cast _Runtime.UNDEFINED;
-    out = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
+    out = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
     multiplyMatrix((cast out), (cast a), (cast b));
     return cast out;
     return cast null;
@@ -1117,13 +1117,13 @@ class SvgDocument {
     var matched:Bool = cast _Runtime.UNDEFINED;
     var match:Null<Dynamic> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast _Runtime.strictEquals(StringTools.trim(Std.string(value)), '') : Bool)) : Bool)) { return cast null; }
-    result = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
+    result = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
     expression = _Runtime.regexp('([a-zA-Z]+)\\s*\\(([^)]*)\\)', 'g');
     matched = false;
     while ((cast !_Runtime.strictEquals((match = cast (_Runtime.callProperty(expression, 'exec', cast ([value] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
       (matched = cast (true : Dynamic));
       var values:Array<Float> = (cast SvgDocument.parseSvgNumberList__svgDocument((cast _Runtime.getIndex(match, 2.0) : String)) : Array<Float>);
-      var operation:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
+      var operation:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
       if ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'matrix') : Bool) && (cast ((cast _Runtime.field(values, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) : Bool)) {
         (operation = cast ((cast createMatrix((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float))), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float))), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 2.0 : Float))), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 3.0 : Float))), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 4.0 : Float))), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 5.0 : Float)))) : Matrix) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'translate') : Bool)) {
@@ -1136,7 +1136,7 @@ class SvgDocument {
         var radians:Float = (_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0), HxMath.PI) / 180.0);
         var cosine:Float = HxMath.cos(radians);
         var sine:Float = HxMath.sin(radians);
-        var rotation:Matrix = (cast createMatrix((cast cosine), (cast sine), (cast -sine), (cast cosine), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
+        var rotation:Matrix = (cast createMatrix((cast cosine), (cast sine), (cast -sine), (cast cosine), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
         if ((cast ((cast _Runtime.field(values, 'length') : Float) >= (cast 3.0 : Float)) : Bool)) {
           (operation = cast ((cast SvgDocument.multiplySvgMatrices__svgDocument((cast (cast createMatrix((cast 1.0), (cast 0.0), (cast 0.0), (cast 1.0), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float))), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 2.0 : Float)))) : Matrix)), (cast (cast SvgDocument.multiplySvgMatrices__svgDocument((cast rotation), (cast (cast createMatrix((cast 1.0), (cast 0.0), (cast 0.0), (cast 1.0), (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float))), (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 2.0 : Float)))) : Matrix))) : Matrix))) : Matrix) : Dynamic));
         } else {

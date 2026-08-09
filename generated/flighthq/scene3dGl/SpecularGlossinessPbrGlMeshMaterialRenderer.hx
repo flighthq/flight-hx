@@ -50,7 +50,7 @@ class SpecularGlossinessPbrGlMeshMaterialRenderer {
     gl = (cast state : GlRenderState).gl;
     specGloss = (cast material : Null<SpecularGlossinessPbrMaterial>);
     standard = ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast (cast SpecularGlossinessPbrGlMeshMaterialRenderer.convertSpecularGlossinessToStandard__specularGlossinessPbrGlMeshMaterialRenderer((cast specGloss)) : StandardPbrMaterialProperties) : Dynamic) : (cast null : Dynamic));
-    program = (cast ensureGlPbrProgram((cast state), (cast (cast buildGlPbrStandardDefineKey((cast state), (cast standard), (cast specGloss)) : GlPbrDefineKey)), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : GlPbrProgram);
+    program = (cast ensureGlPbrProgram((cast state), (cast (cast buildGlPbrStandardDefineKey((cast state), (cast standard), (cast specGloss)) : GlPbrDefineKey)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : GlPbrProgram);
     beginGlMeshDraw((cast state), (cast program), (cast ((cast !_Runtime.strictEquals(specGloss, null) : Bool) && (cast _Runtime.field(specGloss, 'doubleSided') : Bool)) : Bool));
     setGlMeshViewProjection((cast state), (cast (cast program : GlPbrProgram).locViewProjection), (cast camera));
     setGlMeshCameraPosition((cast gl), (cast (cast program : GlPbrProgram).locCameraPosition), (cast camera));

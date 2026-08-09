@@ -104,7 +104,7 @@ class CapacitorGeolocation {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast geolocation : CapacitorGeolocationPlugin).requestPermissions((cast _Runtime.field(_Runtime, 'UNDEFINED'))), function(__awaitValue3:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast geolocation : CapacitorGeolocationPlugin).requestPermissions(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end), function(__awaitValue3:Dynamic):Dynamic {
               return flighthq._internal._Async.flowReturn(_Runtime.strictEquals((cast __awaitValue3 : CapacitorGeolocationPermissionStatus).location, 'granted'));
             });
           }), function(__caughtError:Dynamic):Dynamic {

@@ -173,7 +173,7 @@ class GlParticleEmitter3D {
     if ((cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) { return; }
     GlParticleEmitter3D.ensureInstanceCapacity__glParticleEmitter3D((cast shader), (cast gl), (cast particleCount : Float));
     atlasTexture = _Runtime.coalesce(({ final __typedStruct0 = atlas; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.texture; }), function():Dynamic return cast null);
-    resolvedAtlas = ((cast ((cast !_Runtime.strictEquals(atlasTexture, null) : Bool) && (cast (cast hasTextureSource((cast atlasTexture)) : Bool) : Bool)) : Bool) ? (cast (cast resolveGlTexture((cast state), (cast atlasTexture), (cast true : Bool), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<flighthq._internal.dom.WebGLTexture>) : Dynamic) : (cast null : Dynamic));
+    resolvedAtlas = ((cast ((cast !_Runtime.strictEquals(atlasTexture, null) : Bool) && (cast (cast hasTextureSource((cast atlasTexture)) : Bool) : Bool)) : Bool) ? (cast (cast resolveGlTexture((cast state), (cast atlasTexture), (cast true : Bool), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<flighthq._internal.dom.WebGLTexture>) : Dynamic) : (cast null : Dynamic));
     hasAtlas = !_Runtime.strictEquals(resolvedAtlas, null);
     regions = ((cast hasAtlas : Bool) ? (cast (cast atlas : { var regions:Array<TextureAtlasRegion>; }).regions : Dynamic) : (cast null : Dynamic));
     numRegions = ((cast !_Runtime.strictEquals(regions, null) : Bool) ? (cast _Runtime.field(regions, 'length') : Dynamic) : (cast 0.0 : Dynamic));

@@ -59,7 +59,7 @@ class Vector3 {
 
   public static function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):flighthq.types.Vector3 {
     var out:flighthq.types.Vector3 = cast _Runtime.UNDEFINED;
-    out = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.Vector3);
+    out = (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq.types.Vector3);
     setVector3FromSpherical((cast out), (cast radius : Float), (cast theta : Float), (cast phi : Float));
     return cast out;
     return cast null;

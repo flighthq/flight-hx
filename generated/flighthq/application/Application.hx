@@ -70,8 +70,8 @@ class Application {
       resumeApplicationLoop((cast app));
       if ((cast !_Runtime.strictEquals(app.onActivate, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onActivate]]), 1); }
     });
-    connectSignal((cast win.onDeactivate), (cast onDeactivate), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    connectSignal((cast win.onActivate), (cast onActivate), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    connectSignal((cast win.onDeactivate), (cast onDeactivate), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast win.onActivate), (cast onActivate), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).set(kLifecycle, (cast function():Void {
       disconnectSignal((cast win.onDeactivate), (cast onDeactivate));
       disconnectSignal((cast win.onActivate), (cast onActivate));

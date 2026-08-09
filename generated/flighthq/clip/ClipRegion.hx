@@ -88,7 +88,7 @@ class ClipRegion {
   public static function createClipRegionFromContours(contours:Array<Array<Float>>, winding:PathWinding):flighthq.types.ClipRegion {
     var rect:Rectangle = cast _Runtime.UNDEFINED;
     var owned:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    rect = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle);
+    rect = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
     ClipRegion.setRectangleToContoursBounds__clipRegion((cast rect), (cast contours));
     owned = (cast _Runtime.mapArray((cast contours : Array<Array<Float>>), function(c:Array<Float>, __unused4:Float, __unused5:Array<Array<Float>>):Array<Float> return _Runtime.slice(c, 0, null), _Runtime.UNDEFINED));
     return cast { contours: owned, rect: rect, version: 0.0, winding: winding };
@@ -107,7 +107,7 @@ class ClipRegion {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var rect:Rectangle = cast _Runtime.UNDEFINED;
     contours = (cast flattenPath((cast path), (cast tolerance : Float)) : Array<Array<Float>>);
-    rect = (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle);
+    rect = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
     ClipRegion.setRectangleToContoursBounds__clipRegion((cast rect), (cast contours));
     return cast { contours: contours, rect: rect, version: 0.0, winding: _Runtime.field(path, 'winding') };
     return cast null;
@@ -451,7 +451,7 @@ class ClipRegion {
   public static final clipRegionPool__clipRegion:Array<flighthq.types.ClipRegion> = (cast cast ([] : Array<Dynamic>));
 
   public static function makeEmptyClipRegion__clipRegion():flighthq.types.ClipRegion {
-    return cast { contours: null, rect: (cast createRectangle((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Rectangle), version: 0.0, winding: 'nonZero' };
+    return cast { contours: null, rect: (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle), version: 0.0, winding: 'nonZero' };
     return cast null;
   }
 

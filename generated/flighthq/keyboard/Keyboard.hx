@@ -107,8 +107,8 @@ class Keyboard {
       fire = (cast function():Void { listener((cast 'did'), (cast transition)); });
       virtualKeyboard = (cast Keyboard.getVirtualKeyboard__keyboard() : Null<VirtualKeyboard__keyboard>);
       if ((cast !_Runtime.strictEquals(virtualKeyboard, null) : Bool)) {
-        (cast virtualKeyboard : VirtualKeyboard__keyboard).addEventListener((cast 'geometrychange' : String), (cast fire), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-        return cast function():Void { (cast virtualKeyboard : VirtualKeyboard__keyboard).removeEventListener((cast 'geometrychange' : String), (cast fire), (cast _Runtime.field(_Runtime, 'UNDEFINED'))); };
+        (cast virtualKeyboard : VirtualKeyboard__keyboard).addEventListener((cast 'geometrychange' : String), (cast fire), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+        return cast function():Void { (cast virtualKeyboard : VirtualKeyboard__keyboard).removeEventListener((cast 'geometrychange' : String), (cast fire), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end); };
       }
       viewport = flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'visualViewport');
       if ((cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(viewport, null) : Bool)) : Bool)) { return cast function():Void {

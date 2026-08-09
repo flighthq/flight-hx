@@ -132,7 +132,7 @@ class _WgpuTestHelper {
       canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 800.0);
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 600.0);
-      return flighthq._internal._Async.resolve((cast createWgpuRenderState((cast canvas), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq._internal._Promise<WgpuRenderState>));
+      return flighthq._internal._Async.resolve((cast createWgpuRenderState((cast canvas), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq._internal._Promise<WgpuRenderState>));
     }));
   }
 

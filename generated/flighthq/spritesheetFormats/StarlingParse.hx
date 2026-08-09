@@ -111,7 +111,7 @@ class StarlingParse {
   }
 
   public static function regionsFromXml__starlingParse(xml:String):Array<TextureAtlasRegion> {
-    return cast (cast (cast parseTextureAtlasStarlingXml((cast xml : String), (cast (cast createTextureAtlas((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas)), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
+    return cast (cast (cast parseTextureAtlasStarlingXml((cast xml : String), (cast (cast createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : TextureAtlas)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
     return cast null;
   }
 

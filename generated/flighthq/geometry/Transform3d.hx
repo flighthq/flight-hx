@@ -23,7 +23,7 @@ class Transform3d {
   }
 
   public static function createTransform3D():Transform3D {
-    return cast (cast createEntity((cast { rotation: (cast createQuaternion((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Quaternion), scale: (cast createVector3((cast 1.0), (cast 1.0), (cast 1.0)) : Vector3), position: (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector3) })) : { >Entity, var rotation:Quaternion; var scale:Vector3; var position:Vector3; });
+    return cast (cast createEntity((cast { rotation: (cast createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Quaternion), scale: (cast createVector3((cast 1.0), (cast 1.0), (cast 1.0)) : Vector3), position: (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Vector3) })) : { >Entity, var rotation:Quaternion; var scale:Vector3; var position:Vector3; });
     return cast null;
   }
 

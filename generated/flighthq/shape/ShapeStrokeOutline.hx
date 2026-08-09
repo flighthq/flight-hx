@@ -41,7 +41,7 @@ class ShapeStrokeOutline {
         (deferred = cast (true : Dynamic));
         return;
       }
-      outline = (cast compactStrokePath((cast centerline), (cast style), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Path);
+      outline = (cast compactStrokePath((cast centerline), (cast style), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Path);
       if ((cast ((cast _Runtime.field((cast outline : Path).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: outline, color: color, alpha: alpha }] : Array<Dynamic>)); }
     });
     i = 0.0;

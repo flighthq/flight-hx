@@ -26,7 +26,7 @@ class ParseAtf {
   }
 
   public static function parseAtf(bytes:flighthq._internal._UInt8Array):Null<Array<TextureContainer>> {
-    return cast (cast ParseAtf.parseAtfInternal__parseAtf((cast bytes), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<Array<TextureContainer>>);
+    return cast (cast ParseAtf.parseAtfInternal__parseAtf((cast bytes), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<Array<TextureContainer>>);
     return cast null;
   }
 

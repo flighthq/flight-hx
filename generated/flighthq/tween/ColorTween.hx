@@ -22,7 +22,7 @@ class ColorTween {
     tween = (cast createTween((cast manager), (cast components), (cast duration : Float), (cast { b: (_Runtime.toInt32(toColor) & 255), g: (_Runtime.toInt32((_Runtime.toInt32(toColor) >> 8)) & 255), r: (_Runtime.toInt32((_Runtime.toInt32(toColor) >> 16)) & 255) }), (cast options)) : Tween<ColorComponents__colorTween>);
     connectSignal((cast (cast tween : Tween<ColorComponents__colorTween>).onUpdate), (cast function():Void {
       _Runtime.setIndex(target, property, (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round((cast components : ColorComponents__colorTween).r)) & 255)) << 16)) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round((cast components : ColorComponents__colorTween).g)) & 255)) << 8)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round((cast components : ColorComponents__colorTween).b)) & 255))));
-    }), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast tween;
     return cast null;
   }

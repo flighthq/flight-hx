@@ -18,7 +18,7 @@ class Zoom {
     (camera.y += (Zoom.scratchBefore__zoom.y - Zoom.scratchAfter__zoom.y));
   }
 
-  public static final scratchAfter__zoom:Vector2 = (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector2);
+  public static final scratchAfter__zoom:Vector2 = (cast createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Vector2);
 
-  public static final scratchBefore__zoom:Vector2 = (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector2);
+  public static final scratchBefore__zoom:Vector2 = (cast createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Vector2);
 }

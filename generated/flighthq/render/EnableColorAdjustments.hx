@@ -100,7 +100,7 @@ class EnableColorAdjustments {
 
   public static function createInheritedColorScaleBias__enableColorAdjustments():ColorScaleBias {
     var value:ColorScaleBias = cast _Runtime.UNDEFINED;
-    value = (cast createColorScaleBias((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : ColorScaleBias);
+    value = (cast createColorScaleBias(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : ColorScaleBias);
     ((cast EnableColorAdjustments.inheritedColorScaleBiases__enableColorAdjustments : flighthq._internal._WeakSet<ColorScaleBias>).add(value));
     return cast value;
     return cast null;

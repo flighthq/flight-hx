@@ -16,10 +16,10 @@ import flighthq.types.Scene3DLights.Scene3DLightsLike;
 class PresentGlScene3D {
   @:noCompletion
   public static function presentGlScene3D(state:GlRenderState, target:GlRenderTarget, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike):Void {
-    beginGlRenderPass((cast state), (cast target), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    beginGlRenderPass((cast state), (cast target), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     try {
       try {
-        drawGlScene3D((cast state), (cast scene), (cast camera), (cast lights), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+        drawGlScene3D((cast state), (cast scene), (cast camera), (cast lights), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError0:Dynamic) {
       {
@@ -30,6 +30,6 @@ class PresentGlScene3D {
     {
       endGlRenderPass((cast state));
     }
-    presentGlRenderTarget((cast state), (cast target), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    presentGlRenderTarget((cast state), (cast target), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
   }
 }

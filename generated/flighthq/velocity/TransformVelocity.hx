@@ -42,7 +42,7 @@ class TransformVelocity {
       }
       ((cast sample : VelocitySample).lastFrameId = (cast field : VelocityField).frameId);
     }
-    if ((cast _Runtime.strictEquals((cast sample : VelocitySample).previousWorldTransform, null) : Bool)) { ((cast sample : VelocitySample).previousWorldTransform = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix)); }
+    if ((cast _Runtime.strictEquals((cast sample : VelocitySample).previousWorldTransform, null) : Bool)) { ((cast sample : VelocitySample).previousWorldTransform = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix)); }
     copyMatrix((cast (cast sample : VelocitySample).previousWorldTransform), (cast world));
     count = (cast getNodeChildCount((cast mutableNode)) : Float);
     {

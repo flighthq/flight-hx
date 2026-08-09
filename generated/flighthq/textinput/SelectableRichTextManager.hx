@@ -91,7 +91,7 @@ class SelectableRichTextManager {
     var target:Null<RichText> = cast _Runtime.UNDEFINED;
     target = (cast manager : flighthq.types.SelectableRichTextManager).focused;
     if ((cast _Runtime.strictEquals(target, null) : Bool)) { return; }
-    setRichTextScrollV((cast target), (cast _Runtime.addNumbers((cast (cast target : RichText).data : RichTextData).scrollV, HxMath.round(deltaLines)) : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    setRichTextScrollV((cast target), (cast _Runtime.addNumbers((cast (cast target : RichText).data : RichTextData).scrollV, HxMath.round(deltaLines)) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
   }
 
   public static function focusSelectableRichText(manager:flighthq.types.SelectableRichTextManager, target:RichText):Void {

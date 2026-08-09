@@ -45,7 +45,7 @@ class Socket {
     }
     if ((cast ((cast _Runtime.strictEquals((cast runtime : SocketRuntime).readyState, 'closing') : Bool) || (cast _Runtime.strictEquals((cast runtime : SocketRuntime).readyState, 'closed') : Bool)) : Bool)) { return; }
     ((cast runtime : SocketRuntime).readyState = 'closing');
-    _Runtime.callOptionalValue(({ final __structural0 = (cast runtime : SocketRuntime).connection; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var closeSocketConnection:Null<Float>->Null<String>->Void; }).closeSocketConnection; }), cast ([code, reason] : Array<Dynamic>));
+    ({ final __optionalOwner1 = (cast runtime : SocketRuntime).connection; if (__optionalOwner1 != null) { final __optionalCall0 = (cast __optionalOwner1 : { var closeSocketConnection:Null<Float>->Null<String>->Void; }).closeSocketConnection; if (__optionalCall0 != null) __optionalCall0(code, reason); } });
   }
 
   public static function createSocket(options:SocketOptions):flighthq.types.Socket {
@@ -94,7 +94,7 @@ class Socket {
   public static function disposeSocket(socket:flighthq.types.Socket):Void {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
     if ((cast (cast (cast socket : flighthq.types.Socket).runtime : SocketRuntime).disposed : Bool)) { return; }
-    closeSocket((cast socket), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    closeSocket((cast socket), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     detachSocket((cast socket));
     runtime = (cast socket : flighthq.types.Socket).runtime;
     ((cast runtime : SocketRuntime).connection = null);

@@ -14,7 +14,7 @@ class DecodeImage {
       var decoder:Null<ImageDecoder> = cast _Runtime.UNDEFINED;
       decoder = (cast DecodeImage.resolveImageDecoder__decodeImage((cast bytes), (cast mimeType)) : Null<ImageDecoder>);
       if ((cast _Runtime.strictEquals(decoder, null) : Bool)) { return cast null; }
-      return cast (cast decoder((cast bytes), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq._internal._Promise<DecodedImage>);
+      return cast (cast decoder((cast bytes), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq._internal._Promise<DecodedImage>);
       return cast null;
     }));
   }

@@ -195,7 +195,7 @@ class WgpuParticleEmitter3D {
       ((cast resources : WgpuParticle3DResources__wgpuParticleEmitter3D).instanceData = new flighthq._internal._Float32Array(HxMath.max(needed, _Runtime.multiplyNumbers(_Runtime.field((cast resources : WgpuParticle3DResources__wgpuParticleEmitter3D).instanceData, 'length'), 2.0))));
     }
     atlasTexture = _Runtime.coalesce(({ final __typedStruct0 = atlas; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.texture; }), function():Dynamic return cast null);
-    textureEntry = ((cast ((cast !_Runtime.strictEquals(atlasTexture, null) : Bool) && (cast (cast hasTextureSource((cast atlasTexture)) : Bool) : Bool)) : Bool) ? (cast (cast resolveWgpuTexture((cast state), (cast atlasTexture), (cast true : Bool), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<WgpuTextureEntry>) : Dynamic) : (cast null : Dynamic));
+    textureEntry = ((cast ((cast !_Runtime.strictEquals(atlasTexture, null) : Bool) && (cast (cast hasTextureSource((cast atlasTexture)) : Bool) : Bool)) : Bool) ? (cast (cast resolveWgpuTexture((cast state), (cast atlasTexture), (cast true : Bool), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<WgpuTextureEntry>) : Dynamic) : (cast null : Dynamic));
     hasAtlas = !_Runtime.strictEquals(textureEntry, null);
     regions = ((cast hasAtlas : Bool) ? (cast (cast atlas : { var regions:Array<TextureAtlasRegion>; }).regions : Dynamic) : (cast null : Dynamic));
     numRegions = ((cast !_Runtime.strictEquals(regions, null) : Bool) ? (cast _Runtime.field(regions, 'length') : Dynamic) : (cast 0.0 : Dynamic));
@@ -320,7 +320,7 @@ class WgpuParticleEmitter3D {
     if ((cast _Runtime.strictEquals(_Runtime.field(WgpuParticleEmitter3D.emitterScratch__wgpuParticleEmitter3D, 'length'), 0.0) : Bool)) { return; }
     pass = (cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
-    list = (cast prepareScene3DRender((cast state), (cast scene), (cast camera), (cast lights), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Scene3DRenderList);
+    list = (cast prepareScene3DRender((cast state), (cast scene), (cast camera), (cast lights), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene3DRenderList);
     resources = (cast WgpuParticleEmitter3D.ensureParticle3DResources__wgpuParticleEmitter3D((cast state)) : WgpuParticle3DResources__wgpuParticleEmitter3D);
     f = WgpuParticleEmitter3D.frameScratch__wgpuParticleEmitter3D;
     vp = (cast (cast list : Scene3DRenderList).viewProjection : { var m:flighthq._internal._Float32Array; }).m;

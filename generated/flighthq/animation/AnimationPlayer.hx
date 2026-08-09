@@ -35,17 +35,17 @@ class AnimationPlayer {
     time = ((cast player : flighthq.types.AnimationPlayer).time + (dt * (cast player : flighthq.types.AnimationPlayer).speed));
     if ((cast !(cast (cast player : flighthq.types.AnimationPlayer).loop : Bool) : Bool)) {
       if ((cast ((cast time : Float) >= (cast duration : Float)) : Bool)) {
-        AnimationPlayer.emitAnimationPlayerEvents__animationPlayer((cast player), (cast fromTime : Float), (cast duration : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool));
+        AnimationPlayer.emitAnimationPlayerEvents__animationPlayer((cast player), (cast fromTime : Float), (cast duration : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
         ((cast player : flighthq.types.AnimationPlayer).time = duration);
         ((cast player : flighthq.types.AnimationPlayer).playing = false);
         AnimationPlayer.emitAnimationPlayerFinished__animationPlayer((cast player));
       } else { if ((cast ((cast time : Float) < (cast 0.0 : Float)) : Bool)) {
-        AnimationPlayer.emitAnimationPlayerEvents__animationPlayer((cast player), (cast fromTime : Float), (cast 0.0 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool));
+        AnimationPlayer.emitAnimationPlayerEvents__animationPlayer((cast player), (cast fromTime : Float), (cast 0.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
         ((cast player : flighthq.types.AnimationPlayer).time = 0.0);
         ((cast player : flighthq.types.AnimationPlayer).playing = false);
         AnimationPlayer.emitAnimationPlayerFinished__animationPlayer((cast player));
       } else {
-        AnimationPlayer.emitAnimationPlayerEvents__animationPlayer((cast player), (cast fromTime : Float), (cast time : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool));
+        AnimationPlayer.emitAnimationPlayerEvents__animationPlayer((cast player), (cast fromTime : Float), (cast time : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
         ((cast player : flighthq.types.AnimationPlayer).time = time);
       } }
       return;

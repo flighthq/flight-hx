@@ -34,7 +34,7 @@ class StandardPbrGlMeshMaterialRenderer {
     var program:GlPbrProgram = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     pbr = (cast material : Null<StandardPbrMaterial>);
-    program = (cast ensureGlPbrProgram((cast state), (cast (cast buildGlPbrStandardDefineKey((cast state), (cast pbr), (cast pbr)) : GlPbrDefineKey)), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : GlPbrProgram);
+    program = (cast ensureGlPbrProgram((cast state), (cast (cast buildGlPbrStandardDefineKey((cast state), (cast pbr), (cast pbr)) : GlPbrDefineKey)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : GlPbrProgram);
     beginGlMeshDraw((cast state), (cast program), (cast ((cast !_Runtime.strictEquals(pbr, null) : Bool) && (cast _Runtime.field(pbr, 'doubleSided') : Bool)) : Bool));
     setGlMeshViewProjection((cast state), (cast (cast program : GlPbrProgram).locViewProjection), (cast camera));
     setGlMeshCameraPosition((cast gl), (cast (cast program : GlPbrProgram).locCameraPosition), (cast camera));

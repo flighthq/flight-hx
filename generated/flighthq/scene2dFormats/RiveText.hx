@@ -47,7 +47,7 @@ class RiveText {
     }
     baseStyle = ((cast _Runtime.strictEquals(_Runtime.field(runs, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast RiveText.readRiveNumber__riveText((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), flighthq._internal._StaticIndex.readFloatArrayTyped((cast runs : Array<Float>), (cast 0.0 : Float)))), (cast RiveText.RIVE_RUN_STYLE_ID__riveText : Float), (cast -1.0 : Float)) : Float) : Dynamic));
     format = (cast RiveText.createRiveTextFormat__riveText((cast artboard), (cast baseStyle : Float), (cast align : Float), (cast fontNames)) : TextFormat);
-    node = (cast createRichText((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : RichText);
+    node = (cast createRichText(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : RichText);
     ((cast (cast node : RichText).data : RichTextData).defaultTextFormat = format);
     ((cast (cast node : RichText).data : RichTextData).height = (cast RiveText.readRiveNumber__riveText((cast source), (cast RiveText.RIVE_TEXT_HEIGHT__riveText : Float), (cast 0.0 : Float)) : Float));
     ((cast (cast node : RichText).data : RichTextData).text = text);

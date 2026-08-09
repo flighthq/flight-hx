@@ -64,7 +64,7 @@ class JointRegistry {
   public static function invalidatePhysics2DJoint(world:Physics2DWorld, joint:Physics2DJoint):Bool {
     assertPhysics2DWorldNotStepping((cast world));
     if ((cast ((cast !_Runtime.strictEquals(((cast physics2DJointOwners : flighthq._internal._WeakMap<Physics2DJoint, Physics2DWorld>).get(joint)), world) : Bool) || (cast !(cast _Runtime.includes((cast world : Physics2DWorld).joints, joint) : Bool) : Bool)) : Bool)) { return cast false; }
-    _Runtime.callOptionalValue(({ final __structural2 = (cast getPhysics2DJointSolver((cast world), (cast (cast joint : Physics2DJoint).kind : String)) : Null<Physics2DJointSolver>); __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var clearAccumulatedImpulses:Null<Physics2DJoint->Void>; }).clearAccumulatedImpulses; }), cast ([joint] : Array<Dynamic>));
+    ({ final __optionalOwner3 = (cast getPhysics2DJointSolver((cast world), (cast (cast joint : Physics2DJoint).kind : String)) : Null<Physics2DJointSolver>); if (__optionalOwner3 != null) { final __optionalCall2 = (cast __optionalOwner3 : { @:optional var clearAccumulatedImpulses:Null<Physics2DJoint->Void>; }).clearAccumulatedImpulses; if (__optionalCall2 != null) __optionalCall2(joint); } });
     ((cast joint : Physics2DJoint).impulse0 = 0.0);
     ((cast joint : Physics2DJoint).impulse1 = 0.0);
     ((cast joint : Physics2DJoint).impulse2 = 0.0);

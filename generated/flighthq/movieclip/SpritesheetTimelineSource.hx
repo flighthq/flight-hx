@@ -46,7 +46,7 @@ class SpritesheetTimelineSource {
       if ((cast _Runtime.strictEquals(atlas, null) : Bool)) { return; }
       bitmap = ((cast bitmaps : flighthq._internal._WeakMap<Node2D, Sprite>).get(target));
       if ((cast _Runtime.strictEquals(bitmap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (bitmap = cast ((cast createSprite((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Sprite) : Dynamic));
+        (bitmap = cast ((cast createSprite(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Sprite) : Dynamic));
         (cast addNodeChild((cast target), (cast bitmap)) : NodeOf<Node2DTraits>);
         ((cast bitmaps : flighthq._internal._WeakMap<Node2D, Sprite>).set(target, (cast bitmap)));
       }

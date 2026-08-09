@@ -19,7 +19,7 @@ class IpcTimeoutError extends haxe.Exception {
   public final timeoutMs:Float;
   public var name:String;
   public function new(channel:String, timeoutMs:Float):Void {
-    super((cast 'IPC invoke on channel "' + Std.string(channel) + '" timed out after ' + Std.string(timeoutMs) + 'ms'), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    super((cast 'IPC invoke on channel "' + Std.string(channel) + '" timed out after ' + Std.string(timeoutMs) + 'ms'), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     this.name = 'Error';
     (this.name = 'IpcTimeoutError');
     (this.channel = channel);

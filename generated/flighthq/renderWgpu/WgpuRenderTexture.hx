@@ -80,7 +80,7 @@ class WgpuRenderTexture {
 
   public static function renderIntoWgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture, callback:WgpuRenderState->Void):Void {
     writeWgpuRenderTextureTarget((cast state), (cast renderTexture), (cast function(target:WgpuRenderTarget):Void {
-      beginWgpuRenderPass((cast state), (cast target), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      beginWgpuRenderPass((cast state), (cast target), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       try {
         try {
           callback((cast state));

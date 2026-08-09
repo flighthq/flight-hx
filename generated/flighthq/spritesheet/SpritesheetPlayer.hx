@@ -26,7 +26,7 @@ class SpritesheetPlayer {
       (p.speed = cast (1.0 : Dynamic));
       return cast p;
     }
-    return cast (cast createSpritesheetPlayer((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.SpritesheetPlayer);
+    return cast (cast createSpritesheetPlayer(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq.types.SpritesheetPlayer);
     return cast null;
   }
 

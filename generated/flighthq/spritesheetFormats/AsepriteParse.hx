@@ -55,7 +55,7 @@ class AsepriteParse {
     var __destructure7:Dynamic = cast _Runtime.UNDEFINED;
     var meta:AsepriteMeta = cast _Runtime.UNDEFINED;
     var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
-    regions = (cast (cast parseTextureAtlasAsepriteDocument((cast doc), (cast (cast createTextureAtlas((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : TextureAtlas))) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
+    regions = (cast (cast parseTextureAtlasAsepriteDocument((cast doc), (cast (cast createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : TextureAtlas))) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
     frames = (cast _Runtime.mapArray((cast regions : Array<TextureAtlasRegion>), AsepriteParse.frameFromRegion__asepriteParse, _Runtime.UNDEFINED));
     frameNames = (cast _Runtime.mapArray((cast regions : Array<TextureAtlasRegion>), function(region:TextureAtlasRegion, __unused4:Float, __unused5:Array<TextureAtlasRegion>):String return _Runtime.coalesce(region.name, function():Dynamic return cast ''), _Runtime.UNDEFINED));
     durationMap = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
@@ -82,7 +82,7 @@ class AsepriteParse {
     try {
       (document = cast ((cast _Runtime.jsonParse(json) : AsepriteDocument) : Dynamic));
     } catch (__error:Dynamic) {
-      return cast (cast createSpritesheetData((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : SpritesheetData);
+      return cast (cast createSpritesheetData(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : SpritesheetData);
     }
     return cast (cast AsepriteParse.documentToData__asepriteParse((cast document)) : SpritesheetData);
     return cast null;
@@ -93,7 +93,7 @@ class AsepriteParse {
     try {
       (document = cast ((cast _Runtime.jsonParse(json) : AsepriteDocument) : Dynamic));
     } catch (__error:Dynamic) {
-      return cast { data: (cast createSpritesheetData((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : SpritesheetData), document: (cast AsepriteParse.createEmptyAsepriteDocument__asepriteParse() : AsepriteDocument) };
+      return cast { data: (cast createSpritesheetData(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : SpritesheetData), document: (cast AsepriteParse.createEmptyAsepriteDocument__asepriteParse() : AsepriteDocument) };
     }
     return cast { data: (cast AsepriteParse.documentToData__asepriteParse((cast document)) : SpritesheetData), document: document };
     return cast null;

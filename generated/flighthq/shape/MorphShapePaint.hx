@@ -125,7 +125,7 @@ class MorphShapePaint {
     var currentMatrix:Matrix = cast _Runtime.UNDEFINED;
     var binding:MorphShapePaintBinding = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(startSource, null) : Bool) && (cast _Runtime.strictEquals(endSource, null) : Bool)) : Bool)) {
-      if ((cast _Runtime.strictEquals(commandKey, 'beginTextureFill') : Bool)) { appendShapeBeginTextureFill((cast shape), (cast texture), (cast _Runtime.field(_Runtime, 'UNDEFINED'))); } else { appendShapeLineTextureStyle((cast shape), (cast texture), (cast _Runtime.field(_Runtime, 'UNDEFINED'))); }
+      if ((cast _Runtime.strictEquals(commandKey, 'beginTextureFill') : Bool)) { appendShapeBeginTextureFill((cast shape), (cast texture), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end); } else { appendShapeLineTextureStyle((cast shape), (cast texture), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end); }
       return;
     }
     commandIndex = _Runtime.field((cast (cast shape : MorphShape).data : MorphShapeData).commands, 'length');
@@ -222,5 +222,5 @@ class MorphShapePaint {
     return cast null;
   }
 
-  public static final identityMatrix__morphShapePaint:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
+  public static final identityMatrix__morphShapePaint:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
 }

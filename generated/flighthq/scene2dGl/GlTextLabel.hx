@@ -165,10 +165,10 @@ class GlTextLabel {
     }
     if ((cast ((cast ((cast (cast textData : GlTextLabelData__glTextLabel).logW : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast (cast textData : GlTextLabelData__glTextLabel).logH : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     (cast ensureGlQuadBatchShader((cast state)) : GlQuadBatchShader);
-    texture = (cast bindGlImageResourceTexture((cast state), (cast (cast textData : GlTextLabelData__glTextLabel).image), (cast null), (cast null), (cast true : Bool), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq._internal.dom.WebGLTexture);
+    texture = (cast bindGlImageResourceTexture((cast state), (cast (cast textData : GlTextLabelData__glTextLabel).image), (cast null), (cast null), (cast true : Bool), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq._internal.dom.WebGLTexture);
     straightAlpha = (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha;
     startCount = (cast runtime : GlRenderStateRuntime).quadBatchWriterCount;
-    base = (cast prepareGlQuadBatchWrite((cast state), (cast texture), (cast straightAlpha : Bool), (cast null), (cast (cast renderProxy : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast 1.0 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Float);
+    base = (cast prepareGlQuadBatchWrite((cast state), (cast texture), (cast straightAlpha : Bool), (cast null), (cast (cast renderProxy : RenderProxy2D).blendMode), (cast material), (cast materialRenderer), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Float);
     d = (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData;
     t = (cast renderProxy : RenderProxy2D).transform2D;
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast d : flighthq._internal._Float32Array), (cast base : Float), (cast t.a : Float));

@@ -49,7 +49,7 @@ class Vector2 {
 
   public static function createVector2FromPolar(length:Float, angle:Float):flighthq.types.Vector2 {
     var out:flighthq.types.Vector2 = cast _Runtime.UNDEFINED;
-    out = (cast createVector2((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.Vector2);
+    out = (cast createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq.types.Vector2);
     setVector2FromPolar((cast out), (cast length : Float), (cast angle : Float));
     return cast out;
     return cast null;

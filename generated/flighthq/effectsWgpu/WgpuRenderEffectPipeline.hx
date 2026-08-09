@@ -56,7 +56,7 @@ class WgpuRenderEffectPipeline {
     ((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget : WgpuRenderTarget).colorSpace = colorSpace);
     rgba = (cast state : WgpuRenderState).backgroundColorRgba;
     ((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget : WgpuRenderTarget).clearColors = ((cast ((cast !_Runtime.strictEquals(rgba, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool) ? (cast cast ([(cast WgpuRenderEffectPipeline.packBackgroundClearColor__wgpuRenderEffectPipeline((cast rgba)) : Float)] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)));
-    beginWgpuRenderPass((cast state), (cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    beginWgpuRenderPass((cast state), (cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
   }
 
   public static function createWgpuRenderEffectPipeline(_state:WgpuRenderState, ?options:RenderEffectPipelineOptions):flighthq.types.WgpuRenderEffectPipeline {
@@ -109,7 +109,7 @@ class WgpuRenderEffectPipeline {
       ensureScratch();
       dest = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       if ((cast _Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)) : Bool)) {
-        applyColorLutPassToWgpu((cast state), (cast source), (cast dest), (cast (cast bakeColorLutForRun((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).lutCache), (cast pending), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : ColorLut)), (cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).lutTexture));
+        applyColorLutPassToWgpu((cast state), (cast source), (cast dest), (cast (cast bakeColorLutForRun((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).lutCache), (cast pending), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : ColorLut)), (cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).lutTexture));
       } else {
         var matrices:Array<Array<Float>> = (cast cast ([] : Array<Dynamic>));
         for (op in _Runtime.iterable(pending)) {

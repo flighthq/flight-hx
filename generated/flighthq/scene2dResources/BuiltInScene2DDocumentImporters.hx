@@ -42,7 +42,7 @@ class BuiltInScene2DDocumentImporters {
     diagnostics = (cast cast ([] : Array<Dynamic>));
     result = (cast createScene2DDocumentFromRiveDocument((cast source), (cast diagnostics)) : Null<RiveScene2DDocumentResult>);
     if ((cast _Runtime.strictEquals(result, null) : Bool)) { return cast null; }
-    return cast (cast createScene2DDocument((cast (cast result : RiveScene2DDocumentResult).root), (cast (cast result : RiveScene2DDocumentResult).slots), (cast 'rive'), (cast null), (cast (cast result : RiveScene2DDocumentResult).imageResources), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Scene2DDocument);
+    return cast (cast createScene2DDocument((cast (cast result : RiveScene2DDocumentResult).root), (cast (cast result : RiveScene2DDocumentResult).slots), (cast 'rive'), (cast null), (cast (cast result : RiveScene2DDocumentResult).imageResources), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene2DDocument);
     return cast null;
   }
 
@@ -55,9 +55,9 @@ class BuiltInScene2DDocumentImporters {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
     var result:LottieDocumentImportResult = cast _Runtime.UNDEFINED;
     diagnostics = (cast cast ([] : Array<Dynamic>));
-    result = (cast createScene2DFromLottieDocument((cast (cast BuiltInScene2DDocumentImporters.decodeText__builtInScene2DDocumentImporters((cast source)) : String)), (cast diagnostics), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : LottieDocumentImportResult);
+    result = (cast createScene2DFromLottieDocument((cast (cast BuiltInScene2DDocumentImporters.decodeText__builtInScene2DDocumentImporters((cast source)) : String)), (cast diagnostics), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : LottieDocumentImportResult);
     if ((cast (cast BuiltInScene2DDocumentImporters.isInvalidDocument__builtInScene2DDocumentImporters((cast diagnostics), (cast 'lottie.invalid-document' : String)) : Bool) : Bool)) { return cast null; }
-    return cast (cast createScene2DDocument((cast (cast result : LottieDocumentImportResult).root), (cast cast ([] : Array<Dynamic>)), (cast 'lottie'), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Scene2DDocument);
+    return cast (cast createScene2DDocument((cast (cast result : LottieDocumentImportResult).root), (cast cast ([] : Array<Dynamic>)), (cast 'lottie'), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene2DDocument);
     return cast null;
   }
 
@@ -65,9 +65,9 @@ class BuiltInScene2DDocumentImporters {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
     var root:DisplayObject = cast _Runtime.UNDEFINED;
     diagnostics = (cast cast ([] : Array<Dynamic>));
-    root = (cast createScene2DFromSvgDocument((cast (cast BuiltInScene2DDocumentImporters.decodeText__builtInScene2DDocumentImporters((cast source)) : String) : String), (cast diagnostics), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : DisplayObject);
+    root = (cast createScene2DFromSvgDocument((cast (cast BuiltInScene2DDocumentImporters.decodeText__builtInScene2DDocumentImporters((cast source)) : String) : String), (cast diagnostics), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : DisplayObject);
     if ((cast (cast BuiltInScene2DDocumentImporters.isInvalidDocument__builtInScene2DDocumentImporters((cast diagnostics), (cast 'svg.invalid-document' : String)) : Bool) : Bool)) { return cast null; }
-    return cast (cast createScene2DDocument((cast root), (cast cast ([] : Array<Dynamic>)), (cast 'svg'), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Scene2DDocument);
+    return cast (cast createScene2DDocument((cast root), (cast cast ([] : Array<Dynamic>)), (cast 'svg'), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene2DDocument);
     return cast null;
   }
 

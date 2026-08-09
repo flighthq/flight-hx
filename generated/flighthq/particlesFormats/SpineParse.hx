@@ -157,13 +157,13 @@ class SpineParse {
       return cast _Runtime.UNDEFINED;
     });
     if ((cast (cast nonZeroRange((cast 'lifeOffset' : String)) : Bool) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'spine.life-offset-unsupported' : String), (cast 'collectSpineDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'spine.life-offset-unsupported' : String), (cast 'collectSpineDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     if ((cast ((cast (cast nonZeroRange((cast 'x' : String)) : Bool) : Bool) || (cast (cast nonZeroRange((cast 'y' : String)) : Bool) : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'spine.position-range-unsupported' : String), (cast 'collectSpineDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'spine.position-range-unsupported' : String), (cast 'collectSpineDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     if ((cast _Runtime.strictEquals((cast raw : { var premultiplied:flighthq._internal._Any; }).premultiplied, true) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'spine.premultiplied-informational' : String), (cast 'collectSpineDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'spine.premultiplied-informational' : String), (cast 'collectSpineDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     return cast diagnostics;
     return cast null;
@@ -185,7 +185,7 @@ class SpineParse {
         i++;
       }
     }
-    return cast (cast particleColorCurveFromKeyframes((cast keys), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Array<Float>);
+    return cast (cast particleColorCurveFromKeyframes((cast keys), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Array<Float>);
     return cast null;
   }
 
@@ -201,7 +201,7 @@ class SpineParse {
         i++;
       }
     }
-    return cast (cast particleCurveFromKeyframes((cast keys), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Array<Float>);
+    return cast (cast particleCurveFromKeyframes((cast keys), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Array<Float>);
     return cast null;
   }
 

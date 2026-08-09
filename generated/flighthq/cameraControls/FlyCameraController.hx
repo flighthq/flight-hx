@@ -19,7 +19,7 @@ import flighthq.types.Vector3.Vector3Like;
 class FlyCameraController {
   public static function cloneFlyCameraController(source:flighthq.types.FlyCameraController):flighthq.types.FlyCameraController {
     var clone:flighthq.types.FlyCameraController = cast _Runtime.UNDEFINED;
-    clone = (cast createFlyCameraController((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : flighthq.types.FlyCameraController);
+    clone = (cast createFlyCameraController(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq.types.FlyCameraController);
     copyFlyCameraController((cast clone), (cast source));
     return cast clone;
     return cast null;
@@ -124,5 +124,5 @@ class FlyCameraController {
 
   public static final WORLD_UP__flyCameraController:Vector3 = (cast createVector3((cast 0.0), (cast 1.0), (cast 0.0)) : Vector3);
 
-  public static final scratchTarget__flyCameraController:Vector3 = (cast createVector3((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Vector3);
+  public static final scratchTarget__flyCameraController:Vector3 = (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Vector3);
 }

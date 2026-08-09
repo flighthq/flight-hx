@@ -53,7 +53,7 @@ class CanvasRenderEffectPipeline {
     } else {
       resizeCanvasRenderTarget((cast (cast pipeline : flighthq.types.CanvasRenderEffectPipeline).sceneTarget), (cast w : Float), (cast h : Float));
     }
-    beginCanvasRenderPass((cast state), (cast (cast pipeline : flighthq.types.CanvasRenderEffectPipeline).sceneTarget), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    beginCanvasRenderPass((cast state), (cast (cast pipeline : flighthq.types.CanvasRenderEffectPipeline).sceneTarget), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
   }
 
   public static function createCanvasRenderEffectPipeline(_state:CanvasRenderState, ?options:RenderEffectPipelineOptions):flighthq.types.CanvasRenderEffectPipeline {
@@ -104,7 +104,7 @@ class CanvasRenderEffectPipeline {
       ensureScratch();
       dest = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       if ((cast _Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)) : Bool)) {
-        applyColorLutPassToCanvas((cast source), (cast dest), (cast (cast bakeColorLutForRun((cast (cast pipeline : flighthq.types.CanvasRenderEffectPipeline).lutCache), (cast pending), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : ColorLut)));
+        applyColorLutPassToCanvas((cast source), (cast dest), (cast (cast bakeColorLutForRun((cast (cast pipeline : flighthq.types.CanvasRenderEffectPipeline).lutCache), (cast pending), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : ColorLut)));
       } else {
         var matrices:Array<Array<Float>> = (cast cast ([] : Array<Dynamic>));
         for (op in _Runtime.iterable(pending)) {
@@ -125,7 +125,7 @@ class CanvasRenderEffectPipeline {
       flushAdjustments();
       ensureScratch();
       var dest:CanvasRenderTarget = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
-      if ((cast _Runtime.strictEquals(runner, null) : Bool)) { drawCanvasEffectPass((cast dest), (cast source), (cast 'none' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : flighthq._internal._Any)); } else { runner((cast { state: state, source: source, dest: dest, pool: pool }), (cast operation)); }
+      if ((cast _Runtime.strictEquals(runner, null) : Bool)) { drawCanvasEffectPass((cast dest), (cast source), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end); } else { runner((cast { state: state, source: source, dest: dest, pool: pool }), (cast operation)); }
       (source = cast (dest : Dynamic));
     }
     flushAdjustments();

@@ -169,7 +169,7 @@ class Window {
       if ((cast !_Runtime.strictEquals((cast state : RenderState).renderTransform2D, null) : Bool)) { (cast computeWindowDeviceTransform((cast win), (cast (cast state : RenderState).renderTransform2D)) : Matrix); }
     });
     apply();
-    connectSignal((cast win.onResize), (cast apply), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    connectSignal((cast win.onResize), (cast apply), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).set(Window.kRenderState__window, (cast function():Void { disconnectSignal((cast win.onResize), (cast apply)); })));
   }
 

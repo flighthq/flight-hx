@@ -52,7 +52,7 @@ typedef ObjDropTally__objParse = { var count:Float; var detail:flighthq._interna
 
 class ObjParse {
   public static function createScene3DFromObj(source:String, ?materials:ObjMaterialLibrary, ?diagnostics:Array<ImportDiagnostic>):Scene3D {
-    return cast (cast createScene3DFromDocument((cast (cast parseObj((cast source : String), (cast materials), (cast diagnostics)) : Scene3DDocument)), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Scene3D);
+    return cast (cast createScene3DFromDocument((cast (cast parseObj((cast source : String), (cast materials), (cast diagnostics)) : Scene3DDocument)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene3D);
     return cast null;
   }
 

@@ -34,17 +34,17 @@ class PixiParse {
     var accel:Null<{ @:optional var x:flighthq._internal._Any; @:optional var y:flighthq._internal._Any; }> = cast _Runtime.UNDEFINED;
     diagnostics = (cast cast ([] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals((cast raw : { var spawnBurst:flighthq._internal._Any; }).spawnBurst, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'pixi.spawn-burst-mapped-to-point' : String), (cast 'collectPixiDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'pixi.spawn-burst-mapped-to-point' : String), (cast 'collectPixiDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     if ((cast !_Runtime.strictEquals((cast raw : { var spawnPolygon:flighthq._internal._Any; }).spawnPolygon, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'pixi.spawn-polygon-mapped-to-point' : String), (cast 'collectPixiDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'pixi.spawn-polygon-mapped-to-point' : String), (cast 'collectPixiDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     accel = (cast (cast raw : { var acceleration:flighthq._internal._Any; }).acceleration : Null<{ @:optional var x:flighthq._internal._Any; @:optional var y:flighthq._internal._Any; }>);
     if ((cast ((cast !_Runtime.strictEquals(accel, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.orValue(!_Runtime.strictEquals((cast PixiParse.rn__pixiParse((cast (cast accel : { @:optional var x:flighthq._internal._Any; @:optional var y:flighthq._internal._Any; }).x : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0), function():Dynamic return cast !_Runtime.strictEquals((cast PixiParse.rn__pixiParse((cast (cast accel : { @:optional var x:flighthq._internal._Any; @:optional var y:flighthq._internal._Any; }).y : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0)) : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'pixi.acceleration-unsupported' : String), (cast 'collectPixiDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'pixi.acceleration-unsupported' : String), (cast 'collectPixiDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     if ((cast !_Runtime.strictEquals((cast raw : { var behaviors:flighthq._internal._Any; }).behaviors, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'pixi.behaviors-partial' : String), (cast 'collectPixiDiagnostics' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'pixi.behaviors-partial' : String), (cast 'collectPixiDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     }
     return cast diagnostics;
     return cast null;

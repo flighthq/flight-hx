@@ -30,7 +30,7 @@ class TextInputEditing {
   public static final DESIRED_CARET_X_UNSET__textInputEditing:Float = -1.0;
 
   public static function appendTextInput(source:RichText, text:String):Void {
-    replaceTextInput((cast source), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast text : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    replaceTextInput((cast source), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast text : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
   }
 
   public static function applyTextInputRestriction(source:RichText, text:String, replaceLength:Float = 0.0):String {
@@ -76,9 +76,9 @@ class TextInputEditing {
     start = (cast getTextInputSelectionBeginIndex((cast source)) : Float);
     end = (cast getTextInputSelectionEndIndex((cast source)) : Float);
     if ((cast !_Runtime.strictEquals(start, end) : Bool)) {
-      replaceTextInput((cast source), (cast start : Float), (cast end : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      replaceTextInput((cast source), (cast start : Float), (cast end : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     } else { if ((cast ((cast start : Float) > (cast 0.0 : Float)) : Bool)) {
-      replaceTextInput((cast source), (cast (start - 1.0) : Float), (cast start : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      replaceTextInput((cast source), (cast (start - 1.0) : Float), (cast start : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     } }
     ((cast state : TextInputState).selectionIndex = (cast state : TextInputState).caretIndex);
   }
@@ -89,9 +89,9 @@ class TextInputEditing {
     start = (cast getTextInputSelectionBeginIndex((cast source)) : Float);
     end = (cast getTextInputSelectionEndIndex((cast source)) : Float);
     if ((cast !_Runtime.strictEquals(start, end) : Bool)) {
-      replaceTextInput((cast source), (cast start : Float), (cast end : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      replaceTextInput((cast source), (cast start : Float), (cast end : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     } else { if ((cast ((cast start : Float) < (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Bool)) {
-      replaceTextInput((cast source), (cast start : Float), (cast (start + 1.0) : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      replaceTextInput((cast source), (cast start : Float), (cast (start + 1.0) : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     } }
   }
 
@@ -102,11 +102,11 @@ class TextInputEditing {
     start = (cast getTextInputSelectionBeginIndex((cast source)) : Float);
     end = (cast getTextInputSelectionEndIndex((cast source)) : Float);
     if ((cast !_Runtime.strictEquals(start, end) : Bool)) {
-      replaceTextInput((cast source), (cast start : Float), (cast end : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      replaceTextInput((cast source), (cast start : Float), (cast end : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       return;
     }
     wordStart = (cast TextInputEditing.findWordStartBefore__textInputEditing((cast (cast (cast source : RichText).data : RichTextData).text : String), (cast start : Float)) : Float);
-    if ((cast ((cast wordStart : Float) < (cast start : Float)) : Bool)) { replaceTextInput((cast source), (cast wordStart : Float), (cast start : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))); }
+    if ((cast ((cast wordStart : Float) < (cast start : Float)) : Bool)) { replaceTextInput((cast source), (cast wordStart : Float), (cast start : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end); }
   }
 
   public static function deleteTextInputWordForward(source:RichText):Void {
@@ -116,11 +116,11 @@ class TextInputEditing {
     start = (cast getTextInputSelectionBeginIndex((cast source)) : Float);
     end = (cast getTextInputSelectionEndIndex((cast source)) : Float);
     if ((cast !_Runtime.strictEquals(start, end) : Bool)) {
-      replaceTextInput((cast source), (cast start : Float), (cast end : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      replaceTextInput((cast source), (cast start : Float), (cast end : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       return;
     }
     wordEnd = (cast TextInputEditing.findWordEndAfter__textInputEditing((cast (cast (cast source : RichText).data : RichTextData).text : String), (cast start : Float)) : Float);
-    if ((cast ((cast wordEnd : Float) > (cast start : Float)) : Bool)) { replaceTextInput((cast source), (cast start : Float), (cast wordEnd : Float), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED'))); }
+    if ((cast ((cast wordEnd : Float) > (cast start : Float)) : Bool)) { replaceTextInput((cast source), (cast start : Float), (cast wordEnd : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end); }
   }
 
   public static function getTextInputCaretIndex(source:RichText):Float {
@@ -228,7 +228,7 @@ class TextInputEditing {
       else if (__switchValue == 'copy') {
         {
           var copyText:String = (cast getTextInputSelectionText((cast source)) : String);
-          if ((cast ((cast _Runtime.field(copyText, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callOptionalValue(({ final __structural2 = options; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var onCopy:Null<String->Void>; }).onCopy; }), cast ([copyText] : Array<Dynamic>)); }
+          if ((cast ((cast _Runtime.field(copyText, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ({ final __optionalOwner3 = options; if (__optionalOwner3 != null) { final __optionalCall2 = (cast __optionalOwner3 : { @:optional var onCopy:Null<String->Void>; }).onCopy; if (__optionalCall2 != null) __optionalCall2(copyText); } }); }
           return cast true;
         }
       }
@@ -236,8 +236,8 @@ class TextInputEditing {
         {
           var cutText:String = (cast getTextInputSelectionText((cast source)) : String);
           if ((cast ((cast _Runtime.field(cutText, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-            _Runtime.callOptionalValue(({ final __structural3 = options; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var onCopy:Null<String->Void>; }).onCopy; }), cast ([cutText] : Array<Dynamic>));
-            replaceSelectedTextInput((cast source), (cast '' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+            ({ final __optionalOwner5 = options; if (__optionalOwner5 != null) { final __optionalCall4 = (cast __optionalOwner5 : { @:optional var onCopy:Null<String->Void>; }).onCopy; if (__optionalCall4 != null) __optionalCall4(cutText); } });
+            replaceSelectedTextInput((cast source), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
           }
           return cast true;
         }
@@ -263,15 +263,15 @@ class TextInputEditing {
         return cast true;
       }
       else if (__switchValue == 'down') {
-        moveTextInputCaretDown((cast source), (cast ({ final __structural4 = options; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var layout:Null<TextLayoutResult>; }).layout; })), (cast _Runtime.field(data, 'shiftKey') : Bool));
+        moveTextInputCaretDown((cast source), (cast ({ final __structural6 = options; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var layout:Null<TextLayoutResult>; }).layout; })), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'end') {
-        moveTextInputCaretToLineEnd((cast source), (cast ({ final __structural5 = options; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var layout:Null<TextLayoutResult>; }).layout; })), (cast _Runtime.field(data, 'shiftKey') : Bool));
+        moveTextInputCaretToLineEnd((cast source), (cast ({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var layout:Null<TextLayoutResult>; }).layout; })), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'home') {
-        moveTextInputCaretToLineStart((cast source), (cast ({ final __structural6 = options; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var layout:Null<TextLayoutResult>; }).layout; })), (cast _Runtime.field(data, 'shiftKey') : Bool));
+        moveTextInputCaretToLineStart((cast source), (cast ({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var layout:Null<TextLayoutResult>; }).layout; })), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'left') {
@@ -279,7 +279,7 @@ class TextInputEditing {
         return cast true;
       }
       else if (__switchValue == 'paste') {
-        insertTextInput((cast source), (cast _Runtime.coalesce(({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var clipboardText:Null<String>; }).clipboardText; }), function():Dynamic return cast '') : String));
+        insertTextInput((cast source), (cast _Runtime.coalesce(({ final __structural9 = options; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var clipboardText:Null<String>; }).clipboardText; }), function():Dynamic return cast '') : String));
         return cast true;
       }
       else if (__switchValue == 'return') {
@@ -296,7 +296,7 @@ class TextInputEditing {
         return cast true;
       }
       else if (__switchValue == 'up') {
-        moveTextInputCaretUp((cast source), (cast ({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var layout:Null<TextLayoutResult>; }).layout; })), (cast _Runtime.field(data, 'shiftKey') : Bool));
+        moveTextInputCaretUp((cast source), (cast ({ final __structural10 = options; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var layout:Null<TextLayoutResult>; }).layout; })), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'wordLeft') {
@@ -451,7 +451,7 @@ class TextInputEditing {
       (start = cast (end : Dynamic));
       (end = cast (swap : Dynamic));
     }
-    value = ((cast _Runtime.strictEquals(({ final __structural9 = options; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var applyInputRules:Null<Bool>; }).applyInputRules; }), true) : Bool) ? (cast (cast applyTextInputRestriction((cast source), (cast text : String), (cast (end - start) : Float)) : String) : Dynamic) : (cast text : Dynamic));
+    value = ((cast _Runtime.strictEquals(({ final __structural11 = options; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { @:optional var applyInputRules:Null<Bool>; }).applyInputRules; }), true) : Bool) ? (cast (cast applyTextInputRestriction((cast source), (cast text : String), (cast (end - start) : Float)) : String) : Dynamic) : (cast text : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals(start, end) : Bool)) : Bool)) { return; }
     state = (cast TextInputEditing.getInputState__textInputEditing((cast source)) : TextInputState);
     textBefore = (cast data : RichTextData).text;
@@ -461,8 +461,8 @@ class TextInputEditing {
     TextInputEditing.adjustTextFormatRanges__textInputEditing((cast (cast data : RichTextData).textFormatRanges), (cast (cast data : RichTextData).defaultTextFormat), (cast start : Float), (cast end : Float), (cast _Runtime.field(value, 'length') : Float));
     ((cast state : TextInputState).desiredCaretX = TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing);
     setTextInputSelection((cast source), (cast _Runtime.addNumbers(start, _Runtime.field(value, 'length')) : Float), (cast _Runtime.addNumbers(start, _Runtime.field(value, 'length')) : Float));
-    if ((cast ((cast !_Runtime.strictEquals(({ final __structural10 = options; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var skipHistory:Null<Bool>; }).skipHistory; }), true) : Bool) && (cast ((cast (cast state : TextInputState).historyLimit : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      TextInputEditing.recordTextInputEdit__textInputEditing((cast state), (cast textBefore : String), (cast (cast data : RichTextData).text : String), (cast caretBefore : Float), (cast selectionBefore : Float), (cast _Runtime.coalesce(({ final __structural11 = options; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { @:optional var mergeKind:Null<String>; }).mergeKind; }), function():Dynamic return cast null)));
+    if ((cast ((cast !_Runtime.strictEquals(({ final __structural12 = options; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { @:optional var skipHistory:Null<Bool>; }).skipHistory; }), true) : Bool) && (cast ((cast (cast state : TextInputState).historyLimit : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      TextInputEditing.recordTextInputEdit__textInputEditing((cast state), (cast textBefore : String), (cast (cast data : RichTextData).text : String), (cast caretBefore : Float), (cast selectionBefore : Float), (cast _Runtime.coalesce(({ final __structural13 = options; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { @:optional var mergeKind:Null<String>; }).mergeKind; }), function():Dynamic return cast null)));
     }
     invalidateNodeAppearance((cast source));
   }

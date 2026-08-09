@@ -55,7 +55,7 @@ class GlExternalTexture {
     handle = ({ final __collection5:Dynamic = (cast runtime : GlRenderStateRuntime).glExternalTextureCache; __collection5 == null ? _Runtime.UNDEFINED : ((cast __collection5 : flighthq._internal._WeakMap<ExternalTexture, flighthq._internal.dom.WebGLTexture>).get(source)); });
     if ((cast _Runtime.strictEquals(handle, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     flighthq._internal.backend.WebGl2Backend.bindTexture((cast state : GlRenderState).gl, flighthq._internal.backend.WebGl2Backend.contextConstant((cast state : GlRenderState).gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), handle);
-    applyGlSamplerState((cast state), (cast runtime), (cast handle), (cast (cast texture : { var sampler:Sampler; }).sampler), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    applyGlSamplerState((cast state), (cast runtime), (cast handle), (cast (cast texture : { var sampler:Sampler; }).sampler), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast handle;
     return cast null;
   }

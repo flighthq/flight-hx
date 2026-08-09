@@ -29,7 +29,7 @@ class Tween {
   public static function applyTween<T:flighthq._internal._Object>(manager:TweenManager, target:T, propertyMap:NumericProps<T>):Void {
     var t:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
     var p:flighthq._internal._Record<String, Null<Float>> = cast _Runtime.UNDEFINED;
-    stopTweens((cast manager), (cast target), (cast propertyMap), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    stopTweens((cast manager), (cast target), (cast propertyMap), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     t = (cast target : flighthq._internal._Record<String, Float>);
     p = (cast propertyMap : flighthq._internal._Record<String, Null<Float>>);
     for (key in _Runtime.iterable(flighthq._internal.DynamicObject.keys(p))) {

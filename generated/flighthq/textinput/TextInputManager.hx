@@ -37,10 +37,10 @@ class TextInputManager {
   public static function connectInputToTextInput(input:TextInputSource, manager:flighthq.types.TextInputManager):Void->Void {
     var onKeyDown:InputKeyboardData->Bool = cast _Runtime.UNDEFINED;
     var onTextInput:InputTextData->Bool = cast _Runtime.UNDEFINED;
-    onKeyDown = (cast function(data:InputKeyboardData):Bool return (cast dispatchTextInputKeyDown((cast manager), (cast data), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Bool));
+    onKeyDown = (cast function(data:InputKeyboardData):Bool return (cast dispatchTextInputKeyDown((cast manager), (cast data), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Bool));
     onTextInput = (cast function(data:InputTextData):Bool return (cast dispatchTextInput((cast manager), (cast data.text : String)) : Bool));
-    connectSignal((cast (cast input : TextInputSource).onKeyDown), (cast onKeyDown), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
-    connectSignal((cast (cast input : TextInputSource).onTextInput), (cast onTextInput), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    connectSignal((cast (cast input : TextInputSource).onKeyDown), (cast onKeyDown), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast (cast input : TextInputSource).onTextInput), (cast onTextInput), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
     return cast function():Void {
       disconnectSignal((cast (cast input : TextInputSource).onKeyDown), (cast onKeyDown));
       disconnectSignal((cast (cast input : TextInputSource).onTextInput), (cast onTextInput));
@@ -104,7 +104,7 @@ class TextInputManager {
     var target:Null<RichText> = cast _Runtime.UNDEFINED;
     target = (cast manager : flighthq.types.TextInputManager).focused;
     if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast (cast target : RichText).enabled : Bool) : Bool)) : Bool)) { return; }
-    setRichTextScrollV((cast target), (cast _Runtime.addNumbers((cast (cast target : RichText).data : RichTextData).scrollV, HxMath.round(deltaLines)) : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+    setRichTextScrollV((cast target), (cast _Runtime.addNumbers((cast (cast target : RichText).data : RichTextData).scrollV, HxMath.round(deltaLines)) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
   }
 
   public static function focusTextInput(manager:flighthq.types.TextInputManager, target:RichText):Void {

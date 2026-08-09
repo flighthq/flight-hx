@@ -51,7 +51,7 @@ typedef Md2Frame__md2Parse = { var name:String; var normals:flighthq._internal._
 
 class Md2Parse {
   public static function createScene3DFromMd2(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Scene3D {
-    return cast (cast createScene3DFromDocument((cast (cast parseMd2((cast bytes), (cast diagnostics)) : Scene3DDocument)), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Scene3D);
+    return cast (cast createScene3DFromDocument((cast (cast parseMd2((cast bytes), (cast diagnostics)) : Scene3DDocument)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene3D);
     return cast null;
   }
 
@@ -127,11 +127,11 @@ class Md2Parse {
     offFrames = _Runtime.callProperty(view, 'getInt32', cast ([56.0, true] : Array<Dynamic>));
     declaredEnd = _Runtime.callProperty(view, 'getInt32', cast ([64.0, true] : Array<Dynamic>));
     if ((cast ((cast numFrames : Float) < (cast 1.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'md2.no-frames' : String), (cast 'parseMd2' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'md2.no-frames' : String), (cast 'parseMd2' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       return cast (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);
     }
     if ((cast ((cast numTriangles : Float) < (cast 1.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'md2.no-triangles' : String), (cast 'parseMd2' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'md2.no-triangles' : String), (cast 'parseMd2' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       return cast (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);
     }
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast numVertices : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast numTexCoords : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast numSkins : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast offSkins : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast offTexCoords : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast offTriangles : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast offFrames : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
@@ -221,7 +221,7 @@ class Md2Parse {
       reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'md2.triangle-texcoord-index-out-of-range' : String), (cast 'parseMd2' : String), (cast { corners: outOfRangeTexCoordCorners }));
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(indices, 'length'), 0.0) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'md2.no-valid-triangles' : String), (cast 'parseMd2' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'md2.no-valid-triangles' : String), (cast 'parseMd2' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
       return cast (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);
     }
     document = (cast Md2Parse.emptyMd2Document__md2Parse() : Scene3DDocument);

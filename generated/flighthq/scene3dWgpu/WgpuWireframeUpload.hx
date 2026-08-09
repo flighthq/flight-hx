@@ -18,7 +18,7 @@ class WgpuWireframeUpload {
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var lines:flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array> = cast _Runtime.UNDEFINED;
     var lineIndexBuffer:flighthq._internal.dom.GPUBuffer = cast _Runtime.UNDEFINED;
-    meshUpload = (cast ensureWgpuMeshUpload((cast state), (cast geometry), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool)) : Null<WgpuMeshUpload>);
+    meshUpload = (cast ensureWgpuMeshUpload((cast state), (cast geometry), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<WgpuMeshUpload>);
     if ((cast _Runtime.strictEquals(meshUpload, null) : Bool)) { return cast null; }
     perState = ((cast WgpuWireframeUpload.wireframeUploads__wgpuWireframeUpload : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.WgpuWireframePipeline.WgpuWireframeUpload>>).get(state));
     if ((cast _Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {

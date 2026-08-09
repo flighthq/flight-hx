@@ -51,7 +51,7 @@ class SceneDocument {
     var roots:Array<Float> = cast _Runtime.UNDEFINED;
     nodes = (cast SceneDocument.buildDocumentNodes__sceneDocument((cast document)) : Array<Node3D>);
     SceneDocument.applyDocumentSkins__sceneDocument((cast document), (cast nodes));
-    scene = (cast createScene3D((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Scene3D);
+    scene = (cast createScene3D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene3D);
     roots = _Runtime.coalesce(({ final __structural0 = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'scenes'), sceneIndex); __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : Scene3DDocumentScene).rootNodes; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var r:Float = 0.0;
@@ -77,7 +77,7 @@ class SceneDocument {
     {
       var s:Float = 0.0;
       while ((cast ((cast s : Float) < (cast _Runtime.field(_Runtime.field(document, 'scenes'), 'length') : Float)) : Bool)) {
-        var scene:Scene3D = (cast createScene3D((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Scene3D);
+        var scene:Scene3D = (cast createScene3D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene3D);
         var roots:Array<Float> = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'scenes'), s) : Scene3DDocumentScene).rootNodes;
         {
           var r:Float = 0.0;
@@ -173,7 +173,7 @@ class SceneDocument {
           }
         }
         if ((cast _Runtime.strictEquals(_Runtime.field(channels, 'length'), 0.0) : Bool)) { a++; continue; }
-        _Runtime.setIndex(scene.animations, _Runtime.coalesce((cast source : Scene3DDocumentAnimation).name, function():Dynamic return cast 'animation' + Std.string(a) + ''), (cast createAnimationClip((cast channels), (cast (cast source : Scene3DDocumentAnimation).duration), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : AnimationClip));
+        _Runtime.setIndex(scene.animations, _Runtime.coalesce((cast source : Scene3DDocumentAnimation).name, function():Dynamic return cast 'animation' + Std.string(a) + ''), (cast createAnimationClip((cast channels), (cast (cast source : Scene3DDocumentAnimation).duration), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : AnimationClip));
         a++;
       }
     }

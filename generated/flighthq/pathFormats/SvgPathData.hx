@@ -273,7 +273,7 @@ class SvgPathData {
 
   public static function parseSvgPathData(d:String):Null<Path> {
     var path:Path = cast _Runtime.UNDEFINED;
-    path = (cast createPath((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Path);
+    path = (cast createPath(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Path);
     if ((cast !(cast (cast appendSvgPathData((cast path), (cast d : String)) : Bool) : Bool) : Bool)) { return cast null; }
     return cast path;
     return cast null;

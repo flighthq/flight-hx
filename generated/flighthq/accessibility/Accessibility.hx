@@ -209,7 +209,7 @@ class Accessibility {
 
   @:noCompletion
   public static function getAccessibilityBackend():AccessibilityBackend {
-    if ((cast _Runtime.strictEquals(Accessibility._backend__accessibility, null) : Bool)) { (Accessibility._backend__accessibility = cast ((cast createWebAccessibilityBackend((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : AccessibilityBackend) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(Accessibility._backend__accessibility, null) : Bool)) { (Accessibility._backend__accessibility = cast ((cast createWebAccessibilityBackend(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : AccessibilityBackend) : Dynamic)); }
     return cast Accessibility._backend__accessibility;
     return cast null;
   }
