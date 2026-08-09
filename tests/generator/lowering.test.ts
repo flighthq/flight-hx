@@ -1618,10 +1618,22 @@ describe('TypeScript lowering and Haxe emission', () => {
           private add(delta: number): void {
             this.value += delta;
           }
+          read(tolerance: number = 0.25): number {
+            return tolerance;
+          }
         }
-        export function advance(counter: Counter, maybe: Counter | undefined, dynamic: any): void {
+        export function advance(
+          counter: Counter,
+          maybe: Counter | undefined,
+          dynamic: any,
+          options?: { tolerance?: number },
+        ): void {
           counter.bump(1);
           maybe?.bump(2);
+          counter.read();
+          counter.read(options?.tolerance);
+          maybe?.read();
+          maybe?.read(options?.tolerance);
           counter.bump(...([4] as [number]));
           dynamic.bump(3);
         }
@@ -1642,6 +1654,13 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('(cast counter : Counter).bump(1.0)');
     expect(output).toContain('(cast __generatedClass');
     expect(output).toContain(': Counter).bump(2.0)');
+    expect(output).toContain(
+      "(cast counter : Counter).read(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end)",
+    );
+    expect(output).toContain('(cast counter : Counter).read(#if js (cast ({ final __structural');
+    expect(output).toContain(': Float) #else (cast ({ final __structural');
+    expect(output).toContain(': Null<Float>) #end)');
+    expect(output).toMatch(/\(cast __generatedClass\d+ : Counter\)\.read\(#if js/);
     expect(output).toContain("_Runtime.callProperty(counter, 'bump', _Runtime.concatArrays");
     expect(output).toContain("_Runtime.callProperty(dynamic_, 'bump'");
     expect(output).not.toContain("_Runtime.callProperty(counter, 'bump', cast ([1.0]");

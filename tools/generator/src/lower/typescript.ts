@@ -3034,12 +3034,13 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
       !node.arguments.some(ts.isSpreadElement) &&
       checkerCallIsTyped(node.expression, context);
     const directCalleeType = direct ? directCallReceiverCast(node, context) : undefined;
-    const adaptStructuralCall =
+    const adaptTypedPropertyCall =
       callee.kind === 'property' &&
       callee.name !== 'set' &&
-      Boolean(callee.typedStructBinding || callee.structuralReceiverType);
+      Boolean(callee.generatedClass || callee.typedStructBinding || callee.structuralReceiverType);
+    const generatedClassCall = callee.kind === 'property' && Boolean(callee.generatedClass);
     const checkedCall =
-      (direct || adaptStructuralCall) && checkerCallIsTyped(node.expression, context)
+      generatedClassCall || ((direct || adaptTypedPropertyCall) && checkerCallIsTyped(node.expression, context))
         ? directCallArguments(node, context)
         : undefined;
     return {

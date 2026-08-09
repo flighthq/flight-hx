@@ -3372,7 +3372,13 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     if (expression.callee.generatedClass) {
       const generatedClass = expression.callee.generatedClass;
       const call = (target: string) =>
-        `(cast ${target} : ${safeName(generatedClass)}).${safeName(name)}(${expression.arguments.map(emitExpression).join(', ')})`;
+        `(cast ${target} : ${safeName(generatedClass)}).${safeName(name)}(${expression.arguments
+          .map((argument, index) =>
+            expression.omittedArguments?.[index] || expression.undefinedArguments?.[index]
+              ? emitCheckedCallArgument(expression, argument, index)
+              : emitExpression(argument),
+          )
+          .join(', ')})`;
       if (!(expression.optional || expression.callee.optional)) return call(owner);
       const temporary = `__generatedClass${String(temporaryIndex++)}`;
       return `({ final ${temporary}:Dynamic = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${call(temporary)}; })`;
