@@ -26,7 +26,7 @@ class RichTextQuery {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
         var lineTop:Float = (cast RichTextQuery.getLineOffsetY__richTextQuery((cast layout), (cast i : Float)) : Float);
-        var lineBottom:Float = _Runtime.addNumbers(lineTop, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0));
+        var lineBottom:Float = _Runtime.addNumbers(lineTop, _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0));
         var dist:Float = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
         if ((cast ((cast dist : Float) < (cast closestDist : Float)) : Bool)) {
           (closestDist = cast (dist : Dynamic));
@@ -55,7 +55,7 @@ class RichTextQuery {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field((cast group : TextLayoutGroup).positions, 'length') : Float)) : Bool)) {
-            var advance:Float = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast group : TextLayoutGroup).positions, i), function():Dynamic return cast 0.0);
+            var advance:Float = _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast group : TextLayoutGroup).positions : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0);
             if ((cast ((cast x : Float) <= (cast (gx + (advance / 2.0)) : Float)) : Bool)) { return cast ((cast group : TextLayoutGroup).startIndex + i); }
             (gx = cast ((gx + advance) : Dynamic));
             i++;
@@ -91,7 +91,7 @@ class RichTextQuery {
       (right = cast (HxMath.max(right, ((cast group : TextLayoutGroup).offsetX + (cast group : TextLayoutGroup).width)) : Dynamic));
     }
     if ((cast !(cast found : Bool) : Bool)) { return cast null; }
-    return cast { ascent: ascent, descent: descent, height: _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), lineIndex), function():Dynamic return cast ((ascent + descent) + leading)), leading: leading, width: (right - x), x: ((cast _Runtime.strictEquals(x, HxMath.POSITIVE_INFINITY) : Bool) ? (cast 0.0 : Dynamic) : (cast x : Dynamic)) };
+    return cast { ascent: ascent, descent: descent, height: _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast lineIndex : Float)), function():Dynamic return cast ((ascent + descent) + leading)), leading: leading, width: (right - x), x: ((cast _Runtime.strictEquals(x, HxMath.POSITIVE_INFINITY) : Bool) ? (cast 0.0 : Dynamic) : (cast x : Dynamic)) };
     return cast null;
   }
 
@@ -107,11 +107,11 @@ class RichTextQuery {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast limit : Float)) : Bool)) {
-        (x = cast ((x + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast group : TextLayoutGroup).positions, i), function():Dynamic return cast 0.0)) : Dynamic));
+        (x = cast ((x + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast group : TextLayoutGroup).positions : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
     }
-    charWidth = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast group : TextLayoutGroup).positions, (charIndex - (cast group : TextLayoutGroup).startIndex)), function():Dynamic return cast 0.0);
+    charWidth = _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast group : TextLayoutGroup).positions : Array<Float>), (cast (charIndex - (cast group : TextLayoutGroup).startIndex) : Float)), function():Dynamic return cast 0.0);
     ((cast out : Rectangle).x = x);
     ((cast out : Rectangle).y = (cast group : TextLayoutGroup).offsetY);
     ((cast out : Rectangle).width = charWidth);
@@ -143,7 +143,7 @@ class RichTextQuery {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
         var lineTop:Float = (cast RichTextQuery.getLineOffsetY__richTextQuery((cast layout), (cast i : Float)) : Float);
-        var lineBottom:Float = _Runtime.addNumbers(lineTop, flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i));
+        var lineBottom:Float = (lineTop + flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast i : Float)));
         var dist:Float = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
         if ((cast ((cast dist : Float) < (cast closestDist : Float)) : Bool)) {
           (closestDist = cast (dist : Dynamic));
@@ -246,7 +246,7 @@ class RichTextQuery {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast limit : Float)) : Bool)) {
-        (x = cast ((x + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0)) : Dynamic));
+        (x = cast ((x + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(group, 'positions') : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
     }
@@ -271,7 +271,7 @@ class RichTextQuery {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast lineIndex : Float)) : Bool)) {
-        (y = cast ((y + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0)) : Dynamic));
+        (y = cast ((y + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
     }

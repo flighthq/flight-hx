@@ -22,9 +22,9 @@ class WgpuDitherEffect {
     levels = _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 4.0);
     pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'stylization.dither' : String), (cast WgpuDitherEffect.DITHER_FRAGMENT_WGSL__wgpuDitherEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, HxMath.max(2.0, levels));
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast HxMath.max(2.0, levels) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast _Runtime.field(source, 'width') : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast _Runtime.field(source, 'height') : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 

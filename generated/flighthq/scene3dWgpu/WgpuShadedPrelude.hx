@@ -145,10 +145,10 @@ class WgpuShadedPrelude {
     _Runtime.fill(data, 0.0, 0, null, 1);
     (cast data : flighthq._internal._Float32Array).set(diffuse, Std.int(0.0));
     (cast data : flighthq._internal._Float32Array).set(specular, Std.int(4.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(data, 8.0, _Runtime.field(material, 'shininess'));
-    flighthq._internal._StaticIndex.writeFloat32Array(data, 9.0, _Runtime.field(material, 'alphaCutoff'));
-    flighthq._internal._StaticIndex.writeFloat32Array(data, 10.0, (cast getWgpuScene3DTime((cast state)) : Float));
-    flighthq._internal._StaticIndex.writeFloat32Array(data, 11.0, _Runtime.field(material, 'normalScale'));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast _Runtime.field(material, 'shininess') : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast _Runtime.field(material, 'alphaCutoff') : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 10.0 : Float), (cast (cast getWgpuScene3DTime((cast state)) : Float) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 11.0 : Float), (cast _Runtime.field(material, 'normalScale') : Float));
     WgpuShadedPrelude.writeModifierUniforms__wgpuShadedPrelude((cast data), (cast 12.0 : Float), (cast plan));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast binding : ShadedBinding__wgpuShadedPrelude).buffer, 0.0, _Runtime.field(data, 'buffer'), 0.0, byteLength] : Array<Dynamic>));
     stashWgpuUvTransform((cast state), (cast _Runtime.field(material, 'diffuseMap')));
@@ -363,20 +363,20 @@ class WgpuShadedPrelude {
   }
 
   public static function copyColorRgb__wgpuShadedPrelude(out:flighthq._internal._Float32Array, offset:Float):Void {
-    flighthq._internal._StaticIndex.writeFloat32Array(out, offset, flighthq._internal._StaticIndex.readArray(WgpuShadedPrelude._color__wgpuShadedPrelude, 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 1.0), flighthq._internal._StaticIndex.readArray(WgpuShadedPrelude._color__wgpuShadedPrelude, 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 2.0), flighthq._internal._StaticIndex.readArray(WgpuShadedPrelude._color__wgpuShadedPrelude, 2.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast offset : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuShadedPrelude._color__wgpuShadedPrelude : Array<Float>), (cast 0.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuShadedPrelude._color__wgpuShadedPrelude : Array<Float>), (cast 1.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuShadedPrelude._color__wgpuShadedPrelude : Array<Float>), (cast 2.0 : Float)) : Float));
   }
 
   @:noCompletion
   public static final animatedNormalWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:AnimatedNormalModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : AnimatedNormalModifier);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, base, (cast _Runtime.field(value, 'scroll') : { var x:Float; }).x);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 1.0), (cast _Runtime.field(value, 'scroll') : { var y:Float; }).y);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 2.0), _Runtime.coalesce(_Runtime.field(value, 'strength'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(({ final __typedStruct6 = _Runtime.field(value, 'secondaryScroll'); __typedStruct6 == null ? _Runtime.UNDEFINED : (cast __typedStruct6 : { var x:Float; }).x; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(({ final __typedStruct7 = _Runtime.field(value, 'secondaryScroll'); __typedStruct7 == null ? _Runtime.UNDEFINED : (cast __typedStruct7 : { var y:Float; }).y; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast base : Float), (cast (cast _Runtime.field(value, 'scroll') : { var x:Float; }).x : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 1.0) : Float), (cast (cast _Runtime.field(value, 'scroll') : { var y:Float; }).y : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 2.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'strength'), function():Dynamic return cast 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 4.0) : Float), (cast _Runtime.coalesce(({ final __typedStruct6 = _Runtime.field(value, 'secondaryScroll'); __typedStruct6 == null ? _Runtime.UNDEFINED : (cast __typedStruct6 : { var x:Float; }).x; }), function():Dynamic return cast 0.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 5.0) : Float), (cast _Runtime.coalesce(({ final __typedStruct7 = _Runtime.field(value, 'secondaryScroll'); __typedStruct7 == null ? _Runtime.UNDEFINED : (cast __typedStruct7 : { var y:Float; }).y; }), function():Dynamic return cast 0.0) : Float));
   }, contribution: function(modifier:Modifier, _index:Float, context:WgpuModifierCompileContext):WgpuModifierContribution {
     var value:AnimatedNormalModifier = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
@@ -408,9 +408,9 @@ class WgpuShadedPrelude {
   public static final dissolveWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:DissolveModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : DissolveModifier);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, base, _Runtime.field(value, 'threshold'));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 1.0), _Runtime.coalesce(_Runtime.field(value, 'edgeWidth'), function():Dynamic return cast 0.05));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 2.0), _Runtime.coalesce(_Runtime.field(value, 'scale'), function():Dynamic return cast 8.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast base : Float), (cast _Runtime.field(value, 'threshold') : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 1.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'edgeWidth'), function():Dynamic return cast 0.05) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 2.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'scale'), function():Dynamic return cast 8.0) : Float));
     (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude), (cast _Runtime.field(value, 'edgeColor') : Float)) : LinearColor);
     WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out), (cast (base + 4.0) : Float));
   }, contribution: function(modifier:Modifier, _index:Float, context:WgpuModifierCompileContext):WgpuModifierContribution {
@@ -441,9 +441,9 @@ class WgpuShadedPrelude {
     value = (cast modifier : EmissiveModifier);
     (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude), (cast _Runtime.field(value, 'color') : Float)) : LinearColor);
     WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out), (cast base : Float));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 3.0), _Runtime.field(value, 'strength'));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), ((cast _Runtime.strictEquals(_Runtime.field(value, 'facing'), (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).AwayFromLight) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(_Runtime.field(value, 'facingSoftness'), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 3.0) : Float), (cast _Runtime.field(value, 'strength') : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 4.0) : Float), (cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'facing'), (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).AwayFromLight) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 5.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'facingSoftness'), function():Dynamic return cast 0.0) : Float));
   }, contribution: function(modifier:Modifier, _index:Float, context:WgpuModifierCompileContext):WgpuModifierContribution {
     var value:EmissiveModifier = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
@@ -474,9 +474,9 @@ class WgpuShadedPrelude {
     value = (cast modifier : EnvReflectModifier);
     (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude), (cast _Runtime.field(value, 'tint') : Float)) : LinearColor);
     WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out), (cast base : Float));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 3.0), _Runtime.coalesce(_Runtime.field(value, 'intensity'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(_Runtime.field(value, 'fresnelBias'), function():Dynamic return cast 0.04));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(_Runtime.field(value, 'roughness'), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 3.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'intensity'), function():Dynamic return cast 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 4.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'fresnelBias'), function():Dynamic return cast 0.04) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 5.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'roughness'), function():Dynamic return cast 0.0) : Float));
   }, contribution: function(_modifier:Modifier, _index:Float, context:WgpuModifierCompileContext):WgpuModifierContribution {
     var base:Float = cast _Runtime.UNDEFINED;
     base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
@@ -490,9 +490,9 @@ class WgpuShadedPrelude {
     value = (cast modifier : FogModifier);
     (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude), (cast _Runtime.field(value, 'color') : Float)) : LinearColor);
     WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out), (cast base : Float));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(_Runtime.field(value, 'density'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(_Runtime.field(value, 'near'), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 6.0), _Runtime.coalesce(_Runtime.field(value, 'far'), function():Dynamic return cast 1.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 4.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'density'), function():Dynamic return cast 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 5.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'near'), function():Dynamic return cast 0.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 6.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'far'), function():Dynamic return cast 1.0) : Float));
   }, contribution: function(modifier:Modifier, _index:Float, context:WgpuModifierCompileContext):WgpuModifierContribution {
     var value:FogModifier = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
@@ -515,9 +515,9 @@ class WgpuShadedPrelude {
     value = (cast modifier : RimModifier);
     (cast unpackColorToLinear((cast WgpuShadedPrelude._color__wgpuShadedPrelude), (cast _Runtime.field(value, 'color') : Float)) : LinearColor);
     WgpuShadedPrelude.copyColorRgb__wgpuShadedPrelude((cast out), (cast base : Float));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 3.0), _Runtime.coalesce(_Runtime.field(value, 'power'), function():Dynamic return cast 3.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(_Runtime.field(value, 'intensity'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(_Runtime.field(value, 'bias'), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 3.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'power'), function():Dynamic return cast 3.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 4.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'intensity'), function():Dynamic return cast 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 5.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'bias'), function():Dynamic return cast 0.0) : Float));
   }, contribution: function(_modifier:Modifier, _index:Float, context:WgpuModifierCompileContext):WgpuModifierContribution {
     var base:Float = cast _Runtime.UNDEFINED;
     base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
@@ -529,8 +529,8 @@ class WgpuShadedPrelude {
   public static final toonWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:ToonModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : ToonModifier);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, base, HxMath.max(_Runtime.field(value, 'steps'), 2.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 1.0), _Runtime.coalesce(_Runtime.field(value, 'smoothness'), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast base : Float), (cast HxMath.max(_Runtime.field(value, 'steps'), 2.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 1.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'smoothness'), function():Dynamic return cast 0.0) : Float));
   }, contribution: function(_modifier:Modifier, _index:Float, context:WgpuModifierCompileContext):WgpuModifierContribution {
     var base:Float = cast _Runtime.UNDEFINED;
     base = _Runtime.divideNumbers(_Runtime.field(context, 'uniformBase'), 4.0);
@@ -542,15 +542,15 @@ class WgpuShadedPrelude {
   public static final vertexDisplaceWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:VertexDisplaceModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : VertexDisplaceModifier);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, base, _Runtime.field(value, 'amplitude'));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 1.0), _Runtime.coalesce(_Runtime.field(value, 'frequency'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 2.0), _Runtime.coalesce(_Runtime.field(value, 'speed'), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 4.0), _Runtime.coalesce(({ final __typedStruct8 = _Runtime.field(value, 'axis'); __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var x:Float; }).x; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 5.0), _Runtime.coalesce(({ final __typedStruct9 = _Runtime.field(value, 'axis'); __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var y:Float; }).y; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 6.0), _Runtime.coalesce(({ final __typedStruct10 = _Runtime.field(value, 'axis'); __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var z:Float; }).z; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 8.0), _Runtime.coalesce(({ final __typedStruct11 = _Runtime.field(value, 'direction'); __typedStruct11 == null ? _Runtime.UNDEFINED : (cast __typedStruct11 : { var x:Float; }).x; }), function():Dynamic return cast 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 9.0), _Runtime.coalesce(({ final __typedStruct12 = _Runtime.field(value, 'direction'); __typedStruct12 == null ? _Runtime.UNDEFINED : (cast __typedStruct12 : { var y:Float; }).y; }), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (base + 10.0), _Runtime.coalesce(({ final __typedStruct13 = _Runtime.field(value, 'direction'); __typedStruct13 == null ? _Runtime.UNDEFINED : (cast __typedStruct13 : { var z:Float; }).z; }), function():Dynamic return cast 0.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast base : Float), (cast _Runtime.field(value, 'amplitude') : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 1.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'frequency'), function():Dynamic return cast 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 2.0) : Float), (cast _Runtime.coalesce(_Runtime.field(value, 'speed'), function():Dynamic return cast 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 4.0) : Float), (cast _Runtime.coalesce(({ final __typedStruct8 = _Runtime.field(value, 'axis'); __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var x:Float; }).x; }), function():Dynamic return cast 0.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 5.0) : Float), (cast _Runtime.coalesce(({ final __typedStruct9 = _Runtime.field(value, 'axis'); __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var y:Float; }).y; }), function():Dynamic return cast 0.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 6.0) : Float), (cast _Runtime.coalesce(({ final __typedStruct10 = _Runtime.field(value, 'axis'); __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var z:Float; }).z; }), function():Dynamic return cast 0.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 8.0) : Float), (cast _Runtime.coalesce(({ final __typedStruct11 = _Runtime.field(value, 'direction'); __typedStruct11 == null ? _Runtime.UNDEFINED : (cast __typedStruct11 : { var x:Float; }).x; }), function():Dynamic return cast 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 9.0) : Float), (cast _Runtime.coalesce(({ final __typedStruct12 = _Runtime.field(value, 'direction'); __typedStruct12 == null ? _Runtime.UNDEFINED : (cast __typedStruct12 : { var y:Float; }).y; }), function():Dynamic return cast 0.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + 10.0) : Float), (cast _Runtime.coalesce(({ final __typedStruct13 = _Runtime.field(value, 'direction'); __typedStruct13 == null ? _Runtime.UNDEFINED : (cast __typedStruct13 : { var z:Float; }).z; }), function():Dynamic return cast 0.0) : Float));
   }, contribution: function(modifier:Modifier, _index:Float, context:WgpuModifierCompileContext):WgpuModifierContribution {
     var value:VertexDisplaceModifier = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;

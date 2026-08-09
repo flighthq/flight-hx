@@ -59,11 +59,11 @@ class BooleanPaths {
     ((cast path : Path).winding = 'nonZero');
     for (ring in _Runtime.iterable(contours)) {
       if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-      appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readArray(ring, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, 1.0) : Float));
+      appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 1.0 : Float)) : Float));
       {
         var i:Float = 2.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readArray(ring, i) : Float), (cast flighthq._internal._StaticIndex.readArray(ring, (i + 1.0)) : Float));
+          appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast (i + 1.0) : Float)) : Float));
           (i = cast ((i + 2.0) : Dynamic));
         }
       }

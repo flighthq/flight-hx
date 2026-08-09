@@ -20,8 +20,8 @@ class GetBidiRuns {
     {
       var i:Float = 1.0;
       while ((cast ((cast i : Float) <= (cast length : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.strictEquals(i, length) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(levels, i), flighthq._internal._StaticIndex.readUint8Array(levels, start)) : Bool)) : Bool)) {
-          var level:Float = flighthq._internal._StaticIndex.readUint8Array(levels, start);
+        if ((cast ((cast _Runtime.strictEquals(i, length) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast levels : flighthq._internal._UInt8Array), (cast i : Float)), flighthq._internal._StaticIndex.readUint8ArrayTyped((cast levels : flighthq._internal._UInt8Array), (cast start : Float))) : Bool)) : Bool)) {
+          var level:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast levels : flighthq._internal._UInt8Array), (cast start : Float));
           _Runtime.callProperty(runs, 'push', cast ([{ start: start, end: i, level: level, direction: ((cast _Runtime.strictEquals(_Runtime.fmod(level, 2.0), 0.0) : Bool) ? (cast 'ltr' : Dynamic) : (cast 'rtl' : Dynamic)) }] : Array<Dynamic>));
           (start = cast (i : Dynamic));
         }

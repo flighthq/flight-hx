@@ -35,14 +35,14 @@ class IkConstraint2D {
     world = (cast skeleton : Skeleton2D).worldMatrices;
     target = _Runtime.field(ik, 'targetBoneIndex');
     if ((cast ((cast ((cast target : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast target : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool)) { return; }
-    targetX = flighthq._internal._StaticIndex.readFloat32Array(world, ((target * IkConstraint2D.MATRIX_STRIDE__ikConstraint2D) + 4.0));
-    targetY = flighthq._internal._StaticIndex.readFloat32Array(world, ((target * IkConstraint2D.MATRIX_STRIDE__ikConstraint2D) + 5.0));
+    targetX = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast ((target * IkConstraint2D.MATRIX_STRIDE__ikConstraint2D) + 4.0) : Float));
+    targetY = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast ((target * IkConstraint2D.MATRIX_STRIDE__ikConstraint2D) + 5.0) : Float));
     chain = _Runtime.field(ik, 'boneIndices');
     if ((cast _Runtime.strictEquals(_Runtime.field(chain, 'length'), 1.0) : Bool)) {
-      IkConstraint2D.solveSkeleton2DIkChain1__ikConstraint2D((cast skeleton), (cast flighthq._internal._StaticIndex.readArray(chain, 0.0) : Float), (cast targetX : Float), (cast targetY : Float), (cast ik));
+      IkConstraint2D.solveSkeleton2DIkChain1__ikConstraint2D((cast skeleton), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast chain : Array<Float>), (cast 0.0 : Float)) : Float), (cast targetX : Float), (cast targetY : Float), (cast ik));
       return;
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(chain, 'length'), 2.0) : Bool)) { IkConstraint2D.solveSkeleton2DIkChain2__ikConstraint2D((cast skeleton), (cast flighthq._internal._StaticIndex.readArray(chain, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(chain, 1.0) : Float), (cast targetX : Float), (cast targetY : Float), (cast ik)); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(chain, 'length'), 2.0) : Bool)) { IkConstraint2D.solveSkeleton2DIkChain2__ikConstraint2D((cast skeleton), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast chain : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast chain : Array<Float>), (cast 1.0 : Float)) : Float), (cast targetX : Float), (cast targetY : Float), (cast ik)); }
   }
 
   public static function solveSkeleton2DIkChain1__ikConstraint2D(skeleton:Skeleton2D, boneIndex:Float, targetX:Float, targetY:Float, ik:Skeleton2DIkConstraint):Void {
@@ -149,14 +149,14 @@ class IkConstraint2D {
     if ((cast ((cast parentIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast { x: x, y: y }; }
     world = _Runtime.field(skeleton, 'worldMatrices');
     p = (parentIndex * IkConstraint2D.MATRIX_STRIDE__ikConstraint2D);
-    a = flighthq._internal._StaticIndex.readFloat32Array(world, p);
-    b = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 1.0));
-    c = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 2.0));
-    d = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 3.0));
+    a = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast p : Float));
+    b = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 1.0) : Float));
+    c = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 2.0) : Float));
+    d = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 3.0) : Float));
     determinant = ((a * d) - (c * b));
     if ((cast ((cast HxMath.abs(determinant) : Float) < (cast IkConstraint2D.MINIMUM_DETERMINANT__ikConstraint2D : Float)) : Bool)) { return cast null; }
-    wx = _Runtime.subtractNumbers(x, flighthq._internal._StaticIndex.readFloat32Array(world, (p + 4.0)));
-    wy = _Runtime.subtractNumbers(y, flighthq._internal._StaticIndex.readFloat32Array(world, (p + 5.0)));
+    wx = (x - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 4.0) : Float)));
+    wy = (y - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 5.0) : Float)));
     return cast { x: (((d * wx) - (c * wy)) / determinant), y: (((a * wy) - (b * wx)) / determinant) };
     return cast null;
   }

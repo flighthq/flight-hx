@@ -362,12 +362,12 @@ class WgpuDraw {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
-        var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
+        var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float));
         var scale:Float = ((cast toPremultiplied : Bool) ? (cast (a / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(a, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (255.0 / a) : Dynamic)) : Dynamic));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), scale));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), scale));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), scale));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), a);
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast i : Float)) * scale) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float)) * scale) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float)) * scale) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float), (cast a : Float));
         (i = cast ((i + 4.0) : Dynamic));
       }
     }

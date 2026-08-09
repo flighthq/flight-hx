@@ -172,7 +172,7 @@ class CanvasShapeCommands {
       {
         var __switchValue = pc;
         if (__switchValue == 0.0 || __switchValue == 1.0) {
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float))] : Array<Dynamic>));
           (di = cast ((di + 2.0) : Dynamic));
           ((cast state : CanvasShapeDrawState).hasPendingPath = true);
           ((cast state : CanvasShapeDrawState).hasCurrentPoint = true);
@@ -182,7 +182,7 @@ class CanvasShapeCommands {
             flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
             ((cast state : CanvasShapeDrawState).hasCurrentPoint = true);
           }
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float))] : Array<Dynamic>));
           (di = cast ((di + 2.0) : Dynamic));
           ((cast state : CanvasShapeDrawState).hasPendingPath = true);
         }
@@ -191,12 +191,12 @@ class CanvasShapeCommands {
             flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
             ((cast state : CanvasShapeDrawState).hasCurrentPoint = true);
           }
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'quadraticCurveTo', cast ([flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0)), flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'quadraticCurveTo', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float))] : Array<Dynamic>));
           (di = cast ((di + 4.0) : Dynamic));
           ((cast state : CanvasShapeDrawState).hasPendingPath = true);
         }
         else if (__switchValue == 4.0) {
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float))] : Array<Dynamic>));
           (di = cast ((di + 4.0) : Dynamic));
           ((cast state : CanvasShapeDrawState).hasPendingPath = true);
           ((cast state : CanvasShapeDrawState).hasCurrentPoint = true);
@@ -206,7 +206,7 @@ class CanvasShapeCommands {
             flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
             ((cast state : CanvasShapeDrawState).hasCurrentPoint = true);
           }
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'lineTo', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float))] : Array<Dynamic>));
           (di = cast ((di + 4.0) : Dynamic));
           ((cast state : CanvasShapeDrawState).hasPendingPath = true);
         }
@@ -215,7 +215,7 @@ class CanvasShapeCommands {
             flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([0.0, 0.0] : Array<Dynamic>));
             ((cast state : CanvasShapeDrawState).hasCurrentPoint = true);
           }
-          flighthq._internal.backend.Canvas2dBackend.call(context, 'bezierCurveTo', cast ([flighthq._internal._StaticIndex.readArray(data, di), flighthq._internal._StaticIndex.readArray(data, (di + 1.0)), flighthq._internal._StaticIndex.readArray(data, (di + 2.0)), flighthq._internal._StaticIndex.readArray(data, (di + 3.0)), flighthq._internal._StaticIndex.readArray(data, (di + 4.0)), flighthq._internal._StaticIndex.readArray(data, (di + 5.0))] : Array<Dynamic>));
+          flighthq._internal.backend.Canvas2dBackend.call(context, 'bezierCurveTo', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 4.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 5.0) : Float))] : Array<Dynamic>));
           (di = cast ((di + 6.0) : Dynamic));
           ((cast state : CanvasShapeDrawState).hasPendingPath = true);
         }

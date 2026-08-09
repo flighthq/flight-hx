@@ -150,19 +150,19 @@ class GlRenderPass {
   public static function resolveGlClearColor__glRenderPass(state:GlRenderState, target:GlRenderTarget, index:Float, out:flighthq._internal._Float32Array):Void {
     var packed:Float = cast _Runtime.UNDEFINED;
     var bg:Array<Float> = cast _Runtime.UNDEFINED;
-    packed = flighthq._internal._StaticIndex.readArray(_Runtime.field(target, 'clearColors'), index);
+    packed = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(target, 'clearColors') : Array<Float>), (cast index : Float));
     if ((cast !_Runtime.strictEquals(packed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0));
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0));
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0));
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, ((_Runtime.toInt32(packed) & 255) / 255.0));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast ((_Runtime.toInt32(packed) & 255) / 255.0) : Float));
       return;
     }
     bg = (cast state : GlRenderState).backgroundColorRgba;
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(bg, 0.0), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(bg, 1.0), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(bg, 2.0), function():Dynamic return cast 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, ((cast ((cast _Runtime.field(bg, 'length') : Float) >= (cast 4.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(bg, 3.0) : Dynamic) : (cast 0.0 : Dynamic)));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast bg : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast bg : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 0.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast bg : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 0.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast ((cast ((cast _Runtime.field(bg, 'length') : Float) >= (cast 4.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast bg : Array<Float>), (cast 3.0 : Float)) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
   }
 
   public static function captureGlPassState__glRenderPass(state:GlRenderState):SavedGlPassState__glRenderPass {

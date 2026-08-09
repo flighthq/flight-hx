@@ -18,8 +18,8 @@ class GodRaysMath {
   }
 
   public static function computeGodRaysLightCenter(effect:GodRaysEffect, out:Array<Float>):Void {
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5))));
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5))));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5))) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5))) : Float));
   }
 
   public static function computeGodRaysSampleWeight(effect:GodRaysEffect, sampleIndex:Float):Float {
@@ -46,7 +46,7 @@ class GodRaysMath {
     samples = HxMath.max(1.0, _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 100.0));
     dx = (((cx - px) * density) / samples);
     dy = (((cy - py) * density) / samples);
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, dx);
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, dy);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast dx : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast dy : Float));
   }
 }

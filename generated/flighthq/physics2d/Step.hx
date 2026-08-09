@@ -239,7 +239,7 @@ class Step {
     {
       var contactAt:Float = start;
       while ((cast ((cast contactAt : Float) < (cast end : Float)) : Bool)) {
-        var contact:Physics2DContact = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).contacts, flighthq._internal._StaticIndex.readArray(indices, contactAt));
+        var contact:Physics2DContact = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).contacts, flighthq._internal._StaticIndex.readFloatArrayTyped((cast indices : Array<Float>), (cast contactAt : Float)));
         if ((cast _Runtime.strictEquals(contact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { contactAt++; continue; }
         if ((cast ((cast !(cast (cast contact : Physics2DContact).enabled : Bool) : Bool) || (cast (cast contact : Physics2DContact).sensor : Bool)) : Bool)) { contactAt++; continue; }
         var bodyA:Null<RigidBody2D> = (cast findPhysics2DBody((cast world), (cast (cast contact : Physics2DContact).bodyA : Float)) : Null<RigidBody2D>);
@@ -281,7 +281,7 @@ class Step {
     {
       var contactAt:Float = start;
       while ((cast ((cast contactAt : Float) < (cast end : Float)) : Bool)) {
-        var contact:Physics2DContact = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).contacts, flighthq._internal._StaticIndex.readArray(indices, contactAt));
+        var contact:Physics2DContact = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).contacts, flighthq._internal._StaticIndex.readFloatArrayTyped((cast indices : Array<Float>), (cast contactAt : Float)));
         if ((cast _Runtime.strictEquals(contact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { contactAt++; continue; }
         if ((cast ((cast !(cast (cast contact : Physics2DContact).enabled : Bool) : Bool) || (cast (cast contact : Physics2DContact).sensor : Bool)) : Bool)) { contactAt++; continue; }
         var bodyA:Null<RigidBody2D> = (cast findPhysics2DBody((cast world), (cast (cast contact : Physics2DContact).bodyA : Float)) : Null<RigidBody2D>);
@@ -407,12 +407,12 @@ class Step {
     {
       var island:Float = 0.0;
       while ((cast ((cast island : Float) < (cast _Runtime.field((cast world : Physics2DWorld).solveIslandRoots, 'length') : Float)) : Bool)) {
-        var start:Float = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandBodyStarts, island);
-        var end:Float = _Runtime.addNumbers(start, flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandBodyCounts, island));
+        var start:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandBodyStarts : Array<Float>), (cast island : Float));
+        var end:Float = (start + flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandBodyCounts : Array<Float>), (cast island : Float)));
         {
           var at:Float = start;
           while ((cast ((cast at : Float) < (cast end : Float)) : Bool)) {
-            var body:RigidBody2D = flighthq._internal._StaticIndex.readArray(bodies, flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandBodyIndices, at));
+            var body:RigidBody2D = flighthq._internal._StaticIndex.readArray(bodies, flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandBodyIndices : Array<Float>), (cast at : Float)));
             if ((cast !_Runtime.strictEquals((cast body : RigidBody2D).type, 'dynamic') : Bool)) { at++; continue; }
             ((cast body : RigidBody2D).velocityX += ((((cast body : RigidBody2D).forceX * (cast body : RigidBody2D).inverseMass) + ((cast world : Physics2DWorld).gravityX * (cast body : RigidBody2D).gravityScale)) * dt));
             ((cast body : RigidBody2D).velocityY += ((((cast body : RigidBody2D).forceY * (cast body : RigidBody2D).inverseMass) + ((cast world : Physics2DWorld).gravityY * (cast body : RigidBody2D).gravityScale)) * dt));
@@ -429,13 +429,13 @@ class Step {
     {
       var island:Float = 0.0;
       while ((cast ((cast island : Float) < (cast _Runtime.field((cast world : Physics2DWorld).solveIslandRoots, 'length') : Float)) : Bool)) {
-        Step.preparePhysics2DConstraints__step((cast world), (cast (cast world : Physics2DWorld).solveIslandContactIndices), (cast flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandContactStarts, island) : Float), (cast flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandContactCounts, island) : Float));
-        var jointStart:Float = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandJointStarts, island);
-        var jointEnd:Float = _Runtime.addNumbers(jointStart, flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandJointCounts, island));
+        Step.preparePhysics2DConstraints__step((cast world), (cast (cast world : Physics2DWorld).solveIslandContactIndices), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandContactStarts : Array<Float>), (cast island : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandContactCounts : Array<Float>), (cast island : Float)) : Float));
+        var jointStart:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandJointStarts : Array<Float>), (cast island : Float));
+        var jointEnd:Float = (jointStart + flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandJointCounts : Array<Float>), (cast island : Float)));
         {
           var at:Float = jointStart;
           while ((cast ((cast at : Float) < (cast jointEnd : Float)) : Bool)) {
-            var joint:Physics2DJoint = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).joints, flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandJointIndices, at));
+            var joint:Physics2DJoint = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).joints, flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandJointIndices : Array<Float>), (cast at : Float)));
             _Runtime.callOptionalValue(({ final __structural9 = ((cast (cast world : Physics2DWorld).jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get((cast joint : Physics2DJoint).kind)); __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var prepare:Physics2DWorld->Physics2DJoint->Float->Void; }).prepare; }), cast ([world, joint, dt] : Array<Dynamic>));
             at++;
           }
@@ -447,7 +447,7 @@ class Step {
       {
         var island:Float = 0.0;
         while ((cast ((cast island : Float) < (cast _Runtime.field((cast world : Physics2DWorld).solveIslandRoots, 'length') : Float)) : Bool)) {
-          warmStartPhysics2DContactIndices((cast world), (cast (cast world : Physics2DWorld).solveIslandContactIndices), (cast flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandContactStarts, island) : Float), (cast flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandContactCounts, island) : Float));
+          warmStartPhysics2DContactIndices((cast world), (cast (cast world : Physics2DWorld).solveIslandContactIndices), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandContactStarts : Array<Float>), (cast island : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandContactCounts : Array<Float>), (cast island : Float)) : Float));
           island++;
         }
       }
@@ -466,12 +466,12 @@ class Step {
     {
       var island:Float = 0.0;
       while ((cast ((cast island : Float) < (cast _Runtime.field((cast world : Physics2DWorld).solveIslandRoots, 'length') : Float)) : Bool)) {
-        var start:Float = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandJointStarts, island);
-        var end:Float = _Runtime.addNumbers(start, flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandJointCounts, island));
+        var start:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandJointStarts : Array<Float>), (cast island : Float));
+        var end:Float = (start + flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandJointCounts : Array<Float>), (cast island : Float)));
         {
           var at:Float = start;
           while ((cast ((cast at : Float) < (cast end : Float)) : Bool)) {
-            var joint:Physics2DJoint = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).joints, flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandJointIndices, at));
+            var joint:Physics2DJoint = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).joints, flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandJointIndices : Array<Float>), (cast at : Float)));
             var solver:Null<Physics2DJointSolver> = ((cast (cast world : Physics2DWorld).jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get((cast joint : Physics2DJoint).kind));
             if ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { at++; continue; }
             if ((cast ((cast (cast config : Physics2DSolverConfig).warmStarting : Bool) && (cast !_Runtime.strictEquals((cast solver : Physics2DJointSolver).warmStart, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
@@ -488,17 +488,17 @@ class Step {
     {
       var island:Float = 0.0;
       while ((cast ((cast island : Float) < (cast _Runtime.field((cast world : Physics2DWorld).solveIslandRoots, 'length') : Float)) : Bool)) {
-        var jointStart:Float = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandJointStarts, island);
-        var jointEnd:Float = _Runtime.addNumbers(jointStart, flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandJointCounts, island));
-        var contactStart:Float = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandContactStarts, island);
-        var contactCount:Float = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandContactCounts, island);
+        var jointStart:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandJointStarts : Array<Float>), (cast island : Float));
+        var jointEnd:Float = (jointStart + flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandJointCounts : Array<Float>), (cast island : Float)));
+        var contactStart:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandContactStarts : Array<Float>), (cast island : Float));
+        var contactCount:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandContactCounts : Array<Float>), (cast island : Float));
         {
           var iteration:Float = 0.0;
           while ((cast ((cast iteration : Float) < (cast (cast config : Physics2DSolverConfig).velocityIterations : Float)) : Bool)) {
             {
               var at:Float = jointStart;
               while ((cast ((cast at : Float) < (cast jointEnd : Float)) : Bool)) {
-                var joint:Physics2DJoint = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).joints, flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandJointIndices, at));
+                var joint:Physics2DJoint = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).joints, flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandJointIndices : Array<Float>), (cast at : Float)));
                 _Runtime.callOptionalValue(({ final __structural12 = ((cast (cast world : Physics2DWorld).jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get((cast joint : Physics2DJoint).kind)); __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { var solve:Physics2DWorld->Physics2DJoint->Void; }).solve; }), cast ([world, joint] : Array<Dynamic>));
                 at++;
               }
@@ -518,8 +518,8 @@ class Step {
     {
       var island:Float = 0.0;
       while ((cast ((cast island : Float) < (cast _Runtime.field((cast world : Physics2DWorld).solveIslandRoots, 'length') : Float)) : Bool)) {
-        var contactStart:Float = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandContactStarts, island);
-        var contactCount:Float = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandContactCounts, island);
+        var contactStart:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandContactStarts : Array<Float>), (cast island : Float));
+        var contactCount:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandContactCounts : Array<Float>), (cast island : Float));
         {
           var iteration:Float = 0.0;
           while ((cast ((cast iteration : Float) < (cast (cast config : Physics2DSolverConfig).positionIterations : Float)) : Bool)) {
@@ -565,12 +565,12 @@ class Step {
     {
       var island:Float = 0.0;
       while ((cast ((cast island : Float) < (cast _Runtime.field((cast world : Physics2DWorld).solveIslandRoots, 'length') : Float)) : Bool)) {
-        var start:Float = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandBodyStarts, island);
-        var end:Float = _Runtime.addNumbers(start, flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandBodyCounts, island));
+        var start:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandBodyStarts : Array<Float>), (cast island : Float));
+        var end:Float = (start + flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandBodyCounts : Array<Float>), (cast island : Float)));
         {
           var at:Float = start;
           while ((cast ((cast at : Float) < (cast end : Float)) : Bool)) {
-            Step.advancePhysics2DBody__step((cast flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).bodies, flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).solveIslandBodyIndices, at))), (cast dt : Float));
+            Step.advancePhysics2DBody__step((cast flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).bodies, flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandBodyIndices : Array<Float>), (cast at : Float)))), (cast dt : Float));
             at++;
           }
         }

@@ -552,9 +552,9 @@ class InputManager {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field((cast pad : flighthq._internal.dom.Gamepad).axes, 'length') : Float)) : Bool)) {
-          var value:Float = flighthq._internal._StaticIndex.readArray((cast pad : flighthq._internal.dom.Gamepad).axes, i);
-          if ((cast !_Runtime.strictEquals(value, flighthq._internal._StaticIndex.readArray(prevAxes, i)) : Bool)) {
-            flighthq._internal._StaticIndex.writeArray(prevAxes, i, value);
+          var value:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast pad : flighthq._internal.dom.Gamepad).axes : Array<Float>), (cast i : Float));
+          if ((cast !_Runtime.strictEquals(value, flighthq._internal._StaticIndex.readFloatArrayTyped((cast prevAxes : Array<Float>), (cast i : Float))) : Bool)) {
+            flighthq._internal._StaticIndex.writeFloatArrayTyped((cast prevAxes : Array<Float>), (cast i : Float), (cast value : Float));
             (InputManager._axisData__inputManager.axis = cast (i : Dynamic));
             (InputManager._axisData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Dynamic));
             (InputManager._axisData__inputManager.timeStamp = cast (now : Dynamic));

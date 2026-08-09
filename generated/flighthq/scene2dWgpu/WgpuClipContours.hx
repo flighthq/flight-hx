@@ -87,15 +87,15 @@ class WgpuClipContours {
     iw = (2.0 / (cast viewport : { var width:Float; var height:Float; }).width);
     ih = (2.0 / (cast viewport : { var width:Float; var height:Float; }).height);
     m = new flighthq._internal._Float32Array(12.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (t.a * iw));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (-t.b * ih));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, (t.c * iw));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, (-t.d * ih));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, ((t.tx * iw) - 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 9.0, ((-t.ty * ih) + 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 10.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (t.a * iw) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (-t.b * ih) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast (t.c * iw) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast (-t.d * ih) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast ((t.tx * iw) - 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast ((-t.ty * ih) + 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 10.0 : Float), (cast 1.0 : Float));
     buffer = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBuffer', cast ([{ size: WgpuClipContours.CLIP_UNIFORM_BYTES__wgpuClipContours, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([buffer, 0.0, m] : Array<Dynamic>));
     return cast buffer;
@@ -117,7 +117,7 @@ class WgpuClipContours {
         {
           var i:Float = 1.0;
           while ((cast ((cast i : Float) < (cast (pointCount - 1.0) : Float)) : Bool)) {
-            _Runtime.pushMany(tris, cast ([flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, 1.0), flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0)), flighthq._internal._StaticIndex.readArray(contour, ((i + 1.0) * 2.0)), flighthq._internal._StaticIndex.readArray(contour, (((i + 1.0) * 2.0) + 1.0))] : Array<Dynamic>));
+            _Runtime.pushMany(tris, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i * 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((i * 2.0) + 1.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((i + 1.0) * 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (((i + 1.0) * 2.0) + 1.0) : Float))] : Array<Dynamic>));
             i++;
           }
         }

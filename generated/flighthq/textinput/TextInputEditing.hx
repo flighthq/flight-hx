@@ -160,7 +160,7 @@ class TextInputEditing {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
         var lineTop:Float = (cast TextInputEditing.getLineOffsetY__textInputEditing((cast layout), (cast i : Float)) : Float);
-        var lineBottom:Float = _Runtime.addNumbers(lineTop, flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i));
+        var lineBottom:Float = (lineTop + flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast i : Float)));
         var distance:Float = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
         if ((cast ((cast distance : Float) < (cast closestLineDistance : Float)) : Bool)) {
           (closestLineDistance = cast (distance : Dynamic));
@@ -360,7 +360,7 @@ class TextInputEditing {
       moveTextInputCaret((cast source), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast extendSelection : Bool));
       return;
     }
-    targetY = ((cast TextInputEditing.getLineOffsetY__textInputEditing((cast layout), (cast targetLineIndex : Float)) : Float) + _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), targetLineIndex), 2.0));
+    targetY = ((cast TextInputEditing.getLineOffsetY__textInputEditing((cast layout), (cast targetLineIndex : Float)) : Float) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast targetLineIndex : Float)) / 2.0));
     targetIndex = (cast getTextInputCharacterIndexAtPoint((cast source), (cast layout), (cast (cast state : TextInputState).desiredCaretX : Float), (cast targetY : Float)) : Float);
     newCaret = (cast TextInputEditing.clampIndex__textInputEditing((cast targetIndex : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float);
     ((cast state : TextInputState).caretIndex = newCaret);
@@ -412,7 +412,7 @@ class TextInputEditing {
       moveTextInputCaret((cast source), (cast 0.0 : Float), (cast extendSelection : Bool));
       return;
     }
-    targetY = ((cast TextInputEditing.getLineOffsetY__textInputEditing((cast layout), (cast targetLineIndex : Float)) : Float) + _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), targetLineIndex), 2.0));
+    targetY = ((cast TextInputEditing.getLineOffsetY__textInputEditing((cast layout), (cast targetLineIndex : Float)) : Float) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast targetLineIndex : Float)) / 2.0));
     targetIndex = (cast getTextInputCharacterIndexAtPoint((cast source), (cast layout), (cast (cast state : TextInputState).desiredCaretX : Float), (cast targetY : Float)) : Float);
     newCaret = (cast TextInputEditing.clampIndex__textInputEditing((cast targetIndex : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float);
     ((cast state : TextInputState).caretIndex = newCaret);
@@ -487,7 +487,7 @@ class TextInputEditing {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast scrollVLine : Float)) : Bool)) {
-        (viewTop = cast ((viewTop + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0)) : Dynamic));
+        (viewTop = cast ((viewTop + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
     }
@@ -500,11 +500,11 @@ class TextInputEditing {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(layout, 'numLines') : Float)) : Bool)) {
-          if ((cast ((cast _Runtime.addNumbers(pixelOffset, flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i)) : Float) > (cast (caretBottom - viewportHeight) : Float)) : Bool)) {
+          if ((cast ((cast (pixelOffset + flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast i : Float))) : Float) > (cast (caretBottom - viewportHeight) : Float)) : Bool)) {
             (firstVisibleLine = cast (i : Dynamic));
             break;
           }
-          (pixelOffset = cast ((pixelOffset + flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i)) : Dynamic));
+          (pixelOffset = cast ((pixelOffset + flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast i : Float))) : Dynamic));
           i++;
         }
       }
@@ -648,7 +648,7 @@ class TextInputEditing {
   }
 
   public static function getFallbackLineHeight__textInputEditing(layout:TextLayoutResult):Float {
-    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), 0.0), function():Dynamic return cast 12.0);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 12.0);
     return cast null;
   }
 
@@ -713,7 +713,7 @@ class TextInputEditing {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast lineIndex : Float)) : Bool)) {
-        (y = cast ((y + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'lineHeights'), i), function():Dynamic return cast 0.0)) : Dynamic));
+        (y = cast ((y + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
     }
@@ -747,7 +747,7 @@ class TextInputEditing {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast limit : Float)) : Bool)) {
-        (x = cast ((x + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0)) : Dynamic));
+        (x = cast ((x + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(group, 'positions') : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
     }
@@ -761,7 +761,7 @@ class TextInputEditing {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(group, 'positions'), 'length') : Float)) : Bool)) {
-        var advance:Float = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(group, 'positions'), i), function():Dynamic return cast 0.0);
+        var advance:Float = _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(group, 'positions') : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0);
         if ((cast ((cast x : Float) < (cast (currentX + (advance / 2.0)) : Float)) : Bool)) { return cast _Runtime.addNumbers(_Runtime.field(group, 'startIndex'), i); }
         (currentX = cast ((currentX + advance) : Dynamic));
         i++;

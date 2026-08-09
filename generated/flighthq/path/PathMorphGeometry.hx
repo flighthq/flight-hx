@@ -177,7 +177,7 @@ class PathMorphGeometry {
             {
               var yi:Float = 1.0;
               while ((cast ((cast yi : Float) < (cast 4.0 : Float)) : Bool)) {
-                (twiceArea = cast ((twiceArea + ((_Runtime.multiplyNumbers(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(x, xi), yi), flighthq._internal._StaticIndex.readArray(y, yi)) - _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(y, xi), yi), flighthq._internal._StaticIndex.readArray(x, yi))) / (xi + yi))) : Dynamic));
+                (twiceArea = cast ((twiceArea + ((((flighthq._internal._StaticIndex.readFloatArrayTyped((cast x : Array<Float>), (cast xi : Float)) * yi) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast y : Array<Float>), (cast yi : Float))) - ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast y : Array<Float>), (cast xi : Float)) * yi) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast x : Array<Float>), (cast yi : Float)))) / (xi + yi))) : Dynamic));
                 yi++;
               }
             }
@@ -395,7 +395,7 @@ class PathMorphGeometry {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
-            var partLength:Float = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(lengths, i), flighthq._internal._StaticIndex.readArray(partCounts, i));
+            var partLength:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast lengths : Array<Float>), (cast i : Float)) / flighthq._internal._StaticIndex.readFloatArrayTyped((cast partCounts : Array<Float>), (cast i : Float)));
             if ((cast ((cast partLength : Float) > (cast bestLength : Float)) : Bool)) {
               (best = cast (i : Dynamic));
               (bestLength = cast (partLength : Dynamic));
@@ -413,7 +413,7 @@ class PathMorphGeometry {
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
         var remainder:CubicSegment__pathMorphGeometry = flighthq._internal._StaticIndex.readArray(source, i);
         {
-          var parts:Float = flighthq._internal._StaticIndex.readArray(partCounts, i);
+          var parts:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast partCounts : Array<Float>), (cast i : Float));
           while ((cast ((cast parts : Float) > (cast 1.0 : Float)) : Bool)) {
             var split:Array<CubicSegment__pathMorphGeometry> = (cast PathMorphGeometry.splitCubicSegment__pathMorphGeometry((cast remainder), (cast (1.0 / parts) : Float)) : Array<CubicSegment__pathMorphGeometry>);
             _Runtime.callProperty(segments, 'push', cast ([flighthq._internal._StaticIndex.readArray(split, 0.0)] : Array<Dynamic>));

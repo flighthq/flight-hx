@@ -31,8 +31,8 @@ class BitmapAlpha {
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Float = (((sy * (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width) + sx) * 4.0);
             var di:Float = (((dy * (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width) + dx) * 4.0);
-            var alpha:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), alpha);
+            var alpha:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast alpha : Float));
             px++;
           }
         }
@@ -60,7 +60,7 @@ class BitmapAlpha {
             var x:Float = _Runtime.addNumbers(_Runtime.field(out, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Float = ((((y * bitmapWidth) + x) * 4.0) + 3.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, HxMath.round(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), f)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast i : Float)) * f)) : Float));
             px++;
           }
         }
@@ -87,7 +87,7 @@ class BitmapAlpha {
           while ((cast ((cast px : Float) < (cast _Runtime.field(out, 'width') : Float)) : Bool)) {
             var x:Float = _Runtime.addNumbers(_Runtime.field(out, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, ((((y * bitmapWidth) + x) * 4.0) + 3.0), a);
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast ((((y * bitmapWidth) + x) * 4.0) + 3.0) : Float), (cast a : Float));
             px++;
           }
         }

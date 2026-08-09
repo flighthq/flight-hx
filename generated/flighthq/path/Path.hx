@@ -171,8 +171,8 @@ class Path {
     {
       var last:Null<Array<Float>> = (cast getPathLastPoint((cast path)) : Null<Array<Float>>);
       if ((cast !_Runtime.strictEquals(last, null) : Bool)) {
-        (x1 = cast (flighthq._internal._StaticIndex.readArray(last, 0.0) : Dynamic));
-        (y1 = cast (flighthq._internal._StaticIndex.readArray(last, 1.0) : Dynamic));
+        (x1 = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast last : Array<Float>), (cast 0.0 : Float)) : Dynamic));
+        (y1 = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast last : Array<Float>), (cast 1.0 : Float)) : Dynamic));
       }
     }
     x2 = endX;
@@ -260,11 +260,11 @@ class Path {
 
   public static function appendPathPolygon(path:flighthq.types.Path, points:Array<Float>):Void {
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { return; }
-    appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readArray(points, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(points, 1.0) : Float));
+    appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float));
     {
       var i:Float = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readArray(points, i) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (i + 1.0)) : Float));
+        appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Float));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
@@ -273,11 +273,11 @@ class Path {
 
   public static function appendPathPolyline(path:flighthq.types.Path, points:Array<Float>):Void {
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
-    appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readArray(points, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(points, 1.0) : Float));
+    appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float));
     {
       var i:Float = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readArray(points, i) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (i + 1.0)) : Float));
+        appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Float));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
@@ -403,7 +403,7 @@ class Path {
     var data:Array<Float> = cast _Runtime.UNDEFINED;
     data = _Runtime.field(path, 'data');
     if ((cast ((cast _Runtime.field(data, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { return cast null; }
-    return cast cast ([flighthq._internal._StaticIndex.readArray(data, _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 2.0)), flighthq._internal._StaticIndex.readArray(data, _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 1.0))] : Array<Dynamic>);
+    return cast cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 1.0) : Float))] : Array<Dynamic>);
     return cast null;
   }
 

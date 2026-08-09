@@ -32,14 +32,14 @@ class BitmapTone {
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) >= (cast (cast _Runtime.field(out, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Float = (((sy * (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width) + sx) * 4.0);
             var oi:Float = (((oy * (cast _Runtime.field(out, 'bitmap') : { var width:Float; }).width) + ox) * 4.0);
-            var r:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si);
-            var g:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0));
-            var b:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0));
-            var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, oi, ((cast !_Runtime.strictEquals(redLut, null) : Bool) ? (cast _Runtime.getIndex(redLut, r) : Dynamic) : (cast r : Dynamic)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (oi + 1.0), ((cast !_Runtime.strictEquals(greenLut, null) : Bool) ? (cast _Runtime.getIndex(greenLut, g) : Dynamic) : (cast g : Dynamic)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (oi + 2.0), ((cast !_Runtime.strictEquals(blueLut, null) : Bool) ? (cast _Runtime.getIndex(blueLut, b) : Dynamic) : (cast b : Dynamic)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(od, (oi + 3.0), ((cast !_Runtime.strictEquals(alphaLut, null) : Bool) ? (cast _Runtime.getIndex(alphaLut, a) : Dynamic) : (cast a : Dynamic)));
+            var r:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast si : Float));
+            var g:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 1.0) : Float));
+            var b:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 2.0) : Float));
+            var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast od : flighthq._internal._UInt8ClampedArray), (cast oi : Float), (cast ((cast !_Runtime.strictEquals(redLut, null) : Bool) ? (cast _Runtime.getIndex(redLut, r) : Dynamic) : (cast r : Dynamic)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast od : flighthq._internal._UInt8ClampedArray), (cast (oi + 1.0) : Float), (cast ((cast !_Runtime.strictEquals(greenLut, null) : Bool) ? (cast _Runtime.getIndex(greenLut, g) : Dynamic) : (cast g : Dynamic)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast od : flighthq._internal._UInt8ClampedArray), (cast (oi + 2.0) : Float), (cast ((cast !_Runtime.strictEquals(blueLut, null) : Bool) ? (cast _Runtime.getIndex(blueLut, b) : Dynamic) : (cast b : Dynamic)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast od : flighthq._internal._UInt8ClampedArray), (cast (oi + 3.0) : Float), (cast ((cast !_Runtime.strictEquals(alphaLut, null) : Bool) ? (cast _Runtime.getIndex(alphaLut, a) : Dynamic) : (cast a : Dynamic)) : Float));
             px++;
           }
         }
@@ -64,7 +64,7 @@ class BitmapTone {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 256.0 : Float)) : Bool)) {
         var normalized:Float = HxMath.max(0.0, HxMath.min(1.0, ((i - bp) / span)));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(lut, i, HxMath.round(_Runtime.multiplyNumbers(HxMath.pow(normalized, invGamma), 255.0)));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast lut : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast HxMath.round(_Runtime.multiplyNumbers(HxMath.pow(normalized, invGamma), 255.0)) : Float));
         i++;
       }
     }

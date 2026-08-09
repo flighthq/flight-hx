@@ -318,15 +318,15 @@ class Texture {
     tx = (((cast texture.uvOffset : { var x:Float; }).x + (cosR * preOffsetX)) - (sinR * preOffsetY));
     ty = (((cast texture.uvOffset : { var y:Float; }).y + (sinR * preOffsetX)) + (cosR * preOffsetY));
     m = out.m;
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (sx * cosR));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (sx * sinR));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, (-sy * sinR));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, (sy * cosR));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, tx);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, ty);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (sx * cosR) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (sx * sinR) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast (-sy * sinR) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast (sy * cosR) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast tx : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast ty : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast 1.0 : Float));
   }
 
   public static function getTextureWidth(texture:TextureLike):Float {

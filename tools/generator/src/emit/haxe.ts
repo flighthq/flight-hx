@@ -1895,7 +1895,7 @@ function expressionEmitsDynamic(expression: IrExpression): boolean {
     case 'cast':
       return expression.type.kind === 'dynamic';
     case 'element':
-      return expression.binding !== 'WebGl2Backend';
+      return expression.binding !== 'WebGl2Backend' && !staticIndexedFastPath(expression);
     case 'property':
       return propertyReadEmitsDynamic(expression);
     case 'unary':
@@ -2107,6 +2107,32 @@ function emitSyntheticArrayRead(
   )}`;
 }
 
+interface StaticIndexedFastPath {
+  endpoint: string;
+  receiverType: string;
+  valueType: string;
+}
+
+function staticIndexedFastPath(
+  expression: Extract<IrExpression, { kind: 'element' }>,
+): StaticIndexedFastPath | undefined {
+  const indexedAccess = expression.staticFacts?.indexedAccess;
+  if (!indexedAccess || expression.optional) return undefined;
+  if (indexedAccess.receiver === 'Array') {
+    return expression.type?.kind === 'primitive' && expression.type.name === 'Float'
+      ? { endpoint: 'FloatArrayTyped', receiverType: 'Array<Float>', valueType: 'Float' }
+      : undefined;
+  }
+  if (indexedAccess.receiver === 'ArrayOrFloat32Array' || indexedAccess.receiver === 'Uint16ArrayOrUint32Array') {
+    return undefined;
+  }
+  return {
+    endpoint: `${indexedAccess.receiver}Typed`,
+    receiverType: typedArrayBindingTypes[indexedAccess.receiver],
+    valueType: 'Float',
+  };
+}
+
 function emitStaticIndexedRead(
   expression: Extract<IrExpression, { kind: 'element' }>,
   object = emitExpression(expression.object),
@@ -2117,10 +2143,13 @@ function emitStaticIndexedRead(
   }
   const indexedAccess = expression.staticFacts?.indexedAccess;
   if (!indexedAccess || indexedAccess.reads !== 1 || expression.optional) return undefined;
+  const fastPath = staticIndexedFastPath(expression);
   return markStaticIndexedLowering(
     indexedAccess.receiver,
     'reads',
-    `flighthq._internal._StaticIndex.read${indexedAccess.receiver}(${object}, ${index})`,
+    fastPath
+      ? `flighthq._internal._StaticIndex.read${fastPath.endpoint}((cast ${object} : ${fastPath.receiverType}), (cast ${index} : Float))`
+      : `flighthq._internal._StaticIndex.read${indexedAccess.receiver}(${object}, ${index})`,
   );
 }
 
@@ -2132,10 +2161,13 @@ function emitStaticIndexedWrite(
 ): string | undefined {
   const indexedAccess = expression.staticFacts?.indexedAccess;
   if (!indexedAccess || indexedAccess.writes !== 1 || expression.optional) return undefined;
+  const fastPath = staticIndexedFastPath(expression);
   return markStaticIndexedLowering(
     indexedAccess.receiver,
     'writes',
-    `flighthq._internal._StaticIndex.write${indexedAccess.receiver}(${object}, ${index}, ${value})`,
+    fastPath
+      ? `flighthq._internal._StaticIndex.write${fastPath.endpoint}((cast ${object} : ${fastPath.receiverType}), (cast ${index} : Float), (cast ${value} : ${fastPath.valueType}))`
+      : `flighthq._internal._StaticIndex.write${indexedAccess.receiver}(${object}, ${index}, ${value})`,
   );
 }
 
@@ -2202,6 +2234,7 @@ function emitExpression(expression: IrExpression): string {
         const operator = expression.operator.slice(0, -1);
         const indexedAccess = expression.left.staticFacts?.indexedAccess;
         const directCompound = indexedAccess?.reads === 1 && indexedAccess.writes === 1 && !expression.left.optional;
+        const fastPath = staticIndexedFastPath(expression.left);
         const indexedObject = directCompound ? `__indexedObject${String(temporaryIndex++)}` : object;
         const indexedKey = directCompound ? `__indexedKey${String(temporaryIndex++)}` : index;
         const current =
@@ -2211,7 +2244,7 @@ function emitExpression(expression: IrExpression): string {
           ? emitStaticIndexedWrite(expression.left, value, indexedObject, indexedKey)
           : undefined;
         return directWrite
-          ? `({ var ${indexedObject}:Dynamic = ${object}; var ${indexedKey}:Dynamic = ${index}; ${directWrite}; })`
+          ? `({ var ${indexedObject}:${fastPath?.receiverType ?? 'Dynamic'} = ${object}; var ${indexedKey}:${fastPath ? 'Float' : 'Dynamic'} = ${index}; ${directWrite}; })`
           : `_Runtime.setIndex(${object}, ${index}, ${value})`;
       }
       if (expression.kind === 'assignment' && expression.left.kind === 'property') {

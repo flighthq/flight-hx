@@ -20,7 +20,7 @@ class PathMeshPool {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast fresh : PathMesh).vertices, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray((cast mesh : PathMesh).vertices, i, flighthq._internal._StaticIndex.readArray((cast fresh : PathMesh).vertices, i));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast mesh : PathMesh).vertices : Array<Float>), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast fresh : PathMesh).vertices : Array<Float>), (cast i : Float)) : Float));
         i++;
       }
     }
@@ -28,7 +28,7 @@ class PathMeshPool {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast fresh : PathMesh).indices, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray((cast mesh : PathMesh).indices, i, flighthq._internal._StaticIndex.readArray((cast fresh : PathMesh).indices, i));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast mesh : PathMesh).indices : Array<Float>), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast fresh : PathMesh).indices : Array<Float>), (cast i : Float)) : Float));
         i++;
       }
     }

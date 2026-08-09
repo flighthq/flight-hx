@@ -29,7 +29,7 @@ class ColorGradeAdjustment {
     lift = (cast ColorGradeAdjustment.unpackRgb__colorGradeAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'lift'), function():Dynamic return cast 255.0) : Float)) : Array<Float>);
     gammaRaw = (cast ColorGradeAdjustment.unpackRgb__colorGradeAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'gamma'), function():Dynamic return cast 2155905279.0) : Float)) : Array<Float>);
     gain = (cast ColorGradeAdjustment.unpackRgb__colorGradeAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'gain'), function():Dynamic return cast 4294967295.0) : Float)) : Array<Float>);
-    gammaExp = (cast cast ([_Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 0.0), 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 1.0), 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(gammaRaw, 2.0), 2.0), 0.001))] : Array<Dynamic>));
+    gammaExp = (cast cast ([_Runtime.divideNumbers(1.0, HxMath.max((flighthq._internal._StaticIndex.readFloatArrayTyped((cast gammaRaw : Array<Float>), (cast 0.0 : Float)) * 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max((flighthq._internal._StaticIndex.readFloatArrayTyped((cast gammaRaw : Array<Float>), (cast 1.0 : Float)) * 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max((flighthq._internal._StaticIndex.readFloatArrayTyped((cast gammaRaw : Array<Float>), (cast 2.0 : Float)) * 2.0), 0.001))] : Array<Dynamic>));
     transform = function(out:Array<Float>, r:Float, g:Float, b:Float):Void {
       var cr:Float = cast _Runtime.UNDEFINED;
       var cg:Float = cast _Runtime.UNDEFINED;
@@ -45,12 +45,12 @@ class ColorGradeAdjustment {
       (cr = cast ((((cr - 0.5) * contrast) + 0.5) : Dynamic));
       (cg = cast ((((cg - 0.5) * contrast) + 0.5) : Dynamic));
       (cb = cast ((((cb - 0.5) * contrast) + 0.5) : Dynamic));
-      (cr = cast (HxMath.pow(HxMath.max((_Runtime.multiplyNumbers(cr, flighthq._internal._StaticIndex.readArray(gain, 0.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(lift, 0.0), (1.0 - cr))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 0.0)) : Dynamic));
-      (cg = cast (HxMath.pow(HxMath.max((_Runtime.multiplyNumbers(cg, flighthq._internal._StaticIndex.readArray(gain, 1.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(lift, 1.0), (1.0 - cg))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 1.0)) : Dynamic));
-      (cb = cast (HxMath.pow(HxMath.max((_Runtime.multiplyNumbers(cb, flighthq._internal._StaticIndex.readArray(gain, 2.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(lift, 2.0), (1.0 - cb))), 0.0), flighthq._internal._StaticIndex.readArray(gammaExp, 2.0)) : Dynamic));
-      flighthq._internal._StaticIndex.writeArray(out, 0.0, (cast ColorGradeAdjustment.clamp01__colorGradeAdjustment((cast cr : Float)) : Float));
-      flighthq._internal._StaticIndex.writeArray(out, 1.0, (cast ColorGradeAdjustment.clamp01__colorGradeAdjustment((cast cg : Float)) : Float));
-      flighthq._internal._StaticIndex.writeArray(out, 2.0, (cast ColorGradeAdjustment.clamp01__colorGradeAdjustment((cast cb : Float)) : Float));
+      (cr = cast (HxMath.pow(HxMath.max(((cr * flighthq._internal._StaticIndex.readFloatArrayTyped((cast gain : Array<Float>), (cast 0.0 : Float))) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast lift : Array<Float>), (cast 0.0 : Float)) * (1.0 - cr))), 0.0), flighthq._internal._StaticIndex.readFloatArrayTyped((cast gammaExp : Array<Float>), (cast 0.0 : Float))) : Dynamic));
+      (cg = cast (HxMath.pow(HxMath.max(((cg * flighthq._internal._StaticIndex.readFloatArrayTyped((cast gain : Array<Float>), (cast 1.0 : Float))) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast lift : Array<Float>), (cast 1.0 : Float)) * (1.0 - cg))), 0.0), flighthq._internal._StaticIndex.readFloatArrayTyped((cast gammaExp : Array<Float>), (cast 1.0 : Float))) : Dynamic));
+      (cb = cast (HxMath.pow(HxMath.max(((cb * flighthq._internal._StaticIndex.readFloatArrayTyped((cast gain : Array<Float>), (cast 2.0 : Float))) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast lift : Array<Float>), (cast 2.0 : Float)) * (1.0 - cb))), 0.0), flighthq._internal._StaticIndex.readFloatArrayTyped((cast gammaExp : Array<Float>), (cast 2.0 : Float))) : Dynamic));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast (cast ColorGradeAdjustment.clamp01__colorGradeAdjustment((cast cr : Float)) : Float) : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast (cast ColorGradeAdjustment.clamp01__colorGradeAdjustment((cast cg : Float)) : Float) : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast (cast ColorGradeAdjustment.clamp01__colorGradeAdjustment((cast cb : Float)) : Float) : Float));
     };
     return cast _Runtime.mergeObjects([{ kind: 'ColorGradeAdjustment' }, options, { transform: transform }]);
     return cast null;

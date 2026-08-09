@@ -52,10 +52,10 @@ class BitmapMedian {
                   while ((cast ((cast kx : Float) <= (cast r : Float)) : Bool)) {
                     var sx:Float = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'x'), px) + kx)));
                     var si:Float = (((sy * bitmapWidth) + sx) * 4.0);
-                    flighthq._internal._StaticIndex.writeUint8Array(rs, n, flighthq._internal._StaticIndex.readUint8ClampedArray(data, si));
-                    flighthq._internal._StaticIndex.writeUint8Array(gs, n, flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 1.0)));
-                    flighthq._internal._StaticIndex.writeUint8Array(bs, n, flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 2.0)));
-                    flighthq._internal._StaticIndex.writeUint8Array(as, n, flighthq._internal._StaticIndex.readUint8ClampedArray(data, (si + 3.0)));
+                    flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast rs : flighthq._internal._UInt8Array), (cast n : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast si : Float)) : Float));
+                    flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast gs : flighthq._internal._UInt8Array), (cast n : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (si + 1.0) : Float)) : Float));
+                    flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast bs : flighthq._internal._UInt8Array), (cast n : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (si + 2.0) : Float)) : Float));
+                    flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast as : flighthq._internal._UInt8Array), (cast n : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float)) : Float));
                     n++;
                     kx++;
                   }
@@ -65,10 +65,10 @@ class BitmapMedian {
             }
             var mid:Float = (_Runtime.toInt32(n) >> 1);
             var di:Float = (((py * w) + px) * 4.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (cast BitmapMedian.medianOf__bitmapMedian((cast rs), (cast n : Float), (cast mid : Float)) : Float));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (cast BitmapMedian.medianOf__bitmapMedian((cast gs), (cast n : Float), (cast mid : Float)) : Float));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (cast BitmapMedian.medianOf__bitmapMedian((cast bs), (cast n : Float), (cast mid : Float)) : Float));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), (cast BitmapMedian.medianOf__bitmapMedian((cast as), (cast n : Float), (cast mid : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast (cast BitmapMedian.medianOf__bitmapMedian((cast rs), (cast n : Float), (cast mid : Float)) : Float) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast (cast BitmapMedian.medianOf__bitmapMedian((cast gs), (cast n : Float), (cast mid : Float)) : Float) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast (cast BitmapMedian.medianOf__bitmapMedian((cast bs), (cast n : Float), (cast mid : Float)) : Float) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast BitmapMedian.medianOf__bitmapMedian((cast as), (cast n : Float), (cast mid : Float)) : Float) : Float));
             px++;
           }
         }
@@ -81,17 +81,17 @@ class BitmapMedian {
     {
       var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
-        var v:Float = flighthq._internal._StaticIndex.readUint8Array(values, i);
+        var v:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast values : flighthq._internal._UInt8Array), (cast i : Float));
         var j:Float = (i - 1.0);
-        while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readUint8Array(values, j) : Float) > (cast v : Float)) : Bool)) : Bool)) {
-          flighthq._internal._StaticIndex.writeUint8Array(values, (j + 1.0), flighthq._internal._StaticIndex.readUint8Array(values, j));
+        while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast values : flighthq._internal._UInt8Array), (cast j : Float)) : Float) > (cast v : Float)) : Bool)) : Bool)) {
+          flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast values : flighthq._internal._UInt8Array), (cast (j + 1.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast values : flighthq._internal._UInt8Array), (cast j : Float)) : Float));
           j--;
         }
-        flighthq._internal._StaticIndex.writeUint8Array(values, (j + 1.0), v);
+        flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast values : flighthq._internal._UInt8Array), (cast (j + 1.0) : Float), (cast v : Float));
         i++;
       }
     }
-    return cast flighthq._internal._StaticIndex.readUint8Array(values, mid);
+    return cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast values : flighthq._internal._UInt8Array), (cast mid : Float));
     return cast null;
   }
 

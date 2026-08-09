@@ -64,10 +64,10 @@ class GridLayout {
     paddingBottom = _Runtime.coalesce(_Runtime.field(container, 'paddingBottom'), function():Dynamic return cast 0.0);
     columnGap = _Runtime.coalesce(_Runtime.field(container, 'columnGap'), function():Dynamic return cast 0.0);
     rowGap = _Runtime.coalesce(_Runtime.field(container, 'rowGap'), function():Dynamic return cast 0.0);
-    availableWidth = HxMath.max(0.0, (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(out, (parentOffset + 2.0)), paddingLeft) - paddingRight));
-    availableHeight = HxMath.max(0.0, (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(out, (parentOffset + 3.0)), paddingTop) - paddingBottom));
+    availableWidth = HxMath.max(0.0, ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (parentOffset + 2.0) : Float)) - paddingLeft) - paddingRight));
+    availableHeight = HxMath.max(0.0, ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (parentOffset + 3.0) : Float)) - paddingTop) - paddingBottom));
     childOffset = (childIndex * 4.0);
-    x = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(out, parentOffset), paddingLeft);
+    x = (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast parentOffset : Float)) + paddingLeft);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast column : Float)) : Bool)) {
@@ -84,7 +84,7 @@ class GridLayout {
         i++;
       }
     }
-    y = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(out, (parentOffset + 1.0)), paddingTop);
+    y = (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (parentOffset + 1.0) : Float)) + paddingTop);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast row : Float)) : Bool)) {
@@ -101,10 +101,10 @@ class GridLayout {
         i++;
       }
     }
-    flighthq._internal._StaticIndex.writeFloat32Array(out, childOffset, x);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (childOffset + 1.0), y);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (childOffset + 2.0), width);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (childOffset + 3.0), height);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast childOffset : Float), (cast x : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (childOffset + 1.0) : Float), (cast y : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (childOffset + 2.0) : Float), (cast width : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (childOffset + 3.0) : Float), (cast height : Float));
     return cast null;
     return cast _Runtime.UNDEFINED;
   });

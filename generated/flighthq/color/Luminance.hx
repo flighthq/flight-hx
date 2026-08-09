@@ -31,14 +31,14 @@ class Luminance {
   }
 
   public static function getRec2020LuminanceWeights(out:Array<Float>):Void {
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, 0.2627);
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, 0.678);
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, 0.0593);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast 0.2627 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast 0.678 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast 0.0593 : Float));
   }
 
   public static function getRec709LuminanceWeights(out:Array<Float>):Void {
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, 0.2126);
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, 0.7152);
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, 0.0722);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast 0.2126 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast 0.7152 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast 0.0722 : Float));
   }
 }

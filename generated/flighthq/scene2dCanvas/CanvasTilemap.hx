@@ -70,7 +70,7 @@ class CanvasTilemap {
         {
           var col:Float = 0.0;
           while ((cast ((cast col : Float) < (cast columns : Float)) : Bool)) {
-            var id:Float = flighthq._internal._StaticIndex.readInt16Array(tiles, ((row * columns) + col));
+            var id:Float = flighthq._internal._StaticIndex.readInt16ArrayTyped((cast tiles : flighthq._internal._Int16Array), (cast ((row * columns) + col) : Float));
             if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { col++; continue; }
             var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(regions, id);
             if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { col++; continue; }

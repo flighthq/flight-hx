@@ -395,8 +395,8 @@ class TextLayout {
         while ((cast ((cast ((cast i : Float) < (cast end : Float)) : Bool) && (cast ((cast count : Float) < (cast _Runtime.field(TextLayout._charAdvances__textLayout, 'length') : Float)) : Bool)) : Bool)) {
           var cp:Float = _Runtime.coalesce(_Runtime.codePointAt(text, i), function():Dynamic return cast 0.0);
           var cpLen:Float = ((cast ((cast cp : Float) > (cast 65535.0 : Float)) : Bool) ? (cast 2.0 : Dynamic) : (cast 1.0 : Dynamic));
-          if ((cast ((cast _Runtime.addNumbers((offsetX + w), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(TextLayout._charAdvances__textLayout, count), function():Dynamic return cast 0.0)) : Float) > (cast (cast wrapWidth() : Float) : Float)) : Bool)) { break; }
-          (w = cast ((w + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(TextLayout._charAdvances__textLayout, count), function():Dynamic return cast 0.0)) : Dynamic));
+          if ((cast ((cast _Runtime.addNumbers((offsetX + w), _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast TextLayout._charAdvances__textLayout : Array<Float>), (cast count : Float)), function():Dynamic return cast 0.0)) : Float) > (cast (cast wrapWidth() : Float) : Float)) : Bool)) { break; }
+          (w = cast ((w + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast TextLayout._charAdvances__textLayout : Array<Float>), (cast count : Float)), function():Dynamic return cast 0.0)) : Dynamic));
           count++;
           (charCount = cast ((charCount + cpLen) : Dynamic));
           (i = cast ((i + cpLen) : Dynamic));
@@ -435,7 +435,7 @@ class TextLayout {
     offsetY = 0.0;
     truncated = false;
     breakCount = 0.0;
-    breakIndex = ((cast ((cast _Runtime.field(lineBreaks, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(lineBreaks, 0.0) : Dynamic) : (cast -1.0 : Dynamic));
+    breakIndex = ((cast ((cast _Runtime.field(lineBreaks, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast lineBreaks : Array<Float>), (cast 0.0 : Float)) : Dynamic) : (cast -1.0 : Dynamic));
     spaceIndex = _Runtime.callProperty(text, 'indexOf', cast ([' '] : Array<Dynamic>));
     activeGroup = null;
     updateLineMetrics();
@@ -456,7 +456,7 @@ class TextLayout {
         if ((cast !(cast multiline : Bool) : Bool)) { break; }
         (textIndex = cast ((breakIndex + 1.0) : Dynamic));
         breakCount++;
-        (breakIndex = cast (((cast ((cast breakCount : Float) < (cast _Runtime.field(lineBreaks, 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(lineBreaks, breakCount) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+        (breakIndex = cast (((cast ((cast breakCount : Float) < (cast _Runtime.field(lineBreaks, 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast lineBreaks : Array<Float>), (cast breakCount : Float)) : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
         (spaceIndex = cast (_Runtime.callProperty(text, 'indexOf', cast ([' ', textIndex] : Array<Dynamic>)) : Dynamic));
         updateParagraphMetrics();
         updateLineMetrics();
@@ -468,13 +468,13 @@ class TextLayout {
         var segWidth:Float = _Runtime.field(__destructure1, 'width');
         var shouldWrap:Bool = ((cast ((cast wordWrap : Bool) && (cast ((cast containerWidth : Float) >= (cast (TEXT_LAYOUT_GUTTER * 2.0) : Float)) : Bool)) : Bool) && (cast ((cast (offsetX + segWidth) : Float) > (cast (cast wrapWidth() : Float) : Float)) : Bool));
         if ((cast ((cast ((cast shouldWrap : Bool) && (cast _Runtime.strictEquals(segEnd, wordEnd) : Bool)) : Bool) && (cast ((cast _Runtime.field(segPos, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-          var trailingSpace:Float = flighthq._internal._StaticIndex.readArray(segPos, _Runtime.subtractNumbers(_Runtime.field(segPos, 'length'), 1.0));
+          var trailingSpace:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast segPos : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(segPos, 'length'), 1.0) : Float));
           if ((cast ((cast ((offsetX + segWidth) - trailingSpace) : Float) <= (cast (cast wrapWidth() : Float) : Float)) : Bool)) { (shouldWrap = cast (false : Dynamic)); }
         }
         if ((cast shouldWrap : Bool)) {
           var trimTarget:Null<TextLayoutGroup> = _Runtime.coalesce(activeGroup, function():Dynamic return cast ((cast ((cast _Runtime.field(groups, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(groups, _Runtime.subtractNumbers(_Runtime.field(groups, 'length'), 1.0)) : Dynamic) : (cast null : Dynamic)));
           if (_Runtime.truthy(_Runtime.andValue(_Runtime.andValue(trimTarget, function():Dynamic return cast ((cast _Runtime.field((cast trimTarget : TextLayoutGroup).positions, 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast _Runtime.strictEquals((cast trimTarget : TextLayoutGroup).lineIndex, lineIndex)))) {
-            var trailingW:Float = flighthq._internal._StaticIndex.readArray((cast trimTarget : TextLayoutGroup).positions, _Runtime.subtractNumbers(_Runtime.field((cast trimTarget : TextLayoutGroup).positions, 'length'), 1.0));
+            var trailingW:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast trimTarget : TextLayoutGroup).positions : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field((cast trimTarget : TextLayoutGroup).positions, 'length'), 1.0) : Float));
             ((cast trimTarget : TextLayoutGroup).width -= trailingW);
             (cast trimTarget : TextLayoutGroup).endIndex--;
           }
@@ -509,7 +509,7 @@ class TextLayout {
 
   public static function applyAlignment__textLayout(groups:Array<TextLayoutGroup>, containerWidth:Float, lineWidths:Array<Float>, direction:TextDirection, justification:TextJustification, paragraphLastLines:flighthq._internal._Set<Float>, text:String):Void {
     for (g in _Runtime.iterable(groups)) {
-      var lineW:Float = flighthq._internal._StaticIndex.readArray(lineWidths, (cast g : TextLayoutGroup).lineIndex);
+      var lineW:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast lineWidths : Array<Float>), (cast (cast g : TextLayoutGroup).lineIndex : Float));
       var align:TextFormatAlign = _Runtime.coalesce((cast (cast g : TextLayoutGroup).format : TextFormat).align, function():Dynamic return cast 'left');
       var shift:Float = 0.0;
       var resolved:String = ((cast _Runtime.strictEquals(align, 'start') : Bool) ? (cast ((cast _Runtime.strictEquals(direction, 'RightToLeft') : Bool) ? (cast 'right' : Dynamic) : (cast 'left' : Dynamic)) : Dynamic) : (cast ((cast _Runtime.strictEquals(align, 'end') : Bool) ? (cast ((cast _Runtime.strictEquals(direction, 'RightToLeft') : Bool) ? (cast 'left' : Dynamic) : (cast 'right' : Dynamic)) : Dynamic) : (cast align : Dynamic)) : Dynamic));
@@ -549,7 +549,7 @@ class TextLayout {
           if ((cast ((cast _Runtime.strictEquals((cast g : TextLayoutGroup).lineIndex, li) : Bool) && (cast _Runtime.strictEquals((cast (cast g : TextLayoutGroup).format : TextFormat).align, 'justify') : Bool)) : Bool)) { _Runtime.callProperty(lineGroups, 'push', cast ([g] : Array<Dynamic>)); }
         }
         if ((cast _Runtime.strictEquals(_Runtime.field(lineGroups, 'length'), 0.0) : Bool)) { li++; continue; }
-        var lineW:Float = flighthq._internal._StaticIndex.readArray(lineWidths, li);
+        var lineW:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast lineWidths : Array<Float>), (cast li : Float));
         var available:Float = (containerWidth - (TEXT_LAYOUT_GUTTER * 2.0));
         var residual:Float = (available - lineW);
         if ((cast ((cast residual : Float) <= (cast 0.0 : Float)) : Bool)) { li++; continue; }
@@ -570,7 +570,7 @@ class TextLayout {
             {
               var ci:Float = 0.0;
               while ((cast ((cast ci : Float) < (cast lastPos : Float)) : Bool)) {
-                ({ var __indexedObject16:Dynamic = (cast g : TextLayoutGroup).positions; var __indexedKey17:Dynamic = ci; flighthq._internal._StaticIndex.writeArray(__indexedObject16, __indexedKey17, _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject16, __indexedKey17), extraPerGap)); });
+                ({ var __indexedObject16:Array<Float> = (cast g : TextLayoutGroup).positions; var __indexedKey17:Float = ci; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject16 : Array<Float>), (cast __indexedKey17 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject16 : Array<Float>), (cast __indexedKey17 : Float)) + extraPerGap) : Float)); });
                 (accumulated = cast ((accumulated + extraPerGap) : Dynamic));
                 (groupExtra = cast ((groupExtra + extraPerGap) : Dynamic));
                 ci++;
@@ -604,7 +604,7 @@ class TextLayout {
               while ((cast ((cast ((cast ci : Float) < (cast _Runtime.field((cast g : TextLayoutGroup).positions, 'length') : Float)) : Bool) && (cast ((cast textIndex : Float) < (cast (cast g : TextLayoutGroup).endIndex : Float)) : Bool)) : Bool)) {
                 var codepoint:Float = _Runtime.coalesce(_Runtime.codePointAt(text, textIndex), function():Dynamic return cast 0.0);
                 if ((cast _Runtime.strictEquals(codepoint, 32.0) : Bool)) {
-                  ({ var __indexedObject22:Dynamic = (cast g : TextLayoutGroup).positions; var __indexedKey23:Dynamic = ci; flighthq._internal._StaticIndex.writeArray(__indexedObject22, __indexedKey23, _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject22, __indexedKey23), extraPerSpace)); });
+                  ({ var __indexedObject22:Array<Float> = (cast g : TextLayoutGroup).positions; var __indexedKey23:Float = ci; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject22 : Array<Float>), (cast __indexedKey23 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject22 : Array<Float>), (cast __indexedKey23 : Float)) + extraPerSpace) : Float)); });
                   (accumulated = cast ((accumulated + extraPerSpace) : Dynamic));
                   (groupExtra = cast ((groupExtra + extraPerSpace) : Dynamic));
                 }
@@ -639,12 +639,12 @@ class TextLayout {
         (cast out : TextLayoutResult).numLines++;
       }
       var li:Float = (cast g : TextLayoutGroup).lineIndex;
-      flighthq._internal._StaticIndex.writeArray((cast out : TextLayoutResult).lineAscents, li, HxMath.max(flighthq._internal._StaticIndex.readArray((cast out : TextLayoutResult).lineAscents, li), (cast g : TextLayoutGroup).ascent));
-      flighthq._internal._StaticIndex.writeArray((cast out : TextLayoutResult).lineDescents, li, HxMath.max(flighthq._internal._StaticIndex.readArray((cast out : TextLayoutResult).lineDescents, li), (cast g : TextLayoutGroup).descent));
-      flighthq._internal._StaticIndex.writeArray((cast out : TextLayoutResult).lineHeights, li, HxMath.max(flighthq._internal._StaticIndex.readArray((cast out : TextLayoutResult).lineHeights, li), (cast g : TextLayoutGroup).height));
-      if ((cast ((cast (cast g : TextLayoutGroup).leading : Float) > (cast flighthq._internal._StaticIndex.readArray((cast out : TextLayoutResult).lineLeadings, li) : Float)) : Bool)) { flighthq._internal._StaticIndex.writeArray((cast out : TextLayoutResult).lineLeadings, li, (cast g : TextLayoutGroup).leading); }
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast out : TextLayoutResult).lineAscents : Array<Float>), (cast li : Float), (cast HxMath.max(flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast out : TextLayoutResult).lineAscents : Array<Float>), (cast li : Float)), (cast g : TextLayoutGroup).ascent) : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast out : TextLayoutResult).lineDescents : Array<Float>), (cast li : Float), (cast HxMath.max(flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast out : TextLayoutResult).lineDescents : Array<Float>), (cast li : Float)), (cast g : TextLayoutGroup).descent) : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast out : TextLayoutResult).lineHeights : Array<Float>), (cast li : Float), (cast HxMath.max(flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast out : TextLayoutResult).lineHeights : Array<Float>), (cast li : Float)), (cast g : TextLayoutGroup).height) : Float));
+      if ((cast ((cast (cast g : TextLayoutGroup).leading : Float) > (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast out : TextLayoutResult).lineLeadings : Array<Float>), (cast li : Float)) : Float)) : Bool)) { flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast out : TextLayoutResult).lineLeadings : Array<Float>), (cast li : Float), (cast (cast g : TextLayoutGroup).leading : Float)); }
       var rightEdge:Float = (((cast g : TextLayoutGroup).offsetX - TEXT_LAYOUT_GUTTER) + (cast g : TextLayoutGroup).width);
-      if ((cast ((cast rightEdge : Float) > (cast flighthq._internal._StaticIndex.readArray((cast out : TextLayoutResult).lineWidths, li) : Float)) : Bool)) { flighthq._internal._StaticIndex.writeArray((cast out : TextLayoutResult).lineWidths, li, rightEdge); }
+      if ((cast ((cast rightEdge : Float) > (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast out : TextLayoutResult).lineWidths : Array<Float>), (cast li : Float)) : Float)) : Bool)) { flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast out : TextLayoutResult).lineWidths : Array<Float>), (cast li : Float), (cast rightEdge : Float)); }
       if ((cast ((cast rightEdge : Float) > (cast (cast out : TextLayoutResult).textWidth : Float)) : Bool)) { ((cast out : TextLayoutResult).textWidth = rightEdge); }
       var bottom:Float = HxMath.ceil(((((cast g : TextLayoutGroup).offsetY - TEXT_LAYOUT_GUTTER) + (cast g : TextLayoutGroup).ascent) + (cast g : TextLayoutGroup).descent));
       if ((cast ((cast bottom : Float) > (cast (cast out : TextLayoutResult).textHeight : Float)) : Bool)) { ((cast out : TextLayoutResult).textHeight = bottom); }

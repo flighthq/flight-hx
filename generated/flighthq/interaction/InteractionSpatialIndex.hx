@@ -38,7 +38,7 @@ class InteractionSpatialIndex {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex, 'length') : Float)) : Bool)) {
-        var rank:Float = flighthq._internal._StaticIndex.readArray(InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex, i);
+        var rank:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex : Array<Float>), (cast i : Float));
         if ((cast ((cast rank : Float) >= (cast bestRank : Float)) : Bool)) { i++; continue; }
         var node:Null<N> = (cast flighthq._internal._StaticIndex.readArray(nodes, rank) : Null<N>);
         if ((cast ((cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast hitTestNodeRegion((cast node), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool) : Bool)) : Bool)) {

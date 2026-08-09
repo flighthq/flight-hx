@@ -141,11 +141,11 @@ class WgpuCompressedTexture {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
-        var alpha:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), alpha) / 255.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), alpha) / 255.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), alpha) / 255.0));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), alpha);
+        var alpha:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast ((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast i : Float)) * alpha) / 255.0) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast ((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float)) * alpha) / 255.0) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast ((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float)) * alpha) / 255.0) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float), (cast alpha : Float));
         (i = cast ((i + 4.0) : Dynamic));
       }
     }

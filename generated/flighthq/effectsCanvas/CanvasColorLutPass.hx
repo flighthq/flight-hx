@@ -18,10 +18,10 @@ class CanvasColorLutPass {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast pixelCount : Float)) : Bool)) {
           var p:Float = (i * 4.0);
-          sampleColorLut((cast lut), (cast rgb), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, p), 255.0) : Float), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 1.0)), 255.0) : Float), (cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (p + 2.0)), 255.0) : Float));
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, p, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(rgb, 0.0), 255.0));
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 1.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(rgb, 1.0), 255.0));
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (p + 2.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(rgb, 2.0), 255.0));
+          sampleColorLut((cast lut), (cast rgb), (cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast p : Float)) / 255.0) : Float), (cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (p + 1.0) : Float)) / 255.0) : Float), (cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (p + 2.0) : Float)) / 255.0) : Float));
+          flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast p : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast rgb : Array<Float>), (cast 0.0 : Float)) * 255.0) : Float));
+          flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (p + 1.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast rgb : Array<Float>), (cast 1.0 : Float)) * 255.0) : Float));
+          flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (p + 2.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast rgb : Array<Float>), (cast 2.0 : Float)) * 255.0) : Float));
           i++;
         }
       }

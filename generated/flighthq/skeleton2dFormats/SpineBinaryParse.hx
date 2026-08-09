@@ -256,7 +256,7 @@ class SpineBinaryParse {
     {
       var f:Float = 0.0;
       while ((cast ((cast f : Float) < (cast (frames * components) : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(values, f, flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values, f));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast values : Array<Float>), (cast f : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values : Array<Float>), (cast f : Float)) : Float));
         f++;
       }
     }
@@ -276,7 +276,7 @@ class SpineBinaryParse {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).curves, 'length') : Float)) : Bool)) {
         var points:Null<Array<Float>> = flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).curves, i);
-        var span:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times, (i + 1.0)), flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times, i));
+        var span:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times : Array<Float>), (cast (i + 1.0) : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times : Array<Float>), (cast i : Float)));
         if ((cast ((cast _Runtime.strictEquals(points, null) : Bool) || (cast ((cast span : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
           _Runtime.callProperty(easings, 'push', cast ([null] : Array<Dynamic>));
           i++;
@@ -287,7 +287,7 @@ class SpineBinaryParse {
         {
           var v:Float = 0.0;
           while ((cast ((cast ((cast v : Float) < (cast values : Float)) : Bool) && (cast ((cast ((v + 1.0) * 4.0) : Float) <= (cast _Runtime.field(points, 'length') : Float)) : Bool)) : Bool)) {
-            var rise:Float = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values, (((i + 1.0) * values) + v)), flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values, ((i * values) + v))));
+            var rise:Float = HxMath.abs((flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values : Array<Float>), (cast (((i + 1.0) * values) + v) : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values : Array<Float>), (cast ((i * values) + v) : Float))));
             if ((cast ((cast rise : Float) > (cast widest : Float)) : Bool)) {
               (widest = cast (rise : Dynamic));
               (winner = cast (v : Dynamic));
@@ -299,10 +299,10 @@ class SpineBinaryParse {
         rebase = (cast function(v:Float):Null<Array<Float>> {
           var from:Float = cast _Runtime.UNDEFINED;
           var rise:Float = cast _Runtime.UNDEFINED;
-          from = flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values, ((i * values) + v));
-          rise = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values, (((i + 1.0) * values) + v)), from);
+          from = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values : Array<Float>), (cast ((i * values) + v) : Float));
+          rise = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).values : Array<Float>), (cast (((i + 1.0) * values) + v) : Float)) - from);
           if ((cast _Runtime.strictEquals(rise, 0.0) : Bool)) { return cast null; }
-          return cast cast ([(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, (v * 4.0)), flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times, i)) / span), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((v * 4.0) + 1.0)), from) / rise), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((v * 4.0) + 2.0)), flighthq._internal._StaticIndex.readArray((cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times, i)) / span), (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((v * 4.0) + 3.0)), from) / rise)] : Array<Dynamic>);
+          return cast cast ([((flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (v * 4.0) : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times : Array<Float>), (cast i : Float))) / span), ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((v * 4.0) + 1.0) : Float)) - from) / rise), ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((v * 4.0) + 2.0) : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast timeline : { var curves:Array<Null<Array<Float>>>; var times:Array<Float>; var values:Array<Float>; }).times : Array<Float>), (cast i : Float))) / span), ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((v * 4.0) + 3.0) : Float)) - from) / rise)] : Array<Dynamic>);
           return cast _Runtime.UNDEFINED;
         });
         var won:Null<Array<Float>> = ((cast ((cast winner : Float) < (cast 0.0 : Float)) : Bool) ? (cast null : Dynamic) : (cast (cast rebase((cast winner : Float)) : Null<Array<Float>>) : Dynamic));
@@ -316,7 +316,7 @@ class SpineBinaryParse {
               {
                 var k:Float = 0.0;
                 while ((cast ((cast k : Float) < (cast 4.0 : Float)) : Bool)) {
-                  if ((cast ((cast HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(other, k), flighthq._internal._StaticIndex.readArray(won, k))) : Float) > (cast SpineBinaryParse.SPINE_BINARY_CURVE_EPSILON__spineBinaryParse : Float)) : Bool)) { divergent++; }
+                  if ((cast ((cast HxMath.abs((flighthq._internal._StaticIndex.readFloatArrayTyped((cast other : Array<Float>), (cast k : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast won : Array<Float>), (cast k : Float)))) : Float) > (cast SpineBinaryParse.SPINE_BINARY_CURVE_EPSILON__spineBinaryParse : Float)) : Bool)) { divergent++; }
                   k++;
                 }
               }
@@ -325,10 +325,10 @@ class SpineBinaryParse {
           }
         }
         var chosen:Bool = !_Runtime.strictEquals(won, null);
-        var x1:Float = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(won, 0.0) : Dynamic));
-        var y1:Float = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(won, 1.0) : Dynamic));
-        var x2:Float = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(won, 2.0) : Dynamic));
-        var y2:Float = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(won, 3.0) : Dynamic));
+        var x1:Float = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast won : Array<Float>), (cast 0.0 : Float)) : Dynamic));
+        var y1:Float = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast won : Array<Float>), (cast 1.0 : Float)) : Dynamic));
+        var x2:Float = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast won : Array<Float>), (cast 2.0 : Float)) : Dynamic));
+        var y2:Float = ((cast _Runtime.strictEquals(won, null) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast won : Array<Float>), (cast 3.0 : Float)) : Dynamic));
         if ((cast !(cast chosen : Bool) : Bool)) {
           _Runtime.callProperty(easings, 'push', cast ([null] : Array<Dynamic>));
           i++;
@@ -365,7 +365,7 @@ class SpineBinaryParse {
               continue;
             }
             (cast readSpineBinaryVarint((cast reader)) : Float);
-            var count:Float = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(SpineBinaryParse.SPINE_BINARY_SLOT_COLOR_CHANNELS__spineBinaryParse, type), function():Dynamic return cast 1.0);
+            var count:Float = _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast SpineBinaryParse.SPINE_BINARY_SLOT_COLOR_CHANNELS__spineBinaryParse : Array<Float>), (cast type : Float)), function():Dynamic return cast 1.0);
             if ((cast !_Runtime.strictEquals(type, SpineBinaryParse.SPINE_BINARY_SLOT_RGBA__spineBinaryParse) : Bool)) {
               SpineBinaryParse.tally__spineBinaryParse((cast unmodeled), (cast 'slot-color' : String));
               SpineBinaryParse.skipSpineBinaryCurveFrames__spineBinaryParse((cast reader), (cast frameCount : Float), (cast count : Float), (cast count : Float));
@@ -909,7 +909,7 @@ class SpineBinaryParse {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(uvs, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(uvs, i, (cast readSpineBinaryFloat((cast reader)) : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uvs : flighthq._internal._Float32Array), (cast i : Float), (cast (cast readSpineBinaryFloat((cast reader)) : Float) : Float));
         i++;
       }
     }
@@ -918,7 +918,7 @@ class SpineBinaryParse {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast triangleCount : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeUint16Array(triangles, i, (cast readSpineBinaryUnsignedShort((cast reader)) : Float));
+        flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast triangles : flighthq._internal._UInt16Array), (cast i : Float), (cast (cast readSpineBinaryUnsignedShort((cast reader)) : Float) : Float));
         i++;
       }
     }
@@ -963,7 +963,7 @@ class SpineBinaryParse {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(vertices, 'length') : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, i, (cast readSpineBinaryFloat((cast reader)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast i : Float), (cast (cast readSpineBinaryFloat((cast reader)) : Float) : Float));
           i++;
         }
       }
@@ -975,7 +975,7 @@ class SpineBinaryParse {
       var v:Float = 0.0;
       while ((cast ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool) && (cast !(cast (cast isSpineBinaryReaderOverrun((cast reader)) : Bool) : Bool) : Bool)) : Bool)) {
         var count:Float = (cast readSpineBinaryVarint((cast reader)) : Float);
-        flighthq._internal._StaticIndex.writeUint16Array(influenceCounts, v, count);
+        flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast influenceCounts : flighthq._internal._UInt16Array), (cast v : Float), (cast count : Float));
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {

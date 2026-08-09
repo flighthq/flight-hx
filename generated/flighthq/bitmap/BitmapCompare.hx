@@ -19,15 +19,15 @@ class BitmapCompare {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source.data, 'length') : Float)) : Bool)) {
-        var dr:Float = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, i), flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, i)));
-        var dg:Float = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 1.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, (i + 1.0))));
-        var db:Float = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 2.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, (i + 2.0))));
-        var da:Float = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 3.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(other.data, (i + 3.0))));
+        var dr:Float = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast i : Float)) - flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast other.data : flighthq._internal._UInt8ClampedArray), (cast i : Float))));
+        var dg:Float = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float)) - flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast other.data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float))));
+        var db:Float = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float)) - flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast other.data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float))));
+        var da:Float = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float)) - flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast other.data : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float))));
         if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(dr, 0.0) : Bool) || (cast !_Runtime.strictEquals(dg, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(db, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(da, 0.0) : Bool)) : Bool)) {
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(result.data, i, dr);
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(result.data, (i + 1.0), dg);
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(result.data, (i + 2.0), db);
-          flighthq._internal._StaticIndex.writeUint8ClampedArray(result.data, (i + 3.0), 255.0);
+          flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast result.data : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast dr : Float));
+          flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast result.data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast dg : Float));
+          flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast result.data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast db : Float));
+          flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast result.data : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float), (cast 255.0 : Float));
           (hasDiff = cast (true : Dynamic));
         }
         (i = cast ((i + 4.0) : Dynamic));
@@ -54,10 +54,10 @@ class BitmapCompare {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(a, 'length') : Float)) : Bool)) {
-        var dr:Float = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(a, i), flighthq._internal._StaticIndex.readUint8ClampedArray(b, i)));
-        var dg:Float = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(a, (i + 1.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(b, (i + 1.0))));
-        var db:Float = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(a, (i + 2.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(b, (i + 2.0))));
-        var da:Float = HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(a, (i + 3.0)), flighthq._internal._StaticIndex.readUint8ClampedArray(b, (i + 3.0))));
+        var dr:Float = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast a : flighthq._internal._UInt8ClampedArray), (cast i : Float)) - flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast b : flighthq._internal._UInt8ClampedArray), (cast i : Float))));
+        var dg:Float = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast a : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float)) - flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast b : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float))));
+        var db:Float = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast a : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float)) - flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast b : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float))));
+        var da:Float = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast a : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float)) - flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast b : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float))));
         var pixelDelta:Float = HxMath.max(HxMath.max(HxMath.max(dr, dg), db), da);
         if ((cast ((cast pixelDelta : Float) > (cast maxChannelDelta : Float)) : Bool)) { (maxChannelDelta = cast (pixelDelta : Dynamic)); }
         if ((cast ((cast pixelDelta : Float) > (cast channelTolerance : Float)) : Bool)) { mismatchedPixels++; }

@@ -22,8 +22,8 @@ class PointAttachment2D {
     b = (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D);
     x = _Runtime.field(attachment, 'x');
     y = _Runtime.field(attachment, 'y');
-    (out.x = cast (_Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, b), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 2.0)), y)), flighthq._internal._StaticIndex.readFloat32Array(world, (b + 4.0))) : Dynamic));
-    (out.y = cast (_Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 1.0)), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 3.0)), y)), flighthq._internal._StaticIndex.readFloat32Array(world, (b + 5.0))) : Dynamic));
+    (out.x = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast b : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 2.0) : Float)) * y)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 4.0) : Float))) : Dynamic));
+    (out.y = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 1.0) : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 3.0) : Float)) * y)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 5.0) : Float))) : Dynamic));
   }
 
   public static function computeSkeleton2DPointAttachmentRotation(attachment:flighthq.types.PointAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Float {
@@ -40,8 +40,8 @@ class PointAttachment2D {
     radians = _Runtime.multiplyNumbers(_Runtime.field(attachment, 'rotation'), DEG_TO_RAD);
     cos = HxMath.cos(radians);
     sin = HxMath.sin(radians);
-    x = (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, b), cos) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 2.0)), sin));
-    y = (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 1.0)), cos) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 3.0)), sin));
+    x = ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast b : Float)) * cos) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 2.0) : Float)) * sin));
+    y = ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 1.0) : Float)) * cos) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 3.0) : Float)) * sin));
     return cast _Runtime.multiplyNumbers(HxMath.atan2(y, x), RAD_TO_DEG);
     return cast null;
   }

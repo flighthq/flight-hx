@@ -27,8 +27,8 @@ class CollisionShapeValidation {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        var x:Float = flighthq._internal._StaticIndex.readArray(points, i);
-        var y:Float = flighthq._internal._StaticIndex.readArray(points, (i + 1.0));
+        var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float));
+        var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float));
         if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([x] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([y] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast 'degenerate-shape'; }
         if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
         if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
@@ -40,8 +40,8 @@ class CollisionShapeValidation {
     extent = HxMath.max((maxX - minX), (maxY - minY));
     if ((cast !(cast _Runtime.compare(extent, 0.0, '>') : Bool) : Bool)) { return cast 'degenerate-shape'; }
     crossEpsilon = ((extent * extent) * CollisionShapeValidation.RELATIVE_EPSILON__collisionShapeValidation);
-    xOrigin = flighthq._internal._StaticIndex.readArray(points, 0.0);
-    yOrigin = flighthq._internal._StaticIndex.readArray(points, 1.0);
+    xOrigin = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float));
+    yOrigin = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float));
     areaTwice = 0.0;
     turnSign = 0.0;
     count = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
@@ -50,13 +50,13 @@ class CollisionShapeValidation {
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var previous:Float = _Runtime.fmod(((i + count) - 1.0), count);
         var next:Float = _Runtime.fmod((i + 1.0), count);
-        var x:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1)), xOrigin);
-        var y:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0)), yOrigin);
-        var nextX:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(next) << 1)), xOrigin);
-        var nextY:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(next) << 1) + 1.0)), yOrigin);
+        var x:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (_Runtime.toInt32(i) << 1) : Float)) - xOrigin);
+        var y:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((_Runtime.toInt32(i) << 1) + 1.0) : Float)) - yOrigin);
+        var nextX:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (_Runtime.toInt32(next) << 1) : Float)) - xOrigin);
+        var nextY:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((_Runtime.toInt32(next) << 1) + 1.0) : Float)) - yOrigin);
         (areaTwice = cast ((areaTwice + ((x * nextY) - (y * nextX))) : Dynamic));
-        var ax:Float = (x - _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(previous) << 1)), xOrigin));
-        var ay:Float = (y - _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(previous) << 1) + 1.0)), yOrigin));
+        var ax:Float = (x - (flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (_Runtime.toInt32(previous) << 1) : Float)) - xOrigin));
+        var ay:Float = (y - (flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((_Runtime.toInt32(previous) << 1) + 1.0) : Float)) - yOrigin));
         var bx:Float = (nextX - x);
         var by:Float = (nextY - y);
         var cross:Float = ((ax * by) - (ay * bx));

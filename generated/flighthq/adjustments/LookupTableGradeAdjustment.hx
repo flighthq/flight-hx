@@ -18,15 +18,15 @@ class LookupTableGradeAdjustment {
     strength = _Runtime.coalesce(_Runtime.field(options, 'strength'), function():Dynamic return cast 1.0);
     transform = function(out:Array<Float>, r:Float, g:Float, b:Float):Void {
       if ((cast ((cast _Runtime.strictEquals(lut, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast strength : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(out, 0.0, r);
-        flighthq._internal._StaticIndex.writeArray(out, 1.0, g);
-        flighthq._internal._StaticIndex.writeArray(out, 2.0, b);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast r : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast g : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast b : Float));
         return;
       }
       sampleColorLut((cast lut), (cast out), (cast r : Float), (cast g : Float), (cast b : Float));
-      flighthq._internal._StaticIndex.writeArray(out, 0.0, (r + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 0.0), r) * strength)));
-      flighthq._internal._StaticIndex.writeArray(out, 1.0, (g + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 1.0), g) * strength)));
-      flighthq._internal._StaticIndex.writeArray(out, 2.0, (b + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 2.0), b) * strength)));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast (r + ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float)) - r) * strength)) : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast (g + ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float)) - g) * strength)) : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast (b + ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float)) - b) * strength)) : Float));
     };
     return cast _Runtime.mergeObjects([{ kind: 'LookupTableGradeAdjustment' }, options, { transform: transform }]);
     return cast null;

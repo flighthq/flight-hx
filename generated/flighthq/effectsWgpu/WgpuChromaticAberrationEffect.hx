@@ -24,8 +24,8 @@ class WgpuChromaticAberrationEffect {
     radial = _Runtime.coalesce(_Runtime.field(effect, 'radial'), function():Dynamic return cast true);
     pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'lens.chromaticAberration' : String), (cast WgpuChromaticAberrationEffect.CHROMATIC_ABERRATION_FRAGMENT_WGSL__wgpuChromaticAberrationEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, ((cast radial : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast ((cast radial : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 

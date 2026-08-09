@@ -1,7 +1,13 @@
 // Maintained runtime support for generated Flight Haxe.
 package flighthq._internal;
 
+#if js
 abstract _Float64Array(Dynamic) {
+#elseif lime
+abstract _Float64Array(_LimeTypedArray) {
+#else
+abstract _Float64Array(Array<Float>) {
+#end
   public var length(get, never):Int;
 
   public function new(source:Dynamic = 0, ?byteOffset:Int, ?length:Int) {
@@ -32,7 +38,8 @@ abstract _Float64Array(Dynamic) {
 
   @:arrayAccess public inline function arrayRead(index:Int):Float {
     #if (lime && !js)
-    return (cast this : _LimeTypedArray).get(index);
+    final values:lime.utils.Float64Array = cast this.nativeView;
+    return values[index];
     #else
     return this[index];
     #end
@@ -40,7 +47,8 @@ abstract _Float64Array(Dynamic) {
 
   @:arrayAccess public inline function arrayWrite(index:Int, value:Float):Float {
     #if (lime && !js)
-    return (cast this : _LimeTypedArray).setValue(index, value);
+    final values:lime.utils.Float64Array = cast this.nativeView;
+    return values[index] = value;
     #elseif js
     js.Syntax.code('{0}[{1}] = {2}', this, index, value);
     return this[index];

@@ -1,7 +1,13 @@
 // Maintained runtime support for generated Flight Haxe.
 package flighthq._internal;
 
+#if js
 abstract _UInt8ClampedArray(Dynamic) {
+#elseif lime
+abstract _UInt8ClampedArray(_LimeTypedArray) {
+#else
+abstract _UInt8ClampedArray(Array<Int>) {
+#end
   public var length(get, never):Int;
 
   public function new(source:Dynamic = 0, ?byteOffset:Int, ?length:Int) {
@@ -35,14 +41,15 @@ abstract _UInt8ClampedArray(Dynamic) {
     return new _UInt8ClampedArray(source, byteOffset, length);
   }
 
-  static inline function clamp(value:Dynamic):Int {
+  static inline function clamp(value:Float):Int {
     final rounded = Math.round(value);
     return rounded < 0 ? 0 : rounded > 255 ? 255 : Std.int(rounded);
   }
 
   @:arrayAccess public inline function arrayRead(index:Int):Int {
     #if (lime && !js)
-    return (cast this : _LimeTypedArray).get(index);
+    final values:lime.utils.UInt8Array = cast this.nativeView;
+    return values[index];
     #else
     return this[index];
     #end
@@ -50,7 +57,8 @@ abstract _UInt8ClampedArray(Dynamic) {
 
   @:arrayAccess public inline function arrayWrite(index:Int, value:Float):Int {
     #if (lime && !js)
-    return (cast this : _LimeTypedArray).setValue(index, value);
+    final values:lime.utils.UInt8Array = cast this.nativeView;
+    return values[index] = clamp(value);
     #elseif js
     js.Syntax.code('{0}[{1}] = {2}', this, index, value);
     return this[index];

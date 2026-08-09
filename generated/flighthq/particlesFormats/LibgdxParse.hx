@@ -164,7 +164,7 @@ class LibgdxParse {
     scaleMaxPx = flighthq._internal._StaticIndex.readArray(__destructure5, 1.0);
     scaleMin = (scaleMinPx / textureSize);
     scaleMax = (scaleMaxPx / textureSize);
-    lastScaling = ((cast ((cast _Runtime.field((cast doc.scale : { var scaling:Array<Float>; }).scaling, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray((cast doc.scale : { var scaling:Array<Float>; }).scaling, _Runtime.subtractNumbers(_Runtime.field((cast doc.scale : { var scaling:Array<Float>; }).scaling, 'length'), 1.0)) : Dynamic) : (cast 1.0 : Dynamic));
+    lastScaling = ((cast ((cast _Runtime.field((cast doc.scale : { var scaling:Array<Float>; }).scaling, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast doc.scale : { var scaling:Array<Float>; }).scaling : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field((cast doc.scale : { var scaling:Array<Float>; }).scaling, 'length'), 1.0) : Float)) : Dynamic) : (cast 1.0 : Dynamic));
     scaleEnd = lastScaling;
     __destructure6 = ((cast (cast doc.wind : { var active:Bool; }).active : Bool) ? (cast (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.wind)) : Array<Float>) : Dynamic) : (cast cast ([0.0, 0.0] : Array<Dynamic>) : Dynamic));
     windMin = flighthq._internal._StaticIndex.readArray(__destructure6, 0.0);
@@ -207,8 +207,8 @@ class LibgdxParse {
     er = flighthq._internal._StaticIndex.readArray(__destructure11, 0.0);
     eg = flighthq._internal._StaticIndex.readArray(__destructure11, 1.0);
     eb = flighthq._internal._StaticIndex.readArray(__destructure11, 2.0);
-    alphaStart = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast doc.transparency : { var scaling:Array<Float>; }).scaling, 0.0), function():Dynamic return cast 1.0);
-    alphaEnd = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast doc.transparency : { var scaling:Array<Float>; }).scaling, _Runtime.subtractNumbers(_Runtime.field((cast doc.transparency : { var scaling:Array<Float>; }).scaling, 'length'), 1.0)), function():Dynamic return cast 0.0);
+    alphaStart = _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast doc.transparency : { var scaling:Array<Float>; }).scaling : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0);
+    alphaEnd = _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast doc.transparency : { var scaling:Array<Float>; }).scaling : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field((cast doc.transparency : { var scaling:Array<Float>; }).scaling, 'length'), 1.0) : Float)), function():Dynamic return cast 0.0);
     __destructure12 = (cast LibgdxParse.rangeToMinMax__libgdxParse((cast doc.duration)) : Array<Float>);
     durMin = flighthq._internal._StaticIndex.readArray(__destructure12, 0.0);
     durMax = flighthq._internal._StaticIndex.readArray(__destructure12, 1.0);

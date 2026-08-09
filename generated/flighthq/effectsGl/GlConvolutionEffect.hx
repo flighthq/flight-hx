@@ -47,7 +47,7 @@ class GlConvolutionEffect {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(matrixData, i, flighthq._internal._StaticIndex.readArray(matrix, i));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast matrixData : flighthq._internal._Float32Array), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast matrix : Array<Float>), (cast i : Float)) : Float));
         i++;
       }
     }
@@ -79,7 +79,7 @@ class GlConvolutionEffect {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
-        (sum = cast ((sum + flighthq._internal._StaticIndex.readArray(matrix, i)) : Dynamic));
+        (sum = cast ((sum + flighthq._internal._StaticIndex.readFloatArrayTyped((cast matrix : Array<Float>), (cast i : Float))) : Dynamic));
         i++;
       }
     }

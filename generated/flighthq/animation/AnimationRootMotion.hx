@@ -89,7 +89,7 @@ class AnimationRootMotion {
     {
       var component:Float = 0.0;
       while ((cast ((cast component : Float) < (cast (cast track : AnimationTrack).components : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(out, component, (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(sample, component), flighthq._internal._StaticIndex.readFloat32Array((cast extractor : AnimationRootMotionExtractor).startSample, component)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array((cast extractor : AnimationRootMotionExtractor).cycleDelta, component), cycle)));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast component : Float), (cast ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast sample : flighthq._internal._Float32Array), (cast component : Float)) - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).startSample : flighthq._internal._Float32Array), (cast component : Float))) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).cycleDelta : flighthq._internal._Float32Array), (cast component : Float)) * cycle)) : Float));
         component++;
       }
     }
@@ -132,10 +132,10 @@ class AnimationRootMotion {
     if ((cast ((cast exponent : Float) > (cast 0.0 : Float)) : Bool)) {
       (cast base : flighthq._internal._Float32Array).set((cast extractor : AnimationRootMotionExtractor).cycleDelta);
     } else {
-      flighthq._internal._StaticIndex.writeFloat32Array(base, 0.0, -flighthq._internal._StaticIndex.readFloat32Array((cast extractor : AnimationRootMotionExtractor).cycleDelta, 0.0));
-      flighthq._internal._StaticIndex.writeFloat32Array(base, 1.0, -flighthq._internal._StaticIndex.readFloat32Array((cast extractor : AnimationRootMotionExtractor).cycleDelta, 1.0));
-      flighthq._internal._StaticIndex.writeFloat32Array(base, 2.0, -flighthq._internal._StaticIndex.readFloat32Array((cast extractor : AnimationRootMotionExtractor).cycleDelta, 2.0));
-      flighthq._internal._StaticIndex.writeFloat32Array(base, 3.0, flighthq._internal._StaticIndex.readFloat32Array((cast extractor : AnimationRootMotionExtractor).cycleDelta, 3.0));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast base : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast -flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).cycleDelta : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast base : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast -flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).cycleDelta : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast base : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast -flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).cycleDelta : flighthq._internal._Float32Array), (cast 2.0 : Float)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast base : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).cycleDelta : flighthq._internal._Float32Array), (cast 3.0 : Float)) : Float));
     }
     remaining = HxMath.abs(exponent);
     while ((cast ((cast remaining : Float) > (cast 0.0 : Float)) : Bool)) {

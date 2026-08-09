@@ -68,7 +68,7 @@ class Islands {
         var body:RigidBody2D = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).bodies, i);
         if ((cast ((cast _Runtime.strictEquals((cast body : RigidBody2D).type, 'static') : Bool) || (cast (cast body : RigidBody2D).sleeping : Bool)) : Bool)) { i++; continue; }
         var island:Null<Float> = ((cast byRoot : flighthq._internal._Map<Float, Float>).get((cast Islands._islandRootOf__islands((cast (cast world : Physics2DWorld).islandParents), (cast (cast body : RigidBody2D).index : Float)) : Float)));
-        if ((cast !_Runtime.strictEquals(island, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray((cast world : Physics2DWorld).solveIslandBodyIndices, _Runtime.incrementIndex((cast world : Physics2DWorld).solveIslandCursors, island, 1, true), i); }
+        if ((cast !_Runtime.strictEquals(island, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandBodyIndices : Array<Float>), (cast _Runtime.incrementIndex((cast world : Physics2DWorld).solveIslandCursors, island, 1, true) : Float), (cast i : Float)); }
         i++;
       }
     }
@@ -79,7 +79,7 @@ class Islands {
         var contact:Physics2DContact = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).contacts, i);
         if ((cast ((cast !(cast (cast contact : Physics2DContact).enabled : Bool) : Bool) || (cast (cast contact : Physics2DContact).sensor : Bool)) : Bool)) { i++; continue; }
         var island:Float = (cast Islands._physics2DSolveIslandForPair__islands((cast world), (cast (cast contact : Physics2DContact).bodyA : Float), (cast (cast contact : Physics2DContact).bodyB : Float)) : Float);
-        if ((cast ((cast island : Float) >= (cast 0.0 : Float)) : Bool)) { flighthq._internal._StaticIndex.writeArray((cast world : Physics2DWorld).solveIslandContactIndices, _Runtime.incrementIndex((cast world : Physics2DWorld).solveIslandCursors, island, 1, true), i); }
+        if ((cast ((cast island : Float) >= (cast 0.0 : Float)) : Bool)) { flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandContactIndices : Array<Float>), (cast _Runtime.incrementIndex((cast world : Physics2DWorld).solveIslandCursors, island, 1, true) : Float), (cast i : Float)); }
         i++;
       }
     }
@@ -91,7 +91,7 @@ class Islands {
         var solver:Null<Physics2DJointSolver> = ((cast (cast world : Physics2DWorld).jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get((cast joint : Physics2DJoint).kind));
         if ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         var island:Float = ((cast _Runtime.strictEquals((cast solver : Physics2DJointSolver).usesBodyA, false) : Bool) ? (cast (cast Islands._physics2DSolveIslandForBody__islands((cast world), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Float) : Dynamic) : (cast (cast Islands._physics2DSolveIslandForPair__islands((cast world), (cast (cast joint : Physics2DJoint).bodyA : Float), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Float) : Dynamic));
-        if ((cast ((cast island : Float) >= (cast 0.0 : Float)) : Bool)) { flighthq._internal._StaticIndex.writeArray((cast world : Physics2DWorld).solveIslandJointIndices, _Runtime.incrementIndex((cast world : Physics2DWorld).solveIslandCursors, island, 1, true), i); }
+        if ((cast ((cast island : Float) >= (cast 0.0 : Float)) : Bool)) { flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandJointIndices : Array<Float>), (cast _Runtime.incrementIndex((cast world : Physics2DWorld).solveIslandCursors, island, 1, true) : Float), (cast i : Float)); }
         i++;
       }
     }
@@ -220,8 +220,8 @@ class Islands {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(counts, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(starts, i, start);
-        (start = cast ((start + flighthq._internal._StaticIndex.readArray(counts, i)) : Dynamic));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast starts : Array<Float>), (cast i : Float), (cast start : Float));
+        (start = cast ((start + flighthq._internal._StaticIndex.readFloatArrayTyped((cast counts : Array<Float>), (cast i : Float))) : Dynamic));
         i++;
       }
     }
@@ -232,7 +232,7 @@ class Islands {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(starts, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(cursors, i, flighthq._internal._StaticIndex.readArray(starts, i));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast cursors : Array<Float>), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast starts : Array<Float>), (cast i : Float)) : Float));
         i++;
       }
     }
@@ -241,7 +241,7 @@ class Islands {
   public static function _physics2DIslandItemCount__islands(starts:Array<Float>, counts:Array<Float>):Float {
     var last:Float = cast _Runtime.UNDEFINED;
     last = _Runtime.subtractNumbers(_Runtime.field(counts, 'length'), 1.0);
-    return cast ((cast ((cast last : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(starts, last), flighthq._internal._StaticIndex.readArray(counts, last)) : Dynamic));
+    return cast ((cast ((cast last : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast starts : Array<Float>), (cast last : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast counts : Array<Float>), (cast last : Float))) : Dynamic));
     return cast null;
   }
 

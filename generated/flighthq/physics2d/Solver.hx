@@ -71,7 +71,7 @@ class Solver {
     {
       var i:Float = start;
       while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
-        Solver._solvePhysics2DContactAt__solver((cast world), (cast flighthq._internal._StaticIndex.readArray(indices, i) : Float));
+        Solver._solvePhysics2DContactAt__solver((cast world), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast indices : Array<Float>), (cast i : Float)) : Float));
         i++;
       }
     }
@@ -105,7 +105,7 @@ class Solver {
     {
       var i:Float = start;
       while ((cast ((cast i : Float) < (cast end : Float)) : Bool)) {
-        Solver._warmStartPhysics2DContactAt__solver((cast world), (cast flighthq._internal._StaticIndex.readArray(indices, i) : Float));
+        Solver._warmStartPhysics2DContactAt__solver((cast world), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast indices : Array<Float>), (cast i : Float)) : Float));
         i++;
       }
     }

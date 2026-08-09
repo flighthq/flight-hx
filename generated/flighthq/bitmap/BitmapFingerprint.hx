@@ -19,7 +19,7 @@ class BitmapFingerprint {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(a, 'cells'), 'length') : Float)) : Bool)) {
-        (sum = cast ((sum + HxMath.abs(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(a, 'cells'), i), flighthq._internal._StaticIndex.readUint8Array(_Runtime.field(b, 'cells'), i)))) : Dynamic));
+        (sum = cast ((sum + HxMath.abs((flighthq._internal._StaticIndex.readUint8ArrayTyped((cast _Runtime.field(a, 'cells') : flighthq._internal._UInt8Array), (cast i : Float)) - flighthq._internal._StaticIndex.readUint8ArrayTyped((cast _Runtime.field(b, 'cells') : flighthq._internal._UInt8Array), (cast i : Float))))) : Dynamic));
         i++;
       }
     }
@@ -61,9 +61,9 @@ class BitmapFingerprint {
                 {
                   var x:Float = x0;
                   while ((cast ((cast ((cast x : Float) < (cast x1 : Float)) : Bool) && (cast ((cast x : Float) < (cast width : Float)) : Bool)) : Bool)) {
-                    (sumR = cast ((sumR + flighthq._internal._StaticIndex.readUint8ClampedArray(data, i)) : Dynamic));
-                    (sumG = cast ((sumG + flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0))) : Dynamic));
-                    (sumB = cast ((sumB + flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0))) : Dynamic));
+                    (sumR = cast ((sumR + flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast i : Float))) : Dynamic));
+                    (sumG = cast ((sumG + flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float))) : Dynamic));
+                    (sumB = cast ((sumB + flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float))) : Dynamic));
                     count++;
                     (i = cast ((i + 4.0) : Dynamic));
                     x++;
@@ -73,9 +73,9 @@ class BitmapFingerprint {
               }
             }
             var c:Float = (((cy * gridSize) + cx) * 3.0);
-            flighthq._internal._StaticIndex.writeUint8Array(cells, c, ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.round((sumR / count)) : Dynamic)));
-            flighthq._internal._StaticIndex.writeUint8Array(cells, (c + 1.0), ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.round((sumG / count)) : Dynamic)));
-            flighthq._internal._StaticIndex.writeUint8Array(cells, (c + 2.0), ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.round((sumB / count)) : Dynamic)));
+            flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast cells : flighthq._internal._UInt8Array), (cast c : Float), (cast ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.round((sumR / count)) : Dynamic)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast cells : flighthq._internal._UInt8Array), (cast (c + 1.0) : Float), (cast ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.round((sumG / count)) : Dynamic)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast cells : flighthq._internal._UInt8Array), (cast (c + 2.0) : Float), (cast ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.round((sumB / count)) : Dynamic)) : Float));
             cx++;
           }
         }
@@ -94,7 +94,7 @@ class BitmapFingerprint {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(cells, 'length') : Float)) : Bool)) {
-        (hex = cast ((hex + (_Runtime.getIndex(BitmapFingerprint.HEX__bitmapFingerprint, (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(cells, i)) >> 4)) & 15)) + _Runtime.getIndex(BitmapFingerprint.HEX__bitmapFingerprint, (_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(cells, i)) & 15)))) : Dynamic));
+        (hex = cast ((hex + (_Runtime.getIndex(BitmapFingerprint.HEX__bitmapFingerprint, (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast cells : flighthq._internal._UInt8Array), (cast i : Float))) >> 4)) & 15)) + _Runtime.getIndex(BitmapFingerprint.HEX__bitmapFingerprint, (_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast cells : flighthq._internal._UInt8Array), (cast i : Float))) & 15)))) : Dynamic));
         i++;
       }
     }
@@ -120,7 +120,7 @@ class BitmapFingerprint {
         var hi:Float = _Runtime.callProperty(BitmapFingerprint.HEX__bitmapFingerprint, 'indexOf', cast ([_Runtime.getIndex(hex, (i * 2.0))] : Array<Dynamic>));
         var lo:Float = _Runtime.callProperty(BitmapFingerprint.HEX__bitmapFingerprint, 'indexOf', cast ([_Runtime.getIndex(hex, ((i * 2.0) + 1.0))] : Array<Dynamic>));
         if ((cast ((cast ((cast hi : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast lo : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-        flighthq._internal._StaticIndex.writeUint8Array(cells, i, (_Runtime.toInt32((_Runtime.toInt32(hi) << 4)) | _Runtime.toInt32(lo)));
+        flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast cells : flighthq._internal._UInt8Array), (cast i : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(hi) << 4)) | _Runtime.toInt32(lo)) : Float));
         i++;
       }
     }

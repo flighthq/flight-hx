@@ -76,7 +76,7 @@ class CanvasQuadBatch {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-        var id:Float = flighthq._internal._StaticIndex.readUint16Array(ids, i);
+        var id:Float = flighthq._internal._StaticIndex.readUint16ArrayTyped((cast ids : flighthq._internal._UInt16Array), (cast i : Float));
         if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(regions, id);
         if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
@@ -85,8 +85,8 @@ class CanvasQuadBatch {
         }
         var offset:Float = (i * stride);
         if ((cast _Runtime.strictEquals(stride, 2.0) : Bool)) {
-          var dx:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, offset);
-          var dy:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (offset + 1.0));
+          var dx:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast offset : Float));
+          var dy:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float));
           flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, region.x, region.y, region.width, region.height, ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dx) | 0) : Dynamic) : (cast dx : Dynamic)), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dy) | 0) : Dynamic) : (cast dy : Dynamic)), region.width, region.height] : Array<Dynamic>));
         } else {
           setMatrixFromFloat32Array((cast quadTransform), (cast offset : Float), (cast transforms));

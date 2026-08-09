@@ -68,14 +68,14 @@ class OffsetPath {
       var k:Float = 0.0;
       while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
         var kn:Float = _Runtime.fmod((k + 1.0), count);
-        var dx:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(vertices, (2.0 * kn)), flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k)));
-        var dy:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * kn) + 1.0)), flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0)));
+        var dx:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast (2.0 * kn) : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast (2.0 * k) : Float)));
+        var dy:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast ((2.0 * kn) + 1.0) : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast ((2.0 * k) + 1.0) : Float)));
         var length:Float = _Runtime.hypot(dx, dy);
         var inverse:Float = ((cast ((cast length : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / length) : Dynamic) : (cast 0.0 : Dynamic));
-        flighthq._internal._StaticIndex.writeArray(dirX, k, (dx * inverse));
-        flighthq._internal._StaticIndex.writeArray(dirY, k, (dy * inverse));
-        flighthq._internal._StaticIndex.writeArray(normalX, k, flighthq._internal._StaticIndex.readArray(dirY, k));
-        flighthq._internal._StaticIndex.writeArray(normalY, k, -flighthq._internal._StaticIndex.readArray(dirX, k));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float), (cast (dx * inverse) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float), (cast (dy * inverse) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast normalX : Array<Float>), (cast k : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast normalY : Array<Float>), (cast k : Float), (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float)) : Float));
         k++;
       }
     }
@@ -84,16 +84,16 @@ class OffsetPath {
       var k:Float = 0.0;
       while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
         var previous:Float = _Runtime.fmod(((k - 1.0) + count), count);
-        var vx:Float = flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k));
-        var vy:Float = flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0));
-        var previousEndX:Float = (vx + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalX, previous)));
-        var previousEndY:Float = (vy + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalY, previous)));
-        var thisStartX:Float = (vx + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalX, k)));
-        var thisStartY:Float = (vy + _Runtime.multiplyNumbers(signedDelta, flighthq._internal._StaticIndex.readArray(normalY, k)));
+        var vx:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast (2.0 * k) : Float));
+        var vy:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast ((2.0 * k) + 1.0) : Float));
+        var previousEndX:Float = (vx + (signedDelta * flighthq._internal._StaticIndex.readFloatArrayTyped((cast normalX : Array<Float>), (cast previous : Float))));
+        var previousEndY:Float = (vy + (signedDelta * flighthq._internal._StaticIndex.readFloatArrayTyped((cast normalY : Array<Float>), (cast previous : Float))));
+        var thisStartX:Float = (vx + (signedDelta * flighthq._internal._StaticIndex.readFloatArrayTyped((cast normalX : Array<Float>), (cast k : Float))));
+        var thisStartY:Float = (vy + (signedDelta * flighthq._internal._StaticIndex.readFloatArrayTyped((cast normalY : Array<Float>), (cast k : Float))));
         if ((cast ((cast capIndices : flighthq._internal._Set<Float>).has(k)) : Bool)) {
-          OffsetPath.emitOffsetEndCap__offsetPath((cast ring), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, k) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, k) : Float), (cast HxMath.abs(signedDelta) : Float), (cast end), (cast arcTolerance : Float));
+          OffsetPath.emitOffsetEndCap__offsetPath((cast ring), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast previous : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast previous : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float)) : Float), (cast HxMath.abs(signedDelta) : Float), (cast end), (cast arcTolerance : Float));
         } else {
-          OffsetPath.emitOffsetJoin__offsetPath((cast ring), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, previous) : Float), (cast flighthq._internal._StaticIndex.readArray(dirX, k) : Float), (cast flighthq._internal._StaticIndex.readArray(dirY, k) : Float), (cast signedDelta : Float), (cast join), (cast miterLimit : Float), (cast arcTolerance : Float));
+          OffsetPath.emitOffsetJoin__offsetPath((cast ring), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast previous : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast previous : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float)) : Float), (cast signedDelta : Float), (cast join), (cast miterLimit : Float), (cast arcTolerance : Float));
         }
         k++;
       }
@@ -157,11 +157,11 @@ class OffsetPath {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-        var x:Float = flighthq._internal._StaticIndex.readArray(contour, i);
-        var y:Float = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
+        var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast i : Float));
+        var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i + 1.0) : Float));
         if ((cast ((cast _Runtime.field(out, 'length') : Float) >= (cast 2.0 : Float)) : Bool)) {
-          var dx:Float = _Runtime.subtractNumbers(x, flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 2.0)));
-          var dy:Float = _Runtime.subtractNumbers(y, flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 1.0)));
+          var dx:Float = (x - flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 2.0) : Float)));
+          var dy:Float = (y - flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 1.0) : Float)));
           if ((cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast pointEpsSq : Float)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
         }
         _Runtime.pushMany(out, cast ([x, y] : Array<Dynamic>));
@@ -169,8 +169,8 @@ class OffsetPath {
       }
     }
     if ((cast ((cast closed : Bool) && (cast ((cast _Runtime.field(out, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool)) {
-      var dx:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 0.0), flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 2.0)));
-      var dy:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, 1.0), flighthq._internal._StaticIndex.readArray(out, _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 1.0)));
+      var dx:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 2.0) : Float)));
+      var dy:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(out, 'length'), 1.0) : Float)));
       if ((cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast pointEpsSq : Float)) : Bool)) { _Runtime.setLength(out, (out.length - 2.0)); }
     }
     return cast out;
@@ -191,8 +191,8 @@ class OffsetPath {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-          var x:Float = flighthq._internal._StaticIndex.readArray(contour, i);
-          var y:Float = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
+          var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast i : Float));
+          var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i + 1.0) : Float));
           if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
           if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
           if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }
@@ -214,7 +214,7 @@ class OffsetPath {
     {
       var k:Float = (count - 2.0);
       while ((cast ((cast k : Float) >= (cast 1.0 : Float)) : Bool)) {
-        _Runtime.pushMany(loop, cast ([flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k)), flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0))] : Array<Dynamic>));
+        _Runtime.pushMany(loop, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast (2.0 * k) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast ((2.0 * k) + 1.0) : Float))] : Array<Dynamic>));
         k--;
       }
     }
@@ -238,7 +238,7 @@ class OffsetPath {
       var k:Float = 0.0;
       while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
         var kn:Float = _Runtime.fmod((k + 1.0), count);
-        (area = cast ((area + (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(vertices, (2.0 * k)), flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * kn) + 1.0))) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(vertices, (2.0 * kn)), flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * k) + 1.0))))) : Dynamic));
+        (area = cast ((area + ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast (2.0 * k) : Float)) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast ((2.0 * kn) + 1.0) : Float))) - (flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast (2.0 * kn) : Float)) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast ((2.0 * k) + 1.0) : Float))))) : Dynamic));
         k++;
       }
     }
@@ -261,8 +261,8 @@ class OffsetPath {
     var dy:Float = cast _Runtime.UNDEFINED;
     n = _Runtime.field(contour, 'length');
     if ((cast ((cast n : Float) < (cast 6.0 : Float)) : Bool)) { return cast false; }
-    dx = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, (n - 2.0)));
-    dy = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, 1.0), flighthq._internal._StaticIndex.readArray(contour, (n - 1.0)));
+    dx = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 0.0 : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (n - 2.0) : Float)));
+    dy = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 1.0 : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (n - 1.0) : Float)));
     return cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast pointEpsSq : Float));
     return cast null;
   }
@@ -287,14 +287,14 @@ class OffsetPath {
     var out:Array<Float> = cast _Runtime.UNDEFINED;
     count = _Runtime.divideNumbers(_Runtime.field(vertices, 'length'), 2.0);
     out = _Runtime.createArray(_Runtime.field(vertices, 'length'));
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, flighthq._internal._StaticIndex.readArray(vertices, 0.0));
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, flighthq._internal._StaticIndex.readArray(vertices, 1.0));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast 0.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast 1.0 : Float)) : Float));
     {
       var k:Float = 1.0;
       while ((cast ((cast k : Float) < (cast count : Float)) : Bool)) {
         var source:Float = (count - k);
-        flighthq._internal._StaticIndex.writeArray(out, (2.0 * k), flighthq._internal._StaticIndex.readArray(vertices, (2.0 * source)));
-        flighthq._internal._StaticIndex.writeArray(out, ((2.0 * k) + 1.0), flighthq._internal._StaticIndex.readArray(vertices, ((2.0 * source) + 1.0)));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast (2.0 * k) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast (2.0 * source) : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast ((2.0 * k) + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast ((2.0 * source) + 1.0) : Float)) : Float));
         k++;
       }
     }

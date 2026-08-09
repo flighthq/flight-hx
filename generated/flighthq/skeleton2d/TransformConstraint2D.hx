@@ -41,12 +41,12 @@ class TransformConstraint2D {
     target = _Runtime.field(transform, 'targetBoneIndex');
     if ((cast ((cast ((cast target : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast target : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool)) { return; }
     t = (target * TransformConstraint2D.MATRIX_STRIDE__transformConstraint2D);
-    targetRotation = _Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32Array(world, (t + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(world, t)), RAD_TO_DEG);
-    targetScaleX = _Runtime.hypot(flighthq._internal._StaticIndex.readFloat32Array(world, t), flighthq._internal._StaticIndex.readFloat32Array(world, (t + 1.0)));
-    targetScaleY = _Runtime.hypot(flighthq._internal._StaticIndex.readFloat32Array(world, (t + 2.0)), flighthq._internal._StaticIndex.readFloat32Array(world, (t + 3.0)));
-    targetShearY = ((_Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32Array(world, (t + 3.0)), flighthq._internal._StaticIndex.readFloat32Array(world, (t + 2.0))), RAD_TO_DEG) - 90.0) - targetRotation);
-    targetX = flighthq._internal._StaticIndex.readFloat32Array(world, (t + 4.0));
-    targetY = flighthq._internal._StaticIndex.readFloat32Array(world, (t + 5.0));
+    targetRotation = _Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (t + 1.0) : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast t : Float))), RAD_TO_DEG);
+    targetScaleX = _Runtime.hypot(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast t : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (t + 1.0) : Float)));
+    targetScaleY = _Runtime.hypot(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (t + 2.0) : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (t + 3.0) : Float)));
+    targetShearY = ((_Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (t + 3.0) : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (t + 2.0) : Float))), RAD_TO_DEG) - 90.0) - targetRotation);
+    targetX = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (t + 4.0) : Float));
+    targetY = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (t + 5.0) : Float));
     mix = _Runtime.field(transform, 'mix');
     for (boneIndex in _Runtime.iterable(_Runtime.field(transform, 'boneIndices'))) {
       if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool)) { continue; }
@@ -57,28 +57,28 @@ class TransformConstraint2D {
       var scaleYMix:Float = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixScaleY'), mix);
       var shearMix:Float = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixShearY'), mix);
       if ((cast !_Runtime.strictEquals(rotateMix, 0.0) : Bool)) {
-        var current:Float = _Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(world, o)), RAD_TO_DEG);
+        var current:Float = _Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 1.0) : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast o : Float))), RAD_TO_DEG);
         var wanted:Float = _Runtime.addNumbers(targetRotation, _Runtime.field(transform, 'offsetRotation'));
         ((cast bone : Bone2D).rotation += ((cast TransformConstraint2D.wrapSkeleton2DAngle__transformConstraint2D((cast (wanted - current) : Float)) : Float) * rotateMix));
       }
       if ((cast !_Runtime.strictEquals(scaleXMix, 0.0) : Bool)) {
-        var current:Float = _Runtime.hypot(flighthq._internal._StaticIndex.readFloat32Array(world, o), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 1.0)));
+        var current:Float = _Runtime.hypot(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast o : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 1.0) : Float)));
         if ((cast ((cast current : Float) > (cast 0.0 : Float)) : Bool)) { ((cast bone : Bone2D).scaleX *= (1.0 + (((_Runtime.addNumbers(targetScaleX, _Runtime.field(transform, 'offsetScaleX')) / current) - 1.0) * scaleXMix))); }
       }
       if ((cast !_Runtime.strictEquals(scaleYMix, 0.0) : Bool)) {
-        var current:Float = _Runtime.hypot(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 2.0)), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 3.0)));
+        var current:Float = _Runtime.hypot(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 2.0) : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 3.0) : Float)));
         if ((cast ((cast current : Float) > (cast 0.0 : Float)) : Bool)) { ((cast bone : Bone2D).scaleY *= (1.0 + (((_Runtime.addNumbers(targetScaleY, _Runtime.field(transform, 'offsetScaleY')) / current) - 1.0) * scaleYMix))); }
       }
       if ((cast !_Runtime.strictEquals(shearMix, 0.0) : Bool)) {
-        var currentRotation:Float = _Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(world, o)), RAD_TO_DEG);
-        var current:Float = ((_Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 3.0)), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 2.0))), RAD_TO_DEG) - 90.0) - currentRotation);
+        var currentRotation:Float = _Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 1.0) : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast o : Float))), RAD_TO_DEG);
+        var current:Float = ((_Runtime.multiplyNumbers(HxMath.atan2(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 3.0) : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 2.0) : Float))), RAD_TO_DEG) - 90.0) - currentRotation);
         ((cast bone : Bone2D).shearY += ((cast TransformConstraint2D.wrapSkeleton2DAngle__transformConstraint2D((cast (_Runtime.addNumbers(targetShearY, _Runtime.field(transform, 'offsetShearY')) - current) : Float)) : Float) * shearMix));
       }
       var translateXMix:Float = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixX'), mix);
       var translateYMix:Float = _Runtime.multiplyNumbers(_Runtime.field(transform, 'mixY'), mix);
       if ((cast ((cast !_Runtime.strictEquals(translateXMix, 0.0) : Bool) || (cast !_Runtime.strictEquals(translateYMix, 0.0) : Bool)) : Bool)) {
-        var wantedX:Float = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 4.0)), (_Runtime.subtractNumbers(_Runtime.addNumbers(targetX, _Runtime.field(transform, 'offsetX')), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 4.0))) * translateXMix));
-        var wantedY:Float = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (o + 5.0)), (_Runtime.subtractNumbers(_Runtime.addNumbers(targetY, _Runtime.field(transform, 'offsetY')), flighthq._internal._StaticIndex.readFloat32Array(world, (o + 5.0))) * translateYMix));
+        var wantedX:Float = (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 4.0) : Float)) + ((_Runtime.addNumbers(targetX, _Runtime.field(transform, 'offsetX')) - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 4.0) : Float))) * translateXMix));
+        var wantedY:Float = (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 5.0) : Float)) + ((_Runtime.addNumbers(targetY, _Runtime.field(transform, 'offsetY')) - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 5.0) : Float))) * translateYMix));
         var local:Null<{ var x:Float; var y:Float; }> = (cast TransformConstraint2D.toSkeleton2DParentSpace__transformConstraint2D((cast skeleton), (cast boneIndex : Float), (cast wantedX : Float), (cast wantedY : Float)) : Null<{ var x:Float; var y:Float; }>);
         if ((cast !_Runtime.strictEquals(local, null) : Bool)) {
           ((cast bone : Bone2D).x = (cast local : { var x:Float; var y:Float; }).x);
@@ -104,14 +104,14 @@ class TransformConstraint2D {
     if ((cast ((cast parentIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast { x: x, y: y }; }
     world = _Runtime.field(skeleton, 'worldMatrices');
     p = (parentIndex * TransformConstraint2D.MATRIX_STRIDE__transformConstraint2D);
-    a = flighthq._internal._StaticIndex.readFloat32Array(world, p);
-    b = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 1.0));
-    c = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 2.0));
-    d = flighthq._internal._StaticIndex.readFloat32Array(world, (p + 3.0));
+    a = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast p : Float));
+    b = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 1.0) : Float));
+    c = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 2.0) : Float));
+    d = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 3.0) : Float));
     determinant = ((a * d) - (c * b));
     if ((cast ((cast HxMath.abs(determinant) : Float) < (cast TransformConstraint2D.MINIMUM_DETERMINANT__transformConstraint2D : Float)) : Bool)) { return cast null; }
-    wx = _Runtime.subtractNumbers(x, flighthq._internal._StaticIndex.readFloat32Array(world, (p + 4.0)));
-    wy = _Runtime.subtractNumbers(y, flighthq._internal._StaticIndex.readFloat32Array(world, (p + 5.0)));
+    wx = (x - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 4.0) : Float)));
+    wy = (y - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 5.0) : Float)));
     return cast { x: (((d * wx) - (c * wy)) / determinant), y: (((a * wy) - (b * wx)) / determinant) };
     return cast null;
   }

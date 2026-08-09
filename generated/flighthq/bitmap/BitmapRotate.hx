@@ -156,10 +156,10 @@ class BitmapRotate {
   }
 
   public static function copyPixel__bitmapRotate(dest:flighthq._internal._UInt8ClampedArray, di:Float, source:flighthq._internal._UInt8ClampedArray, si:Float):Void {
-    flighthq._internal._StaticIndex.writeUint8ClampedArray(dest, di, flighthq._internal._StaticIndex.readUint8ClampedArray(source, si));
-    flighthq._internal._StaticIndex.writeUint8ClampedArray(dest, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(source, (si + 1.0)));
-    flighthq._internal._StaticIndex.writeUint8ClampedArray(dest, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(source, (si + 2.0)));
-    flighthq._internal._StaticIndex.writeUint8ClampedArray(dest, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(source, (si + 3.0)));
+    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dest : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source : flighthq._internal._UInt8ClampedArray), (cast si : Float)) : Float));
+    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dest : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source : flighthq._internal._UInt8ClampedArray), (cast (si + 1.0) : Float)) : Float));
+    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dest : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source : flighthq._internal._UInt8ClampedArray), (cast (si + 2.0) : Float)) : Float));
+    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dest : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float)) : Float));
   }
 
   public static function inBounds__bitmapRotate(x:Float, y:Float, width:Float, height:Float):Bool {
@@ -176,9 +176,9 @@ class BitmapRotate {
     {
       var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
-        var t:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (a + c));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (a + c), flighthq._internal._StaticIndex.readUint8ClampedArray(data, (b + c)));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (b + c), t);
+        var t:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (a + c) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (a + c) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (b + c) : Float)) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (b + c) : Float), (cast t : Float));
         c++;
       }
     }

@@ -118,25 +118,25 @@ class WgpuTilemap {
         {
           var col:Float = 0.0;
           while ((cast ((cast col : Float) < (cast columns : Float)) : Bool)) {
-            var id:Float = flighthq._internal._StaticIndex.readInt16Array(tiles, ((row * columns) + col));
+            var id:Float = flighthq._internal._StaticIndex.readInt16ArrayTyped((cast tiles : flighthq._internal._Int16Array), (cast ((row * columns) + col) : Float));
             if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { col++; continue; }
             var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(regions, id);
             if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { col++; continue; }
             var dx:Float = (col * tileWidth);
             var dy:Float = (row * tileHeight);
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, writeBase, pa);
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 1.0), pb);
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 2.0), pc);
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 3.0), pd);
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 4.0), (((pa * dx) + (pc * dy)) + ptx));
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 5.0), (((pb * dx) + (pd * dy)) + pty));
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 6.0), tileWidth);
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 7.0), tileHeight);
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 8.0), (region.x * iw));
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 9.0), (region.y * ih));
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 10.0), ((region.x + region.width) * iw));
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 11.0), ((region.y + region.height) * ih));
-            flighthq._internal._StaticIndex.writeFloat32Array(instanceData, (writeBase + 12.0), alpha);
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast writeBase : Float), (cast pa : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 1.0) : Float), (cast pb : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 2.0) : Float), (cast pc : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 3.0) : Float), (cast pd : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 4.0) : Float), (cast (((pa * dx) + (pc * dy)) + ptx) : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 5.0) : Float), (cast (((pb * dx) + (pd * dy)) + pty) : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 6.0) : Float), (cast tileWidth : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 7.0) : Float), (cast tileHeight : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 8.0) : Float), (cast (region.x * iw) : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 9.0) : Float), (cast (region.y * ih) : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 10.0) : Float), (cast ((region.x + region.width) * iw) : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 11.0) : Float), (cast ((region.y + region.height) * ih) : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 12.0) : Float), (cast alpha : Float));
             packWgpuQuadBatchMaterialInstance((cast state), (cast nodeMaterialData), (cast (startCount + drawCount) : Float));
             var colorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>> = _Runtime.coalesce(_Runtime.coalesce((cast _Runtime.optionalIndex(perTileColorScaleBias, ((row * columns) + col)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>>), function():Dynamic return cast nodeColorMatrix), function():Dynamic return cast nodeColorScaleBias);
             recordWgpuQuadBatchColorScaleBias((cast state), (cast colorScaleBias), (cast (startCount + drawCount) : Float));

@@ -50,7 +50,7 @@ class MorphMeshGeometry {
     {
       var t:Float = 0.0;
       while ((cast ((cast t : Float) < (cast targetCount : Float)) : Bool)) {
-        var weight:Float = flighthq._internal._StaticIndex.readFloat32Array(weights, t);
+        var weight:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast weights : flighthq._internal._Float32Array), (cast t : Float));
         if ((cast _Runtime.strictEquals(weight, 0.0) : Bool)) { t++; continue; }
         var target:MorphTarget = flighthq._internal._StaticIndex.readArray(targets, t);
         MorphMeshGeometry.accumulateDeltas__morphMeshGeometry((cast blendedPositions), (cast (cast target : MorphTarget).positionDeltas), (cast weight : Float), (cast floats : Float));
@@ -76,19 +76,19 @@ class MorphMeshGeometry {
         var dst:Float = (v * floatsPerVertex);
         var s:Float = (v * 3.0);
         if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (dst + positionOffset), flighthq._internal._StaticIndex.readFloat32Array(blendedPositions, s));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((dst + positionOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(blendedPositions, (s + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((dst + positionOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(blendedPositions, (s + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (dst + positionOffset) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast blendedPositions : flighthq._internal._Float32Array), (cast s : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((dst + positionOffset) + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast blendedPositions : flighthq._internal._Float32Array), (cast (s + 1.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((dst + positionOffset) + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast blendedPositions : flighthq._internal._Float32Array), (cast (s + 2.0) : Float)) : Float));
         }
         if ((cast ((cast !_Runtime.strictEquals(blendedNormals, null) : Bool) && (cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (dst + normalOffset), flighthq._internal._StaticIndex.readFloat32Array(blendedNormals, s));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((dst + normalOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(blendedNormals, (s + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((dst + normalOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(blendedNormals, (s + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (dst + normalOffset) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast blendedNormals : flighthq._internal._Float32Array), (cast s : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((dst + normalOffset) + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast blendedNormals : flighthq._internal._Float32Array), (cast (s + 1.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((dst + normalOffset) + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast blendedNormals : flighthq._internal._Float32Array), (cast (s + 2.0) : Float)) : Float));
         }
         if ((cast ((cast !_Runtime.strictEquals(blendedTangents, null) : Bool) && (cast ((cast tangentOffset : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, (dst + tangentOffset), flighthq._internal._StaticIndex.readFloat32Array(blendedTangents, s));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((dst + tangentOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(blendedTangents, (s + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(vertices, ((dst + tangentOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(blendedTangents, (s + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (dst + tangentOffset) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast blendedTangents : flighthq._internal._Float32Array), (cast s : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((dst + tangentOffset) + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast blendedTangents : flighthq._internal._Float32Array), (cast (s + 1.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((dst + tangentOffset) + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast blendedTangents : flighthq._internal._Float32Array), (cast (s + 2.0) : Float)) : Float));
         }
         v++;
       }
@@ -125,19 +125,19 @@ class MorphMeshGeometry {
         var base:Float = (v * floatsPerVertex);
         var p:Float = (v * 3.0);
         if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(positions, p, flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + positionOffset)));
-          flighthq._internal._StaticIndex.writeFloat32Array(positions, (p + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + positionOffset) + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(positions, (p + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + positionOffset) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast positions : flighthq._internal._Float32Array), (cast p : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (base + positionOffset) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast positions : flighthq._internal._Float32Array), (cast (p + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((base + positionOffset) + 1.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast positions : flighthq._internal._Float32Array), (cast (p + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((base + positionOffset) + 2.0) : Float)) : Float));
         }
         if ((cast !_Runtime.strictEquals(normals, null) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(normals, p, flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + normalOffset)));
-          flighthq._internal._StaticIndex.writeFloat32Array(normals, (p + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + normalOffset) + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(normals, (p + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + normalOffset) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast normals : flighthq._internal._Float32Array), (cast p : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (base + normalOffset) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast normals : flighthq._internal._Float32Array), (cast (p + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((base + normalOffset) + 1.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast normals : flighthq._internal._Float32Array), (cast (p + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((base + normalOffset) + 2.0) : Float)) : Float));
         }
         if ((cast !_Runtime.strictEquals(tangents, null) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(tangents, p, flighthq._internal._StaticIndex.readFloat32Array(vertices, (base + tangentOffset)));
-          flighthq._internal._StaticIndex.writeFloat32Array(tangents, (p + 1.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + tangentOffset) + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(tangents, (p + 2.0), flighthq._internal._StaticIndex.readFloat32Array(vertices, ((base + tangentOffset) + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast tangents : flighthq._internal._Float32Array), (cast p : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (base + tangentOffset) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast tangents : flighthq._internal._Float32Array), (cast (p + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((base + tangentOffset) + 1.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast tangents : flighthq._internal._Float32Array), (cast (p + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((base + tangentOffset) + 2.0) : Float)) : Float));
         }
         v++;
       }
@@ -152,7 +152,7 @@ class MorphMeshGeometry {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
-        ({ var __indexedObject0:Dynamic = accumulator; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1), _Runtime.multiplyNumbers(weight, flighthq._internal._StaticIndex.readFloat32Array(deltas, i)))); });
+        ({ var __indexedObject0:flighthq._internal._Float32Array = accumulator; var __indexedKey1:Float = i; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject0 : flighthq._internal._Float32Array), (cast __indexedKey1 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject0 : flighthq._internal._Float32Array), (cast __indexedKey1 : Float)) + (weight * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast deltas : flighthq._internal._Float32Array), (cast i : Float)))) : Float)); });
         i++;
       }
     }

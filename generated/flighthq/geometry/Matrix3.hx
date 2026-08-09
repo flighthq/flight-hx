@@ -32,9 +32,9 @@ class Matrix3 {
       _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds (2)')));
     }
     base = (column * 3.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out.m, base, source.x);
-    flighthq._internal._StaticIndex.writeFloat32Array(out.m, (base + 1.0), source.y);
-    flighthq._internal._StaticIndex.writeFloat32Array(out.m, (base + 2.0), source.z);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out.m : flighthq._internal._Float32Array), (cast base : Float), (cast source.x : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out.m : flighthq._internal._Float32Array), (cast (base + 1.0) : Float), (cast source.y : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out.m : flighthq._internal._Float32Array), (cast (base + 2.0) : Float), (cast source.z : Float));
   }
 
   public static function copyMatrix3ColumnToVector3(out:Vector3Like, column:Float, source:Matrix3Like):Void {
@@ -43,27 +43,27 @@ class Matrix3 {
       _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds (2)')));
     }
     base = (column * 3.0);
-    (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(source.m, base) : Dynamic));
-    (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(source.m, (base + 1.0)) : Dynamic));
-    (out.z = cast (flighthq._internal._StaticIndex.readFloat32Array(source.m, (base + 2.0)) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast base : Float)) : Dynamic));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast (base + 1.0) : Float)) : Dynamic));
+    (out.z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast (base + 2.0) : Float)) : Dynamic));
   }
 
   public static function copyMatrix3RowFromVector3(out:Matrix3Like, row:Float, source:Vector3Like):Void {
     if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds (2)')));
     }
-    flighthq._internal._StaticIndex.writeFloat32Array(out.m, row, source.x);
-    flighthq._internal._StaticIndex.writeFloat32Array(out.m, (row + 3.0), source.y);
-    flighthq._internal._StaticIndex.writeFloat32Array(out.m, (row + 6.0), source.z);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out.m : flighthq._internal._Float32Array), (cast row : Float), (cast source.x : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out.m : flighthq._internal._Float32Array), (cast (row + 3.0) : Float), (cast source.y : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out.m : flighthq._internal._Float32Array), (cast (row + 6.0) : Float), (cast source.z : Float));
   }
 
   public static function copyMatrix3RowToVector3(out:Vector3Like, row:Float, source:Matrix3Like):Void {
     if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds (2)')));
     }
-    (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(source.m, row) : Dynamic));
-    (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(source.m, (row + 3.0)) : Dynamic));
-    (out.z = cast (flighthq._internal._StaticIndex.readFloat32Array(source.m, (row + 6.0)) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast row : Float)) : Dynamic));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast (row + 3.0) : Float)) : Dynamic));
+    (out.z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast (row + 6.0) : Float)) : Dynamic));
   }
 
   public static function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m20:Float, ?m21:Float, ?m22:Float):flighthq.types.Matrix3 {
@@ -71,15 +71,15 @@ class Matrix3 {
     var out:flighthq.types.Matrix3 = cast _Runtime.UNDEFINED;
     m = new flighthq._internal._Float32Array(Matrix3.__identity__matrix3);
     out = (cast createEntity((cast { m: m })) : { >Entity, var m:flighthq._internal._Float32Array; });
-    if ((cast !_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, m00); }
-    if ((cast !_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, m01); }
-    if ((cast !_Runtime.strictEquals(m02, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, m02); }
-    if ((cast !_Runtime.strictEquals(m10, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, m10); }
-    if ((cast !_Runtime.strictEquals(m11, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, m11); }
-    if ((cast !_Runtime.strictEquals(m12, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, m12); }
-    if ((cast !_Runtime.strictEquals(m20, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, m20); }
-    if ((cast !_Runtime.strictEquals(m21, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, m21); }
-    if ((cast !_Runtime.strictEquals(m22, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, m22); }
+    if ((cast !_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast m00 : Float)); }
+    if ((cast !_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast m01 : Float)); }
+    if ((cast !_Runtime.strictEquals(m02, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast m02 : Float)); }
+    if ((cast !_Runtime.strictEquals(m10, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast m10 : Float)); }
+    if ((cast !_Runtime.strictEquals(m11, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast m11 : Float)); }
+    if ((cast !_Runtime.strictEquals(m12, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast m12 : Float)); }
+    if ((cast !_Runtime.strictEquals(m20, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast m20 : Float)); }
+    if ((cast !_Runtime.strictEquals(m21, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast m21 : Float)); }
+    if ((cast !_Runtime.strictEquals(m22, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast m22 : Float)); }
     return cast out;
     return cast null;
   }
@@ -90,7 +90,7 @@ class Matrix3 {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 9.0 : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array((cast a : { var m:flighthq._internal._Float32Array; }).m, i), flighthq._internal._StaticIndex.readFloat32Array((cast b : { var m:flighthq._internal._Float32Array; }).m, i)) : Bool)) { return cast false; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast a : { var m:flighthq._internal._Float32Array; }).m : flighthq._internal._Float32Array), (cast i : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast b : { var m:flighthq._internal._Float32Array; }).m : flighthq._internal._Float32Array), (cast i : Float))) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -101,12 +101,12 @@ class Matrix3 {
   public static function getMatrix3Determinant(source:Matrix3Like):Float {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = source.m;
-    return cast (((((_Runtime.multiplyNumbers(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), flighthq._internal._StaticIndex.readFloat32Array(m, 4.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 8.0)) + _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), flighthq._internal._StaticIndex.readFloat32Array(m, 5.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 6.0))) + _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), flighthq._internal._StaticIndex.readFloat32Array(m, 3.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 7.0))) - _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), flighthq._internal._StaticIndex.readFloat32Array(m, 4.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 6.0))) - _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), flighthq._internal._StaticIndex.readFloat32Array(m, 3.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 8.0))) - _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), flighthq._internal._StaticIndex.readFloat32Array(m, 5.0)), flighthq._internal._StaticIndex.readFloat32Array(m, 7.0)));
+    return cast (((((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float))) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float))) + ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float))) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float)))) + ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float))) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float)))) - ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float))) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float)))) - ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float))) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float)))) - ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float))) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float))));
     return cast null;
   }
 
   public static function getMatrix3Element(source:Matrix3Like, row:Float, column:Float):Float {
-    return cast flighthq._internal._StaticIndex.readFloat32Array(source.m, ((column * 3.0) + row));
+    return cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast ((column * 3.0) + row) : Float));
     return cast null;
   }
 
@@ -126,15 +126,15 @@ class Matrix3 {
     var inv:Float = cast _Runtime.UNDEFINED;
     _out = out.m;
     _in = source.m;
-    a00 = flighthq._internal._StaticIndex.readFloat32Array(_in, 0.0);
-    a10 = flighthq._internal._StaticIndex.readFloat32Array(_in, 1.0);
-    a20 = flighthq._internal._StaticIndex.readFloat32Array(_in, 2.0);
-    a01 = flighthq._internal._StaticIndex.readFloat32Array(_in, 3.0);
-    a11 = flighthq._internal._StaticIndex.readFloat32Array(_in, 4.0);
-    a21 = flighthq._internal._StaticIndex.readFloat32Array(_in, 5.0);
-    a02 = flighthq._internal._StaticIndex.readFloat32Array(_in, 6.0);
-    a12 = flighthq._internal._StaticIndex.readFloat32Array(_in, 7.0);
-    a22 = flighthq._internal._StaticIndex.readFloat32Array(_in, 8.0);
+    a00 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flighthq._internal._Float32Array), (cast 0.0 : Float));
+    a10 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flighthq._internal._Float32Array), (cast 1.0 : Float));
+    a20 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flighthq._internal._Float32Array), (cast 2.0 : Float));
+    a01 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flighthq._internal._Float32Array), (cast 3.0 : Float));
+    a11 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flighthq._internal._Float32Array), (cast 4.0 : Float));
+    a21 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flighthq._internal._Float32Array), (cast 5.0 : Float));
+    a02 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flighthq._internal._Float32Array), (cast 6.0 : Float));
+    a12 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flighthq._internal._Float32Array), (cast 7.0 : Float));
+    a22 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flighthq._internal._Float32Array), (cast 8.0 : Float));
     if ((cast (cast isAffineMatrix3((cast source)) : Bool) : Bool)) {
       var det:Float = ((a00 * a11) - (a01 * a10));
       if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) {
@@ -146,15 +146,15 @@ class Matrix3 {
       var i01:Float = (-a01 * invDet);
       var i10:Float = (-a10 * invDet);
       var i11:Float = (a00 * invDet);
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 0.0, i00);
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 1.0, i10);
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 2.0, 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 3.0, i01);
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 4.0, i11);
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 5.0, 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 6.0, -((i00 * a02) + (i01 * a12)));
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 7.0, -((i10 * a02) + (i11 * a12)));
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 8.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast i00 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast i10 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast i01 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast i11 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast -((i00 * a02) + (i01 * a12)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast -((i10 * a02) + (i11 * a12)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast 1.0 : Float));
       return cast true;
     }
     det = (((a00 * ((a11 * a22) - (a12 * a21))) - (a01 * ((a10 * a22) - (a12 * a20)))) + (a02 * ((a10 * a21) - (a11 * a20))));
@@ -163,21 +163,21 @@ class Matrix3 {
       return cast false;
     }
     inv = (1.0 / det);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 0.0, (((a11 * a22) - (a12 * a21)) * inv));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 1.0, (((a12 * a20) - (a10 * a22)) * inv));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 2.0, (((a10 * a21) - (a11 * a20)) * inv));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 3.0, (((a02 * a21) - (a01 * a22)) * inv));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 4.0, (((a00 * a22) - (a02 * a20)) * inv));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 5.0, (((a01 * a20) - (a00 * a21)) * inv));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 6.0, (((a01 * a12) - (a02 * a11)) * inv));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 7.0, (((a02 * a10) - (a00 * a12)) * inv));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 8.0, (((a00 * a11) - (a01 * a10)) * inv));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (((a11 * a22) - (a12 * a21)) * inv) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (((a12 * a20) - (a10 * a22)) * inv) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast (((a10 * a21) - (a11 * a20)) * inv) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast (((a02 * a21) - (a01 * a22)) * inv) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast (((a00 * a22) - (a02 * a20)) * inv) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast (((a01 * a20) - (a00 * a21)) * inv) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast (((a01 * a12) - (a02 * a11)) * inv) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast (((a02 * a10) - (a00 * a12)) * inv) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast (((a00 * a11) - (a01 * a10)) * inv) : Float));
     return cast true;
     return cast null;
   }
 
   public static function isAffineMatrix3(source:Matrix3Like):Bool {
-    return cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array(source.m, 2.0), 0.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array(source.m, 5.0), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array(source.m, 8.0), 1.0) : Bool));
+    return cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast 2.0 : Float)), 0.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast 5.0 : Float)), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast 8.0 : Float)), 1.0) : Bool));
     return cast null;
   }
 
@@ -206,45 +206,45 @@ class Matrix3 {
     _a = a.m;
     _b = b.m;
     _out = out.m;
-    a00 = flighthq._internal._StaticIndex.readFloat32Array(_a, 0.0);
-    a10 = flighthq._internal._StaticIndex.readFloat32Array(_a, 1.0);
-    a20 = flighthq._internal._StaticIndex.readFloat32Array(_a, 2.0);
-    a01 = flighthq._internal._StaticIndex.readFloat32Array(_a, 3.0);
-    a11 = flighthq._internal._StaticIndex.readFloat32Array(_a, 4.0);
-    a21 = flighthq._internal._StaticIndex.readFloat32Array(_a, 5.0);
-    a02 = flighthq._internal._StaticIndex.readFloat32Array(_a, 6.0);
-    a12 = flighthq._internal._StaticIndex.readFloat32Array(_a, 7.0);
-    a22 = flighthq._internal._StaticIndex.readFloat32Array(_a, 8.0);
-    b00 = flighthq._internal._StaticIndex.readFloat32Array(_b, 0.0);
-    b10 = flighthq._internal._StaticIndex.readFloat32Array(_b, 1.0);
-    b20 = flighthq._internal._StaticIndex.readFloat32Array(_b, 2.0);
-    b01 = flighthq._internal._StaticIndex.readFloat32Array(_b, 3.0);
-    b11 = flighthq._internal._StaticIndex.readFloat32Array(_b, 4.0);
-    b21 = flighthq._internal._StaticIndex.readFloat32Array(_b, 5.0);
-    b02 = flighthq._internal._StaticIndex.readFloat32Array(_b, 6.0);
-    b12 = flighthq._internal._StaticIndex.readFloat32Array(_b, 7.0);
-    b22 = flighthq._internal._StaticIndex.readFloat32Array(_b, 8.0);
+    a00 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _a : flighthq._internal._Float32Array), (cast 0.0 : Float));
+    a10 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _a : flighthq._internal._Float32Array), (cast 1.0 : Float));
+    a20 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _a : flighthq._internal._Float32Array), (cast 2.0 : Float));
+    a01 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _a : flighthq._internal._Float32Array), (cast 3.0 : Float));
+    a11 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _a : flighthq._internal._Float32Array), (cast 4.0 : Float));
+    a21 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _a : flighthq._internal._Float32Array), (cast 5.0 : Float));
+    a02 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _a : flighthq._internal._Float32Array), (cast 6.0 : Float));
+    a12 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _a : flighthq._internal._Float32Array), (cast 7.0 : Float));
+    a22 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _a : flighthq._internal._Float32Array), (cast 8.0 : Float));
+    b00 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flighthq._internal._Float32Array), (cast 0.0 : Float));
+    b10 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flighthq._internal._Float32Array), (cast 1.0 : Float));
+    b20 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flighthq._internal._Float32Array), (cast 2.0 : Float));
+    b01 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flighthq._internal._Float32Array), (cast 3.0 : Float));
+    b11 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flighthq._internal._Float32Array), (cast 4.0 : Float));
+    b21 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flighthq._internal._Float32Array), (cast 5.0 : Float));
+    b02 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flighthq._internal._Float32Array), (cast 6.0 : Float));
+    b12 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flighthq._internal._Float32Array), (cast 7.0 : Float));
+    b22 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flighthq._internal._Float32Array), (cast 8.0 : Float));
     if ((cast ((cast (cast isAffineMatrix3((cast a)) : Bool) : Bool) && (cast (cast isAffineMatrix3((cast b)) : Bool) : Bool)) : Bool)) {
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 0.0, ((a00 * b00) + (a01 * b10)));
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 1.0, ((a10 * b00) + (a11 * b10)));
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 2.0, 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 3.0, ((a00 * b01) + (a01 * b11)));
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 4.0, ((a10 * b01) + (a11 * b11)));
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 5.0, 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 6.0, (((a00 * b02) + (a01 * b12)) + a02));
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 7.0, (((a10 * b02) + (a11 * b12)) + a12));
-      flighthq._internal._StaticIndex.writeFloat32Array(_out, 8.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast ((a00 * b00) + (a01 * b10)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast ((a10 * b00) + (a11 * b10)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast ((a00 * b01) + (a01 * b11)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast ((a10 * b01) + (a11 * b11)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast (((a00 * b02) + (a01 * b12)) + a02) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast (((a10 * b02) + (a11 * b12)) + a12) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast 1.0 : Float));
       return;
     }
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 0.0, (((a00 * b00) + (a01 * b10)) + (a02 * b20)));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 1.0, (((a10 * b00) + (a11 * b10)) + (a12 * b20)));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 2.0, (((a20 * b00) + (a21 * b10)) + (a22 * b20)));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 3.0, (((a00 * b01) + (a01 * b11)) + (a02 * b21)));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 4.0, (((a10 * b01) + (a11 * b11)) + (a12 * b21)));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 5.0, (((a20 * b01) + (a21 * b11)) + (a22 * b21)));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 6.0, (((a00 * b02) + (a01 * b12)) + (a02 * b22)));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 7.0, (((a10 * b02) + (a11 * b12)) + (a12 * b22)));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 8.0, (((a20 * b02) + (a21 * b12)) + (a22 * b22)));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (((a00 * b00) + (a01 * b10)) + (a02 * b20)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (((a10 * b00) + (a11 * b10)) + (a12 * b20)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast (((a20 * b00) + (a21 * b10)) + (a22 * b20)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast (((a00 * b01) + (a01 * b11)) + (a02 * b21)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast (((a10 * b01) + (a11 * b11)) + (a12 * b21)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast (((a20 * b01) + (a21 * b11)) + (a22 * b21)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast (((a00 * b02) + (a01 * b12)) + (a02 * b22)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast (((a10 * b02) + (a11 * b12)) + (a12 * b22)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast (((a20 * b02) + (a21 * b12)) + (a22 * b22)) : Float));
   }
 
   public static function rotateMatrix3(out:Matrix3Like, source:Matrix3Like, theta:Float):Void {
@@ -265,24 +265,24 @@ class Matrix3 {
     s = HxMath.sin(theta);
     a = source.m;
     o = out.m;
-    a0 = flighthq._internal._StaticIndex.readFloat32Array(a, 0.0);
-    a1 = flighthq._internal._StaticIndex.readFloat32Array(a, 1.0);
-    a2 = flighthq._internal._StaticIndex.readFloat32Array(a, 2.0);
-    a3 = flighthq._internal._StaticIndex.readFloat32Array(a, 3.0);
-    a4 = flighthq._internal._StaticIndex.readFloat32Array(a, 4.0);
-    a5 = flighthq._internal._StaticIndex.readFloat32Array(a, 5.0);
-    a6 = flighthq._internal._StaticIndex.readFloat32Array(a, 6.0);
-    a7 = flighthq._internal._StaticIndex.readFloat32Array(a, 7.0);
-    a8 = flighthq._internal._StaticIndex.readFloat32Array(a, 8.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 0.0, ((a0 * c) + (a3 * s)));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 1.0, ((a1 * c) + (a4 * s)));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 2.0, ((a2 * c) + (a5 * s)));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 3.0, ((a0 * -s) + (a3 * c)));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 4.0, ((a1 * -s) + (a4 * c)));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 5.0, ((a2 * -s) + (a5 * c)));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 6.0, a6);
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 7.0, a7);
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 8.0, a8);
+    a0 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 0.0 : Float));
+    a1 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 1.0 : Float));
+    a2 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 2.0 : Float));
+    a3 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 3.0 : Float));
+    a4 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 4.0 : Float));
+    a5 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 5.0 : Float));
+    a6 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 6.0 : Float));
+    a7 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 7.0 : Float));
+    a8 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 8.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast ((a0 * c) + (a3 * s)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast ((a1 * c) + (a4 * s)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast ((a2 * c) + (a5 * s)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast ((a0 * -s) + (a3 * c)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast ((a1 * -s) + (a4 * c)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast ((a2 * -s) + (a5 * c)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast a6 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast a7 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast a8 : Float));
   }
 
   public static function scaleMatrix3(out:Matrix3Like, source:Matrix3Like, sx:Float, sy:Float):Void {
@@ -290,33 +290,33 @@ class Matrix3 {
     var o:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     a = source.m;
     o = out.m;
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 0.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(a, 0.0), sx));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 1.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(a, 1.0), sx));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 2.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(a, 2.0), sx));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 3.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(a, 3.0), sy));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 4.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(a, 4.0), sy));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 5.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(a, 5.0), sy));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 6.0, flighthq._internal._StaticIndex.readFloat32Array(a, 6.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 7.0, flighthq._internal._StaticIndex.readFloat32Array(a, 7.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 8.0, flighthq._internal._StaticIndex.readFloat32Array(a, 8.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 0.0 : Float)) * sx) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 1.0 : Float)) * sx) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 2.0 : Float)) * sx) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 3.0 : Float)) * sy) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 4.0 : Float)) * sy) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 5.0 : Float)) * sy) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 6.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 7.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 8.0 : Float)) : Float));
   }
 
   public static function setMatrix3(out:Matrix3Like, m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):Void {
     var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _out = out.m;
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 0.0, m00);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 3.0, m01);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 6.0, m02);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 1.0, m10);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 4.0, m11);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 7.0, m12);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 2.0, m20);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 5.0, m21);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 8.0, m22);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast m00 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast m01 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast m02 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast m10 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast m11 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast m12 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast m20 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast m21 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast m22 : Float));
   }
 
   public static function setMatrix3Element(out:Matrix3Like, row:Float, column:Float, value:Float):Void {
-    flighthq._internal._StaticIndex.writeFloat32Array(out.m, ((column * 3.0) + row), value);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out.m : flighthq._internal._Float32Array), (cast ((column * 3.0) + row) : Float), (cast value : Float));
   }
 
   public static function setMatrix3FromFloat32Array(out:Matrix3Like, offset:Float, source:flighthq._internal._Float32Array):Void {
@@ -325,7 +325,7 @@ class Matrix3 {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 9.0 : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(m, i, flighthq._internal._StaticIndex.readFloat32Array(source, (offset + i)));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + i) : Float)) : Float));
         i++;
       }
     }
@@ -334,15 +334,15 @@ class Matrix3 {
   public static function setMatrix3FromMatrix(out:Matrix3Like, source:MatrixLike):Void {
     var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _out = out.m;
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 0.0, source.a);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 1.0, source.c);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 2.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 3.0, source.b);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 4.0, source.d);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 5.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 6.0, source.tx);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 7.0, source.ty);
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 8.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast source.a : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast source.c : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast source.b : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast source.d : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast source.tx : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast source.ty : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast 1.0 : Float));
   }
 
   public static function setMatrix3FromMatrix4(out:Matrix3Like, source:Matrix4Like):Void {
@@ -350,15 +350,15 @@ class Matrix3 {
     var _source:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _out = out.m;
     _source = source.m;
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 0.0, flighthq._internal._StaticIndex.readFloat32Array(_source, 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 1.0, flighthq._internal._StaticIndex.readFloat32Array(_source, 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 2.0, flighthq._internal._StaticIndex.readFloat32Array(_source, 2.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 3.0, flighthq._internal._StaticIndex.readFloat32Array(_source, 4.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 4.0, flighthq._internal._StaticIndex.readFloat32Array(_source, 5.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 5.0, flighthq._internal._StaticIndex.readFloat32Array(_source, 6.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 6.0, flighthq._internal._StaticIndex.readFloat32Array(_source, 8.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 7.0, flighthq._internal._StaticIndex.readFloat32Array(_source, 9.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(_out, 8.0, flighthq._internal._StaticIndex.readFloat32Array(_source, 10.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 2.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 4.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 5.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 6.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 8.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 9.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 10.0 : Float)) : Float));
   }
 
   public static function setMatrix3Identity(out:Matrix3Like):Void {
@@ -379,15 +379,15 @@ class Matrix3 {
     var o:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     a = source.m;
     o = out.m;
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 0.0, flighthq._internal._StaticIndex.readFloat32Array(a, 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 1.0, flighthq._internal._StaticIndex.readFloat32Array(a, 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 2.0, flighthq._internal._StaticIndex.readFloat32Array(a, 2.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 3.0, flighthq._internal._StaticIndex.readFloat32Array(a, 3.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 4.0, flighthq._internal._StaticIndex.readFloat32Array(a, 4.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 5.0, flighthq._internal._StaticIndex.readFloat32Array(a, 5.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 6.0, _Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(a, 0.0), tx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(a, 3.0), ty)), flighthq._internal._StaticIndex.readFloat32Array(a, 6.0)));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 7.0, _Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(a, 1.0), tx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(a, 4.0), ty)), flighthq._internal._StaticIndex.readFloat32Array(a, 7.0)));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 8.0, _Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(a, 2.0), tx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(a, 5.0), ty)), flighthq._internal._StaticIndex.readFloat32Array(a, 8.0)));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 2.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 3.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 4.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 5.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast (((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 0.0 : Float)) * tx) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 3.0 : Float)) * ty)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 6.0 : Float))) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast (((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 1.0 : Float)) * tx) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 4.0 : Float)) * ty)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 7.0 : Float))) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast (((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 2.0 : Float)) * tx) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 5.0 : Float)) * ty)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 8.0 : Float))) : Float));
   }
 
   public static function transposeMatrix3(out:Matrix3Like, source:Matrix3Like):Void {
@@ -400,22 +400,22 @@ class Matrix3 {
     var m7:Float = cast _Runtime.UNDEFINED;
     var o:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     s = source.m;
-    m1 = flighthq._internal._StaticIndex.readFloat32Array(s, 1.0);
-    m2 = flighthq._internal._StaticIndex.readFloat32Array(s, 2.0);
-    m3 = flighthq._internal._StaticIndex.readFloat32Array(s, 3.0);
-    m5 = flighthq._internal._StaticIndex.readFloat32Array(s, 5.0);
-    m6 = flighthq._internal._StaticIndex.readFloat32Array(s, 6.0);
-    m7 = flighthq._internal._StaticIndex.readFloat32Array(s, 7.0);
+    m1 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 1.0 : Float));
+    m2 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 2.0 : Float));
+    m3 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 3.0 : Float));
+    m5 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 5.0 : Float));
+    m6 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 6.0 : Float));
+    m7 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 7.0 : Float));
     o = out.m;
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 0.0, flighthq._internal._StaticIndex.readFloat32Array(s, 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 1.0, m3);
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 2.0, m6);
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 3.0, m1);
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 4.0, flighthq._internal._StaticIndex.readFloat32Array(s, 4.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 5.0, m7);
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 6.0, m2);
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 7.0, m5);
-    flighthq._internal._StaticIndex.writeFloat32Array(o, 8.0, flighthq._internal._StaticIndex.readFloat32Array(s, 8.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast m3 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast m6 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast m1 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 4.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast m7 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast m2 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast m5 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 8.0 : Float)) : Float));
   }
 
   public static function writeMatrix3ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Matrix3Like):Void {
@@ -424,7 +424,7 @@ class Matrix3 {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 9.0 : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + i), flighthq._internal._StaticIndex.readFloat32Array(m, i));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + i) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast i : Float)) : Float));
         i++;
       }
     }

@@ -88,43 +88,43 @@ class StandardPbrWgpuMeshMaterialRenderer {
   public static function writeWgpuPbrStandardBlock(out:flighthq._internal._Float32Array, standard:Null<StandardPbrMaterialProperties>, alphaCutoff:Float):Void {
     var strength:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(standard, null) : Bool)) {
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 6.0, 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 7.0, 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 8.0, 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 9.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 10.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 11.0, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 12.0, alphaCutoff);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 13.0, 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 14.0, 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(out, 15.0, 0.0);
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast 1.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast 1.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast 1.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast 1.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast 1.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 10.0 : Float), (cast 1.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 11.0 : Float), (cast 1.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 12.0 : Float), (cast alphaCutoff : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 13.0 : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 14.0 : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 15.0 : Float), (cast 0.0 : Float));
       return;
     }
     (cast unpackColorToLinear((cast StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer), (cast _Runtime.field(standard, 'baseColor') : Float)) : LinearColor);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 2.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 3.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer : Array<Float>), (cast 0.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer : Array<Float>), (cast 2.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer : Array<Float>), (cast 3.0 : Float)) : Float));
     (cast unpackColorToLinear((cast StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer), (cast _Runtime.field(standard, 'emissive') : Float)) : LinearColor);
     strength = _Runtime.field(standard, 'emissiveStrength');
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 0.0), strength));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 1.0), strength));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 6.0, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer, 2.0), strength));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 7.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 8.0, _Runtime.field(standard, 'metallic'));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 9.0, _Runtime.field(standard, 'roughness'));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 10.0, _Runtime.field(standard, 'normalScale'));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 11.0, _Runtime.field(standard, 'occlusionStrength'));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 12.0, alphaCutoff);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 13.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 14.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 15.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer : Array<Float>), (cast 0.0 : Float)) * strength) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float)) * strength) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast StandardPbrWgpuMeshMaterialRenderer._colorScratch__standardPbrWgpuMeshMaterialRenderer : Array<Float>), (cast 2.0 : Float)) * strength) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast _Runtime.field(standard, 'metallic') : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast _Runtime.field(standard, 'roughness') : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 10.0 : Float), (cast _Runtime.field(standard, 'normalScale') : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 11.0 : Float), (cast _Runtime.field(standard, 'occlusionStrength') : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 12.0 : Float), (cast alphaCutoff : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 13.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 14.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 15.0 : Float), (cast 0.0 : Float));
   }
 
   public static final standardPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {

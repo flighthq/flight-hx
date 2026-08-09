@@ -101,10 +101,10 @@ class BitmapFlip {
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Float = (((sy * sStride) + sx) * 4.0);
             var di:Float = (((dy * dStride) + dx) * 4.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast si : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 1.0) : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 2.0) : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float)) : Float));
             px++;
           }
         }
@@ -122,9 +122,9 @@ class BitmapFlip {
     {
       var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
-        var t:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (a + c));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (a + c), flighthq._internal._StaticIndex.readUint8ClampedArray(data, (b + c)));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (b + c), t);
+        var t:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (a + c) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (a + c) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (b + c) : Float)) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (b + c) : Float), (cast t : Float));
         c++;
       }
     }

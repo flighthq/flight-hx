@@ -61,10 +61,10 @@ class BitmapWarp {
             var w:Float = (((m6 * dx) + (m7 * dy)) + m8);
             var di:Float = (((oy * dStride) + ox) * 4.0);
             if ((cast ((cast HxMath.abs(w) : Float) < (cast 1e-10 : Float)) : Bool)) {
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, 0.0);
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), 0.0);
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), 0.0);
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), 0.0);
+              flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast 0.0 : Float));
+              flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast 0.0 : Float));
+              flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast 0.0 : Float));
+              flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast 0.0 : Float));
               dx++;
               continue;
             }
@@ -105,17 +105,17 @@ class BitmapWarp {
       var cx:Null<Float> = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast ix : Float), (cast sw : Float), (cast edgeMode)) : Null<Float>);
       var cy:Null<Float> = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast iy : Float), (cast sh : Float), (cast edgeMode)) : Null<Float>);
       if ((cast ((cast _Runtime.strictEquals(cx, null) : Bool) || (cast _Runtime.strictEquals(cy, null) : Bool)) : Bool)) {
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, 0.0);
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), 0.0);
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), 0.0);
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), 0.0);
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast 0.0 : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast 0.0 : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast 0.0 : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast 0.0 : Float));
         return;
       }
       var si:Float = ((((originY + cy) * sStride) + (originX + cx)) * 4.0);
-      flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si));
-      flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0)));
-      flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)));
-      flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0)));
+      flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast si : Float)) : Float));
+      flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 1.0) : Float)) : Float));
+      flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 2.0) : Float)) : Float));
+      flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float)) : Float));
       return;
     }
     if ((cast _Runtime.strictEquals(sampleMode, 'bicubic') : Bool)) {
@@ -145,13 +145,13 @@ class BitmapWarp {
     {
       var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
-        var v00:Float = ((cast ((cast !_Runtime.strictEquals(cx00, null) : Bool) && (cast !_Runtime.strictEquals(cy00, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, ((((((originY + cy00) * sStride) + originX) + cx00) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
-        var v10:Float = ((cast ((cast !_Runtime.strictEquals(cx10, null) : Bool) && (cast !_Runtime.strictEquals(cy00, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, ((((((originY + cy00) * sStride) + originX) + cx10) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
-        var v01:Float = ((cast ((cast !_Runtime.strictEquals(cx00, null) : Bool) && (cast !_Runtime.strictEquals(cy10, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, ((((((originY + cy10) * sStride) + originX) + cx00) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
-        var v11:Float = ((cast ((cast !_Runtime.strictEquals(cx10, null) : Bool) && (cast !_Runtime.strictEquals(cy10, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, ((((((originY + cy10) * sStride) + originX) + cx10) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
+        var v00:Float = ((cast ((cast !_Runtime.strictEquals(cx00, null) : Bool) && (cast !_Runtime.strictEquals(cy00, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast ((((((originY + cy00) * sStride) + originX) + cx00) * 4.0) + c) : Float)) : Dynamic) : (cast 0.0 : Dynamic));
+        var v10:Float = ((cast ((cast !_Runtime.strictEquals(cx10, null) : Bool) && (cast !_Runtime.strictEquals(cy00, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast ((((((originY + cy00) * sStride) + originX) + cx10) * 4.0) + c) : Float)) : Dynamic) : (cast 0.0 : Dynamic));
+        var v01:Float = ((cast ((cast !_Runtime.strictEquals(cx00, null) : Bool) && (cast !_Runtime.strictEquals(cy10, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast ((((((originY + cy10) * sStride) + originX) + cx00) * 4.0) + c) : Float)) : Dynamic) : (cast 0.0 : Dynamic));
+        var v11:Float = ((cast ((cast !_Runtime.strictEquals(cx10, null) : Bool) && (cast !_Runtime.strictEquals(cy10, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast ((((((originY + cy10) * sStride) + originX) + cx10) * 4.0) + c) : Float)) : Dynamic) : (cast 0.0 : Dynamic));
         var top:Float = ((v00 * (1.0 - tx)) + (v10 * tx));
         var bottom:Float = ((v01 * (1.0 - tx)) + (v11 * tx));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + c), HxMath.round(((top * (1.0 - ty)) + (bottom * ty))));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + c) : Float), (cast HxMath.round(((top * (1.0 - ty)) + (bottom * ty))) : Float));
         c++;
       }
     }
@@ -180,7 +180,7 @@ class BitmapWarp {
               while ((cast ((cast n : Float) <= (cast 2.0 : Float)) : Bool)) {
                 var wx:Float = (cast BitmapWarp.catmullRomWeight__bitmapWarp((cast (tx - n) : Float)) : Float);
                 var rx:Null<Float> = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast (x1 + n) : Float), (cast sw : Float), (cast edgeMode)) : Null<Float>);
-                var v:Float = ((cast ((cast !_Runtime.strictEquals(rx, null) : Bool) && (cast !_Runtime.strictEquals(ry, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, ((((((originY + ry) * sStride) + originX) + rx) * 4.0) + c)) : Dynamic) : (cast 0.0 : Dynamic));
+                var v:Float = ((cast ((cast !_Runtime.strictEquals(rx, null) : Bool) && (cast !_Runtime.strictEquals(ry, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast ((((((originY + ry) * sStride) + originX) + rx) * 4.0) + c) : Float)) : Dynamic) : (cast 0.0 : Dynamic));
                 (sum = cast ((sum + ((v * wy) * wx)) : Dynamic));
                 n++;
               }
@@ -188,7 +188,7 @@ class BitmapWarp {
             m++;
           }
         }
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + c), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(sum))));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + c) : Float), (cast HxMath.max(0.0, HxMath.min(255.0, HxMath.round(sum))) : Float));
         c++;
       }
     }
@@ -236,10 +236,10 @@ class BitmapWarp {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 4.0 : Float)) : Bool)) {
-        var sx:Float = flighthq._internal._StaticIndex.readArray(src, (i * 2.0));
-        var sy:Float = flighthq._internal._StaticIndex.readArray(src, ((i * 2.0) + 1.0));
-        var dx:Float = flighthq._internal._StaticIndex.readArray(dst, (i * 2.0));
-        var dy:Float = flighthq._internal._StaticIndex.readArray(dst, ((i * 2.0) + 1.0));
+        var sx:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast src : Array<Float>), (cast (i * 2.0) : Float));
+        var sy:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast src : Array<Float>), (cast ((i * 2.0) + 1.0) : Float));
+        var dx:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast dst : Array<Float>), (cast (i * 2.0) : Float));
+        var dy:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast dst : Array<Float>), (cast ((i * 2.0) + 1.0) : Float));
         _Runtime.callProperty(A, 'push', cast ([cast ([sx, sy, 1.0, 0.0, 0.0, 0.0, (-dx * sx), (-dx * sy), -dx] : Array<Dynamic>)] : Array<Dynamic>));
         _Runtime.callProperty(A, 'push', cast ([cast ([0.0, 0.0, 0.0, sx, sy, 1.0, (-dy * sx), (-dy * sy), -dy] : Array<Dynamic>)] : Array<Dynamic>));
         i++;
@@ -252,13 +252,13 @@ class BitmapWarp {
       while ((cast ((cast r : Float) < (cast 8.0 : Float)) : Bool)) {
         var row:Array<Float> = flighthq._internal._StaticIndex.readArray(A, r);
         _Runtime.callProperty(M, 'push', cast ([_Runtime.slice(row, 0.0, 8.0)] : Array<Dynamic>));
-        _Runtime.callProperty(b, 'push', cast ([flighthq._internal._StaticIndex.readArray(row, 8.0)] : Array<Dynamic>));
+        _Runtime.callProperty(b, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast row : Array<Float>), (cast 8.0 : Float))] : Array<Dynamic>));
         r++;
       }
     }
     h = (cast BitmapWarp.solveLinear8__bitmapWarp((cast M), (cast b)) : Null<Array<Float>>);
     if ((cast _Runtime.strictEquals(h, null) : Bool)) { return cast null; }
-    return cast cast ([flighthq._internal._StaticIndex.readArray(h, 0.0), flighthq._internal._StaticIndex.readArray(h, 1.0), flighthq._internal._StaticIndex.readArray(h, 2.0), flighthq._internal._StaticIndex.readArray(h, 3.0), flighthq._internal._StaticIndex.readArray(h, 4.0), flighthq._internal._StaticIndex.readArray(h, 5.0), flighthq._internal._StaticIndex.readArray(h, 6.0), flighthq._internal._StaticIndex.readArray(h, 7.0), 1.0] : Array<Dynamic>);
+    return cast cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 3.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 4.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 5.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 6.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 7.0 : Float)), 1.0] : Array<Dynamic>);
     return cast null;
   }
 
@@ -267,16 +267,16 @@ class BitmapWarp {
     var aug:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var x:Array<Float> = cast _Runtime.UNDEFINED;
     n = 8.0;
-    aug = (cast _Runtime.mapArray((cast M : Array<Array<Float>>), function(row:Array<Float>, i:Float, __unused1:Array<Array<Float>>):Array<Float> return _Runtime.concatArrays([_Runtime.toArray(row), [-flighthq._internal._StaticIndex.readArray(b, i)]]), _Runtime.UNDEFINED));
+    aug = (cast _Runtime.mapArray((cast M : Array<Array<Float>>), function(row:Array<Float>, i:Float, __unused1:Array<Array<Float>>):Array<Float> return _Runtime.concatArrays([_Runtime.toArray(row), [-flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast i : Float))]]), _Runtime.UNDEFINED));
     {
       var col:Float = 0.0;
       while ((cast ((cast col : Float) < (cast n : Float)) : Bool)) {
         var maxRow:Float = col;
-        var maxVal:Float = HxMath.abs(flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, col), col));
+        var maxVal:Float = HxMath.abs(flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(aug, col) : Array<Float>), (cast col : Float)));
         {
           var row:Float = (col + 1.0);
           while ((cast ((cast row : Float) < (cast n : Float)) : Bool)) {
-            var v:Float = HxMath.abs(flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), col));
+            var v:Float = HxMath.abs(flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(aug, row) : Array<Float>), (cast col : Float)));
             if ((cast ((cast v : Float) > (cast maxVal : Float)) : Bool)) {
               (maxVal = cast (v : Dynamic));
               (maxRow = cast (row : Dynamic));
@@ -286,15 +286,15 @@ class BitmapWarp {
         }
         if ((cast ((cast maxVal : Float) < (cast 1e-12 : Float)) : Bool)) { return cast null; }
         ({ var __destructure0:Dynamic = cast ([flighthq._internal._StaticIndex.readArray(aug, maxRow), flighthq._internal._StaticIndex.readArray(aug, col)] : Array<Dynamic>); _Runtime.setIndex(aug, col, flighthq._internal._StaticIndex.readArray(__destructure0, 0)); _Runtime.setIndex(aug, maxRow, flighthq._internal._StaticIndex.readArray(__destructure0, 1)); __destructure0; });
-        var pivot:Float = flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, col), col);
+        var pivot:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(aug, col) : Array<Float>), (cast col : Float));
         {
           var row:Float = (col + 1.0);
           while ((cast ((cast row : Float) < (cast n : Float)) : Bool)) {
-            var factor:Float = _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), col), pivot);
+            var factor:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(aug, row) : Array<Float>), (cast col : Float)) / pivot);
             {
               var k:Float = col;
               while ((cast ((cast k : Float) <= (cast n : Float)) : Bool)) {
-                ({ var __indexedObject1:Dynamic = flighthq._internal._StaticIndex.readArray(aug, row); var __indexedKey2:Dynamic = k; flighthq._internal._StaticIndex.writeArray(__indexedObject1, __indexedKey2, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject1, __indexedKey2), _Runtime.multiplyNumbers(factor, flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, col), k)))); });
+                ({ var __indexedObject1:Array<Float> = flighthq._internal._StaticIndex.readArray(aug, row); var __indexedKey2:Float = k; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject1 : Array<Float>), (cast __indexedKey2 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject1 : Array<Float>), (cast __indexedKey2 : Float)) - (factor * flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(aug, col) : Array<Float>), (cast k : Float)))) : Float)); });
                 k++;
               }
             }
@@ -308,15 +308,15 @@ class BitmapWarp {
     {
       var row:Float = (n - 1.0);
       while ((cast ((cast row : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var sum:Float = flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), n);
+        var sum:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(aug, row) : Array<Float>), (cast n : Float));
         {
           var col:Float = (row + 1.0);
           while ((cast ((cast col : Float) < (cast n : Float)) : Bool)) {
-            (sum = cast ((sum - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), col), flighthq._internal._StaticIndex.readArray(x, col))) : Dynamic));
+            (sum = cast ((sum - (flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(aug, row) : Array<Float>), (cast col : Float)) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast x : Array<Float>), (cast col : Float)))) : Dynamic));
             col++;
           }
         }
-        flighthq._internal._StaticIndex.writeArray(x, row, _Runtime.divideNumbers(sum, flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(aug, row), row)));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast x : Array<Float>), (cast row : Float), (cast (sum / flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(aug, row) : Array<Float>), (cast row : Float))) : Float));
         row--;
       }
     }

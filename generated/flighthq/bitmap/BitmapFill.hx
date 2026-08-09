@@ -30,10 +30,10 @@ class BitmapFill {
             var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Float = (((y * (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width) + x) * 4.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray((cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data, i, r);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray((cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data, (i + 1.0), g);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray((cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data, (i + 2.0), b);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray((cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data, (i + 3.0), a);
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast r : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast g : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast b : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float), (cast a : Float));
             px++;
           }
         }
@@ -62,10 +62,10 @@ class BitmapFill {
     fillB = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
     fillA = (_Runtime.toInt32(color) & 255);
     targetI = (((y * out.width) + x) * 4.0);
-    targetR = flighthq._internal._StaticIndex.readUint8ClampedArray(out.data, targetI);
-    targetG = flighthq._internal._StaticIndex.readUint8ClampedArray(out.data, (targetI + 1.0));
-    targetB = flighthq._internal._StaticIndex.readUint8ClampedArray(out.data, (targetI + 2.0));
-    targetA = flighthq._internal._StaticIndex.readUint8ClampedArray(out.data, (targetI + 3.0));
+    targetR = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast targetI : Float));
+    targetG = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (targetI + 1.0) : Float));
+    targetB = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (targetI + 2.0) : Float));
+    targetA = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (targetI + 3.0) : Float));
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(targetR, fillR) : Bool) && (cast _Runtime.strictEquals(targetG, fillG) : Bool)) : Bool) && (cast _Runtime.strictEquals(targetB, fillB) : Bool)) : Bool) && (cast _Runtime.strictEquals(targetA, fillA) : Bool)) : Bool)) { return; }
     needed = (out.width * out.height);
     if ((cast ((cast _Runtime.strictEquals(BitmapFill._floodFillVisited__bitmapFill, null) : Bool) || (cast ((cast _Runtime.field(BitmapFill._floodFillVisited__bitmapFill, 'length') : Float) < (cast needed : Float)) : Bool)) : Bool)) {
@@ -77,18 +77,18 @@ class BitmapFill {
     stack = (cast cast ([(x + (y * out.width))] : Array<Dynamic>));
     while ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       var idx:Float = _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
-      if (_Runtime.truthy(flighthq._internal._StaticIndex.readUint8Array(visited, idx))) { continue; }
-      flighthq._internal._StaticIndex.writeUint8Array(visited, idx, 1.0);
+      if (_Runtime.truthy(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast visited : flighthq._internal._UInt8Array), (cast idx : Float)))) { continue; }
+      flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast visited : flighthq._internal._UInt8Array), (cast idx : Float), (cast 1.0 : Float));
       var px:Float = _Runtime.fmod(idx, out.width);
       var py:Float = HxMath.floor((idx / out.width));
       var i:Float = (idx * 4.0);
-      if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ClampedArray(out.data, i), targetR) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ClampedArray(out.data, (i + 1.0)), targetG) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ClampedArray(out.data, (i + 2.0)), targetB) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ClampedArray(out.data, (i + 3.0)), targetA) : Bool)) : Bool)) {
+      if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast i : Float)), targetR) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float)), targetG) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float)), targetB) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float)), targetA) : Bool)) : Bool)) {
         continue;
       }
-      flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, i, fillR);
-      flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, (i + 1.0), fillG);
-      flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, (i + 2.0), fillB);
-      flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, (i + 3.0), fillA);
+      flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast fillR : Float));
+      flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast fillG : Float));
+      flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast fillB : Float));
+      flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float), (cast fillA : Float));
       if ((cast ((cast px : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([(idx - 1.0)] : Array<Dynamic>)); }
       if ((cast ((cast px : Float) < (cast (out.width - 1.0) : Float)) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([(idx + 1.0)] : Array<Dynamic>)); }
       if ((cast ((cast py : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([(idx - out.width)] : Array<Dynamic>)); }

@@ -38,16 +38,16 @@ class TessellatePath {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
-        var x:Float = flighthq._internal._StaticIndex.readArray(source, i);
-        var y:Float = flighthq._internal._StaticIndex.readArray(source, (i + 1.0));
-        if ((cast ((cast ((cast ((cast _Runtime.field(pts, 'length') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(pts, _Runtime.subtractNumbers(_Runtime.field(pts, 'length'), 2.0)), x) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(pts, _Runtime.subtractNumbers(_Runtime.field(pts, 'length'), 1.0)), y) : Bool)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
+        var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast source : Array<Float>), (cast i : Float));
+        var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast source : Array<Float>), (cast (i + 1.0) : Float));
+        if ((cast ((cast ((cast ((cast _Runtime.field(pts, 'length') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(pts, 'length'), 2.0) : Float)), x) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(pts, 'length'), 1.0) : Float)), y) : Bool)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
         _Runtime.pushMany(pts, cast ([x, y] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
     contour = pts;
     count = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
-    if ((cast ((cast ((cast ((cast count : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, ((count - 1.0) * 2.0))) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 1.0), flighthq._internal._StaticIndex.readArray(contour, (((count - 1.0) * 2.0) + 1.0))) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast count : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((count - 1.0) * 2.0) : Float))) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (((count - 1.0) * 2.0) + 1.0) : Float))) : Bool)) : Bool)) {
       (count = cast ((count - 1.0) : Dynamic));
     }
     if ((cast ((cast count : Float) < (cast 3.0 : Float)) : Bool)) { return; }
@@ -55,7 +55,7 @@ class TessellatePath {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        _Runtime.pushMany(vertices, cast ([flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0))] : Array<Dynamic>));
+        _Runtime.pushMany(vertices, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i * 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((i * 2.0) + 1.0) : Float))] : Array<Dynamic>));
         i++;
       }
     }
@@ -64,7 +64,7 @@ class TessellatePath {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var j:Float = _Runtime.fmod((i + 1.0), count);
-        (twiceArea = cast ((twiceArea + (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((j * 2.0) + 1.0))) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(contour, (j * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0))))) : Dynamic));
+        (twiceArea = cast ((twiceArea + ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i * 2.0) : Float)) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((j * 2.0) + 1.0) : Float))) - (flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (j * 2.0) : Float)) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((i * 2.0) + 1.0) : Float))))) : Dynamic));
         i++;
       }
     }
@@ -92,9 +92,9 @@ class TessellatePath {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          var a:Float = flighthq._internal._StaticIndex.readArray(ring, _Runtime.fmod((_Runtime.addNumbers(i, _Runtime.field(ring, 'length')) - 1.0), _Runtime.field(ring, 'length')));
-          var b:Float = flighthq._internal._StaticIndex.readArray(ring, i);
-          var c:Float = flighthq._internal._StaticIndex.readArray(ring, _Runtime.fmod((i + 1.0), _Runtime.field(ring, 'length')));
+          var a:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast _Runtime.fmod((_Runtime.addNumbers(i, _Runtime.field(ring, 'length')) - 1.0), _Runtime.field(ring, 'length')) : Float));
+          var b:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float));
+          var c:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast _Runtime.fmod((i + 1.0), _Runtime.field(ring, 'length')) : Float));
           if ((cast (cast TessellatePath.isEar__tessellatePath((cast contour), (cast ring), (cast a : Float), (cast b : Float), (cast c : Float)) : Bool) : Bool)) {
             _Runtime.pushMany(indices, cast ([(base + a), (base + b), (base + c)] : Array<Dynamic>));
             _Runtime.splice(ring, Std.int(i), Std.int(1.0), []);
@@ -107,7 +107,7 @@ class TessellatePath {
       if ((cast !(cast clipped : Bool) : Bool)) { break; }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(ring, 'length'), 3.0) : Bool)) {
-      _Runtime.pushMany(indices, cast ([_Runtime.addNumbers(base, flighthq._internal._StaticIndex.readArray(ring, 0.0)), _Runtime.addNumbers(base, flighthq._internal._StaticIndex.readArray(ring, 1.0)), _Runtime.addNumbers(base, flighthq._internal._StaticIndex.readArray(ring, 2.0))] : Array<Dynamic>));
+      _Runtime.pushMany(indices, cast ([(base + flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 0.0 : Float))), (base + flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 1.0 : Float))), (base + flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 2.0 : Float)))] : Array<Dynamic>));
     }
   }
 
@@ -118,19 +118,19 @@ class TessellatePath {
     var by:Float = cast _Runtime.UNDEFINED;
     var cx:Float = cast _Runtime.UNDEFINED;
     var cy:Float = cast _Runtime.UNDEFINED;
-    ax = flighthq._internal._StaticIndex.readArray(contour, (a * 2.0));
-    ay = flighthq._internal._StaticIndex.readArray(contour, ((a * 2.0) + 1.0));
-    bx = flighthq._internal._StaticIndex.readArray(contour, (b * 2.0));
-    by = flighthq._internal._StaticIndex.readArray(contour, ((b * 2.0) + 1.0));
-    cx = flighthq._internal._StaticIndex.readArray(contour, (c * 2.0));
-    cy = flighthq._internal._StaticIndex.readArray(contour, ((c * 2.0) + 1.0));
+    ax = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (a * 2.0) : Float));
+    ay = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((a * 2.0) + 1.0) : Float));
+    bx = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (b * 2.0) : Float));
+    by = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((b * 2.0) + 1.0) : Float));
+    cx = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (c * 2.0) : Float));
+    cy = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((c * 2.0) + 1.0) : Float));
     if ((cast ((cast (((bx - ax) * (cy - by)) - ((by - ay) * (cx - bx))) : Float) <= (cast 0.0 : Float)) : Bool)) { return cast false; }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-        var p:Float = flighthq._internal._StaticIndex.readArray(ring, i);
+        var p:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float));
         if ((cast ((cast ((cast _Runtime.strictEquals(p, a) : Bool) || (cast _Runtime.strictEquals(p, b) : Bool)) : Bool) || (cast _Runtime.strictEquals(p, c) : Bool)) : Bool)) { i++; continue; }
-        if ((cast (cast TessellatePath.isPointInTriangle__tessellatePath((cast flighthq._internal._StaticIndex.readArray(contour, (p * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, ((p * 2.0) + 1.0)) : Float), (cast ax : Float), (cast ay : Float), (cast bx : Float), (cast by : Float), (cast cx : Float), (cast cy : Float)) : Bool) : Bool)) { return cast false; }
+        if ((cast (cast TessellatePath.isPointInTriangle__tessellatePath((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (p * 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((p * 2.0) + 1.0) : Float)) : Float), (cast ax : Float), (cast ay : Float), (cast bx : Float), (cast by : Float), (cast cx : Float), (cast cy : Float)) : Bool) : Bool)) { return cast false; }
         i++;
       }
     }

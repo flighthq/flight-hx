@@ -23,14 +23,14 @@ class LinearSampledGaussian {
         var i:Float = (tap * 2.0);
         var posA:Float = (i - radius);
         if ((cast ((cast (i + 1.0) : Float) < (cast size : Float)) : Bool)) {
-          var weightA:Float = flighthq._internal._StaticIndex.readArray(LinearSampledGaussian.scratchWeights__linearSampledGaussian, i);
-          var weightB:Float = flighthq._internal._StaticIndex.readArray(LinearSampledGaussian.scratchWeights__linearSampledGaussian, (i + 1.0));
+          var weightA:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast LinearSampledGaussian.scratchWeights__linearSampledGaussian : Array<Float>), (cast i : Float));
+          var weightB:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast LinearSampledGaussian.scratchWeights__linearSampledGaussian : Array<Float>), (cast (i + 1.0) : Float));
           var combined:Float = (weightA + weightB);
-          flighthq._internal._StaticIndex.writeArray(outWeights, tap, combined);
-          flighthq._internal._StaticIndex.writeArray(outOffsets, tap, ((cast _Runtime.strictEquals(combined, 0.0) : Bool) ? (cast (posA + 0.5) : Dynamic) : (cast (((posA * weightA) + ((posA + 1.0) * weightB)) / combined) : Dynamic)));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outWeights : Array<Float>), (cast tap : Float), (cast combined : Float));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outOffsets : Array<Float>), (cast tap : Float), (cast ((cast _Runtime.strictEquals(combined, 0.0) : Bool) ? (cast (posA + 0.5) : Dynamic) : (cast (((posA * weightA) + ((posA + 1.0) * weightB)) / combined) : Dynamic)) : Float));
         } else {
-          flighthq._internal._StaticIndex.writeArray(outWeights, tap, flighthq._internal._StaticIndex.readArray(LinearSampledGaussian.scratchWeights__linearSampledGaussian, i));
-          flighthq._internal._StaticIndex.writeArray(outOffsets, tap, posA);
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outWeights : Array<Float>), (cast tap : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast LinearSampledGaussian.scratchWeights__linearSampledGaussian : Array<Float>), (cast i : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outOffsets : Array<Float>), (cast tap : Float), (cast posA : Float));
         }
         tap++;
       }

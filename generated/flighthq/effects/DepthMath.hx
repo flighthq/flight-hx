@@ -35,9 +35,9 @@ class DepthMath {
         var phi:Float = HxMath.acos((1.0 - h3));
         var scale:Float = (i / n);
         var dist:Float = (0.1 + ((0.9 * scale) * scale));
-        flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 0.0), (_Runtime.multiplyNumbers(HxMath.sin(phi), HxMath.cos(theta)) * dist));
-        flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 1.0), (_Runtime.multiplyNumbers(HxMath.sin(phi), HxMath.sin(theta)) * dist));
-        flighthq._internal._StaticIndex.writeFloat32Array(out, ((i * 3.0) + 2.0), _Runtime.multiplyNumbers(HxMath.cos(phi), dist));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((i * 3.0) + 0.0) : Float), (cast (_Runtime.multiplyNumbers(HxMath.sin(phi), HxMath.cos(theta)) * dist) : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((i * 3.0) + 1.0) : Float), (cast (_Runtime.multiplyNumbers(HxMath.sin(phi), HxMath.sin(theta)) * dist) : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((i * 3.0) + 2.0) : Float), (cast _Runtime.multiplyNumbers(HxMath.cos(phi), dist) : Float));
         i++;
       }
     }

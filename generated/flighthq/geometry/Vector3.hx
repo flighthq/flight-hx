@@ -271,9 +271,9 @@ class Vector3 {
   }
 
   public static function setVector3FromFloat32Array(out:Vector3Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(source, offset) : Dynamic));
-    (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 1.0)) : Dynamic));
-    (out.z = cast (flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 2.0)) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast offset : Float)) : Dynamic));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float)) : Dynamic));
+    (out.z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float)) : Dynamic));
   }
 
   public static function setVector3FromSpherical(out:Vector3Like, radius:Float, theta:Float, phi:Float):Void {
@@ -311,15 +311,15 @@ class Vector3 {
     x = source.x;
     y = source.y;
     z = source.z;
-    (out.x = cast (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 0.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 3.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 6.0), z)) : Dynamic));
-    (out.y = cast (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 1.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 4.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 7.0), z)) : Dynamic));
-    (out.z = cast (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 2.0), x) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 5.0), y)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(m, 8.0), z)) : Dynamic));
+    (out.x = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float)) * y)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float)) * z)) : Dynamic));
+    (out.y = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float)) * y)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float)) * z)) : Dynamic));
+    (out.z = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float)) * y)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float)) * z)) : Dynamic));
   }
 
   public static function writeVector3ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Vector3Like):Void {
-    flighthq._internal._StaticIndex.writeFloat32Array(out, offset, source.x);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 1.0), source.y);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 2.0), source.z);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast offset : Float), (cast source.x : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float), (cast source.y : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float), (cast source.z : Float));
   }
 
   public static final VECTOR3_X_AXIS:flighthq.types.Vector3 = (cast createVector3((cast 1.0), (cast 0.0), (cast 0.0)) : flighthq.types.Vector3);

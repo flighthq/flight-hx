@@ -23,7 +23,7 @@ class PathMorph {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray((cast out : Path).commands, i, flighthq._internal._StaticIndex.readArray(commands, i));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast out : Path).commands : Array<Float>), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast commands : Array<Float>), (cast i : Float)) : Float));
         i++;
       }
     }
@@ -35,7 +35,7 @@ class PathMorph {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(endpoint, 'length') : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeArray((cast out : Path).data, i, flighthq._internal._StaticIndex.readArray(endpoint, i));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast out : Path).data : Array<Float>), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast endpoint : Array<Float>), (cast i : Float)) : Float));
           i++;
         }
       }
@@ -45,9 +45,9 @@ class PathMorph {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(startData, 'length') : Float)) : Bool)) {
-        var start:Float = flighthq._internal._StaticIndex.readArray(startData, i);
-        var end:Float = flighthq._internal._StaticIndex.readArray(endData, i);
-        flighthq._internal._StaticIndex.writeArray((cast out : Path).data, i, (start + ((end - start) * progress)));
+        var start:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast startData : Array<Float>), (cast i : Float));
+        var end:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast endData : Array<Float>), (cast i : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast out : Path).data : Array<Float>), (cast i : Float), (cast (start + ((end - start) * progress)) : Float));
         i++;
       }
     }

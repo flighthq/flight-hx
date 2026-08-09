@@ -32,19 +32,19 @@ class ColorLut {
             {
               var ri:Float = 0.0;
               while ((cast ((cast ri : Float) < (cast n : Float)) : Bool)) {
-                flighthq._internal._StaticIndex.writeArray(cell, 0.0, (ri / denom));
-                flighthq._internal._StaticIndex.writeArray(cell, 1.0, g);
-                flighthq._internal._StaticIndex.writeArray(cell, 2.0, b);
+                flighthq._internal._StaticIndex.writeFloatArrayTyped((cast cell : Array<Float>), (cast 0.0 : Float), (cast (ri / denom) : Float));
+                flighthq._internal._StaticIndex.writeFloatArrayTyped((cast cell : Array<Float>), (cast 1.0 : Float), (cast g : Float));
+                flighthq._internal._StaticIndex.writeFloatArrayTyped((cast cell : Array<Float>), (cast 2.0 : Float), (cast b : Float));
                 {
                   var k:Float = 0.0;
                   while ((cast ((cast k : Float) < (cast _Runtime.field(transforms, 'length') : Float)) : Bool)) {
-                    _Runtime.callValue(flighthq._internal._StaticIndex.readArray(transforms, k), cast ([cell, flighthq._internal._StaticIndex.readArray(cell, 0.0), flighthq._internal._StaticIndex.readArray(cell, 1.0), flighthq._internal._StaticIndex.readArray(cell, 2.0)] : Array<Dynamic>));
+                    _Runtime.callValue(flighthq._internal._StaticIndex.readArray(transforms, k), cast ([cell, flighthq._internal._StaticIndex.readFloatArrayTyped((cast cell : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast cell : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast cell : Array<Float>), (cast 2.0 : Float))] : Array<Dynamic>));
                     k++;
                   }
                 }
-                flighthq._internal._StaticIndex.writeArray(samples, i++, (cast ColorLut.clamp01__colorLut((cast flighthq._internal._StaticIndex.readArray(cell, 0.0) : Float)) : Float));
-                flighthq._internal._StaticIndex.writeArray(samples, i++, (cast ColorLut.clamp01__colorLut((cast flighthq._internal._StaticIndex.readArray(cell, 1.0) : Float)) : Float));
-                flighthq._internal._StaticIndex.writeArray(samples, i++, (cast ColorLut.clamp01__colorLut((cast flighthq._internal._StaticIndex.readArray(cell, 2.0) : Float)) : Float));
+                flighthq._internal._StaticIndex.writeFloatArrayTyped((cast samples : Array<Float>), (cast i++ : Float), (cast (cast ColorLut.clamp01__colorLut((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast cell : Array<Float>), (cast 0.0 : Float)) : Float)) : Float) : Float));
+                flighthq._internal._StaticIndex.writeFloatArrayTyped((cast samples : Array<Float>), (cast i++ : Float), (cast (cast ColorLut.clamp01__colorLut((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast cell : Array<Float>), (cast 1.0 : Float)) : Float)) : Float) : Float));
+                flighthq._internal._StaticIndex.writeFloatArrayTyped((cast samples : Array<Float>), (cast i++ : Float), (cast (cast ColorLut.clamp01__colorLut((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast cell : Array<Float>), (cast 2.0 : Float)) : Float)) : Float) : Float));
                 ri++;
               }
             }
@@ -92,21 +92,21 @@ class ColorLut {
     {
       var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) {
-        var c000:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g0) * n) + r0) * 3.0) + c));
-        var c100:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g0) * n) + r1) * 3.0) + c));
-        var c010:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g1) * n) + r0) * 3.0) + c));
-        var c110:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b0 * n) + g1) * n) + r1) * 3.0) + c));
-        var c001:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g0) * n) + r0) * 3.0) + c));
-        var c101:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g0) * n) + r1) * 3.0) + c));
-        var c011:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g1) * n) + r0) * 3.0) + c));
-        var c111:Float = flighthq._internal._StaticIndex.readArray(s, ((((((b1 * n) + g1) * n) + r1) * 3.0) + c));
+        var c000:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast ((((((b0 * n) + g0) * n) + r0) * 3.0) + c) : Float));
+        var c100:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast ((((((b0 * n) + g0) * n) + r1) * 3.0) + c) : Float));
+        var c010:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast ((((((b0 * n) + g1) * n) + r0) * 3.0) + c) : Float));
+        var c110:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast ((((((b0 * n) + g1) * n) + r1) * 3.0) + c) : Float));
+        var c001:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast ((((((b1 * n) + g0) * n) + r0) * 3.0) + c) : Float));
+        var c101:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast ((((((b1 * n) + g0) * n) + r1) * 3.0) + c) : Float));
+        var c011:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast ((((((b1 * n) + g1) * n) + r0) * 3.0) + c) : Float));
+        var c111:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast ((((((b1 * n) + g1) * n) + r1) * 3.0) + c) : Float));
         var c00:Float = (c000 + ((c100 - c000) * dr));
         var c10:Float = (c010 + ((c110 - c010) * dr));
         var c01:Float = (c001 + ((c101 - c001) * dr));
         var c11:Float = (c011 + ((c111 - c011) * dr));
         var c0:Float = (c00 + ((c10 - c00) * dg));
         var c1:Float = (c01 + ((c11 - c01) * dg));
-        flighthq._internal._StaticIndex.writeArray(out, c, (c0 + ((c1 - c0) * db)));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast c : Float), (cast (c0 + ((c1 - c0) * db)) : Float));
         c++;
       }
     }

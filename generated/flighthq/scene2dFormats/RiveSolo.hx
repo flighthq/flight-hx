@@ -20,7 +20,7 @@ class RiveSolo {
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         if ((cast !_Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index) : RiveCoreObject).typeKey, RiveSolo.RIVE_SOLO_TYPE_KEY__riveSolo) : Bool)) { index++; continue; }
         var active:Null<Float> = (cast RiveSolo.readRiveSoloActiveIndex__riveSolo((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index))) : Null<Float>);
-        if ((cast ((cast _Runtime.strictEquals(active, null) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), active), index) : Bool)) : Bool)) {
+        if ((cast ((cast _Runtime.strictEquals(active, null) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast active : Float)), index) : Bool)) : Bool)) {
           reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'rive.solo-unresolved-active' : String), (cast 'applyRiveSolo' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
           index++;
           continue;
@@ -28,7 +28,7 @@ class RiveSolo {
         {
           var child:Float = 0.0;
           while ((cast ((cast child : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-            if ((cast ((cast _Runtime.strictEquals(child, active) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), child), index) : Bool)) : Bool)) { child++; continue; }
+            if ((cast ((cast _Runtime.strictEquals(child, active) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast child : Float)), index) : Bool)) : Bool)) { child++; continue; }
             var node:Null<Node2D> = flighthq._internal._StaticIndex.readArray(nodes, child);
             if ((cast ((cast !_Runtime.strictEquals(node, null) : Bool) && (cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { ((cast node : { var visible:Bool; }).visible = false); }
             child++;

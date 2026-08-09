@@ -16,7 +16,7 @@ class CreateEasingSamples {
     n = HxMath.floor(count);
     result = _Runtime.coalesce(out, function():Dynamic return cast new flighthq._internal._Float32Array(n));
     if ((cast _Runtime.strictEquals(n, 1.0) : Bool)) {
-      flighthq._internal._StaticIndex.writeFloat32Array(result, 0.0, (cast ease((cast 0.5 : Float)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast result : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (cast ease((cast 0.5 : Float)) : Float) : Float));
       return cast result;
     }
     step = (1.0 / (n - 1.0));
@@ -24,12 +24,12 @@ class CreateEasingSamples {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         var t:Float = (i * step);
-        flighthq._internal._StaticIndex.writeFloat32Array(result, i, (cast ease((cast ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast result : flighthq._internal._Float32Array), (cast i : Float), (cast (cast ease((cast ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast t : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic)) : Float)) : Float) : Float));
         i++;
       }
     }
-    flighthq._internal._StaticIndex.writeFloat32Array(result, 0.0, (cast ease((cast 0.0 : Float)) : Float));
-    flighthq._internal._StaticIndex.writeFloat32Array(result, (n - 1.0), (cast ease((cast 1.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast result : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (cast ease((cast 0.0 : Float)) : Float) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast result : flighthq._internal._Float32Array), (cast (n - 1.0) : Float), (cast (cast ease((cast 1.0 : Float)) : Float) : Float));
     return cast result;
     return cast null;
   }

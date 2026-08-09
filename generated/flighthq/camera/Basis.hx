@@ -11,9 +11,9 @@ class Basis {
   public static function getCamera3DForward(out:Vector3Like, camera:Camera3D):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = (cast camera.view : { var m:flighthq._internal._Float32Array; }).m;
-    (out.x = cast (-flighthq._internal._StaticIndex.readFloat32Array(m, 2.0) : Dynamic));
-    (out.y = cast (-flighthq._internal._StaticIndex.readFloat32Array(m, 6.0) : Dynamic));
-    (out.z = cast (-flighthq._internal._StaticIndex.readFloat32Array(m, 10.0) : Dynamic));
+    (out.x = cast (-flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float)) : Dynamic));
+    (out.y = cast (-flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float)) : Dynamic));
+    (out.z = cast (-flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 10.0 : Float)) : Dynamic));
   }
 
   public static function getCamera3DPosition(out:Vector3Like, camera:Camera3D):Void {
@@ -31,18 +31,18 @@ class Basis {
     var ty:Float = cast _Runtime.UNDEFINED;
     var tz:Float = cast _Runtime.UNDEFINED;
     m = (cast camera.view : { var m:flighthq._internal._Float32Array; }).m;
-    m00 = flighthq._internal._StaticIndex.readFloat32Array(m, 0.0);
-    m01 = flighthq._internal._StaticIndex.readFloat32Array(m, 1.0);
-    m02 = flighthq._internal._StaticIndex.readFloat32Array(m, 2.0);
-    m10 = flighthq._internal._StaticIndex.readFloat32Array(m, 4.0);
-    m11 = flighthq._internal._StaticIndex.readFloat32Array(m, 5.0);
-    m12 = flighthq._internal._StaticIndex.readFloat32Array(m, 6.0);
-    m20 = flighthq._internal._StaticIndex.readFloat32Array(m, 8.0);
-    m21 = flighthq._internal._StaticIndex.readFloat32Array(m, 9.0);
-    m22 = flighthq._internal._StaticIndex.readFloat32Array(m, 10.0);
-    tx = flighthq._internal._StaticIndex.readFloat32Array(m, 12.0);
-    ty = flighthq._internal._StaticIndex.readFloat32Array(m, 13.0);
-    tz = flighthq._internal._StaticIndex.readFloat32Array(m, 14.0);
+    m00 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float));
+    m01 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float));
+    m02 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float));
+    m10 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float));
+    m11 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float));
+    m12 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float));
+    m20 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float));
+    m21 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 9.0 : Float));
+    m22 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 10.0 : Float));
+    tx = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 12.0 : Float));
+    ty = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 13.0 : Float));
+    tz = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 14.0 : Float));
     (out.x = cast (-(((m00 * tx) + (m01 * ty)) + (m02 * tz)) : Dynamic));
     (out.y = cast (-(((m10 * tx) + (m11 * ty)) + (m12 * tz)) : Dynamic));
     (out.z = cast (-(((m20 * tx) + (m21 * ty)) + (m22 * tz)) : Dynamic));
@@ -51,16 +51,16 @@ class Basis {
   public static function getCamera3DRight(out:Vector3Like, camera:Camera3D):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = (cast camera.view : { var m:flighthq._internal._Float32Array; }).m;
-    (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 0.0) : Dynamic));
-    (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 4.0) : Dynamic));
-    (out.z = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 8.0) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Dynamic));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float)) : Dynamic));
+    (out.z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float)) : Dynamic));
   }
 
   public static function getCamera3DUp(out:Vector3Like, camera:Camera3D):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = (cast camera.view : { var m:flighthq._internal._Float32Array; }).m;
-    (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 1.0) : Dynamic));
-    (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 5.0) : Dynamic));
-    (out.z = cast (flighthq._internal._StaticIndex.readFloat32Array(m, 9.0) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Dynamic));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float)) : Dynamic));
+    (out.z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 9.0 : Float)) : Dynamic));
   }
 }

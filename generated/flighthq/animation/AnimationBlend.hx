@@ -16,13 +16,13 @@ class AnimationBlend {
     sign = 1.0;
     if ((cast ((cast ((cast (cast accumulator : AnimationSampleAccumulator).quaternion : Bool) && (cast ((cast components : Float) >= (cast 4.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast accumulator : AnimationSampleAccumulator).weight : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var values:flighthq._internal._Float32Array = (cast accumulator : AnimationSampleAccumulator).values;
-      var dot:Float = (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(values, 0.0), _Runtime.getIndex(sample, 0.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(values, 1.0), _Runtime.getIndex(sample, 1.0))) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(values, 2.0), _Runtime.getIndex(sample, 2.0))) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(values, 3.0), _Runtime.getIndex(sample, 3.0)));
+      var dot:Float = (((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 0.0 : Float)), _Runtime.getIndex(sample, 0.0)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 1.0 : Float)), _Runtime.getIndex(sample, 1.0))) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 2.0 : Float)), _Runtime.getIndex(sample, 2.0))) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 3.0 : Float)), _Runtime.getIndex(sample, 3.0)));
       if ((cast ((cast dot : Float) < (cast 0.0 : Float)) : Bool)) { (sign = cast (-1.0 : Dynamic)); }
     }
     {
       var component:Float = 0.0;
       while ((cast ((cast component : Float) < (cast components : Float)) : Bool)) {
-        ({ var __indexedObject0:Dynamic = (cast accumulator : AnimationSampleAccumulator).values; var __indexedKey1:Dynamic = component; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1), (_Runtime.multiplyNumbers(_Runtime.getIndex(sample, component), weight) * sign))); });
+        ({ var __indexedObject0:flighthq._internal._Float32Array = (cast accumulator : AnimationSampleAccumulator).values; var __indexedKey1:Float = component; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject0 : flighthq._internal._Float32Array), (cast __indexedKey1 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject0 : flighthq._internal._Float32Array), (cast __indexedKey1 : Float)) + (_Runtime.multiplyNumbers(_Runtime.getIndex(sample, component), weight) * sign)) : Float)); });
         component++;
       }
     }
@@ -37,10 +37,10 @@ class AnimationBlend {
       var ay:Float = _Runtime.getIndex(base, 1.0);
       var az:Float = _Runtime.getIndex(base, 2.0);
       var aw:Float = _Runtime.getIndex(base, 3.0);
-      var bx:Float = flighthq._internal._StaticIndex.readFloat32Array(AnimationBlend._quaternion__animationBlend, 0.0);
-      var by:Float = flighthq._internal._StaticIndex.readFloat32Array(AnimationBlend._quaternion__animationBlend, 1.0);
-      var bz:Float = flighthq._internal._StaticIndex.readFloat32Array(AnimationBlend._quaternion__animationBlend, 2.0);
-      var bw:Float = flighthq._internal._StaticIndex.readFloat32Array(AnimationBlend._quaternion__animationBlend, 3.0);
+      var bx:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast AnimationBlend._quaternion__animationBlend : flighthq._internal._Float32Array), (cast 0.0 : Float));
+      var by:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast AnimationBlend._quaternion__animationBlend : flighthq._internal._Float32Array), (cast 1.0 : Float));
+      var bz:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast AnimationBlend._quaternion__animationBlend : flighthq._internal._Float32Array), (cast 2.0 : Float));
+      var bw:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast AnimationBlend._quaternion__animationBlend : flighthq._internal._Float32Array), (cast 3.0 : Float));
       AnimationBlend.writeNormalizedQuaternion__animationBlend((cast out), (cast ((((aw * bx) + (ax * bw)) + (ay * bz)) - (az * by)) : Float), (cast ((((aw * by) - (ax * bz)) + (ay * bw)) + (az * bx)) : Float), (cast ((((aw * bz) + (ax * by)) - (ay * bx)) + (az * bw)) : Float), (cast ((((aw * bw) - (ax * bx)) - (ay * by)) - (az * bz)) : Float));
       return;
     }
@@ -86,14 +86,14 @@ class AnimationBlend {
     components = HxMath.min(HxMath.min((cast out : { var length:Float; }).length, _Runtime.field(accumulator, 'components')), _Runtime.field(_Runtime.field(accumulator, 'values'), 'length'));
     if ((cast ((cast _Runtime.field(accumulator, 'quaternion') : Bool) && (cast ((cast components : Float) >= (cast 4.0 : Float)) : Bool)) : Bool)) {
       var values:flighthq._internal._Float32Array = _Runtime.field(accumulator, 'values');
-      AnimationBlend.writeNormalizedQuaternion__animationBlend((cast out), (cast flighthq._internal._StaticIndex.readFloat32Array(values, 0.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(values, 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(values, 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32Array(values, 3.0) : Float));
+      AnimationBlend.writeNormalizedQuaternion__animationBlend((cast out), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 2.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 3.0 : Float)) : Float));
       return cast true;
     }
     inverseWeight = _Runtime.divideNumbers(1.0, _Runtime.field(accumulator, 'weight'));
     {
       var component:Float = 0.0;
       while ((cast ((cast component : Float) < (cast components : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, component, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(accumulator, 'values'), component), inverseWeight));
+        flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, component, (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _Runtime.field(accumulator, 'values') : flighthq._internal._Float32Array), (cast component : Float)) * inverseWeight));
         component++;
       }
     }

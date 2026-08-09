@@ -32,7 +32,7 @@ class WgpuColorLutPass {
     pipeline = (cast WgpuColorLutPass.getLutPipeline__wgpuColorLutPass((cast state), (cast (cast (cast dest : WgpuRenderTarget) : WgpuRenderTarget).format : String)) : WgpuEffectPipeline);
     slotOffset = (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).acquireSlot();
     (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).writeSlot((cast slotOffset : Float), (cast function(__unused2:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused1:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, _Runtime.field(lut, 'size'));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast _Runtime.field(lut, 'size') : Float));
     }, cast ([__unused2] : Array<Dynamic>)); }));
     pass = (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).beginPass((cast (cast dest : WgpuRenderTarget)), (cast 'load' : String));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline((cast pipeline : WgpuEffectPipeline).pipeline);
@@ -99,10 +99,10 @@ class WgpuColorLutPass {
       var j:Float = 0.0;
       var o:Float = 0.0;
       while ((cast ((cast i : Float) < (cast ((n * n) * n) : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(((cast WgpuColorLutPass.clamp01__wgpuColorLutPass((cast flighthq._internal._StaticIndex.readArray(samples, j++) : Float)) : Float) * 255.0)));
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(((cast WgpuColorLutPass.clamp01__wgpuColorLutPass((cast flighthq._internal._StaticIndex.readArray(samples, j++) : Float)) : Float) * 255.0)));
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(((cast WgpuColorLutPass.clamp01__wgpuColorLutPass((cast flighthq._internal._StaticIndex.readArray(samples, j++) : Float)) : Float) * 255.0)));
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, 255.0);
+        flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast data : flighthq._internal._UInt8Array), (cast o++ : Float), (cast HxMath.round(((cast WgpuColorLutPass.clamp01__wgpuColorLutPass((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast samples : Array<Float>), (cast j++ : Float)) : Float)) : Float) * 255.0)) : Float));
+        flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast data : flighthq._internal._UInt8Array), (cast o++ : Float), (cast HxMath.round(((cast WgpuColorLutPass.clamp01__wgpuColorLutPass((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast samples : Array<Float>), (cast j++ : Float)) : Float)) : Float) * 255.0)) : Float));
+        flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast data : flighthq._internal._UInt8Array), (cast o++ : Float), (cast HxMath.round(((cast WgpuColorLutPass.clamp01__wgpuColorLutPass((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast samples : Array<Float>), (cast j++ : Float)) : Float)) : Float) * 255.0)) : Float));
+        flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast data : flighthq._internal._UInt8Array), (cast o++ : Float), (cast 255.0 : Float));
         i++;
       }
     }

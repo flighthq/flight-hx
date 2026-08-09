@@ -1,7 +1,13 @@
 // Maintained runtime support for generated Flight Haxe.
 package flighthq._internal;
 
+#if js
 abstract _Int8Array(Dynamic) {
+#elseif lime
+abstract _Int8Array(_LimeTypedArray) {
+#else
+abstract _Int8Array(Array<Int>) {
+#end
   public var length(get, never):Int;
 
   public function new(source:Dynamic = 0, ?byteOffset:Int, ?length:Int) {
@@ -32,7 +38,8 @@ abstract _Int8Array(Dynamic) {
 
   @:arrayAccess public inline function arrayRead(index:Int):Int {
     #if (lime && !js)
-    return (cast this : _LimeTypedArray).get(index);
+    final values:lime.utils.Int8Array = cast this.nativeView;
+    return values[index];
     #else
     return this[index];
     #end
@@ -40,7 +47,8 @@ abstract _Int8Array(Dynamic) {
 
   @:arrayAccess public inline function arrayWrite(index:Int, value:Float):Int {
     #if (lime && !js)
-    return (cast this : _LimeTypedArray).setValue(index, value);
+    final values:lime.utils.Int8Array = cast this.nativeView;
+    return values[index] = toInt8(value);
     #elseif js
     js.Syntax.code('{0}[{1}] = {2}', this, index, value);
     return this[index];

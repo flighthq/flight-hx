@@ -50,10 +50,10 @@ class ParseBasis {
     header = (cast createByteReader((cast bytes), (cast ParseBasis.basisTotalSlicesOffset__parseBasis : Float)) : ByteReader);
     totalSlices = (cast readByteReaderU24((cast header)) : Float);
     totalImages = (cast readByteReaderU24((cast header)) : Float);
-    format = _Runtime.getIndex(ParseBasis.basisTexFormat__parseBasis, flighthq._internal._StaticIndex.readUint8Array(bytes, ParseBasis.basisTexFormatOffset__parseBasis));
+    format = _Runtime.getIndex(ParseBasis.basisTexFormat__parseBasis, flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast ParseBasis.basisTexFormatOffset__parseBasis : Float)));
     if ((cast _Runtime.strictEquals(format, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure), (cast 'format-unsupported')) : Null<TextureContainer>); }
     if ((cast _Runtime.strictEquals(totalSlices, 0.0) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure), (cast 'structure-invalid')) : Null<TextureContainer>); }
-    shape = (cast ParseBasis.getBasisTextureShape__parseBasis((cast flighthq._internal._StaticIndex.readUint8Array(bytes, ParseBasis.basisTexTypeOffset__parseBasis) : Float), (cast totalImages : Float)) : Null<{ var depth:Float; var faces:Float; var layers:Float; }>);
+    shape = (cast ParseBasis.getBasisTextureShape__parseBasis((cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast ParseBasis.basisTexTypeOffset__parseBasis : Float)) : Float), (cast totalImages : Float)) : Null<{ var depth:Float; var faces:Float; var layers:Float; }>);
     if ((cast _Runtime.strictEquals(shape, null) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure), (cast 'format-unsupported')) : Null<TextureContainer>); }
     sliceDescReader = (cast createByteReader((cast bytes), (cast ParseBasis.basisSliceDescOffsetField__parseBasis : Float)) : ByteReader);
     sliceDescOffset = (cast readByteReaderU32((cast sliceDescReader)) : Float);
@@ -124,7 +124,7 @@ class ParseBasis {
   }
 
   public static function hasBasisSignature__parseBasis(bytes:flighthq._internal._UInt8Array):Bool {
-    return cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 115.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 1.0), 66.0) : Bool));
+    return cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 115.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 1.0 : Float)), 66.0) : Bool));
     return cast null;
   }
 

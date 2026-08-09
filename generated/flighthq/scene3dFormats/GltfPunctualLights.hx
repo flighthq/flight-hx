@@ -48,7 +48,7 @@ class GltfPunctualLights {
         }
         var descriptor:Null<Light> = (cast GltfPunctualLights.buildGltfPunctualLight__gltfPunctualLights((cast source), (cast lightIndex : Float), (cast lightDrops)) : Null<Light>);
         if ((cast _Runtime.strictEquals(descriptor, null) : Bool)) { node++; continue; }
-        _Runtime.callProperty((cast _Runtime.field(context, 'document') : Scene3DDocument).lights, 'push', cast ([{ descriptor: descriptor, name: (cast source : GltfPunctualLight).name, node: flighthq._internal._StaticIndex.readArray(_Runtime.field(context, 'nodeIndices'), node), transform: _Runtime.callProperty(context, 'buildNodeTransform', cast ([node] : Array<Dynamic>)) }] : Array<Dynamic>));
+        _Runtime.callProperty((cast _Runtime.field(context, 'document') : Scene3DDocument).lights, 'push', cast ([{ descriptor: descriptor, name: (cast source : GltfPunctualLight).name, node: flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(context, 'nodeIndices') : Array<Float>), (cast node : Float)), transform: _Runtime.callProperty(context, 'buildNodeTransform', cast ([node] : Array<Dynamic>)) }] : Array<Dynamic>));
         node++;
       }
     }
@@ -65,7 +65,7 @@ class GltfPunctualLights {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var range:Float = cast _Runtime.UNDEFINED;
     color = _Runtime.coalesce(_Runtime.field(source, 'color'), function():Dynamic return cast cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
-    packedColor = (cast packLinearToColor((cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 0.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 1.0), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(color, 2.0), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>))) : Float);
+    packedColor = (cast packLinearToColor((cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>))) : Float);
     intensity = _Runtime.coalesce(_Runtime.field(source, 'intensity'), function():Dynamic return cast 1.0);
     if ((cast !(cast _Runtime.compare(intensity, 0.0, '>=') : Bool) : Bool)) {
       GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'gltf.light-negative-intensity' : String), (cast { firstLight: index }));

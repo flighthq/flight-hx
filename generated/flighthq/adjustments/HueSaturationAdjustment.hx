@@ -41,16 +41,16 @@ class HueSaturationAdjustment {
       (s = cast ((cast HueSaturationAdjustment.clamp01__hueSaturationAdjustment((cast (s * saturation) : Float)) : Float) : Dynamic));
       ln = (cast HueSaturationAdjustment.clamp01__hueSaturationAdjustment((cast (l + lightness) : Float)) : Float);
       if ((cast ((cast s : Float) <= (cast 0.0 : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(out, 0.0, ln);
-        flighthq._internal._StaticIndex.writeArray(out, 1.0, ln);
-        flighthq._internal._StaticIndex.writeArray(out, 2.0, ln);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast ln : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast ln : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast ln : Float));
         return;
       }
       q = ((cast ((cast ln : Float) < (cast 0.5 : Float)) : Bool) ? (cast (ln * (1.0 + s)) : Dynamic) : (cast ((ln + s) - (ln * s)) : Dynamic));
       p = ((2.0 * ln) - q);
-      flighthq._internal._StaticIndex.writeArray(out, 0.0, (cast HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment((cast p : Float), (cast q : Float), (cast (h + (1.0 / 3.0)) : Float)) : Float));
-      flighthq._internal._StaticIndex.writeArray(out, 1.0, (cast HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment((cast p : Float), (cast q : Float), (cast h : Float)) : Float));
-      flighthq._internal._StaticIndex.writeArray(out, 2.0, (cast HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment((cast p : Float), (cast q : Float), (cast (h - (1.0 / 3.0)) : Float)) : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast (cast HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment((cast p : Float), (cast q : Float), (cast (h + (1.0 / 3.0)) : Float)) : Float) : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast (cast HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment((cast p : Float), (cast q : Float), (cast h : Float)) : Float) : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast (cast HueSaturationAdjustment.hue2rgb__hueSaturationAdjustment((cast p : Float), (cast q : Float), (cast (h - (1.0 / 3.0)) : Float)) : Float) : Float));
     };
     return cast _Runtime.mergeObjects([{ kind: 'HueSaturationAdjustment' }, options, { transform: transform }]);
     return cast null;

@@ -40,7 +40,7 @@ class TiledProject {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast cellCount : Float)) : Bool)) {
-        var __destructure1 = (cast decodeTiledGid((cast flighthq._internal._StaticIndex.readUint32Array(data, i) : Float)) : TiledGid);
+        var __destructure1 = (cast decodeTiledGid((cast flighthq._internal._StaticIndex.readUint32ArrayTyped((cast data : flighthq._internal._UInt32Array), (cast i : Float)) : Float)) : TiledGid);
         var tileId:Float = _Runtime.field(__destructure1, 'tileId');
         if ((cast ((cast tileId : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
         var ref:Null<TiledTilesetRef> = (cast getTiledTilesetRefForGid((cast map), (cast tileId : Float)) : Null<TiledTilesetRef>);
@@ -59,7 +59,7 @@ class TiledProject {
           }
         }
         if ((cast _Runtime.strictEquals(group, null) : Bool)) { i++; continue; }
-        flighthq._internal._StaticIndex.writeInt16Array((cast group : TilesetGroup__tiledProject).tiles, i, (tileId - (cast group : TilesetGroup__tiledProject).firstGid));
+        flighthq._internal._StaticIndex.writeInt16ArrayTyped((cast (cast group : TilesetGroup__tiledProject).tiles : flighthq._internal._Int16Array), (cast i : Float), (cast (tileId - (cast group : TilesetGroup__tiledProject).firstGid) : Float));
         i++;
       }
     }

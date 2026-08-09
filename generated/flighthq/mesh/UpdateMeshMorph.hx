@@ -46,7 +46,7 @@ class UpdateMeshMorph {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(weights, 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array(blended, i), flighthq._internal._StaticIndex.readFloat32Array(weights, i)) : Bool)) { return cast true; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast blended : flighthq._internal._Float32Array), (cast i : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast weights : flighthq._internal._Float32Array), (cast i : Float))) : Bool)) { return cast true; }
         i++;
       }
     }

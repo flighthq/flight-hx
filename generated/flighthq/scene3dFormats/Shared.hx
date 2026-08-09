@@ -42,20 +42,20 @@ class Shared {
     {
       var i:Float = offset;
       while ((cast ((cast (i + 3.0) : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
-        var qy:Float = flighthq._internal._StaticIndex.readArray(values, (i + 1.0));
-        flighthq._internal._StaticIndex.writeArray(values, (i + 1.0), flighthq._internal._StaticIndex.readArray(values, (i + 2.0)));
-        flighthq._internal._StaticIndex.writeArray(values, (i + 2.0), _Runtime.normalizeZero(-qy));
+        var qy:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast (i + 1.0) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast values : Array<Float>), (cast (i + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast (i + 2.0) : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast values : Array<Float>), (cast (i + 2.0) : Float), (cast _Runtime.normalizeZero(-qy) : Float));
         (i = cast ((i + stride) : Dynamic));
       }
     }
   }
 
   public static function convertTransformLhToRh(transform:flighthq._internal._Float64Array):Void {
-    flighthq._internal._StaticIndex.writeFloat64Array(transform, 2.0, _Runtime.normalizeZero(-flighthq._internal._StaticIndex.readFloat64Array(transform, 2.0)));
-    flighthq._internal._StaticIndex.writeFloat64Array(transform, 5.0, _Runtime.normalizeZero(-flighthq._internal._StaticIndex.readFloat64Array(transform, 5.0)));
-    flighthq._internal._StaticIndex.writeFloat64Array(transform, 6.0, _Runtime.normalizeZero(-flighthq._internal._StaticIndex.readFloat64Array(transform, 6.0)));
-    flighthq._internal._StaticIndex.writeFloat64Array(transform, 7.0, _Runtime.normalizeZero(-flighthq._internal._StaticIndex.readFloat64Array(transform, 7.0)));
-    flighthq._internal._StaticIndex.writeFloat64Array(transform, 11.0, _Runtime.normalizeZero(-flighthq._internal._StaticIndex.readFloat64Array(transform, 11.0)));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 2.0 : Float), (cast _Runtime.normalizeZero(-flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 2.0 : Float))) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 5.0 : Float), (cast _Runtime.normalizeZero(-flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 5.0 : Float))) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 6.0 : Float), (cast _Runtime.normalizeZero(-flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 6.0 : Float))) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 7.0 : Float), (cast _Runtime.normalizeZero(-flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 7.0 : Float))) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 11.0 : Float), (cast _Runtime.normalizeZero(-flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 11.0 : Float))) : Float));
   }
 
   public static function createEmbeddedTextureRef(bytes:flighthq._internal._UInt8Array, mimeType:Null<String>, ?resources:Array<ImageResourceReference>):Texture {
@@ -85,7 +85,7 @@ class Shared {
     {
       var i:Float = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(values, i, _Runtime.normalizeZero(-flighthq._internal._StaticIndex.readArray(values, i)));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast values : Array<Float>), (cast i : Float), (cast _Runtime.normalizeZero(-flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast i : Float))) : Float));
         (i = cast ((i + 3.0) : Dynamic));
       }
     }
@@ -97,8 +97,8 @@ class Shared {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast MAX_SKIN_INFLUENCES : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(outJoints, i, 0.0);
-        flighthq._internal._StaticIndex.writeArray(outWeights, i, 0.0);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outJoints : Array<Float>), (cast i : Float), (cast 0.0 : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outWeights : Array<Float>), (cast i : Float), (cast 0.0 : Float));
         i++;
       }
     }
@@ -115,8 +115,8 @@ class Shared {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast kept : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(outJoints, i, (cast flighthq._internal._StaticIndex.readArray(influences, i) : { var jointIndex:Float; }).jointIndex);
-        flighthq._internal._StaticIndex.writeArray(outWeights, i, ((cast ((cast sum : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((cast flighthq._internal._StaticIndex.readArray(influences, i) : { var weight:Float; }).weight / sum) : Dynamic) : (cast 0.0 : Dynamic)));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outJoints : Array<Float>), (cast i : Float), (cast (cast flighthq._internal._StaticIndex.readArray(influences, i) : { var jointIndex:Float; }).jointIndex : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outWeights : Array<Float>), (cast i : Float), (cast ((cast ((cast sum : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((cast flighthq._internal._StaticIndex.readArray(influences, i) : { var weight:Float; }).weight / sum) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
         i++;
       }
     }
@@ -126,9 +126,9 @@ class Shared {
     {
       var i:Float = 0.0;
       while ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(indices, 'length') : Float)) : Bool)) {
-        var tmp:Float = flighthq._internal._StaticIndex.readArray(indices, (i + 1.0));
-        flighthq._internal._StaticIndex.writeArray(indices, (i + 1.0), flighthq._internal._StaticIndex.readArray(indices, (i + 2.0)));
-        flighthq._internal._StaticIndex.writeArray(indices, (i + 2.0), tmp);
+        var tmp:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast indices : Array<Float>), (cast (i + 1.0) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast indices : Array<Float>), (cast (i + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast indices : Array<Float>), (cast (i + 2.0) : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast indices : Array<Float>), (cast (i + 2.0) : Float), (cast tmp : Float));
         (i = cast ((i + 3.0) : Dynamic));
       }
     }

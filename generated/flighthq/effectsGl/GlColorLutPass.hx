@@ -45,10 +45,10 @@ class GlColorLutPass {
       var j:Float = 0.0;
       var o:Float = 0.0;
       while ((cast ((cast i : Float) < (cast ((n * n) * n) : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(((cast GlColorLutPass.clamp01__glColorLutPass((cast flighthq._internal._StaticIndex.readArray(samples, j++) : Float)) : Float) * 255.0)));
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(((cast GlColorLutPass.clamp01__glColorLutPass((cast flighthq._internal._StaticIndex.readArray(samples, j++) : Float)) : Float) * 255.0)));
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, HxMath.round(((cast GlColorLutPass.clamp01__glColorLutPass((cast flighthq._internal._StaticIndex.readArray(samples, j++) : Float)) : Float) * 255.0)));
-        flighthq._internal._StaticIndex.writeUint8Array(data, o++, 255.0);
+        flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast data : flighthq._internal._UInt8Array), (cast o++ : Float), (cast HxMath.round(((cast GlColorLutPass.clamp01__glColorLutPass((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast samples : Array<Float>), (cast j++ : Float)) : Float)) : Float) * 255.0)) : Float));
+        flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast data : flighthq._internal._UInt8Array), (cast o++ : Float), (cast HxMath.round(((cast GlColorLutPass.clamp01__glColorLutPass((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast samples : Array<Float>), (cast j++ : Float)) : Float)) : Float) * 255.0)) : Float));
+        flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast data : flighthq._internal._UInt8Array), (cast o++ : Float), (cast HxMath.round(((cast GlColorLutPass.clamp01__glColorLutPass((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast samples : Array<Float>), (cast j++ : Float)) : Float)) : Float) * 255.0)) : Float));
+        flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast data : flighthq._internal._UInt8Array), (cast o++ : Float), (cast 255.0 : Float));
         i++;
       }
     }

@@ -383,23 +383,23 @@ class Shape {
               {
                 var __switchValue = pc;
                 if (__switchValue == 1.0) {
-                  (penX = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
-                  (penY = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
+                  (penX = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Dynamic));
+                  (penY = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Dynamic));
                   (di = cast ((di + 2.0) : Dynamic));
                 }
                 else if (__switchValue == 2.0) {
                   expand((cast penX : Float), (cast penY : Float));
-                  expand((cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float));
-                  (penX = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
-                  (penY = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
+                  expand((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Float));
+                  (penX = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Dynamic));
+                  (penY = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Dynamic));
                   (di = cast ((di + 2.0) : Dynamic));
                 }
                 else if (__switchValue == 3.0) {
                   {
-                    var qcx:Float = flighthq._internal._StaticIndex.readArray(data, di);
-                    var qcy:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
-                    var qax:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-                    var qay:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+                    var qcx:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float));
+                    var qcy:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float));
+                    var qax:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float));
+                    var qay:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float));
                     expand((cast penX : Float), (cast penY : Float));
                     var qdx:Float = ((penX - (2.0 * qcx)) + qax);
                     if ((cast !_Runtime.strictEquals(qdx, 0.0) : Bool)) {
@@ -418,24 +418,24 @@ class Shape {
                   }
                 }
                 else if (__switchValue == 4.0) {
-                  (penX = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
-                  (penY = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
+                  (penX = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Dynamic));
+                  (penY = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Dynamic));
                   (di = cast ((di + 4.0) : Dynamic));
                 }
                 else if (__switchValue == 5.0) {
                   expand((cast penX : Float), (cast penY : Float));
-                  expand((cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float));
-                  (penX = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
-                  (penY = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
+                  expand((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Float));
+                  (penX = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Dynamic));
+                  (penY = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Dynamic));
                   (di = cast ((di + 4.0) : Dynamic));
                 }
                 else if (__switchValue == 6.0) {
                   {
                     expand((cast penX : Float), (cast penY : Float));
-                    var ax:Float = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
-                    var ay:Float = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
+                    var ax:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 4.0) : Float));
+                    var ay:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 5.0) : Float));
                     expand((cast ax : Float), (cast ay : Float));
-                    expandCubicExtrema((cast penX : Float), (cast penY : Float), (cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float), (cast ax : Float), (cast ay : Float));
+                    expandCubicExtrema((cast penX : Float), (cast penY : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Float), (cast ax : Float), (cast ay : Float));
                     (penX = cast (ax : Dynamic));
                     (penY = cast (ay : Dynamic));
                     (di = cast ((di + 6.0) : Dynamic));
@@ -451,7 +451,7 @@ class Shape {
             {
               var vi:Float = 0.0;
               while ((cast ((cast vi : Float) < (cast _Runtime.field(vertices, 'length') : Float)) : Bool)) {
-                expand((cast flighthq._internal._StaticIndex.readArray(vertices, vi) : Float), (cast flighthq._internal._StaticIndex.readArray(vertices, (vi + 1.0)) : Float));
+                expand((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast vi : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast vertices : Array<Float>), (cast (vi + 1.0) : Float)) : Float));
                 (vi = cast ((vi + 2.0) : Dynamic));
               }
             }

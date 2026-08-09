@@ -19,9 +19,9 @@ class HsvColor {
     var q:Float = cast _Runtime.UNDEFINED;
     var t:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(s, 0.0) : Bool)) {
-      flighthq._internal._StaticIndex.writeArray(out, 0.0, v);
-      flighthq._internal._StaticIndex.writeArray(out, 1.0, v);
-      flighthq._internal._StaticIndex.writeArray(out, 2.0, v);
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast v : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast v : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast v : Float));
       return;
     }
     hn = _Runtime.fmod((_Runtime.fmod(h, 360.0) + 360.0), 360.0);
@@ -33,34 +33,34 @@ class HsvColor {
     {
       var __switchValue = i;
       if (__switchValue == 0.0) {
-        flighthq._internal._StaticIndex.writeArray(out, 0.0, v);
-        flighthq._internal._StaticIndex.writeArray(out, 1.0, t);
-        flighthq._internal._StaticIndex.writeArray(out, 2.0, p);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast v : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast t : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast p : Float));
       }
       else if (__switchValue == 1.0) {
-        flighthq._internal._StaticIndex.writeArray(out, 0.0, q);
-        flighthq._internal._StaticIndex.writeArray(out, 1.0, v);
-        flighthq._internal._StaticIndex.writeArray(out, 2.0, p);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast q : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast v : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast p : Float));
       }
       else if (__switchValue == 2.0) {
-        flighthq._internal._StaticIndex.writeArray(out, 0.0, p);
-        flighthq._internal._StaticIndex.writeArray(out, 1.0, v);
-        flighthq._internal._StaticIndex.writeArray(out, 2.0, t);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast p : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast v : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast t : Float));
       }
       else if (__switchValue == 3.0) {
-        flighthq._internal._StaticIndex.writeArray(out, 0.0, p);
-        flighthq._internal._StaticIndex.writeArray(out, 1.0, q);
-        flighthq._internal._StaticIndex.writeArray(out, 2.0, v);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast p : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast q : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast v : Float));
       }
       else if (__switchValue == 4.0) {
-        flighthq._internal._StaticIndex.writeArray(out, 0.0, t);
-        flighthq._internal._StaticIndex.writeArray(out, 1.0, p);
-        flighthq._internal._StaticIndex.writeArray(out, 2.0, v);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast t : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast p : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast v : Float));
       }
       else  {
-        flighthq._internal._StaticIndex.writeArray(out, 0.0, v);
-        flighthq._internal._StaticIndex.writeArray(out, 1.0, p);
-        flighthq._internal._StaticIndex.writeArray(out, 2.0, q);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast v : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast p : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast q : Float));
       }
     }
   }
@@ -92,9 +92,9 @@ class HsvColor {
     } else {
       (h = cast (((((r - g) / d) + 4.0) / 6.0) : Dynamic));
     } } }
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, (h * 360.0));
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, s);
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, v);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast (h * 360.0) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast s : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast v : Float));
     return cast out;
     return cast null;
   }

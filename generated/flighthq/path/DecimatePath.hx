@@ -19,24 +19,24 @@ class DecimatePath {
     for (contour in _Runtime.iterable(contours)) {
       var n:Float = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
       if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-      var closed:Bool = ((cast ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 2.0))) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 1.0), flighthq._internal._StaticIndex.readArray(contour, _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 1.0))) : Bool));
+      var closed:Bool = ((cast ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 2.0) : Float))) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 1.0) : Float))) : Bool));
       var last:Float = ((cast closed : Bool) ? (cast (n - 1.0) : Dynamic) : (cast n : Dynamic));
       var keep:flighthq._internal._UInt8Array = new flighthq._internal._UInt8Array(last);
-      flighthq._internal._StaticIndex.writeUint8Array(keep, 0.0, 1.0);
-      flighthq._internal._StaticIndex.writeUint8Array(keep, (last - 1.0), 1.0);
+      flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast keep : flighthq._internal._UInt8Array), (cast 0.0 : Float), (cast 1.0 : Float));
+      flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast keep : flighthq._internal._UInt8Array), (cast (last - 1.0) : Float), (cast 1.0 : Float));
       DecimatePath.douglasPeucker__decimatePath((cast contour), (cast 0.0 : Float), (cast (last - 1.0) : Float), (cast (tolerance * tolerance) : Float), (cast keep));
       var first:Bool = true;
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast last : Float)) : Bool)) {
-          if ((cast !_Runtime.truthy(flighthq._internal._StaticIndex.readUint8Array(keep, i)) : Bool)) { i++; continue; }
+          if ((cast !_Runtime.truthy(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast keep : flighthq._internal._UInt8Array), (cast i : Float))) : Bool)) { i++; continue; }
           if ((cast first : Bool)) {
             _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
             (first = cast (false : Dynamic));
           } else {
             _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO] : Array<Dynamic>));
           }
-          _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0))] : Array<Dynamic>));
+          _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i * 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((i * 2.0) + 1.0) : Float))] : Array<Dynamic>));
           i++;
         }
       }
@@ -57,10 +57,10 @@ class DecimatePath {
     var maxDistSq:Float = cast _Runtime.UNDEFINED;
     var maxIdx:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast (last - first) : Float) < (cast 2.0 : Float)) : Bool)) { return; }
-    x0 = flighthq._internal._StaticIndex.readArray(pts, (first * 2.0));
-    y0 = flighthq._internal._StaticIndex.readArray(pts, ((first * 2.0) + 1.0));
-    x1 = flighthq._internal._StaticIndex.readArray(pts, (last * 2.0));
-    y1 = flighthq._internal._StaticIndex.readArray(pts, ((last * 2.0) + 1.0));
+    x0 = flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (first * 2.0) : Float));
+    y0 = flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((first * 2.0) + 1.0) : Float));
+    x1 = flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (last * 2.0) : Float));
+    y1 = flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((last * 2.0) + 1.0) : Float));
     dx = (x1 - x0);
     dy = (y1 - y0);
     lenSq = ((dx * dx) + (dy * dy));
@@ -69,8 +69,8 @@ class DecimatePath {
     {
       var i:Float = (first + 1.0);
       while ((cast ((cast i : Float) < (cast last : Float)) : Bool)) {
-        var px:Float = flighthq._internal._StaticIndex.readArray(pts, (i * 2.0));
-        var py:Float = flighthq._internal._StaticIndex.readArray(pts, ((i * 2.0) + 1.0));
+        var px:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (i * 2.0) : Float));
+        var py:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((i * 2.0) + 1.0) : Float));
         var distSq:Float = cast _Runtime.UNDEFINED;
         if ((cast _Runtime.strictEquals(lenSq, 0.0) : Bool)) {
           var ax:Float = (px - x0);
@@ -88,7 +88,7 @@ class DecimatePath {
       }
     }
     if ((cast ((cast maxDistSq : Float) > (cast toleranceSq : Float)) : Bool)) {
-      flighthq._internal._StaticIndex.writeUint8Array(keep, maxIdx, 1.0);
+      flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast keep : flighthq._internal._UInt8Array), (cast maxIdx : Float), (cast 1.0 : Float));
       DecimatePath.douglasPeucker__decimatePath((cast pts), (cast first : Float), (cast maxIdx : Float), (cast toleranceSq : Float), (cast keep));
       DecimatePath.douglasPeucker__decimatePath((cast pts), (cast maxIdx : Float), (cast last : Float), (cast toleranceSq : Float), (cast keep));
     }

@@ -39,7 +39,7 @@ class RiveClipping {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         if ((cast !_Runtime.strictEquals((cast object : RiveCoreObject).typeKey, RiveClipping.RIVE_CLIPPING_SHAPE__riveClipping) : Bool)) { index++; continue; }
         if ((cast !(cast (cast RiveClipping.readRiveFlag__riveClipping((cast object), (cast RiveClipping.RIVE_CLIP_IS_VISIBLE__riveClipping : Float), (cast true : Bool)) : Bool) : Bool) : Bool)) { index++; continue; }
-        var owner:Float = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index);
+        var owner:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float));
         var target:Null<DisplayObject> = ((cast ((cast owner : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(nodes, owner) : Dynamic) : (cast null : Dynamic));
         if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { index++; continue; }
         var source:Float = (cast RiveClipping.readRiveNumber__riveClipping((cast object), (cast RiveClipping.RIVE_CLIP_SOURCE_ID__riveClipping : Float), (cast -1.0 : Float)) : Float);
@@ -77,8 +77,8 @@ class RiveClipping {
       {
         var offset:Float = 0.0;
         while ((cast ((cast (offset + 1.0) : Float) < (cast _Runtime.field((cast record : RivePathRecord).data, 'length') : Float)) : Bool)) {
-          var x:Float = flighthq._internal._StaticIndex.readArray((cast record : RivePathRecord).data, offset);
-          var y:Float = flighthq._internal._StaticIndex.readArray((cast record : RivePathRecord).data, (offset + 1.0));
+          var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast record : RivePathRecord).data : Array<Float>), (cast offset : Float));
+          var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast record : RivePathRecord).data : Array<Float>), (cast (offset + 1.0) : Float));
           _Runtime.pushMany((cast path : Path).data, cast ([(((combined.a * x) + (combined.c * y)) + combined.tx), (((combined.b * x) + (combined.d * y)) + combined.ty)] : Array<Dynamic>));
           (offset = cast ((offset + 2.0) : Dynamic));
         }
@@ -95,7 +95,7 @@ class RiveClipping {
       var index:Float = 1.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
-        var parent:Float = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index);
+        var parent:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float));
         var inherited:Matrix = ((cast ((cast parent : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(transforms, parent) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(transforms, 0.0) : Dynamic));
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveClipping.RIVE_NODE_TYPE_KEY__riveClipping : Float)) : Bool) : Bool) : Bool)) {
           _Runtime.callProperty(transforms, 'push', cast ([inherited] : Array<Dynamic>));

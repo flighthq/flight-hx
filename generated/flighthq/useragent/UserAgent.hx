@@ -14,10 +14,10 @@ class UserAgent {
   public static function detectEndianness():PlatformEndianness {
     try {
       var buf:haxe.io.Bytes = _Runtime.construct(flighthq._internal._HostValueLut.get('ArrayBuffer'), [2.0]);
-      flighthq._internal._StaticIndex.writeUint16Array(new flighthq._internal._UInt16Array(buf), 0.0, 258.0);
+      flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast new flighthq._internal._UInt16Array(buf) : flighthq._internal._UInt16Array), (cast 0.0 : Float), (cast 258.0 : Float));
       var bytes:flighthq._internal._UInt8Array = new flighthq._internal._UInt8Array(buf);
-      if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 1.0) : Bool)) { return cast 'big'; }
-      if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 2.0) : Bool)) { return cast 'little'; }
+      if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 1.0) : Bool)) { return cast 'big'; }
+      if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 2.0) : Bool)) { return cast 'little'; }
     } catch (__error:Dynamic) {
     }
     return cast 'unknown';

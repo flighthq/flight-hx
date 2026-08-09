@@ -54,7 +54,7 @@ class RiveLayout {
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveLayout.RIVE_LAYOUT_PARTICIPANT_TYPE_KEY__riveLayout : Float)) : Bool) : Bool)) {
-          var targetIndex:Float = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index);
+          var targetIndex:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float));
           if ((cast ((cast ((cast ((cast targetIndex : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(nodes, targetIndex), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(nodes, targetIndex), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
             ((cast providers : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).set(targetIndex, (cast { sourceIndex: targetIndex, styleIndex: index, targetIndex: targetIndex, type: 'participant' })));
           }
@@ -69,7 +69,7 @@ class RiveLayout {
           continue;
         }
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveLayout.RIVE_GRID_ITEM_PLACEMENT_TYPE_KEY__riveLayout : Float)) : Bool) : Bool)) {
-          var owner:Float = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index);
+          var owner:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float));
           if ((cast ((cast owner : Float) >= (cast 0.0 : Float)) : Bool)) { ((cast placements : flighthq._internal._Map<Float, RiveCoreObject>).set(owner, (cast object))); }
         }
         index++;
@@ -78,7 +78,7 @@ class RiveLayout {
     providerParents = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     providerChildren = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (provider in _Runtime.iterable(((cast providers : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).values()))) {
-      var start:Float = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), (cast provider : RiveLayoutProvider__riveLayout).sourceIndex);
+      var start:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast (cast provider : RiveLayoutProvider__riveLayout).sourceIndex : Float));
       var parent:Float = (cast RiveLayout.findRiveLayoutParent__riveLayout((cast artboard), (cast componentProviders), (cast start : Float), (cast (cast provider : RiveLayoutProvider__riveLayout).sourceIndex : Float)) : Float);
       ((cast providerParents : flighthq._internal._Map<Float, Float>).set((cast provider : RiveLayoutProvider__riveLayout).sourceIndex, (cast parent)));
       if ((cast ((cast parent : Float) < (cast 0.0 : Float)) : Bool)) { continue; }
@@ -136,14 +136,14 @@ class RiveLayout {
       var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
       if ((cast _Runtime.strictEquals((cast object : RiveCoreObject).typeKey, RiveLayout.RIVE_NODE_TYPE_KEY__riveLayout) : Bool)) {
         (child = cast (index : Dynamic));
-        (index = cast (flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index) : Dynamic));
+        (index = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)) : Dynamic));
         continue;
       }
       if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveLayout.RIVE_SOLO_TYPE_KEY__riveLayout : Float)) : Bool) : Bool)) {
         var active:Float = (cast RiveLayout.readRiveNumber__riveLayout((cast object), (cast RiveLayout.RIVE_SOLO_ACTIVE_COMPONENT__riveLayout : Float), (cast -1.0 : Float)) : Float);
         if ((cast ((cast ((cast active : Float) >= (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(active, child) : Bool)) : Bool)) { return cast RiveLayout.RIVE_NO_PARENT__riveLayout; }
         (child = cast (index : Dynamic));
-        (index = cast (flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index) : Dynamic));
+        (index = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)) : Dynamic));
         continue;
       }
       return cast RiveLayout.RIVE_NO_PARENT__riveLayout;
@@ -231,7 +231,7 @@ class RiveLayout {
     {
       var index:Float = 1.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index), sourceIndex) : Bool)) { index++; continue; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), sourceIndex) : Bool)) { index++; continue; }
         var track:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast (cast track : RiveCoreObject).typeKey : Float), (cast RiveLayout.RIVE_GRID_TRACK_TYPE_KEY__riveLayout : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
         var collection:Float = (cast RiveLayout.readRiveNumber__riveLayout((cast track), (cast RiveLayout.RIVE_GRID_TRACK_COLLECTION__riveLayout : Float), (cast 0.0 : Float)) : Float);

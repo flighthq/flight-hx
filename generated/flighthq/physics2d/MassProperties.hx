@@ -124,10 +124,10 @@ class MassProperties {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var j:Float = _Runtime.fmod((i + 1.0), count);
-        var x0:Float = flighthq._internal._StaticIndex.readArray(points, (i * 2.0));
-        var y0:Float = flighthq._internal._StaticIndex.readArray(points, ((i * 2.0) + 1.0));
-        var x1:Float = flighthq._internal._StaticIndex.readArray(points, (j * 2.0));
-        var y1:Float = flighthq._internal._StaticIndex.readArray(points, ((j * 2.0) + 1.0));
+        var x0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i * 2.0) : Float));
+        var y0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((i * 2.0) + 1.0) : Float));
+        var x1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (j * 2.0) : Float));
+        var y1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((j * 2.0) + 1.0) : Float));
         var cross:Float = ((x0 * y1) - (x1 * y0));
         (area = cast ((area + cross) : Dynamic));
         (centroidX = cast ((centroidX + ((x0 + x1) * cross)) : Dynamic));

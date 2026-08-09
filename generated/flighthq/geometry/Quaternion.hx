@@ -364,15 +364,15 @@ class Quaternion {
     var m22:Float = cast _Runtime.UNDEFINED;
     var trace:Float = cast _Runtime.UNDEFINED;
     m = source.m;
-    m00 = flighthq._internal._StaticIndex.readFloat32Array(m, 0.0);
-    m10 = flighthq._internal._StaticIndex.readFloat32Array(m, 4.0);
-    m20 = flighthq._internal._StaticIndex.readFloat32Array(m, 8.0);
-    m01 = flighthq._internal._StaticIndex.readFloat32Array(m, 1.0);
-    m11 = flighthq._internal._StaticIndex.readFloat32Array(m, 5.0);
-    m21 = flighthq._internal._StaticIndex.readFloat32Array(m, 9.0);
-    m02 = flighthq._internal._StaticIndex.readFloat32Array(m, 2.0);
-    m12 = flighthq._internal._StaticIndex.readFloat32Array(m, 6.0);
-    m22 = flighthq._internal._StaticIndex.readFloat32Array(m, 10.0);
+    m00 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float));
+    m10 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float));
+    m20 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float));
+    m01 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float));
+    m11 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float));
+    m21 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 9.0 : Float));
+    m02 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float));
+    m12 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float));
+    m22 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 10.0 : Float));
     trace = ((m00 + m11) + m22);
     if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
       var s:Float = _Runtime.divideNumbers(0.5, HxMath.sqrt((trace + 1.0)));

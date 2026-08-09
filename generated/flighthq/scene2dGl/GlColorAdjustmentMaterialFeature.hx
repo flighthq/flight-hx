@@ -202,7 +202,7 @@ class GlColorAdjustmentMaterialFeature {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature : Float)) : Bool)) {
-          if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(a, i), flighthq._internal._StaticIndex.readArray(b, i)) : Bool)) { return cast false; }
+          if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast a : Array<Float>), (cast i : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast i : Float))) : Bool)) { return cast false; }
           i++;
         }
       }
@@ -303,7 +303,7 @@ class GlColorAdjustmentMaterialFeature {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-        GlColorAdjustmentMaterialFeature.writeGlNativePackedTintAsColorScaleBias__glColorAdjustmentMaterialFeature((cast runtime), (cast flighthq._internal._StaticIndex.readUint32Array(packed, i) : Float), (cast i : Float));
+        GlColorAdjustmentMaterialFeature.writeGlNativePackedTintAsColorScaleBias__glColorAdjustmentMaterialFeature((cast runtime), (cast flighthq._internal._StaticIndex.readUint32ArrayTyped((cast packed : flighthq._internal._UInt32Array), (cast i : Float)) : Float), (cast i : Float));
         i++;
       }
     }
@@ -327,7 +327,7 @@ class GlColorAdjustmentMaterialFeature {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-        GlColorAdjustmentMaterialFeature.writeGlNativePackedTintAsColorMatrix__glColorAdjustmentMaterialFeature((cast runtime), (cast flighthq._internal._StaticIndex.readUint32Array(packed, i) : Float), (cast i : Float));
+        GlColorAdjustmentMaterialFeature.writeGlNativePackedTintAsColorMatrix__glColorAdjustmentMaterialFeature((cast runtime), (cast flighthq._internal._StaticIndex.readUint32ArrayTyped((cast packed : flighthq._internal._UInt32Array), (cast i : Float)) : Float), (cast i : Float));
         i++;
       }
     }
@@ -440,11 +440,11 @@ class GlColorAdjustmentMaterialFeature {
         while ((cast ((cast row : Float) < (cast 4.0 : Float)) : Bool)) {
           var source:Float = (row * 5.0);
           var target:Float = (offset + (row * 4.0));
-          flighthq._internal._StaticIndex.writeFloat32Array(data, target, flighthq._internal._StaticIndex.readArray(adjustment, source));
-          flighthq._internal._StaticIndex.writeFloat32Array(data, (target + 1.0), flighthq._internal._StaticIndex.readArray(adjustment, (source + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(data, (target + 2.0), flighthq._internal._StaticIndex.readArray(adjustment, (source + 2.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(data, (target + 3.0), flighthq._internal._StaticIndex.readArray(adjustment, (source + 3.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(data, ((offset + 16.0) + row), flighthq._internal._StaticIndex.readArray(adjustment, (source + 4.0)));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast target : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast adjustment : Array<Float>), (cast source : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (target + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast adjustment : Array<Float>), (cast (source + 1.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (target + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast adjustment : Array<Float>), (cast (source + 2.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (target + 3.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast adjustment : Array<Float>), (cast (source + 3.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast ((offset + 16.0) + row) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast adjustment : Array<Float>), (cast (source + 4.0) : Float)) : Float));
           row++;
         }
       }
@@ -453,8 +453,8 @@ class GlColorAdjustmentMaterialFeature {
       {
         var channel:Float = 0.0;
         while ((cast ((cast channel : Float) < (cast 4.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(data, ((offset + (channel * 4.0)) + channel), (cast GlColorAdjustmentMaterialFeature.getColorScale__glColorAdjustmentMaterialFeature((cast adjustment), (cast channel : Float)) : Float));
-          flighthq._internal._StaticIndex.writeFloat32Array(data, ((offset + 16.0) + channel), (cast GlColorAdjustmentMaterialFeature.getColorBias__glColorAdjustmentMaterialFeature((cast adjustment), (cast channel : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast ((offset + (channel * 4.0)) + channel) : Float), (cast (cast GlColorAdjustmentMaterialFeature.getColorScale__glColorAdjustmentMaterialFeature((cast adjustment), (cast channel : Float)) : Float) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast ((offset + 16.0) + channel) : Float), (cast (cast GlColorAdjustmentMaterialFeature.getColorBias__glColorAdjustmentMaterialFeature((cast adjustment), (cast channel : Float)) : Float) : Float));
           channel++;
         }
       }
@@ -463,7 +463,7 @@ class GlColorAdjustmentMaterialFeature {
 
   public static function writeIdentityColorMatrix__glColorAdjustmentMaterialFeature(out:flighthq._internal._Float32Array, offset:Float):Void {
     _Runtime.fill(out, 0.0, offset, (offset + GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature), 3);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, offset, flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 5.0), flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 10.0), flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 15.0), 1.0))));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast offset : Float), (cast flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 5.0) : Float), (cast flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 10.0) : Float), (cast flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 15.0) : Float), (cast 1.0 : Float)) : Float)) : Float)) : Float));
   }
 
   public static function writeGlNativePackedTintAsColorMatrix__glColorAdjustmentMaterialFeature(runtime:GlRenderStateRuntime, nativeWord:Float, instanceIndex:Float):Void {
@@ -472,10 +472,10 @@ class GlColorAdjustmentMaterialFeature {
     GlColorAdjustmentMaterialFeature.writeGlColorMatrixInstance__glColorAdjustmentMaterialFeature((cast runtime), (cast null), (cast instanceIndex : Float));
     out = (cast runtime : GlRenderStateRuntime).quadBatchWriterColorMatrixData;
     offset = (instanceIndex * GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, offset, ((_Runtime.toInt32(nativeWord) & 255) / 255.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 5.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 8)) & 255) / 255.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 10.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 16)) & 255) / 255.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 15.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 24)) & 255) / 255.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast offset : Float), (cast ((_Runtime.toInt32(nativeWord) & 255) / 255.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 5.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 8)) & 255) / 255.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 10.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 16)) & 255) / 255.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 15.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 24)) & 255) / 255.0) : Float));
   }
 
   public static function writeGlAffineValuesAsColorMatrix__glColorAdjustmentMaterialFeature(runtime:GlRenderStateRuntime, affine:flighthq._internal._Float32Array, affineOffset:Float, instanceIndex:Float):Void {
@@ -487,8 +487,8 @@ class GlColorAdjustmentMaterialFeature {
     {
       var channel:Float = 0.0;
       while ((cast ((cast channel : Float) < (cast 4.0 : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(out, ((offset + (channel * 4.0)) + channel), flighthq._internal._StaticIndex.readFloat32Array(affine, (affineOffset + channel)));
-        flighthq._internal._StaticIndex.writeFloat32Array(out, ((offset + 16.0) + channel), flighthq._internal._StaticIndex.readFloat32Array(affine, ((affineOffset + 4.0) + channel)));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((offset + (channel * 4.0)) + channel) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast affine : flighthq._internal._Float32Array), (cast (affineOffset + channel) : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((offset + 16.0) + channel) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast affine : flighthq._internal._Float32Array), (cast ((affineOffset + 4.0) + channel) : Float)) : Float));
         channel++;
       }
     }
@@ -514,20 +514,20 @@ class GlColorAdjustmentMaterialFeature {
       {
         var channel:Float = 0.0;
         while ((cast ((cast channel : Float) < (cast 4.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + channel), (cast GlColorAdjustmentMaterialFeature.getColorScale__glColorAdjustmentMaterialFeature((cast colorScaleBias), (cast channel : Float)) : Float));
-          flighthq._internal._StaticIndex.writeFloat32Array(data, ((offset + 4.0) + channel), (cast GlColorAdjustmentMaterialFeature.getColorBias__glColorAdjustmentMaterialFeature((cast colorScaleBias), (cast channel : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + channel) : Float), (cast (cast GlColorAdjustmentMaterialFeature.getColorScale__glColorAdjustmentMaterialFeature((cast colorScaleBias), (cast channel : Float)) : Float) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast ((offset + 4.0) + channel) : Float), (cast (cast GlColorAdjustmentMaterialFeature.getColorBias__glColorAdjustmentMaterialFeature((cast colorScaleBias), (cast channel : Float)) : Float) : Float));
           channel++;
         }
       }
     } else {
-      flighthq._internal._StaticIndex.writeFloat32Array(data, offset, 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 1.0), 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 2.0), 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 3.0), 1.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 4.0), 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 5.0), 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 6.0), 0.0);
-      flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 7.0), 0.0);
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast offset : Float), (cast 1.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float), (cast 1.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float), (cast 1.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 3.0) : Float), (cast 1.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 4.0) : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 5.0) : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 6.0) : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 7.0) : Float), (cast 0.0 : Float));
     }
   }
 
@@ -543,7 +543,7 @@ class GlColorAdjustmentMaterialFeature {
       ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorTintData = grown);
       (data = cast (grown : Dynamic));
     } }
-    flighthq._internal._StaticIndex.writeUint32Array(data, instanceIndex, (cast GlColorAdjustmentMaterialFeature.rgbaToNativeByteWord__glColorAdjustmentMaterialFeature((cast rgba : Float)) : Float));
+    flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast data : flighthq._internal._UInt32Array), (cast instanceIndex : Float), (cast (cast GlColorAdjustmentMaterialFeature.rgbaToNativeByteWord__glColorAdjustmentMaterialFeature((cast rgba : Float)) : Float) : Float));
   }
 
   public static function writeGlNativePackedTintAsColorScaleBias__glColorAdjustmentMaterialFeature(runtime:GlRenderStateRuntime, nativeWord:Float, instanceIndex:Float):Void {
@@ -552,10 +552,10 @@ class GlColorAdjustmentMaterialFeature {
     offset = (instanceIndex * GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__glColorAdjustmentMaterialFeature);
     GlColorAdjustmentMaterialFeature.writeGlColorScaleBiasInstance__glColorAdjustmentMaterialFeature((cast runtime), (cast null), (cast instanceIndex : Float));
     data = (cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasData;
-    flighthq._internal._StaticIndex.writeFloat32Array(data, offset, ((_Runtime.toInt32(nativeWord) & 255) / 255.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 1.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 8)) & 255) / 255.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 2.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 16)) & 255) / 255.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(data, (offset + 3.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 24)) & 255) / 255.0));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast offset : Float), (cast ((_Runtime.toInt32(nativeWord) & 255) / 255.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 8)) & 255) / 255.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 16)) & 255) / 255.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 3.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 24)) & 255) / 255.0) : Float));
   }
 
   public static function getPackedTint__glColorAdjustmentMaterialFeature(value:Null<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>>):Null<Float> {
@@ -625,11 +625,11 @@ class GlColorAdjustmentMaterialFeature {
           var row:Float = 0.0;
           while ((cast ((cast row : Float) < (cast 4.0 : Float)) : Bool)) {
             var source:Float = (row * 5.0);
-            flighthq._internal.backend.WebGl2Backend.uniform4f(gl, flighthq._internal._StaticIndex.readArray(locations, row), flighthq._internal._StaticIndex.readArray(colorMatrix, source), flighthq._internal._StaticIndex.readArray(colorMatrix, (source + 1.0)), flighthq._internal._StaticIndex.readArray(colorMatrix, (source + 2.0)), flighthq._internal._StaticIndex.readArray(colorMatrix, (source + 3.0)));
+            flighthq._internal.backend.WebGl2Backend.uniform4f(gl, flighthq._internal._StaticIndex.readArray(locations, row), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast source : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast (source + 1.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast (source + 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast (source + 3.0) : Float)));
             row++;
           }
         }
-        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, flighthq._internal._StaticIndex.readArray(locations, 4.0), flighthq._internal._StaticIndex.readArray(colorMatrix, 4.0), flighthq._internal._StaticIndex.readArray(colorMatrix, 9.0), flighthq._internal._StaticIndex.readArray(colorMatrix, 14.0), flighthq._internal._StaticIndex.readArray(colorMatrix, 19.0));
+        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, flighthq._internal._StaticIndex.readArray(locations, 4.0), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 4.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 9.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 14.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 19.0 : Float)));
         return;
       }
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast shader : GlShapeMeshColorScaleBiasShader).colorScaleLocation, (cast colorScaleBias : ColorScaleBias).redScale, (cast colorScaleBias : ColorScaleBias).greenScale, (cast colorScaleBias : ColorScaleBias).blueScale, (cast colorScaleBias : ColorScaleBias).alphaScale);

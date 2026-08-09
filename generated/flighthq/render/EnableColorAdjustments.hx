@@ -74,26 +74,26 @@ class EnableColorAdjustments {
   }
 
   public static function writeColorScaleBiasMatrix__enableColorAdjustments(out:Array<Float>, value:ColorScaleBias):Array<Float> {
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, _Runtime.field(value, 'redScale'));
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, 0.0);
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, 0.0);
-    flighthq._internal._StaticIndex.writeArray(out, 3.0, 0.0);
-    flighthq._internal._StaticIndex.writeArray(out, 4.0, _Runtime.field(value, 'redBias'));
-    flighthq._internal._StaticIndex.writeArray(out, 5.0, 0.0);
-    flighthq._internal._StaticIndex.writeArray(out, 6.0, _Runtime.field(value, 'greenScale'));
-    flighthq._internal._StaticIndex.writeArray(out, 7.0, 0.0);
-    flighthq._internal._StaticIndex.writeArray(out, 8.0, 0.0);
-    flighthq._internal._StaticIndex.writeArray(out, 9.0, _Runtime.field(value, 'greenBias'));
-    flighthq._internal._StaticIndex.writeArray(out, 10.0, 0.0);
-    flighthq._internal._StaticIndex.writeArray(out, 11.0, 0.0);
-    flighthq._internal._StaticIndex.writeArray(out, 12.0, _Runtime.field(value, 'blueScale'));
-    flighthq._internal._StaticIndex.writeArray(out, 13.0, 0.0);
-    flighthq._internal._StaticIndex.writeArray(out, 14.0, _Runtime.field(value, 'blueBias'));
-    flighthq._internal._StaticIndex.writeArray(out, 15.0, 0.0);
-    flighthq._internal._StaticIndex.writeArray(out, 16.0, 0.0);
-    flighthq._internal._StaticIndex.writeArray(out, 17.0, 0.0);
-    flighthq._internal._StaticIndex.writeArray(out, 18.0, _Runtime.field(value, 'alphaScale'));
-    flighthq._internal._StaticIndex.writeArray(out, 19.0, _Runtime.field(value, 'alphaBias'));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast _Runtime.field(value, 'redScale') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 3.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 4.0 : Float), (cast _Runtime.field(value, 'redBias') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 5.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 6.0 : Float), (cast _Runtime.field(value, 'greenScale') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 7.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 8.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 9.0 : Float), (cast _Runtime.field(value, 'greenBias') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 10.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 11.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 12.0 : Float), (cast _Runtime.field(value, 'blueScale') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 13.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 14.0 : Float), (cast _Runtime.field(value, 'blueBias') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 15.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 16.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 17.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 18.0 : Float), (cast _Runtime.field(value, 'alphaScale') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 19.0 : Float), (cast _Runtime.field(value, 'alphaBias') : Float));
     return cast out;
     return cast null;
   }

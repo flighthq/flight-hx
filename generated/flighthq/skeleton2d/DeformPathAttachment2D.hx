@@ -23,7 +23,7 @@ class DeformPathAttachment2D {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(outCommands, i, flighthq._internal._StaticIndex.readArray(commands, i));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outCommands : Array<Float>), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast commands : Array<Float>), (cast i : Float)) : Float));
         i++;
       }
     }

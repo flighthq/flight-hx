@@ -45,8 +45,8 @@ class GetPathSignedArea {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
         var j:Float = _Runtime.fmod((i + 1.0), n);
-        (area = cast ((area + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((j * 2.0) + 1.0)))) : Dynamic));
-        (area = cast ((area - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(contour, (j * 2.0)), flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0)))) : Dynamic));
+        (area = cast ((area + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i * 2.0) : Float)) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((j * 2.0) + 1.0) : Float)))) : Dynamic));
+        (area = cast ((area - (flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (j * 2.0) : Float)) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((i * 2.0) + 1.0) : Float)))) : Dynamic));
         i++;
       }
     }

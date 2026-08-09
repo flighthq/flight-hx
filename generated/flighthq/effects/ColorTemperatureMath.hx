@@ -20,9 +20,9 @@ class ColorTemperatureMath {
       (g = cast ((_Runtime.multiplyNumbers(288.1221695283, HxMath.pow((temp - 60.0), -0.0755148492)) / 255.0) : Dynamic));
       (b = cast (1.0 : Dynamic));
     }
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, HxMath.max(0.0, HxMath.min(1.0, r)));
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, HxMath.min(1.0, g)));
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, HxMath.max(0.0, HxMath.min(1.0, b)));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast HxMath.max(0.0, HxMath.min(1.0, r)) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast HxMath.max(0.0, HxMath.min(1.0, g)) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast HxMath.max(0.0, HxMath.min(1.0, b)) : Float));
   }
 
   public static function computeWhiteBalanceMultipliers(temperature:Float, tint:Float, out:Array<Float>):Void {
@@ -31,8 +31,8 @@ class ColorTemperatureMath {
     kelvin = (6500.0 - (temperature * 4500.0));
     computeColorTemperatureRgb((cast kelvin : Float), (cast out));
     greenShift = (-tint * 0.1);
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, HxMath.max(0.0, flighthq._internal._StaticIndex.readArray(out, 0.0)));
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray(out, 1.0), greenShift)));
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, HxMath.max(0.0, flighthq._internal._StaticIndex.readArray(out, 2.0)));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast HxMath.max(0.0, flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float))) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast HxMath.max(0.0, (flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float)) + greenShift)) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast HxMath.max(0.0, flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float))) : Float));
   }
 }

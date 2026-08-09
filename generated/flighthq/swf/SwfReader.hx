@@ -58,7 +58,7 @@ class SwfReader {
     var value:String = cast _Runtime.UNDEFINED;
     (cast this : SwfReader).alignToByte();
     start = this.pos;
-    while ((cast ((cast ((cast this.pos : Float) < (cast this.end : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(this.source, this.pos), 0.0) : Bool)) : Bool)) { this.pos++; }
+    while ((cast ((cast ((cast this.pos : Float) < (cast this.end : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast this.source : flighthq._internal._UInt8Array), (cast this.pos : Float)), 0.0) : Bool)) : Bool)) { this.pos++; }
     if ((cast ((cast this.pos : Float) >= (cast this.end : Float)) : Bool)) {
       (this.valid = false);
       return cast '';
@@ -74,7 +74,7 @@ class SwfReader {
       (this.valid = false);
       return cast 0.0;
     }
-    return cast flighthq._internal._StaticIndex.readUint8Array(this.source, this.pos++);
+    return cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast this.source : flighthq._internal._UInt8Array), (cast this.pos++ : Float));
     return cast null;
   }
   public function readUint16():Float {
@@ -103,7 +103,7 @@ class SwfReader {
           (this.valid = false);
           return cast 0.0;
         }
-        (value = cast (((value * 2.0) + (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(this.source, this.pos)) >> _Runtime.toInt32((7.0 - this.bitPosition)))) & 1)) : Dynamic));
+        (value = cast (((value * 2.0) + (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast this.source : flighthq._internal._UInt8Array), (cast this.pos : Float))) >> _Runtime.toInt32((7.0 - this.bitPosition)))) & 1)) : Dynamic));
         this.bitPosition++;
         if ((cast _Runtime.strictEquals(this.bitPosition, 8.0) : Bool)) {
           (this.bitPosition = 0.0);

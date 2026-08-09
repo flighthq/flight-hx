@@ -30,10 +30,10 @@ class WgpuScreenSpaceFogEffect {
     density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 1.0);
     pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'atmospheric.screenSpaceFog' : String), (cast WgpuScreenSpaceFogEffect.SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, density);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, r);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, g);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 6.0, b);
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast density : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast r : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast g : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast b : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 

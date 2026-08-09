@@ -46,12 +46,12 @@ class WgpuBloomEffect {
     temp = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
     brightPipeline = (cast getWgpuEffectPipeline((cast state), (cast 'bloom.bright' : String), (cast WgpuBloomEffect.BLOOM_BRIGHT_FRAGMENT_WGSL__wgpuBloomEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast bright), (cast brightPipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, threshold);
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast threshold : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }));
     applyGaussianBlurToWgpu((cast state), (cast bright), (cast blurred), (cast temp), (cast { blurX: radius, blurY: radius }));
     compositePipeline = (cast WgpuBloomEffect.getBloomCompositePipeline__wgpuBloomEffect((cast state)) : WgpuEffectPipeline);
     drawWgpuDualSourceEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast blurred), (cast (cast dest : WgpuRenderTarget)), (cast compositePipeline), (cast function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
     }, cast ([__unused4] : Array<Dynamic>)); }));
     releaseWgpuRenderTarget((cast pool), (cast bright));
     releaseWgpuRenderTarget((cast pool), (cast blurred));

@@ -74,10 +74,10 @@ class WgpuSurface {
                   while ((cast ((cast x : Float) < (cast width : Float)) : Bool)) {
                     var s:Float = (srcRow + (x * 4.0));
                     var d:Float = (dstRow + (x * 4.0));
-                    flighthq._internal._StaticIndex.writeUint8ClampedArray(out, d, ((cast swizzleBGRA : Bool) ? (cast flighthq._internal._StaticIndex.readUint8Array(mapped, (s + 2.0)) : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8Array(mapped, s) : Dynamic)));
-                    flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (d + 1.0), flighthq._internal._StaticIndex.readUint8Array(mapped, (s + 1.0)));
-                    flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (d + 2.0), ((cast swizzleBGRA : Bool) ? (cast flighthq._internal._StaticIndex.readUint8Array(mapped, s) : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8Array(mapped, (s + 2.0)) : Dynamic)));
-                    flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (d + 3.0), flighthq._internal._StaticIndex.readUint8Array(mapped, (s + 3.0)));
+                    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast d : Float), (cast ((cast swizzleBGRA : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast mapped : flighthq._internal._UInt8Array), (cast (s + 2.0) : Float)) : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast mapped : flighthq._internal._UInt8Array), (cast s : Float)) : Dynamic)) : Float));
+                    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (d + 1.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast mapped : flighthq._internal._UInt8Array), (cast (s + 1.0) : Float)) : Float));
+                    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (d + 2.0) : Float), (cast ((cast swizzleBGRA : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast mapped : flighthq._internal._UInt8Array), (cast s : Float)) : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast mapped : flighthq._internal._UInt8Array), (cast (s + 2.0) : Float)) : Dynamic)) : Float));
+                    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (d + 3.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast mapped : flighthq._internal._UInt8Array), (cast (s + 3.0) : Float)) : Float));
                     x++;
                   }
                 }

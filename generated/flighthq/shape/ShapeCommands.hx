@@ -229,15 +229,15 @@ class ShapeCommands {
     var cmds:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
     cmds = (cast (cast shape : Shape).data : ShapeData).commands;
-    _Runtime.pushMany(cmds, cast (['moveTo', 2.0, flighthq._internal._StaticIndex.readArray(points, 0.0), flighthq._internal._StaticIndex.readArray(points, 1.0)] : Array<Dynamic>));
+    _Runtime.pushMany(cmds, cast (['moveTo', 2.0, flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>));
     {
       var k:Float = 2.0;
       while ((cast ((cast k : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 1.0) : Float)) : Bool)) {
-        _Runtime.pushMany(cmds, cast (['lineTo', 2.0, flighthq._internal._StaticIndex.readArray(points, k), flighthq._internal._StaticIndex.readArray(points, (k + 1.0))] : Array<Dynamic>));
+        _Runtime.pushMany(cmds, cast (['lineTo', 2.0, flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast k : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (k + 1.0) : Float))] : Array<Dynamic>));
         (k = cast ((k + 2.0) : Dynamic));
       }
     }
-    _Runtime.pushMany(cmds, cast (['lineTo', 2.0, flighthq._internal._StaticIndex.readArray(points, 0.0), flighthq._internal._StaticIndex.readArray(points, 1.0)] : Array<Dynamic>));
+    _Runtime.pushMany(cmds, cast (['lineTo', 2.0, flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>));
     invalidateContent((cast shape));
   }
 
@@ -245,11 +245,11 @@ class ShapeCommands {
     var cmds:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
     cmds = (cast (cast shape : Shape).data : ShapeData).commands;
-    _Runtime.pushMany(cmds, cast (['moveTo', 2.0, flighthq._internal._StaticIndex.readArray(points, 0.0), flighthq._internal._StaticIndex.readArray(points, 1.0)] : Array<Dynamic>));
+    _Runtime.pushMany(cmds, cast (['moveTo', 2.0, flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>));
     {
       var k:Float = 2.0;
       while ((cast ((cast k : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 1.0) : Float)) : Bool)) {
-        _Runtime.pushMany(cmds, cast (['lineTo', 2.0, flighthq._internal._StaticIndex.readArray(points, k), flighthq._internal._StaticIndex.readArray(points, (k + 1.0))] : Array<Dynamic>));
+        _Runtime.pushMany(cmds, cast (['lineTo', 2.0, flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast k : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (k + 1.0) : Float))] : Array<Dynamic>));
         (k = cast ((k + 2.0) : Dynamic));
       }
     }

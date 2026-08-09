@@ -246,15 +246,15 @@ class GlQuadBatchWriter {
     clipW = (2.0 / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'));
     clipH = (2.0 / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height'));
     m = (cast runtime : GlRenderStateRuntime).matrixArray;
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, clipW);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, -clipH);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, -1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, 1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast clipW : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast -clipH : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast -1.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast 1.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast 1.0 : Float));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, locWorldMatrix, false, m);
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, locTexture, 0.0);
     if ((cast !_Runtime.strictEquals(locStraightTextureAlpha, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {

@@ -166,11 +166,11 @@ class AnimationLayerStack {
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(copied, 'length') : Float)) : Bool)) {
-        var channelIndex:Float = flighthq._internal._StaticIndex.readArray(copied, index);
+        var channelIndex:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast copied : Array<Float>), (cast index : Float));
         if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([channelIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast channelIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast channelIndex : Float) >= (cast channelCount : Float)) : Bool)) : Bool)) {
           _Runtime.throwValue(_Runtime.rangeError('AnimationLayer channel index ' + Std.string(Std.string(channelIndex)) + ' does not exist.'));
         }
-        if ((cast ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(copied, (index - 1.0)), channelIndex) : Bool)) : Bool)) {
+        if ((cast ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast copied : Array<Float>), (cast (index - 1.0) : Float)), channelIndex) : Bool)) : Bool)) {
           _Runtime.throwValue(_Runtime.typeError('AnimationLayer channel index ' + Std.string(channelIndex) + ' is duplicated.'));
         }
         index++;

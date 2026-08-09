@@ -31,7 +31,7 @@ class RiveText {
     {
       var child:Float = (index + 1.0);
       while ((cast ((cast child : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), child), index) : Bool)) { child++; continue; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast child : Float)), index) : Bool)) { child++; continue; }
         if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), child) : RiveCoreObject).typeKey, RiveText.RIVE_TEXT_VALUE_RUN__riveText) : Bool)) { _Runtime.callProperty(runs, 'push', cast ([child] : Array<Dynamic>)); }
         child++;
       }
@@ -45,7 +45,7 @@ class RiveText {
       _Runtime.callProperty(formatRanges, 'push', cast ([{ end: _Runtime.addNumbers(_Runtime.field(text, 'length'), _Runtime.field(value, 'length')), format: (cast RiveText.createRiveTextFormat__riveText((cast artboard), (cast style : Float), (cast align : Float), (cast fontNames)) : TextFormat), start: _Runtime.field(text, 'length') }] : Array<Dynamic>));
       (text = cast ((text + value) : Dynamic));
     }
-    baseStyle = ((cast _Runtime.strictEquals(_Runtime.field(runs, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast RiveText.readRiveNumber__riveText((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), flighthq._internal._StaticIndex.readArray(runs, 0.0))), (cast RiveText.RIVE_RUN_STYLE_ID__riveText : Float), (cast -1.0 : Float)) : Float) : Dynamic));
+    baseStyle = ((cast _Runtime.strictEquals(_Runtime.field(runs, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast RiveText.readRiveNumber__riveText((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), flighthq._internal._StaticIndex.readFloatArrayTyped((cast runs : Array<Float>), (cast 0.0 : Float)))), (cast RiveText.RIVE_RUN_STYLE_ID__riveText : Float), (cast -1.0 : Float)) : Float) : Dynamic));
     format = (cast RiveText.createRiveTextFormat__riveText((cast artboard), (cast baseStyle : Float), (cast align : Float), (cast fontNames)) : TextFormat);
     node = (cast createRichText((cast _Runtime.field(_Runtime, 'UNDEFINED'))) : RichText);
     ((cast (cast node : RichText).data : RichTextData).defaultTextFormat = format);
@@ -89,7 +89,7 @@ class RiveText {
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         if ((cast !_Runtime.strictEquals((cast object : RiveCoreObject).typeKey, RiveText.RIVE_TEXT_STYLE_AXIS__riveText) : Bool)) { index++; continue; }
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index), styleIndex) : Bool)) { index++; continue; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), styleIndex) : Bool)) { index++; continue; }
         _Runtime.callProperty(variations, 'push', cast ([{ axis: (cast RiveText.toRiveOpenTypeTag__riveText((cast (cast RiveText.readRiveNumber__riveText((cast object), (cast RiveText.RIVE_AXIS_TAG__riveText : Float), (cast 0.0 : Float)) : Float) : Float)) : String), value: (cast RiveText.readRiveNumber__riveText((cast object), (cast RiveText.RIVE_AXIS_VALUE__riveText : Float), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
         index++;
       }
@@ -122,10 +122,10 @@ class RiveText {
 
   public static function isRiveDescendantOf__riveText(artboard:RiveArtboardGraph, index:Float, ancestor:Float):Bool {
     var parent:Float = cast _Runtime.UNDEFINED;
-    parent = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index);
+    parent = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float));
     while ((cast ((cast parent : Float) >= (cast 0.0 : Float)) : Bool)) {
       if ((cast _Runtime.strictEquals(parent, ancestor) : Bool)) { return cast true; }
-      (parent = cast (flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), parent) : Dynamic));
+      (parent = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast parent : Float)) : Dynamic));
     }
     return cast false;
     return cast null;

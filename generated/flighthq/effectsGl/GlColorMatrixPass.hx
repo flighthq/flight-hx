@@ -18,7 +18,7 @@ class GlColorMatrixPass {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 20.0 : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(m, i, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, i), function():Dynamic return cast 0.0));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast i : Float), (cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast matrix : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0) : Float));
         i++;
       }
     }

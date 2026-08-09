@@ -16,14 +16,14 @@ class ConvexVertices {
     minY = _Runtime.field(aabb, 'minY');
     maxX = _Runtime.field(aabb, 'maxX');
     maxY = _Runtime.field(aabb, 'maxY');
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 0.0, minX);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 1.0, minY);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 2.0, maxX);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 3.0, minY);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 4.0, maxX);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 5.0, maxY);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 6.0, minX);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 7.0, maxY);
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 0.0 : Float), (cast minX : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 1.0 : Float), (cast minY : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 2.0 : Float), (cast maxX : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 3.0 : Float), (cast minY : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 4.0 : Float), (cast maxX : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 5.0 : Float), (cast maxY : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 6.0 : Float), (cast minX : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 7.0 : Float), (cast maxY : Float));
   }
 
   public static function writeObbVertices(obb:CollisionObb, out:flighthq._internal._Float64Array):Void {
@@ -47,13 +47,13 @@ class ConvexVertices {
     wy = (sin * halfW);
     hx = (-sin * halfH);
     hy = (cos * halfH);
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 0.0, ((cx - wx) - hx));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 1.0, ((cy - wy) - hy));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 2.0, ((cx + wx) - hx));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 3.0, ((cy + wy) - hy));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 4.0, ((cx + wx) + hx));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 5.0, ((cy + wy) + hy));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 6.0, ((cx - wx) + hx));
-    flighthq._internal._StaticIndex.writeFloat64Array(out, 7.0, ((cy - wy) + hy));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 0.0 : Float), (cast ((cx - wx) - hx) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 1.0 : Float), (cast ((cy - wy) - hy) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 2.0 : Float), (cast ((cx + wx) - hx) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 3.0 : Float), (cast ((cy + wy) - hy) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 4.0 : Float), (cast ((cx + wx) + hx) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 5.0 : Float), (cast ((cy + wy) + hy) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 6.0 : Float), (cast ((cx - wx) + hx) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 7.0 : Float), (cast ((cy - wy) + hy) : Float));
   }
 }

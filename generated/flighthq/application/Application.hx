@@ -285,8 +285,8 @@ class Application {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
-        if ((cast ((cast flighthq._internal._StaticIndex.readArray(buf, i) : Float) > (cast 0.0 : Float)) : Bool)) {
-          (total = cast ((total + flighthq._internal._StaticIndex.readArray(buf, i)) : Dynamic));
+        if ((cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast buf : Array<Float>), (cast i : Float)) : Float) > (cast 0.0 : Float)) : Bool)) {
+          (total = cast ((total + flighthq._internal._StaticIndex.readFloatArrayTyped((cast buf : Array<Float>), (cast i : Float))) : Dynamic));
           count++;
         }
         i++;
@@ -387,7 +387,7 @@ class Application {
     if ((cast ((cast _Runtime.field((cast state : LoopState__application).fpsBuffer, 'length') : Float) < (cast Application.ROLLING_FPS_WINDOW__application : Float)) : Bool)) {
       _Runtime.callProperty((cast state : LoopState__application).fpsBuffer, 'push', cast ([delta] : Array<Dynamic>));
     } else {
-      flighthq._internal._StaticIndex.writeArray((cast state : LoopState__application).fpsBuffer, (cast state : LoopState__application).fpsHead, delta);
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast state : LoopState__application).fpsBuffer : Array<Float>), (cast (cast state : LoopState__application).fpsHead : Float), (cast delta : Float));
       ((cast state : LoopState__application).fpsHead = _Runtime.fmod(((cast state : LoopState__application).fpsHead + 1.0), Application.ROLLING_FPS_WINDOW__application));
     }
   }

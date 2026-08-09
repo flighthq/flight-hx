@@ -10,23 +10,23 @@ class StylizeMath {
     var curv:Float = cast _Runtime.UNDEFINED;
     maskScale = _Runtime.divideNumbers(HxMath.max(1.0, resolution), 360.0);
     curv = HxMath.max(0.0, HxMath.min(1.0, curvature));
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, maskScale);
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, (curv * 0.1));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast maskScale : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast (curv * 0.1) : Float));
   }
 
   public static function computeHalftoneCellParams(frequency:Float, angle:Float, out:Array<Float>):Void {
     var cellSize:Float = cast _Runtime.UNDEFINED;
     cellSize = ((cast ((cast frequency : Float) > (cast 1e-10 : Float)) : Bool) ? (cast (1.0 / frequency) : Dynamic) : (cast 1.0 : Dynamic));
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, cellSize);
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.cos(angle));
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, HxMath.sin(angle));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast cellSize : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast HxMath.cos(angle) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast HxMath.sin(angle) : Float));
   }
 
   public static function computeScanlineParams(resolution:Float, intensity:Float, out:Array<Float>):Void {
     var scale:Float = cast _Runtime.UNDEFINED;
     scale = _Runtime.divideNumbers(HxMath.max(1.0, resolution), 480.0);
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, scale);
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, HxMath.max(0.0, HxMath.min(1.0, intensity)));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast scale : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast HxMath.max(0.0, HxMath.min(1.0, intensity)) : Float));
   }
 
   public static function createBayerMatrix(order:Float, out:flighthq._internal._Float32Array):Float {
@@ -38,10 +38,10 @@ class StylizeMath {
     size = HxMath.pow(2.0, HxMath.max(1.0, HxMath.round(order)));
     sizeSq = (size * size);
     raw = new flighthq._internal._Float32Array(sizeSq);
-    flighthq._internal._StaticIndex.writeFloat32Array(raw, 0.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(raw, 1.0, 2.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(raw, 2.0, 3.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(raw, 3.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast raw : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast raw : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast 2.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast raw : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast 3.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast raw : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast 1.0 : Float));
     currentSize = 2.0;
     while ((cast ((cast currentSize : Float) < (cast size : Float)) : Bool)) {
       var next:Float = (currentSize * 2.0);
@@ -53,11 +53,11 @@ class StylizeMath {
           {
             var x:Float = 0.0;
             while ((cast ((cast x : Float) < (cast currentSize : Float)) : Bool)) {
-              var base:Float = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(raw, ((y * currentSize) + x)), 4.0);
-              flighthq._internal._StaticIndex.writeFloat32Array(tmp, ((y * next) + x), base);
-              flighthq._internal._StaticIndex.writeFloat32Array(tmp, ((y * next) + (x + currentSize)), (base + 2.0));
-              flighthq._internal._StaticIndex.writeFloat32Array(tmp, (((y + currentSize) * next) + x), (base + 3.0));
-              flighthq._internal._StaticIndex.writeFloat32Array(tmp, (((y + currentSize) * next) + (x + currentSize)), (base + 1.0));
+              var base:Float = (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast raw : flighthq._internal._Float32Array), (cast ((y * currentSize) + x) : Float)) * 4.0);
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast tmp : flighthq._internal._Float32Array), (cast ((y * next) + x) : Float), (cast base : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast tmp : flighthq._internal._Float32Array), (cast ((y * next) + (x + currentSize)) : Float), (cast (base + 2.0) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast tmp : flighthq._internal._Float32Array), (cast (((y + currentSize) * next) + x) : Float), (cast (base + 3.0) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast tmp : flighthq._internal._Float32Array), (cast (((y + currentSize) * next) + (x + currentSize)) : Float), (cast (base + 1.0) : Float));
               x++;
             }
           }
@@ -71,7 +71,7 @@ class StylizeMath {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast sizeSq : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(out, i, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(raw, i), invSizeSq));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast i : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast raw : flighthq._internal._Float32Array), (cast i : Float)) * invSizeSq) : Float));
         i++;
       }
     }

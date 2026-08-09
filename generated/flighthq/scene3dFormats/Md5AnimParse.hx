@@ -198,22 +198,22 @@ class Md5AnimParse {
             var qz:Float = (cast base : Md5AnimBaseframePose__md5AnimParse).orientationZ;
             var componentOffset:Float = (cast entry : Md5AnimHierarchyEntry__md5AnimParse).startIndex;
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_TX__md5AnimParse)))) {
-              (tx = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast tx) : Dynamic));
+              (tx = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameData : Array<Float>), (cast componentOffset++ : Float)), function():Dynamic return cast tx) : Dynamic));
             }
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_TY__md5AnimParse)))) {
-              (ty = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast ty) : Dynamic));
+              (ty = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameData : Array<Float>), (cast componentOffset++ : Float)), function():Dynamic return cast ty) : Dynamic));
             }
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_TZ__md5AnimParse)))) {
-              (tz = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast tz) : Dynamic));
+              (tz = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameData : Array<Float>), (cast componentOffset++ : Float)), function():Dynamic return cast tz) : Dynamic));
             }
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_QX__md5AnimParse)))) {
-              (qx = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast qx) : Dynamic));
+              (qx = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameData : Array<Float>), (cast componentOffset++ : Float)), function():Dynamic return cast qx) : Dynamic));
             }
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_QY__md5AnimParse)))) {
-              (qy = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast qy) : Dynamic));
+              (qy = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameData : Array<Float>), (cast componentOffset++ : Float)), function():Dynamic return cast qy) : Dynamic));
             }
             if (_Runtime.truthy((_Runtime.toInt32(flags) & _Runtime.toInt32(Md5AnimParse.FLAG_QZ__md5AnimParse)))) {
-              (qz = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameData, componentOffset++), function():Dynamic return cast qz) : Dynamic));
+              (qz = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameData : Array<Float>), (cast componentOffset++ : Float)), function():Dynamic return cast qz) : Dynamic));
             }
             var sumSq:Float = (((qx * qx) + (qy * qy)) + (qz * qz));
             var qw:Float = ((cast ((cast sumSq : Float) < (cast 1.0 : Float)) : Bool) ? (cast -HxMath.sqrt((1.0 - sumSq)) : Dynamic) : (cast 0.0 : Dynamic));

@@ -83,10 +83,10 @@ class FlexLayout {
     paddingTop = _Runtime.coalesce(({ final __structural5 = container; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var paddingTop:Null<Float>; }).paddingTop; }), function():Dynamic return cast 0.0);
     paddingBottom = _Runtime.coalesce(({ final __structural6 = container; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var paddingBottom:Null<Float>; }).paddingBottom; }), function():Dynamic return cast 0.0);
     parentOffset = (parentIndex * 4.0);
-    mainStart = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(out, _Runtime.addNumbers(parentOffset, ((cast row : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic)))), ((cast row : Bool) ? (cast paddingLeft : Dynamic) : (cast paddingTop : Dynamic)));
-    crossStart = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(out, _Runtime.addNumbers(parentOffset, ((cast row : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)))), ((cast row : Bool) ? (cast paddingTop : Dynamic) : (cast paddingLeft : Dynamic)));
-    mainSize = HxMath.max(0.0, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(out, _Runtime.addNumbers(parentOffset, ((cast row : Bool) ? (cast 2.0 : Dynamic) : (cast 3.0 : Dynamic)))), ((cast row : Bool) ? (cast (paddingLeft + paddingRight) : Dynamic) : (cast (paddingTop + paddingBottom) : Dynamic))));
-    crossSize = HxMath.max(0.0, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(out, _Runtime.addNumbers(parentOffset, ((cast row : Bool) ? (cast 3.0 : Dynamic) : (cast 2.0 : Dynamic)))), ((cast row : Bool) ? (cast (paddingTop + paddingBottom) : Dynamic) : (cast (paddingLeft + paddingRight) : Dynamic))));
+    mainStart = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast _Runtime.addNumbers(parentOffset, ((cast row : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic))) : Float)), ((cast row : Bool) ? (cast paddingLeft : Dynamic) : (cast paddingTop : Dynamic)));
+    crossStart = _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast _Runtime.addNumbers(parentOffset, ((cast row : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic))) : Float)), ((cast row : Bool) ? (cast paddingTop : Dynamic) : (cast paddingLeft : Dynamic)));
+    mainSize = HxMath.max(0.0, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast _Runtime.addNumbers(parentOffset, ((cast row : Bool) ? (cast 2.0 : Dynamic) : (cast 3.0 : Dynamic))) : Float)), ((cast row : Bool) ? (cast (paddingLeft + paddingRight) : Dynamic) : (cast (paddingTop + paddingBottom) : Dynamic))));
+    crossSize = HxMath.max(0.0, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast _Runtime.addNumbers(parentOffset, ((cast row : Bool) ? (cast 3.0 : Dynamic) : (cast 2.0 : Dynamic))) : Float)), ((cast row : Bool) ? (cast (paddingTop + paddingBottom) : Dynamic) : (cast (paddingLeft + paddingRight) : Dynamic))));
     lineStartIndex = -1.0;
     lineLastIndex = -1.0;
     lineCount = 0.0;
@@ -166,10 +166,10 @@ class FlexLayout {
     if ((cast _Runtime.strictEquals(align, 'stretch') : Bool)) { (targetCrossSize = cast (lineCross : Dynamic)); }
     targetCross = ((crossStart + crossOffset) + (cast FlexLayout.getFlexAlignOffset__flexLayout((cast align), (cast lineCross : Float), (cast targetCrossSize : Float)) : Float));
     childOffset = (childIndex * 4.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, childOffset, ((cast row : Bool) ? (cast targetMain : Dynamic) : (cast targetCross : Dynamic)));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (childOffset + 1.0), ((cast row : Bool) ? (cast targetCross : Dynamic) : (cast targetMain : Dynamic)));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (childOffset + 2.0), ((cast row : Bool) ? (cast targetMainSize : Dynamic) : (cast targetCrossSize : Dynamic)));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (childOffset + 3.0), ((cast row : Bool) ? (cast targetCrossSize : Dynamic) : (cast targetMainSize : Dynamic)));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast childOffset : Float), (cast ((cast row : Bool) ? (cast targetMain : Dynamic) : (cast targetCross : Dynamic)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (childOffset + 1.0) : Float), (cast ((cast row : Bool) ? (cast targetCross : Dynamic) : (cast targetMain : Dynamic)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (childOffset + 2.0) : Float), (cast ((cast row : Bool) ? (cast targetMainSize : Dynamic) : (cast targetCrossSize : Dynamic)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (childOffset + 3.0) : Float), (cast ((cast row : Bool) ? (cast targetCrossSize : Dynamic) : (cast targetMainSize : Dynamic)) : Float));
     return cast null;
     return cast _Runtime.UNDEFINED;
   });

@@ -39,10 +39,10 @@ class BitmapNoise {
             var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool) || (cast ((cast x : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Float = (((y * bitmapWidth) + x) * 4.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, i, HxMath.round(r));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 1.0), HxMath.round(g));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 2.0), HxMath.round(b));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (i + 3.0), 255.0);
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast HxMath.round(r) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast HxMath.round(g) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast HxMath.round(b) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float), (cast 255.0 : Float));
             px++;
           }
         }
@@ -83,24 +83,24 @@ class BitmapNoise {
             if ((cast grayScale : Bool)) {
               var value:Float = (cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast (_Runtime.toInt32(seed) | 0) : Float)) : Float);
               var byte:Float = HxMath.round((value * 255.0));
-              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_R)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, byte); }
-              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_G)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), byte); }
-              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_R)))) { flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast byte : Float)); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_G)))) { flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast byte : Float)); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) { flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast byte : Float)); }
             } else {
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_R)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, HxMath.round(((cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast (_Runtime.toInt32(seed) | 0) : Float)) : Float) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast HxMath.round(((cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast (_Runtime.toInt32(seed) | 0) : Float)) : Float) * 255.0)) : Float));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_G)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), HxMath.round(((cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435761.0) : Float)) : Float) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast HxMath.round(((cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435761.0) : Float)) : Float) * 255.0)) : Float));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), HxMath.round(((cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435762.0) : Float)) : Float) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast HxMath.round(((cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435762.0) : Float)) : Float) * 255.0)) : Float));
               }
             }
             if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_A)))) {
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), HxMath.round(((cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435763.0) : Float)) : Float) * 255.0)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast HxMath.round(((cast BitmapNoise.fractalValueNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435763.0) : Float)) : Float) * 255.0)) : Float));
             } else {
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), 255.0);
+              flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast 255.0 : Float));
             }
             px++;
           }
@@ -142,24 +142,24 @@ class BitmapNoise {
             if ((cast grayScale : Bool)) {
               var value:Float = (cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast (_Runtime.toInt32(seed) | 0) : Float)) : Float);
               var byte:Float = HxMath.round((value * 255.0));
-              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_R)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, byte); }
-              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_G)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), byte); }
-              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) { flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), byte); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_R)))) { flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast byte : Float)); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_G)))) { flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast byte : Float)); }
+              if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) { flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast byte : Float)); }
             } else {
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_R)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, di, HxMath.round(((cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast (_Runtime.toInt32(seed) | 0) : Float)) : Float) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast HxMath.round(((cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast (_Runtime.toInt32(seed) | 0) : Float)) : Float) * 255.0)) : Float));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_G)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 1.0), HxMath.round(((cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435761.0) : Float)) : Float) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast HxMath.round(((cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435761.0) : Float)) : Float) * 255.0)) : Float));
               }
               if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_B)))) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 2.0), HxMath.round(((cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435762.0) : Float)) : Float) * 255.0)));
+                flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast HxMath.round(((cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435762.0) : Float)) : Float) * 255.0)) : Float));
               }
             }
             if (_Runtime.truthy((_Runtime.toInt32(channelOptions) & _Runtime.toInt32(BITMAP_NOISE_CHANNEL_A)))) {
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), HxMath.round(((cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435763.0) : Float)) : Float) * 255.0)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast HxMath.round(((cast BitmapNoise.turbulenceNoise__bitmapNoise((cast nx : Float), (cast ny : Float), (cast passes : Float), (cast ((_Runtime.toInt32(seed) | 0) + 2654435763.0) : Float)) : Float) * 255.0)) : Float));
             } else {
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(data, (di + 3.0), 255.0);
+              flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast 255.0 : Float));
             }
             px++;
           }

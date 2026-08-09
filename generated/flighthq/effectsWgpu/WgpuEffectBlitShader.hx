@@ -22,8 +22,8 @@ class WgpuEffectBlitShader {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     pipeline = (cast WgpuEffectBlitShader.getWgpuBlitOffsetShader__wgpuEffectBlitShader((cast state)) : WgpuEffectPipeline);
     drawWgpuEffectPass((cast state), (cast source), (cast dest), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, (-dx / (cast source : WgpuRenderTarget).width));
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, (dy / (cast source : WgpuRenderTarget).height));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (-dx / (cast source : WgpuRenderTarget).width) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (dy / (cast source : WgpuRenderTarget).height) : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 

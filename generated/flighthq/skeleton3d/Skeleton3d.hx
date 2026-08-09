@@ -95,7 +95,7 @@ class Skeleton3d {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
-            flighthq._internal._StaticIndex.writeFloat32Array(Skeleton3d._invBind__skeleton3d.m, i, flighthq._internal._StaticIndex.readFloat32Array(inverseBindMatrices, (base + i)));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast Skeleton3d._invBind__skeleton3d.m : flighthq._internal._Float32Array), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast inverseBindMatrices : flighthq._internal._Float32Array), (cast (base + i) : Float)) : Float));
             i++;
           }
         }
@@ -130,7 +130,7 @@ class Skeleton3d {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(a, 'inverseBindMatrices'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(a, 'inverseBindMatrices'), i), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(b, 'inverseBindMatrices'), i)) : Bool)) { return cast false; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _Runtime.field(a, 'inverseBindMatrices') : flighthq._internal._Float32Array), (cast i : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _Runtime.field(b, 'inverseBindMatrices') : flighthq._internal._Float32Array), (cast i : Float))) : Bool)) { return cast false; }
         i++;
       }
     }

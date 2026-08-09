@@ -130,9 +130,9 @@ class RiveShapePaint {
     index = 0.0;
     draw = true;
     zeroRun = 0.0;
-    closed = ((cast ((cast ((cast _Runtime.field(contour, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 2.0))) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(contour, 1.0), flighthq._internal._StaticIndex.readArray(contour, _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 1.0))) : Bool));
+    closed = ((cast ((cast ((cast _Runtime.field(contour, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 2.0) : Float))) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(contour, 'length'), 1.0) : Float))) : Bool));
     while ((cast ((cast travelled : Float) < (cast length : Float)) : Bool)) {
-      var amount:Float = flighthq._internal._StaticIndex.readArray(pattern, _Runtime.fmod(index++, _Runtime.field(pattern, 'length')));
+      var amount:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast pattern : Array<Float>), (cast _Runtime.fmod(index++, _Runtime.field(pattern, 'length')) : Float));
       if ((cast ((cast amount : Float) <= (cast 0.0 : Float)) : Bool)) {
         zeroRun++;
         (draw = cast (!(cast draw : Bool) : Dynamic));
@@ -162,10 +162,10 @@ class RiveShapePaint {
     {
       var index:Float = 2.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-        var x0:Float = flighthq._internal._StaticIndex.readArray(contour, (index - 2.0));
-        var y0:Float = flighthq._internal._StaticIndex.readArray(contour, (index - 1.0));
-        var x1:Float = flighthq._internal._StaticIndex.readArray(contour, index);
-        var y1:Float = flighthq._internal._StaticIndex.readArray(contour, (index + 1.0));
+        var x0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (index - 2.0) : Float));
+        var y0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (index - 1.0) : Float));
+        var x1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast index : Float));
+        var y1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (index + 1.0) : Float));
         var segment:Float = _Runtime.hypot((x1 - x0), (y1 - y0));
         var segmentEnd:Float = (travelled + segment);
         if ((cast ((cast ((cast ((cast segment : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast to : Float) > (cast travelled : Float)) : Bool)) : Bool) && (cast ((cast from : Float) < (cast segmentEnd : Float)) : Bool)) : Bool)) {
@@ -176,10 +176,10 @@ class RiveShapePaint {
           var startX:Float = (x0 + ((x1 - x0) * startRatio));
           var startY:Float = (y0 + ((y1 - y0) * startRatio));
           if ((cast !(cast started : Bool) : Bool)) {
-            if ((cast move : Bool)) { _Runtime.callProperty(commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>)); } else { if ((cast ((cast ((cast ((cast _Runtime.field(data, 'length') : Float) < (cast 2.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(data, _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 2.0)), startX) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(data, _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 1.0)), startY) : Bool)) : Bool)) {
+            if ((cast move : Bool)) { _Runtime.callProperty(commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>)); } else { if ((cast ((cast ((cast ((cast _Runtime.field(data, 'length') : Float) < (cast 2.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 2.0) : Float)), startX) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 1.0) : Float)), startY) : Bool)) : Bool)) {
               _Runtime.callProperty(commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO] : Array<Dynamic>));
             } }
-            if ((cast ((cast move : Bool) || (cast ((cast _Runtime.field(data, 'length') : Float) < (cast 2.0 : Float)) : Bool)) : Bool)) { _Runtime.pushMany(data, cast ([startX, startY] : Array<Dynamic>)); } else { if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(data, _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 2.0)), startX) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(data, _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 1.0)), startY) : Bool)) : Bool)) { _Runtime.pushMany(data, cast ([startX, startY] : Array<Dynamic>)); } }
+            if ((cast ((cast move : Bool) || (cast ((cast _Runtime.field(data, 'length') : Float) < (cast 2.0 : Float)) : Bool)) : Bool)) { _Runtime.pushMany(data, cast ([startX, startY] : Array<Dynamic>)); } else { if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 2.0) : Float)), startX) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 1.0) : Float)), startY) : Bool)) : Bool)) { _Runtime.pushMany(data, cast ([startX, startY] : Array<Dynamic>)); } }
             (started = cast (true : Dynamic));
           }
           _Runtime.callProperty(commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO] : Array<Dynamic>));
@@ -198,7 +198,7 @@ class RiveShapePaint {
     {
       var index:Float = 2.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-        (length = cast ((length + _Runtime.hypot(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, index), flighthq._internal._StaticIndex.readArray(contour, (index - 2.0))), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, (index + 1.0)), flighthq._internal._StaticIndex.readArray(contour, (index - 1.0))))) : Dynamic));
+        (length = cast ((length + _Runtime.hypot((flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast index : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (index - 2.0) : Float))), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (index + 1.0) : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (index - 1.0) : Float))))) : Dynamic));
         (index = cast ((index + 2.0) : Dynamic));
       }
     }
@@ -241,7 +241,7 @@ class RiveShapePaint {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(paths, 'length') : Float)) : Bool)) {
         var from:Float = (travelled / total);
-        (travelled = cast ((travelled + flighthq._internal._StaticIndex.readArray(lengths, index)) : Dynamic));
+        (travelled = cast ((travelled + flighthq._internal._StaticIndex.readFloatArrayTyped((cast lengths : Array<Float>), (cast index : Float))) : Dynamic));
         _Runtime.callProperty(results, 'push', _Runtime.concatArrays([_Runtime.toArray((cast RiveShapePaint.trimRivePathToWindows__riveShapePaint((cast flighthq._internal._StaticIndex.readArray(paths, index)), (cast from : Float), (cast (travelled / total) : Float), (cast windows)) : Array<RivePathRecord>))]));
         index++;
       }
@@ -302,7 +302,7 @@ class RiveShapePaint {
     {
       var index:Float = (paintIndex + 1.0);
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index), paintIndex) : Bool)) { index++; continue; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), paintIndex) : Bool)) { index++; continue; }
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         if ((cast _Runtime.strictEquals((cast object : RiveCoreObject).typeKey, RiveShapePaint.RIVE_TRIM_PATH__riveShapePaint) : Bool)) {
           _Runtime.callProperty(effects, 'push', cast ([{ kind: 'trim', trim: { end: (cast RiveShapePaint.readRiveNumber__riveShapePaint((cast object), (cast RiveShapePaint.RIVE_TRIM_END__riveShapePaint : Float), (cast 0.0 : Float)) : Float), offset: (cast RiveShapePaint.readRiveNumber__riveShapePaint((cast object), (cast RiveShapePaint.RIVE_TRIM_OFFSET__riveShapePaint : Float), (cast 0.0 : Float)) : Float), sequential: _Runtime.strictEquals((cast RiveShapePaint.readRiveNumber__riveShapePaint((cast object), (cast RiveShapePaint.RIVE_TRIM_MODE__riveShapePaint : Float), (cast 0.0 : Float)) : Float), RiveShapePaint.RIVE_TRIM_SEQUENTIAL__riveShapePaint), start: (cast RiveShapePaint.readRiveNumber__riveShapePaint((cast object), (cast RiveShapePaint.RIVE_TRIM_START__riveShapePaint : Float), (cast 0.0 : Float)) : Float) } }] : Array<Dynamic>));
@@ -314,7 +314,7 @@ class RiveShapePaint {
         {
           var child:Float = (index + 1.0);
           while ((cast ((cast child : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-            if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), child), index) : Bool)) { child++; continue; }
+            if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast child : Float)), index) : Bool)) { child++; continue; }
             var dash:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), child);
             if ((cast !_Runtime.strictEquals((cast dash : RiveCoreObject).typeKey, RiveShapePaint.RIVE_DASH__riveShapePaint) : Bool)) { child++; continue; }
             _Runtime.callProperty(lengths, 'push', cast ([{ percentage: (cast RiveShapePaint.readRiveFlag__riveShapePaint((cast dash), (cast RiveShapePaint.RIVE_DASH_LENGTH_IS_PERCENTAGE__riveShapePaint : Float), (cast false : Bool)) : Bool), value: (cast RiveShapePaint.readRiveNumber__riveShapePaint((cast dash), (cast RiveShapePaint.RIVE_DASH_LENGTH__riveShapePaint : Float), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
@@ -335,7 +335,7 @@ class RiveShapePaint {
     {
       var index:Float = (shapeIndex + 1.0);
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index), shapeIndex) : Bool)) { index++; continue; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), shapeIndex) : Bool)) { index++; continue; }
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveShapePaint.RIVE_SHAPE_PAINT__riveShapePaint : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
         _Runtime.callProperty(paints, 'push', cast ([(cast RiveShapePaint.createRivePaint__riveShapePaint((cast object), (cast artboard), (cast index : Float)) : RivePaint__riveShapePaint)] : Array<Dynamic>));
@@ -360,7 +360,7 @@ class RiveShapePaint {
     {
       var index:Float = (paintIndex + 1.0);
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index), paintIndex) : Bool)) { index++; continue; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), paintIndex) : Bool)) { index++; continue; }
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveShapePaint.RIVE_SOLID_COLOR__riveShapePaint : Float)) : Bool) : Bool)) {
           var packed:Float = (cast RiveShapePaint.readRiveNumber__riveShapePaint((cast object), (cast RiveShapePaint.RIVE_SOLID_COLOR_VALUE__riveShapePaint : Float), (cast RiveShapePaint.RIVE_DEFAULT_SOLID_COLOR__riveShapePaint : Float)) : Float);
@@ -385,7 +385,7 @@ class RiveShapePaint {
     {
       var stop:Float = (index + 1.0);
       while ((cast ((cast stop : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), stop), index) : Bool)) { stop++; continue; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast stop : Float)), index) : Bool)) { stop++; continue; }
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), stop);
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveShapePaint.RIVE_GRADIENT_STOP__riveShapePaint : Float)) : Bool) : Bool) : Bool)) { stop++; continue; }
         var packed:Float = (cast RiveShapePaint.readRiveNumber__riveShapePaint((cast object), (cast RiveShapePaint.RIVE_GRADIENT_STOP_COLOR__riveShapePaint : Float), (cast RiveShapePaint.RIVE_DEFAULT_STOP_COLOR__riveShapePaint : Float)) : Float);

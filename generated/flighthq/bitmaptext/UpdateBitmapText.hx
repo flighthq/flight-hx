@@ -95,7 +95,7 @@ class UpdateBitmapText {
         {
           var wi:Float = 0.0;
           while ((cast ((cast wi : Float) < (cast _Runtime.field((cast line : BitmapTextLine__updateBitmapText).words, 'length') : Float)) : Bool)) {
-            if ((cast ((cast wi : Float) > (cast 0.0 : Float)) : Bool)) { (penX = cast ((penX + _Runtime.addNumbers(flighthq._internal._StaticIndex.readArray((cast line : BitmapTextLine__updateBitmapText).gaps, (wi - 1.0)), gapExtra)) : Dynamic)); }
+            if ((cast ((cast wi : Float) > (cast 0.0 : Float)) : Bool)) { (penX = cast ((penX + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast line : BitmapTextLine__updateBitmapText).gaps : Array<Float>), (cast (wi - 1.0) : Float)) + gapExtra)) : Dynamic)); }
             var word:BitmapTextWord__updateBitmapText = flighthq._internal._StaticIndex.readArray((cast line : BitmapTextLine__updateBitmapText).words, wi);
             for (glyph in _Runtime.iterable((cast word : BitmapTextWord__updateBitmapText).glyphs)) {
               var entry:GlyphEntry = (cast glyph : BitmapTextGlyph__updateBitmapText).entry;
@@ -144,10 +144,10 @@ class UpdateBitmapText {
       ((cast page : BitmapTextPage).ids = (cast reserveUint16Array((cast (cast page : BitmapTextPage).ids), (cast next : Float)) : flighthq._internal._UInt16Array));
       ((cast page : BitmapTextPage).transforms = (cast reserveFloat32Array((cast (cast page : BitmapTextPage).transforms), (cast (next * UpdateBitmapText.BITMAP_TEXT_TRANSFORM_STRIDE__updateBitmapText) : Float)) : flighthq._internal._Float32Array));
     }
-    flighthq._internal._StaticIndex.writeUint16Array((cast page : BitmapTextPage).ids, index, id);
+    flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast (cast page : BitmapTextPage).ids : flighthq._internal._UInt16Array), (cast index : Float), (cast id : Float));
     o = (index * UpdateBitmapText.BITMAP_TEXT_TRANSFORM_STRIDE__updateBitmapText);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast page : BitmapTextPage).transforms, o, x);
-    flighthq._internal._StaticIndex.writeFloat32Array((cast page : BitmapTextPage).transforms, (o + 1.0), y);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast page : BitmapTextPage).transforms : flighthq._internal._Float32Array), (cast o : Float), (cast x : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast page : BitmapTextPage).transforms : flighthq._internal._Float32Array), (cast (o + 1.0) : Float), (cast y : Float));
     ((cast page : BitmapTextPage).instanceCount = (index + 1.0));
   }
 

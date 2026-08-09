@@ -38,47 +38,47 @@ class GetPathBounds {
     {
       var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Float = flighthq._internal._StaticIndex.readArray(commands, ci);
+        var command:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast commands : Array<Float>), (cast ci : Float));
         if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO) : Bool)) {
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           expand((cast x : Float), (cast y : Float));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_MOVE_TO) : Bool)) {
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           expand((cast x : Float), (cast y : Float));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO) : Bool)) {
-          var nx:Float = flighthq._internal._StaticIndex.readArray(data, di);
-          var ny:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
+          var nx:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float));
+          var ny:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float));
           (di = cast ((di + 2.0) : Dynamic));
           expand((cast nx : Float), (cast ny : Float));
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_LINE_TO) : Bool)) {
-          var nx:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var ny:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+          var nx:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float));
+          var ny:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float));
           (di = cast ((di + 4.0) : Dynamic));
           expand((cast nx : Float), (cast ny : Float));
           (x = cast (nx : Dynamic));
           (y = cast (ny : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO) : Bool)) {
-          var cx:Float = flighthq._internal._StaticIndex.readArray(data, di);
-          var cy:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
-          var ax:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var ay:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
+          var cx:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float));
+          var cy:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float));
+          var ax:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float));
+          var ay:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float));
           (di = cast ((di + 4.0) : Dynamic));
           GetPathBounds.expandQuadraticBounds__getPathBounds((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast ax : Float), (cast ay : Float), (cast expand));
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO) : Bool)) {
-          var c1x:Float = flighthq._internal._StaticIndex.readArray(data, di);
-          var c1y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
-          var c2x:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var c2y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
-          var ax:Float = flighthq._internal._StaticIndex.readArray(data, (di + 4.0));
-          var ay:Float = flighthq._internal._StaticIndex.readArray(data, (di + 5.0));
+          var c1x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float));
+          var c1y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float));
+          var c2x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float));
+          var c2y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float));
+          var ax:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 4.0) : Float));
+          var ay:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 5.0) : Float));
           (di = cast ((di + 6.0) : Dynamic));
           GetPathBounds.expandCubicBounds__getPathBounds((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast ax : Float), (cast ay : Float), (cast expand));
           (x = cast (ax : Dynamic));

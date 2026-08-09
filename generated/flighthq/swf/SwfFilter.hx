@@ -151,7 +151,7 @@ class SwfFilter {
           {
             var row:Float = 0.0;
             while ((cast ((cast row : Float) < (cast SwfFilter.COLOR_MATRIX_ROWS__swfFilter : Float)) : Bool)) {
-              ({ var __indexedObject0:Dynamic = matrix; var __indexedKey1:Dynamic = ((row * SwfFilter.COLOR_MATRIX_COLUMNS__swfFilter) + SwfFilter.COLOR_MATRIX_BIAS_COLUMN__swfFilter); flighthq._internal._StaticIndex.writeArray(__indexedObject0, __indexedKey1, _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject0, __indexedKey1), SwfFilter.COLOR_CHANNEL_ONE__swfFilter)); });
+              ({ var __indexedObject0:Array<Float> = matrix; var __indexedKey1:Float = ((row * SwfFilter.COLOR_MATRIX_COLUMNS__swfFilter) + SwfFilter.COLOR_MATRIX_BIAS_COLUMN__swfFilter); flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject0 : Array<Float>), (cast __indexedKey1 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject0 : Array<Float>), (cast __indexedKey1 : Float)) / SwfFilter.COLOR_CHANNEL_ONE__swfFilter) : Float)); });
               row++;
             }
           }
@@ -194,8 +194,8 @@ class SwfFilter {
   }
 
   public static function readSwfFilterFloat__swfFilter(reader:SwfReader):Float {
-    flighthq._internal._StaticIndex.writeUint32Array(SwfFilter._floatBytes__swfFilter, 0.0, _Runtime.callProperty(reader, 'readUint32', cast ([] : Array<Dynamic>)));
-    return cast flighthq._internal._StaticIndex.readFloat32Array(SwfFilter._floatValues__swfFilter, 0.0);
+    flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast SwfFilter._floatBytes__swfFilter : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast _Runtime.callProperty(reader, 'readUint32', cast ([] : Array<Dynamic>)) : Float));
+    return cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast SwfFilter._floatValues__swfFilter : flighthq._internal._Float32Array), (cast 0.0 : Float));
     return cast null;
   }
 

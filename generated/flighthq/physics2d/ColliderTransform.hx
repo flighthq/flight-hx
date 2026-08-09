@@ -72,10 +72,10 @@ class ColliderTransform {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
-          var x:Float = flighthq._internal._StaticIndex.readArray(source, i);
-          var y:Float = flighthq._internal._StaticIndex.readArray(source, (i + 1.0));
-          flighthq._internal._StaticIndex.writeArray(target, i, (_Runtime.addNumbers(_Runtime.field(body, 'x'), (x * cos)) - (y * sin)));
-          flighthq._internal._StaticIndex.writeArray(target, (i + 1.0), (_Runtime.addNumbers(_Runtime.field(body, 'y'), (x * sin)) + (y * cos)));
+          var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast source : Array<Float>), (cast i : Float));
+          var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast source : Array<Float>), (cast (i + 1.0) : Float));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast target : Array<Float>), (cast i : Float), (cast (_Runtime.addNumbers(_Runtime.field(body, 'x'), (x * cos)) - (y * sin)) : Float));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast target : Array<Float>), (cast (i + 1.0) : Float), (cast (_Runtime.addNumbers(_Runtime.field(body, 'y'), (x * sin)) + (y * cos)) : Float));
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
@@ -136,15 +136,15 @@ class ColliderTransform {
             ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxY = 0.0);
             return;
           }
-          var minX:Float = flighthq._internal._StaticIndex.readArray(points, 0.0);
-          var minY:Float = flighthq._internal._StaticIndex.readArray(points, 1.0);
+          var minX:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float));
+          var minY:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float));
           var maxX:Float = minX;
           var maxY:Float = minY;
           {
             var i:Float = 2.0;
             while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-              var x:Float = flighthq._internal._StaticIndex.readArray(points, i);
-              var y:Float = flighthq._internal._StaticIndex.readArray(points, (i + 1.0));
+              var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float));
+              var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float));
               if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); } else { if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); } }
               if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); } else { if ((cast ((cast y : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (y : Dynamic)); } }
               (i = cast ((i + 2.0) : Dynamic));

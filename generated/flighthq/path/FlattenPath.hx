@@ -32,18 +32,18 @@ class FlattenPath {
     {
       var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Float = flighthq._internal._StaticIndex.readArray(commands, ci);
+        var command:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast commands : Array<Float>), (cast ci : Float));
         if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO) : Bool)) {
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           (contourStartX = cast (x : Dynamic));
           (contourStartY = cast (y : Dynamic));
           (contour = cast (cast ([x, y] : Array<Dynamic>) : Dynamic));
           _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_MOVE_TO) : Bool)) {
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           (contourStartX = cast (x : Dynamic));
           (contourStartY = cast (y : Dynamic));
@@ -51,27 +51,27 @@ class FlattenPath {
           _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO) : Bool)) {
           (contour = cast ((cast FlattenPath.ensureContour__flattenPath((cast contours), (cast contour)) : Array<Float>) : Dynamic));
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, di) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.pushMany(contour, cast ([x, y] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_LINE_TO) : Bool)) {
           (contour = cast ((cast FlattenPath.ensureContour__flattenPath((cast contours), (cast contour)) : Array<Float>) : Dynamic));
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
+          (x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.pushMany(contour, cast ([x, y] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO) : Bool)) {
           (contour = cast ((cast FlattenPath.ensureContour__flattenPath((cast contours), (cast contour)) : Array<Float>) : Dynamic));
-          FlattenPath.flattenQuadratic__flattenPath((cast contour), (cast x : Float), (cast y : Float), (cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Dynamic));
+          FlattenPath.flattenQuadratic__flattenPath((cast contour), (cast x : Float), (cast y : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
+          (x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO) : Bool)) {
           (contour = cast ((cast FlattenPath.ensureContour__flattenPath((cast contours), (cast contour)) : Array<Float>) : Dynamic));
-          FlattenPath.flattenCubic__flattenPath((cast contour), (cast x : Float), (cast y : Float), (cast flighthq._internal._StaticIndex.readArray(data, di) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 3.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 4.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(data, (di + 5.0)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
-          (x = cast (flighthq._internal._StaticIndex.readArray(data, (di + 4.0)) : Dynamic));
-          (y = cast (flighthq._internal._StaticIndex.readArray(data, (di + 5.0)) : Dynamic));
+          FlattenPath.flattenCubic__flattenPath((cast contour), (cast x : Float), (cast y : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 4.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 5.0) : Float)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
+          (x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 4.0) : Float)) : Dynamic));
+          (y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 5.0) : Float)) : Dynamic));
           (di = cast ((di + 6.0) : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE) : Bool)) {
           if ((cast ((cast !_Runtime.strictEquals(contour, null) : Bool) && (cast _Runtime.orValue(!_Runtime.strictEquals(x, contourStartX), function():Dynamic return cast !_Runtime.strictEquals(y, contourStartY)) : Bool)) : Bool)) {

@@ -25,6 +25,7 @@ class StaticIndexSmoke {
     assertMixedReceivers();
     assertWriteResults();
     assertEvaluationOrder();
+    assertMonomorphicFastPaths();
   }
 
   static function assertArrayFractionalIndex():Void {
@@ -129,6 +130,25 @@ class StaticIndexSmoke {
     order = '';
     if (_StaticIndex.writeArray(orderedSource(), orderedKey(), orderedValue()) != 9 || order != 'rkv') {
       throw 'indexed endpoint argument evaluation order changed';
+    }
+  }
+
+  static function assertMonomorphicFastPaths():Void {
+    final values:Array<Float> = [1.0, 2.0, 3.0, 4.0];
+    final typed = new _Float32Array(values);
+    var sum = 0.0;
+    for (iteration in 0...100000) {
+      final index:Float = iteration & 3;
+      sum += _StaticIndex.readFloatArrayTyped(values, index);
+      sum += _StaticIndex.readFloat32ArrayTyped(typed, index);
+    }
+    if (sum != 500000.0) throw 'monomorphic indexed reads changed values';
+    if (_StaticIndex.writeFloatArrayTyped(values, 0, 5.0) != 5.0 || values[0] != 5.0) {
+      throw 'monomorphic Array<Float> write failed';
+    }
+    if (_StaticIndex.writeFloat32ArrayTyped(typed, 0, 6.0) != 6.0
+      || _StaticIndex.readFloat32ArrayTyped(typed, 0) != 6.0) {
+      throw 'monomorphic Float32Array write failed';
     }
   }
 

@@ -65,7 +65,7 @@ class RiveDocument {
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast 4.0 : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array((cast cursor : RiveCursor__riveDocument).bytes, index), flighthq._internal._StaticIndex.readArray(RiveDocument.RIVE_FINGERPRINT__riveDocument, index)) : Bool)) { return cast null; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast (cast cursor : RiveCursor__riveDocument).bytes : flighthq._internal._UInt8Array), (cast index : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast RiveDocument.RIVE_FINGERPRINT__riveDocument : Array<Float>), (cast index : Float))) : Bool)) { return cast null; }
         index++;
       }
     }
@@ -145,7 +145,7 @@ class RiveDocument {
           ((cast cursor : RiveCursor__riveDocument).overflowed = true);
           return cast 0.0;
         }
-        var byte:Float = flighthq._internal._StaticIndex.readUint8Array((cast cursor : RiveCursor__riveDocument).bytes, (cast cursor : RiveCursor__riveDocument).position++);
+        var byte:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast (cast cursor : RiveCursor__riveDocument).bytes : flighthq._internal._UInt8Array), (cast (cast cursor : RiveCursor__riveDocument).position++ : Float));
         (result = cast ((result + _Runtime.multiplyNumbers((_Runtime.toInt32(byte) & 127), HxMath.pow(2.0, shift))) : Dynamic));
         if ((cast _Runtime.strictEquals((_Runtime.toInt32(byte) & 128), 0.0) : Bool)) { return cast result; }
         (shift = cast ((shift + 7.0) : Dynamic));
@@ -164,7 +164,7 @@ class RiveDocument {
     bytes = (cast cursor : RiveCursor__riveDocument).bytes;
     position = (cast cursor : RiveCursor__riveDocument).position;
     ((cast cursor : RiveCursor__riveDocument).position += 4.0);
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, position)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, (position + 1.0))) << 8)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, (position + 2.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, (position + 3.0))) << 24)))), 0);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast position : Float))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast (position + 1.0) : Float))) << 8)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast (position + 2.0) : Float))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast (position + 3.0) : Float))) << 24)))), 0);
     return cast null;
   }
 
@@ -173,10 +173,10 @@ class RiveDocument {
       ((cast cursor : RiveCursor__riveDocument).overflowed = true);
       return cast 0.0;
     }
-    flighthq._internal._StaticIndex.writeUint8Array(RiveDocument._floatBytes__riveDocument, 0.0, flighthq._internal._StaticIndex.readUint8Array((cast cursor : RiveCursor__riveDocument).bytes, (cast cursor : RiveCursor__riveDocument).position));
-    flighthq._internal._StaticIndex.writeUint8Array(RiveDocument._floatBytes__riveDocument, 1.0, flighthq._internal._StaticIndex.readUint8Array((cast cursor : RiveCursor__riveDocument).bytes, ((cast cursor : RiveCursor__riveDocument).position + 1.0)));
-    flighthq._internal._StaticIndex.writeUint8Array(RiveDocument._floatBytes__riveDocument, 2.0, flighthq._internal._StaticIndex.readUint8Array((cast cursor : RiveCursor__riveDocument).bytes, ((cast cursor : RiveCursor__riveDocument).position + 2.0)));
-    flighthq._internal._StaticIndex.writeUint8Array(RiveDocument._floatBytes__riveDocument, 3.0, flighthq._internal._StaticIndex.readUint8Array((cast cursor : RiveCursor__riveDocument).bytes, ((cast cursor : RiveCursor__riveDocument).position + 3.0)));
+    flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast RiveDocument._floatBytes__riveDocument : flighthq._internal._UInt8Array), (cast 0.0 : Float), (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast (cast cursor : RiveCursor__riveDocument).bytes : flighthq._internal._UInt8Array), (cast (cast cursor : RiveCursor__riveDocument).position : Float)) : Float));
+    flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast RiveDocument._floatBytes__riveDocument : flighthq._internal._UInt8Array), (cast 1.0 : Float), (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast (cast cursor : RiveCursor__riveDocument).bytes : flighthq._internal._UInt8Array), (cast ((cast cursor : RiveCursor__riveDocument).position + 1.0) : Float)) : Float));
+    flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast RiveDocument._floatBytes__riveDocument : flighthq._internal._UInt8Array), (cast 2.0 : Float), (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast (cast cursor : RiveCursor__riveDocument).bytes : flighthq._internal._UInt8Array), (cast ((cast cursor : RiveCursor__riveDocument).position + 2.0) : Float)) : Float));
+    flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast RiveDocument._floatBytes__riveDocument : flighthq._internal._UInt8Array), (cast 3.0 : Float), (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast (cast cursor : RiveCursor__riveDocument).bytes : flighthq._internal._UInt8Array), (cast ((cast cursor : RiveCursor__riveDocument).position + 3.0) : Float)) : Float));
     ((cast cursor : RiveCursor__riveDocument).position += 4.0);
     return cast _Runtime.callProperty(RiveDocument._floatView__riveDocument, 'getFloat32', cast ([0.0, true] : Array<Dynamic>));
     return cast null;
@@ -218,20 +218,20 @@ class RiveDocument {
     index = start;
     end = (start + length);
     while ((cast ((cast index : Float) < (cast end : Float)) : Bool)) {
-      var first:Float = flighthq._internal._StaticIndex.readUint8Array(bytes, index++);
+      var first:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast index++ : Float));
       if ((cast ((cast first : Float) < (cast 128.0 : Float)) : Bool)) {
         (result = cast ((result + _Runtime.callProperty(String, 'fromCharCode', cast ([first] : Array<Dynamic>))) : Dynamic));
         continue;
       }
       if ((cast ((cast first : Float) < (cast 224.0 : Float)) : Bool)) {
-        (result = cast ((result + _Runtime.callProperty(String, 'fromCharCode', cast ([(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(first) & 31)) << 6)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63)))] : Array<Dynamic>))) : Dynamic));
+        (result = cast ((result + _Runtime.callProperty(String, 'fromCharCode', cast ([(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(first) & 31)) << 6)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast index++ : Float))) & 63)))] : Array<Dynamic>))) : Dynamic));
         continue;
       }
       if ((cast ((cast first : Float) < (cast 240.0 : Float)) : Bool)) {
-        (result = cast ((result + _Runtime.callProperty(String, 'fromCharCode', cast ([(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(first) & 15)) << 12)) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63)) << 6)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63)))] : Array<Dynamic>))) : Dynamic));
+        (result = cast ((result + _Runtime.callProperty(String, 'fromCharCode', cast ([(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(first) & 15)) << 12)) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast index++ : Float))) & 63)) << 6)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast index++ : Float))) & 63)))] : Array<Dynamic>))) : Dynamic));
         continue;
       }
-      var point:Float = ((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(first) & 7)) << 18)) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63)) << 12)))) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63)) << 6)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8Array(bytes, index++)) & 63))) - 65536.0);
+      var point:Float = ((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(first) & 7)) << 18)) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast index++ : Float))) & 63)) << 12)))) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast index++ : Float))) & 63)) << 6)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast index++ : Float))) & 63))) - 65536.0);
       (result = cast ((result + _Runtime.callProperty(String, 'fromCharCode', cast ([(55296.0 + (_Runtime.toInt32(point) >> 10)), (56320.0 + (_Runtime.toInt32(point) & 1023))] : Array<Dynamic>))) : Dynamic));
     }
     return cast result;

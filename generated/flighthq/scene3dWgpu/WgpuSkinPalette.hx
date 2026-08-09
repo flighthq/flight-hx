@@ -155,14 +155,14 @@ class WgpuSkinPalette {
         var base:Float = (v * floatsPerVertex);
         var source:Float = (v * 3.0);
         if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(out, (base + positionOffset), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(bindPose, 'positions'), source));
-          flighthq._internal._StaticIndex.writeFloat32Array(out, ((base + positionOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(bindPose, 'positions'), (source + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(out, ((base + positionOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(bindPose, 'positions'), (source + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + positionOffset) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _Runtime.field(bindPose, 'positions') : flighthq._internal._Float32Array), (cast source : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((base + positionOffset) + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _Runtime.field(bindPose, 'positions') : flighthq._internal._Float32Array), (cast (source + 1.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((base + positionOffset) + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _Runtime.field(bindPose, 'positions') : flighthq._internal._Float32Array), (cast (source + 2.0) : Float)) : Float));
         }
         if ((cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(out, (base + normalOffset), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(bindPose, 'normals'), source));
-          flighthq._internal._StaticIndex.writeFloat32Array(out, ((base + normalOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(bindPose, 'normals'), (source + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(out, ((base + normalOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(bindPose, 'normals'), (source + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + normalOffset) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _Runtime.field(bindPose, 'normals') : flighthq._internal._Float32Array), (cast source : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((base + normalOffset) + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _Runtime.field(bindPose, 'normals') : flighthq._internal._Float32Array), (cast (source + 1.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((base + normalOffset) + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _Runtime.field(bindPose, 'normals') : flighthq._internal._Float32Array), (cast (source + 2.0) : Float)) : Float));
         }
         v++;
       }

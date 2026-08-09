@@ -25,8 +25,8 @@ class KuwaharaMath {
           var x:Float = 0.0;
           while ((cast ((cast x : Float) < (cast size : Float)) : Bool)) {
             var d:Float = ((x * x) + (y * y));
-            flighthq._internal._StaticIndex.writeFloat32Array(out, ((y * size) + x), HxMath.exp((-d / twoSigmaSq)));
-            (sum = cast ((sum + flighthq._internal._StaticIndex.readFloat32Array(out, ((y * size) + x))) : Dynamic));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((y * size) + x) : Float), (cast HxMath.exp((-d / twoSigmaSq)) : Float));
+            (sum = cast ((sum + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((y * size) + x) : Float))) : Dynamic));
             x++;
           }
         }
@@ -37,7 +37,7 @@ class KuwaharaMath {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast (size * size) : Float)) : Bool)) {
-        ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1), invSum)); });
+        ({ var __indexedObject0:flighthq._internal._Float32Array = out; var __indexedKey1:Float = i; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject0 : flighthq._internal._Float32Array), (cast __indexedKey1 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject0 : flighthq._internal._Float32Array), (cast __indexedKey1 : Float)) * invSum) : Float)); });
         i++;
       }
     }
@@ -66,14 +66,14 @@ class KuwaharaMath {
     v5 = 0.0;
     v6 = 0.0;
     v7 = 0.0;
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, v0);
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, v1);
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, v2);
-    flighthq._internal._StaticIndex.writeArray(out, 3.0, v3);
-    flighthq._internal._StaticIndex.writeArray(out, 4.0, v4);
-    flighthq._internal._StaticIndex.writeArray(out, 5.0, v5);
-    flighthq._internal._StaticIndex.writeArray(out, 6.0, v6);
-    flighthq._internal._StaticIndex.writeArray(out, 7.0, v7);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast v0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast v1 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast v2 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 3.0 : Float), (cast v3 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 4.0 : Float), (cast v4 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 5.0 : Float), (cast v5 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 6.0 : Float), (cast v6 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 7.0 : Float), (cast v7 : Float));
   }
 
   public static function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Float {

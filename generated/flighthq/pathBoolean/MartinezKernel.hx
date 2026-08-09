@@ -64,9 +64,9 @@ class DirectedGraph__martinezKernel {
     limit = _Runtime.addNumbers(_Runtime.field(this.edgeFrom, 'length'), 2.0);
     while ((cast ((cast guard++ : Float) < (cast limit : Float)) : Bool)) {
       flighthq._internal._StaticIndex.writeArray(this.used, edge, true);
-      var from:Float = flighthq._internal._StaticIndex.readArray(this.edgeFrom, edge);
-      _Runtime.pushMany(ring, cast ([flighthq._internal._StaticIndex.readArray(this.xs, from), flighthq._internal._StaticIndex.readArray(this.ys, from)] : Array<Dynamic>));
-      var to:Float = flighthq._internal._StaticIndex.readArray(this.edgeTo, edge);
+      var from:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast this.edgeFrom : Array<Float>), (cast edge : Float));
+      _Runtime.pushMany(ring, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast this.xs : Array<Float>), (cast from : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast this.ys : Array<Float>), (cast from : Float))] : Array<Dynamic>));
+      var to:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast this.edgeTo : Array<Float>), (cast edge : Float));
       var next:Float = (cast this : DirectedGraph__martinezKernel).nextEdge(to, from);
       if ((cast ((cast ((cast _Runtime.strictEquals(next, -1.0) : Bool) || (cast _Runtime.strictEquals(next, startEdge) : Bool)) : Bool) || (cast flighthq._internal._StaticIndex.readArray(this.used, next) : Bool)) : Bool)) { break; }
       (edge = cast (next : Dynamic));
@@ -78,13 +78,13 @@ class DirectedGraph__martinezKernel {
     var incomingAngle:Float = cast _Runtime.UNDEFINED;
     var best:Float = cast _Runtime.UNDEFINED;
     var bestGap:Float = cast _Runtime.UNDEFINED;
-    incomingAngle = HxMath.atan2(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(this.ys, cameFrom), flighthq._internal._StaticIndex.readArray(this.ys, at)), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(this.xs, cameFrom), flighthq._internal._StaticIndex.readArray(this.xs, at)));
+    incomingAngle = HxMath.atan2((flighthq._internal._StaticIndex.readFloatArrayTyped((cast this.ys : Array<Float>), (cast cameFrom : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast this.ys : Array<Float>), (cast at : Float))), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast this.xs : Array<Float>), (cast cameFrom : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast this.xs : Array<Float>), (cast at : Float))));
     best = -1.0;
     bestGap = HxMath.POSITIVE_INFINITY;
     for (edge in _Runtime.iterable(flighthq._internal._StaticIndex.readArray(this.outgoing, at))) {
       if ((cast flighthq._internal._StaticIndex.readArray(this.used, edge) : Bool)) { continue; }
-      var to:Float = flighthq._internal._StaticIndex.readArray(this.edgeTo, edge);
-      var angle:Float = HxMath.atan2(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(this.ys, to), flighthq._internal._StaticIndex.readArray(this.ys, at)), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(this.xs, to), flighthq._internal._StaticIndex.readArray(this.xs, at)));
+      var to:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast this.edgeTo : Array<Float>), (cast edge : Float));
+      var angle:Float = HxMath.atan2((flighthq._internal._StaticIndex.readFloatArrayTyped((cast this.ys : Array<Float>), (cast to : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast this.ys : Array<Float>), (cast at : Float))), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast this.xs : Array<Float>), (cast to : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast this.xs : Array<Float>), (cast at : Float))));
       var gap:Float = (incomingAngle - angle);
       while ((cast ((cast gap : Float) <= (cast 0.0 : Float)) : Bool)) { (gap = cast ((gap + (HxMath.PI * 2.0)) : Dynamic)); }
       while ((cast ((cast gap : Float) > (cast (HxMath.PI * 2.0) : Float)) : Bool)) { (gap = cast ((gap - (HxMath.PI * 2.0)) : Dynamic)); }
@@ -243,18 +243,18 @@ class MartinezKernel {
     for (contour in _Runtime.iterable(contours)) {
       var count:Float = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
       if ((cast ((cast count : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-      if ((cast ((cast (cast MartinezKernel.approxEqual__martinezKernel((cast flighthq._internal._StaticIndex.readArray(contour, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, ((count - 1.0) * 2.0)) : Float)) : Bool) : Bool) && (cast (cast MartinezKernel.approxEqual__martinezKernel((cast flighthq._internal._StaticIndex.readArray(contour, 1.0) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, (((count - 1.0) * 2.0) + 1.0)) : Float)) : Bool) : Bool)) : Bool)) {
+      if ((cast ((cast (cast MartinezKernel.approxEqual__martinezKernel((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((count - 1.0) * 2.0) : Float)) : Float)) : Bool) : Bool) && (cast (cast MartinezKernel.approxEqual__martinezKernel((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (((count - 1.0) * 2.0) + 1.0) : Float)) : Float)) : Bool) : Bool)) : Bool)) {
         (count = cast ((count - 1.0) : Dynamic));
       }
       if ((cast ((cast count : Float) < (cast 3.0 : Float)) : Bool)) { continue; }
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-          var ax:Float = flighthq._internal._StaticIndex.readArray(contour, (i * 2.0));
-          var ay:Float = flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0));
+          var ax:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i * 2.0) : Float));
+          var ay:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((i * 2.0) + 1.0) : Float));
           var j:Float = _Runtime.fmod((i + 1.0), count);
-          var bx:Float = flighthq._internal._StaticIndex.readArray(contour, (j * 2.0));
-          var by:Float = flighthq._internal._StaticIndex.readArray(contour, ((j * 2.0) + 1.0));
+          var bx:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (j * 2.0) : Float));
+          var by:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((j * 2.0) + 1.0) : Float));
           if ((cast ((cast (cast MartinezKernel.approxEqual__martinezKernel((cast ax : Float), (cast bx : Float)) : Bool) : Bool) && (cast (cast MartinezKernel.approxEqual__martinezKernel((cast ay : Float), (cast by : Float)) : Bool) : Bool)) : Bool)) { i++; continue; }
           MartinezKernel.addEdge__martinezKernel((cast ax : Float), (cast ay : Float), (cast bx : Float), (cast by : Float), (cast isSubject : Bool), (cast heap));
           i++;
@@ -291,8 +291,8 @@ class MartinezKernel {
     inter = (cast MartinezKernel.segmentIntersection__martinezKernel((cast (cast le1 : SweepEvent__martinezKernel).x : Float), (cast (cast le1 : SweepEvent__martinezKernel).y : Float), (cast (cast (cast le1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast (cast le2 : SweepEvent__martinezKernel).x : Float), (cast (cast le2 : SweepEvent__martinezKernel).y : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float)) : Null<Array<Array<Float>>>);
     if ((cast _Runtime.strictEquals(inter, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(_Runtime.field(inter, 'length'), 1.0) : Bool)) {
-      var ix:Float = flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(inter, 0.0), 0.0);
-      var iy:Float = flighthq._internal._StaticIndex.readArray(flighthq._internal._StaticIndex.readArray(inter, 0.0), 1.0);
+      var ix:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(inter, 0.0) : Array<Float>), (cast 0.0 : Float));
+      var iy:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(inter, 0.0) : Array<Float>), (cast 1.0 : Float));
       if ((cast !(cast (cast MartinezKernel.pointOnEndpoint__martinezKernel((cast le1), (cast ix : Float), (cast iy : Float)) : Bool) : Bool) : Bool)) { MartinezKernel.divideSegment__martinezKernel((cast le1), (cast ix : Float), (cast iy : Float), (cast heap)); }
       if ((cast !(cast (cast MartinezKernel.pointOnEndpoint__martinezKernel((cast le2), (cast ix : Float), (cast iy : Float)) : Bool) : Bool) : Bool)) { MartinezKernel.divideSegment__martinezKernel((cast le2), (cast ix : Float), (cast iy : Float), (cast heap)); }
       return;
@@ -581,7 +581,7 @@ class MartinezKernel {
     var graph:DirectedGraph__martinezKernel = cast _Runtime.UNDEFINED;
     graph = new DirectedGraph__martinezKernel();
     for (e in _Runtime.iterable(edges)) {
-      (cast graph : DirectedGraph__martinezKernel).addEdge(flighthq._internal._StaticIndex.readArray(e, 0.0), flighthq._internal._StaticIndex.readArray(e, 1.0), flighthq._internal._StaticIndex.readArray(e, 2.0), flighthq._internal._StaticIndex.readArray(e, 3.0));
+      (cast graph : DirectedGraph__martinezKernel).addEdge(flighthq._internal._StaticIndex.readFloatArrayTyped((cast e : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast e : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast e : Array<Float>), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast e : Array<Float>), (cast 3.0 : Float)));
     }
     return cast (cast graph : DirectedGraph__martinezKernel).traceRings();
     return cast null;
@@ -607,8 +607,8 @@ class MartinezKernel {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-            var x:Float = flighthq._internal._StaticIndex.readArray(contour, i);
-            var y:Float = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
+            var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast i : Float));
+            var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i + 1.0) : Float));
             if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
             if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
             if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }

@@ -132,7 +132,7 @@ class WgpuShadowMap {
       ((cast WgpuShadowMap._shadowProxy__wgpuShadowMap : Scene3DRenderProxy).jointMatrices = jointMatrices);
       rigidDrawBindGroup = (cast writeWgpuDrawUniform((cast state), (cast WgpuShadowMap._shadowProxy__wgpuShadowMap)) : flighthq._internal.dom.GPUBindGroup);
       drawBindGroup = ((cast _Runtime.strictEquals(jointMatrices, null) : Bool) ? (cast rigidDrawBindGroup : Dynamic) : (cast (cast skinning : WgpuSkinningAdapter).getDrawBindGroup((cast state), (cast jointMatrices)) : Dynamic));
-      flighthq._internal._StaticIndex.writeUint32Array(WgpuShadowMap._dynamicOffsets__wgpuShadowMap, 0.0, (cast sceneRuntime : WgpuScene3DRuntime).pendingDrawOffset);
+      flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast WgpuShadowMap._dynamicOffsets__wgpuShadowMap : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast (cast sceneRuntime : WgpuScene3DRuntime).pendingDrawOffset : Float));
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, drawBindGroup, WgpuShadowMap._dynamicOffsets__wgpuShadowMap);
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast upload : WgpuMeshUpload).vertexBuffer);
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer((cast upload : WgpuMeshUpload).indexBuffer, (cast upload : WgpuMeshUpload).indexFormat);

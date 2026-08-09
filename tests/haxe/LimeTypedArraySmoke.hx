@@ -4,6 +4,7 @@ import flighthq._internal._Float32Array;
 import flighthq._internal._Int16Array;
 import flighthq._internal._LimeTypedArray;
 import flighthq._internal._Runtime;
+import flighthq._internal._StaticIndex;
 import flighthq._internal._UInt16Array;
 import flighthq._internal._UInt8Array;
 import flighthq._internal.backend.WebGl2Backend;
@@ -15,6 +16,11 @@ class LimeTypedArraySmoke {
     if (_Runtime.getIndex(floats, 1) != 4.5) throw 'float index';
     if (_Runtime.field(floats, 'length') != 3) throw 'float length';
     if (_Runtime.iterable(floats).join(',') != '1,4.5,3') throw 'float iterable';
+    if (_StaticIndex.readFloat32ArrayTyped(floats, 1) != 4.5) throw 'typed float read';
+    if (_StaticIndex.writeFloat32ArrayTyped(floats, 1, 2.5) != 2.5 || floats[1] != 2.5) {
+      throw 'typed float write';
+    }
+    _StaticIndex.writeFloat32ArrayTyped(floats, 1, 4.5);
     final copied = new _Float32Array(4);
     _Runtime.callProperty(copied, 'set', [floats, 1]);
     if (copied[1] != 1 || copied[2] != 4.5 || copied[3] != 3) throw 'float set';

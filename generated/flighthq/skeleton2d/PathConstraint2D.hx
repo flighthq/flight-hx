@@ -71,12 +71,12 @@ class PathConstraint2D {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var boneIndex:Float = flighthq._internal._StaticIndex.readArray(chain, i);
+        var boneIndex:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast chain : Array<Float>), (cast i : Float));
         (cast getPathPositionAtDistance((cast PathConstraint2D._path__pathConstraint2D), (cast (cast PathConstraint2D.clampSkeleton2DPathDistance__pathConstraint2D((cast distance : Float), (cast total : Float)) : Float) : Float), (cast PathConstraint2D._point__pathConstraint2D), (cast PathConstraint2D._tangent__pathConstraint2D), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)) : Bool);
-        flighthq._internal._StaticIndex.writeFloat64Array(PathConstraint2D._positions__pathConstraint2D, (i * 2.0), (cast PathConstraint2D._point__pathConstraint2D : { var x:Float; var y:Float; }).x);
-        flighthq._internal._StaticIndex.writeFloat64Array(PathConstraint2D._positions__pathConstraint2D, ((i * 2.0) + 1.0), (cast PathConstraint2D._point__pathConstraint2D : { var x:Float; var y:Float; }).y);
-        flighthq._internal._StaticIndex.writeFloat64Array(PathConstraint2D._tangents__pathConstraint2D, (i * 2.0), (cast PathConstraint2D._tangent__pathConstraint2D : { var x:Float; var y:Float; }).x);
-        flighthq._internal._StaticIndex.writeFloat64Array(PathConstraint2D._tangents__pathConstraint2D, ((i * 2.0) + 1.0), (cast PathConstraint2D._tangent__pathConstraint2D : { var x:Float; var y:Float; }).y);
+        flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast PathConstraint2D._positions__pathConstraint2D : flighthq._internal._Float64Array), (cast (i * 2.0) : Float), (cast (cast PathConstraint2D._point__pathConstraint2D : { var x:Float; var y:Float; }).x : Float));
+        flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast PathConstraint2D._positions__pathConstraint2D : flighthq._internal._Float64Array), (cast ((i * 2.0) + 1.0) : Float), (cast (cast PathConstraint2D._point__pathConstraint2D : { var x:Float; var y:Float; }).y : Float));
+        flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast PathConstraint2D._tangents__pathConstraint2D : flighthq._internal._Float64Array), (cast (i * 2.0) : Float), (cast (cast PathConstraint2D._tangent__pathConstraint2D : { var x:Float; var y:Float; }).x : Float));
+        flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast PathConstraint2D._tangents__pathConstraint2D : flighthq._internal._Float64Array), (cast ((i * 2.0) + 1.0) : Float), (cast (cast PathConstraint2D._tangent__pathConstraint2D : { var x:Float; var y:Float; }).y : Float));
         (distance = cast ((distance + (cast PathConstraint2D.resolveSkeleton2DPathSpacing__pathConstraint2D((cast pathConstraint), (cast ((cast ((cast ((cast boneIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast boneIndex : Float) < (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool) ? (cast (cast flighthq._internal._StaticIndex.readArray(bones, boneIndex) : Bone2D).length : Dynamic) : (cast 0.0 : Dynamic)) : Float), (cast total : Float)) : Float)) : Dynamic));
         i++;
       }
@@ -84,13 +84,13 @@ class PathConstraint2D {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var boneIndex:Float = flighthq._internal._StaticIndex.readArray(chain, i);
+        var boneIndex:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast chain : Array<Float>), (cast i : Float));
         if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool)) { i++; continue; }
         var bone:Bone2D = flighthq._internal._StaticIndex.readArray(bones, boneIndex);
         var o:Float = (boneIndex * PathConstraint2D.MATRIX_STRIDE__pathConstraint2D);
         if ((cast ((cast !_Runtime.strictEquals(translateXMix, 0.0) : Bool) || (cast !_Runtime.strictEquals(translateYMix, 0.0) : Bool)) : Bool)) {
-          var wantedX:Float = ((cast PathConstraint2D.world__pathConstraint2D((cast skeleton), (cast (o + 4.0) : Float)) : Float) + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat64Array(PathConstraint2D._positions__pathConstraint2D, (i * 2.0)), (cast PathConstraint2D.world__pathConstraint2D((cast skeleton), (cast (o + 4.0) : Float)) : Float)) * translateXMix));
-          var wantedY:Float = ((cast PathConstraint2D.world__pathConstraint2D((cast skeleton), (cast (o + 5.0) : Float)) : Float) + (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat64Array(PathConstraint2D._positions__pathConstraint2D, ((i * 2.0) + 1.0)), (cast PathConstraint2D.world__pathConstraint2D((cast skeleton), (cast (o + 5.0) : Float)) : Float)) * translateYMix));
+          var wantedX:Float = ((cast PathConstraint2D.world__pathConstraint2D((cast skeleton), (cast (o + 4.0) : Float)) : Float) + ((flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast PathConstraint2D._positions__pathConstraint2D : flighthq._internal._Float64Array), (cast (i * 2.0) : Float)) - (cast PathConstraint2D.world__pathConstraint2D((cast skeleton), (cast (o + 4.0) : Float)) : Float)) * translateXMix));
+          var wantedY:Float = ((cast PathConstraint2D.world__pathConstraint2D((cast skeleton), (cast (o + 5.0) : Float)) : Float) + ((flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast PathConstraint2D._positions__pathConstraint2D : flighthq._internal._Float64Array), (cast ((i * 2.0) + 1.0) : Float)) - (cast PathConstraint2D.world__pathConstraint2D((cast skeleton), (cast (o + 5.0) : Float)) : Float)) * translateYMix));
           var local:Null<{ var x:Float; var y:Float; }> = (cast PathConstraint2D.toSkeleton2DParentSpace__pathConstraint2D((cast skeleton), (cast boneIndex : Float), (cast wantedX : Float), (cast wantedY : Float)) : Null<{ var x:Float; var y:Float; }>);
           if ((cast !_Runtime.strictEquals(local, null) : Bool)) {
             ((cast bone : Bone2D).x = (cast local : { var x:Float; var y:Float; }).x);
@@ -102,15 +102,15 @@ class PathConstraint2D {
           var dirX:Float = cast _Runtime.UNDEFINED;
           var dirY:Float = cast _Runtime.UNDEFINED;
           if ((cast ((cast _Runtime.strictEquals(_Runtime.field(pathConstraint, 'rotateMode'), (cast Skeleton2DPathRotateModeValue : { var Chain:String; var Tangent:String; }).Chain) : Bool) && (cast ((cast (i + 1.0) : Float) < (cast count : Float)) : Bool)) : Bool)) {
-            (dirX = cast (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat64Array(PathConstraint2D._positions__pathConstraint2D, ((i + 1.0) * 2.0)), flighthq._internal._StaticIndex.readFloat64Array(PathConstraint2D._positions__pathConstraint2D, (i * 2.0))) : Dynamic));
-            (dirY = cast (_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat64Array(PathConstraint2D._positions__pathConstraint2D, (((i + 1.0) * 2.0) + 1.0)), flighthq._internal._StaticIndex.readFloat64Array(PathConstraint2D._positions__pathConstraint2D, ((i * 2.0) + 1.0))) : Dynamic));
+            (dirX = cast ((flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast PathConstraint2D._positions__pathConstraint2D : flighthq._internal._Float64Array), (cast ((i + 1.0) * 2.0) : Float)) - flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast PathConstraint2D._positions__pathConstraint2D : flighthq._internal._Float64Array), (cast (i * 2.0) : Float))) : Dynamic));
+            (dirY = cast ((flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast PathConstraint2D._positions__pathConstraint2D : flighthq._internal._Float64Array), (cast (((i + 1.0) * 2.0) + 1.0) : Float)) - flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast PathConstraint2D._positions__pathConstraint2D : flighthq._internal._Float64Array), (cast ((i * 2.0) + 1.0) : Float))) : Dynamic));
             if ((cast ((cast _Runtime.strictEquals(dirX, 0.0) : Bool) && (cast _Runtime.strictEquals(dirY, 0.0) : Bool)) : Bool)) {
-              (dirX = cast (flighthq._internal._StaticIndex.readFloat64Array(PathConstraint2D._tangents__pathConstraint2D, (i * 2.0)) : Dynamic));
-              (dirY = cast (flighthq._internal._StaticIndex.readFloat64Array(PathConstraint2D._tangents__pathConstraint2D, ((i * 2.0) + 1.0)) : Dynamic));
+              (dirX = cast (flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast PathConstraint2D._tangents__pathConstraint2D : flighthq._internal._Float64Array), (cast (i * 2.0) : Float)) : Dynamic));
+              (dirY = cast (flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast PathConstraint2D._tangents__pathConstraint2D : flighthq._internal._Float64Array), (cast ((i * 2.0) + 1.0) : Float)) : Dynamic));
             }
           } else {
-            (dirX = cast (flighthq._internal._StaticIndex.readFloat64Array(PathConstraint2D._tangents__pathConstraint2D, (i * 2.0)) : Dynamic));
-            (dirY = cast (flighthq._internal._StaticIndex.readFloat64Array(PathConstraint2D._tangents__pathConstraint2D, ((i * 2.0) + 1.0)) : Dynamic));
+            (dirX = cast (flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast PathConstraint2D._tangents__pathConstraint2D : flighthq._internal._Float64Array), (cast (i * 2.0) : Float)) : Dynamic));
+            (dirY = cast (flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast PathConstraint2D._tangents__pathConstraint2D : flighthq._internal._Float64Array), (cast ((i * 2.0) + 1.0) : Float)) : Dynamic));
           }
           var current:Float = _Runtime.multiplyNumbers(HxMath.atan2((cast PathConstraint2D.world__pathConstraint2D((cast skeleton), (cast (o + 1.0) : Float)) : Float), (cast PathConstraint2D.world__pathConstraint2D((cast skeleton), (cast o : Float)) : Float)), RAD_TO_DEG);
           var wanted:Float = _Runtime.multiplyNumbers(HxMath.atan2(dirY, dirX), RAD_TO_DEG);
@@ -167,20 +167,20 @@ class PathConstraint2D {
     if ((cast ((cast parentIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast { x: x, y: y }; }
     matrices = _Runtime.field(skeleton, 'worldMatrices');
     p = (parentIndex * PathConstraint2D.MATRIX_STRIDE__pathConstraint2D);
-    a = flighthq._internal._StaticIndex.readFloat32Array(matrices, p);
-    b = flighthq._internal._StaticIndex.readFloat32Array(matrices, (p + 1.0));
-    c = flighthq._internal._StaticIndex.readFloat32Array(matrices, (p + 2.0));
-    d = flighthq._internal._StaticIndex.readFloat32Array(matrices, (p + 3.0));
+    a = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast matrices : flighthq._internal._Float32Array), (cast p : Float));
+    b = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast matrices : flighthq._internal._Float32Array), (cast (p + 1.0) : Float));
+    c = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast matrices : flighthq._internal._Float32Array), (cast (p + 2.0) : Float));
+    d = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast matrices : flighthq._internal._Float32Array), (cast (p + 3.0) : Float));
     determinant = ((a * d) - (c * b));
     if ((cast ((cast HxMath.abs(determinant) : Float) < (cast PathConstraint2D.MINIMUM_DETERMINANT__pathConstraint2D : Float)) : Bool)) { return cast null; }
-    wx = _Runtime.subtractNumbers(x, flighthq._internal._StaticIndex.readFloat32Array(matrices, (p + 4.0)));
-    wy = _Runtime.subtractNumbers(y, flighthq._internal._StaticIndex.readFloat32Array(matrices, (p + 5.0)));
+    wx = (x - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast matrices : flighthq._internal._Float32Array), (cast (p + 4.0) : Float)));
+    wy = (y - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast matrices : flighthq._internal._Float32Array), (cast (p + 5.0) : Float)));
     return cast { x: (((d * wx) - (c * wy)) / determinant), y: (((a * wy) - (b * wx)) / determinant) };
     return cast null;
   }
 
   public static function world__pathConstraint2D(skeleton:Skeleton2D, offset:Float):Float {
-    return cast flighthq._internal._StaticIndex.readFloat32Array(_Runtime.field(skeleton, 'worldMatrices'), offset);
+    return cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _Runtime.field(skeleton, 'worldMatrices') : flighthq._internal._Float32Array), (cast offset : Float));
     return cast null;
   }
 

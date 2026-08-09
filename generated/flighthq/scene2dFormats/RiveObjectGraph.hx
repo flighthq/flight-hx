@@ -60,7 +60,7 @@ class RiveObjectGraph {
       while ((cast ((cast index : Float) < (cast count : Float)) : Bool)) {
         if ((cast !(cast (cast RiveObjectGraph.hasRiveParentCycle__riveObjectGraph((cast parents), (cast index : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
         RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph((cast diagnostics), (cast 'rive.parent-cycle' : String), (cast { index: index }));
-        flighthq._internal._StaticIndex.writeArray(parents, index, RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast parents : Array<Float>), (cast index : Float), (cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph : Float));
         index++;
       }
     }
@@ -91,10 +91,10 @@ class RiveObjectGraph {
     {
       while (true) {
         if ((cast _Runtime.strictEquals(fast, RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph) : Bool)) { return cast false; }
-        (fast = cast (flighthq._internal._StaticIndex.readArray(parents, fast) : Dynamic));
+        (fast = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast parents : Array<Float>), (cast fast : Float)) : Dynamic));
         if ((cast _Runtime.strictEquals(fast, RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph) : Bool)) { return cast false; }
-        (fast = cast (flighthq._internal._StaticIndex.readArray(parents, fast) : Dynamic));
-        (slow = cast (flighthq._internal._StaticIndex.readArray(parents, slow) : Dynamic));
+        (fast = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast parents : Array<Float>), (cast fast : Float)) : Dynamic));
+        (slow = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast parents : Array<Float>), (cast slow : Float)) : Dynamic));
         if ((cast _Runtime.strictEquals(fast, slow) : Bool)) { return cast true; }
       }
     }

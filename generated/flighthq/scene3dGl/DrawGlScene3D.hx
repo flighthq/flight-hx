@@ -100,11 +100,11 @@ class DrawGlScene3D {
         if ((cast !_Runtime.looseEquals(deformGuard, null) : Bool)) { deformGuard((cast mesh)); }
         var subsets:Array<MeshSubset> = (cast mesh.geometry : { var subsets:Array<MeshSubset>; }).subsets;
         var worldMatrix:Matrix4 = (cast getNodeWorldMatrix4((cast mesh)) : Matrix4);
-        var wx:Float = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 12.0);
-        var wy:Float = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 13.0);
-        var wz:Float = flighthq._internal._StaticIndex.readFloat32Array(worldMatrix.m, 14.0);
+        var wx:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast worldMatrix.m : flighthq._internal._Float32Array), (cast 12.0 : Float));
+        var wy:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast worldMatrix.m : flighthq._internal._Float32Array), (cast 13.0 : Float));
+        var wz:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast worldMatrix.m : flighthq._internal._Float32Array), (cast 14.0 : Float));
         var vp:flighthq._internal._Float32Array = viewProjection.m;
-        var clipW:Float = _Runtime.addNumbers(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(vp, 3.0), wx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(vp, 7.0), wy)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(vp, 11.0), wz)), flighthq._internal._StaticIndex.readFloat32Array(vp, 15.0));
+        var clipW:Float = ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vp : flighthq._internal._Float32Array), (cast 3.0 : Float)) * wx) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vp : flighthq._internal._Float32Array), (cast 7.0 : Float)) * wy)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vp : flighthq._internal._Float32Array), (cast 11.0 : Float)) * wz)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vp : flighthq._internal._Float32Array), (cast 15.0 : Float)));
         var objectAlpha:Float = (cast getNode3DWorldAlpha((cast mesh)) : Float);
         var nodeRuntime:Node3DRuntime = (cast getNode3DRuntime((cast mesh)) : Node3DRuntime);
         var colorScaleBias:Null<ColorScaleBias> = (cast nodeRuntime : { var resolvedColorScaleBias:Null<ColorScaleBias>; }).resolvedColorScaleBias;

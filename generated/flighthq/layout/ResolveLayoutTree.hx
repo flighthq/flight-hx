@@ -66,10 +66,10 @@ class ResolveLayoutTree {
         }
         var offset:Float = (i * 4.0);
         if ((cast _Runtime.strictEquals(parentIndex, -1.0) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(out, offset, 0.0);
-          flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 1.0), 0.0);
-          flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 2.0), rootWidth);
-          flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 3.0), rootHeight);
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast offset : Float), (cast 0.0 : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float), (cast 0.0 : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float), (cast rootWidth : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 3.0) : Float), (cast rootHeight : Float));
           i++;
           continue;
         }

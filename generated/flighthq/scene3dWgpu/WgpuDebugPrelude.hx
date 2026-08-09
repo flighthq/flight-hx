@@ -33,10 +33,10 @@ class WgpuDebugPrelude {
       (binding = cast ({ bindGroup: bindGroup, buffer: buffer } : Dynamic));
       ((cast (cast scene : WgpuScene3DRuntime).materialBindGroups : flighthq._internal._WeakMap<flighthq._internal._Object, WgpuMaterialBinding>).set(materialKey, (cast binding)));
     }
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 0.0, near);
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 1.0, far);
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 2.0, normalScale);
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 3.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuDebugPrelude._scratch__wgpuDebugPrelude : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast near : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuDebugPrelude._scratch__wgpuDebugPrelude : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast far : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuDebugPrelude._scratch__wgpuDebugPrelude : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast normalScale : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuDebugPrelude._scratch__wgpuDebugPrelude : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast 0.0 : Float));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast binding : WgpuMaterialBinding).buffer, 0.0, _Runtime.field(WgpuDebugPrelude._scratch__wgpuDebugPrelude, 'buffer'), 0.0, WgpuDebugPrelude.DEBUG_UNIFORM_BYTES__wgpuDebugPrelude] : Array<Dynamic>));
     stashWgpuUvTransform((cast state), (cast null));
     return cast (cast binding : WgpuMaterialBinding).bindGroup;

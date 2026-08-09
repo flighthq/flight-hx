@@ -21,10 +21,10 @@ class RenderColor {
     g = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(uint) & 16711680)), 16);
     b = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(uint) & 65280)), 8);
     a = (_Runtime.toInt32(uint) & 255);
-    flighthq._internal._StaticIndex.writeArray((cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorRgba, 0.0, (r / 255.0));
-    flighthq._internal._StaticIndex.writeArray((cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorRgba, 1.0, (g / 255.0));
-    flighthq._internal._StaticIndex.writeArray((cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorRgba, 2.0, (b / 255.0));
-    flighthq._internal._StaticIndex.writeArray((cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorRgba, 3.0, (a / 255.0));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorRgba : Array<Float>), (cast 0.0 : Float), (cast (r / 255.0) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorRgba : Array<Float>), (cast 1.0 : Float), (cast (g / 255.0) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorRgba : Array<Float>), (cast 2.0 : Float), (cast (b / 255.0) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorRgba : Array<Float>), (cast 3.0 : Float), (cast (a / 255.0) : Float));
     ((cast _state : { var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; }).backgroundColorString = ('#' + _Runtime.callProperty(_Runtime.padStart(_Runtime.numberToString(uint, 16.0), 8.0, '0'), 'toUpperCase', cast ([] : Array<Dynamic>))));
   }
 }

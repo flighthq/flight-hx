@@ -125,17 +125,17 @@ class ShapeStrokeOutline {
     {
       var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var verb:Float = flighthq._internal._StaticIndex.readArray(commands, c);
+        var verb:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast commands : Array<Float>), (cast c : Float));
         if ((cast _Runtime.strictEquals(verb, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE) : Bool)) { return cast true; }
         var n:Float = (cast getPathCommandOperandCount((cast verb : Float)) : Float);
         if ((cast ((cast _Runtime.strictEquals(verb, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO) : Bool) || (cast _Runtime.strictEquals(verb, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_MOVE_TO) : Bool)) : Bool)) {
           if ((cast (cast subpathReturnsToStart() : Bool) : Bool)) { return cast true; }
-          (lastX = cast ((subStartX = cast (flighthq._internal._StaticIndex.readArray(data, ((d + n) - 2.0)) : Dynamic)) : Dynamic));
-          (lastY = cast ((subStartY = cast (flighthq._internal._StaticIndex.readArray(data, ((d + n) - 1.0)) : Dynamic)) : Dynamic));
+          (lastX = cast ((subStartX = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast ((d + n) - 2.0) : Float)) : Dynamic)) : Dynamic));
+          (lastY = cast ((subStartY = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast ((d + n) - 1.0) : Float)) : Dynamic)) : Dynamic));
           (segments = cast (0.0 : Dynamic));
         } else { if ((cast ((cast n : Float) >= (cast 2.0 : Float)) : Bool)) {
-          (lastX = cast (flighthq._internal._StaticIndex.readArray(data, ((d + n) - 2.0)) : Dynamic));
-          (lastY = cast (flighthq._internal._StaticIndex.readArray(data, ((d + n) - 1.0)) : Dynamic));
+          (lastX = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast ((d + n) - 2.0) : Float)) : Dynamic));
+          (lastY = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast ((d + n) - 1.0) : Float)) : Dynamic));
           segments++;
         } }
         (d = cast ((d + n) : Dynamic));

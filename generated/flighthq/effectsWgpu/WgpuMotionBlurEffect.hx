@@ -28,21 +28,21 @@ class WgpuMotionBlurEffect {
     pipeline = (cast WgpuMotionBlurEffect.getMotionBlurPipeline__wgpuMotionBlurEffect((cast state)) : WgpuEffectPipeline);
     if ((cast _Runtime.strictEquals(velocityTexture, null) : Bool)) {
       drawWgpuDualSourceEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
-        flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
-        flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, samples);
-        flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
-        flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
-        flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, 0.0);
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast samples : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast _Runtime.field(source, 'width') : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast _Runtime.field(source, 'height') : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast 0.0 : Float));
       }, cast ([__unused1] : Array<Dynamic>)); }));
       return;
     }
     velocitySource = (cast { view: velocityTexture.createView() } : WgpuRenderTarget);
     drawWgpuDualSourceEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast velocitySource), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, intensity);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, samples);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, _Runtime.field(source, 'width'));
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, _Runtime.field(source, 'height'));
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast samples : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast _Runtime.field(source, 'width') : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast _Runtime.field(source, 'height') : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast 1.0 : Float));
     }, cast ([__unused4] : Array<Dynamic>)); }));
   }
 

@@ -81,10 +81,10 @@ class PointContainment {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
         var j:Float = _Runtime.fmod((i + 1.0), pn);
-        var x0:Float = flighthq._internal._StaticIndex.readArray(px, (_Runtime.toInt32(i) << 1));
-        var y0:Float = flighthq._internal._StaticIndex.readArray(px, ((_Runtime.toInt32(i) << 1) + 1.0));
-        var x1:Float = flighthq._internal._StaticIndex.readArray(px, (_Runtime.toInt32(j) << 1));
-        var y1:Float = flighthq._internal._StaticIndex.readArray(px, ((_Runtime.toInt32(j) << 1) + 1.0));
+        var x0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast px : Array<Float>), (cast (_Runtime.toInt32(i) << 1) : Float));
+        var y0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast px : Array<Float>), (cast ((_Runtime.toInt32(i) << 1) + 1.0) : Float));
+        var x1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast px : Array<Float>), (cast (_Runtime.toInt32(j) << 1) : Float));
+        var y1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast px : Array<Float>), (cast ((_Runtime.toInt32(j) << 1) + 1.0) : Float));
         var cross:Float = (((x1 - x0) * (y - y0)) - ((y1 - y0) * (x - x0)));
         var edgeEpsilon:Float = _Runtime.multiplyNumbers(_Runtime.hypot((x1 - x0), (y1 - y0)), epsilon);
         if ((cast ((cast cross : Float) > (cast edgeEpsilon : Float)) : Bool)) { (positive = cast (true : Dynamic)); } else { if ((cast ((cast cross : Float) < (cast -edgeEpsilon : Float)) : Bool)) { (negative = cast (true : Dynamic)); } }
@@ -108,8 +108,8 @@ class PointContainment {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var x:Float = flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1));
-        var y:Float = flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0));
+        var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (_Runtime.toInt32(i) << 1) : Float));
+        var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((_Runtime.toInt32(i) << 1) + 1.0) : Float));
         if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
         if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
         if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }

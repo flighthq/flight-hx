@@ -35,21 +35,21 @@ class TransformPath {
     {
       var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        var command:Float = flighthq._internal._StaticIndex.readArray(commands, ci);
+        var command:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast commands : Array<Float>), (cast ci : Float));
         if ((cast ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO) : Bool) || (cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO) : Bool)) : Bool)) {
-          var x:Float = flighthq._internal._StaticIndex.readArray(data, di);
-          var y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 1.0));
-          flighthq._internal._StaticIndex.writeArray(data, di, (((a * x) + (c * y)) + tx));
-          flighthq._internal._StaticIndex.writeArray(data, (di + 1.0), (((b * x) + (d * y)) + ty));
+          var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float));
+          var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast data : Array<Float>), (cast di : Float), (cast (((a * x) + (c * y)) + tx) : Float));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float), (cast (((b * x) + (d * y)) + ty) : Float));
           (di = cast ((di + 2.0) : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO) : Bool)) {
           {
             var k:Float = 0.0;
             while ((cast ((cast k : Float) < (cast 4.0 : Float)) : Bool)) {
-              var x:Float = flighthq._internal._StaticIndex.readArray(data, (di + k));
-              var y:Float = flighthq._internal._StaticIndex.readArray(data, ((di + k) + 1.0));
-              flighthq._internal._StaticIndex.writeArray(data, (di + k), (((a * x) + (c * y)) + tx));
-              flighthq._internal._StaticIndex.writeArray(data, ((di + k) + 1.0), (((b * x) + (d * y)) + ty));
+              var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + k) : Float));
+              var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast ((di + k) + 1.0) : Float));
+              flighthq._internal._StaticIndex.writeFloatArrayTyped((cast data : Array<Float>), (cast (di + k) : Float), (cast (((a * x) + (c * y)) + tx) : Float));
+              flighthq._internal._StaticIndex.writeFloatArrayTyped((cast data : Array<Float>), (cast ((di + k) + 1.0) : Float), (cast (((b * x) + (d * y)) + ty) : Float));
               (k = cast ((k + 2.0) : Dynamic));
             }
           }
@@ -58,19 +58,19 @@ class TransformPath {
           {
             var k:Float = 0.0;
             while ((cast ((cast k : Float) < (cast 6.0 : Float)) : Bool)) {
-              var x:Float = flighthq._internal._StaticIndex.readArray(data, (di + k));
-              var y:Float = flighthq._internal._StaticIndex.readArray(data, ((di + k) + 1.0));
-              flighthq._internal._StaticIndex.writeArray(data, (di + k), (((a * x) + (c * y)) + tx));
-              flighthq._internal._StaticIndex.writeArray(data, ((di + k) + 1.0), (((b * x) + (d * y)) + ty));
+              var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + k) : Float));
+              var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast ((di + k) + 1.0) : Float));
+              flighthq._internal._StaticIndex.writeFloatArrayTyped((cast data : Array<Float>), (cast (di + k) : Float), (cast (((a * x) + (c * y)) + tx) : Float));
+              flighthq._internal._StaticIndex.writeFloatArrayTyped((cast data : Array<Float>), (cast ((di + k) + 1.0) : Float), (cast (((b * x) + (d * y)) + ty) : Float));
               (k = cast ((k + 2.0) : Dynamic));
             }
           }
           (di = cast ((di + 6.0) : Dynamic));
         } else { if ((cast ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_MOVE_TO) : Bool) || (cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_LINE_TO) : Bool)) : Bool)) {
-          var x:Float = flighthq._internal._StaticIndex.readArray(data, (di + 2.0));
-          var y:Float = flighthq._internal._StaticIndex.readArray(data, (di + 3.0));
-          flighthq._internal._StaticIndex.writeArray(data, (di + 2.0), (((a * x) + (c * y)) + tx));
-          flighthq._internal._StaticIndex.writeArray(data, (di + 3.0), (((b * x) + (d * y)) + ty));
+          var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float));
+          var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float), (cast (((a * x) + (c * y)) + tx) : Float));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float), (cast (((b * x) + (d * y)) + ty) : Float));
           (di = cast ((di + 4.0) : Dynamic));
         } } } }
         ci++;

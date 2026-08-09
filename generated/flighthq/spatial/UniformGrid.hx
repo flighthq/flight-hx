@@ -319,8 +319,8 @@ class UniformGrid {
           {
             var j:Float = (i + 1.0);
             while ((cast ((cast j : Float) < (cast _Runtime.field(list, 'length') : Float)) : Bool)) {
-              var a:Float = flighthq._internal._StaticIndex.readArray(list, i);
-              var b:Float = flighthq._internal._StaticIndex.readArray(list, j);
+              var a:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast list : Array<Float>), (cast i : Float));
+              var b:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast list : Array<Float>), (cast j : Float));
               if ((cast ((cast a : Float) > (cast b : Float)) : Bool)) {
                 var t:Float = a;
                 (a = cast (b : Dynamic));

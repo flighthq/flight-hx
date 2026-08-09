@@ -18,18 +18,18 @@ class SpineDrawOrder {
       if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([slotIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast slotIndex : Float) >= (cast slotCount : Float)) : Bool)) : Bool)) { return cast null; }
       var destination:Float = (slotIndex + (cast move : { var offset:Float; var slotIndex:Float; }).offset);
       if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([destination] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast destination : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast destination : Float) >= (cast slotCount : Float)) : Bool)) : Bool)) { return cast null; }
-      if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(occupants, destination), SpineDrawOrder.UNCLAIMED_POSITION__spineDrawOrder) : Bool) || (cast flighthq._internal._StaticIndex.readArray(moved, slotIndex) : Bool)) : Bool)) { return cast null; }
-      flighthq._internal._StaticIndex.writeArray(occupants, destination, slotIndex);
+      if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast occupants : Array<Float>), (cast destination : Float)), SpineDrawOrder.UNCLAIMED_POSITION__spineDrawOrder) : Bool) || (cast flighthq._internal._StaticIndex.readArray(moved, slotIndex) : Bool)) : Bool)) { return cast null; }
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast occupants : Array<Float>), (cast destination : Float), (cast slotIndex : Float));
       flighthq._internal._StaticIndex.writeArray(moved, slotIndex, true);
     }
     next = 0.0;
     {
       var position:Float = 0.0;
       while ((cast ((cast position : Float) < (cast slotCount : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(occupants, position), SpineDrawOrder.UNCLAIMED_POSITION__spineDrawOrder) : Bool)) { position++; continue; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast occupants : Array<Float>), (cast position : Float)), SpineDrawOrder.UNCLAIMED_POSITION__spineDrawOrder) : Bool)) { position++; continue; }
         while ((cast ((cast ((cast next : Float) < (cast slotCount : Float)) : Bool) && (cast flighthq._internal._StaticIndex.readArray(moved, next) : Bool)) : Bool)) { next++; }
         if ((cast ((cast next : Float) >= (cast slotCount : Float)) : Bool)) { return cast null; }
-        flighthq._internal._StaticIndex.writeArray(occupants, position, next);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast occupants : Array<Float>), (cast position : Float), (cast next : Float));
         next++;
         position++;
       }
@@ -38,7 +38,7 @@ class SpineDrawOrder {
     {
       var position:Float = 0.0;
       while ((cast ((cast position : Float) < (cast slotCount : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(sortKeys, flighthq._internal._StaticIndex.readArray(occupants, position), position);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast sortKeys : Array<Float>), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast occupants : Array<Float>), (cast position : Float)) : Float), (cast position : Float));
         position++;
       }
     }

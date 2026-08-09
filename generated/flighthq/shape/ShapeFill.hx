@@ -165,13 +165,13 @@ class ShapeFill {
     {
       var v:Float = 0.0;
       while ((cast ((cast v : Float) < (cast _Runtime.field(verbs, 'length') : Float)) : Bool)) {
-        var verb:Float = flighthq._internal._StaticIndex.readArray(verbs, v);
+        var verb:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast verbs : Array<Float>), (cast v : Float));
         var args:Float = (cast getPathCommandOperandCount((cast verb : Float)) : Float);
         _Runtime.callProperty((cast path : Path).commands, 'push', cast ([verb] : Array<Dynamic>));
         {
           var k:Float = 0.0;
           while ((cast ((cast k : Float) < (cast args : Float)) : Bool)) {
-            _Runtime.callProperty((cast path : Path).data, 'push', cast ([flighthq._internal._StaticIndex.readArray(data, (d + k))] : Array<Dynamic>));
+            _Runtime.callProperty((cast path : Path).data, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (d + k) : Float))] : Array<Dynamic>));
             k++;
           }
         }

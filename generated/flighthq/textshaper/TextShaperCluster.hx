@@ -15,13 +15,13 @@ class TextShaperCluster {
     glyphs = _Runtime.field(run, 'glyphs');
     count = _Runtime.field(run, 'glyphCount');
     positions = _Runtime.createArray((count + 1.0));
-    flighthq._internal._StaticIndex.writeArray(positions, 0.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast positions : Array<Float>), (cast 0.0 : Float), (cast 0.0 : Float));
     x = 0.0;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         (x = cast ((x + (cast flighthq._internal._StaticIndex.readArray(glyphs, i) : ShapedGlyph).xAdvance) : Dynamic));
-        flighthq._internal._StaticIndex.writeArray(positions, (i + 1.0), x);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast positions : Array<Float>), (cast (i + 1.0) : Float), (cast x : Float));
         i++;
       }
     }

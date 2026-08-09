@@ -197,10 +197,10 @@ class RaycastCollisionShape {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var j:Float = _Runtime.fmod((i + 1.0), count);
-        var x0:Float = flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1));
-        var y0:Float = flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0));
-        var x1:Float = flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(j) << 1));
-        var y1:Float = flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(j) << 1) + 1.0));
+        var x0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (_Runtime.toInt32(i) << 1) : Float));
+        var y0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((_Runtime.toInt32(i) << 1) + 1.0) : Float));
+        var x1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (_Runtime.toInt32(j) << 1) : Float));
+        var y1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((_Runtime.toInt32(j) << 1) + 1.0) : Float));
         if ((cast !(cast (cast RaycastCollisionShape.writeRaySegmentFraction__raycastCollisionShape((cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast ((directionX * directionX) + (directionY * directionY)) : Float), (cast bestFraction : Float), (cast RaycastCollisionShape.fractionScratch__raycastCollisionShape)) : Bool) : Bool) : Bool)) {
           i++;
           continue;
@@ -238,8 +238,8 @@ class RaycastCollisionShape {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        (x = cast ((x + flighthq._internal._StaticIndex.readArray(points, (_Runtime.toInt32(i) << 1))) : Dynamic));
-        (y = cast ((y + flighthq._internal._StaticIndex.readArray(points, ((_Runtime.toInt32(i) << 1) + 1.0))) : Dynamic));
+        (x = cast ((x + flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (_Runtime.toInt32(i) << 1) : Float))) : Dynamic));
+        (y = cast ((y + flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((_Runtime.toInt32(i) << 1) + 1.0) : Float))) : Dynamic));
         i++;
       }
     }

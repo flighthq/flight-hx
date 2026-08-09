@@ -27,8 +27,8 @@ class WgpuCompositeEffect {
     backdrop = (cast getWgpuBlendEffectBackdrop((cast state), (cast _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null))) : Null<WgpuRenderTarget>);
     hasBackdrop = !_Runtime.strictEquals(backdrop, null);
     drawWgpuDualSourceEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast _Runtime.coalesce(backdrop, function():Dynamic return cast source) : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast (cast WgpuCompositeEffect.getWgpuCompositeEffectPipeline__wgpuCompositeEffect((cast state)) : WgpuEffectPipeline)), (cast function(_f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeInt32Array(i32, 0.0, (cast getWgpuCompositeEffectOperatorIndex((cast _Runtime.field(effect, 'operator') : String)) : Float));
-      flighthq._internal._StaticIndex.writeInt32Array(i32, 1.0, ((cast hasBackdrop : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+      flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 0.0 : Float), (cast (cast getWgpuCompositeEffectOperatorIndex((cast _Runtime.field(effect, 'operator') : String)) : Float) : Float));
+      flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 1.0 : Float), (cast ((cast hasBackdrop : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float));
     }));
   }
 

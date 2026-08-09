@@ -28,10 +28,10 @@ class WgpuRadialBlurEffect {
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
     pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'motion.radialBlur' : String), (cast WgpuRadialBlurEffect.RADIAL_BLUR_FRAGMENT_WGSL__wgpuRadialBlurEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, centerX);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, centerY);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, strength);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, samples);
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast centerX : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast centerY : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast strength : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast samples : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 

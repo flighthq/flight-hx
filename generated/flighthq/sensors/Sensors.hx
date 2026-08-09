@@ -232,15 +232,15 @@ class Sensors {
     wx = (w * x2);
     wy = (w * y2);
     wz = (w * z2);
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, (1.0 - (yy + zz)));
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, (xy + wz));
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, (xz - wy));
-    flighthq._internal._StaticIndex.writeArray(out, 3.0, (xy - wz));
-    flighthq._internal._StaticIndex.writeArray(out, 4.0, (1.0 - (xx + zz)));
-    flighthq._internal._StaticIndex.writeArray(out, 5.0, (yz + wx));
-    flighthq._internal._StaticIndex.writeArray(out, 6.0, (xz + wy));
-    flighthq._internal._StaticIndex.writeArray(out, 7.0, (yz - wx));
-    flighthq._internal._StaticIndex.writeArray(out, 8.0, (1.0 - (xx + yy)));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast (1.0 - (yy + zz)) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast (xy + wz) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast (xz - wy) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 3.0 : Float), (cast (xy - wz) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 4.0 : Float), (cast (1.0 - (xx + zz)) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 5.0 : Float), (cast (yz + wx) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 6.0 : Float), (cast (xz + wy) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 7.0 : Float), (cast (yz - wx) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 8.0 : Float), (cast (1.0 - (xx + yy)) : Float));
   }
 
   public static function computeScreenRelativeOrientation(out:OrientationReading, orientation:OrientationReading, screenAngle:Float):Void {
@@ -436,10 +436,10 @@ class Sensors {
             var q:Null<Array<Float>> = cast _Runtime.UNDEFINED;
             q = (cast sensor : WebOrientationSensor__sensors).quaternion;
             if (_Runtime.truthy(q)) {
-              (Sensors._quaternionReading__sensors.x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(q, 0.0), function():Dynamic return cast 0.0) : Dynamic));
-              (Sensors._quaternionReading__sensors.y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(q, 1.0), function():Dynamic return cast 0.0) : Dynamic));
-              (Sensors._quaternionReading__sensors.z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(q, 2.0), function():Dynamic return cast 0.0) : Dynamic));
-              (Sensors._quaternionReading__sensors.w = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(q, 3.0), function():Dynamic return cast 1.0) : Dynamic));
+              (Sensors._quaternionReading__sensors.x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
+              (Sensors._quaternionReading__sensors.y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
+              (Sensors._quaternionReading__sensors.z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
+              (Sensors._quaternionReading__sensors.w = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 3.0 : Float)), function():Dynamic return cast 1.0) : Dynamic));
               computeEulerFromQuaternion((cast Sensors._absoluteOrientation__sensors), (cast Sensors._quaternionReading__sensors));
             }
             (Sensors._absoluteOrientation__sensors.absolute = cast (true : Dynamic));

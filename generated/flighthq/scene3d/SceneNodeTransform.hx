@@ -54,22 +54,22 @@ class SceneNodeTransform {
     yy = ((zz * xx) - (zx * xz));
     yz = ((zx * xy) - (zy * xx));
     m = SceneNodeTransform._scratchMatrix__sceneNodeTransform.m;
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, xx);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, xy);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, xz);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, yx);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, yy);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, yz);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, zx);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 9.0, zy);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 10.0, zz);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 11.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 12.0, eyeX);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 13.0, eyeY);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 14.0, eyeZ);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 15.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast xx : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast xy : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast xz : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast yx : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast yy : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast yz : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast zx : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast zy : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 10.0 : Float), (cast zz : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 11.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 12.0 : Float), (cast eyeX : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 13.0 : Float), (cast eyeY : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 14.0 : Float), (cast eyeZ : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 15.0 : Float), (cast 1.0 : Float));
     setNodeLocalMatrix4((cast node), (cast SceneNodeTransform._scratchMatrix__sceneNodeTransform));
   }
 

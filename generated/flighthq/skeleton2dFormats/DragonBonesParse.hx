@@ -115,7 +115,7 @@ class DragonBonesParse {
   }
 
   public static function buildDragonBonesBoneRemap__dragonBonesParse(rawIndexToOutput:Array<Float>):DragonBonesBoneRemap__dragonBonesParse {
-    return cast function(rawBoneIndex:Float):Float return ((cast ((cast ((cast rawBoneIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast rawBoneIndex : Float) < (cast _Runtime.field(rawIndexToOutput, 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(rawIndexToOutput, rawBoneIndex) : Dynamic) : (cast -1.0 : Dynamic));
+    return cast function(rawBoneIndex:Float):Float return ((cast ((cast ((cast rawBoneIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast rawBoneIndex : Float) < (cast _Runtime.field(rawIndexToOutput, 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast rawIndexToOutput : Array<Float>), (cast rawBoneIndex : Float)) : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
@@ -270,7 +270,7 @@ class DragonBonesParse {
       while ((cast ((cast i : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
         var frame:flighthq._internal._Record<String, flighthq._internal._Any> = flighthq._internal._StaticIndex.readArray(frames, i);
         var rotation:Float = (cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast frame : { var rotate:flighthq._internal._Any; }).rotate : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(times, i), 0.0) : Bool)) {
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast times : Array<Float>), (cast i : Float)), 0.0) : Bool)) {
           if ((cast _Runtime.strictEquals(previousClockwise, 0.0) : Bool)) {
             (rotation = cast ((previousRotation + (cast DragonBonesParse.normalizeDegrees__dragonBonesParse((cast (rotation - previousRotation) : Float)) : Float)) : Dynamic));
           } else {
@@ -544,7 +544,7 @@ class DragonBonesParse {
           (recovered = cast (true : Dynamic));
           break;
         }
-        var declaredCount:Float = (_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(weights, iW++)) | 0);
+        var declaredCount:Float = (_Runtime.toInt32(flighthq._internal._StaticIndex.readFloatArrayTyped((cast weights : Array<Float>), (cast iW++ : Float))) | 0);
         var vx:Float = (cast DragonBonesParse.numAt__dragonBonesParse((cast verts), (cast (v * 2.0) : Float), (cast 0.0 : Float)) : Float);
         var vy:Float = (cast DragonBonesParse.numAt__dragonBonesParse((cast verts), (cast ((v * 2.0) + 1.0) : Float), (cast 0.0 : Float)) : Float);
         var sx:Float = (((spA * vx) + (spC * vy)) + spTx);
@@ -557,8 +557,8 @@ class DragonBonesParse {
               (recovered = cast (true : Dynamic));
               break;
             }
-            var rawBoneIndex:Float = (_Runtime.toInt32(flighthq._internal._StaticIndex.readArray(weights, iW++)) | 0);
-            var weight:Float = flighthq._internal._StaticIndex.readArray(weights, iW++);
+            var rawBoneIndex:Float = (_Runtime.toInt32(flighthq._internal._StaticIndex.readFloatArrayTyped((cast weights : Array<Float>), (cast iW++ : Float))) | 0);
+            var weight:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast weights : Array<Float>), (cast iW++ : Float));
             var outputBone:Float = (cast remapBoneIndex((cast rawBoneIndex : Float)) : Float);
             var ordinal:Float = (cast DragonBonesParse.findBonePoseOrdinal__dragonBonesParse((cast bonePose), (cast usedBoneCount : Float), (cast rawBoneIndex : Float)) : Float);
             if ((cast ((cast ((cast ((cast outputBone : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ordinal : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast realCount : Float) >= (cast DragonBonesParse.MAX_INFLUENCES_PER_VERTEX__dragonBonesParse : Float)) : Bool)) : Bool)) {
@@ -567,12 +567,12 @@ class DragonBonesParse {
               continue;
             }
             var o:Float = (ordinal * 7.0);
-            var ba:Float = flighthq._internal._StaticIndex.readArray(bonePose, (o + 1.0));
-            var bb:Float = flighthq._internal._StaticIndex.readArray(bonePose, (o + 2.0));
-            var bc:Float = flighthq._internal._StaticIndex.readArray(bonePose, (o + 3.0));
-            var bd:Float = flighthq._internal._StaticIndex.readArray(bonePose, (o + 4.0));
-            var btx:Float = flighthq._internal._StaticIndex.readArray(bonePose, (o + 5.0));
-            var bty:Float = flighthq._internal._StaticIndex.readArray(bonePose, (o + 6.0));
+            var ba:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast bonePose : Array<Float>), (cast (o + 1.0) : Float));
+            var bb:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast bonePose : Array<Float>), (cast (o + 2.0) : Float));
+            var bc:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast bonePose : Array<Float>), (cast (o + 3.0) : Float));
+            var bd:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast bonePose : Array<Float>), (cast (o + 4.0) : Float));
+            var btx:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast bonePose : Array<Float>), (cast (o + 5.0) : Float));
+            var bty:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast bonePose : Array<Float>), (cast (o + 6.0) : Float));
             var det:Float = ((ba * bd) - (bb * bc));
             if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) {
               (recovered = cast (true : Dynamic));
@@ -591,7 +591,7 @@ class DragonBonesParse {
             j++;
           }
         }
-        flighthq._internal._StaticIndex.writeUint16Array(influenceCounts, v, realCount);
+        flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast influenceCounts : flighthq._internal._UInt16Array), (cast v : Float), (cast realCount : Float));
         v++;
       }
     }
@@ -671,7 +671,7 @@ class DragonBonesParse {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast usedBoneCount : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(bonePose, (i * 7.0)), rawBoneIndex) : Bool)) { return cast i; }
+        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast bonePose : Array<Float>), (cast (i * 7.0) : Float)), rawBoneIndex) : Bool)) { return cast i; }
         i++;
       }
     }
@@ -680,7 +680,7 @@ class DragonBonesParse {
   }
 
   public static function numAt__dragonBonesParse(values:Array<Float>, index:Float, fallback:Float):Float {
-    return cast ((cast ((cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal._StaticIndex.readArray(values, index)), 'number') : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(values, index) : Dynamic) : (cast fallback : Dynamic));
+    return cast ((cast ((cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast index : Float))), 'number') : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast index : Float)) : Dynamic) : (cast fallback : Dynamic));
     return cast null;
   }
 
@@ -748,7 +748,7 @@ class DragonBonesParse {
           if ((cast ((cast _Runtime.strictEquals((cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).parentName, null) : Bool) || (cast ((cast indexByName : flighthq._internal._Map<String, Float>).has((cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).parentName)) : Bool)) : Bool)) {
             ((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).parentIndex = ((cast _Runtime.strictEquals((cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).parentName, null) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast ((cast indexByName : flighthq._internal._Map<String, Float>).get((cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).parentName)) : Float) : Dynamic)));
             if ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name), 'string') : Bool)) { ((cast indexByName : flighthq._internal._Map<String, Float>).set((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name, (cast _Runtime.field(bones, 'length')))); }
-            flighthq._internal._StaticIndex.writeArray(rawIndexToOutput, (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).rawIndex, _Runtime.field(bones, 'length'));
+            flighthq._internal._StaticIndex.writeFloatArrayTyped((cast rawIndexToOutput : Array<Float>), (cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).rawIndex : Float), (cast _Runtime.field(bones, 'length') : Float));
             _Runtime.callProperty(bones, 'push', cast ([(cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone] : Array<Dynamic>));
             _Runtime.splice(pending, Std.int(i), Std.int(1.0), []);
             (advanced = cast (true : Dynamic));
@@ -763,7 +763,7 @@ class DragonBonesParse {
       for (entry in _Runtime.iterable(pending)) {
         ((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).parentIndex = -1.0);
         if ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name), 'string') : Bool)) { ((cast indexByName : flighthq._internal._Map<String, Float>).set((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name, (cast _Runtime.field(bones, 'length')))); }
-        flighthq._internal._StaticIndex.writeArray(rawIndexToOutput, (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).rawIndex, _Runtime.field(bones, 'length'));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast rawIndexToOutput : Array<Float>), (cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).rawIndex : Float), (cast _Runtime.field(bones, 'length') : Float));
         _Runtime.callProperty(bones, 'push', cast ([(cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone] : Array<Dynamic>));
       }
     }

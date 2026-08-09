@@ -31,14 +31,14 @@ class BitmapPaletteMap {
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Float = (((sy * (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width) + sx) * 4.0);
             var di:Float = (((dy * (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width) + dx) * 4.0);
-            var r:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si);
-            var g:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0));
-            var b:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0));
-            var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, _Runtime.select(redMap, function():Dynamic return cast flighthq._internal._StaticIndex.readArray(redMap, r), function():Dynamic return cast r));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), _Runtime.select(greenMap, function():Dynamic return cast flighthq._internal._StaticIndex.readArray(greenMap, g), function():Dynamic return cast g));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), _Runtime.select(blueMap, function():Dynamic return cast flighthq._internal._StaticIndex.readArray(blueMap, b), function():Dynamic return cast b));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), _Runtime.select(alphaMap, function():Dynamic return cast flighthq._internal._StaticIndex.readArray(alphaMap, a), function():Dynamic return cast a));
+            var r:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast si : Float));
+            var g:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 1.0) : Float));
+            var b:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 2.0) : Float));
+            var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast _Runtime.select(redMap, function():Dynamic return cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast redMap : Array<Float>), (cast r : Float)), function():Dynamic return cast r) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast _Runtime.select(greenMap, function():Dynamic return cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast greenMap : Array<Float>), (cast g : Float)), function():Dynamic return cast g) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast _Runtime.select(blueMap, function():Dynamic return cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast blueMap : Array<Float>), (cast b : Float)), function():Dynamic return cast b) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast _Runtime.select(alphaMap, function():Dynamic return cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast alphaMap : Array<Float>), (cast a : Float)), function():Dynamic return cast a) : Float));
             px++;
           }
         }

@@ -131,7 +131,7 @@ class RandomDistributions {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(weights, 'length') : Float)) : Bool)) {
-        (total = cast ((total + flighthq._internal._StaticIndex.readArray(weights, i)) : Dynamic));
+        (total = cast ((total + flighthq._internal._StaticIndex.readFloatArrayTyped((cast weights : Array<Float>), (cast i : Float))) : Dynamic));
         i++;
       }
     }
@@ -140,7 +140,7 @@ class RandomDistributions {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(weights, 'length') : Float)) : Bool)) {
-        (r = cast ((r - flighthq._internal._StaticIndex.readArray(weights, i)) : Dynamic));
+        (r = cast ((r - flighthq._internal._StaticIndex.readFloatArrayTyped((cast weights : Array<Float>), (cast i : Float))) : Dynamic));
         if ((cast ((cast r : Float) <= (cast 0.0 : Float)) : Bool)) { return cast i; }
         i++;
       }

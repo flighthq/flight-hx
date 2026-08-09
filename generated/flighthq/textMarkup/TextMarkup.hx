@@ -83,7 +83,7 @@ class TextMarkup {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(aValue, 'length') : Float)) : Bool)) {
-            if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(aValue, i), flighthq._internal._StaticIndex.readArray(bValue, i)) : Bool)) { return cast false; }
+            if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast aValue : Array<Float>), (cast i : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast bValue : Array<Float>), (cast i : Float))) : Bool)) { return cast false; }
             i++;
           }
         }

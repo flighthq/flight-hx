@@ -111,27 +111,27 @@ class ToneMapMath {
   }
 
   public static function getAcesInputMatrix(out:flighthq._internal._Float32Array):Void {
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, 0.59719);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, 0.076);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, 0.0284);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, 0.35458);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, 0.90834);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, 0.13383);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 6.0, 0.04823);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 7.0, 0.01566);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 8.0, 0.83777);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast 0.59719 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast 0.076 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast 0.0284 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast 0.35458 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast 0.90834 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast 0.13383 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast 0.04823 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast 0.01566 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast 0.83777 : Float));
   }
 
   public static function getAcesOutputMatrix(out:flighthq._internal._Float32Array):Void {
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, 1.60475);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, -0.10208);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, -0.00327);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, -0.53108);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, 1.10813);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, -0.07276);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 6.0, -0.07367);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 7.0, -0.00605);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 8.0, 1.07602);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast 1.60475 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast -0.10208 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast -0.00327 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast -0.53108 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast 1.10813 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast -0.07276 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast -0.07367 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast -0.00605 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast 1.07602 : Float));
   }
 
   public static function agxDefaultContrastApprox__toneMapMath(x:Float):Float {

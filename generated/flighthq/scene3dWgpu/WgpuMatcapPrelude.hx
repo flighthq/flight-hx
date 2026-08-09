@@ -34,14 +34,14 @@ class WgpuMatcapPrelude {
       (binding = cast ({ bindGroup: bindGroup, buffer: buffer } : Dynamic));
       ((cast (cast scene : WgpuScene3DRuntime).materialBindGroups : flighthq._internal._WeakMap<flighthq._internal._Object, WgpuMaterialBinding>).set(materialKey, (cast binding)));
     }
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 0.0, flighthq._internal._StaticIndex.readArray(tint, 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 1.0, flighthq._internal._StaticIndex.readArray(tint, 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 2.0, flighthq._internal._StaticIndex.readArray(tint, 2.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 3.0, flighthq._internal._StaticIndex.readArray(tint, 3.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 4.0, alphaCutoff);
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 5.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 6.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 7.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuMatcapPrelude._scratch__wgpuMatcapPrelude : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast tint : Array<Float>), (cast 0.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuMatcapPrelude._scratch__wgpuMatcapPrelude : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast tint : Array<Float>), (cast 1.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuMatcapPrelude._scratch__wgpuMatcapPrelude : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast tint : Array<Float>), (cast 2.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuMatcapPrelude._scratch__wgpuMatcapPrelude : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast tint : Array<Float>), (cast 3.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuMatcapPrelude._scratch__wgpuMatcapPrelude : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast alphaCutoff : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuMatcapPrelude._scratch__wgpuMatcapPrelude : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuMatcapPrelude._scratch__wgpuMatcapPrelude : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuMatcapPrelude._scratch__wgpuMatcapPrelude : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast 0.0 : Float));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast binding : WgpuMaterialBinding).buffer, 0.0, _Runtime.field(WgpuMatcapPrelude._scratch__wgpuMatcapPrelude, 'buffer'), 0.0, WgpuMatcapPrelude.MATCAP_UNIFORM_BYTES__wgpuMatcapPrelude] : Array<Dynamic>));
     stashWgpuUvTransform((cast state), (cast null));
     return cast (cast binding : WgpuMaterialBinding).bindGroup;

@@ -111,7 +111,7 @@ class AnimationStateMachine {
       {
         var component:Float = 0.0;
         while ((cast ((cast component : Float) < (cast width : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, component, flighthq._internal._StaticIndex.readFloat32Array(source, component));
+          flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, component, flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast component : Float)));
           component++;
         }
       }

@@ -13,11 +13,11 @@ class ChannelMixerAdjustment {
     var m:Float->Float = cast _Runtime.UNDEFINED;
     var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
     matrix = _Runtime.coalesce(_Runtime.field(options, 'matrix'), function():Dynamic return cast ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment);
-    m = (cast function(i:Float):Float return _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(matrix, i), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment, i)));
+    m = (cast function(i:Float):Float return _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast matrix : Array<Float>), (cast i : Float)), function():Dynamic return cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment : Array<Float>), (cast i : Float))));
     colorMatrix = (cast createChannelMixerColorMatrix((cast cast ([(cast m((cast 0.0 : Float)) : Float), (cast m((cast 1.0 : Float)) : Float), (cast m((cast 2.0 : Float)) : Float)] : Array<Dynamic>)), (cast cast ([(cast m((cast 4.0 : Float)) : Float), (cast m((cast 5.0 : Float)) : Float), (cast m((cast 6.0 : Float)) : Float)] : Array<Dynamic>)), (cast cast ([(cast m((cast 8.0 : Float)) : Float), (cast m((cast 9.0 : Float)) : Float), (cast m((cast 10.0 : Float)) : Float)] : Array<Dynamic>))) : Array<Float>);
-    flighthq._internal._StaticIndex.writeArray(colorMatrix, 4.0, (cast m((cast 3.0 : Float)) : Float));
-    flighthq._internal._StaticIndex.writeArray(colorMatrix, 9.0, (cast m((cast 7.0 : Float)) : Float));
-    flighthq._internal._StaticIndex.writeArray(colorMatrix, 14.0, (cast m((cast 11.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 4.0 : Float), (cast (cast m((cast 3.0 : Float)) : Float) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 9.0 : Float), (cast (cast m((cast 7.0 : Float)) : Float) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 14.0 : Float), (cast (cast m((cast 11.0 : Float)) : Float) : Float));
     return cast _Runtime.mergeObjects([{ kind: 'ChannelMixerAdjustment' }, options, { matrix: matrix }, { colorMatrix: colorMatrix }]);
     return cast null;
   }

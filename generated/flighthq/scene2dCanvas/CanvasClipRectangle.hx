@@ -25,11 +25,11 @@ class CanvasClipRectangle {
       while ((cast ((cast c : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
         var contour:Array<Float> = flighthq._internal._StaticIndex.readArray(contours, c);
         if ((cast ((cast _Runtime.field(contour, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { c++; continue; }
-        flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'moveTo', cast ([flighthq._internal._StaticIndex.readArray(contour, 0.0), flighthq._internal._StaticIndex.readArray(contour, 1.0)] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'moveTo', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>));
         {
           var i:Float = 2.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-            flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'lineTo', cast ([flighthq._internal._StaticIndex.readArray(contour, i), flighthq._internal._StaticIndex.readArray(contour, (i + 1.0))] : Array<Dynamic>));
+            flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'lineTo', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast i : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i + 1.0) : Float))] : Array<Dynamic>));
             (i = cast ((i + 2.0) : Dynamic));
           }
         }

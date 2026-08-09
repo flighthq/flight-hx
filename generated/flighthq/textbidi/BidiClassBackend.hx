@@ -35,13 +35,13 @@ class BidiClassBackend {
     while ((cast ((cast lo : Float) <= (cast hi : Float)) : Bool)) {
       var mid:Float = (_Runtime.toInt32((lo + hi)) >> 1);
       var base:Float = (mid * 3.0);
-      var start:Float = flighthq._internal._StaticIndex.readArray(BidiClassBackend._ranges__bidiClassBackend, base);
+      var start:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast BidiClassBackend._ranges__bidiClassBackend : Array<Float>), (cast base : Float));
       if ((cast ((cast codepoint : Float) < (cast start : Float)) : Bool)) {
         (hi = cast ((mid - 1.0) : Dynamic));
-      } else { if ((cast ((cast codepoint : Float) > (cast flighthq._internal._StaticIndex.readArray(BidiClassBackend._ranges__bidiClassBackend, (base + 1.0)) : Float)) : Bool)) {
+      } else { if ((cast ((cast codepoint : Float) > (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast BidiClassBackend._ranges__bidiClassBackend : Array<Float>), (cast (base + 1.0) : Float)) : Float)) : Bool)) {
         (lo = cast ((mid + 1.0) : Dynamic));
       } else {
-        return cast flighthq._internal._StaticIndex.readArray(BidiClassBackend._classOrder__bidiClassBackend, flighthq._internal._StaticIndex.readArray(BidiClassBackend._ranges__bidiClassBackend, (base + 2.0)));
+        return cast flighthq._internal._StaticIndex.readArray(BidiClassBackend._classOrder__bidiClassBackend, flighthq._internal._StaticIndex.readFloatArrayTyped((cast BidiClassBackend._ranges__bidiClassBackend : Array<Float>), (cast (base + 2.0) : Float)));
       } }
     }
     return cast 'L';

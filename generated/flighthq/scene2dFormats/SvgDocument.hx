@@ -772,8 +772,8 @@ class SvgDocument {
     y = _Runtime.coalesce(({ final __structural22 = viewport; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast (cast SvgDocument.numberAttribute__svgDocument((cast element), (cast 'y' : String), (cast 0.0 : Float)) : Float));
     viewBox = (cast SvgDocument.parseSvgNumberList__svgDocument((cast _Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast element), (cast 'viewBox' : String)) : Null<String>), function():Dynamic return cast '') : String)) : Array<Float>);
     if ((cast ((cast _Runtime.field(viewBox, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return cast ((cast ((cast _Runtime.strictEquals(x, 0.0) : Bool) && (cast _Runtime.strictEquals(y, 0.0) : Bool)) : Bool) ? (cast null : Dynamic) : (cast (cast createMatrix((cast 1.0), (cast 0.0), (cast 0.0), (cast 1.0), (cast x), (cast y)) : Matrix) : Dynamic)); }
-    width = _Runtime.coalesce(({ final __structural23 = viewport; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast (cast SvgDocument.parseSvgLength__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element), (cast 'width' : String)) : Null<String>)), (cast flighthq._internal._StaticIndex.readArray(viewBox, 2.0) : Float)) : Float));
-    height = _Runtime.coalesce(({ final __structural24 = viewport; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast (cast SvgDocument.parseSvgLength__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element), (cast 'height' : String)) : Null<String>)), (cast flighthq._internal._StaticIndex.readArray(viewBox, 3.0) : Float)) : Float));
+    width = _Runtime.coalesce(({ final __structural23 = viewport; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast (cast SvgDocument.parseSvgLength__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element), (cast 'width' : String)) : Null<String>)), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast viewBox : Array<Float>), (cast 2.0 : Float)) : Float)) : Float));
+    height = _Runtime.coalesce(({ final __structural24 = viewport; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast (cast SvgDocument.parseSvgLength__svgDocument((cast (cast SvgDocument.attribute__svgDocument((cast element), (cast 'height' : String)) : Null<String>)), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast viewBox : Array<Float>), (cast 3.0 : Float)) : Float)) : Float));
     return cast (cast SvgDocument.createSvgViewBoxMatrix__svgDocument((cast viewBox), (cast { height: height, width: width, x: x, y: y }), (cast _Runtime.coalesce((cast SvgDocument.attribute__svgDocument((cast element), (cast 'preserveAspectRatio' : String)) : Null<String>), function():Dynamic return cast 'xMidYMid meet') : String)) : Matrix);
     return cast null;
   }
@@ -800,11 +800,11 @@ class SvgDocument {
     width = _Runtime.field(__destructure18, 'width');
     x = _Runtime.field(__destructure18, 'x');
     y = _Runtime.field(__destructure18, 'y');
-    sx = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(viewBox, 2.0), 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast _Runtime.divideNumbers(width, flighthq._internal._StaticIndex.readArray(viewBox, 2.0)) : Dynamic));
-    sy = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(viewBox, 3.0), 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast _Runtime.divideNumbers(height, flighthq._internal._StaticIndex.readArray(viewBox, 3.0)) : Dynamic));
+    sx = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast viewBox : Array<Float>), (cast 2.0 : Float)), 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast (width / flighthq._internal._StaticIndex.readFloatArrayTyped((cast viewBox : Array<Float>), (cast 2.0 : Float))) : Dynamic));
+    sy = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast viewBox : Array<Float>), (cast 3.0 : Float)), 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast (height / flighthq._internal._StaticIndex.readFloatArrayTyped((cast viewBox : Array<Float>), (cast 3.0 : Float))) : Dynamic));
     preserveAspectRatio = StringTools.trim(Std.string(preserveAspectRatioValue));
     if ((cast _Runtime.strictEquals(preserveAspectRatio, 'none') : Bool)) {
-      return cast (cast createMatrix((cast sx), (cast 0.0), (cast 0.0), (cast sy), (cast (x - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 0.0), sx))), (cast (y - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 1.0), sy)))) : Matrix);
+      return cast (cast createMatrix((cast sx), (cast 0.0), (cast 0.0), (cast sy), (cast (x - (flighthq._internal._StaticIndex.readFloatArrayTyped((cast viewBox : Array<Float>), (cast 0.0 : Float)) * sx))), (cast (y - (flighthq._internal._StaticIndex.readFloatArrayTyped((cast viewBox : Array<Float>), (cast 1.0 : Float)) * sy)))) : Matrix);
     }
     parts = _Runtime.callProperty(preserveAspectRatio, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>));
     alignment = ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(parts, 0.0), 'defer') : Bool) ? (cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(parts, 1.0), function():Dynamic return cast 'xMidYMid') : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(parts, 0.0) : Dynamic));
@@ -812,11 +812,11 @@ class SvgDocument {
     uniformScale = ((cast _Runtime.strictEquals(mode, 'slice') : Bool) ? (cast HxMath.max(sx, sy) : Dynamic) : (cast HxMath.min(sx, sy) : Dynamic));
     (sx = cast (uniformScale : Dynamic));
     (sy = cast (uniformScale : Dynamic));
-    spareX = (width - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 2.0), sx));
-    spareY = (height - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 3.0), sy));
+    spareX = (width - (flighthq._internal._StaticIndex.readFloatArrayTyped((cast viewBox : Array<Float>), (cast 2.0 : Float)) * sx));
+    spareY = (height - (flighthq._internal._StaticIndex.readFloatArrayTyped((cast viewBox : Array<Float>), (cast 3.0 : Float)) * sy));
     alignX = ((cast _Runtime.includes(alignment, 'xMax') : Bool) ? (cast spareX : Dynamic) : (cast ((cast _Runtime.includes(alignment, 'xMid') : Bool) ? (cast (spareX / 2.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
     alignY = ((cast _Runtime.includes(alignment, 'YMax') : Bool) ? (cast spareY : Dynamic) : (cast ((cast _Runtime.includes(alignment, 'YMid') : Bool) ? (cast (spareY / 2.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
-    return cast (cast createMatrix((cast sx), (cast 0.0), (cast 0.0), (cast sy), (cast ((x + alignX) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 0.0), sx))), (cast ((y + alignY) - _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(viewBox, 1.0), sy)))) : Matrix);
+    return cast (cast createMatrix((cast sx), (cast 0.0), (cast 0.0), (cast sy), (cast ((x + alignX) - (flighthq._internal._StaticIndex.readFloatArrayTyped((cast viewBox : Array<Float>), (cast 0.0 : Float)) * sx))), (cast ((y + alignY) - (flighthq._internal._StaticIndex.readFloatArrayTyped((cast viewBox : Array<Float>), (cast 1.0 : Float)) * sy)))) : Matrix);
     return cast null;
   }
 
@@ -1125,27 +1125,27 @@ class SvgDocument {
       var values:Array<Float> = (cast SvgDocument.parseSvgNumberList__svgDocument((cast _Runtime.getIndex(match, 2.0) : String)) : Array<Float>);
       var operation:Matrix = (cast createMatrix((cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
       if ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'matrix') : Bool) && (cast ((cast _Runtime.field(values, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) : Bool)) {
-        (operation = cast ((cast createMatrix((cast flighthq._internal._StaticIndex.readArray(values, 0.0)), (cast flighthq._internal._StaticIndex.readArray(values, 1.0)), (cast flighthq._internal._StaticIndex.readArray(values, 2.0)), (cast flighthq._internal._StaticIndex.readArray(values, 3.0)), (cast flighthq._internal._StaticIndex.readArray(values, 4.0)), (cast flighthq._internal._StaticIndex.readArray(values, 5.0))) : Matrix) : Dynamic));
+        (operation = cast ((cast createMatrix((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float))), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float))), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 2.0 : Float))), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 3.0 : Float))), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 4.0 : Float))), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 5.0 : Float)))) : Matrix) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'translate') : Bool)) {
-        (operation.tx = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, 0.0), function():Dynamic return cast 0.0) : Dynamic));
-        (operation.ty = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, 1.0), function():Dynamic return cast 0.0) : Dynamic));
+        (operation.tx = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
+        (operation.ty = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'scale') : Bool)) {
-        (operation.a = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, 0.0), function():Dynamic return cast 1.0) : Dynamic));
-        (operation.d = cast (_Runtime.coalesce(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, 1.0), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(values, 0.0)), function():Dynamic return cast 1.0) : Dynamic));
+        (operation.a = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0) : Dynamic));
+        (operation.d = cast (_Runtime.coalesce(_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float))), function():Dynamic return cast 1.0) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'rotate') : Bool)) {
-        var radians:Float = (_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, 0.0), function():Dynamic return cast 0.0), HxMath.PI) / 180.0);
+        var radians:Float = (_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0), HxMath.PI) / 180.0);
         var cosine:Float = HxMath.cos(radians);
         var sine:Float = HxMath.sin(radians);
         var rotation:Matrix = (cast createMatrix((cast cosine), (cast sine), (cast -sine), (cast cosine), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Matrix);
         if ((cast ((cast _Runtime.field(values, 'length') : Float) >= (cast 3.0 : Float)) : Bool)) {
-          (operation = cast ((cast SvgDocument.multiplySvgMatrices__svgDocument((cast (cast createMatrix((cast 1.0), (cast 0.0), (cast 0.0), (cast 1.0), (cast flighthq._internal._StaticIndex.readArray(values, 1.0)), (cast flighthq._internal._StaticIndex.readArray(values, 2.0))) : Matrix)), (cast (cast SvgDocument.multiplySvgMatrices__svgDocument((cast rotation), (cast (cast createMatrix((cast 1.0), (cast 0.0), (cast 0.0), (cast 1.0), (cast -flighthq._internal._StaticIndex.readArray(values, 1.0)), (cast -flighthq._internal._StaticIndex.readArray(values, 2.0))) : Matrix))) : Matrix))) : Matrix) : Dynamic));
+          (operation = cast ((cast SvgDocument.multiplySvgMatrices__svgDocument((cast (cast createMatrix((cast 1.0), (cast 0.0), (cast 0.0), (cast 1.0), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float))), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 2.0 : Float)))) : Matrix)), (cast (cast SvgDocument.multiplySvgMatrices__svgDocument((cast rotation), (cast (cast createMatrix((cast 1.0), (cast 0.0), (cast 0.0), (cast 1.0), (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float))), (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 2.0 : Float)))) : Matrix))) : Matrix))) : Matrix) : Dynamic));
         } else {
           (operation = cast (rotation : Dynamic));
         }
       } else { if ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'skewX') : Bool)) {
-        (operation.c = cast (HxMath.tan((_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, 0.0), function():Dynamic return cast 0.0), HxMath.PI) / 180.0)) : Dynamic));
+        (operation.c = cast (HxMath.tan((_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0), HxMath.PI) / 180.0)) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'skewY') : Bool)) {
-        (operation.b = cast (HxMath.tan((_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(values, 0.0), function():Dynamic return cast 0.0), HxMath.PI) / 180.0)) : Dynamic));
+        (operation.b = cast (HxMath.tan((_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0), HxMath.PI) / 180.0)) : Dynamic));
       } else {
         continue;
       } } } } } }
@@ -1258,7 +1258,7 @@ class SvgDocument {
   }
 
   public static function firstNumber__svgDocument(value:Null<String>, fallback:Float):Float {
-    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast SvgDocument.parseSvgNumberList__svgDocument((cast _Runtime.coalesce(value, function():Dynamic return cast '') : String)) : Array<Float>), 0.0), function():Dynamic return cast fallback);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast SvgDocument.parseSvgNumberList__svgDocument((cast _Runtime.coalesce(value, function():Dynamic return cast '') : String)) : Array<Float>) : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast fallback);
     return cast null;
   }
 

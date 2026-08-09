@@ -1,7 +1,13 @@
 // Maintained runtime support for generated Flight Haxe.
 package flighthq._internal;
 
+#if js
 abstract _UInt8Array(Dynamic) {
+#elseif lime
+abstract _UInt8Array(_LimeTypedArray) {
+#else
+abstract _UInt8Array(Dynamic) {
+#end
   public var length(get, never):Int;
 
   public function new(source:Dynamic = 0, ?byteOffset:Int, ?length:Int) {
@@ -36,7 +42,8 @@ abstract _UInt8Array(Dynamic) {
 
   @:arrayAccess public inline function arrayRead(index:Int):Int {
     #if (lime && !js)
-    return (cast this : _LimeTypedArray).get(index);
+    final values:lime.utils.UInt8Array = cast this.nativeView;
+    return values[index];
     #elseif !js
     return Std.isOfType(this, haxe.io.Bytes) ? (cast this : haxe.io.Bytes).get(index) : this[index];
     #else
@@ -44,17 +51,18 @@ abstract _UInt8Array(Dynamic) {
     #end
   }
 
-  @:arrayAccess public inline function arrayWrite(index:Int, value:Int):Int {
+  @:arrayAccess public inline function arrayWrite(index:Int, value:Float):Int {
     #if (lime && !js)
-    return (cast this : _LimeTypedArray).setValue(index, value);
+    final values:lime.utils.UInt8Array = cast this.nativeView;
+    return values[index] = Std.int(value) & 0xff;
     #elseif !js
     if (Std.isOfType(this, haxe.io.Bytes)) {
-      (cast this : haxe.io.Bytes).set(index, value & 0xff);
-      return value & 0xff;
+      (cast this : haxe.io.Bytes).set(index, Std.int(value) & 0xff);
+      return Std.int(value) & 0xff;
     }
-    return this[index] = value & 0xff;
+    return this[index] = Std.int(value) & 0xff;
     #else
-    return this[index] = value & 0xff;
+    return this[index] = Std.int(value) & 0xff;
     #end
   }
 

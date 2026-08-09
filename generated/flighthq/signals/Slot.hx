@@ -25,7 +25,7 @@ class Slot {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data.priorities, 'length') : Float)) : Bool)) {
-        if ((cast ((cast priority : Float) > (cast flighthq._internal._StaticIndex.readArray(data.priorities, i) : Float)) : Bool)) {
+        if ((cast ((cast priority : Float) > (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast data.priorities : Array<Float>), (cast i : Float)) : Float)) : Bool)) {
           _Runtime.splice(data.slots, Std.int(i), Std.int(0.0), [slot]);
           _Runtime.splice(data.priorities, Std.int(i), Std.int(0.0), [priority]);
           _Runtime.splice(data.repeat, Std.int(i), Std.int(0.0), [repeat]);

@@ -17,7 +17,7 @@ class DomClipContours {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-          var __destructure0 = (cast mapPointToElement((cast flighthq._internal._StaticIndex.readArray(contour, i) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, (i + 1.0)) : Float)) : Array<Float>);
+          var __destructure0 = (cast mapPointToElement((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i + 1.0) : Float)) : Float)) : Array<Float>);
           var x:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
           var y:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
           _Runtime.callProperty(pts, 'push', cast (['' + Std.string(x) + 'px ' + Std.string(y) + 'px'] : Array<Dynamic>));
@@ -34,7 +34,7 @@ class DomClipContours {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-            var __destructure1 = (cast mapPointToElement((cast flighthq._internal._StaticIndex.readArray(contour, i) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, (i + 1.0)) : Float)) : Array<Float>);
+            var __destructure1 = (cast mapPointToElement((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i + 1.0) : Float)) : Float)) : Array<Float>);
             var x:Float = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
             var y:Float = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
             (d = cast ((d + '' + Std.string(((cast _Runtime.strictEquals(i, 0.0) : Bool) ? (cast 'M' : Dynamic) : (cast 'L' : Dynamic))) + '' + Std.string(x) + ' ' + Std.string(y) + ' ') : Dynamic));
@@ -61,8 +61,8 @@ class DomClipContours {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool)) {
-            var x:Float = flighthq._internal._StaticIndex.readArray(src, i);
-            var y:Float = flighthq._internal._StaticIndex.readArray(src, (i + 1.0));
+            var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast src : Array<Float>), (cast i : Float));
+            var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast src : Array<Float>), (cast (i + 1.0) : Float));
             _Runtime.pushMany(out, cast ([(((transform.a * x) + (transform.c * y)) + transform.tx), (((transform.b * x) + (transform.d * y)) + transform.ty)] : Array<Dynamic>));
             (i = cast ((i + 2.0) : Dynamic));
           }

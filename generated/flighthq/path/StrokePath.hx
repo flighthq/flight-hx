@@ -37,16 +37,16 @@ class StrokePath {
 
   public static function appendContour__strokePath(path:Path, primary:Array<Float>, reversePrimary:Bool, afterPrimary:Array<Float>, afterSecondary:Array<Float>, secondary:Array<Float>):Void {
     if ((cast reversePrimary : Bool)) {
-      appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readArray(primary, _Runtime.subtractNumbers(_Runtime.field(primary, 'length'), 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(primary, _Runtime.subtractNumbers(_Runtime.field(primary, 'length'), 1.0)) : Float));
+      appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(primary, 'length'), 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(primary, 'length'), 1.0) : Float)) : Float));
       {
         var i:Float = _Runtime.subtractNumbers(_Runtime.field(primary, 'length'), 4.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-          appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readArray(primary, i) : Float), (cast flighthq._internal._StaticIndex.readArray(primary, (i + 1.0)) : Float));
+          appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast (i + 1.0) : Float)) : Float));
           (i = cast ((i - 2.0) : Dynamic));
         }
       }
     } else {
-      appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readArray(primary, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(primary, 1.0) : Float));
+      appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast 1.0 : Float)) : Float));
       StrokePath.appendPoints__strokePath((cast path), (cast primary), (cast 2.0 : Float), (cast 2.0 : Float));
     }
     StrokePath.appendPoints__strokePath((cast path), (cast afterPrimary), (cast 0.0 : Float), (cast 2.0 : Float));
@@ -59,7 +59,7 @@ class StrokePath {
     {
       var i:Float = start;
       while ((cast ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) : Bool)) {
-        appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readArray(points, i) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (i + 1.0)) : Float));
+        appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Float));
         (i = cast ((i + step) : Dynamic));
       }
     }

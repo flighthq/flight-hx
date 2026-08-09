@@ -50,7 +50,7 @@ class SpritesheetTimelineSource {
         (cast addNodeChild((cast target), (cast bitmap)) : NodeOf<Node2DTraits>);
         ((cast bitmaps : flighthq._internal._WeakMap<Node2D, Sprite>).set(target, (cast bitmap)));
       }
-      sheetFrame = flighthq._internal._StaticIndex.readArray(spritesheet.frames, flighthq._internal._StaticIndex.readArray(frames, (frame - 1.0)));
+      sheetFrame = flighthq._internal._StaticIndex.readArray(spritesheet.frames, flighthq._internal._StaticIndex.readFloatArrayTyped((cast frames : Array<Float>), (cast (frame - 1.0) : Float)));
       if ((cast _Runtime.strictEquals(sheetFrame, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       ((cast (cast bitmap : Sprite).data : SpriteData).texture = (cast getTextureAtlasRegionTexture((cast atlas), (cast sheetFrame.id : Float)) : Null<Texture2D>));
       ((cast bitmap : Sprite).x = (sheetFrame.offsetX - animation.originX));
@@ -81,14 +81,14 @@ class SpritesheetTimelineSource {
       {
         var index:Float = 0.0;
         while ((cast ((cast index : Float) < (cast _Runtime.field(frames, 'length') : Float)) : Bool)) {
-          _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readArray(frames, index)] : Array<Dynamic>));
+          _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast frames : Array<Float>), (cast index : Float))] : Array<Dynamic>));
           index++;
         }
       }
       {
         var index:Float = _Runtime.subtractNumbers(_Runtime.field(frames, 'length'), 2.0);
         while ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool)) {
-          _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readArray(frames, index)] : Array<Dynamic>));
+          _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast frames : Array<Float>), (cast index : Float))] : Array<Dynamic>));
           index--;
         }
       }
@@ -97,14 +97,14 @@ class SpritesheetTimelineSource {
     {
       var index:Float = _Runtime.subtractNumbers(_Runtime.field(frames, 'length'), 1.0);
       while ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool)) {
-        _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readArray(frames, index)] : Array<Dynamic>));
+        _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast frames : Array<Float>), (cast index : Float))] : Array<Dynamic>));
         index--;
       }
     }
     {
       var index:Float = 1.0;
       while ((cast ((cast index : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(frames, 'length'), 1.0) : Float)) : Bool)) {
-        _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readArray(frames, index)] : Array<Dynamic>));
+        _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast frames : Array<Float>), (cast index : Float))] : Array<Dynamic>));
         index++;
       }
     }

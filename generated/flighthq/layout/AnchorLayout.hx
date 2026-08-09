@@ -44,10 +44,10 @@ class AnchorLayout {
     if ((cast !(cast (cast AnchorLayout.isAnchorLayoutItemStyle__anchorLayout((cast itemStyle)) : Bool) : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidItemStyle; }
     style = (cast itemStyle : Null<AnchorLayoutItemStyle>);
     parentOffset = (parentIndex * 4.0);
-    parentX = flighthq._internal._StaticIndex.readFloat32Array(out, parentOffset);
-    parentY = flighthq._internal._StaticIndex.readFloat32Array(out, (parentOffset + 1.0));
-    parentWidth = flighthq._internal._StaticIndex.readFloat32Array(out, (parentOffset + 2.0));
-    parentHeight = flighthq._internal._StaticIndex.readFloat32Array(out, (parentOffset + 3.0));
+    parentX = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast parentOffset : Float));
+    parentY = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (parentOffset + 1.0) : Float));
+    parentWidth = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (parentOffset + 2.0) : Float));
+    parentHeight = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (parentOffset + 3.0) : Float));
     left = _Runtime.coalesce(({ final __structural0 = style; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var left:Null<Float>; }).left; }), function():Dynamic return cast null);
     right = _Runtime.coalesce(({ final __structural1 = style; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var right:Null<Float>; }).right; }), function():Dynamic return cast null);
     top = _Runtime.coalesce(({ final __structural2 = style; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var top:Null<Float>; }).top; }), function():Dynamic return cast null);
@@ -57,10 +57,10 @@ class AnchorLayout {
     height = ((cast ((cast !_Runtime.strictEquals(top, null) : Bool) && (cast !_Runtime.strictEquals(bottom, null) : Bool)) : Bool) ? (cast HxMath.max(0.0, ((parentHeight - top) - bottom)) : Dynamic) : (cast (cast AnchorLayout.finiteSize__anchorLayout((cast _Runtime.coalesce(({ final __structural5 = style; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast _Runtime.getIndex(intrinsicSizes, (intrinsicOffset + 1.0))) : Float)) : Float) : Dynamic));
     align = _Runtime.coalesce(({ final __structural6 = style; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var align:Null<String>; }).align; }), function():Dynamic return cast 'topleft');
     childOffset = (childIndex * 4.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, childOffset, ((cast !_Runtime.strictEquals(left, null) : Bool) ? (cast (parentX + left) : Dynamic) : (cast ((cast !_Runtime.strictEquals(right, null) : Bool) ? (cast (((parentX + parentWidth) - right) - width) : Dynamic) : (cast (parentX + (cast AnchorLayout.alignX__anchorLayout((cast parentWidth : Float), (cast width : Float), (cast align)) : Float)) : Dynamic)) : Dynamic)));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (childOffset + 1.0), ((cast !_Runtime.strictEquals(top, null) : Bool) ? (cast (parentY + top) : Dynamic) : (cast ((cast !_Runtime.strictEquals(bottom, null) : Bool) ? (cast (((parentY + parentHeight) - bottom) - height) : Dynamic) : (cast (parentY + (cast AnchorLayout.alignY__anchorLayout((cast parentHeight : Float), (cast height : Float), (cast align)) : Float)) : Dynamic)) : Dynamic)));
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (childOffset + 2.0), width);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (childOffset + 3.0), height);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast childOffset : Float), (cast ((cast !_Runtime.strictEquals(left, null) : Bool) ? (cast (parentX + left) : Dynamic) : (cast ((cast !_Runtime.strictEquals(right, null) : Bool) ? (cast (((parentX + parentWidth) - right) - width) : Dynamic) : (cast (parentX + (cast AnchorLayout.alignX__anchorLayout((cast parentWidth : Float), (cast width : Float), (cast align)) : Float)) : Dynamic)) : Dynamic)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (childOffset + 1.0) : Float), (cast ((cast !_Runtime.strictEquals(top, null) : Bool) ? (cast (parentY + top) : Dynamic) : (cast ((cast !_Runtime.strictEquals(bottom, null) : Bool) ? (cast (((parentY + parentHeight) - bottom) - height) : Dynamic) : (cast (parentY + (cast AnchorLayout.alignY__anchorLayout((cast parentHeight : Float), (cast height : Float), (cast align)) : Float)) : Dynamic)) : Dynamic)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (childOffset + 2.0) : Float), (cast width : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (childOffset + 3.0) : Float), (cast height : Float));
     return cast null;
     return cast _Runtime.UNDEFINED;
   });

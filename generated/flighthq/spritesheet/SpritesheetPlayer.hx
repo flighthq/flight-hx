@@ -57,7 +57,7 @@ class SpritesheetPlayer {
     animation = _Runtime.field(__destructure0, 'animation');
     frameIndex = _Runtime.field(__destructure0, 'frameIndex');
     if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation.frames, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
-    spriteFrameIndex = flighthq._internal._StaticIndex.readArray(animation.frames, frameIndex);
+    spriteFrameIndex = flighthq._internal._StaticIndex.readFloatArrayTyped((cast animation.frames : Array<Float>), (cast frameIndex : Float));
     return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(spritesheet.frames, spriteFrameIndex), function():Dynamic return cast null);
     return cast null;
   }
@@ -75,7 +75,7 @@ class SpritesheetPlayer {
     if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation.frames, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
     n = _Runtime.field(animation.frames, 'length');
     targetIndex = _Runtime.fmod((_Runtime.fmod((frameIndex + frameOffset), n) + n), n);
-    spriteFrameIndex = flighthq._internal._StaticIndex.readArray(animation.frames, targetIndex);
+    spriteFrameIndex = flighthq._internal._StaticIndex.readFloatArrayTyped((cast animation.frames : Array<Float>), (cast targetIndex : Float));
     return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(spritesheet.frames, spriteFrameIndex), function():Dynamic return cast null);
     return cast null;
   }
@@ -224,13 +224,13 @@ class SpritesheetPlayer {
     {
       var vi:Float = 0.0;
       while ((cast ((cast vi : Float) < (cast virtualCount : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat64Array(arr, vi, t);
+        flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast arr : flighthq._internal._Float64Array), (cast vi : Float), (cast t : Float));
         var displayIndex:Float = (cast SpritesheetPlayer.resolveVirtualIndexToDisplayIndex__spritesheetPlayer((cast animation), (cast vi : Float)) : Float);
-        (t = cast ((t + _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(frameDurations, displayIndex), function():Dynamic return cast frameDuration)) : Dynamic));
+        (t = cast ((t + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameDurations : Array<Float>), (cast displayIndex : Float)), function():Dynamic return cast frameDuration)) : Dynamic));
         vi++;
       }
     }
-    flighthq._internal._StaticIndex.writeFloat64Array(arr, virtualCount, _Runtime.orValue(t, function():Dynamic return cast 1.0));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast arr : flighthq._internal._Float64Array), (cast virtualCount : Float), (cast _Runtime.orValue(t, function():Dynamic return cast 1.0) : Float));
     ((cast SpritesheetPlayer.cumulativeDurationsCache__spritesheetPlayer : flighthq._internal._WeakMap<SpritesheetAnimation, flighthq._internal._Float64Array>).set(animation, (cast arr)));
     return cast arr;
     return cast null;
@@ -246,7 +246,7 @@ class SpritesheetPlayer {
     frameDurations = _Runtime.field(__destructure7, 'frameDurations');
     if ((cast !_Runtime.strictEquals(frameDurations, null) : Bool)) {
       var arr:flighthq._internal._Float64Array = (cast SpritesheetPlayer.getCumulativeDurations__spritesheetPlayer((cast animation)) : flighthq._internal._Float64Array);
-      return cast flighthq._internal._StaticIndex.readFloat64Array(arr, _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0));
+      return cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast arr : flighthq._internal._Float64Array), (cast _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0) : Float));
     }
     virtualCount = (cast SpritesheetPlayer.resolveVirtualFrameCount__spritesheetPlayer((cast animation)) : Float);
     return cast _Runtime.orValue((virtualCount * frameDuration), function():Dynamic return cast 1.0);
@@ -289,7 +289,7 @@ class SpritesheetPlayer {
       var hi:Float = (virtualCount - 1.0);
       while ((cast ((cast lo : Float) < (cast hi : Float)) : Bool)) {
         var mid:Float = (_Runtime.toInt32(((lo + hi) + 1.0)) >> 1);
-        if ((cast ((cast flighthq._internal._StaticIndex.readFloat64Array(arr, mid) : Float) <= (cast timeInLoop : Float)) : Bool)) {
+        if ((cast ((cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast arr : flighthq._internal._Float64Array), (cast mid : Float)) : Float) <= (cast timeInLoop : Float)) : Bool)) {
           (lo = cast (mid : Dynamic));
         } else {
           (hi = cast ((mid - 1.0) : Dynamic));
@@ -310,7 +310,7 @@ class SpritesheetPlayer {
     frameDurations = _Runtime.field(__destructure9, 'frameDurations');
     if ((cast !_Runtime.strictEquals(frameDurations, null) : Bool)) {
       var arr:flighthq._internal._Float64Array = (cast SpritesheetPlayer.getCumulativeDurations__spritesheetPlayer((cast animation)) : flighthq._internal._Float64Array);
-      return cast flighthq._internal._StaticIndex.readFloat64Array(arr, virtualIndex);
+      return cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast arr : flighthq._internal._Float64Array), (cast virtualIndex : Float));
     }
     return cast (virtualIndex * frameDuration);
     return cast null;

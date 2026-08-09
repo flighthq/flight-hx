@@ -47,7 +47,7 @@ class BuiltInScene2DDocumentImporters {
   }
 
   public static function matchesRiveDocument__builtInScene2DDocumentImporters(source:flighthq._internal._UInt8Array, _context:Scene2DDocumentImportContext):Bool {
-    return cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(source, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, 0.0), 82.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, 1.0), 73.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, 2.0), 86.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(source, 3.0), 69.0) : Bool));
+    return cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(source, 'length') : Float) >= (cast 4.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 82.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast 1.0 : Float)), 73.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast 2.0 : Float)), 86.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast 3.0 : Float)), 69.0) : Bool));
     return cast null;
   }
 

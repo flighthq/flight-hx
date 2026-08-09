@@ -40,14 +40,14 @@ class WgpuEnvironmentSkybox {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32Array(u, i, flighthq._internal._StaticIndex.readFloat32Array(m, i));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast i : Float)) : Float));
         i++;
       }
     }
-    flighthq._internal._StaticIndex.writeFloat32Array(u, 16.0, _Runtime.field(environment, 'intensity'));
-    flighthq._internal._StaticIndex.writeFloat32Array(u, 17.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(u, 18.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(u, 19.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 16.0 : Float), (cast _Runtime.field(environment, 'intensity') : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 17.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 18.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 19.0 : Float), (cast 0.0 : Float));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast sky : WgpuSkybox__wgpuEnvironmentSkybox).uniformBuffer, 0.0, _Runtime.field(u, 'buffer'), 0.0, WgpuEnvironmentSkybox.SKYBOX_UNIFORM_BYTES__wgpuEnvironmentSkybox] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals((cast sky : WgpuSkybox__wgpuEnvironmentSkybox).cubeBindGroup, null) : Bool) || (cast !_Runtime.strictEquals((cast sky : WgpuSkybox__wgpuEnvironmentSkybox).cubeView, cubeView) : Bool)) : Bool)) {
       ((cast sky : WgpuSkybox__wgpuEnvironmentSkybox).cubeBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast sky : WgpuSkybox__wgpuEnvironmentSkybox).cubeBindGroupLayout, entries: cast ([{ binding: 0.0, resource: cubeView }, { binding: 1.0, resource: (cast WgpuEnvironmentSkybox.getWgpuSkyboxSampler__wgpuEnvironmentSkybox((cast state)) : flighthq._internal.dom.GPUSampler) }] : Array<Dynamic>) }] : Array<Dynamic>)));

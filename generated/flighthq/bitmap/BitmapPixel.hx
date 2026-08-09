@@ -17,45 +17,45 @@ class BitmapPixel {
   public static function getBitmapPixel(source:Bitmap, x:Float, y:Float):Float {
     var i:Float = cast _Runtime.UNDEFINED;
     i = (((y * source.width) + x) * 4.0);
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, i)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 1.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 2.0))) << 8)))) | _Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 3.0))))), 0);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast i : Float))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float))) << 8)))) | _Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float))))), 0);
     return cast null;
   }
 
   public static function getBitmapPixelChannel(source:Bitmap, x:Float, y:Float, channel:ImageChannel):Float {
-    return cast flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, ((((y * source.width) + x) * 4.0) + channel));
+    return cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast ((((y * source.width) + x) * 4.0) + channel) : Float));
     return cast null;
   }
 
   public static function getBitmapPixelLuminance(source:Bitmap, x:Float, y:Float):Float {
     var i:Float = cast _Runtime.UNDEFINED;
     i = (((y * source.width) + x) * 4.0);
-    return cast HxMath.round(((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, i), BitmapPixel.LUMA_R__bitmapPixel) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 1.0)), BitmapPixel.LUMA_G__bitmapPixel)) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 2.0)), BitmapPixel.LUMA_B__bitmapPixel)));
+    return cast HxMath.round((((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast i : Float)) * BitmapPixel.LUMA_R__bitmapPixel) + (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float)) * BitmapPixel.LUMA_G__bitmapPixel)) + (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float)) * BitmapPixel.LUMA_B__bitmapPixel)));
     return cast null;
   }
 
   public static function getBitmapPixelRgb(source:Bitmap, x:Float, y:Float):Float {
     var i:Float = cast _Runtime.UNDEFINED;
     i = (((y * source.width) + x) * 4.0);
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, i)) << 16)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 1.0))) << 8)))) | _Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArray(source.data, (i + 2.0))))), 0);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast i : Float))) << 16)) | _Runtime.toInt32((_Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float))) << 8)))) | _Runtime.toInt32(flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast source.data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float))))), 0);
     return cast null;
   }
 
   public static function setBitmapPixel(out:Bitmap, x:Float, y:Float, color:Float):Void {
     var i:Float = cast _Runtime.UNDEFINED;
     i = (((y * out.width) + x) * 4.0);
-    flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, i, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255));
-    flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, (i + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
-    flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, (i + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
-    flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, (i + 3.0), (_Runtime.toInt32(color) & 255));
+    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) : Float));
+    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) : Float));
+    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) : Float));
+    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float), (cast (_Runtime.toInt32(color) & 255) : Float));
     invalidateBitmap((cast out));
   }
 
   public static function setBitmapPixelRgb(out:Bitmap, x:Float, y:Float, color:Float):Void {
     var i:Float = cast _Runtime.UNDEFINED;
     i = (((y * out.width) + x) * 4.0);
-    flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, i, (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
-    flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, (i + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
-    flighthq._internal._StaticIndex.writeUint8ClampedArray(out.data, (i + 2.0), (_Runtime.toInt32(color) & 255));
+    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) : Float));
+    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) : Float));
+    flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast (_Runtime.toInt32(color) & 255) : Float));
     invalidateBitmap((cast out));
   }
 }

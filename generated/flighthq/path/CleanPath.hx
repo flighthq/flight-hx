@@ -23,13 +23,13 @@ class CleanPath {
     for (contour in _Runtime.iterable(contours)) {
       var n:Float = (_Runtime.toInt32(_Runtime.field(contour, 'length')) >> 1);
       if ((cast ((cast n : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-      var closed:Bool = ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast (cast CleanPath.withinTolerance__cleanPath((cast flighthq._internal._StaticIndex.readArray(contour, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, 1.0) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, ((n * 2.0) - 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, ((n * 2.0) - 1.0)) : Float), (cast toleranceSq : Float)) : Bool) : Bool));
+      var closed:Bool = ((cast ((cast n : Float) >= (cast 3.0 : Float)) : Bool) && (cast (cast CleanPath.withinTolerance__cleanPath((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((n * 2.0) - 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((n * 2.0) - 1.0) : Float)) : Float), (cast toleranceSq : Float)) : Bool) : Bool));
       var count:Float = ((cast closed : Bool) ? (cast (n - 1.0) : Dynamic) : (cast n : Dynamic));
       var kept:Array<Float> = (cast cast ([] : Array<Dynamic>));
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-          CleanPath.pushCleanVertex__cleanPath((cast kept), (cast flighthq._internal._StaticIndex.readArray(contour, (i * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(contour, ((i * 2.0) + 1.0)) : Float), (cast toleranceSq : Float));
+          CleanPath.pushCleanVertex__cleanPath((cast kept), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i * 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((i * 2.0) + 1.0) : Float)) : Float), (cast toleranceSq : Float));
           i++;
         }
       }
@@ -37,12 +37,12 @@ class CleanPath {
       var keptCount:Float = (_Runtime.toInt32(_Runtime.field(kept, 'length')) >> 1);
       if ((cast ((cast closed : Bool) ? (cast ((cast keptCount : Float) < (cast 3.0 : Float)) : Dynamic) : (cast ((cast keptCount : Float) < (cast 2.0 : Float)) : Dynamic)) : Bool)) { continue; }
       _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
-      _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readArray(kept, 0.0), flighthq._internal._StaticIndex.readArray(kept, 1.0)] : Array<Dynamic>));
+      _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>));
       {
         var i:Float = 1.0;
         while ((cast ((cast i : Float) < (cast keptCount : Float)) : Bool)) {
           _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO] : Array<Dynamic>));
-          _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readArray(kept, (i * 2.0)), flighthq._internal._StaticIndex.readArray(kept, ((i * 2.0) + 1.0))] : Array<Dynamic>));
+          _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast (i * 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast ((i * 2.0) + 1.0) : Float))] : Array<Dynamic>));
           i++;
         }
       }
@@ -76,12 +76,12 @@ class CleanPath {
     var my:Float = cast _Runtime.UNDEFINED;
     var sx:Float = cast _Runtime.UNDEFINED;
     var sy:Float = cast _Runtime.UNDEFINED;
-    px = flighthq._internal._StaticIndex.readArray(kept, (prev * 2.0));
-    py = flighthq._internal._StaticIndex.readArray(kept, ((prev * 2.0) + 1.0));
-    mx = flighthq._internal._StaticIndex.readArray(kept, (mid * 2.0));
-    my = flighthq._internal._StaticIndex.readArray(kept, ((mid * 2.0) + 1.0));
-    sx = flighthq._internal._StaticIndex.readArray(kept, (next * 2.0));
-    sy = flighthq._internal._StaticIndex.readArray(kept, ((next * 2.0) + 1.0));
+    px = flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast (prev * 2.0) : Float));
+    py = flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast ((prev * 2.0) + 1.0) : Float));
+    mx = flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast (mid * 2.0) : Float));
+    my = flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast ((mid * 2.0) + 1.0) : Float));
+    sx = flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast (next * 2.0) : Float));
+    sy = flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast ((next * 2.0) + 1.0) : Float));
     return cast (cast CleanPath.isRedundantMiddle__cleanPath((cast px : Float), (cast py : Float), (cast mx : Float), (cast my : Float), (cast sx : Float), (cast sy : Float), (cast toleranceSq : Float)) : Bool);
     return cast null;
   }
@@ -103,10 +103,10 @@ class CleanPath {
   public static function pushCleanVertex__cleanPath(kept:Array<Float>, x:Float, y:Float, toleranceSq:Float):Void {
     var k:Float = cast _Runtime.UNDEFINED;
     k = _Runtime.field(kept, 'length');
-    if ((cast ((cast ((cast k : Float) >= (cast 2.0 : Float)) : Bool) && (cast (cast CleanPath.withinTolerance__cleanPath((cast flighthq._internal._StaticIndex.readArray(kept, (k - 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(kept, (k - 1.0)) : Float), (cast x : Float), (cast y : Float), (cast toleranceSq : Float)) : Bool) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast k : Float) >= (cast 2.0 : Float)) : Bool) && (cast (cast CleanPath.withinTolerance__cleanPath((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast (k - 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast (k - 1.0) : Float)) : Float), (cast x : Float), (cast y : Float), (cast toleranceSq : Float)) : Bool) : Bool)) : Bool)) { return; }
     while ((cast ((cast _Runtime.field(kept, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) {
       var m:Float = _Runtime.field(kept, 'length');
-      if ((cast !(cast (cast CleanPath.isRedundantMiddle__cleanPath((cast flighthq._internal._StaticIndex.readArray(kept, (m - 4.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(kept, (m - 3.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(kept, (m - 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(kept, (m - 1.0)) : Float), (cast x : Float), (cast y : Float), (cast toleranceSq : Float)) : Bool) : Bool) : Bool)) { break; }
+      if ((cast !(cast (cast CleanPath.isRedundantMiddle__cleanPath((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast (m - 4.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast (m - 3.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast (m - 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast kept : Array<Float>), (cast (m - 1.0) : Float)) : Float), (cast x : Float), (cast y : Float), (cast toleranceSq : Float)) : Bool) : Bool) : Bool)) { break; }
       _Runtime.setLength(kept, (kept.length - 2.0));
     }
     _Runtime.pushMany(kept, cast ([x, y] : Array<Dynamic>));

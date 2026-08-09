@@ -56,10 +56,10 @@ class BitmapResize {
               if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool)) { dx++; continue; }
               var si:Float = (((sy * sStride) + sx) * 4.0);
               var di:Float = (((oy * dStride) + ox) * 4.0);
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, si));
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 1.0)));
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 2.0)));
-              flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 3.0), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0)));
+              flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast si : Float)) : Float));
+              flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 1.0) : Float)) : Float));
+              flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 2.0) : Float)) : Float));
+              flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float)) : Float));
               dx++;
             }
           }
@@ -106,7 +106,7 @@ class BitmapResize {
                           var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), ry);
                           var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), rx);
                           var si:Float = (((sy * sStride) + sx) * 4.0);
-                          var v:Float = ((cast ((cast premultiplied : Bool) && (cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) : Bool) ? (cast (_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + c)), flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + 3.0))) / 255.0) : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (si + c)) : Dynamic));
+                          var v:Float = ((cast ((cast premultiplied : Bool) && (cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) : Bool) ? (cast ((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + c) : Float)) * flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float))) / 255.0) : Dynamic) : (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + c) : Float)) : Dynamic));
                           (sum = cast ((sum + ((v * wy) * wx)) : Dynamic));
                           n++;
                         }
@@ -114,20 +114,20 @@ class BitmapResize {
                       m++;
                     }
                   }
-                  flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + c), HxMath.max(0.0, HxMath.min(255.0, HxMath.round(sum))));
+                  flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + c) : Float), (cast HxMath.max(0.0, HxMath.min(255.0, HxMath.round(sum))) : Float));
                   c++;
                 }
               }
               if ((cast premultiplied : Bool)) {
-                var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 3.0));
+                var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float));
                 if ((cast ((cast a : Float) > (cast 0.0 : Float)) : Bool)) {
-                  flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, di), 255.0) / a))));
-                  flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 1.0)), 255.0) / a))));
-                  flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 2.0)), 255.0) / a))));
+                  flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast HxMath.min(255.0, HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast di : Float)) * 255.0) / a))) : Float));
+                  flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast HxMath.min(255.0, HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float)) * 255.0) / a))) : Float));
+                  flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast HxMath.min(255.0, HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float)) * 255.0) / a))) : Float));
                 } else {
-                  flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, 0.0);
-                  flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), 0.0);
-                  flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), 0.0);
+                  flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast 0.0 : Float));
+                  flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast 0.0 : Float));
+                  flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast 0.0 : Float));
                 }
               }
               dx++;
@@ -166,32 +166,32 @@ class BitmapResize {
             {
               var c:Float = 0.0;
               while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
-                var v00:Float = ((cast ((cast i00 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i00 + c)) : Dynamic) : (cast 0.0 : Dynamic));
-                var v10:Float = ((cast ((cast i10 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i10 + c)) : Dynamic) : (cast 0.0 : Dynamic));
-                var v01:Float = ((cast ((cast i01 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i01 + c)) : Dynamic) : (cast 0.0 : Dynamic));
-                var v11:Float = ((cast ((cast i11 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i11 + c)) : Dynamic) : (cast 0.0 : Dynamic));
+                var v00:Float = ((cast ((cast i00 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (i00 + c) : Float)) : Dynamic) : (cast 0.0 : Dynamic));
+                var v10:Float = ((cast ((cast i10 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (i10 + c) : Float)) : Dynamic) : (cast 0.0 : Dynamic));
+                var v01:Float = ((cast ((cast i01 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (i01 + c) : Float)) : Dynamic) : (cast 0.0 : Dynamic));
+                var v11:Float = ((cast ((cast i11 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (i11 + c) : Float)) : Dynamic) : (cast 0.0 : Dynamic));
                 if ((cast ((cast premultiplied : Bool) && (cast ((cast c : Float) < (cast 3.0 : Float)) : Bool)) : Bool)) {
-                  (v00 = cast (((cast ((cast i00 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.multiplyNumbers(v00, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i00 + 3.0))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
-                  (v10 = cast (((cast ((cast i10 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.multiplyNumbers(v10, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i10 + 3.0))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
-                  (v01 = cast (((cast ((cast i01 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.multiplyNumbers(v01, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i01 + 3.0))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
-                  (v11 = cast (((cast ((cast i11 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.multiplyNumbers(v11, flighthq._internal._StaticIndex.readUint8ClampedArray(sd, (i11 + 3.0))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+                  (v00 = cast (((cast ((cast i00 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast ((v00 * flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (i00 + 3.0) : Float))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+                  (v10 = cast (((cast ((cast i10 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast ((v10 * flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (i10 + 3.0) : Float))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+                  (v01 = cast (((cast ((cast i01 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast ((v01 * flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (i01 + 3.0) : Float))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+                  (v11 = cast (((cast ((cast i11 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast ((v11 * flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (i11 + 3.0) : Float))) / 255.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
                 }
                 var top:Float = ((v00 * (1.0 - tx)) + (v10 * tx));
                 var bottom:Float = ((v01 * (1.0 - tx)) + (v11 * tx));
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + c), HxMath.round(((top * (1.0 - ty)) + (bottom * ty))));
+                flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + c) : Float), (cast HxMath.round(((top * (1.0 - ty)) + (bottom * ty))) : Float));
                 c++;
               }
             }
             if ((cast premultiplied : Bool)) {
-              var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 3.0));
+              var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float));
               if ((cast ((cast a : Float) > (cast 0.0 : Float)) : Bool)) {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, di), 255.0) / a))));
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 1.0)), 255.0) / a))));
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), HxMath.min(255.0, HxMath.round((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(dd, (di + 2.0)), 255.0) / a))));
+                flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast HxMath.min(255.0, HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast di : Float)) * 255.0) / a))) : Float));
+                flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast HxMath.min(255.0, HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float)) * 255.0) / a))) : Float));
+                flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast HxMath.min(255.0, HxMath.round(((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float)) * 255.0) / a))) : Float));
               } else {
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, di, 0.0);
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 1.0), 0.0);
-                flighthq._internal._StaticIndex.writeUint8ClampedArray(dd, (di + 2.0), 0.0);
+                flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast 0.0 : Float));
+                flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast 0.0 : Float));
+                flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast 0.0 : Float));
               }
             }
             dx++;

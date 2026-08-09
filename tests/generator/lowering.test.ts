@@ -2669,11 +2669,12 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('((cast a : Float) < (cast b : Float))');
     expect(output).not.toContain("_Runtime.compare(a, b, '<')");
     expect(output).toContain("_Runtime.compare(text, 'z', '<')");
-    expect(output).toContain('flighthq._internal._StaticIndex.readFloat32Array(floats, 0.0)');
-    expect(output).toContain('flighthq._internal._StaticIndex.writeArray(values, 1.0, a)');
+    expect(output).toContain('_StaticIndex.readFloat32ArrayTyped((cast floats : flighthq._internal._Float32Array)');
+    expect(output).toContain('_StaticIndex.writeFloatArrayTyped((cast values : Array<Float>)');
     expect(output).toMatch(
-      /\(\{ var __indexedObject\d+:Dynamic = floats; var __indexedKey\d+:Dynamic = 2\.0; flighthq\._internal\._StaticIndex\.writeFloat32Array\(__indexedObject\d+, __indexedKey\d+, _Runtime\.addNumbers\(flighthq\._internal\._StaticIndex\.readFloat32Array\(__indexedObject\d+, __indexedKey\d+\), b\)\); \}\)/u,
+      /\(\{ var __indexedObject\d+:flighthq\._internal\._Float32Array = floats; var __indexedKey\d+:Float = 2\.0; flighthq\._internal\._StaticIndex\.writeFloat32ArrayTyped\(.+_StaticIndex\.readFloat32ArrayTyped\(.+ \+ b\).+\); \}\)/u,
     );
+    expect(output).not.toContain('_Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped');
     expect(output).toContain('_Runtime.getIndex(mixed, 3.0)');
     expect(output).toContain('_Runtime.getIndex(shadowed, 4.0)');
     expect(output).not.toContain('_Runtime.getIndex(floats,');
@@ -2777,18 +2778,18 @@ describe('TypeScript lowering and Haxe emission', () => {
       'Uint8ClampedArray',
     ] as const) {
       expect(emission.indexedReceivers[receiver]).toEqual({ reads: 1, writes: 1 });
-      expect(output).toContain(`_StaticIndex.read${receiver}(`);
-      expect(output).toContain(`_StaticIndex.write${receiver}(`);
+      expect(output).toContain(`_StaticIndex.read${receiver}Typed(`);
+      expect(output).toContain(`_StaticIndex.write${receiver}Typed(`);
     }
-    expect(output).toContain('_StaticIndex.readArray(values, 1.5)');
-    expect(output).toContain('_StaticIndex.readFloat32Array(typed, key)');
-    expect(output).toContain('_StaticIndex.readFloat32Array(readonly, key)');
-    expect(output).toContain('_StaticIndex.readFloat32Array(same, key)');
+    expect(output).toContain('_StaticIndex.readFloatArrayTyped((cast values : Array<Float>)');
+    expect(output).toContain('_StaticIndex.readFloat32ArrayTyped((cast typed : flighthq._internal._Float32Array)');
+    expect(output).toContain('_StaticIndex.readFloat32ArrayTyped((cast readonly : flighthq._internal._Float32Array)');
+    expect(output).toContain('_StaticIndex.readFloat32ArrayTyped((cast same : flighthq._internal._Float32Array)');
     expect(output).toContain('_Runtime.getIndex(structural, key)');
     expect(output).toContain('_Runtime.getIndex(mixed, key)');
     expect(output).toContain('_Runtime.getIndex((cast value : flighthq._internal._Any), key)');
     expect(output).toMatch(
-      /\(\{ var (__indexedObject\d+):Dynamic = .*receiver.*; var (__indexedKey\d+):Dynamic = .*key.*; flighthq\._internal\._StaticIndex\.writeArray\(\1, \2, _Runtime\.addNumbers\(flighthq\._internal\._StaticIndex\.readArray\(\1, \2\), .*value.*\)\); \}\)/u,
+      /\(\{ var (__indexedObject\d+):Array<Float> = .*receiver.*; var (__indexedKey\d+):Float = .*key.*; flighthq\._internal\._StaticIndex\.writeFloatArrayTyped\(.+_StaticIndex\.readFloatArrayTyped\(.+ \+ .*value.*\).+\); \}\)/u,
     );
   });
 

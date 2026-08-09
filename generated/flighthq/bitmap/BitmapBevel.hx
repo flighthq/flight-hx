@@ -40,10 +40,10 @@ class BitmapBevel {
           var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Float = (((py * w) + px) * 4.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, di, 0.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, (di + 1.0), 0.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, (di + 2.0), 0.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(scratch, (di + 3.0), (cast BitmapBevel.readSourceAlpha__bitmapBevel((cast source), (cast px : Float), (cast py : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast 0.0 : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast 0.0 : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast 0.0 : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast BitmapBevel.readSourceAlpha__bitmapBevel((cast source), (cast px : Float), (cast py : Float)) : Float) : Float));
             px++;
           }
         }
@@ -65,10 +65,10 @@ class BitmapBevel {
             var colorAlpha:Float = ((_Runtime.toInt32(color) & 255) / 255.0);
             var clip:Float = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast ((cast BitmapBevel.readSourceAlpha__bitmapBevel((cast source), (cast px : Float), (cast py : Float)) : Float) / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - ((cast BitmapBevel.readSourceAlpha__bitmapBevel((cast source), (cast px : Float), (cast py : Float)) : Float) / 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
             var edgeIntensity:Float = HxMath.min(1.0, _Runtime.multiplyNumbers(HxMath.abs(gradient), intensity));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, di, (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 1.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 2.0), (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255));
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (di + 3.0), HxMath.round((((edgeIntensity * colorAlpha) * clip) * 255.0)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast HxMath.round((((edgeIntensity * colorAlpha) * clip) * 255.0)) : Float));
             px++;
           }
         }
@@ -115,13 +115,13 @@ class BitmapBevel {
     sx = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
     sy = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
     if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast flighthq._internal._StaticIndex.readUint8ClampedArray((cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data, ((((sy * (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width) + sx) * 4.0) + 3.0));
+    return cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data : flighthq._internal._UInt8ClampedArray), (cast ((((sy * (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width) + sx) * 4.0) + 3.0) : Float));
     return cast null;
   }
 
   public static function sampleField__bitmapBevel(field:flighthq._internal._UInt8ClampedArray, w:Float, h:Float, x:Float, y:Float):Float {
     if ((cast ((cast ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast w : Float)) : Bool)) : Bool) || (cast ((cast y : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast y : Float) >= (cast h : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast _Runtime.divideNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(field, ((((y * w) + x) * 4.0) + 3.0)), 255.0);
+    return cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast field : flighthq._internal._UInt8ClampedArray), (cast ((((y * w) + x) * 4.0) + 3.0) : Float)) / 255.0);
     return cast null;
   }
 }

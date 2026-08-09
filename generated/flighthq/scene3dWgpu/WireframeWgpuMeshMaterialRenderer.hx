@@ -72,7 +72,7 @@ class WireframeWgpuMeshMaterialRenderer {
     upload = (cast ensureWgpuWireframeUpload((cast state), (cast geometry)) : Null<WgpuWireframeUpload>);
     if ((cast _Runtime.strictEquals(upload, null) : Bool)) { return; }
     drawBindGroup = (cast writeWgpuDrawUniform((cast state), (cast proxy)) : flighthq._internal.dom.GPUBindGroup);
-    flighthq._internal._StaticIndex.writeUint32Array(WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer, 0.0, (cast scene : WgpuScene3DRuntime).pendingDrawOffset);
+    flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast (cast scene : WgpuScene3DRuntime).pendingDrawOffset : Float));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, drawBindGroup, WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast upload : WgpuWireframeUpload).vertexBuffer);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer((cast upload : WgpuWireframeUpload).lineIndexBuffer, (cast upload : WgpuWireframeUpload).indexFormat);

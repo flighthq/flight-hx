@@ -1,7 +1,13 @@
 // Maintained runtime support for generated Flight Haxe.
 package flighthq._internal;
 
+#if js
 abstract _Int16Array(Dynamic) {
+#elseif lime
+abstract _Int16Array(_LimeTypedArray) {
+#else
+abstract _Int16Array(Array<Int>) {
+#end
   public var length(get, never):Int;
 
   public function new(source:Dynamic = 0) {
@@ -21,15 +27,17 @@ abstract _Int16Array(Dynamic) {
 
   @:arrayAccess public inline function arrayRead(index:Int):Int {
     #if (lime && !js)
-    return (cast this : _LimeTypedArray).get(index);
+    final values:lime.utils.Int16Array = cast this.nativeView;
+    return values[index];
     #else
     return this[index];
     #end
   }
 
-  @:arrayAccess public inline function arrayWrite(index:Int, value:Dynamic):Int {
+  @:arrayAccess public inline function arrayWrite(index:Int, value:Float):Int {
     #if (lime && !js)
-    return (cast this : _LimeTypedArray).setValue(index, toInt16(value));
+    final values:lime.utils.Int16Array = cast this.nativeView;
+    return values[index] = toInt16(value);
     #else
     return this[index] = toInt16(value);
     #end
@@ -77,7 +85,7 @@ abstract _Int16Array(Dynamic) {
     #end
   }
 
-  private static inline function toInt16(value:Dynamic):Int {
+  private static inline function toInt16(value:Float):Int {
     final wrapped = _Runtime.toInt32(value) & 0xffff;
     return wrapped >= 0x8000 ? wrapped - 0x10000 : wrapped;
   }

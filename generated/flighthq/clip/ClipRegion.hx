@@ -151,7 +151,7 @@ class ClipRegion {
         {
           var j:Float = 0.0;
           while ((cast ((cast j : Float) < (cast _Runtime.field(ai, 'length') : Float)) : Bool)) {
-            if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(ai, j), flighthq._internal._StaticIndex.readArray(bi, j)) : Bool)) { return cast false; }
+            if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast ai : Array<Float>), (cast j : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast bi : Array<Float>), (cast j : Float))) : Bool)) { return cast false; }
             j++;
           }
         }
@@ -280,8 +280,8 @@ class ClipRegion {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
-          var cx:Float = flighthq._internal._StaticIndex.readArray(c, i);
-          var cy:Float = flighthq._internal._StaticIndex.readArray(c, (i + 1.0));
+          var cx:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast c : Array<Float>), (cast i : Float));
+          var cy:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast c : Array<Float>), (cast (i + 1.0) : Float));
           if ((cast ((cast cx : Float) < (cast minX : Float)) : Bool)) { (minX = cast (cx : Dynamic)); }
           if ((cast ((cast cx : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (cx : Dynamic)); }
           if ((cast ((cast cy : Float) < (cast minY : Float)) : Bool)) { (minY = cast (cy : Dynamic)); }
@@ -293,8 +293,8 @@ class ClipRegion {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
-          var cx:Float = flighthq._internal._StaticIndex.readArray(c, i);
-          var cy:Float = flighthq._internal._StaticIndex.readArray(c, (i + 1.0));
+          var cx:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast c : Array<Float>), (cast i : Float));
+          var cy:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast c : Array<Float>), (cast (i + 1.0) : Float));
           if ((cast !(cast _Runtime.orValue(((cast HxMath.abs((cx - minX)) : Float) <= (cast e : Float)), function():Dynamic return cast ((cast HxMath.abs((cx - maxX)) : Float) <= (cast e : Float))) : Bool) : Bool)) {
             (isAxisAligned = cast (false : Dynamic));
             break;
@@ -395,10 +395,10 @@ class ClipRegion {
           {
             var i:Float = 0.0;
             while ((cast ((cast i : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool)) {
-              var ox:Float = flighthq._internal._StaticIndex.readArray(src, i);
-              var oy:Float = flighthq._internal._StaticIndex.readArray(src, (i + 1.0));
-              flighthq._internal._StaticIndex.writeArray(dst, i, (((ma * ox) + (mc * oy)) + mtx));
-              flighthq._internal._StaticIndex.writeArray(dst, (i + 1.0), (((mb * ox) + (md * oy)) + mty));
+              var ox:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast src : Array<Float>), (cast i : Float));
+              var oy:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast src : Array<Float>), (cast (i + 1.0) : Float));
+              flighthq._internal._StaticIndex.writeFloatArrayTyped((cast dst : Array<Float>), (cast i : Float), (cast (((ma * ox) + (mc * oy)) + mtx) : Float));
+              flighthq._internal._StaticIndex.writeFloatArrayTyped((cast dst : Array<Float>), (cast (i + 1.0) : Float), (cast (((mb * ox) + (md * oy)) + mty) : Float));
               (i = cast ((i + 2.0) : Dynamic));
             }
           }
@@ -467,10 +467,10 @@ class ClipRegion {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
-            var x0:Float = flighthq._internal._StaticIndex.readArray(contour, i);
-            var y0:Float = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
-            var x1:Float = flighthq._internal._StaticIndex.readArray(contour, _Runtime.fmod((i + 2.0), n));
-            var y1:Float = flighthq._internal._StaticIndex.readArray(contour, _Runtime.fmod((i + 3.0), n));
+            var x0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast i : Float));
+            var y0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i + 1.0) : Float));
+            var x1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast _Runtime.fmod((i + 2.0), n) : Float));
+            var y1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast _Runtime.fmod((i + 3.0), n) : Float));
             if ((cast ((cast y0 : Float) <= (cast py : Float)) : Bool)) {
               if ((cast ((cast y1 : Float) > (cast py : Float)) : Bool)) {
                 if ((cast ((cast (((x1 - x0) * (py - y0)) - ((px - x0) * (y1 - y0))) : Float) > (cast 0.0 : Float)) : Bool)) {
@@ -569,8 +569,8 @@ class ClipRegion {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-            var x:Float = flighthq._internal._StaticIndex.readArray(contour, i);
-            var y:Float = flighthq._internal._StaticIndex.readArray(contour, (i + 1.0));
+            var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast i : Float));
+            var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i + 1.0) : Float));
             if ((cast ((cast x : Float) < (cast minX : Float)) : Bool)) { (minX = cast (x : Dynamic)); }
             if ((cast ((cast x : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (x : Dynamic)); }
             if ((cast ((cast y : Float) < (cast minY : Float)) : Bool)) { (minY = cast (y : Dynamic)); }

@@ -80,15 +80,15 @@ class GlShader {
     var ih:Float = cast _Runtime.UNDEFINED;
     iw = (2.0 / (cast viewport : { var width:Float; var height:Float; }).width);
     ih = (2.0 / (cast viewport : { var width:Float; var height:Float; }).height);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, ((cast t : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).a * iw));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (-(cast t : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).b * ih));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, ((cast t : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).c * iw));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, (-(cast t : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).d * ih));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, (((cast t : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).tx * iw) - 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, ((-(cast t : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).ty * ih) + 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast ((cast t : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).a * iw) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (-(cast t : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).b * ih) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast ((cast t : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).c * iw) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast (-(cast t : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).d * ih) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast (((cast t : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).tx * iw) - 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast ((-(cast t : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).ty * ih) + 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast 1.0 : Float));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, (cast loc : GlShaderLocations).locMatrix, false, m);
   }
 
@@ -98,15 +98,15 @@ class GlShader {
     var ih:Float = cast _Runtime.UNDEFINED;
     iw = (2.0 / (cast viewport : { var width:Float; var height:Float; }).width);
     ih = (2.0 / (cast viewport : { var width:Float; var height:Float; }).height);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, (a * iw));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, (-b * ih));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, (c * iw));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, (-d * ih));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, ((tx * iw) - 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, ((-ty * ih) + 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (a * iw) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (-b * ih) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast (c * iw) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast (-d * ih) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast ((tx * iw) - 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast ((-ty * ih) + 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast 1.0 : Float));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, (cast loc : GlShaderLocations).locMatrix, false, m);
   }
 }

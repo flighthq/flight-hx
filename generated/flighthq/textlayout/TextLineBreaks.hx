@@ -15,8 +15,8 @@ class TextLineBreaks {
     result = -1.0;
     while ((cast ((cast lo : Float) <= (cast hi : Float)) : Bool)) {
       var mid:Float = _Runtime.unsignedShiftRight(_Runtime.toInt32((lo + hi)), 1);
-      if ((cast ((cast flighthq._internal._StaticIndex.readArray(lineBreaks, mid) : Float) >= (cast startIndex : Float)) : Bool)) {
-        (result = cast (flighthq._internal._StaticIndex.readArray(lineBreaks, mid) : Dynamic));
+      if ((cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast lineBreaks : Array<Float>), (cast mid : Float)) : Float) >= (cast startIndex : Float)) : Bool)) {
+        (result = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast lineBreaks : Array<Float>), (cast mid : Float)) : Dynamic));
         (hi = cast ((mid - 1.0) : Dynamic));
       } else {
         (lo = cast ((mid + 1.0) : Dynamic));

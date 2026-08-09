@@ -94,10 +94,10 @@ class GlyphOutlineSource {
             }
             if ((cast _Runtime.strictEquals(covered, 0.0) : Bool)) { pixelX++; continue; }
             var offset:Float = (((pixelY * width) + pixelX) * 4.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(pixels, offset, 255.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(pixels, (offset + 1.0), 255.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(pixels, (offset + 2.0), 255.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArray(pixels, (offset + 3.0), HxMath.round(((covered * 255.0) / GlyphOutlineSource.RASTER_SAMPLE_COUNT__glyphOutlineSource)));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast pixels : flighthq._internal._UInt8ClampedArray), (cast offset : Float), (cast 255.0 : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast pixels : flighthq._internal._UInt8ClampedArray), (cast (offset + 1.0) : Float), (cast 255.0 : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast pixels : flighthq._internal._UInt8ClampedArray), (cast (offset + 2.0) : Float), (cast 255.0 : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast pixels : flighthq._internal._UInt8ClampedArray), (cast (offset + 3.0) : Float), (cast HxMath.round(((covered * 255.0) / GlyphOutlineSource.RASTER_SAMPLE_COUNT__glyphOutlineSource)) : Float));
             pixelX++;
           }
         }
@@ -114,13 +114,13 @@ class GlyphOutlineSource {
     for (contour in _Runtime.iterable(contours)) {
       var pointCount:Float = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(contour, 'length'), 2.0)) | 0);
       if ((cast ((cast pointCount : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-      var fromX:Float = flighthq._internal._StaticIndex.readArray(contour, ((pointCount - 1.0) * 2.0));
-      var fromY:Float = flighthq._internal._StaticIndex.readArray(contour, (((pointCount - 1.0) * 2.0) + 1.0));
+      var fromX:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((pointCount - 1.0) * 2.0) : Float));
+      var fromY:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (((pointCount - 1.0) * 2.0) + 1.0) : Float));
       {
         var pointIndex:Float = 0.0;
         while ((cast ((cast pointIndex : Float) < (cast pointCount : Float)) : Bool)) {
-          var toX:Float = flighthq._internal._StaticIndex.readArray(contour, (pointIndex * 2.0));
-          var toY:Float = flighthq._internal._StaticIndex.readArray(contour, ((pointIndex * 2.0) + 1.0));
+          var toX:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (pointIndex * 2.0) : Float));
+          var toY:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((pointIndex * 2.0) + 1.0) : Float));
           if ((cast ((cast _Runtime.andValue(((cast fromY : Float) <= (cast y : Float)), function():Dynamic return cast ((cast toY : Float) > (cast y : Float))) : Bool) || (cast _Runtime.andValue(((cast toY : Float) <= (cast y : Float)), function():Dynamic return cast ((cast fromY : Float) > (cast y : Float))) : Bool)) : Bool)) {
             var crossingX:Float = (fromX + (((y - fromY) * (toX - fromX)) / (toY - fromY)));
             if ((cast ((cast x : Float) < (cast crossingX : Float)) : Bool)) { (crossings = cast ((crossings + ((cast ((cast toY : Float) > (cast fromY : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic))) : Dynamic)); }

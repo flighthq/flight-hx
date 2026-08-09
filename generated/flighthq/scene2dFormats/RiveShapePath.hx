@@ -68,7 +68,7 @@ class RiveShapePath {
 
   public static function appendRiveCorner__riveShapePath(path:Path, vertex:RiveVertexPoint__riveShapePath):Void {
     if ((cast _Runtime.strictEquals(_Runtime.field(vertex, 'corner'), null) : Bool)) { return; }
-    appendPathCubicCurveTo((cast path), (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(vertex, 'corner'), 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(vertex, 'corner'), 1.0) : Float), (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(vertex, 'corner'), 2.0) : Float), (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(vertex, 'corner'), 3.0) : Float), (cast _Runtime.field(vertex, 'exitX') : Float), (cast _Runtime.field(vertex, 'exitY') : Float));
+    appendPathCubicCurveTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(vertex, 'corner') : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(vertex, 'corner') : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(vertex, 'corner') : Array<Float>), (cast 2.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(vertex, 'corner') : Array<Float>), (cast 3.0 : Float)) : Float), (cast _Runtime.field(vertex, 'exitX') : Float), (cast _Runtime.field(vertex, 'exitY') : Float));
   }
 
   public static function applyRiveCornerRounding__riveShapePath(vertices:Array<RiveVertexPoint__riveShapePath>, closed:Bool):Void {
@@ -151,9 +151,9 @@ class RiveShapePath {
     linked = (cast RiveShapePath.readRiveFlag__riveShapePath((cast source), (cast RiveShapePath.RIVE_LINK_CORNER_RADIUS__riveShapePath : Float), (cast true : Bool)) : Bool);
     topLeft = (cast RiveShapePath.readRiveDouble__riveShapePath((cast source), (cast RiveShapePath.RIVE_CORNER_RADIUS_TL__riveShapePath : Float), (cast 0.0 : Float)) : Float);
     radii = ((cast linked : Bool) ? (cast cast ([topLeft, topLeft, topLeft, topLeft] : Array<Dynamic>) : Dynamic) : (cast cast ([topLeft, (cast RiveShapePath.readRiveDouble__riveShapePath((cast source), (cast RiveShapePath.RIVE_CORNER_RADIUS_TR__riveShapePath : Float), (cast 0.0 : Float)) : Float), (cast RiveShapePath.readRiveDouble__riveShapePath((cast source), (cast RiveShapePath.RIVE_CORNER_RADIUS_BL__riveShapePath : Float), (cast 0.0 : Float)) : Float), (cast RiveShapePath.readRiveDouble__riveShapePath((cast source), (cast RiveShapePath.RIVE_CORNER_RADIUS_BR__riveShapePath : Float), (cast 0.0 : Float)) : Float)] : Array<Dynamic>) : Dynamic));
-    uniform = _Runtime.callProperty(radii, 'every', cast ([function(radius:Float, __unused0:Float, __unused1:Array<Float>):Bool return _Runtime.strictEquals(radius, flighthq._internal._StaticIndex.readArray(radii, 0.0))] : Array<Dynamic>));
-    if ((cast ((cast uniform : Bool) && (cast ((cast flighthq._internal._StaticIndex.readArray(radii, 0.0) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      appendPathRoundRectangle((cast path), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float), (cast flighthq._internal._StaticIndex.readArray(radii, 0.0)));
+    uniform = _Runtime.callProperty(radii, 'every', cast ([function(radius:Float, __unused0:Float, __unused1:Array<Float>):Bool return _Runtime.strictEquals(radius, flighthq._internal._StaticIndex.readFloatArrayTyped((cast radii : Array<Float>), (cast 0.0 : Float)))] : Array<Dynamic>));
+    if ((cast ((cast uniform : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast radii : Array<Float>), (cast 0.0 : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      appendPathRoundRectangle((cast path), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast radii : Array<Float>), (cast 0.0 : Float))));
       return;
     }
     if ((cast uniform : Bool)) {
@@ -229,7 +229,7 @@ class RiveShapePath {
     {
       var index:Float = (pathIndex + 1.0);
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index), pathIndex) : Bool)) { index++; continue; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), pathIndex) : Bool)) { index++; continue; }
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveShapePath.RIVE_PATH_VERTEX__riveShapePath : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
         _Runtime.callProperty(points, 'push', cast ([(cast RiveShapePath.createRiveVertexPoint__riveShapePath((cast object)) : RiveVertexPoint__riveShapePath)] : Array<Dynamic>));

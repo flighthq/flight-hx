@@ -21,7 +21,7 @@ class CopyPath {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'commands'), 'length') : Float)) : Bool)) {
-          _Runtime.callProperty((cast out : Path).commands, 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'commands'), i)] : Array<Dynamic>));
+          _Runtime.callProperty((cast out : Path).commands, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(source, 'commands') : Array<Float>), (cast i : Float))] : Array<Dynamic>));
           i++;
         }
       }
@@ -29,7 +29,7 @@ class CopyPath {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(source, 'data'), 'length') : Float)) : Bool)) {
-          _Runtime.callProperty((cast out : Path).data, 'push', cast ([flighthq._internal._StaticIndex.readArray(_Runtime.field(source, 'data'), i)] : Array<Dynamic>));
+          _Runtime.callProperty((cast out : Path).data, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(source, 'data') : Array<Float>), (cast i : Float))] : Array<Dynamic>));
           i++;
         }
       }

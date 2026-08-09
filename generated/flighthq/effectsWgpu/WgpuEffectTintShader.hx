@@ -40,11 +40,11 @@ class WgpuEffectTintShader {
     b = flighthq._internal._StaticIndex.readArray(__destructure4, 2.0);
     pipeline = (cast WgpuEffectTintShader.getWgpuInvertTintShader__wgpuEffectTintShader((cast state)) : WgpuEffectPipeline);
     drawWgpuEffectPass((cast state), (cast source), (cast dest), (cast pipeline), (cast function(__unused6:flighthq._internal._Float32Array, __unused7:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, r);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, g);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, b);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, alpha);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, strength);
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast r : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast g : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast b : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast alpha : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast strength : Float));
     }, cast ([__unused6] : Array<Dynamic>)); }));
   }
 
@@ -61,11 +61,11 @@ class WgpuEffectTintShader {
     b = flighthq._internal._StaticIndex.readArray(__destructure8, 2.0);
     pipeline = (cast WgpuEffectTintShader.getWgpuTintShader__wgpuEffectTintShader((cast state)) : WgpuEffectPipeline);
     drawWgpuEffectPass((cast state), (cast source), (cast dest), (cast pipeline), (cast function(__unused10:flighthq._internal._Float32Array, __unused11:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused9:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, r);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, g);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, b);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, alpha);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, strength);
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast r : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast g : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast b : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast alpha : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast strength : Float));
     }, cast ([__unused10] : Array<Dynamic>)); }));
   }
 

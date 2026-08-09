@@ -197,7 +197,7 @@ class WgpuRenderTarget {
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
-    packed = flighthq._internal._StaticIndex.readArray(_Runtime.field(target, 'clearColors'), 0.0);
+    packed = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(target, 'clearColors') : Array<Float>), (cast 0.0 : Float));
     if ((cast _Runtime.strictEquals(packed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { r: 0.0, g: 0.0, b: 0.0, a: 0.0 }; }
     r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0);
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0);

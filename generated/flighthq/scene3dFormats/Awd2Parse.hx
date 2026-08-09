@@ -238,7 +238,7 @@ class Awd2Parse {
       reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'awd2.header-too-short' : String), (cast 'parseAwd2' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
       return cast (cast Awd2Parse.emptyAwdDocument__awd2Parse() : Scene3DDocument);
     }
-    if ((cast ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(input, 0.0), AWD2_MAGIC_0) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(input, 1.0), AWD2_MAGIC_1) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(input, 2.0), AWD2_MAGIC_2) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast input : flighthq._internal._UInt8Array), (cast 0.0 : Float)), AWD2_MAGIC_0) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast input : flighthq._internal._UInt8Array), (cast 1.0 : Float)), AWD2_MAGIC_1) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast input : flighthq._internal._UInt8Array), (cast 2.0 : Float)), AWD2_MAGIC_2) : Bool)) : Bool)) {
       reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'awd2.bad-magic' : String), (cast 'parseAwd2' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
       return cast (cast Awd2Parse.emptyAwdDocument__awd2Parse() : Scene3DDocument);
     }
@@ -262,9 +262,9 @@ class Awd2Parse {
     offset = AWD2_HEADER_BYTES;
     while ((cast ((cast (offset + AWD2_BLOCK_HEADER_BYTES) : Float) <= (cast bodyEnd : Float)) : Bool)) {
       var blockId:Float = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
-      var namespace:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 4.0));
-      var blockType:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 5.0));
-      var blockFlags:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 6.0));
+      var namespace:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast (offset + 4.0) : Float));
+      var blockType:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast (offset + 5.0) : Float));
+      var blockFlags:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast (offset + 6.0) : Float));
       var blockLength:Float = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 7.0), true] : Array<Dynamic>));
       var blockDataStart:Float = (offset + AWD2_BLOCK_HEADER_BYTES);
       if ((cast ((cast (blockDataStart + blockLength) : Float) > (cast bodyEnd : Float)) : Bool)) {
@@ -336,7 +336,7 @@ class Awd2Parse {
     materialForSubset = (cast function(meshInst:ParsedMeshInstance__awd2Parse, subsetIndex:Float):Array<Float> {
       var materialId:Float = cast _Runtime.UNDEFINED;
       var index:Float = cast _Runtime.UNDEFINED;
-      materialId = ((cast ((cast subsetIndex : Float) < (cast _Runtime.field((cast meshInst : ParsedMeshInstance__awd2Parse).materialIds, 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray((cast meshInst : ParsedMeshInstance__awd2Parse).materialIds, subsetIndex) : Dynamic) : (cast 0.0 : Dynamic));
+      materialId = ((cast ((cast subsetIndex : Float) < (cast _Runtime.field((cast meshInst : ParsedMeshInstance__awd2Parse).materialIds, 'length') : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast meshInst : ParsedMeshInstance__awd2Parse).materialIds : Array<Float>), (cast subsetIndex : Float)) : Dynamic) : (cast 0.0 : Dynamic));
       index = (cast Awd2Parse.resolveAwdMaterial__awd2Parse((cast materialId : Float), (cast materialBlocks), (cast textureBlocks), (cast resolvedMaterials), (cast document), (cast diagnostics)) : Float);
       return cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) ? (cast cast ([index] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
       return cast _Runtime.UNDEFINED;
@@ -454,7 +454,7 @@ class Awd2Parse {
       reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'awd2.header-too-short' : String), (cast 'parseAwd2SkeletonAnimations' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
       return cast {  };
     }
-    if ((cast ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(input, 0.0), AWD2_MAGIC_0) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(input, 1.0), AWD2_MAGIC_1) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(input, 2.0), AWD2_MAGIC_2) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast input : flighthq._internal._UInt8Array), (cast 0.0 : Float)), AWD2_MAGIC_0) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast input : flighthq._internal._UInt8Array), (cast 1.0 : Float)), AWD2_MAGIC_1) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast input : flighthq._internal._UInt8Array), (cast 2.0 : Float)), AWD2_MAGIC_2) : Bool)) : Bool)) {
       reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'awd2.bad-magic' : String), (cast 'parseAwd2SkeletonAnimations' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
       return cast {  };
     }
@@ -471,9 +471,9 @@ class Awd2Parse {
     offset = AWD2_HEADER_BYTES;
     while ((cast ((cast (offset + AWD2_BLOCK_HEADER_BYTES) : Float) <= (cast bodyEnd : Float)) : Bool)) {
       var blockId:Float = _Runtime.callProperty(view, 'getUint32', cast ([offset, true] : Array<Dynamic>));
-      var namespace:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 4.0));
-      var blockType:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 5.0));
-      var blockFlags:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 6.0));
+      var namespace:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast (offset + 4.0) : Float));
+      var blockType:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast (offset + 5.0) : Float));
+      var blockFlags:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast (offset + 6.0) : Float));
       var blockLength:Float = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 7.0), true] : Array<Dynamic>));
       var blockDataStart:Float = (offset + AWD2_BLOCK_HEADER_BYTES);
       if ((cast ((cast (blockDataStart + blockLength) : Float) > (cast bodyEnd : Float)) : Bool)) {
@@ -565,7 +565,7 @@ class Awd2Parse {
               _Runtime.pushMany(scaleValues, cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
             } else { if ((cast ((cast ((cast j : Float) < (cast _Runtime.field((cast pose : ParsedSkeletonPose__awd2Parse).jointTransforms, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray((cast pose : ParsedSkeletonPose__awd2Parse).jointTransforms, j), null) : Bool)) : Bool)) {
               var transform:flighthq._internal._Float64Array = flighthq._internal._StaticIndex.readArray((cast pose : ParsedSkeletonPose__awd2Parse).jointTransforms, j);
-              _Runtime.pushMany(translationValues, cast ([flighthq._internal._StaticIndex.readFloat64Array(transform, 9.0), flighthq._internal._StaticIndex.readFloat64Array(transform, 10.0), flighthq._internal._StaticIndex.readFloat64Array(transform, 11.0)] : Array<Dynamic>));
+              _Runtime.pushMany(translationValues, cast ([flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 9.0 : Float)), flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 10.0 : Float)), flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 11.0 : Float))] : Array<Dynamic>));
               Awd2Parse.awdTransformToMatrix4__awd2Parse((cast poseMatrix), (cast transform));
               decomposeMatrix4ToTransform3D((cast poseTransform), (cast poseMatrix));
               _Runtime.pushMany(rotationValues, cast ([(cast (cast poseTransform : Transform3D).rotation : { var x:Float; }).x, (cast (cast poseTransform : Transform3D).rotation : { var y:Float; }).y, (cast (cast poseTransform : Transform3D).rotation : { var z:Float; }).z, (cast (cast poseTransform : Transform3D).rotation : { var w:Float; }).w] : Array<Dynamic>));
@@ -619,9 +619,9 @@ class Awd2Parse {
     animationBlocks = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     offset = AWD2_HEADER_BYTES;
     while ((cast ((cast (offset + AWD2_BLOCK_HEADER_BYTES) : Float) <= (cast bodyEnd : Float)) : Bool)) {
-      var namespace:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 4.0));
-      var blockType:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 5.0));
-      var blockFlags:Float = flighthq._internal._StaticIndex.readUint8Array(source, (offset + 6.0));
+      var namespace:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast (offset + 4.0) : Float));
+      var blockType:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast (offset + 5.0) : Float));
+      var blockFlags:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast (offset + 6.0) : Float));
       var blockLength:Float = _Runtime.callProperty(view, 'getUint32', cast ([(offset + 7.0), true] : Array<Dynamic>));
       var blockDataStart:Float = (offset + AWD2_BLOCK_HEADER_BYTES);
       if ((cast ((cast (blockDataStart + blockLength) : Float) > (cast bodyEnd : Float)) : Bool)) { break; }
@@ -705,7 +705,7 @@ class Awd2Parse {
               _Runtime.pushMany(scaleValues, cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
             } else { if ((cast ((cast ((cast j : Float) < (cast _Runtime.field((cast pose : ParsedSkeletonPose__awd2Parse).jointTransforms, 'length') : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray((cast pose : ParsedSkeletonPose__awd2Parse).jointTransforms, j), null) : Bool)) : Bool)) {
               var transform:flighthq._internal._Float64Array = flighthq._internal._StaticIndex.readArray((cast pose : ParsedSkeletonPose__awd2Parse).jointTransforms, j);
-              _Runtime.pushMany(translationValues, cast ([flighthq._internal._StaticIndex.readFloat64Array(transform, 9.0), flighthq._internal._StaticIndex.readFloat64Array(transform, 10.0), flighthq._internal._StaticIndex.readFloat64Array(transform, 11.0)] : Array<Dynamic>));
+              _Runtime.pushMany(translationValues, cast ([flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 9.0 : Float)), flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 10.0 : Float)), flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 11.0 : Float))] : Array<Dynamic>));
               Awd2Parse.awdTransformToMatrix4__awd2Parse((cast poseMatrix), (cast transform));
               decomposeMatrix4ToTransform3D((cast poseTransform), (cast poseMatrix));
               _Runtime.pushMany(rotationValues, cast ([(cast (cast poseTransform : Transform3D).rotation : { var x:Float; }).x, (cast (cast poseTransform : Transform3D).rotation : { var y:Float; }).y, (cast (cast poseTransform : Transform3D).rotation : { var z:Float; }).z, (cast (cast poseTransform : Transform3D).rotation : { var w:Float; }).w] : Array<Dynamic>));
@@ -720,12 +720,12 @@ class Awd2Parse {
           }
         }
         var translationTrack:AnimationTrack = (cast createAnimationTrack((cast { components: 3.0, times: times, values: translationValues })) : AnimationTrack);
-        _Runtime.callProperty(channels, 'push', cast ([{ node: flighthq._internal._StaticIndex.readArray(jointNodeIndices, j), path: Scene3DAnimationPathTranslation, track: translationTrack }] : Array<Dynamic>));
+        _Runtime.callProperty(channels, 'push', cast ([{ node: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float)), path: Scene3DAnimationPathTranslation, track: translationTrack }] : Array<Dynamic>));
         var rotationTrack:AnimationTrack = (cast createAnimationTrack((cast { components: 4.0, quaternion: true, times: times, values: rotationValues })) : AnimationTrack);
-        _Runtime.callProperty(channels, 'push', cast ([{ node: flighthq._internal._StaticIndex.readArray(jointNodeIndices, j), path: Scene3DAnimationPathRotation, track: rotationTrack }] : Array<Dynamic>));
+        _Runtime.callProperty(channels, 'push', cast ([{ node: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float)), path: Scene3DAnimationPathRotation, track: rotationTrack }] : Array<Dynamic>));
         if ((cast hasScale : Bool)) {
           var scaleTrack:AnimationTrack = (cast createAnimationTrack((cast { components: 3.0, times: times, values: scaleValues })) : AnimationTrack);
-          _Runtime.callProperty(channels, 'push', cast ([{ node: flighthq._internal._StaticIndex.readArray(jointNodeIndices, j), path: Scene3DAnimationPathScale, track: scaleTrack }] : Array<Dynamic>));
+          _Runtime.callProperty(channels, 'push', cast ([{ node: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float)), path: Scene3DAnimationPathScale, track: scaleTrack }] : Array<Dynamic>));
         }
         j++;
       }
@@ -739,7 +739,7 @@ class Awd2Parse {
 
   public static function isAwd2Version__awd2Parse(input:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Bool {
     var versionMajor:Float = cast _Runtime.UNDEFINED;
-    versionMajor = flighthq._internal._StaticIndex.readUint8Array(input, AWD2_VERSION_MAJOR_OFFSET);
+    versionMajor = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast input : flighthq._internal._UInt8Array), (cast AWD2_VERSION_MAJOR_OFFSET : Float));
     if ((cast _Runtime.strictEquals(versionMajor, AWD2_FORMAT_VERSION) : Bool)) { return cast true; }
     reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'awd2.unsupported-version' : String), (cast 'isAwd2Version' : String), (cast { version: versionMajor }));
     return cast false;
@@ -777,9 +777,9 @@ class Awd2Parse {
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
         var parentIndex1:Float = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedSkeleton, 'joints'), j) : ParsedJoint__awd2Parse).parentIndex;
         if ((cast ((cast ((cast parentIndex1 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast (parentIndex1 - 1.0) : Float) < (cast jointCount : Float)) : Bool)) : Bool)) {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, flighthq._internal._StaticIndex.readArray(jointNodeIndices, (parentIndex1 - 1.0))) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readArray(jointNodeIndices, j)] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast (parentIndex1 - 1.0) : Float))) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
         } else {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, skeletonRootIndex) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readArray(jointNodeIndices, j)] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, skeletonRootIndex) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
         }
         j++;
       }
@@ -810,7 +810,7 @@ class Awd2Parse {
         } else {
           copyMatrix4((cast local), (cast flighthq._internal._StaticIndex.readArray(bindWorld, j)));
         }
-        decomposeMatrix4ToTransform3D((cast (cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, flighthq._internal._StaticIndex.readArray(jointNodeIndices, j)) : Scene3DDocumentNode).transform), (cast local));
+        decomposeMatrix4ToTransform3D((cast (cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))) : Scene3DDocumentNode).transform), (cast local));
         j++;
       }
     }
@@ -840,7 +840,7 @@ class Awd2Parse {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 12.0 : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat64Array(transform, i, ((cast widePrecision : Bool) ? (cast _Runtime.callProperty(dv, 'getFloat64', cast ([(offset + (i * floatSize)), true] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callProperty(dv, 'getFloat32', cast ([(offset + (i * floatSize)), true] : Array<Dynamic>)) : Dynamic)));
+        flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast i : Float), (cast ((cast widePrecision : Bool) ? (cast _Runtime.callProperty(dv, 'getFloat64', cast ([(offset + (i * floatSize)), true] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callProperty(dv, 'getFloat32', cast ([(offset + (i * floatSize)), true] : Array<Dynamic>)) : Dynamic)) : Float));
         i++;
       }
     }
@@ -863,22 +863,22 @@ class Awd2Parse {
   public static function awdTransformToMatrix4__awd2Parse(out:Matrix4, transform:flighthq._internal._Float64Array):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = out.m;
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 0.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 1.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 2.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 2.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 3.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 4.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 3.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 5.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 4.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 6.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 5.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 7.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 8.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 6.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 9.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 7.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 10.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 8.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 11.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 12.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 9.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 13.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 10.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 14.0, flighthq._internal._StaticIndex.readFloat64Array(transform, 11.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(m, 15.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 0.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 1.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 2.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 3.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 4.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 5.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 6.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 7.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 10.0 : Float), (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 8.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 11.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 12.0 : Float), (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 9.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 13.0 : Float), (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 10.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 14.0 : Float), (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast transform : flighthq._internal._Float64Array), (cast 11.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 15.0 : Float), (cast 1.0 : Float));
   }
 
   public static function awdDataTypeByteSize__awd2Parse(dataType:Float):Float {
@@ -1075,43 +1075,43 @@ class Awd2Parse {
           var v:Float = 0.0;
           while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
             var o:Float = (v * floatsPerVertex);
-            flighthq._internal._StaticIndex.writeFloat32Array(vertices, o, flighthq._internal._StaticIndex.readArray(positions, (v * 3.0)));
-            flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 1.0), flighthq._internal._StaticIndex.readArray(positions, ((v * 3.0) + 1.0)));
-            flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 2.0), flighthq._internal._StaticIndex.readArray(positions, ((v * 3.0) + 2.0)));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast o : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast (v * 3.0) : Float)) : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast ((v * 3.0) + 1.0) : Float)) : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast ((v * 3.0) + 2.0) : Float)) : Float));
             if ((cast ((cast !_Runtime.strictEquals(normals, null) : Bool) && (cast ((cast ((v * 3.0) + 2.0) : Float) < (cast _Runtime.field(normals, 'length') : Float)) : Bool)) : Bool)) {
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 3.0), flighthq._internal._StaticIndex.readArray(normals, (v * 3.0)));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 4.0), flighthq._internal._StaticIndex.readArray(normals, ((v * 3.0) + 1.0)));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 5.0), flighthq._internal._StaticIndex.readArray(normals, ((v * 3.0) + 2.0)));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 3.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast (v * 3.0) : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 4.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast ((v * 3.0) + 1.0) : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 5.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast ((v * 3.0) + 2.0) : Float)) : Float));
             }
             if ((cast ((cast !_Runtime.strictEquals(tangents, null) : Bool) && (cast ((cast ((v * 3.0) + 2.0) : Float) < (cast _Runtime.field(tangents, 'length') : Float)) : Bool)) : Bool)) {
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 6.0), flighthq._internal._StaticIndex.readArray(tangents, (v * 3.0)));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 7.0), flighthq._internal._StaticIndex.readArray(tangents, ((v * 3.0) + 1.0)));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 8.0), flighthq._internal._StaticIndex.readArray(tangents, ((v * 3.0) + 2.0)));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 9.0), Awd2Parse.AWD2_TANGENT_HANDEDNESS__awd2Parse);
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 6.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast tangents : Array<Float>), (cast (v * 3.0) : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 7.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast tangents : Array<Float>), (cast ((v * 3.0) + 1.0) : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 8.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast tangents : Array<Float>), (cast ((v * 3.0) + 2.0) : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 9.0) : Float), (cast Awd2Parse.AWD2_TANGENT_HANDEDNESS__awd2Parse : Float));
             }
             if ((cast ((cast !_Runtime.strictEquals(uvs, null) : Bool) && (cast ((cast ((v * 2.0) + 1.0) : Float) < (cast _Runtime.field(uvs, 'length') : Float)) : Bool)) : Bool)) {
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 10.0), flighthq._internal._StaticIndex.readArray(uvs, (v * 2.0)));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 11.0), flighthq._internal._StaticIndex.readArray(uvs, ((v * 2.0) + 1.0)));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 10.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast uvs : Array<Float>), (cast (v * 2.0) : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 11.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast uvs : Array<Float>), (cast ((v * 2.0) + 1.0) : Float)) : Float));
             }
             if ((cast skinned : Bool)) {
               var influences:Array<SkinInfluence> = (cast cast ([] : Array<Dynamic>));
               {
                 var k:Float = 0.0;
                 while ((cast ((cast k : Float) < (cast jointsPerVertex : Float)) : Bool)) {
-                  var weight:Float = flighthq._internal._StaticIndex.readArray(jointWeights, ((v * jointsPerVertex) + k));
-                  if ((cast ((cast weight : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(influences, 'push', cast ([{ jointIndex: flighthq._internal._StaticIndex.readArray(jointIndices, ((v * jointsPerVertex) + k)), weight: weight }] : Array<Dynamic>)); }
+                  var weight:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointWeights : Array<Float>), (cast ((v * jointsPerVertex) + k) : Float));
+                  if ((cast ((cast weight : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(influences, 'push', cast ([{ jointIndex: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointIndices : Array<Float>), (cast ((v * jointsPerVertex) + k) : Float)), weight: weight }] : Array<Dynamic>)); }
                   k++;
                 }
               }
               packSkinInfluences((cast influences), (cast jointScratch), (cast weightScratch));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 12.0), flighthq._internal._StaticIndex.readArray(jointScratch, 0.0));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 13.0), flighthq._internal._StaticIndex.readArray(jointScratch, 1.0));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 14.0), flighthq._internal._StaticIndex.readArray(jointScratch, 2.0));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 15.0), flighthq._internal._StaticIndex.readArray(jointScratch, 3.0));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 16.0), flighthq._internal._StaticIndex.readArray(weightScratch, 0.0));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 17.0), flighthq._internal._StaticIndex.readArray(weightScratch, 1.0));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 18.0), flighthq._internal._StaticIndex.readArray(weightScratch, 2.0));
-              flighthq._internal._StaticIndex.writeFloat32Array(vertices, (o + 19.0), flighthq._internal._StaticIndex.readArray(weightScratch, 3.0));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 12.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointScratch : Array<Float>), (cast 0.0 : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 13.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointScratch : Array<Float>), (cast 1.0 : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 14.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointScratch : Array<Float>), (cast 2.0 : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 15.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointScratch : Array<Float>), (cast 3.0 : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 16.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast weightScratch : Array<Float>), (cast 0.0 : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 17.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast weightScratch : Array<Float>), (cast 1.0 : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 18.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast weightScratch : Array<Float>), (cast 2.0 : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (o + 19.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast weightScratch : Array<Float>), (cast 3.0 : Float)) : Float));
             }
             v++;
           }
@@ -1244,7 +1244,7 @@ class Awd2Parse {
       return cast null;
     }
     (offset = cast ((offset + 1.0) : Dynamic));
-    numMethods = flighthq._internal._StaticIndex.readUint8Array(source, offset);
+    numMethods = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast offset : Float));
     (offset = cast ((offset + 1.0) : Dynamic));
     props = (cast Awd2Parse.readAwdProperties__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; });
     diffuseTextureId = _Runtime.coalesce((cast Awd2Parse.readAwdPropertyUint32__awd2Parse((cast view : flighthq._internal._Any), (cast (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values), (cast AWD2_MATERIAL_PROP_DIFFUSE_TEXTURE : Float)) : Null<Float>), function():Dynamic return cast 0.0);
@@ -1355,7 +1355,7 @@ class Awd2Parse {
       reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'awd2.light-truncated' : String), (cast 'parseLightBlock' : String), (cast { field: 'lightType' }));
       return cast null;
     }
-    lightType = flighthq._internal._StaticIndex.readUint8Array((cast source : flighthq._internal._UInt8Array), offset);
+    lightType = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast (cast source : flighthq._internal._UInt8Array) : flighthq._internal._UInt8Array), (cast offset : Float));
     (offset = cast ((offset + 1.0) : Dynamic));
     props = (cast Awd2Parse.readAwdProperties__awd2Parse((cast view : flighthq._internal._Any), (cast offset : Float), (cast end : Float)) : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; });
     values = (cast props : { var end:Float; var values:flighthq._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values;
@@ -1421,7 +1421,7 @@ class Awd2Parse {
       reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'awd2.texture-truncated' : String), (cast 'parseTextureBlock' : String), (cast { field: 'payload' }));
       return cast null;
     }
-    texType = flighthq._internal._StaticIndex.readUint8Array((cast source : flighthq._internal._UInt8Array), offset);
+    texType = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast (cast source : flighthq._internal._UInt8Array) : flighthq._internal._UInt8Array), (cast offset : Float));
     (offset = cast ((offset + 1.0) : Dynamic));
     dataLen = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 4.0) : Dynamic));
@@ -1792,7 +1792,7 @@ class Awd2Parse {
     var rehydrated:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var rehydratedView:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(input, 'buffer'), _Runtime.field(input, 'byteOffset'), _Runtime.field(input, 'byteLength')]);
-    compression = flighthq._internal._StaticIndex.readUint8Array(input, 7.0);
+    compression = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast input : flighthq._internal._UInt8Array), (cast 7.0 : Float));
     if ((cast _Runtime.strictEquals(compression, AWD2_COMPRESSION_NONE) : Bool)) { return cast { source: input, view: view }; }
     decompressor = (cast Awd2Parse.resolveAwdDecompressor__awd2Parse((cast compression : Float)) : Null<Decompressor>);
     if ((cast _Runtime.strictEquals(decompressor, null) : Bool)) {
@@ -1809,7 +1809,7 @@ class Awd2Parse {
     (cast rehydrated : flighthq._internal._UInt8Array).set((cast input : flighthq._internal._UInt8Array).subarray(Std.int(0.0), Std.int(AWD2_HEADER_BYTES)), Std.int(0.0));
     (cast rehydrated : flighthq._internal._UInt8Array).set(inflated, Std.int(AWD2_HEADER_BYTES));
     rehydratedView = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(rehydrated, 'buffer')]);
-    flighthq._internal._StaticIndex.writeUint8Array(rehydrated, 7.0, AWD2_COMPRESSION_NONE);
+    flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast rehydrated : flighthq._internal._UInt8Array), (cast 7.0 : Float), (cast AWD2_COMPRESSION_NONE : Float));
     _Runtime.callProperty(rehydratedView, 'setUint32', cast ([8.0, _Runtime.field(inflated, 'byteLength'), true] : Array<Dynamic>));
     return cast { source: rehydrated, view: rehydratedView };
     return cast null;

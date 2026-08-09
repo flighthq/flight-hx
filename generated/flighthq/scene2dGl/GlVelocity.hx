@@ -104,20 +104,20 @@ class GlVelocity {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast particleCount : Float)) : Bool)) {
-        var velocityX:Float = flighthq._internal._StaticIndex.readFloat32Array(velocities, (i * 2.0));
-        var velocityY:Float = flighthq._internal._StaticIndex.readFloat32Array(velocities, ((i * 2.0) + 1.0));
+        var velocityX:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flighthq._internal._Float32Array), (cast (i * 2.0) : Float));
+        var velocityY:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flighthq._internal._Float32Array), (cast ((i * 2.0) + 1.0) : Float));
         if ((cast ((cast _Runtime.strictEquals(velocityX, 0.0) : Bool) && (cast _Runtime.strictEquals(velocityY, 0.0) : Bool)) : Bool)) { i++; continue; }
-        var id:Float = flighthq._internal._StaticIndex.readUint16Array(ids, i);
+        var id:Float = flighthq._internal._StaticIndex.readUint16ArrayTyped((cast ids : flighthq._internal._UInt16Array), (cast i : Float));
         if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(regions, id);
         var rw:Float = region.width;
         var rh:Float = region.height;
         if ((cast ((cast ((cast rw : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast rh : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
         var tt:Float = (i * 4.0);
-        var px:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, tt);
-        var py:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
-        var rotation:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
-        var scale:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
+        var px:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast tt : Float));
+        var py:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (tt + 1.0) : Float));
+        var rotation:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (tt + 2.0) : Float));
+        var scale:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (tt + 3.0) : Float));
         var cosScale:Float = _Runtime.multiplyNumbers(HxMath.cos(rotation), scale);
         var sinScale:Float = _Runtime.multiplyNumbers(HxMath.sin(rotation), scale);
         var minX:Float = HxMath.POSITIVE_INFINITY;
@@ -185,10 +185,10 @@ class GlVelocity {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-          var velocityX:Float = flighthq._internal._StaticIndex.readFloat32Array(instanceVelocities, (i * 2.0));
-          var velocityY:Float = flighthq._internal._StaticIndex.readFloat32Array(instanceVelocities, ((i * 2.0) + 1.0));
+          var velocityX:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast instanceVelocities : flighthq._internal._Float32Array), (cast (i * 2.0) : Float));
+          var velocityY:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast instanceVelocities : flighthq._internal._Float32Array), (cast ((i * 2.0) + 1.0) : Float));
           if ((cast ((cast _Runtime.strictEquals(velocityX, 0.0) : Bool) && (cast _Runtime.strictEquals(velocityY, 0.0) : Bool)) : Bool)) { i++; continue; }
-          var id:Float = flighthq._internal._StaticIndex.readUint16Array(ids, i);
+          var id:Float = flighthq._internal._StaticIndex.readUint16ArrayTyped((cast ids : flighthq._internal._UInt16Array), (cast i : Float));
           if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
           var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(regions, id);
           var w:Float = region.width;
@@ -201,8 +201,8 @@ class GlVelocity {
           var wtx:Float = cast _Runtime.UNDEFINED;
           var wty:Float = cast _Runtime.UNDEFINED;
           if ((cast isVector2 : Bool)) {
-            var dx:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (i * 2.0));
-            var dy:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, ((i * 2.0) + 1.0));
+            var dx:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (i * 2.0) : Float));
+            var dy:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast ((i * 2.0) + 1.0) : Float));
             (wa = cast (pa : Dynamic));
             (wb = cast (pb : Dynamic));
             (wc = cast (pc : Dynamic));
@@ -211,12 +211,12 @@ class GlVelocity {
             (wty = cast ((((pb * dx) + (pd * dy)) + pty) : Dynamic));
           } else {
             var o:Float = (i * 6.0);
-            var la:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, o);
-            var lb:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 1.0));
-            var lc:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 2.0));
-            var ld:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 3.0));
-            var ltx:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 4.0));
-            var lty:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (o + 5.0));
+            var la:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast o : Float));
+            var lb:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (o + 1.0) : Float));
+            var lc:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (o + 2.0) : Float));
+            var ld:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (o + 3.0) : Float));
+            var ltx:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (o + 4.0) : Float));
+            var lty:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (o + 5.0) : Float));
             (wa = cast (((pa * la) + (pc * lb)) : Dynamic));
             (wb = cast (((pb * la) + (pd * lb)) : Dynamic));
             (wc = cast (((pa * lc) + (pc * ld)) : Dynamic));

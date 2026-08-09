@@ -53,8 +53,8 @@ class CanvasFillPattern {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(colors, 'length') : Float)) : Bool)) {
-        var ratio:Float = HxMath.max(0.0, HxMath.min(1.0, _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(ratios, i), 255.0)));
-        gradient.addColorStop(ratio, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readArray(colors, i) : Float), (cast flighthq._internal._StaticIndex.readArray(alphas, i) : Float)) : String));
+        var ratio:Float = HxMath.max(0.0, HxMath.min(1.0, (flighthq._internal._StaticIndex.readFloatArrayTyped((cast ratios : Array<Float>), (cast i : Float)) / 255.0)));
+        gradient.addColorStop(ratio, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast colors : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast alphas : Array<Float>), (cast i : Float)) : Float)) : String));
         i++;
       }
     }
@@ -141,8 +141,8 @@ class CanvasFillPattern {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(colors, 'length') : Float)) : Bool)) {
-            var ratio:Float = HxMath.max(0.0, HxMath.min(1.0, (t + (_Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(ratios, i), 255.0) * step))));
-            (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(ratio, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readArray(colors, i) : Float), (cast flighthq._internal._StaticIndex.readArray(alphas, i) : Float)) : String));
+            var ratio:Float = HxMath.max(0.0, HxMath.min(1.0, (t + ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast ratios : Array<Float>), (cast i : Float)) / 255.0) * step))));
+            (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(ratio, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast colors : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast alphas : Array<Float>), (cast i : Float)) : Float)) : String));
             i++;
           }
         }
@@ -150,8 +150,8 @@ class CanvasFillPattern {
         {
           var i:Float = _Runtime.subtractNumbers(_Runtime.field(colors, 'length'), 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-            var ratio:Float = HxMath.max(0.0, HxMath.min(1.0, (t + ((1.0 - _Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(ratios, i), 255.0)) * step))));
-            (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(ratio, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readArray(colors, i) : Float), (cast flighthq._internal._StaticIndex.readArray(alphas, i) : Float)) : String));
+            var ratio:Float = HxMath.max(0.0, HxMath.min(1.0, (t + ((1.0 - (flighthq._internal._StaticIndex.readFloatArrayTyped((cast ratios : Array<Float>), (cast i : Float)) / 255.0)) * step))));
+            (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(ratio, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast colors : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast alphas : Array<Float>), (cast i : Float)) : Float)) : String));
             i--;
           }
         }
@@ -163,14 +163,14 @@ class CanvasFillPattern {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(colors, 'length') : Float)) : Bool)) {
-            var ratio:Float = HxMath.max(0.0, HxMath.min((1.0 - 0.001), (t + (_Runtime.divideNumbers(flighthq._internal._StaticIndex.readArray(ratios, i), 255.0) * step))));
-            (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(ratio, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readArray(colors, i) : Float), (cast flighthq._internal._StaticIndex.readArray(alphas, i) : Float)) : String));
+            var ratio:Float = HxMath.max(0.0, HxMath.min((1.0 - 0.001), (t + ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast ratios : Array<Float>), (cast i : Float)) / 255.0) * step))));
+            (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(ratio, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast colors : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast alphas : Array<Float>), (cast i : Float)) : Float)) : String));
             i++;
           }
         }
         var seam:Float = HxMath.max(0.0, HxMath.min(1.0, (t + 0.001)));
-        (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop((seam - 0.001), (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readArray(colors, _Runtime.subtractNumbers(_Runtime.field(colors, 'length'), 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(alphas, _Runtime.subtractNumbers(_Runtime.field(alphas, 'length'), 1.0)) : Float)) : String));
-        (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(seam, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readArray(colors, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(alphas, 0.0) : Float)) : String));
+        (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop((seam - 0.001), (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast colors : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(colors, 'length'), 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast alphas : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(alphas, 'length'), 1.0) : Float)) : Float)) : String));
+        (cast tiledGradient : flighthq._internal.dom.CanvasGradient).addColorStop(seam, (cast CanvasFillPattern.rgbaString__canvasFillPattern((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast colors : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast alphas : Array<Float>), (cast 0.0 : Float)) : Float)) : String));
         (t = cast ((t + step) : Dynamic));
       }
     }

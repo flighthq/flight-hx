@@ -67,7 +67,7 @@ class AbcReader__abcFile {
       (this.valid = false);
       return cast 0.0;
     }
-    return cast flighthq._internal._StaticIndex.readUint8Array(this.source, this.pos++);
+    return cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast this.source : flighthq._internal._UInt8Array), (cast this.pos++ : Float));
     return cast null;
   }
   public function readUint16():Float {

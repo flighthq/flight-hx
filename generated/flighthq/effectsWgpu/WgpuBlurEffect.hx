@@ -54,12 +54,12 @@ class WgpuBlurEffect {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'blur.gaussian' : String), (cast WgpuBlurEffect.GAUSSIAN_BLUR_WGSL__wgpuBlurEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 0.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')));
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 1.0, _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 2.0, dirX);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 3.0, dirY);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 4.0, radius);
-      flighthq._internal._StaticIndex.writeFloat32Array(f32, 5.0, sigma);
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast dirX : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast dirY : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast radius : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast sigma : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }));
   }
 

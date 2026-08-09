@@ -169,7 +169,7 @@ class CustomShaderWgpuMeshMaterialRenderer {
         var value:flighthq._internal._Union2<Float, Array<Float>> = _Runtime.getIndex(uniforms, flighthq._internal._StaticIndex.readArray(names, slot));
         var offset:Float = (slot * 4.0);
         if ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(CustomShaderWgpuMeshMaterialRenderer._uniformScratch__customShaderWgpuMeshMaterialRenderer, offset, value);
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast CustomShaderWgpuMeshMaterialRenderer._uniformScratch__customShaderWgpuMeshMaterialRenderer : flighthq._internal._Float32Array), (cast offset : Float), (cast value : Float));
           slot++;
           continue;
         }
@@ -177,7 +177,7 @@ class CustomShaderWgpuMeshMaterialRenderer {
         {
           var component:Float = 0.0;
           while ((cast ((cast component : Float) < (cast componentCount : Float)) : Bool)) {
-            flighthq._internal._StaticIndex.writeFloat32Array(CustomShaderWgpuMeshMaterialRenderer._uniformScratch__customShaderWgpuMeshMaterialRenderer, (offset + component), flighthq._internal._StaticIndex.readArray(value, component));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast CustomShaderWgpuMeshMaterialRenderer._uniformScratch__customShaderWgpuMeshMaterialRenderer : flighthq._internal._Float32Array), (cast (offset + component) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast value : Array<Float>), (cast component : Float)) : Float));
             component++;
           }
         }

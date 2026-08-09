@@ -137,7 +137,7 @@ class ParseKtx2 {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 12.0 : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, i), flighthq._internal._StaticIndex.readArray(ParseKtx2.ktx2Identifier__parseKtx2, i)) : Bool)) { return cast false; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast i : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast ParseKtx2.ktx2Identifier__parseKtx2 : Array<Float>), (cast i : Float))) : Bool)) { return cast false; }
         (i = cast ((i + 1.0) : Dynamic));
       }
     }

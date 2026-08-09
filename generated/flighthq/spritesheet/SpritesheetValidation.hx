@@ -46,7 +46,7 @@ class SpritesheetValidation {
       {
         var ai:Float = 0.0;
         while ((cast ((cast ai : Float) < (cast _Runtime.field(anim.frames, 'length') : Float)) : Bool)) {
-          var frameRef:Float = flighthq._internal._StaticIndex.readArray(anim.frames, ai);
+          var frameRef:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast anim.frames : Array<Float>), (cast ai : Float));
           if ((cast ((cast ((cast frameRef : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast frameRef : Float) >= (cast _Runtime.field(frames, 'length') : Float)) : Bool)) : Bool)) {
             _Runtime.callProperty(diagnostics, 'push', cast ([{ animationName: animName, frameIndex: ai, message: 'Animation "' + Std.string(animName) + '" references frame index ' + Std.string(frameRef) + ' which is out of range (sheet has ' + Std.string(_Runtime.field(frames, 'length')) + ' frames).', severity: 'error' }] : Array<Dynamic>));
           }

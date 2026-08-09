@@ -207,8 +207,8 @@ class Vector2 {
   }
 
   public static function setVector2FromFloat32Array(out:Vector2Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    (out.x = cast (flighthq._internal._StaticIndex.readFloat32Array(source, offset) : Dynamic));
-    (out.y = cast (flighthq._internal._StaticIndex.readFloat32Array(source, (offset + 1.0)) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast offset : Float)) : Dynamic));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float)) : Dynamic));
   }
 
   public static function setVector2FromPolar(out:Vector2Like, length:Float, angle:Float):Void {
@@ -227,8 +227,8 @@ class Vector2 {
   }
 
   public static function writeVector2ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Vector2Like):Void {
-    flighthq._internal._StaticIndex.writeFloat32Array(out, offset, source.x);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, (offset + 1.0), source.y);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast offset : Float), (cast source.x : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float), (cast source.y : Float));
   }
 
   public static final VECTOR2_X_AXIS:flighthq.types.Vector2 = (cast createVector2((cast 1.0), (cast 0.0)) : flighthq.types.Vector2);

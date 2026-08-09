@@ -34,7 +34,7 @@ class SceneForwardLights {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pointCount : Float)) : Bool)) {
-        _Runtime.callProperty(outIndices, 'push', cast ([flighthq._internal._StaticIndex.readInt32Array(SceneForwardLights.scratchSelectedPointIndices__sceneForwardLights, i)] : Array<Dynamic>));
+        _Runtime.callProperty(outIndices, 'push', cast ([flighthq._internal._StaticIndex.readInt32ArrayTyped((cast SceneForwardLights.scratchSelectedPointIndices__sceneForwardLights : flighthq._internal._Int32Array), (cast i : Float))] : Array<Dynamic>));
         _Runtime.callProperty(outPoints, 'push', cast ([(cast flighthq._internal._StaticIndex.readArray(SceneForwardLights.scratchSelectedPointLights__sceneForwardLights, i) : PointLight)] : Array<Dynamic>));
         i++;
       }
@@ -42,7 +42,7 @@ class SceneForwardLights {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast spotCount : Float)) : Bool)) {
-        _Runtime.callProperty(outIndices, 'push', cast ([~_Runtime.toInt32(flighthq._internal._StaticIndex.readInt32Array(SceneForwardLights.scratchSelectedSpotIndices__sceneForwardLights, i))] : Array<Dynamic>));
+        _Runtime.callProperty(outIndices, 'push', cast ([~_Runtime.toInt32(flighthq._internal._StaticIndex.readInt32ArrayTyped((cast SceneForwardLights.scratchSelectedSpotIndices__sceneForwardLights : flighthq._internal._Int32Array), (cast i : Float)))] : Array<Dynamic>));
         _Runtime.callProperty(outSpots, 'push', cast ([(cast flighthq._internal._StaticIndex.readArray(SceneForwardLights.scratchSelectedSpotLights__sceneForwardLights, i) : SpotLight)] : Array<Dynamic>));
         i++;
       }
@@ -62,8 +62,8 @@ class SceneForwardLights {
         var insertAt:Float = selectedCount;
         while ((cast ((cast insertAt : Float) > (cast 0.0 : Float)) : Bool)) {
           var previous:Float = (insertAt - 1.0);
-          if ((cast ((cast score : Float) < (cast flighthq._internal._StaticIndex.readFloat64Array(selectedScores, previous) : Float)) : Bool)) { break; }
-          if ((cast ((cast _Runtime.strictEquals(score, flighthq._internal._StaticIndex.readFloat64Array(selectedScores, previous)) : Bool) && (cast ((cast inputIndex : Float) > (cast flighthq._internal._StaticIndex.readInt32Array(selectedIndices, previous) : Float)) : Bool)) : Bool)) { break; }
+          if ((cast ((cast score : Float) < (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast selectedScores : flighthq._internal._Float64Array), (cast previous : Float)) : Float)) : Bool)) { break; }
+          if ((cast ((cast _Runtime.strictEquals(score, flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast selectedScores : flighthq._internal._Float64Array), (cast previous : Float))) : Bool) && (cast ((cast inputIndex : Float) > (cast flighthq._internal._StaticIndex.readInt32ArrayTyped((cast selectedIndices : flighthq._internal._Int32Array), (cast previous : Float)) : Float)) : Bool)) : Bool)) { break; }
           insertAt--;
         }
         if ((cast ((cast insertAt : Float) >= (cast MAX_FORWARD_LIGHTS : Float)) : Bool)) { inputIndex++; continue; }
@@ -72,14 +72,14 @@ class SceneForwardLights {
           var i:Float = (nextCount - 1.0);
           while ((cast ((cast i : Float) > (cast insertAt : Float)) : Bool)) {
             flighthq._internal._StaticIndex.writeArray(selectedLights, i, flighthq._internal._StaticIndex.readArray(selectedLights, (i - 1.0)));
-            flighthq._internal._StaticIndex.writeInt32Array(selectedIndices, i, flighthq._internal._StaticIndex.readInt32Array(selectedIndices, (i - 1.0)));
-            flighthq._internal._StaticIndex.writeFloat64Array(selectedScores, i, flighthq._internal._StaticIndex.readFloat64Array(selectedScores, (i - 1.0)));
+            flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast selectedIndices : flighthq._internal._Int32Array), (cast i : Float), (cast flighthq._internal._StaticIndex.readInt32ArrayTyped((cast selectedIndices : flighthq._internal._Int32Array), (cast (i - 1.0) : Float)) : Float));
+            flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast selectedScores : flighthq._internal._Float64Array), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast selectedScores : flighthq._internal._Float64Array), (cast (i - 1.0) : Float)) : Float));
             i--;
           }
         }
         flighthq._internal._StaticIndex.writeArray(selectedLights, insertAt, light);
-        flighthq._internal._StaticIndex.writeInt32Array(selectedIndices, insertAt, inputIndex);
-        flighthq._internal._StaticIndex.writeFloat64Array(selectedScores, insertAt, score);
+        flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast selectedIndices : flighthq._internal._Int32Array), (cast insertAt : Float), (cast inputIndex : Float));
+        flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast selectedScores : flighthq._internal._Float64Array), (cast insertAt : Float), (cast score : Float));
         (selectedCount = cast (nextCount : Dynamic));
         inputIndex++;
       }

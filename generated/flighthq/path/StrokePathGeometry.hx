@@ -53,7 +53,7 @@ class StrokePathGeometry {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
-        if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(dash, i)] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast flighthq._internal._StaticIndex.readArray(dash, i) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
+        if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast dash : Array<Float>), (cast i : Float))] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dash : Array<Float>), (cast i : Float)) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
           return cast { issue: StrokePathTessellationIssueInvalidStyle, issueSubpath: null, pieces: cast ([] : Array<Dynamic>) };
         }
         i++;
@@ -117,10 +117,10 @@ class StrokePathGeometry {
         var points:Array<Float> = (cast StrokePathGeometry.removeConsecutiveDuplicates__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(contours, i))) : Array<Float>);
         if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { i++; continue; }
         var last:Float = _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 2.0);
-        var closed:Bool = ((cast ((cast ((cast _Runtime.field(points, 'length') : Float) >= (cast 8.0 : Float)) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(points, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(points, last) : Float)) : Bool) : Bool)) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(points, 1.0) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (last + 1.0)) : Float)) : Bool) : Bool));
+        var closed:Bool = ((cast ((cast ((cast _Runtime.field(points, 'length') : Float) >= (cast 8.0 : Float)) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast last : Float)) : Float)) : Bool) : Bool)) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (last + 1.0) : Float)) : Float)) : Bool) : Bool));
         if ((cast closed : Bool)) {
-          flighthq._internal._StaticIndex.writeArray(points, last, flighthq._internal._StaticIndex.readArray(points, 0.0));
-          flighthq._internal._StaticIndex.writeArray(points, (last + 1.0), flighthq._internal._StaticIndex.readArray(points, 1.0));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast points : Array<Float>), (cast last : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast points : Array<Float>), (cast (last + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float));
         }
         _Runtime.callProperty(result, 'push', cast ([{ closed: closed, points: points, sourceIndex: i }] : Array<Dynamic>));
         i++;
@@ -144,10 +144,10 @@ class StrokePathGeometry {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast segmentCount : Float)) : Bool)) {
-        var x0:Float = flighthq._internal._StaticIndex.readArray(points, (i * 2.0));
-        var y0:Float = flighthq._internal._StaticIndex.readArray(points, ((i * 2.0) + 1.0));
-        var dx:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, ((i + 1.0) * 2.0)), x0);
-        var dy:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(points, (((i + 1.0) * 2.0) + 1.0)), y0);
+        var x0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i * 2.0) : Float));
+        var y0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((i * 2.0) + 1.0) : Float));
+        var dx:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((i + 1.0) * 2.0) : Float)) - x0);
+        var dy:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (((i + 1.0) * 2.0) + 1.0) : Float)) - y0);
         var length:Float = HxMath.sqrt(((dx * dx) + (dy * dy)));
         if ((cast ((cast length : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool)) { i++; continue; }
         var tx:Float = (dx / length);
@@ -159,22 +159,22 @@ class StrokePathGeometry {
     if ((cast !_Runtime.strictEquals(_Runtime.field(frames, 'length'), segmentCount) : Bool)) { return cast { issue: StrokePathTessellationIssueInvalidPath, piece: null }; }
     piece = (cast { closed: (cast subpath : StrokeSubpath__strokePathGeometry).closed, endCap: cast ([] : Array<Dynamic>), left: cast ([] : Array<Dynamic>), right: cast ([] : Array<Dynamic>), startCap: cast ([] : Array<Dynamic>) });
     if ((cast !(cast (cast subpath : StrokeSubpath__strokePathGeometry).closed : Bool) : Bool)) {
-      StrokePathGeometry.appendEndpointSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readArray(points, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(points, 1.0) : Float), (cast flighthq._internal._StaticIndex.readArray(frames, 0.0)), (cast halfWidth : Float), (cast cap : String), (cast true : Bool), (cast tolerance : Float));
+      StrokePathGeometry.appendEndpointSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readArray(frames, 0.0)), (cast halfWidth : Float), (cast cap : String), (cast true : Bool), (cast tolerance : Float));
       {
         var i:Float = 1.0;
         while ((cast ((cast i : Float) < (cast (pointCount - 1.0) : Float)) : Bool)) {
-          var issue:StrokePathTessellationIssue__strokePathGeometry = (cast StrokePathGeometry.appendJoinSections__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readArray(points, (i * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(points, ((i * 2.0) + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(frames, (i - 1.0))), (cast flighthq._internal._StaticIndex.readArray(frames, i)), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), (cast tolerance : Float)) : StrokePathTessellationIssue__strokePathGeometry);
+          var issue:StrokePathTessellationIssue__strokePathGeometry = (cast StrokePathGeometry.appendJoinSections__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i * 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((i * 2.0) + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readArray(frames, (i - 1.0))), (cast flighthq._internal._StaticIndex.readArray(frames, i)), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), (cast tolerance : Float)) : StrokePathTessellationIssue__strokePathGeometry);
           if ((cast !_Runtime.strictEquals(issue, StrokePathTessellationIssueNone) : Bool)) { return cast { issue: issue, piece: piece }; }
           i++;
         }
       }
-      StrokePathGeometry.appendEndpointSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readArray(points, ((pointCount - 1.0) * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (((pointCount - 1.0) * 2.0) + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(frames, _Runtime.subtractNumbers(_Runtime.field(frames, 'length'), 1.0))), (cast halfWidth : Float), (cast cap : String), (cast false : Bool), (cast tolerance : Float));
+      StrokePathGeometry.appendEndpointSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((pointCount - 1.0) * 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (((pointCount - 1.0) * 2.0) + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readArray(frames, _Runtime.subtractNumbers(_Runtime.field(frames, 'length'), 1.0))), (cast halfWidth : Float), (cast cap : String), (cast false : Bool), (cast tolerance : Float));
     } else {
       var uniquePointCount:Float = (pointCount - 1.0);
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast uniquePointCount : Float)) : Bool)) {
-          var issue:StrokePathTessellationIssue__strokePathGeometry = (cast StrokePathGeometry.appendJoinSections__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readArray(points, (i * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(points, ((i * 2.0) + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(frames, _Runtime.fmod((_Runtime.addNumbers(i, _Runtime.field(frames, 'length')) - 1.0), _Runtime.field(frames, 'length')))), (cast flighthq._internal._StaticIndex.readArray(frames, i)), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), (cast tolerance : Float)) : StrokePathTessellationIssue__strokePathGeometry);
+          var issue:StrokePathTessellationIssue__strokePathGeometry = (cast StrokePathGeometry.appendJoinSections__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i * 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((i * 2.0) + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readArray(frames, _Runtime.fmod((_Runtime.addNumbers(i, _Runtime.field(frames, 'length')) - 1.0), _Runtime.field(frames, 'length')))), (cast flighthq._internal._StaticIndex.readArray(frames, i)), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), (cast tolerance : Float)) : StrokePathTessellationIssue__strokePathGeometry);
           if ((cast !_Runtime.strictEquals(issue, StrokePathTessellationIssueNone) : Bool)) { return cast { issue: issue, piece: piece }; }
           i++;
         }
@@ -235,9 +235,9 @@ class StrokePathGeometry {
     rightIntersection = (cast StrokePathGeometry.intersectLines__strokePathGeometry((cast right0X : Float), (cast right0Y : Float), (cast (cast previous : SegmentFrame__strokePathGeometry).tx : Float), (cast (cast previous : SegmentFrame__strokePathGeometry).ty : Float), (cast right1X : Float), (cast right1Y : Float), (cast (cast next : SegmentFrame__strokePathGeometry).tx : Float), (cast (cast next : SegmentFrame__strokePathGeometry).ty : Float)) : Null<Array<Float>>);
     if ((cast ((cast _Runtime.strictEquals(leftIntersection, null) : Bool) || (cast _Runtime.strictEquals(rightIntersection, null) : Bool)) : Bool)) { return cast StrokePathTessellationIssueReversingJoin; }
     outerIntersection = ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) ? (cast rightIntersection : Dynamic) : (cast leftIntersection : Dynamic));
-    outerDistance = _Runtime.hypot(_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(outerIntersection, 0.0), px), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(outerIntersection, 1.0), py));
+    outerDistance = _Runtime.hypot((flighthq._internal._StaticIndex.readFloatArrayTyped((cast outerIntersection : Array<Float>), (cast 0.0 : Float)) - px), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast outerIntersection : Array<Float>), (cast 1.0 : Float)) - py));
     if ((cast ((cast ((cast _Runtime.strictEquals(join, 'miter') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([miterLimit] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast outerDistance : Float) <= (cast _Runtime.multiplyNumbers(halfWidth, HxMath.max(0.0, miterLimit)) : Float)) : Bool)) : Bool)) {
-      StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readArray(leftIntersection, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(leftIntersection, 1.0) : Float), (cast flighthq._internal._StaticIndex.readArray(rightIntersection, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(rightIntersection, 1.0) : Float));
+      StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast leftIntersection : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast leftIntersection : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast rightIntersection : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast rightIntersection : Array<Float>), (cast 1.0 : Float)) : Float));
       return cast StrokePathTessellationIssueNone;
     }
     inner = ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool) ? (cast leftIntersection : Dynamic) : (cast rightIntersection : Dynamic));
@@ -250,16 +250,16 @@ class StrokePathGeometry {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(outer, 'length') : Float)) : Bool)) {
-          if ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool)) { StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 1.0) : Float), (cast flighthq._internal._StaticIndex.readArray(outer, i) : Float), (cast flighthq._internal._StaticIndex.readArray(outer, (i + 1.0)) : Float)); } else { StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readArray(outer, i) : Float), (cast flighthq._internal._StaticIndex.readArray(outer, (i + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 1.0) : Float)); }
+          if ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool)) { StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast inner : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast inner : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast outer : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast outer : Array<Float>), (cast (i + 1.0) : Float)) : Float)); } else { StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast outer : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast outer : Array<Float>), (cast (i + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast inner : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast inner : Array<Float>), (cast 1.0 : Float)) : Float)); }
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
     } else { if ((cast ((cast turn : Float) > (cast 0.0 : Float)) : Bool)) {
-      StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 1.0) : Float), (cast right0X : Float), (cast right0Y : Float));
-      StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 1.0) : Float), (cast right1X : Float), (cast right1Y : Float));
+      StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast inner : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast inner : Array<Float>), (cast 1.0 : Float)) : Float), (cast right0X : Float), (cast right0Y : Float));
+      StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast inner : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast inner : Array<Float>), (cast 1.0 : Float)) : Float), (cast right1X : Float), (cast right1Y : Float));
     } else {
-      StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast left0X : Float), (cast left0Y : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 1.0) : Float));
-      StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast left1X : Float), (cast left1Y : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 0.0) : Float), (cast flighthq._internal._StaticIndex.readArray(inner, 1.0) : Float));
+      StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast left0X : Float), (cast left0Y : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast inner : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast inner : Array<Float>), (cast 1.0 : Float)) : Float));
+      StrokePathGeometry.appendSection__strokePathGeometry((cast piece), (cast left1X : Float), (cast left1Y : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast inner : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast inner : Array<Float>), (cast 1.0 : Float)) : Float));
     } }
     return cast StrokePathTessellationIssueNone;
     return cast null;
@@ -338,11 +338,11 @@ class StrokePathGeometry {
     offset = _Runtime.fmod((_Runtime.fmod(dashOffset, total) + total), total);
     patternIndex = 0.0;
     consumedOffset = offset;
-    while ((cast ((cast ((cast flighthq._internal._StaticIndex.readArray(pattern, patternIndex) : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool) || (cast ((cast consumedOffset : Float) >= (cast flighthq._internal._StaticIndex.readArray(pattern, patternIndex) : Float)) : Bool)) : Bool)) {
-      if ((cast ((cast flighthq._internal._StaticIndex.readArray(pattern, patternIndex) : Float) > (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool)) { (consumedOffset = cast ((consumedOffset - flighthq._internal._StaticIndex.readArray(pattern, patternIndex)) : Dynamic)); }
+    while ((cast ((cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast pattern : Array<Float>), (cast patternIndex : Float)) : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool) || (cast ((cast consumedOffset : Float) >= (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast pattern : Array<Float>), (cast patternIndex : Float)) : Float)) : Bool)) : Bool)) {
+      if ((cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast pattern : Array<Float>), (cast patternIndex : Float)) : Float) > (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool)) { (consumedOffset = cast ((consumedOffset - flighthq._internal._StaticIndex.readFloatArrayTyped((cast pattern : Array<Float>), (cast patternIndex : Float))) : Dynamic)); }
       (patternIndex = cast (_Runtime.fmod((patternIndex + 1.0), _Runtime.field(pattern, 'length')) : Dynamic));
     }
-    remaining = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(pattern, patternIndex), consumedOffset);
+    remaining = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast pattern : Array<Float>), (cast patternIndex : Float)) - consumedOffset);
     on = _Runtime.strictEquals(_Runtime.fmod(patternIndex, 2.0), 0.0);
     result = (cast cast ([] : Array<Dynamic>));
     current = null;
@@ -350,10 +350,10 @@ class StrokePathGeometry {
     {
       var segment:Float = 0.0;
       while ((cast ((cast segment : Float) < (cast ((_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1) - 1.0) : Float)) : Bool)) {
-        var x0:Float = flighthq._internal._StaticIndex.readArray(points, (segment * 2.0));
-        var y0:Float = flighthq._internal._StaticIndex.readArray(points, ((segment * 2.0) + 1.0));
-        var x1:Float = flighthq._internal._StaticIndex.readArray(points, ((segment + 1.0) * 2.0));
-        var y1:Float = flighthq._internal._StaticIndex.readArray(points, (((segment + 1.0) * 2.0) + 1.0));
+        var x0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (segment * 2.0) : Float));
+        var y0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((segment * 2.0) + 1.0) : Float));
+        var x1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((segment + 1.0) * 2.0) : Float));
+        var y1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (((segment + 1.0) * 2.0) + 1.0) : Float));
         var dx:Float = (x1 - x0);
         var dy:Float = (y1 - y0);
         var length:Float = _Runtime.hypot(dx, dy);
@@ -361,7 +361,7 @@ class StrokePathGeometry {
         while ((cast ((cast distance : Float) < (cast (length - StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry) : Float)) : Bool)) {
           while ((cast ((cast remaining : Float) <= (cast StrokePathGeometry.GEOMETRY_EPSILON__strokePathGeometry : Float)) : Bool)) {
             (patternIndex = cast (_Runtime.fmod((patternIndex + 1.0), _Runtime.field(pattern, 'length')) : Dynamic));
-            (remaining = cast (flighthq._internal._StaticIndex.readArray(pattern, patternIndex) : Dynamic));
+            (remaining = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast pattern : Array<Float>), (cast patternIndex : Float)) : Dynamic));
             (on = cast (_Runtime.strictEquals(_Runtime.fmod(patternIndex, 2.0), 0.0) : Dynamic));
             if ((cast ((cast !(cast on : Bool) : Bool) && (cast !_Runtime.strictEquals(current, null) : Bool)) : Bool)) {
               StrokePathGeometry.pushDash__strokePathGeometry((cast result), (cast current), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float));
@@ -512,14 +512,14 @@ class StrokePathGeometry {
     var abD:Float = cast _Runtime.UNDEFINED;
     var cdA:Float = cast _Runtime.UNDEFINED;
     var cdB:Float = cast _Runtime.UNDEFINED;
-    ax = flighthq._internal._StaticIndex.readArray(a, (ai * 2.0));
-    ay = flighthq._internal._StaticIndex.readArray(a, ((ai * 2.0) + 1.0));
-    bx = flighthq._internal._StaticIndex.readArray(a, (aj * 2.0));
-    by = flighthq._internal._StaticIndex.readArray(a, ((aj * 2.0) + 1.0));
-    cx = flighthq._internal._StaticIndex.readArray(b, (bi * 2.0));
-    cy = flighthq._internal._StaticIndex.readArray(b, ((bi * 2.0) + 1.0));
-    dx = flighthq._internal._StaticIndex.readArray(b, (bj * 2.0));
-    dy = flighthq._internal._StaticIndex.readArray(b, ((bj * 2.0) + 1.0));
+    ax = flighthq._internal._StaticIndex.readFloatArrayTyped((cast a : Array<Float>), (cast (ai * 2.0) : Float));
+    ay = flighthq._internal._StaticIndex.readFloatArrayTyped((cast a : Array<Float>), (cast ((ai * 2.0) + 1.0) : Float));
+    bx = flighthq._internal._StaticIndex.readFloatArrayTyped((cast a : Array<Float>), (cast (aj * 2.0) : Float));
+    by = flighthq._internal._StaticIndex.readFloatArrayTyped((cast a : Array<Float>), (cast ((aj * 2.0) + 1.0) : Float));
+    cx = flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast (bi * 2.0) : Float));
+    cy = flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast ((bi * 2.0) + 1.0) : Float));
+    dx = flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast (bj * 2.0) : Float));
+    dy = flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast ((bj * 2.0) + 1.0) : Float));
     abC = (cast StrokePathGeometry.cross__strokePathGeometry((cast (bx - ax) : Float), (cast (by - ay) : Float), (cast (cx - ax) : Float), (cast (cy - ay) : Float)) : Float);
     abD = (cast StrokePathGeometry.cross__strokePathGeometry((cast (bx - ax) : Float), (cast (by - ay) : Float), (cast (dx - ax) : Float), (cast (dy - ay) : Float)) : Float);
     cdA = (cast StrokePathGeometry.cross__strokePathGeometry((cast (dx - cx) : Float), (cast (dy - cy) : Float), (cast (ax - cx) : Float), (cast (ay - cy) : Float)) : Float);
@@ -545,8 +545,8 @@ class StrokePathGeometry {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
-        if ((cast ((cast ((cast ((cast _Runtime.field(result, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(result, _Runtime.subtractNumbers(_Runtime.field(result, 'length'), 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(source, i) : Float)) : Bool) : Bool)) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(result, _Runtime.subtractNumbers(_Runtime.field(result, 'length'), 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(source, (i + 1.0)) : Float)) : Bool) : Bool)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
-        _Runtime.pushMany(result, cast ([flighthq._internal._StaticIndex.readArray(source, i), flighthq._internal._StaticIndex.readArray(source, (i + 1.0))] : Array<Dynamic>));
+        if ((cast ((cast ((cast ((cast _Runtime.field(result, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast result : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(result, 'length'), 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast source : Array<Float>), (cast i : Float)) : Float)) : Bool) : Bool)) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast result : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(result, 'length'), 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast source : Array<Float>), (cast (i + 1.0) : Float)) : Float)) : Bool) : Bool)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
+        _Runtime.pushMany(result, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast source : Array<Float>), (cast i : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast source : Array<Float>), (cast (i + 1.0) : Float))] : Array<Dynamic>));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
@@ -560,7 +560,7 @@ class StrokePathGeometry {
     {
       var i:Float = _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 2.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        _Runtime.pushMany(result, cast ([flighthq._internal._StaticIndex.readArray(points, i), flighthq._internal._StaticIndex.readArray(points, (i + 1.0))] : Array<Dynamic>));
+        _Runtime.pushMany(result, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float))] : Array<Dynamic>));
         (i = cast ((i - 2.0) : Dynamic));
       }
     }
@@ -572,7 +572,7 @@ class StrokePathGeometry {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readArray(points, i)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
+        if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float))] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -581,7 +581,7 @@ class StrokePathGeometry {
   }
 
   public static function samePoint__strokePathGeometry(points:Array<Float>, a:Float, b:Float):Bool {
-    return cast ((cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(points, (a * 2.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(points, (b * 2.0)) : Float)) : Bool) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readArray(points, ((a * 2.0) + 1.0)) : Float), (cast flighthq._internal._StaticIndex.readArray(points, ((b * 2.0) + 1.0)) : Float)) : Bool) : Bool));
+    return cast ((cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (a * 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (b * 2.0) : Float)) : Float)) : Bool) : Bool) && (cast (cast StrokePathGeometry.approximatelyEqual__strokePathGeometry((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((a * 2.0) + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((b * 2.0) + 1.0) : Float)) : Float)) : Bool) : Bool));
     return cast null;
   }
 

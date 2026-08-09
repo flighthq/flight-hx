@@ -101,15 +101,15 @@ class DebugGeometry {
         {
           var points:Array<Float> = (cast shape : { var points:Array<Float>; }).points;
           if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
-          var localX:Float = flighthq._internal._StaticIndex.readArray(points, _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 2.0));
-          var localY:Float = flighthq._internal._StaticIndex.readArray(points, _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 1.0));
+          var localX:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 2.0) : Float));
+          var localY:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(points, 'length'), 1.0) : Float));
           var previousX:Float = (_Runtime.addNumbers(_Runtime.field(body, 'x'), (localX * cos)) - (localY * sin));
           var previousY:Float = (_Runtime.addNumbers(_Runtime.field(body, 'y'), (localX * sin)) + (localY * cos));
           {
             var i:Float = 0.0;
             while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-              (localX = cast (flighthq._internal._StaticIndex.readArray(points, i) : Dynamic));
-              (localY = cast (flighthq._internal._StaticIndex.readArray(points, (i + 1.0)) : Dynamic));
+              (localX = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Dynamic));
+              (localY = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Dynamic));
               var x:Float = (_Runtime.addNumbers(_Runtime.field(body, 'x'), (localX * cos)) - (localY * sin));
               var y:Float = (_Runtime.addNumbers(_Runtime.field(body, 'y'), (localX * sin)) + (localY * cos));
               DebugGeometry.writeLine__debugGeometry((cast out), (cast 'collider'), (cast _Runtime.field(body, 'index') : Float), (cast -1.0 : Float), (cast previousX : Float), (cast previousY : Float), (cast x : Float), (cast y : Float));

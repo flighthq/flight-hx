@@ -58,15 +58,15 @@ class CanvasParticleEmitter2D {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast particleCount : Float)) : Bool)) {
-        var id:Float = flighthq._internal._StaticIndex.readUint16Array(ids, i);
+        var id:Float = flighthq._internal._StaticIndex.readUint16ArrayTyped((cast ids : flighthq._internal._UInt16Array), (cast i : Float));
         if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
         var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(regions, id);
         if ((cast ((cast ((cast region.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast region.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { i++; continue; }
         var tt:Float = (i * 4.0);
-        var px:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, tt);
-        var py:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 1.0));
-        var rotation:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 2.0));
-        var scale:Float = flighthq._internal._StaticIndex.readFloat32Array(transforms, (tt + 3.0));
+        var px:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast tt : Float));
+        var py:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (tt + 1.0) : Float));
+        var rotation:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (tt + 2.0) : Float));
+        var scale:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (tt + 3.0) : Float));
         var cosR:Float = _Runtime.multiplyNumbers(HxMath.cos(rotation), scale);
         var sinR:Float = _Runtime.multiplyNumbers(HxMath.sin(rotation), scale);
         var a:Float = cast _Runtime.UNDEFINED;
@@ -90,7 +90,7 @@ class CanvasParticleEmitter2D {
           (tx = cast ((((t.a * px) + (t.c * py)) + t.tx) : Dynamic));
           (ty = cast ((((t.b * px) + (t.d * py)) + t.ty) : Dynamic));
         }
-        flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', _Runtime.multiplyNumbers(nodeAlpha, flighthq._internal._StaticIndex.readFloat32Array(alphas, i)));
+        flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (nodeAlpha * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast alphas : flighthq._internal._Float32Array), (cast i : Float))));
         flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, tx, ty] : Array<Dynamic>));
         flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([imageSource, region.x, region.y, region.width, region.height, 0.0, 0.0, region.width, region.height] : Array<Dynamic>));
         i++;

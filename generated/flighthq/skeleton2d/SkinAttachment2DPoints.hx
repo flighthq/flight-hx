@@ -37,16 +37,16 @@ class SkinAttachment2DPoints {
         while ((cast ((cast v : Float) < (cast _Runtime.field(counts, 'length') : Float)) : Bool)) {
           var wx:Float = 0.0;
           var wy:Float = 0.0;
-          var n:Float = flighthq._internal._StaticIndex.readUint16Array(counts, v);
+          var n:Float = flighthq._internal._StaticIndex.readUint16ArrayTyped((cast counts : flighthq._internal._UInt16Array), (cast v : Float));
           {
             var k:Float = 0.0;
             while ((cast ((cast k : Float) < (cast n : Float)) : Bool)) {
-              var b:Float = _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(inf, vi), SkinAttachment2DPoints.MATRIX_STRIDE__skinAttachment2DPoints);
-              var lx:Float = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 1.0)) : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(offsets, di)) : Dynamic));
-              var ly:Float = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 2.0)) : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 2.0)), flighthq._internal._StaticIndex.readFloat32Array(offsets, (di + 1.0))) : Dynamic));
-              var weight:Float = flighthq._internal._StaticIndex.readFloat32Array(inf, (vi + 3.0));
-              (wx = cast ((wx + (weight * _Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, b), lx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 2.0)), ly)), flighthq._internal._StaticIndex.readFloat32Array(world, (b + 4.0))))) : Dynamic));
-              (wy = cast ((wy + (weight * _Runtime.addNumbers((_Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 1.0)), lx) + _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(world, (b + 3.0)), ly)), flighthq._internal._StaticIndex.readFloat32Array(world, (b + 5.0))))) : Dynamic));
+              var b:Float = (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast inf : flighthq._internal._Float32Array), (cast vi : Float)) * SkinAttachment2DPoints.MATRIX_STRIDE__skinAttachment2DPoints);
+              var lx:Float = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast inf : flighthq._internal._Float32Array), (cast (vi + 1.0) : Float)) : Dynamic) : (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast inf : flighthq._internal._Float32Array), (cast (vi + 1.0) : Float)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast offsets : flighthq._internal._Float32Array), (cast di : Float))) : Dynamic));
+              var ly:Float = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast inf : flighthq._internal._Float32Array), (cast (vi + 2.0) : Float)) : Dynamic) : (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast inf : flighthq._internal._Float32Array), (cast (vi + 2.0) : Float)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast offsets : flighthq._internal._Float32Array), (cast (di + 1.0) : Float))) : Dynamic));
+              var weight:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast inf : flighthq._internal._Float32Array), (cast (vi + 3.0) : Float));
+              (wx = cast ((wx + (weight * (((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast b : Float)) * lx) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 2.0) : Float)) * ly)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 4.0) : Float))))) : Dynamic));
+              (wy = cast ((wy + (weight * (((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 1.0) : Float)) * lx) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 3.0) : Float)) * ly)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 5.0) : Float))))) : Dynamic));
               (vi = cast ((vi + 4.0) : Dynamic));
               (di = cast ((di + 2.0) : Dynamic));
               k++;
@@ -66,17 +66,17 @@ class SkinAttachment2DPoints {
       reportSkeleton2DDeformLengthMismatch((cast subject : String), (cast _Runtime.field(deform, 'length') : Float), (cast _Runtime.field(vertices, 'length') : Float));
     }
     b = (boneIndex * SkinAttachment2DPoints.MATRIX_STRIDE__skinAttachment2DPoints);
-    a = flighthq._internal._StaticIndex.readFloat32Array(world, b);
-    bb = flighthq._internal._StaticIndex.readFloat32Array(world, (b + 1.0));
-    c = flighthq._internal._StaticIndex.readFloat32Array(world, (b + 2.0));
-    d = flighthq._internal._StaticIndex.readFloat32Array(world, (b + 3.0));
-    tx = flighthq._internal._StaticIndex.readFloat32Array(world, (b + 4.0));
-    ty = flighthq._internal._StaticIndex.readFloat32Array(world, (b + 5.0));
+    a = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast b : Float));
+    bb = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 1.0) : Float));
+    c = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 2.0) : Float));
+    d = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 3.0) : Float));
+    tx = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 4.0) : Float));
+    ty = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 5.0) : Float));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(vertices, 'length') : Float)) : Bool)) {
-        var vx:Float = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(vertices, i) : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(vertices, i), flighthq._internal._StaticIndex.readFloat32Array(offsets, i)) : Dynamic));
-        var vy:Float = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32Array(vertices, (i + 1.0)) : Dynamic) : (cast _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(vertices, (i + 1.0)), flighthq._internal._StaticIndex.readFloat32Array(offsets, (i + 1.0))) : Dynamic));
+        var vx:Float = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast i : Float)) : Dynamic) : (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast i : Float)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast offsets : flighthq._internal._Float32Array), (cast i : Float))) : Dynamic));
+        var vy:Float = ((cast _Runtime.strictEquals(offsets, null) : Bool) ? (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (i + 1.0) : Float)) : Dynamic) : (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast (i + 1.0) : Float)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast offsets : flighthq._internal._Float32Array), (cast (i + 1.0) : Float))) : Dynamic));
         flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, i, (((a * vx) + (c * vy)) + tx));
         flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, (i + 1.0), (((bb * vx) + (d * vy)) + ty));
         (i = cast ((i + 2.0) : Dynamic));

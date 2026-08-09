@@ -68,7 +68,7 @@ class RiveSkin {
             slot++;
           }
         }
-        flighthq._internal._StaticIndex.writeUint16Array(influenceCounts, position, written);
+        flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast influenceCounts : flighthq._internal._UInt16Array), (cast position : Float), (cast written : Float));
         position++;
       }
     }
@@ -83,9 +83,9 @@ class RiveSkin {
       var index:Float = (skinIndex + 1.0);
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
-        if ((cast ((cast !_Runtime.strictEquals((cast object : RiveCoreObject).typeKey, RiveSkin.RIVE_TENDON__riveSkin) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index), skinIndex) : Bool)) : Bool)) { index++; continue; }
+        if ((cast ((cast !_Runtime.strictEquals((cast object : RiveCoreObject).typeKey, RiveSkin.RIVE_TENDON__riveSkin) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), skinIndex) : Bool)) : Bool)) { index++; continue; }
         var bone:Float = (cast RiveSkin.readRiveNumber__riveSkin((cast object), (cast RiveSkin.RIVE_TENDON_BONE_ID__riveSkin : Float), (cast -1.0 : Float)) : Float);
-        _Runtime.callProperty(tendons, 'push', cast ([{ boneIndex: ((cast ((cast ((cast bone : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast bone : Float) < (cast _Runtime.field(boneIndices, 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(boneIndices, bone) : Dynamic) : (cast -1.0 : Dynamic)), bind: (cast RiveSkin.readRiveMatrix__riveSkin((cast object), (cast RiveSkin.RIVE_TENDON_XX__riveSkin : Float), (cast RiveSkin.RIVE_TENDON_YX__riveSkin : Float), (cast RiveSkin.RIVE_TENDON_XY__riveSkin : Float), (cast RiveSkin.RIVE_TENDON_YY__riveSkin : Float)) : Matrix) }] : Array<Dynamic>));
+        _Runtime.callProperty(tendons, 'push', cast ([{ boneIndex: ((cast ((cast ((cast bone : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast bone : Float) < (cast _Runtime.field(boneIndices, 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast boneIndices : Array<Float>), (cast bone : Float)) : Dynamic) : (cast -1.0 : Dynamic)), bind: (cast RiveSkin.readRiveMatrix__riveSkin((cast object), (cast RiveSkin.RIVE_TENDON_XX__riveSkin : Float), (cast RiveSkin.RIVE_TENDON_YX__riveSkin : Float), (cast RiveSkin.RIVE_TENDON_XY__riveSkin : Float), (cast RiveSkin.RIVE_TENDON_YY__riveSkin : Float)) : Matrix) }] : Array<Dynamic>));
         index++;
       }
     }
@@ -97,7 +97,7 @@ class RiveSkin {
     {
       var index:Float = (skinnableIndex + 1.0);
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index) : RiveCoreObject).typeKey, RiveSkin.RIVE_SKIN__riveSkin) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index), skinnableIndex) : Bool)) : Bool)) { return cast index; }
+        if ((cast ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index) : RiveCoreObject).typeKey, RiveSkin.RIVE_SKIN__riveSkin) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), skinnableIndex) : Bool)) : Bool)) { return cast index; }
         index++;
       }
     }
@@ -109,7 +109,7 @@ class RiveSkin {
     {
       var index:Float = (vertexIndex + 1.0);
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index), vertexIndex) : Bool)) { index++; continue; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), vertexIndex) : Bool)) { index++; continue; }
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index) : RiveCoreObject).typeKey : Float), (cast RiveSkin.RIVE_WEIGHT__riveSkin : Float)) : Bool) : Bool)) { return cast index; }
         index++;
       }

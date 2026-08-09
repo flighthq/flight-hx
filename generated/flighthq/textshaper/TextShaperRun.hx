@@ -90,7 +90,7 @@ class TextShaperRun {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(glyphIds, 'length') : Float)) : Bool)) {
-        var extents:Null<GlyphExtents> = (cast backend : TextShaperBackend).getGlyphExtents((cast flighthq._internal._StaticIndex.readArray(glyphIds, i) : Float));
+        var extents:Null<GlyphExtents> = (cast backend : TextShaperBackend).getGlyphExtents((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast glyphIds : Array<Float>), (cast i : Float)) : Float));
         if ((cast !_Runtime.strictEquals(extents, null) : Bool)) {
           flighthq._internal._StaticIndex.writeArray(out, i, extents);
           resolved++;

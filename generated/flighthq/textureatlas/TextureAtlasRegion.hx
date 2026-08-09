@@ -148,7 +148,7 @@ class TextureAtlasRegion {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(out, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(keys, i, (cast TextureAtlasRegion._textureAtlasRegionSequenceKey__textureAtlasRegion((cast flighthq._internal._StaticIndex.readArray(out, i))) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast keys : Array<Float>), (cast i : Float), (cast (cast TextureAtlasRegion._textureAtlasRegionSequenceKey__textureAtlasRegion((cast flighthq._internal._StaticIndex.readArray(out, i))) : Float) : Float));
         i++;
       }
     }
@@ -156,15 +156,15 @@ class TextureAtlasRegion {
       var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(out, 'length') : Float)) : Bool)) {
         var region:flighthq.types.TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(out, i);
-        var key:Float = flighthq._internal._StaticIndex.readArray(keys, i);
+        var key:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast keys : Array<Float>), (cast i : Float));
         var j:Float = (i - 1.0);
-        while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readArray(keys, j) : Float) > (cast key : Float)) : Bool)) : Bool)) {
+        while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast keys : Array<Float>), (cast j : Float)) : Float) > (cast key : Float)) : Bool)) : Bool)) {
           flighthq._internal._StaticIndex.writeArray(out, (j + 1.0), flighthq._internal._StaticIndex.readArray(out, j));
-          flighthq._internal._StaticIndex.writeArray(keys, (j + 1.0), flighthq._internal._StaticIndex.readArray(keys, j));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast keys : Array<Float>), (cast (j + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast keys : Array<Float>), (cast j : Float)) : Float));
           j--;
         }
         flighthq._internal._StaticIndex.writeArray(out, (j + 1.0), region);
-        flighthq._internal._StaticIndex.writeArray(keys, (j + 1.0), key);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast keys : Array<Float>), (cast (j + 1.0) : Float), (cast key : Float));
         i++;
       }
     }
@@ -241,24 +241,24 @@ class TextureAtlasRegion {
     u1 = ((region.x + region.width) / imageWidth);
     v1 = ((region.y + region.height) / imageHeight);
     if ((cast region.rotated : Bool)) {
-      flighthq._internal._StaticIndex.writeArray(out, 0.0, u0);
-      flighthq._internal._StaticIndex.writeArray(out, 1.0, v1);
-      flighthq._internal._StaticIndex.writeArray(out, 2.0, u0);
-      flighthq._internal._StaticIndex.writeArray(out, 3.0, v0);
-      flighthq._internal._StaticIndex.writeArray(out, 4.0, u1);
-      flighthq._internal._StaticIndex.writeArray(out, 5.0, v0);
-      flighthq._internal._StaticIndex.writeArray(out, 6.0, u1);
-      flighthq._internal._StaticIndex.writeArray(out, 7.0, v1);
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast u0 : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast v1 : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast u0 : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 3.0 : Float), (cast v0 : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 4.0 : Float), (cast u1 : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 5.0 : Float), (cast v0 : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 6.0 : Float), (cast u1 : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 7.0 : Float), (cast v1 : Float));
       return cast out;
     }
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, u0);
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, v0);
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, u1);
-    flighthq._internal._StaticIndex.writeArray(out, 3.0, v0);
-    flighthq._internal._StaticIndex.writeArray(out, 4.0, u1);
-    flighthq._internal._StaticIndex.writeArray(out, 5.0, v1);
-    flighthq._internal._StaticIndex.writeArray(out, 6.0, u0);
-    flighthq._internal._StaticIndex.writeArray(out, 7.0, v1);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast u0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast v0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast u1 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 3.0 : Float), (cast v0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 4.0 : Float), (cast u1 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 5.0 : Float), (cast v1 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 6.0 : Float), (cast u0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 7.0 : Float), (cast v1 : Float));
     return cast out;
     return cast null;
   }

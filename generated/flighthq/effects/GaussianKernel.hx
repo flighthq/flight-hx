@@ -14,7 +14,7 @@ class GaussianKernel {
     size = (cast getGaussianKernelSize((cast sigma : Float)) : Float);
     _Runtime.setLength(out, size);
     if ((cast _Runtime.strictEquals(size, 1.0) : Bool)) {
-      flighthq._internal._StaticIndex.writeArray(out, 0.0, 1.0);
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast 1.0 : Float));
       return cast out;
     }
     radius = ((size - 1.0) / 2.0);
@@ -25,7 +25,7 @@ class GaussianKernel {
       while ((cast ((cast i : Float) < (cast size : Float)) : Bool)) {
         var x:Float = (i - radius);
         var weight:Float = HxMath.exp((-(x * x) / twoSigmaSquared));
-        flighthq._internal._StaticIndex.writeArray(out, i, weight);
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast i : Float), (cast weight : Float));
         (sum = cast ((sum + weight) : Dynamic));
         i++;
       }
@@ -34,7 +34,7 @@ class GaussianKernel {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast size : Float)) : Bool)) {
-        ({ var __indexedObject0:Dynamic = out; var __indexedKey1:Dynamic = i; flighthq._internal._StaticIndex.writeArray(__indexedObject0, __indexedKey1, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readArray(__indexedObject0, __indexedKey1), inverseSum)); });
+        ({ var __indexedObject0:Array<Float> = out; var __indexedKey1:Float = i; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject0 : Array<Float>), (cast __indexedKey1 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject0 : Array<Float>), (cast __indexedKey1 : Float)) * inverseSum) : Float)); });
         i++;
       }
     }

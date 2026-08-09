@@ -58,9 +58,9 @@ class MeshGeometryDeformationClone {
       while ((cast ((cast vertex : Float) < (cast vertexCount : Float)) : Bool)) {
         var target:Float = ((vertex * floatsPerVertex) + offset);
         var from:Float = (vertex * 3.0);
-        flighthq._internal._StaticIndex.writeFloat32Array(geometry.vertices, target, flighthq._internal._StaticIndex.readFloat32Array(source, from));
-        flighthq._internal._StaticIndex.writeFloat32Array(geometry.vertices, (target + 1.0), flighthq._internal._StaticIndex.readFloat32Array(source, (from + 1.0)));
-        flighthq._internal._StaticIndex.writeFloat32Array(geometry.vertices, (target + 2.0), flighthq._internal._StaticIndex.readFloat32Array(source, (from + 2.0)));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast geometry.vertices : flighthq._internal._Float32Array), (cast target : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast from : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast geometry.vertices : flighthq._internal._Float32Array), (cast (target + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (from + 1.0) : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast geometry.vertices : flighthq._internal._Float32Array), (cast (target + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (from + 2.0) : Float)) : Float));
         vertex++;
       }
     }

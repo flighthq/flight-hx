@@ -16,17 +16,17 @@ class HslColor {
     var p:Float = cast _Runtime.UNDEFINED;
     var hn:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(s, 0.0) : Bool)) {
-      flighthq._internal._StaticIndex.writeArray(out, 0.0, l);
-      flighthq._internal._StaticIndex.writeArray(out, 1.0, l);
-      flighthq._internal._StaticIndex.writeArray(out, 2.0, l);
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast l : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast l : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast l : Float));
       return;
     }
     q = ((cast ((cast l : Float) < (cast 0.5 : Float)) : Bool) ? (cast (l * (1.0 + s)) : Dynamic) : (cast ((l + s) - (l * s)) : Dynamic));
     p = ((2.0 * l) - q);
     hn = (h / 360.0);
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, (cast HslColor.hueToRgbChannel__hslColor((cast p : Float), (cast q : Float), (cast (hn + (1.0 / 3.0)) : Float)) : Float));
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, (cast HslColor.hueToRgbChannel__hslColor((cast p : Float), (cast q : Float), (cast hn : Float)) : Float));
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, (cast HslColor.hueToRgbChannel__hslColor((cast p : Float), (cast q : Float), (cast (hn - (1.0 / 3.0)) : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast (cast HslColor.hueToRgbChannel__hslColor((cast p : Float), (cast q : Float), (cast (hn + (1.0 / 3.0)) : Float)) : Float) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast (cast HslColor.hueToRgbChannel__hslColor((cast p : Float), (cast q : Float), (cast hn : Float)) : Float) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast (cast HslColor.hueToRgbChannel__hslColor((cast p : Float), (cast q : Float), (cast (hn - (1.0 / 3.0)) : Float)) : Float) : Float));
   }
 
   public static function rgbToHsl(out:flighthq.types.HslColor, color:Float):flighthq.types.HslColor {
@@ -46,9 +46,9 @@ class HslColor {
     min = HxMath.min(HxMath.min(r, g), b);
     l = ((max + min) / 2.0);
     if ((cast _Runtime.strictEquals(max, min) : Bool)) {
-      flighthq._internal._StaticIndex.writeArray(out, 0.0, 0.0);
-      flighthq._internal._StaticIndex.writeArray(out, 1.0, 0.0);
-      flighthq._internal._StaticIndex.writeArray(out, 2.0, l);
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast l : Float));
       return cast out;
     }
     d = (max - min);
@@ -60,9 +60,9 @@ class HslColor {
     } else {
       (h = cast (((((r - g) / d) + 4.0) / 6.0) : Dynamic));
     } }
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, (h * 360.0));
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, s);
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, l);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast (h * 360.0) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast s : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast l : Float));
     return cast out;
     return cast null;
   }

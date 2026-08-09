@@ -23,8 +23,8 @@ class MeshGeometryUvs {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Float = ((i * floatsPerVertex) + floatOffset);
-        ({ var __indexedObject0:Dynamic = verts; var __indexedKey1:Dynamic = base; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject0, __indexedKey1, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject0, __indexedKey1), du)); });
-        ({ var __indexedObject2:Dynamic = verts; var __indexedKey3:Dynamic = (base + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject2, __indexedKey3, _Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject2, __indexedKey3), dv)); });
+        ({ var __indexedObject0:flighthq._internal._Float32Array = verts; var __indexedKey1:Float = base; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject0 : flighthq._internal._Float32Array), (cast __indexedKey1 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject0 : flighthq._internal._Float32Array), (cast __indexedKey1 : Float)) + du) : Float)); });
+        ({ var __indexedObject2:flighthq._internal._Float32Array = verts; var __indexedKey3:Float = (base + 1.0); flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject2 : flighthq._internal._Float32Array), (cast __indexedKey3 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject2 : flighthq._internal._Float32Array), (cast __indexedKey3 : Float)) + dv) : Float)); });
         i++;
       }
     }
@@ -45,8 +45,8 @@ class MeshGeometryUvs {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Float = ((i * floatsPerVertex) + floatOffset);
-        ({ var __indexedObject4:Dynamic = verts; var __indexedKey5:Dynamic = base; flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject4, __indexedKey5, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject4, __indexedKey5), su)); });
-        ({ var __indexedObject6:Dynamic = verts; var __indexedKey7:Dynamic = (base + 1.0); flighthq._internal._StaticIndex.writeFloat32Array(__indexedObject6, __indexedKey7, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readFloat32Array(__indexedObject6, __indexedKey7), sv)); });
+        ({ var __indexedObject4:flighthq._internal._Float32Array = verts; var __indexedKey5:Float = base; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject4 : flighthq._internal._Float32Array), (cast __indexedKey5 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject4 : flighthq._internal._Float32Array), (cast __indexedKey5 : Float)) * su) : Float)); });
+        ({ var __indexedObject6:flighthq._internal._Float32Array = verts; var __indexedKey7:Float = (base + 1.0); flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject6 : flighthq._internal._Float32Array), (cast __indexedKey7 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject6 : flighthq._internal._Float32Array), (cast __indexedKey7 : Float)) * sv) : Float)); });
         i++;
       }
     }
@@ -67,8 +67,8 @@ class MeshGeometryUvs {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
         var base:Float = ((i * floatsPerVertex) + floatOffset);
-        flighthq._internal._StaticIndex.writeFloat32Array(verts, base, _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(verts, base), HxMath.floor(flighthq._internal._StaticIndex.readFloat32Array(verts, base))));
-        flighthq._internal._StaticIndex.writeFloat32Array(verts, (base + 1.0), _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32Array(verts, (base + 1.0)), HxMath.floor(flighthq._internal._StaticIndex.readFloat32Array(verts, (base + 1.0)))));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast verts : flighthq._internal._Float32Array), (cast base : Float), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast verts : flighthq._internal._Float32Array), (cast base : Float)), HxMath.floor(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast verts : flighthq._internal._Float32Array), (cast base : Float)))) : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast verts : flighthq._internal._Float32Array), (cast (base + 1.0) : Float), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast verts : flighthq._internal._Float32Array), (cast (base + 1.0) : Float)), HxMath.floor(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast verts : flighthq._internal._Float32Array), (cast (base + 1.0) : Float)))) : Float));
         i++;
       }
     }

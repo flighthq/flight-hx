@@ -8,11 +8,11 @@ import flighthq.types.TextureContainerKind;
 class DetectTextureContainer {
   public static function detectTextureContainer(bytes:flighthq._internal._UInt8Array):Null<TextureContainerKind> {
     if ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 12.0 : Float)) : Bool) && (cast (cast DetectTextureContainer.isKtx2Magic__detectTextureContainer((cast bytes)) : Bool) : Bool)) : Bool)) { return cast 'ktx2'; }
-    if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 4.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 68.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 1.0), 68.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 2.0), 83.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 3.0), 32.0) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 4.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 68.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 1.0 : Float)), 68.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 2.0 : Float)), 83.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 3.0 : Float)), 32.0) : Bool)) : Bool)) {
       return cast 'dds';
     }
-    if ((cast ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 65.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 1.0), 84.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 2.0), 70.0) : Bool)) : Bool)) { return cast 'atf'; }
-    if ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 115.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 1.0), 66.0) : Bool)) : Bool)) { return cast 'basis'; }
+    if ((cast ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 65.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 1.0 : Float)), 84.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 2.0 : Float)), 70.0) : Bool)) : Bool)) { return cast 'atf'; }
+    if ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 2.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 115.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 1.0 : Float)), 66.0) : Bool)) : Bool)) { return cast 'basis'; }
     return cast null;
     return cast null;
   }
@@ -21,7 +21,7 @@ class DetectTextureContainer {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 12.0 : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, i), flighthq._internal._StaticIndex.readArray(DetectTextureContainer.ktx2Magic__detectTextureContainer, i)) : Bool)) { return cast false; }
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast i : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast DetectTextureContainer.ktx2Magic__detectTextureContainer : Array<Float>), (cast i : Float))) : Bool)) { return cast false; }
         (i = cast ((i + 1.0) : Dynamic));
       }
     }

@@ -219,22 +219,22 @@ class GlDraw {
     quadIndexBuffer = _Runtime.field(__destructure0, 'quadIndexBuffer');
     shaderLoc = _Runtime.field(__destructure0, 'shaderLoc');
     v = quadVertexData;
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 0.0, x0);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 1.0, y0);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 2.0, u0);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 3.0, v0);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 4.0, x1);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 5.0, y0);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 6.0, u1);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 7.0, v0);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 8.0, x1);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 9.0, y1);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 10.0, u1);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 11.0, v1);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 12.0, x0);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 13.0, y1);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 14.0, u0);
-    flighthq._internal._StaticIndex.writeFloat32Array(v, 15.0, v1);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast x0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast y0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast u0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast v0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast x1 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast y0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast u1 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast v0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast x1 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast y1 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 10.0 : Float), (cast u1 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 11.0 : Float), (cast v1 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 12.0 : Float), (cast x0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 13.0 : Float), (cast y1 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 14.0 : Float), (cast u0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast v : flighthq._internal._Float32Array), (cast 15.0 : Float), (cast v1 : Float));
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), quadVertexBuffer);
     flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), 0.0, v);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), quadIndexBuffer);
@@ -319,12 +319,12 @@ class GlDraw {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
-        var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 3.0));
+        var a:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float));
         var scale:Float = ((cast toPremultiplied : Bool) ? (cast (a / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(a, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (255.0 / a) : Dynamic)) : Dynamic));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, i, _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, i), scale));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 1.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 1.0)), scale));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 2.0), _Runtime.multiplyNumbers(flighthq._internal._StaticIndex.readUint8ClampedArray(data, (i + 2.0)), scale));
-        flighthq._internal._StaticIndex.writeUint8ClampedArray(out, (i + 3.0), a);
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast i : Float)) * scale) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float)) * scale) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float)) * scale) : Float));
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float), (cast a : Float));
         (i = cast ((i + 4.0) : Dynamic));
       }
     }

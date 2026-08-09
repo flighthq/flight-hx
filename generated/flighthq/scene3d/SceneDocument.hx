@@ -56,7 +56,7 @@ class SceneDocument {
     {
       var r:Float = 0.0;
       while ((cast ((cast r : Float) < (cast _Runtime.field(roots, 'length') : Float)) : Bool)) {
-        var node:Node3D = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readArray(roots, r));
+        var node:Node3D = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast roots : Array<Float>), (cast r : Float)));
         if ((cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast addNodeChild((cast scene.root), (cast node)) : NodeOf<Node3DTraits>); }
         r++;
       }
@@ -82,7 +82,7 @@ class SceneDocument {
         {
           var r:Float = 0.0;
           while ((cast ((cast r : Float) < (cast _Runtime.field(roots, 'length') : Float)) : Bool)) {
-            var node:Node3D = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readArray(roots, r));
+            var node:Node3D = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast roots : Array<Float>), (cast r : Float)));
             if ((cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast addNodeChild((cast scene.root), (cast node)) : NodeOf<Node3DTraits>); }
             r++;
           }
@@ -121,7 +121,7 @@ class SceneDocument {
       {
         var j:Float = 0.0;
         while ((cast ((cast j : Float) < (cast _Runtime.field((cast skin : Scene3DDocumentSkin).joints, 'length') : Float)) : Bool)) {
-          var joint:Node3D = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readArray((cast skin : Scene3DDocumentSkin).joints, j));
+          var joint:Node3D = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast skin : Scene3DDocumentSkin).joints : Array<Float>), (cast j : Float)));
           if ((cast !_Runtime.strictEquals(joint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             _Runtime.callProperty(joints, 'push', cast ([joint] : Array<Dynamic>));
             _Runtime.callProperty(names, 'push', cast ([_Runtime.coalesce((cast joint : { var name:Null<String>; }).name, function():Dynamic return cast '')] : Array<Dynamic>));
@@ -194,7 +194,7 @@ class SceneDocument {
         {
           var c:Float = 0.0;
           while ((cast ((cast c : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-            var child:Node3D = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readArray(children, c));
+            var child:Node3D = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast children : Array<Float>), (cast c : Float)));
             if ((cast !_Runtime.strictEquals(child, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast addNodeChild((cast flighthq._internal._StaticIndex.readArray(nodes, i)), (cast child)) : NodeOf<Node3DTraits>); }
             c++;
           }

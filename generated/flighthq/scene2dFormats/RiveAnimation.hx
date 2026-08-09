@@ -147,7 +147,7 @@ class RiveAnimation {
     var path:Null<String> = cast _Runtime.UNDEFINED;
     var convert:Null<Float->Float> = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast _Runtime.strictEquals(skeleton, null) : Bool) || (cast ((cast keyedIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast keyedIndex : Float) >= (cast _Runtime.field(_Runtime.field(skeleton, 'boneIndices'), 'length') : Float)) : Bool)) : Bool)) { return cast null; }
-    boneIndex = flighthq._internal._StaticIndex.readArray(_Runtime.field(skeleton, 'boneIndices'), keyedIndex);
+    boneIndex = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(skeleton, 'boneIndices') : Array<Float>), (cast keyedIndex : Float));
     if ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
     path = (cast RiveAnimation.toRiveBoneAnimationPath__riveAnimation((cast propertyKey : Float)) : Null<String>);
     if ((cast _Runtime.strictEquals(path, null) : Bool)) { return cast null; }
@@ -210,7 +210,7 @@ class RiveAnimation {
         var value:Null<Array<Float>> = (cast readValue((cast object)) : Null<Array<Float>>);
         if ((cast _Runtime.strictEquals(value, null) : Bool)) { break; }
         var time:Float = ((cast RiveAnimation.readRiveNumber__riveAnimation((cast object), (cast RiveAnimation.RIVE_KEYFRAME_FRAME__riveAnimation : Float), (cast 0.0 : Float)) : Float) / fps);
-        if ((cast ((cast ((cast _Runtime.field(times, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast time : Float) <= (cast flighthq._internal._StaticIndex.readArray(times, _Runtime.subtractNumbers(_Runtime.field(times, 'length'), 1.0)) : Float)) : Bool)) : Bool)) { index++; continue; }
+        if ((cast ((cast ((cast _Runtime.field(times, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast time : Float) <= (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast times : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(times, 'length'), 1.0) : Float)) : Float)) : Bool)) : Bool)) { index++; continue; }
         _Runtime.callProperty(times, 'push', cast ([time] : Array<Dynamic>));
         _Runtime.callProperty(values, 'push', _Runtime.concatArrays([_Runtime.toArray(value)]));
         _Runtime.callProperty(segmentEasings, 'push', cast ([(cast RiveAnimation.toRiveSegmentEasing__riveAnimation((cast object), (cast interpolators)) : Null<EasingFunction>)] : Array<Dynamic>));
@@ -273,7 +273,7 @@ class RiveAnimation {
     current = index;
     while ((cast ((cast current : Float) > (cast 0.0 : Float)) : Bool)) {
       if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), current) : RiveCoreObject).typeKey : Float), (cast RiveAnimation.RIVE_SHAPE_TYPE_KEY__riveAnimation : Float)) : Bool) : Bool)) { return cast current; }
-      (current = cast (flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), current) : Dynamic));
+      (current = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast current : Float)) : Dynamic));
     }
     return cast -1.0;
     return cast null;

@@ -29,8 +29,8 @@ class GetPathContourLengths {
     {
       var i:Float = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(contour, 'length') : Float)) : Bool)) {
-        var dx:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, i), flighthq._internal._StaticIndex.readArray(contour, (i - 2.0)));
-        var dy:Float = _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(contour, (i + 1.0)), flighthq._internal._StaticIndex.readArray(contour, (i - 1.0)));
+        var dx:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast i : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i - 2.0) : Float)));
+        var dy:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i + 1.0) : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i - 1.0) : Float)));
         (len = cast ((len + HxMath.sqrt(((dx * dx) + (dy * dy)))) : Dynamic));
         (i = cast ((i + 2.0) : Dynamic));
       }

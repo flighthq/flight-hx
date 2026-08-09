@@ -125,14 +125,14 @@ class GlMeshUpload {
         var base:Float = (v * floatsPerVertex);
         var s:Float = (v * 3.0);
         if ((cast ((cast positionOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(out, (base + positionOffset), flighthq._internal._StaticIndex.readFloat32Array(positions, s));
-          flighthq._internal._StaticIndex.writeFloat32Array(out, ((base + positionOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(positions, (s + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(out, ((base + positionOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(positions, (s + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + positionOffset) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast positions : flighthq._internal._Float32Array), (cast s : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((base + positionOffset) + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast positions : flighthq._internal._Float32Array), (cast (s + 1.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((base + positionOffset) + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast positions : flighthq._internal._Float32Array), (cast (s + 2.0) : Float)) : Float));
         }
         if ((cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32Array(out, (base + normalOffset), flighthq._internal._StaticIndex.readFloat32Array(normals, s));
-          flighthq._internal._StaticIndex.writeFloat32Array(out, ((base + normalOffset) + 1.0), flighthq._internal._StaticIndex.readFloat32Array(normals, (s + 1.0)));
-          flighthq._internal._StaticIndex.writeFloat32Array(out, ((base + normalOffset) + 2.0), flighthq._internal._StaticIndex.readFloat32Array(normals, (s + 2.0)));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (base + normalOffset) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast normals : flighthq._internal._Float32Array), (cast s : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((base + normalOffset) + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast normals : flighthq._internal._Float32Array), (cast (s + 1.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((base + normalOffset) + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast normals : flighthq._internal._Float32Array), (cast (s + 2.0) : Float)) : Float));
         }
         v++;
       }

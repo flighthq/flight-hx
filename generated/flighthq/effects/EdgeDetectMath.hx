@@ -22,12 +22,12 @@ class EdgeDetectMath {
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
     a = ((_Runtime.toInt32(color) & 255) / 255.0);
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, threshold);
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, feather);
-    flighthq._internal._StaticIndex.writeArray(out, 2.0, r);
-    flighthq._internal._StaticIndex.writeArray(out, 3.0, g);
-    flighthq._internal._StaticIndex.writeArray(out, 4.0, b);
-    flighthq._internal._StaticIndex.writeArray(out, 5.0, a);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast threshold : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast feather : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast r : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 3.0 : Float), (cast g : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 4.0 : Float), (cast b : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 5.0 : Float), (cast a : Float));
   }
 
   public static function computeOutlineThicknessPx(effect:OutlineEffect):Float {
@@ -40,28 +40,28 @@ class EdgeDetectMath {
     var threshold:Float = cast _Runtime.UNDEFINED;
     strength = HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0)));
     threshold = HxMath.max(0.01, HxMath.min(1.0, (1.0 - (strength * 0.95))));
-    flighthq._internal._StaticIndex.writeArray(out, 0.0, threshold);
-    flighthq._internal._StaticIndex.writeArray(out, 1.0, strength);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast threshold : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast strength : Float));
   }
 
   public static function getSobelKernelCoefficients(out:flighthq._internal._Float32Array):Void {
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 0.0, -1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 1.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 2.0, 1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 3.0, -2.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 4.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 5.0, 2.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 6.0, -1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 7.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 8.0, 1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 9.0, -1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 10.0, -2.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 11.0, -1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 12.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 13.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 14.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 15.0, 1.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 16.0, 2.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(out, 17.0, 1.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast -1.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast 1.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast -2.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast 2.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast -1.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast 1.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast -1.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 10.0 : Float), (cast -2.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 11.0 : Float), (cast -1.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 12.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 13.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 14.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 15.0 : Float), (cast 1.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 16.0 : Float), (cast 2.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 17.0 : Float), (cast 1.0 : Float));
   }
 }

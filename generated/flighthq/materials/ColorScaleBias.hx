@@ -37,14 +37,14 @@ class ColorScaleBias {
   }
 
   public static function copyColorScaleBiasToArrays(outColorScales:Array<Float>, outColorBiases:Array<Float>, source:ColorScaleBiasLike):Void {
-    flighthq._internal._StaticIndex.writeArray(outColorScales, 0.0, _Runtime.field(source, 'redScale'));
-    flighthq._internal._StaticIndex.writeArray(outColorScales, 1.0, _Runtime.field(source, 'greenScale'));
-    flighthq._internal._StaticIndex.writeArray(outColorScales, 2.0, _Runtime.field(source, 'blueScale'));
-    flighthq._internal._StaticIndex.writeArray(outColorScales, 3.0, _Runtime.field(source, 'alphaScale'));
-    flighthq._internal._StaticIndex.writeArray(outColorBiases, 0.0, _Runtime.field(source, 'redBias'));
-    flighthq._internal._StaticIndex.writeArray(outColorBiases, 1.0, _Runtime.field(source, 'greenBias'));
-    flighthq._internal._StaticIndex.writeArray(outColorBiases, 2.0, _Runtime.field(source, 'blueBias'));
-    flighthq._internal._StaticIndex.writeArray(outColorBiases, 3.0, _Runtime.field(source, 'alphaBias'));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outColorScales : Array<Float>), (cast 0.0 : Float), (cast _Runtime.field(source, 'redScale') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outColorScales : Array<Float>), (cast 1.0 : Float), (cast _Runtime.field(source, 'greenScale') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outColorScales : Array<Float>), (cast 2.0 : Float), (cast _Runtime.field(source, 'blueScale') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outColorScales : Array<Float>), (cast 3.0 : Float), (cast _Runtime.field(source, 'alphaScale') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outColorBiases : Array<Float>), (cast 0.0 : Float), (cast _Runtime.field(source, 'redBias') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outColorBiases : Array<Float>), (cast 1.0 : Float), (cast _Runtime.field(source, 'greenBias') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outColorBiases : Array<Float>), (cast 2.0 : Float), (cast _Runtime.field(source, 'blueBias') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast outColorBiases : Array<Float>), (cast 3.0 : Float), (cast _Runtime.field(source, 'alphaBias') : Float));
   }
 
   public static function createColorScaleBias(?opts:flighthq._internal._Partial<ColorScaleBiasLike>):flighthq.types.ColorScaleBias {

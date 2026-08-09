@@ -160,8 +160,8 @@ class BlendModeMath {
     {
       var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast 3.0 : Float)) : Bool)) {
-        if ((cast ((cast flighthq._internal._StaticIndex.readArray(out, i) : Float) < (cast flighthq._internal._StaticIndex.readArray(out, iMin) : Float)) : Bool)) { (iMin = cast (i : Dynamic)); }
-        if ((cast ((cast flighthq._internal._StaticIndex.readArray(out, i) : Float) > (cast flighthq._internal._StaticIndex.readArray(out, iMax) : Float)) : Bool)) { (iMax = cast (i : Dynamic)); }
+        if ((cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast i : Float)) : Float) < (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast iMin : Float)) : Float)) : Bool)) { (iMin = cast (i : Dynamic)); }
+        if ((cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast i : Float)) : Float) > (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast iMax : Float)) : Float)) : Bool)) { (iMax = cast (i : Dynamic)); }
         i++;
       }
     }
@@ -169,14 +169,14 @@ class BlendModeMath {
       (iMax = cast (_Runtime.fmod((iMin + 1.0), 3.0) : Dynamic));
     }
     iMid = ((3.0 - iMin) - iMax);
-    if ((cast ((cast flighthq._internal._StaticIndex.readArray(out, iMax) : Float) > (cast flighthq._internal._StaticIndex.readArray(out, iMin) : Float)) : Bool)) {
-      flighthq._internal._StaticIndex.writeArray(out, iMid, ((_Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, iMid), flighthq._internal._StaticIndex.readArray(out, iMin)) * target) / _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readArray(out, iMax), flighthq._internal._StaticIndex.readArray(out, iMin))));
-      flighthq._internal._StaticIndex.writeArray(out, iMax, target);
+    if ((cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast iMax : Float)) : Float) > (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast iMin : Float)) : Float)) : Bool)) {
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast iMid : Float), (cast (((flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast iMid : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast iMin : Float))) * target) / (flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast iMax : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast iMin : Float)))) : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast iMax : Float), (cast target : Float));
     } else {
-      flighthq._internal._StaticIndex.writeArray(out, iMid, 0.0);
-      flighthq._internal._StaticIndex.writeArray(out, iMax, 0.0);
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast iMid : Float), (cast 0.0 : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast iMax : Float), (cast 0.0 : Float));
     }
-    flighthq._internal._StaticIndex.writeArray(out, iMin, 0.0);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast iMin : Float), (cast 0.0 : Float));
     return cast out;
     return cast null;
   }

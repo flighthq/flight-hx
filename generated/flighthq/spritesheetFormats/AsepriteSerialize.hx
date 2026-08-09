@@ -45,7 +45,7 @@ class AsepriteSerialize {
     for (anim in _Runtime.iterable(data.animations)) {
       var idx:Float = _Runtime.callProperty(anim.frameNames, 'indexOf', cast ([frameName] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(idx, -1.0) : Bool)) { continue; }
-      if ((cast !_Runtime.strictEquals(anim.frameDurations, null) : Bool)) { return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(anim.frameDurations, idx), function():Dynamic return cast anim.frameDuration); }
+      if ((cast !_Runtime.strictEquals(anim.frameDurations, null) : Bool)) { return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast anim.frameDurations : Array<Float>), (cast idx : Float)), function():Dynamic return cast anim.frameDuration); }
       return cast anim.frameDuration;
     }
     return cast 100.0;

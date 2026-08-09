@@ -205,10 +205,10 @@ class RiveScene2D {
     {
       var offset:Float = 0.0;
       while ((cast ((cast (offset + 1.0) : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
-        var x:Float = flighthq._internal._StaticIndex.readArray(data, offset);
-        var y:Float = flighthq._internal._StaticIndex.readArray(data, (offset + 1.0));
-        flighthq._internal._StaticIndex.writeArray(data, offset, (((local.a * x) + (local.c * y)) + local.tx));
-        flighthq._internal._StaticIndex.writeArray(data, (offset + 1.0), (((local.b * x) + (local.d * y)) + local.ty));
+        var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast offset : Float));
+        var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (offset + 1.0) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast data : Array<Float>), (cast offset : Float), (cast (((local.a * x) + (local.c * y)) + local.tx) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast data : Array<Float>), (cast (offset + 1.0) : Float), (cast (((local.b * x) + (local.d * y)) + local.ty) : Float));
         (offset = cast ((offset + 2.0) : Dynamic));
       }
     }
@@ -218,10 +218,10 @@ class RiveScene2D {
 
   public static function findRiveShapeOwner__riveScene2D(artboard:RiveArtboardGraph, index:Float):Float {
     var parent:Float = cast _Runtime.UNDEFINED;
-    parent = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index);
+    parent = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float));
     while ((cast ((cast parent : Float) > (cast 0.0 : Float)) : Bool)) {
       if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), parent) : RiveCoreObject).typeKey : Float), (cast RiveScene2D.RIVE_SHAPE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) { return cast parent; }
-      (parent = cast (flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), parent) : Dynamic));
+      (parent = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast parent : Float)) : Dynamic));
     }
     return cast -1.0;
     return cast null;
@@ -244,11 +244,11 @@ class RiveScene2D {
 
   public static function findRiveDisplayParent__riveScene2D(nodes:Array<Null<DisplayObject>>, parentIndices:Array<Float>, index:Float):Null<DisplayObject> {
     var parent:Float = cast _Runtime.UNDEFINED;
-    parent = flighthq._internal._StaticIndex.readArray(parentIndices, index);
+    parent = flighthq._internal._StaticIndex.readFloatArrayTyped((cast parentIndices : Array<Float>), (cast index : Float));
     while ((cast ((cast parent : Float) >= (cast 0.0 : Float)) : Bool)) {
       var node:Null<DisplayObject> = flighthq._internal._StaticIndex.readArray(nodes, parent);
       if ((cast ((cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(node, null) : Bool)) : Bool)) { return cast node; }
-      (parent = cast (flighthq._internal._StaticIndex.readArray(parentIndices, parent) : Dynamic));
+      (parent = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast parentIndices : Array<Float>), (cast parent : Float)) : Dynamic));
     }
     return cast null;
     return cast null;

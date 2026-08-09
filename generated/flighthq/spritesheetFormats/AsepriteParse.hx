@@ -41,7 +41,7 @@ class AsepriteParse {
     var uniform:Bool = cast _Runtime.UNDEFINED;
     tagFrameNames = _Runtime.slice(frameNames, tag.from, (tag.to + 1.0));
     durations = (cast _Runtime.mapArray((cast tagFrameNames : Array<String>), function(n:String, __unused0:Float, __unused1:Array<String>):Float return _Runtime.coalesce(((cast durationMap : flighthq._internal._Map<String, Float>).get(n)), function():Dynamic return cast 100.0), _Runtime.UNDEFINED));
-    firstDuration = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(durations, 0.0), function():Dynamic return cast 100.0);
+    firstDuration = _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast durations : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 100.0);
     uniform = _Runtime.callProperty(durations, 'every', cast ([function(d:Float, __unused2:Float, __unused3:Array<Float>):Bool return _Runtime.strictEquals(d, firstDuration)] : Array<Dynamic>));
     return cast (cast createSpritesheetAnimationData((cast { direction: _Runtime.coalesce(tag.direction, function():Dynamic return cast 'forward'), frameDuration: firstDuration, frameDurations: ((cast uniform : Bool) ? (cast null : Dynamic) : (cast durations : Dynamic)), frameNames: tagFrameNames, name: tag.name, repeatCount: -1.0 })) : SpritesheetAnimationData);
     return cast null;

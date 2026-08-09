@@ -69,14 +69,14 @@ class WgpuUnlitPrelude {
   }
 
   public static function writeWgpuUnlitUniform__wgpuUnlitPrelude(state:WgpuRenderState, binding:WgpuMaterialBinding, color:LinearColor, intensity:Float, alphaCutoff:Float):Void {
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 0.0, flighthq._internal._StaticIndex.readArray(color, 0.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 1.0, flighthq._internal._StaticIndex.readArray(color, 1.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 2.0, flighthq._internal._StaticIndex.readArray(color, 2.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 3.0, flighthq._internal._StaticIndex.readArray(color, 3.0));
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 4.0, intensity);
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 5.0, alphaCutoff);
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 6.0, 0.0);
-    flighthq._internal._StaticIndex.writeFloat32Array(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 7.0, 0.0);
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuUnlitPrelude._scratch__wgpuUnlitPrelude : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 0.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuUnlitPrelude._scratch__wgpuUnlitPrelude : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 1.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuUnlitPrelude._scratch__wgpuUnlitPrelude : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 2.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuUnlitPrelude._scratch__wgpuUnlitPrelude : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 3.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuUnlitPrelude._scratch__wgpuUnlitPrelude : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast intensity : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuUnlitPrelude._scratch__wgpuUnlitPrelude : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast alphaCutoff : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuUnlitPrelude._scratch__wgpuUnlitPrelude : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuUnlitPrelude._scratch__wgpuUnlitPrelude : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast 0.0 : Float));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(WgpuUnlitPrelude._scratch__wgpuUnlitPrelude, 'buffer'), 0.0, WgpuUnlitPrelude.UNLIT_UNIFORM_BYTES__wgpuUnlitPrelude] : Array<Dynamic>));
   }
 

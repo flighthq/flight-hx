@@ -51,7 +51,7 @@ class RichTextMetrics {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast limit : Float)) : Bool)) {
-        (offset = cast ((offset + flighthq._internal._StaticIndex.readArray(lineHeights, i)) : Dynamic));
+        (offset = cast ((offset + flighthq._internal._StaticIndex.readFloatArrayTyped((cast lineHeights : Array<Float>), (cast i : Float))) : Dynamic));
         i++;
       }
     }

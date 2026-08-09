@@ -76,7 +76,7 @@ class PrepareGlScene3DForwardLights {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(indices, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(out, i, flighthq._internal._StaticIndex.readArray(indices, i));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast indices : Array<Float>), (cast i : Float)) : Float));
         i++;
       }
     }
@@ -119,7 +119,7 @@ class PrepareGlScene3DForwardLights {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(indices, 'length') : Float)) : Bool)) {
-            if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(candidate, i), flighthq._internal._StaticIndex.readArray(indices, i)) : Bool)) {
+            if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast candidate : Array<Float>), (cast i : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast indices : Array<Float>), (cast i : Float))) : Bool)) {
               (equal = cast (false : Dynamic));
               break;
             }
@@ -139,9 +139,9 @@ class PrepareGlScene3DForwardLights {
     setBoundingSphereFromAabb((cast PrepareGlScene3DForwardLights.scratchWorldSphere__prepareGlScene3DForwardLights), (cast PrepareGlScene3DForwardLights.scratchWorldBounds__prepareGlScene3DForwardLights));
     if ((cast ((cast PrepareGlScene3DForwardLights.scratchWorldSphere__prepareGlScene3DForwardLights.radius : Float) < (cast 0.0 : Float)) : Bool)) {
       var world:flighthq._internal._Float32Array = (cast (cast getNodeWorldMatrix4((cast mesh)) : Matrix4Like) : { var m:flighthq._internal._Float32Array; }).m;
-      ((cast PrepareGlScene3DForwardLights.scratchWorldSphere__prepareGlScene3DForwardLights.center : { var x:Float; }).x = cast (flighthq._internal._StaticIndex.readFloat32Array(world, 12.0) : Dynamic));
-      ((cast PrepareGlScene3DForwardLights.scratchWorldSphere__prepareGlScene3DForwardLights.center : { var y:Float; }).y = cast (flighthq._internal._StaticIndex.readFloat32Array(world, 13.0) : Dynamic));
-      ((cast PrepareGlScene3DForwardLights.scratchWorldSphere__prepareGlScene3DForwardLights.center : { var z:Float; }).z = cast (flighthq._internal._StaticIndex.readFloat32Array(world, 14.0) : Dynamic));
+      ((cast PrepareGlScene3DForwardLights.scratchWorldSphere__prepareGlScene3DForwardLights.center : { var x:Float; }).x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast 12.0 : Float)) : Dynamic));
+      ((cast PrepareGlScene3DForwardLights.scratchWorldSphere__prepareGlScene3DForwardLights.center : { var y:Float; }).y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast 13.0 : Float)) : Dynamic));
+      ((cast PrepareGlScene3DForwardLights.scratchWorldSphere__prepareGlScene3DForwardLights.center : { var z:Float; }).z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast 14.0 : Float)) : Dynamic));
       (PrepareGlScene3DForwardLights.scratchWorldSphere__prepareGlScene3DForwardLights.radius = cast (0.0 : Dynamic));
     }
   }

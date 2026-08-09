@@ -23,67 +23,67 @@ class DisplayObjectAnimation {
       {
         var __switchValue = (cast target : Node2DAnimationTarget).path;
         if (__switchValue == 'Alpha') {
-          ((cast node : { var alpha:Float; }).alpha = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var alpha:Float; }).alpha = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
           invalidateNodeAppearance((cast node));
         }
         else if (__switchValue == 'Pivot') {
-          ((cast node : { var pivotX:Float; }).pivotX = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          ((cast node : { var pivotY:Float; }).pivotY = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 1.0));
+          ((cast node : { var pivotX:Float; }).pivotX = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
+          ((cast node : { var pivotY:Float; }).pivotY = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 1.0 : Float)));
           invalidateNodeLocalTransform((cast node));
         }
         else if (__switchValue == 'PivotX') {
-          ((cast node : { var pivotX:Float; }).pivotX = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var pivotX:Float; }).pivotX = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
           invalidateNodeLocalTransform((cast node));
         }
         else if (__switchValue == 'PivotY') {
-          ((cast node : { var pivotY:Float; }).pivotY = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var pivotY:Float; }).pivotY = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
           invalidateNodeLocalTransform((cast node));
         }
         else if (__switchValue == 'Position') {
-          ((cast node : { var x:Float; }).x = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          ((cast node : { var y:Float; }).y = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 1.0));
+          ((cast node : { var x:Float; }).x = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
+          ((cast node : { var y:Float; }).y = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 1.0 : Float)));
           invalidateNodeLocalTransform((cast node));
         }
         else if (__switchValue == 'Rotation') {
-          ((cast node : { var rotation:Float; }).rotation = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var rotation:Float; }).rotation = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
           invalidateNodeLocalTransform((cast node));
         }
         else if (__switchValue == 'Scale') {
-          ((cast node : { var scaleX:Float; }).scaleX = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          ((cast node : { var scaleY:Float; }).scaleY = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 1.0));
+          ((cast node : { var scaleX:Float; }).scaleX = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
+          ((cast node : { var scaleY:Float; }).scaleY = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 1.0 : Float)));
           invalidateNodeLocalTransform((cast node));
         }
         else if (__switchValue == 'ScaleX') {
-          ((cast node : { var scaleX:Float; }).scaleX = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var scaleX:Float; }).scaleX = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
           invalidateNodeLocalTransform((cast node));
         }
         else if (__switchValue == 'ScaleY') {
-          ((cast node : { var scaleY:Float; }).scaleY = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var scaleY:Float; }).scaleY = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
           invalidateNodeLocalTransform((cast node));
         }
         else if (__switchValue == 'Skew') {
-          ((cast node : { var skewX:Float; }).skewX = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
-          ((cast node : { var skewY:Float; }).skewY = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 1.0));
+          ((cast node : { var skewX:Float; }).skewX = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
+          ((cast node : { var skewY:Float; }).skewY = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 1.0 : Float)));
           invalidateNodeLocalTransform((cast node));
         }
         else if (__switchValue == 'SkewX') {
-          ((cast node : { var skewX:Float; }).skewX = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var skewX:Float; }).skewX = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
           invalidateNodeLocalTransform((cast node));
         }
         else if (__switchValue == 'SkewY') {
-          ((cast node : { var skewY:Float; }).skewY = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var skewY:Float; }).skewY = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
           invalidateNodeLocalTransform((cast node));
         }
         else if (__switchValue == 'Visible') {
-          ((cast node : { var visible:Bool; }).visible = ((cast flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0) : Float) >= (cast 0.5 : Float)));
+          ((cast node : { var visible:Bool; }).visible = ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)) : Float) >= (cast 0.5 : Float)));
           invalidateNodeAppearance((cast node));
         }
         else if (__switchValue == 'X') {
-          ((cast node : { var x:Float; }).x = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var x:Float; }).x = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
           invalidateNodeLocalTransform((cast node));
         }
         else if (__switchValue == 'Y') {
-          ((cast node : { var y:Float; }).y = flighthq._internal._StaticIndex.readArray(DisplayObjectAnimation._scratch__displayObjectAnimation, 0.0));
+          ((cast node : { var y:Float; }).y = flighthq._internal._StaticIndex.readFloatArrayTyped((cast DisplayObjectAnimation._scratch__displayObjectAnimation : Array<Float>), (cast 0.0 : Float)));
           invalidateNodeLocalTransform((cast node));
         }
       }

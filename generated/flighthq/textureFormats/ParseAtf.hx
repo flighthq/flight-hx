@@ -53,17 +53,17 @@ class ParseAtf {
     var lengthWidth:Float = cast _Runtime.UNDEFINED;
     var containers:Array<TextureContainer> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast ParseAtf.hasAtfSignature__parseAtf((cast bytes)) : Bool) : Bool) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure), (cast 'container-unrecognized')) : Null<Array<TextureContainer>>); }
-    versioned = _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 6.0), ParseAtf.atfNewVersionMarker__parseAtf);
+    versioned = _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 6.0 : Float)), ParseAtf.atfNewVersionMarker__parseAtf);
     headerOffset = ((cast versioned : Bool) ? (cast ParseAtf.atfNewHeaderOffset__parseAtf : Dynamic) : (cast ParseAtf.atfLegacyHeaderOffset__parseAtf : Dynamic));
     if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast (headerOffset + 4.0) : Float)) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure), (cast 'header-truncated')) : Null<Array<TextureContainer>>); }
-    version = ((cast versioned : Bool) ? (cast flighthq._internal._StaticIndex.readUint8Array(bytes, 7.0) : Dynamic) : (cast 0.0 : Dynamic));
+    version = ((cast versioned : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 7.0 : Float)) : Dynamic) : (cast 0.0 : Dynamic));
     lengthReader = (cast createByteReader((cast bytes), (cast ((cast versioned : Bool) ? (cast 8.0 : Dynamic) : (cast 3.0 : Dynamic)) : Float)) : ByteReader);
     payloadLength = ((cast versioned : Bool) ? (cast (cast readByteReaderU32BigEndian((cast lengthReader)) : Float) : Dynamic) : (cast (cast readByteReaderU24BigEndian((cast lengthReader)) : Float) : Dynamic));
     if ((cast ((cast (headerOffset + payloadLength) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure), (cast 'level-range-out-of-bounds')) : Null<Array<TextureContainer>>); }
-    typeFormatByte = flighthq._internal._StaticIndex.readUint8Array(bytes, headerOffset);
-    log2Width = flighthq._internal._StaticIndex.readUint8Array(bytes, (headerOffset + 1.0));
-    log2Height = flighthq._internal._StaticIndex.readUint8Array(bytes, (headerOffset + 2.0));
-    mipCount = flighthq._internal._StaticIndex.readUint8Array(bytes, (headerOffset + 3.0));
+    typeFormatByte = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast headerOffset : Float));
+    log2Width = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast (headerOffset + 1.0) : Float));
+    log2Height = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast (headerOffset + 2.0) : Float));
+    mipCount = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast (headerOffset + 3.0) : Float));
     formatCode = (_Runtime.toInt32(typeFormatByte) & _Runtime.toInt32(ParseAtf.atfFormatCodeMask__parseAtf));
     alpha = ((cast ParseAtf.atfAlphaFormatCodes__parseAtf : flighthq._internal._Set<Float>).has(formatCode));
     if ((cast ((cast !(cast alpha : Bool) : Bool) && (cast !(cast ((cast ParseAtf.atfOpaqueFormatCodes__parseAtf : flighthq._internal._Set<Float>).has(formatCode)) : Bool) : Bool)) : Bool)) {
@@ -136,7 +136,7 @@ class ParseAtf {
   }
 
   public static function hasAtfSignature__parseAtf(bytes:flighthq._internal._UInt8Array):Bool {
-    return cast ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 0.0), 65.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 1.0), 84.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8Array(bytes, 2.0), 70.0) : Bool));
+    return cast ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 65.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 1.0 : Float)), 84.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 2.0 : Float)), 70.0) : Bool));
     return cast null;
   }
 

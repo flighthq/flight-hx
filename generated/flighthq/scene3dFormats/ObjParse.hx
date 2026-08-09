@@ -181,7 +181,7 @@ class ObjParse {
                   {
                     var t:Float = 1.0;
                     while ((cast ((cast t : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(faceIndices, 'length'), 1.0) : Float)) : Bool)) {
-                      _Runtime.pushMany((cast bucket : MaterialBucket__objParse).indices, cast ([flighthq._internal._StaticIndex.readArray(faceIndices, 0.0), flighthq._internal._StaticIndex.readArray(faceIndices, t), flighthq._internal._StaticIndex.readArray(faceIndices, (t + 1.0))] : Array<Dynamic>));
+                      _Runtime.pushMany((cast bucket : MaterialBucket__objParse).indices, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast faceIndices : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast faceIndices : Array<Float>), (cast t : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast faceIndices : Array<Float>), (cast (t + 1.0) : Float))] : Array<Dynamic>));
                       t++;
                     }
                   }
@@ -225,7 +225,7 @@ class ObjParse {
                 {
                   var k:Float = 0.0;
                   while ((cast ((cast k : Float) < (cast _Runtime.field(resolved, 'length') : Float)) : Bool)) {
-                    _Runtime.callProperty(pointElements, 'push', cast ([flighthq._internal._StaticIndex.readArray(resolved, k)] : Array<Dynamic>));
+                    _Runtime.callProperty(pointElements, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast resolved : Array<Float>), (cast k : Float))] : Array<Dynamic>));
                     k++;
                   }
                 }
@@ -307,15 +307,15 @@ class ObjParse {
     existing = ((cast (cast bucket : MaterialBucket__objParse).dedup : flighthq._internal._Map<String, Float>).get(key));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     vertexIndex = _Runtime.divideNumbers(_Runtime.field((cast bucket : MaterialBucket__objParse).vertices, 'length'), CANONICAL_FLOATS_PER_VERTEX);
-    _Runtime.pushMany((cast bucket : MaterialBucket__objParse).vertices, cast ([flighthq._internal._StaticIndex.readArray(positions, (posIdx * 3.0)), flighthq._internal._StaticIndex.readArray(positions, ((posIdx * 3.0) + 1.0)), flighthq._internal._StaticIndex.readArray(positions, ((posIdx * 3.0) + 2.0))] : Array<Dynamic>));
+    _Runtime.pushMany((cast bucket : MaterialBucket__objParse).vertices, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast (posIdx * 3.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast ((posIdx * 3.0) + 1.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast ((posIdx * 3.0) + 2.0) : Float))] : Array<Dynamic>));
     if ((cast ((cast normalIdx : Float) >= (cast 0.0 : Float)) : Bool)) {
-      _Runtime.pushMany((cast bucket : MaterialBucket__objParse).vertices, cast ([flighthq._internal._StaticIndex.readArray(normals, (normalIdx * 3.0)), flighthq._internal._StaticIndex.readArray(normals, ((normalIdx * 3.0) + 1.0)), flighthq._internal._StaticIndex.readArray(normals, ((normalIdx * 3.0) + 2.0))] : Array<Dynamic>));
+      _Runtime.pushMany((cast bucket : MaterialBucket__objParse).vertices, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast (normalIdx * 3.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast ((normalIdx * 3.0) + 1.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast ((normalIdx * 3.0) + 2.0) : Float))] : Array<Dynamic>));
     } else {
       _Runtime.pushMany((cast bucket : MaterialBucket__objParse).vertices, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
     }
     _Runtime.pushMany((cast bucket : MaterialBucket__objParse).vertices, cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
     if ((cast ((cast uvIdx : Float) >= (cast 0.0 : Float)) : Bool)) {
-      _Runtime.pushMany((cast bucket : MaterialBucket__objParse).vertices, cast ([flighthq._internal._StaticIndex.readArray(uvs, (uvIdx * 2.0)), flighthq._internal._StaticIndex.readArray(uvs, ((uvIdx * 2.0) + 1.0))] : Array<Dynamic>));
+      _Runtime.pushMany((cast bucket : MaterialBucket__objParse).vertices, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast uvs : Array<Float>), (cast (uvIdx * 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast uvs : Array<Float>), (cast ((uvIdx * 2.0) + 1.0) : Float))] : Array<Dynamic>));
     } else {
       _Runtime.pushMany((cast bucket : MaterialBucket__objParse).vertices, cast ([0.0, 0.0] : Array<Dynamic>));
     }
@@ -347,14 +347,14 @@ class ObjParse {
       {
         var k:Float = 0.0;
         while ((cast ((cast k : Float) < (cast _Runtime.field((cast bucket : MaterialBucket__objParse).indices, 'length') : Float)) : Bool)) {
-          _Runtime.callProperty(indices, 'push', cast ([_Runtime.addNumbers(flighthq._internal._StaticIndex.readArray((cast bucket : MaterialBucket__objParse).indices, k), vertexBase)] : Array<Dynamic>));
+          _Runtime.callProperty(indices, 'push', cast ([(flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast bucket : MaterialBucket__objParse).indices : Array<Float>), (cast k : Float)) + vertexBase)] : Array<Dynamic>));
           k++;
         }
       }
       {
         var k:Float = 0.0;
         while ((cast ((cast k : Float) < (cast _Runtime.field((cast bucket : MaterialBucket__objParse).vertices, 'length') : Float)) : Bool)) {
-          _Runtime.callProperty(vertices, 'push', cast ([flighthq._internal._StaticIndex.readArray((cast bucket : MaterialBucket__objParse).vertices, k)] : Array<Dynamic>));
+          _Runtime.callProperty(vertices, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast bucket : MaterialBucket__objParse).vertices : Array<Float>), (cast k : Float))] : Array<Dynamic>));
           k++;
         }
       }
@@ -405,7 +405,7 @@ class ObjParse {
     {
       var i:Float = 0.0;
       while ((cast ((cast (i + 1.0) : Float) < (cast _Runtime.field(chain, 'length') : Float)) : Bool)) {
-        _Runtime.pushMany(segments, cast ([flighthq._internal._StaticIndex.readArray(chain, i), flighthq._internal._StaticIndex.readArray(chain, (i + 1.0))] : Array<Dynamic>));
+        _Runtime.pushMany(segments, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast chain : Array<Float>), (cast i : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast chain : Array<Float>), (cast (i + 1.0) : Float))] : Array<Dynamic>));
         i++;
       }
     }
@@ -427,11 +427,11 @@ class ObjParse {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(elements, 'length') : Float)) : Bool)) {
-        var source:Float = flighthq._internal._StaticIndex.readArray(elements, i);
+        var source:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast elements : Array<Float>), (cast i : Float));
         var emitted:Null<Float> = ((cast dedup : flighthq._internal._Map<Float, Float>).get(source));
         if ((cast _Runtime.strictEquals(emitted, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           (emitted = cast (_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), CANONICAL_FLOATS_PER_VERTEX) : Dynamic));
-          _Runtime.pushMany(vertices, cast ([flighthq._internal._StaticIndex.readArray(sourcePositions, (source * 3.0)), flighthq._internal._StaticIndex.readArray(sourcePositions, ((source * 3.0) + 1.0)), flighthq._internal._StaticIndex.readArray(sourcePositions, ((source * 3.0) + 2.0))] : Array<Dynamic>));
+          _Runtime.pushMany(vertices, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast sourcePositions : Array<Float>), (cast (source * 3.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast sourcePositions : Array<Float>), (cast ((source * 3.0) + 1.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast sourcePositions : Array<Float>), (cast ((source * 3.0) + 2.0) : Float))] : Array<Dynamic>));
           {
             var pad:Float = 0.0;
             while ((cast ((cast pad : Float) < (cast (CANONICAL_FLOATS_PER_VERTEX - 3.0) : Float)) : Bool)) {
@@ -495,9 +495,9 @@ class ObjParse {
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
-    r = (cast ObjParse.clampChannel__objParse((cast flighthq._internal._StaticIndex.readArray(rgb, 0.0) : Float)) : Float);
-    g = (cast ObjParse.clampChannel__objParse((cast flighthq._internal._StaticIndex.readArray(rgb, 1.0) : Float)) : Float);
-    b = (cast ObjParse.clampChannel__objParse((cast flighthq._internal._StaticIndex.readArray(rgb, 2.0) : Float)) : Float);
+    r = (cast ObjParse.clampChannel__objParse((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast rgb : Array<Float>), (cast 0.0 : Float)) : Float)) : Float);
+    g = (cast ObjParse.clampChannel__objParse((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast rgb : Array<Float>), (cast 1.0 : Float)) : Float)) : Float);
+    b = (cast ObjParse.clampChannel__objParse((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast rgb : Array<Float>), (cast 2.0 : Float)) : Float)) : Float);
     a = (cast ObjParse.clampChannel__objParse((cast alpha : Float)) : Float);
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 24)) | _Runtime.toInt32((_Runtime.toInt32(g) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(b) << 8)))) | _Runtime.toInt32(a))), 0);
     return cast null;

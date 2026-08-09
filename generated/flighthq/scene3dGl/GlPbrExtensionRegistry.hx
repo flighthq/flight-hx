@@ -167,7 +167,7 @@ class GlPbrExtensionRegistry {
       var unit:Float = cast _Runtime.UNDEFINED;
       sceneColor = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).pbrTransmissionSceneColor;
       if ((cast _Runtime.strictEquals(sceneColor, null) : Bool)) { return cast false; }
-      unit = flighthq._internal._StaticIndex.readArray(textureUnits, textureIndex++);
+      unit = flighthq._internal._StaticIndex.readFloatArrayTyped((cast textureUnits : Array<Float>), (cast textureIndex++ : Float));
       if ((cast _Runtime.strictEquals(unit, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + unit));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast sceneColor : GlPbrTransmissionSceneColor).texture);
@@ -178,7 +178,7 @@ class GlPbrExtensionRegistry {
     }, bindTexture: function(samplerUniform:String, uvSetUniform:String, uvTransformUniform:String, texture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>, uvSet:PbrUvSet):Bool {
       var unit:Float = cast _Runtime.UNDEFINED;
       if ((cast !(cast (cast isGlTextureReady((cast state), (cast texture)) : Bool) : Bool) : Bool)) { return cast false; }
-      unit = flighthq._internal._StaticIndex.readArray(textureUnits, textureIndex++);
+      unit = flighthq._internal._StaticIndex.readFloatArrayTyped((cast textureUnits : Array<Float>), (cast textureIndex++ : Float));
       if ((cast ((cast _Runtime.strictEquals(unit, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(texture, null) : Bool)) : Bool)) { return cast false; }
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + unit));
       if ((cast _Runtime.strictEquals((cast resolveGlTexture((cast state), (cast texture), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Bool), (cast _Runtime.field(_Runtime, 'UNDEFINED'))) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { return cast false; }
@@ -192,7 +192,7 @@ class GlPbrExtensionRegistry {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, uniform), value);
     }, setLinearColor: function(uniform:String, color:Float):Void {
       (cast unpackColorToLinear((cast GlPbrExtensionRegistry.scratchRgba__glPbrExtensionRegistry), (cast color : Float)) : LinearColor);
-      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, uniform), flighthq._internal._StaticIndex.readArray(GlPbrExtensionRegistry.scratchRgba__glPbrExtensionRegistry, 0.0), flighthq._internal._StaticIndex.readArray(GlPbrExtensionRegistry.scratchRgba__glPbrExtensionRegistry, 1.0), flighthq._internal._StaticIndex.readArray(GlPbrExtensionRegistry.scratchRgba__glPbrExtensionRegistry, 2.0));
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, uniform), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlPbrExtensionRegistry.scratchRgba__glPbrExtensionRegistry : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlPbrExtensionRegistry.scratchRgba__glPbrExtensionRegistry : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlPbrExtensionRegistry.scratchRgba__glPbrExtensionRegistry : Array<Float>), (cast 2.0 : Float)));
     } };
     return cast null;
   }

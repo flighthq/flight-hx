@@ -33,7 +33,7 @@ class RiveDrawOrder {
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         if ((cast !_Runtime.strictEquals((cast object : RiveCoreObject).typeKey, RiveDrawOrder.RIVE_DRAW_RULES_TYPE_KEY__riveDrawOrder) : Bool)) { index++; continue; }
-        var governed:Null<Node2D> = (cast RiveDrawOrder.resolveRiveDrawNode__riveDrawOrder((cast nodes), (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'parentIndices'), index))) : Null<Node2D>);
+        var governed:Null<Node2D> = (cast RiveDrawOrder.resolveRiveDrawNode__riveDrawOrder((cast nodes), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)))) : Null<Node2D>);
         var target:Null<{ var isAbove:Bool; var node:Node2D; }> = (cast RiveDrawOrder.resolveRiveDrawTarget__riveDrawOrder((cast nodes), (cast artboard), (cast (cast RiveDrawOrder.readRiveDrawId__riveDrawOrder((cast object), (cast RiveDrawOrder.RIVE_DRAW_TARGET_ID__riveDrawOrder : Float)) : Null<Float>))) : Null<{ var isAbove:Bool; var node:Node2D; }>);
         if ((cast ((cast _Runtime.strictEquals(governed, null) : Bool) || (cast _Runtime.strictEquals(target, null) : Bool)) : Bool)) {
           reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'rive.draw-rule-unresolved' : String), (cast 'applyRiveDrawOrder' : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
