@@ -4,8 +4,8 @@
 // lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
 //
 // Two pieces of the upstream program are irreducible browser glue and adapted as the earlier headless
-// ports did: (1) Web Audio's `new AudioContext()` is browser-only, so `getAudioContext` returns a stub
-// context object — the Lime target supplies audio output — keeping the SDK audio call sites identical;
+// ports did: (1) Web Audio's `new AudioContext()` is browser-only, so `getAudioContext` builds the
+// hostLime audio backend (`createLimeAudioContext`) — keeping the SDK audio call sites identical;
 // (2) the DOM pointer source (`createInputManager`/`attachPointerInput`/`connectInputToInteraction`)
 // is replaced by Lime's `onMouseDown`/`onMouseMove`/`onMouseUp`, which dispatch straight into the
 // Flight interaction manager. Every other statement is translated faithfully.
@@ -136,12 +136,10 @@ class Main extends Application {
 
   function getAudioContext():Dynamic {
     if (audioContext == null) {
-      // `new AudioContext()` is browser-only; the Lime target supplies audio output. Stub the context
-      // object so the SDK audio call sites (createAudioMixer/playAudioResource) stay identical.
-      audioContext = {state: 'running'};
-    }
-    if (audioContext.state == 'suspended') {
-      // audioContext.resume().catch(() => {});
+      // `new AudioContext()` is browser-only; the hostLime backend supplies the same protocol over
+      // Lime audio output, so the SDK audio call sites (createAudioMixer/playAudioResource) stay
+      // identical.
+      audioContext = flighthq.hostLime.LimeAudio.createLimeAudioContext();
     }
     return audioContext;
   }

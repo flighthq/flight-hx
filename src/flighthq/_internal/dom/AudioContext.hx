@@ -1,7 +1,22 @@
-// Maintained host-type declaration stub: every target currently sees this
-// type as Dynamic, exactly as before the literal host-type mapping. Upgrading
-// a platform means replacing its branch with a real declaration; see
-// HTMLCanvasElement.hx for the model.
+// Maintained host-type declaration. js stays Dynamic (the genuine browser
+// AudioContext); native is a nominal interface implemented by the host audio
+// backend (hostLime LimeAudio). Members mirror the upstream corpus census in
+// reports/host-types.json: createBufferSource, createGain, createStereoPanner,
+// currentTime, decodeAudioData, destination, resume, state.
 package flighthq._internal.dom;
 
+#if js
 typedef AudioContext = Dynamic;
+#else
+interface AudioContext {
+  var currentTime(get, never):Float;
+  var destination(default, never):AudioDestinationNode;
+  var sampleRate(default, never):Float;
+  var state(default, null):String;
+  function createBufferSource():AudioBufferSourceNode;
+  function createGain():GainNode;
+  function createStereoPanner():StereoPannerNode;
+  function decodeAudioData(data:Dynamic):Dynamic;
+  function resume():Dynamic;
+}
+#end
