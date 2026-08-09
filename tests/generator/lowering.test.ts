@@ -193,6 +193,50 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain("(cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)");
   });
 
+  it('keeps asserted scalar values nullable until nullish fallbacks and checks run', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/nullish-scalars.ts',
+      `
+        export function numberDefault(value: unknown): number { return (value as number) ?? 0.25; }
+        export function booleanDefault(value: unknown): boolean { return (value as boolean) ?? true; }
+        export function undefinedCheck(value: unknown): boolean { return (value as number) === undefined; }
+        export function nullCheck(value: unknown): boolean { return null !== (value as boolean); }
+        export async function awaitedDefault(value: unknown, fallback: Promise<number>): Promise<number> {
+          return (value as number) ?? (await fallback);
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'NullishScalarsFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain(
+      '_Runtime.coalesce(#if js (cast value : Float) #else (cast value : Null<Float>) #end, function():Dynamic return cast 0.25)',
+    );
+    expect(output).toContain(
+      '_Runtime.coalesce(#if js (cast value : Bool) #else (cast value : Null<Bool>) #end, function():Dynamic return cast true)',
+    );
+    expect(output).toContain(
+      "_Runtime.strictEquals(#if js (cast value : Float) #else (cast value : Null<Float>) #end, _Runtime.field(_Runtime, 'UNDEFINED'))",
+    );
+    expect(output).toContain(
+      '!_Runtime.strictEquals(null, #if js (cast value : Bool) #else (cast value : Null<Bool>) #end)',
+    );
+    expect(output).toContain(
+      '_Runtime.strictEquals(#if js (cast value : Float) #else (cast value : Null<Float>) #end, null)',
+    );
+    expect(output).not.toContain('_Runtime.coalesce((cast value : Float)');
+    expect(output).not.toContain('_Runtime.coalesce((cast value : Bool)');
+  });
+
   it('uses primitive generic constraints for explicit any without guessing ambiguous constraints', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/constrainedAny.ts',

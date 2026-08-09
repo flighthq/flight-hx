@@ -92,13 +92,13 @@ class SpineParse {
   }
 
   public static function firstAlpha__spineParse(arr:flighthq._internal._Any):Float {
-    return cast ((cast ((cast _Runtime.isArray(arr) : Bool) && (cast ((cast _Runtime.field(arr, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.coalesce((cast (cast (cast flighthq._internal._StaticIndex.readArray(arr, 0.0) : flighthq._internal._Record<String, flighthq._internal._Any>) : { var alpha:flighthq._internal._Any; }).alpha : Float), function():Dynamic return cast 1.0) : Dynamic) : (cast 1.0 : Dynamic));
+    return cast ((cast ((cast _Runtime.isArray(arr) : Bool) && (cast ((cast _Runtime.field(arr, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.coalesce(#if js (cast (cast (cast flighthq._internal._StaticIndex.readArray(arr, 0.0) : flighthq._internal._Record<String, flighthq._internal._Any>) : { var alpha:flighthq._internal._Any; }).alpha : Float) #else (cast (cast (cast flighthq._internal._StaticIndex.readArray(arr, 0.0) : flighthq._internal._Record<String, flighthq._internal._Any>) : { var alpha:flighthq._internal._Any; }).alpha : Null<Float>) #end, function():Dynamic return cast 1.0) : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }
 
   public static function lastAlpha__spineParse(arr:flighthq._internal._Any):Float {
     if ((cast ((cast !(cast _Runtime.isArray(arr) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(arr, 'length'), 0.0) : Bool)) : Bool)) { return cast 0.0; }
-    return cast _Runtime.coalesce((cast (cast (cast flighthq._internal._StaticIndex.readArray(arr, _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0)) : flighthq._internal._Record<String, flighthq._internal._Any>) : { var alpha:flighthq._internal._Any; }).alpha : Float), function():Dynamic return cast 0.0);
+    return cast _Runtime.coalesce(#if js (cast (cast (cast flighthq._internal._StaticIndex.readArray(arr, _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0)) : flighthq._internal._Record<String, flighthq._internal._Any>) : { var alpha:flighthq._internal._Any; }).alpha : Float) #else (cast (cast (cast flighthq._internal._StaticIndex.readArray(arr, _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0)) : flighthq._internal._Record<String, flighthq._internal._Any>) : { var alpha:flighthq._internal._Any; }).alpha : Null<Float>) #end, function():Dynamic return cast 0.0);
     return cast null;
   }
 

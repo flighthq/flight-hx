@@ -997,6 +997,36 @@ function emitFlatMapVariableInitializers(
   ]);
 }
 
+function nullishScalarCastType(expression: IrExpression): Extract<IrType, { kind: 'primitive' }> | undefined {
+  return expression.kind === 'cast' &&
+    expression.type.kind === 'primitive' &&
+    ['Bool', 'Float', 'Int'].includes(expression.type.name)
+    ? expression.type
+    : undefined;
+}
+
+function emitNullableScalarCast(value: string, type: Extract<IrType, { kind: 'primitive' }>): string {
+  const haxeType = emitType(type);
+  return `#if js (cast ${value} : ${haxeType}) #else (cast ${value} : Null<${haxeType}>) #end`;
+}
+
+function emitNullishOperand(expression: IrExpression): string {
+  const scalarType = nullishScalarCastType(expression);
+  return scalarType && expression.kind === 'cast'
+    ? emitNullableScalarCast(emitExpression(expression.expression), scalarType)
+    : emitExpression(expression);
+}
+
+function isAbsentValue(expression: IrExpression): boolean {
+  return (
+    (expression.kind === 'literal' && expression.value === null) ||
+    (expression.kind === 'property' &&
+      expression.name === 'UNDEFINED' &&
+      expression.object.kind === 'identifier' &&
+      expression.object.name === '_Runtime')
+  );
+}
+
 function emitAwaitedExpression(expression: IrExpression, continuation: (value: string) => string[]): string[] {
   if (expression.kind === 'conditional' && expressionContainsAwait(expression)) {
     return emitAwaitedExpression(expression.condition, (condition) => [
@@ -1012,7 +1042,12 @@ function emitAwaitedExpression(expression: IrExpression, continuation: (value: s
     ['&&', '??', '??undefined', '||'].includes(expression.operator) &&
     expressionContainsAwait(expression.right)
   ) {
-    return emitAwaitedExpression(expression.left, (left) => {
+    const scalarType = ['??', '??undefined'].includes(expression.operator)
+      ? nullishScalarCastType(expression.left)
+      : undefined;
+    const leftExpression = scalarType && expression.left.kind === 'cast' ? expression.left.expression : expression.left;
+    return emitAwaitedExpression(leftExpression, (emittedLeft) => {
+      const left = scalarType ? emitNullableScalarCast(emittedLeft, scalarType) : emittedLeft;
       const right = emitAwaitedExpression(expression.right, continuation);
       if (expression.operator === '&&') {
         return [
@@ -2435,10 +2470,10 @@ function emitExpression(expression: IrExpression): string {
         return `_Runtime.andValue(${emitExpression(expression.left)}, function():Dynamic return cast ${emitExpression(expression.right)})`;
       }
       if (expression.kind === 'binary' && expression.operator === '??') {
-        return `_Runtime.coalesce(${emitExpression(expression.left)}, function():Dynamic return cast ${emitExpression(expression.right)})`;
+        return `_Runtime.coalesce(${emitNullishOperand(expression.left)}, function():Dynamic return cast ${emitExpression(expression.right)})`;
       }
       if (expression.kind === 'binary' && expression.operator === '??undefined') {
-        return `_Runtime.defaultUndefined(${emitExpression(expression.left)}, function():Dynamic return cast ${emitExpression(expression.right)})`;
+        return `_Runtime.defaultUndefined(${emitNullishOperand(expression.left)}, function():Dynamic return cast ${emitExpression(expression.right)})`;
       }
       if (expression.kind === 'binary' && expression.operator === 'in') {
         if (expression.domRootBinding) {
@@ -2479,7 +2514,13 @@ function emitExpression(expression: IrExpression): string {
         return `_Runtime.isInstanceOf(${emitExpression(expression.left)}, ${emitExpression(expression.right)})`;
       }
       if (expression.kind === 'binary' && ['==', '===', '!=', '!=='].includes(expression.operator)) {
-        const equal = `_Runtime.${expression.operator.length === 3 ? 'strictEquals' : 'looseEquals'}(${emitExpression(expression.left)}, ${emitExpression(expression.right)})`;
+        const left = isAbsentValue(expression.right)
+          ? emitNullishOperand(expression.left)
+          : emitExpression(expression.left);
+        const right = isAbsentValue(expression.left)
+          ? emitNullishOperand(expression.right)
+          : emitExpression(expression.right);
+        const equal = `_Runtime.${expression.operator.length === 3 ? 'strictEquals' : 'looseEquals'}(${left}, ${right})`;
         return expression.operator.startsWith('!') ? `!${equal}` : equal;
       }
       if (expression.kind === 'binary' && ['&', '|', '^', '<<', '>>'].includes(expression.operator)) {

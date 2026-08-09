@@ -166,6 +166,11 @@ class CoreSmoke {
       throw 'omitted Float argument did not retain tessellation default: ${defaultToleranceMesh.vertices.length}/${defaultToleranceMesh.indices.length}';
     }
 
+    final missingAlpha:Array<Dynamic> = [{}];
+    if (flighthq.particlesFormats.SpineParse.firstAlpha__spineParse(missingAlpha) != 1) {
+      throw 'nullish Float assertion bypassed the upstream alpha fallback';
+    }
+
     final booleanCircle = flighthq.path.Path.createPath();
     flighthq.path.Path.appendPathCircle(booleanCircle, 160, 150, 80);
     final booleanRoundRectangle = flighthq.path.Path.createPath();
