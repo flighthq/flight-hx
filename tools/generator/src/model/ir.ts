@@ -152,6 +152,7 @@ type IrExpressionNode =
       directArgumentTypes?: Array<IrType | undefined>;
       inferenceCastArguments?: boolean[];
       omittedArguments?: boolean[];
+      undefinedArguments?: boolean[];
       direct?: boolean;
       directCalleeType?: IrType;
       haxeRestIndex?: number;

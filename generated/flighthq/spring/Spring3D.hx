@@ -17,7 +17,7 @@ class Spring3D {
   }
 
   public static function isSpring3DSettled(spring3D:flighthq.types.Spring.Spring3D, targetX:Float, targetY:Float, targetZ:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
-    return cast _Runtime.andValue(((cast (cast isSpringSettled((cast _Runtime.field(spring3D, 'x')), (cast targetX : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool) : Bool) && (cast (cast isSpringSettled((cast _Runtime.field(spring3D, 'y')), (cast targetY : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool) : Bool)), function():Dynamic return cast (cast isSpringSettled((cast _Runtime.field(spring3D, 'z')), (cast targetZ : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool));
+    return cast _Runtime.andValue(((cast (cast isSpringSettled((cast _Runtime.field(spring3D, 'x')), (cast targetX : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool) : Bool) && (cast (cast isSpringSettled((cast _Runtime.field(spring3D, 'y')), (cast targetY : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool) : Bool)), function():Dynamic return cast (cast isSpringSettled((cast _Runtime.field(spring3D, 'z')), (cast targetZ : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool));
     return cast null;
   }
 

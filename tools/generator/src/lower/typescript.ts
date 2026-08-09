@@ -3047,6 +3047,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
       callee,
       ...(checkedCall?.inferenceCasts.some(Boolean) ? { inferenceCastArguments: checkedCall.inferenceCasts } : {}),
       ...(checkedCall?.omittedArguments.some(Boolean) ? { omittedArguments: checkedCall.omittedArguments } : {}),
+      ...(checkedCall?.undefinedArguments.some(Boolean) ? { undefinedArguments: checkedCall.undefinedArguments } : {}),
       ...(checkedCall?.types ? { directArgumentTypes: checkedCall.types } : {}),
       ...(direct
         ? {
@@ -3174,10 +3175,12 @@ function directCallArguments(
   arguments: IrExpression[];
   inferenceCasts: boolean[];
   omittedArguments: boolean[];
+  undefinedArguments: boolean[];
   types?: Array<IrType | undefined>;
 } {
   const arguments_ = node.arguments.map((argument) => lowerExpression(argument, context));
   const omittedArguments = node.arguments.map(() => false);
+  const undefinedArguments = node.arguments.map(() => false);
   const inferenceCasts = node.arguments.map(
     (argument) =>
       ts.isObjectLiteralExpression(argument) ||
@@ -3187,10 +3190,17 @@ function directCallArguments(
   );
   const checker = context.checker;
   const signature = checker?.getResolvedSignature(node);
-  if (!checker || !signature) return { arguments: arguments_, inferenceCasts, omittedArguments };
+  if (!checker || !signature) {
+    return { arguments: arguments_, inferenceCasts, omittedArguments, undefinedArguments };
+  }
   const symbols = signature.getParameters();
-  if (symbols.some(signatureParameterIsRest)) return { arguments: arguments_, inferenceCasts, omittedArguments };
+  if (symbols.some(signatureParameterIsRest)) {
+    return { arguments: arguments_, inferenceCasts, omittedArguments, undefinedArguments };
+  }
   for (let index = 0; index < arguments_.length && index < symbols.length; index++) {
+    undefinedArguments[index] =
+      signatureParameterIsOptional(symbols[index]!) &&
+      checkerTypeIncludesUndefined(checker.getTypeAtLocation(node.arguments[index]!));
     arguments_[index] = adaptDirectFunctionArgument(
       node.arguments[index]!,
       arguments_[index]!,
@@ -3221,8 +3231,8 @@ function directCallArguments(
     if (!type && expected && expected.kind !== 'primitive') inferenceCasts[index] = true;
   });
   return visibleTypes.some((type) => type)
-    ? { arguments: arguments_, inferenceCasts, omittedArguments, types: visibleTypes }
-    : { arguments: arguments_, inferenceCasts, omittedArguments };
+    ? { arguments: arguments_, inferenceCasts, omittedArguments, types: visibleTypes, undefinedArguments }
+    : { arguments: arguments_, inferenceCasts, omittedArguments, undefinedArguments };
 }
 
 function adaptDirectFunctionArgument(
@@ -3392,6 +3402,12 @@ function signatureParameterIsOptional(parameter: ts.Symbol): boolean {
       (declaration) => ts.isParameter(declaration) && Boolean(declaration.questionToken || declaration.initializer),
     ),
   );
+}
+
+function checkerTypeIncludesUndefined(type: ts.Type): boolean {
+  return type.isUnion()
+    ? type.types.some((member) => checkerTypeIncludesUndefined(member))
+    : (type.flags & ts.TypeFlags.Undefined) !== 0;
 }
 
 function signatureParameterIsRest(parameter: ts.Symbol): boolean {

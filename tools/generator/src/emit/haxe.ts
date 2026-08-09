@@ -3556,6 +3556,15 @@ function emitCheckedCallArgument(
   // need null so a scalar cast cannot turn an omitted argument into 0/false.
   if (call.omittedArguments?.[index]) return `#if js (cast ${emitted}) #else (cast null) #end`;
   const expected = call.directArgumentTypes?.[index];
+  // A defaulted scalar accepts undefined in TypeScript. Preserve the nullable
+  // carrier on static targets so null triggers the default without losing values.
+  if (
+    call.undefinedArguments?.[index] &&
+    expected?.kind === 'primitive' &&
+    ['Bool', 'Float', 'Int'].includes(expected.name)
+  ) {
+    return `#if js (cast ${emitted} : ${emitType(expected)}) #else (cast ${emitted} : Null<${emitType(expected)}>) #end`;
+  }
   if (call.inferenceCastArguments?.[index]) return `(cast ${emitted})`;
   if (!expected) return emitted;
   // TypeScript's open structural objects, covariant readonly arrays, and callback

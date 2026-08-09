@@ -166,6 +166,15 @@ class CoreSmoke {
       throw 'omitted Float argument did not retain tessellation default: ${defaultToleranceMesh.vertices.length}/${defaultToleranceMesh.indices.length}';
     }
 
+    final booleanCircle = flighthq.path.Path.createPath();
+    flighthq.path.Path.appendPathCircle(booleanCircle, 160, 150, 80);
+    final booleanRoundRectangle = flighthq.path.Path.createPath();
+    flighthq.path.Path.appendPathRoundRectangle(booleanRoundRectangle, 170, 90, 140, 120, cast 16);
+    final booleanUnion = flighthq.pathBoolean.BooleanPaths.unionPaths(booleanCircle, booleanRoundRectangle);
+    if (booleanUnion.commands.length == 0 || booleanUnion.data.length == 0) {
+      throw 'Martinez path boolean returned an empty union';
+    }
+
     final endFillState:flighthq.types.CanvasShapeDrawState = cast {
       bitmapSrc: null,
       fillMatrix: null,

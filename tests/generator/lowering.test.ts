@@ -157,7 +157,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain("_Runtime.field(sample, 'value')");
   });
 
-  it('keeps synthesized optional arguments nullable at typed call boundaries', () => {
+  it('keeps omitted and possibly undefined arguments nullable at typed call boundaries', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/optional-default.ts',
       `
@@ -167,8 +167,11 @@ describe('TypeScript lowering and Haxe emission', () => {
         interface Handler {
           read(value?: number): number;
         }
-        export function invoke(handler: Handler): number {
-          return withDefault() + handler.read();
+        interface Options {
+          tolerance?: number;
+        }
+        export function invoke(handler: Handler, options?: Options): number {
+          return withDefault() + withDefault(options?.tolerance) + handler.read();
         }
       `,
     );
@@ -182,6 +185,9 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain("withDefault(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end)");
+    expect(output).toContain(
+      'withDefault(#if js (cast ({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var tolerance:Null<Float>; }).tolerance; }) : Float) #else (cast ({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var tolerance:Null<Float>; }).tolerance; }) : Null<Float>) #end)',
+    );
     expect(output).toContain(".read(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end)");
     expect(output).not.toContain('(cast _Runtime.UNDEFINED : Float)');
     expect(output).not.toContain("(cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)");

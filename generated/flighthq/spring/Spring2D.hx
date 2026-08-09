@@ -17,7 +17,7 @@ class Spring2D {
   }
 
   public static function isSpring2DSettled(spring2D:flighthq.types.Spring.Spring2D, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
-    return cast _Runtime.andValue((cast isSpringSettled((cast _Runtime.field(spring2D, 'x')), (cast targetX : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool), function():Dynamic return cast (cast isSpringSettled((cast _Runtime.field(spring2D, 'y')), (cast targetY : Float), (cast positionEpsilon : Float), (cast velocityEpsilon : Float)) : Bool));
+    return cast _Runtime.andValue((cast isSpringSettled((cast _Runtime.field(spring2D, 'x')), (cast targetX : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool), function():Dynamic return cast (cast isSpringSettled((cast _Runtime.field(spring2D, 'y')), (cast targetY : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool));
     return cast null;
   }
 

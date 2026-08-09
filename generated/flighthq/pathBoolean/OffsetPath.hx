@@ -24,7 +24,7 @@ class OffsetPath {
     end = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.end; }), function():Dynamic return cast 'butt');
     miterLimit = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.miterLimit; }), function():Dynamic return cast OffsetPath.DEFAULT_MITER_LIMIT__offsetPath);
     arcTolerance = _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.arcTolerance; }), function():Dynamic return cast OffsetPath.DEFAULT_ARC_TOLERANCE__offsetPath);
-    contours = (cast flattenPath((cast path), (cast ({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.tolerance; }) : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath((cast path), #if js (cast ({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.tolerance; }) : Float) #else (cast ({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>);
     pointEpsSq = HxMath.pow((cast OffsetPath.getContourPointEps__offsetPath((cast contours)) : Float), 2.0);
     rawRings = (cast cast ([] : Array<Dynamic>));
     for (contour in _Runtime.iterable(contours)) {

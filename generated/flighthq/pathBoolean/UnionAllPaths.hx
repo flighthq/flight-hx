@@ -26,7 +26,7 @@ class UnionAllPaths {
     fillRule = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fillRule; }), function():Dynamic return cast 'nonZero');
     contours = (cast cast ([] : Array<Dynamic>));
     for (path in _Runtime.iterable(paths)) {
-      for (contour in _Runtime.iterable((cast flattenPath((cast path), (cast ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.tolerance; }) : Float)) : Array<Array<Float>>))) {
+      for (contour in _Runtime.iterable((cast flattenPath((cast path), #if js (cast ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.tolerance; }) : Float) #else (cast ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>))) {
         _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
       }
     }

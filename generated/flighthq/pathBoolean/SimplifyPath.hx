@@ -15,7 +15,7 @@ class SimplifyPath {
     var fillRule:PathWinding = cast _Runtime.UNDEFINED;
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     fillRule = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fillRule; }), function():Dynamic return cast 'nonZero');
-    contours = (cast flattenPath((cast path), (cast ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.tolerance; }) : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath((cast path), #if js (cast ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.tolerance; }) : Float) #else (cast ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>);
     return cast (cast resolvePathRegions((cast contours), (cast fillRule)) : Path);
     return cast null;
   }

@@ -24,8 +24,8 @@ class BooleanPaths {
     var clipContours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var result:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
     fillRule = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fillRule; }), function():Dynamic return cast 'nonZero');
-    subjectContours = (cast flattenPath((cast subject), (cast ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.tolerance; }) : Float)) : Array<Array<Float>>);
-    clipContours = (cast flattenPath((cast clip), (cast ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.tolerance; }) : Float)) : Array<Array<Float>>);
+    subjectContours = (cast flattenPath((cast subject), #if js (cast ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.tolerance; }) : Float) #else (cast ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>);
+    clipContours = (cast flattenPath((cast clip), #if js (cast ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.tolerance; }) : Float) #else (cast ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>);
     result = (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean((cast subjectContours), (cast clipContours), (cast operation), (cast fillRule));
     return cast (cast BooleanPaths.writeContours__booleanPaths((cast result), (cast out)) : Path);
     return cast null;
