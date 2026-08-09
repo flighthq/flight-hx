@@ -21,10 +21,11 @@ import lime.utils.UInt8Array;
  * uploads and `getImageData`); a context can also wrap an externally owned
  * `Cairo` (a Lime cairo window context) for direct-to-window presentation.
  *
- * Text uses cairo's toy font API with the default face: sizes and colors are
- * honored, `measureText` is a width heuristic until a FreeType face loader
- * exists. `textAlign`/`textBaseline` are stored but only 'left'/alphabetic
- * rendering is applied.
+ * Text uses cairo's toy font API (plus registered FreeType faces when the CSS
+ * font string names one). `measureText` returns real metrics: advance width
+ * from the text path, ink and font boxes by rasterize-and-scan, since Lime's
+ * cairo binding exposes no text/font extents. `textAlign`/`textBaseline` are
+ * stored but only 'left'/alphabetic rendering is applied.
  */
 // Gradient handles implement the standard toolkit contract directly;
 // `measureText` results remain structural.
@@ -474,18 +475,105 @@ class NativeCanvas2dContext {
   }
 
   public function measureText(text:String):Dynamic {
+    final normalized = normalizeDrawnText(text);
+    final cacheKey = font + '\x00' + normalized;
+    final cached = measureCache.get(cacheKey);
+    if (cached != null) return cached;
+
     final ctx = measurementContext();
     ctx.save();
     final registered = resolveRegisteredFont(font);
     if (registered != null) ctx.fontFace = registered.face;
-    ctx.setFontSize(parseFontSize(font));
+    final fontSize = parseFontSize(font);
+    ctx.setFontSize(fontSize);
     ctx.newPath();
     ctx.moveTo(0, 0);
-    ctx.textPath(normalizeDrawnText(text));
+    ctx.textPath(normalized);
     final width = ctx.hasCurrentPoint ? ctx.currentPoint.x : 0.0;
     ctx.newPath();
     ctx.restore();
-    return {width: width};
+
+    // Ink box by rasterizing and scanning — the same honest technique the
+    // upstream web glyph rasterizer uses on a canvas, since Lime's cairo
+    // binding exposes no text/font extents. The font box is the ink box of a
+    // reference string with full ascenders/descenders, cached per font.
+    final ink = rasterInkBox(normalized, fontSize, width, registered);
+    final fontKey = font;
+    var fontBox = fontBoxCache.get(fontKey);
+    if (fontBox == null) {
+      final referenceInk = rasterInkBox(FONT_BOX_REFERENCE, fontSize, 0, registered);
+      fontBox = {ascent: referenceInk.ascent, descent: referenceInk.descent};
+      fontBoxCache.set(fontKey, fontBox);
+    }
+    final metrics = {
+      width: width,
+      actualBoundingBoxLeft: ink.left,
+      actualBoundingBoxRight: ink.right,
+      actualBoundingBoxAscent: ink.ascent,
+      actualBoundingBoxDescent: ink.descent,
+      fontBoundingBoxAscent: fontBox.ascent,
+      fontBoundingBoxDescent: fontBox.descent,
+    };
+    if (measureCacheSize >= MEASURE_CACHE_LIMIT) {
+      measureCache.clear();
+      measureCacheSize = 0;
+    }
+    measureCacheSize++;
+    measureCache.set(cacheKey, metrics);
+    return metrics;
+  }
+
+  static inline final MEASURE_CACHE_LIMIT = 512;
+  // Tall ascenders, deep descenders, and a full-height bar bound the em box.
+  static inline final FONT_BOX_REFERENCE = 'ÅÉbdfghjklpqy|';
+  static final measureCache = new Map<String, Dynamic>();
+  static var measureCacheSize = 0;
+  static final fontBoxCache = new Map<String, {ascent:Float, descent:Float}>();
+
+  /** Paints `text` white on a zeroed scratch ARGB32 surface with the baseline
+   * at `pad` from each edge, then scans for nonzero pixels. Returned distances
+   * follow canvas TextMetrics conventions (left/ascent positive away from the
+   * alignment point and baseline). All zeros when the text has no ink. */
+  function rasterInkBox(text:String, fontSize:Float, advance:Float,
+      registered:Null<{font:lime.text.Font, face:lime.graphics.cairo.CairoFontFace}>):{left:Float, right:Float, ascent:Float, descent:Float} {
+    if (text == '' || fontSize <= 0) return {left: 0, right: 0, ascent: 0, descent: 0};
+    final pad = Std.int(Math.ceil(fontSize)) + 2;
+    final w = Std.int(Math.ceil(Math.max(advance, fontSize * text.length))) + pad * 2;
+    final h = pad * 3;
+    final baseline = pad * 2;
+    final stride = w * 4;
+    final pixels = new lime.utils.UInt8Array(stride * h);
+    final surface = CairoImageSurface.create(pixels, lime.graphics.cairo.CairoFormat.ARGB32, w, h, stride);
+    final ctx = new lime.graphics.cairo.Cairo(surface);
+    if (registered != null) ctx.fontFace = registered.face;
+    ctx.setFontSize(fontSize);
+    ctx.setSourceRGBA(1, 1, 1, 1);
+    ctx.moveTo(pad, baseline);
+    ctx.showText(text);
+    surface.flush();
+    var minX = w;
+    var maxX = -1;
+    var minY = h;
+    var maxY = -1;
+    for (y in 0...h) {
+      final row = y * stride;
+      for (x in 0...w) {
+        final at = row + x * 4;
+        if (pixels[at] != 0 || pixels[at + 1] != 0 || pixels[at + 2] != 0 || pixels[at + 3] != 0) {
+          if (x < minX) minX = x;
+          if (x > maxX) maxX = x;
+          if (y < minY) minY = y;
+          if (y > maxY) maxY = y;
+        }
+      }
+    }
+    if (maxX < 0) return {left: 0, right: 0, ascent: 0, descent: 0};
+    return {
+      left: pad - minX,
+      right: maxX + 1 - pad,
+      ascent: baseline - minY,
+      descent: maxY + 1 - baseline,
+    };
   }
 
   static function parseFontSize(fontValue:String):Float {
