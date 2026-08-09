@@ -1,10 +1,10 @@
 {
-  "completedAt": "2026-08-06T23:52:10.750Z",
+  "completedAt": "2026-08-09T20:32:22.492Z",
   "failedPackages": 0,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 795448,
+      "durationMs": 718789,
       "exitCode": 0,
       "package": "render-gl",
       "signal": null,
@@ -15,5 +15,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": "render-gl",
-  "startedAt": "2026-08-06T23:38:55.301Z"
+  "startedAt": "2026-08-09T20:20:23.701Z"
 }

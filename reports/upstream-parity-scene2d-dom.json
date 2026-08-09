@@ -1,10 +1,10 @@
 {
-  "completedAt": "2026-08-07T00:16:46.356Z",
+  "completedAt": "2026-08-09T20:46:28.758Z",
   "failedPackages": 0,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 635436,
+      "durationMs": 587931,
       "exitCode": 0,
       "package": "scene2d-dom",
       "signal": null,
@@ -15,5 +15,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": "scene2d-dom",
-  "startedAt": "2026-08-07T00:06:10.918Z"
+  "startedAt": "2026-08-09T20:36:40.826Z"
 }
