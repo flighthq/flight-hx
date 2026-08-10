@@ -18,13 +18,16 @@ Implemented:
 - `GlSurface.createGlSurface` / `Scene2dCairo.createCairoSurface` — the render-surface entry the `create*RenderState` family expects.
 - `LimeCursor.createLimeCursorBackend` — per-manager `cursorBackend`.
 - `LimeAudio.createLimeAudioContext` — the injected `AudioContext`: genuine browser context on js, a node-graph emulation over `lime.media.AudioSource` natively (protocol subset per the `reports/host-types.json` census; `flighthq._internal.dom` audio types are nominal interfaces off-js so emitted calls keep compile-time arity).
+- `LimeLoop.createLimeLoopBackend` — `setLoopBackend` over the Lime frame loop, making `startApplicationLoop` drivable natively. Note `stepApplicationLoop` is documented upstream as an explicit-delta driver that bypasses fixed-step accumulation by design — judge the downstream fixed-timestep report against that contract before assuming a port bug.
+- `LimeNet.createLimeNetBackend` — `setNetBackend` over `lime.net.HTTPRequest` (libcurl natively; upstream's own web backend on js). Verified end-to-end: GET/headers/JSON decode plus the status-0 transport sentinel. Documented deviations: 'blob' decodes to the raw buffer, redirect 'error' reports the 3xx as a transport failure after receipt, and `url` echoes the request URL (Lime does not expose the post-redirect URL).
+- `LimeFileSystem.createLimeFileSystemBackend` — the full `FileSystemBackend` over sys IO, including atomic writes, recursive walks with `maxDepth`, stat, copy/append, and `getPath` over Lime's system directories. Unsupported-per-contract natively: file streams (null), symlinks/permissions (false/null), usage (null), watch (no-op unsubscribe, web parity).
+- `LimeStorage.createLimeStorageBackend` — the synchronous `StorageBackend` over a write-through JSON file in the application storage directory (path overridable). `byteSize` reports UTF-16 cost like the web backend; the optional `subscribeChanges` seam is absent by design (no external mutations to observe).
+- `LimeClipboard.createLimeClipboardBackend` — `ClipboardBackend` over the Lime plain-text clipboard: text/format/items lanes and change notification (`Clipboard.onUpdate`) are real; HTML/RTF/image/bookmark/file flavors resolve to their documented denied values.
+- `LimeDialog.createLimeDialogBackend` — `DialogBackend` with real native file pickers (`lime.ui.FileDialog`, including directory and multi-select); `message`/`confirm` show `window.alert` (single-button), `prompt` resolves null (no native input dialog).
 
 Next candidates, in rough downstream-value order:
 
-1. **TextShaperBackend / GlyphRasterizerBackend** — the seams exist and the web defaults measure through canvas `measureText`; natively our `NativeCanvas2dContext.measureText` must return real metrics (cairo text extents) instead of fabricated numbers. This is the downstream "TextMetrics" complaint; it is a hostLime/toolkit backfill, not a seam gap.
-2. **NetBackend** — `createWebNetBackend` is fetch-based; a Lime/haxe HTTP implementation gives the net package native parity and becomes the carrier for resource loading once upstream routes loaders through it (see asks below).
-3. **LoopBackend** — `setLoopBackend` exists (`requestFrame`/`cancelFrame`); LimeApp should provide it over the Lime frame loop. Note `stepApplicationLoop` is documented upstream as an explicit-delta driver that bypasses fixed-step accumulation by design — the downstream fixed-timestep report should be judged against that contract before assuming a port bug.
-4. **Storage / FileSystem / Clipboard / Dialog backends** — mechanical Lime/sys mappings.
+1. **TextShaperBackend / GlyphRasterizerBackend** — the seams exist and the web defaults measure through canvas `measureText`; `NativeCanvas2dContext.measureText` now returns real metrics, so wiring the canvas shaper/rasterizer defaults against it natively (or a dedicated Lime backend) is the remaining step.
 
 ## Upstream asks (missing or bypassed seams)
 
