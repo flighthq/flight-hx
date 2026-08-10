@@ -31,6 +31,8 @@ class CoreSmoke {
     }
     final shapeCommandRegistrarTypecheck:flighthq.types.RenderState->Void = typecheckShapeCommandRegistrars;
     if (shapeCommandRegistrarTypecheck == null) throw 'shape command registrar typecheck failed';
+    final typedProtocolObjectTypecheck:flighthq.types.TweenManager->flighthq.types.Shape->flighthq._internal.dom.AudioContext->flighthq.types.AudioResource->Void = typecheckTypedProtocolObjects;
+    if (typedProtocolObjectTypecheck == null) throw 'typed protocol object typecheck failed';
     if (clamp(12, 0, 10) != 10) throw 'clamp failed';
     StaticLoweringSmoke.run();
     StaticIndexSmoke.run();
@@ -259,5 +261,16 @@ class CoreSmoke {
     flighthq.sdk.Sdk.registerCanvasShapeCommands(state, flighthq.sdk.Sdk.defaultCanvasShapeCommands);
     flighthq.sdk.Sdk.registerGlShapeCommands(state, flighthq.sdk.Sdk.defaultGlShapeCommands);
     flighthq.sdk.Sdk.registerWgpuShapeCommands(state, flighthq.sdk.Sdk.defaultWgpuShapeCommands);
+  }
+
+  static function typecheckTypedProtocolObjects(
+    manager:flighthq.types.TweenManager,
+    shape:flighthq.types.Shape,
+    context:flighthq._internal.dom.AudioContext,
+    audio:flighthq.types.AudioResource,
+  ):Void {
+    flighthq.tween.Tween.createTween(manager, shape, 1.0, {x: 2.0, y: 3.0});
+    flighthq.sdk.Sdk.createTween(manager, shape, 1.0, {x: 2.0, y: 3.0});
+    flighthq.sdk.Sdk.playAudioResource(context, audio, {gain: 1});
   }
 }

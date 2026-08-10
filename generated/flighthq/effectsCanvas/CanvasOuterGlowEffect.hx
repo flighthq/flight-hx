@@ -25,6 +25,8 @@ import flighthq.types.RenderEffect;
 
 class CanvasOuterGlowEffect {
   @:noCompletion
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:OuterGlowEffect):Void {})
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:OuterGlowEffect):Void {})
   public static function applyOuterGlowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, OuterGlowEffect>, ?maybeEffect:OuterGlowEffect):Void {
     var effect:OuterGlowEffect = cast _Runtime.UNDEFINED;
     var css:Null<String> = cast _Runtime.UNDEFINED;

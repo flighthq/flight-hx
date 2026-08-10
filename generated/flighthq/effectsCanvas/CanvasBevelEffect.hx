@@ -21,6 +21,8 @@ import flighthq.types.RenderEffect;
 
 class CanvasBevelEffect {
   @:noCompletion
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:BevelEffect):Void {})
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:BevelEffect):Void {})
   public static function applyBevelEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, BevelEffect>, ?maybeEffect:BevelEffect):Void {
     var effect:BevelEffect = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;

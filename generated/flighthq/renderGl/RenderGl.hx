@@ -98,6 +98,10 @@ class RenderGl {
     return cast null;
   }
 
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor):GlRenderTarget {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:String):GlRenderTarget {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:String):Null<GlRenderTarget> {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy):Null<GlRenderTarget> {})
   public static function createGlRenderTarget(state:GlRenderState, descriptor:RenderTargetDescriptor, ?formatPolicy:RenderTargetFormatPolicy):Null<GlRenderTarget> {
     return cast Facade_RenderGl_flighthq_renderGl_GlRenderTarget.createGlRenderTarget(state, descriptor, formatPolicy);
     return cast null;
@@ -209,6 +213,10 @@ class RenderGl {
     Facade_RenderGl_flighthq_renderGl_GlRenderTexture.renderIntoGlRenderTexture(state, renderTexture, callback);
   }
 
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor):RenderTargetAxes {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:String):RenderTargetAxes {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:String):Null<RenderTargetAxes> {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy):Null<RenderTargetAxes> {})
   public static function resolveGlRenderTargetAxes(state:GlRenderState, descriptor:RenderTargetDescriptor, ?formatPolicy:RenderTargetFormatPolicy):Null<RenderTargetAxes> {
     return cast Facade_RenderGl_flighthq_renderGl_GlRenderTarget.resolveGlRenderTargetAxes(state, descriptor, formatPolicy);
     return cast null;

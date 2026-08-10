@@ -21,6 +21,8 @@ import flighthq.types.RenderEffect;
 
 class CanvasInnerShadowEffect {
   @:noCompletion
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:InnerShadowEffect):Void {})
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:InnerShadowEffect):Void {})
   public static function applyInnerShadowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, InnerShadowEffect>, ?maybeEffect:InnerShadowEffect):Void {
     var effect:InnerShadowEffect = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;

@@ -259,6 +259,8 @@ class Node {
     return cast null;
   }
 
+  @:overload(function<Traits:flighthq._internal._Object, Result:flighthq.types.Node<Traits>>(source:flighthq.types.Node<Traits>, predicate:flighthq.types.Node<Traits>->Bool):Null<Result> {})
+  @:overload(function<Traits:flighthq._internal._Object>(source:flighthq.types.Node<Traits>, predicate:flighthq.types.Node<Traits>->Bool):Null<NodeOf<Traits>> {})
   public static function findNode<Traits:flighthq._internal._Object>(source:flighthq.types.Node<Traits>, predicate:flighthq.types.Node<Traits>->Bool):Null<NodeOf<Traits>> {
     return cast Facade_Node_flighthq_node_Traversal.findNode(source, predicate);
     return cast null;

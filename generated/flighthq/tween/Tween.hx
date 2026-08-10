@@ -47,6 +47,8 @@ class Tween {
     return cast null;
   }
 
+  @:overload(function<T:flighthq._internal._Object>(manager:TweenManager, target:T, duration:Float, propertyMap:NumericProps<T>, ?options:TweenOptions):flighthq.types.Tween<T> {})
+  @:overload(function<T:flighthq._internal._Object>(target:T, duration:Float, propertyMap:NumericProps<T>, ?options:TweenOptions):flighthq.types.Tween<T> {})
   public static function createTween<T:flighthq._internal._Object>(managerOrTarget:flighthq._internal._Union2<TweenManager, T>, targetOrDuration:flighthq._internal._Union2<T, Float>, durationOrProps:flighthq._internal._Union2<Float, NumericProps<T>>, ?propsOrOptions:flighthq._internal._Union2<NumericProps<T>, TweenOptions>, ?maybeOptions:TweenOptions):flighthq.types.Tween<T> {
     var manager:TweenManager = cast _Runtime.UNDEFINED;
     var target:T = cast _Runtime.UNDEFINED;

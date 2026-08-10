@@ -296,9 +296,17 @@ export interface IrFunctionDeclaration {
   name: string;
   noCompletion?: true | undefined;
   origin: SourceOrigin;
+  overloads?: IrFunctionOverload[] | undefined;
   parameters: IrParameter[];
   returns: IrType;
   thisCapture?: string | undefined;
+  typeParameterConstraints?: Array<IrType | undefined> | undefined;
+  typeParameters: string[];
+}
+
+export interface IrFunctionOverload {
+  parameters: IrParameter[];
+  returns: IrType;
   typeParameterConstraints?: Array<IrType | undefined> | undefined;
   typeParameters: string[];
 }

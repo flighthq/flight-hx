@@ -35,6 +35,10 @@ import flighthq.types.RenderTarget.RenderTargetFormatPolicy;
 import flighthq.types.RenderTarget.ResolvedRenderTargetDescriptor;
 
 class GlRenderTarget {
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor):flighthq.types.GlRenderTarget {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:String):flighthq.types.GlRenderTarget {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:String):Null<flighthq.types.GlRenderTarget> {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy):Null<flighthq.types.GlRenderTarget> {})
   public static function createGlRenderTarget(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy = 'preferred'):Null<flighthq.types.GlRenderTarget> {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
@@ -206,6 +210,10 @@ class GlRenderTarget {
     flighthq._internal.backend.WebGl2Backend.flush(gl);
   }
 
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor):RenderTargetAxes {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:String):RenderTargetAxes {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:String):Null<RenderTargetAxes> {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy):Null<RenderTargetAxes> {})
   public static function resolveGlRenderTargetAxes(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy = 'preferred'):Null<RenderTargetAxes> {
     return cast (cast GlRenderTarget.resolveEffectiveGlRenderTargetAxes__glRenderTarget((cast (cast state : GlRenderState).gl), (cast (cast resolveRenderTargetDescriptor((cast descriptor)) : ResolvedRenderTargetDescriptor)), (cast formatPolicy)) : Null<RenderTargetAxes>);
     return cast null;

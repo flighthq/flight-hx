@@ -22,6 +22,8 @@ import flighthq.types.RenderEffect;
 
 class CanvasGradientGlowEffect {
   @:noCompletion
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:GradientGlowEffect):Void {})
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:GradientGlowEffect):Void {})
   public static function applyGradientGlowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, GradientGlowEffect>, ?maybeEffect:GradientGlowEffect):Void {
     var effect:GradientGlowEffect = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;

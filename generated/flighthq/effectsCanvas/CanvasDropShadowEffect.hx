@@ -25,6 +25,8 @@ import flighthq.types.RenderEffect;
 
 class CanvasDropShadowEffect {
   @:noCompletion
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:DropShadowEffect):Void {})
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:DropShadowEffect):Void {})
   public static function applyDropShadowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, DropShadowEffect>, ?maybeEffect:DropShadowEffect):Void {
     var effect:DropShadowEffect = cast _Runtime.UNDEFINED;
     var css:Null<String> = cast _Runtime.UNDEFINED;

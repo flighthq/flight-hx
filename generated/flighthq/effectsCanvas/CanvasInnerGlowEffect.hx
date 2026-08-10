@@ -21,6 +21,8 @@ import flighthq.types.RenderEffect;
 
 class CanvasInnerGlowEffect {
   @:noCompletion
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:InnerGlowEffect):Void {})
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:InnerGlowEffect):Void {})
   public static function applyInnerGlowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, InnerGlowEffect>, ?maybeEffect:InnerGlowEffect):Void {
     var effect:InnerGlowEffect = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;

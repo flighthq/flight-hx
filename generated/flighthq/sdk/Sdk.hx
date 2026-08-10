@@ -5786,6 +5786,10 @@ class Sdk {
     return cast null;
   }
 
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor):GlRenderTarget {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:String):GlRenderTarget {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:String):Null<GlRenderTarget> {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy):Null<GlRenderTarget> {})
   public static function createGlRenderTarget(state:GlRenderState, descriptor:RenderTargetDescriptor, ?formatPolicy:RenderTargetFormatPolicy):Null<GlRenderTarget> {
     return cast Facade_Sdk_flighthq_renderGl_GlRenderTarget.createGlRenderTarget(state, descriptor, formatPolicy);
     return cast null;
@@ -6980,6 +6984,10 @@ class Sdk {
     return cast null;
   }
 
+  @:overload(function(?opts:flighthq._internal._Extract<CreateTextureOptions, { @:optional var dimension:String; }>):Texture2D {})
+  @:overload(function(opts:flighthq._internal._Extract<CreateTextureOptions, { var dimension:String; }>):flighthq._internal._Extract<Texture, { var dimension:String; }> {})
+  @:overload(function(opts:flighthq._internal._Extract<CreateTextureOptions, { var dimension:String; }>):flighthq._internal._Extract<Texture, { var dimension:String; }> {})
+  @:overload(function(opts:flighthq._internal._Extract<CreateTextureOptions, { var dimension:String; }>):flighthq._internal._Extract<Texture, { var dimension:String; }> {})
   public static function createTexture(?opts:CreateTextureOptions):Texture {
     return cast Facade_Sdk_flighthq_texture_Texture.createTexture(opts);
     return cast null;
@@ -7100,6 +7108,8 @@ class Sdk {
     return cast null;
   }
 
+  @:overload(function<T:flighthq._internal._Object>(manager:TweenManager, target:T, duration:Float, propertyMap:NumericProps<T>, ?options:TweenOptions):Tween<T> {})
+  @:overload(function<T:flighthq._internal._Object>(target:T, duration:Float, propertyMap:NumericProps<T>, ?options:TweenOptions):Tween<T> {})
   public static function createTween<T:flighthq._internal._Object>(managerOrTarget:flighthq._internal._Union2<TweenManager, T>, targetOrDuration:flighthq._internal._Union2<T, Float>, durationOrProps:flighthq._internal._Union2<Float, NumericProps<T>>, ?propsOrOptions:flighthq._internal._Union2<NumericProps<T>, TweenOptions>, ?maybeOptions:TweenOptions):Tween<T> {
     return cast Facade_Sdk_flighthq_tween_Tween.createTween(managerOrTarget, targetOrDuration, durationOrProps, propsOrOptions, maybeOptions);
     return cast null;
@@ -9537,6 +9547,8 @@ class Sdk {
     return cast null;
   }
 
+  @:overload(function<Traits:flighthq._internal._Object, Result:Node<Traits>>(source:Node<Traits>, predicate:Node<Traits>->Bool):Null<Result> {})
+  @:overload(function<Traits:flighthq._internal._Object>(source:Node<Traits>, predicate:Node<Traits>->Bool):Null<NodeOf<Traits>> {})
   public static function findNode<Traits:flighthq._internal._Object>(source:Node<Traits>, predicate:Node<Traits>->Bool):Null<NodeOf<Traits>> {
     return cast Facade_Sdk_flighthq_node_Traversal.findNode(source, predicate);
     return cast null;
@@ -17447,6 +17459,10 @@ class Sdk {
     return cast null;
   }
 
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor):RenderTargetAxes {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:String):RenderTargetAxes {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:String):Null<RenderTargetAxes> {})
+  @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy):Null<RenderTargetAxes> {})
   public static function resolveGlRenderTargetAxes(state:GlRenderState, descriptor:RenderTargetDescriptor, ?formatPolicy:RenderTargetFormatPolicy):Null<RenderTargetAxes> {
     return cast Facade_Sdk_flighthq_renderGl_GlRenderTarget.resolveGlRenderTargetAxes(state, descriptor, formatPolicy);
     return cast null;

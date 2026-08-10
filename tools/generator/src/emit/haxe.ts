@@ -276,6 +276,7 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
   // High-arity `directOnly` shims stay private; everything else is public.
   const access = directOnly ? 'private' : 'public';
   const signature = `${access} static function ${safeName(declaration.name)}${generics}(${parameters}):${emitType(declaration.returns)}`;
+  const overloads = directOnly ? [] : emitFunctionOverloads(declaration);
 
   const bodyLines: string[] = [];
   if (directOnly) {
@@ -305,6 +306,7 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
   if (declaration.async) {
     if (!declaration.haxeBody && canFlatMapStatements(declaration.body)) {
       return [
+        ...overloads,
         `${signature} {`,
         ...indent(emitFlatMapFunctionBody(declaration.body, declaration.parameters, declaration.thisCapture)),
         '}',
@@ -312,17 +314,30 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
     }
     if (!declaration.haxeBody && statementsContainAwait(declaration.body) && canFlowStatements(declaration.body)) {
       return [
+        ...overloads,
         `${signature} {`,
         ...indent(emitFlowFunctionBody(declaration.body, declaration.parameters, declaration.thisCapture)),
         '}',
       ];
     }
     if (!declaration.haxeBody && !statementsContainAwait(declaration.body)) {
-      return [`${signature} {`, ...indent(emitPromiseProtectedBody(bodyLines, declaration.thisCapture)), '}'];
+      return [
+        ...overloads,
+        `${signature} {`,
+        ...indent(emitPromiseProtectedBody(bodyLines, declaration.thisCapture)),
+        '}',
+      ];
     }
     throw new Error(`Generator async lowering does not support ${declaration.origin.source}:${declaration.name}`);
   }
-  return [`${signature} {`, ...indent([...emitThisCapture(declaration.thisCapture), ...bodyLines]), '}'];
+  return [...overloads, `${signature} {`, ...indent([...emitThisCapture(declaration.thisCapture), ...bodyLines]), '}'];
+}
+
+function emitFunctionOverloads(declaration: Extract<IrDeclaration, { kind: 'function' }>): string[] {
+  return (declaration.overloads ?? []).map((overload) => {
+    const generics = emitTypeParameters(overload.typeParameters, overload.typeParameterConstraints);
+    return `@:overload(function${generics}(${emitParameters(overload.parameters)}):${emitType(overload.returns)} {})`;
+  });
 }
 
 function emitTypeParameters(names: string[], constraints: Array<IrType | undefined> | undefined): string {

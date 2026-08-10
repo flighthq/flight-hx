@@ -178,6 +178,10 @@ class Texture {
     return cast null;
   }
 
+  @:overload(function(?opts:flighthq._internal._Extract<CreateTextureOptions, { @:optional var dimension:String; }>):Texture2D {})
+  @:overload(function(opts:flighthq._internal._Extract<CreateTextureOptions, { var dimension:String; }>):flighthq._internal._Extract<flighthq.types.Texture, { var dimension:String; }> {})
+  @:overload(function(opts:flighthq._internal._Extract<CreateTextureOptions, { var dimension:String; }>):flighthq._internal._Extract<flighthq.types.Texture, { var dimension:String; }> {})
+  @:overload(function(opts:flighthq._internal._Extract<CreateTextureOptions, { var dimension:String; }>):flighthq._internal._Extract<flighthq.types.Texture, { var dimension:String; }> {})
   public static function createTexture(?opts:CreateTextureOptions):flighthq.types.Texture {
     var common:{ var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; } = cast _Runtime.UNDEFINED;
     var texture:flighthq.types.Texture = cast _Runtime.UNDEFINED;

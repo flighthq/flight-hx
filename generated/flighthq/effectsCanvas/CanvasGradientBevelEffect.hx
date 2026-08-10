@@ -23,6 +23,8 @@ import flighthq.types.RenderEffect;
 
 class CanvasGradientBevelEffect {
   @:noCompletion
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:GradientBevelEffect):Void {})
+  @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:GradientBevelEffect):Void {})
   public static function applyGradientBevelEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, GradientBevelEffect>, ?maybeEffect:GradientBevelEffect):Void {
     var effect:GradientBevelEffect = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;

@@ -594,6 +594,79 @@ describe('TypeScript lowering and Haxe emission', () => {
     ).not.toThrow();
   });
 
+  it('preserves TypeScript overloads so typed protocol object literals avoid implementation unions', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/overloads.ts',
+      `
+        export type NumericProps<T> = { [K in keyof T as T[K] extends number ? K : never]?: number };
+        export interface Manager { brand: string; }
+        export interface Options { delay?: number; }
+        export interface Shape { x: number; y: number; }
+        export function createTween<T extends object>(
+          manager: Manager,
+          target: T,
+          duration: number,
+          properties: Readonly<NumericProps<T>>,
+          options?: Readonly<Options>,
+        ): T;
+        export function createTween<T extends object>(
+          target: T,
+          duration: number,
+          properties: Readonly<NumericProps<T>>,
+          options?: Readonly<Options>,
+        ): T;
+        export function createTween<T extends object>(
+          managerOrTarget: Manager | T,
+          targetOrDuration: T | number,
+          durationOrProperties: number | Readonly<NumericProps<T>>,
+          propertiesOrOptions?: Readonly<NumericProps<T>> | Readonly<Options>,
+          options?: Readonly<Options>,
+        ): T {
+          return managerOrTarget as T;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'Overloads',
+      packageName: '@flighthq/example',
+    });
+    const fixtureDirectory = path.resolve('build/haxe-overload-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'Overloads.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        import flighthq.Overloads.Manager;
+        import flighthq.Overloads.Shape;
+        class Main {
+          static function main() {
+            final manager:Manager = { brand: 'manager' };
+            final shape:Shape = { x: 0.0, y: 0.0 };
+            flighthq.Overloads.createTween(manager, shape, 1.0, { x: 2.0, y: 3.0 });
+            flighthq.Overloads.createTween(shape, 1.0, { x: 2.0, y: 3.0 }, { delay: 0.5 });
+          }
+        }
+      `,
+    );
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output.match(/@:overload\(/gu)).toHaveLength(2);
+    expect(output).toContain(
+      '@:overload(function<T:flighthq._internal._Object>(manager:Manager, target:T, duration:Float, properties:NumericProps<T>, ?options:Options):T {})',
+    );
+    expect(() =>
+      execFileSync('node', ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '--main', 'Main', '--interp'], {
+        cwd: path.resolve('.'),
+        stdio: 'pipe',
+      }),
+    ).not.toThrow();
+  });
+
   it('lowers for-of control flow without diagnostics', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/math/src/sample.ts',

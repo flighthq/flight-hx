@@ -12,6 +12,8 @@ import flighthq.types.Node.NodeTraits;
 import flighthq.types.NodeDescendantVisitor;
 
 class Traversal {
+  @:overload(function<Traits:flighthq._internal._Object, Result:Node<Traits>>(source:Node<Traits>, predicate:Node<Traits>->Bool):Null<Result> {})
+  @:overload(function<Traits:flighthq._internal._Object>(source:Node<Traits>, predicate:Node<Traits>->Bool):Null<NodeOf<Traits>> {})
   public static function findNode<Traits:flighthq._internal._Object>(source:Node<Traits>, predicate:Node<Traits>->Bool):Null<NodeOf<Traits>> {
     var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
     children = _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'children');

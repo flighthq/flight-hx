@@ -25,6 +25,7 @@ import type {
   IrExpression,
   IrExpressionStaticFacts,
   IrFunctionDeclaration,
+  IrFunctionOverload,
   IrHostTypeBinding,
   IrHostEndpointBinding,
   IrIndexedReceiver,
@@ -199,6 +200,7 @@ export function lowerTypeScriptSource(
   const externalTypes = new Set<string>();
   const externalValues = new Map<string, { imported: string; specifier: string }>();
   const directTypeNames = new Set<string>();
+  const privateTypeAliases = new Map<string, ts.TypeAliasDeclaration>();
   const utilityAliasNames = new Set<string>();
   const visibleTypeNames = new Set<string>();
   for (const statement of sourceFile.statements) {
@@ -211,6 +213,7 @@ export function lowerTypeScriptSource(
     ) {
       visibleTypeNames.add(statement.name.text);
       if (hasModifier(statement, ts.SyntaxKind.ExportKeyword)) directTypeNames.add(statement.name.text);
+      else if (ts.isTypeAliasDeclaration(statement)) privateTypeAliases.set(statement.name.text, statement);
       if (ts.isTypeAliasDeclaration(statement) && typeNodeIncludesErasedUtility(statement.type)) {
         utilityAliasNames.add(statement.name.text);
       }
@@ -298,6 +301,7 @@ export function lowerTypeScriptSource(
     erasedLocalTypes,
     hostTypes,
     packageName,
+    privateTypeAliases,
     scopeBindings: new WeakMap(),
     sourceFile,
     temporaryIndex: 0,
@@ -312,13 +316,21 @@ export function lowerTypeScriptSource(
     workspaceDirectory,
   };
 
+  const overloads = new Map<string, IrFunctionOverload[]>();
+
   for (const statement of sourceFile.statements) {
     try {
       if (ts.isFunctionDeclaration(statement) && statement.name && statement.body) {
-        declarations.push(lowerFunction(statement, context));
+        const declaration = lowerFunction(statement, context);
+        const signatures = overloads.get(statement.name.text);
+        if (signatures?.length) declaration.overloads = signatures;
+        overloads.delete(statement.name.text);
+        declarations.push(declaration);
         accountedDeclarations += 1;
       } else if (ts.isFunctionDeclaration(statement) && statement.name) {
-        // TypeScript overload signatures are represented by the following implementation declaration.
+        const signatures = overloads.get(statement.name.text) ?? [];
+        signatures.push(lowerFunctionOverload(statement, context));
+        overloads.set(statement.name.text, signatures);
         accountedDeclarations += 1;
       } else if (ts.isClassDeclaration(statement) && statement.name) {
         const previousClassThis = context.classThis;
@@ -912,6 +924,7 @@ interface LoweringContext {
   erasedLocalTypes: ReadonlySet<string>;
   hostTypes: Map<string, HostTypeUse>;
   packageName: string;
+  privateTypeAliases: ReadonlyMap<string, ts.TypeAliasDeclaration>;
   scopeBindings: WeakMap<ts.Node, ReadonlySet<string>>;
   sourceFile: ts.SourceFile;
   temporaryIndex: number;
@@ -1094,6 +1107,88 @@ function lowerFunction(node: ts.FunctionDeclaration, context: LoweringContext): 
   } finally {
     context.classThis = previousClassThis;
     context.dynamicThisCapture = previousDynamicThisCapture;
+  }
+}
+
+function lowerFunctionOverload(node: ts.FunctionDeclaration, context: LoweringContext): IrFunctionOverload {
+  if (!node.name || node.body) throw new Error('Expected a named function overload without a body');
+  const loweredParameters = lowerParameterList(node.parameters, context);
+  if (loweredParameters.prefix.length > 0) {
+    return unsupported(node, context, 'destructured function overload');
+  }
+  return {
+    parameters: loweredParameters.parameters.map((parameter) => ({
+      ...parameter,
+      type: expandPrivateOverloadType(parameter.type, context),
+    })),
+    returns: expandPrivateOverloadType(
+      node.type ? lowerType(node.type, context) : (inferredReturnType(node, context) ?? { kind: 'dynamic' }),
+      context,
+    ),
+    typeParameterConstraints: lowerTypeParameterConstraints(node.typeParameters, context)?.map((constraint) =>
+      constraint ? expandPrivateOverloadType(constraint, context) : undefined,
+    ),
+    typeParameters: node.typeParameters?.map((parameter) => parameter.name.text) ?? [],
+  };
+}
+
+function expandPrivateOverloadType(
+  type: IrType,
+  context: LoweringContext,
+  substitutions: ReadonlyMap<string, IrType> = new Map(),
+  stack: ReadonlySet<string> = new Set(),
+): IrType {
+  switch (type.kind) {
+    case 'anonymous':
+      return {
+        extends: type.extends.map((item) => expandPrivateOverloadType(item, context, substitutions, stack)),
+        fields: type.fields.map((field) => ({
+          ...field,
+          type: expandPrivateOverloadType(field.type, context, substitutions, stack),
+        })),
+        kind: 'anonymous',
+      };
+    case 'array':
+      return { element: expandPrivateOverloadType(type.element, context, substitutions, stack), kind: 'array' };
+    case 'function':
+      return {
+        kind: 'function',
+        parameters: type.parameters.map((item) => expandPrivateOverloadType(item, context, substitutions, stack)),
+        returns: expandPrivateOverloadType(type.returns, context, substitutions, stack),
+      };
+    case 'named': {
+      const substitution = type.arguments.length === 0 ? substitutions.get(type.name) : undefined;
+      if (substitution) return expandPrivateOverloadType(substitution, context, substitutions, stack);
+      const declaration = context.privateTypeAliases.get(type.name);
+      if (!declaration || stack.has(type.name)) {
+        return {
+          arguments: type.arguments.map((item) => expandPrivateOverloadType(item, context, substitutions, stack)),
+          kind: 'named',
+          name: type.name,
+        };
+      }
+      const arguments_ = type.arguments.map((item) => expandPrivateOverloadType(item, context, substitutions, stack));
+      const aliasSubstitutions = new Map(substitutions);
+      declaration.typeParameters?.forEach((parameter, index) => {
+        aliasSubstitutions.set(parameter.name.text, arguments_[index] ?? { kind: 'dynamic' });
+      });
+      return expandPrivateOverloadType(
+        lowerType(declaration.type, context),
+        context,
+        aliasSubstitutions,
+        new Set([...stack, type.name]),
+      );
+    }
+    case 'nullable':
+      return { inner: expandPrivateOverloadType(type.inner, context, substitutions, stack), kind: 'nullable' };
+    case 'union':
+      return {
+        alternatives: type.alternatives.map((item) => expandPrivateOverloadType(item, context, substitutions, stack)),
+        kind: 'union',
+      };
+    case 'dynamic':
+    case 'primitive':
+      return type;
   }
 }
 

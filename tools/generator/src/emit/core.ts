@@ -973,6 +973,11 @@ function computeExternalTypeNames(modules: IrModule[]): Set<string> {
       if ('typeParameters' in declaration) {
         for (const parameter of declaration.typeParameters) typeParameters.add(parameter);
       }
+      if (declaration.kind === 'function') {
+        for (const overload of declaration.overloads ?? []) {
+          for (const parameter of overload.typeParameters) typeParameters.add(parameter);
+        }
+      }
       if (declaration.kind === 'class') {
         for (const method of declaration.methods)
           for (const parameter of method.typeParameters) typeParameters.add(parameter);
@@ -2520,6 +2525,13 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
         });
         parameters(declaration.parameters);
         type(declaration.returns);
+        declaration.overloads?.forEach((overload) => {
+          overload.typeParameterConstraints?.forEach((constraint) => {
+            if (constraint) type(constraint);
+          });
+          parameters(overload.parameters);
+          type(overload.returns);
+        });
         declaration.body.forEach(statement);
         break;
       case 'variable':
