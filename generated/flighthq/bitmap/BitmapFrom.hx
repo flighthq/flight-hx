@@ -39,25 +39,43 @@ class BitmapFrom {
   }
 
   public static function createBitmapFromImageSource(source:flighthq._internal.dom.CanvasImageSource, width:Float, height:Float):Null<Bitmap> {
-    var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
-    var ctx:Null<flighthq._internal.dom.CanvasRenderingContext2D> = cast _Runtime.UNDEFINED;
-    var raw:flighthq._internal.dom.ImageData = cast _Runtime.UNDEFINED;
-    var bitmap:Bitmap = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast null; }
-    canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
+    if (width <= 0 || height <= 0) return null;
+    final canvas:flighthq._internal.dom.HTMLCanvasElement = cast flighthq._internal.backend.DomDocumentBackend.call(
+      flighthq._internal.backend.DomDocumentBackend.value(),
+      'createElement',
+      cast (['canvas'] : Array<Dynamic>)
+    );
+    if (canvas == null) return null;
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', height);
-    ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(ctx, null) : Bool)) { return cast null; }
+    final ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast flighthq._internal.backend.CanvasElementBackend.call(
+      canvas,
+      'getContext',
+      cast (['2d'] : Array<Dynamic>)
+    );
+    if (ctx == null) return null;
+    var raw:flighthq._internal.dom.ImageData;
     try {
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([source, 0.0, 0.0] : Array<Dynamic>));
-      (raw = cast (flighthq._internal.backend.Canvas2dBackend.call(ctx, 'getImageData', cast ([0.0, 0.0, width, height] : Array<Dynamic>)) : Dynamic));
-    } catch (__error:Dynamic) {
-      return cast null;
+      raw = cast flighthq._internal.backend.Canvas2dBackend.call(
+        ctx,
+        'getImageData',
+        cast ([0.0, 0.0, width, height] : Array<Dynamic>)
+      );
+    } catch (_:Dynamic) {
+      return null;
     }
-    bitmap = (cast createEntity((cast { alphaType: 'straight', gamut: (cast raw.colorSpace : String), data: raw.data, format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width })) : { >Entity, var alphaType:String; var gamut:String; var data:flighthq._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; });
-    return cast bitmap;
+    final bitmap:Bitmap = cast createEntity(cast {
+      alphaType: 'straight',
+      gamut: cast _Runtime.field(raw, 'colorSpace'),
+      data: _Runtime.field(raw, 'data'),
+      format: 'rgba8unorm',
+      height: height,
+      kind: BitmapTextureSourceKind,
+      version: 0.0,
+      width: width,
+    });
+    return bitmap;
     return cast null;
   }
 }

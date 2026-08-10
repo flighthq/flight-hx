@@ -14,7 +14,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | JavaScript-only global value keys | 53 |
 | Module value keys | 0 |
 | Type uses | 10963 |
-| Value uses | 1562 |
+| Value uses | 1560 |
 | Missing toolkit entries | 0 |
 
 ## Types
@@ -272,7 +272,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:Date` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 20 |
 | `global:decodeURIComponent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 2 |
 | `global:DeviceMotionEvent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 7 |
-| `global:document` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 27 |
+| `global:document` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 25 |
 | `global:DOMException` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 8 |
 | `global:encodeURIComponent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 2 |
 | `global:fetch` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 6 |

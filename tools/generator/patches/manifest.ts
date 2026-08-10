@@ -3,6 +3,38 @@ import { definePatches } from '../src/patch/apply.ts';
 export default definePatches([
   {
     expect: {
+      astHash: 'sha256:57c19df3c8d820dc87a2d6f310711ed58fc5e5c570961e25e6996f79d2328c16',
+      kind: 'function',
+    },
+    fragment: 'tools/generator/patches/bodies/bitmap/createBitmapFromImageSource.hx',
+    id: 'bitmap.create-from-image-source.native-scratch-canvas',
+    operation: 'replaceBody',
+    reason:
+      'The native runtime supplies a scratch canvas without a DOM document, so availability must be checked through the canvas backend.',
+    target: {
+      export: 'createBitmapFromImageSource',
+      package: '@flighthq/bitmap',
+      source: 'upstream/packages/bitmap/src/bitmapFrom.ts',
+    },
+  },
+  {
+    expect: {
+      astHash: 'sha256:d54784a6879d18399e017d556950ee8f8fd9be2bd7bca627eb138dfaf56e7a38',
+      kind: 'function',
+    },
+    fragment: 'tools/generator/patches/bodies/bitmap/explainBitmapReadbackBlockReason.hx',
+    id: 'bitmap.explain-readback.native-scratch-canvas',
+    operation: 'replaceBody',
+    reason:
+      'The native runtime supplies a scratch canvas without a DOM document, so diagnostics must probe the canvas backend.',
+    target: {
+      export: '_blockReason__explainBitmapReadback',
+      package: '@flighthq/bitmap',
+      source: 'upstream/packages/bitmap/src/explainBitmapReadback.ts',
+    },
+  },
+  {
+    expect: {
       astHash: 'sha256:e8e8ec56ac0d693d53dc93ebf38f390809e722b38285fd85aff1e9c1d5c98d77',
       kind: 'function',
     },

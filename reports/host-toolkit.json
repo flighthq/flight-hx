@@ -11,7 +11,7 @@
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 15,
     "typeUses": 10963,
-    "valueUses": 1562
+    "valueUses": 1560
   },
   "types": [
     {
@@ -4495,8 +4495,6 @@
         "generated/flighthq/app/App.hx",
         "generated/flighthq/application/Application.hx",
         "generated/flighthq/application/Window.hx",
-        "generated/flighthq/bitmap/BitmapFrom.hx",
-        "generated/flighthq/bitmap/ExplainBitmapReadback.hx",
         "generated/flighthq/device/Device.hx",
         "generated/flighthq/dialog/Dialog.hx",
         "generated/flighthq/glyphatlas/GlyphRasterizerBackend.hx",
@@ -4510,7 +4508,7 @@
         "generated/flighthq/webcam/Webcam.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 27
+      "uses": 25
     },
     {
       "coverage": "js-only",

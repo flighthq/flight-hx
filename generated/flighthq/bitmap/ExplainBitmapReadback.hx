@@ -15,19 +15,25 @@ class ExplainBitmapReadback {
   }
 
   public static function _blockReason__explainBitmapReadback(source:flighthq._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackBlockReason {
-    var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
-    var ctx:Null<flighthq._internal.dom.CanvasRenderingContext2D> = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast 'empty-size'; }
-    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast 'no-canvas'; }
-    canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
+    if (width <= 0 || height <= 0) return cast 'empty-size';
+    final canvas:flighthq._internal.dom.HTMLCanvasElement = cast flighthq._internal.backend.DomDocumentBackend.call(
+      flighthq._internal.backend.DomDocumentBackend.value(),
+      'createElement',
+      cast (['canvas'] : Array<Dynamic>)
+    );
+    if (canvas == null) return cast 'no-canvas';
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);
-    ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals(ctx, null) : Bool)) { return cast 'no-canvas'; }
+    final ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast flighthq._internal.backend.CanvasElementBackend.call(
+      canvas,
+      'getContext',
+      cast (['2d'] : Array<Dynamic>)
+    );
+    if (ctx == null) return cast 'no-canvas';
     try {
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([source, 0.0, 0.0] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'getImageData', cast ([0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
-    } catch (__error:Dynamic) {
+    } catch (_:Dynamic) {
       return cast 'tainted-source';
     }
     return cast 'ok';

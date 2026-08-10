@@ -3277,8 +3277,8 @@
     "staticEmission": {
       "booleanAndExpressions": 2019,
       "booleanConditionalExpressions": 2829,
-      "booleanOrExpressions": 2502,
-      "booleanTruthinessUses": 12898,
+      "booleanOrExpressions": 2500,
+      "booleanTruthinessUses": 12892,
       "destructuringEscapes": {
         "regexp-result-array": {
           "assignment": 0,
@@ -3428,7 +3428,7 @@
           "writes": 379
         }
       },
-      "numericRelations": 6109,
+      "numericRelations": 6105,
       "syntheticArrayReads": {
         "highArityArguments": 27,
         "iterationBindings": 138
