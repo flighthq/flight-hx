@@ -58,6 +58,10 @@ describe('public Haxe facades', () => {
     expect(sdk).not.toContain('_Runtime.callValue(Facade_');
     expect(sdk).toContain('_Runtime.callHaxeRestValue(Facade_');
     expect(sdk).toContain('public static final defaultGlSpriteRenderer:');
+    expect(sdk).toContain('#if lime\n  public static function createCairoSurface(window:lime.ui.Window)');
+    expect(sdk).toContain('flighthq.scene2dCairo.CairoSurface.createCairoSurface(window)');
+    expect(sdk).toContain('#if lime\n  public static function createGlSurface(window:lime.ui.Window)');
+    expect(sdk).toContain('flighthq.hostLime.GlSurface.createGlSurface(window)');
     expect(scene2dGl).toContain('public static final defaultGlSpriteRenderer:');
   });
 

@@ -34,6 +34,7 @@ import type {
   StaticLoweringEmissionCounts,
 } from '../model/ir.ts';
 import { applySemanticPatches } from '../patch/apply.ts';
+import { sdkFacadeFunctionExtras, type FacadeFunctionExtra } from './facade-extras.ts';
 import {
   emitHaxeModule,
   resetStaticLoweringEmissionCounts,
@@ -1250,6 +1251,30 @@ function buildPublicFacades(
     });
   };
 
+  const addFunctionExtra = (target: IrModule, extra: FacadeFunctionExtra): void => {
+    if (target.declarations.some((declaration) => declaration.name === extra.name)) {
+      throw new Error(`Facade extra conflicts with generated declaration ${target.packageName}.${extra.name}`);
+    }
+    target.declarations.push({
+      body: [],
+      exported: true,
+      haxeBody: `return ${extra.target}(${extra.parameters.map((parameter) => parameter.name).join(', ')});`,
+      ...(extra.condition ? { haxeCondition: extra.condition } : {}),
+      kind: 'function',
+      name: extra.name,
+      origin: {
+        column: 1,
+        fingerprint: `maintained-facade-extra:${extra.name}`,
+        line: 1,
+        packageName: target.packageName,
+        source: 'tools/generator/src/emit/facade-extras.ts',
+      },
+      parameters: extra.parameters.map((parameter) => ({ ...parameter })),
+      returns: extra.returns,
+      typeParameters: [],
+    });
+  };
+
   // Match granular package barrels before building the broad SDK facade.
   for (const packageInventory of inventoryByName.values()) {
     if (packageInventory.name === '@flighthq/sdk') continue;
@@ -1299,6 +1324,7 @@ function buildPublicFacades(
     if (!resolved) throw new Error(`Cannot resolve SDK facade export ${record.name} from ${record.source}`);
     addFacade(sdk, record.name, resolved.module, resolved.declaration);
   }
+  for (const extra of sdkFacadeFunctionExtras) addFunctionExtra(sdk, extra);
   sdk.declarations.sort((left, right) => left.name.localeCompare(right.name));
   // Names Haxe makes visible in a package without an import (each module's own top-level
   // type). A referenced type whose name matches one of these in the target's own package is

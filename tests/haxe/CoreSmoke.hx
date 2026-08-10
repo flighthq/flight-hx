@@ -35,6 +35,11 @@ class CoreSmoke {
     if (typedProtocolObjectTypecheck == null) throw 'typed protocol object typecheck failed';
     final physicsSolverTypecheck:flighthq.types.Physics2D.Physics2DWorld->Void = typecheckPhysicsSolverArity;
     if (physicsSolverTypecheck == null) throw 'physics solver arity typecheck failed';
+    #if lime
+    final glSurfaceTypecheck:lime.ui.Window->flighthq._internal.dom.HTMLCanvasElement = flighthq.sdk.Sdk.createGlSurface;
+    final cairoSurfaceTypecheck:lime.ui.Window->flighthq._internal.dom.HTMLCanvasElement = flighthq.sdk.Sdk.createCairoSurface;
+    if (glSurfaceTypecheck == null || cairoSurfaceTypecheck == null) throw 'SDK host surface typecheck failed';
+    #end
     if (clamp(12, 0, 10) != 10) throw 'clamp failed';
     StaticLoweringSmoke.run();
     StaticIndexSmoke.run();

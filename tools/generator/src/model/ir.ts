@@ -292,6 +292,7 @@ export interface IrFunctionDeclaration {
   body: IrStatement[];
   exported: boolean;
   haxeBody?: string | undefined;
+  haxeCondition?: string | undefined;
   kind: 'function';
   name: string;
   noCompletion?: true | undefined;

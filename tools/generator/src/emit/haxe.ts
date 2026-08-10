@@ -240,10 +240,12 @@ export function emitHaxeModule(module: IrModule): string {
     );
   }
   for (const declaration of valueDeclarations) {
-    lines.push(
-      ...indent([...(declaration.noCompletion ? ['@:noCompletion'] : []), ...emitModuleValue(declaration)]),
-      '',
-    );
+    const emitted = [...(declaration.noCompletion ? ['@:noCompletion'] : []), ...emitModuleValue(declaration)];
+    const conditional =
+      declaration.kind === 'function' && declaration.haxeCondition
+        ? [`#if ${declaration.haxeCondition}`, ...emitted, '#end']
+        : emitted;
+    lines.push(...indent(conditional), '');
   }
   if (lines.at(-1) === '') lines.pop();
   lines.push('}', '');

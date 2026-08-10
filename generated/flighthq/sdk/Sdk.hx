@@ -5241,6 +5241,13 @@ class Sdk {
     return cast null;
   }
 
+  #if lime
+  public static function createCairoSurface(window:lime.ui.Window):flighthq._internal.dom.HTMLCanvasElement {
+    return flighthq.scene2dCairo.CairoSurface.createCairoSurface(window);
+    return cast null;
+  }
+  #end
+
   public static function createCamera2D(viewportWidth:Float, viewportHeight:Float, ?options:Camera2DOptions):Camera2D {
     return cast Facade_Sdk_flighthq_camera_Camera2d.createCamera2D(viewportWidth, viewportHeight, options);
     return cast null;
@@ -5799,6 +5806,13 @@ class Sdk {
     return cast Facade_Sdk_flighthq_renderGl_GlRenderTexturePool.createGlRenderTexturePool();
     return cast null;
   }
+
+  #if lime
+  public static function createGlSurface(window:lime.ui.Window):flighthq._internal.dom.HTMLCanvasElement {
+    return flighthq.hostLime.GlSurface.createGlSurface(window);
+    return cast null;
+  }
+  #end
 
   public static function createGlVelocityTarget(state:GlRenderState, width:Float, height:Float):GlRenderTarget {
     return cast Facade_Sdk_flighthq_scene2dGl_GlVelocity.createGlVelocityTarget(state, width, height);
