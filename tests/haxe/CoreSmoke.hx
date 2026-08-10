@@ -8,6 +8,19 @@ import flighthq._internal._Runtime;
 
 class CoreSmoke {
   static function main():Void {
+    // Number.isSafeInteger through the exact emitted form (callProperty on the
+    // LUT Number namespace): physics2d timestep validation depends on it.
+    final numberNamespace:Dynamic = flighthq._internal._HostValueLut.get('Number');
+    if (flighthq._internal._Runtime.callProperty(numberNamespace, 'isSafeInteger', cast ([8.0] : Array<Dynamic>)) != true) {
+      throw 'Number.isSafeInteger(8) should be true';
+    }
+    if (flighthq._internal._Runtime.callProperty(numberNamespace, 'isSafeInteger', cast ([1.5] : Array<Dynamic>)) != false) {
+      throw 'Number.isSafeInteger(1.5) should be false';
+    }
+    if (flighthq._internal._Runtime.callProperty(numberNamespace, 'isSafeInteger', cast ([9007199254740992.0] : Array<Dynamic>)) != false) {
+      throw 'Number.isSafeInteger(2^53) should be false';
+    }
+
     // Cairo alias surface: the derived Cairo-named entry points and typedefs
     // must forward to the canvas originals with reference identity.
     final cairoResolvers:flighthq.types.CairoTextureResolvers = flighthq.scene2dCairo.Scene2dCairo.createCairoTextureResolvers();

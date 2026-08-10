@@ -201,6 +201,12 @@ class _HostValueLut {
           final number:Float = cast value;
           return HxMath.isFinite(number) && !HxMath.isNaN(number) && number == HxMath.ffloor(number);
         },
+        isSafeInteger: function(value:Dynamic):Bool {
+          if (!Std.isOfType(value, Float)) return false;
+          final number:Float = cast value;
+          return HxMath.isFinite(number) && !HxMath.isNaN(number) && number == HxMath.ffloor(number)
+            && HxMath.abs(number) <= 9007199254740991.0;
+        },
         isNaN: function(value:Dynamic):Bool {
           return Std.isOfType(value, Float) && HxMath.isNaN(cast value);
         },
