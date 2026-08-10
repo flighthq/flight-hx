@@ -145,6 +145,7 @@ function auditPackage(
     const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker, typedStructs, {
       expressionTypes: false,
       inferredTypes: false,
+      program,
     });
     lowered += result.accountedDeclarations;
     diagnostics.push(...result.diagnostics);

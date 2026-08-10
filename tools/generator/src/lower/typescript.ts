@@ -44,6 +44,86 @@ import type {
 
 const fingerprintPrinter = ts.createPrinter({ removeComments: true });
 
+interface ObjectMethodArityContext {
+  expectedTypes: ts.Type[];
+  methods: Map<string, ts.Signature>;
+}
+
+type ObjectMethodArityContexts = ReadonlyMap<ts.Symbol, ObjectMethodArityContext>;
+
+const objectMethodArityContextCache = new WeakMap<ts.Program, ObjectMethodArityContexts>();
+
+function originalSymbolAtLocation(node: ts.Node, checker: ts.TypeChecker): ts.Symbol | undefined {
+  const symbol = checker.getSymbolAtLocation(node);
+  return symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0 ? checker.getAliasedSymbol(symbol) : symbol;
+}
+
+function fixedAritySignature(type: ts.Type, checker: ts.TypeChecker): ts.Signature | undefined {
+  return checker
+    .getSignaturesOfType(checker.getNonNullableType(type), ts.SignatureKind.Call)
+    .filter((signature) => !signature.getParameters().some(signatureParameterIsRest))
+    .sort((left, right) => right.getParameters().length - left.getParameters().length)[0];
+}
+
+function collectObjectMethodArityContexts(program: ts.Program, checker: ts.TypeChecker): ObjectMethodArityContexts {
+  const cached = objectMethodArityContextCache.get(program);
+  if (cached) return cached;
+  const contexts = new Map<ts.Symbol, ObjectMethodArityContext>();
+  const visit = (node: ts.Node): void => {
+    if (ts.isCallExpression(node)) {
+      const signature = checker.getResolvedSignature(node);
+      const parameters = signature?.getParameters() ?? [];
+      for (let index = 0; index < node.arguments.length && index < parameters.length; index++) {
+        const argument = unwrapCallTargetAssertions(node.arguments[index]!);
+        if (!ts.isIdentifier(argument) && !ts.isPropertyAccessExpression(argument)) continue;
+        const symbol = originalSymbolAtLocation(ts.isIdentifier(argument) ? argument : argument.name, checker);
+        const declaration = symbol?.valueDeclaration;
+        if (
+          !symbol ||
+          !declaration ||
+          !ts.isVariableDeclaration(declaration) ||
+          !declaration.initializer ||
+          !ts.isObjectLiteralExpression(declaration.initializer)
+        ) {
+          continue;
+        }
+        const expectedType = checker.getNonNullableType(
+          checker.getTypeOfSymbolAtLocation(parameters[index]!, node.arguments[index]!),
+        );
+        const actualType = checker.getNonNullableType(checker.getTypeAtLocation(argument));
+        for (const expectedProperty of checker.getPropertiesOfType(expectedType)) {
+          const actualProperty = actualType.getProperty(expectedProperty.getName());
+          if (!actualProperty) continue;
+          const expectedPropertyType = checker.getTypeOfSymbolAtLocation(expectedProperty, node.arguments[index]!);
+          const actualPropertyType = checker.getTypeOfSymbolAtLocation(actualProperty, argument);
+          const expectedSignature = fixedAritySignature(expectedPropertyType, checker);
+          const actualSignature = fixedAritySignature(actualPropertyType, checker);
+          if (
+            !expectedSignature ||
+            !actualSignature ||
+            actualSignature.getParameters().length >= expectedSignature.getParameters().length
+          ) {
+            continue;
+          }
+          const context = contexts.get(symbol) ?? { expectedTypes: [], methods: new Map<string, ts.Signature>() };
+          const current = context.methods.get(expectedProperty.getName());
+          if (!current || current.getParameters().length < expectedSignature.getParameters().length) {
+            context.methods.set(expectedProperty.getName(), expectedSignature);
+          }
+          if (!context.expectedTypes.includes(expectedType)) context.expectedTypes.push(expectedType);
+          contexts.set(symbol, context);
+        }
+      }
+    }
+    ts.forEachChild(node, visit);
+  };
+  for (const sourceFile of program.getSourceFiles()) {
+    if (!sourceFile.isDeclarationFile) visit(sourceFile);
+  }
+  objectMethodArityContextCache.set(program, contexts);
+  return contexts;
+}
+
 const collectionMembers = {
   ArrayCollection: new Set(['filter', 'flatMap', 'forEach', 'map']),
   MapCollection: new Set(['clear', 'delete', 'entries', 'forEach', 'get', 'has', 'keys', 'set', 'size', 'values']),
@@ -185,7 +265,7 @@ export function lowerTypeScriptSource(
   workspaceDirectory: string,
   checker?: ts.TypeChecker,
   typedStructs?: TypedStructRegistry,
-  options: { expressionTypes?: boolean; inferredTypes?: boolean } = {},
+  options: { expressionTypes?: boolean; inferredTypes?: boolean; program?: ts.Program } = {},
 ): LoweringResult {
   const diagnostics: LoweringDiagnostic[] = [];
   const declarations: IrDeclaration[] = [];
@@ -302,6 +382,8 @@ export function lowerTypeScriptSource(
     hostTypes,
     packageName,
     privateTypeAliases,
+    objectMethodArityContexts:
+      checker && options.program ? collectObjectMethodArityContexts(options.program, checker) : new Map(),
     scopeBindings: new WeakMap(),
     sourceFile,
     temporaryIndex: 0,
@@ -387,14 +469,19 @@ export function lowerTypeScriptSource(
         const mutable = (statement.declarationList.flags & ts.NodeFlags.Const) === 0;
         for (const declaration of statement.declarationList.declarations) {
           if (!ts.isIdentifier(declaration.name)) unsupported(declaration.name, context, 'binding pattern declaration');
+          const initializer = declaration.initializer ? lowerExpression(declaration.initializer, context) : undefined;
+          const type = declaration.type
+            ? lowerType(declaration.type, context)
+            : inferredType(declaration.name, context);
+          widenObjectMethodArities(declaration, initializer, type, context);
           declarations.push({
             exported,
-            initializer: declaration.initializer ? lowerExpression(declaration.initializer, context) : undefined,
+            initializer,
             kind: 'variable',
             mutable,
             name: declaration.name.text,
             origin: origin(statement, context),
-            type: declaration.type ? lowerType(declaration.type, context) : inferredType(declaration.name, context),
+            type,
           });
         }
         accountedDeclarations += 1;
@@ -925,6 +1012,7 @@ interface LoweringContext {
   hostTypes: Map<string, HostTypeUse>;
   packageName: string;
   privateTypeAliases: ReadonlyMap<string, ts.TypeAliasDeclaration>;
+  objectMethodArityContexts: ObjectMethodArityContexts;
   scopeBindings: WeakMap<ts.Node, ReadonlySet<string>>;
   sourceFile: ts.SourceFile;
   temporaryIndex: number;
@@ -2567,6 +2655,108 @@ function lowerVariables(node: ts.VariableDeclarationList, mutable: boolean, cont
     });
     return variables;
   });
+}
+
+function widenObjectMethodArities(
+  declaration: ts.VariableDeclaration,
+  initializer: IrExpression | undefined,
+  type: IrType | undefined,
+  context: LoweringContext,
+): void {
+  if (!context.checker || initializer?.kind !== 'object' || !type || !ts.isIdentifier(declaration.name)) return;
+  const symbol = originalSymbolAtLocation(declaration.name, context.checker);
+  const arityContext = symbol ? context.objectMethodArityContexts.get(symbol) : undefined;
+  if (!arityContext) return;
+  for (const [name, signature] of arityContext.methods) {
+    const property = initializer.properties.find(
+      (candidate) => candidate.kind === 'property' && candidate.name === name && candidate.value.kind === 'function',
+    );
+    if (!property || property.kind !== 'property' || property.value.kind !== 'function') continue;
+    const expectedParameters = signature.getParameters().map((parameter) => ({
+      optional: signatureParameterIsOptional(parameter),
+      type:
+        lowerCheckerType(
+          context.checker!.getTypeOfSymbolAtLocation(parameter, declaration.name),
+          declaration.name,
+          context,
+          new Set(),
+        ) ?? ({ kind: 'dynamic' } as const),
+    }));
+    const actualCount = property.value.parameters.length;
+    if (actualCount >= expectedParameters.length) continue;
+    const names = new Set(property.value.parameters.map((parameter) => parameter.name));
+    const appended: IrParameter[] = expectedParameters.slice(actualCount).map((parameter, offset) => {
+      let name = `__unused${String(actualCount + offset)}`;
+      while (names.has(name)) name += '_';
+      names.add(name);
+      return {
+        name,
+        optional: parameter.optional,
+        rest: false,
+        type: parameter.type,
+      };
+    });
+    property.value.parameters.push(...appended);
+    widenFunctionFieldArity(
+      type,
+      name,
+      expectedParameters.map((parameter) => parameter.type),
+    );
+  }
+  addMissingContextualObjectFields(type, arityContext.expectedTypes, declaration, context);
+}
+
+function addMissingContextualObjectFields(
+  type: IrType,
+  expectedTypes: readonly ts.Type[],
+  declaration: ts.VariableDeclaration,
+  context: LoweringContext,
+): void {
+  if (!context.checker) return;
+  if (type.kind === 'nullable') {
+    addMissingContextualObjectFields(type.inner, expectedTypes, declaration, context);
+    return;
+  }
+  if (type.kind !== 'anonymous') return;
+  const names = new Set(type.fields.map((field) => field.name));
+  for (const expectedType of expectedTypes) {
+    for (const property of context.checker.getPropertiesOfType(expectedType)) {
+      const name = property.getName();
+      if (names.has(name)) continue;
+      const propertyType = lowerCheckerType(
+        context.checker.getTypeOfSymbolAtLocation(property, declaration.name),
+        declaration.name,
+        context,
+        new Set(),
+      );
+      if (!propertyType) continue;
+      names.add(name);
+      type.fields.push({
+        name,
+        optional: (property.flags & ts.SymbolFlags.Optional) !== 0,
+        type: propertyType,
+      });
+    }
+  }
+}
+
+function widenFunctionFieldArity(type: IrType, name: string, expectedParameters: IrType[]): void {
+  if (type.kind === 'nullable') {
+    widenFunctionFieldArity(type.inner, name, expectedParameters);
+    return;
+  }
+  if (type.kind !== 'anonymous') return;
+  const field = type.fields.find((candidate) => candidate.name === name);
+  if (!field) return;
+  const widen = (fieldType: IrType): void => {
+    if (fieldType.kind === 'nullable') {
+      widen(fieldType.inner);
+      return;
+    }
+    if (fieldType.kind !== 'function' || fieldType.parameters.length >= expectedParameters.length) return;
+    fieldType.parameters.push(...expectedParameters.slice(fieldType.parameters.length));
+  };
+  widen(field.type);
 }
 
 interface BindingPatternOptions {

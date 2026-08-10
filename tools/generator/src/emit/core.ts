@@ -2238,7 +2238,7 @@ function lowerFiles(
   for (const file of files) {
     const source = program.getSourceFile(file);
     if (!source) throw new Error(`Upstream TypeScript program is missing source: ${file}`);
-    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker, typedStructs);
+    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker, typedStructs, { program });
     namespacePrivateDeclarations(result.declarations);
     declarations.push(...result.declarations);
     diagnostics.push(...result.diagnostics);

@@ -262,7 +262,7 @@ class Physics2d {
 
   public static final Physics2DMouseJointKind:String = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DMouseJointKind;
 
-  public static final physics2DMouseJointSolver:{ var usesBodyA:Bool; var keepsBodiesAwake:Bool; var swapEnds:Void->Bool; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Physics2d_flighthq_physics2d_Joints.physics2DMouseJointSolver;
+  public static final physics2DMouseJointSolver:{ var usesBodyA:Bool; var keepsBodiesAwake:Bool; var swapEnds:Physics2DJoint->Bool; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; @:optional var warmStart:Null<Physics2DWorld->Physics2DJoint->Void>; @:optional var scaleAccumulatedImpulses:Null<Physics2DJoint->Float->Void>; } = Facade_Physics2d_flighthq_physics2d_Joints.physics2DMouseJointSolver;
 
   public static final Physics2DPrismaticJointKind:String = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DPrismaticJointKind;
 
@@ -286,7 +286,7 @@ class Physics2d {
 
   public static final Physics2DWheelJointKind:String = Facade_Physics2d_flighthq_physics2d_Joints.Physics2DWheelJointKind;
 
-  public static final physics2DWheelJointSolver:{ var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Void->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Physics2d_flighthq_physics2d_Joints.physics2DWheelJointSolver;
+  public static final physics2DWheelJointSolver:{ var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; @:optional var usesBodyA:Null<Bool>; @:optional var keepsBodiesAwake:Null<Bool>; } = Facade_Physics2d_flighthq_physics2d_Joints.physics2DWheelJointSolver;
 
   public static final Physics2DWorldVersion:Float = Facade_Physics2d_flighthq_physics2d_World.Physics2DWorldVersion;
 

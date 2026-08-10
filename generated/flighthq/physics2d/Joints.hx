@@ -207,7 +207,7 @@ class Joints {
     Joints.applyGearImpulse__joints((cast bodyA), (cast bodyB), (cast state), (cast lambda : Float));
   } });
 
-  public static final physics2DMouseJointSolver:{ var usesBodyA:Bool; var keepsBodiesAwake:Bool; var swapEnds:Void->Bool; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = (cast { usesBodyA: false, keepsBodiesAwake: true, swapEnds: function():Bool {
+  public static final physics2DMouseJointSolver:{ var usesBodyA:Bool; var keepsBodiesAwake:Bool; var swapEnds:Physics2DJoint->Bool; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; @:optional var warmStart:Null<Physics2DWorld->Physics2DJoint->Void>; @:optional var scaleAccumulatedImpulses:Null<Physics2DJoint->Float->Void>; } = (cast { usesBodyA: false, keepsBodiesAwake: true, swapEnds: function(__unused0:Physics2DJoint):Bool {
     return cast false;
     return cast _Runtime.UNDEFINED;
   }, clearAccumulatedImpulses: function(joint:Physics2DJoint):Void {
@@ -825,7 +825,7 @@ class Joints {
     applyPhysics2DImpulse((cast bodyA), (cast bodyB), (cast (cast joint : Physics2DJoint).rAX : Float), (cast (cast joint : Physics2DJoint).rAY : Float), (cast (cast joint : Physics2DJoint).rBX : Float), (cast (cast joint : Physics2DJoint).rBY : Float), (cast (-lambda * axisX) : Float), (cast (-lambda * axisY) : Float));
   } });
 
-  public static final physics2DWheelJointSolver:{ var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Void->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = (cast { scaleAccumulatedImpulses: function(joint:Physics2DJoint, timestepRatio:Float):Void {
+  public static final physics2DWheelJointSolver:{ var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; @:optional var usesBodyA:Null<Bool>; @:optional var keepsBodiesAwake:Null<Bool>; } = (cast { scaleAccumulatedImpulses: function(joint:Physics2DJoint, timestepRatio:Float):Void {
     var wheel:Physics2DWheelJoint = cast _Runtime.UNDEFINED;
     wheel = (cast joint : Physics2DWheelJoint);
     ((cast wheel : Physics2DWheelJoint).motorImpulse = _Runtime.multiplyNumbers(_Runtime.coalesce((cast wheel : Physics2DWheelJoint).motorImpulse, function():Dynamic return cast 0.0), timestepRatio));
@@ -850,7 +850,7 @@ class Joints {
     ((cast joint : Physics2DJoint).impulse1 = 0.0);
     ((cast joint : Physics2DJoint).impulse2 = 0.0);
     ((cast (cast joint : Physics2DWheelJoint) : Physics2DWheelJoint).motorImpulse = 0.0);
-  }, swapEnds: function():Bool {
+  }, swapEnds: function(__unused0:Physics2DJoint):Bool {
     return cast false;
     return cast _Runtime.UNDEFINED;
   }, prepare: function(world:Physics2DWorld, joint:Physics2DJoint, dt:Float):Void {

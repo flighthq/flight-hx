@@ -19,7 +19,7 @@ function typedSource(
   fileName: string,
   text: string,
   additionalSources: Readonly<Record<string, string>> = {},
-): { checker: ts.TypeChecker; source: ts.SourceFile } {
+): { checker: ts.TypeChecker; program: ts.Program; source: ts.SourceFile } {
   const options: ts.CompilerOptions = {
     lib: ['lib.es2022.d.ts', 'lib.dom.d.ts'],
     skipLibCheck: true,
@@ -43,7 +43,7 @@ function typedSource(
   const program = ts.createProgram([...virtualSources.keys()], options, host);
   const programSource = program.getSourceFile(fileName);
   if (!programSource) throw new Error(`Fixture program is missing ${fileName}`);
-  return { checker: program.getTypeChecker(), source: programSource };
+  return { checker: program.getTypeChecker(), program, source: programSource };
 }
 
 describe('TypeScript lowering and Haxe emission', () => {
@@ -3612,6 +3612,40 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain(
       'draw: function(_ctx:Dynamic, state:Dynamic, __unused2:Array<flighthq._internal._Any>, __unused3:Float)',
     );
+  });
+
+  it('widens inferred object methods to the typed protocol arity accepted by TypeScript', () => {
+    const solverFile = '/workspace/upstream/packages/example/src/solver.ts';
+    const { checker, program, source } = typedSource(
+      solverFile,
+      `
+        interface Solver {
+          swapEnds(value: number): boolean;
+          solve(value: number): void;
+          warmStart?(value: number): void;
+        }
+        declare function register(value: Solver): void;
+        export const solver = {
+          swapEnds(): boolean { return false; },
+          solve(value: number): void { void value; },
+        };
+        register(solver);
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker, undefined, {
+      program,
+    });
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'InferredProtocolArityFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('swapEnds:Float->Bool');
+    expect(output).toContain('@:optional var warmStart:Float->Void');
+    expect(output).toContain('swapEnds: function(__unused0:Float):Bool');
   });
 
   it('preserves negative-zero normalization and fractional sort comparators', () => {

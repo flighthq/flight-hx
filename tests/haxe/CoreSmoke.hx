@@ -33,6 +33,8 @@ class CoreSmoke {
     if (shapeCommandRegistrarTypecheck == null) throw 'shape command registrar typecheck failed';
     final typedProtocolObjectTypecheck:flighthq.types.TweenManager->flighthq.types.Shape->flighthq._internal.dom.AudioContext->flighthq.types.AudioResource->Void = typecheckTypedProtocolObjects;
     if (typedProtocolObjectTypecheck == null) throw 'typed protocol object typecheck failed';
+    final physicsSolverTypecheck:flighthq.types.Physics2D.Physics2DWorld->Void = typecheckPhysicsSolverArity;
+    if (physicsSolverTypecheck == null) throw 'physics solver arity typecheck failed';
     if (clamp(12, 0, 10) != 10) throw 'clamp failed';
     StaticLoweringSmoke.run();
     StaticIndexSmoke.run();
@@ -272,5 +274,18 @@ class CoreSmoke {
     flighthq.tween.Tween.createTween(manager, shape, 1.0, {x: 2.0, y: 3.0});
     flighthq.sdk.Sdk.createTween(manager, shape, 1.0, {x: 2.0, y: 3.0});
     flighthq.sdk.Sdk.playAudioResource(context, audio, {gain: 1});
+  }
+
+  static function typecheckPhysicsSolverArity(world:flighthq.types.Physics2D.Physics2DWorld):Void {
+    flighthq.physics2d.JointRegistry.registerPhysics2DJointSolver(
+      world,
+      flighthq.physics2d.Joints.Physics2DMouseJointKind,
+      flighthq.physics2d.Joints.physics2DMouseJointSolver,
+    );
+    flighthq.sdk.Sdk.registerPhysics2DJointSolver(
+      world,
+      flighthq.sdk.Sdk.Physics2DWheelJointKind,
+      flighthq.sdk.Sdk.physics2DWheelJointSolver,
+    );
   }
 }
