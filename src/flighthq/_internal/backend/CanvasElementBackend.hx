@@ -90,8 +90,11 @@ class CanvasElementBackend {
 
   public static function setField(canvas:Dynamic, name:String, value:Dynamic):Dynamic {
     switch (name) {
-      case 'width': (canvas : CanvasLike).width = value;
-      case 'height': (canvas : CanvasLike).height = value;
+      // The HTML attribute is integral (browsers truncate assigned floats);
+      // coerce here so a Float never lands raw in the adapter's Int field —
+      // on Neko that float taints the surface stride and Bytes.alloc faults.
+      case 'width': (canvas : CanvasLike).width = Std.int(value);
+      case 'height': (canvas : CanvasLike).height = Std.int(value);
       default:
         #if (js && html5)
         throw 'CanvasElementBackend: unmapped canvas property ' + name;
