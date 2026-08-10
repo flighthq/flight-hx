@@ -30,38 +30,38 @@ class SwfEditText {
     var leading:Float = cast _Runtime.UNDEFINED;
     var text:String = cast _Runtime.UNDEFINED;
     var field:SwfEditTextField__swfEditText = cast _Runtime.UNDEFINED;
-    flags = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-    layoutFlags = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
-    fontId = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_FONT__swfEditText)), 0.0) : Bool) ? (cast _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-    if ((cast !_Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_FONT_CLASS__swfEditText)), 0.0) : Bool)) { _Runtime.callProperty(reader, 'readString', cast ([] : Array<Dynamic>)); }
-    fontHeight = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_FONT__swfEditText)), 0.0) : Bool) ? (cast _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
+    flags = (cast reader : SwfReader).readUint8();
+    layoutFlags = (cast reader : SwfReader).readUint8();
+    if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
+    fontId = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_FONT__swfEditText)), 0.0) : Bool) ? (cast (cast reader : SwfReader).readUint16() : Dynamic) : (cast 0.0 : Dynamic));
+    if ((cast !_Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_FONT_CLASS__swfEditText)), 0.0) : Bool)) { (cast reader : SwfReader).readString(); }
+    fontHeight = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_FONT__swfEditText)), 0.0) : Bool) ? (cast (cast reader : SwfReader).readUint16() : Dynamic) : (cast 0.0 : Dynamic));
     color = 0.0;
     hasColor = false;
     if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_TEXT_COLOR__swfEditText)), 0.0) : Bool)) {
-      var red:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-      var green:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-      var blue:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+      var red:Float = (cast reader : SwfReader).readUint8();
+      var green:Float = (cast reader : SwfReader).readUint8();
+      var blue:Float = (cast reader : SwfReader).readUint8();
+      (cast reader : SwfReader).readUint8();
       (color = cast ((((red * 65536.0) + (green * 256.0)) + blue) : Dynamic));
       (hasColor = cast (true : Dynamic));
     }
-    maxChars = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_MAX_LENGTH__swfEditText)), 0.0) : Bool) ? (cast _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
+    maxChars = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_MAX_LENGTH__swfEditText)), 0.0) : Bool) ? (cast (cast reader : SwfReader).readUint16() : Dynamic) : (cast 0.0 : Dynamic));
     align = 'left';
     leftMargin = 0.0;
     rightMargin = 0.0;
     indent = 0.0;
     leading = 0.0;
     if ((cast !_Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_LAYOUT__swfEditText)), 0.0) : Bool)) {
-      (align = cast ((cast SwfEditText.resolveSwfEditTextAlign__swfEditText((cast _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>)) : Float)) : TextFormatAlign) : Dynamic));
-      (leftMargin = cast (_Runtime.divideNumbers(_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)), SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
-      (rightMargin = cast (_Runtime.divideNumbers(_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)), SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
-      (indent = cast (_Runtime.divideNumbers(_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)), SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
+      (align = cast ((cast SwfEditText.resolveSwfEditTextAlign__swfEditText((cast (cast reader : SwfReader).readUint8() : Float)) : TextFormatAlign) : Dynamic));
+      (leftMargin = cast (_Runtime.divideNumbers((cast reader : SwfReader).readUint16(), SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
+      (rightMargin = cast (_Runtime.divideNumbers((cast reader : SwfReader).readUint16(), SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
+      (indent = cast (_Runtime.divideNumbers((cast reader : SwfReader).readUint16(), SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
       (leading = cast (((cast SwfEditText.readSwfEditTextSigned__swfEditText((cast reader)) : Float) / SwfEditText.TWIPS_PER_PIXEL__swfEditText) : Dynamic));
     }
-    _Runtime.callProperty(reader, 'readString', cast ([] : Array<Dynamic>));
-    text = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_TEXT__swfEditText)), 0.0) : Bool) ? (cast _Runtime.callProperty(reader, 'readString', cast ([] : Array<Dynamic>)) : Dynamic) : (cast '' : Dynamic));
-    if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+    (cast reader : SwfReader).readString();
+    text = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_TEXT__swfEditText)), 0.0) : Bool) ? (cast (cast reader : SwfReader).readString() : Dynamic) : (cast '' : Dynamic));
+    if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
     field = (cast { align: align, border: !_Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_BORDER__swfEditText)), 0.0), color: color, fontHeight: (fontHeight / SwfEditText.TWIPS_PER_PIXEL__swfEditText), fontId: fontId, hasColor: hasColor, height: height, html: !_Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HTML__swfEditText)), 0.0), indent: indent, leading: leading, leftMargin: leftMargin, maxChars: maxChars, multiline: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_MULTILINE__swfEditText)), 0.0), readOnly: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_READ_ONLY__swfEditText)), 0.0), rightMargin: rightMargin, selectable: _Runtime.strictEquals((_Runtime.toInt32(layoutFlags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_NO_SELECT__swfEditText)), 0.0), text: text, width: width, wordWrap: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_WORD_WRAP__swfEditText)), 0.0) });
     return cast function(resolveFontName:Float->String):RichText return (cast SwfEditText.createSwfEditTextNode__swfEditText((cast field), (cast (cast resolveFontName((cast (cast field : SwfEditTextField__swfEditText).fontId : Float)) : String) : String)) : RichText);
     return cast null;
@@ -94,7 +94,7 @@ class SwfEditText {
 
   public static function readSwfEditTextSigned__swfEditText(reader:SwfReader):Float {
     var value:Float = cast _Runtime.UNDEFINED;
-    value = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
+    value = (cast reader : SwfReader).readUint16();
     return cast ((cast ((cast value : Float) >= (cast 32768.0 : Float)) : Bool) ? (cast (value - 65536.0) : Dynamic) : (cast value : Dynamic));
     return cast null;
   }

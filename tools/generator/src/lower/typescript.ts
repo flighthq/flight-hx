@@ -814,10 +814,20 @@ function standardStringBinding(node: ts.Expression, member: string, context: Low
     : undefined;
 }
 
-/** Preserve the nominal receiver for methods on classes generated from this source file. */
+function upstreamPackageSourceDirectory(sourceFile: ts.SourceFile, workspaceDirectory: string): string | undefined {
+  const packagesDirectory = path.join(workspaceDirectory, 'upstream', 'packages');
+  const relative = path.relative(packagesDirectory, sourceFile.fileName);
+  if (relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) return undefined;
+  const [packageDirectory, sourceDirectory] = relative.split(path.sep);
+  return packageDirectory && sourceDirectory === 'src' ? packageDirectory : undefined;
+}
+
+/** Preserve the nominal receiver for methods on classes generated from this upstream package. */
 function generatedClassBinding(node: ts.Expression, context: LoweringContext): string | undefined {
   const checker = context.checker;
   if (!checker) return undefined;
+  const packageDirectory = upstreamPackageSourceDirectory(context.sourceFile, context.workspaceDirectory);
+  if (!packageDirectory) return undefined;
   const names = new Set<string>();
   const seen = new Set<ts.Type>();
   const visit = (type: ts.Type): void => {
@@ -831,7 +841,7 @@ function generatedClassBinding(node: ts.Expression, context: LoweringContext): s
       if (
         ts.isClassDeclaration(declaration) &&
         declaration.name &&
-        declaration.getSourceFile() === context.sourceFile
+        upstreamPackageSourceDirectory(declaration.getSourceFile(), context.workspaceDirectory) === packageDirectory
       ) {
         names.add(declaration.name.text);
       }

@@ -110,22 +110,22 @@ class SwfFrameAction {
     {
       var actions:Float = 0.0;
       while ((cast ((cast actions : Float) < (cast SwfFrameAction.MAX_FRAME_ACTIONS__swfFrameAction : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.field(reader, 'pos') : Float) >= (cast _Runtime.field(reader, 'end') : Float)) : Bool)) { break; }
-        var code:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-        if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+        if ((cast ((cast (cast reader : SwfReader).pos : Float) >= (cast (cast reader : SwfReader).end : Float)) : Bool)) { break; }
+        var code:Float = (cast reader : SwfReader).readUint8();
+        if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
         if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_END__swfFrameAction) : Bool)) { break; }
-        var length:Float = ((cast ((cast code : Float) >= (cast SwfFrameAction.ACTION_HAS_BODY__swfFrameAction : Float)) : Bool) ? (cast _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-        var bodyEnd:Float = _Runtime.addNumbers(_Runtime.field(reader, 'pos'), length);
-        if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast bodyEnd : Float) > (cast _Runtime.field(reader, 'end') : Float)) : Bool)) : Bool)) { return cast null; }
+        var length:Float = ((cast ((cast code : Float) >= (cast SwfFrameAction.ACTION_HAS_BODY__swfFrameAction : Float)) : Bool) ? (cast (cast reader : SwfReader).readUint16() : Dynamic) : (cast 0.0 : Dynamic));
+        var bodyEnd:Float = ((cast reader : SwfReader).pos + length);
+        if ((cast ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool) || (cast ((cast bodyEnd : Float) > (cast (cast reader : SwfReader).end : Float)) : Bool)) : Bool)) { return cast null; }
         if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_STOP__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'stop', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_PLAY__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'play', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_NEXT_FRAME__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'next', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_PREVIOUS_FRAME__swfFrameAction) : Bool)) { _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'previous', label: null }] : Array<Dynamic>)); } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_GOTO_FRAME__swfFrameAction) : Bool)) {
-          _Runtime.callProperty(commands, 'push', cast ([{ frame: _Runtime.addNumbers(_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)), 1.0), kind: 'goto', label: null }] : Array<Dynamic>));
+          _Runtime.callProperty(commands, 'push', cast ([{ frame: _Runtime.addNumbers((cast reader : SwfReader).readUint16(), 1.0), kind: 'goto', label: null }] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(code, SwfFrameAction.ACTION_GOTO_LABEL__swfFrameAction) : Bool)) {
-          _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'goto', label: _Runtime.callProperty(reader, 'readString', cast ([] : Array<Dynamic>)) }] : Array<Dynamic>));
+          _Runtime.callProperty(commands, 'push', cast ([{ frame: 0.0, kind: 'goto', label: (cast reader : SwfReader).readString() }] : Array<Dynamic>));
         } else {
           return cast null;
         } } } } } }
-        _Runtime.setField(reader, 'pos', bodyEnd);
-        if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+        ((cast reader : SwfReader).pos = bodyEnd);
+        if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
         actions++;
       }
     }

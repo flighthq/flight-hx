@@ -32,21 +32,21 @@ class SwfFilter {
   @:noCompletion
   public static function readSwfFilterList(reader:SwfReader, outEffects:Array<RenderEffect>, outAdjustments:Array<Adjustment>):Bool {
     var count:Float = cast _Runtime.UNDEFINED;
-    count = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+    count = (cast reader : SwfReader).readUint8();
     {
       var index:Float = 0.0;
-      while ((cast ((cast ((cast index : Float) < (cast count : Float)) : Bool) && (cast _Runtime.field(reader, 'valid') : Bool)) : Bool)) {
-        var id:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-        if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast false; }
+      while ((cast ((cast ((cast index : Float) < (cast count : Float)) : Bool) && (cast (cast reader : SwfReader).valid : Bool)) : Bool)) {
+        var id:Float = (cast reader : SwfReader).readUint8();
+        if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast false; }
         if ((cast _Runtime.strictEquals(id, SwfFilter.FILTER_DROP_SHADOW__swfFilter) : Bool)) {
           var color:{ var alpha:Float; var rgb:Float; } = (cast SwfFilter.readSwfFilterColor__swfFilter((cast reader)) : { var alpha:Float; var rgb:Float; });
           var blurX:Float = (cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float);
           var blurY:Float = (cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float);
           var angle:Float = ((cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float) * RAD_TO_DEG);
           var distance:Float = (cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float);
-          var strength:Float = _Runtime.callProperty(reader, 'readFixed8', cast ([] : Array<Dynamic>));
-          var flags:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-          if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast false; }
+          var strength:Float = (cast reader : SwfReader).readFixed8();
+          var flags:Float = (cast reader : SwfReader).readUint8();
+          if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast false; }
           _Runtime.callProperty(outEffects, 'push', cast ([((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfFilter.FILTER_INNER__swfFilter)), 0.0) : Bool) ? (cast (cast createInnerShadowEffect((cast { alpha: (cast color : { var alpha:Float; var rgb:Float; }).alpha, angle: angle, blurX: blurX, blurY: blurY, color: (cast color : { var alpha:Float; var rgb:Float; }).rgb, distance: distance, quality: (_Runtime.toInt32(flags) & _Runtime.toInt32(SwfFilter.FILTER_PASSES__swfFilter)), strength: strength })) : InnerShadowEffect) : Dynamic) : (cast (cast createDropShadowEffect((cast { alpha: (cast color : { var alpha:Float; var rgb:Float; }).alpha, angle: angle, blurX: blurX, blurY: blurY, color: (cast color : { var alpha:Float; var rgb:Float; }).rgb, distance: distance, quality: (_Runtime.toInt32(flags) & _Runtime.toInt32(SwfFilter.FILTER_PASSES__swfFilter)), strength: strength })) : DropShadowEffect) : Dynamic))] : Array<Dynamic>));
           index++;
           continue;
@@ -54,8 +54,8 @@ class SwfFilter {
         if ((cast _Runtime.strictEquals(id, SwfFilter.FILTER_BLUR__swfFilter) : Bool)) {
           var blurX:Float = (cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float);
           var blurY:Float = (cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float);
-          _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-          if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast false; }
+          (cast reader : SwfReader).readUint8();
+          if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast false; }
           _Runtime.callProperty(outEffects, 'push', cast ([(cast createBlurEffect((cast { blurX: blurX, blurY: blurY })) : BlurEffect)] : Array<Dynamic>));
           index++;
           continue;
@@ -64,9 +64,9 @@ class SwfFilter {
           var color:{ var alpha:Float; var rgb:Float; } = (cast SwfFilter.readSwfFilterColor__swfFilter((cast reader)) : { var alpha:Float; var rgb:Float; });
           var blurX:Float = (cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float);
           var blurY:Float = (cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float);
-          var strength:Float = _Runtime.callProperty(reader, 'readFixed8', cast ([] : Array<Dynamic>));
-          var flags:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-          if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast false; }
+          var strength:Float = (cast reader : SwfReader).readFixed8();
+          var flags:Float = (cast reader : SwfReader).readUint8();
+          if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast false; }
           var options:{ var alpha:Float; var blurX:Float; var blurY:Float; var color:Float; var quality:Float; var strength:Float; } = (cast { alpha: (cast color : { var alpha:Float; var rgb:Float; }).alpha, blurX: blurX, blurY: blurY, color: (cast color : { var alpha:Float; var rgb:Float; }).rgb, quality: (_Runtime.toInt32(flags) & _Runtime.toInt32(SwfFilter.FILTER_PASSES__swfFilter)), strength: strength });
           _Runtime.callProperty(outEffects, 'push', cast ([((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfFilter.FILTER_INNER__swfFilter)), 0.0) : Bool) ? (cast (cast createInnerGlowEffect((cast options : flighthq._internal._Any)) : InnerGlowEffect) : Dynamic) : (cast (cast createOuterGlowEffect((cast options : flighthq._internal._Any)) : OuterGlowEffect) : Dynamic))] : Array<Dynamic>));
           index++;
@@ -79,15 +79,15 @@ class SwfFilter {
           var blurY:Float = (cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float);
           var angle:Float = ((cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float) * RAD_TO_DEG);
           var distance:Float = (cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float);
-          var strength:Float = _Runtime.callProperty(reader, 'readFixed8', cast ([] : Array<Dynamic>));
-          var flags:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-          if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast false; }
+          var strength:Float = (cast reader : SwfReader).readFixed8();
+          var flags:Float = (cast reader : SwfReader).readUint8();
+          if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast false; }
           _Runtime.callProperty(outEffects, 'push', cast ([(cast createBevelEffect((cast { angle: angle, bevelType: (cast SwfFilter.resolveSwfBevelType__swfFilter((cast flags : Float)) : String), blurX: blurX, blurY: blurY, distance: distance, highlightAlpha: (cast highlight : { var alpha:Float; var rgb:Float; }).alpha, highlightColor: (cast highlight : { var alpha:Float; var rgb:Float; }).rgb, quality: (_Runtime.toInt32(flags) & _Runtime.toInt32(SwfFilter.FILTER_BEVEL_PASSES__swfFilter)), shadowAlpha: (cast shadow : { var alpha:Float; var rgb:Float; }).alpha, shadowColor: (cast shadow : { var alpha:Float; var rgb:Float; }).rgb, strength: strength })) : BevelEffect)] : Array<Dynamic>));
           index++;
           continue;
         }
         if ((cast ((cast _Runtime.strictEquals(id, SwfFilter.FILTER_GRADIENT_GLOW__swfFilter) : Bool) || (cast _Runtime.strictEquals(id, SwfFilter.FILTER_GRADIENT_BEVEL__swfFilter) : Bool)) : Bool)) {
-          var stopCount:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+          var stopCount:Float = (cast reader : SwfReader).readUint8();
           var colors:Array<Float> = (cast cast ([] : Array<Dynamic>));
           var alphas:Array<Float> = (cast cast ([] : Array<Dynamic>));
           var ratios:Array<Float> = (cast cast ([] : Array<Dynamic>));
@@ -103,7 +103,7 @@ class SwfFilter {
           {
             var stop:Float = 0.0;
             while ((cast ((cast stop : Float) < (cast stopCount : Float)) : Bool)) {
-              _Runtime.callProperty(ratios, 'push', cast ([_Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
+              _Runtime.callProperty(ratios, 'push', cast ([(cast reader : SwfReader).readUint8()] : Array<Dynamic>));
               stop++;
             }
           }
@@ -111,29 +111,29 @@ class SwfFilter {
           var blurY:Float = (cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float);
           var angle:Float = ((cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float) * RAD_TO_DEG);
           var distance:Float = (cast SwfFilter.readSwfFilterFixed__swfFilter((cast reader)) : Float);
-          var strength:Float = _Runtime.callProperty(reader, 'readFixed8', cast ([] : Array<Dynamic>));
-          var flags:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-          if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast false; }
+          var strength:Float = (cast reader : SwfReader).readFixed8();
+          var flags:Float = (cast reader : SwfReader).readUint8();
+          if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast false; }
           _Runtime.callProperty(outEffects, 'push', cast ([((cast _Runtime.strictEquals(id, SwfFilter.FILTER_GRADIENT_GLOW__swfFilter) : Bool) ? (cast (cast createGradientGlowEffect((cast { alphas: alphas, blurX: blurX, blurY: blurY, colors: colors, quality: (_Runtime.toInt32(flags) & _Runtime.toInt32(SwfFilter.FILTER_BEVEL_PASSES__swfFilter)), ratios: ratios, strength: strength })) : GradientGlowEffect) : Dynamic) : (cast (cast createGradientBevelEffect((cast { alphas: alphas, angle: angle, bevelType: (cast SwfFilter.resolveSwfBevelType__swfFilter((cast flags : Float)) : String), blurX: blurX, blurY: blurY, colors: colors, distance: distance, quality: (_Runtime.toInt32(flags) & _Runtime.toInt32(SwfFilter.FILTER_BEVEL_PASSES__swfFilter)), ratios: ratios, strength: strength })) : GradientBevelEffect) : Dynamic))] : Array<Dynamic>));
           index++;
           continue;
         }
         if ((cast _Runtime.strictEquals(id, SwfFilter.FILTER_CONVOLUTION__swfFilter) : Bool)) {
-          var matrixX:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-          var matrixY:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+          var matrixX:Float = (cast reader : SwfReader).readUint8();
+          var matrixY:Float = (cast reader : SwfReader).readUint8();
           var divisor:Float = (cast SwfFilter.readSwfFilterFloat__swfFilter((cast reader)) : Float);
           var bias:Float = (cast SwfFilter.readSwfFilterFloat__swfFilter((cast reader)) : Float);
           var matrix:Array<Float> = (cast cast ([] : Array<Dynamic>));
           {
             var cell:Float = 0.0;
-            while ((cast ((cast ((cast cell : Float) < (cast (matrixX * matrixY) : Float)) : Bool) && (cast _Runtime.field(reader, 'valid') : Bool)) : Bool)) {
+            while ((cast ((cast ((cast cell : Float) < (cast (matrixX * matrixY) : Float)) : Bool) && (cast (cast reader : SwfReader).valid : Bool)) : Bool)) {
               _Runtime.callProperty(matrix, 'push', cast ([(cast SwfFilter.readSwfFilterFloat__swfFilter((cast reader)) : Float)] : Array<Dynamic>));
               cell++;
             }
           }
           var color:{ var alpha:Float; var rgb:Float; } = (cast SwfFilter.readSwfFilterColor__swfFilter((cast reader)) : { var alpha:Float; var rgb:Float; });
-          var flags:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-          if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(matrix, 'length'), (matrixX * matrixY)) : Bool)) : Bool)) { return cast false; }
+          var flags:Float = (cast reader : SwfReader).readUint8();
+          if ((cast ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(matrix, 'length'), (matrixX * matrixY)) : Bool)) : Bool)) { return cast false; }
           _Runtime.callProperty(outEffects, 'push', cast ([(cast createConvolutionEffect((cast { bias: bias, clamp: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfFilter.CONVOLUTION_CLAMP__swfFilter)), 0.0), color: (cast color : { var alpha:Float; var rgb:Float; }).rgb, divisor: divisor, matrix: matrix, matrixX: matrixX, matrixY: matrixY, preserveAlpha: !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfFilter.CONVOLUTION_PRESERVE_ALPHA__swfFilter)), 0.0) })) : ConvolutionEffect)] : Array<Dynamic>));
           index++;
           continue;
@@ -142,12 +142,12 @@ class SwfFilter {
           var matrix:Array<Float> = (cast cast ([] : Array<Dynamic>));
           {
             var cell:Float = 0.0;
-            while ((cast ((cast ((cast cell : Float) < (cast SwfFilter.COLOR_MATRIX_LENGTH__swfFilter : Float)) : Bool) && (cast _Runtime.field(reader, 'valid') : Bool)) : Bool)) {
+            while ((cast ((cast ((cast cell : Float) < (cast SwfFilter.COLOR_MATRIX_LENGTH__swfFilter : Float)) : Bool) && (cast (cast reader : SwfReader).valid : Bool)) : Bool)) {
               _Runtime.callProperty(matrix, 'push', cast ([(cast SwfFilter.readSwfFilterFloat__swfFilter((cast reader)) : Float)] : Array<Dynamic>));
               cell++;
             }
           }
-          if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast false; }
+          if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast false; }
           {
             var row:Float = 0.0;
             while ((cast ((cast row : Float) < (cast SwfFilter.COLOR_MATRIX_ROWS__swfFilter : Float)) : Bool)) {
@@ -164,7 +164,7 @@ class SwfFilter {
         index++;
       }
     }
-    return cast _Runtime.field(reader, 'valid');
+    return cast (cast reader : SwfReader).valid;
     return cast null;
   }
 
@@ -178,23 +178,23 @@ class SwfFilter {
     var green:Float = cast _Runtime.UNDEFINED;
     var blue:Float = cast _Runtime.UNDEFINED;
     var alpha:Float = cast _Runtime.UNDEFINED;
-    red = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-    green = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-    blue = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-    alpha = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+    red = (cast reader : SwfReader).readUint8();
+    green = (cast reader : SwfReader).readUint8();
+    blue = (cast reader : SwfReader).readUint8();
+    alpha = (cast reader : SwfReader).readUint8();
     return cast { alpha: (alpha / SwfFilter.COLOR_CHANNEL_ONE__swfFilter), rgb: (((red * 65536.0) + (green * 256.0)) + blue) };
     return cast null;
   }
 
   public static function readSwfFilterFixed__swfFilter(reader:SwfReader):Float {
     var value:Float = cast _Runtime.UNDEFINED;
-    value = _Runtime.callProperty(reader, 'readUint32', cast ([] : Array<Dynamic>));
+    value = (cast reader : SwfReader).readUint32();
     return cast _Runtime.divideNumbers(((cast ((cast value : Float) >= (cast 2147483648.0 : Float)) : Bool) ? (cast (value - 4294967296.0) : Dynamic) : (cast value : Dynamic)), SwfFilter.FIXED_16_ONE__swfFilter);
     return cast null;
   }
 
   public static function readSwfFilterFloat__swfFilter(reader:SwfReader):Float {
-    flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast SwfFilter._floatBytes__swfFilter : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast _Runtime.callProperty(reader, 'readUint32', cast ([] : Array<Dynamic>)) : Float));
+    flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast SwfFilter._floatBytes__swfFilter : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast (cast reader : SwfReader).readUint32() : Float));
     return cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast SwfFilter._floatValues__swfFilter : flighthq._internal._Float32Array), (cast 0.0 : Float));
     return cast null;
   }

@@ -1739,6 +1739,35 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain("_Runtime.callProperty(counter, 'bump', cast ([1.0]");
   });
 
+  it('emits direct calls for generated class receivers declared in another package source file', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/useReader.ts',
+      `
+        export function readValue(reader: SharedReader): number {
+          return reader.readUint32();
+        }
+      `,
+      {
+        '/workspace/upstream/packages/example/src/sharedReader.ts': `
+          class SharedReader {
+            readUint32(): number { return 42; }
+          }
+        `,
+      },
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'CrossSourceClassFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('(cast reader : SharedReader).readUint32()');
+    expect(output).not.toContain("_Runtime.callProperty(reader, 'readUint32'");
+  });
+
   it('routes typed canvas-element operations separately from the Canvas 2D context', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/render-gl/src/sample.ts',

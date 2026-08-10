@@ -39,9 +39,9 @@ class SwfText {
     var height:Float = cast _Runtime.UNDEFINED;
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
-    glyphBits = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-    advanceBits = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+    glyphBits = (cast reader : SwfReader).readUint8();
+    advanceBits = (cast reader : SwfReader).readUint8();
+    if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
     shape = (cast createShape(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Shape);
     glyphOutline = (cast createPath(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Path);
     font = null;
@@ -53,34 +53,34 @@ class SwfText {
     {
       var records:Float = 0.0;
       while ((cast ((cast records : Float) < (cast SwfText.MAX_TEXT_RECORDS__swfText : Float)) : Bool)) {
-        var flags:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-        if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+        var flags:Float = (cast reader : SwfReader).readUint8();
+        if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
         if ((cast _Runtime.strictEquals(flags, 0.0) : Bool)) { return cast shape; }
         if ((cast _Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_RECORD_TYPE__swfText)), 0.0) : Bool)) { return cast null; }
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_HAS_FONT__swfText)), 0.0) : Bool)) {
-          var fontId:Float = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
+          var fontId:Float = (cast reader : SwfReader).readUint16();
           (font = cast (_Runtime.coalesce(((cast fonts : flighthq._internal._Map<Float, GlyphOutlineSource>).get(fontId)), function():Dynamic return cast null) : Dynamic));
           (unitsPerEm = cast (_Runtime.coalesce(({ final __structural1 = _Runtime.callOptionalValue(({ final __structural0 = font; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var getGlyphOutlineMetrics:Void->GlyphOutlineMetrics; }).getGlyphOutlineMetrics; }), cast ([] : Array<Dynamic>)); __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var unitsPerEm:Float; }).unitsPerEm; }), function():Dynamic return cast SwfText.DEFAULT_FONT_UNITS_PER_EM__swfText) : Dynamic));
         }
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_HAS_COLOR__swfText)), 0.0) : Bool)) {
-          var red:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-          var green:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-          var blue:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-          if ((cast ((cast version : Float) >= (cast 2.0 : Float)) : Bool)) { _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>)); }
+          var red:Float = (cast reader : SwfReader).readUint8();
+          var green:Float = (cast reader : SwfReader).readUint8();
+          var blue:Float = (cast reader : SwfReader).readUint8();
+          if ((cast ((cast version : Float) >= (cast 2.0 : Float)) : Bool)) { (cast reader : SwfReader).readUint8(); }
           (color = cast ((((red * 65536.0) + (green * 256.0)) + blue) : Dynamic));
         }
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_HAS_X_OFFSET__swfText)), 0.0) : Bool)) { (x = cast ((cast SwfText.readSwfTextOffset__swfText((cast reader)) : Float) : Dynamic)); }
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_HAS_Y_OFFSET__swfText)), 0.0) : Bool)) { (y = cast ((cast SwfText.readSwfTextOffset__swfText((cast reader)) : Float) : Dynamic)); }
-        if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_HAS_FONT__swfText)), 0.0) : Bool)) { (height = cast (_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic)); }
-        var glyphCount:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-        if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+        if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.TEXT_HAS_FONT__swfText)), 0.0) : Bool)) { (height = cast ((cast reader : SwfReader).readUint16() : Dynamic)); }
+        var glyphCount:Float = (cast reader : SwfReader).readUint8();
+        if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
         var scale:Float = ((cast _Runtime.strictEquals(unitsPerEm, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (height / unitsPerEm) : Dynamic));
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast glyphCount : Float)) : Bool)) {
-            var index:Float = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([glyphBits] : Array<Dynamic>));
-            var advance:Float = _Runtime.callProperty(reader, 'readSignedBits', cast ([advanceBits] : Array<Dynamic>));
-            if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+            var index:Float = (cast reader : SwfReader).readUnsignedBits(glyphBits);
+            var advance:Float = (cast reader : SwfReader).readSignedBits(advanceBits);
+            if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
             if ((cast ((cast !_Runtime.strictEquals(font, null) : Bool) && (cast ((cast scale : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
               if ((cast (cast font : GlyphOutlineSource).getGlyphOutline((cast glyphOutline), (cast index : Float)) : Bool)) {
                 SwfText.appendSwfGlyphOutline__swfText((cast shape), (cast glyphOutline), (cast color : Float), (cast scale : Float), (cast (x / SwfText.TWIPS_PER_PIXEL__swfText) : Float), (cast (y / SwfText.TWIPS_PER_PIXEL__swfText) : Float));
@@ -90,7 +90,7 @@ class SwfText {
             i++;
           }
         }
-        _Runtime.callProperty(reader, 'alignToByte', cast ([] : Array<Dynamic>));
+        (cast reader : SwfReader).alignToByte();
         records++;
       }
     }
@@ -107,7 +107,7 @@ class SwfText {
     var advances:Array<Float> = cast _Runtime.UNDEFINED;
     var codepointToGlyphIndex:flighthq._internal._Map<Float, Float> = cast _Runtime.UNDEFINED;
     var metrics:{ var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; } = cast _Runtime.UNDEFINED;
-    glyphReader = new SwfReader(_Runtime.field(reader, 'source'), _Runtime.field(reader, 'pos'), _Runtime.field(reader, 'end'));
+    glyphReader = new SwfReader((cast reader : SwfReader).source, (cast reader : SwfReader).pos, (cast reader : SwfReader).end);
     glyphs = (cast readSwfFontGlyphs((cast glyphReader), (cast version : Float)) : Null<Array<Null<Shape>>>);
     if ((cast _Runtime.strictEquals(glyphs, null) : Bool)) { return cast null; }
     outlines = (cast _Runtime.mapArray((cast glyphs : Array<Null<Shape>>), SwfText.createSwfGlyphOutlinePath__swfText, _Runtime.UNDEFINED));
@@ -151,25 +151,25 @@ class SwfText {
     var nameLength:Float = cast _Runtime.UNDEFINED;
     var glyphCount:Float = cast _Runtime.UNDEFINED;
     var tableStart:Float = cast _Runtime.UNDEFINED;
-    _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
+    (cast reader : SwfReader).readUint16();
     if ((cast _Runtime.strictEquals(version, 1.0) : Bool)) {
-      var tableStart:Float = _Runtime.field(reader, 'pos');
+      var tableStart:Float = (cast reader : SwfReader).pos;
       return cast (cast SwfText.readSwfFontGlyphShapes__swfText((cast reader), (cast (cast SwfText.readSwfLegacyFontOffsets__swfText((cast reader), (cast tableStart : Float)) : Null<Array<Float>>)), (cast tableStart : Float)) : Null<Array<Null<Shape>>>);
     }
-    flags = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+    flags = (cast reader : SwfReader).readUint8();
     hasWideOffsets = !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.FONT_FLAG_WIDE_OFFSETS__swfText)), 0.0);
-    _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-    nameLength = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+    (cast reader : SwfReader).readUint8();
+    nameLength = (cast reader : SwfReader).readUint8();
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast nameLength : Float)) : Bool)) {
-        _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+        (cast reader : SwfReader).readUint8();
         i++;
       }
     }
-    glyphCount = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast glyphCount : Float) > (cast SwfText.MAX_FONT_GLYPHS__swfText : Float)) : Bool)) : Bool)) { return cast null; }
-    tableStart = _Runtime.field(reader, 'pos');
+    glyphCount = (cast reader : SwfReader).readUint16();
+    if ((cast ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool) || (cast ((cast glyphCount : Float) > (cast SwfText.MAX_FONT_GLYPHS__swfText : Float)) : Bool)) : Bool)) { return cast null; }
+    tableStart = (cast reader : SwfReader).pos;
     return cast (cast SwfText.readSwfFontGlyphShapes__swfText((cast reader), (cast (cast SwfText.readSwfFontOffsets__swfText((cast reader), (cast glyphCount : Float), (cast hasWideOffsets : Bool)) : Null<Array<Float>>)), (cast tableStart : Float)) : Null<Array<Null<Shape>>>);
     return cast null;
   }
@@ -252,38 +252,38 @@ class SwfText {
     var metrics:{ var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; } = cast _Runtime.UNDEFINED;
     var advances:Array<Float> = cast _Runtime.UNDEFINED;
     var kerningCount:Float = cast _Runtime.UNDEFINED;
-    _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
-    flags = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+    (cast reader : SwfReader).readUint16();
+    flags = (cast reader : SwfReader).readUint8();
     hasLayout = !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.FONT_FLAG_HAS_LAYOUT__swfText)), 0.0);
     hasWideCodes = !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.FONT_FLAG_WIDE_CODES__swfText)), 0.0);
     hasWideOffsets = !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfText.FONT_FLAG_WIDE_OFFSETS__swfText)), 0.0);
-    _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-    nameLength = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+    (cast reader : SwfReader).readUint8();
+    nameLength = (cast reader : SwfReader).readUint8();
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast nameLength : Float)) : Bool)) {
-        _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+        (cast reader : SwfReader).readUint8();
         i++;
       }
     }
-    glyphCount = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast !_Runtime.strictEquals(glyphCount, expectedGlyphCount) : Bool)) : Bool)) { return cast null; }
-    tableStart = _Runtime.field(reader, 'pos');
+    glyphCount = (cast reader : SwfReader).readUint16();
+    if ((cast ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool) || (cast !_Runtime.strictEquals(glyphCount, expectedGlyphCount) : Bool)) : Bool)) { return cast null; }
+    tableStart = (cast reader : SwfReader).pos;
     offsets = (cast SwfText.readSwfFontOffsets__swfText((cast reader), (cast glyphCount : Float), (cast hasWideOffsets : Bool)) : Null<Array<Float>>);
     if ((cast _Runtime.strictEquals(offsets, null) : Bool)) { return cast null; }
     codeTableStart = (tableStart + flighthq._internal._StaticIndex.readFloatArrayTyped((cast offsets : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(offsets, 'length'), 1.0) : Float)));
-    if ((cast ((cast ((cast codeTableStart : Float) < (cast _Runtime.field(reader, 'pos') : Float)) : Bool) || (cast ((cast codeTableStart : Float) > (cast _Runtime.field(reader, 'end') : Float)) : Bool)) : Bool)) { return cast null; }
-    _Runtime.setField(reader, 'pos', codeTableStart);
+    if ((cast ((cast ((cast codeTableStart : Float) < (cast (cast reader : SwfReader).pos : Float)) : Bool) || (cast ((cast codeTableStart : Float) > (cast (cast reader : SwfReader).end : Float)) : Bool)) : Bool)) { return cast null; }
+    ((cast reader : SwfReader).pos = codeTableStart);
     codepointToGlyphIndex = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var glyphIndex:Float = 0.0;
       while ((cast ((cast glyphIndex : Float) < (cast glyphCount : Float)) : Bool)) {
-        var codePoint:Float = ((cast hasWideCodes : Bool) ? (cast _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>)) : Dynamic));
-        if ((cast ((cast _Runtime.field(reader, 'valid') : Bool) && (cast !(cast ((cast codepointToGlyphIndex : flighthq._internal._Map<Float, Float>).has(codePoint)) : Bool) : Bool)) : Bool)) { ((cast codepointToGlyphIndex : flighthq._internal._Map<Float, Float>).set(codePoint, (cast glyphIndex))); }
+        var codePoint:Float = ((cast hasWideCodes : Bool) ? (cast (cast reader : SwfReader).readUint16() : Dynamic) : (cast (cast reader : SwfReader).readUint8() : Dynamic));
+        if ((cast ((cast (cast reader : SwfReader).valid : Bool) && (cast !(cast ((cast codepointToGlyphIndex : flighthq._internal._Map<Float, Float>).has(codePoint)) : Bool) : Bool)) : Bool)) { ((cast codepointToGlyphIndex : flighthq._internal._Map<Float, Float>).set(codePoint, (cast glyphIndex))); }
         glyphIndex++;
       }
     }
-    if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
     if ((cast !(cast hasLayout : Bool) : Bool)) { return cast { advances: null, codepointToGlyphIndex: codepointToGlyphIndex, metrics: null }; }
     unitsPerEm = (cast resolveSwfFontUnitsPerEm((cast version : Float)) : Float);
     metrics = (cast { ascent: (cast SwfText.readSwfSignedUint16__swfText((cast reader)) : Float), descent: (cast SwfText.readSwfSignedUint16__swfText((cast reader)) : Float), lineGap: (cast SwfText.readSwfSignedUint16__swfText((cast reader)) : Float), unitsPerEm: unitsPerEm });
@@ -302,43 +302,43 @@ class SwfText {
         glyphIndex++;
       }
     }
-    kerningCount = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
+    kerningCount = (cast reader : SwfReader).readUint16();
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast kerningCount : Float)) : Bool)) {
         if ((cast hasWideCodes : Bool)) {
-          _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
-          _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
+          (cast reader : SwfReader).readUint16();
+          (cast reader : SwfReader).readUint16();
         } else {
-          _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-          _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+          (cast reader : SwfReader).readUint8();
+          (cast reader : SwfReader).readUint8();
         }
-        _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
+        (cast reader : SwfReader).readUint16();
         index++;
       }
     }
-    return cast ((cast _Runtime.field(reader, 'valid') : Bool) ? (cast { advances: advances, codepointToGlyphIndex: codepointToGlyphIndex, metrics: metrics } : Dynamic) : (cast null : Dynamic));
+    return cast ((cast (cast reader : SwfReader).valid : Bool) ? (cast { advances: advances, codepointToGlyphIndex: codepointToGlyphIndex, metrics: metrics } : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function readSwfSignedUint16__swfText(reader:SwfReader):Float {
     var value:Float = cast _Runtime.UNDEFINED;
-    value = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
+    value = (cast reader : SwfReader).readUint16();
     return cast ((cast ((cast value : Float) >= (cast 32768.0 : Float)) : Bool) ? (cast (value - 65536.0) : Dynamic) : (cast value : Dynamic));
     return cast null;
   }
 
   public static function skipSwfRectangle__swfText(reader:SwfReader):Void {
     var bits:Float = cast _Runtime.UNDEFINED;
-    bits = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([5.0] : Array<Dynamic>));
+    bits = (cast reader : SwfReader).readUnsignedBits(5.0);
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast 4.0 : Float)) : Bool)) {
-        _Runtime.callProperty(reader, 'readSignedBits', cast ([bits] : Array<Dynamic>));
+        (cast reader : SwfReader).readSignedBits(bits);
         index++;
       }
     }
-    _Runtime.callProperty(reader, 'alignToByte', cast ([] : Array<Dynamic>));
+    (cast reader : SwfReader).alignToByte();
   }
 
   public static function readSwfFontGlyphShapes__swfText(reader:SwfReader, offsets:Null<Array<Float>>, tableStart:Float):Null<Array<Null<Shape>>> {
@@ -350,8 +350,8 @@ class SwfText {
       while ((cast ((cast (i + 1.0) : Float) < (cast _Runtime.field(offsets, 'length') : Float)) : Bool)) {
         var start:Float = (tableStart + flighthq._internal._StaticIndex.readFloatArrayTyped((cast offsets : Array<Float>), (cast i : Float)));
         var end:Float = (tableStart + flighthq._internal._StaticIndex.readFloatArrayTyped((cast offsets : Array<Float>), (cast (i + 1.0) : Float)));
-        if ((cast ((cast ((cast ((cast start : Float) < (cast tableStart : Float)) : Bool) || (cast ((cast end : Float) > (cast _Runtime.field(reader, 'end') : Float)) : Bool)) : Bool) || (cast ((cast end : Float) < (cast start : Float)) : Bool)) : Bool)) { return cast null; }
-        _Runtime.callProperty(glyphs, 'push', cast ([(cast createSwfGlyphShape((cast new SwfReader(_Runtime.field(reader, 'source'), start, end))) : Null<Shape>)] : Array<Dynamic>));
+        if ((cast ((cast ((cast ((cast start : Float) < (cast tableStart : Float)) : Bool) || (cast ((cast end : Float) > (cast (cast reader : SwfReader).end : Float)) : Bool)) : Bool) || (cast ((cast end : Float) < (cast start : Float)) : Bool)) : Bool)) { return cast null; }
+        _Runtime.callProperty(glyphs, 'push', cast ([(cast createSwfGlyphShape((cast new SwfReader((cast reader : SwfReader).source, start, end))) : Null<Shape>)] : Array<Dynamic>));
         i++;
       }
     }
@@ -365,35 +365,35 @@ class SwfText {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) <= (cast glyphCount : Float)) : Bool)) {
-        _Runtime.callProperty(offsets, 'push', cast ([((cast hasWideOffsets : Bool) ? (cast _Runtime.callProperty(reader, 'readUint32', cast ([] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic))] : Array<Dynamic>));
+        _Runtime.callProperty(offsets, 'push', cast ([((cast hasWideOffsets : Bool) ? (cast (cast reader : SwfReader).readUint32() : Dynamic) : (cast (cast reader : SwfReader).readUint16() : Dynamic))] : Array<Dynamic>));
         i++;
       }
     }
-    return cast ((cast _Runtime.field(reader, 'valid') : Bool) ? (cast offsets : Dynamic) : (cast null : Dynamic));
+    return cast ((cast (cast reader : SwfReader).valid : Bool) ? (cast offsets : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function readSwfLegacyFontOffsets__swfText(reader:SwfReader, tableStart:Float):Null<Array<Float>> {
     var first:Float = cast _Runtime.UNDEFINED;
     var offsets:Array<Float> = cast _Runtime.UNDEFINED;
-    first = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
-    if ((cast ((cast ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast first : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(first, 2.0), 0.0) : Bool)) : Bool) || (cast ((cast (first / 2.0) : Float) > (cast SwfText.MAX_FONT_GLYPHS__swfText : Float)) : Bool)) : Bool)) { return cast null; }
+    first = (cast reader : SwfReader).readUint16();
+    if ((cast ((cast ((cast ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool) || (cast ((cast first : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(first, 2.0), 0.0) : Bool)) : Bool) || (cast ((cast (first / 2.0) : Float) > (cast SwfText.MAX_FONT_GLYPHS__swfText : Float)) : Bool)) : Bool)) { return cast null; }
     offsets = (cast cast ([first] : Array<Dynamic>));
     {
       var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast (first / 2.0) : Float)) : Bool)) {
-        _Runtime.callProperty(offsets, 'push', cast ([_Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
+        _Runtime.callProperty(offsets, 'push', cast ([(cast reader : SwfReader).readUint16()] : Array<Dynamic>));
         i++;
       }
     }
-    _Runtime.callProperty(offsets, 'push', cast ([_Runtime.subtractNumbers(_Runtime.field(reader, 'end'), tableStart)] : Array<Dynamic>));
-    return cast ((cast _Runtime.field(reader, 'valid') : Bool) ? (cast offsets : Dynamic) : (cast null : Dynamic));
+    _Runtime.callProperty(offsets, 'push', cast ([((cast reader : SwfReader).end - tableStart)] : Array<Dynamic>));
+    return cast ((cast (cast reader : SwfReader).valid : Bool) ? (cast offsets : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function readSwfTextOffset__swfText(reader:SwfReader):Float {
     var value:Float = cast _Runtime.UNDEFINED;
-    value = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
+    value = (cast reader : SwfReader).readUint16();
     return cast ((cast ((cast value : Float) >= (cast 32768.0 : Float)) : Bool) ? (cast (value - 65536.0) : Dynamic) : (cast value : Dynamic));
     return cast null;
   }

@@ -76,30 +76,30 @@ class SwfShape {
     hasAlpha = ((cast version : Float) >= (cast 3.0 : Float));
     shape = (cast createShape(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Shape);
     state = (cast { fill0: 0.0, fill0Segment: null, fill1: 0.0, fill1Segment: null, fillSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), line: 0.0, lineSegment: null, lineSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), styles: styles, x: 0.0, y: 0.0 });
-    fillBits = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>));
-    lineBits = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+    fillBits = (cast reader : SwfReader).readUnsignedBits(4.0);
+    lineBits = (cast reader : SwfReader).readUnsignedBits(4.0);
+    if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
     records = 0.0;
     {
       while (true) {
         if ((cast ((cast ++records : Float) > (cast SwfShape.MAX_SHAPE_RECORDS__swfShape : Float)) : Bool)) { return cast null; }
-        if ((cast !_Runtime.strictEquals(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>)), 0.0) : Bool)) {
+        if ((cast !_Runtime.strictEquals((cast reader : SwfReader).readUnsignedBits(1.0), 0.0) : Bool)) {
           if ((cast !(cast (cast SwfShape.readSwfShapeEdge__swfShape((cast reader), (cast state)) : Bool) : Bool) : Bool)) { return cast null; }
           continue;
         }
-        var flags:Float = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([5.0] : Array<Dynamic>));
-        if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+        var flags:Float = (cast reader : SwfReader).readUnsignedBits(5.0);
+        if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
         if ((cast _Runtime.strictEquals(flags, 0.0) : Bool)) { break; }
         SwfShape.flushSwfShapeSegments__swfShape((cast state));
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_MOVE_TO__swfShape)), 0.0) : Bool)) {
-          var moveBits:Float = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([5.0] : Array<Dynamic>));
-          ((cast state : SwfShapeState__swfShape).x = _Runtime.callProperty(reader, 'readSignedBits', cast ([moveBits] : Array<Dynamic>)));
-          ((cast state : SwfShapeState__swfShape).y = _Runtime.callProperty(reader, 'readSignedBits', cast ([moveBits] : Array<Dynamic>)));
+          var moveBits:Float = (cast reader : SwfReader).readUnsignedBits(5.0);
+          ((cast state : SwfShapeState__swfShape).x = (cast reader : SwfReader).readSignedBits(moveBits));
+          ((cast state : SwfShapeState__swfShape).y = (cast reader : SwfReader).readSignedBits(moveBits));
         }
-        if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_FILL_STYLE_0__swfShape)), 0.0) : Bool)) { ((cast state : SwfShapeState__swfShape).fill0 = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([fillBits] : Array<Dynamic>))); }
-        if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_FILL_STYLE_1__swfShape)), 0.0) : Bool)) { ((cast state : SwfShapeState__swfShape).fill1 = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([fillBits] : Array<Dynamic>))); }
-        if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_LINE_STYLE__swfShape)), 0.0) : Bool)) { ((cast state : SwfShapeState__swfShape).line = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([lineBits] : Array<Dynamic>))); }
-        if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+        if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_FILL_STYLE_0__swfShape)), 0.0) : Bool)) { ((cast state : SwfShapeState__swfShape).fill0 = (cast reader : SwfReader).readUnsignedBits(fillBits)); }
+        if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_FILL_STYLE_1__swfShape)), 0.0) : Bool)) { ((cast state : SwfShapeState__swfShape).fill1 = (cast reader : SwfReader).readUnsignedBits(fillBits)); }
+        if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_LINE_STYLE__swfShape)), 0.0) : Bool)) { ((cast state : SwfShapeState__swfShape).line = (cast reader : SwfReader).readUnsignedBits(lineBits)); }
+        if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_NEW_STYLES__swfShape)), 0.0) : Bool)) {
           SwfShape.appendSwfShapeStyleLayer__swfShape((cast shape), (cast state));
           var replacement:Null<SwfShapeStyles__swfShape> = (cast SwfShape.readSwfShapeStyles__swfShape((cast reader), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill)) : Null<SwfShapeStyles__swfShape>);
@@ -108,15 +108,15 @@ class SwfShape {
           ((cast state : SwfShapeState__swfShape).fill0 = 0.0);
           ((cast state : SwfShapeState__swfShape).fill1 = 0.0);
           ((cast state : SwfShapeState__swfShape).line = 0.0);
-          (fillBits = cast (_Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>)) : Dynamic));
-          (lineBits = cast (_Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>)) : Dynamic));
-          if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+          (fillBits = cast ((cast reader : SwfReader).readUnsignedBits(4.0) : Dynamic));
+          (lineBits = cast ((cast reader : SwfReader).readUnsignedBits(4.0) : Dynamic));
+          if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
         }
       }
     }
     SwfShape.flushSwfShapeSegments__swfShape((cast state));
     SwfShape.appendSwfShapeStyleLayer__swfShape((cast shape), (cast state));
-    return cast ((cast _Runtime.field(reader, 'valid') : Bool) ? (cast shape : Dynamic) : (cast null : Dynamic));
+    return cast ((cast (cast reader : SwfReader).valid : Bool) ? (cast shape : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -245,37 +245,37 @@ class SwfShape {
     var lineBits:Float = cast _Runtime.UNDEFINED;
     var records:Array<SwfShapeRecord__swfShape> = cast _Runtime.UNDEFINED;
     var pen:{ var x:Float; var y:Float; } = cast _Runtime.UNDEFINED;
-    fillBits = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>));
-    lineBits = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>));
-    if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+    fillBits = (cast reader : SwfReader).readUnsignedBits(4.0);
+    lineBits = (cast reader : SwfReader).readUnsignedBits(4.0);
+    if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
     records = (cast cast ([] : Array<Dynamic>));
     pen = (cast { x: 0.0, y: 0.0 });
     {
       var count:Float = 0.0;
       while ((cast ((cast count : Float) <= (cast SwfShape.MAX_SHAPE_RECORDS__swfShape : Float)) : Bool)) {
         if ((cast _Runtime.strictEquals(count, SwfShape.MAX_SHAPE_RECORDS__swfShape) : Bool)) { return cast null; }
-        if ((cast !_Runtime.strictEquals(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>)), 0.0) : Bool)) {
+        if ((cast !_Runtime.strictEquals((cast reader : SwfReader).readUnsignedBits(1.0), 0.0) : Bool)) {
           var record:Null<SwfShapeEdgeRecord__swfShape> = (cast SwfShape.readSwfShapeEdgeRecord__swfShape((cast reader), (cast pen)) : Null<SwfShapeEdgeRecord__swfShape>);
           if ((cast _Runtime.strictEquals(record, null) : Bool)) { return cast null; }
           _Runtime.callProperty(records, 'push', cast ([record] : Array<Dynamic>));
           count++;
           continue;
         }
-        var flags:Float = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([5.0] : Array<Dynamic>));
-        if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+        var flags:Float = (cast reader : SwfReader).readUnsignedBits(5.0);
+        if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
         if ((cast _Runtime.strictEquals(flags, 0.0) : Bool)) { return cast records; }
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_NEW_STYLES__swfShape)), 0.0) : Bool)) { return cast null; }
         var moveTo:Null<{ var x:Float; var y:Float; }> = null;
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_MOVE_TO__swfShape)), 0.0) : Bool)) {
-          var moveBits:Float = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([5.0] : Array<Dynamic>));
-          ((cast pen : { var x:Float; var y:Float; }).x = _Runtime.callProperty(reader, 'readSignedBits', cast ([moveBits] : Array<Dynamic>)));
-          ((cast pen : { var x:Float; var y:Float; }).y = _Runtime.callProperty(reader, 'readSignedBits', cast ([moveBits] : Array<Dynamic>)));
+          var moveBits:Float = (cast reader : SwfReader).readUnsignedBits(5.0);
+          ((cast pen : { var x:Float; var y:Float; }).x = (cast reader : SwfReader).readSignedBits(moveBits));
+          ((cast pen : { var x:Float; var y:Float; }).y = (cast reader : SwfReader).readSignedBits(moveBits));
           (moveTo = cast ({ x: (cast pen : { var x:Float; var y:Float; }).x, y: (cast pen : { var x:Float; var y:Float; }).y } : Dynamic));
         }
-        var fill0:Null<Float> = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_FILL_STYLE_0__swfShape)), 0.0) : Bool) ? (cast _Runtime.callProperty(reader, 'readUnsignedBits', cast ([fillBits] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-        var fill1:Null<Float> = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_FILL_STYLE_1__swfShape)), 0.0) : Bool) ? (cast _Runtime.callProperty(reader, 'readUnsignedBits', cast ([fillBits] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-        var line:Null<Float> = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_LINE_STYLE__swfShape)), 0.0) : Bool) ? (cast _Runtime.callProperty(reader, 'readUnsignedBits', cast ([lineBits] : Array<Dynamic>)) : Dynamic) : (cast null : Dynamic));
-        if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+        var fill0:Null<Float> = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_FILL_STYLE_0__swfShape)), 0.0) : Bool) ? (cast (cast reader : SwfReader).readUnsignedBits(fillBits) : Dynamic) : (cast null : Dynamic));
+        var fill1:Null<Float> = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_FILL_STYLE_1__swfShape)), 0.0) : Bool) ? (cast (cast reader : SwfReader).readUnsignedBits(fillBits) : Dynamic) : (cast null : Dynamic));
+        var line:Null<Float> = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_LINE_STYLE__swfShape)), 0.0) : Bool) ? (cast (cast reader : SwfReader).readUnsignedBits(lineBits) : Dynamic) : (cast null : Dynamic));
+        if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
         _Runtime.callProperty(records, 'push', cast ([{ fill0: fill0, fill1: fill1, kind: 'style', line: line, moveTo: moveTo }] : Array<Dynamic>));
         count++;
       }
@@ -354,10 +354,10 @@ class SwfShape {
     var green:Float = cast _Runtime.UNDEFINED;
     var blue:Float = cast _Runtime.UNDEFINED;
     var alpha:Float = cast _Runtime.UNDEFINED;
-    red = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-    green = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-    blue = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-    alpha = ((cast hasAlpha : Bool) ? (cast _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 255.0 : Dynamic));
+    red = (cast reader : SwfReader).readUint8();
+    green = (cast reader : SwfReader).readUint8();
+    blue = (cast reader : SwfReader).readUint8();
+    alpha = ((cast hasAlpha : Bool) ? (cast (cast reader : SwfReader).readUint8() : Dynamic) : (cast 255.0 : Dynamic));
     return cast { color: (((red * 65536.0) + (green * 256.0)) + blue), opacity: (alpha / 255.0) };
     return cast null;
   }
@@ -372,28 +372,28 @@ class SwfShape {
     var curved:Bool = cast _Runtime.UNDEFINED;
     fromX = (cast pen : { var x:Float; var y:Float; }).x;
     fromY = (cast pen : { var x:Float; var y:Float; }).y;
-    straight = !_Runtime.strictEquals(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>)), 0.0);
-    bits = _Runtime.addNumbers(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>)), 2.0);
+    straight = !_Runtime.strictEquals((cast reader : SwfReader).readUnsignedBits(1.0), 0.0);
+    bits = _Runtime.addNumbers((cast reader : SwfReader).readUnsignedBits(4.0), 2.0);
     controlX = 0.0;
     controlY = 0.0;
     curved = false;
     if ((cast straight : Bool)) {
-      var isGeneralLine:Bool = !_Runtime.strictEquals(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>)), 0.0);
+      var isGeneralLine:Bool = !_Runtime.strictEquals((cast reader : SwfReader).readUnsignedBits(1.0), 0.0);
       if ((cast isGeneralLine : Bool)) {
-        ((cast pen : { var x:Float; var y:Float; }).x += _Runtime.callProperty(reader, 'readSignedBits', cast ([bits] : Array<Dynamic>)));
-        ((cast pen : { var x:Float; var y:Float; }).y += _Runtime.callProperty(reader, 'readSignedBits', cast ([bits] : Array<Dynamic>)));
+        ((cast pen : { var x:Float; var y:Float; }).x += (cast reader : SwfReader).readSignedBits(bits));
+        ((cast pen : { var x:Float; var y:Float; }).y += (cast reader : SwfReader).readSignedBits(bits));
       } else {
-        var isVerticalLine:Bool = !_Runtime.strictEquals(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>)), 0.0);
-        if ((cast isVerticalLine : Bool)) { ((cast pen : { var x:Float; var y:Float; }).y += _Runtime.callProperty(reader, 'readSignedBits', cast ([bits] : Array<Dynamic>))); } else { ((cast pen : { var x:Float; var y:Float; }).x += _Runtime.callProperty(reader, 'readSignedBits', cast ([bits] : Array<Dynamic>))); }
+        var isVerticalLine:Bool = !_Runtime.strictEquals((cast reader : SwfReader).readUnsignedBits(1.0), 0.0);
+        if ((cast isVerticalLine : Bool)) { ((cast pen : { var x:Float; var y:Float; }).y += (cast reader : SwfReader).readSignedBits(bits)); } else { ((cast pen : { var x:Float; var y:Float; }).x += (cast reader : SwfReader).readSignedBits(bits)); }
       }
     } else {
       (curved = cast (true : Dynamic));
-      (controlX = cast (_Runtime.addNumbers(fromX, _Runtime.callProperty(reader, 'readSignedBits', cast ([bits] : Array<Dynamic>))) : Dynamic));
-      (controlY = cast (_Runtime.addNumbers(fromY, _Runtime.callProperty(reader, 'readSignedBits', cast ([bits] : Array<Dynamic>))) : Dynamic));
-      ((cast pen : { var x:Float; var y:Float; }).x = _Runtime.addNumbers(controlX, _Runtime.callProperty(reader, 'readSignedBits', cast ([bits] : Array<Dynamic>))));
-      ((cast pen : { var x:Float; var y:Float; }).y = _Runtime.addNumbers(controlY, _Runtime.callProperty(reader, 'readSignedBits', cast ([bits] : Array<Dynamic>))));
+      (controlX = cast (_Runtime.addNumbers(fromX, (cast reader : SwfReader).readSignedBits(bits)) : Dynamic));
+      (controlY = cast (_Runtime.addNumbers(fromY, (cast reader : SwfReader).readSignedBits(bits)) : Dynamic));
+      ((cast pen : { var x:Float; var y:Float; }).x = _Runtime.addNumbers(controlX, (cast reader : SwfReader).readSignedBits(bits)));
+      ((cast pen : { var x:Float; var y:Float; }).y = _Runtime.addNumbers(controlY, (cast reader : SwfReader).readSignedBits(bits)));
     }
-    if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
     return cast { controlX: controlX, controlY: controlY, curved: curved, kind: 'edge', toX: (cast pen : { var x:Float; var y:Float; }).x, toY: (cast pen : { var x:Float; var y:Float; }).y };
     return cast null;
   }
@@ -426,7 +426,7 @@ class SwfShape {
 
   public static function readSwfShapeFillStyle__swfShape(reader:SwfReader, version:Float, hasAlpha:Bool, resolveBitmapFill:Null<SwfBitmapFillResolver__swfShape>):Null<SwfShapeFill__swfShape> {
     var type:Float = cast _Runtime.UNDEFINED;
-    type = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+    type = (cast reader : SwfReader).readUint8();
     if ((cast _Runtime.strictEquals(type, SwfShape.FILL_SOLID__swfShape) : Bool)) {
       var solid:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape((cast reader), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
       return cast (cast SwfShape.createSwfShapeFill__swfShape((cast (cast solid : { var color:Float; var opacity:Float; }).color : Float), (cast (cast solid : { var color:Float; var opacity:Float; }).opacity : Float)) : SwfShapeFill__swfShape);
@@ -434,18 +434,18 @@ class SwfShape {
     if ((cast ((cast ((cast _Runtime.strictEquals(type, SwfShape.FILL_LINEAR_GRADIENT__swfShape) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_RADIAL_GRADIENT__swfShape) : Bool)) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_FOCAL_GRADIENT__swfShape) : Bool)) : Bool)) {
       if ((cast ((cast _Runtime.strictEquals(type, SwfShape.FILL_FOCAL_GRADIENT__swfShape) : Bool) && (cast ((cast version : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
       var matrix:Matrix = (cast SwfShape.readSwfShapeMatrix__swfShape((cast reader)) : Matrix);
-      var spread:Float = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([2.0] : Array<Dynamic>));
-      _Runtime.callProperty(reader, 'readUnsignedBits', cast ([2.0] : Array<Dynamic>));
-      var count:Float = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([4.0] : Array<Dynamic>));
-      _Runtime.callProperty(reader, 'alignToByte', cast ([] : Array<Dynamic>));
-      if ((cast ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast _Runtime.strictEquals(count, 0.0) : Bool)) : Bool) || (cast ((cast count : Float) > (cast SwfShape.MAX_GRADIENT_RECORDS__swfShape : Float)) : Bool)) : Bool)) { return cast null; }
+      var spread:Float = (cast reader : SwfReader).readUnsignedBits(2.0);
+      (cast reader : SwfReader).readUnsignedBits(2.0);
+      var count:Float = (cast reader : SwfReader).readUnsignedBits(4.0);
+      (cast reader : SwfReader).alignToByte();
+      if ((cast ((cast ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool) || (cast _Runtime.strictEquals(count, 0.0) : Bool)) : Bool) || (cast ((cast count : Float) > (cast SwfShape.MAX_GRADIENT_RECORDS__swfShape : Float)) : Bool)) : Bool)) { return cast null; }
       var colors:Array<Float> = (cast cast ([] : Array<Dynamic>));
       var alphas:Array<Float> = (cast cast ([] : Array<Dynamic>));
       var ratios:Array<Float> = (cast cast ([] : Array<Dynamic>));
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-          var ratio:Float = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
+          var ratio:Float = (cast reader : SwfReader).readUint8();
           var record:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape((cast reader), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
           _Runtime.callProperty(ratios, 'push', cast ([ratio] : Array<Dynamic>));
           _Runtime.callProperty(colors, 'push', cast ([(cast record : { var color:Float; var opacity:Float; }).color] : Array<Dynamic>));
@@ -453,14 +453,14 @@ class SwfShape {
           i++;
         }
       }
-      var focalPoint:Float = ((cast _Runtime.strictEquals(type, SwfShape.FILL_FOCAL_GRADIENT__swfShape) : Bool) ? (cast _Runtime.callProperty(reader, 'readFixed8', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
-      if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+      var focalPoint:Float = ((cast _Runtime.strictEquals(type, SwfShape.FILL_FOCAL_GRADIENT__swfShape) : Bool) ? (cast (cast reader : SwfReader).readFixed8() : Dynamic) : (cast 0.0 : Dynamic));
+      if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
       return cast { alphas: alphas, color: 0.0, colors: colors, focalPoint: focalPoint, gradientType: ((cast _Runtime.strictEquals(type, SwfShape.FILL_LINEAR_GRADIENT__swfShape) : Bool) ? (cast 'linear' : Dynamic) : (cast 'radial' : Dynamic)), matrix: matrix, opacity: 1.0, ratios: ratios, spreadMethod: (cast SwfShape.resolveSwfShapeSpreadMethod__swfShape((cast spread : Float)) : SpreadMethod), texture: null, textureMatrix: null };
     }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(type, SwfShape.FILL_REPEATING_BITMAP__swfShape) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_CLIPPED_BITMAP__swfShape) : Bool)) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_NON_SMOOTHED_REPEATING_BITMAP__swfShape) : Bool)) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_NON_SMOOTHED_CLIPPED_BITMAP__swfShape) : Bool)) : Bool)) {
-      var characterId:Float = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
+      var characterId:Float = (cast reader : SwfReader).readUint16();
       var matrix:Matrix = (cast SwfShape.readSwfShapeMatrix__swfShape((cast reader)) : Matrix);
-      if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+      if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
       var repeat:Bool = ((cast _Runtime.strictEquals(type, SwfShape.FILL_REPEATING_BITMAP__swfShape) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_NON_SMOOTHED_REPEATING_BITMAP__swfShape) : Bool));
       var smoothed:Bool = ((cast _Runtime.strictEquals(type, SwfShape.FILL_REPEATING_BITMAP__swfShape) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_CLIPPED_BITMAP__swfShape) : Bool));
       var fill:SwfShapeFill__swfShape = (cast SwfShape.createSwfShapeFill__swfShape((cast 0.0 : Float), (cast 1.0 : Float)) : SwfShapeFill__swfShape);
@@ -485,30 +485,30 @@ class SwfShape {
     var pixelHinting:Bool = cast _Runtime.UNDEFINED;
     var miterLimit:Float = cast _Runtime.UNDEFINED;
     var color:{ var color:Float; var opacity:Float; } = cast _Runtime.UNDEFINED;
-    width = _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>));
+    width = (cast reader : SwfReader).readUint16();
     if ((cast ((cast version : Float) < (cast 4.0 : Float)) : Bool)) {
       var color:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape((cast reader), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
-      if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+      if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
       return cast { alpha: (cast color : { var color:Float; var opacity:Float; }).opacity, caps: 'round', color: (cast color : { var color:Float; var opacity:Float; }).color, joints: 'round', miterLimit: 3.0, pixelHinting: false, width: width };
     }
-    startCap = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([2.0] : Array<Dynamic>));
-    join = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([2.0] : Array<Dynamic>));
-    hasFill = !_Runtime.strictEquals(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>)), 0.0);
-    _Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>));
-    _Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>));
-    pixelHinting = !_Runtime.strictEquals(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>)), 0.0);
-    _Runtime.callProperty(reader, 'readUnsignedBits', cast ([5.0] : Array<Dynamic>));
-    _Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>));
-    _Runtime.callProperty(reader, 'readUnsignedBits', cast ([2.0] : Array<Dynamic>));
-    miterLimit = ((cast _Runtime.strictEquals(join, SwfShape.JOIN_MITER__swfShape) : Bool) ? (cast _Runtime.callProperty(reader, 'readFixed8', cast ([] : Array<Dynamic>)) : Dynamic) : (cast 3.0 : Dynamic));
-    if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+    startCap = (cast reader : SwfReader).readUnsignedBits(2.0);
+    join = (cast reader : SwfReader).readUnsignedBits(2.0);
+    hasFill = !_Runtime.strictEquals((cast reader : SwfReader).readUnsignedBits(1.0), 0.0);
+    (cast reader : SwfReader).readUnsignedBits(1.0);
+    (cast reader : SwfReader).readUnsignedBits(1.0);
+    pixelHinting = !_Runtime.strictEquals((cast reader : SwfReader).readUnsignedBits(1.0), 0.0);
+    (cast reader : SwfReader).readUnsignedBits(5.0);
+    (cast reader : SwfReader).readUnsignedBits(1.0);
+    (cast reader : SwfReader).readUnsignedBits(2.0);
+    miterLimit = ((cast _Runtime.strictEquals(join, SwfShape.JOIN_MITER__swfShape) : Bool) ? (cast (cast reader : SwfReader).readFixed8() : Dynamic) : (cast 3.0 : Dynamic));
+    if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
     if ((cast hasFill : Bool)) {
       var fill:Null<SwfShapeFill__swfShape> = (cast SwfShape.readSwfShapeFillStyle__swfShape((cast reader), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill)) : Null<SwfShapeFill__swfShape>);
       if ((cast _Runtime.strictEquals(fill, null) : Bool)) { return cast null; }
       return cast { alpha: (cast fill : SwfShapeFill__swfShape).opacity, caps: (cast SwfShape.resolveSwfShapeCapsStyle__swfShape((cast startCap : Float)) : CapsStyle), color: (cast fill : SwfShapeFill__swfShape).color, joints: (cast SwfShape.resolveSwfShapeJointStyle__swfShape((cast join : Float)) : JointStyle), miterLimit: miterLimit, pixelHinting: pixelHinting, width: width };
     }
     color = (cast SwfShape.readSwfShapeColor__swfShape((cast reader), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
-    if ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
     return cast { alpha: (cast color : { var color:Float; var opacity:Float; }).opacity, caps: (cast SwfShape.resolveSwfShapeCapsStyle__swfShape((cast startCap : Float)) : CapsStyle), color: (cast color : { var color:Float; var opacity:Float; }).color, joints: (cast SwfShape.resolveSwfShapeJointStyle__swfShape((cast join : Float)) : JointStyle), miterLimit: miterLimit, pixelHinting: pixelHinting, width: width };
     return cast null;
   }
@@ -523,30 +523,30 @@ class SwfShape {
     var ty:Float = cast _Runtime.UNDEFINED;
     a = 1.0;
     d = 1.0;
-    if ((cast !_Runtime.strictEquals(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>)), 0.0) : Bool)) {
-      var scaleBits:Float = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([5.0] : Array<Dynamic>));
-      (a = cast (_Runtime.divideNumbers(_Runtime.callProperty(reader, 'readSignedBits', cast ([scaleBits] : Array<Dynamic>)), SwfShape.FIXED_16_ONE__swfShape) : Dynamic));
-      (d = cast (_Runtime.divideNumbers(_Runtime.callProperty(reader, 'readSignedBits', cast ([scaleBits] : Array<Dynamic>)), SwfShape.FIXED_16_ONE__swfShape) : Dynamic));
+    if ((cast !_Runtime.strictEquals((cast reader : SwfReader).readUnsignedBits(1.0), 0.0) : Bool)) {
+      var scaleBits:Float = (cast reader : SwfReader).readUnsignedBits(5.0);
+      (a = cast (_Runtime.divideNumbers((cast reader : SwfReader).readSignedBits(scaleBits), SwfShape.FIXED_16_ONE__swfShape) : Dynamic));
+      (d = cast (_Runtime.divideNumbers((cast reader : SwfReader).readSignedBits(scaleBits), SwfShape.FIXED_16_ONE__swfShape) : Dynamic));
     }
     b = 0.0;
     c = 0.0;
-    if ((cast !_Runtime.strictEquals(_Runtime.callProperty(reader, 'readUnsignedBits', cast ([1.0] : Array<Dynamic>)), 0.0) : Bool)) {
-      var rotateBits:Float = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([5.0] : Array<Dynamic>));
-      (b = cast (_Runtime.divideNumbers(_Runtime.callProperty(reader, 'readSignedBits', cast ([rotateBits] : Array<Dynamic>)), SwfShape.FIXED_16_ONE__swfShape) : Dynamic));
-      (c = cast (_Runtime.divideNumbers(_Runtime.callProperty(reader, 'readSignedBits', cast ([rotateBits] : Array<Dynamic>)), SwfShape.FIXED_16_ONE__swfShape) : Dynamic));
+    if ((cast !_Runtime.strictEquals((cast reader : SwfReader).readUnsignedBits(1.0), 0.0) : Bool)) {
+      var rotateBits:Float = (cast reader : SwfReader).readUnsignedBits(5.0);
+      (b = cast (_Runtime.divideNumbers((cast reader : SwfReader).readSignedBits(rotateBits), SwfShape.FIXED_16_ONE__swfShape) : Dynamic));
+      (c = cast (_Runtime.divideNumbers((cast reader : SwfReader).readSignedBits(rotateBits), SwfShape.FIXED_16_ONE__swfShape) : Dynamic));
     }
-    translateBits = _Runtime.callProperty(reader, 'readUnsignedBits', cast ([5.0] : Array<Dynamic>));
-    tx = _Runtime.divideNumbers(_Runtime.callProperty(reader, 'readSignedBits', cast ([translateBits] : Array<Dynamic>)), SwfShape.TWIPS_PER_PIXEL__swfShape);
-    ty = _Runtime.divideNumbers(_Runtime.callProperty(reader, 'readSignedBits', cast ([translateBits] : Array<Dynamic>)), SwfShape.TWIPS_PER_PIXEL__swfShape);
-    _Runtime.callProperty(reader, 'alignToByte', cast ([] : Array<Dynamic>));
+    translateBits = (cast reader : SwfReader).readUnsignedBits(5.0);
+    tx = _Runtime.divideNumbers((cast reader : SwfReader).readSignedBits(translateBits), SwfShape.TWIPS_PER_PIXEL__swfShape);
+    ty = _Runtime.divideNumbers((cast reader : SwfReader).readSignedBits(translateBits), SwfShape.TWIPS_PER_PIXEL__swfShape);
+    (cast reader : SwfReader).alignToByte();
     return cast (cast createMatrix((cast a), (cast b), (cast c), (cast d), (cast tx), (cast ty)) : Matrix);
     return cast null;
   }
 
   public static function readSwfShapeStyleCount__swfShape(reader:SwfReader, version:Float):Float {
     var count:Float = cast _Runtime.UNDEFINED;
-    count = _Runtime.callProperty(reader, 'readUint8', cast ([] : Array<Dynamic>));
-    return cast ((cast ((cast _Runtime.strictEquals(count, SwfShape.EXTENDED_STYLE_COUNT__swfShape) : Bool) && (cast ((cast version : Float) >= (cast 2.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.callProperty(reader, 'readUint16', cast ([] : Array<Dynamic>)) : Dynamic) : (cast count : Dynamic));
+    count = (cast reader : SwfReader).readUint8();
+    return cast ((cast ((cast _Runtime.strictEquals(count, SwfShape.EXTENDED_STYLE_COUNT__swfShape) : Bool) && (cast ((cast version : Float) >= (cast 2.0 : Float)) : Bool)) : Bool) ? (cast (cast reader : SwfReader).readUint16() : Dynamic) : (cast count : Dynamic));
     return cast null;
   }
 
@@ -556,7 +556,7 @@ class SwfShape {
     var lineCount:Float = cast _Runtime.UNDEFINED;
     var lines:Array<SwfShapeLine__swfShape> = cast _Runtime.UNDEFINED;
     fillCount = (cast SwfShape.readSwfShapeStyleCount__swfShape((cast reader), (cast version : Float)) : Float);
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast fillCount : Float) > (cast SwfShape.MAX_SHAPE_STYLES__swfShape : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool) || (cast ((cast fillCount : Float) > (cast SwfShape.MAX_SHAPE_STYLES__swfShape : Float)) : Bool)) : Bool)) { return cast null; }
     fills = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
@@ -568,7 +568,7 @@ class SwfShape {
       }
     }
     lineCount = (cast SwfShape.readSwfShapeStyleCount__swfShape((cast reader), (cast version : Float)) : Float);
-    if ((cast ((cast !(cast _Runtime.field(reader, 'valid') : Bool) : Bool) || (cast ((cast lineCount : Float) > (cast SwfShape.MAX_SHAPE_STYLES__swfShape : Float)) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool) || (cast ((cast lineCount : Float) > (cast SwfShape.MAX_SHAPE_STYLES__swfShape : Float)) : Bool)) : Bool)) { return cast null; }
     lines = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
@@ -579,7 +579,7 @@ class SwfShape {
         i++;
       }
     }
-    return cast ((cast _Runtime.field(reader, 'valid') : Bool) ? (cast { fills: fills, lines: lines } : Dynamic) : (cast null : Dynamic));
+    return cast ((cast (cast reader : SwfReader).valid : Bool) ? (cast { fills: fills, lines: lines } : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
