@@ -1,18 +1,20 @@
 {
-  "completedAt": "2026-07-22T11:54:52.359Z",
-  "failedPackages": 0,
+  "completedAt": "2026-08-10T23:53:58.348Z",
+  "failedPackages": 1,
+  "jobs": 12,
   "packages": [
     {
-      "durationMs": 9591,
-      "exitCode": 0,
+      "durationMs": 166142,
+      "exitCode": 1,
+      "failureOutput": "RUN  v4.1.10 /home/joshua/.quimby/workspaces/226de18b-99b2-4497-bbdb-5d55cc85d13a/.quimby/agents/ed3d678c-2a50-49ed-bd52-a59166f2629a/repo\n\n·x······x···································································································································································\n\n Test Files  2 failed | 24 passed (26)\n      Tests  2 failed | 170 passed (172)\n   Start at  16:51:13\n   Duration  164.87s (transform 9.07s, setup 749ms, import 160.61s, tests 431ms, environment 2.41s)\n\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  upstream/packages/effects-canvas/src/canvasDropShadowEffect.test.ts > applyDropShadowEffectToCanvas > uses the CSS drop-shadow path for default draw mode\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ …(3) ]\n\nReceived:\n\n  1st vi.fn() call:\n\n@@ -12,6 +12,7 @@\n      \"height\": 16,\n      \"id\": \"source\",\n      \"width\": 32,\n    },\n    \"drop-shadow(3px 3px 4px rgba(0,0,0,1.000))\",\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/effects-canvas/src/canvasDropShadowEffect.test.ts:50:34\n     48|     applyDropShadowEffectToCanvas(source, dest, { kind: 'DropShadowEff…\n     49|\n     50|     expect(drawCanvasEffectPass).toHaveBeenCalledWith(dest, source, 'd…\n       |                                  ^\n     51|     expect(compositeCanvasSourceMode).not.toHaveBeenCalled();\n     52|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  upstream/packages/effects-canvas/src/canvasOuterGlowEffect.test.ts > applyOuterGlowEffectToCanvas > uses the CSS drop-shadow path for default draw mode\nAssertionError: expected \"vi.fn()\" to be called with arguments: [ …(3) ]\n\nReceived:\n\n  1st vi.fn() call:\n\n@@ -12,6 +12,7 @@\n      \"height\": 16,\n      \"id\": \"source\",\n      \"width\": 32,\n    },\n    \"drop-shadow(0px 0px 6px rgba(255,0,0,1.000))\",\n+   undefined,\n  ]\n\n\nNumber of calls: 1\n\n ❯ upstream/packages/effects-canvas/src/canvasOuterGlowEffect.test.ts:50:34\n     48|     applyOuterGlowEffectToCanvas(source, dest, { kind: 'OuterGlowEffec…\n     49|\n     50|     expect(drawCanvasEffectPass).toHaveBeenCalledWith(dest, source, 'd…\n       |                                  ^\n     51|     expect(compositeCanvasSourceMode).not.toHaveBeenCalled();\n     52|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯",
       "package": "effects-canvas",
       "signal": null,
-      "status": "passed",
-      "summary": "140 passed (140)",
-      "testFiles": 47
+      "status": "failed",
+      "summary": "2 failed | 170 passed (172)",
+      "testFiles": 26
     }
   ],
   "schemaVersion": 1,
   "selectedPackage": "effects-canvas",
-  "startedAt": "2026-07-22T11:54:42.767Z"
+  "startedAt": "2026-08-10T23:51:12.202Z"
 }

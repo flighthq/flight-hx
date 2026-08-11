@@ -1,10 +1,10 @@
 {
-  "completedAt": "2026-08-07T00:06:10.716Z",
+  "completedAt": "2026-08-11T00:31:01.291Z",
   "failedPackages": 0,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 839784,
+      "durationMs": 940083,
       "exitCode": 0,
       "package": "scene2d-canvas",
       "signal": null,
@@ -15,5 +15,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": "scene2d-canvas",
-  "startedAt": "2026-08-06T23:52:10.931Z"
+  "startedAt": "2026-08-11T00:15:21.256Z"
 }
