@@ -43,7 +43,7 @@ class Application {
   public static function attachApplicationExit(app:flighthq.types.Application):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
     var handler:Void->Void = cast _Runtime.UNDEFINED;
-    observers = (cast Application.getApplicationObservers__application((cast app)) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Application.getApplicationObservers__application(({ final __callArgument0:Dynamic = app; __callArgument0; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Application.kExit__application)), cast ([] : Array<Dynamic>));
     handler = (cast function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onExit]]), 1); });
     flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['beforeunload', handler] : Array<Dynamic>));
@@ -60,21 +60,21 @@ class Application {
       (kLifecycle = cast (_Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED')) : Dynamic));
       ((cast Application._lifecycleKeys__application : flighthq._internal._WeakMap<ApplicationWindow, flighthq._internal._Symbol>).set(win, (cast kLifecycle)));
     }
-    observers = (cast Application.getApplicationObservers__application((cast app)) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Application.getApplicationObservers__application(({ final __callArgument1:Dynamic = app; __callArgument1; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(kLifecycle)), cast ([] : Array<Dynamic>));
     onDeactivate = (cast function():Void {
-      pauseApplicationLoop((cast app));
+      pauseApplicationLoop(({ final __callArgument2:Dynamic = app; __callArgument2; }));
       if ((cast !_Runtime.strictEquals(app.onDeactivate, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onDeactivate]]), 1); }
     });
     onActivate = (cast function():Void {
-      resumeApplicationLoop((cast app));
+      resumeApplicationLoop(({ final __callArgument3:Dynamic = app; __callArgument3; }));
       if ((cast !_Runtime.strictEquals(app.onActivate, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onActivate]]), 1); }
     });
-    connectSignal((cast win.onDeactivate), (cast onDeactivate), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    connectSignal((cast win.onActivate), (cast onActivate), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    connectSignal((cast win.onDeactivate : Dynamic), ({ final __callArgument4:Dynamic = onDeactivate; __callArgument4; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    connectSignal((cast win.onActivate : Dynamic), ({ final __callArgument5:Dynamic = onActivate; __callArgument5; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).set(kLifecycle, (cast function():Void {
-      disconnectSignal((cast win.onDeactivate), (cast onDeactivate));
-      disconnectSignal((cast win.onActivate), (cast onActivate));
+      disconnectSignal((cast win.onDeactivate : Dynamic), ({ final __callArgument6:Dynamic = onDeactivate; __callArgument6; }));
+      disconnectSignal((cast win.onActivate : Dynamic), ({ final __callArgument7:Dynamic = onActivate; __callArgument7; }));
     })));
   }
 
@@ -175,7 +175,7 @@ class Application {
 
   public static function detachApplicationExit(app:flighthq.types.Application):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Application.getApplicationObservers__application((cast app)) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Application.getApplicationObservers__application(({ final __callArgument8:Dynamic = app; __callArgument8; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Application.kExit__application)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Application.kExit__application));
   }
@@ -226,7 +226,7 @@ class Application {
 
   public static function disposeApplication(app:flighthq.types.Application):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Application.getApplicationObservers__application((cast app)) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Application.getApplicationObservers__application(({ final __callArgument9:Dynamic = app; __callArgument9; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     for (cleanup in _Runtime.iterable(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).values()))) {
       cleanup();
     }
@@ -265,7 +265,7 @@ class Application {
 
   public static function forEachApplicationWindow(app:flighthq.types.Application, fn:ApplicationWindow->Void):Void {
     for (win in _Runtime.iterable(app.windows)) {
-      fn((cast win));
+      fn(({ final __callArgument14:Dynamic = win; __callArgument14; }));
     }
   }
 
@@ -371,7 +371,7 @@ class Application {
 
   public static function pauseApplicationLoop(app:flighthq.types.Application):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Application.getApplicationObservers__application((cast app)) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Application.getApplicationObservers__application(({ final __callArgument15:Dynamic = app; __callArgument15; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     if ((cast ((cast !(cast app.isRunning : Bool) : Bool) || (cast ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).has(Application.kPaused__application)) : Bool)) : Bool)) { return; }
     (app.isRunning = cast (false : Dynamic));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).set(Application.kPaused__application, (cast function():Void {
@@ -418,7 +418,7 @@ class Application {
   public static function resumeApplicationLoop(app:flighthq.types.Application):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
     var loopState:Null<LoopState__application> = cast _Runtime.UNDEFINED;
-    observers = (cast Application.getApplicationObservers__application((cast app)) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Application.getApplicationObservers__application(({ final __callArgument16:Dynamic = app; __callArgument16; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     if ((cast !(cast ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).has(Application.kPaused__application)) : Bool) : Bool)) { return; }
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Application.kPaused__application));
     loopState = ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap<flighthq.types.Application, LoopState__application>).get(app));
@@ -433,7 +433,7 @@ class Application {
   public static final ROLLING_FPS_WINDOW__application:Float = 60.0;
 
   public static function setApplicationMainWindow(app:flighthq.types.Application, win:ApplicationWindow):Void {
-    registerApplicationWindow((cast app), (cast win));
+    registerApplicationWindow(({ final __callArgument17:Dynamic = app; __callArgument17; }), ({ final __callArgument18:Dynamic = win; __callArgument18; }));
     ((cast Application._mainWindows__application : flighthq._internal._WeakMap<flighthq.types.Application, ApplicationWindow>).set(app, (cast win)));
   }
 
@@ -530,7 +530,7 @@ class Application {
       var delta:Float = cast _Runtime.UNDEFINED;
       var clamped:Float = cast _Runtime.UNDEFINED;
       if ((cast !(cast app.isRunning : Bool) : Bool)) {
-        ((cast loopState : LoopState__application).frameHandle = (cast backend : LoopBackend).requestFrame((cast tick)));
+        ((cast loopState : LoopState__application).frameHandle = (cast backend : LoopBackend).requestFrame(({ final __callArgument19:Dynamic = tick; __callArgument19; })));
         ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).set(Application.kLoop__application, (cast function():Void { (cast backend : LoopBackend).cancelFrame((cast (cast loopState : LoopState__application).frameHandle : flighthq._internal._Any)); })));
         return;
       }
@@ -541,7 +541,7 @@ class Application {
       if ((cast !(cast isFirstTick : Bool) : Bool)) {
         ((cast loopState : LoopState__application).frameRateAccumulated += raw);
         if ((cast ((cast ((cast activeInterval : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast (cast loopState : LoopState__application).frameRateAccumulated : Float) < (cast activeInterval : Float)) : Bool)) : Bool)) {
-          ((cast loopState : LoopState__application).frameHandle = (cast backend : LoopBackend).requestFrame((cast tick)));
+          ((cast loopState : LoopState__application).frameHandle = (cast backend : LoopBackend).requestFrame(({ final __callArgument20:Dynamic = tick; __callArgument20; })));
           ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).set(Application.kLoop__application, (cast function():Void { (cast backend : LoopBackend).cancelFrame((cast (cast loopState : LoopState__application).frameHandle : flighthq._internal._Any)); })));
           return;
         }
@@ -552,7 +552,7 @@ class Application {
       (app.deltaTime = cast (clamped : Dynamic));
       (app.elapsedTime += (clamped / 1000.0));
       (app.frameCount += 1.0);
-      Application.recordFpsSample__application((cast loopState), (cast clamped : Float));
+      Application.recordFpsSample__application((cast loopState : Dynamic), (cast clamped : Float));
       if ((cast ((cast ((cast fixedTimeStep : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(app.onFixedUpdate, null) : Bool)) : Bool)) {
         ((cast loopState : LoopState__application).fixedAccumulator += clamped);
         var iters:Float = 0.0;
@@ -589,10 +589,10 @@ class Application {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onUpdate], [clamped]]), 1);
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onRender]]), 1);
       }
-      ((cast loopState : LoopState__application).frameHandle = (cast backend : LoopBackend).requestFrame((cast tick)));
+      ((cast loopState : LoopState__application).frameHandle = (cast backend : LoopBackend).requestFrame(({ final __callArgument21:Dynamic = tick; __callArgument21; })));
       ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).set(Application.kLoop__application, (cast function():Void { (cast backend : LoopBackend).cancelFrame((cast (cast loopState : LoopState__application).frameHandle : flighthq._internal._Any)); })));
     });
-    observers = (cast Application.getApplicationObservers__application((cast app)) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Application.getApplicationObservers__application(({ final __callArgument22:Dynamic = app; __callArgument22; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Application.kLoop__application)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Application.kPaused__application));
     backend = (cast getLoopBackend() : LoopBackend);
@@ -606,7 +606,7 @@ class Application {
     loopState = (cast { fixedAccumulator: 0.0, fpsBuffer: cast ([] : Array<Dynamic>), fpsHead: 0.0, frameHandle: (cast null : flighthq._internal._Any), frameRateAccumulated: 0.0, lastTime: -1.0, maxDeltaTime: maxDeltaTime });
     ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap<flighthq.types.Application, LoopState__application>).set(app, (cast loopState)));
     (app.isRunning = cast (true : Dynamic));
-    ((cast loopState : LoopState__application).frameHandle = (cast backend : LoopBackend).requestFrame((cast tick)));
+    ((cast loopState : LoopState__application).frameHandle = (cast backend : LoopBackend).requestFrame(({ final __callArgument23:Dynamic = tick; __callArgument23; })));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).set(Application.kLoop__application, (cast function():Void { (cast backend : LoopBackend).cancelFrame((cast (cast loopState : LoopState__application).frameHandle : flighthq._internal._Any)); })));
   }
 
@@ -615,13 +615,13 @@ class Application {
     var maxDelta:Float = cast _Runtime.UNDEFINED;
     var clamped:Float = cast _Runtime.UNDEFINED;
     loopState = ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap<flighthq.types.Application, LoopState__application>).get(app));
-    maxDelta = _Runtime.coalesce(({ final __structural4 = loopState; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var maxDeltaTime:Float; }).maxDeltaTime; }), function():Dynamic return cast Application.DEFAULT_MAX_DELTA_TIME__application);
+    maxDelta = _Runtime.coalesce(({ final __structural24 = loopState; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { var maxDeltaTime:Float; }).maxDeltaTime; }), function():Dynamic return cast Application.DEFAULT_MAX_DELTA_TIME__application);
     clamped = HxMath.min(deltaTime, maxDelta);
     (app.deltaTime = cast (clamped : Dynamic));
     (app.elapsedTime += (clamped / 1000.0));
     (app.frameCount += 1.0);
     (app.interpolationAlpha = cast (1.0 : Dynamic));
-    if ((cast !_Runtime.strictEquals(loopState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { Application.recordFpsSample__application((cast loopState), (cast clamped : Float)); }
+    if ((cast !_Runtime.strictEquals(loopState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { Application.recordFpsSample__application((cast loopState : Dynamic), (cast clamped : Float)); }
     if ((cast !_Runtime.strictEquals(app.onError, null) : Bool)) {
       try {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onUpdate], [clamped]]), 1);
@@ -641,7 +641,7 @@ class Application {
 
   public static function stopApplicationLoop(app:flighthq.types.Application):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Application.getApplicationObservers__application((cast app)) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Application.getApplicationObservers__application(({ final __callArgument25:Dynamic = app; __callArgument25; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Application.kLoop__application)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Application.kLoop__application));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Application.kPaused__application));

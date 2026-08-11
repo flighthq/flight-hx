@@ -20,66 +20,66 @@ import flighthq.types.RenderTexture;
 class CanvasRenderTexture {
   public static function bindCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Null<flighthq._internal.dom.HTMLCanvasElement> {
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
-    entry = (cast CanvasRenderTexture.getEntry__canvasRenderTexture((cast state), (cast renderTexture)) : Null<CanvasRenderTextureEntry>);
-    return cast ((cast _Runtime.strictEquals(({ final __structural0 = entry; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready') : Bool) ? (cast (cast (cast entry : CanvasRenderTextureEntry).target : CanvasRenderTarget).canvas : Dynamic) : (cast null : Dynamic));
+    entry = (cast CanvasRenderTexture.getEntry__canvasRenderTexture(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = renderTexture; __callArgument1; })) : Null<CanvasRenderTextureEntry>);
+    return cast ((cast _Runtime.strictEquals(({ final __structural2 = entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready') : Bool) ? (cast (cast (cast entry : CanvasRenderTextureEntry).target : CanvasRenderTarget).canvas : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function destroyCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Void {
     var targets:flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
-    targets = (cast CanvasRenderTexture.getTargets__canvasRenderTexture((cast (cast getCanvasRenderCacheScreenState((cast state)) : CanvasRenderState))) : flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry>);
+    targets = (cast CanvasRenderTexture.getTargets__canvasRenderTexture((cast getCanvasRenderCacheScreenState(({ final __callArgument3:Dynamic = state; __callArgument3; })) : CanvasRenderState)) : flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry>);
     entry = ((cast targets : flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry>).get(renderTexture));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    destroyCanvasRenderTarget((cast (cast entry : CanvasRenderTextureEntry).target));
+    destroyCanvasRenderTarget((cast entry : CanvasRenderTextureEntry).target);
     ((cast targets : flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry>).delete_(renderTexture));
   }
 
   public static function explainCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):CanvasRenderTextureExplanation {
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
-    entry = (cast CanvasRenderTexture.getEntry__canvasRenderTexture((cast state), (cast renderTexture)) : Null<CanvasRenderTextureEntry>);
-    return cast { height: _Runtime.coalesce(({ final __structural2 = ({ final __structural1 = entry; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var target:CanvasRenderTarget; }).target; }); __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var height:Float; }).height; }), function():Dynamic return cast (cast _Runtime.field(renderTexture, 'source') : RenderTarget).height), status: _Runtime.coalesce(({ final __structural3 = entry; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var status:CanvasRenderTextureStatus; }).status; }), function():Dynamic return cast 'unrendered'), width: _Runtime.coalesce(({ final __structural5 = ({ final __structural4 = entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var target:CanvasRenderTarget; }).target; }); __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var width:Float; }).width; }), function():Dynamic return cast (cast _Runtime.field(renderTexture, 'source') : RenderTarget).width) };
+    entry = (cast CanvasRenderTexture.getEntry__canvasRenderTexture(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = renderTexture; __callArgument5; })) : Null<CanvasRenderTextureEntry>);
+    return cast { height: _Runtime.coalesce(({ final __structural7 = ({ final __structural6 = entry; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var target:CanvasRenderTarget; }).target; }); __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var height:Float; }).height; }), function():Dynamic return cast (cast _Runtime.field(renderTexture, 'source') : RenderTarget).height), status: _Runtime.coalesce(({ final __structural8 = entry; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { var status:CanvasRenderTextureStatus; }).status; }), function():Dynamic return cast 'unrendered'), width: _Runtime.coalesce(({ final __structural10 = ({ final __structural9 = entry; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var target:CanvasRenderTarget; }).target; }); __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { var width:Float; }).width; }), function():Dynamic return cast (cast _Runtime.field(renderTexture, 'source') : RenderTarget).width) };
     return cast null;
   }
 
   @:noCompletion
   public static function getCanvasRenderTextureTarget(state:CanvasRenderState, renderTexture:RenderTexture):Null<CanvasRenderTarget> {
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
-    entry = (cast CanvasRenderTexture.getEntry__canvasRenderTexture((cast state), (cast renderTexture)) : Null<CanvasRenderTextureEntry>);
-    return cast ((cast _Runtime.strictEquals(({ final __structural6 = entry; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready') : Bool) ? (cast (cast entry : CanvasRenderTextureEntry).target : Dynamic) : (cast null : Dynamic));
+    entry = (cast CanvasRenderTexture.getEntry__canvasRenderTexture(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = renderTexture; __callArgument12; })) : Null<CanvasRenderTextureEntry>);
+    return cast ((cast _Runtime.strictEquals(({ final __structural13 = entry; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready') : Bool) ? (cast (cast entry : CanvasRenderTextureEntry).target : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   @:noCompletion
   public static function invalidateCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, status:String = 'unrendered'):Void {
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
-    entry = (cast CanvasRenderTexture.getEntry__canvasRenderTexture((cast state), (cast renderTexture)) : Null<CanvasRenderTextureEntry>);
+    entry = (cast CanvasRenderTexture.getEntry__canvasRenderTexture(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = renderTexture; __callArgument15; })) : Null<CanvasRenderTextureEntry>);
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast entry : CanvasRenderTextureEntry).status = status); }
   }
 
   @:noCompletion
   public static function isCanvasRenderTextureReady(state:CanvasRenderState, renderTexture:RenderTexture):Bool {
-    return cast _Runtime.strictEquals(({ final __structural7 = (cast CanvasRenderTexture.getEntry__canvasRenderTexture((cast state), (cast renderTexture)) : Null<CanvasRenderTextureEntry>); __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready');
+    return cast _Runtime.strictEquals(({ final __structural18 = (cast CanvasRenderTexture.getEntry__canvasRenderTexture(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = renderTexture; __callArgument17; })) : Null<CanvasRenderTextureEntry>); __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready');
     return cast null;
   }
 
   public static function renderIntoCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, callback:CanvasRenderState->Void):Void {
-    (cast writeCanvasRenderTextureTarget : CanvasRenderState->RenderTexture->(CanvasRenderTarget->Void)->Void)((cast state), (cast renderTexture), (cast function(target:CanvasRenderTarget):Void {
-      beginCanvasRenderPass((cast state), (cast target), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    (cast writeCanvasRenderTextureTarget : CanvasRenderState->RenderTexture->(CanvasRenderTarget->Void)->Void)(({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = renderTexture; __callArgument20; }), ({ final __callArgument27:Dynamic = function(target:CanvasRenderTarget):Void {
+      beginCanvasRenderPass(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = target; __callArgument22; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
       try {
         try {
-          callback((cast state));
+          callback(({ final __callArgument23:Dynamic = state; __callArgument23; }));
         } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-      } catch (__finallyError8:Dynamic) {
+      } catch (__finallyError24:Dynamic) {
         {
-          endCanvasRenderPass((cast state));
+          endCanvasRenderPass(({ final __callArgument25:Dynamic = state; __callArgument25; }));
         }
-        _Runtime.throwValue(__finallyError8);
+        _Runtime.throwValue(__finallyError24);
       }
       {
-        endCanvasRenderPass((cast state));
+        endCanvasRenderPass(({ final __callArgument26:Dynamic = state; __callArgument26; }));
       }
-    }));
+    }; __callArgument27; }));
   }
 
   @:noCompletion
@@ -87,27 +87,27 @@ class CanvasRenderTexture {
     var entry:CanvasRenderTextureEntry = cast _Runtime.UNDEFINED;
     var previousStatus:CanvasRenderTextureStatus = cast _Runtime.UNDEFINED;
     var rendered:Bool = cast _Runtime.UNDEFINED;
-    entry = (cast CanvasRenderTexture.ensureEntry__canvasRenderTexture((cast state), (cast renderTexture)) : CanvasRenderTextureEntry);
+    entry = (cast CanvasRenderTexture.ensureEntry__canvasRenderTexture(({ final __callArgument28:Dynamic = state; __callArgument28; }), ({ final __callArgument29:Dynamic = renderTexture; __callArgument29; })) : CanvasRenderTextureEntry);
     previousStatus = (cast entry : CanvasRenderTextureEntry).status;
     ((cast entry : CanvasRenderTextureEntry).status = 'writing');
     rendered = false;
     try {
       try {
-        var result:T = (cast callback((cast (cast entry : CanvasRenderTextureEntry).target)) : T);
+        var result:T = (cast callback((cast entry : CanvasRenderTextureEntry).target) : T);
         (rendered = cast (true : Dynamic));
-        var __returnValue9:Dynamic = result;
+        var __returnValue30:Dynamic = result;
         {
           ((cast entry : CanvasRenderTextureEntry).status = ((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)));
           if ((cast rendered : Bool)) { ((cast renderTexture : RenderTexture).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast renderTexture : RenderTexture).version + 1.0)), 0)); }
         }
-        return cast __returnValue9;
+        return cast __returnValue30;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError10:Dynamic) {
+    } catch (__finallyError31:Dynamic) {
       {
         ((cast entry : CanvasRenderTextureEntry).status = ((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)));
         if ((cast rendered : Bool)) { ((cast renderTexture : RenderTexture).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast renderTexture : RenderTexture).version + 1.0)), 0)); }
       }
-      _Runtime.throwValue(__finallyError10);
+      _Runtime.throwValue(__finallyError31);
     }
     {
       ((cast entry : CanvasRenderTextureEntry).status = ((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)));
@@ -121,13 +121,13 @@ class CanvasRenderTexture {
     var targets:flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
     descriptor = _Runtime.field(renderTexture, 'source');
-    targets = (cast CanvasRenderTexture.getTargets__canvasRenderTexture((cast (cast getCanvasRenderCacheScreenState((cast state)) : CanvasRenderState))) : flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry>);
+    targets = (cast CanvasRenderTexture.getTargets__canvasRenderTexture((cast getCanvasRenderCacheScreenState(({ final __callArgument32:Dynamic = state; __callArgument32; })) : CanvasRenderState)) : flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry>);
     entry = ((cast targets : flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry>).get(renderTexture));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (entry = cast ({ status: 'unrendered', target: (cast createCanvasRenderTarget((cast (cast descriptor : RenderTarget).width : Float), (cast (cast descriptor : RenderTarget).height : Float)) : CanvasRenderTarget) } : Dynamic));
       ((cast targets : flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry>).set(renderTexture, (cast entry)));
     } else {
-      resizeCanvasRenderTarget((cast (cast entry : CanvasRenderTextureEntry).target), (cast (cast descriptor : RenderTarget).width : Float), (cast (cast descriptor : RenderTarget).height : Float));
+      resizeCanvasRenderTarget((cast entry : CanvasRenderTextureEntry).target, (cast (cast descriptor : RenderTarget).width : Float), (cast (cast descriptor : RenderTarget).height : Float));
     }
     return cast entry;
     return cast null;
@@ -145,7 +145,7 @@ class CanvasRenderTexture {
   }
 
   public static function getEntry__canvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Null<CanvasRenderTextureEntry> {
-    return cast ((cast (cast CanvasRenderTexture.getTargets__canvasRenderTexture((cast (cast getCanvasRenderCacheScreenState((cast state)) : CanvasRenderState))) : flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry>) : flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry>).get(renderTexture));
+    return cast ((cast (cast CanvasRenderTexture.getTargets__canvasRenderTexture((cast getCanvasRenderCacheScreenState(({ final __callArgument34:Dynamic = state; __callArgument34; })) : CanvasRenderState)) : flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry>) : flighthq._internal._WeakMap<RenderTexture, CanvasRenderTextureEntry>).get(renderTexture));
     return cast null;
   }
 

@@ -37,33 +37,33 @@ class WgpuInnerGlowEffect {
     src = (cast source : WgpuRenderTarget);
     dst = (cast dest : WgpuRenderTarget);
     descriptor = (cast { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') });
-    s0 = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
-    s1 = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
-    s2 = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
+    s0 = (cast acquireWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }), ({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : WgpuRenderTarget);
+    s1 = (cast acquireWgpuRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : WgpuRenderTarget);
+    s2 = (cast acquireWgpuRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : WgpuRenderTarget);
     color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0);
     alpha = _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
-    applyWgpuEffectInvertTintPass((cast state), (cast src), (cast s0), (cast color : Float), (cast alpha : Float), (cast strength : Float));
-    applyWgpuEffectBoxBlur((cast state), (cast s0), (cast s1), (cast s2), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), edgeColor: (cast WgpuInnerGlowEffect.getInvertTintEdgeColor__wgpuInnerGlowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Array<Float>), passes: quality }));
-    applyWgpuEffectInnerClipPass((cast state), (cast s1), (cast src), (cast s0));
-    clearWgpuEffectTarget((cast state), (cast dst));
+    applyWgpuEffectInvertTintPass(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = src; __callArgument10; }), ({ final __callArgument11:Dynamic = s0; __callArgument11; }), (cast color : Float), (cast alpha : Float), (cast strength : Float));
+    applyWgpuEffectBoxBlur(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = s0; __callArgument13; }), ({ final __callArgument14:Dynamic = s1; __callArgument14; }), ({ final __callArgument15:Dynamic = s2; __callArgument15; }), ({ final __callArgument16:Dynamic = { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), edgeColor: (cast WgpuInnerGlowEffect.getInvertTintEdgeColor__wgpuInnerGlowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Array<Float>), passes: quality }; __callArgument16; }));
+    applyWgpuEffectInnerClipPass(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = s1; __callArgument18; }), ({ final __callArgument19:Dynamic = src; __callArgument19; }), ({ final __callArgument20:Dynamic = s0; __callArgument20; }));
+    clearWgpuEffectTarget(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = dst; __callArgument22; }));
     if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyWgpuEffectBlitPass((cast state), (cast src), (cast dst));
+      applyWgpuEffectBlitPass(({ final __callArgument23:Dynamic = state; __callArgument23; }), ({ final __callArgument24:Dynamic = src; __callArgument24; }), ({ final __callArgument25:Dynamic = dst; __callArgument25; }));
     }
-    applyWgpuEffectBlitPass((cast state), (cast s0), (cast dst));
-    releaseWgpuRenderTarget((cast pool), (cast s0));
-    releaseWgpuRenderTarget((cast pool), (cast s1));
-    releaseWgpuRenderTarget((cast pool), (cast s2));
+    applyWgpuEffectBlitPass(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = s0; __callArgument27; }), ({ final __callArgument28:Dynamic = dst; __callArgument28; }));
+    releaseWgpuRenderTarget(({ final __callArgument29:Dynamic = pool; __callArgument29; }), ({ final __callArgument30:Dynamic = s0; __callArgument30; }));
+    releaseWgpuRenderTarget(({ final __callArgument31:Dynamic = pool; __callArgument31; }), ({ final __callArgument32:Dynamic = s1; __callArgument32; }));
+    releaseWgpuRenderTarget(({ final __callArgument33:Dynamic = pool; __callArgument33; }), ({ final __callArgument34:Dynamic = s2; __callArgument34; }));
   }
 
   public static final defaultWgpuInnerGlowEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyInnerGlowEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : InnerGlowEffect)));
+    applyInnerGlowEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerGlowEffect));
   });
 
   public static function registerWgpuInnerGlowEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state), (cast 'InnerGlowEffect' : String), (cast defaultWgpuInnerGlowEffectRunner));
+    registerWgpuRenderEffect(({ final __callArgument35:Dynamic = state; __callArgument35; }), (cast 'InnerGlowEffect' : String), ({ final __callArgument36:Dynamic = defaultWgpuInnerGlowEffectRunner; __callArgument36; }));
   }
 
   public static function getInvertTintEdgeColor__wgpuInnerGlowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {

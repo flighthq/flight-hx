@@ -34,8 +34,8 @@ class PointContainment {
         }
       }
       else if (__switchValue == 'polygon') {
-        if ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus((cast (cast shape : { var points:Array<Float>; }).points)) : Null<String>), null) : Bool)) { return cast false; }
-        return cast (cast PointContainment.isPointInConvexPolygon__pointContainment((cast x : Float), (cast y : Float), (cast (cast shape : { var points:Array<Float>; }).points), (cast (_Runtime.toInt32(_Runtime.field((cast shape : { var points:Array<Float>; }).points, 'length')) >> 1) : Float)) : Bool);
+        if ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus((cast shape : { var points:Array<Float>; }).points) : Null<String>), null) : Bool)) { return cast false; }
+        return cast (cast PointContainment.isPointInConvexPolygon__pointContainment((cast x : Float), (cast y : Float), (cast shape : { var points:Array<Float>; }).points, (cast (_Runtime.toInt32(_Runtime.field((cast shape : { var points:Array<Float>; }).points, 'length')) >> 1) : Float)) : Bool);
       }
       else if (__switchValue == 'segment') {
         {
@@ -74,7 +74,7 @@ class PointContainment {
     var epsilon:Float = cast _Runtime.UNDEFINED;
     var positive:Bool = cast _Runtime.UNDEFINED;
     var negative:Bool = cast _Runtime.UNDEFINED;
-    epsilon = (cast PointContainment.relativeEpsilon__pointContainment((cast (cast PointContainment.getPolygonExtent__pointContainment((cast px), (cast pn : Float)) : Float) : Float)) : Float);
+    epsilon = (cast PointContainment.relativeEpsilon__pointContainment((cast (cast PointContainment.getPolygonExtent__pointContainment(({ final __callArgument0:Dynamic = px; __callArgument0; }), (cast pn : Float)) : Float) : Float)) : Float);
     positive = false;
     negative = false;
     {

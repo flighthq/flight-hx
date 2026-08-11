@@ -36,7 +36,7 @@ class ElectronTray {
     emit = (cast function(id:Float, type:TrayEventType):Void {
       var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id));
-      _Runtime.callOptionalValue(eventListener, cast ([{ altKey: false, bounds: _Runtime.select(record, function():Dynamic return cast (cast ElectronTray.toBounds__electronTray((cast (cast record : TrayRecord__electronTray).tray)) : Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }>), function():Dynamic return cast null), ctrlKey: false, dropFiles: null, dropText: null, id: id, metaKey: false, position: null, shiftKey: false, type: type }] : Array<Dynamic>));
+      _Runtime.callOptionalValue(eventListener, cast ([{ altKey: false, bounds: _Runtime.select(record, function():Dynamic return cast (cast ElectronTray.toBounds__electronTray((cast record : TrayRecord__electronTray).tray) : Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }>), function():Dynamic return cast null), ctrlKey: false, dropFiles: null, dropText: null, id: id, metaKey: false, position: null, shiftKey: false, type: type }] : Array<Dynamic>));
     });
     return cast { create: function(options:TrayIconOptions):Float {
       var id:Float = cast _Runtime.UNDEFINED;
@@ -53,9 +53,9 @@ class ElectronTray {
         (cast tray : flighthq.types.ElectronApi.ElectronTray).setTitle((cast options.title : String));
         ((cast record : TrayRecord__electronTray).title = options.title);
       }
-      (cast tray : flighthq.types.ElectronApi.ElectronTray).on((cast 'click' : String), (cast function(__unused0:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { emit((cast id : Float), (cast 'click')); }, cast ([] : Array<Dynamic>)); }));
-      (cast tray : flighthq.types.ElectronApi.ElectronTray).on((cast 'right-click' : String), (cast function(__unused1:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { emit((cast id : Float), (cast 'rightClick')); }, cast ([] : Array<Dynamic>)); }));
-      (cast tray : flighthq.types.ElectronApi.ElectronTray).on((cast 'double-click' : String), (cast function(__unused2:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { emit((cast id : Float), (cast 'doubleClick')); }, cast ([] : Array<Dynamic>)); }));
+      (cast tray : flighthq.types.ElectronApi.ElectronTray).on((cast 'click' : String), ({ final __callArgument1:Dynamic = function(__unused0:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { emit((cast id : Float), ({ final __callArgument0:Dynamic = 'click'; __callArgument0; })); }, cast ([] : Array<Dynamic>)); }; __callArgument1; }));
+      (cast tray : flighthq.types.ElectronApi.ElectronTray).on((cast 'right-click' : String), ({ final __callArgument3:Dynamic = function(__unused1:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { emit((cast id : Float), ({ final __callArgument2:Dynamic = 'rightClick'; __callArgument2; })); }, cast ([] : Array<Dynamic>)); }; __callArgument3; }));
+      (cast tray : flighthq.types.ElectronApi.ElectronTray).on((cast 'double-click' : String), ({ final __callArgument5:Dynamic = function(__unused2:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { emit((cast id : Float), ({ final __callArgument4:Dynamic = 'doubleClick'; __callArgument4; })); }, cast ([] : Array<Dynamic>)); }; __callArgument5; }));
       ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).set(id, (cast record)));
       return cast id;
       return cast _Runtime.UNDEFINED;
@@ -66,22 +66,22 @@ class ElectronTray {
       (cast (cast record : TrayRecord__electronTray).tray : flighthq.types.ElectronApi.ElectronTray).destroy();
       ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).delete_(id));
     }, displayBalloon: function(id:Float, options:TrayBalloonOptions):Void {
-      ({ final __optionalOwner3 = ({ final __structural4 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var tray:flighthq.types.ElectronApi.ElectronTray; }).tray; }); if (__optionalOwner3 != null) { final __optionalCall2 = (cast __optionalOwner3 : { var displayBalloon:ElectronTrayBalloonOptions->Void; }).displayBalloon; if (__optionalCall2 != null) __optionalCall2({ icon: options.icon, iconType: options.iconType, title: options.title, content: options.text, largeIcon: options.largeIcon, noSound: options.noSound, respectQuietTime: options.respectQuietTime }); } });
+      ({ final __optionalOwner9 = ({ final __structural10 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { var tray:flighthq.types.ElectronApi.ElectronTray; }).tray; }); if (__optionalOwner9 != null) { final __optionalCall8 = (cast __optionalOwner9 : { var displayBalloon:ElectronTrayBalloonOptions->Void; }).displayBalloon; if (__optionalCall8 != null) __optionalCall8({ icon: options.icon, iconType: options.iconType, title: options.title, content: options.text, largeIcon: options.largeIcon, noSound: options.noSound, respectQuietTime: options.respectQuietTime }); } });
     }, removeBalloon: function(id:Float):Void {
-      ({ final __optionalOwner8 = ({ final __structural9 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var tray:flighthq.types.ElectronApi.ElectronTray; }).tray; }); if (__optionalOwner8 != null) { final __optionalCall7 = (cast __optionalOwner8 : { var removeBalloon:Void->Void; }).removeBalloon; if (__optionalCall7 != null) __optionalCall7(); } });
+      ({ final __optionalOwner14 = ({ final __structural15 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { var tray:flighthq.types.ElectronApi.ElectronTray; }).tray; }); if (__optionalOwner14 != null) { final __optionalCall13 = (cast __optionalOwner14 : { var removeBalloon:Void->Void; }).removeBalloon; if (__optionalCall13 != null) __optionalCall13(); } });
     }, getBounds: function(id:Float):Null<RectangleLike> {
       var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id));
-      return cast _Runtime.select(record, function():Dynamic return cast (cast ElectronTray.toBounds__electronTray((cast (cast record : TrayRecord__electronTray).tray)) : Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }>), function():Dynamic return cast null);
+      return cast _Runtime.select(record, function():Dynamic return cast (cast ElectronTray.toBounds__electronTray((cast record : TrayRecord__electronTray).tray) : Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }>), function():Dynamic return cast null);
       return cast _Runtime.UNDEFINED;
     }, getCapabilities: function():TrayCapabilities {
       return cast { balloon: true, bounds: true, clickEvents: true, dropFiles: false, pressedIcon: true, title: true };
       return cast _Runtime.UNDEFINED;
     }, getTitle: function(id:Float):String {
-      return cast _Runtime.coalesce(({ final __structural10 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { var title:String; }).title; }), function():Dynamic return cast '');
+      return cast _Runtime.coalesce(({ final __structural16 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { var title:String; }).title; }), function():Dynamic return cast '');
       return cast _Runtime.UNDEFINED;
     }, getTooltip: function(id:Float):String {
-      return cast _Runtime.coalesce(({ final __structural11 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { var tooltip:String; }).tooltip; }), function():Dynamic return cast '');
+      return cast _Runtime.coalesce(({ final __structural17 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { var tooltip:String; }).tooltip; }), function():Dynamic return cast '');
       return cast _Runtime.UNDEFINED;
     }, isDestroyed: function(id:Float):Bool {
       var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
@@ -95,21 +95,21 @@ class ElectronTray {
       var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id));
       if ((cast !_Runtime.truthy(record) : Bool)) { return; }
-      (cast (cast record : TrayRecord__electronTray).tray : flighthq.types.ElectronApi.ElectronTray).popUpContextMenu((cast _Runtime.coalesce((cast record : TrayRecord__electronTray).menu, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))), (cast _Runtime.select(position, function():Dynamic return cast { x: (cast position : { var x:Float; }).x, y: (cast position : { var y:Float; }).y }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))));
+      (cast (cast record : TrayRecord__electronTray).tray : flighthq.types.ElectronApi.ElectronTray).popUpContextMenu(({ final __callArgument18:Dynamic = _Runtime.coalesce((cast record : TrayRecord__electronTray).menu, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument18; }), _Runtime.select(position, function():Dynamic return cast { x: (cast position : { var x:Float; }).x, y: (cast position : { var y:Float; }).y }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')));
     }, setContextMenu: function(id:Float, items:Array<MenuItemTemplate>):Void {
       var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
       var menu:ElectronMenu = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id));
       if ((cast !_Runtime.truthy(record) : Bool)) { return; }
-      menu = (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast ElectronTray.toElectronTemplate__electronTray((cast items)) : Array<ElectronMenuItemOptions>)));
+      menu = (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).buildFromTemplate((cast ElectronTray.toElectronTemplate__electronTray(({ final __callArgument19:Dynamic = items; __callArgument19; })) : Array<ElectronMenuItemOptions>));
       ((cast record : TrayRecord__electronTray).menu = menu);
-      (cast (cast record : TrayRecord__electronTray).tray : flighthq.types.ElectronApi.ElectronTray).setContextMenu((cast menu));
+      (cast (cast record : TrayRecord__electronTray).tray : flighthq.types.ElectronApi.ElectronTray).setContextMenu(({ final __callArgument20:Dynamic = menu; __callArgument20; }));
     }, setIcon: function(id:Float, icon:String):Void {
-      ({ final __optionalOwner15 = ({ final __structural16 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { var tray:flighthq.types.ElectronApi.ElectronTray; }).tray; }); if (__optionalOwner15 != null) { final __optionalCall14 = (cast __optionalOwner15 : { var setImage:flighthq._internal._Union2<String, ElectronNativeImage>->Void; }).setImage; if (__optionalCall14 != null) __optionalCall14(icon); } });
+      ({ final __optionalOwner24 = ({ final __structural25 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { var tray:flighthq.types.ElectronApi.ElectronTray; }).tray; }); if (__optionalOwner24 != null) { final __optionalCall23 = (cast __optionalOwner24 : { var setImage:flighthq._internal._Union2<String, ElectronNativeImage>->Void; }).setImage; if (__optionalCall23 != null) __optionalCall23(icon); } });
     }, setIgnoreDoubleClickEvents: function(id:Float, ignore:Bool):Void {
-      ({ final __optionalOwner20 = ({ final __structural21 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { var tray:flighthq.types.ElectronApi.ElectronTray; }).tray; }); if (__optionalOwner20 != null) { final __optionalCall19 = (cast __optionalOwner20 : { var setIgnoreDoubleClickEvents:Bool->Void; }).setIgnoreDoubleClickEvents; if (__optionalCall19 != null) __optionalCall19(ignore); } });
+      ({ final __optionalOwner29 = ({ final __structural30 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural30 == null ? _Runtime.UNDEFINED : (cast __structural30 : { var tray:flighthq.types.ElectronApi.ElectronTray; }).tray; }); if (__optionalOwner29 != null) { final __optionalCall28 = (cast __optionalOwner29 : { var setIgnoreDoubleClickEvents:Bool->Void; }).setIgnoreDoubleClickEvents; if (__optionalCall28 != null) __optionalCall28(ignore); } });
     }, setPressedIcon: function(id:Float, icon:String):Void {
-      ({ final __optionalOwner25 = ({ final __structural26 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { var tray:flighthq.types.ElectronApi.ElectronTray; }).tray; }); if (__optionalOwner25 != null) { final __optionalCall24 = (cast __optionalOwner25 : { var setPressedImage:flighthq._internal._Union2<String, ElectronNativeImage>->Void; }).setPressedImage; if (__optionalCall24 != null) __optionalCall24(icon); } });
+      ({ final __optionalOwner34 = ({ final __structural35 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id)); __structural35 == null ? _Runtime.UNDEFINED : (cast __structural35 : { var tray:flighthq.types.ElectronApi.ElectronTray; }).tray; }); if (__optionalOwner34 != null) { final __optionalCall33 = (cast __optionalOwner34 : { var setPressedImage:flighthq._internal._Union2<String, ElectronNativeImage>->Void; }).setPressedImage; if (__optionalCall33 != null) __optionalCall33(icon); } });
     }, setTemplate: function():Void {
 
     }, setTitle: function(id:Float, title:String):Void {
@@ -148,7 +148,7 @@ class ElectronTray {
     return cast (cast _Runtime.mapArray((cast items : Array<MenuItemTemplate>), function(item:MenuItemTemplate, __unused3:Float, __unused4:Array<MenuItemTemplate>):ElectronMenuItemOptions {
       var options:ElectronMenuItemOptions = cast _Runtime.UNDEFINED;
       options = (cast { id: item.id, label: item.label, type: item.type, role: item.role, accelerator: item.accelerator, enabled: item.enabled, checked: item.checked });
-      if (_Runtime.truthy(item.submenu)) { ((cast options : ElectronMenuItemOptions).submenu = (cast ElectronTray.toElectronTemplate__electronTray((cast item.submenu)) : Array<ElectronMenuItemOptions>)); }
+      if (_Runtime.truthy(item.submenu)) { ((cast options : ElectronMenuItemOptions).submenu = (cast ElectronTray.toElectronTemplate__electronTray(item.submenu) : Array<ElectronMenuItemOptions>)); }
       return cast options;
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));

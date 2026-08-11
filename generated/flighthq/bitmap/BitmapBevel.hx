@@ -43,14 +43,14 @@ class BitmapBevel {
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast 0.0 : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast 0.0 : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast 0.0 : Float));
-            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast BitmapBevel.readSourceAlpha__bitmapBevel((cast source), (cast px : Float), (cast py : Float)) : Float) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast BitmapBevel.readSourceAlpha__bitmapBevel(({ final __callArgument0:Dynamic = source; __callArgument0; }), (cast px : Float), (cast py : Float)) : Float) : Float));
             px++;
           }
         }
         py++;
       }
     }
-    BitmapBevel.blurField__bitmapBevel((cast scratch), (cast out), (cast w : Float), (cast h : Float), (cast _Runtime.field(options, 'radiusX')), (cast _Runtime.field(options, 'radiusY')), (cast _Runtime.field(options, 'passes')));
+    BitmapBevel.blurField__bitmapBevel(({ final __callArgument1:Dynamic = scratch; __callArgument1; }), ({ final __callArgument2:Dynamic = out; __callArgument2; }), (cast w : Float), (cast h : Float), _Runtime.field(options, 'radiusX'), _Runtime.field(options, 'radiusY'), _Runtime.field(options, 'passes'));
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
@@ -58,12 +58,12 @@ class BitmapBevel {
           var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Float = (((py * w) + px) * 4.0);
-            var lit:Float = (cast BitmapBevel.sampleField__bitmapBevel((cast scratch), (cast w : Float), (cast h : Float), (cast (px - offsetX) : Float), (cast (py - offsetY) : Float)) : Float);
-            var shade:Float = (cast BitmapBevel.sampleField__bitmapBevel((cast scratch), (cast w : Float), (cast h : Float), (cast (px + offsetX) : Float), (cast (py + offsetY) : Float)) : Float);
+            var lit:Float = (cast BitmapBevel.sampleField__bitmapBevel(({ final __callArgument3:Dynamic = scratch; __callArgument3; }), (cast w : Float), (cast h : Float), (cast (px - offsetX) : Float), (cast (py - offsetY) : Float)) : Float);
+            var shade:Float = (cast BitmapBevel.sampleField__bitmapBevel(({ final __callArgument4:Dynamic = scratch; __callArgument4; }), (cast w : Float), (cast h : Float), (cast (px + offsetX) : Float), (cast (py + offsetY) : Float)) : Float);
             var gradient:Float = (lit - shade);
             var color:Float = ((cast ((cast gradient : Float) >= (cast 0.0 : Float)) : Bool) ? (cast highlightColor : Dynamic) : (cast shadowColor : Dynamic));
             var colorAlpha:Float = ((_Runtime.toInt32(color) & 255) / 255.0);
-            var clip:Float = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast ((cast BitmapBevel.readSourceAlpha__bitmapBevel((cast source), (cast px : Float), (cast py : Float)) : Float) / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - ((cast BitmapBevel.readSourceAlpha__bitmapBevel((cast source), (cast px : Float), (cast py : Float)) : Float) / 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+            var clip:Float = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast ((cast BitmapBevel.readSourceAlpha__bitmapBevel(({ final __callArgument5:Dynamic = source; __callArgument5; }), (cast px : Float), (cast py : Float)) : Float) / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - ((cast BitmapBevel.readSourceAlpha__bitmapBevel(({ final __callArgument6:Dynamic = source; __callArgument6; }), (cast px : Float), (cast py : Float)) : Float) / 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
             var edgeIntensity:Float = HxMath.min(1.0, _Runtime.multiplyNumbers(HxMath.abs(gradient), intensity));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) : Float));
@@ -92,13 +92,13 @@ class BitmapBevel {
       var pass:Float = 0.0;
       while ((cast ((cast pass : Float) < (cast p : Float)) : Bool)) {
         if ((cast ((cast rx : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsHorizontal((cast b), (cast a), (cast w : Float), (cast h : Float), (cast rx : Float));
+          blurBitmapPixelsHorizontal(({ final __callArgument7:Dynamic = b; __callArgument7; }), ({ final __callArgument8:Dynamic = a; __callArgument8; }), (cast w : Float), (cast h : Float), (cast rx : Float));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
         if ((cast ((cast ry : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsVertical((cast b), (cast a), (cast w : Float), (cast h : Float), (cast ry : Float));
+          blurBitmapPixelsVertical(({ final __callArgument9:Dynamic = b; __callArgument9; }), ({ final __callArgument10:Dynamic = a; __callArgument10; }), (cast w : Float), (cast h : Float), (cast ry : Float));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));

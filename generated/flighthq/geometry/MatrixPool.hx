@@ -12,7 +12,7 @@ class MatrixPool {
   public static function acquireIdentityMatrix():Matrix {
     var m:Matrix = cast _Runtime.UNDEFINED;
     m = (cast acquireMatrix() : Matrix);
-    setMatrixIdentity((cast m));
+    setMatrixIdentity(({ final __callArgument0:Dynamic = m; __callArgument0; }));
     return cast m;
     return cast null;
   }
@@ -22,7 +22,7 @@ class MatrixPool {
     if ((cast ((cast _Runtime.field(MatrixPool.pool__matrixPool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (m = cast ((cast _Runtime.callProperty(MatrixPool.pool__matrixPool, 'pop', cast ([] : Array<Dynamic>)) : Matrix) : Dynamic));
     } else {
-      (m = cast ((cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix) : Dynamic));
+      (m = cast ((cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix) : Dynamic));
     }
     return cast m;
     return cast null;

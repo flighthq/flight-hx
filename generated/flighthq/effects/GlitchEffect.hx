@@ -28,11 +28,11 @@ class GlitchEffect {
   }
 
   public static function registerGlitchEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'GlitchEffect' : String), (cast GlitchEffect.resolveGlitchEffectPadding__glitchEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'GlitchEffect' : String), (cast GlitchEffect.resolveGlitchEffectPadding__glitchEffect : Dynamic));
   }
 
   public static function resolveGlitchEffectPadding__glitchEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getGlitchEffectPadding((cast (cast effect : flighthq.types.GlitchEffect))) : RenderEffectPadding);
+    return cast (cast getGlitchEffectPadding((cast effect : flighthq.types.GlitchEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

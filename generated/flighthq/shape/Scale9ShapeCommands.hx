@@ -76,7 +76,7 @@ class Scale9ShapeCommands {
           flighthq._internal._StaticIndex.writeArray(out, (i + 3.0), (cast mapper : Scale9Mapper).mapY((cast (cast flighthq._internal._StaticIndex.readArray(out, (i + 3.0)) : Float) : Float)));
         }
         else if (__switchValue == 'drawPath') {
-          Scale9ShapeCommands.remapPathData__scale9ShapeCommands((cast Scale9ShapeCommands._remappedPathData__scale9ShapeCommands), (cast (cast flighthq._internal._StaticIndex.readArray(out, (i + 3.0)) : Array<Float>)), (cast (cast flighthq._internal._StaticIndex.readArray(out, (i + 2.0)) : Array<Float>)), (cast mapper));
+          Scale9ShapeCommands.remapPathData__scale9ShapeCommands(({ final __callArgument0:Dynamic = Scale9ShapeCommands._remappedPathData__scale9ShapeCommands; __callArgument0; }), (cast flighthq._internal._StaticIndex.readArray(out, (i + 3.0)) : Array<Float>), (cast flighthq._internal._StaticIndex.readArray(out, (i + 2.0)) : Array<Float>), ({ final __callArgument1:Dynamic = mapper; __callArgument1; }));
           flighthq._internal._StaticIndex.writeArray(out, (i + 3.0), Scale9ShapeCommands._remappedPathData__scale9ShapeCommands);
         }
       }

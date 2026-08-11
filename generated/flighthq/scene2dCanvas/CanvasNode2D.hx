@@ -35,24 +35,24 @@ class CanvasNode2D {
     var tempStack:Array<Renderable> = cast _Runtime.UNDEFINED;
     var clipHooks:Null<Scene2DClipHooks> = cast _Runtime.UNDEFINED;
     var stackLength:Float = cast _Runtime.UNDEFINED;
-    tempStack = (cast (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).tempStack;
+    tempStack = (cast (cast getCanvasRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).tempStack;
     clipHooks = (cast state : CanvasRenderState).displayObjectClipHooks;
     stackLength = 1.0;
     flighthq._internal._StaticIndex.writeArray(tempStack, 0.0, source);
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
       var current:Node2D = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Node2D);
       if ((cast !(cast (cast current : { var enabled:Bool; }).enabled : Bool) : Bool)) { continue; }
-      var data:Null<RenderProxy2D> = (cast getRenderProxy2D((cast state), (cast current)) : Null<RenderProxy2D>);
+      var data:Null<RenderProxy2D> = (cast getRenderProxy2D(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = current; __callArgument2; })) : Null<RenderProxy2D>);
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      ({ final __optionalOwner1 = clipHooks; if (__optionalOwner1 != null) { final __optionalCall0 = (cast __optionalOwner1 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall0 != null) __optionalCall0(state, data, current); } });
-      if ((cast !(cast (cast isRenderProxyVisible((cast data)) : Bool) : Bool) : Bool)) { continue; }
-      ({ final __optionalOwner3 = clipHooks; if (__optionalOwner3 != null) { final __optionalCall2 = (cast __optionalOwner3 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall2 != null) __optionalCall2(state, data, current); } });
-      var filter:Null<String> = (cast resolveCanvasCssFilter((cast state), (cast data)) : Null<String>);
+      ({ final __optionalOwner4 = clipHooks; if (__optionalOwner4 != null) { final __optionalCall3 = (cast __optionalOwner4 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall3 != null) __optionalCall3(state, data, current); } });
+      if ((cast !(cast (cast isRenderProxyVisible(({ final __callArgument5:Dynamic = data; __callArgument5; })) : Bool) : Bool) : Bool)) { continue; }
+      ({ final __optionalOwner7 = clipHooks; if (__optionalOwner7 != null) { final __optionalCall6 = (cast __optionalOwner7 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall6 != null) __optionalCall6(state, data, current); } });
+      var filter:Null<String> = (cast resolveCanvasCssFilter(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = data; __callArgument9; })) : Null<String>);
       if ((cast !_Runtime.strictEquals(filter, null) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'filter', filter); }
-      if ((cast !_Runtime.strictEquals((cast data : RenderProxy2D).renderer, null) : Bool)) { (cast (cast data : RenderProxy2D).renderer : Renderer).submit((cast state), (cast data)); }
+      if ((cast !_Runtime.strictEquals((cast data : RenderProxy2D).renderer, null) : Bool)) { (cast (cast data : RenderProxy2D).renderer : Renderer).submit(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = data; __callArgument11; })); }
       if ((cast !_Runtime.strictEquals(filter, null) : Bool)) { flighthq._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'filter', 'none'); }
       if ((cast (cast data : RenderProxy2D).traverseChildren : Bool)) {
-        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime((cast current)) : Node2DRuntime), 'children');
+        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime(({ final __callArgument12:Dynamic = current; __callArgument12; })) : Node2DRuntime), 'children');
         if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
             var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
@@ -64,6 +64,6 @@ class CanvasNode2D {
         }
       }
     }
-    ({ final __optionalOwner5 = clipHooks; if (__optionalOwner5 != null) { final __optionalCall4 = (cast __optionalOwner5 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall4 != null) __optionalCall4(state); } });
+    ({ final __optionalOwner14 = clipHooks; if (__optionalOwner14 != null) { final __optionalCall13 = (cast __optionalOwner14 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall13 != null) __optionalCall13(state); } });
   }
 }

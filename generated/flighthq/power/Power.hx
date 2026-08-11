@@ -44,43 +44,43 @@ class Power {
     var unsubscribeUnlockScreen:Void->Void = cast _Runtime.UNDEFINED;
     var lastIdleState:PowerIdleState = cast _Runtime.UNDEFINED;
     var idleIntervalId:flighthq._internal.dom.Timeout = cast _Runtime.UNDEFINED;
-    detachPower((cast power));
+    detachPower(({ final __callArgument0:Dynamic = power; __callArgument0; }));
     backend = (cast getPowerBackend() : PowerBackend);
-    wasCharging = (cast (cast backend : PowerBackend).getStatus((cast Power._scratch__power)) : { var isCharging:Bool; }).isCharging;
-    unsubscribeChange = (cast backend : PowerBackend).subscribe((cast function():Void {
+    wasCharging = (cast (cast backend : PowerBackend).getStatus(({ final __callArgument1:Dynamic = Power._scratch__power; __callArgument1; })) : { var isCharging:Bool; }).isCharging;
+    unsubscribeChange = (cast backend : PowerBackend).subscribe(({ final __callArgument3:Dynamic = function():Void {
       var status:PowerStatus = cast _Runtime.UNDEFINED;
-      status = (cast backend : PowerBackend).getStatus((cast Power._scratch__power));
+      status = (cast backend : PowerBackend).getStatus(({ final __callArgument2:Dynamic = Power._scratch__power; __callArgument2; }));
       if ((cast !_Runtime.strictEquals(power.onChange, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onChange], [status]]), 1); }
       if ((cast !_Runtime.strictEquals(status.isCharging, wasCharging) : Bool)) {
         (wasCharging = cast (status.isCharging : Dynamic));
         var transition:Null<Signal<Void->Void>> = ((cast status.isCharging : Bool) ? (cast power.onCharging : Dynamic) : (cast power.onDischarging : Dynamic));
         if ((cast !_Runtime.strictEquals(transition, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[transition]]), 1); }
       }
-    }));
-    unsubscribeLockScreen = (cast backend : PowerBackend).subscribeLockScreen((cast function():Void {
+    }; __callArgument3; }));
+    unsubscribeLockScreen = (cast backend : PowerBackend).subscribeLockScreen(({ final __callArgument4:Dynamic = function():Void {
       if ((cast !_Runtime.strictEquals(power.onLockScreen, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onLockScreen]]), 1); }
-    }));
-    unsubscribeLowPowerModeChange = (cast backend : PowerBackend).subscribeLowPowerModeChange((cast function():Void {
+    }; __callArgument4; }));
+    unsubscribeLowPowerModeChange = (cast backend : PowerBackend).subscribeLowPowerModeChange(({ final __callArgument5:Dynamic = function():Void {
       if ((cast !_Runtime.strictEquals(power.onLowPowerModeChange, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onLowPowerModeChange]]), 1); }
-    }));
-    unsubscribeResume = (cast backend : PowerBackend).subscribeResume((cast function():Void {
+    }; __callArgument5; }));
+    unsubscribeResume = (cast backend : PowerBackend).subscribeResume(({ final __callArgument6:Dynamic = function():Void {
       if ((cast !_Runtime.strictEquals(power.onResume, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onResume]]), 1); }
-    }));
-    unsubscribeSuspend = (cast backend : PowerBackend).subscribeSuspend((cast function():Void {
+    }; __callArgument6; }));
+    unsubscribeSuspend = (cast backend : PowerBackend).subscribeSuspend(({ final __callArgument7:Dynamic = function():Void {
       if ((cast !_Runtime.strictEquals(power.onSuspend, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onSuspend]]), 1); }
-    }));
-    unsubscribeThermalStateChange = (cast backend : PowerBackend).subscribeThermalStateChange((cast function():Void {
+    }; __callArgument7; }));
+    unsubscribeThermalStateChange = (cast backend : PowerBackend).subscribeThermalStateChange(({ final __callArgument8:Dynamic = function():Void {
       if ((cast !_Runtime.strictEquals(power.onThermalStateChange, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onThermalStateChange]]), 1); }
-    }));
-    unsubscribeUnlockScreen = (cast backend : PowerBackend).subscribeUnlockScreen((cast function():Void {
+    }; __callArgument8; }));
+    unsubscribeUnlockScreen = (cast backend : PowerBackend).subscribeUnlockScreen(({ final __callArgument9:Dynamic = function():Void {
       if ((cast !_Runtime.strictEquals(power.onUnlockScreen, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[power.onUnlockScreen]]), 1); }
-    }));
+    }; __callArgument9; }));
     lastIdleState = (cast backend : PowerBackend).getSystemIdleState((cast idleThresholdSeconds : Float));
     idleIntervalId = _Runtime.setInterval(function():Void {
       var idleSignal:Null<Signal<Void->Void>> = cast _Runtime.UNDEFINED;
       var current:PowerIdleState = cast _Runtime.UNDEFINED;
       idleSignal = power.onIdleStateChange;
-      if ((cast ((cast _Runtime.strictEquals(idleSignal, null) : Bool) || (cast !(cast (cast hasSignalSlots((cast idleSignal)) : Bool) : Bool) : Bool)) : Bool)) { return; }
+      if ((cast ((cast _Runtime.strictEquals(idleSignal, null) : Bool) || (cast !(cast (cast hasSignalSlots((cast idleSignal : Dynamic)) : Bool) : Bool) : Bool)) : Bool)) { return; }
       current = (cast backend : PowerBackend).getSystemIdleState((cast idleThresholdSeconds : Float));
       if ((cast !_Runtime.strictEquals(current, lastIdleState) : Bool)) {
         (lastIdleState = cast (current : Dynamic));
@@ -167,7 +167,7 @@ class Power {
       if ((cast _Runtime.strictEquals(wakeLock, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
       try {
         if ((cast !(cast enabled : Bool) : Bool)) {
-          _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural1 = Power._wakeLockSentinel__power; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var release:Null<Void->flighthq._internal._Promise<flighthq._internal._Nothing>>; }).release; }), cast ([] : Array<Dynamic>)), 'catch', cast ([function(__unused0:flighthq._internal._Any):Void {
+          _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural11 = Power._wakeLockSentinel__power; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { @:optional var release:Null<Void->flighthq._internal._Promise<flighthq._internal._Nothing>>; }).release; }), cast ([] : Array<Dynamic>)), 'catch', cast ([function(__unused0:flighthq._internal._Any):Void {
 
           }] : Array<Dynamic>));
           (Power._wakeLockSentinel__power = cast (null : Dynamic));
@@ -245,10 +245,10 @@ class Power {
       });
       return cast function():Void {
         (cancelled = cast (true : Dynamic));
-        ({ final __optionalOwner3 = manager; if (__optionalOwner3 != null) { final __optionalCall2 = (cast __optionalOwner3 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall2 != null) __optionalCall2('levelchange', onLevelChange); } });
-        ({ final __optionalOwner5 = manager; if (__optionalOwner5 != null) { final __optionalCall4 = (cast __optionalOwner5 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall4 != null) __optionalCall4('chargingchange', onChargingChange); } });
-        ({ final __optionalOwner7 = manager; if (__optionalOwner7 != null) { final __optionalCall6 = (cast __optionalOwner7 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall6 != null) __optionalCall6('chargingtimechange', onChargingTimeChange); } });
-        ({ final __optionalOwner9 = manager; if (__optionalOwner9 != null) { final __optionalCall8 = (cast __optionalOwner9 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall8 != null) __optionalCall8('dischargingtimechange', onDischargingTimeChange); } });
+        ({ final __optionalOwner13 = manager; if (__optionalOwner13 != null) { final __optionalCall12 = (cast __optionalOwner13 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall12 != null) __optionalCall12('levelchange', onLevelChange); } });
+        ({ final __optionalOwner15 = manager; if (__optionalOwner15 != null) { final __optionalCall14 = (cast __optionalOwner15 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall14 != null) __optionalCall14('chargingchange', onChargingChange); } });
+        ({ final __optionalOwner17 = manager; if (__optionalOwner17 != null) { final __optionalCall16 = (cast __optionalOwner17 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall16 != null) __optionalCall16('chargingtimechange', onChargingTimeChange); } });
+        ({ final __optionalOwner19 = manager; if (__optionalOwner19 != null) { final __optionalCall18 = (cast __optionalOwner19 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall18 != null) __optionalCall18('dischargingtimechange', onDischargingTimeChange); } });
         (manager = cast (null : Dynamic));
       };
       return cast _Runtime.UNDEFINED;
@@ -300,7 +300,7 @@ class Power {
   }
 
   public static function disposePower(power:flighthq.types.Power):Void {
-    detachPower((cast power));
+    detachPower(({ final __callArgument20:Dynamic = power; __callArgument20; }));
   }
 
   public static function enablePowerSignals(power:flighthq.types.Power):Void {
@@ -324,7 +324,7 @@ class Power {
   }
 
   public static function getPowerBatteryHealth(out:PowerBatteryHealth):Null<PowerBatteryHealth> {
-    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getBatteryHealth((cast out));
+    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getBatteryHealth(({ final __callArgument21:Dynamic = out; __callArgument21; }));
     return cast null;
   }
 
@@ -334,7 +334,7 @@ class Power {
   }
 
   public static function getPowerStatus(out:PowerStatus):PowerStatus {
-    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getStatus((cast out));
+    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getStatus(({ final __callArgument22:Dynamic = out; __callArgument22; }));
     return cast null;
   }
 
@@ -349,7 +349,7 @@ class Power {
   }
 
   public static function getPowerThermalState():PowerThermalState {
-    return cast (cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getStatus((cast Power._scratch__power)) : { var thermalState:PowerThermalState; }).thermalState;
+    return cast (cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getStatus(({ final __callArgument23:Dynamic = Power._scratch__power; __callArgument23; })) : { var thermalState:PowerThermalState; }).thermalState;
     return cast null;
   }
 
@@ -381,7 +381,7 @@ class Power {
   }
 
   public static function setPowerKeepAwake(enabled:Bool, ?mode:PowerKeepAwakeMode):Bool {
-    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).setKeepAwake((cast enabled : Bool), (cast mode));
+    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).setKeepAwake((cast enabled : Bool), ({ final __callArgument24:Dynamic = mode; __callArgument24; }));
     return cast null;
   }
 }

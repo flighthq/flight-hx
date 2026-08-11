@@ -16,14 +16,14 @@ typedef PixiRaw__pixiParse = flighthq._internal._Record<String, flighthq._intern
 
 class PixiParse {
   public static function parsePixiParticle(json:String):ParticleEmitterConfig {
-    return cast (cast PixiParse.rawToConfig__pixiParse((cast (cast PixiParse.parsePixiJson__pixiParse((cast json : String)) : PixiRaw__pixiParse))) : ParticleEmitterConfig);
+    return cast (cast PixiParse.rawToConfig__pixiParse((cast (cast PixiParse.parsePixiJson__pixiParse((cast json : String)) : PixiRaw__pixiParse) : Dynamic)) : ParticleEmitterConfig);
     return cast null;
   }
 
   public static function parsePixiParticleDocument(json:String):PixiParseResult {
     var raw:PixiRaw__pixiParse = cast _Runtime.UNDEFINED;
     raw = (cast PixiParse.parsePixiJson__pixiParse((cast json : String)) : PixiRaw__pixiParse);
-    return cast { config: (cast PixiParse.rawToConfig__pixiParse((cast raw)) : ParticleEmitterConfig), diagnostics: (cast PixiParse.collectPixiDiagnostics__pixiParse((cast raw)) : Array<ImportDiagnostic>) };
+    return cast { config: (cast PixiParse.rawToConfig__pixiParse((cast raw : Dynamic)) : ParticleEmitterConfig), diagnostics: (cast PixiParse.collectPixiDiagnostics__pixiParse((cast raw : Dynamic)) : Array<ImportDiagnostic>) };
     return cast null;
   }
 
@@ -34,17 +34,17 @@ class PixiParse {
     var accel:Null<{ @:optional var x:flighthq._internal._Any; @:optional var y:flighthq._internal._Any; }> = cast _Runtime.UNDEFINED;
     diagnostics = (cast cast ([] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals((cast raw : { var spawnBurst:flighthq._internal._Any; }).spawnBurst, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'pixi.spawn-burst-mapped-to-point' : String), (cast 'collectPixiDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+      reportImportDiagnostic(({ final __callArgument0:Dynamic = diagnostics; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument1; }), (cast 'pixi.spawn-burst-mapped-to-point' : String), (cast 'collectPixiDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     }
     if ((cast !_Runtime.strictEquals((cast raw : { var spawnPolygon:flighthq._internal._Any; }).spawnPolygon, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'pixi.spawn-polygon-mapped-to-point' : String), (cast 'collectPixiDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+      reportImportDiagnostic(({ final __callArgument2:Dynamic = diagnostics; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument3; }), (cast 'pixi.spawn-polygon-mapped-to-point' : String), (cast 'collectPixiDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     }
     accel = (cast (cast raw : { var acceleration:flighthq._internal._Any; }).acceleration : Null<{ @:optional var x:flighthq._internal._Any; @:optional var y:flighthq._internal._Any; }>);
     if ((cast ((cast !_Runtime.strictEquals(accel, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.orValue(!_Runtime.strictEquals((cast PixiParse.rn__pixiParse((cast (cast accel : { @:optional var x:flighthq._internal._Any; @:optional var y:flighthq._internal._Any; }).x : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0), function():Dynamic return cast !_Runtime.strictEquals((cast PixiParse.rn__pixiParse((cast (cast accel : { @:optional var x:flighthq._internal._Any; @:optional var y:flighthq._internal._Any; }).y : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0)) : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'pixi.acceleration-unsupported' : String), (cast 'collectPixiDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+      reportImportDiagnostic(({ final __callArgument4:Dynamic = diagnostics; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument5; }), (cast 'pixi.acceleration-unsupported' : String), (cast 'collectPixiDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     }
     if ((cast !_Runtime.strictEquals((cast raw : { var behaviors:flighthq._internal._Any; }).behaviors, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'pixi.behaviors-partial' : String), (cast 'collectPixiDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+      reportImportDiagnostic(({ final __callArgument6:Dynamic = diagnostics; __callArgument6; }), ({ final __callArgument7:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument7; }), (cast 'pixi.behaviors-partial' : String), (cast 'collectPixiDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     }
     return cast diagnostics;
     return cast null;
@@ -112,8 +112,8 @@ class PixiParse {
     frequency = (cast PixiParse.rn__pixiParse((cast (cast raw : { var frequency:flighthq._internal._Any; }).frequency : flighthq._internal._Any), (cast 0.1 : Float)) : Float);
     spawnRate = ((cast ((cast frequency : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / frequency) : Dynamic) : (cast 10.0 : Dynamic));
     life = (cast (cast raw : { var lifetime:flighthq._internal._Any; }).lifetime : Null<{ @:optional var min:flighthq._internal._Any; @:optional var max:flighthq._internal._Any; }>);
-    lifetimeMin = (cast PixiParse.rn__pixiParse((cast ({ final __structural0 = life; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var min:flighthq._internal._Any; }).min; }) : flighthq._internal._Any), (cast 0.5 : Float)) : Float);
-    lifetimeMax = (cast PixiParse.rn__pixiParse((cast ({ final __structural1 = life; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var max:flighthq._internal._Any; }).max; }) : flighthq._internal._Any), (cast 1.0 : Float)) : Float);
+    lifetimeMin = (cast PixiParse.rn__pixiParse((cast ({ final __structural8 = life; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var min:flighthq._internal._Any; }).min; }) : flighthq._internal._Any), (cast 0.5 : Float)) : Float);
+    lifetimeMax = (cast PixiParse.rn__pixiParse((cast ({ final __structural9 = life; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var max:flighthq._internal._Any; }).max; }) : flighthq._internal._Any), (cast 1.0 : Float)) : Float);
     __destructure0 = (cast PixiParse.readStartEnd__pixiParse((cast (cast raw : { var speed:flighthq._internal._Any; }).speed : flighthq._internal._Any), (cast 100.0 : Float), (cast 50.0 : Float)) : Array<Float>);
     speedStart = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
     speedEnd = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
@@ -129,17 +129,17 @@ class PixiParse {
     alphaStart = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
     alphaEnd = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
     colorObj = (cast (cast raw : { var color:flighthq._internal._Any; }).color : Null<{ @:optional var start:flighthq._internal._Any; @:optional var end:flighthq._internal._Any; }>);
-    __destructure3 = (cast PixiParse.readColor__pixiParse((cast ({ final __structural2 = colorObj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var start:flighthq._internal._Any; }).start; }) : flighthq._internal._Any), (cast 'ffffff' : String)) : Array<Float>);
+    __destructure3 = (cast PixiParse.readColor__pixiParse((cast ({ final __structural10 = colorObj; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var start:flighthq._internal._Any; }).start; }) : flighthq._internal._Any), (cast 'ffffff' : String)) : Array<Float>);
     sr = flighthq._internal._StaticIndex.readArray(__destructure3, 0.0);
     sg = flighthq._internal._StaticIndex.readArray(__destructure3, 1.0);
     sb = flighthq._internal._StaticIndex.readArray(__destructure3, 2.0);
-    __destructure4 = (cast PixiParse.readColor__pixiParse((cast ({ final __structural3 = colorObj; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var end:flighthq._internal._Any; }).end; }) : flighthq._internal._Any), (cast 'ffffff' : String)) : Array<Float>);
+    __destructure4 = (cast PixiParse.readColor__pixiParse((cast ({ final __structural11 = colorObj; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { @:optional var end:flighthq._internal._Any; }).end; }) : flighthq._internal._Any), (cast 'ffffff' : String)) : Array<Float>);
     er = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
     eg = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
     eb = flighthq._internal._StaticIndex.readArray(__destructure4, 2.0);
     angleObj = (cast (cast raw : { var angle:flighthq._internal._Any; }).angle : Null<{ @:optional var min:flighthq._internal._Any; @:optional var max:flighthq._internal._Any; }>);
-    angleMin = (cast PixiParse.rn__pixiParse((cast ({ final __structural4 = angleObj; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var min:flighthq._internal._Any; }).min; }) : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
-    angleMax = (cast PixiParse.rn__pixiParse((cast ({ final __structural5 = angleObj; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var max:flighthq._internal._Any; }).max; }) : flighthq._internal._Any), (cast 360.0 : Float)) : Float);
+    angleMin = (cast PixiParse.rn__pixiParse((cast ({ final __structural12 = angleObj; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { @:optional var min:flighthq._internal._Any; }).min; }) : flighthq._internal._Any), (cast 0.0 : Float)) : Float);
+    angleMax = (cast PixiParse.rn__pixiParse((cast ({ final __structural13 = angleObj; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { @:optional var max:flighthq._internal._Any; }).max; }) : flighthq._internal._Any), (cast 360.0 : Float)) : Float);
     angleMid = (((angleMin + angleMax) * 0.5) * PixiParse.DEG2RAD__pixiParse);
     spread = (((angleMax - angleMin) * 0.5) * PixiParse.DEG2RAD__pixiParse);
     emitterShape = 'point';
@@ -160,7 +160,7 @@ class PixiParse {
     blendMode = null;
     if ((cast ((cast _Runtime.strictEquals(blendModeStr, 'add') : Bool) || (cast _Runtime.strictEquals(blendModeStr, 'additive') : Bool)) : Bool)) { (blendMode = cast ('add' : Dynamic)); } else { if ((cast _Runtime.strictEquals(blendModeStr, 'multiply') : Bool)) { (blendMode = cast ('multiply' : Dynamic)); } else { if ((cast _Runtime.strictEquals(blendModeStr, 'screen') : Bool)) { (blendMode = cast ('screen' : Dynamic)); } else { if ((cast ((cast _Runtime.strictEquals(blendModeStr, 'normal') : Bool) || (cast _Runtime.strictEquals(blendModeStr, 'src_alpha') : Bool)) : Bool)) { (blendMode = cast ('normal' : Dynamic)); } } } }
     rotationSpeed = ((cast PixiParse.rn__pixiParse((cast (cast raw : { var rotationSpeed:flighthq._internal._Any; }).rotationSpeed : flighthq._internal._Any), (cast 0.0 : Float)) : Float) * PixiParse.DEG2RAD__pixiParse);
-    return cast (cast createParticleEmitterConfig((cast { maxParticles: maxParticles, spawnRate: spawnRate, lifetimeMin: lifetimeMin, lifetimeMax: lifetimeMax, speedMin: speedMin, speedMax: speedMax, directionX: HxMath.cos(angleMid), directionY: HxMath.sin(angleMid), spread: spread, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleMin, scaleMax: scaleMax, scaleEnd: scaleEndRatio, colorStartR: sr, colorStartG: sg, colorStartB: sb, colorEndR: er, colorEndG: eg, colorEndB: eb, alphaStart: alphaStart, alphaEnd: alphaEnd, rotationSpeedMin: rotationSpeed, rotationSpeedMax: rotationSpeed, blendMode: blendMode })) : ParticleEmitterConfig);
+    return cast (cast createParticleEmitterConfig(({ final __callArgument14:Dynamic = { maxParticles: maxParticles, spawnRate: spawnRate, lifetimeMin: lifetimeMin, lifetimeMax: lifetimeMax, speedMin: speedMin, speedMax: speedMax, directionX: HxMath.cos(angleMid), directionY: HxMath.sin(angleMid), spread: spread, emitterShape: emitterShape, emitterRadius: emitterRadius, emitterWidth: emitterWidth, emitterHeight: emitterHeight, scaleMin: scaleMin, scaleMax: scaleMax, scaleEnd: scaleEndRatio, colorStartR: sr, colorStartG: sg, colorStartB: sb, colorEndR: er, colorEndG: eg, colorEndB: eb, alphaStart: alphaStart, alphaEnd: alphaEnd, rotationSpeedMin: rotationSpeed, rotationSpeedMax: rotationSpeed, blendMode: blendMode }; __callArgument14; })) : ParticleEmitterConfig);
     return cast null;
   }
 
@@ -170,7 +170,7 @@ class PixiParse {
     var s:String = cast _Runtime.UNDEFINED;
     var channel:Float->Float = cast _Runtime.UNDEFINED;
     valueObj = (cast obj : Null<{ @:optional var value:flighthq._internal._Any; }>);
-    hex = ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'string') : Bool) ? (cast obj : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural6 = valueObj; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var value:flighthq._internal._Any; }).value; })), 'string') : Bool) ? (cast (cast valueObj : { @:optional var value:flighthq._internal._Any; }).value : Dynamic) : (cast def : Dynamic)) : Dynamic));
+    hex = ((cast _Runtime.strictEquals(_Runtime.typeofValue(obj), 'string') : Bool) ? (cast obj : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural15 = valueObj; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { @:optional var value:flighthq._internal._Any; }).value; })), 'string') : Bool) ? (cast (cast valueObj : { @:optional var value:flighthq._internal._Any; }).value : Dynamic) : (cast def : Dynamic)) : Dynamic));
     s = _Runtime.padEnd(_Runtime.replace(hex, _Runtime.regexp('^#', ''), '', false), 6.0, 'f');
     channel = (cast function(i:Float):Float {
       var v:Float = cast _Runtime.UNDEFINED;
@@ -192,8 +192,8 @@ class PixiParse {
     o = (cast obj : { @:optional var start:flighthq._internal._Any; @:optional var end:flighthq._internal._Any; });
     startObj = (cast (cast o : { @:optional var start:flighthq._internal._Any; @:optional var end:flighthq._internal._Any; }).start : Null<{ @:optional var value:flighthq._internal._Any; }>);
     endObj = (cast (cast o : { @:optional var start:flighthq._internal._Any; @:optional var end:flighthq._internal._Any; }).end : Null<{ @:optional var value:flighthq._internal._Any; }>);
-    start = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast o : { @:optional var start:flighthq._internal._Any; @:optional var end:flighthq._internal._Any; }).start), 'number') : Bool) ? (cast (cast o : { @:optional var start:flighthq._internal._Any; @:optional var end:flighthq._internal._Any; }).start : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural7 = startObj; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var value:flighthq._internal._Any; }).value; })), 'number') : Bool) ? (cast (cast startObj : { @:optional var value:flighthq._internal._Any; }).value : Dynamic) : (cast defStart : Dynamic)) : Dynamic));
-    end = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast o : { @:optional var start:flighthq._internal._Any; @:optional var end:flighthq._internal._Any; }).end), 'number') : Bool) ? (cast (cast o : { @:optional var start:flighthq._internal._Any; @:optional var end:flighthq._internal._Any; }).end : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural8 = endObj; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var value:flighthq._internal._Any; }).value; })), 'number') : Bool) ? (cast (cast endObj : { @:optional var value:flighthq._internal._Any; }).value : Dynamic) : (cast defEnd : Dynamic)) : Dynamic));
+    start = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast o : { @:optional var start:flighthq._internal._Any; @:optional var end:flighthq._internal._Any; }).start), 'number') : Bool) ? (cast (cast o : { @:optional var start:flighthq._internal._Any; @:optional var end:flighthq._internal._Any; }).start : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural16 = startObj; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { @:optional var value:flighthq._internal._Any; }).value; })), 'number') : Bool) ? (cast (cast startObj : { @:optional var value:flighthq._internal._Any; }).value : Dynamic) : (cast defStart : Dynamic)) : Dynamic));
+    end = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast o : { @:optional var start:flighthq._internal._Any; @:optional var end:flighthq._internal._Any; }).end), 'number') : Bool) ? (cast (cast o : { @:optional var start:flighthq._internal._Any; @:optional var end:flighthq._internal._Any; }).end : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural17 = endObj; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { @:optional var value:flighthq._internal._Any; }).value; })), 'number') : Bool) ? (cast (cast endObj : { @:optional var value:flighthq._internal._Any; }).value : Dynamic) : (cast defEnd : Dynamic)) : Dynamic));
     return cast cast ([(cast PixiParse.rn__pixiParse((cast start : flighthq._internal._Any), (cast defStart : Float)) : Float), (cast PixiParse.rn__pixiParse((cast end : flighthq._internal._Any), (cast defEnd : Float)) : Float)] : Array<Dynamic>);
     return cast null;
   }

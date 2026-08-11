@@ -25,24 +25,24 @@ import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverity
 
 class BuiltInScene2DDocumentImporters {
   public static function registerLottieScene2DDocumentImporter(registry:Scene2DDocumentImporterRegistry):Void {
-    registerScene2DDocumentImporter((cast registry), (cast 'lottie' : String), (cast BuiltInScene2DDocumentImporters.matchesLottieDocument__builtInScene2DDocumentImporters), (cast BuiltInScene2DDocumentImporters.importLottieDocument__builtInScene2DDocumentImporters));
+    registerScene2DDocumentImporter(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast 'lottie' : String), ({ final __callArgument1:Dynamic = BuiltInScene2DDocumentImporters.matchesLottieDocument__builtInScene2DDocumentImporters; __callArgument1; }), ({ final __callArgument2:Dynamic = BuiltInScene2DDocumentImporters.importLottieDocument__builtInScene2DDocumentImporters; __callArgument2; }));
   }
 
   public static function registerRiveScene2DDocumentImporter(registry:Scene2DDocumentImporterRegistry):Void {
-    registerScene2DDocumentImporter((cast registry), (cast 'rive' : String), (cast BuiltInScene2DDocumentImporters.matchesRiveDocument__builtInScene2DDocumentImporters), (cast BuiltInScene2DDocumentImporters.importRiveDocument__builtInScene2DDocumentImporters));
+    registerScene2DDocumentImporter(({ final __callArgument3:Dynamic = registry; __callArgument3; }), (cast 'rive' : String), ({ final __callArgument4:Dynamic = BuiltInScene2DDocumentImporters.matchesRiveDocument__builtInScene2DDocumentImporters; __callArgument4; }), ({ final __callArgument5:Dynamic = BuiltInScene2DDocumentImporters.importRiveDocument__builtInScene2DDocumentImporters; __callArgument5; }));
   }
 
   public static function registerSvgScene2DDocumentImporter(registry:Scene2DDocumentImporterRegistry):Void {
-    registerScene2DDocumentImporter((cast registry), (cast 'svg' : String), (cast BuiltInScene2DDocumentImporters.matchesSvgDocument__builtInScene2DDocumentImporters), (cast BuiltInScene2DDocumentImporters.importSvgDocument__builtInScene2DDocumentImporters));
+    registerScene2DDocumentImporter(({ final __callArgument6:Dynamic = registry; __callArgument6; }), (cast 'svg' : String), ({ final __callArgument7:Dynamic = BuiltInScene2DDocumentImporters.matchesSvgDocument__builtInScene2DDocumentImporters; __callArgument7; }), ({ final __callArgument8:Dynamic = BuiltInScene2DDocumentImporters.importSvgDocument__builtInScene2DDocumentImporters; __callArgument8; }));
   }
 
   public static function importRiveDocument__builtInScene2DDocumentImporters(source:flighthq._internal._UInt8Array, _context:Scene2DDocumentImportContext):Null<Scene2DDocument> {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
     var result:Null<RiveScene2DDocumentResult> = cast _Runtime.UNDEFINED;
     diagnostics = (cast cast ([] : Array<Dynamic>));
-    result = (cast createScene2DDocumentFromRiveDocument((cast source), (cast diagnostics)) : Null<RiveScene2DDocumentResult>);
+    result = (cast createScene2DDocumentFromRiveDocument(({ final __callArgument9:Dynamic = source; __callArgument9; }), ({ final __callArgument10:Dynamic = diagnostics; __callArgument10; })) : Null<RiveScene2DDocumentResult>);
     if ((cast _Runtime.strictEquals(result, null) : Bool)) { return cast null; }
-    return cast (cast createScene2DDocument((cast (cast result : RiveScene2DDocumentResult).root), (cast (cast result : RiveScene2DDocumentResult).slots), (cast 'rive'), (cast null), (cast (cast result : RiveScene2DDocumentResult).imageResources), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene2DDocument);
+    return cast (cast createScene2DDocument(({ final __callArgument11:Dynamic = (cast result : RiveScene2DDocumentResult).root; __callArgument11; }), (cast (cast result : RiveScene2DDocumentResult).slots : Dynamic), ({ final __callArgument12:Dynamic = 'rive'; __callArgument12; }), ({ final __callArgument13:Dynamic = null; __callArgument13; }), (cast (cast result : RiveScene2DDocumentResult).imageResources : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene2DDocument);
     return cast null;
   }
 
@@ -55,9 +55,9 @@ class BuiltInScene2DDocumentImporters {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
     var result:LottieDocumentImportResult = cast _Runtime.UNDEFINED;
     diagnostics = (cast cast ([] : Array<Dynamic>));
-    result = (cast createScene2DFromLottieDocument((cast (cast BuiltInScene2DDocumentImporters.decodeText__builtInScene2DDocumentImporters((cast source)) : String)), (cast diagnostics), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : LottieDocumentImportResult);
-    if ((cast (cast BuiltInScene2DDocumentImporters.isInvalidDocument__builtInScene2DDocumentImporters((cast diagnostics), (cast 'lottie.invalid-document' : String)) : Bool) : Bool)) { return cast null; }
-    return cast (cast createScene2DDocument((cast (cast result : LottieDocumentImportResult).root), (cast cast ([] : Array<Dynamic>)), (cast 'lottie'), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene2DDocument);
+    result = (cast createScene2DFromLottieDocument((cast (cast BuiltInScene2DDocumentImporters.decodeText__builtInScene2DDocumentImporters(({ final __callArgument14:Dynamic = source; __callArgument14; })) : String) : Dynamic), ({ final __callArgument15:Dynamic = diagnostics; __callArgument15; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : LottieDocumentImportResult);
+    if ((cast (cast BuiltInScene2DDocumentImporters.isInvalidDocument__builtInScene2DDocumentImporters(({ final __callArgument16:Dynamic = diagnostics; __callArgument16; }), (cast 'lottie.invalid-document' : String)) : Bool) : Bool)) { return cast null; }
+    return cast (cast createScene2DDocument(({ final __callArgument17:Dynamic = (cast result : LottieDocumentImportResult).root; __callArgument17; }), (cast cast ([] : Array<Dynamic>) : Dynamic), ({ final __callArgument18:Dynamic = 'lottie'; __callArgument18; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene2DDocument);
     return cast null;
   }
 
@@ -65,23 +65,23 @@ class BuiltInScene2DDocumentImporters {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
     var root:DisplayObject = cast _Runtime.UNDEFINED;
     diagnostics = (cast cast ([] : Array<Dynamic>));
-    root = (cast createScene2DFromSvgDocument((cast (cast BuiltInScene2DDocumentImporters.decodeText__builtInScene2DDocumentImporters((cast source)) : String) : String), (cast diagnostics), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : DisplayObject);
-    if ((cast (cast BuiltInScene2DDocumentImporters.isInvalidDocument__builtInScene2DDocumentImporters((cast diagnostics), (cast 'svg.invalid-document' : String)) : Bool) : Bool)) { return cast null; }
-    return cast (cast createScene2DDocument((cast root), (cast cast ([] : Array<Dynamic>)), (cast 'svg'), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene2DDocument);
+    root = (cast createScene2DFromSvgDocument((cast (cast BuiltInScene2DDocumentImporters.decodeText__builtInScene2DDocumentImporters(({ final __callArgument19:Dynamic = source; __callArgument19; })) : String) : String), ({ final __callArgument20:Dynamic = diagnostics; __callArgument20; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : DisplayObject);
+    if ((cast (cast BuiltInScene2DDocumentImporters.isInvalidDocument__builtInScene2DDocumentImporters(({ final __callArgument21:Dynamic = diagnostics; __callArgument21; }), (cast 'svg.invalid-document' : String)) : Bool) : Bool)) { return cast null; }
+    return cast (cast createScene2DDocument(({ final __callArgument22:Dynamic = root; __callArgument22; }), (cast cast ([] : Array<Dynamic>) : Dynamic), ({ final __callArgument23:Dynamic = 'svg'; __callArgument23; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene2DDocument);
     return cast null;
   }
 
   public static function matchesLottieDocument__builtInScene2DDocumentImporters(source:flighthq._internal._UInt8Array, context:Scene2DDocumentImportContext):Bool {
     var text:String = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(context, 'mimeType'), 'application/lottie+json') : Bool)) { return cast true; }
-    text = _Runtime.callProperty((cast BuiltInScene2DDocumentImporters.decodeText__builtInScene2DDocumentImporters((cast source)) : String), 'trimStart', cast ([] : Array<Dynamic>));
+    text = _Runtime.callProperty((cast BuiltInScene2DDocumentImporters.decodeText__builtInScene2DDocumentImporters(({ final __callArgument26:Dynamic = source; __callArgument26; })) : String), 'trimStart', cast ([] : Array<Dynamic>));
     return cast ((cast ((cast StringTools.startsWith(text, '{') : Bool) && (cast _Runtime.includes(text, '"layers"') : Bool)) : Bool) && (cast _Runtime.includes(text, '"fr"') : Bool));
     return cast null;
   }
 
   public static function matchesSvgDocument__builtInScene2DDocumentImporters(source:flighthq._internal._UInt8Array, context:Scene2DDocumentImportContext):Bool {
     if ((cast _Runtime.strictEquals(_Runtime.field(context, 'mimeType'), 'image/svg+xml') : Bool)) { return cast true; }
-    return cast _Runtime.callProperty(_Runtime.regexp('^(?:<\\?xml[^>]*>\\s*)?<svg(?:\\s|>)', 'i'), 'test', cast ([_Runtime.callProperty((cast BuiltInScene2DDocumentImporters.decodeText__builtInScene2DDocumentImporters((cast source)) : String), 'trimStart', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
+    return cast _Runtime.callProperty(_Runtime.regexp('^(?:<\\?xml[^>]*>\\s*)?<svg(?:\\s|>)', 'i'), 'test', cast ([_Runtime.callProperty((cast BuiltInScene2DDocumentImporters.decodeText__builtInScene2DDocumentImporters(({ final __callArgument29:Dynamic = source; __callArgument29; })) : String), 'trimStart', cast ([] : Array<Dynamic>))] : Array<Dynamic>));
     return cast null;
   }
 

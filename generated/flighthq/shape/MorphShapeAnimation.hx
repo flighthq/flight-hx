@@ -14,7 +14,7 @@ import flighthq.types._internal._MorphShapeValues.MorphShapeKind;
 
 class MorphShapeAnimation {
   public static function applyAnimationClipToMorphShape(clip:AnimationClip, time:Float):Void {
-    sampleAnimationClip((cast MorphShapeAnimation.morphShapeAnimationScratch__morphShapeAnimation), (cast clip), (cast time : Float), (cast function(__unused0:flighthq._internal._ArrayLike<Float>, __unused1:AnimationChannel, __unused2:Float):Bool return applyMorphShapeAnimationSample(__unused0, __unused1)));
+    sampleAnimationClip(({ final __callArgument0:Dynamic = MorphShapeAnimation.morphShapeAnimationScratch__morphShapeAnimation; __callArgument0; }), ({ final __callArgument1:Dynamic = clip; __callArgument1; }), (cast time : Float), ({ final __callArgument2:Dynamic = function(__unused0:flighthq._internal._ArrayLike<Float>, __unused1:AnimationChannel, __unused2:Float):Bool return applyMorphShapeAnimationSample(__unused0, __unused1); __callArgument2; }));
   }
 
   public static function applyMorphShapeAnimationSample(sampled:flighthq._internal._ArrayLike<Float>, channel:AnimationChannel):Bool {
@@ -24,7 +24,7 @@ class MorphShapeAnimation {
     if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast target : MorphShapeAnimationTarget).shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast false; }
     shape = (cast (cast target : MorphShapeAnimationTarget).shape : Null<MorphShape>);
     if ((cast ((cast ((cast _Runtime.strictEquals(shape, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(shape), 'object') : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast shape : MorphShape).kind, MorphShapeKind) : Bool)) : Bool)) { return cast false; }
-    setMorphShapeProgress((cast shape), (cast _Runtime.getIndex(sampled, 0.0) : Float));
+    setMorphShapeProgress(({ final __callArgument3:Dynamic = shape; __callArgument3; }), (cast _Runtime.getIndex(sampled, 0.0) : Float));
     return cast true;
     return cast null;
   }

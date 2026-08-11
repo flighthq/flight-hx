@@ -16,7 +16,7 @@ class TauriShell {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openUrl((cast url : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end), function(__awaitValue0:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openUrl((cast url : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end), function(__awaitValue0:Dynamic):Dynamic {
               __awaitValue0;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -34,7 +34,7 @@ class TauriShell {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openPath((cast path : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end), function(__awaitValue1:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openPath((cast path : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end), function(__awaitValue1:Dynamic):Dynamic {
               __awaitValue1;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -52,7 +52,7 @@ class TauriShell {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openPath((cast path : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end), function(__awaitValue2:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openPath((cast path : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end), function(__awaitValue2:Dynamic):Dynamic {
               __awaitValue2;
               return flighthq._internal._Async.flowReturn('');
             });

@@ -15,11 +15,11 @@ class Framing {
   public static function frameOrbitCameraControllerToSphere(controller:OrbitCameraController, projection:Projection, sphere:BoundingSphereLike, aspect:Float, padding:Float = 1.0):Bool {
     if ((cast ((cast ((cast !(cast _Runtime.compare(sphere.radius, 0.0, '>=') : Bool) : Bool) || (cast !(cast _Runtime.compare(aspect, 0.0, '>') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(padding, 0.0, '>') : Bool) : Bool)) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals((cast projection : { var kind:String; }).kind, 'perspective') : Bool)) {
-      var distance:Float = (cast getPerspectiveProjectionFrameDistanceToSphere((cast projection), (cast sphere.radius : Float), (cast aspect : Float), (cast padding : Float)) : Float);
+      var distance:Float = (cast getPerspectiveProjectionFrameDistanceToSphere(({ final __callArgument0:Dynamic = projection; __callArgument0; }), (cast sphere.radius : Float), (cast aspect : Float), (cast padding : Float)) : Float);
       if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([distance] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
       ((cast controller : OrbitCameraController).goalDistance = (cast clamp((cast distance : Float), (cast (cast controller : OrbitCameraController).minDistance : Float), (cast (cast controller : OrbitCameraController).maxDistance : Float)) : Float));
     } else {
-      setOrthographicProjectionFrameToSphere((cast projection), (cast sphere.radius : Float), (cast aspect : Float), (cast padding : Float));
+      setOrthographicProjectionFrameToSphere(({ final __callArgument1:Dynamic = projection; __callArgument1; }), (cast sphere.radius : Float), (cast aspect : Float), (cast padding : Float));
     }
     ((cast (cast controller : OrbitCameraController).target : { var x:Float; }).x = cast ((cast sphere.center : { var x:Float; }).x : Dynamic));
     ((cast (cast controller : OrbitCameraController).target : { var y:Float; }).y = cast ((cast sphere.center : { var y:Float; }).y : Dynamic));

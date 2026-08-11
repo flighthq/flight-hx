@@ -32,21 +32,21 @@ class WgpuNode2D {
     var tempStack:Array<Renderable> = cast _Runtime.UNDEFINED;
     var clipHooks:Null<Scene2DClipHooks> = cast _Runtime.UNDEFINED;
     var stackLength:Float = cast _Runtime.UNDEFINED;
-    tempStack = (cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).tempStack;
+    tempStack = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).tempStack;
     clipHooks = (cast state : WgpuRenderState).displayObjectClipHooks;
     stackLength = 1.0;
     flighthq._internal._StaticIndex.writeArray(tempStack, 0.0, source);
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
       var current:Node2D = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Node2D);
       if ((cast !(cast (cast current : { var enabled:Bool; }).enabled : Bool) : Bool)) { continue; }
-      var data:Null<RenderProxy2D> = (cast getRenderProxy2D((cast state), (cast current)) : Null<RenderProxy2D>);
+      var data:Null<RenderProxy2D> = (cast getRenderProxy2D(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = current; __callArgument2; })) : Null<RenderProxy2D>);
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      ({ final __optionalOwner1 = clipHooks; if (__optionalOwner1 != null) { final __optionalCall0 = (cast __optionalOwner1 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall0 != null) __optionalCall0(state, data, current); } });
-      if ((cast !(cast (cast isRenderProxyVisible((cast data)) : Bool) : Bool) : Bool)) { continue; }
-      ({ final __optionalOwner3 = clipHooks; if (__optionalOwner3 != null) { final __optionalCall2 = (cast __optionalOwner3 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall2 != null) __optionalCall2(state, data, current); } });
-      ({ final __optionalOwner5 = (cast data : RenderProxy2D).renderer; if (__optionalOwner5 != null) { final __optionalCall4 = (cast __optionalOwner5 : { var submit:RenderState->RenderProxy->Void; }).submit; if (__optionalCall4 != null) __optionalCall4(state, data); } });
+      ({ final __optionalOwner4 = clipHooks; if (__optionalOwner4 != null) { final __optionalCall3 = (cast __optionalOwner4 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall3 != null) __optionalCall3(state, data, current); } });
+      if ((cast !(cast (cast isRenderProxyVisible(({ final __callArgument5:Dynamic = data; __callArgument5; })) : Bool) : Bool) : Bool)) { continue; }
+      ({ final __optionalOwner7 = clipHooks; if (__optionalOwner7 != null) { final __optionalCall6 = (cast __optionalOwner7 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall6 != null) __optionalCall6(state, data, current); } });
+      ({ final __optionalOwner9 = (cast data : RenderProxy2D).renderer; if (__optionalOwner9 != null) { final __optionalCall8 = (cast __optionalOwner9 : { var submit:RenderState->RenderProxy->Void; }).submit; if (__optionalCall8 != null) __optionalCall8(state, data); } });
       if ((cast (cast data : RenderProxy2D).traverseChildren : Bool)) {
-        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime((cast current)) : Node2DRuntime), 'children');
+        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime(({ final __callArgument10:Dynamic = current; __callArgument10; })) : Node2DRuntime), 'children');
         if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
             var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
@@ -58,8 +58,8 @@ class WgpuNode2D {
         }
       }
     }
-    flushWgpuQuadBatchWriter((cast state));
-    ({ final __optionalOwner7 = clipHooks; if (__optionalOwner7 != null) { final __optionalCall6 = (cast __optionalOwner7 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall6 != null) __optionalCall6(state); } });
+    flushWgpuQuadBatchWriter(({ final __callArgument11:Dynamic = state; __callArgument11; }));
+    ({ final __optionalOwner13 = clipHooks; if (__optionalOwner13 != null) { final __optionalCall12 = (cast __optionalOwner13 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall12 != null) __optionalCall12(state); } });
   }
 
   public static final defaultWgpuScene2DRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: drawWgpuScene2D });

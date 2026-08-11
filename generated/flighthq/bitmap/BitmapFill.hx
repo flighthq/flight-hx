@@ -40,7 +40,7 @@ class BitmapFill {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function floodFillBitmap(out:Bitmap, x:Float, y:Float, color:Float):Void {
@@ -94,6 +94,6 @@ class BitmapFill {
       if ((cast ((cast py : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([(idx - out.width)] : Array<Dynamic>)); }
       if ((cast ((cast py : Float) < (cast (out.height - 1.0) : Float)) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([(idx + out.width)] : Array<Dynamic>)); }
     }
-    invalidateBitmap((cast out));
+    invalidateBitmap(({ final __callArgument0:Dynamic = out; __callArgument0; }));
   }
 }

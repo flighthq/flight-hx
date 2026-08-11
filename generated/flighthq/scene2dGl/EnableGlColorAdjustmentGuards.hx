@@ -14,16 +14,16 @@ import flighthq.types.TintMaterialData;
 class EnableGlColorAdjustmentGuards {
   @:noCompletion
   public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeatureGuard, null);
+    return cast !_Runtime.looseEquals((cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeatureGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableGlColorAdjustmentGuards(state:GlRenderState):Void {
-    ((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : { @:optional var glColorAdjustmentMaterialFeatureGuard:Null<GlRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).glColorAdjustmentMaterialFeatureGuard = (cast EnableGlColorAdjustmentGuards.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards));
+    ((cast (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime) : { @:optional var glColorAdjustmentMaterialFeatureGuard:Null<GlRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).glColorAdjustmentMaterialFeatureGuard = (cast EnableGlColorAdjustmentGuards.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards));
   }
 
   public static function warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards():Void {
-    (cast logOnce((cast 'scene2d-gl:color-adjustment-not-enabled' : String), (cast LogLevel.Warn), (cast { message: 'recordGlQuadBatchColorScaleBias: color adjustment present but GL color adjustment not enabled — call registerGlColorAdjustmentMaterialFeature(state)' }), (cast 'scene2d-gl')) : Bool);
+    (cast logOnce((cast 'scene2d-gl:color-adjustment-not-enabled' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: 'recordGlQuadBatchColorScaleBias: color adjustment present but GL color adjustment not enabled — call registerGlColorAdjustmentMaterialFeature(state)' } : Dynamic), ({ final __callArgument3:Dynamic = 'scene2d-gl'; __callArgument3; })) : Bool);
   }
 }

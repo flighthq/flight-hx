@@ -16,14 +16,14 @@ import flighthq.types.WgpuRenderTarget;
 class WgpuContactShadowsEffect {
   @:noCompletion
   public static function applyContactShadowsEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ContactShadowsEffect):Void {
-    applySsaoEffectToWgpu((cast state), (cast source), (cast dest), (cast { kind: 'SsaoEffect', intensity: _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 0.6), radius: _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 0.5), samples: _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0) }));
+    applySsaoEffectToWgpu(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = { kind: 'SsaoEffect', intensity: _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 0.6), radius: _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 0.5), samples: _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0) }; __callArgument3; }));
   }
 
   public static final defaultWgpuContactShadowsEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyContactShadowsEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : ContactShadowsEffect)));
+    applyContactShadowsEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ContactShadowsEffect));
   });
 
   public static function registerWgpuContactShadowsEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state), (cast 'ContactShadowsEffect' : String), (cast defaultWgpuContactShadowsEffectRunner));
+    registerWgpuRenderEffect(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast 'ContactShadowsEffect' : String), ({ final __callArgument5:Dynamic = defaultWgpuContactShadowsEffectRunner; __callArgument5; }));
   }
 }

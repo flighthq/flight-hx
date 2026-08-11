@@ -52,25 +52,25 @@ class ToonGlMeshMaterialRenderer {
     var program:GlToonProgram = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     toon = (cast material : Null<ToonMaterial>);
-    program = (cast ensureGlToonProgram((cast state), (cast (cast ToonGlMeshMaterialRenderer.defineKeyForMaterial__toonGlMeshMaterialRenderer((cast state), (cast toon)) : GlToonDefineKey))) : GlToonProgram);
-    beginGlMeshDraw((cast state), (cast program), (cast ((cast !_Runtime.strictEquals(toon, null) : Bool) && (cast _Runtime.field(toon, 'doubleSided') : Bool)) : Bool));
-    setGlMeshViewProjection((cast state), (cast (cast program : GlToonProgram).locViewProjection), (cast camera));
-    setGlMeshCameraPosition((cast gl), (cast (cast program : GlToonProgram).locCameraPosition), (cast camera));
-    bindGlMeshLightBlock((cast state), (cast program), (cast lights));
-    ToonGlMeshMaterialRenderer.bindGlToonMaterialUniforms__toonGlMeshMaterialRenderer((cast state), (cast program), (cast toon));
+    program = (cast ensureGlToonProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast ToonGlMeshMaterialRenderer.defineKeyForMaterial__toonGlMeshMaterialRenderer(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = toon; __callArgument2; })) : GlToonDefineKey)) : GlToonProgram);
+    beginGlMeshDraw(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = program; __callArgument4; }), (cast ((cast !_Runtime.strictEquals(toon, null) : Bool) && (cast _Runtime.field(toon, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast program : GlToonProgram).locViewProjection, ({ final __callArgument6:Dynamic = camera; __callArgument6; }));
+    setGlMeshCameraPosition(({ final __callArgument7:Dynamic = gl; __callArgument7; }), (cast program : GlToonProgram).locCameraPosition, ({ final __callArgument8:Dynamic = camera; __callArgument8; }));
+    bindGlMeshLightBlock(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = program; __callArgument10; }), ({ final __callArgument11:Dynamic = lights; __callArgument11; }));
+    ToonGlMeshMaterialRenderer.bindGlToonMaterialUniforms__toonGlMeshMaterialRenderer(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = program; __callArgument13; }), ({ final __callArgument14:Dynamic = toon; __callArgument14; }));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument15:Dynamic = state; __callArgument15; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset((cast state), (cast program), (cast proxy), (cast geometry));
+    drawGlMeshSubset(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = program; __callArgument17; }), ({ final __callArgument18:Dynamic = proxy; __callArgument18; }), ({ final __callArgument19:Dynamic = geometry; __callArgument19; }));
   } });
 
   public static function registerGlToonMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer((cast state), (cast ToonMaterialKind : String), (cast toonGlMeshMaterialRenderer));
+    registerGlMeshMaterialRenderer(({ final __callArgument20:Dynamic = state; __callArgument20; }), (cast ToonMaterialKind : String), ({ final __callArgument21:Dynamic = toonGlMeshMaterialRenderer; __callArgument21; }));
   }
 
   public static function defineKeyForMaterial__toonGlMeshMaterialRenderer(state:GlRenderState, material:Null<ToonMaterial>):GlToonDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasBaseColorMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'baseColorMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast _Runtime.field(material, 'baseColorMap')), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)), hasRamp: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'ramp'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast _Runtime.field(material, 'ramp')), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)), hasUvTransform: (cast hasGlUvTransform((cast ((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'baseColorMap') : Dynamic) : (cast null : Dynamic)))) : Bool) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasBaseColorMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'baseColorMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = _Runtime.field(material, 'baseColorMap'); __callArgument23; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)), hasRamp: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'ramp'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture(({ final __callArgument24:Dynamic = state; __callArgument24; }), ({ final __callArgument25:Dynamic = _Runtime.field(material, 'ramp'); __callArgument25; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)), hasUvTransform: (cast hasGlUvTransform((cast ((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'baseColorMap') : Dynamic) : (cast null : Dynamic)) : Dynamic)) : Bool) };
     return cast null;
   }
 
@@ -85,21 +85,21 @@ class ToonGlMeshMaterialRenderer {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), 0.5);
       return;
     }
-    (cast unpackColorToLinear((cast ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer), (cast _Runtime.field(material, 'baseColor') : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument26:Dynamic = ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer; __callArgument26; }), (cast _Runtime.field(material, 'baseColor') : Float)) : LinearColor);
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locBaseColor'), flighthq._internal._StaticIndex.readFloatArrayTyped((cast ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer : Array<Float>), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast ToonGlMeshMaterialRenderer.scratchRgba__toonGlMeshMaterialRenderer : Array<Float>), (cast 3.0 : Float)));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locSteps'), _Runtime.field(material, 'steps'));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff'));
     baseColorMap = _Runtime.field(material, 'baseColorMap');
     if ((cast !_Runtime.strictEquals(baseColorMap, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
-      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast baseColorMap), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locBaseColorMap'), 0.0); }
+      if ((cast !_Runtime.strictEquals((cast resolveGlTexture(({ final __callArgument27:Dynamic = state; __callArgument27; }), ({ final __callArgument28:Dynamic = baseColorMap; __callArgument28; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locBaseColorMap'), 0.0); }
     }
     ramp = _Runtime.field(material, 'ramp');
     if ((cast !_Runtime.strictEquals(ramp, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE1', flighthq._internal.backend.WebGl2Backend.TEXTURE1));
-      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast ramp), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locRamp'), 1.0); }
+      if ((cast !_Runtime.strictEquals((cast resolveGlTexture(({ final __callArgument29:Dynamic = state; __callArgument29; }), ({ final __callArgument30:Dynamic = ramp; __callArgument30; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locRamp'), 1.0); }
     }
-    bindGlUvTransform((cast gl), (cast program), (cast baseColorMap));
+    bindGlUvTransform(({ final __callArgument31:Dynamic = gl; __callArgument31; }), ({ final __callArgument32:Dynamic = program; __callArgument32; }), (cast baseColorMap : Dynamic));
   }
 
   public static final scratchRgba__toonGlMeshMaterialRenderer:LinearColor = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));

@@ -12,7 +12,7 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 
 class WgpuStandardMaterial {
   public static function registerWgpuStandardMaterial(state:WgpuRenderState):Void {
-    registerWgpuMaterialRenderer((cast state), (cast StandardMaterialKindValue : String), (cast standardWgpuMaterialRenderer));
+    registerWgpuMaterialRenderer(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast StandardMaterialKindValue : String), ({ final __callArgument1:Dynamic = standardWgpuMaterialRenderer; __callArgument1; }));
   }
 
   @:noCompletion

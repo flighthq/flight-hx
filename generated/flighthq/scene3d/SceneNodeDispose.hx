@@ -8,6 +8,6 @@ import flighthq.types.Node3D;
 
 class SceneNodeDispose {
   public static function disposeNode3D(node:Node3D):Void {
-    disposeNode((cast node));
+    disposeNode((cast node : Dynamic));
   }
 }

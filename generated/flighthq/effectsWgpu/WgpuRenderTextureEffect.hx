@@ -23,11 +23,11 @@ class WgpuRenderTextureEffect {
     if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, scratch) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, scratch) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('applyWgpuRenderEffectsToRenderTexture: source, destination, and scratch must be distinct'));
     }
-    sourceTarget = (cast getWgpuRenderTextureTarget((cast state), (cast source)) : Null<WgpuRenderTarget>);
+    sourceTarget = (cast getWgpuRenderTextureTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; })) : Null<WgpuRenderTarget>);
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
     operations = (cast _Runtime.flatMapArray((cast effects : Array<RenderEffect>), function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flighthq._internal._Union2<{ var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }>> {
       var runner:Null<WgpuRenderEffectRunner> = cast _Runtime.UNDEFINED;
-      runner = (cast getWgpuRenderEffectRunner((cast state), (cast _Runtime.field(effect, 'kind') : String)) : Null<WgpuRenderEffectRunner>);
+      runner = (cast getWgpuRenderEffectRunner(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<WgpuRenderEffectRunner>);
       return cast ((cast _Runtime.strictEquals(runner, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([{ effect: effect, runner: runner }] : Array<Dynamic>) : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));
@@ -39,10 +39,10 @@ class WgpuRenderTextureEffect {
         var operation:{ var effect:RenderEffect; var runner:WgpuRenderEffectRunner; } = flighthq._internal._StaticIndex.readArray(operations, index);
         var remaining:Float = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
         var output:RenderTexture = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
-        writeWgpuRenderTextureTarget((cast state), (cast output), (cast function(target:WgpuRenderTarget):Void {
-          (cast operation : { var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }).runner((cast { state: state, source: current, dest: target, pool: (cast pool : WgpuRenderTexturePool).effectTargets, sceneDepthTexture: null, sceneVelocityTexture: null }), (cast (cast operation : { var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }).effect));
-        }));
-        (current = cast ((cast getWgpuRenderTextureTarget((cast state), (cast output)) : Null<WgpuRenderTarget>) : Dynamic));
+        writeWgpuRenderTextureTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = output; __callArgument4; }), (cast function(target:WgpuRenderTarget):Void {
+          (cast operation : { var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }).runner(({ final __callArgument5:Dynamic = { state: state, source: current, dest: target, pool: (cast pool : WgpuRenderTexturePool).effectTargets, sceneDepthTexture: null, sceneVelocityTexture: null }; __callArgument5; }), (cast operation : { var effect:RenderEffect; var runner:WgpuRenderEffectRunner; }).effect);
+        } : Dynamic));
+        (current = cast ((cast getWgpuRenderTextureTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = output; __callArgument7; })) : Null<WgpuRenderTarget>) : Dynamic));
         index++;
       }
     }

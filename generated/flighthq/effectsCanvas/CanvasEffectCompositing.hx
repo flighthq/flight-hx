@@ -22,7 +22,7 @@ class CanvasEffectCompositing {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast clampedSamples : Float)) : Bool)) {
         flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
-        perSampleTransform((cast ctx), (cast i : Float), (cast clampedSamples : Float));
+        perSampleTransform(({ final __callArgument0:Dynamic = ctx; __callArgument0; }), (cast i : Float), (cast clampedSamples : Float));
         flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
         flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
         i++;
@@ -63,7 +63,7 @@ class CanvasEffectCompositing {
     imageData = flighthq._internal.backend.Canvas2dBackend.call(srcCtx, 'getImageData', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
     data = (cast imageData : flighthq._internal.dom.ImageData).data;
     pixelCount = (w * h);
-    transform((cast data), (cast pixelCount : Float));
+    transform(({ final __callArgument1:Dynamic = data; __callArgument1; }), (cast pixelCount : Float));
     dstCtx = _Runtime.field(dest, 'context');
     flighthq._internal.backend.Canvas2dBackend.call(dstCtx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(dstCtx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
@@ -77,6 +77,6 @@ class CanvasEffectCompositing {
 
   @:noCompletion
   public static function passthroughCanvasEffectPass(dest:CanvasRenderTarget, source:CanvasRenderTarget):Void {
-    drawCanvasEffectPass((cast dest), (cast source), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    drawCanvasEffectPass(({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 }

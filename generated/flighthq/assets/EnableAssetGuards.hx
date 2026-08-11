@@ -18,17 +18,17 @@ class EnableAssetGuards {
   }
 
   public static function disableAssetGuards(library:AssetLibrary):Void {
-    setAssetAcquireGuard((cast library), (cast null));
+    setAssetAcquireGuard(({ final __callArgument0:Dynamic = library; __callArgument0; }), (cast null : Dynamic));
   }
 
   public static function enableAssetGuards(library:AssetLibrary):Void {
-    setAssetAcquireGuard((cast library), (cast EnableAssetGuards.warnOnAssetAcquireFailure__enableAssetGuards));
+    setAssetAcquireGuard(({ final __callArgument1:Dynamic = library; __callArgument1; }), (cast EnableAssetGuards.warnOnAssetAcquireFailure__enableAssetGuards : Dynamic));
   }
 
   public static function warnOnAssetAcquireFailure__enableAssetGuards(_library:AssetLibrary, explanation:AssetLoadExplanation):Void {
     var message:String = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'missing-descriptor') : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'missing-loader') : Bool)) : Bool)) { return; }
     message = ((cast _Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'missing-descriptor') : Bool) ? (cast 'acquireAsset: no descriptor is registered for id "' + Std.string(_Runtime.field(explanation, 'id')) + '"; call registerAssetDescriptor or registerAssetManifest before acquiring it.' : Dynamic) : (cast 'acquireAsset: no loader is registered for type "' + Std.string(_Runtime.field(explanation, 'type')) + '"; call registerAssetLoader before acquiring "' + Std.string(_Runtime.field(explanation, 'id')) + '".' : Dynamic));
-    (cast logOnce((cast 'assets:acquire:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.coalesce(_Runtime.field(explanation, 'type'), function():Dynamic return cast '')) + ':' + Std.string(_Runtime.field(explanation, 'id')) + '' : String), (cast LogLevel.Warn), (cast _Runtime.mergeObjects([explanation, { message: message }])), (cast 'assets')) : Bool);
+    (cast logOnce((cast 'assets:acquire:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.coalesce(_Runtime.field(explanation, 'type'), function():Dynamic return cast '')) + ':' + Std.string(_Runtime.field(explanation, 'id')) + '' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast _Runtime.mergeObjects([explanation, { message: message }]) : Dynamic), ({ final __callArgument3:Dynamic = 'assets'; __callArgument3; })) : Bool);
   }
 }

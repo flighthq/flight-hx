@@ -17,7 +17,7 @@ class BitmapFontJson {
     var record:Null<BitmapFontRecord> = cast _Runtime.UNDEFINED;
     record = (cast BitmapFontJson.parseBitmapFontJsonRecord__bitmapFontJson((cast text : String)) : Null<BitmapFontRecord>);
     if ((cast _Runtime.strictEquals(record, null) : Bool)) { return cast null; }
-    return cast (cast buildBitmapFontFromRecord((cast record), (cast options)) : Null<BitmapFont>);
+    return cast (cast buildBitmapFontFromRecord(({ final __callArgument0:Dynamic = record; __callArgument0; }), ({ final __callArgument1:Dynamic = options; __callArgument1; })) : Null<BitmapFont>);
     return cast null;
   }
 

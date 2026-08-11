@@ -10,11 +10,11 @@ import flighthq.types.ShapeRasterizer;
 
 class DomShapeRasterizer {
   public static function getDomShapeRasterizer(state:DomRenderState):Null<ShapeRasterizer> {
-    return cast _Runtime.coalesce((cast (cast getDomRenderStateRuntime((cast state)) : DomRenderStateRuntime) : DomRenderStateRuntime).shapeRasterizer, function():Dynamic return cast null);
+    return cast _Runtime.coalesce((cast (cast getDomRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : DomRenderStateRuntime) : DomRenderStateRuntime).shapeRasterizer, function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerDomShapeRasterizer(state:DomRenderState, rasterizer:Null<ShapeRasterizer>):Void {
-    ((cast (cast getDomRenderStateRuntime((cast state)) : DomRenderStateRuntime) : { @:optional var shapeRasterizer:Null<ShapeRasterizer>; }).shapeRasterizer = rasterizer);
+    ((cast (cast getDomRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : DomRenderStateRuntime) : { @:optional var shapeRasterizer:Null<ShapeRasterizer>; }).shapeRasterizer = rasterizer);
   }
 }

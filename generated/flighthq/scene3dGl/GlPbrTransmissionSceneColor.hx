@@ -10,6 +10,6 @@ import flighthq.types.GlScene3DRuntime;
 
 class GlPbrTransmissionSceneColor {
   public static function setGlPbrTransmissionSceneColor(state:GlRenderState, sceneColor:Null<flighthq.types.GlPbrTransmissionSceneColor>):Void {
-    ((cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).pbrTransmissionSceneColor = sceneColor);
+    ((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : GlScene3DRuntime).pbrTransmissionSceneColor = sceneColor);
   }
 }

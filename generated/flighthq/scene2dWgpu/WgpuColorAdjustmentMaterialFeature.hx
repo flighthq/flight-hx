@@ -25,8 +25,8 @@ typedef ColorAdjustmentData__wgpuColorAdjustmentMaterialFeature = flighthq._inte
 class WgpuColorAdjustmentMaterialFeature {
   public static function registerWgpuColorAdjustmentMaterialFeature(state:WgpuRenderState):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    enableColorAdjustments((cast state));
-    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    enableColorAdjustments(({ final __callArgument0:Dynamic = state; __callArgument0; }));
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime);
     ((cast runtime : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeature = WgpuColorAdjustmentMaterialFeature.wgpuColorAdjustmentMaterialFeature__wgpuColorAdjustmentMaterialFeature);
     if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorScaleBiasMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorScaleBiasMode = WgpuColorAdjustmentMaterialFeature.CT_MODE_NONE__wgpuColorAdjustmentMaterialFeature); }
   }
@@ -55,7 +55,7 @@ class WgpuColorAdjustmentMaterialFeature {
     mode = _Runtime.coalesce((cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorScaleBiasMode, function():Dynamic return cast WgpuColorAdjustmentMaterialFeature.CT_MODE_NONE__wgpuColorAdjustmentMaterialFeature);
     tint = _Runtime.coalesce(colorScaleBias, function():Dynamic return cast null);
     if ((cast _Runtime.strictEquals(mode, WgpuColorAdjustmentMaterialFeature.CT_MODE_MATRIX__wgpuColorAdjustmentMaterialFeature) : Bool)) {
-      WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast tint), (cast instanceIndex : Float));
+      WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument2:Dynamic = runtime; __callArgument2; }), ({ final __callArgument3:Dynamic = tint; __callArgument3; }), (cast instanceIndex : Float));
       return;
     }
     if ((cast _Runtime.strictEquals(mode, WgpuColorAdjustmentMaterialFeature.CT_MODE_NONE__wgpuColorAdjustmentMaterialFeature) : Bool)) {
@@ -65,82 +65,82 @@ class WgpuColorAdjustmentMaterialFeature {
         ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterUniformColorScaleBias = tint);
         return;
       }
-      if ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature((cast tint)) : Bool) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.promoteWgpuQuadBatchWriterColorScaleBiasToMatrix__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast instanceIndex : Float), (cast null));
-        WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast tint), (cast instanceIndex : Float));
+      if ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument4:Dynamic = tint; __callArgument4; })) : Bool) : Bool)) {
+        WgpuColorAdjustmentMaterialFeature.promoteWgpuQuadBatchWriterColorScaleBiasToMatrix__wgpuColorAdjustmentMaterialFeature(({ final __callArgument5:Dynamic = runtime; __callArgument5; }), (cast instanceIndex : Float), ({ final __callArgument6:Dynamic = null; __callArgument6; }));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument7:Dynamic = runtime; __callArgument7; }), ({ final __callArgument8:Dynamic = tint; __callArgument8; }), (cast instanceIndex : Float));
         return;
       }
-      var packedTint:Null<Float> = (cast WgpuColorAdjustmentMaterialFeature.getPackedTint__wgpuColorAdjustmentMaterialFeature((cast tint)) : Null<Float>);
+      var packedTint:Null<Float> = (cast WgpuColorAdjustmentMaterialFeature.getPackedTint__wgpuColorAdjustmentMaterialFeature(({ final __callArgument9:Dynamic = tint; __callArgument9; })) : Null<Float>);
       if ((cast !_Runtime.strictEquals(packedTint, null) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.promoteWgpuQuadBatchWriterColorScaleBiasToPackedTint__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast instanceIndex : Float), (cast null));
-        WgpuColorAdjustmentMaterialFeature.writeWgpuPackedTintInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast packedTint : Float), (cast instanceIndex : Float));
+        WgpuColorAdjustmentMaterialFeature.promoteWgpuQuadBatchWriterColorScaleBiasToPackedTint__wgpuColorAdjustmentMaterialFeature(({ final __callArgument10:Dynamic = runtime; __callArgument10; }), (cast instanceIndex : Float), ({ final __callArgument11:Dynamic = null; __callArgument11; }));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuPackedTintInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument12:Dynamic = runtime; __callArgument12; }), (cast packedTint : Float), (cast instanceIndex : Float));
       } else {
-        WgpuColorAdjustmentMaterialFeature.promoteWgpuQuadBatchWriterColorScaleBiasToPerInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast instanceIndex : Float), (cast null));
-        WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast tint), (cast instanceIndex : Float));
+        WgpuColorAdjustmentMaterialFeature.promoteWgpuQuadBatchWriterColorScaleBiasToPerInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument13:Dynamic = runtime; __callArgument13; }), (cast instanceIndex : Float), ({ final __callArgument14:Dynamic = null; __callArgument14; }));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument15:Dynamic = runtime; __callArgument15; }), ({ final __callArgument16:Dynamic = tint; __callArgument16; }), (cast instanceIndex : Float));
       }
       return;
     }
     if ((cast _Runtime.strictEquals(mode, WgpuColorAdjustmentMaterialFeature.CT_MODE_UNIFORM__wgpuColorAdjustmentMaterialFeature) : Bool)) {
       var uniform:Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>> = _Runtime.coalesce((cast runtime : WgpuRenderStateRuntime).quadBatchWriterUniformColorScaleBias, function():Dynamic return cast null);
-      if ((cast (cast WgpuColorAdjustmentMaterialFeature.equalsRecordedColorScaleBias__wgpuColorAdjustmentMaterialFeature((cast tint), (cast uniform)) : Bool) : Bool)) { return; }
-      if ((cast ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature((cast tint)) : Bool) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(uniform, null), function():Dynamic return cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature((cast uniform)) : Bool)) : Bool)) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.promoteWgpuQuadBatchWriterColorScaleBiasToMatrix__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast instanceIndex : Float), (cast uniform));
-        WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast tint), (cast instanceIndex : Float));
+      if ((cast (cast WgpuColorAdjustmentMaterialFeature.equalsRecordedColorScaleBias__wgpuColorAdjustmentMaterialFeature(({ final __callArgument17:Dynamic = tint; __callArgument17; }), ({ final __callArgument18:Dynamic = uniform; __callArgument18; })) : Bool) : Bool)) { return; }
+      if ((cast ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument19:Dynamic = tint; __callArgument19; })) : Bool) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(uniform, null), function():Dynamic return cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument20:Dynamic = uniform; __callArgument20; })) : Bool)) : Bool)) : Bool)) {
+        WgpuColorAdjustmentMaterialFeature.promoteWgpuQuadBatchWriterColorScaleBiasToMatrix__wgpuColorAdjustmentMaterialFeature(({ final __callArgument21:Dynamic = runtime; __callArgument21; }), (cast instanceIndex : Float), ({ final __callArgument22:Dynamic = uniform; __callArgument22; }));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument23:Dynamic = runtime; __callArgument23; }), ({ final __callArgument24:Dynamic = tint; __callArgument24; }), (cast instanceIndex : Float));
         return;
       }
-      var packedTint:Null<Float> = (cast WgpuColorAdjustmentMaterialFeature.getPackedTint__wgpuColorAdjustmentMaterialFeature((cast tint)) : Null<Float>);
-      if ((cast ((cast !_Runtime.strictEquals((cast WgpuColorAdjustmentMaterialFeature.getPackedTint__wgpuColorAdjustmentMaterialFeature((cast uniform)) : Null<Float>), null) : Bool) && (cast !_Runtime.strictEquals(packedTint, null) : Bool)) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.promoteWgpuQuadBatchWriterColorScaleBiasToPackedTint__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast instanceIndex : Float), (cast uniform));
-        WgpuColorAdjustmentMaterialFeature.writeWgpuPackedTintInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast packedTint : Float), (cast instanceIndex : Float));
+      var packedTint:Null<Float> = (cast WgpuColorAdjustmentMaterialFeature.getPackedTint__wgpuColorAdjustmentMaterialFeature(({ final __callArgument25:Dynamic = tint; __callArgument25; })) : Null<Float>);
+      if ((cast ((cast !_Runtime.strictEquals((cast WgpuColorAdjustmentMaterialFeature.getPackedTint__wgpuColorAdjustmentMaterialFeature(({ final __callArgument26:Dynamic = uniform; __callArgument26; })) : Null<Float>), null) : Bool) && (cast !_Runtime.strictEquals(packedTint, null) : Bool)) : Bool)) {
+        WgpuColorAdjustmentMaterialFeature.promoteWgpuQuadBatchWriterColorScaleBiasToPackedTint__wgpuColorAdjustmentMaterialFeature(({ final __callArgument27:Dynamic = runtime; __callArgument27; }), (cast instanceIndex : Float), ({ final __callArgument28:Dynamic = uniform; __callArgument28; }));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuPackedTintInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument29:Dynamic = runtime; __callArgument29; }), (cast packedTint : Float), (cast instanceIndex : Float));
       } else {
-        WgpuColorAdjustmentMaterialFeature.promoteWgpuQuadBatchWriterColorScaleBiasToPerInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast instanceIndex : Float), (cast uniform));
-        WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast tint), (cast instanceIndex : Float));
+        WgpuColorAdjustmentMaterialFeature.promoteWgpuQuadBatchWriterColorScaleBiasToPerInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument30:Dynamic = runtime; __callArgument30; }), (cast instanceIndex : Float), ({ final __callArgument31:Dynamic = uniform; __callArgument31; }));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument32:Dynamic = runtime; __callArgument32; }), ({ final __callArgument33:Dynamic = tint; __callArgument33; }), (cast instanceIndex : Float));
       }
       return;
     }
     if ((cast _Runtime.strictEquals(mode, WgpuColorAdjustmentMaterialFeature.CT_MODE_PACKED_TINT__wgpuColorAdjustmentMaterialFeature) : Bool)) {
-      if ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature((cast tint)) : Bool) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.promoteWgpuPackedTintToColorMatrix__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast instanceIndex : Float));
-        WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast tint), (cast instanceIndex : Float));
+      if ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument34:Dynamic = tint; __callArgument34; })) : Bool) : Bool)) {
+        WgpuColorAdjustmentMaterialFeature.promoteWgpuPackedTintToColorMatrix__wgpuColorAdjustmentMaterialFeature(({ final __callArgument35:Dynamic = runtime; __callArgument35; }), (cast instanceIndex : Float));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument36:Dynamic = runtime; __callArgument36; }), ({ final __callArgument37:Dynamic = tint; __callArgument37; }), (cast instanceIndex : Float));
         return;
       }
-      var packedTint:Null<Float> = (cast WgpuColorAdjustmentMaterialFeature.getPackedTint__wgpuColorAdjustmentMaterialFeature((cast tint)) : Null<Float>);
+      var packedTint:Null<Float> = (cast WgpuColorAdjustmentMaterialFeature.getPackedTint__wgpuColorAdjustmentMaterialFeature(({ final __callArgument38:Dynamic = tint; __callArgument38; })) : Null<Float>);
       if ((cast !_Runtime.strictEquals(packedTint, null) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.writeWgpuPackedTintInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast packedTint : Float), (cast instanceIndex : Float));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuPackedTintInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument39:Dynamic = runtime; __callArgument39; }), (cast packedTint : Float), (cast instanceIndex : Float));
       } else {
-        WgpuColorAdjustmentMaterialFeature.promoteWgpuPackedTintToColorScaleBias__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast instanceIndex : Float));
-        WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast tint), (cast instanceIndex : Float));
+        WgpuColorAdjustmentMaterialFeature.promoteWgpuPackedTintToColorScaleBias__wgpuColorAdjustmentMaterialFeature(({ final __callArgument40:Dynamic = runtime; __callArgument40; }), (cast instanceIndex : Float));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument41:Dynamic = runtime; __callArgument41; }), ({ final __callArgument42:Dynamic = tint; __callArgument42; }), (cast instanceIndex : Float));
       }
       return;
     }
-    if ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature((cast tint)) : Bool) : Bool)) {
-      WgpuColorAdjustmentMaterialFeature.promoteWgpuColorScaleBiasToMatrix__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast instanceIndex : Float));
-      WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast tint), (cast instanceIndex : Float));
+    if ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument43:Dynamic = tint; __callArgument43; })) : Bool) : Bool)) {
+      WgpuColorAdjustmentMaterialFeature.promoteWgpuColorScaleBiasToMatrix__wgpuColorAdjustmentMaterialFeature(({ final __callArgument44:Dynamic = runtime; __callArgument44; }), (cast instanceIndex : Float));
+      WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument45:Dynamic = runtime; __callArgument45; }), ({ final __callArgument46:Dynamic = tint; __callArgument46; }), (cast instanceIndex : Float));
       return;
     }
-    WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast tint), (cast instanceIndex : Float));
+    WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument47:Dynamic = runtime; __callArgument47; }), ({ final __callArgument48:Dynamic = tint; __callArgument48; }), (cast instanceIndex : Float));
   }
 
   public static function resolveWgpuColorAdjustmentFlush__wgpuColorAdjustmentMaterialFeature(state:WgpuRenderState, count:Float):Null<WgpuColorAdjustmentFlush> {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var ctMode:Float = cast _Runtime.UNDEFINED;
     var resolvedMode:Null<Float> = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument49:Dynamic = state; __callArgument49; })) : WgpuRenderStateRuntime);
     ctMode = _Runtime.coalesce((cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorScaleBiasMode, function():Dynamic return cast WgpuColorAdjustmentMaterialFeature.CT_MODE_NONE__wgpuColorAdjustmentMaterialFeature);
     if ((cast _Runtime.strictEquals(ctMode, WgpuColorAdjustmentMaterialFeature.CT_MODE_NONE__wgpuColorAdjustmentMaterialFeature) : Bool)) { return cast null; }
     if ((cast _Runtime.strictEquals(ctMode, WgpuColorAdjustmentMaterialFeature.CT_MODE_UNIFORM__wgpuColorAdjustmentMaterialFeature) : Bool)) {
       var uniform:flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData> = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterUniformColorScaleBias;
-      if ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature((cast uniform)) : Bool) : Bool)) {
+      if ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument50:Dynamic = uniform; __callArgument50; })) : Bool) : Bool)) {
         ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorScaleBiasMode = WgpuColorAdjustmentMaterialFeature.CT_MODE_MATRIX__wgpuColorAdjustmentMaterialFeature);
-        WgpuColorAdjustmentMaterialFeature.fillWgpuQuadBatchWriterUniformColorMatrix__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast uniform), (cast count : Float));
+        WgpuColorAdjustmentMaterialFeature.fillWgpuQuadBatchWriterUniformColorMatrix__wgpuColorAdjustmentMaterialFeature(({ final __callArgument51:Dynamic = runtime; __callArgument51; }), ({ final __callArgument52:Dynamic = uniform; __callArgument52; }), (cast count : Float));
       } else {
-        var packedTint:Null<Float> = (cast WgpuColorAdjustmentMaterialFeature.getPackedTint__wgpuColorAdjustmentMaterialFeature((cast uniform)) : Null<Float>);
+        var packedTint:Null<Float> = (cast WgpuColorAdjustmentMaterialFeature.getPackedTint__wgpuColorAdjustmentMaterialFeature(({ final __callArgument53:Dynamic = uniform; __callArgument53; })) : Null<Float>);
         if ((cast !_Runtime.strictEquals(packedTint, null) : Bool)) {
           ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorScaleBiasMode = WgpuColorAdjustmentMaterialFeature.CT_MODE_PACKED_TINT__wgpuColorAdjustmentMaterialFeature);
-          WgpuColorAdjustmentMaterialFeature.fillWgpuQuadBatchWriterUniformPackedTint__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast packedTint : Float), (cast count : Float));
+          WgpuColorAdjustmentMaterialFeature.fillWgpuQuadBatchWriterUniformPackedTint__wgpuColorAdjustmentMaterialFeature(({ final __callArgument54:Dynamic = runtime; __callArgument54; }), (cast packedTint : Float), (cast count : Float));
         } else {
           ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorScaleBiasMode = WgpuColorAdjustmentMaterialFeature.CT_MODE_PER_INSTANCE__wgpuColorAdjustmentMaterialFeature);
-          WgpuColorAdjustmentMaterialFeature.fillWgpuQuadBatchWriterUniformColorScaleBias__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast uniform), (cast count : Float));
+          WgpuColorAdjustmentMaterialFeature.fillWgpuQuadBatchWriterUniformColorScaleBias__wgpuColorAdjustmentMaterialFeature(({ final __callArgument55:Dynamic = runtime; __callArgument55; }), ({ final __callArgument56:Dynamic = uniform; __callArgument56; }), (cast count : Float));
         }
       }
     }
@@ -148,20 +148,20 @@ class WgpuColorAdjustmentMaterialFeature {
     ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorScaleBiasMode = WgpuColorAdjustmentMaterialFeature.CT_MODE_NONE__wgpuColorAdjustmentMaterialFeature);
     ((cast runtime : WgpuRenderStateRuntime).quadBatchWriterUniformColorScaleBias = null);
     if ((cast _Runtime.strictEquals(resolvedMode, WgpuColorAdjustmentMaterialFeature.CT_MODE_PACKED_TINT__wgpuColorAdjustmentMaterialFeature) : Bool)) {
-      return cast { data: (cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorTintData, floats: 1.0, module: (cast WgpuColorAdjustmentMaterialFeature.getWgpuQuadBatchWriterPackedTintModule__wgpuColorAdjustmentMaterialFeature((cast state)) : flighthq._internal.dom.GPUShaderModule) };
+      return cast { data: (cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorTintData, floats: 1.0, module: (cast WgpuColorAdjustmentMaterialFeature.getWgpuQuadBatchWriterPackedTintModule__wgpuColorAdjustmentMaterialFeature(({ final __callArgument57:Dynamic = state; __callArgument57; })) : flighthq._internal.dom.GPUShaderModule) };
     }
     if ((cast _Runtime.strictEquals(resolvedMode, WgpuColorAdjustmentMaterialFeature.CT_MODE_MATRIX__wgpuColorAdjustmentMaterialFeature) : Bool)) {
-      return cast { data: (cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorMatrixData, floats: WgpuColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__wgpuColorAdjustmentMaterialFeature, module: (cast WgpuColorAdjustmentMaterialFeature.getWgpuQuadBatchWriterColorMatrixModule__wgpuColorAdjustmentMaterialFeature((cast state)) : flighthq._internal.dom.GPUShaderModule) };
+      return cast { data: (cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorMatrixData, floats: WgpuColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__wgpuColorAdjustmentMaterialFeature, module: (cast WgpuColorAdjustmentMaterialFeature.getWgpuQuadBatchWriterColorMatrixModule__wgpuColorAdjustmentMaterialFeature(({ final __callArgument58:Dynamic = state; __callArgument58; })) : flighthq._internal.dom.GPUShaderModule) };
     }
-    return cast { data: (cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorScaleBiasData, floats: WgpuColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__wgpuColorAdjustmentMaterialFeature, module: (cast WgpuColorAdjustmentMaterialFeature.getWgpuQuadBatchWriterColorScaleBiasModule__wgpuColorAdjustmentMaterialFeature((cast state)) : flighthq._internal.dom.GPUShaderModule) };
+    return cast { data: (cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorScaleBiasData, floats: WgpuColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__wgpuColorAdjustmentMaterialFeature, module: (cast WgpuColorAdjustmentMaterialFeature.getWgpuQuadBatchWriterColorScaleBiasModule__wgpuColorAdjustmentMaterialFeature(({ final __callArgument59:Dynamic = state; __callArgument59; })) : flighthq._internal.dom.GPUShaderModule) };
     return cast null;
   }
 
   public static function equalsRecordedColorScaleBias__wgpuColorAdjustmentMaterialFeature(a:Null<ColorAdjustmentData__wgpuColorAdjustmentMaterialFeature>, b:Null<ColorAdjustmentData__wgpuColorAdjustmentMaterialFeature>):Bool {
     if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
     if ((cast ((cast _Runtime.strictEquals(a, null) : Bool) || (cast _Runtime.strictEquals(b, null) : Bool)) : Bool)) { return cast false; }
-    if ((cast ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature((cast a)) : Bool) : Bool) || (cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature((cast b)) : Bool) : Bool)) : Bool)) {
-      if ((cast ((cast !(cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature((cast a)) : Bool) : Bool) : Bool) || (cast !(cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature((cast b)) : Bool) : Bool) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument60:Dynamic = a; __callArgument60; })) : Bool) : Bool) || (cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument61:Dynamic = b; __callArgument61; })) : Bool) : Bool)) : Bool)) {
+      if ((cast ((cast !(cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument62:Dynamic = a; __callArgument62; })) : Bool) : Bool) : Bool) || (cast !(cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument63:Dynamic = b; __callArgument63; })) : Bool) : Bool) : Bool)) : Bool)) { return cast false; }
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast WgpuColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__wgpuColorAdjustmentMaterialFeature : Float)) : Bool)) {
@@ -174,7 +174,7 @@ class WgpuColorAdjustmentMaterialFeature {
     {
       var channel:Float = 0.0;
       while ((cast ((cast channel : Float) < (cast 4.0 : Float)) : Bool)) {
-        if ((cast ((cast !_Runtime.strictEquals((cast WgpuColorAdjustmentMaterialFeature.getColorScale__wgpuColorAdjustmentMaterialFeature((cast a), (cast channel : Float)) : Float), (cast WgpuColorAdjustmentMaterialFeature.getColorScale__wgpuColorAdjustmentMaterialFeature((cast b), (cast channel : Float)) : Float)) : Bool) || (cast !_Runtime.strictEquals((cast WgpuColorAdjustmentMaterialFeature.getColorBias__wgpuColorAdjustmentMaterialFeature((cast a), (cast channel : Float)) : Float), (cast WgpuColorAdjustmentMaterialFeature.getColorBias__wgpuColorAdjustmentMaterialFeature((cast b), (cast channel : Float)) : Float)) : Bool)) : Bool)) {
+        if ((cast ((cast !_Runtime.strictEquals((cast WgpuColorAdjustmentMaterialFeature.getColorScale__wgpuColorAdjustmentMaterialFeature(({ final __callArgument64:Dynamic = a; __callArgument64; }), (cast channel : Float)) : Float), (cast WgpuColorAdjustmentMaterialFeature.getColorScale__wgpuColorAdjustmentMaterialFeature(({ final __callArgument65:Dynamic = b; __callArgument65; }), (cast channel : Float)) : Float)) : Bool) || (cast !_Runtime.strictEquals((cast WgpuColorAdjustmentMaterialFeature.getColorBias__wgpuColorAdjustmentMaterialFeature(({ final __callArgument66:Dynamic = a; __callArgument66; }), (cast channel : Float)) : Float), (cast WgpuColorAdjustmentMaterialFeature.getColorBias__wgpuColorAdjustmentMaterialFeature(({ final __callArgument67:Dynamic = b; __callArgument67; }), (cast channel : Float)) : Float)) : Bool)) : Bool)) {
           return cast false;
         }
         channel++;
@@ -197,11 +197,11 @@ class WgpuColorAdjustmentMaterialFeature {
   }
 
   public static function fillWgpuQuadBatchWriterUniformColorScaleBias__wgpuColorAdjustmentMaterialFeature(runtime:WgpuRenderStateRuntime, colorScaleBias:flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, count:Float):Void {
-    WgpuColorAdjustmentMaterialFeature.ensureWgpuColorScaleBiasCapacity__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast (count * WgpuColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__wgpuColorAdjustmentMaterialFeature) : Float));
+    WgpuColorAdjustmentMaterialFeature.ensureWgpuColorScaleBiasCapacity__wgpuColorAdjustmentMaterialFeature(({ final __callArgument68:Dynamic = runtime; __callArgument68; }), (cast (count * WgpuColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__wgpuColorAdjustmentMaterialFeature) : Float));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast colorScaleBias), (cast i : Float));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument69:Dynamic = runtime; __callArgument69; }), ({ final __callArgument70:Dynamic = colorScaleBias; __callArgument70; }), (cast i : Float));
         i++;
       }
     }
@@ -211,7 +211,7 @@ class WgpuColorAdjustmentMaterialFeature {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.writeWgpuPackedTintInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast rgba : Float), (cast i : Float));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuPackedTintInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument71:Dynamic = runtime; __callArgument71; }), (cast rgba : Float), (cast i : Float));
         i++;
       }
     }
@@ -221,7 +221,7 @@ class WgpuColorAdjustmentMaterialFeature {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast matrix), (cast i : Float));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument72:Dynamic = runtime; __callArgument72; }), ({ final __callArgument73:Dynamic = matrix; __callArgument73; }), (cast i : Float));
         i++;
       }
     }
@@ -265,7 +265,7 @@ class WgpuColorAdjustmentMaterialFeature {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast fill), (cast i : Float));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument74:Dynamic = runtime; __callArgument74; }), ({ final __callArgument75:Dynamic = fill; __callArgument75; }), (cast i : Float));
         i++;
       }
     }
@@ -276,7 +276,7 @@ class WgpuColorAdjustmentMaterialFeature {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.writeWgpuPackedTintInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast (cast WgpuColorAdjustmentMaterialFeature.getPackedTint__wgpuColorAdjustmentMaterialFeature((cast fill)) : Null<Float>) : Float), (cast i : Float));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuPackedTintInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument76:Dynamic = runtime; __callArgument76; }), (cast (cast WgpuColorAdjustmentMaterialFeature.getPackedTint__wgpuColorAdjustmentMaterialFeature(({ final __callArgument77:Dynamic = fill; __callArgument77; })) : Null<Float>) : Float), (cast i : Float));
         i++;
       }
     }
@@ -289,7 +289,7 @@ class WgpuColorAdjustmentMaterialFeature {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.writeWgpuNativePackedTintAsColorScaleBias__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast flighthq._internal._StaticIndex.readUint32ArrayTyped((cast packed : flighthq._internal._UInt32Array), (cast i : Float)) : Float), (cast i : Float));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuNativePackedTintAsColorScaleBias__wgpuColorAdjustmentMaterialFeature(({ final __callArgument78:Dynamic = runtime; __callArgument78; }), (cast flighthq._internal._StaticIndex.readUint32ArrayTyped((cast packed : flighthq._internal._UInt32Array), (cast i : Float)) : Float), (cast i : Float));
         i++;
       }
     }
@@ -300,7 +300,7 @@ class WgpuColorAdjustmentMaterialFeature {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast fill), (cast i : Float));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument79:Dynamic = runtime; __callArgument79; }), ({ final __callArgument80:Dynamic = fill; __callArgument80; }), (cast i : Float));
         i++;
       }
     }
@@ -313,7 +313,7 @@ class WgpuColorAdjustmentMaterialFeature {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.writeWgpuNativePackedTintAsColorMatrix__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast flighthq._internal._StaticIndex.readUint32ArrayTyped((cast packed : flighthq._internal._UInt32Array), (cast i : Float)) : Float), (cast i : Float));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuNativePackedTintAsColorMatrix__wgpuColorAdjustmentMaterialFeature(({ final __callArgument81:Dynamic = runtime; __callArgument81; }), (cast flighthq._internal._StaticIndex.readUint32ArrayTyped((cast packed : flighthq._internal._UInt32Array), (cast i : Float)) : Float), (cast i : Float));
         i++;
       }
     }
@@ -326,7 +326,7 @@ class WgpuColorAdjustmentMaterialFeature {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
-        WgpuColorAdjustmentMaterialFeature.writeWgpuAffineValuesAsColorMatrix__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast affine), (cast (i * WgpuColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__wgpuColorAdjustmentMaterialFeature) : Float), (cast i : Float));
+        WgpuColorAdjustmentMaterialFeature.writeWgpuAffineValuesAsColorMatrix__wgpuColorAdjustmentMaterialFeature(({ final __callArgument82:Dynamic = runtime; __callArgument82; }), ({ final __callArgument83:Dynamic = affine; __callArgument83; }), (cast (i * WgpuColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__wgpuColorAdjustmentMaterialFeature) : Float), (cast i : Float));
         i++;
       }
     }
@@ -336,14 +336,14 @@ class WgpuColorAdjustmentMaterialFeature {
     var offset:Float = cast _Runtime.UNDEFINED;
     var out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     offset = (instanceIndex * WgpuColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__wgpuColorAdjustmentMaterialFeature);
-    WgpuColorAdjustmentMaterialFeature.ensureWgpuColorScaleBiasCapacity__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast (offset + WgpuColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__wgpuColorAdjustmentMaterialFeature) : Float));
+    WgpuColorAdjustmentMaterialFeature.ensureWgpuColorScaleBiasCapacity__wgpuColorAdjustmentMaterialFeature(({ final __callArgument84:Dynamic = runtime; __callArgument84; }), (cast (offset + WgpuColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__wgpuColorAdjustmentMaterialFeature) : Float));
     out = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorScaleBiasData;
     if ((cast !_Runtime.strictEquals(colorScaleBias, null) : Bool)) {
       {
         var channel:Float = 0.0;
         while ((cast ((cast channel : Float) < (cast 4.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + channel) : Float), (cast (cast WgpuColorAdjustmentMaterialFeature.getColorScale__wgpuColorAdjustmentMaterialFeature((cast colorScaleBias), (cast channel : Float)) : Float) : Float));
-          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((offset + 4.0) + channel) : Float), (cast (cast WgpuColorAdjustmentMaterialFeature.getColorBias__wgpuColorAdjustmentMaterialFeature((cast colorScaleBias), (cast channel : Float)) : Float) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + channel) : Float), (cast (cast WgpuColorAdjustmentMaterialFeature.getColorScale__wgpuColorAdjustmentMaterialFeature(({ final __callArgument85:Dynamic = colorScaleBias; __callArgument85; }), (cast channel : Float)) : Float) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((offset + 4.0) + channel) : Float), (cast (cast WgpuColorAdjustmentMaterialFeature.getColorBias__wgpuColorAdjustmentMaterialFeature(({ final __callArgument86:Dynamic = colorScaleBias; __callArgument86; }), (cast channel : Float)) : Float) : Float));
           channel++;
         }
       }
@@ -374,8 +374,8 @@ class WgpuColorAdjustmentMaterialFeature {
       (out = cast (grown : Dynamic));
     } }
     if ((cast _Runtime.strictEquals(adjustment, null) : Bool)) {
-      WgpuColorAdjustmentMaterialFeature.writeIdentityColorMatrix__wgpuColorAdjustmentMaterialFeature((cast out), (cast offset : Float));
-    } else { if ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature((cast adjustment)) : Bool) : Bool)) {
+      WgpuColorAdjustmentMaterialFeature.writeIdentityColorMatrix__wgpuColorAdjustmentMaterialFeature(({ final __callArgument87:Dynamic = out; __callArgument87; }), (cast offset : Float));
+    } else { if ((cast (cast WgpuColorAdjustmentMaterialFeature.isColorMatrixData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument88:Dynamic = adjustment; __callArgument88; })) : Bool) : Bool)) {
       {
         var row:Float = 0.0;
         while ((cast ((cast row : Float) < (cast 4.0 : Float)) : Bool)) {
@@ -390,12 +390,12 @@ class WgpuColorAdjustmentMaterialFeature {
         }
       }
     } else {
-      WgpuColorAdjustmentMaterialFeature.writeIdentityColorMatrix__wgpuColorAdjustmentMaterialFeature((cast out), (cast offset : Float));
+      WgpuColorAdjustmentMaterialFeature.writeIdentityColorMatrix__wgpuColorAdjustmentMaterialFeature(({ final __callArgument89:Dynamic = out; __callArgument89; }), (cast offset : Float));
       {
         var channel:Float = 0.0;
         while ((cast ((cast channel : Float) < (cast 4.0 : Float)) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((offset + (channel * 4.0)) + channel) : Float), (cast (cast WgpuColorAdjustmentMaterialFeature.getColorScale__wgpuColorAdjustmentMaterialFeature((cast adjustment), (cast channel : Float)) : Float) : Float));
-          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((offset + 16.0) + channel) : Float), (cast (cast WgpuColorAdjustmentMaterialFeature.getColorBias__wgpuColorAdjustmentMaterialFeature((cast adjustment), (cast channel : Float)) : Float) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((offset + (channel * 4.0)) + channel) : Float), (cast (cast WgpuColorAdjustmentMaterialFeature.getColorScale__wgpuColorAdjustmentMaterialFeature(({ final __callArgument90:Dynamic = adjustment; __callArgument90; }), (cast channel : Float)) : Float) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast ((offset + 16.0) + channel) : Float), (cast (cast WgpuColorAdjustmentMaterialFeature.getColorBias__wgpuColorAdjustmentMaterialFeature(({ final __callArgument91:Dynamic = adjustment; __callArgument91; }), (cast channel : Float)) : Float) : Float));
           channel++;
         }
       }
@@ -410,7 +410,7 @@ class WgpuColorAdjustmentMaterialFeature {
   public static function writeWgpuNativePackedTintAsColorMatrix__wgpuColorAdjustmentMaterialFeature(runtime:WgpuRenderStateRuntime, nativeWord:Float, instanceIndex:Float):Void {
     var out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var offset:Float = cast _Runtime.UNDEFINED;
-    WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast null), (cast instanceIndex : Float));
+    WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument92:Dynamic = runtime; __callArgument92; }), ({ final __callArgument93:Dynamic = null; __callArgument93; }), (cast instanceIndex : Float));
     out = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorMatrixData;
     offset = (instanceIndex * WgpuColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__wgpuColorAdjustmentMaterialFeature);
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast offset : Float), (cast ((_Runtime.toInt32(nativeWord) & 255) / 255.0) : Float));
@@ -422,7 +422,7 @@ class WgpuColorAdjustmentMaterialFeature {
   public static function writeWgpuAffineValuesAsColorMatrix__wgpuColorAdjustmentMaterialFeature(runtime:WgpuRenderStateRuntime, affine:flighthq._internal._Float32Array, affineOffset:Float, instanceIndex:Float):Void {
     var out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var offset:Float = cast _Runtime.UNDEFINED;
-    WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast null), (cast instanceIndex : Float));
+    WgpuColorAdjustmentMaterialFeature.writeWgpuColorMatrixInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument94:Dynamic = runtime; __callArgument94; }), ({ final __callArgument95:Dynamic = null; __callArgument95; }), (cast instanceIndex : Float));
     out = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorMatrixData;
     offset = (instanceIndex * WgpuColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__wgpuColorAdjustmentMaterialFeature);
     {
@@ -454,7 +454,7 @@ class WgpuColorAdjustmentMaterialFeature {
     var offset:Float = cast _Runtime.UNDEFINED;
     var data:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     offset = (instanceIndex * WgpuColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__wgpuColorAdjustmentMaterialFeature);
-    WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature((cast runtime), (cast null), (cast instanceIndex : Float));
+    WgpuColorAdjustmentMaterialFeature.writeWgpuColorScaleBiasInstance__wgpuColorAdjustmentMaterialFeature(({ final __callArgument96:Dynamic = runtime; __callArgument96; }), ({ final __callArgument97:Dynamic = null; __callArgument97; }), (cast instanceIndex : Float));
     data = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterColorScaleBiasData;
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast offset : Float), (cast ((_Runtime.toInt32(nativeWord) & 255) / 255.0) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 8)) & 255) / 255.0) : Float));
@@ -464,7 +464,7 @@ class WgpuColorAdjustmentMaterialFeature {
 
   public static function getPackedTint__wgpuColorAdjustmentMaterialFeature(value:Null<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>>):Null<Float> {
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast 4294967295.0; }
-    if ((cast (cast WgpuColorAdjustmentMaterialFeature.isTintMaterialData__wgpuColorAdjustmentMaterialFeature((cast value)) : Bool) : Bool)) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(value, 'tint')), 0); }
+    if ((cast (cast WgpuColorAdjustmentMaterialFeature.isTintMaterialData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument98:Dynamic = value; __callArgument98; })) : Bool) : Bool)) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(value, 'tint')), 0); }
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(value, 'redBias'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(value, 'greenBias'), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(value, 'blueBias'), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(value, 'alphaBias'), 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'redScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'redScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'greenScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'greenScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'blueScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'blueScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'alphaScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'alphaScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) {
       return cast null;
     }
@@ -488,7 +488,7 @@ class WgpuColorAdjustmentMaterialFeature {
   }
 
   public static function getColorScale__wgpuColorAdjustmentMaterialFeature(value:flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, channel:Float):Float {
-    if ((cast (cast WgpuColorAdjustmentMaterialFeature.isTintMaterialData__wgpuColorAdjustmentMaterialFeature((cast value)) : Bool) : Bool)) { return cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(value, 'tint')), _Runtime.toInt32((24.0 - (channel * 8.0))))) & 255) / 255.0); }
+    if ((cast (cast WgpuColorAdjustmentMaterialFeature.isTintMaterialData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument99:Dynamic = value; __callArgument99; })) : Bool) : Bool)) { return cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(value, 'tint')), _Runtime.toInt32((24.0 - (channel * 8.0))))) & 255) / 255.0); }
     if ((cast _Runtime.strictEquals(channel, 0.0) : Bool)) { return cast _Runtime.field(value, 'redScale'); }
     if ((cast _Runtime.strictEquals(channel, 1.0) : Bool)) { return cast _Runtime.field(value, 'greenScale'); }
     if ((cast _Runtime.strictEquals(channel, 2.0) : Bool)) { return cast _Runtime.field(value, 'blueScale'); }
@@ -497,7 +497,7 @@ class WgpuColorAdjustmentMaterialFeature {
   }
 
   public static function getColorBias__wgpuColorAdjustmentMaterialFeature(value:flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, channel:Float):Float {
-    if ((cast (cast WgpuColorAdjustmentMaterialFeature.isTintMaterialData__wgpuColorAdjustmentMaterialFeature((cast value)) : Bool) : Bool)) { return cast 0.0; }
+    if ((cast (cast WgpuColorAdjustmentMaterialFeature.isTintMaterialData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument100:Dynamic = value; __callArgument100; })) : Bool) : Bool)) { return cast 0.0; }
     if ((cast _Runtime.strictEquals(channel, 0.0) : Bool)) { return cast _Runtime.field(value, 'redBias'); }
     if ((cast _Runtime.strictEquals(channel, 1.0) : Bool)) { return cast _Runtime.field(value, 'greenBias'); }
     if ((cast _Runtime.strictEquals(channel, 2.0) : Bool)) { return cast _Runtime.field(value, 'blueBias'); }
@@ -518,7 +518,7 @@ class WgpuColorAdjustmentMaterialFeature {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 21.0 : Float), (cast (cast colorScaleBias : ColorScaleBias).greenBias : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 22.0 : Float), (cast (cast colorScaleBias : ColorScaleBias).blueBias : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 23.0 : Float), (cast (cast colorScaleBias : ColorScaleBias).alphaBias : Float));
-    drawWgpuShapeMeshBatch((cast state), (cast renderProxy), (cast meshes), (cast buffers), (cast (cast WgpuColorAdjustmentMaterialFeature.ensureWgpuShapeMeshColorScaleBiasPipeline__wgpuColorAdjustmentMaterialFeature((cast state), (cast (cast renderProxy : RenderProxy2D).blendMode)) : WgpuShapeMeshPipeline)), (cast (cast buffers : WgpuShapeMeshBuffers).colorScaleBiasUniformBuffers), (cast (cast buffers : WgpuShapeMeshBuffers).colorScaleBiasBindGroups), (cast uniform));
+    drawWgpuShapeMeshBatch(({ final __callArgument101:Dynamic = state; __callArgument101; }), ({ final __callArgument102:Dynamic = renderProxy; __callArgument102; }), ({ final __callArgument103:Dynamic = meshes; __callArgument103; }), ({ final __callArgument104:Dynamic = buffers; __callArgument104; }), (cast WgpuColorAdjustmentMaterialFeature.ensureWgpuShapeMeshColorScaleBiasPipeline__wgpuColorAdjustmentMaterialFeature(({ final __callArgument105:Dynamic = state; __callArgument105; }), (cast renderProxy : RenderProxy2D).blendMode) : WgpuShapeMeshPipeline), (cast buffers : WgpuShapeMeshBuffers).colorScaleBiasUniformBuffers, (cast buffers : WgpuShapeMeshBuffers).colorScaleBiasBindGroups, ({ final __callArgument106:Dynamic = uniform; __callArgument106; }));
   }
 
   public static function ensureWgpuShapeMeshColorScaleBiasPipeline__wgpuColorAdjustmentMaterialFeature(state:WgpuRenderState, blendMode:flighthq._internal._IndexedAccess<RenderProxy2D, String>):WgpuShapeMeshPipeline {
@@ -538,7 +538,7 @@ class WgpuColorAdjustmentMaterialFeature {
       (cache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast WgpuColorAdjustmentMaterialFeature._shapeMeshColorScaleBiasPipelines__wgpuColorAdjustmentMaterialFeature : flighthq._internal._WeakMap<flighthq._internal.dom.GPUDevice, flighthq._internal._Map<String, WgpuShapeMeshPipeline>>).set((cast state : WgpuRenderState).device, (cast cache)));
     }
-    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument107:Dynamic = state; __callArgument107; })) : WgpuRenderStateRuntime);
     format = _Runtime.coalesce((cast runtime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     key = '' + Std.string(format) + '|' + Std.string(_Runtime.coalesce(blendMode, function():Dynamic return cast 'null')) + '';
     existing = ((cast cache : flighthq._internal._Map<String, WgpuShapeMeshPipeline>).get(key));
@@ -547,7 +547,7 @@ class WgpuColorAdjustmentMaterialFeature {
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: WgpuColorAdjustmentMaterialFeature.SHAPE_MESH_COLOR_SCALE_BIAS_WGSL__wgpuColorAdjustmentMaterialFeature }] : Array<Dynamic>));
     bindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     layout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([bindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
-    pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main', buffers: cast ([{ arrayStride: 8.0, attributes: cast ([{ shaderLocation: 0.0, offset: 0.0, format: 'float32x2' }] : Array<Dynamic>) }] : Array<Dynamic>) }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: (cast getWgpuBlendState((cast blendMode)) : flighthq._internal.dom.GPUBlendState) }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list', cullMode: 'none' }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: { compare: 'equal', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' }, stencilBack: { compare: 'equal', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' }, stencilReadMask: 255.0, stencilWriteMask: 0.0 } }] : Array<Dynamic>));
+    pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main', buffers: cast ([{ arrayStride: 8.0, attributes: cast ([{ shaderLocation: 0.0, offset: 0.0, format: 'float32x2' }] : Array<Dynamic>) }] : Array<Dynamic>) }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: (cast getWgpuBlendState(({ final __callArgument108:Dynamic = blendMode; __callArgument108; })) : flighthq._internal.dom.GPUBlendState) }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list', cullMode: 'none' }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: { compare: 'equal', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' }, stencilBack: { compare: 'equal', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' }, stencilReadMask: 255.0, stencilWriteMask: 0.0 } }] : Array<Dynamic>));
     created = (cast { pipeline: pipeline, bindGroupLayout: bindGroupLayout });
     ((cast cache : flighthq._internal._Map<String, WgpuShapeMeshPipeline>).set(key, (cast created)));
     return cast created;

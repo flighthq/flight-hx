@@ -17,15 +17,15 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 
 class GlStandardMaterial {
   public static function registerGlStandardMaterial(state:GlRenderState):Void {
-    registerGlMaterialRenderer((cast state), (cast StandardMaterialKindValue : String), (cast standardGlMaterialRenderer));
+    registerGlMaterialRenderer(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast StandardMaterialKindValue : String), ({ final __callArgument1:Dynamic = standardGlMaterialRenderer; __callArgument1; }));
   }
 
   @:noCompletion
   public static final standardGlMaterialRenderer:GlMaterialRenderer = (cast { instanceFloatCount: 0.0, bind: function(state:GlRenderState, material:Null<Material>):Void {
     var shader:GlQuadBatchShader = cast _Runtime.UNDEFINED;
-    shader = (cast ensureGlQuadBatchShader((cast state)) : GlQuadBatchShader);
-    useGlQuadBatchProgram((cast state), (cast (cast shader : GlQuadBatchShader).program));
-    setGlQuadBatchWorldAndTexture((cast state), (cast (cast shader : GlQuadBatchShader).locWorldMatrix), (cast (cast shader : GlQuadBatchShader).locTexture), (cast (cast shader : GlQuadBatchShader).locStraightTextureAlpha));
-    bindGlQuadBatchBaseAttributes((cast state), (cast (cast shader : GlQuadBatchShader).locCorner : Float));
+    shader = (cast ensureGlQuadBatchShader(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlQuadBatchShader);
+    useGlQuadBatchProgram(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast shader : GlQuadBatchShader).program);
+    setGlQuadBatchWorldAndTexture(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast shader : GlQuadBatchShader).locWorldMatrix, (cast shader : GlQuadBatchShader).locTexture, ({ final __callArgument5:Dynamic = (cast shader : GlQuadBatchShader).locStraightTextureAlpha; __callArgument5; }));
+    bindGlQuadBatchBaseAttributes(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast (cast shader : GlQuadBatchShader).locCorner : Float));
   } });
 }

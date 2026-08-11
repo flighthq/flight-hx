@@ -37,15 +37,15 @@ class ResolveBidiLevels {
         i++;
       }
     }
-    paragraphLevel = ((cast _Runtime.strictEquals(baseDirection, 'ltr') : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(baseDirection, 'rtl') : Bool) ? (cast 1.0 : Dynamic) : (cast (cast ResolveBidiLevels.computeParagraphLevel__resolveBidiLevels((cast original), (cast 0.0 : Float), (cast length : Float)) : Float) : Dynamic)) : Dynamic));
+    paragraphLevel = ((cast _Runtime.strictEquals(baseDirection, 'ltr') : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(baseDirection, 'rtl') : Bool) ? (cast 1.0 : Dynamic) : (cast (cast ResolveBidiLevels.computeParagraphLevel__resolveBidiLevels(({ final __callArgument0:Dynamic = original; __callArgument0; }), (cast 0.0 : Float), (cast length : Float)) : Float) : Dynamic)) : Dynamic));
     matchingPdi = _Runtime.fill(new flighthq._internal._Int32Array(length), length, 0, null, 1);
     matchingInitiator = _Runtime.fill(new flighthq._internal._Int32Array(length), -1.0, 0, null, 1);
-    ResolveBidiLevels.pairIsolates__resolveBidiLevels((cast original), (cast matchingPdi), (cast matchingInitiator));
+    ResolveBidiLevels.pairIsolates__resolveBidiLevels(({ final __callArgument1:Dynamic = original; __callArgument1; }), ({ final __callArgument2:Dynamic = matchingPdi; __callArgument2; }), ({ final __callArgument3:Dynamic = matchingInitiator; __callArgument3; }));
     working = _Runtime.slice(original, 0, null);
     levelArray = _Runtime.createArray(length);
-    ResolveBidiLevels.applyExplicitLevels__resolveBidiLevels((cast original), (cast working), (cast levelArray), (cast matchingPdi), (cast paragraphLevel : Float));
-    ResolveBidiLevels.resolveIsolatingRunSequences__resolveBidiLevels((cast original), (cast working), (cast levelArray), (cast matchingPdi), (cast matchingInitiator), (cast paragraphLevel : Float));
-    ResolveBidiLevels.applyLineReset__resolveBidiLevels((cast original), (cast levelArray), (cast paragraphLevel : Float));
+    ResolveBidiLevels.applyExplicitLevels__resolveBidiLevels(({ final __callArgument4:Dynamic = original; __callArgument4; }), ({ final __callArgument5:Dynamic = working; __callArgument5; }), ({ final __callArgument6:Dynamic = levelArray; __callArgument6; }), ({ final __callArgument7:Dynamic = matchingPdi; __callArgument7; }), (cast paragraphLevel : Float));
+    ResolveBidiLevels.resolveIsolatingRunSequences__resolveBidiLevels(({ final __callArgument8:Dynamic = original; __callArgument8; }), ({ final __callArgument9:Dynamic = working; __callArgument9; }), ({ final __callArgument10:Dynamic = levelArray; __callArgument10; }), ({ final __callArgument11:Dynamic = matchingPdi; __callArgument11; }), ({ final __callArgument12:Dynamic = matchingInitiator; __callArgument12; }), (cast paragraphLevel : Float));
+    ResolveBidiLevels.applyLineReset__resolveBidiLevels(({ final __callArgument13:Dynamic = original; __callArgument13; }), ({ final __callArgument14:Dynamic = levelArray; __callArgument14; }), (cast paragraphLevel : Float));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
@@ -139,7 +139,7 @@ class ResolveBidiLevels {
               flighthq._internal._StaticIndex.writeFloatArrayTyped((cast levelArray : Array<Float>), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast stackLevel : Array<Float>), (cast top : Float)) : Float));
               if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(stackOverride, top), null) : Bool)) { flighthq._internal._StaticIndex.writeArray(working, i, (cast flighthq._internal._StaticIndex.readArray(stackOverride, top) : BidiClass)); }
               var asRtl:Bool = _Runtime.strictEquals(t, 'RLI');
-              if ((cast _Runtime.strictEquals(t, 'FSI') : Bool)) { (asRtl = cast (_Runtime.strictEquals((cast ResolveBidiLevels.computeParagraphLevel__resolveBidiLevels((cast original), (cast (i + 1.0) : Float), (cast flighthq._internal._StaticIndex.readInt32ArrayTyped((cast matchingPdi : flighthq._internal._Int32Array), (cast i : Float)) : Float)) : Float), 1.0) : Dynamic)); }
+              if ((cast _Runtime.strictEquals(t, 'FSI') : Bool)) { (asRtl = cast (_Runtime.strictEquals((cast ResolveBidiLevels.computeParagraphLevel__resolveBidiLevels(({ final __callArgument15:Dynamic = original; __callArgument15; }), (cast (i + 1.0) : Float), (cast flighthq._internal._StaticIndex.readInt32ArrayTyped((cast matchingPdi : flighthq._internal._Int32Array), (cast i : Float)) : Float)) : Float), 1.0) : Dynamic)); }
               var newLevel:Float = ((cast asRtl : Bool) ? (cast (cast ResolveBidiLevels.nextOdd__resolveBidiLevels((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast stackLevel : Array<Float>), (cast top : Float)) : Float)) : Float) : Dynamic) : (cast (cast ResolveBidiLevels.nextEven__resolveBidiLevels((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast stackLevel : Array<Float>), (cast top : Float)) : Float)) : Float) : Dynamic));
               if ((cast ((cast ((cast ((cast newLevel : Float) <= (cast MAX_DEPTH : Float)) : Bool) && (cast _Runtime.strictEquals(overflowIsolate, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(overflowEmbedding, 0.0) : Bool)) : Bool)) {
                 validIsolate++;
@@ -289,7 +289,7 @@ class ResolveBidiLevels {
             }
           }
         }
-        ResolveBidiLevels.resolveSequence__resolveBidiLevels((cast original), (cast working), (cast levelArray), (cast kept), (cast sequence), (cast keptStart : Float), (cast keptEnd : Float), (cast matchingPdi), (cast paragraphLevel : Float));
+        ResolveBidiLevels.resolveSequence__resolveBidiLevels(({ final __callArgument16:Dynamic = original; __callArgument16; }), ({ final __callArgument17:Dynamic = working; __callArgument17; }), ({ final __callArgument18:Dynamic = levelArray; __callArgument18; }), ({ final __callArgument19:Dynamic = kept; __callArgument19; }), ({ final __callArgument20:Dynamic = sequence; __callArgument20; }), (cast keptStart : Float), (cast keptEnd : Float), ({ final __callArgument21:Dynamic = matchingPdi; __callArgument21; }), (cast paragraphLevel : Float));
         r++;
       }
     }
@@ -399,11 +399,11 @@ class ResolveBidiLevels {
     {
       var k:Float = 0.0;
       while ((cast ((cast k : Float) < (cast len : Float)) : Bool)) {
-        if ((cast (cast ResolveBidiLevels.isNeutralOrIsolate__resolveBidiLevels((cast flighthq._internal._StaticIndex.readArray(ty, k))) : Bool) : Bool)) {
+        if ((cast (cast ResolveBidiLevels.isNeutralOrIsolate__resolveBidiLevels(flighthq._internal._StaticIndex.readArray(ty, k)) : Bool) : Bool)) {
           var j:Float = k;
-          while ((cast ((cast ((cast j : Float) < (cast len : Float)) : Bool) && (cast (cast ResolveBidiLevels.isNeutralOrIsolate__resolveBidiLevels((cast flighthq._internal._StaticIndex.readArray(ty, j))) : Bool) : Bool)) : Bool)) { j++; }
-          var before:String = ((cast ((cast k : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast ResolveBidiLevels.neutralDirection__resolveBidiLevels((cast flighthq._internal._StaticIndex.readArray(ty, (k - 1.0)))) : String) : Dynamic) : (cast sos : Dynamic));
-          var after:String = ((cast ((cast j : Float) < (cast len : Float)) : Bool) ? (cast (cast ResolveBidiLevels.neutralDirection__resolveBidiLevels((cast flighthq._internal._StaticIndex.readArray(ty, j))) : String) : Dynamic) : (cast eos : Dynamic));
+          while ((cast ((cast ((cast j : Float) < (cast len : Float)) : Bool) && (cast (cast ResolveBidiLevels.isNeutralOrIsolate__resolveBidiLevels(flighthq._internal._StaticIndex.readArray(ty, j)) : Bool) : Bool)) : Bool)) { j++; }
+          var before:String = ((cast ((cast k : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast ResolveBidiLevels.neutralDirection__resolveBidiLevels(flighthq._internal._StaticIndex.readArray(ty, (k - 1.0))) : String) : Dynamic) : (cast sos : Dynamic));
+          var after:String = ((cast ((cast j : Float) < (cast len : Float)) : Bool) ? (cast (cast ResolveBidiLevels.neutralDirection__resolveBidiLevels(flighthq._internal._StaticIndex.readArray(ty, j)) : String) : Dynamic) : (cast eos : Dynamic));
           var resolved:String = ((cast _Runtime.strictEquals(before, after) : Bool) ? (cast before : Dynamic) : (cast embeddingDir : Dynamic));
           {
             var m:Float = k;
@@ -446,7 +446,7 @@ class ResolveBidiLevels {
           flighthq._internal._StaticIndex.writeFloatArrayTyped((cast levelArray : Array<Float>), (cast i : Float), (cast paragraphLevel : Float));
           {
             var j:Float = (i - 1.0);
-            while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast (cast ResolveBidiLevels.isResetType__resolveBidiLevels((cast flighthq._internal._StaticIndex.readArray(original, j))) : Bool) : Bool)) : Bool)) {
+            while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast (cast ResolveBidiLevels.isResetType__resolveBidiLevels(flighthq._internal._StaticIndex.readArray(original, j)) : Bool) : Bool)) : Bool)) {
               flighthq._internal._StaticIndex.writeFloatArrayTyped((cast levelArray : Array<Float>), (cast j : Float), (cast paragraphLevel : Float));
               j--;
             }
@@ -457,7 +457,7 @@ class ResolveBidiLevels {
     }
     {
       var j:Float = (length - 1.0);
-      while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast (cast ResolveBidiLevels.isResetType__resolveBidiLevels((cast flighthq._internal._StaticIndex.readArray(original, j))) : Bool) : Bool)) : Bool)) {
+      while ((cast ((cast ((cast j : Float) >= (cast 0.0 : Float)) : Bool) && (cast (cast ResolveBidiLevels.isResetType__resolveBidiLevels(flighthq._internal._StaticIndex.readArray(original, j)) : Bool) : Bool)) : Bool)) {
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast levelArray : Array<Float>), (cast j : Float), (cast paragraphLevel : Float));
         j--;
       }

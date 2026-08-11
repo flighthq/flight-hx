@@ -47,7 +47,7 @@ class LightAnalysis {
       var windowed:Float = HxMath.max(0.0, HxMath.min(1.0, (1.0 - (factor * factor))));
       (window = cast ((windowed * windowed) : Dynamic));
     }
-    contribution = _Runtime.divideNumbers(((cast getLightLuminance((cast light)) : Float) * window), HxMath.max(distanceSquared, 0.0001));
+    contribution = _Runtime.divideNumbers(((cast getLightLuminance(({ final __callArgument0:Dynamic = light; __callArgument0; })) : Float) * window), HxMath.max(distanceSquared, 0.0001));
     if ((cast _Runtime.strictEquals((cast light : { var kind:String; }).kind, SpotLightKind) : Bool)) {
       var spot:SpotLight = (cast light : SpotLight);
       var directionLength:Float = _Runtime.hypot((cast _Runtime.field(spot, 'direction') : { var x:Float; }).x, (cast _Runtime.field(spot, 'direction') : { var y:Float; }).y, (cast _Runtime.field(spot, 'direction') : { var z:Float; }).z);

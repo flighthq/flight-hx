@@ -37,15 +37,15 @@ import flighthq.types.Tray.TrayBackend;
 
 class TauriRegister {
   public static function registerTauriBackends(tauri:TauriApi):Void {
-    setPlatformBackend((cast (cast createTauriPlatformBackend((cast tauri)) : PlatformBackend)));
-    setAppBackend((cast (cast createTauriAppBackend((cast tauri)) : AppBackend)));
-    setWindowBackend((cast (cast createTauriWindowBackend((cast tauri)) : WindowBackend)));
-    setDialogBackend((cast (cast createTauriDialogBackend((cast tauri)) : DialogBackend)));
-    setClipboardBackend((cast (cast createTauriClipboardBackend((cast tauri)) : ClipboardBackend)));
-    setMenuBackend((cast (cast createTauriMenuBackend((cast tauri)) : MenuBackend)));
-    setTrayBackend((cast (cast createTauriTrayBackend((cast tauri)) : TrayBackend)));
-    setShortcutBackend((cast (cast createTauriShortcutBackend((cast tauri)) : ShortcutBackend)));
-    setNotificationBackend((cast (cast createTauriNotificationBackend((cast tauri)) : NotificationBackend)));
-    setShellBackend((cast (cast createTauriShellBackend((cast tauri)) : ShellBackend)));
+    setPlatformBackend((cast (cast createTauriPlatformBackend(({ final __callArgument0:Dynamic = tauri; __callArgument0; })) : PlatformBackend) : Dynamic));
+    setAppBackend((cast (cast createTauriAppBackend(({ final __callArgument1:Dynamic = tauri; __callArgument1; })) : AppBackend) : Dynamic));
+    setWindowBackend((cast (cast createTauriWindowBackend(({ final __callArgument2:Dynamic = tauri; __callArgument2; })) : WindowBackend) : Dynamic));
+    setDialogBackend((cast (cast createTauriDialogBackend(({ final __callArgument3:Dynamic = tauri; __callArgument3; })) : DialogBackend) : Dynamic));
+    setClipboardBackend((cast (cast createTauriClipboardBackend(({ final __callArgument4:Dynamic = tauri; __callArgument4; })) : ClipboardBackend) : Dynamic));
+    setMenuBackend((cast (cast createTauriMenuBackend(({ final __callArgument5:Dynamic = tauri; __callArgument5; })) : MenuBackend) : Dynamic));
+    setTrayBackend((cast (cast createTauriTrayBackend(({ final __callArgument6:Dynamic = tauri; __callArgument6; })) : TrayBackend) : Dynamic));
+    setShortcutBackend((cast (cast createTauriShortcutBackend(({ final __callArgument7:Dynamic = tauri; __callArgument7; })) : ShortcutBackend) : Dynamic));
+    setNotificationBackend((cast (cast createTauriNotificationBackend(({ final __callArgument8:Dynamic = tauri; __callArgument8; })) : NotificationBackend) : Dynamic));
+    setShellBackend((cast (cast createTauriShellBackend(({ final __callArgument9:Dynamic = tauri; __callArgument9; })) : ShellBackend) : Dynamic));
   }
 }

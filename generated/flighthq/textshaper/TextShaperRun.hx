@@ -43,13 +43,13 @@ class TextShaperRun {
     var backend:Null<TextShaperBackend> = cast _Runtime.UNDEFINED;
     backend = (cast getTextShaperBackend() : Null<TextShaperBackend>);
     if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy((cast backend : TextShaperBackend).getFontMetrics) : Bool)) : Bool)) { return cast null; }
-    return cast (cast backend : TextShaperBackend).getFontMetrics((cast format));
+    return cast (cast backend : TextShaperBackend).getFontMetrics(({ final __callArgument0:Dynamic = format; __callArgument0; }));
     return cast null;
   }
 
   public static function getFontMetricsInto(format:TextFormat, out:FontMetrics):Bool {
     var metrics:Null<FontMetrics> = cast _Runtime.UNDEFINED;
-    metrics = (cast getFontMetrics((cast format)) : Null<FontMetrics>);
+    metrics = (cast getFontMetrics(({ final __callArgument1:Dynamic = format; __callArgument1; })) : Null<FontMetrics>);
     if ((cast _Runtime.strictEquals(metrics, null) : Bool)) { return cast false; }
     (out.ascent = cast ((cast metrics : { var ascent:Float; }).ascent : Dynamic));
     (out.capHeight = cast ((cast metrics : { var capHeight:Float; }).capHeight : Dynamic));
@@ -66,7 +66,7 @@ class TextShaperRun {
   public static function getFontUnitScale(format:TextFormat):Float {
     var metrics:Null<FontMetrics> = cast _Runtime.UNDEFINED;
     var size:Float = cast _Runtime.UNDEFINED;
-    metrics = (cast getFontMetrics((cast format)) : Null<FontMetrics>);
+    metrics = (cast getFontMetrics(({ final __callArgument2:Dynamic = format; __callArgument2; })) : Null<FontMetrics>);
     if ((cast _Runtime.strictEquals(metrics, null) : Bool)) { return cast -1.0; }
     size = _Runtime.coalesce(_Runtime.field(format, 'size'), function():Dynamic return cast 12.0);
     return cast (size / (cast metrics : { var unitsPerEm:Float; }).unitsPerEm);
@@ -106,7 +106,7 @@ class TextShaperRun {
 
   public static function getGlyphExtentsInto(glyphId:Float, _format:TextFormat, out:GlyphExtents):Bool {
     var extents:Null<GlyphExtents> = cast _Runtime.UNDEFINED;
-    extents = (cast getGlyphExtents((cast glyphId : Float), (cast _format)) : Null<GlyphExtents>);
+    extents = (cast getGlyphExtents((cast glyphId : Float), ({ final __callArgument3:Dynamic = _format; __callArgument3; })) : Null<GlyphExtents>);
     if ((cast _Runtime.strictEquals(extents, null) : Bool)) { return cast false; }
     ((cast out : GlyphExtents).height = (cast extents : GlyphExtents).height);
     ((cast out : GlyphExtents).width = (cast extents : GlyphExtents).width);
@@ -136,7 +136,7 @@ class TextShaperRun {
     var backend:Null<TextShaperBackend> = cast _Runtime.UNDEFINED;
     backend = (cast getTextShaperBackend() : Null<TextShaperBackend>);
     if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy((cast backend : TextShaperBackend).shapeRun) : Bool)) : Bool)) { return cast null; }
-    return cast (cast backend : TextShaperBackend).shapeRun((cast text : String), (cast format), (cast options));
+    return cast (cast backend : TextShaperBackend).shapeRun((cast text : String), ({ final __callArgument4:Dynamic = format; __callArgument4; }), ({ final __callArgument5:Dynamic = options; __callArgument5; }));
     return cast null;
   }
 
@@ -146,7 +146,7 @@ class TextShaperRun {
     var glyphs:Array<ShapedGlyph> = cast _Runtime.UNDEFINED;
     backend = (cast getTextShaperBackend() : Null<TextShaperBackend>);
     if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy((cast backend : TextShaperBackend).shapeRun) : Bool)) : Bool)) { return cast false; }
-    result = (cast backend : TextShaperBackend).shapeRun((cast text : String), (cast format), (cast options));
+    result = (cast backend : TextShaperBackend).shapeRun((cast text : String), ({ final __callArgument6:Dynamic = format; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; }));
     glyphs = (cast out : ShapedRun).glyphs;
     ((cast out : ShapedRun).advanceWidth = (cast result : ShapedRun).advanceWidth);
     ((cast out : ShapedRun).direction = (cast result : ShapedRun).direction);

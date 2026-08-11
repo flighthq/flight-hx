@@ -22,12 +22,12 @@ class RichTextContent {
     var source:String = cast _Runtime.UNDEFINED;
     ((cast out : flighthq.types.RichTextContent).text = '');
     _Runtime.setLength((cast out : flighthq.types.RichTextContent).formatRanges, 0.0);
-    baseFormat = (cast RichTextContent.createBaseFormat__richTextContent((cast data)) : TextFormat);
-    source = (cast RichTextContent.getRenderableSource__richTextContent((cast data), (cast passwordCharacter)) : String);
+    baseFormat = (cast RichTextContent.createBaseFormat__richTextContent(({ final __callArgument0:Dynamic = data; __callArgument0; })) : TextFormat);
+    source = (cast RichTextContent.getRenderableSource__richTextContent(({ final __callArgument1:Dynamic = data; __callArgument1; }), ({ final __callArgument2:Dynamic = passwordCharacter; __callArgument2; })) : String);
     if ((cast _Runtime.strictEquals(_Runtime.field(source, 'length'), 0.0) : Bool)) { return; }
-    RichTextContent.appendText__richTextContent((cast out), (cast source : String), (cast baseFormat), (cast _Runtime.field(data, 'condenseWhite') : Bool), (cast _Runtime.field(data, 'maxChars') : Float));
-    RichTextContent.clampRanges__richTextContent((cast (cast out : flighthq.types.RichTextContent).formatRanges), (cast _Runtime.field((cast out : flighthq.types.RichTextContent).text, 'length') : Float));
-    RichTextContent.applyTextFormatRanges__richTextContent((cast out), (cast _Runtime.field(data, 'textFormatRanges')));
+    RichTextContent.appendText__richTextContent(({ final __callArgument3:Dynamic = out; __callArgument3; }), (cast source : String), ({ final __callArgument4:Dynamic = baseFormat; __callArgument4; }), (cast _Runtime.field(data, 'condenseWhite') : Bool), (cast _Runtime.field(data, 'maxChars') : Float));
+    RichTextContent.clampRanges__richTextContent((cast out : flighthq.types.RichTextContent).formatRanges, (cast _Runtime.field((cast out : flighthq.types.RichTextContent).text, 'length') : Float));
+    RichTextContent.applyTextFormatRanges__richTextContent(({ final __callArgument5:Dynamic = out; __callArgument5; }), _Runtime.field(data, 'textFormatRanges'));
   }
 
   public static function createRichTextContent():flighthq.types.RichTextContent {
@@ -59,7 +59,7 @@ class RichTextContent {
     if ((cast ((cast _Runtime.field(value, 'length') : Float) > (cast remaining : Float)) : Bool)) { (value = cast (_Runtime.slice(value, 0.0, remaining) : Dynamic)); }
     start = _Runtime.field((cast out : flighthq.types.RichTextContent).text, 'length');
     ((cast out : flighthq.types.RichTextContent).text += value);
-    RichTextContent.writeFormatRange__richTextContent((cast (cast out : flighthq.types.RichTextContent).formatRanges), (cast format), (cast start : Float), (cast _Runtime.field((cast out : flighthq.types.RichTextContent).text, 'length') : Float));
+    RichTextContent.writeFormatRange__richTextContent((cast out : flighthq.types.RichTextContent).formatRanges, ({ final __callArgument6:Dynamic = format; __callArgument6; }), (cast start : Float), (cast _Runtime.field((cast out : flighthq.types.RichTextContent).text, 'length') : Float));
   }
 
   public static function applyTextFormatRanges__richTextContent(out:flighthq.types.RichTextContent, overrides:Array<TextFormatRange>):Void {
@@ -73,18 +73,18 @@ class RichTextContent {
       var next:Array<TextFormatRange> = (cast cast ([] : Array<Dynamic>));
       for (range in _Runtime.iterable(ranges)) {
         if ((cast ((cast ((cast (cast range : TextFormatRange).end : Float) <= (cast start : Float)) : Bool) || (cast ((cast (cast range : TextFormatRange).start : Float) >= (cast end : Float)) : Bool)) : Bool)) {
-          RichTextContent.writeFormatRange__richTextContent((cast next), (cast (cast range : TextFormatRange).format), (cast (cast range : TextFormatRange).start : Float), (cast (cast range : TextFormatRange).end : Float));
+          RichTextContent.writeFormatRange__richTextContent(({ final __callArgument11:Dynamic = next; __callArgument11; }), (cast range : TextFormatRange).format, (cast (cast range : TextFormatRange).start : Float), (cast (cast range : TextFormatRange).end : Float));
           continue;
         }
-        if ((cast ((cast (cast range : TextFormatRange).start : Float) < (cast start : Float)) : Bool)) { RichTextContent.writeFormatRange__richTextContent((cast next), (cast (cast range : TextFormatRange).format), (cast (cast range : TextFormatRange).start : Float), (cast start : Float)); }
-        RichTextContent.writeFormatRange__richTextContent((cast next), (cast (cast mergeTextFormat((cast (cast range : TextFormatRange).format), (cast (cast override_ : TextFormatRange).format)) : TextFormat)), (cast HxMath.max((cast range : TextFormatRange).start, start) : Float), (cast HxMath.min((cast range : TextFormatRange).end, end) : Float));
-        if ((cast ((cast (cast range : TextFormatRange).end : Float) > (cast end : Float)) : Bool)) { RichTextContent.writeFormatRange__richTextContent((cast next), (cast (cast range : TextFormatRange).format), (cast end : Float), (cast (cast range : TextFormatRange).end : Float)); }
+        if ((cast ((cast (cast range : TextFormatRange).start : Float) < (cast start : Float)) : Bool)) { RichTextContent.writeFormatRange__richTextContent(({ final __callArgument12:Dynamic = next; __callArgument12; }), (cast range : TextFormatRange).format, (cast (cast range : TextFormatRange).start : Float), (cast start : Float)); }
+        RichTextContent.writeFormatRange__richTextContent(({ final __callArgument13:Dynamic = next; __callArgument13; }), (cast mergeTextFormat((cast range : TextFormatRange).format, (cast override_ : TextFormatRange).format) : TextFormat), (cast HxMath.max((cast range : TextFormatRange).start, start) : Float), (cast HxMath.min((cast range : TextFormatRange).end, end) : Float));
+        if ((cast ((cast (cast range : TextFormatRange).end : Float) > (cast end : Float)) : Bool)) { RichTextContent.writeFormatRange__richTextContent(({ final __callArgument14:Dynamic = next; __callArgument14; }), (cast range : TextFormatRange).format, (cast end : Float), (cast (cast range : TextFormatRange).end : Float)); }
       }
       (ranges = cast (next : Dynamic));
     }
     _Runtime.setLength((cast out : flighthq.types.RichTextContent).formatRanges, 0.0);
     for (range in _Runtime.iterable(ranges)) {
-      RichTextContent.writeFormatRange__richTextContent((cast (cast out : flighthq.types.RichTextContent).formatRanges), (cast (cast range : TextFormatRange).format), (cast (cast range : TextFormatRange).start : Float), (cast (cast range : TextFormatRange).end : Float));
+      RichTextContent.writeFormatRange__richTextContent((cast out : flighthq.types.RichTextContent).formatRanges, (cast range : TextFormatRange).format, (cast (cast range : TextFormatRange).start : Float), (cast (cast range : TextFormatRange).end : Float));
     }
   }
 
@@ -105,7 +105,7 @@ class RichTextContent {
 
   public static function createBaseFormat__richTextContent(data:RichTextData):TextFormat {
     var format:TextFormat = cast _Runtime.UNDEFINED;
-    format = (cast mergeTextFormat((cast _Runtime.field(data, 'defaultTextFormat')), (cast _Runtime.field(data, 'textFormat'))) : TextFormat);
+    format = (cast mergeTextFormat(_Runtime.field(data, 'defaultTextFormat'), _Runtime.field(data, 'textFormat')) : TextFormat);
     if ((cast _Runtime.strictEquals((cast format : TextFormat).color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast format : TextFormat).color = _Runtime.field(data, 'textColor')); }
     return cast format;
     return cast null;
@@ -135,7 +135,7 @@ class RichTextContent {
     var previous:TextFormatRange = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(start, end) : Bool)) { return; }
     previous = flighthq._internal._StaticIndex.readArray(ranges, _Runtime.subtractNumbers(_Runtime.field(ranges, 'length'), 1.0));
-    if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast previous : TextFormatRange).end, start) : Bool)) : Bool) && (cast (cast RichTextContent.textFormatEquals__richTextContent((cast (cast previous : TextFormatRange).format), (cast format)) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast previous : TextFormatRange).end, start) : Bool)) : Bool) && (cast (cast RichTextContent.textFormatEquals__richTextContent((cast previous : TextFormatRange).format, ({ final __callArgument17:Dynamic = format; __callArgument17; })) : Bool) : Bool)) : Bool)) {
       ((cast previous : TextFormatRange).end = end);
     } else {
       _Runtime.callProperty(ranges, 'push', cast ([{ end: end, format: _Runtime.mergeObjects([format]), start: start }] : Array<Dynamic>));

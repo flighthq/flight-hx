@@ -25,7 +25,7 @@ class ApplyAnimationClipToSkeleton2D {
         if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool)) { i++; continue; }
         var bind:Null<Skeleton2DAnimationTargetBinder> = (cast getSkeleton2DAnimationTargetBinder((cast (cast target : Skeleton2DAnimationTarget).kind : String)) : Null<Skeleton2DAnimationTargetBinder>);
         if ((cast _Runtime.strictEquals(bind, null) : Bool)) { i++; continue; }
-        bind((cast channel), (cast setup), (cast pose), (cast target : flighthq._internal._Any), (cast time : Float));
+        bind(({ final __callArgument0:Dynamic = channel; __callArgument0; }), ({ final __callArgument1:Dynamic = setup; __callArgument1; }), ({ final __callArgument2:Dynamic = pose; __callArgument2; }), (cast target : flighthq._internal._Any), (cast time : Float));
         i++;
       }
     }

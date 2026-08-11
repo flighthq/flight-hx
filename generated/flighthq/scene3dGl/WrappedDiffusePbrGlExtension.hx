@@ -30,8 +30,8 @@ class WrappedDiffusePbrGlExtension {
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightWrappedDiffuseStrength' : String), (cast _Runtime.field(extension, 'wrappedDiffuseStrength') : Float));
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightWrappedDiffuseThickness' : String), (cast _Runtime.field(extension, 'thickness') : Float));
     (cast context : GlPbrExtensionBindContext).setLinearColor((cast 'u_flightWrappedDiffuseColor' : String), (cast _Runtime.field(extension, 'wrappedDiffuseColor') : Float));
-    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightWrappedDiffuseMap' : String), (cast 'u_flightWrappedDiffuseMapUvSet' : String), (cast 'u_flightWrappedDiffuseMapTransform' : String), (cast _Runtime.field(extension, 'wrappedDiffuseMap')), (cast _Runtime.field(extension, 'wrappedDiffuseMapUvSet')));
-    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightWrappedDiffuseThicknessMap' : String), (cast 'u_flightWrappedDiffuseThicknessMapUvSet' : String), (cast 'u_flightWrappedDiffuseThicknessMapTransform' : String), (cast _Runtime.field(extension, 'thicknessMap')), (cast _Runtime.field(extension, 'thicknessMapUvSet')));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightWrappedDiffuseMap' : String), (cast 'u_flightWrappedDiffuseMapUvSet' : String), (cast 'u_flightWrappedDiffuseMapTransform' : String), (cast _Runtime.field(extension, 'wrappedDiffuseMap') : Dynamic), _Runtime.field(extension, 'wrappedDiffuseMapUvSet'));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightWrappedDiffuseThicknessMap' : String), (cast 'u_flightWrappedDiffuseThicknessMapUvSet' : String), (cast 'u_flightWrappedDiffuseThicknessMapTransform' : String), (cast _Runtime.field(extension, 'thicknessMap') : Dynamic), _Runtime.field(extension, 'thicknessMapUvSet'));
   }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):GlPbrExtensionShaderContribution {
     var extension:WrappedDiffusePbrExtension = cast _Runtime.UNDEFINED;
     var factorMap:Bool = cast _Runtime.UNDEFINED;
@@ -51,6 +51,6 @@ class WrappedDiffusePbrGlExtension {
   } });
 
   public static function registerGlWrappedDiffusePbrExtension(state:GlRenderState):Void {
-    registerGlPbrExtension((cast state), (cast WrappedDiffusePbrExtensionKind : String), (cast wrappedDiffusePbrGlExtension));
+    registerGlPbrExtension(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast WrappedDiffusePbrExtensionKind : String), ({ final __callArgument1:Dynamic = wrappedDiffusePbrGlExtension; __callArgument1; }));
   }
 }

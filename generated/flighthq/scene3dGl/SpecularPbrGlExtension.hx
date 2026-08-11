@@ -29,8 +29,8 @@ class SpecularPbrGlExtension {
     extension = (cast value : SpecularPbrExtension);
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightSpecular' : String), (cast _Runtime.field(extension, 'specular') : Float));
     (cast context : GlPbrExtensionBindContext).setLinearColor((cast 'u_flightSpecularColor' : String), (cast _Runtime.field(extension, 'specularColor') : Float));
-    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightSpecularMap' : String), (cast 'u_flightSpecularMapUvSet' : String), (cast 'u_flightSpecularMapTransform' : String), (cast _Runtime.field(extension, 'specularMap')), (cast _Runtime.field(extension, 'specularMapUvSet')));
-    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightSpecularColorMap' : String), (cast 'u_flightSpecularColorMapUvSet' : String), (cast 'u_flightSpecularColorMapTransform' : String), (cast _Runtime.field(extension, 'specularColorMap')), (cast _Runtime.field(extension, 'specularColorMapUvSet')));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightSpecularMap' : String), (cast 'u_flightSpecularMapUvSet' : String), (cast 'u_flightSpecularMapTransform' : String), (cast _Runtime.field(extension, 'specularMap') : Dynamic), _Runtime.field(extension, 'specularMapUvSet'));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightSpecularColorMap' : String), (cast 'u_flightSpecularColorMapUvSet' : String), (cast 'u_flightSpecularColorMapTransform' : String), (cast _Runtime.field(extension, 'specularColorMap') : Dynamic), _Runtime.field(extension, 'specularColorMapUvSet'));
   }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):GlPbrExtensionShaderContribution {
     var extension:SpecularPbrExtension = cast _Runtime.UNDEFINED;
     var factorMap:Bool = cast _Runtime.UNDEFINED;
@@ -46,6 +46,6 @@ class SpecularPbrGlExtension {
   } });
 
   public static function registerGlSpecularPbrExtension(state:GlRenderState):Void {
-    registerGlPbrExtension((cast state), (cast SpecularPbrExtensionKind : String), (cast specularPbrGlExtension));
+    registerGlPbrExtension(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast SpecularPbrExtensionKind : String), ({ final __callArgument1:Dynamic = specularPbrGlExtension; __callArgument1; }));
   }
 }

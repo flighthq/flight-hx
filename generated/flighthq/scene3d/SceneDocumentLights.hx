@@ -54,40 +54,40 @@ class SceneDocumentLights {
         var source:Scene3DDocumentLight = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'lights'), i);
         var descriptor:Light = (cast source : Scene3DDocumentLight).descriptor;
         if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, AmbientLightKind) : Bool)) {
-          if ((cast _Runtime.strictEquals(ambient, null) : Bool)) { (ambient = cast ((cast cloneAmbientLight((cast (cast descriptor : AmbientLight))) : AmbientLight) : Dynamic)); }
+          if ((cast _Runtime.strictEquals(ambient, null) : Bool)) { (ambient = cast ((cast cloneAmbientLight((cast descriptor : AmbientLight)) : AmbientLight) : Dynamic)); }
           i++;
           continue;
         }
         if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, DirectionalLightKind) : Bool)) {
           if ((cast _Runtime.strictEquals(directional, null) : Bool)) {
-            (directional = cast ((cast cloneDirectionalLight((cast (cast descriptor : DirectionalLight))) : DirectionalLight) : Dynamic));
-            rotateVector3ByQuaternion((cast (cast directional : DirectionalLight).direction), (cast (cast directional : DirectionalLight).direction), (cast (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation));
+            (directional = cast ((cast cloneDirectionalLight((cast descriptor : DirectionalLight)) : DirectionalLight) : Dynamic));
+            rotateVector3ByQuaternion(({ final __callArgument0:Dynamic = (cast directional : DirectionalLight).direction; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast directional : DirectionalLight).direction; __callArgument1; }), ({ final __callArgument2:Dynamic = (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation; __callArgument2; }));
           }
           i++;
           continue;
         }
         if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, HemisphereLightKind) : Bool)) {
-          _Runtime.callProperty(hemisphere, 'push', cast ([(cast cloneHemisphereLight((cast (cast descriptor : HemisphereLight))) : HemisphereLight)] : Array<Dynamic>));
+          _Runtime.callProperty(hemisphere, 'push', cast ([(cast cloneHemisphereLight((cast descriptor : HemisphereLight)) : HemisphereLight)] : Array<Dynamic>));
           i++;
           continue;
         }
         if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, PointLightKind) : Bool)) {
-          var resolved:PointLight = (cast clonePointLight((cast (cast descriptor : PointLight))) : PointLight);
-          SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights((cast (cast resolved : PointLight).position), (cast (cast source : Scene3DDocumentLight).transform));
+          var resolved:PointLight = (cast clonePointLight((cast descriptor : PointLight)) : PointLight);
+          SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights(({ final __callArgument3:Dynamic = (cast resolved : PointLight).position; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast source : Scene3DDocumentLight).transform; __callArgument4; }));
           _Runtime.callProperty(point, 'push', cast ([resolved] : Array<Dynamic>));
           i++;
           continue;
         }
         if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, SpotLightKind) : Bool)) {
-          var resolved:SpotLight = (cast cloneSpotLight((cast (cast descriptor : SpotLight))) : SpotLight);
-          SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights((cast (cast resolved : SpotLight).position), (cast (cast source : Scene3DDocumentLight).transform));
-          rotateVector3ByQuaternion((cast (cast resolved : SpotLight).direction), (cast (cast resolved : SpotLight).direction), (cast (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation));
+          var resolved:SpotLight = (cast cloneSpotLight((cast descriptor : SpotLight)) : SpotLight);
+          SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights(({ final __callArgument5:Dynamic = (cast resolved : SpotLight).position; __callArgument5; }), ({ final __callArgument6:Dynamic = (cast source : Scene3DDocumentLight).transform; __callArgument6; }));
+          rotateVector3ByQuaternion(({ final __callArgument7:Dynamic = (cast resolved : SpotLight).direction; __callArgument7; }), ({ final __callArgument8:Dynamic = (cast resolved : SpotLight).direction; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation; __callArgument9; }));
           _Runtime.callProperty(spot, 'push', cast ([resolved] : Array<Dynamic>));
         }
         i++;
       }
     }
-    return cast (cast createScene3DLights((cast { ambient: ambient, directional: directional, hemisphere: hemisphere, point: point, spot: spot })) : Scene3DLights);
+    return cast (cast createScene3DLights(({ final __callArgument10:Dynamic = { ambient: ambient, directional: directional, hemisphere: hemisphere, point: point, spot: spot }; __callArgument10; })) : Scene3DLights);
     return cast null;
   }
 
@@ -95,7 +95,7 @@ class SceneDocumentLights {
     (out.x *= (cast _Runtime.field(transform, 'scale') : { var x:Float; }).x);
     (out.y *= (cast _Runtime.field(transform, 'scale') : { var y:Float; }).y);
     (out.z *= (cast _Runtime.field(transform, 'scale') : { var z:Float; }).z);
-    rotateVector3ByQuaternion((cast out), (cast out), (cast _Runtime.field(transform, 'rotation')));
+    rotateVector3ByQuaternion(({ final __callArgument11:Dynamic = out; __callArgument11; }), ({ final __callArgument12:Dynamic = out; __callArgument12; }), ({ final __callArgument13:Dynamic = _Runtime.field(transform, 'rotation'); __callArgument13; }));
     (out.x += (cast _Runtime.field(transform, 'position') : { var x:Float; }).x);
     (out.y += (cast _Runtime.field(transform, 'position') : { var y:Float; }).y);
     (out.z += (cast _Runtime.field(transform, 'position') : { var z:Float; }).z);

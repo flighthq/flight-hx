@@ -29,6 +29,6 @@ class DeformPathAttachment2D {
     }
     ((cast out : Path).winding = _Runtime.field(attachment, 'winding'));
     _Runtime.setLength(data, _Runtime.multiplyNumbers(_Runtime.field(attachment, 'pointCount'), 2.0));
-    skinSkeleton2DAttachmentPoints((cast data), (cast _Runtime.field(attachment, 'skin')), (cast _Runtime.field(attachment, 'vertices')), (cast skeleton), (cast boneIndex : Float), (cast deform), (cast 'PathAttachment2D' : String));
+    skinSkeleton2DAttachmentPoints(({ final __callArgument0:Dynamic = data; __callArgument0; }), (cast _Runtime.field(attachment, 'skin') : Dynamic), _Runtime.field(attachment, 'vertices'), ({ final __callArgument1:Dynamic = skeleton; __callArgument1; }), (cast boneIndex : Float), ({ final __callArgument2:Dynamic = deform; __callArgument2; }), (cast 'PathAttachment2D' : String));
   }
 }

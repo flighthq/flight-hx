@@ -40,7 +40,7 @@ import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 class UnlitMaterials {
   public static function createDepthMaterial(?opts:flighthq._internal._Partial<DepthMaterial>):DepthMaterial {
     var material:DepthMaterial = cast _Runtime.UNDEFINED;
-    material = (cast createSurfaceMaterial((cast DepthMaterialKind : String), (cast opts)) : DepthMaterial);
+    material = (cast createSurfaceMaterial((cast DepthMaterialKind : String), (cast opts : Dynamic)) : DepthMaterial);
     ((cast material : DepthMaterial).far = _Runtime.coalesce(({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var far:Null<Float>; }).far; }), function():Dynamic return cast 1.0));
     ((cast material : DepthMaterial).near = _Runtime.coalesce(({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var near:Null<Float>; }).near; }), function():Dynamic return cast 0.0));
     return cast material;
@@ -49,7 +49,7 @@ class UnlitMaterials {
 
   public static function createEmissiveMaterial(?opts:flighthq._internal._Partial<EmissiveMaterial>):EmissiveMaterial {
     var material:EmissiveMaterial = cast _Runtime.UNDEFINED;
-    material = (cast createSurfaceMaterial((cast EmissiveMaterialKind : String), (cast opts)) : EmissiveMaterial);
+    material = (cast createSurfaceMaterial((cast EmissiveMaterialKind : String), (cast opts : Dynamic)) : EmissiveMaterial);
     ((cast material : EmissiveMaterial).emissive = _Runtime.coalesce(({ final __structural2 = opts; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var emissive:Null<Float>; }).emissive; }), function():Dynamic return cast 4294967295.0));
     ((cast material : EmissiveMaterial).emissiveMap = _Runtime.coalesce(({ final __structural3 = opts; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var emissiveMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).emissiveMap; }), function():Dynamic return cast null));
     ((cast material : EmissiveMaterial).emissiveStrength = _Runtime.coalesce(({ final __structural4 = opts; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var emissiveStrength:Null<Float>; }).emissiveStrength; }), function():Dynamic return cast 1.0));
@@ -59,7 +59,7 @@ class UnlitMaterials {
 
   public static function createMatcapMaterial(?opts:flighthq._internal._Partial<MatcapMaterial>):MatcapMaterial {
     var material:MatcapMaterial = cast _Runtime.UNDEFINED;
-    material = (cast createSurfaceMaterial((cast MatcapMaterialKind : String), (cast opts)) : MatcapMaterial);
+    material = (cast createSurfaceMaterial((cast MatcapMaterialKind : String), (cast opts : Dynamic)) : MatcapMaterial);
     ((cast material : MatcapMaterial).matcap = _Runtime.coalesce(({ final __structural5 = opts; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var matcap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).matcap; }), function():Dynamic return cast null));
     ((cast material : MatcapMaterial).tint = _Runtime.coalesce(({ final __structural6 = opts; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var tint:Null<Float>; }).tint; }), function():Dynamic return cast 4294967295.0));
     return cast material;
@@ -68,7 +68,7 @@ class UnlitMaterials {
 
   public static function createNormalMaterial(?opts:flighthq._internal._Partial<NormalMaterial>):NormalMaterial {
     var material:NormalMaterial = cast _Runtime.UNDEFINED;
-    material = (cast createSurfaceMaterial((cast NormalMaterialKind : String), (cast opts)) : NormalMaterial);
+    material = (cast createSurfaceMaterial((cast NormalMaterialKind : String), (cast opts : Dynamic)) : NormalMaterial);
     ((cast material : NormalMaterial).normalMap = _Runtime.coalesce(({ final __structural7 = opts; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var normalMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).normalMap; }), function():Dynamic return cast null));
     ((cast material : NormalMaterial).normalScale = _Runtime.coalesce(({ final __structural8 = opts; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var normalScale:Null<Float>; }).normalScale; }), function():Dynamic return cast 1.0));
     return cast material;
@@ -77,7 +77,7 @@ class UnlitMaterials {
 
   public static function createToonMaterial(?opts:flighthq._internal._Partial<ToonMaterial>):ToonMaterial {
     var material:ToonMaterial = cast _Runtime.UNDEFINED;
-    material = (cast createSurfaceMaterial((cast ToonMaterialKind : String), (cast opts)) : ToonMaterial);
+    material = (cast createSurfaceMaterial((cast ToonMaterialKind : String), (cast opts : Dynamic)) : ToonMaterial);
     ((cast material : ToonMaterial).baseColor = _Runtime.coalesce(({ final __structural9 = opts; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var baseColor:Null<Float>; }).baseColor; }), function():Dynamic return cast 4294967295.0));
     ((cast material : ToonMaterial).baseColorMap = _Runtime.coalesce(({ final __structural10 = opts; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var baseColorMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).baseColorMap; }), function():Dynamic return cast null));
     ((cast material : ToonMaterial).ramp = _Runtime.coalesce(({ final __structural11 = opts; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { @:optional var ramp:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).ramp; }), function():Dynamic return cast null));
@@ -88,7 +88,7 @@ class UnlitMaterials {
 
   public static function createUnlitMaterial(?opts:flighthq._internal._Partial<UnlitMaterial>):UnlitMaterial {
     var material:UnlitMaterial = cast _Runtime.UNDEFINED;
-    material = (cast createSurfaceMaterial((cast UnlitMaterialKind : String), (cast opts)) : UnlitMaterial);
+    material = (cast createSurfaceMaterial((cast UnlitMaterialKind : String), (cast opts : Dynamic)) : UnlitMaterial);
     ((cast material : UnlitMaterial).baseColor = _Runtime.coalesce(({ final __structural13 = opts; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { @:optional var baseColor:Null<Float>; }).baseColor; }), function():Dynamic return cast 4294967295.0));
     ((cast material : UnlitMaterial).baseColorMap = _Runtime.coalesce(({ final __structural14 = opts; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { @:optional var baseColorMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).baseColorMap; }), function():Dynamic return cast null));
     return cast material;
@@ -97,7 +97,7 @@ class UnlitMaterials {
 
   public static function createVertexColorMaterial(?opts:flighthq._internal._Partial<VertexColorMaterial>):VertexColorMaterial {
     var material:VertexColorMaterial = cast _Runtime.UNDEFINED;
-    material = (cast createSurfaceMaterial((cast VertexColorMaterialKind : String), (cast opts)) : VertexColorMaterial);
+    material = (cast createSurfaceMaterial((cast VertexColorMaterialKind : String), (cast opts : Dynamic)) : VertexColorMaterial);
     ((cast material : VertexColorMaterial).tint = _Runtime.coalesce(({ final __structural15 = opts; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { @:optional var tint:Null<Float>; }).tint; }), function():Dynamic return cast 4294967295.0));
     return cast material;
     return cast null;
@@ -105,7 +105,7 @@ class UnlitMaterials {
 
   public static function createWireframeMaterial(?opts:flighthq._internal._Partial<WireframeMaterial>):WireframeMaterial {
     var material:WireframeMaterial = cast _Runtime.UNDEFINED;
-    material = (cast createSurfaceMaterial((cast WireframeMaterialKind : String), (cast opts)) : WireframeMaterial);
+    material = (cast createSurfaceMaterial((cast WireframeMaterialKind : String), (cast opts : Dynamic)) : WireframeMaterial);
     ((cast material : WireframeMaterial).color = _Runtime.coalesce(({ final __structural16 = opts; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { @:optional var color:Null<Float>; }).color; }), function():Dynamic return cast 4294967295.0));
     ((cast material : WireframeMaterial).thickness = _Runtime.coalesce(({ final __structural17 = opts; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { @:optional var thickness:Null<Float>; }).thickness; }), function():Dynamic return cast 1.0));
     return cast material;

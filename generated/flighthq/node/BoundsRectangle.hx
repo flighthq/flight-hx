@@ -39,46 +39,46 @@ class BoundsRectangle {
   public static function computeNodeBoundsRectangle<Traits:flighthq._internal._Object>(out:RectangleLike, source:Spatial2DNode<Traits>, targetCoordinateSpace:Null<Spatial2DNode<Traits>>):Void {
     var bounds:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.truthy(targetCoordinateSpace) : Bool)) { (targetCoordinateSpace = cast (source : Dynamic)); }
-    if ((cast _Runtime.strictEquals((cast getNodeParent((cast targetCoordinateSpace)) : Null<NodeOf<Traits>>), null) : Bool)) {
-      (bounds = cast ((cast getNodeWorldBoundsRectangle((cast source)) : Rectangle) : Dynamic));
-    } else { if ((cast _Runtime.strictEquals((cast getNodeChildCount((cast source)) : Float), 0.0) : Bool)) {
+    if ((cast _Runtime.strictEquals((cast getNodeParent((cast targetCoordinateSpace : Dynamic)) : Null<NodeOf<Traits>>), null) : Bool)) {
+      (bounds = cast ((cast getNodeWorldBoundsRectangle((cast source : Dynamic)) : Rectangle) : Dynamic));
+    } else { if ((cast _Runtime.strictEquals((cast getNodeChildCount((cast source : Dynamic)) : Float), 0.0) : Bool)) {
       if ((cast _Runtime.strictEquals(targetCoordinateSpace, source) : Bool)) {
-        (bounds = cast ((cast getNodeLocalBoundsRectangle((cast source)) : Rectangle) : Dynamic));
-      } else { if ((cast _Runtime.strictEquals(targetCoordinateSpace, (cast getNodeParent((cast source)) : Null<Spatial2DNode<Traits>>)) : Bool)) {
-        (bounds = cast ((cast getNodeParentBoundsRectangle((cast source)) : Rectangle) : Dynamic));
+        (bounds = cast ((cast getNodeLocalBoundsRectangle((cast source : Dynamic)) : Rectangle) : Dynamic));
+      } else { if ((cast _Runtime.strictEquals(targetCoordinateSpace, (cast getNodeParent((cast source : Dynamic)) : Null<Spatial2DNode<Traits>>)) : Bool)) {
+        (bounds = cast ((cast getNodeParentBoundsRectangle((cast source : Dynamic)) : Rectangle) : Dynamic));
       } }
     } }
     if ((cast !_Runtime.truthy(bounds) : Bool)) {
-      var worldBounds:Rectangle = (cast getNodeWorldBoundsRectangle((cast source)) : Rectangle);
+      var worldBounds:Rectangle = (cast getNodeWorldBoundsRectangle((cast source : Dynamic)) : Rectangle);
       var transform:Matrix = (cast acquireMatrix() : Matrix);
-      (cast inverseMatrix((cast transform), (cast (cast getNodeWorldMatrix((cast targetCoordinateSpace)) : Matrix))) : Bool);
-      matrixTransformRectangle((cast out), (cast transform), (cast worldBounds));
-      releaseMatrix((cast transform));
+      (cast inverseMatrix(({ final __callArgument0:Dynamic = transform; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast getNodeWorldMatrix((cast targetCoordinateSpace : Dynamic)) : Matrix); __callArgument1; })) : Bool);
+      matrixTransformRectangle(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = transform; __callArgument3; }), ({ final __callArgument4:Dynamic = worldBounds; __callArgument4; }));
+      releaseMatrix(({ final __callArgument5:Dynamic = transform; __callArgument5; }));
     } else {
-      copyRectangle((cast out), (cast bounds));
+      copyRectangle(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = bounds; __callArgument7; }));
     }
   }
 
   public static function computeNodeRootLocalBoundsRectangle<Traits:flighthq._internal._Object>(out:RectangleLike, root:Spatial2DNode<Traits>):Void {
-    setEmptyRectangle((cast out));
-    BoundsRectangle.mergeRootLocalBounds__boundsRectangle((cast out), (cast root), (cast null));
+    setEmptyRectangle(({ final __callArgument8:Dynamic = out; __callArgument8; }));
+    BoundsRectangle.mergeRootLocalBounds__boundsRectangle(({ final __callArgument9:Dynamic = out; __callArgument9; }), (cast root : Dynamic), ({ final __callArgument10:Dynamic = null; __callArgument10; }));
   }
 
   @:noCompletion
   public static function ensureNodeLocalBoundsRectangle<Traits:flighthq._internal._Object>(target:BoundsNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasBoundsRectangleRuntime, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasBoundsRectangleRuntime>);
-    if ((cast !(cast (cast BoundsRectangle.isNodeLocalBoundsRectangleValid__boundsRectangle((cast target), (cast runtime)) : Bool) : Bool) : Bool)) {
-      BoundsRectangle.recomputeLocalBoundsRectangle__boundsRectangle((cast target), (cast runtime));
+    runtime = (cast getEntityRuntime(({ final __callArgument11:Dynamic = target; __callArgument11; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasBoundsRectangleRuntime>);
+    if ((cast !(cast (cast BoundsRectangle.isNodeLocalBoundsRectangleValid__boundsRectangle((cast target : Dynamic), (cast runtime : Dynamic)) : Bool) : Bool) : Bool)) {
+      BoundsRectangle.recomputeLocalBoundsRectangle__boundsRectangle((cast target : Dynamic), (cast runtime : Dynamic));
     }
   }
 
   @:noCompletion
   public static function ensureNodeParentBoundsRectangle<Traits:flighthq._internal._Object>(target:Spatial2DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasBoundsRectangleRuntime, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasBoundsRectangleRuntime>);
-    if ((cast ((cast ((cast !(cast (cast BoundsRectangle.isNodeLocalBoundsRectangleValid__boundsRectangle((cast target), (cast runtime)) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var boundsUsingLocalBoundsId:Float; }).boundsUsingLocalBoundsId, (cast runtime : { var localBoundsId:Float; }).localBoundsId) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var boundsUsingLocalTransformId:Float; }).boundsUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool)) : Bool)) {
-      BoundsRectangle.recomputeNodeBoundsRectangle__boundsRectangle((cast target), (cast runtime));
+    runtime = (cast getEntityRuntime(({ final __callArgument12:Dynamic = target; __callArgument12; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasBoundsRectangleRuntime>);
+    if ((cast ((cast ((cast !(cast (cast BoundsRectangle.isNodeLocalBoundsRectangleValid__boundsRectangle((cast target : Dynamic), (cast runtime : Dynamic)) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var boundsUsingLocalBoundsId:Float; }).boundsUsingLocalBoundsId, (cast runtime : { var localBoundsId:Float; }).localBoundsId) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var boundsUsingLocalTransformId:Float; }).boundsUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool)) : Bool)) {
+      BoundsRectangle.recomputeNodeBoundsRectangle__boundsRectangle((cast target : Dynamic), (cast runtime : Dynamic));
     }
   }
 
@@ -88,65 +88,65 @@ class BoundsRectangle {
     var localBoundsInvalid:Bool = cast _Runtime.UNDEFINED;
     var hasChildren:Bool = cast _Runtime.UNDEFINED;
     var forceRecompute:Bool = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<flighthq._internal._Intersection2<NodeRuntime<Traits>, HasBoundsRectangleRuntime>, HasTransform2DRuntime>);
-    localBoundsInvalid = ((cast !(cast (cast BoundsRectangle.isNodeLocalBoundsRectangleValid__boundsRectangle((cast target), (cast runtime)) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var worldBoundsUsingLocalBoundsId:Float; }).worldBoundsUsingLocalBoundsId, (cast runtime : { var localBoundsId:Float; }).localBoundsId) : Bool));
-    hasChildren = !_Runtime.strictEquals((cast getNodeChildCount((cast target)) : Float), 0.0);
+    runtime = (cast getEntityRuntime(({ final __callArgument13:Dynamic = target; __callArgument13; })) : flighthq._internal._Intersection2<flighthq._internal._Intersection2<NodeRuntime<Traits>, HasBoundsRectangleRuntime>, HasTransform2DRuntime>);
+    localBoundsInvalid = ((cast !(cast (cast BoundsRectangle.isNodeLocalBoundsRectangleValid__boundsRectangle((cast target : Dynamic), (cast runtime : Dynamic)) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var worldBoundsUsingLocalBoundsId:Float; }).worldBoundsUsingLocalBoundsId, (cast runtime : { var localBoundsId:Float; }).localBoundsId) : Bool));
+    hasChildren = !_Runtime.strictEquals((cast getNodeChildCount((cast target : Dynamic)) : Float), 0.0);
     forceRecompute = false;
     if ((cast ((cast !(cast hasChildren : Bool) : Bool) && (cast !(cast localBoundsInvalid : Bool) : Bool)) : Bool)) {
-      if ((cast (cast BoundsRectangle.tryFastRecomputeWorldBoundsRectangle__boundsRectangle((cast target), (cast runtime)) : Bool) : Bool)) { return; }
+      if ((cast (cast BoundsRectangle.tryFastRecomputeWorldBoundsRectangle__boundsRectangle((cast target : Dynamic), ({ final __callArgument14:Dynamic = runtime; __callArgument14; })) : Bool) : Bool)) { return; }
       (forceRecompute = cast (true : Dynamic));
     }
-    ensureNodeWorldMatrix((cast target));
+    ensureNodeWorldMatrix((cast target : Dynamic));
     if ((cast ((cast ((cast forceRecompute : Bool) || (cast localBoundsInvalid : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var worldBoundsUsingWorldTransformId:Float; }).worldBoundsUsingWorldTransformId, (cast runtime : { var worldTransformId:Float; }).worldTransformId) : Bool)) : Bool)) {
-      BoundsRectangle.recomputeWorldBoundsRectangle__boundsRectangle((cast target), (cast runtime));
+      BoundsRectangle.recomputeWorldBoundsRectangle__boundsRectangle((cast target : Dynamic), (cast runtime : Dynamic));
     }
   }
 
   public static function getNodeHeight<Traits:flighthq._internal._Object>(source:Spatial2DNode<Traits>):Float {
-    computeNodeBoundsRectangle((cast BoundsRectangle._tempBoundsRectangle__boundsRectangle), (cast source), (cast (cast (cast getNodeParent((cast source)) : flighthq._internal._Any) : Null<Spatial2DNode<Traits>>)));
+    computeNodeBoundsRectangle(({ final __callArgument15:Dynamic = BoundsRectangle._tempBoundsRectangle__boundsRectangle; __callArgument15; }), (cast source : Dynamic), (cast (cast (cast getNodeParent((cast source : Dynamic)) : flighthq._internal._Any) : Null<Spatial2DNode<Traits>>) : Dynamic));
     return cast (cast BoundsRectangle._tempBoundsRectangle__boundsRectangle : Rectangle).height;
     return cast null;
   }
 
   public static function getNodeLocalBoundsRectangle<Traits:flighthq._internal._Object>(target:BoundsNode<Traits>):Rectangle {
-    ensureNodeLocalBoundsRectangle((cast target));
-    return cast (cast (cast getEntityRuntime((cast target)) : HasBoundsRectangleRuntime) : { var localBoundsRectangle:Null<Rectangle>; }).localBoundsRectangle;
+    ensureNodeLocalBoundsRectangle((cast target : Dynamic));
+    return cast (cast (cast getEntityRuntime(({ final __callArgument16:Dynamic = target; __callArgument16; })) : HasBoundsRectangleRuntime) : { var localBoundsRectangle:Null<Rectangle>; }).localBoundsRectangle;
     return cast null;
   }
 
   public static function getNodeParentBoundsRectangle<Traits:flighthq._internal._Object>(target:Spatial2DNode<Traits>):Rectangle {
-    ensureNodeParentBoundsRectangle((cast target));
-    return cast (cast (cast getEntityRuntime((cast target)) : HasBoundsRectangleRuntime) : { var boundsRectangle:Null<Rectangle>; }).boundsRectangle;
+    ensureNodeParentBoundsRectangle((cast target : Dynamic));
+    return cast (cast (cast getEntityRuntime(({ final __callArgument17:Dynamic = target; __callArgument17; })) : HasBoundsRectangleRuntime) : { var boundsRectangle:Null<Rectangle>; }).boundsRectangle;
     return cast null;
   }
 
   public static function getNodeWidth<Traits:flighthq._internal._Object>(source:Spatial2DNode<Traits>):Float {
-    computeNodeBoundsRectangle((cast BoundsRectangle._tempBoundsRectangle__boundsRectangle), (cast source), (cast (cast (cast getNodeParent((cast source)) : flighthq._internal._Any) : Null<Spatial2DNode<Traits>>)));
+    computeNodeBoundsRectangle(({ final __callArgument18:Dynamic = BoundsRectangle._tempBoundsRectangle__boundsRectangle; __callArgument18; }), (cast source : Dynamic), (cast (cast (cast getNodeParent((cast source : Dynamic)) : flighthq._internal._Any) : Null<Spatial2DNode<Traits>>) : Dynamic));
     return cast (cast BoundsRectangle._tempBoundsRectangle__boundsRectangle : Rectangle).width;
     return cast null;
   }
 
   public static function getNodeWorldBoundsRectangle<Traits:flighthq._internal._Object>(target:Spatial2DNode<Traits>):Rectangle {
-    ensureNodeWorldBoundsRectangle((cast target));
-    return cast (cast (cast getEntityRuntime((cast target)) : HasBoundsRectangleRuntime) : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle;
+    ensureNodeWorldBoundsRectangle((cast target : Dynamic));
+    return cast (cast (cast getEntityRuntime(({ final __callArgument19:Dynamic = target; __callArgument19; })) : HasBoundsRectangleRuntime) : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle;
     return cast null;
   }
 
   public static function setNodeHeight<Traits:flighthq._internal._Object>(target:Spatial2DNode<Traits>, value:Float):Void {
     if ((cast _Runtime.strictEquals(target.scaleY, 0.0) : Bool)) { return; }
-    (target.scaleY = cast (((value * target.scaleY) / (cast getNodeHeight((cast target)) : Float)) : Dynamic));
-    invalidateNodeLocalTransform((cast target));
+    (target.scaleY = cast (((value * target.scaleY) / (cast getNodeHeight((cast target : Dynamic)) : Float)) : Dynamic));
+    invalidateNodeLocalTransform((cast target : Dynamic));
   }
 
   public static function setNodeWidth<Traits:flighthq._internal._Object>(target:Spatial2DNode<Traits>, value:Float):Void {
     if ((cast _Runtime.strictEquals(target.scaleX, 0.0) : Bool)) { return; }
-    (target.scaleX = cast (((value * target.scaleX) / (cast getNodeWidth((cast target)) : Float)) : Dynamic));
-    invalidateNodeLocalTransform((cast target));
+    (target.scaleX = cast (((value * target.scaleX) / (cast getNodeWidth((cast target : Dynamic)) : Float)) : Dynamic));
+    invalidateNodeLocalTransform((cast target : Dynamic));
   }
 
   public static function recomputeNodeBoundsRectangle__boundsRectangle<Traits:flighthq._internal._Object>(target:Spatial2DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasBoundsRectangleRuntime, }):Void {
-    if ((cast _Runtime.strictEquals(runtime.boundsRectangle, null) : Bool)) { (runtime.boundsRectangle = cast ((cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle) : Dynamic)); }
-    matrixTransformRectangle((cast runtime.boundsRectangle), (cast (cast getNodeLocalMatrix((cast target)) : Matrix)), (cast (cast getNodeLocalBoundsRectangle((cast target)) : Rectangle)));
+    if ((cast _Runtime.strictEquals(runtime.boundsRectangle, null) : Bool)) { (runtime.boundsRectangle = cast ((cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle) : Dynamic)); }
+    matrixTransformRectangle(({ final __callArgument20:Dynamic = runtime.boundsRectangle; __callArgument20; }), ({ final __callArgument21:Dynamic = (cast getNodeLocalMatrix((cast target : Dynamic)) : Matrix); __callArgument21; }), ({ final __callArgument22:Dynamic = (cast getNodeLocalBoundsRectangle((cast target : Dynamic)) : Rectangle); __callArgument22; }));
     ((cast runtime : { var boundsUsingLocalBoundsId:Float; }).boundsUsingLocalBoundsId = (cast runtime : { var localBoundsId:Float; }).localBoundsId);
     ((cast runtime : { var boundsUsingLocalTransformId:Float; }).boundsUsingLocalTransformId = (cast runtime : { var localTransformId:Float; }).localTransformId);
   }
@@ -159,42 +159,42 @@ class BoundsRectangle {
   public static function mergeRootLocalBounds__boundsRectangle<Traits:flighthq._internal._Object>(out:RectangleLike, node:Spatial2DNode<Traits>, transform:Null<Matrix>):Void {
     var localBounds:Rectangle = cast _Runtime.UNDEFINED;
     var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
-    localBounds = (cast getNodeLocalBoundsRectangle((cast node)) : Rectangle);
+    localBounds = (cast getNodeLocalBoundsRectangle((cast node : Dynamic)) : Rectangle);
     if ((cast _Runtime.strictEquals(transform, null) : Bool)) {
-      copyRectangle((cast BoundsRectangle._rootLocalNodeBounds__boundsRectangle), (cast localBounds));
+      copyRectangle(({ final __callArgument23:Dynamic = BoundsRectangle._rootLocalNodeBounds__boundsRectangle; __callArgument23; }), ({ final __callArgument24:Dynamic = localBounds; __callArgument24; }));
     } else {
-      matrixTransformRectangle((cast BoundsRectangle._rootLocalNodeBounds__boundsRectangle), (cast transform), (cast localBounds));
+      matrixTransformRectangle(({ final __callArgument25:Dynamic = BoundsRectangle._rootLocalNodeBounds__boundsRectangle; __callArgument25; }), ({ final __callArgument26:Dynamic = transform; __callArgument26; }), ({ final __callArgument27:Dynamic = localBounds; __callArgument27; }));
     }
-    mergeRectangle((cast out), (cast out), (cast BoundsRectangle._rootLocalNodeBounds__boundsRectangle));
-    children = _Runtime.field((cast getNodeRuntime((cast node)) : NodeRuntime<Traits>), 'children');
+    mergeRectangle(({ final __callArgument28:Dynamic = out; __callArgument28; }), ({ final __callArgument29:Dynamic = out; __callArgument29; }), ({ final __callArgument30:Dynamic = BoundsRectangle._rootLocalNodeBounds__boundsRectangle; __callArgument30; }));
+    children = _Runtime.field((cast getNodeRuntime((cast node : Dynamic)) : NodeRuntime<Traits>), 'children');
     if ((cast _Runtime.strictEquals(children, null) : Bool)) { return; }
     for (child in _Runtime.iterable(children)) {
       if ((cast !(cast (cast child : Node<Traits>).enabled : Bool) : Bool)) { continue; }
       var childTransform:Matrix = (cast acquireMatrix() : Matrix);
-      var childLocal:Matrix = (cast getNodeLocalMatrix((cast (cast child : Spatial2DNode<Traits>))) : Matrix);
-      if ((cast _Runtime.strictEquals(transform, null) : Bool)) { copyMatrix((cast childTransform), (cast childLocal)); } else { multiplyMatrix((cast childTransform), (cast transform), (cast childLocal)); }
-      BoundsRectangle.mergeRootLocalBounds__boundsRectangle((cast out), (cast (cast child : Spatial2DNode<Traits>)), (cast childTransform));
-      releaseMatrix((cast childTransform));
+      var childLocal:Matrix = (cast getNodeLocalMatrix((cast (cast child : Spatial2DNode<Traits>) : Dynamic)) : Matrix);
+      if ((cast _Runtime.strictEquals(transform, null) : Bool)) { copyMatrix(({ final __callArgument33:Dynamic = childTransform; __callArgument33; }), ({ final __callArgument34:Dynamic = childLocal; __callArgument34; })); } else { multiplyMatrix(({ final __callArgument35:Dynamic = childTransform; __callArgument35; }), ({ final __callArgument36:Dynamic = transform; __callArgument36; }), ({ final __callArgument37:Dynamic = childLocal; __callArgument37; })); }
+      BoundsRectangle.mergeRootLocalBounds__boundsRectangle(({ final __callArgument38:Dynamic = out; __callArgument38; }), (cast (cast child : Spatial2DNode<Traits>) : Dynamic), ({ final __callArgument39:Dynamic = childTransform; __callArgument39; }));
+      releaseMatrix(({ final __callArgument40:Dynamic = childTransform; __callArgument40; }));
     }
   }
 
   public static function recomputeLocalBoundsRectangle__boundsRectangle<Traits:flighthq._internal._Object>(target:BoundsNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasBoundsRectangleRuntime, }):Void {
-    if ((cast _Runtime.strictEquals(runtime.localBoundsRectangle, null) : Bool)) { (runtime.localBoundsRectangle = cast ((cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle) : Dynamic)); }
-    (runtime.computeLocalBoundsRectangle)((cast runtime.localBoundsRectangle), (cast target));
+    if ((cast _Runtime.strictEquals(runtime.localBoundsRectangle, null) : Bool)) { (runtime.localBoundsRectangle = cast ((cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle) : Dynamic)); }
+    (runtime.computeLocalBoundsRectangle)(runtime.localBoundsRectangle, ({ final __callArgument41:Dynamic = target; __callArgument41; }));
     ((cast runtime : { var localBoundsUsingLocalBoundsId:Float; }).localBoundsUsingLocalBoundsId = (cast runtime : { var localBoundsId:Float; }).localBoundsId);
   }
 
   public static function recomputeWorldBoundsRectangle__boundsRectangle<Traits:flighthq._internal._Object>(target:Spatial2DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasBoundsRectangleRuntime, >HasTransform2DRuntime, }):Void {
     var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals((cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle, null) : Bool)) { ((cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle)); }
-    matrixTransformRectangle((cast (cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle), (cast (cast getNodeWorldMatrix((cast target)) : Matrix)), (cast (cast getNodeLocalBoundsRectangle((cast target)) : Rectangle)));
-    children = _Runtime.field((cast getNodeRuntime((cast target)) : NodeRuntime<Traits>), 'children');
+    if ((cast _Runtime.strictEquals((cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle, null) : Bool)) { ((cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle)); }
+    matrixTransformRectangle(({ final __callArgument42:Dynamic = (cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle; __callArgument42; }), ({ final __callArgument43:Dynamic = (cast getNodeWorldMatrix((cast target : Dynamic)) : Matrix); __callArgument43; }), ({ final __callArgument44:Dynamic = (cast getNodeLocalBoundsRectangle((cast target : Dynamic)) : Rectangle); __callArgument44; }));
+    children = _Runtime.field((cast getNodeRuntime((cast target : Dynamic)) : NodeRuntime<Traits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
         if ((cast !(cast (cast child : Node<Traits>).enabled : Bool) : Bool)) { continue; }
-        var childWorldBounds:Rectangle = (cast getNodeWorldBoundsRectangle((cast (cast child : Spatial2DNode<Traits>))) : Rectangle);
+        var childWorldBounds:Rectangle = (cast getNodeWorldBoundsRectangle((cast (cast child : Spatial2DNode<Traits>) : Dynamic)) : Rectangle);
         if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(childWorldBounds, 'width'), 0.0) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(childWorldBounds, 'height'), 0.0) : Bool)) : Bool)) {
-          mergeRectangle((cast (cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle), (cast (cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle), (cast childWorldBounds));
+          mergeRectangle(({ final __callArgument47:Dynamic = (cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle; __callArgument47; }), ({ final __callArgument48:Dynamic = (cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle; __callArgument48; }), ({ final __callArgument49:Dynamic = childWorldBounds; __callArgument49; }));
         }
       }
     }
@@ -211,7 +211,7 @@ class BoundsRectangle {
       var _d:Float = _Runtime.field(__destructure0, 'd');
       var _tx:Float = _Runtime.field(__destructure0, 'tx');
       var _ty:Float = _Runtime.field(__destructure0, 'ty');
-      ensureNodeWorldMatrix((cast target));
+      ensureNodeWorldMatrix((cast target : Dynamic));
       var __destructure1 = (cast runtime : { var worldMatrix:Null<Matrix>; }).worldMatrix;
       var a:Float = _Runtime.field(__destructure1, 'a');
       var b:Float = _Runtime.field(__destructure1, 'b');
@@ -231,7 +231,7 @@ class BoundsRectangle {
     return cast null;
   }
 
-  public static final _tempBoundsRectangle__boundsRectangle:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
+  public static final _tempBoundsRectangle__boundsRectangle:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);
 
-  public static final _rootLocalNodeBounds__boundsRectangle:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
+  public static final _rootLocalNodeBounds__boundsRectangle:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);
 }

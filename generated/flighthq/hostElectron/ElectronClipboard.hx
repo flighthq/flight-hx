@@ -76,7 +76,7 @@ class ElectronClipboard {
     }, writeImage: function(dataUrl:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeImage((cast (cast (cast electron : ElectronApi).nativeImage : ElectronNativeImageModule).createFromDataUrl((cast dataUrl : String))));
+          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeImage((cast (cast electron : ElectronApi).nativeImage : ElectronNativeImageModule).createFromDataUrl((cast dataUrl : String)));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -147,7 +147,7 @@ class ElectronClipboard {
         try {
           var payload:ElectronClipboardData = (cast {  });
           _Runtime.setIndex(payload, (cast ElectronClipboard.formatKey__electronClipboard((cast format : String)) : String), data);
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).write((cast payload));
+          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).write(({ final __callArgument0:Dynamic = payload; __callArgument0; }));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -192,7 +192,7 @@ class ElectronClipboard {
           for (item in _Runtime.iterable(items)) {
             _Runtime.setIndex(data, (cast ElectronClipboard.formatKey__electronClipboard((cast item.format : String)) : String), item.data);
           }
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).write((cast data));
+          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).write(({ final __callArgument5:Dynamic = data; __callArgument5; }));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;

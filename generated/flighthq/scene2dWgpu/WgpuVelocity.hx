@@ -41,19 +41,19 @@ typedef WgpuVelocityPipeline__wgpuVelocity = { var pipeline:flighthq._internal.d
 
 class WgpuVelocity {
   public static function createWgpuVelocityTarget(state:WgpuRenderState, width:Float, height:Float):WgpuRenderTarget {
-    return cast (cast createWgpuRenderTarget((cast state), (cast width : Float), (cast height : Float), (cast 'rgba16float' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : WgpuRenderTarget);
+    return cast (cast createWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast width : Float), (cast height : Float), (cast 'rgba16float' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : WgpuRenderTarget);
     return cast null;
   }
 
   public static final defaultWgpuNode2DVelocityWriter:WgpuVelocityWriter = (cast function(ctx:WgpuVelocityContext, node:flighthq._internal._Object):Void {
     var spatial:Spatial2DNode<Dynamic> = cast _Runtime.UNDEFINED;
     var bounds:Rectangle = cast _Runtime.UNDEFINED;
-    (cast getVelocity((cast _Runtime.field(ctx, 'field')), (cast node), (cast WgpuVelocity._scratchVelocity__wgpuVelocity)) : Velocity2D);
+    (cast getVelocity(_Runtime.field(ctx, 'field'), ({ final __callArgument1:Dynamic = node; __callArgument1; }), ({ final __callArgument2:Dynamic = WgpuVelocity._scratchVelocity__wgpuVelocity; __callArgument2; })) : Velocity2D);
     if ((cast ((cast _Runtime.strictEquals((cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).x, 0.0) : Bool) && (cast _Runtime.strictEquals((cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).y, 0.0) : Bool)) : Bool)) { return; }
     spatial = (cast (cast node : flighthq._internal._Any) : Spatial2DNode<Dynamic>);
-    ensureNodeWorldBoundsRectangle((cast spatial));
-    bounds = (cast getNodeWorldBoundsRectangle((cast spatial)) : Rectangle);
-    drawWgpuVelocityQuad((cast ctx), (cast _Runtime.field(bounds, 'x') : Float), (cast _Runtime.field(bounds, 'y') : Float), (cast _Runtime.field(bounds, 'width') : Float), (cast _Runtime.field(bounds, 'height') : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).x : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).y : Float));
+    ensureNodeWorldBoundsRectangle((cast spatial : Dynamic));
+    bounds = (cast getNodeWorldBoundsRectangle((cast spatial : Dynamic)) : Rectangle);
+    drawWgpuVelocityQuad(({ final __callArgument3:Dynamic = ctx; __callArgument3; }), (cast _Runtime.field(bounds, 'x') : Float), (cast _Runtime.field(bounds, 'y') : Float), (cast _Runtime.field(bounds, 'width') : Float), (cast _Runtime.field(bounds, 'height') : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).x : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).y : Float));
   });
 
   public static final defaultWgpuParticleEmitter2DVelocityWriter:WgpuVelocityWriter = (cast function(ctx:WgpuVelocityContext, node:flighthq._internal._Object):Void {
@@ -91,8 +91,8 @@ class WgpuVelocity {
     wtx = 0.0;
     wty = 0.0;
     if ((cast !(cast worldSpace : Bool) : Bool)) {
-      ensureNodeWorldMatrix((cast (cast (cast node : flighthq._internal._Any) : Transform2DNode<Dynamic>)));
-      var transform:Matrix = (cast getNodeWorldMatrix((cast (cast (cast node : flighthq._internal._Any) : Transform2DNode<Dynamic>))) : Matrix);
+      ensureNodeWorldMatrix((cast (cast (cast node : flighthq._internal._Any) : Transform2DNode<Dynamic>) : Dynamic));
+      var transform:Matrix = (cast getNodeWorldMatrix((cast (cast (cast node : flighthq._internal._Any) : Transform2DNode<Dynamic>) : Dynamic)) : Matrix);
       (wa = cast (transform.a : Dynamic));
       (wb = cast (transform.b : Dynamic));
       (wc = cast (transform.c : Dynamic));
@@ -139,7 +139,7 @@ class WgpuVelocity {
             c++;
           }
         }
-        drawWgpuVelocityQuad((cast ctx), (cast minX : Float), (cast minY : Float), (cast (maxX - minX) : Float), (cast (maxY - minY) : Float), (cast velocityX : Float), (cast velocityY : Float));
+        drawWgpuVelocityQuad(({ final __callArgument4:Dynamic = ctx; __callArgument4; }), (cast minX : Float), (cast minY : Float), (cast (maxX - minX) : Float), (cast (maxY - minY) : Float), (cast velocityX : Float), (cast velocityY : Float));
         i++;
       }
     }
@@ -172,8 +172,8 @@ class WgpuVelocity {
     if ((cast ((cast ((cast !_Runtime.strictEquals(instanceVelocities, null) : Bool) && (cast !_Runtime.strictEquals(atlas, null) : Bool)) : Bool) && (cast ((cast instanceCount : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var regions:Array<TextureAtlasRegion> = atlas.regions;
       var numRegions:Float = _Runtime.field(regions, 'length');
-      ensureNodeWorldMatrix((cast (cast (cast node : flighthq._internal._Any) : Transform2DNode<Dynamic>)));
-      var transform:Matrix = (cast getNodeWorldMatrix((cast (cast (cast node : flighthq._internal._Any) : Transform2DNode<Dynamic>))) : Matrix);
+      ensureNodeWorldMatrix((cast (cast (cast node : flighthq._internal._Any) : Transform2DNode<Dynamic>) : Dynamic));
+      var transform:Matrix = (cast getNodeWorldMatrix((cast (cast (cast node : flighthq._internal._Any) : Transform2DNode<Dynamic>) : Dynamic)) : Matrix);
       var pa:Float = transform.a;
       var pb:Float = transform.b;
       var pc:Float = transform.c;
@@ -235,18 +235,18 @@ class WgpuVelocity {
           var minY:Float = HxMath.min(HxMath.min(HxMath.min(y0, y1), y2), y3);
           var maxX:Float = HxMath.max(HxMath.max(HxMath.max(x0, x1), x2), x3);
           var maxY:Float = HxMath.max(HxMath.max(HxMath.max(y0, y1), y2), y3);
-          drawWgpuVelocityQuad((cast ctx), (cast minX : Float), (cast minY : Float), (cast (maxX - minX) : Float), (cast (maxY - minY) : Float), (cast velocityX : Float), (cast velocityY : Float));
+          drawWgpuVelocityQuad(({ final __callArgument5:Dynamic = ctx; __callArgument5; }), (cast minX : Float), (cast minY : Float), (cast (maxX - minX) : Float), (cast (maxY - minY) : Float), (cast velocityX : Float), (cast velocityY : Float));
           i++;
         }
       }
       return;
     }
-    (cast getVelocity((cast _Runtime.field(ctx, 'field')), (cast node), (cast WgpuVelocity._scratchVelocity__wgpuVelocity)) : Velocity2D);
+    (cast getVelocity(_Runtime.field(ctx, 'field'), ({ final __callArgument6:Dynamic = node; __callArgument6; }), ({ final __callArgument7:Dynamic = WgpuVelocity._scratchVelocity__wgpuVelocity; __callArgument7; })) : Velocity2D);
     if ((cast ((cast _Runtime.strictEquals((cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).x, 0.0) : Bool) && (cast _Runtime.strictEquals((cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).y, 0.0) : Bool)) : Bool)) { return; }
     spatial = (cast (cast node : flighthq._internal._Any) : Spatial2DNode<Dynamic>);
-    ensureNodeWorldBoundsRectangle((cast spatial));
-    bounds = (cast getNodeWorldBoundsRectangle((cast spatial)) : Rectangle);
-    drawWgpuVelocityQuad((cast ctx), (cast _Runtime.field(bounds, 'x') : Float), (cast _Runtime.field(bounds, 'y') : Float), (cast _Runtime.field(bounds, 'width') : Float), (cast _Runtime.field(bounds, 'height') : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).x : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).y : Float));
+    ensureNodeWorldBoundsRectangle((cast spatial : Dynamic));
+    bounds = (cast getNodeWorldBoundsRectangle((cast spatial : Dynamic)) : Rectangle);
+    drawWgpuVelocityQuad(({ final __callArgument8:Dynamic = ctx; __callArgument8; }), (cast _Runtime.field(bounds, 'x') : Float), (cast _Runtime.field(bounds, 'y') : Float), (cast _Runtime.field(bounds, 'width') : Float), (cast _Runtime.field(bounds, 'height') : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).x : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).y : Float));
   });
 
   @:noCompletion
@@ -282,7 +282,7 @@ class WgpuVelocity {
 
   @:noCompletion
   public static function getWgpuVelocityWriter(state:WgpuRenderState, kind:Kind):Null<WgpuVelocityWriter> {
-    return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast WgpuVelocity._velocityWriters__wgpuVelocity : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuVelocityWriter>>).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, WgpuVelocityWriter>).get(kind)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection9:Dynamic = ((cast WgpuVelocity._velocityWriters__wgpuVelocity : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuVelocityWriter>>).get(state)); __collection9 == null ? _Runtime.UNDEFINED : ((cast __collection9 : flighthq._internal._Map<String, WgpuVelocityWriter>).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -301,7 +301,7 @@ class WgpuVelocity {
     var pipeline:WgpuVelocityPipeline__wgpuVelocity = cast _Runtime.UNDEFINED;
     var pass:flighthq._internal.dom.GPURenderPassEncoder = cast _Runtime.UNDEFINED;
     var ctx:WgpuVelocityContext = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).commandEncoder, null) : Bool)) {
       _Runtime.throwValue(_Runtime.error('No active command encoder — call renderWgpuBackground before renderWgpuVelocity.'));
     }
@@ -309,14 +309,14 @@ class WgpuVelocity {
       (cast (cast runtime : WgpuRenderStateRuntime).renderPass : flighthq._internal.dom.GPURenderPassEncoder).end();
       ((cast runtime : WgpuRenderStateRuntime).renderPass = null);
     }
-    pipeline = (cast WgpuVelocity.ensureWgpuVelocityPipeline__wgpuVelocity((cast state)) : WgpuVelocityPipeline__wgpuVelocity);
+    pipeline = (cast WgpuVelocity.ensureWgpuVelocityPipeline__wgpuVelocity(({ final __callArgument11:Dynamic = state; __callArgument11; })) : WgpuVelocityPipeline__wgpuVelocity);
     ((cast pipeline : WgpuVelocityPipeline__wgpuVelocity).cursor = 0.0);
     pass = (cast (cast runtime : WgpuRenderStateRuntime).commandEncoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: _Runtime.field(target, 'view'), loadOp: 'clear', storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) });
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setViewport(0.0, 0.0, _Runtime.field(target, 'width'), _Runtime.field(target, 'height'), 0.0, 1.0);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline((cast pipeline : WgpuVelocityPipeline__wgpuVelocity).pipeline);
     ((cast WgpuVelocity._activeVelocityPasses__wgpuVelocity : flighthq._internal._WeakMap<WgpuRenderState, { var pass:flighthq._internal.dom.GPURenderPassEncoder; var pipeline:WgpuVelocityPipeline__wgpuVelocity; }>).set(state, (cast { pass: pass, pipeline: pipeline })));
     ctx = (cast { state: state, field: field, width: _Runtime.field(target, 'width'), height: _Runtime.field(target, 'height'), pixelRatio: (cast state : WgpuRenderState).pixelRatio });
-    WgpuVelocity.visitWgpuVelocity__wgpuVelocity((cast ctx), (cast root));
+    WgpuVelocity.visitWgpuVelocity__wgpuVelocity(({ final __callArgument12:Dynamic = ctx; __callArgument12; }), (cast root : Dynamic));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
     ((cast WgpuVelocity._activeVelocityPasses__wgpuVelocity : flighthq._internal._WeakMap<WgpuRenderState, { var pass:flighthq._internal.dom.GPURenderPassEncoder; var pipeline:WgpuVelocityPipeline__wgpuVelocity; }>).delete_(state));
   }
@@ -349,14 +349,14 @@ class WgpuVelocity {
   public static function visitWgpuVelocity__wgpuVelocity<Traits:flighthq._internal._Object>(ctx:WgpuVelocityContext, node:Transform2DNode<Traits>):Void {
     var writer:Null<WgpuVelocityWriter> = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
-    writer = (cast getWgpuVelocityWriter((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(node, 'kind') : String)) : Null<WgpuVelocityWriter>);
-    if ((cast !_Runtime.strictEquals(writer, null) : Bool)) { writer((cast ctx), (cast node)); }
-    count = (cast getNodeChildCount((cast node)) : Float);
+    writer = (cast getWgpuVelocityWriter(_Runtime.field(ctx, 'state'), (cast _Runtime.field(node, 'kind') : String)) : Null<WgpuVelocityWriter>);
+    if ((cast !_Runtime.strictEquals(writer, null) : Bool)) { writer(({ final __callArgument13:Dynamic = ctx; __callArgument13; }), ({ final __callArgument14:Dynamic = node; __callArgument14; })); }
+    count = (cast getNodeChildCount((cast node : Dynamic)) : Float);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var child:Null<NodeOf<Traits>> = (cast getNodeChildAt((cast node), (cast i : Float)) : Null<NodeOf<Traits>>);
-        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { WgpuVelocity.visitWgpuVelocity__wgpuVelocity((cast ctx), (cast (cast (cast child : flighthq._internal._Any) : Transform2DNode<Traits>))); }
+        var child:Null<NodeOf<Traits>> = (cast getNodeChildAt((cast node : Dynamic), (cast i : Float)) : Null<NodeOf<Traits>>);
+        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { WgpuVelocity.visitWgpuVelocity__wgpuVelocity(({ final __callArgument15:Dynamic = ctx; __callArgument15; }), (cast (cast (cast child : flighthq._internal._Any) : Transform2DNode<Traits>) : Dynamic)); }
         i++;
       }
     }

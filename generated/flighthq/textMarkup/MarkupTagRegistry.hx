@@ -23,20 +23,20 @@ class MarkupTagRegistry {
 
   public static function registerStandardMarkupTags(registry:flighthq.types.MarkupTagRegistry):Void {
     ((cast registry : { @:optional var colorResolver:Null<MarkupColorResolver>; }).colorResolver = resolveMarkupHexColor);
-    registerMarkupTag((cast registry), (cast 'a' : String), (cast MarkupTagRegistry.markupAnchorTagHandler__markupTagRegistry));
-    registerMarkupTag((cast registry), (cast 'b' : String), (cast function(__unused0:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupBoldTagHandler__markupTagRegistry()));
-    registerMarkupTag((cast registry), (cast 'br' : String), (cast function(__unused1:flighthq._internal._Record<String, String>):{ var text:String; } return MarkupTagRegistry.markupBreakTagHandler__markupTagRegistry()));
-    registerMarkupTag((cast registry), (cast 'em' : String), (cast function(__unused2:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupItalicTagHandler__markupTagRegistry()));
-    registerMarkupTag((cast registry), (cast 'font' : String), (cast (cast MarkupTagRegistry.createMarkupFontTagHandler__markupTagRegistry((cast registry)) : MarkupTagHandler)));
-    registerMarkupTag((cast registry), (cast 'i' : String), (cast function(__unused3:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupItalicTagHandler__markupTagRegistry()));
-    registerMarkupTag((cast registry), (cast 'li' : String), (cast MarkupTagRegistry.markupListItemTagHandler__markupTagRegistry));
-    registerMarkupTag((cast registry), (cast 'p' : String), (cast MarkupTagRegistry.markupParagraphTagHandler__markupTagRegistry));
-    registerMarkupTag((cast registry), (cast 's' : String), (cast function(__unused4:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupStrikethroughTagHandler__markupTagRegistry()));
-    registerMarkupTag((cast registry), (cast 'span' : String), (cast (cast MarkupTagRegistry.createMarkupSpanTagHandler__markupTagRegistry((cast registry)) : MarkupTagHandler)));
-    registerMarkupTag((cast registry), (cast 'strike' : String), (cast function(__unused5:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupStrikethroughTagHandler__markupTagRegistry()));
-    registerMarkupTag((cast registry), (cast 'strong' : String), (cast function(__unused6:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupBoldTagHandler__markupTagRegistry()));
-    registerMarkupTag((cast registry), (cast 'textformat' : String), (cast MarkupTagRegistry.markupTextformatTagHandler__markupTagRegistry));
-    registerMarkupTag((cast registry), (cast 'u' : String), (cast function(__unused7:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupUnderlineTagHandler__markupTagRegistry()));
+    registerMarkupTag(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast 'a' : String), ({ final __callArgument1:Dynamic = MarkupTagRegistry.markupAnchorTagHandler__markupTagRegistry; __callArgument1; }));
+    registerMarkupTag(({ final __callArgument2:Dynamic = registry; __callArgument2; }), (cast 'b' : String), ({ final __callArgument3:Dynamic = function(__unused0:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupBoldTagHandler__markupTagRegistry(); __callArgument3; }));
+    registerMarkupTag(({ final __callArgument4:Dynamic = registry; __callArgument4; }), (cast 'br' : String), ({ final __callArgument5:Dynamic = function(__unused1:flighthq._internal._Record<String, String>):{ var text:String; } return MarkupTagRegistry.markupBreakTagHandler__markupTagRegistry(); __callArgument5; }));
+    registerMarkupTag(({ final __callArgument6:Dynamic = registry; __callArgument6; }), (cast 'em' : String), ({ final __callArgument7:Dynamic = function(__unused2:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupItalicTagHandler__markupTagRegistry(); __callArgument7; }));
+    registerMarkupTag(({ final __callArgument8:Dynamic = registry; __callArgument8; }), (cast 'font' : String), (cast MarkupTagRegistry.createMarkupFontTagHandler__markupTagRegistry(({ final __callArgument9:Dynamic = registry; __callArgument9; })) : MarkupTagHandler));
+    registerMarkupTag(({ final __callArgument10:Dynamic = registry; __callArgument10; }), (cast 'i' : String), ({ final __callArgument11:Dynamic = function(__unused3:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupItalicTagHandler__markupTagRegistry(); __callArgument11; }));
+    registerMarkupTag(({ final __callArgument12:Dynamic = registry; __callArgument12; }), (cast 'li' : String), ({ final __callArgument13:Dynamic = MarkupTagRegistry.markupListItemTagHandler__markupTagRegistry; __callArgument13; }));
+    registerMarkupTag(({ final __callArgument14:Dynamic = registry; __callArgument14; }), (cast 'p' : String), ({ final __callArgument15:Dynamic = MarkupTagRegistry.markupParagraphTagHandler__markupTagRegistry; __callArgument15; }));
+    registerMarkupTag(({ final __callArgument16:Dynamic = registry; __callArgument16; }), (cast 's' : String), ({ final __callArgument17:Dynamic = function(__unused4:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupStrikethroughTagHandler__markupTagRegistry(); __callArgument17; }));
+    registerMarkupTag(({ final __callArgument18:Dynamic = registry; __callArgument18; }), (cast 'span' : String), (cast MarkupTagRegistry.createMarkupSpanTagHandler__markupTagRegistry(({ final __callArgument19:Dynamic = registry; __callArgument19; })) : MarkupTagHandler));
+    registerMarkupTag(({ final __callArgument20:Dynamic = registry; __callArgument20; }), (cast 'strike' : String), ({ final __callArgument21:Dynamic = function(__unused5:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupStrikethroughTagHandler__markupTagRegistry(); __callArgument21; }));
+    registerMarkupTag(({ final __callArgument22:Dynamic = registry; __callArgument22; }), (cast 'strong' : String), ({ final __callArgument23:Dynamic = function(__unused6:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupBoldTagHandler__markupTagRegistry(); __callArgument23; }));
+    registerMarkupTag(({ final __callArgument24:Dynamic = registry; __callArgument24; }), (cast 'textformat' : String), ({ final __callArgument25:Dynamic = MarkupTagRegistry.markupTextformatTagHandler__markupTagRegistry; __callArgument25; }));
+    registerMarkupTag(({ final __callArgument26:Dynamic = registry; __callArgument26; }), (cast 'u' : String), ({ final __callArgument27:Dynamic = function(__unused7:flighthq._internal._Record<String, String>):flighthq._internal._Any return MarkupTagRegistry.markupUnderlineTagHandler__markupTagRegistry(); __callArgument27; }));
   }
 
   public static function resolveMarkupHexColor(value:String):Null<Float> {
@@ -189,17 +189,17 @@ class MarkupTagRegistry {
     var rightMargin:Null<Float> = cast _Runtime.UNDEFINED;
     var tabStops:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     format = (cast {  });
-    blockIndent = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry((cast attributes), (cast 'blockindent' : String)) : Null<Float>);
+    blockIndent = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry(({ final __callArgument30:Dynamic = attributes; __callArgument30; }), (cast 'blockindent' : String)) : Null<Float>);
     if ((cast !_Runtime.strictEquals(blockIndent, null) : Bool)) { ((cast format : TextFormat).blockIndent = blockIndent); }
-    indent = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry((cast attributes), (cast 'indent' : String)) : Null<Float>);
+    indent = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry(({ final __callArgument31:Dynamic = attributes; __callArgument31; }), (cast 'indent' : String)) : Null<Float>);
     if ((cast !_Runtime.strictEquals(indent, null) : Bool)) { ((cast format : TextFormat).indent = indent); }
-    leading = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry((cast attributes), (cast 'leading' : String)) : Null<Float>);
+    leading = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry(({ final __callArgument32:Dynamic = attributes; __callArgument32; }), (cast 'leading' : String)) : Null<Float>);
     if ((cast !_Runtime.strictEquals(leading, null) : Bool)) { ((cast format : TextFormat).leading = leading); }
-    leftMargin = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry((cast attributes), (cast 'leftmargin' : String)) : Null<Float>);
+    leftMargin = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry(({ final __callArgument33:Dynamic = attributes; __callArgument33; }), (cast 'leftmargin' : String)) : Null<Float>);
     if ((cast !_Runtime.strictEquals(leftMargin, null) : Bool)) { ((cast format : TextFormat).leftMargin = leftMargin); }
-    rightMargin = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry((cast attributes), (cast 'rightmargin' : String)) : Null<Float>);
+    rightMargin = (cast MarkupTagRegistry.readMarkupNumberAttribute__markupTagRegistry(({ final __callArgument34:Dynamic = attributes; __callArgument34; }), (cast 'rightmargin' : String)) : Null<Float>);
     if ((cast !_Runtime.strictEquals(rightMargin, null) : Bool)) { ((cast format : TextFormat).rightMargin = rightMargin); }
-    tabStops = (cast MarkupTagRegistry.readMarkupTabStopsAttribute__markupTagRegistry((cast attributes), (cast 'tabstops' : String)) : Null<Array<Float>>);
+    tabStops = (cast MarkupTagRegistry.readMarkupTabStopsAttribute__markupTagRegistry(({ final __callArgument35:Dynamic = attributes; __callArgument35; }), (cast 'tabstops' : String)) : Null<Array<Float>>);
     if ((cast !_Runtime.strictEquals(tabStops, null) : Bool)) { ((cast format : TextFormat).tabStops = tabStops); }
     return cast format;
     return cast null;

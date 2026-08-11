@@ -10,15 +10,15 @@ import flighthq.types.Tray.TrayIcon;
 
 class EnableTrayGuards {
   public static function disableTrayGuards():Void {
-    setTrayAnimationGuard((cast null));
+    setTrayAnimationGuard(({ final __callArgument0:Dynamic = null; __callArgument0; }));
   }
 
   public static function enableTrayGuards():Void {
-    setTrayAnimationGuard((cast EnableTrayGuards.warnOnUnboundedTrayAnimation__enableTrayGuards));
+    setTrayAnimationGuard(({ final __callArgument1:Dynamic = EnableTrayGuards.warnOnUnboundedTrayAnimation__enableTrayGuards; __callArgument1; }));
   }
 
   public static function warnOnUnboundedTrayAnimation__enableTrayGuards(_tray:TrayIcon, _frameCount:Float, intervalMs:Float):Void {
     if ((cast ((cast intervalMs : Float) > (cast 0.0 : Float)) : Bool)) { return; }
-    (cast logOnce((cast 'tray:non-positive-animation-interval' : String), (cast LogLevel.Warn), (cast { message: ('startTrayIconAnimation: intervalMs is ' + Std.string(intervalMs) + ', so the icon will be rewritten as fast as the ' + 'host schedules timers rather than on a frame interval. Pass a positive millisecond interval.') }), (cast 'tray')) : Bool);
+    (cast logOnce((cast 'tray:non-positive-animation-interval' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: ('startTrayIconAnimation: intervalMs is ' + Std.string(intervalMs) + ', so the icon will be rewritten as fast as the ' + 'host schedules timers rather than on a frame interval. Pass a positive millisecond interval.') } : Dynamic), ({ final __callArgument3:Dynamic = 'tray'; __callArgument3; })) : Bool);
   }
 }

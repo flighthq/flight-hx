@@ -46,7 +46,7 @@ class StarlingSerialize {
     var lines:Array<String> = cast _Runtime.UNDEFINED;
     lines = (cast cast (['<?xml version="1.0" encoding="UTF-8"?>', '<TextureAtlas imagePath="' + Std.string(doc.imagePath) + '">'] : Array<Dynamic>));
     for (st in _Runtime.iterable(doc.subTextures)) {
-      _Runtime.callProperty(lines, 'push', cast (['	<SubTexture ' + Std.string((cast StarlingSerialize.subTextureToAttr__starlingSerialize((cast st)) : String)) + '/>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['	<SubTexture ' + Std.string((cast StarlingSerialize.subTextureToAttr__starlingSerialize(({ final __callArgument2:Dynamic = st; __callArgument2; })) : String)) + '/>'] : Array<Dynamic>));
     }
     _Runtime.callProperty(lines, 'push', cast (['</TextureAtlas>'] : Array<Dynamic>));
     return cast _Runtime.join(lines, '\n');
@@ -55,8 +55,8 @@ class StarlingSerialize {
 
   public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:flighthq._internal._Partial<StarlingDocument>):String {
     var doc:StarlingDocument = cast _Runtime.UNDEFINED;
-    doc = (cast { imagePath: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast ({ final __structural2 = existing; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var imagePath:Null<String>; }).imagePath; })), function():Dynamic return cast ''), subTextures: (cast _Runtime.mapArray((cast data.frames : Array<SpritesheetFrameData>), StarlingSerialize.frameToSubTexture__starlingSerialize, _Runtime.UNDEFINED)) });
-    return cast (cast StarlingSerialize.documentToXml__starlingSerialize((cast doc)) : String);
+    doc = (cast { imagePath: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast ({ final __structural3 = existing; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var imagePath:Null<String>; }).imagePath; })), function():Dynamic return cast ''), subTextures: (cast _Runtime.mapArray((cast data.frames : Array<SpritesheetFrameData>), StarlingSerialize.frameToSubTexture__starlingSerialize, _Runtime.UNDEFINED)) });
+    return cast (cast StarlingSerialize.documentToXml__starlingSerialize(({ final __callArgument4:Dynamic = doc; __callArgument4; })) : String);
     return cast null;
   }
 }

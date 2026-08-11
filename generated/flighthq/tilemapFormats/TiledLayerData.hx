@@ -14,7 +14,7 @@ class TiledLayerData {
     bytes = (cast TiledLayerData.decodeBase64__tiledLayerData((cast text : String)) : flighthq._internal._UInt8Array);
     if ((cast !_Runtime.strictEquals(compression, null) : Bool)) {
       if ((cast _Runtime.strictEquals(inflate, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-      var inflated:Null<flighthq._internal._UInt8Array> = (cast inflate((cast bytes), (cast compression)) : Null<flighthq._internal._UInt8Array>);
+      var inflated:Null<flighthq._internal._UInt8Array> = (cast inflate(({ final __callArgument0:Dynamic = bytes; __callArgument0; }), ({ final __callArgument1:Dynamic = compression; __callArgument1; })) : Null<flighthq._internal._UInt8Array>);
       if ((cast _Runtime.strictEquals(inflated, null) : Bool)) { return cast null; }
       (bytes = cast (inflated : Dynamic));
     }

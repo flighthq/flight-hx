@@ -13,8 +13,8 @@ import flighthq.types._internal._Node3DValues.Node3DKind;
 class Scene {
   public static function createScene3D(?obj:flighthq._internal._Partial<flighthq._internal._Pick<Node3D, String>>):Scene3D {
     var root:Node3D = cast _Runtime.UNDEFINED;
-    root = (cast createNode3D((cast Node3DKind : String), (cast obj)) : Node3D);
-    return cast (cast createEntity((cast { animations: {  }, metadata: null, resources: cast ([] : Array<Dynamic>), root: root })) : Scene3D);
+    root = (cast createNode3D((cast Node3DKind : String), ({ final __callArgument0:Dynamic = obj; __callArgument0; })) : Node3D);
+    return cast (cast createEntity(({ final __callArgument1:Dynamic = { animations: {  }, metadata: null, resources: cast ([] : Array<Dynamic>), root: root }; __callArgument1; })) : Scene3D);
     return cast null;
   }
 }

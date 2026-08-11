@@ -22,19 +22,19 @@ class SpineBinaryReader {
   }
 
   public static function readSpineBinaryBoolean(reader:ByteReader):Bool {
-    return cast !_Runtime.strictEquals((cast readSpineBinaryByte((cast reader)) : Float), 0.0);
+    return cast !_Runtime.strictEquals((cast readSpineBinaryByte(({ final __callArgument0:Dynamic = reader; __callArgument0; })) : Float), 0.0);
     return cast null;
   }
 
   public static function readSpineBinaryByte(reader:ByteReader):Float {
-    if ((cast !(cast (cast hasSpineBinaryBytes((cast reader), (cast 1.0 : Float)) : Bool) : Bool) : Bool)) { return cast (cast (cast SpineBinaryReader.markSpineBinaryOverrun__spineBinaryReader : ByteReader->Float->Float)((cast reader), (cast 0.0 : Float)) : Float); }
+    if ((cast !(cast (cast hasSpineBinaryBytes(({ final __callArgument1:Dynamic = reader; __callArgument1; }), (cast 1.0 : Float)) : Bool) : Bool) : Bool)) { return cast (cast (cast SpineBinaryReader.markSpineBinaryOverrun__spineBinaryReader : ByteReader->Float->Float)(({ final __callArgument2:Dynamic = reader; __callArgument2; }), (cast 0.0 : Float)) : Float); }
     return cast _Runtime.callProperty(reader.view, 'getUint8', cast ([reader.offset++] : Array<Dynamic>));
     return cast null;
   }
 
   public static function readSpineBinaryFloat(reader:ByteReader):Float {
     var value:Float = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast hasSpineBinaryBytes((cast reader), (cast 4.0 : Float)) : Bool) : Bool) : Bool)) { return cast (cast (cast SpineBinaryReader.markSpineBinaryOverrun__spineBinaryReader : ByteReader->Float->Float)((cast reader), (cast 0.0 : Float)) : Float); }
+    if ((cast !(cast (cast hasSpineBinaryBytes(({ final __callArgument3:Dynamic = reader; __callArgument3; }), (cast 4.0 : Float)) : Bool) : Bool) : Bool)) { return cast (cast (cast SpineBinaryReader.markSpineBinaryOverrun__spineBinaryReader : ByteReader->Float->Float)(({ final __callArgument4:Dynamic = reader; __callArgument4; }), (cast 0.0 : Float)) : Float); }
     value = _Runtime.callProperty(reader.view, 'getFloat32', cast ([reader.offset, false] : Array<Dynamic>));
     (reader.offset += 4.0);
     return cast value;
@@ -43,7 +43,7 @@ class SpineBinaryReader {
 
   public static function readSpineBinaryInt(reader:ByteReader):Float {
     var value:Float = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast hasSpineBinaryBytes((cast reader), (cast 4.0 : Float)) : Bool) : Bool) : Bool)) { return cast (cast (cast SpineBinaryReader.markSpineBinaryOverrun__spineBinaryReader : ByteReader->Float->Float)((cast reader), (cast 0.0 : Float)) : Float); }
+    if ((cast !(cast (cast hasSpineBinaryBytes(({ final __callArgument5:Dynamic = reader; __callArgument5; }), (cast 4.0 : Float)) : Bool) : Bool) : Bool)) { return cast (cast (cast SpineBinaryReader.markSpineBinaryOverrun__spineBinaryReader : ByteReader->Float->Float)(({ final __callArgument6:Dynamic = reader; __callArgument6; }), (cast 0.0 : Float)) : Float); }
     value = _Runtime.callProperty(reader.view, 'getInt32', cast ([reader.offset, false] : Array<Dynamic>));
     (reader.offset += 4.0);
     return cast value;
@@ -52,7 +52,7 @@ class SpineBinaryReader {
 
   public static function readSpineBinarySignedVarint(reader:ByteReader):Float {
     var raw:Float = cast _Runtime.UNDEFINED;
-    raw = (cast SpineBinaryReader.readSpineBinaryRawVarint__spineBinaryReader((cast reader)) : Float);
+    raw = (cast SpineBinaryReader.readSpineBinaryRawVarint__spineBinaryReader(({ final __callArgument7:Dynamic = reader; __callArgument7; })) : Float);
     return cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(raw), 1)) ^ _Runtime.toInt32(-(_Runtime.toInt32(raw) & 1)));
     return cast null;
   }
@@ -62,11 +62,11 @@ class SpineBinaryReader {
     var length:Float = cast _Runtime.UNDEFINED;
     var start:Float = cast _Runtime.UNDEFINED;
     var bytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
-    byteCount = (cast readSpineBinaryVarint((cast reader)) : Float);
+    byteCount = (cast readSpineBinaryVarint(({ final __callArgument8:Dynamic = reader; __callArgument8; })) : Float);
     if ((cast _Runtime.strictEquals(byteCount, 0.0) : Bool)) { return cast null; }
     if ((cast _Runtime.strictEquals(byteCount, 1.0) : Bool)) { return cast ''; }
     length = (byteCount - 1.0);
-    if ((cast !(cast (cast hasSpineBinaryBytes((cast reader), (cast length : Float)) : Bool) : Bool) : Bool)) { return cast (cast (cast SpineBinaryReader.markSpineBinaryOverrun__spineBinaryReader : ByteReader->flighthq._internal._Any->flighthq._internal._Any)((cast reader), (cast null : flighthq._internal._Any)) : Null<String>); }
+    if ((cast !(cast (cast hasSpineBinaryBytes(({ final __callArgument9:Dynamic = reader; __callArgument9; }), (cast length : Float)) : Bool) : Bool) : Bool)) { return cast (cast (cast SpineBinaryReader.markSpineBinaryOverrun__spineBinaryReader : ByteReader->flighthq._internal._Any->flighthq._internal._Any)(({ final __callArgument10:Dynamic = reader; __callArgument10; }), (cast null : flighthq._internal._Any)) : Null<String>); }
     start = _Runtime.addNumbers(_Runtime.field(reader.view, 'byteOffset'), reader.offset);
     bytes = new flighthq._internal._UInt8Array(_Runtime.field(reader.view, 'buffer'), Std.int(start), Std.int(length));
     (reader.offset += length);
@@ -76,7 +76,7 @@ class SpineBinaryReader {
 
   public static function readSpineBinaryUnsignedShort(reader:ByteReader):Float {
     var value:Float = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast hasSpineBinaryBytes((cast reader), (cast 2.0 : Float)) : Bool) : Bool) : Bool)) { return cast (cast (cast SpineBinaryReader.markSpineBinaryOverrun__spineBinaryReader : ByteReader->Float->Float)((cast reader), (cast 0.0 : Float)) : Float); }
+    if ((cast !(cast (cast hasSpineBinaryBytes(({ final __callArgument11:Dynamic = reader; __callArgument11; }), (cast 2.0 : Float)) : Bool) : Bool) : Bool)) { return cast (cast (cast SpineBinaryReader.markSpineBinaryOverrun__spineBinaryReader : ByteReader->Float->Float)(({ final __callArgument12:Dynamic = reader; __callArgument12; }), (cast 0.0 : Float)) : Float); }
     value = _Runtime.callProperty(reader.view, 'getUint16', cast ([reader.offset, false] : Array<Dynamic>));
     (reader.offset += 2.0);
     return cast value;
@@ -84,13 +84,13 @@ class SpineBinaryReader {
   }
 
   public static function readSpineBinaryVarint(reader:ByteReader):Float {
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((cast SpineBinaryReader.readSpineBinaryRawVarint__spineBinaryReader((cast reader)) : Float)), 0);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((cast SpineBinaryReader.readSpineBinaryRawVarint__spineBinaryReader(({ final __callArgument13:Dynamic = reader; __callArgument13; })) : Float)), 0);
     return cast null;
   }
 
   public static function skipSpineBinaryBytes(reader:ByteReader, count:Float):Void {
-    if ((cast !(cast (cast hasSpineBinaryBytes((cast reader), (cast count : Float)) : Bool) : Bool) : Bool)) {
-      (cast (cast SpineBinaryReader.markSpineBinaryOverrun__spineBinaryReader : ByteReader->Float->Float)((cast reader), (cast 0.0 : Float)) : Float);
+    if ((cast !(cast (cast hasSpineBinaryBytes(({ final __callArgument14:Dynamic = reader; __callArgument14; }), (cast count : Float)) : Bool) : Bool) : Bool)) {
+      (cast (cast SpineBinaryReader.markSpineBinaryOverrun__spineBinaryReader : ByteReader->Float->Float)(({ final __callArgument15:Dynamic = reader; __callArgument15; }), (cast 0.0 : Float)) : Float);
       return;
     }
     (reader.offset += count);
@@ -105,18 +105,18 @@ class SpineBinaryReader {
   public static function readSpineBinaryRawVarint__spineBinaryReader(reader:ByteReader):Float {
     var b:Float = cast _Runtime.UNDEFINED;
     var result:Float = cast _Runtime.UNDEFINED;
-    b = (cast readSpineBinaryByte((cast reader)) : Float);
+    b = (cast readSpineBinaryByte(({ final __callArgument16:Dynamic = reader; __callArgument16; })) : Float);
     result = (_Runtime.toInt32(b) & 127);
     if ((cast !_Runtime.strictEquals((_Runtime.toInt32(b) & 128), 0.0) : Bool)) {
-      (b = cast ((cast readSpineBinaryByte((cast reader)) : Float) : Dynamic));
+      (b = cast ((cast readSpineBinaryByte(({ final __callArgument17:Dynamic = reader; __callArgument17; })) : Float) : Dynamic));
       (result = (_Runtime.toInt32(result) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(b) & 127)) << 7))));
       if ((cast !_Runtime.strictEquals((_Runtime.toInt32(b) & 128), 0.0) : Bool)) {
-        (b = cast ((cast readSpineBinaryByte((cast reader)) : Float) : Dynamic));
+        (b = cast ((cast readSpineBinaryByte(({ final __callArgument18:Dynamic = reader; __callArgument18; })) : Float) : Dynamic));
         (result = (_Runtime.toInt32(result) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(b) & 127)) << 14))));
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(b) & 128), 0.0) : Bool)) {
-          (b = cast ((cast readSpineBinaryByte((cast reader)) : Float) : Dynamic));
+          (b = cast ((cast readSpineBinaryByte(({ final __callArgument19:Dynamic = reader; __callArgument19; })) : Float) : Dynamic));
           (result = (_Runtime.toInt32(result) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(b) & 127)) << 21))));
-          if ((cast !_Runtime.strictEquals((_Runtime.toInt32(b) & 128), 0.0) : Bool)) { (result = (_Runtime.toInt32(result) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((cast readSpineBinaryByte((cast reader)) : Float)) & 127)) << 28)))); }
+          if ((cast !_Runtime.strictEquals((_Runtime.toInt32(b) & 128), 0.0) : Bool)) { (result = (_Runtime.toInt32(result) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((cast readSpineBinaryByte(({ final __callArgument20:Dynamic = reader; __callArgument20; })) : Float)) & 127)) << 28)))); }
         }
       }
     }

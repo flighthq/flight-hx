@@ -71,6 +71,6 @@ class DomClipContours {
         c++;
       }
     }
-    (cast stack : { var push:DomClipContourEntry->Void; }).push((cast { kind: 'contour', contours: staged, winding: winding }));
+    (cast stack : { var push:DomClipContourEntry->Void; }).push(({ final __callArgument0:Dynamic = { kind: 'contour', contours: staged, winding: winding }; __callArgument0; }));
   }
 }

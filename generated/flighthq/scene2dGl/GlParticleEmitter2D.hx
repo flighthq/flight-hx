@@ -38,7 +38,7 @@ class GlParticleEmitter2D {
 
   public static function compileParticleShader__glParticleEmitter2D(gl:flighthq._internal.dom.WebGL2RenderingContext):GlParticleShader {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
-    program = (cast createGlProgram((cast gl), (cast GlParticleEmitter2D.PARTICLE_VS__glParticleEmitter2D : String), (cast GlParticleEmitter2D.PARTICLE_FS__glParticleEmitter2D : String), (cast 'Particle emitter' : String)) : flighthq._internal.dom.WebGLProgram);
+    program = (cast createGlProgram(({ final __callArgument0:Dynamic = gl; __callArgument0; }), (cast GlParticleEmitter2D.PARTICLE_VS__glParticleEmitter2D : String), (cast GlParticleEmitter2D.PARTICLE_FS__glParticleEmitter2D : String), (cast 'Particle emitter' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { program: program, locCorner: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_corner'), locPos: 1.0, locCosScale: 2.0, locSinScale: 3.0, locColor: 4.0, locUvRect: 5.0, locSize: 6.0, locWorldMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_world'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture'), locStraightTextureAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_straightTextureAlpha') };
     return cast null;
   }
@@ -48,10 +48,10 @@ class GlParticleEmitter2D {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var cornerData:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var cornerBuf:flighthq._internal.dom.WebGLBuffer = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime);
     if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).particleShader)) { return cast (cast runtime : GlRenderStateRuntime).particleShader; }
     gl = (cast state : GlRenderState).gl;
-    ((cast runtime : GlRenderStateRuntime).particleShader = (cast GlParticleEmitter2D.compileParticleShader__glParticleEmitter2D((cast gl)) : GlParticleShader));
+    ((cast runtime : GlRenderStateRuntime).particleShader = (cast GlParticleEmitter2D.compileParticleShader__glParticleEmitter2D(({ final __callArgument2:Dynamic = gl; __callArgument2; })) : GlParticleShader));
     cornerData = new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>));
     cornerBuf = flighthq._internal.backend.WebGl2Backend.createBuffer(gl);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), cornerBuf);
@@ -68,7 +68,7 @@ class GlParticleEmitter2D {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var needed:Float = cast _Runtime.UNDEFINED;
     var newSize:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     needed = (count * GlParticleEmitter2D.INSTANCE_FLOATS__glParticleEmitter2D);
     if ((cast ((cast _Runtime.coalesce(_Runtime.optionalField((cast runtime : GlRenderStateRuntime).particleInstanceData, 'length'), function():Dynamic return cast 0.0) : Float) >= (cast needed : Float)) : Bool)) { return; }
@@ -104,7 +104,7 @@ class GlParticleEmitter2D {
     var clipW:Float = cast _Runtime.UNDEFINED;
     var clipH:Float = cast _Runtime.UNDEFINED;
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlRenderStateRuntime);
     source = (cast (cast renderProxy : RenderProxy2D).source : ParticleEmitter2D);
     __destructure0 = source.data;
     atlas = _Runtime.field(__destructure0, 'atlas');
@@ -113,19 +113,19 @@ class GlParticleEmitter2D {
     ids = _Runtime.field(__destructure0, 'ids');
     particleCount = _Runtime.field(__destructure0, 'particleCount');
     transforms = _Runtime.field(__destructure0, 'transforms');
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource((cast atlas.texture)) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
-    shader = (cast GlParticleEmitter2D.ensureParticleShader__glParticleEmitter2D((cast state)) : GlParticleShader);
-    GlParticleEmitter2D.ensureInstanceCapacity__glParticleEmitter2D((cast state), (cast particleCount : Float));
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument5:Dynamic = atlas.texture; __callArgument5; })) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
+    shader = (cast GlParticleEmitter2D.ensureParticleShader__glParticleEmitter2D(({ final __callArgument6:Dynamic = state; __callArgument6; })) : GlParticleShader);
+    GlParticleEmitter2D.ensureInstanceCapacity__glParticleEmitter2D(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast particleCount : Float));
     _Runtime.callOptionalValue((cast state : GlRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    if ((cast _Runtime.strictEquals((cast resolveGlTexture((cast state), (cast atlas.texture), (cast true : Bool), (cast SCENE2D_WORKING_COLOR_SPACE)) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals((cast resolveGlTexture(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = atlas.texture; __callArgument9; }), (cast true : Bool), ({ final __callArgument10:Dynamic = SCENE2D_WORKING_COLOR_SPACE; __callArgument10; })) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { return; }
     gl = (cast state : GlRenderState).gl;
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     nodeAlpha = (cast renderProxy : RenderProxy2D).alpha;
     t = (cast renderProxy : RenderProxy2D).transform2D;
     viewport = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas);
-    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth((cast atlas.texture)) : Float)));
-    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight((cast atlas.texture)) : Float)));
+    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(({ final __callArgument11:Dynamic = atlas.texture; __callArgument11; })) : Float)));
+    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(({ final __callArgument12:Dynamic = atlas.texture; __callArgument12; })) : Float)));
     instanceData = (cast runtime : GlRenderStateRuntime).particleInstanceData;
     base = 0.0;
     drawCount = 0.0;
@@ -235,7 +235,7 @@ class GlParticleEmitter2D {
   }
 
   public static final defaultGlParticleEmitter2DRenderer:SpriteRenderer = (cast { createData: noopRendererData, submit: function(state:GlRenderState, node:RenderProxy2D):Void {
-    flushGlQuadBatchWriter((cast state));
-    drawGlParticleEmitter2D((cast state), (cast node));
+    flushGlQuadBatchWriter(({ final __callArgument13:Dynamic = state; __callArgument13; }));
+    drawGlParticleEmitter2D(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = node; __callArgument15; }));
   } });
 }

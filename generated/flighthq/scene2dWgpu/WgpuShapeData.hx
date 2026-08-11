@@ -38,7 +38,7 @@ class WgpuShapeData {
 
   @:noCompletion
   public static function createWgpuShapeData(_state:RenderState, _source:Renderable):RendererData {
-    return cast (cast (cast createWgpuRendererData : WgpuShapeRendererData->RendererData)((cast { surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null, meshBuffers: { vertexBuffers: cast ([] : Array<Dynamic>), vertexCapacities: cast ([] : Array<Dynamic>), indexBuffers: cast ([] : Array<Dynamic>), indexCapacities: cast ([] : Array<Dynamic>), uniformBuffers: cast ([] : Array<Dynamic>), bindGroups: cast ([] : Array<Dynamic>), colorScaleBiasUniformBuffers: cast ([] : Array<Dynamic>), colorScaleBiasBindGroups: cast ([] : Array<Dynamic>) } })) : RendererData);
+    return cast (cast (cast createWgpuRendererData : WgpuShapeRendererData->RendererData)(({ final __callArgument0:Dynamic = { surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null, meshBuffers: { vertexBuffers: cast ([] : Array<Dynamic>), vertexCapacities: cast ([] : Array<Dynamic>), indexBuffers: cast ([] : Array<Dynamic>), indexCapacities: cast ([] : Array<Dynamic>), uniformBuffers: cast ([] : Array<Dynamic>), bindGroups: cast ([] : Array<Dynamic>), colorScaleBiasUniformBuffers: cast ([] : Array<Dynamic>), colorScaleBiasBindGroups: cast ([] : Array<Dynamic>) } }; __callArgument0; })) : RendererData);
     return cast null;
   }
 
@@ -48,8 +48,8 @@ class WgpuShapeData {
     var shapeData:Null<WgpuShapeRendererData> = cast _Runtime.UNDEFINED;
     var surface:Null<WgpuShapeRasterSurface> = cast _Runtime.UNDEFINED;
     var b:WgpuShapeMeshBuffers = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
-    shapeData = (cast getWgpuShapeData((cast data)) : Null<WgpuShapeRendererData>);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime);
+    shapeData = (cast getWgpuShapeData(({ final __callArgument2:Dynamic = data; __callArgument2; })) : Null<WgpuShapeRendererData>);
     if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
     surface = (cast shapeData : WgpuShapeRendererData).surface;
     if ((cast !_Runtime.strictEquals(surface, null) : Bool)) {
@@ -84,7 +84,7 @@ class WgpuShapeData {
 
   @:noCompletion
   public static function getWgpuShapeData(data:RendererData):Null<WgpuShapeRendererData> {
-    return cast (cast (cast getWgpuRendererData : Null<RendererData>->Null<WgpuShapeRendererData>)((cast data)) : Null<WgpuShapeRendererData>);
+    return cast (cast (cast getWgpuRendererData : Null<RendererData>->Null<WgpuShapeRendererData>)(({ final __callArgument11:Dynamic = data; __callArgument11; })) : Null<WgpuShapeRendererData>);
     return cast null;
   }
 }

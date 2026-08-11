@@ -21,13 +21,13 @@ class ParseDds {
     var failure:ParseFailure__parseDds = cast _Runtime.UNDEFINED;
     var container:Null<TextureContainer> = cast _Runtime.UNDEFINED;
     failure = (cast { reason: null });
-    container = (cast ParseDds.parseDdsInternal__parseDds((cast bytes), (cast failure)) : Null<TextureContainer>);
+    container = (cast ParseDds.parseDdsInternal__parseDds(({ final __callArgument0:Dynamic = bytes; __callArgument0; }), (cast failure : Dynamic)) : Null<TextureContainer>);
     return cast ((cast _Runtime.strictEquals(container, null) : Bool) ? (cast (cast failure : ParseFailure__parseDds).reason : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function parseDds(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
-    return cast (cast ParseDds.parseDdsInternal__parseDds((cast bytes), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<TextureContainer>);
+    return cast (cast ParseDds.parseDdsInternal__parseDds(({ final __callArgument1:Dynamic = bytes; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<TextureContainer>);
     return cast null;
   }
 
@@ -54,41 +54,41 @@ class ParseDds {
     var faces:Float = cast _Runtime.UNDEFINED;
     var mipLevels:Float = cast _Runtime.UNDEFINED;
     var layout:Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast ParseDds.hasDdsMagic__parseDds((cast bytes)) : Bool) : Bool) : Bool)) { return cast (cast ParseDds.reject__parseDds((cast failure), (cast 'container-unrecognized')) : Null<TextureContainer>); }
-    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseDds.ddsDataOffset__parseDds : Float)) : Bool)) { return cast (cast ParseDds.reject__parseDds((cast failure), (cast 'header-truncated')) : Null<TextureContainer>); }
-    reader = (cast createByteReader((cast bytes), (cast 4.0 : Float)) : ByteReader);
-    skipByteReader((cast reader), (cast 4.0 : Float));
-    skipByteReader((cast reader), (cast 4.0 : Float));
-    dwHeight = (cast readByteReaderU32((cast reader)) : Float);
-    dwWidth = (cast readByteReaderU32((cast reader)) : Float);
-    skipByteReader((cast reader), (cast 4.0 : Float));
-    dwDepth = (cast readByteReaderU32((cast reader)) : Float);
-    dwMipMapCount = (cast readByteReaderU32((cast reader)) : Float);
+    if ((cast !(cast (cast ParseDds.hasDdsMagic__parseDds(({ final __callArgument2:Dynamic = bytes; __callArgument2; })) : Bool) : Bool) : Bool)) { return cast (cast ParseDds.reject__parseDds((cast failure : Dynamic), ({ final __callArgument3:Dynamic = 'container-unrecognized'; __callArgument3; })) : Null<TextureContainer>); }
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseDds.ddsDataOffset__parseDds : Float)) : Bool)) { return cast (cast ParseDds.reject__parseDds((cast failure : Dynamic), ({ final __callArgument4:Dynamic = 'header-truncated'; __callArgument4; })) : Null<TextureContainer>); }
+    reader = (cast createByteReader(({ final __callArgument5:Dynamic = bytes; __callArgument5; }), (cast 4.0 : Float)) : ByteReader);
+    skipByteReader(({ final __callArgument6:Dynamic = reader; __callArgument6; }), (cast 4.0 : Float));
+    skipByteReader(({ final __callArgument7:Dynamic = reader; __callArgument7; }), (cast 4.0 : Float));
+    dwHeight = (cast readByteReaderU32(({ final __callArgument8:Dynamic = reader; __callArgument8; })) : Float);
+    dwWidth = (cast readByteReaderU32(({ final __callArgument9:Dynamic = reader; __callArgument9; })) : Float);
+    skipByteReader(({ final __callArgument10:Dynamic = reader; __callArgument10; }), (cast 4.0 : Float));
+    dwDepth = (cast readByteReaderU32(({ final __callArgument11:Dynamic = reader; __callArgument11; })) : Float);
+    dwMipMapCount = (cast readByteReaderU32(({ final __callArgument12:Dynamic = reader; __callArgument12; })) : Float);
     (reader.offset = cast (80.0 : Dynamic));
-    pfFlags = (cast readByteReaderU32((cast reader)) : Float);
-    fourCC = (cast readByteReaderU32((cast reader)) : Float);
-    rgbBitCount = (cast readByteReaderU32((cast reader)) : Float);
-    rMask = (cast readByteReaderU32((cast reader)) : Float);
-    gMask = (cast readByteReaderU32((cast reader)) : Float);
-    bMask = (cast readByteReaderU32((cast reader)) : Float);
-    aMask = (cast readByteReaderU32((cast reader)) : Float);
+    pfFlags = (cast readByteReaderU32(({ final __callArgument13:Dynamic = reader; __callArgument13; })) : Float);
+    fourCC = (cast readByteReaderU32(({ final __callArgument14:Dynamic = reader; __callArgument14; })) : Float);
+    rgbBitCount = (cast readByteReaderU32(({ final __callArgument15:Dynamic = reader; __callArgument15; })) : Float);
+    rMask = (cast readByteReaderU32(({ final __callArgument16:Dynamic = reader; __callArgument16; })) : Float);
+    gMask = (cast readByteReaderU32(({ final __callArgument17:Dynamic = reader; __callArgument17; })) : Float);
+    bMask = (cast readByteReaderU32(({ final __callArgument18:Dynamic = reader; __callArgument18; })) : Float);
+    aMask = (cast readByteReaderU32(({ final __callArgument19:Dynamic = reader; __callArgument19; })) : Float);
     (reader.offset = cast (112.0 : Dynamic));
-    caps2 = (cast readByteReaderU32((cast reader)) : Float);
+    caps2 = (cast readByteReaderU32(({ final __callArgument20:Dynamic = reader; __callArgument20; })) : Float);
     if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Volume__parseDds)), 0.0) : Bool) || (cast ((cast dwDepth : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) {
-      return cast (cast ParseDds.reject__parseDds((cast failure), (cast 'format-unsupported')) : Null<TextureContainer>);
+      return cast (cast ParseDds.reject__parseDds((cast failure : Dynamic), ({ final __callArgument21:Dynamic = 'format-unsupported'; __callArgument21; })) : Null<TextureContainer>);
     }
     cube = !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Cubemap__parseDds)), 0.0);
     layers = 1.0;
     dataOffset = ParseDds.ddsDataOffset__parseDds;
     if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(pfFlags) & _Runtime.toInt32(ParseDds.ddsPfFourCC__parseDds)), 0.0) : Bool) && (cast _Runtime.strictEquals(fourCC, ParseDds.ddsFourCcDx10__parseDds) : Bool)) : Bool)) {
-      if ((cast !(cast (cast hasByteReaderBytes((cast (cast createByteReader((cast bytes), (cast ParseDds.ddsDataOffset__parseDds : Float)) : ByteReader)), (cast 20.0 : Float)) : Bool) : Bool) : Bool)) {
-        return cast (cast ParseDds.reject__parseDds((cast failure), (cast 'header-truncated')) : Null<TextureContainer>);
+      if ((cast !(cast (cast hasByteReaderBytes((cast createByteReader(({ final __callArgument22:Dynamic = bytes; __callArgument22; }), (cast ParseDds.ddsDataOffset__parseDds : Float)) : ByteReader), (cast 20.0 : Float)) : Bool) : Bool) : Bool)) {
+        return cast (cast ParseDds.reject__parseDds((cast failure : Dynamic), ({ final __callArgument23:Dynamic = 'header-truncated'; __callArgument23; })) : Null<TextureContainer>);
       }
-      var dx10:ByteReader = (cast createByteReader((cast bytes), (cast ParseDds.ddsDataOffset__parseDds : Float)) : ByteReader);
-      var dxgiFormat:Float = (cast readByteReaderU32((cast dx10)) : Float);
-      skipByteReader((cast dx10), (cast 4.0 : Float));
-      var miscFlag:Float = (cast readByteReaderU32((cast dx10)) : Float);
-      var arraySize:Float = (cast readByteReaderU32((cast dx10)) : Float);
+      var dx10:ByteReader = (cast createByteReader(({ final __callArgument24:Dynamic = bytes; __callArgument24; }), (cast ParseDds.ddsDataOffset__parseDds : Float)) : ByteReader);
+      var dxgiFormat:Float = (cast readByteReaderU32(({ final __callArgument25:Dynamic = dx10; __callArgument25; })) : Float);
+      skipByteReader(({ final __callArgument26:Dynamic = dx10; __callArgument26; }), (cast 4.0 : Float));
+      var miscFlag:Float = (cast readByteReaderU32(({ final __callArgument27:Dynamic = dx10; __callArgument27; })) : Float);
+      var arraySize:Float = (cast readByteReaderU32(({ final __callArgument28:Dynamic = dx10; __callArgument28; })) : Float);
       (format = cast (_Runtime.coalesce(_Runtime.getIndex(ParseDds.ddsDxgiFormat__parseDds, dxgiFormat), function():Dynamic return cast null) : Dynamic));
       (cube = cast (((cast cube : Bool) || (cast !_Runtime.strictEquals((_Runtime.toInt32(miscFlag) & _Runtime.toInt32(ParseDds.ddsDx10MiscCube__parseDds)), 0.0) : Bool)) : Dynamic));
       (layers = cast (HxMath.max(1.0, arraySize) : Dynamic));
@@ -100,14 +100,14 @@ class ParseDds {
     } else {
       (format = cast (null : Dynamic));
     } } }
-    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast (cast ParseDds.reject__parseDds((cast failure), (cast 'format-unsupported')) : Null<TextureContainer>); }
+    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast (cast ParseDds.reject__parseDds((cast failure : Dynamic), ({ final __callArgument29:Dynamic = 'format-unsupported'; __callArgument29; })) : Null<TextureContainer>); }
     width = HxMath.max(1.0, dwWidth);
     height = HxMath.max(1.0, dwHeight);
     faces = ((cast cube : Bool) ? (cast 6.0 : Dynamic) : (cast 1.0 : Dynamic));
     mipLevels = HxMath.max(1.0, dwMipMapCount);
-    layout = (cast computeTextureContainerLevels((cast format), (cast width : Float), (cast height : Float), (cast mipLevels : Float), (cast layers : Float), (cast faces : Float), (cast dataOffset : Float)) : Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }>);
+    layout = (cast computeTextureContainerLevels(({ final __callArgument30:Dynamic = format; __callArgument30; }), (cast width : Float), (cast height : Float), (cast mipLevels : Float), (cast layers : Float), (cast faces : Float), (cast dataOffset : Float)) : Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }>);
     if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast ((cast (cast layout : { var levels:Array<TextureContainerLevel>; var endOffset:Float; }).endOffset : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) : Bool)) {
-      return cast (cast ParseDds.reject__parseDds((cast failure), (cast 'level-range-out-of-bounds')) : Null<TextureContainer>);
+      return cast (cast ParseDds.reject__parseDds((cast failure : Dynamic), ({ final __callArgument31:Dynamic = 'level-range-out-of-bounds'; __callArgument31; })) : Null<TextureContainer>);
     }
     return cast { depth: 1.0, faces: faces, format: format, height: height, layers: layers, levels: (cast layout : { var levels:Array<TextureContainerLevel>; var endOffset:Float; }).levels, mipLevels: mipLevels, supercompression: 'None', width: width };
     return cast null;

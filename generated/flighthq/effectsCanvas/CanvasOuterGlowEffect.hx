@@ -32,21 +32,21 @@ class CanvasOuterGlowEffect {
     var css:Null<String> = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : OuterGlowEffect));
-    css = (cast computeOuterGlowEffectCss((cast effect)) : Null<String>);
+    css = (cast computeOuterGlowEffectCss(({ final __callArgument0:Dynamic = effect; __callArgument0; })) : Null<String>);
     if ((cast !_Runtime.strictEquals(css, null) : Bool)) {
-      drawCanvasEffectPass((cast dest), (cast source), (cast css : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+      drawCanvasEffectPass(({ final __callArgument1:Dynamic = dest; __callArgument1; }), ({ final __callArgument2:Dynamic = source; __callArgument2; }), (cast css : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
       return;
     }
     pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool() : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
-    CanvasOuterGlowEffect.applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect((cast source), (cast dest), (cast pool), (cast effect));
+    CanvasOuterGlowEffect.applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect(({ final __callArgument3:Dynamic = source; __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), ({ final __callArgument5:Dynamic = pool; __callArgument5; }), ({ final __callArgument6:Dynamic = effect; __callArgument6; }));
   }
 
   public static final defaultCanvasOuterGlowEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    (cast applyOuterGlowEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->OuterGlowEffect->Void)((cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : OuterGlowEffect)));
+    (cast applyOuterGlowEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->OuterGlowEffect->Void)(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : OuterGlowEffect));
   });
 
   public static function registerCanvasOuterGlowEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect((cast state), (cast 'OuterGlowEffect' : String), (cast defaultCanvasOuterGlowEffectRunner));
+    registerCanvasRenderEffect(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast 'OuterGlowEffect' : String), ({ final __callArgument8:Dynamic = defaultCanvasOuterGlowEffectRunner; __callArgument8; }));
   }
 
   public static function applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:OuterGlowEffect):Void {
@@ -57,25 +57,25 @@ class CanvasOuterGlowEffect {
     var glowPasses:Float = cast _Runtime.UNDEFINED;
     var blur:Float = cast _Runtime.UNDEFINED;
     var sourceMode:EffectSourceMode = cast _Runtime.UNDEFINED;
-    mask = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    blurred = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    mask = (cast acquireCanvasRenderTarget(({ final __callArgument9:Dynamic = pool; __callArgument9; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument10:Dynamic = pool; __callArgument10; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     tintStrength = HxMath.min(1.0, strength);
     glowPasses = HxMath.max(1.0, HxMath.floor(strength));
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0)) / 2.0));
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
-    drawCanvasTintedAlphaMask((cast mask), (cast source), (cast _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0) : Float), (cast tintStrength : Float));
-    drawCanvasEffectPass((cast blurred), (cast mask), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    clearCanvasTarget((cast dest));
+    drawCanvasTintedAlphaMask(({ final __callArgument11:Dynamic = mask; __callArgument11; }), ({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0) : Float), (cast tintStrength : Float));
+    drawCanvasEffectPass(({ final __callArgument13:Dynamic = blurred; __callArgument13; }), ({ final __callArgument14:Dynamic = mask; __callArgument14; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    clearCanvasTarget(({ final __callArgument15:Dynamic = dest; __callArgument15; }));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast glowPasses : Float)) : Bool)) {
-        compositeCanvasImage((cast dest), (cast blurred), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+        compositeCanvasImage(({ final __callArgument16:Dynamic = dest; __callArgument16; }), ({ final __callArgument17:Dynamic = blurred; __callArgument17; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
         i++;
       }
     }
-    compositeCanvasSourceMode((cast dest), (cast source), (cast sourceMode));
-    releaseCanvasRenderTarget((cast pool), (cast mask));
-    releaseCanvasRenderTarget((cast pool), (cast blurred));
+    compositeCanvasSourceMode(({ final __callArgument18:Dynamic = dest; __callArgument18; }), ({ final __callArgument19:Dynamic = source; __callArgument19; }), ({ final __callArgument20:Dynamic = sourceMode; __callArgument20; }));
+    releaseCanvasRenderTarget(({ final __callArgument21:Dynamic = pool; __callArgument21; }), ({ final __callArgument22:Dynamic = mask; __callArgument22; }));
+    releaseCanvasRenderTarget(({ final __callArgument23:Dynamic = pool; __callArgument23; }), ({ final __callArgument24:Dynamic = blurred; __callArgument24; }));
   }
 }

@@ -29,8 +29,8 @@ class BitmapFontFromGlyphAtlas {
       var entry:GlyphEntry = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
       _Runtime.callProperty(glyphs, 'push', cast ([{ advance: entry.advance, bearingX: entry.bearingX, bearingY: entry.bearingY, codepoint: codepoint, height: entry.height, page: 0.0, width: entry.width, x: entry.x, y: entry.y }] : Array<Dynamic>));
     }
-    page = (cast createTextureAtlas((cast { texture: (cast createTexture((cast { source: runtime.bitmap })) : Texture2D) })) : TextureAtlas);
-    return cast (cast createBitmapFont((cast { glyphs: glyphs, metrics: _Runtime.mergeObjects([runtime.metrics]), pages: cast ([page] : Array<Dynamic>) })) : BitmapFont);
+    page = (cast createTextureAtlas(({ final __callArgument2:Dynamic = { texture: (cast createTexture((cast { source: runtime.bitmap } : Dynamic)) : Texture2D) }; __callArgument2; })) : TextureAtlas);
+    return cast (cast createBitmapFont(({ final __callArgument3:Dynamic = { glyphs: glyphs, metrics: _Runtime.mergeObjects([runtime.metrics]), pages: cast ([page] : Array<Dynamic>) }; __callArgument3; })) : BitmapFont);
     return cast null;
   }
 }

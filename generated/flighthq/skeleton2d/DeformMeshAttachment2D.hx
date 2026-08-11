@@ -11,6 +11,6 @@ import flighthq.types.Skin2D;
 class DeformMeshAttachment2D {
   public static function deformSkeleton2DMeshAttachment(out:flighthq._internal._Float32Array, attachment:MeshAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
     if (deform == null) deform = cast (null : Dynamic);
-    skinSkeleton2DAttachmentPoints((cast out), (cast _Runtime.field(attachment, 'skin')), (cast _Runtime.field(attachment, 'vertices')), (cast skeleton), (cast boneIndex : Float), (cast deform), (cast 'MeshAttachment2D' : String));
+    skinSkeleton2DAttachmentPoints(({ final __callArgument0:Dynamic = out; __callArgument0; }), (cast _Runtime.field(attachment, 'skin') : Dynamic), _Runtime.field(attachment, 'vertices'), ({ final __callArgument1:Dynamic = skeleton; __callArgument1; }), (cast boneIndex : Float), ({ final __callArgument2:Dynamic = deform; __callArgument2; }), (cast 'MeshAttachment2D' : String));
   }
 }

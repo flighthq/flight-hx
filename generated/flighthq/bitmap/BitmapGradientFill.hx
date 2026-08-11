@@ -39,7 +39,7 @@ class BitmapGradientFill {
             var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var t:Float = ((((px - x0) * axisX) + ((py - y0) * axisY)) * invLen);
-            var idx:Float = (cast BitmapGradientFill.spreadIndex__bitmapGradientFill((cast t : Float), (cast spread)) : Float);
+            var idx:Float = (cast BitmapGradientFill.spreadIndex__bitmapGradientFill((cast t : Float), ({ final __callArgument0:Dynamic = spread; __callArgument0; })) : Float);
             var ri:Float = (idx * 4.0);
             var i:Float = (((y * bitmapWidth) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast ramp : flighthq._internal._UInt8ClampedArray), (cast ri : Float)) : Float));
@@ -52,7 +52,7 @@ class BitmapGradientFill {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function fillBitmapRadialGradient(dest:BitmapRegion, ramp:flighthq._internal._UInt8ClampedArray, cx:Float, cy:Float, radius:Float, ?focalX:Float, ?focalY:Float, spread:GradientSpread = 'pad'):Void {
@@ -87,7 +87,7 @@ class BitmapGradientFill {
             var dx:Float = (px - focalX);
             var dy:Float = (py - focalY);
             var t:Float = (_Runtime.multiplyNumbers(HxMath.sqrt(((dx * dx) + (dy * dy))), invRadius) - ((((dx * fdx) + (dy * fdy)) * invRadius) * invRadius));
-            var idx:Float = (cast BitmapGradientFill.spreadIndex__bitmapGradientFill((cast t : Float), (cast spread)) : Float);
+            var idx:Float = (cast BitmapGradientFill.spreadIndex__bitmapGradientFill((cast t : Float), ({ final __callArgument1:Dynamic = spread; __callArgument1; })) : Float);
             var ri:Float = (idx * 4.0);
             var i:Float = (((y * bitmapWidth) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast ramp : flighthq._internal._UInt8ClampedArray), (cast ri : Float)) : Float));
@@ -100,7 +100,7 @@ class BitmapGradientFill {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function spreadIndex__bitmapGradientFill(t:Float, spread:GradientSpread):Float {

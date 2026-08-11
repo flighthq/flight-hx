@@ -30,10 +30,10 @@ class CollideContactManifold {
     var lo:CollisionShape = cast _Runtime.UNDEFINED;
     var hi:CollisionShape = cast _Runtime.UNDEFINED;
     var overlapping:Bool = cast _Runtime.UNDEFINED;
-    rankA = (cast CollideContactManifold.contactShapeKindRank__collideContactManifold((cast (cast a : { var kind:String; }).kind)) : Float);
-    rankB = (cast CollideContactManifold.contactShapeKindRank__collideContactManifold((cast (cast b : { var kind:String; }).kind)) : Float);
+    rankA = (cast CollideContactManifold.contactShapeKindRank__collideContactManifold(({ final __callArgument0:Dynamic = (cast a : { var kind:String; }).kind; __callArgument0; })) : Float);
+    rankB = (cast CollideContactManifold.contactShapeKindRank__collideContactManifold(({ final __callArgument1:Dynamic = (cast b : { var kind:String; }).kind; __callArgument1; })) : Float);
     if ((cast ((cast ((cast rankA : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast rankB : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      clearCollisionContactManifold((cast out));
+      clearCollisionContactManifold(({ final __callArgument2:Dynamic = out; __callArgument2; }));
       return cast false;
     }
     swapped = ((cast rankA : Float) > (cast rankB : Float));
@@ -46,16 +46,16 @@ class CollideContactManifold {
         {
           var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'circle') {
-            (overlapping = cast ((cast collideCircleCircleContactManifold((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideCircleCircleContactManifold(({ final __callArgument3:Dynamic = lo; __callArgument3; }), ({ final __callArgument4:Dynamic = hi; __callArgument4; }), ({ final __callArgument5:Dynamic = out; __callArgument5; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'aabb') {
-            (overlapping = cast ((cast collideCircleAabbContactManifold((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideCircleAabbContactManifold(({ final __callArgument6:Dynamic = lo; __callArgument6; }), ({ final __callArgument7:Dynamic = hi; __callArgument7; }), ({ final __callArgument8:Dynamic = out; __callArgument8; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'obb') {
-            (overlapping = cast ((cast collideCircleObbContactManifold((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideCircleObbContactManifold(({ final __callArgument9:Dynamic = lo; __callArgument9; }), ({ final __callArgument10:Dynamic = hi; __callArgument10; }), ({ final __callArgument11:Dynamic = out; __callArgument11; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast ((cast collideCirclePolygonContactManifold((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideCirclePolygonContactManifold(({ final __callArgument12:Dynamic = lo; __callArgument12; }), ({ final __callArgument13:Dynamic = hi; __callArgument13; }), ({ final __callArgument14:Dynamic = out; __callArgument14; })) : Bool) : Dynamic));
           }
         }
       }
@@ -63,13 +63,13 @@ class CollideContactManifold {
         {
           var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'aabb') {
-            (overlapping = cast ((cast collideAabbAabbContactManifold((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideAabbAabbContactManifold(({ final __callArgument15:Dynamic = lo; __callArgument15; }), ({ final __callArgument16:Dynamic = hi; __callArgument16; }), ({ final __callArgument17:Dynamic = out; __callArgument17; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'obb') {
-            (overlapping = cast ((cast collideAabbObbContactManifold((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideAabbObbContactManifold(({ final __callArgument18:Dynamic = lo; __callArgument18; }), ({ final __callArgument19:Dynamic = hi; __callArgument19; }), ({ final __callArgument20:Dynamic = out; __callArgument20; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast ((cast collideAabbPolygonContactManifold((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideAabbPolygonContactManifold(({ final __callArgument21:Dynamic = lo; __callArgument21; }), ({ final __callArgument22:Dynamic = hi; __callArgument22; }), ({ final __callArgument23:Dynamic = out; __callArgument23; })) : Bool) : Dynamic));
           }
         }
       }
@@ -77,16 +77,16 @@ class CollideContactManifold {
         {
           var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'obb') {
-            (overlapping = cast ((cast collideObbObbContactManifold((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideObbObbContactManifold(({ final __callArgument24:Dynamic = lo; __callArgument24; }), ({ final __callArgument25:Dynamic = hi; __callArgument25; }), ({ final __callArgument26:Dynamic = out; __callArgument26; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast ((cast collideObbPolygonContactManifold((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideObbPolygonContactManifold(({ final __callArgument27:Dynamic = lo; __callArgument27; }), ({ final __callArgument28:Dynamic = hi; __callArgument28; }), ({ final __callArgument29:Dynamic = out; __callArgument29; })) : Bool) : Dynamic));
           }
         }
       }
       else if (__switchValue == 'polygon') {
         if ((cast _Runtime.strictEquals((cast hi : { var kind:String; }).kind, 'polygon') : Bool)) {
-          (overlapping = cast ((cast collidePolygonPolygonContactManifold((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+          (overlapping = cast ((cast collidePolygonPolygonContactManifold(({ final __callArgument30:Dynamic = lo; __callArgument30; }), ({ final __callArgument31:Dynamic = hi; __callArgument31; }), ({ final __callArgument32:Dynamic = out; __callArgument32; })) : Bool) : Dynamic));
         }
       }
     }

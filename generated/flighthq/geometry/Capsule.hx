@@ -14,7 +14,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Capsule {
   public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):flighthq.types.Capsule {
-    return cast (cast createEntity((cast { endX: endX, endY: endY, endZ: endZ, radius: radius, startX: startX, startY: startY, startZ: startZ })) : { >Entity, var endX:Float; var endY:Float; var endZ:Float; var radius:Float; var startX:Float; var startY:Float; var startZ:Float; });
+    return cast (cast createEntity(({ final __callArgument0:Dynamic = { endX: endX, endY: endY, endZ: endZ, radius: radius, startX: startX, startY: startY, startZ: startZ }; __callArgument0; })) : { >Entity, var endX:Float; var endY:Float; var endZ:Float; var radius:Float; var startX:Float; var startY:Float; var startZ:Float; });
     return cast null;
   }
 

@@ -13,7 +13,7 @@ class GetBidiRuns {
     var runs:Array<BidiRun> = cast _Runtime.UNDEFINED;
     var length:Float = cast _Runtime.UNDEFINED;
     var start:Float = cast _Runtime.UNDEFINED;
-    levels = (cast resolveBidiLevels((cast text : String), (cast baseDirection)) : flighthq._internal._UInt8Array);
+    levels = (cast resolveBidiLevels((cast text : String), ({ final __callArgument0:Dynamic = baseDirection; __callArgument0; })) : flighthq._internal._UInt8Array);
     runs = (cast cast ([] : Array<Dynamic>));
     length = _Runtime.field(levels, 'length');
     start = 0.0;

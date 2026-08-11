@@ -22,21 +22,21 @@ class WgpuHalftoneEffect {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     scale = _Runtime.coalesce(_Runtime.field(effect, 'scale'), function():Dynamic return cast 6.0);
     angle = _Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 0.4);
-    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'stylization.halftone' : String), (cast WgpuHalftoneEffect.HALFTONE_FRAGMENT_WGSL__wgpuHalftoneEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.halftone' : String), (cast WgpuHalftoneEffect.HALFTONE_FRAGMENT_WGSL__wgpuHalftoneEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast HxMath.max(1.0, scale) : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast angle : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast _Runtime.field(source, 'width') : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast _Runtime.field(source, 'height') : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument4; }));
   }
 
   public static final defaultWgpuHalftoneEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyHalftoneEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : HalftoneEffect)));
+    applyHalftoneEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : HalftoneEffect));
   });
 
   public static function registerWgpuHalftoneEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state), (cast 'HalftoneEffect' : String), (cast defaultWgpuHalftoneEffectRunner));
+    registerWgpuRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'HalftoneEffect' : String), ({ final __callArgument6:Dynamic = defaultWgpuHalftoneEffectRunner; __callArgument6; }));
   }
 
   public static final HALFTONE_FRAGMENT_WGSL__wgpuHalftoneEffect:String = '\nstruct Uniforms {\n  u_scale : f32,\n  u_angle : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let lum = dot(c.rgb, vec3f(0.2126, 0.7152, 0.0722));\n  let p = uv * uni.u_resolution;\n  let s = sin(uni.u_angle);\n  let co = cos(uni.u_angle);\n  let rp = vec2f(p.x * co - p.y * s, p.x * s + p.y * co);\n  let cell = (rp % vec2f(uni.u_scale)) - uni.u_scale * 0.5;\n  let dist = length(cell) / (uni.u_scale * 0.5);\n  let radius = sqrt(1.0 - lum);\n  let dot1 = step(dist, radius);\n  return vec4f(c.rgb * dot1, c.a);\n}';

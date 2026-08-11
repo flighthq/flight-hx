@@ -49,29 +49,29 @@ class MatcapGlMeshMaterialRenderer {
     var program:GlMatcapProgram = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     matcap = (cast material : Null<MatcapMaterial>);
-    program = (cast ensureGlMatcapProgram((cast state), (cast (cast MatcapGlMeshMaterialRenderer.defineKeyForMaterial__matcapGlMeshMaterialRenderer((cast state), (cast matcap)) : GlMatcapDefineKey))) : GlMatcapProgram);
-    beginGlMeshDraw((cast state), (cast program), (cast ((cast !_Runtime.strictEquals(matcap, null) : Bool) && (cast _Runtime.field(matcap, 'doubleSided') : Bool)) : Bool));
-    setGlMeshViewProjection((cast state), (cast (cast program : GlMatcapProgram).locViewProjection), (cast camera));
+    program = (cast ensureGlMatcapProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast MatcapGlMeshMaterialRenderer.defineKeyForMaterial__matcapGlMeshMaterialRenderer(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = matcap; __callArgument2; })) : GlMatcapDefineKey)) : GlMatcapProgram);
+    beginGlMeshDraw(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = program; __callArgument4; }), (cast ((cast !_Runtime.strictEquals(matcap, null) : Bool) && (cast _Runtime.field(matcap, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast program : GlMatcapProgram).locViewProjection, ({ final __callArgument6:Dynamic = camera; __callArgument6; }));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast program : GlMatcapProgram).locView, false, (cast camera.view : { var m:flighthq._internal._Float32Array; }).m);
     if ((cast _Runtime.strictEquals(matcap, null) : Bool)) {
-      bindGlMatcapSurface((cast state), (cast program), (cast MatcapGlMeshMaterialRenderer.WHITE__matcapGlMeshMaterialRenderer), (cast null), (cast 0.5 : Float));
+      bindGlMatcapSurface(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = program; __callArgument8; }), ({ final __callArgument9:Dynamic = MatcapGlMeshMaterialRenderer.WHITE__matcapGlMeshMaterialRenderer; __callArgument9; }), (cast null : Dynamic), (cast 0.5 : Float));
       return;
     }
-    (cast unpackColorToLinear((cast MatcapGlMeshMaterialRenderer.scratchRgba__matcapGlMeshMaterialRenderer), (cast _Runtime.field(matcap, 'tint') : Float)) : LinearColor);
-    bindGlMatcapSurface((cast state), (cast program), (cast MatcapGlMeshMaterialRenderer.scratchRgba__matcapGlMeshMaterialRenderer), (cast _Runtime.field(matcap, 'matcap')), (cast _Runtime.field(matcap, 'alphaCutoff') : Float));
+    (cast unpackColorToLinear(({ final __callArgument10:Dynamic = MatcapGlMeshMaterialRenderer.scratchRgba__matcapGlMeshMaterialRenderer; __callArgument10; }), (cast _Runtime.field(matcap, 'tint') : Float)) : LinearColor);
+    bindGlMatcapSurface(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = program; __callArgument12; }), ({ final __callArgument13:Dynamic = MatcapGlMeshMaterialRenderer.scratchRgba__matcapGlMeshMaterialRenderer; __callArgument13; }), (cast _Runtime.field(matcap, 'matcap') : Dynamic), (cast _Runtime.field(matcap, 'alphaCutoff') : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset((cast state), (cast program), (cast proxy), (cast geometry));
+    drawGlMeshSubset(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = program; __callArgument16; }), ({ final __callArgument17:Dynamic = proxy; __callArgument17; }), ({ final __callArgument18:Dynamic = geometry; __callArgument18; }));
   } });
 
   public static function registerGlMatcapMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer((cast state), (cast MatcapMaterialKind : String), (cast matcapGlMeshMaterialRenderer));
+    registerGlMeshMaterialRenderer(({ final __callArgument19:Dynamic = state; __callArgument19; }), (cast MatcapMaterialKind : String), ({ final __callArgument20:Dynamic = matcapGlMeshMaterialRenderer; __callArgument20; }));
   }
 
   public static function defineKeyForMaterial__matcapGlMeshMaterialRenderer(state:GlRenderState, material:Null<MatcapMaterial>):GlMatcapDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasMatcap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'matcap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast _Runtime.field(material, 'matcap')), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasMatcap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'matcap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = _Runtime.field(material, 'matcap'); __callArgument22; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) };
     return cast null;
   }
 

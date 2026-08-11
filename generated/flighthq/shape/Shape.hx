@@ -196,7 +196,7 @@ class Shape {
   public static function clearShapeCommands(shape:flighthq.types.Shape):Void {
     _Runtime.setLength((cast (cast shape : flighthq.types.Shape).data : ShapeData).commands, 0.0);
     if ((cast _Runtime.strictEquals((cast shape : flighthq.types.Shape).kind, MorphShapeKind) : Bool)) { _Runtime.setLength((cast (cast (cast shape : MorphShape) : MorphShape).data : MorphShapeData).paintBindings, 0.0); }
-    invalidateContent((cast shape));
+    invalidateContent((cast shape : Dynamic));
   }
 
   public static function computeShapeLocalBoundsRectangle(out:Rectangle, source:BoundsNodeAny):Void {
@@ -489,7 +489,7 @@ class Shape {
       }
     }
     if ((cast _Runtime.strictEquals((cast out : flighthq.types.Shape).kind, MorphShapeKind) : Bool)) { _Runtime.setLength((cast (cast (cast out : MorphShape) : MorphShape).data : MorphShapeData).paintBindings, 0.0); }
-    invalidateContent((cast out));
+    invalidateContent((cast out : Dynamic));
   }
 
   public static function createMorphShape(morph:PathMorph, ?obj:PartialNode<MorphShape>):MorphShape {
@@ -508,7 +508,7 @@ class Shape {
   }
 
   public static function createShape(?obj:PartialNode<flighthq.types.Shape>):flighthq.types.Shape {
-    return cast (cast createNode2D((cast ShapeKind : String), (cast obj), (cast createShapeData), (cast function(__unused0:Null<flighthq._internal._Any>):ShapeRuntime return createShapeRuntime())) : flighthq.types.Shape);
+    return cast (cast createNode2D((cast ShapeKind : String), (cast obj : Dynamic), (cast createShapeData : Dynamic), (cast function(__unused0:Null<flighthq._internal._Any>):ShapeRuntime return createShapeRuntime() : Dynamic)) : flighthq.types.Shape);
     return cast null;
   }
 
@@ -520,7 +520,7 @@ class Shape {
 
   @:noCompletion
   public static function createShapeRuntime():ShapeRuntime {
-    return cast (cast createNode2DRuntime((cast { computeLocalBoundsRectangle: computeShapeLocalBoundsRectangle })) : ShapeRuntime);
+    return cast (cast createNode2DRuntime(({ final __callArgument3:Dynamic = { computeLocalBoundsRectangle: computeShapeLocalBoundsRectangle }; __callArgument3; })) : ShapeRuntime);
     return cast null;
   }
 
@@ -540,7 +540,7 @@ class Shape {
   }
 
   public static function getShapeBounds(out:Rectangle, source:flighthq.types.Shape):Void {
-    computeShapeLocalBoundsRectangle((cast out), (cast source));
+    computeShapeLocalBoundsRectangle(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = source; __callArgument5; }));
   }
 
   public static function getShapeCommandCount(source:flighthq.types.Shape):Float {
@@ -566,7 +566,7 @@ class Shape {
 
   @:noCompletion
   public static function getShapeRuntime(source:flighthq.types.Shape):ShapeRuntime {
-    return cast (cast getNode2DRuntime((cast source)) : ShapeRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument6:Dynamic = source; __callArgument6; })) : ShapeRuntime);
     return cast null;
   }
 

@@ -25,11 +25,11 @@ class ConvolutionEffect {
   }
 
   public static function registerConvolutionEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'ConvolutionEffect' : String), (cast ConvolutionEffect.resolveConvolutionEffectPadding__convolutionEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'ConvolutionEffect' : String), (cast ConvolutionEffect.resolveConvolutionEffectPadding__convolutionEffect : Dynamic));
   }
 
   public static function resolveConvolutionEffectPadding__convolutionEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getConvolutionEffectPadding((cast (cast effect : flighthq.types.ConvolutionEffect))) : RenderEffectPadding);
+    return cast (cast getConvolutionEffectPadding((cast effect : flighthq.types.ConvolutionEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

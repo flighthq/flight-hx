@@ -52,8 +52,8 @@ class ElectronProtocol {
     }, subscribe: function(listener:String->Void):Void->Void {
       var handler:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
       handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void { listener((cast Std.string(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast '')) : String)); }, 0));
-      (cast app : ElectronApp).on((cast 'open-url' : String), (cast handler));
-      return cast function():Void { (cast app : ElectronApp).removeListener((cast 'open-url' : String), (cast handler)); };
+      (cast app : ElectronApp).on((cast 'open-url' : String), ({ final __callArgument0:Dynamic = handler; __callArgument0; }));
+      return cast function():Void { (cast app : ElectronApp).removeListener((cast 'open-url' : String), ({ final __callArgument1:Dynamic = handler; __callArgument1; })); };
       return cast _Runtime.UNDEFINED;
     } };
     return cast null;

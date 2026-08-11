@@ -24,11 +24,11 @@ class OutlineEffect {
   }
 
   public static function registerOutlineEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'OutlineEffect' : String), (cast OutlineEffect.resolveOutlineEffectPadding__outlineEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'OutlineEffect' : String), (cast OutlineEffect.resolveOutlineEffectPadding__outlineEffect : Dynamic));
   }
 
   public static function resolveOutlineEffectPadding__outlineEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getOutlineEffectPadding((cast (cast effect : flighthq.types.OutlineEffect))) : RenderEffectPadding);
+    return cast (cast getOutlineEffectPadding((cast effect : flighthq.types.OutlineEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

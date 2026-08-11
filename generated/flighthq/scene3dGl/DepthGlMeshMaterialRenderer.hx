@@ -31,22 +31,22 @@ class DepthGlMeshMaterialRenderer {
     var depth:Null<DepthMaterial> = cast _Runtime.UNDEFINED;
     var program:GlDebugProgram = cast _Runtime.UNDEFINED;
     depth = (cast material : Null<DepthMaterial>);
-    program = (cast ensureGlDebugProgram((cast state), (cast { hasNormalMap: false, mode: 'depth' })) : GlDebugProgram);
-    beginGlMeshDraw((cast state), (cast program), (cast ((cast !_Runtime.strictEquals(depth, null) : Bool) && (cast _Runtime.field(depth, 'doubleSided') : Bool)) : Bool));
-    setGlMeshViewProjection((cast state), (cast (cast program : GlDebugProgram).locViewProjection), (cast camera));
+    program = (cast ensureGlDebugProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = { hasNormalMap: false, mode: 'depth' }; __callArgument1; })) : GlDebugProgram);
+    beginGlMeshDraw(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), (cast ((cast !_Runtime.strictEquals(depth, null) : Bool) && (cast _Runtime.field(depth, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast program : GlDebugProgram).locViewProjection, ({ final __callArgument5:Dynamic = camera; __callArgument5; }));
     if ((cast _Runtime.strictEquals(depth, null) : Bool)) {
-      bindGlDebugRange((cast state), (cast program), (cast 0.0 : Float), (cast 1.0 : Float));
+      bindGlDebugRange(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = program; __callArgument7; }), (cast 0.0 : Float), (cast 1.0 : Float));
       return;
     }
-    bindGlDebugRange((cast state), (cast program), (cast _Runtime.field(depth, 'near') : Float), (cast _Runtime.field(depth, 'far') : Float));
+    bindGlDebugRange(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), (cast _Runtime.field(depth, 'near') : Float), (cast _Runtime.field(depth, 'far') : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset((cast state), (cast program), (cast proxy), (cast geometry));
+    drawGlMeshSubset(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = program; __callArgument12; }), ({ final __callArgument13:Dynamic = proxy; __callArgument13; }), ({ final __callArgument14:Dynamic = geometry; __callArgument14; }));
   } });
 
   public static function registerGlDepthMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer((cast state), (cast DepthMaterialKind : String), (cast depthGlMeshMaterialRenderer));
+    registerGlMeshMaterialRenderer(({ final __callArgument15:Dynamic = state; __callArgument15; }), (cast DepthMaterialKind : String), ({ final __callArgument16:Dynamic = depthGlMeshMaterialRenderer; __callArgument16; }));
   }
 }

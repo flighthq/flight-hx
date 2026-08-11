@@ -22,13 +22,13 @@ class BitmapFontGlyphSource {
       return cast ((cast _Runtime.strictEquals(({ final __structural1 = texture; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var dimension:String; }).dimension; }), '2d') : Bool) ? (cast (cast texture : Texture2D).source : Dynamic) : (cast null : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, getGlyphEntry: function(codepoint:Float):Null<GlyphEntry> {
-      return cast (cast getBitmapFontGlyph((cast font), (cast codepoint : Float)) : Null<GlyphEntry>);
+      return cast (cast getBitmapFontGlyph(({ final __callArgument2:Dynamic = font; __callArgument2; }), (cast codepoint : Float)) : Null<GlyphEntry>);
       return cast _Runtime.UNDEFINED;
     }, getGlyphKerning: function(left:Float, right:Float):Float {
-      return cast (cast getBitmapFontKerning((cast font), (cast left : Float), (cast right : Float)) : Float);
+      return cast (cast getBitmapFontKerning(({ final __callArgument3:Dynamic = font; __callArgument3; }), (cast left : Float), (cast right : Float)) : Float);
       return cast _Runtime.UNDEFINED;
     }, getGlyphMetrics: function():GlyphMetrics {
-      return cast (cast getBitmapFontMetrics((cast font)) : GlyphMetrics);
+      return cast (cast getBitmapFontMetrics(({ final __callArgument4:Dynamic = font; __callArgument4; })) : GlyphMetrics);
       return cast _Runtime.UNDEFINED;
     } };
     return cast null;

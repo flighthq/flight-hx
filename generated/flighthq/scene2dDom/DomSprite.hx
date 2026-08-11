@@ -36,7 +36,7 @@ typedef DomSpriteData__domSprite = { >RendererData, var canvas:Null<flighthq._in
 class DomSprite {
   public static function createDomSpriteData__domSprite(state:RenderState, source:Renderable):DomSpriteData__domSprite {
     var data:DomSpriteData__domSprite = cast _Runtime.UNDEFINED;
-    data = (cast createSpriteRendererData((cast state), (cast source)) : DomSpriteData__domSprite);
+    data = (cast createSpriteRendererData(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; })) : DomSpriteData__domSprite);
     ((cast data : DomSpriteData__domSprite).canvas = null);
     ((cast data : DomSpriteData__domSprite).context = null);
     ((cast data : DomSpriteData__domSprite).image = null);
@@ -58,18 +58,18 @@ class DomSprite {
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : Sprite).data : SpriteData).texture;
     if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool)) { return; }
-    source = (cast resolveDomTexture((cast state), (cast texture)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
+    source = (cast resolveDomTexture(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = texture; __callArgument3; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return; }
-    textureWidth = (cast getTextureWidth((cast texture)) : Float);
-    textureHeight = (cast getTextureHeight((cast texture)) : Float);
+    textureWidth = (cast getTextureWidth(({ final __callArgument4:Dynamic = texture; __callArgument4; })) : Float);
+    textureHeight = (cast getTextureHeight(({ final __callArgument5:Dynamic = texture; __callArgument5; })) : Float);
     sourceRectangle = (cast { height: HxMath.abs(((cast (cast texture : Texture2D).uvScale : { var y:Float; }).y * textureHeight)), width: HxMath.abs(((cast (cast texture : Texture2D).uvScale : { var x:Float; }).x * textureWidth)), x: ((cast (cast texture : Texture2D).uvOffset : { var x:Float; }).x * textureWidth), y: ((cast (cast texture : Texture2D).uvOffset : { var y:Float; }).y * textureHeight) });
     isFullTexture = ((cast ((cast ((cast _Runtime.strictEquals((cast sourceRectangle : { var height:Float; var width:Float; var x:Float; var y:Float; }).x, 0.0) : Bool) && (cast _Runtime.strictEquals((cast sourceRectangle : { var height:Float; var width:Float; var x:Float; var y:Float; }).y, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast sourceRectangle : { var height:Float; var width:Float; var x:Float; var y:Float; }).width, textureWidth) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast sourceRectangle : { var height:Float; var width:Float; var x:Float; var y:Float; }).height, textureHeight) : Bool));
     if ((cast ((cast isFullTexture : Bool) && (cast _Runtime.isInstanceOf(source, flighthq._internal._HostValueLut.get('HTMLVideoElement')) : Bool)) : Bool)) {
-      DomSprite.renderSpriteAsVideo__domSprite((cast state), (cast renderProxy), (cast data), (cast source));
+      DomSprite.renderSpriteAsVideo__domSprite(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = renderProxy; __callArgument7; }), (cast data : Dynamic), ({ final __callArgument8:Dynamic = source; __callArgument8; }));
     } else { if ((cast ((cast isFullTexture : Bool) && (cast _Runtime.isInstanceOf(source, flighthq._internal._HostValueLut.get('HTMLImageElement')) : Bool)) : Bool)) {
-      DomSprite.renderSpriteAsImage__domSprite((cast state), (cast renderProxy), (cast data), (cast source));
+      DomSprite.renderSpriteAsImage__domSprite(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = renderProxy; __callArgument10; }), (cast data : Dynamic), ({ final __callArgument11:Dynamic = source; __callArgument11; }));
     } else {
-      DomSprite.renderSpriteAsCanvas__domSprite((cast state), (cast renderProxy), (cast data), (cast source : flighthq._internal._Any), (cast sourceRectangle));
+      DomSprite.renderSpriteAsCanvas__domSprite(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = renderProxy; __callArgument13; }), (cast data : Dynamic), (cast source : flighthq._internal._Any), ({ final __callArgument14:Dynamic = sourceRectangle; __callArgument14; }));
     } }
   }
 
@@ -82,7 +82,7 @@ class DomSprite {
     if ((cast _Runtime.strictEquals((cast data : DomSpriteData__domSprite).canvas, null) : Bool)) {
       ((cast data : DomSpriteData__domSprite).canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       ((cast data : DomSpriteData__domSprite).context = flighthq._internal.backend.CanvasElementBackend.call((cast data : DomSpriteData__domSprite).canvas, 'getContext', cast (['2d'] : Array<Dynamic>)));
-      prepareDomElement((cast (cast data : DomSpriteData__domSprite).canvas));
+      prepareDomElement(({ final __callArgument15:Dynamic = (cast data : DomSpriteData__domSprite).canvas; __callArgument15; }));
     }
     texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : Sprite).data : SpriteData).texture;
     pixelRatio = (cast state : DomRenderState).pixelRatio;
@@ -94,8 +94,8 @@ class DomSprite {
     if ((cast !_Runtime.strictEquals(pixelRatio, 1.0) : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(context, 'scale', cast ([pixelRatio, pixelRatio] : Array<Dynamic>)); }
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', ((cast (cast state : DomRenderState).allowSmoothing : Bool) && (cast !(cast StringTools.startsWith((cast (cast texture : { var sampler:Sampler; }).sampler : { var magFilter:TextureFilter; }).magFilter, 'nearest') : Bool) : Bool)));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([source, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).x, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).y, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).width, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).height, 0.0, 0.0, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).width, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).height] : Array<Dynamic>));
-    applyDomStyle((cast state), (cast (cast data : DomSpriteData__domSprite).canvas), (cast renderProxy));
-    setDomRendererElement((cast state), (cast (cast data : DomSpriteData__domSprite).canvas));
+    applyDomStyle(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = (cast data : DomSpriteData__domSprite).canvas; __callArgument17; }), ({ final __callArgument18:Dynamic = renderProxy; __callArgument18; }));
+    setDomRendererElement(({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = (cast data : DomSpriteData__domSprite).canvas; __callArgument20; }));
   }
 
   public static function renderSpriteAsImage__domSprite(state:DomRenderState, renderProxy:RenderProxy2D, data:DomSpriteData__domSprite, source:flighthq._internal.dom.HTMLImageElement):Void {
@@ -105,11 +105,11 @@ class DomSprite {
     if ((cast _Runtime.strictEquals((cast data : DomSpriteData__domSprite).image, null) : Bool)) {
       ((cast data : DomSpriteData__domSprite).image = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['img'] : Array<Dynamic>)));
       ((cast (cast data : DomSpriteData__domSprite).image : flighthq._internal.dom.HTMLImageElement).crossOrigin = 'anonymous');
-      prepareDomElement((cast (cast data : DomSpriteData__domSprite).image));
+      prepareDomElement(({ final __callArgument21:Dynamic = (cast data : DomSpriteData__domSprite).image; __callArgument21; }));
     }
     if ((cast !_Runtime.strictEquals((cast (cast data : DomSpriteData__domSprite).image : flighthq._internal.dom.HTMLImageElement).src, source.src) : Bool)) { ((cast (cast data : DomSpriteData__domSprite).image : flighthq._internal.dom.HTMLImageElement).src = source.src); }
-    applyDomStyle((cast state), (cast (cast data : DomSpriteData__domSprite).image), (cast renderProxy));
-    setDomRendererElement((cast state), (cast (cast data : DomSpriteData__domSprite).image));
+    applyDomStyle(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = (cast data : DomSpriteData__domSprite).image; __callArgument23; }), ({ final __callArgument24:Dynamic = renderProxy; __callArgument24; }));
+    setDomRendererElement(({ final __callArgument25:Dynamic = state; __callArgument25; }), ({ final __callArgument26:Dynamic = (cast data : DomSpriteData__domSprite).image; __callArgument26; }));
   }
 
   public static function renderSpriteAsVideo__domSprite(state:DomRenderState, renderProxy:RenderProxy2D, data:DomSpriteData__domSprite, source:flighthq._internal.dom.HTMLVideoElement):Void {
@@ -117,9 +117,9 @@ class DomSprite {
     ((cast data : DomSpriteData__domSprite).context = null);
     ((cast data : DomSpriteData__domSprite).image = null);
     ((cast data : DomSpriteData__domSprite).video = source);
-    prepareDomElement((cast source));
-    applyDomStyle((cast state), (cast source), (cast renderProxy));
-    setDomRendererElement((cast state), (cast source));
+    prepareDomElement(({ final __callArgument27:Dynamic = source; __callArgument27; }));
+    applyDomStyle(({ final __callArgument28:Dynamic = state; __callArgument28; }), ({ final __callArgument29:Dynamic = source; __callArgument29; }), ({ final __callArgument30:Dynamic = renderProxy; __callArgument30; }));
+    setDomRendererElement(({ final __callArgument31:Dynamic = state; __callArgument31; }), ({ final __callArgument32:Dynamic = source; __callArgument32; }));
   }
 
   public static final defaultDomSpriteRenderer:Scene2DRenderer = (cast { createData: DomSprite.createDomSpriteData__domSprite, isDirty: isSpriteRendererDirty, submit: drawDomSprite });

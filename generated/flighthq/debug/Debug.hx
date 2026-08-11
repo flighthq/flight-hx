@@ -23,9 +23,9 @@ import flighthq.types.RenderState;
 
 class Debug {
   public static function _applyDebugLevels__debug(level:LogLevel, channels:Array<String>):Void {
-    setLogLevel((cast level));
+    setLogLevel(({ final __callArgument0:Dynamic = level; __callArgument0; }));
     for (channel in _Runtime.iterable(channels)) {
-      setLogChannelLevel((cast channel : String), (cast level));
+      setLogChannelLevel((cast channel : String), ({ final __callArgument3:Dynamic = level; __callArgument3; }));
     }
   }
 
@@ -46,14 +46,14 @@ class Debug {
 
   public static function _installDebugSink__debug(sink:LogSink):Void {
     (Debug._installedSink__debug = cast (sink : Dynamic));
-    addLogSink((cast sink));
+    addLogSink(({ final __callArgument6:Dynamic = sink; __callArgument6; }));
   }
 
   public static var _installedSink__debug:Null<LogSink> = _Runtime.explicitNull();
 
   public static function _removeDebugSink__debug():Void {
     if ((cast _Runtime.strictEquals(Debug._installedSink__debug, null) : Bool)) { return; }
-    (cast removeLogSink((cast Debug._installedSink__debug)) : Bool);
+    (cast removeLogSink(({ final __callArgument7:Dynamic = Debug._installedSink__debug; __callArgument7; })) : Bool);
     (Debug._installedSink__debug = cast (null : Dynamic));
   }
 
@@ -70,7 +70,7 @@ class Debug {
   }
 
   public static function _restoreDebugLevels__debug():Void {
-    setLogLevel((cast Debug._savedGlobalLevel__debug));
+    setLogLevel(({ final __callArgument10:Dynamic = Debug._savedGlobalLevel__debug; __callArgument10; }));
     clearLogChannelLevels();
   }
 
@@ -101,11 +101,11 @@ class Debug {
     var channels:Array<String> = cast _Runtime.UNDEFINED;
     if ((cast Debug._enabled__debug : Bool)) { return; }
     level = _Runtime.coalesce(_Runtime.field(options, 'level'), function():Dynamic return cast LogLevel.Debug);
-    subsystems = (cast Debug._resolveDebugSubsystems__debug((cast _Runtime.field(options, 'subsystems'))) : Array<DebugSubsystemHooks>);
-    channels = (cast Debug._collectDebugChannels__debug((cast subsystems), (cast _Runtime.field(options, 'channels'))) : Array<String>);
+    subsystems = (cast Debug._resolveDebugSubsystems__debug(_Runtime.field(options, 'subsystems')) : Array<DebugSubsystemHooks>);
+    channels = (cast Debug._collectDebugChannels__debug(({ final __callArgument13:Dynamic = subsystems; __callArgument13; }), _Runtime.field(options, 'channels')) : Array<String>);
     (Debug._savedGlobalLevel__debug = cast ((cast getLogLevel() : LogLevel) : Dynamic));
-    Debug._applyDebugLevels__debug((cast level), (cast channels));
-    Debug._installDebugSink__debug((cast _Runtime.coalesce(_Runtime.field(options, 'sink'), function():Dynamic return cast (cast createConsoleLogSink(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : LogSink))));
+    Debug._applyDebugLevels__debug(({ final __callArgument14:Dynamic = level; __callArgument14; }), ({ final __callArgument15:Dynamic = channels; __callArgument15; }));
+    Debug._installDebugSink__debug(({ final __callArgument16:Dynamic = _Runtime.coalesce(_Runtime.field(options, 'sink'), function():Dynamic return cast (cast createConsoleLogSink(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : LogSink)); __callArgument16; }));
     for (hooks in _Runtime.iterable(subsystems)) {
       _Runtime.callOptionalProperty(hooks, 'enableGuards', cast ([] : Array<Dynamic>));
       _Runtime.callProperty(Debug._enabledSubsystems__debug, 'push', cast ([hooks] : Array<Dynamic>));
@@ -114,9 +114,9 @@ class Debug {
   }
 
   public static function enableFlightDiagnostics(state:RenderState):Void {
-    enableDebug(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    enableColorAdjustmentGuards((cast state));
-    enableRenderRegistryGuards((cast state));
+    enableDebug(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    enableColorAdjustmentGuards(({ final __callArgument19:Dynamic = state; __callArgument19; }));
+    enableRenderRegistryGuards(({ final __callArgument20:Dynamic = state; __callArgument20; }));
   }
 
   public static function endDebugSpan(timer:Null<LogTimer>):Float {

@@ -23,11 +23,11 @@ class BlurEffect {
   }
 
   public static function registerBlurEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'BlurEffect' : String), (cast BlurEffect.resolveBlurEffectPadding__blurEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'BlurEffect' : String), (cast BlurEffect.resolveBlurEffectPadding__blurEffect : Dynamic));
   }
 
   public static function resolveBlurEffectPadding__blurEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getBlurEffectPadding((cast (cast effect : flighthq.types.BlurEffect))) : RenderEffectPadding);
+    return cast (cast getBlurEffectPadding((cast effect : flighthq.types.BlurEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

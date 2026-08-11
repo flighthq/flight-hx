@@ -27,11 +27,11 @@ class InnerShadowEffect {
   }
 
   public static function registerInnerShadowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'InnerShadowEffect' : String), (cast InnerShadowEffect.resolveInnerShadowEffectPadding__innerShadowEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'InnerShadowEffect' : String), (cast InnerShadowEffect.resolveInnerShadowEffectPadding__innerShadowEffect : Dynamic));
   }
 
   public static function resolveInnerShadowEffectPadding__innerShadowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getInnerShadowEffectPadding((cast (cast effect : flighthq.types.InnerShadowEffect))) : RenderEffectPadding);
+    return cast (cast getInnerShadowEffectPadding((cast effect : flighthq.types.InnerShadowEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

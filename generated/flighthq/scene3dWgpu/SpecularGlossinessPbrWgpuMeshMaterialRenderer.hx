@@ -55,30 +55,30 @@ class SpecularGlossinessPbrWgpuMeshMaterialRenderer {
     var pipeline:WgpuPbrPipeline = cast _Runtime.UNDEFINED;
     var binding:WgpuMaterialBinding = cast _Runtime.UNDEFINED;
     var out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    stateRuntime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     specGloss = (cast material : Null<SpecularGlossinessPbrMaterial>);
-    standard = ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast (cast SpecularGlossinessPbrWgpuMeshMaterialRenderer.convertSpecularGlossinessToStandard__specularGlossinessPbrWgpuMeshMaterialRenderer((cast specGloss)) : StandardPbrMaterialProperties) : Dynamic) : (cast null : Dynamic));
-    key = (cast buildWgpuPbrStandardDefineKey((cast standard), (cast specGloss)) : WgpuPbrDefineKey);
+    standard = ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast (cast SpecularGlossinessPbrWgpuMeshMaterialRenderer.convertSpecularGlossinessToStandard__specularGlossinessPbrWgpuMeshMaterialRenderer(({ final __callArgument1:Dynamic = specGloss; __callArgument1; })) : StandardPbrMaterialProperties) : Dynamic) : (cast null : Dynamic));
+    key = (cast buildWgpuPbrStandardDefineKey(({ final __callArgument2:Dynamic = standard; __callArgument2; }), (cast specGloss : Dynamic)) : WgpuPbrDefineKey);
     format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    pipeline = (cast ensureWgpuPbrPipeline((cast state), (cast key), (cast format : String)) : WgpuPbrPipeline);
-    writeWgpuFrameUniform((cast state), (cast camera), (cast lights));
-    binding = (cast ensureWgpuPbrMaterialBindGroup((cast state), (cast pipeline), (cast _Runtime.coalesce(specGloss, function():Dynamic return cast SpecularGlossinessPbrWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__specularGlossinessPbrWgpuMeshMaterialRenderer)), (cast standard)) : WgpuMaterialBinding);
+    pipeline = (cast ensureWgpuPbrPipeline(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = key; __callArgument4; }), (cast format : String)) : WgpuPbrPipeline);
+    writeWgpuFrameUniform(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = camera; __callArgument6; }), ({ final __callArgument7:Dynamic = lights; __callArgument7; }));
+    binding = (cast ensureWgpuPbrMaterialBindGroup(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = pipeline; __callArgument9; }), ({ final __callArgument10:Dynamic = _Runtime.coalesce(specGloss, function():Dynamic return cast SpecularGlossinessPbrWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__specularGlossinessPbrWgpuMeshMaterialRenderer); __callArgument10; }), ({ final __callArgument11:Dynamic = standard; __callArgument11; })) : WgpuMaterialBinding);
     out = (cast getWgpuPbrMaterialScratch() : flighthq._internal._Float32Array);
-    writeWgpuPbrStandardBlock((cast out), (cast standard), (cast ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast _Runtime.field(specGloss, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)) : Float));
+    writeWgpuPbrStandardBlock(({ final __callArgument12:Dynamic = out; __callArgument12; }), ({ final __callArgument13:Dynamic = standard; __callArgument13; }), (cast ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast _Runtime.field(specGloss, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)) : Float));
     _Runtime.fill(out, 0.0, 16.0, null, 2);
-    writeWgpuPbrMaterialUniform((cast state), (cast binding));
-    beginWgpuMeshDraw((cast state), (cast pipeline));
+    writeWgpuPbrMaterialUniform(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = binding; __callArgument15; }));
+    beginWgpuMeshDraw(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = pipeline; __callArgument17; }));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, (cast binding : WgpuMaterialBinding).bindGroup);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
-    drawWgpuMeshSubset((cast state), (cast proxy), (cast geometry));
+    drawWgpuMeshSubset(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = proxy; __callArgument19; }), ({ final __callArgument20:Dynamic = geometry; __callArgument20; }));
   } });
 
   public static function registerWgpuSpecularGlossinessPbrMaterial(state:WgpuRenderState):Void {
-    registerWgpuBitmapTextureResolver((cast state));
-    registerWgpuImageTextureResolver((cast state));
-    registerWgpuMeshMaterialRenderer((cast state), (cast SpecularGlossinessPbrMaterialKind : String), (cast specularGlossinessPbrWgpuMeshMaterialRenderer));
+    registerWgpuBitmapTextureResolver(({ final __callArgument21:Dynamic = state; __callArgument21; }));
+    registerWgpuImageTextureResolver(({ final __callArgument22:Dynamic = state; __callArgument22; }));
+    registerWgpuMeshMaterialRenderer(({ final __callArgument23:Dynamic = state; __callArgument23; }), (cast SpecularGlossinessPbrMaterialKind : String), ({ final __callArgument24:Dynamic = specularGlossinessPbrWgpuMeshMaterialRenderer; __callArgument24; }));
   }
 
   public static function convertSpecularGlossinessToStandard__specularGlossinessPbrWgpuMeshMaterialRenderer(material:SpecularGlossinessPbrMaterial):StandardPbrMaterialProperties {
@@ -90,8 +90,8 @@ class SpecularGlossinessPbrWgpuMeshMaterialRenderer {
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
-    (cast unpackColorToLinear((cast SpecularGlossinessPbrWgpuMeshMaterialRenderer._diffuseScratch__specularGlossinessPbrWgpuMeshMaterialRenderer), (cast _Runtime.field(material, 'diffuse') : Float)) : LinearColor);
-    (cast unpackColorToLinear((cast SpecularGlossinessPbrWgpuMeshMaterialRenderer._specularScratch__specularGlossinessPbrWgpuMeshMaterialRenderer), (cast _Runtime.field(material, 'specular') : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument25:Dynamic = SpecularGlossinessPbrWgpuMeshMaterialRenderer._diffuseScratch__specularGlossinessPbrWgpuMeshMaterialRenderer; __callArgument25; }), (cast _Runtime.field(material, 'diffuse') : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument26:Dynamic = SpecularGlossinessPbrWgpuMeshMaterialRenderer._specularScratch__specularGlossinessPbrWgpuMeshMaterialRenderer; __callArgument26; }), (cast _Runtime.field(material, 'specular') : Float)) : LinearColor);
     specularBrightness = HxMath.max(HxMath.max(flighthq._internal._StaticIndex.readFloatArrayTyped((cast SpecularGlossinessPbrWgpuMeshMaterialRenderer._specularScratch__specularGlossinessPbrWgpuMeshMaterialRenderer : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast SpecularGlossinessPbrWgpuMeshMaterialRenderer._specularScratch__specularGlossinessPbrWgpuMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float))), flighthq._internal._StaticIndex.readFloatArrayTyped((cast SpecularGlossinessPbrWgpuMeshMaterialRenderer._specularScratch__specularGlossinessPbrWgpuMeshMaterialRenderer : Array<Float>), (cast 2.0 : Float)));
     oneMinusSpecularStrength = (1.0 - specularBrightness);
     diffuseBrightness = HxMath.max(HxMath.max(flighthq._internal._StaticIndex.readFloatArrayTyped((cast SpecularGlossinessPbrWgpuMeshMaterialRenderer._diffuseScratch__specularGlossinessPbrWgpuMeshMaterialRenderer : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast SpecularGlossinessPbrWgpuMeshMaterialRenderer._diffuseScratch__specularGlossinessPbrWgpuMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float))), flighthq._internal._StaticIndex.readFloatArrayTyped((cast SpecularGlossinessPbrWgpuMeshMaterialRenderer._diffuseScratch__specularGlossinessPbrWgpuMeshMaterialRenderer : Array<Float>), (cast 2.0 : Float)));

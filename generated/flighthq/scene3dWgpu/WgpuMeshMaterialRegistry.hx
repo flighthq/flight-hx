@@ -15,19 +15,19 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 class WgpuMeshMaterialRegistry {
   @:noCompletion
   public static function getWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMeshMaterialRenderer> {
-    return cast _Runtime.coalesce(((cast (cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).materialRegistry : flighthq._internal._Map<String, WgpuMeshMaterialRenderer>).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast (cast (cast getWgpuScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuScene3DRuntime) : WgpuScene3DRuntime).materialRegistry : flighthq._internal._Map<String, WgpuMeshMaterialRenderer>).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
   public static function registerWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMeshMaterialRenderer):Void {
-    ((cast (cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).materialRegistry : flighthq._internal._Map<String, WgpuMeshMaterialRenderer>).set(kind, (cast renderer)));
+    ((cast (cast (cast getWgpuScene3DRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuScene3DRuntime) : WgpuScene3DRuntime).materialRegistry : flighthq._internal._Map<String, WgpuMeshMaterialRenderer>).set(kind, (cast renderer)));
   }
 
   @:noCompletion
   public static function resolveWgpuMeshMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMeshMaterialRenderer> {
     var registry:flighthq._internal._Map<String, WgpuMeshMaterialRenderer> = cast _Runtime.UNDEFINED;
-    registry = (cast (cast getWgpuScene3DRuntime((cast state)) : WgpuScene3DRuntime) : WgpuScene3DRuntime).materialRegistry;
+    registry = (cast (cast getWgpuScene3DRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuScene3DRuntime) : WgpuScene3DRuntime).materialRegistry;
     if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
       var renderer:Null<WgpuMeshMaterialRenderer> = ((cast registry : flighthq._internal._Map<String, WgpuMeshMaterialRenderer>).get(_Runtime.field(material, 'kind')));
       if ((cast !_Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast renderer; }

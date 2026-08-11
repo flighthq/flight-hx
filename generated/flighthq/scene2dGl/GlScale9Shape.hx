@@ -55,7 +55,7 @@ class GlScale9Shape {
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);
     ctx = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
-    texture = (cast createGlTexture((cast state)) : flighthq._internal.dom.WebGLTexture);
+    texture = (cast createGlTexture(({ final __callArgument0:Dynamic = state; __callArgument0; })) : flighthq._internal.dom.WebGLTexture);
     return cast (cast (cast { canvas: canvas, ctx: ctx, lastH: 0.0, lastScaleX: -1.0, lastScaleY: -1.0, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, texture: texture } : flighthq._internal._Any) : RendererData);
     return cast null;
   }
@@ -89,24 +89,24 @@ class GlScale9Shape {
     var shaderLoc:GlShaderLocations = cast _Runtime.UNDEFINED;
     var matrixArray:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var t:Matrix = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
-    flushGlQuadBatchWriter((cast state));
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime);
+    flushGlQuadBatchWriter(({ final __callArgument2:Dynamic = state; __callArgument2; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : Scale9Shape);
     __destructure1 = (cast source : Scale9Shape).data;
     commands = _Runtime.field(__destructure1, 'commands');
     scale9Grid = _Runtime.field(__destructure1, 'scale9Grid');
-    version = (cast getNodeLocalContentRevision((cast source)) : Float);
+    version = (cast getNodeLocalContentRevision((cast source : Dynamic)) : Float);
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) { return; }
-    rasterizer = (cast getGlShapeRasterizer((cast state)) : Null<ShapeRasterizer>);
+    rasterizer = (cast getGlShapeRasterizer(({ final __callArgument3:Dynamic = state; __callArgument3; })) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
-      _Runtime.callOptionalValue((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : GlRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast (cast getGlRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : GlRenderStateRuntime) : GlRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
       return;
     }
-    bounds = (cast getNodeLocalBoundsRectangle((cast source)) : Rectangle);
-    mapper = (cast buildGlScale9Mapper((cast bounds), (cast scale9Grid), (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float)) : Null<Scale9Mapper>);
+    bounds = (cast getNodeLocalBoundsRectangle((cast source : Dynamic)) : Rectangle);
+    mapper = (cast buildGlScale9Mapper(({ final __callArgument7:Dynamic = bounds; __callArgument7; }), ({ final __callArgument8:Dynamic = scale9Grid; __callArgument8; }), (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
-      drawGlShape((cast state), (cast renderProxy));
+      drawGlShape(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = renderProxy; __callArgument10; }));
       return;
     }
     shapeData = (cast (cast (cast renderProxy : RenderProxy2D).rendererData : flighthq._internal._Any) : GlScale9ShapeData__glScale9Shape);
@@ -120,10 +120,10 @@ class GlScale9Shape {
       var ctx:flighthq._internal.dom.CanvasRenderingContext2D = (cast shapeData : GlScale9ShapeData__glScale9Shape).ctx;
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([_Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'y'), w, h] : Array<Dynamic>));
-      mapScale9ShapeCommands((cast GlScale9Shape._remappedCommands__glScale9Shape), (cast commands), (cast mapper));
-      rasterizer((cast ctx), (cast GlScale9Shape._remappedCommands__glScale9Shape), (cast state));
+      mapScale9ShapeCommands(({ final __callArgument11:Dynamic = GlScale9Shape._remappedCommands__glScale9Shape; __callArgument11; }), ({ final __callArgument12:Dynamic = commands; __callArgument12; }), ({ final __callArgument13:Dynamic = mapper; __callArgument13; }));
+      rasterizer(({ final __callArgument14:Dynamic = ctx; __callArgument14; }), ({ final __callArgument15:Dynamic = GlScale9Shape._remappedCommands__glScale9Shape; __callArgument15; }), ({ final __callArgument16:Dynamic = state; __callArgument16; }));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-      updateGlTexture((cast state), (cast (cast shapeData : GlScale9ShapeData__glScale9Shape).texture), (cast (cast shapeData : GlScale9ShapeData__glScale9Shape).canvas));
+      updateGlTexture(({ final __callArgument17:Dynamic = state; __callArgument17; }), (cast shapeData : GlScale9ShapeData__glScale9Shape).texture, (cast shapeData : GlScale9ShapeData__glScale9Shape).canvas);
       ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastH = h);
       ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleX = (cast source : Scale9Shape).scaleX);
       ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleY = (cast source : Scale9Shape).scaleY);
@@ -131,7 +131,7 @@ class GlScale9Shape {
       ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastPixelRatio = pixelRatio);
       ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastW = w);
     }
-    useGlProgram((cast state), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    useGlProgram(({ final __callArgument18:Dynamic = state; __callArgument18; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     gl = (cast state : GlRenderState).gl;
     if ((cast !_Runtime.strictEquals((cast runtime : GlRenderStateRuntime).currentTexture, (cast shapeData : GlScale9ShapeData__glScale9Shape).texture) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast shapeData : GlScale9ShapeData__glScale9Shape).texture);
@@ -140,15 +140,15 @@ class GlScale9Shape {
     __destructure2 = runtime;
     shaderLoc = _Runtime.field(__destructure2, 'shaderLoc');
     matrixArray = _Runtime.field(__destructure2, 'matrixArray');
-    setGlBaseUniforms((cast gl), (cast shaderLoc), (cast renderProxy));
+    setGlBaseUniforms(({ final __callArgument19:Dynamic = gl; __callArgument19; }), ({ final __callArgument20:Dynamic = shaderLoc; __callArgument20; }), ({ final __callArgument21:Dynamic = renderProxy; __callArgument21; }));
     t = (cast renderProxy : RenderProxy2D).transform2D;
-    GlScale9Shape.setStrippedGlMatrixFromValues__glScale9Shape((cast gl), (cast shaderLoc), (cast matrixArray), (cast t), (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float), (cast _Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas)));
-    drawGlQuad((cast state), (cast 0.0 : Float), (cast 0.0 : Float), (cast w : Float), (cast h : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
+    GlScale9Shape.setStrippedGlMatrixFromValues__glScale9Shape(({ final __callArgument22:Dynamic = gl; __callArgument22; }), ({ final __callArgument23:Dynamic = shaderLoc; __callArgument23; }), ({ final __callArgument24:Dynamic = matrixArray; __callArgument24; }), ({ final __callArgument25:Dynamic = t; __callArgument25; }), (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float), ({ final __callArgument26:Dynamic = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument26; }));
+    drawGlQuad(({ final __callArgument27:Dynamic = state; __callArgument27; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast w : Float), (cast h : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
   }
 
   @:noCompletion
   public static function drawGlScale9ShapeMask(state:GlRenderState, data:RenderProxy2D):Void {
-    drawGlScale9Shape((cast state), (cast data));
+    drawGlScale9Shape(({ final __callArgument28:Dynamic = state; __callArgument28; }), ({ final __callArgument29:Dynamic = data; __callArgument29; }));
   }
 
   public static final defaultGlScale9ShapeRenderer:Scene2DRenderer = (cast { createData: createGlScale9ShapeData, destroyData: destroyGlScale9ShapeData, submit: drawGlScale9Shape });
@@ -162,6 +162,6 @@ class GlScale9Shape {
     b = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (t.b / scaleX) : Dynamic) : (cast t.b : Dynamic));
     c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.c / scaleY) : Dynamic) : (cast t.c : Dynamic));
     d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.d / scaleY) : Dynamic) : (cast t.d : Dynamic));
-    setGlMatrixFromValues((cast gl), (cast loc), (cast m), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast t.tx : Float), (cast t.ty : Float), (cast viewport));
+    setGlMatrixFromValues(({ final __callArgument30:Dynamic = gl; __callArgument30; }), ({ final __callArgument31:Dynamic = loc; __callArgument31; }), ({ final __callArgument32:Dynamic = m; __callArgument32; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast t.tx : Float), (cast t.ty : Float), ({ final __callArgument33:Dynamic = viewport; __callArgument33; }));
   }
 }

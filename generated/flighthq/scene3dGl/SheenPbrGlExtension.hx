@@ -29,8 +29,8 @@ class SheenPbrGlExtension {
     extension = (cast value : SheenPbrExtension);
     (cast context : GlPbrExtensionBindContext).setLinearColor((cast 'u_flightSheenColor' : String), (cast _Runtime.field(extension, 'sheenColor') : Float));
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightSheenRoughness' : String), (cast _Runtime.field(extension, 'sheenRoughness') : Float));
-    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightSheenColorMap' : String), (cast 'u_flightSheenColorMapUvSet' : String), (cast 'u_flightSheenColorMapTransform' : String), (cast _Runtime.field(extension, 'sheenColorMap')), (cast _Runtime.field(extension, 'sheenColorMapUvSet')));
-    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightSheenRoughnessMap' : String), (cast 'u_flightSheenRoughnessMapUvSet' : String), (cast 'u_flightSheenRoughnessMapTransform' : String), (cast _Runtime.field(extension, 'sheenRoughnessMap')), (cast _Runtime.field(extension, 'sheenRoughnessMapUvSet')));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightSheenColorMap' : String), (cast 'u_flightSheenColorMapUvSet' : String), (cast 'u_flightSheenColorMapTransform' : String), (cast _Runtime.field(extension, 'sheenColorMap') : Dynamic), _Runtime.field(extension, 'sheenColorMapUvSet'));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightSheenRoughnessMap' : String), (cast 'u_flightSheenRoughnessMapUvSet' : String), (cast 'u_flightSheenRoughnessMapTransform' : String), (cast _Runtime.field(extension, 'sheenRoughnessMap') : Dynamic), _Runtime.field(extension, 'sheenRoughnessMapUvSet'));
   }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):GlPbrExtensionShaderContribution {
     var extension:SheenPbrExtension = cast _Runtime.UNDEFINED;
     var colorMap:Bool = cast _Runtime.UNDEFINED;
@@ -46,6 +46,6 @@ class SheenPbrGlExtension {
   } });
 
   public static function registerGlSheenPbrExtension(state:GlRenderState):Void {
-    registerGlPbrExtension((cast state), (cast SheenPbrExtensionKind : String), (cast sheenPbrGlExtension));
+    registerGlPbrExtension(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast SheenPbrExtensionKind : String), ({ final __callArgument1:Dynamic = sheenPbrGlExtension; __callArgument1; }));
   }
 }

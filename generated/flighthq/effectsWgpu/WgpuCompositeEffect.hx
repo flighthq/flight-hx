@@ -24,16 +24,16 @@ class WgpuCompositeEffect {
   public static function applyCompositeEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:CompositeEffect):Void {
     var backdrop:Null<WgpuRenderTarget> = cast _Runtime.UNDEFINED;
     var hasBackdrop:Bool = cast _Runtime.UNDEFINED;
-    backdrop = (cast getWgpuBlendEffectBackdrop((cast state), (cast _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null))) : Null<WgpuRenderTarget>);
+    backdrop = (cast getWgpuBlendEffectBackdrop(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null); __callArgument1; })) : Null<WgpuRenderTarget>);
     hasBackdrop = !_Runtime.strictEquals(backdrop, null);
-    drawWgpuDualSourceEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast _Runtime.coalesce(backdrop, function():Dynamic return cast source) : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast (cast WgpuCompositeEffect.getWgpuCompositeEffectPipeline__wgpuCompositeEffect((cast state)) : WgpuEffectPipeline)), (cast function(_f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
+    drawWgpuDualSourceEffectPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast source : WgpuRenderTarget), (cast _Runtime.coalesce(backdrop, function():Dynamic return cast source) : WgpuRenderTarget), ({ final __callArgument3:Dynamic = (cast dest : WgpuRenderTarget); __callArgument3; }), (cast WgpuCompositeEffect.getWgpuCompositeEffectPipeline__wgpuCompositeEffect(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuEffectPipeline), ({ final __callArgument5:Dynamic = function(_f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 0.0 : Float), (cast (cast getWgpuCompositeEffectOperatorIndex((cast _Runtime.field(effect, 'operator') : String)) : Float) : Float));
       flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 1.0 : Float), (cast ((cast hasBackdrop : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float));
-    }));
+    }; __callArgument5; }));
   }
 
   public static final defaultWgpuCompositeEffectRunner:WgpuRenderEffectRunner = (cast function(context:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyCompositeEffectToWgpu((cast _Runtime.field(context, 'state')), (cast _Runtime.field(context, 'source')), (cast _Runtime.field(context, 'dest')), (cast (cast effect : CompositeEffect)));
+    applyCompositeEffectToWgpu(_Runtime.field(context, 'state'), _Runtime.field(context, 'source'), _Runtime.field(context, 'dest'), (cast effect : CompositeEffect));
   });
 
   @:noCompletion
@@ -43,14 +43,14 @@ class WgpuCompositeEffect {
   }
 
   public static function registerWgpuCompositeEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state), (cast 'CompositeEffect' : String), (cast defaultWgpuCompositeEffectRunner));
+    registerWgpuRenderEffect(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast 'CompositeEffect' : String), ({ final __callArgument7:Dynamic = defaultWgpuCompositeEffectRunner; __callArgument7; }));
   }
 
   public static function getWgpuCompositeEffectPipeline__wgpuCompositeEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var pipeline:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     pipeline = ((cast WgpuCompositeEffect.pipelines__wgpuCompositeEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline((cast state), (cast WGPU_COMPOSITE_FRAGMENT_WGSL : String), (cast 'replace')) : WgpuEffectPipeline) : Dynamic));
+      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast WGPU_COMPOSITE_FRAGMENT_WGSL : String), ({ final __callArgument9:Dynamic = 'replace'; __callArgument9; })) : WgpuEffectPipeline) : Dynamic));
       ((cast WgpuCompositeEffect.pipelines__wgpuCompositeEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast pipeline)));
     }
     return cast pipeline;

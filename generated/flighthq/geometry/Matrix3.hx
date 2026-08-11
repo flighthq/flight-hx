@@ -16,8 +16,8 @@ import flighthq.types.Vector3.Vector3Like;
 class Matrix3 {
   public static function cloneMatrix3(source:Matrix3Like):flighthq.types.Matrix3 {
     var m:flighthq.types.Matrix3 = cast _Runtime.UNDEFINED;
-    m = (cast createMatrix3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq.types.Matrix3);
-    copyMatrix3((cast m), (cast source));
+    m = (cast createMatrix3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq.types.Matrix3);
+    copyMatrix3(({ final __callArgument0:Dynamic = m; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }));
     return cast m;
     return cast null;
   }
@@ -70,7 +70,7 @@ class Matrix3 {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var out:flighthq.types.Matrix3 = cast _Runtime.UNDEFINED;
     m = new flighthq._internal._Float32Array(Matrix3.__identity__matrix3);
-    out = (cast createEntity((cast { m: m })) : { >Entity, var m:flighthq._internal._Float32Array; });
+    out = (cast createEntity(({ final __callArgument2:Dynamic = { m: m }; __callArgument2; })) : { >Entity, var m:flighthq._internal._Float32Array; });
     if ((cast !_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast m00 : Float)); }
     if ((cast !_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast m01 : Float)); }
     if ((cast !_Runtime.strictEquals(m02, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast m02 : Float)); }
@@ -135,7 +135,7 @@ class Matrix3 {
     a02 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flighthq._internal._Float32Array), (cast 6.0 : Float));
     a12 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flighthq._internal._Float32Array), (cast 7.0 : Float));
     a22 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flighthq._internal._Float32Array), (cast 8.0 : Float));
-    if ((cast (cast isAffineMatrix3((cast source)) : Bool) : Bool)) {
+    if ((cast (cast isAffineMatrix3(({ final __callArgument3:Dynamic = source; __callArgument3; })) : Bool) : Bool)) {
       var det:Float = ((a00 * a11) - (a01 * a10));
       if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) {
         _Runtime.fill(_out, HxMath.NaN, 0, null, 1);
@@ -224,7 +224,7 @@ class Matrix3 {
     b02 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flighthq._internal._Float32Array), (cast 6.0 : Float));
     b12 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flighthq._internal._Float32Array), (cast 7.0 : Float));
     b22 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flighthq._internal._Float32Array), (cast 8.0 : Float));
-    if ((cast ((cast (cast isAffineMatrix3((cast a)) : Bool) : Bool) && (cast (cast isAffineMatrix3((cast b)) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast (cast isAffineMatrix3(({ final __callArgument4:Dynamic = a; __callArgument4; })) : Bool) : Bool) && (cast (cast isAffineMatrix3(({ final __callArgument5:Dynamic = b; __callArgument5; })) : Bool) : Bool)) : Bool)) {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast ((a00 * b00) + (a01 * b10)) : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast ((a10 * b00) + (a11 * b10)) : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast 0.0 : Float));
@@ -368,10 +368,10 @@ class Matrix3 {
   public static function setMatrix3NormalFromMatrix4(out:Matrix3Like, source:Matrix4Like):Void {
     var scratch:flighthq.types.Matrix3 = cast _Runtime.UNDEFINED;
     scratch = (cast acquireMatrix3() : flighthq.types.Matrix3);
-    setMatrix3FromMatrix4((cast scratch), (cast source));
-    (cast inverseMatrix3((cast scratch), (cast scratch)) : Bool);
-    transposeMatrix3((cast out), (cast scratch));
-    releaseMatrix3((cast scratch));
+    setMatrix3FromMatrix4(({ final __callArgument6:Dynamic = scratch; __callArgument6; }), ({ final __callArgument7:Dynamic = source; __callArgument7; }));
+    (cast inverseMatrix3(({ final __callArgument8:Dynamic = scratch; __callArgument8; }), ({ final __callArgument9:Dynamic = scratch; __callArgument9; })) : Bool);
+    transposeMatrix3(({ final __callArgument10:Dynamic = out; __callArgument10; }), ({ final __callArgument11:Dynamic = scratch; __callArgument11; }));
+    releaseMatrix3(({ final __callArgument12:Dynamic = scratch; __callArgument12; }));
   }
 
   public static function translateMatrix3(out:Matrix3Like, source:Matrix3Like, tx:Float, ty:Float):Void {

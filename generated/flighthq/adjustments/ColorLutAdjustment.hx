@@ -13,8 +13,8 @@ class ColorLutAdjustment {
     var matrix:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     transform = _Runtime.field((cast operation : flighthq._internal._Partial<flighthq.types.ColorLutAdjustment>), 'transform');
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(transform), 'function') : Bool)) { return cast transform; }
-    matrix = (cast getAdjustmentColorMatrix((cast operation)) : Null<Array<Float>>);
-    return cast ((cast _Runtime.strictEquals(matrix, null) : Bool) ? (cast null : Dynamic) : (cast (cast ColorLutAdjustment.colorMatrixTransform__colorLutAdjustment((cast matrix)) : ColorTransformFunction) : Dynamic));
+    matrix = (cast getAdjustmentColorMatrix(({ final __callArgument0:Dynamic = operation; __callArgument0; })) : Null<Array<Float>>);
+    return cast ((cast _Runtime.strictEquals(matrix, null) : Bool) ? (cast null : Dynamic) : (cast (cast ColorLutAdjustment.colorMatrixTransform__colorLutAdjustment(({ final __callArgument1:Dynamic = matrix; __callArgument1; })) : ColorTransformFunction) : Dynamic));
     return cast null;
   }
 

@@ -33,20 +33,20 @@ class SceneAnimation {
         if ((cast _Runtime.strictEquals((cast target : { var path:Scene3DAnimationPath; }).path, 'Weights') : Bool)) {
           var morph:Null<MeshMorph> = (cast (cast (cast target : { var node:Node3D; }).node : Mesh) : { @:optional var morph:Null<MeshMorph>; }).morph;
           if ((cast _Runtime.looseEquals(morph, null) : Bool)) { i++; continue; }
-          sampleAnimationTrack((cast (cast morph : MeshMorph).weights), (cast (cast channel : AnimationChannel).track), (cast time : Float));
+          sampleAnimationTrack(({ final __callArgument0:Dynamic = (cast morph : MeshMorph).weights; __callArgument0; }), (cast channel : AnimationChannel).track, (cast time : Float));
           i++;
           continue;
         }
-        sampleAnimationTrack((cast SceneAnimation._scratch__sceneAnimation), (cast (cast channel : AnimationChannel).track), (cast time : Float));
+        sampleAnimationTrack(({ final __callArgument1:Dynamic = SceneAnimation._scratch__sceneAnimation; __callArgument1; }), (cast channel : AnimationChannel).track, (cast time : Float));
         var node:Node3D = (cast target : { var node:Node3D; }).node;
         if ((cast _Runtime.strictEquals((cast target : { var path:Scene3DAnimationPath; }).path, 'Translation') : Bool)) {
-          setVector3((cast node.position), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 2.0 : Float)) : Float));
+          setVector3(({ final __callArgument2:Dynamic = node.position; __callArgument2; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 2.0 : Float)) : Float));
         } else { if ((cast _Runtime.strictEquals((cast target : { var path:Scene3DAnimationPath; }).path, 'Scale') : Bool)) {
-          setVector3((cast node.scale), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 2.0 : Float)) : Float));
+          setVector3(({ final __callArgument3:Dynamic = node.scale; __callArgument3; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 2.0 : Float)) : Float));
         } else {
-          setQuaternion((cast node.rotation), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 2.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 3.0 : Float)) : Float));
+          setQuaternion(({ final __callArgument4:Dynamic = node.rotation; __callArgument4; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 2.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 3.0 : Float)) : Float));
         } }
-        invalidateNodeLocalTransform((cast node));
+        invalidateNodeLocalTransform((cast node : Dynamic));
         i++;
       }
     }

@@ -21,14 +21,14 @@ class CanvasBlurEffect {
     blurX = _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0);
     blurY = _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0);
     radius = HxMath.max(0.0, ((blurX + blurY) / 2.0));
-    drawCanvasEffectPass((cast dest), (cast source), (cast ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(radius) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    drawCanvasEffectPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(radius) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static final defaultCanvasBlurEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyBlurEffectToCanvas((cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : BlurEffect)));
+    applyBlurEffectToCanvas(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : BlurEffect));
   });
 
   public static function registerCanvasBlurEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect((cast state), (cast 'BlurEffect' : String), (cast defaultCanvasBlurEffectRunner));
+    registerCanvasRenderEffect(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast 'BlurEffect' : String), ({ final __callArgument3:Dynamic = defaultCanvasBlurEffectRunner; __callArgument3; }));
   }
 }

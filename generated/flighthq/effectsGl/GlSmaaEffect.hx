@@ -20,19 +20,19 @@ class GlSmaaEffect {
     var threshold:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.1);
-    program = (cast getGlEffectProgram((cast state), (cast 'antialiasing.smaa' : String), (cast GlSmaaEffect.SMAA_FRAGMENT_SRC__glSmaaEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'antialiasing.smaa' : String), (cast GlSmaaEffect.SMAA_FRAGMENT_SRC__glSmaaEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_threshold'), threshold);
-    }));
+    } : Dynamic));
   }
 
   public static final defaultGlSmaaEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applySmaaEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : SmaaEffect)));
+    applySmaaEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SmaaEffect));
   });
 
   public static function registerGlSmaaEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state), (cast 'SmaaEffect' : String), (cast defaultGlSmaaEffectRunner));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'SmaaEffect' : String), ({ final __callArgument6:Dynamic = defaultGlSmaaEffectRunner; __callArgument6; }));
   }
 
   public static final SMAA_FRAGMENT_SRC__glSmaaEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_resolution;\nuniform float u_threshold;\nout vec4 o_color;\nfloat luma(vec3 c) {\n  return dot(c, vec3(0.299, 0.587, 0.114));\n}\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  vec4 center = texture(u_texture0, v_texCoord);\n  float lumaC = luma(center.rgb);\n  float lumaL = luma(texture(u_texture0, v_texCoord + vec2(-1.0, 0.0) * texel).rgb);\n  float lumaR = luma(texture(u_texture0, v_texCoord + vec2(1.0, 0.0) * texel).rgb);\n  float lumaT = luma(texture(u_texture0, v_texCoord + vec2(0.0, -1.0) * texel).rgb);\n  float lumaB = luma(texture(u_texture0, v_texCoord + vec2(0.0, 1.0) * texel).rgb);\n  float edge = max(abs(lumaC - lumaL), max(abs(lumaC - lumaR), max(abs(lumaC - lumaT), abs(lumaC - lumaB))));\n  if (edge < u_threshold) {\n    o_color = center;\n    return;\n  }\n  vec3 blurred = (\n    texture(u_texture0, v_texCoord + vec2(-1.0, 0.0) * texel).rgb +\n    texture(u_texture0, v_texCoord + vec2(1.0, 0.0) * texel).rgb +\n    texture(u_texture0, v_texCoord + vec2(0.0, -1.0) * texel).rgb +\n    texture(u_texture0, v_texCoord + vec2(0.0, 1.0) * texel).rgb +\n    center.rgb) / 5.0;\n  o_color = vec4(blurred, center.a);\n}';

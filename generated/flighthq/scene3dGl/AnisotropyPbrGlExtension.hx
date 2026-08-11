@@ -29,7 +29,7 @@ class AnisotropyPbrGlExtension {
     extension = (cast value : AnisotropyPbrExtension);
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightAnisotropyStrength' : String), (cast _Runtime.field(extension, 'anisotropyStrength') : Float));
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightAnisotropyRotation' : String), (cast _Runtime.field(extension, 'anisotropyRotation') : Float));
-    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightAnisotropyMap' : String), (cast 'u_flightAnisotropyMapUvSet' : String), (cast 'u_flightAnisotropyMapTransform' : String), (cast _Runtime.field(extension, 'anisotropyMap')), (cast _Runtime.field(extension, 'anisotropyMapUvSet')));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightAnisotropyMap' : String), (cast 'u_flightAnisotropyMapUvSet' : String), (cast 'u_flightAnisotropyMapTransform' : String), (cast _Runtime.field(extension, 'anisotropyMap') : Dynamic), _Runtime.field(extension, 'anisotropyMapUvSet'));
   }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):GlPbrExtensionShaderContribution {
     var extension:AnisotropyPbrExtension = cast _Runtime.UNDEFINED;
     var hasMap:Bool = cast _Runtime.UNDEFINED;
@@ -43,6 +43,6 @@ class AnisotropyPbrGlExtension {
   } });
 
   public static function registerGlAnisotropyPbrExtension(state:GlRenderState):Void {
-    registerGlPbrExtension((cast state), (cast AnisotropyPbrExtensionKind : String), (cast anisotropyPbrGlExtension));
+    registerGlPbrExtension(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast AnisotropyPbrExtensionKind : String), ({ final __callArgument1:Dynamic = anisotropyPbrGlExtension; __callArgument1; }));
   }
 }

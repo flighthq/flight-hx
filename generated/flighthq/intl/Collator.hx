@@ -9,21 +9,21 @@ import flighthq.types.LocaleInput;
 
 class Collator {
   public static function compareStrings(a:String, b:String, locale:LocaleInput, ?options:Dynamic):Float {
-    return cast _Runtime.callProperty(Collator.getCollator__collator((cast locale), (cast options)), 'compare', cast ([a, b] : Array<Dynamic>));
+    return cast _Runtime.callProperty(Collator.getCollator__collator(({ final __callArgument4:Dynamic = locale; __callArgument4; }), ({ final __callArgument5:Dynamic = options; __callArgument5; })), 'compare', cast ([a, b] : Array<Dynamic>));
     return cast null;
   }
 
   public static function sortStrings(items:Array<String>, locale:LocaleInput, ?options:Dynamic):Array<String> {
     var collator:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    collator = Collator.getCollator__collator((cast locale), (cast options));
+    collator = Collator.getCollator__collator(({ final __callArgument6:Dynamic = locale; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; }));
     return cast _Runtime.sortAndReturn(_Runtime.slice(items, 0, null), function(a:String, b:String) return _Runtime.callProperty(collator, 'compare', cast ([a, b] : Array<Dynamic>)));
     return cast null;
   }
 
   public static function getCollator__collator(locale:LocaleInput, options:Null<Dynamic>):Dynamic {
     var key:String = cast _Runtime.UNDEFINED;
-    key = (cast getCacheKey((cast 'collator' : String), (cast locale), (cast options)) : String);
-    return cast (cast getCached : String->(Void->flighthq._internal._Any)->flighthq._internal._Any)((cast key : String), (cast function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'Collator'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options])));
+    key = (cast getCacheKey((cast 'collator' : String), ({ final __callArgument8:Dynamic = locale; __callArgument8; }), ({ final __callArgument9:Dynamic = options; __callArgument9; })) : String);
+    return cast (cast getCached : String->(Void->flighthq._internal._Any)->flighthq._internal._Any)((cast key : String), ({ final __callArgument10:Dynamic = function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'Collator'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options]); __callArgument10; }));
     return cast null;
   }
 }

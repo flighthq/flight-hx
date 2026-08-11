@@ -23,11 +23,11 @@ class OuterGlowEffect {
   }
 
   public static function registerOuterGlowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'OuterGlowEffect' : String), (cast OuterGlowEffect.resolveOuterGlowEffectPadding__outerGlowEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'OuterGlowEffect' : String), (cast OuterGlowEffect.resolveOuterGlowEffectPadding__outerGlowEffect : Dynamic));
   }
 
   public static function resolveOuterGlowEffectPadding__outerGlowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getOuterGlowEffectPadding((cast (cast effect : flighthq.types.OuterGlowEffect))) : RenderEffectPadding);
+    return cast (cast getOuterGlowEffectPadding((cast effect : flighthq.types.OuterGlowEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

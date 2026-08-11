@@ -15,7 +15,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Aabb {
   public static function cloneAabb(source:AabbLike):flighthq.types.Aabb {
-    return cast (cast createAabb((cast (cast source.min : { var x:Float; }).x), (cast (cast source.min : { var y:Float; }).y), (cast (cast source.min : { var z:Float; }).z), (cast (cast source.max : { var x:Float; }).x), (cast (cast source.max : { var y:Float; }).y), (cast (cast source.max : { var z:Float; }).z)) : flighthq.types.Aabb);
+    return cast (cast createAabb(({ final __callArgument0:Dynamic = (cast source.min : { var x:Float; }).x; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast source.min : { var y:Float; }).y; __callArgument1; }), ({ final __callArgument2:Dynamic = (cast source.min : { var z:Float; }).z; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast source.max : { var x:Float; }).x; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast source.max : { var y:Float; }).y; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast source.max : { var z:Float; }).z; __callArgument5; })) : flighthq.types.Aabb);
     return cast null;
   }
 
@@ -36,9 +36,9 @@ class Aabb {
   public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):flighthq.types.Aabb {
     var min:Vector3 = cast _Runtime.UNDEFINED;
     var max:Vector3 = cast _Runtime.UNDEFINED;
-    min = (cast createVector3((cast _Runtime.coalesce(minX, function():Dynamic return cast HxMath.POSITIVE_INFINITY)), (cast _Runtime.coalesce(minY, function():Dynamic return cast HxMath.POSITIVE_INFINITY)), (cast _Runtime.coalesce(minZ, function():Dynamic return cast HxMath.POSITIVE_INFINITY))) : Vector3);
-    max = (cast createVector3((cast _Runtime.coalesce(maxX, function():Dynamic return cast HxMath.NEGATIVE_INFINITY)), (cast _Runtime.coalesce(maxY, function():Dynamic return cast HxMath.NEGATIVE_INFINITY)), (cast _Runtime.coalesce(maxZ, function():Dynamic return cast HxMath.NEGATIVE_INFINITY))) : Vector3);
-    return cast (cast createEntity((cast { max: max, min: min })) : { >Entity, var max:Vector3; var min:Vector3; });
+    min = (cast createVector3(({ final __callArgument6:Dynamic = _Runtime.coalesce(minX, function():Dynamic return cast HxMath.POSITIVE_INFINITY); __callArgument6; }), ({ final __callArgument7:Dynamic = _Runtime.coalesce(minY, function():Dynamic return cast HxMath.POSITIVE_INFINITY); __callArgument7; }), ({ final __callArgument8:Dynamic = _Runtime.coalesce(minZ, function():Dynamic return cast HxMath.POSITIVE_INFINITY); __callArgument8; })) : Vector3);
+    max = (cast createVector3(({ final __callArgument9:Dynamic = _Runtime.coalesce(maxX, function():Dynamic return cast HxMath.NEGATIVE_INFINITY); __callArgument9; }), ({ final __callArgument10:Dynamic = _Runtime.coalesce(maxY, function():Dynamic return cast HxMath.NEGATIVE_INFINITY); __callArgument10; }), ({ final __callArgument11:Dynamic = _Runtime.coalesce(maxZ, function():Dynamic return cast HxMath.NEGATIVE_INFINITY); __callArgument11; })) : Vector3);
+    return cast (cast createEntity((cast { max: max, min: min } : Dynamic)) : { >Entity, var max:Vector3; var min:Vector3; });
     return cast null;
   }
 

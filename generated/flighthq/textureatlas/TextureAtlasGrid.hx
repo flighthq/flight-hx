@@ -39,7 +39,7 @@ class TextureAtlasGrid {
     namePrefix = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'namePrefix'), function():Dynamic return cast 'frame_');
     frameWidth = _Runtime.coalesce(options.frameWidth, function():Dynamic return cast HxMath.floor((((imageWidth - (2.0 * marginX)) - (spacingX * (columns - 1.0))) / columns)));
     frameHeight = _Runtime.coalesce(options.frameHeight, function():Dynamic return cast HxMath.floor((((imageHeight - (2.0 * marginY)) - (spacingY * (rows - 1.0))) / rows)));
-    atlas = (cast createTextureAtlas((cast { texture: texture })) : TextureAtlas);
+    atlas = (cast createTextureAtlas(({ final __callArgument0:Dynamic = { texture: texture }; __callArgument0; })) : TextureAtlas);
     id = 0.0;
     {
       var row:Float = 0.0;
@@ -47,7 +47,7 @@ class TextureAtlasGrid {
         {
           var column:Float = 0.0;
           while ((cast ((cast column : Float) < (cast columns : Float)) : Bool)) {
-            _Runtime.callProperty(atlas.regions, 'push', cast ([(cast createTextureAtlasRegion((cast { height: frameHeight, id: id, name: '' + Std.string(namePrefix) + '' + Std.string(id) + '', width: frameWidth, x: (marginX + (column * (frameWidth + spacingX))), y: (marginY + (row * (frameHeight + spacingY))) })) : TextureAtlasRegion)] : Array<Dynamic>));
+            _Runtime.callProperty(atlas.regions, 'push', cast ([(cast createTextureAtlasRegion(({ final __callArgument1:Dynamic = { height: frameHeight, id: id, name: '' + Std.string(namePrefix) + '' + Std.string(id) + '', width: frameWidth, x: (marginX + (column * (frameWidth + spacingX))), y: (marginY + (row * (frameHeight + spacingY))) }; __callArgument1; })) : TextureAtlasRegion)] : Array<Dynamic>));
             id++;
             column++;
           }

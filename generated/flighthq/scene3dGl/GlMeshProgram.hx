@@ -43,7 +43,7 @@ class GlMeshProgram {
   public static function beginGlMeshDraw(state:GlRenderState, program:flighthq.types.GlMeshProgram, doubleSided:Bool):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    ((cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram = program);
+    ((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram = program);
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
     flighthq._internal.backend.WebGl2Backend.depthFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LESS', flighthq._internal.backend.WebGl2Backend.LESS));
@@ -65,13 +65,13 @@ class GlMeshProgram {
       ((cast (cast program : flighthq.types.GlMeshProgram) : flighthq.types.GlMeshProgram).locUvTransform = loc);
     }
     if ((cast ((cast _Runtime.strictEquals(loc, null) : Bool) || (cast _Runtime.strictEquals(texture, null) : Bool)) : Bool)) { return; }
-    getTextureUvMatrix((cast GlMeshProgram.scratchUvMatrix__glMeshProgram), (cast texture));
+    getTextureUvMatrix(({ final __callArgument1:Dynamic = GlMeshProgram.scratchUvMatrix__glMeshProgram; __callArgument1; }), ({ final __callArgument2:Dynamic = texture; __callArgument2; }));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, loc, false, GlMeshProgram.scratchUvMatrix__glMeshProgram.m);
   }
 
   @:noCompletion
   public static function compileGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, vertexSource:String, fragmentSource:String):flighthq._internal.dom.WebGLProgram {
-    return cast (cast createGlProgram((cast gl), (cast vertexSource : String), (cast fragmentSource : String), (cast 'Mesh' : String)) : flighthq._internal.dom.WebGLProgram);
+    return cast (cast createGlProgram(({ final __callArgument3:Dynamic = gl; __callArgument3; }), (cast vertexSource : String), (cast fragmentSource : String), (cast 'Mesh' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast null;
   }
 
@@ -92,7 +92,7 @@ class GlMeshProgram {
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locModel'), false, (cast _Runtime.field(proxy, 'worldMatrix') : { var m:flighthq._internal._Float32Array; }).m);
     if ((cast !_Runtime.strictEquals(_Runtime.field(program, 'locNormalMatrix'), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(program, 'locNormalMatrix'), false, (cast _Runtime.field(proxy, 'normalMatrix') : { var m:flighthq._internal._Float32Array; }).m); }
-    uploadGlMeshDrawAlpha((cast gl), (cast program), (cast _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0) : Float), (cast _Runtime.field(proxy, 'material')));
+    uploadGlMeshDrawAlpha(({ final __callArgument4:Dynamic = gl; __callArgument4; }), ({ final __callArgument5:Dynamic = program; __callArgument5; }), (cast _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0) : Float), ({ final __callArgument6:Dynamic = _Runtime.field(proxy, 'material'); __callArgument6; }));
     colorMatrix = _Runtime.field(proxy, 'colorMatrix');
     colorScaleBias = _Runtime.field(proxy, 'colorScaleBias');
     if ((cast !_Runtime.looseEquals(colorMatrix, null) : Bool)) {
@@ -129,12 +129,12 @@ class GlMeshProgram {
     jointMatrices = _Runtime.field(proxy, 'jointMatrices');
     gpuSkinned = ((cast !_Runtime.looseEquals(_Runtime.field(program, 'locJointTexture'), null) : Bool) && (cast !_Runtime.looseEquals(jointMatrices, null) : Bool));
     if ((cast gpuSkinned : Bool)) {
-      var palette:GlSkinPaletteTexture = (cast ensureGlSkinPalette((cast state)) : GlSkinPaletteTexture);
+      var palette:GlSkinPaletteTexture = (cast ensureGlSkinPalette(({ final __callArgument7:Dynamic = state; __callArgument7; })) : GlSkinPaletteTexture);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + SKIN_PALETTE_TEXTURE_UNIT));
-      uploadGlSkinPaletteTexture((cast gl), (cast palette), (cast jointMatrices), (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0) : Float));
+      uploadGlSkinPaletteTexture(({ final __callArgument8:Dynamic = gl; __callArgument8; }), ({ final __callArgument9:Dynamic = palette; __callArgument9; }), ({ final __callArgument10:Dynamic = jointMatrices; __callArgument10; }), (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0) : Float));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locJointTexture'), SKIN_PALETTE_TEXTURE_UNIT);
     }
-    upload = (cast ensureGlMeshUpload((cast state), (cast geometry), (cast gpuSkinned : Bool)) : GlMeshUpload);
+    upload = (cast ensureGlMeshUpload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = geometry; __callArgument12; }), (cast gpuSkinned : Bool)) : GlMeshUpload);
     subset = _Runtime.field(proxy, 'subset');
     if ((cast !_Runtime.strictEquals((cast upload : GlMeshUpload).indexBuffer, null) : Bool)) {
       var elementSize:Float = ((cast _Runtime.strictEquals((cast upload : GlMeshUpload).indexType, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT)) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
@@ -148,10 +148,10 @@ class GlMeshProgram {
   public static function ensureGlScene3DProgram<T:flighthq.types.GlMeshProgram>(state:GlRenderState, key:String, compile:flighthq._internal.dom.WebGL2RenderingContext->T):T {
     var runtime:GlScene3DRuntime = cast _Runtime.UNDEFINED;
     var program:Null<flighthq.types.GlMeshProgram> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime);
+    runtime = (cast getGlScene3DRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlScene3DRuntime);
     program = ((cast (cast runtime : GlScene3DRuntime).programCache : flighthq._internal._Map<String, flighthq.types.GlMeshProgram>).get(key));
     if ((cast _Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (program = cast ((cast compile((cast (cast state : GlRenderState).gl)) : T) : Dynamic));
+      (program = cast ((cast compile((cast state : GlRenderState).gl) : T) : Dynamic));
       ((cast (cast runtime : GlScene3DRuntime).programCache : flighthq._internal._Map<String, flighthq.types.GlMeshProgram>).set(key, (cast program)));
     }
     return cast (cast program : T);
@@ -160,20 +160,20 @@ class GlMeshProgram {
 
   @:noCompletion
   public static function hasGlUvTransform(texture:Null<TextureLike>):Bool {
-    return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast (cast hasTextureSource((cast texture)) : Bool) : Bool)) : Bool) && (cast (cast hasTextureUvTransform((cast texture)) : Bool) : Bool));
+    return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast (cast hasTextureSource(({ final __callArgument14:Dynamic = texture; __callArgument14; })) : Bool) : Bool)) : Bool) && (cast (cast hasTextureUvTransform(({ final __callArgument15:Dynamic = texture; __callArgument15; })) : Bool) : Bool));
     return cast null;
   }
 
   @:noCompletion
   public static function setGlMeshCameraPosition(gl:flighthq._internal.dom.WebGL2RenderingContext, locCameraPosition:Null<flighthq._internal.dom.WebGLUniformLocation>, camera:Camera3D):Void {
-    (cast inverseMatrix4((cast GlMeshProgram.scratchInverseView__glMeshProgram), (cast camera.view)) : Bool);
-    getMatrix4Position((cast GlMeshProgram.scratchCameraPosition__glMeshProgram), (cast GlMeshProgram.scratchInverseView__glMeshProgram));
+    (cast inverseMatrix4(({ final __callArgument16:Dynamic = GlMeshProgram.scratchInverseView__glMeshProgram; __callArgument16; }), ({ final __callArgument17:Dynamic = camera.view; __callArgument17; })) : Bool);
+    getMatrix4Position(({ final __callArgument18:Dynamic = GlMeshProgram.scratchCameraPosition__glMeshProgram; __callArgument18; }), ({ final __callArgument19:Dynamic = GlMeshProgram.scratchInverseView__glMeshProgram; __callArgument19; }));
     flighthq._internal.backend.WebGl2Backend.uniform3f(gl, locCameraPosition, (cast GlMeshProgram.scratchCameraPosition__glMeshProgram : { var x:Float; var y:Float; var z:Float; }).x, (cast GlMeshProgram.scratchCameraPosition__glMeshProgram : { var x:Float; var y:Float; var z:Float; }).y, (cast GlMeshProgram.scratchCameraPosition__glMeshProgram : { var x:Float; var y:Float; var z:Float; }).z);
   }
 
   @:noCompletion
   public static function setGlMeshViewProjection(state:GlRenderState, locViewProjection:Null<flighthq._internal.dom.WebGLUniformLocation>, camera:Camera3D):Void {
-    getCamera3DViewProjectionMatrix4((cast GlMeshProgram.scratchViewProjection__glMeshProgram), (cast camera), (cast (cast getGlScene3DViewportAspect((cast state)) : Float) : Float));
+    getCamera3DViewProjectionMatrix4(({ final __callArgument20:Dynamic = GlMeshProgram.scratchViewProjection__glMeshProgram; __callArgument20; }), ({ final __callArgument21:Dynamic = camera; __callArgument21; }), (cast (cast getGlScene3DViewportAspect(({ final __callArgument22:Dynamic = state; __callArgument22; })) : Float) : Float));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv((cast state : GlRenderState).gl, locViewProjection, false, GlMeshProgram.scratchViewProjection__glMeshProgram.m);
   }
 
@@ -193,7 +193,7 @@ class GlMeshProgram {
       ((cast (cast program : flighthq.types.GlMeshProgram) : flighthq.types.GlMeshProgram).locAlphaIsCoverage = coverageLocation);
     }
     if ((cast !_Runtime.strictEquals(coverageLocation, null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, coverageLocation, ((cast (cast GlMeshProgram.isGlMeshAlphaCoverage__glMeshProgram((cast material)) : Bool) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, coverageLocation, ((cast (cast GlMeshProgram.isGlMeshAlphaCoverage__glMeshProgram(({ final __callArgument23:Dynamic = material; __callArgument23; })) : Bool) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     }
   }
 
@@ -211,11 +211,11 @@ class GlMeshProgram {
   @:noCompletion
   public static final GL_SKIN_VERTEX_DECLARATIONS_GLSL:String = '\nlayout(location = 6) in vec4 a_joints0;\nlayout(location = 7) in vec4 a_weights0;\nuniform highp sampler2D u_jointTexture;\n\nmat4 fetchJointMatrix(int joint) {\n  int x = joint * 4;\n  return mat4(\n    texelFetch(u_jointTexture, ivec2(x, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 1, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 2, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 3, 0), 0)\n  );\n}\n\nmat4 skinMatrix() {\n  return a_weights0.x * fetchJointMatrix(int(a_joints0.x))\n       + a_weights0.y * fetchJointMatrix(int(a_joints0.y))\n       + a_weights0.z * fetchJointMatrix(int(a_joints0.z))\n       + a_weights0.w * fetchJointMatrix(int(a_joints0.w));\n}\n';
 
-  public static final scratchViewProjection__glMeshProgram:Matrix4 = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix4);
+  public static final scratchViewProjection__glMeshProgram:Matrix4 = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4);
 
-  public static final scratchInverseView__glMeshProgram:Matrix4 = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix4);
+  public static final scratchInverseView__glMeshProgram:Matrix4 = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4);
 
   public static final scratchCameraPosition__glMeshProgram:{ var x:Float; var y:Float; var z:Float; } = (cast { x: 0.0, y: 0.0, z: 0.0 });
 
-  public static final scratchUvMatrix__glMeshProgram:Matrix3 = (cast createMatrix3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix3);
+  public static final scratchUvMatrix__glMeshProgram:Matrix3 = (cast createMatrix3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix3);
 }

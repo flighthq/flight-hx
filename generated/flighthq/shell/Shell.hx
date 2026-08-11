@@ -79,7 +79,7 @@ class Shell {
   }
 
   public static function moveItemsToTrash(paths:Array<String>):flighthq._internal._Promise<Array<Bool>> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).moveItemsToTrash((cast paths));
+    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).moveItemsToTrash(({ final __callArgument0:Dynamic = paths; __callArgument0; }));
     return cast null;
   }
 
@@ -90,17 +90,17 @@ class Shell {
 
   public static function openShellExternalUrl(url:String, ?options:ShellOpenExternalOptions):flighthq._internal._Promise<Bool> {
     if ((cast !(cast (cast isShellUrlAllowed((cast url : String)) : Bool) : Bool) : Bool)) { return cast flighthq._internal._Async.resolve(false); }
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openExternal((cast url : String), (cast options));
+    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openExternal((cast url : String), ({ final __callArgument1:Dynamic = options; __callArgument1; }));
     return cast null;
   }
 
   public static function openShellPath(path:String, ?options:ShellOpenPathOptions):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openPath((cast path : String), (cast options));
+    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openPath((cast path : String), ({ final __callArgument2:Dynamic = options; __callArgument2; }));
     return cast null;
   }
 
   public static function openShellPathResult(path:String, ?options:ShellOpenPathOptions):flighthq._internal._Promise<String> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openPathResult((cast path : String), (cast options));
+    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openPathResult((cast path : String), ({ final __callArgument3:Dynamic = options; __callArgument3; }));
     return cast null;
   }
 
@@ -128,7 +128,7 @@ class Shell {
   }
 
   public static function writeShellShortcutLink(shortcutPath:String, link:ShellShortcutLink, ?operation:ShellShortcutWriteOperation):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).writeShortcutLink((cast shortcutPath : String), (cast link), (cast operation));
+    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).writeShortcutLink((cast shortcutPath : String), ({ final __callArgument4:Dynamic = link; __callArgument4; }), ({ final __callArgument5:Dynamic = operation; __callArgument5; }));
     return cast null;
   }
 }

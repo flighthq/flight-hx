@@ -49,20 +49,20 @@ class LambertGlMeshMaterialRenderer {
     var lambert:Null<LambertMaterial> = cast _Runtime.UNDEFINED;
     var program:GlClassicProgram = cast _Runtime.UNDEFINED;
     lambert = (cast material : Null<LambertMaterial>);
-    program = (cast ensureGlClassicProgram((cast state), (cast (cast LambertGlMeshMaterialRenderer.defineKeyForMaterial__lambertGlMeshMaterialRenderer((cast state), (cast lambert)) : GlClassicDefineKey))) : GlClassicProgram);
-    beginGlMeshDraw((cast state), (cast program), (cast ((cast !_Runtime.strictEquals(lambert, null) : Bool) && (cast _Runtime.field(lambert, 'doubleSided') : Bool)) : Bool));
-    setGlMeshViewProjection((cast state), (cast (cast program : GlClassicProgram).locViewProjection), (cast camera));
-    bindGlMeshLightBlock((cast state), (cast program), (cast lights));
-    LambertGlMeshMaterialRenderer.bindGlLambertMaterialUniforms__lambertGlMeshMaterialRenderer((cast state), (cast program), (cast lambert));
+    program = (cast ensureGlClassicProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast LambertGlMeshMaterialRenderer.defineKeyForMaterial__lambertGlMeshMaterialRenderer(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = lambert; __callArgument2; })) : GlClassicDefineKey)) : GlClassicProgram);
+    beginGlMeshDraw(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = program; __callArgument4; }), (cast ((cast !_Runtime.strictEquals(lambert, null) : Bool) && (cast _Runtime.field(lambert, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast program : GlClassicProgram).locViewProjection, ({ final __callArgument6:Dynamic = camera; __callArgument6; }));
+    bindGlMeshLightBlock(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = program; __callArgument8; }), ({ final __callArgument9:Dynamic = lights; __callArgument9; }));
+    LambertGlMeshMaterialRenderer.bindGlLambertMaterialUniforms__lambertGlMeshMaterialRenderer(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = program; __callArgument11; }), ({ final __callArgument12:Dynamic = lambert; __callArgument12; }));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset((cast state), (cast program), (cast proxy), (cast geometry));
+    drawGlMeshSubset(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = program; __callArgument15; }), ({ final __callArgument16:Dynamic = proxy; __callArgument16; }), ({ final __callArgument17:Dynamic = geometry; __callArgument17; }));
   } });
 
   public static function registerGlLambertMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer((cast state), (cast LambertMaterialKind : String), (cast lambertGlMeshMaterialRenderer));
+    registerGlMeshMaterialRenderer(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast LambertMaterialKind : String), ({ final __callArgument19:Dynamic = lambertGlMeshMaterialRenderer; __callArgument19; }));
   }
 
   public static function bindGlLambertMaterialUniforms__lambertGlMeshMaterialRenderer(state:GlRenderState, program:GlClassicProgram, material:Null<LambertMaterial>):Void {
@@ -74,19 +74,19 @@ class LambertGlMeshMaterialRenderer {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), 0.5);
       return;
     }
-    (cast unpackColorToLinear((cast LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer), (cast _Runtime.field(material, 'diffuse') : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument20:Dynamic = LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer; __callArgument20; }), (cast _Runtime.field(material, 'diffuse') : Float)) : LinearColor);
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDiffuse'), flighthq._internal._StaticIndex.readFloatArrayTyped((cast LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer : Array<Float>), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast LambertGlMeshMaterialRenderer.scratchRgba__lambertGlMeshMaterialRenderer : Array<Float>), (cast 3.0 : Float)));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), _Runtime.field(material, 'alphaCutoff'));
     diffuseMap = _Runtime.field(material, 'diffuseMap');
     if ((cast !_Runtime.strictEquals(diffuseMap, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
-      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast diffuseMap), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locDiffuseMap'), 0.0); }
+      if ((cast !_Runtime.strictEquals((cast resolveGlTexture(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = diffuseMap; __callArgument22; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locDiffuseMap'), 0.0); }
     }
-    bindGlUvTransform((cast gl), (cast program), (cast diffuseMap));
+    bindGlUvTransform(({ final __callArgument23:Dynamic = gl; __callArgument23; }), ({ final __callArgument24:Dynamic = program; __callArgument24; }), (cast diffuseMap : Dynamic));
   }
 
   public static function defineKeyForMaterial__lambertGlMeshMaterialRenderer(state:GlRenderState, material:Null<LambertMaterial>):GlClassicDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasAlphaMap: false, hasDiffuseMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'diffuseMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast _Runtime.field(material, 'diffuseMap')), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)), hasNormalMap: false, hasSpecularMap: false, hasUvTransform: (cast hasGlUvTransform((cast ((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'diffuseMap') : Dynamic) : (cast null : Dynamic)))) : Bool), lightingModel: 'lambert' };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasAlphaMap: false, hasDiffuseMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'diffuseMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture(({ final __callArgument25:Dynamic = state; __callArgument25; }), ({ final __callArgument26:Dynamic = _Runtime.field(material, 'diffuseMap'); __callArgument26; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)), hasNormalMap: false, hasSpecularMap: false, hasUvTransform: (cast hasGlUvTransform((cast ((cast !_Runtime.strictEquals(material, null) : Bool) ? (cast _Runtime.field(material, 'diffuseMap') : Dynamic) : (cast null : Dynamic)) : Dynamic)) : Bool), lightingModel: 'lambert' };
     return cast null;
   }
 

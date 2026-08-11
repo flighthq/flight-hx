@@ -11,11 +11,11 @@ import flighthq.types.RenderState;
 class EnableGlTextureResolverGuards {
   @:noCompletion
   public static function areGlTextureResolverGuardsEnabled(state:GlRenderState):Bool {
-    return cast (cast areRenderRegistryGuardsEnabled((cast state)) : Bool);
+    return cast (cast areRenderRegistryGuardsEnabled(({ final __callArgument0:Dynamic = state; __callArgument0; })) : Bool);
     return cast null;
   }
 
   public static function enableGlTextureResolverGuards(state:GlRenderState):Void {
-    enableRenderRegistryGuards((cast state));
+    enableRenderRegistryGuards(({ final __callArgument1:Dynamic = state; __callArgument1; }));
   }
 }

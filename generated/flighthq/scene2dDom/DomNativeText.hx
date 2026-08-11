@@ -36,15 +36,15 @@ class DomNativeText {
     var element:Null<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
     var rect:flighthq._internal.dom.DOMRect = cast _Runtime.UNDEFINED;
     source = (cast (cast renderProxy : RenderProxy2D).source : NativeText);
-    runtime = (cast getNativeTextRuntime((cast source)) : NativeTextRuntime);
+    runtime = (cast getNativeTextRuntime(({ final __callArgument0:Dynamic = source; __callArgument0; })) : NativeTextRuntime);
     data = (cast source : NativeText).data;
     element = (cast runtime : NativeTextRuntime).element;
     if ((cast _Runtime.strictEquals(element, null) : Bool)) {
       (element = cast (flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
-      prepareDomElement((cast element));
+      prepareDomElement(({ final __callArgument1:Dynamic = element; __callArgument1; }));
       ((cast runtime : NativeTextRuntime).element = element);
     }
-    DomNativeText.applyNativeTextStyle__domNativeText((cast element), (cast (cast data : NativeTextData).style));
+    DomNativeText.applyNativeTextStyle__domNativeText(({ final __callArgument2:Dynamic = element; __callArgument2; }), (cast data : NativeTextData).style);
     if ((cast _Runtime.strictEquals((cast data : NativeTextData).autoSize, 'none') : Bool)) {
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).whiteSpace = 'normal');
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string((cast data : NativeTextData).width) + 'px');
@@ -52,7 +52,7 @@ class DomNativeText {
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).display = 'flex');
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).flexDirection = 'column');
-      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).justifyContent = (cast DomNativeText._verticalAlignToJustifyContent__domNativeText((cast (cast data : NativeTextData).verticalAlign)) : String));
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).justifyContent = (cast DomNativeText._verticalAlignToJustifyContent__domNativeText((cast data : NativeTextData).verticalAlign) : String));
     } else {
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).whiteSpace = 'nowrap');
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '');
@@ -66,13 +66,13 @@ class DomNativeText {
     rect = (cast element : flighthq._internal.dom.HTMLElement).getBoundingClientRect();
     ((cast runtime : NativeTextRuntime).measuredWidth = (cast rect : flighthq._internal.dom.DOMRect).width);
     ((cast runtime : NativeTextRuntime).measuredHeight = (cast rect : flighthq._internal.dom.DOMRect).height);
-    applyDomStyle((cast state), (cast element), (cast renderProxy));
-    setDomRendererElement((cast state), (cast element));
+    applyDomStyle(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = element; __callArgument4; }), ({ final __callArgument5:Dynamic = renderProxy; __callArgument5; }));
+    setDomRendererElement(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = element; __callArgument7; }));
   }
 
   @:noCompletion
   public static function drawDomNativeTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    drawDomNativeText((cast state), (cast renderProxy));
+    drawDomNativeText(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = renderProxy; __callArgument9; }));
   }
 
   public static final defaultDomNativeTextRenderer:Scene2DRenderer = (cast { createData: DomNativeText.createDomNativeTextData__domNativeText, submit: drawDomNativeText });

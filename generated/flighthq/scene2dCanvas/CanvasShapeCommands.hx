@@ -23,7 +23,7 @@ import flighthq.types.Texture.TextureLike;
 import flighthq.types.Vector2;
 
 class CanvasShapeCommands {
-  public static final _fillMatrixInverse__canvasShapeCommands:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
+  public static final _fillMatrixInverse__canvasShapeCommands:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix);
 
   @:noCompletion
   public static final defaultCanvasBeginTextureFill:CanvasShapeCommand<String> = (cast { key: 'beginTextureFill', draw: function(context:flighthq._internal.dom.CanvasRenderingContext2D, state:CanvasShapeDrawState, buf:Array<flighthq._internal._Any>, i:Float):Void {
@@ -33,19 +33,19 @@ class CanvasShapeCommands {
     texture = (cast flighthq._internal._StaticIndex.readArray(buf, i) : Texture);
     matrix = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 1.0)) : Null<Matrix>);
     if ((cast ((cast (cast state : CanvasShapeDrawState).hasPendingPath : Bool) && (cast _Runtime.orValue((cast state : CanvasShapeDrawState).hasFill, function():Dynamic return cast (cast state : CanvasShapeDrawState).hasStroke) : Bool)) : Bool)) { (cast state : CanvasShapeDrawState).flush(); }
-    pattern = (cast createBitmapPattern((cast context), (cast texture), (cast (cast state : CanvasShapeDrawState).canvasTextureResolvers), (cast (cast state : CanvasShapeDrawState).allowSmoothing : Bool)) : Null<flighthq._internal.dom.CanvasPattern>);
+    pattern = (cast createBitmapPattern(({ final __callArgument0:Dynamic = context; __callArgument0; }), ({ final __callArgument1:Dynamic = texture; __callArgument1; }), (cast state : CanvasShapeDrawState).canvasTextureResolvers, (cast (cast state : CanvasShapeDrawState).allowSmoothing : Bool)) : Null<flighthq._internal.dom.CanvasPattern>);
     ((cast state : CanvasShapeDrawState).hasFill = !_Runtime.strictEquals(pattern, null));
     ((cast state : CanvasShapeDrawState).fillStyle = _Runtime.coalesce(pattern, function():Dynamic return cast ''));
     ((cast state : CanvasShapeDrawState).fillMatrix = matrix);
     if ((cast !_Runtime.strictEquals(matrix, null) : Bool)) {
-      (cast inverseMatrix((cast CanvasShapeCommands._fillMatrixInverse__canvasShapeCommands), (cast matrix)) : Bool);
+      (cast inverseMatrix(({ final __callArgument2:Dynamic = CanvasShapeCommands._fillMatrixInverse__canvasShapeCommands; __callArgument2; }), ({ final __callArgument3:Dynamic = matrix; __callArgument3; })) : Bool);
       ((cast state : CanvasShapeDrawState).fillMatrixInverse = CanvasShapeCommands._fillMatrixInverse__canvasShapeCommands);
     } else {
       ((cast state : CanvasShapeDrawState).fillMatrixInverse = null);
     }
-    ((cast state : CanvasShapeDrawState).bitmapSrc = (cast resolveCanvasTextureWindowSource((cast (cast state : CanvasShapeDrawState).canvasTextureResolvers), (cast texture)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>));
-    ((cast state : CanvasShapeDrawState).bitmapW = HxMath.abs(((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x * (cast getTextureWidth((cast texture)) : Float))));
-    ((cast state : CanvasShapeDrawState).bitmapH = HxMath.abs(((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y * (cast getTextureHeight((cast texture)) : Float))));
+    ((cast state : CanvasShapeDrawState).bitmapSrc = (cast resolveCanvasTextureWindowSource((cast state : CanvasShapeDrawState).canvasTextureResolvers, ({ final __callArgument4:Dynamic = texture; __callArgument4; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>));
+    ((cast state : CanvasShapeDrawState).bitmapW = HxMath.abs(((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x * (cast getTextureWidth(({ final __callArgument5:Dynamic = texture; __callArgument5; })) : Float))));
+    ((cast state : CanvasShapeDrawState).bitmapH = HxMath.abs(((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y * (cast getTextureHeight(({ final __callArgument6:Dynamic = texture; __callArgument6; })) : Float))));
   } });
 
   public static final defaultCanvasBeginFill:CanvasShapeCommand<String> = (cast { key: 'beginFill', draw: function(_ctx:flighthq._internal.dom.CanvasRenderingContext2D, state:CanvasShapeDrawState, buf:Array<flighthq._internal._Any>, i:Float):Void {
@@ -80,7 +80,7 @@ class CanvasShapeCommands {
     interpolationMethod = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 6.0)) : flighthq._internal._Any);
     focalPointRatio = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 7.0)) : Float);
     if ((cast ((cast (cast state : CanvasShapeDrawState).hasPendingPath : Bool) && (cast _Runtime.orValue((cast state : CanvasShapeDrawState).hasFill, function():Dynamic return cast (cast state : CanvasShapeDrawState).hasStroke) : Bool)) : Bool)) { (cast state : CanvasShapeDrawState).flush(); }
-    pattern = (cast createGradientPattern((cast context), (cast gradientType), (cast colors), (cast alphas), (cast ratios), (cast matrix), (cast spreadMethod), (cast interpolationMethod), (cast focalPointRatio : Float)) : Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasGradient, flighthq._internal.dom.CanvasPattern>>);
+    pattern = (cast createGradientPattern(({ final __callArgument7:Dynamic = context; __callArgument7; }), ({ final __callArgument8:Dynamic = gradientType; __callArgument8; }), ({ final __callArgument9:Dynamic = colors; __callArgument9; }), ({ final __callArgument10:Dynamic = alphas; __callArgument10; }), ({ final __callArgument11:Dynamic = ratios; __callArgument11; }), ({ final __callArgument12:Dynamic = matrix; __callArgument12; }), ({ final __callArgument13:Dynamic = spreadMethod; __callArgument13; }), ({ final __callArgument14:Dynamic = interpolationMethod; __callArgument14; }), (cast focalPointRatio : Float)) : Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasGradient, flighthq._internal.dom.CanvasPattern>>);
     ((cast state : CanvasShapeDrawState).hasFill = !_Runtime.strictEquals(pattern, null));
     ((cast state : CanvasShapeDrawState).fillStyle = _Runtime.coalesce(pattern, function():Dynamic return cast ''));
     ((cast state : CanvasShapeDrawState).fillMatrix = null);
@@ -301,7 +301,7 @@ class CanvasShapeCommands {
     var texture:Texture = cast _Runtime.UNDEFINED;
     var pattern:Null<flighthq._internal.dom.CanvasPattern> = cast _Runtime.UNDEFINED;
     texture = (cast flighthq._internal._StaticIndex.readArray(buf, i) : Texture);
-    pattern = (cast createBitmapPattern((cast context), (cast texture), (cast (cast state : CanvasShapeDrawState).canvasTextureResolvers), (cast (cast state : CanvasShapeDrawState).allowSmoothing : Bool)) : Null<flighthq._internal.dom.CanvasPattern>);
+    pattern = (cast createBitmapPattern(({ final __callArgument17:Dynamic = context; __callArgument17; }), ({ final __callArgument18:Dynamic = texture; __callArgument18; }), (cast state : CanvasShapeDrawState).canvasTextureResolvers, (cast (cast state : CanvasShapeDrawState).allowSmoothing : Bool)) : Null<flighthq._internal.dom.CanvasPattern>);
     if ((cast !_Runtime.strictEquals(pattern, null) : Bool)) {
       ((cast state : CanvasShapeDrawState).strokeStyle = pattern);
       ((cast state : CanvasShapeDrawState).hasStroke = true);
@@ -326,7 +326,7 @@ class CanvasShapeCommands {
     spreadMethod = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 5.0)) : flighthq._internal._Any);
     interpolationMethod = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 6.0)) : flighthq._internal._Any);
     focalPointRatio = (cast flighthq._internal._StaticIndex.readArray(buf, (i + 7.0)) : Float);
-    pattern = (cast createGradientPattern((cast context), (cast gradientType), (cast colors), (cast alphas), (cast ratios), (cast matrix), (cast spreadMethod), (cast interpolationMethod), (cast focalPointRatio : Float)) : Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasGradient, flighthq._internal.dom.CanvasPattern>>);
+    pattern = (cast createGradientPattern(({ final __callArgument19:Dynamic = context; __callArgument19; }), ({ final __callArgument20:Dynamic = gradientType; __callArgument20; }), ({ final __callArgument21:Dynamic = colors; __callArgument21; }), ({ final __callArgument22:Dynamic = alphas; __callArgument22; }), ({ final __callArgument23:Dynamic = ratios; __callArgument23; }), ({ final __callArgument24:Dynamic = matrix; __callArgument24; }), ({ final __callArgument25:Dynamic = spreadMethod; __callArgument25; }), ({ final __callArgument26:Dynamic = interpolationMethod; __callArgument26; }), (cast focalPointRatio : Float)) : Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasGradient, flighthq._internal.dom.CanvasPattern>>);
     if ((cast !_Runtime.strictEquals(pattern, null) : Bool)) {
       ((cast state : CanvasShapeDrawState).strokeStyle = pattern);
       ((cast state : CanvasShapeDrawState).hasStroke = true);

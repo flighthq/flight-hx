@@ -48,33 +48,33 @@ class LambertWgpuMeshMaterialRenderer {
     var format:String = cast _Runtime.UNDEFINED;
     var pipeline:WgpuClassicPipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
-    stateRuntime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     lambert = (cast material : Null<LambertMaterial>);
     format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    pipeline = (cast ensureWgpuClassicPipeline((cast state), (cast (cast LambertWgpuMeshMaterialRenderer.defineKeyForMaterial__lambertWgpuMeshMaterialRenderer((cast lambert)) : WgpuClassicDefineKey)), (cast format : String)) : WgpuClassicPipeline);
-    writeWgpuFrameUniform((cast state), (cast camera), (cast lights));
+    pipeline = (cast ensureWgpuClassicPipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast LambertWgpuMeshMaterialRenderer.defineKeyForMaterial__lambertWgpuMeshMaterialRenderer(({ final __callArgument2:Dynamic = lambert; __callArgument2; })) : WgpuClassicDefineKey), (cast format : String)) : WgpuClassicPipeline);
+    writeWgpuFrameUniform(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = camera; __callArgument4; }), ({ final __callArgument5:Dynamic = lights; __callArgument5; }));
     if ((cast _Runtime.strictEquals(lambert, null) : Bool)) {
-      (group = cast ((cast bindWgpuClassicSurface((cast state), (cast pipeline), (cast LambertWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__lambertWgpuMeshMaterialRenderer), (cast LambertWgpuMeshMaterialRenderer.WHITE__lambertWgpuMeshMaterialRenderer), (cast LambertWgpuMeshMaterialRenderer.WHITE__lambertWgpuMeshMaterialRenderer), (cast 32.0 : Float), (cast 0.5 : Float), (cast null), (cast null), (cast null), (cast null)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (group = cast ((cast bindWgpuClassicSurface(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pipeline; __callArgument7; }), ({ final __callArgument8:Dynamic = LambertWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__lambertWgpuMeshMaterialRenderer; __callArgument8; }), ({ final __callArgument9:Dynamic = LambertWgpuMeshMaterialRenderer.WHITE__lambertWgpuMeshMaterialRenderer; __callArgument9; }), ({ final __callArgument10:Dynamic = LambertWgpuMeshMaterialRenderer.WHITE__lambertWgpuMeshMaterialRenderer; __callArgument10; }), (cast 32.0 : Float), (cast 0.5 : Float), (cast null : Dynamic), (cast null : Dynamic), (cast null : Dynamic), (cast null : Dynamic)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
-      (cast unpackColorToLinear((cast LambertWgpuMeshMaterialRenderer._diffuse__lambertWgpuMeshMaterialRenderer), (cast _Runtime.field(lambert, 'diffuse') : Float)) : LinearColor);
-      (group = cast ((cast bindWgpuClassicSurface((cast state), (cast pipeline), (cast lambert), (cast LambertWgpuMeshMaterialRenderer._diffuse__lambertWgpuMeshMaterialRenderer), (cast LambertWgpuMeshMaterialRenderer.WHITE__lambertWgpuMeshMaterialRenderer), (cast 32.0 : Float), (cast _Runtime.field(lambert, 'alphaCutoff') : Float), (cast _Runtime.field(lambert, 'diffuseMap')), (cast null), (cast null), (cast null)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (cast unpackColorToLinear(({ final __callArgument11:Dynamic = LambertWgpuMeshMaterialRenderer._diffuse__lambertWgpuMeshMaterialRenderer; __callArgument11; }), (cast _Runtime.field(lambert, 'diffuse') : Float)) : LinearColor);
+      (group = cast ((cast bindWgpuClassicSurface(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = pipeline; __callArgument13; }), ({ final __callArgument14:Dynamic = lambert; __callArgument14; }), ({ final __callArgument15:Dynamic = LambertWgpuMeshMaterialRenderer._diffuse__lambertWgpuMeshMaterialRenderer; __callArgument15; }), ({ final __callArgument16:Dynamic = LambertWgpuMeshMaterialRenderer.WHITE__lambertWgpuMeshMaterialRenderer; __callArgument16; }), (cast 32.0 : Float), (cast _Runtime.field(lambert, 'alphaCutoff') : Float), (cast _Runtime.field(lambert, 'diffuseMap') : Dynamic), (cast null : Dynamic), (cast null : Dynamic), (cast null : Dynamic)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
-    beginWgpuMeshDraw((cast state), (cast pipeline));
+    beginWgpuMeshDraw(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = pipeline; __callArgument18; }));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
-    drawWgpuMeshSubset((cast state), (cast proxy), (cast geometry));
+    drawWgpuMeshSubset(({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = proxy; __callArgument20; }), ({ final __callArgument21:Dynamic = geometry; __callArgument21; }));
   } });
 
   public static function registerWgpuLambertMaterial(state:WgpuRenderState):Void {
-    registerWgpuBitmapTextureResolver((cast state));
-    registerWgpuImageTextureResolver((cast state));
-    registerWgpuMeshMaterialRenderer((cast state), (cast LambertMaterialKind : String), (cast lambertWgpuMeshMaterialRenderer));
+    registerWgpuBitmapTextureResolver(({ final __callArgument22:Dynamic = state; __callArgument22; }));
+    registerWgpuImageTextureResolver(({ final __callArgument23:Dynamic = state; __callArgument23; }));
+    registerWgpuMeshMaterialRenderer(({ final __callArgument24:Dynamic = state; __callArgument24; }), (cast LambertMaterialKind : String), ({ final __callArgument25:Dynamic = lambertWgpuMeshMaterialRenderer; __callArgument25; }));
   }
 
   public static function defineKeyForMaterial__lambertWgpuMeshMaterialRenderer(material:Null<LambertMaterial>):WgpuClassicDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasAlphaMap: false, hasDiffuseMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'diffuseMap'))) : Bool) : Bool)), hasNormalMap: false, hasSpecularMap: false, lightingModel: 'lambert' };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasAlphaMap: false, hasDiffuseMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'diffuseMap') : Dynamic)) : Bool) : Bool)), hasNormalMap: false, hasSpecularMap: false, lightingModel: 'lambert' };
     return cast null;
   }
 

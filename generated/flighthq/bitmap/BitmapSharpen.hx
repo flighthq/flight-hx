@@ -19,7 +19,7 @@ class BitmapSharpen {
     var bitmapHeight:Float = cast _Runtime.UNDEFINED;
     var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(options, 'amount'), function():Dynamic return cast 1.0);
-    boxBlurBitmap((cast out), (cast scratch), (cast source), (cast { radiusX: _Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0), radiusY: _Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0), passes: _Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0) }));
+    boxBlurBitmap(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = scratch; __callArgument1; }), ({ final __callArgument2:Dynamic = source; __callArgument2; }), ({ final __callArgument3:Dynamic = { radiusX: _Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0), radiusY: _Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0), passes: _Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0) }; __callArgument3; }));
     w = _Runtime.field(source, 'width');
     h = _Runtime.field(source, 'height');
     bitmapWidth = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;

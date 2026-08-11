@@ -24,11 +24,11 @@ class TiltShiftEffect {
   }
 
   public static function registerTiltShiftEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'TiltShiftEffect' : String), (cast TiltShiftEffect.resolveTiltShiftEffectPadding__tiltShiftEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'TiltShiftEffect' : String), (cast TiltShiftEffect.resolveTiltShiftEffectPadding__tiltShiftEffect : Dynamic));
   }
 
   public static function resolveTiltShiftEffectPadding__tiltShiftEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getTiltShiftEffectPadding((cast (cast effect : flighthq.types.TiltShiftEffect))) : RenderEffectPadding);
+    return cast (cast getTiltShiftEffectPadding((cast effect : flighthq.types.TiltShiftEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

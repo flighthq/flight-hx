@@ -13,21 +13,21 @@ import flighthq.types.Skeleton2DGuards.Skeleton2DDeformLengthMismatch;
 class EnableSkeleton2DGuards {
   @:noCompletion
   public static function disableSkeleton2DGuards():Void {
-    setSkeleton2DCoercedInterpolationGuard((cast null));
-    setSkeleton2DDeformLengthGuard((cast null));
+    setSkeleton2DCoercedInterpolationGuard((cast null : Dynamic));
+    setSkeleton2DDeformLengthGuard((cast null : Dynamic));
   }
 
   @:noCompletion
   public static function enableSkeleton2DGuards():Void {
-    setSkeleton2DCoercedInterpolationGuard((cast EnableSkeleton2DGuards.warnOnCoercedInterpolation__enableSkeleton2DGuards));
-    setSkeleton2DDeformLengthGuard((cast EnableSkeleton2DGuards.warnOnDeformLengthMismatch__enableSkeleton2DGuards));
+    setSkeleton2DCoercedInterpolationGuard((cast EnableSkeleton2DGuards.warnOnCoercedInterpolation__enableSkeleton2DGuards : Dynamic));
+    setSkeleton2DDeformLengthGuard((cast EnableSkeleton2DGuards.warnOnDeformLengthMismatch__enableSkeleton2DGuards : Dynamic));
   }
 
   public static function warnOnCoercedInterpolation__enableSkeleton2DGuards(report:Skeleton2DCoercedInterpolation):Void {
-    (cast logOnce((cast 'skeleton2d:coerced-interpolation:' + Std.string(_Runtime.field(report, 'subject')) + '' : String), (cast LogLevel.Warn), (cast { message: 'A ' + Std.string(_Runtime.field(report, 'subject')) + ' channel states \'' + Std.string(_Runtime.field(report, 'stated')) + '\' interpolation but is walked as \'' + Std.string(_Runtime.field(report, 'applied')) + '\'. The value it carries cannot be blended — an attachment index between two table entries names art nobody authored, and a draw order between two orderings gives fractional sort keys — so the step is forced and the stated easing has no effect. Author the track as \'' + Std.string(_Runtime.field(report, 'applied')) + '\' to say what actually happens, or drive a blendable property instead.' }), (cast 'skeleton2d')) : Bool);
+    (cast logOnce((cast 'skeleton2d:coerced-interpolation:' + Std.string(_Runtime.field(report, 'subject')) + '' : String), ({ final __callArgument0:Dynamic = LogLevel.Warn; __callArgument0; }), (cast { message: 'A ' + Std.string(_Runtime.field(report, 'subject')) + ' channel states \'' + Std.string(_Runtime.field(report, 'stated')) + '\' interpolation but is walked as \'' + Std.string(_Runtime.field(report, 'applied')) + '\'. The value it carries cannot be blended — an attachment index between two table entries names art nobody authored, and a draw order between two orderings gives fractional sort keys — so the step is forced and the stated easing has no effect. Author the track as \'' + Std.string(_Runtime.field(report, 'applied')) + '\' to say what actually happens, or drive a blendable property instead.' } : Dynamic), ({ final __callArgument1:Dynamic = 'skeleton2d'; __callArgument1; })) : Bool);
   }
 
   public static function warnOnDeformLengthMismatch__enableSkeleton2DGuards(report:Skeleton2DDeformLengthMismatch):Void {
-    (cast logOnce((cast 'skeleton2d:deform-length:' + Std.string(_Runtime.field(report, 'subject')) + '' : String), (cast LogLevel.Warn), (cast { message: 'Deform offsets on \'' + Std.string(_Runtime.field(report, 'subject')) + '\' carry ' + Std.string(_Runtime.field(report, 'offsets')) + ' values but the vertex stream they address needs ' + Std.string(_Runtime.field(report, 'addressed')) + '. The offsets are ignored rather than partly applied: a stream of the wrong length has no correct prefix, so consuming what fits would deform some vertices and silently leave the rest in their setup pose. Re-export the attachment, or check that the deform timeline belongs to this attachment.' }), (cast 'skeleton2d')) : Bool);
+    (cast logOnce((cast 'skeleton2d:deform-length:' + Std.string(_Runtime.field(report, 'subject')) + '' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: 'Deform offsets on \'' + Std.string(_Runtime.field(report, 'subject')) + '\' carry ' + Std.string(_Runtime.field(report, 'offsets')) + ' values but the vertex stream they address needs ' + Std.string(_Runtime.field(report, 'addressed')) + '. The offsets are ignored rather than partly applied: a stream of the wrong length has no correct prefix, so consuming what fits would deform some vertices and silently leave the rest in their setup pose. Re-export the attachment, or check that the deform timeline belongs to this attachment.' } : Dynamic), ({ final __callArgument3:Dynamic = 'skeleton2d'; __callArgument3; })) : Bool);
   }
 }

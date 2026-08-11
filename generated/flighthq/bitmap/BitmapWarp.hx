@@ -71,14 +71,14 @@ class BitmapWarp {
             var invW:Float = (1.0 / w);
             var sx:Float = ((((m0 * dx) + (m1 * dy)) + m2) * invW);
             var sy:Float = ((((m3 * dx) + (m4 * dy)) + m5) * invW);
-            BitmapWarp.warpSampleBitmap__bitmapWarp((cast dd), (cast di : Float), (cast sd), (cast sw : Float), (cast sh : Float), (cast _Runtime.field(source, 'x') : Float), (cast _Runtime.field(source, 'y') : Float), (cast sStride : Float), (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float), (cast sx : Float), (cast sy : Float), (cast sampleMode), (cast edgeMode));
+            BitmapWarp.warpSampleBitmap__bitmapWarp(({ final __callArgument0:Dynamic = dd; __callArgument0; }), (cast di : Float), ({ final __callArgument1:Dynamic = sd; __callArgument1; }), (cast sw : Float), (cast sh : Float), (cast _Runtime.field(source, 'x') : Float), (cast _Runtime.field(source, 'y') : Float), (cast sStride : Float), (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument2:Dynamic = sampleMode; __callArgument2; }), ({ final __callArgument3:Dynamic = edgeMode; __callArgument3; }));
             dx++;
           }
         }
         dy++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function warpBitmapQuad(dest:BitmapRegion, source:BitmapRegion, dstQuad:Array<Float>, edgeMode:BitmapEdgeMode = 'transparent', sampleMode:BitmapResizeMode = 'bilinear'):Void {
@@ -91,19 +91,19 @@ class BitmapWarp {
     sh = _Runtime.field(source, 'height');
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(sw, 0.0) : Bool) || (cast _Runtime.strictEquals(sh, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(dest, 'width'), 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(dest, 'height'), 0.0) : Bool)) : Bool)) { return; }
     srcPts = (cast cast ([0.0, 0.0, sw, 0.0, sw, sh, 0.0, sh] : Array<Dynamic>));
-    H = (cast BitmapWarp.computeHomography__bitmapWarp((cast srcPts), (cast dstQuad)) : Null<Array<Float>>);
+    H = (cast BitmapWarp.computeHomography__bitmapWarp(({ final __callArgument4:Dynamic = srcPts; __callArgument4; }), ({ final __callArgument5:Dynamic = dstQuad; __callArgument5; })) : Null<Array<Float>>);
     if ((cast _Runtime.strictEquals(H, null) : Bool)) { return; }
-    Hinv = (cast BitmapWarp.invertMatrix3x3__bitmapWarp((cast H)) : Null<Array<Float>>);
+    Hinv = (cast BitmapWarp.invertMatrix3x3__bitmapWarp(({ final __callArgument6:Dynamic = H; __callArgument6; })) : Null<Array<Float>>);
     if ((cast _Runtime.strictEquals(Hinv, null) : Bool)) { return; }
-    warpBitmap((cast dest), (cast source), (cast Hinv), (cast edgeMode), (cast sampleMode));
+    warpBitmap(({ final __callArgument7:Dynamic = dest; __callArgument7; }), ({ final __callArgument8:Dynamic = source; __callArgument8; }), ({ final __callArgument9:Dynamic = Hinv; __callArgument9; }), ({ final __callArgument10:Dynamic = edgeMode; __callArgument10; }), ({ final __callArgument11:Dynamic = sampleMode; __callArgument11; }));
   }
 
   public static function warpSampleBitmap__bitmapWarp(dd:flighthq._internal._UInt8ClampedArray, di:Float, sd:flighthq._internal._UInt8ClampedArray, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, sHeight:Float, sx:Float, sy:Float, sampleMode:BitmapResizeMode, edgeMode:BitmapEdgeMode):Void {
     if ((cast _Runtime.strictEquals(sampleMode, 'nearest') : Bool)) {
       var ix:Float = HxMath.round(sx);
       var iy:Float = HxMath.round(sy);
-      var cx:Null<Float> = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast ix : Float), (cast sw : Float), (cast edgeMode)) : Null<Float>);
-      var cy:Null<Float> = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast iy : Float), (cast sh : Float), (cast edgeMode)) : Null<Float>);
+      var cx:Null<Float> = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast ix : Float), (cast sw : Float), ({ final __callArgument12:Dynamic = edgeMode; __callArgument12; })) : Null<Float>);
+      var cy:Null<Float> = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast iy : Float), (cast sh : Float), ({ final __callArgument13:Dynamic = edgeMode; __callArgument13; })) : Null<Float>);
       if ((cast ((cast _Runtime.strictEquals(cx, null) : Bool) || (cast _Runtime.strictEquals(cy, null) : Bool)) : Bool)) {
         flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast 0.0 : Float));
         flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast 0.0 : Float));
@@ -119,10 +119,10 @@ class BitmapWarp {
       return;
     }
     if ((cast _Runtime.strictEquals(sampleMode, 'bicubic') : Bool)) {
-      BitmapWarp.warpSampleBicubic__bitmapWarp((cast dd), (cast di : Float), (cast sd), (cast sw : Float), (cast sh : Float), (cast originX : Float), (cast originY : Float), (cast sStride : Float), (cast sHeight : Float), (cast sx : Float), (cast sy : Float), (cast edgeMode));
+      BitmapWarp.warpSampleBicubic__bitmapWarp(({ final __callArgument14:Dynamic = dd; __callArgument14; }), (cast di : Float), ({ final __callArgument15:Dynamic = sd; __callArgument15; }), (cast sw : Float), (cast sh : Float), (cast originX : Float), (cast originY : Float), (cast sStride : Float), (cast sHeight : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument16:Dynamic = edgeMode; __callArgument16; }));
       return;
     }
-    BitmapWarp.warpSampleBilinear__bitmapWarp((cast dd), (cast di : Float), (cast sd), (cast sw : Float), (cast sh : Float), (cast originX : Float), (cast originY : Float), (cast sStride : Float), (cast sHeight : Float), (cast sx : Float), (cast sy : Float), (cast edgeMode));
+    BitmapWarp.warpSampleBilinear__bitmapWarp(({ final __callArgument17:Dynamic = dd; __callArgument17; }), (cast di : Float), ({ final __callArgument18:Dynamic = sd; __callArgument18; }), (cast sw : Float), (cast sh : Float), (cast originX : Float), (cast originY : Float), (cast sStride : Float), (cast sHeight : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument19:Dynamic = edgeMode; __callArgument19; }));
   }
 
   public static function warpSampleBilinear__bitmapWarp(dd:flighthq._internal._UInt8ClampedArray, di:Float, sd:flighthq._internal._UInt8ClampedArray, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:BitmapEdgeMode):Void {
@@ -138,10 +138,10 @@ class BitmapWarp {
     y0 = HxMath.floor(sy);
     tx = (sx - x0);
     ty = (sy - y0);
-    cx00 = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast x0 : Float), (cast sw : Float), (cast edgeMode)) : Null<Float>);
-    cx10 = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast (x0 + 1.0) : Float), (cast sw : Float), (cast edgeMode)) : Null<Float>);
-    cy00 = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast y0 : Float), (cast sh : Float), (cast edgeMode)) : Null<Float>);
-    cy10 = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast (y0 + 1.0) : Float), (cast sh : Float), (cast edgeMode)) : Null<Float>);
+    cx00 = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast x0 : Float), (cast sw : Float), ({ final __callArgument20:Dynamic = edgeMode; __callArgument20; })) : Null<Float>);
+    cx10 = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast (x0 + 1.0) : Float), (cast sw : Float), ({ final __callArgument21:Dynamic = edgeMode; __callArgument21; })) : Null<Float>);
+    cy00 = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast y0 : Float), (cast sh : Float), ({ final __callArgument22:Dynamic = edgeMode; __callArgument22; })) : Null<Float>);
+    cy10 = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast (y0 + 1.0) : Float), (cast sh : Float), ({ final __callArgument23:Dynamic = edgeMode; __callArgument23; })) : Null<Float>);
     {
       var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
@@ -174,12 +174,12 @@ class BitmapWarp {
           var m:Float = -1.0;
           while ((cast ((cast m : Float) <= (cast 2.0 : Float)) : Bool)) {
             var wy:Float = (cast BitmapWarp.catmullRomWeight__bitmapWarp((cast (ty - m) : Float)) : Float);
-            var ry:Null<Float> = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast (y1 + m) : Float), (cast sh : Float), (cast edgeMode)) : Null<Float>);
+            var ry:Null<Float> = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast (y1 + m) : Float), (cast sh : Float), ({ final __callArgument24:Dynamic = edgeMode; __callArgument24; })) : Null<Float>);
             {
               var n:Float = -1.0;
               while ((cast ((cast n : Float) <= (cast 2.0 : Float)) : Bool)) {
                 var wx:Float = (cast BitmapWarp.catmullRomWeight__bitmapWarp((cast (tx - n) : Float)) : Float);
-                var rx:Null<Float> = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast (x1 + n) : Float), (cast sw : Float), (cast edgeMode)) : Null<Float>);
+                var rx:Null<Float> = (cast BitmapWarp.warpResolveEdge__bitmapWarp((cast (x1 + n) : Float), (cast sw : Float), ({ final __callArgument25:Dynamic = edgeMode; __callArgument25; })) : Null<Float>);
                 var v:Float = ((cast ((cast !_Runtime.strictEquals(rx, null) : Bool) && (cast !_Runtime.strictEquals(ry, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast ((((((originY + ry) * sStride) + originX) + rx) * 4.0) + c) : Float)) : Dynamic) : (cast 0.0 : Dynamic));
                 (sum = cast ((sum + ((v * wy) * wx)) : Dynamic));
                 n++;
@@ -256,7 +256,7 @@ class BitmapWarp {
         r++;
       }
     }
-    h = (cast BitmapWarp.solveLinear8__bitmapWarp((cast M), (cast b)) : Null<Array<Float>>);
+    h = (cast BitmapWarp.solveLinear8__bitmapWarp(({ final __callArgument26:Dynamic = M; __callArgument26; }), ({ final __callArgument27:Dynamic = b; __callArgument27; })) : Null<Array<Float>>);
     if ((cast _Runtime.strictEquals(h, null) : Bool)) { return cast null; }
     return cast cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 3.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 4.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 5.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 6.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 7.0 : Float)), 1.0] : Array<Dynamic>);
     return cast null;
@@ -285,7 +285,7 @@ class BitmapWarp {
           }
         }
         if ((cast ((cast maxVal : Float) < (cast 1e-12 : Float)) : Bool)) { return cast null; }
-        ({ var __destructure0:Dynamic = cast ([flighthq._internal._StaticIndex.readArray(aug, maxRow), flighthq._internal._StaticIndex.readArray(aug, col)] : Array<Dynamic>); _Runtime.setIndex(aug, col, flighthq._internal._StaticIndex.readArray(__destructure0, 0)); _Runtime.setIndex(aug, maxRow, flighthq._internal._StaticIndex.readArray(__destructure0, 1)); __destructure0; });
+        ({ var __destructure28:Dynamic = cast ([flighthq._internal._StaticIndex.readArray(aug, maxRow), flighthq._internal._StaticIndex.readArray(aug, col)] : Array<Dynamic>); _Runtime.setIndex(aug, col, flighthq._internal._StaticIndex.readArray(__destructure28, 0)); _Runtime.setIndex(aug, maxRow, flighthq._internal._StaticIndex.readArray(__destructure28, 1)); __destructure28; });
         var pivot:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(aug, col) : Array<Float>), (cast col : Float));
         {
           var row:Float = (col + 1.0);
@@ -294,7 +294,7 @@ class BitmapWarp {
             {
               var k:Float = col;
               while ((cast ((cast k : Float) <= (cast n : Float)) : Bool)) {
-                ({ var __indexedObject1:Array<Float> = flighthq._internal._StaticIndex.readArray(aug, row); var __indexedKey2:Float = k; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject1 : Array<Float>), (cast __indexedKey2 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject1 : Array<Float>), (cast __indexedKey2 : Float)) - (factor * flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(aug, col) : Array<Float>), (cast k : Float)))) : Float)); });
+                ({ var __indexedObject29:Array<Float> = flighthq._internal._StaticIndex.readArray(aug, row); var __indexedKey30:Float = k; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject29 : Array<Float>), (cast __indexedKey30 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject29 : Array<Float>), (cast __indexedKey30 : Float)) - (factor * flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(aug, col) : Array<Float>), (cast k : Float)))) : Float)); });
                 k++;
               }
             }

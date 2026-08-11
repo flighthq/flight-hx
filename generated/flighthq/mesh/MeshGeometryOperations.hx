@@ -80,23 +80,23 @@ class MeshGeometryOperations {
         (indexArray = cast (a : Dynamic));
       }
     }
-    geometry = (cast createMeshGeometry((cast { indices: indexArray, layout: CANONICAL_MESH_GEOMETRY_LAYOUT, vertices: vertices })) : MeshGeometry);
+    geometry = (cast createMeshGeometry(({ final __callArgument0:Dynamic = { indices: indexArray, layout: CANONICAL_MESH_GEOMETRY_LAYOUT, vertices: vertices }; __callArgument0; })) : MeshGeometry);
     if ((cast !_Runtime.truthy(normals) : Bool)) {
-      computeMeshGeometryNormals((cast geometry), (cast geometry));
+      computeMeshGeometryNormals(({ final __callArgument1:Dynamic = geometry; __callArgument1; }), ({ final __callArgument2:Dynamic = geometry; __callArgument2; }));
     }
-    computeMeshGeometryTangents((cast geometry), (cast geometry));
-    refreshMeshGeometryBounds((cast geometry));
+    computeMeshGeometryTangents(({ final __callArgument3:Dynamic = geometry; __callArgument3; }), ({ final __callArgument4:Dynamic = geometry; __callArgument4; }));
+    refreshMeshGeometryBounds(({ final __callArgument5:Dynamic = geometry; __callArgument5; }));
     return cast geometry;
     return cast null;
   }
 
   public static function getMeshGeometryTriangleCount(geometry:MeshGeometry):Float {
     if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool)) {
-      var indexCount:Float = _Runtime.select(geometry.indices, function():Dynamic return cast (cast geometry.indices : { var length:Float; }).length, function():Dynamic return cast (cast getMeshGeometryVertexCount((cast geometry)) : Float));
+      var indexCount:Float = _Runtime.select(geometry.indices, function():Dynamic return cast (cast geometry.indices : { var length:Float; }).length, function():Dynamic return cast (cast getMeshGeometryVertexCount(({ final __callArgument6:Dynamic = geometry; __callArgument6; })) : Float));
       return cast HxMath.floor((indexCount / 3.0));
     }
     if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-strip') : Bool)) {
-      var indexCount:Float = _Runtime.select(geometry.indices, function():Dynamic return cast (cast geometry.indices : { var length:Float; }).length, function():Dynamic return cast (cast getMeshGeometryVertexCount((cast geometry)) : Float));
+      var indexCount:Float = _Runtime.select(geometry.indices, function():Dynamic return cast (cast geometry.indices : { var length:Float; }).length, function():Dynamic return cast (cast getMeshGeometryVertexCount(({ final __callArgument7:Dynamic = geometry; __callArgument7; })) : Float));
       return cast ((cast ((cast indexCount : Float) >= (cast 3.0 : Float)) : Bool) ? (cast (indexCount - 2.0) : Dynamic) : (cast 0.0 : Dynamic));
     }
     return cast 0.0;
@@ -108,7 +108,7 @@ class MeshGeometryOperations {
     var element1:Float = cast _Runtime.UNDEFINED;
     var element2:Float = cast _Runtime.UNDEFINED;
     var indices:Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>> = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast triangleIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast triangleIndex : Float) >= (cast (cast getMeshGeometryTriangleCount((cast geometry)) : Float) : Float)) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast ((cast triangleIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast triangleIndex : Float) >= (cast (cast getMeshGeometryTriangleCount(({ final __callArgument8:Dynamic = geometry; __callArgument8; })) : Float) : Float)) : Bool)) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(geometry.topology, 'triangle-list') : Bool)) {
       (element0 = cast ((triangleIndex * 3.0) : Dynamic));
       (element1 = cast ((element0 + 1.0) : Dynamic));
@@ -154,7 +154,7 @@ class MeshGeometryOperations {
     {
       var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(geometries, 'length') : Float)) : Bool)) {
-        if ((cast !(cast (cast MeshGeometryOperations.layoutsMatch__meshGeometryOperations((cast layout), (cast (cast flighthq._internal._StaticIndex.readArray(geometries, i) : { var layout:VertexAttributeLayout; }).layout)) : Bool) : Bool) : Bool)) { return cast null; }
+        if ((cast !(cast (cast MeshGeometryOperations.layoutsMatch__meshGeometryOperations(({ final __callArgument9:Dynamic = layout; __callArgument9; }), (cast flighthq._internal._StaticIndex.readArray(geometries, i) : { var layout:VertexAttributeLayout; }).layout) : Bool) : Bool) : Bool)) { return cast null; }
         i++;
       }
     }
@@ -203,8 +203,8 @@ class MeshGeometryOperations {
     if ((cast _Runtime.strictEquals(_Runtime.field(mergedSubsets, 'length'), 0.0) : Bool)) {
       _Runtime.callProperty(mergedSubsets, 'push', cast ([{ indexCount: _Runtime.select(mergedIndices, function():Dynamic return cast (cast mergedIndices : { var length:Float; }).length, function():Dynamic return cast (totalVertexFloats / floatsPerVertex)), indexOffset: 0.0 }] : Array<Dynamic>));
     }
-    merged = (cast createMeshGeometry((cast { indices: _Runtime.coalesce(mergedIndices, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: layout, subsets: mergedSubsets, topology: reference.topology, vertices: mergedVertices })) : MeshGeometry);
-    refreshMeshGeometryBounds((cast merged));
+    merged = (cast createMeshGeometry(({ final __callArgument16:Dynamic = { indices: _Runtime.coalesce(mergedIndices, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: layout, subsets: mergedSubsets, topology: reference.topology, vertices: mergedVertices }; __callArgument16; })) : MeshGeometry);
+    refreshMeshGeometryBounds(({ final __callArgument17:Dynamic = merged; __callArgument17; }));
     return cast merged;
     return cast null;
   }

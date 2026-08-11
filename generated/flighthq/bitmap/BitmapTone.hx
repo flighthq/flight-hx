@@ -46,7 +46,7 @@ class BitmapTone {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(out, 'bitmap')));
+    invalidateBitmap(_Runtime.field(out, 'bitmap'));
   }
 
   public static function applyBitmapLevels(out:BitmapRegion, source:BitmapRegion, blackPoint:Float = 0.0, whitePoint:Float = 255.0, gamma:Float = 1.0):Void {
@@ -68,6 +68,6 @@ class BitmapTone {
         i++;
       }
     }
-    applyBitmapCurve((cast out), (cast source), (cast lut), (cast lut), (cast lut), (cast null));
+    applyBitmapCurve(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = lut; __callArgument2; }), ({ final __callArgument3:Dynamic = lut; __callArgument3; }), ({ final __callArgument4:Dynamic = lut; __callArgument4; }), ({ final __callArgument5:Dynamic = null; __callArgument5; }));
   }
 }

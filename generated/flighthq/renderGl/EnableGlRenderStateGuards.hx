@@ -18,20 +18,20 @@ import flighthq.types.Renderable;
 class EnableGlRenderStateGuards {
   @:noCompletion
   public static function areGlRenderStateGuardsEnabled(state:GlRenderState):Bool {
-    return cast _Runtime.strictEquals((cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).renderRootGuard, EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards);
+    return cast _Runtime.strictEquals((cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : RenderStateRuntime).renderRootGuard, EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards);
     return cast null;
   }
 
   public static function enableGlRenderStateGuards(state:GlRenderState):Void {
-    ((cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : { var renderRootGuard:Null<RenderState->Renderable->Void>; }).renderRootGuard = (cast EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards));
-    ((cast (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime) : { var bindingCacheGuard:Null<GlRenderState->flighthq._internal.dom.WebGLProgram->Void>; }).bindingCacheGuard = (cast EnableGlRenderStateGuards.warnOnForeignGlBinding__enableGlRenderStateGuards));
+    ((cast (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime) : { var renderRootGuard:Null<RenderState->Renderable->Void>; }).renderRootGuard = (cast EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards));
+    ((cast (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime) : { var bindingCacheGuard:Null<GlRenderState->flighthq._internal.dom.WebGLProgram->Void>; }).bindingCacheGuard = (cast EnableGlRenderStateGuards.warnOnForeignGlBinding__enableGlRenderStateGuards));
   }
 
   public static function warnOnForeignGlBinding__enableGlRenderStateGuards(state:GlRenderState, expectedProgram:flighthq._internal.dom.WebGLProgram):Void {
     var actual:Null<flighthq._internal.dom.WebGLProgram> = cast _Runtime.UNDEFINED;
     actual = (cast flighthq._internal.backend.WebGl2Backend.getParameter((cast state : GlRenderState).gl, flighthq._internal.backend.WebGl2Backend.contextConstant((cast state : GlRenderState).gl, 'CURRENT_PROGRAM', flighthq._internal.backend.WebGl2Backend.CURRENT_PROGRAM)) : Null<flighthq._internal.dom.WebGLProgram>);
     if ((cast _Runtime.strictEquals(actual, expectedProgram) : Bool)) { return; }
-    (cast logOnce((cast 'render-gl:foreign-gl-binding' : String), (cast LogLevel.Warn), (cast { message: (('useGlProgram: the GL program actually bound is not the one render-gl cached, so a guest renderer ' + 'wrote GL state without restoring it. Call invalidateGlRenderStateCache(state) before returning ') + 'control to render-gl, or the next draw skips a bind it needs and GL rejects a later uniform.'), state: state }), (cast 'render-gl')) : Bool);
+    (cast logOnce((cast 'render-gl:foreign-gl-binding' : String), ({ final __callArgument3:Dynamic = LogLevel.Warn; __callArgument3; }), (cast { message: (('useGlProgram: the GL program actually bound is not the one render-gl cached, so a guest renderer ' + 'wrote GL state without restoring it. Call invalidateGlRenderStateCache(state) before returning ') + 'control to render-gl, or the next draw skips a bind it needs and GL rejects a later uniform.'), state: state } : Dynamic), ({ final __callArgument4:Dynamic = 'render-gl'; __callArgument4; })) : Bool);
   }
 
   public static function warnOnSecondRenderRoot__enableGlRenderStateGuards(state:RenderState, root:Renderable):Void {
@@ -44,7 +44,7 @@ class EnableGlRenderStateGuards {
       return;
     }
     if ((cast _Runtime.strictEquals(previous, root) : Bool)) { return; }
-    (cast logOnce((cast 'render-gl:multiple-roots-one-state' : String), (cast LogLevel.Warn), (cast { firstRoot: previous, message: 'prepareScene2DRender: one GlRenderState was used for multiple roots — derive a dedicated pipeline with createGlOffscreenRenderState(screenState)', root: root, state: state }), (cast 'render-gl')) : Bool);
+    (cast logOnce((cast 'render-gl:multiple-roots-one-state' : String), ({ final __callArgument5:Dynamic = LogLevel.Warn; __callArgument5; }), (cast { firstRoot: previous, message: 'prepareScene2DRender: one GlRenderState was used for multiple roots — derive a dedicated pipeline with createGlOffscreenRenderState(screenState)', root: root, state: state } : Dynamic), ({ final __callArgument6:Dynamic = 'render-gl'; __callArgument6; })) : Bool);
   }
 
   public static final _firstRoots__enableGlRenderStateGuards:flighthq._internal._WeakMap<GlRenderState, Renderable> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);

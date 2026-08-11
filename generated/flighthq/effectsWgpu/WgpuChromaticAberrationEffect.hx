@@ -22,19 +22,19 @@ class WgpuChromaticAberrationEffect {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.005);
     radial = _Runtime.coalesce(_Runtime.field(effect, 'radial'), function():Dynamic return cast true);
-    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'lens.chromaticAberration' : String), (cast WgpuChromaticAberrationEffect.CHROMATIC_ABERRATION_FRAGMENT_WGSL__wgpuChromaticAberrationEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'lens.chromaticAberration' : String), (cast WgpuChromaticAberrationEffect.CHROMATIC_ABERRATION_FRAGMENT_WGSL__wgpuChromaticAberrationEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast ((cast radial : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument4; }));
   }
 
   public static final defaultWgpuChromaticAberrationEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyChromaticAberrationEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : ChromaticAberrationEffect)));
+    applyChromaticAberrationEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ChromaticAberrationEffect));
   });
 
   public static function registerWgpuChromaticAberrationEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state), (cast 'ChromaticAberrationEffect' : String), (cast defaultWgpuChromaticAberrationEffectRunner));
+    registerWgpuRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'ChromaticAberrationEffect' : String), ({ final __callArgument6:Dynamic = defaultWgpuChromaticAberrationEffectRunner; __callArgument6; }));
   }
 
   public static final CHROMATIC_ABERRATION_FRAGMENT_WGSL__wgpuChromaticAberrationEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_radial : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let centered = uv - vec2f(0.5);\n  let scale = mix(1.0, length(centered) * 2.0, uni.u_radial);\n  let dir = mix(vec2f(1.0, 0.0), normalize(centered + vec2f(1e-5)), uni.u_radial);\n  let offset = dir * uni.u_intensity * scale;\n  let r = textureSampleLevel(tex, smp, uv + offset, 0.0).r;\n  let g = textureSampleLevel(tex, smp, uv, 0.0).g;\n  let b = textureSampleLevel(tex, smp, uv - offset, 0.0).b;\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  return vec4f(r, g, b, a);\n}';

@@ -42,15 +42,15 @@ class RenderTarget {
   @:noCompletion
   public static function computeScene2DRenderTargetTransform(outRenderTransform:MatrixLike, source:Node2D, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
     var localTransform:Matrix = cast _Runtime.UNDEFINED;
-    localTransform = (cast getNodeLocalMatrix((cast source)) : Matrix);
-    (cast inverseMatrix((cast RenderTarget._tempInvLocal__renderTarget), (cast localTransform)) : Bool);
+    localTransform = (cast getNodeLocalMatrix((cast source : Dynamic)) : Matrix);
+    (cast inverseMatrix(({ final __callArgument0:Dynamic = RenderTarget._tempInvLocal__renderTarget; __callArgument0; }), ({ final __callArgument1:Dynamic = localTransform; __callArgument1; })) : Bool);
     (RenderTarget._tempTranslation__renderTarget.a = cast (1.0 : Dynamic));
     (RenderTarget._tempTranslation__renderTarget.b = cast (0.0 : Dynamic));
     (RenderTarget._tempTranslation__renderTarget.c = cast (0.0 : Dynamic));
     (RenderTarget._tempTranslation__renderTarget.d = cast (1.0 : Dynamic));
     (RenderTarget._tempTranslation__renderTarget.tx = cast (_Runtime.subtractNumbers(contentX, _Runtime.field(bounds, 'x')) : Dynamic));
     (RenderTarget._tempTranslation__renderTarget.ty = cast (_Runtime.subtractNumbers(contentY, _Runtime.field(bounds, 'y')) : Dynamic));
-    multiplyMatrix((cast outRenderTransform), (cast RenderTarget._tempTranslation__renderTarget), (cast RenderTarget._tempInvLocal__renderTarget));
+    multiplyMatrix(({ final __callArgument2:Dynamic = outRenderTransform; __callArgument2; }), ({ final __callArgument3:Dynamic = RenderTarget._tempTranslation__renderTarget; __callArgument3; }), ({ final __callArgument4:Dynamic = RenderTarget._tempInvLocal__renderTarget; __callArgument4; }));
   }
 
   @:noCompletion
@@ -83,9 +83,9 @@ class RenderTarget {
     return cast null;
   }
 
-  public static final _tempInvLocal__renderTarget:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
+  public static final _tempInvLocal__renderTarget:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix);
 
-  public static final _tempTranslation__renderTarget:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
+  public static final _tempTranslation__renderTarget:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix);
 
   public static final _renderTargetAxisOrder__renderTarget:Array<String> = (cast cast (['width', 'height', 'format', 'colorAttachments', 'colorFormats', 'sampleCount', 'depth', 'colorSpace'] : Array<Dynamic>));
 }

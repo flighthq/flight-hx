@@ -15,7 +15,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Obb {
   public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):flighthq.types.Obb {
-    return cast (cast createEntity((cast { centerX: centerX, centerY: centerY, centerZ: centerZ, halfExtentX: halfExtentX, halfExtentY: halfExtentY, halfExtentZ: halfExtentZ, orientationW: orientationW, orientationX: orientationX, orientationY: orientationY, orientationZ: orientationZ })) : { >Entity, var centerX:Float; var centerY:Float; var centerZ:Float; var halfExtentX:Float; var halfExtentY:Float; var halfExtentZ:Float; var orientationW:Float; var orientationX:Float; var orientationY:Float; var orientationZ:Float; });
+    return cast (cast createEntity(({ final __callArgument0:Dynamic = { centerX: centerX, centerY: centerY, centerZ: centerZ, halfExtentX: halfExtentX, halfExtentY: halfExtentY, halfExtentZ: halfExtentZ, orientationW: orientationW, orientationX: orientationX, orientationY: orientationY, orientationZ: orientationZ }; __callArgument0; })) : { >Entity, var centerX:Float; var centerY:Float; var centerZ:Float; var halfExtentX:Float; var halfExtentY:Float; var halfExtentZ:Float; var orientationW:Float; var orientationX:Float; var orientationY:Float; var orientationZ:Float; });
     return cast null;
   }
 
@@ -54,7 +54,7 @@ class Obb {
     px = point.x;
     py = point.y;
     pz = point.z;
-    __destructure0 = (cast Obb.obbLocalAxes__obb((cast obb)) : Array<Float>);
+    __destructure0 = (cast Obb.obbLocalAxes__obb(({ final __callArgument1:Dynamic = obb; __callArgument1; })) : Array<Float>);
     ax0 = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
     ay0 = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     az0 = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
@@ -109,7 +109,7 @@ class Obb {
     hx = obb.halfExtentX;
     hy = obb.halfExtentY;
     hz = obb.halfExtentZ;
-    __destructure1 = (cast Obb.obbLocalAxes__obb((cast obb)) : Array<Float>);
+    __destructure1 = (cast Obb.obbLocalAxes__obb(({ final __callArgument2:Dynamic = obb; __callArgument2; })) : Array<Float>);
     ax0 = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
     ay0 = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
     az0 = flighthq._internal._StaticIndex.readArray(__destructure1, 2.0);
@@ -178,7 +178,7 @@ class Obb {
     ahx = (((cast aabb.max : { var x:Float; }).x - (cast aabb.min : { var x:Float; }).x) * 0.5);
     ahy = (((cast aabb.max : { var y:Float; }).y - (cast aabb.min : { var y:Float; }).y) * 0.5);
     ahz = (((cast aabb.max : { var z:Float; }).z - (cast aabb.min : { var z:Float; }).z) * 0.5);
-    __destructure2 = (cast Obb.obbLocalAxes__obb((cast obb)) : Array<Float>);
+    __destructure2 = (cast Obb.obbLocalAxes__obb(({ final __callArgument3:Dynamic = obb; __callArgument3; })) : Array<Float>);
     ax0 = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
     ay0 = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
     az0 = flighthq._internal._StaticIndex.readArray(__destructure2, 2.0);
@@ -219,7 +219,7 @@ class Obb {
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
     var tz:Float = cast _Runtime.UNDEFINED;
-    __destructure3 = (cast Obb.obbLocalAxes__obb((cast a)) : Array<Float>);
+    __destructure3 = (cast Obb.obbLocalAxes__obb(({ final __callArgument4:Dynamic = a; __callArgument4; })) : Array<Float>);
     ax0 = flighthq._internal._StaticIndex.readArray(__destructure3, 0.0);
     ay0 = flighthq._internal._StaticIndex.readArray(__destructure3, 1.0);
     az0 = flighthq._internal._StaticIndex.readArray(__destructure3, 2.0);
@@ -229,7 +229,7 @@ class Obb {
     ax2 = flighthq._internal._StaticIndex.readArray(__destructure3, 6.0);
     ay2 = flighthq._internal._StaticIndex.readArray(__destructure3, 7.0);
     az2 = flighthq._internal._StaticIndex.readArray(__destructure3, 8.0);
-    __destructure4 = (cast Obb.obbLocalAxes__obb((cast b)) : Array<Float>);
+    __destructure4 = (cast Obb.obbLocalAxes__obb(({ final __callArgument5:Dynamic = b; __callArgument5; })) : Array<Float>);
     bx0 = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
     by0 = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
     bz0 = flighthq._internal._StaticIndex.readArray(__destructure4, 2.0);

@@ -16,20 +16,20 @@ import flighthq.types.Scene3DLights.Scene3DLightsLike;
 class PresentGlScene3D {
   @:noCompletion
   public static function presentGlScene3D(state:GlRenderState, target:GlRenderTarget, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike):Void {
-    beginGlRenderPass((cast state), (cast target), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    beginGlRenderPass(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = target; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     try {
       try {
-        drawGlScene3D((cast state), (cast scene), (cast camera), (cast lights), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+        drawGlScene3D(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = scene; __callArgument3; }), ({ final __callArgument4:Dynamic = camera; __callArgument4; }), ({ final __callArgument5:Dynamic = lights; __callArgument5; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError0:Dynamic) {
+    } catch (__finallyError6:Dynamic) {
       {
-        endGlRenderPass((cast state));
+        endGlRenderPass(({ final __callArgument7:Dynamic = state; __callArgument7; }));
       }
-      _Runtime.throwValue(__finallyError0);
+      _Runtime.throwValue(__finallyError6);
     }
     {
-      endGlRenderPass((cast state));
+      endGlRenderPass(({ final __callArgument8:Dynamic = state; __callArgument8; }));
     }
-    presentGlRenderTarget((cast state), (cast target), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    presentGlRenderTarget(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = target; __callArgument10; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 }

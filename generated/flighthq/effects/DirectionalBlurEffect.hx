@@ -34,11 +34,11 @@ class DirectionalBlurEffect {
   }
 
   public static function registerDirectionalBlurEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'DirectionalBlurEffect' : String), (cast DirectionalBlurEffect.resolveDirectionalBlurEffectPadding__directionalBlurEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'DirectionalBlurEffect' : String), (cast DirectionalBlurEffect.resolveDirectionalBlurEffectPadding__directionalBlurEffect : Dynamic));
   }
 
   public static function resolveDirectionalBlurEffectPadding__directionalBlurEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getDirectionalBlurEffectPadding((cast (cast effect : flighthq.types.DirectionalBlurEffect))) : RenderEffectPadding);
+    return cast (cast getDirectionalBlurEffectPadding((cast effect : flighthq.types.DirectionalBlurEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

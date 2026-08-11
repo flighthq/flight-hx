@@ -17,13 +17,13 @@ class Spring3D {
   }
 
   public static function isSpring3DSettled(spring3D:flighthq.types.Spring.Spring3D, targetX:Float, targetY:Float, targetZ:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
-    return cast _Runtime.andValue(((cast (cast isSpringSettled((cast _Runtime.field(spring3D, 'x')), (cast targetX : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool) : Bool) && (cast (cast isSpringSettled((cast _Runtime.field(spring3D, 'y')), (cast targetY : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool) : Bool)), function():Dynamic return cast (cast isSpringSettled((cast _Runtime.field(spring3D, 'z')), (cast targetZ : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool));
+    return cast _Runtime.andValue(((cast (cast isSpringSettled(_Runtime.field(spring3D, 'x'), (cast targetX : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool) : Bool) && (cast (cast isSpringSettled(_Runtime.field(spring3D, 'y'), (cast targetY : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool) : Bool)), function():Dynamic return cast (cast isSpringSettled(_Runtime.field(spring3D, 'z'), (cast targetZ : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool));
     return cast null;
   }
 
   public static function updateSpring3D(spring3D:flighthq.types.Spring.Spring3D, targetX:Float, targetY:Float, targetZ:Float, config:SpringConfig, deltaTime:Float):Void {
-    updateSpring((cast (cast spring3D : flighthq.types.Spring.Spring3D).x), (cast targetX : Float), (cast config), (cast deltaTime : Float));
-    updateSpring((cast (cast spring3D : flighthq.types.Spring.Spring3D).y), (cast targetY : Float), (cast config), (cast deltaTime : Float));
-    updateSpring((cast (cast spring3D : flighthq.types.Spring.Spring3D).z), (cast targetZ : Float), (cast config), (cast deltaTime : Float));
+    updateSpring((cast spring3D : flighthq.types.Spring.Spring3D).x, (cast targetX : Float), ({ final __callArgument0:Dynamic = config; __callArgument0; }), (cast deltaTime : Float));
+    updateSpring((cast spring3D : flighthq.types.Spring.Spring3D).y, (cast targetY : Float), ({ final __callArgument1:Dynamic = config; __callArgument1; }), (cast deltaTime : Float));
+    updateSpring((cast spring3D : flighthq.types.Spring.Spring3D).z, (cast targetZ : Float), ({ final __callArgument2:Dynamic = config; __callArgument2; }), (cast deltaTime : Float));
   }
 }

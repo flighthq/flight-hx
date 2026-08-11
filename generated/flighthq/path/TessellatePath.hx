@@ -12,13 +12,13 @@ class TessellatePath {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var vertices:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath((cast path), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument0:Dynamic = path; __callArgument0; }), (cast tolerance : Float)) : Array<Array<Float>>);
     vertices = (cast cast ([] : Array<Dynamic>));
     indices = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        TessellatePath.tessellateContour__tessellatePath((cast flighthq._internal._StaticIndex.readArray(contours, i)), (cast vertices), (cast indices));
+        TessellatePath.tessellateContour__tessellatePath(flighthq._internal._StaticIndex.readArray(contours, i), ({ final __callArgument1:Dynamic = vertices; __callArgument1; }), ({ final __callArgument2:Dynamic = indices; __callArgument2; }));
         i++;
       }
     }
@@ -95,7 +95,7 @@ class TessellatePath {
           var a:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast _Runtime.fmod((_Runtime.addNumbers(i, _Runtime.field(ring, 'length')) - 1.0), _Runtime.field(ring, 'length')) : Float));
           var b:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float));
           var c:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast _Runtime.fmod((i + 1.0), _Runtime.field(ring, 'length')) : Float));
-          if ((cast (cast TessellatePath.isEar__tessellatePath((cast contour), (cast ring), (cast a : Float), (cast b : Float), (cast c : Float)) : Bool) : Bool)) {
+          if ((cast (cast TessellatePath.isEar__tessellatePath(({ final __callArgument3:Dynamic = contour; __callArgument3; }), ({ final __callArgument4:Dynamic = ring; __callArgument4; }), (cast a : Float), (cast b : Float), (cast c : Float)) : Bool) : Bool)) {
             _Runtime.pushMany(indices, cast ([(base + a), (base + b), (base + c)] : Array<Dynamic>));
             _Runtime.splice(ring, Std.int(i), Std.int(1.0), []);
             (clipped = cast (true : Dynamic));

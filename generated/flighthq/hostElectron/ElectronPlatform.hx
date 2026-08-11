@@ -15,7 +15,7 @@ class ElectronPlatform {
     return cast { getInfo: function(out:PlatformInfo):PlatformInfo {
       var proc:Null<{ @:optional var platform:Null<String>; @:optional var arch:Null<String>; @:optional var getSystemVersion:Null<Void->String>; }> = cast _Runtime.UNDEFINED;
       proc = ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('process'), 'undefined') : Bool) ? (cast (cast flighthq._internal._HostValueLut.get('process') : { @:optional var platform:String; @:optional var arch:String; @:optional var getSystemVersion:Void->String; }) : Dynamic) : (cast null : Dynamic));
-      (out.name = cast ((cast ElectronPlatform.toPlatformName__electronPlatform((cast ({ final __structural0 = proc; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var platform:Null<String>; }).platform; }))) : PlatformName) : Dynamic));
+      (out.name = cast ((cast ElectronPlatform.toPlatformName__electronPlatform(({ final __structural0 = proc; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var platform:Null<String>; }).platform; })) : PlatformName) : Dynamic));
       (out.kind = cast ('desktop' : Dynamic));
       (out.version = cast (_Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural1 = proc; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var getSystemVersion:Null<Void->String>; }).getSystemVersion; }), cast ([] : Array<Dynamic>)), function():Dynamic return cast '') : Dynamic));
       (out.arch = cast (_Runtime.coalesce(({ final __structural2 = proc; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var arch:Null<String>; }).arch; }), function():Dynamic return cast '') : Dynamic));

@@ -42,11 +42,11 @@ class GltfPunctualLights {
         if ((cast _Runtime.strictEquals(lightIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { node++; continue; }
         var source:GltfPunctualLight = flighthq._internal._StaticIndex.readArray(definitions, lightIndex);
         if ((cast _Runtime.strictEquals(source, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'gltf.light-missing' : String), (cast { firstLight: lightIndex, firstNode: node }));
+          GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops : Dynamic), ({ final __callArgument4:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument4; }), (cast 'gltf.light-missing' : String), ({ final __callArgument5:Dynamic = { firstLight: lightIndex, firstNode: node }; __callArgument5; }));
           node++;
           continue;
         }
-        var descriptor:Null<Light> = (cast GltfPunctualLights.buildGltfPunctualLight__gltfPunctualLights((cast source), (cast lightIndex : Float), (cast lightDrops)) : Null<Light>);
+        var descriptor:Null<Light> = (cast GltfPunctualLights.buildGltfPunctualLight__gltfPunctualLights(({ final __callArgument6:Dynamic = source; __callArgument6; }), (cast lightIndex : Float), (cast lightDrops : Dynamic)) : Null<Light>);
         if ((cast _Runtime.strictEquals(descriptor, null) : Bool)) { node++; continue; }
         _Runtime.callProperty((cast _Runtime.field(context, 'document') : Scene3DDocument).lights, 'push', cast ([{ descriptor: descriptor, name: (cast source : GltfPunctualLight).name, node: flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(context, 'nodeIndices') : Array<Float>), (cast node : Float)), transform: _Runtime.callProperty(context, 'buildNodeTransform', cast ([node] : Array<Dynamic>)) }] : Array<Dynamic>));
         node++;
@@ -54,7 +54,7 @@ class GltfPunctualLights {
     }
     if ((cast !_Runtime.strictEquals(lightDrops, null) : Bool)) {
       for (tally in _Runtime.iterable(((cast lightDrops : flighthq._internal._Map<String, LightDropTally__gltfPunctualLights>).values()))) {
-        reportImportDiagnostic((cast _Runtime.field(context, 'diagnostics')), (cast (cast tally : LightDropTally__gltfPunctualLights).severity), (cast (cast tally : LightDropTally__gltfPunctualLights).kind : String), (cast 'buildGltfPunctualLight' : String), (cast _Runtime.mergeObjects([(cast tally : LightDropTally__gltfPunctualLights).detail, { count: (cast tally : LightDropTally__gltfPunctualLights).count }])));
+        reportImportDiagnostic((cast _Runtime.field(context, 'diagnostics') : Dynamic), (cast tally : LightDropTally__gltfPunctualLights).severity, (cast (cast tally : LightDropTally__gltfPunctualLights).kind : String), (cast 'buildGltfPunctualLight' : String), ({ final __callArgument9:Dynamic = _Runtime.mergeObjects([(cast tally : LightDropTally__gltfPunctualLights).detail, { count: (cast tally : LightDropTally__gltfPunctualLights).count }]); __callArgument9; }));
       }
     }
   }, kind: 'KHR_lights_punctual' });
@@ -65,31 +65,31 @@ class GltfPunctualLights {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var range:Float = cast _Runtime.UNDEFINED;
     color = _Runtime.coalesce(_Runtime.field(source, 'color'), function():Dynamic return cast cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
-    packedColor = (cast packLinearToColor((cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>))) : Float);
+    packedColor = (cast packLinearToColor(({ final __callArgument10:Dynamic = cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>); __callArgument10; })) : Float);
     intensity = _Runtime.coalesce(_Runtime.field(source, 'intensity'), function():Dynamic return cast 1.0);
     if ((cast !(cast _Runtime.compare(intensity, 0.0, '>=') : Bool) : Bool)) {
-      GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'gltf.light-negative-intensity' : String), (cast { firstLight: index }));
+      GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops : Dynamic), ({ final __callArgument11:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument11; }), (cast 'gltf.light-negative-intensity' : String), ({ final __callArgument12:Dynamic = { firstLight: index }; __callArgument12; }));
       return cast null;
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(source, 'type'), 'directional') : Bool)) {
-      return cast (cast createDirectionalLight((cast { color: packedColor, direction: { x: 0.0, y: 0.0, z: -1.0 }, intensity: intensity })) : DirectionalLight);
+      return cast (cast createDirectionalLight((cast { color: packedColor, direction: { x: 0.0, y: 0.0, z: -1.0 }, intensity: intensity } : Dynamic)) : DirectionalLight);
     }
     range = _Runtime.coalesce(_Runtime.field(source, 'range'), function():Dynamic return cast -1.0);
     if ((cast ((cast !_Runtime.strictEquals(range, -1.0) : Bool) && (cast !(cast _Runtime.compare(range, 0.0, '>') : Bool) : Bool)) : Bool)) {
-      GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'gltf.light-non-positive-range' : String), (cast { firstLight: index }));
+      GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops : Dynamic), ({ final __callArgument13:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument13; }), (cast 'gltf.light-non-positive-range' : String), ({ final __callArgument14:Dynamic = { firstLight: index }; __callArgument14; }));
       return cast null;
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(source, 'type'), 'point') : Bool)) { return cast (cast createPointLight((cast { color: packedColor, intensity: intensity, range: range })) : PointLight); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(source, 'type'), 'point') : Bool)) { return cast (cast createPointLight((cast { color: packedColor, intensity: intensity, range: range } : Dynamic)) : PointLight); }
     if ((cast _Runtime.strictEquals(_Runtime.field(source, 'type'), 'spot') : Bool)) {
-      var inner:Float = _Runtime.coalesce(({ final __structural6 = _Runtime.field(source, 'spot'); __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var innerConeAngle:Null<Float>; }).innerConeAngle; }), function():Dynamic return cast 0.0);
-      var outer:Float = _Runtime.coalesce(({ final __structural7 = _Runtime.field(source, 'spot'); __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var outerConeAngle:Null<Float>; }).outerConeAngle; }), function():Dynamic return cast (HxMath.PI / 4.0));
+      var inner:Float = _Runtime.coalesce(({ final __structural15 = _Runtime.field(source, 'spot'); __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { @:optional var innerConeAngle:Null<Float>; }).innerConeAngle; }), function():Dynamic return cast 0.0);
+      var outer:Float = _Runtime.coalesce(({ final __structural16 = _Runtime.field(source, 'spot'); __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { @:optional var outerConeAngle:Null<Float>; }).outerConeAngle; }), function():Dynamic return cast (HxMath.PI / 4.0));
       if ((cast ((cast ((cast !(cast _Runtime.compare(inner, 0.0, '>=') : Bool) : Bool) || (cast !(cast _Runtime.compare(outer, inner, '>') : Bool) : Bool)) : Bool) || (cast ((cast outer : Float) > (cast (HxMath.PI / 2.0) : Float)) : Bool)) : Bool)) {
-        GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'gltf.light-invalid-spot-cone' : String), (cast { firstLight: index }));
+        GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops : Dynamic), ({ final __callArgument17:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument17; }), (cast 'gltf.light-invalid-spot-cone' : String), ({ final __callArgument18:Dynamic = { firstLight: index }; __callArgument18; }));
         return cast null;
       }
-      return cast (cast createSpotLight((cast { color: packedColor, direction: { x: 0.0, y: 0.0, z: -1.0 }, innerConeDegrees: ((inner * 180.0) / HxMath.PI), intensity: intensity, outerConeDegrees: ((outer * 180.0) / HxMath.PI), range: range })) : SpotLight);
+      return cast (cast createSpotLight((cast { color: packedColor, direction: { x: 0.0, y: 0.0, z: -1.0 }, innerConeDegrees: ((inner * 180.0) / HxMath.PI), intensity: intensity, outerConeDegrees: ((outer * 180.0) / HxMath.PI), range: range } : Dynamic)) : SpotLight);
     }
-    GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'gltf.light-unsupported-type' : String), (cast { firstLight: index, firstType: _Runtime.field(source, 'type') }));
+    GltfPunctualLights.tallyLightDrop__gltfPunctualLights((cast lightDrops : Dynamic), ({ final __callArgument19:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument19; }), (cast 'gltf.light-unsupported-type' : String), ({ final __callArgument20:Dynamic = { firstLight: index, firstType: _Runtime.field(source, 'type') }; __callArgument20; }));
     return cast null;
     return cast null;
   }

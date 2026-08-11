@@ -23,12 +23,12 @@ class GlProgram {
     var vertexShader:flighthq._internal.dom.WebGLShader = cast _Runtime.UNDEFINED;
     var fragmentShader:flighthq._internal.dom.WebGLShader = cast _Runtime.UNDEFINED;
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
-    vertexShader = (cast compileGlShader((cast gl), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VERTEX_SHADER', flighthq._internal.backend.WebGl2Backend.VERTEX_SHADER) : Float), (cast vertexSource : String), (cast label : String)) : flighthq._internal.dom.WebGLShader);
-    fragmentShader = (cast compileGlShader((cast gl), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAGMENT_SHADER', flighthq._internal.backend.WebGl2Backend.FRAGMENT_SHADER) : Float), (cast fragmentSource : String), (cast label : String)) : flighthq._internal.dom.WebGLShader);
+    vertexShader = (cast compileGlShader(({ final __callArgument0:Dynamic = gl; __callArgument0; }), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VERTEX_SHADER', flighthq._internal.backend.WebGl2Backend.VERTEX_SHADER) : Float), (cast vertexSource : String), (cast label : String)) : flighthq._internal.dom.WebGLShader);
+    fragmentShader = (cast compileGlShader(({ final __callArgument1:Dynamic = gl; __callArgument1; }), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAGMENT_SHADER', flighthq._internal.backend.WebGl2Backend.FRAGMENT_SHADER) : Float), (cast fragmentSource : String), (cast label : String)) : flighthq._internal.dom.WebGLShader);
     program = flighthq._internal.backend.WebGl2Backend.createProgram(gl);
     flighthq._internal.backend.WebGl2Backend.attachShader(gl, program, vertexShader);
     flighthq._internal.backend.WebGl2Backend.attachShader(gl, program, fragmentShader);
-    linkGlProgram((cast gl), (cast program), (cast label : String));
+    linkGlProgram(({ final __callArgument2:Dynamic = gl; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), (cast label : String));
     flighthq._internal.backend.WebGl2Backend.deleteShader(gl, vertexShader);
     flighthq._internal.backend.WebGl2Backend.deleteShader(gl, fragmentShader);
     return cast program;

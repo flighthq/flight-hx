@@ -24,22 +24,22 @@ class WgpuDisplacementEffect {
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 8.0);
     frequency = _Runtime.coalesce(_Runtime.field(effect, 'frequency'), function():Dynamic return cast 12.0);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'lens.displacement' : String), (cast WgpuDisplacementEffect.DISPLACEMENT_FRAGMENT_WGSL__wgpuDisplacementEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'lens.displacement' : String), (cast WgpuDisplacementEffect.DISPLACEMENT_FRAGMENT_WGSL__wgpuDisplacementEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast frequency : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast seed : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast _Runtime.field(source, 'width') : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast _Runtime.field(source, 'height') : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument4; }));
   }
 
   public static final defaultWgpuDisplacementEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyDisplacementEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : DisplacementEffect)));
+    applyDisplacementEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DisplacementEffect));
   });
 
   public static function registerWgpuDisplacementEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state), (cast 'DisplacementEffect' : String), (cast defaultWgpuDisplacementEffectRunner));
+    registerWgpuRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'DisplacementEffect' : String), ({ final __callArgument6:Dynamic = defaultWgpuDisplacementEffectRunner; __callArgument6; }));
   }
 
   public static final DISPLACEMENT_FRAGMENT_WGSL__wgpuDisplacementEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_frequency : f32,\n  u_seed : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let f = uni.u_frequency;\n  let warp = vec2f(\n    sin(uv.y * f + uni.u_seed) + sin(uv.y * f * 2.3 + uni.u_seed * 1.7) * 0.5,\n    cos(uv.x * f * 0.8 + uni.u_seed * 1.3)\n  );\n  let displaced = uv + warp * (uni.u_intensity / uni.u_resolution);\n  return textureSampleLevel(tex, smp, displaced, 0.0);\n}';

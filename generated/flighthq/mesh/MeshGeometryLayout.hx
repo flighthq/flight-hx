@@ -44,8 +44,8 @@ class MeshGeometryLayout {
     for (dstAttr in _Runtime.iterable(targetLayout.attributes)) {
       var srcAttr:Null<VertexAttribute> = _Runtime.find((cast source.layout : { var attributes:Array<VertexAttribute>; }).attributes, function(attribute:VertexAttribute, __unused0:Float, __unused1:Array<VertexAttribute>):Bool return _Runtime.strictEquals(attribute.semantic, dstAttr.semantic));
       if ((cast !_Runtime.truthy(srcAttr) : Bool)) { continue; }
-      var sourceByteLength:Float = (cast MeshGeometryLayout.getVertexFormatByteLength__meshGeometryLayout((cast (cast srcAttr : { var format:VertexFormat; }).format)) : Float);
-      var destinationByteLength:Float = (cast MeshGeometryLayout.getVertexFormatByteLength__meshGeometryLayout((cast dstAttr.format)) : Float);
+      var sourceByteLength:Float = (cast MeshGeometryLayout.getVertexFormatByteLength__meshGeometryLayout((cast srcAttr : { var format:VertexFormat; }).format) : Float);
+      var destinationByteLength:Float = (cast MeshGeometryLayout.getVertexFormatByteLength__meshGeometryLayout(dstAttr.format) : Float);
       if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(sourceByteLength, 0.0) : Bool) || (cast _Runtime.strictEquals(destinationByteLength, 0.0) : Bool)) : Bool) || (cast ((cast (cast srcAttr : { var byteOffset:Float; }).byteOffset : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dstAttr.byteOffset : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ((cast srcAttr : { var byteOffset:Float; }).byteOffset + sourceByteLength) : Float) > (cast srcStride : Float)) : Bool)) : Bool) || (cast ((cast (dstAttr.byteOffset + destinationByteLength) : Float) > (cast dstStride : Float)) : Bool)) : Bool)) {
         continue;
       }
@@ -61,11 +61,11 @@ class MeshGeometryLayout {
             (cast destinationBytes : flighthq._internal._UInt8Array).set((cast sourceBytes : flighthq._internal._UInt8Array).subarray(Std.int(sourceOffset), Std.int((sourceOffset + (cast mapping : AttributeMapping__meshGeometryLayout).sourceByteLength))), Std.int(destinationOffset));
             continue;
           }
-          var componentCount:Float = HxMath.min((cast MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout((cast (cast (cast mapping : AttributeMapping__meshGeometryLayout).source : { var format:VertexFormat; }).format)) : Float), (cast MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout((cast (cast (cast mapping : AttributeMapping__meshGeometryLayout).destination : { var format:VertexFormat; }).format)) : Float));
+          var componentCount:Float = HxMath.min((cast MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout((cast (cast mapping : AttributeMapping__meshGeometryLayout).source : { var format:VertexFormat; }).format) : Float), (cast MeshGeometryLayout.getVertexFormatComponentCount__meshGeometryLayout((cast (cast mapping : AttributeMapping__meshGeometryLayout).destination : { var format:VertexFormat; }).format) : Float));
           {
             var component:Float = 0.0;
             while ((cast ((cast component : Float) < (cast componentCount : Float)) : Bool)) {
-              MeshGeometryLayout.writeVertexFormatComponent__meshGeometryLayout((cast destinationView : flighthq._internal._Any), (cast destinationOffset : Float), (cast (cast (cast mapping : AttributeMapping__meshGeometryLayout).destination : { var format:VertexFormat; }).format), (cast component : Float), (cast (cast MeshGeometryLayout.readVertexFormatComponent__meshGeometryLayout((cast sourceView : flighthq._internal._Any), (cast sourceOffset : Float), (cast (cast (cast mapping : AttributeMapping__meshGeometryLayout).source : { var format:VertexFormat; }).format), (cast component : Float)) : Float) : Float));
+              MeshGeometryLayout.writeVertexFormatComponent__meshGeometryLayout((cast destinationView : flighthq._internal._Any), (cast destinationOffset : Float), (cast (cast mapping : AttributeMapping__meshGeometryLayout).destination : { var format:VertexFormat; }).format, (cast component : Float), (cast (cast MeshGeometryLayout.readVertexFormatComponent__meshGeometryLayout((cast sourceView : flighthq._internal._Any), (cast sourceOffset : Float), (cast (cast mapping : AttributeMapping__meshGeometryLayout).source : { var format:VertexFormat; }).format, (cast component : Float)) : Float) : Float));
               component++;
             }
           }
@@ -73,9 +73,9 @@ class MeshGeometryLayout {
         vertex++;
       }
     }
-    converted = (cast createMeshGeometry((cast { indices: _Runtime.coalesce(source.indices, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: targetLayout, subsets: source.subsets, topology: source.topology, vertices: dstVertices })) : MeshGeometry);
+    converted = (cast createMeshGeometry(({ final __callArgument4:Dynamic = { indices: _Runtime.coalesce(source.indices, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: targetLayout, subsets: source.subsets, topology: source.topology, vertices: dstVertices }; __callArgument4; })) : MeshGeometry);
     sourceRuntime = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    smoothingSources = ({ final __structural4 = sourceRuntime; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
+    smoothingSources = ({ final __structural5 = sourceRuntime; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
     if ((cast ((cast !_Runtime.strictEquals(smoothingSources, null) : Bool) && (cast !_Runtime.strictEquals(smoothingSources, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       ((cast (cast _Runtime.getIndex(converted, EntityRuntimeKey) : MeshGeometryRuntime) : MeshGeometryRuntime).tangentSmoothingSources = _Runtime.slice(smoothingSources, 0, null));
     }

@@ -62,8 +62,8 @@ class SpritesheetDetect {
     ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(ASEPRITE, (cast { detect: SpritesheetDetect.detectAseprite__spritesheetDetect, parse: function(text:String, __unused0:SpritesheetParseOptions):SpritesheetData return (cast parseAsepriteSpritesheet((cast text : String)) : SpritesheetData) })));
     ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(COCOS_PLIST, (cast { detect: SpritesheetDetect.detectCocosPlist__spritesheetDetect, parse: function(text:String, __unused1:SpritesheetParseOptions):SpritesheetData return (cast parseCocosPlistSpritesheet((cast text : String)) : SpritesheetData) })));
     ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(TEXTURE_PACKER, (cast { detect: SpritesheetDetect.detectTexturePacker__spritesheetDetect, parse: function(text:String, __unused2:SpritesheetParseOptions):SpritesheetData return (cast parseTexturePackerSpritesheet((cast text : String)) : SpritesheetData) })));
-    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(STARLING, (cast { detect: SpritesheetDetect.detectStarling__spritesheetDetect, parse: function(text:String, opts:SpritesheetParseOptions):SpritesheetData return (cast parseStarlingSpritesheet((cast text : String), (cast { frameDuration: opts.frameDuration })) : SpritesheetData) })));
-    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(LIBGDX_ATLAS, (cast { detect: SpritesheetDetect.detectLibgdxAtlas__spritesheetDetect, parse: function(text:String, opts:SpritesheetParseOptions):SpritesheetData return (cast parseLibgdxAtlasSpritesheet((cast text : String), (cast { frameDuration: opts.frameDuration })) : SpritesheetData) })));
+    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(STARLING, (cast { detect: SpritesheetDetect.detectStarling__spritesheetDetect, parse: function(text:String, opts:SpritesheetParseOptions):SpritesheetData return (cast parseStarlingSpritesheet((cast text : String), (cast { frameDuration: opts.frameDuration } : Dynamic)) : SpritesheetData) })));
+    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(LIBGDX_ATLAS, (cast { detect: SpritesheetDetect.detectLibgdxAtlas__spritesheetDetect, parse: function(text:String, opts:SpritesheetParseOptions):SpritesheetData return (cast parseLibgdxAtlasSpritesheet((cast text : String), (cast { frameDuration: opts.frameDuration } : Dynamic)) : SpritesheetData) })));
     return cast SpritesheetDetect._registry__spritesheetDetect;
     return cast null;
   }
@@ -92,7 +92,7 @@ class SpritesheetDetect {
     if ((cast !_Runtime.truthy(kind) : Bool)) { return cast null; }
     entry = ((cast (cast SpritesheetDetect.getRegistry__spritesheetDetect() : FormatRegistry__spritesheetDetect) : FormatRegistry__spritesheetDetect).get(kind));
     if ((cast !_Runtime.truthy(entry) : Bool)) { return cast null; }
-    return cast (cast entry : FormatEntry__spritesheetDetect).parse((cast text : String), (cast opts));
+    return cast (cast entry : FormatEntry__spritesheetDetect).parse((cast text : String), ({ final __callArgument2:Dynamic = opts; __callArgument2; }));
     return cast null;
   }
 

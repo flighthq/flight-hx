@@ -9,7 +9,7 @@ import flighthq.types.ModifierRegistry;
 
 class IsModifierStackValid {
   public static function isModifierStackValid(registry:ModifierRegistry, stack:Array<Modifier>):Bool {
-    return cast _Runtime.strictEquals(_Runtime.field((cast getUnregisteredModifierKinds((cast registry), (cast stack)) : Array<String>), 'length'), 0.0);
+    return cast _Runtime.strictEquals(_Runtime.field((cast getUnregisteredModifierKinds(({ final __callArgument0:Dynamic = registry; __callArgument0; }), ({ final __callArgument1:Dynamic = stack; __callArgument1; })) : Array<String>), 'length'), 0.0);
     return cast null;
   }
 }

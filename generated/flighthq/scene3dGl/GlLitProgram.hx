@@ -69,7 +69,7 @@ class GlLitProgram {
       ((cast GlLitProgram._uploadedLightBlock__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Scene3DLightBlock>).set(program, (cast lights)));
       ((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Float>).set(program, (cast _Runtime.field(lights, 'version'))));
     }
-    runtime = (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime);
+    runtime = (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime);
     shadow = (cast runtime : GlScene3DRuntime).shadow;
     if ((cast ((cast !_Runtime.strictEquals(shadow, null) : Bool) && (cast (cast shadow : GlScene3DShadow).enabled : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.SHADOW_MAP_TEXTURE_UNIT__glLitProgram));
@@ -99,7 +99,7 @@ class GlLitProgram {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblMaxMip'), ((cast ibl : GlScene3DIbl).prefilteredMipCount - 1.0));
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
     } else {
-      var placeholders:GlIblPlaceholders__glLitProgram = (cast GlLitProgram.ensureGlIblPlaceholders__glLitProgram((cast state)) : GlIblPlaceholders__glLitProgram);
+      var placeholders:GlIblPlaceholders__glLitProgram = (cast GlLitProgram.ensureGlIblPlaceholders__glLitProgram(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlIblPlaceholders__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast placeholders : GlIblPlaceholders__glLitProgram).cube);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblIrradiance'), GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram);

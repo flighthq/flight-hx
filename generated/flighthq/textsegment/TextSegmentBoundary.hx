@@ -10,22 +10,22 @@ import flighthq.types.TextSegment.TextSegmentRange;
 
 class TextSegmentBoundary {
   public static function getNextGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast (cast TextSegmentBoundary.nextSegmentBoundary__textSegmentBoundary((cast (cast segmentGraphemes((cast text : String), (cast locale)) : Array<TextSegment>)), (cast index : Float), (cast _Runtime.field(text, 'length') : Float)) : Float);
+    return cast (cast TextSegmentBoundary.nextSegmentBoundary__textSegmentBoundary((cast segmentGraphemes((cast text : String), ({ final __callArgument0:Dynamic = locale; __callArgument0; })) : Array<TextSegment>), (cast index : Float), (cast _Runtime.field(text, 'length') : Float)) : Float);
     return cast null;
   }
 
   public static function getNextWordBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast (cast TextSegmentBoundary.nextSegmentBoundary__textSegmentBoundary((cast (cast segmentWords((cast text : String), (cast locale)) : Array<TextSegment>)), (cast index : Float), (cast _Runtime.field(text, 'length') : Float)) : Float);
+    return cast (cast TextSegmentBoundary.nextSegmentBoundary__textSegmentBoundary((cast segmentWords((cast text : String), ({ final __callArgument1:Dynamic = locale; __callArgument1; })) : Array<TextSegment>), (cast index : Float), (cast _Runtime.field(text, 'length') : Float)) : Float);
     return cast null;
   }
 
   public static function getPreviousGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast (cast TextSegmentBoundary.previousSegmentBoundary__textSegmentBoundary((cast (cast segmentGraphemes((cast text : String), (cast locale)) : Array<TextSegment>)), (cast index : Float)) : Float);
+    return cast (cast TextSegmentBoundary.previousSegmentBoundary__textSegmentBoundary((cast segmentGraphemes((cast text : String), ({ final __callArgument2:Dynamic = locale; __callArgument2; })) : Array<TextSegment>), (cast index : Float)) : Float);
     return cast null;
   }
 
   public static function getPreviousWordBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast (cast TextSegmentBoundary.previousSegmentBoundary__textSegmentBoundary((cast (cast segmentWords((cast text : String), (cast locale)) : Array<TextSegment>)), (cast index : Float)) : Float);
+    return cast (cast TextSegmentBoundary.previousSegmentBoundary__textSegmentBoundary((cast segmentWords((cast text : String), ({ final __callArgument3:Dynamic = locale; __callArgument3; })) : Array<TextSegment>), (cast index : Float)) : Float);
     return cast null;
   }
 
@@ -36,7 +36,7 @@ class TextSegmentBoundary {
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast null; }
     clamped = (cast TextSegmentBoundary.clampIndex__textSegmentBoundary((cast index : Float), (cast _Runtime.field(text, 'length') : Float)) : Float);
     lookup = ((cast _Runtime.strictEquals(clamped, _Runtime.field(text, 'length')) : Bool) ? (cast _Runtime.subtractNumbers(_Runtime.field(text, 'length'), 1.0) : Dynamic) : (cast clamped : Dynamic));
-    segments = (cast segmentWords((cast text : String), (cast locale)) : Array<TextSegment>);
+    segments = (cast segmentWords((cast text : String), ({ final __callArgument4:Dynamic = locale; __callArgument4; })) : Array<TextSegment>);
     for (segment in _Runtime.iterable(segments)) {
       if ((cast ((cast ((cast lookup : Float) >= (cast (cast segment : TextSegment).start : Float)) : Bool) && (cast ((cast lookup : Float) < (cast (cast segment : TextSegment).end : Float)) : Bool)) : Bool)) {
         return cast ((cast _Runtime.strictEquals((cast segment : TextSegment).isWordLike, true) : Bool) ? (cast { start: (cast segment : TextSegment).start, end: (cast segment : TextSegment).end } : Dynamic) : (cast null : Dynamic));

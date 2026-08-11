@@ -17,25 +17,25 @@ import flighthq.types.Node.NodeRuntime;
 
 class EnableInteractionGuards {
   public static function disableInteractionGuards():Void {
-    setInteractionConnectGuard((cast null));
+    setInteractionConnectGuard((cast null : Dynamic));
   }
 
   public static function enableInteractionGuards():Void {
-    setInteractionConnectGuard((cast EnableInteractionGuards.warnOnInertInteractionTarget__enableInteractionGuards));
+    setInteractionConnectGuard((cast EnableInteractionGuards.warnOnInertInteractionTarget__enableInteractionGuards : Dynamic));
   }
 
   public static function explainInteractionHitEligibility(node:NodeAny):InteractionHitEligibility {
-    return cast { eligible: (cast isNodeHitTestEnabled((cast node)) : Bool), hasEligibleInSubtree: (cast EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards((cast node)) : Bool) };
+    return cast { eligible: (cast isNodeHitTestEnabled(({ final __callArgument0:Dynamic = node; __callArgument0; })) : Bool), hasEligibleInSubtree: (cast EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards(({ final __callArgument1:Dynamic = node; __callArgument1; })) : Bool) };
     return cast null;
   }
 
   public static function hasEligibleNodeInSubtree__enableInteractionGuards(node:NodeAny):Bool {
     var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
-    if ((cast (cast isNodeHitTestEnabled((cast node)) : Bool) : Bool)) { return cast true; }
-    children = _Runtime.field((cast getNodeRuntime((cast node)) : NodeRuntime<flighthq._internal._Any>), 'children');
+    if ((cast (cast isNodeHitTestEnabled(({ final __callArgument2:Dynamic = node; __callArgument2; })) : Bool) : Bool)) { return cast true; }
+    children = _Runtime.field((cast getNodeRuntime((cast node : Dynamic)) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        if ((cast (cast EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards((cast child)) : Bool) : Bool)) { return cast true; }
+        if ((cast (cast EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards(({ final __callArgument5:Dynamic = child; __callArgument5; })) : Bool) : Bool)) { return cast true; }
       }
     }
     return cast false;
@@ -44,11 +44,11 @@ class EnableInteractionGuards {
 
   public static function hasFocusableNodeInSubtree__enableInteractionGuards(node:NodeAny):Bool {
     var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
-    if ((cast (cast isNodeFocusable((cast node)) : Bool) : Bool)) { return cast true; }
-    children = _Runtime.field((cast getNodeRuntime((cast node)) : NodeRuntime<flighthq._internal._Any>), 'children');
+    if ((cast (cast isNodeFocusable(({ final __callArgument6:Dynamic = node; __callArgument6; })) : Bool) : Bool)) { return cast true; }
+    children = _Runtime.field((cast getNodeRuntime((cast node : Dynamic)) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        if ((cast (cast EnableInteractionGuards.hasFocusableNodeInSubtree__enableInteractionGuards((cast child)) : Bool) : Bool)) { return cast true; }
+        if ((cast (cast EnableInteractionGuards.hasFocusableNodeInSubtree__enableInteractionGuards(({ final __callArgument9:Dynamic = child; __callArgument9; })) : Bool) : Bool)) { return cast true; }
       }
     }
     return cast false;
@@ -58,11 +58,11 @@ class EnableInteractionGuards {
   public static function warnOnInertInteractionTarget__enableInteractionGuards(target:NodeAny, name:InteractionSignalName):Void {
     if ((cast ((cast _Runtime.strictEquals(name, 'onKeyDown') : Bool) || (cast _Runtime.strictEquals(name, 'onKeyUp') : Bool)) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(name, 'onFocusIn') : Bool) || (cast _Runtime.strictEquals(name, 'onFocusOut') : Bool)) : Bool)) {
-      if ((cast (cast EnableInteractionGuards.hasFocusableNodeInSubtree__enableInteractionGuards((cast target)) : Bool) : Bool)) { return; }
-      (cast logOnce((cast 'interaction:focus-listener-on-non-focusable' : String), (cast LogLevel.Warn), (cast { message: 'connectInteractionSignal(\'' + Std.string(name) + '\'): target has no focusable node in its subtree — call setNodeFocusable(node, true) so it can receive focus events' }), (cast 'interaction')) : Bool);
+      if ((cast (cast EnableInteractionGuards.hasFocusableNodeInSubtree__enableInteractionGuards(({ final __callArgument10:Dynamic = target; __callArgument10; })) : Bool) : Bool)) { return; }
+      (cast logOnce((cast 'interaction:focus-listener-on-non-focusable' : String), ({ final __callArgument11:Dynamic = LogLevel.Warn; __callArgument11; }), (cast { message: 'connectInteractionSignal(\'' + Std.string(name) + '\'): target has no focusable node in its subtree — call setNodeFocusable(node, true) so it can receive focus events' } : Dynamic), ({ final __callArgument12:Dynamic = 'interaction'; __callArgument12; })) : Bool);
       return;
     }
-    if ((cast (cast EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards((cast target)) : Bool) : Bool)) { return; }
-    (cast logOnce((cast 'interaction:listener-on-inert-node' : String), (cast LogLevel.Warn), (cast { message: 'connectInteractionSignal(\'' + Std.string(name) + '\'): target has no hit-testable node in its subtree — call setNodeHitTestEnabled(node, true) so it can receive pointer events' }), (cast 'interaction')) : Bool);
+    if ((cast (cast EnableInteractionGuards.hasEligibleNodeInSubtree__enableInteractionGuards(({ final __callArgument13:Dynamic = target; __callArgument13; })) : Bool) : Bool)) { return; }
+    (cast logOnce((cast 'interaction:listener-on-inert-node' : String), ({ final __callArgument14:Dynamic = LogLevel.Warn; __callArgument14; }), (cast { message: 'connectInteractionSignal(\'' + Std.string(name) + '\'): target has no hit-testable node in its subtree — call setNodeHitTestEnabled(node, true) so it can receive pointer events' } : Dynamic), ({ final __callArgument15:Dynamic = 'interaction'; __callArgument15; })) : Bool);
   }
 }

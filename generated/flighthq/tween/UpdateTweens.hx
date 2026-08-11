@@ -17,7 +17,7 @@ class UpdateTweens {
     var easedT:Float = cast _Runtime.UNDEFINED;
     var target:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
     if ((cast (cast tween : Tween<T>).complete : Bool)) { return; }
-    if ((cast !(cast (cast tween : Tween<T>).initialized : Bool) : Bool)) { initializeTween((cast tween)); }
+    if ((cast !(cast (cast tween : Tween<T>).initialized : Bool) : Bool)) { initializeTween((cast tween : Dynamic)); }
     effectiveT = ((cast (cast tween : Tween<T>).reverse : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic));
     easedT = (cast tween : Tween<T>).ease((cast effectiveT : Float));
     target = (cast (cast tween : Tween<T>).target : flighthq._internal._Record<String, Float>);
@@ -40,7 +40,7 @@ class UpdateTweens {
     ((cast tween : Tween<T>).elapsed += deltaTime);
     activeElapsed = ((cast tween : Tween<T>).elapsed - (cast tween : Tween<T>).delay);
     if ((cast ((cast activeElapsed : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
-    if ((cast !(cast (cast tween : Tween<T>).initialized : Bool) : Bool)) { initializeTween((cast tween)); }
+    if ((cast !(cast (cast tween : Tween<T>).initialized : Bool) : Bool)) { initializeTween((cast tween : Dynamic)); }
     t = HxMath.min((activeElapsed / (cast tween : Tween<T>).duration), 1.0);
     effectiveT = ((cast (cast tween : Tween<T>).reverse : Bool) ? (cast (1.0 - t) : Dynamic) : (cast t : Dynamic));
     easedT = (cast tween : Tween<T>).ease((cast effectiveT : Float));
@@ -76,7 +76,7 @@ class UpdateTweens {
         if ((cast (cast flighthq._internal._StaticIndex.readArray(list, i) : Tween<flighthq._internal._Any>).complete : Bool)) {
           _Runtime.splice(list, Std.int(i), Std.int(1.0), []);
         } else {
-          (cast UpdateTweens.updateTween__updateTweens : Tween<flighthq._internal._Any>->Float->Void)((cast flighthq._internal._StaticIndex.readArray(list, i)), (cast deltaTime : Float));
+          (cast UpdateTweens.updateTween__updateTweens : Tween<flighthq._internal._Any>->Float->Void)(flighthq._internal._StaticIndex.readArray(list, i), (cast deltaTime : Float));
         }
         i--;
       }

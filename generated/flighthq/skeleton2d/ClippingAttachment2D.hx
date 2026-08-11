@@ -11,7 +11,7 @@ import flighthq.types.Skin2D;
 class ClippingAttachment2D {
   public static function computeSkeleton2DClippingAttachmentVertices(out:flighthq._internal._Float32Array, attachment:flighthq.types.ClippingAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
     if (deform == null) deform = cast (null : Dynamic);
-    skinSkeleton2DAttachmentPoints((cast out), (cast _Runtime.field(attachment, 'skin')), (cast _Runtime.field(attachment, 'vertices')), (cast skeleton), (cast boneIndex : Float), (cast deform), (cast 'ClippingAttachment2D' : String));
+    skinSkeleton2DAttachmentPoints(({ final __callArgument0:Dynamic = out; __callArgument0; }), (cast _Runtime.field(attachment, 'skin') : Dynamic), _Runtime.field(attachment, 'vertices'), ({ final __callArgument1:Dynamic = skeleton; __callArgument1; }), (cast boneIndex : Float), ({ final __callArgument2:Dynamic = deform; __callArgument2; }), (cast 'ClippingAttachment2D' : String));
   }
 
   public static function getSkeleton2DClippingAttachmentSlotRange(attachment:flighthq.types.ClippingAttachment2D, slotIndex:Float, slotCount:Float):{ var end:Float; var start:Float; } {

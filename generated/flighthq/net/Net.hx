@@ -63,47 +63,47 @@ class Net {
   public static function _readNetResponseBody__net(response:flighthq._internal.dom.Response, responseType:NetResponseType, progress:Null<Signal<NetProgress->Void>>):flighthq._internal._Promise<NetResponseBody> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var __flowBranch0:Dynamic;
+        var __flowBranch4:Dynamic;
         if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
             var buffer:haxe.io.Bytes = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap((cast Net._readNetResponseWithProgress__net((cast response), (cast progress)) : flighthq._internal._Promise<haxe.io.Bytes>), function(__awaitValue1:Dynamic):Dynamic {
-              buffer = __awaitValue1;
-              return flighthq._internal._Async.flowReturn(Net._decodeNetBuffer__net((cast buffer), (cast responseType)));
+            return flighthq._internal._Async.flatMap((cast Net._readNetResponseWithProgress__net(({ final __callArgument8:Dynamic = response; __callArgument8; }), ({ final __callArgument9:Dynamic = progress; __callArgument9; })) : flighthq._internal._Promise<haxe.io.Bytes>), function(__awaitValue5:Dynamic):Dynamic {
+              buffer = __awaitValue5;
+              return flighthq._internal._Async.flowReturn(Net._decodeNetBuffer__net(({ final __callArgument6:Dynamic = buffer; __callArgument6; }), ({ final __callArgument7:Dynamic = responseType; __callArgument7; })));
             });
           });
         } else {
-          __flowBranch0 = flighthq._internal._Async.flowNormal();
+          __flowBranch4 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
-          var __flowBranch2:Dynamic;
+        return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
+          var __flowBranch10:Dynamic;
           if ((cast _Runtime.strictEquals(responseType, 'arraybuffer') : Bool)) {
-            __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flatMap(response.arrayBuffer(), function(__awaitValue3:Dynamic):Dynamic {
-                return flighthq._internal._Async.flowReturn(__awaitValue3);
+            __flowBranch10 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flatMap(response.arrayBuffer(), function(__awaitValue11:Dynamic):Dynamic {
+                return flighthq._internal._Async.flowReturn(__awaitValue11);
               });
             });
           } else {
-            __flowBranch2 = flighthq._internal._Async.flowNormal();
+            __flowBranch10 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
-            var __flowBranch4:Dynamic;
+          return flighthq._internal._Async.continueFlow(__flowBranch10, function():Dynamic {
+            var __flowBranch12:Dynamic;
             if ((cast _Runtime.strictEquals(responseType, 'blob') : Bool)) {
-              __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
-                return flighthq._internal._Async.flatMap(response.blob(), function(__awaitValue5:Dynamic):Dynamic {
-                  return flighthq._internal._Async.flowReturn(__awaitValue5);
+              __flowBranch12 = flighthq._internal._Async.protect(function():Dynamic {
+                return flighthq._internal._Async.flatMap(response.blob(), function(__awaitValue13:Dynamic):Dynamic {
+                  return flighthq._internal._Async.flowReturn(__awaitValue13);
                 });
               });
             } else {
-              __flowBranch4 = flighthq._internal._Async.flowNormal();
+              __flowBranch12 = flighthq._internal._Async.flowNormal();
             }
-            return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
-              var __flowBranch6:Dynamic;
+            return flighthq._internal._Async.continueFlow(__flowBranch12, function():Dynamic {
+              var __flowBranch14:Dynamic;
               if ((cast _Runtime.strictEquals(responseType, 'json') : Bool)) {
-                __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
+                __flowBranch14 = flighthq._internal._Async.protect(function():Dynamic {
                   return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-                    return flighthq._internal._Async.flatMap(response.json(), function(__awaitValue7:Dynamic):Dynamic {
-                      return flighthq._internal._Async.flowReturn((cast __awaitValue7 : flighthq._internal._Any));
+                    return flighthq._internal._Async.flatMap(response.json(), function(__awaitValue15:Dynamic):Dynamic {
+                      return flighthq._internal._Async.flowReturn((cast __awaitValue15 : flighthq._internal._Any));
                     });
                   }), function(__caughtError:Dynamic):Dynamic {
                     var __error:Dynamic = __caughtError;
@@ -115,11 +115,11 @@ class Net {
                   });
                 });
               } else {
-                __flowBranch6 = flighthq._internal._Async.flowNormal();
+                __flowBranch14 = flighthq._internal._Async.flowNormal();
               }
-              return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
-                return flighthq._internal._Async.flatMap(response.text(), function(__awaitValue8:Dynamic):Dynamic {
-                  return flighthq._internal._Async.flowReturn(__awaitValue8);
+              return flighthq._internal._Async.continueFlow(__flowBranch14, function():Dynamic {
+                return flighthq._internal._Async.flatMap(response.text(), function(__awaitValue16:Dynamic):Dynamic {
+                  return flighthq._internal._Async.flowReturn(__awaitValue16);
                 });
               });
             });
@@ -149,22 +149,22 @@ class Net {
         var loaded:Float = cast _Runtime.UNDEFINED;
         var out:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
         var offset:Float = cast _Runtime.UNDEFINED;
-        total = (cast Net._netContentLength__net((cast response.headers)) : Float);
+        total = (cast Net._netContentLength__net(response.headers) : Float);
         stream = response.body;
-        var __flowBranch11:Dynamic;
+        var __flowBranch19:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(stream, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast stream : flighthq._internal.dom.ReadableStream<Dynamic>).getReader), 'function') : Bool)) : Bool)) {
-          __flowBranch11 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch19 = flighthq._internal._Async.protect(function():Dynamic {
             var buffer:haxe.io.Bytes = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap(response.arrayBuffer(), function(__awaitValue12:Dynamic):Dynamic {
-              buffer = __awaitValue12;
+            return flighthq._internal._Async.flatMap(response.arrayBuffer(), function(__awaitValue20:Dynamic):Dynamic {
+              buffer = __awaitValue20;
               _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ phase: 'download', loaded: _Runtime.field(buffer, 'byteLength'), total: ((cast ((cast total : Float) >= (cast 0.0 : Float)) : Bool) ? (cast total : Dynamic) : (cast _Runtime.field(buffer, 'byteLength') : Dynamic)) }]]), 1);
               return flighthq._internal._Async.flowReturn(buffer);
             });
           });
         } else {
-          __flowBranch11 = flighthq._internal._Async.flowNormal();
+          __flowBranch19 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch11, function():Dynamic {
+        return flighthq._internal._Async.continueFlow(__flowBranch19, function():Dynamic {
           reader = (cast stream : flighthq._internal.dom.ReadableStream<Dynamic>).getReader();
           chunks = cast ([] : Array<Dynamic>);
           loaded = 0.0;
@@ -175,28 +175,28 @@ class Net {
                 var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
                 var done:Bool = cast _Runtime.UNDEFINED;
                 var value:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
-                return flighthq._internal._Async.flatMap((cast reader : flighthq._internal.dom.ReadableStreamDefaultReader<Dynamic>).read(), function(__awaitValue13:Dynamic):Dynamic {
-                  __destructure0 = __awaitValue13;
+                return flighthq._internal._Async.flatMap((cast reader : flighthq._internal.dom.ReadableStreamDefaultReader<Dynamic>).read(), function(__awaitValue21:Dynamic):Dynamic {
+                  __destructure0 = __awaitValue21;
                   done = _Runtime.field(__destructure0, 'done');
                   value = _Runtime.field(__destructure0, 'value');
-                  var __flowBranch14:Dynamic;
+                  var __flowBranch22:Dynamic;
                   if ((cast done : Bool)) {
-                    __flowBranch14 = flighthq._internal._Async.protect(function():Dynamic {
+                    __flowBranch22 = flighthq._internal._Async.protect(function():Dynamic {
                       return flighthq._internal._Async.flowBreak();
                     });
                   } else {
-                    __flowBranch14 = flighthq._internal._Async.flowNormal();
+                    __flowBranch22 = flighthq._internal._Async.flowNormal();
                   }
-                  return flighthq._internal._Async.continueFlow(__flowBranch14, function():Dynamic {
-                    var __flowBranch15:Dynamic;
+                  return flighthq._internal._Async.continueFlow(__flowBranch22, function():Dynamic {
+                    var __flowBranch23:Dynamic;
                     if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                      __flowBranch15 = flighthq._internal._Async.protect(function():Dynamic {
+                      __flowBranch23 = flighthq._internal._Async.protect(function():Dynamic {
                         return flighthq._internal._Async.flowContinue();
                       });
                     } else {
-                      __flowBranch15 = flighthq._internal._Async.flowNormal();
+                      __flowBranch23 = flighthq._internal._Async.flowNormal();
                     }
-                    return flighthq._internal._Async.continueFlow(__flowBranch15, function():Dynamic {
+                    return flighthq._internal._Async.continueFlow(__flowBranch23, function():Dynamic {
                       _Runtime.callProperty(chunks, 'push', cast ([value] : Array<Dynamic>));
                       (loaded = cast ((loaded + _Runtime.field(value, 'byteLength')) : Dynamic));
                       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ phase: 'download', loaded: loaded, total: ((cast ((cast total : Float) >= (cast 0.0 : Float)) : Bool) ? (cast total : Dynamic) : (cast 0.0 : Dynamic)) }]]), 1);
@@ -264,23 +264,23 @@ class Net {
           var controller:flighthq._internal.dom.AbortController = cast _Runtime.UNDEFINED;
           var teardownAbort:Void->Void = cast _Runtime.UNDEFINED;
           controller = _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []);
-          teardownAbort = (cast Net._wireNetAbort__net((cast controller), (cast _Runtime.field(request, 'timeoutMs')), (cast ({ final __structural18 = options; __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { @:optional var signal:Null<flighthq._internal.dom.AbortSignal>; }).signal; }))) : Void->Void);
+          teardownAbort = (cast Net._wireNetAbort__net(({ final __callArgument26:Dynamic = controller; __callArgument26; }), _Runtime.field(request, 'timeoutMs'), ({ final __structural27 = options; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { @:optional var signal:Null<flighthq._internal.dom.AbortSignal>; }).signal; })) : Void->Void);
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.finalizeFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var response:flighthq._internal.dom.Response = cast _Runtime.UNDEFINED;
             var headers:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
             var body:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('fetch'), cast ([_Runtime.field(request, 'url'), (cast Net._toNetFetchInit__net((cast request), (cast (cast controller : flighthq._internal.dom.AbortController).signal)) : flighthq._internal.dom.RequestInit)] : Array<Dynamic>)), function(__awaitValue19:Dynamic):Dynamic {
-              response = __awaitValue19;
-              headers = (cast Net._readNetResponseHeaders__net((cast (cast response : flighthq._internal.dom.Response).headers)) : flighthq._internal._Record<String, String>);
-              return flighthq._internal._Async.flatMap((cast Net._readNetResponseBody__net((cast response), (cast _Runtime.coalesce(_Runtime.field(request, 'responseType'), function():Dynamic return cast 'text')), (cast ({ final __structural21 = options; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { @:optional var progress:Null<Signal<NetProgress->Void>>; }).progress; }))) : flighthq._internal._Promise<flighthq._internal._Any>), function(__awaitValue20:Dynamic):Dynamic {
-                body = __awaitValue20;
+            return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('fetch'), cast ([_Runtime.field(request, 'url'), (cast Net._toNetFetchInit__net(({ final __callArgument33:Dynamic = request; __callArgument33; }), (cast controller : flighthq._internal.dom.AbortController).signal) : flighthq._internal.dom.RequestInit)] : Array<Dynamic>)), function(__awaitValue28:Dynamic):Dynamic {
+              response = __awaitValue28;
+              headers = (cast Net._readNetResponseHeaders__net((cast response : flighthq._internal.dom.Response).headers) : flighthq._internal._Record<String, String>);
+              return flighthq._internal._Async.flatMap((cast Net._readNetResponseBody__net(({ final __callArgument30:Dynamic = response; __callArgument30; }), ({ final __callArgument31:Dynamic = _Runtime.coalesce(_Runtime.field(request, 'responseType'), function():Dynamic return cast 'text'); __callArgument31; }), ({ final __structural32 = options; __structural32 == null ? _Runtime.UNDEFINED : (cast __structural32 : { @:optional var progress:Null<Signal<NetProgress->Void>>; }).progress; })) : flighthq._internal._Promise<flighthq._internal._Any>), function(__awaitValue29:Dynamic):Dynamic {
+                body = __awaitValue29;
                 return flighthq._internal._Async.flowReturn({ status: (cast response : flighthq._internal.dom.Response).status, statusText: (cast response : flighthq._internal.dom.Response).statusText, ok: (cast response : flighthq._internal.dom.Response).ok, headers: headers, body: body, url: ((cast !_Runtime.strictEquals((cast response : flighthq._internal.dom.Response).url, '') : Bool) ? (cast (cast response : flighthq._internal.dom.Response).url : Dynamic) : (cast _Runtime.field(request, 'url') : Dynamic)) });
               });
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var error:Dynamic = __caughtError;
             return flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flowReturn((cast Net._netTransportFailure__net((cast _Runtime.field(request, 'url') : String), (cast (cast controller : flighthq._internal.dom.AbortController).signal), (cast error : flighthq._internal._Any)) : NetResponse));
+              return flighthq._internal._Async.flowReturn((cast Net._netTransportFailure__net((cast _Runtime.field(request, 'url') : String), (cast controller : flighthq._internal.dom.AbortController).signal, (cast error : flighthq._internal._Any)) : NetResponse));
             });
           }), function():Dynamic {
             teardownAbort();
@@ -302,7 +302,7 @@ class Net {
   }
 
   public static function sendNetRequest(request:NetRequest, ?options:NetRequestOptions):flighthq._internal._Promise<NetResponse> {
-    return cast (cast (cast getNetBackend() : NetBackend) : NetBackend).sendNetRequest((cast request), (cast options));
+    return cast (cast (cast getNetBackend() : NetBackend) : NetBackend).sendNetRequest(({ final __callArgument34:Dynamic = request; __callArgument34; }), ({ final __callArgument35:Dynamic = options; __callArgument35; }));
     return cast null;
   }
 

@@ -11,19 +11,19 @@ import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
 class CanvasRenderEffectRegistry {
   @:noCompletion
   public static function getCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Null<CanvasRenderEffectRunner> {
-    return cast _Runtime.coalesce(({ final __collection0:Dynamic = (cast (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasRenderEffectRegistry; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, CanvasRenderEffectRunner>).get(kind)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection2:Dynamic = (cast (cast getCanvasRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasRenderEffectRegistry; __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map<String, CanvasRenderEffectRunner>).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
   public static function hasCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Bool {
-    return cast _Runtime.coalesce(({ final __collection1:Dynamic = (cast (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasRenderEffectRegistry; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, CanvasRenderEffectRunner>).has(kind)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection5:Dynamic = (cast (cast getCanvasRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasRenderEffectRegistry; __collection5 == null ? _Runtime.UNDEFINED : ((cast __collection5 : flighthq._internal._Map<String, CanvasRenderEffectRunner>).has(kind)); }), function():Dynamic return cast false);
     return cast null;
   }
 
   public static function registerCanvasRenderEffect(state:CanvasRenderState, kind:String, runner:CanvasRenderEffectRunner):Void {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime);
-    ((cast ({ final __nullishOwner4 = runtime; final __nullishValue5:Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>> = cast (cast __nullishOwner4 : CanvasRenderStateRuntime).canvasRenderEffectRegistry; __nullishValue5 == null ? ((cast __nullishOwner4 : CanvasRenderStateRuntime).canvasRenderEffectRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>>)) : (cast __nullishValue5 : Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast runner)));
+    runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : CanvasRenderStateRuntime);
+    ((cast ({ final __nullishOwner9 = runtime; final __nullishValue10:Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>> = cast (cast __nullishOwner9 : CanvasRenderStateRuntime).canvasRenderEffectRegistry; __nullishValue10 == null ? ((cast __nullishOwner9 : CanvasRenderStateRuntime).canvasRenderEffectRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>>)) : (cast __nullishValue10 : Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast runner)));
   }
 }

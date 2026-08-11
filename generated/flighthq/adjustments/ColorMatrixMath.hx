@@ -30,7 +30,7 @@ class ColorMatrixMath {
   }
 
   public static function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void {
-    (cast multiplyColorMatrix((cast target), (cast source), (cast target)) : Array<Float>);
+    (cast multiplyColorMatrix(({ final __callArgument0:Dynamic = target; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = target; __callArgument2; })) : Array<Float>);
   }
 
   public static function createBrightnessColorMatrix(amount:Float):Array<Float> {
@@ -202,7 +202,7 @@ class ColorMatrixMath {
     {
       var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(matrices, 'length') : Float)) : Bool)) {
-        (cast multiplyColorMatrix((cast flighthq._internal._StaticIndex.readArray(matrices, i)), (cast out), (cast out)) : Array<Float>);
+        (cast multiplyColorMatrix(flighthq._internal._StaticIndex.readArray(matrices, i), ({ final __callArgument3:Dynamic = out; __callArgument3; }), ({ final __callArgument4:Dynamic = out; __callArgument4; })) : Array<Float>);
         i++;
       }
     }

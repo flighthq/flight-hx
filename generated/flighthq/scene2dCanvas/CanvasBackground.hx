@@ -12,7 +12,7 @@ import flighthq.types._internal._BlendModeValues.BlendModeValue;
 class CanvasBackground {
   public static function renderCanvasBackground(state:CanvasRenderState):Void {
     flighthq._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'globalCompositeOperation', 'source-over');
-    ((cast (cast getCanvasRenderStateRuntime((cast state)) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).currentBlendMode = (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal);
+    ((cast (cast getCanvasRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).currentBlendMode = (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal);
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'globalAlpha', 1.0);
     if ((cast !_Runtime.strictEquals((_Runtime.toInt32((cast state : CanvasRenderState).backgroundColor) & 255), 0.0) : Bool)) {

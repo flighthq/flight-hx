@@ -26,7 +26,7 @@ class CanvasScanlinesEffect {
     var channel:Float = cast _Runtime.UNDEFINED;
     count = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'count'), function():Dynamic return cast 240.0)));
     intensity = HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.3)));
-    drawCanvasEffectPass((cast dest), (cast source), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    drawCanvasEffectPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     ctx = _Runtime.field(dest, 'context');
     w = _Runtime.field(dest, 'width');
     h = _Runtime.field(dest, 'height');
@@ -50,10 +50,10 @@ class CanvasScanlinesEffect {
   }
 
   public static final defaultCanvasScanlinesEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyScanlinesEffectToCanvas((cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : ScanlinesEffect)));
+    applyScanlinesEffectToCanvas(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ScanlinesEffect));
   });
 
   public static function registerCanvasScanlinesEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect((cast state), (cast 'ScanlinesEffect' : String), (cast defaultCanvasScanlinesEffectRunner));
+    registerCanvasRenderEffect(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast 'ScanlinesEffect' : String), ({ final __callArgument3:Dynamic = defaultCanvasScanlinesEffectRunner; __callArgument3; }));
   }
 }

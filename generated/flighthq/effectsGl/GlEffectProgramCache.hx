@@ -20,7 +20,7 @@ class GlEffectProgramCache {
     }
     existing = ((cast cache : flighthq._internal._Map<String, GlFullscreenProgram>).get(key));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
-    compiled = (cast compileGlFullscreenProgram((cast (cast state : GlRenderState).gl), (cast fragmentSource : String)) : GlFullscreenProgram);
+    compiled = (cast compileGlFullscreenProgram((cast state : GlRenderState).gl, (cast fragmentSource : String)) : GlFullscreenProgram);
     ((cast cache : flighthq._internal._Map<String, GlFullscreenProgram>).set(key, (cast compiled)));
     return cast compiled;
     return cast null;

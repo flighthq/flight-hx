@@ -26,12 +26,12 @@ class ExplainPhysics2DStep {
     var velocityIterationsValid:Bool = cast _Runtime.UNDEFINED;
     var positionIterationsValid:Bool = cast _Runtime.UNDEFINED;
     var ready:Bool = cast _Runtime.UNDEFINED;
-    bodyStateValid = (cast isPhysics2DBodyStateValid((cast world)) : Bool);
-    contactStateValid = (cast isPhysics2DContactStateValid((cast world)) : Bool);
-    gravityValid = (cast isPhysics2DGravityValid((cast world)) : Bool);
-    jointStateValid = (cast isPhysics2DJointStateValid((cast world)) : Bool);
-    previousTimestepValid = (cast isPhysics2DPreviousTimestepValid((cast world)) : Bool);
-    solverConfigValid = (cast isPhysics2DSolverConfigValid((cast _Runtime.field(world, 'config'))) : Bool);
+    bodyStateValid = (cast isPhysics2DBodyStateValid(({ final __callArgument0:Dynamic = world; __callArgument0; })) : Bool);
+    contactStateValid = (cast isPhysics2DContactStateValid(({ final __callArgument1:Dynamic = world; __callArgument1; })) : Bool);
+    gravityValid = (cast isPhysics2DGravityValid(({ final __callArgument2:Dynamic = world; __callArgument2; })) : Bool);
+    jointStateValid = (cast isPhysics2DJointStateValid(({ final __callArgument3:Dynamic = world; __callArgument3; })) : Bool);
+    previousTimestepValid = (cast isPhysics2DPreviousTimestepValid(({ final __callArgument4:Dynamic = world; __callArgument4; })) : Bool);
+    solverConfigValid = (cast isPhysics2DSolverConfigValid(_Runtime.field(world, 'config')) : Bool);
     timestepValid = (cast isPhysics2DTimestepValid((cast dt : Float)) : Bool);
     velocityIterationsValid = ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([(cast _Runtime.field(world, 'config') : Physics2DSolverConfig).velocityIterations] : Array<Dynamic>)) : Bool) && (cast ((cast (cast _Runtime.field(world, 'config') : Physics2DSolverConfig).velocityIterations : Float) >= (cast 0.0 : Float)) : Bool));
     positionIterationsValid = ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([(cast _Runtime.field(world, 'config') : Physics2DSolverConfig).positionIterations] : Array<Dynamic>)) : Bool) && (cast ((cast (cast _Runtime.field(world, 'config') : Physics2DSolverConfig).positionIterations : Float) >= (cast 0.0 : Float)) : Bool));

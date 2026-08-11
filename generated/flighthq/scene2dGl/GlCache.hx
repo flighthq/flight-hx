@@ -42,27 +42,27 @@ import flighthq.types.Scene2DRenderer;
 class GlCache {
   public static function createGlCacheState(screenState:GlRenderState):GlRenderState {
     var cacheState:GlRenderState = cast _Runtime.UNDEFINED;
-    cacheState = (cast createGlOffscreenRenderState((cast screenState)) : GlRenderState);
+    cacheState = (cast createGlOffscreenRenderState(({ final __callArgument0:Dynamic = screenState; __callArgument0; })) : GlRenderState);
     ((cast GlCache._cacheStateScreen__glCache : flighthq._internal._WeakMap<GlRenderState, GlRenderState>).set(cacheState, (cast screenState)));
     return cast cacheState;
     return cast null;
   }
 
   public static function enableGlRenderCache(state:GlRenderState):Void {
-    registerRenderCacheRenderer((cast state), (cast defaultGlRenderCacheRenderer));
+    registerRenderCacheRenderer(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = defaultGlRenderCacheRenderer; __callArgument2; }));
   }
 
   @:noCompletion
   public static function ensureGlRenderCacheTarget(state:GlRenderState, cache:RenderCache, width:Float, height:Float):GlRenderTarget {
     var targets:flighthq._internal._WeakMap<RenderCache, GlRenderTarget> = cast _Runtime.UNDEFINED;
     var target:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
-    targets = (cast GlCache.getTargets__glCache((cast state)) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>);
+    targets = (cast GlCache.getTargets__glCache(({ final __callArgument3:Dynamic = state; __callArgument3; })) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>);
     target = ((cast targets : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (target = cast ((cast createGlRenderTarget((cast state), (cast { width: width, height: height })) : GlRenderTarget) : Dynamic));
+      (target = cast ((cast createGlRenderTarget(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = { width: width, height: height }; __callArgument5; })) : GlRenderTarget) : Dynamic));
       ((cast targets : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).set(cache, (cast target)));
     } else {
-      resizeGlRenderTarget((cast state), (cast target), (cast width : Float), (cast height : Float));
+      resizeGlRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = target; __callArgument7; }), (cast width : Float), (cast height : Float));
     }
     return cast target;
     return cast null;
@@ -76,7 +76,7 @@ class GlCache {
 
   @:noCompletion
   public static function getGlRenderCacheTarget(state:GlRenderState, cache:RenderCache):Null<GlRenderTarget> {
-    return cast _Runtime.coalesce(((cast (cast GlCache.getTargets__glCache((cast state)) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).get(cache)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast (cast GlCache.getTargets__glCache(({ final __callArgument9:Dynamic = state; __callArgument9; })) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).get(cache)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -92,39 +92,39 @@ class GlCache {
     var resized:Bool = cast _Runtime.UNDEFINED;
     var target:GlRenderTarget = cast _Runtime.UNDEFINED;
     var dirty:Bool = cast _Runtime.UNDEFINED;
-    screenState = (cast getGlRenderCacheScreenState((cast cacheState)) : GlRenderState);
-    padding = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.padding; }), function():Dynamic return cast 0.0);
-    minWidth = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.minWidth; }), function():Dynamic return cast 1.0);
-    minHeight = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.minHeight; }), function():Dynamic return cast 1.0);
-    computeNodeRootLocalBoundsRectangle((cast GlCache._bounds__glCache), (cast source));
-    __destructure0 = (cast computeRenderTargetSize((cast GlCache._bounds__glCache), (cast padding), (cast minWidth : Float), (cast minHeight : Float)) : { var width:Float; var height:Float; });
+    screenState = (cast getGlRenderCacheScreenState(({ final __callArgument10:Dynamic = cacheState; __callArgument10; })) : GlRenderState);
+    padding = _Runtime.coalesce(({ final __typedStruct11 = options; __typedStruct11 == null ? _Runtime.UNDEFINED : __typedStruct11.padding; }), function():Dynamic return cast 0.0);
+    minWidth = _Runtime.coalesce(({ final __typedStruct12 = options; __typedStruct12 == null ? _Runtime.UNDEFINED : __typedStruct12.minWidth; }), function():Dynamic return cast 1.0);
+    minHeight = _Runtime.coalesce(({ final __typedStruct13 = options; __typedStruct13 == null ? _Runtime.UNDEFINED : __typedStruct13.minHeight; }), function():Dynamic return cast 1.0);
+    computeNodeRootLocalBoundsRectangle(({ final __callArgument14:Dynamic = GlCache._bounds__glCache; __callArgument14; }), (cast source : Dynamic));
+    __destructure0 = (cast computeRenderTargetSize(({ final __callArgument15:Dynamic = GlCache._bounds__glCache; __callArgument15; }), (cast padding : Dynamic), (cast minWidth : Float), (cast minHeight : Float)) : { var width:Float; var height:Float; });
     width = _Runtime.field(__destructure0, 'width');
     height = _Runtime.field(__destructure0, 'height');
-    existing = (cast getGlRenderCacheTarget((cast screenState), (cast cache)) : Null<GlRenderTarget>);
+    existing = (cast getGlRenderCacheTarget(({ final __callArgument16:Dynamic = screenState; __callArgument16; }), ({ final __callArgument17:Dynamic = cache; __callArgument17; })) : Null<GlRenderTarget>);
     resized = ((cast ((cast _Runtime.strictEquals(existing, null) : Bool) || (cast !_Runtime.strictEquals((cast existing : GlRenderTarget).width, width) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast existing : GlRenderTarget).height, height) : Bool));
-    target = (cast ensureGlRenderCacheTarget((cast screenState), (cast cache), (cast width : Float), (cast height : Float)) : GlRenderTarget);
-    computeScene2DRenderTargetTransform((cast GlCache._renderTransform__glCache), (cast source), (cast GlCache._bounds__glCache), (cast padding : Float), (cast padding : Float));
-    computeRenderCacheTransform((cast (cast cache : RenderCache).transform), (cast GlCache._bounds__glCache), (cast padding : Float), (cast padding : Float));
-    beginGlRenderPass((cast cacheState), (cast target), (cast { preserveColor: true, preserveDepth: true }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    target = (cast ensureGlRenderCacheTarget(({ final __callArgument18:Dynamic = screenState; __callArgument18; }), ({ final __callArgument19:Dynamic = cache; __callArgument19; }), (cast width : Float), (cast height : Float)) : GlRenderTarget);
+    computeScene2DRenderTargetTransform(({ final __callArgument20:Dynamic = GlCache._renderTransform__glCache; __callArgument20; }), ({ final __callArgument21:Dynamic = source; __callArgument21; }), ({ final __callArgument22:Dynamic = GlCache._bounds__glCache; __callArgument22; }), (cast padding : Float), (cast padding : Float));
+    computeRenderCacheTransform(({ final __callArgument23:Dynamic = (cast cache : RenderCache).transform; __callArgument23; }), ({ final __callArgument24:Dynamic = GlCache._bounds__glCache; __callArgument24; }), (cast padding : Float), (cast padding : Float));
+    beginGlRenderPass(({ final __callArgument25:Dynamic = cacheState; __callArgument25; }), ({ final __callArgument26:Dynamic = target; __callArgument26; }), (cast { preserveColor: true, preserveDepth: true } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     dirty = false;
     try {
       try {
-        setGlRenderTransform2D((cast cacheState), (cast GlCache._renderTransform__glCache));
-        (dirty = cast ((cast prepareScene2DRender((cast cacheState), (cast source)) : Bool) : Dynamic));
+        setGlRenderTransform2D(({ final __callArgument27:Dynamic = cacheState; __callArgument27; }), ({ final __callArgument28:Dynamic = GlCache._renderTransform__glCache; __callArgument28; }));
+        (dirty = cast ((cast prepareScene2DRender(({ final __callArgument29:Dynamic = cacheState; __callArgument29; }), ({ final __callArgument30:Dynamic = source; __callArgument30; })) : Bool) : Dynamic));
         if ((cast ((cast dirty : Bool) || (cast resized : Bool)) : Bool)) {
           flighthq._internal.backend.WebGl2Backend.clearColor((cast cacheState : GlRenderState).gl, 0.0, 0.0, 0.0, 0.0);
           flighthq._internal.backend.WebGl2Backend.clear((cast cacheState : GlRenderState).gl, flighthq._internal.backend.WebGl2Backend.contextConstant((cast cacheState : GlRenderState).gl, 'COLOR_BUFFER_BIT', flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT));
-          renderGlScene2D((cast cacheState), (cast source));
+          renderGlScene2D(({ final __callArgument31:Dynamic = cacheState; __callArgument31; }), ({ final __callArgument32:Dynamic = source; __callArgument32; }));
         }
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError3:Dynamic) {
+    } catch (__finallyError33:Dynamic) {
       {
-        endGlRenderPass((cast cacheState));
+        endGlRenderPass(({ final __callArgument34:Dynamic = cacheState; __callArgument34; }));
       }
-      _Runtime.throwValue(__finallyError3);
+      _Runtime.throwValue(__finallyError33);
     }
     {
-      endGlRenderPass((cast cacheState));
+      endGlRenderPass(({ final __callArgument35:Dynamic = cacheState; __callArgument35; }));
     }
     return cast ((cast dirty : Bool) || (cast resized : Bool));
     return cast null;
@@ -134,22 +134,22 @@ class GlCache {
   public static function releaseGlRenderCache(state:GlRenderState, cache:RenderCache):Void {
     var targets:flighthq._internal._WeakMap<RenderCache, GlRenderTarget> = cast _Runtime.UNDEFINED;
     var target:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
-    targets = (cast GlCache.getTargets__glCache((cast state)) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>);
+    targets = (cast GlCache.getTargets__glCache(({ final __callArgument36:Dynamic = state; __callArgument36; })) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>);
     target = ((cast targets : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    destroyGlRenderTarget((cast state), (cast target));
+    destroyGlRenderTarget(({ final __callArgument37:Dynamic = state; __callArgument37; }), ({ final __callArgument38:Dynamic = target; __callArgument38; }));
     ((cast targets : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).delete_(cache));
   }
 
   public static function drawGlRenderCache__glCache(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var cache:Null<RenderCache> = cast _Runtime.UNDEFINED;
     var target:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
-    cache = (cast getRenderProxyCache((cast state), (cast (cast renderProxy : RenderProxy2D).source)) : Null<RenderCache>);
+    cache = (cast getRenderProxyCache(({ final __callArgument39:Dynamic = state; __callArgument39; }), (cast renderProxy : RenderProxy2D).source) : Null<RenderCache>);
     if ((cast _Runtime.strictEquals(cache, null) : Bool)) { return; }
-    target = ((cast (cast GlCache.getTargets__glCache((cast state)) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).get(cache));
+    target = ((cast (cast GlCache.getTargets__glCache(({ final __callArgument41:Dynamic = state; __callArgument41; })) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    flushGlQuadBatchWriter((cast state));
-    drawGlRenderTargetResult((cast state), (cast renderProxy), (cast target), (cast GlCache._identity__glCache));
+    flushGlQuadBatchWriter(({ final __callArgument42:Dynamic = state; __callArgument42; }));
+    drawGlRenderTargetResult(({ final __callArgument43:Dynamic = state; __callArgument43; }), ({ final __callArgument44:Dynamic = renderProxy; __callArgument44; }), ({ final __callArgument45:Dynamic = target; __callArgument45; }), ({ final __callArgument46:Dynamic = GlCache._identity__glCache; __callArgument46; }));
   }
 
   public static function getTargets__glCache(state:GlRenderState):flighthq._internal._WeakMap<RenderCache, GlRenderTarget> {
@@ -170,9 +170,9 @@ class GlCache {
 
   public static final _cacheStateScreen__glCache:flighthq._internal._WeakMap<GlRenderState, GlRenderState> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _bounds__glCache:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
+  public static final _bounds__glCache:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);
 
-  public static final _renderTransform__glCache:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
+  public static final _renderTransform__glCache:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix);
 
-  public static final _identity__glCache:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
+  public static final _identity__glCache:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix);
 }

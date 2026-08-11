@@ -62,10 +62,10 @@ class Shared {
     var resource:Null<EmbeddedImageResourceReference> = cast _Runtime.UNDEFINED;
     resource = _Runtime.callOptionalProperty(resources, 'find', cast ([function(candidate:ImageResourceReference, __unused0:Float, __unused1:Array<ImageResourceReference>):Bool return ((cast ((cast _Runtime.strictEquals((cast candidate : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded) : Bool) && (cast _Runtime.strictEquals((cast candidate : { var bytes:flighthq._internal._UInt8Array; }).bytes, bytes) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast candidate : { var mimeType:Null<String>; }).mimeType, mimeType) : Bool))] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(resource, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (resource = cast ((cast createEmbeddedImageResourceReference((cast bytes), (cast mimeType)) : EmbeddedImageResourceReference) : Dynamic));
+      (resource = cast ((cast createEmbeddedImageResourceReference(({ final __callArgument0:Dynamic = bytes; __callArgument0; }), ({ final __callArgument1:Dynamic = mimeType; __callArgument1; })) : EmbeddedImageResourceReference) : Dynamic));
       _Runtime.callOptionalProperty(resources, 'push', cast ([resource] : Array<Dynamic>));
     }
-    return cast (cast createTexture((cast { resource: resource })) : Texture2D);
+    return cast (cast createTexture(({ final __callArgument2:Dynamic = { resource: resource }; __callArgument2; })) : Texture2D);
     return cast null;
   }
 
@@ -74,10 +74,10 @@ class Shared {
     var resource:Null<ExternalImageResourceReference> = cast _Runtime.UNDEFINED;
     resource = _Runtime.callOptionalProperty(resources, 'find', cast ([function(candidate:ImageResourceReference, __unused2:Float, __unused3:Array<ImageResourceReference>):Bool return ((cast ((cast _Runtime.strictEquals((cast candidate : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).External) : Bool) && (cast _Runtime.strictEquals((cast candidate : { var uri:String; }).uri, uri) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast candidate : { var basePath:Null<String>; }).basePath, basePath) : Bool))] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(resource, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (resource = cast ((cast createExternalImageResourceReference((cast uri : String), (cast basePath)) : ExternalImageResourceReference) : Dynamic));
+      (resource = cast ((cast createExternalImageResourceReference((cast uri : String), ({ final __callArgument3:Dynamic = basePath; __callArgument3; })) : ExternalImageResourceReference) : Dynamic));
       _Runtime.callOptionalProperty(resources, 'push', cast ([resource] : Array<Dynamic>));
     }
-    return cast (cast createTexture((cast { resource: resource })) : Texture2D);
+    return cast (cast createTexture(({ final __callArgument4:Dynamic = { resource: resource }; __callArgument4; })) : Texture2D);
     return cast null;
   }
 

@@ -14,11 +14,11 @@ class ExplainCollisionTest {
     var statusA:Null<String> = cast _Runtime.UNDEFINED;
     var statusB:Null<String> = cast _Runtime.UNDEFINED;
     var overlapping:Bool = cast _Runtime.UNDEFINED;
-    statusA = (cast getCollisionShapeValidationStatus((cast a)) : Null<String>);
+    statusA = (cast getCollisionShapeValidationStatus(({ final __callArgument0:Dynamic = a; __callArgument0; })) : Null<String>);
     if ((cast !_Runtime.strictEquals(statusA, null) : Bool)) { return cast { kind: (cast a : { var kind:String; }).kind, overlapping: false, shapeIndex: 0.0, status: statusA }; }
-    statusB = (cast getCollisionShapeValidationStatus((cast b)) : Null<String>);
+    statusB = (cast getCollisionShapeValidationStatus(({ final __callArgument1:Dynamic = b; __callArgument1; })) : Null<String>);
     if ((cast !_Runtime.strictEquals(statusB, null) : Bool)) { return cast { kind: (cast b : { var kind:String; }).kind, overlapping: false, shapeIndex: 1.0, status: statusB }; }
-    overlapping = (cast testCollision((cast a), (cast b), (cast { depth: 0.0, normalX: 0.0, normalY: 0.0, overlapping: false })) : Bool);
+    overlapping = (cast testCollision(({ final __callArgument2:Dynamic = a; __callArgument2; }), ({ final __callArgument3:Dynamic = b; __callArgument3; }), ({ final __callArgument4:Dynamic = { depth: 0.0, normalX: 0.0, normalY: 0.0, overlapping: false }; __callArgument4; })) : Bool);
     return cast { kind: null, overlapping: overlapping, shapeIndex: null, status: ((cast overlapping : Bool) ? (cast 'overlapping' : Dynamic) : (cast 'separated' : Dynamic)) };
     return cast null;
   }

@@ -35,7 +35,7 @@ class LerpColor {
     g = (sg + ((eg - sg) * tc));
     b = (sb + ((eb - sb) * tc));
     a = (sa + ((ea - sa) * tc));
-    return cast (cast packLinearToColor((cast cast ([r, g, b, a] : Array<Dynamic>))) : Float);
+    return cast (cast packLinearToColor(({ final __callArgument0:Dynamic = cast ([r, g, b, a] : Array<Dynamic>); __callArgument0; })) : Float);
     return cast null;
   }
 

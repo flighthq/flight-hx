@@ -10,7 +10,7 @@ import flighthq.types.MorphShape.MorphShapeGradientEndpointReason;
 class ExplainMorphShapeGradientEndpoints {
   public static function explainMorphShapeGradientEndpoints(start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint):MorphShapeGradientEndpointExplanation {
     var issue:Float = cast _Runtime.UNDEFINED;
-    issue = (cast getMorphShapeGradientEndpointIssue((cast start), (cast end)) : Float);
+    issue = (cast getMorphShapeGradientEndpointIssue(({ final __callArgument0:Dynamic = start; __callArgument0; }), ({ final __callArgument1:Dynamic = end; __callArgument1; })) : Float);
     return cast { endStopCount: _Runtime.field(_Runtime.field(end, 'colors'), 'length'), reason: (cast ExplainMorphShapeGradientEndpoints.getReason__explainMorphShapeGradientEndpoints((cast issue : Float)) : MorphShapeGradientEndpointReason), startStopCount: _Runtime.field(_Runtime.field(start, 'colors'), 'length'), supported: _Runtime.strictEquals(issue, ExplainMorphShapeGradientEndpoints.GradientEndpointIssueNone__explainMorphShapeGradientEndpoints) };
     return cast null;
   }

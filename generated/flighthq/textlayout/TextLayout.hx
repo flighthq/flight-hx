@@ -73,12 +73,12 @@ class TextLayout {
       ((cast out : TextLayoutResult).textWidth = 0.0);
       return;
     }
-    getTextLineBreaks((cast TextLayout._lineBreaks__textLayout), (cast text : String));
+    getTextLineBreaks(({ final __callArgument0:Dynamic = TextLayout._lineBreaks__textLayout; __callArgument0; }), (cast text : String));
     ((cast TextLayout._paragraphLastLines__textLayout : flighthq._internal._Set<Float>).clear());
-    TextLayout.buildGroups__textLayout((cast (cast out : TextLayoutResult).groups), (cast TextLayout._paragraphLastLines__textLayout), (cast text : String), (cast formatRanges), (cast TextLayout._lineBreaks__textLayout), (cast width : Float), (cast measure), (cast wordWrap : Bool), (cast multiline : Bool), (cast maxLines : Float), (cast truncationCharacter : String));
-    TextLayout.writeLineMetrics__textLayout((cast out), (cast (cast out : TextLayoutResult).groups));
-    TextLayout.applyAlignment__textLayout((cast (cast out : TextLayoutResult).groups), (cast width : Float), (cast (cast out : TextLayoutResult).lineWidths), (cast direction), (cast justification), (cast TextLayout._paragraphLastLines__textLayout), (cast text : String));
-    TextLayout.applyVerticalAlignment__textLayout((cast (cast out : TextLayoutResult).groups), (cast (cast params : TextLayoutParams).height : Float), (cast (cast out : TextLayoutResult).textHeight : Float), (cast verticalAlign));
+    TextLayout.buildGroups__textLayout((cast out : TextLayoutResult).groups, ({ final __callArgument1:Dynamic = TextLayout._paragraphLastLines__textLayout; __callArgument1; }), (cast text : String), ({ final __callArgument2:Dynamic = formatRanges; __callArgument2; }), ({ final __callArgument3:Dynamic = TextLayout._lineBreaks__textLayout; __callArgument3; }), (cast width : Float), ({ final __callArgument4:Dynamic = measure; __callArgument4; }), (cast wordWrap : Bool), (cast multiline : Bool), (cast maxLines : Float), (cast truncationCharacter : String));
+    TextLayout.writeLineMetrics__textLayout(({ final __callArgument5:Dynamic = out; __callArgument5; }), (cast out : TextLayoutResult).groups);
+    TextLayout.applyAlignment__textLayout((cast out : TextLayoutResult).groups, (cast width : Float), (cast out : TextLayoutResult).lineWidths, ({ final __callArgument6:Dynamic = direction; __callArgument6; }), ({ final __callArgument7:Dynamic = justification; __callArgument7; }), ({ final __callArgument8:Dynamic = TextLayout._paragraphLastLines__textLayout; __callArgument8; }), (cast text : String));
+    TextLayout.applyVerticalAlignment__textLayout((cast out : TextLayoutResult).groups, (cast (cast params : TextLayoutParams).height : Float), (cast (cast out : TextLayoutResult).textHeight : Float), ({ final __callArgument9:Dynamic = verticalAlign; __callArgument9; }));
     _Runtime.voidValue(autoSize);
     _Runtime.voidValue(border);
   }
@@ -101,7 +101,7 @@ class TextLayout {
       var char:String = _Runtime.slice(text, i, (i + charLen));
       var advance:Float = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(char, '	') : Bool)) {
-        (advance = cast ((cast TextLayout.getTabAdvance__textLayout((cast currentX : Float), (cast tabStops), (cast measure), (cast format)) : Float) : Dynamic));
+        (advance = cast ((cast TextLayout.getTabAdvance__textLayout((cast currentX : Float), ({ final __callArgument10:Dynamic = tabStops; __callArgument10; }), ({ final __callArgument11:Dynamic = measure; __callArgument11; }), ({ final __callArgument12:Dynamic = format; __callArgument12; })) : Float) : Dynamic));
         _Runtime.callProperty(out, 'push', cast ([advance] : Array<Dynamic>));
         (currentX = cast ((currentX + advance) : Dynamic));
         (i = cast ((i + charLen) : Dynamic));
@@ -112,11 +112,11 @@ class TextLayout {
         var nextCp:Float = _Runtime.coalesce(_Runtime.codePointAt(text, nextStart), function():Dynamic return cast 0.0);
         var nextLen:Float = ((cast ((cast nextCp : Float) > (cast 65535.0 : Float)) : Bool) ? (cast 2.0 : Dynamic) : (cast 1.0 : Dynamic));
         var nextChar:String = _Runtime.slice(text, nextStart, (nextStart + nextLen));
-        var nextW:Float = (cast measure((cast nextChar : String), (cast format)) : Float);
-        var pairW:Float = (cast measure((cast (char + nextChar) : String), (cast format)) : Float);
+        var nextW:Float = (cast measure((cast nextChar : String), ({ final __callArgument13:Dynamic = format; __callArgument13; })) : Float);
+        var pairW:Float = (cast measure((cast (char + nextChar) : String), ({ final __callArgument14:Dynamic = format; __callArgument14; })) : Float);
         (advance = cast ((pairW - nextW) : Dynamic));
       } else {
-        (advance = cast ((cast measure((cast char : String), (cast format)) : Float) : Dynamic));
+        (advance = cast ((cast measure((cast char : String), ({ final __callArgument15:Dynamic = format; __callArgument15; })) : Float) : Dynamic));
       }
       _Runtime.callProperty(out, 'push', cast ([(advance + letterSpacing)] : Array<Dynamic>));
       (currentX = cast ((currentX + (advance + letterSpacing)) : Dynamic));
@@ -142,7 +142,7 @@ class TextLayout {
         if ((cast ((cast stop : Float) > (cast currentX : Float)) : Bool)) { return cast (stop - currentX); }
       }
     }
-    spaceW = ((cast measure((cast '    ' : String), (cast format)) : Float) / 4.0);
+    spaceW = ((cast measure((cast '    ' : String), ({ final __callArgument20:Dynamic = format; __callArgument20; })) : Float) / 4.0);
     tabW = _Runtime.multiplyNumbers(HxMath.max(spaceW, 1.0), 4.0);
     return cast (tabW - _Runtime.fmod(currentX, tabW));
     return cast null;
@@ -195,9 +195,9 @@ class TextLayout {
       return cast _Runtime.UNDEFINED;
     });
     updateLineMetrics = (cast function updateLineMetrics():Void {
-      (ascent = cast ((cast getTextFormatAscent((cast currentFormat)) : Float) : Dynamic));
-      (descent = cast ((cast getTextFormatDescent((cast currentFormat)) : Float) : Dynamic));
-      (leading = cast ((cast getTextFormatLeading((cast currentFormat)) : Float) : Dynamic));
+      (ascent = cast ((cast getTextFormatAscent(({ final __callArgument21:Dynamic = currentFormat; __callArgument21; })) : Float) : Dynamic));
+      (descent = cast ((cast getTextFormatDescent(({ final __callArgument22:Dynamic = currentFormat; __callArgument22; })) : Float) : Dynamic));
+      (leading = cast ((cast getTextFormatLeading(({ final __callArgument23:Dynamic = currentFormat; __callArgument23; })) : Float) : Dynamic));
       (lineHeight = cast (HxMath.ceil(((ascent + descent) + leading)) : Dynamic));
       if ((cast ((cast lineHeight : Float) > (cast maxLineHeight : Float)) : Bool)) { (maxLineHeight = cast (lineHeight : Dynamic)); }
       if ((cast ((cast ascent : Float) > (cast maxAscent : Float)) : Bool)) { (maxAscent = cast (ascent : Dynamic)); }
@@ -214,7 +214,7 @@ class TextLayout {
       if ((cast ((cast rangeIndex : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(formatRanges, 'length'), 1.0) : Float)) : Bool)) {
         rangeIndex++;
         (formatRange = cast (flighthq._internal._StaticIndex.readArray(formatRanges, rangeIndex) : Dynamic));
-        (currentFormat = cast ((cast mergeTextFormat((cast currentFormat), (cast (cast formatRange : TextFormatRange).format)) : TextFormat) : Dynamic));
+        (currentFormat = cast ((cast mergeTextFormat(({ final __callArgument24:Dynamic = currentFormat; __callArgument24; }), (cast formatRange : TextFormatRange).format) : TextFormat) : Dynamic));
         return cast true;
       }
       return cast false;
@@ -257,17 +257,17 @@ class TextLayout {
           }
         }
         if ((cast !_Runtime.strictEquals(lastGroup, null) : Bool)) {
-          var ellipsisW:Float = (cast measure((cast truncationCharacter : String), (cast (cast lastGroup : TextLayoutGroup).format)) : Float);
+          var ellipsisW:Float = (cast measure((cast truncationCharacter : String), (cast lastGroup : TextLayoutGroup).format) : Float);
           var available:Float = (((containerWidth - TEXT_LAYOUT_GUTTER) - rightMargin) - (cast lastGroup : TextLayoutGroup).offsetX);
           while ((cast ((cast _Runtime.field((cast lastGroup : TextLayoutGroup).positions, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-            var usedW:Float = (cast TextLayout.sumAdvances__textLayout((cast (cast lastGroup : TextLayoutGroup).positions)) : Float);
+            var usedW:Float = (cast TextLayout.sumAdvances__textLayout((cast lastGroup : TextLayoutGroup).positions) : Float);
             if ((cast ((cast (usedW + ellipsisW) : Float) <= (cast available : Float)) : Bool)) { break; }
             var trimmed:Float = _Runtime.coalesce(_Runtime.callProperty((cast lastGroup : TextLayoutGroup).positions, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast 0.0);
             ((cast lastGroup : TextLayoutGroup).width -= trimmed);
             (cast lastGroup : TextLayoutGroup).endIndex--;
             if ((cast ((cast (cast lastGroup : TextLayoutGroup).endIndex : Float) <= (cast (cast lastGroup : TextLayoutGroup).startIndex : Float)) : Bool)) { break; }
           }
-          var ellipsisGroup:TextLayoutGroup = (cast createTextLayoutGroup((cast (cast lastGroup : TextLayoutGroup).format), (cast (cast lastGroup : TextLayoutGroup).endIndex : Float), (cast (cast lastGroup : TextLayoutGroup).endIndex : Float)) : TextLayoutGroup);
+          var ellipsisGroup:TextLayoutGroup = (cast createTextLayoutGroup((cast lastGroup : TextLayoutGroup).format, (cast (cast lastGroup : TextLayoutGroup).endIndex : Float), (cast (cast lastGroup : TextLayoutGroup).endIndex : Float)) : TextLayoutGroup);
           var ellipsisOffsetX:Float = ((cast lastGroup : TextLayoutGroup).offsetX + (cast lastGroup : TextLayoutGroup).width);
           ((cast ellipsisGroup : TextLayoutGroup).positions = cast ([ellipsisW] : Array<Dynamic>));
           ((cast ellipsisGroup : TextLayoutGroup).width = ellipsisW);
@@ -291,11 +291,11 @@ class TextLayout {
       if ((cast !(cast bulletPending : Bool) : Bool)) { return; }
       (bulletPending = cast (false : Dynamic));
       if ((cast _Runtime.strictEquals((cast currentFormat : TextFormat).listMarker, 'none') : Bool)) {
-        if ((cast ((cast indent : Float) <= (cast 0.0 : Float)) : Bool)) { (indent = cast (_Runtime.addNumbers(HxMath.ceil((cast measure((cast bulletChar : String), (cast currentFormat)) : Float)), 2.0) : Dynamic)); }
+        if ((cast ((cast indent : Float) <= (cast 0.0 : Float)) : Bool)) { (indent = cast (_Runtime.addNumbers(HxMath.ceil((cast measure((cast bulletChar : String), ({ final __callArgument25:Dynamic = currentFormat; __callArgument25; })) : Float)), 2.0) : Dynamic)); }
         return;
       }
-      bulletW = (cast measure((cast bulletChar : String), (cast currentFormat)) : Float);
-      bulletGroup = (cast createTextLayoutGroup((cast currentFormat), (cast textIndex : Float), (cast textIndex : Float)) : TextLayoutGroup);
+      bulletW = (cast measure((cast bulletChar : String), ({ final __callArgument26:Dynamic = currentFormat; __callArgument26; })) : Float);
+      bulletGroup = (cast createTextLayoutGroup(({ final __callArgument27:Dynamic = currentFormat; __callArgument27; }), (cast textIndex : Float), (cast textIndex : Float)) : TextLayoutGroup);
       ((cast bulletGroup : TextLayoutGroup).positions = cast ([bulletW] : Array<Dynamic>));
       ((cast bulletGroup : TextLayoutGroup).width = bulletW);
       ((cast bulletGroup : TextLayoutGroup).offsetX = ((TEXT_LAYOUT_GUTTER + leftMargin) + blockIndent));
@@ -317,15 +317,15 @@ class TextLayout {
         var rangeEnd:Float = HxMath.min(end, (cast formatRange : TextFormatRange).end);
         if ((cast ((cast idx : Float) < (cast rangeEnd : Float)) : Bool)) {
           if ((cast ((cast _Runtime.strictEquals(activeGroup, null) : Bool) || (cast !_Runtime.strictEquals((cast activeGroup : TextLayoutGroup).startIndex, (cast activeGroup : TextLayoutGroup).endIndex) : Bool)) : Bool)) {
-            (activeGroup = cast ((cast createTextLayoutGroup((cast (cast formatRange : TextFormatRange).format), (cast idx : Float), (cast rangeEnd : Float)) : TextLayoutGroup) : Dynamic));
+            (activeGroup = cast ((cast createTextLayoutGroup((cast formatRange : TextFormatRange).format, (cast idx : Float), (cast rangeEnd : Float)) : TextLayoutGroup) : Dynamic));
             _Runtime.callProperty(groups, 'push', cast ([activeGroup] : Array<Dynamic>));
           } else {
             ((cast activeGroup : TextLayoutGroup).format = (cast formatRange : TextFormatRange).format);
             ((cast activeGroup : TextLayoutGroup).startIndex = idx);
             ((cast activeGroup : TextLayoutGroup).endIndex = rangeEnd);
           }
-          TextLayout.charAdvances__textLayout((cast (cast activeGroup : TextLayoutGroup).positions), (cast text : String), (cast currentFormat), (cast idx : Float), (cast rangeEnd : Float), (cast measure), (cast (offsetX + (cast baseX() : Float)) : Float));
-          var spanWidth:Float = (cast TextLayout.sumAdvances__textLayout((cast (cast activeGroup : TextLayoutGroup).positions)) : Float);
+          TextLayout.charAdvances__textLayout((cast activeGroup : TextLayoutGroup).positions, (cast text : String), ({ final __callArgument28:Dynamic = currentFormat; __callArgument28; }), (cast idx : Float), (cast rangeEnd : Float), ({ final __callArgument29:Dynamic = measure; __callArgument29; }), (cast (offsetX + (cast baseX() : Float)) : Float));
+          var spanWidth:Float = (cast TextLayout.sumAdvances__textLayout((cast activeGroup : TextLayoutGroup).positions) : Float);
           ((cast activeGroup : TextLayoutGroup).offsetX = (offsetX + (cast baseX() : Float)));
           ((cast activeGroup : TextLayoutGroup).ascent = ascent);
           ((cast activeGroup : TextLayoutGroup).descent = descent);
@@ -362,7 +362,7 @@ class TextLayout {
       while ((cast ((cast idx : Float) < (cast end : Float)) : Bool)) {
         var rangeEnd:Float = HxMath.min(end, (cast formatRange : TextFormatRange).end);
         if ((cast ((cast idx : Float) < (cast rangeEnd : Float)) : Bool)) {
-          TextLayout.charAdvances__textLayout((cast TextLayout._charAdvances__textLayout), (cast text : String), (cast currentFormat), (cast idx : Float), (cast rangeEnd : Float), (cast measure), (cast ((offsetX + (cast baseX() : Float)) + (cast TextLayout.sumAdvances__textLayout((cast allPositions)) : Float)) : Float));
+          TextLayout.charAdvances__textLayout(({ final __callArgument30:Dynamic = TextLayout._charAdvances__textLayout; __callArgument30; }), (cast text : String), ({ final __callArgument31:Dynamic = currentFormat; __callArgument31; }), (cast idx : Float), (cast rangeEnd : Float), ({ final __callArgument32:Dynamic = measure; __callArgument32; }), (cast ((offsetX + (cast baseX() : Float)) + (cast TextLayout.sumAdvances__textLayout(({ final __callArgument33:Dynamic = allPositions; __callArgument33; })) : Float)) : Float));
           for (p in _Runtime.iterable(TextLayout._charAdvances__textLayout)) {
             _Runtime.callProperty(allPositions, 'push', cast ([p] : Array<Dynamic>));
           }
@@ -374,7 +374,7 @@ class TextLayout {
       (rangeIndex = cast (savedRangeIndex : Dynamic));
       (formatRange = cast (savedFormatRange : Dynamic));
       (currentFormat = cast (savedFormat : Dynamic));
-      return cast { positions: allPositions, width: (cast TextLayout.sumAdvances__textLayout((cast allPositions)) : Float) };
+      return cast { positions: allPositions, width: (cast TextLayout.sumAdvances__textLayout(({ final __callArgument36:Dynamic = allPositions; __callArgument36; })) : Float) };
       return cast _Runtime.UNDEFINED;
     });
     breakLongWord = (cast function breakLongWord(end:Float):Void {
@@ -382,8 +382,8 @@ class TextLayout {
       remaining = textIndex;
       while ((cast ((cast remaining : Float) < (cast end : Float)) : Bool)) {
         if ((cast truncated : Bool)) { return; }
-        TextLayout.charAdvances__textLayout((cast TextLayout._charAdvances__textLayout), (cast text : String), (cast currentFormat), (cast remaining : Float), (cast end : Float), (cast measure), (cast (offsetX + (cast baseX() : Float)) : Float));
-        var totalW:Float = (cast TextLayout.sumAdvances__textLayout((cast TextLayout._charAdvances__textLayout)) : Float);
+        TextLayout.charAdvances__textLayout(({ final __callArgument37:Dynamic = TextLayout._charAdvances__textLayout; __callArgument37; }), (cast text : String), ({ final __callArgument38:Dynamic = currentFormat; __callArgument38; }), (cast remaining : Float), (cast end : Float), ({ final __callArgument39:Dynamic = measure; __callArgument39; }), (cast (offsetX + (cast baseX() : Float)) : Float));
+        var totalW:Float = (cast TextLayout.sumAdvances__textLayout(({ final __callArgument40:Dynamic = TextLayout._charAdvances__textLayout; __callArgument40; })) : Float);
         if ((cast ((cast (offsetX + totalW) : Float) <= (cast (cast wrapWidth() : Float) : Float)) : Bool)) {
           placeSpan((cast remaining : Float), (cast end : Float));
           return;
@@ -423,9 +423,9 @@ class TextLayout {
     firstLineOfParagraph = true;
     bulletPending = false;
     bulletChar = '•';
-    ascent = (cast getTextFormatAscent((cast currentFormat)) : Float);
-    descent = (cast getTextFormatDescent((cast currentFormat)) : Float);
-    leading = (cast getTextFormatLeading((cast currentFormat)) : Float);
+    ascent = (cast getTextFormatAscent(({ final __callArgument41:Dynamic = currentFormat; __callArgument41; })) : Float);
+    descent = (cast getTextFormatDescent(({ final __callArgument42:Dynamic = currentFormat; __callArgument42; })) : Float);
+    leading = (cast getTextFormatLeading(({ final __callArgument43:Dynamic = currentFormat; __callArgument43; })) : Float);
     lineHeight = HxMath.ceil(((ascent + descent) + leading));
     maxAscent = ascent;
     maxLineHeight = lineHeight;
@@ -521,7 +521,7 @@ class TextLayout {
       } } }
       if ((cast !_Runtime.strictEquals(shift, 0.0) : Bool)) { ((cast g : TextLayoutGroup).offsetX += shift); }
     }
-    TextLayout.justifyLines__textLayout((cast groups), (cast containerWidth : Float), (cast lineWidths), (cast justification), (cast paragraphLastLines), (cast text : String));
+    TextLayout.justifyLines__textLayout(({ final __callArgument46:Dynamic = groups; __callArgument46; }), (cast containerWidth : Float), ({ final __callArgument47:Dynamic = lineWidths; __callArgument47; }), ({ final __callArgument48:Dynamic = justification; __callArgument48; }), ({ final __callArgument49:Dynamic = paragraphLastLines; __callArgument49; }), (cast text : String));
   }
 
   public static function applyVerticalAlignment__textLayout(groups:Array<TextLayoutGroup>, containerHeight:Float, contentHeight:Float, verticalAlign:TextVerticalAlign):Void {
@@ -570,7 +570,7 @@ class TextLayout {
             {
               var ci:Float = 0.0;
               while ((cast ((cast ci : Float) < (cast lastPos : Float)) : Bool)) {
-                ({ var __indexedObject16:Array<Float> = (cast g : TextLayoutGroup).positions; var __indexedKey17:Float = ci; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject16 : Array<Float>), (cast __indexedKey17 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject16 : Array<Float>), (cast __indexedKey17 : Float)) + extraPerGap) : Float)); });
+                ({ var __indexedObject58:Array<Float> = (cast g : TextLayoutGroup).positions; var __indexedKey59:Float = ci; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject58 : Array<Float>), (cast __indexedKey59 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject58 : Array<Float>), (cast __indexedKey59 : Float)) + extraPerGap) : Float)); });
                 (accumulated = cast ((accumulated + extraPerGap) : Dynamic));
                 (groupExtra = cast ((groupExtra + extraPerGap) : Dynamic));
                 ci++;
@@ -604,7 +604,7 @@ class TextLayout {
               while ((cast ((cast ((cast ci : Float) < (cast _Runtime.field((cast g : TextLayoutGroup).positions, 'length') : Float)) : Bool) && (cast ((cast textIndex : Float) < (cast (cast g : TextLayoutGroup).endIndex : Float)) : Bool)) : Bool)) {
                 var codepoint:Float = _Runtime.coalesce(_Runtime.codePointAt(text, textIndex), function():Dynamic return cast 0.0);
                 if ((cast _Runtime.strictEquals(codepoint, 32.0) : Bool)) {
-                  ({ var __indexedObject22:Array<Float> = (cast g : TextLayoutGroup).positions; var __indexedKey23:Float = ci; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject22 : Array<Float>), (cast __indexedKey23 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject22 : Array<Float>), (cast __indexedKey23 : Float)) + extraPerSpace) : Float)); });
+                  ({ var __indexedObject64:Array<Float> = (cast g : TextLayoutGroup).positions; var __indexedKey65:Float = ci; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject64 : Array<Float>), (cast __indexedKey65 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject64 : Array<Float>), (cast __indexedKey65 : Float)) + extraPerSpace) : Float)); });
                   (accumulated = cast ((accumulated + extraPerSpace) : Dynamic));
                   (groupExtra = cast ((groupExtra + extraPerSpace) : Dynamic));
                 }

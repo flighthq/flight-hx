@@ -8,11 +8,11 @@ import flighthq.types.BitmapRegion;
 
 class BitmapMorphological {
   public static function dilateBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float):Void {
-    BitmapMorphological.applyMorphological__bitmapMorphological((cast out), (cast source), (cast radius : Float), (cast true : Bool));
+    BitmapMorphological.applyMorphological__bitmapMorphological(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast radius : Float), (cast true : Bool));
   }
 
   public static function erodeBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float):Void {
-    BitmapMorphological.applyMorphological__bitmapMorphological((cast out), (cast source), (cast radius : Float), (cast false : Bool));
+    BitmapMorphological.applyMorphological__bitmapMorphological(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), (cast radius : Float), (cast false : Bool));
   }
 
   public static function applyMorphological__bitmapMorphological(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float, dilate:Bool):Void {

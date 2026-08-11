@@ -66,12 +66,12 @@ class TextShaperItemize {
     var items:Array<TextItem> = cast _Runtime.UNDEFINED;
     var result:Array<ShapedRun> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    items = (cast itemizeText((cast text : String), (cast format), (cast options)) : Array<TextItem>);
+    items = (cast itemizeText((cast text : String), ({ final __callArgument1:Dynamic = format; __callArgument1; }), ({ final __callArgument2:Dynamic = options; __callArgument2; })) : Array<TextItem>);
     result = (cast cast ([] : Array<Dynamic>));
     for (item in _Runtime.iterable(items)) {
       var sub:String = _Runtime.slice(text, (cast item : TextItem).start, (cast item : TextItem).end);
       var runOptions:{ var direction:Null<String>; var script:String; @:optional var features:Null<Array<TextFeature>>; @:optional var language:Null<String>; @:optional var variations:Null<Array<FontVariation>>; } = (cast _Runtime.mergeObjects([options, { direction: ((cast _Runtime.strictEquals((cast item : TextItem).direction, 'TopToBottom') : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast (cast item : TextItem).direction : Dynamic)) }, { script: (cast item : TextItem).script }]));
-      var run:Null<ShapedRun> = (cast shapeTextRun((cast sub : String), (cast format), (cast runOptions)) : Null<ShapedRun>);
+      var run:Null<ShapedRun> = (cast shapeTextRun((cast sub : String), ({ final __callArgument5:Dynamic = format; __callArgument5; }), (cast runOptions : Dynamic)) : Null<ShapedRun>);
       if ((cast !_Runtime.strictEquals(run, null) : Bool)) { _Runtime.callProperty(result, 'push', cast ([run] : Array<Dynamic>)); }
     }
     return cast result;

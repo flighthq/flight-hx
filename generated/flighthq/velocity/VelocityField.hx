@@ -46,7 +46,7 @@ class VelocityField {
 
   public static function contributeVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object, x:Float, y:Float):Void {
     var sample:VelocitySample = cast _Runtime.UNDEFINED;
-    sample = (cast ensureVelocitySample((cast field), (cast source)) : VelocitySample);
+    sample = (cast ensureVelocitySample(({ final __callArgument0:Dynamic = field; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; })) : VelocitySample);
     ((cast (cast sample : VelocitySample).velocity : Velocity2D).x = x);
     ((cast (cast sample : VelocitySample).velocity : Velocity2D).y = y);
     ((cast sample : VelocitySample).lastFrameId = (cast field : flighthq.types.Velocity.VelocityField).frameId);
@@ -182,7 +182,7 @@ class VelocityField {
   }
 
   public static function suppressVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object):Void {
-    contributeVelocity((cast field), (cast source), (cast 0.0 : Float), (cast 0.0 : Float));
+    contributeVelocity(({ final __callArgument2:Dynamic = field; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), (cast 0.0 : Float), (cast 0.0 : Float));
   }
 
   public static function zeroVelocity(out:Velocity2D):Velocity2D {

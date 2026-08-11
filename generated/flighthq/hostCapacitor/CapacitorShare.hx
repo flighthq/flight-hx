@@ -28,23 +28,23 @@ class CapacitorShare {
       return cast cachedAvailable;
       return cast _Runtime.UNDEFINED;
     }, canShare: function(content:ShareContent):Bool {
-      return cast ((cast cachedAvailable : Bool) && (cast (cast CapacitorShare.hasShareableText__capacitorShare((cast content)) : Bool) : Bool));
+      return cast ((cast cachedAvailable : Bool) && (cast (cast CapacitorShare.hasShareableText__capacitorShare(({ final __callArgument0:Dynamic = content; __callArgument0; })) : Bool) : Bool));
       return cast _Runtime.UNDEFINED;
     }, share: function(content:ShareContent, options:Null<ShareOptions>):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
-          var __flowBranch0:Dynamic;
-          if ((cast !(cast (cast CapacitorShare.hasShareableText__capacitorShare((cast content)) : Bool) : Bool) : Bool)) {
-            __flowBranch0 = flighthq._internal._Async.protect(function():Dynamic {
+          var __flowBranch2:Dynamic;
+          if ((cast !(cast (cast CapacitorShare.hasShareableText__capacitorShare(({ final __callArgument1:Dynamic = content; __callArgument1; })) : Bool) : Bool) : Bool)) {
+            __flowBranch2 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch0 = flighthq._internal._Async.flowNormal();
+            __flowBranch2 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch0, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flatMap((cast share : CapacitorSharePlugin).share((cast { title: content.title, text: content.text, url: content.url, dialogTitle: ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : (cast __typedStruct2 : { @:optional var chooserTitle:Null<String>; }).chooserTitle; }) })), function(__awaitValue1:Dynamic):Dynamic {
-                __awaitValue1;
+              return flighthq._internal._Async.flatMap((cast share : CapacitorSharePlugin).share(({ final __callArgument5:Dynamic = { title: content.title, text: content.text, url: content.url, dialogTitle: ({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : (cast __typedStruct4 : { @:optional var chooserTitle:Null<String>; }).chooserTitle; }) }; __callArgument5; })), function(__awaitValue3:Dynamic):Dynamic {
+                __awaitValue3;
                 return flighthq._internal._Async.flowReturn(true);
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -61,19 +61,19 @@ class CapacitorShare {
     }, shareWithResult: function(content:ShareContent, options:Null<ShareOptions>):flighthq._internal._Promise<ShareResult> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
-          var __flowBranch3:Dynamic;
-          if ((cast !(cast (cast CapacitorShare.hasShareableText__capacitorShare((cast content)) : Bool) : Bool) : Bool)) {
-            __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
+          var __flowBranch7:Dynamic;
+          if ((cast !(cast (cast CapacitorShare.hasShareableText__capacitorShare(({ final __callArgument6:Dynamic = content; __callArgument6; })) : Bool) : Bool) : Bool)) {
+            __flowBranch7 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn({ completed: false, activityType: null, dismissed: false });
             });
           } else {
-            __flowBranch3 = flighthq._internal._Async.flowNormal();
+            __flowBranch7 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch7, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var result:CapacitorShareResult = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap((cast share : CapacitorSharePlugin).share((cast { title: content.title, text: content.text, url: content.url, dialogTitle: ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : { @:optional var chooserTitle:Null<String>; }).chooserTitle; }) })), function(__awaitValue4:Dynamic):Dynamic {
-                result = __awaitValue4;
+              return flighthq._internal._Async.flatMap((cast share : CapacitorSharePlugin).share(({ final __callArgument10:Dynamic = { title: content.title, text: content.text, url: content.url, dialogTitle: ({ final __typedStruct9 = options; __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { @:optional var chooserTitle:Null<String>; }).chooserTitle; }) }; __callArgument10; })), function(__awaitValue8:Dynamic):Dynamic {
+                result = __awaitValue8;
                 return flighthq._internal._Async.flowReturn({ completed: true, activityType: _Runtime.coalesce((cast result : CapacitorShareResult).activityType, function():Dynamic return cast null), dismissed: false });
               });
             }), function(__caughtError:Dynamic):Dynamic {

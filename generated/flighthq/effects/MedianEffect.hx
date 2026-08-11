@@ -24,11 +24,11 @@ class MedianEffect {
   }
 
   public static function registerMedianEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'MedianEffect' : String), (cast MedianEffect.resolveMedianEffectPadding__medianEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'MedianEffect' : String), (cast MedianEffect.resolveMedianEffectPadding__medianEffect : Dynamic));
   }
 
   public static function resolveMedianEffectPadding__medianEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getMedianEffectPadding((cast (cast effect : flighthq.types.MedianEffect))) : RenderEffectPadding);
+    return cast (cast getMedianEffectPadding((cast effect : flighthq.types.MedianEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

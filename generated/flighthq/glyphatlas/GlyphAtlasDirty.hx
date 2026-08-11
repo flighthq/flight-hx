@@ -17,7 +17,7 @@ class GlyphAtlasDirty {
     var runtime:GlyphAtlasRuntime = cast _Runtime.UNDEFINED;
     runtime = atlas.runtime;
     if ((cast !(cast runtime.dirty : Bool) : Bool)) { return cast null; }
-    return cast (cast createRectangle((cast runtime.dirtyMinX), (cast runtime.dirtyMinY), (cast (runtime.dirtyMaxX - runtime.dirtyMinX)), (cast (runtime.dirtyMaxY - runtime.dirtyMinY))) : Rectangle);
+    return cast (cast createRectangle(({ final __callArgument0:Dynamic = runtime.dirtyMinX; __callArgument0; }), ({ final __callArgument1:Dynamic = runtime.dirtyMinY; __callArgument1; }), ({ final __callArgument2:Dynamic = (runtime.dirtyMaxX - runtime.dirtyMinX); __callArgument2; }), ({ final __callArgument3:Dynamic = (runtime.dirtyMaxY - runtime.dirtyMinY); __callArgument3; })) : Rectangle);
     return cast null;
   }
 }

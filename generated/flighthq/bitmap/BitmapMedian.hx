@@ -65,10 +65,10 @@ class BitmapMedian {
             }
             var mid:Float = (_Runtime.toInt32(n) >> 1);
             var di:Float = (((py * w) + px) * 4.0);
-            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast (cast BitmapMedian.medianOf__bitmapMedian((cast rs), (cast n : Float), (cast mid : Float)) : Float) : Float));
-            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast (cast BitmapMedian.medianOf__bitmapMedian((cast gs), (cast n : Float), (cast mid : Float)) : Float) : Float));
-            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast (cast BitmapMedian.medianOf__bitmapMedian((cast bs), (cast n : Float), (cast mid : Float)) : Float) : Float));
-            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast BitmapMedian.medianOf__bitmapMedian((cast as), (cast n : Float), (cast mid : Float)) : Float) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast (cast BitmapMedian.medianOf__bitmapMedian(({ final __callArgument0:Dynamic = rs; __callArgument0; }), (cast n : Float), (cast mid : Float)) : Float) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast (cast BitmapMedian.medianOf__bitmapMedian(({ final __callArgument1:Dynamic = gs; __callArgument1; }), (cast n : Float), (cast mid : Float)) : Float) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast (cast BitmapMedian.medianOf__bitmapMedian(({ final __callArgument2:Dynamic = bs; __callArgument2; }), (cast n : Float), (cast mid : Float)) : Float) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast BitmapMedian.medianOf__bitmapMedian(({ final __callArgument3:Dynamic = as; __callArgument3; }), (cast n : Float), (cast mid : Float)) : Float) : Float));
             px++;
           }
         }

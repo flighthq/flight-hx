@@ -18,7 +18,7 @@ class BitmapColorMatrix {
   }
 
   public static function buildBitmapGrayscaleColorMatrix(out:Array<Float>):Void {
-    buildBitmapSaturationColorMatrix((cast out), (cast 0.0 : Float));
+    buildBitmapSaturationColorMatrix(({ final __callArgument0:Dynamic = out; __callArgument0; }), (cast 0.0 : Float));
   }
 
   public static function buildBitmapHueRotationColorMatrix(out:Array<Float>, degrees:Float):Void {

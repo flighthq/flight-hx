@@ -33,7 +33,7 @@ class GlShapeData {
 
   @:noCompletion
   public static function createGlShapeData(_state:GlRenderState, _source:Renderable):Null<RendererData> {
-    return cast (cast toGlShapeRendererData((cast { surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null })) : RendererData);
+    return cast (cast toGlShapeRendererData(({ final __callArgument0:Dynamic = { surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null }; __callArgument0; })) : RendererData);
     return cast null;
   }
 
@@ -42,8 +42,8 @@ class GlShapeData {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var surface:Null<GlShapeRasterSurface> = cast _Runtime.UNDEFINED;
     var entry:Null<{ var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
-    surface = (cast (cast getGlShapeData((cast data)) : GlShapeRendererData) : GlShapeRendererData).surface;
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime);
+    surface = (cast (cast getGlShapeData(({ final __callArgument2:Dynamic = data; __callArgument2; })) : GlShapeRendererData) : GlShapeRendererData).surface;
     if ((cast _Runtime.strictEquals(surface, null) : Bool)) { return; }
     entry = ((cast (cast runtime : GlRenderStateRuntime).textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).get((cast surface : GlShapeRasterSurface).image));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {

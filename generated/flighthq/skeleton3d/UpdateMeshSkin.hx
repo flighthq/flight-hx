@@ -23,15 +23,15 @@ class UpdateMeshSkin {
     var bindPose:Null<MeshSkinBindPose> = cast _Runtime.UNDEFINED;
     skin = mesh.skin;
     if ((cast _Runtime.looseEquals(skin, null) : Bool)) { return; }
-    computeSkeleton3DJointMatrices((cast (cast skin : Skin).skeleton));
+    computeSkeleton3DJointMatrices((cast skin : Skin).skeleton);
     geometry = mesh.geometry;
-    bindPose = (cast getMeshGeometrySkinBindPose((cast geometry)) : Null<MeshSkinBindPose>);
+    bindPose = (cast getMeshGeometrySkinBindPose(({ final __callArgument0:Dynamic = geometry; __callArgument0; })) : Null<MeshSkinBindPose>);
     if ((cast _Runtime.strictEquals(bindPose, null) : Bool)) {
-      (bindPose = cast ((cast captureMeshSkinBindPose((cast geometry)) : MeshSkinBindPose) : Dynamic));
-      setMeshGeometrySkinBindPose((cast geometry), (cast bindPose));
+      (bindPose = cast ((cast captureMeshSkinBindPose(({ final __callArgument1:Dynamic = geometry; __callArgument1; })) : MeshSkinBindPose) : Dynamic));
+      setMeshGeometrySkinBindPose(({ final __callArgument2:Dynamic = geometry; __callArgument2; }), (cast bindPose : Dynamic));
     } else { if ((cast !_Runtime.looseEquals(mesh.morph, null) : Bool)) {
-      updateMeshSkinBindPoseDeformInput((cast bindPose), (cast geometry));
+      updateMeshSkinBindPoseDeformInput(({ final __callArgument3:Dynamic = bindPose; __callArgument3; }), ({ final __callArgument4:Dynamic = geometry; __callArgument4; }));
     } }
-    skinMeshGeometry((cast geometry), (cast (cast skin : Skin).skeleton), (cast bindPose));
+    skinMeshGeometry(({ final __callArgument5:Dynamic = geometry; __callArgument5; }), (cast skin : Skin).skeleton, ({ final __callArgument6:Dynamic = bindPose; __callArgument6; }));
   }
 }

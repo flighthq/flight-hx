@@ -43,13 +43,13 @@ import flighthq.types._internal._Node2DValues.Node2DTraitsKey;
 class DisplayObject {
   public static function createNode2D<R:Node2DRuntime>(kind:Kind, ?obj:PartialNode<Node2D>, ?createData:Node2DDataFactory, ?createNode2DRuntimeFactory:Node2DRuntimeFactory<R>):Node2D {
     var out:Node2D = cast _Runtime.UNDEFINED;
-    out = (cast createNode((cast kind : String), (cast obj), (cast createData), (cast _Runtime.coalesce(createNode2DRuntimeFactory, function():Dynamic return cast (cast (cast createNode2DRuntime : flighthq._internal._Any) : NodeRuntimeFactory<R>)))) : Node2D);
-    initTransform2DTrait((cast out), (cast obj));
-    initBoundsRectangleTrait((cast out), (cast obj));
-    initAppearanceTrait((cast out), (cast obj));
-    initBlendModeTrait((cast out), (cast obj));
-    initMaterialTrait((cast out), (cast obj));
-    initClipTrait((cast out), (cast obj));
+    out = (cast createNode((cast kind : String), (cast obj : Dynamic), (cast createData : Dynamic), (cast _Runtime.coalesce(createNode2DRuntimeFactory, function():Dynamic return cast (cast (cast createNode2DRuntime : flighthq._internal._Any) : NodeRuntimeFactory<R>)) : Dynamic)) : Node2D);
+    initTransform2DTrait(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = obj; __callArgument1; }));
+    initBoundsRectangleTrait(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = obj; __callArgument3; }));
+    initAppearanceTrait(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = obj; __callArgument5; }));
+    initBlendModeTrait(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = obj; __callArgument7; }));
+    initMaterialTrait(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = obj; __callArgument9; }));
+    initClipTrait(({ final __callArgument10:Dynamic = out; __callArgument10; }), ({ final __callArgument11:Dynamic = obj; __callArgument11; }));
     return cast out;
     return cast null;
   }
@@ -57,28 +57,28 @@ class DisplayObject {
   @:noCompletion
   public static function createNode2DRuntime(?methods:flighthq._internal._Partial<flighthq._internal._Intersection2<MethodsOf<Node2DRuntime>, flighthq._internal._Pick<Node2DRuntime, String>>>):Node2DRuntime {
     var out:Node2DRuntime = cast _Runtime.UNDEFINED;
-    out = (cast createNodeRuntime((cast methods)) : Node2DRuntime);
+    out = (cast createNodeRuntime(({ final __callArgument12:Dynamic = methods; __callArgument12; })) : Node2DRuntime);
     ((cast out : { @:optional var traits:Null<NodeTraitsKey<Node2DTraits>>; }).traits = Node2DTraitsKey);
     ((cast out : { var scene2d:Null<Scene2D>; }).scene2d = null);
-    initTransform2DRuntimeTrait((cast out), (cast methods));
-    initBoundsRectangleRuntimeTrait((cast out), (cast methods));
+    initTransform2DRuntimeTrait(({ final __callArgument13:Dynamic = out; __callArgument13; }), ({ final __callArgument14:Dynamic = methods; __callArgument14; }));
+    initBoundsRectangleRuntimeTrait(({ final __callArgument15:Dynamic = out; __callArgument15; }), ({ final __callArgument16:Dynamic = methods; __callArgument16; }));
     return cast out;
     return cast null;
   }
 
   @:noCompletion
   public static function getNode2DRuntime(source:Node2D):Node2DRuntime {
-    return cast (cast getNodeRuntime((cast source)) : Node2DRuntime);
+    return cast (cast getNodeRuntime((cast source : Dynamic)) : Node2DRuntime);
     return cast null;
   }
 
   public static function isNode2D(node:NodeAny):Bool {
-    return cast _Runtime.strictEquals(_Runtime.field((cast getNodeRuntime((cast node)) : NodeRuntime<flighthq._internal._Any>), 'traits'), Node2DTraitsKey);
+    return cast _Runtime.strictEquals(_Runtime.field((cast getNodeRuntime((cast node : Dynamic)) : NodeRuntime<flighthq._internal._Any>), 'traits'), Node2DTraitsKey);
     return cast null;
   }
 
   public static function setNode2DClip(source:Node2D, value:Null<ClipRegion>):Void {
     ((cast source : { var clip:Null<ClipRegion>; }).clip = value);
-    invalidateNodeAppearance((cast source));
+    invalidateNodeAppearance((cast source : Dynamic));
   }
 }

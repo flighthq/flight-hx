@@ -23,11 +23,11 @@ class InnerGlowEffect {
   }
 
   public static function registerInnerGlowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'InnerGlowEffect' : String), (cast InnerGlowEffect.resolveInnerGlowEffectPadding__innerGlowEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'InnerGlowEffect' : String), (cast InnerGlowEffect.resolveInnerGlowEffectPadding__innerGlowEffect : Dynamic));
   }
 
   public static function resolveInnerGlowEffectPadding__innerGlowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getInnerGlowEffectPadding((cast (cast effect : flighthq.types.InnerGlowEffect))) : RenderEffectPadding);
+    return cast (cast getInnerGlowEffectPadding((cast effect : flighthq.types.InnerGlowEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

@@ -32,7 +32,7 @@ class Islands {
     _Runtime.setLength(jointCounts, 0.0);
     for (body in _Runtime.iterable((cast world : Physics2DWorld).bodies)) {
       if ((cast ((cast _Runtime.strictEquals((cast body : RigidBody2D).type, 'static') : Bool) || (cast (cast body : RigidBody2D).sleeping : Bool)) : Bool)) { continue; }
-      var root:Float = (cast Islands._islandRootOf__islands((cast (cast world : Physics2DWorld).islandParents), (cast (cast body : RigidBody2D).index : Float)) : Float);
+      var root:Float = (cast Islands._islandRootOf__islands((cast world : Physics2DWorld).islandParents, (cast (cast body : RigidBody2D).index : Float)) : Float);
       var island:Null<Float> = ((cast byRoot : flighthq._internal._Map<Float, Float>).get(root));
       if ((cast _Runtime.strictEquals(island, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (island = cast (_Runtime.field(roots, 'length') : Dynamic));
@@ -46,51 +46,51 @@ class Islands {
     }
     for (contact in _Runtime.iterable((cast world : Physics2DWorld).contacts)) {
       if ((cast ((cast !(cast (cast contact : Physics2DContact).enabled : Bool) : Bool) || (cast (cast contact : Physics2DContact).sensor : Bool)) : Bool)) { continue; }
-      var island:Float = (cast Islands._physics2DSolveIslandForPair__islands((cast world), (cast (cast contact : Physics2DContact).bodyA : Float), (cast (cast contact : Physics2DContact).bodyB : Float)) : Float);
+      var island:Float = (cast Islands._physics2DSolveIslandForPair__islands(({ final __callArgument4:Dynamic = world; __callArgument4; }), (cast (cast contact : Physics2DContact).bodyA : Float), (cast (cast contact : Physics2DContact).bodyB : Float)) : Float);
       if ((cast ((cast island : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.incrementIndex(contactCounts, island, 1, true); }
     }
     for (joint in _Runtime.iterable((cast world : Physics2DWorld).joints)) {
       var solver:Null<Physics2DJointSolver> = ((cast (cast world : Physics2DWorld).jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get((cast joint : Physics2DJoint).kind));
       if ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      var island:Float = ((cast _Runtime.strictEquals((cast solver : Physics2DJointSolver).usesBodyA, false) : Bool) ? (cast (cast Islands._physics2DSolveIslandForBody__islands((cast world), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Float) : Dynamic) : (cast (cast Islands._physics2DSolveIslandForPair__islands((cast world), (cast (cast joint : Physics2DJoint).bodyA : Float), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Float) : Dynamic));
+      var island:Float = ((cast _Runtime.strictEquals((cast solver : Physics2DJointSolver).usesBodyA, false) : Bool) ? (cast (cast Islands._physics2DSolveIslandForBody__islands(({ final __callArgument7:Dynamic = world; __callArgument7; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Float) : Dynamic) : (cast (cast Islands._physics2DSolveIslandForPair__islands(({ final __callArgument8:Dynamic = world; __callArgument8; }), (cast (cast joint : Physics2DJoint).bodyA : Float), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Float) : Dynamic));
       if ((cast ((cast island : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.incrementIndex(jointCounts, island, 1, true); }
     }
-    Islands._preparePhysics2DIslandSlices__islands((cast (cast world : Physics2DWorld).solveIslandBodyStarts), (cast bodyCounts), (cast (cast world : Physics2DWorld).solveIslandCursors));
-    Islands._preparePhysics2DIslandSlices__islands((cast (cast world : Physics2DWorld).solveIslandContactStarts), (cast contactCounts), (cast (cast world : Physics2DWorld).solveIslandCursors));
-    Islands._preparePhysics2DIslandSlices__islands((cast (cast world : Physics2DWorld).solveIslandJointStarts), (cast jointCounts), (cast (cast world : Physics2DWorld).solveIslandCursors));
-    _Runtime.setLength((cast world : Physics2DWorld).solveIslandBodyIndices, (cast Islands._physics2DIslandItemCount__islands((cast (cast world : Physics2DWorld).solveIslandBodyStarts), (cast bodyCounts)) : Float));
-    _Runtime.setLength((cast world : Physics2DWorld).solveIslandContactIndices, (cast Islands._physics2DIslandItemCount__islands((cast (cast world : Physics2DWorld).solveIslandContactStarts), (cast contactCounts)) : Float));
-    _Runtime.setLength((cast world : Physics2DWorld).solveIslandJointIndices, (cast Islands._physics2DIslandItemCount__islands((cast (cast world : Physics2DWorld).solveIslandJointStarts), (cast jointCounts)) : Float));
-    Islands._copyPhysics2DIslandStarts__islands((cast (cast world : Physics2DWorld).solveIslandCursors), (cast (cast world : Physics2DWorld).solveIslandBodyStarts));
+    Islands._preparePhysics2DIslandSlices__islands((cast world : Physics2DWorld).solveIslandBodyStarts, ({ final __callArgument9:Dynamic = bodyCounts; __callArgument9; }), (cast world : Physics2DWorld).solveIslandCursors);
+    Islands._preparePhysics2DIslandSlices__islands((cast world : Physics2DWorld).solveIslandContactStarts, ({ final __callArgument10:Dynamic = contactCounts; __callArgument10; }), (cast world : Physics2DWorld).solveIslandCursors);
+    Islands._preparePhysics2DIslandSlices__islands((cast world : Physics2DWorld).solveIslandJointStarts, ({ final __callArgument11:Dynamic = jointCounts; __callArgument11; }), (cast world : Physics2DWorld).solveIslandCursors);
+    _Runtime.setLength((cast world : Physics2DWorld).solveIslandBodyIndices, (cast Islands._physics2DIslandItemCount__islands((cast world : Physics2DWorld).solveIslandBodyStarts, ({ final __callArgument12:Dynamic = bodyCounts; __callArgument12; })) : Float));
+    _Runtime.setLength((cast world : Physics2DWorld).solveIslandContactIndices, (cast Islands._physics2DIslandItemCount__islands((cast world : Physics2DWorld).solveIslandContactStarts, ({ final __callArgument13:Dynamic = contactCounts; __callArgument13; })) : Float));
+    _Runtime.setLength((cast world : Physics2DWorld).solveIslandJointIndices, (cast Islands._physics2DIslandItemCount__islands((cast world : Physics2DWorld).solveIslandJointStarts, ({ final __callArgument14:Dynamic = jointCounts; __callArgument14; })) : Float));
+    Islands._copyPhysics2DIslandStarts__islands((cast world : Physics2DWorld).solveIslandCursors, (cast world : Physics2DWorld).solveIslandBodyStarts);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast world : Physics2DWorld).bodies, 'length') : Float)) : Bool)) {
         var body:RigidBody2D = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).bodies, i);
         if ((cast ((cast _Runtime.strictEquals((cast body : RigidBody2D).type, 'static') : Bool) || (cast (cast body : RigidBody2D).sleeping : Bool)) : Bool)) { i++; continue; }
-        var island:Null<Float> = ((cast byRoot : flighthq._internal._Map<Float, Float>).get((cast Islands._islandRootOf__islands((cast (cast world : Physics2DWorld).islandParents), (cast (cast body : RigidBody2D).index : Float)) : Float)));
+        var island:Null<Float> = ((cast byRoot : flighthq._internal._Map<Float, Float>).get((cast Islands._islandRootOf__islands((cast world : Physics2DWorld).islandParents, (cast (cast body : RigidBody2D).index : Float)) : Float)));
         if ((cast !_Runtime.strictEquals(island, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandBodyIndices : Array<Float>), (cast _Runtime.incrementIndex((cast world : Physics2DWorld).solveIslandCursors, island, 1, true) : Float), (cast i : Float)); }
         i++;
       }
     }
-    Islands._copyPhysics2DIslandStarts__islands((cast (cast world : Physics2DWorld).solveIslandCursors), (cast (cast world : Physics2DWorld).solveIslandContactStarts));
+    Islands._copyPhysics2DIslandStarts__islands((cast world : Physics2DWorld).solveIslandCursors, (cast world : Physics2DWorld).solveIslandContactStarts);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast world : Physics2DWorld).contacts, 'length') : Float)) : Bool)) {
         var contact:Physics2DContact = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).contacts, i);
         if ((cast ((cast !(cast (cast contact : Physics2DContact).enabled : Bool) : Bool) || (cast (cast contact : Physics2DContact).sensor : Bool)) : Bool)) { i++; continue; }
-        var island:Float = (cast Islands._physics2DSolveIslandForPair__islands((cast world), (cast (cast contact : Physics2DContact).bodyA : Float), (cast (cast contact : Physics2DContact).bodyB : Float)) : Float);
+        var island:Float = (cast Islands._physics2DSolveIslandForPair__islands(({ final __callArgument15:Dynamic = world; __callArgument15; }), (cast (cast contact : Physics2DContact).bodyA : Float), (cast (cast contact : Physics2DContact).bodyB : Float)) : Float);
         if ((cast ((cast island : Float) >= (cast 0.0 : Float)) : Bool)) { flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandContactIndices : Array<Float>), (cast _Runtime.incrementIndex((cast world : Physics2DWorld).solveIslandCursors, island, 1, true) : Float), (cast i : Float)); }
         i++;
       }
     }
-    Islands._copyPhysics2DIslandStarts__islands((cast (cast world : Physics2DWorld).solveIslandCursors), (cast (cast world : Physics2DWorld).solveIslandJointStarts));
+    Islands._copyPhysics2DIslandStarts__islands((cast world : Physics2DWorld).solveIslandCursors, (cast world : Physics2DWorld).solveIslandJointStarts);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast world : Physics2DWorld).joints, 'length') : Float)) : Bool)) {
         var joint:Physics2DJoint = flighthq._internal._StaticIndex.readArray((cast world : Physics2DWorld).joints, i);
         var solver:Null<Physics2DJointSolver> = ((cast (cast world : Physics2DWorld).jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get((cast joint : Physics2DJoint).kind));
         if ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var island:Float = ((cast _Runtime.strictEquals((cast solver : Physics2DJointSolver).usesBodyA, false) : Bool) ? (cast (cast Islands._physics2DSolveIslandForBody__islands((cast world), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Float) : Dynamic) : (cast (cast Islands._physics2DSolveIslandForPair__islands((cast world), (cast (cast joint : Physics2DJoint).bodyA : Float), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Float) : Dynamic));
+        var island:Float = ((cast _Runtime.strictEquals((cast solver : Physics2DJointSolver).usesBodyA, false) : Bool) ? (cast (cast Islands._physics2DSolveIslandForBody__islands(({ final __callArgument16:Dynamic = world; __callArgument16; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Float) : Dynamic) : (cast (cast Islands._physics2DSolveIslandForPair__islands(({ final __callArgument17:Dynamic = world; __callArgument17; }), (cast (cast joint : Physics2DJoint).bodyA : Float), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Float) : Dynamic));
         if ((cast ((cast island : Float) >= (cast 0.0 : Float)) : Bool)) { flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast world : Physics2DWorld).solveIslandJointIndices : Array<Float>), (cast _Runtime.incrementIndex((cast world : Physics2DWorld).solveIslandCursors, island, 1, true) : Float), (cast i : Float)); }
         i++;
       }
@@ -98,7 +98,7 @@ class Islands {
   }
 
   public static function isRigidBody2DPairAwake(a:RigidBody2D, b:RigidBody2D):Bool {
-    return cast ((cast (cast Islands._isBodyLive__islands((cast a)) : Bool) : Bool) || (cast (cast Islands._isBodyLive__islands((cast b)) : Bool) : Bool));
+    return cast ((cast (cast Islands._isBodyLive__islands(({ final __callArgument18:Dynamic = a; __callArgument18; })) : Bool) : Bool) || (cast (cast Islands._isBodyLive__islands(({ final __callArgument19:Dynamic = b; __callArgument19; })) : Bool) : Bool));
     return cast null;
   }
 
@@ -115,12 +115,12 @@ class Islands {
     ((cast islandTimers : flighthq._internal._Map<Float, Float>).clear());
     for (contact in _Runtime.iterable((cast world : Physics2DWorld).contacts)) {
       if ((cast ((cast !(cast (cast contact : Physics2DContact).enabled : Bool) : Bool) || (cast (cast contact : Physics2DContact).sensor : Bool)) : Bool)) { continue; }
-      Islands._unionDynamicPair__islands((cast world), (cast parents), (cast (cast contact : Physics2DContact).bodyA : Float), (cast (cast contact : Physics2DContact).bodyB : Float));
+      Islands._unionDynamicPair__islands(({ final __callArgument22:Dynamic = world; __callArgument22; }), ({ final __callArgument23:Dynamic = parents; __callArgument23; }), (cast (cast contact : Physics2DContact).bodyA : Float), (cast (cast contact : Physics2DContact).bodyB : Float));
     }
     for (joint in _Runtime.iterable((cast world : Physics2DWorld).joints)) {
       var solver:Null<Physics2DJointSolver> = ((cast (cast world : Physics2DWorld).jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get((cast joint : Physics2DJoint).kind));
       if ((cast ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast solver : Physics2DJointSolver).usesBodyA, false) : Bool)) : Bool)) { continue; }
-      Islands._unionDynamicPair__islands((cast world), (cast parents), (cast (cast joint : Physics2DJoint).bodyA : Float), (cast (cast joint : Physics2DJoint).bodyB : Float));
+      Islands._unionDynamicPair__islands(({ final __callArgument26:Dynamic = world; __callArgument26; }), ({ final __callArgument27:Dynamic = parents; __callArgument27; }), (cast (cast joint : Physics2DJoint).bodyA : Float), (cast (cast joint : Physics2DJoint).bodyB : Float));
     }
     if ((cast !(cast (cast config : Physics2DSolverConfig).allowSleeping : Bool) : Bool)) {
       for (body in _Runtime.iterable(bodies)) {
@@ -136,7 +136,7 @@ class Islands {
         ((cast body : RigidBody2D).sleepTimer = 0.0);
         continue;
       }
-      if ((cast (cast Islands._isBodyStill__islands((cast body), (cast (cast config : Physics2DSolverConfig).sleepLinearThreshold : Float), (cast (cast config : Physics2DSolverConfig).sleepAngularThreshold : Float)) : Bool) : Bool)) {
+      if ((cast (cast Islands._isBodyStill__islands(({ final __callArgument32:Dynamic = body; __callArgument32; }), (cast (cast config : Physics2DSolverConfig).sleepLinearThreshold : Float), (cast (cast config : Physics2DSolverConfig).sleepAngularThreshold : Float)) : Bool) : Bool)) {
         ((cast body : RigidBody2D).sleepTimer += dt);
       } else {
         ((cast body : RigidBody2D).sleepTimer = 0.0);
@@ -144,19 +144,19 @@ class Islands {
     }
     for (joint in _Runtime.iterable((cast world : Physics2DWorld).joints)) {
       var solver:Null<Physics2DJointSolver> = ((cast (cast world : Physics2DWorld).jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get((cast joint : Physics2DJoint).kind));
-      if ((cast !_Runtime.strictEquals(({ final __structural16 = solver; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { @:optional var keepsBodiesAwake:Null<Bool>; }).keepsBodiesAwake; }), true) : Bool)) { continue; }
-      if ((cast !_Runtime.strictEquals((cast solver : Physics2DJointSolver).usesBodyA, false) : Bool)) { Islands._keepPhysics2DBodyAwake__islands((cast world), (cast (cast joint : Physics2DJoint).bodyA : Float)); }
-      Islands._keepPhysics2DBodyAwake__islands((cast world), (cast (cast joint : Physics2DJoint).bodyB : Float));
+      if ((cast !_Runtime.strictEquals(({ final __structural35 = solver; __structural35 == null ? _Runtime.UNDEFINED : (cast __structural35 : { @:optional var keepsBodiesAwake:Null<Bool>; }).keepsBodiesAwake; }), true) : Bool)) { continue; }
+      if ((cast !_Runtime.strictEquals((cast solver : Physics2DJointSolver).usesBodyA, false) : Bool)) { Islands._keepPhysics2DBodyAwake__islands(({ final __callArgument36:Dynamic = world; __callArgument36; }), (cast (cast joint : Physics2DJoint).bodyA : Float)); }
+      Islands._keepPhysics2DBodyAwake__islands(({ final __callArgument37:Dynamic = world; __callArgument37; }), (cast (cast joint : Physics2DJoint).bodyB : Float));
     }
     for (body in _Runtime.iterable(bodies)) {
       if ((cast _Runtime.strictEquals((cast body : RigidBody2D).type, 'static') : Bool)) { continue; }
-      var root:Float = (cast Islands._islandRootOf__islands((cast parents), (cast (cast body : RigidBody2D).index : Float)) : Float);
+      var root:Float = (cast Islands._islandRootOf__islands(({ final __callArgument40:Dynamic = parents; __callArgument40; }), (cast (cast body : RigidBody2D).index : Float)) : Float);
       var current:Null<Float> = ((cast islandTimers : flighthq._internal._Map<Float, Float>).get(root));
       ((cast islandTimers : flighthq._internal._Map<Float, Float>).set(root, (cast ((cast _Runtime.strictEquals(current, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast body : RigidBody2D).sleepTimer : Dynamic) : (cast HxMath.min(current, (cast body : RigidBody2D).sleepTimer) : Dynamic)))));
     }
     for (body in _Runtime.iterable(bodies)) {
       if ((cast _Runtime.strictEquals((cast body : RigidBody2D).type, 'static') : Bool)) { continue; }
-      var islandTimer:Float = _Runtime.coalesce(((cast islandTimers : flighthq._internal._Map<Float, Float>).get((cast Islands._islandRootOf__islands((cast parents), (cast (cast body : RigidBody2D).index : Float)) : Float))), function():Dynamic return cast (cast body : RigidBody2D).sleepTimer);
+      var islandTimer:Float = _Runtime.coalesce(((cast islandTimers : flighthq._internal._Map<Float, Float>).get((cast Islands._islandRootOf__islands(({ final __callArgument43:Dynamic = parents; __callArgument43; }), (cast (cast body : RigidBody2D).index : Float)) : Float))), function():Dynamic return cast (cast body : RigidBody2D).sleepTimer);
       var shouldSleep:Bool = ((cast (cast body : RigidBody2D).sleepEnabled : Bool) && (cast ((cast islandTimer : Float) >= (cast (cast config : Physics2DSolverConfig).timeToSleep : Float)) : Bool));
       if ((cast ((cast !(cast shouldSleep : Bool) : Bool) && (cast (cast body : RigidBody2D).sleeping : Bool)) : Bool)) {
         ((cast body : RigidBody2D).sleepTimer = 0.0);
@@ -171,7 +171,7 @@ class Islands {
   }
 
   public static function wakePhysics2DBody(body:RigidBody2D):Void {
-    assertPhysics2DBodyNotStepping((cast body));
+    assertPhysics2DBodyNotStepping(({ final __callArgument44:Dynamic = body; __callArgument44; }));
     ((cast body : RigidBody2D).sleeping = false);
     ((cast body : RigidBody2D).sleepTimer = 0.0);
   }
@@ -192,23 +192,23 @@ class Islands {
 
   public static function _keepPhysics2DBodyAwake__islands(world:Physics2DWorld, bodyIndex:Float):Void {
     var body:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
-    body = (cast findPhysics2DBody((cast world), (cast bodyIndex : Float)) : Null<RigidBody2D>);
+    body = (cast findPhysics2DBody(({ final __callArgument45:Dynamic = world; __callArgument45; }), (cast bodyIndex : Float)) : Null<RigidBody2D>);
     if ((cast ((cast !_Runtime.strictEquals(body, null) : Bool) && (cast !_Runtime.strictEquals((cast body : RigidBody2D).type, 'static') : Bool)) : Bool)) { ((cast body : RigidBody2D).sleepTimer = 0.0); }
   }
 
   public static function _physics2DSolveIslandForBody__islands(world:Physics2DWorld, bodyIndex:Float):Float {
     var body:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
-    body = (cast findPhysics2DBody((cast world), (cast bodyIndex : Float)) : Null<RigidBody2D>);
+    body = (cast findPhysics2DBody(({ final __callArgument46:Dynamic = world; __callArgument46; }), (cast bodyIndex : Float)) : Null<RigidBody2D>);
     if ((cast ((cast ((cast _Runtime.strictEquals(body, null) : Bool) || (cast _Runtime.strictEquals((cast body : RigidBody2D).type, 'static') : Bool)) : Bool) || (cast (cast body : RigidBody2D).sleeping : Bool)) : Bool)) { return cast -1.0; }
-    return cast _Runtime.coalesce(((cast (cast world : Physics2DWorld).solveIslandByRoot : flighthq._internal._Map<Float, Float>).get((cast Islands._islandRootOf__islands((cast (cast world : Physics2DWorld).islandParents), (cast (cast body : RigidBody2D).index : Float)) : Float))), function():Dynamic return cast -1.0);
+    return cast _Runtime.coalesce(((cast (cast world : Physics2DWorld).solveIslandByRoot : flighthq._internal._Map<Float, Float>).get((cast Islands._islandRootOf__islands((cast world : Physics2DWorld).islandParents, (cast (cast body : RigidBody2D).index : Float)) : Float))), function():Dynamic return cast -1.0);
     return cast null;
   }
 
   public static function _physics2DSolveIslandForPair__islands(world:Physics2DWorld, bodyA:Float, bodyB:Float):Float {
     var islandA:Float = cast _Runtime.UNDEFINED;
-    islandA = (cast Islands._physics2DSolveIslandForBody__islands((cast world), (cast bodyA : Float)) : Float);
+    islandA = (cast Islands._physics2DSolveIslandForBody__islands(({ final __callArgument47:Dynamic = world; __callArgument47; }), (cast bodyA : Float)) : Float);
     if ((cast ((cast islandA : Float) >= (cast 0.0 : Float)) : Bool)) { return cast islandA; }
-    return cast (cast Islands._physics2DSolveIslandForBody__islands((cast world), (cast bodyB : Float)) : Float);
+    return cast (cast Islands._physics2DSolveIslandForBody__islands(({ final __callArgument48:Dynamic = world; __callArgument48; }), (cast bodyB : Float)) : Float);
     return cast null;
   }
 
@@ -250,12 +250,12 @@ class Islands {
     var second:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
     var rootA:Float = cast _Runtime.UNDEFINED;
     var rootB:Float = cast _Runtime.UNDEFINED;
-    first = (cast findPhysics2DBody((cast world), (cast a : Float)) : Null<RigidBody2D>);
-    second = (cast findPhysics2DBody((cast world), (cast b : Float)) : Null<RigidBody2D>);
+    first = (cast findPhysics2DBody(({ final __callArgument49:Dynamic = world; __callArgument49; }), (cast a : Float)) : Null<RigidBody2D>);
+    second = (cast findPhysics2DBody(({ final __callArgument50:Dynamic = world; __callArgument50; }), (cast b : Float)) : Null<RigidBody2D>);
     if ((cast ((cast _Runtime.strictEquals(first, null) : Bool) || (cast _Runtime.strictEquals(second, null) : Bool)) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals((cast first : RigidBody2D).type, 'static') : Bool) || (cast _Runtime.strictEquals((cast second : RigidBody2D).type, 'static') : Bool)) : Bool)) { return; }
-    rootA = (cast Islands._islandRootOf__islands((cast parents), (cast a : Float)) : Float);
-    rootB = (cast Islands._islandRootOf__islands((cast parents), (cast b : Float)) : Float);
+    rootA = (cast Islands._islandRootOf__islands(({ final __callArgument51:Dynamic = parents; __callArgument51; }), (cast a : Float)) : Float);
+    rootB = (cast Islands._islandRootOf__islands(({ final __callArgument52:Dynamic = parents; __callArgument52; }), (cast b : Float)) : Float);
     if ((cast !_Runtime.strictEquals(rootA, rootB) : Bool)) { ((cast parents : flighthq._internal._Map<Float, Float>).set(rootA, (cast rootB))); }
   }
 

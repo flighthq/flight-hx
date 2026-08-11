@@ -33,7 +33,7 @@ class LoadScene3DResources {
         var loaded:Float = cast _Runtime.UNDEFINED;
         var pending:Array<flighthq._internal._Promise<flighthq._internal._Nothing>> = cast _Runtime.UNDEFINED;
         var progress:Null<Signal<Scene3DResourceLoadProgress->Void>> = cast _Runtime.UNDEFINED;
-        resources = (cast updateScene3DResourceStreaming((cast scene), (cast resolver), (cast options)) : Scene3DResources);
+        resources = (cast updateScene3DResourceStreaming(({ final __callArgument5:Dynamic = scene; __callArgument5; }), ({ final __callArgument6:Dynamic = resolver; __callArgument6; }), (cast options : Dynamic)) : Scene3DResources);
         refs = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
         {
           var i:Float = 0.0;
@@ -53,7 +53,7 @@ class LoadScene3DResources {
         total = (cast refs : flighthq._internal._Set<ImageResourceReference>).size;
         loaded = 0.0;
         pending = cast ([] : Array<Dynamic>);
-        progress = ({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.progress; });
+        progress = ({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.progress; });
         for (ref in _Runtime.iterable(refs)) {
           if ((cast ((cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved) : Bool) || (cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed) : Bool)) : Bool)) {
             loaded++;
@@ -66,18 +66,18 @@ class LoadScene3DResources {
             if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ loaded: loaded, total: total }]]), 1); }
           }] : Array<Dynamic>))] : Array<Dynamic>));
         }
-        var __flowBranch6:Dynamic;
+        var __flowBranch10:Dynamic;
         if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch10 = flighthq._internal._Async.protect(function():Dynamic {
             _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ loaded: loaded, total: total }]]), 1);
             return flighthq._internal._Async.flowNormal();
           });
         } else {
-          __flowBranch6 = flighthq._internal._Async.flowNormal();
+          __flowBranch10 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
-          return flighthq._internal._Async.flatMap(flighthq._internal._Async.allSettled(pending), function(__awaitValue7:Dynamic):Dynamic {
-            __awaitValue7;
+        return flighthq._internal._Async.continueFlow(__flowBranch10, function():Dynamic {
+          return flighthq._internal._Async.flatMap(flighthq._internal._Async.allSettled(pending), function(__awaitValue11:Dynamic):Dynamic {
+            __awaitValue11;
             return flighthq._internal._Async.flowNormal();
           });
         });
@@ -95,8 +95,8 @@ class LoadScene3DResources {
         for (entry in _Runtime.iterable(((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).values()))) {
           _Runtime.callProperty(promises, 'push', cast ([entry.promise] : Array<Dynamic>));
         }
-        return flighthq._internal._Async.flatMap(flighthq._internal._Async.allSettled(promises), function(__awaitValue12:Dynamic):Dynamic {
-          __awaitValue12;
+        return flighthq._internal._Async.flatMap(flighthq._internal._Async.allSettled(promises), function(__awaitValue16:Dynamic):Dynamic {
+          __awaitValue16;
           return flighthq._internal._Async.flowNormal();
         });
       })

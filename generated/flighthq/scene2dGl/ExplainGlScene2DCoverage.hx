@@ -22,14 +22,14 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 class ExplainGlScene2DCoverage {
   @:noCompletion
   public static function explainGlScene2DCoverage(out:Array<SceneCoverageEntry>, state:GlRenderState, usage:Scene2DKindUsage):Void {
-    explainScene2DCoverage((cast out), (cast state), (cast usage));
-    (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage((cast out), (cast state), (cast usage), (cast false : Bool)) : Bool);
+    explainScene2DCoverage(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = usage; __callArgument2; }));
+    (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage(({ final __callArgument3:Dynamic = out; __callArgument3; }), ({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = usage; __callArgument5; }), (cast false : Bool)) : Bool);
   }
 
   @:noCompletion
   public static function hasGlScene2DCoverage(state:GlRenderState, usage:Scene2DKindUsage):Bool {
-    if ((cast !(cast (cast hasScene2DCoverage((cast state), (cast usage)) : Bool) : Bool) : Bool)) { return cast false; }
-    return cast !(cast (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage((cast null), (cast state), (cast usage), (cast true : Bool)) : Bool) : Bool);
+    if ((cast !(cast (cast hasScene2DCoverage(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = usage; __callArgument7; })) : Bool) : Bool) : Bool)) { return cast false; }
+    return cast !(cast (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage(({ final __callArgument8:Dynamic = null; __callArgument8; }), ({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = usage; __callArgument10; }), (cast true : Bool)) : Bool) : Bool);
     return cast null;
   }
 
@@ -40,13 +40,13 @@ class ExplainGlScene2DCoverage {
     var materials:Null<flighthq._internal._Map<String, GlMaterialRenderer>> = cast _Runtime.UNDEFINED;
     var hasStandard:Bool = cast _Runtime.UNDEFINED;
     found = false;
-    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlRenderStateRuntime);
     blendModes = (cast runtime : GlRenderStateRuntime).glBlendModeRegistry;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'blendModes'), 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'blendModes'), i);
-        if ((cast _Runtime.strictEquals(({ final __collection0:Dynamic = blendModes; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, GlBlendRealization>).has(kind)); }), true) : Bool)) {
+        if ((cast _Runtime.strictEquals(({ final __collection12:Dynamic = blendModes; __collection12 == null ? _Runtime.UNDEFINED : ((cast __collection12 : flighthq._internal._Map<String, GlBlendRealization>).has(kind)); }), true) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.BlendRealization }] : Array<Dynamic>));
           i++;
           continue;
@@ -58,12 +58,12 @@ class ExplainGlScene2DCoverage {
       }
     }
     materials = (cast runtime : GlRenderStateRuntime).materialRendererMap;
-    hasStandard = _Runtime.strictEquals(({ final __collection1:Dynamic = materials; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, GlMaterialRenderer>).has(StandardMaterialKindValue)); }), true);
+    hasStandard = _Runtime.strictEquals(({ final __collection13:Dynamic = materials; __collection13 == null ? _Runtime.UNDEFINED : ((cast __collection13 : flighthq._internal._Map<String, GlMaterialRenderer>).has(StandardMaterialKindValue)); }), true);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'materialKinds'), 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'materialKinds'), i);
-        if ((cast _Runtime.strictEquals(({ final __collection2:Dynamic = materials; __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map<String, GlMaterialRenderer>).has(kind)); }), true) : Bool)) {
+        if ((cast _Runtime.strictEquals(({ final __collection14:Dynamic = materials; __collection14 == null ? _Runtime.UNDEFINED : ((cast __collection14 : flighthq._internal._Map<String, GlMaterialRenderer>).has(kind)); }), true) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
           i++;
           continue;

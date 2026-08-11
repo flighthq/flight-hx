@@ -30,27 +30,27 @@ import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverR
 class SceneResourceResolver {
   public static function createBuiltInScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolver {
     var resolver:Scene3DResourceResolver = cast _Runtime.UNDEFINED;
-    resolver = (cast createScene3DResourceResolver((cast options)) : Scene3DResourceResolver);
-    registerStandardPbrScene3DMaterialTextures((cast resolver.registry));
-    registerUnlitScene3DMaterialTextures((cast resolver.registry));
-    registerExtendedPbrScene3DMaterialTextures((cast resolver.registry));
+    resolver = (cast createScene3DResourceResolver(({ final __callArgument0:Dynamic = options; __callArgument0; })) : Scene3DResourceResolver);
+    registerStandardPbrScene3DMaterialTextures(resolver.registry);
+    registerUnlitScene3DMaterialTextures(resolver.registry);
+    registerExtendedPbrScene3DMaterialTextures(resolver.registry);
     return cast resolver;
     return cast null;
   }
 
   public static function createScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolver {
     var loader:ResourceLoader = cast _Runtime.UNDEFINED;
-    loader = (cast createResourceLoader((cast { dedupe: false, maxConcurrent: ({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.maxConcurrent; }), streaming: true })) : ResourceLoader);
-    startResourceLoad((cast loader));
-    return cast (cast createEntity((cast _Runtime.objectFromPairs([{ key: 'fetch', value: _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.fetch; }), function():Dynamic return cast fetchWebImageResource) }, { key: 'registry', value: _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.registry; }), function():Dynamic return cast (cast createScene3DMaterialTextureRegistry() : Scene3DMaterialTextureRegistry)) }, { key: Scene3DResourceResolverRuntimeKey, value: { inFlight: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), loader: loader, resolved: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), signals: null } }]))) : { >Entity, var fetch:ImageResourceFetch; var registry:Scene3DMaterialTextureRegistry; var ___u40_Scene3DResourceResolverRuntimeKey_u40_45915:{ var inFlight:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>; var loader:ResourceLoader; var resolved:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>; var signals:flighthq._internal._Any; }; });
+    loader = (cast createResourceLoader((cast { dedupe: false, maxConcurrent: ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.maxConcurrent; }), streaming: true } : Dynamic)) : ResourceLoader);
+    startResourceLoad(({ final __callArgument2:Dynamic = loader; __callArgument2; }));
+    return cast (cast createEntity((cast _Runtime.objectFromPairs([{ key: 'fetch', value: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.fetch; }), function():Dynamic return cast fetchWebImageResource) }, { key: 'registry', value: _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.registry; }), function():Dynamic return cast (cast createScene3DMaterialTextureRegistry() : Scene3DMaterialTextureRegistry)) }, { key: Scene3DResourceResolverRuntimeKey, value: { inFlight: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), loader: loader, resolved: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), signals: null } }]) : Dynamic)) : { >Entity, var fetch:ImageResourceFetch; var registry:Scene3DMaterialTextureRegistry; var ___u40_Scene3DResourceResolverRuntimeKey_u40_45915:{ var inFlight:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>; var loader:ResourceLoader; var resolved:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>; var signals:flighthq._internal._Any; }; });
     return cast null;
   }
 
   public static function disposeScene3DResourceResolver(resolver:Scene3DResourceResolver):Void {
     var runtime:Scene3DResourceResolverRuntime = cast _Runtime.UNDEFINED;
     runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
-    cancelResourceLoad((cast (cast runtime : Scene3DResourceResolverRuntime).loader));
-    disposeResourceLoader((cast (cast runtime : Scene3DResourceResolverRuntime).loader));
+    cancelResourceLoad((cast runtime : Scene3DResourceResolverRuntime).loader);
+    disposeResourceLoader((cast runtime : Scene3DResourceResolverRuntime).loader);
     for (entry in _Runtime.iterable(((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).values()))) {
       (cast entry.controller : flighthq._internal.dom.AbortController).abort();
     }

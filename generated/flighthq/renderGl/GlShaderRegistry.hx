@@ -11,7 +11,7 @@ import flighthq.types.GlShaderLocations.GlBitmapShader;
 class GlShaderRegistry {
   public static function registerGlBitmapShader(state:GlRenderState, shader:GlBitmapShader):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime);
     ((cast runtime : GlRenderStateRuntime).defaultBitmapShader = shader);
   }
 }

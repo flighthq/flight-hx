@@ -105,10 +105,10 @@ class Dialog {
         return cast null;
       }));
     }, openDirectory: function(options:OpenDirectoryDialogOptions):flighthq._internal._Promise<Array<FileDialogHandle>> {
-      return cast (cast Dialog.openWebDirectoryDialog__dialog((cast options)) : flighthq._internal._Promise<Array<FileDialogHandle>>);
+      return cast (cast Dialog.openWebDirectoryDialog__dialog(({ final __callArgument10:Dynamic = options; __callArgument10; })) : flighthq._internal._Promise<Array<FileDialogHandle>>);
       return cast _Runtime.UNDEFINED;
     }, openFile: function(options:OpenFileDialogOptions):flighthq._internal._Promise<Array<FileDialogHandle>> {
-      return cast (cast Dialog.openWebFileDialog__dialog((cast options)) : flighthq._internal._Promise<Array<FileDialogHandle>>);
+      return cast (cast Dialog.openWebFileDialog__dialog(({ final __callArgument11:Dynamic = options; __callArgument11; })) : flighthq._internal._Promise<Array<FileDialogHandle>>);
       return cast _Runtime.UNDEFINED;
     }, prompt: function(options:PromptDialogOptions):flighthq._internal._Promise<Null<String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
@@ -122,7 +122,7 @@ class Dialog {
       }));
     }, saveFile: function(options:SaveFileDialogOptions):flighthq._internal._Promise<Null<FileDialogHandle>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve((cast Dialog.saveWebFile__dialog((cast options)) : flighthq._internal._Promise<Null<FileDialogHandle>>));
+        return flighthq._internal._Async.resolve((cast Dialog.saveWebFile__dialog(({ final __callArgument12:Dynamic = options; __callArgument12; })) : flighthq._internal._Promise<Null<FileDialogHandle>>));
       }));
     } };
     return cast null;
@@ -150,44 +150,44 @@ class Dialog {
       flighthq._internal._Async.protect(function():Dynamic {
         var win:WindowWithFileSystemAccess__dialog = cast _Runtime.UNDEFINED;
         win = (cast flighthq._internal.backend.DomWindowBackend.value() : WindowWithFileSystemAccess__dialog);
-        var __flowBranch10:Dynamic;
+        var __flowBranch13:Dynamic;
         if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast win : WindowWithFileSystemAccess__dialog).showDirectoryPicker), 'function') : Bool)) {
-          __flowBranch10 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch13 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
           });
         } else {
-          __flowBranch10 = flighthq._internal._Async.flowNormal();
+          __flowBranch13 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch10, function():Dynamic {
+        return flighthq._internal._Async.continueFlow(__flowBranch13, function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var pickerOptions:FileSystemAccessDirectoryPickerOptions__dialog = cast _Runtime.UNDEFINED;
             var nativeHandle:FileSystemDirectoryHandle__dialog = cast _Runtime.UNDEFINED;
             var handle:FileDialogHandle = cast _Runtime.UNDEFINED;
             pickerOptions = { mode: 'readwrite' };
-            var __flowBranch11:Dynamic;
+            var __flowBranch14:Dynamic;
             if ((cast !_Runtime.strictEquals(options.startIn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              __flowBranch11 = flighthq._internal._Async.protect(function():Dynamic {
+              __flowBranch14 = flighthq._internal._Async.protect(function():Dynamic {
                 var startIn:Null<String> = cast _Runtime.UNDEFINED;
-                startIn = (cast Dialog.toFileSystemAccessStartIn__dialog((cast options.startIn)) : Null<String>);
-                var __flowBranch12:Dynamic;
+                startIn = (cast Dialog.toFileSystemAccessStartIn__dialog(options.startIn) : Null<String>);
+                var __flowBranch15:Dynamic;
                 if ((cast !_Runtime.strictEquals(startIn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                  __flowBranch12 = flighthq._internal._Async.protect(function():Dynamic {
+                  __flowBranch15 = flighthq._internal._Async.protect(function():Dynamic {
                     ((cast pickerOptions : FileSystemAccessDirectoryPickerOptions__dialog).startIn = startIn);
                     return flighthq._internal._Async.flowNormal();
                   });
                 } else {
-                  __flowBranch12 = flighthq._internal._Async.flowNormal();
+                  __flowBranch15 = flighthq._internal._Async.flowNormal();
                 }
-                return flighthq._internal._Async.continueFlow(__flowBranch12, function():Dynamic {
+                return flighthq._internal._Async.continueFlow(__flowBranch15, function():Dynamic {
                   return flighthq._internal._Async.flowNormal();
                 });
               });
             } else {
-              __flowBranch11 = flighthq._internal._Async.flowNormal();
+              __flowBranch14 = flighthq._internal._Async.flowNormal();
             }
-            return flighthq._internal._Async.continueFlow(__flowBranch11, function():Dynamic {
-              return flighthq._internal._Async.flatMap((cast win : WindowWithFileSystemAccess__dialog).showDirectoryPicker((cast pickerOptions)), function(__awaitValue13:Dynamic):Dynamic {
-                nativeHandle = __awaitValue13;
+            return flighthq._internal._Async.continueFlow(__flowBranch14, function():Dynamic {
+              return flighthq._internal._Async.flatMap((cast win : WindowWithFileSystemAccess__dialog).showDirectoryPicker((cast pickerOptions : Dynamic)), function(__awaitValue16:Dynamic):Dynamic {
+                nativeHandle = __awaitValue16;
                 handle = { kind: 'Directory', name: (cast nativeHandle : FileSystemDirectoryHandle__dialog).name, path: null };
                 ((cast Dialog._fileSystemDirectoryHandleRegistry__dialog : flighthq._internal._WeakMap<FileDialogHandle, FileSystemDirectoryHandle__dialog>).set(handle, (cast nativeHandle)));
                 return flighthq._internal._Async.flowReturn(cast ([handle] : Array<Dynamic>));
@@ -213,56 +213,56 @@ class Dialog {
         var showPicker:Null<Null<FileSystemAccessOpenPickerOptions__dialog>->flighthq._internal._Promise<Array<FileSystemFileHandle__dialog>>> = cast _Runtime.UNDEFINED;
         win = (cast flighthq._internal.backend.DomWindowBackend.value() : WindowWithFileSystemAccess__dialog);
         showPicker = (cast win : WindowWithFileSystemAccess__dialog).showOpenFilePicker;
-        var __flowBranch16:Dynamic;
+        var __flowBranch19:Dynamic;
         if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(showPicker), 'function') : Bool)) {
-          __flowBranch16 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch19 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
           });
         } else {
-          __flowBranch16 = flighthq._internal._Async.flowNormal();
+          __flowBranch19 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch16, function():Dynamic {
+        return flighthq._internal._Async.continueFlow(__flowBranch19, function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var pickerOptions:FileSystemAccessOpenPickerOptions__dialog = cast _Runtime.UNDEFINED;
             var types:Null<Array<{ var accept:flighthq._internal._Record<String, Array<String>>; var description:String; }>> = cast _Runtime.UNDEFINED;
             var nativeHandles:Array<FileSystemFileHandle__dialog> = cast _Runtime.UNDEFINED;
             var handles:Array<FileDialogHandle> = cast _Runtime.UNDEFINED;
             pickerOptions = { multiple: _Runtime.coalesce(options.multiple, function():Dynamic return cast false) };
-            types = (cast Dialog.buildFileSystemAccessTypes__dialog((cast options.filters)) : Null<Array<{ var accept:flighthq._internal._Record<String, Array<String>>; var description:String; }>>);
-            var __flowBranch17:Dynamic;
+            types = (cast Dialog.buildFileSystemAccessTypes__dialog((cast options.filters : Dynamic)) : Null<Array<{ var accept:flighthq._internal._Record<String, Array<String>>; var description:String; }>>);
+            var __flowBranch20:Dynamic;
             if ((cast !_Runtime.strictEquals(types, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              __flowBranch17 = flighthq._internal._Async.protect(function():Dynamic {
+              __flowBranch20 = flighthq._internal._Async.protect(function():Dynamic {
                 ((cast pickerOptions : FileSystemAccessOpenPickerOptions__dialog).types = types);
                 return flighthq._internal._Async.flowNormal();
               });
             } else {
-              __flowBranch17 = flighthq._internal._Async.flowNormal();
+              __flowBranch20 = flighthq._internal._Async.flowNormal();
             }
-            return flighthq._internal._Async.continueFlow(__flowBranch17, function():Dynamic {
-              var __flowBranch18:Dynamic;
+            return flighthq._internal._Async.continueFlow(__flowBranch20, function():Dynamic {
+              var __flowBranch21:Dynamic;
               if ((cast !_Runtime.strictEquals(options.startIn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                __flowBranch18 = flighthq._internal._Async.protect(function():Dynamic {
+                __flowBranch21 = flighthq._internal._Async.protect(function():Dynamic {
                   var startIn:Null<String> = cast _Runtime.UNDEFINED;
-                  startIn = (cast Dialog.toFileSystemAccessStartIn__dialog((cast options.startIn)) : Null<String>);
-                  var __flowBranch19:Dynamic;
+                  startIn = (cast Dialog.toFileSystemAccessStartIn__dialog(options.startIn) : Null<String>);
+                  var __flowBranch22:Dynamic;
                   if ((cast !_Runtime.strictEquals(startIn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                    __flowBranch19 = flighthq._internal._Async.protect(function():Dynamic {
+                    __flowBranch22 = flighthq._internal._Async.protect(function():Dynamic {
                       ((cast pickerOptions : FileSystemAccessOpenPickerOptions__dialog).startIn = startIn);
                       return flighthq._internal._Async.flowNormal();
                     });
                   } else {
-                    __flowBranch19 = flighthq._internal._Async.flowNormal();
+                    __flowBranch22 = flighthq._internal._Async.flowNormal();
                   }
-                  return flighthq._internal._Async.continueFlow(__flowBranch19, function():Dynamic {
+                  return flighthq._internal._Async.continueFlow(__flowBranch22, function():Dynamic {
                     return flighthq._internal._Async.flowNormal();
                   });
                 });
               } else {
-                __flowBranch18 = flighthq._internal._Async.flowNormal();
+                __flowBranch21 = flighthq._internal._Async.flowNormal();
               }
-              return flighthq._internal._Async.continueFlow(__flowBranch18, function():Dynamic {
-                return flighthq._internal._Async.flatMap(_Runtime.callProperty(showPicker, 'call', cast ([win, pickerOptions] : Array<Dynamic>)), function(__awaitValue20:Dynamic):Dynamic {
-                  nativeHandles = __awaitValue20;
+              return flighthq._internal._Async.continueFlow(__flowBranch21, function():Dynamic {
+                return flighthq._internal._Async.flatMap(_Runtime.callProperty(showPicker, 'call', cast ([win, pickerOptions] : Array<Dynamic>)), function(__awaitValue23:Dynamic):Dynamic {
+                  nativeHandles = __awaitValue23;
                   handles = cast ([] : Array<Dynamic>);
                   for (nativeHandle in _Runtime.iterable(nativeHandles)) {
                     var handle:FileDialogHandle = (cast { kind: 'File', name: (cast nativeHandle : FileSystemFileHandle__dialog).name, path: null });
@@ -288,7 +288,7 @@ class Dialog {
 
   public static function openWebDirectoryDialog__dialog(options:OpenDirectoryDialogOptions):flighthq._internal._Promise<Array<FileDialogHandle>> {
     if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast flighthq._internal.backend.DomWindowBackend.value() : WindowWithFileSystemAccess__dialog) : WindowWithFileSystemAccess__dialog).showDirectoryPicker), 'function') : Bool)) : Bool)) {
-      return cast (cast Dialog.openDirectoryPickerAccessApi__dialog((cast options)) : flighthq._internal._Promise<Array<FileDialogHandle>>);
+      return cast (cast Dialog.openDirectoryPickerAccessApi__dialog(({ final __callArgument26:Dynamic = options; __callArgument26; })) : flighthq._internal._Promise<Array<FileDialogHandle>>);
     }
     if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool)) {
       return cast flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
@@ -305,7 +305,7 @@ class Dialog {
           var handles:Array<FileDialogHandle> = cast _Runtime.UNDEFINED;
           files = (cast input : flighthq._internal.dom.HTMLInputElement).files;
           if ((cast ((cast _Runtime.strictEquals(files, null) : Bool) || (cast _Runtime.strictEquals((cast files : flighthq._internal.dom.FileList).length, 0.0) : Bool)) : Bool)) {
-            resolve((cast cast ([] : Array<Dynamic>)));
+            resolve((cast cast ([] : Array<Dynamic>) : flighthq._internal._Any));
             return;
           }
           seenDirs = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
@@ -324,10 +324,10 @@ class Dialog {
           }
           resolve((cast handles : flighthq._internal._Any));
         });
-        (cast input : flighthq._internal.dom.HTMLInputElement).addEventListener('cancel', function(__unused6:flighthq._internal.dom.Event):Void { resolve((cast cast ([] : Array<Dynamic>))); });
+        (cast input : flighthq._internal.dom.HTMLInputElement).addEventListener('cancel', function(__unused6:flighthq._internal.dom.Event):Void { resolve((cast cast ([] : Array<Dynamic>) : flighthq._internal._Any)); });
         (cast input : flighthq._internal.dom.HTMLInputElement).click();
       } catch (__error:Dynamic) {
-        resolve((cast cast ([] : Array<Dynamic>)));
+        resolve((cast cast ([] : Array<Dynamic>) : flighthq._internal._Any));
       }
     });
     return cast null;
@@ -335,7 +335,7 @@ class Dialog {
 
   public static function openWebFileDialog__dialog(options:OpenFileDialogOptions):flighthq._internal._Promise<Array<FileDialogHandle>> {
     if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast flighthq._internal.backend.DomWindowBackend.value() : WindowWithFileSystemAccess__dialog) : WindowWithFileSystemAccess__dialog).showOpenFilePicker), 'function') : Bool)) : Bool)) {
-      return cast (cast Dialog.openFileSystemAccessPicker__dialog((cast options)) : flighthq._internal._Promise<Array<FileDialogHandle>>);
+      return cast (cast Dialog.openFileSystemAccessPicker__dialog(({ final __callArgument27:Dynamic = options; __callArgument27; })) : flighthq._internal._Promise<Array<FileDialogHandle>>);
     }
     if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool)) {
       return cast flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
@@ -348,14 +348,14 @@ class Dialog {
         if ((cast _Runtime.strictEquals(options.directory, true) : Bool)) {
           ((cast (cast input : flighthq._internal._Intersection2<flighthq._internal.dom.HTMLInputElement, { var webkitdirectory:Bool; }>) : { var webkitdirectory:Bool; }).webkitdirectory = true);
         }
-        var accept:String = (cast Dialog.buildAcceptAttribute__dialog((cast options.filters)) : String);
+        var accept:String = (cast Dialog.buildAcceptAttribute__dialog((cast options.filters : Dynamic)) : String);
         if ((cast !_Runtime.strictEquals(accept, '') : Bool)) { ((cast input : flighthq._internal.dom.HTMLInputElement).accept = accept); }
         (cast input : flighthq._internal.dom.HTMLInputElement).addEventListener('change', function(__unused8:flighthq._internal.dom.Event):Void {
           var files:Null<flighthq._internal.dom.FileList> = cast _Runtime.UNDEFINED;
           var handles:Array<FileDialogHandle> = cast _Runtime.UNDEFINED;
           files = (cast input : flighthq._internal.dom.HTMLInputElement).files;
           if ((cast ((cast _Runtime.strictEquals(files, null) : Bool) || (cast _Runtime.strictEquals((cast files : flighthq._internal.dom.FileList).length, 0.0) : Bool)) : Bool)) {
-            resolve((cast cast ([] : Array<Dynamic>)));
+            resolve((cast cast ([] : Array<Dynamic>) : flighthq._internal._Any));
             return;
           }
           handles = (cast cast ([] : Array<Dynamic>));
@@ -368,10 +368,10 @@ class Dialog {
           }
           resolve((cast handles : flighthq._internal._Any));
         });
-        (cast input : flighthq._internal.dom.HTMLInputElement).addEventListener('cancel', function(__unused9:flighthq._internal.dom.Event):Void { resolve((cast cast ([] : Array<Dynamic>))); });
+        (cast input : flighthq._internal.dom.HTMLInputElement).addEventListener('cancel', function(__unused9:flighthq._internal.dom.Event):Void { resolve((cast cast ([] : Array<Dynamic>) : flighthq._internal._Any)); });
         (cast input : flighthq._internal.dom.HTMLInputElement).click();
       } catch (__error:Dynamic) {
-        resolve((cast cast ([] : Array<Dynamic>)));
+        resolve((cast cast ([] : Array<Dynamic>) : flighthq._internal._Any));
       }
     });
     return cast null;
@@ -382,81 +382,81 @@ class Dialog {
       flighthq._internal._Async.protect(function():Dynamic {
         var win:WindowWithFileSystemAccess__dialog = cast _Runtime.UNDEFINED;
         win = (cast flighthq._internal.backend.DomWindowBackend.value() : WindowWithFileSystemAccess__dialog);
-        var __flowBranch23:Dynamic;
+        var __flowBranch28:Dynamic;
         if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast win : WindowWithFileSystemAccess__dialog).showSaveFilePicker), 'function') : Bool)) {
-          __flowBranch23 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch28 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn(null);
           });
         } else {
-          __flowBranch23 = flighthq._internal._Async.flowNormal();
+          __flowBranch28 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch23, function():Dynamic {
+        return flighthq._internal._Async.continueFlow(__flowBranch28, function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var pickerOptions:FileSystemAccessSavePickerOptions__dialog = cast _Runtime.UNDEFINED;
             var types:Null<Array<{ var accept:flighthq._internal._Record<String, Array<String>>; var description:String; }>> = cast _Runtime.UNDEFINED;
             var nativeHandle:FileSystemFileHandle__dialog = cast _Runtime.UNDEFINED;
             var handle:FileDialogHandle = cast _Runtime.UNDEFINED;
             pickerOptions = {  };
-            var __flowBranch24:Dynamic;
+            var __flowBranch29:Dynamic;
             if ((cast !_Runtime.strictEquals(options.defaultName, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              __flowBranch24 = flighthq._internal._Async.protect(function():Dynamic {
+              __flowBranch29 = flighthq._internal._Async.protect(function():Dynamic {
                 ((cast pickerOptions : FileSystemAccessSavePickerOptions__dialog).suggestedName = options.defaultName);
                 return flighthq._internal._Async.flowNormal();
               });
             } else {
-              __flowBranch24 = flighthq._internal._Async.protect(function():Dynamic {
-                var __flowBranch25:Dynamic;
+              __flowBranch29 = flighthq._internal._Async.protect(function():Dynamic {
+                var __flowBranch30:Dynamic;
                 if ((cast !_Runtime.strictEquals(options.defaultPath, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                  __flowBranch25 = flighthq._internal._Async.protect(function():Dynamic {
+                  __flowBranch30 = flighthq._internal._Async.protect(function():Dynamic {
                     var parts:Array<String> = cast _Runtime.UNDEFINED;
                     parts = _Runtime.callProperty(_Runtime.replace(options.defaultPath, _Runtime.regexp('\\\\', 'g'), '/', false), 'split', cast (['/'] : Array<Dynamic>));
                     ((cast pickerOptions : FileSystemAccessSavePickerOptions__dialog).suggestedName = flighthq._internal._StaticIndex.readArray(parts, _Runtime.subtractNumbers(_Runtime.field(parts, 'length'), 1.0)));
                     return flighthq._internal._Async.flowNormal();
                   });
                 } else {
-                  __flowBranch25 = flighthq._internal._Async.flowNormal();
+                  __flowBranch30 = flighthq._internal._Async.flowNormal();
                 }
-                return flighthq._internal._Async.continueFlow(__flowBranch25, function():Dynamic {
+                return flighthq._internal._Async.continueFlow(__flowBranch30, function():Dynamic {
                   return flighthq._internal._Async.flowNormal();
                 });
               });
             }
-            return flighthq._internal._Async.continueFlow(__flowBranch24, function():Dynamic {
-              types = (cast Dialog.buildFileSystemAccessTypes__dialog((cast options.filters)) : Null<Array<{ var accept:flighthq._internal._Record<String, Array<String>>; var description:String; }>>);
-              var __flowBranch26:Dynamic;
+            return flighthq._internal._Async.continueFlow(__flowBranch29, function():Dynamic {
+              types = (cast Dialog.buildFileSystemAccessTypes__dialog((cast options.filters : Dynamic)) : Null<Array<{ var accept:flighthq._internal._Record<String, Array<String>>; var description:String; }>>);
+              var __flowBranch31:Dynamic;
               if ((cast !_Runtime.strictEquals(types, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                __flowBranch26 = flighthq._internal._Async.protect(function():Dynamic {
+                __flowBranch31 = flighthq._internal._Async.protect(function():Dynamic {
                   ((cast pickerOptions : FileSystemAccessSavePickerOptions__dialog).types = types);
                   return flighthq._internal._Async.flowNormal();
                 });
               } else {
-                __flowBranch26 = flighthq._internal._Async.flowNormal();
+                __flowBranch31 = flighthq._internal._Async.flowNormal();
               }
-              return flighthq._internal._Async.continueFlow(__flowBranch26, function():Dynamic {
-                var __flowBranch27:Dynamic;
+              return flighthq._internal._Async.continueFlow(__flowBranch31, function():Dynamic {
+                var __flowBranch32:Dynamic;
                 if ((cast !_Runtime.strictEquals(options.startIn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                  __flowBranch27 = flighthq._internal._Async.protect(function():Dynamic {
+                  __flowBranch32 = flighthq._internal._Async.protect(function():Dynamic {
                     var startIn:Null<String> = cast _Runtime.UNDEFINED;
-                    startIn = (cast Dialog.toFileSystemAccessStartIn__dialog((cast options.startIn)) : Null<String>);
-                    var __flowBranch28:Dynamic;
+                    startIn = (cast Dialog.toFileSystemAccessStartIn__dialog(options.startIn) : Null<String>);
+                    var __flowBranch33:Dynamic;
                     if ((cast !_Runtime.strictEquals(startIn, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                      __flowBranch28 = flighthq._internal._Async.protect(function():Dynamic {
+                      __flowBranch33 = flighthq._internal._Async.protect(function():Dynamic {
                         ((cast pickerOptions : FileSystemAccessSavePickerOptions__dialog).startIn = startIn);
                         return flighthq._internal._Async.flowNormal();
                       });
                     } else {
-                      __flowBranch28 = flighthq._internal._Async.flowNormal();
+                      __flowBranch33 = flighthq._internal._Async.flowNormal();
                     }
-                    return flighthq._internal._Async.continueFlow(__flowBranch28, function():Dynamic {
+                    return flighthq._internal._Async.continueFlow(__flowBranch33, function():Dynamic {
                       return flighthq._internal._Async.flowNormal();
                     });
                   });
                 } else {
-                  __flowBranch27 = flighthq._internal._Async.flowNormal();
+                  __flowBranch32 = flighthq._internal._Async.flowNormal();
                 }
-                return flighthq._internal._Async.continueFlow(__flowBranch27, function():Dynamic {
-                  return flighthq._internal._Async.flatMap((cast win : WindowWithFileSystemAccess__dialog).showSaveFilePicker((cast pickerOptions)), function(__awaitValue29:Dynamic):Dynamic {
-                    nativeHandle = __awaitValue29;
+                return flighthq._internal._Async.continueFlow(__flowBranch32, function():Dynamic {
+                  return flighthq._internal._Async.flatMap((cast win : WindowWithFileSystemAccess__dialog).showSaveFilePicker((cast pickerOptions : Dynamic)), function(__awaitValue34:Dynamic):Dynamic {
+                    nativeHandle = __awaitValue34;
                     handle = { kind: 'File', name: (cast nativeHandle : FileSystemFileHandle__dialog).name, path: null };
                     ((cast Dialog._fileSystemHandleRegistry__dialog : flighthq._internal._WeakMap<FileDialogHandle, FileSystemFileHandle__dialog>).set(handle, (cast nativeHandle)));
                     return flighthq._internal._Async.flowReturn(handle);
@@ -483,52 +483,52 @@ class Dialog {
   }
 
   public static function showConfirmDialog(options:MessageDialogOptions):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).confirm((cast options));
+    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).confirm(({ final __callArgument35:Dynamic = options; __callArgument35; }));
     return cast null;
   }
 
   public static function showErrorBox(title:String, content:String):flighthq._internal._Promise<MessageDialogResult> {
-    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).message((cast { kind: 'error', message: content, title: title }));
+    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).message(({ final __callArgument36:Dynamic = { kind: 'error', message: content, title: title }; __callArgument36; }));
     return cast null;
   }
 
   public static function showErrorDialog(options:MessageDialogOptions):flighthq._internal._Promise<MessageDialogResult> {
-    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).message((cast _Runtime.mergeObjects([options, { kind: 'error' }])));
+    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).message(({ final __callArgument37:Dynamic = _Runtime.mergeObjects([options, { kind: 'error' }]); __callArgument37; }));
     return cast null;
   }
 
   public static function showInfoDialog(options:MessageDialogOptions):flighthq._internal._Promise<MessageDialogResult> {
-    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).message((cast _Runtime.mergeObjects([options, { kind: 'info' }])));
+    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).message(({ final __callArgument38:Dynamic = _Runtime.mergeObjects([options, { kind: 'info' }]); __callArgument38; }));
     return cast null;
   }
 
   public static function showMessageDialog(options:MessageDialogOptions):flighthq._internal._Promise<MessageDialogResult> {
-    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).message((cast options));
+    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).message(({ final __callArgument39:Dynamic = options; __callArgument39; }));
     return cast null;
   }
 
   public static function showOpenDirectoryDialog(options:OpenDirectoryDialogOptions):flighthq._internal._Promise<Array<FileDialogHandle>> {
-    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).openDirectory((cast options));
+    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).openDirectory(({ final __callArgument40:Dynamic = options; __callArgument40; }));
     return cast null;
   }
 
   public static function showOpenFileDialog(options:OpenFileDialogOptions):flighthq._internal._Promise<Array<FileDialogHandle>> {
-    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).openFile((cast options));
+    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).openFile(({ final __callArgument41:Dynamic = options; __callArgument41; }));
     return cast null;
   }
 
   public static function showPromptDialog(options:PromptDialogOptions):flighthq._internal._Promise<Null<String>> {
-    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).prompt((cast options));
+    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).prompt(({ final __callArgument42:Dynamic = options; __callArgument42; }));
     return cast null;
   }
 
   public static function showSaveFileDialog(options:SaveFileDialogOptions):flighthq._internal._Promise<Null<FileDialogHandle>> {
-    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).saveFile((cast options));
+    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).saveFile(({ final __callArgument43:Dynamic = options; __callArgument43; }));
     return cast null;
   }
 
   public static function showWarningDialog(options:MessageDialogOptions):flighthq._internal._Promise<MessageDialogResult> {
-    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).message((cast _Runtime.mergeObjects([options, { kind: 'warning' }])));
+    return cast (cast (cast getDialogBackend() : DialogBackend) : DialogBackend).message(({ final __callArgument44:Dynamic = _Runtime.mergeObjects([options, { kind: 'warning' }]); __callArgument44; }));
     return cast null;
   }
 

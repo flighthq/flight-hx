@@ -44,9 +44,9 @@ class WgpuDropShadowEffect {
     src = (cast source : WgpuRenderTarget);
     dst = (cast dest : WgpuRenderTarget);
     descriptor = (cast { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') });
-    mask = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
-    blurred = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
-    blurTemp = (cast acquireWgpuRenderTarget((cast state), (cast pool), (cast descriptor)) : WgpuRenderTarget);
+    mask = (cast acquireWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }), ({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : WgpuRenderTarget);
+    blurred = (cast acquireWgpuRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : WgpuRenderTarget);
+    blurTemp = (cast acquireWgpuRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : WgpuRenderTarget);
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
     dx = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
@@ -58,31 +58,31 @@ class WgpuDropShadowEffect {
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     tintStrength = HxMath.min(1.0, strength);
     shadowPasses = HxMath.max(1.0, HxMath.floor(strength));
-    applyWgpuEffectTintPass((cast state), (cast src), (cast mask), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
-    applyWgpuEffectBoxBlur((cast state), (cast mask), (cast blurred), (cast blurTemp), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }));
-    clearWgpuEffectTarget((cast state), (cast dst));
+    applyWgpuEffectTintPass(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = src; __callArgument10; }), ({ final __callArgument11:Dynamic = mask; __callArgument11; }), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
+    applyWgpuEffectBoxBlur(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = mask; __callArgument13; }), ({ final __callArgument14:Dynamic = blurred; __callArgument14; }), ({ final __callArgument15:Dynamic = blurTemp; __callArgument15; }), ({ final __callArgument16:Dynamic = { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }; __callArgument16; }));
+    clearWgpuEffectTarget(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = dst; __callArgument18; }));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast shadowPasses : Float)) : Bool)) {
-        applyWgpuEffectBlitOffsetPass((cast state), (cast blurred), (cast dst), (cast dx : Float), (cast dy : Float));
+        applyWgpuEffectBlitOffsetPass(({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = blurred; __callArgument20; }), ({ final __callArgument21:Dynamic = dst; __callArgument21; }), (cast dx : Float), (cast dy : Float));
         i++;
       }
     }
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
-      applyWgpuEffectErasePass((cast state), (cast src), (cast dst));
+      applyWgpuEffectErasePass(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = src; __callArgument23; }), ({ final __callArgument24:Dynamic = dst; __callArgument24; }));
     } else { if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyWgpuEffectBlitPass((cast state), (cast src), (cast dst));
+      applyWgpuEffectBlitPass(({ final __callArgument25:Dynamic = state; __callArgument25; }), ({ final __callArgument26:Dynamic = src; __callArgument26; }), ({ final __callArgument27:Dynamic = dst; __callArgument27; }));
     } }
-    releaseWgpuRenderTarget((cast pool), (cast mask));
-    releaseWgpuRenderTarget((cast pool), (cast blurred));
-    releaseWgpuRenderTarget((cast pool), (cast blurTemp));
+    releaseWgpuRenderTarget(({ final __callArgument28:Dynamic = pool; __callArgument28; }), ({ final __callArgument29:Dynamic = mask; __callArgument29; }));
+    releaseWgpuRenderTarget(({ final __callArgument30:Dynamic = pool; __callArgument30; }), ({ final __callArgument31:Dynamic = blurred; __callArgument31; }));
+    releaseWgpuRenderTarget(({ final __callArgument32:Dynamic = pool; __callArgument32; }), ({ final __callArgument33:Dynamic = blurTemp; __callArgument33; }));
   }
 
   public static final defaultWgpuDropShadowEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyDropShadowEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : DropShadowEffect)));
+    applyDropShadowEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : DropShadowEffect));
   });
 
   public static function registerWgpuDropShadowEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state), (cast 'DropShadowEffect' : String), (cast defaultWgpuDropShadowEffectRunner));
+    registerWgpuRenderEffect(({ final __callArgument34:Dynamic = state; __callArgument34; }), (cast 'DropShadowEffect' : String), ({ final __callArgument35:Dynamic = defaultWgpuDropShadowEffectRunner; __callArgument35; }));
   }
 }

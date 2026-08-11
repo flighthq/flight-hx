@@ -23,12 +23,12 @@ import flighthq.types._internal._ClearcoatPbrExtensionValues.ClearcoatPbrExtensi
 class ClearcoatPbrScene3DMaterialTextures {
   @:noCompletion
   public static function registerClearcoatPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DPbrExtensionTextures((cast registry), (cast ClearcoatPbrExtensionKind : String), (cast function(extension:PbrExtension, out:Array<Texture>):Void {
+    registerScene3DPbrExtensionTextures(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast ClearcoatPbrExtensionKind : String), ({ final __callArgument1:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var clearcoat:ClearcoatPbrExtension = cast _Runtime.UNDEFINED;
       clearcoat = (cast extension : ClearcoatPbrExtension);
       if ((cast !_Runtime.strictEquals(_Runtime.field(clearcoat, 'clearcoatMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(clearcoat, 'clearcoatMap')] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(clearcoat, 'clearcoatNormalMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(clearcoat, 'clearcoatNormalMap')] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(clearcoat, 'clearcoatRoughnessMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(clearcoat, 'clearcoatRoughnessMap')] : Array<Dynamic>)); }
-    }));
+    }; __callArgument1; }));
   }
 }

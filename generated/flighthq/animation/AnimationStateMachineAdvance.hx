@@ -13,10 +13,10 @@ import flighthq.types.EasingFunction;
 class AnimationStateMachineAdvance {
   public static function advanceAnimationStateMachineWithScratch(machine:AnimationStateMachine, dt:Float, advanced:Array<AnimationPlayer>):Void {
     var toIndex:Null<Float> = cast _Runtime.UNDEFINED;
-    advanceAnimationPlayers((cast (cast (cast flighthq._internal._StaticIndex.readArray((cast machine : AnimationStateMachine).states, (cast machine : AnimationStateMachine).currentStateIndex) : AnimationStateMachineState).blendTree : AnimationBlendTree).players), (cast dt : Float), (cast advanced));
+    advanceAnimationPlayers((cast (cast flighthq._internal._StaticIndex.readArray((cast machine : AnimationStateMachine).states, (cast machine : AnimationStateMachine).currentStateIndex) : AnimationStateMachineState).blendTree : AnimationBlendTree).players, (cast dt : Float), ({ final __callArgument0:Dynamic = advanced; __callArgument0; }));
     toIndex = (cast machine : AnimationStateMachine).transitionToStateIndex;
     if ((cast _Runtime.strictEquals(toIndex, null) : Bool)) { return; }
-    advanceAnimationPlayers((cast (cast (cast flighthq._internal._StaticIndex.readArray((cast machine : AnimationStateMachine).states, toIndex) : AnimationStateMachineState).blendTree : AnimationBlendTree).players), (cast dt : Float), (cast advanced));
+    advanceAnimationPlayers((cast (cast flighthq._internal._StaticIndex.readArray((cast machine : AnimationStateMachine).states, toIndex) : AnimationStateMachineState).blendTree : AnimationBlendTree).players, (cast dt : Float), ({ final __callArgument1:Dynamic = advanced; __callArgument1; }));
     ((cast machine : AnimationStateMachine).transitionElapsed += dt);
     ((cast machine : AnimationStateMachine).transitionWeight = (cast machine : AnimationStateMachine).transitionCurve((cast (cast AnimationStateMachineAdvance.getLinearAnimationStateMachineTransitionWeight__animationStateMachineAdvance((cast (cast machine : AnimationStateMachine).transitionElapsed : Float), (cast (cast machine : AnimationStateMachine).transitionDuration : Float)) : Float) : Float)));
     if ((cast ((cast ((cast (cast machine : AnimationStateMachine).transitionDuration : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast (cast machine : AnimationStateMachine).transitionElapsed : Float) >= (cast (cast machine : AnimationStateMachine).transitionDuration : Float)) : Bool)) : Bool)) {

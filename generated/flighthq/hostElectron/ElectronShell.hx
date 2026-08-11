@@ -132,7 +132,7 @@ class ElectronShell {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           var details:ElectronShortcutDetails = (cast { target: link.target, appUserModelId: link.appUserModelId, args: link.args, description: link.description, icon: link.icon, iconIndex: link.iconIndex, cwd: link.workingDirectory });
-          return cast (cast shell : flighthq.types.ElectronApi.ElectronShell).writeShortcutLink((cast shortcutPath : String), (cast operation : String), (cast details));
+          return cast (cast shell : flighthq.types.ElectronApi.ElectronShell).writeShortcutLink((cast shortcutPath : String), (cast operation : String), ({ final __callArgument5:Dynamic = details; __callArgument5; }));
         } catch (__error:Dynamic) {
           return cast false;
         }

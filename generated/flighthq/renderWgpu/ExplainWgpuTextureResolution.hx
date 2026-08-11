@@ -14,9 +14,9 @@ import flighthq.types.WgpuTextureResolver;
 class ExplainWgpuTextureResolution {
   public static function explainWgpuTextureResolution(state:WgpuRenderState, texture:TextureLike):TextureResolutionExplanation {
     var kind:Null<String> = cast _Runtime.UNDEFINED;
-    kind = (cast getTextureSourceKind((cast texture)) : Null<String>);
+    kind = (cast getTextureSourceKind(({ final __callArgument0:Dynamic = texture; __callArgument0; })) : Null<String>);
     if ((cast _Runtime.strictEquals(kind, null) : Bool)) { return cast { kind: kind, status: 'missing-kind' }; }
-    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __collection0:Dynamic = (cast (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuTextureResolverRegistry; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, WgpuTextureResolver>).has(kind)); }), true) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
+    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __collection3:Dynamic = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuTextureResolverRegistry; __collection3 == null ? _Runtime.UNDEFINED : ((cast __collection3 : flighthq._internal._Map<String, WgpuTextureResolver>).has(kind)); }), true) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
     return cast null;
   }
 }

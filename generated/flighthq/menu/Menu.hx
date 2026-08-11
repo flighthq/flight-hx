@@ -39,11 +39,11 @@ class Menu {
       return cast 'item type "' + Std.string(_Runtime.coalesce(item.type, function():Dynamic return cast 'normal')) + '" has "checked" (only "checkbox" and "radio" items are checkable)';
     }
     if ((cast !_Runtime.strictEquals(item.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var groupError:Null<String> = (cast Menu._validateRadioGroups__menu((cast item.submenu)) : Null<String>);
+      var groupError:Null<String> = (cast Menu._validateRadioGroups__menu(item.submenu) : Null<String>);
       if ((cast !_Runtime.strictEquals(groupError, null) : Bool)) { return cast groupError; }
       ((cast seen : flighthq._internal._Set<MenuItemTemplate>).add(item));
       for (child in _Runtime.iterable(item.submenu)) {
-        var err:Null<String> = (cast Menu._validateItem__menu((cast child), (cast seen)) : Null<String>);
+        var err:Null<String> = (cast Menu._validateItem__menu(({ final __callArgument2:Dynamic = child; __callArgument2; }), ({ final __callArgument3:Dynamic = seen; __callArgument3; })) : Null<String>);
         if ((cast !_Runtime.strictEquals(err, null) : Bool)) { return cast err; }
       }
       ((cast seen : flighthq._internal._Set<MenuItemTemplate>).delete_(item));
@@ -133,7 +133,7 @@ class Menu {
           if ((cast ((cast !_Runtime.strictEquals(accelEl, null) : Bool) && (cast !_Runtime.strictEquals(accelEl, labelEl) : Bool)) : Bool)) { ((cast (cast accelEl : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).color = '#888'); }
         });
         if ((cast hasSubmenu : Bool)) {
-          var submenuEl:flighthq._internal.dom.HTMLUListElement = (cast Menu.buildWebMenuElement__menu((cast item.submenu), (cast onSelect)) : flighthq._internal.dom.HTMLUListElement);
+          var submenuEl:flighthq._internal.dom.HTMLUListElement = (cast Menu.buildWebMenuElement__menu(({ final __callArgument8:Dynamic = item.submenu; __callArgument8; }), ({ final __callArgument9:Dynamic = onSelect; __callArgument9; })) : flighthq._internal.dom.HTMLUListElement);
           ((cast (cast submenuEl : flighthq._internal.dom.HTMLUListElement).style : flighthq._internal.dom.CSSStyleDeclaration).position = 'absolute');
           ((cast (cast submenuEl : flighthq._internal.dom.HTMLUListElement).style : flighthq._internal.dom.CSSStyleDeclaration).top = '0');
           ((cast (cast submenuEl : flighthq._internal.dom.HTMLUListElement).style : flighthq._internal.dom.CSSStyleDeclaration).left = '100%');
@@ -203,7 +203,7 @@ class Menu {
     var item:MenuItemTemplate = cast _Runtime.UNDEFINED;
     item = (cast _Runtime.mergeObjects([{ type: 'normal' }, { enabled: true }, template]));
     if ((cast !_Runtime.strictEquals(item.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (item.submenu = cast ((cast _Runtime.mapArray((cast item.submenu : Array<MenuItemTemplate>), function(child:MenuItemTemplate, __unused0:Float, __unused1:Array<MenuItemTemplate>):MenuItemTemplate return (cast createMenuItemTemplate((cast child)) : MenuItemTemplate), _Runtime.UNDEFINED)) : Dynamic));
+      (item.submenu = cast ((cast _Runtime.mapArray((cast item.submenu : Array<MenuItemTemplate>), function(child:MenuItemTemplate, __unused0:Float, __unused1:Array<MenuItemTemplate>):MenuItemTemplate return (cast createMenuItemTemplate(({ final __callArgument10:Dynamic = child; __callArgument10; })) : MenuItemTemplate), _Runtime.UNDEFINED)) : Dynamic));
     }
     return cast item;
     return cast null;
@@ -215,7 +215,7 @@ class Menu {
       return cast false;
       return cast _Runtime.UNDEFINED;
     }, popupContextMenu: function(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
-      return cast (cast Menu.showWebContextMenu__menu((cast items), (cast x : Float), (cast y : Float)) : flighthq._internal._Promise<Null<String>>);
+      return cast (cast Menu.showWebContextMenu__menu(({ final __callArgument11:Dynamic = items; __callArgument11; }), (cast x : Float), (cast y : Float)) : flighthq._internal._Promise<Null<String>>);
       return cast _Runtime.UNDEFINED;
     }, subscribeSelect: function():Void->Void {
       return cast function():Void {
@@ -247,15 +247,15 @@ class Menu {
   }
 
   public static function onMenuSelect(listener:String->Void):Void->Void {
-    return cast (cast (cast getMenuBackend() : MenuBackend) : MenuBackend).subscribeSelect((cast function(id:String):Void {
+    return cast (cast (cast getMenuBackend() : MenuBackend) : MenuBackend).subscribeSelect(({ final __callArgument12:Dynamic = function(id:String):Void {
       listener((cast id : String));
       if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Menu._menuSignals__menu : { var onMenuItemSelect:Signal<String->Void>; }).onMenuItemSelect], [id]]), 1); }
-    }));
+    }; __callArgument12; }));
     return cast null;
   }
 
   public static function setApplicationMenu(items:Array<MenuItemTemplate>):Bool {
-    return cast (cast (cast getMenuBackend() : MenuBackend) : MenuBackend).setApplicationMenu((cast items));
+    return cast (cast (cast getMenuBackend() : MenuBackend) : MenuBackend).setApplicationMenu(({ final __callArgument13:Dynamic = items; __callArgument13; }));
     return cast null;
   }
 
@@ -267,7 +267,7 @@ class Menu {
   public static function showContextMenu(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
     var promise:flighthq._internal._Promise<Null<String>> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Menu._menuSignals__menu : { var onContextMenuOpen:Signal<Void->Void>; }).onContextMenuOpen]]), 1); }
-    promise = (cast (cast getMenuBackend() : MenuBackend) : MenuBackend).popupContextMenu((cast items), (cast x : Float), (cast y : Float));
+    promise = (cast (cast getMenuBackend() : MenuBackend) : MenuBackend).popupContextMenu(({ final __callArgument14:Dynamic = items; __callArgument14; }), (cast x : Float), (cast y : Float));
     if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) {
       var signals:MenuSignals = Menu._menuSignals__menu;
       _Runtime.voidValue(_Runtime.callProperty(promise, 'then', cast ([function(__unused2:Null<String>):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onContextMenuClose]]), 1); }] : Array<Dynamic>)));
@@ -302,7 +302,7 @@ class Menu {
         flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
         (cast overlay : flighthq._internal.dom.HTMLDivElement).remove();
         (cast menu : flighthq._internal.dom.HTMLUListElement).remove();
-        resolve((cast selectedId));
+        resolve(({ final __callArgument15:Dynamic = selectedId; __callArgument15; }));
       });
       moveFocus = (cast function moveFocus(delta:Float):Void {
         var items:Array<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
@@ -322,14 +322,14 @@ class Menu {
         }, _Runtime.UNDEFINED);
         if ((cast !_Runtime.strictEquals(Menu._menuSignals__menu, null) : Bool)) {
           var focused:flighthq._internal.dom.HTMLElement = flighthq._internal._StaticIndex.readArray(items, focusIndex);
-          var itemId:Null<String> = _Runtime.optionalIndex(({ final __hostType7 = focused; __hostType7 == null ? _Runtime.UNDEFINED : (cast __hostType7 : flighthq._internal.dom.HTMLElement).dataset; }), 'itemId');
+          var itemId:Null<String> = _Runtime.optionalIndex(({ final __hostType17 = focused; __hostType17 == null ? _Runtime.UNDEFINED : (cast __hostType17 : flighthq._internal.dom.HTMLElement).dataset; }), 'itemId');
           if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Menu._menuSignals__menu : { var onMenuItemHighlight:Signal<String->Void>; }).onMenuItemHighlight], [itemId]]), 1); }
         }
       });
       onKeyDown = (cast function onKeyDown(e:flighthq._internal.dom.KeyboardEvent):Void {
         if ((cast _Runtime.strictEquals(e.key, 'Escape') : Bool)) {
           e.preventDefault();
-          close((cast null));
+          close(({ final __callArgument18:Dynamic = null; __callArgument18; }));
         } else { if ((cast _Runtime.strictEquals(e.key, 'ArrowDown') : Bool)) {
           e.preventDefault();
           moveFocus((cast 1.0 : Float));
@@ -341,30 +341,30 @@ class Menu {
           var focused:flighthq._internal.dom.HTMLElement = flighthq._internal._StaticIndex.readArray((cast _Runtime.toArray(focusableItems) : Array<flighthq._internal.dom.HTMLElement>), focusIndex);
           if ((cast !_Runtime.strictEquals(focused, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             var itemId:Null<String> = _Runtime.getIndex((cast focused : flighthq._internal.dom.HTMLElement).dataset, 'itemId');
-            if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { close((cast itemId)); }
+            if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { close(({ final __callArgument19:Dynamic = itemId; __callArgument19; })); }
           }
         } } } }
       });
       if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) {
-        resolve((cast null));
+        resolve(({ final __callArgument20:Dynamic = null; __callArgument20; }));
         return;
       }
       overlay = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>));
       ((cast (cast overlay : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).cssText = 'position:fixed;inset:0;z-index:2147483646;');
-      menu = (cast Menu.buildWebMenuElement__menu((cast items), (cast function(id:String):Void { close((cast id)); })) : flighthq._internal.dom.HTMLUListElement);
+      menu = (cast Menu.buildWebMenuElement__menu(({ final __callArgument21:Dynamic = items; __callArgument21; }), ({ final __callArgument23:Dynamic = function(id:String):Void { close(({ final __callArgument22:Dynamic = id; __callArgument22; })); }; __callArgument23; })) : flighthq._internal.dom.HTMLUListElement);
       focusableItems = (cast menu : flighthq._internal.dom.HTMLUListElement).querySelectorAll(':scope > li[data-enabled="true"]');
       focusIndex = -1.0;
-      (cast overlay : flighthq._internal.dom.HTMLDivElement).addEventListener('click', function(__unused5:flighthq._internal.dom.PointerEvent):Void { close((cast null)); });
+      (cast overlay : flighthq._internal.dom.HTMLDivElement).addEventListener('click', function(__unused5:flighthq._internal.dom.PointerEvent):Void { close(({ final __callArgument24:Dynamic = null; __callArgument24; })); });
       flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
       (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body') : flighthq._internal.dom.HTMLElement).appendChild(overlay);
       (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'body') : flighthq._internal.dom.HTMLElement).appendChild(menu);
-      clampMenu((cast menu), (cast x : Float), (cast y : Float));
+      clampMenu(({ final __callArgument25:Dynamic = menu; __callArgument25; }), (cast x : Float), (cast y : Float));
     });
     return cast null;
   }
 
   public static function validateMenuItemTemplate(template:MenuItemTemplate):Null<String> {
-    return cast (cast Menu._validateItem__menu((cast template), (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []))) : Null<String>);
+    return cast (cast Menu._validateItem__menu(({ final __callArgument26:Dynamic = template; __callArgument26; }), _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [])) : Null<String>);
     return cast null;
   }
 }

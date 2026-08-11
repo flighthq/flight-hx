@@ -32,7 +32,7 @@ class GlEffectBoxBlur {
     blurX = _Runtime.coalesce((cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }).blurX, function():Dynamic return cast 4.0);
     blurY = _Runtime.coalesce((cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }).blurY, function():Dynamic return cast 4.0);
     edgeColor = (cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }).edgeColor;
-    loc = (cast GlEffectBoxBlur.getBoxBlurShader__glEffectBoxBlur((cast state)) : BoxBlurShaderLocations__glEffectBoxBlur);
+    loc = (cast GlEffectBoxBlur.getBoxBlurShader__glEffectBoxBlur(({ final __callArgument0:Dynamic = state; __callArgument0; })) : BoxBlurShaderLocations__glEffectBoxBlur);
     read = source;
     write = temp;
     {
@@ -40,13 +40,13 @@ class GlEffectBoxBlur {
       while ((cast ((cast pass : Float) < (cast passes : Float)) : Bool)) {
         var radiusX:Float = (cast computeBoxBlurPassRadius((cast blurX : Float), (cast passes : Float), (cast pass : Float)) : Float);
         if ((cast ((cast radiusX : Float) > (cast 0.0 : Float)) : Bool)) {
-          GlEffectBoxBlur.applyBoxBlurPass__glEffectBoxBlur((cast state), (cast read), (cast write), (cast loc), (cast radiusX : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast edgeColor));
+          GlEffectBoxBlur.applyBoxBlurPass__glEffectBoxBlur(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = read; __callArgument2; }), ({ final __callArgument3:Dynamic = write; __callArgument3; }), (cast loc : Dynamic), (cast radiusX : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast edgeColor : Dynamic));
           (read = cast (write : Dynamic));
           (write = cast (((cast _Runtime.strictEquals(write, temp) : Bool) ? (cast dest : Dynamic) : (cast temp : Dynamic)) : Dynamic));
         }
         var radiusY:Float = (cast computeBoxBlurPassRadius((cast blurY : Float), (cast passes : Float), (cast pass : Float)) : Float);
         if ((cast ((cast radiusY : Float) > (cast 0.0 : Float)) : Bool)) {
-          GlEffectBoxBlur.applyBoxBlurPass__glEffectBoxBlur((cast state), (cast read), (cast write), (cast loc), (cast radiusY : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast edgeColor));
+          GlEffectBoxBlur.applyBoxBlurPass__glEffectBoxBlur(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = read; __callArgument5; }), ({ final __callArgument6:Dynamic = write; __callArgument6; }), (cast loc : Dynamic), (cast radiusY : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast edgeColor : Dynamic));
           (read = cast (write : Dynamic));
           (write = cast (((cast _Runtime.strictEquals(write, temp) : Bool) ? (cast dest : Dynamic) : (cast temp : Dynamic)) : Dynamic));
         }
@@ -54,25 +54,25 @@ class GlEffectBoxBlur {
       }
     }
     if ((cast !_Runtime.strictEquals(read, dest) : Bool)) {
-      GlEffectBoxBlur.applyBlurBlit__glEffectBoxBlur((cast state), (cast read), (cast dest));
+      GlEffectBoxBlur.applyBlurBlit__glEffectBoxBlur(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = read; __callArgument8; }), ({ final __callArgument9:Dynamic = dest; __callArgument9; }));
     }
   }
 
   public static function applyBlurBlit__glEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:BoxBlurShaderLocations__glEffectBoxBlur = cast _Runtime.UNDEFINED;
-    loc = (cast GlEffectBoxBlur.getBoxBlurShader__glEffectBoxBlur((cast state)) : BoxBlurShaderLocations__glEffectBoxBlur);
-    drawGlFullscreenPass((cast state), (cast loc), (cast cast ([(cast source : GlRenderTarget).texture] : Array<Dynamic>)), (cast dest), (cast function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
+    loc = (cast GlEffectBoxBlur.getBoxBlurShader__glEffectBoxBlur(({ final __callArgument10:Dynamic = state; __callArgument10; })) : BoxBlurShaderLocations__glEffectBoxBlur);
+    drawGlFullscreenPass(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = loc; __callArgument12; }), ({ final __callArgument13:Dynamic = cast ([(cast source : GlRenderTarget).texture] : Array<Dynamic>); __callArgument13; }), ({ final __callArgument14:Dynamic = dest; __callArgument14; }), ({ final __callArgument15:Dynamic = function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locTexelSize:flighthq._internal.dom.WebGLUniformLocation; }).locTexelSize, 0.0, 0.0);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locRadius:flighthq._internal.dom.WebGLUniformLocation; }).locRadius, 0.0);
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locDirection:flighthq._internal.dom.WebGLUniformLocation; }).locDirection, 0.0, 0.0);
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast loc : { var locEdgeColor:flighthq._internal.dom.WebGLUniformLocation; }).locEdgeColor, 0.0, 0.0, 0.0, 0.0);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locUseEdgeColor:flighthq._internal.dom.WebGLUniformLocation; }).locUseEdgeColor, 0.0);
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused1] : Array<Dynamic>)); }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument15; }));
   }
 
   public static function applyBoxBlurPass__glEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, loc:BoxBlurShaderLocations__glEffectBoxBlur, radius:Float, dirX:Float, dirY:Float, edgeColor:Null<BoxBlurEdgeColor__glEffectBoxBlur>):Void {
-    drawGlFullscreenPass((cast state), (cast loc), (cast cast ([(cast source : GlRenderTarget).texture] : Array<Dynamic>)), (cast dest), (cast function(__unused4:flighthq._internal.dom.WebGL2RenderingContext, __unused5:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused3:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = loc; __callArgument17; }), ({ final __callArgument18:Dynamic = cast ([(cast source : GlRenderTarget).texture] : Array<Dynamic>); __callArgument18; }), ({ final __callArgument19:Dynamic = dest; __callArgument19; }), ({ final __callArgument20:Dynamic = function(__unused4:flighthq._internal.dom.WebGL2RenderingContext, __unused5:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused3:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locTexelSize:flighthq._internal.dom.WebGLUniformLocation; }).locTexelSize, (1.0 / (cast source : GlRenderTarget).width), (1.0 / (cast source : GlRenderTarget).height));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locRadius:flighthq._internal.dom.WebGLUniformLocation; }).locRadius, radius);
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locDirection:flighthq._internal.dom.WebGLUniformLocation; }).locDirection, dirX, dirY);
@@ -84,7 +84,7 @@ class GlEffectBoxBlur {
         flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locUseEdgeColor:flighthq._internal.dom.WebGLUniformLocation; }).locUseEdgeColor, 1.0);
       }
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused4] : Array<Dynamic>)); }));
+    }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument20; }));
   }
 
   public static function getBoxBlurShader__glEffectBoxBlur(state:GlRenderState):BoxBlurShaderLocations__glEffectBoxBlur {
@@ -92,7 +92,7 @@ class GlEffectBoxBlur {
     loc = ((cast GlEffectBoxBlur.boxBlurShaders__glEffectBoxBlur : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, BoxBlurShaderLocations__glEffectBoxBlur>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram((cast gl), (cast GlEffectBoxBlur.BOX_BLUR_FRAGMENT_SRC__glEffectBoxBlur : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument21:Dynamic = gl; __callArgument21; }), (cast GlEffectBoxBlur.BOX_BLUR_FRAGMENT_SRC__glEffectBoxBlur : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locTexelSize: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_texelSize') }, { locRadius: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_radius') }, { locDirection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_direction') }, { locEdgeColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_edgeColor') }, { locUseEdgeColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_useEdgeColor') }]) : Dynamic));
       ((cast GlEffectBoxBlur.boxBlurShaders__glEffectBoxBlur : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, BoxBlurShaderLocations__glEffectBoxBlur>).set((cast state : GlRenderState).gl, (cast loc)));
     }

@@ -35,7 +35,7 @@ class BitmapCopy {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function copyBitmapPixels(dest:BitmapRegion, source:BitmapRegion, composite:Bool = false):Void {
@@ -83,6 +83,6 @@ class BitmapCopy {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 }

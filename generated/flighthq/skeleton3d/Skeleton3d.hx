@@ -32,9 +32,9 @@ import flighthq.types.Skeleton3D;
 import flighthq.types.Skeleton3DValidationDiagnostic;
 
 class Skeleton3d {
-  public static final _invBind__skeleton3d:Matrix4 = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix4);
+  public static final _invBind__skeleton3d:Matrix4 = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4);
 
-  public static final _result__skeleton3d:Matrix4 = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix4);
+  public static final _result__skeleton3d:Matrix4 = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4);
 
   public static function captureMeshSkinBindPose(geometry:MeshGeometry):MeshSkinBindPose {
     return cast Facade_Skeleton3d_flighthq_skeleton3d_SkinMeshGeometry.captureMeshSkinBindPose(geometry);
@@ -43,7 +43,7 @@ class Skeleton3d {
 
   public static function cloneSkeleton3D(skeleton:Skeleton3D):Skeleton3D {
     var clone:{ >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; } = cast _Runtime.UNDEFINED;
-    clone = (cast createEntity((cast { inverseBindMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'inverseBindMatrices')), jointMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'jointMatrices')), joints: _Runtime.slice(_Runtime.field(skeleton, 'joints'), 0, null), names: ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(_Runtime.field(skeleton, 'names'), 0, null) : Dynamic)) : Dynamic)) })) : { >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; });
+    clone = (cast createEntity(({ final __callArgument0:Dynamic = { inverseBindMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'inverseBindMatrices')), jointMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'jointMatrices')), joints: _Runtime.slice(_Runtime.field(skeleton, 'joints'), 0, null), names: ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(_Runtime.field(skeleton, 'names'), 0, null) : Dynamic)) : Dynamic)) }; __callArgument0; })) : { >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; });
     return cast clone;
     return cast null;
   }
@@ -59,7 +59,7 @@ class Skeleton3d {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(sourceJoints, 'length') : Float)) : Bool)) {
         var source:Node3D = flighthq._internal._StaticIndex.readArray(sourceJoints, i);
-        var clone:Node3D = (cast cloneJoint((cast source), (cast i : Float)) : Node3D);
+        var clone:Node3D = (cast cloneJoint(({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast i : Float)) : Node3D);
         flighthq._internal._StaticIndex.writeArray(joints, i, clone);
         ((cast clonesBySource : flighthq._internal._Map<Node3D, Node3D>).set(source, (cast clone)));
         i++;
@@ -68,14 +68,14 @@ class Skeleton3d {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(sourceJoints, 'length') : Float)) : Bool)) {
-        var sourceParent:Null<NodeOf<Node3DTraits>> = (cast getNodeParent((cast flighthq._internal._StaticIndex.readArray(sourceJoints, i))) : Null<NodeOf<Node3DTraits>>);
+        var sourceParent:Null<NodeOf<Node3DTraits>> = (cast getNodeParent((cast flighthq._internal._StaticIndex.readArray(sourceJoints, i) : Dynamic)) : Null<NodeOf<Node3DTraits>>);
         if ((cast _Runtime.strictEquals(sourceParent, null) : Bool)) { i++; continue; }
         var parentClone:Null<Node3D> = ((cast clonesBySource : flighthq._internal._Map<Node3D, Node3D>).get(sourceParent));
-        if ((cast !_Runtime.strictEquals(parentClone, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast addNodeChild((cast parentClone), (cast flighthq._internal._StaticIndex.readArray(joints, i))) : NodeOf<Node3DTraits>); }
+        if ((cast !_Runtime.strictEquals(parentClone, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast addNodeChild((cast parentClone : Dynamic), (cast flighthq._internal._StaticIndex.readArray(joints, i) : Dynamic)) : NodeOf<Node3DTraits>); }
         i++;
       }
     }
-    return cast (cast createEntity((cast { inverseBindMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'inverseBindMatrices')), jointMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'jointMatrices')), joints: joints, names: ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(_Runtime.field(skeleton, 'names'), 0, null) : Dynamic)) : Dynamic)) })) : { >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; });
+    return cast (cast createEntity(({ final __callArgument2:Dynamic = { inverseBindMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'inverseBindMatrices')), jointMatrices: new flighthq._internal._Float32Array(_Runtime.field(skeleton, 'jointMatrices')), joints: joints, names: ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(skeleton, 'names'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(_Runtime.field(skeleton, 'names'), 0, null) : Dynamic)) : Dynamic)) }; __callArgument2; })) : { >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; });
     return cast null;
   }
 
@@ -99,7 +99,7 @@ class Skeleton3d {
             i++;
           }
         }
-        multiplyMatrix4((cast Skeleton3d._result__skeleton3d), (cast (cast getNodeWorldMatrix4((cast flighthq._internal._StaticIndex.readArray(joints, j))) : Matrix4Like)), (cast Skeleton3d._invBind__skeleton3d));
+        multiplyMatrix4(({ final __callArgument3:Dynamic = Skeleton3d._result__skeleton3d; __callArgument3; }), (cast getNodeWorldMatrix4((cast flighthq._internal._StaticIndex.readArray(joints, j) : Dynamic)) : Matrix4Like), ({ final __callArgument4:Dynamic = Skeleton3d._invBind__skeleton3d; __callArgument4; }));
         (cast jointMatrices : flighthq._internal._Float32Array).set(Skeleton3d._result__skeleton3d.m, Std.int(base));
         j++;
       }
@@ -110,8 +110,8 @@ class Skeleton3d {
     var count:Float = cast _Runtime.UNDEFINED;
     var skeleton:{ >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; } = cast _Runtime.UNDEFINED;
     count = _Runtime.field(joints, 'length');
-    skeleton = (cast createEntity((cast { inverseBindMatrices: _Runtime.coalesce(inverseBindMatrices, function():Dynamic return cast new flighthq._internal._Float32Array((count * 16.0))), jointMatrices: new flighthq._internal._Float32Array((count * 16.0)), joints: joints, names: _Runtime.coalesce(names, function():Dynamic return cast null) })) : { >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; });
-    if ((cast _Runtime.strictEquals(inverseBindMatrices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { setSkeleton3DBindPose((cast skeleton)); }
+    skeleton = (cast createEntity(({ final __callArgument5:Dynamic = { inverseBindMatrices: _Runtime.coalesce(inverseBindMatrices, function():Dynamic return cast new flighthq._internal._Float32Array((count * 16.0))), jointMatrices: new flighthq._internal._Float32Array((count * 16.0)), joints: joints, names: _Runtime.coalesce(names, function():Dynamic return cast null) }; __callArgument5; })) : { >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; });
+    if ((cast _Runtime.strictEquals(inverseBindMatrices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { setSkeleton3DBindPose(({ final __callArgument6:Dynamic = skeleton; __callArgument6; })); }
     return cast skeleton;
     return cast null;
   }
@@ -173,13 +173,13 @@ class Skeleton3d {
     __destructure2 = skeleton;
     joints = _Runtime.field(__destructure2, 'joints');
     if ((cast ((cast ((cast jointIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast jointIndex : Float) >= (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool)) { return cast false; }
-    copyMatrix4((cast out), (cast (cast getNodeWorldMatrix4((cast flighthq._internal._StaticIndex.readArray(joints, jointIndex))) : Matrix4Like)));
+    copyMatrix4(({ final __callArgument7:Dynamic = out; __callArgument7; }), (cast getNodeWorldMatrix4((cast flighthq._internal._StaticIndex.readArray(joints, jointIndex) : Dynamic)) : Matrix4Like));
     return cast true;
     return cast null;
   }
 
   public static function getSkeleton3DJointWorldMatrixByName(out:Matrix4Like, skeleton:Skeleton3D, name:String):Bool {
-    return cast (cast getSkeleton3DJointWorldMatrix((cast out), (cast skeleton), (cast (cast getSkeleton3DJointIndexByName((cast skeleton), (cast name : String)) : Float) : Float)) : Bool);
+    return cast (cast getSkeleton3DJointWorldMatrix(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = skeleton; __callArgument9; }), (cast (cast getSkeleton3DJointIndexByName(({ final __callArgument10:Dynamic = skeleton; __callArgument10; }), (cast name : String)) : Float) : Float)) : Bool);
     return cast null;
   }
 
@@ -201,7 +201,7 @@ class Skeleton3d {
     {
       var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
-        (cast inverseMatrix4((cast Skeleton3d._result__skeleton3d), (cast (cast getNodeWorldMatrix4((cast flighthq._internal._StaticIndex.readArray(joints, j))) : Matrix4Like))) : Bool);
+        (cast inverseMatrix4(({ final __callArgument11:Dynamic = Skeleton3d._result__skeleton3d; __callArgument11; }), (cast getNodeWorldMatrix4((cast flighthq._internal._StaticIndex.readArray(joints, j) : Dynamic)) : Matrix4Like)) : Bool);
         (cast inverseBindMatrices : flighthq._internal._Float32Array).set(Skeleton3d._result__skeleton3d.m, Std.int((j * 16.0)));
         j++;
       }

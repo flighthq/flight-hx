@@ -20,7 +20,7 @@ class RenderViewport {
   public static function computeRenderProxyWorldBounds(out:flighthq._internal._Pick<Rectangle, String>, source:flighthq._internal._Any):Bool {
     var worldBounds:Rectangle = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast RenderViewport.isSpatial2DNode__renderViewport((cast source : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast false; }
-    worldBounds = (cast getNodeWorldBoundsRectangle((cast source)) : Rectangle);
+    worldBounds = (cast getNodeWorldBoundsRectangle((cast source : Dynamic)) : Rectangle);
     _Runtime.setField(out, 'x', _Runtime.field(worldBounds, 'x'));
     _Runtime.setField(out, 'y', _Runtime.field(worldBounds, 'y'));
     _Runtime.setField(out, 'width', _Runtime.field(worldBounds, 'width'));
@@ -49,7 +49,7 @@ class RenderViewport {
     if ((cast !(cast (cast computeRenderProxyWorldBounds((cast RenderViewport._scratchBounds__renderViewport : flighthq._internal._Any), (cast source : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast true; }
     bounds = RenderViewport._scratchBounds__renderViewport;
     if ((cast !_Runtime.looseEquals(renderTransform2D, null) : Bool)) {
-      matrixTransformRectangle((cast RenderViewport._scratchTransformed__renderViewport), (cast renderTransform2D), (cast RenderViewport._scratchBounds__renderViewport));
+      matrixTransformRectangle(({ final __callArgument0:Dynamic = RenderViewport._scratchTransformed__renderViewport; __callArgument0; }), ({ final __callArgument1:Dynamic = renderTransform2D; __callArgument1; }), ({ final __callArgument2:Dynamic = RenderViewport._scratchBounds__renderViewport; __callArgument2; }));
       (bounds = cast (RenderViewport._scratchTransformed__renderViewport : Dynamic));
     }
     objMinX = (cast bounds : Rectangle).x;
@@ -66,7 +66,7 @@ class RenderViewport {
 
   @:noCompletion
   public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
-    return cast (cast isRenderableInViewport((cast _Runtime.field(proxy, 'source') : flighthq._internal._Any), (cast viewport), (cast renderTransform2D)) : Bool);
+    return cast (cast isRenderableInViewport((cast _Runtime.field(proxy, 'source') : flighthq._internal._Any), ({ final __callArgument3:Dynamic = viewport; __callArgument3; }), ({ final __callArgument4:Dynamic = renderTransform2D; __callArgument4; })) : Bool);
     return cast null;
   }
 
@@ -75,7 +75,7 @@ class RenderViewport {
     return cast null;
   }
 
-  public static final _scratchBounds__renderViewport:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
+  public static final _scratchBounds__renderViewport:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);
 
-  public static final _scratchTransformed__renderViewport:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
+  public static final _scratchTransformed__renderViewport:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);
 }

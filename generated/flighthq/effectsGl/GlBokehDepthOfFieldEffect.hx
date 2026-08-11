@@ -25,23 +25,23 @@ class GlBokehDepthOfFieldEffect {
     maxBlur = _Runtime.coalesce(_Runtime.field(effect, 'maxBlur'), function():Dynamic return cast 4.0);
     focusDistance = _Runtime.coalesce(_Runtime.field(effect, 'focusDistance'), function():Dynamic return cast 0.5);
     focusRange = _Runtime.coalesce(_Runtime.field(effect, 'focusRange'), function():Dynamic return cast 0.2);
-    program = (cast getGlEffectProgram((cast state), (cast 'lens.bokehDoF' : String), (cast GlBokehDepthOfFieldEffect.BOKEH_DOF_FRAGMENT_SRC__glBokehDepthOfFieldEffect : String)) : GlFullscreenProgram);
+    program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'lens.bokehDoF' : String), (cast GlBokehDepthOfFieldEffect.BOKEH_DOF_FRAGMENT_SRC__glBokehDepthOfFieldEffect : String)) : GlFullscreenProgram);
     inputs = _Runtime.select(depthTexture, function():Dynamic return cast cast ([_Runtime.field(source, 'texture'), depthTexture] : Array<Dynamic>), function():Dynamic return cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>));
-    drawGlFullscreenPass((cast state), (cast program), (cast inputs), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = inputs; __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_maxBlur'), maxBlur);
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_focusDistance'), focusDistance);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_focusRange'), focusRange);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_hasDepth'), _Runtime.select(depthTexture, function():Dynamic return cast 1.0, function():Dynamic return cast 0.0));
-    }));
+    } : Dynamic));
   }
 
   public static final defaultGlBokehDepthOfFieldEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyBokehDepthOfFieldEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'sceneDepthTexture')), (cast (cast effect : BokehDepthOfFieldEffect)));
+    applyBokehDepthOfFieldEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'sceneDepthTexture'), (cast effect : BokehDepthOfFieldEffect));
   });
 
   public static function registerGlBokehDepthOfFieldEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state), (cast 'BokehDepthOfFieldEffect' : String), (cast defaultGlBokehDepthOfFieldEffectRunner));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'BokehDepthOfFieldEffect' : String), ({ final __callArgument6:Dynamic = defaultGlBokehDepthOfFieldEffectRunner; __callArgument6; }));
   }
 
   public static final BOKEH_DOF_FRAGMENT_SRC__glBokehDepthOfFieldEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform float u_maxBlur;\nuniform vec2 u_resolution;\nuniform float u_focusDistance;\nuniform float u_focusRange;\nuniform float u_hasDepth;\nout vec4 o_color;\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  // Circle of confusion: with depth, blur scales by distance from the focus plane; without, full blur.\n  float coc = 1.0;\n  if (u_hasDepth > 0.5) {\n    float depth = texture(u_texture1, v_texCoord).r;\n    coc = clamp(abs(depth - u_focusDistance) / max(u_focusRange, 1e-4), 0.0, 1.0);\n  }\n  float blur = u_maxBlur * coc;\n  vec4 sum = vec4(0.0);\n  float total = 0.0;\n  for (int i = 0; i < 16; i++) {\n    float a = float(i) * 0.39269908; // golden-ish angular step over the disc\n    float r = (float(i % 4) + 1.0) * 0.25;\n    vec2 offset = vec2(cos(a), sin(a)) * r * blur * texel;\n    sum += texture(u_texture0, v_texCoord + offset);\n    total += 1.0;\n  }\n  o_color = sum / total;\n}';

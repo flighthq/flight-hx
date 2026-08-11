@@ -34,21 +34,21 @@ class NodeTransform3d {
   public static function convertNodeVector3GlobalToLocal<Traits:flighthq._internal._Object>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
     var inv:Matrix4 = cast _Runtime.UNDEFINED;
     inv = (cast acquireMatrix4() : Matrix4);
-    (cast inverseMatrix4((cast inv), (cast (cast getNodeWorldMatrix4((cast source)) : Matrix4Like))) : Bool);
-    matrix4TransformPoint((cast out), (cast inv), (cast point));
-    releaseMatrix4((cast inv));
+    (cast inverseMatrix4(({ final __callArgument0:Dynamic = inv; __callArgument0; }), (cast getNodeWorldMatrix4((cast source : Dynamic)) : Matrix4Like)) : Bool);
+    matrix4TransformPoint(({ final __callArgument1:Dynamic = out; __callArgument1; }), ({ final __callArgument2:Dynamic = inv; __callArgument2; }), ({ final __callArgument3:Dynamic = point; __callArgument3; }));
+    releaseMatrix4(({ final __callArgument4:Dynamic = inv; __callArgument4; }));
   }
 
   public static function convertNodeVector3LocalToGlobal<Traits:flighthq._internal._Object>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
-    matrix4TransformPoint((cast out), (cast (cast getNodeWorldMatrix4((cast source)) : Matrix4Like)), (cast point));
+    matrix4TransformPoint(({ final __callArgument5:Dynamic = out; __callArgument5; }), (cast getNodeWorldMatrix4((cast source : Dynamic)) : Matrix4Like), ({ final __callArgument6:Dynamic = point; __callArgument6; }));
   }
 
   @:noCompletion
   public static function ensureNodeLocalMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
+    runtime = (cast getEntityRuntime(({ final __callArgument7:Dynamic = target; __callArgument7; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
     if ((cast ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool)) : Bool)) {
-      NodeTransform3d.recomputeLocalTransform3D__nodeTransform3d((cast target), (cast runtime));
+      NodeTransform3d.recomputeLocalTransform3D__nodeTransform3d((cast target : Dynamic), (cast runtime : Dynamic));
     }
   }
 
@@ -58,86 +58,86 @@ class NodeTransform3d {
     var parent:Null<Transform3DNode<Traits>> = cast _Runtime.UNDEFINED;
     var parentRuntime:Null<{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }> = cast _Runtime.UNDEFINED;
     var parentWorldTransformId:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
+    runtime = (cast getEntityRuntime(({ final __callArgument8:Dynamic = target; __callArgument8; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
     parent = (cast (cast runtime : { var parent:Null<Node<Traits>>; }).parent : Null<Transform3DNode<Traits>>);
     parentWorldTransformId = 0.0;
     if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
-      ensureNodeWorldMatrix4((cast parent));
-      (parentRuntime = cast ((cast getEntityRuntime((cast parent)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : Dynamic));
+      ensureNodeWorldMatrix4((cast parent : Dynamic));
+      (parentRuntime = cast ((cast getEntityRuntime(({ final __callArgument9:Dynamic = parent; __callArgument9; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : Dynamic));
       (parentWorldTransformId = cast ((cast parentRuntime : { var worldTransformId:Float; }).worldTransformId : Dynamic));
     }
     if ((cast ((cast !_Runtime.strictEquals((cast runtime : { var worldTransformUsingLocalTransformId:Float; }).worldTransformUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var worldTransformUsingParentTransformId:Float; }).worldTransformUsingParentTransformId, parentWorldTransformId) : Bool)) : Bool)) {
-      NodeTransform3d.recomputeWorldTransform3D__nodeTransform3d((cast target), (cast runtime), (cast parentRuntime));
+      NodeTransform3d.recomputeWorldTransform3D__nodeTransform3d((cast target : Dynamic), (cast runtime : Dynamic), (cast parentRuntime : Dynamic));
     }
   }
 
   public static function getNodeLocalMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Matrix4Like {
-    ensureNodeLocalMatrix4((cast target));
-    return cast (cast (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var localMatrix4:Null<Matrix4>; }).localMatrix4;
+    ensureNodeLocalMatrix4((cast target : Dynamic));
+    return cast (cast (cast getEntityRuntime(({ final __callArgument10:Dynamic = target; __callArgument10; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var localMatrix4:Null<Matrix4>; }).localMatrix4;
     return cast null;
   }
 
   public static function getNodeTransform3D<Traits:flighthq._internal._Object>(out:Transform3DLike, source:Transform3DNode<Traits>):Void {
-    copyVector3((cast _Runtime.field(out, 'position')), (cast source.position));
-    copyQuaternion((cast _Runtime.field(out, 'rotation')), (cast source.rotation));
-    copyVector3((cast _Runtime.field(out, 'scale')), (cast source.scale));
+    copyVector3(({ final __callArgument11:Dynamic = _Runtime.field(out, 'position'); __callArgument11; }), ({ final __callArgument12:Dynamic = source.position; __callArgument12; }));
+    copyQuaternion(({ final __callArgument13:Dynamic = _Runtime.field(out, 'rotation'); __callArgument13; }), ({ final __callArgument14:Dynamic = source.rotation; __callArgument14; }));
+    copyVector3(({ final __callArgument15:Dynamic = _Runtime.field(out, 'scale'); __callArgument15; }), ({ final __callArgument16:Dynamic = source.scale; __callArgument16; }));
   }
 
   public static function getNodeWorldMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Matrix4Like {
-    ensureNodeWorldMatrix4((cast target));
-    return cast (cast (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var worldMatrix4:Null<Matrix4>; }).worldMatrix4;
+    ensureNodeWorldMatrix4((cast target : Dynamic));
+    return cast (cast (cast getEntityRuntime(({ final __callArgument17:Dynamic = target; __callArgument17; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var worldMatrix4:Null<Matrix4>; }).worldMatrix4;
     return cast null;
   }
 
   public static function isNodeLocalMatrix4Detached<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Bool {
-    ensureNodeLocalMatrix4((cast target));
-    return cast (cast (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var localMatrix4Detached:Bool; }).localMatrix4Detached;
+    ensureNodeLocalMatrix4((cast target : Dynamic));
+    return cast (cast (cast getEntityRuntime(({ final __callArgument18:Dynamic = target; __callArgument18; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var localMatrix4Detached:Bool; }).localMatrix4Detached;
     return cast null;
   }
 
   public static function setNodeLocalMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>, source:Matrix4Like):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
-    if ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool)) { (runtime.localMatrix4 = cast ((cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix4) : Dynamic)); }
-    copyMatrix4((cast runtime.localMatrix4), (cast source));
-    invalidateNodeLocalTransform((cast target));
+    runtime = (cast getEntityRuntime(({ final __callArgument19:Dynamic = target; __callArgument19; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
+    if ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool)) { (runtime.localMatrix4 = cast ((cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4) : Dynamic)); }
+    copyMatrix4(({ final __callArgument20:Dynamic = runtime.localMatrix4; __callArgument20; }), ({ final __callArgument21:Dynamic = source; __callArgument21; }));
+    invalidateNodeLocalTransform((cast target : Dynamic));
     ((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId = (cast runtime : { var localTransformId:Float; }).localTransformId);
     (runtime.localMatrix4Detached = cast (true : Dynamic));
   }
 
   public static function setNodeTransform3D<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>, source:Transform3DLike):Void {
-    copyVector3((cast target.position), (cast _Runtime.field(source, 'position')));
-    copyQuaternion((cast target.rotation), (cast _Runtime.field(source, 'rotation')));
-    copyVector3((cast target.scale), (cast _Runtime.field(source, 'scale')));
-    invalidateNodeLocalTransform((cast target));
+    copyVector3(({ final __callArgument22:Dynamic = target.position; __callArgument22; }), ({ final __callArgument23:Dynamic = _Runtime.field(source, 'position'); __callArgument23; }));
+    copyQuaternion(({ final __callArgument24:Dynamic = target.rotation; __callArgument24; }), ({ final __callArgument25:Dynamic = _Runtime.field(source, 'rotation'); __callArgument25; }));
+    copyVector3(({ final __callArgument26:Dynamic = target.scale; __callArgument26; }), ({ final __callArgument27:Dynamic = _Runtime.field(source, 'scale'); __callArgument27; }));
+    invalidateNodeLocalTransform((cast target : Dynamic));
   }
 
   @:noCompletion
   public static function syncNodeTransform3DFromMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime((cast target)) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
-    ensureNodeLocalMatrix4((cast target));
-    decomposeMatrix4((cast target.position), (cast target.rotation), (cast target.scale), (cast runtime.localMatrix4));
+    runtime = (cast getEntityRuntime(({ final __callArgument28:Dynamic = target; __callArgument28; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
+    ensureNodeLocalMatrix4((cast target : Dynamic));
+    decomposeMatrix4(({ final __callArgument29:Dynamic = target.position; __callArgument29; }), ({ final __callArgument30:Dynamic = target.rotation; __callArgument30; }), ({ final __callArgument31:Dynamic = target.scale; __callArgument31; }), ({ final __callArgument32:Dynamic = runtime.localMatrix4; __callArgument32; }));
     (runtime.localMatrix4Detached = cast (false : Dynamic));
   }
 
   public static function recomputeLocalTransform3D__nodeTransform3d<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }):Void {
-    if ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool)) { (runtime.localMatrix4 = cast ((cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix4) : Dynamic)); }
-    composeMatrix4((cast runtime.localMatrix4), (cast target.position), (cast target.rotation), (cast target.scale));
+    if ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool)) { (runtime.localMatrix4 = cast ((cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4) : Dynamic)); }
+    composeMatrix4(({ final __callArgument33:Dynamic = runtime.localMatrix4; __callArgument33; }), ({ final __callArgument34:Dynamic = target.position; __callArgument34; }), ({ final __callArgument35:Dynamic = target.rotation; __callArgument35; }), ({ final __callArgument36:Dynamic = target.scale; __callArgument36; }));
     (runtime.localMatrix4Detached = cast (false : Dynamic));
     ((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId = (cast runtime : { var localTransformId:Float; }).localTransformId);
   }
 
   public static function recomputeWorldTransform3D__nodeTransform3d<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }, ?parentRuntime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }):Void {
     if ((cast _Runtime.strictEquals(runtime.worldMatrix4, null) : Bool)) {
-      (runtime.worldMatrix4 = cast ((cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix4) : Dynamic));
+      (runtime.worldMatrix4 = cast ((cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4) : Dynamic));
     }
-    ensureNodeLocalMatrix4((cast target));
+    ensureNodeLocalMatrix4((cast target : Dynamic));
     if ((cast !_Runtime.strictEquals(parentRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      multiplyMatrix4((cast runtime.worldMatrix4), (cast parentRuntime.worldMatrix4), (cast runtime.localMatrix4));
+      multiplyMatrix4(({ final __callArgument37:Dynamic = runtime.worldMatrix4; __callArgument37; }), ({ final __callArgument38:Dynamic = parentRuntime.worldMatrix4; __callArgument38; }), ({ final __callArgument39:Dynamic = runtime.localMatrix4; __callArgument39; }));
     } else {
-      copyMatrix4((cast runtime.worldMatrix4), (cast runtime.localMatrix4));
+      copyMatrix4(({ final __callArgument40:Dynamic = runtime.worldMatrix4; __callArgument40; }), ({ final __callArgument41:Dynamic = runtime.localMatrix4; __callArgument41; }));
     }
-    computeNodeWorldTransformRevision((cast runtime), (cast parentRuntime));
+    computeNodeWorldTransformRevision((cast runtime : Dynamic), (cast parentRuntime : Dynamic));
   }
 }

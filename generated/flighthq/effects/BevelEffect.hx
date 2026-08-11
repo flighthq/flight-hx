@@ -27,11 +27,11 @@ class BevelEffect {
   }
 
   public static function registerBevelEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'BevelEffect' : String), (cast BevelEffect.resolveBevelEffectPadding__bevelEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'BevelEffect' : String), (cast BevelEffect.resolveBevelEffectPadding__bevelEffect : Dynamic));
   }
 
   public static function resolveBevelEffectPadding__bevelEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getBevelEffectPadding((cast (cast effect : flighthq.types.BevelEffect))) : RenderEffectPadding);
+    return cast (cast getBevelEffectPadding((cast effect : flighthq.types.BevelEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

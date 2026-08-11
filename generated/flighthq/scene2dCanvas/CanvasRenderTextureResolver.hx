@@ -14,6 +14,6 @@ import flighthq.types._internal._TextureSourceKindValues.RenderTargetTextureSour
 
 class CanvasRenderTextureResolver {
   public static function registerCanvasRenderTextureResolver(resolvers:CanvasTextureResolvers, state:CanvasRenderState):Void {
-    registerCanvasTextureResolver((cast resolvers), (cast RenderTargetTextureSourceKind : String), (cast function(_resolvers:CanvasTextureResolvers, texture:Texture):Null<flighthq._internal.dom.HTMLCanvasElement> return (cast bindCanvasRenderTexture((cast state), (cast (cast texture : RenderTexture))) : Null<flighthq._internal.dom.HTMLCanvasElement>)));
+    registerCanvasTextureResolver(({ final __callArgument0:Dynamic = resolvers; __callArgument0; }), (cast RenderTargetTextureSourceKind : String), (cast function(_resolvers:CanvasTextureResolvers, texture:Texture):Null<flighthq._internal.dom.HTMLCanvasElement> return (cast bindCanvasRenderTexture(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast texture : RenderTexture)) : Null<flighthq._internal.dom.HTMLCanvasElement>) : Dynamic));
   }
 }

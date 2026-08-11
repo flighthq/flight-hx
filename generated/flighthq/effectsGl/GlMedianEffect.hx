@@ -25,19 +25,19 @@ class GlMedianEffect {
     var radius:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     radius = HxMath.min(MAX_MEDIAN_EFFECT_GL_RADIUS, HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0))));
-    program = (cast getGlEffectProgram((cast state), (cast 'stylization.median' : String), (cast GlMedianEffect.MEDIAN_FRAGMENT_SRC__glMedianEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.median' : String), (cast GlMedianEffect.MEDIAN_FRAGMENT_SRC__glMedianEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_texelSize'), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_radius'), radius);
-    }));
+    } : Dynamic));
   }
 
   public static final defaultGlMedianEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyMedianEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : MedianEffect)));
+    applyMedianEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : MedianEffect));
   });
 
   public static function registerGlMedianEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state), (cast 'MedianEffect' : String), (cast defaultGlMedianEffectRunner));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'MedianEffect' : String), ({ final __callArgument6:Dynamic = defaultGlMedianEffectRunner; __callArgument6; }));
   }
 
   public static final MEDIAN_FRAGMENT_SRC__glMedianEffect:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_texelSize;\nuniform int u_radius;\nout vec4 fragColor;\n\nconst int MAX_S = ' + Std.string(GlMedianEffect.MAX_SAMPLES__glMedianEffect) + ';\n\nvoid sortFloat(inout float arr[MAX_S], int n) {\n  for (int i = 1; i < n; i++) {\n    float key = arr[i];\n    int j = i - 1;\n    while (j >= 0 && arr[j] > key) {\n      arr[j + 1] = arr[j];\n      j--;\n    }\n    arr[j + 1] = key;\n  }\n}\n\nvoid main() {\n  int r = clamp(u_radius, 0, ' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + ');\n  if (r == 0) {\n    fragColor = texture(u_texture0, v_texCoord);\n    return;\n  }\n  int n = (2 * r + 1) * (2 * r + 1);\n  float rv[MAX_S];\n  float gv[MAX_S];\n  float bv[MAX_S];\n  float av[MAX_S];\n  int count = 0;\n  for (int dy = -' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + '; dy <= ' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + '; dy++) {\n    for (int dx = -' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + '; dx <= ' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + '; dx++) {\n      if (abs(dy) <= r && abs(dx) <= r) {\n        vec4 s = texture(u_texture0, v_texCoord + vec2(float(dx), float(dy)) * u_texelSize);\n        rv[count] = s.r;\n        gv[count] = s.g;\n        bv[count] = s.b;\n        av[count] = s.a;\n        count++;\n      }\n    }\n  }\n  sortFloat(rv, n);\n  sortFloat(gv, n);\n  sortFloat(bv, n);\n  sortFloat(av, n);\n  int mid = n / 2;\n  fragColor = vec4(rv[mid], gv[mid], bv[mid], av[mid]);\n}';

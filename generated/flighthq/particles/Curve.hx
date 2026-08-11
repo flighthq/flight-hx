@@ -80,24 +80,24 @@ class Curve {
   }
 
   public static function lerpHsvInPlace(colorsOut:flighthq._internal._Union2<flighthq._internal._Float32Array, Array<Float>>, offset:Float, birth:flighthq._internal._Float32Array, death:flighthq._internal._Float32Array, t:Float):Void {
-    lerpHsvDirect((cast colorsOut), (cast offset : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast birth : flighthq._internal._Float32Array), (cast offset : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast birth : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast birth : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast death : flighthq._internal._Float32Array), (cast offset : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast death : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast death : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float)) : Float), (cast t : Float));
+    lerpHsvDirect(({ final __callArgument0:Dynamic = colorsOut; __callArgument0; }), (cast offset : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast birth : flighthq._internal._Float32Array), (cast offset : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast birth : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast birth : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast death : flighthq._internal._Float32Array), (cast offset : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast death : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast death : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float)) : Float), (cast t : Float));
   }
 
   public static function particleColorCurveFromKeyframes(keys:Array<ColorKeyframe>, samples:Float = 33.0):Array<Float> {
     var sorted:Array<ColorKeyframe> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(keys, 'length'), 0.0) : Bool)) { return cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>); }
     sorted = _Runtime.sortAndReturn(_Runtime.slice(keys, 0, null), function(a:ColorKeyframe, b:ColorKeyframe) return (a.time - b.time));
-    return cast (cast buildParticleColorCurve((cast function(t:Float):Array<Float> {
+    return cast (cast buildParticleColorCurve(({ final __callArgument2:Dynamic = function(t:Float):Array<Float> {
       var seg:{ var f:Float; var i:Float; } = cast _Runtime.UNDEFINED;
       var a:ColorKeyframe = cast _Runtime.UNDEFINED;
       var b:ColorKeyframe = cast _Runtime.UNDEFINED;
-      seg = (cast Curve.locateKeyframe__curve((cast sorted), (cast t : Float)) : { var f:Float; var i:Float; });
+      seg = (cast Curve.locateKeyframe__curve(({ final __callArgument1:Dynamic = sorted; __callArgument1; }), (cast t : Float)) : { var f:Float; var i:Float; });
       if ((cast _Runtime.strictEquals((cast seg : { var f:Float; var i:Float; }).f, 0.0) : Bool)) { return cast cast ([(cast flighthq._internal._StaticIndex.readArray(sorted, (cast seg : { var f:Float; var i:Float; }).i) : { var r:Float; }).r, (cast flighthq._internal._StaticIndex.readArray(sorted, (cast seg : { var f:Float; var i:Float; }).i) : { var g:Float; }).g, (cast flighthq._internal._StaticIndex.readArray(sorted, (cast seg : { var f:Float; var i:Float; }).i) : { var b:Float; }).b] : Array<Dynamic>); }
       a = flighthq._internal._StaticIndex.readArray(sorted, (cast seg : { var f:Float; var i:Float; }).i);
       b = flighthq._internal._StaticIndex.readArray(sorted, ((cast seg : { var f:Float; var i:Float; }).i + 1.0));
       return cast cast ([(a.r + ((b.r - a.r) * (cast seg : { var f:Float; var i:Float; }).f)), (a.g + ((b.g - a.g) * (cast seg : { var f:Float; var i:Float; }).f)), (a.b + ((b.b - a.b) * (cast seg : { var f:Float; var i:Float; }).f))] : Array<Dynamic>);
       return cast _Runtime.UNDEFINED;
-    }), (cast samples : Float)) : Array<Float>);
+    }; __callArgument2; }), (cast samples : Float)) : Array<Float>);
     return cast null;
   }
 
@@ -123,7 +123,7 @@ class Curve {
     var sorted:Array<CurveKeyframe> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(keys, 'length'), 0.0) : Bool)) { return cast cast ([0.0, 0.0] : Array<Dynamic>); }
     sorted = _Runtime.sortAndReturn(_Runtime.slice(keys, 0, null), function(a:CurveKeyframe, b:CurveKeyframe) return (a.time - b.time));
-    return cast (cast buildParticleCurve((cast function(t:Float):Float return (cast Curve.interpKeyframe__curve((cast sorted), (cast t : Float)) : Float)), (cast samples : Float)) : Array<Float>);
+    return cast (cast buildParticleCurve(({ final __callArgument4:Dynamic = function(t:Float):Float return (cast Curve.interpKeyframe__curve(({ final __callArgument3:Dynamic = sorted; __callArgument3; }), (cast t : Float)) : Float); __callArgument4; }), (cast samples : Float)) : Array<Float>);
     return cast null;
   }
 
@@ -201,7 +201,7 @@ class Curve {
     var seg:{ var f:Float; var i:Float; } = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
-    seg = (cast Curve.locateKeyframe__curve((cast sorted), (cast t : Float)) : { var f:Float; var i:Float; });
+    seg = (cast Curve.locateKeyframe__curve(({ final __callArgument5:Dynamic = sorted; __callArgument5; }), (cast t : Float)) : { var f:Float; var i:Float; });
     if ((cast _Runtime.strictEquals((cast seg : { var f:Float; var i:Float; }).f, 0.0) : Bool)) { return cast (cast flighthq._internal._StaticIndex.readArray(sorted, (cast seg : { var f:Float; var i:Float; }).i) : { var value:Float; }).value; }
     a = (cast flighthq._internal._StaticIndex.readArray(sorted, (cast seg : { var f:Float; var i:Float; }).i) : { var value:Float; }).value;
     b = (cast flighthq._internal._StaticIndex.readArray(sorted, ((cast seg : { var f:Float; var i:Float; }).i + 1.0)) : { var value:Float; }).value;

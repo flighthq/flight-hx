@@ -12,12 +12,12 @@ import flighthq.types._internal._AmbientLightValues.AmbientLightKind;
 
 class AmbientLight {
   public static function cloneAmbientLight(source:flighthq.types.AmbientLight):flighthq.types.AmbientLight {
-    return cast (cast createAmbientLight((cast { color: _Runtime.field(source, 'color'), intensity: _Runtime.field(source, 'intensity') })) : flighthq.types.AmbientLight);
+    return cast (cast createAmbientLight(({ final __callArgument0:Dynamic = { color: _Runtime.field(source, 'color'), intensity: _Runtime.field(source, 'intensity') }; __callArgument0; })) : flighthq.types.AmbientLight);
     return cast null;
   }
 
   public static function createAmbientLight(?options:AmbientLightOptions):flighthq.types.AmbientLight {
-    return cast (cast createEntity((cast { color: _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var color:Null<Float>; }).color; }), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0), kind: AmbientLightKind })) : { >Entity, var color:Float; var intensity:Float; var kind:String; });
+    return cast (cast createEntity(({ final __callArgument3:Dynamic = { color: _Runtime.coalesce(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var color:Null<Float>; }).color; }), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(({ final __structural2 = options; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0), kind: AmbientLightKind }; __callArgument3; })) : { >Entity, var color:Float; var intensity:Float; var kind:String; });
     return cast null;
   }
 }

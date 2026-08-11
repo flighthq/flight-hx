@@ -13,20 +13,20 @@ class EnableEntityRuntimeGuards {
   @:noCompletion
   public static function disableEntityRuntimeGuards():Void {
     setEntityRuntimeGuardMode((cast false : Bool));
-    setEntityRuntimeWriteGuard((cast null));
+    setEntityRuntimeWriteGuard((cast null : Dynamic));
   }
 
   @:noCompletion
   public static function enableEntityRuntimeGuards():Void {
     setEntityRuntimeGuardMode((cast true : Bool));
-    setEntityRuntimeWriteGuard((cast EnableEntityRuntimeGuards.warnOnDirectWrite__enableEntityRuntimeGuards));
+    setEntityRuntimeWriteGuard((cast EnableEntityRuntimeGuards.warnOnDirectWrite__enableEntityRuntimeGuards : Dynamic));
   }
 
   public static function warnOnDirectWrite__enableEntityRuntimeGuards(slot:EntityRuntimeWriteSlot):Void {
     if ((cast _Runtime.strictEquals(slot, 'binding-slot') : Bool)) {
-      (cast logOnce((cast 'entity:direct-binding-write' : String), (cast LogLevel.Warn), (cast { message: 'EntityRuntime.binding was written directly. Use attachEntityBinding or detachEntityBinding, which keep the binding and the runtime consistent; the write was allowed but is not tracked.' }), (cast 'entity')) : Bool);
+      (cast logOnce((cast 'entity:direct-binding-write' : String), ({ final __callArgument0:Dynamic = LogLevel.Warn; __callArgument0; }), (cast { message: 'EntityRuntime.binding was written directly. Use attachEntityBinding or detachEntityBinding, which keep the binding and the runtime consistent; the write was allowed but is not tracked.' } : Dynamic), ({ final __callArgument1:Dynamic = 'entity'; __callArgument1; })) : Bool);
       return;
     }
-    (cast logOnce((cast 'entity:direct-runtime-write' : String), (cast LogLevel.Warn), (cast { message: 'An entity\'s runtime slot was written directly. Use ensureEntityRuntime or attachEntityBinding; the write was allowed, but bypassing them is how a runtime ends up on the wrong entity.' }), (cast 'entity')) : Bool);
+    (cast logOnce((cast 'entity:direct-runtime-write' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: 'An entity\'s runtime slot was written directly. Use ensureEntityRuntime or attachEntityBinding; the write was allowed, but bypassing them is how a runtime ends up on the wrong entity.' } : Dynamic), ({ final __callArgument3:Dynamic = 'entity'; __callArgument3; })) : Bool);
   }
 }

@@ -13,7 +13,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Quaternion {
   public static function cloneQuaternion(source:QuaternionLike):flighthq.types.Quaternion {
-    return cast (cast createQuaternion((cast source.x), (cast source.y), (cast source.z), (cast source.w)) : flighthq.types.Quaternion);
+    return cast (cast createQuaternion(({ final __callArgument0:Dynamic = source.x; __callArgument0; }), ({ final __callArgument1:Dynamic = source.y; __callArgument1; }), ({ final __callArgument2:Dynamic = source.z; __callArgument2; }), ({ final __callArgument3:Dynamic = source.w; __callArgument3; })) : flighthq.types.Quaternion);
     return cast null;
   }
 
@@ -32,7 +32,7 @@ class Quaternion {
   }
 
   public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):flighthq.types.Quaternion {
-    return cast (cast createEntity((cast { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 1.0) })) : { >Entity, var x:Float; var y:Float; var z:Float; var w:Float; });
+    return cast (cast createEntity(({ final __callArgument4:Dynamic = { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 1.0) }; __callArgument4; })) : { >Entity, var x:Float; var y:Float; var z:Float; var w:Float; });
     return cast null;
   }
 
@@ -45,7 +45,7 @@ class Quaternion {
 
   public static function getQuaternionAngleBetween(a:QuaternionLike, b:QuaternionLike):Float {
     var dot:Float = cast _Runtime.UNDEFINED;
-    dot = HxMath.abs((cast getQuaternionDot((cast a), (cast b)) : Float));
+    dot = HxMath.abs((cast getQuaternionDot(({ final __callArgument5:Dynamic = a; __callArgument5; }), ({ final __callArgument6:Dynamic = b; __callArgument6; })) : Float));
     return cast _Runtime.multiplyNumbers(2.0, HxMath.acos(HxMath.min(1.0, dot)));
     return cast null;
   }
@@ -421,7 +421,7 @@ class Quaternion {
     tz = to.z;
     dot = (((fx * tx) + (fy * ty)) + (fz * tz));
     if ((cast ((cast dot : Float) > (cast 0.999999 : Float)) : Bool)) {
-      setQuaternionIdentity((cast out));
+      setQuaternionIdentity(({ final __callArgument7:Dynamic = out; __callArgument7; }));
       return;
     }
     if ((cast ((cast dot : Float) < (cast -0.999999 : Float)) : Bool)) {
@@ -506,7 +506,7 @@ class Quaternion {
     rz = ((ux * fy) - (uy * fx));
     rLen = HxMath.sqrt((((rx * rx) + (ry * ry)) + (rz * rz)));
     if ((cast _Runtime.strictEquals(rLen, 0.0) : Bool)) {
-      setQuaternionIdentity((cast out));
+      setQuaternionIdentity(({ final __callArgument8:Dynamic = out; __callArgument8; }));
       return;
     }
     rInv = (1.0 / rLen);

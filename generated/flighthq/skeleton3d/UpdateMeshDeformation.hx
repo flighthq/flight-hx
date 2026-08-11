@@ -9,7 +9,7 @@ import flighthq.types.Mesh;
 
 class UpdateMeshDeformation {
   public static function updateMeshDeformation(mesh:Mesh):Void {
-    updateMeshMorph((cast mesh));
-    updateMeshSkin((cast mesh));
+    updateMeshMorph(({ final __callArgument0:Dynamic = mesh; __callArgument0; }));
+    updateMeshSkin(({ final __callArgument1:Dynamic = mesh; __callArgument1; }));
   }
 }

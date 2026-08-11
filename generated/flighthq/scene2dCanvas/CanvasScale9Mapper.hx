@@ -18,7 +18,7 @@ class CanvasScale9Mapper {
     var gw:Float = cast _Runtime.UNDEFINED;
     var gh:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast scaleX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast scaleY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    bounds = (cast CanvasScale9Mapper.computeCommandsBounds__canvasScale9Mapper((cast commands)) : Null<{ var width:Float; var height:Float; }>);
+    bounds = (cast CanvasScale9Mapper.computeCommandsBounds__canvasScale9Mapper(({ final __callArgument0:Dynamic = commands; __callArgument0; })) : Null<{ var width:Float; var height:Float; }>);
     if ((cast ((cast ((cast _Runtime.strictEquals(bounds, null) : Bool) || (cast ((cast (cast bounds : { var width:Float; var height:Float; }).width : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast bounds : { var width:Float; var height:Float; }).height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
     __destructure0 = bounds;
     bw = _Runtime.field(__destructure0, 'width');

@@ -32,15 +32,15 @@ class CapacitorStatusBar {
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, setBackgroundColor: function(color:Float):Void {
-      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setBackgroundColor((cast { color: (cast CapacitorStatusBar.rgbaToHex__capacitorStatusBar((cast color : Float)) : String) })), function(__unused1:flighthq._internal._Any):Void {
+      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setBackgroundColor(({ final __callArgument4:Dynamic = { color: (cast CapacitorStatusBar.rgbaToHex__capacitorStatusBar((cast color : Float)) : String) }; __callArgument4; })), function(__unused1:flighthq._internal._Any):Void {
 
       });
     }, setOverlaysContent: function(overlay:Bool):Void {
-      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setOverlaysWebView((cast { overlay: overlay })), function(__unused2:flighthq._internal._Any):Void {
+      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setOverlaysWebView(({ final __callArgument6:Dynamic = { overlay: overlay }; __callArgument6; })), function(__unused2:flighthq._internal._Any):Void {
 
       });
     }, setStyle: function(style:StatusBarStyle):Void {
-      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setStyle((cast { style: (cast CapacitorStatusBar.toCapacitorStyle__capacitorStatusBar((cast style)) : String) })), function(__unused3:flighthq._internal._Any):Void {
+      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setStyle(({ final __callArgument10:Dynamic = { style: (cast CapacitorStatusBar.toCapacitorStyle__capacitorStatusBar(({ final __callArgument9:Dynamic = style; __callArgument9; })) : String) }; __callArgument10; })), function(__unused3:flighthq._internal._Any):Void {
 
       });
     }, setVisible: function(visible:Bool):Void {

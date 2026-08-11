@@ -30,15 +30,15 @@ class AnimationLayerStack {
     advanced = (cast stack : flighthq.types.AnimationLayerStack).advanceScratch;
     _Runtime.setLength(advanced, 0.0);
     for (tree in _Runtime.iterable((cast stack : flighthq.types.AnimationLayerStack).blendTrees)) {
-      advanceAnimationPlayers((cast (cast tree : AnimationBlendTree).players), (cast dt : Float), (cast advanced));
+      advanceAnimationPlayers((cast (cast tree : AnimationBlendTree).players : Dynamic), (cast dt : Float), (cast advanced : Dynamic));
     }
     for (machine in _Runtime.iterable((cast stack : flighthq.types.AnimationLayerStack).stateMachines)) {
-      advanceAnimationStateMachineWithScratch((cast machine), (cast dt : Float), (cast advanced));
+      advanceAnimationStateMachineWithScratch(({ final __callArgument4:Dynamic = machine; __callArgument4; }), (cast dt : Float), (cast advanced : Dynamic));
     }
   }
 
   public static function createAnimationBlendTreeLayer(blendTree:AnimationBlendTree, ?options:AnimationLayerOptions):AnimationLayer {
-    return cast (cast AnimationLayerStack.createAnimationLayer__animationLayerStack((cast _Runtime.field((cast blendTree : AnimationBlendTree).channels, 'length') : Float), (cast blendTree), (cast null), (cast options)) : AnimationLayer);
+    return cast (cast AnimationLayerStack.createAnimationLayer__animationLayerStack((cast _Runtime.field((cast blendTree : AnimationBlendTree).channels, 'length') : Float), ({ final __callArgument5:Dynamic = blendTree; __callArgument5; }), ({ final __callArgument6:Dynamic = null; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; })) : AnimationLayer);
     return cast null;
   }
 
@@ -64,7 +64,7 @@ class AnimationLayerStack {
         } else { if ((cast !(cast _Runtime.includes(stateMachines, (cast layer : AnimationLayer).stateMachine) : Bool) : Bool)) {
           _Runtime.callProperty(stateMachines, 'push', cast ([(cast layer : AnimationLayer).stateMachine] : Array<Dynamic>));
         } }
-        var sourceChannels:Array<{ var channel:AnimationChannel; }> = (cast AnimationLayerStack.getAnimationLayerChannels__animationLayerStack((cast layer)) : Array<{ var channel:AnimationChannel; }>);
+        var sourceChannels:Array<{ var channel:AnimationChannel; }> = (cast AnimationLayerStack.getAnimationLayerChannels__animationLayerStack(({ final __callArgument8:Dynamic = layer; __callArgument8; })) : Array<{ var channel:AnimationChannel; }>);
         var channelIndices:Array<Float> = _Runtime.coalesce((cast layer : AnimationLayer).channelIndices, function():Dynamic return cast (cast _Runtime.mapArray((cast sourceChannels : Array<{ var channel:AnimationChannel; }>), function(_:{ var channel:AnimationChannel; }, index:Float, __unused0:Array<{ var channel:AnimationChannel; }>):Float return index, _Runtime.UNDEFINED)));
         for (channelIndex in _Runtime.iterable(channelIndices)) {
           var channel:AnimationChannel = (cast flighthq._internal._StaticIndex.readArray(sourceChannels, channelIndex) : { var channel:AnimationChannel; }).channel;
@@ -76,18 +76,18 @@ class AnimationLayerStack {
             continue;
           }
           var existing:AnimationLayerStackChannel = flighthq._internal._StaticIndex.readArray(channels, existingIndex);
-          AnimationLayerStack.assertCompatibleAnimationLayerChannels__animationLayerStack((cast (cast existing : AnimationLayerStackChannel).channel), (cast channel));
+          AnimationLayerStack.assertCompatibleAnimationLayerChannels__animationLayerStack((cast existing : AnimationLayerStackChannel).channel, ({ final __callArgument11:Dynamic = channel; __callArgument11; }));
           _Runtime.callProperty((cast (cast existing : AnimationLayerStackChannel).sources : Array<AnimationLayerStackChannelSource>), 'push', cast ([{ channelIndex: channelIndex, layerIndex: layerIndex }] : Array<Dynamic>));
         }
         layerIndex++;
       }
     }
-    return cast (cast createEntity((cast { advanceScratch: cast ([] : Array<Dynamic>), blendTrees: blendTrees, channels: channels, layers: copiedLayers, sampleScratch: new flighthq._internal._Float32Array(sampleWidth), stateMachines: stateMachines })) : { >Entity, var advanceScratch:Array<flighthq._internal._Any>; var blendTrees:Array<AnimationBlendTree>; var channels:Array<AnimationLayerStackChannel>; var layers:Array<AnimationLayer>; var sampleScratch:flighthq._internal._Float32Array; var stateMachines:Array<AnimationStateMachine>; });
+    return cast (cast createEntity(({ final __callArgument12:Dynamic = { advanceScratch: cast ([] : Array<Dynamic>), blendTrees: blendTrees, channels: channels, layers: copiedLayers, sampleScratch: new flighthq._internal._Float32Array(sampleWidth), stateMachines: stateMachines }; __callArgument12; })) : { >Entity, var advanceScratch:Array<flighthq._internal._Any>; var blendTrees:Array<AnimationBlendTree>; var channels:Array<AnimationLayerStackChannel>; var layers:Array<AnimationLayer>; var sampleScratch:flighthq._internal._Float32Array; var stateMachines:Array<AnimationStateMachine>; });
     return cast null;
   }
 
   public static function createAnimationStateMachineLayer(stateMachine:AnimationStateMachine, ?options:AnimationLayerOptions):AnimationLayer {
-    return cast (cast AnimationLayerStack.createAnimationLayer__animationLayerStack((cast _Runtime.field((cast stateMachine : AnimationStateMachine).channels, 'length') : Float), (cast null), (cast stateMachine), (cast options)) : AnimationLayer);
+    return cast (cast AnimationLayerStack.createAnimationLayer__animationLayerStack((cast _Runtime.field((cast stateMachine : AnimationStateMachine).channels, 'length') : Float), ({ final __callArgument13:Dynamic = null; __callArgument13; }), ({ final __callArgument14:Dynamic = stateMachine; __callArgument14; }), ({ final __callArgument15:Dynamic = options; __callArgument15; })) : AnimationLayer);
     return cast null;
   }
 
@@ -95,7 +95,7 @@ class AnimationLayerStack {
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(stack, 'channels'), 'length') : Float)) : Bool)) {
-        if ((cast (cast sampleAnimationLayerStackChannel((cast out), (cast stack), (cast index : Float)) : Bool) : Bool)) { visit((cast out), (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(stack, 'channels'), index), 'channel')), (cast index : Float)); }
+        if ((cast (cast sampleAnimationLayerStackChannel(({ final __callArgument16:Dynamic = out; __callArgument16; }), ({ final __callArgument17:Dynamic = stack; __callArgument17; }), (cast index : Float)) : Bool) : Bool)) { visit(({ final __callArgument18:Dynamic = out; __callArgument18; }), _Runtime.field(flighthq._internal._StaticIndex.readArray(_Runtime.field(stack, 'channels'), index), 'channel'), (cast index : Float)); }
         index++;
       }
     }
@@ -109,17 +109,17 @@ class AnimationLayerStack {
     hasPose = false;
     for (source in _Runtime.iterable(_Runtime.field(entry, 'sources'))) {
       var layer:AnimationLayer = flighthq._internal._StaticIndex.readArray(_Runtime.field(stack, 'layers'), _Runtime.field(source, 'layerIndex'));
-      if ((cast ((cast !(cast _Runtime.compare((cast layer : AnimationLayer).weight, 0.0, '>') : Bool) : Bool) || (cast !(cast (cast AnimationLayerStack.sampleAnimationLayer__animationLayerStack((cast _Runtime.field(stack, 'sampleScratch')), (cast layer), (cast _Runtime.field(source, 'channelIndex') : Float)) : Bool) : Bool) : Bool)) : Bool)) { continue; }
+      if ((cast ((cast !(cast _Runtime.compare((cast layer : AnimationLayer).weight, 0.0, '>') : Bool) : Bool) || (cast !(cast (cast AnimationLayerStack.sampleAnimationLayer__animationLayerStack(({ final __callArgument21:Dynamic = _Runtime.field(stack, 'sampleScratch'); __callArgument21; }), ({ final __callArgument22:Dynamic = layer; __callArgument22; }), (cast _Runtime.field(source, 'channelIndex') : Float)) : Bool) : Bool) : Bool)) : Bool)) { continue; }
       if ((cast (cast layer : AnimationLayer).additive : Bool)) {
         if ((cast !(cast hasPose : Bool) : Bool)) {
-          AnimationLayerStack.writeAnimationLayerIdentity__animationLayerStack((cast out), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).components : Float), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).quaternion : Bool));
+          AnimationLayerStack.writeAnimationLayerIdentity__animationLayerStack(({ final __callArgument23:Dynamic = out; __callArgument23; }), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).components : Float), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).quaternion : Bool));
           (hasPose = cast (true : Dynamic));
         }
-        addAnimationSample((cast out), (cast out), (cast _Runtime.field(stack, 'sampleScratch')), (cast (cast layer : AnimationLayer).weight : Float), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).quaternion : Bool));
+        addAnimationSample(({ final __callArgument24:Dynamic = out; __callArgument24; }), ({ final __callArgument25:Dynamic = out; __callArgument25; }), ({ final __callArgument26:Dynamic = _Runtime.field(stack, 'sampleScratch'); __callArgument26; }), (cast (cast layer : AnimationLayer).weight : Float), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).quaternion : Bool));
       } else { if ((cast hasPose : Bool)) {
-        blendAnimationSamples((cast out), (cast out), (cast _Runtime.field(stack, 'sampleScratch')), (cast (cast layer : AnimationLayer).weight : Float), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).quaternion : Bool));
+        blendAnimationSamples(({ final __callArgument27:Dynamic = out; __callArgument27; }), ({ final __callArgument28:Dynamic = out; __callArgument28; }), ({ final __callArgument29:Dynamic = _Runtime.field(stack, 'sampleScratch'); __callArgument29; }), (cast (cast layer : AnimationLayer).weight : Float), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).quaternion : Bool));
       } else {
-        AnimationLayerStack.copyAnimationLayerSample__animationLayerStack((cast out), (cast _Runtime.field(stack, 'sampleScratch')), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).components : Float));
+        AnimationLayerStack.copyAnimationLayerSample__animationLayerStack(({ final __callArgument30:Dynamic = out; __callArgument30; }), ({ final __callArgument31:Dynamic = _Runtime.field(stack, 'sampleScratch'); __callArgument31; }), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).components : Float));
         (hasPose = cast (true : Dynamic));
       } }
     }
@@ -155,7 +155,7 @@ class AnimationLayerStack {
   }
 
   public static function createAnimationLayer__animationLayerStack(channelCount:Float, blendTree:Null<AnimationBlendTree>, stateMachine:Null<AnimationStateMachine>, ?options:AnimationLayerOptions):AnimationLayer {
-    return cast (cast createEntity((cast { additive: _Runtime.coalesce(({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var additive:Null<Bool>; }).additive; }), function():Dynamic return cast false), blendTree: blendTree, channelIndices: (cast AnimationLayerStack.copyAnimationLayerChannelIndices__animationLayerStack((cast ({ final __structural9 = options; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var channelIndices:Null<Array<Float>>; }).channelIndices; })), (cast channelCount : Float)) : Null<Array<Float>>), stateMachine: stateMachine, weight: _Runtime.coalesce(({ final __structural10 = options; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var weight:Null<Float>; }).weight; }), function():Dynamic return cast 1.0) })) : { >Entity, var additive:Bool; var blendTree:Null<AnimationBlendTree>; var channelIndices:Null<Array<Float>>; var stateMachine:Null<AnimationStateMachine>; var weight:Float; });
+    return cast (cast createEntity(({ final __callArgument35:Dynamic = { additive: _Runtime.coalesce(({ final __structural32 = options; __structural32 == null ? _Runtime.UNDEFINED : (cast __structural32 : { @:optional var additive:Null<Bool>; }).additive; }), function():Dynamic return cast false), blendTree: blendTree, channelIndices: (cast AnimationLayerStack.copyAnimationLayerChannelIndices__animationLayerStack(({ final __structural33 = options; __structural33 == null ? _Runtime.UNDEFINED : (cast __structural33 : { @:optional var channelIndices:Null<Array<Float>>; }).channelIndices; }), (cast channelCount : Float)) : Null<Array<Float>>), stateMachine: stateMachine, weight: _Runtime.coalesce(({ final __structural34 = options; __structural34 == null ? _Runtime.UNDEFINED : (cast __structural34 : { @:optional var weight:Null<Float>; }).weight; }), function():Dynamic return cast 1.0) }; __callArgument35; })) : { >Entity, var additive:Bool; var blendTree:Null<AnimationBlendTree>; var channelIndices:Null<Array<Float>>; var stateMachine:Null<AnimationStateMachine>; var weight:Float; });
     return cast null;
   }
 
@@ -181,13 +181,13 @@ class AnimationLayerStack {
   }
 
   public static function getAnimationLayerChannels__animationLayerStack(layer:AnimationLayer):Array<{ var channel:AnimationChannel; }> {
-    return cast _Runtime.coalesce(({ final __structural11 = _Runtime.field(layer, 'blendTree'); __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { var channels:Array<AnimationBlendTreeChannel>; }).channels; }), function():Dynamic return cast (cast _Runtime.field(layer, 'stateMachine') : AnimationStateMachine).channels);
+    return cast _Runtime.coalesce(({ final __structural36 = _Runtime.field(layer, 'blendTree'); __structural36 == null ? _Runtime.UNDEFINED : (cast __structural36 : { var channels:Array<AnimationBlendTreeChannel>; }).channels; }), function():Dynamic return cast (cast _Runtime.field(layer, 'stateMachine') : AnimationStateMachine).channels);
     return cast null;
   }
 
   public static function sampleAnimationLayer__animationLayerStack(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, layer:AnimationLayer, channelIndex:Float):Bool {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(layer, 'blendTree'), null) : Bool)) { return cast (cast sampleAnimationBlendTreeChannel((cast out), (cast _Runtime.field(layer, 'blendTree')), (cast channelIndex : Float)) : Bool); }
-    return cast (cast sampleAnimationStateMachineChannel((cast out), (cast _Runtime.field(layer, 'stateMachine')), (cast channelIndex : Float)) : Bool);
+    if ((cast !_Runtime.strictEquals(_Runtime.field(layer, 'blendTree'), null) : Bool)) { return cast (cast sampleAnimationBlendTreeChannel(({ final __callArgument37:Dynamic = out; __callArgument37; }), _Runtime.field(layer, 'blendTree'), (cast channelIndex : Float)) : Bool); }
+    return cast (cast sampleAnimationStateMachineChannel(({ final __callArgument38:Dynamic = out; __callArgument38; }), ({ final __callArgument39:Dynamic = _Runtime.field(layer, 'stateMachine'); __callArgument39; }), (cast channelIndex : Float)) : Bool);
     return cast null;
   }
 

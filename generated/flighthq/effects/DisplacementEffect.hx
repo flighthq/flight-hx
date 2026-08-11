@@ -28,11 +28,11 @@ class DisplacementEffect {
   }
 
   public static function registerDisplacementEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'DisplacementEffect' : String), (cast DisplacementEffect.resolveDisplacementEffectPadding__displacementEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'DisplacementEffect' : String), (cast DisplacementEffect.resolveDisplacementEffectPadding__displacementEffect : Dynamic));
   }
 
   public static function resolveDisplacementEffectPadding__displacementEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getDisplacementEffectPadding((cast (cast effect : flighthq.types.DisplacementEffect))) : RenderEffectPadding);
+    return cast (cast getDisplacementEffectPadding((cast effect : flighthq.types.DisplacementEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

@@ -11,15 +11,15 @@ import flighthq.types.Log.LogLevel;
 class EnableClipGuards {
   @:noCompletion
   public static function disableClipGuards():Void {
-    setClipRegionReleaseGuard((cast null));
+    setClipRegionReleaseGuard((cast null : Dynamic));
   }
 
   @:noCompletion
   public static function enableClipGuards():Void {
-    setClipRegionReleaseGuard((cast EnableClipGuards.warnOnDoubleRelease__enableClipGuards));
+    setClipRegionReleaseGuard((cast EnableClipGuards.warnOnDoubleRelease__enableClipGuards : Dynamic));
   }
 
   public static function warnOnDoubleRelease__enableClipGuards(_clip:ClipRegion):Void {
-    (cast logOnce((cast 'clip:double-release' : String), (cast LogLevel.Warn), (cast { message: 'releaseClipRegion: this region is already in the pool, so it is being released twice. Two later acquireClipRegion calls will hand back the same object and the clips will alias each other. Every acquireClipRegion pairs with exactly one releaseClipRegion, and the region must not be used after release.' }), (cast 'clip')) : Bool);
+    (cast logOnce((cast 'clip:double-release' : String), ({ final __callArgument0:Dynamic = LogLevel.Warn; __callArgument0; }), (cast { message: 'releaseClipRegion: this region is already in the pool, so it is being released twice. Two later acquireClipRegion calls will hand back the same object and the clips will alias each other. Every acquireClipRegion pairs with exactly one releaseClipRegion, and the region must not be used after release.' } : Dynamic), ({ final __callArgument1:Dynamic = 'clip'; __callArgument1; })) : Bool);
   }
 }

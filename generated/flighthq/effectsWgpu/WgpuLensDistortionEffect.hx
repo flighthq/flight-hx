@@ -22,19 +22,19 @@ class WgpuLensDistortionEffect {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(effect, 'amount'), function():Dynamic return cast 0.2);
     scale = _Runtime.coalesce(_Runtime.field(effect, 'scale'), function():Dynamic return cast 1.0);
-    pipeline = (cast getWgpuEffectPipeline((cast state), (cast 'lens.lensDistortion' : String), (cast WgpuLensDistortionEffect.LENS_DISTORTION_FRAGMENT_WGSL__wgpuLensDistortionEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast (cast dest : WgpuRenderTarget)), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'lens.lensDistortion' : String), (cast WgpuLensDistortionEffect.LENS_DISTORTION_FRAGMENT_WGSL__wgpuLensDistortionEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast amount : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast scale : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument4; }));
   }
 
   public static final defaultWgpuLensDistortionEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyLensDistortionEffectToWgpu((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : LensDistortionEffect)));
+    applyLensDistortionEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : LensDistortionEffect));
   });
 
   public static function registerWgpuLensDistortionEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect((cast state), (cast 'LensDistortionEffect' : String), (cast defaultWgpuLensDistortionEffectRunner));
+    registerWgpuRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'LensDistortionEffect' : String), ({ final __callArgument6:Dynamic = defaultWgpuLensDistortionEffectRunner; __callArgument6; }));
   }
 
   public static final LENS_DISTORTION_FRAGMENT_WGSL__wgpuLensDistortionEffect:String = '\nstruct Uniforms {\n  u_amount : f32,\n  u_scale : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let centered = (uv - vec2f(0.5)) / uni.u_scale;\n  let r2 = dot(centered, centered);\n  let distorted = centered * (1.0 + uni.u_amount * r2) + vec2f(0.5);\n  if (distorted.x < 0.0 || distorted.x > 1.0 || distorted.y < 0.0 || distorted.y > 1.0) {\n    return vec4f(0.0, 0.0, 0.0, 1.0);\n  }\n  return textureSampleLevel(tex, smp, distorted, 0.0);\n}';

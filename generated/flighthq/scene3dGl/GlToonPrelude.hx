@@ -29,22 +29,22 @@ class GlToonPrelude {
   @:noCompletion
   public static function compileGlToonProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlToonDefineKey):GlToonProgram {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
-    program = (cast compileGlProgram((cast gl), (cast (cast getGlToonVertexSourceForKey((cast key)) : String) : String), (cast (cast getGlToonFragmentSourceForKey((cast key)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
-    return cast _Runtime.mergeObjects([(cast resolveGlLitLocations((cast gl), (cast program)) : GlToonProgram), { program: program }, { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff') }, { locBaseColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_baseColor') }, { locBaseColorMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_baseColorMap') }, { locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture') }, { locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model') }, { locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix') }, { locRamp: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ramp') }, { locSteps: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_steps') }, { locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection') }]);
+    program = (cast compileGlProgram(({ final __callArgument0:Dynamic = gl; __callArgument0; }), (cast (cast getGlToonVertexSourceForKey(({ final __callArgument1:Dynamic = key; __callArgument1; })) : String) : String), (cast (cast getGlToonFragmentSourceForKey(({ final __callArgument2:Dynamic = key; __callArgument2; })) : String) : String)) : flighthq._internal.dom.WebGLProgram);
+    return cast _Runtime.mergeObjects([(cast resolveGlLitLocations(({ final __callArgument3:Dynamic = gl; __callArgument3; }), ({ final __callArgument4:Dynamic = program; __callArgument4; })) : GlToonProgram), { program: program }, { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff') }, { locBaseColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_baseColor') }, { locBaseColorMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_baseColorMap') }, { locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture') }, { locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model') }, { locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix') }, { locRamp: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ramp') }, { locSteps: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_steps') }, { locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection') }]);
     return cast null;
   }
 
   @:noCompletion
   public static function ensureGlToonProgram(state:GlRenderState, key:GlToonDefineKey):GlToonProgram {
     var fullKey:GlToonDefineKey = cast _Runtime.UNDEFINED;
-    fullKey = (cast _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeSkinnedRun }]));
-    return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlToonProgram)->GlToonProgram)((cast state), (cast 'toon:' + Std.string((cast buildGlToonDefineKey((cast fullKey)) : String)) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlToonProgram return (cast compileGlToonProgram((cast gl), (cast fullKey)) : GlToonProgram))) : GlToonProgram);
+    fullKey = (cast _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlScene3DRuntime) : GlScene3DRuntime).activeSkinnedRun }]));
+    return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlToonProgram)->GlToonProgram)(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast 'toon:' + Std.string((cast buildGlToonDefineKey(({ final __callArgument7:Dynamic = fullKey; __callArgument7; })) : String)) + '' : String), ({ final __callArgument10:Dynamic = function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlToonProgram return (cast compileGlToonProgram(({ final __callArgument8:Dynamic = gl; __callArgument8; }), ({ final __callArgument9:Dynamic = fullKey; __callArgument9; })) : GlToonProgram); __callArgument10; })) : GlToonProgram);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlToonFragmentSourceForKey(key:GlToonDefineKey):String {
-    return cast ((cast GlToonPrelude.buildGlToonDefineSource__glToonPrelude((cast key)) : String) + GlToonPrelude.TOON_FRAGMENT_BODY__glToonPrelude);
+    return cast ((cast GlToonPrelude.buildGlToonDefineSource__glToonPrelude(({ final __callArgument11:Dynamic = key; __callArgument11; })) : String) + GlToonPrelude.TOON_FRAGMENT_BODY__glToonPrelude);
     return cast null;
   }
 
@@ -52,7 +52,7 @@ class GlToonPrelude {
   public static function getGlToonVertexSourceForKey(key:GlToonDefineKey):String {
     var skin:String = cast _Runtime.UNDEFINED;
     skin = _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '');
-    return cast (((cast GlToonPrelude.buildGlToonDefineSource__glToonPrelude((cast key)) : String) + skin) + GlToonPrelude.TOON_VERTEX_BODY__glToonPrelude);
+    return cast (((cast GlToonPrelude.buildGlToonDefineSource__glToonPrelude(({ final __callArgument12:Dynamic = key; __callArgument12; })) : String) + skin) + GlToonPrelude.TOON_VERTEX_BODY__glToonPrelude);
     return cast null;
   }
 

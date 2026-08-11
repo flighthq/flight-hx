@@ -14,14 +14,14 @@ import flighthq.types.Vector2.Vector2Like;
 
 class Projection2d {
   public static function projectCamera2DPoint(camera:Camera2D, worldX:Float, worldY:Float, out:Vector2Like):Void {
-    getCamera2DViewMatrix((cast camera), (cast Projection2d.scratchMatrix__projection2d));
-    matrixTransformPointXY((cast out), (cast Projection2d.scratchMatrix__projection2d), (cast worldX : Float), (cast worldY : Float));
+    getCamera2DViewMatrix(({ final __callArgument0:Dynamic = camera; __callArgument0; }), ({ final __callArgument1:Dynamic = Projection2d.scratchMatrix__projection2d; __callArgument1; }));
+    matrixTransformPointXY(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = Projection2d.scratchMatrix__projection2d; __callArgument3; }), (cast worldX : Float), (cast worldY : Float));
   }
 
   public static function unprojectCamera2DPoint(camera:Camera2D, screenX:Float, screenY:Float, out:Vector2Like):Void {
-    getCamera2DViewMatrix((cast camera), (cast Projection2d.scratchMatrix__projection2d));
-    inverseMatrixTransformPointXY((cast out), (cast Projection2d.scratchMatrix__projection2d), (cast screenX : Float), (cast screenY : Float));
+    getCamera2DViewMatrix(({ final __callArgument4:Dynamic = camera; __callArgument4; }), ({ final __callArgument5:Dynamic = Projection2d.scratchMatrix__projection2d; __callArgument5; }));
+    inverseMatrixTransformPointXY(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = Projection2d.scratchMatrix__projection2d; __callArgument7; }), (cast screenX : Float), (cast screenY : Float));
   }
 
-  public static final scratchMatrix__projection2d:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
+  public static final scratchMatrix__projection2d:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix);
 }

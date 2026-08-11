@@ -35,33 +35,33 @@ class GlBloomEffect {
     var temp:GlRenderTarget = cast _Runtime.UNDEFINED;
     var brightProgram:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     var compositeProgram:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    threshold = (cast computeBloomThreshold((cast effect)) : Float);
-    intensity = (cast computeBloomIntensity((cast effect)) : Float);
-    radius = (cast computeBloomBlurRadius((cast effect)) : Float);
+    threshold = (cast computeBloomThreshold(({ final __callArgument0:Dynamic = effect; __callArgument0; })) : Float);
+    intensity = (cast computeBloomIntensity(({ final __callArgument1:Dynamic = effect; __callArgument1; })) : Float);
+    radius = (cast computeBloomBlurRadius(({ final __callArgument2:Dynamic = effect; __callArgument2; })) : Float);
     descriptor = (cast { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') });
-    bright = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
-    blurred = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
-    temp = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
-    brightProgram = (cast getGlEffectProgram((cast state), (cast 'bloom.bright' : String), (cast GlBloomEffect.BLOOM_BRIGHT_FRAGMENT_SRC__glBloomEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state), (cast brightProgram), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast bright), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, program:GlFullscreenProgram):Void {
+    bright = (cast acquireGlRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : GlRenderTarget);
+    blurred = (cast acquireGlRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : GlRenderTarget);
+    temp = (cast acquireGlRenderTarget(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = pool; __callArgument10; }), ({ final __callArgument11:Dynamic = descriptor; __callArgument11; })) : GlRenderTarget);
+    brightProgram = (cast getGlEffectProgram(({ final __callArgument12:Dynamic = state; __callArgument12; }), (cast 'bloom.bright' : String), (cast GlBloomEffect.BLOOM_BRIGHT_FRAGMENT_SRC__glBloomEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = brightProgram; __callArgument14; }), ({ final __callArgument15:Dynamic = cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>); __callArgument15; }), ({ final __callArgument16:Dynamic = bright; __callArgument16; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, program:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_threshold'), threshold);
-    }));
-    applyGaussianBlurToGl((cast state), (cast bright), (cast blurred), (cast temp), (cast { blurX: radius, blurY: radius }));
-    compositeProgram = (cast getGlEffectProgram((cast state), (cast 'bloom.composite' : String), (cast GlBloomEffect.BLOOM_COMPOSITE_FRAGMENT_SRC__glBloomEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state), (cast compositeProgram), (cast cast ([_Runtime.field(source, 'texture'), (cast blurred : GlRenderTarget).texture] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, program:GlFullscreenProgram):Void {
+    } : Dynamic));
+    applyGaussianBlurToGl(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = bright; __callArgument18; }), ({ final __callArgument19:Dynamic = blurred; __callArgument19; }), ({ final __callArgument20:Dynamic = temp; __callArgument20; }), ({ final __callArgument21:Dynamic = { blurX: radius, blurY: radius }; __callArgument21; }));
+    compositeProgram = (cast getGlEffectProgram(({ final __callArgument22:Dynamic = state; __callArgument22; }), (cast 'bloom.composite' : String), (cast GlBloomEffect.BLOOM_COMPOSITE_FRAGMENT_SRC__glBloomEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument23:Dynamic = state; __callArgument23; }), ({ final __callArgument24:Dynamic = compositeProgram; __callArgument24; }), ({ final __callArgument25:Dynamic = cast ([_Runtime.field(source, 'texture'), (cast blurred : GlRenderTarget).texture] : Array<Dynamic>); __callArgument25; }), ({ final __callArgument26:Dynamic = dest; __callArgument26; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, program:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_intensity'), intensity);
-    }));
-    releaseGlRenderTarget((cast pool), (cast bright));
-    releaseGlRenderTarget((cast pool), (cast blurred));
-    releaseGlRenderTarget((cast pool), (cast temp));
+    } : Dynamic));
+    releaseGlRenderTarget(({ final __callArgument27:Dynamic = pool; __callArgument27; }), ({ final __callArgument28:Dynamic = bright; __callArgument28; }));
+    releaseGlRenderTarget(({ final __callArgument29:Dynamic = pool; __callArgument29; }), ({ final __callArgument30:Dynamic = blurred; __callArgument30; }));
+    releaseGlRenderTarget(({ final __callArgument31:Dynamic = pool; __callArgument31; }), ({ final __callArgument32:Dynamic = temp; __callArgument32; }));
   }
 
   public static final defaultGlBloomEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyBloomEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : BloomEffect)));
+    applyBloomEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BloomEffect));
   });
 
   public static function registerGlBloomEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state), (cast 'BloomEffect' : String), (cast defaultGlBloomEffectRunner));
+    registerGlRenderEffect(({ final __callArgument33:Dynamic = state; __callArgument33; }), (cast 'BloomEffect' : String), ({ final __callArgument34:Dynamic = defaultGlBloomEffectRunner; __callArgument34; }));
   }
 
   public static final BLOOM_BRIGHT_FRAGMENT_SRC__glBloomEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_threshold;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float l = dot(c.rgb, vec3(0.2126, 0.7152, 0.0722));\n  float k = step(u_threshold, l);\n  o_color = vec4(c.rgb * k, c.a);\n}';

@@ -52,7 +52,7 @@ class MeshGeometryBuilders {
     addFace((cast -hx : Float), (cast -hy : Float), (cast -hz : Float), (cast width : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast depth : Float), (cast 0.0 : Float), (cast -1.0 : Float), (cast 0.0 : Float));
     addFace((cast -hx : Float), (cast -hy : Float), (cast hz : Float), (cast width : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast height : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float));
     addFace((cast hx : Float), (cast -hy : Float), (cast -hz : Float), (cast -width : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast height : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast -1.0 : Float));
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument0:Dynamic = positions; __callArgument0; }), ({ final __callArgument1:Dynamic = normals; __callArgument1; }), ({ final __callArgument2:Dynamic = uvs; __callArgument2; }), ({ final __callArgument3:Dynamic = indices; __callArgument3; })) : MeshGeometry);
     return cast null;
   }
 
@@ -146,7 +146,7 @@ class MeshGeometryBuilders {
         j++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument4:Dynamic = positions; __callArgument4; }), ({ final __callArgument5:Dynamic = normals; __callArgument5; }), ({ final __callArgument6:Dynamic = uvs; __callArgument6; }), ({ final __callArgument7:Dynamic = indices; __callArgument7; })) : MeshGeometry);
     return cast null;
   }
 
@@ -161,8 +161,8 @@ class MeshGeometryBuilders {
     normals = (cast cast ([] : Array<Dynamic>));
     uvs = (cast cast ([] : Array<Dynamic>));
     indices = (cast cast ([] : Array<Dynamic>));
-    MeshGeometryBuilders.addDisc__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices), (cast segs : Float), (cast radius : Float), (cast 0.0 : Float), (cast 1.0 : Float));
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
+    MeshGeometryBuilders.addDisc__meshGeometryBuilders(({ final __callArgument8:Dynamic = positions; __callArgument8; }), ({ final __callArgument9:Dynamic = normals; __callArgument9; }), ({ final __callArgument10:Dynamic = uvs; __callArgument10; }), ({ final __callArgument11:Dynamic = indices; __callArgument11; }), (cast segs : Float), (cast radius : Float), (cast 0.0 : Float), (cast 1.0 : Float));
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument12:Dynamic = positions; __callArgument12; }), ({ final __callArgument13:Dynamic = normals; __callArgument13; }), ({ final __callArgument14:Dynamic = uvs; __callArgument14; }), ({ final __callArgument15:Dynamic = indices; __callArgument15; })) : MeshGeometry);
     return cast null;
   }
 
@@ -228,23 +228,23 @@ class MeshGeometryBuilders {
     }
     if ((cast capped : Bool)) {
       if ((cast ((cast bottomRadius : Float) > (cast 0.0 : Float)) : Bool)) {
-        MeshGeometryBuilders.addDisc__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices), (cast segments : Float), (cast bottomRadius : Float), (cast -halfHeight : Float), (cast -1.0 : Float));
+        MeshGeometryBuilders.addDisc__meshGeometryBuilders(({ final __callArgument16:Dynamic = positions; __callArgument16; }), ({ final __callArgument17:Dynamic = normals; __callArgument17; }), ({ final __callArgument18:Dynamic = uvs; __callArgument18; }), ({ final __callArgument19:Dynamic = indices; __callArgument19; }), (cast segments : Float), (cast bottomRadius : Float), (cast -halfHeight : Float), (cast -1.0 : Float));
       }
       if ((cast ((cast topRadius : Float) > (cast 0.0 : Float)) : Bool)) {
-        MeshGeometryBuilders.addDisc__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices), (cast segments : Float), (cast topRadius : Float), (cast halfHeight : Float), (cast 1.0 : Float));
+        MeshGeometryBuilders.addDisc__meshGeometryBuilders(({ final __callArgument20:Dynamic = positions; __callArgument20; }), ({ final __callArgument21:Dynamic = normals; __callArgument21; }), ({ final __callArgument22:Dynamic = uvs; __callArgument22; }), ({ final __callArgument23:Dynamic = indices; __callArgument23; }), (cast segments : Float), (cast topRadius : Float), (cast halfHeight : Float), (cast 1.0 : Float));
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument24:Dynamic = positions; __callArgument24; }), ({ final __callArgument25:Dynamic = normals; __callArgument25; }), ({ final __callArgument26:Dynamic = uvs; __callArgument26; }), ({ final __callArgument27:Dynamic = indices; __callArgument27; })) : MeshGeometry);
     return cast null;
   }
 
   public static function createDodecahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
-    return cast (cast createPolyhedronMeshGeometry((cast MeshGeometryBuilders.DODECAHEDRON_VERTS__meshGeometryBuilders), (cast MeshGeometryBuilders.DODECAHEDRON_FACES__meshGeometryBuilders), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
+    return cast (cast createPolyhedronMeshGeometry(({ final __callArgument28:Dynamic = MeshGeometryBuilders.DODECAHEDRON_VERTS__meshGeometryBuilders; __callArgument28; }), ({ final __callArgument29:Dynamic = MeshGeometryBuilders.DODECAHEDRON_FACES__meshGeometryBuilders; __callArgument29; }), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
     return cast null;
   }
 
   public static function createIcosahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
-    return cast (cast createPolyhedronMeshGeometry((cast MeshGeometryBuilders.ICOSAHEDRON_VERTS__meshGeometryBuilders), (cast MeshGeometryBuilders.ICOSAHEDRON_FACES__meshGeometryBuilders), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
+    return cast (cast createPolyhedronMeshGeometry(({ final __callArgument30:Dynamic = MeshGeometryBuilders.ICOSAHEDRON_VERTS__meshGeometryBuilders; __callArgument30; }), ({ final __callArgument31:Dynamic = MeshGeometryBuilders.ICOSAHEDRON_FACES__meshGeometryBuilders; __callArgument31; }), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
     return cast null;
   }
 
@@ -350,12 +350,12 @@ class MeshGeometryBuilders {
         i++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast faceIndices)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument38:Dynamic = positions; __callArgument38; }), ({ final __callArgument39:Dynamic = normals; __callArgument39; }), ({ final __callArgument40:Dynamic = uvs; __callArgument40; }), ({ final __callArgument41:Dynamic = faceIndices; __callArgument41; })) : MeshGeometry);
     return cast null;
   }
 
   public static function createOctahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
-    return cast (cast createPolyhedronMeshGeometry((cast MeshGeometryBuilders.OCTAHEDRON_VERTS__meshGeometryBuilders), (cast MeshGeometryBuilders.OCTAHEDRON_FACES__meshGeometryBuilders), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
+    return cast (cast createPolyhedronMeshGeometry(({ final __callArgument42:Dynamic = MeshGeometryBuilders.OCTAHEDRON_VERTS__meshGeometryBuilders; __callArgument42; }), ({ final __callArgument43:Dynamic = MeshGeometryBuilders.OCTAHEDRON_FACES__meshGeometryBuilders; __callArgument43; }), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
     return cast null;
   }
 
@@ -414,7 +414,7 @@ class MeshGeometryBuilders {
         iz++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument44:Dynamic = positions; __callArgument44; }), ({ final __callArgument45:Dynamic = normals; __callArgument45; }), ({ final __callArgument46:Dynamic = uvs; __callArgument46; }), ({ final __callArgument47:Dynamic = indices; __callArgument47; })) : MeshGeometry);
     return cast null;
   }
 
@@ -517,7 +517,7 @@ class MeshGeometryBuilders {
         i++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast flatIndices)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument54:Dynamic = positions; __callArgument54; }), ({ final __callArgument55:Dynamic = normals; __callArgument55; }), ({ final __callArgument56:Dynamic = uvs; __callArgument56; }), ({ final __callArgument57:Dynamic = flatIndices; __callArgument57; })) : MeshGeometry);
     return cast null;
   }
 
@@ -534,7 +534,7 @@ class MeshGeometryBuilders {
     normals = (cast cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
     uvs = (cast cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
     indices = (cast cast ([0.0, 1.0, 2.0, 2.0, 1.0, 3.0] : Array<Dynamic>));
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument58:Dynamic = positions; __callArgument58; }), ({ final __callArgument59:Dynamic = normals; __callArgument59; }), ({ final __callArgument60:Dynamic = uvs; __callArgument60; }), ({ final __callArgument61:Dynamic = indices; __callArgument61; })) : MeshGeometry);
     return cast null;
   }
 
@@ -575,7 +575,7 @@ class MeshGeometryBuilders {
         i++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument62:Dynamic = positions; __callArgument62; }), ({ final __callArgument63:Dynamic = normals; __callArgument63; }), ({ final __callArgument64:Dynamic = uvs; __callArgument64; }), ({ final __callArgument65:Dynamic = indices; __callArgument65; })) : MeshGeometry);
     return cast null;
   }
 
@@ -637,12 +637,12 @@ class MeshGeometryBuilders {
         iy++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument66:Dynamic = positions; __callArgument66; }), ({ final __callArgument67:Dynamic = normals; __callArgument67; }), ({ final __callArgument68:Dynamic = uvs; __callArgument68; }), ({ final __callArgument69:Dynamic = indices; __callArgument69; })) : MeshGeometry);
     return cast null;
   }
 
   public static function createTetrahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
-    return cast (cast createPolyhedronMeshGeometry((cast MeshGeometryBuilders.TETRAHEDRON_VERTS__meshGeometryBuilders), (cast MeshGeometryBuilders.TETRAHEDRON_FACES__meshGeometryBuilders), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
+    return cast (cast createPolyhedronMeshGeometry(({ final __callArgument70:Dynamic = MeshGeometryBuilders.TETRAHEDRON_VERTS__meshGeometryBuilders; __callArgument70; }), ({ final __callArgument71:Dynamic = MeshGeometryBuilders.TETRAHEDRON_FACES__meshGeometryBuilders; __callArgument71; }), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
     return cast null;
   }
 
@@ -750,7 +750,7 @@ class MeshGeometryBuilders {
         i++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument72:Dynamic = positions; __callArgument72; }), ({ final __callArgument73:Dynamic = normals; __callArgument73; }), ({ final __callArgument74:Dynamic = uvs; __callArgument74; }), ({ final __callArgument75:Dynamic = indices; __callArgument75; })) : MeshGeometry);
     return cast null;
   }
 
@@ -819,7 +819,7 @@ class MeshGeometryBuilders {
         j++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders((cast positions), (cast normals), (cast uvs), (cast indices)) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument76:Dynamic = positions; __callArgument76; }), ({ final __callArgument77:Dynamic = normals; __callArgument77; }), ({ final __callArgument78:Dynamic = uvs; __callArgument78; }), ({ final __callArgument79:Dynamic = indices; __callArgument79; })) : MeshGeometry);
     return cast null;
   }
 
@@ -882,9 +882,9 @@ class MeshGeometryBuilders {
     }
     indexArray = new flighthq._internal._UInt32Array(_Runtime.field(indices, 'length'));
     (cast indexArray : flighthq._internal._UInt32Array).set(indices);
-    geometry = (cast createMeshGeometry((cast { indices: indexArray, layout: MeshGeometryBuilders.CANONICAL_VERTEX_LAYOUT__meshGeometryBuilders, vertices: vertices })) : MeshGeometry);
-    MeshGeometryBuilders.computeCanonicalMeshTangents__meshGeometryBuilders((cast vertices), (cast indexArray));
-    refreshMeshGeometryBounds((cast geometry));
+    geometry = (cast createMeshGeometry(({ final __callArgument80:Dynamic = { indices: indexArray, layout: MeshGeometryBuilders.CANONICAL_VERTEX_LAYOUT__meshGeometryBuilders, vertices: vertices }; __callArgument80; })) : MeshGeometry);
+    MeshGeometryBuilders.computeCanonicalMeshTangents__meshGeometryBuilders(({ final __callArgument81:Dynamic = vertices; __callArgument81; }), ({ final __callArgument82:Dynamic = indexArray; __callArgument82; }));
+    refreshMeshGeometryBounds(({ final __callArgument83:Dynamic = geometry; __callArgument83; }));
     return cast geometry;
     return cast null;
   }
@@ -928,12 +928,12 @@ class MeshGeometryBuilders {
           while ((cast ((cast corner : Float) < (cast 3.0 : Float)) : Bool)) {
             var vertex:Float = ((cast _Runtime.strictEquals(corner, 0.0) : Bool) ? (cast i0 : Dynamic) : (cast ((cast _Runtime.strictEquals(corner, 1.0) : Bool) ? (cast i1 : Dynamic) : (cast i2 : Dynamic)) : Dynamic));
             var tangent:Float = (vertex * 3.0);
-            ({ var __indexedObject12:flighthq._internal._Float32Array = tangents; var __indexedKey13:Float = tangent; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject12 : flighthq._internal._Float32Array), (cast __indexedKey13 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject12 : flighthq._internal._Float32Array), (cast __indexedKey13 : Float)) + tx) : Float)); });
-            ({ var __indexedObject14:flighthq._internal._Float32Array = tangents; var __indexedKey15:Float = (tangent + 1.0); flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject14 : flighthq._internal._Float32Array), (cast __indexedKey15 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject14 : flighthq._internal._Float32Array), (cast __indexedKey15 : Float)) + ty) : Float)); });
-            ({ var __indexedObject16:flighthq._internal._Float32Array = tangents; var __indexedKey17:Float = (tangent + 2.0); flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject16 : flighthq._internal._Float32Array), (cast __indexedKey17 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject16 : flighthq._internal._Float32Array), (cast __indexedKey17 : Float)) + tz) : Float)); });
-            ({ var __indexedObject18:flighthq._internal._Float32Array = bitangents; var __indexedKey19:Float = tangent; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject18 : flighthq._internal._Float32Array), (cast __indexedKey19 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject18 : flighthq._internal._Float32Array), (cast __indexedKey19 : Float)) + bx) : Float)); });
-            ({ var __indexedObject20:flighthq._internal._Float32Array = bitangents; var __indexedKey21:Float = (tangent + 1.0); flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject20 : flighthq._internal._Float32Array), (cast __indexedKey21 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject20 : flighthq._internal._Float32Array), (cast __indexedKey21 : Float)) + by) : Float)); });
-            ({ var __indexedObject22:flighthq._internal._Float32Array = bitangents; var __indexedKey23:Float = (tangent + 2.0); flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject22 : flighthq._internal._Float32Array), (cast __indexedKey23 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject22 : flighthq._internal._Float32Array), (cast __indexedKey23 : Float)) + bz) : Float)); });
+            ({ var __indexedObject84:flighthq._internal._Float32Array = tangents; var __indexedKey85:Float = tangent; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject84 : flighthq._internal._Float32Array), (cast __indexedKey85 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject84 : flighthq._internal._Float32Array), (cast __indexedKey85 : Float)) + tx) : Float)); });
+            ({ var __indexedObject86:flighthq._internal._Float32Array = tangents; var __indexedKey87:Float = (tangent + 1.0); flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject86 : flighthq._internal._Float32Array), (cast __indexedKey87 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject86 : flighthq._internal._Float32Array), (cast __indexedKey87 : Float)) + ty) : Float)); });
+            ({ var __indexedObject88:flighthq._internal._Float32Array = tangents; var __indexedKey89:Float = (tangent + 2.0); flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject88 : flighthq._internal._Float32Array), (cast __indexedKey89 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject88 : flighthq._internal._Float32Array), (cast __indexedKey89 : Float)) + tz) : Float)); });
+            ({ var __indexedObject90:flighthq._internal._Float32Array = bitangents; var __indexedKey91:Float = tangent; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject90 : flighthq._internal._Float32Array), (cast __indexedKey91 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject90 : flighthq._internal._Float32Array), (cast __indexedKey91 : Float)) + bx) : Float)); });
+            ({ var __indexedObject92:flighthq._internal._Float32Array = bitangents; var __indexedKey93:Float = (tangent + 1.0); flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject92 : flighthq._internal._Float32Array), (cast __indexedKey93 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject92 : flighthq._internal._Float32Array), (cast __indexedKey93 : Float)) + by) : Float)); });
+            ({ var __indexedObject94:flighthq._internal._Float32Array = bitangents; var __indexedKey95:Float = (tangent + 2.0); flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject94 : flighthq._internal._Float32Array), (cast __indexedKey95 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject94 : flighthq._internal._Float32Array), (cast __indexedKey95 : Float)) + bz) : Float)); });
             corner++;
           }
         }

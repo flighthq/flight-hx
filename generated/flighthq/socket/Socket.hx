@@ -53,7 +53,7 @@ class Socket {
     var socket:flighthq.types.Socket = cast _Runtime.UNDEFINED;
     runtime = (cast { connection: null, signals: null, readyState: 'connecting', delivering: true, disposed: false });
     socket = (cast { url: _Runtime.field(options, 'url'), runtime: runtime });
-    ((cast runtime : SocketRuntime).connection = (cast (cast getSocketBackend() : SocketBackend) : SocketBackend).openSocket((cast options), (cast (cast Socket.makeSocketEventSink__socket((cast runtime)) : SocketEventSink))));
+    ((cast runtime : SocketRuntime).connection = (cast (cast getSocketBackend() : SocketBackend) : SocketBackend).openSocket(({ final __callArgument2:Dynamic = options; __callArgument2; }), (cast Socket.makeSocketEventSink__socket(({ final __callArgument3:Dynamic = runtime; __callArgument3; })) : SocketEventSink)));
     if ((cast _Runtime.strictEquals((cast runtime : SocketRuntime).connection, null) : Bool)) { _Runtime.callOptionalValue(Socket._guard__socket, cast ([{ operation: 'createSocket', reason: 'no-connection', socket: socket }] : Array<Dynamic>)); }
     return cast socket;
     return cast null;
@@ -94,8 +94,8 @@ class Socket {
   public static function disposeSocket(socket:flighthq.types.Socket):Void {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
     if ((cast (cast (cast socket : flighthq.types.Socket).runtime : SocketRuntime).disposed : Bool)) { return; }
-    closeSocket((cast socket), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    detachSocket((cast socket));
+    closeSocket(({ final __callArgument4:Dynamic = socket; __callArgument4; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    detachSocket(({ final __callArgument5:Dynamic = socket; __callArgument5; }));
     runtime = (cast socket : flighthq.types.Socket).runtime;
     ((cast runtime : SocketRuntime).connection = null);
     ((cast runtime : SocketRuntime).signals = null);
@@ -162,7 +162,7 @@ class Socket {
       return cast false;
     }
     if ((cast ((cast !_Runtime.strictEquals((cast runtime : SocketRuntime).readyState, 'open') : Bool) || (cast _Runtime.strictEquals((cast runtime : SocketRuntime).connection, null) : Bool)) : Bool)) { return cast false; }
-    return cast (cast (cast runtime : SocketRuntime).connection : SocketConnection).sendSocketFrame((cast data));
+    return cast (cast (cast runtime : SocketRuntime).connection : SocketConnection).sendSocketFrame(({ final __callArgument6:Dynamic = data; __callArgument6; }));
     return cast null;
   }
 

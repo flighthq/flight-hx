@@ -39,7 +39,7 @@ class BitmapAlpha {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function multiplyBitmapAlpha(out:BitmapRegion, factor:Float):Void {
@@ -67,7 +67,7 @@ class BitmapAlpha {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(out, 'bitmap')));
+    invalidateBitmap(_Runtime.field(out, 'bitmap'));
   }
 
   public static function setBitmapAlpha(out:BitmapRegion, alpha:Float):Void {
@@ -94,6 +94,6 @@ class BitmapAlpha {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(out, 'bitmap')));
+    invalidateBitmap(_Runtime.field(out, 'bitmap'));
   }
 }

@@ -26,11 +26,11 @@ class GradientBevelEffect {
   }
 
   public static function registerGradientBevelEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'GradientBevelEffect' : String), (cast GradientBevelEffect.resolveGradientBevelEffectPadding__gradientBevelEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'GradientBevelEffect' : String), (cast GradientBevelEffect.resolveGradientBevelEffectPadding__gradientBevelEffect : Dynamic));
   }
 
   public static function resolveGradientBevelEffectPadding__gradientBevelEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getGradientBevelEffectPadding((cast (cast effect : flighthq.types.GradientBevelEffect))) : RenderEffectPadding);
+    return cast (cast getGradientBevelEffectPadding((cast effect : flighthq.types.GradientBevelEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

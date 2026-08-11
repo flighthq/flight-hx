@@ -53,7 +53,7 @@ class BitmapFontRecord {
     glyphs = (cast _Runtime.mapArray((cast record.chars : Array<BitmapFontCharRecord>), function(char:BitmapFontCharRecord, __unused0:Float, __unused1:Array<BitmapFontCharRecord>):{ var advance:Float; var bearingX:Float; var bearingY:Float; var codepoint:Float; var height:Float; var page:Float; var width:Float; var x:Float; var y:Float; } return { advance: char.xadvance, bearingX: char.xoffset, bearingY: (record.base - char.yoffset), codepoint: char.id, height: char.height, page: char.page, width: char.width, x: char.x, y: char.y }, _Runtime.UNDEFINED));
     kerning = (cast _Runtime.mapArray((cast record.kernings : Array<BitmapFontKerningRecord>), function(pair:BitmapFontKerningRecord, __unused2:Float, __unused3:Array<BitmapFontKerningRecord>):{ var amount:Float; var left:Float; var right:Float; } return { amount: pair.amount, left: pair.first, right: pair.second }, _Runtime.UNDEFINED));
     data = (cast { encoding: record.encoding, glyphs: glyphs, kerning: kerning, metrics: { ascent: record.base, descent: (record.lineHeight - record.base), lineGap: 0.0 }, pages: pages });
-    return cast (cast createBitmapFont((cast data)) : BitmapFont);
+    return cast (cast createBitmapFont(({ final __callArgument5:Dynamic = data; __callArgument5; })) : BitmapFont);
     return cast null;
   }
 }

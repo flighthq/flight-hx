@@ -14,11 +14,11 @@ import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class DomImageTextureResolver {
   public static function registerDomImageTextureResolver(state:DomRenderState):Void {
-    registerDomTextureResolver((cast state), (cast ImageTextureSourceKind : String), (cast DomImageTextureResolver.resolveDomImageTexture__domImageTextureResolver));
+    registerDomTextureResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast ImageTextureSourceKind : String), (cast DomImageTextureResolver.resolveDomImageTexture__domImageTextureResolver : Dynamic));
   }
 
   public static function resolveDomImageTexture__domImageTextureResolver(_state:DomRenderState, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
-    return cast _Runtime.coalesce(({ final __structural0 = (cast getTextureSource((cast texture)) : Null<Image>); __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var source:flighthq._internal._Any; }).source; }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __structural2 = (cast getTextureSource(({ final __callArgument1:Dynamic = texture; __callArgument1; })) : Null<Image>); __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var source:flighthq._internal._Any; }).source; }), function():Dynamic return cast null);
     return cast null;
   }
 }

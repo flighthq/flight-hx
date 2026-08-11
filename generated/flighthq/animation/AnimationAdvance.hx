@@ -11,7 +11,7 @@ class AnimationAdvance {
     for (player in _Runtime.iterable(players)) {
       if ((cast _Runtime.includes(advanced, player) : Bool)) { continue; }
       _Runtime.callProperty(advanced, 'push', cast ([player] : Array<Dynamic>));
-      advanceAnimationPlayer((cast player), (cast dt : Float));
+      advanceAnimationPlayer(({ final __callArgument2:Dynamic = player; __callArgument2; }), (cast dt : Float));
     }
   }
 }

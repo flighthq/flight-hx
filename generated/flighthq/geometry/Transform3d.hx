@@ -19,15 +19,15 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Transform3d {
   public static function composeMatrix4FromTransform3D(out:Matrix4Like, source:Transform3DLike):Void {
-    composeMatrix4((cast out), (cast _Runtime.field(source, 'position')), (cast _Runtime.field(source, 'rotation')), (cast _Runtime.field(source, 'scale')));
+    composeMatrix4(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.field(source, 'position'); __callArgument1; }), ({ final __callArgument2:Dynamic = _Runtime.field(source, 'rotation'); __callArgument2; }), ({ final __callArgument3:Dynamic = _Runtime.field(source, 'scale'); __callArgument3; }));
   }
 
   public static function createTransform3D():Transform3D {
-    return cast (cast createEntity((cast { rotation: (cast createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Quaternion), scale: (cast createVector3((cast 1.0), (cast 1.0), (cast 1.0)) : Vector3), position: (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Vector3) })) : { >Entity, var rotation:Quaternion; var scale:Vector3; var position:Vector3; });
+    return cast (cast createEntity((cast { rotation: (cast createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Quaternion), scale: (cast createVector3(({ final __callArgument4:Dynamic = 1.0; __callArgument4; }), ({ final __callArgument5:Dynamic = 1.0; __callArgument5; }), ({ final __callArgument6:Dynamic = 1.0; __callArgument6; })) : Vector3), position: (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3) } : Dynamic)) : { >Entity, var rotation:Quaternion; var scale:Vector3; var position:Vector3; });
     return cast null;
   }
 
   public static function decomposeMatrix4ToTransform3D(out:Transform3DLike, m:Matrix4Like):Void {
-    decomposeMatrix4((cast _Runtime.field(out, 'position')), (cast _Runtime.field(out, 'rotation')), (cast _Runtime.field(out, 'scale')), (cast m));
+    decomposeMatrix4(({ final __callArgument7:Dynamic = _Runtime.field(out, 'position'); __callArgument7; }), ({ final __callArgument8:Dynamic = _Runtime.field(out, 'rotation'); __callArgument8; }), ({ final __callArgument9:Dynamic = _Runtime.field(out, 'scale'); __callArgument9; }), ({ final __callArgument10:Dynamic = m; __callArgument10; }));
   }
 }

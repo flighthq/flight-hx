@@ -49,14 +49,14 @@ class WgpuRenderEffectPipeline {
     h = flighthq._internal.backend.CanvasElementBackend.field((cast state : WgpuRenderState).canvas, 'height');
     format = ((cast _Runtime.strictEquals(_Runtime.field((cast pipeline : flighthq.types.WgpuRenderEffectPipeline).options, 'format'), 'rgba16f') : Bool) ? (cast 'rgba16float' : Dynamic) : (cast (cast state : WgpuRenderState).format : Dynamic));
     if ((cast _Runtime.strictEquals((cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget, null) : Bool)) {
-      ((cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget = (cast createWgpuRenderTarget((cast state), (cast w : Float), (cast h : Float), (cast format : String), (cast colorSpace)) : WgpuRenderTarget));
+      ((cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget = (cast createWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast w : Float), (cast h : Float), (cast format : String), ({ final __callArgument1:Dynamic = colorSpace; __callArgument1; })) : WgpuRenderTarget));
     } else {
-      resizeWgpuRenderTarget((cast state), (cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget), (cast w : Float), (cast h : Float));
+      resizeWgpuRenderTarget(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget, (cast w : Float), (cast h : Float));
     }
     ((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget : WgpuRenderTarget).colorSpace = colorSpace);
     rgba = (cast state : WgpuRenderState).backgroundColorRgba;
-    ((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget : WgpuRenderTarget).clearColors = ((cast ((cast !_Runtime.strictEquals(rgba, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool) ? (cast cast ([(cast WgpuRenderEffectPipeline.packBackgroundClearColor__wgpuRenderEffectPipeline((cast rgba)) : Float)] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)));
-    beginWgpuRenderPass((cast state), (cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    ((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget : WgpuRenderTarget).clearColors = ((cast ((cast !_Runtime.strictEquals(rgba, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool) ? (cast cast ([(cast WgpuRenderEffectPipeline.packBackgroundClearColor__wgpuRenderEffectPipeline(({ final __callArgument3:Dynamic = rgba; __callArgument3; })) : Float)] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)));
+    beginWgpuRenderPass(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static function createWgpuRenderEffectPipeline(_state:WgpuRenderState, ?options:RenderEffectPipelineOptions):flighthq.types.WgpuRenderEffectPipeline {
@@ -68,11 +68,11 @@ class WgpuRenderEffectPipeline {
   @:noCompletion
   public static function destroyWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:flighthq.types.WgpuRenderEffectPipeline):Void {
     if (_Runtime.truthy((cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget)) {
-      destroyWgpuRenderTarget((cast state), (cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget));
+      destroyWgpuRenderTarget(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget);
       ((cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget = null);
     }
-    destroyWgpuRenderTargetPool((cast state), (cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).pool));
-    ({ final __hostTypeCall0 = (cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).lutTexture : WgpuColorLutTextureCache).texture; __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flighthq._internal.dom.GPUTexture).destroy(); });
+    destroyWgpuRenderTargetPool(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).pool);
+    ({ final __hostTypeCall7 = (cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).lutTexture : WgpuColorLutTextureCache).texture; __hostTypeCall7 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall7 : flighthq._internal.dom.GPUTexture).destroy(); });
     ((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).lutTexture : WgpuColorLutTextureCache).texture = null);
     ((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).lutTexture : WgpuColorLutTextureCache).size = 0.0);
     ((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).lutTexture : WgpuColorLutTextureCache).lut = null);
@@ -92,7 +92,7 @@ class WgpuRenderEffectPipeline {
     var flushAdjustments:Void->Void = cast _Runtime.UNDEFINED;
     scene = (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget;
     if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return; }
-    endWgpuRenderPass((cast state));
+    endWgpuRenderPass(({ final __callArgument8:Dynamic = state; __callArgument8; }));
     format = (cast scene : WgpuRenderTarget).format;
     descriptor = (cast { width: (cast scene : WgpuRenderTarget).width, height: (cast scene : WgpuRenderTarget).height, format: format, colorSpace: (cast scene : WgpuRenderTarget).colorSpace });
     source = scene;
@@ -100,8 +100,8 @@ class WgpuRenderEffectPipeline {
     scratchB = null;
     pending = (cast cast ([] : Array<Dynamic>));
     ensureScratch = (cast function():Void {
-      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireWgpuRenderTarget((cast state), (cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).pool), (cast descriptor)) : WgpuRenderTarget) : Dynamic)); }
-      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireWgpuRenderTarget((cast state), (cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).pool), (cast descriptor)) : WgpuRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireWgpuRenderTarget(({ final __callArgument9:Dynamic = state; __callArgument9; }), (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).pool, ({ final __callArgument10:Dynamic = descriptor; __callArgument10; })) : WgpuRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireWgpuRenderTarget(({ final __callArgument11:Dynamic = state; __callArgument11; }), (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).pool, ({ final __callArgument12:Dynamic = descriptor; __callArgument12; })) : WgpuRenderTarget) : Dynamic)); }
     });
     flushAdjustments = (cast function():Void {
       var dest:WgpuRenderTarget = cast _Runtime.UNDEFINED;
@@ -109,35 +109,35 @@ class WgpuRenderEffectPipeline {
       ensureScratch();
       dest = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       if ((cast _Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)) : Bool)) {
-        applyColorLutPassToWgpu((cast state), (cast source), (cast dest), (cast (cast bakeColorLutForRun((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).lutCache), (cast pending), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : ColorLut)), (cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).lutTexture));
+        applyColorLutPassToWgpu(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = source; __callArgument14; }), ({ final __callArgument15:Dynamic = dest; __callArgument15; }), (cast bakeColorLutForRun((cast pipeline : flighthq.types.WgpuRenderEffectPipeline).lutCache, ({ final __callArgument16:Dynamic = pending; __callArgument16; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ColorLut), (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).lutTexture);
       } else {
         var matrices:Array<Array<Float>> = (cast cast ([] : Array<Dynamic>));
         for (op in _Runtime.iterable(pending)) {
-          var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix((cast op)) : Null<Array<Float>>);
+          var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix(({ final __callArgument19:Dynamic = op; __callArgument19; })) : Null<Array<Float>>);
           if ((cast !_Runtime.strictEquals(matrix, null) : Bool)) { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
         }
-        applyColorMatrixPassToWgpu((cast state), (cast source), (cast dest), (cast (cast fuseColorMatrices((cast matrices)) : Array<Float>)));
+        applyColorMatrixPassToWgpu(({ final __callArgument20:Dynamic = state; __callArgument20; }), ({ final __callArgument21:Dynamic = source; __callArgument21; }), ({ final __callArgument22:Dynamic = dest; __callArgument22; }), (cast fuseColorMatrices(({ final __callArgument23:Dynamic = matrices; __callArgument23; })) : Array<Float>));
       }
       (source = cast (dest : Dynamic));
       (pending = cast (cast ([] : Array<Dynamic>) : Dynamic));
     });
     for (operation in _Runtime.iterable(operations)) {
-      if ((cast ((cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix((cast operation)) : Null<Array<Float>>), null) : Bool) || (cast (cast isColorLutAdjustment((cast operation)) : Bool) : Bool)) : Bool)) {
+      if ((cast ((cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix(({ final __callArgument26:Dynamic = operation; __callArgument26; })) : Null<Array<Float>>), null) : Bool) || (cast (cast isColorLutAdjustment(({ final __callArgument27:Dynamic = operation; __callArgument27; })) : Bool) : Bool)) : Bool)) {
         _Runtime.callProperty(pending, 'push', cast ([(cast operation : Adjustment)] : Array<Dynamic>));
         continue;
       }
-      var runner:Null<WgpuRenderEffectRunner> = (cast getWgpuRenderEffectRunner((cast state), (cast (cast operation : { var kind:String; }).kind : String)) : Null<WgpuRenderEffectRunner>);
+      var runner:Null<WgpuRenderEffectRunner> = (cast getWgpuRenderEffectRunner(({ final __callArgument28:Dynamic = state; __callArgument28; }), (cast (cast operation : { var kind:String; }).kind : String)) : Null<WgpuRenderEffectRunner>);
       if ((cast _Runtime.strictEquals(runner, null) : Bool)) { continue; }
       flushAdjustments();
       ensureScratch();
       var dest:WgpuRenderTarget = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
-      runner((cast { state: state, source: source, dest: dest, pool: (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).pool, sceneDepthTexture: null, sceneVelocityTexture: (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).velocityTexture }), (cast operation));
+      runner(({ final __callArgument29:Dynamic = { state: state, source: source, dest: dest, pool: (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).pool, sceneDepthTexture: null, sceneVelocityTexture: (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).velocityTexture }; __callArgument29; }), ({ final __callArgument30:Dynamic = operation; __callArgument30; }));
       (source = cast (dest : Dynamic));
     }
     flushAdjustments();
-    WgpuRenderEffectPipeline.presentWgpuRenderEffectResult__wgpuRenderEffectPipeline((cast state), (cast source));
-    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { releaseWgpuRenderTarget((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).pool), (cast scratchA)); }
-    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseWgpuRenderTarget((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).pool), (cast scratchB)); }
+    WgpuRenderEffectPipeline.presentWgpuRenderEffectResult__wgpuRenderEffectPipeline(({ final __callArgument31:Dynamic = state; __callArgument31; }), ({ final __callArgument32:Dynamic = source; __callArgument32; }));
+    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { releaseWgpuRenderTarget((cast pipeline : flighthq.types.WgpuRenderEffectPipeline).pool, ({ final __callArgument33:Dynamic = scratchA; __callArgument33; })); }
+    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseWgpuRenderTarget((cast pipeline : flighthq.types.WgpuRenderEffectPipeline).pool, ({ final __callArgument34:Dynamic = scratchB; __callArgument34; })); }
   }
 
   public static function setWgpuRenderEffectVelocityTexture(pipeline:flighthq.types.WgpuRenderEffectPipeline, texture:Null<flighthq._internal.dom.GPUTexture>):Void {
@@ -148,13 +148,13 @@ class WgpuRenderEffectPipeline {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var linear:Bool = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument35:Dynamic = state; __callArgument35; })) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).commandEncoder, null) : Bool)) { return; }
     linear = _Runtime.strictEquals(_Runtime.field(source, 'colorSpace'), 'linear');
-    pipeline = (cast getWgpuEffectPipeline((cast state), (cast ((cast linear : Bool) ? (cast 'effect.present.linear' : Dynamic) : (cast 'effect.present' : Dynamic)) : String), (cast ((cast linear : Bool) ? (cast WgpuRenderEffectPipeline.LINEAR_PRESENT_FRAGMENT_WGSL__wgpuRenderEffectPipeline : Dynamic) : (cast WgpuRenderEffectPipeline.PRESENT_FRAGMENT_WGSL__wgpuRenderEffectPipeline : Dynamic)) : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state), (cast (cast source : WgpuRenderTarget)), (cast null), (cast pipeline), (cast function(__unused2:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(__unused0:flighthq._internal._Float32Array, __unused1:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline(({ final __callArgument36:Dynamic = state; __callArgument36; }), (cast ((cast linear : Bool) ? (cast 'effect.present.linear' : Dynamic) : (cast 'effect.present' : Dynamic)) : String), (cast ((cast linear : Bool) ? (cast WgpuRenderEffectPipeline.LINEAR_PRESENT_FRAGMENT_WGSL__wgpuRenderEffectPipeline : Dynamic) : (cast WgpuRenderEffectPipeline.PRESENT_FRAGMENT_WGSL__wgpuRenderEffectPipeline : Dynamic)) : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass(({ final __callArgument37:Dynamic = state; __callArgument37; }), (cast source : WgpuRenderTarget), ({ final __callArgument38:Dynamic = null; __callArgument38; }), ({ final __callArgument39:Dynamic = pipeline; __callArgument39; }), ({ final __callArgument40:Dynamic = function(__unused2:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(__unused0:flighthq._internal._Float32Array, __unused1:flighthq._internal._Int32Array):Void {
 
-    }, cast ([] : Array<Dynamic>)); }));
+    }, cast ([] : Array<Dynamic>)); }; __callArgument40; }));
   }
 
   public static function packBackgroundClearColor__wgpuRenderEffectPipeline(rgba:Array<Float>):Float {

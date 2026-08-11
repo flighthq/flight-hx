@@ -57,9 +57,9 @@ class GlGradientBevelEffect {
     var dy:Float = cast _Runtime.UNDEFINED;
     var ramp:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
     descriptor = (cast { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') });
-    s0 = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
-    s1 = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
-    s2 = (cast acquireGlRenderTarget((cast state), (cast pool), (cast descriptor)) : GlRenderTarget);
+    s0 = (cast acquireGlRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }), ({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
@@ -68,39 +68,39 @@ class GlGradientBevelEffect {
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
     gl = (cast state : GlRenderState).gl;
-    applyGlEffectTintPass((cast state), (cast src), (cast s0), (cast 16777215.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
-    applyGlEffectBoxBlur((cast state), (cast s0), (cast s1), (cast s2), (cast { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }));
+    applyGlEffectTintPass(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = src; __callArgument10; }), ({ final __callArgument11:Dynamic = s0; __callArgument11; }), (cast 16777215.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
+    applyGlEffectBoxBlur(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = s0; __callArgument13; }), ({ final __callArgument14:Dynamic = s1; __callArgument14; }), ({ final __callArgument15:Dynamic = s2; __callArgument15; }), ({ final __callArgument16:Dynamic = { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0), passes: quality }; __callArgument16; }));
     dx = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
     dy = _Runtime.multiplyNumbers(HxMath.sin(angle), distance);
-    GlGradientBevelEffect.applyBevelEncodePass__glGradientBevelEffect((cast state), (cast s1), (cast s0), (cast (dx / (cast s1 : GlRenderTarget).width) : Float), (cast (-dy / (cast s1 : GlRenderTarget).height) : Float));
-    ramp = (cast createGlEffectGradientRampTexture((cast gl), (cast _Runtime.field(effect, 'colors')), (cast _Runtime.field(effect, 'alphas')), (cast _Runtime.field(effect, 'ratios'))) : flighthq._internal.dom.WebGLTexture);
-    GlGradientBevelEffect.applyBevelApplyPass__glGradientBevelEffect((cast state), (cast s0), (cast ramp), (cast src), (cast s1));
+    GlGradientBevelEffect.applyBevelEncodePass__glGradientBevelEffect(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = s1; __callArgument18; }), ({ final __callArgument19:Dynamic = s0; __callArgument19; }), (cast (dx / (cast s1 : GlRenderTarget).width) : Float), (cast (-dy / (cast s1 : GlRenderTarget).height) : Float));
+    ramp = (cast createGlEffectGradientRampTexture(({ final __callArgument20:Dynamic = gl; __callArgument20; }), _Runtime.field(effect, 'colors'), _Runtime.field(effect, 'alphas'), _Runtime.field(effect, 'ratios')) : flighthq._internal.dom.WebGLTexture);
+    GlGradientBevelEffect.applyBevelApplyPass__glGradientBevelEffect(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = s0; __callArgument22; }), ({ final __callArgument23:Dynamic = ramp; __callArgument23; }), ({ final __callArgument24:Dynamic = src; __callArgument24; }), ({ final __callArgument25:Dynamic = s1; __callArgument25; }));
     flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, ramp);
-    clearGlRenderTarget((cast state), (cast dst));
+    clearGlRenderTarget(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = dst; __callArgument27; }));
     if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyGlEffectBlitPass((cast state), (cast src), (cast dst));
+      applyGlEffectBlitPass(({ final __callArgument28:Dynamic = state; __callArgument28; }), ({ final __callArgument29:Dynamic = src; __callArgument29; }), ({ final __callArgument30:Dynamic = dst; __callArgument30; }));
     }
-    applyGlEffectBlitPass((cast state), (cast s1), (cast dst));
+    applyGlEffectBlitPass(({ final __callArgument31:Dynamic = state; __callArgument31; }), ({ final __callArgument32:Dynamic = s1; __callArgument32; }), ({ final __callArgument33:Dynamic = dst; __callArgument33; }));
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
-      applyGlEffectErasePass((cast state), (cast src), (cast dst));
+      applyGlEffectErasePass(({ final __callArgument34:Dynamic = state; __callArgument34; }), ({ final __callArgument35:Dynamic = src; __callArgument35; }), ({ final __callArgument36:Dynamic = dst; __callArgument36; }));
     }
-    releaseGlRenderTarget((cast pool), (cast s0));
-    releaseGlRenderTarget((cast pool), (cast s1));
-    releaseGlRenderTarget((cast pool), (cast s2));
+    releaseGlRenderTarget(({ final __callArgument37:Dynamic = pool; __callArgument37; }), ({ final __callArgument38:Dynamic = s0; __callArgument38; }));
+    releaseGlRenderTarget(({ final __callArgument39:Dynamic = pool; __callArgument39; }), ({ final __callArgument40:Dynamic = s1; __callArgument40; }));
+    releaseGlRenderTarget(({ final __callArgument41:Dynamic = pool; __callArgument41; }), ({ final __callArgument42:Dynamic = s2; __callArgument42; }));
   }
 
   public static final defaultGlGradientBevelEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyGradientBevelEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : GradientBevelEffect)));
+    applyGradientBevelEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientBevelEffect));
   });
 
   public static function registerGlGradientBevelEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state), (cast 'GradientBevelEffect' : String), (cast defaultGlGradientBevelEffectRunner));
+    registerGlRenderEffect(({ final __callArgument43:Dynamic = state; __callArgument43; }), (cast 'GradientBevelEffect' : String), ({ final __callArgument44:Dynamic = defaultGlGradientBevelEffectRunner; __callArgument44; }));
   }
 
   public static function applyBevelApplyPass__glGradientBevelEffect(state:GlRenderState, encoded:GlRenderTarget, ramp:flighthq._internal.dom.WebGLTexture, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:BevelApplyLocations__glGradientBevelEffect = cast _Runtime.UNDEFINED;
-    loc = (cast GlGradientBevelEffect.getApplyShader__glGradientBevelEffect((cast state)) : BevelApplyLocations__glGradientBevelEffect);
-    drawGlFullscreenPass((cast state), (cast loc), (cast cast ([(cast encoded : GlRenderTarget).texture] : Array<Dynamic>)), (cast dest), (cast function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
+    loc = (cast GlGradientBevelEffect.getApplyShader__glGradientBevelEffect(({ final __callArgument45:Dynamic = state; __callArgument45; })) : BevelApplyLocations__glGradientBevelEffect);
+    drawGlFullscreenPass(({ final __callArgument46:Dynamic = state; __callArgument46; }), ({ final __callArgument47:Dynamic = loc; __callArgument47; }), ({ final __callArgument48:Dynamic = cast ([(cast encoded : GlRenderTarget).texture] : Array<Dynamic>); __callArgument48; }), ({ final __callArgument49:Dynamic = dest; __callArgument49; }), ({ final __callArgument50:Dynamic = function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE1', flighthq._internal.backend.WebGl2Backend.TEXTURE1));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), ramp);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, (cast loc : { var locRamp:flighthq._internal.dom.WebGLUniformLocation; }).locRamp, 1.0);
@@ -109,16 +109,16 @@ class GlGradientBevelEffect {
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, (cast loc : { var locSource:flighthq._internal.dom.WebGLUniformLocation; }).locSource, 2.0);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused1] : Array<Dynamic>)); }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument50; }));
   }
 
   public static function applyBevelEncodePass__glGradientBevelEffect(state:GlRenderState, blurred:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
     var loc:BevelEncodeLocations__glGradientBevelEffect = cast _Runtime.UNDEFINED;
-    loc = (cast GlGradientBevelEffect.getEncodeShader__glGradientBevelEffect((cast state)) : BevelEncodeLocations__glGradientBevelEffect);
-    drawGlFullscreenPass((cast state), (cast loc), (cast cast ([(cast blurred : GlRenderTarget).texture] : Array<Dynamic>)), (cast dest), (cast function(__unused4:flighthq._internal.dom.WebGL2RenderingContext, __unused5:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused3:GlFullscreenProgram):Void {
+    loc = (cast GlGradientBevelEffect.getEncodeShader__glGradientBevelEffect(({ final __callArgument51:Dynamic = state; __callArgument51; })) : BevelEncodeLocations__glGradientBevelEffect);
+    drawGlFullscreenPass(({ final __callArgument52:Dynamic = state; __callArgument52; }), ({ final __callArgument53:Dynamic = loc; __callArgument53; }), ({ final __callArgument54:Dynamic = cast ([(cast blurred : GlRenderTarget).texture] : Array<Dynamic>); __callArgument54; }), ({ final __callArgument55:Dynamic = dest; __callArgument55; }), ({ final __callArgument56:Dynamic = function(__unused4:flighthq._internal.dom.WebGL2RenderingContext, __unused5:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused3:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locOffset:flighthq._internal.dom.WebGLUniformLocation; }).locOffset, dx, dy);
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused4] : Array<Dynamic>)); }));
+    }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument56; }));
   }
 
   public static function getApplyShader__glGradientBevelEffect(state:GlRenderState):BevelApplyLocations__glGradientBevelEffect {
@@ -126,7 +126,7 @@ class GlGradientBevelEffect {
     loc = ((cast GlGradientBevelEffect.applyShaders__glGradientBevelEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, BevelApplyLocations__glGradientBevelEffect>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram((cast gl), (cast GlGradientBevelEffect.BEVEL_APPLY_FRAGMENT_SRC__glGradientBevelEffect : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument57:Dynamic = gl; __callArgument57; }), (cast GlGradientBevelEffect.BEVEL_APPLY_FRAGMENT_SRC__glGradientBevelEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locRamp: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_ramp') }, { locSource: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_source') }]) : Dynamic));
       ((cast GlGradientBevelEffect.applyShaders__glGradientBevelEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, BevelApplyLocations__glGradientBevelEffect>).set((cast state : GlRenderState).gl, (cast loc)));
     }
@@ -139,7 +139,7 @@ class GlGradientBevelEffect {
     loc = ((cast GlGradientBevelEffect.encodeShaders__glGradientBevelEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, BevelEncodeLocations__glGradientBevelEffect>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram((cast gl), (cast GlGradientBevelEffect.BEVEL_ENCODE_FRAGMENT_SRC__glGradientBevelEffect : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument58:Dynamic = gl; __callArgument58; }), (cast GlGradientBevelEffect.BEVEL_ENCODE_FRAGMENT_SRC__glGradientBevelEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locOffset: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_offset') }]) : Dynamic));
       ((cast GlGradientBevelEffect.encodeShaders__glGradientBevelEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, BevelEncodeLocations__glGradientBevelEffect>).set((cast state : GlRenderState).gl, (cast loc)));
     }

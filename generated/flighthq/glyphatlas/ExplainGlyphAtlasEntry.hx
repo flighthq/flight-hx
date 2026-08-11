@@ -29,7 +29,7 @@ class ExplainGlyphAtlasEntry {
       var entry:GlyphEntry = ((cast runtime.entries : flighthq._internal._Map<Float, GlyphEntry>).get(codepoint));
       return cast { renderable: true, reason: 'ok', glyphWidth: entry.width, glyphHeight: entry.height, usableWidth: usableWidth, usableHeight: usableHeight };
     }
-    bitmap = (cast (cast getGlyphRasterizerBackend() : GlyphRasterizerBackend) : GlyphRasterizerBackend).rasterize((cast codepoint : Float), (cast runtime.rasterizeOptions));
+    bitmap = (cast (cast getGlyphRasterizerBackend() : GlyphRasterizerBackend) : GlyphRasterizerBackend).rasterize((cast codepoint : Float), runtime.rasterizeOptions);
     if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) {
       return cast { renderable: false, reason: 'rasterizer-returned-null', glyphWidth: 0.0, glyphHeight: 0.0, usableWidth: usableWidth, usableHeight: usableHeight };
     }

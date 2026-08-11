@@ -19,11 +19,11 @@ class StepParticleEmitter3D {
     var asEmitter:ParticleEmitter2D = cast _Runtime.UNDEFINED;
     asEmitter = (cast (cast emitter : flighthq._internal._Any) : ParticleEmitter2D);
     if ((cast ((cast !_Runtime.looseEquals(forces, null) : Bool) && (cast ((cast _Runtime.field(forces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      applyParticleForces((cast asEmitter), (cast state), (cast forces), (cast deltaTime : Float));
+      applyParticleForces(({ final __callArgument0:Dynamic = asEmitter; __callArgument0; }), ({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = forces; __callArgument2; }), (cast deltaTime : Float));
     }
-    updateParticleEmitter3D((cast emitter), (cast state), (cast config), (cast deltaTime : Float), (cast callbacks));
+    updateParticleEmitter3D(({ final __callArgument3:Dynamic = emitter; __callArgument3; }), ({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = config; __callArgument5; }), (cast deltaTime : Float), ({ final __callArgument6:Dynamic = callbacks; __callArgument6; }));
     if ((cast ((cast !_Runtime.looseEquals(colliders, null) : Bool) && (cast ((cast _Runtime.field(colliders, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      applyParticleCollisions((cast asEmitter), (cast state), (cast colliders));
+      applyParticleCollisions(({ final __callArgument7:Dynamic = asEmitter; __callArgument7; }), ({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = colliders; __callArgument9; }));
     }
   }
 }

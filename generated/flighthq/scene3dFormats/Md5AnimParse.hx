@@ -57,7 +57,7 @@ class Md5AnimParse {
       if ((cast StringTools.startsWith(line, 'MD5Version') : Bool)) {
         var version:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
         if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([version] : Array<Dynamic>)) : Bool) && (cast !_Runtime.strictEquals(version, 10.0) : Bool)) : Bool)) {
-          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.unsupported-version' : String), (cast 'parseMd5Anim' : String), (cast { version: version }));
+          reportImportDiagnostic(({ final __callArgument0:Dynamic = diagnostics; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument1; }), (cast 'md5anim.unsupported-version' : String), (cast 'parseMd5Anim' : String), ({ final __callArgument2:Dynamic = { version: version }; __callArgument2; }));
         }
         continue;
       }
@@ -65,7 +65,7 @@ class Md5AnimParse {
       if ((cast StringTools.startsWith(line, 'numFrames') : Bool)) {
         (numFrames = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
         if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([numFrames] : Array<Dynamic>)) : Bool) : Bool)) {
-          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.non-numeric-numframes' : String), (cast 'parseMd5Anim' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+          reportImportDiagnostic(({ final __callArgument3:Dynamic = diagnostics; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument4; }), (cast 'md5anim.non-numeric-numframes' : String), (cast 'parseMd5Anim' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
           (numFrames = cast (0.0 : Dynamic));
         }
         continue;
@@ -73,7 +73,7 @@ class Md5AnimParse {
       if ((cast StringTools.startsWith(line, 'numJoints') : Bool)) {
         (numJoints = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
         if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([numJoints] : Array<Dynamic>)) : Bool) : Bool)) {
-          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.non-numeric-numjoints' : String), (cast 'parseMd5Anim' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+          reportImportDiagnostic(({ final __callArgument5:Dynamic = diagnostics; __callArgument5; }), ({ final __callArgument6:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument6; }), (cast 'md5anim.non-numeric-numjoints' : String), (cast 'parseMd5Anim' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
           (numJoints = cast (0.0 : Dynamic));
         }
         continue;
@@ -81,7 +81,7 @@ class Md5AnimParse {
       if ((cast StringTools.startsWith(line, 'frameRate') : Bool)) {
         (frameRate = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>)) : Dynamic));
         if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([frameRate] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast frameRate : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.invalid-framerate' : String), (cast 'parseMd5Anim' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+          reportImportDiagnostic(({ final __callArgument7:Dynamic = diagnostics; __callArgument7; }), ({ final __callArgument8:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument8; }), (cast 'md5anim.invalid-framerate' : String), (cast 'parseMd5Anim' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
           (frameRate = cast (24.0 : Dynamic));
         }
         continue;
@@ -92,43 +92,43 @@ class Md5AnimParse {
         continue;
       }
       if ((cast _Runtime.strictEquals(line, 'hierarchy {') : Bool)) {
-        (i = cast ((cast Md5AnimParse.parseHierarchyBlock__md5AnimParse((cast lines), (cast i : Float), (cast hierarchy), (cast md5Drops)) : Float) : Dynamic));
+        (i = cast ((cast Md5AnimParse.parseHierarchyBlock__md5AnimParse(({ final __callArgument9:Dynamic = lines; __callArgument9; }), (cast i : Float), (cast hierarchy : Dynamic), (cast md5Drops : Dynamic)) : Float) : Dynamic));
         continue;
       }
       if ((cast _Runtime.strictEquals(line, 'bounds {') : Bool)) {
-        (i = cast ((cast Md5AnimParse.skipBlock__md5AnimParse((cast lines), (cast i : Float)) : Float) : Dynamic));
+        (i = cast ((cast Md5AnimParse.skipBlock__md5AnimParse(({ final __callArgument10:Dynamic = lines; __callArgument10; }), (cast i : Float)) : Float) : Dynamic));
         continue;
       }
       if ((cast _Runtime.strictEquals(line, 'baseframe {') : Bool)) {
-        (i = cast ((cast Md5AnimParse.parseBaseframeBlock__md5AnimParse((cast lines), (cast i : Float), (cast baseframe), (cast md5Drops)) : Float) : Dynamic));
+        (i = cast ((cast Md5AnimParse.parseBaseframeBlock__md5AnimParse(({ final __callArgument11:Dynamic = lines; __callArgument11; }), (cast i : Float), (cast baseframe : Dynamic), (cast md5Drops : Dynamic)) : Float) : Dynamic));
         continue;
       }
       if ((cast ((cast StringTools.startsWith(line, 'frame ') : Bool) && (cast StringTools.endsWith(Std.string(line), '{') : Bool)) : Bool)) {
         var frameData:Array<Float> = (cast cast ([] : Array<Dynamic>));
-        (i = cast ((cast Md5AnimParse.parseFrameBlock__md5AnimParse((cast lines), (cast i : Float), (cast frameData), (cast md5Drops)) : Float) : Dynamic));
+        (i = cast ((cast Md5AnimParse.parseFrameBlock__md5AnimParse(({ final __callArgument12:Dynamic = lines; __callArgument12; }), (cast i : Float), ({ final __callArgument13:Dynamic = frameData; __callArgument13; }), (cast md5Drops : Dynamic)) : Float) : Dynamic));
         _Runtime.callProperty(frames, 'push', cast ([frameData] : Array<Dynamic>));
         continue;
       }
     }
     clip = null;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(hierarchy, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) : Bool)) {
-      reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'md5anim.no-data' : String), (cast 'parseMd5Anim' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+      reportImportDiagnostic(({ final __callArgument14:Dynamic = diagnostics; __callArgument14; }), ({ final __callArgument15:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument15; }), (cast 'md5anim.no-data' : String), (cast 'parseMd5Anim' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     } else {
       if ((cast !_Runtime.strictEquals(_Runtime.field(hierarchy, 'length'), numJoints) : Bool)) {
-        reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.joint-count-mismatch' : String), (cast 'parseMd5Anim' : String), (cast { declared: numJoints, found: _Runtime.field(hierarchy, 'length') }));
+        reportImportDiagnostic(({ final __callArgument16:Dynamic = diagnostics; __callArgument16; }), ({ final __callArgument17:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument17; }), (cast 'md5anim.joint-count-mismatch' : String), (cast 'parseMd5Anim' : String), ({ final __callArgument18:Dynamic = { declared: numJoints, found: _Runtime.field(hierarchy, 'length') }; __callArgument18; }));
       }
       if ((cast !_Runtime.strictEquals(_Runtime.field(frames, 'length'), numFrames) : Bool)) {
-        reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.frame-count-mismatch' : String), (cast 'parseMd5Anim' : String), (cast { declared: numFrames, found: _Runtime.field(frames, 'length') }));
+        reportImportDiagnostic(({ final __callArgument19:Dynamic = diagnostics; __callArgument19; }), ({ final __callArgument20:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument20; }), (cast 'md5anim.frame-count-mismatch' : String), (cast 'parseMd5Anim' : String), ({ final __callArgument21:Dynamic = { declared: numFrames, found: _Runtime.field(frames, 'length') }; __callArgument21; }));
       }
       if ((cast ((cast _Runtime.field(joints, 'length') : Float) < (cast _Runtime.field(hierarchy, 'length') : Float)) : Bool)) {
-        reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject), (cast 'md5anim.joints-too-few' : String), (cast 'parseMd5Anim' : String), (cast { animationJoints: _Runtime.field(hierarchy, 'length'), suppliedJoints: _Runtime.field(joints, 'length') }));
+        reportImportDiagnostic(({ final __callArgument22:Dynamic = diagnostics; __callArgument22; }), ({ final __callArgument23:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument23; }), (cast 'md5anim.joints-too-few' : String), (cast 'parseMd5Anim' : String), ({ final __callArgument24:Dynamic = { animationJoints: _Runtime.field(hierarchy, 'length'), suppliedJoints: _Runtime.field(joints, 'length') }; __callArgument24; }));
       } else {
-        (clip = cast ((cast Md5AnimParse.buildAnimationClip__md5AnimParse((cast joints), (cast hierarchy), (cast baseframe), (cast frames), (cast frameRate : Float), (cast declaredComponents : Float), (cast md5Drops)) : AnimationClip) : Dynamic));
+        (clip = cast ((cast Md5AnimParse.buildAnimationClip__md5AnimParse(({ final __callArgument25:Dynamic = joints; __callArgument25; }), (cast hierarchy : Dynamic), (cast baseframe : Dynamic), ({ final __callArgument26:Dynamic = frames; __callArgument26; }), (cast frameRate : Float), (cast declaredComponents : Float), (cast md5Drops : Dynamic)) : AnimationClip) : Dynamic));
       }
     }
     if ((cast !_Runtime.strictEquals(md5Drops, null) : Bool)) {
       for (tally in _Runtime.iterable(((cast md5Drops : flighthq._internal._Map<String, Md5AnimDropTally__md5AnimParse>).values()))) {
-        reportImportDiagnostic((cast diagnostics), (cast (cast tally : Md5AnimDropTally__md5AnimParse).severity), (cast (cast tally : Md5AnimDropTally__md5AnimParse).kind : String), (cast 'parseMd5Anim' : String), (cast _Runtime.mergeObjects([(cast tally : Md5AnimDropTally__md5AnimParse).detail, { count: (cast tally : Md5AnimDropTally__md5AnimParse).count }])));
+        reportImportDiagnostic(({ final __callArgument29:Dynamic = diagnostics; __callArgument29; }), (cast tally : Md5AnimDropTally__md5AnimParse).severity, (cast (cast tally : Md5AnimDropTally__md5AnimParse).kind : String), (cast 'parseMd5Anim' : String), ({ final __callArgument30:Dynamic = _Runtime.mergeObjects([(cast tally : Md5AnimDropTally__md5AnimParse).detail, { count: (cast tally : Md5AnimDropTally__md5AnimParse).count }]); __callArgument30; }));
       }
     }
     return cast clip;
@@ -157,18 +157,18 @@ class Md5AnimParse {
     for (joint in _Runtime.iterable(joints)) {
       if (_Runtime.truthy((cast joint : { var name:Null<String>; }).name)) { ((cast nodeByName : flighthq._internal._Map<String, Node3D>).set((cast joint : { var name:Null<String>; }).name, (cast joint))); }
     }
-    componentTotal = (cast Md5AnimParse.totalMd5AnimComponents__md5AnimParse((cast hierarchy)) : Float);
+    componentTotal = (cast Md5AnimParse.totalMd5AnimComponents__md5AnimParse((cast hierarchy : Dynamic)) : Float);
     if ((cast ((cast ((cast declaredComponents : Float) >= (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(declaredComponents, componentTotal) : Bool)) : Bool)) {
-      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.component-count-mismatch' : String), (cast '' : String), (cast { firstActual: componentTotal, firstExpected: declaredComponents }));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops : Dynamic), ({ final __callArgument33:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument33; }), (cast 'md5anim.component-count-mismatch' : String), (cast '' : String), ({ final __callArgument34:Dynamic = { firstActual: componentTotal, firstExpected: declaredComponents }; __callArgument34; }));
     }
     if ((cast ((cast _Runtime.field(baseframe, 'length') : Float) < (cast jointCount : Float)) : Bool)) {
-      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.baseframe-count-mismatch' : String), (cast '' : String), (cast { firstActual: _Runtime.field(baseframe, 'length'), firstExpected: jointCount }));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops : Dynamic), ({ final __callArgument35:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument35; }), (cast 'md5anim.baseframe-count-mismatch' : String), (cast '' : String), ({ final __callArgument36:Dynamic = { firstActual: _Runtime.field(baseframe, 'length'), firstExpected: jointCount }; __callArgument36; }));
     }
     {
       var f:Float = 0.0;
       while ((cast ((cast f : Float) < (cast frameCount : Float)) : Bool)) {
         if ((cast !_Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(frames, f), 'length'), componentTotal) : Bool)) {
-          Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.frame-width-mismatch' : String), (cast '' : String), (cast { firstActual: _Runtime.field(flighthq._internal._StaticIndex.readArray(frames, f), 'length'), firstExpected: componentTotal, firstFrame: f }));
+          Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops : Dynamic), ({ final __callArgument37:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument37; }), (cast 'md5anim.frame-width-mismatch' : String), (cast '' : String), ({ final __callArgument38:Dynamic = { firstActual: _Runtime.field(flighthq._internal._StaticIndex.readArray(frames, f), 'length'), firstExpected: componentTotal, firstFrame: f }; __callArgument38; }));
           break;
         }
         f++;
@@ -182,7 +182,7 @@ class Md5AnimParse {
         var flags:Float = (cast entry : Md5AnimHierarchyEntry__md5AnimParse).flags;
         var width:Float = (cast Md5AnimParse.countMd5AnimFlagComponents__md5AnimParse((cast flags : Float)) : Float);
         if ((cast ((cast ((cast (cast entry : Md5AnimHierarchyEntry__md5AnimParse).startIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.andValue(((cast width : Float) > (cast 0.0 : Float)), function():Dynamic return cast ((cast ((cast entry : Md5AnimHierarchyEntry__md5AnimParse).startIndex + width) : Float) > (cast componentTotal : Float))) : Bool)) : Bool)) {
-          Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.joint-frame-window-invalid' : String), (cast '' : String), (cast { firstIndex: (cast entry : Md5AnimHierarchyEntry__md5AnimParse).startIndex, firstJoint: j, firstWidth: width }));
+          Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops : Dynamic), ({ final __callArgument39:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument39; }), (cast 'md5anim.joint-frame-window-invalid' : String), (cast '' : String), ({ final __callArgument40:Dynamic = { firstIndex: (cast entry : Md5AnimHierarchyEntry__md5AnimParse).startIndex, firstJoint: j, firstWidth: width }; __callArgument40; }));
         }
         var translationValues:Array<Float> = (cast cast ([] : Array<Dynamic>));
         var rotationValues:Array<Float> = (cast cast ([] : Array<Dynamic>));
@@ -222,17 +222,17 @@ class Md5AnimParse {
             f++;
           }
         }
-        convertPositionsZUpToYUp((cast translationValues), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-        convertQuaternionsZUpToYUp((cast rotationValues), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+        convertPositionsZUpToYUp(({ final __callArgument41:Dynamic = translationValues; __callArgument41; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+        convertQuaternionsZUpToYUp(({ final __callArgument42:Dynamic = rotationValues; __callArgument42; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
         var node:Node3D = _Runtime.coalesce(((cast nodeByName : flighthq._internal._Map<String, Node3D>).get((cast entry : Md5AnimHierarchyEntry__md5AnimParse).name)), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(joints, j));
-        var translationTrack:AnimationTrack = (cast createAnimationTrack((cast { components: 3.0, times: times, values: translationValues })) : AnimationTrack);
-        _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast translationTrack), (cast { node: node, path: Scene3DAnimationPathTranslation })) : AnimationChannel)] : Array<Dynamic>));
-        var rotationTrack:AnimationTrack = (cast createAnimationTrack((cast { components: 4.0, quaternion: true, times: times, values: rotationValues })) : AnimationTrack);
-        _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast rotationTrack), (cast { node: node, path: Scene3DAnimationPathRotation })) : AnimationChannel)] : Array<Dynamic>));
+        var translationTrack:AnimationTrack = (cast createAnimationTrack((cast { components: 3.0, times: times, values: translationValues } : Dynamic)) : AnimationTrack);
+        _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel(({ final __callArgument43:Dynamic = translationTrack; __callArgument43; }), (cast { node: node, path: Scene3DAnimationPathTranslation } : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+        var rotationTrack:AnimationTrack = (cast createAnimationTrack((cast { components: 4.0, quaternion: true, times: times, values: rotationValues } : Dynamic)) : AnimationTrack);
+        _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel(({ final __callArgument44:Dynamic = rotationTrack; __callArgument44; }), (cast { node: node, path: Scene3DAnimationPathRotation } : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
         j++;
       }
     }
-    return cast (cast createAnimationClip((cast channels), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : AnimationClip);
+    return cast (cast createAnimationClip(({ final __callArgument45:Dynamic = channels; __callArgument45; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : AnimationClip);
     return cast null;
   }
 
@@ -244,10 +244,10 @@ class Md5AnimParse {
       i++;
       if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
-      var entry:Null<Md5AnimHierarchyEntry__md5AnimParse> = (cast Md5AnimParse.parseHierarchyLine__md5AnimParse((cast line : String), (cast md5Drops), (cast (i - 1.0) : Float)) : Null<Md5AnimHierarchyEntry__md5AnimParse>);
+      var entry:Null<Md5AnimHierarchyEntry__md5AnimParse> = (cast Md5AnimParse.parseHierarchyLine__md5AnimParse((cast line : String), (cast md5Drops : Dynamic), (cast (i - 1.0) : Float)) : Null<Md5AnimHierarchyEntry__md5AnimParse>);
       if ((cast !_Runtime.strictEquals(entry, null) : Bool)) { _Runtime.callProperty(hierarchy, 'push', cast ([entry] : Array<Dynamic>)); }
     }
-    Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.hierarchy-block-unclosed' : String), (cast '' : String), (cast {  }));
+    Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops : Dynamic), ({ final __callArgument46:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument46; }), (cast 'md5anim.hierarchy-block-unclosed' : String), (cast '' : String), ({ final __callArgument47:Dynamic = {  }; __callArgument47; }));
     return cast i;
     return cast null;
   }
@@ -264,21 +264,21 @@ class Md5AnimParse {
     nameStart = _Runtime.callProperty(line, 'indexOf', cast (['"'] : Array<Dynamic>));
     nameEnd = _Runtime.callProperty(line, 'indexOf', cast (['"', (nameStart + 1.0)] : Array<Dynamic>));
     if ((cast ((cast ((cast nameStart : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast nameEnd : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'md5anim.malformed-hierarchy' : String), (cast 'missing-name-quotes' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'missing-name-quotes' }));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops : Dynamic), ({ final __callArgument48:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument48; }), (cast 'md5anim.malformed-hierarchy' : String), (cast 'missing-name-quotes' : String), ({ final __callArgument49:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'missing-name-quotes' }; __callArgument49; }));
       return cast null;
     }
     name = _Runtime.slice(line, (nameStart + 1.0), nameEnd);
     rest = StringTools.trim(Std.string(_Runtime.slice(line, (nameEnd + 1.0), null)));
     tokens = (cast _Runtime.filterArray((cast _Runtime.callProperty(rest, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)) : Array<String>), function(t:String, __unused0:Float, __unused1:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 3.0 : Float)) : Bool)) {
-      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'md5anim.malformed-hierarchy' : String), (cast 'not-enough-components' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops : Dynamic), ({ final __callArgument50:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument50; }), (cast 'md5anim.malformed-hierarchy' : String), (cast 'not-enough-components' : String), ({ final __callArgument51:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }; __callArgument51; }));
       return cast null;
     }
     parentIndex = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 0.0), 10.0] : Array<Dynamic>));
     flags = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 1.0), 10.0] : Array<Dynamic>));
     startIndex = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 2.0), 10.0] : Array<Dynamic>));
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parentIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([flags] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([startIndex] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'md5anim.malformed-hierarchy' : String), (cast 'non-numeric-values' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'non-numeric-values' }));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops : Dynamic), ({ final __callArgument52:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument52; }), (cast 'md5anim.malformed-hierarchy' : String), (cast 'non-numeric-values' : String), ({ final __callArgument53:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'non-numeric-values' }; __callArgument53; }));
       return cast null;
     }
     return cast { flags: flags, name: name, parentIndex: parentIndex, startIndex: startIndex };
@@ -293,10 +293,10 @@ class Md5AnimParse {
       i++;
       if ((cast _Runtime.strictEquals(line, '}') : Bool)) { return cast i; }
       if ((cast ((cast _Runtime.strictEquals(_Runtime.field(line, 'length'), 0.0) : Bool) || (cast StringTools.startsWith(line, '//') : Bool)) : Bool)) { continue; }
-      var pose:Null<Md5AnimBaseframePose__md5AnimParse> = (cast Md5AnimParse.parseBaseframeLine__md5AnimParse((cast line : String), (cast md5Drops), (cast (i - 1.0) : Float)) : Null<Md5AnimBaseframePose__md5AnimParse>);
+      var pose:Null<Md5AnimBaseframePose__md5AnimParse> = (cast Md5AnimParse.parseBaseframeLine__md5AnimParse((cast line : String), (cast md5Drops : Dynamic), (cast (i - 1.0) : Float)) : Null<Md5AnimBaseframePose__md5AnimParse>);
       if ((cast !_Runtime.strictEquals(pose, null) : Bool)) { _Runtime.callProperty(baseframe, 'push', cast ([pose] : Array<Dynamic>)); }
     }
-    Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.baseframe-block-unclosed' : String), (cast '' : String), (cast {  }));
+    Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops : Dynamic), ({ final __callArgument54:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument54; }), (cast 'md5anim.baseframe-block-unclosed' : String), (cast '' : String), ({ final __callArgument55:Dynamic = {  }; __callArgument55; }));
     return cast i;
     return cast null;
   }
@@ -311,7 +311,7 @@ class Md5AnimParse {
     var orientationZ:Float = cast _Runtime.UNDEFINED;
     tokens = (cast _Runtime.filterArray((cast _Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)) : Array<String>), function(t:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 6.0 : Float)) : Bool)) {
-      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'md5anim.malformed-baseframe' : String), (cast 'not-enough-components' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops : Dynamic), ({ final __callArgument56:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument56; }), (cast 'md5anim.malformed-baseframe' : String), (cast 'not-enough-components' : String), ({ final __callArgument57:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }; __callArgument57; }));
       return cast null;
     }
     positionX = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 0.0)] : Array<Dynamic>));
@@ -321,7 +321,7 @@ class Md5AnimParse {
     orientationY = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 4.0)] : Array<Dynamic>));
     orientationZ = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 5.0)] : Array<Dynamic>));
     if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([orientationX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([orientationY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([orientationZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'md5anim.malformed-baseframe' : String), (cast 'non-numeric-values' : String), (cast { firstLine: (lineIndex + 1.0), reason: 'non-numeric-values' }));
+      Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops : Dynamic), ({ final __callArgument58:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument58; }), (cast 'md5anim.malformed-baseframe' : String), (cast 'non-numeric-values' : String), ({ final __callArgument59:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'non-numeric-values' }; __callArgument59; }));
       return cast null;
     }
     return cast { orientationX: orientationX, orientationY: orientationY, orientationZ: orientationZ, positionX: positionX, positionY: positionY, positionZ: positionZ };
@@ -340,14 +340,14 @@ class Md5AnimParse {
       for (token in _Runtime.iterable(tokens)) {
         var value:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([token] : Array<Dynamic>));
         if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) {
-          Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.non-numeric-frame-value' : String), (cast 'non-numeric-frame-value' : String), (cast { firstLine: i, firstToken: token }));
+          Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops : Dynamic), ({ final __callArgument62:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument62; }), (cast 'md5anim.non-numeric-frame-value' : String), (cast 'non-numeric-frame-value' : String), ({ final __callArgument63:Dynamic = { firstLine: i, firstToken: token }; __callArgument63; }));
           _Runtime.callProperty(frameData, 'push', cast ([0.0] : Array<Dynamic>));
           continue;
         }
         _Runtime.callProperty(frameData, 'push', cast ([value] : Array<Dynamic>));
       }
     }
-    Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover), (cast 'md5anim.frame-block-unclosed' : String), (cast '' : String), (cast {  }));
+    Md5AnimParse.tallyMd5AnimDrop__md5AnimParse((cast md5Drops : Dynamic), ({ final __callArgument64:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument64; }), (cast 'md5anim.frame-block-unclosed' : String), (cast '' : String), ({ final __callArgument65:Dynamic = {  }; __callArgument65; }));
     return cast i;
     return cast null;
   }

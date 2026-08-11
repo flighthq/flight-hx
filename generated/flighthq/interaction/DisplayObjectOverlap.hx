@@ -14,12 +14,12 @@ import flighthq.types.Rectangle.RectangleLike;
 
 class DisplayObjectOverlap {
   public static function containsNode2D(outer:Node2D, inner:Node2D):Bool {
-    return cast (cast enclosesRectangle((cast (cast getNodeWorldBoundsRectangle((cast outer)) : Rectangle)), (cast (cast getNodeWorldBoundsRectangle((cast inner)) : Rectangle))) : Bool);
+    return cast (cast enclosesRectangle(({ final __callArgument0:Dynamic = (cast getNodeWorldBoundsRectangle((cast outer : Dynamic)) : Rectangle); __callArgument0; }), ({ final __callArgument1:Dynamic = (cast getNodeWorldBoundsRectangle((cast inner : Dynamic)) : Rectangle); __callArgument1; })) : Bool);
     return cast null;
   }
 
   public static function getNode2DOverlapRectangle(source:Node2D, other:Node2D, out:Rectangle):Rectangle {
-    computeRectangleIntersection((cast out), (cast (cast getNodeWorldBoundsRectangle((cast source)) : Rectangle)), (cast (cast getNodeWorldBoundsRectangle((cast other)) : Rectangle)));
+    computeRectangleIntersection(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast getNodeWorldBoundsRectangle((cast source : Dynamic)) : Rectangle); __callArgument3; }), ({ final __callArgument4:Dynamic = (cast getNodeWorldBoundsRectangle((cast other : Dynamic)) : Rectangle); __callArgument4; }));
     return cast out;
     return cast null;
   }
@@ -31,14 +31,14 @@ class DisplayObjectOverlap {
     var aCenterY:Float = cast _Runtime.UNDEFINED;
     var bCenterX:Float = cast _Runtime.UNDEFINED;
     var bCenterY:Float = cast _Runtime.UNDEFINED;
-    a = (cast getNodeWorldBoundsRectangle((cast source)) : Rectangle);
-    b = (cast getNodeWorldBoundsRectangle((cast other)) : Rectangle);
-    if ((cast !(cast (cast intersectsRectangle((cast a), (cast b)) : Bool) : Bool) : Bool)) { return cast false; }
+    a = (cast getNodeWorldBoundsRectangle((cast source : Dynamic)) : Rectangle);
+    b = (cast getNodeWorldBoundsRectangle((cast other : Dynamic)) : Rectangle);
+    if ((cast !(cast (cast intersectsRectangle(({ final __callArgument5:Dynamic = a; __callArgument5; }), ({ final __callArgument6:Dynamic = b; __callArgument6; })) : Bool) : Bool) : Bool)) { return cast false; }
     aCenterX = _Runtime.addNumbers(_Runtime.field(a, 'x'), _Runtime.multiplyNumbers(_Runtime.field(a, 'width'), 0.5));
     aCenterY = _Runtime.addNumbers(_Runtime.field(a, 'y'), _Runtime.multiplyNumbers(_Runtime.field(a, 'height'), 0.5));
     bCenterX = _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.multiplyNumbers(_Runtime.field(b, 'width'), 0.5));
     bCenterY = _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.multiplyNumbers(_Runtime.field(b, 'height'), 0.5));
-    return cast ((cast (cast containsRectanglePointXY((cast a), (cast bCenterX : Float), (cast bCenterY : Float)) : Bool) : Bool) || (cast (cast containsRectanglePointXY((cast b), (cast aCenterX : Float), (cast aCenterY : Float)) : Bool) : Bool));
+    return cast ((cast (cast containsRectanglePointXY(({ final __callArgument7:Dynamic = a; __callArgument7; }), (cast bCenterX : Float), (cast bCenterY : Float)) : Bool) : Bool) || (cast (cast containsRectanglePointXY(({ final __callArgument8:Dynamic = b; __callArgument8; }), (cast aCenterX : Float), (cast aCenterY : Float)) : Bool) : Bool));
     return cast null;
   }
 }

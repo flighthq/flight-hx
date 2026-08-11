@@ -18,12 +18,12 @@ class EnableGlRenderEffectGuards {
   }
 
   public static function disableGlRenderEffectGuards(state:GlRenderState):Void {
-    setGlRenderEffectApplicationGuard((cast state), (cast null));
+    setGlRenderEffectApplicationGuard(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast null : Dynamic));
     ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet<GlRenderState>).delete_(state));
   }
 
   public static function enableGlRenderEffectGuards(state:GlRenderState):Void {
-    setGlRenderEffectApplicationGuard((cast state), (cast EnableGlRenderEffectGuards.warnGlRenderEffectApplication__enableGlRenderEffectGuards));
+    setGlRenderEffectApplicationGuard(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast EnableGlRenderEffectGuards.warnGlRenderEffectApplication__enableGlRenderEffectGuards : Dynamic));
     ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet<GlRenderState>).add(state));
   }
 
@@ -47,7 +47,7 @@ class EnableGlRenderEffectGuards {
   }
 
   public static function warnGlRenderEffectApplication__enableGlRenderEffectGuards(_state:GlRenderState, explanation:GlRenderEffectApplicationExplanation):Void {
-    (cast logOnce((cast 'effects-gl:effect-application:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unregisteredKinds'), ',')) + '' : String), (cast LogLevel.Warn), (cast { message: (cast EnableGlRenderEffectGuards.getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards((cast explanation)) : String), registeredCount: _Runtime.field(explanation, 'registeredCount'), requestedCount: _Runtime.field(explanation, 'requestedCount'), status: _Runtime.field(explanation, 'status'), unregisteredKinds: _Runtime.field(explanation, 'unregisteredKinds') }), (cast 'effects-gl')) : Bool);
+    (cast logOnce((cast 'effects-gl:effect-application:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unregisteredKinds'), ',')) + '' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: (cast EnableGlRenderEffectGuards.getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards(({ final __callArgument3:Dynamic = explanation; __callArgument3; })) : String), registeredCount: _Runtime.field(explanation, 'registeredCount'), requestedCount: _Runtime.field(explanation, 'requestedCount'), status: _Runtime.field(explanation, 'status'), unregisteredKinds: _Runtime.field(explanation, 'unregisteredKinds') } : Dynamic), ({ final __callArgument4:Dynamic = 'effects-gl'; __callArgument4; })) : Bool);
   }
 
   public static final _guardedStates__enableGlRenderEffectGuards:flighthq._internal._WeakSet<GlRenderState> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);

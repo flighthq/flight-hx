@@ -22,10 +22,10 @@ class ExplainGlobalShortcutRegistration {
     var hasBackend:Bool = cast _Runtime.UNDEFINED;
     var registered:Bool = cast _Runtime.UNDEFINED;
     var reason:GlobalShortcutBlockReason = cast _Runtime.UNDEFINED;
-    parsed = (cast parseAcceleratorDetailed((cast accelerator : String), (cast (cast createParsedAccelerator() : ParsedAccelerator))) : flighthq._internal._Union2<ParsedAccelerator, AcceleratorParseError>);
+    parsed = (cast parseAcceleratorDetailed((cast accelerator : String), (cast createParsedAccelerator() : ParsedAccelerator)) : flighthq._internal._Union2<ParsedAccelerator, AcceleratorParseError>);
     failed = _Runtime.hasField(parsed, 'reason');
     parseError = ((cast failed : Bool) ? (cast parsed : Dynamic) : (cast null : Dynamic));
-    normalized = ((cast failed : Bool) ? (cast null : Dynamic) : (cast (cast ExplainGlobalShortcutRegistration._joinNormalized__explainGlobalShortcutRegistration((cast (cast parsed : ParsedAccelerator).modifiers), (cast (cast parsed : ParsedAccelerator).key : String)) : String) : Dynamic));
+    normalized = ((cast failed : Bool) ? (cast null : Dynamic) : (cast (cast ExplainGlobalShortcutRegistration._joinNormalized__explainGlobalShortcutRegistration(({ final __callArgument0:Dynamic = (cast parsed : ParsedAccelerator).modifiers; __callArgument0; }), (cast (cast parsed : ParsedAccelerator).key : String)) : String) : Dynamic));
     hasBackend = (cast hasNativeShortcutBackend() : Bool);
     registered = ((cast !_Runtime.strictEquals(normalized, null) : Bool) && (cast (cast isGlobalShortcutRegistered((cast normalized : String)) : Bool) : Bool));
     if ((cast failed : Bool)) { (reason = cast ('unparseable' : Dynamic)); } else { if ((cast !(cast hasBackend : Bool) : Bool)) { (reason = cast ('no-native-backend' : Dynamic)); } else { if ((cast registered : Bool)) { (reason = cast ('already-registered' : Dynamic)); } else { (reason = cast ('ok' : Dynamic)); } } }

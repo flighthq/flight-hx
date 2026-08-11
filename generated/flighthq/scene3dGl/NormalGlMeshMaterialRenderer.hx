@@ -44,23 +44,23 @@ class NormalGlMeshMaterialRenderer {
     var hasNormalMap:Bool = cast _Runtime.UNDEFINED;
     var program:GlDebugProgram = cast _Runtime.UNDEFINED;
     normal = (cast material : Null<NormalMaterial>);
-    hasNormalMap = ((cast ((cast !_Runtime.strictEquals(normal, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(normal, 'normalMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast _Runtime.field(normal, 'normalMap')), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool));
-    program = (cast ensureGlDebugProgram((cast state), (cast { hasNormalMap: hasNormalMap, mode: 'normal' })) : GlDebugProgram);
-    beginGlMeshDraw((cast state), (cast program), (cast ((cast !_Runtime.strictEquals(normal, null) : Bool) && (cast _Runtime.field(normal, 'doubleSided') : Bool)) : Bool));
-    setGlMeshViewProjection((cast state), (cast (cast program : GlDebugProgram).locViewProjection), (cast camera));
+    hasNormalMap = ((cast ((cast !_Runtime.strictEquals(normal, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(normal, 'normalMap'), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast resolveGlTexture(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.field(normal, 'normalMap'); __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool));
+    program = (cast ensureGlDebugProgram(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = { hasNormalMap: hasNormalMap, mode: 'normal' }; __callArgument3; })) : GlDebugProgram);
+    beginGlMeshDraw(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = program; __callArgument5; }), (cast ((cast !_Runtime.strictEquals(normal, null) : Bool) && (cast _Runtime.field(normal, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast program : GlDebugProgram).locViewProjection, ({ final __callArgument7:Dynamic = camera; __callArgument7; }));
     if ((cast _Runtime.strictEquals(normal, null) : Bool)) {
-      bindGlDebugNormalMap((cast state), (cast program), (cast null), (cast 1.0 : Float));
+      bindGlDebugNormalMap(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), (cast null : Dynamic), (cast 1.0 : Float));
       return;
     }
-    bindGlDebugNormalMap((cast state), (cast program), (cast _Runtime.field(normal, 'normalMap')), (cast _Runtime.field(normal, 'normalScale') : Float));
+    bindGlDebugNormalMap(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = program; __callArgument11; }), (cast _Runtime.field(normal, 'normalMap') : Dynamic), (cast _Runtime.field(normal, 'normalScale') : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset((cast state), (cast program), (cast proxy), (cast geometry));
+    drawGlMeshSubset(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = program; __callArgument14; }), ({ final __callArgument15:Dynamic = proxy; __callArgument15; }), ({ final __callArgument16:Dynamic = geometry; __callArgument16; }));
   } });
 
   public static function registerGlNormalMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer((cast state), (cast NormalMaterialKind : String), (cast normalGlMeshMaterialRenderer));
+    registerGlMeshMaterialRenderer(({ final __callArgument17:Dynamic = state; __callArgument17; }), (cast NormalMaterialKind : String), ({ final __callArgument18:Dynamic = normalGlMeshMaterialRenderer; __callArgument18; }));
   }
 }

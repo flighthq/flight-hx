@@ -58,7 +58,7 @@ class GlParticleEmitter3D {
     var indexData:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     var indexBuffer:flighthq._internal.dom.WebGLBuffer = cast _Runtime.UNDEFINED;
     var instanceBuffer:flighthq._internal.dom.WebGLBuffer = cast _Runtime.UNDEFINED;
-    program = (cast createGlProgram((cast gl), (cast GlParticleEmitter3D.PARTICLE_3D_VS__glParticleEmitter3D : String), (cast GlParticleEmitter3D.PARTICLE_3D_FS__glParticleEmitter3D : String), (cast 'ParticleEmitter3D' : String)) : flighthq._internal.dom.WebGLProgram);
+    program = (cast createGlProgram(({ final __callArgument0:Dynamic = gl; __callArgument0; }), (cast GlParticleEmitter3D.PARTICLE_3D_VS__glParticleEmitter3D : String), (cast GlParticleEmitter3D.PARTICLE_3D_FS__glParticleEmitter3D : String), (cast 'ParticleEmitter3D' : String)) : flighthq._internal.dom.WebGLProgram);
     vao = flighthq._internal.backend.WebGl2Backend.createVertexArray(gl);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, vao);
     cornerData = new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>));
@@ -79,7 +79,7 @@ class GlParticleEmitter3D {
     var shader:Null<GlParticle3DShader__glParticleEmitter3D> = cast _Runtime.UNDEFINED;
     shader = ((cast GlParticleEmitter3D.shaderCache__glParticleEmitter3D : flighthq._internal._WeakMap<GlRenderState, GlParticle3DShader__glParticleEmitter3D>).get(state));
     if ((cast !_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast shader; }
-    (shader = cast ((cast GlParticleEmitter3D.compileParticle3DShader__glParticleEmitter3D((cast (cast state : GlRenderState).gl)) : GlParticle3DShader__glParticleEmitter3D) : Dynamic));
+    (shader = cast ((cast GlParticleEmitter3D.compileParticle3DShader__glParticleEmitter3D((cast state : GlRenderState).gl) : GlParticle3DShader__glParticleEmitter3D) : Dynamic));
     ((cast GlParticleEmitter3D.shaderCache__glParticleEmitter3D : flighthq._internal._WeakMap<GlRenderState, GlParticle3DShader__glParticleEmitter3D>).set(state, (cast shader)));
     return cast shader;
     return cast null;
@@ -102,12 +102,12 @@ class GlParticleEmitter3D {
     if ((cast _Runtime.strictEquals(_Runtime.field(node, 'kind'), ParticleEmitter3DKind) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([(cast (cast node : flighthq._internal._Any) : ParticleEmitter3D)] : Array<Dynamic>));
     }
-    children = _Runtime.field((cast getNodeRuntime((cast node)) : NodeRuntime<flighthq._internal._Any>), 'children');
+    children = _Runtime.field((cast getNodeRuntime((cast node : Dynamic)) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          GlParticleEmitter3D.collectParticleEmitter3DNodes__glParticleEmitter3D((cast flighthq._internal._StaticIndex.readArray(children, i)), (cast out));
+          GlParticleEmitter3D.collectParticleEmitter3DNodes__glParticleEmitter3D(({ final __callArgument1:Dynamic = flighthq._internal._StaticIndex.readArray(children, i); __callArgument1; }), ({ final __callArgument2:Dynamic = out; __callArgument2; }));
           i++;
         }
       }
@@ -115,7 +115,7 @@ class GlParticleEmitter3D {
   }
 
   public static function applyGlParticleBlendMode__glParticleEmitter3D(state:GlRenderState, mode:ParticleBlendMode):Void {
-    if ((cast _Runtime.strictEquals((cast state : GlRenderState).applyBlendMode, null) : Bool)) { enableGlBlendModeSupport((cast state)); }
+    if ((cast _Runtime.strictEquals((cast state : GlRenderState).applyBlendMode, null) : Bool)) { enableGlBlendModeSupport(({ final __callArgument3:Dynamic = state; __callArgument3; })); }
     {
       var __switchValue = mode;
       if (__switchValue == 'add') {
@@ -171,15 +171,15 @@ class GlParticleEmitter3D {
     positionsZ = _Runtime.field(__destructure0, 'positionsZ');
     transforms = _Runtime.field(__destructure0, 'transforms');
     if ((cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) { return; }
-    GlParticleEmitter3D.ensureInstanceCapacity__glParticleEmitter3D((cast shader), (cast gl), (cast particleCount : Float));
-    atlasTexture = _Runtime.coalesce(({ final __typedStruct0 = atlas; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.texture; }), function():Dynamic return cast null);
-    resolvedAtlas = ((cast ((cast !_Runtime.strictEquals(atlasTexture, null) : Bool) && (cast (cast hasTextureSource((cast atlasTexture)) : Bool) : Bool)) : Bool) ? (cast (cast resolveGlTexture((cast state), (cast atlasTexture), (cast true : Bool), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<flighthq._internal.dom.WebGLTexture>) : Dynamic) : (cast null : Dynamic));
+    GlParticleEmitter3D.ensureInstanceCapacity__glParticleEmitter3D((cast shader : Dynamic), ({ final __callArgument4:Dynamic = gl; __callArgument4; }), (cast particleCount : Float));
+    atlasTexture = _Runtime.coalesce(({ final __typedStruct5 = atlas; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.texture; }), function():Dynamic return cast null);
+    resolvedAtlas = ((cast ((cast !_Runtime.strictEquals(atlasTexture, null) : Bool) && (cast (cast hasTextureSource(({ final __callArgument6:Dynamic = atlasTexture; __callArgument6; })) : Bool) : Bool)) : Bool) ? (cast (cast resolveGlTexture(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = atlasTexture; __callArgument8; }), (cast true : Bool), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<flighthq._internal.dom.WebGLTexture>) : Dynamic) : (cast null : Dynamic));
     hasAtlas = !_Runtime.strictEquals(resolvedAtlas, null);
     regions = ((cast hasAtlas : Bool) ? (cast (cast atlas : { var regions:Array<TextureAtlasRegion>; }).regions : Dynamic) : (cast null : Dynamic));
     numRegions = ((cast !_Runtime.strictEquals(regions, null) : Bool) ? (cast _Runtime.field(regions, 'length') : Dynamic) : (cast 0.0 : Dynamic));
-    iw = ((cast hasAtlas : Bool) ? (cast _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth((cast atlasTexture)) : Float))) : Dynamic) : (cast 0.0 : Dynamic));
-    ih = ((cast hasAtlas : Bool) ? (cast _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight((cast atlasTexture)) : Float))) : Dynamic) : (cast 0.0 : Dynamic));
-    worldMatrix = (cast getNodeWorldMatrix4((cast (cast (cast emitter : flighthq._internal._Any) : Node3D))) : Matrix4);
+    iw = ((cast hasAtlas : Bool) ? (cast _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(({ final __callArgument9:Dynamic = atlasTexture; __callArgument9; })) : Float))) : Dynamic) : (cast 0.0 : Dynamic));
+    ih = ((cast hasAtlas : Bool) ? (cast _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(({ final __callArgument10:Dynamic = atlasTexture; __callArgument10; })) : Float))) : Dynamic) : (cast 0.0 : Dynamic));
+    worldMatrix = (cast getNodeWorldMatrix4((cast (cast (cast emitter : flighthq._internal._Any) : Node3D) : Dynamic)) : Matrix4);
     wm = worldMatrix.m;
     worldSpace = data.worldSpace;
     instanceData = (cast shader : GlParticle3DShader__glParticleEmitter3D).instanceData;
@@ -303,10 +303,10 @@ class GlParticleEmitter3D {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var vm:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _Runtime.setLength(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, 0.0);
-    GlParticleEmitter3D.collectParticleEmitter3DNodes__glParticleEmitter3D((cast scene), (cast GlParticleEmitter3D.emitterScratch__glParticleEmitter3D));
+    GlParticleEmitter3D.collectParticleEmitter3DNodes__glParticleEmitter3D(({ final __callArgument11:Dynamic = scene; __callArgument11; }), ({ final __callArgument12:Dynamic = GlParticleEmitter3D.emitterScratch__glParticleEmitter3D; __callArgument12; }));
     if ((cast _Runtime.strictEquals(_Runtime.field(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, 'length'), 0.0) : Bool)) { return; }
-    list = (cast prepareScene3DRender((cast state), (cast scene), (cast camera), (cast lights), (cast (cast getGlScene3DViewportAspect((cast state)) : Float))) : Scene3DRenderList);
-    shader = (cast GlParticleEmitter3D.ensureParticle3DShader__glParticleEmitter3D((cast state)) : GlParticle3DShader__glParticleEmitter3D);
+    list = (cast prepareScene3DRender(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = scene; __callArgument14; }), ({ final __callArgument15:Dynamic = camera; __callArgument15; }), ({ final __callArgument16:Dynamic = lights; __callArgument16; }), ({ final __callArgument18:Dynamic = (cast getGlScene3DViewportAspect(({ final __callArgument17:Dynamic = state; __callArgument17; })) : Float); __callArgument18; })) : Scene3DRenderList);
+    shader = (cast GlParticleEmitter3D.ensureParticle3DShader__glParticleEmitter3D(({ final __callArgument19:Dynamic = state; __callArgument19; })) : GlParticle3DShader__glParticleEmitter3D);
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast shader : GlParticle3DShader__glParticleEmitter3D).program);
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast shader : GlParticle3DShader__glParticleEmitter3D).locViewProjection, false, (cast (cast list : Scene3DRenderList).viewProjection : { var m:flighthq._internal._Float32Array; }).m);
@@ -320,14 +320,14 @@ class GlParticleEmitter3D {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, 'length') : Float)) : Bool)) {
         var emitter:ParticleEmitter3D = flighthq._internal._StaticIndex.readArray(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, i);
-        GlParticleEmitter3D.applyGlParticleBlendMode__glParticleEmitter3D((cast state), (cast (cast emitter : ParticleEmitter3D).blendMode));
-        GlParticleEmitter3D.drawParticleEmitter3DNode__glParticleEmitter3D((cast state), (cast shader), (cast emitter));
+        GlParticleEmitter3D.applyGlParticleBlendMode__glParticleEmitter3D(({ final __callArgument20:Dynamic = state; __callArgument20; }), (cast emitter : ParticleEmitter3D).blendMode);
+        GlParticleEmitter3D.drawParticleEmitter3DNode__glParticleEmitter3D(({ final __callArgument21:Dynamic = state; __callArgument21; }), (cast shader : Dynamic), ({ final __callArgument22:Dynamic = emitter; __callArgument22; }));
         i++;
       }
     }
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
-    invalidateGlRenderStateCache((cast state));
+    invalidateGlRenderStateCache(({ final __callArgument23:Dynamic = state; __callArgument23; }));
   }
 
   public static final emitterScratch__glParticleEmitter3D:Array<ParticleEmitter3D> = (cast cast ([] : Array<Dynamic>));

@@ -45,6 +45,6 @@ class BitmapPaletteMap {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 }

@@ -26,11 +26,11 @@ import flighthq.types.Vector3;
 
 class SceneNodeCulling {
   public static function buildScene3DFrustum(out:FrustumLike, viewProjection:Matrix4Like):Void {
-    setFrustumFromMatrix4((cast out), (cast viewProjection));
+    setFrustumFromMatrix4(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = viewProjection; __callArgument1; }));
   }
 
   public static function cullNode3DByFrustum(out:Array<Node3D>, root:Node3D, frustum:FrustumLike):Array<Node3D> {
-    SceneNodeCulling._cullNode__sceneNodeCulling((cast out), (cast root), (cast frustum));
+    SceneNodeCulling._cullNode__sceneNodeCulling(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = root; __callArgument3; }), ({ final __callArgument4:Dynamic = frustum; __callArgument4; }));
     return cast out;
     return cast null;
   }
@@ -42,31 +42,31 @@ class SceneNodeCulling {
       var geom:MeshGeometry = (cast node : { var geometry:MeshGeometry; }).geometry;
       var localBounds:Null<Aabb> = geom.bounds;
       if ((cast _Runtime.strictEquals(localBounds, null) : Bool)) {
-        computeMeshGeometryBounds((cast SceneNodeCulling._scratchLocalAabb__sceneNodeCulling), (cast geom));
+        computeMeshGeometryBounds(({ final __callArgument5:Dynamic = SceneNodeCulling._scratchLocalAabb__sceneNodeCulling; __callArgument5; }), ({ final __callArgument6:Dynamic = geom; __callArgument6; }));
         (localBounds = cast (SceneNodeCulling._scratchLocalAabb__sceneNodeCulling : Dynamic));
       }
       if ((cast ((cast (cast (cast localBounds : { var min:Vector3; }).min : { var x:Float; }).x : Float) <= (cast (cast (cast localBounds : { var max:Vector3; }).max : { var x:Float; }).x : Float)) : Bool)) {
-        ensureNodeWorldMatrix4((cast node));
-        var worldMatrix:Matrix4Like = (cast getNodeWorldMatrix4((cast node)) : Matrix4Like);
-        transformAabbByMatrix4((cast SceneNodeCulling._scratchWorldAabb__sceneNodeCulling), (cast localBounds), (cast worldMatrix));
-        if ((cast (cast isFrustumIntersectingAabb((cast frustum), (cast SceneNodeCulling._scratchWorldAabb__sceneNodeCulling)) : Bool) : Bool)) {
+        ensureNodeWorldMatrix4((cast node : Dynamic));
+        var worldMatrix:Matrix4Like = (cast getNodeWorldMatrix4((cast node : Dynamic)) : Matrix4Like);
+        transformAabbByMatrix4(({ final __callArgument7:Dynamic = SceneNodeCulling._scratchWorldAabb__sceneNodeCulling; __callArgument7; }), ({ final __callArgument8:Dynamic = localBounds; __callArgument8; }), ({ final __callArgument9:Dynamic = worldMatrix; __callArgument9; }));
+        if ((cast (cast isFrustumIntersectingAabb(({ final __callArgument10:Dynamic = frustum; __callArgument10; }), ({ final __callArgument11:Dynamic = SceneNodeCulling._scratchWorldAabb__sceneNodeCulling; __callArgument11; })) : Bool) : Bool)) {
           _Runtime.callProperty(out, 'push', cast ([(cast node : Node3D)] : Array<Dynamic>));
         }
       }
     }
-    children = _Runtime.field((cast getNodeRuntime((cast node)) : NodeRuntime<Node3DTraits>), 'children');
+    children = _Runtime.field((cast getNodeRuntime((cast node : Dynamic)) : NodeRuntime<Node3DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          SceneNodeCulling._cullNode__sceneNodeCulling((cast out), (cast (cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D)), (cast frustum));
+          SceneNodeCulling._cullNode__sceneNodeCulling(({ final __callArgument12:Dynamic = out; __callArgument12; }), (cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D), ({ final __callArgument13:Dynamic = frustum; __callArgument13; }));
           i++;
         }
       }
     }
   }
 
-  public static final _scratchLocalAabb__sceneNodeCulling:Aabb = (cast createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Aabb);
+  public static final _scratchLocalAabb__sceneNodeCulling:Aabb = (cast createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Aabb);
 
-  public static final _scratchWorldAabb__sceneNodeCulling:Aabb = (cast createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Aabb);
+  public static final _scratchWorldAabb__sceneNodeCulling:Aabb = (cast createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Aabb);
 }

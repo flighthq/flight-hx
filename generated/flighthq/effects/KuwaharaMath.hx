@@ -78,7 +78,7 @@ class KuwaharaMath {
 
   public static function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Float {
     var s:Float = cast _Runtime.UNDEFINED;
-    s = (cast computeKuwaharaSectorSize((cast effect)) : Float);
+    s = (cast computeKuwaharaSectorSize(({ final __callArgument2:Dynamic = effect; __callArgument2; })) : Float);
     return cast (s * s);
     return cast null;
   }

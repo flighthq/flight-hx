@@ -16,11 +16,11 @@ import flighthq.types.ParticleObjectsUpdateOptions;
 class StepParticleObjects {
   public static function stepParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?updateOptions:ParticleObjectsUpdateOptions):Void {
     if ((cast ((cast !_Runtime.looseEquals(forces, null) : Bool) && (cast ((cast _Runtime.field(forces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      applyParticleObjectForces((cast objects), (cast state), (cast forces), (cast deltaTime : Float));
+      applyParticleObjectForces(({ final __callArgument0:Dynamic = objects; __callArgument0; }), ({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = forces; __callArgument2; }), (cast deltaTime : Float));
     }
-    updateParticleObjects((cast objects), (cast state), (cast config), (cast deltaTime : Float), (cast updateOptions));
+    updateParticleObjects(({ final __callArgument3:Dynamic = objects; __callArgument3; }), ({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = config; __callArgument5; }), (cast deltaTime : Float), ({ final __callArgument6:Dynamic = updateOptions; __callArgument6; }));
     if ((cast ((cast !_Runtime.looseEquals(colliders, null) : Bool) && (cast ((cast _Runtime.field(colliders, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      applyParticleObjectCollisions((cast objects), (cast state), (cast colliders));
+      applyParticleObjectCollisions(({ final __callArgument7:Dynamic = objects; __callArgument7; }), ({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = colliders; __callArgument9; }));
     }
   }
 }

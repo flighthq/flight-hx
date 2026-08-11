@@ -15,7 +15,7 @@ class Clone {
     var copy:flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     copy = (cast _Runtime.mergeObjects([source]) : flighthq._internal._Record<Dynamic, flighthq._internal._Any>);
     _Runtime.setIndex(copy, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
-    return cast (cast createEntity((cast (cast (cast copy : flighthq._internal._Any) : Type))) : flighthq._internal._Intersection2<Type, Entity>);
+    return cast (cast createEntity((cast (cast (cast copy : flighthq._internal._Any) : Type) : Dynamic)) : flighthq._internal._Intersection2<Type, Entity>);
     return cast null;
   }
 

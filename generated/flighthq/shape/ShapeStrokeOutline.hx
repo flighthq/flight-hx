@@ -25,7 +25,7 @@ class ShapeStrokeOutline {
     var deferred:Bool = cast _Runtime.UNDEFINED;
     var flush:Void->Void = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
-    if ((cast (cast ShapeStrokeOutline.hasNonSolidShapeStroke__shapeStrokeOutline((cast commands)) : Bool) : Bool)) { return cast null; }
+    if ((cast (cast ShapeStrokeOutline.hasNonSolidShapeStroke__shapeStrokeOutline(({ final __callArgument0:Dynamic = commands; __callArgument0; })) : Bool) : Bool)) { return cast null; }
     regions = (cast cast ([] : Array<Dynamic>));
     centerline = null;
     style = null;
@@ -37,11 +37,11 @@ class ShapeStrokeOutline {
     flush = (cast function():Void {
       var outline:Path = cast _Runtime.UNDEFINED;
       if ((cast ((cast ((cast _Runtime.strictEquals(style, null) : Bool) || (cast _Runtime.strictEquals(centerline, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast centerline : Path).commands, 'length'), 0.0) : Bool)) : Bool)) { return; }
-      if ((cast (cast ShapeStrokeOutline.isCenterlineClosed__shapeStrokeOutline((cast centerline)) : Bool) : Bool)) {
+      if ((cast (cast ShapeStrokeOutline.isCenterlineClosed__shapeStrokeOutline(({ final __callArgument1:Dynamic = centerline; __callArgument1; })) : Bool) : Bool)) {
         (deferred = cast (true : Dynamic));
         return;
       }
-      outline = (cast compactStrokePath((cast centerline), (cast style), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Path);
+      outline = (cast compactStrokePath(({ final __callArgument2:Dynamic = centerline; __callArgument2; }), ({ final __callArgument3:Dynamic = style; __callArgument3; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Path);
       if ((cast ((cast _Runtime.field((cast outline : Path).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: outline, color: color, alpha: alpha }] : Array<Dynamic>)); }
     });
     i = 0.0;
@@ -70,7 +70,7 @@ class ShapeStrokeOutline {
             _Runtime.callProperty((cast centerline : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
             _Runtime.pushMany((cast centerline : Path).data, cast ([penX, penY] : Array<Dynamic>));
           }
-          appendShapeGeometryCommand((cast centerline), (cast name : String), (cast commands), (cast a : Float));
+          appendShapeGeometryCommand(({ final __callArgument4:Dynamic = centerline; __callArgument4; }), (cast name : String), ({ final __callArgument5:Dynamic = commands; __callArgument5; }), (cast a : Float));
         }
         if ((cast ((cast _Runtime.strictEquals(name, 'moveTo') : Bool) || (cast _Runtime.strictEquals(name, 'lineTo') : Bool)) : Bool)) {
           (penX = cast ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Dynamic));

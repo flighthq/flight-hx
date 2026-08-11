@@ -15,7 +15,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 class BoundingSphere {
   public static function cloneBoundingSphere(source:BoundingSphereLike):flighthq.types.BoundingSphere {
-    return cast (cast createBoundingSphere((cast (cast source.center : { var x:Float; }).x), (cast (cast source.center : { var y:Float; }).y), (cast (cast source.center : { var z:Float; }).z), (cast source.radius)) : flighthq.types.BoundingSphere);
+    return cast (cast createBoundingSphere(({ final __callArgument0:Dynamic = (cast source.center : { var x:Float; }).x; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast source.center : { var y:Float; }).y; __callArgument1; }), ({ final __callArgument2:Dynamic = (cast source.center : { var z:Float; }).z; __callArgument2; }), ({ final __callArgument3:Dynamic = source.radius; __callArgument3; })) : flighthq.types.BoundingSphere);
     return cast null;
   }
 
@@ -40,8 +40,8 @@ class BoundingSphere {
 
   public static function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):flighthq.types.BoundingSphere {
     var center:Vector3 = cast _Runtime.UNDEFINED;
-    center = (cast createVector3((cast _Runtime.coalesce(centerX, function():Dynamic return cast 0.0)), (cast _Runtime.coalesce(centerY, function():Dynamic return cast 0.0)), (cast _Runtime.coalesce(centerZ, function():Dynamic return cast 0.0))) : Vector3);
-    return cast (cast createEntity((cast { center: center, radius: _Runtime.coalesce(radius, function():Dynamic return cast -1.0) })) : { >Entity, var center:Vector3; var radius:Float; });
+    center = (cast createVector3(({ final __callArgument4:Dynamic = _Runtime.coalesce(centerX, function():Dynamic return cast 0.0); __callArgument4; }), ({ final __callArgument5:Dynamic = _Runtime.coalesce(centerY, function():Dynamic return cast 0.0); __callArgument5; }), ({ final __callArgument6:Dynamic = _Runtime.coalesce(centerZ, function():Dynamic return cast 0.0); __callArgument6; })) : Vector3);
+    return cast (cast createEntity((cast { center: center, radius: _Runtime.coalesce(radius, function():Dynamic return cast -1.0) } : Dynamic)) : { >Entity, var center:Vector3; var radius:Float; });
     return cast null;
   }
 

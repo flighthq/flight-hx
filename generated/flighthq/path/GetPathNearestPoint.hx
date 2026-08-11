@@ -13,7 +13,7 @@ class GetPathNearestPoint {
     var bestDistSq:Float = cast _Runtime.UNDEFINED;
     var bestX:Float = cast _Runtime.UNDEFINED;
     var bestY:Float = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath((cast path), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument0:Dynamic = path; __callArgument0; }), (cast tolerance : Float)) : Array<Array<Float>>);
     bestDistSq = HxMath.POSITIVE_INFINITY;
     bestX = 0.0;
     bestY = 0.0;

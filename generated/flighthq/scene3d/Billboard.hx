@@ -23,7 +23,7 @@ class Billboard {
   public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, mode:BillboardMode = 'full', ?kind:Kind, ?obj:flighthq._internal._Partial<flighthq._internal._Pick<flighthq.types.Billboard, String>>):flighthq.types.Billboard {
     if (kind == null) kind = cast (BillboardKind : Dynamic);
     var billboard:flighthq.types.Billboard = cast _Runtime.UNDEFINED;
-    billboard = (cast createNode3D((cast kind : String), (cast obj)) : flighthq.types.Billboard);
+    billboard = (cast createNode3D((cast kind : String), ({ final __callArgument0:Dynamic = obj; __callArgument0; })) : flighthq.types.Billboard);
     (billboard.geometry = cast (geometry : Dynamic));
     (billboard.materials = cast (materials : Dynamic));
     (billboard.mode = cast (mode : Dynamic));
@@ -32,18 +32,18 @@ class Billboard {
   }
 
   public static function enableBillboardSignals(source:flighthq.types.Billboard):NodeSignals {
-    return cast (cast enableNodeSignals((cast source)) : NodeSignals);
+    return cast (cast enableNodeSignals((cast source : Dynamic)) : NodeSignals);
     return cast null;
   }
 
   @:noCompletion
   public static function getBillboardRuntime(source:flighthq.types.Billboard):BillboardRuntime {
-    return cast (cast getNode3DRuntime((cast source)) : Node3DRuntime);
+    return cast (cast getNode3DRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : Node3DRuntime);
     return cast null;
   }
 
   public static function getBillboardSignals(source:flighthq.types.Billboard):Null<NodeSignals> {
-    return cast (cast getNodeSignals((cast source)) : Null<NodeSignals>);
+    return cast (cast getNodeSignals((cast source : Dynamic)) : Null<NodeSignals>);
     return cast null;
   }
 

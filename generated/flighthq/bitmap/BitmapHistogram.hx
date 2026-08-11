@@ -13,10 +13,10 @@ class BitmapHistogram {
   public static function equalizeBitmapHistogram(dest:BitmapRegion, source:BitmapRegion):Void {
     var histogram:flighthq.types.BitmapHistogram = cast _Runtime.UNDEFINED;
     var total:Float = cast _Runtime.UNDEFINED;
-    histogram = (cast getBitmapHistogram((cast source)) : flighthq.types.BitmapHistogram);
+    histogram = (cast getBitmapHistogram(({ final __callArgument0:Dynamic = source; __callArgument0; })) : flighthq.types.BitmapHistogram);
     total = _Runtime.multiplyNumbers(_Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
-    applyBitmapPaletteMap((cast dest), (cast source), (cast (cast BitmapHistogram.buildEqualizeMap__bitmapHistogram((cast (cast histogram : flighthq.types.BitmapHistogram).red), (cast total : Float)) : Array<Float>)), (cast (cast BitmapHistogram.buildEqualizeMap__bitmapHistogram((cast (cast histogram : flighthq.types.BitmapHistogram).green), (cast total : Float)) : Array<Float>)), (cast (cast BitmapHistogram.buildEqualizeMap__bitmapHistogram((cast (cast histogram : flighthq.types.BitmapHistogram).blue), (cast total : Float)) : Array<Float>)), (cast null));
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    applyBitmapPaletteMap(({ final __callArgument1:Dynamic = dest; __callArgument1; }), ({ final __callArgument2:Dynamic = source; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast BitmapHistogram.buildEqualizeMap__bitmapHistogram((cast histogram : flighthq.types.BitmapHistogram).red, (cast total : Float)) : Array<Float>); __callArgument3; }), ({ final __callArgument4:Dynamic = (cast BitmapHistogram.buildEqualizeMap__bitmapHistogram((cast histogram : flighthq.types.BitmapHistogram).green, (cast total : Float)) : Array<Float>); __callArgument4; }), ({ final __callArgument5:Dynamic = (cast BitmapHistogram.buildEqualizeMap__bitmapHistogram((cast histogram : flighthq.types.BitmapHistogram).blue, (cast total : Float)) : Array<Float>); __callArgument5; }), ({ final __callArgument6:Dynamic = null; __callArgument6; }));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function getBitmapHistogram(source:BitmapRegion):flighthq.types.BitmapHistogram {

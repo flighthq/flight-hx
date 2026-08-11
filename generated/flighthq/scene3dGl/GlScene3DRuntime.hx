@@ -49,14 +49,14 @@ class GlScene3DRuntime {
       flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, (cast scene : flighthq.types.GlScene3DRuntime).environmentSourceCube);
       ((cast scene : flighthq.types.GlScene3DRuntime).environmentSourceCube = null);
     }
-    destroyGlEnvironmentIblBakePrograms((cast state));
+    destroyGlEnvironmentIblBakePrograms(({ final __callArgument2:Dynamic = state; __callArgument2; }));
     if ((cast !_Runtime.strictEquals((cast scene : flighthq.types.GlScene3DRuntime).shadowTarget, null) : Bool)) {
-      destroyGlRenderTarget((cast state), (cast (cast scene : flighthq.types.GlScene3DRuntime).shadowTarget));
+      destroyGlRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast scene : flighthq.types.GlScene3DRuntime).shadowTarget);
       ((cast scene : flighthq.types.GlScene3DRuntime).shadowTarget = null);
     }
     ((cast scene : flighthq.types.GlScene3DRuntime).shadow = null);
     if ((cast !_Runtime.strictEquals((cast scene : flighthq.types.GlScene3DRuntime).skinPalette, null) : Bool)) {
-      destroyGlSkinPaletteTexture((cast gl), (cast (cast scene : flighthq.types.GlScene3DRuntime).skinPalette));
+      destroyGlSkinPaletteTexture(({ final __callArgument4:Dynamic = gl; __callArgument4; }), (cast scene : flighthq.types.GlScene3DRuntime).skinPalette);
       ((cast scene : flighthq.types.GlScene3DRuntime).skinPalette = null);
     }
     _Runtime.setLength((cast scene : flighthq.types.GlScene3DRuntime).blendedDrawList, 0.0);
@@ -69,10 +69,10 @@ class GlScene3DRuntime {
   public static function ensureGlSkinPalette(state:GlRenderState):GlSkinPaletteTexture {
     var scene:flighthq.types.GlScene3DRuntime = cast _Runtime.UNDEFINED;
     var palette:Null<GlSkinPaletteTexture> = cast _Runtime.UNDEFINED;
-    scene = (cast getGlScene3DRuntime((cast state)) : flighthq.types.GlScene3DRuntime);
+    scene = (cast getGlScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : flighthq.types.GlScene3DRuntime);
     palette = (cast scene : flighthq.types.GlScene3DRuntime).skinPalette;
     if ((cast _Runtime.strictEquals(palette, null) : Bool)) {
-      (palette = cast ((cast createGlSkinPaletteTexture((cast (cast state : GlRenderState).gl)) : GlSkinPaletteTexture) : Dynamic));
+      (palette = cast ((cast createGlSkinPaletteTexture((cast state : GlRenderState).gl) : GlSkinPaletteTexture) : Dynamic));
       ((cast scene : flighthq.types.GlScene3DRuntime).skinPalette = palette);
     }
     return cast palette;

@@ -48,33 +48,33 @@ class EmissiveWgpuMeshMaterialRenderer {
     var format:String = cast _Runtime.UNDEFINED;
     var pipeline:WgpuUnlitPipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
-    stateRuntime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     emissive = (cast material : Null<EmissiveMaterial>);
     format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    pipeline = (cast ensureWgpuUnlitPipeline((cast state), (cast (cast EmissiveWgpuMeshMaterialRenderer.defineKeyForMaterial__emissiveWgpuMeshMaterialRenderer((cast emissive)) : WgpuUnlitDefineKey)), (cast format : String)) : WgpuUnlitPipeline);
-    writeWgpuFrameUniform((cast state), (cast camera), (cast _lights));
+    pipeline = (cast ensureWgpuUnlitPipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast EmissiveWgpuMeshMaterialRenderer.defineKeyForMaterial__emissiveWgpuMeshMaterialRenderer(({ final __callArgument2:Dynamic = emissive; __callArgument2; })) : WgpuUnlitDefineKey), (cast format : String)) : WgpuUnlitPipeline);
+    writeWgpuFrameUniform(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = camera; __callArgument4; }), ({ final __callArgument5:Dynamic = _lights; __callArgument5; }));
     if ((cast _Runtime.strictEquals(emissive, null) : Bool)) {
-      (group = cast ((cast bindWgpuUnlitSurface((cast state), (cast pipeline), (cast EmissiveWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__emissiveWgpuMeshMaterialRenderer), (cast EmissiveWgpuMeshMaterialRenderer.WHITE__emissiveWgpuMeshMaterialRenderer), (cast 1.0 : Float), (cast 0.5 : Float), (cast null)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (group = cast ((cast bindWgpuUnlitSurface(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pipeline; __callArgument7; }), ({ final __callArgument8:Dynamic = EmissiveWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__emissiveWgpuMeshMaterialRenderer; __callArgument8; }), ({ final __callArgument9:Dynamic = EmissiveWgpuMeshMaterialRenderer.WHITE__emissiveWgpuMeshMaterialRenderer; __callArgument9; }), (cast 1.0 : Float), (cast 0.5 : Float), (cast null : Dynamic)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
-      (cast unpackColorToLinear((cast EmissiveWgpuMeshMaterialRenderer._scratch__emissiveWgpuMeshMaterialRenderer), (cast _Runtime.field(emissive, 'emissive') : Float)) : LinearColor);
-      (group = cast ((cast bindWgpuUnlitSurface((cast state), (cast pipeline), (cast emissive), (cast EmissiveWgpuMeshMaterialRenderer._scratch__emissiveWgpuMeshMaterialRenderer), (cast _Runtime.field(emissive, 'emissiveStrength') : Float), (cast _Runtime.field(emissive, 'alphaCutoff') : Float), (cast _Runtime.field(emissive, 'emissiveMap'))) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (cast unpackColorToLinear(({ final __callArgument10:Dynamic = EmissiveWgpuMeshMaterialRenderer._scratch__emissiveWgpuMeshMaterialRenderer; __callArgument10; }), (cast _Runtime.field(emissive, 'emissive') : Float)) : LinearColor);
+      (group = cast ((cast bindWgpuUnlitSurface(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = pipeline; __callArgument12; }), ({ final __callArgument13:Dynamic = emissive; __callArgument13; }), ({ final __callArgument14:Dynamic = EmissiveWgpuMeshMaterialRenderer._scratch__emissiveWgpuMeshMaterialRenderer; __callArgument14; }), (cast _Runtime.field(emissive, 'emissiveStrength') : Float), (cast _Runtime.field(emissive, 'alphaCutoff') : Float), (cast _Runtime.field(emissive, 'emissiveMap') : Dynamic)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
-    beginWgpuMeshDraw((cast state), (cast pipeline));
+    beginWgpuMeshDraw(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = pipeline; __callArgument16; }));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
-    drawWgpuMeshSubset((cast state), (cast proxy), (cast geometry));
+    drawWgpuMeshSubset(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = proxy; __callArgument18; }), ({ final __callArgument19:Dynamic = geometry; __callArgument19; }));
   } });
 
   public static function registerWgpuEmissiveMaterial(state:WgpuRenderState):Void {
-    registerWgpuBitmapTextureResolver((cast state));
-    registerWgpuImageTextureResolver((cast state));
-    registerWgpuMeshMaterialRenderer((cast state), (cast EmissiveMaterialKind : String), (cast emissiveWgpuMeshMaterialRenderer));
+    registerWgpuBitmapTextureResolver(({ final __callArgument20:Dynamic = state; __callArgument20; }));
+    registerWgpuImageTextureResolver(({ final __callArgument21:Dynamic = state; __callArgument21; }));
+    registerWgpuMeshMaterialRenderer(({ final __callArgument22:Dynamic = state; __callArgument22; }), (cast EmissiveMaterialKind : String), ({ final __callArgument23:Dynamic = emissiveWgpuMeshMaterialRenderer; __callArgument23; }));
   }
 
   public static function defineKeyForMaterial__emissiveWgpuMeshMaterialRenderer(material:Null<EmissiveMaterial>):WgpuUnlitDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasColorMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'emissiveMap'))) : Bool) : Bool)) };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasColorMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'emissiveMap') : Dynamic)) : Bool) : Bool)) };
     return cast null;
   }
 

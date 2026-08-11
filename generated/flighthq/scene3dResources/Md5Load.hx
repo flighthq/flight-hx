@@ -15,19 +15,19 @@ class Md5Load {
       flighthq._internal._Async.protect(function():Dynamic {
         var source:Null<String> = cast _Runtime.UNDEFINED;
         var document:Scene3DDocument = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast loadScene3DDocumentTextFromUrl((cast url : String), (cast options)) : flighthq._internal._Promise<Null<String>>), function(__awaitValue0:Dynamic):Dynamic {
-          source = __awaitValue0;
-          var __flowBranch1:Dynamic;
+        return flighthq._internal._Async.flatMap((cast loadScene3DDocumentTextFromUrl((cast url : String), ({ final __callArgument5:Dynamic = options; __callArgument5; })) : flighthq._internal._Promise<Null<String>>), function(__awaitValue2:Dynamic):Dynamic {
+          source = __awaitValue2;
+          var __flowBranch3:Dynamic;
           if ((cast _Runtime.strictEquals(source, null) : Bool)) {
-            __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch1 = flighthq._internal._Async.flowNormal();
+            __flowBranch3 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
-            document = (cast parseMd5Mesh((cast source : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene3DDocument);
-            setScene3DDocumentResourceBasePathFromUrl((cast document), (cast url : String));
+          return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
+            document = (cast parseMd5Mesh((cast source : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene3DDocument);
+            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument4:Dynamic = document; __callArgument4; }), (cast url : String));
             return flighthq._internal._Async.flowReturn(document);
           });
         });

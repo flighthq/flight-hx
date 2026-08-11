@@ -21,10 +21,10 @@ class WgpuEffectTintShader {
   @:noCompletion
   public static function applyWgpuEffectInnerClipPass(state:WgpuRenderState, glow:WgpuRenderTarget, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    pipeline = (cast WgpuEffectTintShader.getWgpuInnerClipShader__wgpuEffectTintShader((cast state)) : WgpuEffectPipeline);
-    drawWgpuDualSourceEffectPass((cast state), (cast glow), (cast source), (cast dest), (cast pipeline), (cast function(__unused2:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(__unused0:flighthq._internal._Float32Array, __unused1:flighthq._internal._Int32Array):Void {
+    pipeline = (cast WgpuEffectTintShader.getWgpuInnerClipShader__wgpuEffectTintShader(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuEffectPipeline);
+    drawWgpuDualSourceEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = glow; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), ({ final __callArgument5:Dynamic = pipeline; __callArgument5; }), ({ final __callArgument6:Dynamic = function(__unused2:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(__unused0:flighthq._internal._Float32Array, __unused1:flighthq._internal._Int32Array):Void {
 
-    }, cast ([] : Array<Dynamic>)); }));
+    }, cast ([] : Array<Dynamic>)); }; __callArgument6; }));
   }
 
   @:noCompletion
@@ -38,14 +38,14 @@ class WgpuEffectTintShader {
     r = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
     g = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
     b = flighthq._internal._StaticIndex.readArray(__destructure4, 2.0);
-    pipeline = (cast WgpuEffectTintShader.getWgpuInvertTintShader__wgpuEffectTintShader((cast state)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state), (cast source), (cast dest), (cast pipeline), (cast function(__unused6:flighthq._internal._Float32Array, __unused7:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void {
+    pipeline = (cast WgpuEffectTintShader.getWgpuInvertTintShader__wgpuEffectTintShader(({ final __callArgument7:Dynamic = state; __callArgument7; })) : WgpuEffectPipeline);
+    drawWgpuEffectPass(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = source; __callArgument9; }), ({ final __callArgument10:Dynamic = dest; __callArgument10; }), ({ final __callArgument11:Dynamic = pipeline; __callArgument11; }), ({ final __callArgument12:Dynamic = function(__unused6:flighthq._internal._Float32Array, __unused7:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast r : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast g : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast b : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast alpha : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast strength : Float));
-    }, cast ([__unused6] : Array<Dynamic>)); }));
+    }, cast ([__unused6] : Array<Dynamic>)); }; __callArgument12; }));
   }
 
   @:noCompletion
@@ -59,21 +59,21 @@ class WgpuEffectTintShader {
     r = flighthq._internal._StaticIndex.readArray(__destructure8, 0.0);
     g = flighthq._internal._StaticIndex.readArray(__destructure8, 1.0);
     b = flighthq._internal._StaticIndex.readArray(__destructure8, 2.0);
-    pipeline = (cast WgpuEffectTintShader.getWgpuTintShader__wgpuEffectTintShader((cast state)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state), (cast source), (cast dest), (cast pipeline), (cast function(__unused10:flighthq._internal._Float32Array, __unused11:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused9:flighthq._internal._Int32Array):Void {
+    pipeline = (cast WgpuEffectTintShader.getWgpuTintShader__wgpuEffectTintShader(({ final __callArgument13:Dynamic = state; __callArgument13; })) : WgpuEffectPipeline);
+    drawWgpuEffectPass(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = source; __callArgument15; }), ({ final __callArgument16:Dynamic = dest; __callArgument16; }), ({ final __callArgument17:Dynamic = pipeline; __callArgument17; }), ({ final __callArgument18:Dynamic = function(__unused10:flighthq._internal._Float32Array, __unused11:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused9:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast r : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast g : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast b : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast alpha : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast strength : Float));
-    }, cast ([__unused10] : Array<Dynamic>)); }));
+    }, cast ([__unused10] : Array<Dynamic>)); }; __callArgument18; }));
   }
 
   public static function getWgpuInnerClipShader__wgpuEffectTintShader(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var p:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectTintShader.innerClipPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (p = cast ((cast createWgpuDualSourceEffectPipeline((cast state), (cast WgpuEffectTintShader.INNER_CLIP_WGSL__wgpuEffectTintShader : String), (cast 'replace')) : WgpuEffectPipeline) : Dynamic));
+      (p = cast ((cast createWgpuDualSourceEffectPipeline(({ final __callArgument19:Dynamic = state; __callArgument19; }), (cast WgpuEffectTintShader.INNER_CLIP_WGSL__wgpuEffectTintShader : String), ({ final __callArgument20:Dynamic = 'replace'; __callArgument20; })) : WgpuEffectPipeline) : Dynamic));
       ((cast WgpuEffectTintShader.innerClipPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast p)));
     }
     return cast p;
@@ -84,7 +84,7 @@ class WgpuEffectTintShader {
     var p:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectTintShader.invertTintPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (p = cast ((cast createWgpuEffectPipeline((cast state), (cast WgpuEffectTintShader.INVERT_TINT_WGSL__wgpuEffectTintShader : String), (cast 'replace')) : WgpuEffectPipeline) : Dynamic));
+      (p = cast ((cast createWgpuEffectPipeline(({ final __callArgument21:Dynamic = state; __callArgument21; }), (cast WgpuEffectTintShader.INVERT_TINT_WGSL__wgpuEffectTintShader : String), ({ final __callArgument22:Dynamic = 'replace'; __callArgument22; })) : WgpuEffectPipeline) : Dynamic));
       ((cast WgpuEffectTintShader.invertTintPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast p)));
     }
     return cast p;
@@ -95,7 +95,7 @@ class WgpuEffectTintShader {
     var p:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectTintShader.tintPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (p = cast ((cast createWgpuEffectPipeline((cast state), (cast WgpuEffectTintShader.TINT_WGSL__wgpuEffectTintShader : String), (cast 'replace')) : WgpuEffectPipeline) : Dynamic));
+      (p = cast ((cast createWgpuEffectPipeline(({ final __callArgument23:Dynamic = state; __callArgument23; }), (cast WgpuEffectTintShader.TINT_WGSL__wgpuEffectTintShader : String), ({ final __callArgument24:Dynamic = 'replace'; __callArgument24; })) : WgpuEffectPipeline) : Dynamic));
       ((cast WgpuEffectTintShader.tintPipelines__wgpuEffectTintShader : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast p)));
     }
     return cast p;

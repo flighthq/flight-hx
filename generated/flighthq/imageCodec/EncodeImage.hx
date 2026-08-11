@@ -14,7 +14,7 @@ class EncodeImage {
       var encoder:Null<ImageEncoder> = cast _Runtime.UNDEFINED;
       encoder = (cast getImageEncoder((cast mimeType : String)) : Null<ImageEncoder>);
       if ((cast _Runtime.strictEquals(encoder, null) : Bool)) { return cast null; }
-      return cast (cast encoder((cast image), (cast options)) : flighthq._internal._Promise<flighthq._internal._UInt8Array>);
+      return cast (cast encoder(({ final __callArgument0:Dynamic = image; __callArgument0; }), ({ final __callArgument1:Dynamic = options; __callArgument1; })) : flighthq._internal._Promise<flighthq._internal._UInt8Array>);
       return cast null;
     }));
   }

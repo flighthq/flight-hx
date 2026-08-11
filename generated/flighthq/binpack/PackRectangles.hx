@@ -70,7 +70,7 @@ class PackRectangles {
     if ((cast _Runtime.strictEquals(_Runtime.field(placeable, 'length'), 0.0) : Bool)) {
       return cast { placements: cast ([] : Array<Dynamic>), width: (cast PackRectangles.finalizeExtent__packRectangles((cast 0.0 : Float), (cast powerOfTwo : Bool)) : Float), height: (cast PackRectangles.finalizeExtent__packRectangles((cast 0.0 : Float), (cast powerOfTwo : Bool)) : Float), unpacked: degenerate };
     }
-    sorted = (cast PackRectangles.sortRectanglesForPacking__packRectangles((cast placeable)) : Array<PackableRectangle>);
+    sorted = (cast PackRectangles.sortRectanglesForPacking__packRectangles(({ final __callArgument13:Dynamic = placeable; __callArgument13; })) : Array<PackableRectangle>);
     needWidth = (2.0 * border);
     needHeight = (2.0 * border);
     totalArea = 0.0;
@@ -85,7 +85,7 @@ class PackRectangles {
     seed = _Runtime.addNumbers(HxMath.ceil(HxMath.sqrt(totalArea)), (2.0 * border));
     binWidth = ((cast growable : Bool) ? (cast HxMath.min(HxMath.max(seed, needWidth), maxWidth) : Dynamic) : (cast maxWidth : Dynamic));
     binHeight = ((cast growable : Bool) ? (cast HxMath.min(HxMath.max(seed, needHeight), maxHeight) : Dynamic) : (cast maxHeight : Dynamic));
-    attempt = (cast PackRectangles.packIntoBin__packRectangles((cast sorted), (cast binWidth : Float), (cast binHeight : Float), (cast padding : Float), (cast border : Float), (cast allowRotation : Bool), (cast heuristic)) : { var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; });
+    attempt = (cast PackRectangles.packIntoBin__packRectangles(({ final __callArgument16:Dynamic = sorted; __callArgument16; }), (cast binWidth : Float), (cast binHeight : Float), (cast padding : Float), (cast border : Float), (cast allowRotation : Bool), ({ final __callArgument17:Dynamic = heuristic; __callArgument17; })) : { var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; });
     while ((cast ((cast ((cast ((cast _Runtime.field((cast attempt : { var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; }).unpacked, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast growable : Bool)) : Bool) && (cast _Runtime.orValue(((cast binWidth : Float) < (cast maxWidth : Float)), function():Dynamic return cast ((cast binHeight : Float) < (cast maxHeight : Float))) : Bool)) : Bool)) {
       if ((cast ((cast ((cast binWidth : Float) <= (cast binHeight : Float)) : Bool) && (cast ((cast binWidth : Float) < (cast maxWidth : Float)) : Bool)) : Bool)) {
         (binWidth = cast (HxMath.min((binWidth * 2.0), maxWidth) : Dynamic));
@@ -94,9 +94,9 @@ class PackRectangles {
       } else {
         (binWidth = cast (HxMath.min((binWidth * 2.0), maxWidth) : Dynamic));
       } }
-      (attempt = cast ((cast PackRectangles.packIntoBin__packRectangles((cast sorted), (cast binWidth : Float), (cast binHeight : Float), (cast padding : Float), (cast border : Float), (cast allowRotation : Bool), (cast heuristic)) : { var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; }) : Dynamic));
+      (attempt = cast ((cast PackRectangles.packIntoBin__packRectangles(({ final __callArgument18:Dynamic = sorted; __callArgument18; }), (cast binWidth : Float), (cast binHeight : Float), (cast padding : Float), (cast border : Float), (cast allowRotation : Bool), ({ final __callArgument19:Dynamic = heuristic; __callArgument19; })) : { var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; }) : Dynamic));
     }
-    return cast (cast PackRectangles.finalizeResult__packRectangles((cast { placements: (cast attempt : { var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; }).placements, unpacked: _Runtime.concatArrays([_Runtime.toArray(degenerate), _Runtime.toArray((cast attempt : { var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; }).unpacked)]) }), (cast border : Float), (cast powerOfTwo : Bool), (cast square : Bool)) : PackResult);
+    return cast (cast PackRectangles.finalizeResult__packRectangles(({ final __callArgument20:Dynamic = { placements: (cast attempt : { var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; }).placements, unpacked: _Runtime.concatArrays([_Runtime.toArray(degenerate), _Runtime.toArray((cast attempt : { var placements:Array<PackedRectangle>; var unpacked:Array<RectangleId>; }).unpacked)]) }; __callArgument20; }), (cast border : Float), (cast powerOfTwo : Bool), (cast square : Bool)) : PackResult);
     return cast null;
   }
 
@@ -199,14 +199,14 @@ class PackRectangles {
     for (rect in _Runtime.iterable(sorted)) {
       var pieceWidth:Float = _Runtime.addNumbers(_Runtime.field(rect, 'width'), padding);
       var pieceHeight:Float = _Runtime.addNumbers(_Runtime.field(rect, 'height'), padding);
-      var placement:Null<Placement__packRectangles> = (cast PackRectangles.findBestPlacement__packRectangles((cast free), (cast pieceWidth : Float), (cast pieceHeight : Float), (cast allowRotation : Bool), (cast heuristic)) : Null<Placement__packRectangles>);
+      var placement:Null<Placement__packRectangles> = (cast PackRectangles.findBestPlacement__packRectangles((cast free : Dynamic), (cast pieceWidth : Float), (cast pieceHeight : Float), (cast allowRotation : Bool), ({ final __callArgument29:Dynamic = heuristic; __callArgument29; })) : Null<Placement__packRectangles>);
       if ((cast _Runtime.strictEquals(placement, null) : Bool)) {
         _Runtime.callProperty(unpacked, 'push', cast ([_Runtime.field(rect, 'id')] : Array<Dynamic>));
         continue;
       }
       _Runtime.callProperty(placements, 'push', cast ([{ id: _Runtime.field(rect, 'id'), x: ((cast placement : Placement__packRectangles).x + border), y: ((cast placement : Placement__packRectangles).y + border), width: ((cast (cast placement : Placement__packRectangles).rotated : Bool) ? (cast _Runtime.field(rect, 'height') : Dynamic) : (cast _Runtime.field(rect, 'width') : Dynamic)), height: ((cast (cast placement : Placement__packRectangles).rotated : Bool) ? (cast _Runtime.field(rect, 'width') : Dynamic) : (cast _Runtime.field(rect, 'height') : Dynamic)), rotated: (cast placement : Placement__packRectangles).rotated }] : Array<Dynamic>));
-      PackRectangles.splitFreeRectangles__packRectangles((cast free), (cast placement));
-      PackRectangles.pruneFreeRectangles__packRectangles((cast free));
+      PackRectangles.splitFreeRectangles__packRectangles((cast free : Dynamic), (cast placement : Dynamic));
+      PackRectangles.pruneFreeRectangles__packRectangles((cast free : Dynamic));
     }
     return cast { placements: placements, unpacked: unpacked };
     return cast null;
@@ -219,12 +219,12 @@ class PackRectangles {
         {
           var j:Float = (i + 1.0);
           while ((cast ((cast j : Float) < (cast _Runtime.field(free, 'length') : Float)) : Bool)) {
-            if ((cast (cast PackRectangles.isFreeRectangleContained__packRectangles((cast flighthq._internal._StaticIndex.readArray(free, i)), (cast flighthq._internal._StaticIndex.readArray(free, j))) : Bool) : Bool)) {
+            if ((cast (cast PackRectangles.isFreeRectangleContained__packRectangles((cast flighthq._internal._StaticIndex.readArray(free, i) : Dynamic), (cast flighthq._internal._StaticIndex.readArray(free, j) : Dynamic)) : Bool) : Bool)) {
               _Runtime.splice(free, Std.int(i), Std.int(1.0), []);
               i--;
               break;
             }
-            if ((cast (cast PackRectangles.isFreeRectangleContained__packRectangles((cast flighthq._internal._StaticIndex.readArray(free, j)), (cast flighthq._internal._StaticIndex.readArray(free, i))) : Bool) : Bool)) {
+            if ((cast (cast PackRectangles.isFreeRectangleContained__packRectangles((cast flighthq._internal._StaticIndex.readArray(free, j) : Dynamic), (cast flighthq._internal._StaticIndex.readArray(free, i) : Dynamic)) : Bool) : Bool)) {
               _Runtime.splice(free, Std.int(j), Std.int(1.0), []);
               j--;
             }
@@ -245,7 +245,7 @@ class PackRectangles {
       if ((cast !_Runtime.strictEquals(areaA, areaB) : Bool)) { return cast (areaB - areaA); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'height'), _Runtime.field(b, 'height')) : Bool)) { return cast _Runtime.subtractNumbers(_Runtime.field(b, 'height'), _Runtime.field(a, 'height')); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'width'), _Runtime.field(b, 'width')) : Bool)) { return cast _Runtime.subtractNumbers(_Runtime.field(b, 'width'), _Runtime.field(a, 'width')); }
-      return cast (cast PackRectangles.compareRectangleId__packRectangles((cast _Runtime.field(a, 'id')), (cast _Runtime.field(b, 'id'))) : Float);
+      return cast (cast PackRectangles.compareRectangleId__packRectangles(_Runtime.field(a, 'id'), _Runtime.field(b, 'id')) : Float);
       return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
     return cast null;
@@ -266,7 +266,7 @@ class PackRectangles {
       var i:Float = _Runtime.subtractNumbers(_Runtime.field(free, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var node:FreeRectangle__packRectangles = flighthq._internal._StaticIndex.readArray(free, i);
-        if ((cast !(cast (cast intersectsRectangle((cast node), (cast used)) : Bool) : Bool) : Bool)) { i--; continue; }
+        if ((cast !(cast (cast intersectsRectangle(({ final __callArgument30:Dynamic = node; __callArgument30; }), ({ final __callArgument31:Dynamic = used; __callArgument31; })) : Bool) : Bool) : Bool)) { i--; continue; }
         var nodeRight:Float = ((cast node : FreeRectangle__packRectangles).x + (cast node : FreeRectangle__packRectangles).width);
         var nodeBottom:Float = ((cast node : FreeRectangle__packRectangles).y + (cast node : FreeRectangle__packRectangles).height);
         _Runtime.splice(free, Std.int(i), Std.int(1.0), []);

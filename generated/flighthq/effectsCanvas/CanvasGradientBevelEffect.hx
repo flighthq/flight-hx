@@ -30,15 +30,15 @@ class CanvasGradientBevelEffect {
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : GradientBevelEffect));
     pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool() : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
-    CanvasGradientBevelEffect.applyGradientBevelEffectToCanvasWithPool__canvasGradientBevelEffect((cast source), (cast dest), (cast pool), (cast effect));
+    CanvasGradientBevelEffect.applyGradientBevelEffectToCanvasWithPool__canvasGradientBevelEffect(({ final __callArgument0:Dynamic = source; __callArgument0; }), ({ final __callArgument1:Dynamic = dest; __callArgument1; }), ({ final __callArgument2:Dynamic = pool; __callArgument2; }), ({ final __callArgument3:Dynamic = effect; __callArgument3; }));
   }
 
   public static final defaultCanvasGradientBevelEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    (cast applyGradientBevelEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->GradientBevelEffect->Void)((cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast _Runtime.field(ctx, 'pool')), (cast (cast effect : GradientBevelEffect)));
+    (cast applyGradientBevelEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->GradientBevelEffect->Void)(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientBevelEffect));
   });
 
   public static function registerCanvasGradientBevelEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect((cast state), (cast 'GradientBevelEffect' : String), (cast defaultCanvasGradientBevelEffectRunner));
+    registerCanvasRenderEffect(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast 'GradientBevelEffect' : String), ({ final __callArgument5:Dynamic = defaultCanvasGradientBevelEffectRunner; __callArgument5; }));
   }
 
   public static function applyGradientBevelEffectToCanvasWithPool__canvasGradientBevelEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:GradientBevelEffect):Void {
@@ -55,44 +55,44 @@ class CanvasGradientBevelEffect {
     var offsetY:Float = cast _Runtime.UNDEFINED;
     var strength:Float = cast _Runtime.UNDEFINED;
     var ramp:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
-    blurred = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    lit = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    shade = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    side = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    ramped = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    band = (cast acquireCanvasRenderTarget((cast pool), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument6:Dynamic = pool; __callArgument6; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    lit = (cast acquireCanvasRenderTarget(({ final __callArgument7:Dynamic = pool; __callArgument7; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    shade = (cast acquireCanvasRenderTarget(({ final __callArgument8:Dynamic = pool; __callArgument8; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    side = (cast acquireCanvasRenderTarget(({ final __callArgument9:Dynamic = pool; __callArgument9; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    ramped = (cast acquireCanvasRenderTarget(({ final __callArgument10:Dynamic = pool; __callArgument10; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    band = (cast acquireCanvasRenderTarget(({ final __callArgument11:Dynamic = pool; __callArgument11; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0)) / 2.0));
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
     offsetX = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
     offsetY = _Runtime.multiplyNumbers(HxMath.sin(angle), distance);
     strength = HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0));
-    ramp = (cast buildCanvasGradientRamp((cast _Runtime.field(effect, 'colors')), (cast _Runtime.field(effect, 'alphas')), (cast _Runtime.field(effect, 'ratios'))) : flighthq._internal._UInt8ClampedArray);
-    drawCanvasEffectPass((cast blurred), (cast source), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    clearCanvasTarget((cast lit));
-    compositeCanvasImage((cast lit), (cast blurred), (cast -offsetX : Float), (cast -offsetY : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    clearCanvasTarget((cast shade));
-    compositeCanvasImage((cast shade), (cast blurred), (cast offsetX : Float), (cast offsetY : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    clearCanvasTarget((cast band));
-    clearCanvasTarget((cast side));
-    compositeCanvasImage((cast side), (cast lit), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    compositeCanvasImage((cast side), (cast shade), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flighthq._internal._Any));
-    applyCanvasGradientRampLookup((cast ramped), (cast side), (cast ramp), (cast 0.5 : Float), (cast (0.5 * strength) : Float));
-    compositeCanvasImage((cast band), (cast ramped), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    clearCanvasTarget((cast side));
-    compositeCanvasImage((cast side), (cast shade), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    compositeCanvasImage((cast side), (cast lit), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flighthq._internal._Any));
-    applyCanvasGradientRampLookup((cast ramped), (cast side), (cast ramp), (cast 0.5 : Float), (cast (-0.5 * strength) : Float));
-    compositeCanvasImage((cast band), (cast ramped), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    clipCanvasBevelBand((cast band), (cast source), (cast _Runtime.field(effect, 'bevelType')));
-    clearCanvasTarget((cast dest));
-    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'hide') : Bool)) { compositeCanvasImage((cast dest), (cast source), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end); }
-    compositeCanvasImage((cast dest), (cast band), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    releaseCanvasRenderTarget((cast pool), (cast band));
-    releaseCanvasRenderTarget((cast pool), (cast ramped));
-    releaseCanvasRenderTarget((cast pool), (cast side));
-    releaseCanvasRenderTarget((cast pool), (cast shade));
-    releaseCanvasRenderTarget((cast pool), (cast lit));
-    releaseCanvasRenderTarget((cast pool), (cast blurred));
+    ramp = (cast buildCanvasGradientRamp(_Runtime.field(effect, 'colors'), _Runtime.field(effect, 'alphas'), _Runtime.field(effect, 'ratios')) : flighthq._internal._UInt8ClampedArray);
+    drawCanvasEffectPass(({ final __callArgument12:Dynamic = blurred; __callArgument12; }), ({ final __callArgument13:Dynamic = source; __callArgument13; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    clearCanvasTarget(({ final __callArgument14:Dynamic = lit; __callArgument14; }));
+    compositeCanvasImage(({ final __callArgument15:Dynamic = lit; __callArgument15; }), ({ final __callArgument16:Dynamic = blurred; __callArgument16; }), (cast -offsetX : Float), (cast -offsetY : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    clearCanvasTarget(({ final __callArgument17:Dynamic = shade; __callArgument17; }));
+    compositeCanvasImage(({ final __callArgument18:Dynamic = shade; __callArgument18; }), ({ final __callArgument19:Dynamic = blurred; __callArgument19; }), (cast offsetX : Float), (cast offsetY : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    clearCanvasTarget(({ final __callArgument20:Dynamic = band; __callArgument20; }));
+    clearCanvasTarget(({ final __callArgument21:Dynamic = side; __callArgument21; }));
+    compositeCanvasImage(({ final __callArgument22:Dynamic = side; __callArgument22; }), ({ final __callArgument23:Dynamic = lit; __callArgument23; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    compositeCanvasImage(({ final __callArgument24:Dynamic = side; __callArgument24; }), ({ final __callArgument25:Dynamic = shade; __callArgument25; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flighthq._internal._Any));
+    applyCanvasGradientRampLookup(({ final __callArgument26:Dynamic = ramped; __callArgument26; }), ({ final __callArgument27:Dynamic = side; __callArgument27; }), ({ final __callArgument28:Dynamic = ramp; __callArgument28; }), (cast 0.5 : Float), (cast (0.5 * strength) : Float));
+    compositeCanvasImage(({ final __callArgument29:Dynamic = band; __callArgument29; }), ({ final __callArgument30:Dynamic = ramped; __callArgument30; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    clearCanvasTarget(({ final __callArgument31:Dynamic = side; __callArgument31; }));
+    compositeCanvasImage(({ final __callArgument32:Dynamic = side; __callArgument32; }), ({ final __callArgument33:Dynamic = shade; __callArgument33; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    compositeCanvasImage(({ final __callArgument34:Dynamic = side; __callArgument34; }), ({ final __callArgument35:Dynamic = lit; __callArgument35; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flighthq._internal._Any));
+    applyCanvasGradientRampLookup(({ final __callArgument36:Dynamic = ramped; __callArgument36; }), ({ final __callArgument37:Dynamic = side; __callArgument37; }), ({ final __callArgument38:Dynamic = ramp; __callArgument38; }), (cast 0.5 : Float), (cast (-0.5 * strength) : Float));
+    compositeCanvasImage(({ final __callArgument39:Dynamic = band; __callArgument39; }), ({ final __callArgument40:Dynamic = ramped; __callArgument40; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    clipCanvasBevelBand(({ final __callArgument41:Dynamic = band; __callArgument41; }), ({ final __callArgument42:Dynamic = source; __callArgument42; }), _Runtime.field(effect, 'bevelType'));
+    clearCanvasTarget(({ final __callArgument43:Dynamic = dest; __callArgument43; }));
+    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'hide') : Bool)) { compositeCanvasImage(({ final __callArgument44:Dynamic = dest; __callArgument44; }), ({ final __callArgument45:Dynamic = source; __callArgument45; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); }
+    compositeCanvasImage(({ final __callArgument46:Dynamic = dest; __callArgument46; }), ({ final __callArgument47:Dynamic = band; __callArgument47; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    releaseCanvasRenderTarget(({ final __callArgument48:Dynamic = pool; __callArgument48; }), ({ final __callArgument49:Dynamic = band; __callArgument49; }));
+    releaseCanvasRenderTarget(({ final __callArgument50:Dynamic = pool; __callArgument50; }), ({ final __callArgument51:Dynamic = ramped; __callArgument51; }));
+    releaseCanvasRenderTarget(({ final __callArgument52:Dynamic = pool; __callArgument52; }), ({ final __callArgument53:Dynamic = side; __callArgument53; }));
+    releaseCanvasRenderTarget(({ final __callArgument54:Dynamic = pool; __callArgument54; }), ({ final __callArgument55:Dynamic = shade; __callArgument55; }));
+    releaseCanvasRenderTarget(({ final __callArgument56:Dynamic = pool; __callArgument56; }), ({ final __callArgument57:Dynamic = lit; __callArgument57; }));
+    releaseCanvasRenderTarget(({ final __callArgument58:Dynamic = pool; __callArgument58; }), ({ final __callArgument59:Dynamic = blurred; __callArgument59; }));
   }
 }

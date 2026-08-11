@@ -23,11 +23,11 @@ import flighthq.types._internal._WrappedDiffusePbrExtensionValues.WrappedDiffuse
 class WrappedDiffusePbrScene3DMaterialTextures {
   @:noCompletion
   public static function registerWrappedDiffusePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DPbrExtensionTextures((cast registry), (cast WrappedDiffusePbrExtensionKind : String), (cast function(extension:PbrExtension, out:Array<Texture>):Void {
+    registerScene3DPbrExtensionTextures(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast WrappedDiffusePbrExtensionKind : String), ({ final __callArgument1:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var wrappedDiffuse:WrappedDiffusePbrExtension = cast _Runtime.UNDEFINED;
       wrappedDiffuse = (cast extension : WrappedDiffusePbrExtension);
       if ((cast !_Runtime.strictEquals(_Runtime.field(wrappedDiffuse, 'wrappedDiffuseMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(wrappedDiffuse, 'wrappedDiffuseMap')] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(wrappedDiffuse, 'thicknessMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(wrappedDiffuse, 'thicknessMap')] : Array<Dynamic>)); }
-    }));
+    }; __callArgument1; }));
   }
 }

@@ -33,7 +33,7 @@ class GlWireframeUpload {
     var position:Null<VertexAttribute> = cast _Runtime.UNDEFINED;
     var byteOffset:Float = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    meshUpload = (cast ensureGlMeshUpload((cast state), (cast geometry), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : GlMeshUpload);
+    meshUpload = (cast ensureGlMeshUpload(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = geometry; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : GlMeshUpload);
     perState = ((cast GlWireframeUpload.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>>).get(state));
     if ((cast _Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (perState = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
@@ -44,7 +44,7 @@ class GlWireframeUpload {
       flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).vao);
       return cast upload;
     }
-    lineIndices = (cast GlWireframeUpload.buildLineIndices__glWireframeUpload((cast geometry)) : flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>);
+    lineIndices = (cast GlWireframeUpload.buildLineIndices__glWireframeUpload(({ final __callArgument2:Dynamic = geometry; __callArgument2; })) : flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>);
     indexType = ((cast _Runtime.isInstanceOfName(lineIndices, 'Uint32Array') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT) : Dynamic));
     if ((cast _Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (upload = cast ({ indexType: indexType, lineIndexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0 } : Dynamic));

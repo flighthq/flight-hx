@@ -17,12 +17,12 @@ class Spring2D {
   }
 
   public static function isSpring2DSettled(spring2D:flighthq.types.Spring.Spring2D, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
-    return cast _Runtime.andValue((cast isSpringSettled((cast _Runtime.field(spring2D, 'x')), (cast targetX : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool), function():Dynamic return cast (cast isSpringSettled((cast _Runtime.field(spring2D, 'y')), (cast targetY : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool));
+    return cast _Runtime.andValue((cast isSpringSettled(_Runtime.field(spring2D, 'x'), (cast targetX : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool), function():Dynamic return cast (cast isSpringSettled(_Runtime.field(spring2D, 'y'), (cast targetY : Float), #if js (cast positionEpsilon : Float) #else (cast positionEpsilon : Null<Float>) #end, #if js (cast velocityEpsilon : Float) #else (cast velocityEpsilon : Null<Float>) #end) : Bool));
     return cast null;
   }
 
   public static function updateSpring2D(spring2D:flighthq.types.Spring.Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {
-    updateSpring((cast (cast spring2D : flighthq.types.Spring.Spring2D).x), (cast targetX : Float), (cast config), (cast deltaTime : Float));
-    updateSpring((cast (cast spring2D : flighthq.types.Spring.Spring2D).y), (cast targetY : Float), (cast config), (cast deltaTime : Float));
+    updateSpring((cast spring2D : flighthq.types.Spring.Spring2D).x, (cast targetX : Float), ({ final __callArgument0:Dynamic = config; __callArgument0; }), (cast deltaTime : Float));
+    updateSpring((cast spring2D : flighthq.types.Spring.Spring2D).y, (cast targetY : Float), ({ final __callArgument1:Dynamic = config; __callArgument1; }), (cast deltaTime : Float));
   }
 }

@@ -58,7 +58,7 @@ class BitmapChannel {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(out, 'bitmap')));
+    invalidateBitmap(_Runtime.field(out, 'bitmap'));
   }
 
   public static function splitBitmapChannels(source:Bitmap):Array<Bitmap> {
@@ -103,12 +103,12 @@ class BitmapChannel {
         i++;
       }
     }
-    return cast cast ([(cast BitmapChannel.makeBitmap__bitmapChannel((cast rData), (cast w : Float), (cast h : Float), (cast source)) : Bitmap), (cast BitmapChannel.makeBitmap__bitmapChannel((cast gData), (cast w : Float), (cast h : Float), (cast source)) : Bitmap), (cast BitmapChannel.makeBitmap__bitmapChannel((cast bData), (cast w : Float), (cast h : Float), (cast source)) : Bitmap), (cast BitmapChannel.makeBitmap__bitmapChannel((cast aData), (cast w : Float), (cast h : Float), (cast source)) : Bitmap)] : Array<Dynamic>);
+    return cast cast ([(cast BitmapChannel.makeBitmap__bitmapChannel(({ final __callArgument0:Dynamic = rData; __callArgument0; }), (cast w : Float), (cast h : Float), ({ final __callArgument1:Dynamic = source; __callArgument1; })) : Bitmap), (cast BitmapChannel.makeBitmap__bitmapChannel(({ final __callArgument2:Dynamic = gData; __callArgument2; }), (cast w : Float), (cast h : Float), ({ final __callArgument3:Dynamic = source; __callArgument3; })) : Bitmap), (cast BitmapChannel.makeBitmap__bitmapChannel(({ final __callArgument4:Dynamic = bData; __callArgument4; }), (cast w : Float), (cast h : Float), ({ final __callArgument5:Dynamic = source; __callArgument5; })) : Bitmap), (cast BitmapChannel.makeBitmap__bitmapChannel(({ final __callArgument6:Dynamic = aData; __callArgument6; }), (cast w : Float), (cast h : Float), ({ final __callArgument7:Dynamic = source; __callArgument7; })) : Bitmap)] : Array<Dynamic>);
     return cast null;
   }
 
   public static function makeBitmap__bitmapChannel(data:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, source:Bitmap):Bitmap {
-    return cast (cast createEntity((cast { alphaType: source.alphaType, gamut: source.gamut, data: data, format: source.format, height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width })) : { >Entity, var alphaType:AlphaType; var gamut:String; var data:flighthq._internal._UInt8ClampedArray; var format:PixelFormat; var height:Float; var kind:String; var version:Float; var width:Float; });
+    return cast (cast createEntity((cast { alphaType: source.alphaType, gamut: source.gamut, data: data, format: source.format, height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width } : Dynamic)) : { >Entity, var alphaType:AlphaType; var gamut:String; var data:flighthq._internal._UInt8ClampedArray; var format:PixelFormat; var height:Float; var kind:String; var version:Float; var width:Float; });
     return cast null;
   }
 }

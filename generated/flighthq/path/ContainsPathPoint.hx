@@ -11,7 +11,7 @@ import flighthq.types._internal._PathValues.PathCommandValue;
 class ContainsPathPoint {
   public static function containsPathPoint(path:Path, px:Float, py:Float, tolerance:Float = 0.25):Bool {
     var winding:Float = cast _Runtime.UNDEFINED;
-    winding = (cast ContainsPathPoint.computePathWindingNumber__containsPathPoint((cast path), (cast px : Float), (cast py : Float), (cast tolerance : Float)) : Float);
+    winding = (cast ContainsPathPoint.computePathWindingNumber__containsPathPoint(({ final __callArgument0:Dynamic = path; __callArgument0; }), (cast px : Float), (cast py : Float), (cast tolerance : Float)) : Float);
     if ((cast _Runtime.strictEquals(_Runtime.field(path, 'winding'), 'evenOdd') : Bool)) { return cast !_Runtime.strictEquals((_Runtime.toInt32(winding) & 1), 0.0); }
     return cast !_Runtime.strictEquals(winding, 0.0);
     return cast null;

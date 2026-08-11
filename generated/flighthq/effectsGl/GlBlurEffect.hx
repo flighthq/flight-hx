@@ -27,11 +27,11 @@ import flighthq.types.RenderTexture;
 class GlBlurEffect {
   @:noCompletion
   public static function applyBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, effect:BlurEffect):Void {
-    applyGaussianBlurToGl((cast state), (cast source), (cast dest), (cast temp), (cast { blurX: _Runtime.field(effect, 'blurX'), blurY: _Runtime.field(effect, 'blurY') }));
+    applyGaussianBlurToGl(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = temp; __callArgument3; }), ({ final __callArgument4:Dynamic = { blurX: _Runtime.field(effect, 'blurX'), blurY: _Runtime.field(effect, 'blurY') }; __callArgument4; }));
   }
 
   public static function applyBlurEffectToGlRenderTextures(state:GlRenderState, source:RenderTexture, dest:RenderTexture, temp:RenderTexture, effect:BlurEffect):Bool {
-    return cast (cast applyGaussianBlurToGlRenderTextures((cast state), (cast source), (cast dest), (cast temp), (cast effect)) : Bool);
+    return cast (cast applyGaussianBlurToGlRenderTextures(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = source; __callArgument6; }), ({ final __callArgument7:Dynamic = dest; __callArgument7; }), ({ final __callArgument8:Dynamic = temp; __callArgument8; }), ({ final __callArgument9:Dynamic = effect; __callArgument9; })) : Bool);
     return cast null;
   }
 
@@ -45,8 +45,8 @@ class GlBlurEffect {
     sigmaY = _Runtime.coalesce((cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }).blurY, function():Dynamic return cast 4.0);
     radiusX = ((cast ((cast sigmaX : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.ceil((sigmaX * 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
     radiusY = ((cast ((cast sigmaY : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.ceil((sigmaY * 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
-    GlBlurEffect.applyGlGaussianBlurPass__glBlurEffect((cast state), (cast source), (cast temp), (cast sigmaX : Float), (cast radiusX : Float), (cast 1.0 : Float), (cast 0.0 : Float));
-    GlBlurEffect.applyGlGaussianBlurPass__glBlurEffect((cast state), (cast temp), (cast dest), (cast sigmaY : Float), (cast radiusY : Float), (cast 0.0 : Float), (cast 1.0 : Float));
+    GlBlurEffect.applyGlGaussianBlurPass__glBlurEffect(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = source; __callArgument11; }), ({ final __callArgument12:Dynamic = temp; __callArgument12; }), (cast sigmaX : Float), (cast radiusX : Float), (cast 1.0 : Float), (cast 0.0 : Float));
+    GlBlurEffect.applyGlGaussianBlurPass__glBlurEffect(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = temp; __callArgument14; }), ({ final __callArgument15:Dynamic = dest; __callArgument15; }), (cast sigmaY : Float), (cast radiusY : Float), (cast 0.0 : Float), (cast 1.0 : Float));
   }
 
   public static function applyGaussianBlurToGlRenderTextures(state:GlRenderState, source:RenderTexture, dest:RenderTexture, temp:RenderTexture, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Bool {
@@ -54,15 +54,15 @@ class GlBlurEffect {
     if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, temp) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, temp) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('applyGaussianBlurToGlRenderTextures: source, destination, and scratch must be distinct'));
     }
-    sourceTarget = (cast getGlRenderTextureTarget((cast state), (cast source)) : Null<GlRenderTarget>);
+    sourceTarget = (cast getGlRenderTextureTarget(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = source; __callArgument17; })) : Null<GlRenderTarget>);
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
-    (cast withGlRenderState : GlRenderState->(Void->Void)->Void)((cast state), (cast function():Void {
-      (cast writeGlRenderTextureTarget : GlRenderState->RenderTexture->(GlRenderTarget->Void)->Void)((cast state), (cast temp), (cast function(tempTarget:GlRenderTarget):Void {
-        (cast writeGlRenderTextureTarget : GlRenderState->RenderTexture->(GlRenderTarget->Void)->Void)((cast state), (cast dest), (cast function(destTarget:GlRenderTarget):Void {
-          applyGaussianBlurToGl((cast state), (cast sourceTarget), (cast destTarget), (cast tempTarget), (cast options));
-        }));
-      }));
-    }));
+    (cast withGlRenderState : GlRenderState->(Void->Void)->Void)(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument30:Dynamic = function():Void {
+      (cast writeGlRenderTextureTarget : GlRenderState->RenderTexture->(GlRenderTarget->Void)->Void)(({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = temp; __callArgument20; }), ({ final __callArgument29:Dynamic = function(tempTarget:GlRenderTarget):Void {
+        (cast writeGlRenderTextureTarget : GlRenderState->RenderTexture->(GlRenderTarget->Void)->Void)(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = dest; __callArgument22; }), ({ final __callArgument28:Dynamic = function(destTarget:GlRenderTarget):Void {
+          applyGaussianBlurToGl(({ final __callArgument23:Dynamic = state; __callArgument23; }), ({ final __callArgument24:Dynamic = sourceTarget; __callArgument24; }), ({ final __callArgument25:Dynamic = destTarget; __callArgument25; }), ({ final __callArgument26:Dynamic = tempTarget; __callArgument26; }), ({ final __callArgument27:Dynamic = options; __callArgument27; }));
+        }; __callArgument28; }));
+      }; __callArgument29; }));
+    }; __callArgument30; }));
     return cast true;
     return cast null;
   }
@@ -71,24 +71,24 @@ class GlBlurEffect {
     var descriptor:{ var width:Float; var height:Float; var format:RenderTargetFormat; } = cast _Runtime.UNDEFINED;
     var temp:GlRenderTarget = cast _Runtime.UNDEFINED;
     descriptor = (cast { width: _Runtime.field(_Runtime.field(ctx, 'source'), 'width'), height: _Runtime.field(_Runtime.field(ctx, 'source'), 'height'), format: _Runtime.field(_Runtime.field(ctx, 'source'), 'format') });
-    temp = (cast acquireGlRenderTarget((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'pool')), (cast descriptor)) : GlRenderTarget);
-    applyBlurEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast temp), (cast (cast effect : BlurEffect)));
-    releaseGlRenderTarget((cast _Runtime.field(ctx, 'pool')), (cast temp));
+    temp = (cast acquireGlRenderTarget(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'pool'), ({ final __callArgument31:Dynamic = descriptor; __callArgument31; })) : GlRenderTarget);
+    applyBlurEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), ({ final __callArgument32:Dynamic = temp; __callArgument32; }), (cast effect : BlurEffect));
+    releaseGlRenderTarget(_Runtime.field(ctx, 'pool'), ({ final __callArgument33:Dynamic = temp; __callArgument33; }));
   });
 
   public static function registerGlBlurEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state), (cast 'BlurEffect' : String), (cast defaultGlBlurEffectRunner));
+    registerGlRenderEffect(({ final __callArgument34:Dynamic = state; __callArgument34; }), (cast 'BlurEffect' : String), ({ final __callArgument35:Dynamic = defaultGlBlurEffectRunner; __callArgument35; }));
   }
 
   public static function applyGlGaussianBlurPass__glBlurEffect(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, sigma:Float, radius:Float, dirX:Float, dirY:Float):Void {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    program = (cast getGlEffectProgram((cast state), (cast 'blur.gaussian' : String), (cast GlBlurEffect.GAUSSIAN_BLUR_FRAGMENT_SRC__glBlurEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
-      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast getGlEffectUniformLocation((cast state), (cast p), (cast 'u_texelSize' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast getGlEffectUniformLocation((cast state), (cast p), (cast 'u_sigma' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>), sigma);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast getGlEffectUniformLocation((cast state), (cast p), (cast 'u_radius' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>), radius);
-      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast getGlEffectUniformLocation((cast state), (cast p), (cast 'u_direction' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>), dirX, dirY);
-    }));
+    program = (cast getGlEffectProgram(({ final __callArgument36:Dynamic = state; __callArgument36; }), (cast 'blur.gaussian' : String), (cast GlBlurEffect.GAUSSIAN_BLUR_FRAGMENT_SRC__glBlurEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument37:Dynamic = state; __callArgument37; }), ({ final __callArgument38:Dynamic = program; __callArgument38; }), ({ final __callArgument39:Dynamic = cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>); __callArgument39; }), ({ final __callArgument40:Dynamic = dest; __callArgument40; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast getGlEffectUniformLocation(({ final __callArgument41:Dynamic = state; __callArgument41; }), ({ final __callArgument42:Dynamic = p; __callArgument42; }), (cast 'u_texelSize' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')), _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast getGlEffectUniformLocation(({ final __callArgument43:Dynamic = state; __callArgument43; }), ({ final __callArgument44:Dynamic = p; __callArgument44; }), (cast 'u_sigma' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>), sigma);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast getGlEffectUniformLocation(({ final __callArgument45:Dynamic = state; __callArgument45; }), ({ final __callArgument46:Dynamic = p; __callArgument46; }), (cast 'u_radius' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>), radius);
+      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast getGlEffectUniformLocation(({ final __callArgument47:Dynamic = state; __callArgument47; }), ({ final __callArgument48:Dynamic = p; __callArgument48; }), (cast 'u_direction' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>), dirX, dirY);
+    } : Dynamic));
   }
 
   public static final GAUSSIAN_BLUR_FRAGMENT_SRC__glBlurEffect:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_texelSize;\nuniform float u_sigma;\nuniform float u_radius;\nuniform vec2 u_direction;\nout vec4 o_color;\nvoid main() {\n  int r = max(0, int(u_radius));\n  if (r == 0) {\n    o_color = texture(u_texture0, v_texCoord);\n    return;\n  }\n  float twoSigmaSq = 2.0 * u_sigma * u_sigma;\n  vec4 sum = vec4(0.0);\n  float weightSum = 0.0;\n  for (int i = -r; i <= r; i++) {\n    float w = exp(-float(i * i) / twoSigmaSq);\n    sum += w * texture(u_texture0, v_texCoord + float(i) * u_texelSize * u_direction);\n    weightSum += w;\n  }\n  o_color = sum / weightSum;\n}';

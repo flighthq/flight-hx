@@ -37,7 +37,7 @@ class CapacitorClipboard {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).write((cast { string: text })), function(__awaitValue1:Dynamic):Dynamic {
+            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).write(({ final __callArgument2:Dynamic = { string: text }; __callArgument2; })), function(__awaitValue1:Dynamic):Dynamic {
               __awaitValue1;
               return flighthq._internal._Async.flowReturn(true);
             });
@@ -64,8 +64,8 @@ class CapacitorClipboard {
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var result:CapacitorClipboardReadResult = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).read(), function(__awaitValue2:Dynamic):Dynamic {
-              result = __awaitValue2;
+            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).read(), function(__awaitValue3:Dynamic):Dynamic {
+              result = __awaitValue3;
               return flighthq._internal._Async.flowReturn(((cast !(cast StringTools.startsWith((cast result : CapacitorClipboardReadResult).type, 'image') : Bool) : Bool) && (cast ((cast _Runtime.field((cast result : CapacitorClipboardReadResult).value, 'length') : Float) > (cast 0.0 : Float)) : Bool)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -83,8 +83,8 @@ class CapacitorClipboard {
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var result:CapacitorClipboardReadResult = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).read(), function(__awaitValue3:Dynamic):Dynamic {
-              result = __awaitValue3;
+            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).read(), function(__awaitValue4:Dynamic):Dynamic {
+              result = __awaitValue4;
               return flighthq._internal._Async.flowReturn(((cast StringTools.startsWith((cast result : CapacitorClipboardReadResult).type, 'image') : Bool) ? (cast (cast result : CapacitorClipboardReadResult).value : Dynamic) : (cast '' : Dynamic)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -101,8 +101,8 @@ class CapacitorClipboard {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).write((cast { image: dataUrl })), function(__awaitValue4:Dynamic):Dynamic {
-              __awaitValue4;
+            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).write(({ final __callArgument6:Dynamic = { image: dataUrl }; __callArgument6; })), function(__awaitValue5:Dynamic):Dynamic {
+              __awaitValue5;
               return flighthq._internal._Async.flowReturn(true);
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -119,8 +119,8 @@ class CapacitorClipboard {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).read(), function(__awaitValue5:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn(StringTools.startsWith((cast __awaitValue5 : CapacitorClipboardReadResult).type, 'image'));
+            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).read(), function(__awaitValue7:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn(StringTools.startsWith((cast __awaitValue7 : CapacitorClipboardReadResult).type, 'image'));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -184,8 +184,8 @@ class CapacitorClipboard {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).write((cast { string: '' })), function(__awaitValue6:Dynamic):Dynamic {
-              __awaitValue6;
+            return flighthq._internal._Async.flatMap((cast clipboard : CapacitorClipboardPlugin).write(({ final __callArgument9:Dynamic = { string: '' }; __callArgument9; })), function(__awaitValue8:Dynamic):Dynamic {
+              __awaitValue8;
               return flighthq._internal._Async.flowReturn(true);
             });
           }), function(__caughtError:Dynamic):Dynamic {

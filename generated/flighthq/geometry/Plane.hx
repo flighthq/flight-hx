@@ -11,7 +11,7 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Plane {
   public static function clonePlane(source:PlaneLike):flighthq.types.Plane {
-    return cast (cast createPlane((cast source.a), (cast source.b), (cast source.c), (cast source.d)) : flighthq.types.Plane);
+    return cast (cast createPlane(({ final __callArgument0:Dynamic = source.a; __callArgument0; }), ({ final __callArgument1:Dynamic = source.b; __callArgument1; }), ({ final __callArgument2:Dynamic = source.c; __callArgument2; }), ({ final __callArgument3:Dynamic = source.d; __callArgument3; })) : flighthq.types.Plane);
     return cast null;
   }
 
@@ -23,7 +23,7 @@ class Plane {
   }
 
   public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):flighthq.types.Plane {
-    return cast (cast createEntity((cast { a: _Runtime.coalesce(a, function():Dynamic return cast 0.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 0.0) })) : { >Entity, var a:Float; var b:Float; var c:Float; var d:Float; });
+    return cast (cast createEntity(({ final __callArgument4:Dynamic = { a: _Runtime.coalesce(a, function():Dynamic return cast 0.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 0.0) }; __callArgument4; })) : { >Entity, var a:Float; var b:Float; var c:Float; var d:Float; });
     return cast null;
   }
 

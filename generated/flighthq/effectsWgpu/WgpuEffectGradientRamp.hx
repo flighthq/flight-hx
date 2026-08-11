@@ -19,7 +19,7 @@ class WgpuEffectGradientRamp {
     key = '' + Std.string(_Runtime.join(colors, ',')) + '|' + Std.string(_Runtime.join(alphas, ',')) + '|' + Std.string(_Runtime.join(ratios, ',')) + '';
     texture = ((cast cache : flighthq._internal._Map<String, flighthq._internal.dom.GPUTexture>).get(key));
     if ((cast _Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (texture = cast ((cast WgpuEffectGradientRamp.createWgpuEffectGradientRampTexture__wgpuEffectGradientRamp((cast state), (cast colors), (cast alphas), (cast ratios)) : flighthq._internal.dom.GPUTexture) : Dynamic));
+      (texture = cast ((cast WgpuEffectGradientRamp.createWgpuEffectGradientRampTexture__wgpuEffectGradientRamp(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = colors; __callArgument1; }), ({ final __callArgument2:Dynamic = alphas; __callArgument2; }), ({ final __callArgument3:Dynamic = ratios; __callArgument3; })) : flighthq._internal.dom.GPUTexture) : Dynamic));
       ((cast cache : flighthq._internal._Map<String, flighthq._internal.dom.GPUTexture>).set(key, (cast texture)));
     }
     return cast texture;
@@ -86,7 +86,7 @@ class WgpuEffectGradientRamp {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.GPUTexture = cast _Runtime.UNDEFINED;
-    data = (cast WgpuEffectGradientRamp.buildRampData__wgpuEffectGradientRamp((cast colors), (cast alphas), (cast ratios)) : flighthq._internal._UInt8ClampedArray);
+    data = (cast WgpuEffectGradientRamp.buildRampData__wgpuEffectGradientRamp(({ final __callArgument4:Dynamic = colors; __callArgument4; }), ({ final __callArgument5:Dynamic = alphas; __callArgument5; }), ({ final __callArgument6:Dynamic = ratios; __callArgument6; })) : flighthq._internal._UInt8ClampedArray);
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([256.0, 1.0, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>));

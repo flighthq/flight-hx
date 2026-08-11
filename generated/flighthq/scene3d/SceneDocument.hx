@@ -49,19 +49,19 @@ class SceneDocument {
     var nodes:Array<Node3D> = cast _Runtime.UNDEFINED;
     var scene:Scene3D = cast _Runtime.UNDEFINED;
     var roots:Array<Float> = cast _Runtime.UNDEFINED;
-    nodes = (cast SceneDocument.buildDocumentNodes__sceneDocument((cast document)) : Array<Node3D>);
-    SceneDocument.applyDocumentSkins__sceneDocument((cast document), (cast nodes));
-    scene = (cast createScene3D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene3D);
-    roots = _Runtime.coalesce(({ final __structural0 = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'scenes'), sceneIndex); __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : Scene3DDocumentScene).rootNodes; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    nodes = (cast SceneDocument.buildDocumentNodes__sceneDocument(({ final __callArgument0:Dynamic = document; __callArgument0; })) : Array<Node3D>);
+    SceneDocument.applyDocumentSkins__sceneDocument(({ final __callArgument1:Dynamic = document; __callArgument1; }), ({ final __callArgument2:Dynamic = nodes; __callArgument2; }));
+    scene = (cast createScene3D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene3D);
+    roots = _Runtime.coalesce(({ final __structural3 = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'scenes'), sceneIndex); __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : Scene3DDocumentScene).rootNodes; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var r:Float = 0.0;
       while ((cast ((cast r : Float) < (cast _Runtime.field(roots, 'length') : Float)) : Bool)) {
         var node:Node3D = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast roots : Array<Float>), (cast r : Float)));
-        if ((cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast addNodeChild((cast scene.root), (cast node)) : NodeOf<Node3DTraits>); }
+        if ((cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast addNodeChild((cast scene.root : Dynamic), (cast node : Dynamic)) : NodeOf<Node3DTraits>); }
         r++;
       }
     }
-    SceneDocument.attachDocumentAnimations__sceneDocument((cast document), (cast nodes), (cast scene));
+    SceneDocument.attachDocumentAnimations__sceneDocument(({ final __callArgument4:Dynamic = document; __callArgument4; }), ({ final __callArgument5:Dynamic = nodes; __callArgument5; }), ({ final __callArgument6:Dynamic = scene; __callArgument6; }));
     (scene.metadata = cast (_Runtime.field(document, 'metadata') : Dynamic));
     (scene.resources = cast (_Runtime.slice(_Runtime.field(document, 'resources'), 0, null) : Dynamic));
     return cast scene;
@@ -71,19 +71,19 @@ class SceneDocument {
   public static function createScene3DsFromDocument(document:Scene3DDocument):Array<Scene3D> {
     var nodes:Array<Node3D> = cast _Runtime.UNDEFINED;
     var scenes:Array<Scene3D> = cast _Runtime.UNDEFINED;
-    nodes = (cast SceneDocument.buildDocumentNodes__sceneDocument((cast document)) : Array<Node3D>);
-    SceneDocument.applyDocumentSkins__sceneDocument((cast document), (cast nodes));
+    nodes = (cast SceneDocument.buildDocumentNodes__sceneDocument(({ final __callArgument7:Dynamic = document; __callArgument7; })) : Array<Node3D>);
+    SceneDocument.applyDocumentSkins__sceneDocument(({ final __callArgument8:Dynamic = document; __callArgument8; }), ({ final __callArgument9:Dynamic = nodes; __callArgument9; }));
     scenes = (cast cast ([] : Array<Dynamic>));
     {
       var s:Float = 0.0;
       while ((cast ((cast s : Float) < (cast _Runtime.field(_Runtime.field(document, 'scenes'), 'length') : Float)) : Bool)) {
-        var scene:Scene3D = (cast createScene3D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene3D);
+        var scene:Scene3D = (cast createScene3D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene3D);
         var roots:Array<Float> = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'scenes'), s) : Scene3DDocumentScene).rootNodes;
         {
           var r:Float = 0.0;
           while ((cast ((cast r : Float) < (cast _Runtime.field(roots, 'length') : Float)) : Bool)) {
             var node:Node3D = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast roots : Array<Float>), (cast r : Float)));
-            if ((cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast addNodeChild((cast scene.root), (cast node)) : NodeOf<Node3DTraits>); }
+            if ((cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast addNodeChild((cast scene.root : Dynamic), (cast node : Dynamic)) : NodeOf<Node3DTraits>); }
             r++;
           }
         }
@@ -93,7 +93,7 @@ class SceneDocument {
       }
     }
     if ((cast ((cast _Runtime.field(scenes, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      SceneDocument.attachDocumentAnimations__sceneDocument((cast document), (cast nodes), (cast flighthq._internal._StaticIndex.readArray(scenes, 0.0)));
+      SceneDocument.attachDocumentAnimations__sceneDocument(({ final __callArgument10:Dynamic = document; __callArgument10; }), ({ final __callArgument11:Dynamic = nodes; __callArgument11; }), flighthq._internal._StaticIndex.readArray(scenes, 0.0));
       ((cast flighthq._internal._StaticIndex.readArray(scenes, 0.0) : { var metadata:Null<Scene3DMetadata>; }).metadata = cast (_Runtime.field(document, 'metadata') : Dynamic));
     }
     return cast scenes;
@@ -103,10 +103,10 @@ class SceneDocument {
   public static function applyDocumentNodeTransform__sceneDocument(node:Node3D, source:Scene3DDocumentNode):Void {
     var t:Transform3D = cast _Runtime.UNDEFINED;
     t = _Runtime.field(source, 'transform');
-    setVector3((cast node.position), (cast (cast (cast t : Transform3D).position : { var x:Float; }).x : Float), (cast (cast (cast t : Transform3D).position : { var y:Float; }).y : Float), (cast (cast (cast t : Transform3D).position : { var z:Float; }).z : Float));
-    setQuaternion((cast node.rotation), (cast (cast (cast t : Transform3D).rotation : { var x:Float; }).x : Float), (cast (cast (cast t : Transform3D).rotation : { var y:Float; }).y : Float), (cast (cast (cast t : Transform3D).rotation : { var z:Float; }).z : Float), (cast (cast (cast t : Transform3D).rotation : { var w:Float; }).w : Float));
-    setVector3((cast node.scale), (cast (cast (cast t : Transform3D).scale : { var x:Float; }).x : Float), (cast (cast (cast t : Transform3D).scale : { var y:Float; }).y : Float), (cast (cast (cast t : Transform3D).scale : { var z:Float; }).z : Float));
-    invalidateNodeLocalTransform((cast node));
+    setVector3(({ final __callArgument12:Dynamic = node.position; __callArgument12; }), (cast (cast (cast t : Transform3D).position : { var x:Float; }).x : Float), (cast (cast (cast t : Transform3D).position : { var y:Float; }).y : Float), (cast (cast (cast t : Transform3D).position : { var z:Float; }).z : Float));
+    setQuaternion(({ final __callArgument13:Dynamic = node.rotation; __callArgument13; }), (cast (cast (cast t : Transform3D).rotation : { var x:Float; }).x : Float), (cast (cast (cast t : Transform3D).rotation : { var y:Float; }).y : Float), (cast (cast (cast t : Transform3D).rotation : { var z:Float; }).z : Float), (cast (cast (cast t : Transform3D).rotation : { var w:Float; }).w : Float));
+    setVector3(({ final __callArgument14:Dynamic = node.scale; __callArgument14; }), (cast (cast (cast t : Transform3D).scale : { var x:Float; }).x : Float), (cast (cast (cast t : Transform3D).scale : { var y:Float; }).y : Float), (cast (cast (cast t : Transform3D).scale : { var z:Float; }).z : Float));
+    invalidateNodeLocalTransform((cast node : Dynamic));
   }
 
   public static function applyDocumentSkins__sceneDocument(document:Scene3DDocument, nodes:Array<Node3D>):Void {
@@ -137,7 +137,7 @@ class SceneDocument {
           j++;
         }
       }
-      skeleton = (cast createEntity((cast { inverseBindMatrices: inverseBindMatrices, jointMatrices: new flighthq._internal._Float32Array(_Runtime.multiplyNumbers(_Runtime.field(joints, 'length'), 16.0)), joints: joints, names: ((cast _Runtime.callProperty(names, 'some', cast ([function(name:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast _Runtime.field(name, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast names : Dynamic) : (cast null : Dynamic)) })) : { >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; });
+      skeleton = (cast createEntity(({ final __callArgument15:Dynamic = { inverseBindMatrices: inverseBindMatrices, jointMatrices: new flighthq._internal._Float32Array(_Runtime.multiplyNumbers(_Runtime.field(joints, 'length'), 16.0)), joints: joints, names: ((cast _Runtime.callProperty(names, 'some', cast ([function(name:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast _Runtime.field(name, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast names : Dynamic) : (cast null : Dynamic)) }; __callArgument15; })) : { >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; });
       return cast { skeleton: skeleton, skeletonRoot: null };
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));
@@ -146,7 +146,7 @@ class SceneDocument {
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(document, 'nodes'), 'length') : Float)) : Bool)) {
         var meshIndex:Null<Float> = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'nodes'), i) : Scene3DDocumentNode).mesh;
         if ((cast _Runtime.strictEquals(meshIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var skinIndex:Null<Float> = ({ final __structural1 = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'meshes'), meshIndex); __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : Scene3DDocumentMesh).skin; });
+        var skinIndex:Null<Float> = ({ final __structural16 = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'meshes'), meshIndex); __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : Scene3DDocumentMesh).skin; });
         if ((cast _Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         var skin:Null<Skin> = flighthq._internal._StaticIndex.readArray(skins, skinIndex);
         if ((cast !_Runtime.strictEquals(skin, null) : Bool)) { ((cast (cast (cast flighthq._internal._StaticIndex.readArray(nodes, i) : flighthq._internal._Any) : Mesh) : { @:optional var skin:Null<Skin>; }).skin = cast (skin : Dynamic)); }
@@ -168,12 +168,12 @@ class SceneDocument {
             var node:Node3D = flighthq._internal._StaticIndex.readArray(nodes, (cast channel : Scene3DDocumentAnimationChannel).node);
             if ((cast _Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { c++; continue; }
             var target:Scene3DAnimationTarget = (cast { node: node, path: (cast channel : Scene3DDocumentAnimationChannel).path });
-            _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast (cast channel : Scene3DDocumentAnimationChannel).track), (cast target : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+            _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast channel : Scene3DDocumentAnimationChannel).track, (cast target : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
             c++;
           }
         }
         if ((cast _Runtime.strictEquals(_Runtime.field(channels, 'length'), 0.0) : Bool)) { a++; continue; }
-        _Runtime.setIndex(scene.animations, _Runtime.coalesce((cast source : Scene3DDocumentAnimation).name, function():Dynamic return cast 'animation' + Std.string(a) + ''), (cast createAnimationClip((cast channels), (cast (cast source : Scene3DDocumentAnimation).duration), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : AnimationClip));
+        _Runtime.setIndex(scene.animations, _Runtime.coalesce((cast source : Scene3DDocumentAnimation).name, function():Dynamic return cast 'animation' + Std.string(a) + ''), (cast createAnimationClip(({ final __callArgument17:Dynamic = channels; __callArgument17; }), ({ final __callArgument18:Dynamic = (cast source : Scene3DDocumentAnimation).duration; __callArgument18; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : AnimationClip));
         a++;
       }
     }
@@ -185,17 +185,17 @@ class SceneDocument {
     var nodes:Array<Node3D> = cast _Runtime.UNDEFINED;
     meshes = _Runtime.field(document, 'meshes');
     materials = (cast (cast _Runtime.field(document, 'materials') : flighthq._internal._Any) : Array<Material>);
-    nodes = (cast _Runtime.mapArray((cast _Runtime.field(document, 'nodes') : Array<Scene3DDocumentNode>), function(node:Scene3DDocumentNode, __unused4:Float, __unused5:Array<Scene3DDocumentNode>):Node3D return (cast SceneDocument.buildDocumentNode__sceneDocument((cast node), (cast meshes), (cast materials)) : Node3D), _Runtime.UNDEFINED));
+    nodes = (cast _Runtime.mapArray((cast _Runtime.field(document, 'nodes') : Array<Scene3DDocumentNode>), function(node:Scene3DDocumentNode, __unused4:Float, __unused5:Array<Scene3DDocumentNode>):Node3D return (cast SceneDocument.buildDocumentNode__sceneDocument(({ final __callArgument19:Dynamic = node; __callArgument19; }), (cast meshes : Dynamic), ({ final __callArgument20:Dynamic = materials; __callArgument20; })) : Node3D), _Runtime.UNDEFINED));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(document, 'nodes'), 'length') : Float)) : Bool)) {
-        SceneDocument.applyDocumentNodeTransform__sceneDocument((cast flighthq._internal._StaticIndex.readArray(nodes, i)), (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'nodes'), i)));
+        SceneDocument.applyDocumentNodeTransform__sceneDocument(flighthq._internal._StaticIndex.readArray(nodes, i), flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'nodes'), i));
         var children:Array<Float> = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'nodes'), i) : Scene3DDocumentNode).children;
         {
           var c:Float = 0.0;
           while ((cast ((cast c : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
             var child:Node3D = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast children : Array<Float>), (cast c : Float)));
-            if ((cast !_Runtime.strictEquals(child, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast addNodeChild((cast flighthq._internal._StaticIndex.readArray(nodes, i)), (cast child)) : NodeOf<Node3DTraits>); }
+            if ((cast !_Runtime.strictEquals(child, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast addNodeChild((cast flighthq._internal._StaticIndex.readArray(nodes, i) : Dynamic), (cast child : Dynamic)) : NodeOf<Node3DTraits>); }
             c++;
           }
         }
@@ -210,10 +210,10 @@ class SceneDocument {
     var documentMesh:Scene3DDocumentMesh = cast _Runtime.UNDEFINED;
     var meshMaterials:Array<Null<Material>> = cast _Runtime.UNDEFINED;
     var mesh:Mesh = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(node, 'mesh'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast createNode3D((cast _Runtime.field(node, 'kind') : String), (cast { name: _Runtime.field(node, 'name') })) : Node3D); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(node, 'mesh'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast createNode3D((cast _Runtime.field(node, 'kind') : String), ({ final __callArgument21:Dynamic = { name: _Runtime.field(node, 'name') }; __callArgument21; })) : Node3D); }
     documentMesh = flighthq._internal._StaticIndex.readArray(meshes, _Runtime.field(node, 'mesh'));
     meshMaterials = (cast _Runtime.mapArray((cast (cast documentMesh : Scene3DDocumentMesh).materials : Array<Float>), function(index:Float, __unused6:Float, __unused7:Array<Float>):Material return _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(materials, index), function():Dynamic return cast null), _Runtime.UNDEFINED));
-    mesh = (cast createMesh((cast (cast documentMesh : Scene3DDocumentMesh).geometry), (cast meshMaterials), (cast _Runtime.field(node, 'kind') : String), (cast { name: _Runtime.field(node, 'name') })) : Mesh);
+    mesh = (cast createMesh((cast documentMesh : Scene3DDocumentMesh).geometry, ({ final __callArgument22:Dynamic = meshMaterials; __callArgument22; }), (cast _Runtime.field(node, 'kind') : String), ({ final __callArgument23:Dynamic = { name: _Runtime.field(node, 'name') }; __callArgument23; })) : Mesh);
     if ((cast !_Runtime.looseEquals((cast documentMesh : Scene3DDocumentMesh).morph, null) : Bool)) { (mesh.morph = cast ((cast documentMesh : Scene3DDocumentMesh).morph : Dynamic)); }
     return cast (cast (cast mesh : flighthq._internal._Any) : Node3D);
     return cast null;

@@ -28,8 +28,8 @@ class XmlParse {
     var entities:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
     src = _Runtime.replace((cast XmlParse.stripXmlComments__xmlParse((cast xml : String)) : String), _Runtime.regexp('\\r\\n?', 'g'), '\n', false);
     entities = (cast {  });
-    (src = cast (StringTools.trim(Std.string((cast XmlParse.stripXmlDoctypes__xmlParse((cast _Runtime.replace(src, _Runtime.regexp('<\\?[\\s\\S]*?\\?>', 'g'), '', false) : String), (cast entities)) : String))) : Dynamic));
-    return cast (cast XmlParse.parseElement__xmlParse((cast (cast XmlParse.expandXmlEntities__xmlParse((cast src : String), (cast entities)) : String) : String), (cast { pos: 0.0 })) : Null<XmlElement>);
+    (src = cast (StringTools.trim(Std.string((cast XmlParse.stripXmlDoctypes__xmlParse((cast _Runtime.replace(src, _Runtime.regexp('<\\?[\\s\\S]*?\\?>', 'g'), '', false) : String), ({ final __callArgument1:Dynamic = entities; __callArgument1; })) : String))) : Dynamic));
+    return cast (cast XmlParse.parseElement__xmlParse((cast (cast XmlParse.expandXmlEntities__xmlParse((cast src : String), ({ final __callArgument2:Dynamic = entities; __callArgument2; })) : String) : String), (cast { pos: 0.0 } : Dynamic)) : Null<XmlElement>);
     return cast null;
   }
 
@@ -92,19 +92,19 @@ class XmlParse {
     var children:Array<XmlElement> = cast _Runtime.UNDEFINED;
     var content:Array<flighthq._internal._Union2<String, XmlElement>> = cast _Runtime.UNDEFINED;
     var text:String = cast _Runtime.UNDEFINED;
-    XmlParse.skipWhitespace__xmlParse((cast src : String), (cast state));
+    XmlParse.skipWhitespace__xmlParse((cast src : String), (cast state : Dynamic));
     if ((cast ((cast ((cast (cast state : ParseState__xmlParse).pos : Float) >= (cast _Runtime.field(src, 'length') : Float)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.getIndex(src, (cast state : ParseState__xmlParse).pos), '<') : Bool)) : Bool)) { return cast null; }
     (cast state : ParseState__xmlParse).pos++;
     if ((cast _Runtime.strictEquals(_Runtime.getIndex(src, (cast state : ParseState__xmlParse).pos), '?') : Bool)) {
       var end:Float = _Runtime.callProperty(src, 'indexOf', cast (['?>', (cast state : ParseState__xmlParse).pos] : Array<Dynamic>));
       ((cast state : ParseState__xmlParse).pos = ((cast ((cast end : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (end + 2.0) : Dynamic) : (cast _Runtime.field(src, 'length') : Dynamic)));
-      return cast (cast XmlParse.parseElement__xmlParse((cast src : String), (cast state)) : Null<XmlElement>);
+      return cast (cast XmlParse.parseElement__xmlParse((cast src : String), (cast state : Dynamic)) : Null<XmlElement>);
     }
     nameStart = (cast state : ParseState__xmlParse).pos;
     while ((cast ((cast ((cast (cast state : ParseState__xmlParse).pos : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool) && (cast !(cast _Runtime.callProperty(_Runtime.regexp('[\\s>/]', ''), 'test', cast ([_Runtime.getIndex(src, (cast state : ParseState__xmlParse).pos)] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { (cast state : ParseState__xmlParse).pos++; }
     name = _Runtime.slice(src, nameStart, (cast state : ParseState__xmlParse).pos);
     if ((cast !_Runtime.truthy(name) : Bool)) { return cast null; }
-    XmlParse.skipWhitespace__xmlParse((cast src : String), (cast state));
+    XmlParse.skipWhitespace__xmlParse((cast src : String), (cast state : Dynamic));
     attrsStr = '';
     quote = '';
     while ((cast ((cast (cast state : ParseState__xmlParse).pos : Float) < (cast _Runtime.field(src, 'length') : Float)) : Bool)) {
@@ -151,7 +151,7 @@ class XmlParse {
           (cast state : ParseState__xmlParse).pos++;
           break;
         }
-        var child:Null<XmlElement> = (cast XmlParse.parseElement__xmlParse((cast src : String), (cast state)) : Null<XmlElement>);
+        var child:Null<XmlElement> = (cast XmlParse.parseElement__xmlParse((cast src : String), (cast state : Dynamic)) : Null<XmlElement>);
         if (_Runtime.truthy(child)) {
           _Runtime.callProperty(children, 'push', cast ([child] : Array<Dynamic>));
           _Runtime.callProperty(content, 'push', cast ([child] : Array<Dynamic>));
@@ -225,7 +225,7 @@ class XmlParse {
         } } } } }
         pos++;
       }
-      XmlParse.collectXmlEntityDeclarations__xmlParse((cast _Runtime.slice(xml, doctypeStart, pos) : String), (cast out));
+      XmlParse.collectXmlEntityDeclarations__xmlParse((cast _Runtime.slice(xml, doctypeStart, pos) : String), ({ final __callArgument3:Dynamic = out; __callArgument3; }));
       (copyStart = cast (pos : Dynamic));
     }
     return cast (output + _Runtime.slice(xml, copyStart, null));

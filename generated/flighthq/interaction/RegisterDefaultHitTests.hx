@@ -39,16 +39,16 @@ import flighthq.types._internal._TilemapValues.TilemapKind;
 
 class RegisterDefaultHitTests {
   public static function registerDefaultHitTests():Void {
-    registerHitTest((cast DisplayObjectKind : String), (cast defaultNode2DHitTestHandler));
-    registerHitTest((cast HtmlViewKind : String), (cast defaultHtmlViewHitTestHandler));
-    registerHitTest((cast MovieClipKind : String), (cast defaultMovieClipHitTestHandler));
-    registerHitTest((cast MorphShapeKind : String), (cast defaultShapeHitTestHandler));
-    registerHitTest((cast QuadBatchKind : String), (cast defaultQuadBatchHitTestHandler));
-    registerHitTest((cast RichTextKind : String), (cast defaultRichTextHitTestHandler));
-    registerHitTest((cast Scale9ShapeKind : String), (cast defaultShapeHitTestHandler));
-    registerHitTest((cast ShapeKind : String), (cast defaultShapeHitTestHandler));
-    registerHitTest((cast SpriteKind : String), (cast defaultSpriteHitTestHandler));
-    registerHitTest((cast TextLabelKind : String), (cast defaultTextHitTestHandler));
-    registerHitTest((cast TilemapKind : String), (cast defaultTilemapHitTestHandler));
+    registerHitTest((cast DisplayObjectKind : String), ({ final __callArgument0:Dynamic = defaultNode2DHitTestHandler; __callArgument0; }));
+    registerHitTest((cast HtmlViewKind : String), ({ final __callArgument1:Dynamic = defaultHtmlViewHitTestHandler; __callArgument1; }));
+    registerHitTest((cast MovieClipKind : String), ({ final __callArgument2:Dynamic = defaultMovieClipHitTestHandler; __callArgument2; }));
+    registerHitTest((cast MorphShapeKind : String), ({ final __callArgument3:Dynamic = defaultShapeHitTestHandler; __callArgument3; }));
+    registerHitTest((cast QuadBatchKind : String), ({ final __callArgument4:Dynamic = defaultQuadBatchHitTestHandler; __callArgument4; }));
+    registerHitTest((cast RichTextKind : String), ({ final __callArgument5:Dynamic = defaultRichTextHitTestHandler; __callArgument5; }));
+    registerHitTest((cast Scale9ShapeKind : String), ({ final __callArgument6:Dynamic = defaultShapeHitTestHandler; __callArgument6; }));
+    registerHitTest((cast ShapeKind : String), ({ final __callArgument7:Dynamic = defaultShapeHitTestHandler; __callArgument7; }));
+    registerHitTest((cast SpriteKind : String), ({ final __callArgument8:Dynamic = defaultSpriteHitTestHandler; __callArgument8; }));
+    registerHitTest((cast TextLabelKind : String), ({ final __callArgument9:Dynamic = defaultTextHitTestHandler; __callArgument9; }));
+    registerHitTest((cast TilemapKind : String), ({ final __callArgument10:Dynamic = defaultTilemapHitTestHandler; __callArgument10; }));
   }
 }

@@ -26,7 +26,7 @@ class Skeleton2dConstraint {
         var constraint:Skeleton2DConstraint = flighthq._internal._StaticIndex.readArray(constraints, i);
         var solve:Null<Skeleton2DConstraintSolver> = ((cast Skeleton2dConstraint._solvers__skeleton2dConstraint : flighthq._internal._Map<String, Skeleton2DConstraintSolver>).get(_Runtime.field(constraint, 'kind')));
         if ((cast _Runtime.strictEquals(solve, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        solve((cast skeleton), (cast constraint));
+        solve(({ final __callArgument0:Dynamic = skeleton; __callArgument0; }), ({ final __callArgument1:Dynamic = constraint; __callArgument1; }));
         i++;
       }
     }

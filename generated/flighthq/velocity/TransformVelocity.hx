@@ -20,7 +20,7 @@ import flighthq.velocity.VelocityField.ensureVelocitySample;
 
 class TransformVelocity {
   public static function contributeTransformVelocity<Traits:flighthq._internal._Object>(field:VelocityField, root:Transform2DNode<Traits>):Void {
-    TransformVelocity.visitTransformVelocity__transformVelocity((cast field), (cast root));
+    TransformVelocity.visitTransformVelocity__transformVelocity(({ final __callArgument0:Dynamic = field; __callArgument0; }), (cast root : Dynamic));
   }
 
   public static function visitTransformVelocity__transformVelocity<Traits:flighthq._internal._Object>(field:VelocityField, node:Transform2DNode<Traits>):Void {
@@ -29,9 +29,9 @@ class TransformVelocity {
     var sample:VelocitySample = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
     mutableNode = (cast node : Transform2DNode<Traits>);
-    ensureNodeWorldMatrix((cast mutableNode));
-    world = (cast getNodeWorldMatrix((cast mutableNode)) : Matrix);
-    sample = (cast ensureVelocitySample((cast field), (cast node)) : VelocitySample);
+    ensureNodeWorldMatrix((cast mutableNode : Dynamic));
+    world = (cast getNodeWorldMatrix((cast mutableNode : Dynamic)) : Matrix);
+    sample = (cast ensureVelocitySample(({ final __callArgument1:Dynamic = field; __callArgument1; }), ({ final __callArgument2:Dynamic = node; __callArgument2; })) : VelocitySample);
     if ((cast !_Runtime.strictEquals((cast sample : VelocitySample).explicitFrameId, (cast field : VelocityField).frameId) : Bool)) {
       if ((cast !_Runtime.strictEquals((cast sample : VelocitySample).previousWorldTransform, null) : Bool)) {
         ((cast (cast sample : VelocitySample).velocity : Velocity2D).x = (world.tx - (cast (cast sample : VelocitySample).previousWorldTransform : { var tx:Float; }).tx));
@@ -42,14 +42,14 @@ class TransformVelocity {
       }
       ((cast sample : VelocitySample).lastFrameId = (cast field : VelocityField).frameId);
     }
-    if ((cast _Runtime.strictEquals((cast sample : VelocitySample).previousWorldTransform, null) : Bool)) { ((cast sample : VelocitySample).previousWorldTransform = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix)); }
-    copyMatrix((cast (cast sample : VelocitySample).previousWorldTransform), (cast world));
-    count = (cast getNodeChildCount((cast mutableNode)) : Float);
+    if ((cast _Runtime.strictEquals((cast sample : VelocitySample).previousWorldTransform, null) : Bool)) { ((cast sample : VelocitySample).previousWorldTransform = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix)); }
+    copyMatrix(({ final __callArgument3:Dynamic = (cast sample : VelocitySample).previousWorldTransform; __callArgument3; }), ({ final __callArgument4:Dynamic = world; __callArgument4; }));
+    count = (cast getNodeChildCount((cast mutableNode : Dynamic)) : Float);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var child:Null<NodeOf<Traits>> = (cast getNodeChildAt((cast mutableNode), (cast i : Float)) : Null<NodeOf<Traits>>);
-        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { TransformVelocity.visitTransformVelocity__transformVelocity((cast field), (cast (cast (cast child : flighthq._internal._Any) : Transform2DNode<Traits>))); }
+        var child:Null<NodeOf<Traits>> = (cast getNodeChildAt((cast mutableNode : Dynamic), (cast i : Float)) : Null<NodeOf<Traits>>);
+        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { TransformVelocity.visitTransformVelocity__transformVelocity(({ final __callArgument5:Dynamic = field; __callArgument5; }), (cast (cast (cast child : flighthq._internal._Any) : Transform2DNode<Traits>) : Dynamic)); }
         i++;
       }
     }

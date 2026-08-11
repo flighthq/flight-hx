@@ -45,7 +45,7 @@ class GltfUnlit {
         var existing:MaterialLike = flighthq._internal._StaticIndex.readArray((cast _Runtime.field(context, 'document') : Scene3DDocument).materials, i);
         if ((cast ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(existing, 'kind'), StandardPbrMaterialKind) : Bool)) : Bool)) { i++; continue; }
         var standard:StandardPbrMaterial = (cast (cast existing : flighthq._internal._Any) : StandardPbrMaterial);
-        var replacement:UnlitMaterial = (cast createUnlitMaterial((cast { baseColor: (cast standard : StandardPbrMaterial).baseColor, baseColorMap: (cast standard : StandardPbrMaterial).baseColorMap })) : UnlitMaterial);
+        var replacement:UnlitMaterial = (cast createUnlitMaterial(({ final __callArgument1:Dynamic = { baseColor: (cast standard : StandardPbrMaterial).baseColor, baseColorMap: (cast standard : StandardPbrMaterial).baseColorMap }; __callArgument1; })) : UnlitMaterial);
         ((cast replacement : UnlitMaterial).alphaCutoff = (cast standard : StandardPbrMaterial).alphaCutoff);
         ((cast replacement : UnlitMaterial).alphaMode = (cast standard : StandardPbrMaterial).alphaMode);
         ((cast replacement : UnlitMaterial).doubleSided = (cast standard : StandardPbrMaterial).doubleSided);

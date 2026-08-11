@@ -49,7 +49,7 @@ class BitmapNoise {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function fillBitmapPerlinNoise(dest:BitmapRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
@@ -108,7 +108,7 @@ class BitmapNoise {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function fillBitmapTurbulence(dest:BitmapRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
@@ -167,7 +167,7 @@ class BitmapNoise {
         py++;
       }
     }
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static final BITMAP_NOISE_CHANNEL_A:Float = 8.0;

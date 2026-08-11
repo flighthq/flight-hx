@@ -27,11 +27,11 @@ class DropShadowEffect {
   }
 
   public static function registerDropShadowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'DropShadowEffect' : String), (cast DropShadowEffect.resolveDropShadowEffectPadding__dropShadowEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'DropShadowEffect' : String), (cast DropShadowEffect.resolveDropShadowEffectPadding__dropShadowEffect : Dynamic));
   }
 
   public static function resolveDropShadowEffectPadding__dropShadowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getDropShadowEffectPadding((cast (cast effect : flighthq.types.DropShadowEffect))) : RenderEffectPadding);
+    return cast (cast getDropShadowEffectPadding((cast effect : flighthq.types.DropShadowEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

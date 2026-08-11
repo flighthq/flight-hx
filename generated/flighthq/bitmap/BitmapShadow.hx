@@ -16,24 +16,24 @@ import flighthq.types.BitmapShadowBlurOptions;
 class BitmapShadow {
   public static function dropShadowBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapDropShadowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
-    BitmapShadow.tintBitmapAlphaMask__bitmapShadow((cast out), (cast source), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 255.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0) : Float));
-    BitmapShadow.applyBlurPasses__bitmapShadow((cast out), (cast scratch), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), (cast options));
+    BitmapShadow.tintBitmapAlphaMask__bitmapShadow(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 255.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0) : Float));
+    BitmapShadow.applyBlurPasses__bitmapShadow(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = scratch; __callArgument3; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), ({ final __callArgument4:Dynamic = options; __callArgument4; }));
   }
 
   public static function glowBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapGlowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
-    BitmapShadow.tintBitmapAlphaMask__bitmapShadow((cast out), (cast source), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 4278190335.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0) : Float));
-    BitmapShadow.applyBlurPasses__bitmapShadow((cast out), (cast scratch), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), (cast options));
+    BitmapShadow.tintBitmapAlphaMask__bitmapShadow(({ final __callArgument5:Dynamic = out; __callArgument5; }), ({ final __callArgument6:Dynamic = source; __callArgument6; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 4278190335.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0) : Float));
+    BitmapShadow.applyBlurPasses__bitmapShadow(({ final __callArgument7:Dynamic = out; __callArgument7; }), ({ final __callArgument8:Dynamic = scratch; __callArgument8; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), ({ final __callArgument9:Dynamic = options; __callArgument9; }));
   }
 
   public static function innerGlowBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapInnerGlowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
-    BitmapShadow.applyInnerEffect__bitmapShadow((cast out), (cast scratch), (cast source), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 4278190335.0) : Float), (cast options), (cast 0.0 : Float), (cast 0.0 : Float));
+    BitmapShadow.applyInnerEffect__bitmapShadow(({ final __callArgument10:Dynamic = out; __callArgument10; }), ({ final __callArgument11:Dynamic = scratch; __callArgument11; }), ({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 4278190335.0) : Float), ({ final __callArgument13:Dynamic = options; __callArgument13; }), (cast 0.0 : Float), (cast 0.0 : Float));
   }
 
   public static function innerShadowBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapInnerShadowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
-    BitmapShadow.applyInnerEffect__bitmapShadow((cast out), (cast scratch), (cast source), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 255.0) : Float), (cast options), (cast _Runtime.coalesce(_Runtime.field(options, 'offsetX'), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'offsetY'), function():Dynamic return cast 0.0) : Float));
+    BitmapShadow.applyInnerEffect__bitmapShadow(({ final __callArgument14:Dynamic = out; __callArgument14; }), ({ final __callArgument15:Dynamic = scratch; __callArgument15; }), ({ final __callArgument16:Dynamic = source; __callArgument16; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 255.0) : Float), ({ final __callArgument17:Dynamic = options; __callArgument17; }), (cast _Runtime.coalesce(_Runtime.field(options, 'offsetX'), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'offsetY'), function():Dynamic return cast 0.0) : Float));
   }
 
   public static function applyBlurPasses__bitmapShadow(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, options:BitmapShadowBlurOptions):Void {
@@ -51,13 +51,13 @@ class BitmapShadow {
       var pass:Float = 0.0;
       while ((cast ((cast pass : Float) < (cast passes : Float)) : Bool)) {
         if ((cast ((cast radiusX : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsHorizontal((cast b), (cast a), (cast width : Float), (cast height : Float), (cast radiusX : Float));
+          blurBitmapPixelsHorizontal(({ final __callArgument18:Dynamic = b; __callArgument18; }), ({ final __callArgument19:Dynamic = a; __callArgument19; }), (cast width : Float), (cast height : Float), (cast radiusX : Float));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
         if ((cast ((cast radiusY : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsVertical((cast b), (cast a), (cast width : Float), (cast height : Float), (cast radiusY : Float));
+          blurBitmapPixelsVertical(({ final __callArgument20:Dynamic = b; __callArgument20; }), ({ final __callArgument21:Dynamic = a; __callArgument21; }), (cast width : Float), (cast height : Float), (cast radiusY : Float));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
@@ -90,14 +90,14 @@ class BitmapShadow {
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast 0.0 : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast 0.0 : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast 0.0 : Float));
-            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (255.0 - (cast BitmapShadow.readSourceAlpha__bitmapShadow((cast source), (cast (px - offsetX) : Float), (cast (py - offsetY) : Float)) : Float)) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (255.0 - (cast BitmapShadow.readSourceAlpha__bitmapShadow(({ final __callArgument22:Dynamic = source; __callArgument22; }), (cast (px - offsetX) : Float), (cast (py - offsetY) : Float)) : Float)) : Float));
             px++;
           }
         }
         py++;
       }
     }
-    BitmapShadow.applyBlurPasses__bitmapShadow((cast out), (cast scratch), (cast w : Float), (cast h : Float), (cast options));
+    BitmapShadow.applyBlurPasses__bitmapShadow(({ final __callArgument23:Dynamic = out; __callArgument23; }), ({ final __callArgument24:Dynamic = scratch; __callArgument24; }), (cast w : Float), (cast h : Float), ({ final __callArgument25:Dynamic = options; __callArgument25; }));
     cr = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
     cg = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
     cb = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
@@ -111,7 +111,7 @@ class BitmapShadow {
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Float = (((py * w) + px) * 4.0);
             var blurred:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float));
-            var sourceAlpha:Float = (cast BitmapShadow.readSourceAlpha__bitmapShadow((cast source), (cast px : Float), (cast py : Float)) : Float);
+            var sourceAlpha:Float = (cast BitmapShadow.readSourceAlpha__bitmapShadow(({ final __callArgument26:Dynamic = source; __callArgument26; }), (cast px : Float), (cast py : Float)) : Float);
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast cr : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast cg : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast cb : Float));

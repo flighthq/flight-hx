@@ -130,8 +130,8 @@ class EventHeap__martinezKernel {
     i = _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 1.0);
     while ((cast ((cast i : Float) > (cast 0.0 : Float)) : Bool)) {
       var parent:Float = (_Runtime.toInt32((i - 1.0)) >> 1);
-      if ((cast ((cast (cast MartinezKernel.compareEvents__martinezKernel((cast flighthq._internal._StaticIndex.readArray(data, i)), (cast flighthq._internal._StaticIndex.readArray(data, parent))) : Float) : Float) < (cast 0.0 : Float)) : Bool)) {
-        MartinezKernel.swap__martinezKernel((cast data), (cast i : Float), (cast parent : Float));
+      if ((cast ((cast (cast MartinezKernel.compareEvents__martinezKernel((cast flighthq._internal._StaticIndex.readArray(data, i) : Dynamic), (cast flighthq._internal._StaticIndex.readArray(data, parent) : Dynamic)) : Float) : Float) < (cast 0.0 : Float)) : Bool)) {
+        MartinezKernel.swap__martinezKernel((cast data : Dynamic), (cast i : Float), (cast parent : Float));
         (i = cast (parent : Dynamic));
       } else { break; }
     }
@@ -152,10 +152,10 @@ class EventHeap__martinezKernel {
           var left:Float = ((i * 2.0) + 1.0);
           var right:Float = (left + 1.0);
           var smallest:Float = i;
-          if ((cast ((cast ((cast left : Float) < (cast n : Float)) : Bool) && (cast ((cast (cast MartinezKernel.compareEvents__martinezKernel((cast flighthq._internal._StaticIndex.readArray(data, left)), (cast flighthq._internal._StaticIndex.readArray(data, smallest))) : Float) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { (smallest = cast (left : Dynamic)); }
-          if ((cast ((cast ((cast right : Float) < (cast n : Float)) : Bool) && (cast ((cast (cast MartinezKernel.compareEvents__martinezKernel((cast flighthq._internal._StaticIndex.readArray(data, right)), (cast flighthq._internal._StaticIndex.readArray(data, smallest))) : Float) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { (smallest = cast (right : Dynamic)); }
+          if ((cast ((cast ((cast left : Float) < (cast n : Float)) : Bool) && (cast ((cast (cast MartinezKernel.compareEvents__martinezKernel((cast flighthq._internal._StaticIndex.readArray(data, left) : Dynamic), (cast flighthq._internal._StaticIndex.readArray(data, smallest) : Dynamic)) : Float) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { (smallest = cast (left : Dynamic)); }
+          if ((cast ((cast ((cast right : Float) < (cast n : Float)) : Bool) && (cast ((cast (cast MartinezKernel.compareEvents__martinezKernel((cast flighthq._internal._StaticIndex.readArray(data, right) : Dynamic), (cast flighthq._internal._StaticIndex.readArray(data, smallest) : Dynamic)) : Float) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { (smallest = cast (right : Dynamic)); }
           if ((cast _Runtime.strictEquals(smallest, i) : Bool)) { break; }
-          MartinezKernel.swap__martinezKernel((cast data), (cast i : Float), (cast smallest : Float));
+          MartinezKernel.swap__martinezKernel((cast data : Dynamic), (cast i : Float), (cast smallest : Float));
           (i = cast (smallest : Dynamic));
         }
       }
@@ -169,7 +169,7 @@ class MartinezKernel {
   @:noCompletion
   public static function createMartinezPathBooleanBackend():PathBooleanBackend {
     return cast { computePathBoolean: function(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>, operation:PathBooleanOperation, fillRule:PathBooleanFillRule):Array<PathBooleanContour> {
-      return cast (cast MartinezKernel.computeMartinezBoolean__martinezKernel((cast subject), (cast clip), (cast operation), (cast fillRule)) : Array<PathBooleanContour>);
+      return cast (cast MartinezKernel.computeMartinezBoolean__martinezKernel(({ final __callArgument2:Dynamic = subject; __callArgument2; }), ({ final __callArgument3:Dynamic = clip; __callArgument3; }), ({ final __callArgument4:Dynamic = operation; __callArgument4; }), ({ final __callArgument5:Dynamic = fillRule; __callArgument5; })) : Array<PathBooleanContour>);
       return cast _Runtime.UNDEFINED;
     } };
     return cast null;
@@ -190,13 +190,13 @@ class MartinezKernel {
     var unique:Array<UniqueSegment__martinezKernel> = cast _Runtime.UNDEFINED;
     var kept:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     (MartinezKernel.nextEventId__martinezKernel = cast (0.0 : Dynamic));
-    (MartinezKernel.vertexSnap__martinezKernel = cast ((cast MartinezKernel.computeVertexSnap__martinezKernel((cast subject), (cast clip)) : Float) : Dynamic));
-    segments = (cast MartinezKernel.buildArrangement__martinezKernel((cast subject), (cast clip)) : Array<ArrangementSegment__martinezKernel>);
+    (MartinezKernel.vertexSnap__martinezKernel = cast ((cast MartinezKernel.computeVertexSnap__martinezKernel(({ final __callArgument6:Dynamic = subject; __callArgument6; }), ({ final __callArgument7:Dynamic = clip; __callArgument7; })) : Float) : Dynamic));
+    segments = (cast MartinezKernel.buildArrangement__martinezKernel(({ final __callArgument8:Dynamic = subject; __callArgument8; }), ({ final __callArgument9:Dynamic = clip; __callArgument9; })) : Array<ArrangementSegment__martinezKernel>);
     if ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    unique = (cast MartinezKernel.mergeCoincidentSegments__martinezKernel((cast segments)) : Array<UniqueSegment__martinezKernel>);
-    kept = (cast MartinezKernel.classifySegments__martinezKernel((cast unique), (cast operation), (cast fillRule)) : Array<Array<Float>>);
+    unique = (cast MartinezKernel.mergeCoincidentSegments__martinezKernel((cast segments : Dynamic)) : Array<UniqueSegment__martinezKernel>);
+    kept = (cast MartinezKernel.classifySegments__martinezKernel((cast unique : Dynamic), ({ final __callArgument10:Dynamic = operation; __callArgument10; }), ({ final __callArgument11:Dynamic = fillRule; __callArgument11; })) : Array<Array<Float>>);
     if ((cast _Runtime.strictEquals(_Runtime.field(kept, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    return cast (cast MartinezKernel.traceRings__martinezKernel((cast kept)) : Array<PathBooleanContour>);
+    return cast (cast MartinezKernel.traceRings__martinezKernel(({ final __callArgument12:Dynamic = kept; __callArgument12; })) : Array<PathBooleanContour>);
     return cast null;
   }
 
@@ -205,28 +205,28 @@ class MartinezKernel {
     var status:Array<SweepEvent__martinezKernel> = cast _Runtime.UNDEFINED;
     var segments:Array<ArrangementSegment__martinezKernel> = cast _Runtime.UNDEFINED;
     heap = new EventHeap__martinezKernel();
-    MartinezKernel.fillQueue__martinezKernel((cast subject), (cast true : Bool), (cast heap));
-    MartinezKernel.fillQueue__martinezKernel((cast clip), (cast false : Bool), (cast heap));
+    MartinezKernel.fillQueue__martinezKernel(({ final __callArgument13:Dynamic = subject; __callArgument13; }), (cast true : Bool), (cast heap : Dynamic));
+    MartinezKernel.fillQueue__martinezKernel(({ final __callArgument14:Dynamic = clip; __callArgument14; }), (cast false : Bool), (cast heap : Dynamic));
     status = (cast cast ([] : Array<Dynamic>));
     segments = (cast cast ([] : Array<Dynamic>));
     while ((cast !(cast (cast heap : EventHeap__martinezKernel).isEmpty() : Bool) : Bool)) {
       var event:SweepEvent__martinezKernel = (cast heap : EventHeap__martinezKernel).pop();
       if ((cast (cast event : SweepEvent__martinezKernel).left : Bool)) {
-        var index:Float = (cast MartinezKernel.insertStatus__martinezKernel((cast status), (cast event)) : Float);
+        var index:Float = (cast MartinezKernel.insertStatus__martinezKernel((cast status : Dynamic), (cast event : Dynamic)) : Float);
         var prev:Null<SweepEvent__martinezKernel> = ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(status, (index - 1.0)) : Dynamic) : (cast null : Dynamic));
         var next:Null<SweepEvent__martinezKernel> = ((cast ((cast index : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(status, 'length'), 1.0) : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(status, (index + 1.0)) : Dynamic) : (cast null : Dynamic));
-        if ((cast !_Runtime.strictEquals(next, null) : Bool)) { MartinezKernel.possibleIntersection__martinezKernel((cast event), (cast next), (cast heap)); }
-        if ((cast !_Runtime.strictEquals(prev, null) : Bool)) { MartinezKernel.possibleIntersection__martinezKernel((cast prev), (cast event), (cast heap)); }
+        if ((cast !_Runtime.strictEquals(next, null) : Bool)) { MartinezKernel.possibleIntersection__martinezKernel((cast event : Dynamic), (cast next : Dynamic), (cast heap : Dynamic)); }
+        if ((cast !_Runtime.strictEquals(prev, null) : Bool)) { MartinezKernel.possibleIntersection__martinezKernel((cast prev : Dynamic), (cast event : Dynamic), (cast heap : Dynamic)); }
       } else {
         var leftEvent:SweepEvent__martinezKernel = (cast event : SweepEvent__martinezKernel).otherEvent;
-        var index:Float = (cast MartinezKernel.findStatus__martinezKernel((cast status), (cast leftEvent)) : Float);
+        var index:Float = (cast MartinezKernel.findStatus__martinezKernel((cast status : Dynamic), (cast leftEvent : Dynamic)) : Float);
         if ((cast !_Runtime.strictEquals(index, -1.0) : Bool)) {
           var prev:Null<SweepEvent__martinezKernel> = ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(status, (index - 1.0)) : Dynamic) : (cast null : Dynamic));
           var next:Null<SweepEvent__martinezKernel> = ((cast ((cast index : Float) < (cast _Runtime.subtractNumbers(_Runtime.field(status, 'length'), 1.0) : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(status, (index + 1.0)) : Dynamic) : (cast null : Dynamic));
           _Runtime.splice(status, Std.int(index), Std.int(1.0), []);
-          if ((cast ((cast !_Runtime.strictEquals(prev, null) : Bool) && (cast !_Runtime.strictEquals(next, null) : Bool)) : Bool)) { MartinezKernel.possibleIntersection__martinezKernel((cast prev), (cast next), (cast heap)); }
+          if ((cast ((cast !_Runtime.strictEquals(prev, null) : Bool) && (cast !_Runtime.strictEquals(next, null) : Bool)) : Bool)) { MartinezKernel.possibleIntersection__martinezKernel((cast prev : Dynamic), (cast next : Dynamic), (cast heap : Dynamic)); }
         }
-        MartinezKernel.recordSegment__martinezKernel((cast leftEvent), (cast event), (cast segments));
+        MartinezKernel.recordSegment__martinezKernel((cast leftEvent : Dynamic), (cast event : Dynamic), (cast segments : Dynamic));
       }
     }
     return cast segments;
@@ -256,7 +256,7 @@ class MartinezKernel {
           var bx:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (j * 2.0) : Float));
           var by:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast ((j * 2.0) + 1.0) : Float));
           if ((cast ((cast (cast MartinezKernel.approxEqual__martinezKernel((cast ax : Float), (cast bx : Float)) : Bool) : Bool) && (cast (cast MartinezKernel.approxEqual__martinezKernel((cast ay : Float), (cast by : Float)) : Bool) : Bool)) : Bool)) { i++; continue; }
-          MartinezKernel.addEdge__martinezKernel((cast ax : Float), (cast ay : Float), (cast bx : Float), (cast by : Float), (cast isSubject : Bool), (cast heap));
+          MartinezKernel.addEdge__martinezKernel((cast ax : Float), (cast ay : Float), (cast bx : Float), (cast by : Float), (cast isSubject : Bool), (cast heap : Dynamic));
           i++;
         }
       }
@@ -293,18 +293,18 @@ class MartinezKernel {
     if ((cast _Runtime.strictEquals(_Runtime.field(inter, 'length'), 1.0) : Bool)) {
       var ix:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(inter, 0.0) : Array<Float>), (cast 0.0 : Float));
       var iy:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(inter, 0.0) : Array<Float>), (cast 1.0 : Float));
-      if ((cast !(cast (cast MartinezKernel.pointOnEndpoint__martinezKernel((cast le1), (cast ix : Float), (cast iy : Float)) : Bool) : Bool) : Bool)) { MartinezKernel.divideSegment__martinezKernel((cast le1), (cast ix : Float), (cast iy : Float), (cast heap)); }
-      if ((cast !(cast (cast MartinezKernel.pointOnEndpoint__martinezKernel((cast le2), (cast ix : Float), (cast iy : Float)) : Bool) : Bool) : Bool)) { MartinezKernel.divideSegment__martinezKernel((cast le2), (cast ix : Float), (cast iy : Float), (cast heap)); }
+      if ((cast !(cast (cast MartinezKernel.pointOnEndpoint__martinezKernel((cast le1 : Dynamic), (cast ix : Float), (cast iy : Float)) : Bool) : Bool) : Bool)) { MartinezKernel.divideSegment__martinezKernel((cast le1 : Dynamic), (cast ix : Float), (cast iy : Float), (cast heap : Dynamic)); }
+      if ((cast !(cast (cast MartinezKernel.pointOnEndpoint__martinezKernel((cast le2 : Dynamic), (cast ix : Float), (cast iy : Float)) : Bool) : Bool) : Bool)) { MartinezKernel.divideSegment__martinezKernel((cast le2 : Dynamic), (cast ix : Float), (cast iy : Float), (cast heap : Dynamic)); }
       return;
     }
-    MartinezKernel.divideIfInterior__martinezKernel((cast le1), (cast (cast le2 : SweepEvent__martinezKernel).x : Float), (cast (cast le2 : SweepEvent__martinezKernel).y : Float), (cast heap));
-    MartinezKernel.divideIfInterior__martinezKernel((cast le1), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast heap));
-    MartinezKernel.divideIfInterior__martinezKernel((cast le2), (cast (cast le1 : SweepEvent__martinezKernel).x : Float), (cast (cast le1 : SweepEvent__martinezKernel).y : Float), (cast heap));
-    MartinezKernel.divideIfInterior__martinezKernel((cast le2), (cast (cast (cast le1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast heap));
+    MartinezKernel.divideIfInterior__martinezKernel((cast le1 : Dynamic), (cast (cast le2 : SweepEvent__martinezKernel).x : Float), (cast (cast le2 : SweepEvent__martinezKernel).y : Float), (cast heap : Dynamic));
+    MartinezKernel.divideIfInterior__martinezKernel((cast le1 : Dynamic), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast heap : Dynamic));
+    MartinezKernel.divideIfInterior__martinezKernel((cast le2 : Dynamic), (cast (cast le1 : SweepEvent__martinezKernel).x : Float), (cast (cast le1 : SweepEvent__martinezKernel).y : Float), (cast heap : Dynamic));
+    MartinezKernel.divideIfInterior__martinezKernel((cast le2 : Dynamic), (cast (cast (cast le1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast heap : Dynamic));
   }
 
   public static function divideIfInterior__martinezKernel(le:SweepEvent__martinezKernel, x:Float, y:Float, heap:EventHeap__martinezKernel):Void {
-    if ((cast (cast MartinezKernel.pointStrictlyInside__martinezKernel((cast (cast le : SweepEvent__martinezKernel).x : Float), (cast (cast le : SweepEvent__martinezKernel).y : Float), (cast (cast (cast le : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast x : Float), (cast y : Float)) : Bool) : Bool)) { MartinezKernel.divideSegment__martinezKernel((cast le), (cast x : Float), (cast y : Float), (cast heap)); }
+    if ((cast (cast MartinezKernel.pointStrictlyInside__martinezKernel((cast (cast le : SweepEvent__martinezKernel).x : Float), (cast (cast le : SweepEvent__martinezKernel).y : Float), (cast (cast (cast le : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast x : Float), (cast y : Float)) : Bool) : Bool)) { MartinezKernel.divideSegment__martinezKernel((cast le : Dynamic), (cast x : Float), (cast y : Float), (cast heap : Dynamic)); }
   }
 
   public static function divideSegment__martinezKernel(le:SweepEvent__martinezKernel, x:Float, y:Float, heap:EventHeap__martinezKernel):Void {
@@ -350,7 +350,7 @@ class MartinezKernel {
     hi = _Runtime.field(status, 'length');
     while ((cast ((cast lo : Float) < (cast hi : Float)) : Bool)) {
       var mid:Float = (_Runtime.toInt32((lo + hi)) >> 1);
-      if ((cast ((cast (cast MartinezKernel.compareSegments__martinezKernel((cast flighthq._internal._StaticIndex.readArray(status, mid)), (cast event)) : Float) : Float) < (cast 0.0 : Float)) : Bool)) { (lo = cast ((mid + 1.0) : Dynamic)); } else { (hi = cast (mid : Dynamic)); }
+      if ((cast ((cast (cast MartinezKernel.compareSegments__martinezKernel((cast flighthq._internal._StaticIndex.readArray(status, mid) : Dynamic), (cast event : Dynamic)) : Float) : Float) < (cast 0.0 : Float)) : Bool)) { (lo = cast ((mid + 1.0) : Dynamic)); } else { (hi = cast (mid : Dynamic)); }
     }
     _Runtime.splice(status, Std.int(lo), Std.int(0.0), [event]);
     return cast lo;
@@ -384,14 +384,14 @@ class MartinezKernel {
     s1 = (cast MartinezKernel.signedArea__martinezKernel((cast a1x : Float), (cast a1y : Float), (cast a2x : Float), (cast a2y : Float), (cast (cast le2 : SweepEvent__martinezKernel).x : Float), (cast (cast le2 : SweepEvent__martinezKernel).y : Float)) : Float);
     s2 = (cast MartinezKernel.signedArea__martinezKernel((cast a1x : Float), (cast a1y : Float), (cast a2x : Float), (cast a2y : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float)) : Float);
     if ((cast ((cast !_Runtime.strictEquals(s1, 0.0) : Bool) || (cast !_Runtime.strictEquals(s2, 0.0) : Bool)) : Bool)) {
-      if ((cast ((cast _Runtime.strictEquals(a1x, (cast le2 : SweepEvent__martinezKernel).x) : Bool) && (cast _Runtime.strictEquals(a1y, (cast le2 : SweepEvent__martinezKernel).y) : Bool)) : Bool)) { return cast ((cast (cast MartinezKernel.isBelow__martinezKernel((cast le1), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float)) : Bool) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
+      if ((cast ((cast _Runtime.strictEquals(a1x, (cast le2 : SweepEvent__martinezKernel).x) : Bool) && (cast _Runtime.strictEquals(a1y, (cast le2 : SweepEvent__martinezKernel).y) : Bool)) : Bool)) { return cast ((cast (cast MartinezKernel.isBelow__martinezKernel((cast le1 : Dynamic), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float)) : Bool) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
       if ((cast _Runtime.strictEquals(a1x, (cast le2 : SweepEvent__martinezKernel).x) : Bool)) { return cast ((cast ((cast a1y : Float) < (cast (cast le2 : SweepEvent__martinezKernel).y : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
-      if ((cast _Runtime.strictEquals((cast MartinezKernel.compareEvents__martinezKernel((cast le1), (cast le2)) : Float), 1.0) : Bool)) { return cast ((cast (cast MartinezKernel.isBelow__martinezKernel((cast le2), (cast a1x : Float), (cast a1y : Float)) : Bool) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic)); }
-      return cast ((cast (cast MartinezKernel.isBelow__martinezKernel((cast le1), (cast (cast le2 : SweepEvent__martinezKernel).x : Float), (cast (cast le2 : SweepEvent__martinezKernel).y : Float)) : Bool) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
+      if ((cast _Runtime.strictEquals((cast MartinezKernel.compareEvents__martinezKernel((cast le1 : Dynamic), (cast le2 : Dynamic)) : Float), 1.0) : Bool)) { return cast ((cast (cast MartinezKernel.isBelow__martinezKernel((cast le2 : Dynamic), (cast a1x : Float), (cast a1y : Float)) : Bool) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic)); }
+      return cast ((cast (cast MartinezKernel.isBelow__martinezKernel((cast le1 : Dynamic), (cast (cast le2 : SweepEvent__martinezKernel).x : Float), (cast (cast le2 : SweepEvent__martinezKernel).y : Float)) : Bool) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
     }
     if ((cast !_Runtime.strictEquals((cast le1 : SweepEvent__martinezKernel).isSubject, (cast le2 : SweepEvent__martinezKernel).isSubject) : Bool)) { return cast ((cast (cast le1 : SweepEvent__martinezKernel).isSubject : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
     if ((cast ((cast _Runtime.strictEquals(a1x, (cast le2 : SweepEvent__martinezKernel).x) : Bool) && (cast _Runtime.strictEquals(a1y, (cast le2 : SweepEvent__martinezKernel).y) : Bool)) : Bool)) { return cast ((cast ((cast (cast le1 : SweepEvent__martinezKernel).id : Float) < (cast (cast le2 : SweepEvent__martinezKernel).id : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
-    return cast ((cast _Runtime.strictEquals((cast MartinezKernel.compareEvents__martinezKernel((cast le1), (cast le2)) : Float), 1.0) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic));
+    return cast ((cast _Runtime.strictEquals((cast MartinezKernel.compareEvents__martinezKernel((cast le1 : Dynamic), (cast le2 : Dynamic)) : Float), 1.0) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
@@ -407,7 +407,7 @@ class MartinezKernel {
     if ((cast _Runtime.strictEquals(e1, e2) : Bool)) { return cast 0.0; }
     if ((cast !_Runtime.strictEquals((cast e1 : SweepEvent__martinezKernel).left, (cast e2 : SweepEvent__martinezKernel).left) : Bool)) { return cast ((cast (cast e1 : SweepEvent__martinezKernel).left : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic)); }
     area = (cast MartinezKernel.signedArea__martinezKernel((cast (cast e1 : SweepEvent__martinezKernel).x : Float), (cast (cast e1 : SweepEvent__martinezKernel).y : Float), (cast (cast (cast e1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast e1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast (cast (cast e2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast e2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float)) : Float);
-    if ((cast !_Runtime.strictEquals(area, 0.0) : Bool)) { return cast ((cast (cast MartinezKernel.isBelow__martinezKernel((cast e1), (cast (cast (cast e2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast e2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float)) : Bool) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(area, 0.0) : Bool)) { return cast ((cast (cast MartinezKernel.isBelow__martinezKernel((cast e1 : Dynamic), (cast (cast (cast e2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast e2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float)) : Bool) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
     if ((cast !_Runtime.strictEquals((cast e1 : SweepEvent__martinezKernel).isSubject, (cast e2 : SweepEvent__martinezKernel).isSubject) : Bool)) { return cast ((cast (cast e1 : SweepEvent__martinezKernel).isSubject : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
     return cast ((cast ((cast (cast e1 : SweepEvent__martinezKernel).id : Float) < (cast (cast e2 : SweepEvent__martinezKernel).id : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
@@ -511,12 +511,12 @@ class MartinezKernel {
       var eps:Float = (len * 0.0001);
       var nlx:Float = ((-dy / len) * eps);
       var nly:Float = ((dx / len) * eps);
-      var leftInSubject:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique), (cast (mx + nlx) : Float), (cast (my + nly) : Float), (cast true : Bool)) : Float) : Float), (cast fillRule)) : Bool);
-      var leftInClip:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique), (cast (mx + nlx) : Float), (cast (my + nly) : Float), (cast false : Bool)) : Float) : Float), (cast fillRule)) : Bool);
-      var rightInSubject:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique), (cast (mx - nlx) : Float), (cast (my - nly) : Float), (cast true : Bool)) : Float) : Float), (cast fillRule)) : Bool);
-      var rightInClip:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique), (cast (mx - nlx) : Float), (cast (my - nly) : Float), (cast false : Bool)) : Float) : Float), (cast fillRule)) : Bool);
-      var filledLeft:Bool = (cast MartinezKernel.combine__martinezKernel((cast operation), (cast leftInSubject : Bool), (cast leftInClip : Bool)) : Bool);
-      var filledRight:Bool = (cast MartinezKernel.combine__martinezKernel((cast operation), (cast rightInSubject : Bool), (cast rightInClip : Bool)) : Bool);
+      var leftInSubject:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx + nlx) : Float), (cast (my + nly) : Float), (cast true : Bool)) : Float) : Float), ({ final __callArgument21:Dynamic = fillRule; __callArgument21; })) : Bool);
+      var leftInClip:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx + nlx) : Float), (cast (my + nly) : Float), (cast false : Bool)) : Float) : Float), ({ final __callArgument22:Dynamic = fillRule; __callArgument22; })) : Bool);
+      var rightInSubject:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx - nlx) : Float), (cast (my - nly) : Float), (cast true : Bool)) : Float) : Float), ({ final __callArgument23:Dynamic = fillRule; __callArgument23; })) : Bool);
+      var rightInClip:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx - nlx) : Float), (cast (my - nly) : Float), (cast false : Bool)) : Float) : Float), ({ final __callArgument24:Dynamic = fillRule; __callArgument24; })) : Bool);
+      var filledLeft:Bool = (cast MartinezKernel.combine__martinezKernel(({ final __callArgument25:Dynamic = operation; __callArgument25; }), (cast leftInSubject : Bool), (cast leftInClip : Bool)) : Bool);
+      var filledRight:Bool = (cast MartinezKernel.combine__martinezKernel(({ final __callArgument26:Dynamic = operation; __callArgument26; }), (cast rightInSubject : Bool), (cast rightInClip : Bool)) : Bool);
       if ((cast _Runtime.strictEquals(filledLeft, filledRight) : Bool)) { continue; }
       if ((cast filledLeft : Bool)) { _Runtime.callProperty(kept, 'push', cast ([cast ([(cast seg : UniqueSegment__martinezKernel).ax, (cast seg : UniqueSegment__martinezKernel).ay, (cast seg : UniqueSegment__martinezKernel).bx, (cast seg : UniqueSegment__martinezKernel).by] : Array<Dynamic>)] : Array<Dynamic>)); } else { _Runtime.callProperty(kept, 'push', cast ([cast ([(cast seg : UniqueSegment__martinezKernel).bx, (cast seg : UniqueSegment__martinezKernel).by, (cast seg : UniqueSegment__martinezKernel).ax, (cast seg : UniqueSegment__martinezKernel).ay] : Array<Dynamic>)] : Array<Dynamic>)); }
     }

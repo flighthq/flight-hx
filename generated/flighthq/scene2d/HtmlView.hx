@@ -27,7 +27,7 @@ class HtmlView {
   }
 
   public static function createHtmlView(?obj:PartialNode<flighthq.types.HtmlView>):flighthq.types.HtmlView {
-    return cast (cast createNode2D((cast HtmlViewKind : String), (cast obj), (cast createHtmlViewData), (cast function(__unused0:Null<flighthq._internal._Any>):HtmlViewRuntime return createHtmlViewRuntime())) : flighthq.types.HtmlView);
+    return cast (cast createNode2D((cast HtmlViewKind : String), (cast obj : Dynamic), (cast createHtmlViewData : Dynamic), (cast function(__unused0:Null<flighthq._internal._Any>):HtmlViewRuntime return createHtmlViewRuntime() : Dynamic)) : flighthq.types.HtmlView);
     return cast null;
   }
 
@@ -39,13 +39,13 @@ class HtmlView {
 
   @:noCompletion
   public static function createHtmlViewRuntime():HtmlViewRuntime {
-    return cast (cast createNode2DRuntime((cast HtmlView.defaultMethods__htmlView)) : HtmlViewRuntime);
+    return cast (cast createNode2DRuntime(({ final __callArgument3:Dynamic = HtmlView.defaultMethods__htmlView; __callArgument3; })) : HtmlViewRuntime);
     return cast null;
   }
 
   @:noCompletion
   public static function getHtmlViewRuntime(source:flighthq.types.HtmlView):HtmlViewRuntime {
-    return cast (cast getNode2DRuntime((cast source)) : HtmlViewRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument4:Dynamic = source; __callArgument4; })) : HtmlViewRuntime);
     return cast null;
   }
 
@@ -53,7 +53,7 @@ class HtmlView {
     if ((cast ((cast _Runtime.strictEquals((cast (cast source : flighthq.types.HtmlView).data : HtmlViewData).width, width) : Bool) && (cast _Runtime.strictEquals((cast (cast source : flighthq.types.HtmlView).data : HtmlViewData).height, height) : Bool)) : Bool)) { return; }
     ((cast (cast source : flighthq.types.HtmlView).data : HtmlViewData).width = width);
     ((cast (cast source : flighthq.types.HtmlView).data : HtmlViewData).height = height);
-    invalidateNodeLocalBounds((cast source));
+    invalidateNodeLocalBounds((cast source : Dynamic));
   }
 
   public static final defaultMethods__htmlView:flighthq._internal._Partial<MethodsOf<HtmlViewRuntime>> = (cast { computeLocalBoundsRectangle: computeHtmlViewLocalBoundsRectangle });

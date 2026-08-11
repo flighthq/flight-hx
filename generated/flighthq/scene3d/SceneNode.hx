@@ -30,9 +30,9 @@ class SceneNode {
   public static function createNode3D(?kind:Kind, ?obj:flighthq._internal._Partial<flighthq._internal._Pick<Node3D, String>>):Node3D {
     if (kind == null) kind = cast (Node3DKind : Dynamic);
     var node:{ >Node<Node3DTraits>, >Node3DTraits, } = cast _Runtime.UNDEFINED;
-    node = (cast createNode((cast kind : String), (cast obj), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast function(__unused0:Null<flighthq._internal._Any>):Node3DRuntime return createNode3DRuntime())) : { >Node<Node3DTraits>, >Node3DTraits, });
-    initAppearanceTrait((cast node), (cast obj));
-    initTransform3DTrait((cast node), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    node = (cast createNode((cast kind : String), (cast obj : Dynamic), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), (cast function(__unused0:Null<flighthq._internal._Any>):Node3DRuntime return createNode3DRuntime() : Dynamic)) : { >Node<Node3DTraits>, >Node3DTraits, });
+    initAppearanceTrait(({ final __callArgument0:Dynamic = node; __callArgument0; }), ({ final __callArgument1:Dynamic = obj; __callArgument1; }));
+    initTransform3DTrait(({ final __callArgument2:Dynamic = node; __callArgument2; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     return cast (cast node : Node3D);
     return cast null;
   }
@@ -40,30 +40,30 @@ class SceneNode {
   @:noCompletion
   public static function createNode3DRuntime():Node3DRuntime {
     var out:Node3DRuntime = cast _Runtime.UNDEFINED;
-    out = (cast createNodeRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Node3DRuntime);
+    out = (cast createNodeRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Node3DRuntime);
     ((cast out : { @:optional var traits:Null<NodeTraitsKey<Node3DTraits>>; }).traits = Node3DTraitsKey);
     ((cast out : { var worldAlpha:Null<Float>; }).worldAlpha = null);
     ((cast out : { var worldAlphaUsingAppearanceId:Float; }).worldAlphaUsingAppearanceId = -1.0);
     ((cast out : { var worldAlphaUsingParentAppearanceId:Float; }).worldAlphaUsingParentAppearanceId = -1.0);
     ((cast out : { var worldAppearanceId:Float; }).worldAppearanceId = 0.0);
-    initTransform3DRuntimeTrait((cast out));
+    initTransform3DRuntimeTrait(({ final __callArgument3:Dynamic = out; __callArgument3; }));
     return cast out;
     return cast null;
   }
 
   public static function enableNode3DSignals(source:Node3D):NodeSignals {
-    return cast (cast enableNodeSignals((cast source)) : NodeSignals);
+    return cast (cast enableNodeSignals((cast source : Dynamic)) : NodeSignals);
     return cast null;
   }
 
   @:noCompletion
   public static function getNode3DRuntime(source:Node3D):Node3DRuntime {
-    return cast (cast getNodeRuntime((cast source)) : Node3DRuntime);
+    return cast (cast getNodeRuntime((cast source : Dynamic)) : Node3DRuntime);
     return cast null;
   }
 
   public static function getNode3DSignals(source:Node3D):Null<NodeSignals> {
-    return cast (cast getNodeSignals((cast source)) : Null<NodeSignals>);
+    return cast (cast getNodeSignals((cast source : Dynamic)) : Null<NodeSignals>);
     return cast null;
   }
 }

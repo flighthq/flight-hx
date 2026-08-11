@@ -18,7 +18,7 @@ import flighthq.types.Types.GridLayoutKind;
 
 class GridLayout {
   public static function registerGridLayoutResolver(state:LayoutState):Void {
-    registerLayoutResolver((cast state), (cast GridLayoutKind : String), (cast GridLayout.gridLayoutResolver__gridLayout));
+    registerLayoutResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast GridLayoutKind : String), ({ final __callArgument1:Dynamic = GridLayout.gridLayoutResolver__gridLayout; __callArgument1; }));
   }
 
   public static final gridLayoutResolver__gridLayout:LayoutResolver = (cast function(out:flighthq._internal._Float32Array, tree:LayoutTree, intrinsicSizes:flighthq._internal._ArrayLike<Float>, parentIndex:Float, childIndex:Float):Null<String> {
@@ -45,15 +45,15 @@ class GridLayout {
     var y:Float = cast _Runtime.UNDEFINED;
     var height:Float = cast _Runtime.UNDEFINED;
     containerValue = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'nodes'), parentIndex) : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).containerStyle;
-    if ((cast !(cast (cast GridLayout.isGridLayoutContainerStyle__gridLayout((cast containerValue)) : Bool) : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidContainerStyle; }
+    if ((cast !(cast (cast GridLayout.isGridLayoutContainerStyle__gridLayout(({ final __callArgument2:Dynamic = containerValue; __callArgument2; })) : Bool) : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidContainerStyle; }
     itemValue = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'nodes'), childIndex) : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).itemStyle;
-    if ((cast !(cast (cast GridLayout.isGridLayoutItemStyle__gridLayout((cast itemValue)) : Bool) : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidItemStyle; }
+    if ((cast !(cast (cast GridLayout.isGridLayoutItemStyle__gridLayout(({ final __callArgument3:Dynamic = itemValue; __callArgument3; })) : Bool) : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidItemStyle; }
     container = (cast containerValue : GridLayoutContainerStyle);
-    column = (cast GridLayout.getGridColumn__gridLayout((cast tree), (cast parentIndex : Float), (cast childIndex : Float), (cast _Runtime.field(_Runtime.field(container, 'columns'), 'length') : Float)) : Float);
-    row = (cast GridLayout.getGridRow__gridLayout((cast tree), (cast parentIndex : Float), (cast childIndex : Float), (cast _Runtime.field(_Runtime.field(container, 'columns'), 'length') : Float)) : Float);
+    column = (cast GridLayout.getGridColumn__gridLayout(({ final __callArgument4:Dynamic = tree; __callArgument4; }), (cast parentIndex : Float), (cast childIndex : Float), (cast _Runtime.field(_Runtime.field(container, 'columns'), 'length') : Float)) : Float);
+    row = (cast GridLayout.getGridRow__gridLayout(({ final __callArgument5:Dynamic = tree; __callArgument5; }), (cast parentIndex : Float), (cast childIndex : Float), (cast _Runtime.field(_Runtime.field(container, 'columns'), 'length') : Float)) : Float);
     item = (cast itemValue : Null<GridLayoutItemStyle>);
-    columnSpan = _Runtime.coalesce(({ final __structural0 = item; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var columnSpan:Null<Float>; }).columnSpan; }), function():Dynamic return cast 1.0);
-    rowSpan = _Runtime.coalesce(({ final __structural1 = item; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var rowSpan:Null<Float>; }).rowSpan; }), function():Dynamic return cast 1.0);
+    columnSpan = _Runtime.coalesce(({ final __structural6 = item; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var columnSpan:Null<Float>; }).columnSpan; }), function():Dynamic return cast 1.0);
+    rowSpan = _Runtime.coalesce(({ final __structural7 = item; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var rowSpan:Null<Float>; }).rowSpan; }), function():Dynamic return cast 1.0);
     if ((cast ((cast ((cast ((cast ((cast column : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (column + columnSpan) : Float) > (cast _Runtime.field(_Runtime.field(container, 'columns'), 'length') : Float)) : Bool)) : Bool) || (cast ((cast (row + rowSpan) : Float) > (cast _Runtime.field(_Runtime.field(container, 'rows'), 'length') : Float)) : Bool)) : Bool)) {
       return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidItemStyle;
     }
@@ -71,7 +71,7 @@ class GridLayout {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast column : Float)) : Bool)) {
-        (x = cast ((x + (cast GridLayout.getGridTrackSize__gridLayout((cast tree), (cast intrinsicSizes), (cast parentIndex : Float), (cast container), (cast true : Bool), (cast i : Float), (cast availableWidth : Float), (cast columnGap : Float)) : Float)) : Dynamic));
+        (x = cast ((x + (cast GridLayout.getGridTrackSize__gridLayout(({ final __callArgument8:Dynamic = tree; __callArgument8; }), ({ final __callArgument9:Dynamic = intrinsicSizes; __callArgument9; }), (cast parentIndex : Float), ({ final __callArgument10:Dynamic = container; __callArgument10; }), (cast true : Bool), (cast i : Float), (cast availableWidth : Float), (cast columnGap : Float)) : Float)) : Dynamic));
         (x = cast ((x + columnGap) : Dynamic));
         i++;
       }
@@ -80,7 +80,7 @@ class GridLayout {
     {
       var i:Float = column;
       while ((cast ((cast i : Float) < (cast (column + columnSpan) : Float)) : Bool)) {
-        (width = cast ((width + (cast GridLayout.getGridTrackSize__gridLayout((cast tree), (cast intrinsicSizes), (cast parentIndex : Float), (cast container), (cast true : Bool), (cast i : Float), (cast availableWidth : Float), (cast columnGap : Float)) : Float)) : Dynamic));
+        (width = cast ((width + (cast GridLayout.getGridTrackSize__gridLayout(({ final __callArgument11:Dynamic = tree; __callArgument11; }), ({ final __callArgument12:Dynamic = intrinsicSizes; __callArgument12; }), (cast parentIndex : Float), ({ final __callArgument13:Dynamic = container; __callArgument13; }), (cast true : Bool), (cast i : Float), (cast availableWidth : Float), (cast columnGap : Float)) : Float)) : Dynamic));
         i++;
       }
     }
@@ -88,7 +88,7 @@ class GridLayout {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast row : Float)) : Bool)) {
-        (y = cast ((y + (cast GridLayout.getGridTrackSize__gridLayout((cast tree), (cast intrinsicSizes), (cast parentIndex : Float), (cast container), (cast false : Bool), (cast i : Float), (cast availableHeight : Float), (cast rowGap : Float)) : Float)) : Dynamic));
+        (y = cast ((y + (cast GridLayout.getGridTrackSize__gridLayout(({ final __callArgument14:Dynamic = tree; __callArgument14; }), ({ final __callArgument15:Dynamic = intrinsicSizes; __callArgument15; }), (cast parentIndex : Float), ({ final __callArgument16:Dynamic = container; __callArgument16; }), (cast false : Bool), (cast i : Float), (cast availableHeight : Float), (cast rowGap : Float)) : Float)) : Dynamic));
         (y = cast ((y + rowGap) : Dynamic));
         i++;
       }
@@ -97,7 +97,7 @@ class GridLayout {
     {
       var i:Float = row;
       while ((cast ((cast i : Float) < (cast (row + rowSpan) : Float)) : Bool)) {
-        (height = cast ((height + (cast GridLayout.getGridTrackSize__gridLayout((cast tree), (cast intrinsicSizes), (cast parentIndex : Float), (cast container), (cast false : Bool), (cast i : Float), (cast availableHeight : Float), (cast rowGap : Float)) : Float)) : Dynamic));
+        (height = cast ((height + (cast GridLayout.getGridTrackSize__gridLayout(({ final __callArgument17:Dynamic = tree; __callArgument17; }), ({ final __callArgument18:Dynamic = intrinsicSizes; __callArgument18; }), (cast parentIndex : Float), ({ final __callArgument19:Dynamic = container; __callArgument19; }), (cast false : Bool), (cast i : Float), (cast availableHeight : Float), (cast rowGap : Float)) : Float)) : Dynamic));
         i++;
       }
     }
@@ -118,7 +118,7 @@ class GridLayout {
     track = flighthq._internal._StaticIndex.readArray(tracks, trackIndex);
     if ((cast _Runtime.strictEquals((cast track : { var kind:String; }).kind, 'fixed') : Bool)) { return cast (cast track : { var kind:String; var size:Float; }).size; }
     if ((cast _Runtime.strictEquals((cast track : { var kind:String; }).kind, 'auto') : Bool)) {
-      return cast (cast GridLayout.getGridAutoTrackSize__gridLayout((cast tree), (cast intrinsicSizes), (cast parentIndex : Float), (cast container), (cast columns : Bool), (cast trackIndex : Float)) : Float);
+      return cast (cast GridLayout.getGridAutoTrackSize__gridLayout(({ final __callArgument20:Dynamic = tree; __callArgument20; }), ({ final __callArgument21:Dynamic = intrinsicSizes; __callArgument21; }), (cast parentIndex : Float), ({ final __callArgument22:Dynamic = container; __callArgument22; }), (cast columns : Bool), (cast trackIndex : Float)) : Float);
     }
     occupied = _Runtime.multiplyNumbers(gap, HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.field(tracks, 'length'), 1.0)));
     totalFraction = 0.0;
@@ -127,7 +127,7 @@ class GridLayout {
       while ((cast ((cast i : Float) < (cast _Runtime.field(tracks, 'length') : Float)) : Bool)) {
         var candidate:GridLayoutTrack = flighthq._internal._StaticIndex.readArray(tracks, i);
         if ((cast _Runtime.strictEquals((cast candidate : { var kind:String; }).kind, 'fixed') : Bool)) { (occupied = cast ((occupied + (cast candidate : { var kind:String; var size:Float; }).size) : Dynamic)); } else { if ((cast _Runtime.strictEquals((cast candidate : { var kind:String; }).kind, 'auto') : Bool)) {
-          (occupied = cast ((occupied + (cast GridLayout.getGridAutoTrackSize__gridLayout((cast tree), (cast intrinsicSizes), (cast parentIndex : Float), (cast container), (cast columns : Bool), (cast i : Float)) : Float)) : Dynamic));
+          (occupied = cast ((occupied + (cast GridLayout.getGridAutoTrackSize__gridLayout(({ final __callArgument23:Dynamic = tree; __callArgument23; }), ({ final __callArgument24:Dynamic = intrinsicSizes; __callArgument24; }), (cast parentIndex : Float), ({ final __callArgument25:Dynamic = container; __callArgument25; }), (cast columns : Bool), (cast i : Float)) : Float)) : Dynamic));
         } else { (totalFraction = cast ((totalFraction + (cast candidate : { var fraction:Float; var kind:String; }).fraction) : Dynamic)); } }
         i++;
       }
@@ -145,10 +145,10 @@ class GridLayout {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(tree, 'nodes'), 'length') : Float)) : Bool)) {
         var node:LayoutNode<flighthq._internal._Object, flighthq._internal._Object> = flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'nodes'), i);
-        if ((cast ((cast !_Runtime.strictEquals((cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).parentIndex, parentIndex) : Bool) || (cast !(cast (cast GridLayout.isGridLayoutItemStyle__gridLayout((cast (cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).itemStyle)) : Bool) : Bool) : Bool)) : Bool)) { i++; continue; }
+        if ((cast ((cast !_Runtime.strictEquals((cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).parentIndex, parentIndex) : Bool) || (cast !(cast (cast GridLayout.isGridLayoutItemStyle__gridLayout((cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).itemStyle) : Bool) : Bool) : Bool)) : Bool)) { i++; continue; }
         var item:Null<GridLayoutItemStyle> = (cast (cast node : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).itemStyle : Null<GridLayoutItemStyle>);
-        var start:Float = ((cast columns : Bool) ? (cast (cast GridLayout.getGridColumn__gridLayout((cast tree), (cast parentIndex : Float), (cast i : Float), (cast _Runtime.field(_Runtime.field(container, 'columns'), 'length') : Float)) : Float) : Dynamic) : (cast (cast GridLayout.getGridRow__gridLayout((cast tree), (cast parentIndex : Float), (cast i : Float), (cast _Runtime.field(_Runtime.field(container, 'columns'), 'length') : Float)) : Float) : Dynamic));
-        var span:Float = ((cast columns : Bool) ? (cast _Runtime.coalesce(({ final __structural2 = item; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var columnSpan:Null<Float>; }).columnSpan; }), function():Dynamic return cast 1.0) : Dynamic) : (cast _Runtime.coalesce(({ final __structural3 = item; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var rowSpan:Null<Float>; }).rowSpan; }), function():Dynamic return cast 1.0) : Dynamic));
+        var start:Float = ((cast columns : Bool) ? (cast (cast GridLayout.getGridColumn__gridLayout(({ final __callArgument26:Dynamic = tree; __callArgument26; }), (cast parentIndex : Float), (cast i : Float), (cast _Runtime.field(_Runtime.field(container, 'columns'), 'length') : Float)) : Float) : Dynamic) : (cast (cast GridLayout.getGridRow__gridLayout(({ final __callArgument27:Dynamic = tree; __callArgument27; }), (cast parentIndex : Float), (cast i : Float), (cast _Runtime.field(_Runtime.field(container, 'columns'), 'length') : Float)) : Float) : Dynamic));
+        var span:Float = ((cast columns : Bool) ? (cast _Runtime.coalesce(({ final __structural28 = item; __structural28 == null ? _Runtime.UNDEFINED : (cast __structural28 : { @:optional var columnSpan:Null<Float>; }).columnSpan; }), function():Dynamic return cast 1.0) : Dynamic) : (cast _Runtime.coalesce(({ final __structural29 = item; __structural29 == null ? _Runtime.UNDEFINED : (cast __structural29 : { @:optional var rowSpan:Null<Float>; }).rowSpan; }), function():Dynamic return cast 1.0) : Dynamic));
         if ((cast ((cast ((cast trackIndex : Float) < (cast start : Float)) : Bool) || (cast ((cast trackIndex : Float) >= (cast (start + span) : Float)) : Bool)) : Bool)) { i++; continue; }
         var autoTracksInSpan:Float = 0.0;
         {
@@ -171,16 +171,16 @@ class GridLayout {
   public static function getGridColumn__gridLayout(tree:LayoutTree, parentIndex:Float, childIndex:Float, columnCount:Float):Float {
     var item:Null<GridLayoutItemStyle> = cast _Runtime.UNDEFINED;
     item = (cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'nodes'), childIndex) : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).itemStyle : Null<GridLayoutItemStyle>);
-    if ((cast !_Runtime.strictEquals(({ final __structural4 = item; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var column:Null<Float>; }).column; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.field(item, 'column'); }
-    return cast _Runtime.fmod((cast GridLayout.getGridOrdinal__gridLayout((cast tree), (cast parentIndex : Float), (cast childIndex : Float)) : Float), columnCount);
+    if ((cast !_Runtime.strictEquals(({ final __structural30 = item; __structural30 == null ? _Runtime.UNDEFINED : (cast __structural30 : { @:optional var column:Null<Float>; }).column; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.field(item, 'column'); }
+    return cast _Runtime.fmod((cast GridLayout.getGridOrdinal__gridLayout(({ final __callArgument31:Dynamic = tree; __callArgument31; }), (cast parentIndex : Float), (cast childIndex : Float)) : Float), columnCount);
     return cast null;
   }
 
   public static function getGridRow__gridLayout(tree:LayoutTree, parentIndex:Float, childIndex:Float, columnCount:Float):Float {
     var item:Null<GridLayoutItemStyle> = cast _Runtime.UNDEFINED;
     item = (cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'nodes'), childIndex) : LayoutNode<flighthq._internal._Object, flighthq._internal._Object>).itemStyle : Null<GridLayoutItemStyle>);
-    if ((cast !_Runtime.strictEquals(({ final __structural5 = item; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var row:Null<Float>; }).row; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.field(item, 'row'); }
-    return cast HxMath.floor(((cast GridLayout.getGridOrdinal__gridLayout((cast tree), (cast parentIndex : Float), (cast childIndex : Float)) : Float) / columnCount));
+    if ((cast !_Runtime.strictEquals(({ final __structural32 = item; __structural32 == null ? _Runtime.UNDEFINED : (cast __structural32 : { @:optional var row:Null<Float>; }).row; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.field(item, 'row'); }
+    return cast HxMath.floor(((cast GridLayout.getGridOrdinal__gridLayout(({ final __callArgument33:Dynamic = tree; __callArgument33; }), (cast parentIndex : Float), (cast childIndex : Float)) : Float) / columnCount));
     return cast null;
   }
 

@@ -26,27 +26,27 @@ class GlBlendEffect {
     var opacity:Float = cast _Runtime.UNDEFINED;
     var hasBackdrop:Bool = cast _Runtime.UNDEFINED;
     var inputs:Array<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
-    backdrop = (cast getGlBlendEffectBackdrop((cast state), (cast _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null))) : Null<flighthq._internal.dom.WebGLTexture>);
-    program = (cast getGlEffectProgram((cast state), (cast 'blend.advanced' : String), (cast BLEND_FRAGMENT_SRC : String)) : GlFullscreenProgram);
+    backdrop = (cast getGlBlendEffectBackdrop(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null); __callArgument1; })) : Null<flighthq._internal.dom.WebGLTexture>);
+    program = (cast getGlEffectProgram(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast 'blend.advanced' : String), (cast BLEND_FRAGMENT_SRC : String)) : GlFullscreenProgram);
     modeIndex = (cast getBlendEffectModeIndex((cast _Runtime.field(effect, 'mode') : String)) : Float);
     opacity = _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 1.0);
     hasBackdrop = !_Runtime.strictEquals(backdrop, null);
     inputs = (cast cast ([_Runtime.field(source, 'texture'), ((cast hasBackdrop : Bool) ? (cast (cast backdrop : flighthq._internal.dom.WebGLTexture) : Dynamic) : (cast _Runtime.field(source, 'texture') : Dynamic))] : Array<Dynamic>));
-    drawGlFullscreenPass((cast state), (cast program), (cast inputs), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = program; __callArgument4; }), ({ final __callArgument5:Dynamic = inputs; __callArgument5; }), ({ final __callArgument6:Dynamic = dest; __callArgument6; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       var modeLoc:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
       var opacityLoc:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
       var hasBackdropLoc:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
-      modeLoc = (cast getGlEffectUniformLocation((cast state), (cast p), (cast 'u_mode' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>);
-      opacityLoc = (cast getGlEffectUniformLocation((cast state), (cast p), (cast 'u_opacity' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>);
-      hasBackdropLoc = (cast getGlEffectUniformLocation((cast state), (cast p), (cast 'u_hasBackdrop' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>);
+      modeLoc = (cast getGlEffectUniformLocation(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = p; __callArgument8; }), (cast 'u_mode' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>);
+      opacityLoc = (cast getGlEffectUniformLocation(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = p; __callArgument10; }), (cast 'u_opacity' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>);
+      hasBackdropLoc = (cast getGlEffectUniformLocation(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = p; __callArgument12; }), (cast 'u_hasBackdrop' : String)) : Null<flighthq._internal.dom.WebGLUniformLocation>);
       if ((cast !_Runtime.strictEquals(modeLoc, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, modeLoc, modeIndex); }
       if ((cast !_Runtime.strictEquals(opacityLoc, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1f(gl, opacityLoc, opacity); }
       if ((cast !_Runtime.strictEquals(hasBackdropLoc, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, hasBackdropLoc, ((cast hasBackdrop : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic))); }
-    }));
+    } : Dynamic));
   }
 
   public static final defaultGlBlendEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyBlendEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : BlendEffect)));
+    applyBlendEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : BlendEffect));
   });
 
   @:noCompletion
@@ -58,12 +58,12 @@ class GlBlendEffect {
   @:noCompletion
   public static function getGlBlendEffectBackdrop(state:GlRenderState, backdropKey:Null<String>):Null<flighthq._internal.dom.WebGLTexture> {
     if ((cast _Runtime.strictEquals(backdropKey, null) : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast GlBlendEffect._backdrops__glBlendEffect : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, flighthq._internal.dom.WebGLTexture>>).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, flighthq._internal.dom.WebGLTexture>).get(backdropKey)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection13:Dynamic = ((cast GlBlendEffect._backdrops__glBlendEffect : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, flighthq._internal.dom.WebGLTexture>>).get(state)); __collection13 == null ? _Runtime.UNDEFINED : ((cast __collection13 : flighthq._internal._Map<String, flighthq._internal.dom.WebGLTexture>).get(backdropKey)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerGlBlendEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state), (cast 'BlendEffect' : String), (cast defaultGlBlendEffectRunner));
+    registerGlRenderEffect(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast 'BlendEffect' : String), ({ final __callArgument15:Dynamic = defaultGlBlendEffectRunner; __callArgument15; }));
   }
 
   public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:flighthq._internal.dom.WebGLTexture):Void {
@@ -78,7 +78,7 @@ class GlBlendEffect {
 
   @:noCompletion
   public static function unregisterGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String):Bool {
-    return cast _Runtime.coalesce(({ final __collection1:Dynamic = ((cast GlBlendEffect._backdrops__glBlendEffect : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, flighthq._internal.dom.WebGLTexture>>).get(state)); __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, flighthq._internal.dom.WebGLTexture>).delete_(backdropKey)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection16:Dynamic = ((cast GlBlendEffect._backdrops__glBlendEffect : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, flighthq._internal.dom.WebGLTexture>>).get(state)); __collection16 == null ? _Runtime.UNDEFINED : ((cast __collection16 : flighthq._internal._Map<String, flighthq._internal.dom.WebGLTexture>).delete_(backdropKey)); }), function():Dynamic return cast false);
     return cast null;
   }
 

@@ -77,7 +77,7 @@ class BitmapDissolve {
       flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast destData : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sourceData : flighthq._internal._UInt8ClampedArray), (cast (si + 2.0) : Float)) : Float));
       flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast destData : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sourceData : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float)) : Float));
     }
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
     return cast cursor;
     return cast null;
   }

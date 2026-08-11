@@ -33,7 +33,7 @@ class CanvasSourceModeCompositing {
 
   public static function compositeCanvasSourceMode(dest:CanvasRenderTarget, source:CanvasRenderTarget, sourceMode:CanvasEffectSourceMode):Void {
     if ((cast _Runtime.strictEquals(sourceMode, 'hide') : Bool)) { return; }
-    compositeCanvasImage((cast dest), (cast source), (cast 0.0 : Float), (cast 0.0 : Float), (cast ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool) ? (cast 'destination-out' : Dynamic) : (cast 'source-over' : Dynamic)) : flighthq._internal._Any));
+    compositeCanvasImage(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool) ? (cast 'destination-out' : Dynamic) : (cast 'source-over' : Dynamic)) : flighthq._internal._Any));
   }
 
   public static function drawCanvasInvertedTintedAlphaMask(dest:CanvasRenderTarget, source:CanvasRenderTarget, color:Float, alpha:Float, strength:Float, offsetX:Float = 0.0, offsetY:Float = 0.0):Void {

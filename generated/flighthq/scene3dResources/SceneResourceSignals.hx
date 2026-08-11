@@ -18,7 +18,7 @@ import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverR
 class SceneResourceSignals {
   @:noCompletion
   public static function createScene3DResourceSignals():Scene3DResourceSignals {
-    return cast (cast createEntity((cast { onResourceFailed: (cast createSignal() : Signal<Scene3DResourceEvent->Void>), onResourceResolved: (cast createSignal() : Signal<Scene3DResourceEvent->Void>) })) : { >Entity, var onResourceFailed:Signal<Scene3DResourceEvent->Void>; var onResourceResolved:Signal<Scene3DResourceEvent->Void>; });
+    return cast (cast createEntity((cast { onResourceFailed: (cast createSignal() : Signal<Scene3DResourceEvent->Void>), onResourceResolved: (cast createSignal() : Signal<Scene3DResourceEvent->Void>) } : Dynamic)) : { >Entity, var onResourceFailed:Signal<Scene3DResourceEvent->Void>; var onResourceResolved:Signal<Scene3DResourceEvent->Void>; });
     return cast null;
   }
 

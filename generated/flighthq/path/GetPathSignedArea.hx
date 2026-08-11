@@ -10,9 +10,9 @@ class GetPathSignedArea {
   public static function getPathContourOrientation(path:Path, tolerance:Float = 0.25):String {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var area:Float = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath((cast path), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument0:Dynamic = path; __callArgument0; }), (cast tolerance : Float)) : Array<Array<Float>>);
     if ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool)) { return cast 'degenerate'; }
-    area = (cast GetPathSignedArea.shoelaceArea__getPathSignedArea((cast flighthq._internal._StaticIndex.readArray(contours, 0.0))) : Float);
+    area = (cast GetPathSignedArea.shoelaceArea__getPathSignedArea(flighthq._internal._StaticIndex.readArray(contours, 0.0)) : Float);
     if ((cast ((cast area : Float) > (cast 0.0 : Float)) : Bool)) { return cast 'ccw'; }
     if ((cast ((cast area : Float) < (cast 0.0 : Float)) : Bool)) { return cast 'cw'; }
     return cast 'degenerate';
@@ -22,12 +22,12 @@ class GetPathSignedArea {
   public static function getPathSignedArea(path:Path, tolerance:Float = 0.25):Float {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var total:Float = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath((cast path), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument1:Dynamic = path; __callArgument1; }), (cast tolerance : Float)) : Array<Array<Float>>);
     total = 0.0;
     {
       var ci:Float = 0.0;
       while ((cast ((cast ci : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        (total = cast ((total + (cast GetPathSignedArea.shoelaceArea__getPathSignedArea((cast flighthq._internal._StaticIndex.readArray(contours, ci))) : Float)) : Dynamic));
+        (total = cast ((total + (cast GetPathSignedArea.shoelaceArea__getPathSignedArea(flighthq._internal._StaticIndex.readArray(contours, ci)) : Float)) : Dynamic));
         ci++;
       }
     }

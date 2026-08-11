@@ -19,17 +19,17 @@ class SceneNodeAppearance {
     var parentWorldAlpha:Float = cast _Runtime.UNDEFINED;
     var parentWorldAppearanceId:Float = cast _Runtime.UNDEFINED;
     var appearanceId:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getNode3DRuntime((cast source)) : Node3DRuntime);
+    runtime = (cast getNode3DRuntime(({ final __callArgument0:Dynamic = source; __callArgument0; })) : Node3DRuntime);
     parent = (cast (cast runtime : { var parent:Null<Node<Node3DTraits>>; }).parent : Null<Node3D>);
     parentWorldAlpha = 1.0;
     parentWorldAppearanceId = 0.0;
     if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
-      ensureNode3DWorldAlpha((cast parent));
-      var parentRuntime:Node3DRuntime = (cast getNode3DRuntime((cast parent)) : Node3DRuntime);
+      ensureNode3DWorldAlpha(({ final __callArgument1:Dynamic = parent; __callArgument1; }));
+      var parentRuntime:Node3DRuntime = (cast getNode3DRuntime(({ final __callArgument2:Dynamic = parent; __callArgument2; })) : Node3DRuntime);
       (parentWorldAlpha = cast ((cast parentRuntime : { var worldAlpha:Null<Float>; }).worldAlpha : Dynamic));
       (parentWorldAppearanceId = cast ((cast parentRuntime : { var worldAppearanceId:Float; }).worldAppearanceId : Dynamic));
     }
-    appearanceId = (cast getNodeAppearanceRevision((cast source)) : Float);
+    appearanceId = (cast getNodeAppearanceRevision((cast source : Dynamic)) : Float);
     if ((cast ((cast ((cast _Runtime.strictEquals((cast runtime : { var worldAlpha:Null<Float>; }).worldAlpha, null) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var worldAlphaUsingAppearanceId:Float; }).worldAlphaUsingAppearanceId, appearanceId) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var worldAlphaUsingParentAppearanceId:Float; }).worldAlphaUsingParentAppearanceId, parentWorldAppearanceId) : Bool)) : Bool)) {
       ((cast runtime : { var worldAlpha:Null<Float>; }).worldAlpha = (parentWorldAlpha * source.alpha));
       ((cast runtime : { var worldAlphaUsingAppearanceId:Float; }).worldAlphaUsingAppearanceId = appearanceId);
@@ -41,14 +41,14 @@ class SceneNodeAppearance {
   }
 
   public static function getNode3DWorldAlpha(source:Node3D):Float {
-    ensureNode3DWorldAlpha((cast source));
-    return cast _Runtime.coalesce((cast (cast getNode3DRuntime((cast source)) : Node3DRuntime) : { var worldAlpha:Null<Float>; }).worldAlpha, function():Dynamic return cast 1.0);
+    ensureNode3DWorldAlpha(({ final __callArgument3:Dynamic = source; __callArgument3; }));
+    return cast _Runtime.coalesce((cast (cast getNode3DRuntime(({ final __callArgument4:Dynamic = source; __callArgument4; })) : Node3DRuntime) : { var worldAlpha:Null<Float>; }).worldAlpha, function():Dynamic return cast 1.0);
     return cast null;
   }
 
   public static function setNode3DAlpha(source:Node3D, alpha:Float):Void {
     (source.alpha = cast (alpha : Dynamic));
-    invalidateNodeAppearance((cast source));
+    invalidateNodeAppearance((cast source : Dynamic));
   }
 
   public static var _worldAppearanceRevisionCounter__sceneNodeAppearance:Float = 0.0;

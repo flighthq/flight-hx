@@ -47,7 +47,7 @@ class Follow {
       (nextY = cast (goalY : Dynamic));
     }
     if (_Runtime.truthy(worldBounds)) {
-      getCamera2DVisibleBounds((cast camera), (cast Follow.scratchBounds__follow));
+      getCamera2DVisibleBounds(({ final __callArgument4:Dynamic = camera; __callArgument4; }), ({ final __callArgument5:Dynamic = Follow.scratchBounds__follow; __callArgument5; }));
       var halfVisW:Float = ((cast Follow.scratchBounds__follow : Rectangle).width * 0.5);
       var halfVisH:Float = ((cast Follow.scratchBounds__follow : Rectangle).height * 0.5);
       if ((cast ((cast _Runtime.field(worldBounds, 'width') : Float) <= (cast (cast Follow.scratchBounds__follow : Rectangle).width : Float)) : Bool)) {
@@ -65,5 +65,5 @@ class Follow {
     (camera.y = cast (nextY : Dynamic));
   }
 
-  public static final scratchBounds__follow:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
+  public static final scratchBounds__follow:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);
 }

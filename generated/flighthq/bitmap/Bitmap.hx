@@ -172,7 +172,7 @@ class Bitmap {
   }
 
   public static function cloneBitmap(source:flighthq.types.Bitmap):flighthq.types.Bitmap {
-    return cast (cast createEntity((cast { alphaType: source.alphaType, gamut: source.gamut, data: new flighthq._internal._UInt8ClampedArray(source.data), format: source.format, height: source.height, kind: source.kind, version: 0.0, width: source.width })) : { >Entity, var alphaType:AlphaType; var gamut:String; var data:flighthq._internal._UInt8ClampedArray; var format:PixelFormat; var height:Float; var kind:String; var version:Float; var width:Float; });
+    return cast (cast createEntity((cast { alphaType: source.alphaType, gamut: source.gamut, data: new flighthq._internal._UInt8ClampedArray(source.data), format: source.format, height: source.height, kind: source.kind, version: 0.0, width: source.width } : Dynamic)) : { >Entity, var alphaType:AlphaType; var gamut:String; var data:flighthq._internal._UInt8ClampedArray; var format:PixelFormat; var height:Float; var kind:String; var version:Float; var width:Float; });
     return cast null;
   }
 
@@ -243,7 +243,7 @@ class Bitmap {
       }
     }
     (out.alphaType = cast (target : Dynamic));
-    invalidateBitmap((cast out));
+    invalidateBitmap(({ final __callArgument0:Dynamic = out; __callArgument0; }));
   }
 
   public static function convertBitmapPixelOrder(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, length:Float, from:PixelOrder, to:PixelOrder):Void {
@@ -285,7 +285,7 @@ class Bitmap {
         }
       }
     }
-    return cast (cast createEntity((cast { alphaType: 'straight', gamut: 'srgb', data: data, format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width })) : { >Entity, var alphaType:String; var gamut:String; var data:flighthq._internal._UInt8ClampedArray; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument1:Dynamic = { alphaType: 'straight', gamut: 'srgb', data: data, format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width }; __callArgument1; })) : { >Entity, var alphaType:String; var gamut:String; var data:flighthq._internal._UInt8ClampedArray; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; });
     return cast null;
   }
 

@@ -20,7 +20,7 @@ import flighthq.types.GlyphSource.GlyphRasterizerBackend;
 
 class Font {
   public static function createFont(name:String):flighthq.types.Font {
-    return cast (cast createEntity((cast { name: name })) : { >Entity, var name:String; });
+    return cast (cast createEntity(({ final __callArgument0:Dynamic = { name: name }; __callArgument0; })) : { >Entity, var name:String; });
     return cast null;
   }
 

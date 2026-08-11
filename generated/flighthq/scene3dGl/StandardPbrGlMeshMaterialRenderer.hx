@@ -34,17 +34,17 @@ class StandardPbrGlMeshMaterialRenderer {
     var program:GlPbrProgram = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     pbr = (cast material : Null<StandardPbrMaterial>);
-    program = (cast ensureGlPbrProgram((cast state), (cast (cast buildGlPbrStandardDefineKey((cast state), (cast pbr), (cast pbr)) : GlPbrDefineKey)), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : GlPbrProgram);
-    beginGlMeshDraw((cast state), (cast program), (cast ((cast !_Runtime.strictEquals(pbr, null) : Bool) && (cast _Runtime.field(pbr, 'doubleSided') : Bool)) : Bool));
-    setGlMeshViewProjection((cast state), (cast (cast program : GlPbrProgram).locViewProjection), (cast camera));
-    setGlMeshCameraPosition((cast gl), (cast (cast program : GlPbrProgram).locCameraPosition), (cast camera));
-    bindGlMeshLightBlock((cast state), (cast program), (cast lights));
-    bindGlPbrStandardBlock((cast state), (cast program), (cast pbr));
+    program = (cast ensureGlPbrProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast buildGlPbrStandardDefineKey(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast pbr : Dynamic), (cast pbr : Dynamic)) : GlPbrDefineKey), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : GlPbrProgram);
+    beginGlMeshDraw(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), (cast ((cast !_Runtime.strictEquals(pbr, null) : Bool) && (cast _Runtime.field(pbr, 'doubleSided') : Bool)) : Bool));
+    setGlMeshViewProjection(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast program : GlPbrProgram).locViewProjection, ({ final __callArgument5:Dynamic = camera; __callArgument5; }));
+    setGlMeshCameraPosition(({ final __callArgument6:Dynamic = gl; __callArgument6; }), (cast program : GlPbrProgram).locCameraPosition, ({ final __callArgument7:Dynamic = camera; __callArgument7; }));
+    bindGlMeshLightBlock(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), ({ final __callArgument10:Dynamic = lights; __callArgument10; }));
+    bindGlPbrStandardBlock(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = program; __callArgument12; }), (cast pbr : Dynamic));
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast program : GlPbrProgram).locAlphaCutoff, ((cast !_Runtime.strictEquals(pbr, null) : Bool) ? (cast _Runtime.field(pbr, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset((cast state), (cast program), (cast proxy), (cast geometry));
+    drawGlMeshSubset(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = program; __callArgument15; }), ({ final __callArgument16:Dynamic = proxy; __callArgument16; }), ({ final __callArgument17:Dynamic = geometry; __callArgument17; }));
   } });
 }

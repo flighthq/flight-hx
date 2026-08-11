@@ -13,7 +13,7 @@ import flighthq.types.Signal;
 class Clock {
   public static function addClockChild(parent:flighthq.types.Clock, child:flighthq.types.Clock):Void {
     if ((cast _Runtime.strictEquals((cast child : flighthq.types.Clock).parent, parent) : Bool)) { return; }
-    if ((cast !_Runtime.strictEquals((cast child : flighthq.types.Clock).parent, null) : Bool)) { removeClockChild((cast (cast child : flighthq.types.Clock).parent), (cast child)); }
+    if ((cast !_Runtime.strictEquals((cast child : flighthq.types.Clock).parent, null) : Bool)) { removeClockChild((cast child : flighthq.types.Clock).parent, ({ final __callArgument0:Dynamic = child; __callArgument0; })); }
     ((cast child : flighthq.types.Clock).parent = parent);
     _Runtime.callProperty((cast parent : flighthq.types.Clock).children, 'push', cast ([child] : Array<Dynamic>));
   }
@@ -29,7 +29,7 @@ class Clock {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        advanceClock((cast flighthq._internal._StaticIndex.readArray(children, i)), (cast scaledDelta : Float));
+        advanceClock(flighthq._internal._StaticIndex.readArray(children, i), (cast scaledDelta : Float));
         i++;
       }
     }
@@ -37,20 +37,20 @@ class Clock {
 
   public static function createChildClock(parent:flighthq.types.Clock, ?options:ClockOptions):flighthq.types.Clock {
     var child:flighthq.types.Clock = cast _Runtime.UNDEFINED;
-    child = (cast createClock((cast options)) : flighthq.types.Clock);
-    addClockChild((cast parent), (cast child));
+    child = (cast createClock(({ final __callArgument1:Dynamic = options; __callArgument1; })) : flighthq.types.Clock);
+    addClockChild(({ final __callArgument2:Dynamic = parent; __callArgument2; }), ({ final __callArgument3:Dynamic = child; __callArgument3; }));
     return cast child;
     return cast null;
   }
 
   public static function createClock(?options:ClockOptions):flighthq.types.Clock {
-    return cast { scale: _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var scale:Null<Float>; }).scale; }), function():Dynamic return cast 1.0), paused: _Runtime.coalesce(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var paused:Null<Bool>; }).paused; }), function():Dynamic return cast false), deltaTime: 0.0, elapsed: 0.0, parent: null, children: cast ([] : Array<Dynamic>), onTick: null };
+    return cast { scale: _Runtime.coalesce(({ final __structural4 = options; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var scale:Null<Float>; }).scale; }), function():Dynamic return cast 1.0), paused: _Runtime.coalesce(({ final __structural5 = options; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var paused:Null<Bool>; }).paused; }), function():Dynamic return cast false), deltaTime: 0.0, elapsed: 0.0, parent: null, children: cast ([] : Array<Dynamic>), onTick: null };
     return cast null;
   }
 
   public static function disposeClock(clock:flighthq.types.Clock):Void {
     var children:Array<flighthq.types.Clock> = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals((cast clock : flighthq.types.Clock).parent, null) : Bool)) { removeClockChild((cast (cast clock : flighthq.types.Clock).parent), (cast clock)); }
+    if ((cast !_Runtime.strictEquals((cast clock : flighthq.types.Clock).parent, null) : Bool)) { removeClockChild((cast clock : flighthq.types.Clock).parent, ({ final __callArgument6:Dynamic = clock; __callArgument6; })); }
     children = (cast clock : flighthq.types.Clock).children;
     {
       var i:Float = 0.0;
@@ -60,7 +60,7 @@ class Clock {
       }
     }
     _Runtime.setLength(children, 0.0);
-    if ((cast !_Runtime.strictEquals((cast clock : flighthq.types.Clock).onTick, null) : Bool)) { clearSignal((cast (cast clock : flighthq.types.Clock).onTick)); }
+    if ((cast !_Runtime.strictEquals((cast clock : flighthq.types.Clock).onTick, null) : Bool)) { clearSignal((cast (cast clock : flighthq.types.Clock).onTick : Dynamic)); }
   }
 
   public static function enableClockSignals(clock:flighthq.types.Clock):Signal<Float->Void> {

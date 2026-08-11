@@ -18,7 +18,7 @@ class TransformConstraint2D {
   public static final MATRIX_STRIDE__transformConstraint2D:Float = 6.0;
 
   public static function registerSkeleton2DTransformConstraintSolver():Void {
-    registerSkeleton2DConstraintSolver((cast (cast Skeleton2DConstraintKindValue : { var Ik:String; var Path:String; var Transform:String; }).Transform : String), (cast solveSkeleton2DTransformConstraint));
+    registerSkeleton2DConstraintSolver((cast (cast Skeleton2DConstraintKindValue : { var Ik:String; var Path:String; var Transform:String; }).Transform : String), ({ final __callArgument0:Dynamic = solveSkeleton2DTransformConstraint; __callArgument0; }));
   }
 
   @:noCompletion
@@ -79,13 +79,13 @@ class TransformConstraint2D {
       if ((cast ((cast !_Runtime.strictEquals(translateXMix, 0.0) : Bool) || (cast !_Runtime.strictEquals(translateYMix, 0.0) : Bool)) : Bool)) {
         var wantedX:Float = (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 4.0) : Float)) + ((_Runtime.addNumbers(targetX, _Runtime.field(transform, 'offsetX')) - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 4.0) : Float))) * translateXMix));
         var wantedY:Float = (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 5.0) : Float)) + ((_Runtime.addNumbers(targetY, _Runtime.field(transform, 'offsetY')) - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 5.0) : Float))) * translateYMix));
-        var local:Null<{ var x:Float; var y:Float; }> = (cast TransformConstraint2D.toSkeleton2DParentSpace__transformConstraint2D((cast skeleton), (cast boneIndex : Float), (cast wantedX : Float), (cast wantedY : Float)) : Null<{ var x:Float; var y:Float; }>);
+        var local:Null<{ var x:Float; var y:Float; }> = (cast TransformConstraint2D.toSkeleton2DParentSpace__transformConstraint2D(({ final __callArgument3:Dynamic = skeleton; __callArgument3; }), (cast boneIndex : Float), (cast wantedX : Float), (cast wantedY : Float)) : Null<{ var x:Float; var y:Float; }>);
         if ((cast !_Runtime.strictEquals(local, null) : Bool)) {
           ((cast bone : Bone2D).x = (cast local : { var x:Float; var y:Float; }).x);
           ((cast bone : Bone2D).y = (cast local : { var x:Float; var y:Float; }).y);
         }
       }
-      computeSkeleton2DBoneWorldTransform((cast skeleton), (cast boneIndex : Float));
+      computeSkeleton2DBoneWorldTransform(({ final __callArgument4:Dynamic = skeleton; __callArgument4; }), (cast boneIndex : Float));
     }
   }
 

@@ -34,7 +34,7 @@ class CapacitorDialog {
       }));
     }, message: function(options:MessageDialogOptions):flighthq._internal._Promise<MessageDialogResult> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.flatMap((cast dialog : CapacitorDialogPlugin).alert((cast { title: options.title, message: options.message })), function(__awaitValue0:Dynamic):Dynamic {
+        return flighthq._internal._Async.flatMap((cast dialog : CapacitorDialogPlugin).alert(({ final __callArgument1:Dynamic = { title: options.title, message: options.message }; __callArgument1; })), function(__awaitValue0:Dynamic):Dynamic {
           __awaitValue0;
           return flighthq._internal._Async.resolve({ buttonIndex: 0.0, cancelled: false, checkboxChecked: false });
         });
@@ -42,16 +42,16 @@ class CapacitorDialog {
     }, confirm: function(options:MessageDialogOptions):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var result:CapacitorDialogConfirmResult = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast dialog : CapacitorDialogPlugin).confirm((cast { title: options.title, message: options.message })), function(__awaitValue1:Dynamic):Dynamic {
-          result = __awaitValue1;
+        return flighthq._internal._Async.flatMap((cast dialog : CapacitorDialogPlugin).confirm(({ final __callArgument3:Dynamic = { title: options.title, message: options.message }; __callArgument3; })), function(__awaitValue2:Dynamic):Dynamic {
+          result = __awaitValue2;
           return flighthq._internal._Async.resolve((cast result : CapacitorDialogConfirmResult).value);
         });
       }));
     }, prompt: function(options:PromptDialogOptions):flighthq._internal._Promise<Null<String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var result:CapacitorDialogPromptResult = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast dialog : CapacitorDialogPlugin).prompt((cast { title: options.title, message: options.message, inputText: options.defaultValue, inputPlaceholder: options.placeholder })), function(__awaitValue2:Dynamic):Dynamic {
-          result = __awaitValue2;
+        return flighthq._internal._Async.flatMap((cast dialog : CapacitorDialogPlugin).prompt(({ final __callArgument5:Dynamic = { title: options.title, message: options.message, inputText: options.defaultValue, inputPlaceholder: options.placeholder }; __callArgument5; })), function(__awaitValue4:Dynamic):Dynamic {
+          result = __awaitValue4;
           return flighthq._internal._Async.resolve(((cast (cast result : CapacitorDialogPromptResult).cancelled : Bool) ? (cast null : Dynamic) : (cast (cast result : CapacitorDialogPromptResult).value : Dynamic)));
         });
       }));

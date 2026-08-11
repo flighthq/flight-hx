@@ -15,5 +15,5 @@ class TweenManager {
   }
 
   @:noCompletion
-  public static final defaultManager:flighthq.types.TweenManager = (cast createTweenManager(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : flighthq.types.TweenManager);
+  public static final defaultManager:flighthq.types.TweenManager = (cast createTweenManager(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq.types.TweenManager);
 }

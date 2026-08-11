@@ -19,14 +19,14 @@ class SpatialQuery {
     var worldBounds:Rectangle = cast _Runtime.UNDEFINED;
     var children:Null<Array<Node<Node2DTraits>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast root : { var enabled:Bool; }).enabled : Bool) : Bool)) { return cast out; }
-    worldBounds = (cast getNodeWorldBoundsRectangle((cast root)) : Rectangle);
-    if ((cast (cast intersectsRectangle((cast worldBounds), (cast rect)) : Bool) : Bool)) {
+    worldBounds = (cast getNodeWorldBoundsRectangle((cast root : Dynamic)) : Rectangle);
+    if ((cast (cast intersectsRectangle(({ final __callArgument0:Dynamic = worldBounds; __callArgument0; }), ({ final __callArgument1:Dynamic = rect; __callArgument1; })) : Bool) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([root] : Array<Dynamic>));
     }
-    children = _Runtime.field((cast getNodeRuntime((cast root)) : NodeRuntime<Node2DTraits>), 'children');
+    children = _Runtime.field((cast getNodeRuntime((cast root : Dynamic)) : NodeRuntime<Node2DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        (cast hitTestAreaQuery((cast (cast child : Node2D)), (cast rect), (cast out)) : Array<Node2D>);
+        (cast hitTestAreaQuery((cast child : Node2D), ({ final __callArgument4:Dynamic = rect; __callArgument4; }), ({ final __callArgument5:Dynamic = out; __callArgument5; })) : Array<Node2D>);
       }
     }
     return cast out;
@@ -42,7 +42,7 @@ class SpatialQuery {
     var dy:Float = cast _Runtime.UNDEFINED;
     var children:Null<Array<Node<Node2DTraits>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast root : { var enabled:Bool; }).enabled : Bool) : Bool)) { return cast out; }
-    b = (cast getNodeWorldBoundsRectangle((cast root)) : Rectangle);
+    b = (cast getNodeWorldBoundsRectangle((cast root : Dynamic)) : Rectangle);
     nearX = HxMath.max(_Runtime.field(b, 'x'), HxMath.min(cx, _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.field(b, 'width'))));
     nearY = HxMath.max(_Runtime.field(b, 'y'), HxMath.min(cy, _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.field(b, 'height'))));
     dx = (cx - nearX);
@@ -50,10 +50,10 @@ class SpatialQuery {
     if ((cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast (radius * radius) : Float)) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([root] : Array<Dynamic>));
     }
-    children = _Runtime.field((cast getNodeRuntime((cast root)) : NodeRuntime<Node2DTraits>), 'children');
+    children = _Runtime.field((cast getNodeRuntime((cast root : Dynamic)) : NodeRuntime<Node2DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        (cast hitTestAreaQueryCircle((cast (cast child : Node2D)), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast out)) : Array<Node2D>);
+        (cast hitTestAreaQueryCircle((cast child : Node2D), (cast cx : Float), (cast cy : Float), (cast radius : Float), ({ final __callArgument8:Dynamic = out; __callArgument8; })) : Array<Node2D>);
       }
     }
     return cast out;

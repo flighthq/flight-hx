@@ -7,14 +7,14 @@ import flighthq.font.FontShorthand.getFontShorthand;
 
 class FontStatus {
   public static function isFontLoaded(family:String, ?style:String):Bool {
-    return cast (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts') : flighthq._internal.dom.FontFaceSet).check((cast getFontShorthand((cast family : String), (cast style)) : String));
+    return cast (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts') : flighthq._internal.dom.FontFaceSet).check((cast getFontShorthand((cast family : String), ({ final __callArgument0:Dynamic = style; __callArgument0; })) : String));
     return cast null;
   }
 
   public static function whenFontsReady():flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      return flighthq._internal._Async.flatMap((cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts') : flighthq._internal.dom.FontFaceSet).ready, function(__awaitValue0:Dynamic):Dynamic {
-        __awaitValue0;
+      return flighthq._internal._Async.flatMap((cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts') : flighthq._internal.dom.FontFaceSet).ready, function(__awaitValue1:Dynamic):Dynamic {
+        __awaitValue1;
         return flighthq._internal._Async.resolve(_Runtime.UNDEFINED);
       });
     }));

@@ -33,7 +33,7 @@ class WgpuScene3DRuntime {
 
   @:noCompletion
   public static function getWgpuSkinningAdapter(state:WgpuRenderState):Null<WgpuSkinningAdapter> {
-    return cast (cast (cast (cast getWgpuScene3DRuntime((cast state)) : flighthq.types.WgpuScene3DRuntime) : flighthq.types.WgpuScene3DRuntime).skinningAdapter : Null<WgpuSkinningAdapter>);
+    return cast (cast (cast (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : flighthq.types.WgpuScene3DRuntime) : flighthq.types.WgpuScene3DRuntime).skinningAdapter : Null<WgpuSkinningAdapter>);
     return cast null;
   }
 

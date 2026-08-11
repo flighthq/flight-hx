@@ -54,7 +54,7 @@ class TextSegmenterBackend {
     var segmenter:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     var out:Array<TextSegment> = cast _Runtime.UNDEFINED;
     var isWordGranularity:Bool = cast _Runtime.UNDEFINED;
-    segmenter = (cast TextSegmenterBackend.getCachedSegmenter__textSegmenterBackend((cast locale), (cast granularity)) : Null<flighthq._internal._Any>);
+    segmenter = (cast TextSegmenterBackend.getCachedSegmenter__textSegmenterBackend(({ final __callArgument0:Dynamic = locale; __callArgument0; }), ({ final __callArgument1:Dynamic = granularity; __callArgument1; })) : Null<flighthq._internal._Any>);
     if ((cast _Runtime.strictEquals(segmenter, null) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     out = (cast cast ([] : Array<Dynamic>));
     isWordGranularity = _Runtime.strictEquals(granularity, 'word');

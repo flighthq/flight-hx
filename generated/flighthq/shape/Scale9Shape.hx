@@ -18,13 +18,13 @@ import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 
 class Scale9Shape {
   public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<flighthq.types.Scale9Shape>):flighthq.types.Scale9Shape {
-    return cast (cast createNode2D((cast Scale9ShapeKind : String), (cast (cast obj : PartialNode<flighthq.types.Scale9Shape>)), (cast function(data:Null<flighthq._internal._Any>):Scale9ShapeData return (cast createScale9ShapeData((cast scale9Grid), (cast data)) : Scale9ShapeData)), (cast function(__unused0:Null<flighthq._internal._Any>):Scale9ShapeRuntime return createScale9ShapeRuntime())) : flighthq.types.Scale9Shape);
+    return cast (cast createNode2D((cast Scale9ShapeKind : String), (cast (cast obj : PartialNode<flighthq.types.Scale9Shape>) : Dynamic), (cast function(data:Null<flighthq._internal._Any>):Scale9ShapeData return (cast createScale9ShapeData(({ final __callArgument0:Dynamic = scale9Grid; __callArgument0; }), ({ final __callArgument1:Dynamic = data; __callArgument1; })) : Scale9ShapeData) : Dynamic), (cast function(__unused0:Null<flighthq._internal._Any>):Scale9ShapeRuntime return createScale9ShapeRuntime() : Dynamic)) : flighthq.types.Scale9Shape);
     return cast null;
   }
 
   @:noCompletion
   public static function createScale9ShapeData(scale9Grid:RectangleLike, ?data:flighthq._internal._Partial<Scale9ShapeData>):Scale9ShapeData {
-    return cast { commands: _Runtime.coalesce(({ final __structural0 = data; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), scale9Grid: scale9Grid };
+    return cast { commands: _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), scale9Grid: scale9Grid };
     return cast null;
   }
 
@@ -36,7 +36,7 @@ class Scale9Shape {
 
   @:noCompletion
   public static function getScale9ShapeRuntime(source:flighthq.types.Scale9Shape):Scale9ShapeRuntime {
-    return cast (cast getNode2DRuntime((cast source)) : Scale9ShapeRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument3:Dynamic = source; __callArgument3; })) : Scale9ShapeRuntime);
     return cast null;
   }
 }

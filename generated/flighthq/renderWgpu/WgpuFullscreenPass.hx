@@ -49,15 +49,15 @@ class WgpuFullscreenPass {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var runtime2:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     pass = ((cast !_Runtime.strictEquals(dest, null) : Bool) ? (cast (cast runtime : WgpuRenderStateRuntime).renderPass : Dynamic) : (cast (cast runtime : WgpuRenderStateRuntime).renderPass : Dynamic));
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(wgpuPipeline, 'pipeline'));
     if ((cast !_Runtime.strictEquals(setUniforms, null) : Bool)) {
-      var uniformBindGroup:flighthq._internal.dom.GPUBindGroup = (cast (cast setUniforms : WgpuRenderState->flighthq._internal.dom.GPUBindGroupLayout->flighthq._internal.dom.GPUBindGroup)((cast state), (cast _Runtime.field(wgpuPipeline, 'uniformBindGroupLayout'))) : flighthq._internal.dom.GPUBindGroup);
+      var uniformBindGroup:flighthq._internal.dom.GPUBindGroup = (cast (cast setUniforms : WgpuRenderState->flighthq._internal.dom.GPUBindGroupLayout->flighthq._internal.dom.GPUBindGroup)(({ final __callArgument1:Dynamic = state; __callArgument1; }), _Runtime.field(wgpuPipeline, 'uniformBindGroupLayout')) : flighthq._internal.dom.GPUBindGroup);
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, uniformBindGroup);
     }
-    runtime2 = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    runtime2 = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(inputs, 'length') : Float)) : Bool)) {

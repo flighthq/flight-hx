@@ -31,8 +31,8 @@ class Spritesheet {
 
   public static function cloneSpritesheet(spritesheet:flighthq.types.Spritesheet):flighthq.types.Spritesheet {
     var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
-    frames = (cast _Runtime.mapArray((cast spritesheet.frames : Array<SpritesheetFrame>), function(f:SpritesheetFrame, __unused0:Float, __unused1:Array<SpritesheetFrame>):SpritesheetFrame return (cast createSpritesheetFrame((cast { id: f.id, offsetX: f.offsetX, offsetY: f.offsetY, pivotX: f.pivotX, pivotY: f.pivotY, rotated: f.rotated })) : SpritesheetFrame), _Runtime.UNDEFINED));
-    return cast (cast createEntity((cast { atlas: spritesheet.atlas, animations: _Runtime.mergeObjects([spritesheet.animations]), frames: frames })) : { >Entity, var atlas:Null<TextureAtlas>; var animations:{  }; var frames:Array<SpritesheetFrame>; });
+    frames = (cast _Runtime.mapArray((cast spritesheet.frames : Array<SpritesheetFrame>), function(f:SpritesheetFrame, __unused0:Float, __unused1:Array<SpritesheetFrame>):SpritesheetFrame return (cast createSpritesheetFrame(({ final __callArgument0:Dynamic = { id: f.id, offsetX: f.offsetX, offsetY: f.offsetY, pivotX: f.pivotX, pivotY: f.pivotY, rotated: f.rotated }; __callArgument0; })) : SpritesheetFrame), _Runtime.UNDEFINED));
+    return cast (cast createEntity((cast { atlas: spritesheet.atlas, animations: _Runtime.mergeObjects([spritesheet.animations]), frames: frames } : Dynamic)) : { >Entity, var atlas:Null<TextureAtlas>; var animations:{  }; var frames:Array<SpritesheetFrame>; });
     return cast null;
   }
 
@@ -42,7 +42,7 @@ class Spritesheet {
   }
 
   public static function createSpritesheet(?obj:flighthq._internal._Partial<flighthq.types.Spritesheet>):flighthq.types.Spritesheet {
-    return cast (cast createEntity((cast { atlas: _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null), animations: _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var animations:Null<flighthq._internal._Record<String, SpritesheetAnimation>>; }).animations; }), function():Dynamic return cast {  }), frames: _Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var frames:Null<Array<SpritesheetFrame>>; }).frames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) })) : { >Entity, var atlas:Null<TextureAtlas>; var animations:flighthq._internal._Record<String, SpritesheetAnimation>; var frames:Array<SpritesheetFrame>; });
+    return cast (cast createEntity((cast { atlas: _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null), animations: _Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var animations:Null<flighthq._internal._Record<String, SpritesheetAnimation>>; }).animations; }), function():Dynamic return cast {  }), frames: _Runtime.coalesce(({ final __structural3 = obj; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var frames:Null<Array<SpritesheetFrame>>; }).frames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) } : Dynamic)) : { >Entity, var atlas:Null<TextureAtlas>; var animations:flighthq._internal._Record<String, SpritesheetAnimation>; var frames:Array<SpritesheetFrame>; });
     return cast null;
   }
 

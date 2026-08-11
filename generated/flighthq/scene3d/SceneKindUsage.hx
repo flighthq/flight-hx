@@ -33,7 +33,7 @@ class SceneKindUsage {
     _Runtime.setLength((cast out : Scene3DKindUsage).textureSourceKinds, 0.0);
     visit = (cast function(node:Node3D):Void {
       var materials:Array<Null<Material>> = cast _Runtime.UNDEFINED;
-      SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast (cast out : Scene3DKindUsage).nodeKinds), (cast _Runtime.field(node, 'kind') : String));
+      SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast out : Scene3DKindUsage).nodeKinds, (cast _Runtime.field(node, 'kind') : String));
       if ((cast !(cast (cast isMesh((cast node : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return; }
       materials = (cast node : { var materials:Array<Null<Material>>; }).materials;
       {
@@ -41,13 +41,13 @@ class SceneKindUsage {
         while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
           var material:Null<Material> = (cast flighthq._internal._StaticIndex.readArray(materials, i) : Null<Material>);
           if ((cast _Runtime.strictEquals(material, null) : Bool)) { i++; continue; }
-          SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast (cast out : Scene3DKindUsage).materialKinds), (cast (cast material : Material).kind : String));
+          SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast out : Scene3DKindUsage).materialKinds, (cast (cast material : Material).kind : String));
           var modifiers:Null<Array<Modifier>> = _Runtime.field((cast material : flighthq._internal._Partial<{ var modifiers:Array<Modifier>; }>), 'modifiers');
           if ((cast _Runtime.strictEquals(modifiers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
           {
             var m:Float = 0.0;
             while ((cast ((cast m : Float) < (cast _Runtime.field(modifiers, 'length') : Float)) : Bool)) {
-              SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast (cast out : Scene3DKindUsage).modifierKinds), (cast (cast flighthq._internal._StaticIndex.readArray(modifiers, m) : Modifier).kind : String));
+              SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast out : Scene3DKindUsage).modifierKinds, (cast (cast flighthq._internal._StaticIndex.readArray(modifiers, m) : Modifier).kind : String));
               m++;
             }
           }
@@ -55,15 +55,15 @@ class SceneKindUsage {
         }
       }
     });
-    visit((cast scene.root));
-    forEachNodeDescendant((cast scene.root), (cast function(node:Node<Node3DTraits>):Void { visit((cast (cast node : Node3D))); }));
+    visit(scene.root);
+    forEachNodeDescendant((cast scene.root : Dynamic), (cast function(node:Node<Node3DTraits>):Void { visit((cast node : Node3D)); } : Dynamic));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(scene.resources, 'length') : Float)) : Bool)) {
         var resource:ImageResourceReference = flighthq._internal._StaticIndex.readArray(scene.resources, i);
         if ((cast ((cast _Runtime.strictEquals((cast resource : { @:optional var textures:Null<Array<Texture>>; }).textures, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast resource : { @:optional var textures:Null<Array<Texture>>; }).textures, 'length'), 0.0) : Bool)) : Bool)) { i++; continue; }
-        SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast (cast out : Scene3DKindUsage).textureSourceKinds), (cast ImageTextureSourceKind : String));
-        if ((cast !_Runtime.strictEquals((cast resource : { var mimeType:Null<String>; }).mimeType, null) : Bool)) { SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast (cast out : Scene3DKindUsage).resourceMimeTypes), (cast (cast resource : { var mimeType:Null<String>; }).mimeType : String)); }
+        SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast out : Scene3DKindUsage).textureSourceKinds, (cast ImageTextureSourceKind : String));
+        if ((cast !_Runtime.strictEquals((cast resource : { var mimeType:Null<String>; }).mimeType, null) : Bool)) { SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast out : Scene3DKindUsage).resourceMimeTypes, (cast (cast resource : { var mimeType:Null<String>; }).mimeType : String)); }
         i++;
       }
     }

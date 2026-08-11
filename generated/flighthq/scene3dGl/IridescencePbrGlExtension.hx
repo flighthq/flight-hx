@@ -31,8 +31,8 @@ class IridescencePbrGlExtension {
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightIridescenceIor' : String), (cast _Runtime.field(extension, 'iridescenceIor') : Float));
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightIridescenceThicknessMin' : String), (cast _Runtime.field(extension, 'iridescenceThicknessMin') : Float));
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightIridescenceThicknessMax' : String), (cast _Runtime.field(extension, 'iridescenceThicknessMax') : Float));
-    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightIridescenceMap' : String), (cast 'u_flightIridescenceMapUvSet' : String), (cast 'u_flightIridescenceMapTransform' : String), (cast _Runtime.field(extension, 'iridescenceMap')), (cast _Runtime.field(extension, 'iridescenceMapUvSet')));
-    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightIridescenceThicknessMap' : String), (cast 'u_flightIridescenceThicknessMapUvSet' : String), (cast 'u_flightIridescenceThicknessMapTransform' : String), (cast _Runtime.field(extension, 'iridescenceThicknessMap')), (cast _Runtime.field(extension, 'iridescenceThicknessMapUvSet')));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightIridescenceMap' : String), (cast 'u_flightIridescenceMapUvSet' : String), (cast 'u_flightIridescenceMapTransform' : String), (cast _Runtime.field(extension, 'iridescenceMap') : Dynamic), _Runtime.field(extension, 'iridescenceMapUvSet'));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightIridescenceThicknessMap' : String), (cast 'u_flightIridescenceThicknessMapUvSet' : String), (cast 'u_flightIridescenceThicknessMapTransform' : String), (cast _Runtime.field(extension, 'iridescenceThicknessMap') : Dynamic), _Runtime.field(extension, 'iridescenceThicknessMapUvSet'));
   }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):GlPbrExtensionShaderContribution {
     var extension:IridescencePbrExtension = cast _Runtime.UNDEFINED;
     var factorMap:Bool = cast _Runtime.UNDEFINED;
@@ -48,6 +48,6 @@ class IridescencePbrGlExtension {
   } });
 
   public static function registerGlIridescencePbrExtension(state:GlRenderState):Void {
-    registerGlPbrExtension((cast state), (cast IridescencePbrExtensionKind : String), (cast iridescencePbrGlExtension));
+    registerGlPbrExtension(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast IridescencePbrExtensionKind : String), ({ final __callArgument1:Dynamic = iridescencePbrGlExtension; __callArgument1; }));
   }
 }

@@ -36,11 +36,11 @@ class TestCollision {
     var lo:CollisionShape = cast _Runtime.UNDEFINED;
     var hi:CollisionShape = cast _Runtime.UNDEFINED;
     var overlapping:Bool = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(TestCollision.collisionTestGuard__testCollision, null) : Bool)) { (cast TestCollision.collisionTestGuard__testCollision : CollisionShape->CollisionShape->Void)((cast a), (cast b)); }
-    rankA = (cast TestCollision.shapeKindRank__testCollision((cast (cast a : { var kind:String; }).kind)) : Float);
-    rankB = (cast TestCollision.shapeKindRank__testCollision((cast (cast b : { var kind:String; }).kind)) : Float);
+    if ((cast !_Runtime.strictEquals(TestCollision.collisionTestGuard__testCollision, null) : Bool)) { (cast TestCollision.collisionTestGuard__testCollision : CollisionShape->CollisionShape->Void)(({ final __callArgument0:Dynamic = a; __callArgument0; }), ({ final __callArgument1:Dynamic = b; __callArgument1; })); }
+    rankA = (cast TestCollision.shapeKindRank__testCollision(({ final __callArgument2:Dynamic = (cast a : { var kind:String; }).kind; __callArgument2; })) : Float);
+    rankB = (cast TestCollision.shapeKindRank__testCollision(({ final __callArgument3:Dynamic = (cast b : { var kind:String; }).kind; __callArgument3; })) : Float);
     if ((cast ((cast ((cast rankA : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast rankB : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      clearCollisionManifold((cast out));
+      clearCollisionManifold(({ final __callArgument4:Dynamic = out; __callArgument4; }));
       return cast false;
     }
     swapped = ((cast rankA : Float) > (cast rankB : Float));
@@ -53,16 +53,16 @@ class TestCollision {
         {
           var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'circle') {
-            (overlapping = cast ((cast testCircleCircleCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testCircleCircleCollision(({ final __callArgument5:Dynamic = lo; __callArgument5; }), ({ final __callArgument6:Dynamic = hi; __callArgument6; }), ({ final __callArgument7:Dynamic = out; __callArgument7; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'aabb') {
-            (overlapping = cast ((cast testCircleAabbCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testCircleAabbCollision(({ final __callArgument8:Dynamic = lo; __callArgument8; }), ({ final __callArgument9:Dynamic = hi; __callArgument9; }), ({ final __callArgument10:Dynamic = out; __callArgument10; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'obb') {
-            (overlapping = cast ((cast testCircleObbCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testCircleObbCollision(({ final __callArgument11:Dynamic = lo; __callArgument11; }), ({ final __callArgument12:Dynamic = hi; __callArgument12; }), ({ final __callArgument13:Dynamic = out; __callArgument13; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast ((cast testCirclePolygonCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testCirclePolygonCollision(({ final __callArgument14:Dynamic = lo; __callArgument14; }), ({ final __callArgument15:Dynamic = hi; __callArgument15; }), ({ final __callArgument16:Dynamic = out; __callArgument16; })) : Bool) : Dynamic));
           }
         }
       }
@@ -70,13 +70,13 @@ class TestCollision {
         {
           var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'aabb') {
-            (overlapping = cast ((cast testAabbAabbCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testAabbAabbCollision(({ final __callArgument17:Dynamic = lo; __callArgument17; }), ({ final __callArgument18:Dynamic = hi; __callArgument18; }), ({ final __callArgument19:Dynamic = out; __callArgument19; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'obb') {
-            (overlapping = cast ((cast testAabbObbCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testAabbObbCollision(({ final __callArgument20:Dynamic = lo; __callArgument20; }), ({ final __callArgument21:Dynamic = hi; __callArgument21; }), ({ final __callArgument22:Dynamic = out; __callArgument22; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast ((cast testAabbPolygonCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testAabbPolygonCollision(({ final __callArgument23:Dynamic = lo; __callArgument23; }), ({ final __callArgument24:Dynamic = hi; __callArgument24; }), ({ final __callArgument25:Dynamic = out; __callArgument25; })) : Bool) : Dynamic));
           }
         }
       }
@@ -84,16 +84,16 @@ class TestCollision {
         {
           var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'obb') {
-            (overlapping = cast ((cast testObbObbCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testObbObbCollision(({ final __callArgument26:Dynamic = lo; __callArgument26; }), ({ final __callArgument27:Dynamic = hi; __callArgument27; }), ({ final __callArgument28:Dynamic = out; __callArgument28; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast ((cast testObbPolygonCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+            (overlapping = cast ((cast testObbPolygonCollision(({ final __callArgument29:Dynamic = lo; __callArgument29; }), ({ final __callArgument30:Dynamic = hi; __callArgument30; }), ({ final __callArgument31:Dynamic = out; __callArgument31; })) : Bool) : Dynamic));
           }
         }
       }
       else if (__switchValue == 'polygon') {
         if ((cast _Runtime.strictEquals((cast hi : { var kind:String; }).kind, 'polygon') : Bool)) {
-          (overlapping = cast ((cast testPolygonPolygonCollision((cast lo), (cast hi), (cast out)) : Bool) : Dynamic));
+          (overlapping = cast ((cast testPolygonPolygonCollision(({ final __callArgument32:Dynamic = lo; __callArgument32; }), ({ final __callArgument33:Dynamic = hi; __callArgument33; }), ({ final __callArgument34:Dynamic = out; __callArgument34; })) : Bool) : Dynamic));
         }
       }
     }

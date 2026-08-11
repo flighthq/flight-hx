@@ -22,11 +22,11 @@ class GradientGlowEffect {
   }
 
   public static function registerGradientGlowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'GradientGlowEffect' : String), (cast GradientGlowEffect.resolveGradientGlowEffectPadding__gradientGlowEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'GradientGlowEffect' : String), (cast GradientGlowEffect.resolveGradientGlowEffectPadding__gradientGlowEffect : Dynamic));
   }
 
   public static function resolveGradientGlowEffectPadding__gradientGlowEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getGradientGlowEffectPadding((cast (cast effect : flighthq.types.GradientGlowEffect))) : RenderEffectPadding);
+    return cast (cast getGradientGlowEffectPadding((cast effect : flighthq.types.GradientGlowEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

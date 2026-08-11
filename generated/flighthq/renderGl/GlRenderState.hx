@@ -59,39 +59,39 @@ class GlRenderState {
   public static function copyGlRenderStateRegistrations(target:flighthq.types.GlRenderState, source:flighthq.types.GlRenderState):Void {
     var targetRuntime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var sourceRuntime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    targetRuntime = (cast getGlRenderStateRuntime((cast target)) : GlRenderStateRuntime);
-    sourceRuntime = (cast getGlRenderStateRuntime((cast source)) : GlRenderStateRuntime);
+    targetRuntime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = target; __callArgument0; })) : GlRenderStateRuntime);
+    sourceRuntime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : GlRenderStateRuntime);
     ((cast target : { var applyBlendMode:Null<flighthq.types.GlRenderState->Null<String>->Void>; }).applyBlendMode = (cast (cast source : flighthq.types.GlRenderState).applyBlendMode));
     ((cast targetRuntime : GlRenderStateRuntime).defaultBitmapShader = (cast sourceRuntime : GlRenderStateRuntime).defaultBitmapShader);
-    ((cast targetRuntime : GlRenderStateRuntime).glBlendModeRegistry = (cast GlRenderState.copyMap__glRenderState((cast (cast sourceRuntime : GlRenderStateRuntime).glBlendModeRegistry)) : Null<flighthq._internal._Map<String, GlBlendRealization>>));
+    ((cast targetRuntime : GlRenderStateRuntime).glBlendModeRegistry = (cast GlRenderState.copyMap__glRenderState((cast (cast sourceRuntime : GlRenderStateRuntime).glBlendModeRegistry : Dynamic)) : Null<flighthq._internal._Map<String, GlBlendRealization>>));
     ((cast targetRuntime : GlRenderStateRuntime).glColorAdjustmentMaterialFeature = (cast sourceRuntime : GlRenderStateRuntime).glColorAdjustmentMaterialFeature);
     ((cast targetRuntime : { @:optional var glColorAdjustmentMaterialFeatureGuard:Null<flighthq.types.GlRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).glColorAdjustmentMaterialFeatureGuard = (cast (cast sourceRuntime : GlRenderStateRuntime).glColorAdjustmentMaterialFeatureGuard));
     ((cast targetRuntime : GlRenderStateRuntime).materialRendererMap = ((cast _Runtime.strictEquals((cast sourceRuntime : GlRenderStateRuntime).materialRendererMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [(cast sourceRuntime : GlRenderStateRuntime).materialRendererMap]) : Dynamic)));
     ((cast targetRuntime : GlRenderStateRuntime).materialBitmapShaderMap = ((cast _Runtime.strictEquals((cast sourceRuntime : GlRenderStateRuntime).materialBitmapShaderMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [(cast sourceRuntime : GlRenderStateRuntime).materialBitmapShaderMap]) : Dynamic)));
-    ((cast targetRuntime : GlRenderStateRuntime).sceneMeshMaterialRegistry = (cast GlRenderState.copyMap__glRenderState((cast (cast sourceRuntime : GlRenderStateRuntime).sceneMeshMaterialRegistry)) : Null<flighthq._internal._Map<String, GlMeshMaterialRenderer>>));
+    ((cast targetRuntime : GlRenderStateRuntime).sceneMeshMaterialRegistry = (cast GlRenderState.copyMap__glRenderState((cast (cast sourceRuntime : GlRenderStateRuntime).sceneMeshMaterialRegistry : Dynamic)) : Null<flighthq._internal._Map<String, GlMeshMaterialRenderer>>));
     ((cast targetRuntime : { @:optional var webglShaderBindingResolver:Null<RenderProxy2D->Null<GlBitmapShader>>; }).webglShaderBindingResolver = (cast (cast sourceRuntime : GlRenderStateRuntime).webglShaderBindingResolver));
-    ((cast targetRuntime : GlRenderStateRuntime).glTextureResolverRegistry = (cast GlRenderState.copyRegistryMap__glRenderState((cast (cast sourceRuntime : GlRenderStateRuntime).glTextureResolverRegistry)) : Null<flighthq._internal._Map<String, GlTextureResolver>>));
+    ((cast targetRuntime : GlRenderStateRuntime).glTextureResolverRegistry = (cast GlRenderState.copyRegistryMap__glRenderState((cast (cast sourceRuntime : GlRenderStateRuntime).glTextureResolverRegistry : Dynamic)) : Null<flighthq._internal._Map<String, GlTextureResolver>>));
     ((cast targetRuntime : { @:optional var glRenderTextureGuard:Null<GlRenderTextureGuard>; }).glRenderTextureGuard = (cast sourceRuntime : GlRenderStateRuntime).glRenderTextureGuard);
     ((cast targetRuntime : { @:optional var compressedTextureDecoder:Null<GlCompressedTextureDecoder>; }).compressedTextureDecoder = (cast sourceRuntime : GlRenderStateRuntime).compressedTextureDecoder);
     ((cast targetRuntime : { @:optional var compressedTextureUpload:Null<GlCompressedTextureUploader>; }).compressedTextureUpload = (cast sourceRuntime : GlRenderStateRuntime).compressedTextureUpload);
-    ((cast targetRuntime : GlRenderStateRuntime).glRenderEffectRegistry = (cast GlRenderState.copyMap__glRenderState((cast (cast sourceRuntime : GlRenderStateRuntime).glRenderEffectRegistry)) : Null<flighthq._internal._Map<String, GlRenderEffectRunner>>));
-    copyRenderStateRegistrations((cast target), (cast source));
+    ((cast targetRuntime : GlRenderStateRuntime).glRenderEffectRegistry = (cast GlRenderState.copyMap__glRenderState((cast (cast sourceRuntime : GlRenderStateRuntime).glRenderEffectRegistry : Dynamic)) : Null<flighthq._internal._Map<String, GlRenderEffectRunner>>));
+    copyRenderStateRegistrations(({ final __callArgument2:Dynamic = target; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }));
   }
 
   public static function createGlOffscreenRenderState(screenState:flighthq.types.GlRenderState):flighthq.types.GlRenderState {
     var state:flighthq.types.GlRenderState = cast _Runtime.UNDEFINED;
     var screenRuntime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    state = (cast _createRenderState((cast { allowSmoothing: (cast screenState : flighthq.types.GlRenderState).allowSmoothing, backgroundColor: (cast screenState : flighthq.types.GlRenderState).backgroundColor, backgroundColorRgba: _Runtime.concatArrays([_Runtime.toArray((cast screenState : flighthq.types.GlRenderState).backgroundColorRgba)]), backgroundColorString: (cast screenState : flighthq.types.GlRenderState).backgroundColorString, pixelRatio: (cast screenState : flighthq.types.GlRenderState).pixelRatio, renderAlpha: (cast screenState : flighthq.types.GlRenderState).renderAlpha, renderBlendMode: (cast screenState : flighthq.types.GlRenderState).renderBlendMode, renderTransform2D: (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix), roundPixels: (cast screenState : flighthq.types.GlRenderState).roundPixels, sceneGraphSyncPolicy: (cast screenState : flighthq.types.GlRenderState).sceneGraphSyncPolicy })) : flighthq.types.GlRenderState);
+    state = (cast _createRenderState(({ final __callArgument4:Dynamic = { allowSmoothing: (cast screenState : flighthq.types.GlRenderState).allowSmoothing, backgroundColor: (cast screenState : flighthq.types.GlRenderState).backgroundColor, backgroundColorRgba: _Runtime.concatArrays([_Runtime.toArray((cast screenState : flighthq.types.GlRenderState).backgroundColorRgba)]), backgroundColorString: (cast screenState : flighthq.types.GlRenderState).backgroundColorString, pixelRatio: (cast screenState : flighthq.types.GlRenderState).pixelRatio, renderAlpha: (cast screenState : flighthq.types.GlRenderState).renderAlpha, renderBlendMode: (cast screenState : flighthq.types.GlRenderState).renderBlendMode, renderTransform2D: (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix), roundPixels: (cast screenState : flighthq.types.GlRenderState).roundPixels, sceneGraphSyncPolicy: (cast screenState : flighthq.types.GlRenderState).sceneGraphSyncPolicy }; __callArgument4; })) : flighthq.types.GlRenderState);
     ((cast state : { var applyBlendMode:Null<flighthq.types.GlRenderState->Null<String>->Void>; }).applyBlendMode = (cast (cast screenState : flighthq.types.GlRenderState).applyBlendMode));
     ((cast (cast state : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }) : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas = (cast screenState : flighthq.types.GlRenderState).canvas);
     ((cast (cast state : { var gl:flighthq._internal.dom.WebGL2RenderingContext; }) : { var gl:flighthq._internal.dom.WebGL2RenderingContext; }).gl = (cast screenState : flighthq.types.GlRenderState).gl);
-    screenRuntime = (cast getGlRenderStateRuntime((cast screenState)) : GlRenderStateRuntime);
-    runtime = (cast createGlRenderStateRuntime((cast screenRuntime)) : GlRenderStateRuntime);
+    screenRuntime = (cast getGlRenderStateRuntime(({ final __callArgument5:Dynamic = screenState; __callArgument5; })) : GlRenderStateRuntime);
+    runtime = (cast createGlRenderStateRuntime(({ final __callArgument6:Dynamic = screenRuntime; __callArgument6; })) : GlRenderStateRuntime);
     _Runtime.setIndex(state, EntityRuntimeKey, runtime);
-    GlRenderState.initializeOffscreenGlRuntime__glRenderState((cast runtime), (cast screenRuntime));
-    copyAllRenderersFromRenderState((cast state), (cast screenState));
-    copyGlRenderStateRegistrations((cast state), (cast screenState));
+    GlRenderState.initializeOffscreenGlRuntime__glRenderState(({ final __callArgument7:Dynamic = runtime; __callArgument7; }), ({ final __callArgument8:Dynamic = screenRuntime; __callArgument8; }));
+    copyAllRenderersFromRenderState(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = screenState; __callArgument10; }));
+    copyGlRenderStateRegistrations(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = screenState; __callArgument12; }));
     return cast state;
     return cast null;
   }
@@ -110,21 +110,21 @@ class GlRenderState {
     contextAttribs = (cast _Runtime.mergeObjects([{ alpha: true }, { antialias: _Runtime.coalesce((cast options : GlRenderOptions).antialias, function():Dynamic return cast true) }, { powerPreference: _Runtime.coalesce((cast options : GlRenderOptions).powerPreference, function():Dynamic return cast 'default') }, { stencil: true }, (cast options : GlRenderOptions).contextAttributes]));
     gl = (cast flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['webgl2', contextAttribs] : Array<Dynamic>)) : Null<flighthq._internal.dom.WebGL2RenderingContext>);
     if ((cast !_Runtime.truthy(gl) : Bool)) { _Runtime.throwValue(_Runtime.error('Failed to get WebGL2 context.')); }
-    shaderLoc = (cast compileDefaultGlProgram((cast gl)) : GlShaderLocations);
+    shaderLoc = (cast compileDefaultGlProgram(({ final __callArgument13:Dynamic = gl; __callArgument13; })) : GlShaderLocations);
     matrixArray = new flighthq._internal._Float32Array(9.0);
-    defaultBitmapShader = (cast createDefaultGlBitmapShader((cast shaderLoc), (cast matrixArray)) : GlBitmapShader);
+    defaultBitmapShader = (cast createDefaultGlBitmapShader(({ final __callArgument14:Dynamic = shaderLoc; __callArgument14; }), ({ final __callArgument15:Dynamic = matrixArray; __callArgument15; })) : GlBitmapShader);
     quadIndexBuffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), quadIndexBuffer);
     flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), new flighthq._internal._UInt16Array(cast ([0.0, 1.0, 2.0, 0.0, 2.0, 3.0] : Array<Dynamic>)), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
     quadVertexBuffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), quadVertexBuffer);
     flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), 64.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
-    state = (cast _createRenderState((cast { allowSmoothing: _Runtime.coalesce((cast options : GlRenderOptions).imageSmoothingEnabled, function():Dynamic return cast true), pixelRatio: _Runtime.coalesce((cast options : GlRenderOptions).pixelRatio, function():Dynamic return cast 1.0), renderTransform2D: (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix), roundPixels: _Runtime.coalesce((cast options : GlRenderOptions).roundPixels, function():Dynamic return cast false), sceneGraphSyncPolicy: (cast options : GlRenderOptions).sceneGraphSyncPolicy })) : flighthq.types.GlRenderState);
+    state = (cast _createRenderState(({ final __callArgument16:Dynamic = { allowSmoothing: _Runtime.coalesce((cast options : GlRenderOptions).imageSmoothingEnabled, function():Dynamic return cast true), pixelRatio: _Runtime.coalesce((cast options : GlRenderOptions).pixelRatio, function():Dynamic return cast 1.0), renderTransform2D: (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix), roundPixels: _Runtime.coalesce((cast options : GlRenderOptions).roundPixels, function():Dynamic return cast false), sceneGraphSyncPolicy: (cast options : GlRenderOptions).sceneGraphSyncPolicy }; __callArgument16; })) : flighthq.types.GlRenderState);
     ((cast state : { var applyBlendMode:Null<flighthq.types.GlRenderState->Null<String>->Void>; }).applyBlendMode = (cast null));
     ((cast (cast state : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }) : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas = canvas);
     ((cast (cast state : { var gl:flighthq._internal.dom.WebGL2RenderingContext; }) : { var gl:flighthq._internal.dom.WebGL2RenderingContext; }).gl = gl);
-    if ((cast !_Runtime.looseEquals((cast options : GlRenderOptions).backgroundColor, null) : Bool)) { setRenderStateBackgroundColor((cast state), (cast (cast options : GlRenderOptions).backgroundColor : Float)); }
-    runtime = (cast createGlRenderStateRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : GlRenderStateRuntime);
+    if ((cast !_Runtime.looseEquals((cast options : GlRenderOptions).backgroundColor, null) : Bool)) { setRenderStateBackgroundColor(({ final __callArgument17:Dynamic = state; __callArgument17; }), (cast (cast options : GlRenderOptions).backgroundColor : Float)); }
+    runtime = (cast createGlRenderStateRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : GlRenderStateRuntime);
     _Runtime.setIndex(state, EntityRuntimeKey, runtime);
     ((cast runtime : GlRenderStateRuntime).currentBlendMode = null);
     ((cast runtime : GlRenderStateRuntime).currentFramebuffer = null);
@@ -173,7 +173,7 @@ class GlRenderState {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var contextRuntime:GlContextRuntime__glRenderState = cast _Runtime.UNDEFINED;
     runtime = (cast createRenderStateRuntime() : GlRenderStateRuntime);
-    contextRuntime = ((cast _Runtime.strictEquals(sharedRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fields: {  }, references: 0.0 } : Dynamic) : (cast (cast GlRenderState.getGlContextRuntime__glRenderState((cast sharedRuntime)) : GlContextRuntime__glRenderState) : Dynamic));
+    contextRuntime = ((cast _Runtime.strictEquals(sharedRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fields: {  }, references: 0.0 } : Dynamic) : (cast (cast GlRenderState.getGlContextRuntime__glRenderState(({ final __callArgument18:Dynamic = sharedRuntime; __callArgument18; })) : GlContextRuntime__glRenderState) : Dynamic));
     (cast contextRuntime : GlContextRuntime__glRenderState).references++;
     ((cast GlRenderState._contextRuntimeByStateRuntime__glRenderState : flighthq._internal._WeakMap<GlRenderStateRuntime, GlContextRuntime__glRenderState>).set(runtime, (cast contextRuntime)));
     for (key in _Runtime.iterable(GlRenderState.GL_CONTEXT_RUNTIME_KEYS__glRenderState)) {
@@ -194,9 +194,9 @@ class GlRenderState {
     var programs:flighthq._internal._Set<flighthq._internal.dom.WebGLProgram> = cast _Runtime.UNDEFINED;
     if ((cast ((cast GlRenderState._destroyedStates__glRenderState : flighthq._internal._WeakSet<flighthq.types.GlRenderState>).has(state)) : Bool)) { return; }
     ((cast GlRenderState._destroyedStates__glRenderState : flighthq._internal._WeakSet<flighthq.types.GlRenderState>).add(state));
-    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
-    destroyRenderState((cast state));
-    contextRuntime = (cast GlRenderState.getGlContextRuntime__glRenderState((cast runtime)) : GlContextRuntime__glRenderState);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument21:Dynamic = state; __callArgument21; })) : GlRenderStateRuntime);
+    destroyRenderState(({ final __callArgument22:Dynamic = state; __callArgument22; }));
+    contextRuntime = (cast GlRenderState.getGlContextRuntime__glRenderState(({ final __callArgument23:Dynamic = runtime; __callArgument23; })) : GlContextRuntime__glRenderState);
     (cast contextRuntime : GlContextRuntime__glRenderState).references--;
     if ((cast !_Runtime.strictEquals((cast contextRuntime : GlContextRuntime__glRenderState).references, 0.0) : Bool)) { return; }
     gl = (cast state : flighthq.types.GlRenderState).gl;
@@ -233,7 +233,7 @@ class GlRenderState {
   @:noCompletion
   public static function invalidateGlRenderStateCache(state:flighthq.types.GlRenderState):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime((cast state)) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument26:Dynamic = state; __callArgument26; })) : GlRenderStateRuntime);
     ((cast runtime : GlRenderStateRuntime).currentBlendMode = null);
     ((cast runtime : GlRenderStateRuntime).currentFramebuffer = null);
     ((cast runtime : GlRenderStateRuntime).currentMaskDepth = 0.0);

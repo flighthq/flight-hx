@@ -71,28 +71,28 @@ class InteractionManager {
     var onPointerUp:InputPointerData->Void = cast _Runtime.UNDEFINED;
     var onWheel:InputPointerData->Void = cast _Runtime.UNDEFINED;
     sx = (cast function(v:Float):Float return (v * coordScale));
-    onKeyDown = (cast function(data:InputKeyboardData):Void { dispatchInteractionKeyDown((cast manager), (cast _Runtime.field(data, 'key') : String), (cast _Runtime.field(data, 'keyCode') : Float), (cast data)); });
-    onKeyUp = (cast function(data:InputKeyboardData):Void { dispatchInteractionKeyUp((cast manager), (cast _Runtime.field(data, 'key') : String), (cast _Runtime.field(data, 'keyCode') : Float), (cast data)); });
-    onPointerCancel = (cast function(data:InputPointerData):Void { dispatchInteractionPointerCancel((cast manager), (cast (cast sx((cast _Runtime.field(data, 'x') : Float)) : Float) : Float), (cast (cast sx((cast _Runtime.field(data, 'y') : Float)) : Float) : Float), (cast data)); });
-    onPointerDown = (cast function(data:InputPointerData):Void { dispatchInteractionPointerDown((cast manager), (cast (cast sx((cast _Runtime.field(data, 'x') : Float)) : Float) : Float), (cast (cast sx((cast _Runtime.field(data, 'y') : Float)) : Float) : Float), (cast _Runtime.field(data, 'button') : Float), (cast data)); });
-    onPointerMove = (cast function(data:InputPointerData):Void { dispatchInteractionPointerMove((cast manager), (cast (cast sx((cast _Runtime.field(data, 'x') : Float)) : Float) : Float), (cast (cast sx((cast _Runtime.field(data, 'y') : Float)) : Float) : Float), (cast _Runtime.field(data, 'button') : Float), (cast data)); });
-    onPointerUp = (cast function(data:InputPointerData):Void { dispatchInteractionPointerUp((cast manager), (cast (cast sx((cast _Runtime.field(data, 'x') : Float)) : Float) : Float), (cast (cast sx((cast _Runtime.field(data, 'y') : Float)) : Float) : Float), (cast _Runtime.field(data, 'button') : Float), (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)) : Float), (cast data)); });
-    onWheel = (cast function(data:InputPointerData):Void { dispatchInteractionWheel((cast manager), (cast (cast sx((cast _Runtime.field(data, 'x') : Float)) : Float) : Float), (cast (cast sx((cast _Runtime.field(data, 'y') : Float)) : Float) : Float), (cast _Runtime.field(data, 'deltaX') : Float), (cast _Runtime.field(data, 'deltaY') : Float), (cast data)); });
-    (cast connectSignal : Signal<InputKeyboardData->Void>->(InputKeyboardData->Void)->Null<SignalConnectOptions>->Void)((cast _Runtime.field(input, 'onKeyDown')), (cast onKeyDown), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    (cast connectSignal : Signal<InputKeyboardData->Void>->(InputKeyboardData->Void)->Null<SignalConnectOptions>->Void)((cast _Runtime.field(input, 'onKeyUp')), (cast onKeyUp), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    (cast connectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Null<SignalConnectOptions>->Void)((cast _Runtime.field(input, 'onPointerCancel')), (cast onPointerCancel), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    (cast connectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Null<SignalConnectOptions>->Void)((cast _Runtime.field(input, 'onPointerDown')), (cast onPointerDown), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    (cast connectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Null<SignalConnectOptions>->Void)((cast _Runtime.field(input, 'onPointerMove')), (cast onPointerMove), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    (cast connectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Null<SignalConnectOptions>->Void)((cast _Runtime.field(input, 'onPointerUp')), (cast onPointerUp), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
-    (cast connectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Null<SignalConnectOptions>->Void)((cast _Runtime.field(input, 'onWheel')), (cast onWheel), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    onKeyDown = (cast function(data:InputKeyboardData):Void { dispatchInteractionKeyDown((cast manager : Dynamic), (cast _Runtime.field(data, 'key') : String), (cast _Runtime.field(data, 'keyCode') : Float), ({ final __callArgument0:Dynamic = data; __callArgument0; })); });
+    onKeyUp = (cast function(data:InputKeyboardData):Void { dispatchInteractionKeyUp((cast manager : Dynamic), (cast _Runtime.field(data, 'key') : String), (cast _Runtime.field(data, 'keyCode') : Float), ({ final __callArgument1:Dynamic = data; __callArgument1; })); });
+    onPointerCancel = (cast function(data:InputPointerData):Void { dispatchInteractionPointerCancel((cast manager : Dynamic), (cast (cast sx((cast _Runtime.field(data, 'x') : Float)) : Float) : Float), (cast (cast sx((cast _Runtime.field(data, 'y') : Float)) : Float) : Float), ({ final __callArgument2:Dynamic = data; __callArgument2; })); });
+    onPointerDown = (cast function(data:InputPointerData):Void { dispatchInteractionPointerDown((cast manager : Dynamic), (cast (cast sx((cast _Runtime.field(data, 'x') : Float)) : Float) : Float), (cast (cast sx((cast _Runtime.field(data, 'y') : Float)) : Float) : Float), (cast _Runtime.field(data, 'button') : Float), ({ final __callArgument3:Dynamic = data; __callArgument3; })); });
+    onPointerMove = (cast function(data:InputPointerData):Void { dispatchInteractionPointerMove((cast manager : Dynamic), (cast (cast sx((cast _Runtime.field(data, 'x') : Float)) : Float) : Float), (cast (cast sx((cast _Runtime.field(data, 'y') : Float)) : Float) : Float), (cast _Runtime.field(data, 'button') : Float), ({ final __callArgument4:Dynamic = data; __callArgument4; })); });
+    onPointerUp = (cast function(data:InputPointerData):Void { dispatchInteractionPointerUp((cast manager : Dynamic), (cast (cast sx((cast _Runtime.field(data, 'x') : Float)) : Float) : Float), (cast (cast sx((cast _Runtime.field(data, 'y') : Float)) : Float) : Float), (cast _Runtime.field(data, 'button') : Float), (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)) : Float), ({ final __callArgument5:Dynamic = data; __callArgument5; })); });
+    onWheel = (cast function(data:InputPointerData):Void { dispatchInteractionWheel((cast manager : Dynamic), (cast (cast sx((cast _Runtime.field(data, 'x') : Float)) : Float) : Float), (cast (cast sx((cast _Runtime.field(data, 'y') : Float)) : Float) : Float), (cast _Runtime.field(data, 'deltaX') : Float), (cast _Runtime.field(data, 'deltaY') : Float), ({ final __callArgument6:Dynamic = data; __callArgument6; })); });
+    (cast connectSignal : Signal<InputKeyboardData->Void>->(InputKeyboardData->Void)->Null<SignalConnectOptions>->Void)(_Runtime.field(input, 'onKeyDown'), ({ final __callArgument7:Dynamic = onKeyDown; __callArgument7; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (cast connectSignal : Signal<InputKeyboardData->Void>->(InputKeyboardData->Void)->Null<SignalConnectOptions>->Void)(_Runtime.field(input, 'onKeyUp'), ({ final __callArgument8:Dynamic = onKeyUp; __callArgument8; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (cast connectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Null<SignalConnectOptions>->Void)(_Runtime.field(input, 'onPointerCancel'), ({ final __callArgument9:Dynamic = onPointerCancel; __callArgument9; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (cast connectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Null<SignalConnectOptions>->Void)(_Runtime.field(input, 'onPointerDown'), ({ final __callArgument10:Dynamic = onPointerDown; __callArgument10; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (cast connectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Null<SignalConnectOptions>->Void)(_Runtime.field(input, 'onPointerMove'), ({ final __callArgument11:Dynamic = onPointerMove; __callArgument11; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (cast connectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Null<SignalConnectOptions>->Void)(_Runtime.field(input, 'onPointerUp'), ({ final __callArgument12:Dynamic = onPointerUp; __callArgument12; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (cast connectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Null<SignalConnectOptions>->Void)(_Runtime.field(input, 'onWheel'), ({ final __callArgument13:Dynamic = onWheel; __callArgument13; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     return cast function():Void {
-      (cast disconnectSignal : Signal<InputKeyboardData->Void>->(InputKeyboardData->Void)->Void)((cast _Runtime.field(input, 'onKeyDown')), (cast onKeyDown));
-      (cast disconnectSignal : Signal<InputKeyboardData->Void>->(InputKeyboardData->Void)->Void)((cast _Runtime.field(input, 'onKeyUp')), (cast onKeyUp));
-      (cast disconnectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Void)((cast _Runtime.field(input, 'onPointerCancel')), (cast onPointerCancel));
-      (cast disconnectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Void)((cast _Runtime.field(input, 'onPointerDown')), (cast onPointerDown));
-      (cast disconnectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Void)((cast _Runtime.field(input, 'onPointerMove')), (cast onPointerMove));
-      (cast disconnectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Void)((cast _Runtime.field(input, 'onPointerUp')), (cast onPointerUp));
-      (cast disconnectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Void)((cast _Runtime.field(input, 'onWheel')), (cast onWheel));
+      (cast disconnectSignal : Signal<InputKeyboardData->Void>->(InputKeyboardData->Void)->Void)(_Runtime.field(input, 'onKeyDown'), ({ final __callArgument14:Dynamic = onKeyDown; __callArgument14; }));
+      (cast disconnectSignal : Signal<InputKeyboardData->Void>->(InputKeyboardData->Void)->Void)(_Runtime.field(input, 'onKeyUp'), ({ final __callArgument15:Dynamic = onKeyUp; __callArgument15; }));
+      (cast disconnectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Void)(_Runtime.field(input, 'onPointerCancel'), ({ final __callArgument16:Dynamic = onPointerCancel; __callArgument16; }));
+      (cast disconnectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Void)(_Runtime.field(input, 'onPointerDown'), ({ final __callArgument17:Dynamic = onPointerDown; __callArgument17; }));
+      (cast disconnectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Void)(_Runtime.field(input, 'onPointerMove'), ({ final __callArgument18:Dynamic = onPointerMove; __callArgument18; }));
+      (cast disconnectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Void)(_Runtime.field(input, 'onPointerUp'), ({ final __callArgument19:Dynamic = onPointerUp; __callArgument19; }));
+      (cast disconnectSignal : Signal<InputPointerData->Void>->(InputPointerData->Void)->Void)(_Runtime.field(input, 'onWheel'), ({ final __callArgument20:Dynamic = onWheel; __callArgument20; }));
     };
     return cast null;
   }
@@ -101,22 +101,22 @@ class InteractionManager {
     var signal:Signal<InteractionSignalSlot__interactionManager<Name>> = cast _Runtime.UNDEFINED;
     var trackedSlot:Null<AnyInteractionSignalSlot> = cast _Runtime.UNDEFINED;
     var connectedSlot:InteractionSignalSlot__interactionManager<Name> = cast _Runtime.UNDEFINED;
-    signal = (cast _Runtime.getIndex((cast enableInteractionSignals((cast target)) : InteractionSignals), name) : Signal<InteractionSignalSlot__interactionManager<Name>>);
-    trackedSlot = (cast InteractionManager.getTrackedInteractionSignalSlot__interactionManager((cast manager), (cast target), (cast name), (cast slot)) : Null<AnyInteractionSignalSlot>);
-    if ((cast ((cast !_Runtime.strictEquals(trackedSlot, null) : Bool) && (cast (cast isSlotConnected((cast signal), (cast (cast trackedSlot : InteractionSignalSlot__interactionManager<Name>))) : Bool) : Bool)) : Bool)) { return; }
-    if ((cast (cast isSlotConnected((cast signal), (cast slot)) : Bool) : Bool)) {
-      InteractionManager.setTrackedInteractionSignalSlot__interactionManager((cast manager), (cast target), (cast name), (cast slot), (cast slot));
-      InteractionManager.incrementInteractionSignalSubscriberCount__interactionManager((cast manager), (cast name : String));
+    signal = (cast _Runtime.getIndex((cast enableInteractionSignals((cast target : Dynamic)) : InteractionSignals), name) : Signal<InteractionSignalSlot__interactionManager<Name>>);
+    trackedSlot = (cast InteractionManager.getTrackedInteractionSignalSlot__interactionManager((cast manager : Dynamic), (cast target : Dynamic), (cast name : Dynamic), (cast slot : Dynamic)) : Null<AnyInteractionSignalSlot>);
+    if ((cast ((cast !_Runtime.strictEquals(trackedSlot, null) : Bool) && (cast (cast isSlotConnected((cast signal : Dynamic), (cast (cast trackedSlot : InteractionSignalSlot__interactionManager<Name>) : Dynamic)) : Bool) : Bool)) : Bool)) { return; }
+    if ((cast (cast isSlotConnected((cast signal : Dynamic), (cast slot : Dynamic)) : Bool) : Bool)) {
+      InteractionManager.setTrackedInteractionSignalSlot__interactionManager((cast manager : Dynamic), (cast target : Dynamic), (cast name : Dynamic), (cast slot : Dynamic), (cast slot : Dynamic));
+      InteractionManager.incrementInteractionSignalSubscriberCount__interactionManager((cast manager : Dynamic), (cast name : String));
       return;
     }
-    connectedSlot = ((cast _Runtime.strictEquals(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var once:Null<Bool>; }).once; }), true) : Bool) ? (cast function(data:InteractionSignalPayload__interactionManager<Name>):Void {
-      slot((cast data));
-      InteractionManager.removeTrackedInteractionSignalSlot__interactionManager((cast manager), (cast target), (cast name), (cast slot));
-      InteractionManager.decrementInteractionSignalSubscriberCount__interactionManager((cast manager), (cast name : String));
+    connectedSlot = ((cast _Runtime.strictEquals(({ final __structural21 = options; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { @:optional var once:Null<Bool>; }).once; }), true) : Bool) ? (cast function(data:InteractionSignalPayload__interactionManager<Name>):Void {
+      slot((cast data : Dynamic));
+      InteractionManager.removeTrackedInteractionSignalSlot__interactionManager((cast manager : Dynamic), (cast target : Dynamic), (cast name : Dynamic), (cast slot : Dynamic));
+      InteractionManager.decrementInteractionSignalSubscriberCount__interactionManager((cast manager : Dynamic), (cast name : String));
     } : Dynamic) : (cast slot : Dynamic));
-    connectSignal((cast signal), (cast connectedSlot), (cast options));
-    InteractionManager.setTrackedInteractionSignalSlot__interactionManager((cast manager), (cast target), (cast name), (cast slot), (cast connectedSlot));
-    InteractionManager.incrementInteractionSignalSubscriberCount__interactionManager((cast manager), (cast name : String));
+    connectSignal((cast signal : Dynamic), (cast connectedSlot : Dynamic), ({ final __callArgument22:Dynamic = options; __callArgument22; }));
+    InteractionManager.setTrackedInteractionSignalSlot__interactionManager((cast manager : Dynamic), (cast target : Dynamic), (cast name : Dynamic), (cast slot : Dynamic), (cast connectedSlot : Dynamic));
+    InteractionManager.incrementInteractionSignalSubscriberCount__interactionManager((cast manager : Dynamic), (cast name : String));
     _Runtime.callOptionalValue(InteractionManager.interactionConnectGuard__interactionManager, cast ([target, name] : Array<Dynamic>));
   }
 
@@ -136,26 +136,26 @@ class InteractionManager {
     var signal:Null<Signal<InteractionSignalSlot__interactionManager<Name>>> = cast _Runtime.UNDEFINED;
     var trackedSlot:Null<AnyInteractionSignalSlot> = cast _Runtime.UNDEFINED;
     var connectedSlot:InteractionSignalSlot__interactionManager<Name> = cast _Runtime.UNDEFINED;
-    signal = (cast InteractionManager.getInteractionSignal__interactionManager((cast target), (cast name)) : Null<Signal<InteractionSignalSlot__interactionManager<Name>>>);
+    signal = (cast InteractionManager.getInteractionSignal__interactionManager(({ final __callArgument23:Dynamic = target; __callArgument23; }), (cast name : Dynamic)) : Null<Signal<InteractionSignalSlot__interactionManager<Name>>>);
     if ((cast _Runtime.strictEquals(signal, null) : Bool)) { return; }
-    trackedSlot = (cast InteractionManager.getTrackedInteractionSignalSlot__interactionManager((cast manager), (cast target), (cast name), (cast slot)) : Null<AnyInteractionSignalSlot>);
+    trackedSlot = (cast InteractionManager.getTrackedInteractionSignalSlot__interactionManager((cast manager : Dynamic), (cast target : Dynamic), (cast name : Dynamic), (cast slot : Dynamic)) : Null<AnyInteractionSignalSlot>);
     connectedSlot = (cast _Runtime.coalesce(trackedSlot, function():Dynamic return cast slot) : InteractionSignalSlot__interactionManager<Name>);
-    if ((cast !(cast (cast isSlotConnected((cast signal), (cast connectedSlot)) : Bool) : Bool) : Bool)) { return; }
-    disconnectSignal((cast signal), (cast connectedSlot));
-    InteractionManager.removeTrackedInteractionSignalSlot__interactionManager((cast manager), (cast target), (cast name), (cast slot));
-    InteractionManager.decrementInteractionSignalSubscriberCount__interactionManager((cast manager), (cast name : String));
+    if ((cast !(cast (cast isSlotConnected((cast signal : Dynamic), (cast connectedSlot : Dynamic)) : Bool) : Bool) : Bool)) { return; }
+    disconnectSignal((cast signal : Dynamic), (cast connectedSlot : Dynamic));
+    InteractionManager.removeTrackedInteractionSignalSlot__interactionManager((cast manager : Dynamic), (cast target : Dynamic), (cast name : Dynamic), (cast slot : Dynamic));
+    InteractionManager.decrementInteractionSignalSubscriberCount__interactionManager((cast manager : Dynamic), (cast name : String));
   }
 
   public static function dispatchInteractionContextMenu<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, x:Float, y:Float, button:Float = 2.0, ?options:InteractionPointerOptions):Void {
-    InteractionManager.dispatchPointerSignalAt__interactionManager((cast manager), (cast 'onContextMenu'), (cast x : Float), (cast y : Float), (cast button : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast options));
+    InteractionManager.dispatchPointerSignalAt__interactionManager((cast manager : Dynamic), (cast 'onContextMenu' : Dynamic), (cast x : Float), (cast y : Float), (cast button : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument24:Dynamic = options; __callArgument24; }));
   }
 
   public static function dispatchInteractionKeyDown<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, key:String, keyCode:Float = 0.0, ?modifiers:flighthq._internal._Partial<KeyboardEventData>):Void {
-    InteractionManager.dispatchKeyboardSignal__interactionManager((cast manager), (cast 'onKeyDown'), (cast key : String), (cast keyCode : Float), (cast modifiers));
+    InteractionManager.dispatchKeyboardSignal__interactionManager((cast manager : Dynamic), (cast 'onKeyDown' : Dynamic), (cast key : String), (cast keyCode : Float), ({ final __callArgument25:Dynamic = modifiers; __callArgument25; }));
   }
 
   public static function dispatchInteractionKeyUp<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, key:String, keyCode:Float = 0.0, ?modifiers:flighthq._internal._Partial<KeyboardEventData>):Void {
-    InteractionManager.dispatchKeyboardSignal__interactionManager((cast manager), (cast 'onKeyUp'), (cast key : String), (cast keyCode : Float), (cast modifiers));
+    InteractionManager.dispatchKeyboardSignal__interactionManager((cast manager : Dynamic), (cast 'onKeyUp' : Dynamic), (cast key : String), (cast keyCode : Float), ({ final __callArgument26:Dynamic = modifiers; __callArgument26; }));
   }
 
   public static function dispatchInteractionPointerCancel<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, x:Float, y:Float, ?options:InteractionPointerOptions):Void {
@@ -164,21 +164,21 @@ class InteractionManager {
     var captured:Null<N> = cast _Runtime.UNDEFINED;
     var oldTarget:Null<N> = cast _Runtime.UNDEFINED;
     var target:Null<N> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast InteractionManager.isPointerSignalNeeded__interactionManager((cast manager), (cast InteractionManager.cancelSignalNames__interactionManager)) : Bool) : Bool) : Bool)) { return; }
-    pointerId = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.pointerId; }), function():Dynamic return cast 0.0);
-    state = (cast InteractionManager.getInteractionPointerState__interactionManager((cast manager), (cast pointerId : Float)) : InteractionPointerState<N>);
+    if ((cast !(cast (cast InteractionManager.isPointerSignalNeeded__interactionManager((cast manager : Dynamic), ({ final __callArgument27:Dynamic = InteractionManager.cancelSignalNames__interactionManager; __callArgument27; })) : Bool) : Bool) : Bool)) { return; }
+    pointerId = _Runtime.coalesce(({ final __typedStruct28 = options; __typedStruct28 == null ? _Runtime.UNDEFINED : __typedStruct28.pointerId; }), function():Dynamic return cast 0.0);
+    state = (cast InteractionManager.getInteractionPointerState__interactionManager((cast manager : Dynamic), (cast pointerId : Float)) : InteractionPointerState<N>);
     captured = _Runtime.coalesce(((cast (cast manager : flighthq.types.InteractionManager<N>).pointerCaptures : flighthq._internal._Map<Float, N>).get(pointerId)), function():Dynamic return cast null);
     oldTarget = (cast state : InteractionPointerState<N>).pointerOverTarget;
     target = _Runtime.coalesce(_Runtime.coalesce(captured, function():Dynamic return cast (cast state : InteractionPointerState<N>).pointerDownTarget), function():Dynamic return cast oldTarget);
     ((cast state : InteractionPointerState<N>).pointerDownTarget = null);
     ((cast state : InteractionPointerState<N>).pointerOverTarget = null);
     ((cast (cast manager : flighthq.types.InteractionManager<N>).pointerCaptures : flighthq._internal._Map<Float, N>).delete_(pointerId));
-    InteractionManager.setPointerData__interactionManager((cast target), (cast null), (cast x : Float), (cast y : Float), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast options));
+    InteractionManager.setPointerData__interactionManager(({ final __callArgument29:Dynamic = target; __callArgument29; }), ({ final __callArgument30:Dynamic = null; __callArgument30; }), (cast x : Float), (cast y : Float), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument31:Dynamic = options; __callArgument31; }));
     if ((cast !_Runtime.strictEquals(target, null) : Bool)) {
-      InteractionManager.emitInteractionSignal__interactionManager((cast target), (cast (cast manager : flighthq.types.InteractionManager<N>).root), (cast 'onPointerCancel' : String), (cast InteractionManager._pointerData__interactionManager));
+      InteractionManager.emitInteractionSignal__interactionManager((cast target : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic), (cast 'onPointerCancel' : String), ({ final __callArgument32:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument32; }));
     }
     if ((cast !_Runtime.strictEquals(oldTarget, null) : Bool)) {
-      InteractionManager.dispatchPointerRolloverChange__interactionManager((cast manager), (cast oldTarget), (cast null));
+      InteractionManager.dispatchPointerRolloverChange__interactionManager((cast manager : Dynamic), (cast oldTarget : Dynamic), (cast null : Dynamic));
     }
   }
 
@@ -186,14 +186,14 @@ class InteractionManager {
     var pointerId:Float = cast _Runtime.UNDEFINED;
     var state:InteractionPointerState<N> = cast _Runtime.UNDEFINED;
     var target:Null<N> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast InteractionManager.isPointerSignalNeeded__interactionManager((cast manager), (cast InteractionManager.downSignalNames__interactionManager)) : Bool) : Bool) : Bool)) { return; }
-    pointerId = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.pointerId; }), function():Dynamic return cast 0.0);
-    state = (cast InteractionManager.getInteractionPointerState__interactionManager((cast manager), (cast pointerId : Float)) : InteractionPointerState<N>);
-    target = (cast InteractionManager.findInteractionTarget__interactionManager((cast manager), (cast x : Float), (cast y : Float), (cast pointerId : Float)) : Null<N>);
+    if ((cast !(cast (cast InteractionManager.isPointerSignalNeeded__interactionManager((cast manager : Dynamic), ({ final __callArgument33:Dynamic = InteractionManager.downSignalNames__interactionManager; __callArgument33; })) : Bool) : Bool) : Bool)) { return; }
+    pointerId = _Runtime.coalesce(({ final __typedStruct34 = options; __typedStruct34 == null ? _Runtime.UNDEFINED : __typedStruct34.pointerId; }), function():Dynamic return cast 0.0);
+    state = (cast InteractionManager.getInteractionPointerState__interactionManager((cast manager : Dynamic), (cast pointerId : Float)) : InteractionPointerState<N>);
+    target = (cast InteractionManager.findInteractionTarget__interactionManager((cast manager : Dynamic), (cast x : Float), (cast y : Float), (cast pointerId : Float)) : Null<N>);
     if ((cast _Runtime.strictEquals(target, null) : Bool)) { return; }
     ((cast state : InteractionPointerState<N>).pointerDownTarget = target);
-    InteractionManager.setPointerData__interactionManager((cast target), (cast null), (cast x : Float), (cast y : Float), (cast button : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast options));
-    InteractionManager.emitInteractionSignal__interactionManager((cast target), (cast (cast manager : flighthq.types.InteractionManager<N>).root), (cast 'onPointerDown' : String), (cast InteractionManager._pointerData__interactionManager));
+    InteractionManager.setPointerData__interactionManager(({ final __callArgument35:Dynamic = target; __callArgument35; }), ({ final __callArgument36:Dynamic = null; __callArgument36; }), (cast x : Float), (cast y : Float), (cast button : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument37:Dynamic = options; __callArgument37; }));
+    InteractionManager.emitInteractionSignal__interactionManager((cast target : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic), (cast 'onPointerDown' : String), ({ final __callArgument38:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument38; }));
   }
 
   public static function dispatchInteractionPointerMove<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, x:Float, y:Float, button:Float = 0.0, ?options:InteractionPointerOptions):Void {
@@ -201,21 +201,21 @@ class InteractionManager {
     var state:InteractionPointerState<N> = cast _Runtime.UNDEFINED;
     var oldTarget:Null<N> = cast _Runtime.UNDEFINED;
     var target:Null<N> = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast InteractionManager.isPointerSignalNeeded__interactionManager((cast manager), (cast InteractionManager.moveSignalNames__interactionManager)) : Bool) : Bool) : Bool) && (cast !(cast _Runtime.andValue((cast manager : flighthq.types.InteractionManager<N>).enabled, function():Dynamic return cast !_Runtime.strictEquals((cast manager : flighthq.types.InteractionManager<N>).cursorBackend, null)) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast !(cast (cast InteractionManager.isPointerSignalNeeded__interactionManager((cast manager : Dynamic), ({ final __callArgument39:Dynamic = InteractionManager.moveSignalNames__interactionManager; __callArgument39; })) : Bool) : Bool) : Bool) && (cast !(cast _Runtime.andValue((cast manager : flighthq.types.InteractionManager<N>).enabled, function():Dynamic return cast !_Runtime.strictEquals((cast manager : flighthq.types.InteractionManager<N>).cursorBackend, null)) : Bool) : Bool)) : Bool)) {
       return;
     }
-    pointerId = _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.pointerId; }), function():Dynamic return cast 0.0);
-    state = (cast InteractionManager.getInteractionPointerState__interactionManager((cast manager), (cast pointerId : Float)) : InteractionPointerState<N>);
+    pointerId = _Runtime.coalesce(({ final __typedStruct40 = options; __typedStruct40 == null ? _Runtime.UNDEFINED : __typedStruct40.pointerId; }), function():Dynamic return cast 0.0);
+    state = (cast InteractionManager.getInteractionPointerState__interactionManager((cast manager : Dynamic), (cast pointerId : Float)) : InteractionPointerState<N>);
     oldTarget = (cast state : InteractionPointerState<N>).pointerOverTarget;
-    target = (cast InteractionManager.findInteractionTarget__interactionManager((cast manager), (cast x : Float), (cast y : Float), (cast pointerId : Float)) : Null<N>);
+    target = (cast InteractionManager.findInteractionTarget__interactionManager((cast manager : Dynamic), (cast x : Float), (cast y : Float), (cast pointerId : Float)) : Null<N>);
     if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) && (cast _Runtime.strictEquals(oldTarget, null) : Bool)) : Bool)) { return; }
     ((cast state : InteractionPointerState<N>).pointerOverTarget = target);
-    InteractionManager.setPointerData__interactionManager((cast target), (cast null), (cast x : Float), (cast y : Float), (cast button : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast options));
+    InteractionManager.setPointerData__interactionManager(({ final __callArgument41:Dynamic = target; __callArgument41; }), ({ final __callArgument42:Dynamic = null; __callArgument42; }), (cast x : Float), (cast y : Float), (cast button : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument43:Dynamic = options; __callArgument43; }));
     if ((cast !_Runtime.strictEquals(target, oldTarget) : Bool)) {
-      InteractionManager.dispatchPointerRolloverChange__interactionManager((cast manager), (cast oldTarget), (cast target));
+      InteractionManager.dispatchPointerRolloverChange__interactionManager((cast manager : Dynamic), (cast oldTarget : Dynamic), (cast target : Dynamic));
     }
     if ((cast !_Runtime.strictEquals(target, null) : Bool)) {
-      InteractionManager.emitInteractionSignal__interactionManager((cast target), (cast (cast manager : flighthq.types.InteractionManager<N>).root), (cast 'onPointerMove' : String), (cast InteractionManager._pointerData__interactionManager));
+      InteractionManager.emitInteractionSignal__interactionManager((cast target : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic), (cast 'onPointerMove' : String), ({ final __callArgument44:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument44; }));
     }
   }
 
@@ -225,21 +225,21 @@ class InteractionManager {
     var state:InteractionPointerState<N> = cast _Runtime.UNDEFINED;
     var downTarget:Null<N> = cast _Runtime.UNDEFINED;
     var target:Null<N> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast InteractionManager.isPointerSignalNeeded__interactionManager((cast manager), (cast InteractionManager.upSignalNames__interactionManager)) : Bool) : Bool) : Bool)) { return; }
-    pointerId = _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.pointerId; }), function():Dynamic return cast 0.0);
-    state = (cast InteractionManager.getInteractionPointerState__interactionManager((cast manager), (cast pointerId : Float)) : InteractionPointerState<N>);
+    if ((cast !(cast (cast InteractionManager.isPointerSignalNeeded__interactionManager((cast manager : Dynamic), ({ final __callArgument45:Dynamic = InteractionManager.upSignalNames__interactionManager; __callArgument45; })) : Bool) : Bool) : Bool)) { return; }
+    pointerId = _Runtime.coalesce(({ final __typedStruct46 = options; __typedStruct46 == null ? _Runtime.UNDEFINED : __typedStruct46.pointerId; }), function():Dynamic return cast 0.0);
+    state = (cast InteractionManager.getInteractionPointerState__interactionManager((cast manager : Dynamic), (cast pointerId : Float)) : InteractionPointerState<N>);
     downTarget = (cast state : InteractionPointerState<N>).pointerDownTarget;
-    target = (cast InteractionManager.findInteractionTarget__interactionManager((cast manager), (cast x : Float), (cast y : Float), (cast pointerId : Float)) : Null<N>);
+    target = (cast InteractionManager.findInteractionTarget__interactionManager((cast manager : Dynamic), (cast x : Float), (cast y : Float), (cast pointerId : Float)) : Null<N>);
     ((cast state : InteractionPointerState<N>).pointerDownTarget = null);
-    InteractionManager.setPointerData__interactionManager((cast _Runtime.coalesce(target, function():Dynamic return cast downTarget)), (cast null), (cast x : Float), (cast y : Float), (cast button : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast options));
+    InteractionManager.setPointerData__interactionManager(({ final __callArgument47:Dynamic = _Runtime.coalesce(target, function():Dynamic return cast downTarget); __callArgument47; }), ({ final __callArgument48:Dynamic = null; __callArgument48; }), (cast x : Float), (cast y : Float), (cast button : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument49:Dynamic = options; __callArgument49; }));
     if ((cast !_Runtime.strictEquals(target, null) : Bool)) {
-      InteractionManager.emitInteractionSignal__interactionManager((cast target), (cast (cast manager : flighthq.types.InteractionManager<N>).root), (cast 'onPointerUp' : String), (cast InteractionManager._pointerData__interactionManager));
+      InteractionManager.emitInteractionSignal__interactionManager((cast target : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic), (cast 'onPointerUp' : String), ({ final __callArgument50:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument50; }));
     }
     if ((cast _Runtime.strictEquals(downTarget, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(target, downTarget) : Bool)) {
-      InteractionManager.emitInteractionSignal__interactionManager((cast target), (cast (cast manager : flighthq.types.InteractionManager<N>).root), (cast 'onClick' : String), (cast InteractionManager._pointerData__interactionManager));
+      InteractionManager.emitInteractionSignal__interactionManager((cast target : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic), (cast 'onClick' : String), ({ final __callArgument51:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument51; }));
       if ((cast ((cast _Runtime.strictEquals((cast state : InteractionPointerState<N>).lastClickTarget, target) : Bool) && (cast ((cast (time - (cast state : InteractionPointerState<N>).lastClickTime) : Float) <= (cast (cast manager : flighthq.types.InteractionManager<N>).doubleClickDelay : Float)) : Bool)) : Bool)) {
-        InteractionManager.emitInteractionSignal__interactionManager((cast target), (cast (cast manager : flighthq.types.InteractionManager<N>).root), (cast 'onDoubleClick' : String), (cast InteractionManager._pointerData__interactionManager));
+        InteractionManager.emitInteractionSignal__interactionManager((cast target : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic), (cast 'onDoubleClick' : String), ({ final __callArgument52:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument52; }));
         ((cast state : InteractionPointerState<N>).lastClickTarget = null);
         ((cast state : InteractionPointerState<N>).lastClickTime = -HxMath.POSITIVE_INFINITY);
       } else {
@@ -247,23 +247,23 @@ class InteractionManager {
         ((cast state : InteractionPointerState<N>).lastClickTime = time);
       }
     } else {
-      InteractionManager.emitInteractionSignal__interactionManager((cast downTarget), (cast (cast manager : flighthq.types.InteractionManager<N>).root), (cast 'onReleaseOutside' : String), (cast InteractionManager._pointerData__interactionManager));
+      InteractionManager.emitInteractionSignal__interactionManager((cast downTarget : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic), (cast 'onReleaseOutside' : String), ({ final __callArgument53:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument53; }));
     }
   }
 
   public static function dispatchInteractionWheel<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, x:Float, y:Float, deltaX:Float = 0.0, deltaY:Float = 0.0, ?options:InteractionPointerOptions):Void {
-    InteractionManager.dispatchPointerSignalAt__interactionManager((cast manager), (cast 'onWheel'), (cast x : Float), (cast y : Float), (cast 0.0 : Float), (cast deltaX : Float), (cast deltaY : Float), (cast options));
+    InteractionManager.dispatchPointerSignalAt__interactionManager((cast manager : Dynamic), (cast 'onWheel' : Dynamic), (cast x : Float), (cast y : Float), (cast 0.0 : Float), (cast deltaX : Float), (cast deltaY : Float), ({ final __callArgument54:Dynamic = options; __callArgument54; }));
   }
 
   public static function enableInteractionSignals<N:NodeAny>(source:N):InteractionSignals {
     var runtime:NodeRuntime<NodeAny> = cast _Runtime.UNDEFINED;
-    runtime = (cast getNodeRuntime((cast source)) : NodeRuntime<NodeAny>);
-    return cast ({ final __nullishOwner5 = runtime; final __nullishValue6:Null<InteractionSignals> = cast (cast __nullishOwner5 : NodeRuntime<NodeAny>).interactionSignals; __nullishValue6 == null ? ((cast __nullishOwner5 : NodeRuntime<NodeAny>).interactionSignals = (cast (cast createInteractionSignals() : InteractionSignals) : Null<InteractionSignals>)) : (cast __nullishValue6 : Null<InteractionSignals>); });
+    runtime = (cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<NodeAny>);
+    return cast ({ final __nullishOwner55 = runtime; final __nullishValue56:Null<InteractionSignals> = cast (cast __nullishOwner55 : NodeRuntime<NodeAny>).interactionSignals; __nullishValue56 == null ? ((cast __nullishOwner55 : NodeRuntime<NodeAny>).interactionSignals = (cast (cast createInteractionSignals() : InteractionSignals) : Null<InteractionSignals>)) : (cast __nullishValue56 : Null<InteractionSignals>); });
     return cast null;
   }
 
   public static function getInteractionSignals<N:NodeAny>(source:N):Null<InteractionSignals> {
-    return cast (cast (cast getNodeRuntime((cast source)) : NodeRuntime<NodeAny>) : NodeRuntime<NodeAny>).interactionSignals;
+    return cast (cast (cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<NodeAny>) : NodeRuntime<NodeAny>).interactionSignals;
     return cast null;
   }
 
@@ -276,23 +276,23 @@ class InteractionManager {
   }
 
   public static function dispatchKeyboardSignal__interactionManager<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, name:KeyboardSignalName__interactionManager, key:String, keyCode:Float, ?modifiers:flighthq._internal._Partial<KeyboardEventData>):Void {
-    if ((cast ((cast !(cast (cast manager : flighthq.types.InteractionManager<N>).enabled : Bool) : Bool) || (cast !(cast (cast InteractionManager.hasInteractionSignalSubscriber__interactionManager((cast manager), (cast name : String)) : Bool) : Bool) : Bool)) : Bool)) { return; }
-    InteractionManager.setKeyboardData__interactionManager((cast key : String), (cast keyCode : Float), (cast modifiers));
-    InteractionManager.emitInteractionSignal__interactionManager((cast (cast manager : flighthq.types.InteractionManager<N>).root), (cast (cast manager : flighthq.types.InteractionManager<N>).root), (cast name), (cast InteractionManager._keyboardData__interactionManager));
+    if ((cast ((cast !(cast (cast manager : flighthq.types.InteractionManager<N>).enabled : Bool) : Bool) || (cast !(cast (cast InteractionManager.hasInteractionSignalSubscriber__interactionManager((cast manager : Dynamic), (cast name : String)) : Bool) : Bool) : Bool)) : Bool)) { return; }
+    InteractionManager.setKeyboardData__interactionManager((cast key : String), (cast keyCode : Float), ({ final __callArgument57:Dynamic = modifiers; __callArgument57; }));
+    InteractionManager.emitInteractionSignal__interactionManager((cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic), (cast name : Dynamic), ({ final __callArgument58:Dynamic = InteractionManager._keyboardData__interactionManager; __callArgument58; }));
   }
 
   public static function dispatchPointerRolloverChange__interactionManager<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, oldTarget:Null<N>, target:Null<N>):Void {
     var oldChain:Array<N> = cast _Runtime.UNDEFINED;
     var newChain:Array<N> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(oldTarget, null) : Bool)) {
-      InteractionManager.emitInteractionSignal__interactionManager((cast oldTarget), (cast (cast manager : flighthq.types.InteractionManager<N>).root), (cast 'onPointerOut' : String), (cast InteractionManager._pointerData__interactionManager));
+      InteractionManager.emitInteractionSignal__interactionManager((cast oldTarget : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic), (cast 'onPointerOut' : String), ({ final __callArgument59:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument59; }));
     }
-    oldChain = ((cast !_Runtime.strictEquals(oldTarget, null) : Bool) ? (cast (cast InteractionManager.getInteractionChain__interactionManager((cast oldTarget), (cast (cast manager : flighthq.types.InteractionManager<N>).root)) : Array<N>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
-    newChain = ((cast !_Runtime.strictEquals(target, null) : Bool) ? (cast (cast InteractionManager.getInteractionChain__interactionManager((cast target), (cast (cast manager : flighthq.types.InteractionManager<N>).root)) : Array<N>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
+    oldChain = ((cast !_Runtime.strictEquals(oldTarget, null) : Bool) ? (cast (cast InteractionManager.getInteractionChain__interactionManager((cast oldTarget : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic)) : Array<N>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
+    newChain = ((cast !_Runtime.strictEquals(target, null) : Bool) ? (cast (cast InteractionManager.getInteractionChain__interactionManager((cast target : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic)) : Array<N>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
     for (node in _Runtime.iterable(oldChain)) {
       if ((cast _Runtime.strictEquals(_Runtime.callProperty(newChain, 'indexOf', cast ([node] : Array<Dynamic>)), -1.0) : Bool)) {
-        (cast InteractionManager.setInteractionSignalCurrentTarget__interactionManager : flighthq._internal._Union2<flighthq._internal._Union2<KeyboardEventData, PointerEventData>, FocusEventData>->NodeAny->NodeAny->Void)((cast InteractionManager._pointerData__interactionManager), (cast node), (cast node));
-        InteractionManager.emitInteractionSignalDirect__interactionManager((cast node), (cast 'onPointerRollOut' : String), (cast InteractionManager._pointerData__interactionManager));
+        (cast InteractionManager.setInteractionSignalCurrentTarget__interactionManager : flighthq._internal._Union2<flighthq._internal._Union2<KeyboardEventData, PointerEventData>, FocusEventData>->NodeAny->NodeAny->Void)(({ final __callArgument62:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument62; }), ({ final __callArgument63:Dynamic = node; __callArgument63; }), ({ final __callArgument64:Dynamic = node; __callArgument64; }));
+        InteractionManager.emitInteractionSignalDirect__interactionManager((cast node : Dynamic), (cast 'onPointerRollOut' : String), ({ final __callArgument65:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument65; }));
       }
     }
     {
@@ -300,33 +300,33 @@ class InteractionManager {
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var node:N = flighthq._internal._StaticIndex.readArray(newChain, i);
         if ((cast _Runtime.strictEquals(_Runtime.callProperty(oldChain, 'indexOf', cast ([node] : Array<Dynamic>)), -1.0) : Bool)) {
-          (cast InteractionManager.setInteractionSignalCurrentTarget__interactionManager : flighthq._internal._Union2<flighthq._internal._Union2<KeyboardEventData, PointerEventData>, FocusEventData>->NodeAny->NodeAny->Void)((cast InteractionManager._pointerData__interactionManager), (cast node), (cast node));
-          InteractionManager.emitInteractionSignalDirect__interactionManager((cast node), (cast 'onPointerRollOver' : String), (cast InteractionManager._pointerData__interactionManager));
+          (cast InteractionManager.setInteractionSignalCurrentTarget__interactionManager : flighthq._internal._Union2<flighthq._internal._Union2<KeyboardEventData, PointerEventData>, FocusEventData>->NodeAny->NodeAny->Void)(({ final __callArgument66:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument66; }), ({ final __callArgument67:Dynamic = node; __callArgument67; }), ({ final __callArgument68:Dynamic = node; __callArgument68; }));
+          InteractionManager.emitInteractionSignalDirect__interactionManager((cast node : Dynamic), (cast 'onPointerRollOver' : String), ({ final __callArgument69:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument69; }));
         }
         i--;
       }
     }
     if ((cast !_Runtime.strictEquals(target, null) : Bool)) {
-      InteractionManager.emitInteractionSignal__interactionManager((cast target), (cast (cast manager : flighthq.types.InteractionManager<N>).root), (cast 'onPointerOver' : String), (cast InteractionManager._pointerData__interactionManager));
+      InteractionManager.emitInteractionSignal__interactionManager((cast target : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic), (cast 'onPointerOver' : String), ({ final __callArgument70:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument70; }));
     }
-    InteractionManager.applyInteractionCursor__interactionManager((cast manager), (cast target));
+    InteractionManager.applyInteractionCursor__interactionManager((cast manager : Dynamic), (cast target : Dynamic));
   }
 
   public static function applyInteractionCursor__interactionManager<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, target:Null<N>):Void {
     var backend:Null<CursorBackend> = cast _Runtime.UNDEFINED;
     backend = (cast manager : flighthq.types.InteractionManager<N>).cursorBackend;
     if ((cast _Runtime.strictEquals(backend, null) : Bool)) { return; }
-    (cast backend : CursorBackend).setCursor((cast (cast InteractionManager.resolveInteractionCursor__interactionManager((cast target), (cast (cast manager : flighthq.types.InteractionManager<N>).root)) : Null<flighthq._internal._Union2<String, flighthq._internal._Intersection2<String, flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any>>>>)));
+    (cast backend : CursorBackend).setCursor((cast InteractionManager.resolveInteractionCursor__interactionManager((cast target : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic)) : Null<flighthq._internal._Union2<String, flighthq._internal._Intersection2<String, flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any>>>>));
   }
 
   public static function resolveInteractionCursor__interactionManager<N:NodeAny>(target:Null<N>, root:N):Null<Cursor> {
     var current:Null<N> = cast _Runtime.UNDEFINED;
     current = target;
     while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
-      var cursor:Null<flighthq._internal._Union2<String, flighthq._internal._Intersection2<String, flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any>>>> = (cast getNodeCursor((cast current)) : Null<flighthq._internal._Union2<String, flighthq._internal._Intersection2<String, flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any>>>>);
+      var cursor:Null<flighthq._internal._Union2<String, flighthq._internal._Intersection2<String, flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any>>>> = (cast getNodeCursor(({ final __callArgument71:Dynamic = current; __callArgument71; })) : Null<flighthq._internal._Union2<String, flighthq._internal._Intersection2<String, flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any>>>>);
       if ((cast !_Runtime.strictEquals(cursor, null) : Bool)) { return cast cursor; }
       if ((cast _Runtime.strictEquals(current, root) : Bool)) { break; }
-      (current = cast ((cast getNodeParent((cast current)) : Null<N>) : Dynamic));
+      (current = cast ((cast getNodeParent((cast current : Dynamic)) : Null<N>) : Dynamic));
     }
     return cast null;
     return cast null;
@@ -334,28 +334,28 @@ class InteractionManager {
 
   public static function dispatchPointerSignalAt__interactionManager<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, name:PointerSignalName__interactionManager, x:Float, y:Float, button:Float, deltaX:Float = 0.0, deltaY:Float = 0.0, ?options:InteractionPointerOptions):Void {
     var target:Null<N> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast InteractionManager.isPointerSignalNeeded__interactionManager((cast manager), (cast cast ([name] : Array<Dynamic>))) : Bool) : Bool) : Bool)) { return; }
-    target = (cast InteractionManager.findInteractionTarget__interactionManager((cast manager), (cast x : Float), (cast y : Float), (cast _Runtime.coalesce(({ final __typedStruct9 = options; __typedStruct9 == null ? _Runtime.UNDEFINED : __typedStruct9.pointerId; }), function():Dynamic return cast 0.0) : Float)) : Null<N>);
+    if ((cast !(cast (cast InteractionManager.isPointerSignalNeeded__interactionManager((cast manager : Dynamic), ({ final __callArgument72:Dynamic = cast ([name] : Array<Dynamic>); __callArgument72; })) : Bool) : Bool) : Bool)) { return; }
+    target = (cast InteractionManager.findInteractionTarget__interactionManager((cast manager : Dynamic), (cast x : Float), (cast y : Float), (cast _Runtime.coalesce(({ final __typedStruct73 = options; __typedStruct73 == null ? _Runtime.UNDEFINED : __typedStruct73.pointerId; }), function():Dynamic return cast 0.0) : Float)) : Null<N>);
     if ((cast _Runtime.strictEquals(target, null) : Bool)) { return; }
-    InteractionManager.setPointerData__interactionManager((cast target), (cast null), (cast x : Float), (cast y : Float), (cast button : Float), (cast deltaX : Float), (cast deltaY : Float), (cast options));
-    InteractionManager.emitInteractionSignal__interactionManager((cast target), (cast (cast manager : flighthq.types.InteractionManager<N>).root), (cast name), (cast InteractionManager._pointerData__interactionManager));
+    InteractionManager.setPointerData__interactionManager(({ final __callArgument74:Dynamic = target; __callArgument74; }), ({ final __callArgument75:Dynamic = null; __callArgument75; }), (cast x : Float), (cast y : Float), (cast button : Float), (cast deltaX : Float), (cast deltaY : Float), ({ final __callArgument76:Dynamic = options; __callArgument76; }));
+    InteractionManager.emitInteractionSignal__interactionManager((cast target : Dynamic), (cast (cast manager : flighthq.types.InteractionManager<N>).root : Dynamic), (cast name : Dynamic), ({ final __callArgument77:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument77; }));
   }
 
   public static function emitInteractionSignal__interactionManager<N:NodeAny, Name:InteractionSignalName>(target:N, root:N, name:Name, data:InteractionSignalPayload__interactionManager<Name>):Void {
     var current:Null<N> = cast _Runtime.UNDEFINED;
     current = target;
     while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
-      InteractionManager.setInteractionSignalCurrentTarget__interactionManager((cast data), (cast target), (cast current));
-      InteractionManager.emitInteractionSignalDirect__interactionManager((cast current), (cast name), (cast data));
-      if ((cast (cast (cast InteractionManager.isInteractionSignalCancelled__interactionManager : { var ___u40_EntityRuntimeKey_u40_12063:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)((cast current), (cast name : String)) : Bool) : Bool)) { break; }
+      InteractionManager.setInteractionSignalCurrentTarget__interactionManager((cast data : Dynamic), ({ final __callArgument78:Dynamic = target; __callArgument78; }), ({ final __callArgument79:Dynamic = current; __callArgument79; }));
+      InteractionManager.emitInteractionSignalDirect__interactionManager((cast current : Dynamic), (cast name : Dynamic), (cast data : Dynamic));
+      if ((cast (cast (cast InteractionManager.isInteractionSignalCancelled__interactionManager : { var ___u40_EntityRuntimeKey_u40_12063:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument80:Dynamic = current; __callArgument80; }), (cast name : String)) : Bool) : Bool)) { break; }
       if ((cast _Runtime.strictEquals(current, root) : Bool)) { break; }
-      (current = cast ((cast getNodeParent((cast current)) : Null<N>) : Dynamic));
+      (current = cast ((cast getNodeParent((cast current : Dynamic)) : Null<N>) : Dynamic));
     }
   }
 
   public static function emitInteractionSignalDirect__interactionManager<N:NodeAny, Name:InteractionSignalName>(target:N, name:Name, data:InteractionSignalPayload__interactionManager<Name>):Void {
     var signal:Null<flighthq._internal._IndexedAccess<InteractionSignals, Name>> = cast _Runtime.UNDEFINED;
-    signal = (cast InteractionManager.getInteractionSignal__interactionManager((cast target), (cast name)) : Null<flighthq._internal._IndexedAccess<InteractionSignals, Name>>);
+    signal = (cast InteractionManager.getInteractionSignal__interactionManager(({ final __callArgument81:Dynamic = target; __callArgument81; }), (cast name : Dynamic)) : Null<flighthq._internal._IndexedAccess<InteractionSignals, Name>>);
     if ((cast !_Runtime.strictEquals(signal, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signal : Signal<InteractionSignalPayload__interactionManager<Name>->Void>)], [data]]), 1); }
   }
 
@@ -375,9 +375,9 @@ class InteractionManager {
     if ((cast !(cast (cast manager : flighthq.types.InteractionManager<N>).enabled : Bool) : Bool)) { return cast null; }
     captured = ((cast (cast manager : flighthq.types.InteractionManager<N>).pointerCaptures : flighthq._internal._Map<Float, N>).get(pointerId));
     if ((cast !_Runtime.strictEquals(captured, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast captured; }
-    if ((cast !_Runtime.strictEquals((cast manager : flighthq.types.InteractionManager<N>).spatialIndex, null) : Bool)) { return cast (cast findSpatialInteractionTarget((cast manager), (cast x : Float), (cast y : Float), (cast (cast manager : flighthq.types.InteractionManager<N>).precise : Bool)) : Null<N>); }
+    if ((cast !_Runtime.strictEquals((cast manager : flighthq.types.InteractionManager<N>).spatialIndex, null) : Bool)) { return cast (cast findSpatialInteractionTarget((cast manager : Dynamic), (cast x : Float), (cast y : Float), (cast (cast manager : flighthq.types.InteractionManager<N>).precise : Bool)) : Null<N>); }
     root = (cast manager : flighthq.types.InteractionManager<N>).root;
-    return cast (cast ((cast (cast manager : flighthq.types.InteractionManager<N>).precise : Bool) ? (cast (cast findGraphHitTargetPrecise((cast root), (cast x : Float), (cast y : Float)) : Null<Node<flighthq._internal._Any>>) : Dynamic) : (cast (cast findGraphHitTarget((cast root), (cast x : Float), (cast y : Float)) : Null<Node<flighthq._internal._Any>>) : Dynamic)) : Null<N>);
+    return cast (cast ((cast (cast manager : flighthq.types.InteractionManager<N>).precise : Bool) ? (cast (cast findGraphHitTargetPrecise((cast root : Dynamic), (cast x : Float), (cast y : Float)) : Null<Node<flighthq._internal._Any>>) : Dynamic) : (cast (cast findGraphHitTarget((cast root : Dynamic), (cast x : Float), (cast y : Float)) : Null<Node<flighthq._internal._Any>>) : Dynamic)) : Null<N>);
     return cast null;
   }
 
@@ -400,7 +400,7 @@ class InteractionManager {
     while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([current] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(current, root) : Bool)) { break; }
-      (current = cast ((cast getNodeParent((cast current)) : Null<N>) : Dynamic));
+      (current = cast ((cast getNodeParent((cast current : Dynamic)) : Null<N>) : Dynamic));
     }
     return cast out;
     return cast null;
@@ -408,32 +408,32 @@ class InteractionManager {
 
   public static function getInteractionSignal__interactionManager<N:NodeAny, Name:InteractionSignalName>(source:N, name:Name):Null<flighthq._internal._IndexedAccess<InteractionSignals, Name>> {
     var signals:Null<InteractionSignals> = cast _Runtime.UNDEFINED;
-    signals = _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<flighthq._internal._Any>), 'interactionSignals');
+    signals = _Runtime.field((cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<flighthq._internal._Any>), 'interactionSignals');
     return cast ((cast !_Runtime.strictEquals(signals, null) : Bool) ? (cast _Runtime.getIndex(signals, name) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function getTrackedInteractionSignalSlot__interactionManager<N:NodeAny, Name:InteractionSignalName>(manager:flighthq.types.InteractionManager<N>, target:N, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Null<AnyInteractionSignalSlot> {
-    return cast _Runtime.coalesce(({ final __collection12:Dynamic = ({ final __collection11:Dynamic = ((cast (cast manager : flighthq.types.InteractionManager<N>).trackedSignalSlots : flighthq._internal._Map<N, flighthq._internal._Map<String, flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).get(target)); __collection11 == null ? _Runtime.UNDEFINED : ((cast __collection11 : flighthq._internal._Map<String, flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>).get(name)); }); __collection12 == null ? _Runtime.UNDEFINED : ((cast __collection12 : flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>).get((cast slot : AnyInteractionSignalSlot))); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection84:Dynamic = ({ final __collection83:Dynamic = ((cast (cast manager : flighthq.types.InteractionManager<N>).trackedSignalSlots : flighthq._internal._Map<N, flighthq._internal._Map<String, flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).get(target)); __collection83 == null ? _Runtime.UNDEFINED : ((cast __collection83 : flighthq._internal._Map<String, flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>).get(name)); }); __collection84 == null ? _Runtime.UNDEFINED : ((cast __collection84 : flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>).get((cast slot : AnyInteractionSignalSlot))); }), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function hasInteractionSignalSubscriber__interactionManager<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, name:InteractionSignalName):Bool {
     if ((cast ((cast _Runtime.coalesce(((cast (cast manager : flighthq.types.InteractionManager<N>).signalSubscriberCounts : flighthq._internal._Map<String, Float>).get(name)), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)) : Bool)) { return cast true; }
     if ((cast (cast manager : flighthq.types.InteractionManager<N>).trackedSubscribersOnly : Bool)) { return cast false; }
-    return cast (cast (cast InteractionManager.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_12063:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)((cast (cast manager : flighthq.types.InteractionManager<N>).root), (cast name : String)) : Bool);
+    return cast (cast (cast InteractionManager.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_12063:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument85:Dynamic = (cast manager : flighthq.types.InteractionManager<N>).root; __callArgument85; }), (cast name : String)) : Bool);
     return cast null;
   }
 
   public static function hasInteractionSignalSubscriberInGraph__interactionManager<N:NodeAny>(source:N, name:InteractionSignalName):Bool {
     var signal:Null<flighthq._internal._Union2<flighthq._internal._Union2<Signal<KeyboardEventData->Void>, Signal<PointerEventData->Void>>, Signal<FocusEventData->Void>>> = cast _Runtime.UNDEFINED;
     var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
-    signal = (cast InteractionManager.getInteractionSignal__interactionManager((cast source), (cast name : String)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<Signal<KeyboardEventData->Void>, Signal<PointerEventData->Void>>, Signal<FocusEventData->Void>>>);
-    if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct13 = signal; __typedStruct13 == null ? _Runtime.UNDEFINED : (cast __typedStruct13 : { var data:Null<flighthq._internal._Union2<flighthq._internal._Union2<SignalData<KeyboardEventData->Void>, SignalData<PointerEventData->Void>>, SignalData<FocusEventData->Void>>>; }).data; }), null) : Bool) && (cast !_Runtime.strictEquals(signal, null) : Bool)) : Bool)) { return cast true; }
-    children = _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<flighthq._internal._Any>), 'children');
+    signal = (cast InteractionManager.getInteractionSignal__interactionManager((cast source : Dynamic), (cast name : String)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<Signal<KeyboardEventData->Void>, Signal<PointerEventData->Void>>, Signal<FocusEventData->Void>>>);
+    if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct86 = signal; __typedStruct86 == null ? _Runtime.UNDEFINED : (cast __typedStruct86 : { var data:Null<flighthq._internal._Union2<flighthq._internal._Union2<SignalData<KeyboardEventData->Void>, SignalData<PointerEventData->Void>>, SignalData<FocusEventData->Void>>>; }).data; }), null) : Bool) && (cast !_Runtime.strictEquals(signal, null) : Bool)) : Bool)) { return cast true; }
+    children = _Runtime.field((cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        if ((cast (cast (cast InteractionManager.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_12063:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)((cast (cast child : N)), (cast name : String)) : Bool) : Bool)) { return cast true; }
+        if ((cast (cast (cast InteractionManager.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_12063:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument89:Dynamic = (cast child : N); __callArgument89; }), (cast name : String)) : Bool) : Bool)) { return cast true; }
       }
     }
     return cast false;
@@ -445,14 +445,14 @@ class InteractionManager {
   }
 
   public static function isInteractionSignalCancelled__interactionManager<N:NodeAny>(source:N, name:InteractionSignalName):Bool {
-    return cast _Runtime.strictEquals(({ final __typedStruct17 = ({ final __typedStruct16 = (cast InteractionManager.getInteractionSignal__interactionManager((cast source), (cast name : String)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<Signal<KeyboardEventData->Void>, Signal<PointerEventData->Void>>, Signal<FocusEventData->Void>>>); __typedStruct16 == null ? _Runtime.UNDEFINED : (cast __typedStruct16 : { var data:Null<flighthq._internal._Union2<flighthq._internal._Union2<SignalData<KeyboardEventData->Void>, SignalData<PointerEventData->Void>>, SignalData<FocusEventData->Void>>>; }).data; }); __typedStruct17 == null ? _Runtime.UNDEFINED : (cast __typedStruct17 : { var cancelled:Bool; }).cancelled; }), true);
+    return cast _Runtime.strictEquals(({ final __typedStruct91 = ({ final __typedStruct90 = (cast InteractionManager.getInteractionSignal__interactionManager((cast source : Dynamic), (cast name : String)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<Signal<KeyboardEventData->Void>, Signal<PointerEventData->Void>>, Signal<FocusEventData->Void>>>); __typedStruct90 == null ? _Runtime.UNDEFINED : (cast __typedStruct90 : { var data:Null<flighthq._internal._Union2<flighthq._internal._Union2<SignalData<KeyboardEventData->Void>, SignalData<PointerEventData->Void>>, SignalData<FocusEventData->Void>>>; }).data; }); __typedStruct91 == null ? _Runtime.UNDEFINED : (cast __typedStruct91 : { var cancelled:Bool; }).cancelled; }), true);
     return cast null;
   }
 
   public static function isPointerSignalNeeded__interactionManager<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, names:Array<InteractionSignalName>):Bool {
     if ((cast !(cast (cast manager : flighthq.types.InteractionManager<N>).enabled : Bool) : Bool)) { return cast false; }
     for (name in _Runtime.iterable(names)) {
-      if ((cast (cast InteractionManager.hasInteractionSignalSubscriber__interactionManager((cast manager), (cast name : String)) : Bool) : Bool)) { return cast true; }
+      if ((cast (cast InteractionManager.hasInteractionSignalSubscriber__interactionManager((cast manager : Dynamic), (cast name : String)) : Bool) : Bool)) { return cast true; }
     }
     return cast false;
     return cast null;
@@ -462,7 +462,7 @@ class InteractionManager {
     var targetSlots:Null<flighthq._internal._Map<String, flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>> = cast _Runtime.UNDEFINED;
     var signalSlots:Null<flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>> = cast _Runtime.UNDEFINED;
     targetSlots = ((cast (cast manager : flighthq.types.InteractionManager<N>).trackedSignalSlots : flighthq._internal._Map<N, flighthq._internal._Map<String, flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).get(target));
-    signalSlots = ({ final __collection20:Dynamic = targetSlots; __collection20 == null ? _Runtime.UNDEFINED : ((cast __collection20 : flighthq._internal._Map<String, flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>).get(name)); });
+    signalSlots = ({ final __collection94:Dynamic = targetSlots; __collection94 == null ? _Runtime.UNDEFINED : ((cast __collection94 : flighthq._internal._Map<String, flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>).get(name)); });
     if ((cast _Runtime.strictEquals(signalSlots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     ((cast signalSlots : flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>).delete_((cast slot : AnyInteractionSignalSlot)));
     if ((cast _Runtime.strictEquals((cast signalSlots : flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>).size, 0.0) : Bool)) { ((cast targetSlots : flighthq._internal._Map<Dynamic, Dynamic>).delete_(name)); }
@@ -470,12 +470,12 @@ class InteractionManager {
   }
 
   public static function setKeyboardData__interactionManager(key:String, keyCode:Float, modifiers:Null<flighthq._internal._Partial<KeyboardEventData>>):Void {
-    ((cast InteractionManager._keyboardData__interactionManager : KeyboardEventData).altKey = _Runtime.coalesce(({ final __structural21 = modifiers; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { @:optional var altKey:Null<Bool>; }).altKey; }), function():Dynamic return cast false));
-    ((cast InteractionManager._keyboardData__interactionManager : KeyboardEventData).ctrlKey = _Runtime.coalesce(({ final __structural22 = modifiers; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { @:optional var ctrlKey:Null<Bool>; }).ctrlKey; }), function():Dynamic return cast false));
+    ((cast InteractionManager._keyboardData__interactionManager : KeyboardEventData).altKey = _Runtime.coalesce(({ final __structural95 = modifiers; __structural95 == null ? _Runtime.UNDEFINED : (cast __structural95 : { @:optional var altKey:Null<Bool>; }).altKey; }), function():Dynamic return cast false));
+    ((cast InteractionManager._keyboardData__interactionManager : KeyboardEventData).ctrlKey = _Runtime.coalesce(({ final __structural96 = modifiers; __structural96 == null ? _Runtime.UNDEFINED : (cast __structural96 : { @:optional var ctrlKey:Null<Bool>; }).ctrlKey; }), function():Dynamic return cast false));
     ((cast InteractionManager._keyboardData__interactionManager : KeyboardEventData).key = key);
     ((cast InteractionManager._keyboardData__interactionManager : KeyboardEventData).keyCode = keyCode);
-    ((cast InteractionManager._keyboardData__interactionManager : KeyboardEventData).metaKey = _Runtime.coalesce(({ final __structural23 = modifiers; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { @:optional var metaKey:Null<Bool>; }).metaKey; }), function():Dynamic return cast false));
-    ((cast InteractionManager._keyboardData__interactionManager : KeyboardEventData).shiftKey = _Runtime.coalesce(({ final __structural24 = modifiers; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var shiftKey:Null<Bool>; }).shiftKey; }), function():Dynamic return cast false));
+    ((cast InteractionManager._keyboardData__interactionManager : KeyboardEventData).metaKey = _Runtime.coalesce(({ final __structural97 = modifiers; __structural97 == null ? _Runtime.UNDEFINED : (cast __structural97 : { @:optional var metaKey:Null<Bool>; }).metaKey; }), function():Dynamic return cast false));
+    ((cast InteractionManager._keyboardData__interactionManager : KeyboardEventData).shiftKey = _Runtime.coalesce(({ final __structural98 = modifiers; __structural98 == null ? _Runtime.UNDEFINED : (cast __structural98 : { @:optional var shiftKey:Null<Bool>; }).shiftKey; }), function():Dynamic return cast false));
   }
 
   public static function setInteractionSignalCurrentTarget__interactionManager<Name:InteractionSignalName>(data:InteractionSignalPayload__interactionManager<Name>, target:NodeAny, currentTarget:NodeAny):Void {
@@ -483,30 +483,30 @@ class InteractionManager {
       var pointerData:PointerEventData = (cast data : PointerEventData);
       ((cast pointerData : PointerEventData).target = target);
       ((cast pointerData : PointerEventData).currentTarget = currentTarget);
-      InteractionManager.setPointerDataLocalPosition__interactionManager((cast pointerData), (cast currentTarget));
+      InteractionManager.setPointerDataLocalPosition__interactionManager(({ final __callArgument99:Dynamic = pointerData; __callArgument99; }), ({ final __callArgument100:Dynamic = currentTarget; __callArgument100; }));
     }
   }
 
   public static function setPointerData__interactionManager(target:Null<NodeAny>, currentTarget:Null<NodeAny>, x:Float, y:Float, button:Float, deltaX:Float = 0.0, deltaY:Float = 0.0, ?options:InteractionPointerOptions):Void {
-    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).altKey = _Runtime.coalesce(({ final __typedStruct25 = options; __typedStruct25 == null ? _Runtime.UNDEFINED : __typedStruct25.altKey; }), function():Dynamic return cast false));
+    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).altKey = _Runtime.coalesce(({ final __typedStruct101 = options; __typedStruct101 == null ? _Runtime.UNDEFINED : __typedStruct101.altKey; }), function():Dynamic return cast false));
     ((cast InteractionManager._pointerData__interactionManager : PointerEventData).button = button);
-    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).buttons = _Runtime.coalesce(({ final __typedStruct26 = options; __typedStruct26 == null ? _Runtime.UNDEFINED : __typedStruct26.buttons; }), function():Dynamic return cast ((cast ((cast button : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (1 << _Runtime.toInt32(button)) : Dynamic) : (cast 0.0 : Dynamic))));
-    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).ctrlKey = _Runtime.coalesce(({ final __typedStruct27 = options; __typedStruct27 == null ? _Runtime.UNDEFINED : __typedStruct27.ctrlKey; }), function():Dynamic return cast false));
+    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).buttons = _Runtime.coalesce(({ final __typedStruct102 = options; __typedStruct102 == null ? _Runtime.UNDEFINED : __typedStruct102.buttons; }), function():Dynamic return cast ((cast ((cast button : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (1 << _Runtime.toInt32(button)) : Dynamic) : (cast 0.0 : Dynamic))));
+    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).ctrlKey = _Runtime.coalesce(({ final __typedStruct103 = options; __typedStruct103 == null ? _Runtime.UNDEFINED : __typedStruct103.ctrlKey; }), function():Dynamic return cast false));
     ((cast InteractionManager._pointerData__interactionManager : PointerEventData).currentTarget = currentTarget);
     ((cast InteractionManager._pointerData__interactionManager : PointerEventData).deltaX = deltaX);
     ((cast InteractionManager._pointerData__interactionManager : PointerEventData).deltaY = deltaY);
     ((cast InteractionManager._pointerData__interactionManager : PointerEventData).localX = x);
     ((cast InteractionManager._pointerData__interactionManager : PointerEventData).localY = y);
-    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).metaKey = _Runtime.coalesce(({ final __typedStruct28 = options; __typedStruct28 == null ? _Runtime.UNDEFINED : __typedStruct28.metaKey; }), function():Dynamic return cast false));
-    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).pointerId = _Runtime.coalesce(({ final __typedStruct29 = options; __typedStruct29 == null ? _Runtime.UNDEFINED : __typedStruct29.pointerId; }), function():Dynamic return cast 0.0));
-    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).pointerType = _Runtime.coalesce(({ final __typedStruct30 = options; __typedStruct30 == null ? _Runtime.UNDEFINED : __typedStruct30.pointerType; }), function():Dynamic return cast 'mouse'));
-    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).shiftKey = _Runtime.coalesce(({ final __typedStruct31 = options; __typedStruct31 == null ? _Runtime.UNDEFINED : __typedStruct31.shiftKey; }), function():Dynamic return cast false));
+    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).metaKey = _Runtime.coalesce(({ final __typedStruct104 = options; __typedStruct104 == null ? _Runtime.UNDEFINED : __typedStruct104.metaKey; }), function():Dynamic return cast false));
+    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).pointerId = _Runtime.coalesce(({ final __typedStruct105 = options; __typedStruct105 == null ? _Runtime.UNDEFINED : __typedStruct105.pointerId; }), function():Dynamic return cast 0.0));
+    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).pointerType = _Runtime.coalesce(({ final __typedStruct106 = options; __typedStruct106 == null ? _Runtime.UNDEFINED : __typedStruct106.pointerType; }), function():Dynamic return cast 'mouse'));
+    ((cast InteractionManager._pointerData__interactionManager : PointerEventData).shiftKey = _Runtime.coalesce(({ final __typedStruct107 = options; __typedStruct107 == null ? _Runtime.UNDEFINED : __typedStruct107.shiftKey; }), function():Dynamic return cast false));
     ((cast InteractionManager._pointerData__interactionManager : PointerEventData).target = target);
     ((cast InteractionManager._pointerData__interactionManager : PointerEventData).worldX = x);
     ((cast InteractionManager._pointerData__interactionManager : PointerEventData).worldY = y);
     ((cast InteractionManager._pointerData__interactionManager : PointerEventData).x = x);
     ((cast InteractionManager._pointerData__interactionManager : PointerEventData).y = y);
-    if ((cast !_Runtime.strictEquals(currentTarget, null) : Bool)) { InteractionManager.setPointerDataLocalPosition__interactionManager((cast InteractionManager._pointerData__interactionManager), (cast currentTarget)); }
+    if ((cast !_Runtime.strictEquals(currentTarget, null) : Bool)) { InteractionManager.setPointerDataLocalPosition__interactionManager(({ final __callArgument108:Dynamic = InteractionManager._pointerData__interactionManager; __callArgument108; }), ({ final __callArgument109:Dynamic = currentTarget; __callArgument109; })); }
   }
 
   public static function setTrackedInteractionSignalSlot__interactionManager<N:NodeAny, Name:InteractionSignalName>(manager:flighthq.types.InteractionManager<N>, target:N, name:Name, slot:InteractionSignalSlot__interactionManager<Name>, connectedSlot:InteractionSignalSlot__interactionManager<Name>):Void {
@@ -526,19 +526,19 @@ class InteractionManager {
   }
 
   public static function setPointerDataLocalPosition__interactionManager(data:PointerEventData, currentTarget:NodeAny):Void {
-    if ((cast !(cast (cast InteractionManager.isTransform2DNode__interactionManager((cast currentTarget)) : Bool) : Bool) : Bool)) {
+    if ((cast !(cast (cast InteractionManager.isTransform2DNode__interactionManager(({ final __callArgument110:Dynamic = currentTarget; __callArgument110; })) : Bool) : Bool) : Bool)) {
       ((cast data : PointerEventData).localX = (cast data : PointerEventData).worldX);
       ((cast data : PointerEventData).localY = (cast data : PointerEventData).worldY);
       return;
     }
-    inverseMatrixTransformPointXY((cast InteractionManager._localPoint__interactionManager), (cast (cast getNodeWorldMatrix((cast currentTarget)) : Matrix)), (cast (cast data : PointerEventData).worldX : Float), (cast (cast data : PointerEventData).worldY : Float));
+    inverseMatrixTransformPointXY(({ final __callArgument111:Dynamic = InteractionManager._localPoint__interactionManager; __callArgument111; }), ({ final __callArgument112:Dynamic = (cast getNodeWorldMatrix((cast currentTarget : Dynamic)) : Matrix); __callArgument112; }), (cast (cast data : PointerEventData).worldX : Float), (cast (cast data : PointerEventData).worldY : Float));
     ((cast data : PointerEventData).localX = (cast InteractionManager._localPoint__interactionManager : { var x:Float; var y:Float; }).x);
     ((cast data : PointerEventData).localY = (cast InteractionManager._localPoint__interactionManager : { var x:Float; var y:Float; }).y);
   }
 
   public static function isTransform2DNode__interactionManager(source:NodeAny):Bool {
     var runtime:{ >NodeRuntime<NodeTraits>, @:optional var worldMatrix:flighthq._internal._Any; } = cast _Runtime.UNDEFINED;
-    runtime = (cast getNodeRuntime((cast source)) : flighthq._internal._Intersection2<NodeRuntime<Dynamic>, { @:optional var worldMatrix:flighthq._internal._Any; }>);
+    runtime = (cast getNodeRuntime((cast source : Dynamic)) : flighthq._internal._Intersection2<NodeRuntime<Dynamic>, { @:optional var worldMatrix:flighthq._internal._Any; }>);
     return cast _Runtime.hasField(runtime, 'worldMatrix');
     return cast null;
   }

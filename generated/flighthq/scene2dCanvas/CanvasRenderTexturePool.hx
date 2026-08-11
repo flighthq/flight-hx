@@ -24,12 +24,12 @@ import flighthq.types.Texture.TextureLike;
 class CanvasRenderTexturePool {
   public static function acquireCanvasRenderTexture(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool, descriptor:RenderTargetDescriptor):RenderTexture {
     var renderTexture:RenderTexture = cast _Runtime.UNDEFINED;
-    CanvasRenderTexturePool.assertUsablePool__canvasRenderTexturePool((cast state), (cast pool));
-    renderTexture = _Runtime.coalesce(_Runtime.callProperty((cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createRenderTexture((cast descriptor)) : RenderTexture));
-    CanvasRenderTexturePool.applyRenderTargetDescriptor__canvasRenderTexturePool((cast (cast renderTexture : RenderTexture).source), (cast descriptor));
-    resetTextureUvTransform((cast renderTexture));
+    CanvasRenderTexturePool.assertUsablePool__canvasRenderTexturePool(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }));
+    renderTexture = _Runtime.coalesce(_Runtime.callProperty((cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createRenderTexture(({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : RenderTexture));
+    CanvasRenderTexturePool.applyRenderTargetDescriptor__canvasRenderTexturePool((cast renderTexture : RenderTexture).source, ({ final __callArgument3:Dynamic = descriptor; __callArgument3; }));
+    resetTextureUvTransform(({ final __callArgument4:Dynamic = renderTexture; __callArgument4; }));
     ((cast renderTexture : RenderTexture).colorSpace = _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'));
-    invalidateCanvasRenderTexture((cast state), (cast renderTexture), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+    invalidateCanvasRenderTexture(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = renderTexture; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     ((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).add(renderTexture));
     return cast renderTexture;
     return cast null;
@@ -43,15 +43,15 @@ class CanvasRenderTexturePool {
   public static function destroyCanvasRenderTexturePool(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool):Void {
     var textures:flighthq._internal._Set<RenderTexture> = cast _Runtime.UNDEFINED;
     if ((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).destroyed : Bool)) { return; }
-    CanvasRenderTexturePool.assertPoolOwner__canvasRenderTexturePool((cast state), (cast pool));
+    CanvasRenderTexturePool.assertPoolOwner__canvasRenderTexturePool(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = pool; __callArgument8; }));
     textures = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [_Runtime.concatArrays([_Runtime.toArray((cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).free), _Runtime.toArray((cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).leased)])]);
     for (renderTexture in _Runtime.iterable(textures)) {
-      destroyCanvasRenderTexture((cast state), (cast renderTexture));
+      destroyCanvasRenderTexture(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = renderTexture; __callArgument12; }));
     }
     _Runtime.setLength((cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).free, 0.0);
     ((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).clear());
     for (target in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).effectTargets : CanvasRenderTargetPool).free), _Runtime.toArray((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).effectTargets : CanvasRenderTargetPool).inUse)]))) {
-      destroyCanvasRenderTarget((cast target));
+      destroyCanvasRenderTarget(({ final __callArgument15:Dynamic = target; __callArgument15; }));
     }
     _Runtime.setLength((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).effectTargets : CanvasRenderTargetPool).free, 0.0);
     _Runtime.setLength((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).effectTargets : CanvasRenderTargetPool).inUse, 0.0);
@@ -60,11 +60,11 @@ class CanvasRenderTexturePool {
   }
 
   public static function releaseCanvasRenderTexture(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool, renderTexture:RenderTexture):Void {
-    CanvasRenderTexturePool.assertUsablePool__canvasRenderTexturePool((cast state), (cast pool));
+    CanvasRenderTexturePool.assertUsablePool__canvasRenderTexturePool(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = pool; __callArgument17; }));
     if ((cast !(cast ((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).delete_(renderTexture)) : Bool) : Bool)) {
       _Runtime.throwValue(_Runtime.error('releaseCanvasRenderTexture: texture is not leased from this pool'));
     }
-    invalidateCanvasRenderTexture((cast state), (cast renderTexture), (cast 'released' : String));
+    invalidateCanvasRenderTexture(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = renderTexture; __callArgument19; }), (cast 'released' : String));
     _Runtime.callProperty((cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).free, 'push', cast ([renderTexture] : Array<Dynamic>));
   }
 
@@ -74,40 +74,40 @@ class CanvasRenderTexturePool {
     try {
       try {
         for (descriptor in _Runtime.iterable(descriptors)) {
-          _Runtime.callProperty(textures, 'push', cast ([(cast acquireCanvasRenderTexture((cast state), (cast pool), (cast descriptor)) : RenderTexture)] : Array<Dynamic>));
+          _Runtime.callProperty(textures, 'push', cast ([(cast acquireCanvasRenderTexture(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = pool; __callArgument23; }), ({ final __callArgument24:Dynamic = descriptor; __callArgument24; })) : RenderTexture)] : Array<Dynamic>));
         }
-        var __returnValue6:Dynamic = (cast callback((cast textures)) : T);
+        var __returnValue25:Dynamic = (cast callback(({ final __callArgument26:Dynamic = textures; __callArgument26; })) : T);
         {
           {
             var i:Float = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
             while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
               var texture:RenderTexture = flighthq._internal._StaticIndex.readArray(textures, i);
-              if ((cast ((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseCanvasRenderTexture((cast state), (cast pool), (cast texture)); }
+              if ((cast ((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseCanvasRenderTexture(({ final __callArgument27:Dynamic = state; __callArgument27; }), ({ final __callArgument28:Dynamic = pool; __callArgument28; }), ({ final __callArgument29:Dynamic = texture; __callArgument29; })); }
               i--;
             }
           }
         }
-        return cast __returnValue6;
+        return cast __returnValue25;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError7:Dynamic) {
+    } catch (__finallyError30:Dynamic) {
       {
         {
           var i:Float = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
             var texture:RenderTexture = flighthq._internal._StaticIndex.readArray(textures, i);
-            if ((cast ((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseCanvasRenderTexture((cast state), (cast pool), (cast texture)); }
+            if ((cast ((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseCanvasRenderTexture(({ final __callArgument31:Dynamic = state; __callArgument31; }), ({ final __callArgument32:Dynamic = pool; __callArgument32; }), ({ final __callArgument33:Dynamic = texture; __callArgument33; })); }
             i--;
           }
         }
       }
-      _Runtime.throwValue(__finallyError7);
+      _Runtime.throwValue(__finallyError30);
     }
     {
       {
         var i:Float = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           var texture:RenderTexture = flighthq._internal._StaticIndex.readArray(textures, i);
-          if ((cast ((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseCanvasRenderTexture((cast state), (cast pool), (cast texture)); }
+          if ((cast ((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).has(texture)) : Bool)) { releaseCanvasRenderTexture(({ final __callArgument34:Dynamic = state; __callArgument34; }), ({ final __callArgument35:Dynamic = pool; __callArgument35; }), ({ final __callArgument36:Dynamic = texture; __callArgument36; })); }
           i--;
         }
       }
@@ -131,12 +131,12 @@ class CanvasRenderTexturePool {
 
   public static function assertUsablePool__canvasRenderTexturePool(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool):Void {
     if ((cast (cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).destroyed : Bool)) { _Runtime.throwValue(_Runtime.error('CanvasRenderTexturePool has been destroyed')); }
-    CanvasRenderTexturePool.assertPoolOwner__canvasRenderTexturePool((cast state), (cast pool));
+    CanvasRenderTexturePool.assertPoolOwner__canvasRenderTexturePool(({ final __callArgument37:Dynamic = state; __callArgument37; }), ({ final __callArgument38:Dynamic = pool; __callArgument38; }));
   }
 
   public static function assertPoolOwner__canvasRenderTexturePool(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool):Void {
     var owner:CanvasRenderState = cast _Runtime.UNDEFINED;
-    owner = (cast getCanvasRenderCacheScreenState((cast state)) : CanvasRenderState);
+    owner = (cast getCanvasRenderCacheScreenState(({ final __callArgument39:Dynamic = state; __callArgument39; })) : CanvasRenderState);
     if ((cast _Runtime.strictEquals((cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).owner, null) : Bool)) {
       ((cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).owner = owner);
     } else { if ((cast !_Runtime.strictEquals((cast pool : flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool).owner, owner) : Bool)) {

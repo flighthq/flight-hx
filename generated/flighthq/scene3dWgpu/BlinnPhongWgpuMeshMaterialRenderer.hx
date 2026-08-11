@@ -48,34 +48,34 @@ class BlinnPhongWgpuMeshMaterialRenderer {
     var format:String = cast _Runtime.UNDEFINED;
     var pipeline:WgpuClassicPipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
-    stateRuntime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     blinnPhong = (cast material : Null<BlinnPhongMaterial>);
     format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    pipeline = (cast ensureWgpuClassicPipeline((cast state), (cast (cast BlinnPhongWgpuMeshMaterialRenderer.defineKeyForMaterial__blinnPhongWgpuMeshMaterialRenderer((cast blinnPhong)) : WgpuClassicDefineKey)), (cast format : String)) : WgpuClassicPipeline);
-    writeWgpuFrameUniform((cast state), (cast camera), (cast lights));
+    pipeline = (cast ensureWgpuClassicPipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast BlinnPhongWgpuMeshMaterialRenderer.defineKeyForMaterial__blinnPhongWgpuMeshMaterialRenderer(({ final __callArgument2:Dynamic = blinnPhong; __callArgument2; })) : WgpuClassicDefineKey), (cast format : String)) : WgpuClassicPipeline);
+    writeWgpuFrameUniform(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = camera; __callArgument4; }), ({ final __callArgument5:Dynamic = lights; __callArgument5; }));
     if ((cast _Runtime.strictEquals(blinnPhong, null) : Bool)) {
-      (group = cast ((cast bindWgpuClassicSurface((cast state), (cast pipeline), (cast BlinnPhongWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__blinnPhongWgpuMeshMaterialRenderer), (cast BlinnPhongWgpuMeshMaterialRenderer.WHITE__blinnPhongWgpuMeshMaterialRenderer), (cast BlinnPhongWgpuMeshMaterialRenderer.WHITE__blinnPhongWgpuMeshMaterialRenderer), (cast 32.0 : Float), (cast 0.5 : Float), (cast null), (cast null), (cast null), (cast null)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (group = cast ((cast bindWgpuClassicSurface(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pipeline; __callArgument7; }), ({ final __callArgument8:Dynamic = BlinnPhongWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__blinnPhongWgpuMeshMaterialRenderer; __callArgument8; }), ({ final __callArgument9:Dynamic = BlinnPhongWgpuMeshMaterialRenderer.WHITE__blinnPhongWgpuMeshMaterialRenderer; __callArgument9; }), ({ final __callArgument10:Dynamic = BlinnPhongWgpuMeshMaterialRenderer.WHITE__blinnPhongWgpuMeshMaterialRenderer; __callArgument10; }), (cast 32.0 : Float), (cast 0.5 : Float), (cast null : Dynamic), (cast null : Dynamic), (cast null : Dynamic), (cast null : Dynamic)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
-      (cast unpackColorToLinear((cast BlinnPhongWgpuMeshMaterialRenderer._diffuse__blinnPhongWgpuMeshMaterialRenderer), (cast _Runtime.field(blinnPhong, 'diffuse') : Float)) : LinearColor);
-      (cast unpackColorToLinear((cast BlinnPhongWgpuMeshMaterialRenderer._specular__blinnPhongWgpuMeshMaterialRenderer), (cast _Runtime.field(blinnPhong, 'specular') : Float)) : LinearColor);
-      (group = cast ((cast bindWgpuClassicSurface((cast state), (cast pipeline), (cast blinnPhong), (cast BlinnPhongWgpuMeshMaterialRenderer._diffuse__blinnPhongWgpuMeshMaterialRenderer), (cast BlinnPhongWgpuMeshMaterialRenderer._specular__blinnPhongWgpuMeshMaterialRenderer), (cast _Runtime.field(blinnPhong, 'shininess') : Float), (cast _Runtime.field(blinnPhong, 'alphaCutoff') : Float), (cast _Runtime.field(blinnPhong, 'diffuseMap')), (cast _Runtime.field(blinnPhong, 'specularMap')), (cast _Runtime.field(blinnPhong, 'normalMap')), (cast _Runtime.field(blinnPhong, 'alphaMap'))) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (cast unpackColorToLinear(({ final __callArgument11:Dynamic = BlinnPhongWgpuMeshMaterialRenderer._diffuse__blinnPhongWgpuMeshMaterialRenderer; __callArgument11; }), (cast _Runtime.field(blinnPhong, 'diffuse') : Float)) : LinearColor);
+      (cast unpackColorToLinear(({ final __callArgument12:Dynamic = BlinnPhongWgpuMeshMaterialRenderer._specular__blinnPhongWgpuMeshMaterialRenderer; __callArgument12; }), (cast _Runtime.field(blinnPhong, 'specular') : Float)) : LinearColor);
+      (group = cast ((cast bindWgpuClassicSurface(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = pipeline; __callArgument14; }), ({ final __callArgument15:Dynamic = blinnPhong; __callArgument15; }), ({ final __callArgument16:Dynamic = BlinnPhongWgpuMeshMaterialRenderer._diffuse__blinnPhongWgpuMeshMaterialRenderer; __callArgument16; }), ({ final __callArgument17:Dynamic = BlinnPhongWgpuMeshMaterialRenderer._specular__blinnPhongWgpuMeshMaterialRenderer; __callArgument17; }), (cast _Runtime.field(blinnPhong, 'shininess') : Float), (cast _Runtime.field(blinnPhong, 'alphaCutoff') : Float), (cast _Runtime.field(blinnPhong, 'diffuseMap') : Dynamic), (cast _Runtime.field(blinnPhong, 'specularMap') : Dynamic), (cast _Runtime.field(blinnPhong, 'normalMap') : Dynamic), (cast _Runtime.field(blinnPhong, 'alphaMap') : Dynamic)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
-    beginWgpuMeshDraw((cast state), (cast pipeline));
+    beginWgpuMeshDraw(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = pipeline; __callArgument19; }));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
-    drawWgpuMeshSubset((cast state), (cast proxy), (cast geometry));
+    drawWgpuMeshSubset(({ final __callArgument20:Dynamic = state; __callArgument20; }), ({ final __callArgument21:Dynamic = proxy; __callArgument21; }), ({ final __callArgument22:Dynamic = geometry; __callArgument22; }));
   } });
 
   public static function registerWgpuBlinnPhongMaterial(state:WgpuRenderState):Void {
-    registerWgpuBitmapTextureResolver((cast state));
-    registerWgpuImageTextureResolver((cast state));
-    registerWgpuMeshMaterialRenderer((cast state), (cast BlinnPhongMaterialKind : String), (cast blinnPhongWgpuMeshMaterialRenderer));
+    registerWgpuBitmapTextureResolver(({ final __callArgument23:Dynamic = state; __callArgument23; }));
+    registerWgpuImageTextureResolver(({ final __callArgument24:Dynamic = state; __callArgument24; }));
+    registerWgpuMeshMaterialRenderer(({ final __callArgument25:Dynamic = state; __callArgument25; }), (cast BlinnPhongMaterialKind : String), ({ final __callArgument26:Dynamic = blinnPhongWgpuMeshMaterialRenderer; __callArgument26; }));
   }
 
   public static function defineKeyForMaterial__blinnPhongWgpuMeshMaterialRenderer(material:Null<BlinnPhongMaterial>):WgpuClassicDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasAlphaMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'opaque') : Bool)) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'alphaMap'))) : Bool) : Bool)), hasDiffuseMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'diffuseMap'))) : Bool) : Bool)), hasNormalMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'normalMap'))) : Bool) : Bool)), hasSpecularMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'specularMap'))) : Bool) : Bool)), lightingModel: 'blinnphong' };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasAlphaMap: ((cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'opaque') : Bool)) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'alphaMap') : Dynamic)) : Bool) : Bool)), hasDiffuseMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'diffuseMap') : Dynamic)) : Bool) : Bool)), hasNormalMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'normalMap') : Dynamic)) : Bool) : Bool)), hasSpecularMap: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast isWgpuTextureReady((cast _Runtime.field(material, 'specularMap') : Dynamic)) : Bool) : Bool)), lightingModel: 'blinnphong' };
     return cast null;
   }
 

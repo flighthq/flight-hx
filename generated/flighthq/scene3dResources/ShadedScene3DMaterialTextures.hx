@@ -23,12 +23,12 @@ import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 class ShadedScene3DMaterialTextures {
   @:noCompletion
   public static function registerShadedScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DMaterialTextures((cast registry), (cast ShadedMaterialKind : String), (cast function(material:Material, out:Array<Texture>):Void {
+    registerScene3DMaterialTextures(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast ShadedMaterialKind : String), ({ final __callArgument1:Dynamic = function(material:Material, out:Array<Texture>):Void {
       var shaded:ShadedMaterial = cast _Runtime.UNDEFINED;
       shaded = (cast material : ShadedMaterial);
       if ((cast !_Runtime.strictEquals(_Runtime.field(shaded, 'diffuseMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(shaded, 'diffuseMap')] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(shaded, 'normalMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(shaded, 'normalMap')] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(shaded, 'specularMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(shaded, 'specularMap')] : Array<Dynamic>)); }
-    }));
+    }; __callArgument1; }));
   }
 }

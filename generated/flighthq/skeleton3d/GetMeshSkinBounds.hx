@@ -75,7 +75,7 @@ class GetMeshSkinBounds {
     ez = ((restMaxZ - restMinZ) * 0.5);
     palette = _Runtime.field(skeleton, 'jointMatrices');
     jointCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(palette, 'length'), 16.0)) | 0);
-    referenced = (cast GetMeshSkinBounds.getReferencedJoints__getMeshSkinBounds((cast _Runtime.field(bindPose, 'joints')), (cast _Runtime.field(bindPose, 'weights')), (cast jointCount : Float)) : flighthq._internal._UInt8Array);
+    referenced = (cast GetMeshSkinBounds.getReferencedJoints__getMeshSkinBounds(_Runtime.field(bindPose, 'joints'), _Runtime.field(bindPose, 'weights'), (cast jointCount : Float)) : flighthq._internal._UInt8Array);
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     minZ = HxMath.POSITIVE_INFINITY;
@@ -119,7 +119,7 @@ class GetMeshSkinBounds {
     var maxX:Float = cast _Runtime.UNDEFINED;
     var maxY:Float = cast _Runtime.UNDEFINED;
     var maxZ:Float = cast _Runtime.UNDEFINED;
-    skinVertices((cast _Runtime.field(bindPose, 'skinnedPositions')), (cast _Runtime.field(bindPose, 'skinnedNormals')), (cast _Runtime.field(bindPose, 'positions')), (cast _Runtime.field(bindPose, 'normals')), (cast _Runtime.field(bindPose, 'joints')), (cast _Runtime.field(bindPose, 'weights')), (cast _Runtime.field(skeleton, 'jointMatrices')));
+    skinVertices(_Runtime.field(bindPose, 'skinnedPositions'), _Runtime.field(bindPose, 'skinnedNormals'), _Runtime.field(bindPose, 'positions'), _Runtime.field(bindPose, 'normals'), ({ final __callArgument0:Dynamic = _Runtime.field(bindPose, 'joints'); __callArgument0; }), _Runtime.field(bindPose, 'weights'), _Runtime.field(skeleton, 'jointMatrices'));
     skinned = _Runtime.field(bindPose, 'skinnedPositions');
     vertexCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(skinned, 'length'), 3.0)) | 0);
     minX = HxMath.POSITIVE_INFINITY;

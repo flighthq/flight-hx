@@ -43,7 +43,7 @@ class BlendModeMath {
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     if ((cast (cast isNonSeparableBlendMode((cast mode : String)) : Bool) : Bool)) {
-      blendNonSeparableRgb((cast mode : String), (cast cbR : Float), (cast cbG : Float), (cast cbB : Float), (cast csR : Float), (cast csG : Float), (cast csB : Float), (cast out));
+      blendNonSeparableRgb((cast mode : String), (cast cbR : Float), (cast cbG : Float), (cast cbB : Float), (cast csR : Float), (cast csG : Float), (cast csB : Float), ({ final __callArgument6:Dynamic = out; __callArgument6; }));
       return;
     }
     r = (cast getSeparableBlendChannel((cast mode : String), (cast cbR : Float), (cast csR : Float)) : Float);

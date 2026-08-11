@@ -13,16 +13,16 @@ import flighthq.types.Renderable;
 class EnableColorAdjustmentGuards {
   @:noCompletion
   public static function areColorAdjustmentGuardsEnabled(state:RenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).colorAdjustmentUnsupportedGuard, null);
+    return cast !_Runtime.looseEquals((cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : RenderStateRuntime).colorAdjustmentUnsupportedGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableColorAdjustmentGuards(state:RenderState):Void {
-    ((cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : { var colorAdjustmentUnsupportedGuard:Null<RenderState->Renderable->Void>; }).colorAdjustmentUnsupportedGuard = (cast EnableColorAdjustmentGuards.warnUnsupportedColorAdjustment__enableColorAdjustmentGuards));
+    ((cast (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime) : { var colorAdjustmentUnsupportedGuard:Null<RenderState->Renderable->Void>; }).colorAdjustmentUnsupportedGuard = (cast EnableColorAdjustmentGuards.warnUnsupportedColorAdjustment__enableColorAdjustmentGuards));
   }
 
   public static function warnUnsupportedColorAdjustment__enableColorAdjustmentGuards():Void {
-    (cast logOnce((cast 'render:unsupported-color-adjustment' : String), (cast LogLevel.Warn), (cast { message: 'enableColorAdjustments: a per-object color adjustment is not inline-able because it has no 4×5 matrix representation. Use an Effect pass for the unsupported operation.' }), (cast 'render')) : Bool);
+    (cast logOnce((cast 'render:unsupported-color-adjustment' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: 'enableColorAdjustments: a per-object color adjustment is not inline-able because it has no 4×5 matrix representation. Use an Effect pass for the unsupported operation.' } : Dynamic), ({ final __callArgument3:Dynamic = 'render'; __callArgument3; })) : Bool);
   }
 }

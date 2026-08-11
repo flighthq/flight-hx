@@ -11,14 +11,14 @@ import flighthq.types.Vector2.Vector2Like;
 
 class Zoom {
   public static function zoomCamera2DAtScreenPoint(camera:Camera2D, screenX:Float, screenY:Float, zoom:Float):Void {
-    unprojectCamera2DPoint((cast camera), (cast screenX : Float), (cast screenY : Float), (cast Zoom.scratchBefore__zoom));
+    unprojectCamera2DPoint(({ final __callArgument0:Dynamic = camera; __callArgument0; }), (cast screenX : Float), (cast screenY : Float), ({ final __callArgument1:Dynamic = Zoom.scratchBefore__zoom; __callArgument1; }));
     (camera.zoom = cast (zoom : Dynamic));
-    unprojectCamera2DPoint((cast camera), (cast screenX : Float), (cast screenY : Float), (cast Zoom.scratchAfter__zoom));
+    unprojectCamera2DPoint(({ final __callArgument2:Dynamic = camera; __callArgument2; }), (cast screenX : Float), (cast screenY : Float), ({ final __callArgument3:Dynamic = Zoom.scratchAfter__zoom; __callArgument3; }));
     (camera.x += (Zoom.scratchBefore__zoom.x - Zoom.scratchAfter__zoom.x));
     (camera.y += (Zoom.scratchBefore__zoom.y - Zoom.scratchAfter__zoom.y));
   }
 
-  public static final scratchAfter__zoom:Vector2 = (cast createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Vector2);
+  public static final scratchAfter__zoom:Vector2 = (cast createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector2);
 
-  public static final scratchBefore__zoom:Vector2 = (cast createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Vector2);
+  public static final scratchBefore__zoom:Vector2 = (cast createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector2);
 }

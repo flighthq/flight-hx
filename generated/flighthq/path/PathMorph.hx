@@ -10,7 +10,7 @@ import flighthq.types.ShapeCommand.PathWinding;
 
 class PathMorph {
   public static function createPathMorph(start:Path, end:Path):Null<flighthq.types.PathMorph> {
-    return cast (cast (cast buildPathMorph((cast start), (cast end)) : { var contour:Null<Float>; var issue:Float; var morph:Null<flighthq.types.PathMorph>; }) : { var contour:Null<Float>; var issue:Float; var morph:Null<flighthq.types.PathMorph>; }).morph;
+    return cast (cast (cast buildPathMorph(({ final __callArgument0:Dynamic = start; __callArgument0; }), ({ final __callArgument1:Dynamic = end; __callArgument1; })) : { var contour:Null<Float>; var issue:Float; var morph:Null<flighthq.types.PathMorph>; }) : { var contour:Null<Float>; var issue:Float; var morph:Null<flighthq.types.PathMorph>; }).morph;
     return cast null;
   }
 

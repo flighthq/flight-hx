@@ -17,16 +17,16 @@ import flighthq.types.TextureSource;
 class GlyphSource {
   public static function createGlyphSourceFromGlyphAtlas(atlas:GlyphAtlas):flighthq.types.GlyphSource {
     return cast { getGlyphAtlasImage: function(page:Null<Float> = 0.0):Null<TextureSource> {
-      return cast ((cast _Runtime.strictEquals(page, 0.0) : Bool) ? (cast (cast getGlyphAtlasBitmap((cast atlas)) : Bitmap) : Dynamic) : (cast null : Dynamic));
+      return cast ((cast _Runtime.strictEquals(page, 0.0) : Bool) ? (cast (cast getGlyphAtlasBitmap(({ final __callArgument0:Dynamic = atlas; __callArgument0; })) : Bitmap) : Dynamic) : (cast null : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, getGlyphEntry: function(codepoint:Float):Null<GlyphEntry> {
-      return cast (cast getGlyphAtlasEntry((cast atlas), (cast codepoint : Float)) : Null<GlyphEntry>);
+      return cast (cast getGlyphAtlasEntry(({ final __callArgument1:Dynamic = atlas; __callArgument1; }), (cast codepoint : Float)) : Null<GlyphEntry>);
       return cast _Runtime.UNDEFINED;
     }, getGlyphKerning: function(left:Float, right:Float):Float {
-      return cast (cast getGlyphAtlasKerning((cast atlas), (cast left : Float), (cast right : Float)) : Float);
+      return cast (cast getGlyphAtlasKerning(({ final __callArgument2:Dynamic = atlas; __callArgument2; }), (cast left : Float), (cast right : Float)) : Float);
       return cast _Runtime.UNDEFINED;
     }, getGlyphMetrics: function():GlyphMetrics {
-      return cast (cast getGlyphAtlasMetrics((cast atlas)) : GlyphMetrics);
+      return cast (cast getGlyphAtlasMetrics(({ final __callArgument3:Dynamic = atlas; __callArgument3; })) : GlyphMetrics);
       return cast _Runtime.UNDEFINED;
     } };
     return cast null;

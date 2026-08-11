@@ -36,17 +36,17 @@ class ElectronNotification {
         id = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
         actions = _Runtime.coalesce(request.actions, function():Dynamic return cast cast ([] : Array<Dynamic>));
         n = _Runtime.construct((cast electron : ElectronApi).Notification, [{ title: request.title, body: request.body, icon: request.icon, silent: request.silent, actions: (cast _Runtime.mapArray((cast actions : Array<NotificationAction>), function(a:NotificationAction, __unused0:Float, __unused1:Array<NotificationAction>):{ var type:String; var text:String; } return { type: 'button', text: a.title }, _Runtime.UNDEFINED)) }]);
-        (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'show' : String), (cast function(__unused2:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callOptionalValue(showListener, cast ([id] : Array<Dynamic>)); }, cast ([] : Array<Dynamic>)); }));
-        (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'click' : String), (cast function(__unused3:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callOptionalValue(clickListener, cast ([id] : Array<Dynamic>)); }, cast ([] : Array<Dynamic>)); }));
-        (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'action' : String), (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'show' : String), ({ final __callArgument0:Dynamic = function(__unused2:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callOptionalValue(showListener, cast ([id] : Array<Dynamic>)); }, cast ([] : Array<Dynamic>)); }; __callArgument0; }));
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'click' : String), ({ final __callArgument1:Dynamic = function(__unused3:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callOptionalValue(clickListener, cast ([id] : Array<Dynamic>)); }, cast ([] : Array<Dynamic>)); }; __callArgument1; }));
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'action' : String), ({ final __callArgument3:Dynamic = _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
           var index:Float = cast _Runtime.UNDEFINED;
           index = _Runtime.callValue(flighthq._internal._HostValueLut.get('Number'), cast ([flighthq._internal._StaticIndex.readArray(args, 1.0)] : Array<Dynamic>));
-          _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(({ final __typedStruct0 = flighthq._internal._StaticIndex.readArray(actions, index); __typedStruct0 == null ? _Runtime.UNDEFINED : (cast __typedStruct0 : { var id:String; }).id; }), function():Dynamic return cast ''))] : Array<Dynamic>));
-        }, 0)));
-        (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'close' : String), (cast function(__unused4:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
+          _Runtime.callOptionalValue(actionListener, cast ([id, Std.string(_Runtime.coalesce(({ final __typedStruct2 = flighthq._internal._StaticIndex.readArray(actions, index); __typedStruct2 == null ? _Runtime.UNDEFINED : (cast __typedStruct2 : { var id:String; }).id; }), function():Dynamic return cast ''))] : Array<Dynamic>));
+        }, 0); __callArgument3; }));
+        (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'close' : String), ({ final __callArgument4:Dynamic = function(__unused4:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
           ((cast live : flighthq._internal._Map<String, flighthq.types.ElectronApi.ElectronNotification>).delete_(id));
           _Runtime.callOptionalValue(dismissListener, cast ([id] : Array<Dynamic>));
-        }, cast ([] : Array<Dynamic>)); }));
+        }, cast ([] : Array<Dynamic>)); }; __callArgument4; }));
         ((cast live : flighthq._internal._Map<String, flighthq.types.ElectronApi.ElectronNotification>).set(id, (cast n)));
         (cast n : flighthq.types.ElectronApi.ElectronNotification).show();
         return cast id;

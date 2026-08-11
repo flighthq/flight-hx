@@ -92,7 +92,7 @@ class TauriApp {
       return cast false;
       return cast _Runtime.UNDEFINED;
     }, quit: function():Void {
-      flighthq._internal._Async.recover((cast process : TauriProcessPlugin).exit((cast 0.0)), function(__unused3:flighthq._internal._Any):Void {
+      flighthq._internal._Async.recover((cast process : TauriProcessPlugin).exit(({ final __callArgument1:Dynamic = 0.0; __callArgument1; })), function(__unused3:flighthq._internal._Any):Void {
 
       });
     }, relaunch: function():Void {

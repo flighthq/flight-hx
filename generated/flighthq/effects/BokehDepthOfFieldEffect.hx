@@ -24,11 +24,11 @@ class BokehDepthOfFieldEffect {
   }
 
   public static function registerBokehDepthOfFieldEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'BokehDepthOfFieldEffect' : String), (cast BokehDepthOfFieldEffect.resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'BokehDepthOfFieldEffect' : String), (cast BokehDepthOfFieldEffect.resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect : Dynamic));
   }
 
   public static function resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getBokehDepthOfFieldEffectPadding((cast (cast effect : flighthq.types.BokehDepthOfFieldEffect))) : RenderEffectPadding);
+    return cast (cast getBokehDepthOfFieldEffectPadding((cast effect : flighthq.types.BokehDepthOfFieldEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

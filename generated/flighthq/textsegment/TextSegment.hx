@@ -10,17 +10,17 @@ import flighthq.types.TextSegment.TextSegmenterBackend;
 
 class TextSegment {
   public static function segmentGraphemes(text:String, ?locale:String):Array<flighthq.types.TextSegment> {
-    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), (cast 'grapheme'), (cast locale));
+    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), ({ final __callArgument0:Dynamic = 'grapheme'; __callArgument0; }), ({ final __callArgument1:Dynamic = locale; __callArgument1; }));
     return cast null;
   }
 
   public static function segmentSentences(text:String, ?locale:String):Array<flighthq.types.TextSegment> {
-    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), (cast 'sentence'), (cast locale));
+    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), ({ final __callArgument2:Dynamic = 'sentence'; __callArgument2; }), ({ final __callArgument3:Dynamic = locale; __callArgument3; }));
     return cast null;
   }
 
   public static function segmentWords(text:String, ?locale:String):Array<flighthq.types.TextSegment> {
-    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), (cast 'word'), (cast locale));
+    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), ({ final __callArgument4:Dynamic = 'word'; __callArgument4; }), ({ final __callArgument5:Dynamic = locale; __callArgument5; }));
     return cast null;
   }
 }

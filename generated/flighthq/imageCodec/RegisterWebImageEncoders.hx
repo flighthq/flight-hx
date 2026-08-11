@@ -11,7 +11,7 @@ import flighthq.types.ImageEncoder;
 class RegisterWebImageEncoders {
   public static function registerWebImageEncoders():Void {
     for (mimeType in _Runtime.iterable(RegisterWebImageEncoders.webEncodableMimeTypes__registerWebImageEncoders)) {
-      registerImageEncoder((cast mimeType : String), (cast (cast RegisterWebImageEncoders.createCanvasImageEncoder__registerWebImageEncoders((cast mimeType : String)) : ImageEncoder)));
+      registerImageEncoder((cast mimeType : String), (cast RegisterWebImageEncoders.createCanvasImageEncoder__registerWebImageEncoders((cast mimeType : String)) : ImageEncoder));
     }
   }
 

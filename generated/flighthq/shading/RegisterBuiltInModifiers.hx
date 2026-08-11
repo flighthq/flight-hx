@@ -82,14 +82,14 @@ class RegisterBuiltInModifiers {
   } });
 
   public static function registerBuiltInModifiers(registry:ModifierRegistry):Void {
-    registerModifier((cast registry), (cast animatedNormalModifierDefinition));
-    registerModifier((cast registry), (cast dissolveModifierDefinition));
-    registerModifier((cast registry), (cast emissiveModifierDefinition));
-    registerModifier((cast registry), (cast envReflectModifierDefinition));
-    registerModifier((cast registry), (cast fogModifierDefinition));
-    registerModifier((cast registry), (cast rimModifierDefinition));
-    registerModifier((cast registry), (cast toonModifierDefinition));
-    registerModifier((cast registry), (cast vertexDisplaceModifierDefinition));
+    registerModifier(({ final __callArgument0:Dynamic = registry; __callArgument0; }), ({ final __callArgument1:Dynamic = animatedNormalModifierDefinition; __callArgument1; }));
+    registerModifier(({ final __callArgument2:Dynamic = registry; __callArgument2; }), ({ final __callArgument3:Dynamic = dissolveModifierDefinition; __callArgument3; }));
+    registerModifier(({ final __callArgument4:Dynamic = registry; __callArgument4; }), ({ final __callArgument5:Dynamic = emissiveModifierDefinition; __callArgument5; }));
+    registerModifier(({ final __callArgument6:Dynamic = registry; __callArgument6; }), ({ final __callArgument7:Dynamic = envReflectModifierDefinition; __callArgument7; }));
+    registerModifier(({ final __callArgument8:Dynamic = registry; __callArgument8; }), ({ final __callArgument9:Dynamic = fogModifierDefinition; __callArgument9; }));
+    registerModifier(({ final __callArgument10:Dynamic = registry; __callArgument10; }), ({ final __callArgument11:Dynamic = rimModifierDefinition; __callArgument11; }));
+    registerModifier(({ final __callArgument12:Dynamic = registry; __callArgument12; }), ({ final __callArgument13:Dynamic = toonModifierDefinition; __callArgument13; }));
+    registerModifier(({ final __callArgument14:Dynamic = registry; __callArgument14; }), ({ final __callArgument15:Dynamic = vertexDisplaceModifierDefinition; __callArgument15; }));
   }
 
   public static final rimModifierDefinition:ModifierDefinition = (cast { kind: RimModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect });

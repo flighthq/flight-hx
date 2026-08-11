@@ -58,7 +58,7 @@ class GltfEmissiveStrength {
       }
     }
     if ((cast ((cast negative : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic((cast _Runtime.field(context, 'diagnostics')), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop), (cast 'gltf.emissive-strength-negative' : String), (cast 'GltfEmissiveStrengthExtensionHandler' : String), (cast { count: negative }));
+      reportImportDiagnostic((cast _Runtime.field(context, 'diagnostics') : Dynamic), ({ final __callArgument2:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument2; }), (cast 'gltf.emissive-strength-negative' : String), (cast 'GltfEmissiveStrengthExtensionHandler' : String), ({ final __callArgument3:Dynamic = { count: negative }; __callArgument3; }));
     }
   }, kind: 'KHR_materials_emissive_strength' });
 }

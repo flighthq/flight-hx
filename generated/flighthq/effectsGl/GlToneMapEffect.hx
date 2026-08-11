@@ -23,19 +23,19 @@ class GlToneMapEffect {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     operator_ = _Runtime.coalesce(_Runtime.field(effect, 'operator'), function():Dynamic return cast 'aces');
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 1.0);
-    program = (cast getGlEffectProgram((cast state), (cast 'toneMap.' + Std.string(operator_) + '' : String), (cast (cast GlToneMapEffect.buildToneMapFragment__glToneMapEffect((cast operator_ : String)) : String) : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'toneMap.' + Std.string(operator_) + '' : String), (cast (cast GlToneMapEffect.buildToneMapFragment__glToneMapEffect((cast operator_ : String)) : String) : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_exposure'), exposure);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_white'), _Runtime.coalesce(_Runtime.field(effect, 'white'), function():Dynamic return cast 1.0));
-    }));
+    } : Dynamic));
   }
 
   public static final defaultGlToneMapEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyToneMapEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : ToneMapEffect)));
+    applyToneMapEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ToneMapEffect));
   });
 
   public static function registerGlToneMapEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state), (cast 'ToneMapEffect' : String), (cast defaultGlToneMapEffectRunner));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'ToneMapEffect' : String), ({ final __callArgument6:Dynamic = defaultGlToneMapEffectRunner; __callArgument6; }));
   }
 
   public static function buildToneMapFragment__glToneMapEffect(operator_:String):String {

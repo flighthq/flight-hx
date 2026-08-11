@@ -32,7 +32,7 @@ class AnimationBlend {
   public static function addAnimationSample(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, base:flighthq._internal._ArrayLike<Float>, delta:flighthq._internal._ArrayLike<Float>, weight:Float, quaternion:Bool = false):Void {
     var components:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast quaternion : Bool) && (cast ((cast (cast out : { var length:Float; }).length : Float) >= (cast 4.0 : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(base, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(delta, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool)) {
-      AnimationBlend.writeWeightedQuaternion__animationBlend((cast AnimationBlend._quaternion__animationBlend), (cast delta), (cast weight : Float));
+      AnimationBlend.writeWeightedQuaternion__animationBlend(({ final __callArgument2:Dynamic = AnimationBlend._quaternion__animationBlend; __callArgument2; }), ({ final __callArgument3:Dynamic = delta; __callArgument3; }), (cast weight : Float));
       var ax:Float = _Runtime.getIndex(base, 0.0);
       var ay:Float = _Runtime.getIndex(base, 1.0);
       var az:Float = _Runtime.getIndex(base, 2.0);
@@ -41,7 +41,7 @@ class AnimationBlend {
       var by:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast AnimationBlend._quaternion__animationBlend : flighthq._internal._Float32Array), (cast 1.0 : Float));
       var bz:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast AnimationBlend._quaternion__animationBlend : flighthq._internal._Float32Array), (cast 2.0 : Float));
       var bw:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast AnimationBlend._quaternion__animationBlend : flighthq._internal._Float32Array), (cast 3.0 : Float));
-      AnimationBlend.writeNormalizedQuaternion__animationBlend((cast out), (cast ((((aw * bx) + (ax * bw)) + (ay * bz)) - (az * by)) : Float), (cast ((((aw * by) - (ax * bz)) + (ay * bw)) + (az * bx)) : Float), (cast ((((aw * bz) + (ax * by)) - (ay * bx)) + (az * bw)) : Float), (cast ((((aw * bw) - (ax * bx)) - (ay * by)) - (az * bz)) : Float));
+      AnimationBlend.writeNormalizedQuaternion__animationBlend(({ final __callArgument4:Dynamic = out; __callArgument4; }), (cast ((((aw * bx) + (ax * bw)) + (ay * bz)) - (az * by)) : Float), (cast ((((aw * by) - (ax * bz)) + (ay * bw)) + (az * bx)) : Float), (cast ((((aw * bz) + (ax * by)) - (ay * bx)) + (az * bw)) : Float), (cast ((((aw * bw) - (ax * bx)) - (ay * by)) - (az * bz)) : Float));
       return;
     }
     components = HxMath.min(HxMath.min((cast out : { var length:Float; }).length, _Runtime.field(base, 'length')), _Runtime.field(delta, 'length'));
@@ -59,7 +59,7 @@ class AnimationBlend {
     var components:Float = cast _Runtime.UNDEFINED;
     t = ((cast ((cast alpha : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast alpha : Float) > (cast 1.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast alpha : Dynamic)) : Dynamic));
     if ((cast ((cast ((cast ((cast quaternion : Bool) && (cast ((cast (cast out : { var length:Float; }).length : Float) >= (cast 4.0 : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(a, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(b, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool)) {
-      AnimationBlend.slerpQuaternion__animationBlend((cast out), (cast a), (cast b), (cast t : Float));
+      AnimationBlend.slerpQuaternion__animationBlend(({ final __callArgument5:Dynamic = out; __callArgument5; }), ({ final __callArgument6:Dynamic = a; __callArgument6; }), ({ final __callArgument7:Dynamic = b; __callArgument7; }), (cast t : Float));
       return;
     }
     components = HxMath.min(HxMath.min((cast out : { var length:Float; }).length, _Runtime.field(a, 'length')), _Runtime.field(b, 'length'));
@@ -75,7 +75,7 @@ class AnimationBlend {
   public static function createAnimationSampleAccumulator(components:Float, quaternion:Bool = false):AnimationSampleAccumulator {
     var width:Float = cast _Runtime.UNDEFINED;
     width = HxMath.max(0.0, (_Runtime.toInt32(components) | 0));
-    return cast (cast createEntity((cast { components: width, quaternion: quaternion, values: new flighthq._internal._Float32Array(width), weight: 0.0 })) : { >Entity, var components:Float; var quaternion:Bool; var values:flighthq._internal._Float32Array; var weight:Float; });
+    return cast (cast createEntity(({ final __callArgument8:Dynamic = { components: width, quaternion: quaternion, values: new flighthq._internal._Float32Array(width), weight: 0.0 }; __callArgument8; })) : { >Entity, var components:Float; var quaternion:Bool; var values:flighthq._internal._Float32Array; var weight:Float; });
     return cast null;
   }
 
@@ -86,7 +86,7 @@ class AnimationBlend {
     components = HxMath.min(HxMath.min((cast out : { var length:Float; }).length, _Runtime.field(accumulator, 'components')), _Runtime.field(_Runtime.field(accumulator, 'values'), 'length'));
     if ((cast ((cast _Runtime.field(accumulator, 'quaternion') : Bool) && (cast ((cast components : Float) >= (cast 4.0 : Float)) : Bool)) : Bool)) {
       var values:flighthq._internal._Float32Array = _Runtime.field(accumulator, 'values');
-      AnimationBlend.writeNormalizedQuaternion__animationBlend((cast out), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 2.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 3.0 : Float)) : Float));
+      AnimationBlend.writeNormalizedQuaternion__animationBlend(({ final __callArgument9:Dynamic = out; __callArgument9; }), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 2.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 3.0 : Float)) : Float));
       return cast true;
     }
     inverseWeight = _Runtime.divideNumbers(1.0, _Runtime.field(accumulator, 'weight'));
@@ -143,7 +143,7 @@ class AnimationBlend {
       (scaleA = cast ((1.0 - alpha) : Dynamic));
       (scaleB = cast (alpha : Dynamic));
     }
-    AnimationBlend.writeNormalizedQuaternion__animationBlend((cast out), (cast ((scaleA * ax) + (scaleB * bx)) : Float), (cast ((scaleA * ay) + (scaleB * by)) : Float), (cast ((scaleA * az) + (scaleB * bz)) : Float), (cast ((scaleA * aw) + (scaleB * bw)) : Float));
+    AnimationBlend.writeNormalizedQuaternion__animationBlend(({ final __callArgument10:Dynamic = out; __callArgument10; }), (cast ((scaleA * ax) + (scaleB * bx)) : Float), (cast ((scaleA * ay) + (scaleB * by)) : Float), (cast ((scaleA * az) + (scaleB * bz)) : Float), (cast ((scaleA * aw) + (scaleB * bw)) : Float));
   }
 
   public static function writeNormalizedQuaternion__animationBlend(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, x:Float, y:Float, z:Float, w:Float):Void {
@@ -165,7 +165,7 @@ class AnimationBlend {
   }
 
   public static function writeWeightedQuaternion__animationBlend(out:flighthq._internal._Float32Array, delta:flighthq._internal._ArrayLike<Float>, weight:Float):Void {
-    AnimationBlend.slerpQuaternion__animationBlend((cast out), (cast AnimationBlend.IDENTITY_QUATERNION__animationBlend), (cast delta), (cast weight : Float));
+    AnimationBlend.slerpQuaternion__animationBlend(({ final __callArgument11:Dynamic = out; __callArgument11; }), ({ final __callArgument12:Dynamic = AnimationBlend.IDENTITY_QUATERNION__animationBlend; __callArgument12; }), ({ final __callArgument13:Dynamic = delta; __callArgument13; }), (cast weight : Float));
   }
 
   public static final IDENTITY_QUATERNION__animationBlend:flighthq._internal._Float32Array = new flighthq._internal._Float32Array(cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));

@@ -39,31 +39,31 @@ class CustomShaderGlMeshMaterialRenderer {
     var program:GlCustomShaderProgram__customShaderGlMeshMaterialRenderer = cast _Runtime.UNDEFINED;
     custom = (cast material : Null<CustomShaderMaterial>);
     if ((cast ((cast _Runtime.strictEquals(custom, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(custom, 'shaderKey'), '') : Bool)) : Bool)) {
-      ((cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram = null);
+      ((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram = null);
       return;
     }
-    source = (cast getGlCustomMaterialShaderSource((cast state), (cast _Runtime.field(custom, 'shaderKey') : String)) : Null<GlCustomMaterialShaderSource>);
+    source = (cast getGlCustomMaterialShaderSource(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast _Runtime.field(custom, 'shaderKey') : String)) : Null<GlCustomMaterialShaderSource>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) {
-      ((cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram = null);
+      ((cast (cast getGlScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram = null);
       return;
     }
-    program = (cast CustomShaderGlMeshMaterialRenderer.ensureGlCustomShaderProgram__customShaderGlMeshMaterialRenderer((cast state), (cast _Runtime.field(custom, 'shaderKey') : String), (cast source)) : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer);
-    _Runtime.callOptionalValue((cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).customShaderGuard, cast ([state, (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).program, _Runtime.field(custom, 'shaderKey')] : Array<Dynamic>));
-    beginGlMeshDraw((cast state), (cast program), (cast _Runtime.field(custom, 'doubleSided') : Bool));
-    setGlMeshViewProjection((cast state), (cast (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).locViewProjection), (cast camera));
-    setGlMeshCameraPosition((cast (cast state : GlRenderState).gl), (cast (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).locCameraPosition), (cast camera));
-    CustomShaderGlMeshMaterialRenderer.uploadCustomShaderMaterialUniforms__customShaderGlMeshMaterialRenderer((cast (cast state : GlRenderState).gl), (cast (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).program), (cast custom));
-    CustomShaderGlMeshMaterialRenderer.uploadCustomShaderMaterialTextures__customShaderGlMeshMaterialRenderer((cast state), (cast (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).program), (cast custom));
+    program = (cast CustomShaderGlMeshMaterialRenderer.ensureGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast _Runtime.field(custom, 'shaderKey') : String), ({ final __callArgument4:Dynamic = source; __callArgument4; })) : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer);
+    _Runtime.callOptionalValue((cast (cast getGlScene3DRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : GlScene3DRuntime) : GlScene3DRuntime).customShaderGuard, cast ([state, (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).program, _Runtime.field(custom, 'shaderKey')] : Array<Dynamic>));
+    beginGlMeshDraw(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), (cast _Runtime.field(custom, 'doubleSided') : Bool));
+    setGlMeshViewProjection(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).locViewProjection, ({ final __callArgument11:Dynamic = camera; __callArgument11; }));
+    setGlMeshCameraPosition((cast state : GlRenderState).gl, (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).locCameraPosition, ({ final __callArgument12:Dynamic = camera; __callArgument12; }));
+    CustomShaderGlMeshMaterialRenderer.uploadCustomShaderMaterialUniforms__customShaderGlMeshMaterialRenderer((cast state : GlRenderState).gl, (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).program, ({ final __callArgument13:Dynamic = custom; __callArgument13; }));
+    CustomShaderGlMeshMaterialRenderer.uploadCustomShaderMaterialTextures__customShaderGlMeshMaterialRenderer(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).program, ({ final __callArgument15:Dynamic = custom; __callArgument15; }));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset((cast state), (cast program), (cast proxy), (cast geometry));
+    drawGlMeshSubset(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = program; __callArgument18; }), ({ final __callArgument19:Dynamic = proxy; __callArgument19; }), ({ final __callArgument20:Dynamic = geometry; __callArgument20; }));
   } });
 
   @:noCompletion
   public static function getGlCustomMaterialShaderSource(state:GlRenderState, shaderKey:String):Null<GlCustomMaterialShaderSource> {
-    return cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast CustomShaderGlMeshMaterialRenderer._customMaterialShaders__customShaderGlMeshMaterialRenderer : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlCustomMaterialShaderSource>>).get(state)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, GlCustomMaterialShaderSource>).get(shaderKey)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection21:Dynamic = ((cast CustomShaderGlMeshMaterialRenderer._customMaterialShaders__customShaderGlMeshMaterialRenderer : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlCustomMaterialShaderSource>>).get(state)); __collection21 == null ? _Runtime.UNDEFINED : ((cast __collection21 : flighthq._internal._Map<String, GlCustomMaterialShaderSource>).get(shaderKey)); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -78,17 +78,17 @@ class CustomShaderGlMeshMaterialRenderer {
   }
 
   public static function registerGlCustomShaderMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer((cast state), (cast CustomShaderMaterialKind : String), (cast customShaderGlMeshMaterialRenderer));
+    registerGlMeshMaterialRenderer(({ final __callArgument22:Dynamic = state; __callArgument22; }), (cast CustomShaderMaterialKind : String), ({ final __callArgument23:Dynamic = customShaderGlMeshMaterialRenderer; __callArgument23; }));
   }
 
   public static function ensureGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(state:GlRenderState, shaderKey:String, source:GlCustomMaterialShaderSource):GlCustomShaderProgram__customShaderGlMeshMaterialRenderer {
-    return cast (cast ensureGlScene3DProgram((cast state), (cast 'custom:' + Std.string(shaderKey) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlCustomShaderProgram__customShaderGlMeshMaterialRenderer return (cast CustomShaderGlMeshMaterialRenderer.compileGlCustomShaderProgram__customShaderGlMeshMaterialRenderer((cast gl), (cast source)) : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer))) : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer);
+    return cast (cast ensureGlScene3DProgram(({ final __callArgument24:Dynamic = state; __callArgument24; }), (cast 'custom:' + Std.string(shaderKey) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlCustomShaderProgram__customShaderGlMeshMaterialRenderer return (cast CustomShaderGlMeshMaterialRenderer.compileGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(({ final __callArgument25:Dynamic = gl; __callArgument25; }), ({ final __callArgument26:Dynamic = source; __callArgument26; })) : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer) : Dynamic)) : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer);
     return cast null;
   }
 
   public static function compileGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(gl:flighthq._internal.dom.WebGL2RenderingContext, source:GlCustomMaterialShaderSource):GlCustomShaderProgram__customShaderGlMeshMaterialRenderer {
     var linked:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
-    linked = (cast compileGlProgram((cast gl), (cast _Runtime.field(source, 'vertex') : String), (cast _Runtime.field(source, 'fragment') : String)) : flighthq._internal.dom.WebGLProgram);
+    linked = (cast compileGlProgram(({ final __callArgument27:Dynamic = gl; __callArgument27; }), (cast _Runtime.field(source, 'vertex') : String), (cast _Runtime.field(source, 'fragment') : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { locCameraPosition: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, linked, 'u_cameraPosition'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, linked, 'u_model'), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, linked, 'u_normalMatrix'), locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, linked, 'u_viewProjection'), program: linked };
     return cast null;
   }
@@ -139,7 +139,7 @@ class CustomShaderGlMeshMaterialRenderer {
       var location:Null<flighthq._internal.dom.WebGLUniformLocation> = flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, name);
       if ((cast _Runtime.strictEquals(location, null) : Bool)) { continue; }
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + unit));
-      if ((cast _Runtime.strictEquals((cast resolveGlTexture((cast state), (cast texture), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { continue; }
+      if ((cast _Runtime.strictEquals((cast resolveGlTexture(({ final __callArgument32:Dynamic = state; __callArgument32; }), ({ final __callArgument33:Dynamic = texture; __callArgument33; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { continue; }
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, location, unit);
       unit++;
     }

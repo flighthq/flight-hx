@@ -32,21 +32,21 @@ class App {
     var unsubscribeQuitRequest:Void->Void = cast _Runtime.UNDEFINED;
     var unsubscribeReady:Void->Void = cast _Runtime.UNDEFINED;
     var unsubscribeSecondInstance:Void->Void = cast _Runtime.UNDEFINED;
-    detachApp((cast app));
+    detachApp(({ final __callArgument0:Dynamic = app; __callArgument0; }));
     backend = (cast getAppBackend() : AppBackend);
-    unsubscribeActivate = (cast backend : AppBackend).subscribeActivate((cast function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onActivate]]), 1); }));
-    unsubscribeAllWindowsClosed = (cast backend : AppBackend).subscribeAllWindowsClosed((cast function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onAllWindowsClosed]]), 1); }));
-    unsubscribeOpenFile = (cast backend : AppBackend).subscribeOpenFile((cast function(path:String):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onOpenFile], [path]]), 1); }));
-    unsubscribeQuitRequest = (cast backend : AppBackend).subscribeQuitRequest((cast function(cancelHost:Void->Void):Void {
+    unsubscribeActivate = (cast backend : AppBackend).subscribeActivate(({ final __callArgument1:Dynamic = function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onActivate]]), 1); }; __callArgument1; }));
+    unsubscribeAllWindowsClosed = (cast backend : AppBackend).subscribeAllWindowsClosed(({ final __callArgument2:Dynamic = function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onAllWindowsClosed]]), 1); }; __callArgument2; }));
+    unsubscribeOpenFile = (cast backend : AppBackend).subscribeOpenFile(({ final __callArgument3:Dynamic = function(path:String):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onOpenFile], [path]]), 1); }; __callArgument3; }));
+    unsubscribeQuitRequest = (cast backend : AppBackend).subscribeQuitRequest(({ final __callArgument5:Dynamic = function(cancelHost:Void->Void):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onQuitRequest]]), 1);
-      if ((cast _Runtime.strictEquals(({ final __typedStruct0 = (cast app.onQuitRequest : { var data:Null<SignalData<Void->Void>>; }).data; __typedStruct0 == null ? _Runtime.UNDEFINED : (cast __typedStruct0 : { var cancelled:Bool; }).cancelled; }), true) : Bool)) {
+      if ((cast _Runtime.strictEquals(({ final __typedStruct4 = (cast app.onQuitRequest : { var data:Null<SignalData<Void->Void>>; }).data; __typedStruct4 == null ? _Runtime.UNDEFINED : (cast __typedStruct4 : { var cancelled:Bool; }).cancelled; }), true) : Bool)) {
         cancelHost();
       } else {
         (cast backend : AppBackend).quit();
       }
-    }));
-    unsubscribeReady = (cast backend : AppBackend).subscribeReady((cast function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onReady]]), 1); }));
-    unsubscribeSecondInstance = (cast backend : AppBackend).subscribeSecondInstance((cast function(argv:Array<String>):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onSecondInstance], [argv]]), 1); }));
+    }; __callArgument5; }));
+    unsubscribeReady = (cast backend : AppBackend).subscribeReady(({ final __callArgument6:Dynamic = function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onReady]]), 1); }; __callArgument6; }));
+    unsubscribeSecondInstance = (cast backend : AppBackend).subscribeSecondInstance(({ final __callArgument7:Dynamic = function(argv:Array<String>):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onSecondInstance], [argv]]), 1); }; __callArgument7; }));
     ((cast App._subscriptions__app : flighthq._internal._WeakMap<flighthq.types.App, Void->Void>).set(app, (cast function():Void {
       unsubscribeActivate();
       unsubscribeAllWindowsClosed();
@@ -177,7 +177,7 @@ class App {
     }, setBadgeCount: function(count:Float):Bool {
       if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'setAppBadge') : Bool) : Bool)) : Bool)) { return cast false; }
       try {
-        (cast (cast flighthq._internal.backend.DomNavigatorBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { var setAppBadge:Float->flighthq._internal._Promise<flighthq._internal._Nothing>; }>) : { var setAppBadge:Null<Float>->flighthq._internal._Promise<flighthq._internal._Nothing>; }).setAppBadge((cast count));
+        (cast (cast flighthq._internal.backend.DomNavigatorBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { var setAppBadge:Float->flighthq._internal._Promise<flighthq._internal._Nothing>; }>) : { var setAppBadge:Null<Float>->flighthq._internal._Promise<flighthq._internal._Nothing>; }).setAppBadge(({ final __callArgument8:Dynamic = count; __callArgument8; }));
         return cast true;
       } catch (__error:Dynamic) {
         return cast false;
@@ -246,7 +246,7 @@ class App {
   }
 
   public static function disposeApp(app:flighthq.types.App):Void {
-    detachApp((cast app));
+    detachApp(({ final __callArgument9:Dynamic = app; __callArgument9; }));
   }
 
   public static function focusApp():Void {
@@ -279,7 +279,7 @@ class App {
   }
 
   public static function getAppDirectoryPath(kind:AppPathKind):String {
-    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getAppDirectoryPath((cast kind));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getAppDirectoryPath(({ final __callArgument12:Dynamic = kind; __callArgument12; }));
     return cast null;
   }
 
@@ -366,7 +366,7 @@ class App {
   }
 
   public static function setAppActivationPolicy(policy:AppActivationPolicy):Void {
-    (cast (cast getAppBackend() : AppBackend) : AppBackend).setActivationPolicy((cast policy));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).setActivationPolicy(({ final __callArgument13:Dynamic = policy; __callArgument13; }));
   }
 
   @:noCompletion
@@ -384,11 +384,11 @@ class App {
   }
 
   public static function setAppDockMenu(items:Array<MenuItemTemplate>):Void {
-    (cast (cast getAppBackend() : AppBackend) : AppBackend).setDockMenu((cast items));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).setDockMenu(({ final __callArgument14:Dynamic = items; __callArgument14; }));
   }
 
   public static function setAppLoginItem(settings:AppLoginItemLike):Bool {
-    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).setLoginItem((cast settings));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).setLoginItem(({ final __callArgument15:Dynamic = settings; __callArgument15; }));
     return cast null;
   }
 

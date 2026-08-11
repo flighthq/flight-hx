@@ -41,11 +41,11 @@ class Mesh {
     var geometry:MeshGeometry = cast _Runtime.UNDEFINED;
     var clone:flighthq.types.Mesh = cast _Runtime.UNDEFINED;
     hasDeformation = ((cast !_Runtime.looseEquals(source.skin, null) : Bool) || (cast !_Runtime.looseEquals(source.morph, null) : Bool));
-    geometry = ((cast hasDeformation : Bool) ? (cast (cast cloneMeshGeometryForDeformation((cast source.geometry)) : MeshGeometry) : Dynamic) : (cast source.geometry : Dynamic));
-    clone = (cast createMesh((cast geometry), (cast _Runtime.slice(source.materials, 0, null)), (cast source.kind : String), (cast { enabled: source.enabled, name: source.name })) : flighthq.types.Mesh);
+    geometry = ((cast hasDeformation : Bool) ? (cast (cast cloneMeshGeometryForDeformation(source.geometry) : MeshGeometry) : Dynamic) : (cast source.geometry : Dynamic));
+    clone = (cast createMesh(({ final __callArgument0:Dynamic = geometry; __callArgument0; }), _Runtime.slice(source.materials, 0, null), (cast source.kind : String), ({ final __callArgument1:Dynamic = { enabled: source.enabled, name: source.name }; __callArgument1; })) : flighthq.types.Mesh);
     (clone.alpha = cast (source.alpha : Dynamic));
-    setNodeTransform3D((cast clone), (cast source));
-    if ((cast (cast isNodeLocalMatrix4Detached((cast source)) : Bool) : Bool)) { setNodeLocalMatrix4((cast clone), (cast (cast getNodeLocalMatrix4((cast source)) : Matrix4Like))); }
+    setNodeTransform3D((cast clone : Dynamic), ({ final __callArgument2:Dynamic = source; __callArgument2; }));
+    if ((cast (cast isNodeLocalMatrix4Detached((cast source : Dynamic)) : Bool) : Bool)) { setNodeLocalMatrix4((cast clone : Dynamic), (cast getNodeLocalMatrix4((cast source : Dynamic)) : Matrix4Like)); }
     if ((cast !_Runtime.looseEquals(source.skin, null) : Bool)) { (clone.skin = cast (source.skin : Dynamic)); }
     if ((cast !_Runtime.looseEquals(source.morph, null) : Bool)) {
       (clone.morph = cast ({ targets: (cast source.morph : MeshMorph).targets, weights: new flighthq._internal._Float32Array((cast source.morph : MeshMorph).weights) } : Dynamic));
@@ -57,7 +57,7 @@ class Mesh {
   public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:flighthq._internal._Partial<flighthq._internal._Pick<flighthq.types.Mesh, String>>):flighthq.types.Mesh {
     if (kind == null) kind = cast (MeshKind : Dynamic);
     var mesh:flighthq.types.Mesh = cast _Runtime.UNDEFINED;
-    mesh = (cast createNode3D((cast kind : String), (cast obj)) : flighthq.types.Mesh);
+    mesh = (cast createNode3D((cast kind : String), ({ final __callArgument3:Dynamic = obj; __callArgument3; })) : flighthq.types.Mesh);
     (mesh.geometry = cast (geometry : Dynamic));
     (mesh.materials = cast (materials : Dynamic));
     return cast mesh;
@@ -65,7 +65,7 @@ class Mesh {
   }
 
   public static function enableMeshSignals(source:flighthq.types.Mesh):NodeSignals {
-    return cast (cast enableNodeSignals((cast source)) : NodeSignals);
+    return cast (cast enableNodeSignals((cast source : Dynamic)) : NodeSignals);
     return cast null;
   }
 
@@ -78,12 +78,12 @@ class Mesh {
 
   @:noCompletion
   public static function getMeshRuntime(source:flighthq.types.Mesh):MeshRuntime {
-    return cast (cast getNode3DRuntime((cast source)) : Node3DRuntime);
+    return cast (cast getNode3DRuntime(({ final __callArgument4:Dynamic = source; __callArgument4; })) : Node3DRuntime);
     return cast null;
   }
 
   public static function getMeshSignals(source:flighthq.types.Mesh):Null<NodeSignals> {
-    return cast (cast getNodeSignals((cast source)) : Null<NodeSignals>);
+    return cast (cast getNodeSignals((cast source : Dynamic)) : Null<NodeSignals>);
     return cast null;
   }
 

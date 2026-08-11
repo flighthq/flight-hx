@@ -3616,10 +3616,12 @@ function emitCheckedCallArgument(
   index: number,
 ): string {
   const emitted = emitExpression(argument);
+  const expected = call.directArgumentTypes?.[index];
   // JavaScript needs the original undefined sentinel, while static targets
   // need null so a scalar cast cannot turn an omitted argument into 0/false.
-  if (call.omittedArguments?.[index]) return `#if js (cast ${emitted}) #else (cast null) #end`;
-  const expected = call.directArgumentTypes?.[index];
+  if (call.omittedArguments?.[index]) {
+    return `#if js (cast ${emitted} : Dynamic) #else (cast null : Dynamic) #end`;
+  }
   // A defaulted scalar accepts undefined in TypeScript. Preserve the nullable
   // carrier on static targets so null triggers the default without losing values.
   if (
@@ -3629,17 +3631,31 @@ function emitCheckedCallArgument(
   ) {
     return `#if js (cast ${emitted} : ${emitType(expected)}) #else (cast ${emitted} : Null<${emitType(expected)}>) #end`;
   }
-  if (call.inferenceCastArguments?.[index]) return `(cast ${emitted})`;
-  if (!expected) return emitted;
+  if (!expected) return call.inferenceCastArguments?.[index] ? `(cast ${emitted} : Dynamic)` : emitted;
+  const expectedPreviouslyNeededInference =
+    expected.kind !== 'primitive' &&
+    expected.kind !== 'dynamic' &&
+    !(expected.kind === 'named' && expected.name === 'flighthq._internal._Any');
+  if (
+    expectedPreviouslyNeededInference &&
+    argument.type &&
+    emitType(argument.type) === emitType(expected) &&
+    !call.inferenceCastArguments?.[index]
+  ) {
+    return emitted;
+  }
   // TypeScript's open structural objects, covariant readonly arrays, and callback
   // parameter variance are all stricter in Haxe. An inference cast bridges that
-  // representation mismatch while the callee signature still supplies the
-  // destination's concrete static type.
-  return expected.kind === 'primitive' ||
-    expected.kind === 'dynamic' ||
-    (expected.kind === 'named' && expected.name === 'flighthq._internal._Any')
-    ? `(cast ${emitted} : ${emitType(expected)})`
-    : `(cast ${emitted})`;
+  // representation mismatch. Hoist the value through an explicit dynamic carrier
+  // instead of leaving a bare cast directly in argument position: Neko can compile
+  // the latter as an invalid closure call when the surrounding function contains
+  // early exits and DCE is enabled. This carrier is reserved for the cases Haxe
+  // cannot structurally assign to the checker-known destination type.
+  if (expectedPreviouslyNeededInference) {
+    const temporary = `__callArgument${String(temporaryIndex++)}`;
+    return `({ final ${temporary}:Dynamic = ${emitted}; ${temporary}; })`;
+  }
+  return `(cast ${emitted} : ${emitType(expected)})`;
 }
 
 function structuralFieldIsFunction(type: IrType, name: string): boolean {

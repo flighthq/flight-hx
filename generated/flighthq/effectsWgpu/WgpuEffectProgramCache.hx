@@ -21,7 +21,7 @@ class WgpuEffectProgramCache {
     }
     existing = ((cast cache : flighthq._internal._Map<String, WgpuEffectPipeline>).get(key));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
-    compiled = (cast createWgpuEffectPipeline((cast state), (cast fragmentWGSL : String), (cast blend)) : WgpuEffectPipeline);
+    compiled = (cast createWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast fragmentWGSL : String), ({ final __callArgument1:Dynamic = blend; __callArgument1; })) : WgpuEffectPipeline);
     ((cast cache : flighthq._internal._Map<String, WgpuEffectPipeline>).set(key, (cast compiled)));
     return cast compiled;
     return cast null;

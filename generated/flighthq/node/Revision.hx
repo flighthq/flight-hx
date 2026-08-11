@@ -18,101 +18,101 @@ class Revision {
   }
 
   public static function getNodeAppearanceRevision<Traits:flighthq._internal._Object>(source:Node<Traits>):Float {
-    return cast _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'appearanceId');
+    return cast _Runtime.field((cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<Traits>), 'appearanceId');
     return cast null;
   }
 
   @:noCompletion
   public static function getNodeChildrenRevision<Traits:flighthq._internal._Object>(source:Node<Traits>):Float {
-    return cast _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'childrenId');
+    return cast _Runtime.field((cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<Traits>), 'childrenId');
     return cast null;
   }
 
   public static function getNodeLocalBoundsRevision<Traits:flighthq._internal._Object>(source:Node<Traits>):Float {
-    return cast _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'localBoundsId');
+    return cast _Runtime.field((cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<Traits>), 'localBoundsId');
     return cast null;
   }
 
   public static function getNodeLocalContentRevision<Traits:flighthq._internal._Object>(source:Node<Traits>):Float {
-    return cast _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'localContentId');
+    return cast _Runtime.field((cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<Traits>), 'localContentId');
     return cast null;
   }
 
   public static function getNodeLocalTransformRevision<Traits:flighthq._internal._Object>(source:Node<Traits>):Float {
-    return cast _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'localTransformId');
+    return cast _Runtime.field((cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<Traits>), 'localTransformId');
     return cast null;
   }
 
   @:noCompletion
   public static function getNodeParentReferenceRevision<Traits:flighthq._internal._Object>(source:Node<Traits>):Float {
-    return cast _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'parentReferenceId');
+    return cast _Runtime.field((cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<Traits>), 'parentReferenceId');
     return cast null;
   }
 
   public static function getNodeWorldTransformRevision<Traits:flighthq._internal._Object>(source:Node<Traits>):Float {
-    return cast _Runtime.field((cast getNodeRuntime((cast source)) : NodeRuntime<Traits>), 'worldTransformId');
+    return cast _Runtime.field((cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<Traits>), 'worldTransformId');
     return cast null;
   }
 
   @:noCompletion
   public static function invalidateContent<Traits:flighthq._internal._Object>(target:Node<Traits>):Void {
-    invalidateNodeLocalContent((cast target));
-    invalidateNodeLocalBounds((cast target));
+    invalidateNodeLocalContent((cast target : Dynamic));
+    invalidateNodeLocalBounds((cast target : Dynamic));
   }
 
   @:noCompletion
   public static function invalidateNode<Traits:flighthq._internal._Object>(target:Node<Traits>):Void {
-    invalidateNodeAppearance((cast target));
-    invalidateNodeLocalBounds((cast target));
-    invalidateNodeLocalContent((cast target));
-    invalidateNodeLocalTransform((cast target));
-    invalidateNodeParentReference((cast target));
-    invalidateNodeWorldBounds((cast target));
+    invalidateNodeAppearance((cast target : Dynamic));
+    invalidateNodeLocalBounds((cast target : Dynamic));
+    invalidateNodeLocalContent((cast target : Dynamic));
+    invalidateNodeLocalTransform((cast target : Dynamic));
+    invalidateNodeParentReference((cast target : Dynamic));
+    invalidateNodeWorldBounds((cast target : Dynamic));
   }
 
   public static function invalidateNodeAppearance<Traits:flighthq._internal._Object>(target:Node<Traits>):Void {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
-    runtime = (cast getNodeRuntime((cast target)) : NodeRuntime<Traits>);
+    runtime = (cast getNodeRuntime((cast target : Dynamic)) : NodeRuntime<Traits>);
     ((cast runtime : NodeRuntime<Traits>).appearanceId = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast runtime : NodeRuntime<Traits>).appearanceId + 1.0)), 0));
   }
 
   @:noCompletion
   public static function invalidateNodeLocalBounds<Traits:flighthq._internal._Object>(target:Node<Traits>):Void {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
-    runtime = (cast getNodeRuntime((cast target)) : NodeRuntime<Traits>);
+    runtime = (cast getNodeRuntime((cast target : Dynamic)) : NodeRuntime<Traits>);
     ((cast runtime : NodeRuntime<Traits>).localBoundsId = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast runtime : NodeRuntime<Traits>).localBoundsId + 1.0)), 0));
   }
 
   @:noCompletion
   public static function invalidateNodeLocalContent<Traits:flighthq._internal._Object>(target:Node<Traits>):Void {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
-    runtime = (cast getNodeRuntime((cast target)) : NodeRuntime<Traits>);
+    runtime = (cast getNodeRuntime((cast target : Dynamic)) : NodeRuntime<Traits>);
     ((cast runtime : NodeRuntime<Traits>).localContentId = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast runtime : NodeRuntime<Traits>).localContentId + 1.0)), 0));
   }
 
   public static function invalidateNodeLocalTransform<Traits:flighthq._internal._Object>(target:Node<Traits>):Void {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
-    runtime = (cast getNodeRuntime((cast target)) : NodeRuntime<Traits>);
+    runtime = (cast getNodeRuntime((cast target : Dynamic)) : NodeRuntime<Traits>);
     ((cast runtime : NodeRuntime<Traits>).localTransformId = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast runtime : NodeRuntime<Traits>).localTransformId + 1.0)), 0));
   }
 
   @:noCompletion
   public static function invalidateNodeParentReference<Traits:flighthq._internal._Object>(target:Node<Traits>):Void {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
-    runtime = (cast getNodeRuntime((cast target)) : NodeRuntime<Traits>);
+    runtime = (cast getNodeRuntime((cast target : Dynamic)) : NodeRuntime<Traits>);
     ((cast runtime : NodeRuntime<Traits>).parentReferenceId = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast runtime : NodeRuntime<Traits>).parentReferenceId + 1.0)), 0));
     ((cast runtime : NodeRuntime<Traits>).worldTransformUsingParentTransformId = -1.0);
   }
 
   public static function invalidateNodeRender<Traits:flighthq._internal._Object>(target:Node<Traits>):Void {
-    invalidateNodeAppearance((cast target));
-    invalidateNodeLocalTransform((cast target));
+    invalidateNodeAppearance((cast target : Dynamic));
+    invalidateNodeLocalTransform((cast target : Dynamic));
   }
 
   @:noCompletion
   public static function invalidateNodeWorldBounds<Traits:flighthq._internal._Object>(target:Node<Traits>):Void {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
-    runtime = (cast getNodeRuntime((cast target)) : NodeRuntime<Traits>);
+    runtime = (cast getNodeRuntime((cast target : Dynamic)) : NodeRuntime<Traits>);
     ((cast runtime : NodeRuntime<Traits>).worldBoundsUsingWorldTransformId = -1.0);
     ((cast runtime : NodeRuntime<Traits>).worldBoundsUsingLocalBoundsId = -1.0);
   }

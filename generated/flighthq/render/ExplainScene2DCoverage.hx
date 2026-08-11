@@ -18,12 +18,12 @@ class ExplainScene2DCoverage {
   @:noCompletion
   public static function explainScene2DCoverage(out:Array<SceneCoverageEntry>, state:RenderState, usage:Scene2DKindUsage):Void {
     _Runtime.setLength(out, 0.0);
-    (cast ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage((cast out), (cast state), (cast usage), (cast false : Bool)) : Bool);
+    (cast ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = usage; __callArgument2; }), (cast false : Bool)) : Bool);
   }
 
   @:noCompletion
   public static function hasScene2DCoverage(state:RenderState, usage:Scene2DKindUsage):Bool {
-    return cast !(cast (cast ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage((cast null), (cast state), (cast usage), (cast true : Bool)) : Bool) : Bool);
+    return cast !(cast (cast ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage(({ final __callArgument3:Dynamic = null; __callArgument3; }), ({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = usage; __callArgument5; }), (cast true : Bool)) : Bool) : Bool);
     return cast null;
   }
 
@@ -32,7 +32,7 @@ class ExplainScene2DCoverage {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var commands:Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>> = cast _Runtime.UNDEFINED;
     found = false;
-    runtime = (cast getRenderStateRuntime((cast state)) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : RenderStateRuntime);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'nodeKinds'), 'length') : Float)) : Bool)) {
@@ -53,7 +53,7 @@ class ExplainScene2DCoverage {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'shapeCommandKeys'), 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'shapeCommandKeys'), i);
-        if ((cast _Runtime.strictEquals(({ final __collection0:Dynamic = commands; __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<String, CanvasShapeCommand<String>>).has(kind)); }), true) : Bool)) {
+        if ((cast _Runtime.strictEquals(({ final __collection7:Dynamic = commands; __collection7 == null ? _Runtime.UNDEFINED : ((cast __collection7 : flighthq._internal._Map<String, CanvasShapeCommand<String>>).has(kind)); }), true) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.ShapeCommandHandler }] : Array<Dynamic>));
           i++;
           continue;

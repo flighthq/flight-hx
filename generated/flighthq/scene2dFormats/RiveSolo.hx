@@ -19,9 +19,9 @@ class RiveSolo {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         if ((cast !_Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index) : RiveCoreObject).typeKey, RiveSolo.RIVE_SOLO_TYPE_KEY__riveSolo) : Bool)) { index++; continue; }
-        var active:Null<Float> = (cast RiveSolo.readRiveSoloActiveIndex__riveSolo((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index))) : Null<Float>);
+        var active:Null<Float> = (cast RiveSolo.readRiveSoloActiveIndex__riveSolo(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index)) : Null<Float>);
         if ((cast ((cast _Runtime.strictEquals(active, null) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast active : Float)), index) : Bool)) : Bool)) {
-          reportImportDiagnostic((cast diagnostics), (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip), (cast 'rive.solo-unresolved-active' : String), (cast 'applyRiveSolo' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end);
+          reportImportDiagnostic(({ final __callArgument0:Dynamic = diagnostics; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument1; }), (cast 'rive.solo-unresolved-active' : String), (cast 'applyRiveSolo' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
           index++;
           continue;
         }
@@ -42,7 +42,7 @@ class RiveSolo {
   public static function readRiveSoloActiveIndex__riveSolo(object:flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<RiveArtboardGraph, String>, Float>):Null<Float> {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
     property = _Runtime.find((cast object : { var properties:Array<RiveProperty>; }).properties, function(candidate:RiveProperty, __unused0:Float, __unused1:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, RiveSolo.RIVE_ACTIVE_COMPONENT_ID__riveSolo));
-    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural0 = property; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var value:RiveValue; }).value; })), 'number') : Bool) ? (cast (cast property : RiveProperty).value : Dynamic) : (cast null : Dynamic));
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural2 = property; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var value:RiveValue; }).value; })), 'number') : Bool) ? (cast (cast property : RiveProperty).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 

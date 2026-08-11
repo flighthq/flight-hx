@@ -18,18 +18,18 @@ class EnableMovieClipGuards {
   }
 
   public static function disableMovieClipGuards():Void {
-    setSpritesheetTimelineSourceGuard((cast null));
+    setSpritesheetTimelineSourceGuard((cast null : Dynamic));
     (EnableMovieClipGuards.movieClipGuardsEnabled__enableMovieClipGuards = cast (false : Dynamic));
   }
 
   public static function enableMovieClipGuards():Void {
-    setSpritesheetTimelineSourceGuard((cast EnableMovieClipGuards.warnOnUnsupportedSpritesheetTimelineFields__enableMovieClipGuards));
+    setSpritesheetTimelineSourceGuard((cast EnableMovieClipGuards.warnOnUnsupportedSpritesheetTimelineFields__enableMovieClipGuards : Dynamic));
     (EnableMovieClipGuards.movieClipGuardsEnabled__enableMovieClipGuards = cast (true : Dynamic));
   }
 
   public static function warnOnUnsupportedSpritesheetTimelineFields__enableMovieClipGuards(animation:SpritesheetAnimation, explanation:SpritesheetTimelineSourceExplanation):Void {
     if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(explanation, 'unsupportedFields'), 'length'), 0.0) : Bool)) { return; }
-    (cast logOnce((cast 'movieclip:spritesheet-timeline-source:' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unsupportedFields'), ',')) + '' : String), (cast LogLevel.Warn), (cast { direction: animation.direction, message: 'createSpritesheetTimelineSource: authored repeat or per-frame timing cannot be represented by TimelineSource and will not control MovieClip playback — call explainSpritesheetTimelineSource(animation), or use playSpritesheetAnimation with a SpritesheetPlayer when those semantics must be preserved.', repeatCount: animation.repeatCount, unsupportedFields: _Runtime.field(explanation, 'unsupportedFields') }), (cast 'movieclip')) : Bool);
+    (cast logOnce((cast 'movieclip:spritesheet-timeline-source:' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unsupportedFields'), ',')) + '' : String), ({ final __callArgument0:Dynamic = LogLevel.Warn; __callArgument0; }), (cast { direction: animation.direction, message: 'createSpritesheetTimelineSource: authored repeat or per-frame timing cannot be represented by TimelineSource and will not control MovieClip playback — call explainSpritesheetTimelineSource(animation), or use playSpritesheetAnimation with a SpritesheetPlayer when those semantics must be preserved.', repeatCount: animation.repeatCount, unsupportedFields: _Runtime.field(explanation, 'unsupportedFields') } : Dynamic), ({ final __callArgument1:Dynamic = 'movieclip'; __callArgument1; })) : Bool);
   }
 
   public static var movieClipGuardsEnabled__enableMovieClipGuards:Bool = false;

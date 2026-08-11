@@ -19,20 +19,20 @@ class ResolvePathRegions {
   public static function resolvePathRegions(rings:Array<PathBooleanContour>, fillRule:PathBooleanFillRule):Path {
     var path:Path = cast _Runtime.UNDEFINED;
     var resolved:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
-    path = (cast createPath((cast 'nonZero')) : Path);
+    path = (cast createPath(({ final __callArgument0:Dynamic = 'nonZero'; __callArgument0; })) : Path);
     if ((cast _Runtime.strictEquals(_Runtime.field(rings, 'length'), 0.0) : Bool)) { return cast path; }
-    resolved = (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean((cast rings), (cast ResolvePathRegions.EMPTY_CONTOURS__resolvePathRegions), (cast 'union'), (cast fillRule));
+    resolved = (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean(({ final __callArgument1:Dynamic = rings; __callArgument1; }), ({ final __callArgument2:Dynamic = ResolvePathRegions.EMPTY_CONTOURS__resolvePathRegions; __callArgument2; }), ({ final __callArgument3:Dynamic = 'union'; __callArgument3; }), ({ final __callArgument4:Dynamic = fillRule; __callArgument4; }));
     for (ring in _Runtime.iterable(resolved)) {
       if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-      appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 1.0 : Float)) : Float));
+      appendPathMoveTo(({ final __callArgument7:Dynamic = path; __callArgument7; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 1.0 : Float)) : Float));
       {
         var i:Float = 2.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast (i + 1.0) : Float)) : Float));
+          appendPathLineTo(({ final __callArgument8:Dynamic = path; __callArgument8; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast (i + 1.0) : Float)) : Float));
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
-      appendPathClose((cast path));
+      appendPathClose(({ final __callArgument9:Dynamic = path; __callArgument9; }));
     }
     return cast path;
     return cast null;

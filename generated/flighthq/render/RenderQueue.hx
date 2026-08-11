@@ -25,8 +25,8 @@ class RenderQueue {
     var stack:Array<Renderable> = cast _Runtime.UNDEFINED;
     var stackLength:Float = cast _Runtime.UNDEFINED;
     var sceneOrder:Float = cast _Runtime.UNDEFINED;
-    clearRenderQueue((cast out));
-    runtime = (cast getRenderStateRuntime((cast state)) : RenderStateRuntime);
+    clearRenderQueue(({ final __callArgument0:Dynamic = out; __callArgument0; }));
+    runtime = (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime);
     renderProxyMap = (cast runtime : RenderStateRuntime).renderProxyMap;
     stack = RenderQueue._buildStack__renderQueue;
     stackLength = 1.0;
@@ -38,10 +38,10 @@ class RenderQueue {
       if ((cast _Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
       if ((cast !(cast (cast proxy : RenderProxy).visible : Bool) : Bool)) { continue; }
       if ((cast !_Runtime.strictEquals((cast proxy : RenderProxy).renderer, null) : Bool)) {
-        pushRenderQueueEntry((cast out), (cast proxy), (cast sceneOrder : Float));
+        pushRenderQueueEntry(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = proxy; __callArgument3; }), (cast sceneOrder : Float));
       }
       sceneOrder++;
-      var children:Null<Array<Node<flighthq._internal._Any>>> = _Runtime.field((cast getNodeRuntime((cast (cast current : NodeAny))) : NodeRuntime<flighthq._internal._Any>), 'children');
+      var children:Null<Array<Node<flighthq._internal._Any>>> = _Runtime.field((cast getNodeRuntime((cast (cast current : NodeAny) : Dynamic)) : NodeRuntime<flighthq._internal._Any>), 'children');
       if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
         {
           var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);

@@ -9,24 +9,24 @@ import flighthq.types.Log.LogLevel;
 
 class EnableGlyphAtlasGuards {
   public static function disableGlyphAtlasGuards():Void {
-    setGlyphAtlasEntryGuard((cast null));
+    setGlyphAtlasEntryGuard(({ final __callArgument0:Dynamic = null; __callArgument0; }));
   }
 
   public static function enableGlyphAtlasGuards():Void {
-    setGlyphAtlasEntryGuard((cast EnableGlyphAtlasGuards.warnOnGlyphAtlasEntryBlocked__enableGlyphAtlasGuards));
+    setGlyphAtlasEntryGuard(({ final __callArgument1:Dynamic = EnableGlyphAtlasGuards.warnOnGlyphAtlasEntryBlocked__enableGlyphAtlasGuards; __callArgument1; }));
   }
 
   public static function warnOnGlyphAtlasEntryBlocked__enableGlyphAtlasGuards(reason:String, codepoint:Float):Void {
     var printable:String = cast _Runtime.UNDEFINED;
     printable = 'U+' + Std.string(_Runtime.padStart(_Runtime.callProperty(_Runtime.numberToString(codepoint, 16.0), 'toUpperCase', cast ([] : Array<Dynamic>)), 4.0, '0')) + '';
     if ((cast _Runtime.strictEquals(reason, 'rasterizer-returned-null') : Bool)) {
-      (cast logOnce((cast 'glyphatlas:rasterizer-returned-null' : String), (cast LogLevel.Warn), (cast { message: ('getGlyphAtlasEntry: the rasterizer produced nothing for ' + Std.string(printable) + ', so it will not render. ' + 'The host may have no canvas, the font may not cover this codepoint, or a custom backend declined.') }), (cast 'glyphatlas')) : Bool);
+      (cast logOnce((cast 'glyphatlas:rasterizer-returned-null' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: ('getGlyphAtlasEntry: the rasterizer produced nothing for ' + Std.string(printable) + ', so it will not render. ' + 'The host may have no canvas, the font may not cover this codepoint, or a custom backend declined.') } : Dynamic), ({ final __callArgument3:Dynamic = 'glyphatlas'; __callArgument3; })) : Bool);
       return;
     }
     if ((cast _Runtime.strictEquals(reason, 'glyph-larger-than-atlas') : Bool)) {
-      (cast logOnce((cast 'glyphatlas:glyph-larger-than-atlas' : String), (cast LogLevel.Warn), (cast { message: (('getGlyphAtlasEntry: ' + Std.string(printable) + ' rasterizes larger than the atlas\'s usable area, so it can never ' + 'be placed however much is evicted. Enlarge the atlas or reduce the font size; ') + 'explainGlyphAtlasEntry reports the measured sizes.') }), (cast 'glyphatlas')) : Bool);
+      (cast logOnce((cast 'glyphatlas:glyph-larger-than-atlas' : String), ({ final __callArgument4:Dynamic = LogLevel.Warn; __callArgument4; }), (cast { message: (('getGlyphAtlasEntry: ' + Std.string(printable) + ' rasterizes larger than the atlas\'s usable area, so it can never ' + 'be placed however much is evicted. Enlarge the atlas or reduce the font size; ') + 'explainGlyphAtlasEntry reports the measured sizes.') } : Dynamic), ({ final __callArgument5:Dynamic = 'glyphatlas'; __callArgument5; })) : Bool);
       return;
     }
-    (cast logOnce((cast 'glyphatlas:repack-dropped' : String), (cast LogLevel.Warn), (cast { message: (('getGlyphAtlasEntry: a repack could not replace ' + Std.string(printable) + ' and dropped it. Occasional drops are ' + 'normal under pressure; repeated ones mean the atlas is thrashing and glyphs are being ') + 're-rasterized on every use. Consider a larger atlas or a byte/area budget.') }), (cast 'glyphatlas')) : Bool);
+    (cast logOnce((cast 'glyphatlas:repack-dropped' : String), ({ final __callArgument6:Dynamic = LogLevel.Warn; __callArgument6; }), (cast { message: (('getGlyphAtlasEntry: a repack could not replace ' + Std.string(printable) + ' and dropped it. Occasional drops are ' + 'normal under pressure; repeated ones mean the atlas is thrashing and glyphs are being ') + 're-rasterized on every use. Consider a larger atlas or a byte/area budget.') } : Dynamic), ({ final __callArgument7:Dynamic = 'glyphatlas'; __callArgument7; })) : Bool);
   }
 }

@@ -35,13 +35,13 @@ class WgpuEffectBoxBlur {
       while ((cast ((cast pass : Float) < (cast passes : Float)) : Bool)) {
         var radiusX:Float = (cast computeBoxBlurPassRadius((cast blurX : Float), (cast passes : Float), (cast pass : Float)) : Float);
         if ((cast ((cast radiusX : Float) > (cast 0.0 : Float)) : Bool)) {
-          WgpuEffectBoxBlur.applyBoxBlurPass__wgpuEffectBoxBlur((cast state), (cast read), (cast write), (cast radiusX : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast edgeColor));
+          WgpuEffectBoxBlur.applyBoxBlurPass__wgpuEffectBoxBlur(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = read; __callArgument1; }), ({ final __callArgument2:Dynamic = write; __callArgument2; }), (cast radiusX : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast edgeColor : Dynamic));
           (read = cast (write : Dynamic));
           (write = cast (((cast _Runtime.strictEquals(write, temp) : Bool) ? (cast dest : Dynamic) : (cast temp : Dynamic)) : Dynamic));
         }
         var radiusY:Float = (cast computeBoxBlurPassRadius((cast blurY : Float), (cast passes : Float), (cast pass : Float)) : Float);
         if ((cast ((cast radiusY : Float) > (cast 0.0 : Float)) : Bool)) {
-          WgpuEffectBoxBlur.applyBoxBlurPass__wgpuEffectBoxBlur((cast state), (cast read), (cast write), (cast radiusY : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast edgeColor));
+          WgpuEffectBoxBlur.applyBoxBlurPass__wgpuEffectBoxBlur(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = read; __callArgument4; }), ({ final __callArgument5:Dynamic = write; __callArgument5; }), (cast radiusY : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast edgeColor : Dynamic));
           (read = cast (write : Dynamic));
           (write = cast (((cast _Runtime.strictEquals(write, temp) : Bool) ? (cast dest : Dynamic) : (cast temp : Dynamic)) : Dynamic));
         }
@@ -49,14 +49,14 @@ class WgpuEffectBoxBlur {
       }
     }
     if ((cast !_Runtime.strictEquals(read, dest) : Bool)) {
-      WgpuEffectBoxBlur.applyBoxBlurPass__wgpuEffectBoxBlur((cast state), (cast read), (cast dest), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      WgpuEffectBoxBlur.applyBoxBlurPass__wgpuEffectBoxBlur(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = read; __callArgument7; }), ({ final __callArgument8:Dynamic = dest; __callArgument8; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     }
   }
 
   public static function applyBoxBlurPass__wgpuEffectBoxBlur(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, radius:Float, dirX:Float, dirY:Float, edgeColor:Null<BoxBlurEdgeColor__wgpuEffectBoxBlur>):Void {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    pipeline = (cast WgpuEffectBoxBlur.getBoxBlurPipeline__wgpuEffectBoxBlur((cast state)) : WgpuEffectPipeline);
-    drawWgpuEffectPass((cast state), (cast source), (cast dest), (cast pipeline), (cast function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast WgpuEffectBoxBlur.getBoxBlurPipeline__wgpuEffectBoxBlur(({ final __callArgument9:Dynamic = state; __callArgument9; })) : WgpuEffectPipeline);
+    drawWgpuEffectPass(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = source; __callArgument11; }), ({ final __callArgument12:Dynamic = dest; __callArgument12; }), ({ final __callArgument13:Dynamic = pipeline; __callArgument13; }), ({ final __callArgument14:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (1.0 / (cast source : WgpuRenderTarget).width) : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (1.0 / (cast source : WgpuRenderTarget).height) : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast dirX : Float));
@@ -75,14 +75,14 @@ class WgpuEffectBoxBlur {
         flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast 1.0 : Float));
       }
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast radius : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument14; }));
   }
 
   public static function getBoxBlurPipeline__wgpuEffectBoxBlur(state:WgpuRenderState):WgpuEffectPipeline {
     var p:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     p = ((cast WgpuEffectBoxBlur.boxBlurPipelines__wgpuEffectBoxBlur : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(p, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (p = cast ((cast createWgpuEffectPipeline((cast state), (cast WgpuEffectBoxBlur.BOX_BLUR_WGSL__wgpuEffectBoxBlur : String), (cast 'replace')) : WgpuEffectPipeline) : Dynamic));
+      (p = cast ((cast createWgpuEffectPipeline(({ final __callArgument15:Dynamic = state; __callArgument15; }), (cast WgpuEffectBoxBlur.BOX_BLUR_WGSL__wgpuEffectBoxBlur : String), ({ final __callArgument16:Dynamic = 'replace'; __callArgument16; })) : WgpuEffectPipeline) : Dynamic));
       ((cast WgpuEffectBoxBlur.boxBlurPipelines__wgpuEffectBoxBlur : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast p)));
     }
     return cast p;

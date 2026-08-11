@@ -76,10 +76,10 @@ class SegmentCollision {
     var points:Array<Float> = cast _Runtime.UNDEFINED;
     var pn:Float = cast _Runtime.UNDEFINED;
     points = _Runtime.field(b, 'points');
-    if ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus((cast points)) : Null<String>), null) : Bool)) { return cast false; }
+    if ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus(({ final __callArgument0:Dynamic = points; __callArgument0; })) : Null<String>), null) : Bool)) { return cast false; }
     pn = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
-    if ((cast (cast SegmentCollision.isPointInConvexPolygon__segmentCollision((cast _Runtime.field(a, 'x0') : Float), (cast _Runtime.field(a, 'y0') : Float), (cast points), (cast pn : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast SegmentCollision.isPointInConvexPolygon__segmentCollision((cast _Runtime.field(a, 'x1') : Float), (cast _Runtime.field(a, 'y1') : Float), (cast points), (cast pn : Float)) : Bool) : Bool)) { return cast true; }
+    if ((cast (cast SegmentCollision.isPointInConvexPolygon__segmentCollision((cast _Runtime.field(a, 'x0') : Float), (cast _Runtime.field(a, 'y0') : Float), ({ final __callArgument1:Dynamic = points; __callArgument1; }), (cast pn : Float)) : Bool) : Bool)) { return cast true; }
+    if ((cast (cast SegmentCollision.isPointInConvexPolygon__segmentCollision((cast _Runtime.field(a, 'x1') : Float), (cast _Runtime.field(a, 'y1') : Float), ({ final __callArgument2:Dynamic = points; __callArgument2; }), (cast pn : Float)) : Bool) : Bool)) { return cast true; }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
@@ -103,7 +103,7 @@ class SegmentCollision {
     var epsilon:Float = cast _Runtime.UNDEFINED;
     var positive:Bool = cast _Runtime.UNDEFINED;
     var negative:Bool = cast _Runtime.UNDEFINED;
-    epsilon = (cast SegmentCollision.relativeEpsilon__segmentCollision((cast (cast SegmentCollision.getPolygonExtent__segmentCollision((cast px), (cast pn : Float)) : Float) : Float)) : Float);
+    epsilon = (cast SegmentCollision.relativeEpsilon__segmentCollision((cast (cast SegmentCollision.getPolygonExtent__segmentCollision(({ final __callArgument3:Dynamic = px; __callArgument3; }), (cast pn : Float)) : Float) : Float)) : Float);
     positive = false;
     negative = false;
     {

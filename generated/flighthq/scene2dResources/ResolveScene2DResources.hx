@@ -24,8 +24,8 @@ class ResolveScene2DResources {
         var reference:Scene2DSlotReference = flighthq._internal._StaticIndex.readArray((cast document : Scene2DDocument).slots, i);
         if ((cast ((cast !_Runtime.strictEquals(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var select:Null<Scene2DSlotReference->Bool>; }).select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast _Runtime.callProperty(options, 'select', cast ([reference] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { i++; continue; }
         var content:Null<Node2D> = _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var resolveSlotContent:Null<Scene2DSlotContentResolver>; }).resolveSlotContent; }), cast ([reference] : Array<Dynamic>)), function():Dynamic return cast null);
-        setScene2DSlotReferenceContent((cast reference), (cast content));
-        if ((cast _Runtime.strictEquals(content, null) : Bool)) { _Runtime.callProperty(unresolved, 'push', cast ([reference] : Array<Dynamic>)); } else { (cast resolved : { var push:flighthq._internal._Any; }).push((cast { content: content, reference: reference })); }
+        setScene2DSlotReferenceContent(({ final __callArgument2:Dynamic = reference; __callArgument2; }), (cast content : Dynamic));
+        if ((cast _Runtime.strictEquals(content, null) : Bool)) { _Runtime.callProperty(unresolved, 'push', cast ([reference] : Array<Dynamic>)); } else { (cast resolved : { var push:flighthq._internal._Any; }).push((cast { content: content, reference: reference } : Dynamic)); }
         i++;
       }
     }

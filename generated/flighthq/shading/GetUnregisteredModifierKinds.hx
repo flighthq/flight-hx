@@ -14,7 +14,7 @@ class GetUnregisteredModifierKinds {
     var unregistered:Array<ModifierKind> = cast _Runtime.UNDEFINED;
     unregistered = (cast cast ([] : Array<Dynamic>));
     for (modifier in _Runtime.iterable(stack)) {
-      if ((cast !_Runtime.strictEquals((cast resolveModifier((cast registry), (cast (cast modifier : Modifier).kind : String)) : Null<ModifierDefinition>), null) : Bool)) { continue; }
+      if ((cast !_Runtime.strictEquals((cast resolveModifier(({ final __callArgument2:Dynamic = registry; __callArgument2; }), (cast (cast modifier : Modifier).kind : String)) : Null<ModifierDefinition>), null) : Bool)) { continue; }
       if ((cast _Runtime.includes(unregistered, (cast modifier : Modifier).kind) : Bool)) { continue; }
       _Runtime.callProperty(unregistered, 'push', cast ([(cast modifier : Modifier).kind] : Array<Dynamic>));
     }

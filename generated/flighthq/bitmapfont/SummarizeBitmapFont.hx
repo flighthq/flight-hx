@@ -16,7 +16,7 @@ class SummarizeBitmapFont {
     var maxCodepoint:Float = cast _Runtime.UNDEFINED;
     byteSize = 0.0;
     for (page in _Runtime.iterable(font.pages)) {
-      (byteSize = cast ((byteSize + (cast getTextureAtlasByteSize((cast page)) : Float)) : Dynamic));
+      (byteSize = cast ((byteSize + (cast getTextureAtlasByteSize(({ final __callArgument2:Dynamic = page; __callArgument2; })) : Float)) : Dynamic));
     }
     minCodepoint = -1.0;
     maxCodepoint = -1.0;

@@ -11,7 +11,7 @@ import flighthq.types.ImageDecoder;
 class RegisterWebImageDecoders {
   public static function registerWebImageDecoders():Void {
     for (mimeType in _Runtime.iterable(RegisterWebImageDecoders.webDecodableMimeTypes__registerWebImageDecoders)) {
-      registerImageDecoder((cast mimeType : String), (cast RegisterWebImageDecoders.decodeImageWithCanvas__registerWebImageDecoders));
+      registerImageDecoder((cast mimeType : String), ({ final __callArgument2:Dynamic = RegisterWebImageDecoders.decodeImageWithCanvas__registerWebImageDecoders; __callArgument2; }));
     }
   }
 
@@ -24,8 +24,8 @@ class RegisterWebImageDecoders {
         var canvas:flighthq._internal.dom.OffscreenCanvas = cast _Runtime.UNDEFINED;
         var context:flighthq._internal.dom.OffscreenCanvasRenderingContext2D = cast _Runtime.UNDEFINED;
         var data:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('createImageBitmap'), cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('Blob'), [cast ([_Runtime.slice(bytes, 0, null)] : Array<Dynamic>)])] : Array<Dynamic>)), function(__awaitValue2:Dynamic):Dynamic {
-          bitmap = __awaitValue2;
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('createImageBitmap'), cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('Blob'), [cast ([_Runtime.slice(bytes, 0, null)] : Array<Dynamic>)])] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
+          bitmap = __awaitValue3;
           width = (cast bitmap : flighthq._internal.dom.ImageBitmap).width;
           height = (cast bitmap : flighthq._internal.dom.ImageBitmap).height;
           canvas = _Runtime.construct(flighthq._internal._HostValueLut.get('OffscreenCanvas'), [width, height]);
@@ -33,16 +33,16 @@ class RegisterWebImageDecoders {
           (cast context : flighthq._internal.dom.OffscreenCanvasRenderingContext2D).drawImage(bitmap, 0.0, 0.0);
           (cast bitmap : flighthq._internal.dom.ImageBitmap).close();
           data = (cast (cast context : flighthq._internal.dom.OffscreenCanvasRenderingContext2D).getImageData(0.0, 0.0, width, height) : flighthq._internal.dom.ImageData).data;
-          var __flowBranch4:Dynamic;
-          if ((cast _Runtime.strictEquals(({ final __structural3 = options; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var premultiplyAlpha:Null<Bool>; }).premultiplyAlpha; }), true) : Bool)) {
-            __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
-              RegisterWebImageDecoders.premultiplyRgbaInPlace__registerWebImageDecoders((cast data));
+          var __flowBranch5:Dynamic;
+          if ((cast _Runtime.strictEquals(({ final __structural4 = options; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var premultiplyAlpha:Null<Bool>; }).premultiplyAlpha; }), true) : Bool)) {
+            __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
+              RegisterWebImageDecoders.premultiplyRgbaInPlace__registerWebImageDecoders(({ final __callArgument6:Dynamic = data; __callArgument6; }));
               return flighthq._internal._Async.flowNormal();
             });
           } else {
-            __flowBranch4 = flighthq._internal._Async.flowNormal();
+            __flowBranch5 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
             return flighthq._internal._Async.flowReturn({ data: data, width: width, height: height });
           });
         });

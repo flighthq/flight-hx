@@ -23,11 +23,11 @@ import flighthq.types._internal._SpecularPbrExtensionValues.SpecularPbrExtension
 class SpecularPbrScene3DMaterialTextures {
   @:noCompletion
   public static function registerSpecularPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DPbrExtensionTextures((cast registry), (cast SpecularPbrExtensionKind : String), (cast function(extension:PbrExtension, out:Array<Texture>):Void {
+    registerScene3DPbrExtensionTextures(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast SpecularPbrExtensionKind : String), ({ final __callArgument1:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var specular:SpecularPbrExtension = cast _Runtime.UNDEFINED;
       specular = (cast extension : SpecularPbrExtension);
       if ((cast !_Runtime.strictEquals(_Runtime.field(specular, 'specularMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(specular, 'specularMap')] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(_Runtime.field(specular, 'specularColorMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(specular, 'specularColorMap')] : Array<Dynamic>)); }
-    }));
+    }; __callArgument1; }));
   }
 }

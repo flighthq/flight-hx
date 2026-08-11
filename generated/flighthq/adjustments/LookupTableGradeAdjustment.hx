@@ -23,7 +23,7 @@ class LookupTableGradeAdjustment {
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast b : Float));
         return;
       }
-      sampleColorLut((cast lut), (cast out), (cast r : Float), (cast g : Float), (cast b : Float));
+      sampleColorLut(({ final __callArgument0:Dynamic = lut; __callArgument0; }), ({ final __callArgument1:Dynamic = out; __callArgument1; }), (cast r : Float), (cast g : Float), (cast b : Float));
       flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast (r + ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float)) - r) * strength)) : Float));
       flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast (g + ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float)) - g) * strength)) : Float));
       flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast (b + ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float)) - b) * strength)) : Float));

@@ -21,12 +21,12 @@ class BitmapFormat {
       if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out : flighthq._internal._UInt8ClampedArray).set((cast source : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(length))); }
       return;
     }
-    __destructure0 = (cast BitmapFormat.channelOffsets__bitmapFormat((cast from)) : Array<Float>);
+    __destructure0 = (cast BitmapFormat.channelOffsets__bitmapFormat(({ final __callArgument0:Dynamic = from; __callArgument0; })) : Array<Float>);
     srcR = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
     srcG = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     srcB = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
     srcA = flighthq._internal._StaticIndex.readArray(__destructure0, 3.0);
-    __destructure1 = (cast BitmapFormat.channelOffsets__bitmapFormat((cast to)) : Array<Float>);
+    __destructure1 = (cast BitmapFormat.channelOffsets__bitmapFormat(({ final __callArgument1:Dynamic = to; __callArgument1; })) : Array<Float>);
     dstR = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
     dstG = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
     dstB = flighthq._internal._StaticIndex.readArray(__destructure1, 2.0);

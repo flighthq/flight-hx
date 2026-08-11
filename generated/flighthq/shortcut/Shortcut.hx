@@ -94,11 +94,11 @@ class Shortcut {
     if ((cast _Runtime.strictEquals(Shortcut._dropGuard__shortcut, null) : Bool)) { return cast (cast normalizeAccelerator((cast accelerator : String)) : Null<String>); }
     result = (cast Shortcut._parseDetailed__shortcut((cast accelerator : String)) : flighthq._internal._Union2<_Parsed__shortcut, AcceleratorParseError>);
     if ((cast _Runtime.hasField(result, 'reason') : Bool)) {
-      Shortcut._dropGuard__shortcut((cast { accelerator: accelerator, operation: operation, parseError: result, reason: 'unparseable' }));
+      Shortcut._dropGuard__shortcut(({ final __callArgument2:Dynamic = { accelerator: accelerator, operation: operation, parseError: result, reason: 'unparseable' }; __callArgument2; }));
       return cast null;
     }
-    Shortcut._reportNoNativeBackend__shortcut((cast operation), (cast accelerator : String));
-    return cast (cast Shortcut._formatNormalized__shortcut((cast result)) : String);
+    Shortcut._reportNoNativeBackend__shortcut(({ final __callArgument3:Dynamic = operation; __callArgument3; }), (cast accelerator : String));
+    return cast (cast Shortcut._formatNormalized__shortcut((cast result : Dynamic)) : String);
     return cast null;
   }
 
@@ -115,7 +115,7 @@ class Shortcut {
     var modifiers:Array<ShortcutModifier> = cast _Runtime.UNDEFINED;
     var key:Null<String> = cast _Runtime.UNDEFINED;
     var canonicalKey:Null<String> = cast _Runtime.UNDEFINED;
-    tokens = (cast Shortcut._splitTokens__shortcut((cast StringTools.trim(Std.string(input)) : String), (cast Shortcut._tokenScratch__shortcut)) : Array<String>);
+    tokens = (cast Shortcut._splitTokens__shortcut((cast StringTools.trim(Std.string(input)) : String), ({ final __callArgument4:Dynamic = Shortcut._tokenScratch__shortcut; __callArgument4; })) : Array<String>);
     if ((cast _Runtime.strictEquals(_Runtime.field(tokens, 'length'), 0.0) : Bool)) {
       return cast { reason: 'empty', token: '' };
     }
@@ -150,7 +150,7 @@ class Shortcut {
 
   public static function _reportNoNativeBackend__shortcut(operation:ShortcutOperation, accelerator:String):Void {
     if ((cast ((cast _Runtime.strictEquals(Shortcut._dropGuard__shortcut, null) : Bool) || (cast !_Runtime.strictEquals(Shortcut._backend__shortcut, null) : Bool)) : Bool)) { return; }
-    Shortcut._dropGuard__shortcut((cast { accelerator: accelerator, operation: operation, parseError: null, reason: 'no-native-backend' }));
+    Shortcut._dropGuard__shortcut(({ final __callArgument7:Dynamic = { accelerator: accelerator, operation: operation, parseError: null, reason: 'no-native-backend' }; __callArgument7; }));
   }
 
   public static var _signals__shortcut:Null<ShortcutSignals> = _Runtime.explicitNull();
@@ -211,7 +211,7 @@ class Shortcut {
 
   public static function disableGlobalShortcut(accelerator:String):Bool {
     var normalized:Null<String> = cast _Runtime.UNDEFINED;
-    normalized = (cast Shortcut._normalizeForCommand__shortcut((cast accelerator : String), (cast 'disableGlobalShortcut')) : Null<String>);
+    normalized = (cast Shortcut._normalizeForCommand__shortcut((cast accelerator : String), ({ final __callArgument8:Dynamic = 'disableGlobalShortcut'; __callArgument8; })) : Null<String>);
     if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
     return cast (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).setEnabled((cast normalized : String), (cast false : Bool));
     return cast null;
@@ -223,13 +223,13 @@ class Shortcut {
 
   public static function disposeGlobalShortcutSignals():Void {
     if ((cast _Runtime.strictEquals(Shortcut._signals__shortcut, null) : Bool)) { return; }
-    clearSignal((cast (cast Shortcut._signals__shortcut : { var onTrigger:Signal<ShortcutEvent->Void>; }).onTrigger));
+    clearSignal((cast (cast Shortcut._signals__shortcut : { var onTrigger:Signal<ShortcutEvent->Void>; }).onTrigger : Dynamic));
     (Shortcut._signals__shortcut = cast (null : Dynamic));
   }
 
   public static function enableGlobalShortcut(accelerator:String):Bool {
     var normalized:Null<String> = cast _Runtime.UNDEFINED;
-    normalized = (cast Shortcut._normalizeForCommand__shortcut((cast accelerator : String), (cast 'enableGlobalShortcut')) : Null<String>);
+    normalized = (cast Shortcut._normalizeForCommand__shortcut((cast accelerator : String), ({ final __callArgument9:Dynamic = 'enableGlobalShortcut'; __callArgument9; })) : Null<String>);
     if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
     return cast (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).setEnabled((cast normalized : String), (cast true : Bool));
     return cast null;
@@ -278,13 +278,13 @@ class Shortcut {
     var parts:Array<String> = cast _Runtime.UNDEFINED;
     result = (cast Shortcut._parse__shortcut((cast accelerator : String)) : Null<_Parsed__shortcut>);
     if ((cast _Runtime.strictEquals(result, null) : Bool)) { return cast ''; }
-    isMac = (cast Shortcut._isMacOS__shortcut((cast platform)) : Bool);
+    isMac = (cast Shortcut._isMacOS__shortcut(({ final __callArgument12:Dynamic = platform; __callArgument12; })) : Bool);
     parts = (cast cast ([] : Array<Dynamic>));
     for (mod in _Runtime.iterable((cast result : _Parsed__shortcut).modifiers)) {
-      var resolved:String = ((cast _Runtime.strictEquals(mod, 'CommandOrControl') : Bool) ? (cast (cast resolveCommandOrControlModifier((cast platform)) : String) : Dynamic) : (cast mod : Dynamic));
+      var resolved:String = ((cast _Runtime.strictEquals(mod, 'CommandOrControl') : Bool) ? (cast (cast resolveCommandOrControlModifier(({ final __callArgument15:Dynamic = platform; __callArgument15; })) : String) : Dynamic) : (cast mod : Dynamic));
       _Runtime.callProperty(parts, 'push', cast ([(cast Shortcut._getModifierLabel__shortcut((cast resolved : String), (cast isMac : Bool)) : String)] : Array<Dynamic>));
     }
-    _Runtime.callProperty(parts, 'push', cast ([(cast getAcceleratorKeyLabel((cast (cast result : _Parsed__shortcut).key)) : String)] : Array<Dynamic>));
+    _Runtime.callProperty(parts, 'push', cast ([(cast getAcceleratorKeyLabel((cast result : _Parsed__shortcut).key) : String)] : Array<Dynamic>));
     return cast ((cast isMac : Bool) ? (cast _Runtime.join(parts, '') : Dynamic) : (cast _Runtime.join(parts, '+') : Dynamic));
     return cast null;
   }
@@ -303,8 +303,8 @@ class Shortcut {
 
   public static function getAcceleratorModifierLabel(modifier:ShortcutModifier, ?platform:String):String {
     var resolved:String = cast _Runtime.UNDEFINED;
-    resolved = ((cast _Runtime.strictEquals(modifier, 'CommandOrControl') : Bool) ? (cast (cast resolveCommandOrControlModifier((cast platform)) : String) : Dynamic) : (cast modifier : Dynamic));
-    return cast (cast Shortcut._getModifierLabel__shortcut((cast resolved : String), (cast (cast Shortcut._isMacOS__shortcut((cast platform)) : Bool) : Bool)) : String);
+    resolved = ((cast _Runtime.strictEquals(modifier, 'CommandOrControl') : Bool) ? (cast (cast resolveCommandOrControlModifier(({ final __callArgument16:Dynamic = platform; __callArgument16; })) : String) : Dynamic) : (cast modifier : Dynamic));
+    return cast (cast Shortcut._getModifierLabel__shortcut((cast resolved : String), (cast (cast Shortcut._isMacOS__shortcut(({ final __callArgument17:Dynamic = platform; __callArgument17; })) : Bool) : Bool)) : String);
     return cast null;
   }
 
@@ -371,7 +371,7 @@ class Shortcut {
     var result:Null<_Parsed__shortcut> = cast _Runtime.UNDEFINED;
     result = (cast Shortcut._parse__shortcut((cast input : String)) : Null<_Parsed__shortcut>);
     if ((cast _Runtime.strictEquals(result, null) : Bool)) { return cast null; }
-    return cast (cast Shortcut._formatNormalized__shortcut((cast result)) : String);
+    return cast (cast Shortcut._formatNormalized__shortcut((cast result : Dynamic)) : String);
     return cast null;
   }
 
@@ -379,7 +379,7 @@ class Shortcut {
     var result:Null<_Parsed__shortcut> = cast _Runtime.UNDEFINED;
     result = (cast Shortcut._parse__shortcut((cast input : String)) : Null<_Parsed__shortcut>);
     if ((cast _Runtime.strictEquals(result, null) : Bool)) { return cast null; }
-    return cast (cast Shortcut._copyParsed__shortcut((cast result), (cast out)) : ParsedAccelerator);
+    return cast (cast Shortcut._copyParsed__shortcut((cast result : Dynamic), ({ final __callArgument22:Dynamic = out; __callArgument22; })) : ParsedAccelerator);
     return cast null;
   }
 
@@ -387,30 +387,30 @@ class Shortcut {
     var result:flighthq._internal._Union2<_Parsed__shortcut, AcceleratorParseError> = cast _Runtime.UNDEFINED;
     result = (cast Shortcut._parseDetailed__shortcut((cast input : String)) : flighthq._internal._Union2<_Parsed__shortcut, AcceleratorParseError>);
     if ((cast _Runtime.hasField(result, 'reason') : Bool)) { return cast result; }
-    return cast (cast Shortcut._copyParsed__shortcut((cast result), (cast out)) : ParsedAccelerator);
+    return cast (cast Shortcut._copyParsed__shortcut((cast result : Dynamic), ({ final __callArgument23:Dynamic = out; __callArgument23; })) : ParsedAccelerator);
     return cast null;
   }
 
   public static function registerGlobalShortcut(accelerator:String, handler:ShortcutEvent->Void):Bool {
     var normalized:Null<String> = cast _Runtime.UNDEFINED;
     var wrappedHandler:ShortcutEvent->Void = cast _Runtime.UNDEFINED;
-    normalized = (cast Shortcut._normalizeForCommand__shortcut((cast accelerator : String), (cast 'registerGlobalShortcut')) : Null<String>);
+    normalized = (cast Shortcut._normalizeForCommand__shortcut((cast accelerator : String), ({ final __callArgument24:Dynamic = 'registerGlobalShortcut'; __callArgument24; })) : Null<String>);
     if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
     wrappedHandler = (cast function(event:ShortcutEvent):Void {
-      handler((cast event));
+      handler(({ final __callArgument25:Dynamic = event; __callArgument25; }));
       if ((cast !_Runtime.strictEquals(Shortcut._signals__shortcut, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Shortcut._signals__shortcut : { var onTrigger:Signal<ShortcutEvent->Void>; }).onTrigger], [event]]), 1); }
     });
-    return cast (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).register((cast normalized : String), (cast wrappedHandler));
+    return cast (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).register((cast normalized : String), ({ final __callArgument26:Dynamic = wrappedHandler; __callArgument26; }));
     return cast null;
   }
 
   public static function resolveCommandOrControlModifier(?platform:String):flighthq._internal._Exclude<ShortcutModifier, String> {
-    return cast ((cast (cast Shortcut._isMacOS__shortcut((cast platform)) : Bool) : Bool) ? (cast 'Meta' : Dynamic) : (cast 'Control' : Dynamic));
+    return cast ((cast (cast Shortcut._isMacOS__shortcut(({ final __callArgument27:Dynamic = platform; __callArgument27; })) : Bool) : Bool) ? (cast 'Meta' : Dynamic) : (cast 'Control' : Dynamic));
     return cast null;
   }
 
   public static function resumeAllGlobalShortcuts():Void {
-    Shortcut._reportNoNativeBackend__shortcut((cast 'resumeAllGlobalShortcuts'), (cast '' : String));
+    Shortcut._reportNoNativeBackend__shortcut(({ final __callArgument28:Dynamic = 'resumeAllGlobalShortcuts'; __callArgument28; }), (cast '' : String));
     (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).setAllEnabled((cast true : Bool));
   }
 
@@ -425,18 +425,18 @@ class Shortcut {
   }
 
   public static function suspendAllGlobalShortcuts():Void {
-    Shortcut._reportNoNativeBackend__shortcut((cast 'suspendAllGlobalShortcuts'), (cast '' : String));
+    Shortcut._reportNoNativeBackend__shortcut(({ final __callArgument29:Dynamic = 'suspendAllGlobalShortcuts'; __callArgument29; }), (cast '' : String));
     (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).setAllEnabled((cast false : Bool));
   }
 
   public static function unregisterAllGlobalShortcuts():Void {
-    Shortcut._reportNoNativeBackend__shortcut((cast 'unregisterAllGlobalShortcuts'), (cast '' : String));
+    Shortcut._reportNoNativeBackend__shortcut(({ final __callArgument30:Dynamic = 'unregisterAllGlobalShortcuts'; __callArgument30; }), (cast '' : String));
     (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).unregisterAll();
   }
 
   public static function unregisterGlobalShortcut(accelerator:String):Bool {
     var normalized:Null<String> = cast _Runtime.UNDEFINED;
-    normalized = (cast Shortcut._normalizeForCommand__shortcut((cast accelerator : String), (cast 'unregisterGlobalShortcut')) : Null<String>);
+    normalized = (cast Shortcut._normalizeForCommand__shortcut((cast accelerator : String), ({ final __callArgument31:Dynamic = 'unregisterGlobalShortcut'; __callArgument31; })) : Null<String>);
     if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
     return cast (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).unregister((cast normalized : String));
     return cast null;

@@ -11,15 +11,15 @@ import flighthq.types.StepPosition;
 class EnableEasingGuards {
   @:noCompletion
   public static function disableEasingGuards():Void {
-    setEasingStepsGuard((cast null));
+    setEasingStepsGuard((cast null : Dynamic));
   }
 
   @:noCompletion
   public static function enableEasingGuards():Void {
-    setEasingStepsGuard((cast EnableEasingGuards.warnOnDegenerateSteps__enableEasingGuards));
+    setEasingStepsGuard((cast EnableEasingGuards.warnOnDegenerateSteps__enableEasingGuards : Dynamic));
   }
 
   public static function warnOnDegenerateSteps__enableEasingGuards(count:Float, position:StepPosition):Void {
-    (cast logOnce((cast 'easing:degenerate-steps' : String), (cast LogLevel.Warn), (cast { message: 'easeSteps(' + Std.string(count) + ', \'' + Std.string(position) + '\'): \'' + Std.string(position) + '\' has count - 1 jumps, so it needs count >= 2. With ' + Std.string(count) + ' there are no jumps, the easing divides by zero, and every input returns NaN. Pass count >= 2, or use a position that jumps at an edge (\'jumpEnd\', \'jumpStart\', \'jumpBoth\') — those are defined for count >= 1.' }), (cast 'easing')) : Bool);
+    (cast logOnce((cast 'easing:degenerate-steps' : String), ({ final __callArgument0:Dynamic = LogLevel.Warn; __callArgument0; }), (cast { message: 'easeSteps(' + Std.string(count) + ', \'' + Std.string(position) + '\'): \'' + Std.string(position) + '\' has count - 1 jumps, so it needs count >= 2. With ' + Std.string(count) + ' there are no jumps, the easing divides by zero, and every input returns NaN. Pass count >= 2, or use a position that jumps at an edge (\'jumpEnd\', \'jumpStart\', \'jumpBoth\') — those are defined for count >= 1.' } : Dynamic), ({ final __callArgument1:Dynamic = 'easing'; __callArgument1; })) : Bool);
   }
 }

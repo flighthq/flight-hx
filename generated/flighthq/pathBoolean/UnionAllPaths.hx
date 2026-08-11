@@ -26,26 +26,26 @@ class UnionAllPaths {
     fillRule = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fillRule; }), function():Dynamic return cast 'nonZero');
     contours = (cast cast ([] : Array<Dynamic>));
     for (path in _Runtime.iterable(paths)) {
-      for (contour in _Runtime.iterable((cast flattenPath((cast path), #if js (cast ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.tolerance; }) : Float) #else (cast ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>))) {
+      for (contour in _Runtime.iterable((cast flattenPath(({ final __callArgument5:Dynamic = path; __callArgument5; }), #if js (cast ({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.tolerance; }) : Float) #else (cast ({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>))) {
         _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
       }
     }
-    result = ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool) ? (cast UnionAllPaths.EMPTY_CONTOURS__unionAllPaths : Dynamic) : (cast (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean((cast contours), (cast UnionAllPaths.EMPTY_CONTOURS__unionAllPaths), (cast 'union'), (cast fillRule)) : Dynamic));
-    path = _Runtime.coalesce(out, function():Dynamic return cast (cast createPath((cast 'nonZero')) : Path));
+    result = ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool) ? (cast UnionAllPaths.EMPTY_CONTOURS__unionAllPaths : Dynamic) : (cast (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean(({ final __callArgument7:Dynamic = contours; __callArgument7; }), ({ final __callArgument8:Dynamic = UnionAllPaths.EMPTY_CONTOURS__unionAllPaths; __callArgument8; }), ({ final __callArgument9:Dynamic = 'union'; __callArgument9; }), ({ final __callArgument10:Dynamic = fillRule; __callArgument10; })) : Dynamic));
+    path = _Runtime.coalesce(out, function():Dynamic return cast (cast createPath(({ final __callArgument11:Dynamic = 'nonZero'; __callArgument11; })) : Path));
     _Runtime.setLength((cast path : Path).commands, 0.0);
     _Runtime.setLength((cast path : Path).data, 0.0);
     ((cast path : Path).winding = 'nonZero');
     for (ring in _Runtime.iterable(result)) {
       if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-      appendPathMoveTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 1.0 : Float)) : Float));
+      appendPathMoveTo(({ final __callArgument14:Dynamic = path; __callArgument14; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 1.0 : Float)) : Float));
       {
         var i:Float = 2.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          appendPathLineTo((cast path), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast (i + 1.0) : Float)) : Float));
+          appendPathLineTo(({ final __callArgument15:Dynamic = path; __callArgument15; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast (i + 1.0) : Float)) : Float));
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
-      appendPathClose((cast path));
+      appendPathClose(({ final __callArgument16:Dynamic = path; __callArgument16; }));
     }
     return cast path;
     return cast null;

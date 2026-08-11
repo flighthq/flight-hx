@@ -16,9 +16,9 @@ class RenderAppearance {
   @:noCompletion
   public static function updateRenderProxyAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Bool {
     var appearanceId:Float = cast _Runtime.UNDEFINED;
-    appearanceId = (cast getNodeAppearanceRevision((cast (cast (cast data : RenderProxy).source : Node<Dynamic>))) : Float);
-    if ((cast ((cast _Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals((cast parentData : RenderProxy).appearanceFrameId, (cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).currentFrameId)) : Bool) || (cast !_Runtime.strictEquals((cast data : RenderProxy).lastAppearanceId, appearanceId) : Bool)) : Bool)) {
-      RenderAppearance.recalculateAppearance__renderAppearance((cast state), (cast data), (cast parentData));
+    appearanceId = (cast getNodeAppearanceRevision((cast (cast (cast data : RenderProxy).source : Node<Dynamic>) : Dynamic)) : Float);
+    if ((cast ((cast _Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals((cast parentData : RenderProxy).appearanceFrameId, (cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : RenderStateRuntime).currentFrameId)) : Bool) || (cast !_Runtime.strictEquals((cast data : RenderProxy).lastAppearanceId, appearanceId) : Bool)) : Bool)) {
+      RenderAppearance.recalculateAppearance__renderAppearance(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = data; __callArgument2; }), ({ final __callArgument3:Dynamic = parentData; __callArgument3; }));
       ((cast data : RenderProxy).lastAppearanceId = appearanceId);
       return cast true;
     }
@@ -42,6 +42,6 @@ class RenderAppearance {
       if ((cast ((cast (cast data : RenderProxy).alpha : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
       ((cast data : RenderProxy).blendMode = ((cast !_Runtime.strictEquals((cast state : RenderState).renderBlendMode, null) : Bool) ? (cast (cast state : RenderState).renderBlendMode : Dynamic) : (cast (cast source : { var blendMode:Null<String>; }).blendMode : Dynamic)));
     }
-    ((cast data : RenderProxy).appearanceFrameId = (cast (cast getRenderStateRuntime((cast state)) : RenderStateRuntime) : RenderStateRuntime).currentFrameId);
+    ((cast data : RenderProxy).appearanceFrameId = (cast (cast getRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : RenderStateRuntime) : RenderStateRuntime).currentFrameId);
   }
 }

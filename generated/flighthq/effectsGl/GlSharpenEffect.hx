@@ -20,19 +20,19 @@ class GlSharpenEffect {
     var amount:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(effect, 'amount'), function():Dynamic return cast 0.5);
-    program = (cast getGlEffectProgram((cast state), (cast 'stylization.sharpen' : String), (cast GlSharpenEffect.SHARPEN_FRAGMENT_SRC__glSharpenEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.sharpen' : String), (cast GlSharpenEffect.SHARPEN_FRAGMENT_SRC__glSharpenEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_amount'), amount);
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
-    }));
+    } : Dynamic));
   }
 
   public static final defaultGlSharpenEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applySharpenEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : SharpenEffect)));
+    applySharpenEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SharpenEffect));
   });
 
   public static function registerGlSharpenEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state), (cast 'SharpenEffect' : String), (cast defaultGlSharpenEffectRunner));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'SharpenEffect' : String), ({ final __callArgument6:Dynamic = defaultGlSharpenEffectRunner; __callArgument6; }));
   }
 
   public static final SHARPEN_FRAGMENT_SRC__glSharpenEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_amount;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  vec3 c = texture(u_texture0, v_texCoord).rgb;\n  vec3 n = texture(u_texture0, v_texCoord + vec2(0.0, -texel.y)).rgb;\n  vec3 s = texture(u_texture0, v_texCoord + vec2(0.0, texel.y)).rgb;\n  vec3 e = texture(u_texture0, v_texCoord + vec2(texel.x, 0.0)).rgb;\n  vec3 w = texture(u_texture0, v_texCoord + vec2(-texel.x, 0.0)).rgb;\n  vec3 high = c * 4.0 - n - s - e - w;\n  float a = texture(u_texture0, v_texCoord).a;\n  o_color = vec4(clamp(c + high * u_amount, 0.0, 1.0), a);\n}';

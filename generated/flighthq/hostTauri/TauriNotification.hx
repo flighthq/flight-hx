@@ -31,7 +31,7 @@ class TauriNotification {
         var id:String = cast _Runtime.UNDEFINED;
         id = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
         try {
-          (cast notification : TauriNotificationPlugin).sendNotification((cast { title: request.title, body: request.body, icon: request.icon }));
+          (cast notification : TauriNotificationPlugin).sendNotification(({ final __callArgument0:Dynamic = { title: request.title, body: request.body, icon: request.icon }; __callArgument0; }));
           return cast id;
         } catch (__error:Dynamic) {
           return cast '';
@@ -43,8 +43,8 @@ class TauriNotification {
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var permission:TauriNotificationPermission = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap((cast notification : TauriNotificationPlugin).requestPermission(), function(__awaitValue0:Dynamic):Dynamic {
-              permission = __awaitValue0;
+            return flighthq._internal._Async.flatMap((cast notification : TauriNotificationPlugin).requestPermission(), function(__awaitValue1:Dynamic):Dynamic {
+              permission = __awaitValue1;
               (cachedPermission = cast (((cast _Runtime.strictEquals(permission, 'granted') : Bool) ? (cast 'granted' : Dynamic) : (cast ((cast _Runtime.strictEquals(permission, 'denied') : Bool) ? (cast 'denied' : Dynamic) : (cast 'default' : Dynamic)) : Dynamic)) : Dynamic));
               return flighthq._internal._Async.flowReturn(cachedPermission);
             });

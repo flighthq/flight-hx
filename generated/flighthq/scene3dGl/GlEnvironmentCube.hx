@@ -34,10 +34,10 @@ class GlEnvironmentCube {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var internalFormat:Float = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime);
+    runtime = (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime);
     if ((cast !_Runtime.strictEquals((cast runtime : GlScene3DRuntime).environmentSourceCube, null) : Bool)) { return cast (cast runtime : GlScene3DRuntime).environmentSourceCube; }
     cube = _Runtime.field(environment, 'environment');
-    if ((cast ((cast ((cast _Runtime.strictEquals(cube, null) : Bool) || (cast !_Runtime.strictEquals((cast cube : { var dimension:String; }).dimension, 'cube') : Bool)) : Bool) || (cast !(cast (cast GlEnvironmentCube.hasGlCubeFacePixels__glEnvironmentCube((cast cube)) : Bool) : Bool) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(cube, null) : Bool) || (cast !_Runtime.strictEquals((cast cube : { var dimension:String; }).dimension, 'cube') : Bool)) : Bool) || (cast !(cast (cast GlEnvironmentCube.hasGlCubeFacePixels__glEnvironmentCube(({ final __callArgument1:Dynamic = cube; __callArgument1; })) : Bool) : Bool) : Bool)) : Bool)) { return cast null; }
     sources = (cast cube : { var sources:TextureSourceCubeFaces; }).sources;
     gl = (cast state : GlRenderState).gl;
     internalFormat = ((cast _Runtime.strictEquals((cast cube : { var colorSpace:TextureColorSpace; }).colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic));
@@ -46,7 +46,7 @@ class GlEnvironmentCube {
     {
       var face:Float = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
-        GlEnvironmentCube.uploadGlEnvironmentImage__glEnvironmentCube((cast gl), (cast (cast getGlCubeFaceTarget((cast gl), (cast face : Float)) : Float) : Float), (cast flighthq._internal._StaticIndex.readArray(sources, face)), (cast internalFormat : Float));
+        GlEnvironmentCube.uploadGlEnvironmentImage__glEnvironmentCube(({ final __callArgument2:Dynamic = gl; __callArgument2; }), (cast (cast getGlCubeFaceTarget(({ final __callArgument3:Dynamic = gl; __callArgument3; }), (cast face : Float)) : Float) : Float), ({ final __callArgument4:Dynamic = flighthq._internal._StaticIndex.readArray(sources, face); __callArgument4; }), (cast internalFormat : Float));
         face++;
       }
     }
@@ -73,12 +73,12 @@ class GlEnvironmentCube {
     var runtime:GlScene3DRuntime = cast _Runtime.UNDEFINED;
     var texture:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime);
+    runtime = (cast getGlScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlScene3DRuntime);
     texture = (cast runtime : GlScene3DRuntime).environmentSourceCube;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast false; }
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), texture);
-    GlEnvironmentCube.uploadGlEnvironmentImage__glEnvironmentCube((cast gl), (cast (cast getGlCubeFaceTarget((cast gl), (cast face : Float)) : Float) : Float), (cast image), (cast ((cast _Runtime.strictEquals((cast runtime : GlScene3DRuntime).environmentSourceCubeColorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic)) : Float));
+    GlEnvironmentCube.uploadGlEnvironmentImage__glEnvironmentCube(({ final __callArgument6:Dynamic = gl; __callArgument6; }), (cast (cast getGlCubeFaceTarget(({ final __callArgument7:Dynamic = gl; __callArgument7; }), (cast face : Float)) : Float) : Float), ({ final __callArgument8:Dynamic = image; __callArgument8; }), (cast ((cast _Runtime.strictEquals((cast runtime : GlScene3DRuntime).environmentSourceCubeColorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic)) : Float));
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), null);
     return cast true;
     return cast null;
@@ -104,9 +104,9 @@ class GlEnvironmentCube {
     if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic);
     if ((cast _Runtime.strictEquals(_Runtime.field(image, 'kind'), BitmapTextureSourceKind) : Bool)) {
       var bitmap:Bitmap = (cast image : Bitmap);
-      uploadGlTextureData((cast gl), (cast target : Float), (cast bitmap.width : Float), (cast bitmap.height : Float), (cast bitmap.data), (cast internalFormat : Float));
+      uploadGlTextureData(({ final __callArgument9:Dynamic = gl; __callArgument9; }), (cast target : Float), (cast bitmap.width : Float), (cast bitmap.height : Float), bitmap.data, (cast internalFormat : Float));
     } else {
-      uploadGlTextureImageResource((cast gl), (cast target : Float), (cast (cast image : Image)), (cast internalFormat : Float));
+      uploadGlTextureImageResource(({ final __callArgument10:Dynamic = gl; __callArgument10; }), (cast target : Float), (cast image : Image), (cast internalFormat : Float));
     }
   }
 }

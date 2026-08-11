@@ -29,7 +29,7 @@ class ColorTemperatureMath {
     var kelvin:Float = cast _Runtime.UNDEFINED;
     var greenShift:Float = cast _Runtime.UNDEFINED;
     kelvin = (6500.0 - (temperature * 4500.0));
-    computeColorTemperatureRgb((cast kelvin : Float), (cast out));
+    computeColorTemperatureRgb((cast kelvin : Float), ({ final __callArgument0:Dynamic = out; __callArgument0; }));
     greenShift = (-tint * 0.1);
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast HxMath.max(0.0, flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float))) : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast HxMath.max(0.0, (flighthq._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float)) + greenShift)) : Float));

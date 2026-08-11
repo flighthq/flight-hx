@@ -17,7 +17,7 @@ class WgpuScissor {
     var y:Float = cast _Runtime.UNDEFINED;
     var w:Float = cast _Runtime.UNDEFINED;
     var h:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     rect = (cast runtime : WgpuRenderStateRuntime).currentScissorRect;
     if ((cast _Runtime.strictEquals(rect, null) : Bool)) { return; }
     x = HxMath.max(0.0, HxMath.floor((cast rect : WgpuScissorRect).x));
@@ -31,7 +31,7 @@ class WgpuScissor {
   public static function popWgpuScissorRect(state:WgpuRenderState):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var prev:Null<WgpuScissorRect> = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime);
     prev = _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).scissorStack, 'pop', cast ([] : Array<Dynamic>));
     ((cast runtime : WgpuRenderStateRuntime).currentScissorRect = _Runtime.coalesce(prev, function():Dynamic return cast null));
   }
@@ -39,7 +39,7 @@ class WgpuScissor {
   @:noCompletion
   public static function pushWgpuScissorRect(state:WgpuRenderState, rect:WgpuScissorRect):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime((cast state)) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
     if ((cast !_Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).currentScissorRect, null) : Bool)) {
       _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).scissorStack, 'push', cast ([(cast runtime : WgpuRenderStateRuntime).currentScissorRect] : Array<Dynamic>));
     }

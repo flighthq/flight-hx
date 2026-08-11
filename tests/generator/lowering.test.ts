@@ -184,11 +184,15 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("withDefault(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end)");
+    expect(output).toContain(
+      "withDefault(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end)",
+    );
     expect(output).toContain(
       'withDefault(#if js (cast ({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var tolerance:Null<Float>; }).tolerance; }) : Float) #else (cast ({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var tolerance:Null<Float>; }).tolerance; }) : Null<Float>) #end)',
     );
-    expect(output).toContain(".read(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end)");
+    expect(output).toContain(
+      ".read(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end)",
+    );
     expect(output).not.toContain('(cast _Runtime.UNDEFINED : Float)');
     expect(output).not.toContain("(cast _Runtime.field(_Runtime, 'UNDEFINED') : Float)");
   });
@@ -1728,7 +1732,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('(cast __generatedClass');
     expect(output).toContain(': Counter).bump(2.0)');
     expect(output).toContain(
-      "(cast counter : Counter).read(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end)",
+      "(cast counter : Counter).read(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end)",
     );
     expect(output).toContain('(cast counter : Counter).read(#if js (cast ({ final __structural');
     expect(output).toContain(': Float) #else (cast ({ final __structural');
@@ -1984,6 +1988,116 @@ describe('TypeScript lowering and Haxe emission', () => {
       { cwd: path.resolve('.'), stdio: 'pipe' },
     );
     execFileSync('neko', [nekoOutput], { cwd: path.resolve('.'), stdio: 'pipe' });
+  });
+
+  it('does not emit bare casts for typed closure call arguments', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/swf/src/swfCast.ts',
+      `
+        type Decompressor = (compressed: Uint8Array, uncompressedSize: number) => Uint8Array | null;
+        const FWS_SIGNATURE = 70;
+        const CWS_SIGNATURE = 67;
+        const ZWS_SIGNATURE = 90;
+        const W_SIGNATURE = 87;
+        const S_SIGNATURE = 83;
+        const SWF_PREFIX_LENGTH = 8;
+        const SWF_LZMA_PREFIX_LENGTH = 17;
+        const MIN_SWF_LENGTH = 30;
+        let registered: Decompressor | null = null;
+        class SwfReader {
+          constructor(source: Uint8Array, start: number, end: number) {}
+          readUint32(): number { return 30; }
+        }
+        function getDecompressor(compression: string): Decompressor | null { return registered; }
+        export interface Narrow { value: number; }
+        export interface Wide { value: number; extra: number; }
+        function useNarrow(value: Narrow): void {}
+        export function useWide(value: Wide): void { useNarrow(value); }
+        export function uncompressSwfSource(source: Uint8Array): Uint8Array | null {
+          if (source.length < SWF_PREFIX_LENGTH || source[1] !== W_SIGNATURE || source[2] !== S_SIGNATURE) return null;
+          const signature = source[0];
+          if (signature === FWS_SIGNATURE) return source;
+          const compression = signature === CWS_SIGNATURE ? 'Deflate' : signature === ZWS_SIGNATURE ? 'Lzma' : null;
+          if (compression === null) return null;
+          const decompress = getDecompressor(compression);
+          if (decompress === null) return null;
+          const header = new SwfReader(source, 0, SWF_PREFIX_LENGTH);
+          header.readUint32();
+          const fileLength = header.readUint32();
+          if (fileLength < MIN_SWF_LENGTH) return null;
+          const bodyLength = fileLength - SWF_PREFIX_LENGTH;
+          const streamStart = compression === 'Lzma' ? SWF_LZMA_PREFIX_LENGTH : SWF_PREFIX_LENGTH;
+          if (streamStart > source.length) return null;
+          const body = decompress(source.subarray(streamStart), bodyLength);
+          if (body === null || body.length < bodyLength) return null;
+          const uncompressed = new Uint8Array(SWF_PREFIX_LENGTH + bodyLength);
+          uncompressed.set(source.subarray(0, SWF_PREFIX_LENGTH));
+          uncompressed[0] = FWS_SIGNATURE;
+          uncompressed.set(body.subarray(0, bodyLength), SWF_PREFIX_LENGTH);
+          return uncompressed;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/swf', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'SwfCastFixture',
+      packageName: '@flighthq/swf',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain(
+      'decompress((cast source : flighthq._internal._UInt8Array).subarray(Std.int(streamStart)), (cast bodyLength : Float))',
+    );
+    expect(output).not.toContain('decompress((cast (cast');
+    expect(output).toMatch(/useNarrow\(\(\{ final (__callArgument\d+):Dynamic = value; \1; \}\)\)/u);
+  });
+
+  it('runs the production SWF decompressor call shape on Neko with full DCE', () => {
+    const fixtureDirectory = path.resolve('build/haxe-swf-cast-neko-fixture');
+    const nekoOutput = path.join(fixtureDirectory, 'main.n');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(fixtureDirectory, { recursive: true });
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        import flighthq._internal._UInt8Array;
+        import flighthq.compression.Deflate.registerDeflateDecompressor;
+        import flighthq.swf.SwfDocument.createScene2DFromSwf;
+
+        class Main {
+          static function main():Void {
+            registerDeflateDecompressor();
+            final source = new _UInt8Array([
+              67, 87, 83, 10, 38, 0, 0, 0,
+              120, 156, 99, 96, 192, 7, 0, 0, 30, 0, 1,
+            ]);
+            createScene2DFromSwf(source);
+          }
+        }
+      `,
+    );
+    execFileSync(
+      'node',
+      [
+        'tools/haxe.mjs',
+        '-cp',
+        fixtureDirectory,
+        '-cp',
+        'src',
+        '-cp',
+        'generated',
+        '--main',
+        'Main',
+        '-neko',
+        nekoOutput,
+        '-dce',
+        'full',
+      ],
+      { cwd: path.resolve('.'), stdio: 'pipe' },
+    );
+    expect(() => execFileSync('neko', [nekoOutput], { cwd: path.resolve('.'), stdio: 'pipe' })).not.toThrow();
   });
 
   it('routes non-Flight imported values through stable module toolkit keys', () => {

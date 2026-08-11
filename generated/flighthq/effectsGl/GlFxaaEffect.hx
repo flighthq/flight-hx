@@ -20,19 +20,19 @@ class GlFxaaEffect {
     var edgeThreshold:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     edgeThreshold = _Runtime.coalesce(_Runtime.field(effect, 'edgeThreshold'), function():Dynamic return cast 0.0312);
-    program = (cast getGlEffectProgram((cast state), (cast 'antialiasing.fxaa' : String), (cast GlFxaaEffect.FXAA_FRAGMENT_SRC__glFxaaEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass((cast state), (cast program), (cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'antialiasing.fxaa' : String), (cast GlFxaaEffect.FXAA_FRAGMENT_SRC__glFxaaEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), _Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_edgeThreshold'), edgeThreshold);
-    }));
+    } : Dynamic));
   }
 
   public static final defaultGlFxaaEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyFxaaEffectToGl((cast _Runtime.field(ctx, 'state')), (cast _Runtime.field(ctx, 'source')), (cast _Runtime.field(ctx, 'dest')), (cast (cast effect : FxaaEffect)));
+    applyFxaaEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : FxaaEffect));
   });
 
   public static function registerGlFxaaEffect(state:GlRenderState):Void {
-    registerGlRenderEffect((cast state), (cast 'FxaaEffect' : String), (cast defaultGlFxaaEffectRunner));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'FxaaEffect' : String), ({ final __callArgument6:Dynamic = defaultGlFxaaEffectRunner; __callArgument6; }));
   }
 
   public static final FXAA_FRAGMENT_SRC__glFxaaEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_resolution;\nuniform float u_edgeThreshold;\nout vec4 o_color;\nfloat luma(vec3 c) {\n  return dot(c, vec3(0.299, 0.587, 0.114));\n}\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  vec3 rgbM = texture(u_texture0, v_texCoord).rgb;\n  vec3 rgbNW = texture(u_texture0, v_texCoord + vec2(-1.0, -1.0) * texel).rgb;\n  vec3 rgbNE = texture(u_texture0, v_texCoord + vec2(1.0, -1.0) * texel).rgb;\n  vec3 rgbSW = texture(u_texture0, v_texCoord + vec2(-1.0, 1.0) * texel).rgb;\n  vec3 rgbSE = texture(u_texture0, v_texCoord + vec2(1.0, 1.0) * texel).rgb;\n  float lumaM = luma(rgbM);\n  float lumaNW = luma(rgbNW);\n  float lumaNE = luma(rgbNE);\n  float lumaSW = luma(rgbSW);\n  float lumaSE = luma(rgbSE);\n  float lumaMin = min(lumaM, min(min(lumaNW, lumaNE), min(lumaSW, lumaSE)));\n  float lumaMax = max(lumaM, max(max(lumaNW, lumaNE), max(lumaSW, lumaSE)));\n  float range = lumaMax - lumaMin;\n  if (range < max(u_edgeThreshold, lumaMax * 0.125)) {\n    o_color = vec4(rgbM, texture(u_texture0, v_texCoord).a);\n    return;\n  }\n  vec2 dir;\n  dir.x = -((lumaNW + lumaNE) - (lumaSW + lumaSE));\n  dir.y = ((lumaNW + lumaSW) - (lumaNE + lumaSE));\n  float dirReduce = max((lumaNW + lumaNE + lumaSW + lumaSE) * 0.03125, 0.0078125);\n  float rcpDirMin = 1.0 / (min(abs(dir.x), abs(dir.y)) + dirReduce);\n  dir = clamp(dir * rcpDirMin, vec2(-8.0), vec2(8.0)) * texel;\n  vec3 rgbA = 0.5 * (\n    texture(u_texture0, v_texCoord + dir * (1.0 / 3.0 - 0.5)).rgb +\n    texture(u_texture0, v_texCoord + dir * (2.0 / 3.0 - 0.5)).rgb);\n  vec3 rgbB = rgbA * 0.5 + 0.25 * (\n    texture(u_texture0, v_texCoord + dir * -0.5).rgb +\n    texture(u_texture0, v_texCoord + dir * 0.5).rgb);\n  float lumaB = luma(rgbB);\n  vec3 result = (lumaB < lumaMin || lumaB > lumaMax) ? rgbA : rgbB;\n  o_color = vec4(result, texture(u_texture0, v_texCoord).a);\n}';

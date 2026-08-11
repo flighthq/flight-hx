@@ -38,46 +38,46 @@ class MorphShapePaint {
   public static function appendMorphShapeBeginFill(shape:MorphShape, start:MorphShapeColorEndpoint, end:MorphShapeColorEndpoint):Void {
     var commandIndex:Float = cast _Runtime.UNDEFINED;
     commandIndex = _Runtime.field((cast (cast shape : MorphShape).data : MorphShapeData).commands, 'length');
-    appendShapeBeginFill((cast shape), (cast _Runtime.field(start, 'color') : Float), (cast _Runtime.coalesce(_Runtime.field(start, 'alpha'), function():Dynamic return cast 1.0) : Float));
+    appendShapeBeginFill(({ final __callArgument0:Dynamic = shape; __callArgument0; }), (cast _Runtime.field(start, 'color') : Float), (cast _Runtime.coalesce(_Runtime.field(start, 'alpha'), function():Dynamic return cast 1.0) : Float));
     _Runtime.callProperty((cast (cast shape : MorphShape).data : MorphShapeData).paintBindings, 'push', cast ([{ commandIndex: commandIndex, endAlpha: _Runtime.coalesce(_Runtime.field(end, 'alpha'), function():Dynamic return cast 1.0), endColor: _Runtime.field(end, 'color'), kind: 'color', startAlpha: _Runtime.coalesce(_Runtime.field(start, 'alpha'), function():Dynamic return cast 1.0), startColor: _Runtime.field(start, 'color') }] : Array<Dynamic>));
-    MorphShapePaint.sampleMorphShapePaintBinding__morphShapePaint((cast (cast shape : MorphShape).data), (cast flighthq._internal._StaticIndex.readArray((cast (cast shape : MorphShape).data : MorphShapeData).paintBindings, _Runtime.subtractNumbers(_Runtime.field((cast (cast shape : MorphShape).data : MorphShapeData).paintBindings, 'length'), 1.0))), (cast (cast (cast shape : MorphShape).data : MorphShapeData).progress : Float));
+    MorphShapePaint.sampleMorphShapePaintBinding__morphShapePaint((cast shape : MorphShape).data, flighthq._internal._StaticIndex.readArray((cast (cast shape : MorphShape).data : MorphShapeData).paintBindings, _Runtime.subtractNumbers(_Runtime.field((cast (cast shape : MorphShape).data : MorphShapeData).paintBindings, 'length'), 1.0)), (cast (cast (cast shape : MorphShape).data : MorphShapeData).progress : Float));
   }
 
   public static function appendMorphShapeBeginGradientFill(shape:MorphShape, gradientType:GradientType, start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb'):Bool {
-    return cast (cast MorphShapePaint.appendMorphShapeGradientPaint__morphShapePaint((cast shape), (cast 'beginGradientFill' : String), (cast gradientType), (cast start), (cast end), (cast spreadMethod), (cast interpolationMethod)) : Bool);
+    return cast (cast MorphShapePaint.appendMorphShapeGradientPaint__morphShapePaint(({ final __callArgument1:Dynamic = shape; __callArgument1; }), (cast 'beginGradientFill' : String), ({ final __callArgument2:Dynamic = gradientType; __callArgument2; }), ({ final __callArgument3:Dynamic = start; __callArgument3; }), ({ final __callArgument4:Dynamic = end; __callArgument4; }), ({ final __callArgument5:Dynamic = spreadMethod; __callArgument5; }), ({ final __callArgument6:Dynamic = interpolationMethod; __callArgument6; })) : Bool);
     return cast null;
   }
 
   public static function appendMorphShapeBeginTextureFill(shape:MorphShape, texture:Texture, ?startMatrix:Null<Matrix>, ?endMatrix:Null<Matrix>):Void {
     if (startMatrix == null) startMatrix = cast (null : Dynamic);
     if (endMatrix == null) endMatrix = cast (startMatrix : Dynamic);
-    MorphShapePaint.appendMorphShapeTexturePaint__morphShapePaint((cast shape), (cast 'beginTextureFill' : String), (cast texture), (cast startMatrix), (cast endMatrix));
+    MorphShapePaint.appendMorphShapeTexturePaint__morphShapePaint(({ final __callArgument7:Dynamic = shape; __callArgument7; }), (cast 'beginTextureFill' : String), ({ final __callArgument8:Dynamic = texture; __callArgument8; }), ({ final __callArgument9:Dynamic = startMatrix; __callArgument9; }), ({ final __callArgument10:Dynamic = endMatrix; __callArgument10; }));
   }
 
   public static function appendMorphShapeLineGradientStyle(shape:MorphShape, gradientType:GradientType, start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb'):Bool {
-    return cast (cast MorphShapePaint.appendMorphShapeGradientPaint__morphShapePaint((cast shape), (cast 'lineGradientStyle' : String), (cast gradientType), (cast start), (cast end), (cast spreadMethod), (cast interpolationMethod)) : Bool);
+    return cast (cast MorphShapePaint.appendMorphShapeGradientPaint__morphShapePaint(({ final __callArgument11:Dynamic = shape; __callArgument11; }), (cast 'lineGradientStyle' : String), ({ final __callArgument12:Dynamic = gradientType; __callArgument12; }), ({ final __callArgument13:Dynamic = start; __callArgument13; }), ({ final __callArgument14:Dynamic = end; __callArgument14; }), ({ final __callArgument15:Dynamic = spreadMethod; __callArgument15; }), ({ final __callArgument16:Dynamic = interpolationMethod; __callArgument16; })) : Bool);
     return cast null;
   }
 
   public static function appendMorphShapeLineStyle(shape:MorphShape, start:MorphShapeLineEndpoint, end:MorphShapeLineEndpoint, pixelHinting:Bool = false, scaleMode:LineScaleMode = 'normal', caps:CapsStyle = 'none', joints:JointStyle = 'round', miterLimit:Float = 3.0):Void {
     var commandIndex:Float = cast _Runtime.UNDEFINED;
     commandIndex = _Runtime.field((cast (cast shape : MorphShape).data : MorphShapeData).commands, 'length');
-    appendShapeLineStyle((cast shape), (cast _Runtime.field(start, 'thickness') : Float), (cast _Runtime.field(start, 'color') : Float), (cast _Runtime.coalesce(_Runtime.field(start, 'alpha'), function():Dynamic return cast 1.0) : Float), (cast pixelHinting : Bool), (cast scaleMode), (cast caps), (cast joints), (cast miterLimit : Float));
+    appendShapeLineStyle(({ final __callArgument17:Dynamic = shape; __callArgument17; }), (cast _Runtime.field(start, 'thickness') : Float), (cast _Runtime.field(start, 'color') : Float), (cast _Runtime.coalesce(_Runtime.field(start, 'alpha'), function():Dynamic return cast 1.0) : Float), (cast pixelHinting : Bool), ({ final __callArgument18:Dynamic = scaleMode; __callArgument18; }), ({ final __callArgument19:Dynamic = caps; __callArgument19; }), ({ final __callArgument20:Dynamic = joints; __callArgument20; }), (cast miterLimit : Float));
     _Runtime.callProperty((cast (cast shape : MorphShape).data : MorphShapeData).paintBindings, 'push', cast ([{ commandIndex: commandIndex, endAlpha: _Runtime.coalesce(_Runtime.field(end, 'alpha'), function():Dynamic return cast 1.0), endColor: _Runtime.field(end, 'color'), endThickness: _Runtime.field(end, 'thickness'), kind: 'line', startAlpha: _Runtime.coalesce(_Runtime.field(start, 'alpha'), function():Dynamic return cast 1.0), startColor: _Runtime.field(start, 'color'), startThickness: _Runtime.field(start, 'thickness') }] : Array<Dynamic>));
-    MorphShapePaint.sampleMorphShapePaintBinding__morphShapePaint((cast (cast shape : MorphShape).data), (cast flighthq._internal._StaticIndex.readArray((cast (cast shape : MorphShape).data : MorphShapeData).paintBindings, _Runtime.subtractNumbers(_Runtime.field((cast (cast shape : MorphShape).data : MorphShapeData).paintBindings, 'length'), 1.0))), (cast (cast (cast shape : MorphShape).data : MorphShapeData).progress : Float));
+    MorphShapePaint.sampleMorphShapePaintBinding__morphShapePaint((cast shape : MorphShape).data, flighthq._internal._StaticIndex.readArray((cast (cast shape : MorphShape).data : MorphShapeData).paintBindings, _Runtime.subtractNumbers(_Runtime.field((cast (cast shape : MorphShape).data : MorphShapeData).paintBindings, 'length'), 1.0)), (cast (cast (cast shape : MorphShape).data : MorphShapeData).progress : Float));
   }
 
   public static function appendMorphShapeLineTextureStyle(shape:MorphShape, texture:Texture, ?startMatrix:Null<Matrix>, ?endMatrix:Null<Matrix>):Void {
     if (startMatrix == null) startMatrix = cast (null : Dynamic);
     if (endMatrix == null) endMatrix = cast (startMatrix : Dynamic);
-    MorphShapePaint.appendMorphShapeTexturePaint__morphShapePaint((cast shape), (cast 'lineTextureStyle' : String), (cast texture), (cast startMatrix), (cast endMatrix));
+    MorphShapePaint.appendMorphShapeTexturePaint__morphShapePaint(({ final __callArgument21:Dynamic = shape; __callArgument21; }), (cast 'lineTextureStyle' : String), ({ final __callArgument22:Dynamic = texture; __callArgument22; }), ({ final __callArgument23:Dynamic = startMatrix; __callArgument23; }), ({ final __callArgument24:Dynamic = endMatrix; __callArgument24; }));
   }
 
   public static function sampleMorphShapePaintBindings(data:MorphShapeData, progress:Float):Void {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast data : MorphShapeData).paintBindings, 'length') : Float)) : Bool)) {
-        MorphShapePaint.sampleMorphShapePaintBinding__morphShapePaint((cast data), (cast flighthq._internal._StaticIndex.readArray((cast data : MorphShapeData).paintBindings, i)), (cast progress : Float));
+        MorphShapePaint.sampleMorphShapePaintBinding__morphShapePaint(({ final __callArgument25:Dynamic = data; __callArgument25; }), flighthq._internal._StaticIndex.readArray((cast data : MorphShapeData).paintBindings, i), (cast progress : Float));
         i++;
       }
     }
@@ -95,25 +95,25 @@ class MorphShapePaint {
     var alphas:Array<Float> = cast _Runtime.UNDEFINED;
     var ratios:Array<Float> = cast _Runtime.UNDEFINED;
     var binding:MorphShapeGradientPaintBinding = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals((cast getMorphShapeGradientEndpointIssue((cast start), (cast end)) : Float), 0.0) : Bool)) { return cast false; }
+    if ((cast !_Runtime.strictEquals((cast getMorphShapeGradientEndpointIssue(({ final __callArgument26:Dynamic = start; __callArgument26; }), ({ final __callArgument27:Dynamic = end; __callArgument27; })) : Float), 0.0) : Bool)) { return cast false; }
     commandIndex = _Runtime.field((cast (cast shape : MorphShape).data : MorphShapeData).commands, 'length');
     startSource = _Runtime.coalesce(_Runtime.field(start, 'matrix'), function():Dynamic return cast null);
     endSource = _Runtime.coalesce(_Runtime.field(end, 'matrix'), function():Dynamic return cast null);
     hasMatrix = ((cast !_Runtime.strictEquals(startSource, null) : Bool) || (cast !_Runtime.strictEquals(endSource, null) : Bool));
-    startMatrix = ((cast hasMatrix : Bool) ? (cast (cast cloneMatrix((cast _Runtime.coalesce(startSource, function():Dynamic return cast MorphShapePaint.identityMatrix__morphShapePaint))) : Matrix) : Dynamic) : (cast null : Dynamic));
-    endMatrix = ((cast hasMatrix : Bool) ? (cast (cast cloneMatrix((cast _Runtime.coalesce(endSource, function():Dynamic return cast MorphShapePaint.identityMatrix__morphShapePaint))) : Matrix) : Dynamic) : (cast null : Dynamic));
-    currentMatrix = (cast MorphShapePaint.createSampledMatrix__morphShapePaint((cast startMatrix), (cast endMatrix)) : Null<Matrix>);
+    startMatrix = ((cast hasMatrix : Bool) ? (cast (cast cloneMatrix(({ final __callArgument28:Dynamic = _Runtime.coalesce(startSource, function():Dynamic return cast MorphShapePaint.identityMatrix__morphShapePaint); __callArgument28; })) : Matrix) : Dynamic) : (cast null : Dynamic));
+    endMatrix = ((cast hasMatrix : Bool) ? (cast (cast cloneMatrix(({ final __callArgument29:Dynamic = _Runtime.coalesce(endSource, function():Dynamic return cast MorphShapePaint.identityMatrix__morphShapePaint); __callArgument29; })) : Matrix) : Dynamic) : (cast null : Dynamic));
+    currentMatrix = (cast MorphShapePaint.createSampledMatrix__morphShapePaint(({ final __callArgument30:Dynamic = startMatrix; __callArgument30; }), ({ final __callArgument31:Dynamic = endMatrix; __callArgument31; })) : Null<Matrix>);
     colors = (cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(start, 'colors'))]));
     alphas = (cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(start, 'alphas'))]));
     ratios = (cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(start, 'ratios'))]));
     if ((cast _Runtime.strictEquals(commandKey, 'beginGradientFill') : Bool)) {
-      appendShapeBeginGradientFill((cast shape), (cast gradientType), (cast colors), (cast alphas), (cast ratios), (cast currentMatrix), (cast spreadMethod), (cast interpolationMethod), (cast _Runtime.coalesce(_Runtime.field(start, 'focalPointRatio'), function():Dynamic return cast 0.0) : Float));
+      appendShapeBeginGradientFill(({ final __callArgument32:Dynamic = shape; __callArgument32; }), ({ final __callArgument33:Dynamic = gradientType; __callArgument33; }), ({ final __callArgument34:Dynamic = colors; __callArgument34; }), ({ final __callArgument35:Dynamic = alphas; __callArgument35; }), ({ final __callArgument36:Dynamic = ratios; __callArgument36; }), ({ final __callArgument37:Dynamic = currentMatrix; __callArgument37; }), ({ final __callArgument38:Dynamic = spreadMethod; __callArgument38; }), ({ final __callArgument39:Dynamic = interpolationMethod; __callArgument39; }), (cast _Runtime.coalesce(_Runtime.field(start, 'focalPointRatio'), function():Dynamic return cast 0.0) : Float));
     } else {
-      appendShapeLineGradientStyle((cast shape), (cast gradientType), (cast colors), (cast alphas), (cast ratios), (cast currentMatrix), (cast spreadMethod), (cast interpolationMethod), (cast _Runtime.coalesce(_Runtime.field(start, 'focalPointRatio'), function():Dynamic return cast 0.0) : Float));
+      appendShapeLineGradientStyle(({ final __callArgument40:Dynamic = shape; __callArgument40; }), ({ final __callArgument41:Dynamic = gradientType; __callArgument41; }), ({ final __callArgument42:Dynamic = colors; __callArgument42; }), ({ final __callArgument43:Dynamic = alphas; __callArgument43; }), ({ final __callArgument44:Dynamic = ratios; __callArgument44; }), ({ final __callArgument45:Dynamic = currentMatrix; __callArgument45; }), ({ final __callArgument46:Dynamic = spreadMethod; __callArgument46; }), ({ final __callArgument47:Dynamic = interpolationMethod; __callArgument47; }), (cast _Runtime.coalesce(_Runtime.field(start, 'focalPointRatio'), function():Dynamic return cast 0.0) : Float));
     }
     binding = (cast { commandIndex: commandIndex, commandKey: commandKey, endAlphas: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(end, 'alphas'))]), endColors: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(end, 'colors'))]), endFocalPointRatio: _Runtime.coalesce(_Runtime.field(end, 'focalPointRatio'), function():Dynamic return cast 0.0), endMatrix: endMatrix, endRatios: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(end, 'ratios'))]), kind: 'gradient', startAlphas: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(start, 'alphas'))]), startColors: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(start, 'colors'))]), startFocalPointRatio: _Runtime.coalesce(_Runtime.field(start, 'focalPointRatio'), function():Dynamic return cast 0.0), startMatrix: startMatrix, startRatios: _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(start, 'ratios'))]) });
     _Runtime.callProperty((cast (cast shape : MorphShape).data : MorphShapeData).paintBindings, 'push', cast ([binding] : Array<Dynamic>));
-    MorphShapePaint.sampleMorphShapePaintBinding__morphShapePaint((cast (cast shape : MorphShape).data), (cast binding), (cast (cast (cast shape : MorphShape).data : MorphShapeData).progress : Float));
+    MorphShapePaint.sampleMorphShapePaintBinding__morphShapePaint((cast shape : MorphShape).data, ({ final __callArgument48:Dynamic = binding; __callArgument48; }), (cast (cast (cast shape : MorphShape).data : MorphShapeData).progress : Float));
     return cast true;
     return cast null;
   }
@@ -125,17 +125,17 @@ class MorphShapePaint {
     var currentMatrix:Matrix = cast _Runtime.UNDEFINED;
     var binding:MorphShapePaintBinding = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(startSource, null) : Bool) && (cast _Runtime.strictEquals(endSource, null) : Bool)) : Bool)) {
-      if ((cast _Runtime.strictEquals(commandKey, 'beginTextureFill') : Bool)) { appendShapeBeginTextureFill((cast shape), (cast texture), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end); } else { appendShapeLineTextureStyle((cast shape), (cast texture), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end); }
+      if ((cast _Runtime.strictEquals(commandKey, 'beginTextureFill') : Bool)) { appendShapeBeginTextureFill(({ final __callArgument49:Dynamic = shape; __callArgument49; }), ({ final __callArgument50:Dynamic = texture; __callArgument50; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); } else { appendShapeLineTextureStyle(({ final __callArgument51:Dynamic = shape; __callArgument51; }), ({ final __callArgument52:Dynamic = texture; __callArgument52; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); }
       return;
     }
     commandIndex = _Runtime.field((cast (cast shape : MorphShape).data : MorphShapeData).commands, 'length');
-    startMatrix = (cast cloneMatrix((cast _Runtime.coalesce(startSource, function():Dynamic return cast MorphShapePaint.identityMatrix__morphShapePaint))) : Matrix);
-    endMatrix = (cast cloneMatrix((cast _Runtime.coalesce(endSource, function():Dynamic return cast MorphShapePaint.identityMatrix__morphShapePaint))) : Matrix);
-    currentMatrix = (cast MorphShapePaint.createSampledMatrix__morphShapePaint((cast startMatrix), (cast endMatrix)) : Null<Matrix>);
-    if ((cast _Runtime.strictEquals(commandKey, 'beginTextureFill') : Bool)) { appendShapeBeginTextureFill((cast shape), (cast texture), (cast currentMatrix)); } else { appendShapeLineTextureStyle((cast shape), (cast texture), (cast currentMatrix)); }
+    startMatrix = (cast cloneMatrix(({ final __callArgument53:Dynamic = _Runtime.coalesce(startSource, function():Dynamic return cast MorphShapePaint.identityMatrix__morphShapePaint); __callArgument53; })) : Matrix);
+    endMatrix = (cast cloneMatrix(({ final __callArgument54:Dynamic = _Runtime.coalesce(endSource, function():Dynamic return cast MorphShapePaint.identityMatrix__morphShapePaint); __callArgument54; })) : Matrix);
+    currentMatrix = (cast MorphShapePaint.createSampledMatrix__morphShapePaint(({ final __callArgument55:Dynamic = startMatrix; __callArgument55; }), ({ final __callArgument56:Dynamic = endMatrix; __callArgument56; })) : Null<Matrix>);
+    if ((cast _Runtime.strictEquals(commandKey, 'beginTextureFill') : Bool)) { appendShapeBeginTextureFill(({ final __callArgument57:Dynamic = shape; __callArgument57; }), ({ final __callArgument58:Dynamic = texture; __callArgument58; }), ({ final __callArgument59:Dynamic = currentMatrix; __callArgument59; })); } else { appendShapeLineTextureStyle(({ final __callArgument60:Dynamic = shape; __callArgument60; }), ({ final __callArgument61:Dynamic = texture; __callArgument61; }), ({ final __callArgument62:Dynamic = currentMatrix; __callArgument62; })); }
     binding = (cast { commandIndex: commandIndex, commandKey: commandKey, endMatrix: endMatrix, kind: 'texture', startMatrix: startMatrix });
     _Runtime.callProperty((cast (cast shape : MorphShape).data : MorphShapeData).paintBindings, 'push', cast ([binding] : Array<Dynamic>));
-    MorphShapePaint.sampleMorphShapePaintBinding__morphShapePaint((cast (cast shape : MorphShape).data), (cast binding), (cast (cast (cast shape : MorphShape).data : MorphShapeData).progress : Float));
+    MorphShapePaint.sampleMorphShapePaintBinding__morphShapePaint((cast shape : MorphShape).data, ({ final __callArgument63:Dynamic = binding; __callArgument63; }), (cast (cast (cast shape : MorphShape).data : MorphShapeData).progress : Float));
   }
 
   public static function sampleMorphShapePaintBinding__morphShapePaint(data:MorphShapeData, binding:MorphShapePaintBinding, progress:Float):Void {
@@ -162,7 +162,7 @@ class MorphShapePaint {
     }
     if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(commands, i), (cast binding : { var commandKey:String; }).commandKey) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast binding : { var kind:String; }).kind, 'texture') : Bool)) {
-      MorphShapePaint.sampleMatrix__morphShapePaint((cast (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Matrix)), (cast (cast binding : MorphShapeTexturePaintBinding).startMatrix), (cast (cast binding : MorphShapeTexturePaintBinding).endMatrix), (cast progress : Float));
+      MorphShapePaint.sampleMatrix__morphShapePaint((cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Matrix), (cast binding : MorphShapeTexturePaintBinding).startMatrix, (cast binding : MorphShapeTexturePaintBinding).endMatrix, (cast progress : Float));
       return;
     }
     colors = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 3.0)) : Array<Float>);
@@ -179,14 +179,14 @@ class MorphShapePaint {
     }
     matrix = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 6.0)) : Null<Matrix>);
     if ((cast ((cast ((cast !_Runtime.strictEquals(matrix, null) : Bool) && (cast !_Runtime.strictEquals((cast binding : MorphShapeGradientPaintBinding).startMatrix, null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast binding : MorphShapeGradientPaintBinding).endMatrix, null) : Bool)) : Bool)) {
-      MorphShapePaint.sampleMatrix__morphShapePaint((cast matrix), (cast (cast binding : MorphShapeGradientPaintBinding).startMatrix), (cast (cast binding : MorphShapeGradientPaintBinding).endMatrix), (cast progress : Float));
+      MorphShapePaint.sampleMatrix__morphShapePaint(({ final __callArgument64:Dynamic = matrix; __callArgument64; }), (cast binding : MorphShapeGradientPaintBinding).startMatrix, (cast binding : MorphShapeGradientPaintBinding).endMatrix, (cast progress : Float));
     }
     flighthq._internal._StaticIndex.writeArray(commands, (i + 9.0), (cast MorphShapePaint.interpolateNumber__morphShapePaint((cast (cast binding : MorphShapeGradientPaintBinding).startFocalPointRatio : Float), (cast (cast binding : MorphShapeGradientPaintBinding).endFocalPointRatio : Float), (cast progress : Float)) : Float));
   }
 
   public static function createSampledMatrix__morphShapePaint(start:Null<Matrix>, end:Null<Matrix>):Null<Matrix> {
     if ((cast ((cast _Runtime.strictEquals(start, null) : Bool) && (cast _Runtime.strictEquals(end, null) : Bool)) : Bool)) { return cast null; }
-    return cast (cast cloneMatrix((cast _Runtime.coalesce(start, function():Dynamic return cast MorphShapePaint.identityMatrix__morphShapePaint))) : Matrix);
+    return cast (cast cloneMatrix(({ final __callArgument65:Dynamic = _Runtime.coalesce(start, function():Dynamic return cast MorphShapePaint.identityMatrix__morphShapePaint); __callArgument65; })) : Matrix);
     return cast null;
   }
 
@@ -222,5 +222,5 @@ class MorphShapePaint {
     return cast null;
   }
 
-  public static final identityMatrix__morphShapePaint:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Matrix);
+  public static final identityMatrix__morphShapePaint:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix);
 }

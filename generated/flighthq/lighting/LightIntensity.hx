@@ -20,7 +20,7 @@ class LightIntensity {
   }
 
   public static function convertLightIntensity(fromUnit:LightUnit, toUnit:LightUnit, value:Float):Float {
-    return cast _Runtime.divideNumbers((cast getLightLinearIntensity((cast fromUnit), (cast value : Float)) : Float), _Runtime.getIndex(LightIntensity.LINEAR_PER_UNIT__lightIntensity, toUnit));
+    return cast _Runtime.divideNumbers((cast getLightLinearIntensity(({ final __callArgument0:Dynamic = fromUnit; __callArgument0; }), (cast value : Float)) : Float), _Runtime.getIndex(LightIntensity.LINEAR_PER_UNIT__lightIntensity, toUnit));
     return cast null;
   }
 

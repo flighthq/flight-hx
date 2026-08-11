@@ -17,13 +17,13 @@ class PrepareScene3DMorph {
     var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(scene, 'enabled') : Bool) : Bool)) { return; }
     mesh = (cast (cast scene : flighthq._internal._Any) : Mesh);
-    if ((cast !_Runtime.looseEquals(mesh.geometry, null) : Bool)) { updateMeshMorph((cast mesh)); }
-    children = _Runtime.field((cast getNodeRuntime((cast scene)) : NodeRuntime<flighthq._internal._Any>), 'children');
+    if ((cast !_Runtime.looseEquals(mesh.geometry, null) : Bool)) { updateMeshMorph(({ final __callArgument0:Dynamic = mesh; __callArgument0; })); }
+    children = _Runtime.field((cast getNodeRuntime((cast scene : Dynamic)) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          prepareScene3DMorph((cast flighthq._internal._StaticIndex.readArray(children, i)));
+          prepareScene3DMorph(({ final __callArgument1:Dynamic = flighthq._internal._StaticIndex.readArray(children, i); __callArgument1; }));
           i++;
         }
       }

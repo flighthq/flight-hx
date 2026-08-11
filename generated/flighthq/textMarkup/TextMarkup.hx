@@ -26,7 +26,7 @@ class TextMarkup {
     var text:String = cast _Runtime.UNDEFINED;
     text = (cast content : RichTextContent).text;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool) || (cast StringTools.endsWith(Std.string(text), '\n') : Bool)) : Bool)) { return; }
-    TextMarkup.appendMarkupString__textMarkup((cast content), (cast '\n' : String), (cast TextMarkup.emptyMarkupFormat__textMarkup));
+    TextMarkup.appendMarkupString__textMarkup(({ final __callArgument0:Dynamic = content; __callArgument0; }), (cast '\n' : String), ({ final __callArgument1:Dynamic = TextMarkup.emptyMarkupFormat__textMarkup; __callArgument1; }));
   }
 
   public static function appendMarkupString__textMarkup(content:RichTextContent, value:String, format:TextFormat):Void {
@@ -34,11 +34,11 @@ class TextMarkup {
     if ((cast _Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0) : Bool)) { return; }
     start = _Runtime.field((cast content : RichTextContent).text, 'length');
     ((cast content : RichTextContent).text += value);
-    TextMarkup.pushMarkupRange__textMarkup((cast (cast content : RichTextContent).formatRanges), (cast format), (cast start : Float), (cast _Runtime.field((cast content : RichTextContent).text, 'length') : Float));
+    TextMarkup.pushMarkupRange__textMarkup((cast content : RichTextContent).formatRanges, ({ final __callArgument2:Dynamic = format; __callArgument2; }), (cast start : Float), (cast _Runtime.field((cast content : RichTextContent).text, 'length') : Float));
   }
 
   public static function appendMarkupText__textMarkup(content:RichTextContent, raw:String, format:TextFormat):Void {
-    TextMarkup.appendMarkupString__textMarkup((cast content), (cast (cast TextMarkup.decodeMarkupEntities__textMarkup((cast raw : String)) : String) : String), (cast format));
+    TextMarkup.appendMarkupString__textMarkup(({ final __callArgument3:Dynamic = content; __callArgument3; }), (cast (cast TextMarkup.decodeMarkupEntities__textMarkup((cast raw : String)) : String) : String), ({ final __callArgument4:Dynamic = format; __callArgument4; }));
   }
 
   public static function codePointToString__textMarkup(code:Float, fallback:String):String {
@@ -149,7 +149,7 @@ class TextMarkup {
     var font:Null<String> = cast _Runtime.UNDEFINED;
     open = (cast cast ([] : Array<Dynamic>));
     close = (cast cast ([] : Array<Dynamic>));
-    textformat = (cast TextMarkup.formatMarkupTextformatTag__textMarkup((cast format)) : Null<String>);
+    textformat = (cast TextMarkup.formatMarkupTextformatTag__textMarkup(({ final __callArgument7:Dynamic = format; __callArgument7; })) : Null<String>);
     if ((cast !_Runtime.strictEquals(textformat, null) : Bool)) {
       _Runtime.callProperty(open, 'push', cast ([textformat] : Array<Dynamic>));
       _Runtime.callProperty(close, 'unshift', cast (['</textformat>'] : Array<Dynamic>));
@@ -159,14 +159,14 @@ class TextMarkup {
       _Runtime.callProperty(close, 'unshift', cast (['</p>'] : Array<Dynamic>));
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(format, 'bullet'), true) : Bool)) {
-      _Runtime.callProperty(open, 'push', cast ([(cast TextMarkup.formatMarkupListTag__textMarkup((cast format)) : String)] : Array<Dynamic>));
+      _Runtime.callProperty(open, 'push', cast ([(cast TextMarkup.formatMarkupListTag__textMarkup(({ final __callArgument8:Dynamic = format; __callArgument8; })) : String)] : Array<Dynamic>));
       _Runtime.callProperty(close, 'unshift', cast (['</li>'] : Array<Dynamic>));
     }
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(format, 'url'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(format, 'target'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      _Runtime.callProperty(open, 'push', cast ([(cast TextMarkup.formatMarkupAnchorTag__textMarkup((cast format)) : String)] : Array<Dynamic>));
+      _Runtime.callProperty(open, 'push', cast ([(cast TextMarkup.formatMarkupAnchorTag__textMarkup(({ final __callArgument9:Dynamic = format; __callArgument9; })) : String)] : Array<Dynamic>));
       _Runtime.callProperty(close, 'unshift', cast (['</a>'] : Array<Dynamic>));
     }
-    font = (cast TextMarkup.formatMarkupFontTag__textMarkup((cast format)) : Null<String>);
+    font = (cast TextMarkup.formatMarkupFontTag__textMarkup(({ final __callArgument10:Dynamic = format; __callArgument10; })) : Null<String>);
     if ((cast !_Runtime.strictEquals(font, null) : Bool)) {
       _Runtime.callProperty(open, 'push', cast ([font] : Array<Dynamic>));
       _Runtime.callProperty(close, 'unshift', cast (['</font>'] : Array<Dynamic>));
@@ -231,14 +231,14 @@ class TextMarkup {
     var runStart:Float = cast _Runtime.UNDEFINED;
     text = _Runtime.field(content, 'text');
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast ''; }
-    formats = (cast TextMarkup.resolveMarkupFormats__textMarkup((cast content)) : Array<TextFormat>);
+    formats = (cast TextMarkup.resolveMarkupFormats__textMarkup(({ final __callArgument11:Dynamic = content; __callArgument11; })) : Array<TextFormat>);
     output = '';
     runStart = 0.0;
     while ((cast ((cast runStart : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool)) {
       var format:TextFormat = flighthq._internal._StaticIndex.readArray(formats, runStart);
       var runEnd:Float = (runStart + 1.0);
-      while ((cast ((cast ((cast runEnd : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast (cast TextMarkup.equalsMarkupFormat__textMarkup((cast flighthq._internal._StaticIndex.readArray(formats, runEnd)), (cast format)) : Bool) : Bool)) : Bool)) { runEnd++; }
-      (output = cast ((output + (cast TextMarkup.formatMarkupRun__textMarkup((cast format), (cast _Runtime.slice(text, runStart, runEnd) : String)) : String)) : Dynamic));
+      while ((cast ((cast ((cast runEnd : Float) < (cast _Runtime.field(text, 'length') : Float)) : Bool) && (cast (cast TextMarkup.equalsMarkupFormat__textMarkup(flighthq._internal._StaticIndex.readArray(formats, runEnd), ({ final __callArgument12:Dynamic = format; __callArgument12; })) : Bool) : Bool)) : Bool)) { runEnd++; }
+      (output = cast ((output + (cast TextMarkup.formatMarkupRun__textMarkup(({ final __callArgument13:Dynamic = format; __callArgument13; }), (cast _Runtime.slice(text, runStart, runEnd) : String)) : String)) : Dynamic));
       (runStart = cast (runEnd : Dynamic));
     }
     return cast output;
@@ -250,7 +250,7 @@ class TextMarkup {
     registry = TextMarkup.defaultMarkupTagRegistry__textMarkup;
     if ((cast _Runtime.strictEquals(registry, null) : Bool)) {
       (registry = cast ((cast createMarkupTagRegistry() : MarkupTagRegistry) : Dynamic));
-      registerStandardMarkupTags((cast registry));
+      registerStandardMarkupTags(({ final __callArgument14:Dynamic = registry; __callArgument14; }));
       (TextMarkup.defaultMarkupTagRegistry__textMarkup = cast (registry : Dynamic));
     }
     return cast registry;
@@ -287,13 +287,13 @@ class TextMarkup {
       return;
     }
     attributes = (cast TextMarkup.parseMarkupAttributes__textMarkup((cast ((cast _Runtime.strictEquals(separator, -1.0) : Bool) ? (cast '' : Dynamic) : (cast _Runtime.slice(body, (separator + 1.0), null) : Dynamic)) : String)) : flighthq._internal._Record<String, String>);
-    result = (cast TextMarkup.normalizeMarkupTagResult__textMarkup((cast (cast handler((cast attributes)) : MarkupTagResult))) : MarkupTagEffect);
+    result = (cast TextMarkup.normalizeMarkupTagResult__textMarkup((cast handler(({ final __callArgument15:Dynamic = attributes; __callArgument15; })) : MarkupTagResult)) : MarkupTagEffect);
     if ((cast ((cast _Runtime.strictEquals((cast result : MarkupTagEffect).format, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals((cast result : MarkupTagEffect).text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      TextMarkup.appendMarkupString__textMarkup((cast content), (cast (cast result : MarkupTagEffect).text : String), (cast top));
+      TextMarkup.appendMarkupString__textMarkup(({ final __callArgument16:Dynamic = content; __callArgument16; }), (cast (cast result : MarkupTagEffect).text : String), ({ final __callArgument17:Dynamic = top; __callArgument17; }));
       return;
     }
-    if ((cast _Runtime.strictEquals((cast result : MarkupTagEffect).breakBefore, true) : Bool)) { TextMarkup.appendMarkupBreakBefore__textMarkup((cast content)); }
-    if ((cast !_Runtime.strictEquals((cast result : MarkupTagEffect).text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { TextMarkup.appendMarkupString__textMarkup((cast content), (cast (cast result : MarkupTagEffect).text : String), (cast top)); }
+    if ((cast _Runtime.strictEquals((cast result : MarkupTagEffect).breakBefore, true) : Bool)) { TextMarkup.appendMarkupBreakBefore__textMarkup(({ final __callArgument18:Dynamic = content; __callArgument18; })); }
+    if ((cast !_Runtime.strictEquals((cast result : MarkupTagEffect).text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { TextMarkup.appendMarkupString__textMarkup(({ final __callArgument19:Dynamic = content; __callArgument19; }), (cast (cast result : MarkupTagEffect).text : String), ({ final __callArgument20:Dynamic = top; __callArgument20; })); }
     merged = (cast _Runtime.mergeObjects([top, (cast result : MarkupTagEffect).format]));
     if ((cast !(cast selfClosing : Bool) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([merged] : Array<Dynamic>)); }
   }
@@ -337,11 +337,11 @@ class TextMarkup {
     tagPattern = _Runtime.regexp('<[^>]*>', 'g');
     index = 0.0;
     while ((cast !_Runtime.strictEquals((match = cast (_Runtime.callProperty(tagPattern, 'exec', cast ([html] : Array<Dynamic>)) : Dynamic)), null) : Bool)) {
-      TextMarkup.appendMarkupText__textMarkup((cast content), (cast _Runtime.slice(html, index, _Runtime.field(match, 'index')) : String), (cast flighthq._internal._StaticIndex.readArray(stack, _Runtime.subtractNumbers(_Runtime.field(stack, 'length'), 1.0))));
-      TextMarkup.handleMarkupToken__textMarkup((cast content), (cast handlers), (cast _Runtime.getIndex(match, 0.0) : String), (cast stack));
+      TextMarkup.appendMarkupText__textMarkup(({ final __callArgument21:Dynamic = content; __callArgument21; }), (cast _Runtime.slice(html, index, _Runtime.field(match, 'index')) : String), flighthq._internal._StaticIndex.readArray(stack, _Runtime.subtractNumbers(_Runtime.field(stack, 'length'), 1.0)));
+      TextMarkup.handleMarkupToken__textMarkup(({ final __callArgument22:Dynamic = content; __callArgument22; }), ({ final __callArgument23:Dynamic = handlers; __callArgument23; }), (cast _Runtime.getIndex(match, 0.0) : String), ({ final __callArgument24:Dynamic = stack; __callArgument24; }));
       (index = cast (_Runtime.addNumbers(_Runtime.field(match, 'index'), _Runtime.field(_Runtime.getIndex(match, 0.0), 'length')) : Dynamic));
     }
-    TextMarkup.appendMarkupText__textMarkup((cast content), (cast _Runtime.slice(html, index, null) : String), (cast flighthq._internal._StaticIndex.readArray(stack, _Runtime.subtractNumbers(_Runtime.field(stack, 'length'), 1.0))));
+    TextMarkup.appendMarkupText__textMarkup(({ final __callArgument25:Dynamic = content; __callArgument25; }), (cast _Runtime.slice(html, index, null) : String), flighthq._internal._StaticIndex.readArray(stack, _Runtime.subtractNumbers(_Runtime.field(stack, 'length'), 1.0)));
     return cast content;
     return cast null;
   }
@@ -351,11 +351,11 @@ class TextMarkup {
     if ((cast _Runtime.strictEquals(start, end) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal.DynamicObject.keys(format), 'length'), 0.0) : Bool)) { return; }
     previous = flighthq._internal._StaticIndex.readArray(ranges, _Runtime.subtractNumbers(_Runtime.field(ranges, 'length'), 1.0));
-    if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast previous : TextFormatRange).end, start) : Bool)) : Bool) && (cast (cast TextMarkup.equalsMarkupFormat__textMarkup((cast (cast previous : TextFormatRange).format), (cast format)) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast previous : TextFormatRange).end, start) : Bool)) : Bool) && (cast (cast TextMarkup.equalsMarkupFormat__textMarkup((cast previous : TextFormatRange).format, ({ final __callArgument26:Dynamic = format; __callArgument26; })) : Bool) : Bool)) : Bool)) {
       ((cast previous : TextFormatRange).end = end);
       return;
     }
-    _Runtime.callProperty(ranges, 'push', cast ([(cast createTextFormatRange((cast _Runtime.mergeObjects([format])), (cast start : Float), (cast end : Float)) : TextFormatRange)] : Array<Dynamic>));
+    _Runtime.callProperty(ranges, 'push', cast ([(cast createTextFormatRange(({ final __callArgument27:Dynamic = _Runtime.mergeObjects([format]); __callArgument27; }), (cast start : Float), (cast end : Float)) : TextFormatRange)] : Array<Dynamic>));
   }
 
   public static function registerMarkupClassStyles(registry:MarkupTagRegistry, styles:flighthq._internal._Record<String, flighthq._internal._Partial<TextFormat>>):Void {

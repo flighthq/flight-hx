@@ -32,8 +32,8 @@ class TransmissionVolumePbrGlExtension {
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightTransmissionIor' : String), (cast _Runtime.field(extension, 'ior') : Float));
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightAttenuationDistance' : String), (cast _Runtime.field(extension, 'attenuationDistance') : Float));
     (cast context : GlPbrExtensionBindContext).setLinearColor((cast 'u_flightAttenuationColor' : String), (cast _Runtime.field(extension, 'attenuationColor') : Float));
-    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightTransmissionMap' : String), (cast 'u_flightTransmissionMapUvSet' : String), (cast 'u_flightTransmissionMapTransform' : String), (cast _Runtime.field(extension, 'transmissionMap')), (cast _Runtime.field(extension, 'transmissionMapUvSet')));
-    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightTransmissionThicknessMap' : String), (cast 'u_flightTransmissionThicknessMapUvSet' : String), (cast 'u_flightTransmissionThicknessMapTransform' : String), (cast _Runtime.field(extension, 'thicknessMap')), (cast _Runtime.field(extension, 'thicknessMapUvSet')));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightTransmissionMap' : String), (cast 'u_flightTransmissionMapUvSet' : String), (cast 'u_flightTransmissionMapTransform' : String), (cast _Runtime.field(extension, 'transmissionMap') : Dynamic), _Runtime.field(extension, 'transmissionMapUvSet'));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flightTransmissionThicknessMap' : String), (cast 'u_flightTransmissionThicknessMapUvSet' : String), (cast 'u_flightTransmissionThicknessMapTransform' : String), (cast _Runtime.field(extension, 'thicknessMap') : Dynamic), _Runtime.field(extension, 'thicknessMapUvSet'));
     (cast context : GlPbrExtensionBindContext).bindTransmissionSceneColor((cast 'u_flightTransmissionSceneColor' : String), (cast 'u_flightTransmissionMaxLod' : String));
   }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):GlPbrExtensionShaderContribution {
     var extension:TransmissionVolumePbrExtension = cast _Runtime.UNDEFINED;
@@ -52,6 +52,6 @@ class TransmissionVolumePbrGlExtension {
   } });
 
   public static function registerGlTransmissionVolumePbrExtension(state:GlRenderState):Void {
-    registerGlPbrExtension((cast state), (cast TransmissionVolumePbrExtensionKind : String), (cast transmissionVolumePbrGlExtension));
+    registerGlPbrExtension(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast TransmissionVolumePbrExtensionKind : String), ({ final __callArgument1:Dynamic = transmissionVolumePbrGlExtension; __callArgument1; }));
   }
 }

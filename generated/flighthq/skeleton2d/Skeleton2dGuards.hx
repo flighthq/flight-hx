@@ -12,13 +12,13 @@ class Skeleton2dGuards {
   @:noCompletion
   public static function reportSkeleton2DCoercedInterpolation(subject:String, stated:String, applied:String):Void {
     if ((cast _Runtime.strictEquals(Skeleton2dGuards._coercedInterpolationGuard__skeleton2dGuards, null) : Bool)) { return; }
-    Skeleton2dGuards._coercedInterpolationGuard__skeleton2dGuards((cast { applied: applied, stated: stated, subject: subject }));
+    Skeleton2dGuards._coercedInterpolationGuard__skeleton2dGuards(({ final __callArgument0:Dynamic = { applied: applied, stated: stated, subject: subject }; __callArgument0; }));
   }
 
   @:noCompletion
   public static function reportSkeleton2DDeformLengthMismatch(subject:String, offsets:Float, addressed:Float):Void {
     if ((cast _Runtime.strictEquals(Skeleton2dGuards._deformLengthGuard__skeleton2dGuards, null) : Bool)) { return; }
-    Skeleton2dGuards._deformLengthGuard__skeleton2dGuards((cast { addressed: addressed, offsets: offsets, subject: subject }));
+    Skeleton2dGuards._deformLengthGuard__skeleton2dGuards(({ final __callArgument1:Dynamic = { addressed: addressed, offsets: offsets, subject: subject }; __callArgument1; }));
   }
 
   @:noCompletion

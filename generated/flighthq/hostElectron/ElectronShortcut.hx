@@ -19,7 +19,7 @@ class ElectronShortcut {
       return cast _Runtime.UNDEFINED;
     }, register: function(accelerator:String, listener:ShortcutEvent->Void):Bool {
       var ok:Bool = cast _Runtime.UNDEFINED;
-      ok = (cast globalShortcut : ElectronGlobalShortcut).register((cast accelerator : String), (cast function():Void { listener((cast { accelerator: accelerator })); }));
+      ok = (cast globalShortcut : ElectronGlobalShortcut).register((cast accelerator : String), ({ final __callArgument1:Dynamic = function():Void { listener(({ final __callArgument0:Dynamic = { accelerator: accelerator }; __callArgument0; })); }; __callArgument1; }));
       if ((cast ok : Bool)) { ((cast registered : flighthq._internal._Set<String>).add(accelerator)); }
       return cast ok;
       return cast _Runtime.UNDEFINED;

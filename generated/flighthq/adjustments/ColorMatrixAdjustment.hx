@@ -23,7 +23,7 @@ class ColorMatrixAdjustment {
   }
 
   public static function isColorMatrixAdjustment(operation:{ var kind:String; }):Bool {
-    return cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix((cast operation)) : Null<Array<Float>>), null);
+    return cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix(({ final __callArgument0:Dynamic = operation; __callArgument0; })) : Null<Array<Float>>), null);
     return cast null;
   }
 }

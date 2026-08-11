@@ -15,15 +15,15 @@ class Mediasession {
   public static var _backend__mediasession:Null<MediaSessionBackend> = _Runtime.explicitNull();
 
   public static function clearMediaSessionActionHandler(action:MediaSessionAction):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler((cast action), (cast null));
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler(({ final __callArgument0:Dynamic = action; __callArgument0; }), ({ final __callArgument1:Dynamic = null; __callArgument1; }));
   }
 
   public static function clearMediaSessionMetadata():Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata((cast null));
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata(({ final __callArgument2:Dynamic = null; __callArgument2; }));
   }
 
   public static function clearMediaSessionPositionState():Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState((cast null));
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState(({ final __callArgument3:Dynamic = null; __callArgument3; }));
   }
 
   @:noCompletion
@@ -53,7 +53,7 @@ class Mediasession {
       session = (cast Mediasession.getWebMediaSession__mediasession() : Null<flighthq._internal.dom.MediaSession>);
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
       try {
-        (cast session : flighthq._internal.dom.MediaSession).setActionHandler(action, _Runtime.select(handler, function():Dynamic return cast function(details:MediaSessionActionDetails):Void { handler((cast (cast details : MediaSessionActionDetails))); }, function():Dynamic return cast null));
+        (cast session : flighthq._internal.dom.MediaSession).setActionHandler(action, _Runtime.select(handler, function():Dynamic return cast function(details:MediaSessionActionDetails):Void { handler((cast details : MediaSessionActionDetails)); }, function():Dynamic return cast null));
       } catch (__error:Dynamic) {
       }
     } };
@@ -74,7 +74,7 @@ class Mediasession {
   }
 
   public static function setMediaSessionActionHandler(action:MediaSessionAction, handler:MediaSessionActionDetails->Void):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler((cast action), (cast handler));
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler(({ final __callArgument4:Dynamic = action; __callArgument4; }), ({ final __callArgument5:Dynamic = handler; __callArgument5; }));
   }
 
   @:noCompletion
@@ -83,14 +83,14 @@ class Mediasession {
   }
 
   public static function setMediaSessionMetadata(metadata:MediaSessionMetadata):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata((cast metadata));
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata(({ final __callArgument6:Dynamic = metadata; __callArgument6; }));
   }
 
   public static function setMediaSessionPlaybackState(state:MediaSessionPlaybackState):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPlaybackState((cast state));
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPlaybackState(({ final __callArgument7:Dynamic = state; __callArgument7; }));
   }
 
   public static function setMediaSessionPositionState(state:MediaSessionPositionState):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState((cast state));
+    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState(({ final __callArgument8:Dynamic = state; __callArgument8; }));
   }
 }

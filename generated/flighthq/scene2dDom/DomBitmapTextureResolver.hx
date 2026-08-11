@@ -18,7 +18,7 @@ import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind
 
 class DomBitmapTextureResolver {
   public static function registerDomBitmapTextureResolver(state:DomRenderState):Void {
-    registerDomTextureResolver((cast state), (cast BitmapTextureSourceKind : String), (cast DomBitmapTextureResolver.resolveDomBitmapTexture__domBitmapTextureResolver));
+    registerDomTextureResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast BitmapTextureSourceKind : String), (cast DomBitmapTextureResolver.resolveDomBitmapTexture__domBitmapTextureResolver : Dynamic));
   }
 
   public static function resolveDomBitmapTexture__domBitmapTextureResolver(state:DomRenderState, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
@@ -26,13 +26,13 @@ class DomBitmapTextureResolver {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     var cache:flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }> = cast _Runtime.UNDEFINED;
     var entry:Null<{ var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }> = cast _Runtime.UNDEFINED;
-    bitmap = (cast getTextureSource((cast texture)) : Null<Bitmap>);
+    bitmap = (cast getTextureSource(({ final __callArgument1:Dynamic = texture; __callArgument1; })) : Null<Bitmap>);
     if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) { return cast null; }
-    runtime = (cast getDomRenderStateRuntime((cast state)) : DomRenderStateRuntime);
-    cache = ({ final __nullishOwner0 = runtime; final __nullishValue1:Null<flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>> = cast (cast __nullishOwner0 : DomRenderStateRuntime).bitmapElementCache; __nullishValue1 == null ? ((cast __nullishOwner0 : DomRenderStateRuntime).bitmapElementCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>>)) : (cast __nullishValue1 : Null<flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>>); });
+    runtime = (cast getDomRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : DomRenderStateRuntime);
+    cache = ({ final __nullishOwner3 = runtime; final __nullishValue4:Null<flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>> = cast (cast __nullishOwner3 : DomRenderStateRuntime).bitmapElementCache; __nullishValue4 == null ? ((cast __nullishOwner3 : DomRenderStateRuntime).bitmapElementCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>>)) : (cast __nullishValue4 : Null<flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>>); });
     entry = ((cast cache : flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>).get(bitmap));
     if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast entry : { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }).version, (cast bitmap : { var version:Float; }).version) : Bool)) : Bool)) {
-      var image:Image = (cast createImageResourceFromBitmap((cast bitmap)) : Image);
+      var image:Image = (cast createImageResourceFromBitmap(({ final __callArgument5:Dynamic = bitmap; __callArgument5; })) : Image);
       (entry = cast ({ element: (cast (cast image : Image).source : flighthq._internal.dom.HTMLCanvasElement), version: (cast bitmap : { var version:Float; }).version } : Dynamic));
       ((cast cache : flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>).set(bitmap, (cast entry)));
     }

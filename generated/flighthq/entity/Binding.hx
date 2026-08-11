@@ -22,7 +22,7 @@ class Binding {
   @:noCompletion
   public static function getEntityBinding(source:Entity):Null<flighthq._internal._Object> {
     var runtime:EntityRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime((cast source)) : EntityRuntime);
+    runtime = (cast getEntityRuntime(({ final __callArgument0:Dynamic = source; __callArgument0; })) : EntityRuntime);
     return cast _Runtime.coalesce(_Runtime.optionalField(runtime, 'binding'), function():Dynamic return cast null);
     return cast null;
   }

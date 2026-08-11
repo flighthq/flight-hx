@@ -20,7 +20,7 @@ class Slot {
     var data:SignalData<T> = cast _Runtime.UNDEFINED;
     priority = _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var priority:Null<Float>; }).priority; }), function():Dynamic return cast 0.0);
     repeat = !(cast _Runtime.coalesce(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var once:Null<Bool>; }).once; }), function():Dynamic return cast false) : Bool);
-    Slot.initSignal__slot((cast signal));
+    Slot.initSignal__slot((cast signal : Dynamic));
     data = signal.data;
     {
       var i:Float = 0.0;
@@ -68,7 +68,7 @@ class Slot {
     if ((cast !_Runtime.strictEquals(signal.data, null) : Bool)) { return; }
     data = (cast { slots: cast ([] : Array<Dynamic>), priorities: cast ([] : Array<Dynamic>), repeat: cast ([] : Array<Dynamic>), cancelled: false });
     (signal.data = cast (data : Dynamic));
-    (signal.emit = cast ((cast Slot.makeDispatch__slot((cast data)) : T) : Dynamic));
+    (signal.emit = cast ((cast Slot.makeDispatch__slot((cast data : Dynamic)) : T) : Dynamic));
   }
 
   public static function isSlotConnected<T>(signal:Signal<T>, slot:T):Bool {

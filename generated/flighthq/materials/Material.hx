@@ -10,20 +10,20 @@ import flighthq.types.Material;
 class Material {
   public static function cloneMaterial(source:flighthq.types.Material):flighthq.types.Material {
     var clone:flighthq.types.Material = cast _Runtime.UNDEFINED;
-    clone = (cast createEntity((cast { kind: _Runtime.field(source, 'kind') })) : flighthq.types.Material);
-    Material.copyMaterialFields__material((cast clone), (cast source), (cast _Runtime.field(source, 'kind') : String));
+    clone = (cast createEntity(({ final __callArgument0:Dynamic = { kind: _Runtime.field(source, 'kind') }; __callArgument0; })) : flighthq.types.Material);
+    Material.copyMaterialFields__material(({ final __callArgument1:Dynamic = clone; __callArgument1; }), ({ final __callArgument2:Dynamic = source; __callArgument2; }), (cast _Runtime.field(source, 'kind') : String));
     return cast clone;
     return cast null;
   }
 
   public static function copyMaterial(out:flighthq.types.Material, source:flighthq.types.Material):Void {
     if ((cast _Runtime.strictEquals(out, source) : Bool)) { return; }
-    Material.copyMaterialFields__material((cast out), (cast source), (cast _Runtime.field(source, 'kind') : String));
+    Material.copyMaterialFields__material(({ final __callArgument3:Dynamic = out; __callArgument3; }), ({ final __callArgument4:Dynamic = source; __callArgument4; }), (cast _Runtime.field(source, 'kind') : String));
   }
 
   public static function createMaterial(kind:Kind):flighthq.types.Material {
     var material:flighthq.types.Material = cast _Runtime.UNDEFINED;
-    material = (cast createEntity((cast { kind: kind })) : flighthq.types.Material);
+    material = (cast createEntity(({ final __callArgument5:Dynamic = { kind: kind }; __callArgument5; })) : flighthq.types.Material);
     ((cast material : flighthq.types.Material).name = null);
     return cast material;
     return cast null;

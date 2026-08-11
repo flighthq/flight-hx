@@ -117,9 +117,9 @@ class CapacitorApp {
       return cast false;
       return cast _Runtime.UNDEFINED;
     }, subscribeActivate: function(listener:Void->Void):Void->Void {
-      return cast (cast CapacitorApp.toUnsubscribe__capacitorApp((cast (cast app : CapacitorAppPlugin).addListener((cast 'appStateChange' : String), (cast function(state:{ var isActive:Bool; }):Void {
+      return cast (cast CapacitorApp.toUnsubscribe__capacitorApp((cast app : CapacitorAppPlugin).addListener((cast 'appStateChange' : String), ({ final __callArgument0:Dynamic = function(state:{ var isActive:Bool; }):Void {
         if ((cast (cast state : { var isActive:Bool; }).isActive : Bool)) { listener(); }
-      })))) : Void->Void);
+      }; __callArgument0; }))) : Void->Void);
       return cast _Runtime.UNDEFINED;
     }, subscribeAllWindowsClosed: function():Void->Void {
       return cast function():Void {
@@ -127,7 +127,7 @@ class CapacitorApp {
       };
       return cast _Runtime.UNDEFINED;
     }, subscribeOpenFile: function(listener:String->Void):Void->Void {
-      return cast (cast CapacitorApp.toUnsubscribe__capacitorApp((cast (cast app : CapacitorAppPlugin).addListener((cast 'appUrlOpen' : String), (cast function(event:{ var url:String; }):Void { listener((cast (cast event : { var url:String; }).url : String)); })))) : Void->Void);
+      return cast (cast CapacitorApp.toUnsubscribe__capacitorApp((cast app : CapacitorAppPlugin).addListener((cast 'appUrlOpen' : String), ({ final __callArgument1:Dynamic = function(event:{ var url:String; }):Void { listener((cast (cast event : { var url:String; }).url : String)); }; __callArgument1; }))) : Void->Void);
       return cast _Runtime.UNDEFINED;
     }, subscribeQuitRequest: function():Void->Void {
       return cast function():Void {

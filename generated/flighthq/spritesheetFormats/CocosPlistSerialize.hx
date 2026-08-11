@@ -15,10 +15,10 @@ class CocosPlistSerialize {
     var doc:CocosPlistDocument = cast _Runtime.UNDEFINED;
     frames = (cast {  });
     for (frame in _Runtime.iterable(data.frames)) {
-      _Runtime.setIndex(frames, frame.name, (cast CocosPlistSerialize.frameToEntry__cocosPlistSerialize((cast frame)) : CocosPlistFrame));
+      _Runtime.setIndex(frames, frame.name, (cast CocosPlistSerialize.frameToEntry__cocosPlistSerialize(({ final __callArgument2:Dynamic = frame; __callArgument2; })) : CocosPlistFrame));
     }
-    doc = (cast { frames: frames, metadata: { format: _Runtime.coalesce(({ final __typedStruct3 = ({ final __structural2 = existing; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var metadata:Null<CocosPlistMetadata>; }).metadata; }); __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { var format:Float; }).format; }), function():Dynamic return cast 3.0), size: '{' + Std.string(data.imageWidth) + ',' + Std.string(data.imageHeight) + '}', textureFileName: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast ({ final __typedStruct5 = ({ final __structural4 = existing; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var metadata:Null<CocosPlistMetadata>; }).metadata; }); __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : { var textureFileName:String; }).textureFileName; })), function():Dynamic return cast '') } });
-    return cast (cast CocosPlistSerialize.documentToXml__cocosPlistSerialize((cast doc)) : String);
+    doc = (cast { frames: frames, metadata: { format: _Runtime.coalesce(({ final __typedStruct4 = ({ final __structural3 = existing; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var metadata:Null<CocosPlistMetadata>; }).metadata; }); __typedStruct4 == null ? _Runtime.UNDEFINED : (cast __typedStruct4 : { var format:Float; }).format; }), function():Dynamic return cast 3.0), size: '{' + Std.string(data.imageWidth) + ',' + Std.string(data.imageHeight) + '}', textureFileName: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast ({ final __typedStruct6 = ({ final __structural5 = existing; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var metadata:Null<CocosPlistMetadata>; }).metadata; }); __typedStruct6 == null ? _Runtime.UNDEFINED : (cast __typedStruct6 : { var textureFileName:String; }).textureFileName; })), function():Dynamic return cast '') } });
+    return cast (cast CocosPlistSerialize.documentToXml__cocosPlistSerialize(({ final __callArgument7:Dynamic = doc; __callArgument7; })) : String);
     return cast null;
   }
 

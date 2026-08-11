@@ -48,7 +48,7 @@ class StageFit {
     contentWidth = 0.0;
     contentHeight = 0.0;
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene2d, 'root'), null) : Bool)) {
-      var runtime:flighthq._internal._Any = (cast getNodeRuntime((cast _Runtime.field(scene2d, 'root'))) : flighthq._internal._Partial<HasBoundsRectangleRuntime>);
+      var runtime:flighthq._internal._Any = (cast getNodeRuntime((cast _Runtime.field(scene2d, 'root') : Dynamic)) : flighthq._internal._Partial<HasBoundsRectangleRuntime>);
       if ((cast !_Runtime.strictEquals(_Runtime.optionalField(runtime, 'computeLocalBoundsRectangle'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         ((cast StageFit._tempRectangle__stageFit : Rectangle).width = 0.0);
         ((cast StageFit._tempRectangle__stageFit : Rectangle).height = 0.0);
@@ -81,9 +81,9 @@ class StageFit {
     (out.b = cast (0.0 : Dynamic));
     (out.c = cast (0.0 : Dynamic));
     (out.d = cast (sy : Dynamic));
-    (out.tx = cast ((cast computeScene2DFitAlignX((cast (contentWidth * sx) : Float), (cast viewWidth : Float), (cast _Runtime.field(scene2d, 'align'))) : Float) : Dynamic));
-    (out.ty = cast ((cast computeScene2DFitAlignY((cast (contentHeight * sy) : Float), (cast viewHeight : Float), (cast _Runtime.field(scene2d, 'align'))) : Float) : Dynamic));
+    (out.tx = cast ((cast computeScene2DFitAlignX((cast (contentWidth * sx) : Float), (cast viewWidth : Float), _Runtime.field(scene2d, 'align')) : Float) : Dynamic));
+    (out.ty = cast ((cast computeScene2DFitAlignY((cast (contentHeight * sy) : Float), (cast viewHeight : Float), _Runtime.field(scene2d, 'align')) : Float) : Dynamic));
   }
 
-  public static final _tempRectangle__stageFit:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
+  public static final _tempRectangle__stageFit:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);
 }

@@ -34,17 +34,17 @@ class BloomEffect {
 
   public static function getBloomEffectPadding(effect:flighthq.types.BloomEffect):RenderEffectPadding {
     var radius:Float = cast _Runtime.UNDEFINED;
-    radius = (cast computeBloomBlurRadius((cast effect)) : Float);
+    radius = (cast computeBloomBlurRadius(({ final __callArgument0:Dynamic = effect; __callArgument0; })) : Float);
     return cast (cast getGaussianRenderEffectPadding((cast radius : Float), (cast radius : Float)) : RenderEffectPadding);
     return cast null;
   }
 
   public static function registerBloomEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver((cast state), (cast 'BloomEffect' : String), (cast BloomEffect.resolveBloomEffectPadding__bloomEffect));
+    registerRenderEffectPaddingResolver(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast 'BloomEffect' : String), (cast BloomEffect.resolveBloomEffectPadding__bloomEffect : Dynamic));
   }
 
   public static function resolveBloomEffectPadding__bloomEffect(effect:RenderEffect):RenderEffectPadding {
-    return cast (cast getBloomEffectPadding((cast (cast effect : flighthq.types.BloomEffect))) : RenderEffectPadding);
+    return cast (cast getBloomEffectPadding((cast effect : flighthq.types.BloomEffect)) : RenderEffectPadding);
     return cast null;
   }
 }

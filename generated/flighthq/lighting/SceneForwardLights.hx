@@ -23,8 +23,8 @@ class SceneForwardLights {
     var outIndices:Array<Float> = cast _Runtime.UNDEFINED;
     points = _Runtime.field(lights, 'point');
     spots = _Runtime.field(lights, 'spot');
-    pointCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights((cast points), (cast bounds), (cast SceneForwardLights.scratchSelectedPointLights__sceneForwardLights), (cast SceneForwardLights.scratchSelectedPointIndices__sceneForwardLights), (cast SceneForwardLights.scratchSelectedPointScores__sceneForwardLights)) : Float);
-    spotCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights((cast spots), (cast bounds), (cast SceneForwardLights.scratchSelectedSpotLights__sceneForwardLights), (cast SceneForwardLights.scratchSelectedSpotIndices__sceneForwardLights), (cast SceneForwardLights.scratchSelectedSpotScores__sceneForwardLights)) : Float);
+    pointCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights(({ final __callArgument0:Dynamic = points; __callArgument0; }), ({ final __callArgument1:Dynamic = bounds; __callArgument1; }), ({ final __callArgument2:Dynamic = SceneForwardLights.scratchSelectedPointLights__sceneForwardLights; __callArgument2; }), ({ final __callArgument3:Dynamic = SceneForwardLights.scratchSelectedPointIndices__sceneForwardLights; __callArgument3; }), ({ final __callArgument4:Dynamic = SceneForwardLights.scratchSelectedPointScores__sceneForwardLights; __callArgument4; })) : Float);
+    spotCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights(({ final __callArgument5:Dynamic = spots; __callArgument5; }), ({ final __callArgument6:Dynamic = bounds; __callArgument6; }), ({ final __callArgument7:Dynamic = SceneForwardLights.scratchSelectedSpotLights__sceneForwardLights; __callArgument7; }), ({ final __callArgument8:Dynamic = SceneForwardLights.scratchSelectedSpotIndices__sceneForwardLights; __callArgument8; }), ({ final __callArgument9:Dynamic = SceneForwardLights.scratchSelectedSpotScores__sceneForwardLights; __callArgument9; })) : Float);
     outPoints = (cast out : Scene3DForwardLightSelection).point;
     outSpots = (cast out : Scene3DForwardLightSelection).spot;
     outIndices = (cast out : Scene3DForwardLightSelection).indices;
@@ -57,7 +57,7 @@ class SceneForwardLights {
       var inputIndex:Float = 0.0;
       while ((cast ((cast inputIndex : Float) < (cast _Runtime.field(lights, 'length') : Float)) : Bool)) {
         var light:flighthq._internal._Union2<PointLight, SpotLight> = flighthq._internal._StaticIndex.readArray(lights, inputIndex);
-        var score:Float = (cast getLightContributionAtBoundingSphere((cast light), (cast bounds)) : Float);
+        var score:Float = (cast getLightContributionAtBoundingSphere(({ final __callArgument10:Dynamic = light; __callArgument10; }), ({ final __callArgument11:Dynamic = bounds; __callArgument11; })) : Float);
         if ((cast !(cast _Runtime.compare(score, 0.0, '>') : Bool) : Bool)) { inputIndex++; continue; }
         var insertAt:Float = selectedCount;
         while ((cast ((cast insertAt : Float) > (cast 0.0 : Float)) : Bool)) {

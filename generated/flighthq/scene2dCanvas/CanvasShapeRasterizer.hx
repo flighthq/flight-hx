@@ -12,7 +12,7 @@ import flighthq.types.ShapeRasterizer;
 class CanvasShapeRasterizer {
   public static function createCanvasShapeRasterizer(resolvers:CanvasTextureResolvers):ShapeRasterizer {
     return cast function(context:flighthq._internal.dom.CanvasRenderingContext2D, commands:Array<ShapeCommandToken>, state:RenderState):Void {
-      renderCanvasShapeCommands((cast context), (cast state), (cast (cast commands : Array<flighthq._internal._Any>)), (cast resolvers));
+      renderCanvasShapeCommands(({ final __callArgument0:Dynamic = context; __callArgument0; }), ({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast commands : Array<flighthq._internal._Any>), ({ final __callArgument2:Dynamic = resolvers; __callArgument2; }));
     };
     return cast null;
   }

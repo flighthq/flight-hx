@@ -30,7 +30,7 @@ class GlUnlitPrelude {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAlphaCutoff'), alphaCutoff);
     if ((cast !_Runtime.strictEquals(colorMap, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
-      if ((cast !_Runtime.strictEquals((cast resolveGlTexture((cast state), (cast colorMap), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locColorMap'), 0.0); }
+      if ((cast !_Runtime.strictEquals((cast resolveGlTexture(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = colorMap; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locColorMap'), 0.0); }
     }
   }
 
@@ -43,7 +43,7 @@ class GlUnlitPrelude {
   @:noCompletion
   public static function compileGlUnlitProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlUnlitDefineKey):GlUnlitProgram {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
-    program = (cast compileGlProgram((cast gl), (cast (cast getGlUnlitVertexSourceForKey((cast key)) : String) : String), (cast (cast getGlUnlitFragmentSourceForKey((cast key)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
+    program = (cast compileGlProgram(({ final __callArgument2:Dynamic = gl; __callArgument2; }), (cast (cast getGlUnlitVertexSourceForKey(({ final __callArgument3:Dynamic = key; __callArgument3; })) : String) : String), (cast (cast getGlUnlitFragmentSourceForKey(({ final __callArgument4:Dynamic = key; __callArgument4; })) : String) : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff'), locColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color'), locColorMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorMap'), locIntensity: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_intensity'), locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
@@ -51,20 +51,20 @@ class GlUnlitPrelude {
   @:noCompletion
   public static function ensureGlUnlitProgram(state:GlRenderState, key:GlUnlitDefineKey):GlUnlitProgram {
     var fullKey:GlUnlitDefineKey = cast _Runtime.UNDEFINED;
-    fullKey = (cast _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).activeSkinnedRun }]));
-    return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlUnlitProgram)->GlUnlitProgram)((cast state), (cast 'unlit:' + Std.string((cast buildGlUnlitDefineKey((cast fullKey)) : String)) + '' : String), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlUnlitProgram return (cast compileGlUnlitProgram((cast gl), (cast fullKey)) : GlUnlitProgram))) : GlUnlitProgram);
+    fullKey = (cast _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlScene3DRuntime) : GlScene3DRuntime).activeSkinnedRun }]));
+    return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlUnlitProgram)->GlUnlitProgram)(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast 'unlit:' + Std.string((cast buildGlUnlitDefineKey(({ final __callArgument7:Dynamic = fullKey; __callArgument7; })) : String)) + '' : String), ({ final __callArgument10:Dynamic = function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlUnlitProgram return (cast compileGlUnlitProgram(({ final __callArgument8:Dynamic = gl; __callArgument8; }), ({ final __callArgument9:Dynamic = fullKey; __callArgument9; })) : GlUnlitProgram); __callArgument10; })) : GlUnlitProgram);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlUnlitFragmentSourceForKey(key:GlUnlitDefineKey):String {
-    return cast ((cast GlUnlitPrelude.buildDefineSource__glUnlitPrelude((cast key)) : String) + GlUnlitPrelude.UNLIT_FRAGMENT_BODY__glUnlitPrelude);
+    return cast ((cast GlUnlitPrelude.buildDefineSource__glUnlitPrelude(({ final __callArgument11:Dynamic = key; __callArgument11; })) : String) + GlUnlitPrelude.UNLIT_FRAGMENT_BODY__glUnlitPrelude);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlUnlitVertexSourceForKey(key:GlUnlitDefineKey):String {
-    return cast (((cast GlUnlitPrelude.buildDefineSource__glUnlitPrelude((cast key)) : String) + _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + GlUnlitPrelude.UNLIT_VERTEX_BODY__glUnlitPrelude);
+    return cast (((cast GlUnlitPrelude.buildDefineSource__glUnlitPrelude(({ final __callArgument12:Dynamic = key; __callArgument12; })) : String) + _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + GlUnlitPrelude.UNLIT_VERTEX_BODY__glUnlitPrelude);
     return cast null;
   }
 

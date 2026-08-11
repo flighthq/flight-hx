@@ -15,19 +15,19 @@ class Md2Load {
       flighthq._internal._Async.protect(function():Dynamic {
         var bytes:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
         var document:Scene3DDocument = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast loadScene3DDocumentBytesFromUrl((cast url : String), (cast options)) : flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>>), function(__awaitValue0:Dynamic):Dynamic {
-          bytes = __awaitValue0;
-          var __flowBranch1:Dynamic;
+        return flighthq._internal._Async.flatMap((cast loadScene3DDocumentBytesFromUrl((cast url : String), ({ final __callArgument7:Dynamic = options; __callArgument7; })) : flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>>), function(__awaitValue3:Dynamic):Dynamic {
+          bytes = __awaitValue3;
+          var __flowBranch4:Dynamic;
           if ((cast _Runtime.strictEquals(bytes, null) : Bool)) {
-            __flowBranch1 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch1 = flighthq._internal._Async.flowNormal();
+            __flowBranch4 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
-            document = (cast parseMd2((cast bytes), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Scene3DDocument);
-            setScene3DDocumentResourceBasePathFromUrl((cast document), (cast url : String));
+          return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
+            document = (cast parseMd2(({ final __callArgument5:Dynamic = bytes; __callArgument5; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene3DDocument);
+            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument6:Dynamic = document; __callArgument6; }), (cast url : String));
             return flighthq._internal._Async.flowReturn(document);
           });
         });

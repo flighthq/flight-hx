@@ -31,9 +31,9 @@ class ClearcoatPbrGlExtension {
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightClearcoat' : String), (cast _Runtime.field(extension, 'clearcoat') : Float));
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightClearcoatRoughness' : String), (cast _Runtime.field(extension, 'clearcoatRoughness') : Float));
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightClearcoatNormalScale' : String), (cast _Runtime.field(extension, 'clearcoatNormalScale') : Float));
-    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension((cast context), (cast 'Clearcoat' : String), (cast _Runtime.field(extension, 'clearcoatMap')), (cast _Runtime.field(extension, 'clearcoatMapUvSet')));
-    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension((cast context), (cast 'ClearcoatRoughness' : String), (cast _Runtime.field(extension, 'clearcoatRoughnessMap')), (cast _Runtime.field(extension, 'clearcoatRoughnessMapUvSet')));
-    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension((cast context), (cast 'ClearcoatNormal' : String), (cast _Runtime.field(extension, 'clearcoatNormalMap')), (cast _Runtime.field(extension, 'clearcoatNormalMapUvSet')));
+    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension(({ final __callArgument0:Dynamic = context; __callArgument0; }), (cast 'Clearcoat' : String), (cast _Runtime.field(extension, 'clearcoatMap') : Dynamic), _Runtime.field(extension, 'clearcoatMapUvSet'));
+    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension(({ final __callArgument1:Dynamic = context; __callArgument1; }), (cast 'ClearcoatRoughness' : String), (cast _Runtime.field(extension, 'clearcoatRoughnessMap') : Dynamic), _Runtime.field(extension, 'clearcoatRoughnessMapUvSet'));
+    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension(({ final __callArgument2:Dynamic = context; __callArgument2; }), (cast 'ClearcoatNormal' : String), (cast _Runtime.field(extension, 'clearcoatNormalMap') : Dynamic), _Runtime.field(extension, 'clearcoatNormalMapUvSet'));
   }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):GlPbrExtensionShaderContribution {
     var extension:ClearcoatPbrExtension = cast _Runtime.UNDEFINED;
     var factorMap:Bool = cast _Runtime.UNDEFINED;
@@ -51,11 +51,11 @@ class ClearcoatPbrGlExtension {
   } });
 
   public static function registerGlClearcoatPbrExtension(state:GlRenderState):Void {
-    registerGlPbrExtension((cast state), (cast ClearcoatPbrExtensionKind : String), (cast clearcoatPbrGlExtension));
+    registerGlPbrExtension(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast ClearcoatPbrExtensionKind : String), ({ final __callArgument4:Dynamic = clearcoatPbrGlExtension; __callArgument4; }));
   }
 
   public static function bindMap__clearcoatPbrGlExtension(context:GlPbrExtensionBindContext, name:String, texture:Null<Texture>, uvSet:PbrUvSet):Void {
-    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flight' + Std.string(name) + 'Map' : String), (cast 'u_flight' + Std.string(name) + 'MapUvSet' : String), (cast 'u_flight' + Std.string(name) + 'MapTransform' : String), (cast texture), (cast uvSet));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flight' + Std.string(name) + 'Map' : String), (cast 'u_flight' + Std.string(name) + 'MapUvSet' : String), (cast 'u_flight' + Std.string(name) + 'MapTransform' : String), (cast texture : Dynamic), ({ final __callArgument5:Dynamic = uvSet; __callArgument5; }));
   }
 
   public static function mapDeclarations__clearcoatPbrGlExtension(name:String, enabled:Bool):String {

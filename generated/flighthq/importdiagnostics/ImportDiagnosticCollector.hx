@@ -10,7 +10,7 @@ class ImportDiagnosticCollector {
   public static function collectImportDiagnostics(run:Array<ImportDiagnostic>->Void):Array<ImportDiagnostic> {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
     diagnostics = (cast cast ([] : Array<Dynamic>));
-    run((cast diagnostics));
+    run(({ final __callArgument0:Dynamic = diagnostics; __callArgument0; }));
     return cast diagnostics;
     return cast null;
   }

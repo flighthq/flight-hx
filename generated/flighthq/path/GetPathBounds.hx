@@ -69,7 +69,7 @@ class GetPathBounds {
           var ax:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float));
           var ay:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float));
           (di = cast ((di + 4.0) : Dynamic));
-          GetPathBounds.expandQuadraticBounds__getPathBounds((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast ax : Float), (cast ay : Float), (cast expand));
+          GetPathBounds.expandQuadraticBounds__getPathBounds((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast ax : Float), (cast ay : Float), ({ final __callArgument0:Dynamic = expand; __callArgument0; }));
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO) : Bool)) {
@@ -80,7 +80,7 @@ class GetPathBounds {
           var ax:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 4.0) : Float));
           var ay:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 5.0) : Float));
           (di = cast ((di + 6.0) : Dynamic));
-          GetPathBounds.expandCubicBounds__getPathBounds((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast ax : Float), (cast ay : Float), (cast expand));
+          GetPathBounds.expandCubicBounds__getPathBounds((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast ax : Float), (cast ay : Float), ({ final __callArgument1:Dynamic = expand; __callArgument1; }));
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
         } } } } } }
@@ -144,12 +144,12 @@ class GetPathBounds {
 
   public static function expandCubicBounds__getPathBounds(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x3:Float, y3:Float, expand:Float->Float->Void):Void {
     expand((cast x3 : Float), (cast y3 : Float));
-    GetPathBounds.cubicExtremumRoots__getPathBounds((cast x0 : Float), (cast c1x : Float), (cast c2x : Float), (cast x3 : Float), (cast function(t:Float):Void {
+    GetPathBounds.cubicExtremumRoots__getPathBounds((cast x0 : Float), (cast c1x : Float), (cast c2x : Float), (cast x3 : Float), ({ final __callArgument2:Dynamic = function(t:Float):Void {
       expand((cast (cast GetPathBounds.evalCubic__getPathBounds((cast x0 : Float), (cast c1x : Float), (cast c2x : Float), (cast x3 : Float), (cast t : Float)) : Float) : Float), (cast (cast GetPathBounds.evalCubic__getPathBounds((cast y0 : Float), (cast c1y : Float), (cast c2y : Float), (cast y3 : Float), (cast t : Float)) : Float) : Float));
-    }));
-    GetPathBounds.cubicExtremumRoots__getPathBounds((cast y0 : Float), (cast c1y : Float), (cast c2y : Float), (cast y3 : Float), (cast function(t:Float):Void {
+    }; __callArgument2; }));
+    GetPathBounds.cubicExtremumRoots__getPathBounds((cast y0 : Float), (cast c1y : Float), (cast c2y : Float), (cast y3 : Float), ({ final __callArgument3:Dynamic = function(t:Float):Void {
       expand((cast (cast GetPathBounds.evalCubic__getPathBounds((cast x0 : Float), (cast c1x : Float), (cast c2x : Float), (cast x3 : Float), (cast t : Float)) : Float) : Float), (cast (cast GetPathBounds.evalCubic__getPathBounds((cast y0 : Float), (cast c1y : Float), (cast c2y : Float), (cast y3 : Float), (cast t : Float)) : Float) : Float));
-    }));
+    }; __callArgument3; }));
   }
 
   public static function expandQuadraticBounds__getPathBounds(x0:Float, y0:Float, cx:Float, cy:Float, x2:Float, y2:Float, expand:Float->Float->Void):Void {

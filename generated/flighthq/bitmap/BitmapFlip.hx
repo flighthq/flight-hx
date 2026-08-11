@@ -17,7 +17,7 @@ class BitmapFlip {
     h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     data = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     stride = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
-    if ((cast (cast BitmapFlip.isSameRegion__bitmapFlip((cast dest), (cast source)) : Bool) : Bool)) {
+    if ((cast (cast BitmapFlip.isSameRegion__bitmapFlip(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; })) : Bool) : Bool)) {
       var half:Float = (_Runtime.toInt32(w) >> 1);
       {
         var py:Float = 0.0;
@@ -30,7 +30,7 @@ class BitmapFlip {
               var xa:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
               var xb:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), ((w - 1.0) - px));
               if ((cast ((cast ((cast ((cast ((cast xa : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast xa : Float) >= (cast stride : Float)) : Bool)) : Bool) || (cast ((cast xb : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast xb : Float) >= (cast stride : Float)) : Bool)) : Bool)) { px++; continue; }
-              BitmapFlip.swapPixels__bitmapFlip((cast data), (cast (((y * stride) + xa) * 4.0) : Float), (cast (((y * stride) + xb) * 4.0) : Float));
+              BitmapFlip.swapPixels__bitmapFlip(({ final __callArgument2:Dynamic = data; __callArgument2; }), (cast (((y * stride) + xa) * 4.0) : Float), (cast (((y * stride) + xb) * 4.0) : Float));
               px++;
             }
           }
@@ -39,8 +39,8 @@ class BitmapFlip {
       }
       return;
     }
-    BitmapFlip.copyMirrored__bitmapFlip((cast dest), (cast source), (cast w : Float), (cast h : Float), (cast true : Bool), (cast false : Bool));
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    BitmapFlip.copyMirrored__bitmapFlip(({ final __callArgument3:Dynamic = dest; __callArgument3; }), ({ final __callArgument4:Dynamic = source; __callArgument4; }), (cast w : Float), (cast h : Float), (cast true : Bool), (cast false : Bool));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function flipBitmapVertical(dest:BitmapRegion, source:BitmapRegion):Void {
@@ -52,7 +52,7 @@ class BitmapFlip {
     h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
     data = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     stride = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
-    if ((cast (cast BitmapFlip.isSameRegion__bitmapFlip((cast dest), (cast source)) : Bool) : Bool)) {
+    if ((cast (cast BitmapFlip.isSameRegion__bitmapFlip(({ final __callArgument5:Dynamic = dest; __callArgument5; }), ({ final __callArgument6:Dynamic = source; __callArgument6; })) : Bool) : Bool)) {
       var half:Float = (_Runtime.toInt32(h) >> 1);
       {
         var py:Float = 0.0;
@@ -65,7 +65,7 @@ class BitmapFlip {
             while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
               var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
               if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast stride : Float)) : Bool)) : Bool)) { px++; continue; }
-              BitmapFlip.swapPixels__bitmapFlip((cast data), (cast (((yTop * stride) + x) * 4.0) : Float), (cast (((yBottom * stride) + x) * 4.0) : Float));
+              BitmapFlip.swapPixels__bitmapFlip(({ final __callArgument7:Dynamic = data; __callArgument7; }), (cast (((yTop * stride) + x) * 4.0) : Float), (cast (((yBottom * stride) + x) * 4.0) : Float));
               px++;
             }
           }
@@ -74,8 +74,8 @@ class BitmapFlip {
       }
       return;
     }
-    BitmapFlip.copyMirrored__bitmapFlip((cast dest), (cast source), (cast w : Float), (cast h : Float), (cast false : Bool), (cast true : Bool));
-    invalidateBitmap((cast _Runtime.field(dest, 'bitmap')));
+    BitmapFlip.copyMirrored__bitmapFlip(({ final __callArgument8:Dynamic = dest; __callArgument8; }), ({ final __callArgument9:Dynamic = source; __callArgument9; }), (cast w : Float), (cast h : Float), (cast false : Bool), (cast true : Bool));
+    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
   }
 
   public static function copyMirrored__bitmapFlip(dest:BitmapRegion, source:BitmapRegion, w:Float, h:Float, mirrorX:Bool, mirrorY:Bool):Void {

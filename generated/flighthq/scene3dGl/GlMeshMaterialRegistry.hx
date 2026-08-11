@@ -15,19 +15,19 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 class GlMeshMaterialRegistry {
   @:noCompletion
   public static function getGlMeshMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMeshMaterialRenderer> {
-    return cast _Runtime.coalesce(((cast (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).materialRegistry : flighthq._internal._Map<String, GlMeshMaterialRenderer>).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast (cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : GlScene3DRuntime).materialRegistry : flighthq._internal._Map<String, GlMeshMaterialRenderer>).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
   public static function registerGlMeshMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMeshMaterialRenderer):Void {
-    ((cast (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).materialRegistry : flighthq._internal._Map<String, GlMeshMaterialRenderer>).set(kind, (cast renderer)));
+    ((cast (cast (cast getGlScene3DRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : GlScene3DRuntime) : GlScene3DRuntime).materialRegistry : flighthq._internal._Map<String, GlMeshMaterialRenderer>).set(kind, (cast renderer)));
   }
 
   @:noCompletion
   public static function resolveGlMeshMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMeshMaterialRenderer> {
     var registry:flighthq._internal._Map<String, GlMeshMaterialRenderer> = cast _Runtime.UNDEFINED;
-    registry = (cast (cast getGlScene3DRuntime((cast state)) : GlScene3DRuntime) : GlScene3DRuntime).materialRegistry;
+    registry = (cast (cast getGlScene3DRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlScene3DRuntime) : GlScene3DRuntime).materialRegistry;
     if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
       var renderer:Null<GlMeshMaterialRenderer> = ((cast registry : flighthq._internal._Map<String, GlMeshMaterialRenderer>).get(_Runtime.field(material, 'kind')));
       if ((cast !_Runtime.strictEquals(renderer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast renderer; }

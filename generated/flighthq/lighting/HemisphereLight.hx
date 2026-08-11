@@ -12,12 +12,12 @@ import flighthq.types._internal._HemisphereLightValues.HemisphereLightKind;
 
 class HemisphereLight {
   public static function cloneHemisphereLight(source:flighthq.types.HemisphereLight):flighthq.types.HemisphereLight {
-    return cast (cast createHemisphereLight((cast { groundColor: _Runtime.field(source, 'groundColor'), intensity: _Runtime.field(source, 'intensity'), skyColor: _Runtime.field(source, 'skyColor') })) : flighthq.types.HemisphereLight);
+    return cast (cast createHemisphereLight(({ final __callArgument0:Dynamic = { groundColor: _Runtime.field(source, 'groundColor'), intensity: _Runtime.field(source, 'intensity'), skyColor: _Runtime.field(source, 'skyColor') }; __callArgument0; })) : flighthq.types.HemisphereLight);
     return cast null;
   }
 
   public static function createHemisphereLight(?options:HemisphereLightOptions):flighthq.types.HemisphereLight {
-    return cast (cast createEntity((cast { groundColor: _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var groundColor:Null<Float>; }).groundColor; }), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0), kind: HemisphereLightKind, skyColor: _Runtime.coalesce(({ final __structural2 = options; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var skyColor:Null<Float>; }).skyColor; }), function():Dynamic return cast 4294967295.0) })) : { >Entity, var groundColor:Float; var intensity:Float; var kind:String; var skyColor:Float; });
+    return cast (cast createEntity(({ final __callArgument4:Dynamic = { groundColor: _Runtime.coalesce(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var groundColor:Null<Float>; }).groundColor; }), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(({ final __structural2 = options; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0), kind: HemisphereLightKind, skyColor: _Runtime.coalesce(({ final __structural3 = options; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var skyColor:Null<Float>; }).skyColor; }), function():Dynamic return cast 4294967295.0) }; __callArgument4; })) : { >Entity, var groundColor:Float; var intensity:Float; var kind:String; var skyColor:Float; });
     return cast null;
   }
 }

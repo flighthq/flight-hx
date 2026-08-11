@@ -19,8 +19,8 @@ class Scene2DDocumentImporterRegistry {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(registry, 'entries'), 'length') : Float)) : Bool)) {
         var entry:Scene2DDocumentImporterEntry = flighthq._internal._StaticIndex.readArray(_Runtime.field(registry, 'entries'), i);
-        if ((cast !(cast (cast entry : Scene2DDocumentImporterEntry).matches((cast source), (cast context)) : Bool) : Bool)) { i++; continue; }
-        var document:Null<Scene2DDocument> = (cast entry : Scene2DDocumentImporterEntry).importDocument((cast source), (cast context));
+        if ((cast !(cast (cast entry : Scene2DDocumentImporterEntry).matches(({ final __callArgument0:Dynamic = source; __callArgument0; }), ({ final __callArgument1:Dynamic = context; __callArgument1; })) : Bool) : Bool)) { i++; continue; }
+        var document:Null<Scene2DDocument> = (cast entry : Scene2DDocumentImporterEntry).importDocument(({ final __callArgument2:Dynamic = source; __callArgument2; }), ({ final __callArgument3:Dynamic = context; __callArgument3; }));
         if ((cast ((cast !_Runtime.strictEquals(document, null) : Bool) && (cast _Runtime.strictEquals((cast document : Scene2DDocument).sourceKind, null) : Bool)) : Bool)) { ((cast document : Scene2DDocument).sourceKind = (cast entry : Scene2DDocumentImporterEntry).kind); }
         return cast document;
         i++;
@@ -31,7 +31,7 @@ class Scene2DDocumentImporterRegistry {
   }
 
   public static function createScene2DDocumentImporterRegistry():flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry {
-    return cast (cast createEntity((cast { entries: cast ([] : Array<Dynamic>) })) : { >Entity, var entries:Array<flighthq._internal._Any>; });
+    return cast (cast createEntity(({ final __callArgument4:Dynamic = { entries: cast ([] : Array<Dynamic>) }; __callArgument4; })) : { >Entity, var entries:Array<flighthq._internal._Any>; });
     return cast null;
   }
 

@@ -33,7 +33,7 @@ class BitmapText {
   public static function computeBitmapTextLocalBoundsRectangle(out:Rectangle, source:flighthq.types.BitmapText):Void {
     var runtime:BitmapTextRuntime = cast _Runtime.UNDEFINED;
     var bounds:Null<Rectangle> = cast _Runtime.UNDEFINED;
-    runtime = (cast getNode2DRuntime((cast source)) : BitmapTextRuntime);
+    runtime = (cast getNode2DRuntime(({ final __callArgument0:Dynamic = source; __callArgument0; })) : BitmapTextRuntime);
     bounds = (cast runtime : BitmapTextRuntime).localBoundsRectangle;
     if ((cast _Runtime.strictEquals(bounds, null) : Bool)) {
       ((cast out : Rectangle).x = 0.0);
@@ -42,18 +42,18 @@ class BitmapText {
       ((cast out : Rectangle).height = 0.0);
       return;
     }
-    copyRectangle((cast out), (cast bounds));
+    copyRectangle(({ final __callArgument1:Dynamic = out; __callArgument1; }), ({ final __callArgument2:Dynamic = bounds; __callArgument2; }));
   }
 
   public static function createBitmapText(glyphSource:Null<GlyphSource>, ?options:BitmapTextOptions):flighthq.types.BitmapText {
     var bitmapText:flighthq.types.BitmapText = cast _Runtime.UNDEFINED;
     var data:BitmapTextData = cast _Runtime.UNDEFINED;
     var runtime:BitmapTextRuntime = cast _Runtime.UNDEFINED;
-    bitmapText = (cast createNode2D((cast BitmapTextKind : String), (cast _Runtime.field(_Runtime, 'UNDEFINED')), (cast createBitmapTextData), (cast function(__unused0:Null<flighthq._internal._Any>):BitmapTextRuntime return createBitmapTextRuntime())) : flighthq.types.BitmapText);
+    bitmapText = (cast createNode2D((cast BitmapTextKind : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), (cast createBitmapTextData : Dynamic), (cast function(__unused0:Null<flighthq._internal._Any>):BitmapTextRuntime return createBitmapTextRuntime() : Dynamic)) : flighthq.types.BitmapText);
     data = (cast bitmapText : flighthq.types.BitmapText).data;
     ((cast data : BitmapTextData).glyphSource = glyphSource);
-    if ((cast !_Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { BitmapText.applyBitmapTextOptions__bitmapText((cast data), (cast options)); }
-    runtime = (cast getNode2DRuntime((cast bitmapText)) : BitmapTextRuntime);
+    if ((cast !_Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { BitmapText.applyBitmapTextOptions__bitmapText(({ final __callArgument3:Dynamic = data; __callArgument3; }), ({ final __callArgument4:Dynamic = options; __callArgument4; })); }
+    runtime = (cast getNode2DRuntime(({ final __callArgument5:Dynamic = bitmapText; __callArgument5; })) : BitmapTextRuntime);
     _Runtime.callProperty((cast runtime : BitmapTextRuntime).pages, 'push', cast ([(cast BitmapText.createBitmapTextPage__bitmapText() : BitmapTextPage)] : Array<Dynamic>));
     return cast bitmapText;
     return cast null;
@@ -61,14 +61,14 @@ class BitmapText {
 
   @:noCompletion
   public static function createBitmapTextData(?data:flighthq._internal._Partial<BitmapTextData>):BitmapTextData {
-    return cast { align: _Runtime.coalesce(({ final __structural0 = data; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var align:Null<String>; }).align; }), function():Dynamic return cast 'left'), glyphSource: _Runtime.coalesce(({ final __structural1 = data; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var glyphSource:Null<GlyphSource>; }).glyphSource; }), function():Dynamic return cast null), letterSpacing: _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var letterSpacing:Null<Float>; }).letterSpacing; }), function():Dynamic return cast 0.0), lineHeight: _Runtime.coalesce(({ final __structural3 = data; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var lineHeight:Null<Float>; }).lineHeight; }), function():Dynamic return cast 1.0), text: _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var text:Null<String>; }).text; }), function():Dynamic return cast ''), wrapWidth: _Runtime.coalesce(({ final __structural5 = data; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var wrapWidth:Null<Float>; }).wrapWidth; }), function():Dynamic return cast null) };
+    return cast { align: _Runtime.coalesce(({ final __structural6 = data; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var align:Null<String>; }).align; }), function():Dynamic return cast 'left'), glyphSource: _Runtime.coalesce(({ final __structural7 = data; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var glyphSource:Null<GlyphSource>; }).glyphSource; }), function():Dynamic return cast null), letterSpacing: _Runtime.coalesce(({ final __structural8 = data; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var letterSpacing:Null<Float>; }).letterSpacing; }), function():Dynamic return cast 0.0), lineHeight: _Runtime.coalesce(({ final __structural9 = data; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var lineHeight:Null<Float>; }).lineHeight; }), function():Dynamic return cast 1.0), text: _Runtime.coalesce(({ final __structural10 = data; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var text:Null<String>; }).text; }), function():Dynamic return cast ''), wrapWidth: _Runtime.coalesce(({ final __structural11 = data; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { @:optional var wrapWidth:Null<Float>; }).wrapWidth; }), function():Dynamic return cast null) };
     return cast null;
   }
 
   @:noCompletion
   public static function createBitmapTextRuntime():BitmapTextRuntime {
     var runtime:BitmapTextRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast createNode2DRuntime((cast BitmapText.defaultMethods__bitmapText)) : BitmapTextRuntime);
+    runtime = (cast createNode2DRuntime(({ final __callArgument12:Dynamic = BitmapText.defaultMethods__bitmapText; __callArgument12; })) : BitmapTextRuntime);
     ((cast runtime : BitmapTextRuntime).localBoundsRectangle = null);
     ((cast runtime : BitmapTextRuntime).pages = cast ([] : Array<Dynamic>));
     return cast runtime;
@@ -77,23 +77,23 @@ class BitmapText {
 
   public static function getBitmapTextBounds(source:flighthq.types.BitmapText):Rectangle {
     var out:Rectangle = cast _Runtime.UNDEFINED;
-    out = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : Rectangle);
-    computeBitmapTextLocalBoundsRectangle((cast out), (cast source));
+    out = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);
+    computeBitmapTextLocalBoundsRectangle(({ final __callArgument13:Dynamic = out; __callArgument13; }), ({ final __callArgument14:Dynamic = source; __callArgument14; }));
     return cast out;
     return cast null;
   }
 
   public static function getBitmapTextPages(source:flighthq.types.BitmapText):Array<BitmapTextPage> {
-    return cast (cast (cast getNode2DRuntime((cast source)) : BitmapTextRuntime) : BitmapTextRuntime).pages;
+    return cast (cast (cast getNode2DRuntime(({ final __callArgument15:Dynamic = source; __callArgument15; })) : BitmapTextRuntime) : BitmapTextRuntime).pages;
     return cast null;
   }
 
   public static function reserveBitmapText(target:flighthq.types.BitmapText, glyphCapacity:Float):Void {
     var runtime:BitmapTextRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getNode2DRuntime((cast target)) : BitmapTextRuntime);
+    runtime = (cast getNode2DRuntime(({ final __callArgument16:Dynamic = target; __callArgument16; })) : BitmapTextRuntime);
     for (page in _Runtime.iterable((cast runtime : BitmapTextRuntime).pages)) {
-      ((cast page : BitmapTextPage).ids = (cast reserveUint16Array((cast (cast page : BitmapTextPage).ids), (cast glyphCapacity : Float)) : flighthq._internal._UInt16Array));
-      ((cast page : BitmapTextPage).transforms = (cast reserveFloat32Array((cast (cast page : BitmapTextPage).transforms), (cast (glyphCapacity * BitmapText.BITMAP_TEXT_TRANSFORM_STRIDE__bitmapText) : Float)) : flighthq._internal._Float32Array));
+      ((cast page : BitmapTextPage).ids = (cast reserveUint16Array((cast page : BitmapTextPage).ids, (cast glyphCapacity : Float)) : flighthq._internal._UInt16Array));
+      ((cast page : BitmapTextPage).transforms = (cast reserveFloat32Array((cast page : BitmapTextPage).transforms, (cast (glyphCapacity * BitmapText.BITMAP_TEXT_TRANSFORM_STRIDE__bitmapText) : Float)) : flighthq._internal._Float32Array));
     }
   }
 
@@ -131,12 +131,12 @@ class BitmapText {
 
   public static function copyLocalBoundsRectangle__bitmapText(out:Rectangle, source:Node<Dynamic>):Void {
     var runtime:BitmapTextRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getNode2DRuntime((cast (cast source : flighthq.types.BitmapText))) : BitmapTextRuntime);
-    if ((cast !_Runtime.strictEquals((cast runtime : BitmapTextRuntime).localBoundsRectangle, null) : Bool)) { copyRectangle((cast out), (cast (cast runtime : BitmapTextRuntime).localBoundsRectangle)); }
+    runtime = (cast getNode2DRuntime(({ final __callArgument19:Dynamic = (cast source : flighthq.types.BitmapText); __callArgument19; })) : BitmapTextRuntime);
+    if ((cast !_Runtime.strictEquals((cast runtime : BitmapTextRuntime).localBoundsRectangle, null) : Bool)) { copyRectangle(({ final __callArgument20:Dynamic = out; __callArgument20; }), ({ final __callArgument21:Dynamic = (cast runtime : BitmapTextRuntime).localBoundsRectangle; __callArgument21; })); }
   }
 
   public static function createBitmapTextPage__bitmapText():BitmapTextPage {
-    return cast { atlas: (cast createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED')) #else (cast null) #end) : TextureAtlas), ids: new flighthq._internal._UInt16Array(), instanceCount: 0.0, transforms: new flighthq._internal._Float32Array() };
+    return cast { atlas: (cast createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : TextureAtlas), ids: new flighthq._internal._UInt16Array(), instanceCount: 0.0, transforms: new flighthq._internal._Float32Array() };
     return cast null;
   }
 

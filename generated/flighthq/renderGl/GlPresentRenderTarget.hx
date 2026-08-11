@@ -16,17 +16,17 @@ class GlPresentRenderTarget {
   public static function presentGlRenderTarget(state:GlRenderState, target:GlRenderTarget, ?dest:Null<GlRenderTarget>):Void {
     if (dest == null) dest = cast (null : Dynamic);
     if ((cast _Runtime.strictEquals(_Runtime.field(target, 'colorSpace'), 'linear') : Bool)) {
-      drawGlLinearToSrgbPass((cast state), (cast target), (cast dest));
+      drawGlLinearToSrgbPass(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = target; __callArgument1; }), ({ final __callArgument2:Dynamic = dest; __callArgument2; }));
       return;
     }
-    drawGlFullscreenPass((cast state), (cast (cast GlPresentRenderTarget.getGlCopyProgram__glPresentRenderTarget((cast state)) : GlFullscreenProgram)), (cast cast ([_Runtime.field(target, 'texture')] : Array<Dynamic>)), (cast dest), (cast function(__unused0:flighthq._internal.dom.WebGL2RenderingContext, __unused1:GlFullscreenProgram):Void { GlPresentRenderTarget.NOOP__glPresentRenderTarget(); }));
+    drawGlFullscreenPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast GlPresentRenderTarget.getGlCopyProgram__glPresentRenderTarget(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlFullscreenProgram), ({ final __callArgument5:Dynamic = cast ([_Runtime.field(target, 'texture')] : Array<Dynamic>); __callArgument5; }), ({ final __callArgument6:Dynamic = dest; __callArgument6; }), ({ final __callArgument7:Dynamic = function(__unused0:flighthq._internal.dom.WebGL2RenderingContext, __unused1:GlFullscreenProgram):Void { GlPresentRenderTarget.NOOP__glPresentRenderTarget(); }; __callArgument7; }));
   }
 
   public static function getGlCopyProgram__glPresentRenderTarget(state:GlRenderState):GlFullscreenProgram {
     var program:Null<GlFullscreenProgram> = cast _Runtime.UNDEFINED;
     program = ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (program = cast ((cast compileGlFullscreenProgram((cast (cast state : GlRenderState).gl), (cast GlPresentRenderTarget.COPY_FRAGMENT_SRC__glPresentRenderTarget : String)) : GlFullscreenProgram) : Dynamic));
+      (program = cast ((cast compileGlFullscreenProgram((cast state : GlRenderState).gl, (cast GlPresentRenderTarget.COPY_FRAGMENT_SRC__glPresentRenderTarget : String)) : GlFullscreenProgram) : Dynamic));
       ((cast GlPresentRenderTarget._programs__glPresentRenderTarget : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).set((cast state : GlRenderState).gl, (cast program)));
     }
     return cast program;

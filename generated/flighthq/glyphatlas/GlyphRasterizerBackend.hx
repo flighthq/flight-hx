@@ -34,7 +34,7 @@ class GlyphRasterizerBackend {
       var descent:Float = cast _Runtime.UNDEFINED;
       context = (cast GlyphRasterizerBackend._acquireGlyphRasterContext__glyphRasterizerBackend() : Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>>);
       if ((cast _Runtime.strictEquals(context, null) : Bool)) { return cast null; }
-      GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend((cast context), (cast options));
+      GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend(({ final __callArgument0:Dynamic = context; __callArgument0; }), ({ final __callArgument1:Dynamic = options; __callArgument1; }));
       metrics = flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast (['Hg'] : Array<Dynamic>));
       ascent = (cast metrics : flighthq._internal.dom.TextMetrics).fontBoundingBoxAscent;
       descent = (cast metrics : flighthq._internal.dom.TextMetrics).fontBoundingBoxDescent;
@@ -45,7 +45,7 @@ class GlyphRasterizerBackend {
       var context:Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>> = cast _Runtime.UNDEFINED;
       context = (cast GlyphRasterizerBackend._acquireGlyphRasterContext__glyphRasterizerBackend() : Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasRenderingContext2D, flighthq._internal.dom.OffscreenCanvasRenderingContext2D>>);
       if ((cast _Runtime.strictEquals(context, null) : Bool)) { return cast null; }
-      return cast (cast GlyphRasterizerBackend._rasterizeGlyphOnContext__glyphRasterizerBackend((cast context), (cast codepoint : Float), (cast options)) : Null<GlyphRasterizedBitmap>);
+      return cast (cast GlyphRasterizerBackend._rasterizeGlyphOnContext__glyphRasterizerBackend(({ final __callArgument2:Dynamic = context; __callArgument2; }), (cast codepoint : Float), ({ final __callArgument3:Dynamic = options; __callArgument3; })) : Null<GlyphRasterizedBitmap>);
       return cast _Runtime.UNDEFINED;
     } };
     return cast null;
@@ -95,7 +95,7 @@ class GlyphRasterizerBackend {
     var canvas:flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.OffscreenCanvas> = cast _Runtime.UNDEFINED;
     var image:flighthq._internal.dom.ImageData = cast _Runtime.UNDEFINED;
     text = _Runtime.fromCodePoint(codepoint);
-    GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend((cast context), (cast options));
+    GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend(({ final __callArgument4:Dynamic = context; __callArgument4; }), ({ final __callArgument5:Dynamic = options; __callArgument5; }));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
     metrics = flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([text] : Array<Dynamic>));
@@ -111,7 +111,7 @@ class GlyphRasterizerBackend {
     canvas = flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas');
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', height);
-    GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend((cast context), (cast options));
+    GlyphRasterizerBackend._applyGlyphRasterFont__glyphRasterizerBackend(({ final __callArgument6:Dynamic = context; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; }));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
     flighthq._internal.backend.Canvas2dBackend.call(context, 'clearRect', cast ([0.0, 0.0, width, height] : Array<Dynamic>));

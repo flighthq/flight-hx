@@ -46,16 +46,16 @@ class ElectronPower {
       return cast ((cast blockerId : Float) >= (cast 0.0 : Float));
       return cast _Runtime.UNDEFINED;
     }, subscribe: function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on((cast 'on-battery' : String), (cast listener));
-      (cast powerMonitor : ElectronPowerMonitor).on((cast 'on-ac' : String), (cast listener));
+      (cast powerMonitor : ElectronPowerMonitor).on((cast 'on-battery' : String), ({ final __callArgument0:Dynamic = listener; __callArgument0; }));
+      (cast powerMonitor : ElectronPowerMonitor).on((cast 'on-ac' : String), ({ final __callArgument1:Dynamic = listener; __callArgument1; }));
       return cast function():Void {
-        (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'on-battery' : String), (cast listener));
-        (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'on-ac' : String), (cast listener));
+        (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'on-battery' : String), ({ final __callArgument2:Dynamic = listener; __callArgument2; }));
+        (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'on-ac' : String), ({ final __callArgument3:Dynamic = listener; __callArgument3; }));
       };
       return cast _Runtime.UNDEFINED;
     }, subscribeLockScreen: function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on((cast 'lock-screen' : String), (cast listener));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'lock-screen' : String), (cast listener)); };
+      (cast powerMonitor : ElectronPowerMonitor).on((cast 'lock-screen' : String), ({ final __callArgument4:Dynamic = listener; __callArgument4; }));
+      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'lock-screen' : String), ({ final __callArgument5:Dynamic = listener; __callArgument5; })); };
       return cast _Runtime.UNDEFINED;
     }, subscribeLowPowerModeChange: function():Void->Void {
       return cast function():Void {
@@ -63,20 +63,20 @@ class ElectronPower {
       };
       return cast _Runtime.UNDEFINED;
     }, subscribeResume: function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on((cast 'resume' : String), (cast listener));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'resume' : String), (cast listener)); };
+      (cast powerMonitor : ElectronPowerMonitor).on((cast 'resume' : String), ({ final __callArgument6:Dynamic = listener; __callArgument6; }));
+      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'resume' : String), ({ final __callArgument7:Dynamic = listener; __callArgument7; })); };
       return cast _Runtime.UNDEFINED;
     }, subscribeSuspend: function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on((cast 'suspend' : String), (cast listener));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'suspend' : String), (cast listener)); };
+      (cast powerMonitor : ElectronPowerMonitor).on((cast 'suspend' : String), ({ final __callArgument8:Dynamic = listener; __callArgument8; }));
+      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'suspend' : String), ({ final __callArgument9:Dynamic = listener; __callArgument9; })); };
       return cast _Runtime.UNDEFINED;
     }, subscribeThermalStateChange: function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on((cast 'thermal-state-change' : String), (cast listener));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'thermal-state-change' : String), (cast listener)); };
+      (cast powerMonitor : ElectronPowerMonitor).on((cast 'thermal-state-change' : String), ({ final __callArgument10:Dynamic = listener; __callArgument10; }));
+      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'thermal-state-change' : String), ({ final __callArgument11:Dynamic = listener; __callArgument11; })); };
       return cast _Runtime.UNDEFINED;
     }, subscribeUnlockScreen: function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on((cast 'unlock-screen' : String), (cast listener));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'unlock-screen' : String), (cast listener)); };
+      (cast powerMonitor : ElectronPowerMonitor).on((cast 'unlock-screen' : String), ({ final __callArgument12:Dynamic = listener; __callArgument12; }));
+      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener((cast 'unlock-screen' : String), ({ final __callArgument13:Dynamic = listener; __callArgument13; })); };
       return cast _Runtime.UNDEFINED;
     }, setKeepAwake: function(enabled:Bool):Bool {
       try {
