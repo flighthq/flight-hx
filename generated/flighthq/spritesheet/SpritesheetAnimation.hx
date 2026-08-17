@@ -19,13 +19,13 @@ class SpritesheetAnimation {
   }
 
   public static function createSpritesheetAnimationFromFrameNames(spritesheet:Spritesheet, pattern:Dynamic, ?options:flighthq._internal._Partial<flighthq._internal._Pick<flighthq.types.SpritesheetAnimation, String>>):Null<flighthq.types.SpritesheetAnimation> {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:Spritesheet = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
     var matchedIndices:Array<Float> = cast _Runtime.UNDEFINED;
     __destructure0 = spritesheet;
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    frames = _Runtime.field(__destructure0, 'frames');
+    atlas = __destructure0.atlas;
+    frames = __destructure0.frames;
     if ((cast _Runtime.strictEquals(atlas, null) : Bool)) { return cast null; }
     matchedIndices = (cast cast ([] : Array<Dynamic>));
     {

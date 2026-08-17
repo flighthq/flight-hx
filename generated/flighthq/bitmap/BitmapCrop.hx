@@ -25,10 +25,10 @@ class BitmapCrop {
     var sd:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     sw = source.width;
     sh = source.height;
-    rx = HxMath.round(_Runtime.field(rect, 'x'));
-    ry = HxMath.round(_Runtime.field(rect, 'y'));
-    rw = HxMath.max(0.0, HxMath.round(_Runtime.field(rect, 'width')));
-    rh = HxMath.max(0.0, HxMath.round(_Runtime.field(rect, 'height')));
+    rx = HxMath.round(rect.x);
+    ry = HxMath.round(rect.y);
+    rw = HxMath.max(0.0, HxMath.round(rect.width));
+    rh = HxMath.max(0.0, HxMath.round(rect.height));
     data = new flighthq._internal._UInt8ClampedArray(((rw * rh) * 4.0));
     sd = source.data;
     {

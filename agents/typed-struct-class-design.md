@@ -1,6 +1,6 @@
 # Typed Struct Class-Emission Feasibility
 
-Status: the `Camera2D` cpp pilot passed every Gate 1-3 acceptance check. Gate 4 retains `ParticleEmitterState`; `ParticleEmitterData` was reverted after the provenance audit proved its parent ingress can carry anonymous data into a class-typed read. No Gate-5 schema is enabled. The deterministic census covers all 404 eligible canonical typed-struct schemas at the pinned upstream commit.
+Status: the `Camera2D` cpp pilot passed every Gate 1-3 acceptance check. Gate 4 retains `ParticleEmitterState`; `ParticleEmitterData` was reverted after the provenance audit proved its parent ingress can carry anonymous data into a class-typed read. No Gate-5 schema is enabled. The deterministic census covers all 1,536 eligible canonical typed-struct schemas at the pinned upstream commit.
 
 ## Decision
 
@@ -50,33 +50,41 @@ That taint is realizable on cpp. The generated `ParticleEmitter` and `ParticleEm
 
 Gate 4 therefore uses the revert resolution: `ParticleEmitterData` remains a typedef, and the allowlist retains only the provenance-closed `@flighthq/types:upstream/packages/types/src/ParticleEmitterState.ts#ParticleEmitterState`. The full generated-source SHA is `7d3a64de84e772382b9d85b7adbf02694f0f4e820ebf667f61d6f3bec15103c9`. Relative to the accepted Camera2D parent, the generated delta is exactly the `ParticleEmitterState` type declaration and factory module. Relative to the rejected two-schema experiment at `4f77361fa772d1b009930aecf87fbb3cc14483f0827fcb78d7061f00b1655ba0`, the revert changes exactly the `ParticleEmitterData` type declaration and factory module.
 
+## Rectangle disposition
+
+`RectangleLike` remains a strict structural four-field typedef on every target, and generated geometry operations now use direct typed fields. This removes Haxe-level `_Runtime.field`/`setField` traffic without changing the API accepted by callers.
+
+It is not safe to add either Rectangle identity to the cpp class allowlist yet. `Rectangle` has a production cross-schema transfer through `Entity` and strict-identity observations; because it is not mechanically compatible, it is absent from the nominal-provenance candidate set. `RectangleLike` is mechanically compatible in isolation but is not provenance-closed: its `Scale9Shape -> data -> scale9Grid` containment path inherits cross-schema normalization. An hxcpp cast would not repair either representation and a copying adapter would break the aliasing contract. The generator therefore keeps the structural typedef and fails `validateCppStructInitProvenance` if either identity is proposed for nominal emission.
+
+That boundary is observable in the current portable cpp output: `geometry/Rectangle.cpp` contains 122 `__Field` and 62 `__SetField` operations. They are hxcpp's representation of the intentionally structural typedef, not reflective access emitted by the Haxe generator. Removing them requires closing provenance and enabling a real nominal class; routing them through `_Runtime` or adding an unchecked cast would only hide the same operation or make the representation unsound.
+
 ## Census result
 
-The checked-in source of truth is [`reports/typed-struct-classes.json`](../reports/typed-struct-classes.json). It contains one sorted record per canonical schema plus sorted source locations for every migration or observability finding. [`reports/typed-struct-classes.md`](../reports/typed-struct-classes.md) is the compact 404-row review table. Both are generator outputs, not manually maintained inventories.
+The checked-in source of truth is [`reports/typed-struct-classes.json`](../reports/typed-struct-classes.json). It contains one sorted record per canonical schema plus sorted source locations for every migration or observability finding. [`reports/typed-struct-classes.md`](../reports/typed-struct-classes.md) is the compact 1,536-row review table. Both are generator outputs, not manually maintained inventories.
 
 | Surface | Sites or fields | Affected schemas | Direct sites on affected schemas |
 | --- | --: | --: | --: |
-| Eligible canonical schemas | 404 | 404 | 10,257 |
-| Production object literals | 530 | 212 | 6,751 |
-| Plain production object literals | 490 | 209 | — |
-| Production object literals with spread | 40 | 15 | 1,143 |
-| Production object literals with computed keys | 0 | 0 | 0 |
-| Cross-schema structural transfers | 117 | 15 targets | 547 |
-| Anonymous structural transfers | 160 | 50 | 5,186 |
-| Dynamic ingresses | 55 | 8 | 1,101 |
-| Declared optional fields | 402 | 129 | — |
-| Required fields whose type includes `undefined` | 1 | 1 | — |
-| Object literals omitting optional fields | 86 | 21 | 331 |
-| Production object spreads | 40 | 13 sources | 1,133 |
+| Eligible canonical schemas | 1,536 | 1,536 | 11,816 |
+| Production object literals | 1,842 | 881 | 4,782 |
+| Plain production object literals | 1,666 | 796 | 4,721 |
+| Production object literals with spread | 174 | 119 | 1,232 |
+| Production object literals with computed keys | 2 | 2 | 0 |
+| Cross-schema structural transfers | 1,391 | 275 targets | 6,376 |
+| Anonymous structural transfers | 148 | 53 | 244 |
+| Dynamic ingresses | 67 | 31 | 979 |
+| Declared optional fields | 1,970 | 535 | 1,119 |
+| Required fields whose type includes `undefined` | 2 | 2 | 6 |
+| Object literals omitting optional fields | 392 | 149 | 411 |
+| Production object spreads | 100 | 42 sources | 1,181 |
 | Production object rests | 0 | 0 | 0 |
-| Production enumeration | 0 | 0 | 0 |
+| Production enumeration | 8 | 2 | 0 |
 | Production JSON serialization | 6 | 6 | 2 |
-| Exported input signature references | 1,755 | 231 | — |
-| Exported output signature references | 451 | 165 | — |
-| Test object literals | 1,563 | 205 | 5,695 |
-| Test oracle observations | 57 | 26 | — |
+| Exported input signature references | 8,275 | 819 | 10,702 |
+| Exported output signature references | 1,670 | 712 | 9,608 |
+| Test object literals | 5,262 | 602 | 6,748 |
+| Test oracle observations | 244 | 73 | 2,098 |
 
-The 57 oracle observations are one enumeration, seven JSON serializations, 40 object spreads, and nine Vitest `toStrictEqual` assertions. The audit found no object rest or explicit prototype observation in the current tests. A zero is useful drift evidence, not proof that a public JavaScript consumer never observes the behavior.
+The 244 oracle observations are two enumerations, nine JSON serializations, 212 object spreads, and 21 strict-equality assertions. The audit found no object rest or explicit prototype observation in the current tests. A zero is useful drift evidence, not proof that a public JavaScript consumer never observes the behavior.
 
 The exported-signature counts are schema references, not unique functions or dynamic crossings: each exported callable parameter contributes an input reference, each callable return contributes an output reference, and an exported non-callable variable contributes an output reference. They measure JavaScript bridge exposure if classes were emitted on JavaScript; they do not make a cpp-only class unsafe by themselves.
 
@@ -86,26 +94,26 @@ The exported-signature counts are schema references, not unique functions or dyn
 
 | Gate | Schemas | Direct sites | Meaning |
 | --- | --: | --: | --- |
-| No normalization findings | 328 | 3,628 | Existing production values have a canonical construction or flow identity. |
-| Requires normalization | 76 | 6,629 | At least one source value is not already the target nominal class. |
-| No normalization or observability findings | 291 | 3,270 | Candidate set for target-conditional classes after compile validation. |
-| Previous row, required fields only | 199 | 2,800 | Safest bulk gate; 928 fields, 278 production literals, and no optional-presence policy. |
-| Previous row, optional/undefined fields present | 92 | 470 | Needs constructor-default and absence policy before enablement. |
-| Any observability review | 59 | 2,733 | Requires target-specific parity evidence or continued typedef emission. |
+| No normalization findings | 1,143 | 3,974 | Existing production values have a canonical construction or flow identity. |
+| Requires normalization | 393 | 7,842 | At least one source value is not already the target nominal class. |
+| No normalization or observability findings | 986 | 3,587 | Candidate set for target-conditional classes after compile validation. |
+| Previous row, required fields only | 740 | 3,093 | Safest mechanical gate; 3,465 fields, 898 production literals, and no optional-presence policy. |
+| Previous row, optional/undefined fields present | 246 | 494 | Needs constructor-default and absence policy before enablement. |
+| Any observability review | 238 | 3,241 | Requires target-specific parity evidence or continued typedef emission. |
 
-The remaining 113 schemas outside the 291 clean set are not necessarily impossible. Findings are a required design input. In particular, 76 schemas carry normalization findings and 59 carry observability findings, with overlap between the groups.
+The remaining 550 schemas outside the 986 clean set are not necessarily impossible. Findings are a required design input. In particular, 393 schemas carry normalization findings and 238 carry observability findings, with overlap between the groups.
 
 ### Object construction
 
-`@:structInit` plus a generated constructor is mechanically compatible with the 490 plain contextual object literals. The 40 literals containing spread are not constructor calls in disguise: property order, overwrite order, enumerable-own-property behavior, and source identity must remain explicit. Those sites need a generated projection/merge expression whose result is a real class instance, or the target schema remains a typedef.
+`@:structInit` plus a generated constructor is mechanically compatible with the 1,666 plain contextual object literals. The 174 literals containing spread are not constructor calls in disguise: property order, overwrite order, enumerable-own-property behavior, and source identity must remain explicit. Those sites need a generated projection/merge expression whose result is a real class instance, or the target schema remains a typedef.
 
-There are no computed-key construction sites in the current production corpus. The audit keeps this as a permanent exclusion because a future computed key cannot initialize a closed nominal layout safely without a named normalization step.
+The two computed-key construction sites remain excluded because a computed key cannot initialize a closed nominal layout safely without a named normalization step.
 
-A plain class without `@:structInit` would require rewriting all 530 production construction sites to `new`, plus every generated fixture or helper that relies on structural initialization. That churn buys no additional layout benefit on hxcpp. A plain constructor remains useful only at normalization boundaries where an explicit allocation is semantically intended.
+A plain class without `@:structInit` would require rewriting all 1,842 production construction sites to `new`, plus every generated fixture or helper that relies on structural initialization. That churn buys no additional layout benefit on hxcpp. A plain constructor remains useful only at normalization boundaries where an explicit allocation is semantically intended.
 
 ### Structural assignments
 
-The 117 cross-schema transfers are concentrated in 15 target schemas. The largest relation is 36 `Surface -> ImageResource` transfers, followed by 19 `Aabb -> AabbLike`, then 28 combined `Mesh`/`SceneNodeTraits` transfers into `HasTransform3D`. These are nominally invalid even when the field sets are assignable in TypeScript.
+The 1,391 cross-schema transfers affect 275 target schemas. These are nominally invalid even when the field sets are assignable in TypeScript; the generated report is the source of truth for each exact relation.
 
 An hxcpp `cast` is not a conversion: an anonymous value and a class instance have different native representations. Copying is also not a general fix because the current typed-struct model promises internal reference identity and out-parameter aliasing. Each cross-schema pair must therefore choose one of:
 
@@ -114,35 +122,35 @@ An hxcpp `cast` is not a conversion: an anonymous value and a class instance hav
 - introduce an explicit copying adapter only at a boundary where identity is documented as irrelevant;
 - leave that destination schema as a typedef.
 
-The same rule applies to the 160 anonymous transfers across 50 schemas. The hot numeric records are in this group: `Vector3` has four anonymous transfers and 1,140 direct sites, `Vector2` has nine and 322, `Quaternion` has one and 216, `Matrix3`/`Matrix4` have one each, and `ColorTransform` has five and 215. These are high-value follow-ups, but they are not safe first-wave classes until their exact report locations create canonical instances.
+The same rule applies to the 148 anonymous transfers across 53 schemas. These are high-value follow-ups only when their exact report locations can create canonical instances without copying aliased values.
 
-The 55 dynamic ingresses across eight schemas require the existing typed-struct boundary seam. A validator/copying constructor may be appropriate for external data, but it must run once at the boundary. Casting a dynamic anonymous object and then using native class-offset access is prohibited.
+The 67 dynamic ingresses across 31 schemas require the existing typed-struct boundary seam. A validator/copying constructor may be appropriate for external data, but it must run once at the boundary. Casting a dynamic anonymous object and then using native class-offset access is prohibited.
 
 ### Optional fields and observation
 
-An optional constructor parameter can make `@:structInit` accept an omitted argument, but a native class field still exists after construction. That is not the same model as an absent JavaScript own property. The 86 actual omissions across 21 schemas are therefore an observability gate. The one required-undefined field, `ResourceLoadReport.group`, must remain a required nullable constructor argument; it must not silently become optional.
+An optional constructor parameter can make `@:structInit` accept an omitted argument, but a native class field still exists after construction. That is not the same model as an absent JavaScript own property. The 392 actual omissions across 149 schemas are therefore an observability gate. Both required-undefined fields must remain required nullable constructor arguments; they must not silently become optional.
 
 On cpp, Flight already collapses much of absent/`undefined` behavior to `null`, but serialization, enumeration, and spread can still reveal field presence. Optional class migration needs target-specific tests for omission, explicit `undefined`, `null`, JSON, and copy/spread behavior before it joins the allowlist.
 
-On JavaScript, class instances add prototype/constructor identity and omitted constructor fields can become enumerable own properties with `null` or `undefined` values. That threatens the 1,563 current test literals, 2,206 exported signature references, nine strict-equality assertions, seven JSON oracles, and 40 object-spread oracles. Keeping the typedef branch on JavaScript removes that risk rather than asking the bridge to normalize every public input and output.
+On JavaScript, class instances add prototype/constructor identity and omitted constructor fields can become enumerable own properties with `null` or `undefined` values. That threatens the 5,262 current test literals, 9,945 exported signature references, 21 strict-equality assertions, nine JSON oracles, and 212 object-spread oracles. Keeping the typedef branch on JavaScript removes that risk rather than asking the bridge to normalize every public input and output.
 
 ## Design comparison
 
 | Design | Existing plain literals | Non-canonical flows | hxcpp layout | JavaScript behavior | Recommendation |
 | --- | --- | --- | --- | --- | --- |
-| `@:structInit` class with generated constructor | 490 plain production literals can retain structural syntax | Exact adapters or canonical construction still required | Native class fields can use fixed layout | Prototype and optional-own-property changes if enabled on JS | Use behind a cpp canonical-ID allowlist. |
-| Plain class with generated constructor | Rewrite all 530 production literals to `new` or factories | Exact adapters still required | Same class-layout opportunity | Same prototype risk if enabled on JS | Use only for explicit boundary adapters, not general emission. |
+| `@:structInit` class with generated constructor | 1,666 plain production literals can retain structural syntax | Exact adapters or canonical construction still required | Native class fields can use fixed layout | Prototype and optional-own-property changes if enabled on JS | Use behind a cpp canonical-ID allowlist. |
+| Plain class with generated constructor | Rewrite all 1,842 production literals to `new` or factories | Exact adapters still required | Same class-layout opportunity | Same prototype risk if enabled on JS | Use only for explicit boundary adapters, not general emission. |
 | Class on every target | Same source mechanics as chosen class form | Same normalization work | Captures cpp opportunity | Changes the established JS plain-object bridge and its oracles | Reject. |
 | `#if cpp` class, typedef elsewhere | Same Haxe type name on both branches | cpp compiler exposes every nominal mismatch | Captures the user-priority target | JS output and Vitest oracle remain byte-for-byte on the typedef path | Adopt first. |
 | cpp-and-Neko conditional class | Same as cpp branch | Must compile and test both native representations | Captures cpp opportunity | JS remains unchanged | Consider only after separate Neko measurement. |
 
 ## Expected performance
 
-The current 10,257 direct Haxe accesses are the maximum static opportunity, not a speedup prediction. Anonymous structures still use dynamic/hash-oriented field representation on hxcpp; a real class gives hxcpp a nominal layout and makes fixed-offset/native member access possible. The strongest expected gains are in frequently executed math, transform, particle, and render-state paths, while cold serialization documents may show no meaningful wall-clock change.
+The current 11,816 direct Haxe accesses are the maximum static opportunity, not a speedup prediction. Anonymous structures still use dynamic/hash-oriented field representation on hxcpp; a real class gives hxcpp a nominal layout and makes fixed-offset/native member access possible. The strongest expected gains are in frequently executed math, transform, particle, and render-state paths, while cold serialization documents may show no meaningful wall-clock change.
 
 `Camera2D` is an ideal correctness/performance pilot: it has six required fields, one plain production literal, no normalization or observability finding, and 17 direct static sites. The existing camera projection executes 50 `Camera2D` field accesses in one representative update. Converting the clean camera record first can validate the layout hypothesis without entangling transform normalization. Converting all relevant camera/transform records could eventually address the full 205-access frame projection, but `HasTransform2D` and `HasTransform2DRuntime` first need their anonymous, dynamic, and cross-schema sites normalized.
 
-`ParticleEmitterState` is a closed required-field record with 236 direct static sites and remains the Gate-4 particle class. `ParticleEmitterData` has 405 direct sites but is parked until its containing outer types preserve or normalize the nominal data identity.
+`ParticleEmitterState` is a closed required-field record with 236 direct static sites and remains the Gate-4 particle class. `ParticleEmitterData` has 461 direct sites but is parked until its containing outer types preserve or normalize the nominal data identity.
 
 Neko has a hash-oriented object model too, so the same source hot paths could benefit from a more nominal representation, but it does not offer the same fixed native-layout argument as hxcpp. Treat the benefit as plausible and unquantified. More importantly, the known Neko GL cost includes a large FFI component that this change cannot remove. Neko acceptance should use a CPU-only camera/math/particle benchmark and must not infer class success or failure from GL frame time.
 

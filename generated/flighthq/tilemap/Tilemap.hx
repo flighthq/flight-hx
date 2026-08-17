@@ -54,10 +54,10 @@ class Tilemap {
     rows = _Runtime.field(__destructure0, 'rows');
     tileHeight = _Runtime.field(__destructure0, 'tileHeight');
     tileWidth = _Runtime.field(__destructure0, 'tileWidth');
-    ((cast out : Rectangle).x = 0.0);
-    ((cast out : Rectangle).y = 0.0);
-    ((cast out : Rectangle).width = ((cast !_Runtime.strictEquals(atlas, null) : Bool) ? (cast (columns * tileWidth) : Dynamic) : (cast 0.0 : Dynamic)));
-    ((cast out : Rectangle).height = ((cast !_Runtime.strictEquals(atlas, null) : Bool) ? (cast (rows * tileHeight) : Dynamic) : (cast 0.0 : Dynamic)));
+    (out.x = cast (0.0 : Dynamic));
+    (out.y = cast (0.0 : Dynamic));
+    (out.width = cast (((cast !_Runtime.strictEquals(atlas, null) : Bool) ? (cast (columns * tileWidth) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+    (out.height = cast (((cast !_Runtime.strictEquals(atlas, null) : Bool) ? (cast (rows * tileHeight) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
   }
 
   public static function createTilemap(?obj:PartialNode<flighthq.types.Tilemap>):flighthq.types.Tilemap {
@@ -200,10 +200,10 @@ class Tilemap {
     tileHeight = _Runtime.field(__destructure5, 'tileHeight');
     tileWidth = _Runtime.field(__destructure5, 'tileWidth');
     if ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast ((cast column : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast column : Float) >= (cast columns : Float)) : Bool)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast row : Float) >= (cast rows : Float)) : Bool)) : Bool)) { return cast false; }
-    ((cast out : Rectangle).x = (column * tileWidth));
-    ((cast out : Rectangle).y = (row * tileHeight));
-    ((cast out : Rectangle).width = tileWidth);
-    ((cast out : Rectangle).height = tileHeight);
+    (out.x = cast ((column * tileWidth) : Dynamic));
+    (out.y = cast ((row * tileHeight) : Dynamic));
+    (out.width = cast (tileWidth : Dynamic));
+    (out.height = cast (tileHeight : Dynamic));
     return cast true;
     return cast null;
   }

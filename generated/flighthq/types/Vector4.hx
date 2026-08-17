@@ -8,4 +8,4 @@ import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Vector4 = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var x:Float; var y:Float; var z:Float; var w:Float; };
 
-typedef Vector4Like = EntityWithoutRuntime<flighthq.types.Vector4>;
+typedef Vector4Like = { var x:Float; var y:Float; var z:Float; var w:Float; };

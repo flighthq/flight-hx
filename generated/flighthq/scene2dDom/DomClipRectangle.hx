@@ -71,14 +71,14 @@ class DomClipRectangle {
     var y2:Float = cast _Runtime.UNDEFINED;
     var x3:Float = cast _Runtime.UNDEFINED;
     var y3:Float = cast _Runtime.UNDEFINED;
-    x0 = ((_Runtime.multiplyNumbers(transform.a, _Runtime.field(rect, 'x')) + _Runtime.multiplyNumbers(transform.c, _Runtime.field(rect, 'y'))) + transform.tx);
-    y0 = ((_Runtime.multiplyNumbers(transform.b, _Runtime.field(rect, 'x')) + _Runtime.multiplyNumbers(transform.d, _Runtime.field(rect, 'y'))) + transform.ty);
-    x1 = (((transform.a * _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width'))) + _Runtime.multiplyNumbers(transform.c, _Runtime.field(rect, 'y'))) + transform.tx);
-    y1 = (((transform.b * _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width'))) + _Runtime.multiplyNumbers(transform.d, _Runtime.field(rect, 'y'))) + transform.ty);
-    x2 = ((_Runtime.multiplyNumbers(transform.a, _Runtime.field(rect, 'x')) + (transform.c * _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')))) + transform.tx);
-    y2 = ((_Runtime.multiplyNumbers(transform.b, _Runtime.field(rect, 'x')) + (transform.d * _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')))) + transform.ty);
-    x3 = (((transform.a * _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width'))) + (transform.c * _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')))) + transform.tx);
-    y3 = (((transform.b * _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width'))) + (transform.d * _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')))) + transform.ty);
+    x0 = (((transform.a * rect.x) + (transform.c * rect.y)) + transform.tx);
+    y0 = (((transform.b * rect.x) + (transform.d * rect.y)) + transform.ty);
+    x1 = (((transform.a * (rect.x + rect.width)) + (transform.c * rect.y)) + transform.tx);
+    y1 = (((transform.b * (rect.x + rect.width)) + (transform.d * rect.y)) + transform.ty);
+    x2 = (((transform.a * rect.x) + (transform.c * (rect.y + rect.height))) + transform.tx);
+    y2 = (((transform.b * rect.x) + (transform.d * (rect.y + rect.height))) + transform.ty);
+    x3 = (((transform.a * (rect.x + rect.width)) + (transform.c * (rect.y + rect.height))) + transform.tx);
+    y3 = (((transform.b * (rect.x + rect.width)) + (transform.d * (rect.y + rect.height))) + transform.ty);
     return cast { bottom: HxMath.max(HxMath.max(HxMath.max(y0, y1), y2), y3), left: HxMath.min(HxMath.min(HxMath.min(x0, x1), x2), x3), right: HxMath.max(HxMath.max(HxMath.max(x0, x1), x2), x3), top: HxMath.min(HxMath.min(HxMath.min(y0, y1), y2), y3) };
     return cast null;
   }

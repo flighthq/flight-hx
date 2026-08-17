@@ -50,11 +50,11 @@ class StageFit {
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene2d, 'root'), null) : Bool)) {
       var runtime:flighthq._internal._Any = (cast getNodeRuntime((cast _Runtime.field(scene2d, 'root') : Dynamic)) : flighthq._internal._Partial<HasBoundsRectangleRuntime>);
       if ((cast !_Runtime.strictEquals(_Runtime.optionalField(runtime, 'computeLocalBoundsRectangle'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        ((cast StageFit._tempRectangle__stageFit : Rectangle).width = 0.0);
-        ((cast StageFit._tempRectangle__stageFit : Rectangle).height = 0.0);
+        (StageFit._tempRectangle__stageFit.width = cast (0.0 : Dynamic));
+        (StageFit._tempRectangle__stageFit.height = cast (0.0 : Dynamic));
         _Runtime.callProperty(runtime, 'computeLocalBoundsRectangle', cast ([StageFit._tempRectangle__stageFit, (cast _Runtime.field(scene2d, 'root') : BoundsNodeAny)] : Array<Dynamic>));
-        (contentWidth = cast ((cast StageFit._tempRectangle__stageFit : Rectangle).width : Dynamic));
-        (contentHeight = cast ((cast StageFit._tempRectangle__stageFit : Rectangle).height : Dynamic));
+        (contentWidth = cast (StageFit._tempRectangle__stageFit.width : Dynamic));
+        (contentHeight = cast (StageFit._tempRectangle__stageFit.height : Dynamic));
       }
     }
     if ((cast ((cast _Runtime.strictEquals(contentWidth, 0.0) : Bool) || (cast _Runtime.strictEquals(contentHeight, 0.0) : Bool)) : Bool)) {

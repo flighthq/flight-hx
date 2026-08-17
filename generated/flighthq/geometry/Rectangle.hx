@@ -11,7 +11,7 @@ import flighthq.types.Vector2.Vector2Like;
 
 class Rectangle {
   public static function cloneRectangle(source:RectangleLike):flighthq.types.Rectangle {
-    return cast (cast createRectangle(({ final __callArgument0:Dynamic = _Runtime.field(source, 'x'); __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.field(source, 'y'); __callArgument1; }), ({ final __callArgument2:Dynamic = _Runtime.field(source, 'width'); __callArgument2; }), ({ final __callArgument3:Dynamic = _Runtime.field(source, 'height'); __callArgument3; })) : flighthq.types.Rectangle);
+    return cast (cast createRectangle(({ final __callArgument0:Dynamic = source.x; __callArgument0; }), ({ final __callArgument1:Dynamic = source.y; __callArgument1; }), ({ final __callArgument2:Dynamic = source.width; __callArgument2; }), ({ final __callArgument3:Dynamic = source.height; __callArgument3; })) : flighthq.types.Rectangle);
     return cast null;
   }
 
@@ -28,10 +28,10 @@ class Rectangle {
       setEmptyRectangle(({ final __callArgument12:Dynamic = out; __callArgument12; }));
       return;
     }
-    _Runtime.setField(out, 'x', x0);
-    _Runtime.setField(out, 'y', y0);
-    _Runtime.setField(out, 'width', (x1 - x0));
-    _Runtime.setField(out, 'height', (y1 - y0));
+    (out.x = cast (x0 : Dynamic));
+    (out.y = cast (y0 : Dynamic));
+    (out.width = cast ((x1 - x0) : Dynamic));
+    (out.height = cast ((y1 - y0) : Dynamic));
   }
 
   public static function containsRectanglePoint(source:RectangleLike, vector:Vector2Like):Bool {
@@ -44,20 +44,20 @@ class Rectangle {
     var x1:Float = cast _Runtime.UNDEFINED;
     var y0:Float = cast _Runtime.UNDEFINED;
     var y1:Float = cast _Runtime.UNDEFINED;
-    x0 = HxMath.min(_Runtime.field(source, 'x'), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')));
-    x1 = HxMath.max(_Runtime.field(source, 'x'), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')));
-    y0 = HxMath.min(_Runtime.field(source, 'y'), _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')));
-    y1 = HxMath.max(_Runtime.field(source, 'y'), _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')));
+    x0 = HxMath.min(source.x, (source.x + source.width));
+    x1 = HxMath.max(source.x, (source.x + source.width));
+    y0 = HxMath.min(source.y, (source.y + source.height));
+    y1 = HxMath.max(source.y, (source.y + source.height));
     return cast ((cast ((cast ((cast ((cast x : Float) >= (cast x0 : Float)) : Bool) && (cast ((cast x : Float) < (cast x1 : Float)) : Bool)) : Bool) && (cast ((cast y : Float) >= (cast y0 : Float)) : Bool)) : Bool) && (cast ((cast y : Float) < (cast y1 : Float)) : Bool));
     return cast null;
   }
 
   public static function copyRectangle(out:RectangleLike, source:RectangleLike):Void {
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
-      _Runtime.setField(out, 'x', _Runtime.field(source, 'x'));
-      _Runtime.setField(out, 'y', _Runtime.field(source, 'y'));
-      _Runtime.setField(out, 'width', _Runtime.field(source, 'width'));
-      _Runtime.setField(out, 'height', _Runtime.field(source, 'height'));
+      (out.x = cast (source.x : Dynamic));
+      (out.y = cast (source.y : Dynamic));
+      (out.width = cast (source.width : Dynamic));
+      (out.height = cast (source.height : Dynamic));
     }
   }
 
@@ -75,14 +75,14 @@ class Rectangle {
     var ox1:Float = cast _Runtime.UNDEFINED;
     var oy0:Float = cast _Runtime.UNDEFINED;
     var oy1:Float = cast _Runtime.UNDEFINED;
-    sx0 = HxMath.min(_Runtime.field(source, 'x'), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')));
-    sx1 = HxMath.max(_Runtime.field(source, 'x'), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')));
-    sy0 = HxMath.min(_Runtime.field(source, 'y'), _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')));
-    sy1 = HxMath.max(_Runtime.field(source, 'y'), _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')));
-    ox0 = HxMath.min(_Runtime.field(other, 'x'), _Runtime.addNumbers(_Runtime.field(other, 'x'), _Runtime.field(other, 'width')));
-    ox1 = HxMath.max(_Runtime.field(other, 'x'), _Runtime.addNumbers(_Runtime.field(other, 'x'), _Runtime.field(other, 'width')));
-    oy0 = HxMath.min(_Runtime.field(other, 'y'), _Runtime.addNumbers(_Runtime.field(other, 'y'), _Runtime.field(other, 'height')));
-    oy1 = HxMath.max(_Runtime.field(other, 'y'), _Runtime.addNumbers(_Runtime.field(other, 'y'), _Runtime.field(other, 'height')));
+    sx0 = HxMath.min(source.x, (source.x + source.width));
+    sx1 = HxMath.max(source.x, (source.x + source.width));
+    sy0 = HxMath.min(source.y, (source.y + source.height));
+    sy1 = HxMath.max(source.y, (source.y + source.height));
+    ox0 = HxMath.min(other.x, (other.x + other.width));
+    ox1 = HxMath.max(other.x, (other.x + other.width));
+    oy0 = HxMath.min(other.y, (other.y + other.height));
+    oy1 = HxMath.max(other.y, (other.y + other.height));
     return cast ((cast ((cast ((cast ((cast ox0 : Float) >= (cast sx0 : Float)) : Bool) && (cast ((cast oy0 : Float) >= (cast sy0 : Float)) : Bool)) : Bool) && (cast ((cast ox1 : Float) <= (cast sx1 : Float)) : Bool)) : Bool) && (cast ((cast oy1 : Float) <= (cast sy1 : Float)) : Bool));
     return cast null;
   }
@@ -90,7 +90,7 @@ class Rectangle {
   public static function equalsRectangle(a:Null<RectangleLike>, b:Null<RectangleLike>):Bool {
     if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
-    return cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'width'), _Runtime.field(b, 'width')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'height'), _Runtime.field(b, 'height')) : Bool));
+    return cast ((cast ((cast ((cast _Runtime.strictEquals((cast a : { var x:Float; }).x, (cast b : { var x:Float; }).x) : Bool) && (cast _Runtime.strictEquals((cast a : { var y:Float; }).y, (cast b : { var y:Float; }).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var width:Float; }).width, (cast b : { var width:Float; }).width) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var height:Float; }).height, (cast b : { var height:Float; }).height) : Bool));
     return cast null;
   }
 
@@ -99,37 +99,37 @@ class Rectangle {
   }
 
   public static function getRectangleBottom(source:RectangleLike):Float {
-    return cast _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height'));
+    return cast (source.y + source.height);
     return cast null;
   }
 
   public static function getRectangleBottomRight(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast (_Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')) : Dynamic));
-    (out.y = cast (_Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')) : Dynamic));
+    (out.x = cast ((source.x + source.width) : Dynamic));
+    (out.y = cast ((source.y + source.height) : Dynamic));
   }
 
   public static function getRectangleLeft(source:RectangleLike):Float {
-    return cast _Runtime.field(source, 'x');
+    return cast source.x;
     return cast null;
   }
 
   public static function getRectangleMaxX(source:RectangleLike):Float {
-    return cast HxMath.max(_Runtime.field(source, 'x'), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')));
+    return cast HxMath.max(source.x, (source.x + source.width));
     return cast null;
   }
 
   public static function getRectangleMaxY(source:RectangleLike):Float {
-    return cast HxMath.max(_Runtime.field(source, 'y'), _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')));
+    return cast HxMath.max(source.y, (source.y + source.height));
     return cast null;
   }
 
   public static function getRectangleMinX(source:RectangleLike):Float {
-    return cast HxMath.min(_Runtime.field(source, 'x'), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')));
+    return cast HxMath.min(source.x, (source.x + source.width));
     return cast null;
   }
 
   public static function getRectangleMinY(source:RectangleLike):Float {
-    return cast HxMath.min(_Runtime.field(source, 'y'), _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')));
+    return cast HxMath.min(source.y, (source.y + source.height));
     return cast null;
   }
 
@@ -144,30 +144,30 @@ class Rectangle {
   }
 
   public static function getRectangleRight(source:RectangleLike):Float {
-    return cast _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width'));
+    return cast (source.x + source.width);
     return cast null;
   }
 
   public static function getRectangleSize(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast (_Runtime.field(source, 'width') : Dynamic));
-    (out.y = cast (_Runtime.field(source, 'height') : Dynamic));
+    (out.x = cast (source.width : Dynamic));
+    (out.y = cast (source.height : Dynamic));
   }
 
   public static function getRectangleTop(source:RectangleLike):Float {
-    return cast _Runtime.field(source, 'y');
+    return cast source.y;
     return cast null;
   }
 
   public static function getRectangleTopLeft(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast (_Runtime.field(source, 'x') : Dynamic));
-    (out.y = cast (_Runtime.field(source, 'y') : Dynamic));
+    (out.x = cast (source.x : Dynamic));
+    (out.y = cast (source.y : Dynamic));
   }
 
   public static function inflateRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
-    _Runtime.setField(out, 'x', _Runtime.subtractNumbers(_Runtime.field(source, 'x'), dx));
-    _Runtime.setField(out, 'width', _Runtime.addNumbers(_Runtime.field(source, 'width'), (dx * 2.0)));
-    _Runtime.setField(out, 'y', _Runtime.subtractNumbers(_Runtime.field(source, 'y'), dy));
-    _Runtime.setField(out, 'height', _Runtime.addNumbers(_Runtime.field(source, 'height'), (dy * 2.0)));
+    (out.x = cast ((source.x - dx) : Dynamic));
+    (out.width = cast ((source.width + (dx * 2.0)) : Dynamic));
+    (out.y = cast ((source.y - dy) : Dynamic));
+    (out.height = cast ((source.height + (dy * 2.0)) : Dynamic));
   }
 
   public static function intersectsRectangle(a:RectangleLike, b:RectangleLike):Bool {
@@ -176,27 +176,27 @@ class Rectangle {
   }
 
   public static function isEmptyRectangle(source:RectangleLike):Bool {
-    return cast ((cast _Runtime.strictEquals(_Runtime.field(source, 'width'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(source, 'height'), 0.0) : Bool));
+    return cast ((cast _Runtime.strictEquals(source.width, 0.0) : Bool) || (cast _Runtime.strictEquals(source.height, 0.0) : Bool));
     return cast null;
   }
 
   public static function isFlippedXRectangle(source:RectangleLike):Bool {
-    return cast ((cast _Runtime.field(source, 'width') : Float) < (cast 0.0 : Float));
+    return cast ((cast source.width : Float) < (cast 0.0 : Float));
     return cast null;
   }
 
   public static function isFlippedYRectangle(source:RectangleLike):Bool {
-    return cast ((cast _Runtime.field(source, 'height') : Float) < (cast 0.0 : Float));
+    return cast ((cast source.height : Float) < (cast 0.0 : Float));
     return cast null;
   }
 
   public static function mergeRectangle(out:RectangleLike, source:RectangleLike, other:RectangleLike):Void {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:RectangleLike = cast _Runtime.UNDEFINED;
     var sx:Float = cast _Runtime.UNDEFINED;
     var sy:Float = cast _Runtime.UNDEFINED;
     var sw:Float = cast _Runtime.UNDEFINED;
     var sh:Float = cast _Runtime.UNDEFINED;
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure1:RectangleLike = cast _Runtime.UNDEFINED;
     var ox:Float = cast _Runtime.UNDEFINED;
     var oy:Float = cast _Runtime.UNDEFINED;
     var ow:Float = cast _Runtime.UNDEFINED;
@@ -204,23 +204,23 @@ class Rectangle {
     var sEmpty:Bool = cast _Runtime.UNDEFINED;
     var oEmpty:Bool = cast _Runtime.UNDEFINED;
     __destructure0 = source;
-    sx = _Runtime.field(__destructure0, 'x');
-    sy = _Runtime.field(__destructure0, 'y');
-    sw = _Runtime.field(__destructure0, 'width');
-    sh = _Runtime.field(__destructure0, 'height');
+    sx = __destructure0.x;
+    sy = __destructure0.y;
+    sw = __destructure0.width;
+    sh = __destructure0.height;
     __destructure1 = other;
-    ox = _Runtime.field(__destructure1, 'x');
-    oy = _Runtime.field(__destructure1, 'y');
-    ow = _Runtime.field(__destructure1, 'width');
-    oh = _Runtime.field(__destructure1, 'height');
+    ox = __destructure1.x;
+    oy = __destructure1.y;
+    ow = __destructure1.width;
+    oh = __destructure1.height;
     sEmpty = ((cast _Runtime.strictEquals(sw, 0.0) : Bool) || (cast _Runtime.strictEquals(sh, 0.0) : Bool));
     oEmpty = ((cast _Runtime.strictEquals(ow, 0.0) : Bool) || (cast _Runtime.strictEquals(oh, 0.0) : Bool));
     if ((cast ((cast sEmpty : Bool) || (cast oEmpty : Bool)) : Bool)) {
       if ((cast ((cast oEmpty : Bool) && (cast _Runtime.strictEquals(source, out) : Bool)) : Bool)) { return; }
-      _Runtime.setField(out, 'x', ((cast oEmpty : Bool) ? (cast sx : Dynamic) : (cast ox : Dynamic)));
-      _Runtime.setField(out, 'y', ((cast oEmpty : Bool) ? (cast sy : Dynamic) : (cast oy : Dynamic)));
-      _Runtime.setField(out, 'width', ((cast oEmpty : Bool) ? (cast sw : Dynamic) : (cast ow : Dynamic)));
-      _Runtime.setField(out, 'height', ((cast oEmpty : Bool) ? (cast sh : Dynamic) : (cast oh : Dynamic)));
+      (out.x = cast (((cast oEmpty : Bool) ? (cast sx : Dynamic) : (cast ox : Dynamic)) : Dynamic));
+      (out.y = cast (((cast oEmpty : Bool) ? (cast sy : Dynamic) : (cast oy : Dynamic)) : Dynamic));
+      (out.width = cast (((cast oEmpty : Bool) ? (cast sw : Dynamic) : (cast ow : Dynamic)) : Dynamic));
+      (out.height = cast (((cast oEmpty : Bool) ? (cast sh : Dynamic) : (cast oh : Dynamic)) : Dynamic));
     } else {
       var sourceLeft:Float = HxMath.min(sx, (sx + sw));
       var sourceRight:Float = HxMath.max(sx, (sx + sw));
@@ -234,10 +234,10 @@ class Rectangle {
       var x1:Float = HxMath.max(sourceRight, otherRight);
       var y0:Float = HxMath.min(sourceTop, otherTop);
       var y1:Float = HxMath.max(sourceBottom, otherBottom);
-      _Runtime.setField(out, 'x', x0);
-      _Runtime.setField(out, 'y', y0);
-      _Runtime.setField(out, 'width', (x1 - x0));
-      _Runtime.setField(out, 'height', (y1 - y0));
+      (out.x = cast (x0 : Dynamic));
+      (out.y = cast (y0 : Dynamic));
+      (out.width = cast ((x1 - x0) : Dynamic));
+      (out.height = cast ((y1 - y0) : Dynamic));
     }
   }
 
@@ -250,67 +250,67 @@ class Rectangle {
     maxY = (cast getRectangleMaxY(({ final __callArgument30:Dynamic = source; __callArgument30; })) : Float);
     minX = (cast getRectangleMinX(({ final __callArgument31:Dynamic = source; __callArgument31; })) : Float);
     minY = (cast getRectangleMinY(({ final __callArgument32:Dynamic = source; __callArgument32; })) : Float);
-    _Runtime.setField(out, 'x', minX);
-    _Runtime.setField(out, 'y', minY);
-    _Runtime.setField(out, 'width', (maxX - minX));
-    _Runtime.setField(out, 'height', (maxY - minY));
+    (out.x = cast (minX : Dynamic));
+    (out.y = cast (minY : Dynamic));
+    (out.width = cast ((maxX - minX) : Dynamic));
+    (out.height = cast ((maxY - minY) : Dynamic));
   }
 
   public static function offsetRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
-    _Runtime.setField(out, 'x', _Runtime.addNumbers(_Runtime.field(source, 'x'), dx));
-    _Runtime.setField(out, 'y', _Runtime.addNumbers(_Runtime.field(source, 'y'), dy));
-    _Runtime.setField(out, 'width', _Runtime.field(source, 'width'));
-    _Runtime.setField(out, 'height', _Runtime.field(source, 'height'));
+    (out.x = cast ((source.x + dx) : Dynamic));
+    (out.y = cast ((source.y + dy) : Dynamic));
+    (out.width = cast (source.width : Dynamic));
+    (out.height = cast (source.height : Dynamic));
   }
 
   public static function offsetRectangleByPoint(out:RectangleLike, source:RectangleLike, point:Vector2Like):Void {
-    _Runtime.setField(out, 'x', _Runtime.addNumbers(_Runtime.field(source, 'x'), point.x));
-    _Runtime.setField(out, 'y', _Runtime.addNumbers(_Runtime.field(source, 'y'), point.y));
-    _Runtime.setField(out, 'width', _Runtime.field(source, 'width'));
-    _Runtime.setField(out, 'height', _Runtime.field(source, 'height'));
+    (out.x = cast ((source.x + point.x) : Dynamic));
+    (out.y = cast ((source.y + point.y) : Dynamic));
+    (out.width = cast (source.width : Dynamic));
+    (out.height = cast (source.height : Dynamic));
   }
 
   public static function setEmptyRectangle(out:RectangleLike):Void {
-    _Runtime.setField(out, 'x', _Runtime.setField(out, 'y', _Runtime.setField(out, 'width', _Runtime.setField(out, 'height', 0.0))));
+    (out.x = cast ((out.y = cast ((out.width = cast ((out.height = cast (0.0 : Dynamic)) : Dynamic)) : Dynamic)) : Dynamic));
   }
 
   public static function setRectangle(out:RectangleLike, x:Float, y:Float, width:Float, height:Float):Void {
-    _Runtime.setField(out, 'x', x);
-    _Runtime.setField(out, 'y', y);
-    _Runtime.setField(out, 'width', width);
-    _Runtime.setField(out, 'height', height);
+    (out.x = cast (x : Dynamic));
+    (out.y = cast (y : Dynamic));
+    (out.width = cast (width : Dynamic));
+    (out.height = cast (height : Dynamic));
   }
 
   public static function setRectangleBottom(target:RectangleLike, value:Float):Void {
-    _Runtime.setField(target, 'height', _Runtime.subtractNumbers(value, _Runtime.field(target, 'y')));
+    (target.height = cast ((value - target.y) : Dynamic));
   }
 
   public static function setRectangleBottomRight(target:RectangleLike, point:Vector2Like):Void {
-    _Runtime.setField(target, 'width', _Runtime.subtractNumbers(point.x, _Runtime.field(target, 'x')));
-    _Runtime.setField(target, 'height', _Runtime.subtractNumbers(point.y, _Runtime.field(target, 'y')));
+    (target.width = cast ((point.x - target.x) : Dynamic));
+    (target.height = cast ((point.y - target.y) : Dynamic));
   }
 
   public static function setRectangleLeft(target:RectangleLike, value:Float):Void {
-    _Runtime.setField(target, 'width', _Runtime.subtractNumbers(_Runtime.field(target, 'width'), _Runtime.subtractNumbers(value, _Runtime.field(target, 'x'))));
-    _Runtime.setField(target, 'x', value);
+    (target.width -= (value - target.x));
+    (target.x = cast (value : Dynamic));
   }
 
   public static function setRectangleRight(target:RectangleLike, value:Float):Void {
-    _Runtime.setField(target, 'width', _Runtime.subtractNumbers(value, _Runtime.field(target, 'x')));
+    (target.width = cast ((value - target.x) : Dynamic));
   }
 
   public static function setRectangleSize(out:RectangleLike, size:Vector2Like):Void {
-    _Runtime.setField(out, 'width', size.x);
-    _Runtime.setField(out, 'height', size.y);
+    (out.width = cast (size.x : Dynamic));
+    (out.height = cast (size.y : Dynamic));
   }
 
   public static function setRectangleTop(target:RectangleLike, value:Float):Void {
-    _Runtime.setField(target, 'height', _Runtime.subtractNumbers(_Runtime.field(target, 'height'), _Runtime.subtractNumbers(value, _Runtime.field(target, 'y'))));
-    _Runtime.setField(target, 'y', value);
+    (target.height -= (value - target.y));
+    (target.y = cast (value : Dynamic));
   }
 
   public static function setRectangleTopLeft(out:RectangleLike, point:Vector2Like):Void {
-    _Runtime.setField(out, 'x', point.x);
-    _Runtime.setField(out, 'y', point.y);
+    (out.x = cast (point.x : Dynamic));
+    (out.y = cast (point.y : Dynamic));
   }
 }

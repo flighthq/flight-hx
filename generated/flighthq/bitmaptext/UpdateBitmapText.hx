@@ -125,10 +125,10 @@ class UpdateBitmapText {
     if ((cast _Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY) : Bool)) {
       UpdateBitmapText.setEmptyRectangle__updateBitmapText(({ final __callArgument11:Dynamic = bounds; __callArgument11; }));
     } else {
-      ((cast bounds : Rectangle).x = minX);
-      ((cast bounds : Rectangle).y = minY);
-      ((cast bounds : Rectangle).width = (maxX - minX));
-      ((cast bounds : Rectangle).height = (maxY - minY));
+      (bounds.x = cast (minX : Dynamic));
+      (bounds.y = cast (minY : Dynamic));
+      (bounds.width = cast ((maxX - minX) : Dynamic));
+      (bounds.height = cast ((maxY - minY) : Dynamic));
     }
     invalidateNodeLocalBounds((cast bitmapText : Dynamic));
   }
@@ -270,9 +270,9 @@ class UpdateBitmapText {
   }
 
   public static function setEmptyRectangle__updateBitmapText(out:Rectangle):Void {
-    ((cast out : Rectangle).x = 0.0);
-    ((cast out : Rectangle).y = 0.0);
-    ((cast out : Rectangle).width = 0.0);
-    ((cast out : Rectangle).height = 0.0);
+    (out.x = cast (0.0 : Dynamic));
+    (out.y = cast (0.0 : Dynamic));
+    (out.width = cast (0.0 : Dynamic));
+    (out.height = cast (0.0 : Dynamic));
   }
 }

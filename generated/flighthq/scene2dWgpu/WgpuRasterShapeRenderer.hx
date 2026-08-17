@@ -86,8 +86,8 @@ class WgpuRasterShapeRenderer {
     shapeData = (cast getWgpuShapeData((cast renderProxy : RenderProxy2D).rendererData) : Null<WgpuShapeRendererData>);
     if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
     bounds = (cast getNodeLocalBoundsRectangle((cast source : Dynamic)) : Rectangle);
-    w = HxMath.ceil(_Runtime.field(bounds, 'width'));
-    h = HxMath.ceil(_Runtime.field(bounds, 'height'));
+    w = HxMath.ceil(bounds.width);
+    h = HxMath.ceil(bounds.height);
     if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     version = (cast getNodeLocalContentRevision((cast source : Dynamic)) : Float);
     pixelRatio = (cast state : WgpuRenderState).pixelRatio;
@@ -98,8 +98,8 @@ class WgpuRasterShapeRenderer {
       if ((cast !_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field((cast surface : WgpuShapeRasterSurface).canvas, 'width'), pw) : Bool)) { flighthq._internal.backend.CanvasElementBackend.setField((cast surface : WgpuShapeRasterSurface).canvas, 'width', pw); }
       if ((cast !_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field((cast surface : WgpuShapeRasterSurface).canvas, 'height'), ph) : Bool)) { flighthq._internal.backend.CanvasElementBackend.setField((cast surface : WgpuShapeRasterSurface).canvas, 'height', ph); }
       var ctx:flighthq._internal.dom.CanvasRenderingContext2D = (cast surface : WgpuShapeRasterSurface).ctx;
-      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
-      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([_Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'y'), w, h] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, (-bounds.x * pixelRatio), (-bounds.y * pixelRatio)] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([bounds.x, bounds.y, w, h] : Array<Dynamic>));
       rasterizer(({ final __callArgument4:Dynamic = ctx; __callArgument4; }), (cast commands : Dynamic), ({ final __callArgument5:Dynamic = state; __callArgument5; }));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
       invalidateImageResource((cast surface : WgpuShapeRasterSurface).image);
@@ -110,8 +110,8 @@ class WgpuRasterShapeRenderer {
     }
     (cast ensureWgpuQuadBatchResources(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuQuadBatchResources);
     t = (cast renderProxy : RenderProxy2D).transform2D;
-    tx = ((t.tx + _Runtime.multiplyNumbers(t.a, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.c, _Runtime.field(bounds, 'y')));
-    ty = ((t.ty + _Runtime.multiplyNumbers(t.b, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.d, _Runtime.field(bounds, 'y')));
+    tx = ((t.tx + (t.a * bounds.x)) + (t.c * bounds.y));
+    ty = ((t.ty + (t.b * bounds.x)) + (t.d * bounds.y));
     textureEntry = (cast bindWgpuImageResourceTexture(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast surface : WgpuShapeRasterSurface).image, (cast false : Bool), (cast true : Bool), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<WgpuTextureEntry>);
     if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { return; }
     startCount = (cast runtime : WgpuRenderStateRuntime).quadBatchWriterCount;

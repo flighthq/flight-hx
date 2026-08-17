@@ -48,8 +48,8 @@ class Sprite {
     var runtime:SpriteRuntime = cast _Runtime.UNDEFINED;
     sprite = (cast source : flighthq.types.Sprite);
     texture = (cast _Runtime.field(sprite, 'data') : SpriteData).texture;
-    ((cast out : Rectangle).width = ((cast _Runtime.strictEquals(texture, null) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(HxMath.max(0.0, (cast getTextureWidth(({ final __callArgument1:Dynamic = texture; __callArgument1; })) : Float)), HxMath.abs((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x)) : Dynamic)));
-    ((cast out : Rectangle).height = ((cast _Runtime.strictEquals(texture, null) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(HxMath.max(0.0, (cast getTextureHeight(({ final __callArgument2:Dynamic = texture; __callArgument2; })) : Float)), HxMath.abs((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y)) : Dynamic)));
+    (out.width = cast (((cast _Runtime.strictEquals(texture, null) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(HxMath.max(0.0, (cast getTextureWidth(({ final __callArgument1:Dynamic = texture; __callArgument1; })) : Float)), HxMath.abs((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x)) : Dynamic)) : Dynamic));
+    (out.height = cast (((cast _Runtime.strictEquals(texture, null) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(HxMath.max(0.0, (cast getTextureHeight(({ final __callArgument2:Dynamic = texture; __callArgument2; })) : Float)), HxMath.abs((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y)) : Dynamic)) : Dynamic));
     runtime = (cast getNode2DRuntime(({ final __callArgument3:Dynamic = sprite; __callArgument3; })) : SpriteRuntime);
     ((cast runtime : SpriteRuntime).localBoundsTexture = texture);
     ((cast runtime : SpriteRuntime).localBoundsTextureVersion = _Runtime.coalesce(({ final __structural4 = texture; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var version:Float; }).version; }), function():Dynamic return cast -1.0));

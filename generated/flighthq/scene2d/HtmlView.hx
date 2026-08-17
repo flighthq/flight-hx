@@ -22,8 +22,8 @@ class HtmlView {
   public static function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var data:HtmlViewData = cast _Runtime.UNDEFINED;
     data = (cast (cast source : flighthq.types.HtmlView) : flighthq.types.HtmlView).data;
-    ((cast out : Rectangle).width = (cast data : HtmlViewData).width);
-    ((cast out : Rectangle).height = (cast data : HtmlViewData).height);
+    (out.width = cast ((cast data : HtmlViewData).width : Dynamic));
+    (out.height = cast ((cast data : HtmlViewData).height : Dynamic));
   }
 
   public static function createHtmlView(?obj:PartialNode<flighthq.types.HtmlView>):flighthq.types.HtmlView {

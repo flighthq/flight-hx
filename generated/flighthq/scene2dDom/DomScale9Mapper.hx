@@ -14,13 +14,13 @@ class DomScale9Mapper {
     var gh:Float = cast _Runtime.UNDEFINED;
     var bw:Float = cast _Runtime.UNDEFINED;
     var bh:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast ((cast ((cast scaleX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast scaleY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(bounds, 'width') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(bounds, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    gx = _Runtime.field(scale9Grid, 'x');
-    gy = _Runtime.field(scale9Grid, 'y');
-    gw = _Runtime.field(scale9Grid, 'width');
-    gh = _Runtime.field(scale9Grid, 'height');
-    bw = _Runtime.field(bounds, 'width');
-    bh = _Runtime.field(bounds, 'height');
+    if ((cast ((cast ((cast ((cast ((cast scaleX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast scaleY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast bounds.width : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast bounds.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    gx = scale9Grid.x;
+    gy = scale9Grid.y;
+    gw = scale9Grid.width;
+    gh = scale9Grid.height;
+    bw = bounds.width;
+    bh = bounds.height;
     return cast { mapX: function(x:Float):Float return (cast DomScale9Mapper.toScale9Position__domScale9Mapper((cast x : Float), (cast gx : Float), (cast gw : Float), (cast bw : Float), (cast scaleX : Float)) : Float), mapY: function(y:Float):Float return (cast DomScale9Mapper.toScale9Position__domScale9Mapper((cast y : Float), (cast gy : Float), (cast gh : Float), (cast bh : Float), (cast scaleY : Float)) : Float) };
     return cast null;
   }

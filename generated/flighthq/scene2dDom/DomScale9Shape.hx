@@ -82,8 +82,8 @@ class DomScale9Shape {
       ((cast data : DomScale9ShapeData__domScale9Shape).context = flighthq._internal.backend.CanvasElementBackend.call((cast data : DomScale9ShapeData__domScale9Shape).canvas, 'getContext', cast (['2d'] : Array<Dynamic>)));
       prepareDomElement(({ final __callArgument9:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument9; }));
     }
-    w = HxMath.max(1.0, HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'width'), (cast source : Scale9Shape).scaleX)));
-    h = HxMath.max(1.0, HxMath.ceil(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'height'), (cast source : Scale9Shape).scaleY)));
+    w = HxMath.max(1.0, HxMath.ceil((bounds.width * (cast source : Scale9Shape).scaleX)));
+    h = HxMath.max(1.0, HxMath.ceil((bounds.height * (cast source : Scale9Shape).scaleY)));
     pixelRatio = (cast state : DomRenderState).pixelRatio;
     flighthq._internal.backend.CanvasElementBackend.setField((cast data : DomScale9ShapeData__domScale9Shape).canvas, 'width', HxMath.ceil((w * pixelRatio)));
     flighthq._internal.backend.CanvasElementBackend.setField((cast data : DomScale9ShapeData__domScale9Shape).canvas, 'height', HxMath.ceil((h * pixelRatio)));
@@ -91,7 +91,7 @@ class DomScale9Shape {
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(h) + 'px');
     ctx = (cast data : DomScale9ShapeData__domScale9Shape).context;
     mapScale9ShapeCommands(({ final __callArgument10:Dynamic = DomScale9Shape._remappedCommands__domScale9Shape; __callArgument10; }), ({ final __callArgument11:Dynamic = commands; __callArgument11; }), ({ final __callArgument12:Dynamic = mapper; __callArgument12; }));
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, (-bounds.x * pixelRatio), (-bounds.y * pixelRatio)] : Array<Dynamic>));
     rasterizer(({ final __callArgument13:Dynamic = ctx; __callArgument13; }), ({ final __callArgument14:Dynamic = DomScale9Shape._remappedCommands__domScale9Shape; __callArgument14; }), ({ final __callArgument15:Dynamic = state; __callArgument15; }));
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast renderProxy : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast renderProxy : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast (cast state : DomRenderState).allowSmoothing : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));

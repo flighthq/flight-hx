@@ -58,13 +58,13 @@ class GlyphOutlineSource {
     advance = _Runtime.multiplyNumbers((cast source : flighthq.types.GlyphOutlineSource).getGlyphOutlineAdvance((cast glyphIndex : Float)), scale);
     if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([advance] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     bounds = (cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 });
-    if ((cast ((cast ((cast !(cast (cast getPathBounds(({ final __callArgument3:Dynamic = path; __callArgument3; }), ({ final __callArgument4:Dynamic = bounds; __callArgument4; })) : Bool) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(bounds, 'width'), 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(bounds, 'height'), 0.0) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !(cast (cast getPathBounds(({ final __callArgument3:Dynamic = path; __callArgument3; }), ({ final __callArgument4:Dynamic = bounds; __callArgument4; })) : Bool) : Bool) : Bool) || (cast _Runtime.strictEquals(bounds.width, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(bounds.height, 0.0) : Bool)) : Bool)) {
       return cast { advance: advance, bearingX: 0.0, bearingY: 0.0, height: 0.0, pixels: new flighthq._internal._UInt8ClampedArray(), width: 0.0 };
     }
-    left = _Runtime.subtractNumbers(HxMath.floor(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'x'), scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
-    top = _Runtime.subtractNumbers(HxMath.floor(_Runtime.multiplyNumbers(_Runtime.field(bounds, 'y'), scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
-    right = _Runtime.addNumbers(HxMath.ceil((_Runtime.addNumbers(_Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'width')) * scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
-    bottom = _Runtime.addNumbers(HxMath.ceil((_Runtime.addNumbers(_Runtime.field(bounds, 'y'), _Runtime.field(bounds, 'height')) * scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
+    left = _Runtime.subtractNumbers(HxMath.floor((bounds.x * scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
+    top = _Runtime.subtractNumbers(HxMath.floor((bounds.y * scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
+    right = _Runtime.addNumbers(HxMath.ceil(((bounds.x + bounds.width) * scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
+    bottom = _Runtime.addNumbers(HxMath.ceil(((bounds.y + bounds.height) * scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
     width = (right - left);
     height = (bottom - top);
     if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }

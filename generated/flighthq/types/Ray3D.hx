@@ -8,4 +8,4 @@ import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Ray3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var direction:Vector3; var origin:Vector3; };
 
-typedef Ray3DLike = EntityWithoutRuntime<Ray3D>;
+typedef Ray3DLike = { var direction:Vector3; var origin:Vector3; };

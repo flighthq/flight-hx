@@ -15,7 +15,7 @@ import flighthq.types.Skeleton3D;
 
 class SkinMeshGeometry {
   public static function captureMeshSkinBindPose(geometry:MeshGeometry):MeshSkinBindPose {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:MeshGeometry = cast _Runtime.UNDEFINED;
     var layout:VertexAttributeLayout = cast _Runtime.UNDEFINED;
     var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
@@ -29,8 +29,8 @@ class SkinMeshGeometry {
     var joint:{ var w:Float; var x:Float; var y:Float; var z:Float; } = cast _Runtime.UNDEFINED;
     var weight:{ var w:Float; var x:Float; var y:Float; var z:Float; } = cast _Runtime.UNDEFINED;
     __destructure0 = geometry;
-    layout = _Runtime.field(__destructure0, 'layout');
-    vertices = _Runtime.field(__destructure0, 'vertices');
+    layout = __destructure0.layout;
+    vertices = __destructure0.vertices;
     floatsPerVertex = (layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
     positionOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument0:Dynamic = layout; __callArgument0; }), (cast 'position' : String)) : Float);
@@ -77,7 +77,7 @@ class SkinMeshGeometry {
   }
 
   public static function skinMeshGeometry(geometry:MeshGeometry, skeleton:Skeleton3D, bindPose:MeshSkinBindPose):Void {
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure1:MeshGeometry = cast _Runtime.UNDEFINED;
     var layout:VertexAttributeLayout = cast _Runtime.UNDEFINED;
     var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
@@ -89,8 +89,8 @@ class SkinMeshGeometry {
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     skinVertices(_Runtime.field(bindPose, 'skinnedPositions'), _Runtime.field(bindPose, 'skinnedNormals'), _Runtime.field(bindPose, 'positions'), _Runtime.field(bindPose, 'normals'), ({ final __callArgument6:Dynamic = _Runtime.field(bindPose, 'joints'); __callArgument6; }), _Runtime.field(bindPose, 'weights'), _Runtime.field(skeleton, 'jointMatrices'));
     __destructure1 = geometry;
-    layout = _Runtime.field(__destructure1, 'layout');
-    vertices = _Runtime.field(__destructure1, 'vertices');
+    layout = __destructure1.layout;
+    vertices = __destructure1.vertices;
     floatsPerVertex = (layout.stride / 4.0);
     positionOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument7:Dynamic = layout; __callArgument7; }), (cast 'position' : String)) : Float);
     normalOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument8:Dynamic = layout; __callArgument8; }), (cast 'normal' : String)) : Float);
@@ -120,7 +120,7 @@ class SkinMeshGeometry {
   }
 
   public static function updateMeshSkinBindPoseDeformInput(bindPose:MeshSkinBindPose, geometry:MeshGeometry):Void {
-    var __destructure3:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure3:MeshGeometry = cast _Runtime.UNDEFINED;
     var layout:VertexAttributeLayout = cast _Runtime.UNDEFINED;
     var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
@@ -128,8 +128,8 @@ class SkinMeshGeometry {
     var positionOffset:Float = cast _Runtime.UNDEFINED;
     var normalOffset:Float = cast _Runtime.UNDEFINED;
     __destructure3 = geometry;
-    layout = _Runtime.field(__destructure3, 'layout');
-    vertices = _Runtime.field(__destructure3, 'vertices');
+    layout = __destructure3.layout;
+    vertices = __destructure3.vertices;
     floatsPerVertex = (layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.min((_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) | 0), _Runtime.divideNumbers(_Runtime.field((cast bindPose : MeshSkinBindPose).positions, 'length'), 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
     positionOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument9:Dynamic = layout; __callArgument9; }), (cast 'position' : String)) : Float);

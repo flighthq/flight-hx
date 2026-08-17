@@ -102,7 +102,7 @@ class WgpuParticleEmitter2D {
   public static function drawWgpuParticleEmitter2D(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:ParticleEmitter2D = cast _Runtime.UNDEFINED;
-    var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure2:ParticleEmitterData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var alphas:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var colors:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -138,12 +138,12 @@ class WgpuParticleEmitter2D {
     if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) { return; }
     source = (cast (cast renderProxy : RenderProxy2D).source : ParticleEmitter2D);
     __destructure2 = source.data;
-    atlas = _Runtime.field(__destructure2, 'atlas');
-    alphas = _Runtime.field(__destructure2, 'alphas');
-    colors = _Runtime.field(__destructure2, 'colors');
-    ids = _Runtime.field(__destructure2, 'ids');
-    particleCount = _Runtime.field(__destructure2, 'particleCount');
-    transforms = _Runtime.field(__destructure2, 'transforms');
+    atlas = __destructure2.atlas;
+    alphas = __destructure2.alphas;
+    colors = __destructure2.colors;
+    ids = __destructure2.ids;
+    particleCount = __destructure2.particleCount;
+    transforms = __destructure2.transforms;
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument4:Dynamic = atlas.texture; __callArgument4; })) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
     resources = (cast WgpuParticleEmitter2D.ensureParticleResources__wgpuParticleEmitter2D(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuParticleResources__wgpuParticleEmitter2D);
     WgpuParticleEmitter2D.ensureParticleInstanceBuffer__wgpuParticleEmitter2D(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast particleCount : Float));

@@ -228,9 +228,9 @@ class SwfText {
         _Runtime.callProperty(advances, 'push', cast ([0.0] : Array<Dynamic>));
         continue;
       }
-      _Runtime.callProperty(advances, 'push', cast ([HxMath.max(0.0, _Runtime.addNumbers(_Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'width')))] : Array<Dynamic>));
-      (minY = cast (HxMath.min(minY, _Runtime.field(bounds, 'y')) : Dynamic));
-      (maxY = cast (HxMath.max(maxY, _Runtime.addNumbers(_Runtime.field(bounds, 'y'), _Runtime.field(bounds, 'height'))) : Dynamic));
+      _Runtime.callProperty(advances, 'push', cast ([HxMath.max(0.0, (bounds.x + bounds.width))] : Array<Dynamic>));
+      (minY = cast (HxMath.min(minY, bounds.y) : Dynamic));
+      (maxY = cast (HxMath.max(maxY, (bounds.y + bounds.height)) : Dynamic));
     }
     hasVerticalInk = !_Runtime.strictEquals(minY, HxMath.POSITIVE_INFINITY);
     return cast { advances: advances, metrics: { ascent: ((cast hasVerticalInk : Bool) ? (cast HxMath.max(0.0, -minY) : Dynamic) : (cast (unitsPerEm * SwfText.DEFAULT_ASCENT_RATIO__swfText) : Dynamic)), descent: ((cast hasVerticalInk : Bool) ? (cast HxMath.max(0.0, maxY) : Dynamic) : (cast (unitsPerEm * (1.0 - SwfText.DEFAULT_ASCENT_RATIO__swfText)) : Dynamic)), lineGap: 0.0, unitsPerEm: unitsPerEm } };

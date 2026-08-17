@@ -16,15 +16,15 @@ import flighthq.types.TextureAtlasRegion;
 class SpritesheetValidation {
   public static function validateSpritesheet(spritesheet:Spritesheet):Null<Array<SpritesheetValidationDiagnostic>> {
     var diagnostics:Array<SpritesheetValidationDiagnostic> = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:Spritesheet = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var animations:flighthq._internal._Record<String, SpritesheetAnimation> = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
     diagnostics = (cast cast ([] : Array<Dynamic>));
     __destructure0 = spritesheet;
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    animations = _Runtime.field(__destructure0, 'animations');
-    frames = _Runtime.field(__destructure0, 'frames');
+    atlas = __destructure0.atlas;
+    animations = __destructure0.animations;
+    frames = __destructure0.frames;
     if ((cast !_Runtime.strictEquals(atlas, null) : Bool)) {
       var regionIds:flighthq._internal._Set<Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [(cast _Runtime.mapArray((cast atlas.regions : Array<TextureAtlasRegion>), function(r:TextureAtlasRegion, __unused1:Float, __unused2:Array<TextureAtlasRegion>):Float return r.id, _Runtime.UNDEFINED))]);
       {
@@ -60,14 +60,14 @@ class SpritesheetValidation {
 
   public static function validateSpritesheetData(data:SpritesheetData):Null<Array<SpritesheetValidationDiagnostic>> {
     var diagnostics:Array<SpritesheetValidationDiagnostic> = cast _Runtime.UNDEFINED;
-    var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure4:SpritesheetData = cast _Runtime.UNDEFINED;
     var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrameData> = cast _Runtime.UNDEFINED;
     var frameNameSet:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
     diagnostics = (cast cast ([] : Array<Dynamic>));
     __destructure4 = data;
-    animations = _Runtime.field(__destructure4, 'animations');
-    frames = _Runtime.field(__destructure4, 'frames');
+    animations = __destructure4.animations;
+    frames = __destructure4.frames;
     frameNameSet = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     for (fd in _Runtime.iterable(frames)) {
       if ((cast !_Runtime.strictEquals(fd.name, '') : Bool)) {

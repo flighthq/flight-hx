@@ -28,10 +28,10 @@ class Shortcut {
   public static var _backend__shortcut:Null<ShortcutBackend> = _Runtime.explicitNull();
 
   public static function _copyParsed__shortcut(source:_Parsed__shortcut, out:ParsedAccelerator):ParsedAccelerator {
-    ((cast out : ParsedAccelerator).key = _Runtime.field(source, 'key'));
-    _Runtime.setLength((cast out : ParsedAccelerator).modifiers, 0.0);
+    (out.key = cast (_Runtime.field(source, 'key') : Dynamic));
+    _Runtime.setLength(out.modifiers, 0.0);
     for (modifier in _Runtime.iterable(_Runtime.field(source, 'modifiers'))) {
-      _Runtime.callProperty((cast out : ParsedAccelerator).modifiers, 'push', cast ([modifier] : Array<Dynamic>));
+      _Runtime.callProperty(out.modifiers, 'push', cast ([modifier] : Array<Dynamic>));
     }
     return cast out;
     return cast null;

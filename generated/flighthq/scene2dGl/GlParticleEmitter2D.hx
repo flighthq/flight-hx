@@ -82,7 +82,7 @@ class GlParticleEmitter2D {
   public static function drawGlParticleEmitter2D(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:ParticleEmitter2D = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ParticleEmitterData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var alphas:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var colors:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -107,12 +107,12 @@ class GlParticleEmitter2D {
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlRenderStateRuntime);
     source = (cast (cast renderProxy : RenderProxy2D).source : ParticleEmitter2D);
     __destructure0 = source.data;
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    alphas = _Runtime.field(__destructure0, 'alphas');
-    colors = _Runtime.field(__destructure0, 'colors');
-    ids = _Runtime.field(__destructure0, 'ids');
-    particleCount = _Runtime.field(__destructure0, 'particleCount');
-    transforms = _Runtime.field(__destructure0, 'transforms');
+    atlas = __destructure0.atlas;
+    alphas = __destructure0.alphas;
+    colors = __destructure0.colors;
+    ids = __destructure0.ids;
+    particleCount = __destructure0.particleCount;
+    transforms = __destructure0.transforms;
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument5:Dynamic = atlas.texture; __callArgument5; })) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
     shader = (cast GlParticleEmitter2D.ensureParticleShader__glParticleEmitter2D(({ final __callArgument6:Dynamic = state; __callArgument6; })) : GlParticleShader);
     GlParticleEmitter2D.ensureInstanceCapacity__glParticleEmitter2D(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast particleCount : Float));

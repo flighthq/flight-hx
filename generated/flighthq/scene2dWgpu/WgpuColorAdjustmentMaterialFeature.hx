@@ -465,10 +465,10 @@ class WgpuColorAdjustmentMaterialFeature {
   public static function getPackedTint__wgpuColorAdjustmentMaterialFeature(value:Null<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>>):Null<Float> {
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast 4294967295.0; }
     if ((cast (cast WgpuColorAdjustmentMaterialFeature.isTintMaterialData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument98:Dynamic = value; __callArgument98; })) : Bool) : Bool)) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(value, 'tint')), 0); }
-    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(value, 'redBias'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(value, 'greenBias'), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(value, 'blueBias'), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(value, 'alphaBias'), 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'redScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'redScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'greenScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'greenScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'blueScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'blueScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'alphaScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'alphaScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals((cast value : { var redBias:Float; }).redBias, 0.0) : Bool) || (cast !_Runtime.strictEquals((cast value : { var greenBias:Float; }).greenBias, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast value : { var blueBias:Float; }).blueBias, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast value : { var alphaBias:Float; }).alphaBias, 0.0) : Bool)) : Bool) || (cast ((cast (cast value : { var redScale:Float; }).redScale : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var redScale:Float; }).redScale : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var greenScale:Float; }).greenScale : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var greenScale:Float; }).greenScale : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var blueScale:Float; }).blueScale : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var blueScale:Float; }).blueScale : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var alphaScale:Float; }).alphaScale : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var alphaScale:Float; }).alphaScale : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) {
       return cast null;
     }
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(value, 'redScale'), 255.0))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(value, 'greenScale'), 255.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(value, 'blueScale'), 255.0))) << 8)))) | _Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(value, 'alphaScale'), 255.0))))), 0);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(((cast value : { var redScale:Float; }).redScale * 255.0))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(((cast value : { var greenScale:Float; }).greenScale * 255.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(((cast value : { var blueScale:Float; }).blueScale * 255.0))) << 8)))) | _Runtime.toInt32(HxMath.round(((cast value : { var alphaScale:Float; }).alphaScale * 255.0))))), 0);
     return cast null;
   }
 
@@ -489,19 +489,19 @@ class WgpuColorAdjustmentMaterialFeature {
 
   public static function getColorScale__wgpuColorAdjustmentMaterialFeature(value:flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, channel:Float):Float {
     if ((cast (cast WgpuColorAdjustmentMaterialFeature.isTintMaterialData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument99:Dynamic = value; __callArgument99; })) : Bool) : Bool)) { return cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(value, 'tint')), _Runtime.toInt32((24.0 - (channel * 8.0))))) & 255) / 255.0); }
-    if ((cast _Runtime.strictEquals(channel, 0.0) : Bool)) { return cast _Runtime.field(value, 'redScale'); }
-    if ((cast _Runtime.strictEquals(channel, 1.0) : Bool)) { return cast _Runtime.field(value, 'greenScale'); }
-    if ((cast _Runtime.strictEquals(channel, 2.0) : Bool)) { return cast _Runtime.field(value, 'blueScale'); }
-    return cast _Runtime.field(value, 'alphaScale');
+    if ((cast _Runtime.strictEquals(channel, 0.0) : Bool)) { return cast (cast value : { var redScale:Float; }).redScale; }
+    if ((cast _Runtime.strictEquals(channel, 1.0) : Bool)) { return cast (cast value : { var greenScale:Float; }).greenScale; }
+    if ((cast _Runtime.strictEquals(channel, 2.0) : Bool)) { return cast (cast value : { var blueScale:Float; }).blueScale; }
+    return cast (cast value : { var alphaScale:Float; }).alphaScale;
     return cast null;
   }
 
   public static function getColorBias__wgpuColorAdjustmentMaterialFeature(value:flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, channel:Float):Float {
     if ((cast (cast WgpuColorAdjustmentMaterialFeature.isTintMaterialData__wgpuColorAdjustmentMaterialFeature(({ final __callArgument100:Dynamic = value; __callArgument100; })) : Bool) : Bool)) { return cast 0.0; }
-    if ((cast _Runtime.strictEquals(channel, 0.0) : Bool)) { return cast _Runtime.field(value, 'redBias'); }
-    if ((cast _Runtime.strictEquals(channel, 1.0) : Bool)) { return cast _Runtime.field(value, 'greenBias'); }
-    if ((cast _Runtime.strictEquals(channel, 2.0) : Bool)) { return cast _Runtime.field(value, 'blueBias'); }
-    return cast _Runtime.field(value, 'alphaBias');
+    if ((cast _Runtime.strictEquals(channel, 0.0) : Bool)) { return cast (cast value : { var redBias:Float; }).redBias; }
+    if ((cast _Runtime.strictEquals(channel, 1.0) : Bool)) { return cast (cast value : { var greenBias:Float; }).greenBias; }
+    if ((cast _Runtime.strictEquals(channel, 2.0) : Bool)) { return cast (cast value : { var blueBias:Float; }).blueBias; }
+    return cast (cast value : { var alphaBias:Float; }).alphaBias;
     return cast null;
   }
 
@@ -510,14 +510,14 @@ class WgpuColorAdjustmentMaterialFeature {
     var uniform:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     colorScaleBias = (cast renderProxy : RenderProxy2D).colorScaleBias;
     uniform = WgpuColorAdjustmentMaterialFeature._shapeMeshColorScaleBiasUniformScratch__wgpuColorAdjustmentMaterialFeature;
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 16.0 : Float), (cast (cast colorScaleBias : ColorScaleBias).redScale : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 17.0 : Float), (cast (cast colorScaleBias : ColorScaleBias).greenScale : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 18.0 : Float), (cast (cast colorScaleBias : ColorScaleBias).blueScale : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 19.0 : Float), (cast (cast colorScaleBias : ColorScaleBias).alphaScale : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 20.0 : Float), (cast (cast colorScaleBias : ColorScaleBias).redBias : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 21.0 : Float), (cast (cast colorScaleBias : ColorScaleBias).greenBias : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 22.0 : Float), (cast (cast colorScaleBias : ColorScaleBias).blueBias : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 23.0 : Float), (cast (cast colorScaleBias : ColorScaleBias).alphaBias : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 16.0 : Float), (cast colorScaleBias.redScale : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 17.0 : Float), (cast colorScaleBias.greenScale : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 18.0 : Float), (cast colorScaleBias.blueScale : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 19.0 : Float), (cast colorScaleBias.alphaScale : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 20.0 : Float), (cast colorScaleBias.redBias : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 21.0 : Float), (cast colorScaleBias.greenBias : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 22.0 : Float), (cast colorScaleBias.blueBias : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniform : flighthq._internal._Float32Array), (cast 23.0 : Float), (cast colorScaleBias.alphaBias : Float));
     drawWgpuShapeMeshBatch(({ final __callArgument101:Dynamic = state; __callArgument101; }), ({ final __callArgument102:Dynamic = renderProxy; __callArgument102; }), ({ final __callArgument103:Dynamic = meshes; __callArgument103; }), ({ final __callArgument104:Dynamic = buffers; __callArgument104; }), (cast WgpuColorAdjustmentMaterialFeature.ensureWgpuShapeMeshColorScaleBiasPipeline__wgpuColorAdjustmentMaterialFeature(({ final __callArgument105:Dynamic = state; __callArgument105; }), (cast renderProxy : RenderProxy2D).blendMode) : WgpuShapeMeshPipeline), (cast buffers : WgpuShapeMeshBuffers).colorScaleBiasUniformBuffers, (cast buffers : WgpuShapeMeshBuffers).colorScaleBiasBindGroups, ({ final __callArgument106:Dynamic = uniform; __callArgument106; }));
   }
 

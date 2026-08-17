@@ -25,7 +25,7 @@ class MorphMeshGeometry {
     var targets:Array<MorphTarget> = cast _Runtime.UNDEFINED;
     var weights:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var targetCount:Float = cast _Runtime.UNDEFINED;
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure1:MeshGeometry = cast _Runtime.UNDEFINED;
     var layout:VertexAttributeLayout = cast _Runtime.UNDEFINED;
     var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
@@ -64,8 +64,8 @@ class MorphMeshGeometry {
       }
     }
     __destructure1 = geometry;
-    layout = _Runtime.field(__destructure1, 'layout');
-    vertices = _Runtime.field(__destructure1, 'vertices');
+    layout = __destructure1.layout;
+    vertices = __destructure1.vertices;
     floatsPerVertex = (layout.stride / 4.0);
     positionOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument3:Dynamic = layout; __callArgument3; }), ({ final __callArgument4:Dynamic = 'position'; __callArgument4; })) : Float);
     normalOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument5:Dynamic = layout; __callArgument5; }), ({ final __callArgument6:Dynamic = 'normal'; __callArgument6; })) : Float);
@@ -97,7 +97,7 @@ class MorphMeshGeometry {
   }
 
   public static function captureMeshMorphBindPose(geometry:MeshGeometry):MeshMorphBindPose {
-    var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure2:MeshGeometry = cast _Runtime.UNDEFINED;
     var layout:VertexAttributeLayout = cast _Runtime.UNDEFINED;
     var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
@@ -109,8 +109,8 @@ class MorphMeshGeometry {
     var normals:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     var tangents:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     __destructure2 = geometry;
-    layout = _Runtime.field(__destructure2, 'layout');
-    vertices = _Runtime.field(__destructure2, 'vertices');
+    layout = __destructure2.layout;
+    vertices = __destructure2.vertices;
     floatsPerVertex = (layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
     positionOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument9:Dynamic = layout; __callArgument9; }), ({ final __callArgument10:Dynamic = 'position'; __callArgument10; })) : Float);

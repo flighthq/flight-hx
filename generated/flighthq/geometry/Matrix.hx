@@ -195,7 +195,7 @@ class Matrix {
   }
 
   public static function matrixTransformBounds(out:RectangleLike, source:MatrixLike, ax:Float, ay:Float, bx:Float, by:Float):Void {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:MatrixLike = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     var c:Float = cast _Runtime.UNDEFINED;
@@ -207,15 +207,15 @@ class Matrix {
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
     __destructure0 = source;
-    a = _Runtime.field(__destructure0, 'a');
-    b = _Runtime.field(__destructure0, 'b');
-    c = _Runtime.field(__destructure0, 'c');
-    d = _Runtime.field(__destructure0, 'd');
+    a = __destructure0.a;
+    b = __destructure0.b;
+    c = __destructure0.c;
+    d = __destructure0.d;
     if ((cast ((cast _Runtime.strictEquals(ax, bx) : Bool) && (cast _Runtime.strictEquals(ay, by) : Bool)) : Bool)) {
-      _Runtime.setField(out, 'x', source.tx);
-      _Runtime.setField(out, 'y', source.ty);
-      _Runtime.setField(out, 'width', 0.0);
-      _Runtime.setField(out, 'height', 0.0);
+      (out.x = cast (source.tx : Dynamic));
+      (out.y = cast (source.ty : Dynamic));
+      (out.width = cast (0.0 : Dynamic));
+      (out.height = cast (0.0 : Dynamic));
       return;
     }
     tx0 = ((a * ax) + (c * ay));
@@ -240,10 +240,10 @@ class Matrix {
     if ((cast ((cast ty : Float) < (cast ty0 : Float)) : Bool)) { (ty0 = cast (ty : Dynamic)); }
     if ((cast ((cast tx : Float) > (cast tx1 : Float)) : Bool)) { (tx1 = cast (tx : Dynamic)); }
     if ((cast ((cast ty : Float) > (cast ty1 : Float)) : Bool)) { (ty1 = cast (ty : Dynamic)); }
-    _Runtime.setField(out, 'x', (tx0 + source.tx));
-    _Runtime.setField(out, 'y', (ty0 + source.ty));
-    _Runtime.setField(out, 'width', (tx1 - tx0));
-    _Runtime.setField(out, 'height', (ty1 - ty0));
+    (out.x = cast ((tx0 + source.tx) : Dynamic));
+    (out.y = cast ((ty0 + source.ty) : Dynamic));
+    (out.width = cast ((tx1 - tx0) : Dynamic));
+    (out.height = cast ((ty1 - ty0) : Dynamic));
   }
 
   public static function matrixTransformBoundsVector2(out:RectangleLike, matrix:MatrixLike, a:Vector2Like, b:Vector2Like):Void {
@@ -260,7 +260,7 @@ class Matrix {
   }
 
   public static function matrixTransformRectangle(out:RectangleLike, matrix:MatrixLike, source:RectangleLike):Void {
-    matrixTransformBounds(({ final __callArgument14:Dynamic = out; __callArgument14; }), ({ final __callArgument15:Dynamic = matrix; __callArgument15; }), (cast _Runtime.field(source, 'x') : Float), (cast _Runtime.field(source, 'y') : Float), (cast _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')) : Float), (cast _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')) : Float));
+    matrixTransformBounds(({ final __callArgument14:Dynamic = out; __callArgument14; }), ({ final __callArgument15:Dynamic = matrix; __callArgument15; }), (cast source.x : Float), (cast source.y : Float), (cast (source.x + source.width) : Float), (cast (source.y + source.height) : Float));
   }
 
   public static function matrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {
@@ -409,7 +409,7 @@ class Matrix {
   }
 
   public static function translateMatrix(out:MatrixLike, source:MatrixLike, dx:Float, dy:Float):Void {
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure1:MatrixLike = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     var c:Float = cast _Runtime.UNDEFINED;
@@ -417,12 +417,12 @@ class Matrix {
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
     __destructure1 = source;
-    a = _Runtime.field(__destructure1, 'a');
-    b = _Runtime.field(__destructure1, 'b');
-    c = _Runtime.field(__destructure1, 'c');
-    d = _Runtime.field(__destructure1, 'd');
-    tx = _Runtime.field(__destructure1, 'tx');
-    ty = _Runtime.field(__destructure1, 'ty');
+    a = __destructure1.a;
+    b = __destructure1.b;
+    c = __destructure1.c;
+    d = __destructure1.d;
+    tx = __destructure1.tx;
+    ty = __destructure1.ty;
     setMatrix(({ final __callArgument20:Dynamic = out; __callArgument20; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast (tx + dx) : Float), (cast (ty + dy) : Float));
   }
 
@@ -431,7 +431,7 @@ class Matrix {
   }
 
   public static function translateMatrixByVectorXY(out:MatrixLike, source:MatrixLike, x:Float, y:Float):Void {
-    var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure2:MatrixLike = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     var c:Float = cast _Runtime.UNDEFINED;
@@ -439,12 +439,12 @@ class Matrix {
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
     __destructure2 = source;
-    a = _Runtime.field(__destructure2, 'a');
-    b = _Runtime.field(__destructure2, 'b');
-    c = _Runtime.field(__destructure2, 'c');
-    d = _Runtime.field(__destructure2, 'd');
-    tx = _Runtime.field(__destructure2, 'tx');
-    ty = _Runtime.field(__destructure2, 'ty');
+    a = __destructure2.a;
+    b = __destructure2.b;
+    c = __destructure2.c;
+    d = __destructure2.d;
+    tx = __destructure2.tx;
+    ty = __destructure2.ty;
     setMatrix(({ final __callArgument23:Dynamic = out; __callArgument23; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast ((tx + (a * x)) + (c * y)) : Float), (cast ((ty + (b * x)) + (d * y)) : Float));
   }
 

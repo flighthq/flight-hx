@@ -45,7 +45,7 @@ class CanvasClipRectangle {
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'save', cast ([] : Array<Dynamic>));
     setCanvasTransform(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast state : CanvasRenderState).context, ({ final __callArgument3:Dynamic = transform; __callArgument3; }));
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'beginPath', cast ([] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'rect', cast ([_Runtime.field(rect, 'x'), _Runtime.field(rect, 'y'), _Runtime.field(rect, 'width'), _Runtime.field(rect, 'height')] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'rect', cast ([rect.x, rect.y, rect.width, rect.height] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'clip', cast ([] : Array<Dynamic>));
   }
 }

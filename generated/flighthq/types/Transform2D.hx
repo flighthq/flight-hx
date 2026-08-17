@@ -8,4 +8,4 @@ import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Transform2D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
 
-typedef Transform2DLike = EntityWithoutRuntime<Transform2D>;
+typedef Transform2DLike = { var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };

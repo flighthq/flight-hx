@@ -23,10 +23,10 @@ class CanvasScale9Mapper {
     __destructure0 = bounds;
     bw = _Runtime.field(__destructure0, 'width');
     bh = _Runtime.field(__destructure0, 'height');
-    gx = _Runtime.field(scale9Grid, 'x');
-    gy = _Runtime.field(scale9Grid, 'y');
-    gw = _Runtime.field(scale9Grid, 'width');
-    gh = _Runtime.field(scale9Grid, 'height');
+    gx = scale9Grid.x;
+    gy = scale9Grid.y;
+    gw = scale9Grid.width;
+    gh = scale9Grid.height;
     return cast { mapX: function(x:Float):Float return (cast CanvasScale9Mapper.toScale9Position__canvasScale9Mapper((cast x : Float), (cast gx : Float), (cast gw : Float), (cast bw : Float), (cast scaleX : Float)) : Float), mapY: function(y:Float):Float return (cast CanvasScale9Mapper.toScale9Position__canvasScale9Mapper((cast y : Float), (cast gy : Float), (cast gh : Float), (cast bh : Float), (cast scaleY : Float)) : Float) };
     return cast null;
   }

@@ -2321,11 +2321,11 @@
       "declarationFingerprint": "sha256:353b654b412c10670deff7c560b299be80853ca9514e424354aafae28f18ebd6",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 3,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -2381,9 +2381,7 @@
       "name": "AcceleratorParseError",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/AcceleratorParseError.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -10458,7 +10456,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 90,
+        "reads": 99,
         "writes": 0
       },
       "declarationFingerprint": "sha256:a3e8b0a6c23713f4d8e46cae1937cd775b8337ee098c6b36ecb5a906b35a8a44",
@@ -10468,7 +10466,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 90,
+        "pendingAccesses": 99,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -27359,7 +27357,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 464,
+        "reads": 467,
         "writes": 3
       },
       "declarationFingerprint": "sha256:8806f84841153875eb1d57f486d1529304a35136d032d28da2ad579b45064d37",
@@ -27367,7 +27365,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 467,
+        "directAccesses": 470,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": [
@@ -29017,7 +29015,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 4,
+        "reads": 7,
         "writes": 0
       },
       "declarationFingerprint": "sha256:36622be26b0d6d74ad2b9612c9d5c08e151474680298a719a6cb4f5e3099003e",
@@ -29027,7 +29025,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 4,
+        "pendingAccesses": 7,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -58266,12 +58264,21 @@
       "declarationFingerprint": "sha256:6fbc41d7a9065b4fc4a101d3ffc68df9a3c2756746b347495023a341d63b3dc0",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
-        "directAccesses": 0,
+        "directAccesses": 231,
         "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "dynamic-enumeration"
+          },
+          {
+            "accesses": 2,
+            "reason": "presence-sensitive"
+          }
+        ]
       },
       "escapes": [
         {
@@ -58374,9 +58381,7 @@
       "name": "ColorScaleBias",
       "packageName": "@flighthq/types",
       "purpose": "render-hot RGBA multiplier and offset record",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/ColorScaleBias.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -62343,7 +62348,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 14,
+        "reads": 20,
         "writes": 0
       },
       "declarationFingerprint": "sha256:bde9a7679c21f48a1a9479c7bfcd6dd049d9255cee1c88feaecc530e7fbfb5fc",
@@ -62353,7 +62358,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 14,
+        "pendingAccesses": 20,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -68367,11 +68372,11 @@
       "declarationFingerprint": "sha256:38fa448f3ab74d60dcd04814fef23fdd7681955b2281907978b8d6bc1f47c017",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 5,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -68417,9 +68422,7 @@
       "name": "DomClipContourEntry",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/DomRenderState.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -69725,11 +69728,11 @@
       "declarationFingerprint": "sha256:3e0778c86763ff30fd5e4ca6383466d07adf2ea324b637d54dbb2ddc72c803be",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 36,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -69783,9 +69786,7 @@
       "name": "DomScene2DRectangle",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/DomScene2DRectangle.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -79223,7 +79224,7 @@
       "declarationFingerprint": "sha256:e8922dec976bcfcb17943d6646ad2d8a649cf0c12bc2a77930283dacd421e57a",
       "declarationKind": "type",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
@@ -103516,9 +103517,7 @@
       "name": "EntityWithoutRuntime",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/Entity.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "type",
@@ -114227,7 +114226,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 0,
+        "reads": 2,
         "writes": 0
       },
       "declarationFingerprint": "sha256:50b0b605c4a59647c487994d45d99039aa098de090df70939b4e58a2635be502",
@@ -114235,7 +114234,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
+        "directAccesses": 2,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -132064,7 +132063,7 @@
     {
       "accesses": {
         "calls": 10,
-        "reads": 284,
+        "reads": 292,
         "writes": 242
       },
       "declarationFingerprint": "sha256:a8e896f65206af608a3efc10cf9109d10714c30269d79b02c5077a81879c8d3b",
@@ -132074,7 +132073,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 536,
+        "pendingAccesses": 544,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -132924,7 +132923,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 270,
+        "reads": 276,
         "writes": 27
       },
       "declarationFingerprint": "sha256:a70ee9ffbaf0c1d0fd73965076d56028db2ce78f1dda4c9006e35974be0fe408",
@@ -132934,7 +132933,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 297,
+        "pendingAccesses": 303,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -135758,7 +135757,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 4,
+        "reads": 6,
         "writes": 0
       },
       "declarationFingerprint": "sha256:106de80ca0ba81c8d7d820fd5e6287b21cea576240f6a61c12c7844d0cf9feb8",
@@ -135768,7 +135767,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 4,
+        "pendingAccesses": 6,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -146796,7 +146795,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 2,
+        "reads": 11,
         "writes": 0
       },
       "declarationFingerprint": "sha256:74eac29226f65baa0ccd8d51e1d6a30564af4f67ecd026148f3e2cf967127176",
@@ -146804,7 +146803,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 2,
+        "directAccesses": 11,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -156470,7 +156469,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 2,
+        "reads": 6,
         "writes": 0
       },
       "declarationFingerprint": "sha256:c060013b06ced444e8694568173367e58d597ed2845be791121f047159a18dc0",
@@ -156480,7 +156479,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 2,
+        "pendingAccesses": 6,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -171298,7 +171297,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 2,
+        "reads": 9,
         "writes": 0
       },
       "declarationFingerprint": "sha256:d983c478cbedc28ac64db9a78d5b83adb8b0750a9224e97fa3ddfcfb7c7f2eaa",
@@ -171308,7 +171307,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 2,
+        "pendingAccesses": 9,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -172064,7 +172063,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 9,
+        "reads": 21,
         "writes": 0
       },
       "declarationFingerprint": "sha256:386ab33911ac9d6cfda1c53f076da7a8c79abd8f042508f5e4210185d9eacd08",
@@ -172074,7 +172073,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 9,
+        "pendingAccesses": 21,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -172811,11 +172810,11 @@
       "declarationFingerprint": "sha256:f9af23ea9cb976eee80983290bfed64bfe927dbe60c4d3da359457ff0fd524b3",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 5,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -172882,9 +172881,7 @@
       "name": "LottieAnimatedProperty",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/LottieDocument.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -174475,11 +174472,11 @@
       "declarationFingerprint": "sha256:30634eb0a7a59537f03ae3b33b6e6e8abda530c73ce511e2706162d48b9b3767",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 1,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -174562,9 +174559,7 @@
       "name": "LottieImageAsset",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/LottieDocument.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -175702,11 +175697,11 @@
       "declarationFingerprint": "sha256:f272aaec54f3366e5bd2bc97284d40cd23c4617f89a714cdc5096c25412f3778",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 1,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -175781,9 +175776,7 @@
       "name": "LottiePrecompositionAsset",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/LottieDocument.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -176660,11 +176653,11 @@
       "declarationFingerprint": "sha256:f6022e59ec6b9c1b40b2cb050ba29bf58f0263cad3e9f221c547e6e371532fc4",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 3,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -176730,9 +176723,7 @@
       "name": "LottieSeparatedPositionProperty",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/LottieDocument.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -177515,11 +177506,11 @@
       "declarationFingerprint": "sha256:b2c0738bcde0017502b9eb7ebf1ca70ead5bbf734b1002d6b605f47f95275e72",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 1,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -177586,9 +177577,7 @@
       "name": "LottieStaticProperty",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/LottieDocument.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -179182,11 +179171,11 @@
       "declarationFingerprint": "sha256:7b8cbeecd35b9e04b3c14957a910b0b80f82dfe3f2c265b9d531aae186772ceb",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 7,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -179244,9 +179233,7 @@
       "name": "MarkupTagEffect",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/MarkupTagHandler.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -180533,7 +180520,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 610,
+        "reads": 654,
         "writes": 154
       },
       "declarationFingerprint": "sha256:8ddd28fa32ed92240e8fd2a344a367c2dfdcead7d3069f3abc97744cb17e7eea",
@@ -180541,7 +180528,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 764,
+        "directAccesses": 808,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -190180,7 +190167,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 257,
+        "reads": 267,
         "writes": 31
       },
       "declarationFingerprint": "sha256:ba607b6e53ee733bb8d2233cfaf78618ed0be454fbbe45809ec8977365013d83",
@@ -190188,7 +190175,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 288,
+        "directAccesses": 298,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": [
@@ -190424,7 +190411,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 4,
+        "reads": 5,
         "writes": 0
       },
       "declarationFingerprint": "sha256:594c1b6b37974803ded7399e56221006adb4f5cfd748c999ef2740be53a08cce",
@@ -190434,7 +190421,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 4,
+        "pendingAccesses": 5,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -190820,7 +190807,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 5,
+        "reads": 11,
         "writes": 0
       },
       "declarationFingerprint": "sha256:46ae94ec0d2f4ecb8234eaf136c57802dfddfe945afee70775a2cd3b7ed391ec",
@@ -190830,7 +190817,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 5,
+        "pendingAccesses": 11,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -191269,7 +191256,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 32,
+        "reads": 36,
         "writes": 0
       },
       "declarationFingerprint": "sha256:736e4bf4ec95bf4937e25e58fcd614373bff9626fbfd4431685b2b025bd9f67c",
@@ -191279,7 +191266,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 32,
+        "pendingAccesses": 36,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -202575,11 +202562,11 @@
       "declarationFingerprint": "sha256:426dc2d14c89b2af765f48019e4ba9f16cf36c7064b91789ac3a6f185cbf142e",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 7,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -203976,9 +203963,7 @@
       "name": "Node",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/Node.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -207967,7 +207952,7 @@
       "declarationFingerprint": "sha256:18887280f4f7836bc0fbe77395f606df1d806a6ddfdf9d4c35cc6058b7de7eb2",
       "declarationKind": "type",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
@@ -208171,9 +208156,7 @@
       "name": "NodeAny",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/Node.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "type",
@@ -208566,11 +208549,11 @@
       "declarationFingerprint": "sha256:67ed4d560c545470b8b71012083fb82e169a3a89c21d01422aa62a02e5ad64b2",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 172,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -209501,9 +209484,7 @@
       "name": "NodeRuntime",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/Node.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -213747,12 +213728,17 @@
       "declarationFingerprint": "sha256:9922be3517531ac1f62eed3d778ca5c3e6e7c096c9ff910ca3ca3257fc02d223",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
-        "directAccesses": 0,
+        "directAccesses": 5,
         "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 1,
+            "reason": "presence-sensitive"
+          }
+        ]
       },
       "escapes": [
         {
@@ -213789,9 +213775,7 @@
       "name": "ParsedAccelerator",
       "packageName": "@flighthq/types",
       "purpose": "broad host document",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/ParsedAccelerator.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -217619,7 +217603,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 705,
+        "reads": 729,
         "writes": 0
       },
       "declarationFingerprint": "sha256:cf4bc7901c43bc748e5284248a651f745819fc095bdc6b09ccf7134d7f42f41f",
@@ -217627,7 +217611,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 705,
+        "directAccesses": 729,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": [
@@ -218119,7 +218103,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 383,
+        "reads": 433,
         "writes": 28
       },
       "declarationFingerprint": "sha256:56265a2a70d16090bfde55d92b3f1b50be63638030ea3492c5e2dcbc857b32bd",
@@ -218127,7 +218111,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 411,
+        "directAccesses": 461,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -220302,7 +220286,7 @@
     {
       "accesses": {
         "calls": 9,
-        "reads": 16,
+        "reads": 20,
         "writes": 11
       },
       "declarationFingerprint": "sha256:e4464e1605aa4611f053b8b6fac5a0d4784aca308b7912611ad313c2168ce176",
@@ -220310,7 +220294,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 36,
+        "directAccesses": 40,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -220536,17 +220520,17 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 200,
+        "reads": 202,
         "writes": 16
       },
       "declarationFingerprint": "sha256:9cbb0d15071e08ebc7e743943a37cb1426cb47860423d48eb0de4fd5729f9b81",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 218,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -220598,9 +220582,7 @@
       "name": "Path",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/Path.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -250526,7 +250508,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 77,
+        "reads": 121,
         "writes": 9
       },
       "declarationFingerprint": "sha256:c5ddb66c3aa664642f434b204e28cd767990fb68dccd61d95ddce1217b271f85",
@@ -250536,7 +250518,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 86,
+        "pendingAccesses": 130,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -254196,18 +254178,23 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 441,
+        "reads": 449,
         "writes": 218
       },
       "declarationFingerprint": "sha256:a9ecbfbf0841ea1a0d47b8480c419819b40456e51a9e8b25618ffca45387048b",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
-        "directAccesses": 0,
+        "directAccesses": 667,
         "mode": "direct",
         "pendingAccesses": 0,
-        "reflectiveSurvivors": []
+        "reflectiveSurvivors": [
+          {
+            "accesses": 2,
+            "reason": "presence-sensitive"
+          }
+        ]
       },
       "escapes": [
         {
@@ -254272,9 +254259,7 @@
       "name": "Rectangle",
       "packageName": "@flighthq/types",
       "purpose": "four-component rectangle leaf",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/Rectangle.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -257641,7 +257626,6 @@
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
       "reasons": [
-        "presence-sensitive-use",
         "unsupported-shape"
       ],
       "source": "upstream/packages/types/src/RenderCacheAdapter.ts",
@@ -260110,7 +260094,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 2,
+        "reads": 5,
         "writes": 0
       },
       "declarationFingerprint": "sha256:4a319c9f224ad0ea33a1150b24214c3f6c6c7c49f71d4b2018541d137eb2d3d0",
@@ -260120,7 +260104,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 2,
+        "pendingAccesses": 5,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -260965,11 +260949,11 @@
       "declarationFingerprint": "sha256:4026ea09e96b83cb35d71bc652ac9b7cf776ea01c3e354ff4656db3b4efbd9fd",
       "declarationKind": "type",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 1,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -261041,9 +261025,7 @@
       "name": "RenderProxyAdapter",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/RenderProxyAdapter.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "type",
@@ -261528,11 +261510,11 @@
       "declarationFingerprint": "sha256:2f1b22ab88295c563dd5bc4c915601d3bfb0ceb7a0cf9390902bf8134147b6a3",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 20,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -261704,9 +261686,7 @@
       "name": "RenderState",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/RenderState.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -268698,7 +268678,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 43,
+        "reads": 45,
         "writes": 3
       },
       "declarationFingerprint": "sha256:048d186739d8bfe34b14f636cd57fb89116b401bab1347c3742749f04b2838be",
@@ -268708,7 +268688,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 46,
+        "pendingAccesses": 48,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -268752,7 +268732,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 180,
+        "reads": 188,
         "writes": 61
       },
       "declarationFingerprint": "sha256:fa82e08e1863fcc75e3ed9619dc8585f19565703bc84971444398c1df93031eb",
@@ -268762,7 +268742,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 241,
+        "pendingAccesses": 249,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -273851,7 +273831,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 37,
+        "reads": 39,
         "writes": 0
       },
       "declarationFingerprint": "sha256:c4d9690d18b21e3fb00e7e50dfe7d187fcf5b4135c164263b85824d18571e746",
@@ -273861,7 +273841,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 37,
+        "pendingAccesses": 39,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -274047,7 +274027,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 0,
+        "reads": 8,
         "writes": 0
       },
       "declarationFingerprint": "sha256:13a7dbdfd01d4e31fcfb71cc4a0ba9b7cfa64d334bfba297a4d45a4b283f126e",
@@ -274057,7 +274037,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 8,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -291472,7 +291452,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 32,
+        "reads": 38,
         "writes": 0
       },
       "declarationFingerprint": "sha256:c3677e835bf0844d2df50b06f28145cdeebf386b4c0f584f8296158a84558aa4",
@@ -291482,7 +291462,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 32,
+        "pendingAccesses": 38,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -291696,11 +291676,11 @@
       "declarationFingerprint": "sha256:9583984fbeadff5cb76c66d1ce347f6b68a1e9d0ded4e7ebb19cb84d578c2d3d",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 4,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -291794,9 +291774,7 @@
       "name": "ShapeFillRegion",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/ShapeFillRegion.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -292342,11 +292320,11 @@
       "declarationFingerprint": "sha256:f1dc61ebc379fe1a424bda629a0fb4dc0e8bb625330235733b29ac0aba54be03",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 4,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -292448,9 +292426,7 @@
       "name": "ShapeStrokeRegion",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/ShapeStrokeRegion.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -311275,7 +311251,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 33,
+        "reads": 40,
         "writes": 1
       },
       "declarationFingerprint": "sha256:31eb650a945dc248ce93c5e25b2cd1fdf0f3ad4576ca1b19dc10acd77f99e5e7",
@@ -311285,7 +311261,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 34,
+        "pendingAccesses": 41,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -327586,7 +327562,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 8,
+        "reads": 13,
         "writes": 0
       },
       "declarationFingerprint": "sha256:da9195606c447ce0db19f20527419fc6269a289464dc737abd92885efe9e69d3",
@@ -327594,7 +327570,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 8,
+        "directAccesses": 13,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -327654,7 +327630,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 27,
+        "reads": 38,
         "writes": 0
       },
       "declarationFingerprint": "sha256:a8aba6298250843bd72a0183b1a130e800af4018a239ef5825bef0aeb370e758",
@@ -327662,7 +327638,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 27,
+        "directAccesses": 38,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -328535,7 +328511,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 33,
+        "reads": 35,
         "writes": 0
       },
       "declarationFingerprint": "sha256:f78005b7c0e199cd815a4d375ae51320d35863adf25ef1fc9ed4dbe445066bfe",
@@ -328543,7 +328519,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 33,
+        "directAccesses": 35,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -330331,7 +330307,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 30,
+        "reads": 37,
         "writes": 35
       },
       "declarationFingerprint": "sha256:b7441e36e6a0e7d4e6f0d030132c22cc1dc806624358cdb6326f491bdb8f43d3",
@@ -330339,7 +330315,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 65,
+        "directAccesses": 72,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -350604,7 +350580,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 32,
+        "reads": 44,
         "writes": 7
       },
       "declarationFingerprint": "sha256:d94505d93827743797a2c6724668ebc639ebab71ea755df4bdc4fee0ae7971e5",
@@ -350614,7 +350590,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 39,
+        "pendingAccesses": 51,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -351190,7 +351166,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 4,
+        "reads": 17,
         "writes": 0
       },
       "declarationFingerprint": "sha256:1f2c95acb12ba7582d7411b09d418cf403f8a1cfd850662b185e4c344cecdd40",
@@ -351200,7 +351176,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 4,
+        "pendingAccesses": 17,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -353728,11 +353704,11 @@
       "declarationFingerprint": "sha256:6fc460454838402f2f491be7c207087b5dbd2f51429db1282a2c6ec7e4b78cd3",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 116,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -355016,9 +354992,7 @@
       "name": "Texture2D",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/Texture.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -369949,7 +369923,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 0,
+        "reads": 1,
         "writes": 0
       },
       "declarationFingerprint": "sha256:24fed34412a32b4a4ec7eb62f8605d0827907769a2c1dc6e641efe2b97808e4e",
@@ -369959,7 +369933,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 1,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -373284,7 +373258,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 3,
+        "reads": 6,
         "writes": 0
       },
       "declarationFingerprint": "sha256:74eafef6a565157e5970c142944550be373bd48e9bfd2fe885439256462d07b4",
@@ -373294,7 +373268,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 3,
+        "pendingAccesses": 6,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -374059,7 +374033,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 23,
+        "reads": 66,
         "writes": 4
       },
       "declarationFingerprint": "sha256:24320b83bfd5874be2f12540bc06d3b54f1f6d2611c4c7652b684095843ad56b",
@@ -374069,7 +374043,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 27,
+        "pendingAccesses": 70,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -377022,11 +376996,11 @@
       "declarationFingerprint": "sha256:85e5c19833edd9c741cb580573307ee617acb2647d59e7544e757f4d1b5da3bb",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
-      "eligible": false,
+      "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 0,
+        "pendingAccesses": 4,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -377062,9 +377036,7 @@
       "name": "TintMaterialData",
       "packageName": "@flighthq/types",
       "purpose": "checker-discovered public declaration",
-      "reasons": [
-        "presence-sensitive-use"
-      ],
+      "reasons": [],
       "source": "upstream/packages/types/src/TintMaterialData.ts",
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
@@ -414734,7 +414706,7 @@
     {
       "accesses": {
         "calls": 4,
-        "reads": 246,
+        "reads": 277,
         "writes": 8
       },
       "declarationFingerprint": "sha256:b04573db8382026a9e16cb4953f1dda844ec6cd863bf52f4cb3b0689edf3bda4",
@@ -414744,7 +414716,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 258,
+        "pendingAccesses": 289,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -414951,7 +414923,7 @@
     {
       "accesses": {
         "calls": 8,
-        "reads": 385,
+        "reads": 404,
         "writes": 318
       },
       "declarationFingerprint": "sha256:a2bc23bace382a83f246f14c86f03121db15a25a1f479edc706a6b00dfe0475d",
@@ -414961,7 +414933,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 711,
+        "pendingAccesses": 730,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -421075,16 +421047,16 @@
   "schemaVersion": 5,
   "summary": {
     "auditOnlySchemas": 1604,
-    "bindableAccesses": 28714,
+    "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 10742,
-    "directSchemas": 397,
-    "eligible": 1513,
+    "directAccesses": 11816,
+    "directSchemas": 400,
+    "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
-    "ineligible": 493,
-    "pendingAccesses": 17972,
-    "reflectiveSurvivors": 449
+    "ineligible": 470,
+    "pendingAccesses": 18850,
+    "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"
 }

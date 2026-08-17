@@ -75,6 +75,10 @@ Flight's globally unique free-function names are a deliberate cross-language API
 
 Haxe classes may represent nominal entities or target-specific storage, but they do not become the public behavioral API. Constructors may be private or otherwise internal while `create<Type>` remains public. Structural `*Like` values should remain structural where Haxe can represent them portably.
 
+Concrete `EntityWithoutRuntime<T>` aliases lower to strict anonymous Haxe typedefs containing the checker-resolved fields of `T`; the generic utility itself remains a generic runtime-boundary type. Synthetic object-destructuring temporaries retain that resolved typedef, so generated reads use ordinary typed fields instead of reflection. Property-presence operations remain explicit runtime checks and do not force unrelated reads or writes back to `Dynamic`.
+
+This structural declaration is also the portable ABI description for later Rust generation. A target-specific nominal representation is an optimization layer, not a replacement API: cpp `@:structInit` classes are admitted only when the generated provenance audit proves that every value reaches the type with the same nominal identity. When cross-schema transfer, dynamic ingress, containment, or observable aliasing prevents that proof, the public structural type and direct Haxe access remain in place.
+
 ## Type Placement
 
 Canonical shared declarations remain in their defining `@flighthq/types` file. A main type uses the module path directly (`flighthq.types.Vector2`); additional declarations use ordinary Haxe secondary-type paths (`flighthq.types.Vector2.Vector2Like`). Re-exporting packages reference that canonical declaration and do not duplicate it.

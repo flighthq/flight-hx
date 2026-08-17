@@ -713,14 +713,14 @@ class WgpuMeshPipeline {
       }
     } else { if ((cast !_Runtime.looseEquals(_Runtime.field(proxy, 'colorScaleBias'), null) : Bool)) {
       var colorScaleBias:ColorScaleBias = _Runtime.field(proxy, 'colorScaleBias');
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 44.0) : Float), (cast _Runtime.field(colorScaleBias, 'redScale') : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 45.0) : Float), (cast _Runtime.field(colorScaleBias, 'greenScale') : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 46.0) : Float), (cast _Runtime.field(colorScaleBias, 'blueScale') : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 47.0) : Float), (cast _Runtime.field(colorScaleBias, 'alphaScale') : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 48.0) : Float), (cast _Runtime.field(colorScaleBias, 'redBias') : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 49.0) : Float), (cast _Runtime.field(colorScaleBias, 'greenBias') : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 50.0) : Float), (cast _Runtime.field(colorScaleBias, 'blueBias') : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 51.0) : Float), (cast _Runtime.field(colorScaleBias, 'alphaBias') : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 44.0) : Float), (cast colorScaleBias.redScale : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 45.0) : Float), (cast colorScaleBias.greenScale : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 46.0) : Float), (cast colorScaleBias.blueScale : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 47.0) : Float), (cast colorScaleBias.alphaScale : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 48.0) : Float), (cast colorScaleBias.redBias : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 49.0) : Float), (cast colorScaleBias.greenBias : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 50.0) : Float), (cast colorScaleBias.blueBias : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 51.0) : Float), (cast colorScaleBias.alphaBias : Float));
     } }
     ((cast scene : WgpuScene3DRuntime).pendingDrawOffset = offset);
     ((cast stateRuntime : WgpuRenderStateRuntime).uniformOffset += (cast stateRuntime : WgpuRenderStateRuntime).uniformStride);

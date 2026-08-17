@@ -573,10 +573,10 @@ class SwfDocument {
   public static function computeSwfLocalBoundsRectangle__swfDocument(out:Rectangle, source:BoundsNodeAny):Void {
     var bounds:SwfRectangle__swfDocument = cast _Runtime.UNDEFINED;
     bounds = (cast (cast _Runtime.field(source, 'data') : SwfAuthoredBoundsData__swfDocument) : SwfAuthoredBoundsData__swfDocument).authoredBounds;
-    ((cast out : Rectangle).x = (cast bounds : SwfRectangle__swfDocument).x);
-    ((cast out : Rectangle).y = (cast bounds : SwfRectangle__swfDocument).y);
-    ((cast out : Rectangle).width = (cast bounds : SwfRectangle__swfDocument).width);
-    ((cast out : Rectangle).height = (cast bounds : SwfRectangle__swfDocument).height);
+    (out.x = cast ((cast bounds : SwfRectangle__swfDocument).x : Dynamic));
+    (out.y = cast ((cast bounds : SwfRectangle__swfDocument).y : Dynamic));
+    (out.width = cast ((cast bounds : SwfRectangle__swfDocument).width : Dynamic));
+    (out.height = cast ((cast bounds : SwfRectangle__swfDocument).height : Dynamic));
   }
 
   public static function createSwfInstanceKey__swfDocument(placement:SwfPlacement__swfDocument):Float {

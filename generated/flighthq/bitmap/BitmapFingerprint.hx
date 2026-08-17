@@ -29,16 +29,16 @@ class BitmapFingerprint {
 
   public static function createBitmapFingerprint(source:Bitmap, gridSize:Float = 16.0):flighthq.types.BitmapFingerprint {
     var cells:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:Bitmap = cast _Runtime.UNDEFINED;
     var width:Float = cast _Runtime.UNDEFINED;
     var height:Float = cast _Runtime.UNDEFINED;
     var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     if ((cast ((cast gridSize : Float) < (cast 1.0 : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('createBitmapFingerprint: gridSize must be >= 1 (got ' + Std.string(gridSize) + ')')); }
     cells = new flighthq._internal._UInt8Array(((gridSize * gridSize) * 3.0));
     __destructure0 = source;
-    width = _Runtime.field(__destructure0, 'width');
-    height = _Runtime.field(__destructure0, 'height');
-    data = _Runtime.field(__destructure0, 'data');
+    width = __destructure0.width;
+    height = __destructure0.height;
+    data = __destructure0.data;
     if ((cast ((cast _Runtime.strictEquals(width, 0.0) : Bool) || (cast _Runtime.strictEquals(height, 0.0) : Bool)) : Bool)) { return cast { gridSize: gridSize, cells: cells }; }
     {
       var cy:Float = 0.0;

@@ -8,7 +8,7 @@ import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Camera3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var far:Float; var inverseViewProjection:Matrix4; var jitter:Vector2; var near:Float; var projection:Projection; var view:Matrix4; };
 
-typedef Camera3DLike = EntityWithoutRuntime<Camera3D>;
+typedef Camera3DLike = { var far:Float; var inverseViewProjection:Matrix4; var jitter:Vector2; var near:Float; var projection:Projection; var view:Matrix4; };
 
 typedef Projection = flighthq._internal._Union2<OrthographicProjection, PerspectiveProjection>;
 

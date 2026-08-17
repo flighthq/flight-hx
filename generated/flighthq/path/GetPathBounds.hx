@@ -88,16 +88,16 @@ class GetPathBounds {
       }
     }
     if ((cast _Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY) : Bool)) {
-      _Runtime.setField(out, 'x', 0.0);
-      _Runtime.setField(out, 'y', 0.0);
-      _Runtime.setField(out, 'width', 0.0);
-      _Runtime.setField(out, 'height', 0.0);
+      (out.x = cast (0.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
+      (out.width = cast (0.0 : Dynamic));
+      (out.height = cast (0.0 : Dynamic));
       return cast false;
     }
-    _Runtime.setField(out, 'x', minX);
-    _Runtime.setField(out, 'y', minY);
-    _Runtime.setField(out, 'width', (maxX - minX));
-    _Runtime.setField(out, 'height', (maxY - minY));
+    (out.x = cast (minX : Dynamic));
+    (out.y = cast (minY : Dynamic));
+    (out.width = cast ((maxX - minX) : Dynamic));
+    (out.height = cast ((maxY - minY) : Dynamic));
     return cast true;
     return cast null;
   }

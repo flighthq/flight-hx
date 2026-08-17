@@ -561,10 +561,10 @@ class GlColorAdjustmentMaterialFeature {
   public static function getPackedTint__glColorAdjustmentMaterialFeature(value:Null<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>>):Null<Float> {
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast 4294967295.0; }
     if ((cast (cast GlColorAdjustmentMaterialFeature.isTintMaterialData__glColorAdjustmentMaterialFeature(({ final __callArgument130:Dynamic = value; __callArgument130; })) : Bool) : Bool)) { return cast _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(value, 'tint')), 0); }
-    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(value, 'redBias'), 0.0) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(value, 'greenBias'), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(value, 'blueBias'), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(value, 'alphaBias'), 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'redScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'redScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'greenScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'greenScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'blueScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'blueScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'alphaScale') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(value, 'alphaScale') : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals((cast value : { var redBias:Float; }).redBias, 0.0) : Bool) || (cast !_Runtime.strictEquals((cast value : { var greenBias:Float; }).greenBias, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast value : { var blueBias:Float; }).blueBias, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast value : { var alphaBias:Float; }).alphaBias, 0.0) : Bool)) : Bool) || (cast ((cast (cast value : { var redScale:Float; }).redScale : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var redScale:Float; }).redScale : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var greenScale:Float; }).greenScale : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var greenScale:Float; }).greenScale : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var blueScale:Float; }).blueScale : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var blueScale:Float; }).blueScale : Float) > (cast 1.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var alphaScale:Float; }).alphaScale : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast value : { var alphaScale:Float; }).alphaScale : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) {
       return cast null;
     }
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(value, 'redScale'), 255.0))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(value, 'greenScale'), 255.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(value, 'blueScale'), 255.0))) << 8)))) | _Runtime.toInt32(HxMath.round(_Runtime.multiplyNumbers(_Runtime.field(value, 'alphaScale'), 255.0))))), 0);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round(((cast value : { var redScale:Float; }).redScale * 255.0))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(((cast value : { var greenScale:Float; }).greenScale * 255.0))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round(((cast value : { var blueScale:Float; }).blueScale * 255.0))) << 8)))) | _Runtime.toInt32(HxMath.round(((cast value : { var alphaScale:Float; }).alphaScale * 255.0))))), 0);
     return cast null;
   }
 
@@ -585,19 +585,19 @@ class GlColorAdjustmentMaterialFeature {
 
   public static function getColorScale__glColorAdjustmentMaterialFeature(value:flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, channel:Float):Float {
     if ((cast (cast GlColorAdjustmentMaterialFeature.isTintMaterialData__glColorAdjustmentMaterialFeature(({ final __callArgument131:Dynamic = value; __callArgument131; })) : Bool) : Bool)) { return cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.field(value, 'tint')), _Runtime.toInt32((24.0 - (channel * 8.0))))) & 255) / 255.0); }
-    if ((cast _Runtime.strictEquals(channel, 0.0) : Bool)) { return cast _Runtime.field(value, 'redScale'); }
-    if ((cast _Runtime.strictEquals(channel, 1.0) : Bool)) { return cast _Runtime.field(value, 'greenScale'); }
-    if ((cast _Runtime.strictEquals(channel, 2.0) : Bool)) { return cast _Runtime.field(value, 'blueScale'); }
-    return cast _Runtime.field(value, 'alphaScale');
+    if ((cast _Runtime.strictEquals(channel, 0.0) : Bool)) { return cast (cast value : { var redScale:Float; }).redScale; }
+    if ((cast _Runtime.strictEquals(channel, 1.0) : Bool)) { return cast (cast value : { var greenScale:Float; }).greenScale; }
+    if ((cast _Runtime.strictEquals(channel, 2.0) : Bool)) { return cast (cast value : { var blueScale:Float; }).blueScale; }
+    return cast (cast value : { var alphaScale:Float; }).alphaScale;
     return cast null;
   }
 
   public static function getColorBias__glColorAdjustmentMaterialFeature(value:flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, channel:Float):Float {
     if ((cast (cast GlColorAdjustmentMaterialFeature.isTintMaterialData__glColorAdjustmentMaterialFeature(({ final __callArgument132:Dynamic = value; __callArgument132; })) : Bool) : Bool)) { return cast 0.0; }
-    if ((cast _Runtime.strictEquals(channel, 0.0) : Bool)) { return cast _Runtime.field(value, 'redBias'); }
-    if ((cast _Runtime.strictEquals(channel, 1.0) : Bool)) { return cast _Runtime.field(value, 'greenBias'); }
-    if ((cast _Runtime.strictEquals(channel, 2.0) : Bool)) { return cast _Runtime.field(value, 'blueBias'); }
-    return cast _Runtime.field(value, 'alphaBias');
+    if ((cast _Runtime.strictEquals(channel, 0.0) : Bool)) { return cast (cast value : { var redBias:Float; }).redBias; }
+    if ((cast _Runtime.strictEquals(channel, 1.0) : Bool)) { return cast (cast value : { var greenBias:Float; }).greenBias; }
+    if ((cast _Runtime.strictEquals(channel, 2.0) : Bool)) { return cast (cast value : { var blueBias:Float; }).blueBias; }
+    return cast (cast value : { var alphaBias:Float; }).alphaBias;
     return cast null;
   }
 
@@ -632,8 +632,8 @@ class GlColorAdjustmentMaterialFeature {
         flighthq._internal.backend.WebGl2Backend.uniform4f(gl, flighthq._internal._StaticIndex.readArray(locations, 4.0), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 4.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 9.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 14.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 19.0 : Float)));
         return;
       }
-      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast shader : GlShapeMeshColorScaleBiasShader).colorScaleLocation, (cast colorScaleBias : ColorScaleBias).redScale, (cast colorScaleBias : ColorScaleBias).greenScale, (cast colorScaleBias : ColorScaleBias).blueScale, (cast colorScaleBias : ColorScaleBias).alphaScale);
-      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast shader : GlShapeMeshColorScaleBiasShader).colorBiasLocation, (cast colorScaleBias : ColorScaleBias).redBias, (cast colorScaleBias : ColorScaleBias).greenBias, (cast colorScaleBias : ColorScaleBias).blueBias, (cast colorScaleBias : ColorScaleBias).alphaBias);
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast shader : GlShapeMeshColorScaleBiasShader).colorScaleLocation, (cast colorScaleBias : { var redScale:Float; }).redScale, (cast colorScaleBias : { var greenScale:Float; }).greenScale, (cast colorScaleBias : { var blueScale:Float; }).blueScale, (cast colorScaleBias : { var alphaScale:Float; }).alphaScale);
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast shader : GlShapeMeshColorScaleBiasShader).colorBiasLocation, (cast colorScaleBias : { var redBias:Float; }).redBias, (cast colorScaleBias : { var greenBias:Float; }).greenBias, (cast colorScaleBias : { var blueBias:Float; }).blueBias, (cast colorScaleBias : { var alphaBias:Float; }).alphaBias);
     }; __callArgument144; }));
   }
 

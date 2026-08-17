@@ -128,10 +128,10 @@ class QuadBatch {
     transforms = _Runtime.field(__destructure0, 'transforms');
     transformType = _Runtime.field(__destructure0, 'transformType');
     if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) {
-      ((cast out : Rectangle).x = 0.0);
-      ((cast out : Rectangle).y = 0.0);
-      ((cast out : Rectangle).width = 0.0);
-      ((cast out : Rectangle).height = 0.0);
+      (out.x = cast (0.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
+      (out.width = cast (0.0 : Dynamic));
+      (out.height = cast (0.0 : Dynamic));
       return;
     }
     regions = atlas.regions;
@@ -197,15 +197,15 @@ class QuadBatch {
       }
     }
     if ((cast _Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY) : Bool)) {
-      ((cast out : Rectangle).x = 0.0);
-      ((cast out : Rectangle).y = 0.0);
-      ((cast out : Rectangle).width = 0.0);
-      ((cast out : Rectangle).height = 0.0);
+      (out.x = cast (0.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
+      (out.width = cast (0.0 : Dynamic));
+      (out.height = cast (0.0 : Dynamic));
     } else {
-      ((cast out : Rectangle).x = minX);
-      ((cast out : Rectangle).y = minY);
-      ((cast out : Rectangle).width = (maxX - minX));
-      ((cast out : Rectangle).height = (maxY - minY));
+      (out.x = cast (minX : Dynamic));
+      (out.y = cast (minY : Dynamic));
+      (out.width = cast ((maxX - minX) : Dynamic));
+      (out.height = cast ((maxY - minY) : Dynamic));
     }
   }
 

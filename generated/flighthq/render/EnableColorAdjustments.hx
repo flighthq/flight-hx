@@ -74,26 +74,26 @@ class EnableColorAdjustments {
   }
 
   public static function writeColorScaleBiasMatrix__enableColorAdjustments(out:Array<Float>, value:ColorScaleBias):Array<Float> {
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast _Runtime.field(value, 'redScale') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast value.redScale : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast 0.0 : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast 0.0 : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 3.0 : Float), (cast 0.0 : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 4.0 : Float), (cast _Runtime.field(value, 'redBias') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 4.0 : Float), (cast value.redBias : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 5.0 : Float), (cast 0.0 : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 6.0 : Float), (cast _Runtime.field(value, 'greenScale') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 6.0 : Float), (cast value.greenScale : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 7.0 : Float), (cast 0.0 : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 8.0 : Float), (cast 0.0 : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 9.0 : Float), (cast _Runtime.field(value, 'greenBias') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 9.0 : Float), (cast value.greenBias : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 10.0 : Float), (cast 0.0 : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 11.0 : Float), (cast 0.0 : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 12.0 : Float), (cast _Runtime.field(value, 'blueScale') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 12.0 : Float), (cast value.blueScale : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 13.0 : Float), (cast 0.0 : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 14.0 : Float), (cast _Runtime.field(value, 'blueBias') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 14.0 : Float), (cast value.blueBias : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 15.0 : Float), (cast 0.0 : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 16.0 : Float), (cast 0.0 : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 17.0 : Float), (cast 0.0 : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 18.0 : Float), (cast _Runtime.field(value, 'alphaScale') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 19.0 : Float), (cast _Runtime.field(value, 'alphaBias') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 18.0 : Float), (cast value.alphaScale : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 19.0 : Float), (cast value.alphaBias : Float));
     return cast out;
     return cast null;
   }

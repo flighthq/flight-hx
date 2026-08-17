@@ -48,17 +48,17 @@ class Follow {
     }
     if (_Runtime.truthy(worldBounds)) {
       getCamera2DVisibleBounds(({ final __callArgument4:Dynamic = camera; __callArgument4; }), ({ final __callArgument5:Dynamic = Follow.scratchBounds__follow; __callArgument5; }));
-      var halfVisW:Float = ((cast Follow.scratchBounds__follow : Rectangle).width * 0.5);
-      var halfVisH:Float = ((cast Follow.scratchBounds__follow : Rectangle).height * 0.5);
-      if ((cast ((cast _Runtime.field(worldBounds, 'width') : Float) <= (cast (cast Follow.scratchBounds__follow : Rectangle).width : Float)) : Bool)) {
-        (nextX = cast (_Runtime.addNumbers(_Runtime.field(worldBounds, 'x'), _Runtime.multiplyNumbers(_Runtime.field(worldBounds, 'width'), 0.5)) : Dynamic));
+      var halfVisW:Float = (Follow.scratchBounds__follow.width * 0.5);
+      var halfVisH:Float = (Follow.scratchBounds__follow.height * 0.5);
+      if ((cast ((cast (cast worldBounds : { var width:Float; }).width : Float) <= (cast Follow.scratchBounds__follow.width : Float)) : Bool)) {
+        (nextX = cast (((cast worldBounds : { var x:Float; }).x + ((cast worldBounds : { var width:Float; }).width * 0.5)) : Dynamic));
       } else {
-        (nextX = cast ((cast clamp((cast nextX : Float), (cast _Runtime.addNumbers(_Runtime.field(worldBounds, 'x'), halfVisW) : Float), (cast (_Runtime.addNumbers(_Runtime.field(worldBounds, 'x'), _Runtime.field(worldBounds, 'width')) - halfVisW) : Float)) : Float) : Dynamic));
+        (nextX = cast ((cast clamp((cast nextX : Float), (cast ((cast worldBounds : { var x:Float; }).x + halfVisW) : Float), (cast (((cast worldBounds : { var x:Float; }).x + (cast worldBounds : { var width:Float; }).width) - halfVisW) : Float)) : Float) : Dynamic));
       }
-      if ((cast ((cast _Runtime.field(worldBounds, 'height') : Float) <= (cast (cast Follow.scratchBounds__follow : Rectangle).height : Float)) : Bool)) {
-        (nextY = cast (_Runtime.addNumbers(_Runtime.field(worldBounds, 'y'), _Runtime.multiplyNumbers(_Runtime.field(worldBounds, 'height'), 0.5)) : Dynamic));
+      if ((cast ((cast (cast worldBounds : { var height:Float; }).height : Float) <= (cast Follow.scratchBounds__follow.height : Float)) : Bool)) {
+        (nextY = cast (((cast worldBounds : { var y:Float; }).y + ((cast worldBounds : { var height:Float; }).height * 0.5)) : Dynamic));
       } else {
-        (nextY = cast ((cast clamp((cast nextY : Float), (cast _Runtime.addNumbers(_Runtime.field(worldBounds, 'y'), halfVisH) : Float), (cast (_Runtime.addNumbers(_Runtime.field(worldBounds, 'y'), _Runtime.field(worldBounds, 'height')) - halfVisH) : Float)) : Float) : Dynamic));
+        (nextY = cast ((cast clamp((cast nextY : Float), (cast ((cast worldBounds : { var y:Float; }).y + halfVisH) : Float), (cast (((cast worldBounds : { var y:Float; }).y + (cast worldBounds : { var height:Float; }).height) - halfVisH) : Float)) : Float) : Dynamic));
       }
     }
     (camera.x = cast (nextX : Dynamic));

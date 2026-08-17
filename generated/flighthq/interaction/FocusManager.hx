@@ -156,8 +156,8 @@ class FocusManager {
   public static function boundsCenter__focusManager(node:NodeAny, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
     var bounds:Rectangle = cast _Runtime.UNDEFINED;
     bounds = (cast getNodeWorldBoundsRectangle((cast (cast (cast node : flighthq._internal._Any) : Spatial2DNode<Dynamic>) : Dynamic)) : Rectangle);
-    ((cast out : { var x:Float; var y:Float; }).x = _Runtime.addNumbers(_Runtime.field(bounds, 'x'), _Runtime.divideNumbers(_Runtime.field(bounds, 'width'), 2.0)));
-    ((cast out : { var x:Float; var y:Float; }).y = _Runtime.addNumbers(_Runtime.field(bounds, 'y'), _Runtime.divideNumbers(_Runtime.field(bounds, 'height'), 2.0)));
+    ((cast out : { var x:Float; var y:Float; }).x = (bounds.x + (bounds.width / 2.0)));
+    ((cast out : { var x:Float; var y:Float; }).y = (bounds.y + (bounds.height / 2.0)));
     return cast out;
     return cast null;
   }

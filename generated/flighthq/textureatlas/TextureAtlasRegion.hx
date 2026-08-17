@@ -31,7 +31,7 @@ class TextureAtlasRegion {
   }
 
   public static function addTextureAtlasRegionRectangle(target:TextureAtlas, rect:RectangleLike, ?pivot:Vector2Like, ?name:String):Void {
-    addTextureAtlasRegion(({ final __callArgument6:Dynamic = target; __callArgument6; }), (cast _Runtime.field(rect, 'x') : Float), (cast _Runtime.field(rect, 'y') : Float), (cast _Runtime.field(rect, 'width') : Float), (cast _Runtime.field(rect, 'height') : Float), _Runtime.select(pivot, function():Dynamic return cast pivot.x, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.select(pivot, function():Dynamic return cast pivot.y, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), ({ final __callArgument7:Dynamic = name; __callArgument7; }));
+    addTextureAtlasRegion(({ final __callArgument6:Dynamic = target; __callArgument6; }), (cast rect.x : Float), (cast rect.y : Float), (cast rect.width : Float), (cast rect.height : Float), _Runtime.select(pivot, function():Dynamic return cast pivot.x, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.select(pivot, function():Dynamic return cast pivot.y, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), ({ final __callArgument7:Dynamic = name; __callArgument7; }));
   }
 
   public static function addTextureAtlasRegionVector2(target:TextureAtlas, a:Vector2Like, b:Vector2Like, ?pivot:Vector2Like, ?name:String):Void {
@@ -104,10 +104,10 @@ class TextureAtlasRegion {
     sourceY = region.sourceY;
     originalWidth = _Runtime.coalesce(region.originalWidth, function():Dynamic return cast region.width);
     originalHeight = _Runtime.coalesce(region.originalHeight, function():Dynamic return cast region.height);
-    _Runtime.setField(out, 'x', sourceX);
-    _Runtime.setField(out, 'y', sourceY);
-    _Runtime.setField(out, 'width', originalWidth);
-    _Runtime.setField(out, 'height', originalHeight);
+    (out.x = cast (sourceX : Dynamic));
+    (out.y = cast (sourceY : Dynamic));
+    (out.width = cast (originalWidth : Dynamic));
+    (out.height = cast (originalHeight : Dynamic));
     return cast out;
     return cast null;
   }
@@ -208,20 +208,20 @@ class TextureAtlasRegion {
     var rw:Float = cast _Runtime.UNDEFINED;
     var rh:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast imageWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast imageHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      _Runtime.setField(out, 'x', 0.0);
-      _Runtime.setField(out, 'y', 0.0);
-      _Runtime.setField(out, 'width', 0.0);
-      _Runtime.setField(out, 'height', 0.0);
+      (out.x = cast (0.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
+      (out.width = cast (0.0 : Dynamic));
+      (out.height = cast (0.0 : Dynamic));
       return cast out;
     }
     rx = region.x;
     ry = region.y;
     rw = region.width;
     rh = region.height;
-    _Runtime.setField(out, 'x', (rx / imageWidth));
-    _Runtime.setField(out, 'y', (ry / imageHeight));
-    _Runtime.setField(out, 'width', (rw / imageWidth));
-    _Runtime.setField(out, 'height', (rh / imageHeight));
+    (out.x = cast ((rx / imageWidth) : Dynamic));
+    (out.y = cast ((ry / imageHeight) : Dynamic));
+    (out.width = cast ((rw / imageWidth) : Dynamic));
+    (out.height = cast ((rh / imageHeight) : Dynamic));
     return cast out;
     return cast null;
   }

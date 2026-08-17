@@ -13,7 +13,7 @@ import flighthq.types.TextureAtlasRegion;
 class TextureAtlasGrid {
   public static function createTextureAtlasFromGrid(options:GridSliceOptions, ?texture:Null<Texture2D>):TextureAtlas {
     if (texture == null) texture = cast (null : Dynamic);
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:GridSliceOptions = cast _Runtime.UNDEFINED;
     var columns:Float = cast _Runtime.UNDEFINED;
     var rows:Float = cast _Runtime.UNDEFINED;
     var imageWidth:Float = cast _Runtime.UNDEFINED;
@@ -28,15 +28,15 @@ class TextureAtlasGrid {
     var atlas:TextureAtlas = cast _Runtime.UNDEFINED;
     var id:Float = cast _Runtime.UNDEFINED;
     __destructure0 = options;
-    columns = _Runtime.field(__destructure0, 'columns');
-    rows = _Runtime.field(__destructure0, 'rows');
-    imageWidth = _Runtime.field(__destructure0, 'imageWidth');
-    imageHeight = _Runtime.field(__destructure0, 'imageHeight');
-    marginX = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'marginX'), function():Dynamic return cast 0.0);
-    marginY = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'marginY'), function():Dynamic return cast 0.0);
-    spacingX = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'spacingX'), function():Dynamic return cast 0.0);
-    spacingY = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'spacingY'), function():Dynamic return cast 0.0);
-    namePrefix = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'namePrefix'), function():Dynamic return cast 'frame_');
+    columns = __destructure0.columns;
+    rows = __destructure0.rows;
+    imageWidth = __destructure0.imageWidth;
+    imageHeight = __destructure0.imageHeight;
+    marginX = _Runtime.defaultUndefined(__destructure0.marginX, function():Dynamic return cast 0.0);
+    marginY = _Runtime.defaultUndefined(__destructure0.marginY, function():Dynamic return cast 0.0);
+    spacingX = _Runtime.defaultUndefined(__destructure0.spacingX, function():Dynamic return cast 0.0);
+    spacingY = _Runtime.defaultUndefined(__destructure0.spacingY, function():Dynamic return cast 0.0);
+    namePrefix = _Runtime.defaultUndefined(__destructure0.namePrefix, function():Dynamic return cast 'frame_');
     frameWidth = _Runtime.coalesce(options.frameWidth, function():Dynamic return cast HxMath.floor((((imageWidth - (2.0 * marginX)) - (spacingX * (columns - 1.0))) / columns)));
     frameHeight = _Runtime.coalesce(options.frameHeight, function():Dynamic return cast HxMath.floor((((imageHeight - (2.0 * marginY)) - (spacingY * (rows - 1.0))) / rows)));
     atlas = (cast createTextureAtlas(({ final __callArgument0:Dynamic = { texture: texture }; __callArgument0; })) : TextureAtlas);

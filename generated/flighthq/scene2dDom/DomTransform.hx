@@ -17,7 +17,7 @@ class DomTransform {
 
   @:noCompletion
   public static function setDomTransformWithOffset(element:flighthq._internal.dom.HTMLElement, transform:Matrix, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:Matrix = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     var c:Float = cast _Runtime.UNDEFINED;
@@ -25,10 +25,10 @@ class DomTransform {
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
     __destructure0 = transform;
-    a = _Runtime.field(__destructure0, 'a');
-    b = _Runtime.field(__destructure0, 'b');
-    c = _Runtime.field(__destructure0, 'c');
-    d = _Runtime.field(__destructure0, 'd');
+    a = __destructure0.a;
+    b = __destructure0.b;
+    c = __destructure0.c;
+    d = __destructure0.d;
     tx = (((a * offsetX) + (c * offsetY)) + transform.tx);
     ty = (((b * offsetX) + (d * offsetY)) + transform.ty);
     if ((cast roundPixels : Bool)) {

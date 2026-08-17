@@ -139,7 +139,7 @@ class GlParticleEmitter3D {
   public static function drawParticleEmitter3DNode__glParticleEmitter3D(state:GlRenderState, shader:GlParticle3DShader__glParticleEmitter3D, emitter:ParticleEmitter3D):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var data:ParticleEmitterData = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ParticleEmitterData = cast _Runtime.UNDEFINED;
     var alphas:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var colors:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -163,13 +163,13 @@ class GlParticleEmitter3D {
     gl = (cast state : GlRenderState).gl;
     data = _Runtime.field(emitter, 'data');
     __destructure0 = data;
-    alphas = _Runtime.field(__destructure0, 'alphas');
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    colors = _Runtime.field(__destructure0, 'colors');
-    ids = _Runtime.field(__destructure0, 'ids');
-    particleCount = _Runtime.field(__destructure0, 'particleCount');
-    positionsZ = _Runtime.field(__destructure0, 'positionsZ');
-    transforms = _Runtime.field(__destructure0, 'transforms');
+    alphas = __destructure0.alphas;
+    atlas = __destructure0.atlas;
+    colors = __destructure0.colors;
+    ids = __destructure0.ids;
+    particleCount = __destructure0.particleCount;
+    positionsZ = __destructure0.positionsZ;
+    transforms = __destructure0.transforms;
     if ((cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) { return; }
     GlParticleEmitter3D.ensureInstanceCapacity__glParticleEmitter3D((cast shader : Dynamic), ({ final __callArgument4:Dynamic = gl; __callArgument4; }), (cast particleCount : Float));
     atlasTexture = _Runtime.coalesce(({ final __typedStruct5 = atlas; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.texture; }), function():Dynamic return cast null);

@@ -365,10 +365,10 @@ class Screen {
     var rw:Float = cast _Runtime.UNDEFINED;
     var rh:Float = cast _Runtime.UNDEFINED;
     var sf:Float = cast _Runtime.UNDEFINED;
-    rx = _Runtime.field(rect, 'x');
-    ry = _Runtime.field(rect, 'y');
-    rw = _Runtime.field(rect, 'width');
-    rh = _Runtime.field(rect, 'height');
+    rx = rect.x;
+    ry = rect.y;
+    rw = rect.width;
+    rh = rect.height;
     sf = screen.scaleFactor;
     ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).x = ((rx - screen.x) * sf));
     ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).y = ((ry - screen.y) * sf));
@@ -463,8 +463,8 @@ class Screen {
     bestScreen = flighthq._internal._StaticIndex.readArray(screens, 0.0);
     bestOverlap = -1.0;
     for (screen in _Runtime.iterable(screens)) {
-      var ox:Float = HxMath.max(0.0, _Runtime.subtractNumbers(HxMath.min(_Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width')), (screen.x + screen.width)), HxMath.max(_Runtime.field(rect, 'x'), screen.x)));
-      var oy:Float = HxMath.max(0.0, _Runtime.subtractNumbers(HxMath.min(_Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')), (screen.y + screen.height)), HxMath.max(_Runtime.field(rect, 'y'), screen.y)));
+      var ox:Float = HxMath.max(0.0, _Runtime.subtractNumbers(HxMath.min((rect.x + rect.width), (screen.x + screen.width)), HxMath.max(rect.x, screen.x)));
+      var oy:Float = HxMath.max(0.0, _Runtime.subtractNumbers(HxMath.min((rect.y + rect.height), (screen.y + screen.height)), HxMath.max(rect.y, screen.y)));
       var overlap:Float = (ox * oy);
       if ((cast ((cast overlap : Float) > (cast bestOverlap : Float)) : Bool)) {
         (bestOverlap = cast (overlap : Dynamic));
@@ -472,8 +472,8 @@ class Screen {
       }
     }
     if ((cast ((cast bestOverlap : Float) <= (cast 0.0 : Float)) : Bool)) {
-      var cx:Float = _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.divideNumbers(_Runtime.field(rect, 'width'), 2.0));
-      var cy:Float = _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.divideNumbers(_Runtime.field(rect, 'height'), 2.0));
+      var cx:Float = (rect.x + (rect.width / 2.0));
+      var cy:Float = (rect.y + (rect.height / 2.0));
       var bestDist:Float = HxMath.POSITIVE_INFINITY;
       for (screen in _Runtime.iterable(screens)) {
         var scx:Float = (screen.x + (screen.width / 2.0));
@@ -606,13 +606,13 @@ class Screen {
       return cast out;
     }
     for (screen in _Runtime.iterable(screens)) {
-      if ((cast ((cast ((cast ((cast ((cast _Runtime.field(rect, 'x') : Float) >= (cast screen.x : Float)) : Bool) && (cast ((cast _Runtime.field(rect, 'y') : Float) >= (cast screen.y : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.field(rect, 'width')) : Float) <= (cast (screen.x + screen.width) : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.field(rect, 'height')) : Float) <= (cast (screen.y + screen.height) : Float)) : Bool)) : Bool)) {
+      if ((cast ((cast ((cast ((cast ((cast rect.x : Float) >= (cast screen.x : Float)) : Bool) && (cast ((cast rect.y : Float) >= (cast screen.y : Float)) : Bool)) : Bool) && (cast ((cast (rect.x + rect.width) : Float) <= (cast (screen.x + screen.width) : Float)) : Bool)) : Bool) && (cast ((cast (rect.y + rect.height) : Float) <= (cast (screen.y + screen.height) : Float)) : Bool)) : Bool)) {
         Screen.copyScreenInfo__screen(({ final __callArgument69:Dynamic = screen; __callArgument69; }), ({ final __callArgument70:Dynamic = out; __callArgument70; }));
         return cast out;
       }
     }
-    cx = _Runtime.addNumbers(_Runtime.field(rect, 'x'), _Runtime.divideNumbers(_Runtime.field(rect, 'width'), 2.0));
-    cy = _Runtime.addNumbers(_Runtime.field(rect, 'y'), _Runtime.divideNumbers(_Runtime.field(rect, 'height'), 2.0));
+    cx = (rect.x + (rect.width / 2.0));
+    cy = (rect.y + (rect.height / 2.0));
     bestScreen = flighthq._internal._StaticIndex.readArray(screens, 0.0);
     bestDist = HxMath.POSITIVE_INFINITY;
     for (screen in _Runtime.iterable(screens)) {
@@ -786,10 +786,10 @@ class Screen {
     var rw:Float = cast _Runtime.UNDEFINED;
     var rh:Float = cast _Runtime.UNDEFINED;
     var sf:Float = cast _Runtime.UNDEFINED;
-    rx = _Runtime.field(rect, 'x');
-    ry = _Runtime.field(rect, 'y');
-    rw = _Runtime.field(rect, 'width');
-    rh = _Runtime.field(rect, 'height');
+    rx = rect.x;
+    ry = rect.y;
+    rw = rect.width;
+    rh = rect.height;
     sf = screen.scaleFactor;
     ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).x = ((rx / sf) + screen.x));
     ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).y = ((ry / sf) + screen.y));

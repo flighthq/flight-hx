@@ -8,4 +8,4 @@ import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Frustum = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var bottom:Plane; var far:Plane; var left:Plane; var near:Plane; var right:Plane; var top:Plane; };
 
-typedef FrustumLike = EntityWithoutRuntime<flighthq.types.Frustum>;
+typedef FrustumLike = { var bottom:Plane; var far:Plane; var left:Plane; var near:Plane; var right:Plane; var top:Plane; };

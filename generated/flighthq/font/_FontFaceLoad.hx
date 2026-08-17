@@ -27,8 +27,8 @@ class _FontFaceLoad {
       var url:String = cast _Runtime.UNDEFINED;
       var format:Null<String> = cast _Runtime.UNDEFINED;
       var resolvedFormat:Null<String> = cast _Runtime.UNDEFINED;
-      url = _Runtime.field(__parameter0, 'url');
-      format = _Runtime.field(__parameter0, 'format');
+      url = __parameter0.url;
+      format = __parameter0.format;
       resolvedFormat = _Runtime.coalesce(format, function():Dynamic return cast (cast inferFontFormatFromUrl((cast url : String)) : Null<String>));
       return cast ((cast !_Runtime.strictEquals(resolvedFormat, null) : Bool) ? (cast 'url(' + Std.string(url) + ') format(\'' + Std.string(resolvedFormat) + '\')' : Dynamic) : (cast 'url(' + Std.string(url) + ')' : Dynamic));
       return cast _Runtime.UNDEFINED;

@@ -32,7 +32,7 @@ class UpdateParticleObjects {
 
   public static function updateParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?options:ParticleObjectsUpdateOptions):Void {
     var n:Float = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ParticleObjectsState = cast _Runtime.UNDEFINED;
     var lifetimes:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var velocities:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var scales:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -57,10 +57,10 @@ class UpdateParticleObjects {
     if ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     ensureParticleObjectsStateCapacity(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast n : Float));
     __destructure0 = state;
-    lifetimes = _Runtime.field(__destructure0, 'lifetimes');
-    velocities = _Runtime.field(__destructure0, 'velocities');
-    scales = _Runtime.field(__destructure0, 'scales');
-    rotationSpeeds = _Runtime.field(__destructure0, 'rotationSpeeds');
+    lifetimes = __destructure0.lifetimes;
+    velocities = __destructure0.velocities;
+    scales = __destructure0.scales;
+    rotationSpeeds = __destructure0.rotationSpeeds;
     gx = (config.gravityX * deltaTime);
     gy = (config.gravityY * deltaTime);
     alphaCurve = config.alphaCurve;

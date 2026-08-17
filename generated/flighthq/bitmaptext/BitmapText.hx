@@ -36,10 +36,10 @@ class BitmapText {
     runtime = (cast getNode2DRuntime(({ final __callArgument0:Dynamic = source; __callArgument0; })) : BitmapTextRuntime);
     bounds = (cast runtime : BitmapTextRuntime).localBoundsRectangle;
     if ((cast _Runtime.strictEquals(bounds, null) : Bool)) {
-      ((cast out : Rectangle).x = 0.0);
-      ((cast out : Rectangle).y = 0.0);
-      ((cast out : Rectangle).width = 0.0);
-      ((cast out : Rectangle).height = 0.0);
+      (out.x = cast (0.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
+      (out.width = cast (0.0 : Dynamic));
+      (out.height = cast (0.0 : Dynamic));
       return;
     }
     copyRectangle(({ final __callArgument1:Dynamic = out; __callArgument1; }), ({ final __callArgument2:Dynamic = bounds; __callArgument2; }));

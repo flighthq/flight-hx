@@ -28,7 +28,7 @@ class EmitParticleBurst3D {
     var maxNew:Float = cast _Runtime.UNDEFINED;
     var hasColorVariance:Bool = cast _Runtime.UNDEFINED;
     var newCount:Float = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ParticleEmitterConfig = cast _Runtime.UNDEFINED;
     var colorStartR:Float = cast _Runtime.UNDEFINED;
     var colorStartG:Float = cast _Runtime.UNDEFINED;
     var colorStartB:Float = cast _Runtime.UNDEFINED;
@@ -66,12 +66,12 @@ class EmitParticleBurst3D {
     reserveParticleEmitter3D(({ final __callArgument0:Dynamic = emitter; __callArgument0; }), (cast newCount : Float));
     ensureParticleEmitterStateCapacity(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast newCount : Float), (cast hasColorVariance : Bool));
     __destructure0 = config;
-    colorStartR = _Runtime.field(__destructure0, 'colorStartR');
-    colorStartG = _Runtime.field(__destructure0, 'colorStartG');
-    colorStartB = _Runtime.field(__destructure0, 'colorStartB');
-    colorEndR = _Runtime.field(__destructure0, 'colorEndR');
-    colorEndG = _Runtime.field(__destructure0, 'colorEndG');
-    colorEndB = _Runtime.field(__destructure0, 'colorEndB');
+    colorStartR = __destructure0.colorStartR;
+    colorStartG = __destructure0.colorStartG;
+    colorStartB = __destructure0.colorStartB;
+    colorEndR = __destructure0.colorEndR;
+    colorEndG = __destructure0.colorEndG;
+    colorEndB = __destructure0.colorEndB;
     alphaCurve = config.alphaCurve;
     colorCurve = config.colorCurve;
     scaleCurve = config.scaleCurve;

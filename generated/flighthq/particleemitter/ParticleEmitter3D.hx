@@ -114,7 +114,7 @@ class ParticleEmitter3D {
   }
 
   public static function computeParticleEmitter3DLocalBoundsAabb(out:AabbLike, source:flighthq.types.ParticleEmitter3D):Void {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ParticleEmitterData = cast _Runtime.UNDEFINED;
     var particleCount:Float = cast _Runtime.UNDEFINED;
     var positionsZ:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var transforms:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -125,9 +125,9 @@ class ParticleEmitter3D {
     var maxY:Float = cast _Runtime.UNDEFINED;
     var maxZ:Float = cast _Runtime.UNDEFINED;
     __destructure0 = _Runtime.field(source, 'data');
-    particleCount = _Runtime.field(__destructure0, 'particleCount');
-    positionsZ = _Runtime.field(__destructure0, 'positionsZ');
-    transforms = _Runtime.field(__destructure0, 'transforms');
+    particleCount = __destructure0.particleCount;
+    positionsZ = __destructure0.positionsZ;
+    transforms = __destructure0.transforms;
     if ((cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) {
       ((cast out.min : { var x:Float; }).x = cast (0.0 : Dynamic));
       ((cast out.min : { var y:Float; }).y = cast (0.0 : Dynamic));

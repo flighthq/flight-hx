@@ -53,12 +53,12 @@ class WgpuVelocity {
     spatial = (cast (cast node : flighthq._internal._Any) : Spatial2DNode<Dynamic>);
     ensureNodeWorldBoundsRectangle((cast spatial : Dynamic));
     bounds = (cast getNodeWorldBoundsRectangle((cast spatial : Dynamic)) : Rectangle);
-    drawWgpuVelocityQuad(({ final __callArgument3:Dynamic = ctx; __callArgument3; }), (cast _Runtime.field(bounds, 'x') : Float), (cast _Runtime.field(bounds, 'y') : Float), (cast _Runtime.field(bounds, 'width') : Float), (cast _Runtime.field(bounds, 'height') : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).x : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).y : Float));
+    drawWgpuVelocityQuad(({ final __callArgument3:Dynamic = ctx; __callArgument3; }), (cast bounds.x : Float), (cast bounds.y : Float), (cast bounds.width : Float), (cast bounds.height : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).x : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).y : Float));
   });
 
   public static final defaultWgpuParticleEmitter2DVelocityWriter:WgpuVelocityWriter = (cast function(ctx:WgpuVelocityContext, node:flighthq._internal._Object):Void {
     var emitter:ParticleEmitter2D = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ParticleEmitterData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     var particleCount:Float = cast _Runtime.UNDEFINED;
@@ -75,12 +75,12 @@ class WgpuVelocity {
     var wty:Float = cast _Runtime.UNDEFINED;
     emitter = (cast (cast node : flighthq._internal._Any) : ParticleEmitter2D);
     __destructure0 = emitter.data;
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    ids = _Runtime.field(__destructure0, 'ids');
-    particleCount = _Runtime.field(__destructure0, 'particleCount');
-    transforms = _Runtime.field(__destructure0, 'transforms');
-    velocities = _Runtime.field(__destructure0, 'velocities');
-    worldSpace = _Runtime.field(__destructure0, 'worldSpace');
+    atlas = __destructure0.atlas;
+    ids = __destructure0.ids;
+    particleCount = __destructure0.particleCount;
+    transforms = __destructure0.transforms;
+    velocities = __destructure0.velocities;
+    worldSpace = __destructure0.worldSpace;
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(velocities, 'length') : Float) < (cast (particleCount * 2.0) : Float)) : Bool)) : Bool)) { return; }
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
@@ -246,7 +246,7 @@ class WgpuVelocity {
     spatial = (cast (cast node : flighthq._internal._Any) : Spatial2DNode<Dynamic>);
     ensureNodeWorldBoundsRectangle((cast spatial : Dynamic));
     bounds = (cast getNodeWorldBoundsRectangle((cast spatial : Dynamic)) : Rectangle);
-    drawWgpuVelocityQuad(({ final __callArgument8:Dynamic = ctx; __callArgument8; }), (cast _Runtime.field(bounds, 'x') : Float), (cast _Runtime.field(bounds, 'y') : Float), (cast _Runtime.field(bounds, 'width') : Float), (cast _Runtime.field(bounds, 'height') : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).x : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).y : Float));
+    drawWgpuVelocityQuad(({ final __callArgument8:Dynamic = ctx; __callArgument8; }), (cast bounds.x : Float), (cast bounds.y : Float), (cast bounds.width : Float), (cast bounds.height : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).x : Float), (cast (cast WgpuVelocity._scratchVelocity__wgpuVelocity : Velocity2D).y : Float));
   });
 
   @:noCompletion

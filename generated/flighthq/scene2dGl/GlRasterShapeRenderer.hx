@@ -85,8 +85,8 @@ class GlRasterShapeRenderer {
     version = (cast getNodeLocalContentRevision((cast source : Dynamic)) : Float);
     shapeData = (cast getGlShapeData((cast renderProxy : RenderProxy2D).rendererData) : GlShapeRendererData);
     bounds = (cast getNodeLocalBoundsRectangle((cast source : Dynamic)) : Rectangle);
-    w = HxMath.ceil(_Runtime.field(bounds, 'width'));
-    h = HxMath.ceil(_Runtime.field(bounds, 'height'));
+    w = HxMath.ceil(bounds.width);
+    h = HxMath.ceil(bounds.height);
     if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     pixelRatio = (cast state : GlRenderState).pixelRatio;
     surface = (cast acquireGlShapeRasterSurface(({ final __callArgument3:Dynamic = shapeData; __callArgument3; })) : GlShapeRasterSurface);
@@ -96,8 +96,8 @@ class GlRasterShapeRenderer {
       var ctx:flighthq._internal.dom.CanvasRenderingContext2D = _Runtime.field(__destructure1, 'ctx');
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', HxMath.ceil((w * pixelRatio)));
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', HxMath.ceil((h * pixelRatio)));
-      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'x'), pixelRatio), _Runtime.multiplyNumbers(-_Runtime.field(bounds, 'y'), pixelRatio)] : Array<Dynamic>));
-      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([_Runtime.field(bounds, 'x'), _Runtime.field(bounds, 'y'), w, h] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, (-bounds.x * pixelRatio), (-bounds.y * pixelRatio)] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([bounds.x, bounds.y, w, h] : Array<Dynamic>));
       rasterizer(({ final __callArgument4:Dynamic = ctx; __callArgument4; }), (cast commands : Dynamic), ({ final __callArgument5:Dynamic = state; __callArgument5; }));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
       invalidateImageResource((cast surface : GlShapeRasterSurface).image);
@@ -108,8 +108,8 @@ class GlRasterShapeRenderer {
     }
     (cast ensureGlQuadBatchShader(({ final __callArgument6:Dynamic = state; __callArgument6; })) : GlQuadBatchShader);
     t = (cast renderProxy : RenderProxy2D).transform2D;
-    tx = ((t.tx + _Runtime.multiplyNumbers(t.a, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.c, _Runtime.field(bounds, 'y')));
-    ty = ((t.ty + _Runtime.multiplyNumbers(t.b, _Runtime.field(bounds, 'x'))) + _Runtime.multiplyNumbers(t.d, _Runtime.field(bounds, 'y')));
+    tx = ((t.tx + (t.a * bounds.x)) + (t.c * bounds.y));
+    ty = ((t.ty + (t.b * bounds.x)) + (t.d * bounds.y));
     texture = (cast bindGlImageResourceTexture(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast surface : GlShapeRasterSurface).image, (cast null : Dynamic), ({ final __callArgument8:Dynamic = null; __callArgument8; }), (cast true : Bool), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq._internal.dom.WebGLTexture);
     straightAlpha = (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha;
     startCount = (cast runtime : GlRenderStateRuntime).quadBatchWriterCount;

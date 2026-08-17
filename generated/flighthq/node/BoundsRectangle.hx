@@ -104,7 +104,7 @@ class BoundsRectangle {
 
   public static function getNodeHeight<Traits:flighthq._internal._Object>(source:Spatial2DNode<Traits>):Float {
     computeNodeBoundsRectangle(({ final __callArgument15:Dynamic = BoundsRectangle._tempBoundsRectangle__boundsRectangle; __callArgument15; }), (cast source : Dynamic), (cast (cast (cast getNodeParent((cast source : Dynamic)) : flighthq._internal._Any) : Null<Spatial2DNode<Traits>>) : Dynamic));
-    return cast (cast BoundsRectangle._tempBoundsRectangle__boundsRectangle : Rectangle).height;
+    return cast BoundsRectangle._tempBoundsRectangle__boundsRectangle.height;
     return cast null;
   }
 
@@ -122,7 +122,7 @@ class BoundsRectangle {
 
   public static function getNodeWidth<Traits:flighthq._internal._Object>(source:Spatial2DNode<Traits>):Float {
     computeNodeBoundsRectangle(({ final __callArgument18:Dynamic = BoundsRectangle._tempBoundsRectangle__boundsRectangle; __callArgument18; }), (cast source : Dynamic), (cast (cast (cast getNodeParent((cast source : Dynamic)) : flighthq._internal._Any) : Null<Spatial2DNode<Traits>>) : Dynamic));
-    return cast (cast BoundsRectangle._tempBoundsRectangle__boundsRectangle : Rectangle).width;
+    return cast BoundsRectangle._tempBoundsRectangle__boundsRectangle.width;
     return cast null;
   }
 
@@ -193,7 +193,7 @@ class BoundsRectangle {
       for (child in _Runtime.iterable(children)) {
         if ((cast !(cast (cast child : Node<Traits>).enabled : Bool) : Bool)) { continue; }
         var childWorldBounds:Rectangle = (cast getNodeWorldBoundsRectangle((cast (cast child : Spatial2DNode<Traits>) : Dynamic)) : Rectangle);
-        if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(childWorldBounds, 'width'), 0.0) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(childWorldBounds, 'height'), 0.0) : Bool)) : Bool)) {
+        if ((cast ((cast !_Runtime.strictEquals(childWorldBounds.width, 0.0) : Bool) && (cast !_Runtime.strictEquals(childWorldBounds.height, 0.0) : Bool)) : Bool)) {
           mergeRectangle(({ final __callArgument47:Dynamic = (cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle; __callArgument47; }), ({ final __callArgument48:Dynamic = (cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle; __callArgument48; }), ({ final __callArgument49:Dynamic = childWorldBounds; __callArgument49; }));
         }
       }
@@ -204,25 +204,25 @@ class BoundsRectangle {
 
   public static function tryFastRecomputeWorldBoundsRectangle__boundsRectangle<Traits:flighthq._internal._Object>(target:Spatial2DNode<Traits>, runtime:{ >HasBoundsRectangleRuntime, >HasTransform2DRuntime, }):Bool {
     if ((cast ((cast !_Runtime.strictEquals((cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle, null) : Bool) && (cast !_Runtime.strictEquals((cast runtime : { var worldMatrix:Null<Matrix>; }).worldMatrix, null) : Bool)) : Bool)) {
-      var __destructure0 = (cast runtime : { var worldMatrix:Null<Matrix>; }).worldMatrix;
-      var _a:Float = _Runtime.field(__destructure0, 'a');
-      var _b:Float = _Runtime.field(__destructure0, 'b');
-      var _c:Float = _Runtime.field(__destructure0, 'c');
-      var _d:Float = _Runtime.field(__destructure0, 'd');
-      var _tx:Float = _Runtime.field(__destructure0, 'tx');
-      var _ty:Float = _Runtime.field(__destructure0, 'ty');
+      var __destructure0:Matrix = (cast runtime : { var worldMatrix:Null<Matrix>; }).worldMatrix;
+      var _a:Float = __destructure0.a;
+      var _b:Float = __destructure0.b;
+      var _c:Float = __destructure0.c;
+      var _d:Float = __destructure0.d;
+      var _tx:Float = __destructure0.tx;
+      var _ty:Float = __destructure0.ty;
       ensureNodeWorldMatrix((cast target : Dynamic));
-      var __destructure1 = (cast runtime : { var worldMatrix:Null<Matrix>; }).worldMatrix;
-      var a:Float = _Runtime.field(__destructure1, 'a');
-      var b:Float = _Runtime.field(__destructure1, 'b');
-      var c:Float = _Runtime.field(__destructure1, 'c');
-      var d:Float = _Runtime.field(__destructure1, 'd');
-      var tx:Float = _Runtime.field(__destructure1, 'tx');
-      var ty:Float = _Runtime.field(__destructure1, 'ty');
+      var __destructure1:Matrix = (cast runtime : { var worldMatrix:Null<Matrix>; }).worldMatrix;
+      var a:Float = __destructure1.a;
+      var b:Float = __destructure1.b;
+      var c:Float = __destructure1.c;
+      var d:Float = __destructure1.d;
+      var tx:Float = __destructure1.tx;
+      var ty:Float = __destructure1.ty;
       if ((cast ((cast ((cast ((cast _Runtime.strictEquals(a, _a) : Bool) && (cast _Runtime.strictEquals(b, _b) : Bool)) : Bool) && (cast _Runtime.strictEquals(c, _c) : Bool)) : Bool) && (cast _Runtime.strictEquals(d, _d) : Bool)) : Bool)) {
         if ((cast ((cast !_Runtime.strictEquals(tx, _tx) : Bool) || (cast !_Runtime.strictEquals(ty, _ty) : Bool)) : Bool)) {
-          ((cast (cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle : Rectangle).x += (tx - _tx));
-          ((cast (cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle : Rectangle).y += (ty - _ty));
+          ((cast (cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle : { var x:Float; }).x += (tx - _tx));
+          ((cast (cast runtime : { var worldBoundsRectangle:Null<Rectangle>; }).worldBoundsRectangle : { var y:Float; }).y += (ty - _ty));
         }
         return cast true;
       }

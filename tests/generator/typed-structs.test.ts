@@ -430,6 +430,7 @@ describe('typed struct analysis', () => {
     const report = registry.report;
     const classAudit = auditTypedStructClassFeasibility(workspace, 'fixture', registry, programAndChecker);
     const provenance = auditTypedStructProvenance(workspace, 'fixture', registry, classAudit, programAndChecker);
+    const classAuditById = new Map(classAudit.schemas.map((schema) => [schema.id, schema]));
     const provenanceById = new Map(provenance.schemas.map((schema) => [schema.id, schema]));
     const rectangle = report.candidates.find((candidate) => candidate.name === 'Rectangle');
     const color = report.candidates.find((candidate) => candidate.name === 'ColorScaleBias');
@@ -453,6 +454,21 @@ describe('typed struct analysis', () => {
     expect(() => validateCppStructInitProvenance([particleEmitterDataId], provenance)).toThrow(
       `cpp @:structInit schemas are not provenance-closed: ${particleEmitterDataId}`,
     );
+    const rectangleId = '@flighthq/types:interface#Rectangle';
+    const rectangleLikeId = '@flighthq/types:type#RectangleLike';
+    expect(classAuditById.get(rectangleId)?.migration).toEqual({
+      mechanicallyCompatible: false,
+      normalizationReasons: ['cross-schema-transfer'],
+      observabilityReasons: ['strict-equality'],
+    });
+    expect(provenanceById.has(rectangleId)).toBe(false);
+    expect(provenanceById.get(rectangleLikeId)?.nominalIdentity).toEqual({
+      blockerReasons: ['normalization-provenance'],
+      closed: false,
+    });
+    expect(() => validateCppStructInitProvenance([rectangleId, rectangleLikeId], provenance)).toThrow(
+      `cpp @:structInit schemas are not provenance-closed: ${rectangleId}, ${rectangleLikeId}`,
+    );
     expect(readFileSync('generated/flighthq/types/ParticleEmitter2D.hx', 'utf8')).toContain(
       'typedef ParticleEmitter2D = { var data:ParticleEmitterData;',
     );
@@ -465,16 +481,16 @@ describe('typed struct analysis', () => {
 
     expect(report.summary).toMatchObject({
       auditOnlySchemas: 1_604,
-      bindableAccesses: 28_714,
+      bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 10_742,
-      directSchemas: 397,
-      eligible: 1_513,
+      directAccesses: 11_816,
+      directSchemas: 400,
+      eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
-      ineligible: 493,
-      pendingAccesses: 17_972,
-      reflectiveSurvivors: 449,
+      ineligible: 470,
+      pendingAccesses: 18_850,
+      reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
@@ -485,14 +501,14 @@ describe('typed struct analysis', () => {
       removed: 3,
       renamed: 23,
     });
-    expect(classAudit.summary.schemas).toBe(1_513);
+    expect(classAudit.summary.schemas).toBe(1_536);
     expect(provenance.summary).toMatchObject({
-      candidateSchemas: 730,
-      closedSchemas: 548,
-      containmentEdges: 1_776,
+      candidateSchemas: 741,
+      closedSchemas: 551,
+      containmentEdges: 2_059,
     });
-    expect(rectangle?.eligible).toBe(false);
-    expect(rectangle?.reasons).toContain('presence-sensitive-use');
+    expect(rectangle?.eligible).toBe(true);
+    expect(rectangle?.reasons).not.toContain('presence-sensitive-use');
     expect(rectangle?.escapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -501,18 +517,18 @@ describe('typed struct analysis', () => {
         }),
       ]),
     );
-    expect(color?.eligible).toBe(false);
-    expect(color?.reasons).toContain('presence-sensitive-use');
+    expect(color?.eligible).toBe(true);
+    expect(color?.reasons).not.toContain('presence-sensitive-use');
     expect(color?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(10_742);
+    expect(report.summary.directAccesses).toBe(11_816);
     expect(rectangle?.emission).toEqual({
-      directAccesses: 0,
+      directAccesses: 667,
       mode: 'direct',
       pendingAccesses: 0,
-      reflectiveSurvivors: [],
+      reflectiveSurvivors: [{ accesses: 2, reason: 'presence-sensitive' }],
     });
     expect(camera2D?.emission).toEqual({
       directAccesses: 17,
@@ -522,7 +538,7 @@ describe('typed struct analysis', () => {
     });
     expect(particleEmitterData).toMatchObject({
       eligible: true,
-      emission: { directAccesses: 411, mode: 'direct', pendingAccesses: 0 },
+      emission: { directAccesses: 461, mode: 'direct', pendingAccesses: 0 },
       escapes: [],
       fields: expect.arrayContaining([
         expect.objectContaining({ name: 'particleCount', optional: false, type: 'number' }),
@@ -871,6 +887,7 @@ describe('typed struct analysis', () => {
     const result = lowerFixture(`
       export interface Vector2 { x: number; y: number; }
       export interface Other { x: number; label: string; }
+      export function direct(value: Vector2): number { return value.y; }
       export function computed(value: Vector2, key: 'x' | 'y'): number { return value[key]; }
       export function union(value: Vector2 | Other): number { return value.x; }
       export function present(value: Vector2): boolean { return 'x' in value; }
@@ -884,15 +901,68 @@ describe('typed struct analysis', () => {
     const candidate = result.registry.report.candidates[0]!;
 
     expect(result.lowered.diagnostics).toEqual([]);
-    expect(collectTypedStructBindings(result.lowered.declarations)).toEqual([]);
-    expect(candidate.eligible).toBe(false);
-    expect(candidate.reasons).toContain('presence-sensitive-use');
+    expect(collectTypedStructBindings(result.lowered.declarations)).toEqual([
+      expect.objectContaining({ schemaName: 'Vector2', field: expect.objectContaining({ name: 'y' }) }),
+    ]);
+    expect(candidate.eligible).toBe(true);
+    expect(candidate.reasons).not.toContain('presence-sensitive-use');
     expect(candidate.escapes.map((escape) => escape.reason)).toEqual(
       expect.arrayContaining(['computed-key', 'incompatible-union', 'presence-sensitive']),
     );
+    expect(output).toContain('return cast value.y;');
     expect(output).toContain('_Runtime.getIndex(value, key)');
     expect(output).toContain('(cast value : { var x:Float; }).x');
     expect(output).toContain("_Runtime.hasField(value, 'x')");
+  });
+
+  it('flattens a concrete EntityWithoutRuntime alias into a strict structural typedef', () => {
+    const result = lowerFixture(
+      `
+        export declare const EntityRuntimeKey: unique symbol;
+        export interface Entity { [EntityRuntimeKey]: { binding: object | null } | undefined; }
+        export type EntityWithoutRuntime<Type extends Entity> = Omit<Type, typeof EntityRuntimeKey>;
+        export interface Rectangle extends Entity {
+          height: number;
+          width: number;
+          x: number;
+          y: number;
+        }
+        export type RectangleLike = EntityWithoutRuntime<Rectangle>;
+        export function left(rect: RectangleLike): number { return rect.x; }
+        export function area(rect: Readonly<RectangleLike>): number {
+          const { width, height } = rect;
+          return width * height;
+        }
+      `,
+      {
+        emission: 'direct',
+        name: 'Rectangle',
+        packageName: '@flighthq/types',
+        purpose: 'concrete transparent-wrapper fixture',
+        source: 'upstream/packages/types/src/Vector2.ts',
+      },
+    );
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      haxePackage: 'flighthq.types',
+      imports: [],
+      name: 'Rectangle',
+      packageName: '@flighthq/types',
+    });
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(output).toContain(
+      'typedef RectangleLike = { var height:Float; var width:Float; var x:Float; var y:Float; };',
+    );
+    expect(output).not.toContain('typedef RectangleLike = EntityWithoutRuntime<Rectangle>;');
+    expect(output).toContain('public static function left(rect:RectangleLike):Float');
+    expect(output).toContain('return cast rect.x;');
+    expect(output).toContain('var __destructure0:RectangleLike = cast _Runtime.UNDEFINED;');
+    expect(output).toContain('__destructure0 = rect;');
+    expect(output).toContain('width = __destructure0.width;');
+    expect(output).toContain('height = __destructure0.height;');
+    expect(output).not.toContain("_Runtime.field(__destructure0, 'width')");
+    expect(output).not.toContain("_Runtime.field(__destructure0, 'height')");
   });
 
   it('audits structurally wider intersections as width-sensitive', () => {

@@ -59,7 +59,7 @@ class UpdateParticleEmitter3D {
     var gx:Float = cast _Runtime.UNDEFINED;
     var gy:Float = cast _Runtime.UNDEFINED;
     var gz:Float = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ParticleEmitterConfig = cast _Runtime.UNDEFINED;
     var colorStartR:Float = cast _Runtime.UNDEFINED;
     var colorStartG:Float = cast _Runtime.UNDEFINED;
     var colorStartB:Float = cast _Runtime.UNDEFINED;
@@ -113,12 +113,12 @@ class UpdateParticleEmitter3D {
     gy = (config.gravityY * deltaTime);
     gz = (config.gravityZ * deltaTime);
     __destructure0 = config;
-    colorStartR = _Runtime.field(__destructure0, 'colorStartR');
-    colorStartG = _Runtime.field(__destructure0, 'colorStartG');
-    colorStartB = _Runtime.field(__destructure0, 'colorStartB');
-    colorEndR = _Runtime.field(__destructure0, 'colorEndR');
-    colorEndG = _Runtime.field(__destructure0, 'colorEndG');
-    colorEndB = _Runtime.field(__destructure0, 'colorEndB');
+    colorStartR = __destructure0.colorStartR;
+    colorStartG = __destructure0.colorStartG;
+    colorStartB = __destructure0.colorStartB;
+    colorEndR = __destructure0.colorEndR;
+    colorEndG = __destructure0.colorEndG;
+    colorEndB = __destructure0.colorEndB;
     hasColorVariance = ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(config.colorStartVarianceR, 0.0) : Bool) || (cast !_Runtime.strictEquals(config.colorStartVarianceG, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(config.colorStartVarianceB, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(config.colorEndVarianceR, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(config.colorEndVarianceG, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(config.colorEndVarianceB, 0.0) : Bool));
     hasColorGradient = ((cast ((cast ((cast hasColorVariance : Bool) || (cast !_Runtime.strictEquals(colorStartR, colorEndR) : Bool)) : Bool) || (cast !_Runtime.strictEquals(colorStartG, colorEndG) : Bool)) : Bool) || (cast !_Runtime.strictEquals(colorStartB, colorEndB) : Bool));
     alphaCurve = config.alphaCurve;

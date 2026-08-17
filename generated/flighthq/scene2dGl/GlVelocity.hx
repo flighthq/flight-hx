@@ -54,12 +54,12 @@ class GlVelocity {
     spatial = (cast (cast node : flighthq._internal._Any) : Spatial2DNode<Dynamic>);
     ensureNodeWorldBoundsRectangle((cast spatial : Dynamic));
     bounds = (cast getNodeWorldBoundsRectangle((cast spatial : Dynamic)) : Rectangle);
-    drawGlVelocityQuad(({ final __callArgument4:Dynamic = ctx; __callArgument4; }), (cast _Runtime.field(bounds, 'x') : Float), (cast _Runtime.field(bounds, 'y') : Float), (cast _Runtime.field(bounds, 'width') : Float), (cast _Runtime.field(bounds, 'height') : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).x : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).y : Float));
+    drawGlVelocityQuad(({ final __callArgument4:Dynamic = ctx; __callArgument4; }), (cast bounds.x : Float), (cast bounds.y : Float), (cast bounds.width : Float), (cast bounds.height : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).x : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).y : Float));
   });
 
   public static final defaultGlParticleEmitter2DVelocityWriter:GlVelocityWriter = (cast function(ctx:GlVelocityContext, node:flighthq._internal._Object):Void {
     var emitter:ParticleEmitter2D = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ParticleEmitterData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     var particleCount:Float = cast _Runtime.UNDEFINED;
@@ -76,12 +76,12 @@ class GlVelocity {
     var wty:Float = cast _Runtime.UNDEFINED;
     emitter = (cast (cast node : flighthq._internal._Any) : ParticleEmitter2D);
     __destructure0 = emitter.data;
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    ids = _Runtime.field(__destructure0, 'ids');
-    particleCount = _Runtime.field(__destructure0, 'particleCount');
-    transforms = _Runtime.field(__destructure0, 'transforms');
-    velocities = _Runtime.field(__destructure0, 'velocities');
-    worldSpace = _Runtime.field(__destructure0, 'worldSpace');
+    atlas = __destructure0.atlas;
+    ids = __destructure0.ids;
+    particleCount = __destructure0.particleCount;
+    transforms = __destructure0.transforms;
+    velocities = __destructure0.velocities;
+    worldSpace = __destructure0.worldSpace;
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(velocities, 'length') : Float) < (cast (particleCount * 2.0) : Float)) : Bool)) : Bool)) { return; }
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
@@ -247,7 +247,7 @@ class GlVelocity {
     spatial = (cast (cast node : flighthq._internal._Any) : Spatial2DNode<Dynamic>);
     ensureNodeWorldBoundsRectangle((cast spatial : Dynamic));
     bounds = (cast getNodeWorldBoundsRectangle((cast spatial : Dynamic)) : Rectangle);
-    drawGlVelocityQuad(({ final __callArgument9:Dynamic = ctx; __callArgument9; }), (cast _Runtime.field(bounds, 'x') : Float), (cast _Runtime.field(bounds, 'y') : Float), (cast _Runtime.field(bounds, 'width') : Float), (cast _Runtime.field(bounds, 'height') : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).x : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).y : Float));
+    drawGlVelocityQuad(({ final __callArgument9:Dynamic = ctx; __callArgument9; }), (cast bounds.x : Float), (cast bounds.y : Float), (cast bounds.width : Float), (cast bounds.height : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).x : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).y : Float));
   });
 
   @:noCompletion

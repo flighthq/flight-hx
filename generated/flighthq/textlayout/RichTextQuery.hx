@@ -112,10 +112,10 @@ class RichTextQuery {
       }
     }
     charWidth = _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast group : TextLayoutGroup).positions : Array<Float>), (cast (charIndex - (cast group : TextLayoutGroup).startIndex) : Float)), function():Dynamic return cast 0.0);
-    ((cast out : Rectangle).x = x);
-    ((cast out : Rectangle).y = (cast group : TextLayoutGroup).offsetY);
-    ((cast out : Rectangle).width = charWidth);
-    ((cast out : Rectangle).height = (cast group : TextLayoutGroup).height);
+    (out.x = cast (x : Dynamic));
+    (out.y = cast ((cast group : TextLayoutGroup).offsetY : Dynamic));
+    (out.width = cast (charWidth : Dynamic));
+    (out.height = cast ((cast group : TextLayoutGroup).height : Dynamic));
     return cast true;
     return cast null;
   }

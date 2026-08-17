@@ -122,8 +122,8 @@ class GlMeshProgram {
         ((cast (cast program : flighthq.types.GlMeshProgram) : flighthq.types.GlMeshProgram).locColorBias = locColorBias);
       }
       if ((cast ((cast !_Runtime.strictEquals(locColorScale, null) : Bool) && (cast !_Runtime.looseEquals(locColorBias, null) : Bool)) : Bool)) {
-        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, locColorScale, _Runtime.field(colorScaleBias, 'redScale'), _Runtime.field(colorScaleBias, 'greenScale'), _Runtime.field(colorScaleBias, 'blueScale'), _Runtime.field(colorScaleBias, 'alphaScale'));
-        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, locColorBias, _Runtime.field(colorScaleBias, 'redBias'), _Runtime.field(colorScaleBias, 'greenBias'), _Runtime.field(colorScaleBias, 'blueBias'), _Runtime.field(colorScaleBias, 'alphaBias'));
+        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, locColorScale, (cast colorScaleBias : { var redScale:Float; }).redScale, (cast colorScaleBias : { var greenScale:Float; }).greenScale, (cast colorScaleBias : { var blueScale:Float; }).blueScale, (cast colorScaleBias : { var alphaScale:Float; }).alphaScale);
+        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, locColorBias, (cast colorScaleBias : { var redBias:Float; }).redBias, (cast colorScaleBias : { var greenBias:Float; }).greenBias, (cast colorScaleBias : { var blueBias:Float; }).blueBias, (cast colorScaleBias : { var alphaBias:Float; }).alphaBias);
       }
     } }
     jointMatrices = _Runtime.field(proxy, 'jointMatrices');

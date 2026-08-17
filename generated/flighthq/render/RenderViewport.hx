@@ -21,10 +21,10 @@ class RenderViewport {
     var worldBounds:Rectangle = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast RenderViewport.isSpatial2DNode__renderViewport((cast source : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast false; }
     worldBounds = (cast getNodeWorldBoundsRectangle((cast source : Dynamic)) : Rectangle);
-    _Runtime.setField(out, 'x', _Runtime.field(worldBounds, 'x'));
-    _Runtime.setField(out, 'y', _Runtime.field(worldBounds, 'y'));
-    _Runtime.setField(out, 'width', _Runtime.field(worldBounds, 'width'));
-    _Runtime.setField(out, 'height', _Runtime.field(worldBounds, 'height'));
+    _Runtime.setField(out, 'x', worldBounds.x);
+    _Runtime.setField(out, 'y', worldBounds.y);
+    _Runtime.setField(out, 'width', worldBounds.width);
+    _Runtime.setField(out, 'height', worldBounds.height);
     return cast true;
     return cast null;
   }
@@ -52,10 +52,10 @@ class RenderViewport {
       matrixTransformRectangle(({ final __callArgument0:Dynamic = RenderViewport._scratchTransformed__renderViewport; __callArgument0; }), ({ final __callArgument1:Dynamic = renderTransform2D; __callArgument1; }), ({ final __callArgument2:Dynamic = RenderViewport._scratchBounds__renderViewport; __callArgument2; }));
       (bounds = cast (RenderViewport._scratchTransformed__renderViewport : Dynamic));
     }
-    objMinX = (cast bounds : Rectangle).x;
-    objMinY = (cast bounds : Rectangle).y;
-    objMaxX = ((cast bounds : Rectangle).x + (cast bounds : Rectangle).width);
-    objMaxY = ((cast bounds : Rectangle).y + (cast bounds : Rectangle).height);
+    objMinX = bounds.x;
+    objMinY = bounds.y;
+    objMaxX = (bounds.x + bounds.width);
+    objMaxY = (bounds.y + bounds.height);
     vpMinX = _Runtime.field(viewport, 'x');
     vpMinY = _Runtime.field(viewport, 'y');
     vpMaxX = _Runtime.addNumbers(_Runtime.field(viewport, 'x'), _Runtime.field(viewport, 'width'));

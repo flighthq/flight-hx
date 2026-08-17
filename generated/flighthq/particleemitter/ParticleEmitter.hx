@@ -123,7 +123,7 @@ class ParticleEmitter {
   }
 
   public static function computeParticleEmitter2DLocalBoundsRectangle(out:Rectangle, source:ParticleEmitter2D):Void {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ParticleEmitterData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     var particleCount:Float = cast _Runtime.UNDEFINED;
@@ -135,15 +135,15 @@ class ParticleEmitter {
     var maxX:Float = cast _Runtime.UNDEFINED;
     var maxY:Float = cast _Runtime.UNDEFINED;
     __destructure0 = source.data;
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    ids = _Runtime.field(__destructure0, 'ids');
-    particleCount = _Runtime.field(__destructure0, 'particleCount');
-    transforms = _Runtime.field(__destructure0, 'transforms');
+    atlas = __destructure0.atlas;
+    ids = __destructure0.ids;
+    particleCount = __destructure0.particleCount;
+    transforms = __destructure0.transforms;
     if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) {
-      ((cast out : Rectangle).x = 0.0);
-      ((cast out : Rectangle).y = 0.0);
-      ((cast out : Rectangle).width = 0.0);
-      ((cast out : Rectangle).height = 0.0);
+      (out.x = cast (0.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
+      (out.width = cast (0.0 : Dynamic));
+      (out.height = cast (0.0 : Dynamic));
       return;
     }
     regions = atlas.regions;
@@ -188,15 +188,15 @@ class ParticleEmitter {
       }
     }
     if ((cast _Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY) : Bool)) {
-      ((cast out : Rectangle).x = 0.0);
-      ((cast out : Rectangle).y = 0.0);
-      ((cast out : Rectangle).width = 0.0);
-      ((cast out : Rectangle).height = 0.0);
+      (out.x = cast (0.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
+      (out.width = cast (0.0 : Dynamic));
+      (out.height = cast (0.0 : Dynamic));
     } else {
-      ((cast out : Rectangle).x = minX);
-      ((cast out : Rectangle).y = minY);
-      ((cast out : Rectangle).width = (maxX - minX));
-      ((cast out : Rectangle).height = (maxY - minY));
+      (out.x = cast (minX : Dynamic));
+      (out.y = cast (minY : Dynamic));
+      (out.width = cast ((maxX - minX) : Dynamic));
+      (out.height = cast ((maxY - minY) : Dynamic));
     }
   }
 

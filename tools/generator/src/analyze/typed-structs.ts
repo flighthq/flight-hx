@@ -898,9 +898,6 @@ export function createTypedStructRegistry(
     );
   }
   for (const schema of schemas) {
-    if (schema.audit.escapes.some((escape) => escape.reason === 'presence-sensitive')) {
-      addReason(schema.audit, 'presence-sensitive-use');
-    }
     if (schema.audit.escapes.some((escape) => escape.reason === 'instanceof')) {
       addReason(schema.audit, 'instanceof-use');
     }
@@ -1177,6 +1174,20 @@ function auditUses(
           }
         }
       }
+    } else if (ts.isBindingElement(node) && ts.isObjectBindingPattern(node.parent)) {
+      const member = objectBindingMemberName(node);
+      const receiverType = checker.getTypeAtLocation(node.parent);
+      const resolution = resolve(receiverType);
+      if (member && resolution.kind === 'matched') {
+        const audit = resolution.schemas[0]!;
+        const property = checker.getPropertyOfType(checker.getNonNullableType(receiverType), member);
+        const owned = resolveOwnedField(receiverType, member, property);
+        if (!owned || owned.schema !== byId.get(audit.id)) {
+          addEscape(audit, node, workspaceDirectory, 'unknown-member', member);
+        } else {
+          audit.accesses.reads += 1;
+        }
+      }
     } else if (ts.isElementAccessExpression(node)) {
       addResolutionEscape(
         resolve(checker.getTypeAtLocation(node.expression)),
@@ -1228,6 +1239,12 @@ function auditUses(
     .filter((item) => isProductionUpstreamSource(item, excludedDirectories))) {
     visit(source);
   }
+}
+
+function objectBindingMemberName(node: ts.BindingElement): string | undefined {
+  const name = node.propertyName ?? (ts.isIdentifier(node.name) ? node.name : undefined);
+  if (name && (ts.isIdentifier(name) || ts.isStringLiteral(name) || ts.isNumericLiteral(name))) return name.text;
+  return undefined;
 }
 
 function isCandidateFieldDeclaration(property: ts.Symbol, declarations: ReadonlySet<ts.Declaration>): boolean {

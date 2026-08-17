@@ -106,7 +106,7 @@ class WgpuRenderTarget {
     var d:Float = cast _Runtime.UNDEFINED;
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure1:Matrix = cast _Runtime.UNDEFINED;
     var ta:Float = cast _Runtime.UNDEFINED;
     var tb:Float = cast _Runtime.UNDEFINED;
     var tc:Float = cast _Runtime.UNDEFINED;
@@ -125,12 +125,12 @@ class WgpuRenderTarget {
     tx = _Runtime.field(__destructure0, 'tx');
     ty = _Runtime.field(__destructure0, 'ty');
     __destructure1 = transform;
-    ta = _Runtime.field(__destructure1, 'a');
-    tb = _Runtime.field(__destructure1, 'b');
-    tc = _Runtime.field(__destructure1, 'c');
-    td = _Runtime.field(__destructure1, 'd');
-    ttx = _Runtime.field(__destructure1, 'tx');
-    tty = _Runtime.field(__destructure1, 'ty');
+    ta = __destructure1.a;
+    tb = __destructure1.b;
+    tc = __destructure1.c;
+    td = __destructure1.d;
+    ttx = __destructure1.tx;
+    tty = __destructure1.ty;
     composedTransform = (cast { a: ((a * ta) + (c * tb)), b: ((b * ta) + (d * tb)), c: ((a * tc) + (c * td)), d: ((b * tc) + (d * td)), tx: (((a * ttx) + (c * tty)) + tx), ty: (((b * ttx) + (d * tty)) + ty) });
     drawWgpuQuadWithTransform(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = (cast renderProxy : flighthq._internal._Any); __callArgument12; }), ({ final __callArgument13:Dynamic = composedTransform; __callArgument13; }), ({ final __callArgument14:Dynamic = { texture: _Runtime.field(target, 'texture'), view: _Runtime.field(target, 'view'), bindGroup: _Runtime.field(target, 'bindGroup') }; __callArgument14; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast _Runtime.field(target, 'width') : Float), (cast _Runtime.field(target, 'height') : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float));
   }

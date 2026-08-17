@@ -43,8 +43,8 @@ class SpatialQuery {
     var children:Null<Array<Node<Node2DTraits>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast root : { var enabled:Bool; }).enabled : Bool) : Bool)) { return cast out; }
     b = (cast getNodeWorldBoundsRectangle((cast root : Dynamic)) : Rectangle);
-    nearX = HxMath.max(_Runtime.field(b, 'x'), HxMath.min(cx, _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.field(b, 'width'))));
-    nearY = HxMath.max(_Runtime.field(b, 'y'), HxMath.min(cy, _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.field(b, 'height'))));
+    nearX = HxMath.max(b.x, HxMath.min(cx, (b.x + b.width)));
+    nearY = HxMath.max(b.y, HxMath.min(cy, (b.y + b.height)));
     dx = (cx - nearX);
     dy = (cy - nearY);
     if ((cast ((cast ((dx * dx) + (dy * dy)) : Float) <= (cast (radius * radius) : Float)) : Bool)) {

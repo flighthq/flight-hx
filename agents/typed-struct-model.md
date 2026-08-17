@@ -1,6 +1,6 @@
 # Typed Struct Lowering Proposal
 
-Status: design approved and implemented for 404 eligible canonical schemas. Schema analysis, declaration-owned IR binding, and direct expression emission are enabled; `Rectangle` remains dynamic because of presence-sensitive use. Class-layout emission remains an audited follow-up, not an enabled behavior.
+Status: design approved and implemented across the complete checker-derived universe. There are 1,536 semantically eligible canonical schemas, 400 direct-emission schemas, and 11,816 generated direct accesses. `Rectangle` now emits 667 direct accesses; its two `HitArea` presence tests remain operation-local `_Runtime.hasField` checks. Cpp class layout remains a provenance-gated allowlist, currently containing `Camera2D` and `ParticleEmitterState` only.
 
 ## Goal
 
@@ -55,9 +55,9 @@ Both `field?: T` and `field: T | undefined` emit as `Null<T>` where `T` is not a
 
 Object literals continue to omit fields that were omitted in TypeScript. Explicit `undefined` initializes the field with `_Runtime.UNDEFINED`; that remains distinguishable from omission on JavaScript and collapses to `null` on native targets. Reads become direct `owner.field`. Existing strict-undefined checks continue to compare the result with `_Runtime.UNDEFINED`.
 
-Operations that observably distinguish ownership from value, including `'field' in value`, `Object.hasOwn`, and serialization policies based on property presence, do not infer presence from `owner.field != null`. They use a dedicated presence seam. Until that seam exists on all targets, any schema used by such an operation remains on the dynamic access path for that operation.
+Operations that observably distinguish ownership from value, including `'field' in value`, `Object.hasOwn`, and serialization policies based on property presence, do not infer presence from `owner.field != null`. They use the maintained presence seam. Presence sensitivity is an operation-level escape: the individual check remains dynamic without disabling direct reads and writes elsewhere on the same schema.
 
-No native absent-value sentinel is planned for the near phases. Presence-sensitive schemas stay on the dynamic path; a distinct sentinel is reconsidered only if the audit identifies a hot allowlisted case that cannot be handled at the boundary.
+No native absent-value sentinel is planned for the near phases. A distinct sentinel is reconsidered only if the audit identifies a hot presence-sensitive operation that cannot be handled at the maintained boundary.
 
 Optional receiver chains must evaluate the receiver once and skip argument or right-hand-side evaluation when nullish. The emitter can use a scoped Haxe block temporary, as typed collection lowering does; it must not duplicate an effectful receiver expression.
 
@@ -98,7 +98,7 @@ Migration is leaf-first so compile failures remain local and each step reduces r
 3. Node transforms, bounds, camera data, and other hot geometry aggregates.
 4. Renderer state records and material descriptors after their platform handles are marked as dynamic leaf fields.
 5. Broad scene, asset, host, and serialization documents.
-6. Open dictionaries, mapped types, and presence-sensitive records only after their runtime seams and audits are proven.
+6. Open dictionaries and unresolved mapped types only after their runtime seams and audits are proven; presence-sensitive operations remain separately audited escapes.
 
 Each tranche starts with an allowlist of canonical schema identities. Expanding the allowlist is reviewed from the audit diff; eligibility must not silently widen because an upstream alias changed.
 
@@ -129,7 +129,7 @@ Basic direct reads and writes need no new runtime API. The complete model needs 
 
 `UNDEFINED` should not become a new native sentinel object as part of the first implementation. That would be a repository-wide semantic change and must be reviewed separately.
 
-The class-layout follow-up is now audited in [`typed-struct-class-design.md`](typed-struct-class-design.md) and the generated `reports/typed-struct-classes.{json,md}` census. It recommends a cpp-only `@:structInit` class allowlist beginning with clean required-field schemas. Anonymous-structure access remains hash-oriented on hxcpp; semantic parity and alias preservation still come first, and no class emission is currently enabled.
+The class-layout follow-up is audited in [`typed-struct-class-design.md`](typed-struct-class-design.md) and the generated `reports/typed-struct-classes.{json,md}` census. Cpp-only `@:structInit` emission is enabled for the provenance-closed `Camera2D` and `ParticleEmitterState` identities. Anonymous-structure access remains hash-oriented on hxcpp; no additional schema becomes nominal without a closed provenance proof.
 
 ## Implementation and verification gates
 

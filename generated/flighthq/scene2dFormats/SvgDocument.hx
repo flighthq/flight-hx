@@ -286,13 +286,13 @@ class SvgDocument {
     }
     region = (cast createClipRegionFromPath(({ final __callArgument61:Dynamic = out; __callArgument61; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ClipRegion);
     for (clippedRegion in _Runtime.iterable(clippedRegions)) {
-      if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field((cast out : Path).commands, 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals((cast (cast region : ClipRegion).rect : Rectangle).width, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast region : ClipRegion).rect : Rectangle).height, 0.0) : Bool)) : Bool)) { (region = cast (clippedRegion : Dynamic)); } else { unionClipRegions(({ final __callArgument64:Dynamic = region; __callArgument64; }), ({ final __callArgument65:Dynamic = region; __callArgument65; }), ({ final __callArgument66:Dynamic = clippedRegion; __callArgument66; })); }
+      if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field((cast out : Path).commands, 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals((cast (cast region : ClipRegion).rect : { var width:Float; }).width, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast region : ClipRegion).rect : { var height:Float; }).height, 0.0) : Bool)) : Bool)) { (region = cast (clippedRegion : Dynamic)); } else { unionClipRegions(({ final __callArgument64:Dynamic = region; __callArgument64; }), ({ final __callArgument65:Dynamic = region; __callArgument65; }), ({ final __callArgument66:Dynamic = clippedRegion; __callArgument66; })); }
     }
     (region = cast ((cast SvgDocument.intersectSvgClipReference__svgDocument(({ final __callArgument67:Dynamic = region; __callArgument67; }), ({ final __callArgument68:Dynamic = element; __callArgument68; }), ({ final __callArgument69:Dynamic = null; __callArgument69; }), (cast context : Dynamic)) : ClipRegion) : Dynamic));
     transform = (cast SvgDocument.parseSvgTransform__svgDocument((cast SvgDocument.attribute__svgDocument(({ final __callArgument70:Dynamic = element; __callArgument70; }), (cast 'transform' : String)) : Null<String>)) : Null<Matrix>);
     unitsAttribute = ((cast _Runtime.strictEquals((cast SvgDocument.localName__svgDocument((cast element.name : String)) : String), 'mask') : Bool) ? (cast (cast SvgDocument.attribute__svgDocument(({ final __callArgument71:Dynamic = element; __callArgument71; }), (cast 'maskContentUnits' : String)) : Null<String>) : Dynamic) : (cast (cast SvgDocument.attribute__svgDocument(({ final __callArgument72:Dynamic = element; __callArgument72; }), (cast 'clipPathUnits' : String)) : Null<String>) : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(unitsAttribute, 'objectBoundingBox') : Bool) && (cast !_Runtime.strictEquals(targetBounds, null) : Bool)) : Bool)) {
-      var unitTransform:Matrix = (cast createMatrix(({ final __callArgument73:Dynamic = _Runtime.field(targetBounds, 'width'); __callArgument73; }), ({ final __callArgument74:Dynamic = 0.0; __callArgument74; }), ({ final __callArgument75:Dynamic = 0.0; __callArgument75; }), ({ final __callArgument76:Dynamic = _Runtime.field(targetBounds, 'height'); __callArgument76; }), ({ final __callArgument77:Dynamic = _Runtime.field(targetBounds, 'x'); __callArgument77; }), ({ final __callArgument78:Dynamic = _Runtime.field(targetBounds, 'y'); __callArgument78; })) : Matrix);
+      var unitTransform:Matrix = (cast createMatrix(({ final __callArgument73:Dynamic = (cast targetBounds : { var width:Float; }).width; __callArgument73; }), ({ final __callArgument74:Dynamic = 0.0; __callArgument74; }), ({ final __callArgument75:Dynamic = 0.0; __callArgument75; }), ({ final __callArgument76:Dynamic = (cast targetBounds : { var height:Float; }).height; __callArgument76; }), ({ final __callArgument77:Dynamic = (cast targetBounds : { var x:Float; }).x; __callArgument77; }), ({ final __callArgument78:Dynamic = (cast targetBounds : { var y:Float; }).y; __callArgument78; })) : Matrix);
       (transform = cast (((cast _Runtime.strictEquals(transform, null) : Bool) ? (cast unitTransform : Dynamic) : (cast (cast SvgDocument.multiplySvgMatrices__svgDocument(({ final __callArgument79:Dynamic = unitTransform; __callArgument79; }), ({ final __callArgument80:Dynamic = transform; __callArgument80; })) : Matrix) : Dynamic)) : Dynamic));
     }
     if ((cast _Runtime.strictEquals(transform, null) : Bool)) { return cast region; }
@@ -422,22 +422,22 @@ class SvgDocument {
     var minimumY:Float = cast _Runtime.UNDEFINED;
     var maximumX:Float = cast _Runtime.UNDEFINED;
     var maximumY:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(source, 'width'), 0.0) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(source, 'height'), 0.0) : Bool)) : Bool)) { return cast hasBounds; }
+    if ((cast ((cast _Runtime.strictEquals(source.width, 0.0) : Bool) || (cast _Runtime.strictEquals(source.height, 0.0) : Bool)) : Bool)) { return cast hasBounds; }
     if ((cast !(cast hasBounds : Bool) : Bool)) {
-      ((cast out : Rectangle).x = _Runtime.field(source, 'x'));
-      ((cast out : Rectangle).y = _Runtime.field(source, 'y'));
-      ((cast out : Rectangle).width = _Runtime.field(source, 'width'));
-      ((cast out : Rectangle).height = _Runtime.field(source, 'height'));
+      (out.x = cast (source.x : Dynamic));
+      (out.y = cast (source.y : Dynamic));
+      (out.width = cast (source.width : Dynamic));
+      (out.height = cast (source.height : Dynamic));
       return cast true;
     }
-    minimumX = HxMath.min((cast out : Rectangle).x, _Runtime.field(source, 'x'));
-    minimumY = HxMath.min((cast out : Rectangle).y, _Runtime.field(source, 'y'));
-    maximumX = HxMath.max(((cast out : Rectangle).x + (cast out : Rectangle).width), _Runtime.addNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'width')));
-    maximumY = HxMath.max(((cast out : Rectangle).y + (cast out : Rectangle).height), _Runtime.addNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'height')));
-    ((cast out : Rectangle).x = minimumX);
-    ((cast out : Rectangle).y = minimumY);
-    ((cast out : Rectangle).width = (maximumX - minimumX));
-    ((cast out : Rectangle).height = (maximumY - minimumY));
+    minimumX = HxMath.min(out.x, source.x);
+    minimumY = HxMath.min(out.y, source.y);
+    maximumX = HxMath.max((out.x + out.width), (source.x + source.width));
+    maximumY = HxMath.max((out.y + out.height), (source.y + source.height));
+    (out.x = cast (minimumX : Dynamic));
+    (out.y = cast (minimumY : Dynamic));
+    (out.width = cast ((maximumX - minimumX) : Dynamic));
+    (out.height = cast ((maximumY - minimumY) : Dynamic));
     return cast true;
     return cast null;
   }
@@ -741,8 +741,8 @@ class SvgDocument {
     var matrix:Matrix = cast _Runtime.UNDEFINED;
     bounds = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);
     (cast getPathBounds(({ final __callArgument334:Dynamic = path; __callArgument334; }), ({ final __callArgument335:Dynamic = bounds; __callArgument335; })) : Bool);
-    mapX = (cast function(value:Float):Float return ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast ((cast bounds : Rectangle).x + (value * (cast bounds : Rectangle).width)) : Dynamic) : (cast value : Dynamic)));
-    mapY = (cast function(value:Float):Float return ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast ((cast bounds : Rectangle).y + (value * (cast bounds : Rectangle).height)) : Dynamic) : (cast value : Dynamic)));
+    mapX = (cast function(value:Float):Float return ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast (bounds.x + (value * bounds.width)) : Dynamic) : (cast value : Dynamic)));
+    mapY = (cast function(value:Float):Float return ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast (bounds.y + (value * bounds.height)) : Dynamic) : (cast value : Dynamic)));
     if ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'kind'), 'linear') : Bool)) {
       var x1:Float = (cast mapX((cast _Runtime.field(gradient, 'x1') : Float)) : Float);
       var y1:Float = (cast mapY((cast _Runtime.field(gradient, 'y1') : Float)) : Float);
@@ -753,8 +753,8 @@ class SvgDocument {
       var length:Float = HxMath.max(_Runtime.hypot(dx, dy), 1.0);
       (matrix = cast ((cast createGradientTransformMatrix((cast length : Float), (cast length : Float), (cast HxMath.atan2(dy, dx) : Float), (cast ((x1 + x2) / 2.0) : Float), (cast ((y1 + y2) / 2.0) : Float)) : Matrix) : Dynamic));
     } else {
-      var radiusX:Float = ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.field(gradient, 'radius'), (cast bounds : Rectangle).width) : Dynamic) : (cast _Runtime.field(gradient, 'radius') : Dynamic));
-      var radiusY:Float = ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.field(gradient, 'radius'), (cast bounds : Rectangle).height) : Dynamic) : (cast _Runtime.field(gradient, 'radius') : Dynamic));
+      var radiusX:Float = ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.field(gradient, 'radius'), bounds.width) : Dynamic) : (cast _Runtime.field(gradient, 'radius') : Dynamic));
+      var radiusY:Float = ((cast _Runtime.strictEquals(_Runtime.field(gradient, 'units'), 'objectBoundingBox') : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.field(gradient, 'radius'), bounds.height) : Dynamic) : (cast _Runtime.field(gradient, 'radius') : Dynamic));
       (matrix = cast ((cast createGradientTransformMatrix((cast HxMath.max((radiusX * 2.0), 1.0) : Float), (cast HxMath.max((radiusY * 2.0), 1.0) : Float), (cast 0.0 : Float), (cast (cast mapX((cast _Runtime.field(gradient, 'cx') : Float)) : Float) : Float), (cast (cast mapY((cast _Runtime.field(gradient, 'cy') : Float)) : Float) : Float)) : Matrix) : Dynamic));
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(gradient, 'transform'), null) : Bool)) { (matrix = cast ((cast SvgDocument.multiplySvgMatrices__svgDocument(_Runtime.field(gradient, 'transform'), ({ final __callArgument336:Dynamic = matrix; __callArgument336; })) : Matrix) : Dynamic)); }

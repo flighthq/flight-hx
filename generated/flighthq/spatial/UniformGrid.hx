@@ -76,10 +76,10 @@ class UniformGrid {
   }
 
   public static function _fillRectFromAabb__uniformGrid(out:RectangleLike, aabb:SpatialAabb):Void {
-    _Runtime.setField(out, 'x', aabb.minX);
-    _Runtime.setField(out, 'y', aabb.minY);
-    _Runtime.setField(out, 'width', (aabb.maxX - aabb.minX));
-    _Runtime.setField(out, 'height', (aabb.maxY - aabb.minY));
+    (out.x = cast (aabb.minX : Dynamic));
+    (out.y = cast (aabb.minY : Dynamic));
+    (out.width = cast ((aabb.maxX - aabb.minX) : Dynamic));
+    (out.height = cast ((aabb.maxY - aabb.minY) : Dynamic));
   }
 
   public static function _explainGridIndexing__uniformGrid(grid:UniformGrid__uniformGrid, id:SpatialObjectId):SpatialIndexingExplanation {

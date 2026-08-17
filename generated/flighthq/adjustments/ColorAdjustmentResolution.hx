@@ -53,14 +53,14 @@ class ColorAdjustmentResolution {
       }
     }
     fused = (cast fuseColorMatrices(({ final __callArgument3:Dynamic = matrices; __callArgument3; })) : Array<Float>);
-    ((cast out : ColorScaleBias).redScale = flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 0.0 : Float)));
-    ((cast out : ColorScaleBias).greenScale = flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 6.0 : Float)));
-    ((cast out : ColorScaleBias).blueScale = flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 12.0 : Float)));
-    ((cast out : ColorScaleBias).alphaScale = flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 18.0 : Float)));
-    ((cast out : ColorScaleBias).redBias = flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 4.0 : Float)));
-    ((cast out : ColorScaleBias).greenBias = flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 9.0 : Float)));
-    ((cast out : ColorScaleBias).blueBias = flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 14.0 : Float)));
-    ((cast out : ColorScaleBias).alphaBias = flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 19.0 : Float)));
+    (out.redScale = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 0.0 : Float)) : Dynamic));
+    (out.greenScale = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 6.0 : Float)) : Dynamic));
+    (out.blueScale = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 12.0 : Float)) : Dynamic));
+    (out.alphaScale = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 18.0 : Float)) : Dynamic));
+    (out.redBias = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 4.0 : Float)) : Dynamic));
+    (out.greenBias = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 9.0 : Float)) : Dynamic));
+    (out.blueBias = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 14.0 : Float)) : Dynamic));
+    (out.alphaBias = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 19.0 : Float)) : Dynamic));
     return cast ((cast ((cast inlineable : Bool) && (cast (cast isAffineColorMatrix(({ final __callArgument4:Dynamic = fused; __callArgument4; })) : Bool) : Bool)) : Bool) ? (cast COLOR_ADJUSTMENT_AFFINE : Dynamic) : (cast COLOR_ADJUSTMENT_CHANNEL_MIXING : Dynamic));
     return cast null;
   }

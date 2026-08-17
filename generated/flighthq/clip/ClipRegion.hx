@@ -30,10 +30,10 @@ class ClipRegion {
     var region:Null<flighthq.types.ClipRegion> = cast _Runtime.UNDEFINED;
     region = _Runtime.callProperty(ClipRegion.clipRegionPool__clipRegion, 'pop', cast ([] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast (cast region : flighthq.types.ClipRegion).rect : Rectangle).x = 0.0);
-      ((cast (cast region : flighthq.types.ClipRegion).rect : Rectangle).y = 0.0);
-      ((cast (cast region : flighthq.types.ClipRegion).rect : Rectangle).width = 0.0);
-      ((cast (cast region : flighthq.types.ClipRegion).rect : Rectangle).height = 0.0);
+      ((cast (cast region : flighthq.types.ClipRegion).rect : { var x:Float; }).x = cast (0.0 : Dynamic));
+      ((cast (cast region : flighthq.types.ClipRegion).rect : { var y:Float; }).y = cast (0.0 : Dynamic));
+      ((cast (cast region : flighthq.types.ClipRegion).rect : { var width:Float; }).width = cast (0.0 : Dynamic));
+      ((cast (cast region : flighthq.types.ClipRegion).rect : { var height:Float; }).height = cast (0.0 : Dynamic));
       ((cast region : flighthq.types.ClipRegion).contours = null);
       ((cast region : flighthq.types.ClipRegion).winding = 'nonZero');
       ((cast region : flighthq.types.ClipRegion).version = 0.0);
@@ -98,7 +98,7 @@ class ClipRegion {
   public static function createClipRegionFromEllipse(rectangle:RectangleLike, tolerance:Float = 0.25):flighthq.types.ClipRegion {
     var path:Path = cast _Runtime.UNDEFINED;
     path = (cast createPath(({ final __callArgument13:Dynamic = 'nonZero'; __callArgument13; })) : Path);
-    ClipRegion.appendEllipseToPath__clipRegion(({ final __callArgument14:Dynamic = path; __callArgument14; }), (cast _Runtime.field(rectangle, 'x') : Float), (cast _Runtime.field(rectangle, 'y') : Float), (cast _Runtime.field(rectangle, 'width') : Float), (cast _Runtime.field(rectangle, 'height') : Float));
+    ClipRegion.appendEllipseToPath__clipRegion(({ final __callArgument14:Dynamic = path; __callArgument14; }), (cast rectangle.x : Float), (cast rectangle.y : Float), (cast rectangle.width : Float), (cast rectangle.height : Float));
     return cast (cast createClipRegionFromPath(({ final __callArgument15:Dynamic = path; __callArgument15; }), (cast tolerance : Float)) : flighthq.types.ClipRegion);
     return cast null;
   }
@@ -122,7 +122,7 @@ class ClipRegion {
     var path:Path = cast _Runtime.UNDEFINED;
     if ((cast ((cast radius : Float) <= (cast 0.0 : Float)) : Bool)) { return cast (cast createClipRegionFromRectangle(({ final __callArgument20:Dynamic = rectangle; __callArgument20; })) : flighthq.types.ClipRegion); }
     path = (cast createPath(({ final __callArgument21:Dynamic = 'nonZero'; __callArgument21; })) : Path);
-    ClipRegion.appendRoundedRectToPath__clipRegion(({ final __callArgument22:Dynamic = path; __callArgument22; }), (cast _Runtime.field(rectangle, 'x') : Float), (cast _Runtime.field(rectangle, 'y') : Float), (cast _Runtime.field(rectangle, 'width') : Float), (cast _Runtime.field(rectangle, 'height') : Float), (cast radius : Float));
+    ClipRegion.appendRoundedRectToPath__clipRegion(({ final __callArgument22:Dynamic = path; __callArgument22; }), (cast rectangle.x : Float), (cast rectangle.y : Float), (cast rectangle.width : Float), (cast rectangle.height : Float), (cast radius : Float));
     return cast (cast createClipRegionFromPath(({ final __callArgument23:Dynamic = path; __callArgument23; }), (cast tolerance : Float)) : flighthq.types.ClipRegion);
     return cast null;
   }
@@ -136,7 +136,7 @@ class ClipRegion {
     if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'winding'), _Runtime.field(b, 'winding')) : Bool)) { return cast false; }
     ar = _Runtime.field(a, 'rect');
     br = _Runtime.field(b, 'rect');
-    if ((cast ((cast ((cast ((cast !_Runtime.strictEquals((cast ar : Rectangle).x, (cast br : Rectangle).x) : Bool) || (cast !_Runtime.strictEquals((cast ar : Rectangle).y, (cast br : Rectangle).y) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast ar : Rectangle).width, (cast br : Rectangle).width) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast ar : Rectangle).height, (cast br : Rectangle).height) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(ar.x, br.x) : Bool) || (cast !_Runtime.strictEquals(ar.y, br.y) : Bool)) : Bool) || (cast !_Runtime.strictEquals(ar.width, br.width) : Bool)) : Bool) || (cast !_Runtime.strictEquals(ar.height, br.height) : Bool)) : Bool)) { return cast false; }
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'contours'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(b, 'contours'), null) : Bool)) : Bool)) { return cast true; }
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'contours'), null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(b, 'contours'), null) : Bool)) : Bool)) { return cast false; }
     ac = _Runtime.field(a, 'contours');
@@ -165,10 +165,10 @@ class ClipRegion {
   public static function getClipRegionBounds(out:RectangleLike, clip:flighthq.types.ClipRegion):Void {
     var r:Rectangle = cast _Runtime.UNDEFINED;
     r = _Runtime.field(clip, 'rect');
-    _Runtime.setField(out, 'x', (cast r : Rectangle).x);
-    _Runtime.setField(out, 'y', (cast r : Rectangle).y);
-    _Runtime.setField(out, 'width', (cast r : Rectangle).width);
-    _Runtime.setField(out, 'height', (cast r : Rectangle).height);
+    (out.x = cast (r.x : Dynamic));
+    (out.y = cast (r.y : Dynamic));
+    (out.width = cast (r.width : Dynamic));
+    (out.height = cast (r.height : Dynamic));
   }
 
   public static function intersectClipRegions(out:flighthq.types.ClipRegion, a:flighthq.types.ClipRegion, b:flighthq.types.ClipRegion):Void {
@@ -192,14 +192,14 @@ class ClipRegion {
     var y1:Float = cast _Runtime.UNDEFINED;
     aRect = _Runtime.field(a, 'rect');
     bRect = _Runtime.field(b, 'rect');
-    ax = (cast aRect : Rectangle).x;
-    ay = (cast aRect : Rectangle).y;
-    aw = (cast aRect : Rectangle).width;
-    ah = (cast aRect : Rectangle).height;
-    bx = (cast bRect : Rectangle).x;
-    by = (cast bRect : Rectangle).y;
-    bw = (cast bRect : Rectangle).width;
-    bh = (cast bRect : Rectangle).height;
+    ax = aRect.x;
+    ay = aRect.y;
+    aw = aRect.width;
+    ah = aRect.height;
+    bx = bRect.x;
+    by = bRect.y;
+    bw = bRect.width;
+    bh = bRect.height;
     aContours = _Runtime.field(a, 'contours');
     bContours = _Runtime.field(b, 'contours');
     aWinding = _Runtime.field(a, 'winding');
@@ -209,19 +209,19 @@ class ClipRegion {
     x1 = HxMath.min((ax + aw), (bx + bw));
     y1 = HxMath.min((ay + ah), (by + bh));
     if ((cast ((cast ((cast x1 : Float) <= (cast x0 : Float)) : Bool) || (cast ((cast y1 : Float) <= (cast y0 : Float)) : Bool)) : Bool)) {
-      ((cast (cast out : flighthq.types.ClipRegion).rect : Rectangle).x = 0.0);
-      ((cast (cast out : flighthq.types.ClipRegion).rect : Rectangle).y = 0.0);
-      ((cast (cast out : flighthq.types.ClipRegion).rect : Rectangle).width = 0.0);
-      ((cast (cast out : flighthq.types.ClipRegion).rect : Rectangle).height = 0.0);
+      ((cast (cast out : flighthq.types.ClipRegion).rect : { var x:Float; }).x = cast (0.0 : Dynamic));
+      ((cast (cast out : flighthq.types.ClipRegion).rect : { var y:Float; }).y = cast (0.0 : Dynamic));
+      ((cast (cast out : flighthq.types.ClipRegion).rect : { var width:Float; }).width = cast (0.0 : Dynamic));
+      ((cast (cast out : flighthq.types.ClipRegion).rect : { var height:Float; }).height = cast (0.0 : Dynamic));
       ((cast out : flighthq.types.ClipRegion).contours = null);
       ((cast out : flighthq.types.ClipRegion).winding = 'nonZero');
       ((cast out : flighthq.types.ClipRegion).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast out : flighthq.types.ClipRegion).version + 1.0)), 0));
       return;
     }
-    ((cast (cast out : flighthq.types.ClipRegion).rect : Rectangle).x = x0);
-    ((cast (cast out : flighthq.types.ClipRegion).rect : Rectangle).y = y0);
-    ((cast (cast out : flighthq.types.ClipRegion).rect : Rectangle).width = (x1 - x0));
-    ((cast (cast out : flighthq.types.ClipRegion).rect : Rectangle).height = (y1 - y0));
+    ((cast (cast out : flighthq.types.ClipRegion).rect : { var x:Float; }).x = cast (x0 : Dynamic));
+    ((cast (cast out : flighthq.types.ClipRegion).rect : { var y:Float; }).y = cast (y0 : Dynamic));
+    ((cast (cast out : flighthq.types.ClipRegion).rect : { var width:Float; }).width = cast ((x1 - x0) : Dynamic));
+    ((cast (cast out : flighthq.types.ClipRegion).rect : { var height:Float; }).height = cast ((y1 - y0) : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(aContours, null) : Bool) && (cast _Runtime.strictEquals(bContours, null) : Bool)) : Bool)) {
       ((cast out : flighthq.types.ClipRegion).contours = null);
       ((cast out : flighthq.types.ClipRegion).winding = 'nonZero');
@@ -307,10 +307,10 @@ class ClipRegion {
         }
       }
       if ((cast isAxisAligned : Bool)) {
-        ((cast (cast out : flighthq.types.ClipRegion).rect : Rectangle).x = minX);
-        ((cast (cast out : flighthq.types.ClipRegion).rect : Rectangle).y = minY);
-        ((cast (cast out : flighthq.types.ClipRegion).rect : Rectangle).width = (maxX - minX));
-        ((cast (cast out : flighthq.types.ClipRegion).rect : Rectangle).height = (maxY - minY));
+        ((cast (cast out : flighthq.types.ClipRegion).rect : { var x:Float; }).x = cast (minX : Dynamic));
+        ((cast (cast out : flighthq.types.ClipRegion).rect : { var y:Float; }).y = cast (minY : Dynamic));
+        ((cast (cast out : flighthq.types.ClipRegion).rect : { var width:Float; }).width = cast ((maxX - minX) : Dynamic));
+        ((cast (cast out : flighthq.types.ClipRegion).rect : { var height:Float; }).height = cast ((maxY - minY) : Dynamic));
         ((cast out : flighthq.types.ClipRegion).contours = null);
         ((cast out : flighthq.types.ClipRegion).winding = 'nonZero');
         ((cast out : flighthq.types.ClipRegion).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast out : flighthq.types.ClipRegion).version + 1.0)), 0));
@@ -368,10 +368,10 @@ class ClipRegion {
         ((cast out : flighthq.types.ClipRegion).contours = null);
         ((cast out : flighthq.types.ClipRegion).winding = 'nonZero');
       } else {
-        var rx:Float = (cast inRect : Rectangle).x;
-        var ry:Float = (cast inRect : Rectangle).y;
-        var rw:Float = (cast inRect : Rectangle).width;
-        var rh:Float = (cast inRect : Rectangle).height;
+        var rx:Float = inRect.x;
+        var ry:Float = inRect.y;
+        var rw:Float = inRect.width;
+        var rh:Float = inRect.height;
         var tlX:Float = (((ma * rx) + (mc * ry)) + mtx);
         var tlY:Float = (((mb * rx) + (md * ry)) + mty);
         var trX:Float = (((ma * (rx + rw)) + (mc * ry)) + mtx);
@@ -582,15 +582,15 @@ class ClipRegion {
       }
     }
     if ((cast ((cast minX : Float) > (cast maxX : Float)) : Bool)) {
-      _Runtime.setField(out, 'x', 0.0);
-      _Runtime.setField(out, 'y', 0.0);
-      _Runtime.setField(out, 'width', 0.0);
-      _Runtime.setField(out, 'height', 0.0);
+      (out.x = cast (0.0 : Dynamic));
+      (out.y = cast (0.0 : Dynamic));
+      (out.width = cast (0.0 : Dynamic));
+      (out.height = cast (0.0 : Dynamic));
       return;
     }
-    _Runtime.setField(out, 'x', minX);
-    _Runtime.setField(out, 'y', minY);
-    _Runtime.setField(out, 'width', (maxX - minX));
-    _Runtime.setField(out, 'height', (maxY - minY));
+    (out.x = cast (minX : Dynamic));
+    (out.y = cast (minY : Dynamic));
+    (out.width = cast ((maxX - minX) : Dynamic));
+    (out.height = cast ((maxY - minY) : Dynamic));
   }
 }

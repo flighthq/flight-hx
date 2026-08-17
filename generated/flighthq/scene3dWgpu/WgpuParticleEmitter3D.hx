@@ -153,7 +153,7 @@ class WgpuParticleEmitter3D {
 
   public static function drawParticleEmitter3DNode__wgpuParticleEmitter3D(state:WgpuRenderState, resources:WgpuParticle3DResources__wgpuParticleEmitter3D, pass:flighthq._internal.dom.GPURenderPassEncoder, emitter:ParticleEmitter3D):Void {
     var data:ParticleEmitterData = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ParticleEmitterData = cast _Runtime.UNDEFINED;
     var alphas:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var colors:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -182,13 +182,13 @@ class WgpuParticleEmitter3D {
     var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
     data = _Runtime.field(emitter, 'data');
     __destructure0 = data;
-    alphas = _Runtime.field(__destructure0, 'alphas');
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    colors = _Runtime.field(__destructure0, 'colors');
-    ids = _Runtime.field(__destructure0, 'ids');
-    particleCount = _Runtime.field(__destructure0, 'particleCount');
-    positionsZ = _Runtime.field(__destructure0, 'positionsZ');
-    transforms = _Runtime.field(__destructure0, 'transforms');
+    alphas = __destructure0.alphas;
+    atlas = __destructure0.atlas;
+    colors = __destructure0.colors;
+    ids = __destructure0.ids;
+    particleCount = __destructure0.particleCount;
+    positionsZ = __destructure0.positionsZ;
+    transforms = __destructure0.transforms;
     if ((cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) { return; }
     needed = (particleCount * WgpuParticleEmitter3D.INSTANCE_FLOATS__wgpuParticleEmitter3D);
     if ((cast ((cast _Runtime.field((cast resources : WgpuParticle3DResources__wgpuParticleEmitter3D).instanceData, 'length') : Float) < (cast needed : Float)) : Bool)) {

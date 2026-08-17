@@ -446,7 +446,7 @@ export function lowerTypeScriptSource(
           kind: 'type',
           name: statement.name.text,
           origin: origin(statement, context),
-          type: lowerType(statement.type, context),
+          type: lowerConcreteEntityWithoutRuntimeAlias(statement, context) ?? lowerType(statement.type, context),
           typeParameters: statement.typeParameters?.map((parameter) => parameter.name.text) ?? [],
         });
         accountedDeclarations += 1;
@@ -1356,6 +1356,7 @@ function lowerParameterList(
     const declarations: IrVariable[] = [];
     lowerBindingPattern(node.name, { kind: 'identifier', name }, false, declarations, context, {
       destructuringSource: 'parameter',
+      sourceType: context.checker?.getTypeAtLocation(node.name),
     });
     prefix.push({ declarations, kind: 'variable' });
   }
@@ -2032,6 +2033,101 @@ function lowerTypeMembers(members: ts.NodeArray<ts.TypeElement>, context: Loweri
   return [...new Map(lowered.map((field) => [field.name, field])).values()];
 }
 
+function lowerConcreteEntityWithoutRuntimeAlias(
+  declaration: ts.TypeAliasDeclaration,
+  context: LoweringContext,
+): Extract<IrType, { kind: 'anonymous' }> | undefined {
+  const checker = context.checker;
+  if (
+    !checker ||
+    declaration.typeParameters?.length ||
+    !ts.isTypeReferenceNode(declaration.type) ||
+    declaration.type.typeArguments?.length !== 1
+  ) {
+    return undefined;
+  }
+  const wrapper = originalSymbolAtLocation(declaration.type.typeName, checker);
+  if (
+    wrapper?.getName() !== 'EntityWithoutRuntime' ||
+    !(wrapper.declarations ?? []).some(
+      (candidate) =>
+        ts.isTypeAliasDeclaration(candidate) &&
+        candidate.typeParameters?.length === 1 &&
+        ts.isTypeReferenceNode(candidate.type) &&
+        ts.isIdentifier(candidate.type.typeName) &&
+        candidate.type.typeName.text === 'Omit',
+    )
+  ) {
+    return undefined;
+  }
+
+  const resolved = checker.getTypeFromTypeNode(declaration.type);
+  if (
+    (resolved.flags & ts.TypeFlags.Object) === 0 ||
+    checker.getIndexInfosOfType(resolved).length > 0 ||
+    checker.getSignaturesOfType(resolved, ts.SignatureKind.Call).length > 0 ||
+    checker.getSignaturesOfType(resolved, ts.SignatureKind.Construct).length > 0
+  ) {
+    return undefined;
+  }
+
+  const resolvedProperties = new Map(
+    checker.getPropertiesOfType(resolved).map((property) => [property.getName(), property]),
+  );
+  const target = checker.getTypeFromTypeNode(declaration.type.typeArguments[0]!);
+  const sourceOrder = concreteAliasTargetFieldOrder(declaration.type.typeArguments[0]!, checker);
+  const orderedProperties = checker
+    .getPropertiesOfType(target)
+    .flatMap((property) => {
+      const resolvedProperty = resolvedProperties.get(property.getName());
+      return resolvedProperty ? [resolvedProperty] : [];
+    })
+    .map((property, checkerOrder) => ({ checkerOrder, property }))
+    .sort(
+      (left, right) =>
+        (sourceOrder.get(left.property.getName()) ?? Number.MAX_SAFE_INTEGER) -
+          (sourceOrder.get(right.property.getName()) ?? Number.MAX_SAFE_INTEGER) ||
+        left.checkerOrder - right.checkerOrder,
+    )
+    .map(({ property }) => property);
+  if (orderedProperties.length !== resolvedProperties.size) return undefined;
+
+  const fields: IrTypeField[] = [];
+  for (const property of orderedProperties) {
+    const propertyDeclaration = property.valueDeclaration ?? property.declarations?.[0];
+    if (!propertyDeclaration || propertyDeclaration.getSourceFile().isDeclarationFile) return undefined;
+    const fieldType = lowerCheckerType(
+      checker.getTypeOfSymbolAtLocation(property, propertyDeclaration),
+      declaration,
+      context,
+      new Set(),
+    );
+    if (!fieldType) return undefined;
+    fields.push({
+      name: property.getName(),
+      optional: (property.flags & ts.SymbolFlags.Optional) !== 0,
+      type: fieldType,
+    });
+  }
+  return { extends: [], fields, kind: 'anonymous' };
+}
+
+function concreteAliasTargetFieldOrder(node: ts.TypeNode, checker: ts.TypeChecker): ReadonlyMap<string, number> {
+  if (!ts.isTypeReferenceNode(node)) return new Map();
+  const symbol = originalSymbolAtLocation(node.typeName, checker);
+  const names: string[] = [];
+  for (const declaration of symbol?.declarations ?? []) {
+    if (!ts.isInterfaceDeclaration(declaration) && !ts.isTypeLiteralNode(declaration)) continue;
+    for (const member of declaration.members) {
+      if (!ts.isPropertySignature(member) || !member.name) continue;
+      if (ts.isIdentifier(member.name) || ts.isStringLiteral(member.name) || ts.isNumericLiteral(member.name)) {
+        names.push(member.name.text);
+      }
+    }
+  }
+  return new Map(names.map((name, index) => [name, index]));
+}
+
 function lowerExpressionWithTypeArguments(node: ts.ExpressionWithTypeArguments, context: LoweringContext): IrType {
   const name = node.expression.getText(context.sourceFile);
   const arguments_ = node.typeArguments?.map((argument) => lowerType(argument, context)) ?? [];
@@ -2224,6 +2320,7 @@ function lowerStatement(node: ts.Statement, context: LoweringContext): IrStateme
       : `__iteration${String(context.temporaryIndex++)}`;
     if (!ts.isIdentifier(declaration.name)) {
       lowerBindingPattern(declaration.name, { kind: 'identifier', name: variable }, mutable, bindings, context, {
+        sourceType: context.checker?.getTypeAtLocation(declaration.name),
         syntheticArrayRead: 'iterationBinding',
       });
     }
@@ -2653,16 +2750,29 @@ function lowerVariables(node: ts.VariableDeclarationList, mutable: boolean, cont
     }
     if (!declaration.initializer) unsupported(declaration.name, context, 'uninitialized binding pattern variable');
     const temporaryName = `__destructure${String(context.temporaryIndex++)}`;
+    const sourceType = context.checker?.getTypeAtLocation(declaration.initializer);
+    const temporaryType = sourceType
+      ? directTypedStructDestructuringType(sourceType, declaration.initializer, context)
+      : undefined;
     const variables: IrVariable[] = [
       {
         initializer: lowerExpression(declaration.initializer, context),
         mutable: false,
         name: temporaryName,
+        type: temporaryType,
       },
     ];
-    lowerBindingPattern(declaration.name, { kind: 'identifier', name: temporaryName }, mutable, variables, context, {
-      destructuringSource: 'declaration',
-    });
+    lowerBindingPattern(
+      declaration.name,
+      { kind: 'identifier', name: temporaryName, type: temporaryType },
+      mutable,
+      variables,
+      context,
+      {
+        destructuringSource: 'declaration',
+        sourceType,
+      },
+    );
     return variables;
   });
 }
@@ -2771,6 +2881,7 @@ function widenFunctionFieldArity(type: IrType, name: string, expectedParameters:
 
 interface BindingPatternOptions {
   destructuringSource?: IrDestructuringReadSource | undefined;
+  sourceType?: ts.Type | undefined;
   syntheticArrayRead?: 'iterationBinding' | undefined;
 }
 
@@ -2783,12 +2894,22 @@ function lowerBindingPattern(
   options?: BindingPatternOptions,
 ): void {
   if (ts.isObjectBindingPattern(pattern)) {
+    const sourceType = options?.sourceType;
+    const directSourceType = sourceType ? directTypedStructDestructuringType(sourceType, pattern, context) : undefined;
+    const typedSource = directSourceType && !source.type ? { ...source, type: directSourceType } : source;
     for (const element of pattern.elements) {
       if (element.dotDotDotToken) unsupported(element, context, 'object rest binding');
       const name = element.propertyName
         ? propertyName(element.propertyName, context)
         : element.name.getText(context.sourceFile);
-      let value: IrExpression = { kind: 'property', name, object: source };
+      const field = sourceType ? typedStructDestructuringField(sourceType, name, element, context) : undefined;
+      let value: IrExpression = {
+        kind: 'property',
+        name,
+        object: typedSource,
+        type: field?.type,
+        typedStructBinding: field?.binding,
+      };
       if (element.initializer) {
         value = {
           kind: 'binary',
@@ -2805,7 +2926,10 @@ function lowerBindingPattern(
           type: inferredType(element.name, context),
         });
       } else {
-        lowerBindingPattern(element.name, value, mutable, variables, context, options);
+        lowerBindingPattern(element.name, value, mutable, variables, context, {
+          ...options,
+          sourceType: field?.checkerType,
+        });
       }
     }
     return;
@@ -2845,6 +2969,52 @@ function lowerBindingPattern(
       lowerBindingPattern(element.name, value, mutable, variables, context, options);
     }
   });
+}
+
+function directTypedStructDestructuringType(
+  type: ts.Type,
+  node: ts.Node,
+  context: LoweringContext,
+): IrType | undefined {
+  const registry = context.typedStructs;
+  if (!context.checker || !registry) return undefined;
+  const resolution = registry.resolveDirect(type);
+  const schema = resolution.kind === 'matched' ? resolution.schemas[0] : undefined;
+  if (!schema?.eligible || schema.emission.mode !== 'direct') return undefined;
+  const lowered = lowerCheckerType(type, node, context, new Set());
+  return lowered?.kind === 'dynamic' || lowered?.kind === 'nullable' ? undefined : lowered;
+}
+
+function typedStructDestructuringField(
+  receiverType: ts.Type,
+  name: string,
+  node: ts.Node,
+  context: LoweringContext,
+): { binding: IrTypedStructBinding; checkerType: ts.Type; type?: IrType | undefined } | undefined {
+  const checker = context.checker;
+  const registry = context.typedStructs;
+  if (!checker || !registry || !directTypedStructDestructuringType(receiverType, node, context)) return undefined;
+  const property = checker.getPropertyOfType(checker.getNonNullableType(receiverType), name);
+  const binding = registry.resolveField(receiverType, name, property);
+  if (!property || !binding) return undefined;
+  const declaration = property.valueDeclaration ?? property.declarations?.[0] ?? node;
+  const checkerType = checker.getTypeOfSymbolAtLocation(property, declaration);
+  const fieldType = lowerCheckerType(checkerType, node, context, new Set());
+  return {
+    binding: {
+      field: {
+        name: binding.field.name,
+        optional: binding.field.optional,
+        readonly: binding.field.readonly,
+        requiredUndefined: binding.field.requiredUndefined,
+        ...(fieldType ? { type: fieldType } : {}),
+      },
+      schemaId: binding.schemaId,
+      schemaName: binding.schemaName,
+    },
+    checkerType,
+    type: fieldType,
+  };
 }
 
 function destructuringSourceFact(

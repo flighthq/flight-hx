@@ -11,7 +11,7 @@ import flighthq.types._internal._PathValues.PathCommandValue;
 
 class TransformPath {
   public static function transformPath(source:Path, matrix:MatrixLike, out:Path):Void {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:MatrixLike = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     var c:Float = cast _Runtime.UNDEFINED;
@@ -22,12 +22,12 @@ class TransformPath {
     var commands:Array<Float> = cast _Runtime.UNDEFINED;
     var di:Float = cast _Runtime.UNDEFINED;
     __destructure0 = matrix;
-    a = _Runtime.field(__destructure0, 'a');
-    b = _Runtime.field(__destructure0, 'b');
-    c = _Runtime.field(__destructure0, 'c');
-    d = _Runtime.field(__destructure0, 'd');
-    tx = _Runtime.field(__destructure0, 'tx');
-    ty = _Runtime.field(__destructure0, 'ty');
+    a = __destructure0.a;
+    b = __destructure0.b;
+    c = __destructure0.c;
+    d = __destructure0.d;
+    tx = __destructure0.tx;
+    ty = __destructure0.ty;
     (cast copyPath(({ final __callArgument0:Dynamic = source; __callArgument0; }), ({ final __callArgument1:Dynamic = out; __callArgument1; })) : Path);
     data = (cast out : Path).data;
     commands = _Runtime.field(source, 'commands');
