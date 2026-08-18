@@ -158327,9 +158327,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 33,
+        "directAccesses": 33,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -158447,7 +158447,7 @@
       },
       "name": "InputKeyboardData",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free input keyboard data",
       "reasons": [],
       "source": "upstream/packages/types/src/InputKeyboardData.ts",
       "sourceProvenance": {
@@ -158588,9 +158588,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 48,
+        "directAccesses": 48,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -158732,7 +158732,7 @@
       },
       "name": "InputManager",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free input manager",
       "reasons": [],
       "source": "upstream/packages/types/src/InputManager.ts",
       "sourceProvenance": {
@@ -158754,9 +158754,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 45,
+        "directAccesses": 45,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -158938,7 +158938,7 @@
       },
       "name": "InputPointerData",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free input pointer data",
       "reasons": [],
       "source": "upstream/packages/types/src/InputPointerData.ts",
       "sourceProvenance": {
@@ -164064,9 +164064,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 62,
+        "directAccesses": 62,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -164128,7 +164128,7 @@
       },
       "name": "KeyboardEventData",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free keyboard event data",
       "reasons": [],
       "source": "upstream/packages/types/src/KeyboardEventData.ts",
       "sourceProvenance": {
@@ -349485,9 +349485,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 100,
+        "directAccesses": 100,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -349621,7 +349621,7 @@
       },
       "name": "TextInputState",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free text-input state",
       "reasons": [],
       "source": "upstream/packages/types/src/TextInputState.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1566,
+      "newAuditOnly": 1561,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1566,
+    "auditOnlySchemas": 1561,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 17909,
-    "directSchemas": 438,
+    "directAccesses": 18197,
+    "directSchemas": 443,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 12757,
+    "pendingAccesses": 12469,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

@@ -41,12 +41,12 @@ class FocusManager {
     arrowKeys = _Runtime.coalesce(_Runtime.field(options, 'arrowKeys'), function():Dynamic return cast false);
     onKeyDown = (cast function(data:InputKeyboardData):Void {
       var direction:Null<String> = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(_Runtime.field(data, 'key'), 'Tab') : Bool)) {
-        if ((cast _Runtime.field(data, 'shiftKey') : Bool)) { (cast focusPreviousNode((cast manager : Dynamic)) : Null<N>); } else { (cast focusNextNode((cast manager : Dynamic)) : Null<N>); }
+      if ((cast _Runtime.strictEquals(data.key, 'Tab') : Bool)) {
+        if ((cast data.shiftKey : Bool)) { (cast focusPreviousNode((cast manager : Dynamic)) : Null<N>); } else { (cast focusNextNode((cast manager : Dynamic)) : Null<N>); }
         return;
       }
       if ((cast !(cast arrowKeys : Bool) : Bool)) { return; }
-      direction = (cast FocusManager.arrowKeyDirection__focusManager((cast _Runtime.field(data, 'key') : String)) : Null<String>);
+      direction = (cast FocusManager.arrowKeyDirection__focusManager((cast data.key : String)) : Null<String>);
       if ((cast !_Runtime.strictEquals(direction, null) : Bool)) { (cast focusNodeInDirection((cast manager : Dynamic), ({ final __callArgument0:Dynamic = direction; __callArgument0; })) : Null<N>); }
     });
     connectSignal(_Runtime.field(input, 'onKeyDown'), ({ final __callArgument1:Dynamic = onKeyDown; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);

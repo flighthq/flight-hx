@@ -218,6 +218,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#RiveDocumentImportResult',
     purpose: 'reviewed escape-free Rive document import result',
   },
+  {
+    declarationFingerprint: 'sha256:b8c71131b48fb802bf08fc22ab717a50b460ecb96f29c0d9615fb6319184d31c',
+    id: '@flighthq/types:interface#TextInputState',
+    purpose: 'reviewed escape-free text-input state',
+  },
+  {
+    declarationFingerprint: 'sha256:31ee934c70dc671de1fcf994c61ced46730f1b001bc666d65bcd71240f0101a3',
+    id: '@flighthq/types:interface#KeyboardEventData',
+    purpose: 'reviewed escape-free keyboard event data',
+  },
+  {
+    declarationFingerprint: 'sha256:acb1ec5a0825eae2955aba234b8019647bfebc6c07a57b04c1ffb62af7cc98bd',
+    id: '@flighthq/types:interface#InputManager',
+    purpose: 'reviewed escape-free input manager',
+  },
+  {
+    declarationFingerprint: 'sha256:68dfff739dbd1da432c2948738490cd16465a4b8165214a711165ef6c7f52acc',
+    id: '@flighthq/types:interface#InputPointerData',
+    purpose: 'reviewed escape-free input pointer data',
+  },
+  {
+    declarationFingerprint: 'sha256:771b0863ccf5de23a04937149a041c06baa00c7f1fdc857df31c9928a0953f0d',
+    id: '@flighthq/types:interface#InputKeyboardData',
+    purpose: 'reviewed escape-free input keyboard data',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

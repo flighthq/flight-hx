@@ -272,7 +272,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#InputGamepadAxisData` | 7 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputGamepadButtonData` | 8 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputGamepadConnectData` | 10 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#InputKeyboardData` | 0 | 13 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#InputKeyboardData` | 33 | 13 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#InputKeyRepeatOptions` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#InputKeyRepeatTimer` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#InputState` | 0 | 8 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
@@ -599,7 +599,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#TextInputHistoryEntry` | 0 | 7 | 1 | 0 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TextInputManager` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#TextInputSource` | 0 | 2 | 0 | 2 | 0 | 0 | 1 | 0 | yes | — |
-| `@flighthq/types:interface#TextInputState` | 0 | 15 | 1 | 1 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
+| `@flighthq/types:interface#TextInputState` | 100 | 15 | 1 | 1 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TextItem` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#TextLabelData` | 0 | 6 | 1 | 1 | 1 | 1 | 2 | 2 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#TextLayoutGroup` | 300 | 12 | 1 | 1 | 2 | 0 | 4 | 4 | no | `normalization-provenance` |

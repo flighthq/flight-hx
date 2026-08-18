@@ -296,7 +296,7 @@ class RichText {
   public static function getRichTextPasswordCharacter(source:flighthq.types.RichText):Null<String> {
     var input:Null<TextInputState> = cast _Runtime.UNDEFINED;
     input = (cast (cast getNode2DRuntime(({ final __callArgument66:Dynamic = source; __callArgument66; })) : RichTextRuntime) : RichTextRuntime).input;
-    return cast ((cast ((cast !_Runtime.strictEquals(input, null) : Bool) && (cast (cast input : TextInputState).displayAsPassword : Bool)) : Bool) ? (cast (cast input : TextInputState).passwordCharacter : Dynamic) : (cast null : Dynamic));
+    return cast ((cast ((cast !_Runtime.strictEquals(input, null) : Bool) && (cast (cast input : { var displayAsPassword:Bool; }).displayAsPassword : Bool)) : Bool) ? (cast (cast input : { var passwordCharacter:String; }).passwordCharacter : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 

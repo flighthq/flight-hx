@@ -40,15 +40,15 @@ class TextInput {
   }
 
   public static function applyTextInputOptions__textInput(state:TextInputState, options:TextInputOptions):Void {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'alwaysShowSelection'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).alwaysShowSelection = _Runtime.field(options, 'alwaysShowSelection')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'caretColor'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).caretColor = _Runtime.field(options, 'caretColor')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'caretWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).caretWidth = _Runtime.field(options, 'caretWidth')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'displayAsPassword'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).displayAsPassword = _Runtime.field(options, 'displayAsPassword')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'historyLimit'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).historyLimit = HxMath.max(0.0, _Runtime.field(options, 'historyLimit'))); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'passwordCharacter'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).passwordCharacter = _Runtime.field(options, 'passwordCharacter')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'restrict'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).restrict = _Runtime.field(options, 'restrict')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'selectionAlpha'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).selectionAlpha = _Runtime.field(options, 'selectionAlpha')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'selectionColor'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast state : TextInputState).selectionColor = _Runtime.field(options, 'selectionColor')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'alwaysShowSelection'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (state.alwaysShowSelection = cast (_Runtime.field(options, 'alwaysShowSelection') : Bool)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'caretColor'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (state.caretColor = cast (_Runtime.field(options, 'caretColor') : Float)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'caretWidth'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (state.caretWidth = cast (_Runtime.field(options, 'caretWidth') : Float)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'displayAsPassword'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (state.displayAsPassword = cast (_Runtime.field(options, 'displayAsPassword') : Bool)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'historyLimit'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (state.historyLimit = cast (HxMath.max(0.0, _Runtime.field(options, 'historyLimit')) : Float)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'passwordCharacter'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (state.passwordCharacter = cast (_Runtime.field(options, 'passwordCharacter') : String)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'restrict'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (state.restrict = cast (_Runtime.field(options, 'restrict') : String)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'selectionAlpha'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (state.selectionAlpha = cast (_Runtime.field(options, 'selectionAlpha') : Float)); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'selectionColor'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (state.selectionColor = cast (_Runtime.field(options, 'selectionColor') : Float)); }
   }
 
   public static function createTextInputState__textInput(?options:TextInputOptions):TextInputState {

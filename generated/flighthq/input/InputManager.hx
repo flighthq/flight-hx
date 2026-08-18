@@ -78,7 +78,7 @@ class InputManager {
     onGamepadConnected = (cast function(e:flighthq._internal.dom.Event):Void {
       var pad:flighthq._internal.dom.Gamepad = cast _Runtime.UNDEFINED;
       var prev:GamepadPollState__inputManager = cast _Runtime.UNDEFINED;
-      if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
+      if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       pad = (cast e : flighthq._internal.dom.GamepadEvent).gamepad;
       prev = (cast InputManager.getOrCreateGamepadPollState__inputManager(({ final __callArgument0:Dynamic = manager; __callArgument0; })) : GamepadPollState__inputManager);
       ((cast (cast prev : GamepadPollState__inputManager).axes : flighthq._internal._Map<Float, Array<Float>>).set((cast pad : flighthq._internal.dom.Gamepad).index, (cast (cast _Runtime.toArray((cast pad : flighthq._internal.dom.Gamepad).axes) : Array<Float>))));
@@ -86,12 +86,12 @@ class InputManager {
       (InputManager._connectData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Float));
       (InputManager._connectData__inputManager.id = cast ((cast pad : flighthq._internal.dom.Gamepad).id : String));
       (InputManager._connectData__inputManager.mapping = cast (((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, 'standard') : Bool) ? (cast 'standard' : Dynamic) : (cast ((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, '') : Bool) ? (cast '' : Dynamic) : (cast 'raw' : Dynamic)) : Dynamic)) : GamepadMapping));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onGamepadConnect], [InputManager._connectData__inputManager]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onGamepadConnect], [InputManager._connectData__inputManager]]), 1);
     });
     onGamepadDisconnected = (cast function(e:flighthq._internal.dom.Event):Void {
       var pad:flighthq._internal.dom.Gamepad = cast _Runtime.UNDEFINED;
       var prev:GamepadPollState__inputManager = cast _Runtime.UNDEFINED;
-      if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
+      if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       pad = (cast e : flighthq._internal.dom.GamepadEvent).gamepad;
       prev = (cast InputManager.getOrCreateGamepadPollState__inputManager(({ final __callArgument1:Dynamic = manager; __callArgument1; })) : GamepadPollState__inputManager);
       ((cast (cast prev : GamepadPollState__inputManager).axes : flighthq._internal._Map<Float, Array<Float>>).delete_((cast pad : flighthq._internal.dom.Gamepad).index));
@@ -99,7 +99,7 @@ class InputManager {
       (InputManager._connectData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Float));
       (InputManager._connectData__inputManager.id = cast ((cast pad : flighthq._internal.dom.Gamepad).id : String));
       (InputManager._connectData__inputManager.mapping = cast (((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, 'standard') : Bool) ? (cast 'standard' : Dynamic) : (cast ((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, '') : Bool) ? (cast '' : Dynamic) : (cast 'raw' : Dynamic)) : Dynamic)) : GamepadMapping));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onGamepadDisconnect], [InputManager._connectData__inputManager]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onGamepadDisconnect], [InputManager._connectData__inputManager]]), 1);
     });
     rafId = 0.0;
     loop = (cast function():Void {
@@ -124,19 +124,19 @@ class InputManager {
     preventDefault = _Runtime.coalesce(({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var preventDefault:Null<Bool>; }).preventDefault; }), function():Dynamic return cast true);
     onKeyDown = (cast function(e:flighthq._internal.dom.Event):Void {
       var ke:flighthq._internal.dom.KeyboardEvent = cast _Runtime.UNDEFINED;
-      if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
+      if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       ke = (cast e : flighthq._internal.dom.KeyboardEvent);
       if ((cast preventDefault : Bool)) { (cast ke : flighthq._internal.dom.KeyboardEvent).preventDefault(); }
       InputManager.setInputKeyboardData__inputManager(({ final __callArgument8:Dynamic = InputManager._keyboardData__inputManager; __callArgument8; }), ({ final __callArgument9:Dynamic = ke; __callArgument9; }));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onKeyDown], [InputManager._keyboardData__inputManager]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onKeyDown], [InputManager._keyboardData__inputManager]]), 1);
     });
     onKeyUp = (cast function(e:flighthq._internal.dom.Event):Void {
       var ke:flighthq._internal.dom.KeyboardEvent = cast _Runtime.UNDEFINED;
-      if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
+      if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       ke = (cast e : flighthq._internal.dom.KeyboardEvent);
       if ((cast preventDefault : Bool)) { (cast ke : flighthq._internal.dom.KeyboardEvent).preventDefault(); }
       InputManager.setInputKeyboardData__inputManager(({ final __callArgument10:Dynamic = InputManager._keyboardData__inputManager; __callArgument10; }), ({ final __callArgument11:Dynamic = ke; __callArgument11; }));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onKeyUp], [InputManager._keyboardData__inputManager]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onKeyUp], [InputManager._keyboardData__inputManager]]), 1);
     });
     target.addEventListener('keydown', onKeyDown);
     target.addEventListener('keyup', onKeyUp);
@@ -158,28 +158,28 @@ class InputManager {
       if ((cast preventDefault : Bool)) { e.preventDefault(); }
     });
     onPointerCancel = (cast function(e:flighthq._internal.dom.Event):Void {
-      if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
+      if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       if ((cast preventDefault : Bool)) { e.preventDefault(); }
       InputManager.setInputPointerData__inputManager(({ final __callArgument17:Dynamic = InputManager._pointerData__inputManager; __callArgument17; }), ({ final __callArgument18:Dynamic = (cast e : flighthq._internal.dom.PointerEvent); __callArgument18; }), (cast 0.0 : Float), (cast 0.0 : Float));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onPointerCancel], [InputManager._pointerData__inputManager]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onPointerCancel], [InputManager._pointerData__inputManager]]), 1);
     });
     onPointerDown = (cast function(e:flighthq._internal.dom.Event):Void {
-      if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
+      if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       if ((cast preventDefault : Bool)) { e.preventDefault(); }
       InputManager.setInputPointerData__inputManager(({ final __callArgument19:Dynamic = InputManager._pointerData__inputManager; __callArgument19; }), ({ final __callArgument20:Dynamic = (cast e : flighthq._internal.dom.PointerEvent); __callArgument20; }), (cast 0.0 : Float), (cast 0.0 : Float));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onPointerDown], [InputManager._pointerData__inputManager]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onPointerDown], [InputManager._pointerData__inputManager]]), 1);
     });
     onPointerMove = (cast function(e:flighthq._internal.dom.Event):Void {
-      if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
+      if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       if ((cast preventDefault : Bool)) { e.preventDefault(); }
       InputManager.setInputPointerData__inputManager(({ final __callArgument21:Dynamic = InputManager._pointerData__inputManager; __callArgument21; }), ({ final __callArgument22:Dynamic = (cast e : flighthq._internal.dom.PointerEvent); __callArgument22; }), (cast 0.0 : Float), (cast 0.0 : Float));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onPointerMove], [InputManager._pointerData__inputManager]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onPointerMove], [InputManager._pointerData__inputManager]]), 1);
     });
     onPointerUp = (cast function(e:flighthq._internal.dom.Event):Void {
-      if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
+      if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       if ((cast preventDefault : Bool)) { e.preventDefault(); }
       InputManager.setInputPointerData__inputManager(({ final __callArgument23:Dynamic = InputManager._pointerData__inputManager; __callArgument23; }), ({ final __callArgument24:Dynamic = (cast e : flighthq._internal.dom.PointerEvent); __callArgument24; }), (cast 0.0 : Float), (cast 0.0 : Float));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onPointerUp], [InputManager._pointerData__inputManager]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onPointerUp], [InputManager._pointerData__inputManager]]), 1);
     });
     element.addEventListener('contextmenu', onContextMenu);
     element.addEventListener('pointercancel', onPointerCancel);
@@ -203,11 +203,11 @@ class InputManager {
     target = element.ownerDocument;
     handler = (cast function(e:flighthq._internal.dom.Event):Void {
       var me:flighthq._internal.dom.MouseEvent = cast _Runtime.UNDEFINED;
-      if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
+      if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       me = (cast e : flighthq._internal.dom.MouseEvent);
       if ((cast preventDefault : Bool)) { (cast me : flighthq._internal.dom.MouseEvent).preventDefault(); }
       InputManager.setInputPointerData__inputManager(({ final __callArgument30:Dynamic = InputManager._pointerData__inputManager; __callArgument30; }), ({ final __callArgument31:Dynamic = me; __callArgument31; }), (cast (cast me : flighthq._internal.dom.MouseEvent).movementX : Float), (cast (cast me : flighthq._internal.dom.MouseEvent).movementY : Float));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onPointerMoveRelative], [InputManager._pointerData__inputManager]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onPointerMoveRelative], [InputManager._pointerData__inputManager]]), 1);
     });
     flighthq._internal.backend.DomDocumentBackend.call(target, 'addEventListener', cast (['mousemove', handler] : Array<Dynamic>));
     InputManager.setInputBinding__inputManager(({ final __callArgument32:Dynamic = manager; __callArgument32; }), ({ final __callArgument33:Dynamic = element; __callArgument33; }), ({ final __callArgument34:Dynamic = InputManager.kRelativePointerInput__inputManager; __callArgument34; }), ({ final __callArgument35:Dynamic = function():Void { flighthq._internal.backend.DomDocumentBackend.call(target, 'removeEventListener', cast (['mousemove', handler] : Array<Dynamic>)); }; __callArgument35; }));
@@ -219,22 +219,22 @@ class InputManager {
     onBeforeInput = (cast function(e:flighthq._internal.dom.Event):Void {
       var ie:flighthq._internal.dom.InputEvent = cast _Runtime.UNDEFINED;
       var text:String = cast _Runtime.UNDEFINED;
-      if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
+      if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       ie = (cast e : flighthq._internal.dom.InputEvent);
       text = _Runtime.coalesce((cast ie : flighthq._internal.dom.InputEvent).data, function():Dynamic return cast '');
       (InputManager._textData__inputManager.isComposing = cast ((cast ie : flighthq._internal.dom.InputEvent).isComposing : Bool));
       (InputManager._textData__inputManager.text = cast (text : String));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onTextInput], [InputManager._textData__inputManager]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onTextInput], [InputManager._textData__inputManager]]), 1);
     });
     onCompositionUpdate = (cast function(e:flighthq._internal.dom.Event):Void {
       var ce:flighthq._internal.dom.CompositionEvent = cast _Runtime.UNDEFINED;
       var text:String = cast _Runtime.UNDEFINED;
-      if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
+      if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       ce = (cast e : flighthq._internal.dom.CompositionEvent);
       text = _Runtime.coalesce((cast ce : flighthq._internal.dom.CompositionEvent).data, function():Dynamic return cast '');
       (InputManager._textData__inputManager.isComposing = cast (true : Bool));
       (InputManager._textData__inputManager.text = cast (text : String));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onTextEdit], [InputManager._textData__inputManager]]), 1);
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onTextEdit], [InputManager._textData__inputManager]]), 1);
     });
     element.addEventListener('beforeinput', onBeforeInput);
     element.addEventListener('compositionupdate', onCompositionUpdate);
@@ -251,12 +251,12 @@ class InputManager {
     preventDefault = _Runtime.coalesce(({ final __structural40 = options; __structural40 == null ? _Runtime.UNDEFINED : (cast __structural40 : { @:optional var preventDefault:Null<Bool>; }).preventDefault; }), function():Dynamic return cast true);
     handler = (cast function(e:flighthq._internal.dom.Event):Void {
       var we:flighthq._internal.dom.WheelEvent = cast _Runtime.UNDEFINED;
-      if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
+      if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       we = (cast e : flighthq._internal.dom.WheelEvent);
       if ((cast preventDefault : Bool)) { (cast we : flighthq._internal.dom.WheelEvent).preventDefault(); }
       InputManager.setInputPointerData__inputManager(({ final __callArgument41:Dynamic = InputManager._pointerData__inputManager; __callArgument41; }), ({ final __callArgument42:Dynamic = we; __callArgument42; }), (cast (cast we : flighthq._internal.dom.WheelEvent).deltaX : Float), (cast (cast we : flighthq._internal.dom.WheelEvent).deltaY : Float));
-      ((cast InputManager._pointerData__inputManager : InputPointerData).wheelMode = (cast getMouseWheelModeFromDomWheelEvent(({ final __callArgument43:Dynamic = we; __callArgument43; })) : MouseWheelMode));
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onWheel], [InputManager._pointerData__inputManager]]), 1);
+      (InputManager._pointerData__inputManager.wheelMode = cast ((cast getMouseWheelModeFromDomWheelEvent(({ final __callArgument43:Dynamic = we; __callArgument43; })) : MouseWheelMode) : MouseWheelMode));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onWheel], [InputManager._pointerData__inputManager]]), 1);
     });
     element.addEventListener('wheel', handler, { passive: !(cast preventDefault : Bool) });
     InputManager.setInputBinding__inputManager(({ final __callArgument44:Dynamic = manager; __callArgument44; }), ({ final __callArgument45:Dynamic = element; __callArgument45; }), ({ final __callArgument46:Dynamic = InputManager.kWheelInput__inputManager; __callArgument46; }), ({ final __callArgument47:Dynamic = function():Void { element.removeEventListener('wheel', handler); }; __callArgument47; }));
@@ -274,31 +274,31 @@ class InputManager {
     var onGamepadConnect:InputGamepadConnectData->Void = cast _Runtime.UNDEFINED;
     var onGamepadDisconnect:InputGamepadConnectData->Void = cast _Runtime.UNDEFINED;
     onKeyDown = (cast function(data:InputKeyboardData):Void {
-      if ((cast !(cast ((cast (cast state : InputState).keysDown : flighthq._internal._Set<Float>).has(_Runtime.field(data, 'keyCode'))) : Bool) : Bool)) { ((cast (cast state : InputState).justPressedKeys : flighthq._internal._Set<Float>).add(_Runtime.field(data, 'keyCode'))); }
-      ((cast (cast state : InputState).keysDown : flighthq._internal._Set<Float>).add(_Runtime.field(data, 'keyCode')));
+      if ((cast !(cast ((cast (cast state : InputState).keysDown : flighthq._internal._Set<Float>).has(data.keyCode)) : Bool) : Bool)) { ((cast (cast state : InputState).justPressedKeys : flighthq._internal._Set<Float>).add(data.keyCode)); }
+      ((cast (cast state : InputState).keysDown : flighthq._internal._Set<Float>).add(data.keyCode));
     });
     onKeyUp = (cast function(data:InputKeyboardData):Void {
-      ((cast (cast state : InputState).keysDown : flighthq._internal._Set<Float>).delete_(_Runtime.field(data, 'keyCode')));
-      ((cast (cast state : InputState).justReleasedKeys : flighthq._internal._Set<Float>).add(_Runtime.field(data, 'keyCode')));
+      ((cast (cast state : InputState).keysDown : flighthq._internal._Set<Float>).delete_(data.keyCode));
+      ((cast (cast state : InputState).justReleasedKeys : flighthq._internal._Set<Float>).add(data.keyCode));
     });
     onPointerDown = (cast function(data:InputPointerData):Void {
       var prev:Float = cast _Runtime.UNDEFINED;
-      prev = _Runtime.coalesce(((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).get(_Runtime.field(data, 'pointerId'))), function():Dynamic return cast 0.0);
-      ((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).set(_Runtime.field(data, 'pointerId'), (cast (_Runtime.toInt32(prev) | _Runtime.toInt32((1 << _Runtime.toInt32(_Runtime.field(data, 'button'))))))));
+      prev = _Runtime.coalesce(((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).get(data.pointerId)), function():Dynamic return cast 0.0);
+      ((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).set(data.pointerId, (cast (_Runtime.toInt32(prev) | _Runtime.toInt32((1 << _Runtime.toInt32(data.button)))))));
     });
     onPointerUp = (cast function(data:InputPointerData):Void {
       var prev:Float = cast _Runtime.UNDEFINED;
       var next:Float = cast _Runtime.UNDEFINED;
-      prev = _Runtime.coalesce(((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).get(_Runtime.field(data, 'pointerId'))), function():Dynamic return cast 0.0);
-      next = (_Runtime.toInt32(prev) & _Runtime.toInt32(~_Runtime.toInt32((1 << _Runtime.toInt32(_Runtime.field(data, 'button'))))));
+      prev = _Runtime.coalesce(((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).get(data.pointerId)), function():Dynamic return cast 0.0);
+      next = (_Runtime.toInt32(prev) & _Runtime.toInt32(~_Runtime.toInt32((1 << _Runtime.toInt32(data.button)))));
       if ((cast _Runtime.strictEquals(next, 0.0) : Bool)) {
-        ((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).delete_(_Runtime.field(data, 'pointerId')));
+        ((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).delete_(data.pointerId));
       } else {
-        ((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).set(_Runtime.field(data, 'pointerId'), (cast next)));
+        ((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).set(data.pointerId, (cast next)));
       }
     });
     onPointerCancel = (cast function(data:InputPointerData):Void {
-      ((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).delete_(_Runtime.field(data, 'pointerId')));
+      ((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).delete_(data.pointerId));
     });
     onGamepadButtonDown = (cast function(data:InputGamepadButtonData):Void {
       var key:Float = cast _Runtime.UNDEFINED;
@@ -353,27 +353,27 @@ class InputManager {
         }
       }
     });
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onKeyDown : Dynamic), ({ final __callArgument48:Dynamic = onKeyDown; __callArgument48; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onKeyUp : Dynamic), ({ final __callArgument49:Dynamic = onKeyUp; __callArgument49; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onPointerDown : Dynamic), ({ final __callArgument50:Dynamic = onPointerDown; __callArgument50; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onPointerUp : Dynamic), ({ final __callArgument51:Dynamic = onPointerUp; __callArgument51; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onPointerCancel : Dynamic), ({ final __callArgument52:Dynamic = onPointerCancel; __callArgument52; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadButtonDown : Dynamic), ({ final __callArgument53:Dynamic = onGamepadButtonDown; __callArgument53; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadButtonUp : Dynamic), ({ final __callArgument54:Dynamic = onGamepadButtonUp; __callArgument54; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadAxisMove : Dynamic), ({ final __callArgument55:Dynamic = onGamepadAxisMove; __callArgument55; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadConnect : Dynamic), ({ final __callArgument56:Dynamic = onGamepadConnect; __callArgument56; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadDisconnect : Dynamic), ({ final __callArgument57:Dynamic = onGamepadDisconnect; __callArgument57; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    connectSignal((cast manager.onKeyDown : Dynamic), ({ final __callArgument48:Dynamic = onKeyDown; __callArgument48; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    connectSignal((cast manager.onKeyUp : Dynamic), ({ final __callArgument49:Dynamic = onKeyUp; __callArgument49; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    connectSignal((cast manager.onPointerDown : Dynamic), ({ final __callArgument50:Dynamic = onPointerDown; __callArgument50; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    connectSignal((cast manager.onPointerUp : Dynamic), ({ final __callArgument51:Dynamic = onPointerUp; __callArgument51; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    connectSignal((cast manager.onPointerCancel : Dynamic), ({ final __callArgument52:Dynamic = onPointerCancel; __callArgument52; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    connectSignal((cast manager.onGamepadButtonDown : Dynamic), ({ final __callArgument53:Dynamic = onGamepadButtonDown; __callArgument53; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    connectSignal((cast manager.onGamepadButtonUp : Dynamic), ({ final __callArgument54:Dynamic = onGamepadButtonUp; __callArgument54; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    connectSignal((cast manager.onGamepadAxisMove : Dynamic), ({ final __callArgument55:Dynamic = onGamepadAxisMove; __callArgument55; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    connectSignal((cast manager.onGamepadConnect : Dynamic), ({ final __callArgument56:Dynamic = onGamepadConnect; __callArgument56; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    connectSignal((cast manager.onGamepadDisconnect : Dynamic), ({ final __callArgument57:Dynamic = onGamepadDisconnect; __callArgument57; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     return cast function():Void {
-      disconnectSignal((cast (cast manager : flighthq.types.InputManager).onKeyDown : Dynamic), ({ final __callArgument58:Dynamic = onKeyDown; __callArgument58; }));
-      disconnectSignal((cast (cast manager : flighthq.types.InputManager).onKeyUp : Dynamic), ({ final __callArgument59:Dynamic = onKeyUp; __callArgument59; }));
-      disconnectSignal((cast (cast manager : flighthq.types.InputManager).onPointerDown : Dynamic), ({ final __callArgument60:Dynamic = onPointerDown; __callArgument60; }));
-      disconnectSignal((cast (cast manager : flighthq.types.InputManager).onPointerUp : Dynamic), ({ final __callArgument61:Dynamic = onPointerUp; __callArgument61; }));
-      disconnectSignal((cast (cast manager : flighthq.types.InputManager).onPointerCancel : Dynamic), ({ final __callArgument62:Dynamic = onPointerCancel; __callArgument62; }));
-      disconnectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadButtonDown : Dynamic), ({ final __callArgument63:Dynamic = onGamepadButtonDown; __callArgument63; }));
-      disconnectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadButtonUp : Dynamic), ({ final __callArgument64:Dynamic = onGamepadButtonUp; __callArgument64; }));
-      disconnectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadAxisMove : Dynamic), ({ final __callArgument65:Dynamic = onGamepadAxisMove; __callArgument65; }));
-      disconnectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadConnect : Dynamic), ({ final __callArgument66:Dynamic = onGamepadConnect; __callArgument66; }));
-      disconnectSignal((cast (cast manager : flighthq.types.InputManager).onGamepadDisconnect : Dynamic), ({ final __callArgument67:Dynamic = onGamepadDisconnect; __callArgument67; }));
+      disconnectSignal((cast manager.onKeyDown : Dynamic), ({ final __callArgument58:Dynamic = onKeyDown; __callArgument58; }));
+      disconnectSignal((cast manager.onKeyUp : Dynamic), ({ final __callArgument59:Dynamic = onKeyUp; __callArgument59; }));
+      disconnectSignal((cast manager.onPointerDown : Dynamic), ({ final __callArgument60:Dynamic = onPointerDown; __callArgument60; }));
+      disconnectSignal((cast manager.onPointerUp : Dynamic), ({ final __callArgument61:Dynamic = onPointerUp; __callArgument61; }));
+      disconnectSignal((cast manager.onPointerCancel : Dynamic), ({ final __callArgument62:Dynamic = onPointerCancel; __callArgument62; }));
+      disconnectSignal((cast manager.onGamepadButtonDown : Dynamic), ({ final __callArgument63:Dynamic = onGamepadButtonDown; __callArgument63; }));
+      disconnectSignal((cast manager.onGamepadButtonUp : Dynamic), ({ final __callArgument64:Dynamic = onGamepadButtonUp; __callArgument64; }));
+      disconnectSignal((cast manager.onGamepadAxisMove : Dynamic), ({ final __callArgument65:Dynamic = onGamepadAxisMove; __callArgument65; }));
+      disconnectSignal((cast manager.onGamepadConnect : Dynamic), ({ final __callArgument66:Dynamic = onGamepadConnect; __callArgument66; }));
+      disconnectSignal((cast manager.onGamepadDisconnect : Dynamic), ({ final __callArgument67:Dynamic = onGamepadDisconnect; __callArgument67; }));
     };
     return cast null;
   }
@@ -541,7 +541,7 @@ class InputManager {
     var now:Float = cast _Runtime.UNDEFINED;
     var prev:GamepadPollState__inputManager = cast _Runtime.UNDEFINED;
     var gamepads:Array<Null<flighthq._internal.dom.Gamepad>> = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'getGamepads')), 'function') : Bool)) : Bool)) { return; }
+    if ((cast ((cast !(cast manager.enabled : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'getGamepads')), 'function') : Bool)) : Bool)) { return; }
     now = (cast flighthq._internal._HostValueLut.get('performance') : flighthq._internal.dom.Performance).now();
     prev = (cast InputManager.getOrCreateGamepadPollState__inputManager(({ final __callArgument94:Dynamic = manager; __callArgument94; })) : GamepadPollState__inputManager);
     gamepads = flighthq._internal.backend.DomNavigatorBackend.call(flighthq._internal.backend.DomNavigatorBackend.value(), 'getGamepads', cast ([] : Array<Dynamic>));
@@ -559,7 +559,7 @@ class InputManager {
             (InputManager._axisData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Float));
             (InputManager._axisData__inputManager.timeStamp = cast (now : Float));
             (InputManager._axisData__inputManager.value = cast (value : Float));
-            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onGamepadAxisMove], [InputManager._axisData__inputManager]]), 1);
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onGamepadAxisMove], [InputManager._axisData__inputManager]]), 1);
           }
           i++;
         }
@@ -576,9 +576,9 @@ class InputManager {
             (InputManager._buttonData__inputManager.timeStamp = cast (now : Float));
             (InputManager._buttonData__inputManager.value = cast ((cast btn : flighthq._internal.dom.GamepadButton).value : Float));
             if ((cast (cast btn : flighthq._internal.dom.GamepadButton).pressed : Bool)) {
-              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onGamepadButtonDown], [InputManager._buttonData__inputManager]]), 1);
+              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onGamepadButtonDown], [InputManager._buttonData__inputManager]]), 1);
             } else {
-              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onGamepadButtonUp], [InputManager._buttonData__inputManager]]), 1);
+              _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onGamepadButtonUp], [InputManager._buttonData__inputManager]]), 1);
             }
           }
           i++;
@@ -649,43 +649,43 @@ class InputManager {
   public static function setInputKeyboardData__inputManager(out:InputKeyboardData, event:flighthq._internal.dom.KeyboardEvent):Void {
     var modifier:Float = cast _Runtime.UNDEFINED;
     modifier = (cast getKeyModifierFromDomKeyboardEvent(({ final __callArgument97:Dynamic = event; __callArgument97; })) : Float);
-    ((cast out : InputKeyboardData).altKey = event.altKey);
-    ((cast out : InputKeyboardData).capsLock = !_Runtime.strictEquals((_Runtime.toInt32(modifier) & _Runtime.toInt32((cast KeyModifierValue : { var ALT:Float; var CAPS_LOCK:Float; var CTRL:Float; var LEFT_ALT:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_SHIFT:Float; var META:Float; var MODE:Float; var NONE:Float; var NUM_LOCK:Float; var RIGHT_ALT:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_SHIFT:Float; var SHIFT:Float; }).CAPS_LOCK)), 0.0));
-    ((cast out : InputKeyboardData).code = event.code);
-    ((cast out : InputKeyboardData).ctrlKey = event.ctrlKey);
-    ((cast out : InputKeyboardData).key = event.key);
-    ((cast out : InputKeyboardData).keyCode = (cast getKeyCodeFromDomKeyboardEvent(({ final __callArgument98:Dynamic = event; __callArgument98; })) : Float));
-    ((cast out : InputKeyboardData).location = event.location);
-    ((cast out : InputKeyboardData).metaKey = event.metaKey);
-    ((cast out : InputKeyboardData).modifier = modifier);
-    ((cast out : InputKeyboardData).numLock = !_Runtime.strictEquals((_Runtime.toInt32(modifier) & _Runtime.toInt32((cast KeyModifierValue : { var ALT:Float; var CAPS_LOCK:Float; var CTRL:Float; var LEFT_ALT:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_SHIFT:Float; var META:Float; var MODE:Float; var NONE:Float; var NUM_LOCK:Float; var RIGHT_ALT:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_SHIFT:Float; var SHIFT:Float; }).NUM_LOCK)), 0.0));
-    ((cast out : InputKeyboardData).repeat = event.repeat);
-    ((cast out : InputKeyboardData).shiftKey = event.shiftKey);
-    ((cast out : InputKeyboardData).timeStamp = event.timeStamp);
+    (out.altKey = cast (event.altKey : Bool));
+    (out.capsLock = cast (!_Runtime.strictEquals((_Runtime.toInt32(modifier) & _Runtime.toInt32((cast KeyModifierValue : { var ALT:Float; var CAPS_LOCK:Float; var CTRL:Float; var LEFT_ALT:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_SHIFT:Float; var META:Float; var MODE:Float; var NONE:Float; var NUM_LOCK:Float; var RIGHT_ALT:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_SHIFT:Float; var SHIFT:Float; }).CAPS_LOCK)), 0.0) : Bool));
+    (out.code = cast (event.code : String));
+    (out.ctrlKey = cast (event.ctrlKey : Bool));
+    (out.key = cast (event.key : String));
+    (out.keyCode = cast ((cast getKeyCodeFromDomKeyboardEvent(({ final __callArgument98:Dynamic = event; __callArgument98; })) : Float) : Float));
+    (out.location = cast (event.location : Float));
+    (out.metaKey = cast (event.metaKey : Bool));
+    (out.modifier = cast (modifier : Float));
+    (out.numLock = cast (!_Runtime.strictEquals((_Runtime.toInt32(modifier) & _Runtime.toInt32((cast KeyModifierValue : { var ALT:Float; var CAPS_LOCK:Float; var CTRL:Float; var LEFT_ALT:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_SHIFT:Float; var META:Float; var MODE:Float; var NONE:Float; var NUM_LOCK:Float; var RIGHT_ALT:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_SHIFT:Float; var SHIFT:Float; }).NUM_LOCK)), 0.0) : Bool));
+    (out.repeat = cast (event.repeat : Bool));
+    (out.shiftKey = cast (event.shiftKey : Bool));
+    (out.timeStamp = cast (event.timeStamp : Float));
   }
 
   public static function setInputPointerData__inputManager(out:InputPointerData, event:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.PointerEvent, flighthq._internal.dom.WheelEvent>, flighthq._internal.dom.MouseEvent>, deltaX:Float, deltaY:Float):Void {
-    ((cast out : InputPointerData).altKey = (cast event : { var altKey:Bool; }).altKey);
-    ((cast out : InputPointerData).button = (cast event : { var button:Float; }).button);
-    ((cast out : InputPointerData).buttons = (cast event : { var buttons:Float; }).buttons);
-    ((cast out : InputPointerData).ctrlKey = (cast event : { var ctrlKey:Bool; }).ctrlKey);
-    ((cast out : InputPointerData).deltaX = deltaX);
-    ((cast out : InputPointerData).deltaY = deltaY);
-    ((cast out : InputPointerData).height = ((cast _Runtime.hasField(event, 'height') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).height : Dynamic) : (cast 1.0 : Dynamic)));
-    ((cast out : InputPointerData).isPrimary = ((cast _Runtime.hasField(event, 'isPrimary') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).isPrimary : Dynamic) : (cast true : Dynamic)));
-    ((cast out : InputPointerData).metaKey = (cast event : { var metaKey:Bool; }).metaKey);
-    ((cast out : InputPointerData).pointerId = ((cast _Runtime.hasField(event, 'pointerId') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).pointerId : Dynamic) : (cast 0.0 : Dynamic)));
-    ((cast out : InputPointerData).pointerType = ((cast _Runtime.hasField(event, 'pointerType') : Bool) ? (cast (cast InputManager.getPointerTypeFromDomPointerEvent__inputManager((cast event : flighthq._internal.dom.PointerEvent)) : PointerType) : Dynamic) : (cast 'mouse' : Dynamic)));
-    ((cast out : InputPointerData).pressure = ((cast _Runtime.hasField(event, 'pressure') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).pressure : Dynamic) : (cast 0.0 : Dynamic)));
-    ((cast out : InputPointerData).shiftKey = (cast event : { var shiftKey:Bool; }).shiftKey);
-    ((cast out : InputPointerData).tiltX = ((cast _Runtime.hasField(event, 'tiltX') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).tiltX : Dynamic) : (cast 0.0 : Dynamic)));
-    ((cast out : InputPointerData).tiltY = ((cast _Runtime.hasField(event, 'tiltY') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).tiltY : Dynamic) : (cast 0.0 : Dynamic)));
-    ((cast out : InputPointerData).timeStamp = (cast event : { var timeStamp:Float; }).timeStamp);
-    ((cast out : InputPointerData).twist = ((cast _Runtime.hasField(event, 'twist') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).twist : Dynamic) : (cast 0.0 : Dynamic)));
-    ((cast out : InputPointerData).wheelMode = 'unknown');
-    ((cast out : InputPointerData).width = ((cast _Runtime.hasField(event, 'width') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).width : Dynamic) : (cast 1.0 : Dynamic)));
-    ((cast out : InputPointerData).x = (cast event : { var clientX:Float; }).clientX);
-    ((cast out : InputPointerData).y = (cast event : { var clientY:Float; }).clientY);
+    (out.altKey = cast ((cast event : { var altKey:Bool; }).altKey : Bool));
+    (out.button = cast ((cast event : { var button:Float; }).button : Float));
+    (out.buttons = cast ((cast event : { var buttons:Float; }).buttons : Float));
+    (out.ctrlKey = cast ((cast event : { var ctrlKey:Bool; }).ctrlKey : Bool));
+    (out.deltaX = cast (deltaX : Float));
+    (out.deltaY = cast (deltaY : Float));
+    (out.height = cast (((cast _Runtime.hasField(event, 'height') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).height : Dynamic) : (cast 1.0 : Dynamic)) : Float));
+    (out.isPrimary = cast (((cast _Runtime.hasField(event, 'isPrimary') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).isPrimary : Dynamic) : (cast true : Dynamic)) : Bool));
+    (out.metaKey = cast ((cast event : { var metaKey:Bool; }).metaKey : Bool));
+    (out.pointerId = cast (((cast _Runtime.hasField(event, 'pointerId') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).pointerId : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+    (out.pointerType = cast (((cast _Runtime.hasField(event, 'pointerType') : Bool) ? (cast (cast InputManager.getPointerTypeFromDomPointerEvent__inputManager((cast event : flighthq._internal.dom.PointerEvent)) : PointerType) : Dynamic) : (cast 'mouse' : Dynamic)) : PointerType));
+    (out.pressure = cast (((cast _Runtime.hasField(event, 'pressure') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).pressure : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+    (out.shiftKey = cast ((cast event : { var shiftKey:Bool; }).shiftKey : Bool));
+    (out.tiltX = cast (((cast _Runtime.hasField(event, 'tiltX') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).tiltX : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+    (out.tiltY = cast (((cast _Runtime.hasField(event, 'tiltY') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).tiltY : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+    (out.timeStamp = cast ((cast event : { var timeStamp:Float; }).timeStamp : Float));
+    (out.twist = cast (((cast _Runtime.hasField(event, 'twist') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).twist : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+    (out.wheelMode = cast ('unknown' : MouseWheelMode));
+    (out.width = cast (((cast _Runtime.hasField(event, 'width') : Bool) ? (cast (cast event : flighthq._internal.dom.PointerEvent).width : Dynamic) : (cast 1.0 : Dynamic)) : Float));
+    (out.x = cast ((cast event : { var clientX:Float; }).clientX : Float));
+    (out.y = cast ((cast event : { var clientY:Float; }).clientY : Float));
   }
 
   public static final _standardButtonNames__inputManager:Array<Null<GamepadButtonKind>> = (cast cast ([(cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).BUTTON_SOUTH, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).BUTTON_EAST, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).BUTTON_WEST, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).BUTTON_NORTH, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).SHOULDER_LEFT, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).SHOULDER_RIGHT, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).TRIGGER_LEFT, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).TRIGGER_RIGHT, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).SELECT, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).START, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).STICK_LEFT, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).STICK_RIGHT, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).DPAD_UP, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).DPAD_DOWN, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).DPAD_LEFT, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).DPAD_RIGHT, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).HOME, (cast GamepadButtonKindValues : { var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; }).TOUCHPAD] : Array<Dynamic>));

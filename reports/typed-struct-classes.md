@@ -7,7 +7,7 @@ This is a construction, structural-flow, and observability census. It does not e
 | Metric | Count |
 | --- | ---: |
 | Eligible canonical schemas | 1536 |
-| Direct field accesses | 17909 |
+| Direct field accesses | 18197 |
 | Declared optional fields | 1970 |
 | Declared required-undefined fields | 2 |
 | Production object literals | 1842 |
@@ -603,11 +603,11 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#InputGamepadAxisData` | 7 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#InputGamepadButtonData` | 8 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#InputGamepadConnectData` | 10 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#InputKeyboardData` | 0 | 13 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 6 | 0 | yes | — | — |
+| `@flighthq/types:interface#InputKeyboardData` | 33 | 13 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 6 | 0 | yes | — | — |
 | `@flighthq/types:interface#InputKeyRepeatOptions` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 4 | 0 | yes | — | — |
 | `@flighthq/types:interface#InputKeyRepeatTimer` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#InputManager` | 0 | 16 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | 1 | 0 | 0 | no | `object-literal-spread` | — |
-| `@flighthq/types:interface#InputPointerData` | 0 | 21 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | yes | — | `object-spread` |
+| `@flighthq/types:interface#InputManager` | 48 | 16 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | 1 | 0 | 0 | no | `object-literal-spread` | — |
+| `@flighthq/types:interface#InputPointerData` | 45 | 21 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | yes | — | `object-spread` |
 | `@flighthq/types:interface#InputSignals` | 0 | 15 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 1 | 0 | yes | — | `object-spread` |
 | `@flighthq/types:interface#InputState` | 0 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#InputTextData` | 5 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
@@ -628,7 +628,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#IpcSignals` | 3 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#IpcTarget` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#IridescencePbrExtension` | 0 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#KeyboardEventData` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 1 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#KeyboardEventData` | 62 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 1 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#KuwaharaEffect` | 0 | 2 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#LambertMaterial` | 0 | 10 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
 | `@flighthq/types:interface#LayoutNode` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 11 | 5 | yes | — | `object-spread` |
@@ -1269,7 +1269,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#TextInputManager` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#TextInputOptions` | 0 | 9 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 12 | 0 | yes | — | — |
 | `@flighthq/types:interface#TextInputSource` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#TextInputState` | 0 | 15 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 0 | yes | — | — |
+| `@flighthq/types:interface#TextInputState` | 100 | 15 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#TextItem` | 0 | 4 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#TextLabel` | 0 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 27 | 0 | 0 | 0 | 0 | 0 | 0 | 15 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#TextLabelData` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |

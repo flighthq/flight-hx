@@ -5,9 +5,9 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 438 schemas currently emit direct fields, covering 17,909 accesses.
-- 1,098 eligible schemas remain audit-only, covering 12,757 pending accesses.
-- 841 audit-only schemas have no recorded escape, covering 8,003 pending accesses.
+- 443 schemas currently emit direct fields, covering 18,197 accesses.
+- 1,093 eligible schemas remain audit-only, covering 12,469 pending accesses.
+- 836 audit-only schemas have no recorded escape, covering 7,715 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
@@ -38,6 +38,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote `QuadBatchData`, `CanvasShapeDrawState`, `Scene3DDocument`, `OrbitCameraController`, and `RiveCoreObject`: 568 accesses now emit directly across 37 generated modules. `CanvasShapeDrawState` is provenance-closed, while quad-batch normalization, Scene3D/Rive container transfer, and Orbit's cross-schema entity transfer correctly keep the other identities structural. Three Canvas host-field erasures remain explicit standard-toolkit boundaries.
 - [x] Promote `AnimationTrack`, `Tween`, `AnimationChannel`, `AnimationPlayer`, and `Timeline`: 395 accesses now emit directly across 25 generated modules. Cross-schema transfer keeps all three animation identities structural, strict equality keeps `Timeline` structural, and container transfer keeps `Tween` structural. The erasure report falls by 21 overall: 43 source-`any` erasures disappear while 22 checker-known source-`unknown` fields remain explicit rather than receiving guessed types.
 - [x] Promote `RiveArtboardGraph`, `RiveProperty`, `RivePathRecord`, `RiveFileAsset`, and `RiveDocumentImportResult`: 205 accesses now emit directly across 15 generated modules. All five records are mechanically compatible and provenance-closed, but remain structural because cpp class emission is a separate explicit opt-in. This pure field-dispatch tranche removes 100 `_Runtime.field` calls without changing generated `Dynamic` or the type-erasure report.
+- [x] Promote `TextInputState`, `KeyboardEventData`, `InputManager`, `InputPointerData`, and `InputKeyboardData`: 288 accesses now emit directly across 12 generated modules. Cross-schema transfer, object-literal spread, observed spread, and propagated runtime normalization keep four identities structural; `InputKeyboardData` is provenance-closed but remains structural pending separate cpp review. The tranche removes 99 `_Runtime.field` calls while preserving typed signal callbacks and leaving `Dynamic` and erasure debt unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

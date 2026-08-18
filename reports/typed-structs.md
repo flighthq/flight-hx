@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1566 |
-| Direct schemas | 438 |
+| Audit-only schemas | 1561 |
+| Direct schemas | 443 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 12757 |
-| Directly emitted accesses | 17909 |
+| Pending accesses | 12469 |
+| Directly emitted accesses | 18197 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1566 |
+| Newly discovered, audit-only | 1561 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -788,11 +788,11 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#InputGamepadAxisData` | `direct` | `preserved` | `@flighthq/types:interface#InputGamepadAxisData` | gamepad-axis input result record | 4 | 3 | 4 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputGamepadButtonData` | `direct` | `preserved` | `@flighthq/types:interface#InputGamepadButtonData` | gamepad-button input result record | 4 | 4 | 4 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputGamepadConnectData` | `direct` | `preserved` | `@flighthq/types:interface#InputGamepadConnectData` | gamepad-connection input result record | 3 | 4 | 6 | 0 | 0 | 10 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#InputKeyboardData` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 20 | 13 | 0 | 33 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#InputKeyboardData` | `direct` | `new` | — | reviewed escape-free input keyboard data | 13 | 20 | 13 | 0 | 0 | 33 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputKeyRepeatOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputKeyRepeatTimer` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#InputManager` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 48 | 0 | 0 | 48 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#InputPointerData` | `audit-only` | `new` | — | checker-discovered public declaration | 21 | 23 | 22 | 0 | 45 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#InputManager` | `direct` | `new` | — | reviewed escape-free input manager | 16 | 48 | 0 | 0 | 0 | 48 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#InputPointerData` | `direct` | `new` | — | reviewed escape-free input pointer data | 21 | 23 | 22 | 0 | 0 | 45 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#InputState` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 37 | 0 | 0 | 37 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputTextData` | `direct` | `preserved` | `@flighthq/types:interface#InputTextData` | text-input result record | 2 | 1 | 4 | 0 | 0 | 5 | 0 | 0 | yes | — |
@@ -820,7 +820,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#IpcTarget` | `direct` | `preserved` | `@flighthq/types:interface#IpcTarget` | broad host document | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#IridescencePbrExtension` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 22 | 0 | 0 | 22 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#JointStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#KeyboardEventData` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 56 | 6 | 0 | 62 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#KeyboardEventData` | `direct` | `new` | — | reviewed escape-free keyboard event data | 6 | 56 | 6 | 0 | 0 | 62 | 0 | 0 | yes | — |
 | `@flighthq/types:type#KeyCode` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#KeyModifier` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#Kind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1722,7 +1722,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TextInputManager` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 7 | 2 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextInputOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 28 | 0 | 0 | 28 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextInputSource` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TextInputState` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 68 | 32 | 0 | 100 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextInputState` | `direct` | `new` | — | reviewed escape-free text-input state | 15 | 68 | 32 | 0 | 0 | 100 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextItem` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TextJustification` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#TextLabel` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 28 | 0 | 0 | 28 | 0 | 0 | 0 | yes | — |

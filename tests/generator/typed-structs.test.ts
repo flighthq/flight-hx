@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_566,
+      newAuditOnly: 1_561,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(440);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(445);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_566);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_561);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(38);
+    expect(newDirect).toHaveLength(43);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -300,6 +300,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'RiveDocumentImportResult',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free Rive document import result',
+        }),
+        expect.objectContaining({
+          name: 'TextInputState',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free text-input state',
+        }),
+        expect.objectContaining({
+          name: 'KeyboardEventData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free keyboard event data',
+        }),
+        expect.objectContaining({
+          name: 'InputManager',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free input manager',
+        }),
+        expect.objectContaining({
+          name: 'InputPointerData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free input pointer data',
+        }),
+        expect.objectContaining({
+          name: 'InputKeyboardData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free input keyboard data',
         }),
       ]),
     );
@@ -493,6 +518,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:c4246370c176d4205f5e869630515aeaf9affbf5d1a594c50a0c8d82e0d371d0',
         id: '@flighthq/types:interface#RiveDocumentImportResult',
         purpose: 'reviewed escape-free Rive document import result',
+      },
+      {
+        declarationFingerprint: 'sha256:b8c71131b48fb802bf08fc22ab717a50b460ecb96f29c0d9615fb6319184d31c',
+        id: '@flighthq/types:interface#TextInputState',
+        purpose: 'reviewed escape-free text-input state',
+      },
+      {
+        declarationFingerprint: 'sha256:31ee934c70dc671de1fcf994c61ced46730f1b001bc666d65bcd71240f0101a3',
+        id: '@flighthq/types:interface#KeyboardEventData',
+        purpose: 'reviewed escape-free keyboard event data',
+      },
+      {
+        declarationFingerprint: 'sha256:acb1ec5a0825eae2955aba234b8019647bfebc6c07a57b04c1ffb62af7cc98bd',
+        id: '@flighthq/types:interface#InputManager',
+        purpose: 'reviewed escape-free input manager',
+      },
+      {
+        declarationFingerprint: 'sha256:68dfff739dbd1da432c2948738490cd16465a4b8165214a711165ef6c7f52acc',
+        id: '@flighthq/types:interface#InputPointerData',
+        purpose: 'reviewed escape-free input pointer data',
+      },
+      {
+        declarationFingerprint: 'sha256:771b0863ccf5de23a04937149a041c06baa00c7f1fdc857df31c9928a0953f0d',
+        id: '@flighthq/types:interface#InputKeyboardData',
+        purpose: 'reviewed escape-free input keyboard data',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -905,6 +955,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const inputStateCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['InputKeyboardData', 'InputManager', 'InputPointerData', 'KeyboardEventData', 'TextInputState'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -945,22 +1004,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_566,
+      auditOnlySchemas: 1_561,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 17_909,
-      directSchemas: 438,
+      directAccesses: 18_197,
+      directSchemas: 443,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 12_757,
+      pendingAccesses: 12_469,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_566,
+      newAuditOnly: 1_561,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -988,7 +1047,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(17_909);
+    expect(report.summary.directAccesses).toBe(18_197);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -1254,6 +1313,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(riveDocumentCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'TextInputState',
+        100,
+        'sha256:b8c71131b48fb802bf08fc22ab717a50b460ecb96f29c0d9615fb6319184d31c',
+        'reviewed escape-free text-input state',
+      ],
+      [
+        'KeyboardEventData',
+        62,
+        'sha256:31ee934c70dc671de1fcf994c61ced46730f1b001bc666d65bcd71240f0101a3',
+        'reviewed escape-free keyboard event data',
+      ],
+      [
+        'InputManager',
+        48,
+        'sha256:acb1ec5a0825eae2955aba234b8019647bfebc6c07a57b04c1ffb62af7cc98bd',
+        'reviewed escape-free input manager',
+      ],
+      [
+        'InputPointerData',
+        45,
+        'sha256:68dfff739dbd1da432c2948738490cd16465a4b8165214a711165ef6c7f52acc',
+        'reviewed escape-free input pointer data',
+      ],
+      [
+        'InputKeyboardData',
+        33,
+        'sha256:771b0863ccf5de23a04937149a041c06baa00c7f1fdc857df31c9928a0953f0d',
+        'reviewed escape-free input keyboard data',
+      ],
+    ] as const) {
+      expect(inputStateCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -1541,6 +1642,48 @@ describe('typed struct analysis', () => {
         closed: true,
       });
     }
+    const textInputStateId = '@flighthq/types:interface#TextInputState';
+    expect(classAuditById.get(textInputStateId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(textInputStateId)?.nominalIdentity).toEqual({
+      blockerReasons: ['normalization-provenance'],
+      closed: false,
+    });
+    const inputKeyboardDataId = '@flighthq/types:interface#InputKeyboardData';
+    expect(classAuditById.get(inputKeyboardDataId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(inputKeyboardDataId)?.nominalIdentity).toEqual({
+      blockerReasons: [],
+      closed: true,
+    });
+    expect(classAuditById.get('@flighthq/types:interface#KeyboardEventData')?.migration).toEqual({
+      mechanicallyCompatible: false,
+      normalizationReasons: ['cross-schema-transfer'],
+      observabilityReasons: [],
+    });
+    expect(classAuditById.get('@flighthq/types:interface#InputManager')?.migration).toEqual({
+      mechanicallyCompatible: false,
+      normalizationReasons: ['object-literal-spread'],
+      observabilityReasons: [],
+    });
+    expect(classAuditById.get('@flighthq/types:interface#InputPointerData')?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: ['object-spread'],
+    });
+    for (const structuralInputId of [
+      '@flighthq/types:interface#KeyboardEventData',
+      '@flighthq/types:interface#InputManager',
+      '@flighthq/types:interface#InputPointerData',
+    ]) {
+      expect(provenanceById.has(structuralInputId)).toBe(false);
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -1668,6 +1811,24 @@ describe('typed struct analysis', () => {
     expect(riveScene2DDocument).not.toMatch(/\(cast imported : RiveDocumentImportResult\)\./u);
     expect(riveScene2DDocument).not.toMatch(/_Runtime\.field\(imported,/u);
     expect(riveScene2DDocument).not.toMatch(/\(cast asset : RiveFileAsset\)\./u);
+    const generatedInputManager = readFileSync('generated/flighthq/input/InputManager.hx', 'utf8');
+    expect(generatedInputManager).not.toMatch(/\(cast manager : flighthq\.types\.InputManager\)\./u);
+    expect(generatedInputManager).not.toMatch(/_Runtime\.field\(manager,/u);
+    expect(generatedInputManager).not.toMatch(/\(cast (?:data|out) : Input(?:Keyboard|Pointer)Data\)\./u);
+    expect(generatedInputManager).not.toMatch(/_Runtime\.field\(data,/u);
+    const generatedTextInputManager = readFileSync('generated/flighthq/textinput/TextInputManager.hx', 'utf8');
+    expect(generatedTextInputManager).not.toMatch(/\(cast data : KeyboardEventData\)\./u);
+    expect(generatedTextInputManager).not.toMatch(/_Runtime\.field\(data,/u);
+    for (const path of [
+      'generated/flighthq/textinput/SelectableRichTextManager.hx',
+      'generated/flighthq/textinput/TextInput.hx',
+      'generated/flighthq/textinput/TextInputEditing.hx',
+      'generated/flighthq/textinput/TextInputManager.hx',
+    ]) {
+      const generatedTextInput = readFileSync(path, 'utf8');
+      expect(generatedTextInput).not.toMatch(/\(cast state : TextInputState\)\./u);
+      expect(generatedTextInput).not.toMatch(/_Runtime\.field\(state,/u);
+    }
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

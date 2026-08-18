@@ -26561,7 +26561,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 33,
       "fields": 13,
       "id": "@flighthq/types:interface#InputKeyboardData",
       "name": "InputKeyboardData",
@@ -49819,7 +49819,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 100,
       "fields": 15,
       "id": "@flighthq/types:interface#TextInputState",
       "name": "TextInputState",

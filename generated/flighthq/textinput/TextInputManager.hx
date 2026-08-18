@@ -128,6 +128,6 @@ class TextInputManager {
   public static function setTextInputFocused__textInputManager(target:RichText, focused:Bool):Void {
     var state:Null<TextInputState> = cast _Runtime.UNDEFINED;
     state = (cast getTextInputState(({ final __callArgument29:Dynamic = target; __callArgument29; })) : Null<TextInputState>);
-    if ((cast !_Runtime.strictEquals(state, null) : Bool)) { ((cast state : TextInputState).focused = focused); }
+    if ((cast !_Runtime.strictEquals(state, null) : Bool)) { ((cast state : { var focused:Bool; }).focused = cast (focused : Bool)); }
   }
 }
