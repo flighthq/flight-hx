@@ -47,12 +47,12 @@ class WgpuMeshShapeRenderer {
     var meshData:Null<WgpuShapeRendererData> = cast _Runtime.UNDEFINED;
     var version:Float = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals(runtime.renderPass, null) : Bool)) { return cast false; }
     source = (cast (cast renderProxy : RenderProxy2D).source : Shape);
     __destructure0 = (cast source : Shape).data;
     commands = _Runtime.field(__destructure0, 'commands');
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) : Bool)) { return cast false; }
-    strokePathTessellator = (cast runtime : WgpuRenderStateRuntime).strokeTessellator;
+    strokePathTessellator = runtime.strokeTessellator;
     regions = (cast WgpuMeshShapeRenderer.resolveWgpuShapeMeshRegions__wgpuMeshShapeRenderer(({ final __callArgument1:Dynamic = commands; __callArgument1; }), (cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool)) : Null<Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>>>);
     if ((cast ((cast _Runtime.strictEquals(regions, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(regions, 'length'), 0.0) : Bool)) : Bool)) { return cast false; }
     meshData = (cast getWgpuShapeData((cast renderProxy : RenderProxy2D).rendererData) : Null<WgpuShapeRendererData>);
@@ -85,7 +85,7 @@ class WgpuMeshShapeRenderer {
 
   public static final defaultWgpuMeshShapeRenderer:Scene2DRenderer = (cast { format: BatchFormat.Quad, createData: createWgpuShapeData, destroyData: destroyWgpuShapeData, submit: function(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     if ((cast (cast drawWgpuMeshShape(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = renderProxy; __callArgument6; })) : Bool) : Bool)) { return; }
-    _Runtime.callOptionalValue((cast (cast getWgpuRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
+    _Runtime.callOptionalValue((cast (cast getWgpuRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : WgpuRenderStateRuntime) : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
   } });
 
   public static function resolveWgpuShapeMeshRegions__wgpuMeshShapeRenderer(commands:Array<ShapeCommandToken>, strokePathTessellatorEnabled:Bool):Null<Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>>> {

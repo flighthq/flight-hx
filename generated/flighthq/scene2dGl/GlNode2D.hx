@@ -32,7 +32,7 @@ class GlNode2D {
     var tempStack:Array<Renderable> = cast _Runtime.UNDEFINED;
     var clipHooks:Null<Scene2DClipHooks> = cast _Runtime.UNDEFINED;
     var stackLength:Float = cast _Runtime.UNDEFINED;
-    tempStack = (cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : GlRenderStateRuntime).tempStack;
+    tempStack = (cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { var tempStack:Array<Renderable>; }).tempStack;
     clipHooks = (cast state : GlRenderState).displayObjectClipHooks;
     stackLength = 1.0;
     flighthq._internal._StaticIndex.writeArray(tempStack, 0.0, source);

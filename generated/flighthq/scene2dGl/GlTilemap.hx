@@ -92,18 +92,18 @@ class GlTilemap {
     texture = atlas.texture;
     glTexture = (cast resolveGlTexture(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = texture; __callArgument5; }), (cast true : Bool), ({ final __callArgument6:Dynamic = SCENE2D_WORKING_COLOR_SPACE; __callArgument6; })) : Null<flighthq._internal.dom.WebGLTexture>);
     if ((cast _Runtime.strictEquals(glTexture, null) : Bool)) { return; }
-    straightAlpha = (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha;
+    straightAlpha = runtime.currentTextureStraightAlpha;
     nodeMaterialData = (cast tilemapNode : RenderProxy2D).materialData;
     perTileColorScaleBias = (cast (cast source : Tilemap).data : TilemapData).materialData;
     nodeColorScaleBias = (cast tilemapNode : RenderProxy2D).colorScaleBias;
     nodeColorMatrix = (cast tilemapNode : RenderProxy2D).colorMatrix;
-    startCount = (cast runtime : GlRenderStateRuntime).quadBatchWriterCount;
+    startCount = runtime.quadBatchWriterCount;
     base = (cast prepareGlQuadBatchWrite(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = glTexture; __callArgument8; }), (cast straightAlpha : Bool), (cast (cast texture : Texture2D).sampler : Dynamic), (cast tilemapNode : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument9:Dynamic = materialRenderer; __callArgument9; }), (cast (columns * rows) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(({ final __callArgument10:Dynamic = texture; __callArgument10; })) : Float)));
     ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(({ final __callArgument11:Dynamic = texture; __callArgument11; })) : Float)));
-    instanceData = (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData;
+    instanceData = runtime.quadBatchWriterInstanceData;
     pt = (cast tilemapNode : RenderProxy2D).transform2D;
     pa = pt.a;
     pb = pt.b;
@@ -150,7 +150,7 @@ class GlTilemap {
         row++;
       }
     }
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterCount += drawCount);
+    (runtime.quadBatchWriterCount += drawCount);
   }
 
   public static final defaultGlTilemapRenderer:SpriteRenderer = (cast { format: BatchFormat.Quad, createData: noopRendererData, submit: GlTilemap.submitGlTilemap__glTilemap });

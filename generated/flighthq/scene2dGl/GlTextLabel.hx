@@ -77,10 +77,10 @@ class GlTextLabel {
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime);
     __destructure0 = (cast GlTextLabel.getGlTextLabelData__glTextLabel(({ final __callArgument1:Dynamic = data; __callArgument1; })) : GlTextLabelData__glTextLabel);
     image = _Runtime.field(__destructure0, 'image');
-    entry = ((cast (cast runtime : GlRenderStateRuntime).textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).get(image));
+    entry = ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).get(image));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.deleteTexture((cast state : GlRenderState).gl, (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).texture);
-      ((cast (cast runtime : GlRenderStateRuntime).textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).delete_(image));
+      ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).delete_(image));
     }
   }
 
@@ -166,10 +166,10 @@ class GlTextLabel {
     if ((cast ((cast ((cast (cast textData : GlTextLabelData__glTextLabel).logW : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast (cast textData : GlTextLabelData__glTextLabel).logH : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     (cast ensureGlQuadBatchShader(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlQuadBatchShader);
     texture = (cast bindGlImageResourceTexture(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast textData : GlTextLabelData__glTextLabel).image, (cast null : Dynamic), ({ final __callArgument15:Dynamic = null; __callArgument15; }), (cast true : Bool), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq._internal.dom.WebGLTexture);
-    straightAlpha = (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha;
-    startCount = (cast runtime : GlRenderStateRuntime).quadBatchWriterCount;
+    straightAlpha = runtime.currentTextureStraightAlpha;
+    startCount = runtime.quadBatchWriterCount;
     base = (cast prepareGlQuadBatchWrite(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = texture; __callArgument17; }), (cast straightAlpha : Bool), (cast null : Dynamic), (cast renderProxy : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument18:Dynamic = materialRenderer; __callArgument18; }), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
-    d = (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData;
+    d = runtime.quadBatchWriterInstanceData;
     t = (cast renderProxy : RenderProxy2D).transform2D;
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast d : flighthq._internal._Float32Array), (cast base : Float), (cast t.a : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast d : flighthq._internal._Float32Array), (cast (base + 1.0) : Float), (cast t.b : Float));
@@ -186,7 +186,7 @@ class GlTextLabel {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast d : flighthq._internal._Float32Array), (cast (base + 12.0) : Float), (cast (cast renderProxy : RenderProxy2D).alpha : Float));
     packGlQuadBatchMaterialInstance(({ final __callArgument19:Dynamic = state; __callArgument19; }), (cast renderProxy : RenderProxy2D).materialData, (cast startCount : Float));
     recordGlQuadBatchColorScaleBias(({ final __callArgument20:Dynamic = state; __callArgument20; }), (cast _Runtime.coalesce((cast renderProxy : RenderProxy2D).colorMatrix, function():Dynamic return cast (cast renderProxy : RenderProxy2D).colorScaleBias) : Dynamic), (cast startCount : Float));
-    (cast runtime : GlRenderStateRuntime).quadBatchWriterCount++;
+    runtime.quadBatchWriterCount++;
   }
 
   public static final defaultGlTextLabelRenderer:Scene2DRenderer = (cast { format: BatchFormat.Quad, createData: GlTextLabel.createGlTextLabelData__glTextLabel, destroyData: GlTextLabel.destroyGlTextLabelData__glTextLabel, submit: drawGlTextLabel });

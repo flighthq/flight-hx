@@ -53,10 +53,10 @@ class WgpuShapeData {
     if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
     surface = (cast shapeData : WgpuShapeRendererData).surface;
     if ((cast !_Runtime.strictEquals(surface, null) : Bool)) {
-      var entry:Null<WgpuTextureSourceTextureEntry> = ((cast (cast runtime : WgpuRenderStateRuntime).textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).get((cast surface : WgpuShapeRasterSurface).image));
+      var entry:Null<WgpuTextureSourceTextureEntry> = ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).get((cast surface : WgpuShapeRasterSurface).image));
       if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (cast (cast entry : WgpuTextureSourceTextureEntry).texture : flighthq._internal.dom.GPUTexture).destroy();
-        ((cast (cast runtime : WgpuRenderStateRuntime).textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).delete_((cast surface : WgpuShapeRasterSurface).image));
+        ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).delete_((cast surface : WgpuShapeRasterSurface).image));
       }
     }
     b = (cast shapeData : WgpuShapeRendererData).meshBuffers;

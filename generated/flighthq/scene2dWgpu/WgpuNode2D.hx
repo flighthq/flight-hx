@@ -32,7 +32,7 @@ class WgpuNode2D {
     var tempStack:Array<Renderable> = cast _Runtime.UNDEFINED;
     var clipHooks:Null<Scene2DClipHooks> = cast _Runtime.UNDEFINED;
     var stackLength:Float = cast _Runtime.UNDEFINED;
-    tempStack = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).tempStack;
+    tempStack = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { var tempStack:Array<Renderable>; }).tempStack;
     clipHooks = (cast state : WgpuRenderState).displayObjectClipHooks;
     stackLength = 1.0;
     flighthq._internal._StaticIndex.writeArray(tempStack, 0.0, source);

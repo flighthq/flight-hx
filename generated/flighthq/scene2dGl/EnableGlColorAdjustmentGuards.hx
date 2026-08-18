@@ -14,13 +14,13 @@ import flighthq.types.TintMaterialData;
 class EnableGlColorAdjustmentGuards {
   @:noCompletion
   public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeatureGuard, null);
+    return cast !_Runtime.looseEquals((cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { @:optional var glColorAdjustmentMaterialFeatureGuard:Null<GlRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).glColorAdjustmentMaterialFeatureGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableGlColorAdjustmentGuards(state:GlRenderState):Void {
-    ((cast (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime) : { @:optional var glColorAdjustmentMaterialFeatureGuard:Null<GlRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).glColorAdjustmentMaterialFeatureGuard = (cast EnableGlColorAdjustmentGuards.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards));
+    ((cast (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime) : { @:optional var glColorAdjustmentMaterialFeatureGuard:Null<GlRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).glColorAdjustmentMaterialFeatureGuard = cast (function(__unused0:GlRenderState, __unused1:flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>):Void { EnableGlColorAdjustmentGuards.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards(); } : Null<GlRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>));
   }
 
   public static function warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards():Void {

@@ -40,10 +40,10 @@ class ToonWgpuMeshMaterialRenderer {
     var pipeline:WgpuToonPipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
+    pass = stateRuntime.renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     toon = (cast material : Null<ToonMaterial>);
-    format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    format = _Runtime.coalesce(stateRuntime.currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     pipeline = (cast ensureWgpuToonPipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast ToonWgpuMeshMaterialRenderer.defineKeyForMaterial__toonWgpuMeshMaterialRenderer(({ final __callArgument2:Dynamic = toon; __callArgument2; })) : WgpuToonDefineKey), (cast format : String)) : WgpuToonPipeline);
     writeWgpuFrameUniform(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = camera; __callArgument4; }), ({ final __callArgument5:Dynamic = lights; __callArgument5; }));
     if ((cast _Runtime.strictEquals(toon, null) : Bool)) {

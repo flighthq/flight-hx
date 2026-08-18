@@ -10,11 +10,11 @@ import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 
 class WgpuShapeRasterizer {
   public static function getWgpuShapeRasterizer(state:WgpuRenderState):Null<ShapeRasterizer> {
-    return cast _Runtime.coalesce((cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).shapeRasterizer, function():Dynamic return cast null);
+    return cast _Runtime.coalesce((cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { @:optional var shapeRasterizer:Null<ShapeRasterizer>; }).shapeRasterizer, function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerWgpuShapeRasterizer(state:WgpuRenderState, rasterizer:Null<ShapeRasterizer>):Void {
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { @:optional var shapeRasterizer:Null<ShapeRasterizer>; }).shapeRasterizer = rasterizer);
+    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { @:optional var shapeRasterizer:Null<ShapeRasterizer>; }).shapeRasterizer = cast (rasterizer : Null<ShapeRasterizer>));
   }
 }

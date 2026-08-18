@@ -18,16 +18,16 @@ class WgpuSurface {
     var existing:Null<flighthq._internal.dom.GPUTexture> = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.GPUTexture = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    if ((cast !(cast (cast runtime : WgpuRenderStateRuntime).frameCaptureEnabled : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast runtime.frameCaptureEnabled : Bool) : Bool)) { return cast null; }
     width = HxMath.max(1.0, flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width'));
     height = HxMath.max(1.0, flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height'));
-    existing = (cast runtime : WgpuRenderStateRuntime).frameCaptureTexture;
+    existing = runtime.frameCaptureTexture;
     if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(existing, null) : Bool) && (cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast existing : flighthq._internal.dom.GPUTexture).width, width) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast existing : flighthq._internal.dom.GPUTexture).height, height) : Bool)) : Bool)) {
       return cast existing;
     }
     ({ final __hostTypeCall1 = existing; __hostTypeCall1 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall1 : flighthq._internal.dom.GPUTexture).destroy(); });
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: _Runtime.field(state, 'format'), usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_SRC'))) }] : Array<Dynamic>));
-    ((cast runtime : WgpuRenderStateRuntime).frameCaptureTexture = texture);
+    (runtime.frameCaptureTexture = cast (texture : Null<flighthq._internal.dom.GPUTexture>));
     return cast texture;
     return cast null;
   }
@@ -45,7 +45,7 @@ class WgpuSurface {
         var out:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
         var swizzleBGRA:Bool = cast _Runtime.UNDEFINED;
         runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime);
-        buffer = (cast runtime : WgpuRenderStateRuntime).frameCaptureBuffer;
+        buffer = runtime.frameCaptureBuffer;
         var __flowBranch5:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(buffer, null) : Bool) || (cast _Runtime.strictEquals(buffer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
           __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
@@ -55,9 +55,9 @@ class WgpuSurface {
           __flowBranch5 = flighthq._internal._Async.flowNormal();
         }
         return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
-          width = (cast runtime : WgpuRenderStateRuntime).frameCaptureWidth;
-          height = (cast runtime : WgpuRenderStateRuntime).frameCaptureHeight;
-          bytesPerRow = (cast runtime : WgpuRenderStateRuntime).frameCaptureBytesPerRow;
+          width = runtime.frameCaptureWidth;
+          height = runtime.frameCaptureHeight;
+          bytesPerRow = runtime.frameCaptureBytesPerRow;
           return flighthq._internal._Async.flatMap((cast WgpuSurface.mapWgpuCaptureBuffer__wgpuSurface(({ final __callArgument7:Dynamic = buffer; __callArgument7; }), (cast timeoutMs : Float)) : flighthq._internal._Promise<flighthq._internal._Nothing>), function(__awaitValue6:Dynamic):Dynamic {
             __awaitValue6;
             mapped = new flighthq._internal._UInt8Array((cast buffer : flighthq._internal.dom.GPUBuffer).getMappedRange());
@@ -93,7 +93,7 @@ class WgpuSurface {
   }
 
   public static function enableWgpuFrameCapture(state:WgpuRenderState):Void {
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).frameCaptureEnabled = true);
+    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : WgpuRenderStateRuntime) : { var frameCaptureEnabled:Bool; }).frameCaptureEnabled = cast (true : Bool));
   }
 
   @:noCompletion
@@ -105,21 +105,21 @@ class WgpuSurface {
     var height:Float = cast _Runtime.UNDEFINED;
     var bytesPerRow:Float = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : WgpuRenderStateRuntime);
-    texture = (cast runtime : WgpuRenderStateRuntime).frameCaptureTexture;
-    if ((cast ((cast ((cast !(cast (cast runtime : WgpuRenderStateRuntime).frameCaptureEnabled : Bool) : Bool) || (cast _Runtime.strictEquals(texture, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
-    mapState = ({ final __hostType10 = (cast runtime : WgpuRenderStateRuntime).frameCaptureBuffer; __hostType10 == null ? _Runtime.UNDEFINED : (cast __hostType10 : flighthq._internal.dom.GPUBuffer).mapState; });
+    texture = runtime.frameCaptureTexture;
+    if ((cast ((cast ((cast !(cast runtime.frameCaptureEnabled : Bool) : Bool) || (cast _Runtime.strictEquals(texture, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
+    mapState = ({ final __hostType10 = runtime.frameCaptureBuffer; __hostType10 == null ? _Runtime.UNDEFINED : (cast __hostType10 : flighthq._internal.dom.GPUBuffer).mapState; });
     if ((cast ((cast _Runtime.strictEquals(mapState, 'pending') : Bool) || (cast _Runtime.strictEquals(mapState, 'mapped') : Bool)) : Bool)) { return; }
     width = (cast texture : flighthq._internal.dom.GPUTexture).width;
     height = (cast texture : flighthq._internal.dom.GPUTexture).height;
     bytesPerRow = _Runtime.multiplyNumbers(HxMath.ceil(((width * 4.0) / 256.0)), 256.0);
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).frameCaptureBuffer, null) : Bool) || (cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).frameCaptureBuffer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).frameCaptureWidth, width) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).frameCaptureHeight, height) : Bool)) : Bool)) {
-      ({ final __hostTypeCall11 = (cast runtime : WgpuRenderStateRuntime).frameCaptureBuffer; __hostTypeCall11 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall11 : flighthq._internal.dom.GPUBuffer).destroy(); });
-      ((cast runtime : WgpuRenderStateRuntime).frameCaptureBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: (bytesPerRow * height), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'MAP_READ'))) }] : Array<Dynamic>)));
-      ((cast runtime : WgpuRenderStateRuntime).frameCaptureBytesPerRow = bytesPerRow);
-      ((cast runtime : WgpuRenderStateRuntime).frameCaptureWidth = width);
-      ((cast runtime : WgpuRenderStateRuntime).frameCaptureHeight = height);
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(runtime.frameCaptureBuffer, null) : Bool) || (cast _Runtime.strictEquals(runtime.frameCaptureBuffer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(runtime.frameCaptureWidth, width) : Bool)) : Bool) || (cast !_Runtime.strictEquals(runtime.frameCaptureHeight, height) : Bool)) : Bool)) {
+      ({ final __hostTypeCall11 = runtime.frameCaptureBuffer; __hostTypeCall11 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall11 : flighthq._internal.dom.GPUBuffer).destroy(); });
+      (runtime.frameCaptureBuffer = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBuffer', cast ([{ size: (bytesPerRow * height), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'MAP_READ'))) }] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPUBuffer>));
+      (runtime.frameCaptureBytesPerRow = cast (bytesPerRow : Float));
+      (runtime.frameCaptureWidth = cast (width : Float));
+      (runtime.frameCaptureHeight = cast (height : Float));
     }
-    encoder.copyTextureToBuffer({ texture: texture }, { buffer: (cast runtime : WgpuRenderStateRuntime).frameCaptureBuffer, bytesPerRow: bytesPerRow }, cast ([width, height, 1.0] : Array<Dynamic>));
+    encoder.copyTextureToBuffer({ texture: texture }, { buffer: runtime.frameCaptureBuffer, bytesPerRow: bytesPerRow }, cast ([width, height, 1.0] : Array<Dynamic>));
   }
 
   public static function mapWgpuCaptureBuffer__wgpuSurface(buffer:flighthq._internal.dom.GPUBuffer, timeoutMs:Float):flighthq._internal._Promise<flighthq._internal._Nothing> {

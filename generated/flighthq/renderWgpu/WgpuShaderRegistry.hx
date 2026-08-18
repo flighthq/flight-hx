@@ -11,6 +11,6 @@ import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 class WgpuShaderRegistry {
   @:noCompletion
   public static function registerWgpuBitmapShader(state:WgpuRenderState, shader:WgpuBitmapShader):Void {
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).defaultBitmapShader = shader);
+    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { var defaultBitmapShader:Null<WgpuBitmapShader>; }).defaultBitmapShader = cast (shader : Null<WgpuBitmapShader>));
   }
 }

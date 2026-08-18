@@ -83,7 +83,7 @@ class WgpuScale9Shape {
     var c:Float = cast _Runtime.UNDEFINED;
     var d:Float = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuRenderStateRuntime);
-    if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(runtime.renderPass, null) : Bool)) { return; }
     flushWgpuQuadBatchWriter(({ final __callArgument6:Dynamic = state; __callArgument6; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : Scale9Shape);
     __destructure0 = (cast source : Scale9Shape).data;
@@ -94,7 +94,7 @@ class WgpuScale9Shape {
     if ((cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) { return; }
     rasterizer = (cast getWgpuShapeRasterizer(({ final __callArgument7:Dynamic = state; __callArgument7; })) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
-      _Runtime.callOptionalValue((cast (cast getWgpuRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast (cast getWgpuRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuRenderStateRuntime) : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
       return;
     }
     bounds = (cast getNodeLocalBoundsRectangle((cast source : Dynamic)) : Rectangle);

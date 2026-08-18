@@ -11,19 +11,19 @@ import flighthq.types.GlRenderState.GlRenderStateRuntime;
 class GlRenderEffectRegistry {
   @:noCompletion
   public static function getGlRenderEffectRunner(state:GlRenderState, kind:String):Null<GlRenderEffectRunner> {
-    return cast _Runtime.coalesce(({ final __collection2:Dynamic = (cast (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime) : GlRenderStateRuntime).glRenderEffectRegistry; __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map<String, GlRenderEffectRunner>).get(kind)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection2:Dynamic = (cast (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime) : { @:optional var glRenderEffectRegistry:Null<flighthq._internal._Map<String, GlRenderEffectRunner>>; }).glRenderEffectRegistry; __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map<String, GlRenderEffectRunner>).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
   @:noCompletion
   public static function hasGlRenderEffectRunner(state:GlRenderState, kind:String):Bool {
-    return cast _Runtime.coalesce(({ final __collection5:Dynamic = (cast (cast getGlRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlRenderStateRuntime) : GlRenderStateRuntime).glRenderEffectRegistry; __collection5 == null ? _Runtime.UNDEFINED : ((cast __collection5 : flighthq._internal._Map<String, GlRenderEffectRunner>).has(kind)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection5:Dynamic = (cast (cast getGlRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlRenderStateRuntime) : { @:optional var glRenderEffectRegistry:Null<flighthq._internal._Map<String, GlRenderEffectRunner>>; }).glRenderEffectRegistry; __collection5 == null ? _Runtime.UNDEFINED : ((cast __collection5 : flighthq._internal._Map<String, GlRenderEffectRunner>).has(kind)); }), function():Dynamic return cast false);
     return cast null;
   }
 
   public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : GlRenderStateRuntime);
-    ((cast ({ final __nullishOwner9 = runtime; final __nullishValue10:Null<flighthq._internal._Map<String, GlRenderEffectRunner>> = cast (cast __nullishOwner9 : GlRenderStateRuntime).glRenderEffectRegistry; __nullishValue10 == null ? ((cast __nullishOwner9 : GlRenderStateRuntime).glRenderEffectRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, GlRenderEffectRunner>>)) : (cast __nullishValue10 : Null<flighthq._internal._Map<String, GlRenderEffectRunner>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast runner)));
+    ((cast ({ final __nullishOwner9 = runtime; final __nullishValue10:Null<flighthq._internal._Map<String, GlRenderEffectRunner>> = cast __nullishOwner9.glRenderEffectRegistry; __nullishValue10 == null ? (__nullishOwner9.glRenderEffectRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, GlRenderEffectRunner>>)) : (cast __nullishValue10 : Null<flighthq._internal._Map<String, GlRenderEffectRunner>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast runner)));
   }
 }

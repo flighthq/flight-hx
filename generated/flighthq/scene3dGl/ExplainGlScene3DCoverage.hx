@@ -56,7 +56,7 @@ class ExplainGlScene3DCoverage {
         i++;
       }
     }
-    resolvers = (cast (cast getGlRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : GlRenderStateRuntime) : GlRenderStateRuntime).glTextureResolverRegistry;
+    resolvers = (cast (cast getGlRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : GlRenderStateRuntime) : { @:optional var glTextureResolverRegistry:Null<flighthq._internal._Map<String, GlTextureResolver>>; }).glTextureResolverRegistry;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'textureSourceKinds'), 'length') : Float)) : Bool)) {

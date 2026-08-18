@@ -50,7 +50,7 @@ class WgpuFullscreenPass {
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var runtime2:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    pass = ((cast !_Runtime.strictEquals(dest, null) : Bool) ? (cast (cast runtime : WgpuRenderStateRuntime).renderPass : Dynamic) : (cast (cast runtime : WgpuRenderStateRuntime).renderPass : Dynamic));
+    pass = ((cast !_Runtime.strictEquals(dest, null) : Bool) ? (cast runtime.renderPass : Dynamic) : (cast runtime.renderPass : Dynamic));
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(wgpuPipeline, 'pipeline'));
     if ((cast !_Runtime.strictEquals(setUniforms, null) : Bool)) {
@@ -64,7 +64,7 @@ class WgpuFullscreenPass {
         var input:WgpuRenderTarget = flighthq._internal._StaticIndex.readArray(inputs, i);
         var layout:flighthq._internal.dom.GPUBindGroupLayout = flighthq._internal._StaticIndex.readArray(_Runtime.field(wgpuPipeline, 'textureBindGroupLayouts'), i);
         if ((cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var sampler:flighthq._internal.dom.GPUSampler = ((cast (cast state : WgpuRenderState).allowSmoothing : Bool) ? (cast (cast runtime2 : WgpuRenderStateRuntime).linearSampler : Dynamic) : (cast (cast runtime2 : WgpuRenderStateRuntime).nearestSampler : Dynamic));
+        var sampler:flighthq._internal.dom.GPUSampler = ((cast (cast state : WgpuRenderState).allowSmoothing : Bool) ? (cast runtime2.linearSampler : Dynamic) : (cast runtime2.nearestSampler : Dynamic));
         var bindGroup:flighthq._internal.dom.GPUBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: layout, entries: cast ([{ binding: 0.0, resource: _Runtime.field(input, 'view') }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
         (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup((1.0 + i), bindGroup);
         i++;

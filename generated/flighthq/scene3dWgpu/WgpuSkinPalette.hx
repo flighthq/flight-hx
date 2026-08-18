@@ -44,7 +44,7 @@ class WgpuSkinPalette {
     previousView = (cast scene : WgpuScene3DRuntime).skinPaletteView;
     view = (cast uploadWgpuSkinPalette(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = jointMatrices; __callArgument5; })) : flighthq._internal.dom.GPUTextureView);
     if ((cast ((cast _Runtime.strictEquals((cast scene : WgpuScene3DRuntime).skinDrawBindGroup, null) : Bool) || (cast !_Runtime.strictEquals(previousView, view) : Bool)) : Bool)) {
-      ((cast scene : WgpuScene3DRuntime).skinDrawBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast ensureWgpuSkinDrawLayout(({ final __callArgument6:Dynamic = state; __callArgument6; })) : flighthq._internal.dom.GPUBindGroupLayout), entries: cast ([{ binding: 0.0, resource: { buffer: (cast stateRuntime : WgpuRenderStateRuntime).uniformBuffer, size: 176.0 } }, { binding: 1.0, resource: view }] : Array<Dynamic>) }] : Array<Dynamic>)));
+      ((cast scene : WgpuScene3DRuntime).skinDrawBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast ensureWgpuSkinDrawLayout(({ final __callArgument6:Dynamic = state; __callArgument6; })) : flighthq._internal.dom.GPUBindGroupLayout), entries: cast ([{ binding: 0.0, resource: { buffer: stateRuntime.uniformBuffer, size: 176.0 } }, { binding: 1.0, resource: view }] : Array<Dynamic>) }] : Array<Dynamic>)));
     }
     return cast (cast scene : WgpuScene3DRuntime).skinDrawBindGroup;
     return cast null;

@@ -145,7 +145,7 @@ class DrawGlScene3D {
     boundSkinned = _Runtime.field(_Runtime, 'UNDEFINED');
     boundColorAdjustment = _Runtime.field(_Runtime, 'UNDEFINED');
     boundColorMatrix = _Runtime.field(_Runtime, 'UNDEFINED');
-    colorAdjustmentFeatureEnabled = !_Runtime.looseEquals((cast (cast getGlRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : GlRenderStateRuntime) : GlRenderStateRuntime).glColorAdjustmentMaterialFeature, null);
+    colorAdjustmentFeatureEnabled = !_Runtime.looseEquals((cast (cast getGlRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : GlRenderStateRuntime) : { @:optional var glColorAdjustmentMaterialFeature:Null<GlColorAdjustmentMaterialFeature>; }).glColorAdjustmentMaterialFeature, null);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(opaqueDrawList, 'length') : Float)) : Bool)) {

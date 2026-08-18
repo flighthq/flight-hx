@@ -18,7 +18,7 @@ class WgpuScissor {
     var w:Float = cast _Runtime.UNDEFINED;
     var h:Float = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    rect = (cast runtime : WgpuRenderStateRuntime).currentScissorRect;
+    rect = runtime.currentScissorRect;
     if ((cast _Runtime.strictEquals(rect, null) : Bool)) { return; }
     x = HxMath.max(0.0, HxMath.floor((cast rect : WgpuScissorRect).x));
     y = HxMath.max(0.0, HxMath.floor((cast rect : WgpuScissorRect).y));
@@ -32,17 +32,17 @@ class WgpuScissor {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var prev:Null<WgpuScissorRect> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime);
-    prev = _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).scissorStack, 'pop', cast ([] : Array<Dynamic>));
-    ((cast runtime : WgpuRenderStateRuntime).currentScissorRect = _Runtime.coalesce(prev, function():Dynamic return cast null));
+    prev = _Runtime.callProperty(runtime.scissorStack, 'pop', cast ([] : Array<Dynamic>));
+    (runtime.currentScissorRect = cast (_Runtime.coalesce(prev, function():Dynamic return cast null) : Null<WgpuScissorRect>));
   }
 
   @:noCompletion
   public static function pushWgpuScissorRect(state:WgpuRenderState, rect:WgpuScissorRect):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
-    if ((cast !_Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).currentScissorRect, null) : Bool)) {
-      _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).scissorStack, 'push', cast ([(cast runtime : WgpuRenderStateRuntime).currentScissorRect] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(runtime.currentScissorRect, null) : Bool)) {
+      _Runtime.callProperty(runtime.scissorStack, 'push', cast ([runtime.currentScissorRect] : Array<Dynamic>));
     }
-    ((cast runtime : WgpuRenderStateRuntime).currentScissorRect = { x: _Runtime.field(rect, 'x'), y: _Runtime.field(rect, 'y'), width: _Runtime.field(rect, 'width'), height: _Runtime.field(rect, 'height') });
+    (runtime.currentScissorRect = cast ({ x: _Runtime.field(rect, 'x'), y: _Runtime.field(rect, 'y'), width: _Runtime.field(rect, 'width'), height: _Runtime.field(rect, 'height') } : Null<WgpuScissorRect>));
   }
 }

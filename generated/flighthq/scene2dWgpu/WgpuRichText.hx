@@ -96,7 +96,7 @@ class WgpuRichText {
     var entry:Null<WgpuTextureEntry> = cast _Runtime.UNDEFINED;
     var offsetX:Float = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : WgpuRenderStateRuntime);
-    if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(runtime.renderPass, null) : Bool)) { return; }
     flushWgpuQuadBatchWriter(({ final __callArgument9:Dynamic = state; __callArgument9; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
     data = (cast source : RichText).data;

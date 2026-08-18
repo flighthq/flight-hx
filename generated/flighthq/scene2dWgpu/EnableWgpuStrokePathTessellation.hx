@@ -13,6 +13,6 @@ import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 
 class EnableWgpuStrokePathTessellation {
   public static function enableWgpuStrokePathTessellation(state:WgpuRenderState):Void {
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { var strokeTessellator:Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator = (cast tessellateStrokePath));
+    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { var strokeTessellator:Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator = cast (tessellateStrokePath : Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>>));
   }
 }

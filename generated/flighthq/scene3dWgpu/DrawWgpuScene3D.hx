@@ -152,7 +152,7 @@ class DrawWgpuScene3D {
     ((cast runtime : WgpuScene3DRuntime).activeBlendedRun = blended);
     boundLightBlock = null;
     boundRenderer = null;
-    colorAdjustmentFeatureEnabled = !_Runtime.looseEquals((cast (cast getWgpuRenderStateRuntime(({ final __callArgument29:Dynamic = state; __callArgument29; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeature, null);
+    colorAdjustmentFeatureEnabled = !_Runtime.looseEquals((cast (cast getWgpuRenderStateRuntime(({ final __callArgument29:Dynamic = state; __callArgument29; })) : WgpuRenderStateRuntime) : { @:optional var wgpuColorAdjustmentMaterialFeature:Null<WgpuColorAdjustmentMaterialFeature>; }).wgpuColorAdjustmentMaterialFeature, null);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(entries, 'length') : Float)) : Bool)) {

@@ -27,7 +27,7 @@ class WgpuShaderBinding {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var resolver:Null<RenderProxy2D->Null<WgpuBitmapShader>> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    resolver = (cast runtime : WgpuRenderStateRuntime).webgpuShaderBindingResolver;
+    resolver = runtime.webgpuShaderBindingResolver;
     if ((cast !_Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var shader:Null<WgpuBitmapShader> = (cast resolver(({ final __callArgument1:Dynamic = renderProxy; __callArgument1; })) : Null<WgpuBitmapShader>);
       if ((cast !_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast shader; }
@@ -45,6 +45,6 @@ class WgpuShaderBinding {
       return;
     }
     ((cast WgpuShaderBinding._shaderBindings__wgpuShaderBinding : flighthq._internal._WeakMap<RenderProxy2D, WgpuBitmapShader>).set(renderProxy, (cast shader)));
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime) : { @:optional var webgpuShaderBindingResolver:Null<RenderProxy2D->Null<WgpuBitmapShader>>; }).webgpuShaderBindingResolver = (cast getWgpuShader));
+    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime) : { @:optional var webgpuShaderBindingResolver:Null<RenderProxy2D->Null<WgpuBitmapShader>>; }).webgpuShaderBindingResolver = cast (getWgpuShader : Null<RenderProxy2D->Null<WgpuBitmapShader>>));
   }
 }

@@ -42,10 +42,10 @@ class WireframeWgpuMeshMaterialRenderer {
     var pipeline:WgpuWireframePipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
+    pass = stateRuntime.renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     wireframe = (cast material : Null<WireframeMaterial>);
-    format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    format = _Runtime.coalesce(stateRuntime.currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     pipeline = (cast ensureWgpuWireframePipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast format : String), (cast _Runtime.strictEquals(({ final __structural2 = wireframe; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var alphaMode:MaterialAlphaMode; }).alphaMode; }), 'mask') : Bool)) : WgpuWireframePipeline);
     writeWgpuFrameUniform(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = camera; __callArgument4; }), ({ final __callArgument5:Dynamic = _lights; __callArgument5; }));
     if ((cast _Runtime.strictEquals(wireframe, null) : Bool)) {
@@ -64,7 +64,7 @@ class WireframeWgpuMeshMaterialRenderer {
     var upload:Null<WgpuWireframeUpload> = cast _Runtime.UNDEFINED;
     var drawBindGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument17:Dynamic = state; __callArgument17; })) : WgpuRenderStateRuntime);
-    pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
+    pass = stateRuntime.renderPass;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument18:Dynamic = state; __callArgument18; })) : WgpuScene3DRuntime);
     if ((cast ((cast _Runtime.strictEquals(pass, null) : Bool) || (cast _Runtime.strictEquals((cast scene : WgpuScene3DRuntime).activeMeshPipeline, null) : Bool)) : Bool)) { return; }
     subset = _Runtime.field(proxy, 'subset');

@@ -45,10 +45,10 @@ class GlShapeData {
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime);
     surface = (cast (cast getGlShapeData(({ final __callArgument2:Dynamic = data; __callArgument2; })) : GlShapeRendererData) : GlShapeRendererData).surface;
     if ((cast _Runtime.strictEquals(surface, null) : Bool)) { return; }
-    entry = ((cast (cast runtime : GlRenderStateRuntime).textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).get((cast surface : GlShapeRasterSurface).image));
+    entry = ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).get((cast surface : GlShapeRasterSurface).image));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.deleteTexture((cast state : GlRenderState).gl, (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).texture);
-      ((cast (cast runtime : GlRenderStateRuntime).textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).delete_((cast surface : GlShapeRasterSurface).image));
+      ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).delete_((cast surface : GlShapeRasterSurface).image));
     }
   }
 

@@ -41,7 +41,7 @@ class ExplainGlScene2DCoverage {
     var hasStandard:Bool = cast _Runtime.UNDEFINED;
     found = false;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlRenderStateRuntime);
-    blendModes = (cast runtime : GlRenderStateRuntime).glBlendModeRegistry;
+    blendModes = runtime.glBlendModeRegistry;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'blendModes'), 'length') : Float)) : Bool)) {
@@ -57,7 +57,7 @@ class ExplainGlScene2DCoverage {
         i++;
       }
     }
-    materials = (cast runtime : GlRenderStateRuntime).materialRendererMap;
+    materials = runtime.materialRendererMap;
     hasStandard = _Runtime.strictEquals(({ final __collection13:Dynamic = materials; __collection13 == null ? _Runtime.UNDEFINED : ((cast __collection13 : flighthq._internal._Map<String, GlMaterialRenderer>).has(StandardMaterialKindValue)); }), true);
     {
       var i:Float = 0.0;

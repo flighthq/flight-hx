@@ -78,7 +78,7 @@ class WgpuMeshPipeline {
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
+    pass = stateRuntime.renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuScene3DRuntime);
     ((cast scene : WgpuScene3DRuntime).activeMeshPipeline = pipeline);
@@ -182,7 +182,7 @@ class WgpuMeshPipeline {
     var skinning:Null<WgpuSkinningAdapter> = cast _Runtime.UNDEFINED;
     var boundDrawGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : WgpuRenderStateRuntime);
-    pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
+    pass = stateRuntime.renderPass;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuScene3DRuntime);
     if ((cast ((cast _Runtime.strictEquals(pass, null) : Bool) || (cast _Runtime.strictEquals((cast scene : WgpuScene3DRuntime).activeMeshPipeline, null) : Bool)) : Bool)) { return; }
     subset = _Runtime.field(proxy, 'subset');
@@ -529,7 +529,7 @@ class WgpuMeshPipeline {
     var magFilter:flighthq._internal.dom.GPUFilterMode = cast _Runtime.UNDEFINED;
     var useMips:Bool = cast _Runtime.UNDEFINED;
     var mipmapFilter:Null<flighthq._internal.dom.GPUMipmapFilterMode> = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument64:Dynamic = state; __callArgument64; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).linearSampler; }
+    if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument64:Dynamic = state; __callArgument64; })) : WgpuRenderStateRuntime) : { var linearSampler:flighthq._internal.dom.GPUSampler; }).linearSampler; }
     sampler = (cast texture : { var sampler:Sampler; }).sampler;
     minFilter = ((cast StringTools.startsWith(sampler.minFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
     magFilter = ((cast StringTools.startsWith(sampler.magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic));
@@ -653,11 +653,11 @@ class WgpuMeshPipeline {
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument78:Dynamic = state; __callArgument78; })) : WgpuScene3DRuntime);
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument79:Dynamic = state; __callArgument79; })) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals((cast scene : WgpuScene3DRuntime).drawBindGroup, null) : Bool)) {
-      ((cast scene : WgpuScene3DRuntime).drawBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast (cast ensureWgpuScene3DLayouts(({ final __callArgument80:Dynamic = state; __callArgument80; })) : WgpuScene3DLayouts) : WgpuScene3DLayouts).drawBindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: (cast stateRuntime : WgpuRenderStateRuntime).uniformBuffer, size: WgpuMeshPipeline.DRAW_UNIFORM_BYTES__wgpuMeshPipeline } }] : Array<Dynamic>) }] : Array<Dynamic>)));
+      ((cast scene : WgpuScene3DRuntime).drawBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast (cast ensureWgpuScene3DLayouts(({ final __callArgument80:Dynamic = state; __callArgument80; })) : WgpuScene3DLayouts) : WgpuScene3DLayouts).drawBindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: stateRuntime.uniformBuffer, size: WgpuMeshPipeline.DRAW_UNIFORM_BYTES__wgpuMeshPipeline } }] : Array<Dynamic>) }] : Array<Dynamic>)));
     }
-    offset = (cast stateRuntime : WgpuRenderStateRuntime).uniformOffset;
+    offset = stateRuntime.uniformOffset;
     floatOffset = (offset / 4.0);
-    u = (cast stateRuntime : WgpuRenderStateRuntime).uniformData;
+    u = stateRuntime.uniformData;
     world = (cast _Runtime.field(proxy, 'worldMatrix') : { var m:flighthq._internal._Float32Array; }).m;
     {
       var i:Float = 0.0;
@@ -723,7 +723,7 @@ class WgpuMeshPipeline {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 51.0) : Float), (cast colorScaleBias.alphaBias : Float));
     } }
     ((cast scene : WgpuScene3DRuntime).pendingDrawOffset = offset);
-    ((cast stateRuntime : WgpuRenderStateRuntime).uniformOffset += (cast stateRuntime : WgpuRenderStateRuntime).uniformStride);
+    (stateRuntime.uniformOffset += stateRuntime.uniformStride);
     return cast (cast scene : WgpuScene3DRuntime).drawBindGroup;
     return cast null;
   }

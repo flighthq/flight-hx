@@ -72,7 +72,7 @@ class GlSprite {
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     glTexture = (cast resolveGlTexture(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = texture; __callArgument6; }), (cast true : Bool), ({ final __callArgument7:Dynamic = SCENE2D_WORKING_COLOR_SPACE; __callArgument7; })) : Null<flighthq._internal.dom.WebGLTexture>);
     if ((cast _Runtime.strictEquals(glTexture, null) : Bool)) { return; }
-    straightAlpha = (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha;
+    straightAlpha = runtime.currentTextureStraightAlpha;
     (cast ensureGlQuadBatchShader(({ final __callArgument8:Dynamic = state; __callArgument8; })) : GlQuadBatchShader);
     u0 = (cast (cast texture : Texture2D).uvOffset : { var x:Float; }).x;
     v0 = (cast (cast texture : Texture2D).uvOffset : { var y:Float; }).y;
@@ -84,9 +84,9 @@ class GlSprite {
       (v0 = cast ((1.0 - v0) : Dynamic));
       (v1 = cast ((1.0 - v1) : Dynamic));
     }
-    instanceIndex = (cast runtime : GlRenderStateRuntime).quadBatchWriterCount;
+    instanceIndex = runtime.quadBatchWriterCount;
     base = (cast prepareGlQuadBatchWrite(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = glTexture; __callArgument13; }), (cast straightAlpha : Bool), (cast (cast texture : Texture2D).sampler : Dynamic), (cast renderProxy : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument14:Dynamic = materialRenderer; __callArgument14; }), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
-    data = (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData;
+    data = runtime.quadBatchWriterInstanceData;
     transform = (cast renderProxy : RenderProxy2D).transform2D;
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast base : Float), (cast transform.a : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (base + 1.0) : Float), (cast transform.b : Float));
@@ -103,7 +103,7 @@ class GlSprite {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (base + 12.0) : Float), (cast (cast renderProxy : RenderProxy2D).alpha : Float));
     packGlQuadBatchMaterialInstance(({ final __callArgument15:Dynamic = state; __callArgument15; }), (cast renderProxy : RenderProxy2D).materialData, (cast instanceIndex : Float));
     recordGlQuadBatchColorScaleBias(({ final __callArgument16:Dynamic = state; __callArgument16; }), (cast _Runtime.coalesce((cast renderProxy : RenderProxy2D).colorMatrix, function():Dynamic return cast (cast renderProxy : RenderProxy2D).colorScaleBias) : Dynamic), (cast instanceIndex : Float));
-    (cast runtime : GlRenderStateRuntime).quadBatchWriterCount++;
+    runtime.quadBatchWriterCount++;
   }
 
   public static final defaultGlSpriteRenderer:Scene2DRenderer = (cast { format: BatchFormat.Quad, createData: createSpriteRendererData, isDirty: isSpriteRendererDirty, submit: drawGlSprite });

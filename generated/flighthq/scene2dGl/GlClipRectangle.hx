@@ -23,7 +23,7 @@ class GlClipRectangle {
     stack = (cast GlClipRectangle.getScissorStack__glClipRectangle(({ final __callArgument1:Dynamic = state; __callArgument1; })) : Array<GlScissorRect>);
     _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
     previous = ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(stack, _Runtime.subtractNumbers(_Runtime.field(stack, 'length'), 1.0)) : Dynamic) : (cast null : Dynamic));
-    ((cast runtime : GlRenderStateRuntime).currentScissorRect = previous);
+    (runtime.currentScissorRect = cast (previous : Null<GlScissorRect>));
     flushGlQuadBatchWriter(({ final __callArgument2:Dynamic = state; __callArgument2; }));
     gl = (cast state : GlRenderState).gl;
     if ((cast _Runtime.strictEquals(previous, null) : Bool)) {
@@ -39,8 +39,8 @@ class GlClipRectangle {
     var next:GlScissorRect = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : GlRenderStateRuntime);
-    next = (cast GlClipRectangle.intersectScissorRect__glClipRectangle(({ final __callArgument4:Dynamic = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).currentScissorRect, function():Dynamic return cast null); __callArgument4; }), (cast GlClipRectangle.computeScissorRect__glClipRectangle(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = rect; __callArgument6; }), ({ final __callArgument7:Dynamic = transform; __callArgument7; })) : GlScissorRect)) : GlScissorRect);
-    ((cast runtime : GlRenderStateRuntime).currentScissorRect = next);
+    next = (cast GlClipRectangle.intersectScissorRect__glClipRectangle(({ final __callArgument4:Dynamic = _Runtime.coalesce(runtime.currentScissorRect, function():Dynamic return cast null); __callArgument4; }), (cast GlClipRectangle.computeScissorRect__glClipRectangle(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = rect; __callArgument6; }), ({ final __callArgument7:Dynamic = transform; __callArgument7; })) : GlScissorRect)) : GlScissorRect);
+    (runtime.currentScissorRect = cast (next : Null<GlScissorRect>));
     _Runtime.callProperty((cast GlClipRectangle.getScissorStack__glClipRectangle(({ final __callArgument10:Dynamic = state; __callArgument10; })) : Array<GlScissorRect>), 'push', cast ([next] : Array<Dynamic>));
     flushGlQuadBatchWriter(({ final __callArgument11:Dynamic = state; __callArgument11; }));
     gl = (cast state : GlRenderState).gl;
@@ -72,7 +72,7 @@ class GlClipRectangle {
     y2 = (((transform.b * rect.x) + (transform.d * (rect.y + rect.height))) + transform.ty);
     x3 = (((transform.a * (rect.x + rect.width)) + (transform.c * (rect.y + rect.height))) + transform.tx);
     y3 = (((transform.b * (rect.x + rect.width)) + (transform.d * (rect.y + rect.height))) + transform.ty);
-    viewport = (cast (cast getGlRenderStateRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : GlRenderStateRuntime) : GlRenderStateRuntime).renderTargetViewport;
+    viewport = (cast (cast getGlRenderStateRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : GlRenderStateRuntime) : { var renderTargetViewport:Null<GlViewportRect>; }).renderTargetViewport;
     viewportWidth = _Runtime.coalesce(({ final __structural13 = viewport; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { var width:Float; }).width; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'width'));
     viewportHeight = _Runtime.coalesce(({ final __structural14 = viewport; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { var height:Float; }).height; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'height'));
     minX = HxMath.max(0.0, HxMath.floor(HxMath.min(HxMath.min(HxMath.min(x0, x1), x2), x3)));
@@ -86,8 +86,8 @@ class GlClipRectangle {
   public static function getScissorStack__glClipRectangle(state:GlRenderState):Array<GlScissorRect> {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument17:Dynamic = state; __callArgument17; })) : GlRenderStateRuntime);
-    ({ final __nullishOwner18 = runtime; final __nullishValue19:Null<Array<GlScissorRect>> = cast (cast __nullishOwner18 : GlRenderStateRuntime).scissorStack; __nullishValue19 == null ? ((cast __nullishOwner18 : GlRenderStateRuntime).scissorStack = (cast cast ([] : Array<Dynamic>) : Null<Array<GlScissorRect>>)) : (cast __nullishValue19 : Null<Array<GlScissorRect>>); });
-    return cast (cast runtime : GlRenderStateRuntime).scissorStack;
+    ({ final __nullishOwner18 = runtime; final __nullishValue19:Null<Array<GlScissorRect>> = cast __nullishOwner18.scissorStack; __nullishValue19 == null ? (__nullishOwner18.scissorStack = (cast cast ([] : Array<Dynamic>) : Null<Array<GlScissorRect>>)) : (cast __nullishValue19 : Null<Array<GlScissorRect>>); });
+    return cast runtime.scissorStack;
     return cast null;
   }
 

@@ -33,6 +33,16 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#BitmapRegion',
     purpose: 'reviewed escape-free bitmap region',
   },
+  {
+    declarationFingerprint: 'sha256:a8e896f65206af608a3efc10cf9109d10714c30269d79b02c5077a81879c8d3b',
+    id: '@flighthq/types:interface#GlRenderStateRuntime',
+    purpose: 'reviewed escape-free WebGL render-state runtime',
+  },
+  {
+    declarationFingerprint: 'sha256:a2bc23bace382a83f246f14c86f03121db15a25a1f479edc706a6b00dfe0475d',
+    id: '@flighthq/types:interface#WgpuRenderStateRuntime',
+    purpose: 'reviewed escape-free WebGPU render-state runtime',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

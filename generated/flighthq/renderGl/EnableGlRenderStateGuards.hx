@@ -24,7 +24,7 @@ class EnableGlRenderStateGuards {
 
   public static function enableGlRenderStateGuards(state:GlRenderState):Void {
     ((cast (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime) : { var renderRootGuard:Null<RenderState->Renderable->Void>; }).renderRootGuard = (cast EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards));
-    ((cast (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime) : { var bindingCacheGuard:Null<GlRenderState->flighthq._internal.dom.WebGLProgram->Void>; }).bindingCacheGuard = (cast EnableGlRenderStateGuards.warnOnForeignGlBinding__enableGlRenderStateGuards));
+    ((cast (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime) : { var bindingCacheGuard:Null<GlRenderState->flighthq._internal.dom.WebGLProgram->Void>; }).bindingCacheGuard = cast (EnableGlRenderStateGuards.warnOnForeignGlBinding__enableGlRenderStateGuards : Null<GlRenderState->flighthq._internal.dom.WebGLProgram->Void>));
   }
 
   public static function warnOnForeignGlBinding__enableGlRenderStateGuards(state:GlRenderState, expectedProgram:flighthq._internal.dom.WebGLProgram):Void {

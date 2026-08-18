@@ -13,6 +13,6 @@ import flighthq.types.StrokeStyle;
 
 class EnableGlStrokePathTessellation {
   public static function enableGlStrokePathTessellation(state:GlRenderState):Void {
-    ((cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { var strokeTessellator:Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator = (cast tessellateStrokePath));
+    ((cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { var strokeTessellator:Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator = cast (tessellateStrokePath : Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>>));
   }
 }

@@ -304,7 +304,7 @@ class GlVelocity {
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, (cast program : GlVelocityProgram__glVelocity).locCorner, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 0.0, 0.0);
     ctx = (cast { state: state, field: field, width: _Runtime.field(target, 'width'), height: _Runtime.field(target, 'height'), pixelRatio: (cast state : GlRenderState).pixelRatio });
     GlVelocity.visitGlVelocity__glVelocity(({ final __callArgument13:Dynamic = ctx; __callArgument13; }), (cast root : Dynamic));
-    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), (cast runtime : GlRenderStateRuntime).currentFramebuffer);
+    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), runtime.currentFramebuffer);
     flighthq._internal.backend.WebGl2Backend.disableVertexAttribArray(gl, (cast program : GlVelocityProgram__glVelocity).locCorner);
   }
 

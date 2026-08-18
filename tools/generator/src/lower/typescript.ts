@@ -3624,7 +3624,17 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
       node.operatorToken.kind >= ts.SyntaxKind.FirstAssignment &&
       node.operatorToken.kind <= ts.SyntaxKind.LastAssignment;
     const left = lowerExpression(assignment ? unwrapAssignmentTarget(node.left) : node.left, context);
-    const right = lowerExpression(node.right, context);
+    const loweredRight = lowerExpression(node.right, context);
+    const right =
+      assignment && operator === '=' && left.kind === 'property' && left.typedStructBinding
+        ? adaptFunctionValueToType(
+            node.right,
+            loweredRight,
+            context.checker?.getTypeAtLocation(node.left),
+            context,
+            left.type ?? left.typedStructBinding.field.type,
+          )
+        : loweredRight;
     if (assignment) return { kind: 'assignment', left, operator, right };
     return {
       domRootBinding: operator === 'in' ? domRootBinding(node.right, context) : undefined,
@@ -3764,6 +3774,19 @@ function adaptDirectFunctionArgument(
   const expectedType = checker.getNonNullableType(
     checker.getContextualType(node) ?? checker.getTypeOfSymbolAtLocation(expectedParameter, node),
   );
+  return adaptFunctionValueToType(node, lowered, expectedType, context);
+}
+
+function adaptFunctionValueToType(
+  node: ts.Expression,
+  lowered: IrExpression,
+  rawExpectedType: ts.Type | undefined,
+  context: LoweringContext,
+  expectedIrType?: IrType,
+): IrExpression {
+  const checker = context.checker;
+  if (!checker || !rawExpectedType) return lowered;
+  const expectedType = checker.getNonNullableType(rawExpectedType);
   const expectedSignature = checker.getSignaturesOfType(expectedType, ts.SignatureKind.Call)[0];
   const actualSignature = checker.getSignaturesOfType(checker.getTypeAtLocation(node), ts.SignatureKind.Call)[0];
   if (!expectedSignature || !actualSignature) return lowered;
@@ -3772,6 +3795,12 @@ function adaptDirectFunctionArgument(
   if (actualParameters.length >= expectedParameters.length || actualParameters.some(signatureParameterIsRest)) {
     return lowered;
   }
+  const expectedIrSignature =
+    expectedIrType?.kind === 'function'
+      ? expectedIrType
+      : expectedIrType?.kind === 'nullable' && expectedIrType.inner.kind === 'function'
+        ? expectedIrType.inner
+        : undefined;
   const parameters: IrParameter[] = [];
   for (const parameter of expectedParameters) {
     const actualParameter = actualParameters[parameters.length];
@@ -3783,8 +3812,10 @@ function adaptDirectFunctionArgument(
     const sourceVisible = [parameterType, ...checkerTypeArguments(parameterType, checker)].some((candidate) =>
       sourceDefinedNamedType(candidate.aliasSymbol ?? candidate.getSymbol()),
     );
-    const type =
-      checkerType && (directArgumentTypeIsVisible(checkerType, context) || sourceVisible)
+    const expectedIrParameter = expectedIrSignature?.parameters[parameters.length];
+    const type = expectedIrParameter
+      ? expectedIrParameter
+      : checkerType && (directArgumentTypeIsVisible(checkerType, context) || sourceVisible)
         ? checkerType
         : declaration &&
             ts.isParameter(declaration) &&
@@ -3800,7 +3831,9 @@ function adaptDirectFunctionArgument(
       type,
     });
   }
-  const returns = lowerCheckerType(checker.getReturnTypeOfSignature(actualSignature), node, context, new Set());
+  const returns =
+    expectedIrSignature?.returns ??
+    lowerCheckerType(checker.getReturnTypeOfSignature(actualSignature), node, context, new Set());
   if (!returns) return lowered;
   return {
     body: [],

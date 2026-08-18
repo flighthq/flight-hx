@@ -204,11 +204,11 @@ class GlCompressedTexture {
   }
 
   public static function registerGlCompressedTextureDecoder(state:GlRenderState, decode:Null<GlCompressedTextureDecoder>):Void {
-    ((cast (cast getGlRenderStateRuntime(({ final __callArgument43:Dynamic = state; __callArgument43; })) : GlRenderStateRuntime) : { @:optional var compressedTextureDecoder:Null<GlCompressedTextureDecoder>; }).compressedTextureDecoder = decode);
+    ((cast (cast getGlRenderStateRuntime(({ final __callArgument43:Dynamic = state; __callArgument43; })) : GlRenderStateRuntime) : { @:optional var compressedTextureDecoder:Null<GlCompressedTextureDecoder>; }).compressedTextureDecoder = cast (decode : Null<GlCompressedTextureDecoder>));
   }
 
   public static function registerGlCompressedTextureUpload(state:GlRenderState, ?uploader:Dynamic):Void {
-    ((cast (cast getGlRenderStateRuntime(({ final __callArgument44:Dynamic = state; __callArgument44; })) : GlRenderStateRuntime) : { @:optional var compressedTextureUpload:Null<GlCompressedTextureUploader>; }).compressedTextureUpload = ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast GlCompressedTexture.uploadGlCompressedImage__glCompressedTexture : Dynamic)));
+    ((cast (cast getGlRenderStateRuntime(({ final __callArgument44:Dynamic = state; __callArgument44; })) : GlRenderStateRuntime) : { @:optional var compressedTextureUpload:Null<GlCompressedTextureUploader>; }).compressedTextureUpload = cast (((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast GlCompressedTexture.uploadGlCompressedImage__glCompressedTexture : Dynamic)) : Null<GlCompressedTextureUploader>));
   }
 
   public static function uploadGlCompressedTextureContainer(gl:flighthq._internal.dom.WebGL2RenderingContext, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {

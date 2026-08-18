@@ -56,12 +56,12 @@ class SpecularGlossinessPbrWgpuMeshMaterialRenderer {
     var binding:WgpuMaterialBinding = cast _Runtime.UNDEFINED;
     var out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
+    pass = stateRuntime.renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     specGloss = (cast material : Null<SpecularGlossinessPbrMaterial>);
     standard = ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast (cast SpecularGlossinessPbrWgpuMeshMaterialRenderer.convertSpecularGlossinessToStandard__specularGlossinessPbrWgpuMeshMaterialRenderer(({ final __callArgument1:Dynamic = specGloss; __callArgument1; })) : StandardPbrMaterialProperties) : Dynamic) : (cast null : Dynamic));
     key = (cast buildWgpuPbrStandardDefineKey(({ final __callArgument2:Dynamic = standard; __callArgument2; }), (cast specGloss : Dynamic)) : WgpuPbrDefineKey);
-    format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    format = _Runtime.coalesce(stateRuntime.currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     pipeline = (cast ensureWgpuPbrPipeline(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = key; __callArgument4; }), (cast format : String)) : WgpuPbrPipeline);
     writeWgpuFrameUniform(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = camera; __callArgument6; }), ({ final __callArgument7:Dynamic = lights; __callArgument7; }));
     binding = (cast ensureWgpuPbrMaterialBindGroup(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = pipeline; __callArgument9; }), ({ final __callArgument10:Dynamic = _Runtime.coalesce(specGloss, function():Dynamic return cast SpecularGlossinessPbrWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__specularGlossinessPbrWgpuMeshMaterialRenderer); __callArgument10; }), ({ final __callArgument11:Dynamic = standard; __callArgument11; })) : WgpuMaterialBinding);

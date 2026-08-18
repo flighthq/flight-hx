@@ -46,8 +46,8 @@ class WgpuShader {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var stencilMode:StencilMode__wgpuShader = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    stencilMode = ((cast (cast runtime : WgpuRenderStateRuntime).maskWriteMode : Bool) ? (cast 'maskwrite' : Dynamic) : (cast ((cast ((cast (cast runtime : WgpuRenderStateRuntime).currentMaskDepth : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'masked' : Dynamic) : (cast 'normal' : Dynamic)) : Dynamic));
-    return cast (cast getWgpuPipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast runtime : WgpuRenderStateRuntime).currentBlendMode, (cast stencilMode : Dynamic)) : flighthq._internal.dom.GPURenderPipeline);
+    stencilMode = ((cast runtime.maskWriteMode : Bool) ? (cast 'maskwrite' : Dynamic) : (cast ((cast ((cast runtime.currentMaskDepth : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'masked' : Dynamic) : (cast 'normal' : Dynamic)) : Dynamic));
+    return cast (cast getWgpuPipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), runtime.currentBlendMode, (cast stencilMode : Dynamic)) : flighthq._internal.dom.GPURenderPipeline);
     return cast null;
   }
 
@@ -84,9 +84,9 @@ class WgpuShader {
     var layout:flighthq._internal.dom.GPUPipelineLayout = cast _Runtime.UNDEFINED;
     var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
-    format = _Runtime.coalesce((cast runtime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    format = _Runtime.coalesce(runtime.currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     key = '' + Std.string(_Runtime.coalesce(blendMode, function():Dynamic return cast 'null')) + '-' + Std.string(stencilMode) + '-' + Std.string(format) + '';
-    cached = ((cast (cast runtime : WgpuRenderStateRuntime).pipelineCache : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).get(key));
+    cached = ((cast runtime.pipelineCache : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).get(key));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     blend = (cast getWgpuBlendState(({ final __callArgument3:Dynamic = blendMode; __callArgument3; })) : flighthq._internal.dom.GPUBlendState);
     isMaskWrite = _Runtime.strictEquals(stencilMode, 'maskwrite');
@@ -95,9 +95,9 @@ class WgpuShader {
     device = _Runtime.field(__destructure0, 'device');
     shaderSrc = ((cast isMaskWrite : Bool) ? (cast WgpuShader.MASK_FRAGMENT_SRC__wgpuShader : Dynamic) : (cast WgpuShader.BITMAP_SHADER_SRC__wgpuShader : Dynamic));
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: shaderSrc }] : Array<Dynamic>));
-    layout = (cast createWgpuPipelineLayout(({ final __callArgument4:Dynamic = device; __callArgument4; }), (cast runtime : WgpuRenderStateRuntime).uniformBindGroupLayout, (cast runtime : WgpuRenderStateRuntime).textureBindGroupLayout) : flighthq._internal.dom.GPUPipelineLayout);
+    layout = (cast createWgpuPipelineLayout(({ final __callArgument4:Dynamic = device; __callArgument4; }), runtime.uniformBindGroupLayout, runtime.textureBindGroupLayout) : flighthq._internal.dom.GPUPipelineLayout);
     pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: ((cast isMaskWrite : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast blend : Dynamic)), writeMask: ((cast isMaskWrite : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal.backend.WebGpuConstantsBackend.value('GPUColorWrite', 'ALL') : Dynamic)) }] : Array<Dynamic>) }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: stencilFace, stencilBack: stencilFace, stencilReadMask: 255.0, stencilWriteMask: ((cast isMaskWrite : Bool) ? (cast 255.0 : Dynamic) : (cast 0.0 : Dynamic)) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
-    ((cast (cast runtime : WgpuRenderStateRuntime).pipelineCache : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).set(key, (cast pipeline)));
+    ((cast runtime.pipelineCache : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).set(key, (cast pipeline)));
     return cast pipeline;
     return cast null;
   }
@@ -130,19 +130,19 @@ class WgpuShader {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var byteOffset:Float = cast _Runtime.UNDEFINED;
     var floatBase:Float = cast _Runtime.UNDEFINED;
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure1:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var uniformData:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var uniformDataU32:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
     var matrixArray:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var viewport:{ var width:Float; var height:Float; } = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : WgpuRenderStateRuntime);
-    byteOffset = (cast runtime : WgpuRenderStateRuntime).uniformOffset;
+    byteOffset = runtime.uniformOffset;
     floatBase = (_Runtime.toInt32(byteOffset) >> 2);
     __destructure1 = runtime;
-    uniformData = _Runtime.field(__destructure1, 'uniformData');
-    uniformDataU32 = _Runtime.field(__destructure1, 'uniformDataU32');
-    matrixArray = _Runtime.field(__destructure1, 'matrixArray');
-    viewport = _Runtime.coalesce((cast runtime : WgpuRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : WgpuRenderState).canvas);
+    uniformData = __destructure1.uniformData;
+    uniformDataU32 = __destructure1.uniformDataU32;
+    matrixArray = __destructure1.matrixArray;
+    viewport = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : WgpuRenderState).canvas);
     setWgpuMatrixFromTransform(({ final __callArgument9:Dynamic = matrixArray; __callArgument9; }), ({ final __callArgument10:Dynamic = (cast renderProxy : { var alpha:Float; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }).transform2D; __callArgument10; }), ({ final __callArgument11:Dynamic = viewport; __callArgument11; }));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniformData : flighthq._internal._Float32Array), (cast (floatBase + 0.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast matrixArray : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniformData : flighthq._internal._Float32Array), (cast (floatBase + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast matrixArray : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float));
@@ -176,7 +176,7 @@ class WgpuShader {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniformData : flighthq._internal._Float32Array), (cast (floatBase + 29.0) : Float), (cast v0 : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniformData : flighthq._internal._Float32Array), (cast (floatBase + 30.0) : Float), (cast u1 : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast uniformData : flighthq._internal._Float32Array), (cast (floatBase + 31.0) : Float), (cast v1 : Float));
-    ((cast runtime : WgpuRenderStateRuntime).uniformOffset += (cast runtime : WgpuRenderStateRuntime).uniformStride);
+    (runtime.uniformOffset += runtime.uniformStride);
     return cast byteOffset;
     return cast null;
   }

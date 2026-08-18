@@ -35,10 +35,10 @@ class DepthWgpuMeshMaterialRenderer {
     var pipeline:WgpuDebugPipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
+    pass = stateRuntime.renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     depth = (cast material : Null<DepthMaterial>);
-    format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    format = _Runtime.coalesce(stateRuntime.currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     pipeline = (cast ensureWgpuDebugPipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = { hasNormalMap: false, mode: 'depth' }; __callArgument2; }), (cast format : String), (cast _Runtime.coalesce(({ final __structural3 = depth; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var doubleSided:Bool; }).doubleSided; }), function():Dynamic return cast false) : Bool)) : WgpuDebugPipeline);
     writeWgpuFrameUniform(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = camera; __callArgument5; }), ({ final __callArgument6:Dynamic = _lights; __callArgument6; }));
     if ((cast _Runtime.strictEquals(depth, null) : Bool)) {

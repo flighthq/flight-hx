@@ -78,15 +78,15 @@ class GlBitmapText {
       if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument5:Dynamic = texture; __callArgument5; })) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast page : BitmapTextPage).instanceCount, 0.0) : Bool)) : Bool)) { continue; }
       var glTexture:Null<flighthq._internal.dom.WebGLTexture> = (cast resolveGlTexture(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = texture; __callArgument7; }), (cast true : Bool), ({ final __callArgument8:Dynamic = SCENE2D_WORKING_COLOR_SPACE; __callArgument8; })) : Null<flighthq._internal.dom.WebGLTexture>);
       if ((cast _Runtime.strictEquals(glTexture, null) : Bool)) { continue; }
-      var straightAlpha:Bool = (cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha;
+      var straightAlpha:Bool = runtime.currentTextureStraightAlpha;
       (cast ensureGlQuadBatchShader(({ final __callArgument9:Dynamic = state; __callArgument9; })) : GlQuadBatchShader);
       var base:Float = (cast prepareGlQuadBatchWrite(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = glTexture; __callArgument11; }), (cast straightAlpha : Bool), (cast (cast texture : Texture2D).sampler : Dynamic), (cast node : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument12:Dynamic = materialRenderer; __callArgument12; }), (cast (cast page : BitmapTextPage).instanceCount : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
-      var startCount:Float = (cast runtime : GlRenderStateRuntime).quadBatchWriterCount;
+      var startCount:Float = runtime.quadBatchWriterCount;
       var regions:Array<TextureAtlasRegion> = atlas.regions;
       var numRegions:Float = _Runtime.field(regions, 'length');
       var iw:Float = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(({ final __callArgument13:Dynamic = texture; __callArgument13; })) : Float)));
       var ih:Float = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(({ final __callArgument14:Dynamic = texture; __callArgument14; })) : Float)));
-      var instanceData:flighthq._internal._Float32Array = (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData;
+      var instanceData:flighthq._internal._Float32Array = runtime.quadBatchWriterInstanceData;
       var ids:flighthq._internal._UInt16Array = (cast page : BitmapTextPage).ids;
       var transforms:flighthq._internal._Float32Array = (cast page : BitmapTextPage).transforms;
       var writeBase:Float = base;
@@ -120,7 +120,7 @@ class GlBitmapText {
           i++;
         }
       }
-      ((cast runtime : GlRenderStateRuntime).quadBatchWriterCount += drawCount);
+      (runtime.quadBatchWriterCount += drawCount);
     }
   }
 

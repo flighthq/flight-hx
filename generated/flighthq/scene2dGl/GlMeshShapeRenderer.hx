@@ -48,7 +48,7 @@ class GlMeshShapeRenderer {
     __destructure0 = (cast source : Shape).data;
     commands = _Runtime.field(__destructure0, 'commands');
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) : Bool)) { return cast false; }
-    strokePathTessellator = (cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : GlRenderStateRuntime).strokeTessellator;
+    strokePathTessellator = (cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { var strokeTessellator:Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator;
     regions = (cast GlMeshShapeRenderer.resolveGlShapeMeshRegions__glMeshShapeRenderer(({ final __callArgument1:Dynamic = commands; __callArgument1; }), (cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool)) : Null<Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>>>);
     if ((cast ((cast _Runtime.strictEquals(regions, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(regions, 'length'), 0.0) : Bool)) : Bool)) { return cast false; }
     version = (cast getNodeLocalContentRevision((cast source : Dynamic)) : Float);
@@ -80,7 +80,7 @@ class GlMeshShapeRenderer {
 
   public static final defaultGlMeshShapeRenderer:Scene2DRenderer = (cast { format: BatchFormat.Quad, createData: createGlShapeData, destroyData: destroyGlShapeData, submit: function(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     if ((cast (cast drawGlMeshShape(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = renderProxy; __callArgument6; })) : Bool) : Bool)) { return; }
-    _Runtime.callOptionalValue((cast (cast getGlRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : GlRenderStateRuntime) : GlRenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
+    _Runtime.callOptionalValue((cast (cast getGlRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : GlRenderStateRuntime) : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
   } });
 
   public static function resolveGlShapeMeshRegions__glMeshShapeRenderer(commands:Array<ShapeCommandToken>, strokePathTessellatorEnabled:Bool):Null<Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>>> {

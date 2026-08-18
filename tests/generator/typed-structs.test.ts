@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_603,
+      newAuditOnly: 1_601,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(403);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(405);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,12 +106,22 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_603);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_601);
     expect(newlyDiscovered.filter((candidate) => candidate.emission === 'direct')).toEqual([
       expect.objectContaining({
         name: 'BitmapRegion',
         packageName: '@flighthq/types',
         purpose: 'reviewed escape-free bitmap region',
+      }),
+      expect.objectContaining({
+        name: 'GlRenderStateRuntime',
+        packageName: '@flighthq/types',
+        purpose: 'reviewed escape-free WebGL render-state runtime',
+      }),
+      expect.objectContaining({
+        name: 'WgpuRenderStateRuntime',
+        packageName: '@flighthq/types',
+        purpose: 'reviewed escape-free WebGPU render-state runtime',
       }),
     ]);
     expect(reviewedTypedStructDirectAdditions).toEqual([
@@ -119,6 +129,16 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:6de1c57a64f9d839dba96b69bcdd8cae0ca18580cc13f425ae6cb9ec9f68c4b8',
         id: '@flighthq/types:interface#BitmapRegion',
         purpose: 'reviewed escape-free bitmap region',
+      },
+      {
+        declarationFingerprint: 'sha256:a8e896f65206af608a3efc10cf9109d10714c30269d79b02c5077a81879c8d3b',
+        id: '@flighthq/types:interface#GlRenderStateRuntime',
+        purpose: 'reviewed escape-free WebGL render-state runtime',
+      },
+      {
+        declarationFingerprint: 'sha256:a2bc23bace382a83f246f14c86f03121db15a25a1f479edc706a6b00dfe0475d',
+        id: '@flighthq/types:interface#WgpuRenderStateRuntime',
+        purpose: 'reviewed escape-free WebGPU render-state runtime',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -456,6 +476,8 @@ describe('typed struct analysis', () => {
     const menuItemTemplate = report.candidates.find((candidate) => candidate.name === 'MenuItemTemplate');
     const bitmap = report.candidates.find((candidate) => candidate.name === 'Bitmap');
     const bitmapRegion = report.candidates.find((candidate) => candidate.name === 'BitmapRegion');
+    const glRenderStateRuntime = report.candidates.find((candidate) => candidate.name === 'GlRenderStateRuntime');
+    const wgpuRenderStateRuntime = report.candidates.find((candidate) => candidate.name === 'WgpuRenderStateRuntime');
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -496,22 +518,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_603,
+      auditOnlySchemas: 1_601,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 12_490,
-      directSchemas: 401,
+      directAccesses: 13_764,
+      directSchemas: 403,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 18_176,
+      pendingAccesses: 16_902,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_603,
+      newAuditOnly: 1_601,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -539,7 +561,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(12_490);
+    expect(report.summary.directAccesses).toBe(13_764);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -586,6 +608,24 @@ describe('typed struct analysis', () => {
       purpose: 'reviewed escape-free bitmap region',
       reasons: [],
     });
+    expect(glRenderStateRuntime).toMatchObject({
+      declarationFingerprint: 'sha256:a8e896f65206af608a3efc10cf9109d10714c30269d79b02c5077a81879c8d3b',
+      eligible: true,
+      emission: { directAccesses: 544, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+      escapes: [],
+      migration: { baselineId: null, status: 'new' },
+      purpose: 'reviewed escape-free WebGL render-state runtime',
+      reasons: [],
+    });
+    expect(wgpuRenderStateRuntime).toMatchObject({
+      declarationFingerprint: 'sha256:a2bc23bace382a83f246f14c86f03121db15a25a1f479edc706a6b00dfe0475d',
+      eligible: true,
+      emission: { directAccesses: 730, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+      escapes: [],
+      migration: { baselineId: null, status: 'new' },
+      purpose: 'reviewed escape-free WebGPU render-state runtime',
+      reasons: [],
+    });
     expect(classAuditById.get('@flighthq/types:interface#BitmapRegion')?.migration).toEqual({
       mechanicallyCompatible: true,
       normalizationReasons: [],
@@ -595,8 +635,31 @@ describe('typed struct analysis', () => {
       blockerReasons: [],
       closed: true,
     });
+    for (const renderStateRuntimeId of [
+      '@flighthq/types:interface#GlRenderStateRuntime',
+      '@flighthq/types:interface#WgpuRenderStateRuntime',
+    ]) {
+      expect(classAuditById.get(renderStateRuntimeId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer'],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.has(renderStateRuntimeId)).toBe(false);
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
+    const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
+    expect(glRenderState).toContain(
+      '(runtime.currentProgram = cast (null : Null<flighthq._internal.dom.WebGLProgram>));',
+    );
+    expect(glRenderState).not.toMatch(/\(cast (?:runtime|sourceRuntime|targetRuntime) : GlRenderStateRuntime\)\./u);
+    expect(glRenderState).not.toMatch(/_Runtime\.field\((?:runtime|sourceRuntime|targetRuntime),/u);
+    const wgpuRenderState = readFileSync('generated/flighthq/renderWgpu/WgpuRenderState.hx', 'utf8');
+    expect(wgpuRenderState).toContain(
+      '(runtime.uniformBuffer = cast (uniformBuffer : flighthq._internal.dom.GPUBuffer));',
+    );
+    expect(wgpuRenderState).not.toMatch(/\(cast (?:runtime|sourceRuntime|targetRuntime) : WgpuRenderStateRuntime\)\./u);
+    expect(wgpuRenderState).not.toMatch(/_Runtime\.field\((?:runtime|sourceRuntime|targetRuntime),/u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -667,6 +730,38 @@ describe('typed struct analysis', () => {
     expect(output).toContain('targetFrameRate: 60.0');
     expect(output).not.toContain("_Runtime.field(options, 'maxDeltaTime')");
     expect(output).not.toContain('maxDeltaTime: _Runtime.UNDEFINED');
+  });
+
+  it('adapts direct function-field writes when TypeScript ignores trailing callback parameters', () => {
+    const result = lowerFixture(
+      `
+        export interface Hooks {
+          callback?: ((value: number, label: string) => void) | null;
+        }
+        function warn(): void {}
+        export function install(hooks: Hooks): void {
+          hooks.callback = warn;
+        }
+      `,
+      {
+        emission: 'direct',
+        name: 'Hooks',
+        packageName: '@flighthq/types',
+        purpose: 'fixture callback assignment',
+        source: 'upstream/packages/types/src/Hooks.ts',
+      },
+    );
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      imports: [],
+      name: 'Hooks',
+      packageName: '@flighthq/types',
+    });
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(output).toContain(
+      'hooks.callback = cast (function(__unused0:Float, __unused1:String):Void { warn(); } : Null<Float->String->Void>)',
+    );
   });
 
   it('lowers defensive nullish assignment on required primitive fields portably', () => {

@@ -101,7 +101,7 @@ class GlPbrExtensionRegistry {
       }
     }
     sceneColor = (cast (cast getGlScene3DRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : GlScene3DRuntime) : GlScene3DRuntime).pbrTransmissionSceneColor;
-    activeTarget = (cast (cast getGlRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : GlRenderStateRuntime) : GlRenderStateRuntime).currentRenderTarget;
+    activeTarget = (cast (cast getGlRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : GlRenderStateRuntime) : { @:optional var currentRenderTarget:Null<GlRenderTarget>; }).currentRenderTarget;
     if ((cast ((cast ((cast !_Runtime.strictEquals(transmissionSceneColorKind, null) : Bool) && (cast !_Runtime.strictEquals(sceneColor, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.callOptionalProperty(({ final __structural12 = activeTarget; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { var textures:Array<flighthq._internal.dom.WebGLTexture>; }).textures; }), 'includes', cast ([(cast sceneColor : GlPbrTransmissionSceneColor).texture] : Array<Dynamic>)), true) : Bool)) : Bool)) {
       _Runtime.callProperty(issues, 'push', cast ([{ code: 'framebuffer-feedback', kind: transmissionSceneColorKind }] : Array<Dynamic>));
     }

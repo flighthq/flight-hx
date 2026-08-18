@@ -18001,11 +18001,11 @@
       {
         "byReason": {
           "source-any": 4,
-          "standard-toolkit-boundary": 66
+          "standard-toolkit-boundary": 67
         },
         "module": "flighthq.renderGl.GlDraw",
         "source": "upstream/packages/render-gl/src/glDraw.ts",
-        "total": 70
+        "total": 71
       },
       {
         "byReason": {
@@ -18087,12 +18087,12 @@
         "byReason": {
           "external-toolkit-boundary": 1,
           "source-unknown": 4,
-          "standard-toolkit-boundary": 46,
+          "standard-toolkit-boundary": 47,
           "unclassified": 2
         },
         "module": "flighthq.renderGl.GlRenderState",
         "source": "upstream/packages/render-gl/src/glRenderState.ts",
-        "total": 53
+        "total": 54
       },
       {
         "byReason": {
@@ -18256,11 +18256,11 @@
         "byReason": {
           "external-toolkit-boundary": 29,
           "source-undefined": 12,
-          "standard-toolkit-boundary": 24
+          "standard-toolkit-boundary": 26
         },
         "module": "flighthq.renderWgpu.WgpuDraw",
         "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts",
-        "total": 65
+        "total": 67
       },
       {
         "byReason": {
@@ -18325,12 +18325,12 @@
           "source-any": 6,
           "source-undefined": 6,
           "source-unknown": 4,
-          "standard-toolkit-boundary": 33,
+          "standard-toolkit-boundary": 34,
           "unclassified": 2
         },
         "module": "flighthq.renderWgpu.WgpuRenderState",
         "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-        "total": 68
+        "total": 69
       },
       {
         "byReason": {
@@ -19354,11 +19354,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 13
+          "standard-toolkit-boundary": 15
         },
         "module": "flighthq.scene2dWgpu.WgpuCache",
         "source": "upstream/packages/scene2d-wgpu/src/wgpuCache.ts",
-        "total": 13
+        "total": 15
       },
       {
         "byReason": {
@@ -22728,12 +22728,12 @@
         "source-null": 74,
         "source-undefined": 264,
         "source-unknown": 3797,
-        "standard-toolkit-boundary": 17920,
+        "standard-toolkit-boundary": 17927,
         "unclassified": 365
       },
       "checkerKnownUnrepresentable": 0,
       "modules": 1116,
-      "total": 24144
+      "total": 24151
     }
   }
 }

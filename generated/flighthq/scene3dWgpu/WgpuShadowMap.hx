@@ -88,7 +88,7 @@ class WgpuShadowMap {
     if ((cast !_Runtime.strictEquals((cast sceneRuntime : WgpuScene3DRuntime).shadow, null) : Bool)) { ((cast (cast sceneRuntime : WgpuScene3DRuntime).shadow : WgpuScene3DShadow).enabled = false); }
     if ((cast ((cast _Runtime.strictEquals(directionalLight, null) : Bool) || (cast !(cast _Runtime.field(directionalLight, 'castsShadow') : Bool) : Bool)) : Bool)) { return; }
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
-    encoder = (cast runtime : WgpuRenderStateRuntime).commandEncoder;
+    encoder = runtime.commandEncoder;
     if ((cast _Runtime.strictEquals(encoder, null) : Bool)) { return; }
     if ((cast !_Runtime.strictEquals((cast shadowCamera.projection : { var kind:String; }).kind, 'orthographic') : Bool)) {
       _Runtime.throwValue(_Runtime.error('drawWgpuScene3DShadowMap requires an orthographic shadow camera'));

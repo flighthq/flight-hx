@@ -22,7 +22,7 @@ class GlReadback {
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     readFbo = _Runtime.coalesce(_Runtime.field(target, 'resolveFramebuffer'), function():Dynamic return cast _Runtime.field(target, 'framebuffer'));
-    prevFbo = (cast runtime : GlRenderStateRuntime).currentFramebuffer;
+    prevFbo = runtime.currentFramebuffer;
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'READ_FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER), readFbo);
     status = flighthq._internal.backend.WebGl2Backend.checkFramebufferStatus(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'READ_FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.READ_FRAMEBUFFER));
     if ((cast !_Runtime.strictEquals(status, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_COMPLETE', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_COMPLETE)) : Bool)) {

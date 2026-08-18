@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1603 |
-| Direct schemas | 401 |
+| Audit-only schemas | 1601 |
+| Direct schemas | 403 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 18176 |
-| Directly emitted accesses | 12490 |
+| Pending accesses | 16902 |
+| Directly emitted accesses | 13764 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1603 |
+| Newly discovered, audit-only | 1601 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -623,7 +623,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#GlRenderEffectRunner` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#GlRenderOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 9 | 0 | 0 | 9 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 272 | 7 | 4 | 283 | 0 | 0 | 6 | yes | — |
-| `@flighthq/types:interface#GlRenderStateRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 92 | 292 | 242 | 10 | 544 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free WebGL render-state runtime | 92 | 292 | 242 | 10 | 0 | 544 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderStats` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 18 | 276 | 27 | 0 | 303 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTargetPool` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
@@ -2004,7 +2004,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#WgpuRenderEffectRunner` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#WgpuRenderOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 277 | 8 | 4 | 289 | 0 | 0 | 6 | yes | — |
-| `@flighthq/types:interface#WgpuRenderStateRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 100 | 404 | 318 | 8 | 730 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free WebGPU render-state runtime | 100 | 404 | 318 | 8 | 0 | 730 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderStateSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderStats` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 136 | 16 | 0 | 152 | 0 | 0 | 0 | yes | — |

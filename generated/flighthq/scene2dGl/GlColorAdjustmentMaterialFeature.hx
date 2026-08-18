@@ -32,8 +32,8 @@ class GlColorAdjustmentMaterialFeature {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     enableColorAdjustments(({ final __callArgument0:Dynamic = state; __callArgument0; }));
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime);
-    ((cast runtime : GlRenderStateRuntime).glColorAdjustmentMaterialFeature = GlColorAdjustmentMaterialFeature.glColorAdjustmentMaterialFeature__glColorAdjustmentMaterialFeature);
-    if ((cast _Runtime.strictEquals((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasMode = GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature); }
+    (runtime.glColorAdjustmentMaterialFeature = cast (GlColorAdjustmentMaterialFeature.glColorAdjustmentMaterialFeature__glColorAdjustmentMaterialFeature : Null<flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature>));
+    if ((cast _Runtime.strictEquals(runtime.quadBatchWriterColorScaleBiasMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (runtime.quadBatchWriterColorScaleBiasMode = cast (GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature : Null<Float>)); }
   }
 
   public static final COLOR_SCALE_BIAS_FLOATS__glColorAdjustmentMaterialFeature:Float = 8.0;
@@ -94,7 +94,7 @@ class GlColorAdjustmentMaterialFeature {
     setGlQuadBatchWorldAndTexture(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast shader : GlColorScaleBiasInstancedShader).locWorldMatrix, (cast shader : GlColorScaleBiasInstancedShader).locTexture, ({ final __callArgument19:Dynamic = (cast shader : GlColorScaleBiasInstancedShader).locStraightTextureAlpha; __callArgument19; }));
     bindGlQuadBatchBaseAttributes(({ final __callArgument20:Dynamic = state; __callArgument20; }), (cast (cast shader : GlColorScaleBiasInstancedShader).locCorner : Float));
     gl = (cast state : GlRenderState).gl;
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer);
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.quadBatchWriterColorScaleBiasBuffer);
     {
       var attribute:Float = 0.0;
       while ((cast ((cast attribute : Float) < (cast 5.0 : Float)) : Bool)) {
@@ -117,7 +117,7 @@ class GlColorAdjustmentMaterialFeature {
     setGlQuadBatchWorldAndTexture(({ final __callArgument24:Dynamic = state; __callArgument24; }), (cast shader : GlColorScaleBiasInstancedShader).locWorldMatrix, (cast shader : GlColorScaleBiasInstancedShader).locTexture, ({ final __callArgument25:Dynamic = (cast shader : GlColorScaleBiasInstancedShader).locStraightTextureAlpha; __callArgument25; }));
     bindGlQuadBatchBaseAttributes(({ final __callArgument26:Dynamic = state; __callArgument26; }), (cast (cast shader : GlColorScaleBiasInstancedShader).locCorner : Float));
     gl = (cast state : GlRenderState).gl;
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer);
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.quadBatchWriterColorScaleBiasBuffer);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 7.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 7.0, 4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_STRIDE__glColorAdjustmentMaterialFeature, 0.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 7.0, 1.0);
@@ -136,7 +136,7 @@ class GlColorAdjustmentMaterialFeature {
     setGlQuadBatchWorldAndTexture(({ final __callArgument30:Dynamic = state; __callArgument30; }), (cast shader : GlColorScaleBiasInstancedShader).locWorldMatrix, (cast shader : GlColorScaleBiasInstancedShader).locTexture, ({ final __callArgument31:Dynamic = (cast shader : GlColorScaleBiasInstancedShader).locStraightTextureAlpha; __callArgument31; }));
     bindGlQuadBatchBaseAttributes(({ final __callArgument32:Dynamic = state; __callArgument32; }), (cast (cast shader : GlColorScaleBiasInstancedShader).locCorner : Float));
     gl = (cast state : GlRenderState).gl;
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer);
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.quadBatchWriterColorScaleBiasBuffer);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 7.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 7.0, 4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), true, 4.0, 0.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 7.0, 1.0);
@@ -147,11 +147,11 @@ class GlColorAdjustmentMaterialFeature {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument33:Dynamic = state; __callArgument33; })) : GlRenderStateRuntime);
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).colorScaleBiasInstancedShader)) { return cast (cast runtime : GlRenderStateRuntime).colorScaleBiasInstancedShader; }
+    if (_Runtime.truthy(runtime.colorScaleBiasInstancedShader)) { return cast runtime.colorScaleBiasInstancedShader; }
     gl = (cast state : GlRenderState).gl;
     program = (cast createGlProgram(({ final __callArgument34:Dynamic = gl; __callArgument34; }), (cast GlColorAdjustmentMaterialFeature.CT_INSTANCED_VS__glColorAdjustmentMaterialFeature : String), (cast GlColorAdjustmentMaterialFeature.CT_INSTANCED_FS__glColorAdjustmentMaterialFeature : String), (cast 'Sprite-batch color adjustment (per-instance)' : String)) : flighthq._internal.dom.WebGLProgram);
-    ((cast runtime : GlRenderStateRuntime).colorScaleBiasInstancedShader = { program: program, locCorner: 0.0, locWorldMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_world'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture'), locStraightTextureAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_straightTextureAlpha') });
-    return cast (cast runtime : GlRenderStateRuntime).colorScaleBiasInstancedShader;
+    (runtime.colorScaleBiasInstancedShader = cast ({ program: program, locCorner: 0.0, locWorldMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_world'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture'), locStraightTextureAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_straightTextureAlpha') } : Null<GlColorScaleBiasInstancedShader>));
+    return cast runtime.colorScaleBiasInstancedShader;
     return cast null;
   }
 
@@ -160,11 +160,11 @@ class GlColorAdjustmentMaterialFeature {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument35:Dynamic = state; __callArgument35; })) : GlRenderStateRuntime);
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).colorMatrixInstancedShader)) { return cast (cast runtime : GlRenderStateRuntime).colorMatrixInstancedShader; }
+    if (_Runtime.truthy(runtime.colorMatrixInstancedShader)) { return cast runtime.colorMatrixInstancedShader; }
     gl = (cast state : GlRenderState).gl;
     program = (cast createGlProgram(({ final __callArgument36:Dynamic = gl; __callArgument36; }), (cast GlColorAdjustmentMaterialFeature.CT_MATRIX_INSTANCED_VS__glColorAdjustmentMaterialFeature : String), (cast GlColorAdjustmentMaterialFeature.CT_MATRIX_INSTANCED_FS__glColorAdjustmentMaterialFeature : String), (cast 'Sprite-batch color matrix' : String)) : flighthq._internal.dom.WebGLProgram);
-    ((cast runtime : GlRenderStateRuntime).colorMatrixInstancedShader = { program: program, locCorner: 0.0, locWorldMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_world'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture'), locStraightTextureAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_straightTextureAlpha') });
-    return cast (cast runtime : GlRenderStateRuntime).colorMatrixInstancedShader;
+    (runtime.colorMatrixInstancedShader = cast ({ program: program, locCorner: 0.0, locWorldMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_world'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture'), locStraightTextureAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_straightTextureAlpha') } : Null<GlColorScaleBiasInstancedShader>));
+    return cast runtime.colorMatrixInstancedShader;
     return cast null;
   }
 
@@ -173,11 +173,11 @@ class GlColorAdjustmentMaterialFeature {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument37:Dynamic = state; __callArgument37; })) : GlRenderStateRuntime);
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).colorTintInstancedShader)) { return cast (cast runtime : GlRenderStateRuntime).colorTintInstancedShader; }
+    if (_Runtime.truthy(runtime.colorTintInstancedShader)) { return cast runtime.colorTintInstancedShader; }
     gl = (cast state : GlRenderState).gl;
     program = (cast createGlProgram(({ final __callArgument38:Dynamic = gl; __callArgument38; }), (cast GlColorAdjustmentMaterialFeature.CT_PACKED_TINT_VS__glColorAdjustmentMaterialFeature : String), (cast GlColorAdjustmentMaterialFeature.CT_PACKED_TINT_FS__glColorAdjustmentMaterialFeature : String), (cast 'Sprite-batch tint (RGBA8)' : String)) : flighthq._internal.dom.WebGLProgram);
-    ((cast runtime : GlRenderStateRuntime).colorTintInstancedShader = { program: program, locCorner: 0.0, locWorldMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_world'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture'), locStraightTextureAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_straightTextureAlpha') });
-    return cast (cast runtime : GlRenderStateRuntime).colorTintInstancedShader;
+    (runtime.colorTintInstancedShader = cast ({ program: program, locCorner: 0.0, locWorldMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_world'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture'), locStraightTextureAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_straightTextureAlpha') } : Null<GlColorScaleBiasInstancedShader>));
+    return cast runtime.colorTintInstancedShader;
     return cast null;
   }
 
@@ -186,11 +186,11 @@ class GlColorAdjustmentMaterialFeature {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument39:Dynamic = state; __callArgument39; })) : GlRenderStateRuntime);
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).uniformColorScaleBiasShader)) { return cast (cast runtime : GlRenderStateRuntime).uniformColorScaleBiasShader; }
+    if (_Runtime.truthy(runtime.uniformColorScaleBiasShader)) { return cast runtime.uniformColorScaleBiasShader; }
     gl = (cast state : GlRenderState).gl;
     program = (cast createGlProgram(({ final __callArgument40:Dynamic = gl; __callArgument40; }), (cast QUAD_BATCH_VS : String), (cast GlColorAdjustmentMaterialFeature.UNIFORM_CT_FS__glColorAdjustmentMaterialFeature : String), (cast 'Sprite-batch color adjustment (uniform)' : String)) : flighthq._internal.dom.WebGLProgram);
-    ((cast runtime : GlRenderStateRuntime).uniformColorScaleBiasShader = { program: program, locCorner: 0.0, locWorldMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_world'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture'), locStraightTextureAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_straightTextureAlpha'), locColorScale: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorScale'), locColorBias: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorBias') });
-    return cast (cast runtime : GlRenderStateRuntime).uniformColorScaleBiasShader;
+    (runtime.uniformColorScaleBiasShader = cast ({ program: program, locCorner: 0.0, locWorldMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_world'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture'), locStraightTextureAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_straightTextureAlpha'), locColorScale: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorScale'), locColorBias: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorBias') } : Null<GlUniformColorScaleBiasShader>));
+    return cast runtime.uniformColorScaleBiasShader;
     return cast null;
   }
 
@@ -226,46 +226,46 @@ class GlColorAdjustmentMaterialFeature {
     var ctMode:Float = cast _Runtime.UNDEFINED;
     var uniformColorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>> = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument49:Dynamic = state; __callArgument49; })) : GlRenderStateRuntime);
-    ctMode = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasMode, function():Dynamic return cast GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature);
+    ctMode = _Runtime.coalesce(runtime.quadBatchWriterColorScaleBiasMode, function():Dynamic return cast GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature);
     if ((cast _Runtime.strictEquals(ctMode, GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature) : Bool)) { return cast false; }
-    uniformColorScaleBias = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).quadBatchWriterUniformColorScaleBias, function():Dynamic return cast null);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasMode = GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterUniformColorScaleBias = null);
+    uniformColorScaleBias = _Runtime.coalesce(runtime.quadBatchWriterUniformColorScaleBias, function():Dynamic return cast null);
+    (runtime.quadBatchWriterColorScaleBiasMode = cast (GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature : Null<Float>));
+    (runtime.quadBatchWriterUniformColorScaleBias = cast (null : Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>>));
     if ((cast _Runtime.strictEquals(ctMode, GlColorAdjustmentMaterialFeature.CT_MODE_PACKED_TINT__glColorAdjustmentMaterialFeature) : Bool)) {
       var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
-      if ((cast _Runtime.looseEquals((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer, null) : Bool)) {
-        ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
+      if ((cast _Runtime.looseEquals(runtime.quadBatchWriterColorScaleBiasBuffer, null) : Bool)) {
+        (runtime.quadBatchWriterColorScaleBiasBuffer = cast (flighthq._internal.backend.WebGl2Backend.createBuffer(gl) : Null<flighthq._internal.dom.WebGLBuffer>));
       }
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer);
-      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast (cast runtime : GlRenderStateRuntime).quadBatchWriterColorTintData : flighthq._internal._UInt32Array).subarray(Std.int(0.0), Std.int(count)), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.quadBatchWriterColorScaleBiasBuffer);
+      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime.quadBatchWriterColorTintData : flighthq._internal._UInt32Array).subarray(Std.int(0.0), Std.int(count)), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
       GlColorAdjustmentMaterialFeature.bindGlQuadBatchWriterPackedTint__glColorAdjustmentMaterialFeature(({ final __callArgument50:Dynamic = state; __callArgument50; }));
       return cast true;
     }
     if ((cast _Runtime.strictEquals(ctMode, GlColorAdjustmentMaterialFeature.CT_MODE_MATRIX__glColorAdjustmentMaterialFeature) : Bool)) {
       var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
-      if ((cast _Runtime.looseEquals((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer, null) : Bool)) { ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl)); }
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer);
-      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast (cast runtime : GlRenderStateRuntime).quadBatchWriterColorMatrixData : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((count * GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature))), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
+      if ((cast _Runtime.looseEquals(runtime.quadBatchWriterColorScaleBiasBuffer, null) : Bool)) { (runtime.quadBatchWriterColorScaleBiasBuffer = cast (flighthq._internal.backend.WebGl2Backend.createBuffer(gl) : Null<flighthq._internal.dom.WebGLBuffer>)); }
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.quadBatchWriterColorScaleBiasBuffer);
+      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime.quadBatchWriterColorMatrixData : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((count * GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature))), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
       GlColorAdjustmentMaterialFeature.bindGlQuadBatchWriterInstancedColorMatrix__glColorAdjustmentMaterialFeature(({ final __callArgument51:Dynamic = state; __callArgument51; }));
       return cast true;
     }
     if ((cast _Runtime.strictEquals(ctMode, GlColorAdjustmentMaterialFeature.CT_MODE_PER_INSTANCE__glColorAdjustmentMaterialFeature) : Bool)) {
       var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
-      if ((cast _Runtime.looseEquals((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer, null) : Bool)) {
-        ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl));
+      if ((cast _Runtime.looseEquals(runtime.quadBatchWriterColorScaleBiasBuffer, null) : Bool)) {
+        (runtime.quadBatchWriterColorScaleBiasBuffer = cast (flighthq._internal.backend.WebGl2Backend.createBuffer(gl) : Null<flighthq._internal.dom.WebGLBuffer>));
       }
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer);
-      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast (cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasData : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((count * GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__glColorAdjustmentMaterialFeature))), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.quadBatchWriterColorScaleBiasBuffer);
+      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime.quadBatchWriterColorScaleBiasData : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((count * GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__glColorAdjustmentMaterialFeature))), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
       GlColorAdjustmentMaterialFeature.bindGlQuadBatchWriterInstancedColorScaleBias__glColorAdjustmentMaterialFeature(({ final __callArgument52:Dynamic = state; __callArgument52; }));
       return cast true;
     }
     if ((cast (cast GlColorAdjustmentMaterialFeature.isColorMatrixData__glColorAdjustmentMaterialFeature(({ final __callArgument53:Dynamic = uniformColorScaleBias; __callArgument53; })) : Bool) : Bool)) {
       GlColorAdjustmentMaterialFeature.promoteGlQuadBatchWriterColorScaleBiasToMatrix__glColorAdjustmentMaterialFeature(({ final __callArgument54:Dynamic = runtime; __callArgument54; }), (cast count : Float), ({ final __callArgument55:Dynamic = uniformColorScaleBias; __callArgument55; }));
-      ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasMode = GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature);
+      (runtime.quadBatchWriterColorScaleBiasMode = cast (GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature : Null<Float>));
       var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
-      if ((cast _Runtime.looseEquals((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer, null) : Bool)) { ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl)); }
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer);
-      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast (cast runtime : GlRenderStateRuntime).quadBatchWriterColorMatrixData : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((count * GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature))), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
+      if ((cast _Runtime.looseEquals(runtime.quadBatchWriterColorScaleBiasBuffer, null) : Bool)) { (runtime.quadBatchWriterColorScaleBiasBuffer = cast (flighthq._internal.backend.WebGl2Backend.createBuffer(gl) : Null<flighthq._internal.dom.WebGLBuffer>)); }
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.quadBatchWriterColorScaleBiasBuffer);
+      flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast runtime.quadBatchWriterColorMatrixData : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int((count * GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature))), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flighthq._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
       GlColorAdjustmentMaterialFeature.bindGlQuadBatchWriterInstancedColorMatrix__glColorAdjustmentMaterialFeature(({ final __callArgument56:Dynamic = state; __callArgument56; }));
     } else {
       GlColorAdjustmentMaterialFeature.bindGlQuadBatchWriterUniformColorScaleBias__glColorAdjustmentMaterialFeature(({ final __callArgument57:Dynamic = state; __callArgument57; }), ({ final __callArgument58:Dynamic = uniformColorScaleBias; __callArgument58; }));
@@ -275,7 +275,7 @@ class GlColorAdjustmentMaterialFeature {
   }
 
   public static function promoteGlQuadBatchWriterColorScaleBiasToPerInstance__glColorAdjustmentMaterialFeature(runtime:GlRenderStateRuntime, instanceCount:Float, fill:Null<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>>):Void {
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasMode = GlColorAdjustmentMaterialFeature.CT_MODE_PER_INSTANCE__glColorAdjustmentMaterialFeature);
+    (runtime.quadBatchWriterColorScaleBiasMode = cast (GlColorAdjustmentMaterialFeature.CT_MODE_PER_INSTANCE__glColorAdjustmentMaterialFeature : Null<Float>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
@@ -286,7 +286,7 @@ class GlColorAdjustmentMaterialFeature {
   }
 
   public static function promoteGlQuadBatchWriterColorScaleBiasToPackedTint__glColorAdjustmentMaterialFeature(runtime:GlRenderStateRuntime, instanceCount:Float, fill:Null<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>>):Void {
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasMode = GlColorAdjustmentMaterialFeature.CT_MODE_PACKED_TINT__glColorAdjustmentMaterialFeature);
+    (runtime.quadBatchWriterColorScaleBiasMode = cast (GlColorAdjustmentMaterialFeature.CT_MODE_PACKED_TINT__glColorAdjustmentMaterialFeature : Null<Float>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
@@ -298,8 +298,8 @@ class GlColorAdjustmentMaterialFeature {
 
   public static function promoteGlPackedTintToColorScaleBias__glColorAdjustmentMaterialFeature(runtime:GlRenderStateRuntime, instanceCount:Float):Void {
     var packed:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasMode = GlColorAdjustmentMaterialFeature.CT_MODE_PER_INSTANCE__glColorAdjustmentMaterialFeature);
-    packed = (cast runtime : GlRenderStateRuntime).quadBatchWriterColorTintData;
+    (runtime.quadBatchWriterColorScaleBiasMode = cast (GlColorAdjustmentMaterialFeature.CT_MODE_PER_INSTANCE__glColorAdjustmentMaterialFeature : Null<Float>));
+    packed = runtime.quadBatchWriterColorTintData;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
@@ -310,7 +310,7 @@ class GlColorAdjustmentMaterialFeature {
   }
 
   public static function promoteGlQuadBatchWriterColorScaleBiasToMatrix__glColorAdjustmentMaterialFeature(runtime:GlRenderStateRuntime, instanceCount:Float, fill:Null<ColorAdjustmentData__glColorAdjustmentMaterialFeature>):Void {
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasMode = GlColorAdjustmentMaterialFeature.CT_MODE_MATRIX__glColorAdjustmentMaterialFeature);
+    (runtime.quadBatchWriterColorScaleBiasMode = cast (GlColorAdjustmentMaterialFeature.CT_MODE_MATRIX__glColorAdjustmentMaterialFeature : Null<Float>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
@@ -322,8 +322,8 @@ class GlColorAdjustmentMaterialFeature {
 
   public static function promoteGlPackedTintToColorMatrix__glColorAdjustmentMaterialFeature(runtime:GlRenderStateRuntime, instanceCount:Float):Void {
     var packed:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
-    packed = (cast runtime : GlRenderStateRuntime).quadBatchWriterColorTintData;
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasMode = GlColorAdjustmentMaterialFeature.CT_MODE_MATRIX__glColorAdjustmentMaterialFeature);
+    packed = runtime.quadBatchWriterColorTintData;
+    (runtime.quadBatchWriterColorScaleBiasMode = cast (GlColorAdjustmentMaterialFeature.CT_MODE_MATRIX__glColorAdjustmentMaterialFeature : Null<Float>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
@@ -335,8 +335,8 @@ class GlColorAdjustmentMaterialFeature {
 
   public static function promoteGlColorScaleBiasToMatrix__glColorAdjustmentMaterialFeature(runtime:GlRenderStateRuntime, instanceCount:Float):Void {
     var affine:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    affine = (cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasData;
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasMode = GlColorAdjustmentMaterialFeature.CT_MODE_MATRIX__glColorAdjustmentMaterialFeature);
+    affine = runtime.quadBatchWriterColorScaleBiasData;
+    (runtime.quadBatchWriterColorScaleBiasMode = cast (GlColorAdjustmentMaterialFeature.CT_MODE_MATRIX__glColorAdjustmentMaterialFeature : Null<Float>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
@@ -350,7 +350,7 @@ class GlColorAdjustmentMaterialFeature {
   public static function recordGlColorAdjustment__glColorAdjustmentMaterialFeature(runtime:GlRenderStateRuntime, colorScaleBias:Null<ColorAdjustmentData__glColorAdjustmentMaterialFeature>, instanceIndex:Float):Void {
     var mode:Float = cast _Runtime.UNDEFINED;
     var tint:Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>> = cast _Runtime.UNDEFINED;
-    mode = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasMode, function():Dynamic return cast GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature);
+    mode = _Runtime.coalesce(runtime.quadBatchWriterColorScaleBiasMode, function():Dynamic return cast GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature);
     tint = _Runtime.coalesce(colorScaleBias, function():Dynamic return cast null);
     if ((cast _Runtime.strictEquals(mode, GlColorAdjustmentMaterialFeature.CT_MODE_MATRIX__glColorAdjustmentMaterialFeature) : Bool)) {
       GlColorAdjustmentMaterialFeature.writeGlColorMatrixInstance__glColorAdjustmentMaterialFeature(({ final __callArgument69:Dynamic = runtime; __callArgument69; }), ({ final __callArgument70:Dynamic = tint; __callArgument70; }), (cast instanceIndex : Float));
@@ -359,8 +359,8 @@ class GlColorAdjustmentMaterialFeature {
     if ((cast _Runtime.strictEquals(mode, GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature) : Bool)) {
       if ((cast _Runtime.strictEquals(tint, null) : Bool)) { return; }
       if ((cast _Runtime.strictEquals(instanceIndex, 0.0) : Bool)) {
-        ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasMode = GlColorAdjustmentMaterialFeature.CT_MODE_UNIFORM__glColorAdjustmentMaterialFeature);
-        ((cast runtime : GlRenderStateRuntime).quadBatchWriterUniformColorScaleBias = tint);
+        (runtime.quadBatchWriterColorScaleBiasMode = cast (GlColorAdjustmentMaterialFeature.CT_MODE_UNIFORM__glColorAdjustmentMaterialFeature : Null<Float>));
+        (runtime.quadBatchWriterUniformColorScaleBias = cast (tint : Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>>));
         return;
       }
       if ((cast (cast GlColorAdjustmentMaterialFeature.isColorMatrixData__glColorAdjustmentMaterialFeature(({ final __callArgument71:Dynamic = tint; __callArgument71; })) : Bool) : Bool)) {
@@ -378,7 +378,7 @@ class GlColorAdjustmentMaterialFeature {
       return;
     }
     if ((cast _Runtime.strictEquals(mode, GlColorAdjustmentMaterialFeature.CT_MODE_UNIFORM__glColorAdjustmentMaterialFeature) : Bool)) {
-      var uniform:Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>> = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).quadBatchWriterUniformColorScaleBias, function():Dynamic return cast null);
+      var uniform:Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>> = _Runtime.coalesce(runtime.quadBatchWriterUniformColorScaleBias, function():Dynamic return cast null);
       if ((cast (cast GlColorAdjustmentMaterialFeature.equalsRecordedColorScaleBias__glColorAdjustmentMaterialFeature(({ final __callArgument85:Dynamic = tint; __callArgument85; }), ({ final __callArgument86:Dynamic = uniform; __callArgument86; })) : Bool) : Bool)) { return; }
       if ((cast ((cast (cast GlColorAdjustmentMaterialFeature.isColorMatrixData__glColorAdjustmentMaterialFeature(({ final __callArgument87:Dynamic = tint; __callArgument87; })) : Bool) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(uniform, null), function():Dynamic return cast (cast GlColorAdjustmentMaterialFeature.isColorMatrixData__glColorAdjustmentMaterialFeature(({ final __callArgument88:Dynamic = uniform; __callArgument88; })) : Bool)) : Bool)) : Bool)) {
         GlColorAdjustmentMaterialFeature.promoteGlQuadBatchWriterColorScaleBiasToMatrix__glColorAdjustmentMaterialFeature(({ final __callArgument89:Dynamic = runtime; __callArgument89; }), (cast instanceIndex : Float), ({ final __callArgument90:Dynamic = uniform; __callArgument90; }));
@@ -422,14 +422,14 @@ class GlColorAdjustmentMaterialFeature {
     var offset:Float = cast _Runtime.UNDEFINED;
     var data:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     offset = (instanceIndex * GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature);
-    data = (cast runtime : GlRenderStateRuntime).quadBatchWriterColorMatrixData;
+    data = runtime.quadBatchWriterColorMatrixData;
     if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (data = cast (new flighthq._internal._Float32Array((GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature * 256.0)) : Dynamic));
-      ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorMatrixData = data);
+      (runtime.quadBatchWriterColorMatrixData = cast (data : Null<flighthq._internal._Float32Array>));
     } else { if ((cast ((cast (offset + GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature) : Float) > (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
       var grown:flighthq._internal._Float32Array = new flighthq._internal._Float32Array(HxMath.max((offset + GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature), _Runtime.multiplyNumbers(_Runtime.field(data, 'length'), 2.0)));
       (cast grown : flighthq._internal._Float32Array).set(data);
-      ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorMatrixData = grown);
+      (runtime.quadBatchWriterColorMatrixData = cast (grown : Null<flighthq._internal._Float32Array>));
       (data = cast (grown : Dynamic));
     } }
     if ((cast _Runtime.strictEquals(adjustment, null) : Bool)) {
@@ -470,7 +470,7 @@ class GlColorAdjustmentMaterialFeature {
     var out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var offset:Float = cast _Runtime.UNDEFINED;
     GlColorAdjustmentMaterialFeature.writeGlColorMatrixInstance__glColorAdjustmentMaterialFeature(({ final __callArgument122:Dynamic = runtime; __callArgument122; }), ({ final __callArgument123:Dynamic = null; __callArgument123; }), (cast instanceIndex : Float));
-    out = (cast runtime : GlRenderStateRuntime).quadBatchWriterColorMatrixData;
+    out = runtime.quadBatchWriterColorMatrixData;
     offset = (instanceIndex * GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature);
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast offset : Float), (cast ((_Runtime.toInt32(nativeWord) & 255) / 255.0) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 5.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 8)) & 255) / 255.0) : Float));
@@ -482,7 +482,7 @@ class GlColorAdjustmentMaterialFeature {
     var out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var offset:Float = cast _Runtime.UNDEFINED;
     GlColorAdjustmentMaterialFeature.writeGlColorMatrixInstance__glColorAdjustmentMaterialFeature(({ final __callArgument124:Dynamic = runtime; __callArgument124; }), ({ final __callArgument125:Dynamic = null; __callArgument125; }), (cast instanceIndex : Float));
-    out = (cast runtime : GlRenderStateRuntime).quadBatchWriterColorMatrixData;
+    out = runtime.quadBatchWriterColorMatrixData;
     offset = (instanceIndex * GlColorAdjustmentMaterialFeature.COLOR_MATRIX_FLOATS__glColorAdjustmentMaterialFeature);
     {
       var channel:Float = 0.0;
@@ -498,16 +498,16 @@ class GlColorAdjustmentMaterialFeature {
     var offset:Float = cast _Runtime.UNDEFINED;
     var data:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     offset = (instanceIndex * GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__glColorAdjustmentMaterialFeature);
-    data = (cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasData;
+    data = runtime.quadBatchWriterColorScaleBiasData;
     if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (data = cast (new flighthq._internal._Float32Array((GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__glColorAdjustmentMaterialFeature * 256.0)) : Dynamic));
-      ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasData = data);
+      (runtime.quadBatchWriterColorScaleBiasData = cast (data : Null<flighthq._internal._Float32Array>));
     }
     if ((cast ((cast (offset + GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__glColorAdjustmentMaterialFeature) : Float) > (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
       var newSize:Float = HxMath.max((offset + GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__glColorAdjustmentMaterialFeature), _Runtime.multiplyNumbers(_Runtime.field(data, 'length'), 2.0));
       var grown:flighthq._internal._Float32Array = new flighthq._internal._Float32Array(newSize);
       (cast grown : flighthq._internal._Float32Array).set(data);
-      ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasData = grown);
+      (runtime.quadBatchWriterColorScaleBiasData = cast (grown : Null<flighthq._internal._Float32Array>));
       (data = cast (grown : Dynamic));
     }
     if ((cast !_Runtime.strictEquals(colorScaleBias, null) : Bool)) {
@@ -533,14 +533,14 @@ class GlColorAdjustmentMaterialFeature {
 
   public static function writeGlPackedTintInstance__glColorAdjustmentMaterialFeature(runtime:GlRenderStateRuntime, rgba:Float, instanceIndex:Float):Void {
     var data:Null<flighthq._internal._UInt32Array> = cast _Runtime.UNDEFINED;
-    data = (cast runtime : GlRenderStateRuntime).quadBatchWriterColorTintData;
+    data = runtime.quadBatchWriterColorTintData;
     if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (data = cast (new flighthq._internal._UInt32Array(256.0) : Dynamic));
-      ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorTintData = data);
+      (runtime.quadBatchWriterColorTintData = cast (data : Null<flighthq._internal._UInt32Array>));
     } else { if ((cast ((cast instanceIndex : Float) >= (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
       var grown:flighthq._internal._UInt32Array = new flighthq._internal._UInt32Array(HxMath.max((instanceIndex + 1.0), _Runtime.multiplyNumbers(_Runtime.field(data, 'length'), 2.0)));
       (cast grown : flighthq._internal._UInt32Array).set(data);
-      ((cast runtime : GlRenderStateRuntime).quadBatchWriterColorTintData = grown);
+      (runtime.quadBatchWriterColorTintData = cast (grown : Null<flighthq._internal._UInt32Array>));
       (data = cast (grown : Dynamic));
     } }
     flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast data : flighthq._internal._UInt32Array), (cast instanceIndex : Float), (cast (cast GlColorAdjustmentMaterialFeature.rgbaToNativeByteWord__glColorAdjustmentMaterialFeature((cast rgba : Float)) : Float) : Float));
@@ -551,7 +551,7 @@ class GlColorAdjustmentMaterialFeature {
     var data:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     offset = (instanceIndex * GlColorAdjustmentMaterialFeature.COLOR_SCALE_BIAS_FLOATS__glColorAdjustmentMaterialFeature);
     GlColorAdjustmentMaterialFeature.writeGlColorScaleBiasInstance__glColorAdjustmentMaterialFeature(({ final __callArgument128:Dynamic = runtime; __callArgument128; }), ({ final __callArgument129:Dynamic = null; __callArgument129; }), (cast instanceIndex : Float));
-    data = (cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasData;
+    data = runtime.quadBatchWriterColorScaleBiasData;
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast offset : Float), (cast ((_Runtime.toInt32(nativeWord) & 255) / 255.0) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 8)) & 255) / 255.0) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(nativeWord), 16)) & 255) / 255.0) : Float));
@@ -642,11 +642,11 @@ class GlColorAdjustmentMaterialFeature {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument145:Dynamic = state; __callArgument145; })) : GlRenderStateRuntime);
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).shapeMeshColorMatrixShader)) { return cast (cast runtime : GlRenderStateRuntime).shapeMeshColorMatrixShader; }
+    if (_Runtime.truthy(runtime.shapeMeshColorMatrixShader)) { return cast runtime.shapeMeshColorMatrixShader; }
     gl = (cast state : GlRenderState).gl;
     program = (cast createGlProgram(({ final __callArgument146:Dynamic = gl; __callArgument146; }), (cast GlColorAdjustmentMaterialFeature.SHAPE_MESH_CT_VS__glColorAdjustmentMaterialFeature : String), (cast GlColorAdjustmentMaterialFeature.SHAPE_MESH_MATRIX_FS__glColorAdjustmentMaterialFeature : String), (cast 'Shape-mesh color matrix' : String)) : flighthq._internal.dom.WebGLProgram);
-    ((cast runtime : GlRenderStateRuntime).shapeMeshColorMatrixShader = { program: program, positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), matrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matrix'), colorLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color'), colorScaleLocation: null, colorBiasLocation: null, colorMatrixLocations: cast ([flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ctRow0'), flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ctRow1'), flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ctRow2'), flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ctRow3'), flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorBias')] : Array<Dynamic>) });
-    return cast (cast runtime : GlRenderStateRuntime).shapeMeshColorMatrixShader;
+    (runtime.shapeMeshColorMatrixShader = cast ({ program: program, positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), matrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matrix'), colorLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color'), colorScaleLocation: null, colorBiasLocation: null, colorMatrixLocations: cast ([flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ctRow0'), flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ctRow1'), flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ctRow2'), flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ctRow3'), flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorBias')] : Array<Dynamic>) } : Null<GlShapeMeshColorScaleBiasShader>));
+    return cast runtime.shapeMeshColorMatrixShader;
     return cast null;
   }
 
@@ -655,11 +655,11 @@ class GlColorAdjustmentMaterialFeature {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument147:Dynamic = state; __callArgument147; })) : GlRenderStateRuntime);
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).shapeMeshColorScaleBiasShader)) { return cast (cast runtime : GlRenderStateRuntime).shapeMeshColorScaleBiasShader; }
+    if (_Runtime.truthy(runtime.shapeMeshColorScaleBiasShader)) { return cast runtime.shapeMeshColorScaleBiasShader; }
     gl = (cast state : GlRenderState).gl;
     program = (cast createGlProgram(({ final __callArgument148:Dynamic = gl; __callArgument148; }), (cast GlColorAdjustmentMaterialFeature.SHAPE_MESH_CT_VS__glColorAdjustmentMaterialFeature : String), (cast GlColorAdjustmentMaterialFeature.SHAPE_MESH_CT_FS__glColorAdjustmentMaterialFeature : String), (cast 'Shape-mesh color adjustment' : String)) : flighthq._internal.dom.WebGLProgram);
-    ((cast runtime : GlRenderStateRuntime).shapeMeshColorScaleBiasShader = { program: program, positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), matrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matrix'), colorLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color'), colorScaleLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorScale'), colorBiasLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorBias') });
-    return cast (cast runtime : GlRenderStateRuntime).shapeMeshColorScaleBiasShader;
+    (runtime.shapeMeshColorScaleBiasShader = cast ({ program: program, positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), matrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matrix'), colorLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color'), colorScaleLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorScale'), colorBiasLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_colorBias') } : Null<GlShapeMeshColorScaleBiasShader>));
+    return cast runtime.shapeMeshColorScaleBiasShader;
     return cast null;
   }
 

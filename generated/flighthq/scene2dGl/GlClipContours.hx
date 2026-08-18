@@ -27,8 +27,8 @@ class GlClipContours {
     flushGlQuadBatchWriter(({ final __callArgument0:Dynamic = state; __callArgument0; }));
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
-    nextDepth = HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.coalesce((cast runtime : GlRenderStateRuntime).currentMaskDepth, function():Dynamic return cast 0.0), 1.0));
-    ((cast runtime : GlRenderStateRuntime).currentMaskDepth = nextDepth);
+    nextDepth = HxMath.max(0.0, _Runtime.subtractNumbers(_Runtime.coalesce(runtime.currentMaskDepth, function():Dynamic return cast 0.0), 1.0));
+    (runtime.currentMaskDepth = cast (nextDepth : Null<Float>));
     if ((cast _Runtime.strictEquals(nextDepth, 0.0) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_TEST', flighthq._internal.backend.WebGl2Backend.STENCIL_TEST));
       flighthq._internal.backend.WebGl2Backend.stencilMask(gl, 255.0);
@@ -44,7 +44,7 @@ class GlClipContours {
     flushGlQuadBatchWriter(({ final __callArgument2:Dynamic = state; __callArgument2; }));
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
-    depth = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).currentMaskDepth, function():Dynamic return cast 0.0);
+    depth = _Runtime.coalesce(runtime.currentMaskDepth, function():Dynamic return cast 0.0);
     if ((cast _Runtime.strictEquals(depth, 0.0) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_TEST', flighthq._internal.backend.WebGl2Backend.STENCIL_TEST));
       flighthq._internal.backend.WebGl2Backend.stencilMask(gl, 255.0);
@@ -53,7 +53,7 @@ class GlClipContours {
     GlClipContours.ensureClipProgram__glClipContours(({ final __callArgument4:Dynamic = state; __callArgument4; }));
     program = (cast GlClipContours.clipProgramFor__glClipContours(({ final __callArgument5:Dynamic = state; __callArgument5; })) : ClipProgram__glClipContours);
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast program : ClipProgram__glClipContours).program);
-    ((cast runtime : GlRenderStateRuntime).currentProgram = (cast program : ClipProgram__glClipContours).program);
+    (runtime.currentProgram = cast ((cast program : ClipProgram__glClipContours).program : Null<flighthq._internal.dom.WebGLProgram>));
     GlClipContours.uploadClipUniforms__glClipContours(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast program : Dynamic), ({ final __callArgument7:Dynamic = worldTransform; __callArgument7; }));
     flighthq._internal.backend.WebGl2Backend.colorMask(gl, false, false, false, false);
     flighthq._internal.backend.WebGl2Backend.stencilMask(gl, 255.0);
@@ -75,7 +75,7 @@ class GlClipContours {
       flighthq._internal.backend.WebGl2Backend.stencilFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'NOTEQUAL', flighthq._internal.backend.WebGl2Backend.NOTEQUAL), 0.0, 255.0);
     }
     flighthq._internal.backend.WebGl2Backend.stencilOp(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flighthq._internal.backend.WebGl2Backend.KEEP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flighthq._internal.backend.WebGl2Backend.KEEP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flighthq._internal.backend.WebGl2Backend.KEEP));
-    ((cast runtime : GlRenderStateRuntime).currentMaskDepth = (depth + 1.0));
+    (runtime.currentMaskDepth = cast ((depth + 1.0) : Null<Float>));
   }
 
   public static final clipPrograms__glClipContours:flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, ClipProgram__glClipContours> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
@@ -129,8 +129,8 @@ class GlClipContours {
     var w:Float = cast _Runtime.UNDEFINED;
     var h:Float = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlRenderStateRuntime);
-    w = _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(_Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas), 'width'), function():Dynamic return cast 1.0);
-    h = _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(_Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas), 'height'), function():Dynamic return cast 1.0);
+    w = _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(_Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas), 'width'), function():Dynamic return cast 1.0);
+    h = _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(_Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas), 'height'), function():Dynamic return cast 1.0);
     return cast new flighthq._internal._Float32Array(cast ([(2.0 / w), 0.0, 0.0, 0.0, (-2.0 / h), 0.0, -1.0, 1.0, 1.0] : Array<Dynamic>));
     return cast null;
   }

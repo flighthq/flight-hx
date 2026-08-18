@@ -14,13 +14,13 @@ import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 class EnableWgpuColorAdjustmentGuards {
   @:noCompletion
   public static function areWgpuColorAdjustmentGuardsEnabled(state:WgpuRenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuColorAdjustmentMaterialFeatureGuard, null);
+    return cast !_Runtime.looseEquals((cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { @:optional var wgpuColorAdjustmentMaterialFeatureGuard:Null<WgpuRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).wgpuColorAdjustmentMaterialFeatureGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableWgpuColorAdjustmentGuards(state:WgpuRenderState):Void {
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { @:optional var wgpuColorAdjustmentMaterialFeatureGuard:Null<WgpuRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).wgpuColorAdjustmentMaterialFeatureGuard = (cast EnableWgpuColorAdjustmentGuards.warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards));
+    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { @:optional var wgpuColorAdjustmentMaterialFeatureGuard:Null<WgpuRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).wgpuColorAdjustmentMaterialFeatureGuard = cast (function(__unused0:WgpuRenderState, __unused1:flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>):Void { EnableWgpuColorAdjustmentGuards.warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards(); } : Null<WgpuRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>));
   }
 
   public static function warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards():Void {

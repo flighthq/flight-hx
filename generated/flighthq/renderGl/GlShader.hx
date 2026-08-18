@@ -39,7 +39,7 @@ class GlShader {
       var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
       runtime = (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime);
       setGlAttributes(({ final __callArgument3:Dynamic = gl; __callArgument3; }), ({ final __callArgument4:Dynamic = shaderLoc; __callArgument4; }));
-      setGlMatrixFromTransform(({ final __callArgument5:Dynamic = gl; __callArgument5; }), ({ final __callArgument6:Dynamic = shaderLoc; __callArgument6; }), ({ final __callArgument7:Dynamic = matrixArray; __callArgument7; }), ({ final __callArgument8:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument8; }), ({ final __callArgument9:Dynamic = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument9; }));
+      setGlMatrixFromTransform(({ final __callArgument5:Dynamic = gl; __callArgument5; }), ({ final __callArgument6:Dynamic = shaderLoc; __callArgument6; }), ({ final __callArgument7:Dynamic = matrixArray; __callArgument7; }), ({ final __callArgument8:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument8; }), ({ final __callArgument9:Dynamic = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument9; }));
       setGlBaseUniforms(({ final __callArgument10:Dynamic = gl; __callArgument10; }), ({ final __callArgument11:Dynamic = shaderLoc; __callArgument11; }), ({ final __callArgument12:Dynamic = renderProxy; __callArgument12; }));
     } };
     return cast null;
@@ -53,7 +53,7 @@ class GlShader {
       var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
       runtime = (cast getGlRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlRenderStateRuntime);
       setGlAttributes(({ final __callArgument15:Dynamic = gl; __callArgument15; }), ({ final __callArgument16:Dynamic = locations; __callArgument16; }));
-      setGlMatrixFromTransform(({ final __callArgument17:Dynamic = gl; __callArgument17; }), ({ final __callArgument18:Dynamic = locations; __callArgument18; }), (cast runtime : GlRenderStateRuntime).matrixArray, ({ final __callArgument19:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument19; }), ({ final __callArgument20:Dynamic = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument20; }));
+      setGlMatrixFromTransform(({ final __callArgument17:Dynamic = gl; __callArgument17; }), ({ final __callArgument18:Dynamic = locations; __callArgument18; }), runtime.matrixArray, ({ final __callArgument19:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument19; }), ({ final __callArgument20:Dynamic = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument20; }));
       setGlBaseUniforms(({ final __callArgument21:Dynamic = gl; __callArgument21; }), ({ final __callArgument22:Dynamic = locations; __callArgument22; }), ({ final __callArgument23:Dynamic = renderProxy; __callArgument23; }));
       _Runtime.callOptionalValue(onBind, cast ([gl, locations, renderProxy] : Array<Dynamic>));
     } };

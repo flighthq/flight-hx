@@ -45,11 +45,11 @@ class ShadedWgpuMeshMaterialRenderer {
     var format:String = cast _Runtime.UNDEFINED;
     var pipeline:WgpuMeshPipeline = cast _Runtime.UNDEFINED;
     var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
-    pass = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).renderPass;
+    pass = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { var renderPass:Null<flighthq._internal.dom.GPURenderPassEncoder>; }).renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     shaded = (cast material : Null<ShadedMaterial>);
     if ((cast _Runtime.strictEquals(shaded, null) : Bool)) { return; }
-    format = _Runtime.coalesce((cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    format = _Runtime.coalesce((cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { @:optional var currentColorFormat:Null<String>; }).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     pipeline = (cast ensureWgpuShadedPipeline(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = shaded; __callArgument3; }), (cast format : String)) : WgpuMeshPipeline);
     writeWgpuFrameUniform(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = camera; __callArgument5; }), ({ final __callArgument6:Dynamic = lights; __callArgument6; }));
     (cast unpackColorToLinear(({ final __callArgument7:Dynamic = ShadedWgpuMeshMaterialRenderer._diffuse__shadedWgpuMeshMaterialRenderer; __callArgument7; }), (cast _Runtime.field(shaded, 'diffuse') : Float)) : LinearColor);

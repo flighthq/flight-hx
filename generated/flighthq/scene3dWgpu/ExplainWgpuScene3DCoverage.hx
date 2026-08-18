@@ -58,7 +58,7 @@ class ExplainWgpuScene3DCoverage {
         i++;
       }
     }
-    resolvers = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : WgpuRenderStateRuntime) : WgpuRenderStateRuntime).wgpuTextureResolverRegistry;
+    resolvers = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : WgpuRenderStateRuntime) : { @:optional var wgpuTextureResolverRegistry:Null<flighthq._internal._Map<String, WgpuTextureResolver>>; }).wgpuTextureResolverRegistry;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'textureSourceKinds'), 'length') : Float)) : Bool)) {

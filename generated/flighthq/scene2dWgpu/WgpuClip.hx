@@ -29,20 +29,20 @@ class WgpuClip {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var form:Null<String> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    form = _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).clipForms, 'pop', cast ([] : Array<Dynamic>));
+    form = _Runtime.callProperty(runtime.clipForms, 'pop', cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(form, 'contour') : Bool)) { popWgpuClipContours(({ final __callArgument1:Dynamic = state; __callArgument1; })); } else { popWgpuClipRectangle(({ final __callArgument2:Dynamic = state; __callArgument2; })); }
   }
 
   public static final webgpuClipHooks__wgpuClip:Scene2DClipHooks = (cast { finalize: function(state:WgpuRenderState):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime);
-    while ((cast ((cast _Runtime.field((cast runtime : WgpuRenderStateRuntime).clipForms, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { WgpuClip.popOneWgpuClip__wgpuClip(({ final __callArgument4:Dynamic = state; __callArgument4; })); }
+    while ((cast ((cast _Runtime.field(runtime.clipForms, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { WgpuClip.popOneWgpuClip__wgpuClip(({ final __callArgument4:Dynamic = state; __callArgument4; })); }
   }, popClip: function(state:WgpuRenderState, data:RenderProxy2D, source:Node2D):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var target:Float = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuRenderStateRuntime);
     target = _Runtime.subtractNumbers((cast data : RenderProxy2D).clipDepth, ((cast !_Runtime.looseEquals((cast source : { var clip:Null<ClipRegion>; }).clip, null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-    while ((cast ((cast _Runtime.field((cast runtime : WgpuRenderStateRuntime).clipForms, 'length') : Float) > (cast target : Float)) : Bool)) { WgpuClip.popOneWgpuClip__wgpuClip(({ final __callArgument6:Dynamic = state; __callArgument6; })); }
+    while ((cast ((cast _Runtime.field(runtime.clipForms, 'length') : Float) > (cast target : Float)) : Bool)) { WgpuClip.popOneWgpuClip__wgpuClip(({ final __callArgument6:Dynamic = state; __callArgument6; })); }
   }, pushClip: function(state:WgpuRenderState, data:RenderProxy2D, source:Node2D):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var clip:Null<ClipRegion> = cast _Runtime.UNDEFINED;
@@ -51,10 +51,10 @@ class WgpuClip {
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast clip : ClipRegion).contours, null) : Bool)) {
       pushWgpuClipRectangle(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast clip : ClipRegion).rect; __callArgument9; }), ({ final __callArgument10:Dynamic = (cast data : RenderProxy2D).transform2D; __callArgument10; }));
-      _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).clipForms, 'push', cast (['rect'] : Array<Dynamic>));
+      _Runtime.callProperty(runtime.clipForms, 'push', cast (['rect'] : Array<Dynamic>));
     } else {
       pushWgpuClipContours(({ final __callArgument11:Dynamic = state; __callArgument11; }), (cast clip : ClipRegion).contours, (cast clip : ClipRegion).winding, (cast data : RenderProxy2D).transform2D);
-      _Runtime.callProperty((cast runtime : WgpuRenderStateRuntime).clipForms, 'push', cast (['contour'] : Array<Dynamic>));
+      _Runtime.callProperty(runtime.clipForms, 'push', cast (['contour'] : Array<Dynamic>));
     }
   } });
 }

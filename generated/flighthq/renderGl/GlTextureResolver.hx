@@ -55,7 +55,7 @@ class GlTextureResolver {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var registry:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : GlRenderStateRuntime);
-    registry = ({ final __nullishOwner9 = runtime; final __nullishValue10:Null<flighthq._internal._Map<String, flighthq.types.GlTextureResolver>> = cast (cast __nullishOwner9 : GlRenderStateRuntime).glTextureResolverRegistry; __nullishValue10 == null ? ((cast __nullishOwner9 : GlRenderStateRuntime).glTextureResolverRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, flighthq.types.GlTextureResolver>>)) : (cast __nullishValue10 : Null<flighthq._internal._Map<String, flighthq.types.GlTextureResolver>>); });
+    registry = ({ final __nullishOwner9 = runtime; final __nullishValue10:Null<flighthq._internal._Map<String, flighthq.types.GlTextureResolver>> = cast __nullishOwner9.glTextureResolverRegistry; __nullishValue10 == null ? (__nullishOwner9.glTextureResolverRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, flighthq.types.GlTextureResolver>>)) : (cast __nullishValue10 : Null<flighthq._internal._Map<String, flighthq.types.GlTextureResolver>>); });
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).set(sourceKind, (cast resolver))); }
   }
 
@@ -72,9 +72,9 @@ class GlTextureResolver {
     sourceKind = (cast getTextureSourceKind(({ final __callArgument14:Dynamic = texture; __callArgument14; })) : Null<String>);
     if ((cast _Runtime.strictEquals(sourceKind, null) : Bool)) { return cast null; }
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument15:Dynamic = state; __callArgument15; })) : GlRenderStateRuntime);
-    resolver = ({ final __collection16:Dynamic = (cast runtime : GlRenderStateRuntime).glTextureResolverRegistry; __collection16 == null ? _Runtime.UNDEFINED : ((cast __collection16 : flighthq._internal._Map<String, flighthq.types.GlTextureResolver>).get(sourceKind)); });
+    resolver = ({ final __collection16:Dynamic = runtime.glTextureResolverRegistry; __collection16 == null ? _Runtime.UNDEFINED : ((cast __collection16 : flighthq._internal._Map<String, flighthq.types.GlTextureResolver>).get(sourceKind)); });
     if ((cast _Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callOptionalValue((cast runtime : GlRenderStateRuntime).registryMiss, cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue(runtime.registryMiss, cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;
     }
     return cast (cast resolver(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = texture; __callArgument18; }), (cast premultiply : Bool), (cast getTextureSampleColorSpace((cast texture : { var colorSpace:TextureColorSpace; }).colorSpace, ({ final __callArgument19:Dynamic = workingColorSpace; __callArgument19; })) : TextureColorSpace)) : Null<flighthq._internal.dom.WebGLTexture>);

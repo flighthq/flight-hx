@@ -62,19 +62,19 @@ class GlRenderState {
     targetRuntime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = target; __callArgument0; })) : GlRenderStateRuntime);
     sourceRuntime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : GlRenderStateRuntime);
     ((cast target : { var applyBlendMode:Null<flighthq.types.GlRenderState->Null<String>->Void>; }).applyBlendMode = (cast (cast source : flighthq.types.GlRenderState).applyBlendMode));
-    ((cast targetRuntime : GlRenderStateRuntime).defaultBitmapShader = (cast sourceRuntime : GlRenderStateRuntime).defaultBitmapShader);
-    ((cast targetRuntime : GlRenderStateRuntime).glBlendModeRegistry = (cast GlRenderState.copyMap__glRenderState((cast (cast sourceRuntime : GlRenderStateRuntime).glBlendModeRegistry : Dynamic)) : Null<flighthq._internal._Map<String, GlBlendRealization>>));
-    ((cast targetRuntime : GlRenderStateRuntime).glColorAdjustmentMaterialFeature = (cast sourceRuntime : GlRenderStateRuntime).glColorAdjustmentMaterialFeature);
-    ((cast targetRuntime : { @:optional var glColorAdjustmentMaterialFeatureGuard:Null<flighthq.types.GlRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).glColorAdjustmentMaterialFeatureGuard = (cast (cast sourceRuntime : GlRenderStateRuntime).glColorAdjustmentMaterialFeatureGuard));
-    ((cast targetRuntime : GlRenderStateRuntime).materialRendererMap = ((cast _Runtime.strictEquals((cast sourceRuntime : GlRenderStateRuntime).materialRendererMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [(cast sourceRuntime : GlRenderStateRuntime).materialRendererMap]) : Dynamic)));
-    ((cast targetRuntime : GlRenderStateRuntime).materialBitmapShaderMap = ((cast _Runtime.strictEquals((cast sourceRuntime : GlRenderStateRuntime).materialBitmapShaderMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [(cast sourceRuntime : GlRenderStateRuntime).materialBitmapShaderMap]) : Dynamic)));
-    ((cast targetRuntime : GlRenderStateRuntime).sceneMeshMaterialRegistry = (cast GlRenderState.copyMap__glRenderState((cast (cast sourceRuntime : GlRenderStateRuntime).sceneMeshMaterialRegistry : Dynamic)) : Null<flighthq._internal._Map<String, GlMeshMaterialRenderer>>));
-    ((cast targetRuntime : { @:optional var webglShaderBindingResolver:Null<RenderProxy2D->Null<GlBitmapShader>>; }).webglShaderBindingResolver = (cast (cast sourceRuntime : GlRenderStateRuntime).webglShaderBindingResolver));
-    ((cast targetRuntime : GlRenderStateRuntime).glTextureResolverRegistry = (cast GlRenderState.copyRegistryMap__glRenderState((cast (cast sourceRuntime : GlRenderStateRuntime).glTextureResolverRegistry : Dynamic)) : Null<flighthq._internal._Map<String, GlTextureResolver>>));
-    ((cast targetRuntime : { @:optional var glRenderTextureGuard:Null<GlRenderTextureGuard>; }).glRenderTextureGuard = (cast sourceRuntime : GlRenderStateRuntime).glRenderTextureGuard);
-    ((cast targetRuntime : { @:optional var compressedTextureDecoder:Null<GlCompressedTextureDecoder>; }).compressedTextureDecoder = (cast sourceRuntime : GlRenderStateRuntime).compressedTextureDecoder);
-    ((cast targetRuntime : { @:optional var compressedTextureUpload:Null<GlCompressedTextureUploader>; }).compressedTextureUpload = (cast sourceRuntime : GlRenderStateRuntime).compressedTextureUpload);
-    ((cast targetRuntime : GlRenderStateRuntime).glRenderEffectRegistry = (cast GlRenderState.copyMap__glRenderState((cast (cast sourceRuntime : GlRenderStateRuntime).glRenderEffectRegistry : Dynamic)) : Null<flighthq._internal._Map<String, GlRenderEffectRunner>>));
+    (targetRuntime.defaultBitmapShader = cast (sourceRuntime.defaultBitmapShader : GlBitmapShader));
+    (targetRuntime.glBlendModeRegistry = cast ((cast GlRenderState.copyMap__glRenderState((cast sourceRuntime.glBlendModeRegistry : Dynamic)) : Null<flighthq._internal._Map<String, GlBlendRealization>>) : Null<flighthq._internal._Map<String, GlBlendRealization>>));
+    (targetRuntime.glColorAdjustmentMaterialFeature = cast (sourceRuntime.glColorAdjustmentMaterialFeature : Null<GlColorAdjustmentMaterialFeature>));
+    (targetRuntime.glColorAdjustmentMaterialFeatureGuard = cast (sourceRuntime.glColorAdjustmentMaterialFeatureGuard : Null<flighthq.types.GlRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>));
+    (targetRuntime.materialRendererMap = cast (((cast _Runtime.strictEquals(sourceRuntime.materialRendererMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [sourceRuntime.materialRendererMap]) : Dynamic)) : Null<flighthq._internal._Map<String, GlMaterialRenderer>>));
+    (targetRuntime.materialBitmapShaderMap = cast (((cast _Runtime.strictEquals(sourceRuntime.materialBitmapShaderMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [sourceRuntime.materialBitmapShaderMap]) : Dynamic)) : Null<flighthq._internal._Map<String, GlBitmapShader>>));
+    (targetRuntime.sceneMeshMaterialRegistry = cast ((cast GlRenderState.copyMap__glRenderState((cast sourceRuntime.sceneMeshMaterialRegistry : Dynamic)) : Null<flighthq._internal._Map<String, GlMeshMaterialRenderer>>) : Null<flighthq._internal._Map<String, GlMeshMaterialRenderer>>));
+    (targetRuntime.webglShaderBindingResolver = cast (sourceRuntime.webglShaderBindingResolver : Null<RenderProxy2D->Null<GlBitmapShader>>));
+    (targetRuntime.glTextureResolverRegistry = cast ((cast GlRenderState.copyRegistryMap__glRenderState((cast sourceRuntime.glTextureResolverRegistry : Dynamic)) : Null<flighthq._internal._Map<String, GlTextureResolver>>) : Null<flighthq._internal._Map<String, GlTextureResolver>>));
+    (targetRuntime.glRenderTextureGuard = cast (sourceRuntime.glRenderTextureGuard : Null<GlRenderTextureGuard>));
+    (targetRuntime.compressedTextureDecoder = cast (sourceRuntime.compressedTextureDecoder : Null<GlCompressedTextureDecoder>));
+    (targetRuntime.compressedTextureUpload = cast (sourceRuntime.compressedTextureUpload : Null<GlCompressedTextureUploader>));
+    (targetRuntime.glRenderEffectRegistry = cast ((cast GlRenderState.copyMap__glRenderState((cast sourceRuntime.glRenderEffectRegistry : Dynamic)) : Null<flighthq._internal._Map<String, GlRenderEffectRunner>>) : Null<flighthq._internal._Map<String, GlRenderEffectRunner>>));
     copyRenderStateRegistrations(({ final __callArgument2:Dynamic = target; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }));
   }
 
@@ -126,41 +126,41 @@ class GlRenderState {
     if ((cast !_Runtime.looseEquals((cast options : GlRenderOptions).backgroundColor, null) : Bool)) { setRenderStateBackgroundColor(({ final __callArgument17:Dynamic = state; __callArgument17; }), (cast (cast options : GlRenderOptions).backgroundColor : Float)); }
     runtime = (cast createGlRenderStateRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : GlRenderStateRuntime);
     _Runtime.setIndex(state, EntityRuntimeKey, runtime);
-    ((cast runtime : GlRenderStateRuntime).currentBlendMode = null);
-    ((cast runtime : GlRenderStateRuntime).currentFramebuffer = null);
-    ((cast runtime : GlRenderStateRuntime).currentMaskDepth = 0.0);
-    ((cast runtime : GlRenderStateRuntime).currentProgram = null);
-    ((cast runtime : GlRenderStateRuntime).currentScissorRect = null);
-    ((cast runtime : GlRenderStateRuntime).currentTexture = null);
-    ((cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha = false);
-    ((cast runtime : { @:optional var flushPendingDraws:Null<flighthq.types.GlRenderState->Void>; }).flushPendingDraws = (cast null));
-    ((cast runtime : GlRenderStateRuntime).renderTargetViewport = null);
-    ((cast runtime : GlRenderStateRuntime).defaultBitmapShader = defaultBitmapShader);
-    ((cast runtime : GlRenderStateRuntime).shaderLoc = shaderLoc);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterBlendMode = null);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterial = null);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialRenderer = null);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialFloats = 0.0);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialData = new flighthq._internal._Float32Array((8.0 * 256.0)));
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialBuffer = null);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterCount = 0.0);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceBuffer = null);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData = new flighthq._internal._Float32Array((13.0 * 256.0)));
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterTexture = null);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterSampler = null);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterStraightAlpha = false);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterSmoothing = null);
-    ((cast runtime : GlRenderStateRuntime).textureCache = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
-    ((cast runtime : GlRenderStateRuntime).textureSourcePremultipliedTextureCache = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
-    ((cast runtime : GlRenderStateRuntime).textureSourcePremultipliedSrgbTextureCache = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
-    ((cast runtime : GlRenderStateRuntime).textureSourceStraightTextureCache = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
-    ((cast runtime : GlRenderStateRuntime).textureSourceStraightSrgbTextureCache = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
-    ((cast runtime : GlRenderStateRuntime).quadVertexBuffer = quadVertexBuffer);
-    ((cast runtime : GlRenderStateRuntime).quadIndexBuffer = quadIndexBuffer);
-    ((cast runtime : GlRenderStateRuntime).quadVertexData = new flighthq._internal._Float32Array(16.0));
-    ((cast runtime : GlRenderStateRuntime).matrixArray = matrixArray);
-    ((cast runtime : GlRenderStateRuntime).scissorStack = cast ([] : Array<Dynamic>));
-    ((cast runtime : GlRenderStateRuntime).clipForms = cast ([] : Array<Dynamic>));
+    (runtime.currentBlendMode = cast (null : Null<String>));
+    (runtime.currentFramebuffer = cast (null : Null<flighthq._internal.dom.WebGLFramebuffer>));
+    (runtime.currentMaskDepth = cast (0.0 : Null<Float>));
+    (runtime.currentProgram = cast (null : Null<flighthq._internal.dom.WebGLProgram>));
+    (runtime.currentScissorRect = cast (null : Null<GlScissorRect>));
+    (runtime.currentTexture = cast (null : Null<flighthq._internal.dom.WebGLTexture>));
+    (runtime.currentTextureStraightAlpha = cast (false : Bool));
+    (runtime.flushPendingDraws = cast (null : Null<flighthq.types.GlRenderState->Void>));
+    (runtime.renderTargetViewport = cast (null : Null<GlViewportRect>));
+    (runtime.defaultBitmapShader = cast (defaultBitmapShader : GlBitmapShader));
+    (runtime.shaderLoc = cast (shaderLoc : GlShaderLocations));
+    (runtime.quadBatchWriterBlendMode = cast (null : Null<String>));
+    (runtime.quadBatchWriterMaterial = cast (null : Null<Material>));
+    (runtime.quadBatchWriterMaterialRenderer = cast (null : Null<GlMaterialRenderer>));
+    (runtime.quadBatchWriterMaterialFloats = cast (0.0 : Float));
+    (runtime.quadBatchWriterMaterialData = cast (new flighthq._internal._Float32Array((8.0 * 256.0)) : flighthq._internal._Float32Array));
+    (runtime.quadBatchWriterMaterialBuffer = cast (null : Null<flighthq._internal.dom.WebGLBuffer>));
+    (runtime.quadBatchWriterCount = cast (0.0 : Float));
+    (runtime.quadBatchWriterInstanceBuffer = cast (null : Null<flighthq._internal.dom.WebGLBuffer>));
+    (runtime.quadBatchWriterInstanceData = cast (new flighthq._internal._Float32Array((13.0 * 256.0)) : flighthq._internal._Float32Array));
+    (runtime.quadBatchWriterTexture = cast (null : Null<flighthq._internal.dom.WebGLTexture>));
+    (runtime.quadBatchWriterSampler = cast (null : Null<SamplerLike>));
+    (runtime.quadBatchWriterStraightAlpha = cast (false : Bool));
+    (runtime.quadBatchWriterSmoothing = cast (null : Null<Bool>));
+    (runtime.textureCache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : flighthq._internal._WeakMap<flighthq._internal._Any, flighthq._internal.dom.WebGLTexture>));
+    (runtime.textureSourcePremultipliedTextureCache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>));
+    (runtime.textureSourcePremultipliedSrgbTextureCache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>));
+    (runtime.textureSourceStraightTextureCache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>));
+    (runtime.textureSourceStraightSrgbTextureCache = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>));
+    (runtime.quadVertexBuffer = cast (quadVertexBuffer : flighthq._internal.dom.WebGLBuffer));
+    (runtime.quadIndexBuffer = cast (quadIndexBuffer : flighthq._internal.dom.WebGLBuffer));
+    (runtime.quadVertexData = cast (new flighthq._internal._Float32Array(16.0) : flighthq._internal._Float32Array));
+    (runtime.matrixArray = cast (matrixArray : flighthq._internal._Float32Array));
+    (runtime.scissorStack = cast (cast ([] : Array<Dynamic>) : Null<Array<GlScissorRect>>));
+    (runtime.clipForms = cast (cast ([] : Array<Dynamic>) : Array<String>));
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
     flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE_MINUS_SRC_ALPHA', flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_ALPHA));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
@@ -181,8 +181,8 @@ class GlRenderState {
         _Runtime.setIndex((cast (cast contextRuntime : GlContextRuntime__glRenderState).fields : flighthq._internal._Partial<flighthq._internal._Record<GlContextRuntimeKey__glRenderState, flighthq._internal._Any>>), key, value);
       } });
     }
-    ((cast runtime : GlRenderStateRuntime).currentRenderTarget = null);
-    ((cast runtime : { var bindingCacheGuard:Null<flighthq.types.GlRenderState->flighthq._internal.dom.WebGLProgram->Void>; }).bindingCacheGuard = (cast null));
+    (runtime.currentRenderTarget = cast (null : Null<GlRenderTarget>));
+    (runtime.bindingCacheGuard = cast (null : Null<flighthq.types.GlRenderState->flighthq._internal.dom.WebGLProgram->Void>));
     return cast runtime;
     return cast null;
   }
@@ -201,27 +201,27 @@ class GlRenderState {
     if ((cast !_Runtime.strictEquals((cast contextRuntime : GlContextRuntime__glRenderState).references, 0.0) : Bool)) { return; }
     gl = (cast state : flighthq.types.GlRenderState).gl;
     programs = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).shaderLoc)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast (cast runtime : GlRenderStateRuntime).shaderLoc : GlShaderLocations).program)); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).defaultBitmapShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast (cast runtime : GlRenderStateRuntime).defaultBitmapShader : { var program:flighthq._internal.dom.WebGLProgram; }).program)); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).particleShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast (cast runtime : GlRenderStateRuntime).particleShader : GlParticleShader).program)); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).quadBatchShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast (cast runtime : GlRenderStateRuntime).quadBatchShader : GlQuadBatchShader).program)); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).colorScaleBiasInstancedShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast (cast runtime : GlRenderStateRuntime).colorScaleBiasInstancedShader : GlColorScaleBiasInstancedShader).program)); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).colorMatrixInstancedShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast (cast runtime : GlRenderStateRuntime).colorMatrixInstancedShader : GlColorScaleBiasInstancedShader).program)); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).colorTintInstancedShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast (cast runtime : GlRenderStateRuntime).colorTintInstancedShader : GlColorScaleBiasInstancedShader).program)); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).uniformColorScaleBiasShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast (cast runtime : GlRenderStateRuntime).uniformColorScaleBiasShader : GlUniformColorScaleBiasShader).program)); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).shapeMeshColorScaleBiasShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast (cast runtime : GlRenderStateRuntime).shapeMeshColorScaleBiasShader : GlShapeMeshColorScaleBiasShader).program)); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).shapeMeshColorMatrixShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast (cast runtime : GlRenderStateRuntime).shapeMeshColorMatrixShader : GlShapeMeshColorScaleBiasShader).program)); }
+    if (_Runtime.truthy(runtime.shaderLoc)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.shaderLoc : GlShaderLocations).program)); }
+    if (_Runtime.truthy(runtime.defaultBitmapShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.defaultBitmapShader : { var program:flighthq._internal.dom.WebGLProgram; }).program)); }
+    if (_Runtime.truthy(runtime.particleShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.particleShader : GlParticleShader).program)); }
+    if (_Runtime.truthy(runtime.quadBatchShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.quadBatchShader : GlQuadBatchShader).program)); }
+    if (_Runtime.truthy(runtime.colorScaleBiasInstancedShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.colorScaleBiasInstancedShader : GlColorScaleBiasInstancedShader).program)); }
+    if (_Runtime.truthy(runtime.colorMatrixInstancedShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.colorMatrixInstancedShader : GlColorScaleBiasInstancedShader).program)); }
+    if (_Runtime.truthy(runtime.colorTintInstancedShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.colorTintInstancedShader : GlColorScaleBiasInstancedShader).program)); }
+    if (_Runtime.truthy(runtime.uniformColorScaleBiasShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.uniformColorScaleBiasShader : GlUniformColorScaleBiasShader).program)); }
+    if (_Runtime.truthy(runtime.shapeMeshColorScaleBiasShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.shapeMeshColorScaleBiasShader : GlShapeMeshColorScaleBiasShader).program)); }
+    if (_Runtime.truthy(runtime.shapeMeshColorMatrixShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.shapeMeshColorMatrixShader : GlShapeMeshColorScaleBiasShader).program)); }
     for (program in _Runtime.iterable(programs)) {
       flighthq._internal.backend.WebGl2Backend.deleteProgram(gl, program);
     }
-    flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, (cast runtime : GlRenderStateRuntime).quadVertexBuffer);
-    flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, (cast runtime : GlRenderStateRuntime).quadIndexBuffer);
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).particleCornerBuffer)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, (cast runtime : GlRenderStateRuntime).particleCornerBuffer); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).particleInstanceBuffer)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, (cast runtime : GlRenderStateRuntime).particleInstanceBuffer); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).quadBatchCornerBuffer)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, (cast runtime : GlRenderStateRuntime).quadBatchCornerBuffer); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceBuffer)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, (cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceBuffer); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialBuffer)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, (cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialBuffer); }
-    if (_Runtime.truthy((cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, (cast runtime : GlRenderStateRuntime).quadBatchWriterColorScaleBiasBuffer); }
+    flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, runtime.quadVertexBuffer);
+    flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, runtime.quadIndexBuffer);
+    if (_Runtime.truthy(runtime.particleCornerBuffer)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, runtime.particleCornerBuffer); }
+    if (_Runtime.truthy(runtime.particleInstanceBuffer)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, runtime.particleInstanceBuffer); }
+    if (_Runtime.truthy(runtime.quadBatchCornerBuffer)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, runtime.quadBatchCornerBuffer); }
+    if (_Runtime.truthy(runtime.quadBatchWriterInstanceBuffer)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, runtime.quadBatchWriterInstanceBuffer); }
+    if (_Runtime.truthy(runtime.quadBatchWriterMaterialBuffer)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, runtime.quadBatchWriterMaterialBuffer); }
+    if (_Runtime.truthy(runtime.quadBatchWriterColorScaleBiasBuffer)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, runtime.quadBatchWriterColorScaleBiasBuffer); }
   }
 
   @:noCompletion
@@ -234,40 +234,40 @@ class GlRenderState {
   public static function invalidateGlRenderStateCache(state:flighthq.types.GlRenderState):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument26:Dynamic = state; __callArgument26; })) : GlRenderStateRuntime);
-    ((cast runtime : GlRenderStateRuntime).currentBlendMode = null);
-    ((cast runtime : GlRenderStateRuntime).currentFramebuffer = null);
-    ((cast runtime : GlRenderStateRuntime).currentMaskDepth = 0.0);
-    ((cast runtime : GlRenderStateRuntime).currentProgram = null);
-    ((cast runtime : GlRenderStateRuntime).currentScissorRect = null);
-    ((cast runtime : GlRenderStateRuntime).currentTexture = null);
-    ((cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha = false);
-    ((cast runtime : GlRenderStateRuntime).renderTargetViewport = null);
+    (runtime.currentBlendMode = cast (null : Null<String>));
+    (runtime.currentFramebuffer = cast (null : Null<flighthq._internal.dom.WebGLFramebuffer>));
+    (runtime.currentMaskDepth = cast (0.0 : Null<Float>));
+    (runtime.currentProgram = cast (null : Null<flighthq._internal.dom.WebGLProgram>));
+    (runtime.currentScissorRect = cast (null : Null<GlScissorRect>));
+    (runtime.currentTexture = cast (null : Null<flighthq._internal.dom.WebGLTexture>));
+    (runtime.currentTextureStraightAlpha = cast (false : Bool));
+    (runtime.renderTargetViewport = cast (null : Null<GlViewportRect>));
   }
 
   public static function initializeOffscreenGlRuntime__glRenderState(runtime:GlRenderStateRuntime, screenRuntime:GlRenderStateRuntime):Void {
-    ((cast runtime : GlRenderStateRuntime).currentFramebuffer = null);
-    ((cast runtime : GlRenderStateRuntime).currentMaskDepth = 0.0);
-    ((cast runtime : GlRenderStateRuntime).currentScissorRect = null);
-    ((cast runtime : GlRenderStateRuntime).currentRenderTarget = null);
-    ((cast runtime : { @:optional var flushPendingDraws:Null<flighthq.types.GlRenderState->Void>; }).flushPendingDraws = (cast null));
-    ((cast runtime : GlRenderStateRuntime).renderTargetViewport = null);
-    ((cast runtime : GlRenderStateRuntime).defaultBitmapShader = (cast screenRuntime : GlRenderStateRuntime).defaultBitmapShader);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterBlendMode = null);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterial = null);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialRenderer = null);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialFloats = 0.0);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterMaterialData = new flighthq._internal._Float32Array((8.0 * 256.0)));
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterCount = 0.0);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterInstanceData = new flighthq._internal._Float32Array((13.0 * 256.0)));
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterTexture = null);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterSampler = null);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterStraightAlpha = false);
-    ((cast runtime : GlRenderStateRuntime).quadBatchWriterSmoothing = null);
-    ((cast runtime : GlRenderStateRuntime).particleInstanceData = new flighthq._internal._Float32Array(0.0));
-    ((cast runtime : GlRenderStateRuntime).quadVertexData = new flighthq._internal._Float32Array(16.0));
-    ((cast runtime : GlRenderStateRuntime).matrixArray = new flighthq._internal._Float32Array(9.0));
-    ((cast runtime : GlRenderStateRuntime).scissorStack = cast ([] : Array<Dynamic>));
-    ((cast runtime : GlRenderStateRuntime).clipForms = cast ([] : Array<Dynamic>));
+    (runtime.currentFramebuffer = cast (null : Null<flighthq._internal.dom.WebGLFramebuffer>));
+    (runtime.currentMaskDepth = cast (0.0 : Null<Float>));
+    (runtime.currentScissorRect = cast (null : Null<GlScissorRect>));
+    (runtime.currentRenderTarget = cast (null : Null<GlRenderTarget>));
+    (runtime.flushPendingDraws = cast (null : Null<flighthq.types.GlRenderState->Void>));
+    (runtime.renderTargetViewport = cast (null : Null<GlViewportRect>));
+    (runtime.defaultBitmapShader = cast (screenRuntime.defaultBitmapShader : GlBitmapShader));
+    (runtime.quadBatchWriterBlendMode = cast (null : Null<String>));
+    (runtime.quadBatchWriterMaterial = cast (null : Null<Material>));
+    (runtime.quadBatchWriterMaterialRenderer = cast (null : Null<GlMaterialRenderer>));
+    (runtime.quadBatchWriterMaterialFloats = cast (0.0 : Float));
+    (runtime.quadBatchWriterMaterialData = cast (new flighthq._internal._Float32Array((8.0 * 256.0)) : flighthq._internal._Float32Array));
+    (runtime.quadBatchWriterCount = cast (0.0 : Float));
+    (runtime.quadBatchWriterInstanceData = cast (new flighthq._internal._Float32Array((13.0 * 256.0)) : flighthq._internal._Float32Array));
+    (runtime.quadBatchWriterTexture = cast (null : Null<flighthq._internal.dom.WebGLTexture>));
+    (runtime.quadBatchWriterSampler = cast (null : Null<SamplerLike>));
+    (runtime.quadBatchWriterStraightAlpha = cast (false : Bool));
+    (runtime.quadBatchWriterSmoothing = cast (null : Null<Bool>));
+    (runtime.particleInstanceData = cast (new flighthq._internal._Float32Array(0.0) : Null<flighthq._internal._Float32Array>));
+    (runtime.quadVertexData = cast (new flighthq._internal._Float32Array(16.0) : flighthq._internal._Float32Array));
+    (runtime.matrixArray = cast (new flighthq._internal._Float32Array(9.0) : flighthq._internal._Float32Array));
+    (runtime.scissorStack = cast (cast ([] : Array<Dynamic>) : Null<Array<GlScissorRect>>));
+    (runtime.clipForms = cast (cast ([] : Array<Dynamic>) : Array<String>));
   }
 
   public static function copyMap__glRenderState<K, V>(source:Null<flighthq._internal._Map<K, V>>):Null<flighthq._internal._Map<K, V>> {

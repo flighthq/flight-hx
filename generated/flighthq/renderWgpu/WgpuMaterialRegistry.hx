@@ -19,7 +19,7 @@ class WgpuMaterialRegistry {
   public static function getWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMaterialRenderer> {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    return cast _Runtime.coalesce(({ final __collection1:Dynamic = (cast runtime : WgpuRenderStateRuntime).materialRendererMap; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, WgpuMaterialRenderer>).get(kind)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection1:Dynamic = runtime.materialRendererMap; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, WgpuMaterialRenderer>).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -27,7 +27,7 @@ class WgpuMaterialRegistry {
   public static function registerWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMaterialRenderer):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
-    ((cast ({ final __nullishOwner5 = runtime; final __nullishValue6:Null<flighthq._internal._Map<String, WgpuMaterialRenderer>> = cast (cast __nullishOwner5 : WgpuRenderStateRuntime).materialRendererMap; __nullishValue6 == null ? ((cast __nullishOwner5 : WgpuRenderStateRuntime).materialRendererMap = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, WgpuMaterialRenderer>>)) : (cast __nullishValue6 : Null<flighthq._internal._Map<String, WgpuMaterialRenderer>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast renderer)));
+    ((cast ({ final __nullishOwner5 = runtime; final __nullishValue6:Null<flighthq._internal._Map<String, WgpuMaterialRenderer>> = cast __nullishOwner5.materialRendererMap; __nullishValue6 == null ? (__nullishOwner5.materialRendererMap = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, WgpuMaterialRenderer>>)) : (cast __nullishValue6 : Null<flighthq._internal._Map<String, WgpuMaterialRenderer>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast renderer)));
   }
 
   @:noCompletion
@@ -37,11 +37,11 @@ class WgpuMaterialRegistry {
     var kind:String = cast _Runtime.UNDEFINED;
     var renderer:Null<WgpuMaterialRenderer> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : WgpuRenderStateRuntime);
-    map = (cast runtime : WgpuRenderStateRuntime).materialRendererMap;
+    map = runtime.materialRendererMap;
     kind = _Runtime.coalesce(({ final __structural8 = material; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { var kind:String; }).kind; }), function():Dynamic return cast StandardMaterialKindValue);
     renderer = _Runtime.coalesce(({ final __collection9:Dynamic = map; __collection9 == null ? _Runtime.UNDEFINED : ((cast __collection9 : flighthq._internal._Map<String, WgpuMaterialRenderer>).get(kind)); }), function():Dynamic return cast null);
     if ((cast !_Runtime.strictEquals(renderer, null) : Bool)) { return cast renderer; }
-    _Runtime.callOptionalValue((cast runtime : WgpuRenderStateRuntime).registryMiss, cast ([RenderRegistry.MaterialRenderer, kind] : Array<Dynamic>));
+    _Runtime.callOptionalValue(runtime.registryMiss, cast ([RenderRegistry.MaterialRenderer, kind] : Array<Dynamic>));
     return cast ((cast _Runtime.strictEquals(kind, StandardMaterialKindValue) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(({ final __collection10:Dynamic = map; __collection10 == null ? _Runtime.UNDEFINED : ((cast __collection10 : flighthq._internal._Map<String, WgpuMaterialRenderer>).get(StandardMaterialKindValue)); }), function():Dynamic return cast null) : Dynamic));
     return cast null;
   }

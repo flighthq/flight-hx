@@ -57,13 +57,13 @@ class GlRenderPass {
     activeScissor = ((cast _Runtime.strictEquals(enclosingScissor, null) : Bool) ? (cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast activeViewport : Dynamic)) : Dynamic) : (cast (cast GlRenderPass.intersectGlRects__glRenderPass(({ final __callArgument8:Dynamic = enclosingScissor; __callArgument8; }), ({ final __callArgument9:Dynamic = activeViewport; __callArgument9; })) : GlScissorRect) : Dynamic));
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), (cast target : GlRenderTarget).framebuffer);
     flighthq._internal.backend.WebGl2Backend.viewport(gl, (cast activeViewport : GlViewportRect).x, (cast activeViewport : GlViewportRect).y, (cast activeViewport : GlViewportRect).width, (cast activeViewport : GlViewportRect).height);
-    ((cast runtime : GlRenderStateRuntime).currentFramebuffer = (cast target : GlRenderTarget).framebuffer);
-    ((cast runtime : GlRenderStateRuntime).currentRenderTarget = target);
-    ((cast runtime : GlRenderStateRuntime).renderTargetViewport = activeViewport);
-    ((cast runtime : GlRenderStateRuntime).currentScissorRect = activeScissor);
-    ((cast runtime : GlRenderStateRuntime).scissorStack = ((cast _Runtime.strictEquals(activeScissor, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([activeScissor] : Array<Dynamic>) : Dynamic)));
-    ((cast runtime : GlRenderStateRuntime).clipForms = cast ([] : Array<Dynamic>));
-    ((cast runtime : GlRenderStateRuntime).currentMaskDepth = 0.0);
+    (runtime.currentFramebuffer = cast ((cast target : GlRenderTarget).framebuffer : Null<flighthq._internal.dom.WebGLFramebuffer>));
+    (runtime.currentRenderTarget = cast (target : Null<GlRenderTarget>));
+    (runtime.renderTargetViewport = cast (activeViewport : Null<GlViewportRect>));
+    (runtime.currentScissorRect = cast (activeScissor : Null<GlScissorRect>));
+    (runtime.scissorStack = cast (((cast _Runtime.strictEquals(activeScissor, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([activeScissor] : Array<Dynamic>) : Dynamic)) : Null<Array<GlScissorRect>>));
+    (runtime.clipForms = cast (cast ([] : Array<Dynamic>) : Array<String>));
+    (runtime.currentMaskDepth = cast (0.0 : Null<Float>));
     GlRenderPass.applyGlScissor__glRenderPass(({ final __callArgument10:Dynamic = gl; __callArgument10; }), ({ final __callArgument11:Dynamic = activeScissor; __callArgument11; }));
     if ((cast ((cast currentMaskDepth : Float) > (cast 0.0 : Float)) : Bool)) { flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_TEST', flighthq._internal.backend.WebGl2Backend.STENCIL_TEST)); }
     GlRenderPass.invalidateGlPassBindingCache__glRenderPass(({ final __callArgument12:Dynamic = runtime; __callArgument12; }));
@@ -90,7 +90,7 @@ class GlRenderPass {
     _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(_Runtime.field(stack, 'length'), 0.0) : Bool)) { ((cast GlRenderPass._passStack__glRenderPass : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, Array<GlPassStackEntry__glRenderPass>>).delete_(gl)); }
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument17:Dynamic = state; __callArgument17; })) : GlRenderStateRuntime);
-    ended = _Runtime.coalesce((cast runtime : GlRenderStateRuntime).currentRenderTarget, function():Dynamic return cast null);
+    ended = _Runtime.coalesce(runtime.currentRenderTarget, function():Dynamic return cast null);
     GlRenderPass.restoreGlPassState__glRenderPass(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast (cast saved : GlPassStackEntry__glRenderPass).ownerState : Dynamic));
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), (cast (cast saved : GlPassStackEntry__glRenderPass).previousState : SavedGlPassState__glRenderPass).framebuffer);
     viewport = (cast (cast saved : GlPassStackEntry__glRenderPass).previousState : SavedGlPassState__glRenderPass).renderTargetViewport;
@@ -112,8 +112,8 @@ class GlRenderPass {
     copyMatrix(({ final __callArgument27:Dynamic = next; __callArgument27; }), ({ final __callArgument28:Dynamic = transform; __callArgument28; }));
     ((cast state : GlRenderState).renderTransform2D = next);
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument29:Dynamic = state; __callArgument29; })) : GlRenderStateRuntime);
-    for (source in _Runtime.iterable((cast runtime : GlRenderStateRuntime).renderProxySources)) {
-      var proxy:Null<RenderProxy> = ((cast (cast runtime : GlRenderStateRuntime).renderProxyMap : flighthq._internal._WeakMap<Renderable, RenderProxy>).get(source));
+    for (source in _Runtime.iterable(runtime.renderProxySources)) {
+      var proxy:Null<RenderProxy> = ((cast runtime.renderProxyMap : flighthq._internal._WeakMap<Renderable, RenderProxy>).get(source));
       if ((cast !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast proxy : RenderProxy).lastLocalTransformId = -1.0); }
     }
   }
@@ -138,7 +138,7 @@ class GlRenderPass {
       flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
       flighthq._internal.backend.WebGl2Backend.clearBufferfi(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_STENCIL', flighthq._internal.backend.WebGl2Backend.DEPTH_STENCIL), 0.0, _Runtime.field(target, 'clearDepth'), 0.0);
     }
-    ((cast (cast getGlRenderStateRuntime(({ final __callArgument38:Dynamic = state; __callArgument38; })) : GlRenderStateRuntime) : GlRenderStateRuntime).currentBlendMode = null);
+    ((cast (cast getGlRenderStateRuntime(({ final __callArgument38:Dynamic = state; __callArgument38; })) : GlRenderStateRuntime) : { var currentBlendMode:Null<String>; }).currentBlendMode = cast (null : Null<String>));
   }
 
   public static function isGlColorAttachmentPreserved__glRenderPass(preserve:flighthq._internal._Union2<Bool, Array<Bool>>, index:Float):Bool {
@@ -168,27 +168,27 @@ class GlRenderPass {
   public static function captureGlPassState__glRenderPass(state:GlRenderState):SavedGlPassState__glRenderPass {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument39:Dynamic = state; __callArgument39; })) : GlRenderStateRuntime);
-    return cast { clipForms: _Runtime.concatArrays([_Runtime.toArray(_Runtime.coalesce((cast runtime : GlRenderStateRuntime).clipForms, function():Dynamic return cast cast ([] : Array<Dynamic>)))]), currentMaskDepth: _Runtime.coalesce((cast runtime : GlRenderStateRuntime).currentMaskDepth, function():Dynamic return cast 0.0), framebuffer: (cast runtime : GlRenderStateRuntime).currentFramebuffer, renderTarget: _Runtime.coalesce((cast runtime : GlRenderStateRuntime).currentRenderTarget, function():Dynamic return cast null), renderTargetViewport: (cast runtime : GlRenderStateRuntime).renderTargetViewport, renderTransform2D: (cast state : GlRenderState).renderTransform2D, scissorRect: _Runtime.coalesce((cast runtime : GlRenderStateRuntime).currentScissorRect, function():Dynamic return cast null), scissorStack: _Runtime.concatArrays([_Runtime.toArray(_Runtime.coalesce((cast runtime : GlRenderStateRuntime).scissorStack, function():Dynamic return cast cast ([] : Array<Dynamic>)))]) };
+    return cast { clipForms: _Runtime.concatArrays([_Runtime.toArray(_Runtime.coalesce(runtime.clipForms, function():Dynamic return cast cast ([] : Array<Dynamic>)))]), currentMaskDepth: _Runtime.coalesce(runtime.currentMaskDepth, function():Dynamic return cast 0.0), framebuffer: runtime.currentFramebuffer, renderTarget: _Runtime.coalesce(runtime.currentRenderTarget, function():Dynamic return cast null), renderTargetViewport: runtime.renderTargetViewport, renderTransform2D: (cast state : GlRenderState).renderTransform2D, scissorRect: _Runtime.coalesce(runtime.currentScissorRect, function():Dynamic return cast null), scissorStack: _Runtime.concatArrays([_Runtime.toArray(_Runtime.coalesce(runtime.scissorStack, function():Dynamic return cast cast ([] : Array<Dynamic>)))]) };
     return cast null;
   }
 
   public static function invalidateGlPassBindingCache__glRenderPass(runtime:Dynamic):Void {
-    ((cast runtime : GlRenderStateRuntime).currentBlendMode = null);
-    ((cast runtime : GlRenderStateRuntime).currentProgram = null);
-    ((cast runtime : GlRenderStateRuntime).currentTexture = null);
-    ((cast runtime : GlRenderStateRuntime).currentTextureStraightAlpha = false);
+    (runtime.currentBlendMode = cast (null : Null<String>));
+    (runtime.currentProgram = cast (null : Null<flighthq._internal.dom.WebGLProgram>));
+    (runtime.currentTexture = cast (null : Null<flighthq._internal.dom.WebGLTexture>));
+    (runtime.currentTextureStraightAlpha = cast (false : Bool));
   }
 
   public static function restoreGlPassState__glRenderPass(state:GlRenderState, saved:SavedGlPassState__glRenderPass):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument40:Dynamic = state; __callArgument40; })) : GlRenderStateRuntime);
-    ((cast runtime : GlRenderStateRuntime).currentFramebuffer = _Runtime.field(saved, 'framebuffer'));
-    ((cast runtime : GlRenderStateRuntime).currentRenderTarget = _Runtime.field(saved, 'renderTarget'));
-    ((cast runtime : GlRenderStateRuntime).renderTargetViewport = _Runtime.field(saved, 'renderTargetViewport'));
-    ((cast runtime : GlRenderStateRuntime).currentScissorRect = _Runtime.field(saved, 'scissorRect'));
-    ((cast runtime : GlRenderStateRuntime).scissorStack = _Runtime.field(saved, 'scissorStack'));
-    ((cast runtime : GlRenderStateRuntime).clipForms = _Runtime.field(saved, 'clipForms'));
-    ((cast runtime : GlRenderStateRuntime).currentMaskDepth = _Runtime.field(saved, 'currentMaskDepth'));
+    (runtime.currentFramebuffer = cast (_Runtime.field(saved, 'framebuffer') : Null<flighthq._internal.dom.WebGLFramebuffer>));
+    (runtime.currentRenderTarget = cast (_Runtime.field(saved, 'renderTarget') : Null<GlRenderTarget>));
+    (runtime.renderTargetViewport = cast (_Runtime.field(saved, 'renderTargetViewport') : Null<GlViewportRect>));
+    (runtime.currentScissorRect = cast (_Runtime.field(saved, 'scissorRect') : Null<GlScissorRect>));
+    (runtime.scissorStack = cast (_Runtime.field(saved, 'scissorStack') : Null<Array<GlScissorRect>>));
+    (runtime.clipForms = cast (_Runtime.field(saved, 'clipForms') : Array<String>));
+    (runtime.currentMaskDepth = cast (_Runtime.field(saved, 'currentMaskDepth') : Null<Float>));
     ((cast state : GlRenderState).renderTransform2D = _Runtime.field(saved, 'renderTransform2D'));
   }
 

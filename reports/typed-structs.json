@@ -132071,9 +132071,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 544,
+        "directAccesses": 544,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -132823,7 +132823,7 @@
       },
       "name": "GlRenderStateRuntime",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGL render-state runtime",
       "reasons": [],
       "source": "upstream/packages/types/src/GlRenderState.ts",
       "sourceProvenance": {
@@ -414931,9 +414931,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 730,
+        "directAccesses": 730,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -415747,7 +415747,7 @@
       },
       "name": "WgpuRenderStateRuntime",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGPU render-state runtime",
       "reasons": [],
       "source": "upstream/packages/types/src/WgpuRenderState.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1603,
+      "newAuditOnly": 1601,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1603,
+    "auditOnlySchemas": 1601,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 12490,
-    "directSchemas": 401,
+    "directAccesses": 13764,
+    "directSchemas": 403,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 18176,
+    "pendingAccesses": 16902,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

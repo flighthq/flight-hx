@@ -135,10 +135,10 @@ class StandardPbrWgpuMeshMaterialRenderer {
     var pipeline:WgpuPbrPipeline = cast _Runtime.UNDEFINED;
     var binding:WgpuMaterialBinding = cast _Runtime.UNDEFINED;
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : WgpuRenderStateRuntime);
-    pass = (cast stateRuntime : WgpuRenderStateRuntime).renderPass;
+    pass = stateRuntime.renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     pbr = (cast material : Null<StandardPbrMaterial>);
-    format = _Runtime.coalesce((cast stateRuntime : WgpuRenderStateRuntime).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    format = _Runtime.coalesce(stateRuntime.currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     pipeline = (cast ensureWgpuPbrPipeline(({ final __callArgument20:Dynamic = state; __callArgument20; }), (cast buildWgpuPbrStandardDefineKey(({ final __callArgument21:Dynamic = pbr; __callArgument21; }), ({ final __callArgument22:Dynamic = pbr; __callArgument22; })) : WgpuPbrDefineKey), (cast format : String)) : WgpuPbrPipeline);
     writeWgpuFrameUniform(({ final __callArgument23:Dynamic = state; __callArgument23; }), ({ final __callArgument24:Dynamic = camera; __callArgument24; }), ({ final __callArgument25:Dynamic = lights; __callArgument25; }));
     binding = (cast ensureWgpuPbrMaterialBindGroup(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = pipeline; __callArgument27; }), ({ final __callArgument28:Dynamic = _Runtime.coalesce(pbr, function():Dynamic return cast StandardPbrWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__standardPbrWgpuMeshMaterialRenderer); __callArgument28; }), ({ final __callArgument29:Dynamic = pbr; __callArgument29; })) : WgpuMaterialBinding);

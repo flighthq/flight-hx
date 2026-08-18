@@ -94,18 +94,18 @@ class WgpuEffectPass {
     var view:flighthq._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
     var pass:flighthq._internal.dom.GPURenderPassEncoder = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
-    if ((cast _Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).commandEncoder, null) : Bool)) { _Runtime.throwValue(_Runtime.error('No active command encoder — call renderWgpuBackground first')); }
-    if ((cast !_Runtime.strictEquals((cast runtime : WgpuRenderStateRuntime).renderPass, null) : Bool)) {
-      (cast (cast runtime : WgpuRenderStateRuntime).renderPass : flighthq._internal.dom.GPURenderPassEncoder).end();
-      ((cast runtime : WgpuRenderStateRuntime).renderPass = null);
+    if ((cast _Runtime.strictEquals(runtime.commandEncoder, null) : Bool)) { _Runtime.throwValue(_Runtime.error('No active command encoder — call renderWgpuBackground first')); }
+    if ((cast !_Runtime.strictEquals(runtime.renderPass, null) : Bool)) {
+      (cast runtime.renderPass : flighthq._internal.dom.GPURenderPassEncoder).end();
+      (runtime.renderPass = cast (null : Null<flighthq._internal.dom.GPURenderPassEncoder>));
     }
-    view = ((cast !_Runtime.strictEquals(dest, null) : Bool) ? (cast (cast dest : WgpuRenderTarget).view : Dynamic) : (cast (cast runtime : WgpuRenderStateRuntime).canvasTextureView : Dynamic));
-    pass = (cast (cast runtime : WgpuRenderStateRuntime).commandEncoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: view, loadOp: loadOp, storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) });
+    view = ((cast !_Runtime.strictEquals(dest, null) : Bool) ? (cast (cast dest : WgpuRenderTarget).view : Dynamic) : (cast runtime.canvasTextureView : Dynamic));
+    pass = (cast runtime.commandEncoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: view, loadOp: loadOp, storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) });
     if ((cast !_Runtime.strictEquals(dest, null) : Bool)) {
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setViewport(0.0, 0.0, (cast dest : WgpuRenderTarget).width, (cast dest : WgpuRenderTarget).height, 0.0, 1.0);
     } else {
-      var w:Float = _Runtime.coalesce(({ final __structural3 = (cast runtime : WgpuRenderStateRuntime).renderTargetViewport; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var width:Float; }).width; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : WgpuRenderState).canvas, 'width'));
-      var h:Float = _Runtime.coalesce(({ final __structural4 = (cast runtime : WgpuRenderStateRuntime).renderTargetViewport; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var height:Float; }).height; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : WgpuRenderState).canvas, 'height'));
+      var w:Float = _Runtime.coalesce(({ final __structural3 = runtime.renderTargetViewport; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var width:Float; }).width; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : WgpuRenderState).canvas, 'width'));
+      var h:Float = _Runtime.coalesce(({ final __structural4 = runtime.renderTargetViewport; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var height:Float; }).height; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : WgpuRenderState).canvas, 'height'));
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setViewport(0.0, 0.0, w, h, 0.0, 1.0);
     }
     return cast pass;
