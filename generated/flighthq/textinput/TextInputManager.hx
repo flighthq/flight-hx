@@ -93,7 +93,7 @@ class TextInputManager {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
     target = (cast manager : flighthq.types.TextInputManager).focused;
-    if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast (cast target : RichText).enabled : Bool) : Bool)) : Bool)) { return; }
+    if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast (cast target : { var enabled:Bool; }).enabled : Bool) : Bool)) : Bool)) { return; }
     layout = _Runtime.field((cast getRichTextRuntime(({ final __callArgument22:Dynamic = target; __callArgument22; })) : RichTextRuntime), 'textLayout');
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return; }
     index = (cast getTextInputCharacterIndexAtPoint(({ final __callArgument23:Dynamic = target; __callArgument23; }), ({ final __callArgument24:Dynamic = layout; __callArgument24; }), (cast x : Float), (cast y : Float)) : Float);
@@ -103,8 +103,8 @@ class TextInputManager {
   public static function dispatchTextInputWheel(manager:flighthq.types.TextInputManager, deltaLines:Float):Void {
     var target:Null<RichText> = cast _Runtime.UNDEFINED;
     target = (cast manager : flighthq.types.TextInputManager).focused;
-    if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast (cast target : RichText).enabled : Bool) : Bool)) : Bool)) { return; }
-    setRichTextScrollV(({ final __callArgument26:Dynamic = target; __callArgument26; }), (cast _Runtime.addNumbers((cast (cast target : RichText).data : RichTextData).scrollV, HxMath.round(deltaLines)) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast (cast target : { var enabled:Bool; }).enabled : Bool) : Bool)) : Bool)) { return; }
+    setRichTextScrollV(({ final __callArgument26:Dynamic = target; __callArgument26; }), (cast _Runtime.addNumbers((cast (cast target : { var data:RichTextData; }).data : { var scrollV:Float; }).scrollV, HxMath.round(deltaLines)) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static function focusTextInput(manager:flighthq.types.TextInputManager, target:RichText):Void {
@@ -120,7 +120,7 @@ class TextInputManager {
     var target:Null<RichText> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast manager : flighthq.types.TextInputManager).enabled : Bool) : Bool)) { return cast null; }
     target = (cast manager : flighthq.types.TextInputManager).focused;
-    if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast (cast target : RichText).enabled : Bool) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast (cast target : { var enabled:Bool; }).enabled : Bool) : Bool)) : Bool)) { return cast null; }
     return cast target;
     return cast null;
   }

@@ -43,11 +43,11 @@ class CanvasTextInput {
     if ((cast _Runtime.strictEquals(input, null) : Bool)) { return; }
     layout = _Runtime.field((cast getRichTextRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : RichTextRuntime), 'textLayout');
     if ((cast ((cast _Runtime.andValue(!(cast (cast input : TextInputState).focused : Bool), function():Dynamic return cast !(cast (cast input : TextInputState).alwaysShowSelection : Bool)) : Bool) || (cast _Runtime.strictEquals(layout, null) : Bool)) : Bool)) { return; }
-    fieldW = (cast computeTextBoundsWidth((cast (cast source : RichText).data : Dynamic), ({ final __callArgument2:Dynamic = layout; __callArgument2; })) : Float);
-    fieldH = (cast computeTextBoundsHeight((cast (cast source : RichText).data : Dynamic), ({ final __callArgument3:Dynamic = layout; __callArgument3; })) : Float);
-    firstVisibleLine = ((cast (cast source : RichText).data : RichTextData).scrollV - 1.0);
-    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast layout : TextLayoutResult).lineHeights, (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
-    scrollXOffset = (cast (cast source : RichText).data : RichTextData).scrollH;
+    fieldW = (cast computeTextBoundsWidth((cast source.data : Dynamic), ({ final __callArgument2:Dynamic = layout; __callArgument2; })) : Float);
+    fieldH = (cast computeTextBoundsHeight((cast source.data : Dynamic), ({ final __callArgument3:Dynamic = layout; __callArgument3; })) : Float);
+    firstVisibleLine = ((cast source.data : { var scrollV:Float; }).scrollV - 1.0);
+    scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast layout : { var lineHeights:Array<Float>; }).lineHeights, (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
+    scrollXOffset = (cast source.data : { var scrollH:Float; }).scrollH;
     context = (cast state : CanvasRenderState).context;
     flighthq._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));
     setCanvasTransform(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = context; __callArgument5; }), (cast renderProxy : RenderProxy2D).transform2D);

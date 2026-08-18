@@ -148,7 +148,7 @@ class RiveScene2D {
     name = (cast RiveScene2D.readRiveText__riveScene2D(({ final __callArgument50:Dynamic = object; __callArgument50; }), (cast RiveScene2D.RIVE_NAME__riveScene2D : Float), (cast '' : String)) : String);
     if ((cast _Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveScene2D.RIVE_TEXT_TYPE_KEY__riveScene2D) : Bool)) {
       var label:RichText = (cast createRiveRichText(({ final __callArgument51:Dynamic = artboard; __callArgument51; }), (cast index : Float), ({ final __callArgument52:Dynamic = fontNames; __callArgument52; })) : RichText);
-      ((cast label : RichText).name = name);
+      (label.name = cast (name : Null<String>));
       return cast label;
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveScene2D.RIVE_IMAGE_TYPE_KEY__riveScene2D) : Bool)) {

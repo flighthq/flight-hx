@@ -76,18 +76,18 @@ class SwfEditText {
     if ((cast !_Runtime.strictEquals(fontName, '') : Bool)) { ((cast format : TextFormat).font = fontName); }
     content = ((cast _Runtime.field(field, 'html') : Bool) ? (cast (cast parseTextMarkup((cast _Runtime.field(field, 'text') : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : RichTextContent) : Dynamic) : (cast null : Dynamic));
     node = (cast createRichText(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : RichText);
-    ((cast (cast node : RichText).data : RichTextData).border = _Runtime.field(field, 'border'));
-    ((cast (cast node : RichText).data : RichTextData).defaultTextFormat = format);
-    ((cast (cast node : RichText).data : RichTextData).height = _Runtime.field(field, 'height'));
-    ((cast (cast node : RichText).data : RichTextData).maxChars = _Runtime.field(field, 'maxChars'));
-    ((cast (cast node : RichText).data : RichTextData).multiline = _Runtime.field(field, 'multiline'));
-    ((cast (cast node : RichText).data : RichTextData).selectable = ((cast _Runtime.field(field, 'selectable') : Bool) && (cast !(cast _Runtime.field(field, 'readOnly') : Bool) : Bool)));
-    ((cast (cast node : RichText).data : RichTextData).text = ((cast _Runtime.strictEquals(content, null) : Bool) ? (cast _Runtime.field(field, 'text') : Dynamic) : (cast (cast content : RichTextContent).text : Dynamic)));
-    if ((cast !_Runtime.strictEquals(content, null) : Bool)) { ((cast (cast node : RichText).data : RichTextData).textFormatRanges = (cast content : RichTextContent).formatRanges); }
-    ((cast (cast node : RichText).data : RichTextData).textColor = _Runtime.field(field, 'color'));
-    ((cast (cast node : RichText).data : RichTextData).textFormat = format);
-    ((cast (cast node : RichText).data : RichTextData).width = _Runtime.field(field, 'width'));
-    ((cast (cast node : RichText).data : RichTextData).wordWrap = _Runtime.field(field, 'wordWrap'));
+    ((cast node.data : { var border:Bool; }).border = cast (_Runtime.field(field, 'border') : Bool));
+    ((cast node.data : { var defaultTextFormat:TextFormat; }).defaultTextFormat = cast (format : TextFormat));
+    ((cast node.data : { var height:Float; }).height = cast (_Runtime.field(field, 'height') : Float));
+    ((cast node.data : { var maxChars:Float; }).maxChars = cast (_Runtime.field(field, 'maxChars') : Float));
+    ((cast node.data : { var multiline:Bool; }).multiline = cast (_Runtime.field(field, 'multiline') : Bool));
+    ((cast node.data : { var selectable:Bool; }).selectable = cast (((cast _Runtime.field(field, 'selectable') : Bool) && (cast !(cast _Runtime.field(field, 'readOnly') : Bool) : Bool)) : Bool));
+    ((cast node.data : { var text:String; }).text = cast (((cast _Runtime.strictEquals(content, null) : Bool) ? (cast _Runtime.field(field, 'text') : Dynamic) : (cast (cast content : { var text:String; }).text : Dynamic)) : String));
+    if ((cast !_Runtime.strictEquals(content, null) : Bool)) { ((cast node.data : { var textFormatRanges:Array<TextFormatRange>; }).textFormatRanges = cast ((cast content : { var formatRanges:Array<TextFormatRange>; }).formatRanges : Array<TextFormatRange>)); }
+    ((cast node.data : { var textColor:Float; }).textColor = cast (_Runtime.field(field, 'color') : Float));
+    ((cast node.data : { var textFormat:TextFormat; }).textFormat = cast (format : TextFormat));
+    ((cast node.data : { var width:Float; }).width = cast (_Runtime.field(field, 'width') : Float));
+    ((cast node.data : { var wordWrap:Bool; }).wordWrap = cast (_Runtime.field(field, 'wordWrap') : Bool));
     return cast node;
     return cast null;
   }

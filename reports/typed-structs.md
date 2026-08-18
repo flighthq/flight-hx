@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1596 |
-| Direct schemas | 408 |
+| Audit-only schemas | 1591 |
+| Direct schemas | 413 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 16195 |
-| Directly emitted accesses | 14471 |
+| Pending accesses | 15304 |
+| Directly emitted accesses | 15362 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1596 |
+| Newly discovered, audit-only | 1591 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -1300,9 +1300,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ResourceLoadReport` | `direct` | `preserved` | `@flighthq/types:interface#ResourceLoadReport` | broad asset document | 6 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ResourceLoadReportStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#ResourceResolutionState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#RichText` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 165 | 1 | 0 | 166 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RichTextContent` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 45 | 3 | 0 | 48 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RichTextData` | `audit-only` | `new` | — | checker-discovered public declaration | 21 | 188 | 61 | 0 | 249 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RichText` | `direct` | `new` | — | reviewed escape-free rich text | 19 | 165 | 1 | 0 | 0 | 166 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RichTextContent` | `direct` | `new` | — | reviewed escape-free rich-text content | 2 | 45 | 3 | 0 | 0 | 48 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RichTextData` | `direct` | `new` | — | reviewed escape-free rich-text data | 21 | 188 | 61 | 0 | 0 | 249 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RichTextRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 46 | 37 | 23 | 0 | 60 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RigidBody2D` | `audit-only` | `new` | — | checker-discovered public declaration | 26 | 590 | 133 | 0 | 723 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#RimModifier` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
@@ -1728,9 +1728,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TextLabel` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 28 | 0 | 0 | 28 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextLabelData` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 44 | 7 | 0 | 51 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextLabelRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 41 | 5 | 6 | 1 | 12 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TextLayoutGroup` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 257 | 43 | 0 | 300 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextLayoutGroup` | `direct` | `new` | — | reviewed escape-free text-layout group | 12 | 257 | 43 | 0 | 0 | 300 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextLayoutParams` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 17 | 0 | 0 | 17 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TextLayoutResult` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 118 | 10 | 0 | 128 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextLayoutResult` | `direct` | `new` | — | reviewed escape-free text-layout result | 9 | 118 | 10 | 0 | 0 | 128 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextLineMetrics` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TextListMarker` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#TextMeasureFunction` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |

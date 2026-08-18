@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_596,
+      newAuditOnly: 1_591,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(410);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(415);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_596);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_591);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(8);
+    expect(newDirect).toHaveLength(13);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -140,6 +140,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'RenderTargetDescriptor',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free render-target descriptor',
+        }),
+        expect.objectContaining({
+          name: 'RichText',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free rich text',
+        }),
+        expect.objectContaining({
+          name: 'RichTextContent',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free rich-text content',
+        }),
+        expect.objectContaining({
+          name: 'RichTextData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free rich-text data',
+        }),
+        expect.objectContaining({
+          name: 'TextLayoutGroup',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free text-layout group',
+        }),
+        expect.objectContaining({
+          name: 'TextLayoutResult',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free text-layout result',
         }),
         expect.objectContaining({
           name: 'WgpuRenderStateRuntime',
@@ -193,6 +218,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:d5e40ef824804481c0135b2b35a6745fc6d84140f5c43fb4644b3a8af5a12b45',
         id: '@flighthq/types:interface#WgpuRenderTarget',
         purpose: 'reviewed escape-free WebGPU render target',
+      },
+      {
+        declarationFingerprint: 'sha256:25a70f58982f05188d38a15abf985c669e653dddf4bebfad31755210bff86a5b',
+        id: '@flighthq/types:interface#TextLayoutGroup',
+        purpose: 'reviewed escape-free text-layout group',
+      },
+      {
+        declarationFingerprint: 'sha256:0775b68e5d326626f79c05fb51f2b81d734453706da315289b1c8772c0062d88',
+        id: '@flighthq/types:interface#TextLayoutResult',
+        purpose: 'reviewed escape-free text-layout result',
+      },
+      {
+        declarationFingerprint: 'sha256:fa82e08e1863fcc75e3ed9619dc8585f19565703bc84971444398c1df93031eb',
+        id: '@flighthq/types:interface#RichTextData',
+        purpose: 'reviewed escape-free rich-text data',
+      },
+      {
+        declarationFingerprint: 'sha256:ede1beea3240687757ee8455992b246d3497476a47de43d9b8e5d02d8b73abe7',
+        id: '@flighthq/types:interface#RichText',
+        purpose: 'reviewed escape-free rich text',
+      },
+      {
+        declarationFingerprint: 'sha256:048d186739d8bfe34b14f636cd57fb89116b401bab1347c3742749f04b2838be',
+        id: '@flighthq/types:interface#RichTextContent',
+        purpose: 'reviewed escape-free rich-text content',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -545,6 +595,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const textStructCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['RichText', 'RichTextContent', 'RichTextData', 'TextLayoutGroup', 'TextLayoutResult'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -585,22 +644,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_596,
+      auditOnlySchemas: 1_591,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 14_471,
-      directSchemas: 408,
+      directAccesses: 15_362,
+      directSchemas: 413,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 16_195,
+      pendingAccesses: 15_304,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_596,
+      newAuditOnly: 1_591,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -628,7 +687,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(14_471);
+    expect(report.summary.directAccesses).toBe(15_362);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -735,6 +794,48 @@ describe('typed struct analysis', () => {
         reasons: [],
       });
     }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'RichText',
+        166,
+        'sha256:ede1beea3240687757ee8455992b246d3497476a47de43d9b8e5d02d8b73abe7',
+        'reviewed escape-free rich text',
+      ],
+      [
+        'RichTextContent',
+        48,
+        'sha256:048d186739d8bfe34b14f636cd57fb89116b401bab1347c3742749f04b2838be',
+        'reviewed escape-free rich-text content',
+      ],
+      [
+        'RichTextData',
+        249,
+        'sha256:fa82e08e1863fcc75e3ed9619dc8585f19565703bc84971444398c1df93031eb',
+        'reviewed escape-free rich-text data',
+      ],
+      [
+        'TextLayoutGroup',
+        300,
+        'sha256:25a70f58982f05188d38a15abf985c669e653dddf4bebfad31755210bff86a5b',
+        'reviewed escape-free text-layout group',
+      ],
+      [
+        'TextLayoutResult',
+        128,
+        'sha256:0775b68e5d326626f79c05fb51f2b81d734453706da315289b1c8772c0062d88',
+        'reviewed escape-free text-layout result',
+      ],
+    ] as const) {
+      expect(textStructCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
     expect(classAuditById.get('@flighthq/types:interface#BitmapRegion')?.migration).toEqual({
       mechanicallyCompatible: true,
       normalizationReasons: [],
@@ -773,6 +874,29 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(renderTargetId)).toBe(false);
     }
+    for (const richTextId of ['@flighthq/types:interface#RichText', '@flighthq/types:interface#RichTextData']) {
+      expect(classAuditById.get(richTextId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer'],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.has(richTextId)).toBe(false);
+    }
+    for (const textStructId of [
+      '@flighthq/types:interface#RichTextContent',
+      '@flighthq/types:interface#TextLayoutGroup',
+      '@flighthq/types:interface#TextLayoutResult',
+    ]) {
+      expect(classAuditById.get(textStructId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.get(textStructId)?.nominalIdentity).toEqual({
+        blockerReasons: ['normalization-provenance'],
+        closed: false,
+      });
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -799,6 +923,15 @@ describe('typed struct analysis', () => {
       expect(generatedRenderTarget).not.toMatch(/_Runtime\.field\(target,/u);
       expect(generatedRenderTarget).not.toContain(`(cast target : flighthq.types.${typeName}).`);
     }
+    const richText = readFileSync('generated/flighthq/text/RichText.hx', 'utf8');
+    expect(richText).not.toMatch(/_Runtime\.field\((?:content|richText),/u);
+    expect(richText).not.toMatch(/\(cast richText : flighthq\.types\.RichText\)\./u);
+    const richTextContent = readFileSync('generated/flighthq/textlayout/RichTextContent.hx', 'utf8');
+    expect(richTextContent).not.toMatch(/_Runtime\.field\(data,/u);
+    const richTextMetrics = readFileSync('generated/flighthq/textlayout/RichTextMetrics.hx', 'utf8');
+    expect(richTextMetrics).not.toMatch(/_Runtime\.field\(layout,/u);
+    const richTextQuery = readFileSync('generated/flighthq/textlayout/RichTextQuery.hx', 'utf8');
+    expect(richTextQuery).not.toMatch(/_Runtime\.field\((?:group|layout),/u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

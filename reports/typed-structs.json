@@ -268490,9 +268490,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 166,
+        "directAccesses": 166,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -268664,7 +268664,7 @@
       },
       "name": "RichText",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free rich text",
       "reasons": [],
       "source": "upstream/packages/types/src/RichText.ts",
       "sourceProvenance": {
@@ -268686,9 +268686,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 48,
+        "directAccesses": 48,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -268718,7 +268718,7 @@
       },
       "name": "RichTextContent",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free rich-text content",
       "reasons": [],
       "source": "upstream/packages/types/src/RichTextContent.ts",
       "sourceProvenance": {
@@ -268740,9 +268740,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 249,
+        "directAccesses": 249,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -268924,7 +268924,7 @@
       },
       "name": "RichTextData",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free rich-text data",
       "reasons": [],
       "source": "upstream/packages/types/src/RichText.ts",
       "sourceProvenance": {
@@ -351040,9 +351040,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 300,
+        "directAccesses": 300,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -351152,7 +351152,7 @@
       },
       "name": "TextLayoutGroup",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free text-layout group",
       "reasons": [],
       "source": "upstream/packages/types/src/TextLayout.ts",
       "sourceProvenance": {
@@ -351324,9 +351324,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 128,
+        "directAccesses": 128,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -351412,7 +351412,7 @@
       },
       "name": "TextLayoutResult",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free text-layout result",
       "reasons": [],
       "source": "upstream/packages/types/src/TextLayout.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1596,
+      "newAuditOnly": 1591,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1596,
+    "auditOnlySchemas": 1591,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 14471,
-    "directSchemas": 408,
+    "directAccesses": 15362,
+    "directSchemas": 413,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 16195,
+    "pendingAccesses": 15304,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

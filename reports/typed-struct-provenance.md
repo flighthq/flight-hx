@@ -429,7 +429,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#ResourceLoadCounts` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ResourceLoaderItemSignals` | 8 | 4 | 0 | 4 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ResourceLoadHandle` | 2 | 2 | 0 | 0 | 0 | 1 | 0 | 1 | no | `container-transfer` |
-| `@flighthq/types:interface#RichTextContent` | 0 | 2 | 1 | 1 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
+| `@flighthq/types:interface#RichTextContent` | 48 | 2 | 1 | 1 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#RigidBody2D` | 0 | 26 | 4 | 1 | 0 | 1 | 4 | 4 | no | `container-transfer` |
 | `@flighthq/types:interface#RiveAdvancedBlend` | 0 | 2 | 1 | 1 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#RiveAnimationClip` | 0 | 6 | 1 | 1 | 0 | 0 | 0 | 3 | yes | — |
@@ -602,8 +602,8 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#TextInputState` | 0 | 15 | 1 | 1 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TextItem` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#TextLabelData` | 0 | 6 | 1 | 1 | 1 | 1 | 2 | 2 | no | `container-transfer`, `normalization-provenance` |
-| `@flighthq/types:interface#TextLayoutGroup` | 0 | 12 | 1 | 1 | 2 | 0 | 4 | 4 | no | `normalization-provenance` |
-| `@flighthq/types:interface#TextLayoutResult` | 0 | 9 | 3 | 1 | 2 | 0 | 4 | 3 | no | `normalization-provenance` |
+| `@flighthq/types:interface#TextLayoutGroup` | 300 | 12 | 1 | 1 | 2 | 0 | 4 | 4 | no | `normalization-provenance` |
+| `@flighthq/types:interface#TextLayoutResult` | 128 | 9 | 3 | 1 | 2 | 0 | 4 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TextLineMetrics` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#TextMetrics` | 6 | 3 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#TextSegmenterBackend` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |

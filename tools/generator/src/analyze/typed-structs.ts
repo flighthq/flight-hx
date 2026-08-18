@@ -68,6 +68,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#WgpuRenderTarget',
     purpose: 'reviewed escape-free WebGPU render target',
   },
+  {
+    declarationFingerprint: 'sha256:25a70f58982f05188d38a15abf985c669e653dddf4bebfad31755210bff86a5b',
+    id: '@flighthq/types:interface#TextLayoutGroup',
+    purpose: 'reviewed escape-free text-layout group',
+  },
+  {
+    declarationFingerprint: 'sha256:0775b68e5d326626f79c05fb51f2b81d734453706da315289b1c8772c0062d88',
+    id: '@flighthq/types:interface#TextLayoutResult',
+    purpose: 'reviewed escape-free text-layout result',
+  },
+  {
+    declarationFingerprint: 'sha256:fa82e08e1863fcc75e3ed9619dc8585f19565703bc84971444398c1df93031eb',
+    id: '@flighthq/types:interface#RichTextData',
+    purpose: 'reviewed escape-free rich-text data',
+  },
+  {
+    declarationFingerprint: 'sha256:ede1beea3240687757ee8455992b246d3497476a47de43d9b8e5d02d8b73abe7',
+    id: '@flighthq/types:interface#RichText',
+    purpose: 'reviewed escape-free rich text',
+  },
+  {
+    declarationFingerprint: 'sha256:048d186739d8bfe34b14f636cd57fb89116b401bab1347c3742749f04b2838be',
+    id: '@flighthq/types:interface#RichTextContent',
+    purpose: 'reviewed escape-free rich-text content',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

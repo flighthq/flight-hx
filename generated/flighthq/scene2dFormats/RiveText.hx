@@ -48,13 +48,13 @@ class RiveText {
     baseStyle = ((cast _Runtime.strictEquals(_Runtime.field(runs, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast RiveText.readRiveNumber__riveText(flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), flighthq._internal._StaticIndex.readFloatArrayTyped((cast runs : Array<Float>), (cast 0.0 : Float))), (cast RiveText.RIVE_RUN_STYLE_ID__riveText : Float), (cast -1.0 : Float)) : Float) : Dynamic));
     format = (cast RiveText.createRiveTextFormat__riveText(({ final __callArgument5:Dynamic = artboard; __callArgument5; }), (cast baseStyle : Float), (cast align : Float), ({ final __callArgument6:Dynamic = fontNames; __callArgument6; })) : TextFormat);
     node = (cast createRichText(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : RichText);
-    ((cast (cast node : RichText).data : RichTextData).defaultTextFormat = format);
-    ((cast (cast node : RichText).data : RichTextData).height = (cast RiveText.readRiveNumber__riveText(({ final __callArgument7:Dynamic = source; __callArgument7; }), (cast RiveText.RIVE_TEXT_HEIGHT__riveText : Float), (cast 0.0 : Float)) : Float));
-    ((cast (cast node : RichText).data : RichTextData).text = text);
-    ((cast (cast node : RichText).data : RichTextData).textColor = _Runtime.coalesce((cast format : TextFormat).color, function():Dynamic return cast RiveText.RIVE_DEFAULT_TEXT_COLOR__riveText));
-    ((cast (cast node : RichText).data : RichTextData).textFormat = format);
-    ((cast (cast node : RichText).data : RichTextData).textFormatRanges = formatRanges);
-    ((cast (cast node : RichText).data : RichTextData).width = (cast RiveText.readRiveNumber__riveText(({ final __callArgument8:Dynamic = source; __callArgument8; }), (cast RiveText.RIVE_TEXT_WIDTH__riveText : Float), (cast 0.0 : Float)) : Float));
+    ((cast node.data : { var defaultTextFormat:TextFormat; }).defaultTextFormat = cast (format : TextFormat));
+    ((cast node.data : { var height:Float; }).height = cast ((cast RiveText.readRiveNumber__riveText(({ final __callArgument7:Dynamic = source; __callArgument7; }), (cast RiveText.RIVE_TEXT_HEIGHT__riveText : Float), (cast 0.0 : Float)) : Float) : Float));
+    ((cast node.data : { var text:String; }).text = cast (text : String));
+    ((cast node.data : { var textColor:Float; }).textColor = cast (_Runtime.coalesce((cast format : TextFormat).color, function():Dynamic return cast RiveText.RIVE_DEFAULT_TEXT_COLOR__riveText) : Float));
+    ((cast node.data : { var textFormat:TextFormat; }).textFormat = cast (format : TextFormat));
+    ((cast node.data : { var textFormatRanges:Array<TextFormatRange>; }).textFormatRanges = cast (formatRanges : Array<TextFormatRange>));
+    ((cast node.data : { var width:Float; }).width = cast ((cast RiveText.readRiveNumber__riveText(({ final __callArgument8:Dynamic = source; __callArgument8; }), (cast RiveText.RIVE_TEXT_WIDTH__riveText : Float), (cast 0.0 : Float)) : Float) : Float));
     return cast node;
     return cast null;
   }

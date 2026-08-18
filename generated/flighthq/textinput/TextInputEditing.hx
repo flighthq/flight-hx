@@ -30,18 +30,18 @@ class TextInputEditing {
   public static final DESIRED_CARET_X_UNSET__textInputEditing:Float = -1.0;
 
   public static function appendTextInput(source:RichText, text:String):Void {
-    replaceTextInput(({ final __callArgument0:Dynamic = source; __callArgument0; }), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast text : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    replaceTextInput(({ final __callArgument0:Dynamic = source; __callArgument0; }), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float), (cast text : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static function applyTextInputRestriction(source:RichText, text:String, replaceLength:Float = 0.0):String {
     var data:RichTextData = cast _Runtime.UNDEFINED;
     var value:String = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(source, 'data');
+    data = source.data;
     value = text;
-    if ((cast !(cast (cast data : RichTextData).multiline : Bool) : Bool)) { (value = cast (_Runtime.replace(value, _Runtime.regexp('[\\n\\r]+', 'g'), '', false) : Dynamic)); }
+    if ((cast !(cast data.multiline : Bool) : Bool)) { (value = cast (_Runtime.replace(value, _Runtime.regexp('[\\n\\r]+', 'g'), '', false) : Dynamic)); }
     (value = cast ((cast TextInputEditing.restrictTextInput__textInputEditing((cast value : String), (cast (cast (cast TextInputEditing.getInputState__textInputEditing(({ final __callArgument1:Dynamic = source; __callArgument1; })) : TextInputState) : TextInputState).restrict : String)) : String) : Dynamic));
-    if ((cast ((cast (cast data : RichTextData).maxChars : Float) > (cast 0.0 : Float)) : Bool)) {
-      var maxLength:Float = (_Runtime.subtractNumbers((cast data : RichTextData).maxChars, _Runtime.field((cast data : RichTextData).text, 'length')) + replaceLength);
+    if ((cast ((cast data.maxChars : Float) > (cast 0.0 : Float)) : Bool)) {
+      var maxLength:Float = (_Runtime.subtractNumbers(data.maxChars, _Runtime.field(data.text, 'length')) + replaceLength);
       if ((cast ((cast maxLength : Float) <= (cast 0.0 : Float)) : Bool)) { return cast ''; }
       if ((cast ((cast _Runtime.field(value, 'length') : Float) > (cast maxLength : Float)) : Bool)) { (value = cast (_Runtime.slice(value, 0.0, maxLength) : Dynamic)); }
     }
@@ -90,7 +90,7 @@ class TextInputEditing {
     end = (cast getTextInputSelectionEndIndex(({ final __callArgument11:Dynamic = source; __callArgument11; })) : Float);
     if ((cast !_Runtime.strictEquals(start, end) : Bool)) {
       replaceTextInput(({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast start : Float), (cast end : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    } else { if ((cast ((cast start : Float) < (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Bool)) {
+    } else { if ((cast ((cast start : Float) < (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float)) : Bool)) {
       replaceTextInput(({ final __callArgument13:Dynamic = source; __callArgument13; }), (cast start : Float), (cast (start + 1.0) : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     } }
   }
@@ -105,7 +105,7 @@ class TextInputEditing {
       replaceTextInput(({ final __callArgument16:Dynamic = source; __callArgument16; }), (cast start : Float), (cast end : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
       return;
     }
-    wordStart = (cast TextInputEditing.findWordStartBefore__textInputEditing((cast (cast (cast source : RichText).data : RichTextData).text : String), (cast start : Float)) : Float);
+    wordStart = (cast TextInputEditing.findWordStartBefore__textInputEditing((cast (cast source.data : { var text:String; }).text : String), (cast start : Float)) : Float);
     if ((cast ((cast wordStart : Float) < (cast start : Float)) : Bool)) { replaceTextInput(({ final __callArgument17:Dynamic = source; __callArgument17; }), (cast wordStart : Float), (cast start : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); }
   }
 
@@ -119,12 +119,12 @@ class TextInputEditing {
       replaceTextInput(({ final __callArgument20:Dynamic = source; __callArgument20; }), (cast start : Float), (cast end : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
       return;
     }
-    wordEnd = (cast TextInputEditing.findWordEndAfter__textInputEditing((cast (cast (cast source : RichText).data : RichTextData).text : String), (cast start : Float)) : Float);
+    wordEnd = (cast TextInputEditing.findWordEndAfter__textInputEditing((cast (cast source.data : { var text:String; }).text : String), (cast start : Float)) : Float);
     if ((cast ((cast wordEnd : Float) > (cast start : Float)) : Bool)) { replaceTextInput(({ final __callArgument21:Dynamic = source; __callArgument21; }), (cast start : Float), (cast wordEnd : Float), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); }
   }
 
   public static function getTextInputCaretIndex(source:RichText):Float {
-    return cast (cast TextInputEditing.clampIndex__textInputEditing((cast (cast (cast TextInputEditing.getInputState__textInputEditing(({ final __callArgument22:Dynamic = source; __callArgument22; })) : TextInputState) : TextInputState).caretIndex : Float), (cast _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length') : Float)) : Float);
+    return cast (cast TextInputEditing.clampIndex__textInputEditing((cast (cast (cast TextInputEditing.getInputState__textInputEditing(({ final __callArgument22:Dynamic = source; __callArgument22; })) : TextInputState) : TextInputState).caretIndex : Float), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float)) : Float);
     return cast null;
   }
 
@@ -142,10 +142,10 @@ class TextInputEditing {
       return;
     }
     ((cast out : TextSelectionRectangle).x = (cast TextInputEditing.getTextLayoutGroupCaretX__textInputEditing(({ final __callArgument26:Dynamic = group; __callArgument26; }), (cast caretIndex : Float)) : Float));
-    ((cast out : TextSelectionRectangle).y = _Runtime.field(group, 'offsetY'));
+    ((cast out : TextSelectionRectangle).y = (cast group : { var offsetY:Float; }).offsetY);
     ((cast out : TextSelectionRectangle).width = 1.0);
-    ((cast out : TextSelectionRectangle).height = _Runtime.field(group, 'height'));
-    ((cast out : TextSelectionRectangle).lineIndex = _Runtime.field(group, 'lineIndex'));
+    ((cast out : TextSelectionRectangle).height = (cast group : { var height:Float; }).height);
+    ((cast out : TextSelectionRectangle).lineIndex = (cast group : { var lineIndex:Float; }).lineIndex);
   }
 
   public static function getTextInputCharacterIndexAtPoint(source:RichText, layout:TextLayoutResult, x:Float, y:Float):Float {
@@ -153,14 +153,14 @@ class TextInputEditing {
     var closestLineDistance:Float = cast _Runtime.UNDEFINED;
     var lineStart:Float = cast _Runtime.UNDEFINED;
     var lineEnd:Float = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(layout, 'groups'), 'length'), 0.0) : Bool)) { return cast 0.0; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(layout.groups, 'length'), 0.0) : Bool)) { return cast 0.0; }
     closestLineIndex = 0.0;
     closestLineDistance = HxMath.POSITIVE_INFINITY;
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(layout, 'lineHeights'), 'length') : Float)) : Bool)) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(layout.lineHeights, 'length') : Float)) : Bool)) {
         var lineTop:Float = (cast TextInputEditing.getLineOffsetY__textInputEditing(({ final __callArgument27:Dynamic = layout; __callArgument27; }), (cast i : Float)) : Float);
-        var lineBottom:Float = (lineTop + flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast i : Float)));
+        var lineBottom:Float = (lineTop + flighthq._internal._StaticIndex.readFloatArrayTyped((cast layout.lineHeights : Array<Float>), (cast i : Float)));
         var distance:Float = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
         if ((cast ((cast distance : Float) < (cast closestLineDistance : Float)) : Bool)) {
           (closestLineDistance = cast (distance : Dynamic));
@@ -169,14 +169,14 @@ class TextInputEditing {
         i++;
       }
     }
-    lineStart = _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length');
+    lineStart = _Runtime.field((cast source.data : { var text:String; }).text, 'length');
     lineEnd = 0.0;
-    for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if ((cast !_Runtime.strictEquals((cast group : TextLayoutGroup).lineIndex, closestLineIndex) : Bool)) { continue; }
-      (lineStart = cast (HxMath.min(lineStart, (cast group : TextLayoutGroup).startIndex) : Dynamic));
-      (lineEnd = cast (HxMath.max(lineEnd, (cast group : TextLayoutGroup).endIndex) : Dynamic));
-      if ((cast ((cast x : Float) <= (cast (cast group : TextLayoutGroup).offsetX : Float)) : Bool)) { return cast (cast group : TextLayoutGroup).startIndex; }
-      if ((cast ((cast x : Float) <= (cast ((cast group : TextLayoutGroup).offsetX + (cast group : TextLayoutGroup).width) : Float)) : Bool)) { return cast (cast TextInputEditing.getTextLayoutGroupCharacterIndexAtX__textInputEditing(({ final __callArgument30:Dynamic = group; __callArgument30; }), (cast x : Float)) : Float); }
+    for (group in _Runtime.iterable(layout.groups)) {
+      if ((cast !_Runtime.strictEquals(group.lineIndex, closestLineIndex) : Bool)) { continue; }
+      (lineStart = cast (HxMath.min(lineStart, group.startIndex) : Dynamic));
+      (lineEnd = cast (HxMath.max(lineEnd, group.endIndex) : Dynamic));
+      if ((cast ((cast x : Float) <= (cast group.offsetX : Float)) : Bool)) { return cast group.startIndex; }
+      if ((cast ((cast x : Float) <= (cast (group.offsetX + group.width) : Float)) : Bool)) { return cast (cast TextInputEditing.getTextLayoutGroupCharacterIndexAtX__textInputEditing(({ final __callArgument30:Dynamic = group; __callArgument30; }), (cast x : Float)) : Float); }
     }
     return cast ((cast ((cast lineEnd : Float) > (cast 0.0 : Float)) : Bool) ? (cast lineEnd : Dynamic) : (cast lineStart : Dynamic));
     return cast null;
@@ -186,23 +186,23 @@ class TextInputEditing {
     var state:TextInputState = cast _Runtime.UNDEFINED;
     var passwordCharacter:String = cast _Runtime.UNDEFINED;
     state = (cast TextInputEditing.getInputState__textInputEditing(({ final __callArgument31:Dynamic = source; __callArgument31; })) : TextInputState);
-    if ((cast !(cast (cast state : TextInputState).displayAsPassword : Bool) : Bool)) { return cast (cast _Runtime.field(source, 'data') : RichTextData).text; }
+    if ((cast !(cast (cast state : TextInputState).displayAsPassword : Bool) : Bool)) { return cast (cast source.data : { var text:String; }).text; }
     passwordCharacter = ((cast ((cast _Runtime.field((cast state : TextInputState).passwordCharacter, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.charAt((cast state : TextInputState).passwordCharacter, 0.0) : Dynamic) : (cast '•' : Dynamic));
-    return cast _Runtime.repeat(passwordCharacter, _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length'));
+    return cast _Runtime.repeat(passwordCharacter, _Runtime.field((cast source.data : { var text:String; }).text, 'length'));
     return cast null;
   }
 
   public static function getTextInputSelectionBeginIndex(source:RichText):Float {
     var state:TextInputState = cast _Runtime.UNDEFINED;
     state = (cast TextInputEditing.getInputState__textInputEditing(({ final __callArgument32:Dynamic = source; __callArgument32; })) : TextInputState);
-    return cast HxMath.min((cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).caretIndex : Float), (cast _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length') : Float)) : Float), (cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).selectionIndex : Float), (cast _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length') : Float)) : Float));
+    return cast HxMath.min((cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).caretIndex : Float), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float)) : Float), (cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).selectionIndex : Float), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float)) : Float));
     return cast null;
   }
 
   public static function getTextInputSelectionEndIndex(source:RichText):Float {
     var state:TextInputState = cast _Runtime.UNDEFINED;
     state = (cast TextInputEditing.getInputState__textInputEditing(({ final __callArgument33:Dynamic = source; __callArgument33; })) : TextInputState);
-    return cast HxMath.max((cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).caretIndex : Float), (cast _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length') : Float)) : Float), (cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).selectionIndex : Float), (cast _Runtime.field((cast _Runtime.field(source, 'data') : RichTextData).text, 'length') : Float)) : Float));
+    return cast HxMath.max((cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).caretIndex : Float), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float)) : Float), (cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).selectionIndex : Float), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float)) : Float));
     return cast null;
   }
 
@@ -211,7 +211,7 @@ class TextInputEditing {
   }
 
   public static function getTextInputSelectionText(source:RichText):String {
-    return cast _Runtime.slice((cast _Runtime.field(source, 'data') : RichTextData).text, (cast getTextInputSelectionBeginIndex(({ final __callArgument38:Dynamic = source; __callArgument38; })) : Float), (cast getTextInputSelectionEndIndex(({ final __callArgument39:Dynamic = source; __callArgument39; })) : Float));
+    return cast _Runtime.slice((cast source.data : { var text:String; }).text, (cast getTextInputSelectionBeginIndex(({ final __callArgument38:Dynamic = source; __callArgument38; })) : Float), (cast getTextInputSelectionEndIndex(({ final __callArgument39:Dynamic = source; __callArgument39; })) : Float));
     return cast null;
   }
 
@@ -255,7 +255,7 @@ class TextInputEditing {
         return cast true;
       }
       else if (__switchValue == 'documentEnd') {
-        moveTextInputCaret(({ final __callArgument52:Dynamic = source; __callArgument52; }), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast _Runtime.field(data, 'shiftKey') : Bool));
+        moveTextInputCaret(({ final __callArgument52:Dynamic = source; __callArgument52; }), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float), (cast _Runtime.field(data, 'shiftKey') : Bool));
         return cast true;
       }
       else if (__switchValue == 'documentStart') {
@@ -283,7 +283,7 @@ class TextInputEditing {
         return cast true;
       }
       else if (__switchValue == 'return') {
-        if ((cast !(cast (cast (cast source : RichText).data : RichTextData).multiline : Bool) : Bool)) { return cast false; }
+        if ((cast !(cast (cast source.data : { var multiline:Bool; }).multiline : Bool) : Bool)) { return cast false; }
         insertTextInput(({ final __callArgument64:Dynamic = source; __callArgument64; }), (cast '\n' : String));
         return cast true;
       }
@@ -318,7 +318,7 @@ class TextInputEditing {
   public static function moveTextInputCaret(source:RichText, index:Float, extendSelection:Bool = false):Void {
     var caret:Float = cast _Runtime.UNDEFINED;
     var state:TextInputState = cast _Runtime.UNDEFINED;
-    caret = (cast TextInputEditing.clampIndex__textInputEditing((cast index : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float);
+    caret = (cast TextInputEditing.clampIndex__textInputEditing((cast index : Float), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float)) : Float);
     state = (cast TextInputEditing.getInputState__textInputEditing(({ final __callArgument74:Dynamic = source; __callArgument74; })) : TextInputState);
     ((cast state : TextInputState).caretIndex = caret);
     if ((cast !(cast extendSelection : Bool) : Bool)) { ((cast state : TextInputState).selectionIndex = caret); }
@@ -331,7 +331,7 @@ class TextInputEditing {
     var text:String = cast _Runtime.UNDEFINED;
     var target:Float = cast _Runtime.UNDEFINED;
     caretIndex = (cast getTextInputCaretIndex(({ final __callArgument75:Dynamic = source; __callArgument75; })) : Float);
-    text = (cast (cast source : RichText).data : RichTextData).text;
+    text = (cast source.data : { var text:String; }).text;
     if ((cast ((cast direction : Float) < (cast 0.0 : Float)) : Bool)) {
       (target = cast ((cast TextInputEditing.findWordStartBefore__textInputEditing((cast text : String), (cast caretIndex : Float)) : Float) : Dynamic));
     } else {
@@ -348,7 +348,7 @@ class TextInputEditing {
     var targetIndex:Float = cast _Runtime.UNDEFINED;
     var newCaret:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      moveTextInputCaret(({ final __callArgument77:Dynamic = source; __callArgument77; }), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast extendSelection : Bool));
+      moveTextInputCaret(({ final __callArgument77:Dynamic = source; __callArgument77; }), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float), (cast extendSelection : Bool));
       return;
     }
     state = (cast TextInputEditing.getInputState__textInputEditing(({ final __callArgument78:Dynamic = source; __callArgument78; })) : TextInputState);
@@ -356,13 +356,13 @@ class TextInputEditing {
     getTextInputCaretRectangle(({ final __callArgument79:Dynamic = out; __callArgument79; }), ({ final __callArgument80:Dynamic = source; __callArgument80; }), ({ final __callArgument81:Dynamic = layout; __callArgument81; }));
     if ((cast _Runtime.strictEquals((cast state : TextInputState).desiredCaretX, TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing) : Bool)) { ((cast state : TextInputState).desiredCaretX = (cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x); }
     targetLineIndex = ((cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).lineIndex + 1.0);
-    if ((cast ((cast targetLineIndex : Float) >= (cast _Runtime.field(layout, 'numLines') : Float)) : Bool)) {
-      moveTextInputCaret(({ final __callArgument82:Dynamic = source; __callArgument82; }), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast extendSelection : Bool));
+    if ((cast ((cast targetLineIndex : Float) >= (cast (cast layout : { var numLines:Float; }).numLines : Float)) : Bool)) {
+      moveTextInputCaret(({ final __callArgument82:Dynamic = source; __callArgument82; }), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float), (cast extendSelection : Bool));
       return;
     }
-    targetY = ((cast TextInputEditing.getLineOffsetY__textInputEditing(({ final __callArgument83:Dynamic = layout; __callArgument83; }), (cast targetLineIndex : Float)) : Float) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast targetLineIndex : Float)) / 2.0));
+    targetY = ((cast TextInputEditing.getLineOffsetY__textInputEditing(({ final __callArgument83:Dynamic = layout; __callArgument83; }), (cast targetLineIndex : Float)) : Float) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast layout : { var lineHeights:Array<Float>; }).lineHeights : Array<Float>), (cast targetLineIndex : Float)) / 2.0));
     targetIndex = (cast getTextInputCharacterIndexAtPoint(({ final __callArgument84:Dynamic = source; __callArgument84; }), ({ final __callArgument85:Dynamic = layout; __callArgument85; }), (cast (cast state : TextInputState).desiredCaretX : Float), (cast targetY : Float)) : Float);
-    newCaret = (cast TextInputEditing.clampIndex__textInputEditing((cast targetIndex : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float);
+    newCaret = (cast TextInputEditing.clampIndex__textInputEditing((cast targetIndex : Float), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float)) : Float);
     ((cast state : TextInputState).caretIndex = newCaret);
     if ((cast !(cast extendSelection : Bool) : Bool)) { ((cast state : TextInputState).selectionIndex = newCaret); }
     invalidateNodeAppearance((cast source : Dynamic));
@@ -372,11 +372,11 @@ class TextInputEditing {
     var lineIndex:Float = cast _Runtime.UNDEFINED;
     var lineEnd:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(layout, null) : Bool) || (cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      moveTextInputCaret(({ final __callArgument86:Dynamic = source; __callArgument86; }), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float), (cast extendSelection : Bool));
+      moveTextInputCaret(({ final __callArgument86:Dynamic = source; __callArgument86; }), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float), (cast extendSelection : Bool));
       return;
     }
     lineIndex = (cast TextInputEditing.getCaretLineIndex__textInputEditing(({ final __callArgument87:Dynamic = source; __callArgument87; }), ({ final __callArgument88:Dynamic = layout; __callArgument88; })) : Float);
-    lineEnd = (cast TextInputEditing.getLineEndIndex__textInputEditing(({ final __callArgument89:Dynamic = layout; __callArgument89; }), (cast lineIndex : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float);
+    lineEnd = (cast TextInputEditing.getLineEndIndex__textInputEditing(({ final __callArgument89:Dynamic = layout; __callArgument89; }), (cast lineIndex : Float), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float)) : Float);
     moveTextInputCaret(({ final __callArgument90:Dynamic = source; __callArgument90; }), (cast lineEnd : Float), (cast extendSelection : Bool));
   }
 
@@ -412,9 +412,9 @@ class TextInputEditing {
       moveTextInputCaret(({ final __callArgument101:Dynamic = source; __callArgument101; }), (cast 0.0 : Float), (cast extendSelection : Bool));
       return;
     }
-    targetY = ((cast TextInputEditing.getLineOffsetY__textInputEditing(({ final __callArgument102:Dynamic = layout; __callArgument102; }), (cast targetLineIndex : Float)) : Float) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast targetLineIndex : Float)) / 2.0));
+    targetY = ((cast TextInputEditing.getLineOffsetY__textInputEditing(({ final __callArgument102:Dynamic = layout; __callArgument102; }), (cast targetLineIndex : Float)) : Float) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast layout : { var lineHeights:Array<Float>; }).lineHeights : Array<Float>), (cast targetLineIndex : Float)) / 2.0));
     targetIndex = (cast getTextInputCharacterIndexAtPoint(({ final __callArgument103:Dynamic = source; __callArgument103; }), ({ final __callArgument104:Dynamic = layout; __callArgument104; }), (cast (cast state : TextInputState).desiredCaretX : Float), (cast targetY : Float)) : Float);
-    newCaret = (cast TextInputEditing.clampIndex__textInputEditing((cast targetIndex : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float);
+    newCaret = (cast TextInputEditing.clampIndex__textInputEditing((cast targetIndex : Float), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float)) : Float);
     ((cast state : TextInputState).caretIndex = newCaret);
     if ((cast !(cast extendSelection : Bool) : Bool)) { ((cast state : TextInputState).selectionIndex = newCaret); }
     invalidateNodeAppearance((cast source : Dynamic));
@@ -443,9 +443,9 @@ class TextInputEditing {
     var textBefore:String = cast _Runtime.UNDEFINED;
     var caretBefore:Float = cast _Runtime.UNDEFINED;
     var selectionBefore:Float = cast _Runtime.UNDEFINED;
-    data = (cast source : RichText).data;
-    start = (cast TextInputEditing.clampIndex__textInputEditing((cast beginIndex : Float), (cast _Runtime.field((cast data : RichTextData).text, 'length') : Float)) : Float);
-    end = (cast TextInputEditing.clampIndex__textInputEditing((cast endIndex : Float), (cast _Runtime.field((cast data : RichTextData).text, 'length') : Float)) : Float);
+    data = source.data;
+    start = (cast TextInputEditing.clampIndex__textInputEditing((cast beginIndex : Float), (cast _Runtime.field(data.text, 'length') : Float)) : Float);
+    end = (cast TextInputEditing.clampIndex__textInputEditing((cast endIndex : Float), (cast _Runtime.field(data.text, 'length') : Float)) : Float);
     if ((cast ((cast end : Float) < (cast start : Float)) : Bool)) {
       var swap:Float = start;
       (start = cast (end : Dynamic));
@@ -454,15 +454,15 @@ class TextInputEditing {
     value = ((cast _Runtime.strictEquals(({ final __structural113 = options; __structural113 == null ? _Runtime.UNDEFINED : (cast __structural113 : { @:optional var applyInputRules:Null<Bool>; }).applyInputRules; }), true) : Bool) ? (cast (cast applyTextInputRestriction(({ final __callArgument114:Dynamic = source; __callArgument114; }), (cast text : String), (cast (end - start) : Float)) : String) : Dynamic) : (cast text : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals(start, end) : Bool)) : Bool)) { return; }
     state = (cast TextInputEditing.getInputState__textInputEditing(({ final __callArgument115:Dynamic = source; __callArgument115; })) : TextInputState);
-    textBefore = (cast data : RichTextData).text;
+    textBefore = data.text;
     caretBefore = (cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).caretIndex : Float), (cast _Runtime.field(textBefore, 'length') : Float)) : Float);
     selectionBefore = (cast TextInputEditing.clampIndex__textInputEditing((cast (cast state : TextInputState).selectionIndex : Float), (cast _Runtime.field(textBefore, 'length') : Float)) : Float);
-    ((cast data : RichTextData).text = ((_Runtime.slice(textBefore, 0.0, start) + value) + _Runtime.slice(textBefore, end, null)));
-    TextInputEditing.adjustTextFormatRanges__textInputEditing((cast data : RichTextData).textFormatRanges, (cast data : RichTextData).defaultTextFormat, (cast start : Float), (cast end : Float), (cast _Runtime.field(value, 'length') : Float));
+    (data.text = cast (((_Runtime.slice(textBefore, 0.0, start) + value) + _Runtime.slice(textBefore, end, null)) : String));
+    TextInputEditing.adjustTextFormatRanges__textInputEditing(data.textFormatRanges, data.defaultTextFormat, (cast start : Float), (cast end : Float), (cast _Runtime.field(value, 'length') : Float));
     ((cast state : TextInputState).desiredCaretX = TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing);
     setTextInputSelection(({ final __callArgument116:Dynamic = source; __callArgument116; }), (cast _Runtime.addNumbers(start, _Runtime.field(value, 'length')) : Float), (cast _Runtime.addNumbers(start, _Runtime.field(value, 'length')) : Float));
     if ((cast ((cast !_Runtime.strictEquals(({ final __structural117 = options; __structural117 == null ? _Runtime.UNDEFINED : (cast __structural117 : { @:optional var skipHistory:Null<Bool>; }).skipHistory; }), true) : Bool) && (cast ((cast (cast state : TextInputState).historyLimit : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      TextInputEditing.recordTextInputEdit__textInputEditing(({ final __callArgument118:Dynamic = state; __callArgument118; }), (cast textBefore : String), (cast (cast data : RichTextData).text : String), (cast caretBefore : Float), (cast selectionBefore : Float), ({ final __callArgument120:Dynamic = _Runtime.coalesce(({ final __structural119 = options; __structural119 == null ? _Runtime.UNDEFINED : (cast __structural119 : { @:optional var mergeKind:Null<String>; }).mergeKind; }), function():Dynamic return cast null); __callArgument120; }));
+      TextInputEditing.recordTextInputEdit__textInputEditing(({ final __callArgument118:Dynamic = state; __callArgument118; }), (cast textBefore : String), (cast data.text : String), (cast caretBefore : Float), (cast selectionBefore : Float), ({ final __callArgument120:Dynamic = _Runtime.coalesce(({ final __structural119 = options; __structural119 == null ? _Runtime.UNDEFINED : (cast __structural119 : { @:optional var mergeKind:Null<String>; }).mergeKind; }), function():Dynamic return cast null); __callArgument120; }));
     }
     invalidateNodeAppearance((cast source : Dynamic));
   }
@@ -482,12 +482,12 @@ class TextInputEditing {
     getTextInputCaretRectangle(({ final __callArgument121:Dynamic = out; __callArgument121; }), ({ final __callArgument122:Dynamic = source; __callArgument122; }), ({ final __callArgument123:Dynamic = layout; __callArgument123; }));
     caretTop = (cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y;
     caretBottom = ((cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y + (cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).height);
-    scrollVLine = _Runtime.subtractNumbers(_Runtime.coalesce((cast (cast source : RichText).data : RichTextData).scrollV, function():Dynamic return cast 1.0), 1.0);
+    scrollVLine = _Runtime.subtractNumbers(_Runtime.coalesce((cast source.data : { var scrollV:Float; }).scrollV, function():Dynamic return cast 1.0), 1.0);
     viewTop = 0.0;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast scrollVLine : Float)) : Bool)) {
-        (viewTop = cast ((viewTop + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0)) : Dynamic));
+        (viewTop = cast ((viewTop + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast layout.lineHeights : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
     }
@@ -499,19 +499,19 @@ class TextInputEditing {
       var firstVisibleLine:Float = 0.0;
       {
         var i:Float = 0.0;
-        while ((cast ((cast i : Float) < (cast _Runtime.field(layout, 'numLines') : Float)) : Bool)) {
-          if ((cast ((cast (pixelOffset + flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast i : Float))) : Float) > (cast (caretBottom - viewportHeight) : Float)) : Bool)) {
+        while ((cast ((cast i : Float) < (cast layout.numLines : Float)) : Bool)) {
+          if ((cast ((cast (pixelOffset + flighthq._internal._StaticIndex.readFloatArrayTyped((cast layout.lineHeights : Array<Float>), (cast i : Float))) : Float) > (cast (caretBottom - viewportHeight) : Float)) : Bool)) {
             (firstVisibleLine = cast (i : Dynamic));
             break;
           }
-          (pixelOffset = cast ((pixelOffset + flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast i : Float))) : Dynamic));
+          (pixelOffset = cast ((pixelOffset + flighthq._internal._StaticIndex.readFloatArrayTyped((cast layout.lineHeights : Array<Float>), (cast i : Float))) : Dynamic));
           i++;
         }
       }
       setRichTextScrollV(({ final __callArgument126:Dynamic = source; __callArgument126; }), (cast (firstVisibleLine + 1.0) : Float), ({ final __callArgument127:Dynamic = layout; __callArgument127; }));
     } }
     CARET_SCROLL_MARGIN = 8.0;
-    scrollH = _Runtime.coalesce((cast (cast source : RichText).data : RichTextData).scrollH, function():Dynamic return cast 0.0);
+    scrollH = _Runtime.coalesce((cast source.data : { var scrollH:Float; }).scrollH, function():Dynamic return cast 0.0);
     caretLeft = ((cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - scrollH);
     caretRight = (caretLeft + (cast out : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).width);
     if ((cast ((cast caretLeft : Float) < (cast 0.0 : Float)) : Bool)) {
@@ -522,7 +522,7 @@ class TextInputEditing {
   }
 
   public static function selectAllTextInput(source:RichText):Void {
-    setTextInputSelection(({ final __callArgument132:Dynamic = source; __callArgument132; }), (cast 0.0 : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float));
+    setTextInputSelection(({ final __callArgument132:Dynamic = source; __callArgument132; }), (cast 0.0 : Float), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float));
   }
 
   public static function selectLineAtTextInputIndex(source:RichText, index:Float):Void {
@@ -530,7 +530,7 @@ class TextInputEditing {
     var clamped:Float = cast _Runtime.UNDEFINED;
     var start:Float = cast _Runtime.UNDEFINED;
     var end:Float = cast _Runtime.UNDEFINED;
-    text = (cast (cast source : RichText).data : RichTextData).text;
+    text = (cast source.data : { var text:String; }).text;
     clamped = HxMath.max(0.0, HxMath.min(_Runtime.field(text, 'length'), index));
     start = clamped;
     end = clamped;
@@ -544,7 +544,7 @@ class TextInputEditing {
     var clamped:Float = cast _Runtime.UNDEFINED;
     var start:Float = cast _Runtime.UNDEFINED;
     var end:Float = cast _Runtime.UNDEFINED;
-    text = (cast (cast source : RichText).data : RichTextData).text;
+    text = (cast source.data : { var text:String; }).text;
     clamped = HxMath.max(0.0, HxMath.min(_Runtime.field(text, 'length'), index));
     start = clamped;
     end = clamped;
@@ -560,8 +560,8 @@ class TextInputEditing {
   public static function setTextInputSelection(source:RichText, beginIndex:Float, endIndex:Float):Void {
     var state:TextInputState = cast _Runtime.UNDEFINED;
     state = (cast TextInputEditing.getInputState__textInputEditing(({ final __callArgument135:Dynamic = source; __callArgument135; })) : TextInputState);
-    ((cast state : TextInputState).selectionIndex = (cast TextInputEditing.clampIndex__textInputEditing((cast beginIndex : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float));
-    ((cast state : TextInputState).caretIndex = (cast TextInputEditing.clampIndex__textInputEditing((cast endIndex : Float), (cast _Runtime.field((cast (cast source : RichText).data : RichTextData).text, 'length') : Float)) : Float));
+    ((cast state : TextInputState).selectionIndex = (cast TextInputEditing.clampIndex__textInputEditing((cast beginIndex : Float), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float)) : Float));
+    ((cast state : TextInputState).caretIndex = (cast TextInputEditing.clampIndex__textInputEditing((cast endIndex : Float), (cast _Runtime.field((cast source.data : { var text:String; }).text, 'length') : Float)) : Float));
     invalidateNodeAppearance((cast source : Dynamic));
   }
 
@@ -626,7 +626,7 @@ class TextInputEditing {
   }
 
   public static function applyHistoryRecord__textInputEditing(source:RichText, state:TextInputState, text:String, caretIndex:Float, selectionIndex:Float):Void {
-    ((cast (cast source : RichText).data : RichTextData).text = text);
+    ((cast source.data : { var text:String; }).text = cast (text : String));
     ((cast state : TextInputState).caretIndex = (cast TextInputEditing.clampIndex__textInputEditing((cast caretIndex : Float), (cast _Runtime.field(text, 'length') : Float)) : Float));
     ((cast state : TextInputState).selectionIndex = (cast TextInputEditing.clampIndex__textInputEditing((cast selectionIndex : Float), (cast _Runtime.field(text, 'length') : Float)) : Float));
     ((cast state : TextInputState).desiredCaretX = TextInputEditing.DESIRED_CARET_X_UNSET__textInputEditing);
@@ -648,7 +648,7 @@ class TextInputEditing {
   }
 
   public static function getFallbackLineHeight__textInputEditing(layout:TextLayoutResult):Float {
-    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 12.0);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast layout.lineHeights : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 12.0);
     return cast null;
   }
 
@@ -697,8 +697,8 @@ class TextInputEditing {
   public static function getLineEndIndex__textInputEditing(layout:TextLayoutResult, lineIndex:Float, textLength:Float):Float {
     var end:Float = cast _Runtime.UNDEFINED;
     end = -1.0;
-    for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if ((cast ((cast _Runtime.strictEquals((cast group : TextLayoutGroup).lineIndex, lineIndex) : Bool) && (cast ((cast (cast group : TextLayoutGroup).endIndex : Float) > (cast end : Float)) : Bool)) : Bool)) { (end = cast ((cast group : TextLayoutGroup).endIndex : Dynamic)); }
+    for (group in _Runtime.iterable(layout.groups)) {
+      if ((cast ((cast _Runtime.strictEquals(group.lineIndex, lineIndex) : Bool) && (cast ((cast group.endIndex : Float) > (cast end : Float)) : Bool)) : Bool)) { (end = cast (group.endIndex : Dynamic)); }
     }
     return cast ((cast ((cast end : Float) < (cast 0.0 : Float)) : Bool) ? (cast textLength : Dynamic) : (cast end : Dynamic));
     return cast null;
@@ -706,14 +706,14 @@ class TextInputEditing {
 
   public static function getLineOffsetY__textInputEditing(layout:TextLayoutResult, lineIndex:Float):Float {
     var y:Float = cast _Runtime.UNDEFINED;
-    for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if ((cast _Runtime.strictEquals((cast group : TextLayoutGroup).lineIndex, lineIndex) : Bool)) { return cast (cast group : TextLayoutGroup).offsetY; }
+    for (group in _Runtime.iterable(layout.groups)) {
+      if ((cast _Runtime.strictEquals(group.lineIndex, lineIndex) : Bool)) { return cast group.offsetY; }
     }
     y = TEXT_BOUNDS_GUTTER;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast lineIndex : Float)) : Bool)) {
-        (y = cast ((y + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(layout, 'lineHeights') : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0)) : Dynamic));
+        (y = cast ((y + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast layout.lineHeights : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
     }
@@ -724,30 +724,30 @@ class TextInputEditing {
   public static function getLineStartIndex__textInputEditing(layout:TextLayoutResult, lineIndex:Float):Float {
     var start:Float = cast _Runtime.UNDEFINED;
     start = -1.0;
-    for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if ((cast ((cast _Runtime.strictEquals((cast group : TextLayoutGroup).lineIndex, lineIndex) : Bool) && (cast _Runtime.orValue(((cast start : Float) < (cast 0.0 : Float)), function():Dynamic return cast ((cast (cast group : TextLayoutGroup).startIndex : Float) < (cast start : Float))) : Bool)) : Bool)) { (start = cast ((cast group : TextLayoutGroup).startIndex : Dynamic)); }
+    for (group in _Runtime.iterable(layout.groups)) {
+      if ((cast ((cast _Runtime.strictEquals(group.lineIndex, lineIndex) : Bool) && (cast _Runtime.orValue(((cast start : Float) < (cast 0.0 : Float)), function():Dynamic return cast ((cast group.startIndex : Float) < (cast start : Float))) : Bool)) : Bool)) { (start = cast (group.startIndex : Dynamic)); }
     }
     return cast ((cast ((cast start : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast start : Dynamic));
     return cast null;
   }
 
   public static function getTextLayoutGroupAtIndex__textInputEditing(layout:TextLayoutResult, index:Float):Null<TextLayoutGroup> {
-    for (group in _Runtime.iterable(_Runtime.field(layout, 'groups'))) {
-      if ((cast ((cast ((cast index : Float) >= (cast (cast group : TextLayoutGroup).startIndex : Float)) : Bool) && (cast ((cast index : Float) <= (cast (cast group : TextLayoutGroup).endIndex : Float)) : Bool)) : Bool)) { return cast group; }
+    for (group in _Runtime.iterable(layout.groups)) {
+      if ((cast ((cast ((cast index : Float) >= (cast group.startIndex : Float)) : Bool) && (cast ((cast index : Float) <= (cast group.endIndex : Float)) : Bool)) : Bool)) { return cast group; }
     }
-    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(layout, 'groups'), _Runtime.subtractNumbers(_Runtime.field(_Runtime.field(layout, 'groups'), 'length'), 1.0)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(layout.groups, _Runtime.subtractNumbers(_Runtime.field(layout.groups, 'length'), 1.0)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getTextLayoutGroupCaretX__textInputEditing(group:TextLayoutGroup, index:Float):Float {
     var x:Float = cast _Runtime.UNDEFINED;
     var limit:Float = cast _Runtime.UNDEFINED;
-    x = _Runtime.field(group, 'offsetX');
-    limit = HxMath.max(0.0, _Runtime.subtractNumbers(HxMath.min(index, _Runtime.field(group, 'endIndex')), _Runtime.field(group, 'startIndex')));
+    x = group.offsetX;
+    limit = HxMath.max(0.0, _Runtime.subtractNumbers(HxMath.min(index, group.endIndex), group.startIndex));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast limit : Float)) : Bool)) {
-        (x = cast ((x + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(group, 'positions') : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0)) : Dynamic));
+        (x = cast ((x + _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast group.positions : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0)) : Dynamic));
         i++;
       }
     }
@@ -757,17 +757,17 @@ class TextInputEditing {
 
   public static function getTextLayoutGroupCharacterIndexAtX__textInputEditing(group:TextLayoutGroup, x:Float):Float {
     var currentX:Float = cast _Runtime.UNDEFINED;
-    currentX = _Runtime.field(group, 'offsetX');
+    currentX = group.offsetX;
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(group, 'positions'), 'length') : Float)) : Bool)) {
-        var advance:Float = _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(group, 'positions') : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0);
-        if ((cast ((cast x : Float) < (cast (currentX + (advance / 2.0)) : Float)) : Bool)) { return cast _Runtime.addNumbers(_Runtime.field(group, 'startIndex'), i); }
+      while ((cast ((cast i : Float) < (cast _Runtime.field(group.positions, 'length') : Float)) : Bool)) {
+        var advance:Float = _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast group.positions : Array<Float>), (cast i : Float)), function():Dynamic return cast 0.0);
+        if ((cast ((cast x : Float) < (cast (currentX + (advance / 2.0)) : Float)) : Bool)) { return cast (group.startIndex + i); }
         (currentX = cast ((currentX + advance) : Dynamic));
         i++;
       }
     }
-    return cast _Runtime.field(group, 'endIndex');
+    return cast group.endIndex;
     return cast null;
   }
 

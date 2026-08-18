@@ -132,12 +132,12 @@ class GlTextLabel {
       ((cast textData : GlTextLabelData__glTextLabel).lastPixelRatio = pixelRatio);
       ((cast textData : GlTextLabelData__glTextLabel).logW = 0.0);
       ((cast textData : GlTextLabelData__glTextLabel).logH = 0.0);
-      if ((cast _Runtime.strictEquals(_Runtime.field((cast result : TextLayoutResult).groups, 'length'), 0.0) : Bool)) { return; }
+      if ((cast _Runtime.strictEquals(_Runtime.field(result.groups, 'length'), 0.0) : Bool)) { return; }
       var maxX:Float = 0.0;
       var maxY:Float = 0.0;
-      for (group in _Runtime.iterable((cast result : TextLayoutResult).groups)) {
-        var right:Float = ((cast group : TextLayoutGroup).offsetX + (cast group : TextLayoutGroup).width);
-        var bottom:Float = (((cast group : TextLayoutGroup).offsetY + (cast group : TextLayoutGroup).ascent) + (cast group : TextLayoutGroup).descent);
+      for (group in _Runtime.iterable(result.groups)) {
+        var right:Float = (group.offsetX + group.width);
+        var bottom:Float = ((group.offsetY + group.ascent) + group.descent);
         if ((cast ((cast right : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast (right : Dynamic)); }
         if ((cast ((cast bottom : Float) > (cast maxY : Float)) : Bool)) { (maxY = cast (bottom : Dynamic)); }
       }
@@ -153,11 +153,11 @@ class GlTextLabel {
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'textBaseline', 'alphabetic');
       flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'textAlign', 'start');
-      for (group in _Runtime.iterable((cast result : TextLayoutResult).groups)) {
-        flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString((cast group : TextLayoutGroup).format) : String));
-        flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', (cast computeRgbHexString((cast _Runtime.coalesce((cast (cast group : TextLayoutGroup).format : TextFormat).color, function():Dynamic return cast 0.0) : Float)) : String));
-        var slice:String = _Runtime.substring(text, (cast group : TextLayoutGroup).startIndex, (cast group : TextLayoutGroup).endIndex);
-        flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillText', cast ([slice, (cast group : TextLayoutGroup).offsetX, ((cast group : TextLayoutGroup).offsetY + ((cast group : TextLayoutGroup).ascent * 0.815))] : Array<Dynamic>));
+      for (group in _Runtime.iterable(result.groups)) {
+        flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString(group.format) : String));
+        flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', (cast computeRgbHexString((cast _Runtime.coalesce((cast group.format : TextFormat).color, function():Dynamic return cast 0.0) : Float)) : String));
+        var slice:String = _Runtime.substring(text, group.startIndex, group.endIndex);
+        flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillText', cast ([slice, group.offsetX, (group.offsetY + (group.ascent * 0.815))] : Array<Dynamic>));
       }
       invalidateImageResource((cast textData : GlTextLabelData__glTextLabel).image);
       ((cast textData : GlTextLabelData__glTextLabel).logW = w);

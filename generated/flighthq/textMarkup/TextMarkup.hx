@@ -24,7 +24,7 @@ import flighthq.types.TextFormatRange;
 class TextMarkup {
   public static function appendMarkupBreakBefore__textMarkup(content:RichTextContent):Void {
     var text:String = cast _Runtime.UNDEFINED;
-    text = (cast content : RichTextContent).text;
+    text = content.text;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool) || (cast StringTools.endsWith(Std.string(text), '\n') : Bool)) : Bool)) { return; }
     TextMarkup.appendMarkupString__textMarkup(({ final __callArgument0:Dynamic = content; __callArgument0; }), (cast '\n' : String), ({ final __callArgument1:Dynamic = TextMarkup.emptyMarkupFormat__textMarkup; __callArgument1; }));
   }
@@ -32,9 +32,9 @@ class TextMarkup {
   public static function appendMarkupString__textMarkup(content:RichTextContent, value:String, format:TextFormat):Void {
     var start:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0) : Bool)) { return; }
-    start = _Runtime.field((cast content : RichTextContent).text, 'length');
-    ((cast content : RichTextContent).text += value);
-    TextMarkup.pushMarkupRange__textMarkup((cast content : RichTextContent).formatRanges, ({ final __callArgument2:Dynamic = format; __callArgument2; }), (cast start : Float), (cast _Runtime.field((cast content : RichTextContent).text, 'length') : Float));
+    start = _Runtime.field(content.text, 'length');
+    (content.text += value);
+    TextMarkup.pushMarkupRange__textMarkup(content.formatRanges, ({ final __callArgument2:Dynamic = format; __callArgument2; }), (cast start : Float), (cast _Runtime.field(content.text, 'length') : Float));
   }
 
   public static function appendMarkupText__textMarkup(content:RichTextContent, raw:String, format:TextFormat):Void {
@@ -229,7 +229,7 @@ class TextMarkup {
     var formats:Array<TextFormat> = cast _Runtime.UNDEFINED;
     var output:String = cast _Runtime.UNDEFINED;
     var runStart:Float = cast _Runtime.UNDEFINED;
-    text = _Runtime.field(content, 'text');
+    text = content.text;
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast ''; }
     formats = (cast TextMarkup.resolveMarkupFormats__textMarkup(({ final __callArgument11:Dynamic = content; __callArgument11; })) : Array<TextFormat>);
     output = '';
@@ -377,7 +377,7 @@ class TextMarkup {
   public static function resolveMarkupFormats__textMarkup(content:RichTextContent):Array<TextFormat> {
     var length:Float = cast _Runtime.UNDEFINED;
     var formats:Array<TextFormat> = cast _Runtime.UNDEFINED;
-    length = _Runtime.field(_Runtime.field(content, 'text'), 'length');
+    length = _Runtime.field(content.text, 'length');
     formats = _Runtime.createArray(length);
     {
       var i:Float = 0.0;
@@ -386,7 +386,7 @@ class TextMarkup {
         i++;
       }
     }
-    for (range in _Runtime.iterable(_Runtime.field(content, 'formatRanges'))) {
+    for (range in _Runtime.iterable(content.formatRanges)) {
       var start:Float = HxMath.max(0.0, HxMath.min(length, (cast range : TextFormatRange).start));
       var end:Float = HxMath.max(start, HxMath.min(length, (cast range : TextFormatRange).end));
       {

@@ -87,6 +87,7 @@ import flighthq.types.Rectangle;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.RenderEffect;
 import flighthq.types.RichText;
+import flighthq.types.RichText.RichTextData;
 import flighthq.types.Sampler;
 import flighthq.types.Scale9Shape;
 import flighthq.types.Scene2DDocument;
@@ -689,7 +690,7 @@ class SwfDocument {
     var node:RichText = cast _Runtime.UNDEFINED;
     node = (cast create(({ final __callArgument91:Dynamic = function(fontId:Float):String return _Runtime.coalesce(((cast _Runtime.field(parsed, 'fontNames') : flighthq._internal._Map<Float, String>).get(fontId)), function():Dynamic return cast ''); __callArgument91; })) : RichText);
     if ((cast !_Runtime.strictEquals(bounds, null) : Bool)) {
-      ((cast (cast (cast (cast node : RichText).data : flighthq._internal._Any) : SwfAuthoredBoundsData__swfDocument) : SwfAuthoredBoundsData__swfDocument).authoredBounds = _Runtime.mergeObjects([bounds]));
+      ((cast (cast (cast node.data : flighthq._internal._Any) : SwfAuthoredBoundsData__swfDocument) : SwfAuthoredBoundsData__swfDocument).authoredBounds = _Runtime.mergeObjects([bounds]));
       ((cast (cast getNodeRuntime((cast node : Dynamic)) : Node2DRuntime) : { var computeLocalBoundsRectangle:Rectangle->BoundsNodeAny->Void; }).computeLocalBoundsRectangle = (cast SwfDocument.computeSwfLocalBoundsRectangle__swfDocument));
     }
     return cast node;

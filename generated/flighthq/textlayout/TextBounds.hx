@@ -15,7 +15,7 @@ class TextBounds {
 
   public static function computeTextBoundsHeight(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
     if ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'none') : Bool)) { return cast (cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).height; }
-    return cast HxMath.ceil(_Runtime.addNumbers(_Runtime.field(layout, 'textHeight'), (TEXT_LAYOUT_GUTTER * 2.0)));
+    return cast HxMath.ceil((layout.textHeight + (TEXT_LAYOUT_GUTTER * 2.0)));
     return cast null;
   }
 
@@ -41,7 +41,7 @@ class TextBounds {
 
   public static function computeTextBoundsWidth(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
     if (_Runtime.truthy(_Runtime.orValue(_Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'none'), function():Dynamic return cast (cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).wordWrap))) { return cast (cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).width; }
-    return cast HxMath.ceil(_Runtime.addNumbers(_Runtime.field(layout, 'textWidth'), (TEXT_LAYOUT_GUTTER * 2.0)));
+    return cast HxMath.ceil((layout.textWidth + (TEXT_LAYOUT_GUTTER * 2.0)));
     return cast null;
   }
 }

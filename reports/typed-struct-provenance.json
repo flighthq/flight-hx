@@ -39881,7 +39881,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 48,
       "fields": 2,
       "id": "@flighthq/types:interface#RichTextContent",
       "name": "RichTextContent",
@@ -50040,7 +50040,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 300,
       "fields": 12,
       "id": "@flighthq/types:interface#TextLayoutGroup",
       "name": "TextLayoutGroup",
@@ -50157,7 +50157,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 128,
       "fields": 9,
       "id": "@flighthq/types:interface#TextLayoutResult",
       "name": "TextLayoutResult",
