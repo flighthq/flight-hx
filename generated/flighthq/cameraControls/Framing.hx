@@ -17,13 +17,13 @@ class Framing {
     if ((cast _Runtime.strictEquals((cast projection : { var kind:String; }).kind, 'perspective') : Bool)) {
       var distance:Float = (cast getPerspectiveProjectionFrameDistanceToSphere(({ final __callArgument0:Dynamic = projection; __callArgument0; }), (cast sphere.radius : Float), (cast aspect : Float), (cast padding : Float)) : Float);
       if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([distance] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
-      ((cast controller : OrbitCameraController).goalDistance = (cast clamp((cast distance : Float), (cast (cast controller : OrbitCameraController).minDistance : Float), (cast (cast controller : OrbitCameraController).maxDistance : Float)) : Float));
+      (controller.goalDistance = cast ((cast clamp((cast distance : Float), (cast controller.minDistance : Float), (cast controller.maxDistance : Float)) : Float) : Float));
     } else {
       setOrthographicProjectionFrameToSphere(({ final __callArgument1:Dynamic = projection; __callArgument1; }), (cast sphere.radius : Float), (cast aspect : Float), (cast padding : Float));
     }
-    ((cast (cast controller : OrbitCameraController).target : { var x:Float; }).x = cast ((cast sphere.center : { var x:Float; }).x : Float));
-    ((cast (cast controller : OrbitCameraController).target : { var y:Float; }).y = cast ((cast sphere.center : { var y:Float; }).y : Float));
-    ((cast (cast controller : OrbitCameraController).target : { var z:Float; }).z = cast ((cast sphere.center : { var z:Float; }).z : Float));
+    ((cast controller.target : { var x:Float; }).x = cast ((cast sphere.center : { var x:Float; }).x : Float));
+    ((cast controller.target : { var y:Float; }).y = cast ((cast sphere.center : { var y:Float; }).y : Float));
+    ((cast controller.target : { var z:Float; }).z = cast ((cast sphere.center : { var z:Float; }).z : Float));
     return cast true;
     return cast null;
   }

@@ -37,7 +37,7 @@ class RiveClipping {
       var index:Float = 1.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
-        if ((cast !_Runtime.strictEquals((cast object : RiveCoreObject).typeKey, RiveClipping.RIVE_CLIPPING_SHAPE__riveClipping) : Bool)) { index++; continue; }
+        if ((cast !_Runtime.strictEquals(object.typeKey, RiveClipping.RIVE_CLIPPING_SHAPE__riveClipping) : Bool)) { index++; continue; }
         if ((cast !(cast (cast RiveClipping.readRiveFlag__riveClipping(({ final __callArgument1:Dynamic = object; __callArgument1; }), (cast RiveClipping.RIVE_CLIP_IS_VISIBLE__riveClipping : Float), (cast true : Bool)) : Bool) : Bool) : Bool)) { index++; continue; }
         var owner:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float));
         var target:Null<DisplayObject> = ((cast ((cast owner : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(nodes, owner) : Dynamic) : (cast null : Dynamic));
@@ -97,7 +97,7 @@ class RiveClipping {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
         var parent:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float));
         var inherited:Matrix = ((cast ((cast parent : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(transforms, parent) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(transforms, 0.0) : Dynamic));
-        if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveClipping.RIVE_NODE_TYPE_KEY__riveClipping : Float)) : Bool) : Bool) : Bool)) {
+        if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveClipping.RIVE_NODE_TYPE_KEY__riveClipping : Float)) : Bool) : Bool) : Bool)) {
           _Runtime.callProperty(transforms, 'push', cast ([inherited] : Array<Dynamic>));
           index++;
           continue;
@@ -134,14 +134,14 @@ class RiveClipping {
 
   public static function readRiveNumber__riveClipping(source:RiveCoreObject, key:Float, fallback:Float):Float {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused1:Float, __unused2:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused1:Float, __unused2:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
     return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
     return cast null;
   }
 
   public static function readRiveFlag__riveClipping(source:RiveCoreObject, key:Float, fallback:Bool):Bool {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused3:Float, __unused4:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused3:Float, __unused4:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
     return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast !_Runtime.strictEquals((cast property : RiveProperty).value, 0.0) : Dynamic));
     return cast null;
   }

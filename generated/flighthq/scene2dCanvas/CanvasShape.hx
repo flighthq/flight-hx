@@ -58,7 +58,7 @@ class CanvasShape {
       if ((cast !_Runtime.strictEquals(def, null) : Bool)) { (cast def : CanvasShapeCommand<String>).draw(({ final __callArgument11:Dynamic = context; __callArgument11; }), ({ final __callArgument12:Dynamic = drawState; __callArgument12; }), ({ final __callArgument13:Dynamic = commands; __callArgument13; }), (cast (i + 2.0) : Float)); } else { _Runtime.callOptionalValue((cast (cast getRenderStateRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : RenderStateRuntime) : RenderStateRuntime).registryMiss, cast ([RenderRegistry.ShapeCommandHandler, key] : Array<Dynamic>)); }
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }
-    if ((cast ((cast (cast drawState : CanvasShapeDrawState).hasPendingPath : Bool) && (cast _Runtime.orValue((cast drawState : CanvasShapeDrawState).hasFill, function():Dynamic return cast (cast drawState : CanvasShapeDrawState).hasStroke) : Bool)) : Bool)) {
+    if ((cast ((cast drawState.hasPendingPath : Bool) && (cast _Runtime.orValue(drawState.hasFill, function():Dynamic return cast drawState.hasStroke) : Bool)) : Bool)) {
       CanvasShape.flushCanvasShapePath__canvasShape(({ final __callArgument17:Dynamic = context; __callArgument17; }), ({ final __callArgument18:Dynamic = drawState; __callArgument18; }));
     }
   }
@@ -75,25 +75,25 @@ class CanvasShape {
   }
 
   public static function flushCanvasShapePath__canvasShape(context:flighthq._internal.dom.CanvasRenderingContext2D, state:CanvasShapeDrawState):Void {
-    if ((cast (cast state : CanvasShapeDrawState).hasFill : Bool)) {
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast state : CanvasShapeDrawState).fillStyle);
-      if ((cast ((cast !_Runtime.strictEquals((cast state : CanvasShapeDrawState).fillMatrix, null) : Bool) && (cast !_Runtime.strictEquals((cast state : CanvasShapeDrawState).fillMatrixInverse, null) : Bool)) : Bool)) {
-        var m:Matrix = (cast state : CanvasShapeDrawState).fillMatrix;
-        var inv:Matrix = (cast state : CanvasShapeDrawState).fillMatrixInverse;
+    if ((cast state.hasFill : Bool)) {
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', state.fillStyle);
+      if ((cast ((cast !_Runtime.strictEquals(state.fillMatrix, null) : Bool) && (cast !_Runtime.strictEquals(state.fillMatrixInverse, null) : Bool)) : Bool)) {
+        var m:Matrix = state.fillMatrix;
+        var inv:Matrix = state.fillMatrixInverse;
         flighthq._internal.backend.Canvas2dBackend.call(context, 'transform', cast ([m.a, m.b, m.c, m.d, m.tx, m.ty] : Array<Dynamic>));
-        flighthq._internal.backend.Canvas2dBackend.call(context, 'fill', cast ([(cast state : CanvasShapeDrawState).windingRule] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'fill', cast ([state.windingRule] : Array<Dynamic>));
         flighthq._internal.backend.Canvas2dBackend.call(context, 'transform', cast ([inv.a, inv.b, inv.c, inv.d, inv.tx, inv.ty] : Array<Dynamic>));
       } else {
-        flighthq._internal.backend.Canvas2dBackend.call(context, 'fill', cast ([(cast state : CanvasShapeDrawState).windingRule] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'fill', cast ([state.windingRule] : Array<Dynamic>));
       }
     }
-    if ((cast (cast state : CanvasShapeDrawState).hasStroke : Bool)) {
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'strokeStyle', (cast state : CanvasShapeDrawState).strokeStyle);
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineWidth', (cast state : CanvasShapeDrawState).strokeWidth);
+    if ((cast state.hasStroke : Bool)) {
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'strokeStyle', state.strokeStyle);
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineWidth', state.strokeWidth);
       flighthq._internal.backend.Canvas2dBackend.call(context, 'stroke', cast ([] : Array<Dynamic>));
     }
-    ((cast state : CanvasShapeDrawState).hasPendingPath = false);
-    ((cast state : CanvasShapeDrawState).hasCurrentPoint = false);
+    (state.hasPendingPath = cast (false : Bool));
+    (state.hasCurrentPoint = cast (false : Bool));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
   }
 }

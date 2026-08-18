@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_581,
+      newAuditOnly: 1_576,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(425);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(430);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_581);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_576);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(23);
+    expect(newDirect).toHaveLength(28);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -225,6 +225,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'WgpuScene3DRuntime',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free WebGPU scene runtime',
+        }),
+        expect.objectContaining({
+          name: 'QuadBatchData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free quad batch data',
+        }),
+        expect.objectContaining({
+          name: 'CanvasShapeDrawState',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Canvas shape draw state',
+        }),
+        expect.objectContaining({
+          name: 'Scene3DDocument',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Scene3D document',
+        }),
+        expect.objectContaining({
+          name: 'OrbitCameraController',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free orbit camera controller',
+        }),
+        expect.objectContaining({
+          name: 'RiveCoreObject',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Rive core object',
         }),
       ]),
     );
@@ -343,6 +368,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:4dab30bcdbb8075f68a1edc7500087cb2a72c3202eb16b2ffb6f143591215923',
         id: '@flighthq/types:interface#WgpuScene3DRuntime',
         purpose: 'reviewed escape-free WebGPU scene runtime',
+      },
+      {
+        declarationFingerprint: 'sha256:c5ddb66c3aa664642f434b204e28cd767990fb68dccd61d95ddce1217b271f85',
+        id: '@flighthq/types:interface#QuadBatchData',
+        purpose: 'reviewed escape-free quad batch data',
+      },
+      {
+        declarationFingerprint: 'sha256:02c299290855d11a256afa1f89ac05ea04f2bd5c9cfbd95f9b8f313c8291d5dc',
+        id: '@flighthq/types:interface#CanvasShapeDrawState',
+        purpose: 'reviewed escape-free Canvas shape draw state',
+      },
+      {
+        declarationFingerprint: 'sha256:8917d122db3e102ae4d684a953b0aace8b57597d4e4b6b10c66a3af8f3b19094',
+        id: '@flighthq/types:interface#Scene3DDocument',
+        purpose: 'reviewed escape-free Scene3D document',
+      },
+      {
+        declarationFingerprint: 'sha256:b5f317c10fcee34f5c8ab37de7d06314754e9bcc0fb48124146a562f9117cb5f',
+        id: '@flighthq/types:interface#OrbitCameraController',
+        purpose: 'reviewed escape-free orbit camera controller',
+      },
+      {
+        declarationFingerprint: 'sha256:9252f9146b93933f51443521632f05794eed7f39a6e8059a7ae12d86167e16ac',
+        id: '@flighthq/types:interface#RiveCoreObject',
+        purpose: 'reviewed escape-free Rive core object',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -726,6 +776,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const nextHotCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'CanvasShapeDrawState',
+            'OrbitCameraController',
+            'QuadBatchData',
+            'RiveCoreObject',
+            'Scene3DDocument',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -766,22 +829,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_581,
+      auditOnlySchemas: 1_576,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 16_741,
-      directSchemas: 423,
+      directAccesses: 17_309,
+      directSchemas: 428,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 13_925,
+      pendingAccesses: 13_357,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_581,
+      newAuditOnly: 1_576,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -809,7 +872,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(16_741);
+    expect(report.summary.directAccesses).toBe(17_309);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -949,6 +1012,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(renderContextRuntimeCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'QuadBatchData',
+        130,
+        'sha256:c5ddb66c3aa664642f434b204e28cd767990fb68dccd61d95ddce1217b271f85',
+        'reviewed escape-free quad batch data',
+      ],
+      [
+        'CanvasShapeDrawState',
+        115,
+        'sha256:02c299290855d11a256afa1f89ac05ea04f2bd5c9cfbd95f9b8f313c8291d5dc',
+        'reviewed escape-free Canvas shape draw state',
+      ],
+      [
+        'Scene3DDocument',
+        115,
+        'sha256:8917d122db3e102ae4d684a953b0aace8b57597d4e4b6b10c66a3af8f3b19094',
+        'reviewed escape-free Scene3D document',
+      ],
+      [
+        'OrbitCameraController',
+        104,
+        'sha256:b5f317c10fcee34f5c8ab37de7d06314754e9bcc0fb48124146a562f9117cb5f',
+        'reviewed escape-free orbit camera controller',
+      ],
+      [
+        'RiveCoreObject',
+        104,
+        'sha256:9252f9146b93933f51443521632f05794eed7f39a6e8059a7ae12d86167e16ac',
+        'reviewed escape-free Rive core object',
+      ],
+    ] as const) {
+      expect(nextHotCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -1158,6 +1263,38 @@ describe('typed struct analysis', () => {
       observabilityReasons: [],
     });
     expect(provenanceById.has(wgpuScene3DRuntimeId)).toBe(false);
+    const canvasShapeDrawStateId = '@flighthq/types:interface#CanvasShapeDrawState';
+    expect(classAuditById.get(canvasShapeDrawStateId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(canvasShapeDrawStateId)?.nominalIdentity).toEqual({
+      blockerReasons: [],
+      closed: true,
+    });
+    for (const [id, blockerReason] of [
+      ['@flighthq/types:interface#QuadBatchData', 'normalization-provenance'],
+      ['@flighthq/types:interface#RiveCoreObject', 'container-transfer'],
+      ['@flighthq/types:interface#Scene3DDocument', 'container-transfer'],
+    ] as const) {
+      expect(classAuditById.get(id)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.get(id)?.nominalIdentity).toEqual({
+        blockerReasons: [blockerReason],
+        closed: false,
+      });
+    }
+    const orbitCameraControllerId = '@flighthq/types:interface#OrbitCameraController';
+    expect(classAuditById.get(orbitCameraControllerId)?.migration).toEqual({
+      mechanicallyCompatible: false,
+      normalizationReasons: ['cross-schema-transfer'],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.has(orbitCameraControllerId)).toBe(false);
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -1216,6 +1353,39 @@ describe('typed struct analysis', () => {
     expect(glSceneRuntime).not.toContain('(cast runtime : GlScene3DRuntime).');
     const wgpuSceneRuntime = readFileSync('generated/flighthq/scene3dWgpu/WgpuShadowMap.hx', 'utf8');
     expect(wgpuSceneRuntime).not.toContain('(cast scene : WgpuScene3DRuntime).');
+    const quadBatch = readFileSync('generated/flighthq/quadbatch/QuadBatch.hx', 'utf8');
+    expect(quadBatch).not.toMatch(/\(cast (?:data|src) : QuadBatchData\)\./u);
+    expect(quadBatch).not.toMatch(/_Runtime\.field\(__destructure/u);
+    for (const path of [
+      'generated/flighthq/scene2dCanvas/CanvasShape.hx',
+      'generated/flighthq/scene2dCanvas/CanvasShapeCommands.hx',
+    ]) {
+      const canvasShape = readFileSync(path, 'utf8');
+      expect(canvasShape).not.toMatch(/\(cast (?:drawState|state) : CanvasShapeDrawState\)\./u);
+      expect(canvasShape).not.toMatch(/_Runtime\.field\((?:drawState|state),/u);
+    }
+    for (const path of [
+      'generated/flighthq/scene3d/SceneDocument.hx',
+      'generated/flighthq/scene3d/SceneDocumentLights.hx',
+    ]) {
+      const sceneDocument = readFileSync(path, 'utf8');
+      expect(sceneDocument).not.toContain('(cast document : Scene3DDocument).');
+      expect(sceneDocument).not.toMatch(/_Runtime\.field\(document,/u);
+    }
+    const orbitController = readFileSync('generated/flighthq/cameraControls/OrbitCameraController.hx', 'utf8');
+    expect(orbitController).not.toMatch(
+      /\(cast (?:controller|out|source) : (?:flighthq\.types\.)?OrbitCameraController\)\./u,
+    );
+    expect(orbitController).not.toMatch(/_Runtime\.field\((?:controller|out|source),/u);
+    for (const path of [
+      'generated/flighthq/scene2dFormats/RiveAnimation.hx',
+      'generated/flighthq/scene2dFormats/RiveObjectGraph.hx',
+      'generated/flighthq/scene2dFormats/RiveShapePaint.hx',
+    ]) {
+      const riveCore = readFileSync(path, 'utf8');
+      expect(riveCore).not.toMatch(/\(cast (?:keyframe|object|source) : RiveCoreObject\)\./u);
+      expect(riveCore).not.toMatch(/_Runtime\.field\((?:keyframe|object|source),/u);
+    }
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

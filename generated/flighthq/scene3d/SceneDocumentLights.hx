@@ -50,8 +50,8 @@ class SceneDocumentLights {
     spot = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(document, 'lights'), 'length') : Float)) : Bool)) {
-        var source:Scene3DDocumentLight = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'lights'), i);
+      while ((cast ((cast i : Float) < (cast _Runtime.field(document.lights, 'length') : Float)) : Bool)) {
+        var source:Scene3DDocumentLight = flighthq._internal._StaticIndex.readArray(document.lights, i);
         var descriptor:Light = (cast source : Scene3DDocumentLight).descriptor;
         if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, AmbientLightKind) : Bool)) {
           if ((cast _Runtime.strictEquals(ambient, null) : Bool)) { (ambient = cast ((cast cloneAmbientLight((cast descriptor : AmbientLight)) : AmbientLight) : Dynamic)); }

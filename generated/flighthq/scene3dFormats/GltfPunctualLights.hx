@@ -48,7 +48,7 @@ class GltfPunctualLights {
         }
         var descriptor:Null<Light> = (cast GltfPunctualLights.buildGltfPunctualLight__gltfPunctualLights(({ final __callArgument6:Dynamic = source; __callArgument6; }), (cast lightIndex : Float), (cast lightDrops : Dynamic)) : Null<Light>);
         if ((cast _Runtime.strictEquals(descriptor, null) : Bool)) { node++; continue; }
-        _Runtime.callProperty((cast _Runtime.field(context, 'document') : Scene3DDocument).lights, 'push', cast ([{ descriptor: descriptor, name: (cast source : GltfPunctualLight).name, node: flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(context, 'nodeIndices') : Array<Float>), (cast node : Float)), transform: _Runtime.callProperty(context, 'buildNodeTransform', cast ([node] : Array<Dynamic>)) }] : Array<Dynamic>));
+        _Runtime.callProperty((cast _Runtime.field(context, 'document') : { var lights:Array<Scene3DDocumentLight>; }).lights, 'push', cast ([{ descriptor: descriptor, name: (cast source : GltfPunctualLight).name, node: flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(context, 'nodeIndices') : Array<Float>), (cast node : Float)), transform: _Runtime.callProperty(context, 'buildNodeTransform', cast ([node] : Array<Dynamic>)) }] : Array<Dynamic>));
         node++;
       }
     }

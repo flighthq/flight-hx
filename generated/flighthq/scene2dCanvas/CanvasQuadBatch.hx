@@ -33,7 +33,7 @@ class CanvasQuadBatch {
   public static function drawCanvasQuadBatch(state:CanvasRenderState, quadBatch:RenderProxy2D):Void {
     var source:QuadBatch = cast _Runtime.UNDEFINED;
     var data:QuadBatchData = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:QuadBatchData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var instanceCount:Float = cast _Runtime.UNDEFINED;
     var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
@@ -51,10 +51,10 @@ class CanvasQuadBatch {
     source = (cast (cast quadBatch : RenderProxy2D).source : QuadBatch);
     data = (cast source : QuadBatch).data;
     __destructure0 = data;
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    instanceCount = _Runtime.field(__destructure0, 'instanceCount');
-    ids = _Runtime.field(__destructure0, 'ids');
-    transforms = _Runtime.field(__destructure0, 'transforms');
+    atlas = __destructure0.atlas;
+    instanceCount = __destructure0.instanceCount;
+    ids = __destructure0.ids;
+    transforms = __destructure0.transforms;
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
     image = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument0:Dynamic = state; __callArgument0; })) : CanvasTextureResolvers), ({ final __callArgument1:Dynamic = atlas.texture; __callArgument1; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }
@@ -65,7 +65,7 @@ class CanvasQuadBatch {
     transform = (cast quadBatch : RenderProxy2D).transform2D;
     roundPixels = (cast state : CanvasRenderState).roundPixels;
     quadTransform = (cast acquireMatrix() : Matrix);
-    stride = ((cast _Runtime.strictEquals((cast data : QuadBatchData).transformType, 'vector2') : Bool) ? (cast 2.0 : Dynamic) : (cast 6.0 : Dynamic));
+    stride = ((cast _Runtime.strictEquals(data.transformType, 'vector2') : Bool) ? (cast 2.0 : Dynamic) : (cast 6.0 : Dynamic));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast quadBatch : RenderProxy2D).alpha);
     smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast StringTools.startsWith((cast (cast atlas.texture : Texture2D).sampler : { var magFilter:TextureFilter; }).magFilter, 'nearest') : Bool) : Bool));
     if ((cast !(cast smoothing : Bool) : Bool)) {

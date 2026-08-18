@@ -80,7 +80,7 @@ class SceneDocumentSource {
     var basePath:Null<String> = cast _Runtime.UNDEFINED;
     basePath = (cast getScene3DDocumentBasePathFromUrl((cast url : String)) : Null<String>);
     if ((cast _Runtime.strictEquals(basePath, null) : Bool)) { return; }
-    for (resource in _Runtime.iterable((cast document : Scene3DDocument).resources)) {
+    for (resource in _Runtime.iterable(document.resources)) {
       if ((cast ((cast _Runtime.strictEquals((cast resource : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).External) : Bool) && (cast _Runtime.strictEquals((cast resource : { var basePath:Null<String>; }).basePath, null) : Bool)) : Bool)) {
         ((cast resource : { var basePath:Null<String>; }).basePath = cast (basePath : Null<String>));
       }

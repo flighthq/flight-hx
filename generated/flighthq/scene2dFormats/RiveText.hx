@@ -32,7 +32,7 @@ class RiveText {
       var child:Float = (index + 1.0);
       while ((cast ((cast child : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast child : Float)), index) : Bool)) { child++; continue; }
-        if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), child) : RiveCoreObject).typeKey, RiveText.RIVE_TEXT_VALUE_RUN__riveText) : Bool)) { _Runtime.callProperty(runs, 'push', cast ([child] : Array<Dynamic>)); }
+        if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), child) : { var typeKey:Float; }).typeKey, RiveText.RIVE_TEXT_VALUE_RUN__riveText) : Bool)) { _Runtime.callProperty(runs, 'push', cast ([child] : Array<Dynamic>)); }
         child++;
       }
     }
@@ -88,7 +88,7 @@ class RiveText {
       var index:Float = (styleIndex + 1.0);
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
-        if ((cast !_Runtime.strictEquals((cast object : RiveCoreObject).typeKey, RiveText.RIVE_TEXT_STYLE_AXIS__riveText) : Bool)) { index++; continue; }
+        if ((cast !_Runtime.strictEquals(object.typeKey, RiveText.RIVE_TEXT_STYLE_AXIS__riveText) : Bool)) { index++; continue; }
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), styleIndex) : Bool)) { index++; continue; }
         _Runtime.callProperty(variations, 'push', cast ([{ axis: (cast RiveText.toRiveOpenTypeTag__riveText((cast (cast RiveText.readRiveNumber__riveText(({ final __callArgument15:Dynamic = object; __callArgument15; }), (cast RiveText.RIVE_AXIS_TAG__riveText : Float), (cast 0.0 : Float)) : Float) : Float)) : String), value: (cast RiveText.readRiveNumber__riveText(({ final __callArgument16:Dynamic = object; __callArgument16; }), (cast RiveText.RIVE_AXIS_VALUE__riveText : Float), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
         index++;
@@ -109,7 +109,7 @@ class RiveText {
       var index:Float = (styleIndex + 1.0);
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
-        if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveText.RIVE_SOLID_COLOR__riveText : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
+        if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveText.RIVE_SOLID_COLOR__riveText : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
         if ((cast !(cast (cast RiveText.isRiveDescendantOf__riveText(({ final __callArgument17:Dynamic = artboard; __callArgument17; }), (cast index : Float), (cast styleIndex : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
         var packed:Float = (cast RiveText.readRiveNumber__riveText(({ final __callArgument18:Dynamic = object; __callArgument18; }), (cast RiveText.RIVE_SOLID_COLOR_VALUE__riveText : Float), (cast 0.0 : Float)) : Float);
         return cast (cast packColor((cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0) : Float), (cast ((_Runtime.toInt32(packed) & 255) / 255.0) : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0) : Float)) : Float);
@@ -133,14 +133,14 @@ class RiveText {
 
   public static function readRiveNumber__riveText(source:RiveCoreObject, key:Float, fallback:Float):Float {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused0:Float, __unused1:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused0:Float, __unused1:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
     return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
     return cast null;
   }
 
   public static function readRiveText__riveText(source:RiveCoreObject, key:Float, fallback:String):String {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused2:Float, __unused3:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused2:Float, __unused3:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
     return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'string') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
     return cast null;
   }

@@ -15,11 +15,11 @@ class RiveAssets {
     var assets:Array<RiveFileAsset> = cast _Runtime.UNDEFINED;
     assets = (cast cast ([] : Array<Dynamic>));
     for (object in _Runtime.iterable(objects)) {
-      if ((cast (cast isRiveCoreTypeDerivedFrom((cast _Runtime.field(object, 'typeKey') : Float), (cast RiveAssets.RIVE_FILE_ASSET__riveAssets : Float)) : Bool) : Bool)) {
-        _Runtime.callProperty(assets, 'push', cast ([{ bytes: null, cdnBaseUrl: (cast RiveAssets.readRiveText__riveAssets(({ final __callArgument2:Dynamic = object; __callArgument2; }), (cast RiveAssets.RIVE_ASSET_CDN_BASE_URL__riveAssets : Float), (cast '' : String)) : String), height: (cast RiveAssets.readRiveNumber__riveAssets(({ final __callArgument3:Dynamic = object; __callArgument3; }), (cast RiveAssets.RIVE_ASSET_HEIGHT__riveAssets : Float), (cast 0.0 : Float)) : Float), kind: _Runtime.coalesce((cast getRiveCoreTypeName((cast _Runtime.field(object, 'typeKey') : Float)) : Null<String>), function():Dynamic return cast ''), name: (cast RiveAssets.readRiveText__riveAssets(({ final __callArgument4:Dynamic = object; __callArgument4; }), (cast RiveAssets.RIVE_ASSET_NAME__riveAssets : Float), (cast '' : String)) : String), width: (cast RiveAssets.readRiveNumber__riveAssets(({ final __callArgument5:Dynamic = object; __callArgument5; }), (cast RiveAssets.RIVE_ASSET_WIDTH__riveAssets : Float), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
+      if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveAssets.RIVE_FILE_ASSET__riveAssets : Float)) : Bool) : Bool)) {
+        _Runtime.callProperty(assets, 'push', cast ([{ bytes: null, cdnBaseUrl: (cast RiveAssets.readRiveText__riveAssets(({ final __callArgument2:Dynamic = object; __callArgument2; }), (cast RiveAssets.RIVE_ASSET_CDN_BASE_URL__riveAssets : Float), (cast '' : String)) : String), height: (cast RiveAssets.readRiveNumber__riveAssets(({ final __callArgument3:Dynamic = object; __callArgument3; }), (cast RiveAssets.RIVE_ASSET_HEIGHT__riveAssets : Float), (cast 0.0 : Float)) : Float), kind: _Runtime.coalesce((cast getRiveCoreTypeName((cast object.typeKey : Float)) : Null<String>), function():Dynamic return cast ''), name: (cast RiveAssets.readRiveText__riveAssets(({ final __callArgument4:Dynamic = object; __callArgument4; }), (cast RiveAssets.RIVE_ASSET_NAME__riveAssets : Float), (cast '' : String)) : String), width: (cast RiveAssets.readRiveNumber__riveAssets(({ final __callArgument5:Dynamic = object; __callArgument5; }), (cast RiveAssets.RIVE_ASSET_WIDTH__riveAssets : Float), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
         continue;
       }
-      if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveAssets.RIVE_FILE_ASSET_CONTENTS__riveAssets) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(assets, 'length'), 0.0) : Bool)) : Bool)) { continue; }
+      if ((cast ((cast !_Runtime.strictEquals(object.typeKey, RiveAssets.RIVE_FILE_ASSET_CONTENTS__riveAssets) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(assets, 'length'), 0.0) : Bool)) : Bool)) { continue; }
       ((cast flighthq._internal._StaticIndex.readArray(assets, _Runtime.subtractNumbers(_Runtime.field(assets, 'length'), 1.0)) : RiveFileAsset).bytes = (cast RiveAssets.readRiveBytes__riveAssets(({ final __callArgument6:Dynamic = object; __callArgument6; }), (cast RiveAssets.RIVE_ASSET_BYTES__riveAssets : Float)) : Null<flighthq._internal._UInt8Array>));
     }
     return cast assets;
@@ -28,21 +28,21 @@ class RiveAssets {
 
   public static function readRiveBytes__riveAssets(source:RiveCoreObject, key:Float):Null<flighthq._internal._UInt8Array> {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused0:Float, __unused1:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused0:Float, __unused1:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
     return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast _Runtime.isInstanceOf((cast property : RiveProperty).value, flighthq._internal._HostValueLut.get('Uint8Array')) : Bool) : Bool)) : Bool) ? (cast null : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
     return cast null;
   }
 
   public static function readRiveNumber__riveAssets(source:RiveCoreObject, key:Float, fallback:Float):Float {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused2:Float, __unused3:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused2:Float, __unused3:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
     return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
     return cast null;
   }
 
   public static function readRiveText__riveAssets(source:RiveCoreObject, key:Float, fallback:String):String {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused4:Float, __unused5:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused4:Float, __unused5:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
     return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'string') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
     return cast null;
   }

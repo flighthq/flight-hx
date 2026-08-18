@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1581 |
-| Direct schemas | 423 |
+| Audit-only schemas | 1576 |
+| Direct schemas | 428 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 13925 |
-| Directly emitted accesses | 16741 |
+| Pending accesses | 13357 |
+| Directly emitted accesses | 17309 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1581 |
+| Newly discovered, audit-only | 1576 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -276,7 +276,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CanvasRenderTexturePool` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 18 | 3 | 0 | 21 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CanvasRenderTextureStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#CanvasShapeCommand` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 1 | 0 | 1 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CanvasShapeDrawState` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 50 | 60 | 5 | 115 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasShapeDrawState` | `direct` | `new` | — | reviewed escape-free Canvas shape draw state | 16 | 50 | 60 | 5 | 0 | 115 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CanvasShapeHandler` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#CanvasTextInputOverlay` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#CanvasTextShaperBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -1058,7 +1058,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ObjMaterialLibrary` | `direct` | `relocated` | `@flighthq/scene-formats:interface#ObjMaterialLibrary` | broad serialization document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#OpenDirectoryDialogOptions` | `direct` | `preserved` | `@flighthq/types:interface#OpenDirectoryDialogOptions` | broad host document | 4 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#OpenFileDialogOptions` | `direct` | `preserved` | `@flighthq/types:interface#OpenFileDialogOptions` | broad host document | 7 | 19 | 0 | 0 | 0 | 19 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#OrbitCameraController` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 69 | 35 | 0 | 104 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#OrbitCameraController` | `direct` | `new` | — | reviewed escape-free orbit camera controller | 12 | 69 | 35 | 0 | 0 | 104 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#OrbitCameraControllerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 18 | 0 | 0 | 18 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#OrientationReading` | `direct` | `preserved` | `@flighthq/types:interface#OrientationReading` | broad host document | 8 | 19 | 30 | 0 | 0 | 49 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#OrthographicProjection` | `direct` | `relocated` | `@flighthq/types:interface#OrthographicProjection` | orthographic-camera projection aggregate | 3 | 9 | 5 | 0 | 0 | 14 | 12 | 12 | yes | — |
@@ -1221,7 +1221,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ProtocolHandler` | `direct` | `preserved` | `@flighthq/types:interface#ProtocolHandler` | broad host document | 1 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ProximityReading` | `direct` | `preserved` | `@flighthq/types:interface#ProximityReading` | broad host document | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#QuadBatch` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 28 | 0 | 0 | 28 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#QuadBatchData` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 121 | 9 | 0 | 130 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#QuadBatchData` | `direct` | `new` | — | reviewed escape-free quad batch data | 6 | 121 | 9 | 0 | 0 | 130 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#QuadBatchRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 39 | 6 | 3 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#QuadBatchSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#QuadTransformType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1312,7 +1312,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#RiveAnimationLoop` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#RiveArtboardGraph` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 100 | 1 | 0 | 101 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveArtboardImport` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RiveCoreObject` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 104 | 0 | 0 | 104 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RiveCoreObject` | `direct` | `new` | — | reviewed escape-free Rive core object | 2 | 104 | 0 | 0 | 0 | 104 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveDocument` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveDocumentHeader` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveDocumentImportResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
@@ -1377,7 +1377,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Scene3D` | `direct` | `renamed` | `@flighthq/types:interface#Scene` | broad scene document | 4 | 13 | 4 | 0 | 0 | 17 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Scene3DAnimationPath` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Scene3DAnimationTarget` | `direct` | `renamed` | `@flighthq/types:interface#SceneAnimationTarget` | broad scene document | 2 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Scene3DDocument` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 115 | 0 | 0 | 115 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Scene3DDocument` | `direct` | `new` | — | reviewed escape-free Scene3D document | 10 | 115 | 0 | 0 | 0 | 115 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentAnimation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 1 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentAnimationChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentCamera` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |

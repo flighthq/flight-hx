@@ -243,10 +243,10 @@ class Md2Parse {
           s++;
           continue;
         }
-        var material:Material = (cast (cast createBlinnPhongMaterial(({ final __callArgument44:Dynamic = { diffuseMap: (cast createExternalTextureRef((cast skinName : String), ({ final __callArgument43:Dynamic = null; __callArgument43; }), (cast (cast document : Scene3DDocument).resources : Dynamic)) : Texture) }; __callArgument44; })) : flighthq._internal._Any) : Material);
+        var material:Material = (cast (cast createBlinnPhongMaterial(({ final __callArgument44:Dynamic = { diffuseMap: (cast createExternalTextureRef((cast skinName : String), ({ final __callArgument43:Dynamic = null; __callArgument43; }), (cast document.resources : Dynamic)) : Texture) }; __callArgument44; })) : flighthq._internal._Any) : Material);
         ((cast material : Material).name = skinName);
-        var index:Float = _Runtime.field((cast document : Scene3DDocument).materials, 'length');
-        _Runtime.callProperty((cast document : Scene3DDocument).materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
+        var index:Float = _Runtime.field(document.materials, 'length');
+        _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
         if ((cast _Runtime.strictEquals(_Runtime.field(meshMaterials, 'length'), 0.0) : Bool)) { _Runtime.callProperty(meshMaterials, 'push', cast ([index] : Array<Dynamic>)); }
         s++;
       }
@@ -260,10 +260,10 @@ class Md2Parse {
     morph = (cast Md2Parse.buildMd2Morph__md2Parse((cast frames : Dynamic), ({ final __callArgument49:Dynamic = sourceVertexIndices; __callArgument49; })) : Null<MeshMorph>);
     documentMesh = (cast { geometry: geometry, materials: meshMaterials });
     if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { ((cast documentMesh : Scene3DDocumentMesh).morph = morph); }
-    _Runtime.callProperty((cast document : Scene3DDocument).meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
-    _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: 0.0, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
-    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([0.0] : Array<Dynamic>));
-    _Runtime.callProperty((cast document : Scene3DDocument).animations, 'push', _Runtime.concatArrays([_Runtime.toArray((cast Md2Parse.buildMd2MorphAnimations__md2Parse((cast frames : Dynamic), ({ final __callArgument50:Dynamic = morph; __callArgument50; })) : Array<Scene3DDocumentAnimation>))]));
+    _Runtime.callProperty(document.meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
+    _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: 0.0, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
+    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([0.0] : Array<Dynamic>));
+    _Runtime.callProperty(document.animations, 'push', _Runtime.concatArrays([_Runtime.toArray((cast Md2Parse.buildMd2MorphAnimations__md2Parse((cast frames : Dynamic), ({ final __callArgument50:Dynamic = morph; __callArgument50; })) : Array<Scene3DDocumentAnimation>))]));
     return cast document;
     return cast null;
   }

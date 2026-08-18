@@ -17374,7 +17374,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 115,
       "fields": 16,
       "id": "@flighthq/types:interface#CanvasShapeDrawState",
       "name": "CanvasShapeDrawState",
@@ -38855,7 +38855,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 130,
       "fields": 6,
       "id": "@flighthq/types:interface#QuadBatchData",
       "name": "QuadBatchData",
@@ -40316,7 +40316,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 104,
       "fields": 2,
       "id": "@flighthq/types:interface#RiveCoreObject",
       "name": "RiveCoreObject",
@@ -42217,7 +42217,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 115,
       "fields": 10,
       "id": "@flighthq/types:interface#Scene3DDocument",
       "name": "Scene3DDocument",

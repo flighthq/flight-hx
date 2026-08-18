@@ -47,7 +47,7 @@ class GltfEmissiveStrength {
           i++;
           continue;
         }
-        var material:MaterialLike = flighthq._internal._StaticIndex.readArray((cast _Runtime.field(context, 'document') : Scene3DDocument).materials, i);
+        var material:MaterialLike = flighthq._internal._StaticIndex.readArray((cast _Runtime.field(context, 'document') : { var materials:Array<MaterialLike>; }).materials, i);
         if ((cast _Runtime.strictEquals(material, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         if ((cast _Runtime.strictEquals(_Runtime.field(material, 'kind'), StandardPbrMaterialKind) : Bool)) {
           ((cast (cast (cast material : flighthq._internal._Any) : StandardPbrMaterial) : StandardPbrMaterial).emissiveStrength = strength);

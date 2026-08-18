@@ -318,9 +318,9 @@ class Awd2Parse {
     if ((cast ((cast (cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).size : Float) > (cast 0.0 : Float)) : Bool)) {
       var built:{ var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; } = (cast Awd2Parse.buildAwdSkeletonDocument__awd2Parse((cast (cast _Runtime.callProperty(((cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).values()), 'next', cast ([] : Array<Dynamic>)) : { var value:Null<ParsedSkeleton__awd2Parse>; }).value : Dynamic), ({ final __callArgument37:Dynamic = document; __callArgument37; })) : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; });
       (skeletonJointNodeIndices = cast ((cast built : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; }).jointNodeIndices : Dynamic));
-      (skinIndex = cast (_Runtime.field((cast document : Scene3DDocument).skins, 'length') : Dynamic));
-      _Runtime.callProperty((cast document : Scene3DDocument).skins, 'push', cast ([(cast built : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; }).skin] : Array<Dynamic>));
-      _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([(cast built : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; }).skeletonRootIndex] : Array<Dynamic>));
+      (skinIndex = cast (_Runtime.field(document.skins, 'length') : Dynamic));
+      _Runtime.callProperty(document.skins, 'push', cast ([(cast built : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; }).skin] : Array<Dynamic>));
+      _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([(cast built : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; }).skeletonRootIndex] : Array<Dynamic>));
       if ((cast ((cast (cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).size : Float) > (cast 1.0 : Float)) : Bool)) {
         reportImportDiagnostic(({ final __callArgument38:Dynamic = diagnostics; __callArgument38; }), ({ final __callArgument39:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument39; }), (cast 'awd2.multiple-skeletons' : String), (cast 'parseAwd2' : String), ({ final __callArgument40:Dynamic = { skeletons: (cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).size }; __callArgument40; }));
       }
@@ -328,8 +328,8 @@ class Awd2Parse {
     for (__iteration0 in _Runtime.iterable(containerBlocks)) {
       var blockId:Float = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
       var container:ParsedContainer__awd2Parse = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      var nodeIndex:Float = _Runtime.field((cast document : Scene3DDocument).nodes, 'length');
-      _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue((cast container : ParsedContainer__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: (cast Awd2Parse.awdTransformToTransform3D__awd2Parse((cast container : ParsedContainer__awd2Parse).transform) : Transform3D) }] : Array<Dynamic>));
+      var nodeIndex:Float = _Runtime.field(document.nodes, 'length');
+      _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue((cast container : ParsedContainer__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: (cast Awd2Parse.awdTransformToTransform3D__awd2Parse((cast container : ParsedContainer__awd2Parse).transform) : Transform3D) }] : Array<Dynamic>));
       ((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).set(blockId, (cast nodeIndex)));
     }
     resolvedMaterials = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
@@ -349,33 +349,33 @@ class Awd2Parse {
       var nodeIndex:Float = cast _Runtime.UNDEFINED;
       if ((cast ((cast !_Runtime.strictEquals(geometries, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(geometries, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
         if ((cast _Runtime.strictEquals(_Runtime.field(geometries, 'length'), 1.0) : Bool)) {
-          var meshIndex:Float = _Runtime.field((cast document : Scene3DDocument).meshes, 'length');
+          var meshIndex:Float = _Runtime.field(document.meshes, 'length');
           var mesh:Scene3DDocumentMesh = (cast { geometry: (cast flighthq._internal._StaticIndex.readArray(geometries, 0.0) : ParsedGeometry__awd2Parse).geometry, materials: (cast materialForSubset((cast meshInst : Dynamic), (cast 0.0 : Float)) : Array<Float>) });
           if ((cast ((cast !_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast flighthq._internal._StaticIndex.readArray(geometries, 0.0) : ParsedGeometry__awd2Parse).skinned : Bool)) : Bool)) { ((cast mesh : Scene3DDocumentMesh).skin = skinIndex); }
-          _Runtime.callProperty((cast document : Scene3DDocument).meshes, 'push', cast ([mesh] : Array<Dynamic>));
-          (nodeIndex = cast (_Runtime.field((cast document : Scene3DDocument).nodes, 'length') : Dynamic));
-          _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, name: _Runtime.orValue((cast meshInst : ParsedMeshInstance__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform }] : Array<Dynamic>));
+          _Runtime.callProperty(document.meshes, 'push', cast ([mesh] : Array<Dynamic>));
+          (nodeIndex = cast (_Runtime.field(document.nodes, 'length') : Dynamic));
+          _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, name: _Runtime.orValue((cast meshInst : ParsedMeshInstance__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform }] : Array<Dynamic>));
         } else {
-          (nodeIndex = cast (_Runtime.field((cast document : Scene3DDocument).nodes, 'length') : Dynamic));
+          (nodeIndex = cast (_Runtime.field(document.nodes, 'length') : Dynamic));
           var group:Scene3DDocumentNode = (cast { children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue((cast meshInst : ParsedMeshInstance__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform });
-          _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([group] : Array<Dynamic>));
+          _Runtime.callProperty(document.nodes, 'push', cast ([group] : Array<Dynamic>));
           {
             var i:Float = 0.0;
             while ((cast ((cast i : Float) < (cast _Runtime.field(geometries, 'length') : Float)) : Bool)) {
-              var meshIndex:Float = _Runtime.field((cast document : Scene3DDocument).meshes, 'length');
+              var meshIndex:Float = _Runtime.field(document.meshes, 'length');
               var mesh:Scene3DDocumentMesh = (cast { geometry: (cast flighthq._internal._StaticIndex.readArray(geometries, i) : ParsedGeometry__awd2Parse).geometry, materials: (cast materialForSubset((cast meshInst : Dynamic), (cast i : Float)) : Array<Float>) });
               if ((cast ((cast !_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast flighthq._internal._StaticIndex.readArray(geometries, i) : ParsedGeometry__awd2Parse).skinned : Bool)) : Bool)) { ((cast mesh : Scene3DDocumentMesh).skin = skinIndex); }
-              _Runtime.callProperty((cast document : Scene3DDocument).meshes, 'push', cast ([mesh] : Array<Dynamic>));
-              var childIndex:Float = _Runtime.field((cast document : Scene3DDocument).nodes, 'length');
-              _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
+              _Runtime.callProperty(document.meshes, 'push', cast ([mesh] : Array<Dynamic>));
+              var childIndex:Float = _Runtime.field(document.nodes, 'length');
+              _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
               _Runtime.callProperty((cast group : Scene3DDocumentNode).children, 'push', cast ([childIndex] : Array<Dynamic>));
               i++;
             }
           }
         }
       } else {
-        (nodeIndex = cast (_Runtime.field((cast document : Scene3DDocument).nodes, 'length') : Dynamic));
-        _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue((cast meshInst : ParsedMeshInstance__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform }] : Array<Dynamic>));
+        (nodeIndex = cast (_Runtime.field(document.nodes, 'length') : Dynamic));
+        _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue((cast meshInst : ParsedMeshInstance__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform }] : Array<Dynamic>));
         if ((cast !_Runtime.strictEquals((cast meshInst : ParsedMeshInstance__awd2Parse).geometryId, 0.0) : Bool)) {
           reportImportDiagnostic(({ final __callArgument48:Dynamic = diagnostics; __callArgument48; }), ({ final __callArgument49:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument49; }), (cast 'awd2.mesh-instance-missing-geometry' : String), (cast 'parseAwd2' : String), ({ final __callArgument50:Dynamic = { block: blockId, geometry: (cast meshInst : ParsedMeshInstance__awd2Parse).geometryId }; __callArgument50; }));
         }
@@ -389,7 +389,7 @@ class Awd2Parse {
       if ((cast !_Runtime.strictEquals((cast container : ParsedContainer__awd2Parse).parentId, 0.0) : Bool)) {
         var parentIndex:Null<Float> = ((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get((cast container : ParsedContainer__awd2Parse).parentId));
         if ((cast !_Runtime.strictEquals(parentIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, parentIndex) : Scene3DDocumentNode).children, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, parentIndex) : Scene3DDocumentNode).children, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>));
           ((cast parented : flighthq._internal._Set<Float>).add(blockId));
         }
       }
@@ -400,13 +400,13 @@ class Awd2Parse {
       if ((cast !_Runtime.strictEquals((cast meshInst : ParsedMeshInstance__awd2Parse).parentId, 0.0) : Bool)) {
         var parentIndex:Null<Float> = ((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get((cast meshInst : ParsedMeshInstance__awd2Parse).parentId));
         if ((cast !_Runtime.strictEquals(parentIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, parentIndex) : Scene3DDocumentNode).children, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, parentIndex) : Scene3DDocumentNode).children, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>));
           ((cast parented : flighthq._internal._Set<Float>).add(blockId));
         }
       }
     }
     for (blockId in _Runtime.iterable(((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).keys()))) {
-      if ((cast !(cast ((cast parented : flighthq._internal._Set<Float>).has(blockId)) : Bool) : Bool)) { _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>)); }
+      if ((cast !(cast ((cast parented : flighthq._internal._Set<Float>).has(blockId)) : Bool) : Bool)) { _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>)); }
     }
     lightDrops = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (light in _Runtime.iterable(((cast lightBlocks : flighthq._internal._Map<Float, ParsedLight__awd2Parse>).values()))) {
@@ -429,7 +429,7 @@ class Awd2Parse {
       reportImportDiagnostic(({ final __callArgument72:Dynamic = diagnostics; __callArgument72; }), ({ final __callArgument73:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument73; }), (cast 'awd2.light-scope-dropped' : String), (cast 'parseAwd2' : String), ({ final __callArgument74:Dynamic = { lights: (cast lightBlocks : flighthq._internal._Map<Float, ParsedLight__awd2Parse>).size, pickers: (cast lightPickerBlocks : flighthq._internal._Map<Float, ParsedLightPicker__awd2Parse>).size }; __callArgument74; }));
     }
     if ((cast ((cast _Runtime.field(skeletonJointNodeIndices, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callProperty((cast document : Scene3DDocument).animations, 'push', _Runtime.concatArrays([_Runtime.toArray((cast Awd2Parse.buildAwdDocumentAnimations__awd2Parse(({ final __callArgument75:Dynamic = source; __callArgument75; }), ({ final __callArgument76:Dynamic = skeletonJointNodeIndices; __callArgument76; }), ({ final __callArgument77:Dynamic = diagnostics; __callArgument77; })) : Array<Scene3DDocumentAnimation>))]));
+      _Runtime.callProperty(document.animations, 'push', _Runtime.concatArrays([_Runtime.toArray((cast Awd2Parse.buildAwdDocumentAnimations__awd2Parse(({ final __callArgument75:Dynamic = source; __callArgument75; }), ({ final __callArgument76:Dynamic = skeletonJointNodeIndices; __callArgument76; }), ({ final __callArgument77:Dynamic = diagnostics; __callArgument77; })) : Array<Scene3DDocumentAnimation>))]));
     }
     return cast document;
     return cast null;
@@ -761,14 +761,14 @@ class Awd2Parse {
     var local:Matrix4 = cast _Runtime.UNDEFINED;
     var skin:Scene3DDocumentSkin = cast _Runtime.UNDEFINED;
     jointCount = _Runtime.field(_Runtime.field(parsedSkeleton, 'joints'), 'length');
-    skeletonRootIndex = _Runtime.field((cast document : Scene3DDocument).nodes, 'length');
-    _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: 'skeleton', transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
+    skeletonRootIndex = _Runtime.field(document.nodes, 'length');
+    _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: 'skeleton', transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
     jointNodeIndices = (cast cast ([] : Array<Dynamic>));
     {
       var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
-        _Runtime.callProperty(jointNodeIndices, 'push', cast ([_Runtime.field((cast document : Scene3DDocument).nodes, 'length')] : Array<Dynamic>));
-        _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedSkeleton, 'joints'), j) : ParsedJoint__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
+        _Runtime.callProperty(jointNodeIndices, 'push', cast ([_Runtime.field(document.nodes, 'length')] : Array<Dynamic>));
+        _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedSkeleton, 'joints'), j) : ParsedJoint__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
         j++;
       }
     }
@@ -777,9 +777,9 @@ class Awd2Parse {
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
         var parentIndex1:Float = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedSkeleton, 'joints'), j) : ParsedJoint__awd2Parse).parentIndex;
         if ((cast ((cast ((cast parentIndex1 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast (parentIndex1 - 1.0) : Float) < (cast jointCount : Float)) : Bool)) : Bool)) {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast (parentIndex1 - 1.0) : Float))) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast (parentIndex1 - 1.0) : Float))) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
         } else {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, skeletonRootIndex) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, skeletonRootIndex) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
         }
         j++;
       }
@@ -810,7 +810,7 @@ class Awd2Parse {
         } else {
           copyMatrix4(({ final __callArgument149:Dynamic = local; __callArgument149; }), ({ final __callArgument150:Dynamic = flighthq._internal._StaticIndex.readArray(bindWorld, j); __callArgument150; }));
         }
-        decomposeMatrix4ToTransform3D(({ final __callArgument151:Dynamic = (cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))) : Scene3DDocumentNode).transform; __callArgument151; }), ({ final __callArgument152:Dynamic = local; __callArgument152; }));
+        decomposeMatrix4ToTransform3D(({ final __callArgument151:Dynamic = (cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))) : Scene3DDocumentNode).transform; __callArgument151; }), ({ final __callArgument152:Dynamic = local; __callArgument152; }));
         j++;
       }
     }
@@ -1316,7 +1316,7 @@ class Awd2Parse {
       reportImportDiagnostic(({ final __callArgument232:Dynamic = diagnostics; __callArgument232; }), ({ final __callArgument233:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument233; }), (cast 'awd2.camera-unsupported-projection' : String), (cast 'parseAwd2' : String), ({ final __callArgument234:Dynamic = { name: _Runtime.field(camera, 'name'), projectionType: _Runtime.field(camera, 'projectionType') }; __callArgument234; }));
       return;
     } } }
-    _Runtime.callProperty((cast document : Scene3DDocument).cameras, 'push', cast ([_Runtime.mergeObjects([{ far: Awd2Parse.AWD2_CAMERA_DEFAULT_FAR__awd2Parse }, ((cast ((cast _Runtime.field(_Runtime.field(camera, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(camera, 'name') } : Dynamic) : (cast {  } : Dynamic)), { near: Awd2Parse.AWD2_CAMERA_DEFAULT_NEAR__awd2Parse }, ((cast !_Runtime.strictEquals(nodeIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { node: nodeIndex } : Dynamic) : (cast {  } : Dynamic)), { projection: projection }, { transform: (cast Awd2Parse.awdTransformToTransform3D__awd2Parse(_Runtime.field(camera, 'transform')) : Transform3D) }])] : Array<Dynamic>));
+    _Runtime.callProperty(document.cameras, 'push', cast ([_Runtime.mergeObjects([{ far: Awd2Parse.AWD2_CAMERA_DEFAULT_FAR__awd2Parse }, ((cast ((cast _Runtime.field(_Runtime.field(camera, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(camera, 'name') } : Dynamic) : (cast {  } : Dynamic)), { near: Awd2Parse.AWD2_CAMERA_DEFAULT_NEAR__awd2Parse }, ((cast !_Runtime.strictEquals(nodeIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { node: nodeIndex } : Dynamic) : (cast {  } : Dynamic)), { projection: projection }, { transform: (cast Awd2Parse.awdTransformToTransform3D__awd2Parse(_Runtime.field(camera, 'transform')) : Transform3D) }])] : Array<Dynamic>));
   }
 
   public static function parseLightBlock__awd2Parse(view:Dynamic, source:flighthq._internal._UInt8Array, start:Float, end:Float, matrixWide:Bool, ?diagnostics:Array<ImportDiagnostic>):Null<ParsedLight__awd2Parse> {
@@ -1534,8 +1534,8 @@ class Awd2Parse {
     material = (cast (cast createShadedMaterial((cast { diffuse: diffuse, diffuseMap: diffuseTexture, normalMap: normalTexture, shininess: _Runtime.coalesce((cast parsed : ParsedMaterial__awd2Parse).gloss, function():Dynamic return cast AWD2_MATERIAL_DEFAULT_GLOSS), specular: (cast Awd2Parse.getAwdSpecularRgba__awd2Parse((cast parsed : ParsedMaterial__awd2Parse).specularColor, (cast strength : Float)) : Float), specularMap: specularTexture } : Dynamic)) : flighthq._internal._Any) : Material);
     if ((cast ((cast !_Runtime.strictEquals((cast parsed : ParsedMaterial__awd2Parse).alpha, null) : Bool) && (cast ((cast (cast parsed : ParsedMaterial__awd2Parse).alpha : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { ((cast (cast (cast material : flighthq._internal._Any) : SurfaceMaterial) : SurfaceMaterial).alphaMode = 'blend'); }
     ((cast material : Material).name = ((cast ((cast _Runtime.field((cast parsed : ParsedMaterial__awd2Parse).name, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast parsed : ParsedMaterial__awd2Parse).name : Dynamic) : (cast null : Dynamic)));
-    index = _Runtime.field((cast document : Scene3DDocument).materials, 'length');
-    _Runtime.callProperty((cast document : Scene3DDocument).materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
+    index = _Runtime.field(document.materials, 'length');
+    _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
     ((cast cache : flighthq._internal._Map<Float, Float>).set(materialId, (cast index)));
     return cast index;
     return cast null;
@@ -1549,10 +1549,10 @@ class Awd2Parse {
       return cast null;
     }
     if ((cast ((cast !_Runtime.strictEquals((cast parsed : ParsedTexture__awd2Parse).bytes, null) : Bool) && (cast !_Runtime.strictEquals((cast parsed : ParsedTexture__awd2Parse).mimeType, null) : Bool)) : Bool)) {
-      return cast (cast createEmbeddedTextureRef((cast parsed : ParsedTexture__awd2Parse).bytes, ({ final __callArgument300:Dynamic = (cast parsed : ParsedTexture__awd2Parse).mimeType; __callArgument300; }), (cast (cast document : Scene3DDocument).resources : Dynamic)) : Texture);
+      return cast (cast createEmbeddedTextureRef((cast parsed : ParsedTexture__awd2Parse).bytes, ({ final __callArgument300:Dynamic = (cast parsed : ParsedTexture__awd2Parse).mimeType; __callArgument300; }), (cast document.resources : Dynamic)) : Texture);
     }
     if ((cast !_Runtime.strictEquals((cast parsed : ParsedTexture__awd2Parse).url, null) : Bool)) {
-      return cast (cast createExternalTextureRef((cast (cast parsed : ParsedTexture__awd2Parse).url : String), ({ final __callArgument301:Dynamic = null; __callArgument301; }), (cast (cast document : Scene3DDocument).resources : Dynamic)) : Texture);
+      return cast (cast createExternalTextureRef((cast (cast parsed : ParsedTexture__awd2Parse).url : String), ({ final __callArgument301:Dynamic = null; __callArgument301; }), (cast document.resources : Dynamic)) : Texture);
     }
     return cast null;
     return cast null;
@@ -1580,9 +1580,9 @@ class Awd2Parse {
     if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'specular'), AWD2_LIGHT_DEFAULT_SPECULAR) : Bool)) {
       Awd2Parse.tallyAwdLightDrop__awd2Parse((cast drops : Dynamic), ({ final __callArgument314:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument314; }), (cast 'awd2.light-specular-dropped' : String), ({ final __callArgument315:Dynamic = { firstLight: _Runtime.field(light, 'name'), firstSpecular: _Runtime.field(light, 'specular') }; __callArgument315; }));
     }
-    _Runtime.callProperty((cast document : Scene3DDocument).lights, 'push', cast ([{ descriptor: descriptor, name: _Runtime.orValue(_Runtime.field(light, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), node: nodeIndex, transform: transform }] : Array<Dynamic>));
+    _Runtime.callProperty(document.lights, 'push', cast ([{ descriptor: descriptor, name: _Runtime.orValue(_Runtime.field(light, 'name'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), node: nodeIndex, transform: transform }] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'ambient'), 0.0) : Bool)) {
-      _Runtime.callProperty((cast document : Scene3DDocument).lights, 'push', cast ([{ descriptor: (cast createAmbientLight((cast { color: (cast Awd2Parse.getAwdLightRgba__awd2Parse((cast _Runtime.field(light, 'ambientRgb') : Float)) : Float), intensity: _Runtime.field(light, 'ambient') } : Dynamic)) : AmbientLight), name: _Runtime.select(_Runtime.field(light, 'name'), function():Dynamic return cast '' + Std.string(_Runtime.field(light, 'name')) + ' Ambient', function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), node: nodeIndex, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
+      _Runtime.callProperty(document.lights, 'push', cast ([{ descriptor: (cast createAmbientLight((cast { color: (cast Awd2Parse.getAwdLightRgba__awd2Parse((cast _Runtime.field(light, 'ambientRgb') : Float)) : Float), intensity: _Runtime.field(light, 'ambient') } : Dynamic)) : AmbientLight), name: _Runtime.select(_Runtime.field(light, 'name'), function():Dynamic return cast '' + Std.string(_Runtime.field(light, 'name')) + ' Ambient', function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), node: nodeIndex, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
     }
   }
 

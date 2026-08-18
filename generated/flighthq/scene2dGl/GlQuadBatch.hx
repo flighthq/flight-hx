@@ -43,7 +43,7 @@ class GlQuadBatch {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:QuadBatch = cast _Runtime.UNDEFINED;
     var data:QuadBatchData = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:QuadBatchData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var instanceCount:Float = cast _Runtime.UNDEFINED;
     var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
@@ -79,10 +79,10 @@ class GlQuadBatch {
     source = (cast (cast quadBatch : RenderProxy2D).source : QuadBatch);
     data = (cast source : QuadBatch).data;
     __destructure0 = data;
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    instanceCount = _Runtime.field(__destructure0, 'instanceCount');
-    ids = _Runtime.field(__destructure0, 'ids');
-    transforms = _Runtime.field(__destructure0, 'transforms');
+    atlas = __destructure0.atlas;
+    instanceCount = __destructure0.instanceCount;
+    ids = __destructure0.ids;
+    transforms = __destructure0.transforms;
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument1:Dynamic = atlas.texture; __callArgument1; })) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
     (cast ensureGlQuadBatchShader(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlQuadBatchShader);
     material = (cast quadBatch : RenderProxy2D).material;
@@ -93,7 +93,7 @@ class GlQuadBatch {
     if ((cast _Runtime.strictEquals(glTexture, null) : Bool)) { return; }
     straightAlpha = runtime.currentTextureStraightAlpha;
     nodeMaterialData = (cast quadBatch : RenderProxy2D).materialData;
-    perQuadColorScaleBias = (cast data : QuadBatchData).materialData;
+    perQuadColorScaleBias = data.materialData;
     nodeColorScaleBias = (cast quadBatch : RenderProxy2D).colorScaleBias;
     nodeColorMatrix = (cast quadBatch : RenderProxy2D).colorMatrix;
     startCount = runtime.quadBatchWriterCount;
@@ -103,7 +103,7 @@ class GlQuadBatch {
     iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(({ final __callArgument10:Dynamic = texture; __callArgument10; })) : Float)));
     ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(({ final __callArgument11:Dynamic = texture; __callArgument11; })) : Float)));
     instanceData = runtime.quadBatchWriterInstanceData;
-    isVector2 = _Runtime.strictEquals((cast data : QuadBatchData).transformType, 'vector2');
+    isVector2 = _Runtime.strictEquals(data.transformType, 'vector2');
     pt = (cast quadBatch : RenderProxy2D).transform2D;
     pa = pt.a;
     pb = pt.b;

@@ -103,13 +103,13 @@ class RiveScene2D {
       var index:Float = 1.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
-        if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveScene2D.RIVE_PATH_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) {
+        if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveScene2D.RIVE_PATH_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) {
           _Runtime.callProperty(nodes, 'push', cast ([null] : Array<Dynamic>));
           RiveScene2D.collectRivePathGeometry__riveScene2D(({ final __callArgument14:Dynamic = shapePaths; __callArgument14; }), ({ final __callArgument15:Dynamic = artboard; __callArgument15; }), (cast index : Float), ({ final __callArgument16:Dynamic = diagnostics; __callArgument16; }));
           index++;
           continue;
         }
-        if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast (cast object : RiveCoreObject).typeKey : Float), (cast RiveScene2D.RIVE_NODE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool) : Bool)) {
+        if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveScene2D.RIVE_NODE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool) : Bool)) {
           _Runtime.callProperty(nodes, 'push', cast ([null] : Array<Dynamic>));
           index++;
           continue;
@@ -146,20 +146,20 @@ class RiveScene2D {
   public static function createRiveDisplayNode__riveScene2D(object:RiveCoreObject, artboard:RiveArtboardGraph, index:Float, fontNames:Array<String>):DisplayObject {
     var name:String = cast _Runtime.UNDEFINED;
     name = (cast RiveScene2D.readRiveText__riveScene2D(({ final __callArgument50:Dynamic = object; __callArgument50; }), (cast RiveScene2D.RIVE_NAME__riveScene2D : Float), (cast '' : String)) : String);
-    if ((cast _Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveScene2D.RIVE_TEXT_TYPE_KEY__riveScene2D) : Bool)) {
+    if ((cast _Runtime.strictEquals(object.typeKey, RiveScene2D.RIVE_TEXT_TYPE_KEY__riveScene2D) : Bool)) {
       var label:RichText = (cast createRiveRichText(({ final __callArgument51:Dynamic = artboard; __callArgument51; }), (cast index : Float), ({ final __callArgument52:Dynamic = fontNames; __callArgument52; })) : RichText);
       (label.name = cast (name : Null<String>));
       return cast label;
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveScene2D.RIVE_IMAGE_TYPE_KEY__riveScene2D) : Bool)) {
+    if ((cast _Runtime.strictEquals(object.typeKey, RiveScene2D.RIVE_IMAGE_TYPE_KEY__riveScene2D) : Bool)) {
       return cast (cast createRiveImageSprite((cast name : String), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument53:Dynamic = object; __callArgument53; }), (cast RiveScene2D.RIVE_IMAGE_ASSET_ID__riveScene2D : Float), (cast -1.0 : Float)) : Float) : Float)) : DisplayObject);
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(object, 'typeKey'), RiveScene2D.RIVE_NESTED_ARTBOARD_TYPE_KEY__riveScene2D) : Bool)) {
+    if ((cast _Runtime.strictEquals(object.typeKey, RiveScene2D.RIVE_NESTED_ARTBOARD_TYPE_KEY__riveScene2D) : Bool)) {
       var node:DisplayObject = (cast createDisplayObject((cast { name: name } : Dynamic)) : DisplayObject);
       markRiveNestedArtboard(({ final __callArgument54:Dynamic = node; __callArgument54; }), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument55:Dynamic = object; __callArgument55; }), (cast RiveScene2D.RIVE_NESTED_ARTBOARD_ID__riveScene2D : Float), (cast -1.0 : Float)) : Float) : Float));
       return cast node;
     }
-    if ((cast (cast isRiveCoreTypeDerivedFrom((cast _Runtime.field(object, 'typeKey') : Float), (cast RiveScene2D.RIVE_SHAPE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) { return cast (cast createShape((cast { name: name } : Dynamic)) : Shape); }
+    if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveScene2D.RIVE_SHAPE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) { return cast (cast createShape((cast { name: name } : Dynamic)) : Shape); }
     return cast (cast createDisplayObject((cast { name: name } : Dynamic)) : DisplayObject);
     return cast null;
   }
@@ -220,7 +220,7 @@ class RiveScene2D {
     var parent:Float = cast _Runtime.UNDEFINED;
     parent = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float));
     while ((cast ((cast parent : Float) > (cast 0.0 : Float)) : Bool)) {
-      if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), parent) : RiveCoreObject).typeKey : Float), (cast RiveScene2D.RIVE_SHAPE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) { return cast parent; }
+      if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), parent) : { var typeKey:Float; }).typeKey : Float), (cast RiveScene2D.RIVE_SHAPE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) { return cast parent; }
       (parent = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast parent : Float)) : Dynamic));
     }
     return cast -1.0;
@@ -267,7 +267,7 @@ class RiveScene2D {
     var value:Float = cast _Runtime.UNDEFINED;
     var fixed:Null<String> = cast _Runtime.UNDEFINED;
     var mode:Null<String> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast _Runtime.field(source, 'typeKey') : Float), (cast RiveScene2D.RIVE_DRAWABLE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveScene2D.RIVE_DRAWABLE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool) : Bool)) { return; }
     value = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument93:Dynamic = source; __callArgument93; }), (cast RiveScene2D.RIVE_BLEND_MODE__riveScene2D : Float), (cast RiveScene2D.RIVE_BLEND_SRC_OVER__riveScene2D : Float)) : Float);
     fixed = ((cast RiveScene2D.RIVE_FIXED_BLEND_MODES__riveScene2D : flighthq._internal._Map<Float, String>).get(value));
     if ((cast !_Runtime.strictEquals(fixed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -281,14 +281,14 @@ class RiveScene2D {
 
   public static function readRiveNumber__riveScene2D(source:RiveCoreObject, key:Float, fallback:Float):Float {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused6:Float, __unused7:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused6:Float, __unused7:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
     return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
     return cast null;
   }
 
   public static function readRiveText__riveScene2D(source:RiveCoreObject, key:Float, fallback:String):String {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused8:Float, __unused9:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused8:Float, __unused9:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
     return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'string') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
     return cast null;
   }

@@ -45,7 +45,7 @@ class WgpuQuadBatch {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:QuadBatch = cast _Runtime.UNDEFINED;
     var data:QuadBatchData = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:QuadBatchData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var instanceCount:Float = cast _Runtime.UNDEFINED;
     var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
@@ -81,10 +81,10 @@ class WgpuQuadBatch {
     source = (cast (cast quadBatch : RenderProxy2D).source : QuadBatch);
     data = (cast source : QuadBatch).data;
     __destructure0 = data;
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    instanceCount = _Runtime.field(__destructure0, 'instanceCount');
-    ids = _Runtime.field(__destructure0, 'ids');
-    transforms = _Runtime.field(__destructure0, 'transforms');
+    atlas = __destructure0.atlas;
+    instanceCount = __destructure0.instanceCount;
+    ids = __destructure0.ids;
+    transforms = __destructure0.transforms;
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument1:Dynamic = atlas.texture; __callArgument1; })) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
     material = (cast quadBatch : RenderProxy2D).material;
     materialRenderer = (cast resolveWgpuMaterialRenderer(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast material : Dynamic)) : Null<WgpuMaterialRenderer>);
@@ -93,7 +93,7 @@ class WgpuQuadBatch {
     textureEntry = (cast resolveWgpuTexture(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = texture; __callArgument4; }), (cast true : Bool), ({ final __callArgument5:Dynamic = SCENE2D_WORKING_COLOR_SPACE; __callArgument5; })) : Null<WgpuTextureEntry>);
     if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { return; }
     nodeMaterialData = (cast quadBatch : RenderProxy2D).materialData;
-    perQuadColorScaleBias = (cast data : QuadBatchData).materialData;
+    perQuadColorScaleBias = data.materialData;
     nodeColorScaleBias = (cast quadBatch : RenderProxy2D).colorScaleBias;
     nodeColorMatrix = (cast quadBatch : RenderProxy2D).colorMatrix;
     startCount = runtime.quadBatchWriterCount;
@@ -103,7 +103,7 @@ class WgpuQuadBatch {
     iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(({ final __callArgument9:Dynamic = texture; __callArgument9; })) : Float)));
     ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(({ final __callArgument10:Dynamic = texture; __callArgument10; })) : Float)));
     instanceData = runtime.quadBatchWriterInstanceData;
-    isVector2 = _Runtime.strictEquals((cast data : QuadBatchData).transformType, 'vector2');
+    isVector2 = _Runtime.strictEquals(data.transformType, 'vector2');
     pt = (cast quadBatch : RenderProxy2D).transform2D;
     pa = pt.a;
     pb = pt.b;

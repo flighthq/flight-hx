@@ -135,8 +135,8 @@ class Md5Parse {
       reportImportDiagnostic(({ final __callArgument10:Dynamic = diagnostics; __callArgument10; }), ({ final __callArgument11:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument11; }), (cast 'md5mesh.no-data' : String), (cast 'parseMd5Mesh' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     }
     if ((cast ((cast _Runtime.field(joints, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      (skinIndex = cast (_Runtime.field((cast document : Scene3DDocument).skins, 'length') : Dynamic));
-      _Runtime.callProperty((cast document : Scene3DDocument).skins, 'push', cast ([(cast Md5Parse.buildMd5SkeletonDocument__md5Parse(({ final __callArgument12:Dynamic = joints; __callArgument12; }), ({ final __callArgument13:Dynamic = document; __callArgument13; }), (cast md5Drops : Dynamic)) : Scene3DDocumentSkin)] : Array<Dynamic>));
+      (skinIndex = cast (_Runtime.field(document.skins, 'length') : Dynamic));
+      _Runtime.callProperty(document.skins, 'push', cast ([(cast Md5Parse.buildMd5SkeletonDocument__md5Parse(({ final __callArgument12:Dynamic = joints; __callArgument12; }), ({ final __callArgument13:Dynamic = document; __callArgument13; }), (cast md5Drops : Dynamic)) : Scene3DDocumentSkin)] : Array<Dynamic>));
     }
     truncatedVertexCount = 0.0;
     maxObservedInfluences = 0.0;
@@ -236,18 +236,18 @@ class Md5Parse {
           computeMeshGeometryTangents(({ final __callArgument28:Dynamic = geometry; __callArgument28; }), ({ final __callArgument29:Dynamic = geometry; __callArgument29; }));
           var meshMaterials:Array<Float> = (cast cast ([] : Array<Dynamic>));
           if ((cast ((cast _Runtime.field(md5Mesh.shader, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-            var material:Material = (cast (cast createBlinnPhongMaterial(({ final __callArgument31:Dynamic = { diffuseMap: (cast createExternalTextureRef((cast md5Mesh.shader : String), ({ final __callArgument30:Dynamic = null; __callArgument30; }), (cast (cast document : Scene3DDocument).resources : Dynamic)) : Texture) }; __callArgument31; })) : flighthq._internal._Any) : Material);
+            var material:Material = (cast (cast createBlinnPhongMaterial(({ final __callArgument31:Dynamic = { diffuseMap: (cast createExternalTextureRef((cast md5Mesh.shader : String), ({ final __callArgument30:Dynamic = null; __callArgument30; }), (cast document.resources : Dynamic)) : Texture) }; __callArgument31; })) : flighthq._internal._Any) : Material);
             ((cast material : Material).name = md5Mesh.shader);
-            _Runtime.callProperty(meshMaterials, 'push', cast ([_Runtime.field((cast document : Scene3DDocument).materials, 'length')] : Array<Dynamic>));
-            _Runtime.callProperty((cast document : Scene3DDocument).materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
+            _Runtime.callProperty(meshMaterials, 'push', cast ([_Runtime.field(document.materials, 'length')] : Array<Dynamic>));
+            _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
           }
           var documentMesh:Scene3DDocumentMesh = (cast { geometry: geometry, materials: meshMaterials });
           if ((cast !_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast documentMesh : Scene3DDocumentMesh).skin = skinIndex); }
-          var meshIndex:Float = _Runtime.field((cast document : Scene3DDocument).meshes, 'length');
-          _Runtime.callProperty((cast document : Scene3DDocument).meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
-          var nodeIndex:Float = _Runtime.field((cast document : Scene3DDocument).nodes, 'length');
-          _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
+          var meshIndex:Float = _Runtime.field(document.meshes, 'length');
+          _Runtime.callProperty(document.meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
+          var nodeIndex:Float = _Runtime.field(document.nodes, 'length');
+          _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
         } else {
           Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument32:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument32; }), (cast 'md5mesh.mesh-empty' : String), (cast '' : String), ({ final __callArgument33:Dynamic = {  }; __callArgument33; }));
         }
@@ -276,9 +276,9 @@ class Md5Parse {
     var relQuat:Quaternion = cast _Runtime.UNDEFINED;
     var inverseBind:Array<Matrix4> = cast _Runtime.UNDEFINED;
     var bindWorld:Matrix4 = cast _Runtime.UNDEFINED;
-    skeletonRootIndex = _Runtime.field((cast document : Scene3DDocument).nodes, 'length');
-    _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: 'skeleton', transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
-    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([skeletonRootIndex] : Array<Dynamic>));
+    skeletonRootIndex = _Runtime.field(document.nodes, 'length');
+    _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: 'skeleton', transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
+    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([skeletonRootIndex] : Array<Dynamic>));
     jointPositions = (cast cast ([] : Array<Dynamic>));
     jointOrientations = (cast cast ([] : Array<Dynamic>));
     for (joint in _Runtime.iterable(joints)) {
@@ -291,8 +291,8 @@ class Md5Parse {
     {
       var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(jointNodeIndices, 'push', cast ([_Runtime.field((cast document : Scene3DDocument).nodes, 'length')] : Array<Dynamic>));
-        _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: (cast flighthq._internal._StaticIndex.readArray(joints, j) : { var name:String; }).name, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
+        _Runtime.callProperty(jointNodeIndices, 'push', cast ([_Runtime.field(document.nodes, 'length')] : Array<Dynamic>));
+        _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: (cast flighthq._internal._StaticIndex.readArray(joints, j) : { var name:String; }).name, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
         j++;
       }
     }
@@ -328,7 +328,7 @@ class Md5Parse {
         } else { if ((cast !_Runtime.strictEquals(parentIndex, -1.0) : Bool)) {
           Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument54:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument54; }), (cast 'md5mesh.joint-parent-out-of-range' : String), (cast '' : String), ({ final __callArgument55:Dynamic = { firstJoint: j, firstParent: parentIndex }; __callArgument55; }));
         } }
-        var transform:Transform3D = (cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))) : Scene3DDocumentNode).transform;
+        var transform:Transform3D = (cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))) : Scene3DDocumentNode).transform;
         setVector3(({ final __callArgument56:Dynamic = (cast transform : Transform3D).position; __callArgument56; }), (cast localPx : Float), (cast localPy : Float), (cast localPz : Float));
         setQuaternion(({ final __callArgument57:Dynamic = (cast transform : Transform3D).rotation; __callArgument57; }), (cast localQx : Float), (cast localQy : Float), (cast localQz : Float), (cast localQw : Float));
         j++;
@@ -339,9 +339,9 @@ class Md5Parse {
       while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
         var parentIndex:Float = (cast flighthq._internal._StaticIndex.readArray(joints, j) : { var parentIndex:Float; }).parentIndex;
         if ((cast ((cast ((cast ((cast ((cast parentIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast parentIndex : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool) && (cast !_Runtime.strictEquals(parentIndex, j) : Bool)) : Bool) && (cast !(cast (cast Md5Parse.isMd5JointCycle__md5Parse(({ final __callArgument58:Dynamic = joints; __callArgument58; }), (cast j : Float)) : Bool) : Bool) : Bool)) : Bool)) {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast parentIndex : Float))) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast parentIndex : Float))) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
         } else {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).nodes, skeletonRootIndex) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, skeletonRootIndex) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
         }
         j++;
       }

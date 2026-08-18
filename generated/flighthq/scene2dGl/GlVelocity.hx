@@ -152,7 +152,7 @@ class GlVelocity {
     var data:QuadBatchData = cast _Runtime.UNDEFINED;
     var runtime:QuadBatchRuntime = cast _Runtime.UNDEFINED;
     var instanceVelocities:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure1:QuadBatchData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     var instanceCount:Float = cast _Runtime.UNDEFINED;
@@ -165,11 +165,11 @@ class GlVelocity {
     runtime = (cast _Runtime.getIndex((cast node : { @:optional var __EntityRuntimeKey:flighthq._internal._Any; }), EntityRuntimeKey) : QuadBatchRuntime);
     instanceVelocities = (cast runtime : QuadBatchRuntime).instanceVelocities;
     __destructure1 = data;
-    atlas = _Runtime.field(__destructure1, 'atlas');
-    ids = _Runtime.field(__destructure1, 'ids');
-    instanceCount = _Runtime.field(__destructure1, 'instanceCount');
-    transforms = _Runtime.field(__destructure1, 'transforms');
-    transformType = _Runtime.field(__destructure1, 'transformType');
+    atlas = __destructure1.atlas;
+    ids = __destructure1.ids;
+    instanceCount = __destructure1.instanceCount;
+    transforms = __destructure1.transforms;
+    transformType = __destructure1.transformType;
     if ((cast ((cast ((cast !_Runtime.strictEquals(instanceVelocities, null) : Bool) && (cast !_Runtime.strictEquals(atlas, null) : Bool)) : Bool) && (cast ((cast instanceCount : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var regions:Array<TextureAtlasRegion> = atlas.regions;
       var numRegions:Float = _Runtime.field(regions, 'length');

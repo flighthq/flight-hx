@@ -44,12 +44,12 @@ class QuadBatch {
     var index:Float = cast _Runtime.UNDEFINED;
     var o:Float = cast _Runtime.UNDEFINED;
     var signals:Null<QuadBatchSignals> = cast _Runtime.UNDEFINED;
-    index = (cast (cast target : flighthq.types.QuadBatch).data : QuadBatchData).instanceCount;
+    index = (cast (cast target : flighthq.types.QuadBatch).data : { var instanceCount:Float; }).instanceCount;
     resizeQuadBatch(({ final __callArgument0:Dynamic = target; __callArgument0; }), (cast (index + 1.0) : Float));
-    flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast (cast (cast target : flighthq.types.QuadBatch).data : QuadBatchData).ids : flighthq._internal._UInt16Array), (cast index : Float), (cast id : Float));
+    flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast (cast (cast target : flighthq.types.QuadBatch).data : { var ids:flighthq._internal._UInt16Array; }).ids : flighthq._internal._UInt16Array), (cast index : Float), (cast id : Float));
     o = (index * QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch);
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast (cast target : flighthq.types.QuadBatch).data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast o : Float), (cast x : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast (cast target : flighthq.types.QuadBatch).data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (o + 1.0) : Float), (cast y : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast (cast target : flighthq.types.QuadBatch).data : { var transforms:flighthq._internal._Float32Array; }).transforms : flighthq._internal._Float32Array), (cast o : Float), (cast x : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast (cast target : flighthq.types.QuadBatch).data : { var transforms:flighthq._internal._Float32Array; }).transforms : flighthq._internal._Float32Array), (cast (o + 1.0) : Float), (cast y : Float));
     signals = (cast getQuadBatchSignals(({ final __callArgument1:Dynamic = target; __callArgument1; })) : Null<QuadBatchSignals>);
     if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast (cast signals : QuadBatchSignals).onInstanceAppended : { var emit:Float->Void; }).emit)((cast index : Float)); }
     return cast index;
@@ -58,7 +58,7 @@ class QuadBatch {
 
   public static function clearQuadBatch(target:flighthq.types.QuadBatch):Void {
     var signals:Null<QuadBatchSignals> = cast _Runtime.UNDEFINED;
-    ((cast (cast target : flighthq.types.QuadBatch).data : QuadBatchData).instanceCount = 0.0);
+    ((cast (cast target : flighthq.types.QuadBatch).data : { var instanceCount:Float; }).instanceCount = cast (0.0 : Float));
     signals = (cast getQuadBatchSignals(({ final __callArgument2:Dynamic = target; __callArgument2; })) : Null<QuadBatchSignals>);
     if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast (cast signals : QuadBatchSignals).onCleared : { var emit:Void->Void; }).emit)(); }
   }
@@ -66,7 +66,7 @@ class QuadBatch {
   public static function cloneQuadBatch(source:flighthq.types.QuadBatch):flighthq.types.QuadBatch {
     var src:QuadBatchData = cast _Runtime.UNDEFINED;
     src = _Runtime.field(source, 'data');
-    return cast (cast createQuadBatch(({ final __callArgument3:Dynamic = { data: { atlas: (cast src : QuadBatchData).atlas, ids: _Runtime.slice((cast src : QuadBatchData).ids, 0, null), instanceCount: (cast src : QuadBatchData).instanceCount, materialData: ((cast !_Runtime.strictEquals((cast src : QuadBatchData).materialData, null) : Bool) ? (cast _Runtime.slice((cast src : QuadBatchData).materialData, 0, null) : Dynamic) : (cast null : Dynamic)), transforms: _Runtime.slice((cast src : QuadBatchData).transforms, 0, null), transformType: (cast src : QuadBatchData).transformType } }; __callArgument3; })) : flighthq.types.QuadBatch);
+    return cast (cast createQuadBatch(({ final __callArgument3:Dynamic = { data: { atlas: src.atlas, ids: _Runtime.slice(src.ids, 0, null), instanceCount: src.instanceCount, materialData: ((cast !_Runtime.strictEquals(src.materialData, null) : Bool) ? (cast _Runtime.slice(src.materialData, 0, null) : Dynamic) : (cast null : Dynamic)), transforms: _Runtime.slice(src.transforms, 0, null), transformType: src.transformType } }; __callArgument3; })) : flighthq.types.QuadBatch);
     return cast null;
   }
 
@@ -81,35 +81,35 @@ class QuadBatch {
     var stride:Float = cast _Runtime.UNDEFINED;
     var write:Float = cast _Runtime.UNDEFINED;
     data = (cast target : flighthq.types.QuadBatch).data;
-    if ((cast _Runtime.strictEquals((cast data : QuadBatchData).instanceCount, 0.0) : Bool)) { return; }
-    stride = (cast getQuadBatchTransformStride((cast data : QuadBatchData).transformType) : Float);
+    if ((cast _Runtime.strictEquals(data.instanceCount, 0.0) : Bool)) { return; }
+    stride = (cast getQuadBatchTransformStride(data.transformType) : Float);
     write = 0.0;
     {
       var read:Float = 0.0;
-      while ((cast ((cast read : Float) < (cast (cast data : QuadBatchData).instanceCount : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint16ArrayTyped((cast (cast data : QuadBatchData).ids : flighthq._internal._UInt16Array), (cast read : Float)), QUAD_BATCH_DELETED_ID) : Bool)) { read++; continue; }
+      while ((cast ((cast read : Float) < (cast data.instanceCount : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint16ArrayTyped((cast data.ids : flighthq._internal._UInt16Array), (cast read : Float)), QUAD_BATCH_DELETED_ID) : Bool)) { read++; continue; }
         if ((cast !_Runtime.strictEquals(write, read) : Bool)) {
-          flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast (cast data : QuadBatchData).ids : flighthq._internal._UInt16Array), (cast write : Float), (cast flighthq._internal._StaticIndex.readUint16ArrayTyped((cast (cast data : QuadBatchData).ids : flighthq._internal._UInt16Array), (cast read : Float)) : Float));
+          flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast data.ids : flighthq._internal._UInt16Array), (cast write : Float), (cast flighthq._internal._StaticIndex.readUint16ArrayTyped((cast data.ids : flighthq._internal._UInt16Array), (cast read : Float)) : Float));
           var dst:Float = (write * stride);
           var src:Float = (read * stride);
           {
             var k:Float = 0.0;
             while ((cast ((cast k : Float) < (cast stride : Float)) : Bool)) {
-              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (dst + k) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (src + k) : Float)) : Float));
+              flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (dst + k) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (src + k) : Float)) : Float));
               k++;
             }
           }
-          if ((cast !_Runtime.strictEquals((cast data : QuadBatchData).materialData, null) : Bool)) { flighthq._internal._StaticIndex.writeArray((cast data : QuadBatchData).materialData, write, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast data : QuadBatchData).materialData, read), function():Dynamic return cast null)); }
+          if ((cast !_Runtime.strictEquals(data.materialData, null) : Bool)) { flighthq._internal._StaticIndex.writeArray(data.materialData, write, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(data.materialData, read), function():Dynamic return cast null)); }
         }
         write++;
         read++;
       }
     }
-    ((cast data : QuadBatchData).instanceCount = write);
+    (data.instanceCount = cast (write : Float));
   }
 
   public static function computeQuadBatchLocalBoundsRectangle(out:Rectangle, source:flighthq.types.QuadBatch):Void {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:QuadBatchData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     var instanceCount:Float = cast _Runtime.UNDEFINED;
@@ -122,11 +122,11 @@ class QuadBatch {
     var maxX:Float = cast _Runtime.UNDEFINED;
     var maxY:Float = cast _Runtime.UNDEFINED;
     __destructure0 = _Runtime.field(source, 'data');
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    ids = _Runtime.field(__destructure0, 'ids');
-    instanceCount = _Runtime.field(__destructure0, 'instanceCount');
-    transforms = _Runtime.field(__destructure0, 'transforms');
-    transformType = _Runtime.field(__destructure0, 'transformType');
+    atlas = __destructure0.atlas;
+    ids = __destructure0.ids;
+    instanceCount = __destructure0.instanceCount;
+    transforms = __destructure0.transforms;
+    transformType = __destructure0.transformType;
     if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) {
       (out.x = cast (0.0 : Float));
       (out.y = cast (0.0 : Float));
@@ -248,27 +248,27 @@ class QuadBatch {
     var stride:Float = cast _Runtime.UNDEFINED;
     var transformCapacity:Float = cast _Runtime.UNDEFINED;
     data = _Runtime.field(source, 'data');
-    stride = (cast getQuadBatchTransformStride((cast data : QuadBatchData).transformType) : Float);
-    transformCapacity = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field((cast data : QuadBatchData).transforms, 'length'), stride)) | 0);
-    return cast HxMath.min(_Runtime.field((cast data : QuadBatchData).ids, 'length'), transformCapacity);
+    stride = (cast getQuadBatchTransformStride(data.transformType) : Float);
+    transformCapacity = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(data.transforms, 'length'), stride)) | 0);
+    return cast HxMath.min(_Runtime.field(data.ids, 'length'), transformCapacity);
     return cast null;
   }
 
   public static function getQuadBatchInstanceId(source:flighthq.types.QuadBatch, index:Float):Float {
-    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast _Runtime.field(source, 'data') : QuadBatchData).instanceCount : Float)) : Bool)) : Bool)) { return cast -1.0; }
-    return cast flighthq._internal._StaticIndex.readUint16ArrayTyped((cast (cast _Runtime.field(source, 'data') : QuadBatchData).ids : flighthq._internal._UInt16Array), (cast index : Float));
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast _Runtime.field(source, 'data') : { var instanceCount:Float; }).instanceCount : Float)) : Bool)) : Bool)) { return cast -1.0; }
+    return cast flighthq._internal._StaticIndex.readUint16ArrayTyped((cast (cast _Runtime.field(source, 'data') : { var ids:flighthq._internal._UInt16Array; }).ids : flighthq._internal._UInt16Array), (cast index : Float));
     return cast null;
   }
 
   public static function getQuadBatchInstanceTransform(out:Vector2Like, source:flighthq.types.QuadBatch, index:Float):Bool {
-    var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure2:QuadBatchData = cast _Runtime.UNDEFINED;
     var instanceCount:Float = cast _Runtime.UNDEFINED;
     var transforms:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var transformType:QuadTransformType = cast _Runtime.UNDEFINED;
     __destructure2 = _Runtime.field(source, 'data');
-    instanceCount = _Runtime.field(__destructure2, 'instanceCount');
-    transforms = _Runtime.field(__destructure2, 'transforms');
-    transformType = _Runtime.field(__destructure2, 'transformType');
+    instanceCount = __destructure2.instanceCount;
+    transforms = __destructure2.transforms;
+    transformType = __destructure2.transformType;
     if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast instanceCount : Float)) : Bool)) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(transformType, 'vector2') : Bool)) {
       var o:Float = (index * QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch);
@@ -310,7 +310,7 @@ class QuadBatch {
   }
 
   public static function hitTestQuadBatchPointExactXY(source:flighthq.types.QuadBatch, x:Float, y:Float):Float {
-    var __destructure3:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure3:QuadBatchData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     var instanceCount:Float = cast _Runtime.UNDEFINED;
@@ -319,11 +319,11 @@ class QuadBatch {
     var regions:Array<TextureAtlasRegion> = cast _Runtime.UNDEFINED;
     var numRegions:Float = cast _Runtime.UNDEFINED;
     __destructure3 = _Runtime.field(source, 'data');
-    atlas = _Runtime.field(__destructure3, 'atlas');
-    ids = _Runtime.field(__destructure3, 'ids');
-    instanceCount = _Runtime.field(__destructure3, 'instanceCount');
-    transforms = _Runtime.field(__destructure3, 'transforms');
-    transformType = _Runtime.field(__destructure3, 'transformType');
+    atlas = __destructure3.atlas;
+    ids = __destructure3.ids;
+    instanceCount = __destructure3.instanceCount;
+    transforms = __destructure3.transforms;
+    transformType = __destructure3.transformType;
     if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return cast -1.0; }
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
@@ -375,7 +375,7 @@ class QuadBatch {
   }
 
   public static function hitTestQuadBatchPointXY(source:flighthq.types.QuadBatch, x:Float, y:Float):Float {
-    var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure4:QuadBatchData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     var instanceCount:Float = cast _Runtime.UNDEFINED;
@@ -384,11 +384,11 @@ class QuadBatch {
     var regions:Array<TextureAtlasRegion> = cast _Runtime.UNDEFINED;
     var numRegions:Float = cast _Runtime.UNDEFINED;
     __destructure4 = _Runtime.field(source, 'data');
-    atlas = _Runtime.field(__destructure4, 'atlas');
-    ids = _Runtime.field(__destructure4, 'ids');
-    instanceCount = _Runtime.field(__destructure4, 'instanceCount');
-    transforms = _Runtime.field(__destructure4, 'transforms');
-    transformType = _Runtime.field(__destructure4, 'transformType');
+    atlas = __destructure4.atlas;
+    ids = __destructure4.ids;
+    instanceCount = __destructure4.instanceCount;
+    transforms = __destructure4.transforms;
+    transformType = __destructure4.transformType;
     if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return cast -1.0; }
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
@@ -444,17 +444,17 @@ class QuadBatch {
   }
 
   public static function iterateQuadBatchInstances(source:flighthq.types.QuadBatch, visitor:Float->Float->flighthq._internal._Float32Array->Void):Void {
-    var __destructure5:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure5:QuadBatchData = cast _Runtime.UNDEFINED;
     var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     var instanceCount:Float = cast _Runtime.UNDEFINED;
     var transforms:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var transformType:QuadTransformType = cast _Runtime.UNDEFINED;
     var stride:Float = cast _Runtime.UNDEFINED;
     __destructure5 = _Runtime.field(source, 'data');
-    ids = _Runtime.field(__destructure5, 'ids');
-    instanceCount = _Runtime.field(__destructure5, 'instanceCount');
-    transforms = _Runtime.field(__destructure5, 'transforms');
-    transformType = _Runtime.field(__destructure5, 'transformType');
+    ids = __destructure5.ids;
+    instanceCount = __destructure5.instanceCount;
+    transforms = __destructure5.transforms;
+    transformType = __destructure5.transformType;
     stride = (cast getQuadBatchTransformStride(({ final __callArgument17:Dynamic = transformType; __callArgument17; })) : Float);
     {
       var i:Float = 0.0;
@@ -471,32 +471,32 @@ class QuadBatch {
     var swapSource:Float = cast _Runtime.UNDEFINED;
     var signals:Null<QuadBatchSignals> = cast _Runtime.UNDEFINED;
     data = (cast target : flighthq.types.QuadBatch).data;
-    last = ((cast data : QuadBatchData).instanceCount - 1.0);
+    last = (data.instanceCount - 1.0);
     if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) > (cast last : Float)) : Bool)) : Bool)) { return; }
     swapSource = ((cast ((cast index : Float) < (cast last : Float)) : Bool) ? (cast last : Dynamic) : (cast -1.0 : Dynamic));
     if ((cast ((cast index : Float) < (cast last : Float)) : Bool)) {
-      flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast (cast data : QuadBatchData).ids : flighthq._internal._UInt16Array), (cast index : Float), (cast flighthq._internal._StaticIndex.readUint16ArrayTyped((cast (cast data : QuadBatchData).ids : flighthq._internal._UInt16Array), (cast last : Float)) : Float));
-      if ((cast _Runtime.strictEquals((cast data : QuadBatchData).transformType, 'vector2') : Bool)) {
+      flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast data.ids : flighthq._internal._UInt16Array), (cast index : Float), (cast flighthq._internal._StaticIndex.readUint16ArrayTyped((cast data.ids : flighthq._internal._UInt16Array), (cast last : Float)) : Float));
+      if ((cast _Runtime.strictEquals(data.transformType, 'vector2') : Bool)) {
         var dst:Float = (index * QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch);
         var src:Float = (last * QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch);
-        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast dst : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast src : Float)) : Float));
-        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (dst + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (src + 1.0) : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast dst : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast src : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (dst + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (src + 1.0) : Float)) : Float));
       } else {
         var dst:Float = (index * QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch);
         var src:Float = (last * QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch);
         {
           var k:Float = 0.0;
           while ((cast ((cast k : Float) < (cast QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch : Float)) : Bool)) {
-            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (dst + k) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (src + k) : Float)) : Float));
+            flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (dst + k) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (src + k) : Float)) : Float));
             k++;
           }
         }
       }
-      if ((cast !_Runtime.strictEquals((cast data : QuadBatchData).materialData, null) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray((cast data : QuadBatchData).materialData, index, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast data : QuadBatchData).materialData, last), function():Dynamic return cast null));
+      if ((cast !_Runtime.strictEquals(data.materialData, null) : Bool)) {
+        flighthq._internal._StaticIndex.writeArray(data.materialData, index, _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(data.materialData, last), function():Dynamic return cast null));
       }
     }
-    ((cast data : QuadBatchData).instanceCount = last);
+    (data.instanceCount = cast (last : Float));
     signals = (cast getQuadBatchSignals(({ final __callArgument18:Dynamic = target; __callArgument18; })) : Null<QuadBatchSignals>);
     if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast (cast signals : QuadBatchSignals).onInstanceRemoved : { var emit:Float->Float->Void; }).emit)((cast index : Float), (cast swapSource : Float)); }
   }
@@ -507,8 +507,8 @@ class QuadBatch {
     currentCapacity = (cast getQuadBatchCapacity(({ final __callArgument19:Dynamic = target; __callArgument19; })) : Float);
     if ((cast ((cast currentCapacity : Float) >= (cast capacity : Float)) : Bool)) { return; }
     data = (cast target : flighthq.types.QuadBatch).data;
-    ((cast data : QuadBatchData).ids = (cast reserveUint16Array((cast data : QuadBatchData).ids, (cast capacity : Float)) : flighthq._internal._UInt16Array));
-    ((cast data : QuadBatchData).transforms = (cast reserveFloat32Array((cast data : QuadBatchData).transforms, (cast (capacity * (cast getQuadBatchTransformStride((cast data : QuadBatchData).transformType) : Float)) : Float)) : flighthq._internal._Float32Array));
+    (data.ids = cast ((cast reserveUint16Array(data.ids, (cast capacity : Float)) : flighthq._internal._UInt16Array) : flighthq._internal._UInt16Array));
+    (data.transforms = cast ((cast reserveFloat32Array(data.transforms, (cast (capacity * (cast getQuadBatchTransformStride(data.transformType) : Float)) : Float)) : flighthq._internal._Float32Array) : flighthq._internal._Float32Array));
   }
 
   public static function resizeQuadBatch(target:flighthq.types.QuadBatch, instanceCount:Float):Void {
@@ -516,8 +516,8 @@ class QuadBatch {
     var oldInstanceCount:Float = cast _Runtime.UNDEFINED;
     var capacity:Float = cast _Runtime.UNDEFINED;
     data = (cast target : flighthq.types.QuadBatch).data;
-    oldInstanceCount = (cast data : QuadBatchData).instanceCount;
-    ((cast data : QuadBatchData).instanceCount = instanceCount);
+    oldInstanceCount = data.instanceCount;
+    (data.instanceCount = cast (instanceCount : Float));
     if ((cast ((cast oldInstanceCount : Float) >= (cast instanceCount : Float)) : Bool)) { return; }
     capacity = (cast getQuadBatchCapacity(({ final __callArgument20:Dynamic = target; __callArgument20; })) : Float);
     if ((cast ((cast capacity : Float) < (cast instanceCount : Float)) : Bool)) {
@@ -530,26 +530,26 @@ class QuadBatch {
     var data:QuadBatchData = cast _Runtime.UNDEFINED;
     var o:Float = cast _Runtime.UNDEFINED;
     data = (cast target : flighthq.types.QuadBatch).data;
-    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast data : QuadBatchData).instanceCount : Float)) : Bool)) : Bool)) { return; }
-    flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast (cast data : QuadBatchData).ids : flighthq._internal._UInt16Array), (cast index : Float), (cast id : Float));
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast data.instanceCount : Float)) : Bool)) : Bool)) { return; }
+    flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast data.ids : flighthq._internal._UInt16Array), (cast index : Float), (cast id : Float));
     o = (index * QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch);
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast o : Float), (cast x : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (o + 1.0) : Float), (cast y : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast o : Float), (cast x : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (o + 1.0) : Float), (cast y : Float));
   }
 
   public static function setQuadBatchInstanceMatrix(target:flighthq.types.QuadBatch, index:Float, id:Float, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
     var data:QuadBatchData = cast _Runtime.UNDEFINED;
     var o:Float = cast _Runtime.UNDEFINED;
     data = (cast target : flighthq.types.QuadBatch).data;
-    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast data : QuadBatchData).instanceCount : Float)) : Bool)) : Bool)) { return; }
-    flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast (cast data : QuadBatchData).ids : flighthq._internal._UInt16Array), (cast index : Float), (cast id : Float));
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast data.instanceCount : Float)) : Bool)) : Bool)) { return; }
+    flighthq._internal._StaticIndex.writeUint16ArrayTyped((cast data.ids : flighthq._internal._UInt16Array), (cast index : Float), (cast id : Float));
     o = (index * QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch);
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast o : Float), (cast a : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (o + 1.0) : Float), (cast b : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (o + 2.0) : Float), (cast c : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (o + 3.0) : Float), (cast d : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (o + 4.0) : Float), (cast tx : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (o + 5.0) : Float), (cast ty : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast o : Float), (cast a : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (o + 1.0) : Float), (cast b : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (o + 2.0) : Float), (cast c : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (o + 3.0) : Float), (cast d : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (o + 4.0) : Float), (cast tx : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (o + 5.0) : Float), (cast ty : Float));
   }
 
   public static function setQuadBatchInstanceRange(target:flighthq.types.QuadBatch, startIndex:Float, count:Float, source:flighthq._internal._Float32Array):Void {
@@ -558,14 +558,14 @@ class QuadBatch {
     var dst:Float = cast _Runtime.UNDEFINED;
     var len:Float = cast _Runtime.UNDEFINED;
     data = (cast target : flighthq.types.QuadBatch).data;
-    if ((cast ((cast ((cast ((cast startIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast count : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (startIndex + count) : Float) > (cast (cast data : QuadBatchData).instanceCount : Float)) : Bool)) : Bool)) { return; }
-    stride = (cast getQuadBatchTransformStride((cast data : QuadBatchData).transformType) : Float);
+    if ((cast ((cast ((cast ((cast startIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast count : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (startIndex + count) : Float) > (cast data.instanceCount : Float)) : Bool)) : Bool)) { return; }
+    stride = (cast getQuadBatchTransformStride(data.transformType) : Float);
     dst = (startIndex * stride);
     len = (count * stride);
     {
       var k:Float = 0.0;
       while ((cast ((cast k : Float) < (cast len : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (dst + k) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast k : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (dst + k) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast k : Float)) : Float));
         k++;
       }
     }
@@ -574,9 +574,9 @@ class QuadBatch {
   public static function setQuadBatchInstanceTint(target:flighthq.types.QuadBatch, index:Float, rgba:Float):Void {
     var data:QuadBatchData = cast _Runtime.UNDEFINED;
     data = (cast target : flighthq.types.QuadBatch).data;
-    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast (cast data : QuadBatchData).instanceCount : Float)) : Bool)) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals((cast data : QuadBatchData).materialData, null) : Bool)) { ((cast data : QuadBatchData).materialData = _Runtime.fill(_Runtime.createArray((cast data : QuadBatchData).instanceCount), null, 0, null, 1)); }
-    flighthq._internal._StaticIndex.writeArray((cast data : QuadBatchData).materialData, index, { tint: _Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 0) });
+    if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast data.instanceCount : Float)) : Bool)) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(data.materialData, null) : Bool)) { (data.materialData = cast (_Runtime.fill(_Runtime.createArray(data.instanceCount), null, 0, null, 1) : Null<Array<Null<flighthq._internal._Object>>>)); }
+    flighthq._internal._StaticIndex.writeArray(data.materialData, index, { tint: _Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 0) });
   }
 
   public static function setQuadBatchLocalBoundsRectangle(target:flighthq.types.QuadBatch, rect:Rectangle):Void {
@@ -591,17 +591,17 @@ class QuadBatch {
     var data:QuadBatchData = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
     data = (cast target : flighthq.types.QuadBatch).data;
-    if ((cast _Runtime.strictEquals((cast data : QuadBatchData).transformType, newType) : Bool)) { return; }
-    count = (cast data : QuadBatchData).instanceCount;
+    if ((cast _Runtime.strictEquals(data.transformType, newType) : Bool)) { return; }
+    count = data.instanceCount;
     if ((cast _Runtime.strictEquals(newType, 'matrix3x2') : Bool)) {
-      var newTransforms:flighthq._internal._Float32Array = new flighthq._internal._Float32Array(_Runtime.multiplyNumbers(HxMath.max(_Runtime.divideNumbers(_Runtime.field((cast data : QuadBatchData).transforms, 'length'), QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch), count), QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch));
+      var newTransforms:flighthq._internal._Float32Array = new flighthq._internal._Float32Array(_Runtime.multiplyNumbers(HxMath.max(_Runtime.divideNumbers(_Runtime.field(data.transforms, 'length'), QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch), count), QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch));
       {
         var i:Float = (count - 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           var src:Float = (i * QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch);
           var dst:Float = (i * QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch);
-          var x:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast src : Float));
-          var y:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (src + 1.0) : Float));
+          var x:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast src : Float));
+          var y:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (src + 1.0) : Float));
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast newTransforms : flighthq._internal._Float32Array), (cast dst : Float), (cast 1.0 : Float));
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast newTransforms : flighthq._internal._Float32Array), (cast (dst + 1.0) : Float), (cast 0.0 : Float));
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast newTransforms : flighthq._internal._Float32Array), (cast (dst + 2.0) : Float), (cast 0.0 : Float));
@@ -611,20 +611,20 @@ class QuadBatch {
           i--;
         }
       }
-      ((cast data : QuadBatchData).transforms = newTransforms);
+      (data.transforms = cast (newTransforms : flighthq._internal._Float32Array));
     } else {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
           var src:Float = (i * QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch);
           var dst:Float = (i * QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch);
-          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast dst : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (src + 4.0) : Float)) : Float));
-          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (dst + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast data : QuadBatchData).transforms : flighthq._internal._Float32Array), (cast (src + 5.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast dst : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (src + 4.0) : Float)) : Float));
+          flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (dst + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flighthq._internal._Float32Array), (cast (src + 5.0) : Float)) : Float));
           i++;
         }
       }
     }
-    ((cast data : QuadBatchData).transformType = newType);
+    (data.transformType = cast (newType : QuadTransformType));
   }
 
   public static final defaultMethods__quadBatch:flighthq._internal._Partial<MethodsOf<QuadBatchRuntime>> = (cast { computeLocalBoundsRectangle: QuadBatch.copyLocalBoundsRectangle__quadBatch });

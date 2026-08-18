@@ -31,7 +31,7 @@ class RiveSkeleton {
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(objects, 'length') : Float)) : Bool)) {
-        if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast flighthq._internal._StaticIndex.readArray(objects, index) : RiveCoreObject).typeKey : Float), (cast RiveSkeleton.RIVE_BONE__riveSkeleton : Float)) : Bool) : Bool)) { _Runtime.callProperty(components, 'push', cast ([index] : Array<Dynamic>)); }
+        if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast flighthq._internal._StaticIndex.readArray(objects, index) : { var typeKey:Float; }).typeKey : Float), (cast RiveSkeleton.RIVE_BONE__riveSkeleton : Float)) : Bool) : Bool)) { _Runtime.callProperty(components, 'push', cast ([index] : Array<Dynamic>)); }
         index++;
       }
     }
@@ -57,7 +57,7 @@ class RiveSkeleton {
     var isRoot:Bool = cast _Runtime.UNDEFINED;
     var parentComponent:Float = cast _Runtime.UNDEFINED;
     var parentLength:Float = cast _Runtime.UNDEFINED;
-    isRoot = (cast isRiveCoreTypeDerivedFrom((cast _Runtime.field(source, 'typeKey') : Float), (cast RiveSkeleton.RIVE_ROOT_BONE__riveSkeleton : Float)) : Bool);
+    isRoot = (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveSkeleton.RIVE_ROOT_BONE__riveSkeleton : Float)) : Bool);
     parentComponent = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast component : Float));
     parentLength = ((cast ((cast ((cast parentComponent : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast parentComponent : Float) < (cast _Runtime.field(objects, 'length') : Float)) : Bool)) : Bool) ? (cast (cast RiveSkeleton.readRiveNumber__riveSkeleton(flighthq._internal._StaticIndex.readArray(objects, parentComponent), (cast RiveSkeleton.RIVE_BONE_LENGTH__riveSkeleton : Float), (cast 0.0 : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
     return cast { length: (cast RiveSkeleton.readRiveNumber__riveSkeleton(({ final __callArgument6:Dynamic = source; __callArgument6; }), (cast RiveSkeleton.RIVE_BONE_LENGTH__riveSkeleton : Float), (cast 0.0 : Float)) : Float), name: (cast RiveSkeleton.readRiveText__riveSkeleton(({ final __callArgument7:Dynamic = source; __callArgument7; }), (cast RiveSkeleton.RIVE_NAME__riveSkeleton : Float), (cast '' : String)) : String), parentIndex: parentIndex, rotation: ((cast RiveSkeleton.readRiveNumber__riveSkeleton(({ final __callArgument8:Dynamic = source; __callArgument8; }), (cast RiveSkeleton.RIVE_ROTATION__riveSkeleton : Float), (cast 0.0 : Float)) : Float) * RAD_TO_DEG), scaleX: (cast RiveSkeleton.readRiveNumber__riveSkeleton(({ final __callArgument9:Dynamic = source; __callArgument9; }), (cast RiveSkeleton.RIVE_SCALE_X__riveSkeleton : Float), (cast 1.0 : Float)) : Float), scaleY: (cast RiveSkeleton.readRiveNumber__riveSkeleton(({ final __callArgument10:Dynamic = source; __callArgument10; }), (cast RiveSkeleton.RIVE_SCALE_Y__riveSkeleton : Float), (cast 1.0 : Float)) : Float), shearX: 0.0, shearY: 0.0, transformMode: (cast TransformMode2D : { var Normal:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var OnlyTranslation:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoRotationOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScale:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScaleOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; }).Normal, x: ((cast isRoot : Bool) ? (cast (cast RiveSkeleton.readRiveNumber__riveSkeleton(({ final __callArgument11:Dynamic = source; __callArgument11; }), (cast RiveSkeleton.RIVE_ROOT_BONE_X__riveSkeleton : Float), (cast 0.0 : Float)) : Float) : Dynamic) : (cast ((cast _Runtime.strictEquals(parentIndex, RiveSkeleton.NO_BONE__riveSkeleton) : Bool) ? (cast 0.0 : Dynamic) : (cast parentLength : Dynamic)) : Dynamic)), y: ((cast isRoot : Bool) ? (cast (cast RiveSkeleton.readRiveNumber__riveSkeleton(({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast RiveSkeleton.RIVE_ROOT_BONE_Y__riveSkeleton : Float), (cast 0.0 : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic)) };
@@ -79,14 +79,14 @@ class RiveSkeleton {
 
   public static function readRiveNumber__riveSkeleton(source:RiveCoreObject, key:Float, fallback:Float):Float {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused2:Float, __unused3:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused2:Float, __unused3:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
     return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
     return cast null;
   }
 
   public static function readRiveText__riveSkeleton(source:RiveCoreObject, key:Float, fallback:String):String {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(_Runtime.field(source, 'properties'), function(candidate:RiveProperty, __unused4:Float, __unused5:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused4:Float, __unused5:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
     return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'string') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
     return cast null;
   }

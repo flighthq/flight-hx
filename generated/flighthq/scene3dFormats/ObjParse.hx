@@ -366,14 +366,14 @@ class ObjParse {
     if ((cast _Runtime.strictEquals(_Runtime.field(subsets, 'length'), 0.0) : Bool)) { return; }
     geometry = (cast createMeshGeometry(({ final __callArgument80:Dynamic = { indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_LAYOUT, subsets: subsets, vertices: new flighthq._internal._Float32Array(vertices) }; __callArgument80; })) : MeshGeometry);
     if ((cast !(cast sourceHasNormals : Bool) : Bool)) { computeMeshGeometryNormals(({ final __callArgument81:Dynamic = geometry; __callArgument81; }), ({ final __callArgument82:Dynamic = geometry; __callArgument82; })); }
-    meshIndex = _Runtime.field((cast document : Scene3DDocument).meshes, 'length');
+    meshIndex = _Runtime.field(document.meshes, 'length');
     mesh = (cast { geometry: geometry, materials: materials });
-    _Runtime.callProperty((cast document : Scene3DDocument).meshes, 'push', cast ([mesh] : Array<Dynamic>));
-    nodeIndex = _Runtime.field((cast document : Scene3DDocument).nodes, 'length');
+    _Runtime.callProperty(document.meshes, 'push', cast ([mesh] : Array<Dynamic>));
+    nodeIndex = _Runtime.field(document.nodes, 'length');
     node = (cast { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) });
     if ((cast !_Runtime.strictEquals(name, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast node : Scene3DDocumentNode).name = name); }
-    _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([node] : Array<Dynamic>));
-    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
+    _Runtime.callProperty(document.nodes, 'push', cast ([node] : Array<Dynamic>));
+    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
   }
 
   public static function resolveObjElementIndices__objParse(args:String, positionCount:Float, objDrops:Null<flighthq._internal._Map<String, ObjDropTally__objParse>>, lineIndex:Float):Array<Float> {
@@ -446,12 +446,12 @@ class ObjParse {
       }
     }
     geometry = (cast createMeshGeometry(({ final __callArgument85:Dynamic = { indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_LAYOUT, subsets: cast ([{ indexCount: _Runtime.field(indices, 'length'), indexOffset: 0.0 }] : Array<Dynamic>), topology: topology, vertices: new flighthq._internal._Float32Array(vertices) }; __callArgument85; })) : MeshGeometry);
-    meshIndex = _Runtime.field((cast document : Scene3DDocument).meshes, 'length');
-    _Runtime.callProperty((cast document : Scene3DDocument).meshes, 'push', cast ([{ geometry: geometry, materials: cast ([-1.0] : Array<Dynamic>) }] : Array<Dynamic>));
+    meshIndex = _Runtime.field(document.meshes, 'length');
+    _Runtime.callProperty(document.meshes, 'push', cast ([{ geometry: geometry, materials: cast ([-1.0] : Array<Dynamic>) }] : Array<Dynamic>));
     node = (cast { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) });
     if ((cast !_Runtime.strictEquals(name, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast node : Scene3DDocumentNode).name = name); }
-    _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([node] : Array<Dynamic>));
-    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([_Runtime.subtractNumbers(_Runtime.field((cast document : Scene3DDocument).nodes, 'length'), 1.0)] : Array<Dynamic>));
+    _Runtime.callProperty(document.nodes, 'push', cast ([node] : Array<Dynamic>));
+    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([_Runtime.subtractNumbers(_Runtime.field(document.nodes, 'length'), 1.0)] : Array<Dynamic>));
   }
 
   public static function objMaterialToBlinnPhong__objParse(material:ObjMaterial, document:Scene3DDocument, diagnostics:Null<Array<ImportDiagnostic>>):BlinnPhongMaterial {
@@ -484,7 +484,7 @@ class ObjParse {
   public static function externalObjTexture__objParse(uri:Null<String>, document:Scene3DDocument, colorSpace:TextureColorSpace):Null<Texture> {
     var texture:Texture = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(uri, null) : Bool)) { return cast null; }
-    texture = (cast createExternalTextureRef((cast uri : String), ({ final __callArgument112:Dynamic = null; __callArgument112; }), (cast (cast document : Scene3DDocument).resources : Dynamic)) : Texture);
+    texture = (cast createExternalTextureRef((cast uri : String), ({ final __callArgument112:Dynamic = null; __callArgument112; }), (cast document.resources : Dynamic)) : Texture);
     ((cast texture : { var colorSpace:TextureColorSpace; }).colorSpace = colorSpace);
     return cast texture;
     return cast null;
@@ -526,8 +526,8 @@ class ObjParse {
     }
     material = (cast (cast ((cast (cast ObjParse.hasObjPbrDirectives__objParse(({ final __callArgument119:Dynamic = parsed; __callArgument119; })) : Bool) : Bool) ? (cast (cast ObjParse.objMaterialToStandardPbr__objParse(({ final __callArgument120:Dynamic = parsed; __callArgument120; }), ({ final __callArgument121:Dynamic = document; __callArgument121; }), ({ final __callArgument122:Dynamic = diagnostics; __callArgument122; })) : StandardPbrMaterial) : Dynamic) : (cast (cast ObjParse.objMaterialToBlinnPhong__objParse(({ final __callArgument123:Dynamic = parsed; __callArgument123; }), ({ final __callArgument124:Dynamic = document; __callArgument124; }), ({ final __callArgument125:Dynamic = diagnostics; __callArgument125; })) : BlinnPhongMaterial) : Dynamic)) : flighthq._internal._Any) : Material);
     ((cast material : Material).name = name);
-    index = _Runtime.field((cast document : Scene3DDocument).materials, 'length');
-    _Runtime.callProperty((cast document : Scene3DDocument).materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
+    index = _Runtime.field(document.materials, 'length');
+    _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
     ((cast cache : flighthq._internal._Map<String, Float>).set(name, (cast index)));
     return cast index;
     return cast null;

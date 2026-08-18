@@ -778,13 +778,13 @@ class ThreeDsParse {
     if ((cast _Runtime.strictEquals(_Runtime.field(subsets, 'length'), 0.0) : Bool)) { return; }
     geometry = (cast createMeshGeometry(({ final __callArgument85:Dynamic = { indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_LAYOUT, subsets: subsets, vertices: new flighthq._internal._Float32Array(outVertices) }; __callArgument85; })) : MeshGeometry);
     documentMesh = (cast { geometry: geometry, materials: meshMaterials });
-    meshIndex = _Runtime.field((cast document : Scene3DDocument).meshes, 'length');
-    _Runtime.callProperty((cast document : Scene3DDocument).meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
+    meshIndex = _Runtime.field(document.meshes, 'length');
+    _Runtime.callProperty(document.meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
     node = (cast { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: transform });
     if ((cast ((cast _Runtime.field(mesh.name, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast node : Scene3DDocumentNode).name = mesh.name); }
-    nodeIndex = _Runtime.field((cast document : Scene3DDocument).nodes, 'length');
-    _Runtime.callProperty((cast document : Scene3DDocument).nodes, 'push', cast ([node] : Array<Dynamic>));
-    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray((cast document : Scene3DDocument).scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
+    nodeIndex = _Runtime.field(document.nodes, 'length');
+    _Runtime.callProperty(document.nodes, 'push', cast ([node] : Array<Dynamic>));
+    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
   }
 
   public static function appendThreeDsCameraDocument__threeDsParse(camera:ThreeDsCamera, document:Scene3DDocument):Void {
@@ -808,7 +808,7 @@ class ThreeDsParse {
       }
     }
     focalLength = ((cast ((cast _Runtime.field(camera, 'focalLength') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(camera, 'focalLength') : Dynamic) : (cast ThreeDsParse.THREE_DS_DEFAULT_FOCAL_LENGTH_MM__threeDsParse : Dynamic));
-    _Runtime.callProperty((cast document : Scene3DDocument).cameras, 'push', cast ([_Runtime.mergeObjects([{ far: _Runtime.coalesce(_Runtime.field(camera, 'far'), function():Dynamic return cast ThreeDsParse.THREE_DS_DEFAULT_FAR__threeDsParse) }, ((cast ((cast _Runtime.field(_Runtime.field(camera, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(camera, 'name') } : Dynamic) : (cast {  } : Dynamic)), { near: _Runtime.coalesce(_Runtime.field(camera, 'near'), function():Dynamic return cast ThreeDsParse.THREE_DS_DEFAULT_NEAR__threeDsParse) }, { projection: { aspect: 1.0, fovY: _Runtime.multiplyNumbers(2.0, HxMath.atan((THREE_DS_CAMERA_APERTURE_MM / (2.0 * focalLength)))), kind: 'perspective' } }, { transform: transform }])] : Array<Dynamic>));
+    _Runtime.callProperty(document.cameras, 'push', cast ([_Runtime.mergeObjects([{ far: _Runtime.coalesce(_Runtime.field(camera, 'far'), function():Dynamic return cast ThreeDsParse.THREE_DS_DEFAULT_FAR__threeDsParse) }, ((cast ((cast _Runtime.field(_Runtime.field(camera, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(camera, 'name') } : Dynamic) : (cast {  } : Dynamic)), { near: _Runtime.coalesce(_Runtime.field(camera, 'near'), function():Dynamic return cast ThreeDsParse.THREE_DS_DEFAULT_NEAR__threeDsParse) }, { projection: { aspect: 1.0, fovY: _Runtime.multiplyNumbers(2.0, HxMath.atan((THREE_DS_CAMERA_APERTURE_MM / (2.0 * focalLength)))), kind: 'perspective' } }, { transform: transform }])] : Array<Dynamic>));
   }
 
   public static function appendThreeDsLightDocument__threeDsParse(light:ThreeDsLight, document:Scene3DDocument, threeDsDrops:Null<flighthq._internal._Map<String, ThreeDsDropTally__threeDsParse>>):Void {
@@ -842,7 +842,7 @@ class ThreeDsParse {
     } else {
       (descriptor = cast ((cast createPointLight((cast { color: color, intensity: intensity, range: range } : Dynamic)) : PointLight) : Dynamic));
     }
-    _Runtime.callProperty((cast document : Scene3DDocument).lights, 'push', cast ([_Runtime.mergeObjects([{ descriptor: descriptor }, ((cast ((cast _Runtime.field(_Runtime.field(light, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(light, 'name') } : Dynamic) : (cast {  } : Dynamic)), { transform: transform }])] : Array<Dynamic>));
+    _Runtime.callProperty(document.lights, 'push', cast ([_Runtime.mergeObjects([{ descriptor: descriptor }, ((cast ((cast _Runtime.field(_Runtime.field(light, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(light, 'name') } : Dynamic) : (cast {  } : Dynamic)), { transform: transform }])] : Array<Dynamic>));
   }
 
   public static function collectThreeDsPivots__threeDsParse(view:Dynamic, offset:Float):flighthq._internal._Map<String, Array<Float>> {
@@ -966,8 +966,8 @@ class ThreeDsParse {
     }
     cached = ((cast materialIndexByName : flighthq._internal._Map<String, Float>).get(name));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
-    index = _Runtime.field((cast document : Scene3DDocument).materials, 'length');
-    _Runtime.callProperty((cast document : Scene3DDocument).materials, 'push', cast ([(cast (cast ThreeDsParse.threeDsMaterialToBlinnPhong__threeDsParse(({ final __callArgument179:Dynamic = parsed; __callArgument179; }), ({ final __callArgument180:Dynamic = document; __callArgument180; })) : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
+    index = _Runtime.field(document.materials, 'length');
+    _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast ThreeDsParse.threeDsMaterialToBlinnPhong__threeDsParse(({ final __callArgument179:Dynamic = parsed; __callArgument179; }), ({ final __callArgument180:Dynamic = document; __callArgument180; })) : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
     ((cast materialIndexByName : flighthq._internal._Map<String, Float>).set(name, (cast index)));
     return cast index;
     return cast null;
@@ -975,7 +975,7 @@ class ThreeDsParse {
 
   public static function threeDsMaterialToBlinnPhong__threeDsParse(material:ThreeDsMaterial, document:Scene3DDocument):Material {
     var result:BlinnPhongMaterial = cast _Runtime.UNDEFINED;
-    result = (cast createBlinnPhongMaterial(({ final __callArgument183:Dynamic = _Runtime.mergeObjects([{ alphaMap: ((cast !_Runtime.strictEquals(material.opacityFilename, null) : Bool) ? (cast (cast createExternalTextureRef((cast material.opacityFilename : String), ({ final __callArgument181:Dynamic = null; __callArgument181; }), (cast (cast document : Scene3DDocument).resources : Dynamic)) : Texture) : Dynamic) : (cast null : Dynamic)) }, { diffuse: (cast ThreeDsParse.packThreeDsColor__threeDsParse(material.diffuse, (cast material.opacity : Float)) : Float) }, { diffuseMap: ((cast !_Runtime.strictEquals(material.textureFilename, null) : Bool) ? (cast (cast createExternalTextureRef((cast material.textureFilename : String), ({ final __callArgument182:Dynamic = null; __callArgument182; }), (cast (cast document : Scene3DDocument).resources : Dynamic)) : Texture) : Dynamic) : (cast null : Dynamic)) }, { specular: (cast ThreeDsParse.packThreeDsColor__threeDsParse(material.specular, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float) }, ((cast !_Runtime.strictEquals(material.shininess, null) : Bool) ? (cast { shininess: material.shininess } : Dynamic) : (cast {  } : Dynamic))]); __callArgument183; })) : BlinnPhongMaterial);
+    result = (cast createBlinnPhongMaterial(({ final __callArgument183:Dynamic = _Runtime.mergeObjects([{ alphaMap: ((cast !_Runtime.strictEquals(material.opacityFilename, null) : Bool) ? (cast (cast createExternalTextureRef((cast material.opacityFilename : String), ({ final __callArgument181:Dynamic = null; __callArgument181; }), (cast document.resources : Dynamic)) : Texture) : Dynamic) : (cast null : Dynamic)) }, { diffuse: (cast ThreeDsParse.packThreeDsColor__threeDsParse(material.diffuse, (cast material.opacity : Float)) : Float) }, { diffuseMap: ((cast !_Runtime.strictEquals(material.textureFilename, null) : Bool) ? (cast (cast createExternalTextureRef((cast material.textureFilename : String), ({ final __callArgument182:Dynamic = null; __callArgument182; }), (cast document.resources : Dynamic)) : Texture) : Dynamic) : (cast null : Dynamic)) }, { specular: (cast ThreeDsParse.packThreeDsColor__threeDsParse(material.specular, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float) }, ((cast !_Runtime.strictEquals(material.shininess, null) : Bool) ? (cast { shininess: material.shininess } : Dynamic) : (cast {  } : Dynamic))]); __callArgument183; })) : BlinnPhongMaterial);
     ((cast result : BlinnPhongMaterial).name = ((cast ((cast _Runtime.field(material.name, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast material.name : Dynamic) : (cast null : Dynamic)));
     if ((cast ((cast ((cast material.opacity : Float) < (cast 1.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(material.opacityFilename, null) : Bool)) : Bool)) { ((cast result : BlinnPhongMaterial).alphaMode = 'blend'); }
     return cast (cast (cast result : flighthq._internal._Any) : Material);

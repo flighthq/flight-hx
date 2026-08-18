@@ -143,6 +143,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#WgpuScene3DRuntime',
     purpose: 'reviewed escape-free WebGPU scene runtime',
   },
+  {
+    declarationFingerprint: 'sha256:c5ddb66c3aa664642f434b204e28cd767990fb68dccd61d95ddce1217b271f85',
+    id: '@flighthq/types:interface#QuadBatchData',
+    purpose: 'reviewed escape-free quad batch data',
+  },
+  {
+    declarationFingerprint: 'sha256:02c299290855d11a256afa1f89ac05ea04f2bd5c9cfbd95f9b8f313c8291d5dc',
+    id: '@flighthq/types:interface#CanvasShapeDrawState',
+    purpose: 'reviewed escape-free Canvas shape draw state',
+  },
+  {
+    declarationFingerprint: 'sha256:8917d122db3e102ae4d684a953b0aace8b57597d4e4b6b10c66a3af8f3b19094',
+    id: '@flighthq/types:interface#Scene3DDocument',
+    purpose: 'reviewed escape-free Scene3D document',
+  },
+  {
+    declarationFingerprint: 'sha256:b5f317c10fcee34f5c8ab37de7d06314754e9bcc0fb48124146a562f9117cb5f',
+    id: '@flighthq/types:interface#OrbitCameraController',
+    purpose: 'reviewed escape-free orbit camera controller',
+  },
+  {
+    declarationFingerprint: 'sha256:9252f9146b93933f51443521632f05794eed7f39a6e8059a7ae12d86167e16ac',
+    id: '@flighthq/types:interface#RiveCoreObject',
+    purpose: 'reviewed escape-free Rive core object',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(
