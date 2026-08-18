@@ -46,7 +46,7 @@ class GlGradientGlowEffect {
     var sourceMode:EffectSourceMode = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var ramp:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
-    descriptor = (cast { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') });
+    descriptor = (cast { width: source.width, height: source.height, format: source.format });
     s0 = (cast acquireGlRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }), ({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : GlRenderTarget);
     s1 = (cast acquireGlRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : GlRenderTarget);
     s2 = (cast acquireGlRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : GlRenderTarget);
@@ -84,7 +84,7 @@ class GlGradientGlowEffect {
   public static function applyGradientLookupPass__glGradientGlowEffect(state:GlRenderState, blurred:GlRenderTarget, ramp:flighthq._internal.dom.WebGLTexture, dest:GlRenderTarget):Void {
     var loc:GradientLookupLocations__glGradientGlowEffect = cast _Runtime.UNDEFINED;
     loc = (cast GlGradientGlowEffect.getLookupShader__glGradientGlowEffect(({ final __callArgument41:Dynamic = state; __callArgument41; })) : GradientLookupLocations__glGradientGlowEffect);
-    drawGlFullscreenPass(({ final __callArgument42:Dynamic = state; __callArgument42; }), ({ final __callArgument43:Dynamic = loc; __callArgument43; }), ({ final __callArgument44:Dynamic = cast ([(cast blurred : GlRenderTarget).texture] : Array<Dynamic>); __callArgument44; }), ({ final __callArgument45:Dynamic = dest; __callArgument45; }), ({ final __callArgument46:Dynamic = function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument42:Dynamic = state; __callArgument42; }), ({ final __callArgument43:Dynamic = loc; __callArgument43; }), ({ final __callArgument44:Dynamic = cast ([blurred.texture] : Array<Dynamic>); __callArgument44; }), ({ final __callArgument45:Dynamic = dest; __callArgument45; }), ({ final __callArgument46:Dynamic = function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE1', flighthq._internal.backend.WebGl2Backend.TEXTURE1));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), ramp);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, (cast loc : { var locRamp:flighthq._internal.dom.WebGLUniformLocation; }).locRamp, 1.0);

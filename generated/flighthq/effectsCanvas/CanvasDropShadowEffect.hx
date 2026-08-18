@@ -61,8 +61,8 @@ class CanvasDropShadowEffect {
     var shadowPasses:Float = cast _Runtime.UNDEFINED;
     var blur:Float = cast _Runtime.UNDEFINED;
     var sourceMode:EffectSourceMode = cast _Runtime.UNDEFINED;
-    mask = (cast acquireCanvasRenderTarget(({ final __callArgument9:Dynamic = pool; __callArgument9; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument10:Dynamic = pool; __callArgument10; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    mask = (cast acquireCanvasRenderTarget(({ final __callArgument9:Dynamic = pool; __callArgument9; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument10:Dynamic = pool; __callArgument10; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
     dx = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);

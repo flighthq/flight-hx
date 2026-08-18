@@ -5,14 +5,14 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 403 schemas currently emit direct fields, covering 13,764 accesses.
-- 1,133 eligible schemas remain audit-only, covering 16,902 pending accesses.
-- 876 audit-only schemas have no recorded escape, covering 12,148 pending accesses.
+- 408 schemas currently emit direct fields, covering 14,471 accesses.
+- 1,128 eligible schemas remain audit-only, covering 16,195 pending accesses.
+- 871 audit-only schemas have no recorded escape, covering 11,441 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
 - The cpp provenance audit has 551 closed nominal-identity candidates; only `Camera2D` and `ParticleEmitterState` are enabled.
-- Generated `Dynamic` occurrences fell from 49,168 to 47,010 across checker-derived typed-struct assignments and the first escape-free reviewed tranches.
+- Generated `Dynamic` occurrences fell from 49,168 to 47,009 across checker-derived typed-struct assignments and the reviewed escape-free tranches.
 
 ## 1. Closed mapped aliases
 
@@ -31,7 +31,8 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Verify that bitmap modules use direct `BitmapRegion` fields and retain all aliasing/out-parameter behavior.
 - [x] Cast direct typed-struct writes to the checker-derived field type rather than routing known values through `Dynamic`.
 - [x] Promote `GlRenderStateRuntime` and `WgpuRenderStateRuntime`: 1,274 accesses now emit directly while their shared-base cross-schema transfers correctly keep cpp nominalization disabled.
-- [ ] Review the next zero-escape hot rows, including render targets, text layout, rich text, physics world/contact records, and clip regions.
+- [x] Promote the Canvas, WebGL, portable, descriptor, and WebGPU render-target family: 707 accesses now emit directly while structural-transfer and optional-omission evidence correctly keeps cpp nominalization disabled.
+- [ ] Review the next zero-escape hot rows, including text layout, rich text, physics world/contact records, and clip regions.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 
 ## 3. Typed union projection

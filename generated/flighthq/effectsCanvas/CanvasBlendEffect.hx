@@ -27,17 +27,17 @@ class CanvasBlendEffect {
       return;
     }
     operation = getCanvasBlendEffectCompositeOperation((cast _Runtime.field(effect, 'mode') : String));
-    ctx = _Runtime.field(dest, 'context');
+    ctx = dest.context;
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalAlpha', 1.0);
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'source-over');
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'filter', 'none');
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([(cast backdrop : CanvasRenderTarget).canvas, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, dest.width, dest.height] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([(cast backdrop : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalAlpha', _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 1.0));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', operation);
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([source.canvas, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 

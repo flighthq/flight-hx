@@ -55,7 +55,7 @@ class GlApplicationRenderView {
     }
     storageWidth = HxMath.max(1.0, HxMath.ceil(width));
     storageHeight = HxMath.max(1.0, HxMath.ceil(height));
-    if ((cast ((cast !_Runtime.strictEquals((cast renderTarget : GlRenderTarget).width, storageWidth) : Bool) || (cast !_Runtime.strictEquals((cast renderTarget : GlRenderTarget).height, storageHeight) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals(renderTarget.width, storageWidth) : Bool) || (cast !_Runtime.strictEquals(renderTarget.height, storageHeight) : Bool)) : Bool)) {
       resizeGlRenderTarget(({ final __callArgument11:Dynamic = renderState; __callArgument11; }), ({ final __callArgument12:Dynamic = renderTarget; __callArgument12; }), (cast width : Float), (cast height : Float));
     }
   }

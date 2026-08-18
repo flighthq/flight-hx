@@ -27,8 +27,8 @@ class WgpuMedianEffect {
     radius = HxMath.min(MAX_MEDIAN_EFFECT_WGPU_RADIUS, HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0))));
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.median' : String), (cast WgpuMedianEffect.MEDIAN_WGSL__wgpuMedianEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (1.0 / source.width) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (1.0 / source.height) : Float));
       flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 2.0 : Float), (cast radius : Float));
     }; __callArgument4; }));
   }

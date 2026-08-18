@@ -35,13 +35,13 @@ class CanvasRenderTarget {
       ((cast CanvasRenderTarget._targetStack__canvasRenderTarget : flighthq._internal._WeakMap<CanvasRenderState, Array<SavedCanvasState__canvasRenderTarget>>).set(state, (cast stack)));
     }
     _Runtime.callProperty(stack, 'push', cast ([{ canvas: (cast handles : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas, context: (cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context, renderTransform2D: (cast handles : { var renderTransform2D:Null<Matrix>; }).renderTransform2D }] : Array<Dynamic>));
-    ((cast handles : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas = (cast target : flighthq.types.CanvasRenderTarget).canvas);
-    ((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context = (cast target : flighthq.types.CanvasRenderTarget).context);
+    ((cast handles : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas = target.canvas);
+    ((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context = target.context);
     flighthq._internal.backend.Canvas2dBackend.setField((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context, 'imageSmoothingEnabled', (cast runtime : CanvasRenderStateRuntime).imageSmoothingEnabled);
     flighthq._internal.backend.Canvas2dBackend.setField((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context, 'imageSmoothingQuality', (cast runtime : CanvasRenderStateRuntime).imageSmoothingQuality);
     preserveColor = ({ final __structural1 = preserve; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var preserveColor:Null<flighthq._internal._Union2<Bool, Array<Bool>>>; }).preserveColor; });
     preserved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(preserveColor), 'boolean') : Bool) ? (cast preserveColor : Dynamic) : (cast _Runtime.strictEquals(_Runtime.optionalIndex(preserveColor, 0.0), true) : Dynamic));
-    if ((cast !(cast preserved : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.call((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context, 'clearRect', cast ([0.0, 0.0, (cast target : flighthq.types.CanvasRenderTarget).width, (cast target : flighthq.types.CanvasRenderTarget).height] : Array<Dynamic>)); }
+    if ((cast !(cast preserved : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.call((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context, 'clearRect', cast ([0.0, 0.0, target.width, target.height] : Array<Dynamic>)); }
   }
 
   @:noCompletion
@@ -58,10 +58,10 @@ class CanvasRenderTarget {
 
   @:noCompletion
   public static function destroyCanvasRenderTarget(target:flighthq.types.CanvasRenderTarget):Void {
-    flighthq._internal.backend.CanvasElementBackend.setField((cast target : flighthq.types.CanvasRenderTarget).canvas, 'width', 0.0);
-    flighthq._internal.backend.CanvasElementBackend.setField((cast target : flighthq.types.CanvasRenderTarget).canvas, 'height', 0.0);
-    ((cast target : flighthq.types.CanvasRenderTarget).width = 0.0);
-    ((cast target : flighthq.types.CanvasRenderTarget).height = 0.0);
+    flighthq._internal.backend.CanvasElementBackend.setField(target.canvas, 'width', 0.0);
+    flighthq._internal.backend.CanvasElementBackend.setField(target.canvas, 'height', 0.0);
+    (target.width = cast (0.0 : Float));
+    (target.height = cast (0.0 : Float));
   }
 
   @:noCompletion
@@ -78,10 +78,10 @@ class CanvasRenderTarget {
 
   @:noCompletion
   public static function resizeCanvasRenderTarget(target:flighthq.types.CanvasRenderTarget, width:Float, height:Float):Void {
-    flighthq._internal.backend.CanvasElementBackend.setField((cast target : flighthq.types.CanvasRenderTarget).canvas, 'width', HxMath.max(1.0, HxMath.ceil(width)));
-    flighthq._internal.backend.CanvasElementBackend.setField((cast target : flighthq.types.CanvasRenderTarget).canvas, 'height', HxMath.max(1.0, HxMath.ceil(height)));
-    ((cast target : flighthq.types.CanvasRenderTarget).width = flighthq._internal.backend.CanvasElementBackend.field((cast target : flighthq.types.CanvasRenderTarget).canvas, 'width'));
-    ((cast target : flighthq.types.CanvasRenderTarget).height = flighthq._internal.backend.CanvasElementBackend.field((cast target : flighthq.types.CanvasRenderTarget).canvas, 'height'));
+    flighthq._internal.backend.CanvasElementBackend.setField(target.canvas, 'width', HxMath.max(1.0, HxMath.ceil(width)));
+    flighthq._internal.backend.CanvasElementBackend.setField(target.canvas, 'height', HxMath.max(1.0, HxMath.ceil(height)));
+    (target.width = cast (flighthq._internal.backend.CanvasElementBackend.field(target.canvas, 'width') : Float));
+    (target.height = cast (flighthq._internal.backend.CanvasElementBackend.field(target.canvas, 'height') : Float));
   }
 
   public static function setCanvasRenderTransform2D(state:CanvasRenderState, transform:Matrix):Void {

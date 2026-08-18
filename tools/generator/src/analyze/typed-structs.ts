@@ -43,6 +43,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#WgpuRenderStateRuntime',
     purpose: 'reviewed escape-free WebGPU render-state runtime',
   },
+  {
+    declarationFingerprint: 'sha256:77ecafe9197f64a9e574cc139335cb7aff72a45c8b5efecc742d943d53a49e3a',
+    id: '@flighthq/types:interface#CanvasRenderTarget',
+    purpose: 'reviewed escape-free Canvas render target',
+  },
+  {
+    declarationFingerprint: 'sha256:a70ee9ffbaf0c1d0fd73965076d56028db2ce78f1dda4c9006e35974be0fe408',
+    id: '@flighthq/types:interface#GlRenderTarget',
+    purpose: 'reviewed escape-free WebGL render target',
+  },
+  {
+    declarationFingerprint: 'sha256:c7a251ae0b80f4ecea3ed0c7bf9d8f702baff476a5465d16cdf5e1d1bc427111',
+    id: '@flighthq/types:interface#RenderTarget',
+    purpose: 'reviewed escape-free portable render target',
+  },
+  {
+    declarationFingerprint: 'sha256:f976a3e923d48395ab6e3ab23594c3979ad742550499012816e1aa6fada959dc',
+    id: '@flighthq/types:interface#RenderTargetDescriptor',
+    purpose: 'reviewed escape-free render-target descriptor',
+  },
+  {
+    declarationFingerprint: 'sha256:d5e40ef824804481c0135b2b35a6745fc6d84140f5c43fb4644b3a8af5a12b45',
+    id: '@flighthq/types:interface#WgpuRenderTarget',
+    purpose: 'reviewed escape-free WebGPU render target',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

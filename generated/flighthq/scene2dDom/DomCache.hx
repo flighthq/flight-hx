@@ -34,7 +34,7 @@ class DomCache {
     target = ((cast targets : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (target = cast ((cast createCanvasRenderTarget((cast width : Float), (cast height : Float)) : CanvasRenderTarget) : Dynamic));
-      prepareDomElement(({ final __callArgument3:Dynamic = (cast target : CanvasRenderTarget).canvas; __callArgument3; }));
+      prepareDomElement(({ final __callArgument3:Dynamic = (cast target : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas; __callArgument3; }));
       ((cast targets : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>).set(cache, (cast target)));
     } else {
       resizeCanvasRenderTarget(({ final __callArgument4:Dynamic = target; __callArgument4; }), (cast width : Float), (cast height : Float));
@@ -64,7 +64,7 @@ class DomCache {
     domState = (cast state : DomRenderState);
     target = ((cast (cast DomCache.getTargets__domCache(({ final __callArgument11:Dynamic = domState; __callArgument11; })) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>).get(cache));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    canvas = (cast target : CanvasRenderTarget).canvas;
+    canvas = (cast target : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas;
     setDomTransformWithOffset(({ final __callArgument12:Dynamic = canvas; __callArgument12; }), (cast data : RenderProxy2D).transform2D, (cast 0.0 : Float), (cast 0.0 : Float), (cast (cast domState : DomRenderState).roundPixels : Bool));
     ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast data : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast data : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     ((cast (cast canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast (cast state : RenderState).allowSmoothing : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));

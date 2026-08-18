@@ -50,9 +50,9 @@ class CanvasInnerShadowEffect {
     var distance:Float = cast _Runtime.UNDEFINED;
     var offsetX:Float = cast _Runtime.UNDEFINED;
     var offsetY:Float = cast _Runtime.UNDEFINED;
-    mask = (cast acquireCanvasRenderTarget(({ final __callArgument6:Dynamic = pool; __callArgument6; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument7:Dynamic = pool; __callArgument7; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    shadow = (cast acquireCanvasRenderTarget(({ final __callArgument8:Dynamic = pool; __callArgument8; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    mask = (cast acquireCanvasRenderTarget(({ final __callArgument6:Dynamic = pool; __callArgument6; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument7:Dynamic = pool; __callArgument7; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    shadow = (cast acquireCanvasRenderTarget(({ final __callArgument8:Dynamic = pool; __callArgument8; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
     shadowPasses = HxMath.max(1.0, HxMath.floor(strength));
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0)) / 2.0));

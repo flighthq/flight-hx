@@ -37,7 +37,7 @@ class CanvasRenderEffectPipeline {
     w = HxMath.max(1.0, HxMath.ceil(width));
     h = HxMath.max(1.0, HxMath.ceil(height));
     target = _Runtime.coalesce(_Runtime.callProperty((cast pool : CanvasRenderTargetPool).free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createCanvasRenderTarget((cast w : Float), (cast h : Float)) : CanvasRenderTarget));
-    if ((cast ((cast !_Runtime.strictEquals((cast target : CanvasRenderTarget).width, w) : Bool) || (cast !_Runtime.strictEquals((cast target : CanvasRenderTarget).height, h) : Bool)) : Bool)) { resizeCanvasRenderTarget(({ final __callArgument0:Dynamic = target; __callArgument0; }), (cast w : Float), (cast h : Float)); }
+    if ((cast ((cast !_Runtime.strictEquals(target.width, w) : Bool) || (cast !_Runtime.strictEquals(target.height, h) : Bool)) : Bool)) { resizeCanvasRenderTarget(({ final __callArgument0:Dynamic = target; __callArgument0; }), (cast w : Float), (cast h : Float)); }
     _Runtime.callProperty((cast pool : CanvasRenderTargetPool).inUse, 'push', cast ([target] : Array<Dynamic>));
     return cast target;
     return cast null;
@@ -95,8 +95,8 @@ class CanvasRenderEffectPipeline {
     scratchB = null;
     pending = (cast cast ([] : Array<Dynamic>));
     ensureScratch = (cast function():Void {
-      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireCanvasRenderTarget(({ final __callArgument3:Dynamic = pool; __callArgument3; }), (cast (cast scene : CanvasRenderTarget).width : Float), (cast (cast scene : CanvasRenderTarget).height : Float)) : CanvasRenderTarget) : Dynamic)); }
-      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireCanvasRenderTarget(({ final __callArgument4:Dynamic = pool; __callArgument4; }), (cast (cast scene : CanvasRenderTarget).width : Float), (cast (cast scene : CanvasRenderTarget).height : Float)) : CanvasRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireCanvasRenderTarget(({ final __callArgument3:Dynamic = pool; __callArgument3; }), (cast (cast scene : { var width:Float; }).width : Float), (cast (cast scene : { var height:Float; }).height : Float)) : CanvasRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireCanvasRenderTarget(({ final __callArgument4:Dynamic = pool; __callArgument4; }), (cast (cast scene : { var width:Float; }).width : Float), (cast (cast scene : { var height:Float; }).height : Float)) : CanvasRenderTarget) : Dynamic)); }
     });
     flushAdjustments = (cast function():Void {
       var dest:CanvasRenderTarget = cast _Runtime.UNDEFINED;
@@ -151,7 +151,7 @@ class CanvasRenderEffectPipeline {
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', 1.0);
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'filter', 'none');
     flighthq._internal.backend.Canvas2dBackend.call(context, 'clearRect', cast ([0.0, 0.0, flighthq._internal.backend.CanvasElementBackend.field((cast state : CanvasRenderState).canvas, 'width'), flighthq._internal.backend.CanvasElementBackend.field((cast state : CanvasRenderState).canvas, 'height')] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([source.canvas, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>));
   }
 }

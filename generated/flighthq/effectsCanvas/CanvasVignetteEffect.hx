@@ -40,9 +40,9 @@ class CanvasVignetteEffect {
     colorAlpha = ((_Runtime.toInt32(color) & 255) / 255.0);
     darken = HxMath.max(0.0, HxMath.min(1.0, (intensity * colorAlpha)));
     drawCanvasEffectPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    ctx = _Runtime.field(dest, 'context');
-    w = _Runtime.field(dest, 'width');
-    h = _Runtime.field(dest, 'height');
+    ctx = dest.context;
+    w = dest.width;
+    h = dest.height;
     cx = (w * 0.5);
     cy = (h * 0.5);
     outer = HxMath.sqrt(((cx * cx) + (cy * cy)));

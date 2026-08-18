@@ -23,9 +23,9 @@ class WgpuRenderTargetPool {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free, 'length') : Float)) : Bool)) {
         var candidate:WgpuRenderTarget = flighthq._internal._StaticIndex.readArray((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free, i);
-        if ((cast ((cast ((cast _Runtime.strictEquals((cast candidate : WgpuRenderTarget).width, w) : Bool) && (cast _Runtime.strictEquals((cast candidate : WgpuRenderTarget).height, h) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast candidate : WgpuRenderTarget).format, format) : Bool)) : Bool)) {
+        if ((cast ((cast ((cast _Runtime.strictEquals(candidate.width, w) : Bool) && (cast _Runtime.strictEquals(candidate.height, h) : Bool)) : Bool) && (cast _Runtime.strictEquals(candidate.format, format) : Bool)) : Bool)) {
           _Runtime.splice((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free, Std.int(i), Std.int(1.0), []);
-          ((cast candidate : WgpuRenderTarget).colorSpace = _Runtime.coalesce((cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; }).colorSpace, function():Dynamic return cast 'srgb'));
+          (candidate.colorSpace = cast (_Runtime.coalesce((cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; }).colorSpace, function():Dynamic return cast 'srgb') : RenderTargetColorSpace));
           return cast candidate;
         }
         i++;

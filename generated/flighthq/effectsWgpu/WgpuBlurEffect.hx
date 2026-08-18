@@ -40,7 +40,7 @@ class WgpuBlurEffect {
   public static final defaultWgpuBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
     var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;
     var temp:WgpuRenderTarget = cast _Runtime.UNDEFINED;
-    descriptor = (cast { width: _Runtime.field(_Runtime.field(ctx, 'source'), 'width'), height: _Runtime.field(_Runtime.field(ctx, 'source'), 'height'), format: _Runtime.field(_Runtime.field(ctx, 'source'), 'format') });
+    descriptor = (cast { width: (cast _Runtime.field(ctx, 'source') : { var width:Float; }).width, height: (cast _Runtime.field(ctx, 'source') : { var height:Float; }).height, format: (cast _Runtime.field(ctx, 'source') : { var format:String; }).format });
     temp = (cast acquireWgpuRenderTarget(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'pool'), ({ final __callArgument11:Dynamic = descriptor; __callArgument11; })) : WgpuRenderTarget);
     applyBlurEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), ({ final __callArgument12:Dynamic = temp; __callArgument12; }), (cast effect : BlurEffect));
     releaseWgpuRenderTarget(_Runtime.field(ctx, 'pool'), ({ final __callArgument13:Dynamic = temp; __callArgument13; }));
@@ -54,8 +54,8 @@ class WgpuBlurEffect {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument16:Dynamic = state; __callArgument16; }), (cast 'blur.gaussian' : String), (cast WgpuBlurEffect.GAUSSIAN_BLUR_WGSL__wgpuBlurEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument17:Dynamic = state; __callArgument17; }), (cast source : WgpuRenderTarget), ({ final __callArgument18:Dynamic = (cast dest : WgpuRenderTarget); __callArgument18; }), ({ final __callArgument19:Dynamic = pipeline; __callArgument19; }), ({ final __callArgument20:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast _Runtime.divideNumbers(1.0, _Runtime.field(source, 'width')) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast _Runtime.divideNumbers(1.0, _Runtime.field(source, 'height')) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (1.0 / source.width) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (1.0 / source.height) : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast dirX : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast dirY : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast radius : Float));

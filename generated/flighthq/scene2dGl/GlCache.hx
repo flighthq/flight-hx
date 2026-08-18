@@ -101,7 +101,7 @@ class GlCache {
     width = _Runtime.field(__destructure0, 'width');
     height = _Runtime.field(__destructure0, 'height');
     existing = (cast getGlRenderCacheTarget(({ final __callArgument16:Dynamic = screenState; __callArgument16; }), ({ final __callArgument17:Dynamic = cache; __callArgument17; })) : Null<GlRenderTarget>);
-    resized = ((cast ((cast _Runtime.strictEquals(existing, null) : Bool) || (cast !_Runtime.strictEquals((cast existing : GlRenderTarget).width, width) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast existing : GlRenderTarget).height, height) : Bool));
+    resized = ((cast ((cast _Runtime.strictEquals(existing, null) : Bool) || (cast !_Runtime.strictEquals((cast existing : { var width:Float; }).width, width) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast existing : { var height:Float; }).height, height) : Bool));
     target = (cast ensureGlRenderCacheTarget(({ final __callArgument18:Dynamic = screenState; __callArgument18; }), ({ final __callArgument19:Dynamic = cache; __callArgument19; }), (cast width : Float), (cast height : Float)) : GlRenderTarget);
     computeScene2DRenderTargetTransform(({ final __callArgument20:Dynamic = GlCache._renderTransform__glCache; __callArgument20; }), ({ final __callArgument21:Dynamic = source; __callArgument21; }), ({ final __callArgument22:Dynamic = GlCache._bounds__glCache; __callArgument22; }), (cast padding : Float), (cast padding : Float));
     computeRenderCacheTransform(({ final __callArgument23:Dynamic = (cast cache : RenderCache).transform; __callArgument23; }), ({ final __callArgument24:Dynamic = GlCache._bounds__glCache; __callArgument24; }), (cast padding : Float), (cast padding : Float));

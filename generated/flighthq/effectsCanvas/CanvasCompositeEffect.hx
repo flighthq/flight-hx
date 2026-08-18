@@ -18,18 +18,18 @@ class CanvasCompositeEffect {
   @:noCompletion
   public static function applyCompositeEffectToCanvas(state:CanvasRenderState, source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:CompositeEffect):Void {
     var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
-    ctx = _Runtime.field(dest, 'context');
+    ctx = dest.context;
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalAlpha', 1.0);
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'source-over');
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'filter', 'none');
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, dest.width, dest.height] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.field(effect, 'operator'), (cast CompositeOperatorValues : { var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; }).Clear) : Bool)) {
       var backdrop:Null<CanvasRenderTarget> = (cast getCanvasBlendEffectBackdrop(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null); __callArgument1; })) : Null<CanvasRenderTarget>);
-      if ((cast !_Runtime.strictEquals(backdrop, null) : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([(cast backdrop : CanvasRenderTarget).canvas, 0.0, 0.0] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(backdrop, null) : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([(cast backdrop : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas, 0.0, 0.0] : Array<Dynamic>)); }
       flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', getCanvasCompositeEffectOperation((cast _Runtime.field(effect, 'operator') : String)));
-      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(source, 'canvas'), 0.0, 0.0] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([source.canvas, 0.0, 0.0] : Array<Dynamic>));
     }
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }

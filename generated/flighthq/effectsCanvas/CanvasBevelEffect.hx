@@ -60,12 +60,12 @@ class CanvasBevelEffect {
     var distance:Float = cast _Runtime.UNDEFINED;
     var offsetX:Float = cast _Runtime.UNDEFINED;
     var offsetY:Float = cast _Runtime.UNDEFINED;
-    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument10:Dynamic = pool; __callArgument10; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    lit = (cast acquireCanvasRenderTarget(({ final __callArgument11:Dynamic = pool; __callArgument11; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    shade = (cast acquireCanvasRenderTarget(({ final __callArgument12:Dynamic = pool; __callArgument12; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    side = (cast acquireCanvasRenderTarget(({ final __callArgument13:Dynamic = pool; __callArgument13; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    tinted = (cast acquireCanvasRenderTarget(({ final __callArgument14:Dynamic = pool; __callArgument14; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    band = (cast acquireCanvasRenderTarget(({ final __callArgument15:Dynamic = pool; __callArgument15; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument10:Dynamic = pool; __callArgument10; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    lit = (cast acquireCanvasRenderTarget(({ final __callArgument11:Dynamic = pool; __callArgument11; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    shade = (cast acquireCanvasRenderTarget(({ final __callArgument12:Dynamic = pool; __callArgument12; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    side = (cast acquireCanvasRenderTarget(({ final __callArgument13:Dynamic = pool; __callArgument13; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    tinted = (cast acquireCanvasRenderTarget(({ final __callArgument14:Dynamic = pool; __callArgument14; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    band = (cast acquireCanvasRenderTarget(({ final __callArgument15:Dynamic = pool; __callArgument15; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     strength = HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0));
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0)) / 2.0));
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);

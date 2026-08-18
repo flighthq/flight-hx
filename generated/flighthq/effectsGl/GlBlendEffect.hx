@@ -31,7 +31,7 @@ class GlBlendEffect {
     modeIndex = (cast getBlendEffectModeIndex((cast _Runtime.field(effect, 'mode') : String)) : Float);
     opacity = _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 1.0);
     hasBackdrop = !_Runtime.strictEquals(backdrop, null);
-    inputs = (cast cast ([_Runtime.field(source, 'texture'), ((cast hasBackdrop : Bool) ? (cast (cast backdrop : flighthq._internal.dom.WebGLTexture) : Dynamic) : (cast _Runtime.field(source, 'texture') : Dynamic))] : Array<Dynamic>));
+    inputs = (cast cast ([source.texture, ((cast hasBackdrop : Bool) ? (cast (cast backdrop : flighthq._internal.dom.WebGLTexture) : Dynamic) : (cast source.texture : Dynamic))] : Array<Dynamic>));
     drawGlFullscreenPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = program; __callArgument4; }), ({ final __callArgument5:Dynamic = inputs; __callArgument5; }), ({ final __callArgument6:Dynamic = dest; __callArgument6; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       var modeLoc:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
       var opacityLoc:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;

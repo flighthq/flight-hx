@@ -49,7 +49,7 @@ class GlInnerShadowEffect {
     var strength:Float = cast _Runtime.UNDEFINED;
     var quality:Float = cast _Runtime.UNDEFINED;
     var sourceMode:InnerEffectSourceMode = cast _Runtime.UNDEFINED;
-    descriptor = (cast { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') });
+    descriptor = (cast { width: source.width, height: source.height, format: source.format });
     s0 = (cast acquireGlRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }), ({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : GlRenderTarget);
     s1 = (cast acquireGlRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : GlRenderTarget);
     s2 = (cast acquireGlRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : GlRenderTarget);
@@ -91,7 +91,7 @@ class GlInnerShadowEffect {
   public static function applyGlInnerClipPass__glInnerShadowEffect(state:GlRenderState, shadow:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     loc = (cast GlInnerShadowEffect.getClipShader__glInnerShadowEffect(({ final __callArgument44:Dynamic = state; __callArgument44; })) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument45:Dynamic = state; __callArgument45; }), ({ final __callArgument46:Dynamic = loc; __callArgument46; }), ({ final __callArgument47:Dynamic = cast ([(cast shadow : GlRenderTarget).texture, (cast source : GlRenderTarget).texture] : Array<Dynamic>); __callArgument47; }), ({ final __callArgument48:Dynamic = dest; __callArgument48; }), ({ final __callArgument49:Dynamic = function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument45:Dynamic = state; __callArgument45; }), ({ final __callArgument46:Dynamic = loc; __callArgument46; }), ({ final __callArgument47:Dynamic = cast ([shadow.texture, source.texture] : Array<Dynamic>); __callArgument47; }), ({ final __callArgument48:Dynamic = dest; __callArgument48; }), ({ final __callArgument49:Dynamic = function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO));
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument49; }));
   }

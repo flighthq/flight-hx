@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1601 |
-| Direct schemas | 403 |
+| Audit-only schemas | 1596 |
+| Direct schemas | 408 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 16902 |
-| Directly emitted accesses | 13764 |
+| Pending accesses | 16195 |
+| Directly emitted accesses | 14471 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1601 |
+| Newly discovered, audit-only | 1596 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -269,7 +269,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CanvasRenderOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 70 | 15 | 9 | 94 | 0 | 0 | 16 | yes | — |
 | `@flighthq/types:interface#CanvasRenderStateRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 23 | 22 | 11 | 1 | 34 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CanvasRenderTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 147 | 6 | 0 | 153 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasRenderTarget` | `direct` | `new` | — | reviewed escape-free Canvas render target | 4 | 147 | 6 | 0 | 0 | 153 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTargetPool` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTextureEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 12 | 3 | 0 | 15 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -625,7 +625,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 272 | 7 | 4 | 283 | 0 | 0 | 6 | yes | — |
 | `@flighthq/types:interface#GlRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free WebGL render-state runtime | 92 | 292 | 242 | 10 | 0 | 544 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderStats` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlRenderTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 18 | 276 | 27 | 0 | 303 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlRenderTarget` | `direct` | `new` | — | reviewed escape-free WebGL render target | 18 | 276 | 27 | 0 | 0 | 303 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTargetPool` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTextureEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 19 | 5 | 0 | 24 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
@@ -1271,12 +1271,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#RenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 15 | 5 | 0 | 20 | 0 | 0 | 9 | yes | — |
 | `@flighthq/types:interface#RenderStateRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 47 | 28 | 7 | 82 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderStateStats` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RenderTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 16 | 33 | 0 | 49 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RenderTarget` | `direct` | `new` | — | reviewed escape-free portable render target | 14 | 16 | 33 | 0 | 0 | 49 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderTargetAxes` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 42 | 0 | 0 | 42 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:interface#RenderTargetAxisDifference` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#RenderTargetColorSpace` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#RenderTargetDepth` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#RenderTargetDescriptor` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 50 | 0 | 0 | 50 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RenderTargetDescriptor` | `direct` | `new` | — | reviewed escape-free render-target descriptor | 10 | 50 | 0 | 0 | 0 | 50 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderTargetDimensions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderTargetExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#RenderTargetFormat` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -2007,7 +2007,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free WebGPU render-state runtime | 100 | 404 | 318 | 8 | 0 | 730 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderStateSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderStats` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuRenderTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 136 | 16 | 0 | 152 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuRenderTarget` | `direct` | `new` | — | reviewed escape-free WebGPU render target | 11 | 136 | 16 | 0 | 0 | 152 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuRenderTargetPool` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTextureEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 18 | 5 | 0 | 23 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |

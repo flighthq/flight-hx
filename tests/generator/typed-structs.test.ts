@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_601,
+      newAuditOnly: 1_596,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(405);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(410);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,24 +106,53 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_601);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'direct')).toEqual([
-      expect.objectContaining({
-        name: 'BitmapRegion',
-        packageName: '@flighthq/types',
-        purpose: 'reviewed escape-free bitmap region',
-      }),
-      expect.objectContaining({
-        name: 'GlRenderStateRuntime',
-        packageName: '@flighthq/types',
-        purpose: 'reviewed escape-free WebGL render-state runtime',
-      }),
-      expect.objectContaining({
-        name: 'WgpuRenderStateRuntime',
-        packageName: '@flighthq/types',
-        purpose: 'reviewed escape-free WebGPU render-state runtime',
-      }),
-    ]);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_596);
+    const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
+    expect(newDirect).toHaveLength(8);
+    expect(newDirect).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: 'BitmapRegion',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free bitmap region',
+        }),
+        expect.objectContaining({
+          name: 'CanvasRenderTarget',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Canvas render target',
+        }),
+        expect.objectContaining({
+          name: 'GlRenderStateRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL render-state runtime',
+        }),
+        expect.objectContaining({
+          name: 'GlRenderTarget',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL render target',
+        }),
+        expect.objectContaining({
+          name: 'RenderTarget',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free portable render target',
+        }),
+        expect.objectContaining({
+          name: 'RenderTargetDescriptor',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free render-target descriptor',
+        }),
+        expect.objectContaining({
+          name: 'WgpuRenderStateRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU render-state runtime',
+        }),
+        expect.objectContaining({
+          name: 'WgpuRenderTarget',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU render target',
+        }),
+      ]),
+    );
     expect(reviewedTypedStructDirectAdditions).toEqual([
       {
         declarationFingerprint: 'sha256:6de1c57a64f9d839dba96b69bcdd8cae0ca18580cc13f425ae6cb9ec9f68c4b8',
@@ -139,6 +168,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:a2bc23bace382a83f246f14c86f03121db15a25a1f479edc706a6b00dfe0475d',
         id: '@flighthq/types:interface#WgpuRenderStateRuntime',
         purpose: 'reviewed escape-free WebGPU render-state runtime',
+      },
+      {
+        declarationFingerprint: 'sha256:77ecafe9197f64a9e574cc139335cb7aff72a45c8b5efecc742d943d53a49e3a',
+        id: '@flighthq/types:interface#CanvasRenderTarget',
+        purpose: 'reviewed escape-free Canvas render target',
+      },
+      {
+        declarationFingerprint: 'sha256:a70ee9ffbaf0c1d0fd73965076d56028db2ce78f1dda4c9006e35974be0fe408',
+        id: '@flighthq/types:interface#GlRenderTarget',
+        purpose: 'reviewed escape-free WebGL render target',
+      },
+      {
+        declarationFingerprint: 'sha256:c7a251ae0b80f4ecea3ed0c7bf9d8f702baff476a5465d16cdf5e1d1bc427111',
+        id: '@flighthq/types:interface#RenderTarget',
+        purpose: 'reviewed escape-free portable render target',
+      },
+      {
+        declarationFingerprint: 'sha256:f976a3e923d48395ab6e3ab23594c3979ad742550499012816e1aa6fada959dc',
+        id: '@flighthq/types:interface#RenderTargetDescriptor',
+        purpose: 'reviewed escape-free render-target descriptor',
+      },
+      {
+        declarationFingerprint: 'sha256:d5e40ef824804481c0135b2b35a6745fc6d84140f5c43fb4644b3a8af5a12b45',
+        id: '@flighthq/types:interface#WgpuRenderTarget',
+        purpose: 'reviewed escape-free WebGPU render target',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -478,6 +532,19 @@ describe('typed struct analysis', () => {
     const bitmapRegion = report.candidates.find((candidate) => candidate.name === 'BitmapRegion');
     const glRenderStateRuntime = report.candidates.find((candidate) => candidate.name === 'GlRenderStateRuntime');
     const wgpuRenderStateRuntime = report.candidates.find((candidate) => candidate.name === 'WgpuRenderStateRuntime');
+    const renderTargetCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'CanvasRenderTarget',
+            'GlRenderTarget',
+            'RenderTarget',
+            'RenderTargetDescriptor',
+            'WgpuRenderTarget',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -518,22 +585,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_601,
+      auditOnlySchemas: 1_596,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 13_764,
-      directSchemas: 403,
+      directAccesses: 14_471,
+      directSchemas: 408,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 16_902,
+      pendingAccesses: 16_195,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_601,
+      newAuditOnly: 1_596,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -561,7 +628,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(13_764);
+    expect(report.summary.directAccesses).toBe(14_471);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -626,6 +693,48 @@ describe('typed struct analysis', () => {
       purpose: 'reviewed escape-free WebGPU render-state runtime',
       reasons: [],
     });
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'CanvasRenderTarget',
+        153,
+        'sha256:77ecafe9197f64a9e574cc139335cb7aff72a45c8b5efecc742d943d53a49e3a',
+        'reviewed escape-free Canvas render target',
+      ],
+      [
+        'GlRenderTarget',
+        303,
+        'sha256:a70ee9ffbaf0c1d0fd73965076d56028db2ce78f1dda4c9006e35974be0fe408',
+        'reviewed escape-free WebGL render target',
+      ],
+      [
+        'RenderTarget',
+        49,
+        'sha256:c7a251ae0b80f4ecea3ed0c7bf9d8f702baff476a5465d16cdf5e1d1bc427111',
+        'reviewed escape-free portable render target',
+      ],
+      [
+        'RenderTargetDescriptor',
+        50,
+        'sha256:f976a3e923d48395ab6e3ab23594c3979ad742550499012816e1aa6fada959dc',
+        'reviewed escape-free render-target descriptor',
+      ],
+      [
+        'WgpuRenderTarget',
+        152,
+        'sha256:d5e40ef824804481c0135b2b35a6745fc6d84140f5c43fb4644b3a8af5a12b45',
+        'reviewed escape-free WebGPU render target',
+      ],
+    ] as const) {
+      expect(renderTargetCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
     expect(classAuditById.get('@flighthq/types:interface#BitmapRegion')?.migration).toEqual({
       mechanicallyCompatible: true,
       normalizationReasons: [],
@@ -646,6 +755,24 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(renderStateRuntimeId)).toBe(false);
     }
+    for (const [renderTargetId, normalizationReasons, observabilityReasons] of [
+      ['@flighthq/types:interface#CanvasRenderTarget', ['anonymous-structural-transfer'], []],
+      ['@flighthq/types:interface#GlRenderTarget', ['anonymous-structural-transfer'], []],
+      ['@flighthq/types:interface#RenderTarget', ['cross-schema-transfer'], []],
+      [
+        '@flighthq/types:interface#RenderTargetDescriptor',
+        ['anonymous-structural-transfer', 'cross-schema-transfer', 'object-literal-spread'],
+        ['optional-omission'],
+      ],
+      ['@flighthq/types:interface#WgpuRenderTarget', ['anonymous-structural-transfer'], []],
+    ] as const) {
+      expect(classAuditById.get(renderTargetId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      expect(provenanceById.has(renderTargetId)).toBe(false);
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -660,6 +787,18 @@ describe('typed struct analysis', () => {
     );
     expect(wgpuRenderState).not.toMatch(/\(cast (?:runtime|sourceRuntime|targetRuntime) : WgpuRenderStateRuntime\)\./u);
     expect(wgpuRenderState).not.toMatch(/_Runtime\.field\((?:runtime|sourceRuntime|targetRuntime),/u);
+    const renderTarget = readFileSync('generated/flighthq/render/RenderTarget.hx', 'utf8');
+    expect(renderTarget).toContain('width = HxMath.max(1.0, HxMath.ceil(descriptor.width));');
+    expect(renderTarget).not.toMatch(/_Runtime\.field\(descriptor,/u);
+    for (const [path, typeName] of [
+      ['generated/flighthq/scene2dCanvas/CanvasRenderTarget.hx', 'CanvasRenderTarget'],
+      ['generated/flighthq/renderGl/GlRenderTarget.hx', 'GlRenderTarget'],
+      ['generated/flighthq/renderWgpu/WgpuRenderTarget.hx', 'WgpuRenderTarget'],
+    ] as const) {
+      const generatedRenderTarget = readFileSync(path, 'utf8');
+      expect(generatedRenderTarget).not.toMatch(/_Runtime\.field\(target,/u);
+      expect(generatedRenderTarget).not.toContain(`(cast target : flighthq.types.${typeName}).`);
+    }
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

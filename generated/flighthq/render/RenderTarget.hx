@@ -74,12 +74,12 @@ class RenderTarget {
     var colorAttachments:Float = cast _Runtime.UNDEFINED;
     var defaultFormat:RenderTargetFormat = cast _Runtime.UNDEFINED;
     var colorFormats:flighthq._internal._IndexedAccess<ResolvedRenderTargetDescriptor, String> = cast _Runtime.UNDEFINED;
-    width = HxMath.max(1.0, HxMath.ceil(_Runtime.field(descriptor, 'width')));
-    height = HxMath.max(1.0, HxMath.ceil(_Runtime.field(descriptor, 'height')));
-    colorAttachments = HxMath.max(1.0, HxMath.ceil(_Runtime.coalesce(_Runtime.field(descriptor, 'colorAttachments'), function():Dynamic return cast 1.0)));
-    defaultFormat = _Runtime.coalesce(_Runtime.field(descriptor, 'format'), function():Dynamic return cast 'rgba8');
-    colorFormats = (cast _Runtime.toArray({ length: colorAttachments }, function(_:flighthq._internal._Any, index:Float):RenderTargetFormat return _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(descriptor, 'colorFormats'), index), function():Dynamic return cast defaultFormat)) : Array<RenderTargetFormat>);
-    return cast { width: width, height: height, format: flighthq._internal._StaticIndex.readArray(colorFormats, 0.0), colorAttachments: colorAttachments, colorFormats: colorFormats, sampleCount: HxMath.max(1.0, HxMath.ceil(_Runtime.coalesce(_Runtime.field(descriptor, 'sampleCount'), function():Dynamic return cast 1.0))), depth: _Runtime.coalesce(_Runtime.field(descriptor, 'depth'), function():Dynamic return cast 'none'), colorSpace: _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'), clearColors: _Runtime.select(_Runtime.field(descriptor, 'clearColors'), function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(descriptor, 'clearColors'))]), function():Dynamic return cast cast ([] : Array<Dynamic>)), clearDepth: _Runtime.coalesce(_Runtime.field(descriptor, 'clearDepth'), function():Dynamic return cast 1.0) };
+    width = HxMath.max(1.0, HxMath.ceil(descriptor.width));
+    height = HxMath.max(1.0, HxMath.ceil(descriptor.height));
+    colorAttachments = HxMath.max(1.0, HxMath.ceil(_Runtime.coalesce(descriptor.colorAttachments, function():Dynamic return cast 1.0)));
+    defaultFormat = _Runtime.coalesce(descriptor.format, function():Dynamic return cast 'rgba8');
+    colorFormats = (cast _Runtime.toArray({ length: colorAttachments }, function(_:flighthq._internal._Any, index:Float):RenderTargetFormat return _Runtime.coalesce(_Runtime.optionalIndex(descriptor.colorFormats, index), function():Dynamic return cast defaultFormat)) : Array<RenderTargetFormat>);
+    return cast { width: width, height: height, format: flighthq._internal._StaticIndex.readArray(colorFormats, 0.0), colorAttachments: colorAttachments, colorFormats: colorFormats, sampleCount: HxMath.max(1.0, HxMath.ceil(_Runtime.coalesce(descriptor.sampleCount, function():Dynamic return cast 1.0))), depth: _Runtime.coalesce(descriptor.depth, function():Dynamic return cast 'none'), colorSpace: _Runtime.coalesce(descriptor.colorSpace, function():Dynamic return cast 'srgb'), clearColors: _Runtime.select(descriptor.clearColors, function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(descriptor.clearColors)]), function():Dynamic return cast cast ([] : Array<Dynamic>)), clearDepth: _Runtime.coalesce(descriptor.clearDepth, function():Dynamic return cast 1.0) };
     return cast null;
   }
 

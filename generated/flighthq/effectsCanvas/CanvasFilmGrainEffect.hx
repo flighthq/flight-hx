@@ -35,7 +35,7 @@ class CanvasFilmGrainEffect {
     cells = 64.0;
     patchSize = (cells * size);
     noise = (cast acquireCanvasRenderTarget(({ final __callArgument2:Dynamic = pool; __callArgument2; }), (cast patchSize : Float), (cast patchSize : Float)) : CanvasRenderTarget);
-    nctx = (cast noise : CanvasRenderTarget).context;
+    nctx = noise.context;
     flighthq._internal.backend.Canvas2dBackend.call(nctx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(nctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(nctx, 'globalCompositeOperation', 'source-over');
@@ -59,16 +59,16 @@ class CanvasFilmGrainEffect {
       }
     }
     flighthq._internal.backend.Canvas2dBackend.call(nctx, 'restore', cast ([] : Array<Dynamic>));
-    ctx = _Runtime.field(dest, 'context');
+    ctx = dest.context;
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'filter', 'none');
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'overlay');
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalAlpha', HxMath.max(0.0, HxMath.min(1.0, intensity)));
-    pattern = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'createPattern', cast ([(cast noise : CanvasRenderTarget).canvas, 'repeat'] : Array<Dynamic>));
+    pattern = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'createPattern', cast ([noise.canvas, 'repeat'] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(pattern, null) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', pattern);
-      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect', cast ([0.0, 0.0, _Runtime.field(dest, 'width'), _Runtime.field(dest, 'height')] : Array<Dynamic>));
+      flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect', cast ([0.0, 0.0, dest.width, dest.height] : Array<Dynamic>));
     }
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
     releaseCanvasRenderTarget(({ final __callArgument3:Dynamic = pool; __callArgument3; }), ({ final __callArgument4:Dynamic = noise; __callArgument4; }));

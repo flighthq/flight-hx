@@ -27,9 +27,9 @@ class CanvasScanlinesEffect {
     count = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'count'), function():Dynamic return cast 240.0)));
     intensity = HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.3)));
     drawCanvasEffectPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    ctx = _Runtime.field(dest, 'context');
-    w = _Runtime.field(dest, 'width');
-    h = _Runtime.field(dest, 'height');
+    ctx = dest.context;
+    w = dest.width;
+    h = dest.height;
     spacing = (h / count);
     lineHeight = HxMath.max(1.0, (spacing * 0.5));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));

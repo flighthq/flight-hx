@@ -27,7 +27,7 @@ class GlRenderTexturePool {
     renderTexture = _Runtime.coalesce(_Runtime.callProperty((cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createRenderTexture(({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : RenderTexture));
     GlRenderTexturePool.applyRenderTargetDescriptor__glRenderTexturePool((cast renderTexture : RenderTexture).source, ({ final __callArgument3:Dynamic = descriptor; __callArgument3; }));
     resetTextureUvTransform(({ final __callArgument4:Dynamic = renderTexture; __callArgument4; }));
-    ((cast renderTexture : RenderTexture).colorSpace = _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'));
+    ((cast renderTexture : RenderTexture).colorSpace = _Runtime.coalesce(descriptor.colorSpace, function():Dynamic return cast 'srgb'));
     invalidateGlRenderTexture(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = renderTexture; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     ((cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).add(renderTexture));
     return cast renderTexture;
@@ -110,17 +110,17 @@ class GlRenderTexturePool {
   }
 
   public static function applyRenderTargetDescriptor__glRenderTexturePool(target:RenderTarget, descriptor:RenderTargetDescriptor):Void {
-    ((cast target : RenderTarget).width = _Runtime.field(descriptor, 'width'));
-    ((cast target : RenderTarget).height = _Runtime.field(descriptor, 'height'));
-    ((cast target : RenderTarget).format = _Runtime.field(descriptor, 'format'));
-    ((cast target : RenderTarget).colorAttachments = _Runtime.field(descriptor, 'colorAttachments'));
-    ((cast target : RenderTarget).colorFormats = ((cast _Runtime.strictEquals(_Runtime.field(descriptor, 'colorFormats'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(descriptor, 'colorFormats'))]) : Dynamic)));
-    ((cast target : RenderTarget).sampleCount = _Runtime.field(descriptor, 'sampleCount'));
-    ((cast target : RenderTarget).depth = _Runtime.field(descriptor, 'depth'));
-    ((cast target : RenderTarget).colorSpace = _Runtime.coalesce(_Runtime.field(descriptor, 'colorSpace'), function():Dynamic return cast 'srgb'));
-    ((cast target : RenderTarget).clearColors = ((cast _Runtime.strictEquals(_Runtime.field(descriptor, 'clearColors'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(descriptor, 'clearColors'))]) : Dynamic)));
-    ((cast target : RenderTarget).clearDepth = _Runtime.field(descriptor, 'clearDepth'));
-    ((cast target : RenderTarget).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast target : RenderTarget).version + 1.0)), 0));
+    (target.width = cast (descriptor.width : Float));
+    (target.height = cast (descriptor.height : Float));
+    (target.format = cast (descriptor.format : Null<String>));
+    (target.colorAttachments = cast (descriptor.colorAttachments : Null<Float>));
+    (target.colorFormats = cast (((cast _Runtime.strictEquals(descriptor.colorFormats, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(descriptor.colorFormats)]) : Dynamic)) : Null<Array<RenderTargetFormat>>));
+    (target.sampleCount = cast (descriptor.sampleCount : Null<Float>));
+    (target.depth = cast (descriptor.depth : Null<String>));
+    (target.colorSpace = cast (_Runtime.coalesce(descriptor.colorSpace, function():Dynamic return cast 'srgb') : Null<String>));
+    (target.clearColors = cast (((cast _Runtime.strictEquals(descriptor.clearColors, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(descriptor.clearColors)]) : Dynamic)) : Null<Array<Float>>));
+    (target.clearDepth = cast (descriptor.clearDepth : Null<Float>));
+    (target.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((target.version + 1.0)), 0) : Float));
   }
 
   public static function assertUsablePool__glRenderTexturePool(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool):Void {

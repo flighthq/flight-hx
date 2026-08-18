@@ -53,9 +53,9 @@ class WgpuRenderEffectPipeline {
     } else {
       resizeWgpuRenderTarget(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget, (cast w : Float), (cast h : Float));
     }
-    ((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget : WgpuRenderTarget).colorSpace = colorSpace);
+    ((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget : { var colorSpace:RenderTargetColorSpace; }).colorSpace = cast (colorSpace : RenderTargetColorSpace));
     rgba = (cast state : WgpuRenderState).backgroundColorRgba;
-    ((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget : WgpuRenderTarget).clearColors = ((cast ((cast !_Runtime.strictEquals(rgba, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool) ? (cast cast ([(cast WgpuRenderEffectPipeline.packBackgroundClearColor__wgpuRenderEffectPipeline(({ final __callArgument3:Dynamic = rgba; __callArgument3; })) : Float)] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)));
+    ((cast (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget : { var clearColors:Array<Float>; }).clearColors = cast (((cast ((cast !_Runtime.strictEquals(rgba, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(rgba, 'length') : Float) >= (cast 4.0 : Float)) : Bool)) : Bool) ? (cast cast ([(cast WgpuRenderEffectPipeline.packBackgroundClearColor__wgpuRenderEffectPipeline(({ final __callArgument3:Dynamic = rgba; __callArgument3; })) : Float)] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)) : Array<Float>));
     beginWgpuRenderPass(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
@@ -93,8 +93,8 @@ class WgpuRenderEffectPipeline {
     scene = (cast pipeline : flighthq.types.WgpuRenderEffectPipeline).sceneTarget;
     if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return; }
     endWgpuRenderPass(({ final __callArgument8:Dynamic = state; __callArgument8; }));
-    format = (cast scene : WgpuRenderTarget).format;
-    descriptor = (cast { width: (cast scene : WgpuRenderTarget).width, height: (cast scene : WgpuRenderTarget).height, format: format, colorSpace: (cast scene : WgpuRenderTarget).colorSpace });
+    format = (cast scene : { var format:String; }).format;
+    descriptor = (cast { width: (cast scene : { var width:Float; }).width, height: (cast scene : { var height:Float; }).height, format: format, colorSpace: (cast scene : { var colorSpace:RenderTargetColorSpace; }).colorSpace });
     source = scene;
     scratchA = null;
     scratchB = null;
@@ -150,7 +150,7 @@ class WgpuRenderEffectPipeline {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument35:Dynamic = state; __callArgument35; })) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals(runtime.commandEncoder, null) : Bool)) { return; }
-    linear = _Runtime.strictEquals(_Runtime.field(source, 'colorSpace'), 'linear');
+    linear = _Runtime.strictEquals(source.colorSpace, 'linear');
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument36:Dynamic = state; __callArgument36; }), (cast ((cast linear : Bool) ? (cast 'effect.present.linear' : Dynamic) : (cast 'effect.present' : Dynamic)) : String), (cast ((cast linear : Bool) ? (cast WgpuRenderEffectPipeline.LINEAR_PRESENT_FRAGMENT_WGSL__wgpuRenderEffectPipeline : Dynamic) : (cast WgpuRenderEffectPipeline.PRESENT_FRAGMENT_WGSL__wgpuRenderEffectPipeline : Dynamic)) : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument37:Dynamic = state; __callArgument37; }), (cast source : WgpuRenderTarget), ({ final __callArgument38:Dynamic = null; __callArgument38; }), ({ final __callArgument39:Dynamic = pipeline; __callArgument39; }), ({ final __callArgument40:Dynamic = function(__unused2:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(__unused0:flighthq._internal._Float32Array, __unused1:flighthq._internal._Int32Array):Void {
 

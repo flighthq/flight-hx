@@ -55,12 +55,12 @@ class CanvasGradientBevelEffect {
     var offsetY:Float = cast _Runtime.UNDEFINED;
     var strength:Float = cast _Runtime.UNDEFINED;
     var ramp:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
-    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument6:Dynamic = pool; __callArgument6; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    lit = (cast acquireCanvasRenderTarget(({ final __callArgument7:Dynamic = pool; __callArgument7; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    shade = (cast acquireCanvasRenderTarget(({ final __callArgument8:Dynamic = pool; __callArgument8; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    side = (cast acquireCanvasRenderTarget(({ final __callArgument9:Dynamic = pool; __callArgument9; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    ramped = (cast acquireCanvasRenderTarget(({ final __callArgument10:Dynamic = pool; __callArgument10; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
-    band = (cast acquireCanvasRenderTarget(({ final __callArgument11:Dynamic = pool; __callArgument11; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float)) : CanvasRenderTarget);
+    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument6:Dynamic = pool; __callArgument6; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    lit = (cast acquireCanvasRenderTarget(({ final __callArgument7:Dynamic = pool; __callArgument7; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    shade = (cast acquireCanvasRenderTarget(({ final __callArgument8:Dynamic = pool; __callArgument8; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    side = (cast acquireCanvasRenderTarget(({ final __callArgument9:Dynamic = pool; __callArgument9; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    ramped = (cast acquireCanvasRenderTarget(({ final __callArgument10:Dynamic = pool; __callArgument10; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    band = (cast acquireCanvasRenderTarget(({ final __callArgument11:Dynamic = pool; __callArgument11; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0)) / 2.0));
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);

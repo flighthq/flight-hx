@@ -43,7 +43,7 @@ class GlRenderPass {
     previousRuntime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = previousOwner; __callArgument1; })) : GlRenderStateRuntime);
     previousState = (cast GlRenderPass.captureGlPassState__glRenderPass(({ final __callArgument2:Dynamic = previousOwner; __callArgument2; })) : SavedGlPassState__glRenderPass);
     currentMaskDepth = (cast previousState : SavedGlPassState__glRenderPass).currentMaskDepth;
-    if ((cast ((cast ((cast currentMaskDepth : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals((cast previousState : SavedGlPassState__glRenderPass).framebuffer, (cast target : GlRenderTarget).framebuffer) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast currentMaskDepth : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals((cast previousState : SavedGlPassState__glRenderPass).framebuffer, target.framebuffer) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('beginGlRenderPass: cannot nest the active framebuffer while a contour clip is live'));
     }
     if ((cast _Runtime.strictEquals(stack, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -55,9 +55,9 @@ class GlRenderPass {
     activeViewport = (cast GlRenderPass.resolveGlPassViewport__glRenderPass(({ final __callArgument6:Dynamic = target; __callArgument6; }), ({ final __callArgument7:Dynamic = viewport; __callArgument7; })) : GlViewportRect);
     enclosingScissor = (cast previousState : SavedGlPassState__glRenderPass).scissorRect;
     activeScissor = ((cast _Runtime.strictEquals(enclosingScissor, null) : Bool) ? (cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast activeViewport : Dynamic)) : Dynamic) : (cast (cast GlRenderPass.intersectGlRects__glRenderPass(({ final __callArgument8:Dynamic = enclosingScissor; __callArgument8; }), ({ final __callArgument9:Dynamic = activeViewport; __callArgument9; })) : GlScissorRect) : Dynamic));
-    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), (cast target : GlRenderTarget).framebuffer);
+    flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), target.framebuffer);
     flighthq._internal.backend.WebGl2Backend.viewport(gl, (cast activeViewport : GlViewportRect).x, (cast activeViewport : GlViewportRect).y, (cast activeViewport : GlViewportRect).width, (cast activeViewport : GlViewportRect).height);
-    (runtime.currentFramebuffer = cast ((cast target : GlRenderTarget).framebuffer : Null<flighthq._internal.dom.WebGLFramebuffer>));
+    (runtime.currentFramebuffer = cast (target.framebuffer : Null<flighthq._internal.dom.WebGLFramebuffer>));
     (runtime.currentRenderTarget = cast (target : Null<GlRenderTarget>));
     (runtime.renderTargetViewport = cast (activeViewport : Null<GlViewportRect>));
     (runtime.currentScissorRect = cast (activeScissor : Null<GlScissorRect>));
@@ -126,17 +126,17 @@ class GlRenderPass {
     preserveColor = _Runtime.coalesce(({ final __structural32 = preserve; __structural32 == null ? _Runtime.UNDEFINED : (cast __structural32 : { @:optional var preserveColor:Null<flighthq._internal._Union2<Bool, Array<Bool>>>; }).preserveColor; }), function():Dynamic return cast false);
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(target, 'textures'), 'length') : Float)) : Bool)) {
+      while ((cast ((cast i : Float) < (cast _Runtime.field(target.textures, 'length') : Float)) : Bool)) {
         if ((cast (cast GlRenderPass.isGlColorAttachmentPreserved__glRenderPass(({ final __callArgument33:Dynamic = preserveColor; __callArgument33; }), (cast i : Float)) : Bool) : Bool)) { i++; continue; }
         GlRenderPass.resolveGlClearColor__glRenderPass(({ final __callArgument34:Dynamic = state; __callArgument34; }), ({ final __callArgument35:Dynamic = target; __callArgument35; }), (cast i : Float), ({ final __callArgument36:Dynamic = GlRenderPass._clearRgba__glRenderPass; __callArgument36; }));
         flighthq._internal.backend.WebGl2Backend.clearBufferfv(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR', flighthq._internal.backend.WebGl2Backend.COLOR), i, GlRenderPass._clearRgba__glRenderPass);
         i++;
       }
     }
-    hasDepth = ((cast !_Runtime.strictEquals(_Runtime.field(target, 'depthStencilRenderbuffer'), null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(target, 'depthTexture'), null) : Bool));
+    hasDepth = ((cast !_Runtime.strictEquals(target.depthStencilRenderbuffer, null) : Bool) || (cast !_Runtime.strictEquals(target.depthTexture, null) : Bool));
     if ((cast ((cast hasDepth : Bool) && (cast !_Runtime.strictEquals(({ final __structural37 = preserve; __structural37 == null ? _Runtime.UNDEFINED : (cast __structural37 : { @:optional var preserveDepth:Null<Bool>; }).preserveDepth; }), true) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
-      flighthq._internal.backend.WebGl2Backend.clearBufferfi(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_STENCIL', flighthq._internal.backend.WebGl2Backend.DEPTH_STENCIL), 0.0, _Runtime.field(target, 'clearDepth'), 0.0);
+      flighthq._internal.backend.WebGl2Backend.clearBufferfi(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_STENCIL', flighthq._internal.backend.WebGl2Backend.DEPTH_STENCIL), 0.0, target.clearDepth, 0.0);
     }
     ((cast (cast getGlRenderStateRuntime(({ final __callArgument38:Dynamic = state; __callArgument38; })) : GlRenderStateRuntime) : { var currentBlendMode:Null<String>; }).currentBlendMode = cast (null : Null<String>));
   }
@@ -150,7 +150,7 @@ class GlRenderPass {
   public static function resolveGlClearColor__glRenderPass(state:GlRenderState, target:GlRenderTarget, index:Float, out:flighthq._internal._Float32Array):Void {
     var packed:Float = cast _Runtime.UNDEFINED;
     var bg:Array<Float> = cast _Runtime.UNDEFINED;
-    packed = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(target, 'clearColors') : Array<Float>), (cast index : Float));
+    packed = flighthq._internal._StaticIndex.readFloatArrayTyped((cast target.clearColors : Array<Float>), (cast index : Float));
     if ((cast !_Runtime.strictEquals(packed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255) / 255.0) : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255) / 255.0) : Float));
@@ -243,20 +243,20 @@ class GlRenderPass {
     var bottom:Float = cast _Runtime.UNDEFINED;
     var width:Float = cast _Runtime.UNDEFINED;
     var height:Float = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { height: _Runtime.field(target, 'height'), width: _Runtime.field(target, 'width'), x: 0.0, y: 0.0 }; }
+    if ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { height: target.height, width: target.width, x: 0.0, y: 0.0 }; }
     passWidth = HxMath.max(0.0, _Runtime.field(viewport, 'width'));
     passHeight = HxMath.max(0.0, _Runtime.field(viewport, 'height'));
     rawLeft = HxMath.floor(_Runtime.field(viewport, 'x'));
     rawRight = ((cast _Runtime.strictEquals(passWidth, 0.0) : Bool) ? (cast rawLeft : Dynamic) : (cast HxMath.ceil(_Runtime.addNumbers(_Runtime.field(viewport, 'x'), passWidth)) : Dynamic));
     rawTop = HxMath.floor(_Runtime.field(viewport, 'y'));
     rawBottom = ((cast _Runtime.strictEquals(passHeight, 0.0) : Bool) ? (cast rawTop : Dynamic) : (cast HxMath.ceil(_Runtime.addNumbers(_Runtime.field(viewport, 'y'), passHeight)) : Dynamic));
-    left = (cast GlRenderPass.clampGlPassEdge__glRenderPass((cast rawLeft : Float), (cast _Runtime.field(target, 'width') : Float)) : Float);
-    right = (cast GlRenderPass.clampGlPassEdge__glRenderPass((cast rawRight : Float), (cast _Runtime.field(target, 'width') : Float)) : Float);
-    top = (cast GlRenderPass.clampGlPassEdge__glRenderPass((cast rawTop : Float), (cast _Runtime.field(target, 'height') : Float)) : Float);
-    bottom = (cast GlRenderPass.clampGlPassEdge__glRenderPass((cast rawBottom : Float), (cast _Runtime.field(target, 'height') : Float)) : Float);
+    left = (cast GlRenderPass.clampGlPassEdge__glRenderPass((cast rawLeft : Float), (cast target.width : Float)) : Float);
+    right = (cast GlRenderPass.clampGlPassEdge__glRenderPass((cast rawRight : Float), (cast target.width : Float)) : Float);
+    top = (cast GlRenderPass.clampGlPassEdge__glRenderPass((cast rawTop : Float), (cast target.height : Float)) : Float);
+    bottom = (cast GlRenderPass.clampGlPassEdge__glRenderPass((cast rawBottom : Float), (cast target.height : Float)) : Float);
     width = HxMath.max(0.0, (right - left));
     height = HxMath.max(0.0, (bottom - top));
-    return cast { height: height, width: width, x: left, y: _Runtime.subtractNumbers(_Runtime.field(target, 'height'), bottom) };
+    return cast { height: height, width: width, x: left, y: (target.height - bottom) };
     return cast null;
   }
 

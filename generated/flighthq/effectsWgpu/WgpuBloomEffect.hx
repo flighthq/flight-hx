@@ -40,7 +40,7 @@ class WgpuBloomEffect {
     threshold = (cast computeBloomThreshold(({ final __callArgument0:Dynamic = effect; __callArgument0; })) : Float);
     intensity = (cast computeBloomIntensity(({ final __callArgument1:Dynamic = effect; __callArgument1; })) : Float);
     radius = (cast computeBloomBlurRadius(({ final __callArgument2:Dynamic = effect; __callArgument2; })) : Float);
-    descriptor = (cast { width: _Runtime.field(source, 'width'), height: _Runtime.field(source, 'height'), format: _Runtime.field(source, 'format') });
+    descriptor = (cast { width: source.width, height: source.height, format: source.format });
     bright = (cast acquireWgpuRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : WgpuRenderTarget);
     blurred = (cast acquireWgpuRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : WgpuRenderTarget);
     temp = (cast acquireWgpuRenderTarget(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = pool; __callArgument10; }), ({ final __callArgument11:Dynamic = descriptor; __callArgument11; })) : WgpuRenderTarget);

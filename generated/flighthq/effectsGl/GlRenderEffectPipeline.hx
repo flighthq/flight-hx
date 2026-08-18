@@ -60,7 +60,7 @@ class GlRenderEffectPipeline {
     } else {
       resizeGlRenderTarget(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget, (cast w : Float), (cast h : Float));
     }
-    ((cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget : GlRenderTarget).colorSpace = colorSpace);
+    ((cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget : { var colorSpace:RenderTargetColorSpace; }).colorSpace = cast (colorSpace : RenderTargetColorSpace));
     beginGlRenderPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget, (cast { preserveColor: true, preserveDepth: true } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
@@ -100,7 +100,7 @@ class GlRenderEffectPipeline {
     if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return; }
     endGlRenderPass(({ final __callArgument6:Dynamic = state; __callArgument6; }));
     format = _Runtime.coalesce(_Runtime.field((cast pipeline : flighthq.types.GlRenderEffectPipeline).options, 'format'), function():Dynamic return cast 'rgba8');
-    descriptor = (cast { width: (cast scene : GlRenderTarget).width, height: (cast scene : GlRenderTarget).height, format: format, colorSpace: (cast scene : GlRenderTarget).colorSpace });
+    descriptor = (cast { width: (cast scene : { var width:Float; }).width, height: (cast scene : { var height:Float; }).height, format: format, colorSpace: (cast scene : { var colorSpace:RenderTargetColorSpace; }).colorSpace });
     source = scene;
     scratchA = null;
     scratchB = null;
@@ -139,7 +139,7 @@ class GlRenderEffectPipeline {
       ensureScratch();
       var dest:GlRenderTarget = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       clearGlRenderTarget(({ final __callArgument29:Dynamic = state; __callArgument29; }), ({ final __callArgument30:Dynamic = dest; __callArgument30; }));
-      runner(({ final __callArgument31:Dynamic = { state: state, source: source, dest: dest, pool: (cast pipeline : flighthq.types.GlRenderEffectPipeline).pool, sceneDepthTexture: (cast scene : GlRenderTarget).depthTexture, sceneVelocityTexture: (cast pipeline : flighthq.types.GlRenderEffectPipeline).velocityTexture }; __callArgument31; }), ({ final __callArgument32:Dynamic = operation; __callArgument32; }));
+      runner(({ final __callArgument31:Dynamic = { state: state, source: source, dest: dest, pool: (cast pipeline : flighthq.types.GlRenderEffectPipeline).pool, sceneDepthTexture: (cast scene : { var depthTexture:Null<flighthq._internal.dom.WebGLTexture>; }).depthTexture, sceneVelocityTexture: (cast pipeline : flighthq.types.GlRenderEffectPipeline).velocityTexture }; __callArgument31; }), ({ final __callArgument32:Dynamic = operation; __callArgument32; }));
       (source = cast (dest : Dynamic));
     }
     flushAdjustments();
@@ -154,12 +154,12 @@ class GlRenderEffectPipeline {
 
   public static function presentGlRenderEffectResult__glRenderEffectPipeline(state:GlRenderState, source:GlRenderTarget):Void {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(source, 'colorSpace'), 'linear') : Bool)) {
+    if ((cast _Runtime.strictEquals(source.colorSpace, 'linear') : Bool)) {
       drawGlLinearToSrgbPass(({ final __callArgument37:Dynamic = state; __callArgument37; }), ({ final __callArgument38:Dynamic = source; __callArgument38; }), ({ final __callArgument39:Dynamic = null; __callArgument39; }));
       return;
     }
     program = (cast getGlEffectProgram(({ final __callArgument40:Dynamic = state; __callArgument40; }), (cast 'effect.present' : String), (cast GlRenderEffectPipeline.PRESENT_FRAGMENT_SRC__glRenderEffectPipeline : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument41:Dynamic = state; __callArgument41; }), ({ final __callArgument42:Dynamic = program; __callArgument42; }), ({ final __callArgument43:Dynamic = cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>); __callArgument43; }), ({ final __callArgument44:Dynamic = null; __callArgument44; }), (cast function(__unused3:flighthq._internal.dom.WebGL2RenderingContext, __unused4:GlFullscreenProgram):Void { _Runtime.callValue(function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument41:Dynamic = state; __callArgument41; }), ({ final __callArgument42:Dynamic = program; __callArgument42; }), ({ final __callArgument43:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument43; }), ({ final __callArgument44:Dynamic = null; __callArgument44; }), (cast function(__unused3:flighthq._internal.dom.WebGL2RenderingContext, __unused4:GlFullscreenProgram):Void { _Runtime.callValue(function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void {
 
     }, cast ([] : Array<Dynamic>)); } : Dynamic));
   }

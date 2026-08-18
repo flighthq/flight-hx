@@ -22,12 +22,12 @@ class GlFullscreenPass {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
-    if ((cast !_Runtime.strictEquals(runtime.currentFramebuffer, (cast target : GlRenderTarget).framebuffer) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), (cast target : GlRenderTarget).framebuffer);
-      (runtime.currentFramebuffer = cast ((cast target : GlRenderTarget).framebuffer : Null<flighthq._internal.dom.WebGLFramebuffer>));
+    if ((cast !_Runtime.strictEquals(runtime.currentFramebuffer, target.framebuffer) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), target.framebuffer);
+      (runtime.currentFramebuffer = cast (target.framebuffer : Null<flighthq._internal.dom.WebGLFramebuffer>));
     }
-    flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, (cast target : GlRenderTarget).width, (cast target : GlRenderTarget).height);
-    (runtime.renderTargetViewport = cast ({ height: (cast target : GlRenderTarget).height, width: (cast target : GlRenderTarget).width, x: 0.0, y: 0.0 } : Null<GlViewportRect>));
+    flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, target.width, target.height);
+    (runtime.renderTargetViewport = cast ({ height: target.height, width: target.width, x: 0.0, y: 0.0 } : Null<GlViewportRect>));
     flighthq._internal.backend.WebGl2Backend.clearColor(gl, 0.0, 0.0, 0.0, 0.0);
     flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_BUFFER_BIT', flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT));
     (runtime.currentTexture = cast (null : Null<flighthq._internal.dom.WebGLTexture>));
@@ -68,13 +68,13 @@ class GlFullscreenPass {
       flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
       (runtime.currentProgram = cast (_Runtime.field(program, 'program') : Null<flighthq._internal.dom.WebGLProgram>));
     }
-    destFramebuffer = _Runtime.coalesce(({ final __structural3 = dest; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var framebuffer:flighthq._internal.dom.WebGLFramebuffer; }).framebuffer; }), function():Dynamic return cast null);
+    destFramebuffer = _Runtime.coalesce(({ final __typedStruct3 = dest; __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { var framebuffer:flighthq._internal.dom.WebGLFramebuffer; }).framebuffer; }), function():Dynamic return cast null);
     if ((cast !_Runtime.strictEquals(runtime.currentFramebuffer, destFramebuffer) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), destFramebuffer);
       (runtime.currentFramebuffer = cast (destFramebuffer : Null<flighthq._internal.dom.WebGLFramebuffer>));
     }
-    destWidth = _Runtime.coalesce(({ final __structural4 = dest; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var width:Float; }).width; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'width'));
-    destHeight = _Runtime.coalesce(({ final __structural5 = dest; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var height:Float; }).height; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'height'));
+    destWidth = _Runtime.coalesce(({ final __typedStruct4 = dest; __typedStruct4 == null ? _Runtime.UNDEFINED : (cast __typedStruct4 : { var width:Float; }).width; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'width'));
+    destHeight = _Runtime.coalesce(({ final __typedStruct5 = dest; __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : { var height:Float; }).height; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'height'));
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, destWidth, destHeight);
     (runtime.renderTargetViewport = cast (_Runtime.select(dest, function():Dynamic return cast { height: destHeight, width: destWidth, x: 0.0, y: 0.0 }, function():Dynamic return cast null) : Null<GlViewportRect>));
     {

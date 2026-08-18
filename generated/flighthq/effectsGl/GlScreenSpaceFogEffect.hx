@@ -34,7 +34,7 @@ class GlScreenSpaceFogEffect {
     near = _Runtime.coalesce(_Runtime.field(effect, 'near'), function():Dynamic return cast 0.0);
     far = _Runtime.coalesce(_Runtime.field(effect, 'far'), function():Dynamic return cast 1.0);
     program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'atmospheric.screenSpaceFog' : String), (cast GlScreenSpaceFogEffect.SCREEN_SPACE_FOG_FRAGMENT_SRC__glScreenSpaceFogEffect : String)) : GlFullscreenProgram);
-    inputs = _Runtime.select(depthTexture, function():Dynamic return cast cast ([_Runtime.field(source, 'texture'), depthTexture] : Array<Dynamic>), function():Dynamic return cast cast ([_Runtime.field(source, 'texture')] : Array<Dynamic>));
+    inputs = _Runtime.select(depthTexture, function():Dynamic return cast cast ([source.texture, depthTexture] : Array<Dynamic>), function():Dynamic return cast cast ([source.texture] : Array<Dynamic>));
     drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = inputs; __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_fogColor'), r, g, b);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_density'), density);

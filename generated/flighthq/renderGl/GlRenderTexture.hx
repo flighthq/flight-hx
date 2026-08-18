@@ -47,7 +47,7 @@ class GlRenderTexture {
       (runtime.currentTextureStraightAlpha = cast (false : Bool));
       return cast null;
     }
-    texture = (cast (cast entry : GlRenderTextureEntry).target : GlRenderTarget).texture;
+    texture = (cast (cast entry : GlRenderTextureEntry).target : { var texture:flighthq._internal.dom.WebGLTexture; }).texture;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlRenderStateRuntime);
     flighthq._internal.backend.WebGl2Backend.bindTexture((cast state : GlRenderState).gl, flighthq._internal.backend.WebGl2Backend.contextConstant((cast state : GlRenderState).gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), texture);
     (runtime.currentTexture = cast (texture : Null<flighthq._internal.dom.WebGLTexture>));
@@ -91,13 +91,13 @@ class GlRenderTexture {
     var descriptor:RenderTarget = cast _Runtime.UNDEFINED;
     entry = (cast GlRenderTexture.getEntry__glRenderTexture(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = renderTexture; __callArgument22; })) : Null<GlRenderTextureEntry>);
     descriptor = _Runtime.field(renderTexture, 'source');
-    return cast { height: _Runtime.coalesce(_Runtime.coalesce(({ final __structural24 = ({ final __structural23 = entry; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { var target:GlRenderTarget; }).target; }); __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { var height:Float; }).height; }), function():Dynamic return cast ({ final __structural25 = descriptor; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : RenderTarget).height; })), function():Dynamic return cast 0.0), status: _Runtime.coalesce(({ final __structural26 = entry; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { var status:GlRenderTextureStatus; }).status; }), function():Dynamic return cast 'unrendered'), width: _Runtime.coalesce(_Runtime.coalesce(({ final __structural28 = ({ final __structural27 = entry; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { var target:GlRenderTarget; }).target; }); __structural28 == null ? _Runtime.UNDEFINED : (cast __structural28 : { var width:Float; }).width; }), function():Dynamic return cast ({ final __structural29 = descriptor; __structural29 == null ? _Runtime.UNDEFINED : (cast __structural29 : RenderTarget).width; })), function():Dynamic return cast 0.0) };
+    return cast { height: _Runtime.coalesce(_Runtime.coalesce(({ final __typedStruct24 = ({ final __structural23 = entry; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { var target:GlRenderTarget; }).target; }); __typedStruct24 == null ? _Runtime.UNDEFINED : (cast __typedStruct24 : { var height:Float; }).height; }), function():Dynamic return cast ({ final __typedStruct25 = descriptor; __typedStruct25 == null ? _Runtime.UNDEFINED : __typedStruct25.height; })), function():Dynamic return cast 0.0), status: _Runtime.coalesce(({ final __structural26 = entry; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { var status:GlRenderTextureStatus; }).status; }), function():Dynamic return cast 'unrendered'), width: _Runtime.coalesce(_Runtime.coalesce(({ final __typedStruct28 = ({ final __structural27 = entry; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { var target:GlRenderTarget; }).target; }); __typedStruct28 == null ? _Runtime.UNDEFINED : (cast __typedStruct28 : { var width:Float; }).width; }), function():Dynamic return cast ({ final __typedStruct29 = descriptor; __typedStruct29 == null ? _Runtime.UNDEFINED : __typedStruct29.width; })), function():Dynamic return cast 0.0) };
     return cast null;
   }
 
   @:noCompletion
   public static function getGlRenderTextureColorSpace(state:GlRenderState, renderTexture:RenderTexture):TextureColorSpace {
-    return cast _Runtime.coalesce(({ final __structural33 = ({ final __structural32 = (cast GlRenderTexture.getEntry__glRenderTexture(({ final __callArgument30:Dynamic = state; __callArgument30; }), ({ final __callArgument31:Dynamic = renderTexture; __callArgument31; })) : Null<GlRenderTextureEntry>); __structural32 == null ? _Runtime.UNDEFINED : (cast __structural32 : { var target:GlRenderTarget; }).target; }); __structural33 == null ? _Runtime.UNDEFINED : (cast __structural33 : { var colorSpace:RenderTargetColorSpace; }).colorSpace; }), function():Dynamic return cast _Runtime.field(renderTexture, 'colorSpace'));
+    return cast _Runtime.coalesce(({ final __typedStruct33 = ({ final __structural32 = (cast GlRenderTexture.getEntry__glRenderTexture(({ final __callArgument30:Dynamic = state; __callArgument30; }), ({ final __callArgument31:Dynamic = renderTexture; __callArgument31; })) : Null<GlRenderTextureEntry>); __structural32 == null ? _Runtime.UNDEFINED : (cast __structural32 : { var target:GlRenderTarget; }).target; }); __typedStruct33 == null ? _Runtime.UNDEFINED : (cast __typedStruct33 : { var colorSpace:RenderTargetColorSpace; }).colorSpace; }), function():Dynamic return cast _Runtime.field(renderTexture, 'colorSpace'));
     return cast null;
   }
 
@@ -181,7 +181,7 @@ class GlRenderTexture {
         {
           ((cast entry : GlRenderTextureEntry).status = ((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)));
           if ((cast rendered : Bool)) {
-            ((cast renderTexture : RenderTexture).colorSpace = (cast (cast entry : GlRenderTextureEntry).target : GlRenderTarget).colorSpace);
+            ((cast renderTexture : RenderTexture).colorSpace = (cast (cast entry : GlRenderTextureEntry).target : { var colorSpace:RenderTargetColorSpace; }).colorSpace);
             ((cast renderTexture : RenderTexture).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast renderTexture : RenderTexture).version + 1.0)), 0));
           }
         }
@@ -191,7 +191,7 @@ class GlRenderTexture {
       {
         ((cast entry : GlRenderTextureEntry).status = ((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)));
         if ((cast rendered : Bool)) {
-          ((cast renderTexture : RenderTexture).colorSpace = (cast (cast entry : GlRenderTextureEntry).target : GlRenderTarget).colorSpace);
+          ((cast renderTexture : RenderTexture).colorSpace = (cast (cast entry : GlRenderTextureEntry).target : { var colorSpace:RenderTargetColorSpace; }).colorSpace);
           ((cast renderTexture : RenderTexture).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast renderTexture : RenderTexture).version + 1.0)), 0));
         }
       }
@@ -200,7 +200,7 @@ class GlRenderTexture {
     {
       ((cast entry : GlRenderTextureEntry).status = ((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)));
       if ((cast rendered : Bool)) {
-        ((cast renderTexture : RenderTexture).colorSpace = (cast (cast entry : GlRenderTextureEntry).target : GlRenderTarget).colorSpace);
+        ((cast renderTexture : RenderTexture).colorSpace = (cast (cast entry : GlRenderTextureEntry).target : { var colorSpace:RenderTargetColorSpace; }).colorSpace);
         ((cast renderTexture : RenderTexture).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast renderTexture : RenderTexture).version + 1.0)), 0));
       }
     }
@@ -220,10 +220,10 @@ class GlRenderTexture {
     } else {
       var requested:ResolvedRenderTargetDescriptor = (cast resolveRenderTargetDescriptor(({ final __callArgument66:Dynamic = descriptor; __callArgument66; })) : ResolvedRenderTargetDescriptor);
       if ((cast (cast GlRenderTexture.matchesGlRenderTextureAllocation__glRenderTexture((cast entry : GlRenderTextureEntry).target, ({ final __callArgument67:Dynamic = requested; __callArgument67; })) : Bool) : Bool)) {
-        resizeGlRenderTarget(({ final __callArgument68:Dynamic = state; __callArgument68; }), (cast entry : GlRenderTextureEntry).target, (cast (cast descriptor : RenderTarget).width : Float), (cast (cast descriptor : RenderTarget).height : Float));
-        ((cast (cast entry : GlRenderTextureEntry).target : GlRenderTarget).requestedAxes = { width: (cast requested : ResolvedRenderTargetDescriptor).width, height: (cast requested : ResolvedRenderTargetDescriptor).height, format: (cast requested : ResolvedRenderTargetDescriptor).format, colorAttachments: (cast requested : ResolvedRenderTargetDescriptor).colorAttachments, colorFormats: _Runtime.concatArrays([_Runtime.toArray((cast requested : ResolvedRenderTargetDescriptor).colorFormats)]), sampleCount: (cast requested : ResolvedRenderTargetDescriptor).sampleCount, depth: (cast requested : ResolvedRenderTargetDescriptor).depth, colorSpace: (cast requested : ResolvedRenderTargetDescriptor).colorSpace });
-        ((cast (cast entry : GlRenderTextureEntry).target : GlRenderTarget).clearColors = _Runtime.concatArrays([_Runtime.toArray((cast requested : ResolvedRenderTargetDescriptor).clearColors)]));
-        ((cast (cast entry : GlRenderTextureEntry).target : GlRenderTarget).clearDepth = (cast requested : ResolvedRenderTargetDescriptor).clearDepth);
+        resizeGlRenderTarget(({ final __callArgument68:Dynamic = state; __callArgument68; }), (cast entry : GlRenderTextureEntry).target, (cast descriptor.width : Float), (cast descriptor.height : Float));
+        ((cast (cast entry : GlRenderTextureEntry).target : { var requestedAxes:RenderTargetAxes; }).requestedAxes = cast ({ width: (cast requested : ResolvedRenderTargetDescriptor).width, height: (cast requested : ResolvedRenderTargetDescriptor).height, format: (cast requested : ResolvedRenderTargetDescriptor).format, colorAttachments: (cast requested : ResolvedRenderTargetDescriptor).colorAttachments, colorFormats: _Runtime.concatArrays([_Runtime.toArray((cast requested : ResolvedRenderTargetDescriptor).colorFormats)]), sampleCount: (cast requested : ResolvedRenderTargetDescriptor).sampleCount, depth: (cast requested : ResolvedRenderTargetDescriptor).depth, colorSpace: (cast requested : ResolvedRenderTargetDescriptor).colorSpace } : RenderTargetAxes));
+        ((cast (cast entry : GlRenderTextureEntry).target : { var clearColors:Array<Float>; }).clearColors = cast (_Runtime.concatArrays([_Runtime.toArray((cast requested : ResolvedRenderTargetDescriptor).clearColors)]) : Array<Float>));
+        ((cast (cast entry : GlRenderTextureEntry).target : { var clearDepth:Float; }).clearDepth = cast ((cast requested : ResolvedRenderTargetDescriptor).clearDepth : Float));
       } else {
         destroyGlRenderTarget(({ final __callArgument69:Dynamic = state; __callArgument69; }), (cast entry : GlRenderTextureEntry).target);
         ((cast entry : GlRenderTextureEntry).target = (cast createGlRenderTarget(({ final __callArgument70:Dynamic = state; __callArgument70; }), ({ final __callArgument71:Dynamic = descriptor; __callArgument71; })) : GlRenderTarget));

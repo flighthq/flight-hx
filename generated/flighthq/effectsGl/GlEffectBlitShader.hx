@@ -28,8 +28,8 @@ class GlEffectBlitShader {
   public static function applyGlEffectBlitOffsetPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
     var loc:BlitOffsetShaderLocations__glEffectBlitShader = cast _Runtime.UNDEFINED;
     loc = (cast GlEffectBlitShader.getGlBlitOffsetShader__glEffectBlitShader(({ final __callArgument0:Dynamic = state; __callArgument0; })) : BlitOffsetShaderLocations__glEffectBlitShader);
-    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = loc; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([(cast source : GlRenderTarget).texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), ({ final __callArgument5:Dynamic = function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
-      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locOffset:flighthq._internal.dom.WebGLUniformLocation; }).locOffset, (-dx / (cast source : GlRenderTarget).width), (dy / (cast source : GlRenderTarget).height));
+    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = loc; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), ({ final __callArgument5:Dynamic = function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
+      flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locOffset:flighthq._internal.dom.WebGLUniformLocation; }).locOffset, (-dx / source.width), (dy / source.height));
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument5; }));
   }
 
@@ -37,7 +37,7 @@ class GlEffectBlitShader {
   public static function applyGlEffectBlitPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     loc = (cast GlEffectBlitShader.getGlBlitShader__glEffectBlitShader(({ final __callArgument6:Dynamic = state; __callArgument6; })) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = loc; __callArgument8; }), ({ final __callArgument9:Dynamic = cast ([(cast source : GlRenderTarget).texture] : Array<Dynamic>); __callArgument9; }), ({ final __callArgument10:Dynamic = dest; __callArgument10; }), ({ final __callArgument11:Dynamic = function(__unused5:flighthq._internal.dom.WebGL2RenderingContext, __unused6:GlFullscreenProgram):Void { _Runtime.callValue(function(__unused3:flighthq._internal.dom.WebGL2RenderingContext, __unused4:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = loc; __callArgument8; }), ({ final __callArgument9:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument9; }), ({ final __callArgument10:Dynamic = dest; __callArgument10; }), ({ final __callArgument11:Dynamic = function(__unused5:flighthq._internal.dom.WebGL2RenderingContext, __unused6:GlFullscreenProgram):Void { _Runtime.callValue(function(__unused3:flighthq._internal.dom.WebGL2RenderingContext, __unused4:GlFullscreenProgram):Void {
 
     }, cast ([] : Array<Dynamic>)); }; __callArgument11; }));
   }
@@ -46,7 +46,7 @@ class GlEffectBlitShader {
   public static function applyGlEffectErasePass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     loc = (cast GlEffectBlitShader.getGlEraseShader__glEffectBlitShader(({ final __callArgument12:Dynamic = state; __callArgument12; })) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = loc; __callArgument14; }), ({ final __callArgument15:Dynamic = cast ([(cast source : GlRenderTarget).texture] : Array<Dynamic>); __callArgument15; }), ({ final __callArgument16:Dynamic = dest; __callArgument16; }), ({ final __callArgument17:Dynamic = function(__unused8:flighthq._internal.dom.WebGL2RenderingContext, __unused9:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused7:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = loc; __callArgument14; }), ({ final __callArgument15:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument15; }), ({ final __callArgument16:Dynamic = dest; __callArgument16; }), ({ final __callArgument17:Dynamic = function(__unused8:flighthq._internal.dom.WebGL2RenderingContext, __unused9:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused7:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE_MINUS_SRC_ALPHA', flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_ALPHA));
     }, cast ([__unused8] : Array<Dynamic>)); }; __callArgument17; }));
   }

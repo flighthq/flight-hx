@@ -43110,9 +43110,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 153,
+        "directAccesses": 153,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -43158,7 +43158,7 @@
       },
       "name": "CanvasRenderTarget",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Canvas render target",
       "reasons": [],
       "source": "upstream/packages/types/src/CanvasRenderTarget.ts",
       "sourceProvenance": {
@@ -132931,9 +132931,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 303,
+        "directAccesses": 303,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -133091,7 +133091,7 @@
       },
       "name": "GlRenderTarget",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGL render target",
       "reasons": [],
       "source": "upstream/packages/types/src/GlRenderTarget.ts",
       "sourceProvenance": {
@@ -261935,9 +261935,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 49,
+        "directAccesses": 49,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -262069,7 +262069,7 @@
       },
       "name": "RenderTarget",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free portable render target",
       "reasons": [],
       "source": "upstream/packages/types/src/RenderTarget.ts",
       "sourceProvenance": {
@@ -263638,9 +263638,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 50,
+        "directAccesses": 50,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -263734,7 +263734,7 @@
       },
       "name": "RenderTargetDescriptor",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free render-target descriptor",
       "reasons": [],
       "source": "upstream/packages/types/src/RenderTarget.ts",
       "sourceProvenance": {
@@ -415893,9 +415893,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 152,
+        "directAccesses": 152,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -415997,7 +415997,7 @@
       },
       "name": "WgpuRenderTarget",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGPU render target",
       "reasons": [],
       "source": "upstream/packages/types/src/WgpuRenderTarget.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1601,
+      "newAuditOnly": 1596,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1601,
+    "auditOnlySchemas": 1596,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 13764,
-    "directSchemas": 403,
+    "directAccesses": 14471,
+    "directSchemas": 408,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 16902,
+    "pendingAccesses": 16195,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"
