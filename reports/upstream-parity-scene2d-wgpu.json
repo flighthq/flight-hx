@@ -1,10 +1,10 @@
 {
-  "completedAt": "2026-08-18T02:10:45.739Z",
+  "completedAt": "2026-08-18T13:10:59.761Z",
   "failedPackages": 0,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 741391,
+      "durationMs": 701456,
       "exitCode": 0,
       "package": "scene2d-wgpu",
       "signal": null,
@@ -15,5 +15,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": "scene2d-wgpu",
-  "startedAt": "2026-08-18T01:58:24.397Z"
+  "startedAt": "2026-08-18T12:59:18.303Z"
 }
