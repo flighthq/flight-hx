@@ -1,10 +1,10 @@
 {
-  "completedAt": "2026-08-07T20:10:43.353Z",
+  "completedAt": "2026-08-18T10:15:51.746Z",
   "failedPackages": 0,
   "jobs": 12,
   "packages": [
     {
-      "durationMs": 936887,
+      "durationMs": 681966,
       "exitCode": 0,
       "package": "scene2d-gl",
       "signal": null,
@@ -15,5 +15,5 @@
   ],
   "schemaVersion": 1,
   "selectedPackage": "scene2d-gl",
-  "startedAt": "2026-08-07T19:55:06.462Z"
+  "startedAt": "2026-08-18T10:04:29.778Z"
 }
