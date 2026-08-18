@@ -52,7 +52,7 @@ class GltfEmissiveStrength {
         if ((cast _Runtime.strictEquals(_Runtime.field(material, 'kind'), StandardPbrMaterialKind) : Bool)) {
           ((cast (cast (cast material : flighthq._internal._Any) : StandardPbrMaterial) : StandardPbrMaterial).emissiveStrength = strength);
         } else { if ((cast _Runtime.strictEquals(_Runtime.field(material, 'kind'), ExtendedPbrMaterialKind) : Bool)) {
-          ((cast (cast (cast (cast material : flighthq._internal._Any) : ExtendedPbrMaterial) : ExtendedPbrMaterial).standard : StandardPbrMaterialProperties).emissiveStrength = strength);
+          ((cast (cast (cast (cast material : flighthq._internal._Any) : ExtendedPbrMaterial) : ExtendedPbrMaterial).standard : { var emissiveStrength:Float; }).emissiveStrength = cast (strength : Float));
         } }
         i++;
       }

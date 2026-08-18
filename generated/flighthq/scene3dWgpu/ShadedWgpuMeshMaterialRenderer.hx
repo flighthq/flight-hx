@@ -52,8 +52,8 @@ class ShadedWgpuMeshMaterialRenderer {
     format = _Runtime.coalesce((cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { @:optional var currentColorFormat:Null<String>; }).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     pipeline = (cast ensureWgpuShadedPipeline(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = shaded; __callArgument3; }), (cast format : String)) : WgpuMeshPipeline);
     writeWgpuFrameUniform(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = camera; __callArgument5; }), ({ final __callArgument6:Dynamic = lights; __callArgument6; }));
-    (cast unpackColorToLinear(({ final __callArgument7:Dynamic = ShadedWgpuMeshMaterialRenderer._diffuse__shadedWgpuMeshMaterialRenderer; __callArgument7; }), (cast _Runtime.field(shaded, 'diffuse') : Float)) : LinearColor);
-    (cast unpackColorToLinear(({ final __callArgument8:Dynamic = ShadedWgpuMeshMaterialRenderer._specular__shadedWgpuMeshMaterialRenderer; __callArgument8; }), (cast _Runtime.field(shaded, 'specular') : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument7:Dynamic = ShadedWgpuMeshMaterialRenderer._diffuse__shadedWgpuMeshMaterialRenderer; __callArgument7; }), (cast (cast shaded : { var diffuse:Float; }).diffuse : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument8:Dynamic = ShadedWgpuMeshMaterialRenderer._specular__shadedWgpuMeshMaterialRenderer; __callArgument8; }), (cast (cast shaded : { var specular:Float; }).specular : Float)) : LinearColor);
     group = (cast bindWgpuShadedSurface(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = pipeline; __callArgument10; }), ({ final __callArgument11:Dynamic = shaded; __callArgument11; }), ({ final __callArgument12:Dynamic = ShadedWgpuMeshMaterialRenderer._diffuse__shadedWgpuMeshMaterialRenderer; __callArgument12; }), ({ final __callArgument13:Dynamic = ShadedWgpuMeshMaterialRenderer._specular__shadedWgpuMeshMaterialRenderer; __callArgument13; })) : flighthq._internal.dom.GPUBindGroup);
     beginWgpuMeshDraw(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = pipeline; __callArgument15; }));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
@@ -63,7 +63,7 @@ class ShadedWgpuMeshMaterialRenderer {
 
   @:noCompletion
   public static function getWgpuShadedBaseFlags(material:ShadedMaterial):{ var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; } {
-    return cast { alphaMaskEnabled: _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask'), doubleSided: _Runtime.field(material, 'doubleSided'), hasDiffuseMap: (cast isWgpuTextureReady((cast _Runtime.field(material, 'diffuseMap') : Dynamic)) : Bool), hasNormalMap: (cast isWgpuTextureReady((cast _Runtime.field(material, 'normalMap') : Dynamic)) : Bool), hasSpecularMap: (cast isWgpuTextureReady((cast _Runtime.field(material, 'specularMap') : Dynamic)) : Bool) };
+    return cast { alphaMaskEnabled: _Runtime.strictEquals(material.alphaMode, 'mask'), doubleSided: material.doubleSided, hasDiffuseMap: (cast isWgpuTextureReady((cast material.diffuseMap : Dynamic)) : Bool), hasNormalMap: (cast isWgpuTextureReady((cast material.normalMap : Dynamic)) : Bool), hasSpecularMap: (cast isWgpuTextureReady((cast material.specularMap : Dynamic)) : Bool) };
     return cast null;
   }
 

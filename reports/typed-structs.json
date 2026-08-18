@@ -37519,9 +37519,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 43,
+        "directAccesses": 43,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -37653,7 +37653,7 @@
       },
       "name": "BlinnPhongMaterial",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Blinn-Phong material",
       "reasons": [],
       "source": "upstream/packages/types/src/BlinnPhongMaterial.ts",
       "sourceProvenance": {
@@ -228454,9 +228454,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 43,
+        "directAccesses": 43,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -228580,7 +228580,7 @@
       },
       "name": "PhongMaterial",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Phong material",
       "reasons": [],
       "source": "upstream/packages/types/src/PhongMaterial.ts",
       "sourceProvenance": {
@@ -290090,9 +290090,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 56,
+        "directAccesses": 56,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -290224,7 +290224,7 @@
       },
       "name": "ShadedMaterial",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free shaded material",
       "reasons": [],
       "source": "upstream/packages/types/src/ShadedMaterial.ts",
       "sourceProvenance": {
@@ -324062,9 +324062,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 52,
+        "directAccesses": 52,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -324228,7 +324228,7 @@
       },
       "name": "SpecularGlossinessPbrMaterial",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free specular-glossiness PBR material",
       "reasons": [],
       "source": "upstream/packages/types/src/SpecularGlossinessPbrMaterial.ts",
       "sourceProvenance": {
@@ -333029,9 +333029,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 92,
+        "directAccesses": 92,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -333149,7 +333149,7 @@
       },
       "name": "StandardPbrMaterialProperties",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free standard PBR material properties",
       "reasons": [],
       "source": "upstream/packages/types/src/StandardPbrMaterial.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1561,
+      "newAuditOnly": 1556,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1561,
+    "auditOnlySchemas": 1556,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 18197,
-    "directSchemas": 443,
+    "directAccesses": 18483,
+    "directSchemas": 448,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 12469,
+    "pendingAccesses": 12183,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

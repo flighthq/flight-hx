@@ -94,11 +94,11 @@ class SceneMaterialTextureRegistry {
   }
 
   public static function listStandardPbrPropertiesTextures__sceneMaterialTextureRegistry(pbr:StandardPbrMaterialProperties, out:Array<Texture>):Void {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(pbr, 'baseColorMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'baseColorMap')] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(pbr, 'emissiveMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'emissiveMap')] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(pbr, 'metallicRoughnessMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'metallicRoughnessMap')] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(pbr, 'normalMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'normalMap')] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(pbr, 'occlusionMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(pbr, 'occlusionMap')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(pbr.baseColorMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([pbr.baseColorMap] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(pbr.emissiveMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([pbr.emissiveMap] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(pbr.metallicRoughnessMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([pbr.metallicRoughnessMap] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(pbr.normalMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([pbr.normalMap] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(pbr.occlusionMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([pbr.occlusionMap] : Array<Dynamic>)); }
   }
 
   public static function listUnlitMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {

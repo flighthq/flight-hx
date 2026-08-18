@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1561 |
-| Direct schemas | 443 |
+| Audit-only schemas | 1556 |
+| Direct schemas | 448 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 12469 |
-| Directly emitted accesses | 18197 |
+| Pending accesses | 12183 |
+| Directly emitted accesses | 18483 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1561 |
+| Newly discovered, audit-only | 1556 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -238,7 +238,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#BlendEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BlendMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#BlendModeNode` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:interface#BlinnPhongMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 32 | 11 | 0 | 43 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#BlinnPhongMaterial` | `direct` | `new` | — | reviewed escape-free Blinn-Phong material | 14 | 32 | 11 | 0 | 0 | 43 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BloomEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BlurEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BokehDepthOfFieldEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
@@ -1132,7 +1132,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PermissionStateSource` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#PerspectiveProjection` | `direct` | `relocated` | `@flighthq/types:interface#PerspectiveProjection` | perspective-camera projection aggregate | 3 | 8 | 1 | 0 | 0 | 9 | 12 | 12 | yes | — |
 | `@flighthq/types:interface#PerspectiveProjectionOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#PhongMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 36 | 7 | 0 | 43 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#PhongMaterial` | `direct` | `new` | — | reviewed escape-free Phong material | 13 | 36 | 7 | 0 | 0 | 43 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics2DBodyType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Physics2DCollider` | `direct` | `new` | — | reviewed escape-free physics collider | 5 | 46 | 1 | 0 | 0 | 47 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DCollisionFilter` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 13 | 0 | 0 | 13 | 0 | 0 | 1 | yes | — |
@@ -1437,7 +1437,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#SensorsPermissionState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#SensorSubscribeOptions` | `direct` | `preserved` | `@flighthq/types:interface#SensorSubscribeOptions` | broad host document | 1 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SepiaAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ShadedMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 44 | 12 | 0 | 56 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ShadedMaterial` | `direct` | `new` | — | reviewed escape-free shaded material | 14 | 44 | 12 | 0 | 0 | 56 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShadedMaterialOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Shape` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 41 | 0 | 0 | 41 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ShapeCommandKey` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1572,7 +1572,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SpatialIndexRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SpatialObjectId` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#SpatialPair` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SpecularGlossinessPbrMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 18 | 36 | 16 | 0 | 52 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SpecularGlossinessPbrMaterial` | `direct` | `new` | — | reviewed escape-free specular-glossiness PBR material | 18 | 36 | 16 | 0 | 0 | 52 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SpecularPbrExtension` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 15 | 0 | 0 | 15 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SphereCollider` | `direct` | `preserved` | `@flighthq/types:interface#SphereCollider` | broad asset document | 8 | 22 | 0 | 0 | 0 | 22 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SpineAlphaKeyframe` | `direct` | `relocated` | `@flighthq/particles-formats:interface#SpineAlphaKeyframe` | broad serialization document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1615,7 +1615,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#StandardMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#StandardMaterialKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#StandardPbrMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 24 | 6 | 0 | 30 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#StandardPbrMaterialProperties` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 60 | 32 | 0 | 92 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#StandardPbrMaterialProperties` | `direct` | `new` | — | reviewed escape-free standard PBR material properties | 13 | 60 | 32 | 0 | 0 | 92 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StarlingDocument` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#StarlingDocument` | broad serialization document | 2 | 3 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StarlingParsed` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#StarlingParsed` | broad serialization document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StarlingParseOptions` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#StarlingParseOptions` | broad serialization document | 1 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |

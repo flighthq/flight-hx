@@ -7,11 +7,11 @@ import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 
 class MaterialValidation {
   public static function clampStandardPbrMaterialProperties(out:StandardPbrMaterialProperties):StandardPbrMaterialProperties {
-    ((cast out : StandardPbrMaterialProperties).metallic = HxMath.min(1.0, HxMath.max(0.0, (cast out : StandardPbrMaterialProperties).metallic)));
-    ((cast out : StandardPbrMaterialProperties).roughness = HxMath.min(1.0, HxMath.max(0.0, (cast out : StandardPbrMaterialProperties).roughness)));
-    ((cast out : StandardPbrMaterialProperties).occlusionStrength = HxMath.min(1.0, HxMath.max(0.0, (cast out : StandardPbrMaterialProperties).occlusionStrength)));
-    ((cast out : StandardPbrMaterialProperties).emissiveStrength = HxMath.max(0.0, (cast out : StandardPbrMaterialProperties).emissiveStrength));
-    ((cast out : StandardPbrMaterialProperties).normalScale = HxMath.max(0.0, (cast out : StandardPbrMaterialProperties).normalScale));
+    (out.metallic = cast (HxMath.min(1.0, HxMath.max(0.0, out.metallic)) : Float));
+    (out.roughness = cast (HxMath.min(1.0, HxMath.max(0.0, out.roughness)) : Float));
+    (out.occlusionStrength = cast (HxMath.min(1.0, HxMath.max(0.0, out.occlusionStrength)) : Float));
+    (out.emissiveStrength = cast (HxMath.max(0.0, out.emissiveStrength) : Float));
+    (out.normalScale = cast (HxMath.max(0.0, out.normalScale) : Float));
     return cast out;
     return cast null;
   }

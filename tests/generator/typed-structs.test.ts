@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_561,
+      newAuditOnly: 1_556,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(445);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(450);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_561);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_556);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(43);
+    expect(newDirect).toHaveLength(48);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -325,6 +325,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'InputKeyboardData',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free input keyboard data',
+        }),
+        expect.objectContaining({
+          name: 'StandardPbrMaterialProperties',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free standard PBR material properties',
+        }),
+        expect.objectContaining({
+          name: 'ShadedMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free shaded material',
+        }),
+        expect.objectContaining({
+          name: 'SpecularGlossinessPbrMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free specular-glossiness PBR material',
+        }),
+        expect.objectContaining({
+          name: 'PhongMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Phong material',
+        }),
+        expect.objectContaining({
+          name: 'BlinnPhongMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Blinn-Phong material',
         }),
       ]),
     );
@@ -543,6 +568,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:771b0863ccf5de23a04937149a041c06baa00c7f1fdc857df31c9928a0953f0d',
         id: '@flighthq/types:interface#InputKeyboardData',
         purpose: 'reviewed escape-free input keyboard data',
+      },
+      {
+        declarationFingerprint: 'sha256:44fad9b5706a5df98cf0027a1603a725ef02feb70f58928c41700c9d56bd5de4',
+        id: '@flighthq/types:interface#StandardPbrMaterialProperties',
+        purpose: 'reviewed escape-free standard PBR material properties',
+      },
+      {
+        declarationFingerprint: 'sha256:f012cad97304e5b646c0f93382b021b88256802524f06f31c7c237f4904454f6',
+        id: '@flighthq/types:interface#ShadedMaterial',
+        purpose: 'reviewed escape-free shaded material',
+      },
+      {
+        declarationFingerprint: 'sha256:0507be5be486444087da384892e2e4cc933f986b96fce65dc8cae8f6304a069f',
+        id: '@flighthq/types:interface#SpecularGlossinessPbrMaterial',
+        purpose: 'reviewed escape-free specular-glossiness PBR material',
+      },
+      {
+        declarationFingerprint: 'sha256:64e437f2e5a0160d04bbc20e190fa582580cd6407ac92088e8b008e8c8d4aa9b',
+        id: '@flighthq/types:interface#PhongMaterial',
+        purpose: 'reviewed escape-free Phong material',
+      },
+      {
+        declarationFingerprint: 'sha256:1ad81b90e44e80bd524b045aac2be2bc6a069473749743258d893377441f0194',
+        id: '@flighthq/types:interface#BlinnPhongMaterial',
+        purpose: 'reviewed escape-free Blinn-Phong material',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -964,6 +1014,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const materialCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'BlinnPhongMaterial',
+            'PhongMaterial',
+            'ShadedMaterial',
+            'SpecularGlossinessPbrMaterial',
+            'StandardPbrMaterialProperties',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1004,22 +1067,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_561,
+      auditOnlySchemas: 1_556,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 18_197,
-      directSchemas: 443,
+      directAccesses: 18_483,
+      directSchemas: 448,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 12_469,
+      pendingAccesses: 12_183,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_561,
+      newAuditOnly: 1_556,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1047,7 +1110,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(18_197);
+    expect(report.summary.directAccesses).toBe(18_483);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -1355,6 +1418,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(inputStateCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'StandardPbrMaterialProperties',
+        92,
+        'sha256:44fad9b5706a5df98cf0027a1603a725ef02feb70f58928c41700c9d56bd5de4',
+        'reviewed escape-free standard PBR material properties',
+      ],
+      [
+        'ShadedMaterial',
+        56,
+        'sha256:f012cad97304e5b646c0f93382b021b88256802524f06f31c7c237f4904454f6',
+        'reviewed escape-free shaded material',
+      ],
+      [
+        'SpecularGlossinessPbrMaterial',
+        52,
+        'sha256:0507be5be486444087da384892e2e4cc933f986b96fce65dc8cae8f6304a069f',
+        'reviewed escape-free specular-glossiness PBR material',
+      ],
+      [
+        'PhongMaterial',
+        43,
+        'sha256:64e437f2e5a0160d04bbc20e190fa582580cd6407ac92088e8b008e8c8d4aa9b',
+        'reviewed escape-free Phong material',
+      ],
+      [
+        'BlinnPhongMaterial',
+        43,
+        'sha256:1ad81b90e44e80bd524b045aac2be2bc6a069473749743258d893377441f0194',
+        'reviewed escape-free Blinn-Phong material',
+      ],
+    ] as const) {
+      expect(materialCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -1684,6 +1789,29 @@ describe('typed struct analysis', () => {
     ]) {
       expect(provenanceById.has(structuralInputId)).toBe(false);
     }
+    for (const materialId of [
+      '@flighthq/types:interface#ShadedMaterial',
+      '@flighthq/types:interface#StandardPbrMaterialProperties',
+    ]) {
+      expect(classAuditById.get(materialId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer'],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.has(materialId)).toBe(false);
+    }
+    for (const materialId of [
+      '@flighthq/types:interface#BlinnPhongMaterial',
+      '@flighthq/types:interface#PhongMaterial',
+      '@flighthq/types:interface#SpecularGlossinessPbrMaterial',
+    ]) {
+      expect(classAuditById.get(materialId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer'],
+        observabilityReasons: ['optional-omission'],
+      });
+      expect(provenanceById.has(materialId)).toBe(false);
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -1829,6 +1957,20 @@ describe('typed struct analysis', () => {
       expect(generatedTextInput).not.toMatch(/\(cast state : TextInputState\)\./u);
       expect(generatedTextInput).not.toMatch(/_Runtime\.field\(state,/u);
     }
+    const generatedPbrMaterials = readFileSync('generated/flighthq/materials/PbrMaterials.hx', 'utf8');
+    expect(generatedPbrMaterials).not.toMatch(
+      /\(cast (?:material|out|source|target) : (?:SpecularGlossinessPbrMaterial|StandardPbrMaterialProperties)\)\./u,
+    );
+    expect(generatedPbrMaterials).not.toMatch(/_Runtime\.field\((?:material|out|source|target),/u);
+    const generatedClassicMaterials = readFileSync('generated/flighthq/materials/ClassicMaterials.hx', 'utf8');
+    expect(generatedClassicMaterials).not.toMatch(/\(cast material : (?:BlinnPhongMaterial|PhongMaterial)\)\./u);
+    expect(generatedClassicMaterials).not.toMatch(/_Runtime\.field\(material,/u);
+    const generatedShadedMaterialRenderer = readFileSync(
+      'generated/flighthq/scene3dGl/ShadedGlMeshMaterialRenderer.hx',
+      'utf8',
+    );
+    expect(generatedShadedMaterialRenderer).not.toMatch(/\(cast material : ShadedMaterial\)\./u);
+    expect(generatedShadedMaterialRenderer).not.toMatch(/_Runtime\.field\(material,/u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

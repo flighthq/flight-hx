@@ -243,6 +243,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#InputKeyboardData',
     purpose: 'reviewed escape-free input keyboard data',
   },
+  {
+    declarationFingerprint: 'sha256:44fad9b5706a5df98cf0027a1603a725ef02feb70f58928c41700c9d56bd5de4',
+    id: '@flighthq/types:interface#StandardPbrMaterialProperties',
+    purpose: 'reviewed escape-free standard PBR material properties',
+  },
+  {
+    declarationFingerprint: 'sha256:f012cad97304e5b646c0f93382b021b88256802524f06f31c7c237f4904454f6',
+    id: '@flighthq/types:interface#ShadedMaterial',
+    purpose: 'reviewed escape-free shaded material',
+  },
+  {
+    declarationFingerprint: 'sha256:0507be5be486444087da384892e2e4cc933f986b96fce65dc8cae8f6304a069f',
+    id: '@flighthq/types:interface#SpecularGlossinessPbrMaterial',
+    purpose: 'reviewed escape-free specular-glossiness PBR material',
+  },
+  {
+    declarationFingerprint: 'sha256:64e437f2e5a0160d04bbc20e190fa582580cd6407ac92088e8b008e8c8d4aa9b',
+    id: '@flighthq/types:interface#PhongMaterial',
+    purpose: 'reviewed escape-free Phong material',
+  },
+  {
+    declarationFingerprint: 'sha256:1ad81b90e44e80bd524b045aac2be2bc6a069473749743258d893377441f0194',
+    id: '@flighthq/types:interface#BlinnPhongMaterial',
+    purpose: 'reviewed escape-free Blinn-Phong material',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(
