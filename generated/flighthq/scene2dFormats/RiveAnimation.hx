@@ -236,15 +236,15 @@ class RiveAnimation {
     var rebuild:Null<Void->Void> = cast _Runtime.UNDEFINED;
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
     var slot:RiveProperty = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast ((cast objectIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast objectIndex : Float) >= (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) : Bool) || (cast ((cast propertyKey : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    object = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), objectIndex);
+    if ((cast ((cast ((cast ((cast objectIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast objectIndex : Float) >= (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) : Bool) || (cast ((cast propertyKey : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    object = flighthq._internal._StaticIndex.readArray(artboard.objects, objectIndex);
     rebuild = ((cast rebuilds : flighthq._internal._Map<Float, Void->Void>).get((cast RiveAnimation.findRiveShapeOwner__riveAnimation(({ final __callArgument66:Dynamic = artboard; __callArgument66; }), (cast objectIndex : Float)) : Float)));
     if ((cast _Runtime.strictEquals(rebuild, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-    property = _Runtime.find(object.properties, function(candidate:RiveProperty, __unused0:Float, __unused1:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, propertyKey));
+    property = _Runtime.find(object.properties, function(candidate:RiveProperty, __unused0:Float, __unused1:Array<RiveProperty>):Bool return _Runtime.strictEquals(candidate.key, propertyKey));
     slot = _Runtime.coalesce(property, function():Dynamic return cast { key: propertyKey, type: defaultType, value: 0.0 });
     if ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(object.properties, 'push', cast ([slot] : Array<Dynamic>)); }
     return cast { riveApply: function(sample:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
-      ((cast slot : RiveProperty).value = ((cast _Runtime.strictEquals((cast slot : RiveProperty).type, (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Color) : Bool) ? (cast (cast RiveAnimation.packRiveColorSample__riveAnimation(({ final __callArgument67:Dynamic = sample; __callArgument67; })) : Float) : Dynamic) : (cast flighthq._internal._StaticIndex.readArrayOrFloat32Array(sample, 0.0) : Dynamic)));
+      (slot.value = cast (((cast _Runtime.strictEquals(slot.type, (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Color) : Bool) ? (cast (cast RiveAnimation.packRiveColorSample__riveAnimation(({ final __callArgument67:Dynamic = sample; __callArgument67; })) : Float) : Dynamic) : (cast flighthq._internal._StaticIndex.readArrayOrFloat32Array(sample, 0.0) : Dynamic)) : RiveValue));
       ((cast RiveAnimation._pendingRebuilds__riveAnimation : flighthq._internal._Set<Void->Void>).add(rebuild));
     } };
     return cast null;
@@ -272,8 +272,8 @@ class RiveAnimation {
     var current:Float = cast _Runtime.UNDEFINED;
     current = index;
     while ((cast ((cast current : Float) > (cast 0.0 : Float)) : Bool)) {
-      if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), current) : { var typeKey:Float; }).typeKey : Float), (cast RiveAnimation.RIVE_SHAPE_TYPE_KEY__riveAnimation : Float)) : Bool) : Bool)) { return cast current; }
-      (current = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast current : Float)) : Dynamic));
+      if ((cast (cast isRiveCoreTypeDerivedFrom((cast (cast flighthq._internal._StaticIndex.readArray(artboard.objects, current) : { var typeKey:Float; }).typeKey : Float), (cast RiveAnimation.RIVE_SHAPE_TYPE_KEY__riveAnimation : Float)) : Bool) : Bool)) { return cast current; }
+      (current = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast current : Float)) : Dynamic));
     }
     return cast -1.0;
     return cast null;
@@ -341,15 +341,15 @@ class RiveAnimation {
 
   public static function readRiveNumber__riveAnimation(source:RiveCoreObject, key:Float, fallback:Float):Float {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused2:Float, __unused3:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
-    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused2:Float, __unused3:Array<RiveProperty>):Bool return _Runtime.strictEquals(candidate.key, key));
+    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : { var value:RiveValue; }).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : { var value:RiveValue; }).value : Dynamic));
     return cast null;
   }
 
   public static function readRiveText__riveAnimation(source:RiveCoreObject, key:Float, fallback:String):String {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused4:Float, __unused5:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
-    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'string') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused4:Float, __unused5:Array<RiveProperty>):Bool return _Runtime.strictEquals(candidate.key, key));
+    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : { var value:RiveValue; }).value), 'string') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : { var value:RiveValue; }).value : Dynamic));
     return cast null;
   }
 

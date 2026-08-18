@@ -40167,7 +40167,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 101,
       "fields": 4,
       "id": "@flighthq/types:interface#RiveArtboardGraph",
       "name": "RiveArtboardGraph",
@@ -40472,7 +40472,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 6,
       "fields": 2,
       "id": "@flighthq/types:interface#RiveDocumentImportResult",
       "name": "RiveDocumentImportResult",
@@ -40521,7 +40521,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 6,
       "fields": 6,
       "id": "@flighthq/types:interface#RiveFileAsset",
       "name": "RiveFileAsset",
@@ -40583,7 +40583,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 15,
       "fields": 4,
       "id": "@flighthq/types:interface#RivePathRecord",
       "name": "RivePathRecord",
@@ -40652,7 +40652,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 77,
       "fields": 3,
       "id": "@flighthq/types:interface#RiveProperty",
       "name": "RiveProperty",

@@ -193,6 +193,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Timeline',
     purpose: 'reviewed escape-free timeline state',
   },
+  {
+    declarationFingerprint: 'sha256:44aafe6b8ad37be7a692fd5ee540a56e2b48628f12925791a38e546b9f3e5987',
+    id: '@flighthq/types:interface#RiveArtboardGraph',
+    purpose: 'reviewed escape-free Rive artboard graph',
+  },
+  {
+    declarationFingerprint: 'sha256:33b8ffeb2ffb3539affbe33b3665d4d8946af0486ae79f57a1ac3062d75617c5',
+    id: '@flighthq/types:interface#RiveProperty',
+    purpose: 'reviewed escape-free Rive property',
+  },
+  {
+    declarationFingerprint: 'sha256:c9e4515a60d200d26308fa2a4d98c62ed83db38350d9545f6ef795ad4dd0edc7',
+    id: '@flighthq/types:interface#RivePathRecord',
+    purpose: 'reviewed escape-free Rive path record',
+  },
+  {
+    declarationFingerprint: 'sha256:e705df1c2ba082092310edcd7d71a4484273ee3cfd2d09ba1a644921b06566be',
+    id: '@flighthq/types:interface#RiveFileAsset',
+    purpose: 'reviewed escape-free Rive file asset',
+  },
+  {
+    declarationFingerprint: 'sha256:c4246370c176d4205f5e869630515aeaf9affbf5d1a594c50a0c8d82e0d371d0',
+    id: '@flighthq/types:interface#RiveDocumentImportResult',
+    purpose: 'reviewed escape-free Rive document import result',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

@@ -270580,9 +270580,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 101,
+        "directAccesses": 101,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -270628,7 +270628,7 @@
       },
       "name": "RiveArtboardGraph",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Rive artboard graph",
       "reasons": [],
       "source": "upstream/packages/types/src/RiveDocument.ts",
       "sourceProvenance": {
@@ -270938,9 +270938,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -270970,7 +270970,7 @@
       },
       "name": "RiveDocumentImportResult",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Rive document import result",
       "reasons": [],
       "source": "upstream/packages/types/src/RiveDocument.ts",
       "sourceProvenance": {
@@ -271111,9 +271111,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -271175,7 +271175,7 @@
       },
       "name": "RiveFileAsset",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Rive file asset",
       "reasons": [],
       "source": "upstream/packages/types/src/RiveDocument.ts",
       "sourceProvenance": {
@@ -271297,9 +271297,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 15,
+        "directAccesses": 15,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -271345,7 +271345,7 @@
       },
       "name": "RivePathRecord",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Rive path record",
       "reasons": [],
       "source": "upstream/packages/types/src/RiveDocument.ts",
       "sourceProvenance": {
@@ -271367,9 +271367,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 77,
+        "directAccesses": 77,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -271407,7 +271407,7 @@
       },
       "name": "RiveProperty",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Rive property",
       "reasons": [],
       "source": "upstream/packages/types/src/RiveDocument.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1571,
+      "newAuditOnly": 1566,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1571,
+    "auditOnlySchemas": 1566,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 17704,
-    "directSchemas": 433,
+    "directAccesses": 17909,
+    "directSchemas": 438,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 12962,
+    "pendingAccesses": 12757,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

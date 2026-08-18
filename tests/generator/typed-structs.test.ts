@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_571,
+      newAuditOnly: 1_566,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(435);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(440);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_571);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_566);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(33);
+    expect(newDirect).toHaveLength(38);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -275,6 +275,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'Timeline',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free timeline state',
+        }),
+        expect.objectContaining({
+          name: 'RiveArtboardGraph',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Rive artboard graph',
+        }),
+        expect.objectContaining({
+          name: 'RiveProperty',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Rive property',
+        }),
+        expect.objectContaining({
+          name: 'RivePathRecord',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Rive path record',
+        }),
+        expect.objectContaining({
+          name: 'RiveFileAsset',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Rive file asset',
+        }),
+        expect.objectContaining({
+          name: 'RiveDocumentImportResult',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Rive document import result',
         }),
       ]),
     );
@@ -443,6 +468,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:aaf49d1e409fd3c60824a648cf8edd8e53ad11411923a0b5ab74c34be4da89a6',
         id: '@flighthq/types:interface#Timeline',
         purpose: 'reviewed escape-free timeline state',
+      },
+      {
+        declarationFingerprint: 'sha256:44aafe6b8ad37be7a692fd5ee540a56e2b48628f12925791a38e546b9f3e5987',
+        id: '@flighthq/types:interface#RiveArtboardGraph',
+        purpose: 'reviewed escape-free Rive artboard graph',
+      },
+      {
+        declarationFingerprint: 'sha256:33b8ffeb2ffb3539affbe33b3665d4d8946af0486ae79f57a1ac3062d75617c5',
+        id: '@flighthq/types:interface#RiveProperty',
+        purpose: 'reviewed escape-free Rive property',
+      },
+      {
+        declarationFingerprint: 'sha256:c9e4515a60d200d26308fa2a4d98c62ed83db38350d9545f6ef795ad4dd0edc7',
+        id: '@flighthq/types:interface#RivePathRecord',
+        purpose: 'reviewed escape-free Rive path record',
+      },
+      {
+        declarationFingerprint: 'sha256:e705df1c2ba082092310edcd7d71a4484273ee3cfd2d09ba1a644921b06566be',
+        id: '@flighthq/types:interface#RiveFileAsset',
+        purpose: 'reviewed escape-free Rive file asset',
+      },
+      {
+        declarationFingerprint: 'sha256:c4246370c176d4205f5e869630515aeaf9affbf5d1a594c50a0c8d82e0d371d0',
+        id: '@flighthq/types:interface#RiveDocumentImportResult',
+        purpose: 'reviewed escape-free Rive document import result',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -846,6 +896,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const riveDocumentCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['RiveArtboardGraph', 'RiveDocumentImportResult', 'RiveFileAsset', 'RivePathRecord', 'RiveProperty'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -886,22 +945,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_571,
+      auditOnlySchemas: 1_566,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 17_704,
-      directSchemas: 433,
+      directAccesses: 17_909,
+      directSchemas: 438,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 12_962,
+      pendingAccesses: 12_757,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_571,
+      newAuditOnly: 1_566,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -929,7 +988,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(17_704);
+    expect(report.summary.directAccesses).toBe(17_909);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -1153,6 +1212,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(animationTimelineCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'RiveArtboardGraph',
+        101,
+        'sha256:44aafe6b8ad37be7a692fd5ee540a56e2b48628f12925791a38e546b9f3e5987',
+        'reviewed escape-free Rive artboard graph',
+      ],
+      [
+        'RiveProperty',
+        77,
+        'sha256:33b8ffeb2ffb3539affbe33b3665d4d8946af0486ae79f57a1ac3062d75617c5',
+        'reviewed escape-free Rive property',
+      ],
+      [
+        'RivePathRecord',
+        15,
+        'sha256:c9e4515a60d200d26308fa2a4d98c62ed83db38350d9545f6ef795ad4dd0edc7',
+        'reviewed escape-free Rive path record',
+      ],
+      [
+        'RiveFileAsset',
+        6,
+        'sha256:e705df1c2ba082092310edcd7d71a4484273ee3cfd2d09ba1a644921b06566be',
+        'reviewed escape-free Rive file asset',
+      ],
+      [
+        'RiveDocumentImportResult',
+        6,
+        'sha256:c4246370c176d4205f5e869630515aeaf9affbf5d1a594c50a0c8d82e0d371d0',
+        'reviewed escape-free Rive document import result',
+      ],
+    ] as const) {
+      expect(riveDocumentCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -1423,6 +1524,23 @@ describe('typed struct analysis', () => {
       blockerReasons: ['container-transfer'],
       closed: false,
     });
+    for (const riveDocumentId of [
+      '@flighthq/types:interface#RiveArtboardGraph',
+      '@flighthq/types:interface#RiveDocumentImportResult',
+      '@flighthq/types:interface#RiveFileAsset',
+      '@flighthq/types:interface#RivePathRecord',
+      '@flighthq/types:interface#RiveProperty',
+    ]) {
+      expect(classAuditById.get(riveDocumentId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.get(riveDocumentId)?.nominalIdentity).toEqual({
+        blockerReasons: [],
+        closed: true,
+      });
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -1536,6 +1654,20 @@ describe('typed struct analysis', () => {
     const timeline = readFileSync('generated/flighthq/timeline/Timeline.hx', 'utf8');
     expect(timeline).not.toMatch(/\(cast timeline : (?:flighthq\.types\.)?Timeline\)\./u);
     expect(timeline).not.toMatch(/_Runtime\.field\(timeline,/u);
+    const riveObjectGraph = readFileSync('generated/flighthq/scene2dFormats/RiveObjectGraph.hx', 'utf8');
+    expect(riveObjectGraph).not.toMatch(/\(cast artboard : RiveArtboardGraph\)\./u);
+    expect(riveObjectGraph).not.toMatch(/_Runtime\.field\(artboard,/u);
+    expect(riveObjectGraph).not.toMatch(/\(cast candidate : RiveProperty\)\./u);
+    const riveAssets = readFileSync('generated/flighthq/scene2dFormats/RiveAssets.hx', 'utf8');
+    expect(riveAssets).not.toMatch(/\(cast candidate : RiveProperty\)\./u);
+    expect(riveAssets).not.toMatch(/: RiveFileAsset\)\.(?:bytes|cdnBaseUrl|height|kind|name|width)/u);
+    const riveShapePaint = readFileSync('generated/flighthq/scene2dFormats/RiveShapePaint.hx', 'utf8');
+    expect(riveShapePaint).not.toMatch(/\(cast record : RivePathRecord\)\./u);
+    expect(riveShapePaint).not.toMatch(/_Runtime\.field\(record,/u);
+    const riveScene2DDocument = readFileSync('generated/flighthq/scene2dFormats/RiveScene2DDocument.hx', 'utf8');
+    expect(riveScene2DDocument).not.toMatch(/\(cast imported : RiveDocumentImportResult\)\./u);
+    expect(riveScene2DDocument).not.toMatch(/_Runtime\.field\(imported,/u);
+    expect(riveScene2DDocument).not.toMatch(/\(cast asset : RiveFileAsset\)\./u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

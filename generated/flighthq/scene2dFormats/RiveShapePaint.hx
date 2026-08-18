@@ -73,7 +73,7 @@ class RiveShapePaint {
 
   public static function appendRivePaths__riveShapePaint(shape:Shape, paths:Array<RivePathRecord>, winding:Null<String>):Void {
     for (path in _Runtime.iterable(paths)) {
-      appendShapePath(({ final __callArgument21:Dynamic = shape; __callArgument21; }), _Runtime.slice((cast path : RivePathRecord).commands, 0, null), _Runtime.slice((cast path : RivePathRecord).data, 0, null), ({ final __callArgument22:Dynamic = _Runtime.coalesce(winding, function():Dynamic return cast (cast path : RivePathRecord).winding); __callArgument22; }));
+      appendShapePath(({ final __callArgument21:Dynamic = shape; __callArgument21; }), _Runtime.slice(path.commands, 0, null), _Runtime.slice(path.data, 0, null), ({ final __callArgument22:Dynamic = _Runtime.coalesce(winding, function():Dynamic return cast path.winding); __callArgument22; }));
     }
   }
 
@@ -106,7 +106,7 @@ class RiveShapePaint {
         RiveShapePaint.appendRiveDashContour__riveShapePaint(({ final __callArgument37:Dynamic = contour; __callArgument37; }), (cast dash : Dynamic), ({ final __callArgument38:Dynamic = commands; __callArgument38; }), ({ final __callArgument39:Dynamic = data; __callArgument39; }));
       }
       if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { continue; }
-      _Runtime.callProperty(results, 'push', cast ([{ commands: commands, data: data, pathIndex: (cast record : RivePathRecord).pathIndex, winding: (cast record : RivePathRecord).winding }] : Array<Dynamic>));
+      _Runtime.callProperty(results, 'push', cast ([{ commands: commands, data: data, pathIndex: record.pathIndex, winding: record.winding }] : Array<Dynamic>));
     }
     return cast results;
     return cast null;
@@ -267,9 +267,9 @@ class RiveShapePaint {
       var start:Float = HxMath.max(0.0, ((windowStart - from) / span));
       var end:Float = HxMath.min(1.0, ((windowEnd - from) / span));
       if ((cast ((cast end : Float) <= (cast start : Float)) : Bool)) { continue; }
-      var trimmed:Path = (cast createPath((cast record : RivePathRecord).winding) : Path);
+      var trimmed:Path = (cast createPath(record.winding) : Path);
       dashPath(({ final __callArgument58:Dynamic = path; __callArgument58; }), ({ final __callArgument59:Dynamic = cast ([((end - start) * length), ((1.0 - (end - start)) * length)] : Array<Dynamic>); __callArgument59; }), (cast (start * length) : Float), ({ final __callArgument60:Dynamic = trimmed; __callArgument60; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-      _Runtime.callProperty(results, 'push', cast ([{ commands: _Runtime.slice((cast trimmed : Path).commands, 0, null), data: _Runtime.slice((cast trimmed : Path).data, 0, null), pathIndex: (cast record : RivePathRecord).pathIndex, winding: (cast trimmed : Path).winding }] : Array<Dynamic>));
+      _Runtime.callProperty(results, 'push', cast ([{ commands: _Runtime.slice((cast trimmed : Path).commands, 0, null), data: _Runtime.slice((cast trimmed : Path).data, 0, null), pathIndex: record.pathIndex, winding: (cast trimmed : Path).winding }] : Array<Dynamic>));
     }
     return cast results;
     return cast null;
@@ -285,11 +285,11 @@ class RiveShapePaint {
 
   public static function toRivePath__riveShapePaint(record:RivePathRecord):Path {
     var path:Path = cast _Runtime.UNDEFINED;
-    path = (cast createPath((cast record : RivePathRecord).winding) : Path);
-    for (command in _Runtime.iterable((cast record : RivePathRecord).commands)) {
+    path = (cast createPath(record.winding) : Path);
+    for (command in _Runtime.iterable(record.commands)) {
       _Runtime.callProperty((cast path : Path).commands, 'push', cast ([command] : Array<Dynamic>));
     }
-    for (value in _Runtime.iterable((cast record : RivePathRecord).data)) {
+    for (value in _Runtime.iterable(record.data)) {
       _Runtime.callProperty((cast path : Path).data, 'push', cast ([value] : Array<Dynamic>));
     }
     return cast path;
@@ -301,9 +301,9 @@ class RiveShapePaint {
     effects = (cast cast ([] : Array<Dynamic>));
     {
       var index:Float = (paintIndex + 1.0);
-      while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), paintIndex) : Bool)) { index++; continue; }
-        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
+      while ((cast ((cast index : Float) < (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float)), paintIndex) : Bool)) { index++; continue; }
+        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
         if ((cast _Runtime.strictEquals(object.typeKey, RiveShapePaint.RIVE_TRIM_PATH__riveShapePaint) : Bool)) {
           _Runtime.callProperty(effects, 'push', cast ([{ kind: 'trim', trim: { end: (cast RiveShapePaint.readRiveNumber__riveShapePaint(({ final __callArgument65:Dynamic = object; __callArgument65; }), (cast RiveShapePaint.RIVE_TRIM_END__riveShapePaint : Float), (cast 0.0 : Float)) : Float), offset: (cast RiveShapePaint.readRiveNumber__riveShapePaint(({ final __callArgument66:Dynamic = object; __callArgument66; }), (cast RiveShapePaint.RIVE_TRIM_OFFSET__riveShapePaint : Float), (cast 0.0 : Float)) : Float), sequential: _Runtime.strictEquals((cast RiveShapePaint.readRiveNumber__riveShapePaint(({ final __callArgument67:Dynamic = object; __callArgument67; }), (cast RiveShapePaint.RIVE_TRIM_MODE__riveShapePaint : Float), (cast 0.0 : Float)) : Float), RiveShapePaint.RIVE_TRIM_SEQUENTIAL__riveShapePaint), start: (cast RiveShapePaint.readRiveNumber__riveShapePaint(({ final __callArgument68:Dynamic = object; __callArgument68; }), (cast RiveShapePaint.RIVE_TRIM_START__riveShapePaint : Float), (cast 0.0 : Float)) : Float) } }] : Array<Dynamic>));
           index++;
@@ -313,9 +313,9 @@ class RiveShapePaint {
         var lengths:Array<RiveDashLength__riveShapePaint> = (cast cast ([] : Array<Dynamic>));
         {
           var child:Float = (index + 1.0);
-          while ((cast ((cast child : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-            if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast child : Float)), index) : Bool)) { child++; continue; }
-            var dash:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), child);
+          while ((cast ((cast child : Float) < (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) {
+            if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast child : Float)), index) : Bool)) { child++; continue; }
+            var dash:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, child);
             if ((cast !_Runtime.strictEquals(dash.typeKey, RiveShapePaint.RIVE_DASH__riveShapePaint) : Bool)) { child++; continue; }
             _Runtime.callProperty(lengths, 'push', cast ([{ percentage: (cast RiveShapePaint.readRiveFlag__riveShapePaint(({ final __callArgument69:Dynamic = dash; __callArgument69; }), (cast RiveShapePaint.RIVE_DASH_LENGTH_IS_PERCENTAGE__riveShapePaint : Float), (cast false : Bool)) : Bool), value: (cast RiveShapePaint.readRiveNumber__riveShapePaint(({ final __callArgument70:Dynamic = dash; __callArgument70; }), (cast RiveShapePaint.RIVE_DASH_LENGTH__riveShapePaint : Float), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
             child++;
@@ -334,9 +334,9 @@ class RiveShapePaint {
     paints = (cast cast ([] : Array<Dynamic>));
     {
       var index:Float = (shapeIndex + 1.0);
-      while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), shapeIndex) : Bool)) { index++; continue; }
-        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
+      while ((cast ((cast index : Float) < (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float)), shapeIndex) : Bool)) { index++; continue; }
+        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveShapePaint.RIVE_SHAPE_PAINT__riveShapePaint : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
         _Runtime.callProperty(paints, 'push', cast ([(cast RiveShapePaint.createRivePaint__riveShapePaint(({ final __callArgument73:Dynamic = object; __callArgument73; }), ({ final __callArgument74:Dynamic = artboard; __callArgument74; }), (cast index : Float)) : RivePaint__riveShapePaint)] : Array<Dynamic>));
         index++;
@@ -359,9 +359,9 @@ class RiveShapePaint {
   public static function applyRivePaintMutator__riveShapePaint(paint:RivePaint__riveShapePaint, artboard:RiveArtboardGraph, paintIndex:Float):Void {
     {
       var index:Float = (paintIndex + 1.0);
-      while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), paintIndex) : Bool)) { index++; continue; }
-        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
+      while ((cast ((cast index : Float) < (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float)), paintIndex) : Bool)) { index++; continue; }
+        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveShapePaint.RIVE_SOLID_COLOR__riveShapePaint : Float)) : Bool) : Bool)) {
           var packed:Float = (cast RiveShapePaint.readRiveNumber__riveShapePaint(({ final __callArgument82:Dynamic = object; __callArgument82; }), (cast RiveShapePaint.RIVE_SOLID_COLOR_VALUE__riveShapePaint : Float), (cast RiveShapePaint.RIVE_DEFAULT_SOLID_COLOR__riveShapePaint : Float)) : Float);
           ((cast paint : RivePaint__riveShapePaint).color = (_Runtime.toInt32(packed) & 16777215));
@@ -384,9 +384,9 @@ class RiveShapePaint {
     gradient = (cast { alphas: cast ([] : Array<Dynamic>), colors: cast ([] : Array<Dynamic>), endX: (cast RiveShapePaint.readRiveNumber__riveShapePaint(({ final __callArgument86:Dynamic = source; __callArgument86; }), (cast RiveShapePaint.RIVE_GRADIENT_END_X__riveShapePaint : Float), (cast 0.0 : Float)) : Float), endY: (cast RiveShapePaint.readRiveNumber__riveShapePaint(({ final __callArgument87:Dynamic = source; __callArgument87; }), (cast RiveShapePaint.RIVE_GRADIENT_END_Y__riveShapePaint : Float), (cast 0.0 : Float)) : Float), radial: (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveShapePaint.RIVE_RADIAL_GRADIENT__riveShapePaint : Float)) : Bool), ratios: cast ([] : Array<Dynamic>), startX: (cast RiveShapePaint.readRiveNumber__riveShapePaint(({ final __callArgument88:Dynamic = source; __callArgument88; }), (cast RiveShapePaint.RIVE_GRADIENT_START_X__riveShapePaint : Float), (cast 0.0 : Float)) : Float), startY: (cast RiveShapePaint.readRiveNumber__riveShapePaint(({ final __callArgument89:Dynamic = source; __callArgument89; }), (cast RiveShapePaint.RIVE_GRADIENT_START_Y__riveShapePaint : Float), (cast 0.0 : Float)) : Float) });
     {
       var stop:Float = (index + 1.0);
-      while ((cast ((cast stop : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast stop : Float)), index) : Bool)) { stop++; continue; }
-        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), stop);
+      while ((cast ((cast stop : Float) < (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast stop : Float)), index) : Bool)) { stop++; continue; }
+        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, stop);
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveShapePaint.RIVE_GRADIENT_STOP__riveShapePaint : Float)) : Bool) : Bool) : Bool)) { stop++; continue; }
         var packed:Float = (cast RiveShapePaint.readRiveNumber__riveShapePaint(({ final __callArgument90:Dynamic = object; __callArgument90; }), (cast RiveShapePaint.RIVE_GRADIENT_STOP_COLOR__riveShapePaint : Float), (cast RiveShapePaint.RIVE_DEFAULT_STOP_COLOR__riveShapePaint : Float)) : Float);
         _Runtime.callProperty((cast gradient : RiveGradientPaint__riveShapePaint).colors, 'push', cast ([(_Runtime.toInt32(packed) & 16777215)] : Array<Dynamic>));
@@ -431,15 +431,15 @@ class RiveShapePaint {
 
   public static function readRiveNumber__riveShapePaint(source:RiveCoreObject, key:Float, fallback:Float):Float {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused11:Float, __unused12:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
-    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused11:Float, __unused12:Array<RiveProperty>):Bool return _Runtime.strictEquals(candidate.key, key));
+    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : { var value:RiveValue; }).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : { var value:RiveValue; }).value : Dynamic));
     return cast null;
   }
 
   public static function readRiveFlag__riveShapePaint(source:RiveCoreObject, key:Float, fallback:Bool):Bool {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused13:Float, __unused14:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
-    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast !_Runtime.strictEquals((cast property : RiveProperty).value, 0.0) : Dynamic));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused13:Float, __unused14:Array<RiveProperty>):Bool return _Runtime.strictEquals(candidate.key, key));
+    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : { var value:RiveValue; }).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast !_Runtime.strictEquals((cast property : { var value:RiveValue; }).value, 0.0) : Dynamic));
     return cast null;
   }
 

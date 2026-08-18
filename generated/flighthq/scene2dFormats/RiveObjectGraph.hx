@@ -12,6 +12,7 @@ import flighthq.types.RiveDocument.RiveArtboardGraph;
 import flighthq.types.RiveDocument.RiveCoreObject;
 import flighthq.types.RiveDocument.RiveObjectGraph;
 import flighthq.types.RiveDocument.RiveProperty;
+import flighthq.types.RiveDocument.RiveValue;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 class RiveObjectGraph {
@@ -26,7 +27,7 @@ class RiveObjectGraph {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(document, 'objects'), index);
         if ((cast _Runtime.strictEquals(object.typeKey, RiveObjectGraph.RIVE_ARTBOARD_TYPE_KEY__riveObjectGraph) : Bool)) {
           (current = cast (cast ([object] : Array<Dynamic>) : Dynamic));
-          if ((cast ((cast _Runtime.field(artboards, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast flighthq._internal._StaticIndex.readArray(artboards, _Runtime.subtractNumbers(_Runtime.field(artboards, 'length'), 1.0)) : RiveArtboardGraph).streamEnd = index); }
+          if ((cast ((cast _Runtime.field(artboards, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast flighthq._internal._StaticIndex.readArray(artboards, _Runtime.subtractNumbers(_Runtime.field(artboards, 'length'), 1.0)) : { var streamEnd:Float; }).streamEnd = cast (index : Float)); }
           _Runtime.callProperty(artboards, 'push', cast ([{ objects: current, parentIndices: cast ([] : Array<Dynamic>), streamEnd: _Runtime.field(_Runtime.field(document, 'objects'), 'length'), streamStart: index }] : Array<Dynamic>));
           index++;
           continue;
@@ -46,12 +47,12 @@ class RiveObjectGraph {
   public static function resolveRiveParentIndices__riveObjectGraph(artboard:RiveArtboardGraph, diagnostics:Null<Array<ImportDiagnostic>>):Void {
     var count:Float = cast _Runtime.UNDEFINED;
     var parents:Array<Float> = cast _Runtime.UNDEFINED;
-    count = _Runtime.field((cast artboard : RiveArtboardGraph).objects, 'length');
-    parents = (cast artboard : RiveArtboardGraph).parentIndices;
+    count = _Runtime.field(artboard.objects, 'length');
+    parents = artboard.parentIndices;
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast count : Float)) : Bool)) {
-        _Runtime.callProperty(parents, 'push', cast ([((cast _Runtime.strictEquals(index, 0.0) : Bool) ? (cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph : Dynamic) : (cast (cast RiveObjectGraph.readRiveParentIndex__riveObjectGraph(flighthq._internal._StaticIndex.readArray((cast artboard : RiveArtboardGraph).objects, index), (cast count : Float), (cast index : Float), ({ final __callArgument4:Dynamic = diagnostics; __callArgument4; })) : Float) : Dynamic))] : Array<Dynamic>));
+        _Runtime.callProperty(parents, 'push', cast ([((cast _Runtime.strictEquals(index, 0.0) : Bool) ? (cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph : Dynamic) : (cast (cast RiveObjectGraph.readRiveParentIndex__riveObjectGraph(flighthq._internal._StaticIndex.readArray(artboard.objects, index), (cast count : Float), (cast index : Float), ({ final __callArgument4:Dynamic = diagnostics; __callArgument4; })) : Float) : Dynamic))] : Array<Dynamic>));
         index++;
       }
     }
@@ -69,12 +70,12 @@ class RiveObjectGraph {
   public static function readRiveParentIndex__riveObjectGraph(object:RiveCoreObject, count:Float, index:Float, diagnostics:Null<Array<ImportDiagnostic>>):Float {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
     var parent:Float = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(object.properties, function(candidate:RiveProperty, __unused0:Float, __unused1:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, RiveObjectGraph.RIVE_PARENT_ID_PROPERTY_KEY__riveObjectGraph));
+    property = _Runtime.find(object.properties, function(candidate:RiveProperty, __unused0:Float, __unused1:Array<RiveProperty>):Bool return _Runtime.strictEquals(candidate.key, RiveObjectGraph.RIVE_PARENT_ID_PROPERTY_KEY__riveObjectGraph));
     if ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph(({ final __callArgument8:Dynamic = diagnostics; __callArgument8; }), (cast 'rive.component-without-parent' : String), ({ final __callArgument9:Dynamic = { index: index }; __callArgument9; }));
       return cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph;
     }
-    parent = (cast (cast property : RiveProperty).value : Float);
+    parent = (cast (cast property : { var value:RiveValue; }).value : Float);
     if ((cast ((cast ((cast _Runtime.strictEquals(parent, index) : Bool) || (cast ((cast parent : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast parent : Float) >= (cast count : Float)) : Bool)) : Bool)) {
       RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph(({ final __callArgument10:Dynamic = diagnostics; __callArgument10; }), (cast 'rive.unresolved-parent' : String), ({ final __callArgument11:Dynamic = { index: index, parent: parent }; __callArgument11; }));
       return cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph;

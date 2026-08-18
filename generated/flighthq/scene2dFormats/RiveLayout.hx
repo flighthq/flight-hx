@@ -51,10 +51,10 @@ class RiveLayout {
     placements = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var index:Float = 1.0;
-      while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
+      while ((cast ((cast index : Float) < (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) {
+        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveLayout.RIVE_LAYOUT_PARTICIPANT_TYPE_KEY__riveLayout : Float)) : Bool) : Bool)) {
-          var targetIndex:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float));
+          var targetIndex:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float));
           if ((cast ((cast ((cast ((cast targetIndex : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(nodes, targetIndex), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(nodes, targetIndex), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
             ((cast providers : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).set(targetIndex, (cast { sourceIndex: targetIndex, styleIndex: index, targetIndex: targetIndex, type: 'participant' })));
           }
@@ -69,7 +69,7 @@ class RiveLayout {
           continue;
         }
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveLayout.RIVE_GRID_ITEM_PLACEMENT_TYPE_KEY__riveLayout : Float)) : Bool) : Bool)) {
-          var owner:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float));
+          var owner:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float));
           if ((cast ((cast owner : Float) >= (cast 0.0 : Float)) : Bool)) { ((cast placements : flighthq._internal._Map<Float, RiveCoreObject>).set(owner, (cast object))); }
         }
         index++;
@@ -78,7 +78,7 @@ class RiveLayout {
     providerParents = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     providerChildren = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (provider in _Runtime.iterable(((cast providers : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).values()))) {
-      var start:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast (cast provider : RiveLayoutProvider__riveLayout).sourceIndex : Float));
+      var start:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast (cast provider : RiveLayoutProvider__riveLayout).sourceIndex : Float));
       var parent:Float = (cast RiveLayout.findRiveLayoutParent__riveLayout(({ final __callArgument5:Dynamic = artboard; __callArgument5; }), (cast componentProviders : Dynamic), (cast start : Float), (cast (cast provider : RiveLayoutProvider__riveLayout).sourceIndex : Float)) : Float);
       ((cast providerParents : flighthq._internal._Map<Float, Float>).set((cast provider : RiveLayoutProvider__riveLayout).sourceIndex, (cast parent)));
       if ((cast ((cast parent : Float) < (cast 0.0 : Float)) : Bool)) { continue; }
@@ -106,13 +106,13 @@ class RiveLayout {
     providers = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var index:Float = 0.0;
-      while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
+      while ((cast ((cast index : Float) < (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) {
+        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveLayout.RIVE_LAYOUT_COMPONENT_TYPE_KEY__riveLayout : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
-        var styleProperty:Null<RiveProperty> = _Runtime.find(object.properties, function(property:RiveProperty, __unused2:Float, __unused3:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast property : RiveProperty).key, RiveLayout.RIVE_LAYOUT_STYLE_ID__riveLayout));
+        var styleProperty:Null<RiveProperty> = _Runtime.find(object.properties, function(property:RiveProperty, __unused2:Float, __unused3:Array<RiveProperty>):Bool return _Runtime.strictEquals(property.key, RiveLayout.RIVE_LAYOUT_STYLE_ID__riveLayout));
         if ((cast _Runtime.strictEquals(styleProperty, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { index++; continue; }
-        var styleIndex:Float = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast styleProperty : RiveProperty).value), 'number') : Bool) ? (cast (cast styleProperty : RiveProperty).value : Dynamic) : (cast -1.0 : Dynamic));
-        var style:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), styleIndex);
+        var styleIndex:Float = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast styleProperty : { var value:RiveValue; }).value), 'number') : Bool) ? (cast (cast styleProperty : { var value:RiveValue; }).value : Dynamic) : (cast -1.0 : Dynamic));
+        var style:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, styleIndex);
         if ((cast ((cast ((cast ((cast _Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast isRiveCoreTypeDerivedFrom((cast style.typeKey : Float), (cast RiveLayout.RIVE_LAYOUT_COMPONENT_STYLE_TYPE_KEY__riveLayout : Float)) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(nodes, index), null) : Bool)) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(nodes, index), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
           reportImportDiagnostic(({ final __callArgument15:Dynamic = diagnostics; __callArgument15; }), ({ final __callArgument16:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument16; }), (cast 'rive.layout-unresolved-style' : String), (cast 'createRiveLayoutImports' : String), ({ final __callArgument17:Dynamic = { index: index, styleId: styleIndex }; __callArgument17; }));
           index++;
@@ -133,17 +133,17 @@ class RiveLayout {
     child = initialChild;
     while ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool)) {
       if ((cast ((cast components : flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout>).has(index)) : Bool)) { return cast index; }
-      var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
+      var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
       if ((cast _Runtime.strictEquals(object.typeKey, RiveLayout.RIVE_NODE_TYPE_KEY__riveLayout) : Bool)) {
         (child = cast (index : Dynamic));
-        (index = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)) : Dynamic));
+        (index = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float)) : Dynamic));
         continue;
       }
       if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveLayout.RIVE_SOLO_TYPE_KEY__riveLayout : Float)) : Bool) : Bool)) {
         var active:Float = (cast RiveLayout.readRiveNumber__riveLayout(({ final __callArgument18:Dynamic = object; __callArgument18; }), (cast RiveLayout.RIVE_SOLO_ACTIVE_COMPONENT__riveLayout : Float), (cast -1.0 : Float)) : Float);
         if ((cast ((cast ((cast active : Float) >= (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(active, child) : Bool)) : Bool)) { return cast RiveLayout.RIVE_NO_PARENT__riveLayout; }
         (child = cast (index : Dynamic));
-        (index = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)) : Dynamic));
+        (index = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float)) : Dynamic));
         continue;
       }
       return cast RiveLayout.RIVE_NO_PARENT__riveLayout;
@@ -164,8 +164,8 @@ class RiveLayout {
     var nodeIndex:Float = cast _Runtime.UNDEFINED;
     target = flighthq._internal._StaticIndex.readArray(displayNodes, _Runtime.field(provider, 'targetIndex'));
     if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
-    source = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), _Runtime.field(provider, 'sourceIndex'));
-    style = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), _Runtime.field(provider, 'styleIndex'));
+    source = flighthq._internal._StaticIndex.readArray(artboard.objects, _Runtime.field(provider, 'sourceIndex'));
+    style = flighthq._internal._StaticIndex.readArray(artboard.objects, _Runtime.field(provider, 'styleIndex'));
     children = _Runtime.coalesce(((cast childrenByProvider : flighthq._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>>).get(_Runtime.field(provider, 'sourceIndex'))), function():Dynamic return cast cast ([] : Array<Dynamic>));
     context = ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'component') : Bool) ? (cast (cast RiveLayout.createRiveLayoutContext__riveLayout((cast _Runtime.field(provider, 'sourceIndex') : Float), ({ final __callArgument19:Dynamic = style; __callArgument19; }), (cast _Runtime.coalesce(({ final __structural20 = parentContext; __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : { var rtl:Bool; }).rtl; }), function():Dynamic return cast false) : Bool), (cast _Runtime.field(children, 'length') : Float)) : RiveLayoutContext__riveLayout) : Dynamic) : (cast null : Dynamic));
     itemStyle = ((cast _Runtime.strictEquals(parentContext, null) : Bool) ? (cast null : Dynamic) : (cast (cast RiveLayout.createRiveItemStyle__riveLayout(({ final __callArgument21:Dynamic = artboard; __callArgument21; }), (cast provider : Dynamic), ({ final __callArgument22:Dynamic = source; __callArgument22; }), ({ final __callArgument23:Dynamic = style; __callArgument23; }), (cast parentContext : Dynamic), ((cast placements : flighthq._internal._Map<Float, RiveCoreObject>).get(_Runtime.field(provider, 'sourceIndex')))) : Null<flighthq._internal._Union2<FlexLayoutItemStyle, GridLayoutItemStyle>>) : Dynamic));
@@ -230,9 +230,9 @@ class RiveLayout {
     rows = (cast cast ([] : Array<Dynamic>));
     {
       var index:Float = 1.0;
-      while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float)), sourceIndex) : Bool)) { index++; continue; }
-        var track:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
+      while ((cast ((cast index : Float) < (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float)), sourceIndex) : Bool)) { index++; continue; }
+        var track:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast track.typeKey : Float), (cast RiveLayout.RIVE_GRID_TRACK_TYPE_KEY__riveLayout : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
         var collection:Float = (cast RiveLayout.readRiveNumber__riveLayout(({ final __callArgument46:Dynamic = track; __callArgument46; }), (cast RiveLayout.RIVE_GRID_TRACK_COLLECTION__riveLayout : Float), (cast 0.0 : Float)) : Float);
         if ((cast ((cast !_Runtime.strictEquals(collection, RiveLayout.RIVE_GRID_TEMPLATE_COLUMNS__riveLayout) : Bool) && (cast !_Runtime.strictEquals(collection, RiveLayout.RIVE_GRID_TEMPLATE_ROWS__riveLayout) : Bool)) : Bool)) { index++; continue; }
@@ -413,8 +413,8 @@ class RiveLayout {
 
   public static function readRiveNumber__riveLayout(source:RiveCoreObject, key:Float, fallback:Float):Float {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused4:Float, __unused5:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
-    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __structural99 = property; __structural99 == null ? _Runtime.UNDEFINED : (cast __structural99 : { var value:RiveValue; }).value; })), 'number') : Bool) ? (cast (cast property : RiveProperty).value : Dynamic) : (cast fallback : Dynamic));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused4:Float, __unused5:Array<RiveProperty>):Bool return _Runtime.strictEquals(candidate.key, key));
+    return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __typedStruct99 = property; __typedStruct99 == null ? _Runtime.UNDEFINED : (cast __typedStruct99 : { var value:RiveValue; }).value; })), 'number') : Bool) ? (cast (cast property : { var value:RiveValue; }).value : Dynamic) : (cast fallback : Dynamic));
     return cast null;
   }
 

@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1571 |
-| Direct schemas | 433 |
+| Audit-only schemas | 1566 |
+| Direct schemas | 438 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 12962 |
-| Directly emitted accesses | 17704 |
+| Pending accesses | 12757 |
+| Directly emitted accesses | 17909 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1571 |
+| Newly discovered, audit-only | 1566 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -1310,18 +1310,18 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#RiveAdvancedBlend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveAnimationClip` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#RiveAnimationLoop` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#RiveArtboardGraph` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 100 | 1 | 0 | 101 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RiveArtboardGraph` | `direct` | `new` | — | reviewed escape-free Rive artboard graph | 4 | 100 | 1 | 0 | 0 | 101 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveArtboardImport` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveCoreObject` | `direct` | `new` | — | reviewed escape-free Rive core object | 2 | 104 | 0 | 0 | 0 | 104 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveDocument` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveDocumentHeader` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RiveDocumentImportResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RiveDocumentImportResult` | `direct` | `new` | — | reviewed escape-free Rive document import result | 2 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | yes | — |
 | `@flighthq/types:type#RiveFieldType` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:interface#RiveFileAsset` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 5 | 1 | 0 | 6 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RiveFileAsset` | `direct` | `new` | — | reviewed escape-free Rive file asset | 6 | 5 | 1 | 0 | 0 | 6 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveLayoutImport` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveObjectGraph` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RivePathRecord` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 15 | 0 | 0 | 15 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RiveProperty` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 76 | 1 | 0 | 77 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RivePathRecord` | `direct` | `new` | — | reviewed escape-free Rive path record | 4 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RiveProperty` | `direct` | `new` | — | reviewed escape-free Rive property | 3 | 76 | 1 | 0 | 0 | 77 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RivePropertyFieldType` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveScene2DDocumentResult` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveSkeleton2DImport` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |

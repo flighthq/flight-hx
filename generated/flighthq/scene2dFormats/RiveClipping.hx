@@ -35,11 +35,11 @@ class RiveClipping {
     clips = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var index:Float = 1.0;
-      while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
+      while ((cast ((cast index : Float) < (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) {
+        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
         if ((cast !_Runtime.strictEquals(object.typeKey, RiveClipping.RIVE_CLIPPING_SHAPE__riveClipping) : Bool)) { index++; continue; }
         if ((cast !(cast (cast RiveClipping.readRiveFlag__riveClipping(({ final __callArgument1:Dynamic = object; __callArgument1; }), (cast RiveClipping.RIVE_CLIP_IS_VISIBLE__riveClipping : Float), (cast true : Bool)) : Bool) : Bool) : Bool)) { index++; continue; }
-        var owner:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float));
+        var owner:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float));
         var target:Null<DisplayObject> = ((cast ((cast owner : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(nodes, owner) : Dynamic) : (cast null : Dynamic));
         if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { index++; continue; }
         var source:Float = (cast RiveClipping.readRiveNumber__riveClipping(({ final __callArgument2:Dynamic = object; __callArgument2; }), (cast RiveClipping.RIVE_CLIP_SOURCE_ID__riveClipping : Float), (cast -1.0 : Float)) : Float);
@@ -71,14 +71,14 @@ class RiveClipping {
     if ((cast (cast inverseMatrix(({ final __callArgument12:Dynamic = into; __callArgument12; }), ({ final __callArgument13:Dynamic = clipped; __callArgument13; })) : Bool) : Bool)) { multiplyMatrix(({ final __callArgument14:Dynamic = combined; __callArgument14; }), ({ final __callArgument15:Dynamic = into; __callArgument15; }), ({ final __callArgument16:Dynamic = source; __callArgument16; })); } else { multiplyMatrix(({ final __callArgument17:Dynamic = combined; __callArgument17; }), ({ final __callArgument18:Dynamic = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix); __callArgument18; }), ({ final __callArgument19:Dynamic = source; __callArgument19; })); }
     path = (cast createPath(({ final __callArgument21:Dynamic = ((cast _Runtime.strictEquals((cast RiveClipping.readRiveNumber__riveClipping(({ final __callArgument20:Dynamic = clipping; __callArgument20; }), (cast RiveClipping.RIVE_CLIP_FILL_RULE__riveClipping : Float), (cast 0.0 : Float)) : Float), 1.0) : Bool) ? (cast 'evenOdd' : Dynamic) : (cast 'nonZero' : Dynamic)); __callArgument21; })) : Path);
     for (record in _Runtime.iterable(paths)) {
-      for (command in _Runtime.iterable((cast record : RivePathRecord).commands)) {
+      for (command in _Runtime.iterable(record.commands)) {
         _Runtime.callProperty((cast path : Path).commands, 'push', cast ([command] : Array<Dynamic>));
       }
       {
         var offset:Float = 0.0;
-        while ((cast ((cast (offset + 1.0) : Float) < (cast _Runtime.field((cast record : RivePathRecord).data, 'length') : Float)) : Bool)) {
-          var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast record : RivePathRecord).data : Array<Float>), (cast offset : Float));
-          var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast record : RivePathRecord).data : Array<Float>), (cast (offset + 1.0) : Float));
+        while ((cast ((cast (offset + 1.0) : Float) < (cast _Runtime.field(record.data, 'length') : Float)) : Bool)) {
+          var x:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast record.data : Array<Float>), (cast offset : Float));
+          var y:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast record.data : Array<Float>), (cast (offset + 1.0) : Float));
           _Runtime.pushMany((cast path : Path).data, cast ([(((combined.a * x) + (combined.c * y)) + combined.tx), (((combined.b * x) + (combined.d * y)) + combined.ty)] : Array<Dynamic>));
           (offset = cast ((offset + 2.0) : Dynamic));
         }
@@ -93,9 +93,9 @@ class RiveClipping {
     transforms = (cast cast ([(cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix)] : Array<Dynamic>));
     {
       var index:Float = 1.0;
-      while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(artboard, 'objects'), 'length') : Float)) : Bool)) {
-        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(_Runtime.field(artboard, 'objects'), index);
-        var parent:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(artboard, 'parentIndices') : Array<Float>), (cast index : Float));
+      while ((cast ((cast index : Float) < (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) {
+        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
+        var parent:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float));
         var inherited:Matrix = ((cast ((cast parent : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(transforms, parent) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(transforms, 0.0) : Dynamic));
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveClipping.RIVE_NODE_TYPE_KEY__riveClipping : Float)) : Bool) : Bool) : Bool)) {
           _Runtime.callProperty(transforms, 'push', cast ([inherited] : Array<Dynamic>));
@@ -134,15 +134,15 @@ class RiveClipping {
 
   public static function readRiveNumber__riveClipping(source:RiveCoreObject, key:Float, fallback:Float):Float {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused1:Float, __unused2:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
-    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : RiveProperty).value : Dynamic));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused1:Float, __unused2:Array<RiveProperty>):Bool return _Runtime.strictEquals(candidate.key, key));
+    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : { var value:RiveValue; }).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast (cast property : { var value:RiveValue; }).value : Dynamic));
     return cast null;
   }
 
   public static function readRiveFlag__riveClipping(source:RiveCoreObject, key:Float, fallback:Bool):Bool {
     var property:Null<RiveProperty> = cast _Runtime.UNDEFINED;
-    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused3:Float, __unused4:Array<RiveProperty>):Bool return _Runtime.strictEquals((cast candidate : RiveProperty).key, key));
-    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : RiveProperty).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast !_Runtime.strictEquals((cast property : RiveProperty).value, 0.0) : Dynamic));
+    property = _Runtime.find(source.properties, function(candidate:RiveProperty, __unused3:Float, __unused4:Array<RiveProperty>):Bool return _Runtime.strictEquals(candidate.key, key));
+    return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : { var value:RiveValue; }).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast !_Runtime.strictEquals((cast property : { var value:RiveValue; }).value, 0.0) : Dynamic));
     return cast null;
   }
 
