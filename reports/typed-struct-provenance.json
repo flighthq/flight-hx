@@ -48016,7 +48016,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 52,
       "fields": 9,
       "id": "@flighthq/types:interface#StatechartInstance",
       "name": "StatechartInstance",
@@ -48135,7 +48135,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 23,
       "fields": 4,
       "id": "@flighthq/types:interface#StatechartTransition",
       "name": "StatechartTransition",

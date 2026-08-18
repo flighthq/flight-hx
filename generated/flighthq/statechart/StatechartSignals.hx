@@ -10,12 +10,12 @@ import flighthq.types.StatechartSignals;
 
 class StatechartSignals {
   public static function enableStatechartSignals(instance:StatechartInstance):flighthq.types.StatechartSignals {
-    return cast ({ final __nullishOwner0 = instance; final __nullishValue1:Null<flighthq.types.StatechartSignals> = cast (cast __nullishOwner0 : StatechartInstance).signals; __nullishValue1 == null ? ((cast __nullishOwner0 : StatechartInstance).signals = (cast { onStateChange: (cast createSignal() : Signal<Float->Float->Float->Void>) } : Null<flighthq.types.StatechartSignals>)) : (cast __nullishValue1 : Null<flighthq.types.StatechartSignals>); });
+    return cast ({ final __nullishOwner0 = instance; final __nullishValue1:Null<flighthq.types.StatechartSignals> = cast __nullishOwner0.signals; __nullishValue1 == null ? (__nullishOwner0.signals = (cast { onStateChange: (cast createSignal() : Signal<Float->Float->Float->Void>) } : Null<flighthq.types.StatechartSignals>)) : (cast __nullishValue1 : Null<flighthq.types.StatechartSignals>); });
     return cast null;
   }
 
   public static function getStatechartSignals(instance:StatechartInstance):Null<flighthq.types.StatechartSignals> {
-    return cast _Runtime.field(instance, 'signals');
+    return cast instance.signals;
     return cast null;
   }
 }

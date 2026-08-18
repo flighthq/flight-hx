@@ -368,6 +368,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Skeleton2DPathConstraint',
     purpose: 'reviewed escape-free 2D skeleton path constraint',
   },
+  {
+    declarationFingerprint: 'sha256:fe1c6f9a7092aaf16cd71f41a141a74e9ef235eec04fa6afa7ea048439b63fde',
+    id: '@flighthq/types:interface#AnimationStateMachine',
+    purpose: 'reviewed escape-free animation state machine',
+  },
+  {
+    declarationFingerprint: 'sha256:592fba8ca0e3d4c3037c94796a1c24af517eaa4337ffd428ae340ca7f8c0bf29',
+    id: '@flighthq/types:interface#AnimationCrossfade',
+    purpose: 'reviewed escape-free animation crossfade',
+  },
+  {
+    declarationFingerprint: 'sha256:cfe564914537b7c6b1f9b16a293e7a1b8c28d3d743a920f8054b8d1304fa39b7',
+    id: '@flighthq/types:interface#Statechart',
+    purpose: 'reviewed escape-free statechart',
+  },
+  {
+    declarationFingerprint: 'sha256:99282de81a9db1f080a9e203455b3ae137163ab87e2b608b70d3defc5949fa86',
+    id: '@flighthq/types:interface#StatechartInstance',
+    purpose: 'reviewed escape-free statechart instance',
+  },
+  {
+    declarationFingerprint: 'sha256:ee1a1c67324b9c8fb812541fc64da6edb13d01144a9bfd7289e47a151cefd755',
+    id: '@flighthq/types:interface#StatechartTransition',
+    purpose: 'reviewed escape-free statechart transition',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

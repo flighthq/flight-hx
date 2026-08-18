@@ -7958,9 +7958,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 23,
+        "directAccesses": 23,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -8052,7 +8052,7 @@
       },
       "name": "AnimationCrossfade",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free animation crossfade",
       "reasons": [],
       "source": "upstream/packages/types/src/AnimationCrossfade.ts",
       "sourceProvenance": {
@@ -10210,9 +10210,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 53,
+        "directAccesses": 53,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -10328,7 +10328,7 @@
       },
       "name": "AnimationStateMachine",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free animation state machine",
       "reasons": [],
       "source": "upstream/packages/types/src/AnimationStateMachine.ts",
       "sourceProvenance": {
@@ -334087,9 +334087,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 21,
+        "directAccesses": 21,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -334127,7 +334127,7 @@
       },
       "name": "Statechart",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free statechart",
       "reasons": [],
       "source": "upstream/packages/types/src/Statechart.ts",
       "sourceProvenance": {
@@ -335670,9 +335670,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 52,
+        "directAccesses": 52,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -335758,7 +335758,7 @@
       },
       "name": "StatechartInstance",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free statechart instance",
       "reasons": [],
       "source": "upstream/packages/types/src/Statechart.ts",
       "sourceProvenance": {
@@ -335950,9 +335950,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 23,
+        "directAccesses": 23,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -335998,7 +335998,7 @@
       },
       "name": "StatechartTransition",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free statechart transition",
       "reasons": [],
       "source": "upstream/packages/types/src/Statechart.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1536,
+      "newAuditOnly": 1531,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1536,
+    "auditOnlySchemas": 1531,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 19395,
-    "directSchemas": 468,
+    "directAccesses": 19567,
+    "directSchemas": 473,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 11271,
+    "pendingAccesses": 11099,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

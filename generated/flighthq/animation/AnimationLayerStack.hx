@@ -87,7 +87,7 @@ class AnimationLayerStack {
   }
 
   public static function createAnimationStateMachineLayer(stateMachine:AnimationStateMachine, ?options:AnimationLayerOptions):AnimationLayer {
-    return cast (cast AnimationLayerStack.createAnimationLayer__animationLayerStack((cast _Runtime.field((cast stateMachine : AnimationStateMachine).channels, 'length') : Float), ({ final __callArgument13:Dynamic = null; __callArgument13; }), ({ final __callArgument14:Dynamic = stateMachine; __callArgument14; }), ({ final __callArgument15:Dynamic = options; __callArgument15; })) : AnimationLayer);
+    return cast (cast AnimationLayerStack.createAnimationLayer__animationLayerStack((cast _Runtime.field(stateMachine.channels, 'length') : Float), ({ final __callArgument13:Dynamic = null; __callArgument13; }), ({ final __callArgument14:Dynamic = stateMachine; __callArgument14; }), ({ final __callArgument15:Dynamic = options; __callArgument15; })) : AnimationLayer);
     return cast null;
   }
 
@@ -181,7 +181,7 @@ class AnimationLayerStack {
   }
 
   public static function getAnimationLayerChannels__animationLayerStack(layer:AnimationLayer):Array<{ var channel:AnimationChannel; }> {
-    return cast _Runtime.coalesce(({ final __structural36 = _Runtime.field(layer, 'blendTree'); __structural36 == null ? _Runtime.UNDEFINED : (cast __structural36 : { var channels:Array<AnimationBlendTreeChannel>; }).channels; }), function():Dynamic return cast (cast _Runtime.field(layer, 'stateMachine') : AnimationStateMachine).channels);
+    return cast _Runtime.coalesce(({ final __structural36 = _Runtime.field(layer, 'blendTree'); __structural36 == null ? _Runtime.UNDEFINED : (cast __structural36 : { var channels:Array<AnimationBlendTreeChannel>; }).channels; }), function():Dynamic return cast (cast _Runtime.field(layer, 'stateMachine') : { var channels:Array<AnimationStateMachineChannel>; }).channels);
     return cast null;
   }
 

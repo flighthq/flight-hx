@@ -16,22 +16,22 @@ import flighthq.types.Statechart.StatechartTransitionStatus;
 
 class EnableStatechartGuards {
   public static function areStatechartGuardsEnabled(instance:StatechartInstance):Bool {
-    return cast _Runtime.strictEquals(_Runtime.field(instance, 'durationGuard'), EnableStatechartGuards.warnMissingStatechartRegionDuration__enableStatechartGuards);
+    return cast _Runtime.strictEquals(instance.durationGuard, EnableStatechartGuards.warnMissingStatechartRegionDuration__enableStatechartGuards);
     return cast null;
   }
 
   public static function disableStatechartGuards(instance:StatechartInstance):Void {
-    ((cast instance : { var durationGuard:Null<StatechartDurationGuard>; }).durationGuard = null);
+    (instance.durationGuard = cast (null : Null<StatechartDurationGuard>));
   }
 
   public static function enableStatechartGuards(instance:StatechartInstance):Void {
-    ((cast instance : { var durationGuard:Null<StatechartDurationGuard>; }).durationGuard = EnableStatechartGuards.warnMissingStatechartRegionDuration__enableStatechartGuards);
+    (instance.durationGuard = cast (EnableStatechartGuards.warnMissingStatechartRegionDuration__enableStatechartGuards : Null<StatechartDurationGuard>));
   }
 
   public static function warnMissingStatechartRegionDuration__enableStatechartGuards(instance:StatechartInstance, explanation:StatechartTransitionExplanation):Void {
     var chartId:Float = cast _Runtime.UNDEFINED;
-    chartId = (cast EnableStatechartGuards.getStatechartGuardChartId__enableStatechartGuards(({ final __callArgument0:Dynamic = _Runtime.field(instance, 'chart'); __callArgument0; })) : Float);
-    (cast logOnce((cast 'statechart:missing-region-duration:' + Std.string(chartId) + ':' + Std.string(_Runtime.field(explanation, 'regionIndex')) + ':' + Std.string(_Runtime.field(explanation, 'sourceStateIndex')) + ':' + Std.string(_Runtime.field(explanation, 'transitionIndex')) + '' : String), ({ final __callArgument1:Dynamic = LogLevel.Warn; __callArgument1; }), (cast { exitTimeRatio: _Runtime.coalesce(_Runtime.optionalField(_Runtime.optionalIndex(_Runtime.optionalField(_Runtime.optionalIndex(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray(_Runtime.field(_Runtime.field(instance, 'chart'), 'regions'), _Runtime.field(explanation, 'regionIndex')), 'states'), _Runtime.field(explanation, 'sourceStateIndex')), 'transitions'), _Runtime.field(explanation, 'transitionIndex')), 'exitTimeRatio'), function():Dynamic return cast -1.0), message: 'advanceStatechartInstance: exitTimeRatio requires a positive region duration; the transition was treated as having no exit-time requirement — call setStatechartRegionDuration when the region enters a state.', regionDuration: _Runtime.coalesce(flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast _Runtime.field(instance, 'regionDuration') : flighthq._internal._Float64Array), (cast _Runtime.field(explanation, 'regionIndex') : Float)), function():Dynamic return cast -1.0), regionIndex: _Runtime.field(explanation, 'regionIndex'), sourceStateIndex: _Runtime.field(explanation, 'sourceStateIndex'), status: _Runtime.field(explanation, 'status'), targetStateIndex: _Runtime.field(explanation, 'targetStateIndex'), transitionIndex: _Runtime.field(explanation, 'transitionIndex') } : Dynamic), ({ final __callArgument2:Dynamic = 'statechart'; __callArgument2; })) : Bool);
+    chartId = (cast EnableStatechartGuards.getStatechartGuardChartId__enableStatechartGuards(({ final __callArgument0:Dynamic = instance.chart; __callArgument0; })) : Float);
+    (cast logOnce((cast 'statechart:missing-region-duration:' + Std.string(chartId) + ':' + Std.string(_Runtime.field(explanation, 'regionIndex')) + ':' + Std.string(_Runtime.field(explanation, 'sourceStateIndex')) + ':' + Std.string(_Runtime.field(explanation, 'transitionIndex')) + '' : String), ({ final __callArgument1:Dynamic = LogLevel.Warn; __callArgument1; }), (cast { exitTimeRatio: _Runtime.coalesce(({ final __typedStruct2 = _Runtime.optionalIndex(_Runtime.optionalField(_Runtime.optionalIndex(_Runtime.optionalField(flighthq._internal._StaticIndex.readArray((cast instance.chart : { var regions:Array<StatechartRegion>; }).regions, _Runtime.field(explanation, 'regionIndex')), 'states'), _Runtime.field(explanation, 'sourceStateIndex')), 'transitions'), _Runtime.field(explanation, 'transitionIndex')); __typedStruct2 == null ? _Runtime.UNDEFINED : (cast __typedStruct2 : { var exitTimeRatio:Float; }).exitTimeRatio; }), function():Dynamic return cast -1.0), message: 'advanceStatechartInstance: exitTimeRatio requires a positive region duration; the transition was treated as having no exit-time requirement — call setStatechartRegionDuration when the region enters a state.', regionDuration: _Runtime.coalesce(flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast instance.regionDuration : flighthq._internal._Float64Array), (cast _Runtime.field(explanation, 'regionIndex') : Float)), function():Dynamic return cast -1.0), regionIndex: _Runtime.field(explanation, 'regionIndex'), sourceStateIndex: _Runtime.field(explanation, 'sourceStateIndex'), status: _Runtime.field(explanation, 'status'), targetStateIndex: _Runtime.field(explanation, 'targetStateIndex'), transitionIndex: _Runtime.field(explanation, 'transitionIndex') } : Dynamic), ({ final __callArgument3:Dynamic = 'statechart'; __callArgument3; })) : Bool);
   }
 
   public static function getStatechartGuardChartId__enableStatechartGuards(chart:flighthq._internal._Object):Float {

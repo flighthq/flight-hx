@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_536,
+      newAuditOnly: 1_531,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(470);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(475);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_536);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_531);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(68);
+    expect(newDirect).toHaveLength(73);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -450,6 +450,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'Skeleton2DPathConstraint',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free 2D skeleton path constraint',
+        }),
+        expect.objectContaining({
+          name: 'AnimationStateMachine',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free animation state machine',
+        }),
+        expect.objectContaining({
+          name: 'AnimationCrossfade',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free animation crossfade',
+        }),
+        expect.objectContaining({
+          name: 'Statechart',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free statechart',
+        }),
+        expect.objectContaining({
+          name: 'StatechartInstance',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free statechart instance',
+        }),
+        expect.objectContaining({
+          name: 'StatechartTransition',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free statechart transition',
         }),
       ]),
     );
@@ -793,6 +818,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:3831dc7503c830297819df165667142b18595623fb5320f616539f5dbb48b1bd',
         id: '@flighthq/types:interface#Skeleton2DPathConstraint',
         purpose: 'reviewed escape-free 2D skeleton path constraint',
+      },
+      {
+        declarationFingerprint: 'sha256:fe1c6f9a7092aaf16cd71f41a141a74e9ef235eec04fa6afa7ea048439b63fde',
+        id: '@flighthq/types:interface#AnimationStateMachine',
+        purpose: 'reviewed escape-free animation state machine',
+      },
+      {
+        declarationFingerprint: 'sha256:592fba8ca0e3d4c3037c94796a1c24af517eaa4337ffd428ae340ca7f8c0bf29',
+        id: '@flighthq/types:interface#AnimationCrossfade',
+        purpose: 'reviewed escape-free animation crossfade',
+      },
+      {
+        declarationFingerprint: 'sha256:cfe564914537b7c6b1f9b16a293e7a1b8c28d3d743a920f8054b8d1304fa39b7',
+        id: '@flighthq/types:interface#Statechart',
+        purpose: 'reviewed escape-free statechart',
+      },
+      {
+        declarationFingerprint: 'sha256:99282de81a9db1f080a9e203455b3ae137163ab87e2b608b70d3defc5949fa86',
+        id: '@flighthq/types:interface#StatechartInstance',
+        purpose: 'reviewed escape-free statechart instance',
+      },
+      {
+        declarationFingerprint: 'sha256:ee1a1c67324b9c8fb812541fc64da6edb13d01144a9bfd7289e47a151cefd755',
+        id: '@flighthq/types:interface#StatechartTransition',
+        purpose: 'reviewed escape-free statechart transition',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -1275,6 +1325,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const stateMachineCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'AnimationCrossfade',
+            'AnimationStateMachine',
+            'Statechart',
+            'StatechartInstance',
+            'StatechartTransition',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1315,22 +1378,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_536,
+      auditOnlySchemas: 1_531,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 19_395,
-      directSchemas: 468,
+      directAccesses: 19_567,
+      directSchemas: 473,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 11_271,
+      pendingAccesses: 11_099,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_536,
+      newAuditOnly: 1_531,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1358,7 +1421,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(19_395);
+    expect(report.summary.directAccesses).toBe(19_567);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -1887,6 +1950,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'AnimationStateMachine',
+        53,
+        'sha256:fe1c6f9a7092aaf16cd71f41a141a74e9ef235eec04fa6afa7ea048439b63fde',
+        'reviewed escape-free animation state machine',
+      ],
+      [
+        'StatechartInstance',
+        52,
+        'sha256:99282de81a9db1f080a9e203455b3ae137163ab87e2b608b70d3defc5949fa86',
+        'reviewed escape-free statechart instance',
+      ],
+      [
+        'StatechartTransition',
+        23,
+        'sha256:ee1a1c67324b9c8fb812541fc64da6edb13d01144a9bfd7289e47a151cefd755',
+        'reviewed escape-free statechart transition',
+      ],
+      [
+        'AnimationCrossfade',
+        23,
+        'sha256:592fba8ca0e3d4c3037c94796a1c24af517eaa4337ffd428ae340ca7f8c0bf29',
+        'reviewed escape-free animation crossfade',
+      ],
+      [
+        'Statechart',
+        21,
+        'sha256:cfe564914537b7c6b1f9b16a293e7a1b8c28d3d743a920f8054b8d1304fa39b7',
+        'reviewed escape-free statechart',
+      ],
+    ] as const) {
+      expect(stateMachineCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'Physics2DWorld',
         217,
         'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
@@ -2299,6 +2404,38 @@ describe('typed struct analysis', () => {
         closed: false,
       });
     }
+    for (const animationStateId of [
+      '@flighthq/types:interface#AnimationCrossfade',
+      '@flighthq/types:interface#AnimationStateMachine',
+    ]) {
+      expect(classAuditById.get(animationStateId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer'],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.has(animationStateId)).toBe(false);
+    }
+    const statechartId = '@flighthq/types:interface#Statechart';
+    expect(classAuditById.get(statechartId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: ['json-serialization'],
+    });
+    expect(provenanceById.has(statechartId)).toBe(false);
+    for (const statechartRuntimeId of [
+      '@flighthq/types:interface#StatechartInstance',
+      '@flighthq/types:interface#StatechartTransition',
+    ]) {
+      expect(classAuditById.get(statechartRuntimeId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.get(statechartRuntimeId)?.nominalIdentity).toEqual({
+        blockerReasons: [],
+        closed: true,
+      });
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -2514,6 +2651,20 @@ describe('typed struct analysis', () => {
     const generatedSkinMesh = readFileSync('generated/flighthq/skeleton3d/SkinMeshGeometry.hx', 'utf8');
     expect(generatedSkinMesh).not.toMatch(/\(cast bindPose : MeshSkinBindPose\)\./u);
     expect(generatedSkinMesh).not.toMatch(/_Runtime\.field\(bindPose,/u);
+    const generatedAnimationCrossfade = readFileSync('generated/flighthq/animation/AnimationCrossfade.hx', 'utf8');
+    expect(generatedAnimationCrossfade).not.toMatch(/\(cast state : flighthq\.types\.AnimationCrossfade\)\./u);
+    expect(generatedAnimationCrossfade).not.toMatch(/_Runtime\.field\(state,/u);
+    const generatedAnimationStateMachine = readFileSync(
+      'generated/flighthq/animation/AnimationStateMachine.hx',
+      'utf8',
+    );
+    expect(generatedAnimationStateMachine).not.toMatch(/\(cast machine : flighthq\.types\.AnimationStateMachine\)\./u);
+    expect(generatedAnimationStateMachine).not.toMatch(/_Runtime\.field\(machine,/u);
+    const generatedStatechart = readFileSync('generated/flighthq/statechart/Statechart.hx', 'utf8');
+    expect(generatedStatechart).not.toMatch(
+      /\(cast (?:chart|instance|transition) : (?:Statechart|StatechartInstance|StatechartTransition)\)\./u,
+    );
+    expect(generatedStatechart).not.toMatch(/_Runtime\.field\((?:chart|instance|transition),/u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
