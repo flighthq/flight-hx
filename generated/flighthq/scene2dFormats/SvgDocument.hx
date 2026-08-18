@@ -286,7 +286,7 @@ class SvgDocument {
     }
     region = (cast createClipRegionFromPath(({ final __callArgument61:Dynamic = out; __callArgument61; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ClipRegion);
     for (clippedRegion in _Runtime.iterable(clippedRegions)) {
-      if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field((cast out : Path).commands, 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals((cast (cast region : ClipRegion).rect : { var width:Float; }).width, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast region : ClipRegion).rect : { var height:Float; }).height, 0.0) : Bool)) : Bool)) { (region = cast (clippedRegion : Dynamic)); } else { unionClipRegions(({ final __callArgument64:Dynamic = region; __callArgument64; }), ({ final __callArgument65:Dynamic = region; __callArgument65; }), ({ final __callArgument66:Dynamic = clippedRegion; __callArgument66; })); }
+      if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field((cast out : Path).commands, 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals((cast region.rect : { var width:Float; }).width, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast region.rect : { var height:Float; }).height, 0.0) : Bool)) : Bool)) { (region = cast (clippedRegion : Dynamic)); } else { unionClipRegions(({ final __callArgument64:Dynamic = region; __callArgument64; }), ({ final __callArgument65:Dynamic = region; __callArgument65; }), ({ final __callArgument66:Dynamic = clippedRegion; __callArgument66; })); }
     }
     (region = cast ((cast SvgDocument.intersectSvgClipReference__svgDocument(({ final __callArgument67:Dynamic = region; __callArgument67; }), ({ final __callArgument68:Dynamic = element; __callArgument68; }), ({ final __callArgument69:Dynamic = null; __callArgument69; }), (cast context : Dynamic)) : ClipRegion) : Dynamic));
     transform = (cast SvgDocument.parseSvgTransform__svgDocument((cast SvgDocument.attribute__svgDocument(({ final __callArgument70:Dynamic = element; __callArgument70; }), (cast 'transform' : String)) : Null<String>)) : Null<Matrix>);
@@ -346,7 +346,7 @@ class SvgDocument {
         _Runtime.callProperty(out, 'push', cast ([{ path: transformedPath, region: null, winding: (cast path : Path).winding }] : Array<Dynamic>));
       } else {
         var region:ClipRegion = (cast SvgDocument.intersectSvgClipReference__svgDocument((cast createClipRegionFromPath(({ final __callArgument114:Dynamic = transformedPath; __callArgument114; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ClipRegion), ({ final __callArgument115:Dynamic = element; __callArgument115; }), ({ final __callArgument116:Dynamic = transform; __callArgument116; }), (cast context : Dynamic)) : ClipRegion);
-        _Runtime.callProperty(out, 'push', cast ([{ path: null, region: region, winding: (cast region : ClipRegion).winding }] : Array<Dynamic>));
+        _Runtime.callProperty(out, 'push', cast ([{ path: null, region: region, winding: region.winding }] : Array<Dynamic>));
       }
       return;
     }
@@ -361,7 +361,7 @@ class SvgDocument {
             var region:ClipRegion = _Runtime.coalesce((cast geometry : SvgClipGeometry__svgDocument).region, function():Dynamic return cast (cast createClipRegionFromPath(({ final __callArgument120:Dynamic = (cast geometry : SvgClipGeometry__svgDocument).path; __callArgument120; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ClipRegion));
             ((cast geometry : SvgClipGeometry__svgDocument).path = null);
             ((cast geometry : SvgClipGeometry__svgDocument).region = (cast SvgDocument.intersectSvgClipReference__svgDocument(({ final __callArgument121:Dynamic = region; __callArgument121; }), ({ final __callArgument122:Dynamic = element; __callArgument122; }), ({ final __callArgument123:Dynamic = transform; __callArgument123; }), (cast context : Dynamic)) : ClipRegion));
-            ((cast geometry : SvgClipGeometry__svgDocument).winding = (cast (cast geometry : SvgClipGeometry__svgDocument).region : ClipRegion).winding);
+            ((cast geometry : SvgClipGeometry__svgDocument).winding = (cast (cast geometry : SvgClipGeometry__svgDocument).region : { var winding:PathWinding; }).winding);
             index++;
           }
         }
@@ -389,7 +389,7 @@ class SvgDocument {
       return cast base;
     }
     ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flighthq._internal._Set<String>).add(id));
-    referencedRegion = (cast SvgDocument.createSvgClipRegion__svgDocument(({ final __callArgument132:Dynamic = referenced; __callArgument132; }), ({ final __callArgument133:Dynamic = (cast base : ClipRegion).rect; __callArgument133; }), (cast context : Dynamic)) : ClipRegion);
+    referencedRegion = (cast SvgDocument.createSvgClipRegion__svgDocument(({ final __callArgument132:Dynamic = referenced; __callArgument132; }), ({ final __callArgument133:Dynamic = base.rect; __callArgument133; }), (cast context : Dynamic)) : ClipRegion);
     ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flighthq._internal._Set<String>).delete_(id));
     if ((cast !_Runtime.strictEquals(transform, null) : Bool)) { transformClipRegion(({ final __callArgument134:Dynamic = referencedRegion; __callArgument134; }), ({ final __callArgument135:Dynamic = referencedRegion; __callArgument135; }), ({ final __callArgument136:Dynamic = transform; __callArgument136; })); }
     intersectClipRegions(({ final __callArgument137:Dynamic = base; __callArgument137; }), ({ final __callArgument138:Dynamic = base; __callArgument138; }), ({ final __callArgument139:Dynamic = referencedRegion; __callArgument139; }));

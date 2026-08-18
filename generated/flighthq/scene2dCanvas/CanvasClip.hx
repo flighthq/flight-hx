@@ -44,10 +44,10 @@ class CanvasClip {
     s = (cast state : CanvasRenderState);
     clip = (cast source : { var clip:Null<ClipRegion>; }).clip;
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals((cast clip : ClipRegion).contours, null) : Bool)) {
-      pushCanvasClipRectangle(({ final __callArgument2:Dynamic = s; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast clip : ClipRegion).rect; __callArgument3; }), (cast data : RenderProxy2D).transform2D);
+    if ((cast _Runtime.strictEquals((cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, null) : Bool)) {
+      pushCanvasClipRectangle(({ final __callArgument2:Dynamic = s; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast clip : { var rect:Rectangle; }).rect; __callArgument3; }), (cast data : RenderProxy2D).transform2D);
     } else {
-      pushCanvasClipContours(({ final __callArgument4:Dynamic = s; __callArgument4; }), (cast clip : ClipRegion).contours, (cast clip : ClipRegion).winding, (cast data : RenderProxy2D).transform2D);
+      pushCanvasClipContours(({ final __callArgument4:Dynamic = s; __callArgument4; }), (cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, (cast clip : { var winding:PathWinding; }).winding, (cast data : RenderProxy2D).transform2D);
     }
     (cast s : CanvasRenderState).currentClipDepth++;
   } });

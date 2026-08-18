@@ -19159,7 +19159,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 151,
       "fields": 4,
       "id": "@flighthq/types:interface#ClipRegion",
       "name": "ClipRegion",
@@ -37566,7 +37566,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 47,
       "fields": 5,
       "id": "@flighthq/types:interface#Physics2DCollider",
       "name": "Physics2DCollider",
@@ -37631,7 +37631,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 157,
       "fields": 13,
       "id": "@flighthq/types:interface#Physics2DContact",
       "name": "Physics2DContact",
@@ -38323,7 +38323,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 55,
       "fields": 13,
       "id": "@flighthq/types:interface#Physics2DSolverConfig",
       "name": "Physics2DSolverConfig",
@@ -38432,7 +38432,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 217,
       "fields": 29,
       "id": "@flighthq/types:interface#Physics2DWorld",
       "name": "Physics2DWorld",

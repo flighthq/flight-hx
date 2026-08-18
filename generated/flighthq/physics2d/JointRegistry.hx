@@ -19,12 +19,12 @@ class JointRegistry {
   public static function addPhysics2DJoint(world:Physics2DWorld, joint:Physics2DJoint):Physics2DJoint {
     var active:Bool = cast _Runtime.UNDEFINED;
     assertPhysics2DWorldNotStepping(({ final __callArgument0:Dynamic = world; __callArgument0; }));
-    if ((cast ((cast ((cast physics2DJointOwners : flighthq._internal._WeakMap<Physics2DJoint, Physics2DWorld>).has(joint)) : Bool) || (cast _Runtime.includes((cast world : Physics2DWorld).joints, joint) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast physics2DJointOwners : flighthq._internal._WeakMap<Physics2DJoint, Physics2DWorld>).has(joint)) : Bool) || (cast _Runtime.includes(world.joints, joint) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('Cannot add a physics joint that already belongs to a physics world'));
     }
     active = !_Runtime.strictEquals((cast getPhysics2DJointSolver(({ final __callArgument1:Dynamic = world; __callArgument1; }), (cast (cast joint : Physics2DJoint).kind : String)) : Null<Physics2DJointSolver>), null);
     if ((cast active : Bool)) { JointRegistry._canonicalizePhysics2DJointEnds__jointRegistry(({ final __callArgument2:Dynamic = world; __callArgument2; }), ({ final __callArgument3:Dynamic = joint; __callArgument3; })); }
-    _Runtime.callProperty((cast world : Physics2DWorld).joints, 'push', cast ([joint] : Array<Dynamic>));
+    _Runtime.callProperty(world.joints, 'push', cast ([joint] : Array<Dynamic>));
     ((cast physics2DJointOwners : flighthq._internal._WeakMap<Physics2DJoint, Physics2DWorld>).set(joint, (cast world)));
     rebuildPhysics2DJointCollisionSuppressions(({ final __callArgument4:Dynamic = world; __callArgument4; }));
     if ((cast active : Bool)) { JointRegistry._wakePhysics2DJointBodies__jointRegistry(({ final __callArgument5:Dynamic = world; __callArgument5; }), ({ final __callArgument6:Dynamic = joint; __callArgument6; })); }
@@ -57,13 +57,13 @@ class JointRegistry {
   }
 
   public static function getPhysics2DJointSolver(world:Physics2DWorld, kind:Physics2DJointKind):Null<Physics2DJointSolver> {
-    return cast _Runtime.coalesce(((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map<String, Physics2DJointSolver>).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast world.jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function invalidatePhysics2DJoint(world:Physics2DWorld, joint:Physics2DJoint):Bool {
     assertPhysics2DWorldNotStepping(({ final __callArgument14:Dynamic = world; __callArgument14; }));
-    if ((cast ((cast !_Runtime.strictEquals(((cast physics2DJointOwners : flighthq._internal._WeakMap<Physics2DJoint, Physics2DWorld>).get(joint)), world) : Bool) || (cast !(cast _Runtime.includes((cast world : Physics2DWorld).joints, joint) : Bool) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast !_Runtime.strictEquals(((cast physics2DJointOwners : flighthq._internal._WeakMap<Physics2DJoint, Physics2DWorld>).get(joint)), world) : Bool) || (cast !(cast _Runtime.includes(world.joints, joint) : Bool) : Bool)) : Bool)) { return cast false; }
     ({ final __optionalOwner18 = (cast getPhysics2DJointSolver(({ final __callArgument19:Dynamic = world; __callArgument19; }), (cast (cast joint : Physics2DJoint).kind : String)) : Null<Physics2DJointSolver>); if (__optionalOwner18 != null) { final __optionalCall17 = (cast __optionalOwner18 : { @:optional var clearAccumulatedImpulses:Null<Physics2DJoint->Void>; }).clearAccumulatedImpulses; if (__optionalCall17 != null) __optionalCall17(joint); } });
     ((cast joint : Physics2DJoint).impulse0 = 0.0);
     ((cast joint : Physics2DJoint).impulse1 = 0.0);
@@ -76,8 +76,8 @@ class JointRegistry {
 
   public static function registerPhysics2DJointSolver(world:Physics2DWorld, kind:Physics2DJointKind, solver:Physics2DJointSolver):Void {
     assertPhysics2DWorldNotStepping(({ final __callArgument23:Dynamic = world; __callArgument23; }));
-    ((cast (cast world : Physics2DWorld).jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).set(kind, (cast solver)));
-    for (joint in _Runtime.iterable((cast world : Physics2DWorld).joints)) {
+    ((cast world.jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).set(kind, (cast solver)));
+    for (joint in _Runtime.iterable(world.joints)) {
       if ((cast !_Runtime.strictEquals((cast joint : Physics2DJoint).kind, kind) : Bool)) { continue; }
       JointRegistry._canonicalizePhysics2DJointEnds__jointRegistry(({ final __callArgument26:Dynamic = world; __callArgument26; }), ({ final __callArgument27:Dynamic = joint; __callArgument27; }));
       JointRegistry._wakePhysics2DJointBodies__jointRegistry(({ final __callArgument28:Dynamic = world; __callArgument28; }), ({ final __callArgument29:Dynamic = joint; __callArgument29; }));
@@ -88,10 +88,10 @@ class JointRegistry {
   public static function removePhysics2DJoint(world:Physics2DWorld, joint:Physics2DJoint):Bool {
     var at:Float = cast _Runtime.UNDEFINED;
     assertPhysics2DWorldNotStepping(({ final __callArgument31:Dynamic = world; __callArgument31; }));
-    at = _Runtime.callProperty((cast world : Physics2DWorld).joints, 'indexOf', cast ([(cast joint : Physics2DJoint)] : Array<Dynamic>));
+    at = _Runtime.callProperty(world.joints, 'indexOf', cast ([(cast joint : Physics2DJoint)] : Array<Dynamic>));
     if ((cast ((cast at : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
     if ((cast !_Runtime.strictEquals((cast getPhysics2DJointSolver(({ final __callArgument32:Dynamic = world; __callArgument32; }), (cast _Runtime.field(joint, 'kind') : String)) : Null<Physics2DJointSolver>), null) : Bool)) { JointRegistry._wakePhysics2DJointBodies__jointRegistry(({ final __callArgument33:Dynamic = world; __callArgument33; }), ({ final __callArgument34:Dynamic = joint; __callArgument34; })); }
-    _Runtime.splice((cast world : Physics2DWorld).joints, Std.int(at), Std.int(1.0), []);
+    _Runtime.splice(world.joints, Std.int(at), Std.int(1.0), []);
     ((cast physics2DJointOwners : flighthq._internal._WeakMap<Physics2DJoint, Physics2DWorld>).delete_((cast joint : Physics2DJoint)));
     rebuildPhysics2DJointCollisionSuppressions(({ final __callArgument35:Dynamic = world; __callArgument35; }));
     return cast true;

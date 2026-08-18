@@ -44,7 +44,7 @@ class WorldQueries {
     ((cast out : Physics2DQueryResult).hitCount = 0.0);
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([x] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([y] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
     synchronizePhysics2DBroadphase(({ final __callArgument0:Dynamic = world; __callArgument0; }));
-    (cast (cast world : Physics2DWorld).index : SpatialIndexBackend).querySpatialPoint((cast x : Float), (cast y : Float), ({ final __callArgument1:Dynamic = WorldQueries.candidateBodyScratch__worldQueries; __callArgument1; }));
+    (cast world.index : SpatialIndexBackend).querySpatialPoint((cast x : Float), (cast y : Float), ({ final __callArgument1:Dynamic = WorldQueries.candidateBodyScratch__worldQueries; __callArgument1; }));
     _Runtime.callProperty(WorldQueries.candidateBodyScratch__worldQueries, 'sort', cast ([WorldQueries.compareNumbers__worldQueries] : Array<Dynamic>));
     for (bodyIndex in _Runtime.iterable(WorldQueries.candidateBodyScratch__worldQueries)) {
       var body:Null<RigidBody2D> = (cast findPhysics2DBody(({ final __callArgument4:Dynamic = world; __callArgument4; }), (cast bodyIndex : Float)) : Null<RigidBody2D>);
@@ -54,7 +54,7 @@ class WorldQueries {
         while ((cast ((cast colliderIndex : Float) < (cast _Runtime.field((cast body : RigidBody2D).colliders, 'length') : Float)) : Bool)) {
           var collider:Physics2DCollider = flighthq._internal._StaticIndex.readArray((cast body : RigidBody2D).colliders, colliderIndex);
           if ((cast !(cast (cast WorldQueries.passesColliderFilter__worldQueries(({ final __callArgument7:Dynamic = collider; __callArgument7; }), ({ final __callArgument8:Dynamic = filter; __callArgument8; })) : Bool) : Bool) : Bool)) { colliderIndex++; continue; }
-          if ((cast !(cast (cast getCollisionShapeContainsPoint((cast collider : Physics2DCollider).world, (cast x : Float), (cast y : Float)) : Bool) : Bool) : Bool)) { colliderIndex++; continue; }
+          if ((cast !(cast (cast getCollisionShapeContainsPoint(collider.world, (cast x : Float), (cast y : Float)) : Bool) : Bool) : Bool)) { colliderIndex++; continue; }
           WorldQueries.writeQueryHit__worldQueries(({ final __callArgument9:Dynamic = out; __callArgument9; }), ({ final __callArgument10:Dynamic = body; __callArgument10; }), ({ final __callArgument11:Dynamic = collider; __callArgument11; }), (cast colliderIndex : Float));
           colliderIndex++;
         }
@@ -78,7 +78,7 @@ class WorldQueries {
       return;
     }
     synchronizePhysics2DBroadphase(({ final __callArgument18:Dynamic = world; __callArgument18; }));
-    (cast (cast world : Physics2DWorld).index : SpatialIndexBackend).querySpatialRay((cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), ({ final __callArgument19:Dynamic = WorldQueries.candidateBodyScratch__worldQueries; __callArgument19; }));
+    (cast world.index : SpatialIndexBackend).querySpatialRay((cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), ({ final __callArgument19:Dynamic = WorldQueries.candidateBodyScratch__worldQueries; __callArgument19; }));
     _Runtime.callProperty(WorldQueries.candidateBodyScratch__worldQueries, 'sort', cast ([WorldQueries.compareNumbers__worldQueries] : Array<Dynamic>));
     for (bodyIndex in _Runtime.iterable(WorldQueries.candidateBodyScratch__worldQueries)) {
       var body:Null<RigidBody2D> = (cast findPhysics2DBody(({ final __callArgument22:Dynamic = world; __callArgument22; }), (cast bodyIndex : Float)) : Null<RigidBody2D>);
@@ -88,7 +88,7 @@ class WorldQueries {
         while ((cast ((cast colliderIndex : Float) < (cast _Runtime.field((cast body : RigidBody2D).colliders, 'length') : Float)) : Bool)) {
           var collider:Physics2DCollider = flighthq._internal._StaticIndex.readArray((cast body : RigidBody2D).colliders, colliderIndex);
           if ((cast !(cast (cast WorldQueries.passesColliderFilter__worldQueries(({ final __callArgument25:Dynamic = collider; __callArgument25; }), ({ final __callArgument26:Dynamic = filter; __callArgument26; })) : Bool) : Bool) : Bool)) { colliderIndex++; continue; }
-          if ((cast !(cast (cast raycastCollisionShape((cast collider : Physics2DCollider).world, (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), ({ final __callArgument27:Dynamic = WorldQueries.raycastHitScratch__worldQueries; __callArgument27; }), (cast maxFraction : Float)) : Bool) : Bool) : Bool)) {
+          if ((cast !(cast (cast raycastCollisionShape(collider.world, (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), ({ final __callArgument27:Dynamic = WorldQueries.raycastHitScratch__worldQueries; __callArgument27; }), (cast maxFraction : Float)) : Bool) : Bool) : Bool)) {
             colliderIndex++;
             continue;
           }
@@ -104,7 +104,7 @@ class WorldQueries {
     ((cast out : Physics2DQueryResult).hitCount = 0.0);
     if ((cast !(cast (cast WorldQueries.isValidRegion__worldQueries(({ final __callArgument37:Dynamic = region; __callArgument37; })) : Bool) : Bool) : Bool)) { return; }
     synchronizePhysics2DBroadphase(({ final __callArgument38:Dynamic = world; __callArgument38; }));
-    (cast (cast world : Physics2DWorld).index : SpatialIndexBackend).querySpatialRegion(({ final __callArgument39:Dynamic = region; __callArgument39; }), ({ final __callArgument40:Dynamic = WorldQueries.candidateBodyScratch__worldQueries; __callArgument40; }));
+    (cast world.index : SpatialIndexBackend).querySpatialRegion(({ final __callArgument39:Dynamic = region; __callArgument39; }), ({ final __callArgument40:Dynamic = WorldQueries.candidateBodyScratch__worldQueries; __callArgument40; }));
     _Runtime.callProperty(WorldQueries.candidateBodyScratch__worldQueries, 'sort', cast ([WorldQueries.compareNumbers__worldQueries] : Array<Dynamic>));
     for (bodyIndex in _Runtime.iterable(WorldQueries.candidateBodyScratch__worldQueries)) {
       var body:Null<RigidBody2D> = (cast findPhysics2DBody(({ final __callArgument43:Dynamic = world; __callArgument43; }), (cast bodyIndex : Float)) : Null<RigidBody2D>);
@@ -210,8 +210,8 @@ class WorldQueries {
 
   public static function passesColliderFilter__worldQueries(collider:Physics2DCollider, filter:Null<Physics2DQueryFilter>):Bool {
     if ((cast _Runtime.strictEquals(filter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast true; }
-    if ((cast ((cast !(cast _Runtime.field(filter, 'includeSensors') : Bool) : Bool) && (cast _Runtime.field(collider, 'sensor') : Bool)) : Bool)) { return cast false; }
-    return cast _Runtime.andValue(!_Runtime.strictEquals((_Runtime.toInt32((cast _Runtime.field(collider, 'filter') : Physics2DCollisionFilter).categoryBits) & _Runtime.toInt32(_Runtime.field(filter, 'categoryBits'))), 0.0), function():Dynamic return cast !_Runtime.strictEquals((_Runtime.toInt32((cast _Runtime.field(collider, 'filter') : Physics2DCollisionFilter).maskBits) & _Runtime.toInt32(_Runtime.field(filter, 'maskBits'))), 0.0));
+    if ((cast ((cast !(cast _Runtime.field(filter, 'includeSensors') : Bool) : Bool) && (cast collider.sensor : Bool)) : Bool)) { return cast false; }
+    return cast _Runtime.andValue(!_Runtime.strictEquals((_Runtime.toInt32((cast collider.filter : Physics2DCollisionFilter).categoryBits) & _Runtime.toInt32(_Runtime.field(filter, 'categoryBits'))), 0.0), function():Dynamic return cast !_Runtime.strictEquals((_Runtime.toInt32((cast collider.filter : Physics2DCollisionFilter).maskBits) & _Runtime.toInt32(_Runtime.field(filter, 'maskBits'))), 0.0));
     return cast null;
   }
 

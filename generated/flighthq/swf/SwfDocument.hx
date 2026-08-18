@@ -548,7 +548,7 @@ class SwfDocument {
     multiplyMatrix(({ final __callArgument68:Dynamic = combined; __callArgument68; }), ({ final __callArgument69:Dynamic = _Runtime.field(mask, 'matrix'); __callArgument69; }), ({ final __callArgument70:Dynamic = inverse; __callArgument70; }));
     contours = (cast cast ([] : Array<Dynamic>));
     for (region in _Runtime.iterable(_Runtime.coalesce((cast getShapeFillRegions((cast (cast (cast shape : Shape).data : ShapeData).commands : Dynamic)) : Null<Array<ShapeFillRegion>>), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
-      for (contour in _Runtime.iterable(_Runtime.coalesce((cast (cast createClipRegionFromPath((cast region : ShapeFillRegion).path, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ClipRegion) : ClipRegion).contours, function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
+      for (contour in _Runtime.iterable(_Runtime.coalesce((cast (cast createClipRegionFromPath((cast region : ShapeFillRegion).path, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ClipRegion) : { var contours:Null<Array<Array<Float>>>; }).contours, function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
         var transformed:Array<Float> = _Runtime.createArray(_Runtime.field(contour, 'length'));
         {
           var i:Float = 0.0;

@@ -14,8 +14,8 @@ class MassProperties {
   public static function computePhysics2DColliderMassData(collider:Physics2DCollider, out:Physics2DMassData):Void {
     var shape:CollisionShape = cast _Runtime.UNDEFINED;
     var density:Float = cast _Runtime.UNDEFINED;
-    shape = _Runtime.field(collider, 'local');
-    density = (cast _Runtime.field(collider, 'material') : Physics2DMaterial).density;
+    shape = collider.local;
+    density = (cast collider.material : Physics2DMaterial).density;
     {
       var __switchValue = (cast shape : { var kind:String; }).kind;
       if (__switchValue == 'circle') {

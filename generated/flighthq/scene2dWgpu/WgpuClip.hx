@@ -49,11 +49,11 @@ class WgpuClip {
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : WgpuRenderStateRuntime);
     clip = (cast source : { var clip:Null<ClipRegion>; }).clip;
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals((cast clip : ClipRegion).contours, null) : Bool)) {
-      pushWgpuClipRectangle(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast clip : ClipRegion).rect; __callArgument9; }), ({ final __callArgument10:Dynamic = (cast data : RenderProxy2D).transform2D; __callArgument10; }));
+    if ((cast _Runtime.strictEquals((cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, null) : Bool)) {
+      pushWgpuClipRectangle(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast clip : { var rect:Rectangle; }).rect; __callArgument9; }), ({ final __callArgument10:Dynamic = (cast data : RenderProxy2D).transform2D; __callArgument10; }));
       _Runtime.callProperty(runtime.clipForms, 'push', cast (['rect'] : Array<Dynamic>));
     } else {
-      pushWgpuClipContours(({ final __callArgument11:Dynamic = state; __callArgument11; }), (cast clip : ClipRegion).contours, (cast clip : ClipRegion).winding, (cast data : RenderProxy2D).transform2D);
+      pushWgpuClipContours(({ final __callArgument11:Dynamic = state; __callArgument11; }), (cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, (cast clip : { var winding:PathWinding; }).winding, (cast data : RenderProxy2D).transform2D);
       _Runtime.callProperty(runtime.clipForms, 'push', cast (['contour'] : Array<Dynamic>));
     }
   } });

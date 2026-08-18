@@ -52141,9 +52141,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 151,
+        "directAccesses": 151,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -52189,7 +52189,7 @@
       },
       "name": "ClipRegion",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free clip region",
       "reasons": [],
       "source": "upstream/packages/types/src/ClipRegion.ts",
       "sourceProvenance": {
@@ -229281,9 +229281,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 47,
+        "directAccesses": 47,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -229337,7 +229337,7 @@
       },
       "name": "Physics2DCollider",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free physics collider",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics2D.ts",
       "sourceProvenance": {
@@ -229428,9 +229428,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 157,
+        "directAccesses": 157,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -229548,7 +229548,7 @@
       },
       "name": "Physics2DContact",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free physics contact",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics2D.ts",
       "sourceProvenance": {
@@ -236416,9 +236416,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 55,
+        "directAccesses": 55,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -236536,7 +236536,7 @@
       },
       "name": "Physics2DSolverConfig",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free physics solver config",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics2D.ts",
       "sourceProvenance": {
@@ -237332,9 +237332,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 217,
+        "directAccesses": 217,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -237580,7 +237580,7 @@
       },
       "name": "Physics2DWorld",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free physics world",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics2D.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1591,
+      "newAuditOnly": 1586,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1591,
+    "auditOnlySchemas": 1586,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 15362,
-    "directSchemas": 413,
+    "directAccesses": 15989,
+    "directSchemas": 418,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 15304,
+    "pendingAccesses": 14677,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

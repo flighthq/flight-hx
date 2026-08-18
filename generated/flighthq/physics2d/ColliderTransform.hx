@@ -38,8 +38,8 @@ class ColliderTransform {
     var world:CollisionShape = cast _Runtime.UNDEFINED;
     var cos:Float = cast _Runtime.UNDEFINED;
     var sin:Float = cast _Runtime.UNDEFINED;
-    local = (cast collider : Physics2DCollider).local;
-    world = (cast collider : Physics2DCollider).world;
+    local = collider.local;
+    world = collider.world;
     cos = HxMath.cos(_Runtime.field(body, 'angle'));
     sin = HxMath.sin(_Runtime.field(body, 'angle'));
     if ((cast ((cast _Runtime.strictEquals((cast local : { var kind:String; }).kind, 'circle') : Bool) && (cast _Runtime.strictEquals((cast world : { var kind:String; }).kind, 'circle') : Bool)) : Bool)) {
@@ -96,7 +96,7 @@ class ColliderTransform {
 
   public static function writePhysics2DColliderBounds(collider:Physics2DCollider, out:{ var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }):Void {
     var shape:CollisionShape = cast _Runtime.UNDEFINED;
-    shape = _Runtime.field(collider, 'world');
+    shape = collider.world;
     {
       var __switchValue = (cast shape : { var kind:String; }).kind;
       if (__switchValue == 'circle') {

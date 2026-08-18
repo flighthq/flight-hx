@@ -33,34 +33,34 @@ class DebugGeometry {
     ((cast out : Physics2DDebugGeometry).lineCount = 0.0);
     ((cast out : Physics2DDebugGeometry).circleCount = 0.0);
     if ((cast _Runtime.coalesce(_Runtime.field(options, 'drawColliders'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.drawColliders) : Bool)) {
-      for (body in _Runtime.iterable(_Runtime.field(world, 'bodies'))) {
+      for (body in _Runtime.iterable(world.bodies)) {
         for (collider in _Runtime.iterable((cast body : RigidBody2D).colliders)) {
-          DebugGeometry.writeCollider__debugGeometry(({ final __callArgument4:Dynamic = out; __callArgument4; }), (cast collider : Physics2DCollider).local, ({ final __callArgument5:Dynamic = body; __callArgument5; }), (cast options : flighthq._internal._Any));
+          DebugGeometry.writeCollider__debugGeometry(({ final __callArgument4:Dynamic = out; __callArgument4; }), collider.local, ({ final __callArgument5:Dynamic = body; __callArgument5; }), (cast options : flighthq._internal._Any));
         }
       }
     }
     if ((cast _Runtime.coalesce(_Runtime.field(options, 'drawContacts'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.drawContacts) : Bool)) {
       var length:Float = _Runtime.coalesce(_Runtime.field(options, 'contactNormalLength'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.contactNormalLength);
-      for (contact in _Runtime.iterable(_Runtime.field(world, 'contacts'))) {
-        if ((cast !(cast (cast contact : Physics2DContact).touching : Bool) : Bool)) { continue; }
+      for (contact in _Runtime.iterable(world.contacts)) {
+        if ((cast !(cast contact.touching : Bool) : Bool)) { continue; }
         {
           var i:Float = 0.0;
-          while ((cast ((cast i : Float) < (cast (cast contact : Physics2DContact).pointCount : Float)) : Bool)) {
-            var point:Physics2DContactPoint = flighthq._internal._StaticIndex.readArray((cast contact : Physics2DContact).points, i);
-            DebugGeometry.writeLine__debugGeometry(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = 'contact-normal'; __callArgument9; }), (cast (cast contact : Physics2DContact).bodyA : Float), (cast (cast contact : Physics2DContact).bodyB : Float), (cast (cast point : Physics2DContactPoint).x : Float), (cast (cast point : Physics2DContactPoint).y : Float), (cast ((cast point : Physics2DContactPoint).x + ((cast contact : Physics2DContact).normalX * length)) : Float), (cast ((cast point : Physics2DContactPoint).y + ((cast contact : Physics2DContact).normalY * length)) : Float));
+          while ((cast ((cast i : Float) < (cast contact.pointCount : Float)) : Bool)) {
+            var point:Physics2DContactPoint = flighthq._internal._StaticIndex.readArray(contact.points, i);
+            DebugGeometry.writeLine__debugGeometry(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = 'contact-normal'; __callArgument9; }), (cast contact.bodyA : Float), (cast contact.bodyB : Float), (cast (cast point : Physics2DContactPoint).x : Float), (cast (cast point : Physics2DContactPoint).y : Float), (cast ((cast point : Physics2DContactPoint).x + (contact.normalX * length)) : Float), (cast ((cast point : Physics2DContactPoint).y + (contact.normalY * length)) : Float));
             i++;
           }
         }
       }
     }
     if ((cast _Runtime.coalesce(_Runtime.field(options, 'drawJoints'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.drawJoints) : Bool)) {
-      for (joint in _Runtime.iterable(_Runtime.field(world, 'joints'))) {
+      for (joint in _Runtime.iterable(world.joints)) {
         DebugGeometry.writeJoint__debugGeometry(({ final __callArgument12:Dynamic = out; __callArgument12; }), ({ final __callArgument13:Dynamic = world; __callArgument13; }), ({ final __callArgument14:Dynamic = joint; __callArgument14; }));
       }
     }
     if ((cast _Runtime.coalesce(_Runtime.field(options, 'drawCentersOfMass'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.drawCentersOfMass) : Bool)) {
       var radius:Float = _Runtime.coalesce(_Runtime.field(options, 'centerOfMassRadius'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.centerOfMassRadius);
-      for (body in _Runtime.iterable(_Runtime.field(world, 'bodies'))) {
+      for (body in _Runtime.iterable(world.bodies)) {
         var cos:Float = HxMath.cos((cast body : RigidBody2D).angle);
         var sin:Float = HxMath.sin((cast body : RigidBody2D).angle);
         DebugGeometry.writeCircle__debugGeometry(({ final __callArgument17:Dynamic = out; __callArgument17; }), ({ final __callArgument18:Dynamic = 'center-of-mass'; __callArgument18; }), (cast (cast body : RigidBody2D).index : Float), (cast -1.0 : Float), (cast (((cast body : RigidBody2D).x + ((cast body : RigidBody2D).centerX * cos)) - ((cast body : RigidBody2D).centerY * sin)) : Float), (cast (((cast body : RigidBody2D).y + ((cast body : RigidBody2D).centerX * sin)) + ((cast body : RigidBody2D).centerY * cos)) : Float), (cast radius : Float));
@@ -184,7 +184,7 @@ class DebugGeometry {
       DebugGeometry.writeLine__debugGeometry(({ final __callArgument40:Dynamic = out; __callArgument40; }), ({ final __callArgument41:Dynamic = 'joint'; __callArgument41; }), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast (cast mouse : Physics2DMouseJoint).targetX : Float), (cast (cast mouse : Physics2DMouseJoint).targetY : Float), (cast anchorBX : Float), (cast anchorBY : Float));
       return;
     }
-    if ((cast _Runtime.strictEquals(({ final __structural42 = ((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map<String, Physics2DJointSolver>).get(_Runtime.field(joint, 'kind'))); __structural42 == null ? _Runtime.UNDEFINED : (cast __structural42 : { @:optional var usesBodyA:Null<Bool>; }).usesBodyA; }), false) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(({ final __structural42 = ((cast world.jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get(_Runtime.field(joint, 'kind'))); __structural42 == null ? _Runtime.UNDEFINED : (cast __structural42 : { @:optional var usesBodyA:Null<Bool>; }).usesBodyA; }), false) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument43:Dynamic = world; __callArgument43; }), (cast _Runtime.field(joint, 'bodyA') : Float)) : Null<RigidBody2D>);
     if ((cast _Runtime.strictEquals(bodyA, null) : Bool)) { return; }
     anchorAX = (cast DebugGeometry.jointAnchorX__debugGeometry(({ final __callArgument44:Dynamic = bodyA; __callArgument44; }), (cast _Runtime.field(joint, 'localAnchorAX') : Float), (cast _Runtime.field(joint, 'localAnchorAY') : Float)) : Float);

@@ -47,11 +47,11 @@ class GlClip {
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : GlRenderStateRuntime);
     clip = (cast source : { var clip:Null<ClipRegion>; }).clip;
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals((cast clip : ClipRegion).contours, null) : Bool)) {
-      pushGlClipRectangle(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = (cast clip : ClipRegion).rect; __callArgument11; }), ({ final __callArgument12:Dynamic = (cast data : RenderProxy2D).transform2D; __callArgument12; }));
+    if ((cast _Runtime.strictEquals((cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, null) : Bool)) {
+      pushGlClipRectangle(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = (cast clip : { var rect:Rectangle; }).rect; __callArgument11; }), ({ final __callArgument12:Dynamic = (cast data : RenderProxy2D).transform2D; __callArgument12; }));
       _Runtime.callProperty(runtime.clipForms, 'push', cast (['rect'] : Array<Dynamic>));
     } else {
-      pushGlClipContours(({ final __callArgument13:Dynamic = state; __callArgument13; }), (cast clip : ClipRegion).contours, (cast clip : ClipRegion).winding, (cast data : RenderProxy2D).transform2D);
+      pushGlClipContours(({ final __callArgument13:Dynamic = state; __callArgument13; }), (cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, (cast clip : { var winding:PathWinding; }).winding, (cast data : RenderProxy2D).transform2D);
       _Runtime.callProperty(runtime.clipForms, 'push', cast (['contour'] : Array<Dynamic>));
     }
   } });

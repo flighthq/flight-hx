@@ -5,9 +5,9 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 413 schemas currently emit direct fields, covering 15,362 accesses.
-- 1,123 eligible schemas remain audit-only, covering 15,304 pending accesses.
-- 866 audit-only schemas have no recorded escape, covering 10,550 pending accesses.
+- 418 schemas currently emit direct fields, covering 15,989 accesses.
+- 1,118 eligible schemas remain audit-only, covering 14,677 pending accesses.
+- 861 audit-only schemas have no recorded escape, covering 9,923 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
@@ -33,7 +33,8 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote `GlRenderStateRuntime` and `WgpuRenderStateRuntime`: 1,274 accesses now emit directly while their shared-base cross-schema transfers correctly keep cpp nominalization disabled.
 - [x] Promote the Canvas, WebGL, portable, descriptor, and WebGPU render-target family: 707 accesses now emit directly while structural-transfer and optional-omission evidence correctly keeps cpp nominalization disabled.
 - [x] Promote `TextLayoutGroup`, `TextLayoutResult`, `RichTextData`, `RichText`, and `RichTextContent`: 891 accesses now emit directly while propagated cross-schema provenance keeps all five structural on cpp.
-- [ ] Review the next zero-escape hot rows, including physics world/contact records and clip regions.
+- [x] Promote `Physics2DWorld`, `Physics2DContact`, `Physics2DSolverConfig`, `Physics2DCollider`, and `ClipRegion`: 627 accesses now emit directly; cpp class emission remains separately opt-in even for the four provenance-closed physics identities, while clip containment keeps `ClipRegion` structural.
+- [ ] Review the render-context/runtime hot rows: `GlRenderEffectContext`, `WgpuRenderEffectContext`, `CanvasRenderEffectContext`, `GlScene3DRuntime`, and `WgpuScene3DRuntime`.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 
 ## 3. Typed union projection

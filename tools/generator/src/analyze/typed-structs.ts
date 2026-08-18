@@ -93,6 +93,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#RichTextContent',
     purpose: 'reviewed escape-free rich-text content',
   },
+  {
+    declarationFingerprint: 'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
+    id: '@flighthq/types:interface#Physics2DWorld',
+    purpose: 'reviewed escape-free physics world',
+  },
+  {
+    declarationFingerprint: 'sha256:3a89f0bc11ff1e68096dbb0499ae192d3abb1cde4962391c47b614b9bc6d616f',
+    id: '@flighthq/types:interface#Physics2DContact',
+    purpose: 'reviewed escape-free physics contact',
+  },
+  {
+    declarationFingerprint: 'sha256:29644de2ca268e7003a01a34866533f5279d4bc6da62b2de3f2f702b1a5eaaab',
+    id: '@flighthq/types:interface#Physics2DSolverConfig',
+    purpose: 'reviewed escape-free physics solver config',
+  },
+  {
+    declarationFingerprint: 'sha256:61a33980287691a1d2e1de55628a62dc799ca4529f6c87a035683162ee3e72ce',
+    id: '@flighthq/types:interface#Physics2DCollider',
+    purpose: 'reviewed escape-free physics collider',
+  },
+  {
+    declarationFingerprint: 'sha256:f73b90fe6168b429bc413bda84ebe794b96c7345e5da4ab65264c4241d9995b2',
+    id: '@flighthq/types:interface#ClipRegion',
+    purpose: 'reviewed escape-free clip region',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

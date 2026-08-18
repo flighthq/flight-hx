@@ -20,9 +20,9 @@ class ExplainPhysics2DJoints {
     readyCount = 0.0;
     {
       var jointIndex:Float = 0.0;
-      while ((cast ((cast jointIndex : Float) < (cast _Runtime.field(_Runtime.field(world, 'joints'), 'length') : Float)) : Bool)) {
-        var joint:Physics2DJoint = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'joints'), jointIndex);
-        var solver:Null<Physics2DJointSolver> = ((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map<String, Physics2DJointSolver>).get((cast joint : Physics2DJoint).kind));
+      while ((cast ((cast jointIndex : Float) < (cast _Runtime.field(world.joints, 'length') : Float)) : Bool)) {
+        var joint:Physics2DJoint = flighthq._internal._StaticIndex.readArray(world.joints, jointIndex);
+        var solver:Null<Physics2DJointSolver> = ((cast world.jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get((cast joint : Physics2DJoint).kind));
         var solverRegistered:Bool = !_Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED'));
         var bodyAUsed:Bool = !_Runtime.strictEquals(({ final __structural0 = solver; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var usesBodyA:Null<Bool>; }).usesBodyA; }), false);
         var bodyAFound:Bool = !_Runtime.strictEquals((cast findPhysics2DBody(({ final __callArgument1:Dynamic = world; __callArgument1; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>), null);

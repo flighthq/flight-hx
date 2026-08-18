@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_591,
+      newAuditOnly: 1_586,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(415);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(420);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_591);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_586);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(13);
+    expect(newDirect).toHaveLength(18);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -175,6 +175,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'WgpuRenderTarget',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free WebGPU render target',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DWorld',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics world',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DContact',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics contact',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DSolverConfig',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics solver config',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DCollider',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics collider',
+        }),
+        expect.objectContaining({
+          name: 'ClipRegion',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free clip region',
         }),
       ]),
     );
@@ -243,6 +268,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:048d186739d8bfe34b14f636cd57fb89116b401bab1347c3742749f04b2838be',
         id: '@flighthq/types:interface#RichTextContent',
         purpose: 'reviewed escape-free rich-text content',
+      },
+      {
+        declarationFingerprint: 'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
+        id: '@flighthq/types:interface#Physics2DWorld',
+        purpose: 'reviewed escape-free physics world',
+      },
+      {
+        declarationFingerprint: 'sha256:3a89f0bc11ff1e68096dbb0499ae192d3abb1cde4962391c47b614b9bc6d616f',
+        id: '@flighthq/types:interface#Physics2DContact',
+        purpose: 'reviewed escape-free physics contact',
+      },
+      {
+        declarationFingerprint: 'sha256:29644de2ca268e7003a01a34866533f5279d4bc6da62b2de3f2f702b1a5eaaab',
+        id: '@flighthq/types:interface#Physics2DSolverConfig',
+        purpose: 'reviewed escape-free physics solver config',
+      },
+      {
+        declarationFingerprint: 'sha256:61a33980287691a1d2e1de55628a62dc799ca4529f6c87a035683162ee3e72ce',
+        id: '@flighthq/types:interface#Physics2DCollider',
+        purpose: 'reviewed escape-free physics collider',
+      },
+      {
+        declarationFingerprint: 'sha256:f73b90fe6168b429bc413bda84ebe794b96c7345e5da4ab65264c4241d9995b2',
+        id: '@flighthq/types:interface#ClipRegion',
+        purpose: 'reviewed escape-free clip region',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -604,6 +654,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const physicsAndClipCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['ClipRegion', 'Physics2DCollider', 'Physics2DContact', 'Physics2DSolverConfig', 'Physics2DWorld'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -644,22 +703,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_591,
+      auditOnlySchemas: 1_586,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 15_362,
-      directSchemas: 413,
+      directAccesses: 15_989,
+      directSchemas: 418,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 15_304,
+      pendingAccesses: 14_677,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_591,
+      newAuditOnly: 1_586,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -687,7 +746,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(15_362);
+    expect(report.summary.directAccesses).toBe(15_989);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -785,6 +844,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(renderTargetCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'Physics2DWorld',
+        217,
+        'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
+        'reviewed escape-free physics world',
+      ],
+      [
+        'Physics2DContact',
+        157,
+        'sha256:3a89f0bc11ff1e68096dbb0499ae192d3abb1cde4962391c47b614b9bc6d616f',
+        'reviewed escape-free physics contact',
+      ],
+      [
+        'Physics2DSolverConfig',
+        55,
+        'sha256:29644de2ca268e7003a01a34866533f5279d4bc6da62b2de3f2f702b1a5eaaab',
+        'reviewed escape-free physics solver config',
+      ],
+      [
+        'Physics2DCollider',
+        47,
+        'sha256:61a33980287691a1d2e1de55628a62dc799ca4529f6c87a035683162ee3e72ce',
+        'reviewed escape-free physics collider',
+      ],
+      [
+        'ClipRegion',
+        151,
+        'sha256:f73b90fe6168b429bc413bda84ebe794b96c7345e5da4ab65264c4241d9995b2',
+        'reviewed escape-free clip region',
+      ],
+    ] as const) {
+      expect(physicsAndClipCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -897,6 +998,32 @@ describe('typed struct analysis', () => {
         closed: false,
       });
     }
+    for (const physicsStructId of [
+      '@flighthq/types:interface#Physics2DCollider',
+      '@flighthq/types:interface#Physics2DContact',
+      '@flighthq/types:interface#Physics2DSolverConfig',
+      '@flighthq/types:interface#Physics2DWorld',
+    ]) {
+      expect(classAuditById.get(physicsStructId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.get(physicsStructId)?.nominalIdentity).toEqual({
+        blockerReasons: [],
+        closed: true,
+      });
+    }
+    const clipRegionId = '@flighthq/types:interface#ClipRegion';
+    expect(classAuditById.get(clipRegionId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(clipRegionId)?.nominalIdentity).toEqual({
+      blockerReasons: ['normalization-provenance'],
+      closed: false,
+    });
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -932,6 +1059,16 @@ describe('typed struct analysis', () => {
     expect(richTextMetrics).not.toMatch(/_Runtime\.field\(layout,/u);
     const richTextQuery = readFileSync('generated/flighthq/textlayout/RichTextQuery.hx', 'utf8');
     expect(richTextQuery).not.toMatch(/_Runtime\.field\((?:group|layout),/u);
+    const physicsStepValidation = readFileSync('generated/flighthq/physics2d/StepValidation.hx', 'utf8');
+    expect(physicsStepValidation).not.toMatch(/_Runtime\.field\((?:collider|config|contact|world),/u);
+    expect(physicsStepValidation).not.toMatch(
+      /\(cast (?:collider|config|contact|world) : Physics2D(?:Collider|Contact|SolverConfig|World)\)\./u,
+    );
+    const physicsWorld = readFileSync('generated/flighthq/physics2d/World.hx', 'utf8');
+    expect(physicsWorld).not.toMatch(/_Runtime\.field\(world,/u);
+    const generatedClipRegion = readFileSync('generated/flighthq/clip/ClipRegion.hx', 'utf8');
+    expect(generatedClipRegion).not.toMatch(/_Runtime\.field\(clip,/u);
+    expect(generatedClipRegion).not.toMatch(/\(cast clip : ClipRegion\)\./u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

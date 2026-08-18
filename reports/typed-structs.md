@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1591 |
-| Direct schemas | 413 |
+| Audit-only schemas | 1586 |
+| Direct schemas | 418 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 15304 |
-| Directly emitted accesses | 15362 |
+| Pending accesses | 14677 |
+| Directly emitted accesses | 15989 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1591 |
+| Newly discovered, audit-only | 1586 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -350,7 +350,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ClipboardWriteItem` | `direct` | `preserved` | `@flighthq/types:interface#ClipboardWriteItem` | broad host document | 2 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ClipNode` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#ClippingAttachment2D` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ClipRegion` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 104 | 47 | 0 | 151 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ClipRegion` | `direct` | `new` | — | reviewed escape-free clip region | 4 | 104 | 47 | 0 | 0 | 151 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ClipRegionReleaseGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#Clock` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 25 | 11 | 0 | 36 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ClockOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
@@ -1134,9 +1134,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#PerspectiveProjectionOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PhongMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 36 | 7 | 0 | 43 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics2DBodyType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#Physics2DCollider` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 46 | 1 | 0 | 47 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DCollider` | `direct` | `new` | — | reviewed escape-free physics collider | 5 | 46 | 1 | 0 | 0 | 47 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DCollisionFilter` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 13 | 0 | 0 | 13 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Physics2DContact` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 144 | 13 | 0 | 157 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DContact` | `direct` | `new` | — | reviewed escape-free physics contact | 13 | 144 | 13 | 0 | 0 | 157 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics2DContactCallback` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#Physics2DContactEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DContactHooks` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
@@ -1175,13 +1175,13 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Physics2DRevoluteJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DRopeJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DRopeJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DSolverConfig` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 52 | 3 | 0 | 55 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DSolverConfig` | `direct` | `new` | — | reviewed escape-free physics solver config | 13 | 52 | 3 | 0 | 0 | 55 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DStepExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DWeldJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 2 | 1 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DWeldJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DWheelJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 24 | 21 | 6 | 0 | 27 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DWheelJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DWorld` | `audit-only` | `new` | — | checker-discovered public declaration | 29 | 214 | 3 | 0 | 217 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DWorld` | `direct` | `new` | — | reviewed escape-free physics world | 29 | 214 | 3 | 0 | 0 | 217 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PixelateEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PixelFormat` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#PixelOrder` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |

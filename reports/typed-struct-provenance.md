@@ -136,7 +136,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#ClipboardBookmark` | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#ClipboardWatch` | 1 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#ClipboardWriteItem` | 5 | 2 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
-| `@flighthq/types:interface#ClipRegion` | 0 | 4 | 16 | 1 | 32 | 0 | 26 | 46 | no | `normalization-provenance` |
+| `@flighthq/types:interface#ClipRegion` | 151 | 4 | 16 | 1 | 32 | 0 | 26 | 46 | no | `normalization-provenance` |
 | `@flighthq/types:interface#Clock` | 0 | 7 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CocosPlistDocument` | 7 | 2 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CocosPlistMetadata` | 7 | 3 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
@@ -378,8 +378,8 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#PermissionBackend` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#PermissionStateExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#PerspectiveProjection` | 9 | 3 | 4 | 0 | 2 | 0 | 4 | 3 | no | `normalization-provenance` |
-| `@flighthq/types:interface#Physics2DCollider` | 0 | 5 | 3 | 14 | 0 | 0 | 5 | 5 | yes | — |
-| `@flighthq/types:interface#Physics2DContact` | 0 | 13 | 3 | 1 | 0 | 0 | 2 | 1 | yes | — |
+| `@flighthq/types:interface#Physics2DCollider` | 47 | 5 | 3 | 14 | 0 | 0 | 5 | 5 | yes | — |
+| `@flighthq/types:interface#Physics2DContact` | 157 | 13 | 3 | 1 | 0 | 0 | 2 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DContactEvents` | 0 | 2 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DContactHooks` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DContactPoint` | 0 | 13 | 1 | 0 | 0 | 0 | 3 | 1 | yes | — |
@@ -395,9 +395,9 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Physics2DQueryResult` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DRayHit` | 0 | 8 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DRayResult` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#Physics2DSolverConfig` | 0 | 13 | 1 | 0 | 0 | 0 | 2 | 2 | yes | — |
+| `@flighthq/types:interface#Physics2DSolverConfig` | 55 | 13 | 1 | 0 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#Physics2DStepExplanation` | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Physics2DWorld` | 0 | 29 | 0 | 9 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics2DWorld` | 217 | 29 | 0 | 9 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#PixiParseResult` | 2 | 2 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#PlatformBackend` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Power` | 37 | 10 | 0 | 10 | 0 | 0 | 1 | 1 | yes | — |
