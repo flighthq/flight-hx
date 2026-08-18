@@ -34,7 +34,7 @@ import flighthq.types.Physics2D.Physics2DWeldJointOptions;
 import flighthq.types.Physics2D.Physics2DWheelJoint;
 import flighthq.types.Physics2D.Physics2DWheelJointOptions;
 
-typedef Physics2DJointBase__jointFactories = flighthq._internal._Omit<Physics2DJoint, String>;
+typedef Physics2DJointBase__jointFactories = { var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; };
 
 class JointFactories {
   public static function createJointBase__jointFactories(options:Physics2DJointOptions):Physics2DJointBase__jointFactories {

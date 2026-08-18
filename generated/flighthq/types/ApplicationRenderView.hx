@@ -4,14 +4,17 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTarget.RenderTargetDepth;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.RenderTarget.RenderTargetDimensions;
+import flighthq.types.RenderTarget.RenderTargetFormat;
 
 typedef ApplicationRenderView<State, Target> = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var renderState:State; var renderTarget:Target; var viewport:Viewport; var window:ApplicationWindow; };
 
 typedef ApplicationRenderViewResize<State, Target> = State->Target->Float->Float->Void;
 
-typedef ApplicationRenderViewTargetOptions = flighthq._internal._Omit<RenderTargetDescriptor, String>;
+typedef ApplicationRenderViewTargetOptions = { @:optional var format:Null<RenderTargetFormat>; @:optional var colorAttachments:Null<Float>; @:optional var colorFormats:Null<Array<RenderTargetFormat>>; @:optional var sampleCount:Null<Float>; @:optional var depth:Null<RenderTargetDepth>; @:optional var colorSpace:Null<RenderTargetColorSpace>; @:optional var clearColors:Null<Array<Float>>; @:optional var clearDepth:Null<Float>; };
 
 typedef GlApplicationRenderViewOptions = { @:optional var render:GlRenderOptions; @:optional var target:ApplicationRenderViewTargetOptions; };
 

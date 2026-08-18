@@ -14,4 +14,4 @@ typedef FocusManagerOptions = { @:optional var wrap:Bool; };
 
 typedef FocusNavigationOptions = { @:optional var arrowKeys:Bool; };
 
-typedef FocusNavigationInput = flighthq._internal._Pick<InputSignals, String>;
+typedef FocusNavigationInput = { var onKeyDown:Signal<InputKeyboardData->Void>; };

@@ -446,7 +446,7 @@ export function lowerTypeScriptSource(
           kind: 'type',
           name: statement.name.text,
           origin: origin(statement, context),
-          type: lowerConcreteEntityWithoutRuntimeAlias(statement, context) ?? lowerType(statement.type, context),
+          type: lowerConcreteClosedMappedAlias(statement, context) ?? lowerType(statement.type, context),
           typeParameters: statement.typeParameters?.map((parameter) => parameter.name.text) ?? [],
         });
         accountedDeclarations += 1;
@@ -1589,7 +1589,7 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
       Pick: 'flighthq._internal._Pick',
       Required: 'flighthq._internal._Required',
     }[name];
-    if (utilityType) return { arguments: arguments_, kind: 'named', name: utilityType };
+    if (utilityType && standardType) return { arguments: arguments_, kind: 'named', name: utilityType };
     if (['Awaited', 'NonNullable', 'Readonly'].includes(name) && arguments_[0]) {
       return arguments_[0];
     }
@@ -2033,7 +2033,7 @@ function lowerTypeMembers(members: ts.NodeArray<ts.TypeElement>, context: Loweri
   return [...new Map(lowered.map((field) => [field.name, field])).values()];
 }
 
-function lowerConcreteEntityWithoutRuntimeAlias(
+function lowerConcreteClosedMappedAlias(
   declaration: ts.TypeAliasDeclaration,
   context: LoweringContext,
 ): Extract<IrType, { kind: 'anonymous' }> | undefined {
@@ -2042,24 +2042,12 @@ function lowerConcreteEntityWithoutRuntimeAlias(
     !checker ||
     declaration.typeParameters?.length ||
     !ts.isTypeReferenceNode(declaration.type) ||
-    declaration.type.typeArguments?.length !== 1
+    !declaration.type.typeArguments?.length
   ) {
     return undefined;
   }
   const wrapper = originalSymbolAtLocation(declaration.type.typeName, checker);
-  if (
-    wrapper?.getName() !== 'EntityWithoutRuntime' ||
-    !(wrapper.declarations ?? []).some(
-      (candidate) =>
-        ts.isTypeAliasDeclaration(candidate) &&
-        candidate.typeParameters?.length === 1 &&
-        ts.isTypeReferenceNode(candidate.type) &&
-        ts.isIdentifier(candidate.type.typeName) &&
-        candidate.type.typeName.text === 'Omit',
-    )
-  ) {
-    return undefined;
-  }
+  if (!closedMappedAliasWrapper(wrapper, checker)) return undefined;
 
   const resolved = checker.getTypeFromTypeNode(declaration.type);
   if (
@@ -2074,8 +2062,10 @@ function lowerConcreteEntityWithoutRuntimeAlias(
   const resolvedProperties = new Map(
     checker.getPropertiesOfType(resolved).map((property) => [property.getName(), property]),
   );
-  const target = checker.getTypeFromTypeNode(declaration.type.typeArguments[0]!);
-  const sourceOrder = concreteAliasTargetFieldOrder(declaration.type.typeArguments[0]!, checker);
+  const targetNode = declaration.type.typeArguments[0]!;
+  if (concreteAliasTargetIsGeneric(targetNode, checker)) return undefined;
+  const target = checker.getTypeFromTypeNode(targetNode);
+  const sourceOrder = concreteAliasTargetFieldOrder(targetNode, checker);
   const orderedProperties = checker
     .getPropertiesOfType(target)
     .flatMap((property) => {
@@ -2093,23 +2083,59 @@ function lowerConcreteEntityWithoutRuntimeAlias(
   if (orderedProperties.length !== resolvedProperties.size) return undefined;
 
   const fields: IrTypeField[] = [];
+  const fieldNames = new Set<string>();
   for (const property of orderedProperties) {
     const propertyDeclaration = property.valueDeclaration ?? property.declarations?.[0];
     if (!propertyDeclaration || propertyDeclaration.getSourceFile().isDeclarationFile) return undefined;
-    const fieldType = lowerCheckerType(
-      checker.getTypeOfSymbolAtLocation(property, propertyDeclaration),
-      declaration,
-      context,
-      new Set(),
-    );
+    const name = concreteMappedPropertyName(property, propertyDeclaration, context);
+    if (!name || fieldNames.has(name)) return undefined;
+    const checkerType = checker.getTypeOfSymbolAtLocation(property, propertyDeclaration);
+    const fieldType = concreteMappedFieldType(checkerType, propertyDeclaration, declaration, context);
     if (!fieldType) return undefined;
+    fieldNames.add(name);
     fields.push({
-      name: property.getName(),
+      name,
       optional: (property.flags & ts.SymbolFlags.Optional) !== 0,
       type: fieldType,
     });
   }
   return { extends: [], fields, kind: 'anonymous' };
+}
+
+function concreteAliasTargetIsGeneric(node: ts.TypeNode, checker: ts.TypeChecker): boolean {
+  if (!ts.isTypeReferenceNode(node)) return false;
+  const symbol = originalSymbolAtLocation(node.typeName, checker);
+  return (symbol?.declarations ?? []).some(
+    (declaration) =>
+      (ts.isInterfaceDeclaration(declaration) ||
+        ts.isTypeAliasDeclaration(declaration) ||
+        ts.isClassDeclaration(declaration)) &&
+      Boolean(declaration.typeParameters?.length),
+  );
+}
+
+function concreteMappedFieldType(
+  checkerType: ts.Type,
+  propertyDeclaration: ts.Declaration,
+  aliasDeclaration: ts.TypeAliasDeclaration,
+  context: LoweringContext,
+): IrType | undefined {
+  if (
+    (ts.isPropertySignature(propertyDeclaration) || ts.isPropertyDeclaration(propertyDeclaration)) &&
+    propertyDeclaration.type
+  ) {
+    const declared = lowerType(propertyDeclaration.type, {
+      ...context,
+      sourceFile: propertyDeclaration.getSourceFile(),
+    });
+    const nullish = checkerType.isUnion()
+      ? checkerType.types.some((item) => (item.flags & (ts.TypeFlags.Null | ts.TypeFlags.Undefined)) !== 0)
+      : (checkerType.flags & (ts.TypeFlags.Null | ts.TypeFlags.Undefined)) !== 0;
+    return nullish && declared.kind !== 'dynamic' && declared.kind !== 'nullable'
+      ? { inner: declared, kind: 'nullable' }
+      : declared;
+  }
+  return lowerCheckerType(checkerType, aliasDeclaration, context, new Set());
 }
 
 function concreteAliasTargetFieldOrder(node: ts.TypeNode, checker: ts.TypeChecker): ReadonlyMap<string, number> {
@@ -2120,12 +2146,38 @@ function concreteAliasTargetFieldOrder(node: ts.TypeNode, checker: ts.TypeChecke
     if (!ts.isInterfaceDeclaration(declaration) && !ts.isTypeLiteralNode(declaration)) continue;
     for (const member of declaration.members) {
       if (!ts.isPropertySignature(member) || !member.name) continue;
-      if (ts.isIdentifier(member.name) || ts.isStringLiteral(member.name) || ts.isNumericLiteral(member.name)) {
-        names.push(member.name.text);
-      }
+      const property = checker.getSymbolAtLocation(member.name);
+      if (property) names.push(property.getName());
     }
   }
   return new Map(names.map((name, index) => [name, index]));
+}
+
+function closedMappedAliasWrapper(symbol: ts.Symbol | undefined, checker: ts.TypeChecker): boolean {
+  if (closedStandardMappedUtility(symbol)) return true;
+  for (const declaration of symbol?.declarations ?? []) {
+    if (!ts.isTypeAliasDeclaration(declaration) || !declaration.typeParameters?.length) continue;
+    if (!ts.isTypeReferenceNode(declaration.type)) continue;
+    const wrapped = originalSymbolAtLocation(declaration.type.typeName, checker);
+    if (closedStandardMappedUtility(wrapped)) return true;
+  }
+  return false;
+}
+
+function closedStandardMappedUtility(symbol: ts.Symbol | undefined): boolean {
+  return ['Omit', 'Partial', 'Pick'].some((name) => standardLibraryTypeSymbol(symbol, name));
+}
+
+function concreteMappedPropertyName(
+  property: ts.Symbol,
+  declaration: ts.Declaration,
+  context: LoweringContext,
+): string | undefined {
+  if (ts.isPropertySignature(declaration) || ts.isPropertyDeclaration(declaration)) {
+    return propertyName(declaration.name, context);
+  }
+  const name = property.getName();
+  return name.startsWith('__@') ? undefined : name;
 }
 
 function lowerExpressionWithTypeArguments(node: ts.ExpressionWithTypeArguments, context: LoweringContext): IrType {
@@ -4080,7 +4132,7 @@ function collectBindingNames(name: ts.BindingName, output: Set<string>): void {
 function propertyName(node: ts.PropertyName, context: LoweringContext): string {
   if (ts.isIdentifier(node) || ts.isStringLiteral(node) || ts.isNumericLiteral(node)) return node.text;
   if (ts.isComputedPropertyName(node)) {
-    const sourceName = node.expression.getText(context.sourceFile).replace(/[^A-Za-z0-9_]/gu, '_');
+    const sourceName = node.expression.getText(node.getSourceFile()).replace(/[^A-Za-z0-9_]/gu, '_');
     return `__${sourceName}`;
   }
   return unsupported(node, context, 'computed property name');

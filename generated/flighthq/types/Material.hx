@@ -9,6 +9,6 @@ import flighthq.types.Entity.Kind;
 
 typedef Material = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; };
 
-typedef MaterialLike = { var kind:String; @:optional var name:Null<String>; };
+typedef MaterialLike = { var kind:Kind; @:optional var name:Null<String>; };
 
 typedef MaterialData = flighthq._internal._Object;

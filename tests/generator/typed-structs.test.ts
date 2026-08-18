@@ -965,6 +965,98 @@ describe('typed struct analysis', () => {
     expect(output).not.toContain("_Runtime.field(__destructure0, 'height')");
   });
 
+  it('materializes closed standard mapped aliases and retains generic or open utilities', () => {
+    const result = lowerFixture(
+      `
+        export type Mode = 'fast' | 'safe';
+        export interface Options {
+          alpha: number;
+          beta?: string;
+          gamma: boolean;
+          mode: Mode;
+        }
+        export type OptionalOptions = Partial<Options>;
+        export type SelectedOptions = Pick<Options, 'alpha' | 'gamma'>;
+        export type RemainingOptions = Omit<Options, 'beta'>;
+        export type GenericOptions<Type> = Partial<Type>;
+        export type OpenOptions = Partial<Record<string, number>>;
+        export type StandardOptions = Partial<Date>;
+      `,
+      {
+        ...fixtureCandidate,
+        name: 'Options',
+      },
+    );
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      haxePackage: 'flighthq.types',
+      imports: [],
+      name: 'Options',
+      packageName: '@flighthq/types',
+    });
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(output).toContain(
+      'typedef OptionalOptions = { @:optional var alpha:Null<Float>; @:optional var beta:Null<String>; @:optional var gamma:Null<Bool>; @:optional var mode:Null<Mode>; };',
+    );
+    expect(output).toContain('typedef SelectedOptions = { var alpha:Float; var gamma:Bool; };');
+    expect(output).toContain('typedef RemainingOptions = { var alpha:Float; var gamma:Bool; var mode:Mode; };');
+    expect(output).toContain('typedef GenericOptions<Type> = flighthq._internal._Partial<Type>;');
+    expect(output).toContain(
+      'typedef OpenOptions = flighthq._internal._Partial<flighthq._internal._Record<String, Float>>;',
+    );
+    expect(output).toContain('typedef StandardOptions = flighthq._internal._Partial<Date>;');
+  });
+
+  it('does not materialize a source-defined utility that shadows Partial', () => {
+    const result = lowerFixture(
+      `
+        type Partial<Type> = { value: Type };
+        export interface Options { alpha: number; }
+        export type ShadowedOptions = Partial<Options>;
+      `,
+      {
+        ...fixtureCandidate,
+        name: 'Options',
+      },
+    );
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      haxePackage: 'flighthq.types',
+      imports: [],
+      name: 'Options',
+      packageName: '@flighthq/types',
+    });
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(output).toContain('typedef ShadowedOptions = Partial<Options>;');
+    expect(output).not.toContain('typedef ShadowedOptions = {');
+  });
+
+  it('materializes the reviewed production mapped aliases without erasing named field types', () => {
+    expect(readFileSync('generated/flighthq/types/Viewport.hx', 'utf8')).toContain(
+      'typedef ViewportLike = { @:optional var devicePixelRatio:Null<Float>; @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; };',
+    );
+    expect(readFileSync('generated/flighthq/types/ApplicationRenderView.hx', 'utf8')).toContain(
+      'typedef ApplicationRenderViewTargetOptions = { @:optional var format:Null<RenderTargetFormat>; @:optional var colorAttachments:Null<Float>; @:optional var colorFormats:Null<Array<RenderTargetFormat>>;',
+    );
+    expect(readFileSync('generated/flighthq/types/FocusManager.hx', 'utf8')).toContain(
+      'typedef FocusNavigationInput = { var onKeyDown:Signal<InputKeyboardData->Void>; };',
+    );
+    expect(readFileSync('generated/flighthq/types/InteractionManager.hx', 'utf8')).toContain(
+      'typedef InteractionInputSource = { var onKeyDown:Signal<InputKeyboardData->Void>; var onKeyUp:Signal<InputKeyboardData->Void>;',
+    );
+    expect(readFileSync('generated/flighthq/physics2d/JointFactories.hx', 'utf8')).toContain(
+      'typedef Physics2DJointBase__jointFactories = { var bodyA:Float; var bodyB:Float;',
+    );
+    expect(readFileSync('generated/flighthq/types/Entity.hx', 'utf8')).toContain(
+      'typedef EntityWithoutRuntime<Type> = flighthq._internal._Omit<Type, Dynamic>;',
+    );
+    expect(readFileSync('generated/flighthq/types/Texture.hx', 'utf8')).toContain(
+      'typedef TextureLike = TextureLikeFrom__Texture<flighthq.types.Texture>;',
+    );
+  });
+
   it('audits structurally wider intersections as width-sensitive', () => {
     const fixture = typedStructFixture(`
       export interface A { x: number; }

@@ -12,6 +12,7 @@ This directory records the durable design and execution context for the Flight H
 - [`typed-struct-class-design.md`](typed-struct-class-design.md): cpp target-conditional class feasibility, census, migration gates, and benchmark policy.
 - [`typed-struct-provenance-audit.md`](typed-struct-provenance-audit.md): required-field containment, dynamic/JSON roots, generic construction gaps, and Gate-5 closure policy.
 - [`typed-struct-optional-policy.md`](typed-struct-optional-policy.md): Gate-6 constructor, absence, nominal-provenance, and staging policy for optional/undefined schemas.
+- [`strict-typing-todo.md`](strict-typing-todo.md): active checklist for closed mapped aliases, direct structural emission, union projection, host-toolkit typing, and Rust-ready representations.
 - [`plan.md`](plan.md): completed implementation phases and the upstream-update workflow.
 - [`status.md`](status.md): current decisions, verified state, prerequisites, and release decisions.
 - [`flight-port-core.md`](flight-port-core.md): plan to extract the language-neutral kernel into a shared core with Haxe and Rust emitters over one oracle.
