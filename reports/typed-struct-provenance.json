@@ -29132,7 +29132,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 36,
       "fields": 6,
       "id": "@flighthq/types:interface#MeshSkinBindPose",
       "name": "MeshSkinBindPose",
@@ -46168,7 +46168,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 20,
       "fields": 3,
       "id": "@flighthq/types:interface#SkinAttachment2D",
       "name": "SkinAttachment2D",

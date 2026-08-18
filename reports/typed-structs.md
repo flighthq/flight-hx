@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1541 |
-| Direct schemas | 463 |
+| Audit-only schemas | 1536 |
+| Direct schemas | 468 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 11450 |
-| Directly emitted accesses | 19216 |
+| Pending accesses | 11271 |
+| Directly emitted accesses | 19395 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1541 |
+| Newly discovered, audit-only | 1536 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -963,7 +963,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#MeshMorph` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshMorphBindPose` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MeshRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 35 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | no | `unsupported-shape` |
-| `@flighthq/types:interface#MeshSkinBindPose` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 36 | 0 | 0 | 36 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MeshSkinBindPose` | `direct` | `new` | — | reviewed escape-free mesh skin bind pose | 6 | 36 | 0 | 0 | 0 | 36 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshSubset` | `direct` | `preserved` | `@flighthq/types:interface#MeshSubset` | broad scene document | 2 | 26 | 0 | 0 | 0 | 26 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshTriangleVertexIndices` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 3 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MessageDialogKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1494,7 +1494,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SignalData` | `direct` | `preserved` | `@flighthq/types:interface#SignalData` | broad scene document | 4 | 28 | 2 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SignalScope` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SignalThrottleOptions` | `direct` | `relocated` | `@flighthq/signals:interface#SignalThrottleOptions` | signal-throttle option record | 2 | 4 | 0 | 0 | 0 | 4 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Skeleton2D` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 61 | 5 | 0 | 66 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Skeleton2D` | `direct` | `new` | — | reviewed escape-free 2D skeleton | 6 | 61 | 5 | 0 | 0 | 66 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Skeleton2DAnimationPath` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Skeleton2DAnimationTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Skeleton2DAnimationTargetBinder` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
@@ -1513,7 +1513,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Skeleton2DIkConstraint` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton2DImport` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton2DImportAnimation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Skeleton2DPathConstraint` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 16 | 0 | 0 | 16 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Skeleton2DPathConstraint` | `direct` | `new` | — | reviewed escape-free 2D skeleton path constraint | 12 | 16 | 0 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Skeleton2DPathPositionMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#Skeleton2DPathRotateMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#Skeleton2DPathSpacingMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1521,12 +1521,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Skeleton2DSlotAnimationTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton2DSlotDeform` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 1 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton2DTransformConstraint` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 15 | 0 | 0 | 15 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Skeleton3D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 40 | 1 | 0 | 41 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Skeleton3D` | `direct` | `new` | — | reviewed escape-free 3D skeleton | 4 | 40 | 1 | 0 | 0 | 41 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton3DValidationDiagnostic` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SketchEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skin` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skin2D` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SkinAttachment2D` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 20 | 0 | 0 | 20 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SkinAttachment2D` | `direct` | `new` | — | reviewed escape-free 2D skin attachment | 3 | 20 | 0 | 0 | 0 | 20 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SkinInfluence` | `direct` | `relocated` | `@flighthq/scene-formats:interface#SkinInfluence` | broad serialization document | 2 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Slot2D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 7 | 0 | 13 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#SmaaEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |

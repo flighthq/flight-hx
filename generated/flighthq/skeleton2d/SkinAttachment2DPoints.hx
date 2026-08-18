@@ -21,7 +21,7 @@ class SkinAttachment2DPoints {
     var d:Float = cast _Runtime.UNDEFINED;
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
-    world = _Runtime.field(skeleton, 'worldMatrices');
+    world = skeleton.worldMatrices;
     if ((cast ((cast !_Runtime.strictEquals(skin, null) : Bool) && (cast !_Runtime.strictEquals(skin, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       var counts:flighthq._internal._UInt16Array = _Runtime.field(skin, 'influenceCounts');
       var inf:flighthq._internal._Float32Array = _Runtime.field(skin, 'influences');

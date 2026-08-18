@@ -101,7 +101,7 @@ class GlShadowMap {
       }
       flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast program : GlMeshProgram).locModel, false, (cast (cast getNodeWorldMatrix4((cast mesh : Dynamic)) : Matrix4Like) : { var m:flighthq._internal._Float32Array; }).m);
       if ((cast skinned : Bool)) {
-        var jointMatrices:flighthq._internal._Float32Array = (cast (cast mesh.skin : Skin).skeleton : Skeleton3D).jointMatrices;
+        var jointMatrices:flighthq._internal._Float32Array = (cast (cast mesh.skin : Skin).skeleton : { var jointMatrices:flighthq._internal._Float32Array; }).jointMatrices;
         flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + SKIN_PALETTE_TEXTURE_UNIT));
         uploadGlSkinPaletteTexture(({ final __callArgument10:Dynamic = gl; __callArgument10; }), (cast ensureGlSkinPalette(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlSkinPaletteTexture), ({ final __callArgument12:Dynamic = jointMatrices; __callArgument12; }), (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0) : Float));
         flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.coalesce((cast program : GlMeshProgram).locJointTexture, function():Dynamic return cast null), SKIN_PALETTE_TEXTURE_UNIT);

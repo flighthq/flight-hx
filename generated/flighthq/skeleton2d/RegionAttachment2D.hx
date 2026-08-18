@@ -22,7 +22,7 @@ class RegionAttachment2D {
     var hh:Float = cast _Runtime.UNDEFINED;
     setTransformMatrix(({ final __callArgument0:Dynamic = RegionAttachment2D._local__regionAttachment2D; __callArgument0; }), (cast _Runtime.field(attachment, 'scaleX') : Float), (cast _Runtime.field(attachment, 'scaleY') : Float), (cast _Runtime.multiplyNumbers(_Runtime.field(attachment, 'rotation'), DEG_TO_RAD) : Float), (cast _Runtime.field(attachment, 'x') : Float), (cast _Runtime.field(attachment, 'y') : Float));
     b = (boneIndex * RegionAttachment2D.MATRIX_STRIDE__regionAttachment2D);
-    world = _Runtime.field(skeleton, 'worldMatrices');
+    world = skeleton.worldMatrices;
     (RegionAttachment2D._bone__regionAttachment2D.a = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast b : Float)) : Float));
     (RegionAttachment2D._bone__regionAttachment2D.b = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 1.0) : Float)) : Float));
     (RegionAttachment2D._bone__regionAttachment2D.c = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 2.0) : Float)) : Float));

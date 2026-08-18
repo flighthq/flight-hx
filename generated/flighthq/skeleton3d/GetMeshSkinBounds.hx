@@ -34,7 +34,7 @@ class GetMeshSkinBounds {
     var maxX:Float = cast _Runtime.UNDEFINED;
     var maxY:Float = cast _Runtime.UNDEFINED;
     var maxZ:Float = cast _Runtime.UNDEFINED;
-    positions = _Runtime.field(bindPose, 'positions');
+    positions = bindPose.positions;
     restVertexCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0)) | 0);
     restMinX = HxMath.POSITIVE_INFINITY;
     restMinY = HxMath.POSITIVE_INFINITY;
@@ -73,9 +73,9 @@ class GetMeshSkinBounds {
     ex = ((restMaxX - restMinX) * 0.5);
     ey = ((restMaxY - restMinY) * 0.5);
     ez = ((restMaxZ - restMinZ) * 0.5);
-    palette = _Runtime.field(skeleton, 'jointMatrices');
+    palette = skeleton.jointMatrices;
     jointCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(palette, 'length'), 16.0)) | 0);
-    referenced = (cast GetMeshSkinBounds.getReferencedJoints__getMeshSkinBounds(_Runtime.field(bindPose, 'joints'), _Runtime.field(bindPose, 'weights'), (cast jointCount : Float)) : flighthq._internal._UInt8Array);
+    referenced = (cast GetMeshSkinBounds.getReferencedJoints__getMeshSkinBounds(bindPose.joints, bindPose.weights, (cast jointCount : Float)) : flighthq._internal._UInt8Array);
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     minZ = HxMath.POSITIVE_INFINITY;
@@ -119,8 +119,8 @@ class GetMeshSkinBounds {
     var maxX:Float = cast _Runtime.UNDEFINED;
     var maxY:Float = cast _Runtime.UNDEFINED;
     var maxZ:Float = cast _Runtime.UNDEFINED;
-    skinVertices(_Runtime.field(bindPose, 'skinnedPositions'), _Runtime.field(bindPose, 'skinnedNormals'), _Runtime.field(bindPose, 'positions'), _Runtime.field(bindPose, 'normals'), ({ final __callArgument0:Dynamic = _Runtime.field(bindPose, 'joints'); __callArgument0; }), _Runtime.field(bindPose, 'weights'), _Runtime.field(skeleton, 'jointMatrices'));
-    skinned = _Runtime.field(bindPose, 'skinnedPositions');
+    skinVertices(bindPose.skinnedPositions, bindPose.skinnedNormals, bindPose.positions, bindPose.normals, ({ final __callArgument0:Dynamic = bindPose.joints; __callArgument0; }), bindPose.weights, skeleton.jointMatrices);
+    skinned = bindPose.skinnedPositions;
     vertexCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(skinned, 'length'), 3.0)) | 0);
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;

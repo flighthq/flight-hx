@@ -94,7 +94,7 @@ class DragonBonesParse {
     animations = (cast DragonBonesParse.parseDragonBonesAnimations__dragonBonesParse((cast (cast armature : { var animation:flighthq._internal._Any; }).animation : flighthq._internal._Any), ({ final __callArgument12:Dynamic = boneIndexByName; __callArgument12; }), ({ final __callArgument13:Dynamic = slotOrder; __callArgument13; }), ({ final __callArgument14:Dynamic = table; __callArgument14; }), (cast frameRate : Float), ({ final __callArgument15:Dynamic = diagnostics; __callArgument15; })) : Array<Skeleton2DImportAnimation>);
     DragonBonesParse.skipCrumbDragonBonesGroup__dragonBonesParse(({ final __callArgument16:Dynamic = diagnostics; __callArgument16; }), (cast (cast armature : { var ik:flighthq._internal._Any; }).ik : flighthq._internal._Any), (cast 'dragonbones.ik-constraint-unsupported' : String));
     skeleton = (cast createSkeleton2D(({ final __callArgument17:Dynamic = bones; __callArgument17; }), ({ final __callArgument18:Dynamic = slots; __callArgument18; })) : Skeleton2D);
-    if ((cast ((cast _Runtime.field(skins, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast skeleton : Skeleton2D).skins = skins); }
+    if ((cast ((cast _Runtime.field(skins, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { (skeleton.skins = cast (skins : Null<Array<AttachmentSkin2D>>)); }
     return cast { animations: animations, skeleton: skeleton };
     return cast null;
   }

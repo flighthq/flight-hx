@@ -28,7 +28,7 @@ class DeformAnimationTarget2D {
     var slotIndex:Float = cast _Runtime.UNDEFINED;
     var components:Float = cast _Runtime.UNDEFINED;
     deformTarget = (cast target : Skeleton2DDeformAnimationTarget);
-    slots = (cast pose : Skeleton2D).slots;
+    slots = pose.slots;
     if ((cast ((cast _Runtime.strictEquals(slots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(slots, null) : Bool)) : Bool)) { return; }
     slotIndex = _Runtime.field(deformTarget, 'slotIndex');
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(slotIndex), 'number') : Bool) || (cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast slotIndex : Float) >= (cast _Runtime.field(slots, 'length') : Float)) : Bool)) : Bool)) { return; }

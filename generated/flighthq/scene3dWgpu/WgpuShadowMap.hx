@@ -128,7 +128,7 @@ class WgpuShadowMap {
       }
       world = (cast getNodeWorldMatrix4((cast mesh : Dynamic)) : Matrix4);
       multiplyMatrix4(({ final __callArgument10:Dynamic = WgpuShadowMap._shadowProxy__wgpuShadowMap.worldMatrix; __callArgument10; }), ({ final __callArgument11:Dynamic = lightMatrix; __callArgument11; }), ({ final __callArgument12:Dynamic = world; __callArgument12; }));
-      jointMatrices = ((cast skinned : Bool) ? (cast (cast (cast mesh.skin : Skin).skeleton : Skeleton3D).jointMatrices : Dynamic) : (cast null : Dynamic));
+      jointMatrices = ((cast skinned : Bool) ? (cast (cast (cast mesh.skin : Skin).skeleton : { var jointMatrices:flighthq._internal._Float32Array; }).jointMatrices : Dynamic) : (cast null : Dynamic));
       (WgpuShadowMap._shadowProxy__wgpuShadowMap.jointMatrices = cast (jointMatrices : Null<flighthq._internal._Float32Array>));
       rigidDrawBindGroup = (cast writeWgpuDrawUniform(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = WgpuShadowMap._shadowProxy__wgpuShadowMap; __callArgument14; })) : flighthq._internal.dom.GPUBindGroup);
       drawBindGroup = ((cast _Runtime.strictEquals(jointMatrices, null) : Bool) ? (cast rigidDrawBindGroup : Dynamic) : (cast (cast skinning : WgpuSkinningAdapter).getDrawBindGroup(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = jointMatrices; __callArgument16; })) : Dynamic));

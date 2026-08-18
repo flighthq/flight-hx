@@ -17,7 +17,7 @@ class PointAttachment2D {
     var b:Float = cast _Runtime.UNDEFINED;
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
-    world = _Runtime.field(skeleton, 'worldMatrices');
+    world = skeleton.worldMatrices;
     if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D) : Float) >= (cast _Runtime.field(world, 'length') : Float)) : Bool)) : Bool)) { return; }
     b = (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D);
     x = _Runtime.field(attachment, 'x');
@@ -34,7 +34,7 @@ class PointAttachment2D {
     var sin:Float = cast _Runtime.UNDEFINED;
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
-    world = _Runtime.field(skeleton, 'worldMatrices');
+    world = skeleton.worldMatrices;
     if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D) : Float) >= (cast _Runtime.field(world, 'length') : Float)) : Bool)) : Bool)) { return cast _Runtime.field(attachment, 'rotation'); }
     b = (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D);
     radians = _Runtime.multiplyNumbers(_Runtime.field(attachment, 'rotation'), DEG_TO_RAD);

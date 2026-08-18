@@ -20,7 +20,7 @@ class SceneSkeleton {
       var node:Node3D = _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
       if ((cast (cast isMesh((cast node : flighthq._internal._Any)) : Bool) : Bool)) {
         var skin:Null<Skin> = (cast (cast (cast node : flighthq._internal._Any) : Mesh) : { @:optional var skin:Null<Skin>; }).skin;
-        if ((cast !_Runtime.looseEquals(skin, null) : Bool)) { return cast (cast (cast skin : Skin).skeleton : Skeleton3D).joints; }
+        if ((cast !_Runtime.looseEquals(skin, null) : Bool)) { return cast (cast (cast skin : Skin).skeleton : { var joints:Array<Node3D>; }).joints; }
       }
       _Runtime.callProperty(stack, 'push', _Runtime.concatArrays([_Runtime.toArray((cast getNodeChildren((cast node : Dynamic)) : Array<NodeOf<Node3DTraits>>))]));
     }

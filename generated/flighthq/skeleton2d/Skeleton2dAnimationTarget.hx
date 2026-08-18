@@ -74,8 +74,8 @@ class Skeleton2dAnimationTarget {
     var poseBone:Bone2D = cast _Runtime.UNDEFINED;
     boneTarget = (cast target : Skeleton2DAnimationTarget);
     boneIndex = _Runtime.field(boneTarget, 'boneIndex');
-    setupBones = _Runtime.field(setup, 'bones');
-    poseBones = (cast pose : Skeleton2D).bones;
+    setupBones = setup.bones;
+    poseBones = pose.bones;
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(boneIndex), 'number') : Bool)) { return; }
     if ((cast ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(poseBones, 'length') : Float)) : Bool)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(setupBones, 'length') : Float)) : Bool)) : Bool)) { return; }
     sampleAnimationTrack(({ final __callArgument0:Dynamic = Skeleton2dAnimationTarget._scratch__skeleton2dAnimationTarget; __callArgument0; }), channel.track, (cast time : Float));
@@ -126,7 +126,7 @@ class Skeleton2dAnimationTarget {
     var slots:Null<Array<Slot2D>> = cast _Runtime.UNDEFINED;
     var slotIndex:Float = cast _Runtime.UNDEFINED;
     slotTarget = (cast target : Skeleton2DSlotAnimationTarget);
-    slots = (cast pose : Skeleton2D).slots;
+    slots = pose.slots;
     if ((cast ((cast _Runtime.strictEquals(slots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(slots, null) : Bool)) : Bool)) { return; }
     slotIndex = _Runtime.field(slotTarget, 'slotIndex');
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(slotIndex), 'number') : Bool) || (cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast slotIndex : Float) >= (cast _Runtime.field(slots, 'length') : Float)) : Bool)) : Bool)) { return; }

@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_541,
+      newAuditOnly: 1_536,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(465);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(470);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_541);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_536);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(63);
+    expect(newDirect).toHaveLength(68);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -425,6 +425,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'Physics2DRevoluteJoint',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free physics revolute joint',
+        }),
+        expect.objectContaining({
+          name: 'Skeleton2D',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free 2D skeleton',
+        }),
+        expect.objectContaining({
+          name: 'Skeleton3D',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free 3D skeleton',
+        }),
+        expect.objectContaining({
+          name: 'MeshSkinBindPose',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free mesh skin bind pose',
+        }),
+        expect.objectContaining({
+          name: 'SkinAttachment2D',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free 2D skin attachment',
+        }),
+        expect.objectContaining({
+          name: 'Skeleton2DPathConstraint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free 2D skeleton path constraint',
         }),
       ]),
     );
@@ -743,6 +768,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:f45bdd8ec8f78d20609e6978dab03cf413f0cd31305168d66313d7eb273099a1',
         id: '@flighthq/types:interface#Physics2DRevoluteJoint',
         purpose: 'reviewed escape-free physics revolute joint',
+      },
+      {
+        declarationFingerprint: 'sha256:4c5c7df2276c0ba36c720adc9c2f10a21508a54448a1f67dcb2587581d3ca5c2',
+        id: '@flighthq/types:interface#Skeleton2D',
+        purpose: 'reviewed escape-free 2D skeleton',
+      },
+      {
+        declarationFingerprint: 'sha256:31eb650a945dc248ce93c5e25b2cd1fdf0f3ad4576ca1b19dc10acd77f99e5e7',
+        id: '@flighthq/types:interface#Skeleton3D',
+        purpose: 'reviewed escape-free 3D skeleton',
+      },
+      {
+        declarationFingerprint: 'sha256:736e4bf4ec95bf4937e25e58fcd614373bff9626fbfd4431685b2b025bd9f67c',
+        id: '@flighthq/types:interface#MeshSkinBindPose',
+        purpose: 'reviewed escape-free mesh skin bind pose',
+      },
+      {
+        declarationFingerprint: 'sha256:5b923770aadf08c459c517186e28a6ca1a7ffcabd35a29d8d97ca742aa95996c',
+        id: '@flighthq/types:interface#SkinAttachment2D',
+        purpose: 'reviewed escape-free 2D skin attachment',
+      },
+      {
+        declarationFingerprint: 'sha256:3831dc7503c830297819df165667142b18595623fb5320f616539f5dbb48b1bd',
+        id: '@flighthq/types:interface#Skeleton2DPathConstraint',
+        purpose: 'reviewed escape-free 2D skeleton path constraint',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -1216,6 +1266,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const skeletonSkinCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['MeshSkinBindPose', 'Skeleton2D', 'Skeleton2DPathConstraint', 'Skeleton3D', 'SkinAttachment2D'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1256,22 +1315,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_541,
+      auditOnlySchemas: 1_536,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 19_216,
-      directSchemas: 463,
+      directAccesses: 19_395,
+      directSchemas: 468,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 11_450,
+      pendingAccesses: 11_271,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_541,
+      newAuditOnly: 1_536,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1299,7 +1358,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(19_216);
+    expect(report.summary.directAccesses).toBe(19_395);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -1786,6 +1845,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'Skeleton2D',
+        66,
+        'sha256:4c5c7df2276c0ba36c720adc9c2f10a21508a54448a1f67dcb2587581d3ca5c2',
+        'reviewed escape-free 2D skeleton',
+      ],
+      [
+        'Skeleton3D',
+        41,
+        'sha256:31eb650a945dc248ce93c5e25b2cd1fdf0f3ad4576ca1b19dc10acd77f99e5e7',
+        'reviewed escape-free 3D skeleton',
+      ],
+      [
+        'MeshSkinBindPose',
+        36,
+        'sha256:736e4bf4ec95bf4937e25e58fcd614373bff9626fbfd4431685b2b025bd9f67c',
+        'reviewed escape-free mesh skin bind pose',
+      ],
+      [
+        'SkinAttachment2D',
+        20,
+        'sha256:5b923770aadf08c459c517186e28a6ca1a7ffcabd35a29d8d97ca742aa95996c',
+        'reviewed escape-free 2D skin attachment',
+      ],
+      [
+        'Skeleton2DPathConstraint',
+        16,
+        'sha256:3831dc7503c830297819df165667142b18595623fb5320f616539f5dbb48b1bd',
+        'reviewed escape-free 2D skeleton path constraint',
+      ],
+    ] as const) {
+      expect(skeletonSkinCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'Physics2DWorld',
         217,
         'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
@@ -2172,6 +2273,32 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(physicsJointId)).toBe(false);
     }
+    for (const skeletonId of [
+      '@flighthq/types:interface#Skeleton2D',
+      '@flighthq/types:interface#Skeleton2DPathConstraint',
+      '@flighthq/types:interface#Skeleton3D',
+    ]) {
+      expect(classAuditById.get(skeletonId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer'],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.has(skeletonId)).toBe(false);
+    }
+    for (const skinLeafId of [
+      '@flighthq/types:interface#MeshSkinBindPose',
+      '@flighthq/types:interface#SkinAttachment2D',
+    ]) {
+      expect(classAuditById.get(skinLeafId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.get(skinLeafId)?.nominalIdentity).toEqual({
+        blockerReasons: ['normalization-provenance'],
+        closed: false,
+      });
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -2373,6 +2500,20 @@ describe('typed struct analysis', () => {
     const generatedPhysicsDebugGeometry = readFileSync('generated/flighthq/physics2d/DebugGeometry.hx', 'utf8');
     expect(generatedPhysicsDebugGeometry).not.toMatch(/\(cast pulley : Physics2DPulleyJoint\)\./u);
     expect(generatedPhysicsDebugGeometry).not.toMatch(/_Runtime\.field\(pulley,/u);
+    const generatedSkeleton2D = readFileSync('generated/flighthq/skeleton2d/Skeleton2d.hx', 'utf8');
+    expect(generatedSkeleton2D).not.toMatch(/\(cast (?:skeleton|entry) : (?:Skeleton2D|SkinAttachment2D)\)\./u);
+    expect(generatedSkeleton2D).not.toMatch(/_Runtime\.field\((?:skeleton|entry),/u);
+    const generatedPathConstraint2D = readFileSync('generated/flighthq/skeleton2d/PathConstraint2D.hx', 'utf8');
+    expect(generatedPathConstraint2D).not.toMatch(
+      /\(cast (?:constraint|pathConstraint|skeleton) : (?:Skeleton2DPathConstraint|Skeleton2D)\)\./u,
+    );
+    expect(generatedPathConstraint2D).not.toMatch(/_Runtime\.field\((?:constraint|pathConstraint|skeleton),/u);
+    const generatedSkeleton3D = readFileSync('generated/flighthq/skeleton3d/Skeleton3d.hx', 'utf8');
+    expect(generatedSkeleton3D).not.toMatch(/\(cast skeleton : Skeleton3D\)\./u);
+    expect(generatedSkeleton3D).not.toMatch(/_Runtime\.field\(skeleton,/u);
+    const generatedSkinMesh = readFileSync('generated/flighthq/skeleton3d/SkinMeshGeometry.hx', 'utf8');
+    expect(generatedSkinMesh).not.toMatch(/\(cast bindPose : MeshSkinBindPose\)\./u);
+    expect(generatedSkinMesh).not.toMatch(/_Runtime\.field\(bindPose,/u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

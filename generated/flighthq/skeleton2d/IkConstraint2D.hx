@@ -31,8 +31,8 @@ class IkConstraint2D {
     var targetY:Float = cast _Runtime.UNDEFINED;
     var chain:Array<Float> = cast _Runtime.UNDEFINED;
     ik = (cast constraint : Skeleton2DIkConstraint);
-    bones = (cast skeleton : Skeleton2D).bones;
-    world = (cast skeleton : Skeleton2D).worldMatrices;
+    bones = skeleton.bones;
+    world = skeleton.worldMatrices;
     target = _Runtime.field(ik, 'targetBoneIndex');
     if ((cast ((cast ((cast target : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast target : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool)) { return; }
     targetX = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast ((target * IkConstraint2D.MATRIX_STRIDE__ikConstraint2D) + 4.0) : Float));
@@ -52,7 +52,7 @@ class IkConstraint2D {
     var dx:Float = cast _Runtime.UNDEFINED;
     var dy:Float = cast _Runtime.UNDEFINED;
     var rotation:Float = cast _Runtime.UNDEFINED;
-    bones = (cast skeleton : Skeleton2D).bones;
+    bones = skeleton.bones;
     if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool)) { return; }
     bone = flighthq._internal._StaticIndex.readArray(bones, boneIndex);
     local = (cast IkConstraint2D.toSkeleton2DParentSpace__ikConstraint2D(({ final __callArgument5:Dynamic = skeleton; __callArgument5; }), (cast boneIndex : Float), (cast targetX : Float), (cast targetY : Float)) : Null<{ var x:Float; var y:Float; }>);
@@ -94,7 +94,7 @@ class IkConstraint2D {
     var aim:Float = cast _Runtime.UNDEFINED;
     var parentRotation:Float = cast _Runtime.UNDEFINED;
     var childRotation:Float = cast _Runtime.UNDEFINED;
-    bones = (cast skeleton : Skeleton2D).bones;
+    bones = skeleton.bones;
     if ((cast ((cast ((cast ((cast ((cast parentIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast parentIndex : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool) || (cast ((cast childIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast childIndex : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool)) { return; }
     parent = flighthq._internal._StaticIndex.readArray(bones, parentIndex);
     child = flighthq._internal._StaticIndex.readArray(bones, childIndex);
@@ -145,9 +145,9 @@ class IkConstraint2D {
     var determinant:Float = cast _Runtime.UNDEFINED;
     var wx:Float = cast _Runtime.UNDEFINED;
     var wy:Float = cast _Runtime.UNDEFINED;
-    parentIndex = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(skeleton, 'bones'), boneIndex) : Bone2D).parentIndex;
+    parentIndex = (cast flighthq._internal._StaticIndex.readArray(skeleton.bones, boneIndex) : Bone2D).parentIndex;
     if ((cast ((cast parentIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast { x: x, y: y }; }
-    world = _Runtime.field(skeleton, 'worldMatrices');
+    world = skeleton.worldMatrices;
     p = (parentIndex * IkConstraint2D.MATRIX_STRIDE__ikConstraint2D);
     a = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast p : Float));
     b = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 1.0) : Float));

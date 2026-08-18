@@ -233,8 +233,8 @@ class SpineParse {
     setup = _Runtime.coalesce(_Runtime.find(skins, function(skin:AttachmentSkin2D, __unused4:Float, __unused5:Array<AttachmentSkin2D>):Bool return _Runtime.strictEquals((cast skin : AttachmentSkin2D).name, SpineParse.SPINE_DEFAULT_SKIN_NAME__spineParse)), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(skins, 0.0));
     if ((cast _Runtime.strictEquals(setup, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (entry in _Runtime.iterable((cast setup : AttachmentSkin2D).attachments)) {
-      if ((cast ((cast ((cast (cast entry : SkinAttachment2D).slotIndex : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attachmentNames, (cast entry : SkinAttachment2D).slotIndex), (cast entry : SkinAttachment2D).name) : Bool)) : Bool)) {
-        ((cast flighthq._internal._StaticIndex.readArray(slots, (cast entry : SkinAttachment2D).slotIndex) : Slot2D).attachment = (cast entry : SkinAttachment2D).attachment);
+      if ((cast ((cast ((cast entry.slotIndex : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attachmentNames, entry.slotIndex), entry.name) : Bool)) : Bool)) {
+        ((cast flighthq._internal._StaticIndex.readArray(slots, entry.slotIndex) : Slot2D).attachment = entry.attachment);
       }
     }
   }
@@ -549,8 +549,8 @@ class SpineParse {
       }
       var index:Null<Float> = ((cast indexByName : flighthq._internal._Map<String, Float>).get(name));
       if ((cast _Runtime.strictEquals(index, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        var found:Null<SkinAttachment2D> = _Runtime.callOptionalProperty(({ final __structural109 = setup; __structural109 == null ? _Runtime.UNDEFINED : (cast __structural109 : AttachmentSkin2D).attachments; }), 'find', cast ([function(entry:SkinAttachment2D, __unused13:Float, __unused14:Array<SkinAttachment2D>):Bool return ((cast _Runtime.strictEquals((cast entry : SkinAttachment2D).slotIndex, slotIndex) : Bool) && (cast _Runtime.strictEquals((cast entry : SkinAttachment2D).name, name) : Bool))] : Array<Dynamic>));
-        (index = cast (((cast _Runtime.strictEquals(found, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast SpineParse.SPINE_NO_ATTACHMENT_INDEX__spineParse : Dynamic) : (cast _Runtime.subtractNumbers(_Runtime.callProperty(attachments, 'push', cast ([(cast found : SkinAttachment2D).attachment] : Array<Dynamic>)), 1.0) : Dynamic)) : Dynamic));
+        var found:Null<SkinAttachment2D> = _Runtime.callOptionalProperty(({ final __structural109 = setup; __structural109 == null ? _Runtime.UNDEFINED : (cast __structural109 : AttachmentSkin2D).attachments; }), 'find', cast ([function(entry:SkinAttachment2D, __unused13:Float, __unused14:Array<SkinAttachment2D>):Bool return ((cast _Runtime.strictEquals(entry.slotIndex, slotIndex) : Bool) && (cast _Runtime.strictEquals(entry.name, name) : Bool))] : Array<Dynamic>));
+        (index = cast (((cast _Runtime.strictEquals(found, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast SpineParse.SPINE_NO_ATTACHMENT_INDEX__spineParse : Dynamic) : (cast _Runtime.subtractNumbers(_Runtime.callProperty(attachments, 'push', cast ([(cast found : { var attachment:Attachment2D; }).attachment] : Array<Dynamic>)), 1.0) : Dynamic)) : Dynamic));
         ((cast indexByName : flighthq._internal._Map<String, Float>).set(name, (cast index)));
       }
       _Runtime.callProperty(values, 'push', cast ([index] : Array<Dynamic>));
@@ -627,7 +627,7 @@ class SpineParse {
     SpineParse.resolveSpineSetupAttachments__spineParse(({ final __callArgument121:Dynamic = slots; __callArgument121; }), ({ final __callArgument122:Dynamic = attachmentNames; __callArgument122; }), ({ final __callArgument123:Dynamic = skins; __callArgument123; }));
     animations = (cast SpineParse.parseSpineAnimations__spineParse((cast (cast record : { var animations:flighthq._internal._Any; }).animations : flighthq._internal._Any), ({ final __callArgument124:Dynamic = bones; __callArgument124; }), ({ final __callArgument125:Dynamic = slots; __callArgument125; }), ({ final __callArgument126:Dynamic = skins; __callArgument126; }), ({ final __callArgument127:Dynamic = diagnostics; __callArgument127; })) : Array<Skeleton2DImportAnimation>);
     skeleton = (cast createSkeleton2D(({ final __callArgument128:Dynamic = bones; __callArgument128; }), ({ final __callArgument129:Dynamic = slots; __callArgument129; })) : Skeleton2D);
-    if ((cast ((cast _Runtime.field(skins, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast skeleton : Skeleton2D).skins = skins); }
+    if ((cast ((cast _Runtime.field(skins, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { (skeleton.skins = cast (skins : Null<Array<AttachmentSkin2D>>)); }
     return cast { animations: animations, skeleton: skeleton };
     return cast null;
   }

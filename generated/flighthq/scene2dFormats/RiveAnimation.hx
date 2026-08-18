@@ -151,7 +151,7 @@ class RiveAnimation {
     if ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
     path = (cast RiveAnimation.toRiveBoneAnimationPath__riveAnimation((cast propertyKey : Float)) : Null<String>);
     if ((cast _Runtime.strictEquals(path, null) : Bool)) { return cast null; }
-    convert = (cast RiveAnimation.toRiveBoneValueConversion__riveAnimation(({ final __callArgument41:Dynamic = path; __callArgument41; }), flighthq._internal._StaticIndex.readArray((cast _Runtime.field(skeleton, 'skeleton') : Skeleton2D).bones, boneIndex)) : Null<Float->Float>);
+    convert = (cast RiveAnimation.toRiveBoneValueConversion__riveAnimation(({ final __callArgument41:Dynamic = path; __callArgument41; }), flighthq._internal._StaticIndex.readArray((cast _Runtime.field(skeleton, 'skeleton') : { var bones:Array<Bone2D>; }).bones, boneIndex)) : Null<Float->Float>);
     if ((cast _Runtime.strictEquals(convert, null) : Bool)) {
       reportImportDiagnostic(({ final __callArgument42:Dynamic = diagnostics; __callArgument42; }), ({ final __callArgument43:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument43; }), (cast 'rive.unrepresentable-bone-scale' : String), (cast 'createRiveAnimationClips' : String), ({ final __callArgument44:Dynamic = { bone: boneIndex, property: propertyKey }; __callArgument44; }));
       return cast null;

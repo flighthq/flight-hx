@@ -41,8 +41,8 @@ class MeshGeometryDeformationClone {
   }
 
   public static function restoreSkinBindPose__meshGeometryDeformationClone(geometry:MeshGeometry, bindPose:MeshSkinBindPose):Void {
-    MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone(({ final __callArgument12:Dynamic = geometry; __callArgument12; }), (cast 'position' : String), _Runtime.field(bindPose, 'positions'));
-    MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone(({ final __callArgument13:Dynamic = geometry; __callArgument13; }), (cast 'normal' : String), _Runtime.field(bindPose, 'normals'));
+    MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone(({ final __callArgument12:Dynamic = geometry; __callArgument12; }), (cast 'position' : String), bindPose.positions);
+    MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone(({ final __callArgument13:Dynamic = geometry; __callArgument13; }), (cast 'normal' : String), bindPose.normals);
   }
 
   public static function restoreFloat3__meshGeometryDeformationClone(geometry:MeshGeometry, semantic:String, source:flighthq._internal._Float32Array):Void {

@@ -107,7 +107,7 @@ class GlMeshUpload {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var positionOffset:Float = cast _Runtime.UNDEFINED;
     var normalOffset:Float = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:MeshSkinBindPose = cast _Runtime.UNDEFINED;
     var normals:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var positions:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
@@ -116,8 +116,8 @@ class GlMeshUpload {
     positionOffset = (cast GlMeshUpload.floatOffsetForSemantic__glMeshUpload(({ final __callArgument7:Dynamic = geometry; __callArgument7; }), (cast 'position' : String)) : Float);
     normalOffset = (cast GlMeshUpload.floatOffsetForSemantic__glMeshUpload(({ final __callArgument8:Dynamic = geometry; __callArgument8; }), (cast 'normal' : String)) : Float);
     __destructure0 = bindPose;
-    normals = _Runtime.field(__destructure0, 'normals');
-    positions = _Runtime.field(__destructure0, 'positions');
+    normals = __destructure0.normals;
+    positions = __destructure0.positions;
     vertexCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0)) | 0);
     {
       var v:Float = 0.0;

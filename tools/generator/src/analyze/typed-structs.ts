@@ -343,6 +343,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Physics2DRevoluteJoint',
     purpose: 'reviewed escape-free physics revolute joint',
   },
+  {
+    declarationFingerprint: 'sha256:4c5c7df2276c0ba36c720adc9c2f10a21508a54448a1f67dcb2587581d3ca5c2',
+    id: '@flighthq/types:interface#Skeleton2D',
+    purpose: 'reviewed escape-free 2D skeleton',
+  },
+  {
+    declarationFingerprint: 'sha256:31eb650a945dc248ce93c5e25b2cd1fdf0f3ad4576ca1b19dc10acd77f99e5e7',
+    id: '@flighthq/types:interface#Skeleton3D',
+    purpose: 'reviewed escape-free 3D skeleton',
+  },
+  {
+    declarationFingerprint: 'sha256:736e4bf4ec95bf4937e25e58fcd614373bff9626fbfd4431685b2b025bd9f67c',
+    id: '@flighthq/types:interface#MeshSkinBindPose',
+    purpose: 'reviewed escape-free mesh skin bind pose',
+  },
+  {
+    declarationFingerprint: 'sha256:5b923770aadf08c459c517186e28a6ca1a7ffcabd35a29d8d97ca742aa95996c',
+    id: '@flighthq/types:interface#SkinAttachment2D',
+    purpose: 'reviewed escape-free 2D skin attachment',
+  },
+  {
+    declarationFingerprint: 'sha256:3831dc7503c830297819df165667142b18595623fb5320f616539f5dbb48b1bd',
+    id: '@flighthq/types:interface#Skeleton2DPathConstraint',
+    purpose: 'reviewed escape-free 2D skeleton path constraint',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(
