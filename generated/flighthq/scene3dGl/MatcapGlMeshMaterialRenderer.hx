@@ -61,7 +61,7 @@ class MatcapGlMeshMaterialRenderer {
     bindGlMatcapSurface(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = program; __callArgument12; }), ({ final __callArgument13:Dynamic = MatcapGlMeshMaterialRenderer.scratchRgba__matcapGlMeshMaterialRenderer; __callArgument13; }), (cast _Runtime.field(matcap, 'matcap') : Dynamic), (cast _Runtime.field(matcap, 'alphaCutoff') : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     drawGlMeshSubset(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = program; __callArgument16; }), ({ final __callArgument17:Dynamic = proxy; __callArgument17; }), ({ final __callArgument18:Dynamic = geometry; __callArgument18; }));
   } });

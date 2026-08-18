@@ -30,7 +30,7 @@ class GlLensDistortionEffect {
   }
 
   public static final defaultGlLensDistortionEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyLensDistortionEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : LensDistortionEffect));
+    applyLensDistortionEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : LensDistortionEffect));
   });
 
   public static function registerGlLensDistortionEffect(state:GlRenderState):Void {

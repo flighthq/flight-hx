@@ -32,7 +32,7 @@ class CanvasInnerGlowEffect {
   }
 
   public static final defaultCanvasInnerGlowEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    (cast applyInnerGlowEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->InnerGlowEffect->Void)(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerGlowEffect));
+    (cast applyInnerGlowEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->InnerGlowEffect->Void)(ctx.source, ctx.dest, ctx.pool, (cast effect : InnerGlowEffect));
   });
 
   public static function registerCanvasInnerGlowEffect(state:CanvasRenderState):Void {

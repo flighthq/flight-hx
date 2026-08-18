@@ -54,7 +54,7 @@ class CanvasBloomEffect {
   }
 
   public static final defaultCanvasBloomEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyBloomEffectToCanvas(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BloomEffect));
+    applyBloomEffectToCanvas(ctx.source, ctx.dest, ctx.pool, (cast effect : BloomEffect));
   });
 
   public static function registerCanvasBloomEffect(state:CanvasRenderState):Void {

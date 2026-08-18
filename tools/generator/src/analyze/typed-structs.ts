@@ -118,6 +118,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#ClipRegion',
     purpose: 'reviewed escape-free clip region',
   },
+  {
+    declarationFingerprint: 'sha256:56f73a3c7c106c2cfc9affd8f47d517ff6685a4a5bad8083b9d9fe76d3fcf217',
+    id: '@flighthq/types:interface#CanvasRenderEffectContext',
+    purpose: 'reviewed escape-free Canvas render-effect context',
+  },
+  {
+    declarationFingerprint: 'sha256:fdc15a042a1a80053691e6e5e9fdcec40ccc068adde5e22e51ae98764f1520a6',
+    id: '@flighthq/types:interface#GlRenderEffectContext',
+    purpose: 'reviewed escape-free WebGL render-effect context',
+  },
+  {
+    declarationFingerprint: 'sha256:fd9b6f3f63bcd3f4391e10fb091fcb7444196085bcefc1d301287787dfe3a3e2',
+    id: '@flighthq/types:interface#WgpuRenderEffectContext',
+    purpose: 'reviewed escape-free WebGPU render-effect context',
+  },
+  {
+    declarationFingerprint: 'sha256:4699244536c3feef6f3f739f35112b90e8382c1ec3ae5327e196af03c3d85b16',
+    id: '@flighthq/types:interface#GlScene3DRuntime',
+    purpose: 'reviewed escape-free WebGL scene runtime',
+  },
+  {
+    declarationFingerprint: 'sha256:4dab30bcdbb8075f68a1edc7500087cb2a72c3202eb16b2ffb6f143591215923',
+    id: '@flighthq/types:interface#WgpuScene3DRuntime',
+    purpose: 'reviewed escape-free WebGPU scene runtime',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

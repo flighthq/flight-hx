@@ -42,7 +42,7 @@ class CanvasDropShadowEffect {
   }
 
   public static final defaultCanvasDropShadowEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    (cast applyDropShadowEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->DropShadowEffect->Void)(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : DropShadowEffect));
+    (cast applyDropShadowEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->DropShadowEffect->Void)(ctx.source, ctx.dest, ctx.pool, (cast effect : DropShadowEffect));
   });
 
   public static function registerCanvasDropShadowEffect(state:CanvasRenderState):Void {

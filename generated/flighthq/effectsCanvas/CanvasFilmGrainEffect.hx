@@ -75,7 +75,7 @@ class CanvasFilmGrainEffect {
   }
 
   public static final defaultCanvasFilmGrainEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyFilmGrainEffectToCanvas(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : FilmGrainEffect));
+    applyFilmGrainEffectToCanvas(ctx.source, ctx.dest, ctx.pool, (cast effect : FilmGrainEffect));
   });
 
   public static function registerCanvasFilmGrainEffect(state:CanvasRenderState):Void {

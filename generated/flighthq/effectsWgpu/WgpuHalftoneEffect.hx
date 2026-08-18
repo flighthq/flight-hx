@@ -32,7 +32,7 @@ class WgpuHalftoneEffect {
   }
 
   public static final defaultWgpuHalftoneEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyHalftoneEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : HalftoneEffect));
+    applyHalftoneEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : HalftoneEffect));
   });
 
   public static function registerWgpuHalftoneEffect(state:WgpuRenderState):Void {

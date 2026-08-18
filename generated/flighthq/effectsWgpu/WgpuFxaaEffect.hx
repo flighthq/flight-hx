@@ -33,7 +33,7 @@ class WgpuFxaaEffect {
   }
 
   public static final defaultWgpuFxaaEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyFxaaEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : FxaaEffect));
+    applyFxaaEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : FxaaEffect));
   });
 
   public static function registerWgpuFxaaEffect(state:WgpuRenderState):Void {

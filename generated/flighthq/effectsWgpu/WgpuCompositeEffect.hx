@@ -33,7 +33,7 @@ class WgpuCompositeEffect {
   }
 
   public static final defaultWgpuCompositeEffectRunner:WgpuRenderEffectRunner = (cast function(context:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyCompositeEffectToWgpu(_Runtime.field(context, 'state'), _Runtime.field(context, 'source'), _Runtime.field(context, 'dest'), (cast effect : CompositeEffect));
+    applyCompositeEffectToWgpu(context.state, context.source, context.dest, (cast effect : CompositeEffect));
   });
 
   @:noCompletion

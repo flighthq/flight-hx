@@ -52,7 +52,7 @@ class CanvasPixelateEffect {
   }
 
   public static final defaultCanvasPixelateEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyPixelateEffectToCanvas(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : PixelateEffect));
+    applyPixelateEffectToCanvas(ctx.source, ctx.dest, ctx.pool, (cast effect : PixelateEffect));
   });
 
   public static function registerCanvasPixelateEffect(state:CanvasRenderState):Void {

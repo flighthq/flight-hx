@@ -28,7 +28,7 @@ class GlSketchEffect {
   }
 
   public static final defaultGlSketchEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applySketchEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SketchEffect));
+    applySketchEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : SketchEffect));
   });
 
   public static function registerGlSketchEffect(state:GlRenderState):Void {

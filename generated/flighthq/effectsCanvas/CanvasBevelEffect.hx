@@ -40,7 +40,7 @@ class CanvasBevelEffect {
   }
 
   public static final defaultCanvasBevelEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    (cast applyBevelEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->BevelEffect->Void)(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BevelEffect));
+    (cast applyBevelEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->BevelEffect->Void)(ctx.source, ctx.dest, ctx.pool, (cast effect : BevelEffect));
   });
 
   public static function registerCanvasBevelEffect(state:CanvasRenderState):Void {

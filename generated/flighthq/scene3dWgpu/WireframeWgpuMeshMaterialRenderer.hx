@@ -66,13 +66,13 @@ class WireframeWgpuMeshMaterialRenderer {
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument17:Dynamic = state; __callArgument17; })) : WgpuRenderStateRuntime);
     pass = stateRuntime.renderPass;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument18:Dynamic = state; __callArgument18; })) : WgpuScene3DRuntime);
-    if ((cast ((cast _Runtime.strictEquals(pass, null) : Bool) || (cast _Runtime.strictEquals((cast scene : WgpuScene3DRuntime).activeMeshPipeline, null) : Bool)) : Bool)) { return; }
+    if ((cast ((cast _Runtime.strictEquals(pass, null) : Bool) || (cast _Runtime.strictEquals(scene.activeMeshPipeline, null) : Bool)) : Bool)) { return; }
     subset = _Runtime.field(proxy, 'subset');
     if ((cast _Runtime.strictEquals(subset.indexCount, 0.0) : Bool)) { return; }
     upload = (cast ensureWgpuWireframeUpload(({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = geometry; __callArgument20; })) : Null<WgpuWireframeUpload>);
     if ((cast _Runtime.strictEquals(upload, null) : Bool)) { return; }
     drawBindGroup = (cast writeWgpuDrawUniform(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = proxy; __callArgument22; })) : flighthq._internal.dom.GPUBindGroup);
-    flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast (cast scene : WgpuScene3DRuntime).pendingDrawOffset : Float));
+    flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast scene.pendingDrawOffset : Float));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, drawBindGroup, WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast upload : WgpuWireframeUpload).vertexBuffer);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer((cast upload : WgpuWireframeUpload).lineIndexBuffer, (cast upload : WgpuWireframeUpload).indexFormat);

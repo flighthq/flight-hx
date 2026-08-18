@@ -47,7 +47,7 @@ class WgpuMotionBlurEffect {
   }
 
   public static final defaultWgpuMotionBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyMotionBlurEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'sceneVelocityTexture'), (cast effect : MotionBlurEffect));
+    applyMotionBlurEffectToWgpu(ctx.state, ctx.source, ctx.dest, ctx.sceneVelocityTexture, (cast effect : MotionBlurEffect));
   });
 
   public static function registerWgpuMotionBlurEffect(state:WgpuRenderState):Void {

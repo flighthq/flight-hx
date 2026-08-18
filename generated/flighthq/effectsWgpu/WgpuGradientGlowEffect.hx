@@ -87,7 +87,7 @@ class WgpuGradientGlowEffect {
   }
 
   public static final defaultWgpuGradientGlowEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyGradientGlowEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientGlowEffect));
+    applyGradientGlowEffectToWgpu(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : GradientGlowEffect));
   });
 
   public static function registerWgpuGradientGlowEffect(state:WgpuRenderState):Void {

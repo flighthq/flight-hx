@@ -12,13 +12,13 @@ import flighthq.types.Log.LogLevel;
 class EnableGlScene3DCustomShaderGuards {
   @:noCompletion
   public static function areGlScene3DCustomShaderGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : GlScene3DRuntime).customShaderGuard, null);
+    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : { @:optional var customShaderGuard:Null<GlRenderState->flighthq._internal.dom.WebGLProgram->String->Void>; }).customShaderGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableGlScene3DCustomShaderGuards(state:GlRenderState):Void {
-    ((cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : { @:optional var customShaderGuard:Null<GlRenderState->flighthq._internal.dom.WebGLProgram->String->Void>; }).customShaderGuard = (cast EnableGlScene3DCustomShaderGuards.warnGlCustomShaderUniformTypes__enableGlScene3DCustomShaderGuards));
+    ((cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : { @:optional var customShaderGuard:Null<GlRenderState->flighthq._internal.dom.WebGLProgram->String->Void>; }).customShaderGuard = cast (EnableGlScene3DCustomShaderGuards.warnGlCustomShaderUniformTypes__enableGlScene3DCustomShaderGuards : Null<GlRenderState->flighthq._internal.dom.WebGLProgram->String->Void>));
   }
 
   public static function glUniformTypeName__enableGlScene3DCustomShaderGuards(gl:flighthq._internal.dom.WebGL2RenderingContext, type:Float):String {

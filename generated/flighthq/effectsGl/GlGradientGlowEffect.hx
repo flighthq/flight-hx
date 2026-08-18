@@ -74,7 +74,7 @@ class GlGradientGlowEffect {
   }
 
   public static final defaultGlGradientGlowEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyGradientGlowEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientGlowEffect));
+    applyGradientGlowEffectToGl(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : GradientGlowEffect));
   });
 
   public static function registerGlGradientGlowEffect(state:GlRenderState):Void {

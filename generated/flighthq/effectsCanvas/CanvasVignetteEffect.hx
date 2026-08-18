@@ -64,7 +64,7 @@ class CanvasVignetteEffect {
   }
 
   public static final defaultCanvasVignetteEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyVignetteEffectToCanvas(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : VignetteEffect));
+    applyVignetteEffectToCanvas(ctx.source, ctx.dest, (cast effect : VignetteEffect));
   });
 
   public static function registerCanvasVignetteEffect(state:CanvasRenderState):Void {

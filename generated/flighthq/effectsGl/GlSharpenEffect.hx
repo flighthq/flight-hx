@@ -28,7 +28,7 @@ class GlSharpenEffect {
   }
 
   public static final defaultGlSharpenEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applySharpenEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SharpenEffect));
+    applySharpenEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : SharpenEffect));
   });
 
   public static function registerGlSharpenEffect(state:GlRenderState):Void {

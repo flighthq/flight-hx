@@ -34,7 +34,7 @@ class GlMotionBlurEffect {
   }
 
   public static final defaultGlMotionBlurEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyMotionBlurEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'sceneVelocityTexture'), (cast effect : MotionBlurEffect));
+    applyMotionBlurEffectToGl(ctx.state, ctx.source, ctx.dest, ctx.sceneVelocityTexture, (cast effect : MotionBlurEffect));
   });
 
   public static function registerGlMotionBlurEffect(state:GlRenderState):Void {

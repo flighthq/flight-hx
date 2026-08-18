@@ -34,7 +34,7 @@ class GlOutlineEffect {
   }
 
   public static final defaultGlOutlineEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyOutlineEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : OutlineEffect));
+    applyOutlineEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : OutlineEffect));
   });
 
   public static function registerGlOutlineEffect(state:GlRenderState):Void {

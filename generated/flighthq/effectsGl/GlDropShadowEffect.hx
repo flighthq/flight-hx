@@ -89,7 +89,7 @@ class GlDropShadowEffect {
   }
 
   public static final defaultGlDropShadowEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyDropShadowEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : DropShadowEffect));
+    applyDropShadowEffectToGl(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : DropShadowEffect));
   });
 
   public static function registerGlDropShadowEffect(state:GlRenderState):Void {

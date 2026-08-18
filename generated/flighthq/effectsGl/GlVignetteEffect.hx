@@ -44,7 +44,7 @@ class GlVignetteEffect {
   }
 
   public static final defaultGlVignetteEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyVignetteEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : VignetteEffect));
+    applyVignetteEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : VignetteEffect));
   });
 
   public static function registerGlVignetteEffect(state:GlRenderState):Void {

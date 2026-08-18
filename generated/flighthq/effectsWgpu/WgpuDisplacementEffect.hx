@@ -35,7 +35,7 @@ class WgpuDisplacementEffect {
   }
 
   public static final defaultWgpuDisplacementEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyDisplacementEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DisplacementEffect));
+    applyDisplacementEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : DisplacementEffect));
   });
 
   public static function registerWgpuDisplacementEffect(state:WgpuRenderState):Void {

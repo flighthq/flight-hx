@@ -35,7 +35,7 @@ class CanvasCompositeEffect {
   }
 
   public static final defaultCanvasCompositeEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyCompositeEffectToCanvas(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CompositeEffect));
+    applyCompositeEffectToCanvas(ctx.state, ctx.source, ctx.dest, (cast effect : CompositeEffect));
   });
 
   public static function getCanvasCompositeEffectOperation(operator_:CompositeOperator):flighthq._internal.dom.GlobalCompositeOperation {

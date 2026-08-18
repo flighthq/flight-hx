@@ -38,7 +38,7 @@ class WgpuCrtEffect {
   }
 
   public static final defaultWgpuCrtEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyCrtEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CrtEffect));
+    applyCrtEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : CrtEffect));
   });
 
   public static function registerWgpuCrtEffect(state:WgpuRenderState):Void {

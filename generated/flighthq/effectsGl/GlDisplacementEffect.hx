@@ -34,7 +34,7 @@ class GlDisplacementEffect {
   }
 
   public static final defaultGlDisplacementEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyDisplacementEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DisplacementEffect));
+    applyDisplacementEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : DisplacementEffect));
   });
 
   public static function registerGlDisplacementEffect(state:GlRenderState):Void {

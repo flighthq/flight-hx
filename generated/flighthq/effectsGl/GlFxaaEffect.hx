@@ -28,7 +28,7 @@ class GlFxaaEffect {
   }
 
   public static final defaultGlFxaaEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyFxaaEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : FxaaEffect));
+    applyFxaaEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : FxaaEffect));
   });
 
   public static function registerGlFxaaEffect(state:GlRenderState):Void {

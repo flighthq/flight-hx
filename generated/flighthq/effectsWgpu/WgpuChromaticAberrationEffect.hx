@@ -30,7 +30,7 @@ class WgpuChromaticAberrationEffect {
   }
 
   public static final defaultWgpuChromaticAberrationEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyChromaticAberrationEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ChromaticAberrationEffect));
+    applyChromaticAberrationEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : ChromaticAberrationEffect));
   });
 
   public static function registerWgpuChromaticAberrationEffect(state:WgpuRenderState):Void {

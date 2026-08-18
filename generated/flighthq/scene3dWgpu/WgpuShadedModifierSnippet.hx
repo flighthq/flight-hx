@@ -19,15 +19,15 @@ class WgpuShadedModifierSnippet {
   public static function registerWgpuModifierSnippet(state:WgpuRenderState, snippet:WgpuModifierSnippet):Void {
     var runtime:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
-    if ((cast _Runtime.strictEquals((cast runtime : WgpuScene3DRuntime).modifierSnippetRegistry, null) : Bool)) { ((cast runtime : WgpuScene3DRuntime).modifierSnippetRegistry = (cast createModifierRegistry() : ModifierRegistry)); }
-    registerModifier((cast runtime : WgpuScene3DRuntime).modifierSnippetRegistry, ({ final __callArgument1:Dynamic = snippet; __callArgument1; }));
-    (cast runtime : WgpuScene3DRuntime).modifierSnippetRevision++;
+    if ((cast _Runtime.strictEquals(runtime.modifierSnippetRegistry, null) : Bool)) { (runtime.modifierSnippetRegistry = cast ((cast createModifierRegistry() : ModifierRegistry) : Null<ModifierRegistry>)); }
+    registerModifier(runtime.modifierSnippetRegistry, ({ final __callArgument1:Dynamic = snippet; __callArgument1; }));
+    runtime.modifierSnippetRevision++;
   }
 
   @:noCompletion
   public static function resolveWgpuModifierSnippet(state:WgpuRenderState, kind:ModifierKind):Null<WgpuModifierSnippet> {
     var registry:Null<ModifierRegistry> = cast _Runtime.UNDEFINED;
-    registry = (cast (cast getWgpuScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuScene3DRuntime) : WgpuScene3DRuntime).modifierSnippetRegistry;
+    registry = (cast (cast getWgpuScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuScene3DRuntime) : { var modifierSnippetRegistry:Null<ModifierRegistry>; }).modifierSnippetRegistry;
     if ((cast _Runtime.strictEquals(registry, null) : Bool)) { return cast null; }
     return cast (cast resolveModifier(({ final __callArgument3:Dynamic = registry; __callArgument3; }), (cast kind : String)) : Null<WgpuModifierSnippet>);
     return cast null;

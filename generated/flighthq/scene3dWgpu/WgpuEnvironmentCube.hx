@@ -37,7 +37,7 @@ class WgpuEnvironmentCube {
     var texture:flighthq._internal.dom.GPUTexture = cast _Runtime.UNDEFINED;
     var view:flighthq._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
-    if ((cast !_Runtime.strictEquals((cast scene : WgpuScene3DRuntime).environmentSourceCubeView, null) : Bool)) { return cast (cast scene : WgpuScene3DRuntime).environmentSourceCubeView; }
+    if ((cast !_Runtime.strictEquals(scene.environmentSourceCubeView, null) : Bool)) { return cast scene.environmentSourceCubeView; }
     cube = _Runtime.field(environment, 'environment');
     if ((cast ((cast ((cast _Runtime.strictEquals(cube, null) : Bool) || (cast !_Runtime.strictEquals((cast cube : { var dimension:String; }).dimension, 'cube') : Bool)) : Bool) || (cast !(cast (cast WgpuEnvironmentCube.hasWgpuCubeFacePixels__wgpuEnvironmentCube(({ final __callArgument1:Dynamic = cube; __callArgument1; })) : Bool) : Bool) : Bool)) : Bool)) { return cast null; }
     sources = (cast cube : { var sources:TextureSourceCubeFaces; }).sources;
@@ -53,8 +53,8 @@ class WgpuEnvironmentCube {
       }
     }
     view = (cast texture : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' });
-    ((cast scene : WgpuScene3DRuntime).environmentSourceCube = texture);
-    ((cast scene : WgpuScene3DRuntime).environmentSourceCubeView = view);
+    (scene.environmentSourceCube = cast (texture : Null<flighthq._internal.dom.GPUTexture>));
+    (scene.environmentSourceCubeView = cast (view : Null<flighthq._internal.dom.GPUTextureView>));
     return cast view;
     return cast null;
   }
@@ -62,7 +62,7 @@ class WgpuEnvironmentCube {
   @:noCompletion
   public static function updateWgpuEnvironmentCubeFace(state:WgpuRenderState, face:Float, image:TextureSource):Bool {
     var texture:Null<flighthq._internal.dom.GPUTexture> = cast _Runtime.UNDEFINED;
-    texture = (cast (cast getWgpuScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuScene3DRuntime) : WgpuScene3DRuntime).environmentSourceCube;
+    texture = (cast (cast getWgpuScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuScene3DRuntime) : { var environmentSourceCube:Null<flighthq._internal.dom.GPUTexture>; }).environmentSourceCube;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast false; }
     WgpuEnvironmentCube.uploadWgpuEnvironmentImage__wgpuEnvironmentCube((cast state : WgpuRenderState).device, ({ final __callArgument6:Dynamic = texture; __callArgument6; }), (cast face : Float), ({ final __callArgument7:Dynamic = image; __callArgument7; }));
     return cast true;

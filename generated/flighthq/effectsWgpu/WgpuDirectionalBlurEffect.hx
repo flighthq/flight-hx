@@ -35,7 +35,7 @@ class WgpuDirectionalBlurEffect {
   }
 
   public static final defaultWgpuDirectionalBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyDirectionalBlurEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DirectionalBlurEffect));
+    applyDirectionalBlurEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : DirectionalBlurEffect));
   });
 
   public static function registerWgpuDirectionalBlurEffect(state:WgpuRenderState):Void {

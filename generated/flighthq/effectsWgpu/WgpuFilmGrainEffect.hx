@@ -33,7 +33,7 @@ class WgpuFilmGrainEffect {
   }
 
   public static final defaultWgpuFilmGrainEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyFilmGrainEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : FilmGrainEffect));
+    applyFilmGrainEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : FilmGrainEffect));
   });
 
   public static function registerWgpuFilmGrainEffect(state:WgpuRenderState):Void {

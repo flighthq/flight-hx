@@ -25,7 +25,7 @@ class CanvasBlurEffect {
   }
 
   public static final defaultCanvasBlurEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyBlurEffectToCanvas(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : BlurEffect));
+    applyBlurEffectToCanvas(ctx.source, ctx.dest, (cast effect : BlurEffect));
   });
 
   public static function registerCanvasBlurEffect(state:CanvasRenderState):Void {

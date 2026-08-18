@@ -80,7 +80,7 @@ class GlOuterGlowEffect {
   }
 
   public static final defaultGlOuterGlowEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyOuterGlowEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : OuterGlowEffect));
+    applyOuterGlowEffectToGl(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : OuterGlowEffect));
   });
 
   public static function registerGlOuterGlowEffect(state:GlRenderState):Void {

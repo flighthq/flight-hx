@@ -30,7 +30,7 @@ class WgpuLensDistortionEffect {
   }
 
   public static final defaultWgpuLensDistortionEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyLensDistortionEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : LensDistortionEffect));
+    applyLensDistortionEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : LensDistortionEffect));
   });
 
   public static function registerWgpuLensDistortionEffect(state:WgpuRenderState):Void {

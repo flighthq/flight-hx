@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_586,
+      newAuditOnly: 1_581,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(420);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(425);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_586);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_581);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(18);
+    expect(newDirect).toHaveLength(23);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -200,6 +200,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'ClipRegion',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free clip region',
+        }),
+        expect.objectContaining({
+          name: 'CanvasRenderEffectContext',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Canvas render-effect context',
+        }),
+        expect.objectContaining({
+          name: 'GlRenderEffectContext',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL render-effect context',
+        }),
+        expect.objectContaining({
+          name: 'WgpuRenderEffectContext',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU render-effect context',
+        }),
+        expect.objectContaining({
+          name: 'GlScene3DRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL scene runtime',
+        }),
+        expect.objectContaining({
+          name: 'WgpuScene3DRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU scene runtime',
         }),
       ]),
     );
@@ -293,6 +318,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:f73b90fe6168b429bc413bda84ebe794b96c7345e5da4ab65264c4241d9995b2',
         id: '@flighthq/types:interface#ClipRegion',
         purpose: 'reviewed escape-free clip region',
+      },
+      {
+        declarationFingerprint: 'sha256:56f73a3c7c106c2cfc9affd8f47d517ff6685a4a5bad8083b9d9fe76d3fcf217',
+        id: '@flighthq/types:interface#CanvasRenderEffectContext',
+        purpose: 'reviewed escape-free Canvas render-effect context',
+      },
+      {
+        declarationFingerprint: 'sha256:fdc15a042a1a80053691e6e5e9fdcec40ccc068adde5e22e51ae98764f1520a6',
+        id: '@flighthq/types:interface#GlRenderEffectContext',
+        purpose: 'reviewed escape-free WebGL render-effect context',
+      },
+      {
+        declarationFingerprint: 'sha256:fd9b6f3f63bcd3f4391e10fb091fcb7444196085bcefc1d301287787dfe3a3e2',
+        id: '@flighthq/types:interface#WgpuRenderEffectContext',
+        purpose: 'reviewed escape-free WebGPU render-effect context',
+      },
+      {
+        declarationFingerprint: 'sha256:4699244536c3feef6f3f739f35112b90e8382c1ec3ae5327e196af03c3d85b16',
+        id: '@flighthq/types:interface#GlScene3DRuntime',
+        purpose: 'reviewed escape-free WebGL scene runtime',
+      },
+      {
+        declarationFingerprint: 'sha256:4dab30bcdbb8075f68a1edc7500087cb2a72c3202eb16b2ffb6f143591215923',
+        id: '@flighthq/types:interface#WgpuScene3DRuntime',
+        purpose: 'reviewed escape-free WebGPU scene runtime',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -663,6 +713,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const renderContextRuntimeCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'CanvasRenderEffectContext',
+            'GlRenderEffectContext',
+            'GlScene3DRuntime',
+            'WgpuRenderEffectContext',
+            'WgpuScene3DRuntime',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -703,22 +766,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_586,
+      auditOnlySchemas: 1_581,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 15_989,
-      directSchemas: 418,
+      directAccesses: 16_741,
+      directSchemas: 423,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 14_677,
+      pendingAccesses: 13_925,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_586,
+      newAuditOnly: 1_581,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -746,7 +809,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(15_989);
+    expect(report.summary.directAccesses).toBe(16_741);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -844,6 +907,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(renderTargetCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'CanvasRenderEffectContext',
+        42,
+        'sha256:56f73a3c7c106c2cfc9affd8f47d517ff6685a4a5bad8083b9d9fe76d3fcf217',
+        'reviewed escape-free Canvas render-effect context',
+      ],
+      [
+        'GlRenderEffectContext',
+        155,
+        'sha256:fdc15a042a1a80053691e6e5e9fdcec40ccc068adde5e22e51ae98764f1520a6',
+        'reviewed escape-free WebGL render-effect context',
+      ],
+      [
+        'WgpuRenderEffectContext',
+        147,
+        'sha256:fd9b6f3f63bcd3f4391e10fb091fcb7444196085bcefc1d301287787dfe3a3e2',
+        'reviewed escape-free WebGPU render-effect context',
+      ],
+      [
+        'GlScene3DRuntime',
+        132,
+        'sha256:4699244536c3feef6f3f739f35112b90e8382c1ec3ae5327e196af03c3d85b16',
+        'reviewed escape-free WebGL scene runtime',
+      ],
+      [
+        'WgpuScene3DRuntime',
+        276,
+        'sha256:4dab30bcdbb8075f68a1edc7500087cb2a72c3202eb16b2ffb6f143591215923',
+        'reviewed escape-free WebGPU scene runtime',
+      ],
+    ] as const) {
+      expect(renderContextRuntimeCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -1024,6 +1129,35 @@ describe('typed struct analysis', () => {
       blockerReasons: ['normalization-provenance'],
       closed: false,
     });
+    for (const effectContextId of [
+      '@flighthq/types:interface#CanvasRenderEffectContext',
+      '@flighthq/types:interface#GlRenderEffectContext',
+      '@flighthq/types:interface#WgpuRenderEffectContext',
+    ]) {
+      expect(classAuditById.get(effectContextId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.get(effectContextId)?.nominalIdentity).toEqual({
+        blockerReasons: [],
+        closed: true,
+      });
+    }
+    const glScene3DRuntimeId = '@flighthq/types:interface#GlScene3DRuntime';
+    expect(classAuditById.get(glScene3DRuntimeId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: ['optional-omission'],
+    });
+    expect(provenanceById.has(glScene3DRuntimeId)).toBe(false);
+    const wgpuScene3DRuntimeId = '@flighthq/types:interface#WgpuScene3DRuntime';
+    expect(classAuditById.get(wgpuScene3DRuntimeId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.has(wgpuScene3DRuntimeId)).toBe(false);
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -1069,6 +1203,19 @@ describe('typed struct analysis', () => {
     const generatedClipRegion = readFileSync('generated/flighthq/clip/ClipRegion.hx', 'utf8');
     expect(generatedClipRegion).not.toMatch(/_Runtime\.field\(clip,/u);
     expect(generatedClipRegion).not.toMatch(/\(cast clip : ClipRegion\)\./u);
+    for (const [path, typeName] of [
+      ['generated/flighthq/effectsCanvas/CanvasBevelEffect.hx', 'CanvasRenderEffectContext'],
+      ['generated/flighthq/effectsGl/GlBloomEffect.hx', 'GlRenderEffectContext'],
+      ['generated/flighthq/effectsWgpu/WgpuBloomEffect.hx', 'WgpuRenderEffectContext'],
+    ] as const) {
+      const generatedEffect = readFileSync(path, 'utf8');
+      expect(generatedEffect).not.toContain(`(cast ctx : ${typeName}).`);
+      expect(generatedEffect).not.toMatch(/_Runtime\.field\(ctx,/u);
+    }
+    const glSceneRuntime = readFileSync('generated/flighthq/scene3dGl/GlEnvironmentIblBake.hx', 'utf8');
+    expect(glSceneRuntime).not.toContain('(cast runtime : GlScene3DRuntime).');
+    const wgpuSceneRuntime = readFileSync('generated/flighthq/scene3dWgpu/WgpuShadowMap.hx', 'utf8');
+    expect(wgpuSceneRuntime).not.toContain('(cast scene : WgpuScene3DRuntime).');
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

@@ -70,7 +70,7 @@ class WgpuOuterGlowEffect {
   }
 
   public static final defaultWgpuOuterGlowEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyOuterGlowEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : OuterGlowEffect));
+    applyOuterGlowEffectToWgpu(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : OuterGlowEffect));
   });
 
   public static function registerWgpuOuterGlowEffect(state:WgpuRenderState):Void {

@@ -69,7 +69,7 @@ class WgpuInnerShadowEffect {
   }
 
   public static final defaultWgpuInnerShadowEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyInnerShadowEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerShadowEffect));
+    applyInnerShadowEffectToWgpu(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : InnerShadowEffect));
   });
 
   public static function registerWgpuInnerShadowEffect(state:WgpuRenderState):Void {

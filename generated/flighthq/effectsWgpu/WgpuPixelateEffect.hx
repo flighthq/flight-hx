@@ -29,7 +29,7 @@ class WgpuPixelateEffect {
   }
 
   public static final defaultWgpuPixelateEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyPixelateEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : PixelateEffect));
+    applyPixelateEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : PixelateEffect));
   });
 
   public static function registerWgpuPixelateEffect(state:WgpuRenderState):Void {

@@ -91,7 +91,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Camera2D` | 17 | 6 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Camera3DOptions` | 0 | 3 | 0 | 2 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasMaterialRenderer` | 0 | 1 | 1 | 0 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
-| `@flighthq/types:interface#CanvasRenderEffectContext` | 0 | 4 | 0 | 4 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasRenderEffectContext` | 42 | 4 | 0 | 4 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderEffectPipeline` | 0 | 4 | 0 | 4 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTextureEntry` | 0 | 2 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTextureExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -228,7 +228,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#GlPbrTransmissionSceneColor` | 0 | 4 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlQuadBatchShader` | 0 | 11 | 1 | 0 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#GlRenderEffectApplicationExplanation` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#GlRenderEffectContext` | 0 | 6 | 0 | 4 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#GlRenderEffectContext` | 155 | 6 | 0 | 4 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderEffectPipeline` | 0 | 6 | 0 | 5 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlRenderStats` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTargetPool` | 0 | 1 | 3 | 1 | 0 | 0 | 4 | 3 | yes | — |
@@ -708,7 +708,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#WgpuModifierCompileContext` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuQuadBatchResources` | 0 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot` | 0 | 4 | 1 | 0 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
-| `@flighthq/types:interface#WgpuRenderEffectContext` | 0 | 6 | 0 | 4 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuRenderEffectContext` | 147 | 6 | 0 | 4 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderEffectPipeline` | 0 | 6 | 0 | 5 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuRenderStateSignals` | 0 | 2 | 0 | 2 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTextureEntry` | 0 | 2 | 1 | 1 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |

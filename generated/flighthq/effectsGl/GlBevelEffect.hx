@@ -88,7 +88,7 @@ class GlBevelEffect {
   }
 
   public static final defaultGlBevelEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyBevelEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BevelEffect));
+    applyBevelEffectToGl(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : BevelEffect));
   });
 
   public static function registerGlBevelEffect(state:GlRenderState):Void {

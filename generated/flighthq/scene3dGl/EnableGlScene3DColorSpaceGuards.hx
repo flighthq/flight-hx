@@ -12,13 +12,13 @@ import flighthq.types.Log.LogLevel;
 class EnableGlScene3DColorSpaceGuards {
   @:noCompletion
   public static function areGlScene3DColorSpaceGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : GlScene3DRuntime).colorSpaceGuard, null);
+    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : { @:optional var colorSpaceGuard:Null<Void->Void>; }).colorSpaceGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableGlScene3DColorSpaceGuards(state:GlRenderState):Void {
-    ((cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : { @:optional var colorSpaceGuard:Null<Void->Void>; }).colorSpaceGuard = (cast EnableGlScene3DColorSpaceGuards.warnGlScene3DDrawnToCanvas__enableGlScene3DColorSpaceGuards));
+    ((cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : { @:optional var colorSpaceGuard:Null<Void->Void>; }).colorSpaceGuard = cast (EnableGlScene3DColorSpaceGuards.warnGlScene3DDrawnToCanvas__enableGlScene3DColorSpaceGuards : Null<Void->Void>));
   }
 
   public static function warnGlScene3DDrawnToCanvas__enableGlScene3DColorSpaceGuards():Void {

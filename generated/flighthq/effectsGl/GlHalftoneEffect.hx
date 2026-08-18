@@ -31,7 +31,7 @@ class GlHalftoneEffect {
   }
 
   public static final defaultGlHalftoneEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyHalftoneEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : HalftoneEffect));
+    applyHalftoneEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : HalftoneEffect));
   });
 
   public static function registerGlHalftoneEffect(state:GlRenderState):Void {

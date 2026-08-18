@@ -35,7 +35,7 @@ class GlEnvironmentCube {
     var internalFormat:Float = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
     runtime = (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime);
-    if ((cast !_Runtime.strictEquals((cast runtime : GlScene3DRuntime).environmentSourceCube, null) : Bool)) { return cast (cast runtime : GlScene3DRuntime).environmentSourceCube; }
+    if ((cast !_Runtime.strictEquals(runtime.environmentSourceCube, null) : Bool)) { return cast runtime.environmentSourceCube; }
     cube = _Runtime.field(environment, 'environment');
     if ((cast ((cast ((cast _Runtime.strictEquals(cube, null) : Bool) || (cast !_Runtime.strictEquals((cast cube : { var dimension:String; }).dimension, 'cube') : Bool)) : Bool) || (cast !(cast (cast GlEnvironmentCube.hasGlCubeFacePixels__glEnvironmentCube(({ final __callArgument1:Dynamic = cube; __callArgument1; })) : Bool) : Bool) : Bool)) : Bool)) { return cast null; }
     sources = (cast cube : { var sources:TextureSourceCubeFaces; }).sources;
@@ -56,8 +56,8 @@ class GlEnvironmentCube {
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_T', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE));
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_R', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_R), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE));
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), null);
-    ((cast runtime : GlScene3DRuntime).environmentSourceCube = texture);
-    ((cast runtime : GlScene3DRuntime).environmentSourceCubeColorSpace = (cast cube : { var colorSpace:TextureColorSpace; }).colorSpace);
+    (runtime.environmentSourceCube = cast (texture : Null<flighthq._internal.dom.WebGLTexture>));
+    (runtime.environmentSourceCubeColorSpace = cast ((cast cube : { var colorSpace:TextureColorSpace; }).colorSpace : TextureColorSpace));
     return cast texture;
     return cast null;
   }
@@ -74,11 +74,11 @@ class GlEnvironmentCube {
     var texture:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     runtime = (cast getGlScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlScene3DRuntime);
-    texture = (cast runtime : GlScene3DRuntime).environmentSourceCube;
+    texture = runtime.environmentSourceCube;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast false; }
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), texture);
-    GlEnvironmentCube.uploadGlEnvironmentImage__glEnvironmentCube(({ final __callArgument6:Dynamic = gl; __callArgument6; }), (cast (cast getGlCubeFaceTarget(({ final __callArgument7:Dynamic = gl; __callArgument7; }), (cast face : Float)) : Float) : Float), ({ final __callArgument8:Dynamic = image; __callArgument8; }), (cast ((cast _Runtime.strictEquals((cast runtime : GlScene3DRuntime).environmentSourceCubeColorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic)) : Float));
+    GlEnvironmentCube.uploadGlEnvironmentImage__glEnvironmentCube(({ final __callArgument6:Dynamic = gl; __callArgument6; }), (cast (cast getGlCubeFaceTarget(({ final __callArgument7:Dynamic = gl; __callArgument7; }), (cast face : Float)) : Float) : Float), ({ final __callArgument8:Dynamic = image; __callArgument8; }), (cast ((cast _Runtime.strictEquals(runtime.environmentSourceCubeColorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic)) : Float));
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), null);
     return cast true;
     return cast null;

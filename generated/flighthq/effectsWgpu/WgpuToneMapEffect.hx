@@ -33,7 +33,7 @@ class WgpuToneMapEffect {
   }
 
   public static final defaultWgpuToneMapEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyToneMapEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ToneMapEffect));
+    applyToneMapEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : ToneMapEffect));
   });
 
   public static function registerWgpuToneMapEffect(state:WgpuRenderState):Void {

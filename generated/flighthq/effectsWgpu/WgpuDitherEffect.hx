@@ -29,7 +29,7 @@ class WgpuDitherEffect {
   }
 
   public static final defaultWgpuDitherEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyDitherEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DitherEffect));
+    applyDitherEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : DitherEffect));
   });
 
   public static function registerWgpuDitherEffect(state:WgpuRenderState):Void {

@@ -44,7 +44,7 @@ class GlGodRaysEffect {
   }
 
   public static final defaultGlGodRaysEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyGodRaysEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : GodRaysEffect));
+    applyGodRaysEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : GodRaysEffect));
   });
 
   public static function registerGlGodRaysEffect(state:GlRenderState):Void {

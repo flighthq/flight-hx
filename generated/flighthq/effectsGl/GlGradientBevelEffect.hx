@@ -90,7 +90,7 @@ class GlGradientBevelEffect {
   }
 
   public static final defaultGlGradientBevelEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyGradientBevelEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientBevelEffect));
+    applyGradientBevelEffectToGl(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : GradientBevelEffect));
   });
 
   public static function registerGlGradientBevelEffect(state:GlRenderState):Void {

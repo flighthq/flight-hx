@@ -51,7 +51,7 @@ class GlUnlitPrelude {
   @:noCompletion
   public static function ensureGlUnlitProgram(state:GlRenderState, key:GlUnlitDefineKey):GlUnlitProgram {
     var fullKey:GlUnlitDefineKey = cast _Runtime.UNDEFINED;
-    fullKey = (cast _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlScene3DRuntime) : GlScene3DRuntime).activeSkinnedRun }]));
+    fullKey = (cast _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlScene3DRuntime) : { var activeSkinnedRun:Bool; }).activeSkinnedRun }]));
     return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlUnlitProgram)->GlUnlitProgram)(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast 'unlit:' + Std.string((cast buildGlUnlitDefineKey(({ final __callArgument7:Dynamic = fullKey; __callArgument7; })) : String)) + '' : String), ({ final __callArgument10:Dynamic = function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlUnlitProgram return (cast compileGlUnlitProgram(({ final __callArgument8:Dynamic = gl; __callArgument8; }), ({ final __callArgument9:Dynamic = fullKey; __callArgument9; })) : GlUnlitProgram); __callArgument10; })) : GlUnlitProgram);
     return cast null;
   }

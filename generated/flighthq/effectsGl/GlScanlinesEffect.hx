@@ -30,7 +30,7 @@ class GlScanlinesEffect {
   }
 
   public static final defaultGlScanlinesEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyScanlinesEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ScanlinesEffect));
+    applyScanlinesEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : ScanlinesEffect));
   });
 
   public static function registerGlScanlinesEffect(state:GlRenderState):Void {

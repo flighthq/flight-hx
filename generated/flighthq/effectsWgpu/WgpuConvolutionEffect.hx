@@ -67,7 +67,7 @@ class WgpuConvolutionEffect {
   }
 
   public static final defaultWgpuConvolutionEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyConvolutionEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ConvolutionEffect));
+    applyConvolutionEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : ConvolutionEffect));
   });
 
   public static function registerWgpuConvolutionEffect(state:WgpuRenderState):Void {

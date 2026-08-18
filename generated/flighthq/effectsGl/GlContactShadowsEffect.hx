@@ -20,7 +20,7 @@ class GlContactShadowsEffect {
   }
 
   public static final defaultGlContactShadowsEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyContactShadowsEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ContactShadowsEffect));
+    applyContactShadowsEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : ContactShadowsEffect));
   });
 
   public static function registerGlContactShadowsEffect(state:GlRenderState):Void {

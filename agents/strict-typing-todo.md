@@ -5,14 +5,14 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 418 schemas currently emit direct fields, covering 15,989 accesses.
-- 1,118 eligible schemas remain audit-only, covering 14,677 pending accesses.
-- 861 audit-only schemas have no recorded escape, covering 9,923 pending accesses.
+- 423 schemas currently emit direct fields, covering 16,741 accesses.
+- 1,113 eligible schemas remain audit-only, covering 13,925 pending accesses.
+- 856 audit-only schemas have no recorded escape, covering 9,171 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
 - The cpp provenance audit has 551 closed nominal-identity candidates; only `Camera2D` and `ParticleEmitterState` are enabled.
-- Generated `Dynamic` occurrences fell from 49,168 to 47,006 across checker-derived typed-struct assignments and the reviewed escape-free tranches.
+- Generated `Dynamic` occurrences fell from 49,168 to 47,000 across checker-derived typed-struct assignments and the reviewed escape-free tranches.
 
 ## 1. Closed mapped aliases
 
@@ -34,7 +34,8 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote the Canvas, WebGL, portable, descriptor, and WebGPU render-target family: 707 accesses now emit directly while structural-transfer and optional-omission evidence correctly keeps cpp nominalization disabled.
 - [x] Promote `TextLayoutGroup`, `TextLayoutResult`, `RichTextData`, `RichText`, and `RichTextContent`: 891 accesses now emit directly while propagated cross-schema provenance keeps all five structural on cpp.
 - [x] Promote `Physics2DWorld`, `Physics2DContact`, `Physics2DSolverConfig`, `Physics2DCollider`, and `ClipRegion`: 627 accesses now emit directly; cpp class emission remains separately opt-in even for the four provenance-closed physics identities, while clip containment keeps `ClipRegion` structural.
-- [ ] Review the render-context/runtime hot rows: `GlRenderEffectContext`, `WgpuRenderEffectContext`, `CanvasRenderEffectContext`, `GlScene3DRuntime`, and `WgpuScene3DRuntime`.
+- [x] Promote `GlRenderEffectContext`, `WgpuRenderEffectContext`, `CanvasRenderEffectContext`, `GlScene3DRuntime`, and `WgpuScene3DRuntime`: 752 accesses now emit directly across 168 generated modules. The three render-effect contexts are provenance-closed but remain structural pending explicit cpp review; the two Scene3D runtimes remain provenance-open. Checker-known `unknown` fields add 13 explicit source-boundary erasures rather than guessed types.
+- [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 
 ## 3. Typed union projection

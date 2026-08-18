@@ -33,7 +33,7 @@ class WgpuSmaaEffect {
   }
 
   public static final defaultWgpuSmaaEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applySmaaEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SmaaEffect));
+    applySmaaEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : SmaaEffect));
   });
 
   public static function registerWgpuSmaaEffect(state:WgpuRenderState):Void {

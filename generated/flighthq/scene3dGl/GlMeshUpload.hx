@@ -37,7 +37,7 @@ class GlMeshUpload {
     var bindPose:Null<MeshSkinBindPose> = cast _Runtime.UNDEFINED;
     var stride:Float = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    cache = (cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : GlScene3DRuntime).uploadCache;
+    cache = (cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : { var uploadCache:flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlScene3DRuntime.GlMeshUpload>; }).uploadCache;
     upload = ((cast cache : flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlScene3DRuntime.GlMeshUpload>).get((cast geometry : MeshGeometry)));
     primitiveMode = (cast GlMeshUpload.getGlPrimitiveMode__glMeshUpload(({ final __callArgument1:Dynamic = gl; __callArgument1; }), geometry.topology) : Float);
     morphed = !_Runtime.strictEquals((cast getMeshGeometryMorphBindPose(({ final __callArgument2:Dynamic = geometry; __callArgument2; })) : Null<MeshMorphBindPose>), null);

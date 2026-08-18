@@ -42,7 +42,7 @@ class CanvasOuterGlowEffect {
   }
 
   public static final defaultCanvasOuterGlowEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    (cast applyOuterGlowEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->OuterGlowEffect->Void)(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : OuterGlowEffect));
+    (cast applyOuterGlowEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->OuterGlowEffect->Void)(ctx.source, ctx.dest, ctx.pool, (cast effect : OuterGlowEffect));
   });
 
   public static function registerCanvasOuterGlowEffect(state:CanvasRenderState):Void {

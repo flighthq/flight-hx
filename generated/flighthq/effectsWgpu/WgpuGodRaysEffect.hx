@@ -44,7 +44,7 @@ class WgpuGodRaysEffect {
   }
 
   public static final defaultWgpuGodRaysEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyGodRaysEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : GodRaysEffect));
+    applyGodRaysEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : GodRaysEffect));
   });
 
   public static function registerWgpuGodRaysEffect(state:WgpuRenderState):Void {

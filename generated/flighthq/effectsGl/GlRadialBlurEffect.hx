@@ -35,7 +35,7 @@ class GlRadialBlurEffect {
   }
 
   public static final defaultGlRadialBlurEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyRadialBlurEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : RadialBlurEffect));
+    applyRadialBlurEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : RadialBlurEffect));
   });
 
   public static function registerGlRadialBlurEffect(state:GlRenderState):Void {

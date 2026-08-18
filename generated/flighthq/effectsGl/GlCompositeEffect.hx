@@ -42,7 +42,7 @@ class GlCompositeEffect {
   }
 
   public static final defaultGlCompositeEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyCompositeEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CompositeEffect));
+    applyCompositeEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : CompositeEffect));
   });
 
   @:noCompletion

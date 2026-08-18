@@ -36,7 +36,7 @@ class WgpuRadialBlurEffect {
   }
 
   public static final defaultWgpuRadialBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyRadialBlurEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : RadialBlurEffect));
+    applyRadialBlurEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : RadialBlurEffect));
   });
 
   public static function registerWgpuRadialBlurEffect(state:WgpuRenderState):Void {

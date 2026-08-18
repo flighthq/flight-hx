@@ -42,7 +42,7 @@ class CanvasBlendEffect {
   }
 
   public static final defaultCanvasBlendEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyBlendEffectToCanvas(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : BlendEffect));
+    applyBlendEffectToCanvas(ctx.state, ctx.source, ctx.dest, (cast effect : BlendEffect));
   });
 
   public static function getCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:Null<String>):Null<CanvasRenderTarget> {

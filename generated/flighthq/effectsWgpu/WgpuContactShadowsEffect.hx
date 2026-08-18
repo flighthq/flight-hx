@@ -20,7 +20,7 @@ class WgpuContactShadowsEffect {
   }
 
   public static final defaultWgpuContactShadowsEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyContactShadowsEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ContactShadowsEffect));
+    applyContactShadowsEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : ContactShadowsEffect));
   });
 
   public static function registerWgpuContactShadowsEffect(state:WgpuRenderState):Void {

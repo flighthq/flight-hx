@@ -48,7 +48,7 @@ class VertexColorGlMeshMaterialRenderer {
     bindGlUnlitSurface(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = program; __callArgument11; }), ({ final __callArgument12:Dynamic = VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer; __callArgument12; }), (cast 1.0 : Float), (cast null : Dynamic), (cast _Runtime.field(vertexColor, 'alphaCutoff') : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     drawGlMeshSubset(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = program; __callArgument15; }), ({ final __callArgument16:Dynamic = proxy; __callArgument16; }), ({ final __callArgument17:Dynamic = geometry; __callArgument17; }));
   } });

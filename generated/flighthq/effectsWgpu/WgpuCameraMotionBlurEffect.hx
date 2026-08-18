@@ -30,7 +30,7 @@ class WgpuCameraMotionBlurEffect {
   }
 
   public static final defaultWgpuCameraMotionBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyCameraMotionBlurEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CameraMotionBlurEffect));
+    applyCameraMotionBlurEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : CameraMotionBlurEffect));
   });
 
   public static function registerWgpuCameraMotionBlurEffect(state:WgpuRenderState):Void {

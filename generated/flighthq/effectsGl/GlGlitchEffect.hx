@@ -37,7 +37,7 @@ class GlGlitchEffect {
   }
 
   public static final defaultGlGlitchEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyGlitchEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : GlitchEffect));
+    applyGlitchEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : GlitchEffect));
   });
 
   public static function registerGlGlitchEffect(state:GlRenderState):Void {

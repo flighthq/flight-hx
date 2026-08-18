@@ -59,7 +59,7 @@ class WgpuInnerGlowEffect {
   }
 
   public static final defaultWgpuInnerGlowEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyInnerGlowEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerGlowEffect));
+    applyInnerGlowEffectToWgpu(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : InnerGlowEffect));
   });
 
   public static function registerWgpuInnerGlowEffect(state:WgpuRenderState):Void {

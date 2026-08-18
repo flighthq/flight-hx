@@ -59,7 +59,7 @@ class WgpuBloomEffect {
   }
 
   public static final defaultWgpuBloomEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyBloomEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BloomEffect));
+    applyBloomEffectToWgpu(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : BloomEffect));
   });
 
   public static function registerWgpuBloomEffect(state:WgpuRenderState):Void {

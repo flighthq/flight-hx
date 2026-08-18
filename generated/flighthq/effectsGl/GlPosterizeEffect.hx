@@ -27,7 +27,7 @@ class GlPosterizeEffect {
   }
 
   public static final defaultGlPosterizeEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyPosterizeEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : PosterizeEffect));
+    applyPosterizeEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : PosterizeEffect));
   });
 
   public static function registerGlPosterizeEffect(state:GlRenderState):Void {

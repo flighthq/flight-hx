@@ -37,7 +37,7 @@ class GlToonPrelude {
   @:noCompletion
   public static function ensureGlToonProgram(state:GlRenderState, key:GlToonDefineKey):GlToonProgram {
     var fullKey:GlToonDefineKey = cast _Runtime.UNDEFINED;
-    fullKey = (cast _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlScene3DRuntime) : GlScene3DRuntime).activeSkinnedRun }]));
+    fullKey = (cast _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlScene3DRuntime) : { var activeSkinnedRun:Bool; }).activeSkinnedRun }]));
     return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlToonProgram)->GlToonProgram)(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast 'toon:' + Std.string((cast buildGlToonDefineKey(({ final __callArgument7:Dynamic = fullKey; __callArgument7; })) : String)) + '' : String), ({ final __callArgument10:Dynamic = function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlToonProgram return (cast compileGlToonProgram(({ final __callArgument8:Dynamic = gl; __callArgument8; }), ({ final __callArgument9:Dynamic = fullKey; __callArgument9; })) : GlToonProgram); __callArgument10; })) : GlToonProgram);
     return cast null;
   }

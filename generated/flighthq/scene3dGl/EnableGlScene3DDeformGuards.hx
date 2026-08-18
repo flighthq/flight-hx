@@ -23,13 +23,13 @@ import flighthq.types.Skin;
 class EnableGlScene3DDeformGuards {
   @:noCompletion
   public static function areGlScene3DDeformGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : GlScene3DRuntime).deformGuard, null);
+    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : { @:optional var deformGuard:Null<Mesh->Void>; }).deformGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableGlScene3DDeformGuards(state:GlRenderState):Void {
-    ((cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : { @:optional var deformGuard:Null<Mesh->Void>; }).deformGuard = (cast EnableGlScene3DDeformGuards.warnGlScene3DMeshDrawnUndeformed__enableGlScene3DDeformGuards));
+    ((cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : { @:optional var deformGuard:Null<Mesh->Void>; }).deformGuard = cast (EnableGlScene3DDeformGuards.warnGlScene3DMeshDrawnUndeformed__enableGlScene3DDeformGuards : Null<Mesh->Void>));
   }
 
   public static function warnGlScene3DMeshDrawnUndeformed__enableGlScene3DDeformGuards(mesh:Mesh):Void {

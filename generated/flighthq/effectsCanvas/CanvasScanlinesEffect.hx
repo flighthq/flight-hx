@@ -50,7 +50,7 @@ class CanvasScanlinesEffect {
   }
 
   public static final defaultCanvasScanlinesEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    applyScanlinesEffectToCanvas(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ScanlinesEffect));
+    applyScanlinesEffectToCanvas(ctx.source, ctx.dest, (cast effect : ScanlinesEffect));
   });
 
   public static function registerCanvasScanlinesEffect(state:CanvasRenderState):Void {

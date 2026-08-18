@@ -28,7 +28,7 @@ class GlSmaaEffect {
   }
 
   public static final defaultGlSmaaEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applySmaaEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SmaaEffect));
+    applySmaaEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : SmaaEffect));
   });
 
   public static function registerGlSmaaEffect(state:GlRenderState):Void {

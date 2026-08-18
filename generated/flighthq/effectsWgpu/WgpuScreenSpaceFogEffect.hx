@@ -38,7 +38,7 @@ class WgpuScreenSpaceFogEffect {
   }
 
   public static final defaultWgpuScreenSpaceFogEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyScreenSpaceFogEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ScreenSpaceFogEffect));
+    applyScreenSpaceFogEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : ScreenSpaceFogEffect));
   });
 
   public static function registerWgpuScreenSpaceFogEffect(state:WgpuRenderState):Void {

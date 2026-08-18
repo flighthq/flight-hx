@@ -45,7 +45,7 @@ class GlScreenSpaceFogEffect {
   }
 
   public static final defaultGlScreenSpaceFogEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyScreenSpaceFogEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'sceneDepthTexture'), (cast effect : ScreenSpaceFogEffect));
+    applyScreenSpaceFogEffectToGl(ctx.state, ctx.source, ctx.dest, ctx.sceneDepthTexture, (cast effect : ScreenSpaceFogEffect));
   });
 
   public static function registerGlScreenSpaceFogEffect(state:GlRenderState):Void {

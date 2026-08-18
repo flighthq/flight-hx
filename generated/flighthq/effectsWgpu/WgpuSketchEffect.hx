@@ -29,7 +29,7 @@ class WgpuSketchEffect {
   }
 
   public static final defaultWgpuSketchEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applySketchEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SketchEffect));
+    applySketchEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : SketchEffect));
   });
 
   public static function registerWgpuSketchEffect(state:WgpuRenderState):Void {

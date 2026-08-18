@@ -33,7 +33,7 @@ class WgpuLensDirtEffect {
   }
 
   public static final defaultWgpuLensDirtEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyLensDirtEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : LensDirtEffect));
+    applyLensDirtEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : LensDirtEffect));
   });
 
   public static function registerWgpuLensDirtEffect(state:WgpuRenderState):Void {

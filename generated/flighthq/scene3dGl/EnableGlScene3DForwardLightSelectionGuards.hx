@@ -15,13 +15,13 @@ import flighthq.types.SpotLight;
 class EnableGlScene3DForwardLightSelectionGuards {
   @:noCompletion
   public static function areGlScene3DForwardLightSelectionGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : GlScene3DRuntime).forwardLightSelectionGuard, null);
+    return cast !_Runtime.looseEquals((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : { @:optional var forwardLightSelectionGuard:Null<Scene3DLightsLike->Void>; }).forwardLightSelectionGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableGlScene3DForwardLightSelectionGuards(state:GlRenderState):Void {
-    ((cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : { @:optional var forwardLightSelectionGuard:Null<Scene3DLightsLike->Void>; }).forwardLightSelectionGuard = (cast EnableGlScene3DForwardLightSelectionGuards.warnGlScene3DForwardLightSelectionRequired__enableGlScene3DForwardLightSelectionGuards));
+    ((cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : { @:optional var forwardLightSelectionGuard:Null<Scene3DLightsLike->Void>; }).forwardLightSelectionGuard = cast (EnableGlScene3DForwardLightSelectionGuards.warnGlScene3DForwardLightSelectionRequired__enableGlScene3DForwardLightSelectionGuards : Null<Scene3DLightsLike->Void>));
   }
 
   public static function warnGlScene3DForwardLightSelectionRequired__enableGlScene3DForwardLightSelectionGuards(lights:Scene3DLightsLike):Void {

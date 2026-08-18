@@ -30,7 +30,7 @@ class GlChromaticAberrationEffect {
   }
 
   public static final defaultGlChromaticAberrationEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyChromaticAberrationEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ChromaticAberrationEffect));
+    applyChromaticAberrationEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : ChromaticAberrationEffect));
   });
 
   public static function registerGlChromaticAberrationEffect(state:GlRenderState):Void {

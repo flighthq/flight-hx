@@ -37,7 +37,7 @@ class GlCrtEffect {
   }
 
   public static final defaultGlCrtEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyCrtEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CrtEffect));
+    applyCrtEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : CrtEffect));
   });
 
   public static function registerGlCrtEffect(state:GlRenderState):Void {

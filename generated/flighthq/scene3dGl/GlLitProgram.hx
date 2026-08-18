@@ -70,7 +70,7 @@ class GlLitProgram {
       ((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Float>).set(program, (cast _Runtime.field(lights, 'version'))));
     }
     runtime = (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime);
-    shadow = (cast runtime : GlScene3DRuntime).shadow;
+    shadow = runtime.shadow;
     if ((cast ((cast !_Runtime.strictEquals(shadow, null) : Bool) && (cast (cast shadow : GlScene3DShadow).enabled : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.SHADOW_MAP_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast shadow : GlScene3DShadow).texture);
@@ -83,7 +83,7 @@ class GlLitProgram {
     } else {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowEnabled'), 0.0);
     }
-    ibl = (cast runtime : GlScene3DRuntime).ibl;
+    ibl = runtime.ibl;
     if ((cast !_Runtime.strictEquals(ibl, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast ibl : GlScene3DIbl).irradianceCube);

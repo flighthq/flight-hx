@@ -112,7 +112,7 @@ class WgpuGradientBevelEffect {
   }
 
   public static final defaultWgpuGradientBevelEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyGradientBevelEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientBevelEffect));
+    applyGradientBevelEffectToWgpu(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : GradientBevelEffect));
   });
 
   public static function registerWgpuGradientBevelEffect(state:WgpuRenderState):Void {

@@ -30,7 +30,7 @@ class WgpuWhiteBalanceEffect {
   }
 
   public static final defaultWgpuWhiteBalanceEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyWhiteBalanceEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : WhiteBalanceEffect));
+    applyWhiteBalanceEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : WhiteBalanceEffect));
   });
 
   public static function registerWgpuWhiteBalanceEffect(state:WgpuRenderState):Void {

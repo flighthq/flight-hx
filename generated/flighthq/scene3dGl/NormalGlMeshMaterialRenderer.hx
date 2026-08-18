@@ -55,7 +55,7 @@ class NormalGlMeshMaterialRenderer {
     bindGlDebugNormalMap(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = program; __callArgument11; }), (cast _Runtime.field(normal, 'normalMap') : Dynamic), (cast _Runtime.field(normal, 'normalScale') : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     drawGlMeshSubset(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = program; __callArgument14; }), ({ final __callArgument15:Dynamic = proxy; __callArgument15; }), ({ final __callArgument16:Dynamic = geometry; __callArgument16; }));
   } });

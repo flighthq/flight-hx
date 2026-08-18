@@ -41,7 +41,7 @@ class ExplainWgpuScene3DCoverage {
     var resolvers:Null<flighthq._internal._Map<String, WgpuTextureResolver>> = cast _Runtime.UNDEFINED;
     var snippets:Null<ModifierRegistry> = cast _Runtime.UNDEFINED;
     found = false;
-    materials = (cast (cast getWgpuScene3DRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuScene3DRuntime) : WgpuScene3DRuntime).materialRegistry;
+    materials = (cast (cast getWgpuScene3DRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuScene3DRuntime) : { var materialRegistry:flighthq._internal._Map<String, WgpuMeshMaterialRenderer>; }).materialRegistry;
     hasStandard = ((cast materials : flighthq._internal._Map<String, WgpuMeshMaterialRenderer>).has(StandardMaterialKindValue));
     {
       var i:Float = 0.0;
@@ -74,7 +74,7 @@ class ExplainWgpuScene3DCoverage {
         i++;
       }
     }
-    snippets = (cast (cast getWgpuScene3DRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : WgpuScene3DRuntime) : WgpuScene3DRuntime).modifierSnippetRegistry;
+    snippets = (cast (cast getWgpuScene3DRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : WgpuScene3DRuntime) : { var modifierSnippetRegistry:Null<ModifierRegistry>; }).modifierSnippetRegistry;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'modifierKinds'), 'length') : Float)) : Bool)) {

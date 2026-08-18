@@ -30,7 +30,7 @@ class GlCameraMotionBlurEffect {
   }
 
   public static final defaultGlCameraMotionBlurEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyCameraMotionBlurEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CameraMotionBlurEffect));
+    applyCameraMotionBlurEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : CameraMotionBlurEffect));
   });
 
   public static function registerGlCameraMotionBlurEffect(state:GlRenderState):Void {

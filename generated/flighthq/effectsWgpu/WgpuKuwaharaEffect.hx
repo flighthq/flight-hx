@@ -29,7 +29,7 @@ class WgpuKuwaharaEffect {
   }
 
   public static final defaultWgpuKuwaharaEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyKuwaharaEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : KuwaharaEffect));
+    applyKuwaharaEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : KuwaharaEffect));
   });
 
   public static function registerWgpuKuwaharaEffect(state:WgpuRenderState):Void {

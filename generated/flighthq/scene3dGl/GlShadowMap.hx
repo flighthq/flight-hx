@@ -59,16 +59,16 @@ class GlShadowMap {
     var boundProgram:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     runtime = (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime);
-    previousShadow = (cast runtime : GlScene3DRuntime).shadow;
+    previousShadow = runtime.shadow;
     if ((cast !_Runtime.strictEquals(previousShadow, null) : Bool)) { ((cast previousShadow : GlScene3DShadow).enabled = false); }
     if ((cast ((cast _Runtime.strictEquals(directionalLight, null) : Bool) || (cast !(cast _Runtime.field(directionalLight, 'castsShadow') : Bool) : Bool)) : Bool)) { return; }
     if ((cast !_Runtime.strictEquals((cast shadowCamera.projection : { var kind:String; }).kind, 'orthographic') : Bool)) {
       _Runtime.throwValue(_Runtime.error('drawGlScene3DShadowMap requires an orthographic shadow camera'));
     }
-    if ((cast _Runtime.strictEquals((cast runtime : GlScene3DRuntime).shadowTarget, null) : Bool)) {
-      ((cast runtime : GlScene3DRuntime).shadowTarget = (cast createGlRenderTarget(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = { depth: 'depth-stencil-sampled', height: DIRECTIONAL_SHADOW_MAP_SIZE, width: DIRECTIONAL_SHADOW_MAP_SIZE }; __callArgument2; })) : GlRenderTarget));
+    if ((cast _Runtime.strictEquals(runtime.shadowTarget, null) : Bool)) {
+      (runtime.shadowTarget = cast ((cast createGlRenderTarget(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = { depth: 'depth-stencil-sampled', height: DIRECTIONAL_SHADOW_MAP_SIZE, width: DIRECTIONAL_SHADOW_MAP_SIZE }; __callArgument2; })) : GlRenderTarget) : Null<GlRenderTarget>));
     }
-    target = (cast runtime : GlScene3DRuntime).shadowTarget;
+    target = runtime.shadowTarget;
     normalBiasWorld = _Runtime.multiplyNumbers(_Runtime.field(directionalLight, 'normalBias'), (cast getOrthographicProjectionTexelSize(shadowCamera.projection, (cast target.width : Float), (cast target.height : Float)) : Float));
     matrix = _Runtime.coalesce(({ final __structural3 = previousShadow; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var matrix:Matrix4; }).matrix; }), function():Dynamic return cast (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4));
     getCamera3DViewProjectionMatrix4(({ final __callArgument4:Dynamic = matrix; __callArgument4; }), ({ final __callArgument5:Dynamic = shadowCamera; __callArgument5; }), (cast 1.0 : Float));
@@ -119,7 +119,7 @@ class GlShadowMap {
     flighthq._internal.backend.WebGl2Backend.viewport(gl, flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 3.0 : Float)));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
     flighthq._internal.backend.WebGl2Backend.cullFace(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BACK', flighthq._internal.backend.WebGl2Backend.BACK));
-    ((cast runtime : GlScene3DRuntime).shadow = { enabled: true, matrix: matrix, normalBiasWorld: normalBiasWorld, pcfRadius: (cast GlShadowMap.normalizeDirectionalShadowPcfRadius__glShadowMap((cast _Runtime.field(directionalLight, 'pcfRadius') : Float)) : Float), shadowBias: _Runtime.field(directionalLight, 'shadowBias'), texture: target.depthTexture });
+    (runtime.shadow = cast ({ enabled: true, matrix: matrix, normalBiasWorld: normalBiasWorld, pcfRadius: (cast GlShadowMap.normalizeDirectionalShadowPcfRadius__glShadowMap((cast _Runtime.field(directionalLight, 'pcfRadius') : Float)) : Float), shadowBias: _Runtime.field(directionalLight, 'shadowBias'), texture: target.depthTexture } : Null<GlScene3DShadow>));
   }
 
   public static function normalizeDirectionalShadowPcfRadius__glShadowMap(radius:Float):Float {

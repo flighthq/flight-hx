@@ -33,7 +33,7 @@ class GlFilmGrainEffect {
   }
 
   public static final defaultGlFilmGrainEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyFilmGrainEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : FilmGrainEffect));
+    applyFilmGrainEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : FilmGrainEffect));
   });
 
   public static function registerGlFilmGrainEffect(state:GlRenderState):Void {

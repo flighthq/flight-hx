@@ -34,7 +34,7 @@ class GlDirectionalBlurEffect {
   }
 
   public static final defaultGlDirectionalBlurEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyDirectionalBlurEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DirectionalBlurEffect));
+    applyDirectionalBlurEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : DirectionalBlurEffect));
   });
 
   public static function registerGlDirectionalBlurEffect(state:GlRenderState):Void {

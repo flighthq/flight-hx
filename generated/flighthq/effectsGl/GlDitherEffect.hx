@@ -28,7 +28,7 @@ class GlDitherEffect {
   }
 
   public static final defaultGlDitherEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyDitherEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : DitherEffect));
+    applyDitherEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : DitherEffect));
   });
 
   public static function registerGlDitherEffect(state:GlRenderState):Void {

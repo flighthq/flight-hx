@@ -43,7 +43,7 @@ class StandardPbrGlMeshMaterialRenderer {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast program : GlPbrProgram).locAlphaCutoff, ((cast !_Runtime.strictEquals(pbr, null) : Bool) ? (cast _Runtime.field(pbr, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     drawGlMeshSubset(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = program; __callArgument15; }), ({ final __callArgument16:Dynamic = proxy; __callArgument16; }), ({ final __callArgument17:Dynamic = geometry; __callArgument17; }));
   } });

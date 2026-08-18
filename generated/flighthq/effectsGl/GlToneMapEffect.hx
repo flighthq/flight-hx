@@ -31,7 +31,7 @@ class GlToneMapEffect {
   }
 
   public static final defaultGlToneMapEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyToneMapEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ToneMapEffect));
+    applyToneMapEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : ToneMapEffect));
   });
 
   public static function registerGlToneMapEffect(state:GlRenderState):Void {

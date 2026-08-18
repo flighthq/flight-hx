@@ -28,7 +28,7 @@ class GlPixelateEffect {
   }
 
   public static final defaultGlPixelateEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyPixelateEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : PixelateEffect));
+    applyPixelateEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : PixelateEffect));
   });
 
   public static function registerGlPixelateEffect(state:GlRenderState):Void {

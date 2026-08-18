@@ -70,10 +70,10 @@ class GlBlurEffect {
   public static final defaultGlBlurEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
     var descriptor:{ var width:Float; var height:Float; var format:RenderTargetFormat; } = cast _Runtime.UNDEFINED;
     var temp:GlRenderTarget = cast _Runtime.UNDEFINED;
-    descriptor = (cast { width: (cast _Runtime.field(ctx, 'source') : { var width:Float; }).width, height: (cast _Runtime.field(ctx, 'source') : { var height:Float; }).height, format: (cast _Runtime.field(ctx, 'source') : { var format:RenderTargetFormat; }).format });
-    temp = (cast acquireGlRenderTarget(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'pool'), ({ final __callArgument31:Dynamic = descriptor; __callArgument31; })) : GlRenderTarget);
-    applyBlurEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), ({ final __callArgument32:Dynamic = temp; __callArgument32; }), (cast effect : BlurEffect));
-    releaseGlRenderTarget(_Runtime.field(ctx, 'pool'), ({ final __callArgument33:Dynamic = temp; __callArgument33; }));
+    descriptor = (cast { width: (cast ctx.source : { var width:Float; }).width, height: (cast ctx.source : { var height:Float; }).height, format: (cast ctx.source : { var format:RenderTargetFormat; }).format });
+    temp = (cast acquireGlRenderTarget(ctx.state, ctx.pool, ({ final __callArgument31:Dynamic = descriptor; __callArgument31; })) : GlRenderTarget);
+    applyBlurEffectToGl(ctx.state, ctx.source, ctx.dest, ({ final __callArgument32:Dynamic = temp; __callArgument32; }), (cast effect : BlurEffect));
+    releaseGlRenderTarget(ctx.pool, ({ final __callArgument33:Dynamic = temp; __callArgument33; }));
   });
 
   public static function registerGlBlurEffect(state:GlRenderState):Void {

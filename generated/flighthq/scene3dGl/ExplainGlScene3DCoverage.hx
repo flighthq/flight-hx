@@ -39,7 +39,7 @@ class ExplainGlScene3DCoverage {
     var resolvers:Null<flighthq._internal._Map<String, GlTextureResolver>> = cast _Runtime.UNDEFINED;
     var snippets:Null<ModifierRegistry> = cast _Runtime.UNDEFINED;
     found = false;
-    materials = (cast (cast getGlScene3DRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : GlScene3DRuntime) : GlScene3DRuntime).materialRegistry;
+    materials = (cast (cast getGlScene3DRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : GlScene3DRuntime) : { var materialRegistry:flighthq._internal._Map<String, GlMeshMaterialRenderer>; }).materialRegistry;
     hasStandard = ((cast materials : flighthq._internal._Map<String, GlMeshMaterialRenderer>).has(StandardMaterialKindValue));
     {
       var i:Float = 0.0;
@@ -72,7 +72,7 @@ class ExplainGlScene3DCoverage {
         i++;
       }
     }
-    snippets = (cast (cast getGlScene3DRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : GlScene3DRuntime) : GlScene3DRuntime).modifierSnippetRegistry;
+    snippets = (cast (cast getGlScene3DRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : GlScene3DRuntime) : { var modifierSnippetRegistry:Null<ModifierRegistry>; }).modifierSnippetRegistry;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'modifierKinds'), 'length') : Float)) : Bool)) {

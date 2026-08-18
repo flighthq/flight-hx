@@ -33,7 +33,7 @@ class GlMedianEffect {
   }
 
   public static final defaultGlMedianEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyMedianEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : MedianEffect));
+    applyMedianEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : MedianEffect));
   });
 
   public static function registerGlMedianEffect(state:GlRenderState):Void {

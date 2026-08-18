@@ -36,7 +36,7 @@ class GlLensFlareEffect {
   }
 
   public static final defaultGlLensFlareEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyLensFlareEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : LensFlareEffect));
+    applyLensFlareEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : LensFlareEffect));
   });
 
   public static function registerGlLensFlareEffect(state:GlRenderState):Void {

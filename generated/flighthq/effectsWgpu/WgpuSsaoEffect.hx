@@ -32,7 +32,7 @@ class WgpuSsaoEffect {
   }
 
   public static final defaultWgpuSsaoEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applySsaoEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SsaoEffect));
+    applySsaoEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : SsaoEffect));
   });
 
   public static function registerWgpuSsaoEffect(state:WgpuRenderState):Void {

@@ -29,7 +29,7 @@ class WgpuSharpenEffect {
   }
 
   public static final defaultWgpuSharpenEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applySharpenEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SharpenEffect));
+    applySharpenEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : SharpenEffect));
   });
 
   public static function registerWgpuSharpenEffect(state:WgpuRenderState):Void {

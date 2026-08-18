@@ -35,7 +35,7 @@ class WgpuTiltShiftEffect {
   }
 
   public static final defaultWgpuTiltShiftEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyTiltShiftEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : TiltShiftEffect));
+    applyTiltShiftEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : TiltShiftEffect));
   });
 
   public static function registerWgpuTiltShiftEffect(state:WgpuRenderState):Void {

@@ -47,7 +47,7 @@ class WgpuVignetteEffect {
   }
 
   public static final defaultWgpuVignetteEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyVignetteEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : VignetteEffect));
+    applyVignetteEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : VignetteEffect));
   });
 
   public static function registerWgpuVignetteEffect(state:WgpuRenderState):Void {

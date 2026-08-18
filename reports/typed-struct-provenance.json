@@ -17000,7 +17000,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 42,
       "fields": 4,
       "id": "@flighthq/types:interface#CanvasRenderEffectContext",
       "name": "CanvasRenderEffectContext",
@@ -24558,7 +24558,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 155,
       "fields": 6,
       "id": "@flighthq/types:interface#GlRenderEffectContext",
       "name": "GlRenderEffectContext",
@@ -56288,7 +56288,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 147,
       "fields": 6,
       "id": "@flighthq/types:interface#WgpuRenderEffectContext",
       "name": "WgpuRenderEffectContext",

@@ -33,8 +33,8 @@ class GlEnvironmentIblBake {
     flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_color_buffer_float');
     flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'OES_texture_float_linear');
     runtime = (cast getGlScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlScene3DRuntime);
-    if ((cast _Runtime.strictEquals((cast runtime : GlScene3DRuntime).iblBakeFramebuffer, null) : Bool)) { ((cast runtime : GlScene3DRuntime).iblBakeFramebuffer = flighthq._internal.backend.WebGl2Backend.createFramebuffer(gl)); }
-    fbo = (cast runtime : GlScene3DRuntime).iblBakeFramebuffer;
+    if ((cast _Runtime.strictEquals(runtime.iblBakeFramebuffer, null) : Bool)) { (runtime.iblBakeFramebuffer = cast (flighthq._internal.backend.WebGl2Backend.createFramebuffer(gl) : Null<flighthq._internal.dom.WebGLFramebuffer>)); }
+    fbo = runtime.iblBakeFramebuffer;
     prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_BINDING', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING)) : Null<flighthq._internal.dom.WebGLFramebuffer>);
     prevViewport = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VIEWPORT', flighthq._internal.backend.WebGl2Backend.VIEWPORT)) : flighthq._internal._Int32Array);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
@@ -44,11 +44,11 @@ class GlEnvironmentIblBake {
     __destructure0 = (cast GlEnvironmentIblBake.bakeGlPrefiltered__glEnvironmentIblBake(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = fbo; __callArgument7; }), ({ final __callArgument8:Dynamic = sourceCube; __callArgument8; })) : { var prefilteredCube:flighthq._internal.dom.WebGLTexture; var prefilteredMipCount:Float; });
     prefilteredCube = _Runtime.field(__destructure0, 'prefilteredCube');
     prefilteredMipCount = _Runtime.field(__destructure0, 'prefilteredMipCount');
-    brdfLut = _Runtime.coalesce(({ final __structural9 = (cast runtime : GlScene3DRuntime).ibl; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var brdfLut:flighthq._internal.dom.WebGLTexture; }).brdfLut; }), function():Dynamic return cast (cast GlEnvironmentIblBake.bakeGlBrdfLut__glEnvironmentIblBake(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = fbo; __callArgument11; })) : flighthq._internal.dom.WebGLTexture));
+    brdfLut = _Runtime.coalesce(({ final __structural9 = runtime.ibl; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var brdfLut:flighthq._internal.dom.WebGLTexture; }).brdfLut; }), function():Dynamic return cast (cast GlEnvironmentIblBake.bakeGlBrdfLut__glEnvironmentIblBake(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = fbo; __callArgument11; })) : flighthq._internal.dom.WebGLTexture));
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), prevFramebuffer);
     flighthq._internal.backend.WebGl2Backend.viewport(gl, flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 3.0 : Float)));
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
-    ((cast runtime : GlScene3DRuntime).ibl = { brdfLut: brdfLut, intensity: _Runtime.field(environment, 'intensity'), irradianceCube: irradianceCube, prefilteredCube: prefilteredCube, prefilteredMipCount: prefilteredMipCount });
+    (runtime.ibl = cast ({ brdfLut: brdfLut, intensity: _Runtime.field(environment, 'intensity'), irradianceCube: irradianceCube, prefilteredCube: prefilteredCube, prefilteredMipCount: prefilteredMipCount } : Null<GlScene3DIbl>));
   }
 
   @:noCompletion

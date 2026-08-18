@@ -60,7 +60,7 @@ class UnlitGlMeshMaterialRenderer {
     bindGlUvTransform(({ final __callArgument14:Dynamic = gl; __callArgument14; }), ({ final __callArgument15:Dynamic = program; __callArgument15; }), (cast _Runtime.field(unlit, 'baseColorMap') : Dynamic));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     drawGlMeshSubset(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = program; __callArgument18; }), ({ final __callArgument19:Dynamic = proxy; __callArgument19; }), ({ final __callArgument20:Dynamic = geometry; __callArgument20; }));
   } });

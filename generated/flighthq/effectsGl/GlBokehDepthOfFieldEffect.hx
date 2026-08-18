@@ -37,7 +37,7 @@ class GlBokehDepthOfFieldEffect {
   }
 
   public static final defaultGlBokehDepthOfFieldEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyBokehDepthOfFieldEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'sceneDepthTexture'), (cast effect : BokehDepthOfFieldEffect));
+    applyBokehDepthOfFieldEffectToGl(ctx.state, ctx.source, ctx.dest, ctx.sceneDepthTexture, (cast effect : BokehDepthOfFieldEffect));
   });
 
   public static function registerGlBokehDepthOfFieldEffect(state:GlRenderState):Void {

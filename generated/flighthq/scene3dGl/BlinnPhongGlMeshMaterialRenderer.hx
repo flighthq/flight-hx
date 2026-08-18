@@ -59,7 +59,7 @@ class BlinnPhongGlMeshMaterialRenderer {
     BlinnPhongGlMeshMaterialRenderer.bindGlBlinnPhongMaterialUniforms__blinnPhongGlMeshMaterialRenderer(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = program; __callArgument13; }), ({ final __callArgument14:Dynamic = blinnPhong; __callArgument14; }));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime(({ final __callArgument15:Dynamic = state; __callArgument15; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument15:Dynamic = state; __callArgument15; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     drawGlMeshSubset(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = program; __callArgument17; }), ({ final __callArgument18:Dynamic = proxy; __callArgument18; }), ({ final __callArgument19:Dynamic = geometry; __callArgument19; }));
   } });

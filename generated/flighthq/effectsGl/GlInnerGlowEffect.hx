@@ -70,7 +70,7 @@ class GlInnerGlowEffect {
   }
 
   public static final defaultGlInnerGlowEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyInnerGlowEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerGlowEffect));
+    applyInnerGlowEffectToGl(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : InnerGlowEffect));
   });
 
   public static function registerGlInnerGlowEffect(state:GlRenderState):Void {

@@ -62,7 +62,7 @@ class GlCustomShaderEffect {
   }
 
   public static final defaultGlCustomShaderEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyCustomShaderEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : CustomShaderEffect));
+    applyCustomShaderEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : CustomShaderEffect));
   });
 
   @:noCompletion

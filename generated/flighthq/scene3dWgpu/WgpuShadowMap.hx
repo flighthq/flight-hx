@@ -50,27 +50,27 @@ class WgpuShadowMap {
   public static function destroyWgpuScene3DShadow(state:WgpuRenderState):Void {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
-    if ((cast !_Runtime.strictEquals((cast scene : WgpuScene3DRuntime).shadow, null) : Bool)) {
-      (cast (cast (cast scene : WgpuScene3DRuntime).shadow : WgpuScene3DShadow).depthTexture : flighthq._internal.dom.GPUTexture).destroy();
-      ((cast scene : WgpuScene3DRuntime).shadow = null);
+    if ((cast !_Runtime.strictEquals(scene.shadow, null) : Bool)) {
+      (cast (cast scene.shadow : WgpuScene3DShadow).depthTexture : flighthq._internal.dom.GPUTexture).destroy();
+      (scene.shadow = cast (null : Null<WgpuScene3DShadow>));
     }
-    if ((cast !_Runtime.strictEquals((cast scene : WgpuScene3DRuntime).shadowDummyTexture, null) : Bool)) {
-      (cast (cast scene : WgpuScene3DRuntime).shadowDummyTexture : flighthq._internal.dom.GPUTexture).destroy();
-      ((cast scene : WgpuScene3DRuntime).shadowDummyTexture = null);
-      ((cast scene : WgpuScene3DRuntime).shadowDummyView = null);
+    if ((cast !_Runtime.strictEquals(scene.shadowDummyTexture, null) : Bool)) {
+      (cast scene.shadowDummyTexture : flighthq._internal.dom.GPUTexture).destroy();
+      (scene.shadowDummyTexture = cast (null : Null<flighthq._internal.dom.GPUTexture>));
+      (scene.shadowDummyView = cast (null : Null<flighthq._internal.dom.GPUTextureView>));
     }
-    if ((cast !_Runtime.strictEquals((cast scene : WgpuScene3DRuntime).shadowUniformBuffer, null) : Bool)) {
-      (cast (cast scene : WgpuScene3DRuntime).shadowUniformBuffer : flighthq._internal.dom.GPUBuffer).destroy();
-      ((cast scene : WgpuScene3DRuntime).shadowUniformBuffer = null);
+    if ((cast !_Runtime.strictEquals(scene.shadowUniformBuffer, null) : Bool)) {
+      (cast scene.shadowUniformBuffer : flighthq._internal.dom.GPUBuffer).destroy();
+      (scene.shadowUniformBuffer = cast (null : Null<flighthq._internal.dom.GPUBuffer>));
     }
-    ((cast scene : WgpuScene3DRuntime).shadowComparisonSampler = null);
-    ((cast scene : WgpuScene3DRuntime).shadowDepthPipeline = null);
-    ((cast scene : WgpuScene3DRuntime).shadowDepthSkinnedPipeline = null);
-    ((cast scene : WgpuScene3DRuntime).shadowSampleBindGroup = null);
-    ((cast scene : WgpuScene3DRuntime).shadowSampleLayout = null);
-    ((cast scene : WgpuScene3DRuntime).shadowSampleView = null);
-    ((cast scene : WgpuScene3DRuntime).pbrSampleBindGroup = null);
-    ((cast scene : WgpuScene3DRuntime).pbrSampleShadowView = null);
+    (scene.shadowComparisonSampler = cast (null : Null<flighthq._internal.dom.GPUSampler>));
+    (scene.shadowDepthPipeline = cast (null : Null<flighthq._internal.dom.GPURenderPipeline>));
+    (scene.shadowDepthSkinnedPipeline = cast (null : Null<flighthq._internal.dom.GPURenderPipeline>));
+    (scene.shadowSampleBindGroup = cast (null : Null<flighthq._internal.dom.GPUBindGroup>));
+    (scene.shadowSampleLayout = cast (null : Null<flighthq._internal.dom.GPUBindGroupLayout>));
+    (scene.shadowSampleView = cast (null : Null<flighthq._internal.dom.GPUTextureView>));
+    (scene.pbrSampleBindGroup = cast (null : Null<flighthq._internal.dom.GPUBindGroup>));
+    (scene.pbrSampleShadowView = cast (null : Null<flighthq._internal.dom.GPUTextureView>));
   }
 
   public static function drawWgpuScene3DShadowMap(state:WgpuRenderState, scene:Node3D, shadowCamera:Camera3D, directionalLight:Null<DirectionalLight>):Void {
@@ -85,7 +85,7 @@ class WgpuShadowMap {
     var pass:flighthq._internal.dom.GPURenderPassEncoder = cast _Runtime.UNDEFINED;
     var boundPipeline:Null<flighthq._internal.dom.GPURenderPipeline> = cast _Runtime.UNDEFINED;
     sceneRuntime = (cast getWgpuScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuScene3DRuntime);
-    if ((cast !_Runtime.strictEquals((cast sceneRuntime : WgpuScene3DRuntime).shadow, null) : Bool)) { ((cast (cast sceneRuntime : WgpuScene3DRuntime).shadow : WgpuScene3DShadow).enabled = false); }
+    if ((cast !_Runtime.strictEquals(sceneRuntime.shadow, null) : Bool)) { ((cast sceneRuntime.shadow : WgpuScene3DShadow).enabled = false); }
     if ((cast ((cast _Runtime.strictEquals(directionalLight, null) : Bool) || (cast !(cast _Runtime.field(directionalLight, 'castsShadow') : Bool) : Bool)) : Bool)) { return; }
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
     encoder = runtime.commandEncoder;
@@ -93,11 +93,11 @@ class WgpuShadowMap {
     if ((cast !_Runtime.strictEquals((cast shadowCamera.projection : { var kind:String; }).kind, 'orthographic') : Bool)) {
       _Runtime.throwValue(_Runtime.error('drawWgpuScene3DShadowMap requires an orthographic shadow camera'));
     }
-    shadow = (cast sceneRuntime : WgpuScene3DRuntime).shadow;
+    shadow = sceneRuntime.shadow;
     if ((cast _Runtime.strictEquals(shadow, null) : Bool)) {
       var depthTexture:flighthq._internal.dom.GPUTexture = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createTexture', cast ([{ size: cast ([DIRECTIONAL_SHADOW_MAP_SIZE, DIRECTIONAL_SHADOW_MAP_SIZE, 1.0] : Array<Dynamic>), format: SHADOW_DEPTH_FORMAT, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
       (shadow = cast ({ depthTexture: depthTexture, depthView: (cast depthTexture : flighthq._internal.dom.GPUTexture).createView(), enabled: false, mapHeight: DIRECTIONAL_SHADOW_MAP_SIZE, mapWidth: DIRECTIONAL_SHADOW_MAP_SIZE, matrix: (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4), normalBiasWorld: 0.0, pcfRadius: 0.0, shadowBias: 0.0 } : Dynamic));
-      ((cast sceneRuntime : WgpuScene3DRuntime).shadow = shadow);
+      (sceneRuntime.shadow = cast (shadow : Null<WgpuScene3DShadow>));
     }
     normalBiasWorld = _Runtime.multiplyNumbers(_Runtime.field(directionalLight, 'normalBias'), (cast getOrthographicProjectionTexelSize(shadowCamera.projection, (cast (cast shadow : WgpuScene3DShadow).mapWidth : Float), (cast (cast shadow : WgpuScene3DShadow).mapHeight : Float)) : Float));
     lightMatrix = (cast shadow : WgpuScene3DShadow).matrix;
@@ -132,7 +132,7 @@ class WgpuShadowMap {
       ((cast WgpuShadowMap._shadowProxy__wgpuShadowMap : Scene3DRenderProxy).jointMatrices = jointMatrices);
       rigidDrawBindGroup = (cast writeWgpuDrawUniform(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = WgpuShadowMap._shadowProxy__wgpuShadowMap; __callArgument14; })) : flighthq._internal.dom.GPUBindGroup);
       drawBindGroup = ((cast _Runtime.strictEquals(jointMatrices, null) : Bool) ? (cast rigidDrawBindGroup : Dynamic) : (cast (cast skinning : WgpuSkinningAdapter).getDrawBindGroup(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = jointMatrices; __callArgument16; })) : Dynamic));
-      flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast WgpuShadowMap._dynamicOffsets__wgpuShadowMap : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast (cast sceneRuntime : WgpuScene3DRuntime).pendingDrawOffset : Float));
+      flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast WgpuShadowMap._dynamicOffsets__wgpuShadowMap : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast sceneRuntime.pendingDrawOffset : Float));
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, drawBindGroup, WgpuShadowMap._dynamicOffsets__wgpuShadowMap);
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast upload : WgpuMeshUpload).vertexBuffer);
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer((cast upload : WgpuMeshUpload).indexBuffer, (cast upload : WgpuMeshUpload).indexFormat);
@@ -160,14 +160,14 @@ class WgpuShadowMap {
     var layout:flighthq._internal.dom.GPUPipelineLayout = cast _Runtime.UNDEFINED;
     var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument17:Dynamic = state; __callArgument17; })) : WgpuScene3DRuntime);
-    cached = ((cast skinned : Bool) ? (cast (cast scene : WgpuScene3DRuntime).shadowDepthSkinnedPipeline : Dynamic) : (cast (cast scene : WgpuScene3DRuntime).shadowDepthPipeline : Dynamic));
+    cached = ((cast skinned : Bool) ? (cast scene.shadowDepthSkinnedPipeline : Dynamic) : (cast scene.shadowDepthPipeline : Dynamic));
     if ((cast !_Runtime.strictEquals(cached, null) : Bool)) { return cast cached; }
     device = (cast state : WgpuRenderState).device;
     skinning = (cast getWgpuSkinningAdapter(({ final __callArgument18:Dynamic = state; __callArgument18; })) : Null<WgpuSkinningAdapter>);
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: ((cast ((cast skinned : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast (cast skinning : WgpuSkinningAdapter).extendShadowDepthPrelude((cast WgpuShadowMap.SHADOW_DEPTH_WGSL__wgpuShadowMap : String)) : Dynamic) : (cast WgpuShadowMap.SHADOW_DEPTH_WGSL__wgpuShadowMap : Dynamic)) }] : Array<Dynamic>));
     layout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([((cast ((cast skinned : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast (cast skinning : WgpuSkinningAdapter).getDrawLayout(({ final __callArgument19:Dynamic = state; __callArgument19; })) : Dynamic) : (cast (cast (cast ensureWgpuScene3DLayouts(({ final __callArgument20:Dynamic = state; __callArgument20; })) : WgpuScene3DLayouts) : WgpuScene3DLayouts).drawBindGroupLayout : Dynamic))] : Array<Dynamic>) }] : Array<Dynamic>));
     pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main', buffers: ((cast ((cast skinned : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast (cast skinning : WgpuSkinningAdapter).vertexBufferLayouts : Dynamic) : (cast WgpuShadowMap.SHADOW_VERTEX_BUFFER_LAYOUTS__wgpuShadowMap : Dynamic)) }, primitive: { topology: 'triangle-list', frontFace: 'ccw', cullMode: 'front' }, depthStencil: { format: SHADOW_DEPTH_FORMAT, depthWriteEnabled: true, depthCompare: 'less' } }] : Array<Dynamic>));
-    if ((cast skinned : Bool)) { ((cast scene : WgpuScene3DRuntime).shadowDepthSkinnedPipeline = pipeline); } else { ((cast scene : WgpuScene3DRuntime).shadowDepthPipeline = pipeline); }
+    if ((cast skinned : Bool)) { (scene.shadowDepthSkinnedPipeline = cast (pipeline : Null<flighthq._internal.dom.GPURenderPipeline>)); } else { (scene.shadowDepthPipeline = cast (pipeline : Null<flighthq._internal.dom.GPURenderPipeline>)); }
     return cast pipeline;
     return cast null;
   }

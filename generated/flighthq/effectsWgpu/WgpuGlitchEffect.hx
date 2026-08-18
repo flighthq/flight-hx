@@ -38,7 +38,7 @@ class WgpuGlitchEffect {
   }
 
   public static final defaultWgpuGlitchEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyGlitchEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : GlitchEffect));
+    applyGlitchEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : GlitchEffect));
   });
 
   public static function registerWgpuGlitchEffect(state:WgpuRenderState):Void {

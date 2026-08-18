@@ -43,7 +43,7 @@ class GlMeshProgram {
   public static function beginGlMeshDraw(state:GlRenderState, program:flighthq.types.GlMeshProgram, doubleSided:Bool):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    ((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram = program);
+    ((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<flighthq.types.GlMeshProgram>; }).activeMeshProgram = cast (program : Null<flighthq.types.GlMeshProgram>));
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
     flighthq._internal.backend.WebGl2Backend.depthFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LESS', flighthq._internal.backend.WebGl2Backend.LESS));
@@ -149,10 +149,10 @@ class GlMeshProgram {
     var runtime:GlScene3DRuntime = cast _Runtime.UNDEFINED;
     var program:Null<flighthq.types.GlMeshProgram> = cast _Runtime.UNDEFINED;
     runtime = (cast getGlScene3DRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlScene3DRuntime);
-    program = ((cast (cast runtime : GlScene3DRuntime).programCache : flighthq._internal._Map<String, flighthq.types.GlMeshProgram>).get(key));
+    program = ((cast runtime.programCache : flighthq._internal._Map<String, flighthq.types.GlMeshProgram>).get(key));
     if ((cast _Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (program = cast ((cast compile((cast state : GlRenderState).gl) : T) : Dynamic));
-      ((cast (cast runtime : GlScene3DRuntime).programCache : flighthq._internal._Map<String, flighthq.types.GlMeshProgram>).set(key, (cast program)));
+      ((cast runtime.programCache : flighthq._internal._Map<String, flighthq.types.GlMeshProgram>).set(key, (cast program)));
     }
     return cast (cast program : T);
     return cast null;

@@ -37,7 +37,7 @@ class WgpuBlendEffect {
   }
 
   public static final defaultWgpuBlendEffectRunner:WgpuRenderEffectRunner = (cast function(context:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyBlendEffectToWgpu(_Runtime.field(context, 'state'), _Runtime.field(context, 'source'), _Runtime.field(context, 'dest'), (cast effect : BlendEffect));
+    applyBlendEffectToWgpu(context.state, context.source, context.dest, (cast effect : BlendEffect));
   });
 
   @:noCompletion

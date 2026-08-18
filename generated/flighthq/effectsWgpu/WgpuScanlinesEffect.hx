@@ -30,7 +30,7 @@ class WgpuScanlinesEffect {
   }
 
   public static final defaultWgpuScanlinesEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyScanlinesEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ScanlinesEffect));
+    applyScanlinesEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : ScanlinesEffect));
   });
 
   public static function registerWgpuScanlinesEffect(state:WgpuRenderState):Void {

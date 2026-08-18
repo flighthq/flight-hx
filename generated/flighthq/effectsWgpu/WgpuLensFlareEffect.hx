@@ -36,7 +36,7 @@ class WgpuLensFlareEffect {
   }
 
   public static final defaultWgpuLensFlareEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyLensFlareEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : LensFlareEffect));
+    applyLensFlareEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : LensFlareEffect));
   });
 
   public static function registerWgpuLensFlareEffect(state:WgpuRenderState):Void {

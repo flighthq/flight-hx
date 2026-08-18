@@ -7185,11 +7185,12 @@
     },
     {
       "byReason": {
+        "source-unknown": 2,
         "standard-toolkit-boundary": 5
       },
       "module": "flighthq.scene3dWgpu.DrawWgpuScene3D",
       "source": "upstream/packages/scene3d-wgpu/src/drawWgpuScene3D.ts",
-      "total": 5
+      "total": 7
     },
     {
       "byReason": {
@@ -7388,23 +7389,23 @@
       "byReason": {
         "external-toolkit-boundary": 55,
         "source-undefined": 14,
-        "source-unknown": 5,
+        "source-unknown": 7,
         "standard-toolkit-boundary": 29
       },
       "module": "flighthq.scene3dWgpu.WgpuMeshPipeline",
       "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
-      "total": 103
+      "total": 105
     },
     {
       "byReason": {
         "external-toolkit-boundary": 6,
         "source-undefined": 4,
-        "source-unknown": 1,
+        "source-unknown": 2,
         "standard-toolkit-boundary": 7
       },
       "module": "flighthq.scene3dWgpu.WgpuMeshUpload",
       "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshUpload.ts",
-      "total": 18
+      "total": 19
     },
     {
       "byReason": {
@@ -7437,12 +7438,12 @@
     {
       "byReason": {
         "source-any": 4,
-        "source-unknown": 2,
+        "source-unknown": 4,
         "standard-toolkit-boundary": 2
       },
       "module": "flighthq.scene3dWgpu.WgpuScene3DRuntime",
       "source": "upstream/packages/scene3d-wgpu/src/wgpuScene3DRuntime.ts",
-      "total": 8
+      "total": 10
     },
     {
       "byReason": {
@@ -7457,11 +7458,12 @@
         "external-toolkit-boundary": 7,
         "source-any": 7,
         "source-undefined": 2,
+        "source-unknown": 4,
         "standard-toolkit-boundary": 35
       },
       "module": "flighthq.scene3dWgpu.WgpuShadedPrelude",
       "source": "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts",
-      "total": 51
+      "total": 55
     },
     {
       "byReason": {
@@ -7478,12 +7480,12 @@
       "byReason": {
         "external-toolkit-boundary": 7,
         "source-undefined": 3,
-        "source-unknown": 1,
+        "source-unknown": 3,
         "standard-toolkit-boundary": 7
       },
       "module": "flighthq.scene3dWgpu.WgpuSkinPalette",
       "source": "upstream/packages/scene3d-wgpu/src/wgpuSkinPalette.ts",
-      "total": 18
+      "total": 20
     },
     {
       "byReason": {
@@ -9516,12 +9518,12 @@
       "source-never": 110,
       "source-null": 74,
       "source-undefined": 264,
-      "source-unknown": 3797,
+      "source-unknown": 3810,
       "standard-toolkit-boundary": 17927,
       "unclassified": 365
     },
     "checkerKnownUnrepresentable": 0,
     "modules": 1116,
-    "total": 24151
+    "total": 24164
   }
 }

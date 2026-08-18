@@ -34,7 +34,7 @@ class CanvasGradientBevelEffect {
   }
 
   public static final defaultCanvasGradientBevelEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    (cast applyGradientBevelEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->GradientBevelEffect->Void)(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientBevelEffect));
+    (cast applyGradientBevelEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->GradientBevelEffect->Void)(ctx.source, ctx.dest, ctx.pool, (cast effect : GradientBevelEffect));
   });
 
   public static function registerCanvasGradientBevelEffect(state:CanvasRenderState):Void {

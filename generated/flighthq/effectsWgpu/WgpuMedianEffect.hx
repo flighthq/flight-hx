@@ -34,7 +34,7 @@ class WgpuMedianEffect {
   }
 
   public static final defaultWgpuMedianEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyMedianEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : MedianEffect));
+    applyMedianEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : MedianEffect));
   });
 
   public static function registerWgpuMedianEffect(state:WgpuRenderState):Void {

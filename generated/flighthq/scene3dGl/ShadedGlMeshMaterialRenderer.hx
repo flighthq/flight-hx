@@ -71,7 +71,7 @@ class ShadedGlMeshMaterialRenderer {
     if ((cast ((cast _Runtime.field(modifiers, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ShadedGlMeshMaterialRenderer.bindGlShadedModifiers__shadedGlMeshMaterialRenderer(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = program; __callArgument18; }), ({ final __callArgument19:Dynamic = modifiers; __callArgument19; })); }
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime(({ final __callArgument20:Dynamic = state; __callArgument20; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument20:Dynamic = state; __callArgument20; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     drawGlMeshSubset(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = program; __callArgument22; }), ({ final __callArgument23:Dynamic = proxy; __callArgument23; }), ({ final __callArgument24:Dynamic = geometry; __callArgument24; }));
   } });
@@ -85,7 +85,7 @@ class ShadedGlMeshMaterialRenderer {
     var ordered:Array<Modifier> = cast _Runtime.UNDEFINED;
     var nextTextureUnit:Float = cast _Runtime.UNDEFINED;
     var context:GlModifierBindContext = cast _Runtime.UNDEFINED;
-    registry = (cast (cast getGlScene3DRuntime(({ final __callArgument27:Dynamic = state; __callArgument27; })) : GlScene3DRuntime) : GlScene3DRuntime).modifierSnippetRegistry;
+    registry = (cast (cast getGlScene3DRuntime(({ final __callArgument27:Dynamic = state; __callArgument27; })) : GlScene3DRuntime) : { var modifierSnippetRegistry:Null<ModifierRegistry>; }).modifierSnippetRegistry;
     if ((cast _Runtime.strictEquals(registry, null) : Bool)) { return; }
     ordered = (cast orderModifierStack(({ final __callArgument28:Dynamic = modifiers; __callArgument28; })) : Array<Modifier>);
     nextTextureUnit = ShadedGlMeshMaterialRenderer.MODIFIER_TEXTURE_UNIT_BASE__shadedGlMeshMaterialRenderer;

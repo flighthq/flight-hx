@@ -32,7 +32,7 @@ class CanvasInnerShadowEffect {
   }
 
   public static final defaultCanvasInnerShadowEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    (cast applyInnerShadowEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->InnerShadowEffect->Void)(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : InnerShadowEffect));
+    (cast applyInnerShadowEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->InnerShadowEffect->Void)(ctx.source, ctx.dest, ctx.pool, (cast effect : InnerShadowEffect));
   });
 
   public static function registerCanvasInnerShadowEffect(state:CanvasRenderState):Void {

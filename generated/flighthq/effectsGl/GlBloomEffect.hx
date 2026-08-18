@@ -57,7 +57,7 @@ class GlBloomEffect {
   }
 
   public static final defaultGlBloomEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyBloomEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BloomEffect));
+    applyBloomEffectToGl(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : BloomEffect));
   });
 
   public static function registerGlBloomEffect(state:GlRenderState):Void {

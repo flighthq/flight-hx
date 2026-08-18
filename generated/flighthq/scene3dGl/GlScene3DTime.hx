@@ -10,11 +10,11 @@ import flighthq.types.GlScene3DRuntime;
 class GlScene3DTime {
   @:noCompletion
   public static function getGlScene3DTime(state:GlRenderState):Float {
-    return cast (cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : GlScene3DRuntime).time;
+    return cast (cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : { var time:Float; }).time;
     return cast null;
   }
 
   public static function setGlScene3DTime(state:GlRenderState, timeSeconds:Float):Void {
-    ((cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : GlScene3DRuntime).time = timeSeconds);
+    ((cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : { var time:Float; }).time = cast (timeSeconds : Float));
   }
 }

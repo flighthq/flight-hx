@@ -46,7 +46,7 @@ class WgpuOutlineEffect {
   }
 
   public static final defaultWgpuOutlineEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyOutlineEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : OutlineEffect));
+    applyOutlineEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : OutlineEffect));
   });
 
   public static function registerWgpuOutlineEffect(state:WgpuRenderState):Void {

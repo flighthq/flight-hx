@@ -33,7 +33,7 @@ class CanvasGradientGlowEffect {
   }
 
   public static final defaultCanvasGradientGlowEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
-    (cast applyGradientGlowEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->GradientGlowEffect->Void)(_Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : GradientGlowEffect));
+    (cast applyGradientGlowEffectToCanvas : CanvasRenderTarget->CanvasRenderTarget->CanvasRenderTargetPool->GradientGlowEffect->Void)(ctx.source, ctx.dest, ctx.pool, (cast effect : GradientGlowEffect));
   });
 
   public static function registerCanvasGradientGlowEffect(state:CanvasRenderState):Void {

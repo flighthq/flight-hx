@@ -30,7 +30,7 @@ class GlWhiteBalanceEffect {
   }
 
   public static final defaultGlWhiteBalanceEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyWhiteBalanceEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : WhiteBalanceEffect));
+    applyWhiteBalanceEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : WhiteBalanceEffect));
   });
 
   public static function registerGlWhiteBalanceEffect(state:GlRenderState):Void {

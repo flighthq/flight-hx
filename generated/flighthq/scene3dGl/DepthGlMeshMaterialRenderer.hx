@@ -41,7 +41,7 @@ class DepthGlMeshMaterialRenderer {
     bindGlDebugRange(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), (cast _Runtime.field(depth, 'near') : Float), (cast _Runtime.field(depth, 'far') : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     drawGlMeshSubset(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = program; __callArgument12; }), ({ final __callArgument13:Dynamic = proxy; __callArgument13; }), ({ final __callArgument14:Dynamic = geometry; __callArgument14; }));
   } });

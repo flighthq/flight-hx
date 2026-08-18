@@ -28,7 +28,7 @@ class GlKuwaharaEffect {
   }
 
   public static final defaultGlKuwaharaEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyKuwaharaEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : KuwaharaEffect));
+    applyKuwaharaEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : KuwaharaEffect));
   });
 
   public static function registerGlKuwaharaEffect(state:GlRenderState):Void {

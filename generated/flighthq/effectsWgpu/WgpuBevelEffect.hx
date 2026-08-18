@@ -78,7 +78,7 @@ class WgpuBevelEffect {
   }
 
   public static final defaultWgpuBevelEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyBevelEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : BevelEffect));
+    applyBevelEffectToWgpu(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : BevelEffect));
   });
 
   public static function registerWgpuBevelEffect(state:WgpuRenderState):Void {

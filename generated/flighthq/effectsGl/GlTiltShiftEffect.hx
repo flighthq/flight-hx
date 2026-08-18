@@ -34,7 +34,7 @@ class GlTiltShiftEffect {
   }
 
   public static final defaultGlTiltShiftEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyTiltShiftEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : TiltShiftEffect));
+    applyTiltShiftEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : TiltShiftEffect));
   });
 
   public static function registerGlTiltShiftEffect(state:GlRenderState):Void {

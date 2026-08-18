@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1586 |
-| Direct schemas | 418 |
+| Audit-only schemas | 1581 |
+| Direct schemas | 423 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 14677 |
-| Directly emitted accesses | 15989 |
+| Pending accesses | 13925 |
+| Directly emitted accesses | 16741 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1586 |
+| Newly discovered, audit-only | 1581 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -262,7 +262,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#CanvasImageSourceKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#CanvasMaterialRenderer` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#CanvasMaterialState` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CanvasRenderEffectContext` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 42 | 0 | 0 | 42 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasRenderEffectContext` | `direct` | `new` | — | reviewed escape-free Canvas render-effect context | 4 | 42 | 0 | 0 | 0 | 42 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderEffectPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 10 | 2 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CanvasRenderEffectRunner` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#CanvasRenderEffectSupport` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -618,7 +618,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlRenderEffectApplicationExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlRenderEffectApplicationGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#GlRenderEffectApplicationStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#GlRenderEffectContext` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 155 | 0 | 0 | 155 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlRenderEffectContext` | `direct` | `new` | — | reviewed escape-free WebGL render-effect context | 6 | 155 | 0 | 0 | 0 | 155 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderEffectPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 24 | 3 | 0 | 27 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlRenderEffectRunner` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#GlRenderOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 9 | 0 | 0 | 9 | 0 | 0 | 1 | yes | — |
@@ -636,7 +636,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlScene3DDrawEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 2 | 10 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlScene3DForwardLightList` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 1 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlScene3DIbl` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlScene3DRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 28 | 95 | 33 | 4 | 132 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlScene3DRuntime` | `direct` | `new` | — | reviewed escape-free WebGL scene runtime | 28 | 95 | 33 | 4 | 0 | 132 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlScene3DShadow` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 7 | 1 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlScissorRect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 38 | 0 | 0 | 38 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlShadedDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 20 | 0 | 0 | 20 | 0 | 0 | 1 | yes | — |
@@ -1999,7 +1999,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuPbrPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuQuadBatchResources` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 12 | 4 | 0 | 16 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuRenderEffectContext` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 147 | 0 | 0 | 147 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuRenderEffectContext` | `direct` | `new` | — | reviewed escape-free WebGPU render-effect context | 6 | 147 | 0 | 0 | 0 | 147 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderEffectPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 24 | 3 | 0 | 27 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuRenderEffectRunner` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#WgpuRenderOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
@@ -2021,7 +2021,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuScene3DFrameBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DIbl` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 15 | 0 | 0 | 15 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DLayouts` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuScene3DRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 61 | 174 | 100 | 2 | 276 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuScene3DRuntime` | `direct` | `new` | — | reviewed escape-free WebGPU scene runtime | 61 | 174 | 100 | 2 | 0 | 276 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DShadow` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 14 | 5 | 0 | 19 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScissorRect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 36 | 0 | 0 | 36 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeMesh` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |

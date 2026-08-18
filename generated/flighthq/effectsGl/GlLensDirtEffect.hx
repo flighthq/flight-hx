@@ -33,7 +33,7 @@ class GlLensDirtEffect {
   }
 
   public static final defaultGlLensDirtEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyLensDirtEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : LensDirtEffect));
+    applyLensDirtEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : LensDirtEffect));
   });
 
   public static function registerGlLensDirtEffect(state:GlRenderState):Void {

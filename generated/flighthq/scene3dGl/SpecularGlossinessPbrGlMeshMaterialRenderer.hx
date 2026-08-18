@@ -59,7 +59,7 @@ class SpecularGlossinessPbrGlMeshMaterialRenderer {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast program : GlPbrProgram).locAlphaCutoff, ((cast !_Runtime.strictEquals(specGloss, null) : Bool) ? (cast _Runtime.field(specGloss, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlScene3DRuntime) : GlScene3DRuntime).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     drawGlMeshSubset(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = program; __callArgument18; }), ({ final __callArgument19:Dynamic = proxy; __callArgument19; }), ({ final __callArgument20:Dynamic = geometry; __callArgument20; }));
   } });

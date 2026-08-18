@@ -66,7 +66,7 @@ class GlConvolutionEffect {
   }
 
   public static final defaultGlConvolutionEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyConvolutionEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : ConvolutionEffect));
+    applyConvolutionEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : ConvolutionEffect));
   });
 
   public static function registerGlConvolutionEffect(state:GlRenderState):Void {

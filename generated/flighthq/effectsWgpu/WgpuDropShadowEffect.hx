@@ -79,7 +79,7 @@ class WgpuDropShadowEffect {
   }
 
   public static final defaultWgpuDropShadowEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyDropShadowEffectToWgpu(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), _Runtime.field(ctx, 'pool'), (cast effect : DropShadowEffect));
+    applyDropShadowEffectToWgpu(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : DropShadowEffect));
   });
 
   public static function registerWgpuDropShadowEffect(state:WgpuRenderState):Void {

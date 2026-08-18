@@ -31,10 +31,10 @@ class WgpuMeshUpload {
     indices = geometry.indices;
     if ((cast _Runtime.strictEquals(indices, null) : Bool)) { return cast null; }
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
-    cache = (cast scene : WgpuScene3DRuntime).uploadCache;
+    cache = scene.uploadCache;
     upload = ((cast cache : flighthq._internal._WeakMap<flighthq._internal._Object, flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload>).get(geometry));
     meshRuntime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    skinning = (cast (cast scene : WgpuScene3DRuntime).skinningAdapter : Null<WgpuSkinningAdapter>);
+    skinning = (cast scene.skinningAdapter : Null<WgpuSkinningAdapter>);
     hasSkinBindPose = ((cast ((cast gpuSkinned : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) && (cast (cast skinning : WgpuSkinningAdapter).hasBindPose(({ final __callArgument1:Dynamic = geometry; __callArgument1; })) : Bool));
     if ((cast ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast hasSkinBindPose : Bool) ? (cast _Runtime.strictEquals((cast upload : flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload).skinBindUploaded, true) : Dynamic) : (cast _Runtime.strictEquals((cast upload : flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload).version, geometry.version) : Dynamic)) : Bool)) : Bool)) {
       return cast upload;

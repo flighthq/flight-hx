@@ -22,12 +22,12 @@ class WgpuWireframePrelude {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
-    binding = ((cast (cast scene : WgpuScene3DRuntime).materialBindGroups : flighthq._internal._WeakMap<flighthq._internal._Object, WgpuMaterialBinding>).get(materialKey));
+    binding = ((cast scene.materialBindGroups : flighthq._internal._WeakMap<flighthq._internal._Object, WgpuMaterialBinding>).get(materialKey));
     if ((cast _Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var buffer:flighthq._internal.dom.GPUBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBuffer', cast ([{ size: WgpuWireframePrelude.WIREFRAME_UNIFORM_BYTES__wgpuWireframePrelude, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
       var bindGroup:flighthq._internal.dom.GPUBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: _Runtime.field(pipeline, 'materialBindGroupLayout'), entries: cast ([{ binding: 0.0, resource: { buffer: buffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
       (binding = cast ({ bindGroup: bindGroup, buffer: buffer } : Dynamic));
-      ((cast (cast scene : WgpuScene3DRuntime).materialBindGroups : flighthq._internal._WeakMap<flighthq._internal._Object, WgpuMaterialBinding>).set(materialKey, (cast binding)));
+      ((cast scene.materialBindGroups : flighthq._internal._WeakMap<flighthq._internal._Object, WgpuMaterialBinding>).set(materialKey, (cast binding)));
     }
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuWireframePrelude._scratch__wgpuWireframePrelude : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 0.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast WgpuWireframePrelude._scratch__wgpuWireframePrelude : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast color : Array<Float>), (cast 1.0 : Float)) : Float));

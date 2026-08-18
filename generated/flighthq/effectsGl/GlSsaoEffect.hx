@@ -31,7 +31,7 @@ class GlSsaoEffect {
   }
 
   public static final defaultGlSsaoEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applySsaoEffectToGl(_Runtime.field(ctx, 'state'), _Runtime.field(ctx, 'source'), _Runtime.field(ctx, 'dest'), (cast effect : SsaoEffect));
+    applySsaoEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : SsaoEffect));
   });
 
   public static function registerGlSsaoEffect(state:GlRenderState):Void {
