@@ -19,7 +19,7 @@ class DomTextureResolver {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     var registry:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     runtime = (cast getDomRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : DomRenderStateRuntime);
-    registry = ({ final __nullishOwner1 = runtime; final __nullishValue2:Null<flighthq._internal._Map<String, flighthq.types.DomTextureResolver>> = cast (cast __nullishOwner1 : DomRenderStateRuntime).domTextureResolverRegistry; __nullishValue2 == null ? ((cast __nullishOwner1 : DomRenderStateRuntime).domTextureResolverRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, flighthq.types.DomTextureResolver>>)) : (cast __nullishValue2 : Null<flighthq._internal._Map<String, flighthq.types.DomTextureResolver>>); });
+    registry = ({ final __nullishOwner1 = runtime; final __nullishValue2:Null<flighthq._internal._Map<String, flighthq.types.DomTextureResolver>> = cast __nullishOwner1.domTextureResolverRegistry; __nullishValue2 == null ? (__nullishOwner1.domTextureResolverRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, flighthq.types.DomTextureResolver>>)) : (cast __nullishValue2 : Null<flighthq._internal._Map<String, flighthq.types.DomTextureResolver>>); });
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).set(sourceKind, (cast resolver))); }
   }
 
@@ -32,9 +32,9 @@ class DomTextureResolver {
     sourceKind = (cast getTextureSourceKind(({ final __callArgument3:Dynamic = texture; __callArgument3; })) : Null<String>);
     if ((cast _Runtime.strictEquals(sourceKind, null) : Bool)) { return cast null; }
     runtime = (cast getDomRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : DomRenderStateRuntime);
-    resolver = ({ final __collection5:Dynamic = (cast runtime : DomRenderStateRuntime).domTextureResolverRegistry; __collection5 == null ? _Runtime.UNDEFINED : ((cast __collection5 : flighthq._internal._Map<String, flighthq.types.DomTextureResolver>).get(sourceKind)); });
+    resolver = ({ final __collection5:Dynamic = runtime.domTextureResolverRegistry; __collection5 == null ? _Runtime.UNDEFINED : ((cast __collection5 : flighthq._internal._Map<String, flighthq.types.DomTextureResolver>).get(sourceKind)); });
     if ((cast _Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callOptionalValue((cast runtime : DomRenderStateRuntime).registryMiss, cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue(runtime.registryMiss, cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;
     }
     return cast (cast resolver(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = texture; __callArgument7; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);

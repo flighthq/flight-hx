@@ -70,7 +70,7 @@ class GlShader {
 
   @:noCompletion
   public static function setGlBaseUniforms(gl:flighthq._internal.dom.WebGL2RenderingContext, loc:GlShaderLocations, renderProxy:RenderProxy):Void {
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : GlShaderLocations).locAlpha, (cast renderProxy : RenderProxy).alpha);
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : GlShaderLocations).locAlpha, renderProxy.alpha);
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, (cast loc : GlShaderLocations).locTexture, 0.0);
   }
 

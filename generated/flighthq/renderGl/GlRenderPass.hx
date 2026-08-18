@@ -114,7 +114,7 @@ class GlRenderPass {
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument29:Dynamic = state; __callArgument29; })) : GlRenderStateRuntime);
     for (source in _Runtime.iterable(runtime.renderProxySources)) {
       var proxy:Null<RenderProxy> = ((cast runtime.renderProxyMap : flighthq._internal._WeakMap<Renderable, RenderProxy>).get(source));
-      if ((cast !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast proxy : RenderProxy).lastLocalTransformId = -1.0); }
+      if ((cast !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast proxy : { var lastLocalTransformId:Float; }).lastLocalTransformId = cast (-1.0 : Float)); }
     }
   }
 

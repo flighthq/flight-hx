@@ -5,14 +5,14 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 448 schemas currently emit direct fields, covering 18,483 accesses.
-- 1,088 eligible schemas remain audit-only, covering 12,183 pending accesses.
-- 831 audit-only schemas have no recorded escape, covering 7,429 pending accesses.
+- 453 schemas currently emit direct fields, covering 18,780 accesses.
+- 1,083 eligible schemas remain audit-only, covering 11,886 pending accesses.
+- 826 audit-only schemas have no recorded escape, covering 7,132 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
 - The cpp provenance audit has 551 closed nominal-identity candidates; only `Camera2D` and `ParticleEmitterState` are enabled.
-- Generated `Dynamic` occurrences fell from 49,168 to 46,986 across checker-derived typed-struct assignments and the reviewed escape-free tranches.
+- Generated `Dynamic` occurrences fell from 49,168 to 46,982 across checker-derived typed-struct assignments and the reviewed escape-free tranches.
 
 ## 1. Closed mapped aliases
 
@@ -40,6 +40,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote `RiveArtboardGraph`, `RiveProperty`, `RivePathRecord`, `RiveFileAsset`, and `RiveDocumentImportResult`: 205 accesses now emit directly across 15 generated modules. All five records are mechanically compatible and provenance-closed, but remain structural because cpp class emission is a separate explicit opt-in. This pure field-dispatch tranche removes 100 `_Runtime.field` calls without changing generated `Dynamic` or the type-erasure report.
 - [x] Promote `TextInputState`, `KeyboardEventData`, `InputManager`, `InputPointerData`, and `InputKeyboardData`: 288 accesses now emit directly across 12 generated modules. Cross-schema transfer, object-literal spread, observed spread, and propagated runtime normalization keep four identities structural; `InputKeyboardData` is provenance-closed but remains structural pending separate cpp review. The tranche removes 99 `_Runtime.field` calls while preserving typed signal callbacks and leaving `Dynamic` and erasure debt unchanged.
 - [x] Promote `StandardPbrMaterialProperties`, `ShadedMaterial`, `SpecularGlossinessPbrMaterial`, `PhongMaterial`, and `BlinnPhongMaterial`: 286 accesses now emit directly across 22 generated modules. Cross-schema transfers keep all five structural, and optional omission is additionally observable on the specular-glossiness, Phong, and Blinn-Phong variants. The tranche removes 197 `_Runtime.field` calls while preserving typed texture unions and leaving `Dynamic` and erasure debt unchanged.
+- [x] Promote `RenderStateRuntime`, `RenderProxy`, `DomRenderStateRuntime`, `ResolvedRenderTargetDescriptor`, and `Scene3DRenderProxy`: 297 accesses now emit directly across 45 generated modules. Base/DOM runtime transfers and anonymous/cross-schema proxy transfers keep those identities structural; object-spread and optional-omission evidence keep the resolved descriptor and Scene3D proxy structural. The tranche removes 31 `_Runtime.field` calls and four `Dynamic` occurrences without changing erasure debt.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

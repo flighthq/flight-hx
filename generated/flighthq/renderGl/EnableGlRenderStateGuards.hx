@@ -18,12 +18,12 @@ import flighthq.types.Renderable;
 class EnableGlRenderStateGuards {
   @:noCompletion
   public static function areGlRenderStateGuardsEnabled(state:GlRenderState):Bool {
-    return cast _Runtime.strictEquals((cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : RenderStateRuntime).renderRootGuard, EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards);
+    return cast _Runtime.strictEquals((cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : { var renderRootGuard:Null<RenderState->Renderable->Void>; }).renderRootGuard, EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards);
     return cast null;
   }
 
   public static function enableGlRenderStateGuards(state:GlRenderState):Void {
-    ((cast (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime) : { var renderRootGuard:Null<RenderState->Renderable->Void>; }).renderRootGuard = (cast EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards));
+    ((cast (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime) : { var renderRootGuard:Null<RenderState->Renderable->Void>; }).renderRootGuard = cast (EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards : Null<RenderState->Renderable->Void>));
     ((cast (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime) : { var bindingCacheGuard:Null<GlRenderState->flighthq._internal.dom.WebGLProgram->Void>; }).bindingCacheGuard = cast (EnableGlRenderStateGuards.warnOnForeignGlBinding__enableGlRenderStateGuards : Null<GlRenderState->flighthq._internal.dom.WebGLProgram->Void>));
   }
 

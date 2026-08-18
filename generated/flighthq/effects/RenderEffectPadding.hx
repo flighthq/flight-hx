@@ -21,7 +21,7 @@ class RenderEffectPadding {
     var emitMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>> = cast _Runtime.UNDEFINED;
     list = ((cast _Runtime.isArray(effects) : Bool) ? (cast effects : Dynamic) : (cast cast ([effects] : Array<Dynamic>) : Dynamic));
     explanation = (cast explainRenderEffectPadding(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = list; __callArgument1; })) : RenderEffectPaddingExplanation);
-    emitMiss = (cast (cast getRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : RenderStateRuntime) : RenderStateRuntime).registryMiss;
+    emitMiss = (cast (cast getRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : RenderStateRuntime) : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss;
     if ((cast !_Runtime.strictEquals(emitMiss, null) : Bool)) { for (kind in _Runtime.iterable((cast explanation : RenderEffectPaddingExplanation).missingKinds)) {   (cast emitMiss : RenderRegistry->String->Void)(({ final __callArgument5:Dynamic = RenderRegistry.EffectPaddingResolver; __callArgument5; }), (cast kind : String)); } }
     return cast (cast explanation : RenderEffectPaddingExplanation).padding;
     return cast null;
@@ -36,7 +36,7 @@ class RenderEffectPadding {
     var top:Float = cast _Runtime.UNDEFINED;
     var missingKinds:Array<Kind> = cast _Runtime.UNDEFINED;
     list = ((cast _Runtime.isArray(effects) : Bool) ? (cast effects : Dynamic) : (cast cast ([effects] : Array<Dynamic>) : Dynamic));
-    registry = (cast (cast getRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : RenderStateRuntime) : RenderStateRuntime).renderEffectPaddingResolverRegistry;
+    registry = (cast (cast getRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : RenderStateRuntime) : { @:optional var renderEffectPaddingResolverRegistry:Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>>; }).renderEffectPaddingResolverRegistry;
     bottom = 0.0;
     left = 0.0;
     right = 0.0;
@@ -81,7 +81,7 @@ class RenderEffectPadding {
   public static function registerRenderEffectPaddingResolver(state:RenderState, kind:Kind, resolver:Null<RenderEffectPaddingResolver>):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : RenderStateRuntime);
-    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ({ final __collection12:Dynamic = (cast runtime : RenderStateRuntime).renderEffectPaddingResolverRegistry; __collection12 == null ? _Runtime.UNDEFINED : ((cast __collection12 : flighthq._internal._Map<String, RenderEffectPaddingResolver>).delete_(kind)); }); } else { ((cast ({ final __nullishOwner15 = runtime; final __nullishValue16:Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>> = cast (cast __nullishOwner15 : RenderStateRuntime).renderEffectPaddingResolverRegistry; __nullishValue16 == null ? ((cast __nullishOwner15 : RenderStateRuntime).renderEffectPaddingResolverRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>>)) : (cast __nullishValue16 : Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast resolver))); }
+    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ({ final __collection12:Dynamic = runtime.renderEffectPaddingResolverRegistry; __collection12 == null ? _Runtime.UNDEFINED : ((cast __collection12 : flighthq._internal._Map<String, RenderEffectPaddingResolver>).delete_(kind)); }); } else { ((cast ({ final __nullishOwner15 = runtime; final __nullishValue16:Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>> = cast __nullishOwner15.renderEffectPaddingResolverRegistry; __nullishValue16 == null ? (__nullishOwner15.renderEffectPaddingResolverRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>>)) : (cast __nullishValue16 : Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast resolver))); }
   }
 
   public static function sanitizePadding__renderEffectPadding(value:Float):Float {

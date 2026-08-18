@@ -13,13 +13,13 @@ import flighthq.types.Renderable;
 class EnableColorAdjustmentGuards {
   @:noCompletion
   public static function areColorAdjustmentGuardsEnabled(state:RenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : RenderStateRuntime).colorAdjustmentUnsupportedGuard, null);
+    return cast !_Runtime.looseEquals((cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : { var colorAdjustmentUnsupportedGuard:Null<RenderState->Renderable->Void>; }).colorAdjustmentUnsupportedGuard, null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableColorAdjustmentGuards(state:RenderState):Void {
-    ((cast (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime) : { var colorAdjustmentUnsupportedGuard:Null<RenderState->Renderable->Void>; }).colorAdjustmentUnsupportedGuard = (cast EnableColorAdjustmentGuards.warnUnsupportedColorAdjustment__enableColorAdjustmentGuards));
+    ((cast (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime) : { var colorAdjustmentUnsupportedGuard:Null<RenderState->Renderable->Void>; }).colorAdjustmentUnsupportedGuard = cast (function(__unused0:RenderState, __unused1:Renderable):Void { EnableColorAdjustmentGuards.warnUnsupportedColorAdjustment__enableColorAdjustmentGuards(); } : Null<RenderState->Renderable->Void>));
   }
 
   public static function warnUnsupportedColorAdjustment__enableColorAdjustmentGuards():Void {

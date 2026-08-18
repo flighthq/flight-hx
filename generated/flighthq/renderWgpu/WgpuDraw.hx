@@ -295,7 +295,7 @@ class WgpuDraw {
     var uniformOffset:Float = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument58:Dynamic = state; __callArgument58; })) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals(runtime.renderPass, null) : Bool)) { return; }
-    uniformOffset = (cast writeWgpuQuadUniforms(({ final __callArgument59:Dynamic = state; __callArgument59; }), ({ final __callArgument60:Dynamic = { alpha: (cast renderProxy : RenderProxy).alpha, transform2D: transform }; __callArgument60; }), (cast getWgpuRenderProxyColorScaleBias(({ final __callArgument61:Dynamic = renderProxy; __callArgument61; })) : Null<ColorScaleBias>), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float), (cast u0 : Float), (cast v0 : Float), (cast u1 : Float), (cast v1 : Float), (cast _Runtime.strictEquals((cast textureEntry : WgpuTextureEntry).straightAlpha, true) : Bool)) : Float);
+    uniformOffset = (cast writeWgpuQuadUniforms(({ final __callArgument59:Dynamic = state; __callArgument59; }), ({ final __callArgument60:Dynamic = { alpha: renderProxy.alpha, transform2D: transform }; __callArgument60; }), (cast getWgpuRenderProxyColorScaleBias(({ final __callArgument61:Dynamic = renderProxy; __callArgument61; })) : Null<ColorScaleBias>), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float), (cast u0 : Float), (cast v0 : Float), (cast u1 : Float), (cast v1 : Float), (cast _Runtime.strictEquals((cast textureEntry : WgpuTextureEntry).straightAlpha, true) : Bool)) : Float);
     submitWgpuQuadDraw(({ final __callArgument62:Dynamic = state; __callArgument62; }), (cast uniformOffset : Float), (cast textureEntry : WgpuTextureEntry).bindGroup);
   }
 

@@ -37,7 +37,7 @@ class ExplainScene2DCoverage {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'nodeKinds'), 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'nodeKinds'), i);
-        if ((cast ((cast (cast runtime : RenderStateRuntime).rendererMap : flighthq._internal._Map<String, Renderer>).has(kind)) : Bool)) {
+        if ((cast ((cast runtime.rendererMap : flighthq._internal._Map<String, Renderer>).has(kind)) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.NodeRenderer }] : Array<Dynamic>));
           i++;
           continue;
@@ -48,7 +48,7 @@ class ExplainScene2DCoverage {
         i++;
       }
     }
-    commands = (cast runtime : RenderStateRuntime).canvasShapeCommandRegistry;
+    commands = runtime.canvasShapeCommandRegistry;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'shapeCommandKeys'), 'length') : Float)) : Bool)) {

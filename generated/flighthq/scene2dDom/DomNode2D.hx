@@ -48,9 +48,9 @@ class DomNode2D {
     runtime = (cast getDomRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : DomRenderStateRuntime);
     container = (cast state : DomRenderState).element;
     clipHooks = (cast state : DomRenderState).displayObjectClipHooks;
-    applyClip = (cast runtime : DomRenderStateRuntime).domClipHooks;
-    frameId = (cast runtime : DomRenderStateRuntime).currentFrameId;
-    tempStack = (cast runtime : DomRenderStateRuntime).tempStack;
+    applyClip = runtime.domClipHooks;
+    frameId = runtime.currentFrameId;
+    tempStack = runtime.tempStack;
     stackLength = 1.0;
     flighthq._internal._StaticIndex.writeArray(tempStack, 0.0, source);
     newLength = 0.0;

@@ -185,13 +185,13 @@ class WgpuMeshPipeline {
     pass = stateRuntime.renderPass;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuScene3DRuntime);
     if ((cast ((cast _Runtime.strictEquals(pass, null) : Bool) || (cast _Runtime.strictEquals(scene.activeMeshPipeline, null) : Bool)) : Bool)) { return; }
-    subset = _Runtime.field(proxy, 'subset');
+    subset = proxy.subset;
     if ((cast _Runtime.strictEquals(subset.indexCount, 0.0) : Bool)) { return; }
     upload = (cast ensureWgpuMeshUpload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = geometry; __callArgument12; }), (cast (cast scene.activeMeshPipeline : flighthq.types.WgpuMeshPipeline).skinned : Bool)) : Null<WgpuMeshUpload>);
     if ((cast ((cast _Runtime.strictEquals(upload, null) : Bool) || (cast _Runtime.strictEquals((cast upload : WgpuMeshUpload).indexBuffer, null) : Bool)) : Bool)) { return; }
     drawBindGroup = (cast writeWgpuDrawUniform(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = proxy; __callArgument14; })) : flighthq._internal.dom.GPUBindGroup);
     activePipeline = scene.activeMeshPipeline;
-    jointMatrices = _Runtime.coalesce(_Runtime.field(proxy, 'jointMatrices'), function():Dynamic return cast null);
+    jointMatrices = _Runtime.coalesce(proxy.jointMatrices, function():Dynamic return cast null);
     skinning = (cast scene.skinningAdapter : Null<WgpuSkinningAdapter>);
     boundDrawGroup = ((cast ((cast ((cast (cast activePipeline : flighthq.types.WgpuMeshPipeline).skinned : Bool) && (cast !_Runtime.strictEquals(jointMatrices, null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast (cast skinning : WgpuSkinningAdapter).getDrawBindGroup(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = jointMatrices; __callArgument16; })) : Dynamic) : (cast drawBindGroup : Dynamic));
     flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast WgpuMeshPipeline._dynamicOffsets__wgpuMeshPipeline : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast scene.pendingDrawOffset : Float));
@@ -658,7 +658,7 @@ class WgpuMeshPipeline {
     offset = stateRuntime.uniformOffset;
     floatOffset = (offset / 4.0);
     u = stateRuntime.uniformData;
-    world = (cast _Runtime.field(proxy, 'worldMatrix') : { var m:flighthq._internal._Float32Array; }).m;
+    world = (cast proxy.worldMatrix : { var m:flighthq._internal._Float32Array; }).m;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {
@@ -666,7 +666,7 @@ class WgpuMeshPipeline {
         i++;
       }
     }
-    n = (cast _Runtime.field(proxy, 'normalMatrix') : { var m:flighthq._internal._Float32Array; }).m;
+    n = (cast proxy.normalMatrix : { var m:flighthq._internal._Float32Array; }).m;
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 16.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast n : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 17.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast n : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 18.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast n : flighthq._internal._Float32Array), (cast 2.0 : Float)) : Float));
@@ -692,11 +692,11 @@ class WgpuMeshPipeline {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 37.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast uv : flighthq._internal._Float32Array), (cast 7.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 38.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast uv : flighthq._internal._Float32Array), (cast 8.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 39.0) : Float), (cast 0.0 : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 40.0) : Float), (cast _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0) : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 41.0) : Float), (cast ((cast (cast WgpuMeshPipeline.isWgpuMeshAlphaCoverage__wgpuMeshPipeline(({ final __callArgument81:Dynamic = _Runtime.field(proxy, 'material'); __callArgument81; })) : Bool) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 40.0) : Float), (cast _Runtime.coalesce(proxy.alpha, function():Dynamic return cast 1.0) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 41.0) : Float), (cast ((cast (cast WgpuMeshPipeline.isWgpuMeshAlphaCoverage__wgpuMeshPipeline(({ final __callArgument81:Dynamic = proxy.material; __callArgument81; })) : Bool) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 42.0) : Float), (cast 0.0 : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 43.0) : Float), (cast 0.0 : Float));
-    colorMatrix = _Runtime.field(proxy, 'colorMatrix');
+    colorMatrix = proxy.colorMatrix;
     if ((cast !_Runtime.looseEquals(colorMatrix, null) : Bool)) {
       {
         var row:Float = 0.0;
@@ -711,8 +711,8 @@ class WgpuMeshPipeline {
           row++;
         }
       }
-    } else { if ((cast !_Runtime.looseEquals(_Runtime.field(proxy, 'colorScaleBias'), null) : Bool)) {
-      var colorScaleBias:ColorScaleBias = _Runtime.field(proxy, 'colorScaleBias');
+    } else { if ((cast !_Runtime.looseEquals(proxy.colorScaleBias, null) : Bool)) {
+      var colorScaleBias:ColorScaleBias = proxy.colorScaleBias;
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 44.0) : Float), (cast colorScaleBias.redScale : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 45.0) : Float), (cast colorScaleBias.greenScale : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast (floatOffset + 46.0) : Float), (cast colorScaleBias.blueScale : Float));

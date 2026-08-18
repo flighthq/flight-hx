@@ -41,20 +41,20 @@ class RenderState {
   public static function createRenderStateRuntime():RenderStateRuntime {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast createEntityRuntime() : RenderStateRuntime);
-    ((cast runtime : { var colorAdjustmentResolver:Null<flighthq.types.RenderState->RenderProxy->Null<RenderProxy>->Void>; }).colorAdjustmentResolver = (cast null));
-    ((cast runtime : { var colorAdjustmentUnsupportedGuard:Null<flighthq.types.RenderState->Renderable->Void>; }).colorAdjustmentUnsupportedGuard = (cast null));
-    ((cast runtime : RenderStateRuntime).currentFrameId = 0.0);
-    ((cast runtime : { var renderAdaptHook:Null<flighthq.types.RenderState->Renderable->RenderProxy2D->Void>; }).renderAdaptHook = (cast null));
-    ((cast runtime : RenderStateRuntime).renderProxyAdapterMap = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
-    ((cast runtime : RenderStateRuntime).renderProxyMap = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []));
-    ((cast runtime : RenderStateRuntime).renderProxySources = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []));
-    ((cast runtime : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss = null);
-    ((cast runtime : RenderStateRuntime).renderEffectPaddingResolverRegistry = null);
-    ((cast runtime : { var renderRootGuard:Null<flighthq.types.RenderState->Renderable->Void>; }).renderRootGuard = (cast null));
-    ((cast runtime : { var strokeTessellator:Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator = (cast null));
-    ((cast runtime : RenderStateRuntime).rendererMap = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
-    ((cast runtime : RenderStateRuntime).rendererMapId = 0.0);
-    ((cast runtime : RenderStateRuntime).tempStack = cast ([] : Array<Dynamic>));
+    (runtime.colorAdjustmentResolver = cast (null : Null<flighthq.types.RenderState->RenderProxy->Null<RenderProxy>->Void>));
+    (runtime.colorAdjustmentUnsupportedGuard = cast (null : Null<flighthq.types.RenderState->Renderable->Void>));
+    (runtime.currentFrameId = cast (0.0 : Float));
+    (runtime.renderAdaptHook = cast (null : Null<flighthq.types.RenderState->Renderable->RenderProxy2D->Void>));
+    (runtime.renderProxyAdapterMap = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : flighthq._internal._WeakMap<Renderable, RenderProxyAdapter>));
+    (runtime.renderProxyMap = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : flighthq._internal._WeakMap<Renderable, RenderProxy>));
+    (runtime.renderProxySources = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) : flighthq._internal._Set<Renderable>));
+    (runtime.registryMiss = cast (null : Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>));
+    (runtime.renderEffectPaddingResolverRegistry = cast (null : Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>>));
+    (runtime.renderRootGuard = cast (null : Null<flighthq.types.RenderState->Renderable->Void>));
+    (runtime.strokeTessellator = cast (null : Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>>));
+    (runtime.rendererMap = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : flighthq._internal._Map<String, Renderer>));
+    (runtime.rendererMapId = cast (0.0 : Float));
+    (runtime.tempStack = cast (cast ([] : Array<Dynamic>) : Array<Renderable>));
     return cast runtime;
     return cast null;
   }
@@ -62,13 +62,13 @@ class RenderState {
   public static function destroyRenderState(state:flighthq.types.RenderState):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getRenderStateRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : RenderStateRuntime);
-    for (source in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray((cast runtime : RenderStateRuntime).renderProxySources)]))) {
+    for (source in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(runtime.renderProxySources)]))) {
       RenderState.disposeRenderProxyForShutdown__renderState(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = source; __callArgument16; }));
     }
-    ({ final __optionalOwner18 = (cast runtime : RenderStateRuntime).registryMiss; if (__optionalOwner18 != null) { final __optionalCall17 = (cast __optionalOwner18 : { var clear:Void->Void; }).clear; if (__optionalCall17 != null) __optionalCall17(); } });
-    ((cast runtime : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss = null);
-    ((cast runtime : RenderStateRuntime).renderEffectPaddingResolverRegistry = null);
-    _Runtime.setLength((cast runtime : RenderStateRuntime).tempStack, 0.0);
+    ({ final __optionalOwner18 = runtime.registryMiss; if (__optionalOwner18 != null) { final __optionalCall17 = (cast __optionalOwner18 : { var clear:Void->Void; }).clear; if (__optionalCall17 != null) __optionalCall17(); } });
+    (runtime.registryMiss = cast (null : Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>));
+    (runtime.renderEffectPaddingResolverRegistry = cast (null : Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>>));
+    _Runtime.setLength(runtime.tempStack, 0.0);
   }
 
   @:noCompletion
@@ -81,11 +81,11 @@ class RenderState {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var proxy:Null<RenderProxy> = cast _Runtime.UNDEFINED;
     runtime = (cast getRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : RenderStateRuntime);
-    proxy = ((cast (cast runtime : RenderStateRuntime).renderProxyMap : flighthq._internal._WeakMap<Renderable, RenderProxy>).get(source));
-    if ((cast ((cast !_Runtime.strictEquals(({ final __structural20 = proxy; __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : { var rendererData:Null<RendererData>; }).rendererData; }), null) : Bool) && (cast !_Runtime.strictEquals(({ final __structural21 = proxy; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { var rendererData:Null<RendererData>; }).rendererData; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      ({ final __optionalOwner23 = (cast proxy : RenderProxy).renderer; if (__optionalOwner23 != null) { final __optionalCall22 = (cast __optionalOwner23 : { @:optional var destroyData:Null<flighthq.types.RenderState->RendererData->Void>; }).destroyData; if (__optionalCall22 != null) __optionalCall22(state, (cast proxy : RenderProxy).rendererData); } });
+    proxy = ((cast runtime.renderProxyMap : flighthq._internal._WeakMap<Renderable, RenderProxy>).get(source));
+    if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct20 = proxy; __typedStruct20 == null ? _Runtime.UNDEFINED : (cast __typedStruct20 : { var rendererData:Null<RendererData>; }).rendererData; }), null) : Bool) && (cast !_Runtime.strictEquals(({ final __typedStruct21 = proxy; __typedStruct21 == null ? _Runtime.UNDEFINED : (cast __typedStruct21 : { var rendererData:Null<RendererData>; }).rendererData; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
+      ({ final __optionalOwner23 = (cast proxy : { var renderer:Null<Renderer>; }).renderer; if (__optionalOwner23 != null) { final __optionalCall22 = (cast __optionalOwner23 : { @:optional var destroyData:Null<flighthq.types.RenderState->RendererData->Void>; }).destroyData; if (__optionalCall22 != null) __optionalCall22(state, (cast proxy : { var rendererData:Null<RendererData>; }).rendererData); } });
     }
-    ((cast (cast runtime : RenderStateRuntime).renderProxyMap : flighthq._internal._WeakMap<Renderable, RenderProxy>).delete_(source));
-    ((cast (cast runtime : RenderStateRuntime).renderProxySources : flighthq._internal._Set<Renderable>).delete_(source));
+    ((cast runtime.renderProxyMap : flighthq._internal._WeakMap<Renderable, RenderProxy>).delete_(source));
+    ((cast runtime.renderProxySources : flighthq._internal._Set<Renderable>).delete_(source));
   }
 }

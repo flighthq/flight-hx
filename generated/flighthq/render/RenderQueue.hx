@@ -27,7 +27,7 @@ class RenderQueue {
     var sceneOrder:Float = cast _Runtime.UNDEFINED;
     clearRenderQueue(({ final __callArgument0:Dynamic = out; __callArgument0; }));
     runtime = (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime);
-    renderProxyMap = (cast runtime : RenderStateRuntime).renderProxyMap;
+    renderProxyMap = runtime.renderProxyMap;
     stack = RenderQueue._buildStack__renderQueue;
     stackLength = 1.0;
     flighthq._internal._StaticIndex.writeArray(stack, 0.0, source);
@@ -36,8 +36,8 @@ class RenderQueue {
       var current:Renderable = flighthq._internal._StaticIndex.readArray(stack, --stackLength);
       var proxy:Null<RenderProxy> = ((cast renderProxyMap : flighthq._internal._WeakMap<Renderable, RenderProxy>).get(current));
       if ((cast _Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      if ((cast !(cast (cast proxy : RenderProxy).visible : Bool) : Bool)) { continue; }
-      if ((cast !_Runtime.strictEquals((cast proxy : RenderProxy).renderer, null) : Bool)) {
+      if ((cast !(cast (cast proxy : { var visible:Bool; }).visible : Bool) : Bool)) { continue; }
+      if ((cast !_Runtime.strictEquals((cast proxy : { var renderer:Null<Renderer>; }).renderer, null) : Bool)) {
         pushRenderQueueEntry(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = proxy; __callArgument3; }), (cast sceneOrder : Float));
       }
       sceneOrder++;

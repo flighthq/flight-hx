@@ -175,14 +175,14 @@ class DrawWgpuScene3D {
           (boundColorAdjustment = cast (colorAdjusted : Dynamic));
           (boundColorMatrix = cast (colorMatrix : Dynamic));
         }
-        ((cast DrawWgpuScene3D.proxy__drawWgpuScene3D : Scene3DRenderProxy).alpha = (cast entry : DrawEntry__drawWgpuScene3D).alpha);
-        ((cast DrawWgpuScene3D.proxy__drawWgpuScene3D : Scene3DRenderProxy).colorScaleBias = ((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawWgpuScene3D).colorScaleBias : Dynamic) : (cast null : Dynamic)));
-        ((cast DrawWgpuScene3D.proxy__drawWgpuScene3D : Scene3DRenderProxy).colorMatrix = ((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawWgpuScene3D).colorMatrix : Dynamic) : (cast null : Dynamic)));
-        ((cast DrawWgpuScene3D.proxy__drawWgpuScene3D : Scene3DRenderProxy).jointMatrices = ((cast skinned : Bool) ? (cast (cast (cast (cast (cast entry : DrawEntry__drawWgpuScene3D).mesh : { @:optional var skin:Null<Skin>; }).skin : Skin).skeleton : Skeleton3D).jointMatrices : Dynamic) : (cast null : Dynamic)));
-        ((cast DrawWgpuScene3D.proxy__drawWgpuScene3D : Scene3DRenderProxy).material = (cast entry : DrawEntry__drawWgpuScene3D).material);
-        ((cast DrawWgpuScene3D.proxy__drawWgpuScene3D : Scene3DRenderProxy).normalMatrix = DrawWgpuScene3D.scratchNormalMatrix__drawWgpuScene3D);
-        ((cast DrawWgpuScene3D.proxy__drawWgpuScene3D : Scene3DRenderProxy).subset = (cast entry : DrawEntry__drawWgpuScene3D).subset);
-        ((cast DrawWgpuScene3D.proxy__drawWgpuScene3D : Scene3DRenderProxy).worldMatrix = worldMatrix);
+        (DrawWgpuScene3D.proxy__drawWgpuScene3D.alpha = cast ((cast entry : DrawEntry__drawWgpuScene3D).alpha : Null<Float>));
+        (DrawWgpuScene3D.proxy__drawWgpuScene3D.colorScaleBias = cast (((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawWgpuScene3D).colorScaleBias : Dynamic) : (cast null : Dynamic)) : Null<ColorScaleBias>));
+        (DrawWgpuScene3D.proxy__drawWgpuScene3D.colorMatrix = cast (((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawWgpuScene3D).colorMatrix : Dynamic) : (cast null : Dynamic)) : Null<Array<Float>>));
+        (DrawWgpuScene3D.proxy__drawWgpuScene3D.jointMatrices = cast (((cast skinned : Bool) ? (cast (cast (cast (cast (cast entry : DrawEntry__drawWgpuScene3D).mesh : { @:optional var skin:Null<Skin>; }).skin : Skin).skeleton : Skeleton3D).jointMatrices : Dynamic) : (cast null : Dynamic)) : Null<flighthq._internal._Float32Array>));
+        (DrawWgpuScene3D.proxy__drawWgpuScene3D.material = cast ((cast entry : DrawEntry__drawWgpuScene3D).material : Material));
+        (DrawWgpuScene3D.proxy__drawWgpuScene3D.normalMatrix = cast (DrawWgpuScene3D.scratchNormalMatrix__drawWgpuScene3D : Matrix3));
+        (DrawWgpuScene3D.proxy__drawWgpuScene3D.subset = cast ((cast entry : DrawEntry__drawWgpuScene3D).subset : MeshSubset));
+        (DrawWgpuScene3D.proxy__drawWgpuScene3D.worldMatrix = cast (worldMatrix : Matrix4));
         (cast (cast entry : DrawEntry__drawWgpuScene3D).renderer : WgpuMeshMaterialRenderer).draw(({ final __callArgument37:Dynamic = state; __callArgument37; }), ({ final __callArgument38:Dynamic = DrawWgpuScene3D.proxy__drawWgpuScene3D; __callArgument38; }), (cast (cast entry : DrawEntry__drawWgpuScene3D).mesh : { var geometry:MeshGeometry; }).geometry);
         i++;
       }

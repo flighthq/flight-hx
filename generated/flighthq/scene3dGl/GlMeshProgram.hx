@@ -90,11 +90,11 @@ class GlMeshProgram {
     var upload:GlMeshUpload = cast _Runtime.UNDEFINED;
     var subset:MeshSubset = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locModel'), false, (cast _Runtime.field(proxy, 'worldMatrix') : { var m:flighthq._internal._Float32Array; }).m);
-    if ((cast !_Runtime.strictEquals(_Runtime.field(program, 'locNormalMatrix'), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(program, 'locNormalMatrix'), false, (cast _Runtime.field(proxy, 'normalMatrix') : { var m:flighthq._internal._Float32Array; }).m); }
-    uploadGlMeshDrawAlpha(({ final __callArgument4:Dynamic = gl; __callArgument4; }), ({ final __callArgument5:Dynamic = program; __callArgument5; }), (cast _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0) : Float), ({ final __callArgument6:Dynamic = _Runtime.field(proxy, 'material'); __callArgument6; }));
-    colorMatrix = _Runtime.field(proxy, 'colorMatrix');
-    colorScaleBias = _Runtime.field(proxy, 'colorScaleBias');
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locModel'), false, (cast proxy.worldMatrix : { var m:flighthq._internal._Float32Array; }).m);
+    if ((cast !_Runtime.strictEquals(_Runtime.field(program, 'locNormalMatrix'), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(program, 'locNormalMatrix'), false, (cast proxy.normalMatrix : { var m:flighthq._internal._Float32Array; }).m); }
+    uploadGlMeshDrawAlpha(({ final __callArgument4:Dynamic = gl; __callArgument4; }), ({ final __callArgument5:Dynamic = program; __callArgument5; }), (cast _Runtime.coalesce(proxy.alpha, function():Dynamic return cast 1.0) : Float), ({ final __callArgument6:Dynamic = proxy.material; __callArgument6; }));
+    colorMatrix = proxy.colorMatrix;
+    colorScaleBias = proxy.colorScaleBias;
     if ((cast !_Runtime.looseEquals(colorMatrix, null) : Bool)) {
       var loc0:Null<flighthq._internal.dom.WebGLUniformLocation> = _Runtime.field(program, 'locColorMatrix0');
       if ((cast _Runtime.strictEquals(loc0, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -126,7 +126,7 @@ class GlMeshProgram {
         flighthq._internal.backend.WebGl2Backend.uniform4f(gl, locColorBias, (cast colorScaleBias : { var redBias:Float; }).redBias, (cast colorScaleBias : { var greenBias:Float; }).greenBias, (cast colorScaleBias : { var blueBias:Float; }).blueBias, (cast colorScaleBias : { var alphaBias:Float; }).alphaBias);
       }
     } }
-    jointMatrices = _Runtime.field(proxy, 'jointMatrices');
+    jointMatrices = proxy.jointMatrices;
     gpuSkinned = ((cast !_Runtime.looseEquals(_Runtime.field(program, 'locJointTexture'), null) : Bool) && (cast !_Runtime.looseEquals(jointMatrices, null) : Bool));
     if ((cast gpuSkinned : Bool)) {
       var palette:GlSkinPaletteTexture = (cast ensureGlSkinPalette(({ final __callArgument7:Dynamic = state; __callArgument7; })) : GlSkinPaletteTexture);
@@ -135,7 +135,7 @@ class GlMeshProgram {
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locJointTexture'), SKIN_PALETTE_TEXTURE_UNIT);
     }
     upload = (cast ensureGlMeshUpload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = geometry; __callArgument12; }), (cast gpuSkinned : Bool)) : GlMeshUpload);
-    subset = _Runtime.field(proxy, 'subset');
+    subset = proxy.subset;
     if ((cast !_Runtime.strictEquals((cast upload : GlMeshUpload).indexBuffer, null) : Bool)) {
       var elementSize:Float = ((cast _Runtime.strictEquals((cast upload : GlMeshUpload).indexType, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT)) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
       flighthq._internal.backend.WebGl2Backend.drawElements(gl, (cast upload : GlMeshUpload).primitiveMode, subset.indexCount, (cast upload : GlMeshUpload).indexType, (subset.indexOffset * elementSize));

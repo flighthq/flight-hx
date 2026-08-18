@@ -59,10 +59,10 @@ class WireframeGlMeshMaterialRenderer {
     gl = (cast state : GlRenderState).gl;
     program = (cast (cast getGlScene3DRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast program : GlMeshProgram).locModel, false, (cast _Runtime.field(proxy, 'worldMatrix') : { var m:flighthq._internal._Float32Array; }).m);
-    uploadGlMeshDrawAlpha(({ final __callArgument8:Dynamic = gl; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), (cast _Runtime.coalesce(_Runtime.field(proxy, 'alpha'), function():Dynamic return cast 1.0) : Float), ({ final __callArgument10:Dynamic = _Runtime.field(proxy, 'material'); __callArgument10; }));
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast program : GlMeshProgram).locModel, false, (cast proxy.worldMatrix : { var m:flighthq._internal._Float32Array; }).m);
+    uploadGlMeshDrawAlpha(({ final __callArgument8:Dynamic = gl; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), (cast _Runtime.coalesce(proxy.alpha, function():Dynamic return cast 1.0) : Float), ({ final __callArgument10:Dynamic = proxy.material; __callArgument10; }));
     upload = (cast ensureGlWireframeUpload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = geometry; __callArgument12; })) : GlWireframeUpload);
-    subset = _Runtime.field(proxy, 'subset');
+    subset = proxy.subset;
     elementSize = ((cast _Runtime.strictEquals((cast upload : GlWireframeUpload).indexType, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT)) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
     flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINES', flighthq._internal.backend.WebGl2Backend.LINES), (subset.indexCount * 2.0), (cast upload : GlWireframeUpload).indexType, ((subset.indexOffset * 2.0) * elementSize));
   } });

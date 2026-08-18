@@ -24,7 +24,7 @@ class RenderTransform2d {
     var parentDirty:Bool = cast _Runtime.UNDEFINED;
     var localDirty:Bool = cast _Runtime.UNDEFINED;
     localTransformId = (cast getNodeLocalTransformRevision((cast (cast (cast data : RenderProxy2D).source : Node<Dynamic>) : Dynamic)) : Float);
-    parentDirty = ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast parentData : RenderProxy2D).transformFrameId, (cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : RenderStateRuntime).currentFrameId) : Bool));
+    parentDirty = ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast parentData : RenderProxy2D).transformFrameId, (cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : { var currentFrameId:Float; }).currentFrameId) : Bool));
     localDirty = ((cast _Runtime.strictEquals((cast state : RenderState).sceneGraphSyncPolicy, 'refreshDerivedState') : Bool) || (cast !_Runtime.strictEquals((cast data : RenderProxy2D).lastLocalTransformId, localTransformId) : Bool));
     if ((cast ((cast parentDirty : Bool) || (cast localDirty : Bool)) : Bool)) {
       RenderTransform2d.recalculateRenderTransform2D__renderTransform2d(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = data; __callArgument2; }), ({ final __callArgument3:Dynamic = parentData; __callArgument3; }));
@@ -45,6 +45,6 @@ class RenderTransform2d {
     } else {
       copyMatrix(({ final __callArgument7:Dynamic = (cast data : RenderProxy2D).transform2D; __callArgument7; }), ({ final __callArgument8:Dynamic = transform2D; __callArgument8; }));
     }
-    ((cast data : RenderProxy2D).transformFrameId = (cast (cast getRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : RenderStateRuntime) : RenderStateRuntime).currentFrameId);
+    ((cast data : RenderProxy2D).transformFrameId = (cast (cast getRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : RenderStateRuntime) : { var currentFrameId:Float; }).currentFrameId);
   }
 }

@@ -12,7 +12,7 @@ import flighthq.types.ShapeCommand.ShapeCommandKey;
 class CanvasShapeRegistry {
   @:noCompletion
   public static function getCanvasShapeCommand(state:RenderState, key:String):Null<CanvasShapeCommand<String>> {
-    return cast _Runtime.coalesce(({ final __collection2:Dynamic = (cast (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime) : RenderStateRuntime).canvasShapeCommandRegistry; __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map<String, CanvasShapeCommand<String>>).get(key)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection2:Dynamic = (cast (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime) : { @:optional var canvasShapeCommandRegistry:Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>>; }).canvasShapeCommandRegistry; __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map<String, CanvasShapeCommand<String>>).get(key)); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -21,7 +21,7 @@ class CanvasShapeRegistry {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var registry:flighthq._internal._Map<String, CanvasShapeCommand<String>> = cast _Runtime.UNDEFINED;
     runtime = (cast getRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : RenderStateRuntime);
-    registry = ({ final __nullishOwner4 = runtime; final __nullishValue5:Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>> = cast (cast __nullishOwner4 : RenderStateRuntime).canvasShapeCommandRegistry; __nullishValue5 == null ? ((cast __nullishOwner4 : RenderStateRuntime).canvasShapeCommandRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>>)) : (cast __nullishValue5 : Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>>); });
+    registry = ({ final __nullishOwner4 = runtime; final __nullishValue5:Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>> = cast __nullishOwner4.canvasShapeCommandRegistry; __nullishValue5 == null ? (__nullishOwner4.canvasShapeCommandRegistry = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>>)) : (cast __nullishValue5 : Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>>); });
     ((cast registry : flighthq._internal._Map<String, CanvasShapeCommand<String>>).set((cast command : CanvasShapeCommand<K>).key, (cast command)));
   }
 

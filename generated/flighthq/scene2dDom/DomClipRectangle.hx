@@ -23,7 +23,7 @@ class DomClipRectangle {
     var rect:Null<DomScene2DRectangle> = cast _Runtime.UNDEFINED;
     var local:DomScene2DRectangle = cast _Runtime.UNDEFINED;
     var clipPath:String = cast _Runtime.UNDEFINED;
-    element = ((cast (cast (cast getDomRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : DomRenderStateRuntime) : DomRenderStateRuntime).domElementMap : flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>).get(data));
+    element = ((cast (cast (cast getDomRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : DomRenderStateRuntime) : { var domElementMap:flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>; }).domElementMap : flighthq._internal._WeakMap<RenderProxy2D, flighthq._internal.dom.HTMLElement>).get(data));
     if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     contour = null;
     {
@@ -92,7 +92,7 @@ class DomClipRectangle {
   public static function setDomClipHooks(state:DomRenderState):Void {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getDomRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : DomRenderStateRuntime);
-    if ((cast _Runtime.strictEquals((cast runtime : DomRenderStateRuntime).domClipHooks, null) : Bool)) { ((cast runtime : DomRenderStateRuntime).domClipHooks = DomClipRectangle.domClipHooksImpl__domClipRectangle); }
+    if ((cast _Runtime.strictEquals(runtime.domClipHooks, null) : Bool)) { (runtime.domClipHooks = cast (DomClipRectangle.domClipHooksImpl__domClipRectangle : Null<DomClipHooks>)); }
   }
 
   public static function createScene2DToElementPointMapper__domClipRectangle(element:flighthq._internal.dom.HTMLElement):Float->Float->Array<Float> {
@@ -192,6 +192,6 @@ class DomClipRectangle {
   public static final EMPTY_CLIP_PATH__domClipRectangle:String = 'inset(0 100% 100% 0)';
 
   public static final domClipHooksImpl__domClipRectangle:DomClipHooks = (cast { apply: function(state:DomRenderState, data:RenderProxy2D):Void {
-    applyDomClipRectangles(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = data; __callArgument15; }), (cast (cast getDomRenderStateRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : DomRenderStateRuntime) : DomRenderStateRuntime).domClipStack);
+    applyDomClipRectangles(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = data; __callArgument15; }), (cast (cast getDomRenderStateRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : DomRenderStateRuntime) : { var domClipStack:Array<DomClipEntry>; }).domClipStack);
   } });
 }

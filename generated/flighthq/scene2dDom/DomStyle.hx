@@ -31,6 +31,6 @@ class DomStyle {
 
   @:noCompletion
   public static function setDomRendererElement(state:DomRenderState, element:flighthq._internal.dom.HTMLElement):Void {
-    ((cast (cast getDomRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : DomRenderStateRuntime) : DomRenderStateRuntime).domCurrentElement = element);
+    ((cast (cast getDomRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : DomRenderStateRuntime) : { var domCurrentElement:Null<flighthq._internal.dom.HTMLElement>; }).domCurrentElement = cast (element : Null<flighthq._internal.dom.HTMLElement>));
   }
 }

@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1556 |
-| Direct schemas | 448 |
+| Audit-only schemas | 1551 |
+| Direct schemas | 453 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 12183 |
-| Directly emitted accesses | 18483 |
+| Pending accesses | 11886 |
+| Directly emitted accesses | 18780 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1556 |
+| Newly discovered, audit-only | 1551 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -443,7 +443,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#DomImageSourceKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#DomRenderOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DomRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 19 | 6 | 7 | 32 | 0 | 0 | 2 | yes | — |
-| `@flighthq/types:interface#DomRenderStateRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 27 | 32 | 17 | 3 | 52 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#DomRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free DOM render-state runtime | 27 | 32 | 17 | 3 | 0 | 52 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DomScene2DRectangle` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 36 | 0 | 0 | 36 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#DomTextInputOverlay` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#DomTextureResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
@@ -1257,7 +1257,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Renderer` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 10 | yes | — |
 | `@flighthq/types:interface#RendererData` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:interface#RenderPassPreserve` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RenderProxy` | `audit-only` | `new` | — | checker-discovered public declaration | 22 | 47 | 19 | 0 | 66 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RenderProxy` | `direct` | `new` | — | reviewed escape-free render proxy | 22 | 47 | 19 | 0 | 0 | 66 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderProxy2D` | `audit-only` | `new` | — | checker-discovered public declaration | 25 | 286 | 12 | 0 | 298 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#RenderProxyAdapter` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 7 | yes | — |
 | `@flighthq/types:type#RenderProxyResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1269,7 +1269,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#RenderRegistrySignals` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#RenderSortKey` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#RenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 15 | 5 | 0 | 20 | 0 | 0 | 9 | yes | — |
-| `@flighthq/types:interface#RenderStateRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 47 | 28 | 7 | 82 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RenderStateRuntime` | `direct` | `new` | — | reviewed escape-free render-state runtime | 16 | 47 | 28 | 7 | 0 | 82 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderStateStats` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderTarget` | `direct` | `new` | — | reviewed escape-free portable render target | 14 | 16 | 33 | 0 | 0 | 49 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderTargetAxes` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 42 | 0 | 0 | 42 | 0 | 0 | 4 | yes | — |
@@ -1285,7 +1285,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#RenderTexture` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 22 | 8 | 0 | 30 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderViewport2D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ReplaceTextInputOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ResolvedRenderTargetDescriptor` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 49 | 0 | 0 | 49 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ResolvedRenderTargetDescriptor` | `direct` | `new` | — | reviewed escape-free resolved render-target descriptor | 10 | 49 | 0 | 0 | 0 | 49 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ResolveScene2DResourcesOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 1 | 0 | 2 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ResolveScene3DResourcesOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 1 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ResourceLoadBytes` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1402,7 +1402,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#Scene3DPbrExtensionTextureLister` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#Scene3DPickOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DRenderList` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 21 | 1 | 0 | 22 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Scene3DRenderProxy` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 23 | 25 | 0 | 48 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Scene3DRenderProxy` | `direct` | `new` | — | reviewed escape-free Scene3D render proxy | 8 | 23 | 25 | 0 | 0 | 48 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DResourceEvent` | `direct` | `renamed` | `@flighthq/scene-resources:interface#SceneResourceEvent` | broad scene document | 2 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DResourceInFlight` | `direct` | `renamed` | `@flighthq/scene-resources:interface#SceneResourceInFlight` | broad scene document | 3 | 10 | 1 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DResourceLoadProgress` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |

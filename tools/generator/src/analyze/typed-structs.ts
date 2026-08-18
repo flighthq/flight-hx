@@ -268,6 +268,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#BlinnPhongMaterial',
     purpose: 'reviewed escape-free Blinn-Phong material',
   },
+  {
+    declarationFingerprint: 'sha256:b27249a8cd675e578a7deb9802c0ebbf90928b97b9000fc7b47a1165ad38f419',
+    id: '@flighthq/types:interface#RenderStateRuntime',
+    purpose: 'reviewed escape-free render-state runtime',
+  },
+  {
+    declarationFingerprint: 'sha256:f0d40c25ffe0591e6ea74f08dd22ec61859b14d72b08dbf54d2b642fd68e5cb9',
+    id: '@flighthq/types:interface#RenderProxy',
+    purpose: 'reviewed escape-free render proxy',
+  },
+  {
+    declarationFingerprint: 'sha256:2fc485e81e3cee06d54afe96b9e729f984503a325de3c0fa9fb2eb466f01ed3b',
+    id: '@flighthq/types:interface#DomRenderStateRuntime',
+    purpose: 'reviewed escape-free DOM render-state runtime',
+  },
+  {
+    declarationFingerprint: 'sha256:f1ab7ec236b568f33e9b66eec91b29426d97375591f5060c6a649f9439d5d083',
+    id: '@flighthq/types:interface#ResolvedRenderTargetDescriptor',
+    purpose: 'reviewed escape-free resolved render-target descriptor',
+  },
+  {
+    declarationFingerprint: 'sha256:79df9e528430e381be2d9b7b98b30e5784f18d6f57932943ae5ef00f34daaed5',
+    id: '@flighthq/types:interface#Scene3DRenderProxy',
+    purpose: 'reviewed escape-free Scene3D render proxy',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

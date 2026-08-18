@@ -37,9 +37,9 @@ class GlRenderTargetPool {
         var candidate:GlRenderTarget = flighthq._internal._StaticIndex.readArray((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, i);
         if ((cast (cast GlRenderTargetPool.matchesGlRenderTargetAxes__glRenderTargetPool(({ final __callArgument4:Dynamic = candidate; __callArgument4; }), ({ final __callArgument5:Dynamic = effective; __callArgument5; })) : Bool) : Bool)) {
           _Runtime.splice((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, Std.int(i), Std.int(1.0), []);
-          (candidate.requestedAxes = cast ({ width: (cast requested : ResolvedRenderTargetDescriptor).width, height: (cast requested : ResolvedRenderTargetDescriptor).height, format: (cast requested : ResolvedRenderTargetDescriptor).format, colorAttachments: (cast requested : ResolvedRenderTargetDescriptor).colorAttachments, colorFormats: _Runtime.concatArrays([_Runtime.toArray((cast requested : ResolvedRenderTargetDescriptor).colorFormats)]), sampleCount: (cast requested : ResolvedRenderTargetDescriptor).sampleCount, depth: (cast requested : ResolvedRenderTargetDescriptor).depth, colorSpace: (cast requested : ResolvedRenderTargetDescriptor).colorSpace } : RenderTargetAxes));
-          (candidate.clearColors = cast (_Runtime.concatArrays([_Runtime.toArray((cast requested : ResolvedRenderTargetDescriptor).clearColors)]) : Array<Float>));
-          (candidate.clearDepth = cast ((cast requested : ResolvedRenderTargetDescriptor).clearDepth : Float));
+          (candidate.requestedAxes = cast ({ width: requested.width, height: requested.height, format: requested.format, colorAttachments: requested.colorAttachments, colorFormats: _Runtime.concatArrays([_Runtime.toArray(requested.colorFormats)]), sampleCount: requested.sampleCount, depth: requested.depth, colorSpace: requested.colorSpace } : RenderTargetAxes));
+          (candidate.clearColors = cast (_Runtime.concatArrays([_Runtime.toArray(requested.clearColors)]) : Array<Float>));
+          (candidate.clearDepth = cast (requested.clearDepth : Float));
           clearGlRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = candidate; __callArgument7; }));
           return cast candidate;
         }

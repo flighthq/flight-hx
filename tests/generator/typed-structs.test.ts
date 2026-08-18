@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_556,
+      newAuditOnly: 1_551,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(450);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(455);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_556);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_551);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(48);
+    expect(newDirect).toHaveLength(53);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -350,6 +350,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'BlinnPhongMaterial',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free Blinn-Phong material',
+        }),
+        expect.objectContaining({
+          name: 'RenderStateRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free render-state runtime',
+        }),
+        expect.objectContaining({
+          name: 'RenderProxy',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free render proxy',
+        }),
+        expect.objectContaining({
+          name: 'DomRenderStateRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free DOM render-state runtime',
+        }),
+        expect.objectContaining({
+          name: 'ResolvedRenderTargetDescriptor',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free resolved render-target descriptor',
+        }),
+        expect.objectContaining({
+          name: 'Scene3DRenderProxy',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Scene3D render proxy',
         }),
       ]),
     );
@@ -593,6 +618,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:1ad81b90e44e80bd524b045aac2be2bc6a069473749743258d893377441f0194',
         id: '@flighthq/types:interface#BlinnPhongMaterial',
         purpose: 'reviewed escape-free Blinn-Phong material',
+      },
+      {
+        declarationFingerprint: 'sha256:b27249a8cd675e578a7deb9802c0ebbf90928b97b9000fc7b47a1165ad38f419',
+        id: '@flighthq/types:interface#RenderStateRuntime',
+        purpose: 'reviewed escape-free render-state runtime',
+      },
+      {
+        declarationFingerprint: 'sha256:f0d40c25ffe0591e6ea74f08dd22ec61859b14d72b08dbf54d2b642fd68e5cb9',
+        id: '@flighthq/types:interface#RenderProxy',
+        purpose: 'reviewed escape-free render proxy',
+      },
+      {
+        declarationFingerprint: 'sha256:2fc485e81e3cee06d54afe96b9e729f984503a325de3c0fa9fb2eb466f01ed3b',
+        id: '@flighthq/types:interface#DomRenderStateRuntime',
+        purpose: 'reviewed escape-free DOM render-state runtime',
+      },
+      {
+        declarationFingerprint: 'sha256:f1ab7ec236b568f33e9b66eec91b29426d97375591f5060c6a649f9439d5d083',
+        id: '@flighthq/types:interface#ResolvedRenderTargetDescriptor',
+        purpose: 'reviewed escape-free resolved render-target descriptor',
+      },
+      {
+        declarationFingerprint: 'sha256:79df9e528430e381be2d9b7b98b30e5784f18d6f57932943ae5ef00f34daaed5',
+        id: '@flighthq/types:interface#Scene3DRenderProxy',
+        purpose: 'reviewed escape-free Scene3D render proxy',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -1027,6 +1077,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const renderRuntimeCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'DomRenderStateRuntime',
+            'RenderProxy',
+            'RenderStateRuntime',
+            'ResolvedRenderTargetDescriptor',
+            'Scene3DRenderProxy',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1067,22 +1130,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_556,
+      auditOnlySchemas: 1_551,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 18_483,
-      directSchemas: 448,
+      directAccesses: 18_780,
+      directSchemas: 453,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 12_183,
+      pendingAccesses: 11_886,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_556,
+      newAuditOnly: 1_551,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1110,7 +1173,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(18_483);
+    expect(report.summary.directAccesses).toBe(18_780);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -1471,6 +1534,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'RenderStateRuntime',
+        82,
+        'sha256:b27249a8cd675e578a7deb9802c0ebbf90928b97b9000fc7b47a1165ad38f419',
+        'reviewed escape-free render-state runtime',
+      ],
+      [
+        'RenderProxy',
+        66,
+        'sha256:f0d40c25ffe0591e6ea74f08dd22ec61859b14d72b08dbf54d2b642fd68e5cb9',
+        'reviewed escape-free render proxy',
+      ],
+      [
+        'DomRenderStateRuntime',
+        52,
+        'sha256:2fc485e81e3cee06d54afe96b9e729f984503a325de3c0fa9fb2eb466f01ed3b',
+        'reviewed escape-free DOM render-state runtime',
+      ],
+      [
+        'ResolvedRenderTargetDescriptor',
+        49,
+        'sha256:f1ab7ec236b568f33e9b66eec91b29426d97375591f5060c6a649f9439d5d083',
+        'reviewed escape-free resolved render-target descriptor',
+      ],
+      [
+        'Scene3DRenderProxy',
+        48,
+        'sha256:79df9e528430e381be2d9b7b98b30e5784f18d6f57932943ae5ef00f34daaed5',
+        'reviewed escape-free Scene3D render proxy',
+      ],
+    ] as const) {
+      expect(renderRuntimeCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'Physics2DWorld',
         217,
         'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
@@ -1812,6 +1917,20 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(materialId)).toBe(false);
     }
+    for (const [renderRuntimeId, mechanicallyCompatible, normalizationReasons, observabilityReasons] of [
+      ['@flighthq/types:interface#RenderStateRuntime', false, ['cross-schema-transfer'], []],
+      ['@flighthq/types:interface#RenderProxy', false, ['anonymous-structural-transfer', 'cross-schema-transfer'], []],
+      ['@flighthq/types:interface#DomRenderStateRuntime', false, ['cross-schema-transfer'], []],
+      ['@flighthq/types:interface#ResolvedRenderTargetDescriptor', true, [], ['object-spread']],
+      ['@flighthq/types:interface#Scene3DRenderProxy', true, [], ['optional-omission']],
+    ] as const) {
+      expect(classAuditById.get(renderRuntimeId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      expect(provenanceById.has(renderRuntimeId)).toBe(false);
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -1971,6 +2090,25 @@ describe('typed struct analysis', () => {
     );
     expect(generatedShadedMaterialRenderer).not.toMatch(/\(cast material : ShadedMaterial\)\./u);
     expect(generatedShadedMaterialRenderer).not.toMatch(/_Runtime\.field\(material,/u);
+    const generatedRenderState = readFileSync('generated/flighthq/render/RenderState.hx', 'utf8');
+    expect(generatedRenderState).not.toMatch(/\(cast runtime : RenderStateRuntime\)\./u);
+    expect(generatedRenderState).not.toMatch(/_Runtime\.field\(runtime,/u);
+    const generatedRenderProxy = readFileSync('generated/flighthq/render/RenderProxy.hx', 'utf8');
+    expect(generatedRenderProxy).not.toMatch(
+      /\(cast (?:data|parentData|proxy|source) : (?:flighthq\.types\.)?RenderProxy\)\./u,
+    );
+    expect(generatedRenderProxy).not.toMatch(/_Runtime\.field\((?:data|parentData|proxy),/u);
+    const generatedDomRenderState = readFileSync('generated/flighthq/scene2dDom/DomRenderState.hx', 'utf8');
+    expect(generatedDomRenderState).not.toMatch(/\(cast runtime : DomRenderStateRuntime\)\./u);
+    expect(generatedDomRenderState).not.toMatch(/_Runtime\.field\(runtime,/u);
+    const generatedGlRenderTarget = readFileSync('generated/flighthq/renderGl/GlRenderTarget.hx', 'utf8');
+    expect(generatedGlRenderTarget).not.toMatch(
+      /\(cast (?:descriptor|requested) : ResolvedRenderTargetDescriptor\)\./u,
+    );
+    expect(generatedGlRenderTarget).not.toMatch(/_Runtime\.field\((?:descriptor|requested),/u);
+    const generatedWgpuMeshPipeline = readFileSync('generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx', 'utf8');
+    expect(generatedWgpuMeshPipeline).not.toMatch(/\(cast proxy : Scene3DRenderProxy\)\./u);
+    expect(generatedWgpuMeshPipeline).not.toMatch(/_Runtime\.field\(proxy,/u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
