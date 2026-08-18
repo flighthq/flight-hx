@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_546,
+      newAuditOnly: 1_541,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(460);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(465);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_546);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_541);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(58);
+    expect(newDirect).toHaveLength(63);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -400,6 +400,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'CollisionContactManifold',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free collision contact manifold',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DPrismaticJoint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics prismatic joint',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DPulleyJoint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics pulley joint',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DGearJoint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics gear joint',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DWheelJoint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics wheel joint',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DRevoluteJoint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics revolute joint',
         }),
       ]),
     );
@@ -693,6 +718,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:6dfc439ab4ce910b63d1d1a0ad76eaa0bb434fe5a5a17db5b8af67a6ca5332ef',
         id: '@flighthq/types:interface#CollisionContactManifold',
         purpose: 'reviewed escape-free collision contact manifold',
+      },
+      {
+        declarationFingerprint: 'sha256:7047314bcb16b3ebe3626298c25398572a66360e5e872133b33a21415c4e2e88',
+        id: '@flighthq/types:interface#Physics2DPrismaticJoint',
+        purpose: 'reviewed escape-free physics prismatic joint',
+      },
+      {
+        declarationFingerprint: 'sha256:a169f1f5512b2bf35e7587690e6ef634681878d267026c2ab03a3dafd517ed12',
+        id: '@flighthq/types:interface#Physics2DPulleyJoint',
+        purpose: 'reviewed escape-free physics pulley joint',
+      },
+      {
+        declarationFingerprint: 'sha256:7a2a5c30028a7ebe59854b90338612f99a484da9d05bd71eaaa7de448bbb2b7c',
+        id: '@flighthq/types:interface#Physics2DGearJoint',
+        purpose: 'reviewed escape-free physics gear joint',
+      },
+      {
+        declarationFingerprint: 'sha256:70b93b46c79fe10b1370af8bf3c98f46e51df7082eb8bc53ed35ae7680de8fd4',
+        id: '@flighthq/types:interface#Physics2DWheelJoint',
+        purpose: 'reviewed escape-free physics wheel joint',
+      },
+      {
+        declarationFingerprint: 'sha256:f45bdd8ec8f78d20609e6978dab03cf413f0cd31305168d66313d7eb273099a1',
+        id: '@flighthq/types:interface#Physics2DRevoluteJoint',
+        purpose: 'reviewed escape-free physics revolute joint',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -1153,6 +1203,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const physicsJointCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'Physics2DGearJoint',
+            'Physics2DPrismaticJoint',
+            'Physics2DPulleyJoint',
+            'Physics2DRevoluteJoint',
+            'Physics2DWheelJoint',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1193,22 +1256,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_546,
+      auditOnlySchemas: 1_541,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 19_061,
-      directSchemas: 458,
+      directAccesses: 19_216,
+      directSchemas: 463,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 11_605,
+      pendingAccesses: 11_450,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_546,
+      newAuditOnly: 1_541,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1236,7 +1299,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(19_061);
+    expect(report.summary.directAccesses).toBe(19_216);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -1681,6 +1744,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'Physics2DPrismaticJoint',
+        44,
+        'sha256:7047314bcb16b3ebe3626298c25398572a66360e5e872133b33a21415c4e2e88',
+        'reviewed escape-free physics prismatic joint',
+      ],
+      [
+        'Physics2DPulleyJoint',
+        29,
+        'sha256:a169f1f5512b2bf35e7587690e6ef634681878d267026c2ab03a3dafd517ed12',
+        'reviewed escape-free physics pulley joint',
+      ],
+      [
+        'Physics2DGearJoint',
+        29,
+        'sha256:7a2a5c30028a7ebe59854b90338612f99a484da9d05bd71eaaa7de448bbb2b7c',
+        'reviewed escape-free physics gear joint',
+      ],
+      [
+        'Physics2DWheelJoint',
+        27,
+        'sha256:70b93b46c79fe10b1370af8bf3c98f46e51df7082eb8bc53ed35ae7680de8fd4',
+        'reviewed escape-free physics wheel joint',
+      ],
+      [
+        'Physics2DRevoluteJoint',
+        26,
+        'sha256:f45bdd8ec8f78d20609e6978dab03cf413f0cd31305168d66313d7eb273099a1',
+        'reviewed escape-free physics revolute joint',
+      ],
+    ] as const) {
+      expect(physicsJointCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'Physics2DWorld',
         217,
         'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
@@ -2053,6 +2158,20 @@ describe('typed struct analysis', () => {
         closed: true,
       });
     }
+    for (const physicsJointId of [
+      '@flighthq/types:interface#Physics2DGearJoint',
+      '@flighthq/types:interface#Physics2DPrismaticJoint',
+      '@flighthq/types:interface#Physics2DPulleyJoint',
+      '@flighthq/types:interface#Physics2DRevoluteJoint',
+      '@flighthq/types:interface#Physics2DWheelJoint',
+    ]) {
+      expect(classAuditById.get(physicsJointId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer', 'object-literal-spread'],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.has(physicsJointId)).toBe(false);
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -2246,6 +2365,14 @@ describe('typed struct analysis', () => {
     const generatedSweepCollision = readFileSync('generated/flighthq/collision/SweepCollisionShape.hx', 'utf8');
     expect(generatedSweepCollision).not.toMatch(/\(cast out : CollisionTimeOfImpact\)\./u);
     expect(generatedSweepCollision).not.toMatch(/_Runtime\.field\(out,/u);
+    const generatedPhysicsJoints = readFileSync('generated/flighthq/physics2d/Joints.hx', 'utf8');
+    expect(generatedPhysicsJoints).not.toMatch(
+      /\(cast (?:gear|prismatic|pulley|revolute|wheel) : Physics2D(?:Gear|Prismatic|Pulley|Revolute|Wheel)Joint\)\./u,
+    );
+    expect(generatedPhysicsJoints).not.toMatch(/_Runtime\.field\((?:gear|prismatic|pulley|revolute|wheel),/u);
+    const generatedPhysicsDebugGeometry = readFileSync('generated/flighthq/physics2d/DebugGeometry.hx', 'utf8');
+    expect(generatedPhysicsDebugGeometry).not.toMatch(/\(cast pulley : Physics2DPulleyJoint\)\./u);
+    expect(generatedPhysicsDebugGeometry).not.toMatch(/_Runtime\.field\(pulley,/u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

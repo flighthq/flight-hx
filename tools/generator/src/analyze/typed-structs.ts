@@ -318,6 +318,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#CollisionContactManifold',
     purpose: 'reviewed escape-free collision contact manifold',
   },
+  {
+    declarationFingerprint: 'sha256:7047314bcb16b3ebe3626298c25398572a66360e5e872133b33a21415c4e2e88',
+    id: '@flighthq/types:interface#Physics2DPrismaticJoint',
+    purpose: 'reviewed escape-free physics prismatic joint',
+  },
+  {
+    declarationFingerprint: 'sha256:a169f1f5512b2bf35e7587690e6ef634681878d267026c2ab03a3dafd517ed12',
+    id: '@flighthq/types:interface#Physics2DPulleyJoint',
+    purpose: 'reviewed escape-free physics pulley joint',
+  },
+  {
+    declarationFingerprint: 'sha256:7a2a5c30028a7ebe59854b90338612f99a484da9d05bd71eaaa7de448bbb2b7c',
+    id: '@flighthq/types:interface#Physics2DGearJoint',
+    purpose: 'reviewed escape-free physics gear joint',
+  },
+  {
+    declarationFingerprint: 'sha256:70b93b46c79fe10b1370af8bf3c98f46e51df7082eb8bc53ed35ae7680de8fd4',
+    id: '@flighthq/types:interface#Physics2DWheelJoint',
+    purpose: 'reviewed escape-free physics wheel joint',
+  },
+  {
+    declarationFingerprint: 'sha256:f45bdd8ec8f78d20609e6978dab03cf413f0cd31305168d66313d7eb273099a1',
+    id: '@flighthq/types:interface#Physics2DRevoluteJoint',
+    purpose: 'reviewed escape-free physics revolute joint',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(
