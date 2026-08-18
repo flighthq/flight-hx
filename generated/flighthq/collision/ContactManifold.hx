@@ -8,11 +8,11 @@ import flighthq.types.Collision.CollisionContactPoint;
 
 class ContactManifold {
   public static function clearCollisionContactManifold(out:CollisionContactManifold):Void {
-    ((cast out : CollisionContactManifold).overlapping = false);
-    ((cast out : CollisionContactManifold).normalX = 0.0);
-    ((cast out : CollisionContactManifold).normalY = 0.0);
-    ((cast out : CollisionContactManifold).depth = 0.0);
-    ((cast out : CollisionContactManifold).pointCount = 0.0);
+    (out.overlapping = cast (false : Bool));
+    (out.normalX = cast (0.0 : Float));
+    (out.normalY = cast (0.0 : Float));
+    (out.depth = cast (0.0 : Float));
+    (out.pointCount = cast (0.0 : Float));
   }
 
   public static function createCollisionContactManifold():CollisionContactManifold {

@@ -29,8 +29,8 @@ class SweepCollisionShape {
       return cast false;
     }
     if ((cast (cast collideContactManifold(({ final __callArgument3:Dynamic = shapeA; __callArgument3; }), ({ final __callArgument4:Dynamic = shapeB; __callArgument4; }), ({ final __callArgument5:Dynamic = SweepCollisionShape.manifoldScratch__sweepCollisionShape; __callArgument5; })) : Bool) : Bool)) {
-      ((cast out : CollisionTimeOfImpact).normalX = (cast SweepCollisionShape.canonicalZero__sweepCollisionShape((cast (cast SweepCollisionShape.manifoldScratch__sweepCollisionShape : CollisionContactManifold).normalX : Float)) : Float));
-      ((cast out : CollisionTimeOfImpact).normalY = (cast SweepCollisionShape.canonicalZero__sweepCollisionShape((cast (cast SweepCollisionShape.manifoldScratch__sweepCollisionShape : CollisionContactManifold).normalY : Float)) : Float));
+      (out.normalX = cast ((cast SweepCollisionShape.canonicalZero__sweepCollisionShape((cast SweepCollisionShape.manifoldScratch__sweepCollisionShape.normalX : Float)) : Float) : Float));
+      (out.normalY = cast ((cast SweepCollisionShape.canonicalZero__sweepCollisionShape((cast SweepCollisionShape.manifoldScratch__sweepCollisionShape.normalY : Float)) : Float) : Float));
       SweepCollisionShape.writeShapeASupport__sweepCollisionShape(({ final __callArgument6:Dynamic = shapeA; __callArgument6; }), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument7:Dynamic = out; __callArgument7; }));
       return cast true;
     }
@@ -51,8 +51,8 @@ class SweepCollisionShape {
       if ((cast !_Runtime.strictEquals(verticesA, null) : Bool)) {
         (hit = cast ((cast SweepCollisionShape.sweepCirclePolygon__sweepCollisionShape((cast (cast shapeB : { var x:Float; }).x : Float), (cast (cast shapeB : { var y:Float; }).y : Float), (cast (cast shapeB : { var radius:Float; }).radius : Float), ({ final __callArgument15:Dynamic = verticesA; __callArgument15; }), (cast -relativeX : Float), (cast -relativeY : Float), ({ final __callArgument16:Dynamic = out; __callArgument16; })) : Bool) : Dynamic));
         if ((cast hit : Bool)) {
-          ((cast out : CollisionTimeOfImpact).normalX = -(cast out : CollisionTimeOfImpact).normalX);
-          ((cast out : CollisionTimeOfImpact).normalY = -(cast out : CollisionTimeOfImpact).normalY);
+          (out.normalX = cast (-out.normalX : Float));
+          (out.normalY = cast (-out.normalY : Float));
         }
       }
     } else {
@@ -62,13 +62,13 @@ class SweepCollisionShape {
         (hit = cast ((cast SweepCollisionShape.sweepPolygonPolygon__sweepCollisionShape(({ final __callArgument21:Dynamic = verticesA; __callArgument21; }), ({ final __callArgument22:Dynamic = verticesB; __callArgument22; }), (cast relativeX : Float), (cast relativeY : Float), (cast maxFraction : Float), ({ final __callArgument23:Dynamic = out; __callArgument23; })) : Bool) : Dynamic));
       }
     } }
-    if ((cast ((cast ((cast !(cast hit : Bool) : Bool) || (cast ((cast (cast out : CollisionTimeOfImpact).fraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast out : CollisionTimeOfImpact).fraction : Float) > (cast maxFraction : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !(cast hit : Bool) : Bool) || (cast ((cast out.fraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast out.fraction : Float) > (cast maxFraction : Float)) : Bool)) : Bool)) {
       SweepCollisionShape.clearCollisionTimeOfImpact__sweepCollisionShape(({ final __callArgument24:Dynamic = out; __callArgument24; }));
       return cast false;
     }
-    ((cast out : CollisionTimeOfImpact).normalX = (cast SweepCollisionShape.canonicalZero__sweepCollisionShape((cast (cast out : CollisionTimeOfImpact).normalX : Float)) : Float));
-    ((cast out : CollisionTimeOfImpact).normalY = (cast SweepCollisionShape.canonicalZero__sweepCollisionShape((cast (cast out : CollisionTimeOfImpact).normalY : Float)) : Float));
-    SweepCollisionShape.writeShapeASupport__sweepCollisionShape(({ final __callArgument25:Dynamic = shapeA; __callArgument25; }), (cast (translationAX * (cast out : CollisionTimeOfImpact).fraction) : Float), (cast (translationAY * (cast out : CollisionTimeOfImpact).fraction) : Float), ({ final __callArgument26:Dynamic = out; __callArgument26; }));
+    (out.normalX = cast ((cast SweepCollisionShape.canonicalZero__sweepCollisionShape((cast out.normalX : Float)) : Float) : Float));
+    (out.normalY = cast ((cast SweepCollisionShape.canonicalZero__sweepCollisionShape((cast out.normalY : Float)) : Float) : Float));
+    SweepCollisionShape.writeShapeASupport__sweepCollisionShape(({ final __callArgument25:Dynamic = shapeA; __callArgument25; }), (cast (translationAX * out.fraction) : Float), (cast (translationAY * out.fraction) : Float), ({ final __callArgument26:Dynamic = out; __callArgument26; }));
     return cast true;
     return cast null;
   }
@@ -100,9 +100,9 @@ class SweepCollisionShape {
     normalY = (offsetY + (velocityY * fraction));
     length = _Runtime.hypot(normalX, normalY);
     if ((cast !(cast _Runtime.compare(length, 0.0, '>') : Bool) : Bool)) { return cast false; }
-    ((cast out : CollisionTimeOfImpact).fraction = fraction);
-    ((cast out : CollisionTimeOfImpact).normalX = (normalX / length));
-    ((cast out : CollisionTimeOfImpact).normalY = (normalY / length));
+    (out.fraction = cast (fraction : Float));
+    (out.normalX = cast ((normalX / length) : Float));
+    (out.normalY = cast ((normalY / length) : Float));
     return cast true;
     return cast null;
   }
@@ -160,9 +160,9 @@ class SweepCollisionShape {
       }
     }
     if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bestFraction] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
-    ((cast out : CollisionTimeOfImpact).fraction = bestFraction);
-    ((cast out : CollisionTimeOfImpact).normalX = bestNormalX);
-    ((cast out : CollisionTimeOfImpact).normalY = bestNormalY);
+    (out.fraction = cast (bestFraction : Float));
+    (out.normalX = cast (bestNormalX : Float));
+    (out.normalY = cast (bestNormalY : Float));
     return cast true;
     return cast null;
   }
@@ -175,9 +175,9 @@ class SweepCollisionShape {
     if ((cast !(cast (cast SweepCollisionShape.sweepPolygonAxes__sweepCollisionShape(({ final __callArgument28:Dynamic = verticesA; __callArgument28; }), ({ final __callArgument29:Dynamic = verticesA; __callArgument29; }), ({ final __callArgument30:Dynamic = verticesB; __callArgument30; }), (cast velocityX : Float), (cast velocityY : Float)) : Bool) : Bool) : Bool)) { return cast false; }
     if ((cast !(cast (cast SweepCollisionShape.sweepPolygonAxes__sweepCollisionShape(({ final __callArgument31:Dynamic = verticesB; __callArgument31; }), ({ final __callArgument32:Dynamic = verticesA; __callArgument32; }), ({ final __callArgument33:Dynamic = verticesB; __callArgument33; }), (cast velocityX : Float), (cast velocityY : Float)) : Bool) : Bool) : Bool)) { return cast false; }
     if ((cast ((cast ((cast ((cast SweepCollisionShape.sweepEntry__sweepCollisionShape : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast SweepCollisionShape.sweepEntry__sweepCollisionShape : Float) > (cast SweepCollisionShape.sweepExit__sweepCollisionShape : Float)) : Bool)) : Bool) || (cast ((cast SweepCollisionShape.sweepEntry__sweepCollisionShape : Float) > (cast maxFraction : Float)) : Bool)) : Bool)) { return cast false; }
-    ((cast out : CollisionTimeOfImpact).fraction = SweepCollisionShape.sweepEntry__sweepCollisionShape);
-    ((cast out : CollisionTimeOfImpact).normalX = SweepCollisionShape.sweepNormalX__sweepCollisionShape);
-    ((cast out : CollisionTimeOfImpact).normalY = SweepCollisionShape.sweepNormalY__sweepCollisionShape);
+    (out.fraction = cast (SweepCollisionShape.sweepEntry__sweepCollisionShape : Float));
+    (out.normalX = cast (SweepCollisionShape.sweepNormalX__sweepCollisionShape : Float));
+    (out.normalY = cast (SweepCollisionShape.sweepNormalY__sweepCollisionShape : Float));
     return cast true;
     return cast null;
   }
@@ -280,8 +280,8 @@ class SweepCollisionShape {
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals((cast shape : { var kind:String; }).kind, 'circle') : Bool)) {
-      ((cast out : CollisionTimeOfImpact).x = (((cast shape : { var x:Float; }).x + translationX) - ((cast out : CollisionTimeOfImpact).normalX * (cast shape : { var radius:Float; }).radius)));
-      ((cast out : CollisionTimeOfImpact).y = (((cast shape : { var y:Float; }).y + translationY) - ((cast out : CollisionTimeOfImpact).normalY * (cast shape : { var radius:Float; }).radius)));
+      (out.x = cast ((((cast shape : { var x:Float; }).x + translationX) - (out.normalX * (cast shape : { var radius:Float; }).radius)) : Float));
+      (out.y = cast ((((cast shape : { var y:Float; }).y + translationY) - (out.normalY * (cast shape : { var radius:Float; }).radius)) : Float));
       return;
     }
     vertices = (cast SweepCollisionShape.writeShapeVertices__sweepCollisionShape(({ final __callArgument40:Dynamic = shape; __callArgument40; }), ({ final __callArgument41:Dynamic = SweepCollisionShape.verticesAScratch__sweepCollisionShape; __callArgument41; })) : Null<flighthq._internal._ArrayLike<Float>>);
@@ -290,7 +290,7 @@ class SweepCollisionShape {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(vertices, 'length') : Float)) : Bool)) {
-        var projection:Float = (_Runtime.multiplyNumbers(-(cast out : CollisionTimeOfImpact).normalX, _Runtime.getIndex(vertices, i)) - _Runtime.multiplyNumbers((cast out : CollisionTimeOfImpact).normalY, _Runtime.getIndex(vertices, (i + 1.0))));
+        var projection:Float = (_Runtime.multiplyNumbers(-out.normalX, _Runtime.getIndex(vertices, i)) - _Runtime.multiplyNumbers(out.normalY, _Runtime.getIndex(vertices, (i + 1.0))));
         if ((cast ((cast projection : Float) > (cast best : Float)) : Bool)) { (best = cast (projection : Dynamic)); }
         (i = cast ((i + 2.0) : Dynamic));
       }
@@ -302,7 +302,7 @@ class SweepCollisionShape {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(vertices, 'length') : Float)) : Bool)) {
-        var projection:Float = (_Runtime.multiplyNumbers(-(cast out : CollisionTimeOfImpact).normalX, _Runtime.getIndex(vertices, i)) - _Runtime.multiplyNumbers((cast out : CollisionTimeOfImpact).normalY, _Runtime.getIndex(vertices, (i + 1.0))));
+        var projection:Float = (_Runtime.multiplyNumbers(-out.normalX, _Runtime.getIndex(vertices, i)) - _Runtime.multiplyNumbers(out.normalY, _Runtime.getIndex(vertices, (i + 1.0))));
         if ((cast ((cast HxMath.abs((projection - best)) : Float) > (cast epsilon : Float)) : Bool)) { (i = cast ((i + 2.0) : Dynamic)); continue; }
         (x = cast ((x + _Runtime.getIndex(vertices, i)) : Dynamic));
         (y = cast ((y + _Runtime.getIndex(vertices, (i + 1.0))) : Dynamic));
@@ -311,8 +311,8 @@ class SweepCollisionShape {
       }
     }
     if ((cast ((cast count : Float) > (cast 0.0 : Float)) : Bool)) {
-      ((cast out : CollisionTimeOfImpact).x = ((x / count) + translationX));
-      ((cast out : CollisionTimeOfImpact).y = ((y / count) + translationY));
+      (out.x = cast (((x / count) + translationX) : Float));
+      (out.y = cast (((y / count) + translationY) : Float));
     }
   }
 
@@ -348,11 +348,11 @@ class SweepCollisionShape {
   }
 
   public static function clearCollisionTimeOfImpact__sweepCollisionShape(out:CollisionTimeOfImpact):Void {
-    ((cast out : CollisionTimeOfImpact).fraction = 0.0);
-    ((cast out : CollisionTimeOfImpact).x = 0.0);
-    ((cast out : CollisionTimeOfImpact).y = 0.0);
-    ((cast out : CollisionTimeOfImpact).normalX = 0.0);
-    ((cast out : CollisionTimeOfImpact).normalY = 0.0);
+    (out.fraction = cast (0.0 : Float));
+    (out.x = cast (0.0 : Float));
+    (out.y = cast (0.0 : Float));
+    (out.normalX = cast (0.0 : Float));
+    (out.normalY = cast (0.0 : Float));
   }
 
   public static function canonicalZero__sweepCollisionShape(value:Float):Float {

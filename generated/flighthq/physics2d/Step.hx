@@ -189,8 +189,8 @@ class Step {
       _Runtime.callProperty(world.contacts, 'push', cast ([contact] : Array<Dynamic>));
     }
     if ((cast created : Bool)) { _Runtime.callProperty((cast world.events : Physics2DContactEvents).began, 'push', cast ([contact] : Array<Dynamic>)); }
-    ((cast contact : { var normalX:Float; }).normalX = cast (_Runtime.field(manifold, 'normalX') : Float));
-    ((cast contact : { var normalY:Float; }).normalY = cast (_Runtime.field(manifold, 'normalY') : Float));
+    ((cast contact : { var normalX:Float; }).normalX = cast (manifold.normalX : Float));
+    ((cast contact : { var normalY:Float; }).normalY = cast (manifold.normalY : Float));
     ((cast contact : { var friction:Float; }).friction = cast (friction : Float));
     ((cast contact : { var restitution:Float; }).restitution = cast (restitution : Float));
     ((cast contact : { var enabled:Bool; }).enabled = cast (true : Bool));
@@ -205,8 +205,8 @@ class Step {
     oldTangent1 = ((cast ((cast oldPointCount : Float) > (cast 1.0 : Float)) : Bool) ? (cast (cast flighthq._internal._StaticIndex.readArray((cast contact : { var points:Array<Physics2DContactPoint>; }).points, 1.0) : Physics2DContactPoint).tangentImpulse : Dynamic) : (cast 0.0 : Dynamic));
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(manifold, 'pointCount') : Float)) : Bool)) {
-        var source:CollisionContactPoint = flighthq._internal._StaticIndex.readArray(_Runtime.field(manifold, 'points'), i);
+      while ((cast ((cast i : Float) < (cast manifold.pointCount : Float)) : Bool)) {
+        var source:CollisionContactPoint = flighthq._internal._StaticIndex.readArray(manifold.points, i);
         var target:Physics2DContactPoint = flighthq._internal._StaticIndex.readArray((cast contact : { var points:Array<Physics2DContactPoint>; }).points, i);
         var normalImpulse:Float = 0.0;
         var tangentImpulse:Float = 0.0;
@@ -226,7 +226,7 @@ class Step {
         i++;
       }
     }
-    ((cast contact : { var pointCount:Float; }).pointCount = cast (_Runtime.field(manifold, 'pointCount') : Float));
+    ((cast contact : { var pointCount:Float; }).pointCount = cast (manifold.pointCount : Float));
     return cast contact;
     return cast null;
   }
@@ -294,12 +294,12 @@ class Step {
         updatePhysics2DColliderWorldShape(({ final __callArgument49:Dynamic = colliderA; __callArgument49; }), ({ final __callArgument50:Dynamic = bodyA; __callArgument50; }));
         updatePhysics2DColliderWorldShape(({ final __callArgument51:Dynamic = colliderB; __callArgument51; }), ({ final __callArgument52:Dynamic = bodyB; __callArgument52; }));
         if ((cast !(cast (cast collideContactManifold(colliderA.world, colliderB.world, ({ final __callArgument53:Dynamic = Step.manifoldScratch__step; __callArgument53; })) : Bool) : Bool) : Bool)) { contactAt++; continue; }
-        var normalX:Float = (cast Step.manifoldScratch__step : CollisionContactManifold).normalX;
-        var normalY:Float = (cast Step.manifoldScratch__step : CollisionContactManifold).normalY;
+        var normalX:Float = Step.manifoldScratch__step.normalX;
+        var normalY:Float = Step.manifoldScratch__step.normalY;
         {
           var i:Float = 0.0;
-          while ((cast ((cast i : Float) < (cast (cast Step.manifoldScratch__step : CollisionContactManifold).pointCount : Float)) : Bool)) {
-            var point:CollisionContactPoint = flighthq._internal._StaticIndex.readArray((cast Step.manifoldScratch__step : CollisionContactManifold).points, i);
+          while ((cast ((cast i : Float) < (cast Step.manifoldScratch__step.pointCount : Float)) : Bool)) {
+            var point:CollisionContactPoint = flighthq._internal._StaticIndex.readArray(Step.manifoldScratch__step.points, i);
             var excess:Float = ((cast point : CollisionContactPoint).depth - config.penetrationSlop);
             if ((cast ((cast excess : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
             var centerAX:Float = (((cast bodyA : RigidBody2D).x + _Runtime.multiplyNumbers((cast bodyA : RigidBody2D).centerX, HxMath.cos((cast bodyA : RigidBody2D).angle))) - _Runtime.multiplyNumbers((cast bodyA : RigidBody2D).centerY, HxMath.sin((cast bodyA : RigidBody2D).angle)));
@@ -652,19 +652,19 @@ class Step {
               var second:Physics2DCollider = flighthq._internal._StaticIndex.readArray((cast bodyB : RigidBody2D).colliders, colliderB);
               if ((cast ((cast second.sensor : Bool) || (cast !(cast (cast Step.isPhysics2DColliderPairEnabled__step(({ final __callArgument126:Dynamic = first; __callArgument126; }), ({ final __callArgument127:Dynamic = second; __callArgument127; })) : Bool) : Bool) : Bool)) : Bool)) { colliderB++; continue; }
               if ((cast !_Runtime.strictEquals((cast Step.findPhysics2DContact__step(({ final __callArgument128:Dynamic = world; __callArgument128; }), (cast (cast bodyA : RigidBody2D).index : Float), (cast (cast bodyB : RigidBody2D).index : Float), (cast colliderA : Float), (cast colliderB : Float)) : Null<Physics2DContact>), null) : Bool)) { colliderB++; continue; }
-              if ((cast ((cast ((cast !(cast (cast Step.findPhysics2DColliderImpact__step(({ final __callArgument129:Dynamic = world; __callArgument129; }), ({ final __callArgument130:Dynamic = bodyA; __callArgument130; }), ({ final __callArgument131:Dynamic = bodyB; __callArgument131; }), ({ final __callArgument132:Dynamic = first; __callArgument132; }), ({ final __callArgument133:Dynamic = second; __callArgument133; }), (cast translationAX : Float), (cast translationAY : Float), (cast translationBX : Float), (cast translationBY : Float), (cast dt : Float)) : Bool) : Bool) : Bool) || (cast ((cast (cast Step.ccdSweepScratch__step : CollisionTimeOfImpact).fraction : Float) > (cast Step.ccdImpactFraction__step : Float)) : Bool)) : Bool) || (cast !(cast (cast Step.isPhysics2DImpactApproaching__step(({ final __callArgument134:Dynamic = bodyA; __callArgument134; }), ({ final __callArgument135:Dynamic = bodyB; __callArgument135; }), ({ final __callArgument136:Dynamic = Step.ccdSweepScratch__step; __callArgument136; }), (cast translationAX : Float), (cast translationAY : Float), (cast translationBX : Float), (cast translationBY : Float), (cast ((cast bodyA : RigidBody2D).angularVelocity * dt) : Float), (cast ((cast bodyB : RigidBody2D).angularVelocity * dt) : Float)) : Bool) : Bool) : Bool)) : Bool)) {
+              if ((cast ((cast ((cast !(cast (cast Step.findPhysics2DColliderImpact__step(({ final __callArgument129:Dynamic = world; __callArgument129; }), ({ final __callArgument130:Dynamic = bodyA; __callArgument130; }), ({ final __callArgument131:Dynamic = bodyB; __callArgument131; }), ({ final __callArgument132:Dynamic = first; __callArgument132; }), ({ final __callArgument133:Dynamic = second; __callArgument133; }), (cast translationAX : Float), (cast translationAY : Float), (cast translationBX : Float), (cast translationBY : Float), (cast dt : Float)) : Bool) : Bool) : Bool) || (cast ((cast Step.ccdSweepScratch__step.fraction : Float) > (cast Step.ccdImpactFraction__step : Float)) : Bool)) : Bool) || (cast !(cast (cast Step.isPhysics2DImpactApproaching__step(({ final __callArgument134:Dynamic = bodyA; __callArgument134; }), ({ final __callArgument135:Dynamic = bodyB; __callArgument135; }), ({ final __callArgument136:Dynamic = Step.ccdSweepScratch__step; __callArgument136; }), (cast translationAX : Float), (cast translationAY : Float), (cast translationBX : Float), (cast translationBY : Float), (cast ((cast bodyA : RigidBody2D).angularVelocity * dt) : Float), (cast ((cast bodyB : RigidBody2D).angularVelocity * dt) : Float)) : Bool) : Bool) : Bool)) : Bool)) {
                 colliderB++;
                 continue;
               }
-              (Step.ccdImpactFraction__step = cast ((cast Step.ccdSweepScratch__step : CollisionTimeOfImpact).fraction : Dynamic));
+              (Step.ccdImpactFraction__step = cast (Step.ccdSweepScratch__step.fraction : Dynamic));
               (Step.ccdImpactBodyA__step = cast ((cast bodyA : RigidBody2D).index : Dynamic));
               (Step.ccdImpactBodyB__step = cast ((cast bodyB : RigidBody2D).index : Dynamic));
               (Step.ccdImpactColliderA__step = cast (colliderA : Dynamic));
               (Step.ccdImpactColliderB__step = cast (colliderB : Dynamic));
-              (Step.ccdImpactX__step = cast ((cast Step.ccdSweepScratch__step : CollisionTimeOfImpact).x : Dynamic));
-              (Step.ccdImpactY__step = cast ((cast Step.ccdSweepScratch__step : CollisionTimeOfImpact).y : Dynamic));
-              (Step.ccdImpactNormalX__step = cast ((cast Step.ccdSweepScratch__step : CollisionTimeOfImpact).normalX : Dynamic));
-              (Step.ccdImpactNormalY__step = cast ((cast Step.ccdSweepScratch__step : CollisionTimeOfImpact).normalY : Dynamic));
+              (Step.ccdImpactX__step = cast (Step.ccdSweepScratch__step.x : Dynamic));
+              (Step.ccdImpactY__step = cast (Step.ccdSweepScratch__step.y : Dynamic));
+              (Step.ccdImpactNormalX__step = cast (Step.ccdSweepScratch__step.normalX : Dynamic));
+              (Step.ccdImpactNormalY__step = cast (Step.ccdSweepScratch__step.normalY : Dynamic));
               colliderB++;
             }
           }
@@ -719,12 +719,12 @@ class Step {
           }
         }
         (cast Step.testPhysics2DColliderOverlapAtFraction__step(({ final __callArgument150:Dynamic = bodyA; __callArgument150; }), ({ final __callArgument151:Dynamic = bodyB; __callArgument151; }), ({ final __callArgument152:Dynamic = colliderA; __callArgument152; }), ({ final __callArgument153:Dynamic = colliderB; __callArgument153; }), (cast translationAX : Float), (cast translationAY : Float), (cast translationBX : Float), (cast translationBY : Float), (cast rotationA : Float), (cast rotationB : Float), (cast upper : Float)) : Bool);
-        var point:CollisionContactPoint = flighthq._internal._StaticIndex.readArray((cast Step.ccdRotationalManifoldScratch__step : CollisionContactManifold).points, 0.0);
-        ((cast Step.ccdSweepScratch__step : CollisionTimeOfImpact).fraction = upper);
-        ((cast Step.ccdSweepScratch__step : CollisionTimeOfImpact).x = (cast point : CollisionContactPoint).x);
-        ((cast Step.ccdSweepScratch__step : CollisionTimeOfImpact).y = (cast point : CollisionContactPoint).y);
-        ((cast Step.ccdSweepScratch__step : CollisionTimeOfImpact).normalX = (cast Step.ccdRotationalManifoldScratch__step : CollisionContactManifold).normalX);
-        ((cast Step.ccdSweepScratch__step : CollisionTimeOfImpact).normalY = (cast Step.ccdRotationalManifoldScratch__step : CollisionContactManifold).normalY);
+        var point:CollisionContactPoint = flighthq._internal._StaticIndex.readArray(Step.ccdRotationalManifoldScratch__step.points, 0.0);
+        (Step.ccdSweepScratch__step.fraction = cast (upper : Float));
+        (Step.ccdSweepScratch__step.x = cast ((cast point : CollisionContactPoint).x : Float));
+        (Step.ccdSweepScratch__step.y = cast ((cast point : CollisionContactPoint).y : Float));
+        (Step.ccdSweepScratch__step.normalX = cast (Step.ccdRotationalManifoldScratch__step.normalX : Float));
+        (Step.ccdSweepScratch__step.normalY = cast (Step.ccdRotationalManifoldScratch__step.normalY : Float));
         return cast true;
         sample++;
       }
@@ -810,13 +810,13 @@ class Step {
     var rAY:Float = cast _Runtime.UNDEFINED;
     var rBX:Float = cast _Runtime.UNDEFINED;
     var rBY:Float = cast _Runtime.UNDEFINED;
-    Step.writePhysics2DBodyCenter__step(({ final __callArgument173:Dynamic = bodyA; __callArgument173; }), (cast _Runtime.multiplyNumbers(translationAX, _Runtime.field(impact, 'fraction')) : Float), (cast _Runtime.multiplyNumbers(translationAY, _Runtime.field(impact, 'fraction')) : Float), (cast _Runtime.multiplyNumbers(rotationA, _Runtime.field(impact, 'fraction')) : Float), ({ final __callArgument174:Dynamic = Step.ccdCenterAScratch__step; __callArgument174; }));
-    Step.writePhysics2DBodyCenter__step(({ final __callArgument175:Dynamic = bodyB; __callArgument175; }), (cast _Runtime.multiplyNumbers(translationBX, _Runtime.field(impact, 'fraction')) : Float), (cast _Runtime.multiplyNumbers(translationBY, _Runtime.field(impact, 'fraction')) : Float), (cast _Runtime.multiplyNumbers(rotationB, _Runtime.field(impact, 'fraction')) : Float), ({ final __callArgument176:Dynamic = Step.ccdCenterBScratch__step; __callArgument176; }));
-    rAX = _Runtime.subtractNumbers(_Runtime.field(impact, 'x'), (cast Step.ccdCenterAScratch__step : { var x:Float; var y:Float; }).x);
-    rAY = _Runtime.subtractNumbers(_Runtime.field(impact, 'y'), (cast Step.ccdCenterAScratch__step : { var x:Float; var y:Float; }).y);
-    rBX = _Runtime.subtractNumbers(_Runtime.field(impact, 'x'), (cast Step.ccdCenterBScratch__step : { var x:Float; var y:Float; }).x);
-    rBY = _Runtime.subtractNumbers(_Runtime.field(impact, 'y'), (cast Step.ccdCenterBScratch__step : { var x:Float; var y:Float; }).y);
-    return cast ((cast (cast Step.relativePhysics2DPointVelocity__step(({ final __callArgument177:Dynamic = bodyA; __callArgument177; }), ({ final __callArgument178:Dynamic = bodyB; __callArgument178; }), (cast rAX : Float), (cast rAY : Float), (cast rBX : Float), (cast rBY : Float), (cast _Runtime.field(impact, 'normalX') : Float), (cast _Runtime.field(impact, 'normalY') : Float)) : Float) : Float) < (cast -1e-9 : Float));
+    Step.writePhysics2DBodyCenter__step(({ final __callArgument173:Dynamic = bodyA; __callArgument173; }), (cast (translationAX * impact.fraction) : Float), (cast (translationAY * impact.fraction) : Float), (cast (rotationA * impact.fraction) : Float), ({ final __callArgument174:Dynamic = Step.ccdCenterAScratch__step; __callArgument174; }));
+    Step.writePhysics2DBodyCenter__step(({ final __callArgument175:Dynamic = bodyB; __callArgument175; }), (cast (translationBX * impact.fraction) : Float), (cast (translationBY * impact.fraction) : Float), (cast (rotationB * impact.fraction) : Float), ({ final __callArgument176:Dynamic = Step.ccdCenterBScratch__step; __callArgument176; }));
+    rAX = (impact.x - (cast Step.ccdCenterAScratch__step : { var x:Float; var y:Float; }).x);
+    rAY = (impact.y - (cast Step.ccdCenterAScratch__step : { var x:Float; var y:Float; }).y);
+    rBX = (impact.x - (cast Step.ccdCenterBScratch__step : { var x:Float; var y:Float; }).x);
+    rBY = (impact.y - (cast Step.ccdCenterBScratch__step : { var x:Float; var y:Float; }).y);
+    return cast ((cast (cast Step.relativePhysics2DPointVelocity__step(({ final __callArgument177:Dynamic = bodyA; __callArgument177; }), ({ final __callArgument178:Dynamic = bodyB; __callArgument178; }), (cast rAX : Float), (cast rAY : Float), (cast rBX : Float), (cast rBY : Float), (cast impact.normalX : Float), (cast impact.normalY : Float)) : Float) : Float) < (cast -1e-9 : Float));
     return cast null;
   }
 
@@ -888,13 +888,13 @@ class Step {
     var restitution:Float = cast _Runtime.UNDEFINED;
     var enabled:Bool = cast _Runtime.UNDEFINED;
     var sensor:Bool = cast _Runtime.UNDEFINED;
-    ((cast Step.manifoldScratch__step : CollisionContactManifold).normalX = Step.ccdImpactNormalX__step);
-    ((cast Step.manifoldScratch__step : CollisionContactManifold).normalY = Step.ccdImpactNormalY__step);
-    ((cast Step.manifoldScratch__step : CollisionContactManifold).pointCount = 1.0);
-    ((cast flighthq._internal._StaticIndex.readArray((cast Step.manifoldScratch__step : CollisionContactManifold).points, 0.0) : CollisionContactPoint).x = Step.ccdImpactX__step);
-    ((cast flighthq._internal._StaticIndex.readArray((cast Step.manifoldScratch__step : CollisionContactManifold).points, 0.0) : CollisionContactPoint).y = Step.ccdImpactY__step);
-    ((cast flighthq._internal._StaticIndex.readArray((cast Step.manifoldScratch__step : CollisionContactManifold).points, 0.0) : CollisionContactPoint).depth = 0.0);
-    ((cast flighthq._internal._StaticIndex.readArray((cast Step.manifoldScratch__step : CollisionContactManifold).points, 0.0) : CollisionContactPoint).featureId = 0.0);
+    (Step.manifoldScratch__step.normalX = cast (Step.ccdImpactNormalX__step : Float));
+    (Step.manifoldScratch__step.normalY = cast (Step.ccdImpactNormalY__step : Float));
+    (Step.manifoldScratch__step.pointCount = cast (1.0 : Float));
+    ((cast flighthq._internal._StaticIndex.readArray(Step.manifoldScratch__step.points, 0.0) : CollisionContactPoint).x = Step.ccdImpactX__step);
+    ((cast flighthq._internal._StaticIndex.readArray(Step.manifoldScratch__step.points, 0.0) : CollisionContactPoint).y = Step.ccdImpactY__step);
+    ((cast flighthq._internal._StaticIndex.readArray(Step.manifoldScratch__step.points, 0.0) : CollisionContactPoint).depth = 0.0);
+    ((cast flighthq._internal._StaticIndex.readArray(Step.manifoldScratch__step.points, 0.0) : CollisionContactPoint).featureId = 0.0);
     contact = (cast Step.mergePhysics2DContact__step(({ final __callArgument202:Dynamic = world; __callArgument202; }), (cast _Runtime.field(bodyA, 'index') : Float), (cast _Runtime.field(bodyB, 'index') : Float), (cast Step.ccdImpactColliderA__step : Float), (cast Step.ccdImpactColliderB__step : Float), ({ final __callArgument203:Dynamic = Step.manifoldScratch__step; __callArgument203; }), (cast false : Bool), (cast (cast mixPhysics2DFriction((cast (cast (cast colliderA : { var material:Physics2DMaterial; }).material : Physics2DMaterial).friction : Float), (cast (cast (cast colliderB : { var material:Physics2DMaterial; }).material : Physics2DMaterial).friction : Float)) : Float) : Float), (cast (cast mixPhysics2DRestitution((cast (cast (cast colliderA : { var material:Physics2DMaterial; }).material : Physics2DMaterial).restitution : Float), (cast (cast (cast colliderB : { var material:Physics2DMaterial; }).material : Physics2DMaterial).restitution : Float)) : Float) : Float)) : Physics2DContact);
     preSolve = (cast world.contactHooks : Physics2DContactHooks).preSolve;
     if ((cast _Runtime.strictEquals(preSolve, null) : Bool)) { return cast contact; }

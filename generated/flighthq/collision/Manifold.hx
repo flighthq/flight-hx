@@ -7,10 +7,10 @@ import flighthq.types.Collision.CollisionManifold;
 
 class Manifold {
   public static function clearCollisionManifold(out:CollisionManifold):Void {
-    ((cast out : CollisionManifold).overlapping = false);
-    ((cast out : CollisionManifold).normalX = 0.0);
-    ((cast out : CollisionManifold).normalY = 0.0);
-    ((cast out : CollisionManifold).depth = 0.0);
+    (out.overlapping = cast (false : Bool));
+    (out.normalX = cast (0.0 : Float));
+    (out.normalY = cast (0.0 : Float));
+    (out.depth = cast (0.0 : Float));
   }
 
   public static function createCollisionManifold():CollisionManifold {

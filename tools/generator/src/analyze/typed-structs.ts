@@ -293,6 +293,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Scene3DRenderProxy',
     purpose: 'reviewed escape-free Scene3D render proxy',
   },
+  {
+    declarationFingerprint: 'sha256:9857efd596ffe6f3cd132688ed2264e350ad971fb56bbc6ab0c21e04bf59a1f8',
+    id: '@flighthq/types:interface#Velocity2D',
+    purpose: 'reviewed escape-free 2D velocity',
+  },
+  {
+    declarationFingerprint: 'sha256:daa52fb2451e8e19fe83cb7d0c336ee6443aa4ce7bed4067a08e12c74835c407',
+    id: '@flighthq/types:interface#CollisionTimeOfImpact',
+    purpose: 'reviewed escape-free collision time of impact',
+  },
+  {
+    declarationFingerprint: 'sha256:4db498c8ac68087d55e1489e845ae6c93c321ef8e63c84e2848d03acd2aca853',
+    id: '@flighthq/types:interface#Physics2DMassData',
+    purpose: 'reviewed escape-free physics mass data',
+  },
+  {
+    declarationFingerprint: 'sha256:3faf5007f7f5fcf04ee37c934cfbdb99659201a81ab1a767ebe1727536076405',
+    id: '@flighthq/types:interface#CollisionManifold',
+    purpose: 'reviewed escape-free collision manifold',
+  },
+  {
+    declarationFingerprint: 'sha256:6dfc439ab4ce910b63d1d1a0ad76eaa0bb434fe5a5a17db5b8af67a6ca5332ef',
+    id: '@flighthq/types:interface#CollisionContactManifold',
+    purpose: 'reviewed escape-free collision contact manifold',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

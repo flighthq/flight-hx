@@ -143,16 +143,16 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#CocosPlistParsed` | 0 | 2 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionAabb` | 0 | 4 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
 | `@flighthq/types:interface#CollisionCircle` | 0 | 3 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
-| `@flighthq/types:interface#CollisionContactManifold` | 0 | 6 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionContactManifold` | 44 | 6 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionContactPoint` | 0 | 4 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#CollisionManifold` | 0 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionManifold` | 45 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionObb` | 0 | 5 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
 | `@flighthq/types:interface#CollisionPoint` | 0 | 2 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
 | `@flighthq/types:interface#CollisionPolygon` | 0 | 1 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
 | `@flighthq/types:interface#CollisionRaycastHit` | 0 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionSegment` | 0 | 4 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
 | `@flighthq/types:interface#CollisionTestExplanation` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#CollisionTimeOfImpact` | 0 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionTimeOfImpact` | 61 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#ColorKeyframe` | 22 | 4 | 0 | 0 | 0 | 1 | 1 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#ColorLut` | 0 | 2 | 4 | 0 | 1 | 0 | 8 | 6 | no | `normalization-provenance` |
 | `@flighthq/types:interface#ColorLutAdjustment` | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | no | `container-transfer` |
@@ -389,7 +389,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Physics2DDebugLine` | 0 | 7 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DJointResolution` | 0 | 9 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DJointResolutionExplanation` | 0 | 3 | 0 | 1 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Physics2DMassData` | 0 | 4 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DMassData` | 45 | 4 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryFilter` | 0 | 6 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryHit` | 0 | 3 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryResult` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
@@ -680,7 +680,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#UpdaterBackend` | 0 | 21 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#UpdaterError` | 0 | 2 | 1 | 0 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#UpdaterSignatureConfig` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
-| `@flighthq/types:interface#Velocity2D` | 0 | 2 | 1 | 0 | 0 | 0 | 5 | 3 | yes | — |
+| `@flighthq/types:interface#Velocity2D` | 86 | 2 | 1 | 0 | 0 | 0 | 5 | 3 | yes | — |
 | `@flighthq/types:interface#VelocityField` | 0 | 2 | 2 | 1 | 0 | 0 | 3 | 1 | yes | — |
 | `@flighthq/types:interface#VelocitySample` | 0 | 4 | 1 | 2 | 0 | 0 | 4 | 2 | yes | — |
 | `@flighthq/types:interface#VertexAttribute` | 60 | 3 | 1 | 0 | 4 | 0 | 8 | 9 | no | `normalization-provenance` |

@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_551,
+      newAuditOnly: 1_546,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(455);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(460);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_551);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_546);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(53);
+    expect(newDirect).toHaveLength(58);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -375,6 +375,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'Scene3DRenderProxy',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free Scene3D render proxy',
+        }),
+        expect.objectContaining({
+          name: 'Velocity2D',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free 2D velocity',
+        }),
+        expect.objectContaining({
+          name: 'CollisionTimeOfImpact',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free collision time of impact',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DMassData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics mass data',
+        }),
+        expect.objectContaining({
+          name: 'CollisionManifold',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free collision manifold',
+        }),
+        expect.objectContaining({
+          name: 'CollisionContactManifold',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free collision contact manifold',
         }),
       ]),
     );
@@ -643,6 +668,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:79df9e528430e381be2d9b7b98b30e5784f18d6f57932943ae5ef00f34daaed5',
         id: '@flighthq/types:interface#Scene3DRenderProxy',
         purpose: 'reviewed escape-free Scene3D render proxy',
+      },
+      {
+        declarationFingerprint: 'sha256:9857efd596ffe6f3cd132688ed2264e350ad971fb56bbc6ab0c21e04bf59a1f8',
+        id: '@flighthq/types:interface#Velocity2D',
+        purpose: 'reviewed escape-free 2D velocity',
+      },
+      {
+        declarationFingerprint: 'sha256:daa52fb2451e8e19fe83cb7d0c336ee6443aa4ce7bed4067a08e12c74835c407',
+        id: '@flighthq/types:interface#CollisionTimeOfImpact',
+        purpose: 'reviewed escape-free collision time of impact',
+      },
+      {
+        declarationFingerprint: 'sha256:4db498c8ac68087d55e1489e845ae6c93c321ef8e63c84e2848d03acd2aca853',
+        id: '@flighthq/types:interface#Physics2DMassData',
+        purpose: 'reviewed escape-free physics mass data',
+      },
+      {
+        declarationFingerprint: 'sha256:3faf5007f7f5fcf04ee37c934cfbdb99659201a81ab1a767ebe1727536076405',
+        id: '@flighthq/types:interface#CollisionManifold',
+        purpose: 'reviewed escape-free collision manifold',
+      },
+      {
+        declarationFingerprint: 'sha256:6dfc439ab4ce910b63d1d1a0ad76eaa0bb434fe5a5a17db5b8af67a6ca5332ef',
+        id: '@flighthq/types:interface#CollisionContactManifold',
+        purpose: 'reviewed escape-free collision contact manifold',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -1090,6 +1140,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const collisionPhysicsCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'CollisionContactManifold',
+            'CollisionManifold',
+            'CollisionTimeOfImpact',
+            'Physics2DMassData',
+            'Velocity2D',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1130,22 +1193,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_551,
+      auditOnlySchemas: 1_546,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 18_780,
-      directSchemas: 453,
+      directAccesses: 19_061,
+      directSchemas: 458,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 11_886,
+      pendingAccesses: 11_605,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_551,
+      newAuditOnly: 1_546,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1173,7 +1236,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(18_780);
+    expect(report.summary.directAccesses).toBe(19_061);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -1576,6 +1639,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'Velocity2D',
+        86,
+        'sha256:9857efd596ffe6f3cd132688ed2264e350ad971fb56bbc6ab0c21e04bf59a1f8',
+        'reviewed escape-free 2D velocity',
+      ],
+      [
+        'CollisionTimeOfImpact',
+        61,
+        'sha256:daa52fb2451e8e19fe83cb7d0c336ee6443aa4ce7bed4067a08e12c74835c407',
+        'reviewed escape-free collision time of impact',
+      ],
+      [
+        'Physics2DMassData',
+        45,
+        'sha256:4db498c8ac68087d55e1489e845ae6c93c321ef8e63c84e2848d03acd2aca853',
+        'reviewed escape-free physics mass data',
+      ],
+      [
+        'CollisionManifold',
+        45,
+        'sha256:3faf5007f7f5fcf04ee37c934cfbdb99659201a81ab1a767ebe1727536076405',
+        'reviewed escape-free collision manifold',
+      ],
+      [
+        'CollisionContactManifold',
+        44,
+        'sha256:6dfc439ab4ce910b63d1d1a0ad76eaa0bb434fe5a5a17db5b8af67a6ca5332ef',
+        'reviewed escape-free collision contact manifold',
+      ],
+    ] as const) {
+      expect(collisionPhysicsCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'Physics2DWorld',
         217,
         'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
@@ -1931,6 +2036,23 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(renderRuntimeId)).toBe(false);
     }
+    for (const collisionPhysicsId of [
+      '@flighthq/types:interface#CollisionContactManifold',
+      '@flighthq/types:interface#CollisionManifold',
+      '@flighthq/types:interface#CollisionTimeOfImpact',
+      '@flighthq/types:interface#Physics2DMassData',
+      '@flighthq/types:interface#Velocity2D',
+    ]) {
+      expect(classAuditById.get(collisionPhysicsId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.get(collisionPhysicsId)?.nominalIdentity).toEqual({
+        blockerReasons: [],
+        closed: true,
+      });
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -2109,6 +2231,21 @@ describe('typed struct analysis', () => {
     const generatedWgpuMeshPipeline = readFileSync('generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx', 'utf8');
     expect(generatedWgpuMeshPipeline).not.toMatch(/\(cast proxy : Scene3DRenderProxy\)\./u);
     expect(generatedWgpuMeshPipeline).not.toMatch(/_Runtime\.field\(proxy,/u);
+    const generatedVelocity = readFileSync('generated/flighthq/velocity/TransformVelocity.hx', 'utf8');
+    expect(generatedVelocity).not.toMatch(/\(cast (?:a|b|current|out|previous|source|velocity) : Velocity2D\)\./u);
+    expect(generatedVelocity).not.toMatch(/_Runtime\.field\((?:a|b|current|out|previous|source|velocity),/u);
+    const generatedMassProperties = readFileSync('generated/flighthq/physics2d/MassProperties.hx', 'utf8');
+    expect(generatedMassProperties).not.toMatch(/\(cast out : Physics2DMassData\)\./u);
+    expect(generatedMassProperties).not.toMatch(/_Runtime\.field\(out,/u);
+    const generatedCollisionManifold = readFileSync('generated/flighthq/collision/Manifold.hx', 'utf8');
+    expect(generatedCollisionManifold).not.toMatch(/\(cast out : CollisionManifold\)\./u);
+    expect(generatedCollisionManifold).not.toMatch(/_Runtime\.field\(out,/u);
+    const generatedContactManifold = readFileSync('generated/flighthq/collision/ContactManifold.hx', 'utf8');
+    expect(generatedContactManifold).not.toMatch(/\(cast out : CollisionContactManifold\)\./u);
+    expect(generatedContactManifold).not.toMatch(/_Runtime\.field\(out,/u);
+    const generatedSweepCollision = readFileSync('generated/flighthq/collision/SweepCollisionShape.hx', 'utf8');
+    expect(generatedSweepCollision).not.toMatch(/\(cast out : CollisionTimeOfImpact\)\./u);
+    expect(generatedSweepCollision).not.toMatch(/_Runtime\.field\(out,/u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

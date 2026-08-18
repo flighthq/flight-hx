@@ -19981,7 +19981,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 44,
       "fields": 6,
       "id": "@flighthq/types:interface#CollisionContactManifold",
       "name": "CollisionContactManifold",
@@ -20059,7 +20059,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 45,
       "fields": 4,
       "id": "@flighthq/types:interface#CollisionManifold",
       "name": "CollisionManifold",
@@ -20677,7 +20677,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 61,
       "fields": 5,
       "id": "@flighthq/types:interface#CollisionTimeOfImpact",
       "name": "CollisionTimeOfImpact",
@@ -38043,7 +38043,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 45,
       "fields": 4,
       "id": "@flighthq/types:interface#Physics2DMassData",
       "name": "Physics2DMassData",
@@ -54663,7 +54663,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 86,
       "fields": 2,
       "id": "@flighthq/types:interface#Velocity2D",
       "name": "Velocity2D",

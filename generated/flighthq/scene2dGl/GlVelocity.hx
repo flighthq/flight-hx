@@ -50,11 +50,11 @@ class GlVelocity {
     var spatial:Spatial2DNode<Dynamic> = cast _Runtime.UNDEFINED;
     var bounds:Rectangle = cast _Runtime.UNDEFINED;
     (cast getVelocity(_Runtime.field(ctx, 'field'), ({ final __callArgument2:Dynamic = node; __callArgument2; }), ({ final __callArgument3:Dynamic = GlVelocity._scratchVelocity__glVelocity; __callArgument3; })) : Velocity2D);
-    if ((cast ((cast _Runtime.strictEquals((cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).x, 0.0) : Bool) && (cast _Runtime.strictEquals((cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).y, 0.0) : Bool)) : Bool)) { return; }
+    if ((cast ((cast _Runtime.strictEquals(GlVelocity._scratchVelocity__glVelocity.x, 0.0) : Bool) && (cast _Runtime.strictEquals(GlVelocity._scratchVelocity__glVelocity.y, 0.0) : Bool)) : Bool)) { return; }
     spatial = (cast (cast node : flighthq._internal._Any) : Spatial2DNode<Dynamic>);
     ensureNodeWorldBoundsRectangle((cast spatial : Dynamic));
     bounds = (cast getNodeWorldBoundsRectangle((cast spatial : Dynamic)) : Rectangle);
-    drawGlVelocityQuad(({ final __callArgument4:Dynamic = ctx; __callArgument4; }), (cast bounds.x : Float), (cast bounds.y : Float), (cast bounds.width : Float), (cast bounds.height : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).x : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).y : Float));
+    drawGlVelocityQuad(({ final __callArgument4:Dynamic = ctx; __callArgument4; }), (cast bounds.x : Float), (cast bounds.y : Float), (cast bounds.width : Float), (cast bounds.height : Float), (cast GlVelocity._scratchVelocity__glVelocity.x : Float), (cast GlVelocity._scratchVelocity__glVelocity.y : Float));
   });
 
   public static final defaultGlParticleEmitter2DVelocityWriter:GlVelocityWriter = (cast function(ctx:GlVelocityContext, node:flighthq._internal._Object):Void {
@@ -243,11 +243,11 @@ class GlVelocity {
       return;
     }
     (cast getVelocity(_Runtime.field(ctx, 'field'), ({ final __callArgument7:Dynamic = node; __callArgument7; }), ({ final __callArgument8:Dynamic = GlVelocity._scratchVelocity__glVelocity; __callArgument8; })) : Velocity2D);
-    if ((cast ((cast _Runtime.strictEquals((cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).x, 0.0) : Bool) && (cast _Runtime.strictEquals((cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).y, 0.0) : Bool)) : Bool)) { return; }
+    if ((cast ((cast _Runtime.strictEquals(GlVelocity._scratchVelocity__glVelocity.x, 0.0) : Bool) && (cast _Runtime.strictEquals(GlVelocity._scratchVelocity__glVelocity.y, 0.0) : Bool)) : Bool)) { return; }
     spatial = (cast (cast node : flighthq._internal._Any) : Spatial2DNode<Dynamic>);
     ensureNodeWorldBoundsRectangle((cast spatial : Dynamic));
     bounds = (cast getNodeWorldBoundsRectangle((cast spatial : Dynamic)) : Rectangle);
-    drawGlVelocityQuad(({ final __callArgument9:Dynamic = ctx; __callArgument9; }), (cast bounds.x : Float), (cast bounds.y : Float), (cast bounds.width : Float), (cast bounds.height : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).x : Float), (cast (cast GlVelocity._scratchVelocity__glVelocity : Velocity2D).y : Float));
+    drawGlVelocityQuad(({ final __callArgument9:Dynamic = ctx; __callArgument9; }), (cast bounds.x : Float), (cast bounds.y : Float), (cast bounds.width : Float), (cast bounds.height : Float), (cast GlVelocity._scratchVelocity__glVelocity.x : Float), (cast GlVelocity._scratchVelocity__glVelocity.y : Float));
   });
 
   @:noCompletion

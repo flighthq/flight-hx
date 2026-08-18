@@ -55,15 +55,15 @@ class ShapeCollision {
       return cast false;
     }
     if ((cast ((cast overlapX : Float) <= (cast overlapY : Float)) : Bool)) {
-      ((cast out : CollisionManifold).normalX = ((cast ((cast penLeftX : Float) < (cast penRightX : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)));
-      ((cast out : CollisionManifold).normalY = 0.0);
-      ((cast out : CollisionManifold).depth = overlapX);
+      (out.normalX = cast (((cast ((cast penLeftX : Float) < (cast penRightX : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)) : Float));
+      (out.normalY = cast (0.0 : Float));
+      (out.depth = cast (overlapX : Float));
     } else {
-      ((cast out : CollisionManifold).normalX = 0.0);
-      ((cast out : CollisionManifold).normalY = ((cast ((cast penDownY : Float) < (cast penUpY : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)));
-      ((cast out : CollisionManifold).depth = overlapY);
+      (out.normalX = cast (0.0 : Float));
+      (out.normalY = cast (((cast ((cast penDownY : Float) < (cast penUpY : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)) : Float));
+      (out.depth = cast (overlapY : Float));
     }
-    ((cast out : CollisionManifold).overlapping = true);
+    (out.overlapping = cast (true : Bool));
     return cast true;
     return cast null;
   }
@@ -119,15 +119,15 @@ class ShapeCollision {
     dist = HxMath.sqrt(distSquared);
     if ((cast ((cast dist : Float) > (cast (cast ShapeCollision.relativeEpsilon__shapeCollision((cast radiusSum : Float)) : Float) : Float)) : Bool)) {
       var inv:Float = (1.0 / dist);
-      ((cast out : CollisionManifold).normalX = (dx * inv));
-      ((cast out : CollisionManifold).normalY = (dy * inv));
-      ((cast out : CollisionManifold).depth = (radiusSum - dist));
+      (out.normalX = cast ((dx * inv) : Float));
+      (out.normalY = cast ((dy * inv) : Float));
+      (out.depth = cast ((radiusSum - dist) : Float));
     } else {
-      ((cast out : CollisionManifold).normalX = 1.0);
-      ((cast out : CollisionManifold).normalY = 0.0);
-      ((cast out : CollisionManifold).depth = radiusSum);
+      (out.normalX = cast (1.0 : Float));
+      (out.normalY = cast (0.0 : Float));
+      (out.depth = cast (radiusSum : Float));
     }
-    ((cast out : CollisionManifold).overlapping = true);
+    (out.overlapping = cast (true : Bool));
     return cast true;
     return cast null;
   }
@@ -161,10 +161,10 @@ class ShapeCollision {
     if ((cast !(cast (cast ShapeCollision.circleAabbOverlap__shapeCollision((cast localX : Float), (cast localY : Float), (cast radius : Float), (cast -halfW : Float), (cast -halfH : Float), (cast halfW : Float), (cast halfH : Float), ({ final __callArgument32:Dynamic = out; __callArgument32; })) : Bool) : Bool) : Bool)) {
       return cast false;
     }
-    localNormalX = (cast out : CollisionManifold).normalX;
-    localNormalY = (cast out : CollisionManifold).normalY;
-    ((cast out : CollisionManifold).normalX = ((localNormalX * cos) - (localNormalY * sin)));
-    ((cast out : CollisionManifold).normalY = ((localNormalX * sin) + (localNormalY * cos)));
+    localNormalX = out.normalX;
+    localNormalY = out.normalY;
+    (out.normalX = cast (((localNormalX * cos) - (localNormalY * sin)) : Float));
+    (out.normalY = cast (((localNormalX * sin) + (localNormalY * cos)) : Float));
     return cast true;
     return cast null;
   }
@@ -237,10 +237,10 @@ class ShapeCollision {
         return cast false;
       }
       var inv:Float = (1.0 / dist);
-      ((cast out : CollisionManifold).normalX = (dx * inv));
-      ((cast out : CollisionManifold).normalY = (dy * inv));
-      ((cast out : CollisionManifold).depth = (radius - dist));
-      ((cast out : CollisionManifold).overlapping = true);
+      (out.normalX = cast ((dx * inv) : Float));
+      (out.normalY = cast ((dy * inv) : Float));
+      (out.depth = cast ((radius - dist) : Float));
+      (out.overlapping = cast (true : Bool));
       return cast true;
     }
     left = (cx - minX);
@@ -265,10 +265,10 @@ class ShapeCollision {
       (normalX = cast (0.0 : Dynamic));
       (normalY = cast (1.0 : Dynamic));
     }
-    ((cast out : CollisionManifold).normalX = ((cast _Runtime.strictEquals(normalX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalX : Dynamic)));
-    ((cast out : CollisionManifold).normalY = ((cast _Runtime.strictEquals(normalY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalY : Dynamic)));
-    ((cast out : CollisionManifold).depth = (min + radius));
-    ((cast out : CollisionManifold).overlapping = true);
+    (out.normalX = cast (((cast _Runtime.strictEquals(normalX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalX : Dynamic)) : Float));
+    (out.normalY = cast (((cast _Runtime.strictEquals(normalY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalY : Dynamic)) : Float));
+    (out.depth = cast ((min + radius) : Float));
+    (out.overlapping = cast (true : Bool));
     return cast true;
     return cast null;
   }
@@ -377,10 +377,10 @@ class ShapeCollision {
       (normalX = cast (-normalX : Dynamic));
       (normalY = cast (-normalY : Dynamic));
     }
-    ((cast out : CollisionManifold).normalX = ((cast _Runtime.strictEquals(normalX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalX : Dynamic)));
-    ((cast out : CollisionManifold).normalY = ((cast _Runtime.strictEquals(normalY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalY : Dynamic)));
-    ((cast out : CollisionManifold).depth = minOverlap);
-    ((cast out : CollisionManifold).overlapping = true);
+    (out.normalX = cast (((cast _Runtime.strictEquals(normalX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalX : Dynamic)) : Float));
+    (out.normalY = cast (((cast _Runtime.strictEquals(normalY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalY : Dynamic)) : Float));
+    (out.depth = cast (minOverlap : Float));
+    (out.overlapping = cast (true : Bool));
     return cast true;
     return cast null;
   }
@@ -469,10 +469,10 @@ class ShapeCollision {
       (normalX = cast (-normalX : Dynamic));
       (normalY = cast (-normalY : Dynamic));
     }
-    ((cast out : CollisionManifold).normalX = ((cast _Runtime.strictEquals(normalX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalX : Dynamic)));
-    ((cast out : CollisionManifold).normalY = ((cast _Runtime.strictEquals(normalY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalY : Dynamic)));
-    ((cast out : CollisionManifold).depth = (cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).overlap);
-    ((cast out : CollisionManifold).overlapping = true);
+    (out.normalX = cast (((cast _Runtime.strictEquals(normalX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalX : Dynamic)) : Float));
+    (out.normalY = cast (((cast _Runtime.strictEquals(normalY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast normalY : Dynamic)) : Float));
+    (out.depth = cast ((cast ShapeCollision.minOverlapAxis__shapeCollision : { var overlap:Float; var x:Float; var y:Float; }).overlap : Float));
+    (out.overlapping = cast (true : Bool));
     return cast true;
     return cast null;
   }

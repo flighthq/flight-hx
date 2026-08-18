@@ -21,10 +21,10 @@ class MassProperties {
       if (__switchValue == 'circle') {
         {
           var area:Float = ((HxMath.PI * (cast shape : { var radius:Float; }).radius) * (cast shape : { var radius:Float; }).radius);
-          ((cast out : Physics2DMassData).mass = (area * density));
-          ((cast out : Physics2DMassData).inertia = (((0.5 * (cast out : Physics2DMassData).mass) * (cast shape : { var radius:Float; }).radius) * (cast shape : { var radius:Float; }).radius));
-          ((cast out : Physics2DMassData).centerX = (cast shape : { var x:Float; }).x);
-          ((cast out : Physics2DMassData).centerY = (cast shape : { var y:Float; }).y);
+          (out.mass = cast ((area * density) : Float));
+          (out.inertia = cast ((((0.5 * out.mass) * (cast shape : { var radius:Float; }).radius) * (cast shape : { var radius:Float; }).radius) : Float));
+          (out.centerX = cast ((cast shape : { var x:Float; }).x : Float));
+          (out.centerY = cast ((cast shape : { var y:Float; }).y : Float));
           return;
         }
       }
@@ -32,10 +32,10 @@ class MassProperties {
         {
           var width:Float = ((cast shape : { var maxX:Float; }).maxX - (cast shape : { var minX:Float; }).minX);
           var height:Float = ((cast shape : { var maxY:Float; }).maxY - (cast shape : { var minY:Float; }).minY);
-          ((cast out : Physics2DMassData).mass = ((width * height) * density));
-          ((cast out : Physics2DMassData).inertia = (((cast out : Physics2DMassData).mass * ((width * width) + (height * height))) / 12.0));
-          ((cast out : Physics2DMassData).centerX = (((cast shape : { var minX:Float; }).minX + (cast shape : { var maxX:Float; }).maxX) / 2.0));
-          ((cast out : Physics2DMassData).centerY = (((cast shape : { var minY:Float; }).minY + (cast shape : { var maxY:Float; }).maxY) / 2.0));
+          (out.mass = cast (((width * height) * density) : Float));
+          (out.inertia = cast (((out.mass * ((width * width) + (height * height))) / 12.0) : Float));
+          (out.centerX = cast ((((cast shape : { var minX:Float; }).minX + (cast shape : { var maxX:Float; }).maxX) / 2.0) : Float));
+          (out.centerY = cast ((((cast shape : { var minY:Float; }).minY + (cast shape : { var maxY:Float; }).maxY) / 2.0) : Float));
           return;
         }
       }
@@ -43,10 +43,10 @@ class MassProperties {
         {
           var width:Float = ((cast shape : { var halfW:Float; }).halfW * 2.0);
           var height:Float = ((cast shape : { var halfH:Float; }).halfH * 2.0);
-          ((cast out : Physics2DMassData).mass = ((width * height) * density));
-          ((cast out : Physics2DMassData).inertia = (((cast out : Physics2DMassData).mass * ((width * width) + (height * height))) / 12.0));
-          ((cast out : Physics2DMassData).centerX = (cast shape : { var x:Float; }).x);
-          ((cast out : Physics2DMassData).centerY = (cast shape : { var y:Float; }).y);
+          (out.mass = cast (((width * height) * density) : Float));
+          (out.inertia = cast (((out.mass * ((width * width) + (height * height))) / 12.0) : Float));
+          (out.centerX = cast ((cast shape : { var x:Float; }).x : Float));
+          (out.centerY = cast ((cast shape : { var y:Float; }).y : Float));
           return;
         }
       }
@@ -55,10 +55,10 @@ class MassProperties {
         return;
       }
       else  {
-        ((cast out : Physics2DMassData).mass = 0.0);
-        ((cast out : Physics2DMassData).inertia = 0.0);
-        ((cast out : Physics2DMassData).centerX = 0.0);
-        ((cast out : Physics2DMassData).centerY = 0.0);
+        (out.mass = cast (0.0 : Float));
+        (out.inertia = cast (0.0 : Float));
+        (out.centerX = cast (0.0 : Float));
+        (out.centerY = cast (0.0 : Float));
       }
     }
   }
@@ -74,9 +74,9 @@ class MassProperties {
     weightedY = 0.0;
     for (collider in _Runtime.iterable((cast body : RigidBody2D).colliders)) {
       computePhysics2DColliderMassData(({ final __callArgument3:Dynamic = collider; __callArgument3; }), ({ final __callArgument4:Dynamic = MassProperties.scratch__massProperties; __callArgument4; }));
-      (mass = cast ((mass + (cast MassProperties.scratch__massProperties : Physics2DMassData).mass) : Dynamic));
-      (weightedX = cast ((weightedX + ((cast MassProperties.scratch__massProperties : Physics2DMassData).centerX * (cast MassProperties.scratch__massProperties : Physics2DMassData).mass)) : Dynamic));
-      (weightedY = cast ((weightedY + ((cast MassProperties.scratch__massProperties : Physics2DMassData).centerY * (cast MassProperties.scratch__massProperties : Physics2DMassData).mass)) : Dynamic));
+      (mass = cast ((mass + MassProperties.scratch__massProperties.mass) : Dynamic));
+      (weightedX = cast ((weightedX + (MassProperties.scratch__massProperties.centerX * MassProperties.scratch__massProperties.mass)) : Dynamic));
+      (weightedY = cast ((weightedY + (MassProperties.scratch__massProperties.centerY * MassProperties.scratch__massProperties.mass)) : Dynamic));
     }
     if ((cast ((cast mass : Float) > (cast 0.0 : Float)) : Bool)) {
       ((cast body : RigidBody2D).centerX = (weightedX / mass));
@@ -88,9 +88,9 @@ class MassProperties {
     inertia = 0.0;
     for (collider in _Runtime.iterable((cast body : RigidBody2D).colliders)) {
       computePhysics2DColliderMassData(({ final __callArgument7:Dynamic = collider; __callArgument7; }), ({ final __callArgument8:Dynamic = MassProperties.scratch__massProperties; __callArgument8; }));
-      var offsetX:Float = ((cast MassProperties.scratch__massProperties : Physics2DMassData).centerX - (cast body : RigidBody2D).centerX);
-      var offsetY:Float = ((cast MassProperties.scratch__massProperties : Physics2DMassData).centerY - (cast body : RigidBody2D).centerY);
-      (inertia = cast ((inertia + ((cast MassProperties.scratch__massProperties : Physics2DMassData).inertia + ((cast MassProperties.scratch__massProperties : Physics2DMassData).mass * ((offsetX * offsetX) + (offsetY * offsetY))))) : Dynamic));
+      var offsetX:Float = (MassProperties.scratch__massProperties.centerX - (cast body : RigidBody2D).centerX);
+      var offsetY:Float = (MassProperties.scratch__massProperties.centerY - (cast body : RigidBody2D).centerY);
+      (inertia = cast ((inertia + (MassProperties.scratch__massProperties.inertia + (MassProperties.scratch__massProperties.mass * ((offsetX * offsetX) + (offsetY * offsetY))))) : Dynamic));
     }
     simulated = _Runtime.strictEquals((cast body : RigidBody2D).type, 'dynamic');
     ((cast body : RigidBody2D).mass = ((cast simulated : Bool) ? (cast mass : Dynamic) : (cast 0.0 : Dynamic)));
@@ -110,10 +110,10 @@ class MassProperties {
     var offsetSquared:Float = cast _Runtime.UNDEFINED;
     count = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
     if ((cast ((cast count : Float) < (cast 3.0 : Float)) : Bool)) {
-      ((cast out : Physics2DMassData).mass = 0.0);
-      ((cast out : Physics2DMassData).inertia = 0.0);
-      ((cast out : Physics2DMassData).centerX = 0.0);
-      ((cast out : Physics2DMassData).centerY = 0.0);
+      (out.mass = cast (0.0 : Float));
+      (out.inertia = cast (0.0 : Float));
+      (out.centerX = cast (0.0 : Float));
+      (out.centerY = cast (0.0 : Float));
       return;
     }
     area = 0.0;
@@ -138,19 +138,19 @@ class MassProperties {
     }
     (area = cast ((area * 0.5) : Dynamic));
     if ((cast _Runtime.strictEquals(area, 0.0) : Bool)) {
-      ((cast out : Physics2DMassData).mass = 0.0);
-      ((cast out : Physics2DMassData).inertia = 0.0);
-      ((cast out : Physics2DMassData).centerX = 0.0);
-      ((cast out : Physics2DMassData).centerY = 0.0);
+      (out.mass = cast (0.0 : Float));
+      (out.inertia = cast (0.0 : Float));
+      (out.centerX = cast (0.0 : Float));
+      (out.centerY = cast (0.0 : Float));
       return;
     }
     absoluteArea = HxMath.abs(area);
-    ((cast out : Physics2DMassData).mass = (absoluteArea * density));
-    ((cast out : Physics2DMassData).centerX = (centroidX / (6.0 * area)));
-    ((cast out : Physics2DMassData).centerY = (centroidY / (6.0 * area)));
+    (out.mass = cast ((absoluteArea * density) : Float));
+    (out.centerX = cast ((centroidX / (6.0 * area)) : Float));
+    (out.centerY = cast ((centroidY / (6.0 * area)) : Float));
     originMoment = (_Runtime.divideNumbers(HxMath.abs(moment), 12.0) * density);
-    offsetSquared = (((cast out : Physics2DMassData).centerX * (cast out : Physics2DMassData).centerX) + ((cast out : Physics2DMassData).centerY * (cast out : Physics2DMassData).centerY));
-    ((cast out : Physics2DMassData).inertia = (originMoment - ((cast out : Physics2DMassData).mass * offsetSquared)));
+    offsetSquared = ((out.centerX * out.centerX) + (out.centerY * out.centerY));
+    (out.inertia = cast ((originMoment - (out.mass * offsetSquared)) : Float));
   }
 
   public static final scratch__massProperties:Physics2DMassData = (cast { mass: 0.0, inertia: 0.0, centerX: 0.0, centerY: 0.0 });

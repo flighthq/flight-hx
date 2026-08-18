@@ -208,11 +208,11 @@ class ShapeContact {
       (clipEnd = cast (0.0 : Dynamic));
     } }
     referenceSeparation = ((cast referenceIsA : Bool) ? (cast separationA : Dynamic) : (cast separationB : Dynamic));
-    ((cast out : CollisionContactManifold).normalX = ((cast referenceIsA : Bool) ? (cast -normalX : Dynamic) : (cast normalX : Dynamic)));
-    ((cast out : CollisionContactManifold).normalY = ((cast referenceIsA : Bool) ? (cast -normalY : Dynamic) : (cast normalY : Dynamic)));
-    ((cast out : CollisionContactManifold).depth = -referenceSeparation);
-    ((cast out : CollisionContactManifold).overlapping = true);
-    ((cast out : CollisionContactManifold).pointCount = 0.0);
+    (out.normalX = cast (((cast referenceIsA : Bool) ? (cast -normalX : Dynamic) : (cast normalX : Dynamic)) : Float));
+    (out.normalY = cast (((cast referenceIsA : Bool) ? (cast -normalY : Dynamic) : (cast normalY : Dynamic)) : Float));
+    (out.depth = cast (-referenceSeparation : Float));
+    (out.overlapping = cast (true : Bool));
+    (out.pointCount = cast (0.0 : Float));
     if ((cast ((cast clipStart : Float) <= (cast clipEnd : Float)) : Bool)) {
       var first:Float = (cast packContactFeatureId((cast referenceIsA : Bool), (cast referenceEdge : Float), (cast incidentEdge : Float), (cast false : Bool)) : Float);
       ShapeContact.appendClippedContact__shapeContact((cast p0X : Float), (cast p0Y : Float), (cast p1X : Float), (cast p1Y : Float), (cast clipStart : Float), (cast v1X : Float), (cast v1Y : Float), (cast normalX : Float), (cast normalY : Float), (cast first : Float), ({ final __callArgument63:Dynamic = out; __callArgument63; }));
@@ -234,12 +234,12 @@ class ShapeContact {
     y = (p0Y + ((p1Y - p0Y) * s));
     separation = ((normalX * (x - faceX)) + (normalY * (y - faceY)));
     if ((cast ((cast separation : Float) > (cast 0.0 : Float)) : Bool)) { return; }
-    point = flighthq._internal._StaticIndex.readArray((cast out : CollisionContactManifold).points, (cast out : CollisionContactManifold).pointCount);
+    point = flighthq._internal._StaticIndex.readArray(out.points, out.pointCount);
     ((cast point : CollisionContactPoint).x = x);
     ((cast point : CollisionContactPoint).y = y);
     ((cast point : CollisionContactPoint).depth = -separation);
     ((cast point : CollisionContactPoint).featureId = featureId);
-    (cast out : CollisionContactManifold).pointCount++;
+    out.pointCount++;
   }
 
   public static function maxFaceSeparation__shapeContact(sx:flighthq._internal._ArrayLike<Float>, sn:Float, ox:flighthq._internal._ArrayLike<Float>, on:Float):Float {
@@ -358,19 +358,19 @@ class ShapeContact {
     var normalY:Float = cast _Runtime.UNDEFINED;
     var depth:Float = cast _Runtime.UNDEFINED;
     var point:CollisionContactPoint = cast _Runtime.UNDEFINED;
-    normalX = (cast ShapeContact.leanScratch__shapeContact : CollisionManifold).normalX;
-    normalY = (cast ShapeContact.leanScratch__shapeContact : CollisionManifold).normalY;
-    depth = (cast ShapeContact.leanScratch__shapeContact : CollisionManifold).depth;
-    ((cast out : CollisionContactManifold).normalX = normalX);
-    ((cast out : CollisionContactManifold).normalY = normalY);
-    ((cast out : CollisionContactManifold).depth = depth);
-    ((cast out : CollisionContactManifold).overlapping = true);
-    point = flighthq._internal._StaticIndex.readArray((cast out : CollisionContactManifold).points, 0.0);
+    normalX = ShapeContact.leanScratch__shapeContact.normalX;
+    normalY = ShapeContact.leanScratch__shapeContact.normalY;
+    depth = ShapeContact.leanScratch__shapeContact.depth;
+    (out.normalX = cast (normalX : Float));
+    (out.normalY = cast (normalY : Float));
+    (out.depth = cast (depth : Float));
+    (out.overlapping = cast (true : Bool));
+    point = flighthq._internal._StaticIndex.readArray(out.points, 0.0);
     ((cast point : CollisionContactPoint).x = (cx - (normalX * radius)));
     ((cast point : CollisionContactPoint).y = (cy - (normalY * radius)));
     ((cast point : CollisionContactPoint).depth = depth);
     ((cast point : CollisionContactPoint).featureId = 0.0);
-    ((cast out : CollisionContactManifold).pointCount = 1.0);
+    (out.pointCount = cast (1.0 : Float));
     return cast true;
     return cast null;
   }

@@ -91,8 +91,8 @@ class CollideContactManifold {
       }
     }
     if ((cast ((cast overlapping : Bool) && (cast swapped : Bool)) : Bool)) {
-      ((cast out : CollisionContactManifold).normalX = -(cast out : CollisionContactManifold).normalX);
-      ((cast out : CollisionContactManifold).normalY = -(cast out : CollisionContactManifold).normalY);
+      (out.normalX = cast (-out.normalX : Float));
+      (out.normalY = cast (-out.normalY : Float));
     }
     return cast overlapping;
     return cast null;
