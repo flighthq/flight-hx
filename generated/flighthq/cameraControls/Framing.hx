@@ -21,9 +21,9 @@ class Framing {
     } else {
       setOrthographicProjectionFrameToSphere(({ final __callArgument1:Dynamic = projection; __callArgument1; }), (cast sphere.radius : Float), (cast aspect : Float), (cast padding : Float));
     }
-    ((cast (cast controller : OrbitCameraController).target : { var x:Float; }).x = cast ((cast sphere.center : { var x:Float; }).x : Dynamic));
-    ((cast (cast controller : OrbitCameraController).target : { var y:Float; }).y = cast ((cast sphere.center : { var y:Float; }).y : Dynamic));
-    ((cast (cast controller : OrbitCameraController).target : { var z:Float; }).z = cast ((cast sphere.center : { var z:Float; }).z : Dynamic));
+    ((cast (cast controller : OrbitCameraController).target : { var x:Float; }).x = cast ((cast sphere.center : { var x:Float; }).x : Float));
+    ((cast (cast controller : OrbitCameraController).target : { var y:Float; }).y = cast ((cast sphere.center : { var y:Float; }).y : Float));
+    ((cast (cast controller : OrbitCameraController).target : { var z:Float; }).z = cast ((cast sphere.center : { var z:Float; }).z : Float));
     return cast true;
     return cast null;
   }
@@ -43,11 +43,11 @@ class Framing {
     var paddedRadius:Float = cast _Runtime.UNDEFINED;
     paddedRadius = (radius * padding);
     if ((cast ((cast aspect : Float) >= (cast 1.0 : Float)) : Bool)) {
-      (projection.halfHeight = cast (paddedRadius : Dynamic));
-      (projection.halfWidth = cast ((paddedRadius * aspect) : Dynamic));
+      (projection.halfHeight = cast (paddedRadius : Float));
+      (projection.halfWidth = cast ((paddedRadius * aspect) : Float));
     } else {
-      (projection.halfHeight = cast ((paddedRadius / aspect) : Dynamic));
-      (projection.halfWidth = cast (paddedRadius : Dynamic));
+      (projection.halfHeight = cast ((paddedRadius / aspect) : Float));
+      (projection.halfWidth = cast (paddedRadius : Float));
     }
   }
 }

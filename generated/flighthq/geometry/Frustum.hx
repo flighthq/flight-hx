@@ -42,9 +42,9 @@ class Frustum {
         var w:Float = ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float)) * nx) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float)) * ny)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 11.0 : Float)) * nz)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 15.0 : Float)));
         var invW:Float = ((cast !_Runtime.strictEquals(w, 0.0) : Bool) ? (cast (1.0 / w) : Dynamic) : (cast 1.0 : Dynamic));
         var corner:Vector3Like = flighthq._internal._StaticIndex.readArray(out, i);
-        (corner.x = cast ((x * invW) : Dynamic));
-        (corner.y = cast ((y * invW) : Dynamic));
-        (corner.z = cast ((z * invW) : Dynamic));
+        (corner.x = cast ((x * invW) : Float));
+        (corner.y = cast ((y * invW) : Float));
+        (corner.z = cast ((z * invW) : Float));
         i++;
       }
     }
@@ -132,15 +132,15 @@ class Frustum {
     l = HxMath.sqrt((((a * a) + (b * b)) + (c * c)));
     if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
       var inv:Float = (1.0 / l);
-      (out.a = cast ((a * inv) : Dynamic));
-      (out.b = cast ((b * inv) : Dynamic));
-      (out.c = cast ((c * inv) : Dynamic));
-      (out.d = cast ((d * inv) : Dynamic));
+      (out.a = cast ((a * inv) : Float));
+      (out.b = cast ((b * inv) : Float));
+      (out.c = cast ((c * inv) : Float));
+      (out.d = cast ((d * inv) : Float));
     } else {
-      (out.a = cast (a : Dynamic));
-      (out.b = cast (b : Dynamic));
-      (out.c = cast (c : Dynamic));
-      (out.d = cast (d : Dynamic));
+      (out.a = cast (a : Float));
+      (out.b = cast (b : Float));
+      (out.c = cast (c : Float));
+      (out.d = cast (d : Float));
     }
   }
 }

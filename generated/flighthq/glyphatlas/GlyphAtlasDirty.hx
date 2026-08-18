@@ -10,7 +10,7 @@ import flighthq.types.Rectangle;
 
 class GlyphAtlasDirty {
   public static function clearGlyphAtlasDirty(atlas:GlyphAtlas):Void {
-    ((cast atlas.runtime : { var dirty:Bool; }).dirty = cast (false : Dynamic));
+    ((cast atlas.runtime : { var dirty:Bool; }).dirty = cast (false : Bool));
   }
 
   public static function getGlyphAtlasDirtyRegion(atlas:GlyphAtlas):Null<Rectangle> {

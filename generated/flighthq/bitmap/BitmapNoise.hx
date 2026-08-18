@@ -17,15 +17,15 @@ class BitmapNoise {
     state = _Runtime.orValue(_Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32(seed) | 0)), 0), function():Dynamic return cast 1.0);
     lo = HxMath.max(0.0, HxMath.min(255.0, low));
     span = _Runtime.subtractNumbers(HxMath.max(0.0, HxMath.min(255.0, high)), lo);
-    data = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    bitmapWidth = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
+    data = (cast dest.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    bitmapWidth = (cast dest.bitmap : { var width:Float; }).width;
     {
       var py:Float = 0.0;
-      while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+      while ((cast ((cast py : Float) < (cast dest.height : Float)) : Bool)) {
+        var y:Float = (dest.y + py);
         {
           var px:Float = 0.0;
-          while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
+          while ((cast ((cast px : Float) < (cast dest.width : Float)) : Bool)) {
             (state = cast ((cast BitmapNoise.nextRandomState__bitmapNoise((cast state : Float)) : Float) : Dynamic));
             var r:Float = (lo + ((state / 4294967296.0) * span));
             var g:Float = r;
@@ -36,8 +36,8 @@ class BitmapNoise {
               (state = cast ((cast BitmapNoise.nextRandomState__bitmapNoise((cast state : Float)) : Float) : Dynamic));
               (b = cast ((lo + ((state / 4294967296.0) * span)) : Dynamic));
             }
-            var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
-            if ((cast ((cast ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool) || (cast ((cast x : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
+            var x:Float = (dest.x + px);
+            if ((cast ((cast ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool) || (cast ((cast x : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Float = (((y * bitmapWidth) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast HxMath.round(r) : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast HxMath.round(g) : Float));
@@ -49,7 +49,7 @@ class BitmapNoise {
         py++;
       }
     }
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap(dest.bitmap);
   }
 
   public static function fillBitmapPerlinNoise(dest:BitmapRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
@@ -63,19 +63,19 @@ class BitmapNoise {
     fx0 = ((cast ((cast baseX : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseX) : Dynamic) : (cast 0.0 : Dynamic));
     fy0 = ((cast ((cast baseY : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseY) : Dynamic) : (cast 0.0 : Dynamic));
     passes = HxMath.max(1.0, HxMath.round(octaves));
-    data = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    bitmapWidth = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
-    w = _Runtime.field(dest, 'width');
-    h = _Runtime.field(dest, 'height');
+    data = (cast dest.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    bitmapWidth = (cast dest.bitmap : { var width:Float; }).width;
+    w = dest.width;
+    h = dest.height;
     {
       var py:Float = 0.0;
-      while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
-        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
+      while ((cast ((cast py : Float) < (cast dest.height : Float)) : Bool)) {
+        var y:Float = (dest.y + py);
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Float = 0.0;
-          while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
-            var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+          while ((cast ((cast px : Float) < (cast dest.width : Float)) : Bool)) {
+            var x:Float = (dest.x + px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var di:Float = (((y * bitmapWidth) + x) * 4.0);
             var nx:Float = ((cast stitch : Bool) ? (cast (cast BitmapNoise.stitchedCoord__bitmapNoise((cast (px * fx0) : Float), (cast (w * fx0) : Float)) : Float) : Dynamic) : (cast (px * fx0) : Dynamic));
@@ -108,7 +108,7 @@ class BitmapNoise {
         py++;
       }
     }
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap(dest.bitmap);
   }
 
   public static function fillBitmapTurbulence(dest:BitmapRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, grayScale:Bool = false, stitch:Bool = false, channelOptions:Float = 7.0):Void {
@@ -122,19 +122,19 @@ class BitmapNoise {
     fx0 = ((cast ((cast baseX : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseX) : Dynamic) : (cast 0.0 : Dynamic));
     fy0 = ((cast ((cast baseY : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / baseY) : Dynamic) : (cast 0.0 : Dynamic));
     passes = HxMath.max(1.0, HxMath.round(octaves));
-    data = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    bitmapWidth = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
-    w = _Runtime.field(dest, 'width');
-    h = _Runtime.field(dest, 'height');
+    data = (cast dest.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    bitmapWidth = (cast dest.bitmap : { var width:Float; }).width;
+    w = dest.width;
+    h = dest.height;
     {
       var py:Float = 0.0;
-      while ((cast ((cast py : Float) < (cast _Runtime.field(dest, 'height') : Float)) : Bool)) {
-        var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
-        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
+      while ((cast ((cast py : Float) < (cast dest.height : Float)) : Bool)) {
+        var y:Float = (dest.y + py);
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Float = 0.0;
-          while ((cast ((cast px : Float) < (cast _Runtime.field(dest, 'width') : Float)) : Bool)) {
-            var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+          while ((cast ((cast px : Float) < (cast dest.width : Float)) : Bool)) {
+            var x:Float = (dest.x + px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var di:Float = (((y * bitmapWidth) + x) * 4.0);
             var nx:Float = ((cast stitch : Bool) ? (cast (cast BitmapNoise.stitchedCoord__bitmapNoise((cast (px * fx0) : Float), (cast (w * fx0) : Float)) : Float) : Dynamic) : (cast (px * fx0) : Dynamic));
@@ -167,7 +167,7 @@ class BitmapNoise {
         py++;
       }
     }
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap(dest.bitmap);
   }
 
   public static final BITMAP_NOISE_CHANNEL_A:Float = 8.0;

@@ -82,7 +82,7 @@ class SceneDocumentSource {
     if ((cast _Runtime.strictEquals(basePath, null) : Bool)) { return; }
     for (resource in _Runtime.iterable((cast document : Scene3DDocument).resources)) {
       if ((cast ((cast _Runtime.strictEquals((cast resource : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).External) : Bool) && (cast _Runtime.strictEquals((cast resource : { var basePath:Null<String>; }).basePath, null) : Bool)) : Bool)) {
-        ((cast resource : { var basePath:Null<String>; }).basePath = cast (basePath : Dynamic));
+        ((cast resource : { var basePath:Null<String>; }).basePath = cast (basePath : Null<String>));
       }
     }
   }

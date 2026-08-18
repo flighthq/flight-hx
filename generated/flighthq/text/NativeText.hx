@@ -29,16 +29,16 @@ class NativeText {
     var runtime:NativeTextRuntime = cast _Runtime.UNDEFINED;
     native = (cast source : flighthq.types.NativeText);
     data = (cast native : flighthq.types.NativeText).data;
-    (out.x = cast (0.0 : Dynamic));
-    (out.y = cast (0.0 : Dynamic));
+    (out.x = cast (0.0 : Float));
+    (out.y = cast (0.0 : Float));
     if ((cast _Runtime.strictEquals((cast data : NativeTextData).autoSize, 'none') : Bool)) {
-      (out.width = cast ((cast data : NativeTextData).width : Dynamic));
-      (out.height = cast ((cast data : NativeTextData).height : Dynamic));
+      (out.width = cast ((cast data : NativeTextData).width : Float));
+      (out.height = cast ((cast data : NativeTextData).height : Float));
       return;
     }
     runtime = (cast getNativeTextRuntime(({ final __callArgument0:Dynamic = native; __callArgument0; })) : NativeTextRuntime);
-    (out.width = cast (((cast ((cast _Runtime.field(runtime, 'measuredWidth') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(runtime, 'measuredWidth') : Dynamic) : (cast (cast data : NativeTextData).width : Dynamic)) : Dynamic));
-    (out.height = cast (((cast ((cast _Runtime.field(runtime, 'measuredHeight') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(runtime, 'measuredHeight') : Dynamic) : (cast (cast data : NativeTextData).height : Dynamic)) : Dynamic));
+    (out.width = cast (((cast ((cast _Runtime.field(runtime, 'measuredWidth') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(runtime, 'measuredWidth') : Dynamic) : (cast (cast data : NativeTextData).width : Dynamic)) : Float));
+    (out.height = cast (((cast ((cast _Runtime.field(runtime, 'measuredHeight') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(runtime, 'measuredHeight') : Dynamic) : (cast (cast data : NativeTextData).height : Dynamic)) : Float));
   }
 
   public static function createNativeText(?obj:PartialNode<flighthq.types.NativeText>):flighthq.types.NativeText {

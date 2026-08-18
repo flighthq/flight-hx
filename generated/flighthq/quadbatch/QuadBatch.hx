@@ -128,10 +128,10 @@ class QuadBatch {
     transforms = _Runtime.field(__destructure0, 'transforms');
     transformType = _Runtime.field(__destructure0, 'transformType');
     if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.width = cast (0.0 : Dynamic));
-      (out.height = cast (0.0 : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.width = cast (0.0 : Float));
+      (out.height = cast (0.0 : Float));
       return;
     }
     regions = atlas.regions;
@@ -197,15 +197,15 @@ class QuadBatch {
       }
     }
     if ((cast _Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY) : Bool)) {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.width = cast (0.0 : Dynamic));
-      (out.height = cast (0.0 : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.width = cast (0.0 : Float));
+      (out.height = cast (0.0 : Float));
     } else {
-      (out.x = cast (minX : Dynamic));
-      (out.y = cast (minY : Dynamic));
-      (out.width = cast ((maxX - minX) : Dynamic));
-      (out.height = cast ((maxY - minY) : Dynamic));
+      (out.x = cast (minX : Float));
+      (out.y = cast (minY : Float));
+      (out.width = cast ((maxX - minX) : Float));
+      (out.height = cast ((maxY - minY) : Float));
     }
   }
 
@@ -272,12 +272,12 @@ class QuadBatch {
     if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast instanceCount : Float)) : Bool)) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(transformType, 'vector2') : Bool)) {
       var o:Float = (index * QuadBatch.QUAD_VECTOR2_STRIDE__quadBatch);
-      (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast o : Float)) : Dynamic));
-      (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (o + 1.0) : Float)) : Dynamic));
+      (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast o : Float)) : Float));
+      (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (o + 1.0) : Float)) : Float));
     } else {
       var o:Float = (index * QuadBatch.QUAD_MATRIX3X2_STRIDE__quadBatch);
-      (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (o + 4.0) : Float)) : Dynamic));
-      (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (o + 5.0) : Float)) : Dynamic));
+      (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (o + 4.0) : Float)) : Float));
+      (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (o + 5.0) : Float)) : Float));
     }
     return cast true;
     return cast null;

@@ -88,16 +88,16 @@ class GetPathBounds {
       }
     }
     if ((cast _Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY) : Bool)) {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.width = cast (0.0 : Dynamic));
-      (out.height = cast (0.0 : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.width = cast (0.0 : Float));
+      (out.height = cast (0.0 : Float));
       return cast false;
     }
-    (out.x = cast (minX : Dynamic));
-    (out.y = cast (minY : Dynamic));
-    (out.width = cast ((maxX - minX) : Dynamic));
-    (out.height = cast ((maxY - minY) : Dynamic));
+    (out.x = cast (minX : Float));
+    (out.y = cast (minY : Float));
+    (out.width = cast ((maxX - minX) : Float));
+    (out.height = cast ((maxY - minY) : Float));
     return cast true;
     return cast null;
   }

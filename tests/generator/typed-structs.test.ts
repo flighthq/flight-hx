@@ -9,6 +9,7 @@ import {
   cppStructInitTypedStructIds,
   createTypedStructRegistry,
   discoverTypedStructUniverse,
+  reviewedTypedStructDirectAdditions,
   typedStructRegistry,
   typedStructStableId,
   type TypedStructCandidate,
@@ -42,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_604,
+      newAuditOnly: 1_603,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -53,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(402);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(403);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -92,7 +93,7 @@ describe('typed struct stable declaration identity', () => {
     ).toBe('@flighthq/types:interface#ParticleEmitterData');
   });
 
-  it('admits only new rows as audit-only and records reviewed replacements separately', () => {
+  it('admits new rows as audit-only unless explicitly reviewed for direct emission', () => {
     const workspace = path.resolve('.');
     const { program } = upstreamTypeScriptProgram(workspace);
     const discovery = discoverTypedStructUniverse(workspace, program);
@@ -105,7 +106,21 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.every((candidate) => candidate.emission === 'audit-only')).toBe(true);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_603);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'direct')).toEqual([
+      expect.objectContaining({
+        name: 'BitmapRegion',
+        packageName: '@flighthq/types',
+        purpose: 'reviewed escape-free bitmap region',
+      }),
+    ]);
+    expect(reviewedTypedStructDirectAdditions).toEqual([
+      {
+        declarationFingerprint: 'sha256:6de1c57a64f9d839dba96b69bcdd8cae0ca18580cc13f425ae6cb9ec9f68c4b8',
+        id: '@flighthq/types:interface#BitmapRegion',
+        purpose: 'reviewed escape-free bitmap region',
+      },
+    ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
@@ -440,6 +455,7 @@ describe('typed struct analysis', () => {
     const codec = report.candidates.find((candidate) => candidate.name === 'ParticleFormatCodec');
     const menuItemTemplate = report.candidates.find((candidate) => candidate.name === 'MenuItemTemplate');
     const bitmap = report.candidates.find((candidate) => candidate.name === 'Bitmap');
+    const bitmapRegion = report.candidates.find((candidate) => candidate.name === 'BitmapRegion');
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -480,22 +496,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_604,
+      auditOnlySchemas: 1_603,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 11_816,
-      directSchemas: 400,
+      directAccesses: 12_490,
+      directSchemas: 401,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 18_850,
+      pendingAccesses: 18_176,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_604,
+      newAuditOnly: 1_603,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -523,7 +539,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(11_816);
+    expect(report.summary.directAccesses).toBe(12_490);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -561,6 +577,26 @@ describe('typed struct analysis', () => {
       emission: { mode: 'direct' },
       migration: { baselineId: '@flighthq/types:interface#Surface', status: 'renamed' },
     });
+    expect(bitmapRegion).toMatchObject({
+      declarationFingerprint: 'sha256:6de1c57a64f9d839dba96b69bcdd8cae0ca18580cc13f425ae6cb9ec9f68c4b8',
+      eligible: true,
+      emission: { directAccesses: 674, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+      escapes: [],
+      migration: { baselineId: null, status: 'new' },
+      purpose: 'reviewed escape-free bitmap region',
+      reasons: [],
+    });
+    expect(classAuditById.get('@flighthq/types:interface#BitmapRegion')?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get('@flighthq/types:interface#BitmapRegion')?.nominalIdentity).toEqual({
+      blockerReasons: [],
+      closed: true,
+    });
+    const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
+    expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -687,8 +723,8 @@ describe('typed struct analysis', () => {
       'hasKeyboard',
       'hasMouse',
     ]);
-    expect(output).toContain('(out.hasKeyboard = cast (false : Dynamic))');
-    expect(output).toContain('(out.hasMouse = cast (false : Dynamic))');
+    expect(output).toContain('(out.hasKeyboard = cast (false : Bool))');
+    expect(output).toContain('(out.hasMouse = cast (false : Bool))');
     expect(output).not.toContain("_Runtime.setField(out, 'has");
   });
 
@@ -743,7 +779,7 @@ describe('typed struct analysis', () => {
       requiredUndefined: true,
     });
     expect(bindings.some((binding) => binding.field.name === 'method')).toBe(false);
-    expect(output).toContain('(value.y = cast (value.x : Dynamic))');
+    expect(output).toContain('(value.y = cast (value.x : Float))');
     expect(output).toContain('(value.y += 1.0)');
     expect(output).toContain('value.y++');
     expect(output).toContain('(value.callback)((cast value.y : Float))');

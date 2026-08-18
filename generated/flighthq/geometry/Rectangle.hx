@@ -28,10 +28,10 @@ class Rectangle {
       setEmptyRectangle(({ final __callArgument12:Dynamic = out; __callArgument12; }));
       return;
     }
-    (out.x = cast (x0 : Dynamic));
-    (out.y = cast (y0 : Dynamic));
-    (out.width = cast ((x1 - x0) : Dynamic));
-    (out.height = cast ((y1 - y0) : Dynamic));
+    (out.x = cast (x0 : Float));
+    (out.y = cast (y0 : Float));
+    (out.width = cast ((x1 - x0) : Float));
+    (out.height = cast ((y1 - y0) : Float));
   }
 
   public static function containsRectanglePoint(source:RectangleLike, vector:Vector2Like):Bool {
@@ -54,10 +54,10 @@ class Rectangle {
 
   public static function copyRectangle(out:RectangleLike, source:RectangleLike):Void {
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
-      (out.x = cast (source.x : Dynamic));
-      (out.y = cast (source.y : Dynamic));
-      (out.width = cast (source.width : Dynamic));
-      (out.height = cast (source.height : Dynamic));
+      (out.x = cast (source.x : Float));
+      (out.y = cast (source.y : Float));
+      (out.width = cast (source.width : Float));
+      (out.height = cast (source.height : Float));
     }
   }
 
@@ -104,8 +104,8 @@ class Rectangle {
   }
 
   public static function getRectangleBottomRight(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast ((source.x + source.width) : Dynamic));
-    (out.y = cast ((source.y + source.height) : Dynamic));
+    (out.x = cast ((source.x + source.width) : Float));
+    (out.y = cast ((source.y + source.height) : Float));
   }
 
   public static function getRectangleLeft(source:RectangleLike):Float {
@@ -134,13 +134,13 @@ class Rectangle {
   }
 
   public static function getRectangleNormalizedBottomRight(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast ((cast getRectangleMaxX(({ final __callArgument17:Dynamic = source; __callArgument17; })) : Float) : Dynamic));
-    (out.y = cast ((cast getRectangleMaxY(({ final __callArgument18:Dynamic = source; __callArgument18; })) : Float) : Dynamic));
+    (out.x = cast ((cast getRectangleMaxX(({ final __callArgument17:Dynamic = source; __callArgument17; })) : Float) : Float));
+    (out.y = cast ((cast getRectangleMaxY(({ final __callArgument18:Dynamic = source; __callArgument18; })) : Float) : Float));
   }
 
   public static function getRectangleNormalizedTopLeft(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast ((cast getRectangleMinX(({ final __callArgument19:Dynamic = source; __callArgument19; })) : Float) : Dynamic));
-    (out.y = cast ((cast getRectangleMinY(({ final __callArgument20:Dynamic = source; __callArgument20; })) : Float) : Dynamic));
+    (out.x = cast ((cast getRectangleMinX(({ final __callArgument19:Dynamic = source; __callArgument19; })) : Float) : Float));
+    (out.y = cast ((cast getRectangleMinY(({ final __callArgument20:Dynamic = source; __callArgument20; })) : Float) : Float));
   }
 
   public static function getRectangleRight(source:RectangleLike):Float {
@@ -149,8 +149,8 @@ class Rectangle {
   }
 
   public static function getRectangleSize(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast (source.width : Dynamic));
-    (out.y = cast (source.height : Dynamic));
+    (out.x = cast (source.width : Float));
+    (out.y = cast (source.height : Float));
   }
 
   public static function getRectangleTop(source:RectangleLike):Float {
@@ -159,15 +159,15 @@ class Rectangle {
   }
 
   public static function getRectangleTopLeft(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast (source.x : Dynamic));
-    (out.y = cast (source.y : Dynamic));
+    (out.x = cast (source.x : Float));
+    (out.y = cast (source.y : Float));
   }
 
   public static function inflateRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
-    (out.x = cast ((source.x - dx) : Dynamic));
-    (out.width = cast ((source.width + (dx * 2.0)) : Dynamic));
-    (out.y = cast ((source.y - dy) : Dynamic));
-    (out.height = cast ((source.height + (dy * 2.0)) : Dynamic));
+    (out.x = cast ((source.x - dx) : Float));
+    (out.width = cast ((source.width + (dx * 2.0)) : Float));
+    (out.y = cast ((source.y - dy) : Float));
+    (out.height = cast ((source.height + (dy * 2.0)) : Float));
   }
 
   public static function intersectsRectangle(a:RectangleLike, b:RectangleLike):Bool {
@@ -217,10 +217,10 @@ class Rectangle {
     oEmpty = ((cast _Runtime.strictEquals(ow, 0.0) : Bool) || (cast _Runtime.strictEquals(oh, 0.0) : Bool));
     if ((cast ((cast sEmpty : Bool) || (cast oEmpty : Bool)) : Bool)) {
       if ((cast ((cast oEmpty : Bool) && (cast _Runtime.strictEquals(source, out) : Bool)) : Bool)) { return; }
-      (out.x = cast (((cast oEmpty : Bool) ? (cast sx : Dynamic) : (cast ox : Dynamic)) : Dynamic));
-      (out.y = cast (((cast oEmpty : Bool) ? (cast sy : Dynamic) : (cast oy : Dynamic)) : Dynamic));
-      (out.width = cast (((cast oEmpty : Bool) ? (cast sw : Dynamic) : (cast ow : Dynamic)) : Dynamic));
-      (out.height = cast (((cast oEmpty : Bool) ? (cast sh : Dynamic) : (cast oh : Dynamic)) : Dynamic));
+      (out.x = cast (((cast oEmpty : Bool) ? (cast sx : Dynamic) : (cast ox : Dynamic)) : Float));
+      (out.y = cast (((cast oEmpty : Bool) ? (cast sy : Dynamic) : (cast oy : Dynamic)) : Float));
+      (out.width = cast (((cast oEmpty : Bool) ? (cast sw : Dynamic) : (cast ow : Dynamic)) : Float));
+      (out.height = cast (((cast oEmpty : Bool) ? (cast sh : Dynamic) : (cast oh : Dynamic)) : Float));
     } else {
       var sourceLeft:Float = HxMath.min(sx, (sx + sw));
       var sourceRight:Float = HxMath.max(sx, (sx + sw));
@@ -234,10 +234,10 @@ class Rectangle {
       var x1:Float = HxMath.max(sourceRight, otherRight);
       var y0:Float = HxMath.min(sourceTop, otherTop);
       var y1:Float = HxMath.max(sourceBottom, otherBottom);
-      (out.x = cast (x0 : Dynamic));
-      (out.y = cast (y0 : Dynamic));
-      (out.width = cast ((x1 - x0) : Dynamic));
-      (out.height = cast ((y1 - y0) : Dynamic));
+      (out.x = cast (x0 : Float));
+      (out.y = cast (y0 : Float));
+      (out.width = cast ((x1 - x0) : Float));
+      (out.height = cast ((y1 - y0) : Float));
     }
   }
 
@@ -250,67 +250,67 @@ class Rectangle {
     maxY = (cast getRectangleMaxY(({ final __callArgument30:Dynamic = source; __callArgument30; })) : Float);
     minX = (cast getRectangleMinX(({ final __callArgument31:Dynamic = source; __callArgument31; })) : Float);
     minY = (cast getRectangleMinY(({ final __callArgument32:Dynamic = source; __callArgument32; })) : Float);
-    (out.x = cast (minX : Dynamic));
-    (out.y = cast (minY : Dynamic));
-    (out.width = cast ((maxX - minX) : Dynamic));
-    (out.height = cast ((maxY - minY) : Dynamic));
+    (out.x = cast (minX : Float));
+    (out.y = cast (minY : Float));
+    (out.width = cast ((maxX - minX) : Float));
+    (out.height = cast ((maxY - minY) : Float));
   }
 
   public static function offsetRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
-    (out.x = cast ((source.x + dx) : Dynamic));
-    (out.y = cast ((source.y + dy) : Dynamic));
-    (out.width = cast (source.width : Dynamic));
-    (out.height = cast (source.height : Dynamic));
+    (out.x = cast ((source.x + dx) : Float));
+    (out.y = cast ((source.y + dy) : Float));
+    (out.width = cast (source.width : Float));
+    (out.height = cast (source.height : Float));
   }
 
   public static function offsetRectangleByPoint(out:RectangleLike, source:RectangleLike, point:Vector2Like):Void {
-    (out.x = cast ((source.x + point.x) : Dynamic));
-    (out.y = cast ((source.y + point.y) : Dynamic));
-    (out.width = cast (source.width : Dynamic));
-    (out.height = cast (source.height : Dynamic));
+    (out.x = cast ((source.x + point.x) : Float));
+    (out.y = cast ((source.y + point.y) : Float));
+    (out.width = cast (source.width : Float));
+    (out.height = cast (source.height : Float));
   }
 
   public static function setEmptyRectangle(out:RectangleLike):Void {
-    (out.x = cast ((out.y = cast ((out.width = cast ((out.height = cast (0.0 : Dynamic)) : Dynamic)) : Dynamic)) : Dynamic));
+    (out.x = cast ((out.y = cast ((out.width = cast ((out.height = cast (0.0 : Float)) : Float)) : Float)) : Float));
   }
 
   public static function setRectangle(out:RectangleLike, x:Float, y:Float, width:Float, height:Float):Void {
-    (out.x = cast (x : Dynamic));
-    (out.y = cast (y : Dynamic));
-    (out.width = cast (width : Dynamic));
-    (out.height = cast (height : Dynamic));
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
+    (out.width = cast (width : Float));
+    (out.height = cast (height : Float));
   }
 
   public static function setRectangleBottom(target:RectangleLike, value:Float):Void {
-    (target.height = cast ((value - target.y) : Dynamic));
+    (target.height = cast ((value - target.y) : Float));
   }
 
   public static function setRectangleBottomRight(target:RectangleLike, point:Vector2Like):Void {
-    (target.width = cast ((point.x - target.x) : Dynamic));
-    (target.height = cast ((point.y - target.y) : Dynamic));
+    (target.width = cast ((point.x - target.x) : Float));
+    (target.height = cast ((point.y - target.y) : Float));
   }
 
   public static function setRectangleLeft(target:RectangleLike, value:Float):Void {
     (target.width -= (value - target.x));
-    (target.x = cast (value : Dynamic));
+    (target.x = cast (value : Float));
   }
 
   public static function setRectangleRight(target:RectangleLike, value:Float):Void {
-    (target.width = cast ((value - target.x) : Dynamic));
+    (target.width = cast ((value - target.x) : Float));
   }
 
   public static function setRectangleSize(out:RectangleLike, size:Vector2Like):Void {
-    (out.width = cast (size.x : Dynamic));
-    (out.height = cast (size.y : Dynamic));
+    (out.width = cast (size.x : Float));
+    (out.height = cast (size.y : Float));
   }
 
   public static function setRectangleTop(target:RectangleLike, value:Float):Void {
     (target.height -= (value - target.y));
-    (target.y = cast (value : Dynamic));
+    (target.y = cast (value : Float));
   }
 
   public static function setRectangleTopLeft(out:RectangleLike, point:Vector2Like):Void {
-    (out.x = cast (point.x : Dynamic));
-    (out.y = cast (point.y : Dynamic));
+    (out.x = cast (point.x : Float));
+    (out.y = cast (point.y : Float));
   }
 }

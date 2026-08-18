@@ -24,9 +24,9 @@ class Billboard {
     if (kind == null) kind = cast (BillboardKind : Dynamic);
     var billboard:flighthq.types.Billboard = cast _Runtime.UNDEFINED;
     billboard = (cast createNode3D((cast kind : String), ({ final __callArgument0:Dynamic = obj; __callArgument0; })) : flighthq.types.Billboard);
-    (billboard.geometry = cast (geometry : Dynamic));
-    (billboard.materials = cast (materials : Dynamic));
-    (billboard.mode = cast (mode : Dynamic));
+    (billboard.geometry = cast (geometry : MeshGeometry));
+    (billboard.materials = cast (materials : Array<Null<Material>>));
+    (billboard.mode = cast (mode : BillboardMode));
     return cast billboard;
     return cast null;
   }

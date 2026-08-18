@@ -70,9 +70,9 @@ class Obb {
     d0 = HxMath.min(HxMath.max((((dx * ax0) + (dy * ay0)) + (dz * az0)), -hx), hx);
     d1 = HxMath.min(HxMath.max((((dx * ax1) + (dy * ay1)) + (dz * az1)), -hy), hy);
     d2 = HxMath.min(HxMath.max((((dx * ax2) + (dy * ay2)) + (dz * az2)), -hz), hz);
-    (out.x = cast ((((cx + (d0 * ax0)) + (d1 * ax1)) + (d2 * ax2)) : Dynamic));
-    (out.y = cast ((((cy + (d0 * ay0)) + (d1 * ay1)) + (d2 * ay2)) : Dynamic));
-    (out.z = cast ((((cz + (d0 * az0)) + (d1 * az1)) + (d2 * az2)) : Dynamic));
+    (out.x = cast ((((cx + (d0 * ax0)) + (d1 * ax1)) + (d2 * ax2)) : Float));
+    (out.y = cast ((((cy + (d0 * ay0)) + (d1 * ay1)) + (d2 * ay2)) : Float));
+    (out.z = cast ((((cz + (d0 * az0)) + (d1 * az1)) + (d2 * az2)) : Float));
   }
 
   public static function intersectRay3DObb(ray:Ray3DLike, obb:ObbLike):Float {
@@ -247,16 +247,16 @@ class Obb {
   }
 
   public static function setObb(out:ObbLike, centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Void {
-    (out.centerX = cast (centerX : Dynamic));
-    (out.centerY = cast (centerY : Dynamic));
-    (out.centerZ = cast (centerZ : Dynamic));
-    (out.halfExtentX = cast (halfExtentX : Dynamic));
-    (out.halfExtentY = cast (halfExtentY : Dynamic));
-    (out.halfExtentZ = cast (halfExtentZ : Dynamic));
-    (out.orientationX = cast (orientationX : Dynamic));
-    (out.orientationY = cast (orientationY : Dynamic));
-    (out.orientationZ = cast (orientationZ : Dynamic));
-    (out.orientationW = cast (orientationW : Dynamic));
+    (out.centerX = cast (centerX : Float));
+    (out.centerY = cast (centerY : Float));
+    (out.centerZ = cast (centerZ : Float));
+    (out.halfExtentX = cast (halfExtentX : Float));
+    (out.halfExtentY = cast (halfExtentY : Float));
+    (out.halfExtentZ = cast (halfExtentZ : Float));
+    (out.orientationX = cast (orientationX : Float));
+    (out.orientationY = cast (orientationY : Float));
+    (out.orientationZ = cast (orientationZ : Float));
+    (out.orientationW = cast (orientationW : Float));
   }
 
   public static function transformObbByMatrix4(out:ObbLike, obb:ObbLike, m:Matrix4Like):Void {
@@ -343,16 +343,16 @@ class Obb {
       (mqy = cast (((r21 + r12) / s) : Dynamic));
       (mqz = cast ((0.25 * s) : Dynamic));
     } } }
-    (out.centerX = cast (newCx : Dynamic));
-    (out.centerY = cast (newCy : Dynamic));
-    (out.centerZ = cast (newCz : Dynamic));
-    (out.halfExtentX = cast ((hx * sx) : Dynamic));
-    (out.halfExtentY = cast ((hy * sy) : Dynamic));
-    (out.halfExtentZ = cast ((hz * sz) : Dynamic));
-    (out.orientationX = cast (((((mqw * oqx) + (mqx * oqw)) + (mqy * oqz)) - (mqz * oqy)) : Dynamic));
-    (out.orientationY = cast (((((mqw * oqy) - (mqx * oqz)) + (mqy * oqw)) + (mqz * oqx)) : Dynamic));
-    (out.orientationZ = cast (((((mqw * oqz) + (mqx * oqy)) - (mqy * oqx)) + (mqz * oqw)) : Dynamic));
-    (out.orientationW = cast (((((mqw * oqw) - (mqx * oqx)) - (mqy * oqy)) - (mqz * oqz)) : Dynamic));
+    (out.centerX = cast (newCx : Float));
+    (out.centerY = cast (newCy : Float));
+    (out.centerZ = cast (newCz : Float));
+    (out.halfExtentX = cast ((hx * sx) : Float));
+    (out.halfExtentY = cast ((hy * sy) : Float));
+    (out.halfExtentZ = cast ((hz * sz) : Float));
+    (out.orientationX = cast (((((mqw * oqx) + (mqx * oqw)) + (mqy * oqz)) - (mqz * oqy)) : Float));
+    (out.orientationY = cast (((((mqw * oqy) - (mqx * oqz)) + (mqy * oqw)) + (mqz * oqx)) : Float));
+    (out.orientationZ = cast (((((mqw * oqz) + (mqx * oqy)) - (mqy * oqx)) + (mqz * oqw)) : Float));
+    (out.orientationW = cast (((((mqw * oqw) - (mqx * oqx)) - (mqy * oqy)) - (mqz * oqz)) : Float));
   }
 
   public static function obbLocalAxes__obb(obb:ObbLike):Array<Float> {

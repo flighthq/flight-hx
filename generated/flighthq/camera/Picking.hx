@@ -56,20 +56,20 @@ class Picking {
       (farY = cast ((farY * invW) : Dynamic));
       (farZ = cast ((farZ * invW) : Dynamic));
     }
-    (Picking.__scratchNear__picking.x = cast (nearX : Dynamic));
-    (Picking.__scratchNear__picking.y = cast (nearY : Dynamic));
-    (Picking.__scratchNear__picking.z = cast (nearZ : Dynamic));
-    (Picking.__scratchFar__picking.x = cast (farX : Dynamic));
-    (Picking.__scratchFar__picking.y = cast (farY : Dynamic));
-    (Picking.__scratchFar__picking.z = cast (farZ : Dynamic));
+    (Picking.__scratchNear__picking.x = cast (nearX : Float));
+    (Picking.__scratchNear__picking.y = cast (nearY : Float));
+    (Picking.__scratchNear__picking.z = cast (nearZ : Float));
+    (Picking.__scratchFar__picking.x = cast (farX : Float));
+    (Picking.__scratchFar__picking.y = cast (farY : Float));
+    (Picking.__scratchFar__picking.z = cast (farZ : Float));
     subtractVector3(({ final __callArgument4:Dynamic = Picking.__scratchDir__picking; __callArgument4; }), ({ final __callArgument5:Dynamic = Picking.__scratchFar__picking; __callArgument5; }), ({ final __callArgument6:Dynamic = Picking.__scratchNear__picking; __callArgument6; }));
     (cast normalizeVector3(({ final __callArgument7:Dynamic = Picking.__scratchDir__picking; __callArgument7; }), ({ final __callArgument8:Dynamic = Picking.__scratchDir__picking; __callArgument8; })) : Float);
-    ((cast out.origin : { var x:Float; }).x = cast (nearX : Dynamic));
-    ((cast out.origin : { var y:Float; }).y = cast (nearY : Dynamic));
-    ((cast out.origin : { var z:Float; }).z = cast (nearZ : Dynamic));
-    ((cast out.direction : { var x:Float; }).x = cast (Picking.__scratchDir__picking.x : Dynamic));
-    ((cast out.direction : { var y:Float; }).y = cast (Picking.__scratchDir__picking.y : Dynamic));
-    ((cast out.direction : { var z:Float; }).z = cast (Picking.__scratchDir__picking.z : Dynamic));
+    ((cast out.origin : { var x:Float; }).x = cast (nearX : Float));
+    ((cast out.origin : { var y:Float; }).y = cast (nearY : Float));
+    ((cast out.origin : { var z:Float; }).z = cast (nearZ : Float));
+    ((cast out.direction : { var x:Float; }).x = cast (Picking.__scratchDir__picking.x : Float));
+    ((cast out.direction : { var y:Float; }).y = cast (Picking.__scratchDir__picking.y : Float));
+    ((cast out.direction : { var z:Float; }).z = cast (Picking.__scratchDir__picking.z : Float));
     return cast true;
     return cast null;
   }
@@ -97,9 +97,9 @@ class Picking {
       return cast false;
     }
     invW = (1.0 / clipW);
-    (out.x = cast ((clipX * invW) : Dynamic));
-    (out.y = cast ((clipY * invW) : Dynamic));
-    (out.z = cast ((clipZ * invW) : Dynamic));
+    (out.x = cast ((clipX * invW) : Float));
+    (out.y = cast ((clipY * invW) : Float));
+    (out.z = cast ((clipZ * invW) : Float));
     return cast true;
     return cast null;
   }

@@ -28,7 +28,7 @@ class Shortcut {
   public static var _backend__shortcut:Null<ShortcutBackend> = _Runtime.explicitNull();
 
   public static function _copyParsed__shortcut(source:_Parsed__shortcut, out:ParsedAccelerator):ParsedAccelerator {
-    (out.key = cast (_Runtime.field(source, 'key') : Dynamic));
+    (out.key = cast (_Runtime.field(source, 'key') : String));
     _Runtime.setLength(out.modifiers, 0.0);
     for (modifier in _Runtime.iterable(_Runtime.field(source, 'modifiers'))) {
       _Runtime.callProperty(out.modifiers, 'push', cast ([modifier] : Array<Dynamic>));

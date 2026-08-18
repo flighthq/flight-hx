@@ -52,19 +52,19 @@ class TextLabel {
     label = (cast source : flighthq.types.TextLabel);
     data = (cast label : flighthq.types.TextLabel).data;
     if ((cast _Runtime.strictEquals((cast data : TextLabelData).autoSize, 'none') : Bool)) {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.width = cast ((cast data : TextLabelData).width : Dynamic));
-      (out.height = cast ((cast data : TextLabelData).height : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.width = cast ((cast data : TextLabelData).width : Float));
+      (out.height = cast ((cast data : TextLabelData).height : Float));
       return;
     }
     ensureTextLayout(({ final __callArgument1:Dynamic = label; __callArgument1; }));
     layout = (cast getTextLayout(({ final __callArgument2:Dynamic = label; __callArgument2; })) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.width = cast ((cast data : TextLabelData).width : Dynamic));
-      (out.height = cast ((cast data : TextLabelData).height : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.width = cast ((cast data : TextLabelData).width : Float));
+      (out.height = cast ((cast data : TextLabelData).height : Float));
       return;
     }
     computeTextBoundsRectangle(({ final __callArgument3:Dynamic = out; __callArgument3; }), ({ final __callArgument4:Dynamic = data; __callArgument4; }), ({ final __callArgument5:Dynamic = layout; __callArgument5; }));

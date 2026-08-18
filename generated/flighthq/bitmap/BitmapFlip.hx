@@ -13,22 +13,22 @@ class BitmapFlip {
     var h:Float = cast _Runtime.UNDEFINED;
     var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     var stride:Float = cast _Runtime.UNDEFINED;
-    w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
-    h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
-    data = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    stride = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
+    w = HxMath.min(dest.width, source.width);
+    h = HxMath.min(dest.height, source.height);
+    data = (cast dest.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    stride = (cast dest.bitmap : { var width:Float; }).width;
     if ((cast (cast BitmapFlip.isSameRegion__bitmapFlip(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; })) : Bool) : Bool)) {
       var half:Float = (_Runtime.toInt32(w) >> 1);
       {
         var py:Float = 0.0;
         while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-          var y:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
-          if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
+          var y:Float = (dest.y + py);
+          if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
           {
             var px:Float = 0.0;
             while ((cast ((cast px : Float) < (cast half : Float)) : Bool)) {
-              var xa:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
-              var xb:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), ((w - 1.0) - px));
+              var xa:Float = (dest.x + px);
+              var xb:Float = (dest.x + ((w - 1.0) - px));
               if ((cast ((cast ((cast ((cast ((cast xa : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast xa : Float) >= (cast stride : Float)) : Bool)) : Bool) || (cast ((cast xb : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast xb : Float) >= (cast stride : Float)) : Bool)) : Bool)) { px++; continue; }
               BitmapFlip.swapPixels__bitmapFlip(({ final __callArgument2:Dynamic = data; __callArgument2; }), (cast (((y * stride) + xa) * 4.0) : Float), (cast (((y * stride) + xb) * 4.0) : Float));
               px++;
@@ -40,7 +40,7 @@ class BitmapFlip {
       return;
     }
     BitmapFlip.copyMirrored__bitmapFlip(({ final __callArgument3:Dynamic = dest; __callArgument3; }), ({ final __callArgument4:Dynamic = source; __callArgument4; }), (cast w : Float), (cast h : Float), (cast true : Bool), (cast false : Bool));
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap(dest.bitmap);
   }
 
   public static function flipBitmapVertical(dest:BitmapRegion, source:BitmapRegion):Void {
@@ -48,22 +48,22 @@ class BitmapFlip {
     var h:Float = cast _Runtime.UNDEFINED;
     var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     var stride:Float = cast _Runtime.UNDEFINED;
-    w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
-    h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
-    data = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    stride = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
+    w = HxMath.min(dest.width, source.width);
+    h = HxMath.min(dest.height, source.height);
+    data = (cast dest.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    stride = (cast dest.bitmap : { var width:Float; }).width;
     if ((cast (cast BitmapFlip.isSameRegion__bitmapFlip(({ final __callArgument5:Dynamic = dest; __callArgument5; }), ({ final __callArgument6:Dynamic = source; __callArgument6; })) : Bool) : Bool)) {
       var half:Float = (_Runtime.toInt32(h) >> 1);
       {
         var py:Float = 0.0;
         while ((cast ((cast py : Float) < (cast half : Float)) : Bool)) {
-          var yTop:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
-          var yBottom:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), ((h - 1.0) - py));
-          if ((cast ((cast ((cast ((cast ((cast yTop : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast yTop : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool) || (cast ((cast yBottom : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast yBottom : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
+          var yTop:Float = (dest.y + py);
+          var yBottom:Float = (dest.y + ((h - 1.0) - py));
+          if ((cast ((cast ((cast ((cast ((cast yTop : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast yTop : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool) || (cast ((cast yBottom : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast yBottom : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
           {
             var px:Float = 0.0;
             while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-              var x:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+              var x:Float = (dest.x + px);
               if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast stride : Float)) : Bool)) : Bool)) { px++; continue; }
               BitmapFlip.swapPixels__bitmapFlip(({ final __callArgument7:Dynamic = data; __callArgument7; }), (cast (((yTop * stride) + x) * 4.0) : Float), (cast (((yBottom * stride) + x) * 4.0) : Float));
               px++;
@@ -75,7 +75,7 @@ class BitmapFlip {
       return;
     }
     BitmapFlip.copyMirrored__bitmapFlip(({ final __callArgument8:Dynamic = dest; __callArgument8; }), ({ final __callArgument9:Dynamic = source; __callArgument9; }), (cast w : Float), (cast h : Float), (cast false : Bool), (cast true : Bool));
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap(dest.bitmap);
   }
 
   public static function copyMirrored__bitmapFlip(dest:BitmapRegion, source:BitmapRegion, w:Float, h:Float, mirrorX:Bool, mirrorY:Bool):Void {
@@ -83,21 +83,21 @@ class BitmapFlip {
     var dd:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     var sStride:Float = cast _Runtime.UNDEFINED;
     var dStride:Float = cast _Runtime.UNDEFINED;
-    sd = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    dd = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    sStride = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
-    dStride = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
+    sd = (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    dd = (cast dest.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    sStride = (cast source.bitmap : { var width:Float; }).width;
+    dStride = (cast dest.bitmap : { var width:Float; }).width;
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-        var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), ((cast mirrorY : Bool) ? (cast ((h - 1.0) - py) : Dynamic) : (cast py : Dynamic)));
-        var dy:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
-        if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
+        var sy:Float = _Runtime.addNumbers(source.y, ((cast mirrorY : Bool) ? (cast ((h - 1.0) - py) : Dynamic) : (cast py : Dynamic)));
+        var dy:Float = (dest.y + py);
+        if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast (cast source.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), ((cast mirrorX : Bool) ? (cast ((w - 1.0) - px) : Dynamic) : (cast px : Dynamic)));
-            var dx:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+            var sx:Float = _Runtime.addNumbers(source.x, ((cast mirrorX : Bool) ? (cast ((w - 1.0) - px) : Dynamic) : (cast px : Dynamic)));
+            var dx:Float = (dest.x + px);
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Float = (((sy * sStride) + sx) * 4.0);
             var di:Float = (((dy * dStride) + dx) * 4.0);
@@ -114,7 +114,7 @@ class BitmapFlip {
   }
 
   public static function isSameRegion__bitmapFlip(a:BitmapRegion, b:BitmapRegion):Bool {
-    return cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'bitmap'), _Runtime.field(b, 'bitmap')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'width'), _Runtime.field(b, 'width')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'height'), _Runtime.field(b, 'height')) : Bool));
+    return cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(a.bitmap, b.bitmap) : Bool) && (cast _Runtime.strictEquals(a.x, b.x) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.y, b.y) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.width, b.width) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.height, b.height) : Bool));
     return cast null;
   }
 

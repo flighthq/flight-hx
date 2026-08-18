@@ -216,13 +216,13 @@ class BitmapBlur {
       var pass:Float = 0.0;
       while ((cast ((cast pass : Float) < (cast passes : Float)) : Bool)) {
         if ((cast ((cast radiusX : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsHorizontal(({ final __callArgument2:Dynamic = b; __callArgument2; }), ({ final __callArgument3:Dynamic = a; __callArgument3; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), (cast radiusX : Float));
+          blurBitmapPixelsHorizontal(({ final __callArgument2:Dynamic = b; __callArgument2; }), ({ final __callArgument3:Dynamic = a; __callArgument3; }), (cast source.width : Float), (cast source.height : Float), (cast radiusX : Float));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
         if ((cast ((cast radiusY : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsVertical(({ final __callArgument4:Dynamic = b; __callArgument4; }), ({ final __callArgument5:Dynamic = a; __callArgument5; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), (cast radiusY : Float));
+          blurBitmapPixelsVertical(({ final __callArgument4:Dynamic = b; __callArgument4; }), ({ final __callArgument5:Dynamic = a; __callArgument5; }), (cast source.width : Float), (cast source.height : Float), (cast radiusY : Float));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
@@ -231,7 +231,7 @@ class BitmapBlur {
       }
     }
     if ((cast !_Runtime.strictEquals(a, out) : Bool)) {
-      (cast out : flighthq._internal._UInt8ClampedArray).set((cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int((_Runtime.multiplyNumbers(_Runtime.field(source, 'width'), _Runtime.field(source, 'height')) * 4.0))));
+      (cast out : flighthq._internal._UInt8ClampedArray).set((cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((source.width * source.height) * 4.0))));
     }
   }
 
@@ -288,13 +288,13 @@ class BitmapBlur {
       var pass:Float = 0.0;
       while ((cast ((cast pass : Float) < (cast passCount : Float)) : Bool)) {
         if (_Runtime.truthy(kernelX)) {
-          blurBitmapPixelsHorizontalWeighted(({ final __callArgument12:Dynamic = b; __callArgument12; }), ({ final __callArgument13:Dynamic = a; __callArgument13; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), ({ final __callArgument14:Dynamic = kernelX; __callArgument14; }));
+          blurBitmapPixelsHorizontalWeighted(({ final __callArgument12:Dynamic = b; __callArgument12; }), ({ final __callArgument13:Dynamic = a; __callArgument13; }), (cast source.width : Float), (cast source.height : Float), ({ final __callArgument14:Dynamic = kernelX; __callArgument14; }));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
         if (_Runtime.truthy(kernelY)) {
-          blurBitmapPixelsVerticalWeighted(({ final __callArgument15:Dynamic = b; __callArgument15; }), ({ final __callArgument16:Dynamic = a; __callArgument16; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), ({ final __callArgument17:Dynamic = kernelY; __callArgument17; }));
+          blurBitmapPixelsVerticalWeighted(({ final __callArgument15:Dynamic = b; __callArgument15; }), ({ final __callArgument16:Dynamic = a; __callArgument16; }), (cast source.width : Float), (cast source.height : Float), ({ final __callArgument17:Dynamic = kernelY; __callArgument17; }));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
@@ -303,7 +303,7 @@ class BitmapBlur {
       }
     }
     if ((cast !_Runtime.strictEquals(a, out) : Bool)) {
-      (cast out : flighthq._internal._UInt8ClampedArray).set((cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int((_Runtime.multiplyNumbers(_Runtime.field(source, 'width'), _Runtime.field(source, 'height')) * 4.0))));
+      (cast out : flighthq._internal._UInt8ClampedArray).set((cast a : flighthq._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(((source.width * source.height) * 4.0))));
     }
   }
 }

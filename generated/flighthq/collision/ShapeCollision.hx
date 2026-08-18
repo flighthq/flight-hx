@@ -298,8 +298,8 @@ class ShapeCollision {
         var y0:Float = _Runtime.getIndex(px, ((_Runtime.toInt32(i) << 1) + 1.0));
         var x1:Float = _Runtime.getIndex(px, (_Runtime.toInt32(j) << 1));
         var y1:Float = _Runtime.getIndex(px, ((_Runtime.toInt32(j) << 1) + 1.0));
-        (ShapeCollision.scratchAxis__shapeCollision.x = cast ((y1 - y0) : Dynamic));
-        (ShapeCollision.scratchAxis__shapeCollision.y = cast (-(x1 - x0) : Dynamic));
+        (ShapeCollision.scratchAxis__shapeCollision.x = cast ((y1 - y0) : Float));
+        (ShapeCollision.scratchAxis__shapeCollision.y = cast (-(x1 - x0) : Float));
         var len:Float = (cast normalizeVector2(({ final __callArgument60:Dynamic = ShapeCollision.scratchAxis__shapeCollision; __callArgument60; }), ({ final __callArgument61:Dynamic = ShapeCollision.scratchAxis__shapeCollision; __callArgument61; })) : Float);
         if ((cast ((cast len : Float) <= (cast epsilon : Float)) : Bool)) { i++; continue; }
         ShapeCollision.canonicalizeScratchAxis__shapeCollision();
@@ -337,8 +337,8 @@ class ShapeCollision {
         i++;
       }
     }
-    (ShapeCollision.scratchAxis__shapeCollision.x = cast ((cx - nearestX) : Dynamic));
-    (ShapeCollision.scratchAxis__shapeCollision.y = cast ((cy - nearestY) : Dynamic));
+    (ShapeCollision.scratchAxis__shapeCollision.x = cast ((cx - nearestX) : Float));
+    (ShapeCollision.scratchAxis__shapeCollision.y = cast ((cy - nearestY) : Float));
     vertexAxisLen = (cast normalizeVector2(({ final __callArgument64:Dynamic = ShapeCollision.scratchAxis__shapeCollision; __callArgument64; }), ({ final __callArgument65:Dynamic = ShapeCollision.scratchAxis__shapeCollision; __callArgument65; })) : Float);
     if ((cast ((cast vertexAxisLen : Float) > (cast epsilon : Float)) : Bool)) {
       ShapeCollision.canonicalizeScratchAxis__shapeCollision();
@@ -486,8 +486,8 @@ class ShapeCollision {
         var y0:Float = _Runtime.getIndex(sx, ((_Runtime.toInt32(i) << 1) + 1.0));
         var x1:Float = _Runtime.getIndex(sx, (_Runtime.toInt32(j) << 1));
         var y1:Float = _Runtime.getIndex(sx, ((_Runtime.toInt32(j) << 1) + 1.0));
-        (ShapeCollision.scratchAxis__shapeCollision.x = cast ((y1 - y0) : Dynamic));
-        (ShapeCollision.scratchAxis__shapeCollision.y = cast (-(x1 - x0) : Dynamic));
+        (ShapeCollision.scratchAxis__shapeCollision.x = cast ((y1 - y0) : Float));
+        (ShapeCollision.scratchAxis__shapeCollision.y = cast (-(x1 - x0) : Float));
         var len:Float = (cast normalizeVector2(({ final __callArgument80:Dynamic = ShapeCollision.scratchAxis__shapeCollision; __callArgument80; }), ({ final __callArgument81:Dynamic = ShapeCollision.scratchAxis__shapeCollision; __callArgument81; })) : Float);
         if ((cast ((cast len : Float) <= (cast epsilon : Float)) : Bool)) { i++; continue; }
         ShapeCollision.canonicalizeScratchAxis__shapeCollision();
@@ -551,8 +551,8 @@ class ShapeCollision {
 
   public static function canonicalizeScratchAxis__shapeCollision():Void {
     if ((cast ((cast ((cast ShapeCollision.scratchAxis__shapeCollision.x : Float) < (cast -ShapeCollision.RELATIVE_EPSILON__shapeCollision : Float)) : Bool) || (cast _Runtime.andValue(((cast HxMath.abs(ShapeCollision.scratchAxis__shapeCollision.x) : Float) <= (cast ShapeCollision.RELATIVE_EPSILON__shapeCollision : Float)), function():Dynamic return cast ((cast ShapeCollision.scratchAxis__shapeCollision.y : Float) < (cast 0.0 : Float))) : Bool)) : Bool)) {
-      (ShapeCollision.scratchAxis__shapeCollision.x = cast (-ShapeCollision.scratchAxis__shapeCollision.x : Dynamic));
-      (ShapeCollision.scratchAxis__shapeCollision.y = cast (-ShapeCollision.scratchAxis__shapeCollision.y : Dynamic));
+      (ShapeCollision.scratchAxis__shapeCollision.x = cast (-ShapeCollision.scratchAxis__shapeCollision.x : Float));
+      (ShapeCollision.scratchAxis__shapeCollision.y = cast (-ShapeCollision.scratchAxis__shapeCollision.y : Float));
     }
   }
 

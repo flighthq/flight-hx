@@ -136,12 +136,12 @@ class Sensors {
     alpha = HxMath.atan2((2.0 * ((w * z) + (x * y))), (1.0 - (2.0 * ((x * x) + (z * z)))));
     gamma = HxMath.atan2((2.0 * ((w * y) + (x * z))), (1.0 - (2.0 * ((x * x) + (y * y)))));
     toDeg = (180.0 / HxMath.PI);
-    (out.alpha = cast (_Runtime.fmod((_Runtime.fmod((alpha * toDeg), 360.0) + 360.0), 360.0) : Dynamic));
-    (out.beta = cast ((beta * toDeg) : Dynamic));
-    (out.gamma = cast ((gamma * toDeg) : Dynamic));
-    (out.interval = cast (quaternion.interval : Dynamic));
-    (out.timestamp = cast (quaternion.timestamp : Dynamic));
-    (out.accuracy = cast (quaternion.accuracy : Dynamic));
+    (out.alpha = cast (_Runtime.fmod((_Runtime.fmod((alpha * toDeg), 360.0) + 360.0), 360.0) : Float));
+    (out.beta = cast ((beta * toDeg) : Float));
+    (out.gamma = cast ((gamma * toDeg) : Float));
+    (out.interval = cast (quaternion.interval : Float));
+    (out.timestamp = cast (quaternion.timestamp : Float));
+    (out.accuracy = cast (quaternion.accuracy : SensorAccuracy));
   }
 
   public static function computeGravityFromOrientation(out:MotionReading, orientation:OrientationReading):Void {
@@ -161,12 +161,12 @@ class Sensors {
     cosG = HxMath.cos(g);
     sinB = HxMath.sin(b);
     cosB = HxMath.cos(b);
-    (out.x = cast (((G * cosB) * sinG) : Dynamic));
-    (out.y = cast ((-G * sinB) : Dynamic));
-    (out.z = cast (((G * cosB) * cosG) : Dynamic));
-    (out.interval = cast (orientation.interval : Dynamic));
-    (out.timestamp = cast (orientation.timestamp : Dynamic));
-    (out.accuracy = cast (orientation.accuracy : Dynamic));
+    (out.x = cast (((G * cosB) * sinG) : Float));
+    (out.y = cast ((-G * sinB) : Float));
+    (out.z = cast (((G * cosB) * cosG) : Float));
+    (out.interval = cast (orientation.interval : Float));
+    (out.timestamp = cast (orientation.timestamp : Float));
+    (out.accuracy = cast (orientation.accuracy : SensorAccuracy));
   }
 
   public static function computeQuaternionFromOrientationReading(out:QuaternionReading, orientation:OrientationReading):Void {
@@ -190,13 +190,13 @@ class Sensors {
     sb = HxMath.sin(b);
     cg = HxMath.cos(g);
     sg = HxMath.sin(g);
-    (out.x = cast ((((sa * sb) * cg) - ((ca * cb) * sg)) : Dynamic));
-    (out.y = cast ((((sa * cb) * sg) + ((ca * sb) * cg)) : Dynamic));
-    (out.z = cast ((((ca * cb) * sg) - ((sa * sb) * cg)) : Dynamic));
-    (out.w = cast ((((ca * cb) * cg) + ((sa * sb) * sg)) : Dynamic));
-    (out.interval = cast (orientation.interval : Dynamic));
-    (out.timestamp = cast (orientation.timestamp : Dynamic));
-    (out.accuracy = cast (orientation.accuracy : Dynamic));
+    (out.x = cast ((((sa * sb) * cg) - ((ca * cb) * sg)) : Float));
+    (out.y = cast ((((sa * cb) * sg) + ((ca * sb) * cg)) : Float));
+    (out.z = cast ((((ca * cb) * sg) - ((sa * sb) * cg)) : Float));
+    (out.w = cast ((((ca * cb) * cg) + ((sa * sb) * sg)) : Float));
+    (out.interval = cast (orientation.interval : Float));
+    (out.timestamp = cast (orientation.timestamp : Float));
+    (out.accuracy = cast (orientation.accuracy : SensorAccuracy));
   }
 
   public static function computeRotationMatrixFromQuaternion(out:Array<Float>, quaternion:QuaternionReading):Void {
@@ -258,14 +258,14 @@ class Sensors {
     angle = (screenAngle * toRad);
     sinA = HxMath.sin(angle);
     cosA = HxMath.cos(angle);
-    (out.alpha = cast (alpha : Dynamic));
-    (out.beta = cast (((beta * cosA) - (gamma * sinA)) : Dynamic));
-    (out.gamma = cast (((beta * sinA) + (gamma * cosA)) : Dynamic));
-    (out.absolute = cast (orientation.absolute : Dynamic));
-    (out.heading = cast (orientation.heading : Dynamic));
-    (out.interval = cast (orientation.interval : Dynamic));
-    (out.timestamp = cast (orientation.timestamp : Dynamic));
-    (out.accuracy = cast (orientation.accuracy : Dynamic));
+    (out.alpha = cast (alpha : Float));
+    (out.beta = cast (((beta * cosA) - (gamma * sinA)) : Float));
+    (out.gamma = cast (((beta * sinA) + (gamma * cosA)) : Float));
+    (out.absolute = cast (orientation.absolute : Bool));
+    (out.heading = cast (orientation.heading : Float));
+    (out.interval = cast (orientation.interval : Float));
+    (out.timestamp = cast (orientation.timestamp : Float));
+    (out.accuracy = cast (orientation.accuracy : SensorAccuracy));
   }
 
   public static function computeWorldAccelerationFromDeviceAcceleration(out:MotionReading, acceleration:MotionReading, quaternion:QuaternionReading):Void {
@@ -297,12 +297,12 @@ class Sensors {
     ccx = ((qy * cz) - (qz * cy));
     ccy = ((qz * cx) - (qx * cz));
     ccz = ((qx * cy) - (qy * cx));
-    (out.x = cast (((ax + (twx * cx)) + (2.0 * ccx)) : Dynamic));
-    (out.y = cast (((ay + (twx * cy)) + (2.0 * ccy)) : Dynamic));
-    (out.z = cast (((az + (twx * cz)) + (2.0 * ccz)) : Dynamic));
-    (out.interval = cast (acceleration.interval : Dynamic));
-    (out.timestamp = cast (acceleration.timestamp : Dynamic));
-    (out.accuracy = cast (acceleration.accuracy : Dynamic));
+    (out.x = cast (((ax + (twx * cx)) + (2.0 * ccx)) : Float));
+    (out.y = cast (((ay + (twx * cy)) + (2.0 * ccy)) : Float));
+    (out.z = cast (((az + (twx * cz)) + (2.0 * ccz)) : Float));
+    (out.interval = cast (acceleration.interval : Float));
+    (out.timestamp = cast (acceleration.timestamp : Float));
+    (out.accuracy = cast (acceleration.accuracy : SensorAccuracy));
   }
 
   @:noCompletion
@@ -436,14 +436,14 @@ class Sensors {
             var q:Null<Array<Float>> = cast _Runtime.UNDEFINED;
             q = (cast sensor : WebOrientationSensor__sensors).quaternion;
             if (_Runtime.truthy(q)) {
-              (Sensors._quaternionReading__sensors.x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
-              (Sensors._quaternionReading__sensors.y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
-              (Sensors._quaternionReading__sensors.z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
-              (Sensors._quaternionReading__sensors.w = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 3.0 : Float)), function():Dynamic return cast 1.0) : Dynamic));
+              (Sensors._quaternionReading__sensors.x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0) : Float));
+              (Sensors._quaternionReading__sensors.y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 0.0) : Float));
+              (Sensors._quaternionReading__sensors.z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 0.0) : Float));
+              (Sensors._quaternionReading__sensors.w = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 3.0 : Float)), function():Dynamic return cast 1.0) : Float));
               computeEulerFromQuaternion(({ final __callArgument15:Dynamic = Sensors._absoluteOrientation__sensors; __callArgument15; }), ({ final __callArgument16:Dynamic = Sensors._quaternionReading__sensors; __callArgument16; }));
             }
-            (Sensors._absoluteOrientation__sensors.absolute = cast (true : Dynamic));
-            (Sensors._absoluteOrientation__sensors.heading = cast (-1.0 : Dynamic));
+            (Sensors._absoluteOrientation__sensors.absolute = cast (true : Bool));
+            (Sensors._absoluteOrientation__sensors.heading = cast (-1.0 : Float));
             listener(({ final __callArgument17:Dynamic = Sensors._absoluteOrientation__sensors; __callArgument17; }));
           });
           (cast sensor : WebOrientationSensor__sensors).addEventListener((cast 'reading' : String), ({ final __callArgument18:Dynamic = handler; __callArgument18; }));
@@ -456,13 +456,13 @@ class Sensors {
         }
       }
       handler = (cast function(event:WebDeviceOrientationEvent__sensors):Void {
-        (Sensors._absoluteOrientation__sensors.alpha = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).alpha, function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._absoluteOrientation__sensors.beta = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).beta, function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._absoluteOrientation__sensors.gamma = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).gamma, function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._absoluteOrientation__sensors.absolute = cast (true : Dynamic));
-        (Sensors._absoluteOrientation__sensors.heading = cast (-1.0 : Dynamic));
-        (Sensors._absoluteOrientation__sensors.interval = cast (-1.0 : Dynamic));
-        (Sensors._absoluteOrientation__sensors.timestamp = cast (-1.0 : Dynamic));
+        (Sensors._absoluteOrientation__sensors.alpha = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).alpha, function():Dynamic return cast 0.0) : Float));
+        (Sensors._absoluteOrientation__sensors.beta = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).beta, function():Dynamic return cast 0.0) : Float));
+        (Sensors._absoluteOrientation__sensors.gamma = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).gamma, function():Dynamic return cast 0.0) : Float));
+        (Sensors._absoluteOrientation__sensors.absolute = cast (true : Bool));
+        (Sensors._absoluteOrientation__sensors.heading = cast (-1.0 : Float));
+        (Sensors._absoluteOrientation__sensors.interval = cast (-1.0 : Float));
+        (Sensors._absoluteOrientation__sensors.timestamp = cast (-1.0 : Float));
         listener(({ final __callArgument20:Dynamic = Sensors._absoluteOrientation__sensors; __callArgument20; }));
       });
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['deviceorientationabsolute', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
@@ -481,9 +481,9 @@ class Sensors {
         var sensor:WebAmbientLightSensor__sensors = (cast _Runtime.construct(ctor, [sensorOptions]) : WebAmbientLightSensor__sensors);
         var handler:Void->Void = cast _Runtime.UNDEFINED;
         handler = (cast function():Void {
-          (Sensors._ambientLight__sensors.illuminance = cast (_Runtime.coalesce((cast sensor : WebAmbientLightSensor__sensors).illuminance, function():Dynamic return cast 0.0) : Dynamic));
-          (Sensors._ambientLight__sensors.interval = cast (-1.0 : Dynamic));
-          (Sensors._ambientLight__sensors.timestamp = cast (-1.0 : Dynamic));
+          (Sensors._ambientLight__sensors.illuminance = cast (_Runtime.coalesce((cast sensor : WebAmbientLightSensor__sensors).illuminance, function():Dynamic return cast 0.0) : Float));
+          (Sensors._ambientLight__sensors.interval = cast (-1.0 : Float));
+          (Sensors._ambientLight__sensors.timestamp = cast (-1.0 : Float));
           listener(({ final __callArgument22:Dynamic = Sensors._ambientLight__sensors; __callArgument22; }));
         });
         (cast sensor : WebAmbientLightSensor__sensors).addEventListener((cast 'reading' : String), ({ final __callArgument23:Dynamic = handler; __callArgument23; }));
@@ -514,11 +514,11 @@ class Sensors {
         withGravity = (cast event : WebDeviceMotionEvent__sensors).accelerationIncludingGravity;
         linearAccel = (cast event : WebDeviceMotionEvent__sensors).acceleration;
         if ((cast !_Runtime.truthy(withGravity) : Bool)) { return; }
-        (Sensors._gravity__sensors.x = cast (_Runtime.subtractNumbers(_Runtime.coalesce((cast withGravity : WebMotionVector__sensors).x, function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural25 = linearAccel; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0)) : Dynamic));
-        (Sensors._gravity__sensors.y = cast (_Runtime.subtractNumbers(_Runtime.coalesce((cast withGravity : WebMotionVector__sensors).y, function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural26 = linearAccel; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0)) : Dynamic));
-        (Sensors._gravity__sensors.z = cast (_Runtime.subtractNumbers(_Runtime.coalesce((cast withGravity : WebMotionVector__sensors).z, function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural27 = linearAccel; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { @:optional var z:Null<Float>; }).z; }), function():Dynamic return cast 0.0)) : Dynamic));
-        (Sensors._gravity__sensors.interval = cast (_Runtime.coalesce((cast event : WebDeviceMotionEvent__sensors).interval, function():Dynamic return cast -1.0) : Dynamic));
-        (Sensors._gravity__sensors.timestamp = cast (-1.0 : Dynamic));
+        (Sensors._gravity__sensors.x = cast (_Runtime.subtractNumbers(_Runtime.coalesce((cast withGravity : WebMotionVector__sensors).x, function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural25 = linearAccel; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0)) : Float));
+        (Sensors._gravity__sensors.y = cast (_Runtime.subtractNumbers(_Runtime.coalesce((cast withGravity : WebMotionVector__sensors).y, function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural26 = linearAccel; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0)) : Float));
+        (Sensors._gravity__sensors.z = cast (_Runtime.subtractNumbers(_Runtime.coalesce((cast withGravity : WebMotionVector__sensors).z, function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural27 = linearAccel; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { @:optional var z:Null<Float>; }).z; }), function():Dynamic return cast 0.0)) : Float));
+        (Sensors._gravity__sensors.interval = cast (_Runtime.coalesce((cast event : WebDeviceMotionEvent__sensors).interval, function():Dynamic return cast -1.0) : Float));
+        (Sensors._gravity__sensors.timestamp = cast (-1.0 : Float));
         listener(({ final __callArgument28:Dynamic = Sensors._gravity__sensors; __callArgument28; }));
       });
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['devicemotion', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
@@ -535,11 +535,11 @@ class Sensors {
         var accel:Null<WebMotionVector__sensors> = cast _Runtime.UNDEFINED;
         accel = (cast event : WebDeviceMotionEvent__sensors).acceleration;
         if ((cast !_Runtime.truthy(accel) : Bool)) { return; }
-        (Sensors._linearAcceleration__sensors.x = cast (_Runtime.coalesce((cast accel : WebMotionVector__sensors).x, function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._linearAcceleration__sensors.y = cast (_Runtime.coalesce((cast accel : WebMotionVector__sensors).y, function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._linearAcceleration__sensors.z = cast (_Runtime.coalesce((cast accel : WebMotionVector__sensors).z, function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._linearAcceleration__sensors.interval = cast (_Runtime.coalesce((cast event : WebDeviceMotionEvent__sensors).interval, function():Dynamic return cast -1.0) : Dynamic));
-        (Sensors._linearAcceleration__sensors.timestamp = cast (-1.0 : Dynamic));
+        (Sensors._linearAcceleration__sensors.x = cast (_Runtime.coalesce((cast accel : WebMotionVector__sensors).x, function():Dynamic return cast 0.0) : Float));
+        (Sensors._linearAcceleration__sensors.y = cast (_Runtime.coalesce((cast accel : WebMotionVector__sensors).y, function():Dynamic return cast 0.0) : Float));
+        (Sensors._linearAcceleration__sensors.z = cast (_Runtime.coalesce((cast accel : WebMotionVector__sensors).z, function():Dynamic return cast 0.0) : Float));
+        (Sensors._linearAcceleration__sensors.interval = cast (_Runtime.coalesce((cast event : WebDeviceMotionEvent__sensors).interval, function():Dynamic return cast -1.0) : Float));
+        (Sensors._linearAcceleration__sensors.timestamp = cast (-1.0 : Float));
         listener(({ final __callArgument29:Dynamic = Sensors._linearAcceleration__sensors; __callArgument29; }));
       });
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['devicemotion', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
@@ -558,11 +558,11 @@ class Sensors {
         var sensor:WebMagnetometer__sensors = _Runtime.construct(ctor, [sensorOptions]);
         var handler:Void->Void = cast _Runtime.UNDEFINED;
         handler = (cast function():Void {
-          (Sensors._magnetometer__sensors.x = cast (_Runtime.coalesce((cast sensor : WebMagnetometer__sensors).x, function():Dynamic return cast 0.0) : Dynamic));
-          (Sensors._magnetometer__sensors.y = cast (_Runtime.coalesce((cast sensor : WebMagnetometer__sensors).y, function():Dynamic return cast 0.0) : Dynamic));
-          (Sensors._magnetometer__sensors.z = cast (_Runtime.coalesce((cast sensor : WebMagnetometer__sensors).z, function():Dynamic return cast 0.0) : Dynamic));
-          (Sensors._magnetometer__sensors.interval = cast (-1.0 : Dynamic));
-          (Sensors._magnetometer__sensors.timestamp = cast (-1.0 : Dynamic));
+          (Sensors._magnetometer__sensors.x = cast (_Runtime.coalesce((cast sensor : WebMagnetometer__sensors).x, function():Dynamic return cast 0.0) : Float));
+          (Sensors._magnetometer__sensors.y = cast (_Runtime.coalesce((cast sensor : WebMagnetometer__sensors).y, function():Dynamic return cast 0.0) : Float));
+          (Sensors._magnetometer__sensors.z = cast (_Runtime.coalesce((cast sensor : WebMagnetometer__sensors).z, function():Dynamic return cast 0.0) : Float));
+          (Sensors._magnetometer__sensors.interval = cast (-1.0 : Float));
+          (Sensors._magnetometer__sensors.timestamp = cast (-1.0 : Float));
           listener(({ final __callArgument31:Dynamic = Sensors._magnetometer__sensors; __callArgument31; }));
         });
         (cast sensor : WebMagnetometer__sensors).addEventListener((cast 'reading' : String), ({ final __callArgument32:Dynamic = handler; __callArgument32; }));
@@ -586,17 +586,17 @@ class Sensors {
         var accel:Null<WebMotionVector__sensors> = cast _Runtime.UNDEFINED;
         var rate:Null<WebRotationRate__sensors> = cast _Runtime.UNDEFINED;
         accel = (cast event : WebDeviceMotionEvent__sensors).accelerationIncludingGravity;
-        (Sensors._motionAcceleration__sensors.x = cast (_Runtime.coalesce(({ final __structural34 = accel; __structural34 == null ? _Runtime.UNDEFINED : (cast __structural34 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._motionAcceleration__sensors.y = cast (_Runtime.coalesce(({ final __structural35 = accel; __structural35 == null ? _Runtime.UNDEFINED : (cast __structural35 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._motionAcceleration__sensors.z = cast (_Runtime.coalesce(({ final __structural36 = accel; __structural36 == null ? _Runtime.UNDEFINED : (cast __structural36 : { @:optional var z:Null<Float>; }).z; }), function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._motionAcceleration__sensors.interval = cast (_Runtime.coalesce((cast event : WebDeviceMotionEvent__sensors).interval, function():Dynamic return cast -1.0) : Dynamic));
-        (Sensors._motionAcceleration__sensors.timestamp = cast (-1.0 : Dynamic));
+        (Sensors._motionAcceleration__sensors.x = cast (_Runtime.coalesce(({ final __structural34 = accel; __structural34 == null ? _Runtime.UNDEFINED : (cast __structural34 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0) : Float));
+        (Sensors._motionAcceleration__sensors.y = cast (_Runtime.coalesce(({ final __structural35 = accel; __structural35 == null ? _Runtime.UNDEFINED : (cast __structural35 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0) : Float));
+        (Sensors._motionAcceleration__sensors.z = cast (_Runtime.coalesce(({ final __structural36 = accel; __structural36 == null ? _Runtime.UNDEFINED : (cast __structural36 : { @:optional var z:Null<Float>; }).z; }), function():Dynamic return cast 0.0) : Float));
+        (Sensors._motionAcceleration__sensors.interval = cast (_Runtime.coalesce((cast event : WebDeviceMotionEvent__sensors).interval, function():Dynamic return cast -1.0) : Float));
+        (Sensors._motionAcceleration__sensors.timestamp = cast (-1.0 : Float));
         rate = (cast event : WebDeviceMotionEvent__sensors).rotationRate;
-        (Sensors._motionRotationRate__sensors.alpha = cast (_Runtime.coalesce(({ final __structural37 = rate; __structural37 == null ? _Runtime.UNDEFINED : (cast __structural37 : { @:optional var alpha:Null<Float>; }).alpha; }), function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._motionRotationRate__sensors.beta = cast (_Runtime.coalesce(({ final __structural38 = rate; __structural38 == null ? _Runtime.UNDEFINED : (cast __structural38 : { @:optional var beta:Null<Float>; }).beta; }), function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._motionRotationRate__sensors.gamma = cast (_Runtime.coalesce(({ final __structural39 = rate; __structural39 == null ? _Runtime.UNDEFINED : (cast __structural39 : { @:optional var gamma:Null<Float>; }).gamma; }), function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._motionRotationRate__sensors.interval = cast (_Runtime.coalesce((cast event : WebDeviceMotionEvent__sensors).interval, function():Dynamic return cast -1.0) : Dynamic));
-        (Sensors._motionRotationRate__sensors.timestamp = cast (-1.0 : Dynamic));
+        (Sensors._motionRotationRate__sensors.alpha = cast (_Runtime.coalesce(({ final __structural37 = rate; __structural37 == null ? _Runtime.UNDEFINED : (cast __structural37 : { @:optional var alpha:Null<Float>; }).alpha; }), function():Dynamic return cast 0.0) : Float));
+        (Sensors._motionRotationRate__sensors.beta = cast (_Runtime.coalesce(({ final __structural38 = rate; __structural38 == null ? _Runtime.UNDEFINED : (cast __structural38 : { @:optional var beta:Null<Float>; }).beta; }), function():Dynamic return cast 0.0) : Float));
+        (Sensors._motionRotationRate__sensors.gamma = cast (_Runtime.coalesce(({ final __structural39 = rate; __structural39 == null ? _Runtime.UNDEFINED : (cast __structural39 : { @:optional var gamma:Null<Float>; }).gamma; }), function():Dynamic return cast 0.0) : Float));
+        (Sensors._motionRotationRate__sensors.interval = cast (_Runtime.coalesce((cast event : WebDeviceMotionEvent__sensors).interval, function():Dynamic return cast -1.0) : Float));
+        (Sensors._motionRotationRate__sensors.timestamp = cast (-1.0 : Float));
         listener(({ final __callArgument40:Dynamic = Sensors._motionAcceleration__sensors; __callArgument40; }), ({ final __callArgument41:Dynamic = Sensors._motionRotationRate__sensors; __callArgument41; }));
       });
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['devicemotion', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
@@ -611,14 +611,14 @@ class Sensors {
       }; }
       handler = (cast function(event:WebDeviceOrientationEvent__sensors):Void {
         var heading:Null<Float> = cast _Runtime.UNDEFINED;
-        (Sensors._orientation__sensors.alpha = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).alpha, function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._orientation__sensors.beta = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).beta, function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._orientation__sensors.gamma = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).gamma, function():Dynamic return cast 0.0) : Dynamic));
-        (Sensors._orientation__sensors.absolute = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).absolute, function():Dynamic return cast false) : Dynamic));
-        (Sensors._orientation__sensors.interval = cast (-1.0 : Dynamic));
-        (Sensors._orientation__sensors.timestamp = cast (-1.0 : Dynamic));
+        (Sensors._orientation__sensors.alpha = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).alpha, function():Dynamic return cast 0.0) : Float));
+        (Sensors._orientation__sensors.beta = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).beta, function():Dynamic return cast 0.0) : Float));
+        (Sensors._orientation__sensors.gamma = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).gamma, function():Dynamic return cast 0.0) : Float));
+        (Sensors._orientation__sensors.absolute = cast (_Runtime.coalesce((cast event : WebDeviceOrientationEvent__sensors).absolute, function():Dynamic return cast false) : Bool));
+        (Sensors._orientation__sensors.interval = cast (-1.0 : Float));
+        (Sensors._orientation__sensors.timestamp = cast (-1.0 : Float));
         heading = (cast (cast event : { @:optional var webkitCompassHeading:Float; }) : { @:optional var webkitCompassHeading:Null<Float>; }).webkitCompassHeading;
-        (Sensors._orientation__sensors.heading = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(heading), 'number') : Bool) ? (cast heading : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
+        (Sensors._orientation__sensors.heading = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(heading), 'number') : Bool) ? (cast heading : Dynamic) : (cast -1.0 : Dynamic)) : Float));
         listener(({ final __callArgument42:Dynamic = Sensors._orientation__sensors; __callArgument42; }));
       });
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['deviceorientation', (cast handler : flighthq._internal.dom.EventListener)] : Array<Dynamic>));
@@ -644,12 +644,12 @@ class Sensors {
         handler = (cast function():Void {
           var q:Null<Array<Float>> = cast _Runtime.UNDEFINED;
           q = (cast sensor : WebOrientationSensor__sensors).quaternion;
-          (Sensors._quaternionReading__sensors.x = cast (_Runtime.coalesce(_Runtime.optionalIndex(q, 0.0), function():Dynamic return cast 0.0) : Dynamic));
-          (Sensors._quaternionReading__sensors.y = cast (_Runtime.coalesce(_Runtime.optionalIndex(q, 1.0), function():Dynamic return cast 0.0) : Dynamic));
-          (Sensors._quaternionReading__sensors.z = cast (_Runtime.coalesce(_Runtime.optionalIndex(q, 2.0), function():Dynamic return cast 0.0) : Dynamic));
-          (Sensors._quaternionReading__sensors.w = cast (_Runtime.coalesce(_Runtime.optionalIndex(q, 3.0), function():Dynamic return cast 1.0) : Dynamic));
-          (Sensors._quaternionReading__sensors.interval = cast (-1.0 : Dynamic));
-          (Sensors._quaternionReading__sensors.timestamp = cast (-1.0 : Dynamic));
+          (Sensors._quaternionReading__sensors.x = cast (_Runtime.coalesce(_Runtime.optionalIndex(q, 0.0), function():Dynamic return cast 0.0) : Float));
+          (Sensors._quaternionReading__sensors.y = cast (_Runtime.coalesce(_Runtime.optionalIndex(q, 1.0), function():Dynamic return cast 0.0) : Float));
+          (Sensors._quaternionReading__sensors.z = cast (_Runtime.coalesce(_Runtime.optionalIndex(q, 2.0), function():Dynamic return cast 0.0) : Float));
+          (Sensors._quaternionReading__sensors.w = cast (_Runtime.coalesce(_Runtime.optionalIndex(q, 3.0), function():Dynamic return cast 1.0) : Float));
+          (Sensors._quaternionReading__sensors.interval = cast (-1.0 : Float));
+          (Sensors._quaternionReading__sensors.timestamp = cast (-1.0 : Float));
           listener(({ final __callArgument44:Dynamic = Sensors._quaternionReading__sensors; __callArgument44; }));
         });
         (cast sensor : WebOrientationSensor__sensors).addEventListener((cast 'reading' : String), ({ final __callArgument45:Dynamic = handler; __callArgument45; }));

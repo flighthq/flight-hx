@@ -9,8 +9,8 @@ import flighthq.types.BitmapRegion;
 class BitmapDraw {
   public static function drawBitmap(dest:flighthq._internal.dom.HTMLCanvasElement, source:BitmapRegion, x:Float, y:Float):Void {
     var domImageData:flighthq._internal.dom.ImageData = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast _Runtime.field(source, 'width') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(source, 'height') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
-    domImageData = _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('globalThis'), 'ImageData'), [_Runtime.field(source, 'width'), _Runtime.field(source, 'height')]);
+    if ((cast ((cast ((cast source.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast source.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
+    domImageData = _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('globalThis'), 'ImageData'), [source.width, source.height]);
     extractBitmapPixels(({ final __callArgument0:Dynamic = (cast domImageData : flighthq._internal.dom.ImageData).data; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }));
     flighthq._internal.backend.Canvas2dBackend.call(flighthq._internal.backend.CanvasElementBackend.call(dest, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, x, y] : Array<Dynamic>));
   }

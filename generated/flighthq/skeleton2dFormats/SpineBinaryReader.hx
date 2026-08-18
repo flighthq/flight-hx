@@ -97,7 +97,7 @@ class SpineBinaryReader {
   }
 
   public static function markSpineBinaryOverrun__spineBinaryReader<T>(reader:ByteReader, value:T):T {
-    (reader.offset = cast (_Runtime.addNumbers(_Runtime.field(reader.view, 'byteLength'), 1.0) : Dynamic));
+    (reader.offset = cast (_Runtime.addNumbers(_Runtime.field(reader.view, 'byteLength'), 1.0) : Float));
     return cast value;
     return cast null;
   }

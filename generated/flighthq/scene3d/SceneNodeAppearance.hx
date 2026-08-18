@@ -47,7 +47,7 @@ class SceneNodeAppearance {
   }
 
   public static function setNode3DAlpha(source:Node3D, alpha:Float):Void {
-    (source.alpha = cast (alpha : Dynamic));
+    (source.alpha = cast (alpha : Float));
     invalidateNodeAppearance((cast source : Dynamic));
   }
 

@@ -11,23 +11,23 @@ import flighthq.types.MethodsOf;
 class HasTransform2d {
   @:noCompletion
   public static function initTransform2DRuntimeTrait(target:HasTransform2DRuntime, ?_methods:flighthq._internal._Partial<MethodsOf<HasTransform2DRuntime>>):Void {
-    (target.localMatrix = cast (null : Dynamic));
-    (target.rotationAngle = cast (0.0 : Dynamic));
-    (target.rotationCosine = cast (1.0 : Dynamic));
-    (target.rotationSine = cast (0.0 : Dynamic));
-    (target.worldMatrix = cast (null : Dynamic));
+    (target.localMatrix = cast (null : Null<Matrix>));
+    (target.rotationAngle = cast (0.0 : Float));
+    (target.rotationCosine = cast (1.0 : Float));
+    (target.rotationSine = cast (0.0 : Float));
+    (target.worldMatrix = cast (null : Null<Matrix>));
   }
 
   @:noCompletion
   public static function initTransform2DTrait(target:HasTransform2D, ?obj:flighthq._internal._Partial<HasTransform2D>):Void {
-    (target.pivotX = cast (_Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var pivotX:Null<Float>; }).pivotX; }), function():Dynamic return cast 0.0) : Dynamic));
-    (target.pivotY = cast (_Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var pivotY:Null<Float>; }).pivotY; }), function():Dynamic return cast 0.0) : Dynamic));
-    (target.rotation = cast (_Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var rotation:Null<Float>; }).rotation; }), function():Dynamic return cast 0.0) : Dynamic));
-    (target.scaleX = cast (_Runtime.coalesce(({ final __structural3 = obj; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var scaleX:Null<Float>; }).scaleX; }), function():Dynamic return cast 1.0) : Dynamic));
-    (target.scaleY = cast (_Runtime.coalesce(({ final __structural4 = obj; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var scaleY:Null<Float>; }).scaleY; }), function():Dynamic return cast 1.0) : Dynamic));
-    (target.skewX = cast (_Runtime.coalesce(({ final __structural5 = obj; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var skewX:Null<Float>; }).skewX; }), function():Dynamic return cast 0.0) : Dynamic));
-    (target.skewY = cast (_Runtime.coalesce(({ final __structural6 = obj; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var skewY:Null<Float>; }).skewY; }), function():Dynamic return cast 0.0) : Dynamic));
-    (target.x = cast (_Runtime.coalesce(({ final __structural7 = obj; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0) : Dynamic));
-    (target.y = cast (_Runtime.coalesce(({ final __structural8 = obj; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0) : Dynamic));
+    (target.pivotX = cast (_Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var pivotX:Null<Float>; }).pivotX; }), function():Dynamic return cast 0.0) : Float));
+    (target.pivotY = cast (_Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var pivotY:Null<Float>; }).pivotY; }), function():Dynamic return cast 0.0) : Float));
+    (target.rotation = cast (_Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var rotation:Null<Float>; }).rotation; }), function():Dynamic return cast 0.0) : Float));
+    (target.scaleX = cast (_Runtime.coalesce(({ final __structural3 = obj; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var scaleX:Null<Float>; }).scaleX; }), function():Dynamic return cast 1.0) : Float));
+    (target.scaleY = cast (_Runtime.coalesce(({ final __structural4 = obj; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var scaleY:Null<Float>; }).scaleY; }), function():Dynamic return cast 1.0) : Float));
+    (target.skewX = cast (_Runtime.coalesce(({ final __structural5 = obj; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var skewX:Null<Float>; }).skewX; }), function():Dynamic return cast 0.0) : Float));
+    (target.skewY = cast (_Runtime.coalesce(({ final __structural6 = obj; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var skewY:Null<Float>; }).skewY; }), function():Dynamic return cast 0.0) : Float));
+    (target.x = cast (_Runtime.coalesce(({ final __structural7 = obj; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0) : Float));
+    (target.y = cast (_Runtime.coalesce(({ final __structural8 = obj; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0) : Float));
   }
 }

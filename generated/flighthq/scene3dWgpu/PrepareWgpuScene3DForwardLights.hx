@@ -139,10 +139,10 @@ class PrepareWgpuScene3DForwardLights {
     setBoundingSphereFromAabb(({ final __callArgument6:Dynamic = PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights; __callArgument6; }), ({ final __callArgument7:Dynamic = PrepareWgpuScene3DForwardLights.scratchWorldBounds__prepareWgpuScene3DForwardLights; __callArgument7; }));
     if ((cast ((cast PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.radius : Float) >= (cast 0.0 : Float)) : Bool)) { return; }
     world = (cast (cast getNodeWorldMatrix4((cast mesh : Dynamic)) : Matrix4Like) : { var m:flighthq._internal._Float32Array; }).m;
-    ((cast PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.center : { var x:Float; }).x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast 12.0 : Float)) : Dynamic));
-    ((cast PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.center : { var y:Float; }).y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast 13.0 : Float)) : Dynamic));
-    ((cast PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.center : { var z:Float; }).z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast 14.0 : Float)) : Dynamic));
-    (PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.radius = cast (0.0 : Dynamic));
+    ((cast PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.center : { var x:Float; }).x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast 12.0 : Float)) : Float));
+    ((cast PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.center : { var y:Float; }).y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast 13.0 : Float)) : Float));
+    ((cast PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.center : { var z:Float; }).z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast 14.0 : Float)) : Float));
+    (PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights.radius = cast (0.0 : Float));
   }
 
   public static final preparedByState__prepareWgpuScene3DForwardLights:flighthq._internal._WeakMap<WgpuRenderState, Prepared__prepareWgpuScene3DForwardLights> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);

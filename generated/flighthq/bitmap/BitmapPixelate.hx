@@ -15,11 +15,11 @@ class BitmapPixelate {
     var bitmapHeight:Float = cast _Runtime.UNDEFINED;
     var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     block = HxMath.max(1.0, HxMath.round(blockSize));
-    w = _Runtime.field(source, 'width');
-    h = _Runtime.field(source, 'height');
-    bitmapWidth = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
-    bitmapHeight = (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height;
-    data = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    w = source.width;
+    h = source.height;
+    bitmapWidth = (cast source.bitmap : { var width:Float; }).width;
+    bitmapHeight = (cast source.bitmap : { var height:Float; }).height;
+    data = (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     {
       var by:Float = 0.0;
       while ((cast ((cast by : Float) < (cast h : Float)) : Bool)) {
@@ -36,12 +36,12 @@ class BitmapPixelate {
             {
               var py:Float = by;
               while ((cast ((cast py : Float) < (cast yEnd : Float)) : Bool)) {
-                var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+                var sy:Float = (source.y + py);
                 if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast bitmapHeight : Float)) : Bool)) : Bool)) { py++; continue; }
                 {
                   var px:Float = bx;
                   while ((cast ((cast px : Float) < (cast xEnd : Float)) : Bool)) {
-                    var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+                    var sx:Float = (source.x + px);
                     if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
                     var si:Float = (((sy * bitmapWidth) + sx) * 4.0);
                     (r = cast ((r + flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast si : Float))) : Dynamic));

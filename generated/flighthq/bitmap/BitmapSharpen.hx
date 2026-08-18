@@ -20,20 +20,20 @@ class BitmapSharpen {
     var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(options, 'amount'), function():Dynamic return cast 1.0);
     boxBlurBitmap(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = scratch; __callArgument1; }), ({ final __callArgument2:Dynamic = source; __callArgument2; }), ({ final __callArgument3:Dynamic = { radiusX: _Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0), radiusY: _Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0), passes: _Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0) }; __callArgument3; }));
-    w = _Runtime.field(source, 'width');
-    h = _Runtime.field(source, 'height');
-    bitmapWidth = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
-    bitmapHeight = (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height;
-    data = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    w = source.width;
+    h = source.height;
+    bitmapWidth = (cast source.bitmap : { var width:Float; }).width;
+    bitmapHeight = (cast source.bitmap : { var height:Float; }).height;
+    data = (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-        var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+        var sy:Float = (source.y + py);
         if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast bitmapHeight : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var sx:Float = (source.x + px);
             if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var si:Float = (((sy * bitmapWidth) + sx) * 4.0);
             var di:Float = (((py * w) + px) * 4.0);

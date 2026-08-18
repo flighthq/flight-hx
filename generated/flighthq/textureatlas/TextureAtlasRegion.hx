@@ -104,10 +104,10 @@ class TextureAtlasRegion {
     sourceY = region.sourceY;
     originalWidth = _Runtime.coalesce(region.originalWidth, function():Dynamic return cast region.width);
     originalHeight = _Runtime.coalesce(region.originalHeight, function():Dynamic return cast region.height);
-    (out.x = cast (sourceX : Dynamic));
-    (out.y = cast (sourceY : Dynamic));
-    (out.width = cast (originalWidth : Dynamic));
-    (out.height = cast (originalHeight : Dynamic));
+    (out.x = cast (sourceX : Float));
+    (out.y = cast (sourceY : Float));
+    (out.width = cast (originalWidth : Float));
+    (out.height = cast (originalHeight : Float));
     return cast out;
     return cast null;
   }
@@ -208,20 +208,20 @@ class TextureAtlasRegion {
     var rw:Float = cast _Runtime.UNDEFINED;
     var rh:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast imageWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast imageHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.width = cast (0.0 : Dynamic));
-      (out.height = cast (0.0 : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.width = cast (0.0 : Float));
+      (out.height = cast (0.0 : Float));
       return cast out;
     }
     rx = region.x;
     ry = region.y;
     rw = region.width;
     rh = region.height;
-    (out.x = cast ((rx / imageWidth) : Dynamic));
-    (out.y = cast ((ry / imageHeight) : Dynamic));
-    (out.width = cast ((rw / imageWidth) : Dynamic));
-    (out.height = cast ((rh / imageHeight) : Dynamic));
+    (out.x = cast ((rx / imageWidth) : Float));
+    (out.y = cast ((ry / imageHeight) : Float));
+    (out.width = cast ((rw / imageWidth) : Float));
+    (out.height = cast ((rh / imageHeight) : Float));
     return cast out;
     return cast null;
   }
@@ -314,20 +314,20 @@ class TextureAtlasRegion {
     sourceX = _Runtime.coalesce(_Runtime.field(source, 'sourceX'), function():Dynamic return cast 0.0);
     sourceY = _Runtime.coalesce(_Runtime.field(source, 'sourceY'), function():Dynamic return cast 0.0);
     trimmed = _Runtime.coalesce(_Runtime.field(source, 'trimmed'), function():Dynamic return cast false);
-    (out.x = cast (x : Dynamic));
-    (out.y = cast (y : Dynamic));
-    (out.width = cast (width : Dynamic));
-    (out.height = cast (height : Dynamic));
-    (out.id = cast (id : Dynamic));
-    (out.name = cast (name : Dynamic));
-    (out.originalHeight = cast (originalHeight : Dynamic));
-    (out.originalWidth = cast (originalWidth : Dynamic));
-    (out.pivotX = cast (pivotX : Dynamic));
-    (out.pivotY = cast (pivotY : Dynamic));
-    (out.rotated = cast (rotated : Dynamic));
-    (out.sourceX = cast (sourceX : Dynamic));
-    (out.sourceY = cast (sourceY : Dynamic));
-    (out.trimmed = cast (trimmed : Dynamic));
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
+    (out.width = cast (width : Float));
+    (out.height = cast (height : Float));
+    (out.id = cast (id : Float));
+    (out.name = cast (name : Null<String>));
+    (out.originalHeight = cast (originalHeight : Null<Float>));
+    (out.originalWidth = cast (originalWidth : Null<Float>));
+    (out.pivotX = cast (pivotX : Null<Float>));
+    (out.pivotY = cast (pivotY : Null<Float>));
+    (out.rotated = cast (rotated : Bool));
+    (out.sourceX = cast (sourceX : Float));
+    (out.sourceY = cast (sourceY : Float));
+    (out.trimmed = cast (trimmed : Bool));
   }
 
   @:noCompletion
@@ -371,11 +371,11 @@ class TextureAtlasRegion {
     if ((cast ((cast ((cast sourceWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast sourceHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       ((cast texture : Texture2D).flipX = false);
       ((cast texture : Texture2D).flipY = false);
-      ((cast (cast texture : Texture2D).uvOffset : { var x:Float; }).x = cast (0.0 : Dynamic));
-      ((cast (cast texture : Texture2D).uvOffset : { var y:Float; }).y = cast (0.0 : Dynamic));
+      ((cast (cast texture : Texture2D).uvOffset : { var x:Float; }).x = cast (0.0 : Float));
+      ((cast (cast texture : Texture2D).uvOffset : { var y:Float; }).y = cast (0.0 : Float));
       ((cast texture : Texture2D).uvRotation = 0.0);
-      ((cast (cast texture : Texture2D).uvScale : { var x:Float; }).x = cast (0.0 : Dynamic));
-      ((cast (cast texture : Texture2D).uvScale : { var y:Float; }).y = cast (0.0 : Dynamic));
+      ((cast (cast texture : Texture2D).uvScale : { var x:Float; }).x = cast (0.0 : Float));
+      ((cast (cast texture : Texture2D).uvScale : { var y:Float; }).y = cast (0.0 : Float));
       return;
     }
     pageX = ((cast _Runtime.field(page, 'uvOffset') : { var x:Float; }).x * sourceWidth);
@@ -384,21 +384,21 @@ class TextureAtlasRegion {
     pageHeight = ((cast _Runtime.field(page, 'uvScale') : { var y:Float; }).y * sourceHeight);
     x = ((cast _Runtime.field(page, 'flipX') : Bool) ? (cast (((pageX + pageWidth) - region.x) - region.width) : Dynamic) : (cast (pageX + region.x) : Dynamic));
     y = ((cast _Runtime.field(page, 'flipY') : Bool) ? (cast (((pageY + pageHeight) - region.y) - region.height) : Dynamic) : (cast (pageY + region.y) : Dynamic));
-    ((cast (cast texture : Texture2D).uvOffset : { var x:Float; }).x = cast ((x / sourceWidth) : Dynamic));
+    ((cast (cast texture : Texture2D).uvOffset : { var x:Float; }).x = cast ((x / sourceWidth) : Float));
     if ((cast region.rotated : Bool)) {
       ((cast texture : Texture2D).flipX = _Runtime.field(page, 'flipY'));
       ((cast texture : Texture2D).flipY = _Runtime.field(page, 'flipX'));
-      ((cast (cast texture : Texture2D).uvOffset : { var y:Float; }).y = cast (((y + region.height) / sourceHeight) : Dynamic));
+      ((cast (cast texture : Texture2D).uvOffset : { var y:Float; }).y = cast (((y + region.height) / sourceHeight) : Float));
       ((cast texture : Texture2D).uvRotation = (-HxMath.PI / 2.0));
-      ((cast (cast texture : Texture2D).uvScale : { var x:Float; }).x = cast ((region.height / sourceHeight) : Dynamic));
-      ((cast (cast texture : Texture2D).uvScale : { var y:Float; }).y = cast ((region.width / sourceWidth) : Dynamic));
+      ((cast (cast texture : Texture2D).uvScale : { var x:Float; }).x = cast ((region.height / sourceHeight) : Float));
+      ((cast (cast texture : Texture2D).uvScale : { var y:Float; }).y = cast ((region.width / sourceWidth) : Float));
     } else {
       ((cast texture : Texture2D).flipX = _Runtime.field(page, 'flipX'));
       ((cast texture : Texture2D).flipY = _Runtime.field(page, 'flipY'));
-      ((cast (cast texture : Texture2D).uvOffset : { var y:Float; }).y = cast ((y / sourceHeight) : Dynamic));
+      ((cast (cast texture : Texture2D).uvOffset : { var y:Float; }).y = cast ((y / sourceHeight) : Float));
       ((cast texture : Texture2D).uvRotation = 0.0);
-      ((cast (cast texture : Texture2D).uvScale : { var x:Float; }).x = cast ((region.width / sourceWidth) : Dynamic));
-      ((cast (cast texture : Texture2D).uvScale : { var y:Float; }).y = cast ((region.height / sourceHeight) : Dynamic));
+      ((cast (cast texture : Texture2D).uvScale : { var x:Float; }).x = cast ((region.width / sourceWidth) : Float));
+      ((cast (cast texture : Texture2D).uvScale : { var y:Float; }).y = cast ((region.height / sourceHeight) : Float));
     }
   }
 

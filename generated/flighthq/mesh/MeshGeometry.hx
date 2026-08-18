@@ -137,7 +137,7 @@ class MeshGeometry {
   }
 
   public static function invalidateMeshGeometry(geometry:flighthq.types.MeshGeometry):Void {
-    (geometry.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((geometry.version + 1.0)), 0) : Dynamic));
+    (geometry.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((geometry.version + 1.0)), 0) : Float));
   }
 
   public static function setMeshGeometryMorphBindPose(geometry:flighthq.types.MeshGeometry, bindPose:Null<MeshMorphBindPose>):Void {

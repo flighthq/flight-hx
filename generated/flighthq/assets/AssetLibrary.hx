@@ -59,9 +59,9 @@ class AssetLibrary {
         (cast adapter : AssetLoaderAdapter<flighthq._internal._Any>).dispose((cast value : flighthq._internal._Any));
         return cast value;
       }
-      (entry.value = cast (value : Dynamic));
-      (entry.resident = cast (true : Dynamic));
-      (entry.loadPromise = cast (null : Dynamic));
+      (entry.value = cast (value : flighthq._internal._Any));
+      (entry.resident = cast (true : Bool));
+      (entry.loadPromise = cast (null : Null<flighthq._internal._Promise<flighthq._internal._Any>>));
       return cast value;
       return cast _Runtime.UNDEFINED;
     }, function(error:flighthq._internal._Any):flighthq._internal._Any {
@@ -69,7 +69,7 @@ class AssetLibrary {
       _Runtime.throwValue(error);
       return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
-    (entry.loadPromise = cast (loadPromise : Dynamic));
+    (entry.loadPromise = cast (loadPromise : Null<flighthq._internal._Promise<flighthq._internal._Any>>));
     return cast (cast loadPromise : flighthq._internal._Promise<T>);
     return cast null;
   }
@@ -93,7 +93,7 @@ class AssetLibrary {
       if ((cast !_Runtime.strictEquals(adapter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast adapter : AssetLoaderAdapter<flighthq._internal._Any>).dispose((cast entry.value : flighthq._internal._Any)); }
     }
     ((cast runtime.adapters : flighthq._internal._Map<AssetType, AssetLoaderAdapter<flighthq._internal._Any>>).clear());
-    (runtime.acquireGuard = cast (null : Dynamic));
+    (runtime.acquireGuard = cast (null : Null<AssetAcquireGuard>));
     ((cast runtime.descriptors : flighthq._internal._Map<String, AssetDescriptor>).clear());
     ((cast runtime.entries : flighthq._internal._Map<String, AssetEntry>).clear());
     ((cast runtime.freedIds : flighthq._internal._Set<String>).clear());
@@ -275,7 +275,7 @@ class AssetLibrary {
 
   @:noCompletion
   public static function setAssetAcquireGuard(library:flighthq.types.Assets.AssetLibrary, guard:Null<AssetAcquireGuard>):Void {
-    ((cast library.runtime : { var acquireGuard:Null<AssetAcquireGuard>; }).acquireGuard = cast (guard : Dynamic));
+    ((cast library.runtime : { var acquireGuard:Null<AssetAcquireGuard>; }).acquireGuard = cast (guard : Null<AssetAcquireGuard>));
   }
 
   public static function disposeAssetEntry__assetLibrary(runtime:AssetLibraryRuntime, id:String, entry:AssetEntry):Void {

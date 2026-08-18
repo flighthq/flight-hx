@@ -47,31 +47,31 @@ class Screen {
   }
 
   public static function copyScreenInfo__screen(src:ScreenInfo, dst:ScreenInfo):Void {
-    (dst.id = cast (src.id : Dynamic));
-    (dst.x = cast (src.x : Dynamic));
-    (dst.y = cast (src.y : Dynamic));
-    (dst.width = cast (src.width : Dynamic));
-    (dst.height = cast (src.height : Dynamic));
-    (dst.workWidth = cast (src.workWidth : Dynamic));
-    (dst.workHeight = cast (src.workHeight : Dynamic));
-    (dst.scaleFactor = cast (src.scaleFactor : Dynamic));
-    (dst.isPrimary = cast (src.isPrimary : Dynamic));
-    (dst.rotation = cast (src.rotation : Dynamic));
-    (dst.orientation = cast (src.orientation : Dynamic));
-    (dst.refreshRate = cast (src.refreshRate : Dynamic));
-    (dst.colorDepth = cast (src.colorDepth : Dynamic));
-    (dst.pixelDepth = cast (src.pixelDepth : Dynamic));
-    (dst.physicalWidth = cast (src.physicalWidth : Dynamic));
-    (dst.physicalHeight = cast (src.physicalHeight : Dynamic));
-    (dst.isHdr = cast (src.isHdr : Dynamic));
-    (dst.colorSpace = cast (src.colorSpace : Dynamic));
-    (dst.maxLuminance = cast (src.maxLuminance : Dynamic));
-    (dst.depthPerComponent = cast (src.depthPerComponent : Dynamic));
-    (dst.dpi = cast (src.dpi : Dynamic));
-    (dst.label = cast (src.label : Dynamic));
-    (dst.internal = cast (src.internal : Dynamic));
-    (dst.touchSupport = cast (src.touchSupport : Dynamic));
-    (dst.monochrome = cast (src.monochrome : Dynamic));
+    (dst.id = cast (src.id : Float));
+    (dst.x = cast (src.x : Float));
+    (dst.y = cast (src.y : Float));
+    (dst.width = cast (src.width : Float));
+    (dst.height = cast (src.height : Float));
+    (dst.workWidth = cast (src.workWidth : Float));
+    (dst.workHeight = cast (src.workHeight : Float));
+    (dst.scaleFactor = cast (src.scaleFactor : Float));
+    (dst.isPrimary = cast (src.isPrimary : Bool));
+    (dst.rotation = cast (src.rotation : Float));
+    (dst.orientation = cast (src.orientation : ScreenOrientation));
+    (dst.refreshRate = cast (src.refreshRate : Float));
+    (dst.colorDepth = cast (src.colorDepth : Float));
+    (dst.pixelDepth = cast (src.pixelDepth : Float));
+    (dst.physicalWidth = cast (src.physicalWidth : Float));
+    (dst.physicalHeight = cast (src.physicalHeight : Float));
+    (dst.isHdr = cast (src.isHdr : Bool));
+    (dst.colorSpace = cast (src.colorSpace : ScreenColorSpace));
+    (dst.maxLuminance = cast (src.maxLuminance : Float));
+    (dst.depthPerComponent = cast (src.depthPerComponent : Float));
+    (dst.dpi = cast (src.dpi : Float));
+    (dst.label = cast (src.label : String));
+    (dst.internal = cast (src.internal : Bool));
+    (dst.touchSupport = cast (src.touchSupport : String));
+    (dst.monochrome = cast (src.monochrome : Bool));
   }
 
   @:noCompletion
@@ -116,31 +116,31 @@ class Screen {
       (_cachedScreens = cast (null : Dynamic));
     });
     buildScreenInfoFromDetailed = (cast function buildScreenInfoFromDetailed(sd:ScreenDetailed__screen, index:Float, primaryIndex:Float, out:ScreenInfo):Void {
-      (out.id = cast (index : Dynamic));
-      (out.x = cast ((cast sd : ScreenDetailed__screen).left : Dynamic));
-      (out.y = cast ((cast sd : ScreenDetailed__screen).top : Dynamic));
-      (out.width = cast ((cast sd : ScreenDetailed__screen).width : Dynamic));
-      (out.height = cast ((cast sd : ScreenDetailed__screen).height : Dynamic));
-      (out.workWidth = cast ((cast sd : ScreenDetailed__screen).availWidth : Dynamic));
-      (out.workHeight = cast ((cast sd : ScreenDetailed__screen).availHeight : Dynamic));
-      (out.scaleFactor = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).devicePixelRatio), 'number') : Bool) ? (cast (cast sd : ScreenDetailed__screen).devicePixelRatio : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
-      (out.isPrimary = cast (((cast _Runtime.strictEquals(index, primaryIndex) : Bool) || (cast _Runtime.coalesce((cast sd : ScreenDetailed__screen).isPrimary, function():Dynamic return cast _Runtime.strictEquals(index, 0.0)) : Bool)) : Dynamic));
-      (out.rotation = cast ((cast Screen.getWebRotation__screen() : Float) : Dynamic));
-      (out.orientation = cast ((cast Screen.getWebOrientation__screen() : ScreenOrientation) : Dynamic));
-      (out.refreshRate = cast (((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).refreshRate), 'number') : Bool) && (cast ((cast (cast sd : ScreenDetailed__screen).refreshRate : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast sd : ScreenDetailed__screen).refreshRate : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.colorDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).colorDepth), 'number') : Bool) ? (cast (cast sd : ScreenDetailed__screen).colorDepth : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.pixelDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).pixelDepth), 'number') : Bool) ? (cast (cast sd : ScreenDetailed__screen).pixelDepth : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.physicalWidth = cast (HxMath.round((out.width * out.scaleFactor)) : Dynamic));
-      (out.physicalHeight = cast (HxMath.round((out.height * out.scaleFactor)) : Dynamic));
-      (out.isHdr = cast ((cast Screen.getWebIsHdr__screen() : Bool) : Dynamic));
-      (out.colorSpace = cast ((cast Screen.getWebColorSpace__screen() : ScreenColorSpace) : Dynamic));
-      (out.maxLuminance = cast (-1.0 : Dynamic));
-      (out.depthPerComponent = cast (-1.0 : Dynamic));
-      (out.dpi = cast (-1.0 : Dynamic));
-      (out.label = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).label), 'string') : Bool) ? (cast (cast sd : ScreenDetailed__screen).label : Dynamic) : (cast '' : Dynamic)) : Dynamic));
-      (out.internal = cast (_Runtime.coalesce((cast sd : ScreenDetailed__screen).isInternal, function():Dynamic return cast false) : Dynamic));
-      (out.touchSupport = cast ('unknown' : Dynamic));
-      (out.monochrome = cast (false : Dynamic));
+      (out.id = cast (index : Float));
+      (out.x = cast ((cast sd : ScreenDetailed__screen).left : Float));
+      (out.y = cast ((cast sd : ScreenDetailed__screen).top : Float));
+      (out.width = cast ((cast sd : ScreenDetailed__screen).width : Float));
+      (out.height = cast ((cast sd : ScreenDetailed__screen).height : Float));
+      (out.workWidth = cast ((cast sd : ScreenDetailed__screen).availWidth : Float));
+      (out.workHeight = cast ((cast sd : ScreenDetailed__screen).availHeight : Float));
+      (out.scaleFactor = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).devicePixelRatio), 'number') : Bool) ? (cast (cast sd : ScreenDetailed__screen).devicePixelRatio : Dynamic) : (cast 1.0 : Dynamic)) : Float));
+      (out.isPrimary = cast (((cast _Runtime.strictEquals(index, primaryIndex) : Bool) || (cast _Runtime.coalesce((cast sd : ScreenDetailed__screen).isPrimary, function():Dynamic return cast _Runtime.strictEquals(index, 0.0)) : Bool)) : Bool));
+      (out.rotation = cast ((cast Screen.getWebRotation__screen() : Float) : Float));
+      (out.orientation = cast ((cast Screen.getWebOrientation__screen() : ScreenOrientation) : ScreenOrientation));
+      (out.refreshRate = cast (((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).refreshRate), 'number') : Bool) && (cast ((cast (cast sd : ScreenDetailed__screen).refreshRate : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast sd : ScreenDetailed__screen).refreshRate : Dynamic) : (cast -1.0 : Dynamic)) : Float));
+      (out.colorDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).colorDepth), 'number') : Bool) ? (cast (cast sd : ScreenDetailed__screen).colorDepth : Dynamic) : (cast -1.0 : Dynamic)) : Float));
+      (out.pixelDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).pixelDepth), 'number') : Bool) ? (cast (cast sd : ScreenDetailed__screen).pixelDepth : Dynamic) : (cast -1.0 : Dynamic)) : Float));
+      (out.physicalWidth = cast (HxMath.round((out.width * out.scaleFactor)) : Float));
+      (out.physicalHeight = cast (HxMath.round((out.height * out.scaleFactor)) : Float));
+      (out.isHdr = cast ((cast Screen.getWebIsHdr__screen() : Bool) : Bool));
+      (out.colorSpace = cast ((cast Screen.getWebColorSpace__screen() : ScreenColorSpace) : ScreenColorSpace));
+      (out.maxLuminance = cast (-1.0 : Float));
+      (out.depthPerComponent = cast (-1.0 : Float));
+      (out.dpi = cast (-1.0 : Float));
+      (out.label = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast sd : ScreenDetailed__screen).label), 'string') : Bool) ? (cast (cast sd : ScreenDetailed__screen).label : Dynamic) : (cast '' : Dynamic)) : String));
+      (out.internal = cast (_Runtime.coalesce((cast sd : ScreenDetailed__screen).isInternal, function():Dynamic return cast false) : Bool));
+      (out.touchSupport = cast ('unknown' : String));
+      (out.monochrome = cast (false : Bool));
     });
     buildCurrentScreenInfo = (cast function buildCurrentScreenInfo(out:ScreenInfo):Void {
       var s:flighthq._internal.dom.Screen = cast _Runtime.UNDEFINED;
@@ -157,31 +157,31 @@ class Screen {
         return;
       }
       s = flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screen');
-      (out.id = cast (0.0 : Dynamic));
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.width = cast ((cast s : flighthq._internal.dom.Screen).width : Dynamic));
-      (out.height = cast ((cast s : flighthq._internal.dom.Screen).height : Dynamic));
-      (out.workWidth = cast ((cast s : flighthq._internal.dom.Screen).availWidth : Dynamic));
-      (out.workHeight = cast ((cast s : flighthq._internal.dom.Screen).availHeight : Dynamic));
-      (out.scaleFactor = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio')), 'number') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio') : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
-      (out.isPrimary = cast (true : Dynamic));
-      (out.rotation = cast ((cast Screen.getWebRotation__screen() : Float) : Dynamic));
-      (out.orientation = cast ((cast Screen.getWebOrientation__screen() : ScreenOrientation) : Dynamic));
-      (out.refreshRate = cast (-1.0 : Dynamic));
-      (out.colorDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast s : flighthq._internal.dom.Screen).colorDepth), 'number') : Bool) ? (cast (cast s : flighthq._internal.dom.Screen).colorDepth : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.pixelDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast s : flighthq._internal.dom.Screen).pixelDepth), 'number') : Bool) ? (cast (cast s : flighthq._internal.dom.Screen).pixelDepth : Dynamic) : (cast -1.0 : Dynamic)) : Dynamic));
-      (out.physicalWidth = cast (HxMath.round((out.width * out.scaleFactor)) : Dynamic));
-      (out.physicalHeight = cast (HxMath.round((out.height * out.scaleFactor)) : Dynamic));
-      (out.isHdr = cast ((cast Screen.getWebIsHdr__screen() : Bool) : Dynamic));
-      (out.colorSpace = cast ((cast Screen.getWebColorSpace__screen() : ScreenColorSpace) : Dynamic));
-      (out.maxLuminance = cast (-1.0 : Dynamic));
-      (out.depthPerComponent = cast (-1.0 : Dynamic));
-      (out.dpi = cast (-1.0 : Dynamic));
-      (out.label = cast ('' : Dynamic));
-      (out.internal = cast (false : Dynamic));
-      (out.touchSupport = cast ('unknown' : Dynamic));
-      (out.monochrome = cast (false : Dynamic));
+      (out.id = cast (0.0 : Float));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.width = cast ((cast s : flighthq._internal.dom.Screen).width : Float));
+      (out.height = cast ((cast s : flighthq._internal.dom.Screen).height : Float));
+      (out.workWidth = cast ((cast s : flighthq._internal.dom.Screen).availWidth : Float));
+      (out.workHeight = cast ((cast s : flighthq._internal.dom.Screen).availHeight : Float));
+      (out.scaleFactor = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio')), 'number') : Bool) ? (cast flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio') : Dynamic) : (cast 1.0 : Dynamic)) : Float));
+      (out.isPrimary = cast (true : Bool));
+      (out.rotation = cast ((cast Screen.getWebRotation__screen() : Float) : Float));
+      (out.orientation = cast ((cast Screen.getWebOrientation__screen() : ScreenOrientation) : ScreenOrientation));
+      (out.refreshRate = cast (-1.0 : Float));
+      (out.colorDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast s : flighthq._internal.dom.Screen).colorDepth), 'number') : Bool) ? (cast (cast s : flighthq._internal.dom.Screen).colorDepth : Dynamic) : (cast -1.0 : Dynamic)) : Float));
+      (out.pixelDepth = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue((cast s : flighthq._internal.dom.Screen).pixelDepth), 'number') : Bool) ? (cast (cast s : flighthq._internal.dom.Screen).pixelDepth : Dynamic) : (cast -1.0 : Dynamic)) : Float));
+      (out.physicalWidth = cast (HxMath.round((out.width * out.scaleFactor)) : Float));
+      (out.physicalHeight = cast (HxMath.round((out.height * out.scaleFactor)) : Float));
+      (out.isHdr = cast ((cast Screen.getWebIsHdr__screen() : Bool) : Bool));
+      (out.colorSpace = cast ((cast Screen.getWebColorSpace__screen() : ScreenColorSpace) : ScreenColorSpace));
+      (out.maxLuminance = cast (-1.0 : Float));
+      (out.depthPerComponent = cast (-1.0 : Float));
+      (out.dpi = cast (-1.0 : Float));
+      (out.label = cast ('' : String));
+      (out.internal = cast (false : Bool));
+      (out.touchSupport = cast ('unknown' : String));
+      (out.monochrome = cast (false : Bool));
     });
     _cursorX = 0.0;
     _cursorY = 0.0;
@@ -313,11 +313,11 @@ class Screen {
     }, getModes: function(screen:ScreenInfo, out:Array<ScreenMode>):Array<ScreenMode> {
       _Runtime.setLength(out, 1.0);
       if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flighthq._internal._StaticIndex.writeArray(out, 0.0, (cast createScreenMode() : ScreenMode)); }
-      ((cast flighthq._internal._StaticIndex.readArray(out, 0.0) : { var width:Float; }).width = cast (screen.width : Dynamic));
-      ((cast flighthq._internal._StaticIndex.readArray(out, 0.0) : { var height:Float; }).height = cast (screen.height : Dynamic));
-      ((cast flighthq._internal._StaticIndex.readArray(out, 0.0) : { var refreshRate:Float; }).refreshRate = cast (screen.refreshRate : Dynamic));
-      ((cast flighthq._internal._StaticIndex.readArray(out, 0.0) : { var colorDepth:Float; }).colorDepth = cast (screen.colorDepth : Dynamic));
-      ((cast flighthq._internal._StaticIndex.readArray(out, 0.0) : { var pixelFormat:String; }).pixelFormat = cast ('' : Dynamic));
+      ((cast flighthq._internal._StaticIndex.readArray(out, 0.0) : { var width:Float; }).width = cast (screen.width : Float));
+      ((cast flighthq._internal._StaticIndex.readArray(out, 0.0) : { var height:Float; }).height = cast (screen.height : Float));
+      ((cast flighthq._internal._StaticIndex.readArray(out, 0.0) : { var refreshRate:Float; }).refreshRate = cast (screen.refreshRate : Float));
+      ((cast flighthq._internal._StaticIndex.readArray(out, 0.0) : { var colorDepth:Float; }).colorDepth = cast (screen.colorDepth : Float));
+      ((cast flighthq._internal._StaticIndex.readArray(out, 0.0) : { var pixelFormat:String; }).pixelFormat = cast ('' : String));
       return cast out;
       return cast _Runtime.UNDEFINED;
     } });
@@ -388,31 +388,31 @@ class Screen {
   }
 
   public static function fillDefaultScreenInfo__screen(out:ScreenInfo):Void {
-    (out.id = cast (0.0 : Dynamic));
-    (out.x = cast (0.0 : Dynamic));
-    (out.y = cast (0.0 : Dynamic));
-    (out.width = cast (0.0 : Dynamic));
-    (out.height = cast (0.0 : Dynamic));
-    (out.workWidth = cast (0.0 : Dynamic));
-    (out.workHeight = cast (0.0 : Dynamic));
-    (out.scaleFactor = cast (1.0 : Dynamic));
-    (out.isPrimary = cast (false : Dynamic));
-    (out.rotation = cast (-1.0 : Dynamic));
-    (out.orientation = cast ('Landscape' : Dynamic));
-    (out.refreshRate = cast (-1.0 : Dynamic));
-    (out.colorDepth = cast (-1.0 : Dynamic));
-    (out.pixelDepth = cast (-1.0 : Dynamic));
-    (out.physicalWidth = cast (-1.0 : Dynamic));
-    (out.physicalHeight = cast (-1.0 : Dynamic));
-    (out.isHdr = cast (false : Dynamic));
-    (out.colorSpace = cast ('srgb' : Dynamic));
-    (out.maxLuminance = cast (-1.0 : Dynamic));
-    (out.depthPerComponent = cast (-1.0 : Dynamic));
-    (out.dpi = cast (-1.0 : Dynamic));
-    (out.label = cast ('' : Dynamic));
-    (out.internal = cast (false : Dynamic));
-    (out.touchSupport = cast ('unknown' : Dynamic));
-    (out.monochrome = cast (false : Dynamic));
+    (out.id = cast (0.0 : Float));
+    (out.x = cast (0.0 : Float));
+    (out.y = cast (0.0 : Float));
+    (out.width = cast (0.0 : Float));
+    (out.height = cast (0.0 : Float));
+    (out.workWidth = cast (0.0 : Float));
+    (out.workHeight = cast (0.0 : Float));
+    (out.scaleFactor = cast (1.0 : Float));
+    (out.isPrimary = cast (false : Bool));
+    (out.rotation = cast (-1.0 : Float));
+    (out.orientation = cast ('Landscape' : ScreenOrientation));
+    (out.refreshRate = cast (-1.0 : Float));
+    (out.colorDepth = cast (-1.0 : Float));
+    (out.pixelDepth = cast (-1.0 : Float));
+    (out.physicalWidth = cast (-1.0 : Float));
+    (out.physicalHeight = cast (-1.0 : Float));
+    (out.isHdr = cast (false : Bool));
+    (out.colorSpace = cast ('srgb' : ScreenColorSpace));
+    (out.maxLuminance = cast (-1.0 : Float));
+    (out.depthPerComponent = cast (-1.0 : Float));
+    (out.dpi = cast (-1.0 : Float));
+    (out.label = cast ('' : String));
+    (out.internal = cast (false : Bool));
+    (out.touchSupport = cast ('unknown' : String));
+    (out.monochrome = cast (false : Bool));
   }
 
   public static function getPrimaryScreen(out:ScreenInfo):ScreenInfo {
@@ -493,11 +493,11 @@ class Screen {
   }
 
   public static function getScreenCurrentMode(screen:ScreenInfo, out:ScreenMode):ScreenMode {
-    (out.width = cast (screen.width : Dynamic));
-    (out.height = cast (screen.height : Dynamic));
-    (out.refreshRate = cast (screen.refreshRate : Dynamic));
-    (out.colorDepth = cast (screen.colorDepth : Dynamic));
-    (out.pixelFormat = cast ('' : Dynamic));
+    (out.width = cast (screen.width : Float));
+    (out.height = cast (screen.height : Float));
+    (out.refreshRate = cast (screen.refreshRate : Float));
+    (out.colorDepth = cast (screen.colorDepth : Float));
+    (out.pixelFormat = cast ('' : String));
     return cast out;
     return cast null;
   }

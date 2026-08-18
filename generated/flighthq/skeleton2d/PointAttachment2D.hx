@@ -22,8 +22,8 @@ class PointAttachment2D {
     b = (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D);
     x = _Runtime.field(attachment, 'x');
     y = _Runtime.field(attachment, 'y');
-    (out.x = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast b : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 2.0) : Float)) * y)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 4.0) : Float))) : Dynamic));
-    (out.y = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 1.0) : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 3.0) : Float)) * y)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 5.0) : Float))) : Dynamic));
+    (out.x = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast b : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 2.0) : Float)) * y)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 4.0) : Float))) : Float));
+    (out.y = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 1.0) : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 3.0) : Float)) * y)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 5.0) : Float))) : Float));
   }
 
   public static function computeSkeleton2DPointAttachmentRotation(attachment:flighthq.types.PointAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Float {

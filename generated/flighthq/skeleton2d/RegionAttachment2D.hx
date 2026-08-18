@@ -23,12 +23,12 @@ class RegionAttachment2D {
     setTransformMatrix(({ final __callArgument0:Dynamic = RegionAttachment2D._local__regionAttachment2D; __callArgument0; }), (cast _Runtime.field(attachment, 'scaleX') : Float), (cast _Runtime.field(attachment, 'scaleY') : Float), (cast _Runtime.multiplyNumbers(_Runtime.field(attachment, 'rotation'), DEG_TO_RAD) : Float), (cast _Runtime.field(attachment, 'x') : Float), (cast _Runtime.field(attachment, 'y') : Float));
     b = (boneIndex * RegionAttachment2D.MATRIX_STRIDE__regionAttachment2D);
     world = _Runtime.field(skeleton, 'worldMatrices');
-    (RegionAttachment2D._bone__regionAttachment2D.a = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast b : Float)) : Dynamic));
-    (RegionAttachment2D._bone__regionAttachment2D.b = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 1.0) : Float)) : Dynamic));
-    (RegionAttachment2D._bone__regionAttachment2D.c = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 2.0) : Float)) : Dynamic));
-    (RegionAttachment2D._bone__regionAttachment2D.d = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 3.0) : Float)) : Dynamic));
-    (RegionAttachment2D._bone__regionAttachment2D.tx = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 4.0) : Float)) : Dynamic));
-    (RegionAttachment2D._bone__regionAttachment2D.ty = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 5.0) : Float)) : Dynamic));
+    (RegionAttachment2D._bone__regionAttachment2D.a = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast b : Float)) : Float));
+    (RegionAttachment2D._bone__regionAttachment2D.b = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 1.0) : Float)) : Float));
+    (RegionAttachment2D._bone__regionAttachment2D.c = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 2.0) : Float)) : Float));
+    (RegionAttachment2D._bone__regionAttachment2D.d = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 3.0) : Float)) : Float));
+    (RegionAttachment2D._bone__regionAttachment2D.tx = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 4.0) : Float)) : Float));
+    (RegionAttachment2D._bone__regionAttachment2D.ty = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 5.0) : Float)) : Float));
     multiplyMatrix(({ final __callArgument1:Dynamic = RegionAttachment2D._combined__regionAttachment2D; __callArgument1; }), ({ final __callArgument2:Dynamic = RegionAttachment2D._bone__regionAttachment2D; __callArgument2; }), ({ final __callArgument3:Dynamic = RegionAttachment2D._local__regionAttachment2D; __callArgument3; }));
     hw = _Runtime.divideNumbers(_Runtime.field(attachment, 'width'), 2.0);
     hh = _Runtime.divideNumbers(_Runtime.field(attachment, 'height'), 2.0);

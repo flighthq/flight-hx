@@ -54,10 +54,10 @@ class Tilemap {
     rows = _Runtime.field(__destructure0, 'rows');
     tileHeight = _Runtime.field(__destructure0, 'tileHeight');
     tileWidth = _Runtime.field(__destructure0, 'tileWidth');
-    (out.x = cast (0.0 : Dynamic));
-    (out.y = cast (0.0 : Dynamic));
-    (out.width = cast (((cast !_Runtime.strictEquals(atlas, null) : Bool) ? (cast (columns * tileWidth) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
-    (out.height = cast (((cast !_Runtime.strictEquals(atlas, null) : Bool) ? (cast (rows * tileHeight) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+    (out.x = cast (0.0 : Float));
+    (out.y = cast (0.0 : Float));
+    (out.width = cast (((cast !_Runtime.strictEquals(atlas, null) : Bool) ? (cast (columns * tileWidth) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+    (out.height = cast (((cast !_Runtime.strictEquals(atlas, null) : Bool) ? (cast (rows * tileHeight) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
   }
 
   public static function createTilemap(?obj:PartialNode<flighthq.types.Tilemap>):flighthq.types.Tilemap {
@@ -123,8 +123,8 @@ class Tilemap {
     col = (cast getTilemapColumnAtX(({ final __callArgument10:Dynamic = source; __callArgument10; }), (cast x : Float)) : Float);
     row = (cast getTilemapRowAtY(({ final __callArgument11:Dynamic = source; __callArgument11; }), (cast y : Float)) : Float);
     if ((cast ((cast ((cast col : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
-    (out.x = cast (col : Dynamic));
-    (out.y = cast (row : Dynamic));
+    (out.x = cast (col : Float));
+    (out.y = cast (row : Float));
     return cast true;
     return cast null;
   }
@@ -200,10 +200,10 @@ class Tilemap {
     tileHeight = _Runtime.field(__destructure5, 'tileHeight');
     tileWidth = _Runtime.field(__destructure5, 'tileWidth');
     if ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast ((cast column : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast column : Float) >= (cast columns : Float)) : Bool)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast row : Float) >= (cast rows : Float)) : Bool)) : Bool)) { return cast false; }
-    (out.x = cast ((column * tileWidth) : Dynamic));
-    (out.y = cast ((row * tileHeight) : Dynamic));
-    (out.width = cast (tileWidth : Dynamic));
-    (out.height = cast (tileHeight : Dynamic));
+    (out.x = cast ((column * tileWidth) : Float));
+    (out.y = cast ((row * tileHeight) : Float));
+    (out.width = cast (tileWidth : Float));
+    (out.height = cast (tileHeight : Float));
     return cast true;
     return cast null;
   }

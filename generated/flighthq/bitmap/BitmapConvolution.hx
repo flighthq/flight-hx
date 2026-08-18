@@ -37,15 +37,15 @@ class BitmapConvolution {
     preserveAlpha = _Runtime.coalesce(_Runtime.field(options, 'preserveAlpha'), function():Dynamic return cast true);
     offsetX = HxMath.floor((matrixX / 2.0));
     offsetY = HxMath.floor((matrixY / 2.0));
-    bitmapWidth = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
-    bitmapHeight = (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height;
-    data = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    bitmapWidth = (cast source.bitmap : { var width:Float; }).width;
+    bitmapHeight = (cast source.bitmap : { var height:Float; }).height;
+    data = (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     {
       var py:Float = 0.0;
-      while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
+      while ((cast ((cast py : Float) < (cast source.height : Float)) : Bool)) {
         {
           var px:Float = 0.0;
-          while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
+          while ((cast ((cast px : Float) < (cast source.width : Float)) : Bool)) {
             var r:Float = 0.0;
             var g:Float = 0.0;
             var b:Float = 0.0;
@@ -53,12 +53,12 @@ class BitmapConvolution {
             {
               var ky:Float = 0.0;
               while ((cast ((cast ky : Float) < (cast matrixY : Float)) : Bool)) {
-                var rawSampleY:Float = ((_Runtime.addNumbers(_Runtime.field(source, 'y'), py) + ky) - offsetY);
+                var rawSampleY:Float = (((source.y + py) + ky) - offsetY);
                 var weight_row_start:Float = (ky * matrixX);
                 {
                   var kx:Float = 0.0;
                   while ((cast ((cast kx : Float) < (cast matrixX : Float)) : Bool)) {
-                    var rawSampleX:Float = ((_Runtime.addNumbers(_Runtime.field(source, 'x'), px) + kx) - offsetX);
+                    var rawSampleX:Float = (((source.x + px) + kx) - offsetX);
                     var weight:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast matrix : Array<Float>), (cast (weight_row_start + kx) : Float));
                     var sampleX:Float = cast _Runtime.UNDEFINED;
                     var sampleY:Float = cast _Runtime.UNDEFINED;
@@ -91,13 +91,13 @@ class BitmapConvolution {
                 ky++;
               }
             }
-            var di:Float = ((_Runtime.multiplyNumbers(py, _Runtime.field(source, 'width')) + px) * 4.0);
+            var di:Float = (((py * source.width) + px) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast (cast BitmapConvolution.clampByte__bitmapConvolution((cast ((r / divisor) + bias) : Float)) : Float) : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast (cast BitmapConvolution.clampByte__bitmapConvolution((cast ((g / divisor) + bias) : Float)) : Float) : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast (cast BitmapConvolution.clampByte__bitmapConvolution((cast ((b / divisor) + bias) : Float)) : Float) : Float));
             if ((cast preserveAlpha : Bool)) {
-              var cy:Float = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), _Runtime.addNumbers(_Runtime.field(source, 'y'), py)));
-              var cx:Float = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), _Runtime.addNumbers(_Runtime.field(source, 'x'), px)));
+              var cy:Float = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), (source.y + py)));
+              var cx:Float = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), (source.x + px)));
               flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast ((((cy * bitmapWidth) + cx) * 4.0) + 3.0) : Float)) : Float));
             } else {
               flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast BitmapConvolution.clampByte__bitmapConvolution((cast ((a / divisor) + bias) : Float)) : Float) : Float));

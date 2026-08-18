@@ -102,17 +102,17 @@ class GlyphAtlasEntry {
     maxX = (x + width);
     maxY = (y + height);
     if ((cast !(cast runtime.dirty : Bool) : Bool)) {
-      (runtime.dirty = cast (true : Dynamic));
-      (runtime.dirtyMinX = cast (x : Dynamic));
-      (runtime.dirtyMinY = cast (y : Dynamic));
-      (runtime.dirtyMaxX = cast (maxX : Dynamic));
-      (runtime.dirtyMaxY = cast (maxY : Dynamic));
+      (runtime.dirty = cast (true : Bool));
+      (runtime.dirtyMinX = cast (x : Float));
+      (runtime.dirtyMinY = cast (y : Float));
+      (runtime.dirtyMaxX = cast (maxX : Float));
+      (runtime.dirtyMaxY = cast (maxY : Float));
       return;
     }
-    (runtime.dirtyMinX = cast (HxMath.min(runtime.dirtyMinX, x) : Dynamic));
-    (runtime.dirtyMinY = cast (HxMath.min(runtime.dirtyMinY, y) : Dynamic));
-    (runtime.dirtyMaxX = cast (HxMath.max(runtime.dirtyMaxX, maxX) : Dynamic));
-    (runtime.dirtyMaxY = cast (HxMath.max(runtime.dirtyMaxY, maxY) : Dynamic));
+    (runtime.dirtyMinX = cast (HxMath.min(runtime.dirtyMinX, x) : Float));
+    (runtime.dirtyMinY = cast (HxMath.min(runtime.dirtyMinY, y) : Float));
+    (runtime.dirtyMaxX = cast (HxMath.max(runtime.dirtyMaxX, maxX) : Float));
+    (runtime.dirtyMaxY = cast (HxMath.max(runtime.dirtyMaxY, maxY) : Float));
   }
 
   public static function _placeGlyphOnShelf__glyphAtlasEntry(runtime:GlyphAtlasRuntime, width:Float, height:Float):Null<{ var x:Float; var y:Float; }> {
@@ -138,14 +138,14 @@ class GlyphAtlasEntry {
     }
     if ((cast !_Runtime.strictEquals(best, null) : Bool)) {
       var x:Float = (cast best : { var cursorX:Float; }).cursorX;
-      ((cast best : { var cursorX:Float; }).cursorX = cast (((x + width) + padding) : Dynamic));
+      ((cast best : { var cursorX:Float; }).cursorX = cast (((x + width) + padding) : Float));
       return cast { x: x, y: (cast best : { var y:Float; }).y };
     }
     y = runtime.packBottom;
     if ((cast ((cast (y + height) : Float) > (cast (bitmap.height - padding) : Float)) : Bool)) { return cast null; }
     if ((cast ((cast (padding + width) : Float) > (cast rightLimit : Float)) : Bool)) { return cast null; }
     _Runtime.callProperty(runtime.shelves, 'push', cast ([{ cursorX: ((padding + width) + padding), height: height, y: y }] : Array<Dynamic>));
-    (runtime.packBottom = cast (((y + height) + padding) : Dynamic));
+    (runtime.packBottom = cast (((y + height) + padding) : Float));
     return cast { x: padding, y: y };
     return cast null;
   }
@@ -153,7 +153,7 @@ class GlyphAtlasEntry {
   public static function _repackGlyphAtlas__glyphAtlasEntry(runtime:GlyphAtlasRuntime):Void {
     var codepoints:Array<Float> = cast _Runtime.UNDEFINED;
     _Runtime.setLength(runtime.shelves, 0.0);
-    (runtime.packBottom = cast (runtime.padding : Dynamic));
+    (runtime.packBottom = cast (runtime.padding : Float));
     _Runtime.fill((cast runtime.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data, 0.0, 0, null, 1);
     codepoints = _Runtime.callProperty(_Runtime.concatArrays([_Runtime.toArray(((cast runtime.entries : flighthq._internal._Map<Float, GlyphEntry>).keys()))]), 'sort', cast ([function(a:Float, b:Float):Float {
       var heightDelta:Float = cast _Runtime.UNDEFINED;
@@ -173,8 +173,8 @@ class GlyphAtlasEntry {
         ((cast runtime.lru : flighthq._internal._Map<Float, Bool>).delete_(codepoint));
         continue;
       }
-      (entry.x = cast ((cast placement : { var x:Float; var y:Float; }).x : Dynamic));
-      (entry.y = cast ((cast placement : { var x:Float; var y:Float; }).y : Dynamic));
+      (entry.x = cast ((cast placement : { var x:Float; var y:Float; }).x : Float));
+      (entry.y = cast ((cast placement : { var x:Float; var y:Float; }).y : Float));
       var region:BitmapRegion = (cast createBitmapRegion(runtime.bitmap, (cast entry.x : Float), (cast entry.y : Float), (cast entry.width : Float), (cast entry.height : Float)) : BitmapRegion);
       writeBitmapPixels(({ final __callArgument21:Dynamic = region; __callArgument21; }), bitmap.pixels);
     }

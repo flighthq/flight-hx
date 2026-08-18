@@ -86,7 +86,7 @@ class UpdateParticleEmitter2D {
     var liveRenderVelocityCount:Float = cast _Runtime.UNDEFINED;
     data = emitter.data;
     worldTransform = ((cast config.worldSpace : Bool) ? (cast (cast getNodeWorldMatrix((cast (cast (cast emitter : flighthq._internal._Any) : Node2D) : Dynamic)) : Matrix) : Dynamic) : (cast null : Dynamic));
-    (data.worldSpace = cast (!_Runtime.strictEquals(worldTransform, null) : Dynamic));
+    (data.worldSpace = cast (!_Runtime.strictEquals(worldTransform, null) : Bool));
     if ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     trackX = ((cast !_Runtime.strictEquals(worldTransform, null) : Bool) ? (cast (cast worldTransform : { var tx:Float; }).tx : Dynamic) : (cast emitter.x : Dynamic));
     trackY = ((cast !_Runtime.strictEquals(worldTransform, null) : Bool) ? (cast (cast worldTransform : { var ty:Float; }).ty : Dynamic) : (cast emitter.y : Dynamic));
@@ -214,7 +214,7 @@ class UpdateParticleEmitter2D {
       }
       i++;
     }
-    (data.particleCount = cast (liveCount : Dynamic));
+    (data.particleCount = cast (liveCount : Float));
     emitting = (cast UpdateParticleEmitter2D.isEmitting__updateParticleEmitter2D(({ final __callArgument28:Dynamic = config; __callArgument28; }), (cast state.emitterAge : Float)) : Bool);
     if ((cast ((cast ((cast config.duration : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast config.loop : Bool) : Bool)) : Bool)) { (state.emitterAge += deltaTime); }
     (state.spawnAccumulator += ((cast emitting : Bool) ? (cast (config.spawnRate * deltaTime) : Dynamic) : (cast 0.0 : Dynamic)));
@@ -224,7 +224,7 @@ class UpdateParticleEmitter2D {
       (state.burstTimer -= deltaTime);
       if ((cast ((cast state.burstTimer : Float) <= (cast 0.0 : Float)) : Bool)) {
         (toSpawn = cast ((toSpawn + config.burstCount) : Dynamic));
-        (state.burstTimer = cast (((cast ((cast config.burstInterval : Float) > (cast 0.0 : Float)) : Bool) ? (cast config.burstInterval : Dynamic) : (cast HxMath.POSITIVE_INFINITY : Dynamic)) : Dynamic));
+        (state.burstTimer = cast (((cast ((cast config.burstInterval : Float) > (cast 0.0 : Float)) : Bool) ? (cast config.burstInterval : Dynamic) : (cast HxMath.POSITIVE_INFINITY : Dynamic)) : Float));
       }
     }
     maxNew = (config.maxParticles - liveCount);
@@ -397,10 +397,10 @@ class UpdateParticleEmitter2D {
           sIdx++;
         }
       }
-      (data.particleCount = cast (newCount : Dynamic));
+      (data.particleCount = cast (newCount : Float));
     }
-    (state.prevX = cast (trackX : Dynamic));
-    (state.prevY = cast (trackY : Dynamic));
+    (state.prevX = cast (trackX : Float));
+    (state.prevY = cast (trackY : Float));
     liveRenderVelocityCount = (data.particleCount * 2.0);
     if ((cast ((cast _Runtime.field(data.velocities, 'length') : Float) >= (cast liveRenderVelocityCount : Float)) : Bool)) {
       {

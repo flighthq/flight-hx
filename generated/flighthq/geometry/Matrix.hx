@@ -30,14 +30,14 @@ class Matrix {
     if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds (2)')));
     } else { if ((cast _Runtime.strictEquals(column, 0.0) : Bool)) {
-      (out.a = cast (source.x : Dynamic));
-      (out.b = cast (source.y : Dynamic));
+      (out.a = cast (source.x : Float));
+      (out.b = cast (source.y : Float));
     } else { if ((cast _Runtime.strictEquals(column, 1.0) : Bool)) {
-      (out.c = cast (source.x : Dynamic));
-      (out.d = cast (source.y : Dynamic));
+      (out.c = cast (source.x : Float));
+      (out.d = cast (source.y : Float));
     } else {
-      (out.tx = cast (source.x : Dynamic));
-      (out.ty = cast (source.y : Dynamic));
+      (out.tx = cast (source.x : Float));
+      (out.ty = cast (source.y : Float));
     } } }
   }
 
@@ -45,17 +45,17 @@ class Matrix {
     if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds (2)')));
     } else { if ((cast _Runtime.strictEquals(column, 0.0) : Bool)) {
-      (out.x = cast (source.a : Dynamic));
-      (out.y = cast (source.b : Dynamic));
-      (out.z = cast (0.0 : Dynamic));
+      (out.x = cast (source.a : Float));
+      (out.y = cast (source.b : Float));
+      (out.z = cast (0.0 : Float));
     } else { if ((cast _Runtime.strictEquals(column, 1.0) : Bool)) {
-      (out.x = cast (source.c : Dynamic));
-      (out.y = cast (source.d : Dynamic));
-      (out.z = cast (0.0 : Dynamic));
+      (out.x = cast (source.c : Float));
+      (out.y = cast (source.d : Float));
+      (out.z = cast (0.0 : Float));
     } else {
-      (out.x = cast (source.tx : Dynamic));
-      (out.y = cast (source.ty : Dynamic));
-      (out.z = cast (1.0 : Dynamic));
+      (out.x = cast (source.tx : Float));
+      (out.y = cast (source.ty : Float));
+      (out.z = cast (1.0 : Float));
     } } }
   }
 
@@ -63,13 +63,13 @@ class Matrix {
     if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds (2)')));
     } else { if ((cast _Runtime.strictEquals(row, 0.0) : Bool)) {
-      (out.a = cast (source.x : Dynamic));
-      (out.c = cast (source.y : Dynamic));
-      (out.tx = cast (source.z : Dynamic));
+      (out.a = cast (source.x : Float));
+      (out.c = cast (source.y : Float));
+      (out.tx = cast (source.z : Float));
     } else { if ((cast _Runtime.strictEquals(row, 1.0) : Bool)) {
-      (out.b = cast (source.x : Dynamic));
-      (out.d = cast (source.y : Dynamic));
-      (out.ty = cast (source.z : Dynamic));
+      (out.b = cast (source.x : Float));
+      (out.d = cast (source.y : Float));
+      (out.ty = cast (source.z : Float));
     } } }
   }
 
@@ -77,17 +77,17 @@ class Matrix {
     if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds (2)')));
     } else { if ((cast _Runtime.strictEquals(row, 0.0) : Bool)) {
-      (out.x = cast (source.a : Dynamic));
-      (out.y = cast (source.c : Dynamic));
-      (out.z = cast (source.tx : Dynamic));
+      (out.x = cast (source.a : Float));
+      (out.y = cast (source.c : Float));
+      (out.z = cast (source.tx : Float));
     } else { if ((cast _Runtime.strictEquals(row, 1.0) : Bool)) {
-      (out.x = cast (source.b : Dynamic));
-      (out.y = cast (source.d : Dynamic));
-      (out.z = cast (source.ty : Dynamic));
+      (out.x = cast (source.b : Float));
+      (out.y = cast (source.d : Float));
+      (out.z = cast (source.ty : Float));
     } else {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.z = cast (1.0 : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.z = cast (1.0 : Float));
     } } }
   }
 
@@ -140,9 +140,9 @@ class Matrix {
     ty = source.ty;
     det = ((a * d) - (c * b));
     if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) {
-      (out.a = cast ((out.b = cast ((out.c = cast ((out.d = cast (0.0 : Dynamic)) : Dynamic)) : Dynamic)) : Dynamic));
-      (out.tx = cast (-tx : Dynamic));
-      (out.ty = cast (-ty : Dynamic));
+      (out.a = cast ((out.b = cast ((out.c = cast ((out.d = cast (0.0 : Float)) : Float)) : Float)) : Float));
+      (out.tx = cast (-tx : Float));
+      (out.ty = cast (-ty : Float));
       return cast false;
     }
     invDet = (1.0 / det);
@@ -150,12 +150,12 @@ class Matrix {
     outB = (-b * invDet);
     outC = (-c * invDet);
     outD = (a * invDet);
-    (out.a = cast (outA : Dynamic));
-    (out.b = cast (outB : Dynamic));
-    (out.c = cast (outC : Dynamic));
-    (out.d = cast (outD : Dynamic));
-    (out.tx = cast (-((outA * tx) + (outC * ty)) : Dynamic));
-    (out.ty = cast (-((outB * tx) + (outD * ty)) : Dynamic));
+    (out.a = cast (outA : Float));
+    (out.b = cast (outB : Float));
+    (out.c = cast (outC : Float));
+    (out.d = cast (outD : Float));
+    (out.tx = cast (-((outA * tx) + (outC * ty)) : Float));
+    (out.ty = cast (-((outB * tx) + (outD * ty)) : Float));
     return cast true;
     return cast null;
   }
@@ -168,12 +168,12 @@ class Matrix {
     var norm:Float = cast _Runtime.UNDEFINED;
     norm = ((source.a * source.d) - (source.b * source.c));
     if ((cast _Runtime.strictEquals(norm, 0.0) : Bool)) {
-      (out.x = cast (-source.tx : Dynamic));
-      (out.y = cast (-source.ty : Dynamic));
+      (out.x = cast (-source.tx : Float));
+      (out.y = cast (-source.ty : Float));
     } else {
       var px:Float = ((1.0 / norm) * ((source.c * (source.ty - y)) + (source.d * (x - source.tx))));
-      (out.y = cast (((1.0 / norm) * ((source.a * (y - source.ty)) + (source.b * (source.tx - x)))) : Dynamic));
-      (out.x = cast (px : Dynamic));
+      (out.y = cast (((1.0 / norm) * ((source.a * (y - source.ty)) + (source.b * (source.tx - x)))) : Float));
+      (out.x = cast (px : Float));
     }
   }
 
@@ -185,12 +185,12 @@ class Matrix {
     var norm:Float = cast _Runtime.UNDEFINED;
     norm = ((source.a * source.d) - (source.b * source.c));
     if ((cast _Runtime.strictEquals(norm, 0.0) : Bool)) {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
     } else {
       var px:Float = ((1.0 / norm) * ((source.d * x) - (source.c * y)));
-      (out.y = cast (((1.0 / norm) * ((-source.b * x) + (source.a * y))) : Dynamic));
-      (out.x = cast (px : Dynamic));
+      (out.y = cast (((1.0 / norm) * ((-source.b * x) + (source.a * y))) : Float));
+      (out.x = cast (px : Float));
     }
   }
 
@@ -212,10 +212,10 @@ class Matrix {
     c = __destructure0.c;
     d = __destructure0.d;
     if ((cast ((cast _Runtime.strictEquals(ax, bx) : Bool) && (cast _Runtime.strictEquals(ay, by) : Bool)) : Bool)) {
-      (out.x = cast (source.tx : Dynamic));
-      (out.y = cast (source.ty : Dynamic));
-      (out.width = cast (0.0 : Dynamic));
-      (out.height = cast (0.0 : Dynamic));
+      (out.x = cast (source.tx : Float));
+      (out.y = cast (source.ty : Float));
+      (out.width = cast (0.0 : Float));
+      (out.height = cast (0.0 : Float));
       return;
     }
     tx0 = ((a * ax) + (c * ay));
@@ -240,10 +240,10 @@ class Matrix {
     if ((cast ((cast ty : Float) < (cast ty0 : Float)) : Bool)) { (ty0 = cast (ty : Dynamic)); }
     if ((cast ((cast tx : Float) > (cast tx1 : Float)) : Bool)) { (tx1 = cast (tx : Dynamic)); }
     if ((cast ((cast ty : Float) > (cast ty1 : Float)) : Bool)) { (ty1 = cast (ty : Dynamic)); }
-    (out.x = cast ((tx0 + source.tx) : Dynamic));
-    (out.y = cast ((ty0 + source.ty) : Dynamic));
-    (out.width = cast ((tx1 - tx0) : Dynamic));
-    (out.height = cast ((ty1 - ty0) : Dynamic));
+    (out.x = cast ((tx0 + source.tx) : Float));
+    (out.y = cast ((ty0 + source.ty) : Float));
+    (out.width = cast ((tx1 - tx0) : Float));
+    (out.height = cast ((ty1 - ty0) : Float));
   }
 
   public static function matrixTransformBoundsVector2(out:RectangleLike, matrix:MatrixLike, a:Vector2Like, b:Vector2Like):Void {
@@ -255,8 +255,8 @@ class Matrix {
   }
 
   public static function matrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
-    (out.x = cast ((((x * source.a) + (y * source.c)) + source.tx) : Dynamic));
-    (out.y = cast ((((x * source.b) + (y * source.d)) + source.ty) : Dynamic));
+    (out.x = cast ((((x * source.a) + (y * source.c)) + source.tx) : Float));
+    (out.y = cast ((((x * source.b) + (y * source.d)) + source.ty) : Float));
   }
 
   public static function matrixTransformRectangle(out:RectangleLike, matrix:MatrixLike, source:RectangleLike):Void {
@@ -268,8 +268,8 @@ class Matrix {
   }
 
   public static function matrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
-    (out.x = cast (((x * source.a) + (y * source.c)) : Dynamic));
-    (out.y = cast (((x * source.b) + (y * source.d)) : Dynamic));
+    (out.x = cast (((x * source.a) + (y * source.c)) : Float));
+    (out.y = cast (((x * source.b) + (y * source.d)) : Float));
   }
 
   public static function multiplyMatrix(out:MatrixLike, a:MatrixLike, b:MatrixLike):Void {
@@ -297,12 +297,12 @@ class Matrix {
     c2 = b.c;
     d2 = b.d;
     ty2 = b.ty;
-    (out.a = cast (((a1 * a2) + (c1 * b2)) : Dynamic));
-    (out.b = cast (((b1 * a2) + (d1 * b2)) : Dynamic));
-    (out.tx = cast ((((a1 * tx2) + (c1 * ty2)) + tx1) : Dynamic));
-    (out.c = cast (((a1 * c2) + (c1 * d2)) : Dynamic));
-    (out.d = cast (((b1 * c2) + (d1 * d2)) : Dynamic));
-    (out.ty = cast ((((b1 * tx2) + (d1 * ty2)) + ty1) : Dynamic));
+    (out.a = cast (((a1 * a2) + (c1 * b2)) : Float));
+    (out.b = cast (((b1 * a2) + (d1 * b2)) : Float));
+    (out.tx = cast ((((a1 * tx2) + (c1 * ty2)) + tx1) : Float));
+    (out.c = cast (((a1 * c2) + (c1 * d2)) : Float));
+    (out.d = cast (((b1 * c2) + (d1 * d2)) : Float));
+    (out.ty = cast ((((b1 * tx2) + (d1 * ty2)) + ty1) : Float));
   }
 
   public static function rotateMatrix(out:MatrixLike, source:MatrixLike, theta:Float):Void {
@@ -314,59 +314,59 @@ class Matrix {
     cos = HxMath.cos(theta);
     sin = HxMath.sin(theta);
     a1 = ((source.a * cos) - (source.b * sin));
-    (out.b = cast (((source.a * sin) + (source.b * cos)) : Dynamic));
-    (out.a = cast (a1 : Dynamic));
+    (out.b = cast (((source.a * sin) + (source.b * cos)) : Float));
+    (out.a = cast (a1 : Float));
     c1 = ((source.c * cos) - (source.d * sin));
-    (out.d = cast (((source.c * sin) + (source.d * cos)) : Dynamic));
-    (out.c = cast (c1 : Dynamic));
+    (out.d = cast (((source.c * sin) + (source.d * cos)) : Float));
+    (out.c = cast (c1 : Float));
     tx1 = ((source.tx * cos) - (source.ty * sin));
-    (out.ty = cast (((source.tx * sin) + (source.ty * cos)) : Dynamic));
-    (out.tx = cast (tx1 : Dynamic));
+    (out.ty = cast (((source.tx * sin) + (source.ty * cos)) : Float));
+    (out.tx = cast (tx1 : Float));
   }
 
   public static function scaleMatrix(out:MatrixLike, source:MatrixLike, sx:Float, sy:Float):Void {
-    (out.a = cast ((source.a * sx) : Dynamic));
-    (out.b = cast ((source.b * sy) : Dynamic));
-    (out.c = cast ((source.c * sx) : Dynamic));
-    (out.d = cast ((source.d * sy) : Dynamic));
-    (out.tx = cast ((source.tx * sx) : Dynamic));
-    (out.ty = cast ((source.ty * sy) : Dynamic));
+    (out.a = cast ((source.a * sx) : Float));
+    (out.b = cast ((source.b * sy) : Float));
+    (out.c = cast ((source.c * sx) : Float));
+    (out.d = cast ((source.d * sy) : Float));
+    (out.tx = cast ((source.tx * sx) : Float));
+    (out.ty = cast ((source.ty * sy) : Float));
   }
 
   public static function setGradientTransformMatrix(out:MatrixLike, width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Void {
-    (out.a = cast ((width / 1638.4) : Dynamic));
-    (out.d = cast ((height / 1638.4) : Dynamic));
+    (out.a = cast ((width / 1638.4) : Float));
+    (out.d = cast ((height / 1638.4) : Float));
     if ((cast !_Runtime.strictEquals(rotation, 0.0) : Bool)) {
       var cos:Float = HxMath.cos(rotation);
       var sin:Float = HxMath.sin(rotation);
-      (out.b = cast ((sin * out.d) : Dynamic));
-      (out.c = cast ((-sin * out.a) : Dynamic));
+      (out.b = cast ((sin * out.d) : Float));
+      (out.c = cast ((-sin * out.a) : Float));
       (out.a *= cos);
       (out.d *= cos);
     } else {
-      (out.b = cast (0.0 : Dynamic));
-      (out.c = cast (0.0 : Dynamic));
+      (out.b = cast (0.0 : Float));
+      (out.c = cast (0.0 : Float));
     }
-    (out.tx = cast ((tx + (width / 2.0)) : Dynamic));
-    (out.ty = cast ((ty + (height / 2.0)) : Dynamic));
+    (out.tx = cast ((tx + (width / 2.0)) : Float));
+    (out.ty = cast ((ty + (height / 2.0)) : Float));
   }
 
   public static function setMatrix(out:MatrixLike, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
-    (out.a = cast (a : Dynamic));
-    (out.b = cast (b : Dynamic));
-    (out.c = cast (c : Dynamic));
-    (out.d = cast (d : Dynamic));
-    (out.tx = cast (tx : Dynamic));
-    (out.ty = cast (ty : Dynamic));
+    (out.a = cast (a : Float));
+    (out.b = cast (b : Float));
+    (out.c = cast (c : Float));
+    (out.d = cast (d : Float));
+    (out.tx = cast (tx : Float));
+    (out.ty = cast (ty : Float));
   }
 
   public static function setMatrixFromFloat32Array(out:MatrixLike, offset:Float, source:flighthq._internal._Float32Array):Void {
-    (out.a = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast offset : Float)) : Dynamic));
-    (out.b = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float)) : Dynamic));
-    (out.c = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float)) : Dynamic));
-    (out.d = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 3.0) : Float)) : Dynamic));
-    (out.tx = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 4.0) : Float)) : Dynamic));
-    (out.ty = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 5.0) : Float)) : Dynamic));
+    (out.a = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast offset : Float)) : Float));
+    (out.b = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float)) : Float));
+    (out.c = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float)) : Float));
+    (out.d = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 3.0) : Float)) : Float));
+    (out.tx = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 4.0) : Float)) : Float));
+    (out.ty = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 5.0) : Float)) : Float));
   }
 
   public static function setMatrixFromMatrix3(out:MatrixLike, source:Matrix3Like):Void {
@@ -378,12 +378,12 @@ class Matrix {
   public static function setMatrixFromMatrix4(out:MatrixLike, source:Matrix4Like):Void {
     var s:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     s = source.m;
-    (out.a = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Dynamic));
-    (out.b = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 4.0 : Float)) : Dynamic));
-    (out.tx = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 12.0 : Float)) : Dynamic));
-    (out.c = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Dynamic));
-    (out.d = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 5.0 : Float)) : Dynamic));
-    (out.ty = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 13.0 : Float)) : Dynamic));
+    (out.a = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float));
+    (out.b = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 4.0 : Float)) : Float));
+    (out.tx = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 12.0 : Float)) : Float));
+    (out.c = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float));
+    (out.d = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 5.0 : Float)) : Float));
+    (out.ty = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast s : flighthq._internal._Float32Array), (cast 13.0 : Float)) : Float));
   }
 
   public static function setMatrixIdentity(out:MatrixLike):Void {
@@ -394,18 +394,18 @@ class Matrix {
     if ((cast !_Runtime.strictEquals(rotation, 0.0) : Bool)) {
       var cos:Float = HxMath.cos(rotation);
       var sin:Float = HxMath.sin(rotation);
-      (out.a = cast ((cos * scaleX) : Dynamic));
-      (out.b = cast ((sin * scaleY) : Dynamic));
-      (out.c = cast ((-sin * scaleX) : Dynamic));
-      (out.d = cast ((cos * scaleY) : Dynamic));
+      (out.a = cast ((cos * scaleX) : Float));
+      (out.b = cast ((sin * scaleY) : Float));
+      (out.c = cast ((-sin * scaleX) : Float));
+      (out.d = cast ((cos * scaleY) : Float));
     } else {
-      (out.a = cast (scaleX : Dynamic));
-      (out.b = cast (0.0 : Dynamic));
-      (out.c = cast (0.0 : Dynamic));
-      (out.d = cast (scaleY : Dynamic));
+      (out.a = cast (scaleX : Float));
+      (out.b = cast (0.0 : Float));
+      (out.c = cast (0.0 : Float));
+      (out.d = cast (scaleY : Float));
     }
-    (out.tx = cast (tx : Dynamic));
-    (out.ty = cast (ty : Dynamic));
+    (out.tx = cast (tx : Float));
+    (out.ty = cast (ty : Float));
   }
 
   public static function translateMatrix(out:MatrixLike, source:MatrixLike, dx:Float, dy:Float):Void {

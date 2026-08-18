@@ -221,9 +221,9 @@ class Vector4 {
   }
 
   public static function projectVector4(out:Vector3Like, source:Vector4Like):Void {
-    (out.x = cast (_Runtime.divideNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'w')) : Dynamic));
-    (out.y = cast (_Runtime.divideNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'w')) : Dynamic));
-    (out.z = cast (_Runtime.divideNumbers(_Runtime.field(source, 'z'), _Runtime.field(source, 'w')) : Dynamic));
+    (out.x = cast (_Runtime.divideNumbers(_Runtime.field(source, 'x'), _Runtime.field(source, 'w')) : Float));
+    (out.y = cast (_Runtime.divideNumbers(_Runtime.field(source, 'y'), _Runtime.field(source, 'w')) : Float));
+    (out.z = cast (_Runtime.divideNumbers(_Runtime.field(source, 'z'), _Runtime.field(source, 'w')) : Float));
   }
 
   public static function reflectVector4(out:Vector4Like, incident:Vector4Like, normal:Vector4Like):Void {

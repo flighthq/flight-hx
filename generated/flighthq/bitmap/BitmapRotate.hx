@@ -12,8 +12,8 @@ import flighthq.types.BitmapResizeMode;
 
 class BitmapRotate {
   public static function rotateBitmap(dest:BitmapRegion, source:BitmapRegion, angle:Float, ?pivotX:Float, ?pivotY:Float, edgeMode:BitmapEdgeMode = 'clamp', sampleMode:BitmapResizeMode = 'bilinear'):Void {
-    if (pivotX == null) pivotX = cast ((_Runtime.subtractNumbers(_Runtime.field(source, 'width'), 1.0) / 2.0) : Dynamic);
-    if (pivotY == null) pivotY = cast ((_Runtime.subtractNumbers(_Runtime.field(source, 'height'), 1.0) / 2.0) : Dynamic);
+    if (pivotX == null) pivotX = cast (((source.width - 1.0) / 2.0) : Dynamic);
+    if (pivotY == null) pivotY = cast (((source.height - 1.0) / 2.0) : Dynamic);
     var cosA:Float = cast _Runtime.UNDEFINED;
     var sinA:Float = cast _Runtime.UNDEFINED;
     var destPivotX:Float = cast _Runtime.UNDEFINED;
@@ -22,8 +22,8 @@ class BitmapRotate {
     var f:Float = cast _Runtime.UNDEFINED;
     cosA = HxMath.cos(-angle);
     sinA = HxMath.sin(-angle);
-    destPivotX = (_Runtime.subtractNumbers(_Runtime.field(dest, 'width'), 1.0) / 2.0);
-    destPivotY = (_Runtime.subtractNumbers(_Runtime.field(dest, 'height'), 1.0) / 2.0);
+    destPivotX = ((dest.width - 1.0) / 2.0);
+    destPivotY = ((dest.height - 1.0) / 2.0);
     e = ((pivotX - (cosA * destPivotX)) + (sinA * destPivotY));
     f = ((pivotY - (sinA * destPivotX)) - (cosA * destPivotY));
     transformBitmap(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = cast ([cosA, sinA, -sinA, cosA, e, f] : Array<Dynamic>); __callArgument2; }), ({ final __callArgument3:Dynamic = edgeMode; __callArgument3; }), ({ final __callArgument4:Dynamic = sampleMode; __callArgument4; }));
@@ -36,42 +36,42 @@ class BitmapRotate {
     var dd:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     var sStride:Float = cast _Runtime.UNDEFINED;
     var dStride:Float = cast _Runtime.UNDEFINED;
-    w = HxMath.min(_Runtime.field(dest, 'width'), _Runtime.field(source, 'width'));
-    h = HxMath.min(_Runtime.field(dest, 'height'), _Runtime.field(source, 'height'));
+    w = HxMath.min(dest.width, source.width);
+    h = HxMath.min(dest.height, source.height);
     if ((cast (cast BitmapRotate.isSameRegion__bitmapRotate(({ final __callArgument5:Dynamic = dest; __callArgument5; }), ({ final __callArgument6:Dynamic = source; __callArgument6; })) : Bool) : Bool)) {
-      var data:flighthq._internal._UInt8ClampedArray = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-      var stride:Float = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
+      var data:flighthq._internal._UInt8ClampedArray = (cast dest.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+      var stride:Float = (cast dest.bitmap : { var width:Float; }).width;
       var total:Float = (w * h);
       var half:Float = (_Runtime.toInt32(total) >> 1);
       {
         var k:Float = 0.0;
         while ((cast ((cast k : Float) < (cast half : Float)) : Bool)) {
-          var ax:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), _Runtime.fmod(k, w));
-          var ay:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), HxMath.floor((k / w)));
-          var bx:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), ((w - 1.0) - _Runtime.fmod(k, w)));
-          var by:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), _Runtime.subtractNumbers((h - 1.0), HxMath.floor((k / w))));
-          if ((cast ((cast !(cast (cast BitmapRotate.inBounds__bitmapRotate((cast ax : Float), (cast ay : Float), (cast stride : Float), (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool) : Bool) : Bool) || (cast !(cast (cast BitmapRotate.inBounds__bitmapRotate((cast bx : Float), (cast by : Float), (cast stride : Float), (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool) : Bool) : Bool)) : Bool)) { k++; continue; }
+          var ax:Float = (dest.x + _Runtime.fmod(k, w));
+          var ay:Float = _Runtime.addNumbers(dest.y, HxMath.floor((k / w)));
+          var bx:Float = (dest.x + ((w - 1.0) - _Runtime.fmod(k, w)));
+          var by:Float = (dest.y + _Runtime.subtractNumbers((h - 1.0), HxMath.floor((k / w))));
+          if ((cast ((cast !(cast (cast BitmapRotate.inBounds__bitmapRotate((cast ax : Float), (cast ay : Float), (cast stride : Float), (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool) : Bool) : Bool) || (cast !(cast (cast BitmapRotate.inBounds__bitmapRotate((cast bx : Float), (cast by : Float), (cast stride : Float), (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool) : Bool) : Bool)) : Bool)) { k++; continue; }
           BitmapRotate.swapPixels__bitmapRotate(({ final __callArgument7:Dynamic = data; __callArgument7; }), (cast (((ay * stride) + ax) * 4.0) : Float), (cast (((by * stride) + bx) * 4.0) : Float));
           k++;
         }
       }
       return;
     }
-    sd = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    dd = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    sStride = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
-    dStride = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
+    sd = (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    dd = (cast dest.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    sStride = (cast source.bitmap : { var width:Float; }).width;
+    dStride = (cast dest.bitmap : { var width:Float; }).width;
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-        var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), ((h - 1.0) - py));
-        var dy:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
-        if ((cast ((cast !(cast (cast BitmapRotate.inBounds__bitmapRotate((cast 0.0 : Float), (cast sy : Float), (cast sStride : Float), (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float)) : Bool) : Bool) : Bool) || (cast !(cast (cast BitmapRotate.inBounds__bitmapRotate((cast 0.0 : Float), (cast dy : Float), (cast dStride : Float), (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool) : Bool) : Bool)) : Bool)) { py++; continue; }
+        var sy:Float = (source.y + ((h - 1.0) - py));
+        var dy:Float = (dest.y + py);
+        if ((cast ((cast !(cast (cast BitmapRotate.inBounds__bitmapRotate((cast 0.0 : Float), (cast sy : Float), (cast sStride : Float), (cast (cast source.bitmap : { var height:Float; }).height : Float)) : Bool) : Bool) : Bool) || (cast !(cast (cast BitmapRotate.inBounds__bitmapRotate((cast 0.0 : Float), (cast dy : Float), (cast dStride : Float), (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool) : Bool) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), ((w - 1.0) - px));
-            var dx:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
+            var sx:Float = (source.x + ((w - 1.0) - px));
+            var dx:Float = (dest.x + px);
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { px++; continue; }
             BitmapRotate.copyPixel__bitmapRotate(({ final __callArgument8:Dynamic = dd; __callArgument8; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument9:Dynamic = sd; __callArgument9; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
             px++;
@@ -80,7 +80,7 @@ class BitmapRotate {
         py++;
       }
     }
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap(dest.bitmap);
   }
 
   public static function rotateBitmapClockwise(dest:BitmapRegion, source:BitmapRegion):Void {
@@ -90,25 +90,25 @@ class BitmapRotate {
     var dd:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     var sStride:Float = cast _Runtime.UNDEFINED;
     var dStride:Float = cast _Runtime.UNDEFINED;
-    sw = _Runtime.field(source, 'width');
-    sh = _Runtime.field(source, 'height');
-    sd = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    dd = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    sStride = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
-    dStride = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
+    sw = source.width;
+    sh = source.height;
+    sd = (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    dd = (cast dest.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    sStride = (cast source.bitmap : { var width:Float; }).width;
+    dStride = (cast dest.bitmap : { var width:Float; }).width;
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast sh : Float)) : Bool)) {
-        var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
-        if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
+        var sy:Float = (source.y + py);
+        if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast (cast source.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast sw : Float)) : Bool)) {
-            var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var sx:Float = (source.x + px);
             if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool)) { px++; continue; }
-            var dx:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), ((sh - 1.0) - py));
-            var dy:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), px);
-            if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { px++; continue; }
+            var dx:Float = (dest.x + ((sh - 1.0) - py));
+            var dy:Float = (dest.y + px);
+            if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { px++; continue; }
             BitmapRotate.copyPixel__bitmapRotate(({ final __callArgument10:Dynamic = dd; __callArgument10; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument11:Dynamic = sd; __callArgument11; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
             px++;
           }
@@ -116,7 +116,7 @@ class BitmapRotate {
         py++;
       }
     }
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap(dest.bitmap);
   }
 
   public static function rotateBitmapCounterClockwise(dest:BitmapRegion, source:BitmapRegion):Void {
@@ -126,25 +126,25 @@ class BitmapRotate {
     var dd:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     var sStride:Float = cast _Runtime.UNDEFINED;
     var dStride:Float = cast _Runtime.UNDEFINED;
-    sw = _Runtime.field(source, 'width');
-    sh = _Runtime.field(source, 'height');
-    sd = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    dd = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    sStride = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
-    dStride = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
+    sw = source.width;
+    sh = source.height;
+    sd = (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    dd = (cast dest.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    sStride = (cast source.bitmap : { var width:Float; }).width;
+    dStride = (cast dest.bitmap : { var width:Float; }).width;
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast sh : Float)) : Bool)) {
-        var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
-        if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
+        var sy:Float = (source.y + py);
+        if ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast (cast source.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast sw : Float)) : Bool)) {
-            var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+            var sx:Float = (source.x + px);
             if ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool)) { px++; continue; }
-            var dx:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), py);
-            var dy:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), ((sw - 1.0) - px));
-            if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { px++; continue; }
+            var dx:Float = (dest.x + py);
+            var dy:Float = (dest.y + ((sw - 1.0) - px));
+            if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { px++; continue; }
             BitmapRotate.copyPixel__bitmapRotate(({ final __callArgument12:Dynamic = dd; __callArgument12; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument13:Dynamic = sd; __callArgument13; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
             px++;
           }
@@ -152,7 +152,7 @@ class BitmapRotate {
         py++;
       }
     }
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap(dest.bitmap);
   }
 
   public static function copyPixel__bitmapRotate(dest:flighthq._internal._UInt8ClampedArray, di:Float, source:flighthq._internal._UInt8ClampedArray, si:Float):Void {
@@ -168,7 +168,7 @@ class BitmapRotate {
   }
 
   public static function isSameRegion__bitmapRotate(a:BitmapRegion, b:BitmapRegion):Bool {
-    return cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'bitmap'), _Runtime.field(b, 'bitmap')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'x'), _Runtime.field(b, 'x')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'y'), _Runtime.field(b, 'y')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'width'), _Runtime.field(b, 'width')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(a, 'height'), _Runtime.field(b, 'height')) : Bool));
+    return cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(a.bitmap, b.bitmap) : Bool) && (cast _Runtime.strictEquals(a.x, b.x) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.y, b.y) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.width, b.width) : Bool)) : Bool) && (cast _Runtime.strictEquals(a.height, b.height) : Bool));
     return cast null;
   }
 

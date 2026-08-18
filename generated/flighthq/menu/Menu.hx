@@ -163,7 +163,7 @@ class Menu {
     var clone:MenuItemTemplate = cast _Runtime.UNDEFINED;
     clone = (cast _Runtime.mergeObjects([template]));
     if ((cast !_Runtime.strictEquals(template.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (clone.submenu = cast ((cast _Runtime.mapArray((cast template.submenu : Array<MenuItemTemplate>), cloneMenuTemplate, _Runtime.UNDEFINED)) : Dynamic));
+      (clone.submenu = cast ((cast _Runtime.mapArray((cast template.submenu : Array<MenuItemTemplate>), cloneMenuTemplate, _Runtime.UNDEFINED)) : Null<Array<MenuItemTemplate>>));
     }
     return cast clone;
     return cast null;
@@ -203,7 +203,7 @@ class Menu {
     var item:MenuItemTemplate = cast _Runtime.UNDEFINED;
     item = (cast _Runtime.mergeObjects([{ type: 'normal' }, { enabled: true }, template]));
     if ((cast !_Runtime.strictEquals(item.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (item.submenu = cast ((cast _Runtime.mapArray((cast item.submenu : Array<MenuItemTemplate>), function(child:MenuItemTemplate, __unused0:Float, __unused1:Array<MenuItemTemplate>):MenuItemTemplate return (cast createMenuItemTemplate(({ final __callArgument10:Dynamic = child; __callArgument10; })) : MenuItemTemplate), _Runtime.UNDEFINED)) : Dynamic));
+      (item.submenu = cast ((cast _Runtime.mapArray((cast item.submenu : Array<MenuItemTemplate>), function(child:MenuItemTemplate, __unused0:Float, __unused1:Array<MenuItemTemplate>):MenuItemTemplate return (cast createMenuItemTemplate(({ final __callArgument10:Dynamic = child; __callArgument10; })) : MenuItemTemplate), _Runtime.UNDEFINED)) : Null<Array<MenuItemTemplate>>));
     }
     return cast item;
     return cast null;

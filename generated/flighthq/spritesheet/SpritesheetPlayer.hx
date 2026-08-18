@@ -17,13 +17,13 @@ class SpritesheetPlayer {
   public static function acquireSpritesheetPlayer():flighthq.types.SpritesheetPlayer {
     if ((cast ((cast _Runtime.field(SpritesheetPlayer.playerPool__spritesheetPlayer, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       var p:flighthq.types.SpritesheetPlayer = _Runtime.callProperty(SpritesheetPlayer.playerPool__spritesheetPlayer, 'pop', cast ([] : Array<Dynamic>));
-      (p.animation = cast (null : Dynamic));
-      (p.complete = cast (true : Dynamic));
-      (p.elapsed = cast (0.0 : Dynamic));
-      (p.frameIndex = cast (0.0 : Dynamic));
-      (p.paused = cast (false : Dynamic));
+      (p.animation = cast (null : Null<SpritesheetAnimation>));
+      (p.complete = cast (true : Bool));
+      (p.elapsed = cast (0.0 : Float));
+      (p.frameIndex = cast (0.0 : Float));
+      (p.paused = cast (false : Bool));
       _Runtime.setLength(p.queue, 0.0);
-      (p.speed = cast (1.0 : Dynamic));
+      (p.speed = cast (1.0 : Float));
       return cast p;
     }
     return cast (cast createSpritesheetPlayer(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq.types.SpritesheetPlayer);
@@ -43,8 +43,8 @@ class SpritesheetPlayer {
   public static function disposeSpritesheetPlayer(player:flighthq.types.SpritesheetPlayer):Void {
     clearSignal((cast player.onComplete : Dynamic));
     clearSignal((cast player.onLoop : Dynamic));
-    (player.animation = cast (null : Dynamic));
-    (player.complete = cast (true : Dynamic));
+    (player.animation = cast (null : Null<SpritesheetAnimation>));
+    (player.complete = cast (true : Bool));
     _Runtime.setLength(player.queue, 0.0);
   }
 
@@ -81,15 +81,15 @@ class SpritesheetPlayer {
   }
 
   public static function pauseSpritesheetPlayer(player:flighthq.types.SpritesheetPlayer):Void {
-    (player.paused = cast (true : Dynamic));
+    (player.paused = cast (true : Bool));
   }
 
   public static function playSpritesheetAnimation(player:flighthq.types.SpritesheetPlayer, animation:Null<SpritesheetAnimation>, restart:Bool = true):Void {
     if ((cast ((cast !(cast restart : Bool) : Bool) && (cast _Runtime.strictEquals(animation, player.animation) : Bool)) : Bool)) { return; }
-    (player.animation = cast (animation : Dynamic));
-    (player.complete = cast (_Runtime.strictEquals(animation, null) : Dynamic));
-    (player.elapsed = cast (0.0 : Dynamic));
-    (player.frameIndex = cast (0.0 : Dynamic));
+    (player.animation = cast (animation : Null<SpritesheetAnimation>));
+    (player.complete = cast (_Runtime.strictEquals(animation, null) : Bool));
+    (player.elapsed = cast (0.0 : Float));
+    (player.frameIndex = cast (0.0 : Float));
     _Runtime.setLength(player.queue, 0.0);
   }
 
@@ -100,18 +100,18 @@ class SpritesheetPlayer {
   public static function releaseSpritesheetPlayer(player:flighthq.types.SpritesheetPlayer):Void {
     clearSignal((cast player.onComplete : Dynamic));
     clearSignal((cast player.onLoop : Dynamic));
-    (player.animation = cast (null : Dynamic));
-    (player.complete = cast (true : Dynamic));
-    (player.elapsed = cast (0.0 : Dynamic));
-    (player.frameIndex = cast (0.0 : Dynamic));
-    (player.paused = cast (false : Dynamic));
+    (player.animation = cast (null : Null<SpritesheetAnimation>));
+    (player.complete = cast (true : Bool));
+    (player.elapsed = cast (0.0 : Float));
+    (player.frameIndex = cast (0.0 : Float));
+    (player.paused = cast (false : Bool));
     _Runtime.setLength(player.queue, 0.0);
-    (player.speed = cast (1.0 : Dynamic));
+    (player.speed = cast (1.0 : Float));
     _Runtime.callProperty(SpritesheetPlayer.playerPool__spritesheetPlayer, 'push', cast ([player] : Array<Dynamic>));
   }
 
   public static function resumeSpritesheetPlayer(player:flighthq.types.SpritesheetPlayer):Void {
-    (player.paused = cast (false : Dynamic));
+    (player.paused = cast (false : Bool));
   }
 
   public static function seekSpritesheetPlayerToFrame(player:flighthq.types.SpritesheetPlayer, frameIndex:Float):Void {
@@ -123,9 +123,9 @@ class SpritesheetPlayer {
     animation = __destructure2.animation;
     if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation.frames, 'length'), 0.0) : Bool)) : Bool)) { return; }
     clamped = HxMath.max(0.0, HxMath.min(frameIndex, _Runtime.subtractNumbers(_Runtime.field(animation.frames, 'length'), 1.0)));
-    (player.frameIndex = cast (clamped : Dynamic));
+    (player.frameIndex = cast (clamped : Float));
     virtualIndex = (cast SpritesheetPlayer.resolveDisplayIndexToFirstVirtualIndex__spritesheetPlayer(({ final __callArgument9:Dynamic = animation; __callArgument9; }), (cast clamped : Float)) : Float);
-    (player.elapsed = cast ((cast SpritesheetPlayer.resolveVirtualIndexStartTime__spritesheetPlayer(({ final __callArgument10:Dynamic = animation; __callArgument10; }), (cast virtualIndex : Float)) : Float) : Dynamic));
+    (player.elapsed = cast ((cast SpritesheetPlayer.resolveVirtualIndexStartTime__spritesheetPlayer(({ final __callArgument10:Dynamic = animation; __callArgument10; }), (cast virtualIndex : Float)) : Float) : Float));
   }
 
   public static function seekSpritesheetPlayerToTime(player:flighthq.types.SpritesheetPlayer, time:Float):Void {
@@ -136,14 +136,14 @@ class SpritesheetPlayer {
     animation = __destructure3.animation;
     if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation.frames, 'length'), 0.0) : Bool)) : Bool)) { return; }
     totalTime = (cast SpritesheetPlayer.resolveAnimationTotalTime__spritesheetPlayer(({ final __callArgument11:Dynamic = animation; __callArgument11; })) : Float);
-    (player.elapsed = cast (HxMath.max(0.0, HxMath.min(time, totalTime)) : Dynamic));
-    (player.frameIndex = cast ((cast SpritesheetPlayer.resolveFrameIndexFromElapsed__spritesheetPlayer(({ final __callArgument12:Dynamic = animation; __callArgument12; }), (cast player.elapsed : Float)) : Float) : Dynamic));
+    (player.elapsed = cast (HxMath.max(0.0, HxMath.min(time, totalTime)) : Float));
+    (player.frameIndex = cast ((cast SpritesheetPlayer.resolveFrameIndexFromElapsed__spritesheetPlayer(({ final __callArgument12:Dynamic = animation; __callArgument12; }), (cast player.elapsed : Float)) : Float) : Float));
   }
 
   public static function stopSpritesheetPlayer(player:flighthq.types.SpritesheetPlayer):Void {
-    (player.elapsed = cast (0.0 : Dynamic));
-    (player.frameIndex = cast (0.0 : Dynamic));
-    (player.complete = cast (true : Dynamic));
+    (player.elapsed = cast (0.0 : Float));
+    (player.frameIndex = cast (0.0 : Float));
+    (player.complete = cast (true : Bool));
     _Runtime.setLength(player.queue, 0.0);
   }
 
@@ -169,22 +169,22 @@ class SpritesheetPlayer {
     if ((cast ((cast player.elapsed : Float) >= (cast playbackTime : Float)) : Bool)) {
       if ((cast ((cast _Runtime.field(player.queue, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
         var next:SpritesheetAnimation = _Runtime.callProperty(player.queue, 'shift', cast ([] : Array<Dynamic>));
-        (player.animation = cast (next : Dynamic));
-        (player.elapsed = cast (0.0 : Dynamic));
-        (player.frameIndex = cast (0.0 : Dynamic));
+        (player.animation = cast (next : Null<SpritesheetAnimation>));
+        (player.elapsed = cast (0.0 : Float));
+        (player.frameIndex = cast (0.0 : Float));
         return cast true;
       }
-      (player.elapsed = cast (playbackTime : Dynamic));
+      (player.elapsed = cast (playbackTime : Float));
       var lastVi:Float = ((cast SpritesheetPlayer.resolveVirtualFrameCount__spritesheetPlayer(({ final __callArgument14:Dynamic = animation; __callArgument14; })) : Float) - 1.0);
-      (player.frameIndex = cast ((cast SpritesheetPlayer.resolveVirtualIndexToDisplayIndex__spritesheetPlayer(({ final __callArgument15:Dynamic = animation; __callArgument15; }), (cast lastVi : Float)) : Float) : Dynamic));
-      (player.complete = cast (true : Dynamic));
+      (player.frameIndex = cast ((cast SpritesheetPlayer.resolveVirtualIndexToDisplayIndex__spritesheetPlayer(({ final __callArgument15:Dynamic = animation; __callArgument15; }), (cast lastVi : Float)) : Float) : Float));
+      (player.complete = cast (true : Bool));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[player.onComplete]]), 1);
       return cast true;
     }
     if ((cast ((cast HxMath.floor((player.elapsed / totalTime)) : Float) > (cast prevLoopCount : Float)) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[player.onLoop]]), 1); }
     timeInLoop = _Runtime.fmod(player.elapsed, totalTime);
     vi = (cast SpritesheetPlayer.resolveVirtualIndexFromTime__spritesheetPlayer(({ final __callArgument16:Dynamic = animation; __callArgument16; }), (cast timeInLoop : Float)) : Float);
-    (player.frameIndex = cast ((cast SpritesheetPlayer.resolveVirtualIndexToDisplayIndex__spritesheetPlayer(({ final __callArgument17:Dynamic = animation; __callArgument17; }), (cast vi : Float)) : Float) : Dynamic));
+    (player.frameIndex = cast ((cast SpritesheetPlayer.resolveVirtualIndexToDisplayIndex__spritesheetPlayer(({ final __callArgument17:Dynamic = animation; __callArgument17; }), (cast vi : Float)) : Float) : Float));
     return cast true;
     return cast null;
   }

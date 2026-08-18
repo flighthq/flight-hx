@@ -82,7 +82,7 @@ class RiveScene2DDocument {
         var asset:RiveFileAsset = flighthq._internal._StaticIndex.readArray(_Runtime.field(imported, 'assets'), index);
         if ((cast ((cast !_Runtime.strictEquals((cast asset : RiveFileAsset).kind, RiveScene2DDocument.RIVE_IMAGE_ASSET_KIND__riveScene2DDocument) : Bool) || (cast _Runtime.strictEquals((cast asset : RiveFileAsset).bytes, null) : Bool)) : Bool)) { index++; continue; }
         var reference:EmbeddedImageResourceReference = (cast createEmbeddedImageResourceReference((cast asset : RiveFileAsset).bytes, (cast RiveScene2DDocument.toRiveMimeType__riveScene2DDocument((cast asset : RiveFileAsset).bytes) : Null<String>)) : EmbeddedImageResourceReference);
-        (reference.textures = cast ((cast RiveScene2DDocument.collectRiveTexturesForAsset__riveScene2DDocument(({ final __callArgument7:Dynamic = imported; __callArgument7; }), (cast index : Float)) : Array<Texture>) : Dynamic));
+        (reference.textures = cast ((cast RiveScene2DDocument.collectRiveTexturesForAsset__riveScene2DDocument(({ final __callArgument7:Dynamic = imported; __callArgument7; }), (cast index : Float)) : Array<Texture>) : Null<Array<Texture>>));
         _Runtime.callProperty(references, 'push', cast ([reference] : Array<Dynamic>));
         index++;
       }

@@ -424,20 +424,20 @@ class SvgDocument {
     var maximumY:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(source.width, 0.0) : Bool) || (cast _Runtime.strictEquals(source.height, 0.0) : Bool)) : Bool)) { return cast hasBounds; }
     if ((cast !(cast hasBounds : Bool) : Bool)) {
-      (out.x = cast (source.x : Dynamic));
-      (out.y = cast (source.y : Dynamic));
-      (out.width = cast (source.width : Dynamic));
-      (out.height = cast (source.height : Dynamic));
+      (out.x = cast (source.x : Float));
+      (out.y = cast (source.y : Float));
+      (out.width = cast (source.width : Float));
+      (out.height = cast (source.height : Float));
       return cast true;
     }
     minimumX = HxMath.min(out.x, source.x);
     minimumY = HxMath.min(out.y, source.y);
     maximumX = HxMath.max((out.x + out.width), (source.x + source.width));
     maximumY = HxMath.max((out.y + out.height), (source.y + source.height));
-    (out.x = cast (minimumX : Dynamic));
-    (out.y = cast (minimumY : Dynamic));
-    (out.width = cast ((maximumX - minimumX) : Dynamic));
-    (out.height = cast ((maximumY - minimumY) : Dynamic));
+    (out.x = cast (minimumX : Float));
+    (out.y = cast (minimumY : Float));
+    (out.width = cast ((maximumX - minimumX) : Float));
+    (out.height = cast ((maximumY - minimumY) : Float));
     return cast true;
     return cast null;
   }
@@ -1127,11 +1127,11 @@ class SvgDocument {
       if ((cast ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'matrix') : Bool) && (cast ((cast _Runtime.field(values, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) : Bool)) {
         (operation = cast ((cast createMatrix(({ final __callArgument429:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)); __callArgument429; }), ({ final __callArgument430:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float)); __callArgument430; }), ({ final __callArgument431:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 2.0 : Float)); __callArgument431; }), ({ final __callArgument432:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 3.0 : Float)); __callArgument432; }), ({ final __callArgument433:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 4.0 : Float)); __callArgument433; }), ({ final __callArgument434:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 5.0 : Float)); __callArgument434; })) : Matrix) : Dynamic));
       } else { if ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'translate') : Bool)) {
-        (operation.tx = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
-        (operation.ty = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
+        (operation.tx = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0) : Float));
+        (operation.ty = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 0.0) : Float));
       } else { if ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'scale') : Bool)) {
-        (operation.a = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0) : Dynamic));
-        (operation.d = cast (_Runtime.coalesce(_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float))), function():Dynamic return cast 1.0) : Dynamic));
+        (operation.a = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0) : Float));
+        (operation.d = cast (_Runtime.coalesce(_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float))), function():Dynamic return cast 1.0) : Float));
       } else { if ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'rotate') : Bool)) {
         var radians:Float = (_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0), HxMath.PI) / 180.0);
         var cosine:Float = HxMath.cos(radians);
@@ -1143,9 +1143,9 @@ class SvgDocument {
           (operation = cast (rotation : Dynamic));
         }
       } else { if ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'skewX') : Bool)) {
-        (operation.c = cast (HxMath.tan((_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0), HxMath.PI) / 180.0)) : Dynamic));
+        (operation.c = cast (HxMath.tan((_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0), HxMath.PI) / 180.0)) : Float));
       } else { if ((cast _Runtime.strictEquals(_Runtime.getIndex(match, 1.0), 'skewY') : Bool)) {
-        (operation.b = cast (HxMath.tan((_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0), HxMath.PI) / 180.0)) : Dynamic));
+        (operation.b = cast (HxMath.tan((_Runtime.multiplyNumbers(_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0), HxMath.PI) / 180.0)) : Float));
       } else {
         continue;
       } } } } } }

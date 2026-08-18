@@ -17,12 +17,12 @@ class Sampler {
   }
 
   public static function copySampler(out:SamplerLike, source:SamplerLike):Void {
-    (out.anisotropy = cast (source.anisotropy : Dynamic));
-    (out.magFilter = cast (source.magFilter : Dynamic));
-    (out.minFilter = cast (source.minFilter : Dynamic));
-    (out.mipmaps = cast (source.mipmaps : Dynamic));
-    (out.wrapU = cast (source.wrapU : Dynamic));
-    (out.wrapV = cast (source.wrapV : Dynamic));
+    (out.anisotropy = cast (source.anisotropy : Float));
+    (out.magFilter = cast (source.magFilter : TextureFilter));
+    (out.minFilter = cast (source.minFilter : TextureFilter));
+    (out.mipmaps = cast (source.mipmaps : Bool));
+    (out.wrapU = cast (source.wrapU : TextureWrap));
+    (out.wrapV = cast (source.wrapV : TextureWrap));
   }
 
   public static function createAnisotropicSampler(level:Float):flighthq.types.Sampler {

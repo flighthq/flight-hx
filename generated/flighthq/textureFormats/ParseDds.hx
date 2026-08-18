@@ -64,7 +64,7 @@ class ParseDds {
     skipByteReader(({ final __callArgument10:Dynamic = reader; __callArgument10; }), (cast 4.0 : Float));
     dwDepth = (cast readByteReaderU32(({ final __callArgument11:Dynamic = reader; __callArgument11; })) : Float);
     dwMipMapCount = (cast readByteReaderU32(({ final __callArgument12:Dynamic = reader; __callArgument12; })) : Float);
-    (reader.offset = cast (80.0 : Dynamic));
+    (reader.offset = cast (80.0 : Float));
     pfFlags = (cast readByteReaderU32(({ final __callArgument13:Dynamic = reader; __callArgument13; })) : Float);
     fourCC = (cast readByteReaderU32(({ final __callArgument14:Dynamic = reader; __callArgument14; })) : Float);
     rgbBitCount = (cast readByteReaderU32(({ final __callArgument15:Dynamic = reader; __callArgument15; })) : Float);
@@ -72,7 +72,7 @@ class ParseDds {
     gMask = (cast readByteReaderU32(({ final __callArgument17:Dynamic = reader; __callArgument17; })) : Float);
     bMask = (cast readByteReaderU32(({ final __callArgument18:Dynamic = reader; __callArgument18; })) : Float);
     aMask = (cast readByteReaderU32(({ final __callArgument19:Dynamic = reader; __callArgument19; })) : Float);
-    (reader.offset = cast (112.0 : Dynamic));
+    (reader.offset = cast (112.0 : Float));
     caps2 = (cast readByteReaderU32(({ final __callArgument20:Dynamic = reader; __callArgument20; })) : Float);
     if ((cast ((cast !_Runtime.strictEquals((_Runtime.toInt32(caps2) & _Runtime.toInt32(ParseDds.ddsCaps2Volume__parseDds)), 0.0) : Bool) || (cast ((cast dwDepth : Float) > (cast 1.0 : Float)) : Bool)) : Bool)) {
       return cast (cast ParseDds.reject__parseDds((cast failure : Dynamic), ({ final __callArgument21:Dynamic = 'format-unsupported'; __callArgument21; })) : Null<TextureContainer>);

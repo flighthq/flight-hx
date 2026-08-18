@@ -38,12 +38,12 @@ class GlyphAtlas {
     runtime = atlas.runtime;
     ((cast runtime.entries : flighthq._internal._Map<Float, GlyphEntry>).clear());
     ((cast runtime.bitmaps : flighthq._internal._Map<Float, GlyphRasterizedBitmap>).clear());
-    (runtime.occupiedArea = cast (0.0 : Dynamic));
-    (runtime.retainedBytes = cast (0.0 : Dynamic));
+    (runtime.occupiedArea = cast (0.0 : Float));
+    (runtime.retainedBytes = cast (0.0 : Float));
     ((cast runtime.lru : flighthq._internal._Map<Float, Bool>).clear());
     _Runtime.setLength(runtime.shelves, 0.0);
-    (runtime.packBottom = cast (runtime.padding : Dynamic));
-    (runtime.dirty = cast (false : Dynamic));
+    (runtime.packBottom = cast (runtime.padding : Float));
+    (runtime.dirty = cast (false : Bool));
   }
 
   public static function getGlyphAtlasBitmap(atlas:flighthq.types.GlyphSource.GlyphAtlas):Bitmap {

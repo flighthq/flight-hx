@@ -85,21 +85,21 @@ class TauriWindow {
 
       }); }
       flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).onMoved((cast function(event:{ var payload:TauriPhysicalPositionLike; }):Void {
-        (win.x = cast ((cast (cast event : { var payload:TauriPhysicalPositionLike; }).payload : TauriPhysicalPositionLike).x : Dynamic));
-        (win.y = cast ((cast (cast event : { var payload:TauriPhysicalPositionLike; }).payload : TauriPhysicalPositionLike).y : Dynamic));
+        (win.x = cast ((cast (cast event : { var payload:TauriPhysicalPositionLike; }).payload : TauriPhysicalPositionLike).x : Float));
+        (win.y = cast ((cast (cast event : { var payload:TauriPhysicalPositionLike; }).payload : TauriPhysicalPositionLike).y : Float));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMove]]), 1);
       } : Dynamic)), function(__unused14:flighthq._internal._Any):Void {
 
       });
       flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).onResized((cast function(event:{ var payload:TauriLogicalSizeLike; }):Void {
-        (win.width = cast ((cast (cast event : { var payload:TauriLogicalSizeLike; }).payload : TauriLogicalSizeLike).width : Dynamic));
-        (win.height = cast ((cast (cast event : { var payload:TauriLogicalSizeLike; }).payload : TauriLogicalSizeLike).height : Dynamic));
+        (win.width = cast ((cast (cast event : { var payload:TauriLogicalSizeLike; }).payload : TauriLogicalSizeLike).width : Float));
+        (win.height = cast ((cast (cast event : { var payload:TauriLogicalSizeLike; }).payload : TauriLogicalSizeLike).height : Float));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onResize]]), 1);
       } : Dynamic)), function(__unused15:flighthq._internal._Any):Void {
 
       });
       flighthq._internal._Async.recover((cast w : flighthq.types.TauriApi.TauriWindow).onFocusChanged(({ final __callArgument3:Dynamic = function(event:{ var payload:Bool; }):Void {
-        (win.focused = cast ((cast event : { var payload:Bool; }).payload : Dynamic));
+        (win.focused = cast ((cast event : { var payload:Bool; }).payload : Bool));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[((cast (cast event : { var payload:Bool; }).payload : Bool) ? (cast win.onFocusIn : Dynamic) : (cast win.onFocusOut : Dynamic))]]), 1);
       }; __callArgument3; })), function(__unused16:flighthq._internal._Any):Void {
 
@@ -124,10 +124,10 @@ class TauriWindow {
     }, setSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
       run(({ final __callArgument8:Dynamic = win; __callArgument8; }), ({ final __callArgument9:Dynamic = function(w:flighthq.types.TauriApi.TauriWindow):flighthq._internal._Promise<flighthq._internal._Any> return (cast w : flighthq.types.TauriApi.TauriWindow).setSize(_Runtime.construct((cast windowModule : TauriWindowModule).LogicalSize, [width, height])); __callArgument9; }));
     }, getBounds: function(win:ApplicationWindow, out:WindowBounds):WindowBounds {
-      (out.x = cast (win.x : Dynamic));
-      (out.y = cast (win.y : Dynamic));
-      (out.width = cast (win.width : Dynamic));
-      (out.height = cast (win.height : Dynamic));
+      (out.x = cast (win.x : Float));
+      (out.y = cast (win.y : Float));
+      (out.width = cast (win.width : Float));
+      (out.height = cast (win.height : Float));
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, minimize: function(win:ApplicationWindow):Void {

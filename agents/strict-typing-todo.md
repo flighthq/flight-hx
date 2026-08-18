@@ -5,13 +5,14 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 400 schemas currently emit direct fields, covering 11,816 accesses.
-- 1,136 eligible schemas remain audit-only, covering 18,850 pending accesses.
-- 879 audit-only schemas have no recorded escape, covering 14,096 pending accesses.
+- 401 schemas currently emit direct fields, covering 12,490 accesses.
+- 1,135 eligible schemas remain audit-only, covering 18,176 pending accesses.
+- 878 audit-only schemas have no recorded escape, covering 13,422 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
-- Generated Haxe contains 347 `_Partial`, 26 `_Pick`, 199 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
+- Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
 - The cpp provenance audit has 551 closed nominal-identity candidates; only `Camera2D` and `ParticleEmitterState` are enabled.
+- Generated `Dynamic` occurrences fell from 49,168 to 47,025 when typed-struct writes began casting to their checker-derived field type instead of `Dynamic`.
 
 ## 1. Closed mapped aliases
 
@@ -25,9 +26,10 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 
 ## 2. Escape-free direct typed structs
 
-- [ ] Add an explicit reviewed-addition mechanism for checker-discovered audit-only identities; do not rewrite the historical migration baseline or silently enable newly discovered rows.
-- [ ] Enable `BitmapRegion` first: 674 pending accesses, no escapes, mechanically compatible, and nominal-provenance closed.
-- [ ] Verify that bitmap modules use direct `BitmapRegion` fields and retain all aliasing/out-parameter behavior.
+- [x] Add an explicit reviewed-addition mechanism for checker-discovered audit-only identities; do not rewrite the historical migration baseline or silently enable newly discovered rows.
+- [x] Enable `BitmapRegion` first: 674 accesses, no escapes, mechanically compatible, and nominal-provenance closed.
+- [x] Verify that bitmap modules use direct `BitmapRegion` fields and retain all aliasing/out-parameter behavior.
+- [x] Cast direct typed-struct writes to the checker-derived field type rather than routing known values through `Dynamic`.
 - [ ] Review the next zero-escape hot rows, including render-state runtimes, render targets, text layout, rich text, physics world/contact records, and clip regions.
 - [ ] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

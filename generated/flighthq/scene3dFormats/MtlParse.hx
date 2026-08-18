@@ -59,7 +59,7 @@ class MtlParse {
                   break;
                 }
                 var c:Null<Array<Float>> = (cast MtlParse.parseColor__mtlParse((cast args : String), (cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)) : Null<Array<Float>>);
-                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { ((cast current : { var ambient:Array<Float>; }).ambient = cast (c : Dynamic)); }
+                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { ((cast current : { var ambient:Array<Float>; }).ambient = cast (c : Array<Float>)); }
               }
             }
             else if (__switchValue == 'Kd') {
@@ -69,7 +69,7 @@ class MtlParse {
                   break;
                 }
                 var c:Null<Array<Float>> = (cast MtlParse.parseColor__mtlParse((cast args : String), (cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)) : Null<Array<Float>>);
-                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { ((cast current : { var diffuse:Array<Float>; }).diffuse = cast (c : Dynamic)); }
+                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { ((cast current : { var diffuse:Array<Float>; }).diffuse = cast (c : Array<Float>)); }
               }
             }
             else if (__switchValue == 'Ks') {
@@ -79,7 +79,7 @@ class MtlParse {
                   break;
                 }
                 var c:Null<Array<Float>> = (cast MtlParse.parseColor__mtlParse((cast args : String), (cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)) : Null<Array<Float>>);
-                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { ((cast current : { var specular:Array<Float>; }).specular = cast (c : Dynamic)); }
+                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { ((cast current : { var specular:Array<Float>; }).specular = cast (c : Array<Float>)); }
               }
             }
             else if (__switchValue == 'Ns') {
@@ -89,7 +89,7 @@ class MtlParse {
                   break;
                 }
                 var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var specularExponent:Float; }).specularExponent = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var specularExponent:Float; }).specularExponent = cast (v : Float)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'd') {
@@ -99,7 +99,7 @@ class MtlParse {
                   break;
                 }
                 var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var dissolve:Float; }).dissolve = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var dissolve:Float; }).dissolve = cast (v : Float)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'Tr') {
@@ -109,7 +109,7 @@ class MtlParse {
                   break;
                 }
                 var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var dissolve:Float; }).dissolve = cast ((1.0 - v) : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var dissolve:Float; }).dissolve = cast ((1.0 - v) : Float)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'illum') {
@@ -119,7 +119,7 @@ class MtlParse {
                   break;
                 }
                 var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([args, 10.0] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var illumination:Float; }).illumination = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var illumination:Float; }).illumination = cast (v : Float)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'map_Kd') {
@@ -128,7 +128,7 @@ class MtlParse {
                   MtlParse.tallyDirectiveBeforeMaterial__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float));
                   break;
                 }
-                ((cast current : { var mapDiffuse:Null<String>; }).mapDiffuse = cast (args : Dynamic));
+                ((cast current : { var mapDiffuse:Null<String>; }).mapDiffuse = cast (args : Null<String>));
               }
             }
             else if (__switchValue == 'map_Ka') {
@@ -137,7 +137,7 @@ class MtlParse {
                   MtlParse.tallyDirectiveBeforeMaterial__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float));
                   break;
                 }
-                ((cast current : { var mapAmbient:Null<String>; }).mapAmbient = cast (args : Dynamic));
+                ((cast current : { var mapAmbient:Null<String>; }).mapAmbient = cast (args : Null<String>));
               }
             }
             else if (__switchValue == 'map_Ks') {
@@ -146,7 +146,7 @@ class MtlParse {
                   MtlParse.tallyDirectiveBeforeMaterial__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float));
                   break;
                 }
-                ((cast current : { var mapSpecular:Null<String>; }).mapSpecular = cast (args : Dynamic));
+                ((cast current : { var mapSpecular:Null<String>; }).mapSpecular = cast (args : Null<String>));
               }
             }
             else if (__switchValue == 'map_Bump' || __switchValue == 'bump') {
@@ -155,7 +155,7 @@ class MtlParse {
                   MtlParse.tallyDirectiveBeforeMaterial__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float));
                   break;
                 }
-                ((cast current : { var mapBump:Null<String>; }).mapBump = cast (args : Dynamic));
+                ((cast current : { var mapBump:Null<String>; }).mapBump = cast (args : Null<String>));
               }
             }
             else if (__switchValue == 'Ke') {
@@ -165,7 +165,7 @@ class MtlParse {
                   break;
                 }
                 var c:Null<Array<Float>> = (cast MtlParse.parseColor__mtlParse((cast args : String), (cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)) : Null<Array<Float>>);
-                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { ((cast current : { var emissive:Null<Array<Float>>; }).emissive = cast (c : Dynamic)); }
+                if ((cast !_Runtime.strictEquals(c, null) : Bool)) { ((cast current : { var emissive:Null<Array<Float>>; }).emissive = cast (c : Null<Array<Float>>)); }
               }
             }
             else if (__switchValue == 'Pr') {
@@ -175,7 +175,7 @@ class MtlParse {
                   break;
                 }
                 var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var roughness:Null<Float>; }).roughness = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var roughness:Null<Float>; }).roughness = cast (v : Null<Float>)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'Pm') {
@@ -185,7 +185,7 @@ class MtlParse {
                   break;
                 }
                 var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var metallic:Null<Float>; }).metallic = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var metallic:Null<Float>; }).metallic = cast (v : Null<Float>)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'Ps') {
@@ -195,7 +195,7 @@ class MtlParse {
                   break;
                 }
                 var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var sheen:Null<Float>; }).sheen = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var sheen:Null<Float>; }).sheen = cast (v : Null<Float>)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'Pc') {
@@ -205,7 +205,7 @@ class MtlParse {
                   break;
                 }
                 var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var clearcoat:Null<Float>; }).clearcoat = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var clearcoat:Null<Float>; }).clearcoat = cast (v : Null<Float>)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'Pcr') {
@@ -215,7 +215,7 @@ class MtlParse {
                   break;
                 }
                 var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var clearcoatRoughness:Null<Float>; }).clearcoatRoughness = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var clearcoatRoughness:Null<Float>; }).clearcoatRoughness = cast (v : Null<Float>)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'aniso') {
@@ -225,7 +225,7 @@ class MtlParse {
                   break;
                 }
                 var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var anisotropy:Null<Float>; }).anisotropy = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var anisotropy:Null<Float>; }).anisotropy = cast (v : Null<Float>)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'anisor') {
@@ -235,7 +235,7 @@ class MtlParse {
                   break;
                 }
                 var v:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([args] : Array<Dynamic>));
-                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var anisotropyRotation:Null<Float>; }).anisotropyRotation = cast (v : Dynamic)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
+                if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool)) { ((cast current : { var anisotropyRotation:Null<Float>; }).anisotropyRotation = cast (v : Null<Float>)); } else { MtlParse.tallyInvalidValue__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float)); }
               }
             }
             else if (__switchValue == 'map_d') {
@@ -244,7 +244,7 @@ class MtlParse {
                   MtlParse.tallyDirectiveBeforeMaterial__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float));
                   break;
                 }
-                ((cast current : { var mapDissolve:Null<String>; }).mapDissolve = cast (args : Dynamic));
+                ((cast current : { var mapDissolve:Null<String>; }).mapDissolve = cast (args : Null<String>));
               }
             }
             else if (__switchValue == 'map_Ke') {
@@ -253,7 +253,7 @@ class MtlParse {
                   MtlParse.tallyDirectiveBeforeMaterial__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float));
                   break;
                 }
-                ((cast current : { var mapEmissive:Null<String>; }).mapEmissive = cast (args : Dynamic));
+                ((cast current : { var mapEmissive:Null<String>; }).mapEmissive = cast (args : Null<String>));
               }
             }
             else if (__switchValue == 'map_Pr') {
@@ -262,7 +262,7 @@ class MtlParse {
                   MtlParse.tallyDirectiveBeforeMaterial__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float));
                   break;
                 }
-                ((cast current : { var mapRoughness:Null<String>; }).mapRoughness = cast (args : Dynamic));
+                ((cast current : { var mapRoughness:Null<String>; }).mapRoughness = cast (args : Null<String>));
               }
             }
             else if (__switchValue == 'map_Pm') {
@@ -271,7 +271,7 @@ class MtlParse {
                   MtlParse.tallyDirectiveBeforeMaterial__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float));
                   break;
                 }
-                ((cast current : { var mapMetallic:Null<String>; }).mapMetallic = cast (args : Dynamic));
+                ((cast current : { var mapMetallic:Null<String>; }).mapMetallic = cast (args : Null<String>));
               }
             }
             else if (__switchValue == 'norm') {
@@ -280,7 +280,7 @@ class MtlParse {
                   MtlParse.tallyDirectiveBeforeMaterial__mtlParse((cast mtlDrops : Dynamic), (cast directive : String), (cast i : Float));
                   break;
                 }
-                ((cast current : { var mapNormal:Null<String>; }).mapNormal = cast (args : Dynamic));
+                ((cast current : { var mapNormal:Null<String>; }).mapNormal = cast (args : Null<String>));
               }
             }
             else  {

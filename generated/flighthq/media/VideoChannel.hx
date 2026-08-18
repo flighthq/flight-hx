@@ -51,8 +51,8 @@ class VideoChannel {
     if ((cast !_Runtime.strictEquals(channel.state, 'playing') : Bool)) { return; }
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return; }
-    (channel.currentTime = cast ((cast getVideoChannelCurrentTime(({ final __callArgument0:Dynamic = channel; __callArgument0; })) : Float) : Dynamic));
-    (channel.state = cast ('paused' : Dynamic));
+    (channel.currentTime = cast ((cast getVideoChannelCurrentTime(({ final __callArgument0:Dynamic = channel; __callArgument0; })) : Float) : Float));
+    (channel.state = cast ('paused' : VideoChannelState));
     (cast element : flighthq._internal.dom.HTMLVideoElement).pause();
   }
 
@@ -87,7 +87,7 @@ class VideoChannel {
 
   public static function setVideoChannelCurrentTime(channel:flighthq.types.VideoResource.VideoChannel, value:Float):Float {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
-    (channel.currentTime = cast ((cast VideoChannel.clamp__videoChannel((cast value : Float), (cast 0.0 : Float), (cast channel.length : Float)) : Float) : Dynamic));
+    (channel.currentTime = cast ((cast VideoChannel.clamp__videoChannel((cast value : Float), (cast 0.0 : Float), (cast channel.length : Float)) : Float) : Float));
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
     if ((cast !_Runtime.strictEquals(element, null) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).currentTime = (channel.currentTime / 1000.0)); }
     return cast channel.currentTime;
@@ -96,7 +96,7 @@ class VideoChannel {
 
   public static function setVideoChannelGain(channel:flighthq.types.VideoResource.VideoChannel, value:Float):Float {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
-    (channel.gain = cast (value : Dynamic));
+    (channel.gain = cast (value : Float));
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
     if ((cast !_Runtime.strictEquals(element, null) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).volume = value); }
     return cast channel.gain;
@@ -105,7 +105,7 @@ class VideoChannel {
 
   public static function setVideoChannelPlaybackRate(channel:flighthq.types.VideoResource.VideoChannel, value:Float):Float {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
-    (channel.playbackRate = cast (value : Dynamic));
+    (channel.playbackRate = cast (value : Float));
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
     if ((cast !_Runtime.strictEquals(element, null) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).playbackRate = value); }
     return cast channel.playbackRate;
@@ -121,8 +121,8 @@ class VideoChannel {
       (cast element : flighthq._internal.dom.HTMLVideoElement).pause();
       ((cast element : flighthq._internal.dom.HTMLVideoElement).currentTime = 0.0);
     }
-    (channel.currentTime = cast (0.0 : Dynamic));
-    (channel.state = cast ('stopped' : Dynamic));
+    (channel.currentTime = cast (0.0 : Float));
+    (channel.state = cast ('stopped' : VideoChannelState));
   }
 
   public static final videoChannelRuntimes__videoChannel:flighthq._internal._WeakMap<flighthq._internal.dom.HTMLVideoElement, VideoChannelRuntime__videoChannel> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
@@ -145,12 +145,12 @@ class VideoChannel {
     runtime = ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast ((cast VideoChannel.videoChannelRuntimes__videoChannel : flighthq._internal._WeakMap<flighthq._internal.dom.HTMLVideoElement, VideoChannelRuntime__videoChannel>).get(element)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     if ((cast ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals((cast runtime : VideoChannelRuntime__videoChannel).loopsRemaining, 0.0) : Bool)) : Bool)) {
       if ((cast ((cast (cast runtime : VideoChannelRuntime__videoChannel).loopsRemaining : Float) > (cast 0.0 : Float)) : Bool)) { (cast runtime : VideoChannelRuntime__videoChannel).loopsRemaining--; }
-      (channel.currentTime = cast (0.0 : Dynamic));
+      (channel.currentTime = cast (0.0 : Float));
       VideoChannel.startVideoChannel__videoChannel(({ final __callArgument9:Dynamic = channel; __callArgument9; }));
       return;
     }
-    (channel.currentTime = cast (channel.length : Dynamic));
-    (channel.state = cast ('complete' : Dynamic));
+    (channel.currentTime = cast (channel.length : Float));
+    (channel.state = cast ('complete' : VideoChannelState));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[channel.onComplete]]), 1);
   }
 
@@ -159,9 +159,9 @@ class VideoChannel {
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return; }
     ((cast element : flighthq._internal.dom.HTMLVideoElement).currentTime = (channel.currentTime / 1000.0));
-    (channel.state = cast ('playing' : Dynamic));
+    (channel.state = cast ('playing' : VideoChannelState));
     flighthq._internal._Async.recover((cast element : flighthq._internal.dom.HTMLVideoElement).play(), function(__unused0:flighthq._internal._Any):Void {
-      if ((cast _Runtime.strictEquals(channel.state, 'playing') : Bool)) { (channel.state = cast ('stopped' : Dynamic)); }
+      if ((cast _Runtime.strictEquals(channel.state, 'playing') : Bool)) { (channel.state = cast ('stopped' : VideoChannelState)); }
     });
   }
 }

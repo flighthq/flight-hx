@@ -53,7 +53,7 @@ class RevealScene3DResourcesOnResolve {
     owners = (cast cast ([] : Array<Dynamic>));
     RevealScene3DResourcesOnResolve.collectPendingTextureOwners__revealScene3DResourcesOnResolve(({ final __callArgument3:Dynamic = scene; __callArgument3; }), ({ final __callArgument4:Dynamic = resolver; __callArgument4; }), (cast ownersByTexture : Dynamic), (cast owners : Dynamic));
     for (owner in _Runtime.iterable(owners)) {
-      ((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).node : { var alpha:Float; }).alpha = cast (from : Dynamic));
+      ((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).node : { var alpha:Float; }).alpha = cast (from : Float));
     }
     signals = (cast enableScene3DResourceSignals(({ final __callArgument7:Dynamic = resolver; __callArgument7; })) : Scene3DResourceSignals);
     slot = (cast function(event:{ var texture:Texture; }):Void {

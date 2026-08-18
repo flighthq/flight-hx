@@ -18,11 +18,11 @@ class CapacitorHaptics {
       return cast false;
       return cast _Runtime.UNDEFINED;
     }, capabilities: function(out:HapticsCapabilities):HapticsCapabilities {
-      (out.supported = cast (true : Dynamic));
-      (out.intensity = cast (false : Dynamic));
-      (out.patterns = cast (false : Dynamic));
-      (out.amplitudeControl = cast (false : Dynamic));
-      (out.customEvents = cast (false : Dynamic));
+      (out.supported = cast (true : Bool));
+      (out.intensity = cast (false : Bool));
+      (out.patterns = cast (false : Bool));
+      (out.amplitudeControl = cast (false : Bool));
+      (out.customEvents = cast (false : Bool));
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, impact: function(style:HapticImpactStyle):Bool {

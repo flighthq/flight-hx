@@ -51,14 +51,14 @@ class TextShaperRun {
     var metrics:Null<FontMetrics> = cast _Runtime.UNDEFINED;
     metrics = (cast getFontMetrics(({ final __callArgument1:Dynamic = format; __callArgument1; })) : Null<FontMetrics>);
     if ((cast _Runtime.strictEquals(metrics, null) : Bool)) { return cast false; }
-    (out.ascent = cast ((cast metrics : { var ascent:Float; }).ascent : Dynamic));
-    (out.capHeight = cast ((cast metrics : { var capHeight:Float; }).capHeight : Dynamic));
-    (out.descent = cast ((cast metrics : { var descent:Float; }).descent : Dynamic));
-    (out.lineGap = cast ((cast metrics : { var lineGap:Float; }).lineGap : Dynamic));
-    (out.underlinePosition = cast ((cast metrics : { var underlinePosition:Float; }).underlinePosition : Dynamic));
-    (out.underlineThickness = cast ((cast metrics : { var underlineThickness:Float; }).underlineThickness : Dynamic));
-    (out.unitsPerEm = cast ((cast metrics : { var unitsPerEm:Float; }).unitsPerEm : Dynamic));
-    (out.xHeight = cast ((cast metrics : { var xHeight:Float; }).xHeight : Dynamic));
+    (out.ascent = cast ((cast metrics : { var ascent:Float; }).ascent : Float));
+    (out.capHeight = cast ((cast metrics : { var capHeight:Float; }).capHeight : Float));
+    (out.descent = cast ((cast metrics : { var descent:Float; }).descent : Float));
+    (out.lineGap = cast ((cast metrics : { var lineGap:Float; }).lineGap : Float));
+    (out.underlinePosition = cast ((cast metrics : { var underlinePosition:Float; }).underlinePosition : Float));
+    (out.underlineThickness = cast ((cast metrics : { var underlineThickness:Float; }).underlineThickness : Float));
+    (out.unitsPerEm = cast ((cast metrics : { var unitsPerEm:Float; }).unitsPerEm : Float));
+    (out.xHeight = cast ((cast metrics : { var xHeight:Float; }).xHeight : Float));
     return cast true;
     return cast null;
   }

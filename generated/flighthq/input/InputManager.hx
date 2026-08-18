@@ -83,9 +83,9 @@ class InputManager {
       prev = (cast InputManager.getOrCreateGamepadPollState__inputManager(({ final __callArgument0:Dynamic = manager; __callArgument0; })) : GamepadPollState__inputManager);
       ((cast (cast prev : GamepadPollState__inputManager).axes : flighthq._internal._Map<Float, Array<Float>>).set((cast pad : flighthq._internal.dom.Gamepad).index, (cast (cast _Runtime.toArray((cast pad : flighthq._internal.dom.Gamepad).axes) : Array<Float>))));
       ((cast (cast prev : GamepadPollState__inputManager).buttons : flighthq._internal._Map<Float, Array<Bool>>).set((cast pad : flighthq._internal.dom.Gamepad).index, (cast (cast _Runtime.toArray((cast pad : flighthq._internal.dom.Gamepad).buttons, function(b:flighthq._internal.dom.GamepadButton, __unused0:Float):Bool return (cast b : flighthq._internal.dom.GamepadButton).pressed) : Array<Bool>))));
-      (InputManager._connectData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Dynamic));
-      (InputManager._connectData__inputManager.id = cast ((cast pad : flighthq._internal.dom.Gamepad).id : Dynamic));
-      (InputManager._connectData__inputManager.mapping = cast (((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, 'standard') : Bool) ? (cast 'standard' : Dynamic) : (cast ((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, '') : Bool) ? (cast '' : Dynamic) : (cast 'raw' : Dynamic)) : Dynamic)) : Dynamic));
+      (InputManager._connectData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Float));
+      (InputManager._connectData__inputManager.id = cast ((cast pad : flighthq._internal.dom.Gamepad).id : String));
+      (InputManager._connectData__inputManager.mapping = cast (((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, 'standard') : Bool) ? (cast 'standard' : Dynamic) : (cast ((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, '') : Bool) ? (cast '' : Dynamic) : (cast 'raw' : Dynamic)) : Dynamic)) : GamepadMapping));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onGamepadConnect], [InputManager._connectData__inputManager]]), 1);
     });
     onGamepadDisconnected = (cast function(e:flighthq._internal.dom.Event):Void {
@@ -96,9 +96,9 @@ class InputManager {
       prev = (cast InputManager.getOrCreateGamepadPollState__inputManager(({ final __callArgument1:Dynamic = manager; __callArgument1; })) : GamepadPollState__inputManager);
       ((cast (cast prev : GamepadPollState__inputManager).axes : flighthq._internal._Map<Float, Array<Float>>).delete_((cast pad : flighthq._internal.dom.Gamepad).index));
       ((cast (cast prev : GamepadPollState__inputManager).buttons : flighthq._internal._Map<Float, Array<Bool>>).delete_((cast pad : flighthq._internal.dom.Gamepad).index));
-      (InputManager._connectData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Dynamic));
-      (InputManager._connectData__inputManager.id = cast ((cast pad : flighthq._internal.dom.Gamepad).id : Dynamic));
-      (InputManager._connectData__inputManager.mapping = cast (((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, 'standard') : Bool) ? (cast 'standard' : Dynamic) : (cast ((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, '') : Bool) ? (cast '' : Dynamic) : (cast 'raw' : Dynamic)) : Dynamic)) : Dynamic));
+      (InputManager._connectData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Float));
+      (InputManager._connectData__inputManager.id = cast ((cast pad : flighthq._internal.dom.Gamepad).id : String));
+      (InputManager._connectData__inputManager.mapping = cast (((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, 'standard') : Bool) ? (cast 'standard' : Dynamic) : (cast ((cast _Runtime.strictEquals((cast pad : flighthq._internal.dom.Gamepad).mapping, '') : Bool) ? (cast '' : Dynamic) : (cast 'raw' : Dynamic)) : Dynamic)) : GamepadMapping));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onGamepadDisconnect], [InputManager._connectData__inputManager]]), 1);
     });
     rafId = 0.0;
@@ -222,8 +222,8 @@ class InputManager {
       if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
       ie = (cast e : flighthq._internal.dom.InputEvent);
       text = _Runtime.coalesce((cast ie : flighthq._internal.dom.InputEvent).data, function():Dynamic return cast '');
-      (InputManager._textData__inputManager.isComposing = cast ((cast ie : flighthq._internal.dom.InputEvent).isComposing : Dynamic));
-      (InputManager._textData__inputManager.text = cast (text : Dynamic));
+      (InputManager._textData__inputManager.isComposing = cast ((cast ie : flighthq._internal.dom.InputEvent).isComposing : Bool));
+      (InputManager._textData__inputManager.text = cast (text : String));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onTextInput], [InputManager._textData__inputManager]]), 1);
     });
     onCompositionUpdate = (cast function(e:flighthq._internal.dom.Event):Void {
@@ -232,8 +232,8 @@ class InputManager {
       if ((cast !(cast (cast manager : flighthq.types.InputManager).enabled : Bool) : Bool)) { return; }
       ce = (cast e : flighthq._internal.dom.CompositionEvent);
       text = _Runtime.coalesce((cast ce : flighthq._internal.dom.CompositionEvent).data, function():Dynamic return cast '');
-      (InputManager._textData__inputManager.isComposing = cast (true : Dynamic));
-      (InputManager._textData__inputManager.text = cast (text : Dynamic));
+      (InputManager._textData__inputManager.isComposing = cast (true : Bool));
+      (InputManager._textData__inputManager.text = cast (text : String));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onTextEdit], [InputManager._textData__inputManager]]), 1);
     });
     element.addEventListener('beforeinput', onBeforeInput);
@@ -555,10 +555,10 @@ class InputManager {
           var value:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast pad : flighthq._internal.dom.Gamepad).axes : Array<Float>), (cast i : Float));
           if ((cast !_Runtime.strictEquals(value, flighthq._internal._StaticIndex.readFloatArrayTyped((cast prevAxes : Array<Float>), (cast i : Float))) : Bool)) {
             flighthq._internal._StaticIndex.writeFloatArrayTyped((cast prevAxes : Array<Float>), (cast i : Float), (cast value : Float));
-            (InputManager._axisData__inputManager.axis = cast (i : Dynamic));
-            (InputManager._axisData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Dynamic));
-            (InputManager._axisData__inputManager.timeStamp = cast (now : Dynamic));
-            (InputManager._axisData__inputManager.value = cast (value : Dynamic));
+            (InputManager._axisData__inputManager.axis = cast (i : Float));
+            (InputManager._axisData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Float));
+            (InputManager._axisData__inputManager.timeStamp = cast (now : Float));
+            (InputManager._axisData__inputManager.value = cast (value : Float));
             _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onGamepadAxisMove], [InputManager._axisData__inputManager]]), 1);
           }
           i++;
@@ -571,10 +571,10 @@ class InputManager {
           var wasPressed:Bool = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(prevButtons, i), function():Dynamic return cast false);
           if ((cast !_Runtime.strictEquals((cast btn : flighthq._internal.dom.GamepadButton).pressed, wasPressed) : Bool)) {
             flighthq._internal._StaticIndex.writeArray(prevButtons, i, (cast btn : flighthq._internal.dom.GamepadButton).pressed);
-            (InputManager._buttonData__inputManager.button = cast (i : Dynamic));
-            (InputManager._buttonData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Dynamic));
-            (InputManager._buttonData__inputManager.timeStamp = cast (now : Dynamic));
-            (InputManager._buttonData__inputManager.value = cast ((cast btn : flighthq._internal.dom.GamepadButton).value : Dynamic));
+            (InputManager._buttonData__inputManager.button = cast (i : Float));
+            (InputManager._buttonData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Float));
+            (InputManager._buttonData__inputManager.timeStamp = cast (now : Float));
+            (InputManager._buttonData__inputManager.value = cast ((cast btn : flighthq._internal.dom.GamepadButton).value : Float));
             if ((cast (cast btn : flighthq._internal.dom.GamepadButton).pressed : Bool)) {
               _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast manager : flighthq.types.InputManager).onGamepadButtonDown], [InputManager._buttonData__inputManager]]), 1);
             } else {

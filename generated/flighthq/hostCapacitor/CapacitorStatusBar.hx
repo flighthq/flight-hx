@@ -24,11 +24,11 @@ class CapacitorStatusBar {
     return cast { getInfo: function(out:StatusBarInfo):StatusBarInfo {
       var info:Null<CapacitorStatusBarInfoResult> = cast _Runtime.UNDEFINED;
       info = cachedInfo;
-      (out.color = cast (((cast !_Runtime.strictEquals(({ final __structural0 = info; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var color:Null<String>; }).color; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast CapacitorStatusBar.hexToRgba__capacitorStatusBar((cast (cast info : CapacitorStatusBarInfoResult).color : String)) : Float) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
-      (out.height = cast (-1.0 : Dynamic));
-      (out.overlaysContent = cast (_Runtime.coalesce(({ final __structural1 = info; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var overlays:Null<Bool>; }).overlays; }), function():Dynamic return cast false) : Dynamic));
-      (out.style = cast (((cast !_Runtime.strictEquals(info, null) : Bool) ? (cast (cast CapacitorStatusBar.toStatusBarStyle__capacitorStatusBar((cast (cast info : CapacitorStatusBarInfoResult).style : String)) : StatusBarStyle) : Dynamic) : (cast 'default' : Dynamic)) : Dynamic));
-      (out.visible = cast (_Runtime.coalesce(({ final __structural2 = info; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var visible:Bool; }).visible; }), function():Dynamic return cast true) : Dynamic));
+      (out.color = cast (((cast !_Runtime.strictEquals(({ final __structural0 = info; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var color:Null<String>; }).color; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast CapacitorStatusBar.hexToRgba__capacitorStatusBar((cast (cast info : CapacitorStatusBarInfoResult).color : String)) : Float) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+      (out.height = cast (-1.0 : Float));
+      (out.overlaysContent = cast (_Runtime.coalesce(({ final __structural1 = info; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var overlays:Null<Bool>; }).overlays; }), function():Dynamic return cast false) : Bool));
+      (out.style = cast (((cast !_Runtime.strictEquals(info, null) : Bool) ? (cast (cast CapacitorStatusBar.toStatusBarStyle__capacitorStatusBar((cast (cast info : CapacitorStatusBarInfoResult).style : String)) : StatusBarStyle) : Dynamic) : (cast 'default' : Dynamic)) : StatusBarStyle));
+      (out.visible = cast (_Runtime.coalesce(({ final __structural2 = info; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var visible:Bool; }).visible; }), function():Dynamic return cast true) : Bool));
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, setBackgroundColor: function(color:Float):Void {

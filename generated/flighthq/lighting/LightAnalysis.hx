@@ -64,32 +64,32 @@ class LightAnalysis {
     var kind:String = cast _Runtime.UNDEFINED;
     kind = _Runtime.field(light, 'kind');
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(kind, AmbientLightKind) : Bool) || (cast _Runtime.strictEquals(kind, HemisphereLightKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, EnvironmentKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, DirectionalLightKind) : Bool)) : Bool)) {
-      ((cast out.center : { var x:Float; }).x = cast (0.0 : Dynamic));
-      ((cast out.center : { var y:Float; }).y = cast (0.0 : Dynamic));
-      ((cast out.center : { var z:Float; }).z = cast (0.0 : Dynamic));
-      (out.radius = cast (-1.0 : Dynamic));
+      ((cast out.center : { var x:Float; }).x = cast (0.0 : Float));
+      ((cast out.center : { var y:Float; }).y = cast (0.0 : Float));
+      ((cast out.center : { var z:Float; }).z = cast (0.0 : Float));
+      (out.radius = cast (-1.0 : Float));
       return;
     }
     if ((cast ((cast ((cast _Runtime.strictEquals(kind, PointLightKind) : Bool) || (cast _Runtime.strictEquals(kind, SpotLightKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, AreaLightKind) : Bool)) : Bool)) {
       var spatial:PointLight = (cast light : PointLight);
       var range:Float = _Runtime.field(spatial, 'range');
       if ((cast ((cast range : Float) < (cast 0.0 : Float)) : Bool)) {
-        ((cast out.center : { var x:Float; }).x = cast (0.0 : Dynamic));
-        ((cast out.center : { var y:Float; }).y = cast (0.0 : Dynamic));
-        ((cast out.center : { var z:Float; }).z = cast (0.0 : Dynamic));
-        (out.radius = cast (-1.0 : Dynamic));
+        ((cast out.center : { var x:Float; }).x = cast (0.0 : Float));
+        ((cast out.center : { var y:Float; }).y = cast (0.0 : Float));
+        ((cast out.center : { var z:Float; }).z = cast (0.0 : Float));
+        (out.radius = cast (-1.0 : Float));
         return;
       }
-      ((cast out.center : { var x:Float; }).x = cast ((cast _Runtime.field(spatial, 'position') : { var x:Float; }).x : Dynamic));
-      ((cast out.center : { var y:Float; }).y = cast ((cast _Runtime.field(spatial, 'position') : { var y:Float; }).y : Dynamic));
-      ((cast out.center : { var z:Float; }).z = cast ((cast _Runtime.field(spatial, 'position') : { var z:Float; }).z : Dynamic));
-      (out.radius = cast (range : Dynamic));
+      ((cast out.center : { var x:Float; }).x = cast ((cast _Runtime.field(spatial, 'position') : { var x:Float; }).x : Float));
+      ((cast out.center : { var y:Float; }).y = cast ((cast _Runtime.field(spatial, 'position') : { var y:Float; }).y : Float));
+      ((cast out.center : { var z:Float; }).z = cast ((cast _Runtime.field(spatial, 'position') : { var z:Float; }).z : Float));
+      (out.radius = cast (range : Float));
       return;
     }
-    ((cast out.center : { var x:Float; }).x = cast (0.0 : Dynamic));
-    ((cast out.center : { var y:Float; }).y = cast (0.0 : Dynamic));
-    ((cast out.center : { var z:Float; }).z = cast (0.0 : Dynamic));
-    (out.radius = cast (-1.0 : Dynamic));
+    ((cast out.center : { var x:Float; }).x = cast (0.0 : Float));
+    ((cast out.center : { var y:Float; }).y = cast (0.0 : Float));
+    ((cast out.center : { var z:Float; }).z = cast (0.0 : Float));
+    (out.radius = cast (-1.0 : Float));
   }
 
   public static function getLightLuminance(light:Light):Float {

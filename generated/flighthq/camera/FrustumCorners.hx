@@ -47,9 +47,9 @@ class FrustumCorners {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 8.0 : Float)) : Bool)) {
-        ((cast flighthq._internal._StaticIndex.readArray(out, i) : { var x:Float; }).x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(results, i) : Array<Float>), (cast 0.0 : Float)) : Dynamic));
-        ((cast flighthq._internal._StaticIndex.readArray(out, i) : { var y:Float; }).y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(results, i) : Array<Float>), (cast 1.0 : Float)) : Dynamic));
-        ((cast flighthq._internal._StaticIndex.readArray(out, i) : { var z:Float; }).z = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(results, i) : Array<Float>), (cast 2.0 : Float)) : Dynamic));
+        ((cast flighthq._internal._StaticIndex.readArray(out, i) : { var x:Float; }).x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(results, i) : Array<Float>), (cast 0.0 : Float)) : Float));
+        ((cast flighthq._internal._StaticIndex.readArray(out, i) : { var y:Float; }).y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(results, i) : Array<Float>), (cast 1.0 : Float)) : Float));
+        ((cast flighthq._internal._StaticIndex.readArray(out, i) : { var z:Float; }).z = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(results, i) : Array<Float>), (cast 2.0 : Float)) : Float));
         i++;
       }
     }

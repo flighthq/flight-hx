@@ -29,10 +29,10 @@ class BitmapWarp {
     var dd:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     var sStride:Float = cast _Runtime.UNDEFINED;
     var dStride:Float = cast _Runtime.UNDEFINED;
-    dw = _Runtime.field(dest, 'width');
-    dh = _Runtime.field(dest, 'height');
-    sw = _Runtime.field(source, 'width');
-    sh = _Runtime.field(source, 'height');
+    dw = dest.width;
+    dh = dest.height;
+    sw = source.width;
+    sh = source.height;
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(dw, 0.0) : Bool) || (cast _Runtime.strictEquals(dh, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(sw, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(sh, 0.0) : Bool)) : Bool)) { return; }
     __destructure0 = matrix;
     m0 = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
@@ -44,19 +44,19 @@ class BitmapWarp {
     m6 = flighthq._internal._StaticIndex.readArray(__destructure0, 6.0);
     m7 = flighthq._internal._StaticIndex.readArray(__destructure0, 7.0);
     m8 = flighthq._internal._StaticIndex.readArray(__destructure0, 8.0);
-    sd = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    dd = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    sStride = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
-    dStride = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
+    sd = (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    dd = (cast dest.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    sStride = (cast source.bitmap : { var width:Float; }).width;
+    dStride = (cast dest.bitmap : { var width:Float; }).width;
     {
       var dy:Float = 0.0;
       while ((cast ((cast dy : Float) < (cast dh : Float)) : Bool)) {
-        var oy:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), dy);
-        if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { dy++; continue; }
+        var oy:Float = (dest.y + dy);
+        if ((cast ((cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast oy : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { dy++; continue; }
         {
           var dx:Float = 0.0;
           while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
-            var ox:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), dx);
+            var ox:Float = (dest.x + dx);
             if ((cast ((cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast ox : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { dx++; continue; }
             var w:Float = (((m6 * dx) + (m7 * dy)) + m8);
             var di:Float = (((oy * dStride) + ox) * 4.0);
@@ -71,14 +71,14 @@ class BitmapWarp {
             var invW:Float = (1.0 / w);
             var sx:Float = ((((m0 * dx) + (m1 * dy)) + m2) * invW);
             var sy:Float = ((((m3 * dx) + (m4 * dy)) + m5) * invW);
-            BitmapWarp.warpSampleBitmap__bitmapWarp(({ final __callArgument0:Dynamic = dd; __callArgument0; }), (cast di : Float), ({ final __callArgument1:Dynamic = sd; __callArgument1; }), (cast sw : Float), (cast sh : Float), (cast _Runtime.field(source, 'x') : Float), (cast _Runtime.field(source, 'y') : Float), (cast sStride : Float), (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument2:Dynamic = sampleMode; __callArgument2; }), ({ final __callArgument3:Dynamic = edgeMode; __callArgument3; }));
+            BitmapWarp.warpSampleBitmap__bitmapWarp(({ final __callArgument0:Dynamic = dd; __callArgument0; }), (cast di : Float), ({ final __callArgument1:Dynamic = sd; __callArgument1; }), (cast sw : Float), (cast sh : Float), (cast source.x : Float), (cast source.y : Float), (cast sStride : Float), (cast (cast source.bitmap : { var height:Float; }).height : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument2:Dynamic = sampleMode; __callArgument2; }), ({ final __callArgument3:Dynamic = edgeMode; __callArgument3; }));
             dx++;
           }
         }
         dy++;
       }
     }
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap(dest.bitmap);
   }
 
   public static function warpBitmapQuad(dest:BitmapRegion, source:BitmapRegion, dstQuad:Array<Float>, edgeMode:BitmapEdgeMode = 'transparent', sampleMode:BitmapResizeMode = 'bilinear'):Void {
@@ -87,9 +87,9 @@ class BitmapWarp {
     var srcPts:Array<Float> = cast _Runtime.UNDEFINED;
     var H:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     var Hinv:Null<Array<Float>> = cast _Runtime.UNDEFINED;
-    sw = _Runtime.field(source, 'width');
-    sh = _Runtime.field(source, 'height');
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(sw, 0.0) : Bool) || (cast _Runtime.strictEquals(sh, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(dest, 'width'), 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(dest, 'height'), 0.0) : Bool)) : Bool)) { return; }
+    sw = source.width;
+    sh = source.height;
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(sw, 0.0) : Bool) || (cast _Runtime.strictEquals(sh, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest.width, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest.height, 0.0) : Bool)) : Bool)) { return; }
     srcPts = (cast cast ([0.0, 0.0, sw, 0.0, sw, sh, 0.0, sh] : Array<Dynamic>));
     H = (cast BitmapWarp.computeHomography__bitmapWarp(({ final __callArgument4:Dynamic = srcPts; __callArgument4; }), ({ final __callArgument5:Dynamic = dstQuad; __callArgument5; })) : Null<Array<Float>>);
     if ((cast _Runtime.strictEquals(H, null) : Bool)) { return; }

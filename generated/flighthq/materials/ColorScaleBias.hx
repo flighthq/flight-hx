@@ -15,25 +15,25 @@ class ColorScaleBias {
   }
 
   public static function concatColorScaleBias(out:ColorScaleBiasLike, source:ColorScaleBiasLike, other:ColorScaleBiasLike):Void {
-    (out.redBias = cast (((source.redScale * other.redBias) + source.redBias) : Dynamic));
-    (out.greenBias = cast (((source.greenScale * other.greenBias) + source.greenBias) : Dynamic));
-    (out.blueBias = cast (((source.blueScale * other.blueBias) + source.blueBias) : Dynamic));
-    (out.alphaBias = cast (((source.alphaScale * other.alphaBias) + source.alphaBias) : Dynamic));
-    (out.redScale = cast ((source.redScale * other.redScale) : Dynamic));
-    (out.greenScale = cast ((source.greenScale * other.greenScale) : Dynamic));
-    (out.blueScale = cast ((source.blueScale * other.blueScale) : Dynamic));
-    (out.alphaScale = cast ((source.alphaScale * other.alphaScale) : Dynamic));
+    (out.redBias = cast (((source.redScale * other.redBias) + source.redBias) : Float));
+    (out.greenBias = cast (((source.greenScale * other.greenBias) + source.greenBias) : Float));
+    (out.blueBias = cast (((source.blueScale * other.blueBias) + source.blueBias) : Float));
+    (out.alphaBias = cast (((source.alphaScale * other.alphaBias) + source.alphaBias) : Float));
+    (out.redScale = cast ((source.redScale * other.redScale) : Float));
+    (out.greenScale = cast ((source.greenScale * other.greenScale) : Float));
+    (out.blueScale = cast ((source.blueScale * other.blueScale) : Float));
+    (out.alphaScale = cast ((source.alphaScale * other.alphaScale) : Float));
   }
 
   public static function copyColorScaleBias(out:ColorScaleBiasLike, source:ColorScaleBiasLike):Void {
-    (out.redScale = cast (source.redScale : Dynamic));
-    (out.greenScale = cast (source.greenScale : Dynamic));
-    (out.blueScale = cast (source.blueScale : Dynamic));
-    (out.alphaScale = cast (source.alphaScale : Dynamic));
-    (out.redBias = cast (source.redBias : Dynamic));
-    (out.greenBias = cast (source.greenBias : Dynamic));
-    (out.blueBias = cast (source.blueBias : Dynamic));
-    (out.alphaBias = cast (source.alphaBias : Dynamic));
+    (out.redScale = cast (source.redScale : Float));
+    (out.greenScale = cast (source.greenScale : Float));
+    (out.blueScale = cast (source.blueScale : Float));
+    (out.alphaScale = cast (source.alphaScale : Float));
+    (out.redBias = cast (source.redBias : Float));
+    (out.greenBias = cast (source.greenBias : Float));
+    (out.blueBias = cast (source.blueBias : Float));
+    (out.alphaBias = cast (source.alphaBias : Float));
   }
 
   public static function copyColorScaleBiasToArrays(outColorScales:Array<Float>, outColorBiases:Array<Float>, source:ColorScaleBiasLike):Void {
@@ -78,14 +78,14 @@ class ColorScaleBias {
   }
 
   public static function invertColorScaleBias(out:ColorScaleBiasLike, source:ColorScaleBiasLike):Void {
-    (out.redScale = cast (((cast !_Runtime.strictEquals(source.redScale, 0.0) : Bool) ? (cast (1.0 / source.redScale) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
-    (out.greenScale = cast (((cast !_Runtime.strictEquals(source.greenScale, 0.0) : Bool) ? (cast (1.0 / source.greenScale) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
-    (out.blueScale = cast (((cast !_Runtime.strictEquals(source.blueScale, 0.0) : Bool) ? (cast (1.0 / source.blueScale) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
-    (out.alphaScale = cast (((cast !_Runtime.strictEquals(source.alphaScale, 0.0) : Bool) ? (cast (1.0 / source.alphaScale) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
-    (out.redBias = cast (-source.redBias : Dynamic));
-    (out.greenBias = cast (-source.greenBias : Dynamic));
-    (out.blueBias = cast (-source.blueBias : Dynamic));
-    (out.alphaBias = cast (-source.alphaBias : Dynamic));
+    (out.redScale = cast (((cast !_Runtime.strictEquals(source.redScale, 0.0) : Bool) ? (cast (1.0 / source.redScale) : Dynamic) : (cast 1.0 : Dynamic)) : Float));
+    (out.greenScale = cast (((cast !_Runtime.strictEquals(source.greenScale, 0.0) : Bool) ? (cast (1.0 / source.greenScale) : Dynamic) : (cast 1.0 : Dynamic)) : Float));
+    (out.blueScale = cast (((cast !_Runtime.strictEquals(source.blueScale, 0.0) : Bool) ? (cast (1.0 / source.blueScale) : Dynamic) : (cast 1.0 : Dynamic)) : Float));
+    (out.alphaScale = cast (((cast !_Runtime.strictEquals(source.alphaScale, 0.0) : Bool) ? (cast (1.0 / source.alphaScale) : Dynamic) : (cast 1.0 : Dynamic)) : Float));
+    (out.redBias = cast (-source.redBias : Float));
+    (out.greenBias = cast (-source.greenBias : Float));
+    (out.blueBias = cast (-source.blueBias : Float));
+    (out.alphaBias = cast (-source.alphaBias : Float));
   }
 
   public static function isIdentityColorScaleBias(source:ColorScaleBiasLike, compareAlphaScale:Bool = true):Bool {
@@ -94,36 +94,36 @@ class ColorScaleBias {
   }
 
   public static function setColorScaleBias(out:ColorScaleBiasLike, redScale:Float, greenScale:Float, blueScale:Float, alphaScale:Float, redBias:Float, greenBias:Float, blueBias:Float, alphaBias:Float):Void {
-    (out.redScale = cast (redScale : Dynamic));
-    (out.greenScale = cast (greenScale : Dynamic));
-    (out.blueScale = cast (blueScale : Dynamic));
-    (out.alphaScale = cast (alphaScale : Dynamic));
-    (out.redBias = cast (redBias : Dynamic));
-    (out.greenBias = cast (greenBias : Dynamic));
-    (out.blueBias = cast (blueBias : Dynamic));
-    (out.alphaBias = cast (alphaBias : Dynamic));
+    (out.redScale = cast (redScale : Float));
+    (out.greenScale = cast (greenScale : Float));
+    (out.blueScale = cast (blueScale : Float));
+    (out.alphaScale = cast (alphaScale : Float));
+    (out.redBias = cast (redBias : Float));
+    (out.greenBias = cast (greenBias : Float));
+    (out.blueBias = cast (blueBias : Float));
+    (out.alphaBias = cast (alphaBias : Float));
   }
 
   public static function setColorScaleBiasBiasRgb(out:ColorScaleBiasLike, value:Float):Void {
-    (out.redBias = cast (((_Runtime.toInt32((_Runtime.toInt32(value) >> 16)) & 255) / 255.0) : Dynamic));
-    (out.greenBias = cast (((_Runtime.toInt32((_Runtime.toInt32(value) >> 8)) & 255) / 255.0) : Dynamic));
-    (out.blueBias = cast (((_Runtime.toInt32(value) & 255) / 255.0) : Dynamic));
-    (out.alphaBias = cast (0.0 : Dynamic));
-    (out.redScale = cast (0.0 : Dynamic));
-    (out.greenScale = cast (0.0 : Dynamic));
-    (out.blueScale = cast (0.0 : Dynamic));
-    (out.alphaScale = cast (1.0 : Dynamic));
+    (out.redBias = cast (((_Runtime.toInt32((_Runtime.toInt32(value) >> 16)) & 255) / 255.0) : Float));
+    (out.greenBias = cast (((_Runtime.toInt32((_Runtime.toInt32(value) >> 8)) & 255) / 255.0) : Float));
+    (out.blueBias = cast (((_Runtime.toInt32(value) & 255) / 255.0) : Float));
+    (out.alphaBias = cast (0.0 : Float));
+    (out.redScale = cast (0.0 : Float));
+    (out.greenScale = cast (0.0 : Float));
+    (out.blueScale = cast (0.0 : Float));
+    (out.alphaScale = cast (1.0 : Float));
   }
 
   public static function setColorScaleBiasBiasRgba(out:ColorScaleBiasLike, value:Float):Void {
-    (out.redBias = cast (((_Runtime.toInt32((_Runtime.toInt32(value) >> 24)) & 255) / 255.0) : Dynamic));
-    (out.greenBias = cast (((_Runtime.toInt32((_Runtime.toInt32(value) >> 16)) & 255) / 255.0) : Dynamic));
-    (out.blueBias = cast (((_Runtime.toInt32((_Runtime.toInt32(value) >> 8)) & 255) / 255.0) : Dynamic));
-    (out.alphaBias = cast (((_Runtime.toInt32(value) & 255) / 255.0) : Dynamic));
-    (out.redScale = cast (0.0 : Dynamic));
-    (out.greenScale = cast (0.0 : Dynamic));
-    (out.blueScale = cast (0.0 : Dynamic));
-    (out.alphaScale = cast (0.0 : Dynamic));
+    (out.redBias = cast (((_Runtime.toInt32((_Runtime.toInt32(value) >> 24)) & 255) / 255.0) : Float));
+    (out.greenBias = cast (((_Runtime.toInt32((_Runtime.toInt32(value) >> 16)) & 255) / 255.0) : Float));
+    (out.blueBias = cast (((_Runtime.toInt32((_Runtime.toInt32(value) >> 8)) & 255) / 255.0) : Float));
+    (out.alphaBias = cast (((_Runtime.toInt32(value) & 255) / 255.0) : Float));
+    (out.redScale = cast (0.0 : Float));
+    (out.greenScale = cast (0.0 : Float));
+    (out.blueScale = cast (0.0 : Float));
+    (out.alphaScale = cast (0.0 : Float));
   }
 
   public static function setColorScaleBiasIdentity(out:flighthq.types.ColorScaleBias):Void {

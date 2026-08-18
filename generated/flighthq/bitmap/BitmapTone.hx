@@ -14,24 +14,24 @@ class BitmapTone {
     var h:Float = cast _Runtime.UNDEFINED;
     var od:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     var sd:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
-    w = HxMath.min(_Runtime.field(out, 'width'), _Runtime.field(source, 'width'));
-    h = HxMath.min(_Runtime.field(out, 'height'), _Runtime.field(source, 'height'));
-    od = (cast _Runtime.field(out, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    sd = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    w = HxMath.min(out.width, source.width);
+    h = HxMath.min(out.height, source.height);
+    od = (cast out.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    sd = (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
-        var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
-        var oy:Float = _Runtime.addNumbers(_Runtime.field(out, 'y'), py);
-        if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) >= (cast (cast _Runtime.field(out, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
+        var sy:Float = (source.y + py);
+        var oy:Float = (out.y + py);
+        if ((cast ((cast ((cast ((cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sy : Float) >= (cast (cast source.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast oy : Float) >= (cast (cast out.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
-            var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
-            var ox:Float = _Runtime.addNumbers(_Runtime.field(out, 'x'), px);
-            if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) >= (cast (cast _Runtime.field(out, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Float = (((sy * (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width) + sx) * 4.0);
-            var oi:Float = (((oy * (cast _Runtime.field(out, 'bitmap') : { var width:Float; }).width) + ox) * 4.0);
+            var sx:Float = (source.x + px);
+            var ox:Float = (out.x + px);
+            if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast (cast source.bitmap : { var width:Float; }).width : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast ox : Float) >= (cast (cast out.bitmap : { var width:Float; }).width : Float)) : Bool)) : Bool)) { px++; continue; }
+            var si:Float = (((sy * (cast source.bitmap : { var width:Float; }).width) + sx) * 4.0);
+            var oi:Float = (((oy * (cast out.bitmap : { var width:Float; }).width) + ox) * 4.0);
             var r:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast si : Float));
             var g:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 1.0) : Float));
             var b:Float = flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 2.0) : Float));
@@ -46,7 +46,7 @@ class BitmapTone {
         py++;
       }
     }
-    invalidateBitmap(_Runtime.field(out, 'bitmap'));
+    invalidateBitmap(out.bitmap);
   }
 
   public static function applyBitmapLevels(out:BitmapRegion, source:BitmapRegion, blackPoint:Float = 0.0, whitePoint:Float = 255.0, gamma:Float = 1.0):Void {

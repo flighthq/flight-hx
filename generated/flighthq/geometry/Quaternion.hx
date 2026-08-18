@@ -18,17 +18,17 @@ class Quaternion {
   }
 
   public static function conjugateQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
-    (out.x = cast (-source.x : Dynamic));
-    (out.y = cast (-source.y : Dynamic));
-    (out.z = cast (-source.z : Dynamic));
-    (out.w = cast (source.w : Dynamic));
+    (out.x = cast (-source.x : Float));
+    (out.y = cast (-source.y : Float));
+    (out.z = cast (-source.z : Float));
+    (out.w = cast (source.w : Float));
   }
 
   public static function copyQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
-    (out.x = cast (source.x : Dynamic));
-    (out.y = cast (source.y : Dynamic));
-    (out.z = cast (source.z : Dynamic));
-    (out.w = cast (source.w : Dynamic));
+    (out.x = cast (source.x : Float));
+    (out.y = cast (source.y : Float));
+    (out.z = cast (source.z : Float));
+    (out.w = cast (source.w : Float));
   }
 
   public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):flighthq.types.Quaternion {
@@ -104,73 +104,73 @@ class Quaternion {
       var __switchValue = order;
       if (__switchValue == 'XYZ') {
         {
-          (out.y = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m02))) : Dynamic));
+          (out.y = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m02))) : Float));
           if ((cast ((cast HxMath.abs(m02) : Float) < (cast 0.9999999 : Float)) : Bool)) {
-            (out.x = cast (HxMath.atan2(-m12, m22) : Dynamic));
-            (out.z = cast (HxMath.atan2(-m01, m00) : Dynamic));
+            (out.x = cast (HxMath.atan2(-m12, m22) : Float));
+            (out.z = cast (HxMath.atan2(-m01, m00) : Float));
           } else {
-            (out.x = cast (HxMath.atan2(m21, m11) : Dynamic));
-            (out.z = cast (0.0 : Dynamic));
+            (out.x = cast (HxMath.atan2(m21, m11) : Float));
+            (out.z = cast (0.0 : Float));
           }
         }
       }
       else if (__switchValue == 'XZY') {
         {
-          (out.z = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m01))) : Dynamic));
+          (out.z = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m01))) : Float));
           if ((cast ((cast HxMath.abs(m01) : Float) < (cast 0.9999999 : Float)) : Bool)) {
-            (out.x = cast (HxMath.atan2(m21, m11) : Dynamic));
-            (out.y = cast (HxMath.atan2(m02, m00) : Dynamic));
+            (out.x = cast (HxMath.atan2(m21, m11) : Float));
+            (out.y = cast (HxMath.atan2(m02, m00) : Float));
           } else {
-            (out.x = cast (HxMath.atan2(-m12, m22) : Dynamic));
-            (out.y = cast (0.0 : Dynamic));
+            (out.x = cast (HxMath.atan2(-m12, m22) : Float));
+            (out.y = cast (0.0 : Float));
           }
         }
       }
       else if (__switchValue == 'YXZ') {
         {
-          (out.x = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m12))) : Dynamic));
+          (out.x = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m12))) : Float));
           if ((cast ((cast HxMath.abs(m12) : Float) < (cast 0.9999999 : Float)) : Bool)) {
-            (out.y = cast (HxMath.atan2(m02, m22) : Dynamic));
-            (out.z = cast (HxMath.atan2(m10, m11) : Dynamic));
+            (out.y = cast (HxMath.atan2(m02, m22) : Float));
+            (out.z = cast (HxMath.atan2(m10, m11) : Float));
           } else {
-            (out.y = cast (HxMath.atan2(-m20, m00) : Dynamic));
-            (out.z = cast (0.0 : Dynamic));
+            (out.y = cast (HxMath.atan2(-m20, m00) : Float));
+            (out.z = cast (0.0 : Float));
           }
         }
       }
       else if (__switchValue == 'YZX') {
         {
-          (out.z = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m10))) : Dynamic));
+          (out.z = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m10))) : Float));
           if ((cast ((cast HxMath.abs(m10) : Float) < (cast 0.9999999 : Float)) : Bool)) {
-            (out.x = cast (HxMath.atan2(-m12, m11) : Dynamic));
-            (out.y = cast (HxMath.atan2(-m20, m00) : Dynamic));
+            (out.x = cast (HxMath.atan2(-m12, m11) : Float));
+            (out.y = cast (HxMath.atan2(-m20, m00) : Float));
           } else {
-            (out.x = cast (0.0 : Dynamic));
-            (out.y = cast (HxMath.atan2(m02, m22) : Dynamic));
+            (out.x = cast (0.0 : Float));
+            (out.y = cast (HxMath.atan2(m02, m22) : Float));
           }
         }
       }
       else if (__switchValue == 'ZXY') {
         {
-          (out.x = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m21))) : Dynamic));
+          (out.x = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, m21))) : Float));
           if ((cast ((cast HxMath.abs(m21) : Float) < (cast 0.9999999 : Float)) : Bool)) {
-            (out.y = cast (HxMath.atan2(-m20, m22) : Dynamic));
-            (out.z = cast (HxMath.atan2(-m01, m11) : Dynamic));
+            (out.y = cast (HxMath.atan2(-m20, m22) : Float));
+            (out.z = cast (HxMath.atan2(-m01, m11) : Float));
           } else {
-            (out.y = cast (0.0 : Dynamic));
-            (out.z = cast (HxMath.atan2(m10, m00) : Dynamic));
+            (out.y = cast (0.0 : Float));
+            (out.z = cast (HxMath.atan2(m10, m00) : Float));
           }
         }
       }
       else if (__switchValue == 'ZYX') {
         {
-          (out.y = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m20))) : Dynamic));
+          (out.y = cast (HxMath.asin(HxMath.min(1.0, HxMath.max(-1.0, -m20))) : Float));
           if ((cast ((cast HxMath.abs(m20) : Float) < (cast 0.9999999 : Float)) : Bool)) {
-            (out.x = cast (HxMath.atan2(m21, m22) : Dynamic));
-            (out.z = cast (HxMath.atan2(m10, m00) : Dynamic));
+            (out.x = cast (HxMath.atan2(m21, m22) : Float));
+            (out.z = cast (HxMath.atan2(m10, m00) : Float));
           } else {
-            (out.x = cast (0.0 : Dynamic));
-            (out.z = cast (HxMath.atan2(-m01, m11) : Dynamic));
+            (out.x = cast (0.0 : Float));
+            (out.z = cast (HxMath.atan2(-m01, m11) : Float));
           }
         }
       }
@@ -190,17 +190,17 @@ class Quaternion {
     w = source.w;
     lenSq = ((((x * x) + (y * y)) + (z * z)) + (w * w));
     if ((cast _Runtime.strictEquals(lenSq, 0.0) : Bool)) {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.z = cast (0.0 : Dynamic));
-      (out.w = cast (1.0 : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.z = cast (0.0 : Float));
+      (out.w = cast (1.0 : Float));
       return;
     }
     inv = (1.0 / lenSq);
-    (out.x = cast ((-x * inv) : Dynamic));
-    (out.y = cast ((-y * inv) : Dynamic));
-    (out.z = cast ((-z * inv) : Dynamic));
-    (out.w = cast ((w * inv) : Dynamic));
+    (out.x = cast ((-x * inv) : Float));
+    (out.y = cast ((-y * inv) : Float));
+    (out.z = cast ((-z * inv) : Float));
+    (out.w = cast ((w * inv) : Float));
   }
 
   public static function multiplyQuaternion(out:QuaternionLike, a:QuaternionLike, b:QuaternionLike):Void {
@@ -220,10 +220,10 @@ class Quaternion {
     by = b.y;
     bz = b.z;
     bw = b.w;
-    (out.x = cast (((((aw * bx) + (ax * bw)) + (ay * bz)) - (az * by)) : Dynamic));
-    (out.y = cast (((((aw * by) - (ax * bz)) + (ay * bw)) + (az * bx)) : Dynamic));
-    (out.z = cast (((((aw * bz) + (ax * by)) - (ay * bx)) + (az * bw)) : Dynamic));
-    (out.w = cast (((((aw * bw) - (ax * bx)) - (ay * by)) - (az * bz)) : Dynamic));
+    (out.x = cast (((((aw * bx) + (ax * bw)) + (ay * bz)) - (az * by)) : Float));
+    (out.y = cast (((((aw * by) - (ax * bz)) + (ay * bw)) + (az * bx)) : Float));
+    (out.z = cast (((((aw * bz) + (ax * by)) - (ay * bx)) + (az * bw)) : Float));
+    (out.w = cast (((((aw * bw) - (ax * bx)) - (ay * by)) - (az * bz)) : Float));
   }
 
   public static function normalizeQuaternion(out:QuaternionLike, source:QuaternionLike):Float {
@@ -239,15 +239,15 @@ class Quaternion {
     l = HxMath.sqrt(((((x * x) + (y * y)) + (z * z)) + (w * w)));
     if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
       var inv:Float = (1.0 / l);
-      (out.x = cast ((x * inv) : Dynamic));
-      (out.y = cast ((y * inv) : Dynamic));
-      (out.z = cast ((z * inv) : Dynamic));
-      (out.w = cast ((w * inv) : Dynamic));
+      (out.x = cast ((x * inv) : Float));
+      (out.y = cast ((y * inv) : Float));
+      (out.z = cast ((z * inv) : Float));
+      (out.w = cast ((w * inv) : Float));
     } else {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.z = cast (0.0 : Dynamic));
-      (out.w = cast (1.0 : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.z = cast (0.0 : Float));
+      (out.w = cast (1.0 : Float));
     }
     return cast l;
     return cast null;
@@ -274,16 +274,16 @@ class Quaternion {
     tx = (2.0 * ((qy * vz) - (qz * vy)));
     ty = (2.0 * ((qz * vx) - (qx * vz)));
     tz = (2.0 * ((qx * vy) - (qy * vx)));
-    (out.x = cast (((vx + (qw * tx)) + ((qy * tz) - (qz * ty))) : Dynamic));
-    (out.y = cast (((vy + (qw * ty)) + ((qz * tx) - (qx * tz))) : Dynamic));
-    (out.z = cast (((vz + (qw * tz)) + ((qx * ty) - (qy * tx))) : Dynamic));
+    (out.x = cast (((vx + (qw * tx)) + ((qy * tz) - (qz * ty))) : Float));
+    (out.y = cast (((vy + (qw * ty)) + ((qz * tx) - (qx * tz))) : Float));
+    (out.z = cast (((vz + (qw * tz)) + ((qx * ty) - (qy * tx))) : Float));
   }
 
   public static function setQuaternion(out:QuaternionLike, x:Float, y:Float, z:Float, w:Float):Void {
-    (out.x = cast (x : Dynamic));
-    (out.y = cast (y : Dynamic));
-    (out.z = cast (z : Dynamic));
-    (out.w = cast (w : Dynamic));
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
+    (out.z = cast (z : Float));
+    (out.w = cast (w : Float));
   }
 
   public static function setQuaternionFromAxisAngle(out:QuaternionLike, axis:Vector3Like, angle:Float):Void {
@@ -291,10 +291,10 @@ class Quaternion {
     var s:Float = cast _Runtime.UNDEFINED;
     half = (angle * 0.5);
     s = HxMath.sin(half);
-    (out.x = cast ((axis.x * s) : Dynamic));
-    (out.y = cast ((axis.y * s) : Dynamic));
-    (out.z = cast ((axis.z * s) : Dynamic));
-    (out.w = cast (HxMath.cos(half) : Dynamic));
+    (out.x = cast ((axis.x * s) : Float));
+    (out.y = cast ((axis.y * s) : Float));
+    (out.z = cast ((axis.z * s) : Float));
+    (out.w = cast (HxMath.cos(half) : Float));
   }
 
   public static function setQuaternionFromEuler(out:QuaternionLike, x:Float, y:Float, z:Float, order:EulerOrder = 'XYZ'):Void {
@@ -313,40 +313,40 @@ class Quaternion {
     {
       var __switchValue = order;
       if (__switchValue == 'XYZ') {
-        (out.x = cast ((((s1 * c2) * c3) + ((c1 * s2) * s3)) : Dynamic));
-        (out.y = cast ((((c1 * s2) * c3) - ((s1 * c2) * s3)) : Dynamic));
-        (out.z = cast ((((c1 * c2) * s3) + ((s1 * s2) * c3)) : Dynamic));
-        (out.w = cast ((((c1 * c2) * c3) - ((s1 * s2) * s3)) : Dynamic));
+        (out.x = cast ((((s1 * c2) * c3) + ((c1 * s2) * s3)) : Float));
+        (out.y = cast ((((c1 * s2) * c3) - ((s1 * c2) * s3)) : Float));
+        (out.z = cast ((((c1 * c2) * s3) + ((s1 * s2) * c3)) : Float));
+        (out.w = cast ((((c1 * c2) * c3) - ((s1 * s2) * s3)) : Float));
       }
       else if (__switchValue == 'XZY') {
-        (out.x = cast ((((s1 * c2) * c3) - ((c1 * s2) * s3)) : Dynamic));
-        (out.y = cast ((((c1 * s2) * c3) - ((s1 * c2) * s3)) : Dynamic));
-        (out.z = cast ((((c1 * c2) * s3) + ((s1 * s2) * c3)) : Dynamic));
-        (out.w = cast ((((c1 * c2) * c3) + ((s1 * s2) * s3)) : Dynamic));
+        (out.x = cast ((((s1 * c2) * c3) - ((c1 * s2) * s3)) : Float));
+        (out.y = cast ((((c1 * s2) * c3) - ((s1 * c2) * s3)) : Float));
+        (out.z = cast ((((c1 * c2) * s3) + ((s1 * s2) * c3)) : Float));
+        (out.w = cast ((((c1 * c2) * c3) + ((s1 * s2) * s3)) : Float));
       }
       else if (__switchValue == 'YXZ') {
-        (out.x = cast ((((s1 * c2) * c3) + ((c1 * s2) * s3)) : Dynamic));
-        (out.y = cast ((((c1 * s2) * c3) - ((s1 * c2) * s3)) : Dynamic));
-        (out.z = cast ((((c1 * c2) * s3) - ((s1 * s2) * c3)) : Dynamic));
-        (out.w = cast ((((c1 * c2) * c3) + ((s1 * s2) * s3)) : Dynamic));
+        (out.x = cast ((((s1 * c2) * c3) + ((c1 * s2) * s3)) : Float));
+        (out.y = cast ((((c1 * s2) * c3) - ((s1 * c2) * s3)) : Float));
+        (out.z = cast ((((c1 * c2) * s3) - ((s1 * s2) * c3)) : Float));
+        (out.w = cast ((((c1 * c2) * c3) + ((s1 * s2) * s3)) : Float));
       }
       else if (__switchValue == 'YZX') {
-        (out.x = cast ((((s1 * c2) * c3) + ((c1 * s2) * s3)) : Dynamic));
-        (out.y = cast ((((c1 * s2) * c3) + ((s1 * c2) * s3)) : Dynamic));
-        (out.z = cast ((((c1 * c2) * s3) - ((s1 * s2) * c3)) : Dynamic));
-        (out.w = cast ((((c1 * c2) * c3) - ((s1 * s2) * s3)) : Dynamic));
+        (out.x = cast ((((s1 * c2) * c3) + ((c1 * s2) * s3)) : Float));
+        (out.y = cast ((((c1 * s2) * c3) + ((s1 * c2) * s3)) : Float));
+        (out.z = cast ((((c1 * c2) * s3) - ((s1 * s2) * c3)) : Float));
+        (out.w = cast ((((c1 * c2) * c3) - ((s1 * s2) * s3)) : Float));
       }
       else if (__switchValue == 'ZXY') {
-        (out.x = cast ((((s1 * c2) * c3) - ((c1 * s2) * s3)) : Dynamic));
-        (out.y = cast ((((c1 * s2) * c3) + ((s1 * c2) * s3)) : Dynamic));
-        (out.z = cast ((((c1 * c2) * s3) + ((s1 * s2) * c3)) : Dynamic));
-        (out.w = cast ((((c1 * c2) * c3) - ((s1 * s2) * s3)) : Dynamic));
+        (out.x = cast ((((s1 * c2) * c3) - ((c1 * s2) * s3)) : Float));
+        (out.y = cast ((((c1 * s2) * c3) + ((s1 * c2) * s3)) : Float));
+        (out.z = cast ((((c1 * c2) * s3) + ((s1 * s2) * c3)) : Float));
+        (out.w = cast ((((c1 * c2) * c3) - ((s1 * s2) * s3)) : Float));
       }
       else if (__switchValue == 'ZYX') {
-        (out.x = cast ((((s1 * c2) * c3) - ((c1 * s2) * s3)) : Dynamic));
-        (out.y = cast ((((c1 * s2) * c3) + ((s1 * c2) * s3)) : Dynamic));
-        (out.z = cast ((((c1 * c2) * s3) - ((s1 * s2) * c3)) : Dynamic));
-        (out.w = cast ((((c1 * c2) * c3) + ((s1 * s2) * s3)) : Dynamic));
+        (out.x = cast ((((s1 * c2) * c3) - ((c1 * s2) * s3)) : Float));
+        (out.y = cast ((((c1 * s2) * c3) + ((s1 * c2) * s3)) : Float));
+        (out.z = cast ((((c1 * c2) * s3) - ((s1 * s2) * c3)) : Float));
+        (out.w = cast ((((c1 * c2) * c3) + ((s1 * s2) * s3)) : Float));
       }
     }
   }
@@ -376,28 +376,28 @@ class Quaternion {
     trace = ((m00 + m11) + m22);
     if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
       var s:Float = _Runtime.divideNumbers(0.5, HxMath.sqrt((trace + 1.0)));
-      (out.w = cast ((0.25 / s) : Dynamic));
-      (out.x = cast (((m12 - m21) * s) : Dynamic));
-      (out.y = cast (((m20 - m02) * s) : Dynamic));
-      (out.z = cast (((m01 - m10) * s) : Dynamic));
+      (out.w = cast ((0.25 / s) : Float));
+      (out.x = cast (((m12 - m21) * s) : Float));
+      (out.y = cast (((m20 - m02) * s) : Float));
+      (out.z = cast (((m01 - m10) * s) : Float));
     } else { if ((cast ((cast ((cast m00 : Float) > (cast m11 : Float)) : Bool) && (cast ((cast m00 : Float) > (cast m22 : Float)) : Bool)) : Bool)) {
       var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m00) - m11) - m22)));
-      (out.w = cast (((m12 - m21) / s) : Dynamic));
-      (out.x = cast ((0.25 * s) : Dynamic));
-      (out.y = cast (((m10 + m01) / s) : Dynamic));
-      (out.z = cast (((m20 + m02) / s) : Dynamic));
+      (out.w = cast (((m12 - m21) / s) : Float));
+      (out.x = cast ((0.25 * s) : Float));
+      (out.y = cast (((m10 + m01) / s) : Float));
+      (out.z = cast (((m20 + m02) / s) : Float));
     } else { if ((cast ((cast m11 : Float) > (cast m22 : Float)) : Bool)) {
       var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m11) - m00) - m22)));
-      (out.w = cast (((m20 - m02) / s) : Dynamic));
-      (out.x = cast (((m10 + m01) / s) : Dynamic));
-      (out.y = cast ((0.25 * s) : Dynamic));
-      (out.z = cast (((m21 + m12) / s) : Dynamic));
+      (out.w = cast (((m20 - m02) / s) : Float));
+      (out.x = cast (((m10 + m01) / s) : Float));
+      (out.y = cast ((0.25 * s) : Float));
+      (out.z = cast (((m21 + m12) / s) : Float));
     } else {
       var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m22) - m00) - m11)));
-      (out.w = cast (((m01 - m10) / s) : Dynamic));
-      (out.x = cast (((m20 + m02) / s) : Dynamic));
-      (out.y = cast (((m21 + m12) / s) : Dynamic));
-      (out.z = cast ((0.25 * s) : Dynamic));
+      (out.w = cast (((m01 - m10) / s) : Float));
+      (out.x = cast (((m20 + m02) / s) : Float));
+      (out.y = cast (((m21 + m12) / s) : Float));
+      (out.z = cast ((0.25 * s) : Float));
     } } }
   }
 
@@ -440,19 +440,19 @@ class Quaternion {
       (px = cast ((px / pLen) : Dynamic));
       (py = cast ((py / pLen) : Dynamic));
       (pz = cast ((pz / pLen) : Dynamic));
-      (out.x = cast (px : Dynamic));
-      (out.y = cast (py : Dynamic));
-      (out.z = cast (pz : Dynamic));
-      (out.w = cast (0.0 : Dynamic));
+      (out.x = cast (px : Float));
+      (out.y = cast (py : Float));
+      (out.z = cast (pz : Float));
+      (out.w = cast (0.0 : Float));
       return;
     }
     cx = ((fy * tz) - (fz * ty));
     cy = ((fz * tx) - (fx * tz));
     cz = ((fx * ty) - (fy * tx));
-    (out.x = cast (cx : Dynamic));
-    (out.y = cast (cy : Dynamic));
-    (out.z = cast (cz : Dynamic));
-    (out.w = cast ((1.0 + dot) : Dynamic));
+    (out.x = cast (cx : Float));
+    (out.y = cast (cy : Float));
+    (out.z = cast (cz : Float));
+    (out.w = cast ((1.0 + dot) : Float));
     len = HxMath.sqrt(((((out.x * out.x) + (out.y * out.y)) + (out.z * out.z)) + (out.w * out.w)));
     if ((cast !_Runtime.strictEquals(len, 0.0) : Bool)) {
       var inv:Float = (1.0 / len);
@@ -464,10 +464,10 @@ class Quaternion {
   }
 
   public static function setQuaternionIdentity(out:QuaternionLike):Void {
-    (out.x = cast (0.0 : Dynamic));
-    (out.y = cast (0.0 : Dynamic));
-    (out.z = cast (0.0 : Dynamic));
-    (out.w = cast (1.0 : Dynamic));
+    (out.x = cast (0.0 : Float));
+    (out.y = cast (0.0 : Float));
+    (out.z = cast (0.0 : Float));
+    (out.w = cast (1.0 : Float));
   }
 
   public static function setQuaternionLookRotation(out:QuaternionLike, forward:Vector3Like, up:Vector3Like):Void {
@@ -528,28 +528,28 @@ class Quaternion {
     trace = ((m00 + m11) + m22);
     if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
       var s:Float = _Runtime.divideNumbers(0.5, HxMath.sqrt((trace + 1.0)));
-      (out.w = cast ((0.25 / s) : Dynamic));
-      (out.x = cast (((m12 - m21) * s) : Dynamic));
-      (out.y = cast (((m20 - m02) * s) : Dynamic));
-      (out.z = cast (((m01 - m10) * s) : Dynamic));
+      (out.w = cast ((0.25 / s) : Float));
+      (out.x = cast (((m12 - m21) * s) : Float));
+      (out.y = cast (((m20 - m02) * s) : Float));
+      (out.z = cast (((m01 - m10) * s) : Float));
     } else { if ((cast ((cast ((cast m00 : Float) > (cast m11 : Float)) : Bool) && (cast ((cast m00 : Float) > (cast m22 : Float)) : Bool)) : Bool)) {
       var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m00) - m11) - m22)));
-      (out.w = cast (((m12 - m21) / s) : Dynamic));
-      (out.x = cast ((0.25 * s) : Dynamic));
-      (out.y = cast (((m10 + m01) / s) : Dynamic));
-      (out.z = cast (((m20 + m02) / s) : Dynamic));
+      (out.w = cast (((m12 - m21) / s) : Float));
+      (out.x = cast ((0.25 * s) : Float));
+      (out.y = cast (((m10 + m01) / s) : Float));
+      (out.z = cast (((m20 + m02) / s) : Float));
     } else { if ((cast ((cast m11 : Float) > (cast m22 : Float)) : Bool)) {
       var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m11) - m00) - m22)));
-      (out.w = cast (((m20 - m02) / s) : Dynamic));
-      (out.x = cast (((m10 + m01) / s) : Dynamic));
-      (out.y = cast ((0.25 * s) : Dynamic));
-      (out.z = cast (((m21 + m12) / s) : Dynamic));
+      (out.w = cast (((m20 - m02) / s) : Float));
+      (out.x = cast (((m10 + m01) / s) : Float));
+      (out.y = cast ((0.25 * s) : Float));
+      (out.z = cast (((m21 + m12) / s) : Float));
     } else {
       var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + m22) - m00) - m11)));
-      (out.w = cast (((m01 - m10) / s) : Dynamic));
-      (out.x = cast (((m20 + m02) / s) : Dynamic));
-      (out.y = cast (((m21 + m12) / s) : Dynamic));
-      (out.z = cast ((0.25 * s) : Dynamic));
+      (out.w = cast (((m01 - m10) / s) : Float));
+      (out.x = cast (((m20 + m02) / s) : Float));
+      (out.y = cast (((m21 + m12) / s) : Float));
+      (out.z = cast ((0.25 * s) : Float));
     } } }
   }
 
@@ -590,9 +590,9 @@ class Quaternion {
       (scaleA = cast ((1.0 - t) : Dynamic));
       (scaleB = cast (t : Dynamic));
     }
-    (out.x = cast (((ax * scaleA) + (bx * scaleB)) : Dynamic));
-    (out.y = cast (((ay * scaleA) + (by * scaleB)) : Dynamic));
-    (out.z = cast (((az * scaleA) + (bz * scaleB)) : Dynamic));
-    (out.w = cast (((aw * scaleA) + (bw * scaleB)) : Dynamic));
+    (out.x = cast (((ax * scaleA) + (bx * scaleB)) : Float));
+    (out.y = cast (((ay * scaleA) + (by * scaleB)) : Float));
+    (out.z = cast (((az * scaleA) + (bz * scaleB)) : Float));
+    (out.w = cast (((aw * scaleA) + (bw * scaleB)) : Float));
   }
 }

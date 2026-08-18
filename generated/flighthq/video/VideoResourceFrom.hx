@@ -37,7 +37,7 @@ class VideoResourceFrom {
             return flighthq._internal._Async.reject(error);
           });
         }), function():Dynamic {
-          (resource.objectUrl = cast (url : Dynamic));
+          (resource.objectUrl = cast (url : Null<String>));
           return flighthq._internal._Async.flowReturn(resource);
         });
       })

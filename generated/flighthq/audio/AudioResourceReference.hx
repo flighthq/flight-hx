@@ -91,7 +91,7 @@ class AudioResourceReference {
                 __flowBranch6 = flighthq._internal._Async.flowNormal();
               }
               return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
-                ((cast (cast ref : { var resource:AudioResource; }).resource : { var buffer:Null<flighthq._internal.dom.AudioBuffer>; }).buffer = cast ((cast decoded : { var buffer:Null<flighthq._internal.dom.AudioBuffer>; }).buffer : Dynamic));
+                ((cast (cast ref : { var resource:AudioResource; }).resource : { var buffer:Null<flighthq._internal.dom.AudioBuffer>; }).buffer = cast ((cast decoded : { var buffer:Null<flighthq._internal.dom.AudioBuffer>; }).buffer : Null<flighthq._internal.dom.AudioBuffer>));
                 ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
                 return flighthq._internal._Async.flowReturn((cast ref : { var resource:AudioResource; }).resource);
               });
@@ -110,7 +110,7 @@ class AudioResourceReference {
                 __flowBranch11 = flighthq._internal._Async.flowNormal();
               }
               return flighthq._internal._Async.continueFlow(__flowBranch11, function():Dynamic {
-                ((cast (cast ref : { var resource:AudioResource; }).resource : { var buffer:Null<flighthq._internal.dom.AudioBuffer>; }).buffer = cast ((cast decoded : { var buffer:Null<flighthq._internal.dom.AudioBuffer>; }).buffer : Dynamic));
+                ((cast (cast ref : { var resource:AudioResource; }).resource : { var buffer:Null<flighthq._internal.dom.AudioBuffer>; }).buffer = cast ((cast decoded : { var buffer:Null<flighthq._internal.dom.AudioBuffer>; }).buffer : Null<flighthq._internal.dom.AudioBuffer>));
                 ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
                 return flighthq._internal._Async.flowReturn((cast ref : { var resource:AudioResource; }).resource);
               });

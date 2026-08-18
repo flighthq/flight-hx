@@ -125,10 +125,10 @@ class UpdateBitmapText {
     if ((cast _Runtime.strictEquals(minX, HxMath.POSITIVE_INFINITY) : Bool)) {
       UpdateBitmapText.setEmptyRectangle__updateBitmapText(({ final __callArgument11:Dynamic = bounds; __callArgument11; }));
     } else {
-      (bounds.x = cast (minX : Dynamic));
-      (bounds.y = cast (minY : Dynamic));
-      (bounds.width = cast ((maxX - minX) : Dynamic));
-      (bounds.height = cast ((maxY - minY) : Dynamic));
+      (bounds.x = cast (minX : Float));
+      (bounds.y = cast (minY : Float));
+      (bounds.width = cast ((maxX - minX) : Float));
+      (bounds.height = cast ((maxY - minY) : Float));
     }
     invalidateNodeLocalBounds((cast bitmapText : Dynamic));
   }
@@ -210,7 +210,7 @@ class UpdateBitmapText {
     }
     pageData = flighthq._internal._StaticIndex.readArray((cast runtime : BitmapTextRuntime).pages, page);
     if ((cast _Runtime.strictEquals((cast (cast pageData : BitmapTextPage).atlas : { var texture:Null<Texture2D>; }).texture, null) : Bool)) {
-      ((cast (cast pageData : BitmapTextPage).atlas : { var texture:Null<Texture2D>; }).texture = cast ((cast createTexture((cast { dimension: '2d', source: image } : Dynamic)) : Texture2D) : Dynamic));
+      ((cast (cast pageData : BitmapTextPage).atlas : { var texture:Null<Texture2D>; }).texture = cast ((cast createTexture((cast { dimension: '2d', source: image } : Dynamic)) : Texture2D) : Null<Texture2D>));
     } else {
       setTextureSource(({ final __callArgument15:Dynamic = (cast (cast pageData : BitmapTextPage).atlas : { var texture:Null<Texture2D>; }).texture; __callArgument15; }), (cast image : Dynamic));
     }
@@ -270,9 +270,9 @@ class UpdateBitmapText {
   }
 
   public static function setEmptyRectangle__updateBitmapText(out:Rectangle):Void {
-    (out.x = cast (0.0 : Dynamic));
-    (out.y = cast (0.0 : Dynamic));
-    (out.width = cast (0.0 : Dynamic));
-    (out.height = cast (0.0 : Dynamic));
+    (out.x = cast (0.0 : Float));
+    (out.y = cast (0.0 : Float));
+    (out.width = cast (0.0 : Float));
+    (out.height = cast (0.0 : Float));
   }
 }

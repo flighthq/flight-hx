@@ -77,12 +77,12 @@ class Ray3d {
       (ta = cast (((cast !_Runtime.strictEquals(aa, 0.0) : Bool) ? (cast (-ar / aa) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
       if ((cast ((cast ta : Float) < (cast 0.0 : Float)) : Bool)) { (ta = cast (0.0 : Dynamic)); }
     }
-    (outA.x = cast ((aox + (adx * ta)) : Dynamic));
-    (outA.y = cast ((aoy + (ady * ta)) : Dynamic));
-    (outA.z = cast ((aoz + (adz * ta)) : Dynamic));
-    (outB.x = cast ((box + (bdx * tb)) : Dynamic));
-    (outB.y = cast ((boy + (bdy * tb)) : Dynamic));
-    (outB.z = cast ((boz + (bdz * tb)) : Dynamic));
+    (outA.x = cast ((aox + (adx * ta)) : Float));
+    (outA.y = cast ((aoy + (ady * ta)) : Float));
+    (outA.z = cast ((aoz + (adz * ta)) : Float));
+    (outB.x = cast ((box + (bdx * tb)) : Float));
+    (outB.y = cast ((boy + (bdy * tb)) : Float));
+    (outB.z = cast ((boz + (bdz * tb)) : Float));
   }
 
   public static function getClosestPointOnRay3D(out:Vector3Like, ray:Ray3DLike, point:Vector3Like):Void {
@@ -109,9 +109,9 @@ class Ray3d {
     lenSq = (((dx * dx) + (dy * dy)) + (dz * dz));
     t = ((cast !_Runtime.strictEquals(lenSq, 0.0) : Bool) ? (cast (((((px - ox) * dx) + ((py - oy) * dy)) + ((pz - oz) * dz)) / lenSq) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool)) { (t = cast (0.0 : Dynamic)); }
-    (out.x = cast ((ox + (dx * t)) : Dynamic));
-    (out.y = cast ((oy + (dy * t)) : Dynamic));
-    (out.z = cast ((oz + (dz * t)) : Dynamic));
+    (out.x = cast ((ox + (dx * t)) : Float));
+    (out.y = cast ((oy + (dy * t)) : Float));
+    (out.z = cast ((oz + (dz * t)) : Float));
   }
 
   public static function getRay3DPointAt(out:Vector3Like, ray:Ray3DLike, t:Float):Void {
@@ -127,9 +127,9 @@ class Ray3d {
     dx = (cast ray.direction : { var x:Float; }).x;
     dy = (cast ray.direction : { var y:Float; }).y;
     dz = (cast ray.direction : { var z:Float; }).z;
-    (out.x = cast ((ox + (dx * t)) : Dynamic));
-    (out.y = cast ((oy + (dy * t)) : Dynamic));
-    (out.z = cast ((oz + (dz * t)) : Dynamic));
+    (out.x = cast ((ox + (dx * t)) : Float));
+    (out.y = cast ((oy + (dy * t)) : Float));
+    (out.z = cast ((oz + (dz * t)) : Float));
   }
 
   public static function intersectRay3DAabb(ray:Ray3DLike, aabb:AabbLike):Float {
@@ -310,11 +310,11 @@ class Ray3d {
     dx = direction.x;
     dy = direction.y;
     dz = direction.z;
-    ((cast out.origin : { var x:Float; }).x = cast (ox : Dynamic));
-    ((cast out.origin : { var y:Float; }).y = cast (oy : Dynamic));
-    ((cast out.origin : { var z:Float; }).z = cast (oz : Dynamic));
-    ((cast out.direction : { var x:Float; }).x = cast (dx : Dynamic));
-    ((cast out.direction : { var y:Float; }).y = cast (dy : Dynamic));
-    ((cast out.direction : { var z:Float; }).z = cast (dz : Dynamic));
+    ((cast out.origin : { var x:Float; }).x = cast (ox : Float));
+    ((cast out.origin : { var y:Float; }).y = cast (oy : Float));
+    ((cast out.origin : { var z:Float; }).z = cast (oz : Float));
+    ((cast out.direction : { var x:Float; }).x = cast (dx : Float));
+    ((cast out.direction : { var y:Float; }).y = cast (dy : Float));
+    ((cast out.direction : { var z:Float; }).z = cast (dz : Float));
   }
 }

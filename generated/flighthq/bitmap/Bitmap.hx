@@ -242,7 +242,7 @@ class Bitmap {
         }
       }
     }
-    (out.alphaType = cast (target : Dynamic));
+    (out.alphaType = cast (target : AlphaType));
     invalidateBitmap(({ final __callArgument0:Dynamic = out; __callArgument0; }));
   }
 
@@ -474,7 +474,7 @@ class Bitmap {
   }
 
   public static function invalidateBitmap(bitmap:flighthq.types.Bitmap):Void {
-    (bitmap.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((bitmap.version + 1.0)), 0) : Dynamic));
+    (bitmap.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((bitmap.version + 1.0)), 0) : Float));
   }
 
   public static function medianBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float):Void {

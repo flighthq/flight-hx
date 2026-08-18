@@ -212,15 +212,15 @@ class Camera {
     var projection:Projection = cast _Runtime.UNDEFINED;
     projection = camera.projection;
     if ((cast _Runtime.strictEquals((cast projection : { var kind:String; }).kind, 'perspective') : Bool)) {
-      ((cast projection : { var aspect:Float; }).aspect = cast (aspect : Dynamic));
+      ((cast projection : { var aspect:Float; }).aspect = cast (aspect : Float));
       return;
     }
-    ((cast projection : { var halfWidth:Float; }).halfWidth = cast (((cast projection : { var halfHeight:Float; }).halfHeight * aspect) : Dynamic));
+    ((cast projection : { var halfWidth:Float; }).halfWidth = cast (((cast projection : { var halfHeight:Float; }).halfHeight * aspect) : Float));
   }
 
   public static function setCamera3DJitter(camera:Camera3D, x:Float, y:Float):Void {
-    ((cast camera.jitter : { var x:Float; }).x = cast (x : Dynamic));
-    ((cast camera.jitter : { var y:Float; }).y = cast (y : Dynamic));
+    ((cast camera.jitter : { var x:Float; }).x = cast (x : Float));
+    ((cast camera.jitter : { var y:Float; }).y = cast (y : Float));
   }
 
   public static function setCamera3DViewMatrix4FromLookAt(camera:Camera3D, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {

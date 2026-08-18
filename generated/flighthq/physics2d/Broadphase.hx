@@ -62,10 +62,10 @@ class Broadphase {
         (cast (cast world : Physics2DWorld).index : SpatialIndexBackend).removeSpatialObject((cast (cast body : RigidBody2D).index : Float));
         continue;
       }
-      (Broadphase.bodyBounds__broadphase.minX = cast (minX : Dynamic));
-      (Broadphase.bodyBounds__broadphase.minY = cast (minY : Dynamic));
-      (Broadphase.bodyBounds__broadphase.maxX = cast ((cast Broadphase.paddedUpperBound__broadphase((cast maxX : Float)) : Float) : Dynamic));
-      (Broadphase.bodyBounds__broadphase.maxY = cast ((cast Broadphase.paddedUpperBound__broadphase((cast maxY : Float)) : Float) : Dynamic));
+      (Broadphase.bodyBounds__broadphase.minX = cast (minX : Float));
+      (Broadphase.bodyBounds__broadphase.minY = cast (minY : Float));
+      (Broadphase.bodyBounds__broadphase.maxX = cast ((cast Broadphase.paddedUpperBound__broadphase((cast maxX : Float)) : Float) : Float));
+      (Broadphase.bodyBounds__broadphase.maxY = cast ((cast Broadphase.paddedUpperBound__broadphase((cast maxY : Float)) : Float) : Float));
       (cast (cast world : Physics2DWorld).index : SpatialIndexBackend).updateSpatialObject((cast (cast body : RigidBody2D).index : Float), ({ final __callArgument10:Dynamic = Broadphase.bodyBounds__broadphase; __callArgument10; }));
     }
   }

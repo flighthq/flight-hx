@@ -28,8 +28,8 @@ class BitmapDissolve {
     var sourceStride:Float = cast _Runtime.UNDEFINED;
     var sourceBitmapHeight:Float = cast _Runtime.UNDEFINED;
     var dissolved:Float = cast _Runtime.UNDEFINED;
-    width = _Runtime.field(dest, 'width');
-    height = _Runtime.field(dest, 'height');
+    width = dest.width;
+    height = dest.height;
     total = (width * height);
     if ((cast ((cast total : Float) <= (cast 0.0 : Float)) : Bool)) { return cast seed; }
     bits = 0.0;
@@ -38,17 +38,17 @@ class BitmapDissolve {
     mask = (period - 1.0);
     cursor = ((cast ((cast seed : Float) < (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast seed : Float) > (cast period : Float)) : Bool) ? (cast period : Dynamic) : (cast (_Runtime.toInt32(seed) | 0) : Dynamic)) : Dynamic));
     if ((cast ((cast pixelCount : Float) <= (cast 0.0 : Float)) : Bool)) { return cast cursor; }
-    toFill = ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(source, 'bitmap'), _Runtime.field(dest, 'bitmap')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(source, 'x'), _Runtime.field(dest, 'x')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(source, 'y'), _Runtime.field(dest, 'y')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(source, 'width'), _Runtime.field(dest, 'width')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(source, 'height'), _Runtime.field(dest, 'height')) : Bool));
+    toFill = ((cast ((cast ((cast ((cast _Runtime.strictEquals(source.bitmap, dest.bitmap) : Bool) && (cast _Runtime.strictEquals(source.x, dest.x) : Bool)) : Bool) && (cast _Runtime.strictEquals(source.y, dest.y) : Bool)) : Bool) && (cast _Runtime.strictEquals(source.width, dest.width) : Bool)) : Bool) && (cast _Runtime.strictEquals(source.height, dest.height) : Bool));
     fillR = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(fillColor), 24)) & 255);
     fillG = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> 16)) & 255);
     fillB = (_Runtime.toInt32((_Runtime.toInt32(fillColor) >> 8)) & 255);
     fillA = (_Runtime.toInt32(fillColor) & 255);
-    destData = (cast _Runtime.field(dest, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    destStride = (cast _Runtime.field(dest, 'bitmap') : { var width:Float; }).width;
-    destBitmapHeight = (cast _Runtime.field(dest, 'bitmap') : { var height:Float; }).height;
-    sourceData = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    sourceStride = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
-    sourceBitmapHeight = (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height;
+    destData = (cast dest.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    destStride = (cast dest.bitmap : { var width:Float; }).width;
+    destBitmapHeight = (cast dest.bitmap : { var height:Float; }).height;
+    sourceData = (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    sourceStride = (cast source.bitmap : { var width:Float; }).width;
+    sourceBitmapHeight = (cast source.bitmap : { var height:Float; }).height;
     dissolved = 0.0;
     while ((cast ((cast ((cast dissolved : Float) < (cast pixelCount : Float)) : Bool) && (cast ((cast cursor : Float) < (cast period : Float)) : Bool)) : Bool)) {
       var pixelIndex:Float = (cast BitmapDissolve.permutePixelIndex__bitmapDissolve((cast cursor : Float), (cast bits : Float), (cast mask : Float)) : Float);
@@ -57,8 +57,8 @@ class BitmapDissolve {
       dissolved++;
       var px:Float = _Runtime.fmod(pixelIndex, width);
       var py:Float = (_Runtime.toInt32((pixelIndex / width)) | 0);
-      var dx:Float = _Runtime.addNumbers(_Runtime.field(dest, 'x'), px);
-      var dy:Float = _Runtime.addNumbers(_Runtime.field(dest, 'y'), py);
+      var dx:Float = (dest.x + px);
+      var dy:Float = (dest.y + py);
       if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast destStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast destBitmapHeight : Float)) : Bool)) : Bool)) { continue; }
       var di:Float = (((dy * destStride) + dx) * 4.0);
       if ((cast toFill : Bool)) {
@@ -68,8 +68,8 @@ class BitmapDissolve {
         flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast destData : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast fillA : Float));
         continue;
       }
-      var sx:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
-      var sy:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
+      var sx:Float = (source.x + px);
+      var sy:Float = (source.y + py);
       if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sourceStride : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast sourceBitmapHeight : Float)) : Bool)) : Bool)) { continue; }
       var si:Float = (((sy * sourceStride) + sx) * 4.0);
       flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast destData : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sourceData : flighthq._internal._UInt8ClampedArray), (cast si : Float)) : Float));
@@ -77,7 +77,7 @@ class BitmapDissolve {
       flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast destData : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sourceData : flighthq._internal._UInt8ClampedArray), (cast (si + 2.0) : Float)) : Float));
       flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast destData : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sourceData : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float)) : Float));
     }
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap(dest.bitmap);
     return cast cursor;
     return cast null;
   }

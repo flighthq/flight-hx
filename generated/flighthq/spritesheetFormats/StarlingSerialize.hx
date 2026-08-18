@@ -12,17 +12,17 @@ class StarlingSerialize {
   public static function frameToSubTexture__starlingSerialize(frame:flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<SpritesheetData, String>, Float>):StarlingSubTexture {
     var st:StarlingSubTexture = cast _Runtime.UNDEFINED;
     st = (cast { height: (cast frame : { var height:Float; }).height, name: (cast frame : { var name:String; }).name, width: (cast frame : { var width:Float; }).width, x: (cast frame : { var x:Float; }).x, y: (cast frame : { var y:Float; }).y });
-    if ((cast !_Runtime.strictEquals((cast frame : { var offsetX:Float; }).offsetX, 0.0) : Bool)) { (st.frameX = cast (-(cast frame : { var offsetX:Float; }).offsetX : Dynamic)); }
-    if ((cast !_Runtime.strictEquals((cast frame : { var offsetY:Float; }).offsetY, 0.0) : Bool)) { (st.frameY = cast (-(cast frame : { var offsetY:Float; }).offsetY : Dynamic)); }
-    if ((cast !_Runtime.strictEquals((cast frame : { var sourceWidth:Float; }).sourceWidth, (cast frame : { var width:Float; }).width) : Bool)) { (st.frameWidth = cast ((cast frame : { var sourceWidth:Float; }).sourceWidth : Dynamic)); }
-    if ((cast !_Runtime.strictEquals((cast frame : { var sourceHeight:Float; }).sourceHeight, (cast frame : { var height:Float; }).height) : Bool)) { (st.frameHeight = cast ((cast frame : { var sourceHeight:Float; }).sourceHeight : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast frame : { var offsetX:Float; }).offsetX, 0.0) : Bool)) { (st.frameX = cast (-(cast frame : { var offsetX:Float; }).offsetX : Null<Float>)); }
+    if ((cast !_Runtime.strictEquals((cast frame : { var offsetY:Float; }).offsetY, 0.0) : Bool)) { (st.frameY = cast (-(cast frame : { var offsetY:Float; }).offsetY : Null<Float>)); }
+    if ((cast !_Runtime.strictEquals((cast frame : { var sourceWidth:Float; }).sourceWidth, (cast frame : { var width:Float; }).width) : Bool)) { (st.frameWidth = cast ((cast frame : { var sourceWidth:Float; }).sourceWidth : Null<Float>)); }
+    if ((cast !_Runtime.strictEquals((cast frame : { var sourceHeight:Float; }).sourceHeight, (cast frame : { var height:Float; }).height) : Bool)) { (st.frameHeight = cast ((cast frame : { var sourceHeight:Float; }).sourceHeight : Null<Float>)); }
     if ((cast ((cast !_Runtime.strictEquals((cast frame : { var pivotX:Null<Float>; }).pivotX, null) : Bool) && (cast ((cast (cast frame : { var sourceWidth:Float; }).sourceWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      (st.pivotX = cast (((cast frame : { var pivotX:Null<Float>; }).pivotX * (cast frame : { var sourceWidth:Float; }).sourceWidth) : Dynamic));
+      (st.pivotX = cast (((cast frame : { var pivotX:Null<Float>; }).pivotX * (cast frame : { var sourceWidth:Float; }).sourceWidth) : Null<Float>));
     }
     if ((cast ((cast !_Runtime.strictEquals((cast frame : { var pivotY:Null<Float>; }).pivotY, null) : Bool) && (cast ((cast (cast frame : { var sourceHeight:Float; }).sourceHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      (st.pivotY = cast (((cast frame : { var pivotY:Null<Float>; }).pivotY * (cast frame : { var sourceHeight:Float; }).sourceHeight) : Dynamic));
+      (st.pivotY = cast (((cast frame : { var pivotY:Null<Float>; }).pivotY * (cast frame : { var sourceHeight:Float; }).sourceHeight) : Null<Float>));
     }
-    if ((cast (cast frame : { var rotated:Bool; }).rotated : Bool)) { (st.rotated = cast (true : Dynamic)); }
+    if ((cast (cast frame : { var rotated:Bool; }).rotated : Bool)) { (st.rotated = cast (true : Null<Bool>)); }
     return cast st;
     return cast null;
   }

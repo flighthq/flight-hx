@@ -40,7 +40,7 @@ class SwfBitmap {
     bitmap = (cast createBitmap((cast width : Float), (cast height : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Bitmap);
     unpacked = ((cast hasColorTable : Bool) ? (cast (cast SwfBitmap.unpackSwfColorMapped__swfBitmap(({ final __callArgument2:Dynamic = bitmap; __callArgument2; }), ({ final __callArgument3:Dynamic = pixels; __callArgument3; }), (cast width : Float), (cast height : Float), (cast colorCount : Float), (cast hasAlpha : Bool)) : Bool) : Dynamic) : (cast ((cast _Runtime.strictEquals(format, SwfBitmap.FORMAT_15_BIT__swfBitmap) : Bool) ? (cast (cast SwfBitmap.unpackSwf15Bit__swfBitmap(({ final __callArgument4:Dynamic = bitmap; __callArgument4; }), ({ final __callArgument5:Dynamic = pixels; __callArgument5; }), (cast width : Float), (cast height : Float)) : Bool) : Dynamic) : (cast (cast SwfBitmap.unpackSwf24Bit__swfBitmap(({ final __callArgument6:Dynamic = bitmap; __callArgument6; }), ({ final __callArgument7:Dynamic = pixels; __callArgument7; }), (cast width : Float), (cast height : Float), (cast hasAlpha : Bool)) : Bool) : Dynamic)) : Dynamic));
     if ((cast !(cast unpacked : Bool) : Bool)) { return cast null; }
-    (bitmap.alphaType = cast (((cast hasAlpha : Bool) ? (cast 'premultiplied' : Dynamic) : (cast 'opaque' : Dynamic)) : Dynamic));
+    (bitmap.alphaType = cast (((cast hasAlpha : Bool) ? (cast 'premultiplied' : Dynamic) : (cast 'opaque' : Dynamic)) : AlphaType));
     return cast bitmap;
     return cast null;
   }

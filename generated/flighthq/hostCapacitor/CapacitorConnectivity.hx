@@ -28,14 +28,14 @@ class CapacitorConnectivity {
 
     });
     return cast { getStatus: function(out:ConnectivityStatus):ConnectivityStatus {
-      (out.online = cast ((cast mirror : CapacitorConnectionStatus).connected : Dynamic));
-      (out.type = cast ((cast CapacitorConnectivity.toConnectionType__capacitorConnectivity((cast (cast mirror : CapacitorConnectionStatus).connectionType : String)) : ConnectivityConnectionType) : Dynamic));
-      (out.downlink = cast (-1.0 : Dynamic));
-      (out.downlinkMax = cast (-1.0 : Dynamic));
-      (out.effectiveType = cast ('' : Dynamic));
-      (out.rtt = cast (-1.0 : Dynamic));
-      (out.saveData = cast (false : Dynamic));
-      (out.metered = cast (_Runtime.strictEquals(out.type, 'cellular') : Dynamic));
+      (out.online = cast ((cast mirror : CapacitorConnectionStatus).connected : Bool));
+      (out.type = cast ((cast CapacitorConnectivity.toConnectionType__capacitorConnectivity((cast (cast mirror : CapacitorConnectionStatus).connectionType : String)) : ConnectivityConnectionType) : ConnectivityConnectionType));
+      (out.downlink = cast (-1.0 : Float));
+      (out.downlinkMax = cast (-1.0 : Float));
+      (out.effectiveType = cast ('' : String));
+      (out.rtt = cast (-1.0 : Float));
+      (out.saveData = cast (false : Bool));
+      (out.metered = cast (_Runtime.strictEquals(out.type, 'cellular') : Bool));
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, subscribe: function(listener:Void->Void):Void->Void {

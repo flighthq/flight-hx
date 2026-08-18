@@ -36,10 +36,10 @@ class MeshGeometryCompute {
     floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast _Runtime.strictEquals(vertexCount, 0.0) : Bool)) {
-      ((cast out.center : { var x:Float; }).x = cast (0.0 : Dynamic));
-      ((cast out.center : { var y:Float; }).y = cast (0.0 : Dynamic));
-      ((cast out.center : { var z:Float; }).z = cast (0.0 : Dynamic));
-      (out.radius = cast (-1.0 : Dynamic));
+      ((cast out.center : { var x:Float; }).x = cast (0.0 : Float));
+      ((cast out.center : { var y:Float; }).y = cast (0.0 : Float));
+      ((cast out.center : { var z:Float; }).z = cast (0.0 : Float));
+      (out.radius = cast (-1.0 : Float));
       return;
     }
     minX = HxMath.POSITIVE_INFINITY;
@@ -80,10 +80,10 @@ class MeshGeometryCompute {
         i++;
       }
     }
-    ((cast out.center : { var x:Float; }).x = cast (cx : Dynamic));
-    ((cast out.center : { var y:Float; }).y = cast (cy : Dynamic));
-    ((cast out.center : { var z:Float; }).z = cast (cz : Dynamic));
-    (out.radius = cast (HxMath.sqrt(radiusSq) : Dynamic));
+    ((cast out.center : { var x:Float; }).x = cast (cx : Float));
+    ((cast out.center : { var y:Float; }).y = cast (cy : Float));
+    ((cast out.center : { var z:Float; }).z = cast (cz : Float));
+    (out.radius = cast (HxMath.sqrt(radiusSq) : Float));
   }
 
   public static function computeMeshGeometryBounds(out:AabbLike, geometry:MeshGeometry):Void {
@@ -121,12 +121,12 @@ class MeshGeometryCompute {
         i++;
       }
     }
-    ((cast out.min : { var x:Float; }).x = cast (minX : Dynamic));
-    ((cast out.min : { var y:Float; }).y = cast (minY : Dynamic));
-    ((cast out.min : { var z:Float; }).z = cast (minZ : Dynamic));
-    ((cast out.max : { var x:Float; }).x = cast (maxX : Dynamic));
-    ((cast out.max : { var y:Float; }).y = cast (maxY : Dynamic));
-    ((cast out.max : { var z:Float; }).z = cast (maxZ : Dynamic));
+    ((cast out.min : { var x:Float; }).x = cast (minX : Float));
+    ((cast out.min : { var y:Float; }).y = cast (minY : Float));
+    ((cast out.min : { var z:Float; }).z = cast (minZ : Float));
+    ((cast out.max : { var x:Float; }).x = cast (maxX : Float));
+    ((cast out.max : { var y:Float; }).y = cast (maxY : Float));
+    ((cast out.max : { var z:Float; }).z = cast (maxZ : Float));
   }
 
   public static function computeMeshGeometryFlatNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
@@ -426,7 +426,7 @@ class MeshGeometryCompute {
         }
       }
       (targetVertices = cast (expanded : Dynamic));
-      (out.vertices = cast (expanded : Dynamic));
+      (out.vertices = cast (expanded : flighthq._internal._Float32Array));
       var needsUint32:Bool = ((cast ((cast _Runtime.isInstanceOfName(sourceIndices, 'Uint32Array') : Bool) || (cast _Runtime.isInstanceOfName(out.indices, 'Uint32Array') : Bool)) : Bool) || (cast ((cast outputVertexCount : Float) > (cast MeshGeometryCompute.UINT16_MAX__meshGeometryCompute : Float)) : Bool));
       var remappedIndices:flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array> = ((cast needsUint32 : Bool) ? (cast new flighthq._internal._UInt32Array(elementCount) : Dynamic) : (cast new flighthq._internal._UInt16Array(elementCount) : Dynamic));
       {
@@ -443,7 +443,7 @@ class MeshGeometryCompute {
           element++;
         }
       }
-      (out.indices = cast (remappedIndices : Dynamic));
+      (out.indices = cast (remappedIndices : Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>>));
       MeshGeometryCompute.recordTangentSmoothingSources__meshGeometryCompute(({ final __callArgument20:Dynamic = out; __callArgument20; }), ({ final __callArgument21:Dynamic = geometry; __callArgument21; }), ({ final __callArgument22:Dynamic = clusterSources; __callArgument22; }), ({ final __callArgument23:Dynamic = clusterOutputs; __callArgument23; }), (cast clusterCount : Float), (cast sourceVertexCount : Float), (cast outputVertexCount : Float));
     } else {
       {
@@ -674,7 +674,7 @@ class MeshGeometryCompute {
     bounds = geometry.bounds;
     if ((cast _Runtime.strictEquals(bounds, null) : Bool)) {
       (bounds = cast ((cast createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Aabb) : Dynamic));
-      (geometry.bounds = cast (bounds : Dynamic));
+      (geometry.bounds = cast (bounds : Null<Aabb>));
     }
     computeMeshGeometryBounds(({ final __callArgument33:Dynamic = bounds; __callArgument33; }), ({ final __callArgument34:Dynamic = geometry; __callArgument34; }));
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);

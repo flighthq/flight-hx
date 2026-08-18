@@ -55,9 +55,9 @@ class Intersection {
     if ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool)) {
       return cast false;
     }
-    (out.x = cast ((ox + (t * dx)) : Dynamic));
-    (out.y = cast ((oy + (t * dy)) : Dynamic));
-    (out.z = cast ((oz + (t * dz)) : Dynamic));
+    (out.x = cast ((ox + (t * dx)) : Float));
+    (out.y = cast ((oy + (t * dy)) : Float));
+    (out.z = cast ((oz + (t * dz)) : Float));
     return cast true;
     return cast null;
   }

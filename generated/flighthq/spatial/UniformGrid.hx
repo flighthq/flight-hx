@@ -76,10 +76,10 @@ class UniformGrid {
   }
 
   public static function _fillRectFromAabb__uniformGrid(out:RectangleLike, aabb:SpatialAabb):Void {
-    (out.x = cast (aabb.minX : Dynamic));
-    (out.y = cast (aabb.minY : Dynamic));
-    (out.width = cast ((aabb.maxX - aabb.minX) : Dynamic));
-    (out.height = cast ((aabb.maxY - aabb.minY) : Dynamic));
+    (out.x = cast (aabb.minX : Float));
+    (out.y = cast (aabb.minY : Float));
+    (out.width = cast ((aabb.maxX - aabb.minX) : Float));
+    (out.height = cast ((aabb.maxY - aabb.minY) : Float));
   }
 
   public static function _explainGridIndexing__uniformGrid(grid:UniformGrid__uniformGrid, id:SpatialObjectId):SpatialIndexingExplanation {
@@ -178,10 +178,10 @@ class UniformGrid {
       var cs:Float = (cast grid : UniformGrid__uniformGrid).cellSize;
       var spanned:Float = (cast UniformGrid._spannedCellCount__uniformGrid((cast cs : Float), ({ final __callArgument25:Dynamic = bounds; __callArgument25; })) : Float);
       if ((cast ((cast ((cast ((cast ((cast ((cast spanned : Float) <= (cast MAX_INDEXED_CELLS_PER_OBJECT : Float)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid._cellIndex__uniformGrid((cast (cast previous : { var minX:Float; }).minX : Float), (cast cs : Float)) : Float), (cast UniformGrid._cellIndex__uniformGrid((cast bounds.minX : Float), (cast cs : Float)) : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid._cellIndex__uniformGrid((cast (cast previous : { var minY:Float; }).minY : Float), (cast cs : Float)) : Float), (cast UniformGrid._cellIndex__uniformGrid((cast bounds.minY : Float), (cast cs : Float)) : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid._cellIndex__uniformGrid((cast (cast previous : { var maxX:Float; }).maxX : Float), (cast cs : Float)) : Float), (cast UniformGrid._cellIndex__uniformGrid((cast bounds.maxX : Float), (cast cs : Float)) : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid._cellIndex__uniformGrid((cast (cast previous : { var maxY:Float; }).maxY : Float), (cast cs : Float)) : Float), (cast UniformGrid._cellIndex__uniformGrid((cast bounds.maxY : Float), (cast cs : Float)) : Float)) : Bool)) : Bool)) {
-        ((cast previous : { var minX:Float; }).minX = cast (bounds.minX : Dynamic));
-        ((cast previous : { var minY:Float; }).minY = cast (bounds.minY : Dynamic));
-        ((cast previous : { var maxX:Float; }).maxX = cast (bounds.maxX : Dynamic));
-        ((cast previous : { var maxY:Float; }).maxY = cast (bounds.maxY : Dynamic));
+        ((cast previous : { var minX:Float; }).minX = cast (bounds.minX : Float));
+        ((cast previous : { var minY:Float; }).minY = cast (bounds.minY : Float));
+        ((cast previous : { var maxX:Float; }).maxX = cast (bounds.maxX : Float));
+        ((cast previous : { var maxY:Float; }).maxY = cast (bounds.maxY : Float));
         return cast true;
       }
     }

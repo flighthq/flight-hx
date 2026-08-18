@@ -32,10 +32,10 @@ class BoundingSphere {
   }
 
   public static function copyBoundingSphere(out:BoundingSphereLike, source:BoundingSphereLike):Void {
-    ((cast out.center : { var x:Float; }).x = cast ((cast source.center : { var x:Float; }).x : Dynamic));
-    ((cast out.center : { var y:Float; }).y = cast ((cast source.center : { var y:Float; }).y : Dynamic));
-    ((cast out.center : { var z:Float; }).z = cast ((cast source.center : { var z:Float; }).z : Dynamic));
-    (out.radius = cast (source.radius : Dynamic));
+    ((cast out.center : { var x:Float; }).x = cast ((cast source.center : { var x:Float; }).x : Float));
+    ((cast out.center : { var y:Float; }).y = cast ((cast source.center : { var y:Float; }).y : Float));
+    ((cast out.center : { var z:Float; }).z = cast ((cast source.center : { var z:Float; }).z : Float));
+    (out.radius = cast (source.radius : Float));
   }
 
   public static function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):flighthq.types.BoundingSphere {
@@ -60,9 +60,9 @@ class BoundingSphere {
     cz = (cast sphere.center : { var z:Float; }).z;
     r = sphere.radius;
     if ((cast ((cast r : Float) < (cast 0.0 : Float)) : Bool)) {
-      (out.x = cast (cx : Dynamic));
-      (out.y = cast (cy : Dynamic));
-      (out.z = cast (cz : Dynamic));
+      (out.x = cast (cx : Float));
+      (out.y = cast (cy : Float));
+      (out.z = cast (cz : Float));
       return;
     }
     dx = (point.x - cx);
@@ -70,15 +70,15 @@ class BoundingSphere {
     dz = (point.z - cz);
     dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if ((cast _Runtime.strictEquals(dist, 0.0) : Bool)) {
-      (out.x = cast ((cx + r) : Dynamic));
-      (out.y = cast (cy : Dynamic));
-      (out.z = cast (cz : Dynamic));
+      (out.x = cast ((cx + r) : Float));
+      (out.y = cast (cy : Float));
+      (out.z = cast (cz : Float));
       return;
     }
     scale = (r / dist);
-    (out.x = cast ((cx + (dx * scale)) : Dynamic));
-    (out.y = cast ((cy + (dy * scale)) : Dynamic));
-    (out.z = cast ((cz + (dz * scale)) : Dynamic));
+    (out.x = cast ((cx + (dx * scale)) : Float));
+    (out.y = cast ((cy + (dy * scale)) : Float));
+    (out.z = cast ((cz + (dz * scale)) : Float));
   }
 
   public static function isBoundingSphereIntersectingBoundingSphere(a:BoundingSphereLike, b:BoundingSphereLike):Bool {
@@ -113,17 +113,17 @@ class BoundingSphere {
     var newRadius:Float = cast _Runtime.UNDEFINED;
     var t:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast a.radius : Float) < (cast 0.0 : Float)) : Bool)) {
-      ((cast out.center : { var x:Float; }).x = cast ((cast b.center : { var x:Float; }).x : Dynamic));
-      ((cast out.center : { var y:Float; }).y = cast ((cast b.center : { var y:Float; }).y : Dynamic));
-      ((cast out.center : { var z:Float; }).z = cast ((cast b.center : { var z:Float; }).z : Dynamic));
-      (out.radius = cast (b.radius : Dynamic));
+      ((cast out.center : { var x:Float; }).x = cast ((cast b.center : { var x:Float; }).x : Float));
+      ((cast out.center : { var y:Float; }).y = cast ((cast b.center : { var y:Float; }).y : Float));
+      ((cast out.center : { var z:Float; }).z = cast ((cast b.center : { var z:Float; }).z : Float));
+      (out.radius = cast (b.radius : Float));
       return;
     }
     if ((cast ((cast b.radius : Float) < (cast 0.0 : Float)) : Bool)) {
-      ((cast out.center : { var x:Float; }).x = cast ((cast a.center : { var x:Float; }).x : Dynamic));
-      ((cast out.center : { var y:Float; }).y = cast ((cast a.center : { var y:Float; }).y : Dynamic));
-      ((cast out.center : { var z:Float; }).z = cast ((cast a.center : { var z:Float; }).z : Dynamic));
-      (out.radius = cast (a.radius : Dynamic));
+      ((cast out.center : { var x:Float; }).x = cast ((cast a.center : { var x:Float; }).x : Float));
+      ((cast out.center : { var y:Float; }).y = cast ((cast a.center : { var y:Float; }).y : Float));
+      ((cast out.center : { var z:Float; }).z = cast ((cast a.center : { var z:Float; }).z : Float));
+      (out.radius = cast (a.radius : Float));
       return;
     }
     acx = (cast a.center : { var x:Float; }).x;
@@ -139,32 +139,32 @@ class BoundingSphere {
     dz = (bcz - acz);
     dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if ((cast ((cast (dist + br) : Float) <= (cast ar : Float)) : Bool)) {
-      ((cast out.center : { var x:Float; }).x = cast (acx : Dynamic));
-      ((cast out.center : { var y:Float; }).y = cast (acy : Dynamic));
-      ((cast out.center : { var z:Float; }).z = cast (acz : Dynamic));
-      (out.radius = cast (ar : Dynamic));
+      ((cast out.center : { var x:Float; }).x = cast (acx : Float));
+      ((cast out.center : { var y:Float; }).y = cast (acy : Float));
+      ((cast out.center : { var z:Float; }).z = cast (acz : Float));
+      (out.radius = cast (ar : Float));
       return;
     }
     if ((cast ((cast (dist + ar) : Float) <= (cast br : Float)) : Bool)) {
-      ((cast out.center : { var x:Float; }).x = cast (bcx : Dynamic));
-      ((cast out.center : { var y:Float; }).y = cast (bcy : Dynamic));
-      ((cast out.center : { var z:Float; }).z = cast (bcz : Dynamic));
-      (out.radius = cast (br : Dynamic));
+      ((cast out.center : { var x:Float; }).x = cast (bcx : Float));
+      ((cast out.center : { var y:Float; }).y = cast (bcy : Float));
+      ((cast out.center : { var z:Float; }).z = cast (bcz : Float));
+      (out.radius = cast (br : Float));
       return;
     }
     newRadius = (((dist + ar) + br) * 0.5);
     t = ((cast !_Runtime.strictEquals(dist, 0.0) : Bool) ? (cast ((newRadius - ar) / dist) : Dynamic) : (cast 0.0 : Dynamic));
-    ((cast out.center : { var x:Float; }).x = cast ((acx + (dx * t)) : Dynamic));
-    ((cast out.center : { var y:Float; }).y = cast ((acy + (dy * t)) : Dynamic));
-    ((cast out.center : { var z:Float; }).z = cast ((acz + (dz * t)) : Dynamic));
-    (out.radius = cast (newRadius : Dynamic));
+    ((cast out.center : { var x:Float; }).x = cast ((acx + (dx * t)) : Float));
+    ((cast out.center : { var y:Float; }).y = cast ((acy + (dy * t)) : Float));
+    ((cast out.center : { var z:Float; }).z = cast ((acz + (dz * t)) : Float));
+    (out.radius = cast (newRadius : Float));
   }
 
   public static function setBoundingSphere(out:BoundingSphereLike, centerX:Float, centerY:Float, centerZ:Float, radius:Float):Void {
-    ((cast out.center : { var x:Float; }).x = cast (centerX : Dynamic));
-    ((cast out.center : { var y:Float; }).y = cast (centerY : Dynamic));
-    ((cast out.center : { var z:Float; }).z = cast (centerZ : Dynamic));
-    (out.radius = cast (radius : Dynamic));
+    ((cast out.center : { var x:Float; }).x = cast (centerX : Float));
+    ((cast out.center : { var y:Float; }).y = cast (centerY : Float));
+    ((cast out.center : { var z:Float; }).z = cast (centerZ : Float));
+    (out.radius = cast (radius : Float));
   }
 
   public static function setBoundingSphereFromAabb(out:BoundingSphereLike, aabb:AabbLike):Void {
@@ -187,10 +187,10 @@ class BoundingSphere {
     maxY = (cast aabb.max : { var y:Float; }).y;
     maxZ = (cast aabb.max : { var z:Float; }).z;
     if ((cast ((cast ((cast ((cast minX : Float) > (cast maxX : Float)) : Bool) || (cast ((cast minY : Float) > (cast maxY : Float)) : Bool)) : Bool) || (cast ((cast minZ : Float) > (cast maxZ : Float)) : Bool)) : Bool)) {
-      ((cast out.center : { var x:Float; }).x = cast (0.0 : Dynamic));
-      ((cast out.center : { var y:Float; }).y = cast (0.0 : Dynamic));
-      ((cast out.center : { var z:Float; }).z = cast (0.0 : Dynamic));
-      (out.radius = cast (-1.0 : Dynamic));
+      ((cast out.center : { var x:Float; }).x = cast (0.0 : Float));
+      ((cast out.center : { var y:Float; }).y = cast (0.0 : Float));
+      ((cast out.center : { var z:Float; }).z = cast (0.0 : Float));
+      (out.radius = cast (-1.0 : Float));
       return;
     }
     cx = ((minX + maxX) * 0.5);
@@ -199,10 +199,10 @@ class BoundingSphere {
     ex = ((maxX - minX) * 0.5);
     ey = ((maxY - minY) * 0.5);
     ez = ((maxZ - minZ) * 0.5);
-    ((cast out.center : { var x:Float; }).x = cast (cx : Dynamic));
-    ((cast out.center : { var y:Float; }).y = cast (cy : Dynamic));
-    ((cast out.center : { var z:Float; }).z = cast (cz : Dynamic));
-    (out.radius = cast (HxMath.sqrt((((ex * ex) + (ey * ey)) + (ez * ez))) : Dynamic));
+    ((cast out.center : { var x:Float; }).x = cast (cx : Float));
+    ((cast out.center : { var y:Float; }).y = cast (cy : Float));
+    ((cast out.center : { var z:Float; }).z = cast (cz : Float));
+    (out.radius = cast (HxMath.sqrt((((ex * ex) + (ey * ey)) + (ez * ez))) : Float));
   }
 
   public static function transformBoundingSphereByMatrix4(out:BoundingSphereLike, sphere:BoundingSphereLike, m:Matrix4Like):Void {
@@ -230,9 +230,9 @@ class BoundingSphere {
     sy = HxMath.sqrt((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _m : flighthq._internal._Float32Array), (cast 4.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _m : flighthq._internal._Float32Array), (cast 4.0 : Float))) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _m : flighthq._internal._Float32Array), (cast 5.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _m : flighthq._internal._Float32Array), (cast 5.0 : Float)))) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _m : flighthq._internal._Float32Array), (cast 6.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _m : flighthq._internal._Float32Array), (cast 6.0 : Float)))));
     sz = HxMath.sqrt((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _m : flighthq._internal._Float32Array), (cast 8.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _m : flighthq._internal._Float32Array), (cast 8.0 : Float))) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _m : flighthq._internal._Float32Array), (cast 9.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _m : flighthq._internal._Float32Array), (cast 9.0 : Float)))) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _m : flighthq._internal._Float32Array), (cast 10.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _m : flighthq._internal._Float32Array), (cast 10.0 : Float)))));
     maxScale = HxMath.max(HxMath.max(sx, sy), sz);
-    ((cast out.center : { var x:Float; }).x = cast (tcx : Dynamic));
-    ((cast out.center : { var y:Float; }).y = cast (tcy : Dynamic));
-    ((cast out.center : { var z:Float; }).z = cast (tcz : Dynamic));
-    (out.radius = cast (((cast ((cast radius : Float) < (cast 0.0 : Float)) : Bool) ? (cast radius : Dynamic) : (cast (radius * maxScale) : Dynamic)) : Dynamic));
+    ((cast out.center : { var x:Float; }).x = cast (tcx : Float));
+    ((cast out.center : { var y:Float; }).y = cast (tcy : Float));
+    ((cast out.center : { var z:Float; }).z = cast (tcz : Float));
+    (out.radius = cast (((cast ((cast radius : Float) < (cast 0.0 : Float)) : Bool) ? (cast radius : Dynamic) : (cast (radius * maxScale) : Dynamic)) : Float));
   }
 }

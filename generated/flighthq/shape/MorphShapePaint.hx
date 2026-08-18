@@ -191,12 +191,12 @@ class MorphShapePaint {
   }
 
   public static function sampleMatrix__morphShapePaint(out:Matrix, start:Matrix, end:Matrix, progress:Float):Void {
-    (out.a = cast ((cast MorphShapePaint.interpolateNumber__morphShapePaint((cast start.a : Float), (cast end.a : Float), (cast progress : Float)) : Float) : Dynamic));
-    (out.b = cast ((cast MorphShapePaint.interpolateNumber__morphShapePaint((cast start.b : Float), (cast end.b : Float), (cast progress : Float)) : Float) : Dynamic));
-    (out.c = cast ((cast MorphShapePaint.interpolateNumber__morphShapePaint((cast start.c : Float), (cast end.c : Float), (cast progress : Float)) : Float) : Dynamic));
-    (out.d = cast ((cast MorphShapePaint.interpolateNumber__morphShapePaint((cast start.d : Float), (cast end.d : Float), (cast progress : Float)) : Float) : Dynamic));
-    (out.tx = cast ((cast MorphShapePaint.interpolateNumber__morphShapePaint((cast start.tx : Float), (cast end.tx : Float), (cast progress : Float)) : Float) : Dynamic));
-    (out.ty = cast ((cast MorphShapePaint.interpolateNumber__morphShapePaint((cast start.ty : Float), (cast end.ty : Float), (cast progress : Float)) : Float) : Dynamic));
+    (out.a = cast ((cast MorphShapePaint.interpolateNumber__morphShapePaint((cast start.a : Float), (cast end.a : Float), (cast progress : Float)) : Float) : Float));
+    (out.b = cast ((cast MorphShapePaint.interpolateNumber__morphShapePaint((cast start.b : Float), (cast end.b : Float), (cast progress : Float)) : Float) : Float));
+    (out.c = cast ((cast MorphShapePaint.interpolateNumber__morphShapePaint((cast start.c : Float), (cast end.c : Float), (cast progress : Float)) : Float) : Float));
+    (out.d = cast ((cast MorphShapePaint.interpolateNumber__morphShapePaint((cast start.d : Float), (cast end.d : Float), (cast progress : Float)) : Float) : Float));
+    (out.tx = cast ((cast MorphShapePaint.interpolateNumber__morphShapePaint((cast start.tx : Float), (cast end.tx : Float), (cast progress : Float)) : Float) : Float));
+    (out.ty = cast ((cast MorphShapePaint.interpolateNumber__morphShapePaint((cast start.ty : Float), (cast end.ty : Float), (cast progress : Float)) : Float) : Float));
   }
 
   public static function interpolateNumber__morphShapePaint(start:Float, end:Float, progress:Float):Float {

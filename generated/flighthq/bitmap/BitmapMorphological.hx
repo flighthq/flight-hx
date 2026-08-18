@@ -24,11 +24,11 @@ class BitmapMorphological {
     var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     var identity:Float = cast _Runtime.UNDEFINED;
     r = HxMath.max(0.0, HxMath.round(radius));
-    w = _Runtime.field(source, 'width');
-    h = _Runtime.field(source, 'height');
-    bitmapWidth = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
-    bitmapHeight = (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height;
-    data = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    w = source.width;
+    h = source.height;
+    bitmapWidth = (cast source.bitmap : { var width:Float; }).width;
+    bitmapHeight = (cast source.bitmap : { var height:Float; }).height;
+    data = (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     identity = ((cast dilate : Bool) ? (cast 0.0 : Dynamic) : (cast 255.0 : Dynamic));
     {
       var py:Float = 0.0;
@@ -43,11 +43,11 @@ class BitmapMorphological {
             {
               var ky:Float = -r;
               while ((cast ((cast ky : Float) <= (cast r : Float)) : Bool)) {
-                var sy:Float = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'y'), py) + ky)));
+                var sy:Float = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), ((source.y + py) + ky)));
                 {
                   var kx:Float = -r;
                   while ((cast ((cast kx : Float) <= (cast r : Float)) : Bool)) {
-                    var sx:Float = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'x'), px) + kx)));
+                    var sx:Float = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), ((source.x + px) + kx)));
                     var si:Float = (((sy * bitmapWidth) + sx) * 4.0);
                     if ((cast dilate : Bool)) {
                       if ((cast ((cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast si : Float)) : Float) > (cast vR : Float)) : Bool)) { (vR = cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast si : Float)) : Dynamic)); }

@@ -53,8 +53,8 @@ class GetPathNearestPoint {
       }
     }
     if ((cast _Runtime.strictEquals(bestDistSq, HxMath.POSITIVE_INFINITY) : Bool)) { return cast -1.0; }
-    (out.x = cast (bestX : Dynamic));
-    (out.y = cast (bestY : Dynamic));
+    (out.x = cast (bestX : Float));
+    (out.y = cast (bestY : Float));
     return cast HxMath.sqrt(bestDistSq);
     return cast null;
   }

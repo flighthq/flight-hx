@@ -21,18 +21,18 @@ class ParticleEmitterState {
   public static function ensureParticleEmitterStateCapacity(state:flighthq.types.ParticleEmitterState, capacity:Float, hasColorVariance:Bool):Void {
     if ((cast ((cast _Runtime.field(state.lifetimes, 'length') : Float) >= (cast (capacity * 2.0) : Float)) : Bool)) {
       if ((cast ((cast hasColorVariance : Bool) && (cast ((cast _Runtime.field(state.colorBirth, 'length') : Float) < (cast (capacity * 3.0) : Float)) : Bool)) : Bool)) {
-        (state.colorBirth = cast ((cast reserveFloat32Array(state.colorBirth, (cast (capacity * 3.0) : Float)) : flighthq._internal._Float32Array) : Dynamic));
-        (state.colorDeath = cast ((cast reserveFloat32Array(state.colorDeath, (cast (capacity * 3.0) : Float)) : flighthq._internal._Float32Array) : Dynamic));
+        (state.colorBirth = cast ((cast reserveFloat32Array(state.colorBirth, (cast (capacity * 3.0) : Float)) : flighthq._internal._Float32Array) : flighthq._internal._Float32Array));
+        (state.colorDeath = cast ((cast reserveFloat32Array(state.colorDeath, (cast (capacity * 3.0) : Float)) : flighthq._internal._Float32Array) : flighthq._internal._Float32Array));
       }
       return;
     }
-    (state.lifetimes = cast ((cast reserveFloat32Array(state.lifetimes, (cast (capacity * 2.0) : Float)) : flighthq._internal._Float32Array) : Dynamic));
-    (state.velocities = cast ((cast reserveFloat32Array(state.velocities, (cast (capacity * PARTICLE_VELOCITY_STRIDE) : Float)) : flighthq._internal._Float32Array) : Dynamic));
-    (state.scales = cast ((cast reserveFloat32Array(state.scales, (cast capacity : Float)) : flighthq._internal._Float32Array) : Dynamic));
-    (state.rotationSpeeds = cast ((cast reserveFloat32Array(state.rotationSpeeds, (cast capacity : Float)) : flighthq._internal._Float32Array) : Dynamic));
+    (state.lifetimes = cast ((cast reserveFloat32Array(state.lifetimes, (cast (capacity * 2.0) : Float)) : flighthq._internal._Float32Array) : flighthq._internal._Float32Array));
+    (state.velocities = cast ((cast reserveFloat32Array(state.velocities, (cast (capacity * PARTICLE_VELOCITY_STRIDE) : Float)) : flighthq._internal._Float32Array) : flighthq._internal._Float32Array));
+    (state.scales = cast ((cast reserveFloat32Array(state.scales, (cast capacity : Float)) : flighthq._internal._Float32Array) : flighthq._internal._Float32Array));
+    (state.rotationSpeeds = cast ((cast reserveFloat32Array(state.rotationSpeeds, (cast capacity : Float)) : flighthq._internal._Float32Array) : flighthq._internal._Float32Array));
     if ((cast hasColorVariance : Bool)) {
-      (state.colorBirth = cast ((cast reserveFloat32Array(state.colorBirth, (cast (capacity * 3.0) : Float)) : flighthq._internal._Float32Array) : Dynamic));
-      (state.colorDeath = cast ((cast reserveFloat32Array(state.colorDeath, (cast (capacity * 3.0) : Float)) : flighthq._internal._Float32Array) : Dynamic));
+      (state.colorBirth = cast ((cast reserveFloat32Array(state.colorBirth, (cast (capacity * 3.0) : Float)) : flighthq._internal._Float32Array) : flighthq._internal._Float32Array));
+      (state.colorDeath = cast ((cast reserveFloat32Array(state.colorDeath, (cast (capacity * 3.0) : Float)) : flighthq._internal._Float32Array) : flighthq._internal._Float32Array));
     }
   }
 }

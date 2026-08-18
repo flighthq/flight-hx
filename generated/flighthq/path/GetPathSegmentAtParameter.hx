@@ -20,8 +20,8 @@ class GetPathSegmentAtParameter {
     u3 = (u2 * u);
     t2 = (t * t);
     t3 = (t2 * t);
-    (out.x = cast (((((u3 * x0) + (((3.0 * u2) * t) * c1x)) + (((3.0 * u) * t2) * c2x)) + (t3 * x1)) : Dynamic));
-    (out.y = cast (((((u3 * y0) + (((3.0 * u2) * t) * c1y)) + (((3.0 * u) * t2) * c2y)) + (t3 * y1)) : Dynamic));
+    (out.x = cast (((((u3 * x0) + (((3.0 * u2) * t) * c1x)) + (((3.0 * u) * t2) * c2x)) + (t3 * x1)) : Float));
+    (out.y = cast (((((u3 * y0) + (((3.0 * u2) * t) * c1y)) + (((3.0 * u) * t2) * c2y)) + (t3 * y1)) : Float));
     return cast out;
     return cast null;
   }
@@ -33,8 +33,8 @@ class GetPathSegmentAtParameter {
     u = (1.0 - t);
     u2 = (u * u);
     t2 = (t * t);
-    (out.x = cast ((3.0 * (((u2 * (c1x - x0)) + (((2.0 * u) * t) * (c2x - c1x))) + (t2 * (x1 - c2x)))) : Dynamic));
-    (out.y = cast ((3.0 * (((u2 * (c1y - y0)) + (((2.0 * u) * t) * (c2y - c1y))) + (t2 * (y1 - c2y)))) : Dynamic));
+    (out.x = cast ((3.0 * (((u2 * (c1x - x0)) + (((2.0 * u) * t) * (c2x - c1x))) + (t2 * (x1 - c2x)))) : Float));
+    (out.y = cast ((3.0 * (((u2 * (c1y - y0)) + (((2.0 * u) * t) * (c2y - c1y))) + (t2 * (y1 - c2y)))) : Float));
     return cast out;
     return cast null;
   }
@@ -52,8 +52,8 @@ class GetPathSegmentAtParameter {
   public static function getQuadraticBezierPoint(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
     var u:Float = cast _Runtime.UNDEFINED;
     u = (1.0 - t);
-    (out.x = cast (((((u * u) * x0) + (((2.0 * u) * t) * cx)) + ((t * t) * x1)) : Dynamic));
-    (out.y = cast (((((u * u) * y0) + (((2.0 * u) * t) * cy)) + ((t * t) * y1)) : Dynamic));
+    (out.x = cast (((((u * u) * x0) + (((2.0 * u) * t) * cx)) + ((t * t) * x1)) : Float));
+    (out.y = cast (((((u * u) * y0) + (((2.0 * u) * t) * cy)) + ((t * t) * y1)) : Float));
     return cast out;
     return cast null;
   }
@@ -61,8 +61,8 @@ class GetPathSegmentAtParameter {
   public static function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
     var u:Float = cast _Runtime.UNDEFINED;
     u = (1.0 - t);
-    (out.x = cast ((2.0 * ((u * (cx - x0)) + (t * (x1 - cx)))) : Dynamic));
-    (out.y = cast ((2.0 * ((u * (cy - y0)) + (t * (y1 - cy)))) : Dynamic));
+    (out.x = cast ((2.0 * ((u * (cx - x0)) + (t * (x1 - cx)))) : Float));
+    (out.y = cast ((2.0 * ((u * (cy - y0)) + (t * (y1 - cy)))) : Float));
     return cast out;
     return cast null;
   }
@@ -98,11 +98,11 @@ class GetPathSegmentAtParameter {
           (di = cast ((di + 2.0) : Dynamic));
           if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
             if ((cast wantTangent : Bool)) {
-              (out.x = cast ((x1 - x) : Dynamic));
-              (out.y = cast ((y1 - y) : Dynamic));
+              (out.x = cast ((x1 - x) : Float));
+              (out.y = cast ((y1 - y) : Float));
             } else {
-              (out.x = cast ((x + (t * (x1 - x))) : Dynamic));
-              (out.y = cast ((y + (t * (y1 - y))) : Dynamic));
+              (out.x = cast ((x + (t * (x1 - x))) : Float));
+              (out.y = cast ((y + (t * (y1 - y))) : Float));
             }
             return cast true;
           }
@@ -115,11 +115,11 @@ class GetPathSegmentAtParameter {
           (di = cast ((di + 4.0) : Dynamic));
           if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
             if ((cast wantTangent : Bool)) {
-              (out.x = cast ((x1 - x) : Dynamic));
-              (out.y = cast ((y1 - y) : Dynamic));
+              (out.x = cast ((x1 - x) : Float));
+              (out.y = cast ((y1 - y) : Float));
             } else {
-              (out.x = cast ((x + (t * (x1 - x))) : Dynamic));
-              (out.y = cast ((y + (t * (y1 - y))) : Dynamic));
+              (out.x = cast ((x + (t * (x1 - x))) : Float));
+              (out.y = cast ((y + (t * (y1 - y))) : Float));
             }
             return cast true;
           }

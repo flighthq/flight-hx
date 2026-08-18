@@ -10,9 +10,9 @@ class Vector3Pool {
   public static function acquireEmptyVector3():Vector3 {
     var v:Vector3 = cast _Runtime.UNDEFINED;
     v = (cast acquireVector3() : Vector3);
-    (v.x = cast (0.0 : Dynamic));
-    (v.y = cast (0.0 : Dynamic));
-    (v.z = cast (0.0 : Dynamic));
+    (v.x = cast (0.0 : Float));
+    (v.y = cast (0.0 : Float));
+    (v.z = cast (0.0 : Float));
     return cast v;
     return cast null;
   }

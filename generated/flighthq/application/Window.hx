@@ -118,8 +118,8 @@ class Window {
         var x:Float = flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenX');
         var y:Float = flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenY');
         if ((cast ((cast !_Runtime.strictEquals(win.x, x) : Bool) || (cast !_Runtime.strictEquals(win.y, y) : Bool)) : Bool)) {
-          (win.x = cast (x : Dynamic));
-          (win.y = cast (y : Dynamic));
+          (win.x = cast (x : Float));
+          (win.y = cast (y : Float));
           _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMove]]), 1);
         }
       }
@@ -180,9 +180,9 @@ class Window {
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Window.kResize__window)), cast ([] : Array<Dynamic>));
     observer = _Runtime.construct(flighthq._internal._HostValueLut.get('ResizeObserver'), [function(entries:Array<flighthq._internal.dom.ResizeObserverEntry>, __unused0:flighthq._internal.dom.ResizeObserver):Void {
       for (entry in _Runtime.iterable(entries)) {
-        (win.width = cast (HxMath.round((cast (cast entry : flighthq._internal.dom.ResizeObserverEntry).contentRect : flighthq._internal.dom.DOMRectReadOnly).width) : Dynamic));
-        (win.height = cast (HxMath.round((cast (cast entry : flighthq._internal.dom.ResizeObserverEntry).contentRect : flighthq._internal.dom.DOMRectReadOnly).height) : Dynamic));
-        (win.devicePixelRatio = cast (_Runtime.orValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio'), function():Dynamic return cast 1.0) : Dynamic));
+        (win.width = cast (HxMath.round((cast (cast entry : flighthq._internal.dom.ResizeObserverEntry).contentRect : flighthq._internal.dom.DOMRectReadOnly).width) : Float));
+        (win.height = cast (HxMath.round((cast (cast entry : flighthq._internal.dom.ResizeObserverEntry).contentRect : flighthq._internal.dom.DOMRectReadOnly).height) : Float));
+        (win.devicePixelRatio = cast (_Runtime.orValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'devicePixelRatio'), function():Dynamic return cast 1.0) : Float));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onResize]]), 1);
       }
     }]);
@@ -221,12 +221,12 @@ class Window {
   public static function computeWindowDeviceTransform(win:ApplicationWindow, out:Matrix):Matrix {
     var scale:Float = cast _Runtime.UNDEFINED;
     scale = win.devicePixelRatio;
-    (out.a = cast (scale : Dynamic));
-    (out.b = cast (0.0 : Dynamic));
-    (out.c = cast (0.0 : Dynamic));
-    (out.d = cast (scale : Dynamic));
-    (out.tx = cast (0.0 : Dynamic));
-    (out.ty = cast (0.0 : Dynamic));
+    (out.a = cast (scale : Float));
+    (out.b = cast (0.0 : Float));
+    (out.c = cast (0.0 : Float));
+    (out.d = cast (scale : Float));
+    (out.tx = cast (0.0 : Float));
+    (out.ty = cast (0.0 : Float));
     return cast out;
     return cast null;
   }
@@ -266,16 +266,16 @@ class Window {
       }
     }, getBounds: function(win:ApplicationWindow, out:WindowBounds):WindowBounds {
       if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
-        (out.x = cast (win.x : Dynamic));
-        (out.y = cast (win.y : Dynamic));
-        (out.width = cast (win.width : Dynamic));
-        (out.height = cast (win.height : Dynamic));
+        (out.x = cast (win.x : Float));
+        (out.y = cast (win.y : Float));
+        (out.width = cast (win.width : Float));
+        (out.height = cast (win.height : Float));
         return cast out;
       }
-      (out.x = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenX'), function():Dynamic return cast win.x) : Dynamic));
-      (out.y = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenY'), function():Dynamic return cast win.y) : Dynamic));
-      (out.width = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerWidth'), function():Dynamic return cast win.width) : Dynamic));
-      (out.height = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight'), function():Dynamic return cast win.height) : Dynamic));
+      (out.x = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenX'), function():Dynamic return cast win.x) : Float));
+      (out.y = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenY'), function():Dynamic return cast win.y) : Float));
+      (out.width = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerWidth'), function():Dynamic return cast win.width) : Float));
+      (out.height = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight'), function():Dynamic return cast win.height) : Float));
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, minimize: function():Void {
@@ -440,7 +440,7 @@ class Window {
   }
 
   public static function focusWindow(win:ApplicationWindow):Void {
-    (win.focused = cast (true : Dynamic));
+    (win.focused = cast (true : Bool));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).focus(({ final __callArgument37:Dynamic = win; __callArgument37; }));
   }
 
@@ -463,7 +463,7 @@ class Window {
 
   public static function hideWindow(win:ApplicationWindow):Void {
     if ((cast !(cast win.visible : Bool) : Bool)) { return; }
-    (win.visible = cast (false : Dynamic));
+    (win.visible = cast (false : Bool));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).hide(({ final __callArgument39:Dynamic = win; __callArgument39; }));
   }
 
@@ -477,14 +477,14 @@ class Window {
 
   public static function maximizeWindow(win:ApplicationWindow):Void {
     if ((cast win.maximized : Bool)) { return; }
-    (win.maximized = cast (true : Dynamic));
+    (win.maximized = cast (true : Bool));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).maximize(({ final __callArgument40:Dynamic = win; __callArgument40; }));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMaximize]]), 1);
   }
 
   public static function minimizeWindow(win:ApplicationWindow):Void {
     if ((cast win.minimized : Bool)) { return; }
-    (win.minimized = cast (true : Dynamic));
+    (win.minimized = cast (true : Bool));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).minimize(({ final __callArgument41:Dynamic = win; __callArgument41; }));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMinimize]]), 1);
   }
@@ -492,21 +492,21 @@ class Window {
   public static function openWindow(win:ApplicationWindow, ?options:WindowOptions):Bool {
     if (options == null) options = cast ({  } : Dynamic);
     var result:Bool = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(options.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.title = cast (options.title : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.x, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.x = cast (options.x : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.y, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.y = cast (options.y : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.width, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.width = cast (options.width : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.height, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.height = cast (options.height : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.resizable, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.resizable = cast (options.resizable : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.alwaysOnTop, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.alwaysOnTop = cast (options.alwaysOnTop : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.fullscreen, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.fullscreen = cast (options.fullscreen : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.minimized, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.minimized = cast (options.minimized : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.maximized, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.maximized = cast (options.maximized : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.visible = cast (options.visible : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.minWidth, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.minWidth = cast (options.minWidth : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.minHeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.minHeight = cast (options.minHeight : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.maxWidth, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.maxWidth = cast (options.maxWidth : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(options.maxHeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.maxHeight = cast (options.maxHeight : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(options.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.title = cast (options.title : String)); }
+    if ((cast !_Runtime.strictEquals(options.x, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.x = cast (options.x : Float)); }
+    if ((cast !_Runtime.strictEquals(options.y, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.y = cast (options.y : Float)); }
+    if ((cast !_Runtime.strictEquals(options.width, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.width = cast (options.width : Float)); }
+    if ((cast !_Runtime.strictEquals(options.height, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.height = cast (options.height : Float)); }
+    if ((cast !_Runtime.strictEquals(options.resizable, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.resizable = cast (options.resizable : Bool)); }
+    if ((cast !_Runtime.strictEquals(options.alwaysOnTop, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.alwaysOnTop = cast (options.alwaysOnTop : Bool)); }
+    if ((cast !_Runtime.strictEquals(options.fullscreen, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.fullscreen = cast (options.fullscreen : Bool)); }
+    if ((cast !_Runtime.strictEquals(options.minimized, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.minimized = cast (options.minimized : Bool)); }
+    if ((cast !_Runtime.strictEquals(options.maximized, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.maximized = cast (options.maximized : Bool)); }
+    if ((cast !_Runtime.strictEquals(options.visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.visible = cast (options.visible : Bool)); }
+    if ((cast !_Runtime.strictEquals(options.minWidth, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.minWidth = cast (options.minWidth : Float)); }
+    if ((cast !_Runtime.strictEquals(options.minHeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.minHeight = cast (options.minHeight : Float)); }
+    if ((cast !_Runtime.strictEquals(options.maxWidth, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.maxWidth = cast (options.maxWidth : Float)); }
+    if ((cast !_Runtime.strictEquals(options.maxHeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.maxHeight = cast (options.maxHeight : Float)); }
     result = (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).open(({ final __callArgument42:Dynamic = win; __callArgument42; }), ({ final __callArgument43:Dynamic = options; __callArgument43; }));
     if ((cast _Runtime.strictEquals(options.center, true) : Bool)) { centerWindow(({ final __callArgument44:Dynamic = win; __callArgument44; })); }
     return cast result;
@@ -540,14 +540,14 @@ class Window {
 
   public static function restoreWindow(win:ApplicationWindow):Void {
     if ((cast ((cast !(cast win.minimized : Bool) : Bool) && (cast !(cast win.maximized : Bool) : Bool)) : Bool)) { return; }
-    (win.minimized = cast (false : Dynamic));
-    (win.maximized = cast (false : Dynamic));
+    (win.minimized = cast (false : Bool));
+    (win.maximized = cast (false : Bool));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).restore(({ final __callArgument47:Dynamic = win; __callArgument47; }));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onRestore]]), 1);
   }
 
   public static function setWindowAlwaysOnTop(win:ApplicationWindow, alwaysOnTop:Bool):Void {
-    (win.alwaysOnTop = cast (alwaysOnTop : Dynamic));
+    (win.alwaysOnTop = cast (alwaysOnTop : Bool));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setAlwaysOnTop(({ final __callArgument48:Dynamic = win; __callArgument48; }), (cast alwaysOnTop : Bool));
   }
 
@@ -562,7 +562,7 @@ class Window {
 
   public static function setWindowFullscreen(win:ApplicationWindow, fullscreen:Bool):Void {
     if ((cast _Runtime.strictEquals(win.fullscreen, fullscreen) : Bool)) { return; }
-    (win.fullscreen = cast (fullscreen : Dynamic));
+    (win.fullscreen = cast (fullscreen : Bool));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setFullscreen(({ final __callArgument50:Dynamic = win; __callArgument50; }), (cast fullscreen : Bool));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFullscreenChanged]]), 1);
   }
@@ -572,13 +572,13 @@ class Window {
   }
 
   public static function setWindowIcon(win:ApplicationWindow, icon:String):Void {
-    (win.icon = cast (icon : Dynamic));
+    (win.icon = cast (icon : String));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setIcon(({ final __callArgument52:Dynamic = win; __callArgument52; }), (cast icon : String));
   }
 
   public static function setWindowMaximumSize(win:ApplicationWindow, width:Float, height:Float):Void {
-    (win.maxWidth = cast (width : Dynamic));
-    (win.maxHeight = cast (height : Dynamic));
+    (win.maxWidth = cast (width : Float));
+    (win.maxHeight = cast (height : Float));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setMaximumSize(({ final __callArgument53:Dynamic = win; __callArgument53; }), (cast width : Float), (cast height : Float));
   }
 
@@ -587,13 +587,13 @@ class Window {
   }
 
   public static function setWindowMinimumSize(win:ApplicationWindow, width:Float, height:Float):Void {
-    (win.minWidth = cast (width : Dynamic));
-    (win.minHeight = cast (height : Dynamic));
+    (win.minWidth = cast (width : Float));
+    (win.minHeight = cast (height : Float));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setMinimumSize(({ final __callArgument55:Dynamic = win; __callArgument55; }), (cast width : Float), (cast height : Float));
   }
 
   public static function setWindowOpacity(win:ApplicationWindow, opacity:Float):Void {
-    (win.opacity = cast (opacity : Dynamic));
+    (win.opacity = cast (opacity : Float));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setOpacity(({ final __callArgument56:Dynamic = win; __callArgument56; }), (cast opacity : Float));
   }
 
@@ -602,8 +602,8 @@ class Window {
   }
 
   public static function setWindowPosition(win:ApplicationWindow, x:Float, y:Float):Void {
-    (win.x = cast (x : Dynamic));
-    (win.y = cast (y : Dynamic));
+    (win.x = cast (x : Float));
+    (win.y = cast (y : Float));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setPosition(({ final __callArgument59:Dynamic = win; __callArgument59; }), (cast x : Float), (cast y : Float));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMove]]), 1);
   }
@@ -613,30 +613,30 @@ class Window {
   }
 
   public static function setWindowResizable(win:ApplicationWindow, resizable:Bool):Void {
-    (win.resizable = cast (resizable : Dynamic));
+    (win.resizable = cast (resizable : Bool));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setResizable(({ final __callArgument61:Dynamic = win; __callArgument61; }), (cast resizable : Bool));
   }
 
   public static function setWindowSize(win:ApplicationWindow, width:Float, height:Float):Void {
-    (win.width = cast (width : Dynamic));
-    (win.height = cast (height : Dynamic));
+    (win.width = cast (width : Float));
+    (win.height = cast (height : Float));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setSize(({ final __callArgument62:Dynamic = win; __callArgument62; }), (cast width : Float), (cast height : Float));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onResize]]), 1);
   }
 
   public static function setWindowSkipTaskbar(win:ApplicationWindow, skip:Bool):Void {
-    (win.skipTaskbar = cast (skip : Dynamic));
+    (win.skipTaskbar = cast (skip : Bool));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setSkipTaskbar(({ final __callArgument63:Dynamic = win; __callArgument63; }), (cast skip : Bool));
   }
 
   public static function setWindowTitle(win:ApplicationWindow, title:String):Void {
-    (win.title = cast (title : Dynamic));
+    (win.title = cast (title : String));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setTitle(({ final __callArgument64:Dynamic = win; __callArgument64; }), (cast title : String));
   }
 
   public static function showWindow(win:ApplicationWindow):Void {
     if ((cast win.visible : Bool)) { return; }
-    (win.visible = cast (true : Dynamic));
+    (win.visible = cast (true : Bool));
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).show(({ final __callArgument65:Dynamic = win; __callArgument65; }));
   }
 

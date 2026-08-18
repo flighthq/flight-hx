@@ -210,8 +210,8 @@ class WgpuCache {
     target = (cast ensureWgpuRenderCacheTarget(({ final __callArgument23:Dynamic = screenState; __callArgument23; }), ({ final __callArgument24:Dynamic = cache; __callArgument24; }), (cast width : Float), (cast height : Float)) : WgpuRenderTarget);
     computeScene2DRenderTargetTransform(({ final __callArgument25:Dynamic = WgpuCache._renderTransform__wgpuCache; __callArgument25; }), ({ final __callArgument26:Dynamic = source; __callArgument26; }), ({ final __callArgument27:Dynamic = WgpuCache._bounds__wgpuCache; __callArgument27; }), (cast padding : Float), (cast padding : Float));
     computeRenderCacheTransform(({ final __callArgument28:Dynamic = (cast cache : RenderCache).transform; __callArgument28; }), ({ final __callArgument29:Dynamic = WgpuCache._bounds__wgpuCache; __callArgument29; }), (cast padding : Float), (cast padding : Float));
-    (WgpuCache._yInvert__wgpuCache.d = cast (-1.0 : Dynamic));
-    (WgpuCache._yInvert__wgpuCache.ty = cast ((cast target : WgpuRenderTarget).height : Dynamic));
+    (WgpuCache._yInvert__wgpuCache.d = cast (-1.0 : Float));
+    (WgpuCache._yInvert__wgpuCache.ty = cast ((cast target : WgpuRenderTarget).height : Float));
     multiplyMatrix(({ final __callArgument30:Dynamic = WgpuCache._bakeTransform__wgpuCache; __callArgument30; }), ({ final __callArgument31:Dynamic = WgpuCache._yInvert__wgpuCache; __callArgument31; }), ({ final __callArgument32:Dynamic = WgpuCache._renderTransform__wgpuCache; __callArgument32; }));
     ((cast cacheRuntime : WgpuRenderStateRuntime).quadBatchWriterBufferCursor = 0.0);
     beginWgpuRenderPass(({ final __callArgument33:Dynamic = cacheState; __callArgument33; }), ({ final __callArgument34:Dynamic = target; __callArgument34; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);

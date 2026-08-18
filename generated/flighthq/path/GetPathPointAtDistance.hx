@@ -43,8 +43,8 @@ class GetPathPointAtDistance {
         var contour:Array<Float> = flighthq._internal._StaticIndex.readArray(contours, ci);
         if ((cast ((cast _Runtime.field(contour, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { ci++; continue; }
         if ((cast ((cast remaining : Float) <= (cast 0.0 : Float)) : Bool)) {
-          (out.x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 0.0 : Float)) : Dynamic));
-          (out.y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 1.0 : Float)) : Dynamic));
+          (out.x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 0.0 : Float)) : Float));
+          (out.y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast 1.0 : Float)) : Float));
           return cast true;
         }
         {
@@ -55,8 +55,8 @@ class GetPathPointAtDistance {
             var segLen:Float = HxMath.sqrt(((dx * dx) + (dy * dy)));
             if ((cast ((cast remaining : Float) <= (cast segLen : Float)) : Bool)) {
               var t:Float = ((cast ((cast segLen : Float) > (cast 0.0 : Float)) : Bool) ? (cast (remaining / segLen) : Dynamic) : (cast 0.0 : Dynamic));
-              (out.x = cast ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i - 2.0) : Float)) + (t * dx)) : Dynamic));
-              (out.y = cast ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i - 1.0) : Float)) + (t * dy)) : Dynamic));
+              (out.x = cast ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i - 2.0) : Float)) + (t * dx)) : Float));
+              (out.y = cast ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast contour : Array<Float>), (cast (i - 1.0) : Float)) + (t * dy)) : Float));
               return cast true;
             }
             (remaining = cast ((remaining - segLen) : Dynamic));
@@ -67,8 +67,8 @@ class GetPathPointAtDistance {
       }
     }
     last = flighthq._internal._StaticIndex.readArray(contours, _Runtime.subtractNumbers(_Runtime.field(contours, 'length'), 1.0));
-    (out.x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast last : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(last, 'length'), 2.0) : Float)) : Dynamic));
-    (out.y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast last : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(last, 'length'), 1.0) : Float)) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast last : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(last, 'length'), 2.0) : Float)) : Float));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast last : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(last, 'length'), 1.0) : Float)) : Float));
     return cast true;
     return cast null;
   }
@@ -78,8 +78,8 @@ class GetPathPointAtDistance {
     var lastTx:Float = cast _Runtime.UNDEFINED;
     var lastTy:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool)) {
-      (out.x = cast (1.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
+      (out.x = cast (1.0 : Float));
+      (out.y = cast (0.0 : Float));
       return cast false;
     }
     remaining = distance;
@@ -102,8 +102,8 @@ class GetPathPointAtDistance {
               (lastTy = cast ((dy * invLen) : Dynamic));
             }
             if ((cast ((cast remaining : Float) <= (cast segLen : Float)) : Bool)) {
-              (out.x = cast (lastTx : Dynamic));
-              (out.y = cast (lastTy : Dynamic));
+              (out.x = cast (lastTx : Float));
+              (out.y = cast (lastTy : Float));
               return cast true;
             }
             (remaining = cast ((remaining - segLen) : Dynamic));
@@ -113,8 +113,8 @@ class GetPathPointAtDistance {
         ci++;
       }
     }
-    (out.x = cast (lastTx : Dynamic));
-    (out.y = cast (lastTy : Dynamic));
+    (out.x = cast (lastTx : Float));
+    (out.y = cast (lastTy : Float));
     return cast true;
     return cast null;
   }

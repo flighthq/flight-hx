@@ -368,12 +368,12 @@ class Matrix4 {
     sz = HxMath.sqrt((((m20 * m20) + (m21 * m21)) + (m22 * m22)));
     det = (((m00 * ((m11 * m22) - (m12 * m21))) - (m10 * ((m01 * m22) - (m02 * m21)))) + (m20 * ((m01 * m12) - (m02 * m11))));
     if ((cast ((cast det : Float) < (cast 0.0 : Float)) : Bool)) { (sx = cast (-sx : Dynamic)); }
-    (outPosition.x = cast (tx : Dynamic));
-    (outPosition.y = cast (ty : Dynamic));
-    (outPosition.z = cast (tz : Dynamic));
-    (outScale.x = cast (sx : Dynamic));
-    (outScale.y = cast (sy : Dynamic));
-    (outScale.z = cast (sz : Dynamic));
+    (outPosition.x = cast (tx : Float));
+    (outPosition.y = cast (ty : Float));
+    (outPosition.z = cast (tz : Float));
+    (outScale.x = cast (sx : Float));
+    (outScale.y = cast (sy : Float));
+    (outScale.z = cast (sz : Float));
     invSx = ((cast !_Runtime.strictEquals(sx, 0.0) : Bool) ? (cast (1.0 / sx) : Dynamic) : (cast 0.0 : Dynamic));
     invSy = ((cast !_Runtime.strictEquals(sy, 0.0) : Bool) ? (cast (1.0 / sy) : Dynamic) : (cast 0.0 : Dynamic));
     invSz = ((cast !_Runtime.strictEquals(sz, 0.0) : Bool) ? (cast (1.0 / sz) : Dynamic) : (cast 0.0 : Dynamic));
@@ -389,28 +389,28 @@ class Matrix4 {
     trace = ((r00 + r11) + r22);
     if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
       var s:Float = _Runtime.divideNumbers(0.5, HxMath.sqrt((trace + 1.0)));
-      (outRotation.w = cast ((0.25 / s) : Dynamic));
-      (outRotation.x = cast (((r12 - r21) * s) : Dynamic));
-      (outRotation.y = cast (((r20 - r02) * s) : Dynamic));
-      (outRotation.z = cast (((r01 - r10) * s) : Dynamic));
+      (outRotation.w = cast ((0.25 / s) : Float));
+      (outRotation.x = cast (((r12 - r21) * s) : Float));
+      (outRotation.y = cast (((r20 - r02) * s) : Float));
+      (outRotation.z = cast (((r01 - r10) * s) : Float));
     } else { if ((cast ((cast ((cast r00 : Float) > (cast r11 : Float)) : Bool) && (cast ((cast r00 : Float) > (cast r22 : Float)) : Bool)) : Bool)) {
       var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r00) - r11) - r22)));
-      (outRotation.w = cast (((r12 - r21) / s) : Dynamic));
-      (outRotation.x = cast ((0.25 * s) : Dynamic));
-      (outRotation.y = cast (((r10 + r01) / s) : Dynamic));
-      (outRotation.z = cast (((r20 + r02) / s) : Dynamic));
+      (outRotation.w = cast (((r12 - r21) / s) : Float));
+      (outRotation.x = cast ((0.25 * s) : Float));
+      (outRotation.y = cast (((r10 + r01) / s) : Float));
+      (outRotation.z = cast (((r20 + r02) / s) : Float));
     } else { if ((cast ((cast r11 : Float) > (cast r22 : Float)) : Bool)) {
       var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r11) - r00) - r22)));
-      (outRotation.w = cast (((r20 - r02) / s) : Dynamic));
-      (outRotation.x = cast (((r10 + r01) / s) : Dynamic));
-      (outRotation.y = cast ((0.25 * s) : Dynamic));
-      (outRotation.z = cast (((r21 + r12) / s) : Dynamic));
+      (outRotation.w = cast (((r20 - r02) / s) : Float));
+      (outRotation.x = cast (((r10 + r01) / s) : Float));
+      (outRotation.y = cast ((0.25 * s) : Float));
+      (outRotation.z = cast (((r21 + r12) / s) : Float));
     } else {
       var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r22) - r00) - r11)));
-      (outRotation.w = cast (((r01 - r10) / s) : Dynamic));
-      (outRotation.x = cast (((r20 + r02) / s) : Dynamic));
-      (outRotation.y = cast (((r21 + r12) / s) : Dynamic));
-      (outRotation.z = cast ((0.25 * s) : Dynamic));
+      (outRotation.w = cast (((r01 - r10) / s) : Float));
+      (outRotation.x = cast (((r20 + r02) / s) : Float));
+      (outRotation.y = cast (((r21 + r12) / s) : Float));
+      (outRotation.z = cast ((0.25 * s) : Float));
     } } }
   }
 
@@ -443,9 +443,9 @@ class Matrix4 {
   public static function getMatrix4Position(out:Vector3Like, source:Matrix4Like):Void {
     var _source:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     _source = source.m;
-    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 12.0 : Float)) : Dynamic));
-    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 13.0 : Float)) : Dynamic));
-    (out.z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 14.0 : Float)) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 12.0 : Float)) : Float));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 13.0 : Float)) : Float));
+    (out.z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 14.0 : Float)) : Float));
   }
 
   public static function interpolateMatrix4(out:Matrix4Like, a:Matrix4Like, b:Matrix4Like, t:Float):Void {
@@ -548,9 +548,9 @@ class Matrix4 {
     x = point.x;
     y = point.y;
     z = point.z;
-    (out.x = cast (((((x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 0.0 : Float))) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 4.0 : Float)))) + (z * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 8.0 : Float)))) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 12.0 : Float))) : Dynamic));
-    (out.y = cast (((((x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 1.0 : Float))) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 5.0 : Float)))) + (z * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 9.0 : Float)))) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 13.0 : Float))) : Dynamic));
-    (out.z = cast (((((x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 2.0 : Float))) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 6.0 : Float)))) + (z * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 10.0 : Float)))) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 14.0 : Float))) : Dynamic));
+    (out.x = cast (((((x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 0.0 : Float))) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 4.0 : Float)))) + (z * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 8.0 : Float)))) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 12.0 : Float))) : Float));
+    (out.y = cast (((((x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 1.0 : Float))) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 5.0 : Float)))) + (z * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 9.0 : Float)))) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 13.0 : Float))) : Float));
+    (out.z = cast (((((x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 2.0 : Float))) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 6.0 : Float)))) + (z * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 10.0 : Float)))) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flighthq._internal._Float32Array), (cast 14.0 : Float))) : Float));
   }
 
   public static function matrix4TransformVector(out:Vector4Like, source:Matrix4Like, vector:Vector4Like):Void {

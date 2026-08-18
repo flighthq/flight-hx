@@ -46,9 +46,9 @@ class TextLabelLayout {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
     layout = (cast getTextLayout(({ final __callArgument8:Dynamic = source; __callArgument8; })) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
-      (out.height = cast (0.0 : Dynamic));
-      (out.numLines = cast (0.0 : Dynamic));
-      (out.width = cast (0.0 : Dynamic));
+      (out.height = cast (0.0 : Float));
+      (out.numLines = cast (0.0 : Float));
+      (out.width = cast (0.0 : Float));
       return;
     }
     getTextMetrics(({ final __callArgument9:Dynamic = out; __callArgument9; }), ({ final __callArgument10:Dynamic = layout; __callArgument10; }));

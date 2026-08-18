@@ -60,10 +60,10 @@ class Statusbar {
       return;
     }
     next = _Runtime.coalesce(Statusbar._applied__statusbar, function():Dynamic return cast (cast createStatusBarInfo() : StatusBarInfo));
-    if ((cast !_Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (next.style = cast (style : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (next.visible = cast (visible : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (next.color = cast (color : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (next.overlaysContent = cast (overlaysContent : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (next.style = cast (style : StatusBarStyle)); }
+    if ((cast !_Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (next.visible = cast (visible : Bool)); }
+    if ((cast !_Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (next.color = cast (color : Float)); }
+    if ((cast !_Runtime.strictEquals(overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (next.overlaysContent = cast (overlaysContent : Bool)); }
     (Statusbar._applied__statusbar = cast (next : Dynamic));
   }
 
@@ -129,11 +129,11 @@ class Statusbar {
   @:noCompletion
   public static function createWebStatusBarBackend():StatusBarBackend {
     return cast { getInfo: function(out:StatusBarInfo):StatusBarInfo {
-      (out.color = cast ((cast Statusbar._webReadThemeColor__statusbar() : Float) : Dynamic));
-      (out.height = cast (-1.0 : Dynamic));
-      (out.overlaysContent = cast (false : Dynamic));
-      (out.style = cast ('default' : Dynamic));
-      (out.visible = cast (true : Dynamic));
+      (out.color = cast ((cast Statusbar._webReadThemeColor__statusbar() : Float) : Float));
+      (out.height = cast (-1.0 : Float));
+      (out.overlaysContent = cast (false : Bool));
+      (out.style = cast ('default' : StatusBarStyle));
+      (out.visible = cast (true : Bool));
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, setBackgroundColor: function(color:Float, ?_animated:Bool):Void {

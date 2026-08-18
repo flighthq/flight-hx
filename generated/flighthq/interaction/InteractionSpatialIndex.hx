@@ -65,10 +65,10 @@ class InteractionSpatialIndex {
       var rank:Float = 0.0;
       while ((cast ((cast rank : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
         var bounds:Rectangle = (cast getNodeWorldBoundsRectangle((cast (cast flighthq._internal._StaticIndex.readArray(nodes, rank) : Node2D) : Dynamic)) : Rectangle);
-        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minX = cast (bounds.x : Dynamic));
-        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minY = cast (bounds.y : Dynamic));
-        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxX = cast ((bounds.x + bounds.width) : Dynamic));
-        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxY = cast ((bounds.y + bounds.height) : Dynamic));
+        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minX = cast (bounds.x : Float));
+        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minY = cast (bounds.y : Float));
+        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxX = cast ((bounds.x + bounds.width) : Float));
+        (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxY = cast ((bounds.y + bounds.height) : Float));
         (cast insertSpatialObject(({ final __callArgument6:Dynamic = index; __callArgument6; }), (cast (cast rank : SpatialObjectId) : Float), ({ final __callArgument7:Dynamic = InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex; __callArgument7; })) : Bool);
         rank++;
       }

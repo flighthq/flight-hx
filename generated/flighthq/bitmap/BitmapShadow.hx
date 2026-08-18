@@ -17,13 +17,13 @@ class BitmapShadow {
   public static function dropShadowBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapDropShadowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     BitmapShadow.tintBitmapAlphaMask__bitmapShadow(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 255.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0) : Float));
-    BitmapShadow.applyBlurPasses__bitmapShadow(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = scratch; __callArgument3; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), ({ final __callArgument4:Dynamic = options; __callArgument4; }));
+    BitmapShadow.applyBlurPasses__bitmapShadow(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = scratch; __callArgument3; }), (cast source.width : Float), (cast source.height : Float), ({ final __callArgument4:Dynamic = options; __callArgument4; }));
   }
 
   public static function glowBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapGlowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     BitmapShadow.tintBitmapAlphaMask__bitmapShadow(({ final __callArgument5:Dynamic = out; __callArgument5; }), ({ final __callArgument6:Dynamic = source; __callArgument6; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 4278190335.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0) : Float));
-    BitmapShadow.applyBlurPasses__bitmapShadow(({ final __callArgument7:Dynamic = out; __callArgument7; }), ({ final __callArgument8:Dynamic = scratch; __callArgument8; }), (cast _Runtime.field(source, 'width') : Float), (cast _Runtime.field(source, 'height') : Float), ({ final __callArgument9:Dynamic = options; __callArgument9; }));
+    BitmapShadow.applyBlurPasses__bitmapShadow(({ final __callArgument7:Dynamic = out; __callArgument7; }), ({ final __callArgument8:Dynamic = scratch; __callArgument8; }), (cast source.width : Float), (cast source.height : Float), ({ final __callArgument9:Dynamic = options; __callArgument9; }));
   }
 
   public static function innerGlowBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapInnerGlowOptions):Void {
@@ -78,8 +78,8 @@ class BitmapShadow {
     var cb:Float = cast _Runtime.UNDEFINED;
     var ca:Float = cast _Runtime.UNDEFINED;
     var scale:Float = cast _Runtime.UNDEFINED;
-    w = _Runtime.field(source, 'width');
-    h = _Runtime.field(source, 'height');
+    w = source.width;
+    h = source.height;
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
@@ -127,10 +127,10 @@ class BitmapShadow {
   public static function readSourceAlpha__bitmapShadow(source:BitmapRegion, px:Float, py:Float):Float {
     var sx:Float = cast _Runtime.UNDEFINED;
     var sy:Float = cast _Runtime.UNDEFINED;
-    sx = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
-    sy = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
-    if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data : flighthq._internal._UInt8ClampedArray), (cast ((((sy * (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width) + sx) * 4.0) + 3.0) : Float));
+    sx = (source.x + px);
+    sy = (source.y + py);
+    if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast (cast source.bitmap : { var width:Float; }).width : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast (cast source.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { return cast 0.0; }
+    return cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data : flighthq._internal._UInt8ClampedArray), (cast ((((sy * (cast source.bitmap : { var width:Float; }).width) + sx) * 4.0) + 3.0) : Float));
     return cast null;
   }
 
@@ -147,20 +147,20 @@ class BitmapShadow {
     alphaScale = _Runtime.multiplyNumbers(HxMath.max(0.0, intensity), ca);
     {
       var py:Float = 0.0;
-      while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
-        var sourceY:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
-        if ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
+      while ((cast ((cast py : Float) < (cast source.height : Float)) : Bool)) {
+        var sourceY:Float = (source.y + py);
+        if ((cast ((cast ((cast sourceY : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceY : Float) >= (cast (cast source.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Float = 0.0;
-          while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
-            var sourceX:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
-            if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool)) { px++; continue; }
-            var si:Float = (((sourceY * (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width) + sourceX) * 4.0);
-            var di:Float = ((_Runtime.multiplyNumbers(py, _Runtime.field(source, 'width')) + px) * 4.0);
+          while ((cast ((cast px : Float) < (cast source.width : Float)) : Bool)) {
+            var sourceX:Float = (source.x + px);
+            if ((cast ((cast ((cast sourceX : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sourceX : Float) >= (cast (cast source.bitmap : { var width:Float; }).width : Float)) : Bool)) : Bool)) { px++; continue; }
+            var si:Float = (((sourceY * (cast source.bitmap : { var width:Float; }).width) + sourceX) * 4.0);
+            var di:Float = (((py * source.width) + px) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast cr : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast cg : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast cb : Float));
-            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast HxMath.min(255.0, HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float)) * alphaScale))) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast HxMath.min(255.0, HxMath.round((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float)) * alphaScale))) : Float));
             px++;
           }
         }

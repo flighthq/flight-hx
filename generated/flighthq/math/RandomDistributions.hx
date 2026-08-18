@@ -57,8 +57,8 @@ class RandomDistributions {
       (x = cast ((((cast random() : Float) * 2.0) - 1.0) : Dynamic));
       (y = cast ((((cast random() : Float) * 2.0) - 1.0) : Dynamic));
     } while ((cast ((cast ((x * x) + (y * y)) : Float) > (cast 1.0 : Float)) : Bool));
-    (out.x = cast (x : Dynamic));
-    (out.y = cast (y : Dynamic));
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
   }
 
   public static function randomInsideUnitSphere(random:RandomSource, out:Vector3Like):Void {
@@ -70,9 +70,9 @@ class RandomDistributions {
       (y = cast ((((cast random() : Float) * 2.0) - 1.0) : Dynamic));
       (z = cast ((((cast random() : Float) * 2.0) - 1.0) : Dynamic));
     } while ((cast ((cast (((x * x) + (y * y)) + (z * z)) : Float) > (cast 1.0 : Float)) : Bool));
-    (out.x = cast (x : Dynamic));
-    (out.y = cast (y : Dynamic));
-    (out.z = cast (z : Dynamic));
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
+    (out.z = cast (z : Float));
   }
 
   public static function randomOnUnitCircle(random:RandomSource, out:Vector2Like):Void {
@@ -82,8 +82,8 @@ class RandomDistributions {
     angle = (((cast random() : Float) * HxMath.PI) * 2.0);
     x = HxMath.cos(angle);
     y = HxMath.sin(angle);
-    (out.x = cast (x : Dynamic));
-    (out.y = cast (y : Dynamic));
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
   }
 
   public static function randomOnUnitSphere(random:RandomSource, out:Vector3Like):Void {
@@ -103,9 +103,9 @@ class RandomDistributions {
     rx = (x * f);
     ry = (y * f);
     rz = (1.0 - (2.0 * s));
-    (out.x = cast (rx : Dynamic));
-    (out.y = cast (ry : Dynamic));
-    (out.z = cast (rz : Dynamic));
+    (out.x = cast (rx : Float));
+    (out.y = cast (ry : Float));
+    (out.z = cast (rz : Float));
   }
 
   public static function randomPoisson(random:RandomSource, lambda:Float = 1.0):Float {

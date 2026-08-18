@@ -794,9 +794,9 @@ class ThreeDsParse {
     var focalLength:Float = cast _Runtime.UNDEFINED;
     position = (cast ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse(_Runtime.field(camera, 'position')) : Vector3);
     transform = (cast createTransform3D() : Transform3D);
-    ((cast (cast transform : Transform3D).position : { var x:Float; }).x = cast (position.x : Dynamic));
-    ((cast (cast transform : Transform3D).position : { var y:Float; }).y = cast (position.y : Dynamic));
-    ((cast (cast transform : Transform3D).position : { var z:Float; }).z = cast (position.z : Dynamic));
+    ((cast (cast transform : Transform3D).position : { var x:Float; }).x = cast (position.x : Float));
+    ((cast (cast transform : Transform3D).position : { var y:Float; }).y = cast (position.y : Float));
+    ((cast (cast transform : Transform3D).position : { var z:Float; }).z = cast (position.z : Float));
     aim = (cast ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse(_Runtime.field(camera, 'target')) : Vector3);
     subtractVector3(({ final __callArgument86:Dynamic = aim; __callArgument86; }), ({ final __callArgument87:Dynamic = aim; __callArgument87; }), ({ final __callArgument88:Dynamic = position; __callArgument88; }));
     if ((cast ((cast (cast normalizeVector3(({ final __callArgument89:Dynamic = aim; __callArgument89; }), ({ final __callArgument90:Dynamic = aim; __callArgument90; })) : Float) : Float) > (cast 0.0 : Float)) : Bool)) {
@@ -820,9 +820,9 @@ class ThreeDsParse {
     var descriptor:Light = cast _Runtime.UNDEFINED;
     position = (cast ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse(_Runtime.field(light, 'position')) : Vector3);
     transform = (cast createTransform3D() : Transform3D);
-    ((cast (cast transform : Transform3D).position : { var x:Float; }).x = cast (position.x : Dynamic));
-    ((cast (cast transform : Transform3D).position : { var y:Float; }).y = cast (position.y : Dynamic));
-    ((cast (cast transform : Transform3D).position : { var z:Float; }).z = cast (position.z : Dynamic));
+    ((cast (cast transform : Transform3D).position : { var x:Float; }).x = cast (position.x : Float));
+    ((cast (cast transform : Transform3D).position : { var y:Float; }).y = cast (position.y : Float));
+    ((cast (cast transform : Transform3D).position : { var z:Float; }).z = cast (position.z : Float));
     color = (cast ThreeDsParse.packThreeDsColor__threeDsParse(_Runtime.field(light, 'color'), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
     range = _Runtime.coalesce(_Runtime.field(light, 'outerRange'), function():Dynamic return cast -1.0);
     if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'innerRange'), null) : Bool)) {
@@ -917,9 +917,9 @@ class ThreeDsParse {
     {
       var i:Float = 0.0;
       while ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(positions, 'length') : Float)) : Bool)) {
-        (point.x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast i : Float)) : Dynamic));
-        (point.y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast (i + 1.0) : Float)) : Dynamic));
-        (point.z = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast (i + 2.0) : Float)) : Dynamic));
+        (point.x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast i : Float)) : Float));
+        (point.y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast (i + 1.0) : Float)) : Float));
+        (point.z = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast (i + 2.0) : Float)) : Float));
         matrix4TransformPoint(({ final __callArgument137:Dynamic = point; __callArgument137; }), ({ final __callArgument138:Dynamic = inverse; __callArgument138; }), ({ final __callArgument139:Dynamic = point; __callArgument139; }));
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast positions : Array<Float>), (cast i : Float), (cast point.x : Float));
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast positions : Array<Float>), (cast (i + 1.0) : Float), (cast point.y : Float));

@@ -33,10 +33,10 @@ class TextBounds {
     var slack:Float = cast _Runtime.UNDEFINED;
     width = (cast computeTextBoundsWidth((cast spec : Dynamic), ({ final __callArgument1:Dynamic = layout; __callArgument1; })) : Float);
     slack = ((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).width - width);
-    (out.x = cast (((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'right') : Bool) ? (cast slack : Dynamic) : (cast ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'center') : Bool) ? (cast (slack / 2.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)) : Dynamic));
-    (out.y = cast (0.0 : Dynamic));
-    (out.width = cast (width : Dynamic));
-    (out.height = cast ((cast computeTextBoundsHeight((cast spec : Dynamic), ({ final __callArgument2:Dynamic = layout; __callArgument2; })) : Float) : Dynamic));
+    (out.x = cast (((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'right') : Bool) ? (cast slack : Dynamic) : (cast ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'center') : Bool) ? (cast (slack / 2.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)) : Float));
+    (out.y = cast (0.0 : Float));
+    (out.width = cast (width : Float));
+    (out.height = cast ((cast computeTextBoundsHeight((cast spec : Dynamic), ({ final __callArgument2:Dynamic = layout; __callArgument2; })) : Float) : Float));
   }
 
   public static function computeTextBoundsWidth(spec:TextBoundsSpec, layout:TextLayoutResult):Float {

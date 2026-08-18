@@ -21,12 +21,12 @@ import flighthq.types.RenderTarget.ResolvedRenderTargetDescriptor;
 class RenderTarget {
   @:noCompletion
   public static function computeRenderCacheTransform(outCacheTransform:MatrixLike, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
-    (outCacheTransform.a = cast (1.0 : Dynamic));
-    (outCacheTransform.b = cast (0.0 : Dynamic));
-    (outCacheTransform.c = cast (0.0 : Dynamic));
-    (outCacheTransform.d = cast (1.0 : Dynamic));
-    (outCacheTransform.tx = cast ((bounds.x - contentX) : Dynamic));
-    (outCacheTransform.ty = cast ((bounds.y - contentY) : Dynamic));
+    (outCacheTransform.a = cast (1.0 : Float));
+    (outCacheTransform.b = cast (0.0 : Float));
+    (outCacheTransform.c = cast (0.0 : Float));
+    (outCacheTransform.d = cast (1.0 : Float));
+    (outCacheTransform.tx = cast ((bounds.x - contentX) : Float));
+    (outCacheTransform.ty = cast ((bounds.y - contentY) : Float));
   }
 
   @:noCompletion
@@ -44,12 +44,12 @@ class RenderTarget {
     var localTransform:Matrix = cast _Runtime.UNDEFINED;
     localTransform = (cast getNodeLocalMatrix((cast source : Dynamic)) : Matrix);
     (cast inverseMatrix(({ final __callArgument0:Dynamic = RenderTarget._tempInvLocal__renderTarget; __callArgument0; }), ({ final __callArgument1:Dynamic = localTransform; __callArgument1; })) : Bool);
-    (RenderTarget._tempTranslation__renderTarget.a = cast (1.0 : Dynamic));
-    (RenderTarget._tempTranslation__renderTarget.b = cast (0.0 : Dynamic));
-    (RenderTarget._tempTranslation__renderTarget.c = cast (0.0 : Dynamic));
-    (RenderTarget._tempTranslation__renderTarget.d = cast (1.0 : Dynamic));
-    (RenderTarget._tempTranslation__renderTarget.tx = cast ((contentX - bounds.x) : Dynamic));
-    (RenderTarget._tempTranslation__renderTarget.ty = cast ((contentY - bounds.y) : Dynamic));
+    (RenderTarget._tempTranslation__renderTarget.a = cast (1.0 : Float));
+    (RenderTarget._tempTranslation__renderTarget.b = cast (0.0 : Float));
+    (RenderTarget._tempTranslation__renderTarget.c = cast (0.0 : Float));
+    (RenderTarget._tempTranslation__renderTarget.d = cast (1.0 : Float));
+    (RenderTarget._tempTranslation__renderTarget.tx = cast ((contentX - bounds.x) : Float));
+    (RenderTarget._tempTranslation__renderTarget.ty = cast ((contentY - bounds.y) : Float));
     multiplyMatrix(({ final __callArgument2:Dynamic = outRenderTransform; __callArgument2; }), ({ final __callArgument3:Dynamic = RenderTarget._tempTranslation__renderTarget; __callArgument3; }), ({ final __callArgument4:Dynamic = RenderTarget._tempInvLocal__renderTarget; __callArgument4; }));
   }
 

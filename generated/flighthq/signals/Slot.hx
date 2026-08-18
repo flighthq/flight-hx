@@ -10,8 +10,8 @@ import flighthq.types.SignalConnectOptions;
 
 class Slot {
   public static function clearSignal<T>(signal:Signal<T>):Void {
-    (signal.emit = cast ((cast (cast nullSignalEmit : flighthq._internal._Any) : T) : Dynamic));
-    (signal.data = cast (null : Dynamic));
+    (signal.emit = cast ((cast (cast nullSignalEmit : flighthq._internal._Any) : T) : T));
+    (signal.data = cast (null : Null<SignalData<T>>));
   }
 
   public static function connectSignal<T>(signal:Signal<T>, slot:T, ?options:SignalConnectOptions):Void {
@@ -53,8 +53,8 @@ class Slot {
       }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(data.slots, 'length'), 0.0) : Bool)) {
-      (signal.emit = cast ((cast (cast nullSignalEmit : flighthq._internal._Any) : T) : Dynamic));
-      (signal.data = cast (null : Dynamic));
+      (signal.emit = cast ((cast (cast nullSignalEmit : flighthq._internal._Any) : T) : T));
+      (signal.data = cast (null : Null<SignalData<T>>));
     }
   }
 
@@ -67,8 +67,8 @@ class Slot {
     var data:SignalData<T> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(signal.data, null) : Bool)) { return; }
     data = (cast { slots: cast ([] : Array<Dynamic>), priorities: cast ([] : Array<Dynamic>), repeat: cast ([] : Array<Dynamic>), cancelled: false });
-    (signal.data = cast (data : Dynamic));
-    (signal.emit = cast ((cast Slot.makeDispatch__slot((cast data : Dynamic)) : T) : Dynamic));
+    (signal.data = cast (data : Null<SignalData<T>>));
+    (signal.emit = cast ((cast Slot.makeDispatch__slot((cast data : Dynamic)) : T) : T));
   }
 
   public static function isSlotConnected<T>(signal:Signal<T>, slot:T):Bool {
@@ -79,7 +79,7 @@ class Slot {
   public static function makeDispatch__slot<T>(data:SignalData<T>):T {
     return cast (cast (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
       var i:Float = cast _Runtime.UNDEFINED;
-      (data.cancelled = cast (false : Dynamic));
+      (data.cancelled = cast (false : Bool));
       i = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data.slots, 'length') : Float)) : Bool)) {
         _Runtime.apply(flighthq._internal._StaticIndex.readArray(data.slots, i), _Runtime.concatArrays([_Runtime.toArray(args)]));

@@ -23,14 +23,14 @@ class ElectronPower {
     return cast { getStatus: function(out:PowerStatus):PowerStatus {
       var onBattery:Bool = cast _Runtime.UNDEFINED;
       onBattery = _Runtime.strictEquals((cast powerMonitor : ElectronPowerMonitor).onBatteryPower, true);
-      (out.batteryLevel = cast (-1.0 : Dynamic));
-      (out.chargingTime = cast (-1.0 : Dynamic));
-      (out.dischargingTime = cast (-1.0 : Dynamic));
-      (out.isBatteryLow = cast (false : Dynamic));
-      (out.isCharging = cast (!(cast onBattery : Bool) : Dynamic));
-      (out.isLowPower = cast (false : Dynamic));
-      (out.isOnBattery = cast (onBattery : Dynamic));
-      (out.thermalState = cast ('Unknown' : Dynamic));
+      (out.batteryLevel = cast (-1.0 : Float));
+      (out.chargingTime = cast (-1.0 : Float));
+      (out.dischargingTime = cast (-1.0 : Float));
+      (out.isBatteryLow = cast (false : Bool));
+      (out.isCharging = cast (!(cast onBattery : Bool) : Bool));
+      (out.isLowPower = cast (false : Bool));
+      (out.isOnBattery = cast (onBattery : Bool));
+      (out.thermalState = cast ('Unknown' : PowerThermalState));
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, getBatteryHealth: function():Null<PowerBatteryHealth> {

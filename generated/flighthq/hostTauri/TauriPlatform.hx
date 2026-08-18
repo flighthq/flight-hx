@@ -16,13 +16,13 @@ class TauriPlatform {
     var os:TauriOsModule = cast _Runtime.UNDEFINED;
     os = (cast tauri : TauriApi).os;
     return cast { getInfo: function(out:PlatformInfo):PlatformInfo {
-      (out.name = cast ((cast TauriPlatform.toPlatformName__tauriPlatform((cast (cast os : TauriOsModule).platform() : String)) : PlatformName) : Dynamic));
-      (out.kind = cast ('desktop' : Dynamic));
-      (out.version = cast ((cast os : TauriOsModule).version() : Dynamic));
-      (out.arch = cast ((cast os : TauriOsModule).arch() : Dynamic));
-      (out.locale = cast (_Runtime.coalesce((cast os : TauriOsModule).locale(), function():Dynamic return cast '') : Dynamic));
-      (out.isTouch = cast (false : Dynamic));
-      (out.runtime = cast ('tauri' : Dynamic));
+      (out.name = cast ((cast TauriPlatform.toPlatformName__tauriPlatform((cast (cast os : TauriOsModule).platform() : String)) : PlatformName) : PlatformName));
+      (out.kind = cast ('desktop' : PlatformKind));
+      (out.version = cast ((cast os : TauriOsModule).version() : String));
+      (out.arch = cast ((cast os : TauriOsModule).arch() : String));
+      (out.locale = cast (_Runtime.coalesce((cast os : TauriOsModule).locale(), function():Dynamic return cast '') : String));
+      (out.isTouch = cast (false : Bool));
+      (out.runtime = cast ('tauri' : PlatformRuntime));
       return cast out;
       return cast _Runtime.UNDEFINED;
     } };

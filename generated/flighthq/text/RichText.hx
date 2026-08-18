@@ -90,19 +90,19 @@ class RichText {
     richText = (cast source : flighthq.types.RichText);
     data = (cast richText : flighthq.types.RichText).data;
     if ((cast _Runtime.strictEquals((cast data : RichTextData).autoSize, 'none') : Bool)) {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.width = cast ((cast data : RichTextData).width : Dynamic));
-      (out.height = cast ((cast data : RichTextData).height : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.width = cast ((cast data : RichTextData).width : Float));
+      (out.height = cast ((cast data : RichTextData).height : Float));
       return;
     }
     ensureTextLayout(({ final __callArgument8:Dynamic = richText; __callArgument8; }));
     layout = (cast getTextLayout(({ final __callArgument9:Dynamic = richText; __callArgument9; })) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.width = cast ((cast data : RichTextData).width : Dynamic));
-      (out.height = cast ((cast data : RichTextData).height : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.width = cast ((cast data : RichTextData).width : Float));
+      (out.height = cast ((cast data : RichTextData).height : Float));
       return;
     }
     computeTextBoundsRectangle(({ final __callArgument10:Dynamic = out; __callArgument10; }), (cast data : Dynamic), ({ final __callArgument11:Dynamic = layout; __callArgument11; }));

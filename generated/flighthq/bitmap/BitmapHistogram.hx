@@ -14,9 +14,9 @@ class BitmapHistogram {
     var histogram:flighthq.types.BitmapHistogram = cast _Runtime.UNDEFINED;
     var total:Float = cast _Runtime.UNDEFINED;
     histogram = (cast getBitmapHistogram(({ final __callArgument0:Dynamic = source; __callArgument0; })) : flighthq.types.BitmapHistogram);
-    total = _Runtime.multiplyNumbers(_Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
+    total = (source.width * source.height);
     applyBitmapPaletteMap(({ final __callArgument1:Dynamic = dest; __callArgument1; }), ({ final __callArgument2:Dynamic = source; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast BitmapHistogram.buildEqualizeMap__bitmapHistogram((cast histogram : flighthq.types.BitmapHistogram).red, (cast total : Float)) : Array<Float>); __callArgument3; }), ({ final __callArgument4:Dynamic = (cast BitmapHistogram.buildEqualizeMap__bitmapHistogram((cast histogram : flighthq.types.BitmapHistogram).green, (cast total : Float)) : Array<Float>); __callArgument4; }), ({ final __callArgument5:Dynamic = (cast BitmapHistogram.buildEqualizeMap__bitmapHistogram((cast histogram : flighthq.types.BitmapHistogram).blue, (cast total : Float)) : Array<Float>); __callArgument5; }), ({ final __callArgument6:Dynamic = null; __callArgument6; }));
-    invalidateBitmap(_Runtime.field(dest, 'bitmap'));
+    invalidateBitmap(dest.bitmap);
   }
 
   public static function getBitmapHistogram(source:BitmapRegion):flighthq.types.BitmapHistogram {
@@ -30,17 +30,17 @@ class BitmapHistogram {
     green = _Runtime.fill(_Runtime.createArray(256.0), 0.0, 0, null, 1);
     blue = _Runtime.fill(_Runtime.createArray(256.0), 0.0, 0, null, 1);
     alpha = _Runtime.fill(_Runtime.createArray(256.0), 0.0, 0, null, 1);
-    data = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
-    bitmapWidth = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
+    data = (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    bitmapWidth = (cast source.bitmap : { var width:Float; }).width;
     {
       var py:Float = 0.0;
-      while ((cast ((cast py : Float) < (cast _Runtime.field(source, 'height') : Float)) : Bool)) {
-        var y:Float = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
-        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
+      while ((cast ((cast py : Float) < (cast source.height : Float)) : Bool)) {
+        var y:Float = (source.y + py);
+        if ((cast ((cast ((cast y : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast y : Float) >= (cast (cast source.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { py++; continue; }
         {
           var px:Float = 0.0;
-          while ((cast ((cast px : Float) < (cast _Runtime.field(source, 'width') : Float)) : Bool)) {
-            var x:Float = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
+          while ((cast ((cast px : Float) < (cast source.width : Float)) : Bool)) {
+            var x:Float = (source.x + px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var i:Float = (((y * bitmapWidth) + x) * 4.0);
             _Runtime.incrementIndex(red, flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast i : Float)), 1, true);

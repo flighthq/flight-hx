@@ -23,7 +23,7 @@ class MeshGeometryTransforms {
     if ((cast !_Runtime.truthy(geometry.bounds) : Bool)) {
       var bounds:Aabb = (cast createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Aabb);
       computeMeshGeometryBounds(({ final __callArgument0:Dynamic = bounds; __callArgument0; }), ({ final __callArgument1:Dynamic = geometry; __callArgument1; }));
-      (geometry.bounds = cast (bounds : Dynamic));
+      (geometry.bounds = cast (bounds : Null<Aabb>));
     }
     b = geometry.bounds;
     cx = (((cast b.min : { var x:Float; }).x + (cast b.max : { var x:Float; }).x) * 0.5);

@@ -29,7 +29,7 @@ class MeshGeometryDeformationClone {
     if ((cast !_Runtime.strictEquals(morphBindPose, null) : Bool)) { MeshGeometryDeformationClone.restoreMorphBindPose__meshGeometryDeformationClone(({ final __callArgument3:Dynamic = clone; __callArgument3; }), ({ final __callArgument4:Dynamic = morphBindPose; __callArgument4; })); } else { if ((cast !_Runtime.strictEquals(skinBindPose, null) : Bool)) { MeshGeometryDeformationClone.restoreSkinBindPose__meshGeometryDeformationClone(({ final __callArgument5:Dynamic = clone; __callArgument5; }), ({ final __callArgument6:Dynamic = skinBindPose; __callArgument6; })); } }
     bounds = (cast createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Aabb);
     computeMeshGeometryBounds(({ final __callArgument7:Dynamic = bounds; __callArgument7; }), ({ final __callArgument8:Dynamic = clone; __callArgument8; }));
-    (clone.bounds = cast (bounds : Dynamic));
+    (clone.bounds = cast (bounds : Null<Aabb>));
     return cast clone;
     return cast null;
   }

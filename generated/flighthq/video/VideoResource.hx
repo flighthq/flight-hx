@@ -20,9 +20,9 @@ class VideoResource {
     }
     if ((cast !_Runtime.strictEquals(resource.objectUrl, null) : Bool)) {
       _Runtime.callProperty(flighthq._internal._HostValueLut.get('URL'), 'revokeObjectURL', cast ([resource.objectUrl] : Array<Dynamic>));
-      (resource.objectUrl = cast (null : Dynamic));
+      (resource.objectUrl = cast (null : Null<String>));
     }
-    (resource.element = cast (null : Dynamic));
+    (resource.element = cast (null : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>));
   }
 
   public static function getVideoResourceDuration(resource:flighthq.types.VideoResource):Float {

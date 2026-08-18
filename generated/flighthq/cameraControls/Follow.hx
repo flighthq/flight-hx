@@ -61,8 +61,8 @@ class Follow {
         (nextY = cast ((cast clamp((cast nextY : Float), (cast ((cast worldBounds : { var y:Float; }).y + halfVisH) : Float), (cast (((cast worldBounds : { var y:Float; }).y + (cast worldBounds : { var height:Float; }).height) - halfVisH) : Float)) : Float) : Dynamic));
       }
     }
-    (camera.x = cast (nextX : Dynamic));
-    (camera.y = cast (nextY : Dynamic));
+    (camera.x = cast (nextX : Float));
+    (camera.y = cast (nextY : Float));
   }
 
   public static final scratchBounds__follow:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);

@@ -296,15 +296,15 @@ class Hierarchy {
         var b:Float = localM.b;
         var c:Float = localM.c;
         var d:Float = localM.d;
-        (child.scaleX = cast (HxMath.sqrt(((a * a) + (b * b))) : Dynamic));
-        (child.scaleY = cast (HxMath.sqrt(((c * c) + (d * d))) : Dynamic));
+        (child.scaleX = cast (HxMath.sqrt(((a * a) + (b * b))) : Float));
+        (child.scaleY = cast (HxMath.sqrt(((c * c) + (d * d))) : Float));
         if ((cast ((cast ((a * d) - (b * c)) : Float) < (cast 0.0 : Float)) : Bool)) {
-          (child.scaleY = cast (-child.scaleY : Dynamic));
+          (child.scaleY = cast (-child.scaleY : Float));
         }
         var skewYRad:Float = (child.skewY * Hierarchy.DEG_TO_RAD__hierarchy);
-        (child.rotation = cast ((_Runtime.subtractNumbers(HxMath.atan2(b, a), skewYRad) * Hierarchy.RAD_TO_DEG__hierarchy) : Dynamic));
-        (child.x = cast ((localM.tx + ((a * child.pivotX) + (c * child.pivotY))) : Dynamic));
-        (child.y = cast ((localM.ty + ((b * child.pivotX) + (d * child.pivotY))) : Dynamic));
+        (child.rotation = cast ((_Runtime.subtractNumbers(HxMath.atan2(b, a), skewYRad) * Hierarchy.RAD_TO_DEG__hierarchy) : Float));
+        (child.x = cast ((localM.tx + ((a * child.pivotX) + (c * child.pivotY))) : Float));
+        (child.y = cast ((localM.ty + ((b * child.pivotX) + (d * child.pivotY))) : Float));
         invalidateNodeLocalTransform((cast child : Dynamic));
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError7:Dynamic) {

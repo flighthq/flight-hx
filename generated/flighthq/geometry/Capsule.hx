@@ -69,14 +69,14 @@ class Capsule {
     dz = (pz - closestZ);
     dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if ((cast ((cast dist : Float) < (cast 1e-10 : Float)) : Bool)) {
-      (out.x = cast ((closestX + r) : Dynamic));
-      (out.y = cast (closestY : Dynamic));
-      (out.z = cast (closestZ : Dynamic));
+      (out.x = cast ((closestX + r) : Float));
+      (out.y = cast (closestY : Float));
+      (out.z = cast (closestZ : Float));
     } else {
       var inv:Float = (r / dist);
-      (out.x = cast ((closestX + (dx * inv)) : Dynamic));
-      (out.y = cast ((closestY + (dy * inv)) : Dynamic));
-      (out.z = cast ((closestZ + (dz * inv)) : Dynamic));
+      (out.x = cast ((closestX + (dx * inv)) : Float));
+      (out.y = cast ((closestY + (dy * inv)) : Float));
+      (out.z = cast ((closestZ + (dz * inv)) : Float));
     }
   }
 
@@ -224,13 +224,13 @@ class Capsule {
   }
 
   public static function setCapsule(out:CapsuleLike, startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Void {
-    (out.startX = cast (startX : Dynamic));
-    (out.startY = cast (startY : Dynamic));
-    (out.startZ = cast (startZ : Dynamic));
-    (out.endX = cast (endX : Dynamic));
-    (out.endY = cast (endY : Dynamic));
-    (out.endZ = cast (endZ : Dynamic));
-    (out.radius = cast (radius : Dynamic));
+    (out.startX = cast (startX : Float));
+    (out.startY = cast (startY : Float));
+    (out.startZ = cast (startZ : Float));
+    (out.endX = cast (endX : Float));
+    (out.endY = cast (endY : Float));
+    (out.endZ = cast (endZ : Float));
+    (out.radius = cast (radius : Float));
   }
 
   public static function pointToSegmentDistanceSq__capsule(px:Float, py:Float, pz:Float, ax:Float, ay:Float, az:Float, bx:Float, by:Float, bz:Float):Float {

@@ -43,12 +43,12 @@ class Mesh {
     hasDeformation = ((cast !_Runtime.looseEquals(source.skin, null) : Bool) || (cast !_Runtime.looseEquals(source.morph, null) : Bool));
     geometry = ((cast hasDeformation : Bool) ? (cast (cast cloneMeshGeometryForDeformation(source.geometry) : MeshGeometry) : Dynamic) : (cast source.geometry : Dynamic));
     clone = (cast createMesh(({ final __callArgument0:Dynamic = geometry; __callArgument0; }), _Runtime.slice(source.materials, 0, null), (cast source.kind : String), ({ final __callArgument1:Dynamic = { enabled: source.enabled, name: source.name }; __callArgument1; })) : flighthq.types.Mesh);
-    (clone.alpha = cast (source.alpha : Dynamic));
+    (clone.alpha = cast (source.alpha : Float));
     setNodeTransform3D((cast clone : Dynamic), ({ final __callArgument2:Dynamic = source; __callArgument2; }));
     if ((cast (cast isNodeLocalMatrix4Detached((cast source : Dynamic)) : Bool) : Bool)) { setNodeLocalMatrix4((cast clone : Dynamic), (cast getNodeLocalMatrix4((cast source : Dynamic)) : Matrix4Like)); }
-    if ((cast !_Runtime.looseEquals(source.skin, null) : Bool)) { (clone.skin = cast (source.skin : Dynamic)); }
+    if ((cast !_Runtime.looseEquals(source.skin, null) : Bool)) { (clone.skin = cast (source.skin : Null<Skin>)); }
     if ((cast !_Runtime.looseEquals(source.morph, null) : Bool)) {
-      (clone.morph = cast ({ targets: (cast source.morph : MeshMorph).targets, weights: new flighthq._internal._Float32Array((cast source.morph : MeshMorph).weights) } : Dynamic));
+      (clone.morph = cast ({ targets: (cast source.morph : MeshMorph).targets, weights: new flighthq._internal._Float32Array((cast source.morph : MeshMorph).weights) } : Null<MeshMorph>));
     }
     return cast clone;
     return cast null;
@@ -58,8 +58,8 @@ class Mesh {
     if (kind == null) kind = cast (MeshKind : Dynamic);
     var mesh:flighthq.types.Mesh = cast _Runtime.UNDEFINED;
     mesh = (cast createNode3D((cast kind : String), ({ final __callArgument3:Dynamic = obj; __callArgument3; })) : flighthq.types.Mesh);
-    (mesh.geometry = cast (geometry : Dynamic));
-    (mesh.materials = cast (materials : Dynamic));
+    (mesh.geometry = cast (geometry : MeshGeometry));
+    (mesh.materials = cast (materials : Array<Null<Material>>));
     return cast mesh;
     return cast null;
   }

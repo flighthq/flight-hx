@@ -101,8 +101,8 @@ class UpdateParticleObjects {
         if ((cast hasScaleAnim : Bool)) {
           var factor:Float = ((cast hasScaleCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument12:Dynamic = scaleCurve; __callArgument12; }), (cast lifeFraction : Float)) : Float) : Dynamic) : (cast (1.0 + ((config.scaleEnd - 1.0) * lifeFraction)) : Dynamic));
           var s:Float = (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast scales : flighthq._internal._Float32Array), (cast i : Float)) * factor);
-          ((cast flighthq._internal._StaticIndex.readArray(objects, i) : { var scaleX:Float; }).scaleX = cast (s : Dynamic));
-          ((cast flighthq._internal._StaticIndex.readArray(objects, i) : { var scaleY:Float; }).scaleY = cast (s : Dynamic));
+          ((cast flighthq._internal._StaticIndex.readArray(objects, i) : { var scaleX:Float; }).scaleX = cast (s : Float));
+          ((cast flighthq._internal._StaticIndex.readArray(objects, i) : { var scaleY:Float; }).scaleY = cast (s : Float));
         }
         if ((cast hasRotSpeed : Bool)) {
           ((cast flighthq._internal._StaticIndex.readArray(objects, i) : { var rotation:Float; }).rotation += (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast rotationSpeeds : flighthq._internal._Float32Array), (cast i : Float)) * deltaTime));
@@ -119,7 +119,7 @@ class UpdateParticleObjects {
       (state.burstTimer -= deltaTime);
       if ((cast ((cast state.burstTimer : Float) <= (cast 0.0 : Float)) : Bool)) {
         (toSpawn = cast ((toSpawn + config.burstCount) : Dynamic));
-        (state.burstTimer = cast (((cast ((cast config.burstInterval : Float) > (cast 0.0 : Float)) : Bool) ? (cast config.burstInterval : Dynamic) : (cast HxMath.POSITIVE_INFINITY : Dynamic)) : Dynamic));
+        (state.burstTimer = cast (((cast ((cast config.burstInterval : Float) > (cast 0.0 : Float)) : Bool) ? (cast config.burstInterval : Dynamic) : (cast HxMath.POSITIVE_INFINITY : Dynamic)) : Float));
       }
     }
     if ((cast ((cast toSpawn : Float) > (cast 0.0 : Float)) : Bool)) {
@@ -154,12 +154,12 @@ class UpdateParticleObjects {
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast scales : flighthq._internal._Float32Array), (cast i : Float), (cast spawnScale : Float));
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast rotationSpeeds : flighthq._internal._Float32Array), (cast i : Float), (cast ((cast hasRotSpeed : Bool) ? (cast (config.rotationSpeedMin + _Runtime.multiplyNumbers((state.random)(), rotSpeedRange)) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
           var obj:ParticleObject = flighthq._internal._StaticIndex.readArray(objects, i);
-          (obj.x = cast (spawnX : Dynamic));
-          (obj.y = cast (spawnY : Dynamic));
-          (obj.rotation = cast (angle : Dynamic));
+          (obj.x = cast (spawnX : Float));
+          (obj.y = cast (spawnY : Float));
+          (obj.rotation = cast (angle : Float));
           var spawnFactor:Float = ((cast hasScaleCurve : Bool) ? (cast (spawnScale * (cast sampleParticleCurve(({ final __callArgument15:Dynamic = scaleCurve; __callArgument15; }), (cast 0.0 : Float)) : Float)) : Dynamic) : (cast spawnScale : Dynamic));
-          (obj.scaleX = cast (spawnFactor : Dynamic));
-          (obj.scaleY = cast (spawnFactor : Dynamic));
+          (obj.scaleX = cast (spawnFactor : Float));
+          (obj.scaleY = cast (spawnFactor : Float));
           ((cast obj : { var alpha:Float; }).alpha = ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument16:Dynamic = alphaCurve; __callArgument16; }), (cast 0.0 : Float)) : Float) : Dynamic) : (cast config.alphaStart : Dynamic)));
           ((cast obj : { var visible:Bool; }).visible = true);
           toSpawn--;
@@ -169,8 +169,8 @@ class UpdateParticleObjects {
       }
     }
     if ((cast !(cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([emitterX] : Array<Dynamic>)) : Bool) : Bool)) {
-      (state.prevX = cast (emitterX : Dynamic));
-      (state.prevY = cast (emitterY : Dynamic));
+      (state.prevX = cast (emitterX : Float));
+      (state.prevY = cast (emitterY : Float));
     }
   }
 }

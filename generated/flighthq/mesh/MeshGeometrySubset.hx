@@ -19,7 +19,7 @@ class MeshGeometrySubset {
       }
     }
     _Runtime.callProperty(next, 'push', cast ([{ indexCount: subset.indexCount, indexOffset: subset.indexOffset }] : Array<Dynamic>));
-    (geometry.subsets = cast (next : Dynamic));
+    (geometry.subsets = cast (next : Array<MeshSubset>));
   }
 
   public static function getMeshGeometrySubsetTriangleCount(geometry:MeshGeometry, subsetIndex:Float):Float {
@@ -62,6 +62,6 @@ class MeshGeometrySubset {
         i++;
       }
     }
-    (geometry.subsets = cast (next : Dynamic));
+    (geometry.subsets = cast (next : Array<MeshSubset>));
   }
 }

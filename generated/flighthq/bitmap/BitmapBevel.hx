@@ -23,8 +23,8 @@ class BitmapBevel {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var highlightColor:Float = cast _Runtime.UNDEFINED;
     var shadowColor:Float = cast _Runtime.UNDEFINED;
-    w = _Runtime.field(source, 'width');
-    h = _Runtime.field(source, 'height');
+    w = source.width;
+    h = source.height;
     angle = _Runtime.coalesce(_Runtime.field(options, 'angle'), function():Dynamic return cast (HxMath.PI / 4.0));
     distance = _Runtime.coalesce(_Runtime.field(options, 'distance'), function():Dynamic return cast 4.0);
     offsetX = HxMath.round(_Runtime.multiplyNumbers(HxMath.cos(angle), distance));
@@ -112,10 +112,10 @@ class BitmapBevel {
   public static function readSourceAlpha__bitmapBevel(source:BitmapRegion, px:Float, py:Float):Float {
     var sx:Float = cast _Runtime.UNDEFINED;
     var sy:Float = cast _Runtime.UNDEFINED;
-    sx = _Runtime.addNumbers(_Runtime.field(source, 'x'), px);
-    sy = _Runtime.addNumbers(_Runtime.field(source, 'y'), py);
-    if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height : Float)) : Bool)) : Bool)) { return cast 0.0; }
-    return cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data : flighthq._internal._UInt8ClampedArray), (cast ((((sy * (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width) + sx) * 4.0) + 3.0) : Float));
+    sx = (source.x + px);
+    sy = (source.y + py);
+    if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast (cast source.bitmap : { var width:Float; }).width : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sy : Float) >= (cast (cast source.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { return cast 0.0; }
+    return cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data : flighthq._internal._UInt8ClampedArray), (cast ((((sy * (cast source.bitmap : { var width:Float; }).width) + sx) * 4.0) + 3.0) : Float));
     return cast null;
   }
 

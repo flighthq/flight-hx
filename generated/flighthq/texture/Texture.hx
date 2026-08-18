@@ -388,11 +388,11 @@ class Texture {
   public static function resetTextureUvTransform(texture:TextureLike):Void {
     ((cast texture : { var flipX:Bool; }).flipX = false);
     ((cast texture : { var flipY:Bool; }).flipY = false);
-    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast (0.0 : Dynamic));
-    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast (0.0 : Dynamic));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast (0.0 : Float));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast (0.0 : Float));
     ((cast texture : { var uvRotation:Float; }).uvRotation = 0.0);
-    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast (1.0 : Dynamic));
-    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast (1.0 : Dynamic));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast (1.0 : Float));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast (1.0 : Float));
   }
 
   public static function resetVideoTextureFrame(texture:TextureLike):Void {
@@ -421,21 +421,21 @@ class Texture {
     textureWidth = (cast getTextureWidth(({ final __callArgument48:Dynamic = texture; __callArgument48; })) : Float);
     textureHeight = (cast getTextureHeight(({ final __callArgument49:Dynamic = texture; __callArgument49; })) : Float);
     if ((cast ((cast ((cast textureWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast textureHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast (0.0 : Dynamic));
-      ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast (0.0 : Dynamic));
-      ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast (0.0 : Dynamic));
-      ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast (0.0 : Dynamic));
+      ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast (0.0 : Float));
+      ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast (0.0 : Float));
+      ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast (0.0 : Float));
+      ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast (0.0 : Float));
       return;
     }
-    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast ((x / textureWidth) : Dynamic));
-    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast ((y / textureHeight) : Dynamic));
-    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast ((width / textureWidth) : Dynamic));
-    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast ((height / textureHeight) : Dynamic));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast ((x / textureWidth) : Float));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast ((y / textureHeight) : Float));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast ((width / textureWidth) : Float));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast ((height / textureHeight) : Float));
   }
 
   public static function setTextureUvOffset(texture:TextureLike, x:Float, y:Float):Void {
-    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast (x : Dynamic));
-    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast (y : Dynamic));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast (x : Float));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast (y : Float));
   }
 
   public static function setTextureUvRotation(texture:TextureLike, radians:Float):Void {
@@ -443,8 +443,8 @@ class Texture {
   }
 
   public static function setTextureUvScale(texture:TextureLike, x:Float, y:Float):Void {
-    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast (x : Dynamic));
-    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast (y : Dynamic));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast (x : Float));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast (y : Float));
   }
 
   public static function setVideoTextureSource(texture:TextureLike, source:VideoResource):Void {
@@ -480,7 +480,7 @@ class Texture {
     ty = (cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y;
     cosR = HxMath.cos(r);
     sinR = HxMath.sin(r);
-    (out.x = cast (((((sx * cosR) * fu) - ((sy * sinR) * fv)) + tx) : Dynamic));
-    (out.y = cast (((((sx * sinR) * fu) + ((sy * cosR) * fv)) + ty) : Dynamic));
+    (out.x = cast (((((sx * cosR) * fu) - ((sy * sinR) * fv)) + tx) : Float));
+    (out.y = cast (((((sx * sinR) * fu) + ((sy * cosR) * fv)) + ty) : Float));
   }
 }

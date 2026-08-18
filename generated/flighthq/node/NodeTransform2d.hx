@@ -89,15 +89,15 @@ class NodeTransform2d {
   }
 
   public static function setNodeTransform2D<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>, source:Transform2DLike):Void {
-    (target.pivotX = cast (_Runtime.field(source, 'pivotX') : Dynamic));
-    (target.pivotY = cast (_Runtime.field(source, 'pivotY') : Dynamic));
-    (target.rotation = cast (_Runtime.field(source, 'rotation') : Dynamic));
-    (target.scaleX = cast (_Runtime.field(source, 'scaleX') : Dynamic));
-    (target.scaleY = cast (_Runtime.field(source, 'scaleY') : Dynamic));
-    (target.skewX = cast (_Runtime.field(source, 'skewX') : Dynamic));
-    (target.skewY = cast (_Runtime.field(source, 'skewY') : Dynamic));
-    (target.x = cast (_Runtime.field(source, 'x') : Dynamic));
-    (target.y = cast (_Runtime.field(source, 'y') : Dynamic));
+    (target.pivotX = cast (_Runtime.field(source, 'pivotX') : Float));
+    (target.pivotY = cast (_Runtime.field(source, 'pivotY') : Float));
+    (target.rotation = cast (_Runtime.field(source, 'rotation') : Float));
+    (target.scaleX = cast (_Runtime.field(source, 'scaleX') : Float));
+    (target.scaleY = cast (_Runtime.field(source, 'scaleY') : Float));
+    (target.skewX = cast (_Runtime.field(source, 'skewX') : Float));
+    (target.skewY = cast (_Runtime.field(source, 'skewY') : Float));
+    (target.x = cast (_Runtime.field(source, 'x') : Float));
+    (target.y = cast (_Runtime.field(source, 'y') : Float));
     invalidateNodeLocalTransform((cast target : Dynamic));
   }
 
@@ -113,32 +113,32 @@ class NodeTransform2d {
       var rad:Float = (angle * NodeTransform2d.DEG_TO_RAD__nodeTransform2d);
       var sin:Float = HxMath.sin(rad);
       var cos:Float = HxMath.cos(rad);
-      (runtime.rotationAngle = cast (angle : Dynamic));
-      (runtime.rotationSine = cast (sin : Dynamic));
-      (runtime.rotationCosine = cast (cos : Dynamic));
+      (runtime.rotationAngle = cast (angle : Float));
+      (runtime.rotationSine = cast (sin : Float));
+      (runtime.rotationCosine = cast (cos : Float));
     }
-    if ((cast _Runtime.strictEquals(runtime.localMatrix, null) : Bool)) { (runtime.localMatrix = cast ((cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(runtime.localMatrix, null) : Bool)) { (runtime.localMatrix = cast ((cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix) : Null<Matrix>)); }
     matrix = runtime.localMatrix;
     if ((cast ((cast _Runtime.strictEquals(target.skewX, 0.0) : Bool) && (cast _Runtime.strictEquals(target.skewY, 0.0) : Bool)) : Bool)) {
-      (matrix.a = cast ((runtime.rotationCosine * target.scaleX) : Dynamic));
-      (matrix.b = cast ((runtime.rotationSine * target.scaleX) : Dynamic));
-      (matrix.c = cast ((-runtime.rotationSine * target.scaleY) : Dynamic));
-      (matrix.d = cast ((runtime.rotationCosine * target.scaleY) : Dynamic));
+      (matrix.a = cast ((runtime.rotationCosine * target.scaleX) : Float));
+      (matrix.b = cast ((runtime.rotationSine * target.scaleX) : Float));
+      (matrix.c = cast ((-runtime.rotationSine * target.scaleY) : Float));
+      (matrix.d = cast ((runtime.rotationCosine * target.scaleY) : Float));
     } else {
       var radY:Float = ((runtime.rotationAngle + target.skewY) * NodeTransform2d.DEG_TO_RAD__nodeTransform2d);
       var radX:Float = ((runtime.rotationAngle + target.skewX) * NodeTransform2d.DEG_TO_RAD__nodeTransform2d);
-      (matrix.a = cast (_Runtime.multiplyNumbers(HxMath.cos(radY), target.scaleX) : Dynamic));
-      (matrix.b = cast (_Runtime.multiplyNumbers(HxMath.sin(radY), target.scaleX) : Dynamic));
-      (matrix.c = cast (_Runtime.multiplyNumbers(-HxMath.sin(radX), target.scaleY) : Dynamic));
-      (matrix.d = cast (_Runtime.multiplyNumbers(HxMath.cos(radX), target.scaleY) : Dynamic));
+      (matrix.a = cast (_Runtime.multiplyNumbers(HxMath.cos(radY), target.scaleX) : Float));
+      (matrix.b = cast (_Runtime.multiplyNumbers(HxMath.sin(radY), target.scaleX) : Float));
+      (matrix.c = cast (_Runtime.multiplyNumbers(-HxMath.sin(radX), target.scaleY) : Float));
+      (matrix.d = cast (_Runtime.multiplyNumbers(HxMath.cos(radX), target.scaleY) : Float));
     }
-    (matrix.tx = cast ((target.x - ((matrix.a * target.pivotX) + (matrix.c * target.pivotY))) : Dynamic));
-    (matrix.ty = cast ((target.y - ((matrix.b * target.pivotX) + (matrix.d * target.pivotY))) : Dynamic));
+    (matrix.tx = cast ((target.x - ((matrix.a * target.pivotX) + (matrix.c * target.pivotY))) : Float));
+    (matrix.ty = cast ((target.y - ((matrix.b * target.pivotX) + (matrix.d * target.pivotY))) : Float));
     ((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId = (cast runtime : { var localTransformId:Float; }).localTransformId);
   }
 
   public static function recomputeWorldTransform2D__nodeTransform2d<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasTransform2DRuntime, }, ?parentRuntime:{ >NodeRuntime<Traits>, >HasTransform2DRuntime, }):Void {
-    if ((cast _Runtime.strictEquals(runtime.worldMatrix, null) : Bool)) { (runtime.worldMatrix = cast ((cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(runtime.worldMatrix, null) : Bool)) { (runtime.worldMatrix = cast ((cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix) : Null<Matrix>)); }
     ensureNodeLocalMatrix((cast target : Dynamic));
     if ((cast !_Runtime.strictEquals(parentRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       multiplyMatrix(({ final __callArgument11:Dynamic = runtime.worldMatrix; __callArgument11; }), ({ final __callArgument12:Dynamic = parentRuntime.worldMatrix; __callArgument12; }), ({ final __callArgument13:Dynamic = runtime.localMatrix; __callArgument13; }));

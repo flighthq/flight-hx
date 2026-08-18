@@ -2366,15 +2366,19 @@ function emitExpression(expression: IrExpression): string {
               left.type ?? binding.field.type,
             );
           }
-          const field = directTypedStructField(expression.left, object);
+          const left = expression.left;
+          const field = directTypedStructField(left, object);
+          const assigned = (value: string): string => typedStructAssignmentValue(left, value);
           if (expression.operator === '=') {
-            return `(${field} = cast (${emitExpression(expression.right)} : Dynamic))`;
+            return `(${field} = ${assigned(emitExpression(expression.right))})`;
           }
           if (expression.operator === '%=') {
-            return `(${field} = cast (${emitArithmeticOperation(field, '%', emitExpression(expression.right))} : Dynamic))`;
+            return `(${field} = ${assigned(emitArithmeticOperation(field, '%', emitExpression(expression.right)))})`;
           }
           if (['&=', '|=', '^=', '<<=', '>>=', '>>>='].includes(expression.operator)) {
-            return `(${field} = cast (${emitCompoundOperation(field, expression.operator.slice(0, -1), expression.right)} : Dynamic))`;
+            return `(${field} = ${assigned(
+              emitCompoundOperation(field, expression.operator.slice(0, -1), expression.right),
+            )})`;
           }
           return `(${field} ${expression.operator} ${emitExpression(expression.right)})`;
         }
@@ -3109,6 +3113,14 @@ function directTypedStructField(
     ? `(cast ${owner} : ${typeof receiverCast === 'string' ? receiverCast : emitType(receiverCast)})`
     : owner;
   return `${typedOwner}.${safeName(binding.field.name)}`;
+}
+
+function typedStructAssignmentValue(expression: Extract<IrExpression, { kind: 'property' }>, value: string): string {
+  const type = expression.type ?? expression.typedStructBinding?.field.type;
+  if (!type) {
+    throw new Error(`Typed-struct assignment has no field type: ${currentSourceIdentity}:${expression.name}`);
+  }
+  return `cast (${value} : ${emitType(type)})`;
 }
 
 function emitTypedStructRead(expression: Extract<IrExpression, { kind: 'property' }>): string {

@@ -50,20 +50,20 @@ class StageFit {
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene2d, 'root'), null) : Bool)) {
       var runtime:flighthq._internal._Any = (cast getNodeRuntime((cast _Runtime.field(scene2d, 'root') : Dynamic)) : flighthq._internal._Partial<HasBoundsRectangleRuntime>);
       if ((cast !_Runtime.strictEquals(_Runtime.optionalField(runtime, 'computeLocalBoundsRectangle'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (StageFit._tempRectangle__stageFit.width = cast (0.0 : Dynamic));
-        (StageFit._tempRectangle__stageFit.height = cast (0.0 : Dynamic));
+        (StageFit._tempRectangle__stageFit.width = cast (0.0 : Float));
+        (StageFit._tempRectangle__stageFit.height = cast (0.0 : Float));
         _Runtime.callProperty(runtime, 'computeLocalBoundsRectangle', cast ([StageFit._tempRectangle__stageFit, (cast _Runtime.field(scene2d, 'root') : BoundsNodeAny)] : Array<Dynamic>));
         (contentWidth = cast (StageFit._tempRectangle__stageFit.width : Dynamic));
         (contentHeight = cast (StageFit._tempRectangle__stageFit.height : Dynamic));
       }
     }
     if ((cast ((cast _Runtime.strictEquals(contentWidth, 0.0) : Bool) || (cast _Runtime.strictEquals(contentHeight, 0.0) : Bool)) : Bool)) {
-      (out.a = cast (1.0 : Dynamic));
-      (out.b = cast (0.0 : Dynamic));
-      (out.c = cast (0.0 : Dynamic));
-      (out.d = cast (1.0 : Dynamic));
-      (out.tx = cast (0.0 : Dynamic));
-      (out.ty = cast (0.0 : Dynamic));
+      (out.a = cast (1.0 : Float));
+      (out.b = cast (0.0 : Float));
+      (out.c = cast (0.0 : Float));
+      (out.d = cast (1.0 : Float));
+      (out.tx = cast (0.0 : Float));
+      (out.ty = cast (0.0 : Float));
       return;
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(scene2d, 'scaleMode'), 'noscale') : Bool)) {
@@ -77,12 +77,12 @@ class StageFit {
     } else {
       (sx = cast ((sy = cast ((cast computeScene2DFitFillScale((cast contentWidth : Float), (cast contentHeight : Float), (cast viewWidth : Float), (cast viewHeight : Float)) : Float) : Dynamic)) : Dynamic));
     } } }
-    (out.a = cast (sx : Dynamic));
-    (out.b = cast (0.0 : Dynamic));
-    (out.c = cast (0.0 : Dynamic));
-    (out.d = cast (sy : Dynamic));
-    (out.tx = cast ((cast computeScene2DFitAlignX((cast (contentWidth * sx) : Float), (cast viewWidth : Float), _Runtime.field(scene2d, 'align')) : Float) : Dynamic));
-    (out.ty = cast ((cast computeScene2DFitAlignY((cast (contentHeight * sy) : Float), (cast viewHeight : Float), _Runtime.field(scene2d, 'align')) : Float) : Dynamic));
+    (out.a = cast (sx : Float));
+    (out.b = cast (0.0 : Float));
+    (out.c = cast (0.0 : Float));
+    (out.d = cast (sy : Float));
+    (out.tx = cast ((cast computeScene2DFitAlignX((cast (contentWidth * sx) : Float), (cast viewWidth : Float), _Runtime.field(scene2d, 'align')) : Float) : Float));
+    (out.ty = cast ((cast computeScene2DFitAlignY((cast (contentHeight * sy) : Float), (cast viewHeight : Float), _Runtime.field(scene2d, 'align')) : Float) : Float));
   }
 
   public static final _tempRectangle__stageFit:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);

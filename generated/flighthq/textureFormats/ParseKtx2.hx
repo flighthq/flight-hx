@@ -75,7 +75,7 @@ class ParseKtx2 {
     layers = HxMath.max(1.0, layerCount);
     faces = ((cast _Runtime.strictEquals(faceCount, 6.0) : Bool) ? (cast 6.0 : Dynamic) : (cast 1.0 : Dynamic));
     levelCountPresent = HxMath.max(1.0, levelCount);
-    (reader.offset = cast (ParseKtx2.ktx2LevelIndexOffset__parseKtx2 : Dynamic));
+    (reader.offset = cast (ParseKtx2.ktx2LevelIndexOffset__parseKtx2 : Float));
     if ((cast !(cast (cast hasByteReaderBytes(({ final __callArgument17:Dynamic = reader; __callArgument17; }), (cast (levelCountPresent * 24.0) : Float)) : Bool) : Bool) : Bool)) { return cast (cast ParseKtx2.reject__parseKtx2((cast failure : Dynamic), ({ final __callArgument18:Dynamic = 'level-range-out-of-bounds'; __callArgument18; })) : Null<TextureContainer>); }
     fileOrderLevels = (cast cast ([] : Array<Dynamic>));
     imagesPerLevel = (layers * faces);

@@ -20,11 +20,11 @@ class BitmapMedian {
     var bs:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var as:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     r = HxMath.max(0.0, HxMath.round(radius));
-    w = _Runtime.field(source, 'width');
-    h = _Runtime.field(source, 'height');
-    bitmapWidth = (cast _Runtime.field(source, 'bitmap') : { var width:Float; }).width;
-    bitmapHeight = (cast _Runtime.field(source, 'bitmap') : { var height:Float; }).height;
-    data = (cast _Runtime.field(source, 'bitmap') : { var data:flighthq._internal._UInt8ClampedArray; }).data;
+    w = source.width;
+    h = source.height;
+    bitmapWidth = (cast source.bitmap : { var width:Float; }).width;
+    bitmapHeight = (cast source.bitmap : { var height:Float; }).height;
+    data = (cast source.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
     area = (((2.0 * r) + 1.0) * ((2.0 * r) + 1.0));
     if ((cast ((cast _Runtime.strictEquals(BitmapMedian._windowRed__bitmapMedian, null) : Bool) || (cast ((cast _Runtime.field(BitmapMedian._windowRed__bitmapMedian, 'length') : Float) < (cast area : Float)) : Bool)) : Bool)) {
       (BitmapMedian._windowRed__bitmapMedian = cast (new flighthq._internal._UInt8Array(area) : Dynamic));
@@ -46,11 +46,11 @@ class BitmapMedian {
             {
               var ky:Float = -r;
               while ((cast ((cast ky : Float) <= (cast r : Float)) : Bool)) {
-                var sy:Float = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'y'), py) + ky)));
+                var sy:Float = HxMath.max(0.0, HxMath.min((bitmapHeight - 1.0), ((source.y + py) + ky)));
                 {
                   var kx:Float = -r;
                   while ((cast ((cast kx : Float) <= (cast r : Float)) : Bool)) {
-                    var sx:Float = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), (_Runtime.addNumbers(_Runtime.field(source, 'x'), px) + kx)));
+                    var sx:Float = HxMath.max(0.0, HxMath.min((bitmapWidth - 1.0), ((source.x + px) + kx)));
                     var si:Float = (((sy * bitmapWidth) + sx) * 4.0);
                     flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast rs : flighthq._internal._UInt8Array), (cast n : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast si : Float)) : Float));
                     flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast gs : flighthq._internal._UInt8Array), (cast n : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (si + 1.0) : Float)) : Float));

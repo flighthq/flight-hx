@@ -10,10 +10,10 @@ class RectanglePool {
   public static function acquireEmptyRectangle():Rectangle {
     var r:Rectangle = cast _Runtime.UNDEFINED;
     r = (cast acquireRectangle() : Rectangle);
-    (r.x = cast (0.0 : Dynamic));
-    (r.y = cast (0.0 : Dynamic));
-    (r.width = cast (0.0 : Dynamic));
-    (r.height = cast (0.0 : Dynamic));
+    (r.x = cast (0.0 : Float));
+    (r.y = cast (0.0 : Float));
+    (r.width = cast (0.0 : Float));
+    (r.height = cast (0.0 : Float));
     return cast r;
     return cast null;
   }

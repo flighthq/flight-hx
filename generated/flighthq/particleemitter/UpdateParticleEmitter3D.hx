@@ -89,7 +89,7 @@ class UpdateParticleEmitter3D {
     var liveVelocityCount:Float = cast _Runtime.UNDEFINED;
     data = (cast emitter : ParticleEmitter3D).data;
     worldM = ((cast config.worldSpace : Bool) ? (cast (cast (cast getNodeWorldMatrix4((cast (cast (cast emitter : flighthq._internal._Any) : Node3D) : Dynamic)) : Matrix4Like) : { var m:flighthq._internal._Float32Array; }).m : Dynamic) : (cast null : Dynamic));
-    (data.worldSpace = cast (!_Runtime.strictEquals(worldM, null) : Dynamic));
+    (data.worldSpace = cast (!_Runtime.strictEquals(worldM, null) : Bool));
     if ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     originM = ((cast !_Runtime.strictEquals(worldM, null) : Bool) ? (cast worldM : Dynamic) : (cast (cast (cast getNodeLocalMatrix4((cast (cast (cast emitter : flighthq._internal._Any) : Node3D) : Dynamic)) : Matrix4Like) : { var m:flighthq._internal._Float32Array; }).m : Dynamic));
     trackX = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast originM : flighthq._internal._Float32Array), (cast 12.0 : Float));
@@ -222,7 +222,7 @@ class UpdateParticleEmitter3D {
       }
       i++;
     }
-    (data.particleCount = cast (liveCount : Dynamic));
+    (data.particleCount = cast (liveCount : Float));
     emitting = (cast UpdateParticleEmitter3D.isEmitting__updateParticleEmitter3D(({ final __callArgument28:Dynamic = config; __callArgument28; }), (cast state.emitterAge : Float)) : Bool);
     if ((cast ((cast ((cast config.duration : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast config.loop : Bool) : Bool)) : Bool)) { (state.emitterAge += deltaTime); }
     (state.spawnAccumulator += ((cast emitting : Bool) ? (cast (config.spawnRate * deltaTime) : Dynamic) : (cast 0.0 : Dynamic)));
@@ -232,7 +232,7 @@ class UpdateParticleEmitter3D {
       (state.burstTimer -= deltaTime);
       if ((cast ((cast state.burstTimer : Float) <= (cast 0.0 : Float)) : Bool)) {
         (toSpawn = cast ((toSpawn + config.burstCount) : Dynamic));
-        (state.burstTimer = cast (((cast ((cast config.burstInterval : Float) > (cast 0.0 : Float)) : Bool) ? (cast config.burstInterval : Dynamic) : (cast HxMath.POSITIVE_INFINITY : Dynamic)) : Dynamic));
+        (state.burstTimer = cast (((cast ((cast config.burstInterval : Float) > (cast 0.0 : Float)) : Bool) ? (cast config.burstInterval : Dynamic) : (cast HxMath.POSITIVE_INFINITY : Dynamic)) : Float));
       }
     }
     maxNew = (config.maxParticles - liveCount);
@@ -411,11 +411,11 @@ class UpdateParticleEmitter3D {
           sIdx++;
         }
       }
-      (data.particleCount = cast (newCount : Dynamic));
+      (data.particleCount = cast (newCount : Float));
     }
-    (state.prevX = cast (trackX : Dynamic));
-    (state.prevY = cast (trackY : Dynamic));
-    (state.prevZ = cast (trackZ : Dynamic));
+    (state.prevX = cast (trackX : Float));
+    (state.prevY = cast (trackY : Float));
+    (state.prevZ = cast (trackZ : Float));
     liveVelocityCount = (data.particleCount * PARTICLE_VELOCITY_STRIDE);
     if ((cast ((cast _Runtime.field(data.velocities, 'length') : Float) >= (cast liveVelocityCount : Float)) : Bool)) {
       {

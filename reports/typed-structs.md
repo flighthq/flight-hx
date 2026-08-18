@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1604 |
-| Direct schemas | 400 |
+| Audit-only schemas | 1603 |
+| Direct schemas | 401 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 18850 |
-| Directly emitted accesses | 11816 |
+| Pending accesses | 18176 |
+| Directly emitted accesses | 12490 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1604 |
+| Newly discovered, audit-only | 1603 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -224,7 +224,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#BitmapMismatch` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BitmapReadbackBlockReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#BitmapReadbackExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#BitmapRegion` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 669 | 5 | 0 | 674 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#BitmapRegion` | `direct` | `new` | — | reviewed escape-free bitmap region | 5 | 669 | 5 | 0 | 0 | 674 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BitmapResizeMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#BitmapResizeOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapShadowBlurOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 1 | yes | — |

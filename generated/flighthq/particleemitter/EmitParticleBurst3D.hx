@@ -232,7 +232,7 @@ class EmitParticleBurst3D {
         sIdx++;
       }
     }
-    (data.particleCount = cast (newCount : Dynamic));
+    (data.particleCount = cast (newCount : Float));
     return cast toSpawn;
     return cast null;
   }

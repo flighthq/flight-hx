@@ -489,16 +489,16 @@ class GltfParse {
   public static function cloneGltfTransform__gltfParse(source:Transform3D):Transform3D {
     var transform:Transform3D = cast _Runtime.UNDEFINED;
     transform = (cast createTransform3D() : Transform3D);
-    ((cast (cast transform : Transform3D).position : { var x:Float; }).x = cast ((cast _Runtime.field(source, 'position') : { var x:Float; }).x : Dynamic));
-    ((cast (cast transform : Transform3D).position : { var y:Float; }).y = cast ((cast _Runtime.field(source, 'position') : { var y:Float; }).y : Dynamic));
-    ((cast (cast transform : Transform3D).position : { var z:Float; }).z = cast ((cast _Runtime.field(source, 'position') : { var z:Float; }).z : Dynamic));
-    ((cast (cast transform : Transform3D).rotation : { var x:Float; }).x = cast ((cast _Runtime.field(source, 'rotation') : { var x:Float; }).x : Dynamic));
-    ((cast (cast transform : Transform3D).rotation : { var y:Float; }).y = cast ((cast _Runtime.field(source, 'rotation') : { var y:Float; }).y : Dynamic));
-    ((cast (cast transform : Transform3D).rotation : { var z:Float; }).z = cast ((cast _Runtime.field(source, 'rotation') : { var z:Float; }).z : Dynamic));
-    ((cast (cast transform : Transform3D).rotation : { var w:Float; }).w = cast ((cast _Runtime.field(source, 'rotation') : { var w:Float; }).w : Dynamic));
-    ((cast (cast transform : Transform3D).scale : { var x:Float; }).x = cast ((cast _Runtime.field(source, 'scale') : { var x:Float; }).x : Dynamic));
-    ((cast (cast transform : Transform3D).scale : { var y:Float; }).y = cast ((cast _Runtime.field(source, 'scale') : { var y:Float; }).y : Dynamic));
-    ((cast (cast transform : Transform3D).scale : { var z:Float; }).z = cast ((cast _Runtime.field(source, 'scale') : { var z:Float; }).z : Dynamic));
+    ((cast (cast transform : Transform3D).position : { var x:Float; }).x = cast ((cast _Runtime.field(source, 'position') : { var x:Float; }).x : Float));
+    ((cast (cast transform : Transform3D).position : { var y:Float; }).y = cast ((cast _Runtime.field(source, 'position') : { var y:Float; }).y : Float));
+    ((cast (cast transform : Transform3D).position : { var z:Float; }).z = cast ((cast _Runtime.field(source, 'position') : { var z:Float; }).z : Float));
+    ((cast (cast transform : Transform3D).rotation : { var x:Float; }).x = cast ((cast _Runtime.field(source, 'rotation') : { var x:Float; }).x : Float));
+    ((cast (cast transform : Transform3D).rotation : { var y:Float; }).y = cast ((cast _Runtime.field(source, 'rotation') : { var y:Float; }).y : Float));
+    ((cast (cast transform : Transform3D).rotation : { var z:Float; }).z = cast ((cast _Runtime.field(source, 'rotation') : { var z:Float; }).z : Float));
+    ((cast (cast transform : Transform3D).rotation : { var w:Float; }).w = cast ((cast _Runtime.field(source, 'rotation') : { var w:Float; }).w : Float));
+    ((cast (cast transform : Transform3D).scale : { var x:Float; }).x = cast ((cast _Runtime.field(source, 'scale') : { var x:Float; }).x : Float));
+    ((cast (cast transform : Transform3D).scale : { var y:Float; }).y = cast ((cast _Runtime.field(source, 'scale') : { var y:Float; }).y : Float));
+    ((cast (cast transform : Transform3D).scale : { var z:Float; }).z = cast ((cast _Runtime.field(source, 'scale') : { var z:Float; }).z : Float));
     return cast transform;
     return cast null;
   }
@@ -670,20 +670,20 @@ class GltfParse {
     r = gltfNode.rotation;
     s = gltfNode.scale;
     if ((cast !_Runtime.strictEquals(t, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast (cast transform : Transform3D).position : { var x:Float; }).x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast t : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
-      ((cast (cast transform : Transform3D).position : { var y:Float; }).y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast t : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
-      ((cast (cast transform : Transform3D).position : { var z:Float; }).z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast t : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
+      ((cast (cast transform : Transform3D).position : { var x:Float; }).x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast t : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0) : Float));
+      ((cast (cast transform : Transform3D).position : { var y:Float; }).y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast t : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 0.0) : Float));
+      ((cast (cast transform : Transform3D).position : { var z:Float; }).z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast t : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 0.0) : Float));
     }
     if ((cast !_Runtime.strictEquals(r, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast (cast transform : Transform3D).rotation : { var x:Float; }).x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast r : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
-      ((cast (cast transform : Transform3D).rotation : { var y:Float; }).y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast r : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
-      ((cast (cast transform : Transform3D).rotation : { var z:Float; }).z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast r : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 0.0) : Dynamic));
-      ((cast (cast transform : Transform3D).rotation : { var w:Float; }).w = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast r : Array<Float>), (cast 3.0 : Float)), function():Dynamic return cast 1.0) : Dynamic));
+      ((cast (cast transform : Transform3D).rotation : { var x:Float; }).x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast r : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0) : Float));
+      ((cast (cast transform : Transform3D).rotation : { var y:Float; }).y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast r : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 0.0) : Float));
+      ((cast (cast transform : Transform3D).rotation : { var z:Float; }).z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast r : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 0.0) : Float));
+      ((cast (cast transform : Transform3D).rotation : { var w:Float; }).w = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast r : Array<Float>), (cast 3.0 : Float)), function():Dynamic return cast 1.0) : Float));
     }
     if ((cast !_Runtime.strictEquals(s, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast (cast transform : Transform3D).scale : { var x:Float; }).x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0) : Dynamic));
-      ((cast (cast transform : Transform3D).scale : { var y:Float; }).y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 1.0) : Dynamic));
-      ((cast (cast transform : Transform3D).scale : { var z:Float; }).z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 1.0) : Dynamic));
+      ((cast (cast transform : Transform3D).scale : { var x:Float; }).x = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0) : Float));
+      ((cast (cast transform : Transform3D).scale : { var y:Float; }).y = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 1.0) : Float));
+      ((cast (cast transform : Transform3D).scale : { var z:Float; }).z = cast (_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast s : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 1.0) : Float));
     }
     return cast transform;
     return cast null;
@@ -745,22 +745,22 @@ class GltfParse {
 
   public static function applyGltfSampler__gltfParse(texture:Texture, sampler:Null<GltfSampler>):Void {
     if ((cast _Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    if ((cast !_Runtime.strictEquals((cast sampler : { @:optional var wrapS:Null<Float>; }).wrapS, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast (cast texture : { var sampler:Sampler; }).sampler : { var wrapU:TextureWrap; }).wrapU = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, (cast sampler : { @:optional var wrapS:Null<Float>; }).wrapS) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals((cast sampler : { @:optional var wrapT:Null<Float>; }).wrapT, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast (cast texture : { var sampler:Sampler; }).sampler : { var wrapV:TextureWrap; }).wrapV = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, (cast sampler : { @:optional var wrapT:Null<Float>; }).wrapT) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals((cast sampler : { @:optional var magFilter:Null<Float>; }).magFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast (cast texture : { var sampler:Sampler; }).sampler : { var magFilter:TextureFilter; }).magFilter = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, (cast sampler : { @:optional var magFilter:Null<Float>; }).magFilter) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast sampler : { @:optional var wrapS:Null<Float>; }).wrapS, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast (cast texture : { var sampler:Sampler; }).sampler : { var wrapU:TextureWrap; }).wrapU = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, (cast sampler : { @:optional var wrapS:Null<Float>; }).wrapS) : TextureWrap)); }
+    if ((cast !_Runtime.strictEquals((cast sampler : { @:optional var wrapT:Null<Float>; }).wrapT, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast (cast texture : { var sampler:Sampler; }).sampler : { var wrapV:TextureWrap; }).wrapV = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_WRAP__gltfParse, (cast sampler : { @:optional var wrapT:Null<Float>; }).wrapT) : TextureWrap)); }
+    if ((cast !_Runtime.strictEquals((cast sampler : { @:optional var magFilter:Null<Float>; }).magFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast (cast texture : { var sampler:Sampler; }).sampler : { var magFilter:TextureFilter; }).magFilter = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, (cast sampler : { @:optional var magFilter:Null<Float>; }).magFilter) : TextureFilter)); }
     if ((cast !_Runtime.strictEquals((cast sampler : { @:optional var minFilter:Null<Float>; }).minFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast (cast texture : { var sampler:Sampler; }).sampler : { var minFilter:TextureFilter; }).minFilter = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, (cast sampler : { @:optional var minFilter:Null<Float>; }).minFilter) : Dynamic));
-      ((cast (cast texture : { var sampler:Sampler; }).sampler : { var mipmaps:Bool; }).mipmaps = cast (_Runtime.getIndex(GltfParse.GLTF_MIN_FILTER_MIPMAPS__gltfParse, (cast sampler : { @:optional var minFilter:Null<Float>; }).minFilter) : Dynamic));
+      ((cast (cast texture : { var sampler:Sampler; }).sampler : { var minFilter:TextureFilter; }).minFilter = cast (_Runtime.getIndex(GltfParse.GLTF_TEXTURE_FILTER__gltfParse, (cast sampler : { @:optional var minFilter:Null<Float>; }).minFilter) : TextureFilter));
+      ((cast (cast texture : { var sampler:Sampler; }).sampler : { var mipmaps:Bool; }).mipmaps = cast (_Runtime.getIndex(GltfParse.GLTF_MIN_FILTER_MIPMAPS__gltfParse, (cast sampler : { @:optional var minFilter:Null<Float>; }).minFilter) : Bool));
     }
   }
 
   public static function applyGltfTextureTransform__gltfParse(texture:Texture, transform:Null<flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<GltfTextureInfo, String>, String>>):Void {
     if ((cast _Runtime.strictEquals(transform, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast (_Runtime.coalesce(_Runtime.optionalIndex((cast transform : { @:optional var offset:Null<Array<Float>>; }).offset, 0.0), function():Dynamic return cast 0.0) : Dynamic));
-    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast (_Runtime.coalesce(_Runtime.optionalIndex((cast transform : { @:optional var offset:Null<Array<Float>>; }).offset, 1.0), function():Dynamic return cast 0.0) : Dynamic));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast (_Runtime.coalesce(_Runtime.optionalIndex((cast transform : { @:optional var offset:Null<Array<Float>>; }).offset, 0.0), function():Dynamic return cast 0.0) : Float));
+    ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast (_Runtime.coalesce(_Runtime.optionalIndex((cast transform : { @:optional var offset:Null<Array<Float>>; }).offset, 1.0), function():Dynamic return cast 0.0) : Float));
     ((cast texture : { var uvRotation:Float; }).uvRotation = _Runtime.coalesce((cast transform : { @:optional var rotation:Null<Float>; }).rotation, function():Dynamic return cast 0.0));
-    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast (_Runtime.coalesce(_Runtime.optionalIndex((cast transform : { @:optional var scale:Null<Array<Float>>; }).scale, 0.0), function():Dynamic return cast 1.0) : Dynamic));
-    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast (_Runtime.coalesce(_Runtime.optionalIndex((cast transform : { @:optional var scale:Null<Array<Float>>; }).scale, 1.0), function():Dynamic return cast 1.0) : Dynamic));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x = cast (_Runtime.coalesce(_Runtime.optionalIndex((cast transform : { @:optional var scale:Null<Array<Float>>; }).scale, 0.0), function():Dynamic return cast 1.0) : Float));
+    ((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y = cast (_Runtime.coalesce(_Runtime.optionalIndex((cast transform : { @:optional var scale:Null<Array<Float>>; }).scale, 1.0), function():Dynamic return cast 1.0) : Float));
   }
 
   public static function buildGltfImageResourceReference__gltfParse(doc:GltfDocument, buffers:Array<flighthq._internal._UInt8Array>, image:GltfImage, options:Null<GltfImportOptions>, imageIndex:Float, gltfDrops:Null<flighthq._internal._Map<String, GltfDropTally__gltfParse>>):Null<ImageResourceReference> {

@@ -573,10 +573,10 @@ class SwfDocument {
   public static function computeSwfLocalBoundsRectangle__swfDocument(out:Rectangle, source:BoundsNodeAny):Void {
     var bounds:SwfRectangle__swfDocument = cast _Runtime.UNDEFINED;
     bounds = (cast (cast _Runtime.field(source, 'data') : SwfAuthoredBoundsData__swfDocument) : SwfAuthoredBoundsData__swfDocument).authoredBounds;
-    (out.x = cast ((cast bounds : SwfRectangle__swfDocument).x : Dynamic));
-    (out.y = cast ((cast bounds : SwfRectangle__swfDocument).y : Dynamic));
-    (out.width = cast ((cast bounds : SwfRectangle__swfDocument).width : Dynamic));
-    (out.height = cast ((cast bounds : SwfRectangle__swfDocument).height : Dynamic));
+    (out.x = cast ((cast bounds : SwfRectangle__swfDocument).x : Float));
+    (out.y = cast ((cast bounds : SwfRectangle__swfDocument).y : Float));
+    (out.width = cast ((cast bounds : SwfRectangle__swfDocument).width : Float));
+    (out.height = cast ((cast bounds : SwfRectangle__swfDocument).height : Float));
   }
 
   public static function createSwfInstanceKey__swfDocument(placement:SwfPlacement__swfDocument):Float {
@@ -644,7 +644,7 @@ class SwfDocument {
       var image:Null<SwfImagePayload__swfDocument> = ((cast _Runtime.field(parsed, 'images') : flighthq._internal._Map<Float, SwfImagePayload__swfDocument>).get(characterId));
       if ((cast ((cast _Runtime.strictEquals(image, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast SwfDocument.isSwfLosslessImage__swfDocument((cast image : Dynamic)) : Bool) : Bool)) : Bool)) { continue; }
       var reference:EmbeddedImageResourceReference = (cast createEmbeddedImageResourceReference((cast image : SwfImagePayload__swfDocument).bytes, ({ final __callArgument90:Dynamic = (cast image : SwfImagePayload__swfDocument).mimeType; __callArgument90; })) : EmbeddedImageResourceReference);
-      (reference.textures = cast (_Runtime.concatArrays([_Runtime.toArray(((cast variants : flighthq._internal._Map<String, Texture2D>).values()))]) : Dynamic));
+      (reference.textures = cast (_Runtime.concatArrays([_Runtime.toArray(((cast variants : flighthq._internal._Map<String, Texture2D>).values()))]) : Null<Array<Texture>>));
       _Runtime.callProperty(resources, 'push', cast ([reference] : Array<Dynamic>));
     }
     return cast resources;

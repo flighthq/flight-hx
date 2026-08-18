@@ -14,8 +14,8 @@ class TextMetrics {
   }
 
   public static function getTextMetrics(out:flighthq.types.TextMetrics, layout:TextLayoutResult):Void {
-    (out.width = cast (HxMath.ceil(_Runtime.field(layout, 'textWidth')) : Dynamic));
-    (out.height = cast (HxMath.ceil(_Runtime.field(layout, 'textHeight')) : Dynamic));
-    (out.numLines = cast (_Runtime.field(layout, 'numLines') : Dynamic));
+    (out.width = cast (HxMath.ceil(_Runtime.field(layout, 'textWidth')) : Float));
+    (out.height = cast (HxMath.ceil(_Runtime.field(layout, 'textHeight')) : Float));
+    (out.numLines = cast (_Runtime.field(layout, 'numLines') : Float));
   }
 }

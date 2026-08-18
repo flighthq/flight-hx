@@ -72,15 +72,15 @@ class ElectronScreen {
   }
 
   public static function fillScreenInfo__electronScreen(out:ScreenInfo, display:ElectronDisplay, isPrimary:Bool):ScreenInfo {
-    (out.id = cast (_Runtime.field(display, 'id') : Dynamic));
-    (out.x = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).x : Dynamic));
-    (out.y = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).y : Dynamic));
-    (out.width = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).width : Dynamic));
-    (out.height = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).height : Dynamic));
-    (out.workWidth = cast ((cast _Runtime.field(display, 'workArea') : { var x:Float; var y:Float; var width:Float; var height:Float; }).width : Dynamic));
-    (out.workHeight = cast ((cast _Runtime.field(display, 'workArea') : { var x:Float; var y:Float; var width:Float; var height:Float; }).height : Dynamic));
-    (out.scaleFactor = cast (_Runtime.field(display, 'scaleFactor') : Dynamic));
-    (out.isPrimary = cast (isPrimary : Dynamic));
+    (out.id = cast (_Runtime.field(display, 'id') : Float));
+    (out.x = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).x : Float));
+    (out.y = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).y : Float));
+    (out.width = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).width : Float));
+    (out.height = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).height : Float));
+    (out.workWidth = cast ((cast _Runtime.field(display, 'workArea') : { var x:Float; var y:Float; var width:Float; var height:Float; }).width : Float));
+    (out.workHeight = cast ((cast _Runtime.field(display, 'workArea') : { var x:Float; var y:Float; var width:Float; var height:Float; }).height : Float));
+    (out.scaleFactor = cast (_Runtime.field(display, 'scaleFactor') : Float));
+    (out.isPrimary = cast (isPrimary : Bool));
     return cast out;
     return cast null;
   }

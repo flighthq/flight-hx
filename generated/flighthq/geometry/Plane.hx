@@ -16,10 +16,10 @@ class Plane {
   }
 
   public static function copyPlane(out:PlaneLike, source:PlaneLike):Void {
-    (out.a = cast (source.a : Dynamic));
-    (out.b = cast (source.b : Dynamic));
-    (out.c = cast (source.c : Dynamic));
-    (out.d = cast (source.d : Dynamic));
+    (out.a = cast (source.a : Float));
+    (out.b = cast (source.b : Float));
+    (out.c = cast (source.c : Float));
+    (out.d = cast (source.d : Float));
   }
 
   public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):flighthq.types.Plane {
@@ -36,15 +36,15 @@ class Plane {
     py = point.y;
     pz = point.z;
     dist = ((((plane.a * px) + (plane.b * py)) + (plane.c * pz)) + plane.d);
-    (out.x = cast ((px - (dist * plane.a)) : Dynamic));
-    (out.y = cast ((py - (dist * plane.b)) : Dynamic));
-    (out.z = cast ((pz - (dist * plane.c)) : Dynamic));
+    (out.x = cast ((px - (dist * plane.a)) : Float));
+    (out.y = cast ((py - (dist * plane.b)) : Float));
+    (out.z = cast ((pz - (dist * plane.c)) : Float));
   }
 
   public static function getPlaneCoplanarPoint(out:Vector3Like, plane:PlaneLike):Void {
-    (out.x = cast ((-plane.a * plane.d) : Dynamic));
-    (out.y = cast ((-plane.b * plane.d) : Dynamic));
-    (out.z = cast ((-plane.c * plane.d) : Dynamic));
+    (out.x = cast ((-plane.a * plane.d) : Float));
+    (out.y = cast ((-plane.b * plane.d) : Float));
+    (out.z = cast ((-plane.c * plane.d) : Float));
   }
 
   public static function getPlaneSignedDistanceToPoint(plane:PlaneLike, point:Vector3Like):Float {
@@ -65,17 +65,17 @@ class Plane {
     d = source.d;
     len = HxMath.sqrt((((a * a) + (b * b)) + (c * c)));
     if ((cast _Runtime.strictEquals(len, 0.0) : Bool)) {
-      (out.a = cast (a : Dynamic));
-      (out.b = cast (b : Dynamic));
-      (out.c = cast (c : Dynamic));
-      (out.d = cast (d : Dynamic));
+      (out.a = cast (a : Float));
+      (out.b = cast (b : Float));
+      (out.c = cast (c : Float));
+      (out.d = cast (d : Float));
       return;
     }
     inv = (1.0 / len);
-    (out.a = cast ((a * inv) : Dynamic));
-    (out.b = cast ((b * inv) : Dynamic));
-    (out.c = cast ((c * inv) : Dynamic));
-    (out.d = cast ((d * inv) : Dynamic));
+    (out.a = cast ((a * inv) : Float));
+    (out.b = cast ((b * inv) : Float));
+    (out.c = cast ((c * inv) : Float));
+    (out.d = cast ((d * inv) : Float));
   }
 
   public static function projectVector3OntoPlane(out:Vector3Like, point:Vector3Like, plane:PlaneLike):Void {
@@ -87,23 +87,23 @@ class Plane {
     py = point.y;
     pz = point.z;
     dist = ((((plane.a * px) + (plane.b * py)) + (plane.c * pz)) + plane.d);
-    (out.x = cast ((px - (dist * plane.a)) : Dynamic));
-    (out.y = cast ((py - (dist * plane.b)) : Dynamic));
-    (out.z = cast ((pz - (dist * plane.c)) : Dynamic));
+    (out.x = cast ((px - (dist * plane.a)) : Float));
+    (out.y = cast ((py - (dist * plane.b)) : Float));
+    (out.z = cast ((pz - (dist * plane.c)) : Float));
   }
 
   public static function setPlane(out:PlaneLike, a:Float, b:Float, c:Float, d:Float):Void {
-    (out.a = cast (a : Dynamic));
-    (out.b = cast (b : Dynamic));
-    (out.c = cast (c : Dynamic));
-    (out.d = cast (d : Dynamic));
+    (out.a = cast (a : Float));
+    (out.b = cast (b : Float));
+    (out.c = cast (c : Float));
+    (out.d = cast (d : Float));
   }
 
   public static function setPlaneFromNormalAndPoint(out:PlaneLike, normal:Vector3Like, point:Vector3Like):Void {
-    (out.a = cast (normal.x : Dynamic));
-    (out.b = cast (normal.y : Dynamic));
-    (out.c = cast (normal.z : Dynamic));
-    (out.d = cast (-(((normal.x * point.x) + (normal.y * point.y)) + (normal.z * point.z)) : Dynamic));
+    (out.a = cast (normal.x : Float));
+    (out.b = cast (normal.y : Float));
+    (out.c = cast (normal.z : Float));
+    (out.d = cast (-(((normal.x * point.x) + (normal.y * point.y)) + (normal.z * point.z)) : Float));
   }
 
   public static function setPlaneFromPoints(out:PlaneLike, a:Vector3Like, b:Vector3Like, c:Vector3Like):Void {
@@ -129,16 +129,16 @@ class Plane {
     nz = ((e1x * e2y) - (e1y * e2x));
     len = HxMath.sqrt((((nx * nx) + (ny * ny)) + (nz * nz)));
     if ((cast _Runtime.strictEquals(len, 0.0) : Bool)) {
-      (out.a = cast (nx : Dynamic));
-      (out.b = cast (ny : Dynamic));
-      (out.c = cast (nz : Dynamic));
-      (out.d = cast (0.0 : Dynamic));
+      (out.a = cast (nx : Float));
+      (out.b = cast (ny : Float));
+      (out.c = cast (nz : Float));
+      (out.d = cast (0.0 : Float));
       return;
     }
     inv = (1.0 / len);
-    (out.a = cast ((nx * inv) : Dynamic));
-    (out.b = cast ((ny * inv) : Dynamic));
-    (out.c = cast ((nz * inv) : Dynamic));
-    (out.d = cast (-(((out.a * a.x) + (out.b * a.y)) + (out.c * a.z)) : Dynamic));
+    (out.a = cast ((nx * inv) : Float));
+    (out.b = cast ((ny * inv) : Float));
+    (out.c = cast ((nz * inv) : Float));
+    (out.d = cast (-(((out.a * a.x) + (out.b * a.y)) + (out.c * a.z)) : Float));
   }
 }

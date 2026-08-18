@@ -92,8 +92,8 @@ class CanvasQuadBatch {
           setMatrixFromFloat32Array(({ final __callArgument3:Dynamic = quadTransform; __callArgument3; }), (cast offset : Float), ({ final __callArgument4:Dynamic = transforms; __callArgument4; }));
           multiplyMatrix(({ final __callArgument5:Dynamic = quadTransform; __callArgument5; }), ({ final __callArgument6:Dynamic = transform; __callArgument6; }), ({ final __callArgument7:Dynamic = quadTransform; __callArgument7; }));
           if ((cast roundPixels : Bool)) {
-            (quadTransform.tx = cast (HxMath.round(quadTransform.tx) : Dynamic));
-            (quadTransform.ty = cast (HxMath.round(quadTransform.ty) : Dynamic));
+            (quadTransform.tx = cast (HxMath.round(quadTransform.tx) : Float));
+            (quadTransform.ty = cast (HxMath.round(quadTransform.ty) : Float));
           }
           flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([quadTransform.a, quadTransform.b, quadTransform.c, quadTransform.d, quadTransform.tx, quadTransform.ty] : Array<Dynamic>));
           flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, region.x, region.y, region.width, region.height, 0.0, 0.0, region.width, region.height] : Array<Dynamic>));

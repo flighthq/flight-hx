@@ -43,9 +43,9 @@ class Matrix3 {
       _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds (2)')));
     }
     base = (column * 3.0);
-    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast base : Float)) : Dynamic));
-    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast (base + 1.0) : Float)) : Dynamic));
-    (out.z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast (base + 2.0) : Float)) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast base : Float)) : Float));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast (base + 1.0) : Float)) : Float));
+    (out.z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast (base + 2.0) : Float)) : Float));
   }
 
   public static function copyMatrix3RowFromVector3(out:Matrix3Like, row:Float, source:Vector3Like):Void {
@@ -61,9 +61,9 @@ class Matrix3 {
     if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds (2)')));
     }
-    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast row : Float)) : Dynamic));
-    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast (row + 3.0) : Float)) : Dynamic));
-    (out.z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast (row + 6.0) : Float)) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast row : Float)) : Float));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast (row + 3.0) : Float)) : Float));
+    (out.z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source.m : flighthq._internal._Float32Array), (cast (row + 6.0) : Float)) : Float));
   }
 
   public static function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m20:Float, ?m21:Float, ?m22:Float):flighthq.types.Matrix3 {

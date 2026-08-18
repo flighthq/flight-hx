@@ -18,6 +18,27 @@ export const cppStructInitTypedStructIds: readonly string[] = [
 
 const cppStructInitTypedStructIdSet = new Set(cppStructInitTypedStructIds);
 
+interface ReviewedTypedStructDirectAddition {
+  declarationFingerprint: string;
+  id: string;
+  purpose: string;
+}
+
+// Checker-discovered rows enter audit-only. Moving one to direct emission is a
+// separate, reviewable decision locked to its declaration fingerprint; this
+// list must not be folded into the historical migration baseline.
+export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDirectAddition[] = [
+  {
+    declarationFingerprint: 'sha256:6de1c57a64f9d839dba96b69bcdd8cae0ca18580cc13f425ae6cb9ec9f68c4b8',
+    id: '@flighthq/types:interface#BitmapRegion',
+    purpose: 'reviewed escape-free bitmap region',
+  },
+];
+
+const reviewedTypedStructDirectAdditionsById = new Map(
+  reviewedTypedStructDirectAdditions.map((addition) => [addition.id, addition]),
+);
+
 export interface TypedStructCandidate {
   declarationKind?: TypedStructDeclarationKind;
   emission: 'audit-only' | 'direct';
@@ -396,6 +417,19 @@ export function discoverTypedStructUniverse(
     });
   }
 
+  for (const addition of reviewedTypedStructDirectAdditions) {
+    const current = candidatesById.get(addition.id);
+    if (!current) throw new Error(`Reviewed typed-struct direct addition is missing: ${addition.id}`);
+    if (current.migration.status !== 'new' || current.migration.baselineId !== null) {
+      throw new Error(`Reviewed typed-struct direct addition is no longer checker-new: ${addition.id}`);
+    }
+    candidatesById.set(addition.id, {
+      ...current,
+      emission: 'direct',
+      purpose: addition.purpose,
+    });
+  }
+
   validateTypedStructMigrationApprovals(baseline, consumedExceptionalBaselineIds, candidatesById);
   const candidates = [...candidatesById.values()].sort(compareResolvedTypedStructCandidates);
   const removed = [...approvedTypedStructReplacementRemovals]
@@ -411,8 +445,20 @@ export function discoverTypedStructUniverse(
   const countStatus = (status: TypedStructMigrationStatus): number =>
     candidates.filter((candidate) => candidate.migration.status === status).length;
   const newCandidates = candidates.filter((candidate) => candidate.migration.status === 'new');
-  if (newCandidates.some((candidate) => candidate.emission !== 'audit-only')) {
-    throw new Error('Checker-discovered typed-struct rows must enter audit-only');
+  const unreviewedDirectCandidates = newCandidates.filter(
+    (candidate) =>
+      candidate.emission === 'direct' &&
+      !reviewedTypedStructDirectAdditionsById.has(
+        typedStructStableId(candidate.packageName, candidate.declarationKind, candidate.name),
+      ),
+  );
+  if (unreviewedDirectCandidates.length > 0) {
+    throw new Error(
+      `Checker-discovered typed-struct rows require direct-emission review: ${unreviewedDirectCandidates
+        .map((candidate) => typedStructStableId(candidate.packageName, candidate.declarationKind, candidate.name))
+        .sort()
+        .join(', ')}`,
+    );
   }
 
   return {
@@ -424,7 +470,7 @@ export function discoverTypedStructUniverse(
       summary: {
         baseline: baseline.candidates.length,
         kindChanged: countStatus('kind-changed'),
-        newAuditOnly: newCandidates.length,
+        newAuditOnly: newCandidates.filter((candidate) => candidate.emission === 'audit-only').length,
         preserved: countStatus('preserved'),
         relocated: countStatus('relocated'),
         removed: removed.length,
@@ -918,6 +964,8 @@ export function createTypedStructRegistry(
     );
   }
 
+  validateReviewedTypedStructDirectAdditions(schemas);
+
   const report: TypedStructAudit = {
     candidates: schemas.map((schema) => schema.audit),
     migration: migration ?? migrationAuditForCustomCandidates(analyzableCandidates, upstreamCommit),
@@ -985,6 +1033,22 @@ export function createTypedStructRegistry(
       };
     },
   };
+}
+
+function validateReviewedTypedStructDirectAdditions(schemas: readonly InternalSchema[]): void {
+  const schemasById = new Map(schemas.map((schema) => [schema.audit.id, schema.audit]));
+  for (const addition of reviewedTypedStructDirectAdditions) {
+    const schema = schemasById.get(addition.id);
+    if (!schema) continue;
+    if (schema.declarationFingerprint !== addition.declarationFingerprint) {
+      throw new Error(
+        `Reviewed typed-struct direct addition fingerprint drift for ${addition.id}: expected ${addition.declarationFingerprint}, received ${schema.declarationFingerprint}`,
+      );
+    }
+    if (!schema.eligible || schema.emission.mode !== 'direct' || schema.escapes.length > 0) {
+      throw new Error(`Reviewed typed-struct direct addition is no longer eligible and escape-free: ${addition.id}`);
+    }
+  }
 }
 
 function typedStructHaxeType(schema: TypedStructSchemaAudit): string {

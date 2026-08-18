@@ -17,7 +17,7 @@ class AudioResource {
   }
 
   public static function disposeAudioResource(resource:flighthq.types.AudioResource):Void {
-    (resource.buffer = cast (null : Dynamic));
+    (resource.buffer = cast (null : Null<flighthq._internal.dom.AudioBuffer>));
   }
 
   public static function getAudioResourceByteSize(resource:flighthq.types.AudioResource):Float {

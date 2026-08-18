@@ -30,10 +30,10 @@ class ClipRegion {
     var region:Null<flighthq.types.ClipRegion> = cast _Runtime.UNDEFINED;
     region = _Runtime.callProperty(ClipRegion.clipRegionPool__clipRegion, 'pop', cast ([] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast (cast region : flighthq.types.ClipRegion).rect : { var x:Float; }).x = cast (0.0 : Dynamic));
-      ((cast (cast region : flighthq.types.ClipRegion).rect : { var y:Float; }).y = cast (0.0 : Dynamic));
-      ((cast (cast region : flighthq.types.ClipRegion).rect : { var width:Float; }).width = cast (0.0 : Dynamic));
-      ((cast (cast region : flighthq.types.ClipRegion).rect : { var height:Float; }).height = cast (0.0 : Dynamic));
+      ((cast (cast region : flighthq.types.ClipRegion).rect : { var x:Float; }).x = cast (0.0 : Float));
+      ((cast (cast region : flighthq.types.ClipRegion).rect : { var y:Float; }).y = cast (0.0 : Float));
+      ((cast (cast region : flighthq.types.ClipRegion).rect : { var width:Float; }).width = cast (0.0 : Float));
+      ((cast (cast region : flighthq.types.ClipRegion).rect : { var height:Float; }).height = cast (0.0 : Float));
       ((cast region : flighthq.types.ClipRegion).contours = null);
       ((cast region : flighthq.types.ClipRegion).winding = 'nonZero');
       ((cast region : flighthq.types.ClipRegion).version = 0.0);
@@ -165,10 +165,10 @@ class ClipRegion {
   public static function getClipRegionBounds(out:RectangleLike, clip:flighthq.types.ClipRegion):Void {
     var r:Rectangle = cast _Runtime.UNDEFINED;
     r = _Runtime.field(clip, 'rect');
-    (out.x = cast (r.x : Dynamic));
-    (out.y = cast (r.y : Dynamic));
-    (out.width = cast (r.width : Dynamic));
-    (out.height = cast (r.height : Dynamic));
+    (out.x = cast (r.x : Float));
+    (out.y = cast (r.y : Float));
+    (out.width = cast (r.width : Float));
+    (out.height = cast (r.height : Float));
   }
 
   public static function intersectClipRegions(out:flighthq.types.ClipRegion, a:flighthq.types.ClipRegion, b:flighthq.types.ClipRegion):Void {
@@ -209,19 +209,19 @@ class ClipRegion {
     x1 = HxMath.min((ax + aw), (bx + bw));
     y1 = HxMath.min((ay + ah), (by + bh));
     if ((cast ((cast ((cast x1 : Float) <= (cast x0 : Float)) : Bool) || (cast ((cast y1 : Float) <= (cast y0 : Float)) : Bool)) : Bool)) {
-      ((cast (cast out : flighthq.types.ClipRegion).rect : { var x:Float; }).x = cast (0.0 : Dynamic));
-      ((cast (cast out : flighthq.types.ClipRegion).rect : { var y:Float; }).y = cast (0.0 : Dynamic));
-      ((cast (cast out : flighthq.types.ClipRegion).rect : { var width:Float; }).width = cast (0.0 : Dynamic));
-      ((cast (cast out : flighthq.types.ClipRegion).rect : { var height:Float; }).height = cast (0.0 : Dynamic));
+      ((cast (cast out : flighthq.types.ClipRegion).rect : { var x:Float; }).x = cast (0.0 : Float));
+      ((cast (cast out : flighthq.types.ClipRegion).rect : { var y:Float; }).y = cast (0.0 : Float));
+      ((cast (cast out : flighthq.types.ClipRegion).rect : { var width:Float; }).width = cast (0.0 : Float));
+      ((cast (cast out : flighthq.types.ClipRegion).rect : { var height:Float; }).height = cast (0.0 : Float));
       ((cast out : flighthq.types.ClipRegion).contours = null);
       ((cast out : flighthq.types.ClipRegion).winding = 'nonZero');
       ((cast out : flighthq.types.ClipRegion).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast out : flighthq.types.ClipRegion).version + 1.0)), 0));
       return;
     }
-    ((cast (cast out : flighthq.types.ClipRegion).rect : { var x:Float; }).x = cast (x0 : Dynamic));
-    ((cast (cast out : flighthq.types.ClipRegion).rect : { var y:Float; }).y = cast (y0 : Dynamic));
-    ((cast (cast out : flighthq.types.ClipRegion).rect : { var width:Float; }).width = cast ((x1 - x0) : Dynamic));
-    ((cast (cast out : flighthq.types.ClipRegion).rect : { var height:Float; }).height = cast ((y1 - y0) : Dynamic));
+    ((cast (cast out : flighthq.types.ClipRegion).rect : { var x:Float; }).x = cast (x0 : Float));
+    ((cast (cast out : flighthq.types.ClipRegion).rect : { var y:Float; }).y = cast (y0 : Float));
+    ((cast (cast out : flighthq.types.ClipRegion).rect : { var width:Float; }).width = cast ((x1 - x0) : Float));
+    ((cast (cast out : flighthq.types.ClipRegion).rect : { var height:Float; }).height = cast ((y1 - y0) : Float));
     if ((cast ((cast _Runtime.strictEquals(aContours, null) : Bool) && (cast _Runtime.strictEquals(bContours, null) : Bool)) : Bool)) {
       ((cast out : flighthq.types.ClipRegion).contours = null);
       ((cast out : flighthq.types.ClipRegion).winding = 'nonZero');
@@ -307,10 +307,10 @@ class ClipRegion {
         }
       }
       if ((cast isAxisAligned : Bool)) {
-        ((cast (cast out : flighthq.types.ClipRegion).rect : { var x:Float; }).x = cast (minX : Dynamic));
-        ((cast (cast out : flighthq.types.ClipRegion).rect : { var y:Float; }).y = cast (minY : Dynamic));
-        ((cast (cast out : flighthq.types.ClipRegion).rect : { var width:Float; }).width = cast ((maxX - minX) : Dynamic));
-        ((cast (cast out : flighthq.types.ClipRegion).rect : { var height:Float; }).height = cast ((maxY - minY) : Dynamic));
+        ((cast (cast out : flighthq.types.ClipRegion).rect : { var x:Float; }).x = cast (minX : Float));
+        ((cast (cast out : flighthq.types.ClipRegion).rect : { var y:Float; }).y = cast (minY : Float));
+        ((cast (cast out : flighthq.types.ClipRegion).rect : { var width:Float; }).width = cast ((maxX - minX) : Float));
+        ((cast (cast out : flighthq.types.ClipRegion).rect : { var height:Float; }).height = cast ((maxY - minY) : Float));
         ((cast out : flighthq.types.ClipRegion).contours = null);
         ((cast out : flighthq.types.ClipRegion).winding = 'nonZero');
         ((cast out : flighthq.types.ClipRegion).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast out : flighthq.types.ClipRegion).version + 1.0)), 0));
@@ -582,15 +582,15 @@ class ClipRegion {
       }
     }
     if ((cast ((cast minX : Float) > (cast maxX : Float)) : Bool)) {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.width = cast (0.0 : Dynamic));
-      (out.height = cast (0.0 : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.width = cast (0.0 : Float));
+      (out.height = cast (0.0 : Float));
       return;
     }
-    (out.x = cast (minX : Dynamic));
-    (out.y = cast (minY : Dynamic));
-    (out.width = cast ((maxX - minX) : Dynamic));
-    (out.height = cast ((maxY - minY) : Dynamic));
+    (out.x = cast (minX : Float));
+    (out.y = cast (minY : Float));
+    (out.width = cast ((maxX - minX) : Float));
+    (out.height = cast ((maxY - minY) : Float));
   }
 }

@@ -141,14 +141,14 @@ class Power {
       charging = cachedCharging;
       chargingTime = cachedChargingTime;
       dischargingTime = cachedDischargingTime;
-      (out.batteryLevel = cast (level : Dynamic));
-      (out.chargingTime = cast (chargingTime : Dynamic));
-      (out.dischargingTime = cast (dischargingTime : Dynamic));
-      (out.isBatteryLow = cast (((cast ((cast ((cast level : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast level : Float) <= (cast 0.2 : Float)) : Bool)) : Bool) && (cast !(cast charging : Bool) : Bool)) : Dynamic));
-      (out.isCharging = cast (charging : Dynamic));
-      (out.isOnBattery = cast (((cast ((cast level : Float) >= (cast 0.0 : Float)) : Bool) && (cast !(cast charging : Bool) : Bool)) : Dynamic));
-      (out.isLowPower = cast (false : Dynamic));
-      (out.thermalState = cast ('Unknown' : Dynamic));
+      (out.batteryLevel = cast (level : Float));
+      (out.chargingTime = cast (chargingTime : Float));
+      (out.dischargingTime = cast (dischargingTime : Float));
+      (out.isBatteryLow = cast (((cast ((cast ((cast level : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast level : Float) <= (cast 0.2 : Float)) : Bool)) : Bool) && (cast !(cast charging : Bool) : Bool)) : Bool));
+      (out.isCharging = cast (charging : Bool));
+      (out.isOnBattery = cast (((cast ((cast level : Float) >= (cast 0.0 : Float)) : Bool) && (cast !(cast charging : Bool) : Bool)) : Bool));
+      (out.isLowPower = cast (false : Bool));
+      (out.thermalState = cast ('Unknown' : PowerThermalState));
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, getSystemIdleState: function(_thresholdSeconds:Float):PowerIdleState {
@@ -304,16 +304,16 @@ class Power {
   }
 
   public static function enablePowerSignals(power:flighthq.types.Power):Void {
-    if ((cast _Runtime.strictEquals(power.onChange, null) : Bool)) { (power.onChange = cast ((cast createSignal() : Signal<PowerStatus->Void>) : Dynamic)); }
-    if ((cast _Runtime.strictEquals(power.onCharging, null) : Bool)) { (power.onCharging = cast ((cast createSignal() : Signal<Void->Void>) : Dynamic)); }
-    if ((cast _Runtime.strictEquals(power.onDischarging, null) : Bool)) { (power.onDischarging = cast ((cast createSignal() : Signal<Void->Void>) : Dynamic)); }
-    if ((cast _Runtime.strictEquals(power.onIdleStateChange, null) : Bool)) { (power.onIdleStateChange = cast ((cast createSignal() : Signal<Void->Void>) : Dynamic)); }
-    if ((cast _Runtime.strictEquals(power.onLockScreen, null) : Bool)) { (power.onLockScreen = cast ((cast createSignal() : Signal<Void->Void>) : Dynamic)); }
-    if ((cast _Runtime.strictEquals(power.onLowPowerModeChange, null) : Bool)) { (power.onLowPowerModeChange = cast ((cast createSignal() : Signal<Void->Void>) : Dynamic)); }
-    if ((cast _Runtime.strictEquals(power.onResume, null) : Bool)) { (power.onResume = cast ((cast createSignal() : Signal<Void->Void>) : Dynamic)); }
-    if ((cast _Runtime.strictEquals(power.onSuspend, null) : Bool)) { (power.onSuspend = cast ((cast createSignal() : Signal<Void->Void>) : Dynamic)); }
-    if ((cast _Runtime.strictEquals(power.onThermalStateChange, null) : Bool)) { (power.onThermalStateChange = cast ((cast createSignal() : Signal<Void->Void>) : Dynamic)); }
-    if ((cast _Runtime.strictEquals(power.onUnlockScreen, null) : Bool)) { (power.onUnlockScreen = cast ((cast createSignal() : Signal<Void->Void>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(power.onChange, null) : Bool)) { (power.onChange = cast ((cast createSignal() : Signal<PowerStatus->Void>) : Null<Signal<PowerStatus->Void>>)); }
+    if ((cast _Runtime.strictEquals(power.onCharging, null) : Bool)) { (power.onCharging = cast ((cast createSignal() : Signal<Void->Void>) : Null<Signal<Void->Void>>)); }
+    if ((cast _Runtime.strictEquals(power.onDischarging, null) : Bool)) { (power.onDischarging = cast ((cast createSignal() : Signal<Void->Void>) : Null<Signal<Void->Void>>)); }
+    if ((cast _Runtime.strictEquals(power.onIdleStateChange, null) : Bool)) { (power.onIdleStateChange = cast ((cast createSignal() : Signal<Void->Void>) : Null<Signal<Void->Void>>)); }
+    if ((cast _Runtime.strictEquals(power.onLockScreen, null) : Bool)) { (power.onLockScreen = cast ((cast createSignal() : Signal<Void->Void>) : Null<Signal<Void->Void>>)); }
+    if ((cast _Runtime.strictEquals(power.onLowPowerModeChange, null) : Bool)) { (power.onLowPowerModeChange = cast ((cast createSignal() : Signal<Void->Void>) : Null<Signal<Void->Void>>)); }
+    if ((cast _Runtime.strictEquals(power.onResume, null) : Bool)) { (power.onResume = cast ((cast createSignal() : Signal<Void->Void>) : Null<Signal<Void->Void>>)); }
+    if ((cast _Runtime.strictEquals(power.onSuspend, null) : Bool)) { (power.onSuspend = cast ((cast createSignal() : Signal<Void->Void>) : Null<Signal<Void->Void>>)); }
+    if ((cast _Runtime.strictEquals(power.onThermalStateChange, null) : Bool)) { (power.onThermalStateChange = cast ((cast createSignal() : Signal<Void->Void>) : Null<Signal<Void->Void>>)); }
+    if ((cast _Runtime.strictEquals(power.onUnlockScreen, null) : Bool)) { (power.onUnlockScreen = cast ((cast createSignal() : Signal<Void->Void>) : Null<Signal<Void->Void>>)); }
   }
 
   @:noCompletion

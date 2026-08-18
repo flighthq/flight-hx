@@ -25,7 +25,7 @@ class TextureAtlas {
 
   public static function disposeTextureAtlas(atlas:flighthq.types.TextureAtlas):Void {
     _Runtime.setLength(atlas.regions, 0.0);
-    (atlas.texture = cast (null : Dynamic));
+    (atlas.texture = cast (null : Null<Texture2D>));
   }
 
   public static function getTextureAtlasByteSize(atlas:flighthq.types.TextureAtlas):Float {

@@ -231,7 +231,7 @@ class Application {
       cleanup();
     }
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).clear());
-    (app.isRunning = cast (false : Dynamic));
+    (app.isRunning = cast (false : Bool));
   }
 
   public static function disposeApplicationWindow(win:ApplicationWindow):Void {
@@ -239,10 +239,10 @@ class Application {
   }
 
   public static function enableApplicationLifecycleSignals(app:flighthq.types.Application):Void {
-    if ((cast _Runtime.strictEquals(app.onActivate, null) : Bool)) { (app.onActivate = cast ((cast createSignal() : Signal<Void->Void>) : Dynamic)); }
-    if ((cast _Runtime.strictEquals(app.onDeactivate, null) : Bool)) { (app.onDeactivate = cast ((cast createSignal() : Signal<Void->Void>) : Dynamic)); }
-    if ((cast _Runtime.strictEquals(app.onError, null) : Bool)) { (app.onError = cast ((cast createSignal() : Signal<flighthq._internal._Any->Void>) : Dynamic)); }
-    if ((cast _Runtime.strictEquals(app.onFixedUpdate, null) : Bool)) { (app.onFixedUpdate = cast ((cast createSignal() : Signal<Float->Void>) : Dynamic)); }
+    if ((cast _Runtime.strictEquals(app.onActivate, null) : Bool)) { (app.onActivate = cast ((cast createSignal() : Signal<Void->Void>) : Null<Signal<Void->Void>>)); }
+    if ((cast _Runtime.strictEquals(app.onDeactivate, null) : Bool)) { (app.onDeactivate = cast ((cast createSignal() : Signal<Void->Void>) : Null<Signal<Void->Void>>)); }
+    if ((cast _Runtime.strictEquals(app.onError, null) : Bool)) { (app.onError = cast ((cast createSignal() : Signal<flighthq._internal._Any->Void>) : Null<Signal<flighthq._internal._Any->Void>>)); }
+    if ((cast _Runtime.strictEquals(app.onFixedUpdate, null) : Bool)) { (app.onFixedUpdate = cast ((cast createSignal() : Signal<Float->Void>) : Null<Signal<Float->Void>>)); }
   }
 
   public static function exitApplicationFullscreen():flighthq._internal._Promise<flighthq._internal._Nothing> {
@@ -373,7 +373,7 @@ class Application {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
     observers = (cast Application.getApplicationObservers__application(({ final __callArgument15:Dynamic = app; __callArgument15; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     if ((cast ((cast !(cast app.isRunning : Bool) : Bool) || (cast ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).has(Application.kPaused__application)) : Bool)) : Bool)) { return; }
-    (app.isRunning = cast (false : Dynamic));
+    (app.isRunning = cast (false : Bool));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).set(Application.kPaused__application, (cast function():Void {
 
     })));
@@ -427,7 +427,7 @@ class Application {
       ((cast loopState : LoopState__application).fixedAccumulator = 0.0);
       ((cast loopState : LoopState__application).frameRateAccumulated = 0.0);
     }
-    (app.isRunning = cast (true : Dynamic));
+    (app.isRunning = cast (true : Bool));
   }
 
   public static final ROLLING_FPS_WINDOW__application:Float = 60.0;
@@ -549,7 +549,7 @@ class Application {
       delta = ((cast ((cast ((cast activeInterval : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast isFirstTick : Bool) : Bool)) : Bool) ? (cast (cast loopState : LoopState__application).frameRateAccumulated : Dynamic) : (cast raw : Dynamic));
       ((cast loopState : LoopState__application).frameRateAccumulated = 0.0);
       clamped = HxMath.min(delta, maxDeltaTime);
-      (app.deltaTime = cast (clamped : Dynamic));
+      (app.deltaTime = cast (clamped : Float));
       (app.elapsedTime += (clamped / 1000.0));
       (app.frameCount += 1.0);
       Application.recordFpsSample__application((cast loopState : Dynamic), (cast clamped : Float));
@@ -570,9 +570,9 @@ class Application {
           }
         }
         if ((cast ((cast iters : Float) >= (cast maxUpdatesPerFrame : Float)) : Bool)) { ((cast loopState : LoopState__application).fixedAccumulator = 0.0); }
-        (app.interpolationAlpha = cast (((cast ((cast fixedTimeStep : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((cast loopState : LoopState__application).fixedAccumulator / fixedTimeStep) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+        (app.interpolationAlpha = cast (((cast ((cast fixedTimeStep : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((cast loopState : LoopState__application).fixedAccumulator / fixedTimeStep) : Dynamic) : (cast 1.0 : Dynamic)) : Float));
       } else {
-        (app.interpolationAlpha = cast (1.0 : Dynamic));
+        (app.interpolationAlpha = cast (1.0 : Float));
       }
       if ((cast !_Runtime.strictEquals(app.onError, null) : Bool)) {
         try {
@@ -605,7 +605,7 @@ class Application {
     bgInterval = ((cast ((cast backgroundFrameRate : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1000.0 / backgroundFrameRate) : Dynamic) : (cast 0.0 : Dynamic));
     loopState = (cast { fixedAccumulator: 0.0, fpsBuffer: cast ([] : Array<Dynamic>), fpsHead: 0.0, frameHandle: (cast null : flighthq._internal._Any), frameRateAccumulated: 0.0, lastTime: -1.0, maxDeltaTime: maxDeltaTime });
     ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap<flighthq.types.Application, LoopState__application>).set(app, (cast loopState)));
-    (app.isRunning = cast (true : Dynamic));
+    (app.isRunning = cast (true : Bool));
     ((cast loopState : LoopState__application).frameHandle = (cast backend : LoopBackend).requestFrame(({ final __callArgument23:Dynamic = tick; __callArgument23; })));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).set(Application.kLoop__application, (cast function():Void { (cast backend : LoopBackend).cancelFrame((cast (cast loopState : LoopState__application).frameHandle : flighthq._internal._Any)); })));
   }
@@ -617,10 +617,10 @@ class Application {
     loopState = ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap<flighthq.types.Application, LoopState__application>).get(app));
     maxDelta = _Runtime.coalesce(({ final __structural24 = loopState; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { var maxDeltaTime:Float; }).maxDeltaTime; }), function():Dynamic return cast Application.DEFAULT_MAX_DELTA_TIME__application);
     clamped = HxMath.min(deltaTime, maxDelta);
-    (app.deltaTime = cast (clamped : Dynamic));
+    (app.deltaTime = cast (clamped : Float));
     (app.elapsedTime += (clamped / 1000.0));
     (app.frameCount += 1.0);
-    (app.interpolationAlpha = cast (1.0 : Dynamic));
+    (app.interpolationAlpha = cast (1.0 : Float));
     if ((cast !_Runtime.strictEquals(loopState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { Application.recordFpsSample__application((cast loopState : Dynamic), (cast clamped : Float)); }
     if ((cast !_Runtime.strictEquals(app.onError, null) : Bool)) {
       try {
@@ -646,7 +646,7 @@ class Application {
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Application.kLoop__application));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Application.kPaused__application));
     ((cast Application._applicationLoopState__application : flighthq._internal._WeakMap<flighthq.types.Application, LoopState__application>).delete_(app));
-    (app.isRunning = cast (false : Dynamic));
+    (app.isRunning = cast (false : Bool));
   }
 
   public static function synchronizeApplicationRenderView(view:ApplicationRenderView<Dynamic, Dynamic>):Void {

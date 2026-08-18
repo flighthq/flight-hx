@@ -53,8 +53,8 @@ class SceneHitAttributes {
     if ((cast !(cast (cast getMeshGeometryVertexUv0(({ final __callArgument2:Dynamic = SceneHitAttributes._uv0__sceneHitAttributes; __callArgument2; }), ({ final __callArgument3:Dynamic = geometry; __callArgument3; }), (cast (cast SceneHitAttributes._triangle__sceneHitAttributes : { var i0:Float; var i1:Float; var i2:Float; }).i0 : Float)) : Bool) : Bool) : Bool)) { return cast false; }
     if ((cast !(cast (cast getMeshGeometryVertexUv0(({ final __callArgument4:Dynamic = SceneHitAttributes._uv1__sceneHitAttributes; __callArgument4; }), ({ final __callArgument5:Dynamic = geometry; __callArgument5; }), (cast (cast SceneHitAttributes._triangle__sceneHitAttributes : { var i0:Float; var i1:Float; var i2:Float; }).i1 : Float)) : Bool) : Bool) : Bool)) { return cast false; }
     if ((cast !(cast (cast getMeshGeometryVertexUv0(({ final __callArgument6:Dynamic = SceneHitAttributes._uv2__sceneHitAttributes; __callArgument6; }), ({ final __callArgument7:Dynamic = geometry; __callArgument7; }), (cast (cast SceneHitAttributes._triangle__sceneHitAttributes : { var i0:Float; var i1:Float; var i2:Float; }).i2 : Float)) : Bool) : Bool) : Bool)) { return cast false; }
-    (out.x = cast (((_Runtime.multiplyNumbers(_Runtime.field(hit, 'u'), (cast SceneHitAttributes._uv0__sceneHitAttributes : { var x:Float; var y:Float; }).x) + _Runtime.multiplyNumbers(_Runtime.field(hit, 'v'), (cast SceneHitAttributes._uv1__sceneHitAttributes : { var x:Float; var y:Float; }).x)) + _Runtime.multiplyNumbers(_Runtime.field(hit, 'w'), (cast SceneHitAttributes._uv2__sceneHitAttributes : { var x:Float; var y:Float; }).x)) : Dynamic));
-    (out.y = cast (((_Runtime.multiplyNumbers(_Runtime.field(hit, 'u'), (cast SceneHitAttributes._uv0__sceneHitAttributes : { var x:Float; var y:Float; }).y) + _Runtime.multiplyNumbers(_Runtime.field(hit, 'v'), (cast SceneHitAttributes._uv1__sceneHitAttributes : { var x:Float; var y:Float; }).y)) + _Runtime.multiplyNumbers(_Runtime.field(hit, 'w'), (cast SceneHitAttributes._uv2__sceneHitAttributes : { var x:Float; var y:Float; }).y)) : Dynamic));
+    (out.x = cast (((_Runtime.multiplyNumbers(_Runtime.field(hit, 'u'), (cast SceneHitAttributes._uv0__sceneHitAttributes : { var x:Float; var y:Float; }).x) + _Runtime.multiplyNumbers(_Runtime.field(hit, 'v'), (cast SceneHitAttributes._uv1__sceneHitAttributes : { var x:Float; var y:Float; }).x)) + _Runtime.multiplyNumbers(_Runtime.field(hit, 'w'), (cast SceneHitAttributes._uv2__sceneHitAttributes : { var x:Float; var y:Float; }).x)) : Float));
+    (out.y = cast (((_Runtime.multiplyNumbers(_Runtime.field(hit, 'u'), (cast SceneHitAttributes._uv0__sceneHitAttributes : { var x:Float; var y:Float; }).y) + _Runtime.multiplyNumbers(_Runtime.field(hit, 'v'), (cast SceneHitAttributes._uv1__sceneHitAttributes : { var x:Float; var y:Float; }).y)) + _Runtime.multiplyNumbers(_Runtime.field(hit, 'w'), (cast SceneHitAttributes._uv2__sceneHitAttributes : { var x:Float; var y:Float; }).y)) : Float));
     return cast true;
     return cast null;
   }
@@ -141,9 +141,9 @@ class SceneHitAttributes {
     lengthSquared = (((x * x) + (y * y)) + (z * z));
     if ((cast _Runtime.strictEquals(lengthSquared, 0.0) : Bool)) { return cast false; }
     inverseLength = _Runtime.divideNumbers(1.0, HxMath.sqrt(lengthSquared));
-    (out.x = cast ((x * inverseLength) : Dynamic));
-    (out.y = cast ((y * inverseLength) : Dynamic));
-    (out.z = cast ((z * inverseLength) : Dynamic));
+    (out.x = cast ((x * inverseLength) : Float));
+    (out.y = cast ((y * inverseLength) : Float));
+    (out.z = cast ((z * inverseLength) : Float));
     return cast true;
     return cast null;
   }

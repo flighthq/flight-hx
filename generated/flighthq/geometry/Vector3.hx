@@ -12,9 +12,9 @@ import flighthq.types.Vector4.Vector4Like;
 
 class Vector3 {
   public static function addVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    (out.x = cast ((a.x + b.x) : Dynamic));
-    (out.y = cast ((a.y + b.y) : Dynamic));
-    (out.z = cast ((a.z + b.z) : Dynamic));
+    (out.x = cast ((a.x + b.x) : Float));
+    (out.y = cast ((a.y + b.y) : Float));
+    (out.z = cast ((a.z + b.z) : Float));
   }
 
   public static function clampVector3(out:Vector3Like, value:Vector3Like, min:Vector3Like, max:Vector3Like):Void {
@@ -36,9 +36,9 @@ class Vector3 {
     maxX = max.x;
     maxY = max.y;
     maxZ = max.z;
-    (out.x = cast (((cast ((cast vx : Float) < (cast minX : Float)) : Bool) ? (cast minX : Dynamic) : (cast ((cast ((cast vx : Float) > (cast maxX : Float)) : Bool) ? (cast maxX : Dynamic) : (cast vx : Dynamic)) : Dynamic)) : Dynamic));
-    (out.y = cast (((cast ((cast vy : Float) < (cast minY : Float)) : Bool) ? (cast minY : Dynamic) : (cast ((cast ((cast vy : Float) > (cast maxY : Float)) : Bool) ? (cast maxY : Dynamic) : (cast vy : Dynamic)) : Dynamic)) : Dynamic));
-    (out.z = cast (((cast ((cast vz : Float) < (cast minZ : Float)) : Bool) ? (cast minZ : Dynamic) : (cast ((cast ((cast vz : Float) > (cast maxZ : Float)) : Bool) ? (cast maxZ : Dynamic) : (cast vz : Dynamic)) : Dynamic)) : Dynamic));
+    (out.x = cast (((cast ((cast vx : Float) < (cast minX : Float)) : Bool) ? (cast minX : Dynamic) : (cast ((cast ((cast vx : Float) > (cast maxX : Float)) : Bool) ? (cast maxX : Dynamic) : (cast vx : Dynamic)) : Dynamic)) : Float));
+    (out.y = cast (((cast ((cast vy : Float) < (cast minY : Float)) : Bool) ? (cast minY : Dynamic) : (cast ((cast ((cast vy : Float) > (cast maxY : Float)) : Bool) ? (cast maxY : Dynamic) : (cast vy : Dynamic)) : Dynamic)) : Float));
+    (out.z = cast (((cast ((cast vz : Float) < (cast minZ : Float)) : Bool) ? (cast minZ : Dynamic) : (cast ((cast ((cast vz : Float) > (cast maxZ : Float)) : Bool) ? (cast maxZ : Dynamic) : (cast vz : Dynamic)) : Dynamic)) : Float));
   }
 
   public static function cloneVector3(source:Vector3Like):flighthq.types.Vector3 {
@@ -47,9 +47,9 @@ class Vector3 {
   }
 
   public static function copyVector3(out:Vector3Like, source:Vector3Like):Void {
-    (out.x = cast (source.x : Dynamic));
-    (out.y = cast (source.y : Dynamic));
-    (out.z = cast (source.z : Dynamic));
+    (out.x = cast (source.x : Float));
+    (out.y = cast (source.y : Float));
+    (out.z = cast (source.z : Float));
   }
 
   public static function createVector3(?x:Float, ?y:Float, ?z:Float):flighthq.types.Vector3 {
@@ -72,9 +72,9 @@ class Vector3 {
     x = ((source.y * other.z) - (source.z * other.y));
     y = ((source.z * other.x) - (source.x * other.z));
     z = ((source.x * other.y) - (source.y * other.x));
-    (out.x = cast (x : Dynamic));
-    (out.y = cast (y : Dynamic));
-    (out.z = cast (z : Dynamic));
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
+    (out.z = cast (z : Float));
   }
 
   public static function divideVector3(out:Vector3Like, source:Vector3Like, divisor:Vector3Like):Void {
@@ -90,9 +90,9 @@ class Vector3 {
     dx = divisor.x;
     dy = divisor.y;
     dz = divisor.z;
-    (out.x = cast (((cast !_Runtime.strictEquals(dx, 0.0) : Bool) ? (cast (sx / dx) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
-    (out.y = cast (((cast !_Runtime.strictEquals(dy, 0.0) : Bool) ? (cast (sy / dy) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
-    (out.z = cast (((cast !_Runtime.strictEquals(dz, 0.0) : Bool) ? (cast (sz / dz) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+    (out.x = cast (((cast !_Runtime.strictEquals(dx, 0.0) : Bool) ? (cast (sx / dx) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+    (out.y = cast (((cast !_Runtime.strictEquals(dy, 0.0) : Bool) ? (cast (sy / dy) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+    (out.z = cast (((cast !_Runtime.strictEquals(dz, 0.0) : Bool) ? (cast (sz / dz) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
   }
 
   public static function equalsVector3(a:Null<Vector3Like>, b:Null<Vector3Like>):Bool {
@@ -160,14 +160,14 @@ class Vector3 {
     z = source.z;
     radius = HxMath.sqrt((((x * x) + (y * y)) + (z * z)));
     if ((cast _Runtime.strictEquals(radius, 0.0) : Bool)) {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.z = cast (0.0 : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.z = cast (0.0 : Float));
       return;
     }
-    (out.x = cast (radius : Dynamic));
-    (out.y = cast (HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, (y / radius)))) : Dynamic));
-    (out.z = cast (HxMath.atan2(z, x) : Dynamic));
+    (out.x = cast (radius : Float));
+    (out.y = cast (HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, (y / radius)))) : Float));
+    (out.z = cast (HxMath.atan2(z, x) : Float));
   }
 
   public static function interpolateVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like, t:Float):Void {
@@ -177,27 +177,27 @@ class Vector3 {
     ax = a.x;
     ay = a.y;
     az = a.z;
-    (out.x = cast ((ax + (t * (b.x - ax))) : Dynamic));
-    (out.y = cast ((ay + (t * (b.y - ay))) : Dynamic));
-    (out.z = cast ((az + (t * (b.z - az))) : Dynamic));
+    (out.x = cast ((ax + (t * (b.x - ax))) : Float));
+    (out.y = cast ((ay + (t * (b.y - ay))) : Float));
+    (out.z = cast ((az + (t * (b.z - az))) : Float));
   }
 
   public static function maxVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    (out.x = cast (((cast ((cast a.x : Float) > (cast b.x : Float)) : Bool) ? (cast a.x : Dynamic) : (cast b.x : Dynamic)) : Dynamic));
-    (out.y = cast (((cast ((cast a.y : Float) > (cast b.y : Float)) : Bool) ? (cast a.y : Dynamic) : (cast b.y : Dynamic)) : Dynamic));
-    (out.z = cast (((cast ((cast a.z : Float) > (cast b.z : Float)) : Bool) ? (cast a.z : Dynamic) : (cast b.z : Dynamic)) : Dynamic));
+    (out.x = cast (((cast ((cast a.x : Float) > (cast b.x : Float)) : Bool) ? (cast a.x : Dynamic) : (cast b.x : Dynamic)) : Float));
+    (out.y = cast (((cast ((cast a.y : Float) > (cast b.y : Float)) : Bool) ? (cast a.y : Dynamic) : (cast b.y : Dynamic)) : Float));
+    (out.z = cast (((cast ((cast a.z : Float) > (cast b.z : Float)) : Bool) ? (cast a.z : Dynamic) : (cast b.z : Dynamic)) : Float));
   }
 
   public static function minVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    (out.x = cast (((cast ((cast a.x : Float) < (cast b.x : Float)) : Bool) ? (cast a.x : Dynamic) : (cast b.x : Dynamic)) : Dynamic));
-    (out.y = cast (((cast ((cast a.y : Float) < (cast b.y : Float)) : Bool) ? (cast a.y : Dynamic) : (cast b.y : Dynamic)) : Dynamic));
-    (out.z = cast (((cast ((cast a.z : Float) < (cast b.z : Float)) : Bool) ? (cast a.z : Dynamic) : (cast b.z : Dynamic)) : Dynamic));
+    (out.x = cast (((cast ((cast a.x : Float) < (cast b.x : Float)) : Bool) ? (cast a.x : Dynamic) : (cast b.x : Dynamic)) : Float));
+    (out.y = cast (((cast ((cast a.y : Float) < (cast b.y : Float)) : Bool) ? (cast a.y : Dynamic) : (cast b.y : Dynamic)) : Float));
+    (out.z = cast (((cast ((cast a.z : Float) < (cast b.z : Float)) : Bool) ? (cast a.z : Dynamic) : (cast b.z : Dynamic)) : Float));
   }
 
   public static function multiplyVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    (out.x = cast ((a.x * b.x) : Dynamic));
-    (out.y = cast ((a.y * b.y) : Dynamic));
-    (out.z = cast ((a.z * b.z) : Dynamic));
+    (out.x = cast ((a.x * b.x) : Float));
+    (out.y = cast ((a.y * b.y) : Float));
+    (out.z = cast ((a.z * b.z) : Float));
   }
 
   public static function nearEqualsVector3(a:Vector3Like, b:Vector3Like, tolerance:Float = 0.000001):Bool {
@@ -206,36 +206,36 @@ class Vector3 {
   }
 
   public static function negateVector3(out:Vector3Like, source:Vector3Like):Void {
-    (out.x = cast ((source.x * -1.0) : Dynamic));
-    (out.y = cast ((source.y * -1.0) : Dynamic));
-    (out.z = cast ((source.z * -1.0) : Dynamic));
+    (out.x = cast ((source.x * -1.0) : Float));
+    (out.y = cast ((source.y * -1.0) : Float));
+    (out.z = cast ((source.z * -1.0) : Float));
   }
 
   public static function normalizeVector3(out:Vector3Like, source:Vector3Like):Float {
     var l:Float = cast _Runtime.UNDEFINED;
     l = (cast getVector3Length(({ final __callArgument9:Dynamic = source; __callArgument9; })) : Float);
     if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
-      (out.x = cast ((source.x / l) : Dynamic));
-      (out.y = cast ((source.y / l) : Dynamic));
-      (out.z = cast ((source.z / l) : Dynamic));
+      (out.x = cast ((source.x / l) : Float));
+      (out.y = cast ((source.y / l) : Float));
+      (out.z = cast ((source.z / l) : Float));
     } else {
-      (out.x = cast (0.0 : Dynamic));
-      (out.y = cast (0.0 : Dynamic));
-      (out.z = cast (0.0 : Dynamic));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.z = cast (0.0 : Float));
     }
     return cast l;
     return cast null;
   }
 
   public static function offsetVector3(out:Vector3Like, source:Vector3Like, dx:Float, dy:Float, dz:Float):Void {
-    (out.x = cast ((source.x + dx) : Dynamic));
-    (out.y = cast ((source.y + dy) : Dynamic));
-    (out.z = cast ((source.z + dz) : Dynamic));
+    (out.x = cast ((source.x + dx) : Float));
+    (out.y = cast ((source.y + dy) : Float));
+    (out.z = cast ((source.z + dz) : Float));
   }
 
   public static function projectVector3(out:Vector2Like, source:Vector3Like):Void {
-    (out.x = cast ((source.x / source.z) : Dynamic));
-    (out.y = cast ((source.y / source.z) : Dynamic));
+    (out.x = cast ((source.x / source.z) : Float));
+    (out.y = cast ((source.y / source.z) : Float));
   }
 
   public static function reflectVector3(out:Vector3Like, incident:Vector3Like, normal:Vector3Like):Void {
@@ -253,35 +253,35 @@ class Vector3 {
     ny = normal.y;
     nz = normal.z;
     twoDot = (2.0 * (((ix * nx) + (iy * ny)) + (iz * nz)));
-    (out.x = cast ((ix - (twoDot * nx)) : Dynamic));
-    (out.y = cast ((iy - (twoDot * ny)) : Dynamic));
-    (out.z = cast ((iz - (twoDot * nz)) : Dynamic));
+    (out.x = cast ((ix - (twoDot * nx)) : Float));
+    (out.y = cast ((iy - (twoDot * ny)) : Float));
+    (out.z = cast ((iz - (twoDot * nz)) : Float));
   }
 
   public static function scaleVector3(out:Vector3Like, source:Vector3Like, scalar:Float):Void {
-    (out.x = cast ((source.x * scalar) : Dynamic));
-    (out.y = cast ((source.y * scalar) : Dynamic));
-    (out.z = cast ((source.z * scalar) : Dynamic));
+    (out.x = cast ((source.x * scalar) : Float));
+    (out.y = cast ((source.y * scalar) : Float));
+    (out.z = cast ((source.z * scalar) : Float));
   }
 
   public static function setVector3(out:Vector3Like, x:Float, y:Float, z:Float):Void {
-    (out.x = cast (x : Dynamic));
-    (out.y = cast (y : Dynamic));
-    (out.z = cast (z : Dynamic));
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
+    (out.z = cast (z : Float));
   }
 
   public static function setVector3FromFloat32Array(out:Vector3Like, offset:Float, source:flighthq._internal._Float32Array):Void {
-    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast offset : Float)) : Dynamic));
-    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float)) : Dynamic));
-    (out.z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float)) : Dynamic));
+    (out.x = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast offset : Float)) : Float));
+    (out.y = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float)) : Float));
+    (out.z = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast source : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float)) : Float));
   }
 
   public static function setVector3FromSpherical(out:Vector3Like, radius:Float, theta:Float, phi:Float):Void {
     var sinTheta:Float = cast _Runtime.UNDEFINED;
     sinTheta = HxMath.sin(theta);
-    (out.x = cast (_Runtime.multiplyNumbers((radius * sinTheta), HxMath.cos(phi)) : Dynamic));
-    (out.y = cast (_Runtime.multiplyNumbers(radius, HxMath.cos(theta)) : Dynamic));
-    (out.z = cast (_Runtime.multiplyNumbers((radius * sinTheta), HxMath.sin(phi)) : Dynamic));
+    (out.x = cast (_Runtime.multiplyNumbers((radius * sinTheta), HxMath.cos(phi)) : Float));
+    (out.y = cast (_Runtime.multiplyNumbers(radius, HxMath.cos(theta)) : Float));
+    (out.z = cast (_Runtime.multiplyNumbers((radius * sinTheta), HxMath.sin(phi)) : Float));
   }
 
   public static function setVector3FromVector4(out:Vector3Like, source:Vector4Like):Void {
@@ -291,15 +291,15 @@ class Vector3 {
     x = _Runtime.field(source, 'x');
     y = _Runtime.field(source, 'y');
     z = _Runtime.field(source, 'z');
-    (out.x = cast (x : Dynamic));
-    (out.y = cast (y : Dynamic));
-    (out.z = cast (z : Dynamic));
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
+    (out.z = cast (z : Float));
   }
 
   public static function subtractVector3(out:Vector3Like, source:Vector3Like, other:Vector3Like):Void {
-    (out.x = cast ((source.x - other.x) : Dynamic));
-    (out.y = cast ((source.y - other.y) : Dynamic));
-    (out.z = cast ((source.z - other.z) : Dynamic));
+    (out.x = cast ((source.x - other.x) : Float));
+    (out.y = cast ((source.y - other.y) : Float));
+    (out.z = cast ((source.z - other.z) : Float));
   }
 
   public static function transformVector3ByMatrix3(out:Vector3Like, source:Vector3Like, matrix:{ var m:flighthq._internal._Float32Array; }):Void {
@@ -311,9 +311,9 @@ class Vector3 {
     x = source.x;
     y = source.y;
     z = source.z;
-    (out.x = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float)) * y)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float)) * z)) : Dynamic));
-    (out.y = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float)) * y)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float)) * z)) : Dynamic));
-    (out.z = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float)) * y)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float)) * z)) : Dynamic));
+    (out.x = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float)) * y)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float)) * z)) : Float));
+    (out.y = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float)) * y)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float)) * z)) : Float));
+    (out.z = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float)) * y)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float)) * z)) : Float));
   }
 
   public static function writeVector3ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Vector3Like):Void {

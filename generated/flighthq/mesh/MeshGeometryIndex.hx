@@ -63,8 +63,8 @@ class MeshGeometryIndex {
       }
     }
     out = (cast cloneMeshGeometry(({ final __callArgument2:Dynamic = geometry; __callArgument2; })) : MeshGeometry);
-    (out.vertices = cast (new flighthq._internal._Float32Array(compactBuffer) : Dynamic));
-    (out.indices = cast (indices : Dynamic));
+    (out.vertices = cast (new flighthq._internal._Float32Array(compactBuffer) : flighthq._internal._Float32Array));
+    (out.indices = cast (indices : Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>>));
     return cast out;
     return cast null;
   }
@@ -147,8 +147,8 @@ class MeshGeometryIndex {
       }
     }
     out = (cast cloneMeshGeometry(({ final __callArgument4:Dynamic = geometry; __callArgument4; })) : MeshGeometry);
-    (out.indices = cast (null : Dynamic));
-    (out.vertices = cast (vertices : Dynamic));
+    (out.indices = cast (null : Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>>));
+    (out.vertices = cast (vertices : flighthq._internal._Float32Array));
     return cast out;
     return cast null;
   }
@@ -168,7 +168,7 @@ class MeshGeometryIndex {
         i++;
       }
     }
-    (out.indices = cast (indices : Dynamic));
+    (out.indices = cast (indices : Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>>));
     return cast out;
     return cast null;
   }
@@ -237,8 +237,8 @@ class MeshGeometryIndex {
     }
     weldedBuffer = _Runtime.slice(_Runtime.field(uniqueBytes, 'buffer'), 0.0, (uniqueCount * stride));
     out = (cast cloneMeshGeometry(({ final __callArgument12:Dynamic = geometry; __callArgument12; })) : MeshGeometry);
-    (out.vertices = cast (new flighthq._internal._Float32Array(weldedBuffer) : Dynamic));
-    (out.indices = cast (indices : Dynamic));
+    (out.vertices = cast (new flighthq._internal._Float32Array(weldedBuffer) : flighthq._internal._Float32Array));
+    (out.indices = cast (indices : Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>>));
     return cast out;
     return cast null;
   }

@@ -302,12 +302,12 @@ class Skeleton2d {
   public static final MATRIX_STRIDE__skeleton2d:Float = 6.0;
 
   public static function readMatrix__skeleton2d(out:MatrixLike, buffer:flighthq._internal._Float32Array, offset:Float):Void {
-    (out.a = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast buffer : flighthq._internal._Float32Array), (cast offset : Float)) : Dynamic));
-    (out.b = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast buffer : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float)) : Dynamic));
-    (out.c = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast buffer : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float)) : Dynamic));
-    (out.d = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast buffer : flighthq._internal._Float32Array), (cast (offset + 3.0) : Float)) : Dynamic));
-    (out.tx = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast buffer : flighthq._internal._Float32Array), (cast (offset + 4.0) : Float)) : Dynamic));
-    (out.ty = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast buffer : flighthq._internal._Float32Array), (cast (offset + 5.0) : Float)) : Dynamic));
+    (out.a = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast buffer : flighthq._internal._Float32Array), (cast offset : Float)) : Float));
+    (out.b = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast buffer : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float)) : Float));
+    (out.c = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast buffer : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float)) : Float));
+    (out.d = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast buffer : flighthq._internal._Float32Array), (cast (offset + 3.0) : Float)) : Float));
+    (out.tx = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast buffer : flighthq._internal._Float32Array), (cast (offset + 4.0) : Float)) : Float));
+    (out.ty = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast buffer : flighthq._internal._Float32Array), (cast (offset + 5.0) : Float)) : Float));
   }
 
   public static function registerSkeleton2DAnimationTargetBinder(kind:Skeleton2DAnimationTargetKind, bind:Skeleton2DAnimationTargetBinder):Void {
@@ -335,12 +335,12 @@ class Skeleton2d {
   }
 
   public static function setMatrixIdentityLocal__skeleton2d(out:MatrixLike):Void {
-    (out.a = cast (1.0 : Dynamic));
-    (out.b = cast (0.0 : Dynamic));
-    (out.c = cast (0.0 : Dynamic));
-    (out.d = cast (1.0 : Dynamic));
-    (out.tx = cast (0.0 : Dynamic));
-    (out.ty = cast (0.0 : Dynamic));
+    (out.a = cast (1.0 : Float));
+    (out.b = cast (0.0 : Float));
+    (out.c = cast (0.0 : Float));
+    (out.d = cast (1.0 : Float));
+    (out.tx = cast (0.0 : Float));
+    (out.ty = cast (0.0 : Float));
   }
 
   public static function setSkeleton2DBindPose(skeleton:Skeleton2D):Void {
