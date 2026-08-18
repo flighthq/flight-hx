@@ -28,16 +28,16 @@ class SceneAnimation {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(channels, 'length') : Float)) : Bool)) {
         var channel:AnimationChannel = flighthq._internal._StaticIndex.readArray(channels, i);
-        var target:Null<Scene3DAnimationTarget> = (cast (cast channel : AnimationChannel).targetRef : Null<Scene3DAnimationTarget>);
+        var target:Null<Scene3DAnimationTarget> = (cast channel.targetRef : Null<Scene3DAnimationTarget>);
         if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast target : { var node:Node3D; }).node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { i++; continue; }
         if ((cast _Runtime.strictEquals((cast target : { var path:Scene3DAnimationPath; }).path, 'Weights') : Bool)) {
           var morph:Null<MeshMorph> = (cast (cast (cast target : { var node:Node3D; }).node : Mesh) : { @:optional var morph:Null<MeshMorph>; }).morph;
           if ((cast _Runtime.looseEquals(morph, null) : Bool)) { i++; continue; }
-          sampleAnimationTrack(({ final __callArgument0:Dynamic = (cast morph : MeshMorph).weights; __callArgument0; }), (cast channel : AnimationChannel).track, (cast time : Float));
+          sampleAnimationTrack(({ final __callArgument0:Dynamic = (cast morph : MeshMorph).weights; __callArgument0; }), channel.track, (cast time : Float));
           i++;
           continue;
         }
-        sampleAnimationTrack(({ final __callArgument1:Dynamic = SceneAnimation._scratch__sceneAnimation; __callArgument1; }), (cast channel : AnimationChannel).track, (cast time : Float));
+        sampleAnimationTrack(({ final __callArgument1:Dynamic = SceneAnimation._scratch__sceneAnimation; __callArgument1; }), channel.track, (cast time : Float));
         var node:Node3D = (cast target : { var node:Node3D; }).node;
         if ((cast _Runtime.strictEquals((cast target : { var path:Scene3DAnimationPath; }).path, 'Translation') : Bool)) {
           setVector3(({ final __callArgument2:Dynamic = node.position; __callArgument2; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneAnimation._scratch__sceneAnimation : Array<Float>), (cast 2.0 : Float)) : Float));

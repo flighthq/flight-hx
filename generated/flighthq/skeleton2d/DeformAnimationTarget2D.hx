@@ -32,10 +32,10 @@ class DeformAnimationTarget2D {
     if ((cast ((cast _Runtime.strictEquals(slots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(slots, null) : Bool)) : Bool)) { return; }
     slotIndex = _Runtime.field(deformTarget, 'slotIndex');
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(slotIndex), 'number') : Bool) || (cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast slotIndex : Float) >= (cast _Runtime.field(slots, 'length') : Float)) : Bool)) : Bool)) { return; }
-    components = (cast _Runtime.field(channel, 'track') : AnimationTrack).components;
+    components = (cast channel.track : { var components:Float; }).components;
     if ((cast ((cast components : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     if ((cast ((cast _Runtime.field(DeformAnimationTarget2D._scratch__deformAnimationTarget2D, 'length') : Float) < (cast components : Float)) : Bool)) { (DeformAnimationTarget2D._scratch__deformAnimationTarget2D = cast (new flighthq._internal._Float32Array(components) : Dynamic)); }
-    sampleAnimationTrack(({ final __callArgument1:Dynamic = DeformAnimationTarget2D._scratch__deformAnimationTarget2D; __callArgument1; }), _Runtime.field(channel, 'track'), (cast time : Float));
+    sampleAnimationTrack(({ final __callArgument1:Dynamic = DeformAnimationTarget2D._scratch__deformAnimationTarget2D; __callArgument1; }), channel.track, (cast time : Float));
     (cast setSkeleton2DSlotDeform(flighthq._internal._StaticIndex.readArray(slots, slotIndex), (cast _Runtime.coalesce(_Runtime.field(deformTarget, 'attachment'), function():Dynamic return cast null) : Dynamic), ({ final __callArgument2:Dynamic = (cast DeformAnimationTarget2D._scratch__deformAnimationTarget2D : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(components)); __callArgument2; })) : Null<Skeleton2DSlotDeform>);
   }
 

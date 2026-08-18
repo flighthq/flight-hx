@@ -21,7 +21,7 @@ class ApplyAnimationClipToSkeleton2D {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(channels, 'length') : Float)) : Bool)) {
         var channel:AnimationChannel = flighthq._internal._StaticIndex.readArray(channels, i);
-        var target:Null<Skeleton2DAnimationTarget> = (cast (cast channel : AnimationChannel).targetRef : Null<Skeleton2DAnimationTarget>);
+        var target:Null<Skeleton2DAnimationTarget> = (cast channel.targetRef : Null<Skeleton2DAnimationTarget>);
         if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool)) { i++; continue; }
         var bind:Null<Skeleton2DAnimationTargetBinder> = (cast getSkeleton2DAnimationTargetBinder((cast (cast target : Skeleton2DAnimationTarget).kind : String)) : Null<Skeleton2DAnimationTargetBinder>);
         if ((cast _Runtime.strictEquals(bind, null) : Bool)) { i++; continue; }

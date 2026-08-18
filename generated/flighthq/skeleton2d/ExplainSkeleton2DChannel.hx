@@ -13,7 +13,7 @@ class ExplainSkeleton2DChannel {
   public static function explainSkeleton2DChannelInterpolation(channel:AnimationChannel, subject:String):Null<Skeleton2DCoercedInterpolation> {
     var stated:AnimationInterpolation = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast isSkeleton2DSteppedChannelSubject((cast subject : String)) : Bool) : Bool) : Bool)) { return cast null; }
-    stated = (cast _Runtime.field(channel, 'track') : AnimationTrack).interpolation;
+    stated = (cast channel.track : { var interpolation:AnimationInterpolation; }).interpolation;
     if ((cast _Runtime.strictEquals(stated, ExplainSkeleton2DChannel.STEP_INTERPOLATION__explainSkeleton2DChannel) : Bool)) { return cast null; }
     return cast { applied: ExplainSkeleton2DChannel.STEP_INTERPOLATION__explainSkeleton2DChannel, stated: stated, subject: subject };
     return cast null;

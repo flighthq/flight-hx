@@ -123,9 +123,9 @@ class LottieDocument {
   public static function applyAnimationClipToLottieDocument(clip:AnimationClip, time:Float):Void {
     applyAnimationClipToNode2D(({ final __callArgument0:Dynamic = clip; __callArgument0; }), (cast time : Float));
     for (channel in _Runtime.iterable(clip.channels)) {
-      var target:Null<LottieMutableAnimationTarget__lottieDocument> = (cast (cast channel : AnimationChannel).targetRef : Null<LottieMutableAnimationTarget__lottieDocument>);
+      var target:Null<LottieMutableAnimationTarget__lottieDocument> = (cast channel.targetRef : Null<LottieMutableAnimationTarget__lottieDocument>);
       if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast target : LottieMutableAnimationTarget__lottieDocument).lottieApply, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
-      sampleAnimationTrack(({ final __callArgument3:Dynamic = LottieDocument._sampleScratch__lottieDocument; __callArgument3; }), (cast channel : AnimationChannel).track, (cast time : Float));
+      sampleAnimationTrack(({ final __callArgument3:Dynamic = LottieDocument._sampleScratch__lottieDocument; __callArgument3; }), channel.track, (cast time : Float));
       (cast target : LottieMutableAnimationTarget__lottieDocument).lottieApply(({ final __callArgument4:Dynamic = LottieDocument._sampleScratch__lottieDocument; __callArgument4; }));
     }
   }

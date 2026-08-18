@@ -4,25 +4,26 @@ package flighthq.tween._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Tween;
+import flighthq.types.Tween.NumericProps;
 import flighthq.types.TweenPropertyDetail;
 
 class _Internal {
   public static function initializeTween<T:flighthq._internal._Object>(tween:Tween<T>):Void {
     var target:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
     var propertyMap:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
-    target = (cast (cast tween : Tween<T>).target : flighthq._internal._Record<String, Float>);
-    propertyMap = (cast (cast tween : Tween<T>).propertyMap : flighthq._internal._Record<String, Float>);
-    for (detail in _Runtime.iterable((cast tween : Tween<T>).properties)) {
+    target = (cast tween.target : flighthq._internal._Record<String, Float>);
+    propertyMap = (cast tween.propertyMap : flighthq._internal._Record<String, Float>);
+    for (detail in _Runtime.iterable(tween.properties)) {
       var start:Float = _Runtime.coalesce(_Runtime.getIndex(target, (cast detail : TweenPropertyDetail).key), function():Dynamic return cast 0.0);
       var end:Float = _Runtime.coalesce(_Runtime.getIndex(propertyMap, (cast detail : TweenPropertyDetail).key), function():Dynamic return cast 0.0);
       ((cast detail : TweenPropertyDetail).start = start);
       ((cast detail : TweenPropertyDetail).change = (end - start));
-      if ((cast (cast tween : Tween<T>).smartRotation : Bool)) {
+      if ((cast tween.smartRotation : Bool)) {
         var change:Float = _Runtime.fmod((_Runtime.fmod((cast detail : TweenPropertyDetail).change, 360.0) + 360.0), 360.0);
         if ((cast ((cast change : Float) > (cast 180.0 : Float)) : Bool)) { (change = cast ((change - 360.0) : Dynamic)); }
         ((cast detail : TweenPropertyDetail).change = change);
       }
     }
-    ((cast tween : Tween<T>).initialized = true);
+    (tween.initialized = cast (true : Bool));
   }
 }

@@ -662,7 +662,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#TrayBackend` | 0 | 19 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#TrayEventData` | 0 | 10 | 0 | 6 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TurbulenceForce` | 4 | 3 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
-| `@flighthq/types:interface#Tween` | 0 | 19 | 1 | 6 | 0 | 2 | 2 | 2 | no | `container-transfer` |
+| `@flighthq/types:interface#Tween` | 91 | 19 | 1 | 6 | 0 | 2 | 2 | 2 | no | `container-transfer` |
 | `@flighthq/types:interface#TweenManager` | 16 | 3 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#TweenPropertyDetail` | 0 | 3 | 1 | 0 | 0 | 1 | 2 | 2 | no | `container-transfer` |
 | `@flighthq/types:interface#UnityAnimationCurve` | 0 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |

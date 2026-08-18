@@ -82,7 +82,7 @@ class MovieClip {
   }
 
   public static function getMovieClipCurrentFrame(clip:flighthq.types.MovieClip):Float {
-    return cast _Runtime.coalesce(({ final __structural3 = (cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var currentFrame:Float; }).currentFrame; }), function():Dynamic return cast 1.0);
+    return cast _Runtime.coalesce(({ final __typedStruct3 = (cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline; __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { var currentFrame:Float; }).currentFrame; }), function():Dynamic return cast 1.0);
     return cast null;
   }
 
@@ -112,7 +112,7 @@ class MovieClip {
   }
 
   public static function getMovieClipTotalFrames(clip:flighthq.types.MovieClip):Float {
-    return cast _Runtime.coalesce(({ final __structural7 = ({ final __structural6 = (cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var source:Null<TimelineSource>; }).source; }); __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var totalFrames:Float; }).totalFrames; }), function():Dynamic return cast 1.0);
+    return cast _Runtime.coalesce(({ final __structural7 = ({ final __typedStruct6 = (cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline; __typedStruct6 == null ? _Runtime.UNDEFINED : (cast __typedStruct6 : { var source:Null<TimelineSource>; }).source; }); __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var totalFrames:Float; }).totalFrames; }), function():Dynamic return cast 1.0);
     return cast null;
   }
 
@@ -127,7 +127,7 @@ class MovieClip {
   }
 
   public static function isMovieClipPlaying(clip:flighthq.types.MovieClip):Bool {
-    return cast _Runtime.coalesce(({ final __structural10 = (cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { var isPlaying:Bool; }).isPlaying; }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __typedStruct10 = (cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var isPlaying:Bool; }).isPlaying; }), function():Dynamic return cast false);
     return cast null;
   }
 
@@ -154,10 +154,10 @@ class MovieClip {
   public static function setMovieClipSource(clip:flighthq.types.MovieClip, source:TimelineSource):Void {
     var timeline:Timeline = cast _Runtime.UNDEFINED;
     timeline = _Runtime.coalesce((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, function():Dynamic return cast (cast createTimeline(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Timeline));
-    ((cast timeline : Timeline).source = source);
-    ((cast timeline : Timeline).target = clip);
+    (timeline.source = cast (source : Null<TimelineSource>));
+    (timeline.target = cast (clip : Null<Node2D>));
     ((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline = timeline);
-    gotoAndStopTimeline(({ final __callArgument12:Dynamic = timeline; __callArgument12; }), ({ final __callArgument13:Dynamic = (cast timeline : Timeline).currentFrame; __callArgument13; }));
+    gotoAndStopTimeline(({ final __callArgument12:Dynamic = timeline; __callArgument12; }), ({ final __callArgument13:Dynamic = timeline.currentFrame; __callArgument13; }));
   }
 
   public static function stopMovieClip(clip:flighthq.types.MovieClip):Void {

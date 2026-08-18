@@ -13,24 +13,24 @@ import flighthq.types.TweenPropertyDetail;
 class TweenProgress {
   public static function getTweenProgress(tween:Tween<flighthq._internal._Any>):Float {
     var activeElapsed:Float = cast _Runtime.UNDEFINED;
-    if ((cast (cast tween : Tween<flighthq._internal._Any>).complete : Bool)) { return cast 1.0; }
-    activeElapsed = ((cast tween : Tween<flighthq._internal._Any>).elapsed - (cast tween : Tween<flighthq._internal._Any>).delay);
+    if ((cast tween.complete : Bool)) { return cast 1.0; }
+    activeElapsed = (tween.elapsed - tween.delay);
     if ((cast ((cast activeElapsed : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
-    return cast HxMath.min((activeElapsed / (cast tween : Tween<flighthq._internal._Any>).duration), 1.0);
+    return cast HxMath.min((activeElapsed / tween.duration), 1.0);
     return cast null;
   }
 
   @:noCompletion
   public static function invalidateTween(tween:Tween<flighthq._internal._Any>):Void {
-    ((cast tween : Tween<flighthq._internal._Any>).initialized = false);
-    ((cast tween : Tween<flighthq._internal._Any>).complete = false);
-    ((cast tween : Tween<flighthq._internal._Any>).elapsed = 0.0);
+    (tween.initialized = cast (false : Bool));
+    (tween.complete = cast (false : Bool));
+    (tween.elapsed = cast (0.0 : Float));
   }
 
   public static function restartTween(tween:Tween<flighthq._internal._Any>, includeDelay:Bool = true):Void {
-    ((cast tween : Tween<flighthq._internal._Any>).initialized = false);
-    ((cast tween : Tween<flighthq._internal._Any>).complete = false);
-    ((cast tween : Tween<flighthq._internal._Any>).elapsed = ((cast includeDelay : Bool) ? (cast 0.0 : Dynamic) : (cast (cast tween : Tween<flighthq._internal._Any>).delay : Dynamic)));
+    (tween.initialized = cast (false : Bool));
+    (tween.complete = cast (false : Bool));
+    (tween.elapsed = cast (((cast includeDelay : Bool) ? (cast 0.0 : Dynamic) : (cast tween.delay : Dynamic)) : Float));
   }
 
   public static function seekTween(tween:Tween<flighthq._internal._Any>, timeSeconds:Float):Void {
@@ -42,31 +42,31 @@ class TweenProgress {
     var easedT:Float = cast _Runtime.UNDEFINED;
     var writes:Array<{ var key:String; var value:Float; }> = cast _Runtime.UNDEFINED;
     var target:flighthq._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast tween : Tween<flighthq._internal._Any>).initialized : Bool) : Bool)) { (cast initializeTween : Tween<flighthq._internal._Any>->Void)(({ final __callArgument0:Dynamic = tween; __callArgument0; })); }
-    maxElapsed = ((cast tween : Tween<flighthq._internal._Any>).delay + (cast tween : Tween<flighthq._internal._Any>).duration);
+    if ((cast !(cast tween.initialized : Bool) : Bool)) { (cast initializeTween : Tween<flighthq._internal._Any>->Void)(({ final __callArgument0:Dynamic = tween; __callArgument0; })); }
+    maxElapsed = (tween.delay + tween.duration);
     clampedElapsed = HxMath.max(0.0, HxMath.min(timeSeconds, maxElapsed));
-    ((cast tween : Tween<flighthq._internal._Any>).elapsed = clampedElapsed);
-    activeElapsed = (clampedElapsed - (cast tween : Tween<flighthq._internal._Any>).delay);
+    (tween.elapsed = cast (clampedElapsed : Float));
+    activeElapsed = (clampedElapsed - tween.delay);
     if ((cast ((cast activeElapsed : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
-    t = HxMath.min((activeElapsed / (cast tween : Tween<flighthq._internal._Any>).duration), 1.0);
-    effectiveT = ((cast (cast tween : Tween<flighthq._internal._Any>).reverse : Bool) ? (cast (1.0 - t) : Dynamic) : (cast t : Dynamic));
-    easedT = (cast tween : Tween<flighthq._internal._Any>).ease((cast effectiveT : Float));
+    t = HxMath.min((activeElapsed / tween.duration), 1.0);
+    effectiveT = ((cast tween.reverse : Bool) ? (cast (1.0 - t) : Dynamic) : (cast t : Dynamic));
+    easedT = (tween.ease)((cast effectiveT : Float));
     writes = (cast cast ([] : Array<Dynamic>));
-    for (detail in _Runtime.iterable((cast tween : Tween<flighthq._internal._Any>).properties)) {
+    for (detail in _Runtime.iterable(tween.properties)) {
       var value:Float = ((cast detail : TweenPropertyDetail).start + ((cast detail : TweenPropertyDetail).change * easedT));
-      if ((cast (cast tween : Tween<flighthq._internal._Any>).snapping : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
+      if ((cast tween.snapping : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
       _Runtime.callProperty(writes, 'push', cast ([{ key: (cast detail : TweenPropertyDetail).key, value: value }] : Array<Dynamic>));
     }
-    target = (cast (cast tween : Tween<flighthq._internal._Any>).target : flighthq._internal._Record<String, Float>);
+    target = (cast tween.target : flighthq._internal._Record<String, Float>);
     for (__iteration0 in _Runtime.iterable(writes)) {
       var key:String = _Runtime.field(__iteration0, 'key');
       var value:Float = _Runtime.field(__iteration0, 'value');
       _Runtime.setIndex(target, key, value);
     }
-    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast tween : Tween<flighthq._internal._Any>).onUpdate]]), 1);
-    if ((cast ((cast ((cast t : Float) >= (cast 1.0 : Float)) : Bool) && (cast !(cast (cast tween : Tween<flighthq._internal._Any>).complete : Bool) : Bool)) : Bool)) {
-      ((cast tween : Tween<flighthq._internal._Any>).complete = true);
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast tween : Tween<flighthq._internal._Any>).onComplete]]), 1);
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[tween.onUpdate]]), 1);
+    if ((cast ((cast ((cast t : Float) >= (cast 1.0 : Float)) : Bool) && (cast !(cast tween.complete : Bool) : Bool)) : Bool)) {
+      (tween.complete = cast (true : Bool));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[tween.onComplete]]), 1);
     }
   }
 
@@ -74,7 +74,7 @@ class TweenProgress {
     var clamped:Float = cast _Runtime.UNDEFINED;
     var targetElapsed:Float = cast _Runtime.UNDEFINED;
     clamped = HxMath.max(0.0, HxMath.min(progress, 1.0));
-    targetElapsed = ((cast tween : Tween<flighthq._internal._Any>).delay + (clamped * (cast tween : Tween<flighthq._internal._Any>).duration));
+    targetElapsed = (tween.delay + (clamped * tween.duration));
     seekTween(({ final __callArgument5:Dynamic = tween; __callArgument5; }), (cast targetElapsed : Float));
   }
 }

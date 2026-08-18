@@ -16,9 +16,9 @@ import flighthq.types.Node2DAnimationTarget;
 class DisplayObjectAnimation {
   public static function applyAnimationClipToNode2D(clip:AnimationClip, time:Float):Void {
     for (channel in _Runtime.iterable(clip.channels)) {
-      var target:Null<Node2DAnimationTarget> = (cast (cast channel : AnimationChannel).targetRef : Null<Node2DAnimationTarget>);
+      var target:Null<Node2DAnimationTarget> = (cast channel.targetRef : Null<Node2DAnimationTarget>);
       if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast target : Node2DAnimationTarget).node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
-      sampleAnimationTrack(({ final __callArgument2:Dynamic = DisplayObjectAnimation._scratch__displayObjectAnimation; __callArgument2; }), (cast channel : AnimationChannel).track, (cast time : Float));
+      sampleAnimationTrack(({ final __callArgument2:Dynamic = DisplayObjectAnimation._scratch__displayObjectAnimation; __callArgument2; }), channel.track, (cast time : Float));
       var node:Node2D = (cast target : Node2DAnimationTarget).node;
       {
         var __switchValue = (cast target : Node2DAnimationTarget).path;

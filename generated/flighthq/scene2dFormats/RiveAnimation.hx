@@ -49,9 +49,9 @@ class RiveAnimation {
   public static function applyAnimationClipToRiveDocument(clip:AnimationClip, time:Float):Void {
     applyAnimationClipToNode2D(({ final __callArgument0:Dynamic = clip; __callArgument0; }), (cast time : Float));
     for (channel in _Runtime.iterable(clip.channels)) {
-      var target:Null<RiveMutableTarget__riveAnimation> = (cast (cast channel : AnimationChannel).targetRef : Null<RiveMutableTarget__riveAnimation>);
+      var target:Null<RiveMutableTarget__riveAnimation> = (cast channel.targetRef : Null<RiveMutableTarget__riveAnimation>);
       if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast target : RiveMutableTarget__riveAnimation).riveApply, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
-      sampleAnimationTrack(({ final __callArgument3:Dynamic = RiveAnimation._sampleScratch__riveAnimation; __callArgument3; }), (cast channel : AnimationChannel).track, (cast time : Float));
+      sampleAnimationTrack(({ final __callArgument3:Dynamic = RiveAnimation._sampleScratch__riveAnimation; __callArgument3; }), channel.track, (cast time : Float));
       (cast target : RiveMutableTarget__riveAnimation).riveApply(({ final __callArgument4:Dynamic = RiveAnimation._sampleScratch__riveAnimation; __callArgument4; }));
     }
     for (rebuild in _Runtime.iterable(RiveAnimation._pendingRebuilds__riveAnimation)) {

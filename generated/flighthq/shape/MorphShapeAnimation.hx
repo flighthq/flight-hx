@@ -20,7 +20,7 @@ class MorphShapeAnimation {
   public static function applyMorphShapeAnimationSample(sampled:flighthq._internal._ArrayLike<Float>, channel:AnimationChannel):Bool {
     var target:Null<MorphShapeAnimationTarget> = cast _Runtime.UNDEFINED;
     var shape:Null<MorphShape> = cast _Runtime.UNDEFINED;
-    target = (cast _Runtime.field(channel, 'targetRef') : Null<MorphShapeAnimationTarget>);
+    target = (cast channel.targetRef : Null<MorphShapeAnimationTarget>);
     if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast target : MorphShapeAnimationTarget).shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast false; }
     shape = (cast (cast target : MorphShapeAnimationTarget).shape : Null<MorphShape>);
     if ((cast ((cast ((cast _Runtime.strictEquals(shape, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(shape), 'object') : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast shape : MorphShape).kind, MorphShapeKind) : Bool)) : Bool)) { return cast false; }

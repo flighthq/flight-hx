@@ -14,7 +14,7 @@ import flighthq.types._internal._AnimationInterpolationValues.AnimationInterpola
 
 class AnimationTrack {
   public static function cloneAnimationTrack(track:flighthq.types.AnimationTrack):flighthq.types.AnimationTrack {
-    return cast (cast createEntity((cast { components: _Runtime.field(track, 'components'), easing: _Runtime.field(track, 'easing'), interpolation: _Runtime.field(track, 'interpolation'), quaternion: _Runtime.field(track, 'quaternion'), segmentEasings: ((cast _Runtime.strictEquals(_Runtime.field(track, 'segmentEasings'), null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(_Runtime.field(track, 'segmentEasings'), 0, null) : Dynamic)), times: (cast AnimationTrack.cloneNumberBuffer__animationTrack(_Runtime.field(track, 'times')) : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), values: (cast AnimationTrack.cloneNumberBuffer__animationTrack(_Runtime.field(track, 'values')) : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>) } : Dynamic)) : { >Entity, var components:Float; var easing:Null<EasingFunction>; var interpolation:AnimationInterpolation; var quaternion:Bool; var segmentEasings:Null<Array<Null<EasingFunction>>>; var times:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>; var values:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>; });
+    return cast (cast createEntity((cast { components: track.components, easing: track.easing, interpolation: track.interpolation, quaternion: track.quaternion, segmentEasings: ((cast _Runtime.strictEquals(track.segmentEasings, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(track.segmentEasings, 0, null) : Dynamic)), times: (cast AnimationTrack.cloneNumberBuffer__animationTrack(track.times) : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), values: (cast AnimationTrack.cloneNumberBuffer__animationTrack(track.values) : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>) } : Dynamic)) : { >Entity, var components:Float; var easing:Null<EasingFunction>; var interpolation:AnimationInterpolation; var quaternion:Bool; var segmentEasings:Null<Array<Null<EasingFunction>>>; var times:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>; var values:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>; });
     return cast null;
   }
 
@@ -24,7 +24,7 @@ class AnimationTrack {
   }
 
   public static function sampleAnimationTrack(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, track:flighthq.types.AnimationTrack, t:Float):Void {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:flighthq.types.AnimationTrack = cast _Runtime.UNDEFINED;
     var components:Float = cast _Runtime.UNDEFINED;
     var times:flighthq._internal._ArrayLike<Float> = cast _Runtime.UNDEFINED;
     var values:flighthq._internal._ArrayLike<Float> = cast _Runtime.UNDEFINED;
@@ -39,9 +39,9 @@ class AnimationTrack {
     var oi:Float = cast _Runtime.UNDEFINED;
     var oj:Float = cast _Runtime.UNDEFINED;
     __destructure0 = track;
-    components = _Runtime.field(__destructure0, 'components');
-    times = _Runtime.field(__destructure0, 'times');
-    values = _Runtime.field(__destructure0, 'values');
+    components = __destructure0.components;
+    times = __destructure0.times;
+    values = __destructure0.values;
     count = _Runtime.field(times, 'length');
     if ((cast _Runtime.strictEquals(count, 0.0) : Bool)) {
       {
@@ -71,19 +71,19 @@ class AnimationTrack {
     t0 = _Runtime.getIndex(times, i);
     dt = _Runtime.subtractNumbers(_Runtime.getIndex(times, (i + 1.0)), t0);
     alpha = ((cast ((cast dt : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((t - t0) / dt) : Dynamic) : (cast 0.0 : Dynamic));
-    easing = _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.field(track, 'segmentEasings'), i), function():Dynamic return cast _Runtime.field(track, 'easing'));
+    easing = _Runtime.coalesce(_Runtime.optionalIndex(track.segmentEasings, i), function():Dynamic return cast track.easing);
     if ((cast !_Runtime.strictEquals(easing, null) : Bool)) { (alpha = cast ((cast easing((cast alpha : Float)) : Float) : Dynamic)); }
-    if ((cast _Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Step') : Bool)) {
+    if ((cast _Runtime.strictEquals(track.interpolation, 'Step') : Bool)) {
       AnimationTrack.copyKeyframeValue__animationTrack(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = track; __callArgument5; }), (cast i : Float));
       return;
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Cubic') : Bool)) {
+    if ((cast _Runtime.strictEquals(track.interpolation, 'Cubic') : Bool)) {
       AnimationTrack.sampleCubicSegment__animationTrack(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = track; __callArgument7; }), (cast i : Float), (cast alpha : Float), (cast dt : Float));
       return;
     }
     oi = (cast AnimationTrack.keyframeValueOffset__animationTrack(({ final __callArgument8:Dynamic = track; __callArgument8; }), (cast i : Float)) : Float);
     oj = (cast AnimationTrack.keyframeValueOffset__animationTrack(({ final __callArgument9:Dynamic = track; __callArgument9; }), (cast (i + 1.0) : Float)) : Float);
-    if ((cast ((cast _Runtime.field(track, 'quaternion') : Bool) && (cast _Runtime.strictEquals(components, 4.0) : Bool)) : Bool)) {
+    if ((cast ((cast track.quaternion : Bool) && (cast _Runtime.strictEquals(components, 4.0) : Bool)) : Bool)) {
       AnimationTrack.slerpFlatQuaternion__animationTrack(({ final __callArgument10:Dynamic = out; __callArgument10; }), ({ final __callArgument11:Dynamic = values; __callArgument11; }), (cast oi : Float), (cast oj : Float), (cast alpha : Float));
       return;
     }
@@ -98,7 +98,7 @@ class AnimationTrack {
   }
 
   public static function trimAnimationTrack(track:flighthq.types.AnimationTrack, startTime:Float, endTime:Float):flighthq.types.AnimationTrack {
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure1:flighthq.types.AnimationTrack = cast _Runtime.UNDEFINED;
     var components:Float = cast _Runtime.UNDEFINED;
     var times:flighthq._internal._ArrayLike<Float> = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
@@ -107,8 +107,8 @@ class AnimationTrack {
     var outValues:Array<Float> = cast _Runtime.UNDEFINED;
     var sourceKeyframes:Array<Float> = cast _Runtime.UNDEFINED;
     __destructure1 = track;
-    components = _Runtime.field(__destructure1, 'components');
-    times = _Runtime.field(__destructure1, 'times');
+    components = __destructure1.components;
+    times = __destructure1.times;
     count = _Runtime.field(times, 'length');
     stride = (cast AnimationTrack.keyframeStride__animationTrack(({ final __callArgument12:Dynamic = track; __callArgument12; })) : Float);
     outTimes = (cast cast ([] : Array<Dynamic>));
@@ -125,20 +125,20 @@ class AnimationTrack {
         {
           var c:Float = 0.0;
           while ((cast ((cast c : Float) < (cast stride : Float)) : Bool)) {
-            _Runtime.callProperty(outValues, 'push', cast ([_Runtime.getIndex(_Runtime.field(track, 'values'), (off + c))] : Array<Dynamic>));
+            _Runtime.callProperty(outValues, 'push', cast ([_Runtime.getIndex(track.values, (off + c))] : Array<Dynamic>));
             c++;
           }
         }
         k++;
       }
     }
-    return cast (cast createEntity((cast { components: components, easing: _Runtime.field(track, 'easing'), interpolation: _Runtime.field(track, 'interpolation'), quaternion: _Runtime.field(track, 'quaternion'), segmentEasings: ((cast ((cast _Runtime.strictEquals(_Runtime.field(track, 'segmentEasings'), null) : Bool) || (cast ((cast _Runtime.field(sourceKeyframes, 'length') : Float) < (cast 2.0 : Float)) : Bool)) : Bool) ? (cast ((cast _Runtime.strictEquals(_Runtime.field(track, 'segmentEasings'), null) : Bool) ? (cast null : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)) : Dynamic) : (cast _Runtime.slice(_Runtime.field(track, 'segmentEasings'), flighthq._internal._StaticIndex.readFloatArrayTyped((cast sourceKeyframes : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast sourceKeyframes : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(sourceKeyframes, 'length'), 1.0) : Float))) : Dynamic)), times: outTimes, values: outValues } : Dynamic)) : { >Entity, var components:Float; var easing:Null<EasingFunction>; var interpolation:AnimationInterpolation; var quaternion:Bool; var segmentEasings:Null<Array<Null<EasingFunction>>>; var times:Array<Float>; var values:Array<Float>; });
+    return cast (cast createEntity((cast { components: components, easing: track.easing, interpolation: track.interpolation, quaternion: track.quaternion, segmentEasings: ((cast ((cast _Runtime.strictEquals(track.segmentEasings, null) : Bool) || (cast ((cast _Runtime.field(sourceKeyframes, 'length') : Float) < (cast 2.0 : Float)) : Bool)) : Bool) ? (cast ((cast _Runtime.strictEquals(track.segmentEasings, null) : Bool) ? (cast null : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)) : Dynamic) : (cast _Runtime.slice(track.segmentEasings, flighthq._internal._StaticIndex.readFloatArrayTyped((cast sourceKeyframes : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast sourceKeyframes : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(sourceKeyframes, 'length'), 1.0) : Float))) : Dynamic)), times: outTimes, values: outValues } : Dynamic)) : { >Entity, var components:Float; var easing:Null<EasingFunction>; var interpolation:AnimationInterpolation; var quaternion:Bool; var segmentEasings:Null<Array<Null<EasingFunction>>>; var times:Array<Float>; var values:Array<Float>; });
     return cast null;
   }
 
   public static function validateAnimationTrack(track:flighthq.types.AnimationTrack):Null<Array<AnimationTrackValidationDiagnostic>> {
     var diagnostics:Array<AnimationTrackValidationDiagnostic> = cast _Runtime.UNDEFINED;
-    var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure2:flighthq.types.AnimationTrack = cast _Runtime.UNDEFINED;
     var times:flighthq._internal._ArrayLike<Float> = cast _Runtime.UNDEFINED;
     var values:flighthq._internal._ArrayLike<Float> = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
@@ -146,8 +146,8 @@ class AnimationTrack {
     var expectedEasings:Float = cast _Runtime.UNDEFINED;
     diagnostics = (cast cast ([] : Array<Dynamic>));
     __destructure2 = track;
-    times = _Runtime.field(__destructure2, 'times');
-    values = _Runtime.field(__destructure2, 'values');
+    times = __destructure2.times;
+    values = __destructure2.values;
     count = _Runtime.field(times, 'length');
     {
       var k:Float = 1.0;
@@ -163,8 +163,8 @@ class AnimationTrack {
       _Runtime.callProperty(diagnostics, 'push', cast ([{ code: 'valuesLengthMismatch', index: null, message: 'values.length (' + Std.string(_Runtime.field(values, 'length')) + ') must equal keyCount * componentsPerKeyframe (' + Std.string(expected) + ').' }] : Array<Dynamic>));
     }
     expectedEasings = HxMath.max(0.0, (count - 1.0));
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(track, 'segmentEasings'), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(track, 'segmentEasings'), 'length'), expectedEasings) : Bool)) : Bool)) {
-      _Runtime.callProperty(diagnostics, 'push', cast ([{ code: 'segmentEasingsLengthMismatch', index: null, message: 'segmentEasings.length (' + Std.string(_Runtime.field(_Runtime.field(track, 'segmentEasings'), 'length')) + ') must equal keyCount - 1 (' + Std.string(expectedEasings) + ').' }] : Array<Dynamic>));
+    if ((cast ((cast !_Runtime.strictEquals(track.segmentEasings, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(track.segmentEasings, 'length'), expectedEasings) : Bool)) : Bool)) {
+      _Runtime.callProperty(diagnostics, 'push', cast ([{ code: 'segmentEasingsLengthMismatch', index: null, message: 'segmentEasings.length (' + Std.string(_Runtime.field(track.segmentEasings, 'length')) + ') must equal keyCount - 1 (' + Std.string(expectedEasings) + ').' }] : Array<Dynamic>));
     }
     return cast ((cast ((cast _Runtime.field(diagnostics, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast diagnostics : Dynamic) : (cast null : Dynamic));
     return cast null;
@@ -190,22 +190,22 @@ class AnimationTrack {
     off = (cast AnimationTrack.keyframeValueOffset__animationTrack(({ final __callArgument14:Dynamic = track; __callArgument14; }), (cast k : Float)) : Float);
     {
       var c:Float = 0.0;
-      while ((cast ((cast c : Float) < (cast _Runtime.field(track, 'components') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, c, _Runtime.getIndex(_Runtime.field(track, 'values'), (off + c)));
+      while ((cast ((cast c : Float) < (cast track.components : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeArrayOrFloat32Array(out, c, _Runtime.getIndex(track.values, (off + c)));
         c++;
       }
     }
   }
 
   public static function keyframeStride__animationTrack(track:flighthq.types.AnimationTrack):Float {
-    return cast ((cast _Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Cubic') : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.field(track, 'components'), 3.0) : Dynamic) : (cast _Runtime.field(track, 'components') : Dynamic));
+    return cast ((cast _Runtime.strictEquals(track.interpolation, 'Cubic') : Bool) ? (cast (track.components * 3.0) : Dynamic) : (cast track.components : Dynamic));
     return cast null;
   }
 
   public static function keyframeValueOffset__animationTrack(track:flighthq.types.AnimationTrack, k:Float):Float {
     var stride:Float = cast _Runtime.UNDEFINED;
     stride = (cast AnimationTrack.keyframeStride__animationTrack(({ final __callArgument15:Dynamic = track; __callArgument15; })) : Float);
-    return cast ((cast _Runtime.strictEquals(_Runtime.field(track, 'interpolation'), 'Cubic') : Bool) ? (cast _Runtime.addNumbers((k * stride), _Runtime.field(track, 'components')) : Dynamic) : (cast (k * stride) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(track.interpolation, 'Cubic') : Bool) ? (cast ((k * stride) + track.components) : Dynamic) : (cast (k * stride) : Dynamic));
     return cast null;
   }
 
@@ -230,7 +230,7 @@ class AnimationTrack {
   }
 
   public static function sampleCubicSegment__animationTrack(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, track:flighthq.types.AnimationTrack, i:Float, alpha:Float, dt:Float):Void {
-    var __destructure3:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure3:flighthq.types.AnimationTrack = cast _Runtime.UNDEFINED;
     var components:Float = cast _Runtime.UNDEFINED;
     var values:flighthq._internal._ArrayLike<Float> = cast _Runtime.UNDEFINED;
     var stride:Float = cast _Runtime.UNDEFINED;
@@ -243,8 +243,8 @@ class AnimationTrack {
     var base0:Float = cast _Runtime.UNDEFINED;
     var base1:Float = cast _Runtime.UNDEFINED;
     __destructure3 = track;
-    components = _Runtime.field(__destructure3, 'components');
-    values = _Runtime.field(__destructure3, 'values');
+    components = __destructure3.components;
+    values = __destructure3.values;
     stride = (components * 3.0);
     a2 = (alpha * alpha);
     a3 = (a2 * alpha);
@@ -265,7 +265,7 @@ class AnimationTrack {
         c++;
       }
     }
-    if ((cast ((cast _Runtime.field(track, 'quaternion') : Bool) && (cast _Runtime.strictEquals(components, 4.0) : Bool)) : Bool)) { AnimationTrack.normalizeFlatQuaternion__animationTrack(({ final __callArgument16:Dynamic = out; __callArgument16; })); }
+    if ((cast ((cast track.quaternion : Bool) && (cast _Runtime.strictEquals(components, 4.0) : Bool)) : Bool)) { AnimationTrack.normalizeFlatQuaternion__animationTrack(({ final __callArgument16:Dynamic = out; __callArgument16; })); }
   }
 
   public static function slerpFlatQuaternion__animationTrack(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, values:flighthq._internal._ArrayLike<Float>, oa:Float, ob:Float, alpha:Float):Void {

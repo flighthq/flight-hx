@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_576,
+      newAuditOnly: 1_571,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(430);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(435);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_576);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_571);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(28);
+    expect(newDirect).toHaveLength(33);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -250,6 +250,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'RiveCoreObject',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free Rive core object',
+        }),
+        expect.objectContaining({
+          name: 'AnimationTrack',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free animation track',
+        }),
+        expect.objectContaining({
+          name: 'Tween',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free tween state',
+        }),
+        expect.objectContaining({
+          name: 'AnimationChannel',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free animation channel',
+        }),
+        expect.objectContaining({
+          name: 'AnimationPlayer',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free animation player',
+        }),
+        expect.objectContaining({
+          name: 'Timeline',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free timeline state',
         }),
       ]),
     );
@@ -393,6 +418,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:9252f9146b93933f51443521632f05794eed7f39a6e8059a7ae12d86167e16ac',
         id: '@flighthq/types:interface#RiveCoreObject',
         purpose: 'reviewed escape-free Rive core object',
+      },
+      {
+        declarationFingerprint: 'sha256:a3e8b0a6c23713f4d8e46cae1937cd775b8337ee098c6b36ecb5a906b35a8a44',
+        id: '@flighthq/types:interface#AnimationTrack',
+        purpose: 'reviewed escape-free animation track',
+      },
+      {
+        declarationFingerprint: 'sha256:6903b4fa8a509237f7ff329abd18f797ff86f22fe5115266aa530240bdad1859',
+        id: '@flighthq/types:interface#Tween',
+        purpose: 'reviewed escape-free tween state',
+      },
+      {
+        declarationFingerprint: 'sha256:bdb2b9a80b19b26d3da6a39bd5641971941622f788716891ce6a299c97dd325b',
+        id: '@flighthq/types:interface#AnimationChannel',
+        purpose: 'reviewed escape-free animation channel',
+      },
+      {
+        declarationFingerprint: 'sha256:7737db1e82e8f1bf7d07b4ebd21bd0f18946927b22ba3b0216c93a3d85241c6d',
+        id: '@flighthq/types:interface#AnimationPlayer',
+        purpose: 'reviewed escape-free animation player',
+      },
+      {
+        declarationFingerprint: 'sha256:aaf49d1e409fd3c60824a648cf8edd8e53ad11411923a0b5ab74c34be4da89a6',
+        id: '@flighthq/types:interface#Timeline',
+        purpose: 'reviewed escape-free timeline state',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -789,6 +839,13 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const animationTimelineCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['AnimationChannel', 'AnimationPlayer', 'AnimationTrack', 'Timeline', 'Tween'].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -829,22 +886,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_576,
+      auditOnlySchemas: 1_571,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 17_309,
-      directSchemas: 428,
+      directAccesses: 17_704,
+      directSchemas: 433,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 13_357,
+      pendingAccesses: 12_962,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_576,
+      newAuditOnly: 1_571,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -872,7 +929,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(17_309);
+    expect(report.summary.directAccesses).toBe(17_704);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -1054,6 +1111,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(nextHotCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'AnimationTrack',
+        99,
+        'sha256:a3e8b0a6c23713f4d8e46cae1937cd775b8337ee098c6b36ecb5a906b35a8a44',
+        'reviewed escape-free animation track',
+      ],
+      [
+        'Tween',
+        91,
+        'sha256:6903b4fa8a509237f7ff329abd18f797ff86f22fe5115266aa530240bdad1859',
+        'reviewed escape-free tween state',
+      ],
+      [
+        'AnimationChannel',
+        89,
+        'sha256:bdb2b9a80b19b26d3da6a39bd5641971941622f788716891ce6a299c97dd325b',
+        'reviewed escape-free animation channel',
+      ],
+      [
+        'AnimationPlayer',
+        61,
+        'sha256:7737db1e82e8f1bf7d07b4ebd21bd0f18946927b22ba3b0216c93a3d85241c6d',
+        'reviewed escape-free animation player',
+      ],
+      [
+        'Timeline',
+        55,
+        'sha256:aaf49d1e409fd3c60824a648cf8edd8e53ad11411923a0b5ab74c34be4da89a6',
+        'reviewed escape-free timeline state',
+      ],
+    ] as const) {
+      expect(animationTimelineCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -1295,6 +1394,35 @@ describe('typed struct analysis', () => {
       observabilityReasons: [],
     });
     expect(provenanceById.has(orbitCameraControllerId)).toBe(false);
+    for (const animationEntityId of [
+      '@flighthq/types:interface#AnimationChannel',
+      '@flighthq/types:interface#AnimationPlayer',
+      '@flighthq/types:interface#AnimationTrack',
+    ]) {
+      expect(classAuditById.get(animationEntityId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer'],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.has(animationEntityId)).toBe(false);
+    }
+    const timelineId = '@flighthq/types:interface#Timeline';
+    expect(classAuditById.get(timelineId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: ['strict-equality'],
+    });
+    expect(provenanceById.has(timelineId)).toBe(false);
+    const tweenId = '@flighthq/types:interface#Tween';
+    expect(classAuditById.get(tweenId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(tweenId)?.nominalIdentity).toEqual({
+      blockerReasons: ['container-transfer'],
+      closed: false,
+    });
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -1386,6 +1514,28 @@ describe('typed struct analysis', () => {
       expect(riveCore).not.toMatch(/\(cast (?:keyframe|object|source) : RiveCoreObject\)\./u);
       expect(riveCore).not.toMatch(/_Runtime\.field\((?:keyframe|object|source),/u);
     }
+    const animationTrack = readFileSync('generated/flighthq/animation/AnimationTrack.hx', 'utf8');
+    expect(animationTrack).not.toMatch(/\(cast (?:source|track) : AnimationTrack\)\./u);
+    expect(animationTrack).not.toMatch(/_Runtime\.field\((?:source|track),/u);
+    for (const path of [
+      'generated/flighthq/animation/AnimationBlendTree.hx',
+      'generated/flighthq/animation/AnimationClip.hx',
+    ]) {
+      const animationChannel = readFileSync(path, 'utf8');
+      expect(animationChannel).not.toMatch(/\(cast (?:channel|existing) : AnimationChannel\)\./u);
+      expect(animationChannel).not.toMatch(/_Runtime\.field\((?:channel|existing),/u);
+    }
+    const animationPlayer = readFileSync('generated/flighthq/animation/AnimationPlayer.hx', 'utf8');
+    expect(animationPlayer).not.toMatch(/\(cast player : (?:flighthq\.types\.)?AnimationPlayer\)\./u);
+    expect(animationPlayer).not.toMatch(/_Runtime\.field\(player,/u);
+    for (const path of ['generated/flighthq/tween/Tween.hx', 'generated/flighthq/tween/UpdateTweens.hx']) {
+      const tween = readFileSync(path, 'utf8');
+      expect(tween).not.toMatch(/\(cast (?:source|target|tween) : (?:flighthq\.types\.)?Tween[^)]*\)\./u);
+      expect(tween).not.toMatch(/_Runtime\.field\((?:source|target|tween),/u);
+    }
+    const timeline = readFileSync('generated/flighthq/timeline/Timeline.hx', 'utf8');
+    expect(timeline).not.toMatch(/\(cast timeline : (?:flighthq\.types\.)?Timeline\)\./u);
+    expect(timeline).not.toMatch(/_Runtime\.field\(timeline,/u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

@@ -68,10 +68,10 @@ class AnimationLayerStack {
         var channelIndices:Array<Float> = _Runtime.coalesce((cast layer : AnimationLayer).channelIndices, function():Dynamic return cast (cast _Runtime.mapArray((cast sourceChannels : Array<{ var channel:AnimationChannel; }>), function(_:{ var channel:AnimationChannel; }, index:Float, __unused0:Array<{ var channel:AnimationChannel; }>):Float return index, _Runtime.UNDEFINED)));
         for (channelIndex in _Runtime.iterable(channelIndices)) {
           var channel:AnimationChannel = (cast flighthq._internal._StaticIndex.readArray(sourceChannels, channelIndex) : { var channel:AnimationChannel; }).channel;
-          (sampleWidth = cast (HxMath.max(sampleWidth, (cast _Runtime.field(channel, 'track') : AnimationTrack).components) : Dynamic));
-          var existingIndex:Null<Float> = ((cast channelByTarget : flighthq._internal._Map<flighthq._internal._Any, Float>).get(_Runtime.field(channel, 'targetRef')));
+          (sampleWidth = cast (HxMath.max(sampleWidth, (cast channel.track : { var components:Float; }).components) : Dynamic));
+          var existingIndex:Null<Float> = ((cast channelByTarget : flighthq._internal._Map<flighthq._internal._Any, Float>).get(channel.targetRef));
           if ((cast _Runtime.strictEquals(existingIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-            ((cast channelByTarget : flighthq._internal._Map<flighthq._internal._Any, Float>).set(_Runtime.field(channel, 'targetRef'), (cast _Runtime.field(channels, 'length'))));
+            ((cast channelByTarget : flighthq._internal._Map<flighthq._internal._Any, Float>).set(channel.targetRef, (cast _Runtime.field(channels, 'length'))));
             _Runtime.callProperty(channels, 'push', cast ([{ channel: channel, sources: cast ([{ channelIndex: channelIndex, layerIndex: layerIndex }] : Array<Dynamic>) }] : Array<Dynamic>));
             continue;
           }
@@ -112,14 +112,14 @@ class AnimationLayerStack {
       if ((cast ((cast !(cast _Runtime.compare((cast layer : AnimationLayer).weight, 0.0, '>') : Bool) : Bool) || (cast !(cast (cast AnimationLayerStack.sampleAnimationLayer__animationLayerStack(({ final __callArgument21:Dynamic = _Runtime.field(stack, 'sampleScratch'); __callArgument21; }), ({ final __callArgument22:Dynamic = layer; __callArgument22; }), (cast _Runtime.field(source, 'channelIndex') : Float)) : Bool) : Bool) : Bool)) : Bool)) { continue; }
       if ((cast (cast layer : AnimationLayer).additive : Bool)) {
         if ((cast !(cast hasPose : Bool) : Bool)) {
-          AnimationLayerStack.writeAnimationLayerIdentity__animationLayerStack(({ final __callArgument23:Dynamic = out; __callArgument23; }), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).components : Float), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).quaternion : Bool));
+          AnimationLayerStack.writeAnimationLayerIdentity__animationLayerStack(({ final __callArgument23:Dynamic = out; __callArgument23; }), (cast (cast (cast _Runtime.field(entry, 'channel') : { var track:AnimationTrack; }).track : { var components:Float; }).components : Float), (cast (cast (cast _Runtime.field(entry, 'channel') : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
           (hasPose = cast (true : Dynamic));
         }
-        addAnimationSample(({ final __callArgument24:Dynamic = out; __callArgument24; }), ({ final __callArgument25:Dynamic = out; __callArgument25; }), ({ final __callArgument26:Dynamic = _Runtime.field(stack, 'sampleScratch'); __callArgument26; }), (cast (cast layer : AnimationLayer).weight : Float), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).quaternion : Bool));
+        addAnimationSample(({ final __callArgument24:Dynamic = out; __callArgument24; }), ({ final __callArgument25:Dynamic = out; __callArgument25; }), ({ final __callArgument26:Dynamic = _Runtime.field(stack, 'sampleScratch'); __callArgument26; }), (cast (cast layer : AnimationLayer).weight : Float), (cast (cast (cast _Runtime.field(entry, 'channel') : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
       } else { if ((cast hasPose : Bool)) {
-        blendAnimationSamples(({ final __callArgument27:Dynamic = out; __callArgument27; }), ({ final __callArgument28:Dynamic = out; __callArgument28; }), ({ final __callArgument29:Dynamic = _Runtime.field(stack, 'sampleScratch'); __callArgument29; }), (cast (cast layer : AnimationLayer).weight : Float), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).quaternion : Bool));
+        blendAnimationSamples(({ final __callArgument27:Dynamic = out; __callArgument27; }), ({ final __callArgument28:Dynamic = out; __callArgument28; }), ({ final __callArgument29:Dynamic = _Runtime.field(stack, 'sampleScratch'); __callArgument29; }), (cast (cast layer : AnimationLayer).weight : Float), (cast (cast (cast _Runtime.field(entry, 'channel') : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
       } else {
-        AnimationLayerStack.copyAnimationLayerSample__animationLayerStack(({ final __callArgument30:Dynamic = out; __callArgument30; }), ({ final __callArgument31:Dynamic = _Runtime.field(stack, 'sampleScratch'); __callArgument31; }), (cast (cast _Runtime.field(_Runtime.field(entry, 'channel'), 'track') : AnimationTrack).components : Float));
+        AnimationLayerStack.copyAnimationLayerSample__animationLayerStack(({ final __callArgument30:Dynamic = out; __callArgument30; }), ({ final __callArgument31:Dynamic = _Runtime.field(stack, 'sampleScratch'); __callArgument31; }), (cast (cast (cast _Runtime.field(entry, 'channel') : { var track:AnimationTrack; }).track : { var components:Float; }).components : Float));
         (hasPose = cast (true : Dynamic));
       } }
     }
@@ -137,7 +137,7 @@ class AnimationLayerStack {
   }
 
   public static function assertCompatibleAnimationLayerChannels__animationLayerStack(existing:AnimationChannel, channel:AnimationChannel):Void {
-    if ((cast ((cast !_Runtime.strictEquals((cast _Runtime.field(existing, 'track') : AnimationTrack).components, (cast _Runtime.field(channel, 'track') : AnimationTrack).components) : Bool) || (cast !_Runtime.strictEquals((cast _Runtime.field(existing, 'track') : AnimationTrack).quaternion, (cast _Runtime.field(channel, 'track') : AnimationTrack).quaternion) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals((cast existing.track : { var components:Float; }).components, (cast channel.track : { var components:Float; }).components) : Bool) || (cast !_Runtime.strictEquals((cast existing.track : { var quaternion:Bool; }).quaternion, (cast channel.track : { var quaternion:Bool; }).quaternion) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.typeError('AnimationLayerStack target has incompatible tracks across layers.'));
     }
   }

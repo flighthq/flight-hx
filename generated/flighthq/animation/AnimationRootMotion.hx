@@ -20,14 +20,14 @@ class AnimationRootMotion {
       _Runtime.throwValue(_Runtime.rangeError('AnimationRootMotionExtractor channel index ' + Std.string(Std.string(channelIndex)) + ' does not exist.'));
     }
     channel = flighthq._internal._StaticIndex.readArray(clip.channels, channelIndex);
-    width = (cast (cast channel : AnimationChannel).track : AnimationTrack).components;
-    if ((cast ((cast (cast (cast channel : AnimationChannel).track : AnimationTrack).quaternion : Bool) && (cast !_Runtime.strictEquals(width, 4.0) : Bool)) : Bool)) {
+    width = (cast channel.track : { var components:Float; }).components;
+    if ((cast ((cast (cast channel.track : { var quaternion:Bool; }).quaternion : Bool) && (cast !_Runtime.strictEquals(width, 4.0) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.typeError('AnimationRootMotionExtractor quaternion channel must have four components.'));
     }
     extractor = (cast createEntity((cast { channel: channel, channelIndex: channelIndex, clip: clip, cycleDelta: new flighthq._internal._Float32Array(width), fromMotion: new flighthq._internal._Float32Array(width), fromSample: new flighthq._internal._Float32Array(width), powerScratch: new flighthq._internal._Float32Array(width), startSample: new flighthq._internal._Float32Array(width), toMotion: new flighthq._internal._Float32Array(width), toSample: new flighthq._internal._Float32Array(width) } : Dynamic)) : { >Entity, var channel:AnimationChannel; var channelIndex:Float; var clip:AnimationClip; var cycleDelta:flighthq._internal._Float32Array; var fromMotion:flighthq._internal._Float32Array; var fromSample:flighthq._internal._Float32Array; var powerScratch:flighthq._internal._Float32Array; var startSample:flighthq._internal._Float32Array; var toMotion:flighthq._internal._Float32Array; var toSample:flighthq._internal._Float32Array; });
-    sampleAnimationTrack(({ final __callArgument0:Dynamic = (cast extractor : { var startSample:flighthq._internal._Float32Array; }).startSample; __callArgument0; }), (cast channel : AnimationChannel).track, (cast 0.0 : Float));
-    sampleAnimationTrack(({ final __callArgument1:Dynamic = (cast extractor : { var toSample:flighthq._internal._Float32Array; }).toSample; __callArgument1; }), (cast channel : AnimationChannel).track, (cast clip.duration : Float));
-    AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument2:Dynamic = (cast extractor : { var cycleDelta:flighthq._internal._Float32Array; }).cycleDelta; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast extractor : { var startSample:flighthq._internal._Float32Array; }).startSample; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast extractor : { var toSample:flighthq._internal._Float32Array; }).toSample; __callArgument4; }), (cast (cast (cast channel : AnimationChannel).track : AnimationTrack).quaternion : Bool));
+    sampleAnimationTrack(({ final __callArgument0:Dynamic = (cast extractor : { var startSample:flighthq._internal._Float32Array; }).startSample; __callArgument0; }), channel.track, (cast 0.0 : Float));
+    sampleAnimationTrack(({ final __callArgument1:Dynamic = (cast extractor : { var toSample:flighthq._internal._Float32Array; }).toSample; __callArgument1; }), channel.track, (cast clip.duration : Float));
+    AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument2:Dynamic = (cast extractor : { var cycleDelta:flighthq._internal._Float32Array; }).cycleDelta; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast extractor : { var startSample:flighthq._internal._Float32Array; }).startSample; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast extractor : { var toSample:flighthq._internal._Float32Array; }).toSample; __callArgument4; }), (cast (cast channel.track : { var quaternion:Bool; }).quaternion : Bool));
     return cast extractor;
     return cast null;
   }
@@ -37,11 +37,11 @@ class AnimationRootMotion {
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([startTime] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([endTime] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('AnimationRootMotionExtractor time range must contain only finite numbers.'));
     }
-    components = (cast _Runtime.field((cast extractor : AnimationRootMotionExtractor).channel, 'track') : AnimationTrack).components;
+    components = (cast (cast (cast extractor : AnimationRootMotionExtractor).channel : { var track:AnimationTrack; }).track : { var components:Float; }).components;
     if ((cast ((cast (cast out : { var length:Float; }).length : Float) < (cast components : Float)) : Bool)) { return cast false; }
     AnimationRootMotion.writeAnimationRootMotionAt__animationRootMotion((cast extractor : AnimationRootMotionExtractor).fromMotion, ({ final __callArgument5:Dynamic = extractor; __callArgument5; }), (cast startTime : Float), (cast extractor : AnimationRootMotionExtractor).fromSample);
     AnimationRootMotion.writeAnimationRootMotionAt__animationRootMotion((cast extractor : AnimationRootMotionExtractor).toMotion, ({ final __callArgument6:Dynamic = extractor; __callArgument6; }), (cast endTime : Float), (cast extractor : AnimationRootMotionExtractor).toSample);
-    AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument7:Dynamic = out; __callArgument7; }), ({ final __callArgument8:Dynamic = (cast extractor : AnimationRootMotionExtractor).fromMotion; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast extractor : AnimationRootMotionExtractor).toMotion; __callArgument9; }), (cast (cast _Runtime.field((cast extractor : AnimationRootMotionExtractor).channel, 'track') : AnimationTrack).quaternion : Bool));
+    AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument7:Dynamic = out; __callArgument7; }), ({ final __callArgument8:Dynamic = (cast extractor : AnimationRootMotionExtractor).fromMotion; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast extractor : AnimationRootMotionExtractor).toMotion; __callArgument9; }), (cast (cast (cast (cast extractor : AnimationRootMotionExtractor).channel : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
     return cast true;
     return cast null;
   }
@@ -72,15 +72,15 @@ class AnimationRootMotion {
     var cycle:Float = cast _Runtime.UNDEFINED;
     var localTime:Float = cast _Runtime.UNDEFINED;
     duration = (cast (cast extractor : AnimationRootMotionExtractor).clip : { var duration:Float; }).duration;
-    track = _Runtime.field((cast extractor : AnimationRootMotionExtractor).channel, 'track');
+    track = (cast (cast extractor : AnimationRootMotionExtractor).channel : { var track:AnimationTrack; }).track;
     if ((cast !(cast _Runtime.compare(duration, 0.0, '>') : Bool) : Bool)) {
-      AnimationRootMotion.writeAnimationRootMotionIdentity__animationRootMotion(({ final __callArgument11:Dynamic = out; __callArgument11; }), (cast (cast track : AnimationTrack).components : Float), (cast (cast track : AnimationTrack).quaternion : Bool));
+      AnimationRootMotion.writeAnimationRootMotionIdentity__animationRootMotion(({ final __callArgument11:Dynamic = out; __callArgument11; }), (cast track.components : Float), (cast track.quaternion : Bool));
       return;
     }
     cycle = HxMath.floor((time / duration));
     localTime = (time - (cycle * duration));
     sampleAnimationTrack(({ final __callArgument12:Dynamic = sample; __callArgument12; }), ({ final __callArgument13:Dynamic = track; __callArgument13; }), (cast localTime : Float));
-    if ((cast (cast track : AnimationTrack).quaternion : Bool)) {
+    if ((cast track.quaternion : Bool)) {
       AnimationRootMotion.writeAnimationRootMotionQuaternionPower__animationRootMotion(({ final __callArgument14:Dynamic = out; __callArgument14; }), ({ final __callArgument15:Dynamic = extractor; __callArgument15; }), (cast cycle : Float));
       AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument16:Dynamic = (cast extractor : AnimationRootMotionExtractor).powerScratch; __callArgument16; }), ({ final __callArgument17:Dynamic = (cast extractor : AnimationRootMotionExtractor).startSample; __callArgument17; }), ({ final __callArgument18:Dynamic = sample; __callArgument18; }), (cast true : Bool));
       AnimationRootMotion.multiplyAnimationRootMotionQuaternion__animationRootMotion(({ final __callArgument19:Dynamic = out; __callArgument19; }), ({ final __callArgument20:Dynamic = out; __callArgument20; }), ({ final __callArgument21:Dynamic = (cast extractor : AnimationRootMotionExtractor).powerScratch; __callArgument21; }));
@@ -88,7 +88,7 @@ class AnimationRootMotion {
     }
     {
       var component:Float = 0.0;
-      while ((cast ((cast component : Float) < (cast (cast track : AnimationTrack).components : Float)) : Bool)) {
+      while ((cast ((cast component : Float) < (cast track.components : Float)) : Bool)) {
         flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast component : Float), (cast ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast sample : flighthq._internal._Float32Array), (cast component : Float)) - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).startSample : flighthq._internal._Float32Array), (cast component : Float))) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).cycleDelta : flighthq._internal._Float32Array), (cast component : Float)) * cycle)) : Float));
         component++;
       }

@@ -53686,7 +53686,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 91,
       "fields": 19,
       "id": "@flighthq/types:interface#Tween",
       "name": "Tween",

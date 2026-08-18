@@ -168,6 +168,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#RiveCoreObject',
     purpose: 'reviewed escape-free Rive core object',
   },
+  {
+    declarationFingerprint: 'sha256:a3e8b0a6c23713f4d8e46cae1937cd775b8337ee098c6b36ecb5a906b35a8a44',
+    id: '@flighthq/types:interface#AnimationTrack',
+    purpose: 'reviewed escape-free animation track',
+  },
+  {
+    declarationFingerprint: 'sha256:6903b4fa8a509237f7ff329abd18f797ff86f22fe5115266aa530240bdad1859',
+    id: '@flighthq/types:interface#Tween',
+    purpose: 'reviewed escape-free tween state',
+  },
+  {
+    declarationFingerprint: 'sha256:bdb2b9a80b19b26d3da6a39bd5641971941622f788716891ce6a299c97dd325b',
+    id: '@flighthq/types:interface#AnimationChannel',
+    purpose: 'reviewed escape-free animation channel',
+  },
+  {
+    declarationFingerprint: 'sha256:7737db1e82e8f1bf7d07b4ebd21bd0f18946927b22ba3b0216c93a3d85241c6d',
+    id: '@flighthq/types:interface#AnimationPlayer',
+    purpose: 'reviewed escape-free animation player',
+  },
+  {
+    declarationFingerprint: 'sha256:aaf49d1e409fd3c60824a648cf8edd8e53ad11411923a0b5ab74c34be4da89a6',
+    id: '@flighthq/types:interface#Timeline',
+    purpose: 'reviewed escape-free timeline state',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

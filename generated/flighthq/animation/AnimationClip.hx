@@ -18,7 +18,7 @@ class AnimationClip {
     var events:Array<AnimationClipEvent> = cast _Runtime.UNDEFINED;
     channels = (cast cast ([] : Array<Dynamic>));
     for (channel in _Runtime.iterable(clip.channels)) {
-      _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast cloneAnimationTrack((cast channel : AnimationChannel).track) : AnimationTrack), (cast (cast channel : AnimationChannel).targetRef : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
+      _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast cloneAnimationTrack(channel.track) : AnimationTrack), (cast channel.targetRef : flighthq._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
     }
     events = (cast _Runtime.mapArray((cast clip.events : Array<AnimationClipEvent>), function(event:AnimationClipEvent, __unused0:Float, __unused1:Array<AnimationClipEvent>):AnimationClipEvent return (cast createAnimationClipEvent((cast (cast event : AnimationClipEvent).time : Float), (cast (cast event : AnimationClipEvent).name : String), (cast (cast event : AnimationClipEvent).payload : flighthq._internal._Any)) : AnimationClipEvent), _Runtime.UNDEFINED));
     return cast (cast createEntity(({ final __callArgument2:Dynamic = { channels: channels, duration: clip.duration, events: events }; __callArgument2; })) : { >Entity, var channels:Array<AnimationChannel>; var duration:Float; var events:Array<AnimationClipEvent>; });
@@ -62,7 +62,7 @@ class AnimationClip {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(channels, 'length') : Float)) : Bool)) {
         var channel:AnimationChannel = flighthq._internal._StaticIndex.readArray(channels, i);
-        sampleAnimationTrack(({ final __callArgument9:Dynamic = out; __callArgument9; }), (cast channel : AnimationChannel).track, (cast time : Float));
+        sampleAnimationTrack(({ final __callArgument9:Dynamic = out; __callArgument9; }), channel.track, (cast time : Float));
         visit(({ final __callArgument10:Dynamic = out; __callArgument10; }), ({ final __callArgument11:Dynamic = channel; __callArgument11; }), (cast i : Float));
         i++;
       }
@@ -73,7 +73,7 @@ class AnimationClip {
     var max:Float = cast _Runtime.UNDEFINED;
     max = 0.0;
     for (channel in _Runtime.iterable(channels)) {
-      var times:flighthq._internal._ArrayLike<Float> = (cast _Runtime.field(channel, 'track') : AnimationTrack).times;
+      var times:flighthq._internal._ArrayLike<Float> = (cast channel.track : { var times:flighthq._internal._ArrayLike<Float>; }).times;
       var last:Float = _Runtime.field(times, 'length');
       if ((cast ((cast ((cast last : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast _Runtime.getIndex(times, (last - 1.0)) : Float) > (cast max : Float)) : Bool)) : Bool)) { (max = cast (_Runtime.getIndex(times, (last - 1.0)) : Dynamic)); }
     }
