@@ -32,20 +32,20 @@ class Socket {
   }
 
   public static function attachSocket(socket:flighthq.types.Socket):Void {
-    if ((cast (cast (cast socket : flighthq.types.Socket).runtime : SocketRuntime).disposed : Bool)) { return; }
-    ((cast (cast socket : flighthq.types.Socket).runtime : SocketRuntime).delivering = true);
+    if ((cast (cast (cast socket : flighthq.types.Socket).runtime : { var disposed:Bool; }).disposed : Bool)) { return; }
+    ((cast (cast socket : flighthq.types.Socket).runtime : { var delivering:Bool; }).delivering = cast (true : Bool));
   }
 
   public static function closeSocket(socket:flighthq.types.Socket, ?code:Float, ?reason:String):Void {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast socket : flighthq.types.Socket).runtime;
-    if ((cast (cast runtime : SocketRuntime).disposed : Bool)) {
+    if ((cast runtime.disposed : Bool)) {
       _Runtime.callOptionalValue(Socket._guard__socket, cast ([{ operation: 'closeSocket', reason: 'disposed', socket: socket }] : Array<Dynamic>));
       return;
     }
-    if ((cast ((cast _Runtime.strictEquals((cast runtime : SocketRuntime).readyState, 'closing') : Bool) || (cast _Runtime.strictEquals((cast runtime : SocketRuntime).readyState, 'closed') : Bool)) : Bool)) { return; }
-    ((cast runtime : SocketRuntime).readyState = 'closing');
-    ({ final __optionalOwner1 = (cast runtime : SocketRuntime).connection; if (__optionalOwner1 != null) { final __optionalCall0 = (cast __optionalOwner1 : { var closeSocketConnection:Null<Float>->Null<String>->Void; }).closeSocketConnection; if (__optionalCall0 != null) __optionalCall0(code, reason); } });
+    if ((cast ((cast _Runtime.strictEquals(runtime.readyState, 'closing') : Bool) || (cast _Runtime.strictEquals(runtime.readyState, 'closed') : Bool)) : Bool)) { return; }
+    (runtime.readyState = cast ('closing' : SocketReadyState));
+    ({ final __optionalOwner1 = runtime.connection; if (__optionalOwner1 != null) { final __optionalCall0 = (cast __optionalOwner1 : { var closeSocketConnection:Null<Float>->Null<String>->Void; }).closeSocketConnection; if (__optionalCall0 != null) __optionalCall0(code, reason); } });
   }
 
   public static function createSocket(options:SocketOptions):flighthq.types.Socket {
@@ -53,8 +53,8 @@ class Socket {
     var socket:flighthq.types.Socket = cast _Runtime.UNDEFINED;
     runtime = (cast { connection: null, signals: null, readyState: 'connecting', delivering: true, disposed: false });
     socket = (cast { url: _Runtime.field(options, 'url'), runtime: runtime });
-    ((cast runtime : SocketRuntime).connection = (cast (cast getSocketBackend() : SocketBackend) : SocketBackend).openSocket(({ final __callArgument2:Dynamic = options; __callArgument2; }), (cast Socket.makeSocketEventSink__socket(({ final __callArgument3:Dynamic = runtime; __callArgument3; })) : SocketEventSink)));
-    if ((cast _Runtime.strictEquals((cast runtime : SocketRuntime).connection, null) : Bool)) { _Runtime.callOptionalValue(Socket._guard__socket, cast ([{ operation: 'createSocket', reason: 'no-connection', socket: socket }] : Array<Dynamic>)); }
+    (runtime.connection = cast ((cast (cast getSocketBackend() : SocketBackend) : SocketBackend).openSocket(({ final __callArgument2:Dynamic = options; __callArgument2; }), (cast Socket.makeSocketEventSink__socket(({ final __callArgument3:Dynamic = runtime; __callArgument3; })) : SocketEventSink)) : Null<SocketConnection>));
+    if ((cast _Runtime.strictEquals(runtime.connection, null) : Bool)) { _Runtime.callOptionalValue(Socket._guard__socket, cast ([{ operation: 'createSocket', reason: 'no-connection', socket: socket }] : Array<Dynamic>)); }
     return cast socket;
     return cast null;
   }
@@ -84,7 +84,7 @@ class Socket {
   }
 
   public static function detachSocket(socket:flighthq.types.Socket):Void {
-    ((cast (cast socket : flighthq.types.Socket).runtime : SocketRuntime).delivering = false);
+    ((cast (cast socket : flighthq.types.Socket).runtime : { var delivering:Bool; }).delivering = cast (false : Bool));
   }
 
   public static function disableSocketGuards():Void {
@@ -93,14 +93,14 @@ class Socket {
 
   public static function disposeSocket(socket:flighthq.types.Socket):Void {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
-    if ((cast (cast (cast socket : flighthq.types.Socket).runtime : SocketRuntime).disposed : Bool)) { return; }
+    if ((cast (cast (cast socket : flighthq.types.Socket).runtime : { var disposed:Bool; }).disposed : Bool)) { return; }
     closeSocket(({ final __callArgument4:Dynamic = socket; __callArgument4; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     detachSocket(({ final __callArgument5:Dynamic = socket; __callArgument5; }));
     runtime = (cast socket : flighthq.types.Socket).runtime;
-    ((cast runtime : SocketRuntime).connection = null);
-    ((cast runtime : SocketRuntime).signals = null);
-    ((cast runtime : SocketRuntime).readyState = 'closed');
-    ((cast runtime : SocketRuntime).disposed = true);
+    (runtime.connection = cast (null : Null<SocketConnection>));
+    (runtime.signals = cast (null : Null<SocketSignals>));
+    (runtime.readyState = cast ('closed' : SocketReadyState));
+    (runtime.disposed = cast (true : Bool));
   }
 
   public static function enableSocketGuards():Void {
@@ -110,11 +110,11 @@ class Socket {
   public static function enableSocketSignals(socket:flighthq.types.Socket):SocketSignals {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast socket : flighthq.types.Socket).runtime;
-    if ((cast (cast runtime : SocketRuntime).disposed : Bool)) { _Runtime.callOptionalValue(Socket._guard__socket, cast ([{ operation: 'enableSocketSignals', reason: 'disposed', socket: socket }] : Array<Dynamic>)); }
-    if ((cast _Runtime.strictEquals((cast runtime : SocketRuntime).signals, null) : Bool)) {
-      ((cast runtime : SocketRuntime).signals = { onSocketOpen: (cast createSignal() : Signal<Void->Void>), onSocketMessage: (cast createSignal() : Signal<SocketMessage->Void>), onSocketClose: (cast createSignal() : Signal<SocketCloseInfo->Void>), onSocketError: (cast createSignal() : Signal<Void->Void>) });
+    if ((cast runtime.disposed : Bool)) { _Runtime.callOptionalValue(Socket._guard__socket, cast ([{ operation: 'enableSocketSignals', reason: 'disposed', socket: socket }] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(runtime.signals, null) : Bool)) {
+      (runtime.signals = cast ({ onSocketOpen: (cast createSignal() : Signal<Void->Void>), onSocketMessage: (cast createSignal() : Signal<SocketMessage->Void>), onSocketClose: (cast createSignal() : Signal<SocketCloseInfo->Void>), onSocketError: (cast createSignal() : Signal<Void->Void>) } : Null<SocketSignals>));
     }
-    return cast (cast runtime : SocketRuntime).signals;
+    return cast runtime.signals;
     return cast null;
   }
 
@@ -131,25 +131,25 @@ class Socket {
   }
 
   public static function getSocketReadyState(socket:flighthq.types.Socket):SocketReadyState {
-    return cast (cast _Runtime.field(socket, 'runtime') : SocketRuntime).readyState;
+    return cast (cast _Runtime.field(socket, 'runtime') : { var readyState:SocketReadyState; }).readyState;
     return cast null;
   }
 
   public static function makeSocketEventSink__socket(runtime:SocketRuntime):SocketEventSink {
     return cast { handleSocketOpen: function():Void {
-      if ((cast !(cast (cast runtime : SocketRuntime).delivering : Bool) : Bool)) { return; }
-      ((cast runtime : SocketRuntime).readyState = 'open');
-      if ((cast !_Runtime.strictEquals((cast runtime : SocketRuntime).signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : SocketRuntime).signals : SocketSignals).onSocketOpen]]), 1); }
+      if ((cast !(cast runtime.delivering : Bool) : Bool)) { return; }
+      (runtime.readyState = cast ('open' : SocketReadyState));
+      if ((cast !_Runtime.strictEquals(runtime.signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast runtime.signals : SocketSignals).onSocketOpen]]), 1); }
     }, handleSocketMessage: function(message:SocketMessage):Void {
-      if ((cast !(cast (cast runtime : SocketRuntime).delivering : Bool) : Bool)) { return; }
-      if ((cast !_Runtime.strictEquals((cast runtime : SocketRuntime).signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : SocketRuntime).signals : SocketSignals).onSocketMessage], [message]]), 1); }
+      if ((cast !(cast runtime.delivering : Bool) : Bool)) { return; }
+      if ((cast !_Runtime.strictEquals(runtime.signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast runtime.signals : SocketSignals).onSocketMessage], [message]]), 1); }
     }, handleSocketClose: function(info:SocketCloseInfo):Void {
-      if ((cast !(cast (cast runtime : SocketRuntime).delivering : Bool) : Bool)) { return; }
-      ((cast runtime : SocketRuntime).readyState = 'closed');
-      if ((cast !_Runtime.strictEquals((cast runtime : SocketRuntime).signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : SocketRuntime).signals : SocketSignals).onSocketClose], [info]]), 1); }
+      if ((cast !(cast runtime.delivering : Bool) : Bool)) { return; }
+      (runtime.readyState = cast ('closed' : SocketReadyState));
+      if ((cast !_Runtime.strictEquals(runtime.signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast runtime.signals : SocketSignals).onSocketClose], [info]]), 1); }
     }, handleSocketError: function():Void {
-      if ((cast !(cast (cast runtime : SocketRuntime).delivering : Bool) : Bool)) { return; }
-      if ((cast !_Runtime.strictEquals((cast runtime : SocketRuntime).signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : SocketRuntime).signals : SocketSignals).onSocketError]]), 1); }
+      if ((cast !(cast runtime.delivering : Bool) : Bool)) { return; }
+      if ((cast !_Runtime.strictEquals(runtime.signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast runtime.signals : SocketSignals).onSocketError]]), 1); }
     } };
     return cast null;
   }
@@ -157,12 +157,12 @@ class Socket {
   public static function sendSocketMessage(socket:flighthq.types.Socket, data:flighthq._internal._Union2<String, haxe.io.Bytes>):Bool {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(socket, 'runtime');
-    if ((cast (cast runtime : SocketRuntime).disposed : Bool)) {
+    if ((cast runtime.disposed : Bool)) {
       _Runtime.callOptionalValue(Socket._guard__socket, cast ([{ operation: 'sendSocketMessage', reason: 'disposed', socket: socket }] : Array<Dynamic>));
       return cast false;
     }
-    if ((cast ((cast !_Runtime.strictEquals((cast runtime : SocketRuntime).readyState, 'open') : Bool) || (cast _Runtime.strictEquals((cast runtime : SocketRuntime).connection, null) : Bool)) : Bool)) { return cast false; }
-    return cast (cast (cast runtime : SocketRuntime).connection : SocketConnection).sendSocketFrame(({ final __callArgument6:Dynamic = data; __callArgument6; }));
+    if ((cast ((cast !_Runtime.strictEquals(runtime.readyState, 'open') : Bool) || (cast _Runtime.strictEquals(runtime.connection, null) : Bool)) : Bool)) { return cast false; }
+    return cast (cast runtime.connection : SocketConnection).sendSocketFrame(({ final __callArgument6:Dynamic = data; __callArgument6; }));
     return cast null;
   }
 

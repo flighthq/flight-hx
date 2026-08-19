@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_466,
+      newAuditOnly: 1_461,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(540);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(545);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_466);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_461);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(138);
+    expect(newDirect).toHaveLength(143);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -800,6 +800,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'SpecularPbrExtension',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free specular PBR extension',
+        }),
+        expect.objectContaining({
+          name: 'FlyCameraController',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free fly camera controller',
+        }),
+        expect.objectContaining({
+          name: 'ParticleEmitter3D',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free 3D particle emitter',
+        }),
+        expect.objectContaining({
+          name: 'SocketRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free socket runtime',
+        }),
+        expect.objectContaining({
+          name: 'NodeOrderList',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free node order list',
+        }),
+        expect.objectContaining({
+          name: 'PackableRectangle',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free packable rectangle',
         }),
       ]),
     );
@@ -1494,6 +1519,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#SpecularPbrExtension',
         purpose: 'reviewed escape-free specular PBR extension',
       },
+      {
+        declarationFingerprint: 'sha256:5ec7dbb9000ec57efedee41fc853a74e39bf8f7b229155779007e9579f9407b7',
+        id: '@flighthq/types:interface#FlyCameraController',
+        purpose: 'reviewed escape-free fly camera controller',
+      },
+      {
+        declarationFingerprint: 'sha256:64e20d991efa3af3e4d7ea369d2494215759ec7b97040fd164291220452e4e3d',
+        id: '@flighthq/types:interface#ParticleEmitter3D',
+        purpose: 'reviewed escape-free 3D particle emitter',
+      },
+      {
+        declarationFingerprint: 'sha256:84a5032e10a50972215d64097cb31bfcac6f4cb43baf03f7b651b7d72bc25864',
+        id: '@flighthq/types:interface#SocketRuntime',
+        purpose: 'reviewed escape-free socket runtime',
+      },
+      {
+        declarationFingerprint: 'sha256:ac6d71dd26dbaa9e99b676efee5645d01bc94b02da6199e93c5b674e43b77e92',
+        id: '@flighthq/types:interface#NodeOrderList',
+        purpose: 'reviewed escape-free node order list',
+      },
+      {
+        declarationFingerprint: 'sha256:0d4dd4a03fe6768f388ff1d15945725582f976354ad7cc1f2df54aa966166763',
+        id: '@flighthq/types:interface#PackableRectangle',
+        purpose: 'reviewed escape-free packable rectangle',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -2129,6 +2179,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const highAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['FlyCameraController', 'NodeOrderList', 'PackableRectangle', 'ParticleEmitter3D', 'SocketRuntime'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -2169,22 +2228,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_466,
+      auditOnlySchemas: 1_461,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 21_434,
-      directSchemas: 538,
+      directAccesses: 21_675,
+      directSchemas: 543,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 9_232,
+      pendingAccesses: 8_991,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_466,
+      newAuditOnly: 1_461,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -2251,7 +2310,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(21_434);
+    expect(report.summary.directAccesses).toBe(21_675);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2517,6 +2576,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(pbrExtensionCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'FlyCameraController',
+        64,
+        'sha256:5ec7dbb9000ec57efedee41fc853a74e39bf8f7b229155779007e9579f9407b7',
+        'reviewed escape-free fly camera controller',
+      ],
+      [
+        'ParticleEmitter3D',
+        55,
+        'sha256:64e20d991efa3af3e4d7ea369d2494215759ec7b97040fd164291220452e4e3d',
+        'reviewed escape-free 3D particle emitter',
+      ],
+      [
+        'SocketRuntime',
+        43,
+        'sha256:84a5032e10a50972215d64097cb31bfcac6f4cb43baf03f7b651b7d72bc25864',
+        'reviewed escape-free socket runtime',
+      ],
+      [
+        'NodeOrderList',
+        41,
+        'sha256:ac6d71dd26dbaa9e99b676efee5645d01bc94b02da6199e93c5b674e43b77e92',
+        'reviewed escape-free node order list',
+      ],
+      [
+        'PackableRectangle',
+        38,
+        'sha256:0d4dd4a03fe6768f388ff1d15945725582f976354ad7cc1f2df54aa966166763',
+        'reviewed escape-free packable rectangle',
+      ],
+    ] as const) {
+      expect(highAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -4159,6 +4260,24 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(pbrExtensionId)).toBe(false);
     }
+    for (const [frontierId, normalizationReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#FlyCameraController', ['cross-schema-transfer'], null],
+      ['@flighthq/types:interface#ParticleEmitter3D', ['dynamic-ingress'], null],
+      ['@flighthq/types:interface#NodeOrderList', [], { blockerReasons: ['normalization-provenance'], closed: false }],
+      ['@flighthq/types:interface#PackableRectangle', [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#SocketRuntime', [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible: normalizationReasons.length === 0,
+        normalizationReasons,
+        observabilityReasons: [],
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -4585,6 +4704,27 @@ describe('typed struct analysis', () => {
       );
       expect(generatedPbrExtension).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:ClearcoatPbrExtension|IridescencePbrExtension|SpecularPbrExtension|TransmissionVolumePbrExtension|WrappedDiffusePbrExtension)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/binpack/ExplainUnpackedRectangles.hx',
+      'generated/flighthq/binpack/PackRectangles.hx',
+      'generated/flighthq/cameraControls/FlyCameraController.hx',
+      'generated/flighthq/node/NodeOrderList.hx',
+      'generated/flighthq/particleemitter/EmitParticleBurst3D.hx',
+      'generated/flighthq/particleemitter/ParticleEmitter3D.hx',
+      'generated/flighthq/particleemitter/UpdateParticleEmitter3D.hx',
+      'generated/flighthq/scene3dGl/GlParticleEmitter3D.hx',
+      'generated/flighthq/scene3dWgpu/WgpuParticleEmitter3D.hx',
+      'generated/flighthq/socket/ExplainSocketSendFailure.hx',
+      'generated/flighthq/socket/Socket.hx',
+    ]) {
+      const generatedFrontier = readFileSync(path, 'utf8');
+      expect(generatedFrontier).not.toMatch(
+        /_Runtime\.field\((?:a|b|emitter|list|out|rect|rectangle|runtime|source),/u,
+      );
+      expect(generatedFrontier).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:FlyCameraController|NodeOrderList(?:<[^>]+>)?|PackableRectangle|ParticleEmitter3D|SocketRuntime)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

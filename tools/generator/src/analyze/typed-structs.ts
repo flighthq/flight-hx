@@ -718,6 +718,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#SpecularPbrExtension',
     purpose: 'reviewed escape-free specular PBR extension',
   },
+  {
+    declarationFingerprint: 'sha256:5ec7dbb9000ec57efedee41fc853a74e39bf8f7b229155779007e9579f9407b7',
+    id: '@flighthq/types:interface#FlyCameraController',
+    purpose: 'reviewed escape-free fly camera controller',
+  },
+  {
+    declarationFingerprint: 'sha256:64e20d991efa3af3e4d7ea369d2494215759ec7b97040fd164291220452e4e3d',
+    id: '@flighthq/types:interface#ParticleEmitter3D',
+    purpose: 'reviewed escape-free 3D particle emitter',
+  },
+  {
+    declarationFingerprint: 'sha256:84a5032e10a50972215d64097cb31bfcac6f4cb43baf03f7b651b7d72bc25864',
+    id: '@flighthq/types:interface#SocketRuntime',
+    purpose: 'reviewed escape-free socket runtime',
+  },
+  {
+    declarationFingerprint: 'sha256:ac6d71dd26dbaa9e99b676efee5645d01bc94b02da6199e93c5b674e43b77e92',
+    id: '@flighthq/types:interface#NodeOrderList',
+    purpose: 'reviewed escape-free node order list',
+  },
+  {
+    declarationFingerprint: 'sha256:0d4dd4a03fe6768f388ff1d15945725582f976354ad7cc1f2df54aa966166763',
+    id: '@flighthq/types:interface#PackableRectangle',
+    purpose: 'reviewed escape-free packable rectangle',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

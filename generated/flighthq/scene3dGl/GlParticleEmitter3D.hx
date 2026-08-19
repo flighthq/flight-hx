@@ -161,7 +161,7 @@ class GlParticleEmitter3D {
     var base:Float = cast _Runtime.UNDEFINED;
     var drawCount:Float = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    data = _Runtime.field(emitter, 'data');
+    data = emitter.data;
     __destructure0 = data;
     alphas = __destructure0.alphas;
     atlas = __destructure0.atlas;
@@ -320,7 +320,7 @@ class GlParticleEmitter3D {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, 'length') : Float)) : Bool)) {
         var emitter:ParticleEmitter3D = flighthq._internal._StaticIndex.readArray(GlParticleEmitter3D.emitterScratch__glParticleEmitter3D, i);
-        GlParticleEmitter3D.applyGlParticleBlendMode__glParticleEmitter3D(({ final __callArgument20:Dynamic = state; __callArgument20; }), (cast emitter : ParticleEmitter3D).blendMode);
+        GlParticleEmitter3D.applyGlParticleBlendMode__glParticleEmitter3D(({ final __callArgument20:Dynamic = state; __callArgument20; }), emitter.blendMode);
         GlParticleEmitter3D.drawParticleEmitter3DNode__glParticleEmitter3D(({ final __callArgument21:Dynamic = state; __callArgument21; }), (cast shader : Dynamic), ({ final __callArgument22:Dynamic = emitter; __callArgument22; }));
         i++;
       }

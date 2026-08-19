@@ -13,12 +13,12 @@ class ExplainSocketSendFailure {
   public static function explainSocketSendFailure(socket:Socket):Null<SocketSendFailureExplanation> {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
     runtime = _Runtime.field(socket, 'runtime');
-    if ((cast (cast runtime : SocketRuntime).disposed : Bool)) { return cast { reason: 'disposed', readyState: 'closed', url: _Runtime.field(socket, 'url') }; }
-    if ((cast _Runtime.strictEquals((cast runtime : SocketRuntime).connection, null) : Bool)) {
-      return cast { reason: 'no-connection', readyState: (cast runtime : SocketRuntime).readyState, url: _Runtime.field(socket, 'url') };
+    if ((cast runtime.disposed : Bool)) { return cast { reason: 'disposed', readyState: 'closed', url: _Runtime.field(socket, 'url') }; }
+    if ((cast _Runtime.strictEquals(runtime.connection, null) : Bool)) {
+      return cast { reason: 'no-connection', readyState: runtime.readyState, url: _Runtime.field(socket, 'url') };
     }
-    if ((cast !_Runtime.strictEquals((cast runtime : SocketRuntime).readyState, 'open') : Bool)) {
-      return cast { reason: 'not-open', readyState: (cast runtime : SocketRuntime).readyState, url: _Runtime.field(socket, 'url') };
+    if ((cast !_Runtime.strictEquals(runtime.readyState, 'open') : Bool)) {
+      return cast { reason: 'not-open', readyState: runtime.readyState, url: _Runtime.field(socket, 'url') };
     }
     return cast null;
     return cast null;

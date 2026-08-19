@@ -112025,9 +112025,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 64,
+        "directAccesses": 64,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -112111,7 +112111,7 @@
       },
       "name": "FlyCameraController",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free fly camera controller",
       "reasons": [],
       "source": "upstream/packages/types/src/FlyCameraController.ts",
       "sourceProvenance": {
@@ -208450,9 +208450,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 41,
+        "directAccesses": 41,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -208490,7 +208490,7 @@
       },
       "name": "NodeOrderList",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free node order list",
       "reasons": [],
       "source": "upstream/packages/types/src/NodeOrderList.ts",
       "sourceProvenance": {
@@ -213450,9 +213450,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 38,
+        "directAccesses": 38,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -213490,7 +213490,7 @@
       },
       "name": "PackableRectangle",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free packable rectangle",
       "reasons": [],
       "source": "upstream/packages/types/src/BinPack.ts",
       "sourceProvenance": {
@@ -217121,9 +217121,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 55,
+        "directAccesses": 55,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -217223,7 +217223,7 @@
       },
       "name": "ParticleEmitter3D",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free 3D particle emitter",
       "reasons": [],
       "source": "upstream/packages/types/src/ParticleEmitter3D.ts",
       "sourceProvenance": {
@@ -313494,9 +313494,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 43,
+        "directAccesses": 43,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -313550,7 +313550,7 @@
       },
       "name": "SocketRuntime",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free socket runtime",
       "reasons": [],
       "source": "upstream/packages/types/src/Socket.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1466,
+      "newAuditOnly": 1461,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1466,
+    "auditOnlySchemas": 1461,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 21434,
-    "directSchemas": 538,
+    "directAccesses": 21675,
+    "directSchemas": 543,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 9232,
+    "pendingAccesses": 8991,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

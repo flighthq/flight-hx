@@ -26,16 +26,16 @@ class FlyCameraController {
   }
 
   public static function copyFlyCameraController(out:flighthq.types.FlyCameraController, source:flighthq.types.FlyCameraController):Void {
-    ((cast out : flighthq.types.FlyCameraController).goalPitch = _Runtime.field(source, 'goalPitch'));
-    ((cast out : flighthq.types.FlyCameraController).goalYaw = _Runtime.field(source, 'goalYaw'));
-    ((cast out : flighthq.types.FlyCameraController).maxPitch = _Runtime.field(source, 'maxPitch'));
-    ((cast out : flighthq.types.FlyCameraController).minPitch = _Runtime.field(source, 'minPitch'));
-    ((cast out : flighthq.types.FlyCameraController).pitch = _Runtime.field(source, 'pitch'));
-    ((cast (cast out : flighthq.types.FlyCameraController).position : { var x:Float; }).x = cast ((cast _Runtime.field(source, 'position') : { var x:Float; }).x : Float));
-    ((cast (cast out : flighthq.types.FlyCameraController).position : { var y:Float; }).y = cast ((cast _Runtime.field(source, 'position') : { var y:Float; }).y : Float));
-    ((cast (cast out : flighthq.types.FlyCameraController).position : { var z:Float; }).z = cast ((cast _Runtime.field(source, 'position') : { var z:Float; }).z : Float));
-    ((cast out : flighthq.types.FlyCameraController).smoothTime = _Runtime.field(source, 'smoothTime'));
-    ((cast out : flighthq.types.FlyCameraController).yaw = _Runtime.field(source, 'yaw'));
+    (out.goalPitch = cast (source.goalPitch : Float));
+    (out.goalYaw = cast (source.goalYaw : Float));
+    (out.maxPitch = cast (source.maxPitch : Float));
+    (out.minPitch = cast (source.minPitch : Float));
+    (out.pitch = cast (source.pitch : Float));
+    ((cast out.position : { var x:Float; }).x = cast ((cast source.position : { var x:Float; }).x : Float));
+    ((cast out.position : { var y:Float; }).y = cast ((cast source.position : { var y:Float; }).y : Float));
+    ((cast out.position : { var z:Float; }).z = cast ((cast source.position : { var z:Float; }).z : Float));
+    (out.smoothTime = cast (source.smoothTime : Float));
+    (out.yaw = cast (source.yaw : Float));
   }
 
   public static function createFlyCameraController(?options:FlyCameraControllerOptions):flighthq.types.FlyCameraController {
@@ -50,17 +50,17 @@ class FlyCameraController {
   }
 
   public static function lookFlyCameraController(controller:flighthq.types.FlyCameraController, deltaYaw:Float, deltaPitch:Float):Void {
-    ((cast controller : flighthq.types.FlyCameraController).goalYaw += deltaYaw);
-    ((cast controller : flighthq.types.FlyCameraController).goalPitch = (cast clamp((cast ((cast controller : flighthq.types.FlyCameraController).goalPitch + deltaPitch) : Float), (cast (cast controller : flighthq.types.FlyCameraController).minPitch : Float), (cast (cast controller : flighthq.types.FlyCameraController).maxPitch : Float)) : Float));
+    (controller.goalYaw += deltaYaw);
+    (controller.goalPitch = cast ((cast clamp((cast (controller.goalPitch + deltaPitch) : Float), (cast controller.minPitch : Float), (cast controller.maxPitch : Float)) : Float) : Float));
   }
 
   public static function moveFlyCameraController(controller:flighthq.types.FlyCameraController, forward:Float, right:Float, up:Float):Void {
     var sinYaw:Float = cast _Runtime.UNDEFINED;
     var cosYaw:Float = cast _Runtime.UNDEFINED;
     var position:Vector3 = cast _Runtime.UNDEFINED;
-    sinYaw = HxMath.sin((cast controller : flighthq.types.FlyCameraController).yaw);
-    cosYaw = HxMath.cos((cast controller : flighthq.types.FlyCameraController).yaw);
-    position = (cast controller : flighthq.types.FlyCameraController).position;
+    sinYaw = HxMath.sin(controller.yaw);
+    cosYaw = HxMath.cos(controller.yaw);
+    position = controller.position;
     (position.x += ((sinYaw * forward) + (cosYaw * right)));
     (position.y += up);
     (position.z += ((-cosYaw * forward) + (sinYaw * right)));
@@ -73,21 +73,21 @@ class FlyCameraController {
     yaw = _Runtime.coalesce(({ final __structural14 = options; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { @:optional var yaw:Null<Float>; }).yaw; }), function():Dynamic return cast 0.0);
     pitch = _Runtime.coalesce(({ final __structural15 = options; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { @:optional var pitch:Null<Float>; }).pitch; }), function():Dynamic return cast 0.0);
     position = ({ final __structural16 = options; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { @:optional var position:Null<Vector3Like>; }).position; });
-    ((cast controller : flighthq.types.FlyCameraController).goalPitch = pitch);
-    ((cast controller : flighthq.types.FlyCameraController).goalYaw = yaw);
-    ((cast controller : flighthq.types.FlyCameraController).maxPitch = _Runtime.coalesce(({ final __structural17 = options; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { @:optional var maxPitch:Null<Float>; }).maxPitch; }), function():Dynamic return cast FlyCameraController.DEFAULT_MAX_PITCH__flyCameraController));
-    ((cast controller : flighthq.types.FlyCameraController).minPitch = _Runtime.coalesce(({ final __structural18 = options; __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { @:optional var minPitch:Null<Float>; }).minPitch; }), function():Dynamic return cast FlyCameraController.DEFAULT_MIN_PITCH__flyCameraController));
-    ((cast controller : flighthq.types.FlyCameraController).pitch = pitch);
-    ((cast (cast controller : flighthq.types.FlyCameraController).position : { var x:Float; }).x = cast (_Runtime.coalesce(({ final __typedStruct19 = position; __typedStruct19 == null ? _Runtime.UNDEFINED : (cast __typedStruct19 : { var x:Float; }).x; }), function():Dynamic return cast 0.0) : Float));
-    ((cast (cast controller : flighthq.types.FlyCameraController).position : { var y:Float; }).y = cast (_Runtime.coalesce(({ final __typedStruct20 = position; __typedStruct20 == null ? _Runtime.UNDEFINED : (cast __typedStruct20 : { var y:Float; }).y; }), function():Dynamic return cast 0.0) : Float));
-    ((cast (cast controller : flighthq.types.FlyCameraController).position : { var z:Float; }).z = cast (_Runtime.coalesce(({ final __typedStruct21 = position; __typedStruct21 == null ? _Runtime.UNDEFINED : (cast __typedStruct21 : { var z:Float; }).z; }), function():Dynamic return cast 0.0) : Float));
-    ((cast controller : flighthq.types.FlyCameraController).smoothTime = _Runtime.coalesce(({ final __structural22 = options; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { @:optional var smoothTime:Null<Float>; }).smoothTime; }), function():Dynamic return cast 0.0));
-    ((cast controller : flighthq.types.FlyCameraController).yaw = yaw);
+    (controller.goalPitch = cast (pitch : Float));
+    (controller.goalYaw = cast (yaw : Float));
+    (controller.maxPitch = cast (_Runtime.coalesce(({ final __structural17 = options; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { @:optional var maxPitch:Null<Float>; }).maxPitch; }), function():Dynamic return cast FlyCameraController.DEFAULT_MAX_PITCH__flyCameraController) : Float));
+    (controller.minPitch = cast (_Runtime.coalesce(({ final __structural18 = options; __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { @:optional var minPitch:Null<Float>; }).minPitch; }), function():Dynamic return cast FlyCameraController.DEFAULT_MIN_PITCH__flyCameraController) : Float));
+    (controller.pitch = cast (pitch : Float));
+    ((cast controller.position : { var x:Float; }).x = cast (_Runtime.coalesce(({ final __typedStruct19 = position; __typedStruct19 == null ? _Runtime.UNDEFINED : (cast __typedStruct19 : { var x:Float; }).x; }), function():Dynamic return cast 0.0) : Float));
+    ((cast controller.position : { var y:Float; }).y = cast (_Runtime.coalesce(({ final __typedStruct20 = position; __typedStruct20 == null ? _Runtime.UNDEFINED : (cast __typedStruct20 : { var y:Float; }).y; }), function():Dynamic return cast 0.0) : Float));
+    ((cast controller.position : { var z:Float; }).z = cast (_Runtime.coalesce(({ final __typedStruct21 = position; __typedStruct21 == null ? _Runtime.UNDEFINED : (cast __typedStruct21 : { var z:Float; }).z; }), function():Dynamic return cast 0.0) : Float));
+    (controller.smoothTime = cast (_Runtime.coalesce(({ final __structural22 = options; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { @:optional var smoothTime:Null<Float>; }).smoothTime; }), function():Dynamic return cast 0.0) : Float));
+    (controller.yaw = cast (yaw : Float));
   }
 
   public static function snapFlyCameraController(controller:flighthq.types.FlyCameraController):Void {
-    ((cast controller : flighthq.types.FlyCameraController).pitch = (cast clamp((cast (cast controller : flighthq.types.FlyCameraController).goalPitch : Float), (cast (cast controller : flighthq.types.FlyCameraController).minPitch : Float), (cast (cast controller : flighthq.types.FlyCameraController).maxPitch : Float)) : Float));
-    ((cast controller : flighthq.types.FlyCameraController).yaw = (cast controller : flighthq.types.FlyCameraController).goalYaw);
+    (controller.pitch = cast ((cast clamp((cast controller.goalPitch : Float), (cast controller.minPitch : Float), (cast controller.maxPitch : Float)) : Float) : Float));
+    (controller.yaw = cast (controller.goalYaw : Float));
   }
 
   public static function updateFlyCameraController(controller:flighthq.types.FlyCameraController, camera:Camera3D, deltaTime:Float):Void {
@@ -97,21 +97,21 @@ class FlyCameraController {
     var cosYaw:Float = cast _Runtime.UNDEFINED;
     var sinYaw:Float = cast _Runtime.UNDEFINED;
     var position:Vector3 = cast _Runtime.UNDEFINED;
-    goalPitch = (cast clamp((cast (cast controller : flighthq.types.FlyCameraController).goalPitch : Float), (cast (cast controller : flighthq.types.FlyCameraController).minPitch : Float), (cast (cast controller : flighthq.types.FlyCameraController).maxPitch : Float)) : Float);
-    if ((cast ((cast ((cast (cast controller : flighthq.types.FlyCameraController).smoothTime : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast deltaTime : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      var lambda:Float = (1.0 / (cast controller : flighthq.types.FlyCameraController).smoothTime);
-      var nearestGoalYaw:Float = ((cast controller : flighthq.types.FlyCameraController).yaw + (cast deltaAngle((cast (cast controller : flighthq.types.FlyCameraController).yaw : Float), (cast (cast controller : flighthq.types.FlyCameraController).goalYaw : Float)) : Float));
-      ((cast controller : flighthq.types.FlyCameraController).yaw = (cast damp((cast (cast controller : flighthq.types.FlyCameraController).yaw : Float), (cast nearestGoalYaw : Float), (cast lambda : Float), (cast deltaTime : Float)) : Float));
-      ((cast controller : flighthq.types.FlyCameraController).pitch = (cast damp((cast (cast controller : flighthq.types.FlyCameraController).pitch : Float), (cast goalPitch : Float), (cast lambda : Float), (cast deltaTime : Float)) : Float));
+    goalPitch = (cast clamp((cast controller.goalPitch : Float), (cast controller.minPitch : Float), (cast controller.maxPitch : Float)) : Float);
+    if ((cast ((cast ((cast controller.smoothTime : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast deltaTime : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      var lambda:Float = (1.0 / controller.smoothTime);
+      var nearestGoalYaw:Float = (controller.yaw + (cast deltaAngle((cast controller.yaw : Float), (cast controller.goalYaw : Float)) : Float));
+      (controller.yaw = cast ((cast damp((cast controller.yaw : Float), (cast nearestGoalYaw : Float), (cast lambda : Float), (cast deltaTime : Float)) : Float) : Float));
+      (controller.pitch = cast ((cast damp((cast controller.pitch : Float), (cast goalPitch : Float), (cast lambda : Float), (cast deltaTime : Float)) : Float) : Float));
     } else {
-      ((cast controller : flighthq.types.FlyCameraController).yaw = (cast controller : flighthq.types.FlyCameraController).goalYaw);
-      ((cast controller : flighthq.types.FlyCameraController).pitch = goalPitch);
+      (controller.yaw = cast (controller.goalYaw : Float));
+      (controller.pitch = cast (goalPitch : Float));
     }
-    cosPitch = HxMath.cos((cast controller : flighthq.types.FlyCameraController).pitch);
-    sinPitch = HxMath.sin((cast controller : flighthq.types.FlyCameraController).pitch);
-    cosYaw = HxMath.cos((cast controller : flighthq.types.FlyCameraController).yaw);
-    sinYaw = HxMath.sin((cast controller : flighthq.types.FlyCameraController).yaw);
-    position = (cast controller : flighthq.types.FlyCameraController).position;
+    cosPitch = HxMath.cos(controller.pitch);
+    sinPitch = HxMath.sin(controller.pitch);
+    cosYaw = HxMath.cos(controller.yaw);
+    sinYaw = HxMath.sin(controller.yaw);
+    position = controller.position;
     (FlyCameraController.scratchTarget__flyCameraController.x = cast ((position.x + (sinYaw * cosPitch)) : Float));
     (FlyCameraController.scratchTarget__flyCameraController.y = cast ((position.y + sinPitch) : Float));
     (FlyCameraController.scratchTarget__flyCameraController.z = cast ((position.z - (cosYaw * cosPitch)) : Float));

@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1466 |
-| Direct schemas | 538 |
+| Audit-only schemas | 1461 |
+| Direct schemas | 543 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 9232 |
-| Directly emitted accesses | 21434 |
+| Pending accesses | 8991 |
+| Directly emitted accesses | 21675 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1466 |
+| Newly discovered, audit-only | 1461 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -535,7 +535,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#FlexLayoutWrap` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#FlowStack` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FlowState` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 2 | 0 | 9 | 11 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#FlyCameraController` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 42 | 22 | 0 | 64 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#FlyCameraController` | `direct` | `new` | — | reviewed escape-free fly camera controller | 8 | 42 | 22 | 0 | 0 | 64 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FlyCameraControllerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#FocusDirection` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#FocusEventData` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 3 | 0 | 3 | 0 | 0 | 0 | yes | — |
@@ -1036,7 +1036,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#NodeDescendantVisitor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#NodeInteractionState` | `direct` | `new` | — | reviewed escape-free node interaction state | 5 | 14 | 5 | 0 | 0 | 19 | 0 | 0 | yes | — |
 | `@flighthq/types:type#NodeOf` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:interface#NodeOrderList` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 36 | 5 | 0 | 41 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NodeOrderList` | `direct` | `new` | — | reviewed escape-free node order list | 3 | 36 | 5 | 0 | 0 | 41 | 0 | 0 | yes | — |
 | `@flighthq/types:type#NodeOrderListEntryVisitor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#NodeRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 27 | 113 | 58 | 1 | 172 | 0 | 0 | 100 | yes | — |
 | `@flighthq/types:type#NodeRuntimeFactory` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
@@ -1065,7 +1065,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#OrthographicProjectionOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#OuterGlowEffect` | `direct` | `new` | — | reviewed escape-free outer-glow effect | 8 | 27 | 0 | 0 | 0 | 27 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#OutlineEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#PackableRectangle` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 38 | 0 | 0 | 38 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#PackableRectangle` | `direct` | `new` | — | reviewed escape-free packable rectangle | 3 | 38 | 0 | 0 | 0 | 38 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PackedRectangle` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PackResult` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PanniniProjectionEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1088,7 +1088,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ParticleDesignerSerializeOptions` | `direct` | `relocated` | `@flighthq/particles-formats:interface#ParticleDesignerSerializeOptions` | broad serialization document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ParticleEmitter2D` | `direct` | `renamed` | `@flighthq/types:interface#ParticleEmitter` | broad asset document | 19 | 54 | 0 | 0 | 0 | 54 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ParticleEmitter2DRuntime` | `direct` | `renamed` | `@flighthq/types:interface#ParticleEmitterRuntime` | broad asset document | 38 | 4 | 2 | 0 | 0 | 6 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ParticleEmitter3D` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 53 | 2 | 0 | 55 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ParticleEmitter3D` | `direct` | `new` | — | reviewed escape-free 3D particle emitter | 10 | 53 | 2 | 0 | 0 | 55 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ParticleEmitter3DRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 34 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#ParticleEmitterCallbacks` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ParticleEmitterConfig` | `direct` | `preserved` | `@flighthq/types:interface#ParticleEmitterConfig` | broad asset document | 52 | 729 | 0 | 0 | 0 | 729 | 6 | 6 | yes | — |
@@ -1542,7 +1542,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SocketMessage` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SocketOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SocketReadyState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#SocketRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 32 | 11 | 0 | 43 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SocketRuntime` | `direct` | `new` | — | reviewed escape-free socket runtime | 5 | 32 | 11 | 0 | 0 | 43 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SocketSendFailureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#SocketSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SoftKeyboard` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |

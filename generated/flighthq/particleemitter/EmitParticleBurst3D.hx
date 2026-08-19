@@ -55,7 +55,7 @@ class EmitParticleBurst3D {
     var dirNx:Float = cast _Runtime.UNDEFINED;
     var dirNy:Float = cast _Runtime.UNDEFINED;
     var dirNz:Float = cast _Runtime.UNDEFINED;
-    data = (cast emitter : ParticleEmitter3D).data;
+    data = emitter.data;
     liveCount = data.particleCount;
     toSpawn = HxMath.floor(count);
     maxNew = (config.maxParticles - liveCount);

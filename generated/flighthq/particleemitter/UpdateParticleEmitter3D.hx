@@ -31,7 +31,7 @@ class UpdateParticleEmitter3D {
 
   public static function isParticleEmitter3DComplete(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
     if ((cast ((cast ((cast config.duration : Float) <= (cast 0.0 : Float)) : Bool) || (cast config.loop : Bool)) : Bool)) { return cast false; }
-    return cast ((cast ((cast state.emitterAge : Float) >= (cast config.duration : Float)) : Bool) && (cast _Runtime.strictEquals((cast (cast emitter : ParticleEmitter3D).data : { var particleCount:Float; }).particleCount, 0.0) : Bool));
+    return cast ((cast ((cast state.emitterAge : Float) >= (cast config.duration : Float)) : Bool) && (cast _Runtime.strictEquals((cast emitter.data : { var particleCount:Float; }).particleCount, 0.0) : Bool));
     return cast null;
   }
 
@@ -87,7 +87,7 @@ class UpdateParticleEmitter3D {
     var toSpawn:Float = cast _Runtime.UNDEFINED;
     var maxNew:Float = cast _Runtime.UNDEFINED;
     var liveVelocityCount:Float = cast _Runtime.UNDEFINED;
-    data = (cast emitter : ParticleEmitter3D).data;
+    data = emitter.data;
     worldM = ((cast config.worldSpace : Bool) ? (cast (cast (cast getNodeWorldMatrix4((cast (cast (cast emitter : flighthq._internal._Any) : Node3D) : Dynamic)) : Matrix4Like) : { var m:flighthq._internal._Float32Array; }).m : Dynamic) : (cast null : Dynamic));
     (data.worldSpace = cast (!_Runtime.strictEquals(worldM, null) : Bool));
     if ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool)) { return; }

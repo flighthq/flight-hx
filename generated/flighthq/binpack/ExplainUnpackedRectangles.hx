@@ -30,8 +30,8 @@ class ExplainUnpackedRectangles {
     unpacked = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [(cast result : PackResult).unpacked]);
     explanations = (cast cast ([] : Array<Dynamic>));
     for (rectangle in _Runtime.iterable(rectangles)) {
-      if ((cast !(cast ((cast unpacked : flighthq._internal._Set<RectangleId>).has(_Runtime.field(rectangle, 'id'))) : Bool) : Bool)) { continue; }
-      _Runtime.callProperty(explanations, 'push', cast ([{ id: _Runtime.field(rectangle, 'id'), reason: (cast ExplainUnpackedRectangles.getUnpackedReason__explainUnpackedRectangles(({ final __callArgument8:Dynamic = rectangle; __callArgument8; }), (cast usableWidth : Float), (cast usableHeight : Float), (cast allowRotation : Bool)) : UnpackedRectangleReason), usableWidth: usableWidth, usableHeight: usableHeight }] : Array<Dynamic>));
+      if ((cast !(cast ((cast unpacked : flighthq._internal._Set<RectangleId>).has(rectangle.id)) : Bool) : Bool)) { continue; }
+      _Runtime.callProperty(explanations, 'push', cast ([{ id: rectangle.id, reason: (cast ExplainUnpackedRectangles.getUnpackedReason__explainUnpackedRectangles(({ final __callArgument8:Dynamic = rectangle; __callArgument8; }), (cast usableWidth : Float), (cast usableHeight : Float), (cast allowRotation : Bool)) : UnpackedRectangleReason), usableWidth: usableWidth, usableHeight: usableHeight }] : Array<Dynamic>));
     }
     return cast explanations;
     return cast null;
@@ -39,9 +39,9 @@ class ExplainUnpackedRectangles {
 
   public static function getUnpackedReason__explainUnpackedRectangles(rectangle:PackableRectangle, usableWidth:Float, usableHeight:Float, allowRotation:Bool):UnpackedRectangleReason {
     if ((cast ((cast ((cast usableWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast usableHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast 'regionCollapsed'; }
-    if ((cast !(cast (cast ExplainUnpackedRectangles.fitsWithin__explainUnpackedRectangles((cast _Runtime.field(rectangle, 'width') : Float), (cast _Runtime.field(rectangle, 'height') : Float), (cast usableWidth : Float), (cast usableHeight : Float)) : Bool) : Bool) : Bool)) {
+    if ((cast !(cast (cast ExplainUnpackedRectangles.fitsWithin__explainUnpackedRectangles((cast rectangle.width : Float), (cast rectangle.height : Float), (cast usableWidth : Float), (cast usableHeight : Float)) : Bool) : Bool) : Bool)) {
       if ((cast !(cast allowRotation : Bool) : Bool)) { return cast 'oversized'; }
-      if ((cast !(cast (cast ExplainUnpackedRectangles.fitsWithin__explainUnpackedRectangles((cast _Runtime.field(rectangle, 'height') : Float), (cast _Runtime.field(rectangle, 'width') : Float), (cast usableWidth : Float), (cast usableHeight : Float)) : Bool) : Bool) : Bool)) { return cast 'oversized'; }
+      if ((cast !(cast (cast ExplainUnpackedRectangles.fitsWithin__explainUnpackedRectangles((cast rectangle.height : Float), (cast rectangle.width : Float), (cast usableWidth : Float), (cast usableHeight : Float)) : Bool) : Bool) : Bool)) { return cast 'oversized'; }
     }
     return cast 'binExhausted';
     return cast null;
