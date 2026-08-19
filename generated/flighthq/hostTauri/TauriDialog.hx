@@ -22,7 +22,7 @@ import flighthq.types.TauriApi.TauriDialogSaveOptions;
 class TauriDialog {
   public static function createTauriDialogBackend(tauri:TauriApi):DialogBackend {
     var dialog:TauriDialogPlugin = cast _Runtime.UNDEFINED;
-    dialog = (cast tauri : TauriApi).dialog;
+    dialog = tauri.dialog;
     return cast { openFile: function(options:OpenFileDialogOptions):flighthq._internal._Promise<Array<FileDialogHandle>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var result:Null<flighthq._internal._Union2<String, Array<String>>> = cast _Runtime.UNDEFINED;

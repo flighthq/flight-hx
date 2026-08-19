@@ -11,7 +11,7 @@ import flighthq.types.TauriApi.TauriOpenerPlugin;
 class TauriShell {
   public static function createTauriShellBackend(tauri:TauriApi):ShellBackend {
     var opener:TauriOpenerPlugin = cast _Runtime.UNDEFINED;
-    opener = (cast tauri : TauriApi).opener;
+    opener = tauri.opener;
     return cast { openExternal: function(url:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {

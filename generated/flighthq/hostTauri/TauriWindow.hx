@@ -24,7 +24,7 @@ class TauriWindow {
     var windowModule:TauriWindowModule = cast _Runtime.UNDEFINED;
     var windows:flighthq._internal._WeakMap<ApplicationWindow, flighthq.types.TauriApi.TauriWindow> = cast _Runtime.UNDEFINED;
     var run:ApplicationWindow->(flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>)->Void = cast _Runtime.UNDEFINED;
-    windowModule = (cast tauri : TauriApi).window;
+    windowModule = tauri.window;
     windows = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
     run = (cast function(win:ApplicationWindow, fn:flighthq.types.TauriApi.TauriWindow->flighthq._internal._Promise<flighthq._internal._Any>):Void {
       var w:Null<flighthq.types.TauriApi.TauriWindow> = cast _Runtime.UNDEFINED;

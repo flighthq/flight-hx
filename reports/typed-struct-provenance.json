@@ -48626,7 +48626,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 14,
       "fields": 11,
       "id": "@flighthq/types:interface#TauriApi",
       "name": "TauriApi",
@@ -55941,7 +55941,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 15,
       "fields": 3,
       "id": "@flighthq/types:interface#WgpuColorLutTextureCache",
       "name": "WgpuColorLutTextureCache",
@@ -56683,7 +56683,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 15,
       "fields": 8,
       "id": "@flighthq/types:interface#WgpuScene3DIbl",
       "name": "WgpuScene3DIbl",

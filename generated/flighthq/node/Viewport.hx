@@ -15,7 +15,7 @@ class Viewport {
   }
 
   public static function getViewportAspect(viewport:flighthq.types.Viewport):Float {
-    return cast ((cast !_Runtime.strictEquals(_Runtime.field(viewport, 'height'), 0.0) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.field(viewport, 'width'), _Runtime.field(viewport, 'height')) : Dynamic) : (cast 1.0 : Dynamic));
+    return cast ((cast !_Runtime.strictEquals(viewport.height, 0.0) : Bool) ? (cast (viewport.width / viewport.height) : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }
 }

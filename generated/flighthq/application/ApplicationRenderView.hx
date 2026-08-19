@@ -64,11 +64,11 @@ class ApplicationRenderView {
     height = HxMath.max(0.0, HxMath.round(((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).window : { var height:Float; }).height * devicePixelRatio)));
     runtime = (cast ApplicationRenderView.getApplicationRenderViewRuntime__applicationRenderView(({ final __callArgument5:Dynamic = view; __callArgument5; })) : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>);
     (cast runtime : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>).resize((cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).renderState, (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).renderTarget, (cast width : Float), (cast height : Float));
-    ((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).viewport : Viewport).devicePixelRatio = devicePixelRatio);
-    ((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).viewport : Viewport).height = height);
-    ((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).viewport : Viewport).width = width);
-    ((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).viewport : Viewport).x = 0.0);
-    ((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).viewport : Viewport).y = 0.0);
+    ((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).viewport : { var devicePixelRatio:Float; }).devicePixelRatio = cast (devicePixelRatio : Float));
+    ((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).viewport : { var height:Float; }).height = cast (height : Float));
+    ((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).viewport : { var width:Float; }).width = cast (width : Float));
+    ((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).viewport : { var x:Float; }).x = cast (0.0 : Float));
+    ((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).viewport : { var y:Float; }).y = cast (0.0 : Float));
     ((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).renderState : RenderState).pixelRatio = devicePixelRatio);
     if ((cast !_Runtime.strictEquals((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).renderState : RenderState).renderTransform2D, null) : Bool)) {
       (cast computeWindowDeviceTransform((cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).window, (cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).renderState : RenderState).renderTransform2D) : Matrix);

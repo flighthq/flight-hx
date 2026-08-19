@@ -121,7 +121,7 @@ class WgpuShadowMap {
       skinned = _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural7 = skinning; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var isGpuSkinned:Mesh->Bool; }).isGpuSkinned; }), cast ([mesh] : Array<Dynamic>)), function():Dynamic return cast false);
       pipeline = ((cast skinned : Bool) ? (cast (cast WgpuShadowMap.ensureWgpuShadowDepthPipeline__wgpuShadowMap(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast true : Bool)) : flighthq._internal.dom.GPURenderPipeline) : Dynamic) : (cast rigidPipeline : Dynamic));
       upload = (cast ensureWgpuMeshUpload(({ final __callArgument9:Dynamic = state; __callArgument9; }), mesh.geometry, (cast skinned : Bool)) : Null<WgpuMeshUpload>);
-      if ((cast ((cast _Runtime.strictEquals(upload, null) : Bool) || (cast _Runtime.strictEquals((cast upload : WgpuMeshUpload).indexBuffer, null) : Bool)) : Bool)) { return; }
+      if ((cast ((cast _Runtime.strictEquals(upload, null) : Bool) || (cast _Runtime.strictEquals((cast upload : { var indexBuffer:Null<flighthq._internal.dom.GPUBuffer>; }).indexBuffer, null) : Bool)) : Bool)) { return; }
       if ((cast !_Runtime.strictEquals(pipeline, boundPipeline) : Bool)) {
         (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline);
         (boundPipeline = cast (pipeline : Dynamic));
@@ -134,9 +134,9 @@ class WgpuShadowMap {
       drawBindGroup = ((cast _Runtime.strictEquals(jointMatrices, null) : Bool) ? (cast rigidDrawBindGroup : Dynamic) : (cast (cast skinning : WgpuSkinningAdapter).getDrawBindGroup(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = jointMatrices; __callArgument16; })) : Dynamic));
       flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast WgpuShadowMap._dynamicOffsets__wgpuShadowMap : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast sceneRuntime.pendingDrawOffset : Float));
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, drawBindGroup, WgpuShadowMap._dynamicOffsets__wgpuShadowMap);
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast upload : WgpuMeshUpload).vertexBuffer);
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer((cast upload : WgpuMeshUpload).indexBuffer, (cast upload : WgpuMeshUpload).indexFormat);
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed((cast upload : WgpuMeshUpload).indexCount, 1.0, 0.0, 0.0, 0.0);
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast upload : { var vertexBuffer:flighthq._internal.dom.GPUBuffer; }).vertexBuffer);
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer((cast upload : { var indexBuffer:Null<flighthq._internal.dom.GPUBuffer>; }).indexBuffer, (cast upload : { var indexFormat:String; }).indexFormat);
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed((cast upload : { var indexCount:Float; }).indexCount, 1.0, 0.0, 0.0, 0.0);
     } : Dynamic));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
     ((cast shadow : { var enabled:Bool; }).enabled = cast (true : Bool));

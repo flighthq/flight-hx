@@ -14,7 +14,7 @@ import flighthq.types.TauriApi.TauriOsModule;
 class TauriPlatform {
   public static function createTauriPlatformBackend(tauri:TauriApi):PlatformBackend {
     var os:TauriOsModule = cast _Runtime.UNDEFINED;
-    os = (cast tauri : TauriApi).os;
+    os = tauri.os;
     return cast { getInfo: function(out:PlatformInfo):PlatformInfo {
       (out.name = cast ((cast TauriPlatform.toPlatformName__tauriPlatform((cast (cast os : TauriOsModule).platform() : String)) : PlatformName) : PlatformName));
       (out.kind = cast ('desktop' : PlatformKind));

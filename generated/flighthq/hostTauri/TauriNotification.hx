@@ -18,7 +18,7 @@ class TauriNotification {
     var notification:TauriNotificationPlugin = cast _Runtime.UNDEFINED;
     var nextId:Float = cast _Runtime.UNDEFINED;
     var cachedPermission:NotificationPermission = cast _Runtime.UNDEFINED;
-    notification = (cast tauri : TauriApi).notification;
+    notification = tauri.notification;
     nextId = 0.0;
     cachedPermission = 'default';
     flighthq._internal._Async.recover(_Runtime.callProperty((cast notification : TauriNotificationPlugin).isPermissionGranted(), 'then', cast ([function(granted:Bool):Void {

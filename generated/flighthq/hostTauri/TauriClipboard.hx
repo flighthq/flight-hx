@@ -11,7 +11,7 @@ import flighthq.types.TauriApi.TauriClipboardManager;
 class TauriClipboard {
   public static function createTauriClipboardBackend(tauri:TauriApi):ClipboardBackend {
     var clipboard:TauriClipboardManager = cast _Runtime.UNDEFINED;
-    clipboard = (cast tauri : TauriApi).clipboard;
+    clipboard = tauri.clipboard;
     return cast { readText: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {

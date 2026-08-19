@@ -1118,6 +1118,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#ThreeDsLight',
     purpose: 'reviewed escape-free 3DS light',
   },
+  {
+    declarationFingerprint: 'sha256:2c9de49060c0caec1db063676aaff00b42a147d1453a572eebc9698cad804d96',
+    id: '@flighthq/types:interface#WgpuScene3DIbl',
+    purpose: 'reviewed escape-free WebGPU Scene3D IBL',
+  },
+  {
+    declarationFingerprint: 'sha256:c598e5b3c7afe9486b6cb5b0debd608414646860ec136cf35c318b86b51ff1b1',
+    id: '@flighthq/types:interface#WgpuColorLutTextureCache',
+    purpose: 'reviewed escape-free WebGPU color-LUT texture cache',
+  },
+  {
+    declarationFingerprint: 'sha256:5ded44df647ee2b8cd70a1c2fac7b6afdecf21d4ad1b059efa421212360c4c4d',
+    id: '@flighthq/types:interface#WgpuMeshUpload',
+    purpose: 'reviewed escape-free WebGPU mesh upload',
+  },
+  {
+    declarationFingerprint: 'sha256:4469ff9b065da72e57da440a045907f3e0002cad6c1040d298d4bdd03720003d',
+    id: '@flighthq/types:interface#Viewport',
+    purpose: 'reviewed escape-free viewport',
+  },
+  {
+    declarationFingerprint: 'sha256:44bcb932c0e88a332e71c3d85aecb67af098ff10aec46f4e8e656678fcc4e7e7',
+    id: '@flighthq/types:interface#TauriApi',
+    purpose: 'reviewed escape-free Tauri API',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

@@ -32,8 +32,8 @@ class WgpuEnvironmentIblBake {
     sourceBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast programs : WgpuBakePrograms__wgpuEnvironmentIblBake).sourceBindGroupLayout, entries: cast ([{ binding: 0.0, resource: sourceCubeView }, { binding: 1.0, resource: (cast programs : WgpuBakePrograms__wgpuEnvironmentIblBake).sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
     irradiance = (cast WgpuEnvironmentIblBake.bakeWgpuIrradiance__wgpuEnvironmentIblBake(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast programs : Dynamic), ({ final __callArgument5:Dynamic = sourceBindGroup; __callArgument5; })) : WgpuBakedCube__wgpuEnvironmentIblBake);
     prefiltered = (cast WgpuEnvironmentIblBake.bakeWgpuPrefiltered__wgpuEnvironmentIblBake(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast programs : Dynamic), ({ final __callArgument7:Dynamic = sourceBindGroup; __callArgument7; })) : WgpuBakedCube__wgpuEnvironmentIblBake);
-    brdf = _Runtime.coalesce(({ final __structural8 = scene.ibl; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { var brdfLut:flighthq._internal.dom.GPUTexture; }).brdfLut; }), function():Dynamic return cast (cast WgpuEnvironmentIblBake.bakeWgpuBrdfLut__wgpuEnvironmentIblBake(({ final __callArgument9:Dynamic = state; __callArgument9; }), (cast programs : Dynamic)) : flighthq._internal.dom.GPUTexture));
-    brdfView = _Runtime.coalesce(({ final __structural10 = scene.ibl; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { var brdfLutView:flighthq._internal.dom.GPUTextureView; }).brdfLutView; }), function():Dynamic return cast (cast brdf : flighthq._internal.dom.GPUTexture).createView());
+    brdf = _Runtime.coalesce(({ final __typedStruct8 = scene.ibl; __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var brdfLut:flighthq._internal.dom.GPUTexture; }).brdfLut; }), function():Dynamic return cast (cast WgpuEnvironmentIblBake.bakeWgpuBrdfLut__wgpuEnvironmentIblBake(({ final __callArgument9:Dynamic = state; __callArgument9; }), (cast programs : Dynamic)) : flighthq._internal.dom.GPUTexture));
+    brdfView = _Runtime.coalesce(({ final __typedStruct10 = scene.ibl; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var brdfLutView:flighthq._internal.dom.GPUTextureView; }).brdfLutView; }), function():Dynamic return cast (cast brdf : flighthq._internal.dom.GPUTexture).createView());
     ibl = (cast { brdfLut: brdf, brdfLutView: brdfView, intensity: _Runtime.field(environment, 'intensity'), irradianceCube: (cast irradiance : WgpuBakedCube__wgpuEnvironmentIblBake).texture, irradianceCubeView: (cast irradiance : WgpuBakedCube__wgpuEnvironmentIblBake).view, prefilteredCube: (cast prefiltered : WgpuBakedCube__wgpuEnvironmentIblBake).texture, prefilteredCubeView: (cast prefiltered : WgpuBakedCube__wgpuEnvironmentIblBake).view, prefilteredMipCount: WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake });
     (scene.ibl = cast (ibl : Null<WgpuScene3DIbl>));
   }
@@ -43,9 +43,9 @@ class WgpuEnvironmentIblBake {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : WgpuScene3DRuntime);
     if ((cast !_Runtime.strictEquals(scene.ibl, null) : Bool)) {
-      (cast (cast scene.ibl : WgpuScene3DIbl).brdfLut : flighthq._internal.dom.GPUTexture).destroy();
-      (cast (cast scene.ibl : WgpuScene3DIbl).irradianceCube : flighthq._internal.dom.GPUTexture).destroy();
-      (cast (cast scene.ibl : WgpuScene3DIbl).prefilteredCube : flighthq._internal.dom.GPUTexture).destroy();
+      (cast (cast scene.ibl : { var brdfLut:flighthq._internal.dom.GPUTexture; }).brdfLut : flighthq._internal.dom.GPUTexture).destroy();
+      (cast (cast scene.ibl : { var irradianceCube:flighthq._internal.dom.GPUTexture; }).irradianceCube : flighthq._internal.dom.GPUTexture).destroy();
+      (cast (cast scene.ibl : { var prefilteredCube:flighthq._internal.dom.GPUTexture; }).prefilteredCube : flighthq._internal.dom.GPUTexture).destroy();
       (scene.ibl = cast (null : Null<WgpuScene3DIbl>));
     }
     if ((cast !_Runtime.strictEquals(scene.environmentSourceCube, null) : Bool)) {

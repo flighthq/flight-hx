@@ -13,7 +13,7 @@ class TauriShortcut {
   public static function createTauriShortcutBackend(tauri:TauriApi):ShortcutBackend {
     var globalShortcut:TauriGlobalShortcutPlugin = cast _Runtime.UNDEFINED;
     var registered:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
-    globalShortcut = (cast tauri : TauriApi).globalShortcut;
+    globalShortcut = tauri.globalShortcut;
     registered = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     return cast { getRegistered: function():Array<String> {
       return cast _Runtime.concatArrays([_Runtime.toArray(registered)]);

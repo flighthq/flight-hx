@@ -244,12 +244,12 @@ class GlRenderPass {
     var width:Float = cast _Runtime.UNDEFINED;
     var height:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { height: target.height, width: target.width, x: 0.0, y: 0.0 }; }
-    passWidth = HxMath.max(0.0, _Runtime.field(viewport, 'width'));
-    passHeight = HxMath.max(0.0, _Runtime.field(viewport, 'height'));
-    rawLeft = HxMath.floor(_Runtime.field(viewport, 'x'));
-    rawRight = ((cast _Runtime.strictEquals(passWidth, 0.0) : Bool) ? (cast rawLeft : Dynamic) : (cast HxMath.ceil(_Runtime.addNumbers(_Runtime.field(viewport, 'x'), passWidth)) : Dynamic));
-    rawTop = HxMath.floor(_Runtime.field(viewport, 'y'));
-    rawBottom = ((cast _Runtime.strictEquals(passHeight, 0.0) : Bool) ? (cast rawTop : Dynamic) : (cast HxMath.ceil(_Runtime.addNumbers(_Runtime.field(viewport, 'y'), passHeight)) : Dynamic));
+    passWidth = HxMath.max(0.0, (cast viewport : { var width:Float; }).width);
+    passHeight = HxMath.max(0.0, (cast viewport : { var height:Float; }).height);
+    rawLeft = HxMath.floor((cast viewport : { var x:Float; }).x);
+    rawRight = ((cast _Runtime.strictEquals(passWidth, 0.0) : Bool) ? (cast rawLeft : Dynamic) : (cast HxMath.ceil(((cast viewport : { var x:Float; }).x + passWidth)) : Dynamic));
+    rawTop = HxMath.floor((cast viewport : { var y:Float; }).y);
+    rawBottom = ((cast _Runtime.strictEquals(passHeight, 0.0) : Bool) ? (cast rawTop : Dynamic) : (cast HxMath.ceil(((cast viewport : { var y:Float; }).y + passHeight)) : Dynamic));
     left = (cast GlRenderPass.clampGlPassEdge__glRenderPass((cast rawLeft : Float), (cast target.width : Float)) : Float);
     right = (cast GlRenderPass.clampGlPassEdge__glRenderPass((cast rawRight : Float), (cast target.width : Float)) : Float);
     top = (cast GlRenderPass.clampGlPassEdge__glRenderPass((cast rawTop : Float), (cast target.height : Float)) : Float);

@@ -38,8 +38,8 @@ class TauriTray {
     var nextId:Float = cast _Runtime.UNDEFINED;
     var eventListener:Null<TrayEventData->Void> = cast _Runtime.UNDEFINED;
     var emit:Float->TrayEventType->Void = cast _Runtime.UNDEFINED;
-    trayModule = (cast tauri : TauriApi).tray;
-    menuModule = (cast tauri : TauriApi).menu;
+    trayModule = tauri.tray;
+    menuModule = tauri.menu;
     trays = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     nextId = 0.0;
     eventListener = null;

@@ -17,9 +17,9 @@ class TauriApp {
     var process:TauriProcessPlugin = cast _Runtime.UNDEFINED;
     var cachedName:String = cast _Runtime.UNDEFINED;
     var cachedVersion:String = cast _Runtime.UNDEFINED;
-    app = (cast tauri : TauriApi).app;
-    os = (cast tauri : TauriApi).os;
-    process = (cast tauri : TauriApi).process;
+    app = tauri.app;
+    os = tauri.os;
+    process = tauri.process;
     cachedName = '';
     cachedVersion = '';
     flighthq._internal._Async.recover(_Runtime.callProperty((cast app : TauriAppModule).getName(), 'then', cast ([function(name:String):Void {

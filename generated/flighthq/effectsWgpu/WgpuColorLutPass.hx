@@ -86,11 +86,11 @@ class WgpuColorLutPass {
     __destructure5 = state;
     device = _Runtime.field(__destructure5, 'device');
     n = _Runtime.field(lut, 'size');
-    if ((cast ((cast !_Runtime.strictEquals((cast cache : WgpuColorLutTextureCache).texture, null) : Bool) && (cast _Runtime.strictEquals((cast cache : WgpuColorLutTextureCache).lut, lut) : Bool)) : Bool)) { return cast (cast cache : WgpuColorLutTextureCache).texture; }
-    if ((cast ((cast _Runtime.strictEquals((cast cache : WgpuColorLutTextureCache).texture, null) : Bool) || (cast !_Runtime.strictEquals((cast cache : WgpuColorLutTextureCache).size, n) : Bool)) : Bool)) {
-      ({ final __hostTypeCall10 = (cast cache : WgpuColorLutTextureCache).texture; __hostTypeCall10 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall10 : flighthq._internal.dom.GPUTexture).destroy(); });
-      ((cast cache : WgpuColorLutTextureCache).texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([n, n, n] : Array<Dynamic>), dimension: '3d', format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)));
-      ((cast cache : WgpuColorLutTextureCache).size = n);
+    if ((cast ((cast !_Runtime.strictEquals(cache.texture, null) : Bool) && (cast _Runtime.strictEquals(cache.lut, lut) : Bool)) : Bool)) { return cast cache.texture; }
+    if ((cast ((cast _Runtime.strictEquals(cache.texture, null) : Bool) || (cast !_Runtime.strictEquals(cache.size, n) : Bool)) : Bool)) {
+      ({ final __hostTypeCall10 = cache.texture; __hostTypeCall10 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall10 : flighthq._internal.dom.GPUTexture).destroy(); });
+      (cache.texture = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([n, n, n] : Array<Dynamic>), dimension: '3d', format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPUTexture>));
+      (cache.size = cast (n : Float));
     }
     samples = _Runtime.field(lut, 'samples');
     data = new flighthq._internal._UInt8Array((((n * n) * n) * 4.0));
@@ -106,9 +106,9 @@ class WgpuColorLutPass {
         i++;
       }
     }
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: (cast cache : WgpuColorLutTextureCache).texture }, data, { bytesPerRow: (n * 4.0), rowsPerImage: n }, cast ([n, n, n] : Array<Dynamic>)] : Array<Dynamic>));
-    ((cast cache : WgpuColorLutTextureCache).lut = lut);
-    return cast (cast cache : WgpuColorLutTextureCache).texture;
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: cache.texture }, data, { bytesPerRow: (n * 4.0), rowsPerImage: n }, cast ([n, n, n] : Array<Dynamic>)] : Array<Dynamic>));
+    (cache.lut = cast (lut : Null<ColorLut>));
+    return cast cache.texture;
     return cast null;
   }
 

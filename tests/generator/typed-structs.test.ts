@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_386,
+      newAuditOnly: 1_381,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(620);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(625);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_386);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_381);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(218);
+    expect(newDirect).toHaveLength(223);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1200,6 +1200,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'ThreeDsLight',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free 3DS light',
+        }),
+        expect.objectContaining({
+          name: 'WgpuScene3DIbl',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU Scene3D IBL',
+        }),
+        expect.objectContaining({
+          name: 'WgpuColorLutTextureCache',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU color-LUT texture cache',
+        }),
+        expect.objectContaining({
+          name: 'WgpuMeshUpload',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU mesh upload',
+        }),
+        expect.objectContaining({
+          name: 'Viewport',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free viewport',
+        }),
+        expect.objectContaining({
+          name: 'TauriApi',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Tauri API',
         }),
       ]),
     );
@@ -2294,6 +2319,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#ThreeDsLight',
         purpose: 'reviewed escape-free 3DS light',
       },
+      {
+        declarationFingerprint: 'sha256:2c9de49060c0caec1db063676aaff00b42a147d1453a572eebc9698cad804d96',
+        id: '@flighthq/types:interface#WgpuScene3DIbl',
+        purpose: 'reviewed escape-free WebGPU Scene3D IBL',
+      },
+      {
+        declarationFingerprint: 'sha256:c598e5b3c7afe9486b6cb5b0debd608414646860ec136cf35c318b86b51ff1b1',
+        id: '@flighthq/types:interface#WgpuColorLutTextureCache',
+        purpose: 'reviewed escape-free WebGPU color-LUT texture cache',
+      },
+      {
+        declarationFingerprint: 'sha256:5ded44df647ee2b8cd70a1c2fac7b6afdecf21d4ad1b059efa421212360c4c4d',
+        id: '@flighthq/types:interface#WgpuMeshUpload',
+        purpose: 'reviewed escape-free WebGPU mesh upload',
+      },
+      {
+        declarationFingerprint: 'sha256:4469ff9b065da72e57da440a045907f3e0002cad6c1040d298d4bdd03720003d',
+        id: '@flighthq/types:interface#Viewport',
+        purpose: 'reviewed escape-free viewport',
+      },
+      {
+        declarationFingerprint: 'sha256:44bcb932c0e88a332e71c3d85aecb67af098ff10aec46f4e8e656678fcc4e7e7',
+        id: '@flighthq/types:interface#TauriApi',
+        purpose: 'reviewed escape-free Tauri API',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -3101,6 +3151,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const seventeenthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['TauriApi', 'Viewport', 'WgpuColorLutTextureCache', 'WgpuMeshUpload', 'WgpuScene3DIbl'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -3141,22 +3200,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_386,
+      auditOnlySchemas: 1_381,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 23_319,
-      directSchemas: 618,
+      directAccesses: 23_391,
+      directSchemas: 623,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 7_347,
+      pendingAccesses: 7_275,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_386,
+      newAuditOnly: 1_381,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -3233,7 +3292,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(23_319);
+    expect(report.summary.directAccesses).toBe(23_391);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -4161,6 +4220,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(sixteenthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'WgpuScene3DIbl',
+        15,
+        'sha256:2c9de49060c0caec1db063676aaff00b42a147d1453a572eebc9698cad804d96',
+        'reviewed escape-free WebGPU Scene3D IBL',
+      ],
+      [
+        'WgpuColorLutTextureCache',
+        15,
+        'sha256:c598e5b3c7afe9486b6cb5b0debd608414646860ec136cf35c318b86b51ff1b1',
+        'reviewed escape-free WebGPU color-LUT texture cache',
+      ],
+      [
+        'WgpuMeshUpload',
+        14,
+        'sha256:5ded44df647ee2b8cd70a1c2fac7b6afdecf21d4ad1b059efa421212360c4c4d',
+        'reviewed escape-free WebGPU mesh upload',
+      ],
+      [
+        'Viewport',
+        14,
+        'sha256:4469ff9b065da72e57da440a045907f3e0002cad6c1040d298d4bdd03720003d',
+        'reviewed escape-free viewport',
+      ],
+      [
+        'TauriApi',
+        14,
+        'sha256:44bcb932c0e88a332e71c3d85aecb67af098ff10aec46f4e8e656678fcc4e7e7',
+        'reviewed escape-free Tauri API',
+      ],
+    ] as const) {
+      expect(seventeenthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -5923,6 +6024,24 @@ describe('typed struct analysis', () => {
         expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
       }
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#WgpuScene3DIbl', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#WgpuColorLutTextureCache', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#WgpuMeshUpload', true, [], null],
+      ['@flighthq/types:interface#Viewport', false, ['cross-schema-transfer'], null],
+      ['@flighthq/types:interface#TauriApi', true, [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons: [],
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -6972,6 +7091,41 @@ describe('typed struct analysis', () => {
       ['generated/flighthq/scene3dFormats/ThreeDsParse.hx', 'light'],
       ['generated/flighthq/scene3dGl/SheenPbrGlExtension.hx', 'extension'],
       ['generated/flighthq/scene3dResources/SheenPbrScene3DMaterialTextures.hx', 'sheen'],
+    ] as const) {
+      expect(readFileSync(path, 'utf8')).not.toContain(`_Runtime.field(${receiver},`);
+    }
+    for (const path of [
+      'generated/flighthq/application/ApplicationRenderView.hx',
+      'generated/flighthq/effectsWgpu/WgpuColorLutPass.hx',
+      'generated/flighthq/effectsWgpu/WgpuRenderEffectPipeline.hx',
+      'generated/flighthq/hostTauri/TauriApp.hx',
+      'generated/flighthq/hostTauri/TauriClipboard.hx',
+      'generated/flighthq/hostTauri/TauriDialog.hx',
+      'generated/flighthq/hostTauri/TauriMenu.hx',
+      'generated/flighthq/hostTauri/TauriNotification.hx',
+      'generated/flighthq/hostTauri/TauriPlatform.hx',
+      'generated/flighthq/hostTauri/TauriShell.hx',
+      'generated/flighthq/hostTauri/TauriShortcut.hx',
+      'generated/flighthq/hostTauri/TauriTray.hx',
+      'generated/flighthq/hostTauri/TauriWindow.hx',
+      'generated/flighthq/node/Viewport.hx',
+      'generated/flighthq/renderGl/GlRenderPass.hx',
+      'generated/flighthq/scene3dWgpu/WgpuEnvironmentIblBake.hx',
+      'generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx',
+      'generated/flighthq/scene3dWgpu/WgpuMeshUpload.hx',
+      'generated/flighthq/scene3dWgpu/WgpuShadowMap.hx',
+      'generated/flighthq/scene3dWgpu/WgpuWireframeUpload.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:TauriApi|Viewport|WgpuColorLutTextureCache|WgpuMeshUpload|WgpuScene3DIbl)\)\./u,
+      );
+    }
+    for (const [path, receiver] of [
+      ['generated/flighthq/effectsWgpu/WgpuColorLutPass.hx', 'cache'],
+      ['generated/flighthq/hostTauri/TauriApp.hx', 'tauri'],
+      ['generated/flighthq/node/Viewport.hx', 'viewport'],
+      ['generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx', 'ibl'],
+      ['generated/flighthq/scene3dWgpu/WgpuMeshUpload.hx', 'upload'],
     ] as const) {
       expect(readFileSync(path, 'utf8')).not.toContain(`_Runtime.field(${receiver},`);
     }

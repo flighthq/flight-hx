@@ -72,10 +72,10 @@ class WgpuRenderEffectPipeline {
       (pipeline.sceneTarget = cast (null : Null<WgpuRenderTarget>));
     }
     destroyWgpuRenderTargetPool(({ final __callArgument6:Dynamic = state; __callArgument6; }), pipeline.pool);
-    ({ final __hostTypeCall7 = (cast pipeline.lutTexture : WgpuColorLutTextureCache).texture; __hostTypeCall7 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall7 : flighthq._internal.dom.GPUTexture).destroy(); });
-    ((cast pipeline.lutTexture : WgpuColorLutTextureCache).texture = null);
-    ((cast pipeline.lutTexture : WgpuColorLutTextureCache).size = 0.0);
-    ((cast pipeline.lutTexture : WgpuColorLutTextureCache).lut = null);
+    ({ final __hostTypeCall7 = (cast pipeline.lutTexture : { var texture:Null<flighthq._internal.dom.GPUTexture>; }).texture; __hostTypeCall7 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall7 : flighthq._internal.dom.GPUTexture).destroy(); });
+    ((cast pipeline.lutTexture : { var texture:Null<flighthq._internal.dom.GPUTexture>; }).texture = cast (null : Null<flighthq._internal.dom.GPUTexture>));
+    ((cast pipeline.lutTexture : { var size:Float; }).size = cast (0.0 : Float));
+    ((cast pipeline.lutTexture : { var lut:Null<ColorLut>; }).lut = cast (null : Null<ColorLut>));
     ((cast pipeline.lutCache : ColorLutCache).signature = null);
     ((cast pipeline.lutCache : ColorLutCache).lut = null);
   }

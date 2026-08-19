@@ -188,7 +188,7 @@ class WgpuMeshPipeline {
     subset = proxy.subset;
     if ((cast _Runtime.strictEquals(subset.indexCount, 0.0) : Bool)) { return; }
     upload = (cast ensureWgpuMeshUpload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = geometry; __callArgument12; }), (cast (cast scene.activeMeshPipeline : flighthq.types.WgpuMeshPipeline).skinned : Bool)) : Null<WgpuMeshUpload>);
-    if ((cast ((cast _Runtime.strictEquals(upload, null) : Bool) || (cast _Runtime.strictEquals((cast upload : WgpuMeshUpload).indexBuffer, null) : Bool)) : Bool)) { return; }
+    if ((cast ((cast _Runtime.strictEquals(upload, null) : Bool) || (cast _Runtime.strictEquals((cast upload : { var indexBuffer:Null<flighthq._internal.dom.GPUBuffer>; }).indexBuffer, null) : Bool)) : Bool)) { return; }
     drawBindGroup = (cast writeWgpuDrawUniform(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = proxy; __callArgument14; })) : flighthq._internal.dom.GPUBindGroup);
     activePipeline = scene.activeMeshPipeline;
     jointMatrices = _Runtime.coalesce(proxy.jointMatrices, function():Dynamic return cast null);
@@ -196,8 +196,8 @@ class WgpuMeshPipeline {
     boundDrawGroup = ((cast ((cast ((cast (cast activePipeline : flighthq.types.WgpuMeshPipeline).skinned : Bool) && (cast !_Runtime.strictEquals(jointMatrices, null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast (cast skinning : WgpuSkinningAdapter).getDrawBindGroup(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = jointMatrices; __callArgument16; })) : Dynamic) : (cast drawBindGroup : Dynamic));
     flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast WgpuMeshPipeline._dynamicOffsets__wgpuMeshPipeline : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast scene.pendingDrawOffset : Float));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, boundDrawGroup, WgpuMeshPipeline._dynamicOffsets__wgpuMeshPipeline);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast upload : WgpuMeshUpload).vertexBuffer);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer((cast upload : WgpuMeshUpload).indexBuffer, (cast upload : WgpuMeshUpload).indexFormat);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast upload : { var vertexBuffer:flighthq._internal.dom.GPUBuffer; }).vertexBuffer);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer((cast upload : { var indexBuffer:Null<flighthq._internal.dom.GPUBuffer>; }).indexBuffer, (cast upload : { var indexFormat:String; }).indexFormat);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed(subset.indexCount, 1.0, subset.indexOffset, 0.0, 0.0);
   }
 
@@ -242,8 +242,8 @@ class WgpuMeshPipeline {
     u = WgpuMeshPipeline._iblSampleScratch__wgpuMeshPipeline;
     if ((cast !_Runtime.strictEquals(ibl, null) : Bool)) {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast 1.0 : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (cast ibl : WgpuScene3DIbl).intensity : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast ((cast ibl : WgpuScene3DIbl).prefilteredMipCount - 1.0) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (cast ibl : { var intensity:Float; }).intensity : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast ((cast ibl : { var prefilteredMipCount:Float; }).prefilteredMipCount - 1.0) : Float));
     } else {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast 0.0 : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast 1.0 : Float));
@@ -251,9 +251,9 @@ class WgpuMeshPipeline {
     }
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast 0.0 : Float));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([scene.iblUniformBuffer, 0.0, _Runtime.field(u, 'buffer'), 0.0, WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline] : Array<Dynamic>));
-    irradianceView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : WgpuScene3DIbl).irradianceCubeView : Dynamic) : (cast scene.iblDummyCubeView : Dynamic));
-    prefilteredView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : WgpuScene3DIbl).prefilteredCubeView : Dynamic) : (cast scene.iblDummyCubeView : Dynamic));
-    brdfView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : WgpuScene3DIbl).brdfLutView : Dynamic) : (cast scene.iblDummyLutView : Dynamic));
+    irradianceView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : { var irradianceCubeView:flighthq._internal.dom.GPUTextureView; }).irradianceCubeView : Dynamic) : (cast scene.iblDummyCubeView : Dynamic));
+    prefilteredView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : { var prefilteredCubeView:flighthq._internal.dom.GPUTextureView; }).prefilteredCubeView : Dynamic) : (cast scene.iblDummyCubeView : Dynamic));
+    brdfView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : { var brdfLutView:flighthq._internal.dom.GPUTextureView; }).brdfLutView : Dynamic) : (cast scene.iblDummyLutView : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(scene.iblSampleBindGroup, null) : Bool) || (cast !_Runtime.strictEquals(scene.iblSampleCubeView, irradianceView) : Bool)) : Bool)) {
       (scene.iblSampleBindGroup = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast ensureWgpuIblSampleLayout(({ final __callArgument20:Dynamic = state; __callArgument20; })) : flighthq._internal.dom.GPUBindGroupLayout), entries: cast ([{ binding: 0.0, resource: { buffer: scene.iblUniformBuffer } }, { binding: 1.0, resource: irradianceView }, { binding: 2.0, resource: prefilteredView }, { binding: 3.0, resource: brdfView }, { binding: 4.0, resource: scene.iblSampler }] : Array<Dynamic>) }] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPUBindGroup>));
       (scene.iblSampleCubeView = cast (irradianceView : Null<flighthq._internal.dom.GPUTextureView>));
@@ -343,8 +343,8 @@ class WgpuMeshPipeline {
     u = WgpuMeshPipeline._iblSampleScratch__wgpuMeshPipeline;
     if ((cast !_Runtime.strictEquals(ibl, null) : Bool)) {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast 1.0 : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (cast ibl : WgpuScene3DIbl).intensity : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast ((cast ibl : WgpuScene3DIbl).prefilteredMipCount - 1.0) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (cast ibl : { var intensity:Float; }).intensity : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast ((cast ibl : { var prefilteredMipCount:Float; }).prefilteredMipCount - 1.0) : Float));
     } else {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast 0.0 : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast 1.0 : Float));
@@ -353,9 +353,9 @@ class WgpuMeshPipeline {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast 0.0 : Float));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([scene.iblUniformBuffer, 0.0, _Runtime.field(u, 'buffer'), 0.0, WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline] : Array<Dynamic>));
     shadowView = ((cast !_Runtime.strictEquals(shadow, null) : Bool) ? (cast (cast shadow : { var depthView:flighthq._internal.dom.GPUTextureView; }).depthView : Dynamic) : (cast scene.shadowDummyView : Dynamic));
-    irradianceView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : WgpuScene3DIbl).irradianceCubeView : Dynamic) : (cast scene.iblDummyCubeView : Dynamic));
-    prefilteredView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : WgpuScene3DIbl).prefilteredCubeView : Dynamic) : (cast scene.iblDummyCubeView : Dynamic));
-    brdfView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : WgpuScene3DIbl).brdfLutView : Dynamic) : (cast scene.iblDummyLutView : Dynamic));
+    irradianceView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : { var irradianceCubeView:flighthq._internal.dom.GPUTextureView; }).irradianceCubeView : Dynamic) : (cast scene.iblDummyCubeView : Dynamic));
+    prefilteredView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : { var prefilteredCubeView:flighthq._internal.dom.GPUTextureView; }).prefilteredCubeView : Dynamic) : (cast scene.iblDummyCubeView : Dynamic));
+    brdfView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : { var brdfLutView:flighthq._internal.dom.GPUTextureView; }).brdfLutView : Dynamic) : (cast scene.iblDummyLutView : Dynamic));
     if ((cast ((cast ((cast _Runtime.strictEquals(scene.pbrSampleBindGroup, null) : Bool) || (cast !_Runtime.strictEquals(scene.pbrSampleShadowView, shadowView) : Bool)) : Bool) || (cast !_Runtime.strictEquals(scene.pbrSampleIblCubeView, irradianceView) : Bool)) : Bool)) {
       (scene.pbrSampleBindGroup = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast ensureWgpuPbrSampleLayout(({ final __callArgument37:Dynamic = state; __callArgument37; })) : flighthq._internal.dom.GPUBindGroupLayout), entries: cast ([{ binding: 0.0, resource: { buffer: scene.shadowUniformBuffer } }, { binding: 1.0, resource: shadowView }, { binding: 2.0, resource: scene.shadowComparisonSampler }, { binding: 3.0, resource: { buffer: scene.iblUniformBuffer } }, { binding: 4.0, resource: irradianceView }, { binding: 5.0, resource: prefilteredView }, { binding: 6.0, resource: brdfView }, { binding: 7.0, resource: scene.iblSampler }] : Array<Dynamic>) }] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPUBindGroup>));
       (scene.pbrSampleShadowView = cast (shadowView : Null<flighthq._internal.dom.GPUTextureView>));
