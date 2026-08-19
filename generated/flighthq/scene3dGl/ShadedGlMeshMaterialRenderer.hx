@@ -94,7 +94,7 @@ class ShadedGlMeshMaterialRenderer {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(ordered, 'length') : Float)) : Bool)) {
         var modifier:Modifier = flighthq._internal._StaticIndex.readArray(ordered, index);
-        var snippet:Null<GlModifierSnippet> = (cast resolveModifier(({ final __callArgument29:Dynamic = registry; __callArgument29; }), (cast (cast modifier : Modifier).kind : String)) : Null<GlModifierSnippet>);
+        var snippet:Null<GlModifierSnippet> = (cast resolveModifier(({ final __callArgument29:Dynamic = registry; __callArgument29; }), (cast modifier.kind : String)) : Null<GlModifierSnippet>);
         if ((cast ((cast _Runtime.strictEquals(snippet, null) : Bool) || (cast _Runtime.strictEquals((cast snippet : GlModifierSnippet).bind, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { index++; continue; }
         ((cast context : GlModifierBindContext).index = index);
         (cast snippet : GlModifierSnippet).bind(({ final __callArgument30:Dynamic = modifier; __callArgument30; }), ({ final __callArgument31:Dynamic = context; __callArgument31; }));

@@ -326,7 +326,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#MeshSkinBindPose` | 36 | 6 | 1 | 0 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#MeshSubset` | 26 | 2 | 3 | 0 | 4 | 2 | 9 | 7 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#MessageDialogResult` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Modifier` | 0 | 2 | 2 | 0 | 1 | 0 | 3 | 2 | no | `normalization-provenance` |
+| `@flighthq/types:interface#Modifier` | 14 | 2 | 2 | 0 | 1 | 0 | 3 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#ModifierRegistry` | 0 | 1 | 2 | 1 | 0 | 0 | 1 | 3 | yes | — |
 | `@flighthq/types:interface#MorphShapeColorPaintBinding` | 0 | 6 | 1 | 0 | 2 | 0 | 2 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#MorphShapeData` | 30 | 6 | 1 | 9 | 2 | 1 | 2 | 3 | no | `container-transfer`, `normalization-provenance` |
@@ -384,7 +384,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Physics2DContactHooks` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DContactPoint` | 0 | 13 | 1 | 0 | 0 | 0 | 3 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DDebugCircle` | 0 | 6 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#Physics2DDebugGeometry` | 0 | 4 | 0 | 2 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics2DDebugGeometry` | 14 | 4 | 0 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DDebugGeometryOptions` | 0 | 7 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DDebugLine` | 0 | 7 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DJointResolution` | 0 | 9 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -517,7 +517,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Skin2D` | 0 | 2 | 4 | 0 | 1 | 0 | 5 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#SkinAttachment2D` | 20 | 3 | 1 | 1 | 1 | 0 | 3 | 6 | no | `normalization-provenance` |
 | `@flighthq/types:interface#SkinInfluence` | 5 | 2 | 0 | 0 | 0 | 1 | 1 | 0 | no | `container-transfer` |
-| `@flighthq/types:interface#Socket` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Socket` | 14 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SocketBackend` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SocketCloseInfo` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SocketConnection` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |

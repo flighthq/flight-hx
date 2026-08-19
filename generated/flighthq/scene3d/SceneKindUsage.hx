@@ -47,7 +47,7 @@ class SceneKindUsage {
           {
             var m:Float = 0.0;
             while ((cast ((cast m : Float) < (cast _Runtime.field(modifiers, 'length') : Float)) : Bool)) {
-              SceneKindUsage.addScene3DUsedKind__sceneKindUsage(out.modifierKinds, (cast (cast flighthq._internal._StaticIndex.readArray(modifiers, m) : Modifier).kind : String));
+              SceneKindUsage.addScene3DUsedKind__sceneKindUsage(out.modifierKinds, (cast (cast flighthq._internal._StaticIndex.readArray(modifiers, m) : { var kind:String; }).kind : String));
               m++;
             }
           }

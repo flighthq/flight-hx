@@ -43,13 +43,13 @@ class StrokePathGeometry {
     var halfWidth:Float = cast _Runtime.UNDEFINED;
     var cap:String = cast _Runtime.UNDEFINED;
     var join:String = cast _Runtime.UNDEFINED;
-    width = _Runtime.coalesce(_Runtime.field(style, 'width'), function():Dynamic return cast 1.0);
-    dashOffset = _Runtime.coalesce(_Runtime.field(style, 'dashOffset'), function():Dynamic return cast 0.0);
-    miterLimit = _Runtime.coalesce(_Runtime.field(style, 'miterLimit'), function():Dynamic return cast 4.0);
+    width = _Runtime.coalesce(style.width, function():Dynamic return cast 1.0);
+    dashOffset = _Runtime.coalesce(style.dashOffset, function():Dynamic return cast 0.0);
+    miterLimit = _Runtime.coalesce(style.miterLimit, function():Dynamic return cast 4.0);
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([width] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([tolerance] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast tolerance : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([dashOffset] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([miterLimit] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast miterLimit : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
       return cast { issue: StrokePathTessellationIssueInvalidStyle, issueSubpath: null, pieces: cast ([] : Array<Dynamic>) };
     }
-    dash = _Runtime.coalesce(_Runtime.field(style, 'dash'), function():Dynamic return cast StrokePathGeometry.EMPTY_DASH__strokePathGeometry);
+    dash = _Runtime.coalesce(style.dash, function():Dynamic return cast StrokePathGeometry.EMPTY_DASH__strokePathGeometry);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(dash, 'length') : Float)) : Bool)) {
@@ -74,8 +74,8 @@ class StrokePathGeometry {
     issueSubpath = centerlineIntersection;
     pieces = (cast cast ([] : Array<Dynamic>));
     halfWidth = (width / 2.0);
-    cap = _Runtime.coalesce(_Runtime.field(style, 'cap'), function():Dynamic return cast 'butt');
-    join = _Runtime.coalesce(_Runtime.field(style, 'join'), function():Dynamic return cast 'miter');
+    cap = _Runtime.coalesce(style.cap, function():Dynamic return cast 'butt');
+    join = _Runtime.coalesce(style.join, function():Dynamic return cast 'miter');
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {

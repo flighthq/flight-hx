@@ -303,7 +303,7 @@ class WgpuShadedPrelude {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(ordered, 'length') : Float)) : Bool)) {
         var modifier:Modifier = flighthq._internal._StaticIndex.readArray(ordered, index);
-        var snippet:Null<WgpuModifierSnippet> = (cast resolveModifier(({ final __callArgument49:Dynamic = registry; __callArgument49; }), (cast (cast modifier : Modifier).kind : String)) : Null<WgpuModifierSnippet>);
+        var snippet:Null<WgpuModifierSnippet> = (cast resolveModifier(({ final __callArgument49:Dynamic = registry; __callArgument49; }), (cast modifier.kind : String)) : Null<WgpuModifierSnippet>);
         flighthq._internal._StaticIndex.writeArray(snippets, index, snippet);
         if ((cast _Runtime.strictEquals(snippet, null) : Bool)) { index++; continue; }
         var base:Float = (index * WgpuShadedPrelude.MODIFIER_FLOATS__wgpuShadedPrelude);
@@ -354,7 +354,7 @@ class WgpuShadedPrelude {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(plan, 'orderedModifiers'), 'length') : Float)) : Bool)) {
-        if ((cast !_Runtime.strictEquals((cast resolveModifier(({ final __callArgument59:Dynamic = registry; __callArgument59; }), (cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(plan, 'orderedModifiers'), i) : Modifier).kind : String)) : Null<ModifierDefinition>), flighthq._internal._StaticIndex.readArray(_Runtime.field(plan, 'snippets'), i)) : Bool)) { return cast false; }
+        if ((cast !_Runtime.strictEquals((cast resolveModifier(({ final __callArgument59:Dynamic = registry; __callArgument59; }), (cast (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(plan, 'orderedModifiers'), i) : { var kind:String; }).kind : String)) : Null<ModifierDefinition>), flighthq._internal._StaticIndex.readArray(_Runtime.field(plan, 'snippets'), i)) : Bool)) { return cast false; }
         i++;
       }
     }

@@ -29469,7 +29469,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 14,
       "fields": 2,
       "id": "@flighthq/types:interface#Modifier",
       "name": "Modifier",
@@ -37875,7 +37875,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 14,
       "fields": 4,
       "id": "@flighthq/types:interface#Physics2DDebugGeometry",
       "name": "Physics2DDebugGeometry",
@@ -46260,7 +46260,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 14,
       "fields": 2,
       "id": "@flighthq/types:interface#Socket",
       "name": "Socket",

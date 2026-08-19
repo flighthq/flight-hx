@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1381 |
-| Direct schemas | 623 |
+| Audit-only schemas | 1376 |
+| Direct schemas | 628 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 7275 |
-| Directly emitted accesses | 23391 |
+| Pending accesses | 7206 |
+| Directly emitted accesses | 23460 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1381 |
+| Newly discovered, audit-only | 1376 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -970,7 +970,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#MessageDialogOptions` | `direct` | `preserved` | `@flighthq/types:interface#MessageDialogOptions` | broad host document | 10 | 28 | 0 | 0 | 0 | 28 | 3 | 3 | yes | — |
 | `@flighthq/types:interface#MessageDialogResult` | `direct` | `preserved` | `@flighthq/types:interface#MessageDialogResult` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MethodsOf` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Modifier` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 14 | 0 | 0 | 14 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Modifier` | `direct` | `new` | — | reviewed escape-free modifier | 2 | 14 | 0 | 0 | 0 | 14 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ModifierDefinition` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 0 | 1 | 3 | 0 | 0 | 8 | yes | — |
 | `@flighthq/types:type#ModifierKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#ModifierRegistry` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
@@ -1143,7 +1143,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Physics2DContactPoint` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 54 | 23 | 0 | 77 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DDebugCircle` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 6 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics2DDebugFeature` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#Physics2DDebugGeometry` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 10 | 4 | 0 | 14 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DDebugGeometry` | `direct` | `new` | — | reviewed escape-free physics debug geometry | 4 | 10 | 4 | 0 | 0 | 14 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DDebugGeometryOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DDebugLine` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 7 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DDistanceJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 18 | 4 | 1 | 0 | 5 | 0 | 0 | 0 | yes | — |
@@ -1532,7 +1532,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SmaaEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Snapshot` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#SnapshotSchema` | `audit-only` | `new` | — | checker-discovered public declaration | 24 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#Socket` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 14 | 0 | 0 | 14 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Socket` | `direct` | `new` | — | reviewed escape-free socket | 2 | 14 | 0 | 0 | 0 | 14 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SocketBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#SocketCloseInfo` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SocketConnection` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
@@ -1635,7 +1635,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#StatechartInstance` | `direct` | `new` | — | reviewed escape-free statechart instance | 9 | 48 | 3 | 1 | 0 | 52 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StatechartRegion` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StatechartSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#StatechartState` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#StatechartState` | `direct` | `new` | — | reviewed escape-free statechart state | 3 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StatechartTransition` | `direct` | `new` | — | reviewed escape-free statechart transition | 4 | 23 | 0 | 0 | 0 | 23 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StatechartTransitionExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#StatechartTransitionStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1656,7 +1656,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#StorageSignals` | `direct` | `preserved` | `@flighthq/types:interface#StorageSignals` | broad host document | 1 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StrokePathTessellationExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#StrokePathTessellationReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#StrokeStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 14 | 0 | 0 | 14 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#StrokeStyle` | `direct` | `new` | — | reviewed escape-free stroke style | 6 | 14 | 0 | 0 | 0 | 14 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SurfaceMaterial` | `direct` | `new` | — | reviewed escape-free surface material | 6 | 18 | 5 | 0 | 0 | 23 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SurfaceMaterialOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SvgDocumentImportOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | yes | — |

@@ -5,9 +5,9 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 623 schemas currently emit direct fields, covering 23,391 accesses.
-- 913 eligible schemas remain audit-only, covering 7,275 pending accesses.
-- 656 audit-only schemas have no recorded escape, covering 2,521 pending accesses.
+- 628 schemas currently emit direct fields, covering 23,460 accesses.
+- 908 eligible schemas remain audit-only, covering 7,206 pending accesses.
+- 651 audit-only schemas have no recorded escape, covering 2,452 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
@@ -75,6 +75,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote the fifteenth high-access zero-escape frontier: `AnimationSampleAccumulator`, `AnimationLayer`, `AnimationBlendTreeInput`, `LottieKeyframe`, and `Skeleton2DTransformConstraint`. Their 77 accesses now emit directly across five generated modules. Cross-schema transfer keeps the accumulator, layer, blend-tree input, and skeleton constraint structural; the Lottie keyframe has no production construction site. The tranche removes 38 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the sixteenth high-access zero-escape frontier: `AbcTrait`, `CanvasRenderTextureEntry`, `NetRequest`, `SheenPbrExtension`, and `ThreeDsLight`. Their 76 accesses now emit directly across eight generated modules. Container transfer plus normalization provenance keep the ABC trait structural, optional omission keeps the net request structural, cross-schema transfer keeps the sheen extension structural, and the provenance-closed Canvas render-texture entry and 3DS light remain structural pending separate cpp review. The tranche removes 45 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the seventeenth high-access zero-escape frontier: `WgpuScene3DIbl`, `WgpuColorLutTextureCache`, `WgpuMeshUpload`, `Viewport`, and `TauriApi`. Their 72 accesses now emit directly across 20 generated modules. Cross-schema transfer keeps the viewport structural; the mesh upload has no provenance row; and the provenance-closed Scene3D IBL, color-LUT texture cache, and Tauri API remain structural pending separate cpp review. The tranche removes nine `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
+- [x] Promote the eighteenth high-access zero-escape frontier: `StrokeStyle`, `Socket`, `Physics2DDebugGeometry`, `Modifier`, and `StatechartState`. Their 69 accesses now emit directly across 15 generated modules. Optional omission keeps the stroke style structural; normalization provenance keeps the modifier structural; the statechart state has no production construction site; and the provenance-closed socket and physics debug geometry remain structural pending separate cpp review. The tranche removes 34 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

@@ -192386,9 +192386,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 14,
+        "directAccesses": 14,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -192418,7 +192418,7 @@
       },
       "name": "Modifier",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free modifier",
       "reasons": [],
       "source": "upstream/packages/types/src/Modifier.ts",
       "sourceProvenance": {
@@ -230631,9 +230631,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 14,
+        "directAccesses": 14,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -230679,7 +230679,7 @@
       },
       "name": "Physics2DDebugGeometry",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free physics debug geometry",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics2D.ts",
       "sourceProvenance": {
@@ -312220,9 +312220,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 14,
+        "directAccesses": 14,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -312252,7 +312252,7 @@
       },
       "name": "Socket",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free socket",
       "reasons": [],
       "source": "upstream/packages/types/src/Socket.ts",
       "sourceProvenance": {
@@ -335888,9 +335888,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 13,
+        "directAccesses": 13,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -335928,7 +335928,7 @@
       },
       "name": "StatechartState",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free statechart state",
       "reasons": [],
       "source": "upstream/packages/types/src/Statechart.ts",
       "sourceProvenance": {
@@ -340819,9 +340819,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 14,
+        "directAccesses": 14,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -340883,7 +340883,7 @@
       },
       "name": "StrokeStyle",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free stroke style",
       "reasons": [],
       "source": "upstream/packages/types/src/StrokeStyle.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1381,
+      "newAuditOnly": 1376,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1381,
+    "auditOnlySchemas": 1376,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 23391,
-    "directSchemas": 623,
+    "directAccesses": 23460,
+    "directSchemas": 628,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 7275,
+    "pendingAccesses": 7206,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

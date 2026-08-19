@@ -1143,6 +1143,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#TauriApi',
     purpose: 'reviewed escape-free Tauri API',
   },
+  {
+    declarationFingerprint: 'sha256:ec1ee1a0110859d8a51e6fef7add0524114a018e5ce4bb456d8f0d1707c3d278',
+    id: '@flighthq/types:interface#StrokeStyle',
+    purpose: 'reviewed escape-free stroke style',
+  },
+  {
+    declarationFingerprint: 'sha256:b86755aef7f21cdbdf6fe0f9b1b5da2c48bbf6395e26a4466d9c7d69a153cfe6',
+    id: '@flighthq/types:interface#Socket',
+    purpose: 'reviewed escape-free socket',
+  },
+  {
+    declarationFingerprint: 'sha256:1f8b276b48280ac169c1a2fd693088116385bea498fd8d80746091ed5a42729a',
+    id: '@flighthq/types:interface#Physics2DDebugGeometry',
+    purpose: 'reviewed escape-free physics debug geometry',
+  },
+  {
+    declarationFingerprint: 'sha256:796da4037514e9798f33666107ab84b3e7a4d1656e87ad4354d2508e6a10dd38',
+    id: '@flighthq/types:interface#Modifier',
+    purpose: 'reviewed escape-free modifier',
+  },
+  {
+    declarationFingerprint: 'sha256:decf7fe340c128e6a1f153a139af5a745851388a7c362e4660bb156def070f05',
+    id: '@flighthq/types:interface#StatechartState',
+    purpose: 'reviewed escape-free statechart state',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

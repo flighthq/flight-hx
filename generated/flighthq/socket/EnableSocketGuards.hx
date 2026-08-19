@@ -28,7 +28,7 @@ class EnableSocketGuards {
   public static function warnOnSocketMisuse__enableSocketGuards(notice:SocketGuardNotice):Void {
     var url:String = cast _Runtime.UNDEFINED;
     var message:String = cast _Runtime.UNDEFINED;
-    url = _Runtime.field((cast notice : { var socket:Socket; }).socket, 'url');
+    url = (cast (cast notice : { var socket:Socket; }).socket : { var url:String; }).url;
     message = ((cast _Runtime.strictEquals((cast notice : { var reason:String; }).reason, 'no-connection') : Bool) ? (cast 'createSocket: active backend returned no connection — call setSocketBackend(...) with a backend that supports this transport' : Dynamic) : (cast '' + Std.string((cast notice : { var operation:String; var reason:String; var socket:Socket; }).operation) + ': socket is already disposed — call createSocket(...) to create a new socket' : Dynamic));
     (cast logOnce((cast 'socket:' + Std.string((cast notice : { var operation:String; }).operation) + ':' + Std.string((cast notice : { var reason:String; }).reason) + '' : String), ({ final __callArgument0:Dynamic = LogLevel.Warn; __callArgument0; }), (cast { message: message, operation: (cast notice : { var operation:String; }).operation, reason: (cast notice : { var reason:String; }).reason, url: url } : Dynamic), ({ final __callArgument1:Dynamic = 'socket'; __callArgument1; })) : Bool);
   }

@@ -24,15 +24,15 @@ class CompactStrokePath {
     var subpaths:Array<StrokeSubpath__compactStrokePath> = cast _Runtime.UNDEFINED;
     var dash:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     var dashOffset:Float = cast _Runtime.UNDEFINED;
-    width = _Runtime.coalesce(_Runtime.field(style, 'width'), function():Dynamic return cast 1.0);
-    join = _Runtime.coalesce(_Runtime.field(style, 'join'), function():Dynamic return cast 'miter');
-    cap = _Runtime.coalesce(_Runtime.field(style, 'cap'), function():Dynamic return cast 'butt');
-    miterLimit = _Runtime.coalesce(_Runtime.field(style, 'miterLimit'), function():Dynamic return cast 4.0);
+    width = _Runtime.coalesce(style.width, function():Dynamic return cast 1.0);
+    join = _Runtime.coalesce(style.join, function():Dynamic return cast 'miter');
+    cap = _Runtime.coalesce(style.cap, function():Dynamic return cast 'butt');
+    miterLimit = _Runtime.coalesce(style.miterLimit, function():Dynamic return cast 4.0);
     halfWidth = (width / 2.0);
     result = (cast { commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: 'nonZero' });
     subpaths = (cast CompactStrokePath.decodeSubpaths__compactStrokePath(({ final __callArgument0:Dynamic = path; __callArgument0; }), (cast tolerance : Float)) : Array<StrokeSubpath__compactStrokePath>);
-    dash = _Runtime.select(_Runtime.andValue(_Runtime.field(style, 'dash'), function():Dynamic return cast ((cast _Runtime.field(_Runtime.field(style, 'dash'), 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast _Runtime.field(style, 'dash'), function():Dynamic return cast null);
-    dashOffset = _Runtime.coalesce(_Runtime.field(style, 'dashOffset'), function():Dynamic return cast 0.0);
+    dash = _Runtime.select(_Runtime.andValue(style.dash, function():Dynamic return cast ((cast _Runtime.field(style.dash, 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast style.dash, function():Dynamic return cast null);
+    dashOffset = _Runtime.coalesce(style.dashOffset, function():Dynamic return cast 0.0);
     for (subpath in _Runtime.iterable(subpaths)) {
       if ((cast ((cast _Runtime.field((cast subpath : StrokeSubpath__compactStrokePath).points, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
       var segments:Array<DashSegment__compactStrokePath> = _Runtime.select(dash, function():Dynamic return cast (cast CompactStrokePath.applyDash__compactStrokePath((cast subpath : StrokeSubpath__compactStrokePath).points, (cast (cast subpath : StrokeSubpath__compactStrokePath).closed : Bool), ({ final __callArgument3:Dynamic = dash; __callArgument3; }), (cast dashOffset : Float)) : Array<DashSegment__compactStrokePath>), function():Dynamic return cast cast ([{ points: (cast subpath : StrokeSubpath__compactStrokePath).points, closed: (cast subpath : StrokeSubpath__compactStrokePath).closed }] : Array<Dynamic>));

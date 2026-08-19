@@ -32,13 +32,13 @@ class Socket {
   }
 
   public static function attachSocket(socket:flighthq.types.Socket):Void {
-    if ((cast (cast (cast socket : flighthq.types.Socket).runtime : { var disposed:Bool; }).disposed : Bool)) { return; }
-    ((cast (cast socket : flighthq.types.Socket).runtime : { var delivering:Bool; }).delivering = cast (true : Bool));
+    if ((cast (cast socket.runtime : { var disposed:Bool; }).disposed : Bool)) { return; }
+    ((cast socket.runtime : { var delivering:Bool; }).delivering = cast (true : Bool));
   }
 
   public static function closeSocket(socket:flighthq.types.Socket, ?code:Float, ?reason:String):Void {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast socket : flighthq.types.Socket).runtime;
+    runtime = socket.runtime;
     if ((cast runtime.disposed : Bool)) {
       _Runtime.callOptionalValue(Socket._guard__socket, cast ([{ operation: 'closeSocket', reason: 'disposed', socket: socket }] : Array<Dynamic>));
       return;
@@ -84,7 +84,7 @@ class Socket {
   }
 
   public static function detachSocket(socket:flighthq.types.Socket):Void {
-    ((cast (cast socket : flighthq.types.Socket).runtime : { var delivering:Bool; }).delivering = cast (false : Bool));
+    ((cast socket.runtime : { var delivering:Bool; }).delivering = cast (false : Bool));
   }
 
   public static function disableSocketGuards():Void {
@@ -93,10 +93,10 @@ class Socket {
 
   public static function disposeSocket(socket:flighthq.types.Socket):Void {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
-    if ((cast (cast (cast socket : flighthq.types.Socket).runtime : { var disposed:Bool; }).disposed : Bool)) { return; }
+    if ((cast (cast socket.runtime : { var disposed:Bool; }).disposed : Bool)) { return; }
     closeSocket(({ final __callArgument4:Dynamic = socket; __callArgument4; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     detachSocket(({ final __callArgument5:Dynamic = socket; __callArgument5; }));
-    runtime = (cast socket : flighthq.types.Socket).runtime;
+    runtime = socket.runtime;
     (runtime.connection = cast (null : Null<SocketConnection>));
     (runtime.signals = cast (null : Null<SocketSignals>));
     (runtime.readyState = cast ('closed' : SocketReadyState));
@@ -109,7 +109,7 @@ class Socket {
 
   public static function enableSocketSignals(socket:flighthq.types.Socket):SocketSignals {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast socket : flighthq.types.Socket).runtime;
+    runtime = socket.runtime;
     if ((cast runtime.disposed : Bool)) { _Runtime.callOptionalValue(Socket._guard__socket, cast ([{ operation: 'enableSocketSignals', reason: 'disposed', socket: socket }] : Array<Dynamic>)); }
     if ((cast _Runtime.strictEquals(runtime.signals, null) : Bool)) {
       (runtime.signals = cast ({ onSocketOpen: (cast createSignal() : Signal<Void->Void>), onSocketMessage: (cast createSignal() : Signal<SocketMessage->Void>), onSocketClose: (cast createSignal() : Signal<SocketCloseInfo->Void>), onSocketError: (cast createSignal() : Signal<Void->Void>) } : Null<SocketSignals>));
@@ -131,7 +131,7 @@ class Socket {
   }
 
   public static function getSocketReadyState(socket:flighthq.types.Socket):SocketReadyState {
-    return cast (cast _Runtime.field(socket, 'runtime') : { var readyState:SocketReadyState; }).readyState;
+    return cast (cast socket.runtime : { var readyState:SocketReadyState; }).readyState;
     return cast null;
   }
 
@@ -156,7 +156,7 @@ class Socket {
 
   public static function sendSocketMessage(socket:flighthq.types.Socket, data:flighthq._internal._Union2<String, haxe.io.Bytes>):Bool {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
-    runtime = _Runtime.field(socket, 'runtime');
+    runtime = socket.runtime;
     if ((cast runtime.disposed : Bool)) {
       _Runtime.callOptionalValue(Socket._guard__socket, cast ([{ operation: 'sendSocketMessage', reason: 'disposed', socket: socket }] : Array<Dynamic>));
       return cast false;

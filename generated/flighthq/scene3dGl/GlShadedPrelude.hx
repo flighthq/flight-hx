@@ -91,7 +91,7 @@ class GlShadedPrelude {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(orderedModifiers, 'length') : Float)) : Bool)) {
         var modifier:Modifier = flighthq._internal._StaticIndex.readArray(orderedModifiers, index);
-        var snippet:Null<GlModifierSnippet> = (cast resolveModifier(({ final __callArgument24:Dynamic = registry; __callArgument24; }), (cast (cast modifier : Modifier).kind : String)) : Null<GlModifierSnippet>);
+        var snippet:Null<GlModifierSnippet> = (cast resolveModifier(({ final __callArgument24:Dynamic = registry; __callArgument24; }), (cast modifier.kind : String)) : Null<GlModifierSnippet>);
         if ((cast ((cast _Runtime.strictEquals(snippet, null) : Bool) || (cast _Runtime.strictEquals((cast snippet : GlModifierSnippet).slot, (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Vertex) : Bool)) : Bool)) { index++; continue; }
         if ((cast !_Runtime.strictEquals((cast snippet : GlModifierSnippet).declarations, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (declarations = cast ((declarations + '' + Std.string((cast snippet : GlModifierSnippet).declarations(({ final __callArgument25:Dynamic = modifier; __callArgument25; }), (cast index : Float))) + '\n') : Dynamic)); }
         var contribution:String = '' + Std.string((cast snippet : GlModifierSnippet).contribution(({ final __callArgument26:Dynamic = modifier; __callArgument26; }), (cast index : Float))) + '\n';
@@ -112,7 +112,7 @@ class GlShadedPrelude {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(orderedModifiers, 'length') : Float)) : Bool)) {
         var modifier:Modifier = flighthq._internal._StaticIndex.readArray(orderedModifiers, index);
-        var snippet:Null<GlModifierSnippet> = (cast resolveModifier(({ final __callArgument27:Dynamic = registry; __callArgument27; }), (cast (cast modifier : Modifier).kind : String)) : Null<GlModifierSnippet>);
+        var snippet:Null<GlModifierSnippet> = (cast resolveModifier(({ final __callArgument27:Dynamic = registry; __callArgument27; }), (cast modifier.kind : String)) : Null<GlModifierSnippet>);
         if ((cast ((cast _Runtime.strictEquals(snippet, null) : Bool) || (cast !_Runtime.strictEquals((cast snippet : GlModifierSnippet).slot, (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Vertex) : Bool)) : Bool)) { index++; continue; }
         if ((cast !_Runtime.strictEquals((cast snippet : GlModifierSnippet).declarations, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (declarations = cast ((declarations + '' + Std.string((cast snippet : GlModifierSnippet).declarations(({ final __callArgument28:Dynamic = modifier; __callArgument28; }), (cast index : Float))) + '\n') : Dynamic)); }
         (vertex = cast ((vertex + '' + Std.string((cast snippet : GlModifierSnippet).contribution(({ final __callArgument29:Dynamic = modifier; __callArgument29; }), (cast index : Float))) + '\n') : Dynamic));

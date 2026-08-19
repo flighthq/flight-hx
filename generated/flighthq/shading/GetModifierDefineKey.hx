@@ -17,7 +17,7 @@ class GetModifierDefineKey {
     key = '';
     for (modifier in _Runtime.iterable(ordered)) {
       var signature:String = (cast GetModifierDefineKey.getDefineSignature__getModifierDefineKey(({ final __callArgument3:Dynamic = modifier; __callArgument3; }), ({ final __callArgument4:Dynamic = registry; __callArgument4; })) : String);
-      var token:String = ((cast ((cast _Runtime.field(signature, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string((cast modifier : Modifier).kind) + ':' + Std.string(signature) + '' : Dynamic) : (cast (cast modifier : Modifier).kind : Dynamic));
+      var token:String = ((cast ((cast _Runtime.field(signature, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string(modifier.kind) + ':' + Std.string(signature) + '' : Dynamic) : (cast modifier.kind : Dynamic));
       (key = cast (((cast ((cast _Runtime.field(key, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string(key) + '+' + Std.string(token) + '' : Dynamic) : (cast token : Dynamic)) : Dynamic));
     }
     return cast key;
@@ -27,7 +27,7 @@ class GetModifierDefineKey {
   public static function getDefineSignature__getModifierDefineKey(modifier:Modifier, ?registry:ModifierRegistry):String {
     var definition:Null<ModifierDefinition> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast ''; }
-    definition = (cast resolveModifier(({ final __callArgument5:Dynamic = registry; __callArgument5; }), (cast _Runtime.field(modifier, 'kind') : String)) : Null<ModifierDefinition>);
+    definition = (cast resolveModifier(({ final __callArgument5:Dynamic = registry; __callArgument5; }), (cast modifier.kind : String)) : Null<ModifierDefinition>);
     if ((cast ((cast _Runtime.strictEquals(definition, null) : Bool) || (cast _Runtime.strictEquals((cast definition : ModifierDefinition).getDefineSignature, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast ''; }
     return cast (cast definition : ModifierDefinition).getDefineSignature(({ final __callArgument6:Dynamic = modifier; __callArgument6; }));
     return cast null;

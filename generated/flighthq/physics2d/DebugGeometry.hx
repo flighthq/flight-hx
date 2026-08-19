@@ -30,8 +30,8 @@ class DebugGeometry {
 
   public static function writePhysics2DDebugGeometry(world:Physics2DWorld, out:Physics2DDebugGeometry, ?options:flighthq._internal._Partial<Physics2DDebugGeometryOptions>):Void {
     if (options == null) options = cast ({ drawCentersOfMass: true, drawColliders: true, drawContacts: true, drawJoints: true, centerOfMassRadius: 0.08, contactNormalLength: 0.5, pointRadius: 0.04 } : Dynamic);
-    ((cast out : Physics2DDebugGeometry).lineCount = 0.0);
-    ((cast out : Physics2DDebugGeometry).circleCount = 0.0);
+    (out.lineCount = cast (0.0 : Float));
+    (out.circleCount = cast (0.0 : Float));
     if ((cast _Runtime.coalesce(_Runtime.field(options, 'drawColliders'), function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.drawColliders) : Bool)) {
       for (body in _Runtime.iterable(world.bodies)) {
         for (collider in _Runtime.iterable((cast body : RigidBody2D).colliders)) {
@@ -219,11 +219,11 @@ class DebugGeometry {
 
   public static function writeLine__debugGeometry(out:Physics2DDebugGeometry, feature:Physics2DDebugFeature, bodyA:Float, bodyB:Float, x0:Float, y0:Float, x1:Float, y1:Float):Void {
     var line:Physics2DDebugLine = cast _Runtime.UNDEFINED;
-    if ((cast ((cast (cast out : Physics2DDebugGeometry).lineCount : Float) < (cast _Runtime.field((cast out : Physics2DDebugGeometry).lines, 'length') : Float)) : Bool)) { (line = cast (flighthq._internal._StaticIndex.readArray((cast out : Physics2DDebugGeometry).lines, (cast out : Physics2DDebugGeometry).lineCount) : Dynamic)); } else {
+    if ((cast ((cast out.lineCount : Float) < (cast _Runtime.field(out.lines, 'length') : Float)) : Bool)) { (line = cast (flighthq._internal._StaticIndex.readArray(out.lines, out.lineCount) : Dynamic)); } else {
       (line = cast ({ bodyA: -1.0, bodyB: -1.0, feature: 'collider', x0: 0.0, x1: 0.0, y0: 0.0, y1: 0.0 } : Dynamic));
-      _Runtime.callProperty((cast out : Physics2DDebugGeometry).lines, 'push', cast ([line] : Array<Dynamic>));
+      _Runtime.callProperty(out.lines, 'push', cast ([line] : Array<Dynamic>));
     }
-    (cast out : Physics2DDebugGeometry).lineCount++;
+    out.lineCount++;
     ((cast line : Physics2DDebugLine).feature = feature);
     ((cast line : Physics2DDebugLine).bodyA = bodyA);
     ((cast line : Physics2DDebugLine).bodyB = bodyB);
@@ -235,11 +235,11 @@ class DebugGeometry {
 
   public static function writeCircle__debugGeometry(out:Physics2DDebugGeometry, feature:Physics2DDebugFeature, bodyA:Float, bodyB:Float, x:Float, y:Float, radius:Float):Void {
     var circle:Physics2DDebugCircle = cast _Runtime.UNDEFINED;
-    if ((cast ((cast (cast out : Physics2DDebugGeometry).circleCount : Float) < (cast _Runtime.field((cast out : Physics2DDebugGeometry).circles, 'length') : Float)) : Bool)) { (circle = cast (flighthq._internal._StaticIndex.readArray((cast out : Physics2DDebugGeometry).circles, (cast out : Physics2DDebugGeometry).circleCount) : Dynamic)); } else {
+    if ((cast ((cast out.circleCount : Float) < (cast _Runtime.field(out.circles, 'length') : Float)) : Bool)) { (circle = cast (flighthq._internal._StaticIndex.readArray(out.circles, out.circleCount) : Dynamic)); } else {
       (circle = cast ({ bodyA: -1.0, bodyB: -1.0, feature: 'collider', radius: 0.0, x: 0.0, y: 0.0 } : Dynamic));
-      _Runtime.callProperty((cast out : Physics2DDebugGeometry).circles, 'push', cast ([circle] : Array<Dynamic>));
+      _Runtime.callProperty(out.circles, 'push', cast ([circle] : Array<Dynamic>));
     }
-    (cast out : Physics2DDebugGeometry).circleCount++;
+    out.circleCount++;
     ((cast circle : Physics2DDebugCircle).feature = feature);
     ((cast circle : Physics2DDebugCircle).bodyA = bodyA);
     ((cast circle : Physics2DDebugCircle).bodyB = bodyB);
