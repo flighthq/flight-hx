@@ -44,8 +44,8 @@ class ExplainGlScene2DCoverage {
     blendModes = runtime.glBlendModeRegistry;
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'blendModes'), 'length') : Float)) : Bool)) {
-        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'blendModes'), i);
+      while ((cast ((cast i : Float) < (cast _Runtime.field(usage.blendModes, 'length') : Float)) : Bool)) {
+        var kind:String = flighthq._internal._StaticIndex.readArray(usage.blendModes, i);
         if ((cast _Runtime.strictEquals(({ final __collection12:Dynamic = blendModes; __collection12 == null ? _Runtime.UNDEFINED : ((cast __collection12 : flighthq._internal._Map<String, GlBlendRealization>).has(kind)); }), true) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.BlendRealization }] : Array<Dynamic>));
           i++;
@@ -61,8 +61,8 @@ class ExplainGlScene2DCoverage {
     hasStandard = _Runtime.strictEquals(({ final __collection13:Dynamic = materials; __collection13 == null ? _Runtime.UNDEFINED : ((cast __collection13 : flighthq._internal._Map<String, GlMaterialRenderer>).has(StandardMaterialKindValue)); }), true);
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'materialKinds'), 'length') : Float)) : Bool)) {
-        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'materialKinds'), i);
+      while ((cast ((cast i : Float) < (cast _Runtime.field(usage.materialKinds, 'length') : Float)) : Bool)) {
+        var kind:String = flighthq._internal._StaticIndex.readArray(usage.materialKinds, i);
         if ((cast _Runtime.strictEquals(({ final __collection14:Dynamic = materials; __collection14 == null ? _Runtime.UNDEFINED : ((cast __collection14 : flighthq._internal._Map<String, GlMaterialRenderer>).has(kind)); }), true) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
           i++;

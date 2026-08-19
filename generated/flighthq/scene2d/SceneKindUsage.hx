@@ -24,32 +24,32 @@ class SceneKindUsage {
   @:noCompletion
   public static function getScene2DKindUsage(out:Scene2DKindUsage, scene:Scene2D):Void {
     var visit:Node2D->Void = cast _Runtime.UNDEFINED;
-    _Runtime.setLength((cast out : Scene2DKindUsage).blendModes, 0.0);
-    _Runtime.setLength((cast out : Scene2DKindUsage).materialKinds, 0.0);
-    _Runtime.setLength((cast out : Scene2DKindUsage).nodeKinds, 0.0);
-    _Runtime.setLength((cast out : Scene2DKindUsage).shapeCommandKeys, 0.0);
+    _Runtime.setLength(out.blendModes, 0.0);
+    _Runtime.setLength(out.materialKinds, 0.0);
+    _Runtime.setLength(out.nodeKinds, 0.0);
+    _Runtime.setLength(out.shapeCommandKeys, 0.0);
     visit = (cast function(node:Node2D):Void {
       var commands:Null<Array<ShapeCommandToken>> = cast _Runtime.UNDEFINED;
       var i:Float = cast _Runtime.UNDEFINED;
-      SceneKindUsage.addScene2DUsedKind__sceneKindUsage((cast out : Scene2DKindUsage).nodeKinds, (cast _Runtime.field(node, 'kind') : String));
+      SceneKindUsage.addScene2DUsedKind__sceneKindUsage(out.nodeKinds, (cast _Runtime.field(node, 'kind') : String));
       if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(node, 'blendMode'), null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(node, 'blendMode'), (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal) : Bool)) : Bool)) {
-        SceneKindUsage.addScene2DUsedKind__sceneKindUsage((cast out : Scene2DKindUsage).blendModes, (cast _Runtime.field(node, 'blendMode') : String));
+        SceneKindUsage.addScene2DUsedKind__sceneKindUsage(out.blendModes, (cast _Runtime.field(node, 'blendMode') : String));
       }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(node, 'material'), null) : Bool)) { SceneKindUsage.addScene2DUsedKind__sceneKindUsage((cast out : Scene2DKindUsage).materialKinds, (cast (cast _Runtime.field(node, 'material') : Material).kind : String)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(node, 'material'), null) : Bool)) { SceneKindUsage.addScene2DUsedKind__sceneKindUsage(out.materialKinds, (cast (cast _Runtime.field(node, 'material') : Material).kind : String)); }
       commands = ({ final __structural0 = (cast _Runtime.field(node, 'data') : Null<flighthq._internal._Partial<{ var commands:Array<ShapeCommandToken>; }>>); __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; });
       if ((cast _Runtime.strictEquals(commands, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       i = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
-        SceneKindUsage.addScene2DUsedKind__sceneKindUsage((cast out : Scene2DKindUsage).shapeCommandKeys, (cast (cast flighthq._internal._StaticIndex.readArray(commands, i) : String) : String));
+        SceneKindUsage.addScene2DUsedKind__sceneKindUsage(out.shapeCommandKeys, (cast (cast flighthq._internal._StaticIndex.readArray(commands, i) : String) : String));
         (i = cast ((i + ((cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float) + 2.0)) : Dynamic));
       }
     });
     visit(_Runtime.field(scene, 'root'));
     forEachNodeDescendant((cast _Runtime.field(scene, 'root') : Dynamic), (cast function(node:Node<Node2DTraits>):Void { visit((cast node : Node2D)); } : Dynamic));
-    _Runtime.callProperty((cast out : Scene2DKindUsage).blendModes, 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty((cast out : Scene2DKindUsage).materialKinds, 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty((cast out : Scene2DKindUsage).nodeKinds, 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty((cast out : Scene2DKindUsage).shapeCommandKeys, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(out.blendModes, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(out.materialKinds, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(out.nodeKinds, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(out.shapeCommandKeys, 'sort', cast ([] : Array<Dynamic>));
   }
 
   public static function addScene2DUsedKind__sceneKindUsage(kinds:Array<String>, kind:String):Void {

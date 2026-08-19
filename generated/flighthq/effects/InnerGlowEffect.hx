@@ -18,7 +18,7 @@ class InnerGlowEffect {
   }
 
   public static function getInnerGlowEffectPadding(effect:flighthq.types.InnerGlowEffect):RenderEffectPadding {
-    return cast (cast getGaussianRenderEffectPadding((cast _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0) : Float)) : RenderEffectPadding);
+    return cast (cast getGaussianRenderEffectPadding((cast _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0) : Float), (cast _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0) : Float)) : RenderEffectPadding);
     return cast null;
   }
 

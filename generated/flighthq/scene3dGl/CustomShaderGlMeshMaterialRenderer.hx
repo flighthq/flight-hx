@@ -38,18 +38,18 @@ class CustomShaderGlMeshMaterialRenderer {
     var source:Null<GlCustomMaterialShaderSource> = cast _Runtime.UNDEFINED;
     var program:GlCustomShaderProgram__customShaderGlMeshMaterialRenderer = cast _Runtime.UNDEFINED;
     custom = (cast material : Null<CustomShaderMaterial>);
-    if ((cast ((cast _Runtime.strictEquals(custom, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(custom, 'shaderKey'), '') : Bool)) : Bool)) {
+    if ((cast ((cast _Runtime.strictEquals(custom, null) : Bool) || (cast _Runtime.strictEquals((cast custom : { var shaderKey:String; }).shaderKey, '') : Bool)) : Bool)) {
       ((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram = cast (null : Null<GlMeshProgram>));
       return;
     }
-    source = (cast getGlCustomMaterialShaderSource(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast _Runtime.field(custom, 'shaderKey') : String)) : Null<GlCustomMaterialShaderSource>);
+    source = (cast getGlCustomMaterialShaderSource(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast (cast custom : { var shaderKey:String; }).shaderKey : String)) : Null<GlCustomMaterialShaderSource>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) {
       ((cast (cast getGlScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram = cast (null : Null<GlMeshProgram>));
       return;
     }
-    program = (cast CustomShaderGlMeshMaterialRenderer.ensureGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast _Runtime.field(custom, 'shaderKey') : String), ({ final __callArgument4:Dynamic = source; __callArgument4; })) : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer);
-    ({ final __optionalCall7 = (cast (cast getGlScene3DRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : GlScene3DRuntime) : { @:optional var customShaderGuard:Null<GlRenderState->flighthq._internal.dom.WebGLProgram->String->Void>; }).customShaderGuard; if (__optionalCall7 != null) __optionalCall7(state, (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).program, _Runtime.field(custom, 'shaderKey')); });
-    beginGlMeshDraw(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = program; __callArgument10; }), (cast _Runtime.field(custom, 'doubleSided') : Bool));
+    program = (cast CustomShaderGlMeshMaterialRenderer.ensureGlCustomShaderProgram__customShaderGlMeshMaterialRenderer(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast (cast custom : { var shaderKey:String; }).shaderKey : String), ({ final __callArgument4:Dynamic = source; __callArgument4; })) : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer);
+    ({ final __optionalCall7 = (cast (cast getGlScene3DRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : GlScene3DRuntime) : { @:optional var customShaderGuard:Null<GlRenderState->flighthq._internal.dom.WebGLProgram->String->Void>; }).customShaderGuard; if (__optionalCall7 != null) __optionalCall7(state, (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).program, (cast custom : { var shaderKey:String; }).shaderKey); });
+    beginGlMeshDraw(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = program; __callArgument10; }), (cast (cast custom : { var doubleSided:Bool; }).doubleSided : Bool));
     setGlMeshViewProjection(({ final __callArgument11:Dynamic = state; __callArgument11; }), (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).locViewProjection, ({ final __callArgument12:Dynamic = camera; __callArgument12; }));
     setGlMeshCameraPosition((cast state : GlRenderState).gl, (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).locCameraPosition, ({ final __callArgument13:Dynamic = camera; __callArgument13; }));
     CustomShaderGlMeshMaterialRenderer.uploadCustomShaderMaterialUniforms__customShaderGlMeshMaterialRenderer((cast state : GlRenderState).gl, (cast program : GlCustomShaderProgram__customShaderGlMeshMaterialRenderer).program, ({ final __callArgument14:Dynamic = custom; __callArgument14; }));
@@ -95,7 +95,7 @@ class CustomShaderGlMeshMaterialRenderer {
 
   public static function uploadCustomShaderMaterialUniforms__customShaderGlMeshMaterialRenderer(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq._internal.dom.WebGLProgram, material:CustomShaderMaterial):Void {
     var uniforms:Null<flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>>> = cast _Runtime.UNDEFINED;
-    uniforms = _Runtime.field(material, 'uniforms');
+    uniforms = material.uniforms;
     if ((cast _Runtime.strictEquals(uniforms, null) : Bool)) { return; }
     for (name in _Runtime.iterable(flighthq._internal.DynamicObject.keys(uniforms))) {
       var location:Null<flighthq._internal.dom.WebGLUniformLocation> = flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, name);
@@ -130,7 +130,7 @@ class CustomShaderGlMeshMaterialRenderer {
     var textures:Null<flighthq._internal._Record<String, Texture>> = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var unit:Float = cast _Runtime.UNDEFINED;
-    textures = _Runtime.field(material, 'textures');
+    textures = material.textures;
     if ((cast _Runtime.strictEquals(textures, null) : Bool)) { return; }
     gl = (cast state : GlRenderState).gl;
     unit = 0.0;

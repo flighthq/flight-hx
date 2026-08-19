@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1431 |
-| Direct schemas | 573 |
+| Audit-only schemas | 1426 |
+| Direct schemas | 578 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 8168 |
-| Directly emitted accesses | 22498 |
+| Pending accesses | 8058 |
+| Directly emitted accesses | 22608 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1431 |
+| Newly discovered, audit-only | 1426 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -404,7 +404,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ConvolutionEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 20 | 0 | 0 | 20 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CreateCubeTextureOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CreateExternalTextureOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CreateRenderTextureOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 22 | 0 | 0 | 22 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CreateRenderTextureOptions` | `direct` | `new` | — | reviewed escape-free render-texture options | 16 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CreateTextureOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#CrtEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CubeTexture` | `direct` | `kind-changed` | `@flighthq/types:interface#CubeTexture` | broad asset document | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
@@ -413,7 +413,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CursorBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#CurveKeyframe` | `direct` | `preserved` | `@flighthq/types:interface#CurveKeyframe` | broad asset document | 2 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CustomShaderEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CustomShaderMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 19 | 3 | 0 | 22 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CustomShaderMaterial` | `direct` | `new` | — | reviewed escape-free custom-shader material | 9 | 19 | 3 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DebugOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DebugSubsystemHooks` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 0 | 2 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#DebugSubsystemName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -783,7 +783,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ImportDiagnostic` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ImportDiagnosticSeverity` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#InnerEffectSourceMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#InnerGlowEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 22 | 0 | 0 | 22 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#InnerGlowEffect` | `direct` | `new` | — | reviewed escape-free inner-glow effect | 8 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InnerShadowEffect` | `direct` | `new` | — | reviewed escape-free inner-shadow effect | 10 | 30 | 0 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputGamepadAxisData` | `direct` | `preserved` | `@flighthq/types:interface#InputGamepadAxisData` | gamepad-axis input result record | 4 | 3 | 4 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputGamepadButtonData` | `direct` | `preserved` | `@flighthq/types:interface#InputGamepadButtonData` | gamepad-button input result record | 4 | 4 | 4 | 0 | 0 | 8 | 0 | 0 | yes | — |
@@ -992,7 +992,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#MorphShapeTexturePaintBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 2 | 0 | 0 | 2 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:interface#MorphTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MotionBlurEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#MotionPath` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 14 | 8 | 0 | 22 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MotionPath` | `direct` | `new` | — | reviewed escape-free motion path | 6 | 14 | 8 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MotionPathLoopMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#MotionReading` | `direct` | `preserved` | `@flighthq/types:interface#MotionReading` | broad host document | 6 | 6 | 32 | 0 | 0 | 38 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MouseButton` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
@@ -1362,7 +1362,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Scene2DFitContext` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene2DImageResourceLoadProgress` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene2DImageResources` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Scene2DKindUsage` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 22 | 0 | 0 | 22 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Scene2DKindUsage` | `direct` | `new` | — | reviewed escape-free Scene2D kind usage | 4 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Scene2DQuality` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#Scene2DRenderBlankReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Scene2DRenderer` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |

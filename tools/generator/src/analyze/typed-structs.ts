@@ -893,6 +893,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Scene3DRenderList',
     purpose: 'reviewed escape-free Scene3D render list',
   },
+  {
+    declarationFingerprint: 'sha256:496c05d2679fb7bd28f2ea80ce1ab909b2ad53eda73c19b1e1933cddacf8d877',
+    id: '@flighthq/types:interface#Scene2DKindUsage',
+    purpose: 'reviewed escape-free Scene2D kind usage',
+  },
+  {
+    declarationFingerprint: 'sha256:9ed90b466cc7a1b9394a8de4672a9f73333fe5c5379a26853f9d55533c9c0c5d',
+    id: '@flighthq/types:interface#MotionPath',
+    purpose: 'reviewed escape-free motion path',
+  },
+  {
+    declarationFingerprint: 'sha256:8301e42403f279dd1544f2cfcd45fc89ac70c49225e2760882b1c6511f02657c',
+    id: '@flighthq/types:interface#InnerGlowEffect',
+    purpose: 'reviewed escape-free inner-glow effect',
+  },
+  {
+    declarationFingerprint: 'sha256:a8c84d5a06304f2943dc6a1e7a3b630148b0705730330018dafd7e117b112f4c',
+    id: '@flighthq/types:interface#CustomShaderMaterial',
+    purpose: 'reviewed escape-free custom-shader material',
+  },
+  {
+    declarationFingerprint: 'sha256:53fc44a6b4cbdc1dd54aadc12a3aad4c2a60b93fc5c864af2dade3c3b650f72e',
+    id: '@flighthq/types:interface#CreateRenderTextureOptions',
+    purpose: 'reviewed escape-free render-texture options',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

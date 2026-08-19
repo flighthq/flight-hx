@@ -20,7 +20,7 @@ class MotionPath {
   }
 
   public static function getMotionPathHeading(mp:flighthq.types.MotionPath):Float {
-    (cast getPathTangentAtDistance(_Runtime.field(mp, 'path'), (cast _Runtime.field(mp, 'distance') : Float), ({ final __callArgument1:Dynamic = MotionPath.scratchTangent__motionPath; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Bool);
+    (cast getPathTangentAtDistance(mp.path, (cast mp.distance : Float), ({ final __callArgument1:Dynamic = MotionPath.scratchTangent__motionPath; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Bool);
     return cast HxMath.atan2(MotionPath.scratchTangent__motionPath.y, MotionPath.scratchTangent__motionPath.x);
     return cast null;
   }
@@ -28,38 +28,38 @@ class MotionPath {
   public static final scratchTangent__motionPath:Vector2 = (cast createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector2);
 
   public static function getMotionPathPosition(mp:flighthq.types.MotionPath, pointOut:Vector2Like, tangentOut:Vector2Like):Bool {
-    return cast (cast getPathPositionAtDistance(_Runtime.field(mp, 'path'), (cast _Runtime.field(mp, 'distance') : Float), ({ final __callArgument2:Dynamic = pointOut; __callArgument2; }), ({ final __callArgument3:Dynamic = tangentOut; __callArgument3; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Bool);
+    return cast (cast getPathPositionAtDistance(mp.path, (cast mp.distance : Float), ({ final __callArgument2:Dynamic = pointOut; __callArgument2; }), ({ final __callArgument3:Dynamic = tangentOut; __callArgument3; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Bool);
     return cast null;
   }
 
   public static function getMotionPathProgress(mp:flighthq.types.MotionPath):Float {
-    return cast ((cast ((cast _Runtime.field(mp, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.divideNumbers(_Runtime.field(mp, 'distance'), _Runtime.field(mp, 'length')) : Dynamic) : (cast 0.0 : Dynamic));
+    return cast ((cast ((cast mp.length : Float) > (cast 0.0 : Float)) : Bool) ? (cast (mp.distance / mp.length) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
   public static function setMotionPathDistance(mp:flighthq.types.MotionPath, distance:Float):Void {
     var length:Float = cast _Runtime.UNDEFINED;
     var clamped:Float = cast _Runtime.UNDEFINED;
-    length = (cast mp : flighthq.types.MotionPath).length;
+    length = mp.length;
     clamped = distance;
     if ((cast ((cast clamped : Float) < (cast 0.0 : Float)) : Bool)) { (clamped = cast (0.0 : Dynamic)); } else { if ((cast ((cast clamped : Float) > (cast length : Float)) : Bool)) { (clamped = cast (length : Dynamic)); } }
-    ((cast mp : flighthq.types.MotionPath).distance = clamped);
+    (mp.distance = cast (clamped : Float));
   }
 
   public static function setMotionPathProgress(mp:flighthq.types.MotionPath, t:Float):Void {
     var clamped:Float = cast _Runtime.UNDEFINED;
     clamped = t;
     if ((cast ((cast clamped : Float) < (cast 0.0 : Float)) : Bool)) { (clamped = cast (0.0 : Dynamic)); } else { if ((cast ((cast clamped : Float) > (cast 1.0 : Float)) : Bool)) { (clamped = cast (1.0 : Dynamic)); } }
-    ((cast mp : flighthq.types.MotionPath).distance = (clamped * (cast mp : flighthq.types.MotionPath).length));
+    (mp.distance = cast ((clamped * mp.length) : Float));
   }
 
   public static function updateMotionPath(mp:flighthq.types.MotionPath, deltaTime:Float):Void {
     var length:Float = cast _Runtime.UNDEFINED;
     var move:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
-    length = (cast mp : flighthq.types.MotionPath).length;
+    length = mp.length;
     if ((cast ((cast length : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
-    move = ((cast mp : flighthq.types.MotionPath).speed * deltaTime);
+    move = (mp.speed * deltaTime);
     MotionPath.applyMotionPathLoopMode__motionPath(({ final __callArgument4:Dynamic = mp; __callArgument4; }), (cast move : Float), (cast length : Float));
   }
 
@@ -68,13 +68,13 @@ class MotionPath {
     var distance:Float = cast _Runtime.UNDEFINED;
     var direction:Float = cast _Runtime.UNDEFINED;
     var clamped:Float = cast _Runtime.UNDEFINED;
-    loopMode = (cast mp : flighthq.types.MotionPath).loopMode;
-    distance = (cast mp : flighthq.types.MotionPath).distance;
-    direction = (cast mp : flighthq.types.MotionPath).direction;
+    loopMode = mp.loopMode;
+    distance = mp.distance;
+    direction = mp.direction;
     if ((cast _Runtime.strictEquals(loopMode, 'loop') : Bool)) {
       var wrapped:Float = _Runtime.fmod((distance + (direction * move)), length);
       if ((cast ((cast wrapped : Float) < (cast 0.0 : Float)) : Bool)) { (wrapped = cast ((wrapped + length) : Dynamic)); }
-      ((cast mp : flighthq.types.MotionPath).distance = wrapped);
+      (mp.distance = cast (wrapped : Float));
       return;
     }
     if ((cast _Runtime.strictEquals(loopMode, 'pingpong') : Bool)) {
@@ -83,16 +83,16 @@ class MotionPath {
       var advanced:Float = _Runtime.fmod((phase + move), period);
       if ((cast ((cast advanced : Float) < (cast 0.0 : Float)) : Bool)) { (advanced = cast ((advanced + period) : Dynamic)); }
       if ((cast ((cast advanced : Float) <= (cast length : Float)) : Bool)) {
-        ((cast mp : flighthq.types.MotionPath).distance = advanced);
-        ((cast mp : flighthq.types.MotionPath).direction = 1.0);
+        (mp.distance = cast (advanced : Float));
+        (mp.direction = cast (1.0 : Float));
       } else {
-        ((cast mp : flighthq.types.MotionPath).distance = (period - advanced));
-        ((cast mp : flighthq.types.MotionPath).direction = -1.0);
+        (mp.distance = cast ((period - advanced) : Float));
+        (mp.direction = cast (-1.0 : Float));
       }
       return;
     }
     clamped = (distance + (direction * move));
     if ((cast ((cast clamped : Float) < (cast 0.0 : Float)) : Bool)) { (clamped = cast (0.0 : Dynamic)); } else { if ((cast ((cast clamped : Float) > (cast length : Float)) : Bool)) { (clamped = cast (length : Dynamic)); } }
-    ((cast mp : flighthq.types.MotionPath).distance = clamped);
+    (mp.distance = cast (clamped : Float));
   }
 }

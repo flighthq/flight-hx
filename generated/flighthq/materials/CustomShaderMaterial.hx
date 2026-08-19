@@ -13,9 +13,9 @@ class CustomShaderMaterial {
   public static function createCustomShaderMaterial(?opts:flighthq._internal._Partial<flighthq.types.CustomShaderMaterial>):flighthq.types.CustomShaderMaterial {
     var material:flighthq.types.CustomShaderMaterial = cast _Runtime.UNDEFINED;
     material = (cast createSurfaceMaterial((cast CustomShaderMaterialKind : String), (cast opts : Dynamic)) : flighthq.types.CustomShaderMaterial);
-    ((cast material : flighthq.types.CustomShaderMaterial).shaderKey = _Runtime.coalesce(({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var shaderKey:Null<String>; }).shaderKey; }), function():Dynamic return cast ''));
-    ((cast material : flighthq.types.CustomShaderMaterial).textures = _Runtime.coalesce(({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var textures:Null<flighthq._internal._Record<String, Texture>>; }).textures; }), function():Dynamic return cast null));
-    ((cast material : flighthq.types.CustomShaderMaterial).uniforms = _Runtime.coalesce(({ final __structural2 = opts; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var uniforms:Null<flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>>>; }).uniforms; }), function():Dynamic return cast null));
+    (material.shaderKey = cast (_Runtime.coalesce(({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var shaderKey:Null<String>; }).shaderKey; }), function():Dynamic return cast '') : String));
+    (material.textures = cast (_Runtime.coalesce(({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var textures:Null<flighthq._internal._Record<String, Texture>>; }).textures; }), function():Dynamic return cast null) : Null<flighthq._internal._Record<String, Texture>>));
+    (material.uniforms = cast (_Runtime.coalesce(({ final __structural2 = opts; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var uniforms:Null<flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>>>; }).uniforms; }), function():Dynamic return cast null) : Null<flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>>>));
     return cast material;
     return cast null;
   }

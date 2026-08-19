@@ -62598,9 +62598,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 22,
+        "directAccesses": 22,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -62742,7 +62742,7 @@
       },
       "name": "CreateRenderTextureOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free render-texture options",
       "reasons": [],
       "source": "upstream/packages/types/src/CreateRenderTextureOptions.ts",
       "sourceProvenance": {
@@ -64013,9 +64013,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 22,
+        "directAccesses": 22,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -64107,7 +64107,7 @@
       },
       "name": "CustomShaderMaterial",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free custom-shader material",
       "reasons": [],
       "source": "upstream/packages/types/src/CustomShaderMaterial.ts",
       "sourceProvenance": {
@@ -157905,9 +157905,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 22,
+        "directAccesses": 22,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -157985,7 +157985,7 @@
       },
       "name": "InnerGlowEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free inner-glow effect",
       "reasons": [],
       "source": "upstream/packages/types/src/InnerGlowEffect.ts",
       "sourceProvenance": {
@@ -196319,9 +196319,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 22,
+        "directAccesses": 22,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -196383,7 +196383,7 @@
       },
       "name": "MotionPath",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free motion path",
       "reasons": [],
       "source": "upstream/packages/types/src/MotionPath.ts",
       "sourceProvenance": {
@@ -276936,9 +276936,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 22,
+        "directAccesses": 22,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -276984,7 +276984,7 @@
       },
       "name": "Scene2DKindUsage",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Scene2D kind usage",
       "reasons": [],
       "source": "upstream/packages/types/src/Scene2DKindUsage.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1431,
+      "newAuditOnly": 1426,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1431,
+    "auditOnlySchemas": 1426,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 22498,
-    "directSchemas": 573,
+    "directAccesses": 22608,
+    "directSchemas": 578,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 8168,
+    "pendingAccesses": 8058,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

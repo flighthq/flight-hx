@@ -35,8 +35,8 @@ class ExplainScene2DCoverage {
     runtime = (cast getRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : RenderStateRuntime);
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'nodeKinds'), 'length') : Float)) : Bool)) {
-        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'nodeKinds'), i);
+      while ((cast ((cast i : Float) < (cast _Runtime.field(usage.nodeKinds, 'length') : Float)) : Bool)) {
+        var kind:String = flighthq._internal._StaticIndex.readArray(usage.nodeKinds, i);
         if ((cast ((cast runtime.rendererMap : flighthq._internal._Map<String, Renderer>).has(kind)) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.NodeRenderer }] : Array<Dynamic>));
           i++;
@@ -51,8 +51,8 @@ class ExplainScene2DCoverage {
     commands = runtime.canvasShapeCommandRegistry;
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'shapeCommandKeys'), 'length') : Float)) : Bool)) {
-        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'shapeCommandKeys'), i);
+      while ((cast ((cast i : Float) < (cast _Runtime.field(usage.shapeCommandKeys, 'length') : Float)) : Bool)) {
+        var kind:String = flighthq._internal._StaticIndex.readArray(usage.shapeCommandKeys, i);
         if ((cast _Runtime.strictEquals(({ final __collection7:Dynamic = commands; __collection7 == null ? _Runtime.UNDEFINED : ((cast __collection7 : flighthq._internal._Map<String, CanvasShapeCommand<String>>).has(kind)); }), true) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.ShapeCommandHandler }] : Array<Dynamic>));
           i++;

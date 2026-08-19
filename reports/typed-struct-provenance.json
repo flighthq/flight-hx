@@ -30369,7 +30369,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 22,
       "fields": 6,
       "id": "@flighthq/types:interface#MotionPath",
       "name": "MotionPath",
@@ -41763,7 +41763,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 22,
       "fields": 4,
       "id": "@flighthq/types:interface#Scene2DKindUsage",
       "name": "Scene2DKindUsage",

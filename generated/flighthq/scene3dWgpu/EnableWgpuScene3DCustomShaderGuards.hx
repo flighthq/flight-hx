@@ -33,7 +33,7 @@ class EnableWgpuScene3DCustomShaderGuards {
     var textureCount:Float = cast _Runtime.UNDEFINED;
     var required:Array<Array<flighthq._internal._Union2<Float, String>>> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.looseEquals((cast (cast getWgpuScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuScene3DRuntime) : { @:optional var customShaderGuard:Null<WgpuRenderState->String->String->CustomShaderMaterial->Void>; }).customShaderGuard, null) : Bool)) { return; }
-    uniforms = _Runtime.coalesce(_Runtime.field(material, 'uniforms'), function():Dynamic return cast {  });
+    uniforms = _Runtime.coalesce(material.uniforms, function():Dynamic return cast {  });
     uniformNames = _Runtime.callProperty(flighthq._internal.DynamicObject.keys(uniforms), 'sort', cast ([] : Array<Dynamic>));
     for (name in _Runtime.iterable(uniformNames)) {
       var value:flighthq._internal._Union2<Float, Array<Float>> = _Runtime.getIndex(uniforms, name);
@@ -44,7 +44,7 @@ class EnableWgpuScene3DCustomShaderGuards {
     if ((cast ((cast _Runtime.field(uniformNames, 'length') : Float) > (cast WGPU_CUSTOM_SHADER_USER_VEC4_CAPACITY : Float)) : Bool)) {
       EnableWgpuScene3DCustomShaderGuards.warn__enableWgpuScene3DCustomShaderGuards((cast 'uniform-overflow:' + Std.string(shaderKey) + '' : String), (cast 'shader "' + Std.string(shaderKey) + '" has ' + Std.string(_Runtime.field(uniformNames, 'length')) + ' uniforms, exceeding the fixed ' + Std.string(WGPU_CUSTOM_SHADER_USER_VEC4_CAPACITY) + '-vec4 UserBlock capacity; extra alphabetically sorted fields are not uploaded.' : String));
     }
-    textureCount = _Runtime.field(flighthq._internal.DynamicObject.keys(_Runtime.coalesce(_Runtime.field(material, 'textures'), function():Dynamic return cast {  })), 'length');
+    textureCount = _Runtime.field(flighthq._internal.DynamicObject.keys(_Runtime.coalesce(material.textures, function():Dynamic return cast {  })), 'length');
     if ((cast ((cast textureCount : Float) > (cast WGPU_CUSTOM_SHADER_TEXTURE_CAPACITY : Float)) : Bool)) {
       EnableWgpuScene3DCustomShaderGuards.warn__enableWgpuScene3DCustomShaderGuards((cast 'texture-overflow:' + Std.string(shaderKey) + '' : String), (cast 'shader "' + Std.string(shaderKey) + '" has ' + Std.string(textureCount) + ' textures, exceeding the fixed ' + Std.string(WGPU_CUSTOM_SHADER_TEXTURE_CAPACITY) + '-texture binding capacity; extra bag-order textures are not bound.' : String));
     }
