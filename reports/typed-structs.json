@@ -159125,9 +159125,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 37,
+        "directAccesses": 37,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -159205,7 +159205,7 @@
       },
       "name": "InputState",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free input state",
       "reasons": [],
       "source": "upstream/packages/types/src/InputState.ts",
       "sourceProvenance": {
@@ -160035,9 +160035,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 49,
+        "directAccesses": 49,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -160139,7 +160139,7 @@
       },
       "name": "InteractionManager",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free interaction manager",
       "reasons": [],
       "source": "upstream/packages/types/src/InteractionManager.ts",
       "sourceProvenance": {
@@ -160333,9 +160333,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 15,
+        "directAccesses": 15,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -160381,7 +160381,7 @@
       },
       "name": "InteractionPointerState",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free interaction pointer state",
       "reasons": [],
       "source": "upstream/packages/types/src/InteractionManager.ts",
       "sourceProvenance": {
@@ -208294,9 +208294,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 19,
+        "directAccesses": 19,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -208350,7 +208350,7 @@
       },
       "name": "NodeInteractionState",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free node interaction state",
       "reasons": [],
       "source": "upstream/packages/types/src/NodeInteractionState.ts",
       "sourceProvenance": {
@@ -244417,9 +244417,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 28,
+        "directAccesses": 28,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -244577,7 +244577,7 @@
       },
       "name": "PointerEventData",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free pointer event data",
       "reasons": [],
       "source": "upstream/packages/types/src/PointerEventData.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1486,
+      "newAuditOnly": 1481,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1486,
+    "auditOnlySchemas": 1481,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 20997,
-    "directSchemas": 518,
+    "directAccesses": 21145,
+    "directSchemas": 523,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 9669,
+    "pendingAccesses": 9521,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

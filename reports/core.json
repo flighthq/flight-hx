@@ -16316,11 +16316,11 @@
       },
       {
         "byReason": {
-          "source-never": 6
+          "source-never": 12
         },
         "module": "flighthq.interaction.NodeInteractionState",
         "source": "upstream/packages/interaction/src/nodeInteractionState.ts",
-        "total": 6
+        "total": 12
       },
       {
         "byReason": {
@@ -22750,7 +22750,7 @@
       "byReason": {
         "external-toolkit-boundary": 606,
         "source-any": 965,
-        "source-never": 110,
+        "source-never": 116,
         "source-null": 74,
         "source-undefined": 264,
         "source-unknown": 3832,
@@ -22759,7 +22759,7 @@
       },
       "checkerKnownUnrepresentable": 0,
       "modules": 1119,
-      "total": 24151
+      "total": 24157
     }
   }
 }

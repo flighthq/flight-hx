@@ -275,12 +275,12 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#InputKeyboardData` | 33 | 13 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#InputKeyRepeatOptions` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#InputKeyRepeatTimer` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#InputState` | 0 | 8 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#InputState` | 37 | 8 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#InputTextData` | 5 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InstancedMesh` | 0 | 14 | 0 | 6 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InteractionHitEligibility` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#InteractionManager` | 0 | 11 | 0 | 9 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#InteractionPointerState` | 0 | 4 | 1 | 6 | 0 | 1 | 1 | 1 | no | `container-transfer` |
+| `@flighthq/types:interface#InteractionManager` | 49 | 11 | 0 | 9 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#InteractionPointerState` | 15 | 4 | 1 | 6 | 0 | 1 | 1 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#InteractionSignals` | 0 | 17 | 15 | 17 | 15 | 0 | 3 | 16 | no | `normalization-provenance` |
 | `@flighthq/types:interface#IpcBackendCapabilities` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#IpcChannel` | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
@@ -343,7 +343,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#NetResponse` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Node2DTraits` | 0 | 19 | 37 | 3 | 17 | 260 | 9 | 26 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#Node3DTraits` | 9 | 5 | 4 | 3 | 5 | 57 | 6 | 7 | no | `container-transfer`, `normalization-provenance` |
-| `@flighthq/types:interface#NodeInteractionState` | 0 | 5 | 15 | 4 | 15 | 0 | 3 | 16 | no | `normalization-provenance` |
+| `@flighthq/types:interface#NodeInteractionState` | 19 | 5 | 15 | 4 | 15 | 0 | 3 | 16 | no | `normalization-provenance` |
 | `@flighthq/types:interface#NodeOrderList` | 0 | 3 | 1 | 1 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#NodeSignals` | 15 | 5 | 15 | 5 | 15 | 0 | 3 | 16 | no | `normalization-provenance` |
 | `@flighthq/types:interface#NodeTraits` | 0 | 4 | 0 | 0 | 0 | 35 | 1 | 0 | no | `container-transfer` |

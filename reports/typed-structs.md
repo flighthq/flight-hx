@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1486 |
-| Direct schemas | 518 |
+| Audit-only schemas | 1481 |
+| Direct schemas | 523 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 9669 |
-| Directly emitted accesses | 20997 |
+| Pending accesses | 9521 |
+| Directly emitted accesses | 21145 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1486 |
+| Newly discovered, audit-only | 1481 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -794,17 +794,17 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#InputManager` | `direct` | `new` | — | reviewed escape-free input manager | 16 | 48 | 0 | 0 | 0 | 48 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputPointerData` | `direct` | `new` | — | reviewed escape-free input pointer data | 21 | 23 | 22 | 0 | 0 | 45 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#InputState` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 37 | 0 | 0 | 37 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#InputState` | `direct` | `new` | — | reviewed escape-free input state | 8 | 37 | 0 | 0 | 0 | 37 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputTextData` | `direct` | `preserved` | `@flighthq/types:interface#InputTextData` | text-input result record | 2 | 1 | 4 | 0 | 0 | 5 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InstancedMesh` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#InstancedMeshRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 34 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#InteractionConnectGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#InteractionHitEligibility` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#InteractionInputSource` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | yes | — |
-| `@flighthq/types:interface#InteractionManager` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 49 | 0 | 0 | 49 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#InteractionManager` | `direct` | `new` | — | reviewed escape-free interaction manager | 11 | 49 | 0 | 0 | 0 | 49 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InteractionManagerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InteractionPointerOptions` | `direct` | `preserved` | `@flighthq/types:interface#InteractionPointerOptions` | interaction-pointer option record | 7 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#InteractionPointerState` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 6 | 9 | 0 | 15 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#InteractionPointerState` | `direct` | `new` | — | reviewed escape-free interaction pointer state | 4 | 6 | 9 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:type#InteractionSignalName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#InteractionSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:type#InterpolationMethod` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1034,7 +1034,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#NodeData` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#NodeDataFactory` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#NodeDescendantVisitor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#NodeInteractionState` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 14 | 5 | 0 | 19 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NodeInteractionState` | `direct` | `new` | — | reviewed escape-free node interaction state | 5 | 14 | 5 | 0 | 0 | 19 | 0 | 0 | yes | — |
 | `@flighthq/types:type#NodeOf` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#NodeOrderList` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 36 | 5 | 0 | 41 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#NodeOrderListEntryVisitor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
@@ -1199,7 +1199,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PlatformRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#PlayMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#PointAttachment2D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#PointerEventData` | `audit-only` | `new` | — | checker-discovered public declaration | 18 | 4 | 24 | 0 | 28 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#PointerEventData` | `direct` | `new` | — | reviewed escape-free pointer event data | 18 | 4 | 24 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PointerType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#PointGravityWellForce` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PointLight` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 24 | 0 | 0 | 24 | 0 | 0 | 7 | yes | — |

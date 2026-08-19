@@ -618,6 +618,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#VertexDisplaceModifierOptions',
     purpose: 'reviewed escape-free vertex-displacement modifier options',
   },
+  {
+    declarationFingerprint: 'sha256:862e11110d27a2fae69cc108968d79f6b75dfb8719760df193c2f036752e10e6',
+    id: '@flighthq/types:interface#InteractionManager',
+    purpose: 'reviewed escape-free interaction manager',
+  },
+  {
+    declarationFingerprint: 'sha256:216dce6f67c2e578771f19028b5b6df661f640ecf89609634c0f5537d28f30e7',
+    id: '@flighthq/types:interface#InputState',
+    purpose: 'reviewed escape-free input state',
+  },
+  {
+    declarationFingerprint: 'sha256:a21b27d68119da759ea2e963106f0280744090b06621aba95150c883bc80fb23',
+    id: '@flighthq/types:interface#PointerEventData',
+    purpose: 'reviewed escape-free pointer event data',
+  },
+  {
+    declarationFingerprint: 'sha256:1a80443ef92b7e9bc7ac2dd87e10ced28db13469f8d2df5f858aa35a5a986944',
+    id: '@flighthq/types:interface#NodeInteractionState',
+    purpose: 'reviewed escape-free node interaction state',
+  },
+  {
+    declarationFingerprint: 'sha256:6c846f5649ce0d7c3800c0bf309bebafb3e4bc1f67b56d12bc9e2acce5c9d262',
+    id: '@flighthq/types:interface#InteractionPointerState',
+    purpose: 'reviewed escape-free interaction pointer state',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

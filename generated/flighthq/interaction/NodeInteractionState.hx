@@ -26,12 +26,12 @@ class NodeInteractionState {
   }
 
   public static function getNodeCursor(source:NodeAny):Null<Cursor> {
-    return cast _Runtime.coalesce(({ final __structural3 = (cast getNodeInteractionState(({ final __callArgument2:Dynamic = source; __callArgument2; })) : Null<flighthq.types.NodeInteractionState>); __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var cursor:Null<flighthq._internal._Union2<String, flighthq._internal._Intersection2<String, flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any>>>>; }).cursor; }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __typedStruct3 = (cast getNodeInteractionState(({ final __callArgument2:Dynamic = source; __callArgument2; })) : Null<flighthq.types.NodeInteractionState>); __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { var cursor:Null<flighthq._internal._Union2<String, flighthq._internal._Intersection2<String, flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any>>>>; }).cursor; }), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getNodeHitArea(source:NodeAny):Null<HitArea> {
-    return cast _Runtime.coalesce(({ final __structural5 = (cast getNodeInteractionState(({ final __callArgument4:Dynamic = source; __callArgument4; })) : Null<flighthq.types.NodeInteractionState>); __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea; }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __typedStruct5 = (cast getNodeInteractionState(({ final __callArgument4:Dynamic = source; __callArgument4; })) : Null<flighthq.types.NodeInteractionState>); __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea; }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -41,37 +41,37 @@ class NodeInteractionState {
   }
 
   public static function getNodeTabIndex(source:NodeAny):Float {
-    return cast _Runtime.coalesce(({ final __structural7 = (cast getNodeInteractionState(({ final __callArgument6:Dynamic = source; __callArgument6; })) : Null<flighthq.types.NodeInteractionState>); __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var tabIndex:Float; }).tabIndex; }), function():Dynamic return cast -1.0);
+    return cast _Runtime.coalesce(({ final __typedStruct7 = (cast getNodeInteractionState(({ final __callArgument6:Dynamic = source; __callArgument6; })) : Null<flighthq.types.NodeInteractionState>); __typedStruct7 == null ? _Runtime.UNDEFINED : (cast __typedStruct7 : { var tabIndex:Float; }).tabIndex; }), function():Dynamic return cast -1.0);
     return cast null;
   }
 
   public static function isNodeFocusable(source:NodeAny):Bool {
-    return cast _Runtime.coalesce(({ final __structural9 = (cast getNodeInteractionState(({ final __callArgument8:Dynamic = source; __callArgument8; })) : Null<flighthq.types.NodeInteractionState>); __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var focusable:Bool; }).focusable; }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __typedStruct9 = (cast getNodeInteractionState(({ final __callArgument8:Dynamic = source; __callArgument8; })) : Null<flighthq.types.NodeInteractionState>); __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var focusable:Bool; }).focusable; }), function():Dynamic return cast false);
     return cast null;
   }
 
   public static function isNodeHitTestEnabled(source:NodeAny):Bool {
-    return cast _Runtime.coalesce(({ final __structural11 = (cast getNodeInteractionState(({ final __callArgument10:Dynamic = source; __callArgument10; })) : Null<flighthq.types.NodeInteractionState>); __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __typedStruct11 = (cast getNodeInteractionState(({ final __callArgument10:Dynamic = source; __callArgument10; })) : Null<flighthq.types.NodeInteractionState>); __typedStruct11 == null ? _Runtime.UNDEFINED : (cast __typedStruct11 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), function():Dynamic return cast false);
     return cast null;
   }
 
   public static function setNodeCursor(source:NodeAny, cursor:Null<Cursor>):Void {
-    ((cast (cast enableNodeInteractionState(({ final __callArgument12:Dynamic = source; __callArgument12; })) : flighthq.types.NodeInteractionState) : flighthq.types.NodeInteractionState).cursor = cursor);
+    ((cast (cast enableNodeInteractionState(({ final __callArgument12:Dynamic = source; __callArgument12; })) : flighthq.types.NodeInteractionState) : { var cursor:Null<flighthq._internal._Union2<String, flighthq._internal._Intersection2<String, flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any>>>>; }).cursor = cast (cursor : Null<flighthq._internal._Union2<String, flighthq._internal._Intersection2<String, flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any>>>>));
   }
 
   public static function setNodeFocusable(source:NodeAny, focusable:Bool):Void {
-    ((cast (cast enableNodeInteractionState(({ final __callArgument13:Dynamic = source; __callArgument13; })) : flighthq.types.NodeInteractionState) : flighthq.types.NodeInteractionState).focusable = focusable);
+    ((cast (cast enableNodeInteractionState(({ final __callArgument13:Dynamic = source; __callArgument13; })) : flighthq.types.NodeInteractionState) : { var focusable:Bool; }).focusable = cast (focusable : Bool));
   }
 
   public static function setNodeHitArea(source:NodeAny, hitArea:Null<HitArea>):Void {
-    ((cast (cast enableNodeInteractionState(({ final __callArgument14:Dynamic = source; __callArgument14; })) : flighthq.types.NodeInteractionState) : flighthq.types.NodeInteractionState).hitArea = hitArea);
+    ((cast (cast enableNodeInteractionState(({ final __callArgument14:Dynamic = source; __callArgument14; })) : flighthq.types.NodeInteractionState) : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea = cast (hitArea : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>));
   }
 
   public static function setNodeHitTestEnabled(source:NodeAny, enabled:Bool):Void {
-    ((cast (cast enableNodeInteractionState(({ final __callArgument15:Dynamic = source; __callArgument15; })) : flighthq.types.NodeInteractionState) : flighthq.types.NodeInteractionState).hitTestEnabled = enabled);
+    ((cast (cast enableNodeInteractionState(({ final __callArgument15:Dynamic = source; __callArgument15; })) : flighthq.types.NodeInteractionState) : { var hitTestEnabled:Bool; }).hitTestEnabled = cast (enabled : Bool));
   }
 
   public static function setNodeTabIndex(source:NodeAny, tabIndex:Float):Void {
-    ((cast (cast enableNodeInteractionState(({ final __callArgument16:Dynamic = source; __callArgument16; })) : flighthq.types.NodeInteractionState) : flighthq.types.NodeInteractionState).tabIndex = tabIndex);
+    ((cast (cast enableNodeInteractionState(({ final __callArgument16:Dynamic = source; __callArgument16; })) : flighthq.types.NodeInteractionState) : { var tabIndex:Float; }).tabIndex = cast (tabIndex : Float));
   }
 }

@@ -5,9 +5,9 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 518 schemas currently emit direct fields, covering 20,997 accesses.
-- 1,018 eligible schemas remain audit-only, covering 9,669 pending accesses.
-- 761 audit-only schemas have no recorded escape, covering 4,915 pending accesses.
+- 523 schemas currently emit direct fields, covering 21,145 accesses.
+- 1,013 eligible schemas remain audit-only, covering 9,521 pending accesses.
+- 756 audit-only schemas have no recorded escape, covering 4,767 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
@@ -54,6 +54,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote `GlScissorRect`, `WgpuScissorRect`, `CanvasRenderStateRuntime`, `GlRenderEffectPipeline`, and `WgpuRenderEffectPipeline`: 162 accesses now emit directly across 16 generated modules. Cross-schema transfer keeps the Canvas runtime and WebGL scissor record structural, normalization provenance keeps the WebGPU scissor record structural, and the two provenance-closed pipelines remain structural pending separate cpp review. The tranche removes 46 `_Runtime.field` calls; five newly visible `ImageSmoothingQuality` uses remain explicit standard-toolkit-boundary erasures rather than guessed types, while generated `Dynamic` and `Reflect` remain unchanged.
 - [x] Promote `VertexDisplaceModifier`, `AnimatedNormalModifier`, `EmissiveModifier`, `FogModifier`, and `DissolveModifier`: 130 accesses now emit directly across seven generated modules. Cross-schema transfer keeps all five modifier records structural, and optional omission is additionally observable on every record except `FogModifier`. The tranche removes 124 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged; the five companion option schemas are separately measured in the following tranche.
 - [x] Promote `AnimatedNormalModifierOptions`, `DissolveModifierOptions`, `EmissiveModifierOptions`, `FogModifierOptions`, and `VertexDisplaceModifierOptions`: 33 accesses now emit directly across five generated factories, removing their remaining reflective option reads. All five inputs are mechanically class-compatible but have no production construction site, so they remain structural and outside the cpp provenance candidate pool. The tranche removes 33 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
+- [x] Promote `InteractionManager`, `InputState`, `PointerEventData`, `NodeInteractionState`, and `InteractionPointerState`: 148 accesses now emit directly across five generated modules. `InteractionManager` and `InputState` are provenance-closed but remain structural pending separate cpp review; cross-schema transfer keeps `PointerEventData` structural, normalization provenance keeps `NodeInteractionState` structural, and container transfer keeps `InteractionPointerState` structural. The tranche removes eight `_Runtime.field` calls and redundant schema casts; six newly visible `source-never` assignments remain explicit erasures rather than guessed types, while generated `Dynamic` and `Reflect` remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

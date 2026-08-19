@@ -274,62 +274,62 @@ class InputManager {
     var onGamepadConnect:InputGamepadConnectData->Void = cast _Runtime.UNDEFINED;
     var onGamepadDisconnect:InputGamepadConnectData->Void = cast _Runtime.UNDEFINED;
     onKeyDown = (cast function(data:InputKeyboardData):Void {
-      if ((cast !(cast ((cast (cast state : InputState).keysDown : flighthq._internal._Set<Float>).has(data.keyCode)) : Bool) : Bool)) { ((cast (cast state : InputState).justPressedKeys : flighthq._internal._Set<Float>).add(data.keyCode)); }
-      ((cast (cast state : InputState).keysDown : flighthq._internal._Set<Float>).add(data.keyCode));
+      if ((cast !(cast ((cast state.keysDown : flighthq._internal._Set<Float>).has(data.keyCode)) : Bool) : Bool)) { ((cast state.justPressedKeys : flighthq._internal._Set<Float>).add(data.keyCode)); }
+      ((cast state.keysDown : flighthq._internal._Set<Float>).add(data.keyCode));
     });
     onKeyUp = (cast function(data:InputKeyboardData):Void {
-      ((cast (cast state : InputState).keysDown : flighthq._internal._Set<Float>).delete_(data.keyCode));
-      ((cast (cast state : InputState).justReleasedKeys : flighthq._internal._Set<Float>).add(data.keyCode));
+      ((cast state.keysDown : flighthq._internal._Set<Float>).delete_(data.keyCode));
+      ((cast state.justReleasedKeys : flighthq._internal._Set<Float>).add(data.keyCode));
     });
     onPointerDown = (cast function(data:InputPointerData):Void {
       var prev:Float = cast _Runtime.UNDEFINED;
-      prev = _Runtime.coalesce(((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).get(data.pointerId)), function():Dynamic return cast 0.0);
-      ((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).set(data.pointerId, (cast (_Runtime.toInt32(prev) | _Runtime.toInt32((1 << _Runtime.toInt32(data.button)))))));
+      prev = _Runtime.coalesce(((cast state.pointerButtonsDown : flighthq._internal._Map<Float, Float>).get(data.pointerId)), function():Dynamic return cast 0.0);
+      ((cast state.pointerButtonsDown : flighthq._internal._Map<Float, Float>).set(data.pointerId, (cast (_Runtime.toInt32(prev) | _Runtime.toInt32((1 << _Runtime.toInt32(data.button)))))));
     });
     onPointerUp = (cast function(data:InputPointerData):Void {
       var prev:Float = cast _Runtime.UNDEFINED;
       var next:Float = cast _Runtime.UNDEFINED;
-      prev = _Runtime.coalesce(((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).get(data.pointerId)), function():Dynamic return cast 0.0);
+      prev = _Runtime.coalesce(((cast state.pointerButtonsDown : flighthq._internal._Map<Float, Float>).get(data.pointerId)), function():Dynamic return cast 0.0);
       next = (_Runtime.toInt32(prev) & _Runtime.toInt32(~_Runtime.toInt32((1 << _Runtime.toInt32(data.button)))));
       if ((cast _Runtime.strictEquals(next, 0.0) : Bool)) {
-        ((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).delete_(data.pointerId));
+        ((cast state.pointerButtonsDown : flighthq._internal._Map<Float, Float>).delete_(data.pointerId));
       } else {
-        ((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).set(data.pointerId, (cast next)));
+        ((cast state.pointerButtonsDown : flighthq._internal._Map<Float, Float>).set(data.pointerId, (cast next)));
       }
     });
     onPointerCancel = (cast function(data:InputPointerData):Void {
-      ((cast (cast state : InputState).pointerButtonsDown : flighthq._internal._Map<Float, Float>).delete_(data.pointerId));
+      ((cast state.pointerButtonsDown : flighthq._internal._Map<Float, Float>).delete_(data.pointerId));
     });
     onGamepadButtonDown = (cast function(data:InputGamepadButtonData):Void {
       var key:Float = cast _Runtime.UNDEFINED;
       key = ((data.gamepad * InputManager.MAX_GAMEPAD_BUTTONS__inputManager) + data.button);
-      if ((cast !(cast ((cast (cast state : InputState).gamepadButtonsDown : flighthq._internal._Set<Float>).has(key)) : Bool) : Bool)) { ((cast (cast state : InputState).justPressedGamepadButtons : flighthq._internal._Set<Float>).add(key)); }
-      ((cast (cast state : InputState).gamepadButtonsDown : flighthq._internal._Set<Float>).add(key));
+      if ((cast !(cast ((cast state.gamepadButtonsDown : flighthq._internal._Set<Float>).has(key)) : Bool) : Bool)) { ((cast state.justPressedGamepadButtons : flighthq._internal._Set<Float>).add(key)); }
+      ((cast state.gamepadButtonsDown : flighthq._internal._Set<Float>).add(key));
     });
     onGamepadButtonUp = (cast function(data:InputGamepadButtonData):Void {
       var key:Float = cast _Runtime.UNDEFINED;
       key = ((data.gamepad * InputManager.MAX_GAMEPAD_BUTTONS__inputManager) + data.button);
-      ((cast (cast state : InputState).gamepadButtonsDown : flighthq._internal._Set<Float>).delete_(key));
-      ((cast (cast state : InputState).justReleasedGamepadButtons : flighthq._internal._Set<Float>).add(key));
+      ((cast state.gamepadButtonsDown : flighthq._internal._Set<Float>).delete_(key));
+      ((cast state.justReleasedGamepadButtons : flighthq._internal._Set<Float>).add(key));
     });
     onGamepadAxisMove = (cast function(data:InputGamepadAxisData):Void {
-      ((cast (cast state : InputState).axisValues : flighthq._internal._Map<Float, Float>).set(((data.gamepad * InputManager.MAX_GAMEPAD_AXES__inputManager) + data.axis), (cast data.value)));
+      ((cast state.axisValues : flighthq._internal._Map<Float, Float>).set(((data.gamepad * InputManager.MAX_GAMEPAD_AXES__inputManager) + data.axis), (cast data.value)));
     });
     onGamepadConnect = (cast function(data:InputGamepadConnectData):Void {
       {
         var b:Float = 0.0;
         while ((cast ((cast b : Float) < (cast InputManager.MAX_GAMEPAD_BUTTONS__inputManager : Float)) : Bool)) {
           var key:Float = ((data.gamepad * InputManager.MAX_GAMEPAD_BUTTONS__inputManager) + b);
-          ((cast (cast state : InputState).gamepadButtonsDown : flighthq._internal._Set<Float>).delete_(key));
-          ((cast (cast state : InputState).justPressedGamepadButtons : flighthq._internal._Set<Float>).delete_(key));
-          ((cast (cast state : InputState).justReleasedGamepadButtons : flighthq._internal._Set<Float>).delete_(key));
+          ((cast state.gamepadButtonsDown : flighthq._internal._Set<Float>).delete_(key));
+          ((cast state.justPressedGamepadButtons : flighthq._internal._Set<Float>).delete_(key));
+          ((cast state.justReleasedGamepadButtons : flighthq._internal._Set<Float>).delete_(key));
           b++;
         }
       }
       {
         var a:Float = 0.0;
         while ((cast ((cast a : Float) < (cast InputManager.MAX_GAMEPAD_AXES__inputManager : Float)) : Bool)) {
-          ((cast (cast state : InputState).axisValues : flighthq._internal._Map<Float, Float>).delete_(((data.gamepad * InputManager.MAX_GAMEPAD_AXES__inputManager) + a)));
+          ((cast state.axisValues : flighthq._internal._Map<Float, Float>).delete_(((data.gamepad * InputManager.MAX_GAMEPAD_AXES__inputManager) + a)));
           a++;
         }
       }
@@ -339,16 +339,16 @@ class InputManager {
         var b:Float = 0.0;
         while ((cast ((cast b : Float) < (cast InputManager.MAX_GAMEPAD_BUTTONS__inputManager : Float)) : Bool)) {
           var key:Float = ((data.gamepad * InputManager.MAX_GAMEPAD_BUTTONS__inputManager) + b);
-          ((cast (cast state : InputState).gamepadButtonsDown : flighthq._internal._Set<Float>).delete_(key));
-          ((cast (cast state : InputState).justPressedGamepadButtons : flighthq._internal._Set<Float>).delete_(key));
-          ((cast (cast state : InputState).justReleasedGamepadButtons : flighthq._internal._Set<Float>).delete_(key));
+          ((cast state.gamepadButtonsDown : flighthq._internal._Set<Float>).delete_(key));
+          ((cast state.justPressedGamepadButtons : flighthq._internal._Set<Float>).delete_(key));
+          ((cast state.justReleasedGamepadButtons : flighthq._internal._Set<Float>).delete_(key));
           b++;
         }
       }
       {
         var a:Float = 0.0;
         while ((cast ((cast a : Float) < (cast InputManager.MAX_GAMEPAD_AXES__inputManager : Float)) : Bool)) {
-          ((cast (cast state : InputState).axisValues : flighthq._internal._Map<Float, Float>).delete_(((data.gamepad * InputManager.MAX_GAMEPAD_AXES__inputManager) + a)));
+          ((cast state.axisValues : flighthq._internal._Map<Float, Float>).delete_(((data.gamepad * InputManager.MAX_GAMEPAD_AXES__inputManager) + a)));
           a++;
         }
       }
@@ -444,10 +444,10 @@ class InputManager {
   }
 
   public static function endInputStateFrame(state:InputState):Void {
-    ((cast (cast state : InputState).justPressedKeys : flighthq._internal._Set<Float>).clear());
-    ((cast (cast state : InputState).justReleasedKeys : flighthq._internal._Set<Float>).clear());
-    ((cast (cast state : InputState).justPressedGamepadButtons : flighthq._internal._Set<Float>).clear());
-    ((cast (cast state : InputState).justReleasedGamepadButtons : flighthq._internal._Set<Float>).clear());
+    ((cast state.justPressedKeys : flighthq._internal._Set<Float>).clear());
+    ((cast state.justReleasedKeys : flighthq._internal._Set<Float>).clear());
+    ((cast state.justPressedGamepadButtons : flighthq._internal._Set<Float>).clear());
+    ((cast state.justReleasedGamepadButtons : flighthq._internal._Set<Float>).clear());
   }
 
   public static function exitInputPointerLock():Void {
@@ -483,7 +483,7 @@ class InputManager {
   }
 
   public static function getInputGamepadAxis(state:InputState, gamepad:Float, axis:Float):Float {
-    return cast _Runtime.coalesce(((cast _Runtime.field(state, 'axisValues') : flighthq._internal._Map<Float, Float>).get(((gamepad * InputManager.MAX_GAMEPAD_AXES__inputManager) + axis))), function():Dynamic return cast 0.0);
+    return cast _Runtime.coalesce(((cast state.axisValues : flighthq._internal._Map<Float, Float>).get(((gamepad * InputManager.MAX_GAMEPAD_AXES__inputManager) + axis))), function():Dynamic return cast 0.0);
     return cast null;
   }
 
@@ -523,17 +523,17 @@ class InputManager {
   }
 
   public static function isInputGamepadButtonDown(state:InputState, gamepad:Float, button:Float):Bool {
-    return cast ((cast _Runtime.field(state, 'gamepadButtonsDown') : flighthq._internal._Set<Float>).has(((gamepad * InputManager.MAX_GAMEPAD_BUTTONS__inputManager) + button)));
+    return cast ((cast state.gamepadButtonsDown : flighthq._internal._Set<Float>).has(((gamepad * InputManager.MAX_GAMEPAD_BUTTONS__inputManager) + button)));
     return cast null;
   }
 
   public static function isInputKeyDown(state:InputState, keyCode:Float):Bool {
-    return cast ((cast _Runtime.field(state, 'keysDown') : flighthq._internal._Set<Float>).has(keyCode));
+    return cast ((cast state.keysDown : flighthq._internal._Set<Float>).has(keyCode));
     return cast null;
   }
 
   public static function isInputPointerButtonDown(state:InputState, pointerId:Float, button:Float):Bool {
-    return cast !_Runtime.strictEquals((_Runtime.toInt32(_Runtime.coalesce(((cast _Runtime.field(state, 'pointerButtonsDown') : flighthq._internal._Map<Float, Float>).get(pointerId)), function():Dynamic return cast 0.0)) & _Runtime.toInt32((1 << _Runtime.toInt32(button)))), 0.0);
+    return cast !_Runtime.strictEquals((_Runtime.toInt32(_Runtime.coalesce(((cast state.pointerButtonsDown : flighthq._internal._Map<Float, Float>).get(pointerId)), function():Dynamic return cast 0.0)) & _Runtime.toInt32((1 << _Runtime.toInt32(button)))), 0.0);
     return cast null;
   }
 
@@ -614,22 +614,22 @@ class InputManager {
   }
 
   public static function wasInputGamepadButtonPressed(state:InputState, gamepad:Float, button:Float):Bool {
-    return cast ((cast _Runtime.field(state, 'justPressedGamepadButtons') : flighthq._internal._Set<Float>).has(((gamepad * InputManager.MAX_GAMEPAD_BUTTONS__inputManager) + button)));
+    return cast ((cast state.justPressedGamepadButtons : flighthq._internal._Set<Float>).has(((gamepad * InputManager.MAX_GAMEPAD_BUTTONS__inputManager) + button)));
     return cast null;
   }
 
   public static function wasInputGamepadButtonReleased(state:InputState, gamepad:Float, button:Float):Bool {
-    return cast ((cast _Runtime.field(state, 'justReleasedGamepadButtons') : flighthq._internal._Set<Float>).has(((gamepad * InputManager.MAX_GAMEPAD_BUTTONS__inputManager) + button)));
+    return cast ((cast state.justReleasedGamepadButtons : flighthq._internal._Set<Float>).has(((gamepad * InputManager.MAX_GAMEPAD_BUTTONS__inputManager) + button)));
     return cast null;
   }
 
   public static function wasInputKeyPressed(state:InputState, keyCode:Float):Bool {
-    return cast ((cast _Runtime.field(state, 'justPressedKeys') : flighthq._internal._Set<Float>).has(keyCode));
+    return cast ((cast state.justPressedKeys : flighthq._internal._Set<Float>).has(keyCode));
     return cast null;
   }
 
   public static function wasInputKeyReleased(state:InputState, keyCode:Float):Bool {
-    return cast ((cast _Runtime.field(state, 'justReleasedKeys') : flighthq._internal._Set<Float>).has(keyCode));
+    return cast ((cast state.justReleasedKeys : flighthq._internal._Set<Float>).has(keyCode));
     return cast null;
   }
 

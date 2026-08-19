@@ -28,7 +28,7 @@ class InteractionSpatialIndex {
     var nodes:Null<Array<NodeAny>> = cast _Runtime.UNDEFINED;
     var best:Null<N> = cast _Runtime.UNDEFINED;
     var bestRank:Float = cast _Runtime.UNDEFINED;
-    index = (cast manager : InteractionManager<N>).spatialIndex;
+    index = manager.spatialIndex;
     if ((cast _Runtime.strictEquals(index, null) : Bool)) { return cast null; }
     nodes = ((cast InteractionSpatialIndex.managerCandidates__interactionSpatialIndex : flighthq._internal._WeakMap<flighthq._internal._Object, Array<NodeAny>>).get(manager));
     if ((cast ((cast _Runtime.strictEquals(nodes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(nodes, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
@@ -55,10 +55,10 @@ class InteractionSpatialIndex {
   public static function refreshInteractionSpatialIndex<N:NodeAny>(manager:InteractionManager<N>):Void {
     var index:Null<SpatialIndex> = cast _Runtime.UNDEFINED;
     var nodes:Array<NodeAny> = cast _Runtime.UNDEFINED;
-    index = (cast manager : InteractionManager<N>).spatialIndex;
+    index = manager.spatialIndex;
     if ((cast _Runtime.strictEquals(index, null) : Bool)) { return; }
     nodes = (cast cast ([] : Array<Dynamic>));
-    InteractionSpatialIndex.collectSpatialCandidates__interactionSpatialIndex(({ final __callArgument3:Dynamic = (cast manager : InteractionManager<N>).root; __callArgument3; }), ({ final __callArgument4:Dynamic = nodes; __callArgument4; }));
+    InteractionSpatialIndex.collectSpatialCandidates__interactionSpatialIndex(({ final __callArgument3:Dynamic = manager.root; __callArgument3; }), ({ final __callArgument4:Dynamic = nodes; __callArgument4; }));
     ((cast InteractionSpatialIndex.managerCandidates__interactionSpatialIndex : flighthq._internal._WeakMap<flighthq._internal._Object, Array<NodeAny>>).set(manager, (cast nodes)));
     clearSpatialIndex(({ final __callArgument5:Dynamic = index; __callArgument5; }));
     {
@@ -81,8 +81,8 @@ class InteractionSpatialIndex {
     var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
     state = (cast getNodeInteractionState(({ final __callArgument8:Dynamic = node; __callArgument8; })) : Null<NodeInteractionState>);
-    enabled = _Runtime.strictEquals(({ final __structural9 = state; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
-    if ((cast ((cast enabled : Bool) && (cast !_Runtime.looseEquals(({ final __structural10 = state; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : NodeInteractionState).hitArea; }), null) : Bool)) : Bool)) {
+    enabled = _Runtime.strictEquals(({ final __typedStruct9 = state; __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
+    if ((cast ((cast enabled : Bool) && (cast !_Runtime.looseEquals(({ final __typedStruct10 = state; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea; }), null) : Bool)) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>));
       return;
     }

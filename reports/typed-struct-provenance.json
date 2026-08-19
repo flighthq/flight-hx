@@ -26652,7 +26652,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 37,
       "fields": 8,
       "id": "@flighthq/types:interface#InputState",
       "name": "InputState",
@@ -26834,7 +26834,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 49,
       "fields": 11,
       "id": "@flighthq/types:interface#InteractionManager",
       "name": "InteractionManager",
@@ -26908,7 +26908,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 15,
       "fields": 4,
       "id": "@flighthq/types:interface#InteractionPointerState",
       "name": "InteractionPointerState",
@@ -34558,7 +34558,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 19,
       "fields": 5,
       "id": "@flighthq/types:interface#NodeInteractionState",
       "name": "NodeInteractionState",

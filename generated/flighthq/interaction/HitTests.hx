@@ -95,7 +95,7 @@ class HitTests {
 
   public static function hitTestNodeRegion(source:NodeAny, x:Float, y:Float, precise:Bool = false):Bool {
     var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>> = cast _Runtime.UNDEFINED;
-    hitArea = _Runtime.coalesce(({ final __structural9 = (cast getNodeInteractionState(({ final __callArgument8:Dynamic = source; __callArgument8; })) : Null<NodeInteractionState>); __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea; }), function():Dynamic return cast null);
+    hitArea = _Runtime.coalesce(({ final __typedStruct9 = (cast getNodeInteractionState(({ final __callArgument8:Dynamic = source; __callArgument8; })) : Null<NodeInteractionState>); __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea; }), function():Dynamic return cast null);
     if ((cast !_Runtime.strictEquals(hitArea, null) : Bool)) { return cast (cast HitTests.hitAreaContainsPoint__hitTests(({ final __callArgument10:Dynamic = source; __callArgument10; }), ({ final __callArgument11:Dynamic = hitArea; __callArgument11; }), (cast x : Float), (cast y : Float)) : Bool); }
     return cast (cast HitTests.testNodeGeometry__hitTests(({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool);
     return cast null;
@@ -116,8 +116,8 @@ class HitTests {
     var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return cast null; }
     state = (cast getNodeInteractionState(({ final __callArgument13:Dynamic = node; __callArgument13; })) : Null<NodeInteractionState>);
-    enabled = _Runtime.strictEquals(({ final __structural14 = state; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
-    hitArea = _Runtime.coalesce(({ final __structural15 = state; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea; }), function():Dynamic return cast null);
+    enabled = _Runtime.strictEquals(({ final __typedStruct14 = state; __typedStruct14 == null ? _Runtime.UNDEFINED : (cast __typedStruct14 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
+    hitArea = _Runtime.coalesce(({ final __typedStruct15 = state; __typedStruct15 == null ? _Runtime.UNDEFINED : (cast __typedStruct15 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea; }), function():Dynamic return cast null);
     if ((cast ((cast enabled : Bool) && (cast !_Runtime.strictEquals(hitArea, null) : Bool)) : Bool)) {
       return cast ((cast (cast HitTests.hitAreaContainsPoint__hitTests(({ final __callArgument16:Dynamic = node; __callArgument16; }), ({ final __callArgument17:Dynamic = hitArea; __callArgument17; }), (cast x : Float), (cast y : Float)) : Bool) : Bool) ? (cast node : Dynamic) : (cast null : Dynamic));
     }
@@ -144,8 +144,8 @@ class HitTests {
     var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return cast false; }
     state = (cast getNodeInteractionState(({ final __callArgument20:Dynamic = node; __callArgument20; })) : Null<NodeInteractionState>);
-    enabled = _Runtime.strictEquals(({ final __structural21 = state; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
-    hitArea = _Runtime.coalesce(({ final __structural22 = state; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea; }), function():Dynamic return cast null);
+    enabled = _Runtime.strictEquals(({ final __typedStruct21 = state; __typedStruct21 == null ? _Runtime.UNDEFINED : (cast __typedStruct21 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
+    hitArea = _Runtime.coalesce(({ final __typedStruct22 = state; __typedStruct22 == null ? _Runtime.UNDEFINED : (cast __typedStruct22 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea; }), function():Dynamic return cast null);
     if ((cast ((cast enabled : Bool) && (cast !_Runtime.strictEquals(hitArea, null) : Bool)) : Bool)) { return cast (cast HitTests.hitAreaContainsPoint__hitTests(({ final __callArgument23:Dynamic = node; __callArgument23; }), ({ final __callArgument24:Dynamic = hitArea; __callArgument24; }), (cast x : Float), (cast y : Float)) : Bool); }
     if ((cast ((cast enabled : Bool) && (cast (cast HitTests.testNodeGeometry__hitTests(({ final __callArgument25:Dynamic = node; __callArgument25; }), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool) : Bool)) : Bool)) { return cast true; }
     children = _Runtime.field((cast getNodeRuntime(({ final __callArgument26:Dynamic = node; __callArgument26; })) : NodeRuntime<flighthq._internal._Any>), 'children');
@@ -165,8 +165,8 @@ class HitTests {
     var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
     state = (cast getNodeInteractionState(({ final __callArgument29:Dynamic = node; __callArgument29; })) : Null<NodeInteractionState>);
-    enabled = _Runtime.strictEquals(({ final __structural30 = state; __structural30 == null ? _Runtime.UNDEFINED : (cast __structural30 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
-    hitArea = _Runtime.coalesce(({ final __structural31 = state; __structural31 == null ? _Runtime.UNDEFINED : (cast __structural31 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea; }), function():Dynamic return cast null);
+    enabled = _Runtime.strictEquals(({ final __typedStruct30 = state; __typedStruct30 == null ? _Runtime.UNDEFINED : (cast __typedStruct30 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
+    hitArea = _Runtime.coalesce(({ final __typedStruct31 = state; __typedStruct31 == null ? _Runtime.UNDEFINED : (cast __typedStruct31 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea; }), function():Dynamic return cast null);
     if ((cast ((cast enabled : Bool) && (cast !_Runtime.strictEquals(hitArea, null) : Bool)) : Bool)) {
       if ((cast (cast HitTests.hitAreaContainsPoint__hitTests(({ final __callArgument32:Dynamic = node; __callArgument32; }), ({ final __callArgument33:Dynamic = hitArea; __callArgument33; }), (cast x : Float), (cast y : Float)) : Bool) : Bool)) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
       return;

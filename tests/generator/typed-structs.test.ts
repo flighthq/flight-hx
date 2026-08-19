@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_486,
+      newAuditOnly: 1_481,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(520);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(525);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_486);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_481);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(118);
+    expect(newDirect).toHaveLength(123);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -700,6 +700,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'VertexDisplaceModifierOptions',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free vertex-displacement modifier options',
+        }),
+        expect.objectContaining({
+          name: 'InteractionManager',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free interaction manager',
+        }),
+        expect.objectContaining({
+          name: 'InputState',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free input state',
+        }),
+        expect.objectContaining({
+          name: 'PointerEventData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free pointer event data',
+        }),
+        expect.objectContaining({
+          name: 'NodeInteractionState',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free node interaction state',
+        }),
+        expect.objectContaining({
+          name: 'InteractionPointerState',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free interaction pointer state',
         }),
       ]),
     );
@@ -1294,6 +1319,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#VertexDisplaceModifierOptions',
         purpose: 'reviewed escape-free vertex-displacement modifier options',
       },
+      {
+        declarationFingerprint: 'sha256:862e11110d27a2fae69cc108968d79f6b75dfb8719760df193c2f036752e10e6',
+        id: '@flighthq/types:interface#InteractionManager',
+        purpose: 'reviewed escape-free interaction manager',
+      },
+      {
+        declarationFingerprint: 'sha256:216dce6f67c2e578771f19028b5b6df661f640ecf89609634c0f5537d28f30e7',
+        id: '@flighthq/types:interface#InputState',
+        purpose: 'reviewed escape-free input state',
+      },
+      {
+        declarationFingerprint: 'sha256:a21b27d68119da759ea2e963106f0280744090b06621aba95150c883bc80fb23',
+        id: '@flighthq/types:interface#PointerEventData',
+        purpose: 'reviewed escape-free pointer event data',
+      },
+      {
+        declarationFingerprint: 'sha256:1a80443ef92b7e9bc7ac2dd87e10ced28db13469f8d2df5f858aa35a5a986944',
+        id: '@flighthq/types:interface#NodeInteractionState',
+        purpose: 'reviewed escape-free node interaction state',
+      },
+      {
+        declarationFingerprint: 'sha256:6c846f5649ce0d7c3800c0bf309bebafb3e4bc1f67b56d12bc9e2acce5c9d262',
+        id: '@flighthq/types:interface#InteractionPointerState',
+        purpose: 'reviewed escape-free interaction pointer state',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -1885,6 +1935,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const interactionStateCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'InputState',
+            'InteractionManager',
+            'InteractionPointerState',
+            'NodeInteractionState',
+            'PointerEventData',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1925,22 +1988,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_486,
+      auditOnlySchemas: 1_481,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 20_997,
-      directSchemas: 518,
+      directAccesses: 21_145,
+      directSchemas: 523,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 9_669,
+      pendingAccesses: 9_521,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_486,
+      newAuditOnly: 1_481,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1953,8 +2016,8 @@ describe('typed struct analysis', () => {
       containmentEdges: 2_059,
     });
     expect(typeErasureReport.summary).toMatchObject({
-      byReason: expect.objectContaining({ 'standard-toolkit-boundary': 17_935 }),
-      total: 24_151,
+      byReason: expect.objectContaining({ 'source-never': 116, 'standard-toolkit-boundary': 17_935 }),
+      total: 24_157,
     });
     expect(
       typeErasureReport.modules
@@ -1983,6 +2046,14 @@ describe('typed struct analysis', () => {
         total: 27,
       },
     ]);
+    expect(
+      typeErasureReport.modules.find(({ module }) => module === 'flighthq.interaction.NodeInteractionState'),
+    ).toEqual({
+      byReason: { 'source-never': 12 },
+      module: 'flighthq.interaction.NodeInteractionState',
+      source: 'upstream/packages/interaction/src/nodeInteractionState.ts',
+      total: 12,
+    });
     expect(rectangle?.eligible).toBe(true);
     expect(rectangle?.reasons).not.toContain('presence-sensitive-use');
     expect(rectangle?.escapes).toEqual(
@@ -1999,7 +2070,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(20_997);
+    expect(report.summary.directAccesses).toBe(21_145);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2139,6 +2210,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(shadingModifierOptionCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'InteractionManager',
+        49,
+        'sha256:862e11110d27a2fae69cc108968d79f6b75dfb8719760df193c2f036752e10e6',
+        'reviewed escape-free interaction manager',
+      ],
+      [
+        'InputState',
+        37,
+        'sha256:216dce6f67c2e578771f19028b5b6df661f640ecf89609634c0f5537d28f30e7',
+        'reviewed escape-free input state',
+      ],
+      [
+        'PointerEventData',
+        28,
+        'sha256:a21b27d68119da759ea2e963106f0280744090b06621aba95150c883bc80fb23',
+        'reviewed escape-free pointer event data',
+      ],
+      [
+        'NodeInteractionState',
+        19,
+        'sha256:1a80443ef92b7e9bc7ac2dd87e10ced28db13469f8d2df5f858aa35a5a986944',
+        'reviewed escape-free node interaction state',
+      ],
+      [
+        'InteractionPointerState',
+        15,
+        'sha256:6c846f5649ce0d7c3800c0bf309bebafb3e4bc1f67b56d12bc9e2acce5c9d262',
+        'reviewed escape-free interaction pointer state',
+      ],
+    ] as const) {
+      expect(interactionStateCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -3641,6 +3754,44 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(shadingModifierOptionsId)).toBe(false);
     }
+    for (const closedInteractionId of [
+      '@flighthq/types:interface#InputState',
+      '@flighthq/types:interface#InteractionManager',
+    ]) {
+      expect(classAuditById.get(closedInteractionId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.get(closedInteractionId)?.nominalIdentity).toEqual({ blockerReasons: [], closed: true });
+    }
+    const pointerEventDataId = '@flighthq/types:interface#PointerEventData';
+    expect(classAuditById.get(pointerEventDataId)?.migration).toEqual({
+      mechanicallyCompatible: false,
+      normalizationReasons: ['cross-schema-transfer'],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.has(pointerEventDataId)).toBe(false);
+    const nodeInteractionStateId = '@flighthq/types:interface#NodeInteractionState';
+    expect(classAuditById.get(nodeInteractionStateId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(nodeInteractionStateId)?.nominalIdentity).toEqual({
+      blockerReasons: ['normalization-provenance'],
+      closed: false,
+    });
+    const interactionPointerStateId = '@flighthq/types:interface#InteractionPointerState';
+    expect(classAuditById.get(interactionPointerStateId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(interactionPointerStateId)?.nominalIdentity).toEqual({
+      blockerReasons: ['container-transfer'],
+      closed: false,
+    });
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -3997,6 +4148,28 @@ describe('typed struct analysis', () => {
       expect(generatedModifierOptions).not.toMatch(
         /\(cast options : (?:AnimatedNormalModifierOptions|DissolveModifierOptions|EmissiveModifierOptions|FogModifierOptions|VertexDisplaceModifierOptions)\)\./u,
       );
+    }
+    const generatedTypedInputManager = readFileSync('generated/flighthq/input/InputManager.hx', 'utf8');
+    expect(generatedTypedInputManager).not.toMatch(/_Runtime\.field\(state,/u);
+    expect(generatedTypedInputManager).not.toMatch(/\(cast state : InputState\)\./u);
+    const generatedInteractionManager = readFileSync('generated/flighthq/interaction/InteractionManager.hx', 'utf8');
+    expect(generatedInteractionManager).not.toMatch(/_Runtime\.field\((?:data|manager|state),/u);
+    expect(generatedInteractionManager).not.toMatch(
+      /\(cast (?:data|manager|state) : (?:flighthq\.types\.)?(?:InteractionManager|InteractionPointerState|PointerEventData)(?:<[^>]+>)?\)\./u,
+    );
+    const generatedInteractionSpatialIndex = readFileSync(
+      'generated/flighthq/interaction/InteractionSpatialIndex.hx',
+      'utf8',
+    );
+    expect(generatedInteractionSpatialIndex).not.toMatch(/\(cast manager : InteractionManager<[^>]+>\)\./u);
+    for (const path of [
+      'generated/flighthq/interaction/HitTests.hx',
+      'generated/flighthq/interaction/InteractionSpatialIndex.hx',
+      'generated/flighthq/interaction/NodeInteractionState.hx',
+    ]) {
+      const generatedOptionalInteractionState = readFileSync(path, 'utf8');
+      expect(generatedOptionalInteractionState).toContain('__typedStruct');
+      expect(generatedOptionalInteractionState).not.toContain('__structural');
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
