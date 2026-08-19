@@ -291,7 +291,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#IpcTarget` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#LayoutResolutionExplanation` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#LayoutState` | 28 | 8 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#LayoutTree` | 0 | 1 | 1 | 1 | 0 | 0 | 1 | 3 | yes | — |
+| `@flighthq/types:interface#LayoutTree` | 17 | 1 | 1 | 1 | 0 | 0 | 1 | 3 | yes | — |
 | `@flighthq/types:interface#LibgdxAtlasDocument` | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LibgdxAtlasPage` | 0 | 7 | 1 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LibgdxAtlasRegion` | 0 | 8 | 1 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -525,7 +525,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#SocketRuntime` | 43 | 5 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SocketSignals` | 0 | 4 | 1 | 4 | 0 | 0 | 1 | 2 | yes | — |
 | `@flighthq/types:interface#SoftKeyboard` | 0 | 9 | 0 | 9 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#SoftKeyboardInfo` | 0 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#SoftKeyboardInfo` | 17 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SoftKeyboardTransition` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#SpatialIndex` | 0 | 1 | 2 | 1 | 0 | 0 | 3 | 2 | yes | — |
 | `@flighthq/types:interface#SpatialIndexingExplanation` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |

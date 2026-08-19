@@ -56,7 +56,7 @@ class DomSprite {
     var isFullTexture:Bool = cast _Runtime.UNDEFINED;
     data = (cast (cast renderProxy : RenderProxy2D).rendererData : Null<DomSpriteData__domSprite>);
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
-    texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : Sprite).data : SpriteData).texture;
+    texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : SpriteData).texture;
     if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool)) { return; }
     source = (cast resolveDomTexture(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = texture; __callArgument3; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return; }
@@ -84,7 +84,7 @@ class DomSprite {
       ((cast data : DomSpriteData__domSprite).context = flighthq._internal.backend.CanvasElementBackend.call((cast data : DomSpriteData__domSprite).canvas, 'getContext', cast (['2d'] : Array<Dynamic>)));
       prepareDomElement(({ final __callArgument15:Dynamic = (cast data : DomSpriteData__domSprite).canvas; __callArgument15; }));
     }
-    texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : Sprite).data : SpriteData).texture;
+    texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : SpriteData).texture;
     pixelRatio = (cast state : DomRenderState).pixelRatio;
     flighthq._internal.backend.CanvasElementBackend.setField((cast data : DomSpriteData__domSprite).canvas, 'width', ((cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).width * pixelRatio));
     flighthq._internal.backend.CanvasElementBackend.setField((cast data : DomSpriteData__domSprite).canvas, 'height', ((cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).height * pixelRatio));

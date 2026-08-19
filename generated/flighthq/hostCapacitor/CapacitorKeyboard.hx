@@ -40,11 +40,11 @@ class CapacitorKeyboard {
 
     });
     return cast { getInfo: function(out:SoftKeyboardInfo):SoftKeyboardInfo {
-      ((cast out : SoftKeyboardInfo).visible = mirrorVisible);
-      ((cast out : SoftKeyboardInfo).height = mirrorHeight);
-      ((cast out : SoftKeyboardInfo).x = 0.0);
-      ((cast out : SoftKeyboardInfo).y = 0.0);
-      ((cast out : SoftKeyboardInfo).width = 0.0);
+      (out.visible = cast (mirrorVisible : Bool));
+      (out.height = cast (mirrorHeight : Float));
+      (out.x = cast (0.0 : Float));
+      (out.y = cast (0.0 : Float));
+      (out.width = cast (0.0 : Float));
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, hide: function():Void {

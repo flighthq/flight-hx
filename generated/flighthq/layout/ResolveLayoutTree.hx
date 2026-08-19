@@ -19,7 +19,7 @@ class ResolveLayoutTree {
     if ((cast ((cast !_Runtime.strictEquals(state.lastFailureKind, null) : Bool) && (cast _Runtime.orValue(((cast ((cast nodeIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast state.lastFailureNodeIndex : Float) < (cast 0.0 : Float)) : Bool)), function():Dynamic return cast _Runtime.strictEquals(nodeIndex, state.lastFailureNodeIndex)) : Bool)) : Bool)) {
       return cast { actualLength: state.lastFailureActualLength, kind: state.lastFailureKind, nodeIndex: state.lastFailureNodeIndex, parentIndex: state.lastFailureParentIndex, requiredLength: state.lastFailureRequiredLength, resolverKind: state.lastFailureResolverKind };
     }
-    nodes = _Runtime.field(tree, 'nodes');
+    nodes = tree.nodes;
     if ((cast ((cast ((cast nodeIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast nodeIndex : Float) >= (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) : Bool)) { return cast null; }
     node = flighthq._internal._StaticIndex.readArray(nodes, nodeIndex);
     if ((cast ((cast ((cast node.parentIndex : Float) < (cast -1.0 : Float)) : Bool) || (cast ((cast node.parentIndex : Float) >= (cast nodeIndex : Float)) : Bool)) : Bool)) {
@@ -45,7 +45,7 @@ class ResolveLayoutTree {
     var rootWidth:Float = cast _Runtime.UNDEFINED;
     var rootHeight:Float = cast _Runtime.UNDEFINED;
     ResolveLayoutTree.clearLayoutFailure__resolveLayoutTree(({ final __callArgument4:Dynamic = state; __callArgument4; }));
-    nodes = _Runtime.field(tree, 'nodes');
+    nodes = tree.nodes;
     requiredOutLength = _Runtime.multiplyNumbers(_Runtime.field(nodes, 'length'), 4.0);
     if ((cast ((cast _Runtime.field(out, 'length') : Float) < (cast requiredOutLength : Float)) : Bool)) {
       return cast (cast ResolveLayoutTree.failLayoutResolution__resolveLayoutTree(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = tree; __callArgument6; }), ({ final __callArgument7:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).OutputTooSmall; __callArgument7; }), (cast -1.0 : Float), (cast -1.0 : Float), (cast requiredOutLength : Float), (cast _Runtime.field(out, 'length') : Float), ({ final __callArgument8:Dynamic = null; __callArgument8; })) : Bool);

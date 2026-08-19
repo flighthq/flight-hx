@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_401,
+      newAuditOnly: 1_396,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(605);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(610);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_401);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_396);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(203);
+    expect(newDirect).toHaveLength(208);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1125,6 +1125,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'WgpuQuadBatchWriterBufferSlot',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free WebGPU quad-batch buffer slot',
+        }),
+        expect.objectContaining({
+          name: 'TextShaperBackend',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free text-shaper backend',
+        }),
+        expect.objectContaining({
+          name: 'TextLayoutParams',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free text-layout parameters',
+        }),
+        expect.objectContaining({
+          name: 'SoftKeyboardInfo',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free soft-keyboard info',
+        }),
+        expect.objectContaining({
+          name: 'LayoutTree',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free layout tree',
+        }),
+        expect.objectContaining({
+          name: 'Sprite',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free sprite',
         }),
       ]),
     );
@@ -2144,6 +2169,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot',
         purpose: 'reviewed escape-free WebGPU quad-batch buffer slot',
       },
+      {
+        declarationFingerprint: 'sha256:a6d76855c342cc710304eff6c3034f16a3853a751ee704d881de32f764d3c047',
+        id: '@flighthq/types:interface#TextShaperBackend',
+        purpose: 'reviewed escape-free text-shaper backend',
+      },
+      {
+        declarationFingerprint: 'sha256:1f2c95acb12ba7582d7411b09d418cf403f8a1cfd850662b185e4c344cecdd40',
+        id: '@flighthq/types:interface#TextLayoutParams',
+        purpose: 'reviewed escape-free text-layout parameters',
+      },
+      {
+        declarationFingerprint: 'sha256:0d37ab980102fd6c29da9c33e3ff69749aa8fc3fceed59fed424bf51c17c3ca4',
+        id: '@flighthq/types:interface#SoftKeyboardInfo',
+        purpose: 'reviewed escape-free soft-keyboard info',
+      },
+      {
+        declarationFingerprint: 'sha256:490d3123a670ddb1d15cd2cfd73da271b75c8e85cc7f1fe029718b2079329e7a',
+        id: '@flighthq/types:interface#LayoutTree',
+        purpose: 'reviewed escape-free layout tree',
+      },
+      {
+        declarationFingerprint: 'sha256:d7459435d0471453f1a562948d6fa63807ac8d1381c6ea5874b6f8299eb1b9c2',
+        id: '@flighthq/types:interface#Sprite',
+        purpose: 'reviewed escape-free sprite',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -2920,6 +2970,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const fourteenthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['LayoutTree', 'SoftKeyboardInfo', 'Sprite', 'TextLayoutParams', 'TextShaperBackend'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -2960,22 +3019,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_401,
+      auditOnlySchemas: 1_396,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 23_082,
-      directSchemas: 603,
+      directAccesses: 23_166,
+      directSchemas: 608,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 7_584,
+      pendingAccesses: 7_500,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_401,
+      newAuditOnly: 1_396,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -3052,7 +3111,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(23_082);
+    expect(report.summary.directAccesses).toBe(23_166);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -3854,6 +3913,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(thirteenthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'TextShaperBackend',
+        17,
+        'sha256:a6d76855c342cc710304eff6c3034f16a3853a751ee704d881de32f764d3c047',
+        'reviewed escape-free text-shaper backend',
+      ],
+      [
+        'TextLayoutParams',
+        17,
+        'sha256:1f2c95acb12ba7582d7411b09d418cf403f8a1cfd850662b185e4c344cecdd40',
+        'reviewed escape-free text-layout parameters',
+      ],
+      [
+        'SoftKeyboardInfo',
+        17,
+        'sha256:0d37ab980102fd6c29da9c33e3ff69749aa8fc3fceed59fed424bf51c17c3ca4',
+        'reviewed escape-free soft-keyboard info',
+      ],
+      [
+        'LayoutTree',
+        17,
+        'sha256:490d3123a670ddb1d15cd2cfd73da271b75c8e85cc7f1fe029718b2079329e7a',
+        'reviewed escape-free layout tree',
+      ],
+      [
+        'Sprite',
+        16,
+        'sha256:d7459435d0471453f1a562948d6fa63807ac8d1381c6ea5874b6f8299eb1b9c2',
+        'reviewed escape-free sprite',
+      ],
+    ] as const) {
+      expect(fourteenthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -5561,6 +5662,24 @@ describe('typed struct analysis', () => {
       }
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#TextShaperBackend', true, [], [], null],
+      ['@flighthq/types:interface#TextLayoutParams', true, [], ['object-spread', 'optional-omission'], null],
+      ['@flighthq/types:interface#SoftKeyboardInfo', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#LayoutTree', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#Sprite', false, ['cross-schema-transfer'], [], null],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
         true,
@@ -6553,6 +6672,29 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:GlRenderTexturePool|GlShadedProgram|GlShapeRendererData|WgpuQuadBatchWriterBufferSlot|WgpuRenderTexturePool)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/hostCapacitor/CapacitorKeyboard.hx',
+      'generated/flighthq/interaction/RegisterSpriteHitTest.hx',
+      'generated/flighthq/keyboard/Keyboard.hx',
+      'generated/flighthq/layout/AnchorLayout.hx',
+      'generated/flighthq/layout/FlexLayout.hx',
+      'generated/flighthq/layout/GridLayout.hx',
+      'generated/flighthq/layout/ResolveLayoutTree.hx',
+      'generated/flighthq/movieclip/SpritesheetTimelineSource.hx',
+      'generated/flighthq/scene2d/Sprite.hx',
+      'generated/flighthq/scene2dCanvas/CanvasSprite.hx',
+      'generated/flighthq/scene2dDom/DomSprite.hx',
+      'generated/flighthq/scene2dGl/GlSprite.hx',
+      'generated/flighthq/scene2dWgpu/WgpuSprite.hx',
+      'generated/flighthq/swf/SwfDocument.hx',
+      'generated/flighthq/textlayout/TextLayout.hx',
+      'generated/flighthq/textshaper/TextShaper.hx',
+      'generated/flighthq/textshaper/TextShaperRun.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:LayoutTree|SoftKeyboardInfo|Sprite|TextLayoutParams|TextShaperBackend)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

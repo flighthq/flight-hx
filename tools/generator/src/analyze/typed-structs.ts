@@ -1043,6 +1043,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot',
     purpose: 'reviewed escape-free WebGPU quad-batch buffer slot',
   },
+  {
+    declarationFingerprint: 'sha256:a6d76855c342cc710304eff6c3034f16a3853a751ee704d881de32f764d3c047',
+    id: '@flighthq/types:interface#TextShaperBackend',
+    purpose: 'reviewed escape-free text-shaper backend',
+  },
+  {
+    declarationFingerprint: 'sha256:1f2c95acb12ba7582d7411b09d418cf403f8a1cfd850662b185e4c344cecdd40',
+    id: '@flighthq/types:interface#TextLayoutParams',
+    purpose: 'reviewed escape-free text-layout parameters',
+  },
+  {
+    declarationFingerprint: 'sha256:0d37ab980102fd6c29da9c33e3ff69749aa8fc3fceed59fed424bf51c17c3ca4',
+    id: '@flighthq/types:interface#SoftKeyboardInfo',
+    purpose: 'reviewed escape-free soft-keyboard info',
+  },
+  {
+    declarationFingerprint: 'sha256:490d3123a670ddb1d15cd2cfd73da271b75c8e85cc7f1fe029718b2079329e7a',
+    id: '@flighthq/types:interface#LayoutTree',
+    purpose: 'reviewed escape-free layout tree',
+  },
+  {
+    declarationFingerprint: 'sha256:d7459435d0471453f1a562948d6fa63807ac8d1381c6ea5874b6f8299eb1b9c2',
+    id: '@flighthq/types:interface#Sprite',
+    purpose: 'reviewed escape-free sprite',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

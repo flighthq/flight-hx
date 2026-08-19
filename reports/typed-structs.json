@@ -166260,9 +166260,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 17,
+        "directAccesses": 17,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -166284,7 +166284,7 @@
       },
       "name": "LayoutTree",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free layout tree",
       "reasons": [],
       "source": "upstream/packages/types/src/Layout.ts",
       "sourceProvenance": {
@@ -318171,9 +318171,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 17,
+        "directAccesses": 17,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -318227,7 +318227,7 @@
       },
       "name": "SoftKeyboardInfo",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free soft-keyboard info",
       "reasons": [],
       "source": "upstream/packages/types/src/Keyboard.ts",
       "sourceProvenance": {
@@ -326871,9 +326871,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 16,
+        "directAccesses": 16,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -327045,7 +327045,7 @@
       },
       "name": "Sprite",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free sprite",
       "reasons": [],
       "source": "upstream/packages/types/src/Sprite.ts",
       "sourceProvenance": {
@@ -351174,9 +351174,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 17,
+        "directAccesses": 17,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -351302,7 +351302,7 @@
       },
       "name": "TextLayoutParams",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free text-layout parameters",
       "reasons": [],
       "source": "upstream/packages/types/src/TextLayout.ts",
       "sourceProvenance": {
@@ -353317,9 +353317,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 17,
+        "directAccesses": 17,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -353389,7 +353389,7 @@
       },
       "name": "TextShaperBackend",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free text-shaper backend",
       "reasons": [],
       "source": "upstream/packages/types/src/TextShaper.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1401,
+      "newAuditOnly": 1396,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1401,
+    "auditOnlySchemas": 1396,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 23082,
-    "directSchemas": 603,
+    "directAccesses": 23166,
+    "directSchemas": 608,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 7584,
+    "pendingAccesses": 7500,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

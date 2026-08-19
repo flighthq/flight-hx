@@ -33,7 +33,7 @@ class TextLayout {
   public static final _paragraphLastLines__textLayout:flighthq._internal._Set<Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
 
   public static function computeTextLayout(out:TextLayoutResult, params:TextLayoutParams):Void {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:TextLayoutParams = cast _Runtime.UNDEFINED;
     var text:String = cast _Runtime.UNDEFINED;
     var formatRanges:Array<TextFormatRange> = cast _Runtime.UNDEFINED;
     var width:Float = cast _Runtime.UNDEFINED;
@@ -48,19 +48,19 @@ class TextLayout {
     var truncationCharacter:String = cast _Runtime.UNDEFINED;
     var verticalAlign:TextVerticalAlign = cast _Runtime.UNDEFINED;
     __destructure0 = params;
-    text = _Runtime.field(__destructure0, 'text');
-    formatRanges = _Runtime.field(__destructure0, 'formatRanges');
-    width = _Runtime.field(__destructure0, 'width');
-    measure = _Runtime.field(__destructure0, 'measure');
-    wordWrap = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'wordWrap'), function():Dynamic return cast false);
-    multiline = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'multiline'), function():Dynamic return cast false);
-    autoSize = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'autoSize'), function():Dynamic return cast 'none');
-    border = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'border'), function():Dynamic return cast false);
-    direction = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'direction'), function():Dynamic return cast 'LeftToRight');
-    justification = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'justification'), function():Dynamic return cast 'interWord');
-    maxLines = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'maxLines'), function():Dynamic return cast -1.0);
-    truncationCharacter = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'truncationCharacter'), function():Dynamic return cast '…');
-    verticalAlign = _Runtime.defaultUndefined(_Runtime.field(__destructure0, 'verticalAlign'), function():Dynamic return cast 'top');
+    text = __destructure0.text;
+    formatRanges = __destructure0.formatRanges;
+    width = __destructure0.width;
+    measure = __destructure0.measure;
+    wordWrap = _Runtime.defaultUndefined(__destructure0.wordWrap, function():Dynamic return cast false);
+    multiline = _Runtime.defaultUndefined(__destructure0.multiline, function():Dynamic return cast false);
+    autoSize = _Runtime.defaultUndefined(__destructure0.autoSize, function():Dynamic return cast 'none');
+    border = _Runtime.defaultUndefined(__destructure0.border, function():Dynamic return cast false);
+    direction = _Runtime.defaultUndefined(__destructure0.direction, function():Dynamic return cast 'LeftToRight');
+    justification = _Runtime.defaultUndefined(__destructure0.justification, function():Dynamic return cast 'interWord');
+    maxLines = _Runtime.defaultUndefined(__destructure0.maxLines, function():Dynamic return cast -1.0);
+    truncationCharacter = _Runtime.defaultUndefined(__destructure0.truncationCharacter, function():Dynamic return cast '…');
+    verticalAlign = _Runtime.defaultUndefined(__destructure0.verticalAlign, function():Dynamic return cast 'top');
     if ((cast ((cast !_Runtime.truthy(text) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(formatRanges, 'length'), 0.0) : Bool)) : Bool)) {
       _Runtime.setLength(out.groups, 0.0);
       _Runtime.setLength(out.lineAscents, 0.0);
@@ -78,7 +78,7 @@ class TextLayout {
     TextLayout.buildGroups__textLayout(out.groups, ({ final __callArgument1:Dynamic = TextLayout._paragraphLastLines__textLayout; __callArgument1; }), (cast text : String), ({ final __callArgument2:Dynamic = formatRanges; __callArgument2; }), ({ final __callArgument3:Dynamic = TextLayout._lineBreaks__textLayout; __callArgument3; }), (cast width : Float), ({ final __callArgument4:Dynamic = measure; __callArgument4; }), (cast wordWrap : Bool), (cast multiline : Bool), (cast maxLines : Float), (cast truncationCharacter : String));
     TextLayout.writeLineMetrics__textLayout(({ final __callArgument5:Dynamic = out; __callArgument5; }), out.groups);
     TextLayout.applyAlignment__textLayout(out.groups, (cast width : Float), out.lineWidths, ({ final __callArgument6:Dynamic = direction; __callArgument6; }), ({ final __callArgument7:Dynamic = justification; __callArgument7; }), ({ final __callArgument8:Dynamic = TextLayout._paragraphLastLines__textLayout; __callArgument8; }), (cast text : String));
-    TextLayout.applyVerticalAlignment__textLayout(out.groups, (cast (cast params : TextLayoutParams).height : Float), (cast out.textHeight : Float), ({ final __callArgument9:Dynamic = verticalAlign; __callArgument9; }));
+    TextLayout.applyVerticalAlignment__textLayout(out.groups, (cast params.height : Float), (cast out.textHeight : Float), ({ final __callArgument9:Dynamic = verticalAlign; __callArgument9; }));
     _Runtime.voidValue(autoSize);
     _Runtime.voidValue(border);
   }
@@ -658,8 +658,8 @@ class TextLayout {
   }
 
   public static function isTextLayoutTruncated(layout:TextLayoutResult, params:TextLayoutParams):Bool {
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(params, 'maxLines'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.field(params, 'maxLines') : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
-    return cast ((cast ((cast layout.numLines : Float) >= (cast _Runtime.field(params, 'maxLines') : Float)) : Bool) && (cast ((cast _Runtime.field(layout.groups, 'length') : Float) > (cast 0.0 : Float)) : Bool));
+    if ((cast ((cast _Runtime.strictEquals(params.maxLines, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast params.maxLines : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
+    return cast ((cast ((cast layout.numLines : Float) >= (cast params.maxLines : Float)) : Bool) && (cast ((cast _Runtime.field(layout.groups, 'length') : Float) > (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 }

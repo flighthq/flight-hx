@@ -33,14 +33,14 @@ class Keyboard {
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
     detachSoftKeyboard(({ final __callArgument0:Dynamic = keyboard; __callArgument0; }));
     backend = (cast getSoftKeyboardBackend() : SoftKeyboardBackend);
-    wasVisible = (cast (cast backend : SoftKeyboardBackend).getInfo(({ final __callArgument1:Dynamic = Keyboard._scratch__keyboard; __callArgument1; })) : SoftKeyboardInfo).visible;
+    wasVisible = (cast (cast backend : SoftKeyboardBackend).getInfo(({ final __callArgument1:Dynamic = Keyboard._scratch__keyboard; __callArgument1; })) : { var visible:Bool; }).visible;
     unsubscribe = (cast backend : SoftKeyboardBackend).subscribe(({ final __callArgument3:Dynamic = function(phase:SoftKeyboardPhase, transition:SoftKeyboardTransition):Void {
       var prevVisible:Bool = cast _Runtime.UNDEFINED;
       var info:SoftKeyboardInfo = cast _Runtime.UNDEFINED;
       var nowVisible:Bool = cast _Runtime.UNDEFINED;
       prevVisible = wasVisible;
       info = (cast backend : SoftKeyboardBackend).getInfo(({ final __callArgument2:Dynamic = Keyboard._scratch__keyboard; __callArgument2; }));
-      nowVisible = (cast info : SoftKeyboardInfo).visible;
+      nowVisible = info.visible;
       if ((cast _Runtime.strictEquals(phase, 'will') : Bool)) {
         if ((cast ((cast nowVisible : Bool) && (cast !(cast prevVisible : Bool) : Bool)) : Bool)) {
           _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onWillShow], [transition]]), 1);
@@ -50,13 +50,13 @@ class Keyboard {
           _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onWillResize], [transition]]), 1);
         } }
       } else {
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onDidResize], [(cast info : SoftKeyboardInfo).height]]), 1);
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onResize], [(cast info : SoftKeyboardInfo).height]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onDidResize], [info.height]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onResize], [info.height]]), 1);
         if ((cast !_Runtime.strictEquals(nowVisible, prevVisible) : Bool)) {
           (wasVisible = cast (nowVisible : Dynamic));
           if ((cast nowVisible : Bool)) {
-            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onDidShow], [(cast info : SoftKeyboardInfo).height]]), 1);
-            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onShow], [(cast info : SoftKeyboardInfo).height]]), 1);
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onDidShow], [info.height]]), 1);
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onShow], [info.height]]), 1);
           } else {
             _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onDidHide]]), 1);
             _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onHide]]), 1);
@@ -88,11 +88,11 @@ class Keyboard {
     return cast { getInfo: function(out:SoftKeyboardInfo):SoftKeyboardInfo {
       var geo:WebKeyboardGeometry__keyboard = cast _Runtime.UNDEFINED;
       geo = (cast Keyboard.getWebKeyboardGeometry__keyboard() : WebKeyboardGeometry__keyboard);
-      ((cast out : SoftKeyboardInfo).height = (cast geo : WebKeyboardGeometry__keyboard).height);
-      ((cast out : SoftKeyboardInfo).visible = ((cast (cast geo : WebKeyboardGeometry__keyboard).height : Float) > (cast 0.0 : Float)));
-      ((cast out : SoftKeyboardInfo).x = (cast geo : WebKeyboardGeometry__keyboard).x);
-      ((cast out : SoftKeyboardInfo).y = (cast geo : WebKeyboardGeometry__keyboard).y);
-      ((cast out : SoftKeyboardInfo).width = (cast geo : WebKeyboardGeometry__keyboard).width);
+      (out.height = cast ((cast geo : WebKeyboardGeometry__keyboard).height : Float));
+      (out.visible = cast (((cast (cast geo : WebKeyboardGeometry__keyboard).height : Float) > (cast 0.0 : Float)) : Bool));
+      (out.x = cast ((cast geo : WebKeyboardGeometry__keyboard).x : Float));
+      (out.y = cast ((cast geo : WebKeyboardGeometry__keyboard).y : Float));
+      (out.width = cast ((cast geo : WebKeyboardGeometry__keyboard).width : Float));
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, subscribe: function(listener:SoftKeyboardPhase->SoftKeyboardTransition->Void):Void->Void {
@@ -158,7 +158,7 @@ class Keyboard {
   }
 
   public static function getSoftKeyboardHeight():Float {
-    return cast (cast (cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).getInfo(({ final __callArgument9:Dynamic = Keyboard._scratch__keyboard; __callArgument9; })) : SoftKeyboardInfo).height;
+    return cast (cast (cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).getInfo(({ final __callArgument9:Dynamic = Keyboard._scratch__keyboard; __callArgument9; })) : { var height:Float; }).height;
     return cast null;
   }
 

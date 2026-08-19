@@ -52,9 +52,9 @@ class SpritesheetTimelineSource {
       }
       sheetFrame = flighthq._internal._StaticIndex.readArray(spritesheet.frames, flighthq._internal._StaticIndex.readFloatArrayTyped((cast frames : Array<Float>), (cast (frame - 1.0) : Float)));
       if ((cast _Runtime.strictEquals(sheetFrame, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-      ((cast (cast bitmap : Sprite).data : SpriteData).texture = (cast getTextureAtlasRegionTexture(({ final __callArgument3:Dynamic = atlas; __callArgument3; }), (cast sheetFrame.id : Float)) : Null<Texture2D>));
-      ((cast bitmap : Sprite).x = (sheetFrame.offsetX - animation.originX));
-      ((cast bitmap : Sprite).y = (sheetFrame.offsetY - animation.originY));
+      ((cast (cast bitmap : { var data:SpriteData; }).data : SpriteData).texture = (cast getTextureAtlasRegionTexture(({ final __callArgument3:Dynamic = atlas; __callArgument3; }), (cast sheetFrame.id : Float)) : Null<Texture2D>));
+      ((cast bitmap : { var x:Float; }).x = cast ((sheetFrame.offsetX - animation.originX) : Float));
+      ((cast bitmap : { var y:Float; }).y = cast ((sheetFrame.offsetY - animation.originY) : Float));
       invalidateNodeLocalTransform((cast bitmap : Dynamic));
     } };
     return cast null;

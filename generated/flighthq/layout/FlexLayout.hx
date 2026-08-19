@@ -68,9 +68,9 @@ class FlexLayout {
     var targetCrossSize:Float = cast _Runtime.UNDEFINED;
     var targetCross:Float = cast _Runtime.UNDEFINED;
     var childOffset:Float = cast _Runtime.UNDEFINED;
-    containerValue = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'nodes'), parentIndex) : { var containerStyle:Null<flighthq._internal._Object>; }).containerStyle;
+    containerValue = (cast flighthq._internal._StaticIndex.readArray(tree.nodes, parentIndex) : { var containerStyle:Null<flighthq._internal._Object>; }).containerStyle;
     if ((cast !(cast (cast FlexLayout.isFlexLayoutContainerStyle__flexLayout(({ final __callArgument2:Dynamic = containerValue; __callArgument2; })) : Bool) : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidContainerStyle; }
-    itemValue = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'nodes'), childIndex) : { var itemStyle:Null<flighthq._internal._Object>; }).itemStyle;
+    itemValue = (cast flighthq._internal._StaticIndex.readArray(tree.nodes, childIndex) : { var itemStyle:Null<flighthq._internal._Object>; }).itemStyle;
     if ((cast !(cast (cast FlexLayout.isFlexLayoutItemStyle__flexLayout(({ final __callArgument3:Dynamic = itemValue; __callArgument3; })) : Bool) : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidItemStyle; }
     container = (cast containerValue : Null<FlexLayoutContainerStyle>);
     direction = _Runtime.coalesce(({ final __structural4 = container; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var direction:Null<String>; }).direction; }), function():Dynamic return cast 'row');
@@ -97,7 +97,7 @@ class FlexLayout {
     lineUsedForWrap = 0.0;
     crossOffset = 0.0;
     containsTarget = false;
-    nodes = _Runtime.field(tree, 'nodes');
+    nodes = tree.nodes;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
@@ -185,8 +185,8 @@ class FlexLayout {
     total = 0.0;
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(tree, 'nodes'), 'length') : Float)) : Bool)) {
-        var node:LayoutNode<flighthq._internal._Object, flighthq._internal._Object> = flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'nodes'), i);
+      while ((cast ((cast i : Float) < (cast _Runtime.field(tree.nodes, 'length') : Float)) : Bool)) {
+        var node:LayoutNode<flighthq._internal._Object, flighthq._internal._Object> = flighthq._internal._StaticIndex.readArray(tree.nodes, i);
         if ((cast !_Runtime.strictEquals(node.parentIndex, parentIndex) : Bool)) { i++; continue; }
         var base:Float = (cast FlexLayout.getFlexBase__flexLayout(({ final __callArgument29:Dynamic = node; __callArgument29; }), ({ final __callArgument30:Dynamic = intrinsicSizes; __callArgument30; }), (cast i : Float), (cast row : Bool)) : Float);
         if ((cast ((cast ((cast lineCount : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast ((lineUsed + gap) + base) : Float) > (cast mainSize : Float)) : Bool)) : Bool)) {
@@ -235,7 +235,7 @@ class FlexLayout {
     {
       var i:Float = startIndex;
       while ((cast ((cast i : Float) < (cast endIndex : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'nodes'), i) : { var parentIndex:Float; }).parentIndex, parentIndex) : Bool)) { count++; }
+        if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(tree.nodes, i) : { var parentIndex:Float; }).parentIndex, parentIndex) : Bool)) { count++; }
         i++;
       }
     }

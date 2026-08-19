@@ -657,9 +657,9 @@ class SwfDocument {
   public static function createSwfTexturedSprite__swfDocument(texture:Texture2D, bounds:Null<SwfRectangle__swfDocument>):Sprite {
     var target:Sprite = cast _Runtime.UNDEFINED;
     target = (cast createSprite(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Sprite);
-    ((cast (cast target : Sprite).data : SpriteData).texture = texture);
+    ((cast target.data : SpriteData).texture = texture);
     if ((cast !_Runtime.strictEquals(bounds, null) : Bool)) {
-      ((cast (cast (cast (cast target : Sprite).data : flighthq._internal._Any) : SwfAuthoredBoundsData__swfDocument) : SwfAuthoredBoundsData__swfDocument).authoredBounds = _Runtime.mergeObjects([bounds]));
+      ((cast (cast (cast target.data : flighthq._internal._Any) : SwfAuthoredBoundsData__swfDocument) : SwfAuthoredBoundsData__swfDocument).authoredBounds = _Runtime.mergeObjects([bounds]));
       ((cast (cast getNodeRuntime((cast target : Dynamic)) : Node2DRuntime) : { var computeLocalBoundsRectangle:Rectangle->BoundsNodeAny->Void; }).computeLocalBoundsRectangle = (cast SwfDocument.computeSwfLocalBoundsRectangle__swfDocument));
     }
     return cast target;

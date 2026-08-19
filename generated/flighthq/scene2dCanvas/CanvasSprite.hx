@@ -44,7 +44,7 @@ class CanvasSprite {
     var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     var smoothing:Bool = cast _Runtime.UNDEFINED;
     drawCanvasScene2D(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = sprite; __callArgument1; }));
-    texture = (cast (cast (cast (cast sprite : RenderProxy2D).source : Sprite) : Sprite).data : SpriteData).texture;
+    texture = (cast (cast (cast (cast sprite : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : SpriteData).texture;
     if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool)) { return; }
     drawable = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument2:Dynamic = state; __callArgument2; })) : CanvasTextureResolvers), ({ final __callArgument3:Dynamic = texture; __callArgument3; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(drawable, null) : Bool)) { return; }

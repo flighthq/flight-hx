@@ -27704,7 +27704,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 17,
       "fields": 1,
       "id": "@flighthq/types:interface#LayoutTree",
       "name": "LayoutTree",
@@ -46624,7 +46624,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 17,
       "fields": 5,
       "id": "@flighthq/types:interface#SoftKeyboardInfo",
       "name": "SoftKeyboardInfo",

@@ -38,9 +38,9 @@ class AnchorLayout {
     var height:Float = cast _Runtime.UNDEFINED;
     var align:ViewportAlign = cast _Runtime.UNDEFINED;
     var childOffset:Float = cast _Runtime.UNDEFINED;
-    parentStyle = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'nodes'), parentIndex) : { var containerStyle:Null<flighthq._internal._Object>; }).containerStyle;
+    parentStyle = (cast flighthq._internal._StaticIndex.readArray(tree.nodes, parentIndex) : { var containerStyle:Null<flighthq._internal._Object>; }).containerStyle;
     if ((cast !(cast (cast AnchorLayout.isEmptyStyle__anchorLayout(({ final __callArgument2:Dynamic = parentStyle; __callArgument2; })) : Bool) : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidContainerStyle; }
-    itemStyle = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(tree, 'nodes'), childIndex) : { var itemStyle:Null<flighthq._internal._Object>; }).itemStyle;
+    itemStyle = (cast flighthq._internal._StaticIndex.readArray(tree.nodes, childIndex) : { var itemStyle:Null<flighthq._internal._Object>; }).itemStyle;
     if ((cast !(cast (cast AnchorLayout.isAnchorLayoutItemStyle__anchorLayout(({ final __callArgument3:Dynamic = itemStyle; __callArgument3; })) : Bool) : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidItemStyle; }
     style = (cast itemStyle : Null<AnchorLayoutItemStyle>);
     parentOffset = (parentIndex * 4.0);
