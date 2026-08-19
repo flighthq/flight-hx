@@ -18,9 +18,9 @@ class ConvolutionEffect {
   public static function getConvolutionEffectPadding(effect:flighthq.types.ConvolutionEffect):RenderEffectPadding {
     var offsetX:Float = cast _Runtime.UNDEFINED;
     var offsetY:Float = cast _Runtime.UNDEFINED;
-    offsetX = HxMath.floor(_Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.field(effect, 'matrixX')), 0.5));
-    offsetY = HxMath.floor(_Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.field(effect, 'matrixY')), 0.5));
-    return cast { bottom: offsetY, left: HxMath.max(0.0, (_Runtime.subtractNumbers(_Runtime.field(effect, 'matrixX'), 1.0) - offsetX)), right: offsetX, top: HxMath.max(0.0, (_Runtime.subtractNumbers(_Runtime.field(effect, 'matrixY'), 1.0) - offsetY)) };
+    offsetX = HxMath.floor(_Runtime.multiplyNumbers(HxMath.max(0.0, effect.matrixX), 0.5));
+    offsetY = HxMath.floor(_Runtime.multiplyNumbers(HxMath.max(0.0, effect.matrixY), 0.5));
+    return cast { bottom: offsetY, left: HxMath.max(0.0, ((effect.matrixX - 1.0) - offsetX)), right: offsetX, top: HxMath.max(0.0, ((effect.matrixY - 1.0) - offsetY)) };
     return cast null;
   }
 

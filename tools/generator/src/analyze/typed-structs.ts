@@ -943,6 +943,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#LogEntry',
     purpose: 'reviewed escape-free log entry',
   },
+  {
+    declarationFingerprint: 'sha256:1c993883bad8944cd6da043e55da9b6014270eb750d3a0fbc840c9cd107de2b0',
+    id: '@flighthq/types:interface#ToonMaterial',
+    purpose: 'reviewed escape-free toon material',
+  },
+  {
+    declarationFingerprint: 'sha256:eb909d67f4277244c321489bb2cd34a8cb5cc3de0bfade3146aa4c09fb4b27f0',
+    id: '@flighthq/types:interface#UnlitMaterial',
+    purpose: 'reviewed escape-free unlit material',
+  },
+  {
+    declarationFingerprint: 'sha256:bde9a7679c21f48a1a9479c7bfcd6dd049d9255cee1c88feaecc530e7fbfb5fc',
+    id: '@flighthq/types:interface#ConvolutionEffect',
+    purpose: 'reviewed escape-free convolution effect',
+  },
+  {
+    declarationFingerprint: 'sha256:69801d3535461cd2a982b945b3099efbf3129d5d5152ed829a5e5ab849141c58',
+    id: '@flighthq/types:interface#EmissiveMaterial',
+    purpose: 'reviewed escape-free emissive material',
+  },
+  {
+    declarationFingerprint: 'sha256:58e62708f57df42b10b3295377b9c994df1e99c342cdf02e0df5ddac41df98f5',
+    id: '@flighthq/types:interface#TransformInherit2D',
+    purpose: 'reviewed escape-free 2D transform inheritance',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

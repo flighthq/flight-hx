@@ -20,7 +20,7 @@ class WgpuConvolutionEffect {
 
   @:noCompletion
   public static function applyConvolutionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ConvolutionEffect):Void {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ConvolutionEffect = cast _Runtime.UNDEFINED;
     var matrix:Array<Float> = cast _Runtime.UNDEFINED;
     var matrixX:Float = cast _Runtime.UNDEFINED;
     var matrixY:Float = cast _Runtime.UNDEFINED;
@@ -31,17 +31,17 @@ class WgpuConvolutionEffect {
     var divisor:Float = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     __destructure0 = effect;
-    matrix = _Runtime.field(__destructure0, 'matrix');
-    matrixX = _Runtime.field(__destructure0, 'matrixX');
-    matrixY = _Runtime.field(__destructure0, 'matrixY');
+    matrix = __destructure0.matrix;
+    matrixX = __destructure0.matrixX;
+    matrixY = __destructure0.matrixY;
     if ((cast ((cast ((cast matrixX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast matrixY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution matrix dimensions must be positive')); }
     if ((cast ((cast (matrixX * matrixY) : Float) > (cast MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution kernel exceeds the WebGPU maximum of 7×7 (' + Std.string(matrixX) + '×' + Std.string(matrixY) + ' given)')); }
     if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution matrix does not match its declared dimensions')); }
-    bias = _Runtime.coalesce(_Runtime.field(effect, 'bias'), function():Dynamic return cast 0.0);
-    clampEdge = _Runtime.coalesce(_Runtime.field(effect, 'clamp'), function():Dynamic return cast true);
-    preserveAlpha = _Runtime.coalesce(_Runtime.field(effect, 'preserveAlpha'), function():Dynamic return cast true);
-    edgeColor = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0);
-    divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast (cast WgpuConvolutionEffect.getAutoDivisor__wgpuConvolutionEffect(({ final __callArgument0:Dynamic = matrix; __callArgument0; }), (cast (matrixX * matrixY) : Float)) : Float));
+    bias = _Runtime.coalesce(effect.bias, function():Dynamic return cast 0.0);
+    clampEdge = _Runtime.coalesce(effect.clamp, function():Dynamic return cast true);
+    preserveAlpha = _Runtime.coalesce(effect.preserveAlpha, function():Dynamic return cast true);
+    edgeColor = _Runtime.coalesce(effect.color, function():Dynamic return cast 0.0);
+    divisor = _Runtime.coalesce(effect.divisor, function():Dynamic return cast (cast WgpuConvolutionEffect.getAutoDivisor__wgpuConvolutionEffect(({ final __callArgument0:Dynamic = matrix; __callArgument0; }), (cast (matrixX * matrixY) : Float)) : Float));
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast 'stylization.convolution' : String), (cast WgpuConvolutionEffect.CONVOLUTION_WGSL__wgpuConvolutionEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast source : WgpuRenderTarget), ({ final __callArgument3:Dynamic = (cast dest : WgpuRenderTarget); __callArgument3; }), ({ final __callArgument4:Dynamic = pipeline; __callArgument4; }), ({ final __callArgument5:Dynamic = function(f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (1.0 / source.width) : Float));

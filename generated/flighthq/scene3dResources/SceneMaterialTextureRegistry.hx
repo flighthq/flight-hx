@@ -104,6 +104,6 @@ class SceneMaterialTextureRegistry {
   public static function listUnlitMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {
     var unlit:UnlitMaterial = cast _Runtime.UNDEFINED;
     unlit = (cast material : UnlitMaterial);
-    if ((cast !_Runtime.strictEquals(_Runtime.field(unlit, 'baseColorMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(unlit, 'baseColorMap')] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(unlit.baseColorMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([unlit.baseColorMap] : Array<Dynamic>)); }
   }
 }

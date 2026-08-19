@@ -122,7 +122,7 @@ class Skeleton2d {
       var pc:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 2.0) : Float));
       var pd:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 3.0) : Float));
       var inherit:TransformInherit2D = (cast bone : Bone2D).transformMode;
-      if ((cast (cast inherit : TransformInherit2D).translation : Bool)) {
+      if ((cast inherit.translation : Bool)) {
         flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 4.0) : Float), (cast (((pa * (cast bone : Bone2D).x) + (pc * (cast bone : Bone2D).y)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 4.0) : Float))) : Float));
         flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (o + 5.0) : Float), (cast (((pb * (cast bone : Bone2D).x) + (pd * (cast bone : Bone2D).y)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (p + 5.0) : Float))) : Float));
       } else {
@@ -133,7 +133,7 @@ class Skeleton2d {
       var eb:Float = cast _Runtime.UNDEFINED;
       var ec:Float = cast _Runtime.UNDEFINED;
       var ed:Float = cast _Runtime.UNDEFINED;
-      if ((cast ((cast ((cast (cast inherit : TransformInherit2D).rotation : Bool) && (cast (cast inherit : TransformInherit2D).scale : Bool)) : Bool) && (cast (cast inherit : TransformInherit2D).reflection : Bool)) : Bool)) {
+      if ((cast ((cast ((cast inherit.rotation : Bool) && (cast inherit.scale : Bool)) : Bool) && (cast inherit.reflection : Bool)) : Bool)) {
         (ea = cast (pa : Dynamic));
         (eb = cast (pb : Dynamic));
         (ec = cast (pc : Dynamic));
@@ -141,22 +141,22 @@ class Skeleton2d {
       } else {
         var psx:Float = _Runtime.orValue(_Runtime.hypot(pa, pb), function():Dynamic return cast 1.0);
         var psy:Float = _Runtime.orValue(_Runtime.hypot(pc, pd), function():Dynamic return cast 1.0);
-        var d0x:Float = ((cast (cast inherit : TransformInherit2D).rotation : Bool) ? (cast (pa / psx) : Dynamic) : (cast 1.0 : Dynamic));
-        var d0y:Float = ((cast (cast inherit : TransformInherit2D).rotation : Bool) ? (cast (pb / psx) : Dynamic) : (cast 0.0 : Dynamic));
+        var d0x:Float = ((cast inherit.rotation : Bool) ? (cast (pa / psx) : Dynamic) : (cast 1.0 : Dynamic));
+        var d0y:Float = ((cast inherit.rotation : Bool) ? (cast (pb / psx) : Dynamic) : (cast 0.0 : Dynamic));
         var d1x:Float = cast _Runtime.UNDEFINED;
         var d1y:Float = cast _Runtime.UNDEFINED;
-        if ((cast ((cast (cast inherit : TransformInherit2D).rotation : Bool) && (cast (cast inherit : TransformInherit2D).reflection : Bool)) : Bool)) {
+        if ((cast ((cast inherit.rotation : Bool) && (cast inherit.reflection : Bool)) : Bool)) {
           (d1x = cast ((pc / psy) : Dynamic));
           (d1y = cast ((pd / psy) : Dynamic));
-        } else { if ((cast (cast inherit : TransformInherit2D).rotation : Bool)) {
+        } else { if ((cast inherit.rotation : Bool)) {
           (d1x = cast (-d0y : Dynamic));
           (d1y = cast (d0x : Dynamic));
         } else {
           (d1x = cast (0.0 : Dynamic));
-          (d1y = cast (((cast ((cast (cast inherit : TransformInherit2D).reflection : Bool) && (cast ((cast ((pa * pd) - (pb * pc)) : Float) < (cast 0.0 : Float)) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+          (d1y = cast (((cast ((cast inherit.reflection : Bool) && (cast ((cast ((pa * pd) - (pb * pc)) : Float) < (cast 0.0 : Float)) : Bool)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
         } }
-        var sx:Float = ((cast (cast inherit : TransformInherit2D).scale : Bool) ? (cast psx : Dynamic) : (cast 1.0 : Dynamic));
-        var sy:Float = ((cast (cast inherit : TransformInherit2D).scale : Bool) ? (cast psy : Dynamic) : (cast 1.0 : Dynamic));
+        var sx:Float = ((cast inherit.scale : Bool) ? (cast psx : Dynamic) : (cast 1.0 : Dynamic));
+        var sy:Float = ((cast inherit.scale : Bool) ? (cast psy : Dynamic) : (cast 1.0 : Dynamic));
         (ea = cast ((d0x * sx) : Dynamic));
         (eb = cast ((d0y * sx) : Dynamic));
         (ec = cast ((d1x * sy) : Dynamic));
@@ -241,7 +241,7 @@ class Skeleton2d {
       while ((cast ((cast i : Float) < (cast _Runtime.field(a.bones, 'length') : Float)) : Bool)) {
         var x:Bone2D = flighthq._internal._StaticIndex.readArray(a.bones, i);
         var y:Bone2D = flighthq._internal._StaticIndex.readArray(b.bones, i);
-        if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals((cast x : Bone2D).parentIndex, (cast y : Bone2D).parentIndex) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).x, (cast y : Bone2D).x) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).y, (cast y : Bone2D).y) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).rotation, (cast y : Bone2D).rotation) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).scaleX, (cast y : Bone2D).scaleX) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).scaleY, (cast y : Bone2D).scaleY) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).shearX, (cast y : Bone2D).shearX) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).shearY, (cast y : Bone2D).shearY) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).length, (cast y : Bone2D).length) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast (cast x : Bone2D).transformMode : TransformInherit2D).rotation, (cast (cast y : Bone2D).transformMode : TransformInherit2D).rotation) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast (cast x : Bone2D).transformMode : TransformInherit2D).scale, (cast (cast y : Bone2D).transformMode : TransformInherit2D).scale) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast (cast x : Bone2D).transformMode : TransformInherit2D).reflection, (cast (cast y : Bone2D).transformMode : TransformInherit2D).reflection) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast (cast x : Bone2D).transformMode : TransformInherit2D).translation, (cast (cast y : Bone2D).transformMode : TransformInherit2D).translation) : Bool)) : Bool)) {
+        if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals((cast x : Bone2D).parentIndex, (cast y : Bone2D).parentIndex) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).x, (cast y : Bone2D).x) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).y, (cast y : Bone2D).y) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).rotation, (cast y : Bone2D).rotation) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).scaleX, (cast y : Bone2D).scaleX) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).scaleY, (cast y : Bone2D).scaleY) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).shearX, (cast y : Bone2D).shearX) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).shearY, (cast y : Bone2D).shearY) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast x : Bone2D).length, (cast y : Bone2D).length) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast (cast x : Bone2D).transformMode : { var rotation:Bool; }).rotation, (cast (cast y : Bone2D).transformMode : { var rotation:Bool; }).rotation) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast (cast x : Bone2D).transformMode : { var scale:Bool; }).scale, (cast (cast y : Bone2D).transformMode : { var scale:Bool; }).scale) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast (cast x : Bone2D).transformMode : { var reflection:Bool; }).reflection, (cast (cast y : Bone2D).transformMode : { var reflection:Bool; }).reflection) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast (cast x : Bone2D).transformMode : { var translation:Bool; }).translation, (cast (cast y : Bone2D).transformMode : { var translation:Bool; }).translation) : Bool)) : Bool)) {
           return cast false;
         }
         i++;

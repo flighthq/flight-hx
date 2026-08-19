@@ -20,7 +20,7 @@ class GlConvolutionEffect {
 
   @:noCompletion
   public static function applyConvolutionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ConvolutionEffect):Void {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ConvolutionEffect = cast _Runtime.UNDEFINED;
     var matrix:Array<Float> = cast _Runtime.UNDEFINED;
     var matrixX:Float = cast _Runtime.UNDEFINED;
     var matrixY:Float = cast _Runtime.UNDEFINED;
@@ -32,17 +32,17 @@ class GlConvolutionEffect {
     var matrixData:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     __destructure0 = effect;
-    matrix = _Runtime.field(__destructure0, 'matrix');
-    matrixX = _Runtime.field(__destructure0, 'matrixX');
-    matrixY = _Runtime.field(__destructure0, 'matrixY');
+    matrix = __destructure0.matrix;
+    matrixX = __destructure0.matrixX;
+    matrixY = __destructure0.matrixY;
     if ((cast ((cast ((cast matrixX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast matrixY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution matrix dimensions must be positive')); }
     if ((cast ((cast (matrixX * matrixY) : Float) > (cast MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution kernel exceeds the WebGL maximum of 7×7 (' + Std.string(matrixX) + '×' + Std.string(matrixY) + ' given)')); }
     if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution matrix does not match its declared dimensions')); }
-    bias = _Runtime.coalesce(_Runtime.field(effect, 'bias'), function():Dynamic return cast 0.0);
-    clampEdge = _Runtime.coalesce(_Runtime.field(effect, 'clamp'), function():Dynamic return cast true);
-    preserveAlpha = _Runtime.coalesce(_Runtime.field(effect, 'preserveAlpha'), function():Dynamic return cast true);
-    edgeColor = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0);
-    divisor = _Runtime.coalesce(_Runtime.field(effect, 'divisor'), function():Dynamic return cast (cast GlConvolutionEffect.getAutoDivisor__glConvolutionEffect(({ final __callArgument0:Dynamic = matrix; __callArgument0; }), (cast (matrixX * matrixY) : Float)) : Float));
+    bias = _Runtime.coalesce(effect.bias, function():Dynamic return cast 0.0);
+    clampEdge = _Runtime.coalesce(effect.clamp, function():Dynamic return cast true);
+    preserveAlpha = _Runtime.coalesce(effect.preserveAlpha, function():Dynamic return cast true);
+    edgeColor = _Runtime.coalesce(effect.color, function():Dynamic return cast 0.0);
+    divisor = _Runtime.coalesce(effect.divisor, function():Dynamic return cast (cast GlConvolutionEffect.getAutoDivisor__glConvolutionEffect(({ final __callArgument0:Dynamic = matrix; __callArgument0; }), (cast (matrixX * matrixY) : Float)) : Float));
     matrixData = new flighthq._internal._Float32Array(MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE);
     {
       var i:Float = 0.0;

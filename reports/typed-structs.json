@@ -62356,9 +62356,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 20,
+        "directAccesses": 20,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -62444,7 +62444,7 @@
       },
       "name": "ConvolutionEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free convolution effect",
       "reasons": [],
       "source": "upstream/packages/types/src/ConvolutionEffect.ts",
       "sourceProvenance": {
@@ -77362,9 +77362,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 20,
+        "directAccesses": 20,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -77456,7 +77456,7 @@
       },
       "name": "EmissiveMaterial",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free emissive material",
       "reasons": [],
       "source": "upstream/packages/types/src/EmissiveMaterial.ts",
       "sourceProvenance": {
@@ -377806,9 +377806,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 21,
+        "directAccesses": 21,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -377908,7 +377908,7 @@
       },
       "name": "ToonMaterial",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free toon material",
       "reasons": [],
       "source": "upstream/packages/types/src/ToonMaterial.ts",
       "sourceProvenance": {
@@ -379802,9 +379802,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 20,
+        "directAccesses": 20,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -379850,7 +379850,7 @@
       },
       "name": "TransformInherit2D",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free 2D transform inheritance",
       "reasons": [],
       "source": "upstream/packages/types/src/TransformInherit2D.ts",
       "sourceProvenance": {
@@ -384611,9 +384611,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 21,
+        "directAccesses": 21,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -384697,7 +384697,7 @@
       },
       "name": "UnlitMaterial",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free unlit material",
       "reasons": [],
       "source": "upstream/packages/types/src/UnlitMaterial.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1421,
+      "newAuditOnly": 1416,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1421,
+    "auditOnlySchemas": 1416,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 22715,
-    "directSchemas": 583,
+    "directAccesses": 22817,
+    "directSchemas": 588,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 7951,
+    "pendingAccesses": 7849,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

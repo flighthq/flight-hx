@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_421,
+      newAuditOnly: 1_416,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(585);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(590);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_421);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_416);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(183);
+    expect(newDirect).toHaveLength(188);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1025,6 +1025,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'LogEntry',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free log entry',
+        }),
+        expect.objectContaining({
+          name: 'ToonMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free toon material',
+        }),
+        expect.objectContaining({
+          name: 'UnlitMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free unlit material',
+        }),
+        expect.objectContaining({
+          name: 'ConvolutionEffect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free convolution effect',
+        }),
+        expect.objectContaining({
+          name: 'EmissiveMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free emissive material',
+        }),
+        expect.objectContaining({
+          name: 'TransformInherit2D',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free 2D transform inheritance',
         }),
       ]),
     );
@@ -1944,6 +1969,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#LogEntry',
         purpose: 'reviewed escape-free log entry',
       },
+      {
+        declarationFingerprint: 'sha256:1c993883bad8944cd6da043e55da9b6014270eb750d3a0fbc840c9cd107de2b0',
+        id: '@flighthq/types:interface#ToonMaterial',
+        purpose: 'reviewed escape-free toon material',
+      },
+      {
+        declarationFingerprint: 'sha256:eb909d67f4277244c321489bb2cd34a8cb5cc3de0bfade3146aa4c09fb4b27f0',
+        id: '@flighthq/types:interface#UnlitMaterial',
+        purpose: 'reviewed escape-free unlit material',
+      },
+      {
+        declarationFingerprint: 'sha256:bde9a7679c21f48a1a9479c7bfcd6dd049d9255cee1c88feaecc530e7fbfb5fc',
+        id: '@flighthq/types:interface#ConvolutionEffect',
+        purpose: 'reviewed escape-free convolution effect',
+      },
+      {
+        declarationFingerprint: 'sha256:69801d3535461cd2a982b945b3099efbf3129d5d5152ed829a5e5ab849141c58',
+        id: '@flighthq/types:interface#EmissiveMaterial',
+        purpose: 'reviewed escape-free emissive material',
+      },
+      {
+        declarationFingerprint: 'sha256:58e62708f57df42b10b3295377b9c994df1e99c342cdf02e0df5ddac41df98f5',
+        id: '@flighthq/types:interface#TransformInherit2D',
+        purpose: 'reviewed escape-free 2D transform inheritance',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -2672,6 +2722,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const tenthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['ConvolutionEffect', 'EmissiveMaterial', 'ToonMaterial', 'TransformInherit2D', 'UnlitMaterial'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -2712,22 +2771,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_421,
+      auditOnlySchemas: 1_416,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 22_715,
-      directSchemas: 583,
+      directAccesses: 22_817,
+      directSchemas: 588,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 7_951,
+      pendingAccesses: 7_849,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_421,
+      newAuditOnly: 1_416,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -2794,7 +2853,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(22_715);
+    expect(report.summary.directAccesses).toBe(22_817);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -3428,6 +3487,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(ninthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'ToonMaterial',
+        21,
+        'sha256:1c993883bad8944cd6da043e55da9b6014270eb750d3a0fbc840c9cd107de2b0',
+        'reviewed escape-free toon material',
+      ],
+      [
+        'UnlitMaterial',
+        21,
+        'sha256:eb909d67f4277244c321489bb2cd34a8cb5cc3de0bfade3146aa4c09fb4b27f0',
+        'reviewed escape-free unlit material',
+      ],
+      [
+        'ConvolutionEffect',
+        20,
+        'sha256:bde9a7679c21f48a1a9479c7bfcd6dd049d9255cee1c88feaecc530e7fbfb5fc',
+        'reviewed escape-free convolution effect',
+      ],
+      [
+        'EmissiveMaterial',
+        20,
+        'sha256:69801d3535461cd2a982b945b3099efbf3129d5d5152ed829a5e5ab849141c58',
+        'reviewed escape-free emissive material',
+      ],
+      [
+        'TransformInherit2D',
+        20,
+        'sha256:58e62708f57df42b10b3295377b9c994df1e99c342cdf02e0df5ddac41df98f5',
+        'reviewed escape-free 2D transform inheritance',
+      ],
+    ] as const) {
+      expect(tenthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -5135,6 +5236,20 @@ describe('typed struct analysis', () => {
         expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
       }
     }
+    for (const [frontierId, normalizationReasons, observabilityReasons] of [
+      ['@flighthq/types:interface#ToonMaterial', ['cross-schema-transfer'], ['optional-omission']],
+      ['@flighthq/types:interface#UnlitMaterial', ['cross-schema-transfer'], ['optional-omission']],
+      ['@flighthq/types:interface#ConvolutionEffect', ['cross-schema-transfer', 'object-literal-spread'], []],
+      ['@flighthq/types:interface#EmissiveMaterial', ['cross-schema-transfer'], ['optional-omission']],
+      ['@flighthq/types:interface#TransformInherit2D', ['anonymous-structural-transfer'], []],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      expect(provenanceById.has(frontierId)).toBe(false);
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, nominalIdentity] of [
       ['@flighthq/types:interface#ElectronApi', true, [], { blockerReasons: [], closed: true }],
       ['@flighthq/types:interface#GlLitProgram', false, ['cross-schema-transfer'], null],
@@ -5961,6 +6076,28 @@ describe('typed struct analysis', () => {
       /_Runtime\.field\((?:instruction|multiname),/u,
     );
     expect(readFileSync('generated/flighthq/log/Log.hx', 'utf8')).not.toMatch(/_Runtime\.field\(entry,/u);
+    for (const path of [
+      'generated/flighthq/effects/ConvolutionEffect.hx',
+      'generated/flighthq/effectsGl/GlConvolutionEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuConvolutionEffect.hx',
+      'generated/flighthq/materials/UnlitMaterials.hx',
+      'generated/flighthq/scene3dFormats/GltfUnlit.hx',
+      'generated/flighthq/scene3dGl/EmissiveGlMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dGl/ToonGlMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dGl/UnlitGlMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dResources/SceneMaterialTextureRegistry.hx',
+      'generated/flighthq/scene3dWgpu/EmissiveWgpuMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dWgpu/ToonWgpuMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dWgpu/UnlitWgpuMeshMaterialRenderer.hx',
+      'generated/flighthq/skeleton2d/Skeleton2d.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:ConvolutionEffect|EmissiveMaterial|ToonMaterial|TransformInherit2D|UnlitMaterial)\)\./u,
+      );
+    }
+    expect(readFileSync('generated/flighthq/effects/ConvolutionEffect.hx', 'utf8')).not.toMatch(
+      /_Runtime\.field\(effect,/u,
+    );
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
       /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,

@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1421 |
-| Direct schemas | 583 |
+| Audit-only schemas | 1416 |
+| Direct schemas | 588 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 7951 |
-| Directly emitted accesses | 22715 |
+| Pending accesses | 7849 |
+| Directly emitted accesses | 22817 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1421 |
+| Newly discovered, audit-only | 1416 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -401,7 +401,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ConnectivityReachabilityOptions` | `direct` | `preserved` | `@flighthq/types:interface#ConnectivityReachabilityOptions` | broad host document | 3 | 4 | 0 | 0 | 0 | 4 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ConnectivityStatus` | `direct` | `preserved` | `@flighthq/types:interface#ConnectivityStatus` | broad host document | 8 | 34 | 16 | 0 | 0 | 50 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ContactShadowsEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ConvolutionEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 20 | 0 | 0 | 20 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ConvolutionEffect` | `direct` | `new` | — | reviewed escape-free convolution effect | 9 | 20 | 0 | 0 | 0 | 20 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CreateCubeTextureOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CreateExternalTextureOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CreateRenderTextureOptions` | `direct` | `new` | — | reviewed escape-free render-texture options | 16 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | yes | — |
@@ -492,7 +492,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ElectronTrayConstructor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `constructable-schema` |
 | `@flighthq/types:interface#EmbeddedAudioResourceReference` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 6 | 2 | 0 | 8 | 0 | 0 | 20 | yes | — |
 | `@flighthq/types:interface#EmbeddedImageResourceReference` | `direct` | `renamed` | `@flighthq/types:interface#EmbeddedSceneResourceRef` | broad scene document | 6 | 6 | 2 | 0 | 0 | 8 | 56 | 56 | yes | — |
-| `@flighthq/types:interface#EmissiveMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 17 | 3 | 0 | 20 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#EmissiveMaterial` | `direct` | `new` | — | reviewed escape-free emissive material | 9 | 17 | 3 | 0 | 0 | 20 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#EmissiveModifier` | `direct` | `new` | — | reviewed escape-free emissive modifier | 7 | 25 | 1 | 0 | 0 | 26 | 0 | 0 | yes | — |
 | `@flighthq/types:type#EmissiveModifierFacing` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#EmissiveModifierOptions` | `direct` | `new` | — | reviewed escape-free emissive modifier options | 5 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | yes | — |
@@ -1860,7 +1860,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TintMaterialData` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 4 | 0 | 0 | 4 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#ToneMapEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ToneMapOperator` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#ToonMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 17 | 4 | 0 | 21 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ToonMaterial` | `direct` | `new` | — | reviewed escape-free toon material | 10 | 17 | 4 | 0 | 0 | 21 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ToonModifier` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ToonModifierOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Transform2D` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 9 | 0 | 0 | 9 | 0 | 0 | 30 | yes | — |
@@ -1869,7 +1869,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Transform3D` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 75 | 0 | 0 | 75 | 0 | 0 | 19 | yes | — |
 | `@flighthq/types:type#Transform3DLike` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 19 | yes | — |
 | `@flighthq/types:type#Transform3DNode` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | no | `unsupported-shape` |
-| `@flighthq/types:interface#TransformInherit2D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 20 | 0 | 0 | 20 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TransformInherit2D` | `direct` | `new` | — | reviewed escape-free 2D transform inheritance | 4 | 20 | 0 | 0 | 0 | 20 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TransmissionVolumePbrExtension` | `direct` | `new` | — | reviewed escape-free transmission-volume PBR extension | 10 | 24 | 7 | 0 | 0 | 31 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TrayBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 19 | yes | — |
 | `@flighthq/types:interface#TrayBalloonOptions` | `direct` | `preserved` | `@flighthq/types:interface#TrayBalloonOptions` | tray-balloon option record | 7 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
@@ -1904,7 +1904,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#UnitySerializeOptions` | `direct` | `relocated` | `@flighthq/particles-formats:interface#UnitySerializeOptions` | broad serialization document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#UnityShape` | `direct` | `relocated` | `@flighthq/particles-formats:interface#UnityShape` | broad serialization document | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#UnitySizeOverLifetime` | `direct` | `relocated` | `@flighthq/particles-formats:interface#UnitySizeOverLifetime` | broad serialization document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#UnlitMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 15 | 6 | 0 | 21 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#UnlitMaterial` | `direct` | `new` | — | reviewed escape-free unlit material | 8 | 15 | 6 | 0 | 0 | 21 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#UnpackedRectangleExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#UnpackedRectangleReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#UpdateInfo` | `direct` | `preserved` | `@flighthq/types:interface#UpdateInfo` | broad host document | 9 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |

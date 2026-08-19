@@ -49,8 +49,8 @@ class ToonWgpuMeshMaterialRenderer {
     if ((cast _Runtime.strictEquals(toon, null) : Bool)) {
       (group = cast ((cast bindWgpuToonSurface(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pipeline; __callArgument7; }), ({ final __callArgument8:Dynamic = ToonWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__toonWgpuMeshMaterialRenderer; __callArgument8; }), ({ final __callArgument9:Dynamic = ToonWgpuMeshMaterialRenderer.WHITE__toonWgpuMeshMaterialRenderer; __callArgument9; }), (cast 3.0 : Float), (cast 0.5 : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
-      (cast unpackColorToLinear(({ final __callArgument10:Dynamic = ToonWgpuMeshMaterialRenderer._scratch__toonWgpuMeshMaterialRenderer; __callArgument10; }), (cast _Runtime.field(toon, 'baseColor') : Float)) : LinearColor);
-      (group = cast ((cast bindWgpuToonSurface(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = pipeline; __callArgument12; }), ({ final __callArgument13:Dynamic = toon; __callArgument13; }), ({ final __callArgument14:Dynamic = ToonWgpuMeshMaterialRenderer._scratch__toonWgpuMeshMaterialRenderer; __callArgument14; }), (cast _Runtime.field(toon, 'steps') : Float), (cast _Runtime.field(toon, 'alphaCutoff') : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (cast unpackColorToLinear(({ final __callArgument10:Dynamic = ToonWgpuMeshMaterialRenderer._scratch__toonWgpuMeshMaterialRenderer; __callArgument10; }), (cast (cast toon : { var baseColor:Float; }).baseColor : Float)) : LinearColor);
+      (group = cast ((cast bindWgpuToonSurface(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = pipeline; __callArgument12; }), ({ final __callArgument13:Dynamic = toon; __callArgument13; }), ({ final __callArgument14:Dynamic = ToonWgpuMeshMaterialRenderer._scratch__toonWgpuMeshMaterialRenderer; __callArgument14; }), (cast (cast toon : { var steps:Float; }).steps : Float), (cast (cast toon : { var alphaCutoff:Float; }).alphaCutoff : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
     beginWgpuMeshDraw(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = pipeline; __callArgument16; }));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
@@ -65,7 +65,7 @@ class ToonWgpuMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__toonWgpuMeshMaterialRenderer(material:Null<ToonMaterial>):WgpuToonDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasBaseColorMap: false, hasRamp: false };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals((cast material : { var alphaMode:MaterialAlphaMode; }).alphaMode, 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast material : { var doubleSided:Bool; }).doubleSided : Bool)), hasBaseColorMap: false, hasRamp: false };
     return cast null;
   }
 
