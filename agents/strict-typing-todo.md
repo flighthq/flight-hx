@@ -5,9 +5,9 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 493 schemas currently emit direct fields, covering 20,326 accesses.
-- 1,043 eligible schemas remain audit-only, covering 10,340 pending accesses.
-- 786 audit-only schemas have no recorded escape, covering 5,586 pending accesses.
+- 498 schemas currently emit direct fields, covering 20,505 accesses.
+- 1,038 eligible schemas remain audit-only, covering 10,161 pending accesses.
+- 781 audit-only schemas have no recorded escape, covering 5,407 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
@@ -49,6 +49,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote `Scene3DHit`, `CollisionRaycastHit`, `Physics2DRayHit`, `CollisionContactPoint`, and `VelocitySample`: 200 accesses now emit directly across nine generated modules. Cross-schema entity transfer keeps `Scene3DHit` structural, while the four mechanically compatible leaf records are provenance-closed but remain structural pending separate cpp review. The tranche removes 90 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote `RichTextRuntime`, `TextLabelData`, `BitmapTextPage`, `TextLabel`, and `ShapedRun`: 204 accesses now emit directly across 23 generated modules. Cross-schema transfer keeps the runtime and label structural, object spread keeps the shaped run structural, and normalization provenance keeps the bitmap-text page and label data structural. The tranche removes four generated `Dynamic` occurrences and 32 `_Runtime.field` calls while `Reflect` and type-erasure debt remain unchanged.
 - [x] Promote `Shape`, `Scale9Shape`, `ShapeData`, `MorphShape`, and `MorphShapeData`: 184 accesses now emit directly across 20 generated modules. Cross-schema transfer keeps all three public shape identities structural, `Shape` additionally has dynamic ingress, and propagated normalization provenance keeps both data records structural. The tranche removes seven generated `Dynamic` occurrences and 14 `_Runtime.field` calls while `Reflect` and type-erasure debt remain unchanged.
+- [x] Promote `GlMeshProgram`, `GlClassicProgram`, `GlMeshUpload`, `GlParticleShader`, and `GlPbrProgram`: 179 accesses now emit directly across 15 generated modules. Object-literal spread keeps the classic and PBR program records structural; anonymous/cross-schema transfer and optional omission keep the mesh program structural; optional omission keeps the mesh upload structural; and normalization provenance keeps the particle shader structural. The tranche removes 83 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

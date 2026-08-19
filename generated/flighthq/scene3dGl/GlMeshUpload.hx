@@ -23,9 +23,9 @@ class GlMeshUpload {
   public static function destroyGlMeshUpload(state:GlRenderState, upload:flighthq.types.GlScene3DRuntime.GlMeshUpload):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    flighthq._internal.backend.WebGl2Backend.deleteVertexArray(gl, _Runtime.field(upload, 'vao'));
-    flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(upload, 'vertexBuffer'));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(upload, 'indexBuffer'), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(upload, 'indexBuffer')); }
+    flighthq._internal.backend.WebGl2Backend.deleteVertexArray(gl, upload.vao);
+    flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, upload.vertexBuffer);
+    if ((cast !_Runtime.strictEquals(upload.indexBuffer, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, upload.indexBuffer); }
   }
 
   public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, gpuSkinned:Bool = false):flighthq.types.GlScene3DRuntime.GlMeshUpload {
@@ -42,19 +42,19 @@ class GlMeshUpload {
     primitiveMode = (cast GlMeshUpload.getGlPrimitiveMode__glMeshUpload(({ final __callArgument1:Dynamic = gl; __callArgument1; }), geometry.topology) : Float);
     morphed = !_Runtime.strictEquals((cast getMeshGeometryMorphBindPose(({ final __callArgument2:Dynamic = geometry; __callArgument2; })) : Null<MeshMorphBindPose>), null);
     bindPose = ((cast ((cast gpuSkinned : Bool) && (cast !(cast morphed : Bool) : Bool)) : Bool) ? (cast (cast getMeshGeometrySkinBindPose(({ final __callArgument3:Dynamic = geometry; __callArgument3; })) : Null<MeshSkinBindPose>) : Dynamic) : (cast null : Dynamic));
-    if ((cast ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast !_Runtime.strictEquals(bindPose, null) : Bool) ? (cast _Runtime.strictEquals((cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).skinBindUploaded, true) : Dynamic) : (cast _Runtime.strictEquals((cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).version, geometry.version) : Dynamic)) : Bool)) : Bool)) {
-      ((cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).primitiveMode = primitiveMode);
-      flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).vao);
+    if ((cast ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast !_Runtime.strictEquals(bindPose, null) : Bool) ? (cast _Runtime.strictEquals((cast upload : { @:optional var skinBindUploaded:Null<Bool>; }).skinBindUploaded, true) : Dynamic) : (cast _Runtime.strictEquals((cast upload : { var version:Float; }).version, geometry.version) : Dynamic)) : Bool)) : Bool)) {
+      ((cast upload : { var primitiveMode:Float; }).primitiveMode = cast (primitiveMode : Float));
+      flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : { var vao:flighthq._internal.dom.WebGLVertexArrayObject; }).vao);
       return cast upload;
     }
     if ((cast _Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (upload = cast ({ indexBuffer: null, indexCount: 0.0, indexType: flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), primitiveMode: primitiveMode, vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0, vertexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl) } : Dynamic));
       ((cast cache : flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlScene3DRuntime.GlMeshUpload>).set((cast geometry : MeshGeometry), (cast upload)));
     }
-    flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).vao);
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).vertexBuffer);
+    flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : { var vao:flighthq._internal.dom.WebGLVertexArrayObject; }).vao);
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast upload : { var vertexBuffer:flighthq._internal.dom.WebGLBuffer; }).vertexBuffer);
     flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), ((cast !_Runtime.strictEquals(bindPose, null) : Bool) ? (cast (cast GlMeshUpload.buildSkinBindVertices__glMeshUpload(({ final __callArgument4:Dynamic = geometry; __callArgument4; }), ({ final __callArgument5:Dynamic = bindPose; __callArgument5; })) : flighthq._internal._Float32Array) : Dynamic) : (cast geometry.vertices : Dynamic)), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
-    ((cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).skinBindUploaded = !_Runtime.strictEquals(bindPose, null));
+    ((cast upload : { @:optional var skinBindUploaded:Null<Bool>; }).skinBindUploaded = cast (!_Runtime.strictEquals(bindPose, null) : Null<Bool>));
     stride = (cast geometry.layout : { var stride:Float; }).stride;
     {
       var i:Float = 0.0;
@@ -64,18 +64,18 @@ class GlMeshUpload {
       }
     }
     if ((cast !_Runtime.strictEquals(geometry.indices, null) : Bool)) {
-      if ((cast _Runtime.strictEquals((cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).indexBuffer, null) : Bool)) { ((cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).indexBuffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl)); }
-      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), (cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).indexBuffer);
+      if ((cast _Runtime.strictEquals((cast upload : { var indexBuffer:Null<flighthq._internal.dom.WebGLBuffer>; }).indexBuffer, null) : Bool)) { ((cast upload : { var indexBuffer:Null<flighthq._internal.dom.WebGLBuffer>; }).indexBuffer = cast (flighthq._internal.backend.WebGl2Backend.createBuffer(gl) : Null<flighthq._internal.dom.WebGLBuffer>)); }
+      flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), (cast upload : { var indexBuffer:Null<flighthq._internal.dom.WebGLBuffer>; }).indexBuffer);
       flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), geometry.indices, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
-      ((cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).indexType = ((cast _Runtime.isInstanceOfName(geometry.indices, 'Uint32Array') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT) : Dynamic)));
-      ((cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).indexCount = (cast geometry.indices : { var length:Float; }).length);
+      ((cast upload : { var indexType:Float; }).indexType = cast (((cast _Runtime.isInstanceOfName(geometry.indices, 'Uint32Array') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT) : Dynamic)) : Float));
+      ((cast upload : { var indexCount:Float; }).indexCount = cast ((cast geometry.indices : { var length:Float; }).length : Float));
     } else {
-      if ((cast !_Runtime.strictEquals((cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).indexBuffer, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, (cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).indexBuffer); }
-      ((cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).indexBuffer = null);
-      ((cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).indexCount = ((cast ((cast (cast geometry.layout : { var stride:Float; }).stride : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'byteLength'), (cast geometry.layout : { var stride:Float; }).stride)) : Dynamic) : (cast 0.0 : Dynamic)));
+      if ((cast !_Runtime.strictEquals((cast upload : { var indexBuffer:Null<flighthq._internal.dom.WebGLBuffer>; }).indexBuffer, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, (cast upload : { var indexBuffer:Null<flighthq._internal.dom.WebGLBuffer>; }).indexBuffer); }
+      ((cast upload : { var indexBuffer:Null<flighthq._internal.dom.WebGLBuffer>; }).indexBuffer = cast (null : Null<flighthq._internal.dom.WebGLBuffer>));
+      ((cast upload : { var indexCount:Float; }).indexCount = cast (((cast ((cast (cast geometry.layout : { var stride:Float; }).stride : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'byteLength'), (cast geometry.layout : { var stride:Float; }).stride)) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
     }
-    ((cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).primitiveMode = primitiveMode);
-    ((cast upload : flighthq.types.GlScene3DRuntime.GlMeshUpload).version = geometry.version);
+    ((cast upload : { var primitiveMode:Float; }).primitiveMode = cast (primitiveMode : Float));
+    ((cast upload : { var version:Float; }).version = cast (geometry.version : Float));
     return cast upload;
     return cast null;
   }

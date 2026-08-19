@@ -170,9 +170,9 @@ class GlParticleEmitter2D {
     if ((cast _Runtime.strictEquals(drawCount, 0.0) : Bool)) { return; }
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.particleInstanceBuffer);
     flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), 0.0, instanceData, 0.0, (drawCount * GlParticleEmitter2D.INSTANCE_FLOATS__glParticleEmitter2D));
-    if ((cast !_Runtime.strictEquals(runtime.currentProgram, (cast shader : GlParticleShader).program) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast shader : GlParticleShader).program);
-      (runtime.currentProgram = cast ((cast shader : GlParticleShader).program : Null<flighthq._internal.dom.WebGLProgram>));
+    if ((cast !_Runtime.strictEquals(runtime.currentProgram, shader.program) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.useProgram(gl, shader.program);
+      (runtime.currentProgram = cast (shader.program : Null<flighthq._internal.dom.WebGLProgram>));
     }
     clipW = (2.0 / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'));
     clipH = (2.0 / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height'));
@@ -198,40 +198,40 @@ class GlParticleEmitter2D {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast ((-t.ty * clipH) + 1.0) : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast 1.0 : Float));
     }
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, (cast shader : GlParticleShader).locWorldMatrix, false, m);
-    flighthq._internal.backend.WebGl2Backend.uniform1i(gl, (cast shader : GlParticleShader).locTexture, 0.0);
-    flighthq._internal.backend.WebGl2Backend.uniform1i(gl, (cast shader : GlParticleShader).locStraightTextureAlpha, ((cast runtime.currentTextureStraightAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, shader.locWorldMatrix, false, m);
+    flighthq._internal.backend.WebGl2Backend.uniform1i(gl, shader.locTexture, 0.0);
+    flighthq._internal.backend.WebGl2Backend.uniform1i(gl, shader.locStraightTextureAlpha, ((cast runtime.currentTextureStraightAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.particleCornerBuffer);
-    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, (cast shader : GlParticleShader).locCorner);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, (cast shader : GlParticleShader).locCorner, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 8.0, 0.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, (cast shader : GlParticleShader).locCorner, 0.0);
+    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, shader.locCorner);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, shader.locCorner, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 8.0, 0.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, shader.locCorner, 0.0);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.particleInstanceBuffer);
-    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, (cast shader : GlParticleShader).locPos);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, (cast shader : GlParticleShader).locPos, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlParticleEmitter2D.INSTANCE_STRIDE__glParticleEmitter2D, 0.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, (cast shader : GlParticleShader).locPos, 1.0);
-    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, (cast shader : GlParticleShader).locCosScale);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, (cast shader : GlParticleShader).locCosScale, 1.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlParticleEmitter2D.INSTANCE_STRIDE__glParticleEmitter2D, 8.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, (cast shader : GlParticleShader).locCosScale, 1.0);
-    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, (cast shader : GlParticleShader).locSinScale);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, (cast shader : GlParticleShader).locSinScale, 1.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlParticleEmitter2D.INSTANCE_STRIDE__glParticleEmitter2D, 12.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, (cast shader : GlParticleShader).locSinScale, 1.0);
-    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, (cast shader : GlParticleShader).locColor);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, (cast shader : GlParticleShader).locColor, 4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlParticleEmitter2D.INSTANCE_STRIDE__glParticleEmitter2D, 16.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, (cast shader : GlParticleShader).locColor, 1.0);
-    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, (cast shader : GlParticleShader).locUvRect);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, (cast shader : GlParticleShader).locUvRect, 4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlParticleEmitter2D.INSTANCE_STRIDE__glParticleEmitter2D, 32.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, (cast shader : GlParticleShader).locUvRect, 1.0);
-    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, (cast shader : GlParticleShader).locSize);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, (cast shader : GlParticleShader).locSize, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlParticleEmitter2D.INSTANCE_STRIDE__glParticleEmitter2D, 48.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, (cast shader : GlParticleShader).locSize, 1.0);
+    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, shader.locPos);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, shader.locPos, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlParticleEmitter2D.INSTANCE_STRIDE__glParticleEmitter2D, 0.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, shader.locPos, 1.0);
+    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, shader.locCosScale);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, shader.locCosScale, 1.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlParticleEmitter2D.INSTANCE_STRIDE__glParticleEmitter2D, 8.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, shader.locCosScale, 1.0);
+    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, shader.locSinScale);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, shader.locSinScale, 1.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlParticleEmitter2D.INSTANCE_STRIDE__glParticleEmitter2D, 12.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, shader.locSinScale, 1.0);
+    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, shader.locColor);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, shader.locColor, 4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlParticleEmitter2D.INSTANCE_STRIDE__glParticleEmitter2D, 16.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, shader.locColor, 1.0);
+    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, shader.locUvRect);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, shader.locUvRect, 4.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlParticleEmitter2D.INSTANCE_STRIDE__glParticleEmitter2D, 32.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, shader.locUvRect, 1.0);
+    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, shader.locSize);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, shader.locSize, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, GlParticleEmitter2D.INSTANCE_STRIDE__glParticleEmitter2D, 48.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, shader.locSize, 1.0);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), runtime.quadIndexBuffer);
     flighthq._internal.backend.WebGl2Backend.drawElementsInstanced(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), 6.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), 0.0, drawCount);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, (cast shader : GlParticleShader).locPos, 0.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, (cast shader : GlParticleShader).locCosScale, 0.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, (cast shader : GlParticleShader).locSinScale, 0.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, (cast shader : GlParticleShader).locColor, 0.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, (cast shader : GlParticleShader).locUvRect, 0.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, (cast shader : GlParticleShader).locSize, 0.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, shader.locPos, 0.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, shader.locCosScale, 0.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, shader.locSinScale, 0.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, shader.locColor, 0.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, shader.locUvRect, 0.0);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, shader.locSize, 0.0);
   }
 
   public static final defaultGlParticleEmitter2DRenderer:SpriteRenderer = (cast { createData: noopRendererData, submit: function(state:GlRenderState, node:RenderProxy2D):Void {

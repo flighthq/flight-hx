@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_511,
+      newAuditOnly: 1_506,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(495);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(500);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_511);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_506);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(93);
+    expect(newDirect).toHaveLength(98);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -575,6 +575,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'MorphShapeData',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free morph-shape data',
+        }),
+        expect.objectContaining({
+          name: 'GlMeshProgram',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL mesh program',
+        }),
+        expect.objectContaining({
+          name: 'GlClassicProgram',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL classic program',
+        }),
+        expect.objectContaining({
+          name: 'GlMeshUpload',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL mesh upload',
+        }),
+        expect.objectContaining({
+          name: 'GlParticleShader',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL particle shader',
+        }),
+        expect.objectContaining({
+          name: 'GlPbrProgram',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL PBR program',
         }),
       ]),
     );
@@ -1043,6 +1068,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:3c3ad2fcb2496c19ddf40cd7c5c6c20d5ddde69456be127c40066abd544b30e8',
         id: '@flighthq/types:interface#MorphShapeData',
         purpose: 'reviewed escape-free morph-shape data',
+      },
+      {
+        declarationFingerprint: 'sha256:25ac84d4effc1f1758fbadbe9e06fde068ef3b4b8fc74721bf1940acb3180003',
+        id: '@flighthq/types:interface#GlMeshProgram',
+        purpose: 'reviewed escape-free WebGL mesh program',
+      },
+      {
+        declarationFingerprint: 'sha256:b20947fd9184317c7f029c89d578561437626fa7ec03965c083784006319e1ec',
+        id: '@flighthq/types:interface#GlClassicProgram',
+        purpose: 'reviewed escape-free WebGL classic program',
+      },
+      {
+        declarationFingerprint: 'sha256:ea701c770e76279c2c1ed247f4e08cca4953589f33791d7e9964c4acbb38c508',
+        id: '@flighthq/types:interface#GlMeshUpload',
+        purpose: 'reviewed escape-free WebGL mesh upload',
+      },
+      {
+        declarationFingerprint: 'sha256:92ef9e960d48ccadf9d840f3dc2863ee3f64c2089ea081effa5c2ecaa9d1a079',
+        id: '@flighthq/types:interface#GlParticleShader',
+        purpose: 'reviewed escape-free WebGL particle shader',
+      },
+      {
+        declarationFingerprint: 'sha256:6abe913b84fc928aa0aa4bbda552125819c350c09026b795363905f3f0410759',
+        id: '@flighthq/types:interface#GlPbrProgram',
+        purpose: 'reviewed escape-free WebGL PBR program',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -1574,6 +1624,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const glProgramCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['GlClassicProgram', 'GlMeshProgram', 'GlMeshUpload', 'GlParticleShader', 'GlPbrProgram'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1614,22 +1673,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_511,
+      auditOnlySchemas: 1_506,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 20_326,
-      directSchemas: 493,
+      directAccesses: 20_505,
+      directSchemas: 498,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 10_340,
+      pendingAccesses: 10_161,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_511,
+      newAuditOnly: 1_506,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1657,7 +1716,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(20_326);
+    expect(report.summary.directAccesses).toBe(20_505);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2396,6 +2455,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'GlMeshProgram',
+        43,
+        'sha256:25ac84d4effc1f1758fbadbe9e06fde068ef3b4b8fc74721bf1940acb3180003',
+        'reviewed escape-free WebGL mesh program',
+      ],
+      [
+        'GlClassicProgram',
+        37,
+        'sha256:b20947fd9184317c7f029c89d578561437626fa7ec03965c083784006319e1ec',
+        'reviewed escape-free WebGL classic program',
+      ],
+      [
+        'GlMeshUpload',
+        35,
+        'sha256:ea701c770e76279c2c1ed247f4e08cca4953589f33791d7e9964c4acbb38c508',
+        'reviewed escape-free WebGL mesh upload',
+      ],
+      [
+        'GlParticleShader',
+        34,
+        'sha256:92ef9e960d48ccadf9d840f3dc2863ee3f64c2089ea081effa5c2ecaa9d1a079',
+        'reviewed escape-free WebGL particle shader',
+      ],
+      [
+        'GlPbrProgram',
+        30,
+        'sha256:6abe913b84fc928aa0aa4bbda552125819c350c09026b795363905f3f0410759',
+        'reviewed escape-free WebGL PBR program',
+      ],
+    ] as const) {
+      expect(glProgramCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'Physics2DWorld',
         217,
         'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
@@ -2968,6 +3069,41 @@ describe('typed struct analysis', () => {
       blockerReasons: ['container-transfer', 'normalization-provenance'],
       closed: false,
     });
+    for (const spreadProgramId of [
+      '@flighthq/types:interface#GlClassicProgram',
+      '@flighthq/types:interface#GlPbrProgram',
+    ]) {
+      expect(classAuditById.get(spreadProgramId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['object-literal-spread'],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.has(spreadProgramId)).toBe(false);
+    }
+    const glMeshProgramId = '@flighthq/types:interface#GlMeshProgram';
+    expect(classAuditById.get(glMeshProgramId)?.migration).toEqual({
+      mechanicallyCompatible: false,
+      normalizationReasons: ['anonymous-structural-transfer', 'cross-schema-transfer'],
+      observabilityReasons: ['optional-omission'],
+    });
+    expect(provenanceById.has(glMeshProgramId)).toBe(false);
+    const glMeshUploadId = '@flighthq/types:interface#GlMeshUpload';
+    expect(classAuditById.get(glMeshUploadId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: ['optional-omission'],
+    });
+    expect(provenanceById.has(glMeshUploadId)).toBe(false);
+    const glParticleShaderId = '@flighthq/types:interface#GlParticleShader';
+    expect(classAuditById.get(glParticleShaderId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(glParticleShaderId)?.nominalIdentity).toEqual({
+      blockerReasons: ['normalization-provenance'],
+      closed: false,
+    });
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -3265,6 +3401,24 @@ describe('typed struct analysis', () => {
     expect(generatedCanvasScale9).not.toMatch(/_Runtime\.field\(__destructure1, '(?:scaleX|scaleY)'\)/u);
     const generatedShapeJson = readFileSync('generated/flighthq/shapeFormats/ShapeJson.hx', 'utf8');
     expect(generatedShapeJson).not.toMatch(/_Runtime\.field\(shape, 'data'\)/u);
+    const generatedGlMeshProgram = readFileSync('generated/flighthq/scene3dGl/GlMeshProgram.hx', 'utf8');
+    expect(generatedGlMeshProgram).not.toMatch(/_Runtime\.field\(program,/u);
+    expect(generatedGlMeshProgram).not.toMatch(/\(cast upload : GlMeshUpload\)\./u);
+    const generatedGlMeshUpload = readFileSync('generated/flighthq/scene3dGl/GlMeshUpload.hx', 'utf8');
+    expect(generatedGlMeshUpload).not.toMatch(/_Runtime\.field\(upload,/u);
+    expect(generatedGlMeshUpload).not.toMatch(/\(cast upload : flighthq\.types\.GlScene3DRuntime\.GlMeshUpload\)\./u);
+    const generatedGlParticles = readFileSync('generated/flighthq/scene2dGl/GlParticleEmitter2D.hx', 'utf8');
+    expect(generatedGlParticles).not.toMatch(/\(cast shader : GlParticleShader\)\./u);
+    expect(generatedGlParticles).not.toMatch(/_Runtime\.field\(shader,/u);
+    for (const path of [
+      'generated/flighthq/scene3dGl/BlinnPhongGlMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dGl/PhongGlMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dGl/StandardPbrGlMeshMaterialRenderer.hx',
+    ]) {
+      const generatedGlMaterial = readFileSync(path, 'utf8');
+      expect(generatedGlMaterial).not.toMatch(/\(cast program : (?:GlClassicProgram|GlPbrProgram)\)\./u);
+      expect(generatedGlMaterial).not.toMatch(/_Runtime\.field\(program,/u);
+    }
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

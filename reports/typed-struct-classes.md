@@ -7,7 +7,7 @@ This is a construction, structural-flow, and observability census. It does not e
 | Metric | Count |
 | --- | ---: |
 | Eligible canonical schemas | 1536 |
-| Direct field accesses | 20326 |
+| Direct field accesses | 20505 |
 | Declared optional fields | 1970 |
 | Declared required-undefined fields | 2 |
 | Production object literals | 1842 |
@@ -437,7 +437,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#GlBlendRealization` | 0 | 3 | 1 | 0 | 6 | 6 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 3 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#GlCapabilities` | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlClassicDefineKey` | 0 | 10 | 3 | 0 | 4 | 3 | 1 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | 19 | 17 | no | `object-literal-spread` | `object-spread`, `optional-omission` |
-| `@flighthq/types:interface#GlClassicProgram` | 0 | 48 | 11 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `object-literal-spread` | — |
+| `@flighthq/types:interface#GlClassicProgram` | 37 | 48 | 11 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `object-literal-spread` | — |
 | `@flighthq/types:interface#GlColorAdjustmentMaterialFeature` | 0 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 4 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlColorLutTextureCache` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlColorScaleBiasInstancedShader` | 0 | 5 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
@@ -453,19 +453,19 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#GlMatcapProgram` | 0 | 19 | 11 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#GlMaterialRenderer` | 0 | 3 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 3 | 1 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#GlMeshMaterialRenderer` | 0 | 2 | 0 | 0 | 16 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 18 | 2 | 0 | yes | — | — |
-| `@flighthq/types:interface#GlMeshProgram` | 0 | 15 | 11 | 0 | 2 | 2 | 0 | 0 | 2 | 23 | 1 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 3 | 0 | no | `anonymous-structural-transfer`, `cross-schema-transfer` | `optional-omission` |
-| `@flighthq/types:interface#GlMeshUpload` | 0 | 8 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#GlMeshProgram` | 43 | 15 | 11 | 0 | 2 | 2 | 0 | 0 | 2 | 23 | 1 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 3 | 0 | no | `anonymous-structural-transfer`, `cross-schema-transfer` | `optional-omission` |
+| `@flighthq/types:interface#GlMeshUpload` | 35 | 8 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#GlModifierBindContext` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlModifierSnippet` | 0 | 6 | 3 | 0 | 8 | 0 | 8 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 9 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#GlobalShortcutExplanation` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#GlParticleShader` | 0 | 11 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#GlParticleShader` | 34 | 11 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlPbrDefineKey` | 0 | 11 | 3 | 0 | 2 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 6 | 1 | 2 | 0 | no | `object-literal-spread` | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#GlPbrExtensionBindContext` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlPbrExtensionIssue` | 0 | 2 | 0 | 0 | 5 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlPbrExtensionRegistration` | 0 | 3 | 0 | 0 | 7 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 8 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlPbrExtensionShaderContext` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlPbrExtensionShaderContribution` | 0 | 9 | 1 | 0 | 7 | 7 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 4 | 0 | yes | — | `optional-omission` |
-| `@flighthq/types:interface#GlPbrProgram` | 0 | 53 | 11 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | no | `object-literal-spread` | — |
+| `@flighthq/types:interface#GlPbrProgram` | 30 | 53 | 11 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | no | `object-literal-spread` | — |
 | `@flighthq/types:interface#GlPbrTransmissionSceneColor` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlQuadBatchShader` | 0 | 11 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlRenderEffectApplicationExplanation` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |

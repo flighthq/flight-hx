@@ -24237,7 +24237,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 34,
       "fields": 11,
       "id": "@flighthq/types:interface#GlParticleShader",
       "name": "GlParticleShader",

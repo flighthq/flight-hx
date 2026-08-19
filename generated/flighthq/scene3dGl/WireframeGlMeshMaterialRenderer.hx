@@ -59,7 +59,7 @@ class WireframeGlMeshMaterialRenderer {
     gl = (cast state : GlRenderState).gl;
     program = (cast (cast getGlScene3DRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast program : GlMeshProgram).locModel, false, (cast proxy.worldMatrix : { var m:flighthq._internal._Float32Array; }).m);
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast program : { var locModel:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locModel, false, (cast proxy.worldMatrix : { var m:flighthq._internal._Float32Array; }).m);
     uploadGlMeshDrawAlpha(({ final __callArgument8:Dynamic = gl; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), (cast _Runtime.coalesce(proxy.alpha, function():Dynamic return cast 1.0) : Float), ({ final __callArgument10:Dynamic = proxy.material; __callArgument10; }));
     upload = (cast ensureGlWireframeUpload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = geometry; __callArgument12; })) : GlWireframeUpload);
     subset = proxy.subset;

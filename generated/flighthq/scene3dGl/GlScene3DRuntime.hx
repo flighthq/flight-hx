@@ -31,7 +31,7 @@ class GlScene3DRuntime {
     if ((cast _Runtime.strictEquals(scene, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     gl = (cast state : GlRenderState).gl;
     for (program in _Runtime.iterable(((cast (cast scene : { var programCache:flighthq._internal._Map<String, GlMeshProgram>; }).programCache : flighthq._internal._Map<String, GlMeshProgram>).values()))) {
-      flighthq._internal.backend.WebGl2Backend.deleteProgram(gl, (cast program : GlMeshProgram).program);
+      flighthq._internal.backend.WebGl2Backend.deleteProgram(gl, program.program);
     }
     ((cast (cast scene : { var programCache:flighthq._internal._Map<String, GlMeshProgram>; }).programCache : flighthq._internal._Map<String, GlMeshProgram>).clear());
     ((cast scene : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram = cast (null : Null<GlMeshProgram>));

@@ -203,7 +203,7 @@ class GlRenderState {
     programs = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     if (_Runtime.truthy(runtime.shaderLoc)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.shaderLoc : GlShaderLocations).program)); }
     if (_Runtime.truthy(runtime.defaultBitmapShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.defaultBitmapShader : { var program:flighthq._internal.dom.WebGLProgram; }).program)); }
-    if (_Runtime.truthy(runtime.particleShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.particleShader : GlParticleShader).program)); }
+    if (_Runtime.truthy(runtime.particleShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.particleShader : { var program:flighthq._internal.dom.WebGLProgram; }).program)); }
     if (_Runtime.truthy(runtime.quadBatchShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.quadBatchShader : GlQuadBatchShader).program)); }
     if (_Runtime.truthy(runtime.colorScaleBiasInstancedShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.colorScaleBiasInstancedShader : GlColorScaleBiasInstancedShader).program)); }
     if (_Runtime.truthy(runtime.colorMatrixInstancedShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.colorMatrixInstancedShader : GlColorScaleBiasInstancedShader).program)); }

@@ -122727,9 +122727,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 37,
+        "directAccesses": 37,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -123127,7 +123127,7 @@
       },
       "name": "GlClassicProgram",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGL classic program",
       "reasons": [],
       "source": "upstream/packages/types/src/GlClassicProgram.ts",
       "sourceProvenance": {
@@ -127139,9 +127139,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 43,
+        "directAccesses": 43,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -127275,7 +127275,7 @@
       },
       "name": "GlMeshProgram",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGL mesh program",
       "reasons": [],
       "source": "upstream/packages/types/src/GlMeshProgram.ts",
       "sourceProvenance": {
@@ -127297,9 +127297,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 35,
+        "directAccesses": 35,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -127377,7 +127377,7 @@
       },
       "name": "GlMeshUpload",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGL mesh upload",
       "reasons": [],
       "source": "upstream/packages/types/src/GlScene3DRuntime.ts",
       "sourceProvenance": {
@@ -128386,9 +128386,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 34,
+        "directAccesses": 34,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -128490,7 +128490,7 @@
       },
       "name": "GlParticleShader",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGL particle shader",
       "reasons": [],
       "source": "upstream/packages/types/src/GlRenderState.ts",
       "sourceProvenance": {
@@ -130096,9 +130096,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 30,
+        "directAccesses": 30,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -130536,7 +130536,7 @@
       },
       "name": "GlPbrProgram",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGL PBR program",
       "reasons": [],
       "source": "upstream/packages/types/src/GlPbrProgram.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1511,
+      "newAuditOnly": 1506,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1511,
+    "auditOnlySchemas": 1506,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 20326,
-    "directSchemas": 493,
+    "directAccesses": 20505,
+    "directSchemas": 498,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 10340,
+    "pendingAccesses": 10161,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

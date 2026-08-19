@@ -44,7 +44,7 @@ class GlMeshProgram {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     ((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<flighthq.types.GlMeshProgram>; }).activeMeshProgram = cast (program : Null<flighthq.types.GlMeshProgram>));
-    flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
+    flighthq._internal.backend.WebGl2Backend.useProgram(gl, program.program);
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
     flighthq._internal.backend.WebGl2Backend.depthFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LESS', flighthq._internal.backend.WebGl2Backend.LESS));
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
@@ -59,10 +59,10 @@ class GlMeshProgram {
   @:noCompletion
   public static function bindGlUvTransform(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq.types.GlMeshProgram, texture:Null<TextureLike>):Void {
     var loc:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
-    loc = _Runtime.field(program, 'locUvTransform');
+    loc = program.locUvTransform;
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (loc = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_uvTransform') : Dynamic));
-      ((cast (cast program : flighthq.types.GlMeshProgram) : flighthq.types.GlMeshProgram).locUvTransform = loc);
+      (loc = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program.program, 'u_uvTransform') : Dynamic));
+      ((cast (cast program : flighthq.types.GlMeshProgram) : { @:optional var locUvTransform:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locUvTransform = cast (loc : Null<flighthq._internal.dom.WebGLUniformLocation>));
     }
     if ((cast ((cast _Runtime.strictEquals(loc, null) : Bool) || (cast _Runtime.strictEquals(texture, null) : Bool)) : Bool)) { return; }
     getTextureUvMatrix(({ final __callArgument1:Dynamic = GlMeshProgram.scratchUvMatrix__glMeshProgram; __callArgument1; }), ({ final __callArgument2:Dynamic = texture; __callArgument2; }));
@@ -77,7 +77,7 @@ class GlMeshProgram {
 
   @:noCompletion
   public static function destroyGlMeshProgram(state:GlRenderState, program:flighthq.types.GlMeshProgram):Void {
-    flighthq._internal.backend.WebGl2Backend.deleteProgram((cast state : GlRenderState).gl, _Runtime.field(program, 'program'));
+    flighthq._internal.backend.WebGl2Backend.deleteProgram((cast state : GlRenderState).gl, program.program);
   }
 
   @:noCompletion
@@ -90,36 +90,36 @@ class GlMeshProgram {
     var upload:GlMeshUpload = cast _Runtime.UNDEFINED;
     var subset:MeshSubset = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locModel'), false, (cast proxy.worldMatrix : { var m:flighthq._internal._Float32Array; }).m);
-    if ((cast !_Runtime.strictEquals(_Runtime.field(program, 'locNormalMatrix'), null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(program, 'locNormalMatrix'), false, (cast proxy.normalMatrix : { var m:flighthq._internal._Float32Array; }).m); }
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, program.locModel, false, (cast proxy.worldMatrix : { var m:flighthq._internal._Float32Array; }).m);
+    if ((cast !_Runtime.strictEquals(program.locNormalMatrix, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, program.locNormalMatrix, false, (cast proxy.normalMatrix : { var m:flighthq._internal._Float32Array; }).m); }
     uploadGlMeshDrawAlpha(({ final __callArgument4:Dynamic = gl; __callArgument4; }), ({ final __callArgument5:Dynamic = program; __callArgument5; }), (cast _Runtime.coalesce(proxy.alpha, function():Dynamic return cast 1.0) : Float), ({ final __callArgument6:Dynamic = proxy.material; __callArgument6; }));
     colorMatrix = proxy.colorMatrix;
     colorScaleBias = proxy.colorScaleBias;
     if ((cast !_Runtime.looseEquals(colorMatrix, null) : Bool)) {
-      var loc0:Null<flighthq._internal.dom.WebGLUniformLocation> = _Runtime.field(program, 'locColorMatrix0');
+      var loc0:Null<flighthq._internal.dom.WebGLUniformLocation> = program.locColorMatrix0;
       if ((cast _Runtime.strictEquals(loc0, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (loc0 = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_flightColorMatrix0') : Dynamic));
-        ((cast (cast program : flighthq.types.GlMeshProgram) : flighthq.types.GlMeshProgram).locColorMatrix0 = loc0);
-        ((cast (cast program : flighthq.types.GlMeshProgram) : flighthq.types.GlMeshProgram).locColorMatrix1 = flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_flightColorMatrix1'));
-        ((cast (cast program : flighthq.types.GlMeshProgram) : flighthq.types.GlMeshProgram).locColorMatrix2 = flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_flightColorMatrix2'));
-        ((cast (cast program : flighthq.types.GlMeshProgram) : flighthq.types.GlMeshProgram).locColorMatrix3 = flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_flightColorMatrix3'));
-        ((cast (cast program : flighthq.types.GlMeshProgram) : flighthq.types.GlMeshProgram).locColorMatrixOffset = flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_flightColorMatrixOffset'));
+        (loc0 = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program.program, 'u_flightColorMatrix0') : Dynamic));
+        ((cast (cast program : flighthq.types.GlMeshProgram) : { @:optional var locColorMatrix0:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locColorMatrix0 = cast (loc0 : Null<flighthq._internal.dom.WebGLUniformLocation>));
+        ((cast (cast program : flighthq.types.GlMeshProgram) : { @:optional var locColorMatrix1:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locColorMatrix1 = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program.program, 'u_flightColorMatrix1') : Null<flighthq._internal.dom.WebGLUniformLocation>));
+        ((cast (cast program : flighthq.types.GlMeshProgram) : { @:optional var locColorMatrix2:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locColorMatrix2 = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program.program, 'u_flightColorMatrix2') : Null<flighthq._internal.dom.WebGLUniformLocation>));
+        ((cast (cast program : flighthq.types.GlMeshProgram) : { @:optional var locColorMatrix3:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locColorMatrix3 = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program.program, 'u_flightColorMatrix3') : Null<flighthq._internal.dom.WebGLUniformLocation>));
+        ((cast (cast program : flighthq.types.GlMeshProgram) : { @:optional var locColorMatrixOffset:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locColorMatrixOffset = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program.program, 'u_flightColorMatrixOffset') : Null<flighthq._internal.dom.WebGLUniformLocation>));
       }
       if ((cast !_Runtime.strictEquals(loc0, null) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.uniform4f(gl, loc0, flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 3.0 : Float)));
-        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColorMatrix1'), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 5.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 6.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 7.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 8.0 : Float)));
-        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColorMatrix2'), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 10.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 11.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 12.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 13.0 : Float)));
-        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColorMatrix3'), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 15.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 16.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 17.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 18.0 : Float)));
-        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locColorMatrixOffset'), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 4.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 9.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 14.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 19.0 : Float)));
+        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, program.locColorMatrix1, flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 5.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 6.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 7.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 8.0 : Float)));
+        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, program.locColorMatrix2, flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 10.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 11.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 12.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 13.0 : Float)));
+        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, program.locColorMatrix3, flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 15.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 16.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 17.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 18.0 : Float)));
+        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, program.locColorMatrixOffset, flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 4.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 9.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 14.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 19.0 : Float)));
       }
     } else { if ((cast !_Runtime.looseEquals(colorScaleBias, null) : Bool)) {
-      var locColorScale:Null<flighthq._internal.dom.WebGLUniformLocation> = _Runtime.field(program, 'locColorScale');
-      var locColorBias:Null<flighthq._internal.dom.WebGLUniformLocation> = _Runtime.field(program, 'locColorBias');
+      var locColorScale:Null<flighthq._internal.dom.WebGLUniformLocation> = program.locColorScale;
+      var locColorBias:Null<flighthq._internal.dom.WebGLUniformLocation> = program.locColorBias;
       if ((cast _Runtime.strictEquals(locColorScale, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (locColorScale = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_flightColorScale') : Dynamic));
-        (locColorBias = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_flightColorBias') : Dynamic));
-        ((cast (cast program : flighthq.types.GlMeshProgram) : flighthq.types.GlMeshProgram).locColorScale = locColorScale);
-        ((cast (cast program : flighthq.types.GlMeshProgram) : flighthq.types.GlMeshProgram).locColorBias = locColorBias);
+        (locColorScale = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program.program, 'u_flightColorScale') : Dynamic));
+        (locColorBias = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program.program, 'u_flightColorBias') : Dynamic));
+        ((cast (cast program : flighthq.types.GlMeshProgram) : { @:optional var locColorScale:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locColorScale = cast (locColorScale : Null<flighthq._internal.dom.WebGLUniformLocation>));
+        ((cast (cast program : flighthq.types.GlMeshProgram) : { @:optional var locColorBias:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locColorBias = cast (locColorBias : Null<flighthq._internal.dom.WebGLUniformLocation>));
       }
       if ((cast ((cast !_Runtime.strictEquals(locColorScale, null) : Bool) && (cast !_Runtime.looseEquals(locColorBias, null) : Bool)) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.uniform4f(gl, locColorScale, (cast colorScaleBias : { var redScale:Float; }).redScale, (cast colorScaleBias : { var greenScale:Float; }).greenScale, (cast colorScaleBias : { var blueScale:Float; }).blueScale, (cast colorScaleBias : { var alphaScale:Float; }).alphaScale);
@@ -127,20 +127,20 @@ class GlMeshProgram {
       }
     } }
     jointMatrices = proxy.jointMatrices;
-    gpuSkinned = ((cast !_Runtime.looseEquals(_Runtime.field(program, 'locJointTexture'), null) : Bool) && (cast !_Runtime.looseEquals(jointMatrices, null) : Bool));
+    gpuSkinned = ((cast !_Runtime.looseEquals(program.locJointTexture, null) : Bool) && (cast !_Runtime.looseEquals(jointMatrices, null) : Bool));
     if ((cast gpuSkinned : Bool)) {
       var palette:GlSkinPaletteTexture = (cast ensureGlSkinPalette(({ final __callArgument7:Dynamic = state; __callArgument7; })) : GlSkinPaletteTexture);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + SKIN_PALETTE_TEXTURE_UNIT));
       uploadGlSkinPaletteTexture(({ final __callArgument8:Dynamic = gl; __callArgument8; }), ({ final __callArgument9:Dynamic = palette; __callArgument9; }), ({ final __callArgument10:Dynamic = jointMatrices; __callArgument10; }), (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0) : Float));
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locJointTexture'), SKIN_PALETTE_TEXTURE_UNIT);
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locJointTexture, SKIN_PALETTE_TEXTURE_UNIT);
     }
     upload = (cast ensureGlMeshUpload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = geometry; __callArgument12; }), (cast gpuSkinned : Bool)) : GlMeshUpload);
     subset = proxy.subset;
-    if ((cast !_Runtime.strictEquals((cast upload : GlMeshUpload).indexBuffer, null) : Bool)) {
-      var elementSize:Float = ((cast _Runtime.strictEquals((cast upload : GlMeshUpload).indexType, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT)) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
-      flighthq._internal.backend.WebGl2Backend.drawElements(gl, (cast upload : GlMeshUpload).primitiveMode, subset.indexCount, (cast upload : GlMeshUpload).indexType, (subset.indexOffset * elementSize));
+    if ((cast !_Runtime.strictEquals(upload.indexBuffer, null) : Bool)) {
+      var elementSize:Float = ((cast _Runtime.strictEquals(upload.indexType, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT)) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
+      flighthq._internal.backend.WebGl2Backend.drawElements(gl, upload.primitiveMode, subset.indexCount, upload.indexType, (subset.indexOffset * elementSize));
     } else {
-      flighthq._internal.backend.WebGl2Backend.drawArrays(gl, (cast upload : GlMeshUpload).primitiveMode, subset.indexOffset, subset.indexCount);
+      flighthq._internal.backend.WebGl2Backend.drawArrays(gl, upload.primitiveMode, subset.indexOffset, subset.indexCount);
     }
   }
 
@@ -181,16 +181,16 @@ class GlMeshProgram {
   public static function uploadGlMeshDrawAlpha(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq.types.GlMeshProgram, alpha:Float, material:Null<Material>):Void {
     var location:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
     var coverageLocation:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
-    location = _Runtime.field(program, 'locObjectAlpha');
+    location = program.locObjectAlpha;
     if ((cast _Runtime.strictEquals(location, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (location = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_objectAlpha') : Dynamic));
-      ((cast (cast program : flighthq.types.GlMeshProgram) : flighthq.types.GlMeshProgram).locObjectAlpha = location);
+      (location = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program.program, 'u_objectAlpha') : Dynamic));
+      ((cast (cast program : flighthq.types.GlMeshProgram) : { @:optional var locObjectAlpha:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locObjectAlpha = cast (location : Null<flighthq._internal.dom.WebGLUniformLocation>));
     }
     if ((cast !_Runtime.strictEquals(location, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniform1f(gl, location, alpha); }
-    coverageLocation = _Runtime.field(program, 'locAlphaIsCoverage');
+    coverageLocation = program.locAlphaIsCoverage;
     if ((cast _Runtime.strictEquals(coverageLocation, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (coverageLocation = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(program, 'program'), 'u_alphaIsCoverage') : Dynamic));
-      ((cast (cast program : flighthq.types.GlMeshProgram) : flighthq.types.GlMeshProgram).locAlphaIsCoverage = coverageLocation);
+      (coverageLocation = cast (flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program.program, 'u_alphaIsCoverage') : Dynamic));
+      ((cast (cast program : flighthq.types.GlMeshProgram) : { @:optional var locAlphaIsCoverage:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locAlphaIsCoverage = cast (coverageLocation : Null<flighthq._internal.dom.WebGLUniformLocation>));
     }
     if ((cast !_Runtime.strictEquals(coverageLocation, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, coverageLocation, ((cast (cast GlMeshProgram.isGlMeshAlphaCoverage__glMeshProgram(({ final __callArgument23:Dynamic = material; __callArgument23; })) : Bool) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));

@@ -52,7 +52,7 @@ class GlWireframeUpload {
     }
     ((cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).indexType = indexType);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).vao);
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast meshUpload : GlMeshUpload).vertexBuffer);
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), meshUpload.vertexBuffer);
     stride = (cast geometry.layout : { var stride:Float; }).stride;
     position = _Runtime.find((cast geometry.layout : { var attributes:Array<VertexAttribute>; }).attributes, function(a:VertexAttribute, __unused0:Float, __unused1:Array<VertexAttribute>):Bool return _Runtime.strictEquals(a.semantic, 'position'));
     byteOffset = ((cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast position : { var byteOffset:Float; }).byteOffset : Dynamic) : (cast 0.0 : Dynamic));

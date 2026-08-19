@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1511 |
-| Direct schemas | 493 |
+| Audit-only schemas | 1506 |
+| Direct schemas | 498 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 10340 |
-| Directly emitted accesses | 20326 |
+| Pending accesses | 10161 |
+| Directly emitted accesses | 20505 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1511 |
+| Newly discovered, audit-only | 1506 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -577,7 +577,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlClassicDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 26 | 0 | 0 | 26 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#GlClassicLightingModel` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#GlClassicProgram` | `audit-only` | `new` | — | checker-discovered public declaration | 48 | 37 | 0 | 0 | 37 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlClassicProgram` | `direct` | `new` | — | reviewed escape-free WebGL classic program | 48 | 37 | 0 | 0 | 0 | 37 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlColorAdjustmentMaterialFeature` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 0 | 0 | 6 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#GlColorLutTextureCache` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 4 | 0 | 10 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlColorScaleBiasInstancedShader` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 18 | 0 | 0 | 18 | 0 | 0 | 0 | yes | — |
@@ -598,13 +598,13 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlMatcapProgram` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlMaterialRenderer` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 0 | 0 | 2 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#GlMeshMaterialRenderer` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
-| `@flighthq/types:interface#GlMeshProgram` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 33 | 10 | 0 | 43 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlMeshUpload` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 26 | 9 | 0 | 35 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlMeshProgram` | `direct` | `new` | — | reviewed escape-free WebGL mesh program | 15 | 33 | 10 | 0 | 0 | 43 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlMeshUpload` | `direct` | `new` | — | reviewed escape-free WebGL mesh upload | 8 | 26 | 9 | 0 | 0 | 35 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlModifierBindContext` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 48 | 1 | 0 | 49 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlModifierSnippet` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 10 | 0 | 0 | 10 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:type#GlobalShortcutBlockReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#GlobalShortcutExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlParticleShader` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 34 | 0 | 0 | 34 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlParticleShader` | `direct` | `new` | — | reviewed escape-free WebGL particle shader | 11 | 34 | 0 | 0 | 0 | 34 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlPbrDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 26 | 0 | 0 | 26 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlPbrExtensionBindContext` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 34 | yes | — |
 | `@flighthq/types:interface#GlPbrExtensionIssue` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
@@ -612,7 +612,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlPbrExtensionRegistration` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:interface#GlPbrExtensionShaderContext` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 15 | yes | — |
 | `@flighthq/types:interface#GlPbrExtensionShaderContribution` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlPbrProgram` | `audit-only` | `new` | — | checker-discovered public declaration | 53 | 30 | 0 | 0 | 30 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlPbrProgram` | `direct` | `new` | — | reviewed escape-free WebGL PBR program | 53 | 30 | 0 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlPbrTransmissionSceneColor` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlQuadBatchShader` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderEffectApplicationExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |

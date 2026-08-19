@@ -36,11 +36,11 @@ class StandardPbrGlMeshMaterialRenderer {
     pbr = (cast material : Null<StandardPbrMaterial>);
     program = (cast ensureGlPbrProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast buildGlPbrStandardDefineKey(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast pbr : Dynamic), (cast pbr : Dynamic)) : GlPbrDefineKey), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : GlPbrProgram);
     beginGlMeshDraw(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), (cast ((cast !_Runtime.strictEquals(pbr, null) : Bool) && (cast _Runtime.field(pbr, 'doubleSided') : Bool)) : Bool));
-    setGlMeshViewProjection(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast program : GlPbrProgram).locViewProjection, ({ final __callArgument5:Dynamic = camera; __callArgument5; }));
-    setGlMeshCameraPosition(({ final __callArgument6:Dynamic = gl; __callArgument6; }), (cast program : GlPbrProgram).locCameraPosition, ({ final __callArgument7:Dynamic = camera; __callArgument7; }));
+    setGlMeshViewProjection(({ final __callArgument4:Dynamic = state; __callArgument4; }), program.locViewProjection, ({ final __callArgument5:Dynamic = camera; __callArgument5; }));
+    setGlMeshCameraPosition(({ final __callArgument6:Dynamic = gl; __callArgument6; }), program.locCameraPosition, ({ final __callArgument7:Dynamic = camera; __callArgument7; }));
     bindGlMeshLightBlock(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), ({ final __callArgument10:Dynamic = lights; __callArgument10; }));
     bindGlPbrStandardBlock(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = program; __callArgument12; }), (cast pbr : Dynamic));
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast program : GlPbrProgram).locAlphaCutoff, ((cast !_Runtime.strictEquals(pbr, null) : Bool) ? (cast _Runtime.field(pbr, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locAlphaCutoff, ((cast !_Runtime.strictEquals(pbr, null) : Bool) ? (cast _Runtime.field(pbr, 'alphaCutoff') : Dynamic) : (cast 0.5 : Dynamic)));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
     program = (cast (cast getGlScene3DRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;

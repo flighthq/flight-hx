@@ -95,23 +95,23 @@ class GlShadowMap {
       skinned = ((cast !_Runtime.looseEquals(mesh.skin, null) : Bool) && (cast (cast hasMeshGeometrySkin(mesh.geometry) : Bool) : Bool));
       program = ((cast skinned : Bool) ? (cast (skinnedProgram ??= (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlMeshProgram)->GlMeshProgram)(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast 'shadow:depth:skin' : String), ({ final __callArgument9:Dynamic = GlShadowMap.compileShadowDepthSkinnedProgram__glShadowMap; __callArgument9; })) : GlMeshProgram)) : Dynamic) : (cast rigidProgram : Dynamic));
       if ((cast !_Runtime.strictEquals(program, boundProgram) : Bool)) {
-        flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast program : GlMeshProgram).program);
-        flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast program : GlMeshProgram).locViewProjection, false, matrix.m);
+        flighthq._internal.backend.WebGl2Backend.useProgram(gl, program.program);
+        flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, program.locViewProjection, false, matrix.m);
         (boundProgram = cast (program : Dynamic));
       }
-      flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast program : GlMeshProgram).locModel, false, (cast (cast getNodeWorldMatrix4((cast mesh : Dynamic)) : Matrix4Like) : { var m:flighthq._internal._Float32Array; }).m);
+      flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, program.locModel, false, (cast (cast getNodeWorldMatrix4((cast mesh : Dynamic)) : Matrix4Like) : { var m:flighthq._internal._Float32Array; }).m);
       if ((cast skinned : Bool)) {
         var jointMatrices:flighthq._internal._Float32Array = (cast (cast mesh.skin : Skin).skeleton : { var jointMatrices:flighthq._internal._Float32Array; }).jointMatrices;
         flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + SKIN_PALETTE_TEXTURE_UNIT));
         uploadGlSkinPaletteTexture(({ final __callArgument10:Dynamic = gl; __callArgument10; }), (cast ensureGlSkinPalette(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlSkinPaletteTexture), ({ final __callArgument12:Dynamic = jointMatrices; __callArgument12; }), (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0) : Float));
-        flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.coalesce((cast program : GlMeshProgram).locJointTexture, function():Dynamic return cast null), SKIN_PALETTE_TEXTURE_UNIT);
+        flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.coalesce(program.locJointTexture, function():Dynamic return cast null), SKIN_PALETTE_TEXTURE_UNIT);
       }
       upload = (cast ensureGlMeshUpload(({ final __callArgument13:Dynamic = state; __callArgument13; }), mesh.geometry, (cast skinned : Bool)) : GlMeshUpload);
-      flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : GlMeshUpload).vao);
-      if ((cast !_Runtime.strictEquals((cast upload : GlMeshUpload).indexBuffer, null) : Bool)) {
-        flighthq._internal.backend.WebGl2Backend.drawElements(gl, (cast upload : GlMeshUpload).primitiveMode, (cast upload : GlMeshUpload).indexCount, (cast upload : GlMeshUpload).indexType, 0.0);
+      flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, upload.vao);
+      if ((cast !_Runtime.strictEquals(upload.indexBuffer, null) : Bool)) {
+        flighthq._internal.backend.WebGl2Backend.drawElements(gl, upload.primitiveMode, upload.indexCount, upload.indexType, 0.0);
       } else {
-        flighthq._internal.backend.WebGl2Backend.drawArrays(gl, (cast upload : GlMeshUpload).primitiveMode, 0.0, (cast upload : GlMeshUpload).indexCount);
+        flighthq._internal.backend.WebGl2Backend.drawArrays(gl, upload.primitiveMode, 0.0, upload.indexCount);
       }
     } : Dynamic));
     flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));

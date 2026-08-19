@@ -220,7 +220,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#GlMeshMaterialRenderer` | 0 | 2 | 2 | 0 | 1 | 1 | 2 | 3 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#GlModifierBindContext` | 0 | 4 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlobalShortcutExplanation` | 0 | 6 | 0 | 1 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#GlParticleShader` | 0 | 11 | 1 | 0 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#GlParticleShader` | 34 | 11 | 1 | 0 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#GlPbrExtensionBindContext` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlPbrExtensionIssue` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlPbrExtensionRegistration` | 0 | 3 | 1 | 0 | 0 | 1 | 1 | 2 | no | `container-transfer` |

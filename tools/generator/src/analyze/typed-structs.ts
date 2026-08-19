@@ -493,6 +493,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#MorphShapeData',
     purpose: 'reviewed escape-free morph-shape data',
   },
+  {
+    declarationFingerprint: 'sha256:25ac84d4effc1f1758fbadbe9e06fde068ef3b4b8fc74721bf1940acb3180003',
+    id: '@flighthq/types:interface#GlMeshProgram',
+    purpose: 'reviewed escape-free WebGL mesh program',
+  },
+  {
+    declarationFingerprint: 'sha256:b20947fd9184317c7f029c89d578561437626fa7ec03965c083784006319e1ec',
+    id: '@flighthq/types:interface#GlClassicProgram',
+    purpose: 'reviewed escape-free WebGL classic program',
+  },
+  {
+    declarationFingerprint: 'sha256:ea701c770e76279c2c1ed247f4e08cca4953589f33791d7e9964c4acbb38c508',
+    id: '@flighthq/types:interface#GlMeshUpload',
+    purpose: 'reviewed escape-free WebGL mesh upload',
+  },
+  {
+    declarationFingerprint: 'sha256:92ef9e960d48ccadf9d840f3dc2863ee3f64c2089ea081effa5c2ecaa9d1a079',
+    id: '@flighthq/types:interface#GlParticleShader',
+    purpose: 'reviewed escape-free WebGL particle shader',
+  },
+  {
+    declarationFingerprint: 'sha256:6abe913b84fc928aa0aa4bbda552125819c350c09026b795363905f3f0410759',
+    id: '@flighthq/types:interface#GlPbrProgram',
+    purpose: 'reviewed escape-free WebGL PBR program',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(
